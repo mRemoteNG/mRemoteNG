@@ -107,6 +107,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                                        connectionInfo.RedirectSmartCards.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectSound", connectionInfo.RedirectSound.ToString()));
             element.Add(new XAttribute("SoundQuality", connectionInfo.SoundQuality.ToString()));
+            element.Add(new XAttribute("RedirectAudioCapture", connectionInfo.RedirectAudioCapture.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectKeys", connectionInfo.RedirectKeys.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("Connected",
                                        (connectionInfo.OpenConnections.Count > 0).ToString().ToLowerInvariant()));
@@ -210,6 +211,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                                            connectionInfo.Inheritance.RedirectSound.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritSoundQuality",
                                            connectionInfo.Inheritance.SoundQuality.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritRedirectAudioCapture",
+                    connectionInfo.Inheritance.RedirectAudioCapture.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritResolution",
                                            connectionInfo.Inheritance.Resolution.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritAutomaticResize",
@@ -311,6 +314,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritRedirectSmartCards", falseString));
                 element.Add(new XAttribute("InheritRedirectSound", falseString));
                 element.Add(new XAttribute("InheritSoundQuality", falseString));
+                element.Add(new XAttribute("InheritRedirectAudioCapture", falseString));
                 element.Add(new XAttribute("InheritResolution", falseString));
                 element.Add(new XAttribute("InheritAutomaticResize", falseString));
                 element.Add(new XAttribute("InheritUseConsoleSession", falseString));

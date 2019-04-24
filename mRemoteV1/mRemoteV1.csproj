@@ -423,6 +423,7 @@
     <Compile Include="UI\Controls\ConnectionInfoPropertyGrid\ConnectionInfoPropertyGrid.Designer.cs">
       <DependentUpon>ConnectionInfoPropertyGrid.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\ConnectionInfoPropertyGrid\PropertyMode.cs" />
     <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.cs">
       <SubType>Component</SubType>
     </Compile>

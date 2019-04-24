@@ -148,6 +148,9 @@
     </Setting>
     <Setting Name="ConDefaultRedirectSound" Type="System.String" Scope="User">
       <Value Profile="(Default)">DoNotPlay</Value>
+    </Setting>    
+      <Setting Name="ConDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MaxPuttyWaitTime" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
@@ -252,6 +255,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultRedirectSound" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>   
+      <Setting Name="InhDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultResolution" Type="System.Boolean" Scope="User">
@@ -703,6 +709,9 @@
     </Setting>
     <Setting Name="SQLServerType" Type="System.String" Scope="User">
       <Value Profile="(Default)">mssql</Value>
+    </Setting>
+    <Setting Name="DoNotTrimUsername" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

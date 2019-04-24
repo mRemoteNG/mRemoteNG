@@ -2666,4 +2666,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="ConnectInViewOnlyMode" xml:space="preserve">
     <value>Im View-Only-Modus verbinden</value>
   </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Leerzeichen nicht aus Benutzernamen entfernen</value>
+  </data>
 </root>

@@ -204,12 +204,19 @@ namespace mRemoteNG.UI.Window
         #region Public Properties
 
         public bool PropertiesVisible => _btnShowProperties.Checked;
+        public bool CanShowProperties => SelectedTreeNode != null;
 
         public bool InheritanceVisible => _btnShowInheritance.Checked;
+        public bool CanShowInheritance => !_pGrid.RootNodeSelected &&
+                                          SelectedTreeNode != null &&
+                                          _pGrid.SelectedConnectionInfo?.Parent != null &&
+                                          !(_pGrid.SelectedConnectionInfo.Parent is RootNodeInfo);
 
         public bool DefaultPropertiesVisible => _btnShowDefaultProperties.Checked;
+        public bool CanShowDefaultProperties => true;
 
         public bool DefaultInheritanceVisible => _btnShowDefaultInheritance.Checked;
+        public bool CanShowDefaultInheritance => true;
 
         /// <summary>
         /// A list of properties being shown for the current object.
@@ -236,6 +243,30 @@ namespace mRemoteNG.UI.Window
 
         #region Public Methods
 
+        public void ShowConnectionProperties()
+        {
+            _pGrid.PropertyMode = PropertyMode.Connection;
+            UpdateTopRow();
+        }
+
+        public void ShowInheritanceProperties()
+        {
+            _pGrid.PropertyMode = PropertyMode.Inheritance;
+            UpdateTopRow();
+        }
+
+        public void ShowDefaultConnectionProperties()
+        {
+            _pGrid.PropertyMode = PropertyMode.DefaultConnection;
+            UpdateTopRow();
+        }
+
+        public void ShowDefaultInheritanceProperties()
+        {
+            _pGrid.PropertyMode = PropertyMode.DefaultInheritance;
+            UpdateTopRow();
+        }
+
         protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
         {
             // Main form handle command key events
@@ -256,92 +287,9 @@ namespace mRemoteNG.UI.Window
 
             return true; // Handled
         }
-
-        private void UpdateTopRow()
-        {
-            try
-            {
-                UpdatePropertiesButton();
-                UpdateShowInheritanceButton();
-                UpdateShowDefaultPropertiesButton();
-                UpdateShowDefaultInheritanceButton();
-                UpdateHostStatusButton();
-                UpdateIconButton();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(
-                    MessageClass.ErrorMsg,
-                    Language.strConfigPropertyGridObjectFailed + Environment.NewLine +
-                    ex.Message, true);
-            }
-        }
-
-        private void UpdatePropertiesButton()
-        {
-            _btnShowProperties.Checked =
-                !_pGrid.IsShowingDefaultProperties &&
-                !_pGrid.IsShowingInheritance;
-        }
-
-        private void UpdateShowInheritanceButton()
-        {
-            // if we are on the show inheritance tab but it isn't a
-            // valid choice, switch to the properties tab
-            if (_btnShowInheritance.Checked && !_btnShowInheritance.Enabled)
-                ShowConnectionProperties();
-
-            _btnShowInheritance.Enabled =
-                !_pGrid.RootNodeSelected &&
-                _pGrid.SelectedConnectionInfo.Parent != null &&
-                !(_pGrid.SelectedConnectionInfo.Parent is RootNodeInfo);
-
-            _btnShowInheritance.Checked =
-                _btnShowInheritance.Enabled &&
-                _pGrid.IsShowingInheritance &&
-                !_pGrid.IsShowingDefaultProperties;
-        }
-
-        private void UpdateShowDefaultPropertiesButton()
-        {
-            _btnShowDefaultProperties.Checked =
-                _pGrid.IsShowingDefaultProperties &&
-                !_pGrid.IsShowingInheritance;
-        }
-
-        private void UpdateShowDefaultInheritanceButton()
-        {
-            _btnShowDefaultInheritance.Checked =
-                _pGrid.IsShowingDefaultProperties &&
-                _pGrid.IsShowingInheritance;
-        }
-
-        private void UpdateHostStatusButton()
-        {
-            _btnHostStatus.Enabled =
-                !_pGrid.RootNodeSelected &&
-                !_pGrid.IsShowingDefaultProperties &&
-                !(_pGrid.SelectedConnectionInfo is ContainerInfo);
-
-            SetHostStatus(_pGrid.SelectedObject);
-        }
-
-        private void UpdateIconButton()
-        {
-            _btnIcon.Enabled = !_pGrid.IsShowingDefaultProperties &&
-                               !_pGrid.RootNodeSelected;
-
-            _btnIcon.Image = _btnIcon.Enabled
-                ? ConnectionIcon
-                    .FromString(_pGrid.SelectedConnectionInfo.Icon)
-                    .ToBitmap()
-                : null;
-        }
-
         #endregion
 
         #region Private Methods
-
         private void ApplyLanguage()
         {
             _btnShowInheritance.Text = Language.strButtonInheritance;
@@ -372,6 +320,86 @@ namespace mRemoteNG.UI.Window
                 _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Background");
             _pGrid.CommandsForeColor =
                 _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Item_Disabled_Foreground");
+        }
+
+        private void UpdateTopRow()
+        {
+            try
+            {
+                // if we are on the show inheritance tab but it isn't a
+                // valid choice, switch to the properties tab
+                if (_pGrid.PropertyMode == PropertyMode.Inheritance && !CanShowInheritance)
+                {
+                    ShowConnectionProperties();
+                    return;
+                }
+
+                UpdatePropertiesButton();
+                UpdateShowInheritanceButton();
+                UpdateShowDefaultPropertiesButton();
+                UpdateShowDefaultInheritanceButton();
+                UpdateHostStatusButton();
+                UpdateIconButton();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(
+                    MessageClass.ErrorMsg,
+                    Language.strConfigPropertyGridObjectFailed + Environment.NewLine +
+                    ex.Message, true);
+            }
+        }
+
+        private void UpdatePropertiesButton()
+        {
+            _btnShowProperties.Enabled = CanShowProperties;
+            _btnShowProperties.Checked =
+                _pGrid.PropertyMode == PropertyMode.Connection;
+        }
+
+        private void UpdateShowInheritanceButton()
+        {
+            _btnShowInheritance.Enabled = CanShowInheritance;
+            _btnShowInheritance.Checked =
+                _pGrid.PropertyMode == PropertyMode.Inheritance;
+        }
+
+        private void UpdateShowDefaultPropertiesButton()
+        {
+            _btnShowDefaultProperties.Enabled = CanShowDefaultProperties;
+            _btnShowDefaultProperties.Checked =
+                _pGrid.PropertyMode == PropertyMode.DefaultConnection;
+        }
+
+        private void UpdateShowDefaultInheritanceButton()
+        {
+            _btnShowDefaultInheritance.Enabled = CanShowDefaultInheritance;
+            _btnShowDefaultInheritance.Checked =
+                _pGrid.PropertyMode == PropertyMode.DefaultInheritance;
+        }
+
+        private void UpdateHostStatusButton()
+        {
+            _btnHostStatus.Enabled =
+                !_pGrid.RootNodeSelected &&
+                !_pGrid.IsShowingDefaultProperties &&
+                !(_pGrid.SelectedConnectionInfo is ContainerInfo);
+
+            SetHostStatus(_pGrid.SelectedObject);
+        }
+
+        private void UpdateIconButton()
+        {
+            _btnIcon.Enabled =
+                _pGrid.SelectedConnectionInfo != null &&
+                !_pGrid.IsShowingDefaultProperties &&
+                !_pGrid.RootNodeSelected;
+
+            _btnIcon.Image = _btnIcon.Enabled
+                ? ConnectionIcon
+                    .FromString(_pGrid.SelectedConnectionInfo?.Icon)?
+                    .ToBitmap()
+                : null;
         }
 
         private void AddToolStripItems()
@@ -477,28 +505,19 @@ namespace mRemoteNG.UI.Window
             ShowConnectionProperties();
         }
 
-        private void ShowConnectionProperties()
+        private void btnShowInheritance_Click(object sender, EventArgs e)
         {
-            _pGrid.SetDisplayMode(showInheritance: false, showDefaultProperties: false);
-            UpdateTopRow();
+            ShowInheritanceProperties();
         }
 
         private void btnShowDefaultProperties_Click(object sender, EventArgs e)
         {
-            _pGrid.SetDisplayMode(showDefaultProperties: true);
-            UpdateTopRow();
-        }
-
-        private void btnShowInheritance_Click(object sender, EventArgs e)
-        {
-            _pGrid.SetDisplayMode(showInheritance: true);
-            UpdateTopRow();
+            ShowDefaultConnectionProperties();
         }
 
         private void btnShowDefaultInheritance_Click(object sender, EventArgs e)
         {
-            _pGrid.SetDisplayMode(showInheritance: true, showDefaultProperties: true);
-            UpdateTopRow();
+            ShowDefaultInheritanceProperties();
         }
 
         private void btnHostStatus_Click(object sender, EventArgs e)

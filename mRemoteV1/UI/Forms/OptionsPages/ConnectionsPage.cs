@@ -1,4 +1,4 @@
-using mRemoteNG.Config;
+﻿using mRemoteNG.Config;
 using System;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -31,6 +31,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSaveConnectionsAfterEveryEdit.Text = Language.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
             chkPlaceSearchBarAboveConnectionTree.Text = Language.PlaceSearchBarAboveConnectionTree;
+            chkDoNotTrimUsername.Text = Language.DoNotTrimUsername;
 
             lblRdpReconnectionCount.Text = Language.strRdpReconnectCount;
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
@@ -52,6 +53,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSaveConnectionsAfterEveryEdit.Checked = Settings.Default.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
             chkPlaceSearchBarAboveConnectionTree.Checked = Settings.Default.PlaceSearchBarAboveConnectionTree;
+            chkDoNotTrimUsername.Checked = Settings.Default.DoNotTrimUsername;
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
@@ -83,6 +85,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SaveConnectionsAfterEveryEdit = chkSaveConnectionsAfterEveryEdit.Checked;
             Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
             Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
+            Settings.Default.DoNotTrimUsername = chkDoNotTrimUsername.Checked;
 
             Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
             Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
