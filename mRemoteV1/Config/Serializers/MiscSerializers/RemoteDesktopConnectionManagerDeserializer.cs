@@ -153,7 +153,7 @@ namespace mRemoteNG.Config.Serializers
             var logonCredentialsNode = xmlNode.SelectSingleNode("./logonCredentials");
             if (logonCredentialsNode?.Attributes?["inherit"]?.Value == "None")
             {
-                connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText;
+                connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText ?? string.Empty;
 
                 var passwordNode = logonCredentialsNode.SelectSingleNode("./password");
                 if (_schemaVersion == 1) // Version 2.2 allows clear text passwords
@@ -167,7 +167,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Password = DecryptRdcManPassword(passwordNode?.InnerText);
                 }
 
-                connectionInfo.Domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText;
+                connectionInfo.Domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText ?? string.Empty;
             }
             else
             {
@@ -199,15 +199,15 @@ namespace mRemoteNG.Config.Serializers
                     gatewaySettingsNode.SelectSingleNode("./enabled")?.InnerText == "True"
                         ? RdpProtocol.RDGatewayUsageMethod.Always
                         : RdpProtocol.RDGatewayUsageMethod.Never;
-                connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText;
-                connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText;
+                connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText ?? string.Empty;
+                connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText ?? string.Empty;
 
                 var passwordNode = gatewaySettingsNode.SelectSingleNode("./password");
                 connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True"
                     ? passwordNode.InnerText
                     : DecryptRdcManPassword(passwordNode?.InnerText);
 
-                connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText;
+                connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText ?? string.Empty;
                 // ./logonMethod
                 // ./localBypass
                 // ./credSharing

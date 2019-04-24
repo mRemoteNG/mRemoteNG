@@ -62,6 +62,7 @@ namespace mRemoteNG.Connection
         private bool _redirectSmartCards;
         private RdpProtocol.RDPSounds _redirectSound;
         private RdpProtocol.RDPSoundQuality _soundQuality;
+        private bool _redirectAudioCapture;
 
         private string _preExtApp;
         private string _postExtApp;
@@ -145,7 +146,7 @@ namespace mRemoteNG.Connection
         public virtual string Username
         {
             get => GetPropertyValue("Username", _username);
-            set => SetField(ref _username, value?.Trim(), "Username");
+            set => SetField(ref _username, Settings.Default.DoNotTrimUsername ? value : value?.Trim(), "Username");
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
@@ -515,6 +516,7 @@ namespace mRemoteNG.Connection
             set { SetField(ref _redirectClipboard, value, "RedirectClipboard"); }
         }
 
+
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectPorts"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectPorts"),
@@ -557,6 +559,17 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("SoundQuality", _soundQuality);
             set => SetField(ref _soundQuality, value, "SoundQuality");
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectAudioCapture"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectAudioCapture"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
+        public bool RedirectAudioCapture
+        {
+            get => GetPropertyValue(nameof(RedirectAudioCapture), _redirectAudioCapture);
+            set => SetField(ref _redirectAudioCapture, value, nameof(RedirectAudioCapture));
         }
 
         #endregion

@@ -364,6 +364,7 @@ namespace mRemoteNG.Connection
                                                               Settings.Default.ConDefaultRedirectSound);
             SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality),
                                                                    Settings.Default.ConDefaultSoundQuality);
+            RedirectAudioCapture = Settings.Default.ConDefaultRedirectAudioCapture;
         }
 
         private void SetMiscDefaults()
