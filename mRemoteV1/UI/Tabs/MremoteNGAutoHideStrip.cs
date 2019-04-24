@@ -33,9 +33,11 @@ namespace mRemoteNG.UI.Tabs
         private const int _TabGapBetween = 10;
 
         #region Customizable Properties
+
         public Font TextFont => DockPanel.Theme.Skin.AutoHideStripSkin.TextFont;
 
         private static StringFormat _stringFormatTabHorizontal;
+
         private StringFormat StringFormatTabHorizontal
         {
             get
@@ -61,6 +63,7 @@ namespace mRemoteNG.UI.Tabs
         }
 
         private static StringFormat _stringFormatTabVertical;
+
         private StringFormat StringFormatTabVertical
         {
             get
@@ -70,9 +73,11 @@ namespace mRemoteNG.UI.Tabs
                     _stringFormatTabVertical = new StringFormat();
                     _stringFormatTabVertical.Alignment = StringAlignment.Near;
                     _stringFormatTabVertical.LineAlignment = StringAlignment.Center;
-                    _stringFormatTabVertical.FormatFlags = StringFormatFlags.NoWrap | StringFormatFlags.DirectionVertical;
+                    _stringFormatTabVertical.FormatFlags =
+                        StringFormatFlags.NoWrap | StringFormatFlags.DirectionVertical;
                     _stringFormatTabVertical.Trimming = StringTrimming.None;
                 }
+
                 if (RightToLeft == RightToLeft.Yes)
                     _stringFormatTabVertical.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
                 else
@@ -111,6 +116,7 @@ namespace mRemoteNG.UI.Tabs
         private static Matrix MatrixIdentity { get; } = new Matrix();
 
         private static DockState[] _dockStates;
+
         private static DockState[] DockStates
         {
             get
@@ -123,11 +129,13 @@ namespace mRemoteNG.UI.Tabs
                     _dockStates[2] = DockState.DockTopAutoHide;
                     _dockStates[3] = DockState.DockBottomAutoHide;
                 }
+
                 return _dockStates;
             }
         }
 
         private static GraphicsPath _graphicsPath;
+
         internal static GraphicsPath GraphicsPath
         {
             get
@@ -143,9 +151,9 @@ namespace mRemoteNG.UI.Tabs
             : base(panel)
         {
             SetStyle(ControlStyles.ResizeRedraw |
-                ControlStyles.UserPaint |
-                ControlStyles.AllPaintingInWmPaint |
-                ControlStyles.OptimizedDoubleBuffer, true);
+                     ControlStyles.UserPaint |
+                     ControlStyles.AllPaintingInWmPaint |
+                     ControlStyles.OptimizedDoubleBuffer, true);
             BackColor = SystemColors.ControlLight;
         }
 
@@ -191,7 +199,7 @@ namespace mRemoteNG.UI.Tabs
             {
                 var matrixRotated = new Matrix();
                 matrixRotated.RotateAt(90, new PointF(rectTabStrip.X + (float)rectTabStrip.Height / 2,
-                    rectTabStrip.Y + (float)rectTabStrip.Height / 2));
+                                                      rectTabStrip.Y + (float)rectTabStrip.Height / 2));
                 g.Transform = matrixRotated;
             }
 
@@ -200,6 +208,7 @@ namespace mRemoteNG.UI.Tabs
                 foreach (TabNG tab in pane.AutoHideTabs)
                     DrawTab(g, tab);
             }
+
             g.Transform = matrixIdentity;
         }
 
@@ -226,8 +235,8 @@ namespace mRemoteNG.UI.Tabs
                 foreach (TabNG tab in pane.AutoHideTabs)
                 {
                     var width = imageWidth + ImageGapLeft + ImageGapRight +
-                        TextRenderer.MeasureText(tab.Content.DockHandler.TabText, TextFont).Width +
-                        TextGapLeft + TextGapRight;
+                                TextRenderer.MeasureText(tab.Content.DockHandler.TabText, TextFont).Width +
+                                TextGapLeft + TextGapRight;
                     tab.TabX = x;
                     tab.TabWidth = width;
                     x += width;
@@ -298,11 +307,11 @@ namespace mRemoteNG.UI.Tabs
                     // The DockState is DockLeftAutoHide or DockRightAutoHide, so rotate the image 90 degrees to the right. 
                     var rectTransform = RtlTransform(rectImage, dockState);
                     Point[] rotationPoints =
-                        {
-                            new Point(rectTransform.X + rectTransform.Width, rectTransform.Y),
-                            new Point(rectTransform.X + rectTransform.Width, rectTransform.Y + rectTransform.Height),
-                            new Point(rectTransform.X, rectTransform.Y)
-                        };
+                    {
+                        new Point(rectTransform.X + rectTransform.Width, rectTransform.Y),
+                        new Point(rectTransform.X + rectTransform.Width, rectTransform.Y + rectTransform.Height),
+                        new Point(rectTransform.X, rectTransform.Y)
+                    };
 
                     using (var rotatedIcon = new Icon(((Form)content).Icon, 16, 16))
                     {
@@ -324,9 +333,11 @@ namespace mRemoteNG.UI.Tabs
                 var textColor = DockPanel.Theme.Skin.AutoHideStripSkin.TabGradient.TextColor;
 
                 if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
-                    g.DrawString(content.DockHandler.TabText, TextFont, new SolidBrush(textColor), rectText, StringFormatTabVertical);
+                    g.DrawString(content.DockHandler.TabText, TextFont, new SolidBrush(textColor), rectText,
+                                 StringFormatTabVertical);
                 else
-                    g.DrawString(content.DockHandler.TabText, TextFont, new SolidBrush(textColor), rectText, StringFormatTabHorizontal);
+                    g.DrawString(content.DockHandler.TabText, TextFont, new SolidBrush(textColor), rectText,
+                                 StringFormatTabHorizontal);
 
                 // Set rotate back
                 g.Transform = matrixRotate;
@@ -406,8 +417,9 @@ namespace mRemoteNG.UI.Tabs
 
             var x = tab.TabX;
             var y = rectTabStrip.Y +
-                (dockState == DockState.DockTopAutoHide || dockState == DockState.DockRightAutoHide ?
-                0 : TabGapTop);
+                    (dockState == DockState.DockTopAutoHide || dockState == DockState.DockRightAutoHide
+                        ? 0
+                        : TabGapTop);
             var width = tab.TabWidth;
             var height = rectTabStrip.Height - TabGapTop;
 
@@ -435,8 +447,8 @@ namespace mRemoteNG.UI.Tabs
             }
 
             return new Rectangle((int)(pts[0].X - (float)rect.Height / 2 + .5F),
-                (int)(pts[0].Y - (float)rect.Width / 2 + .5F),
-                rect.Height, rect.Width);
+                                 (int)(pts[0].Y - (float)rect.Width / 2 + .5F),
+                                 rect.Height, rect.Width);
         }
 
         protected override IDockContent HitTest(Point point)
@@ -468,11 +480,11 @@ namespace mRemoteNG.UI.Tabs
             return new Rectangle((int)bounds.Left, (int)bounds.Top, (int)bounds.Width, (int)bounds.Height);
         }
 
-        protected  override int MeasureHeight()
+        protected override int MeasureHeight()
         {
             return Math.Max(ImageGapBottom +
-                ImageGapTop + ImageHeight,
-                TextFont.Height) + TabGapTop;
+                            ImageGapTop + ImageHeight,
+                            TextFont.Height) + TabGapTop;
         }
 
         protected override void OnRefreshChanges()
@@ -484,6 +496,6 @@ namespace mRemoteNG.UI.Tabs
         protected override Tab CreateTab(IDockContent content)
         {
             return new TabNG(content);
-        } 
+        }
     }
 }

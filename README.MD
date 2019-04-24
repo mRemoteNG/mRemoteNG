@@ -4,15 +4,15 @@
 [![Join the chat at https://gitter.im/mRemoteNG/PublicChat/](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mRemoteNG/PublicChat)
 [![PayPal](https://img.shields.io/badge/%24-PayPal-blue.svg)](https://www.paypal.me/DavidSparer)
 
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge)](https://bestpractices.coreinfrastructure.org/projects/529)
+[![Github Releases](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/total.svg?style=flat-square)](https://github.com/mRemoteNG/mRemoteNG/releases/)
 
-[![Issues In Progress](https://badge.waffle.io/mRemoteNG/mRemoteNG.png?label=In%20Progress&title=In%20Progress)](https://waffle.io/mRemoteNG/mRemoteNG)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge)](https://bestpractices.coreinfrastructure.org/projects/529)
 
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
-| Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.11/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.11) |
-| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.12/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.12) |
-| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.12/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.12) |
+| Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
+| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
+| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
 
 mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
 
@@ -54,6 +54,6 @@ If you find mRemoteNG useful and would like to contribute, it would be greatly a
 Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/Development) on how to configure your development environment and submit a pull request.
 
 ### Translate
-Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/How%20to%20Help%20Translating%20mRemoteNG) on how to help make mRemoteNG a polygot
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/How%20to%20Help%20Translating%20mRemoteNG) on how to help make mRemoteNG a polyglot
 
 [![Developed with ReSharper](https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png)](https://www.jetbrains.com/resharper/)

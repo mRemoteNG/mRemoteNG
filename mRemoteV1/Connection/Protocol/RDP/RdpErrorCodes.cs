@@ -1,6 +1,6 @@
-using mRemoteNG.App;
-using System;
+﻿using System;
 using System.Collections;
+using mRemoteNG.App;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
@@ -12,18 +12,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             _description = new Hashtable
             {
-                { 0, "Language.strRdpErrorUnknown"},
-                { 1, "Language.strRdpErrorCode1"},
-                { 2, "Language.strRdpErrorOutOfMemory"},
-                { 3, "Language.strRdpErrorWindowCreation"},
-                { 4, "Language.strRdpErrorCode2"},
-                { 5, "Language.strRdpErrorCode3"},
-                { 6, "Language.strRdpErrorCode4"},
-                { 7, "Language.strRdpErrorConnection"},
-                { 100, "Language.strRdpErrorWinsock"}
+                {"0", nameof(Language.strRdpErrorUnknown)},
+                {"1", nameof(Language.strRdpErrorCode1)},
+                {"2", nameof(Language.strRdpErrorOutOfMemory)},
+                {"3", nameof(Language.strRdpErrorWindowCreation)},
+                {"4", nameof(Language.strRdpErrorCode2)},
+                {"5", nameof(Language.strRdpErrorCode3)},
+                {"6", nameof(Language.strRdpErrorCode4)},
+                {"7", nameof(Language.strRdpErrorConnection)},
+                {"100", nameof(Language.strRdpErrorWinsock)}
             };
         }
-					
+
         public static string GetError(int id)
         {
             try

@@ -1,20 +1,21 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
-using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
-    public class RemoteDesktopConnectionManager27DeserializerTests
+	public class RemoteDesktopConnectionManager27DeserializerTests
     {
         private string _connectionFileContents;
         private RemoteDesktopConnectionManagerDeserializer _deserializer;
-        private ConnectionTreeModel _connectionTreeModel;
         private const string ExpectedName = "server1_displayname";
         private const string ExpectedHostname = "server1";
         private const string ExpectedDescription = "Comment text here";
@@ -44,265 +45,80 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         {
             _connectionFileContents = Resources.test_rdcman_v2_7_schema3;
             _deserializer = new RemoteDesktopConnectionManagerDeserializer();
-            _connectionTreeModel = _deserializer.Deserialize(_connectionFileContents);
         }
 
         [Test]
         public void ConnectionTreeModelHasARootNode()
         {
-            var numberOfRootNodes = _connectionTreeModel.RootNodes.Count;
+	        var connectionTreeModel = _deserializer.Deserialize(_connectionFileContents);
+			var numberOfRootNodes = connectionTreeModel.RootNodes.Count;
             Assert.That(numberOfRootNodes, Is.GreaterThan(0));
         }
 
         [Test]
         public void RootNodeHasContents()
         {
-            var rootNodeContents = _connectionTreeModel.RootNodes.First().Children;
+	        var connectionTreeModel = _deserializer.Deserialize(_connectionFileContents);
+			var rootNodeContents = connectionTreeModel.RootNodes.First().Children;
             Assert.That(rootNodeContents, Is.Not.Empty);
         }
 
         [Test]
         public void AllSubRootFoldersImported()
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
+	        var connectionTreeModel = _deserializer.Deserialize(_connectionFileContents);
+			var rootNode = connectionTreeModel.RootNodes.First();
             var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
             var rootNodeContents = importedRdcmanRootNode.Children.Count(node => node.Name == "Group1" || node.Name == "Group2");
             Assert.That(rootNodeContents, Is.EqualTo(2));
         }
 
-        [Test]
-        public void ConnectionDisplayNameImported()
+        [TestCaseSource(nameof(ExpectedPropertyValues))]
+        public void PropertiesWithValuesAreCorrectlyImported(Func<ConnectionInfo, object> propSelector, object expectedValue)
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Name, Is.EqualTo(ExpectedName));
+	        var connectionTreeModel = _deserializer.Deserialize(_connectionFileContents);
+
+			var connection = connectionTreeModel
+				.GetRecursiveChildList()
+				.OfType<ContainerInfo>()
+				.First(node => node.Name == "Group1")
+				.Children
+				.First();
+
+            Assert.That(propSelector(connection), Is.EqualTo(expectedValue));
         }
 
-        [Test]
-        public void ConnectionHostnameImported()
+		[TestCaseSource(nameof(NullPropertyValues))]
+        public void PropertiesWithoutValuesAreIgnored(Func<ConnectionInfo, object> propSelector)
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Hostname, Is.EqualTo(ExpectedHostname));
+	        var connectionTreeModel = _deserializer.Deserialize(Resources.test_rdcman_v2_7_schema3_empty_values);
+
+	        var importedConnection = connectionTreeModel
+		        .GetRecursiveChildList()
+		        .OfType<ContainerInfo>()
+		        .First(node => node.Name == "Group1")
+		        .Children
+		        .First();
+
+			Assert.That(propSelector(importedConnection), Is.EqualTo(propSelector(new ConnectionInfo())));
         }
 
-        [Test]
-        public void ConnectionDescriptionImported()
+        [TestCaseSource(nameof(NullPropertyValues))]
+        public void NonExistantPropertiesAreIgnored(Func<ConnectionInfo, object> propSelector)
         {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Description, Is.EqualTo(ExpectedDescription));
+	        var connectionTreeModel = _deserializer.Deserialize(Resources.test_rdcman_v2_7_schema3_null_values);
+
+	        var importedConnection = connectionTreeModel
+		        .GetRecursiveChildList()
+		        .OfType<ContainerInfo>()
+		        .First(node => node.Name == "Group1")
+		        .Children
+		        .First();
+
+	        Assert.That(propSelector(importedConnection), Is.EqualTo(propSelector(new ConnectionInfo())));
         }
 
-        [Test]
-        public void ConnectionUsernameImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Username, Is.EqualTo(ExpectedUsername));
-        }
-
-        [Test]
-        public void ConnectionDomainImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Domain, Is.EqualTo(ExpectedDomain));
-        }
-
-        // Since password is encrypted with a machine key, cant test decryption on another machine
-        //[Test]
-        //public void ConnectionPasswordImported()
-        //{
-        //    var rootNode = _connectionTreeModel.RootNodes.First();
-        //    var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-        //    var connection = group1.Children.First();
-        //    Assert.That(connection.Password, Is.EqualTo(ExpectedPassword));
-        //}
-
-        [Test]
-        public void ConnectionProtocolSetToRdp()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Protocol, Is.EqualTo(ProtocolType.RDP));
-        }
-
-        [Test]
-        public void ConnectionUseConsoleSessionImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.UseConsoleSession, Is.EqualTo(ExpectedUseConsoleSession));
-        }
-
-        [Test]
-        public void ConnectionPortImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Port, Is.EqualTo(ExpectedPort));
-        }
-
-        [Test]
-        public void ConnectionGatewayUsageMethodImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RDGatewayUsageMethod, Is.EqualTo(ExpectedGatewayUsageMethod));
-        }
-
-        [Test]
-        public void ConnectionGatewayHostnameImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RDGatewayHostname, Is.EqualTo(ExpectedGatewayHostname));
-        }
-
-        [Test]
-        public void ConnectionGatewayUsernameImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RDGatewayUsername, Is.EqualTo(ExpectedGatewayUsername));
-        }
-
-        // Since password is encrypted with a machine key, cant test decryption on another machine
-        //[Test]
-        //public void ConnectionGatewayPasswordImported()
-        //{
-        //    var rootNode = _connectionTreeModel.RootNodes.First();
-        //    var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-        //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-        //    var connection = group1.Children.First();
-        //    Assert.That(connection.RDGatewayPassword, Is.EqualTo(ExpectedGatewayPassword));
-        //}
-
-        [Test]
-        public void ConnectionGatewayDomainImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RDGatewayDomain, Is.EqualTo(ExpectedGatewayDomain));
-        }
-
-        [Test]
-        public void ConnectionResolutionImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Resolution, Is.EqualTo(ExpectedRdpResolution));
-        }
-
-        [Test]
-        public void ConnectionColorDepthImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Colors, Is.EqualTo(ExpectedRdpColorDepth));
-        }
-
-        [Test]
-        public void ConnectionAudioRedirectionImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RedirectSound, Is.EqualTo(ExpectedAudioRedirection));
-        }
-
-        [Test]
-        public void ConnectionKeyRedirectionImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RedirectKeys, Is.EqualTo(ExpectedKeyRedirection));
-        }
-
-        [Test]
-        public void ConnectionDriveRedirectionImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RedirectDiskDrives, Is.EqualTo(ExpectedDriveRedirection));
-        }
-
-        [Test]
-        public void ConnectionPortRedirectionImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RedirectPorts, Is.EqualTo(ExpectedPortRedirection));
-        }
-
-        [Test]
-        public void ConnectionPrinterRedirectionImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RedirectPrinters, Is.EqualTo(ExpectedPrinterRedirection));
-        }
-
-        [Test]
-        public void ConnectionSmartcardRedirectionImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RedirectSmartCards, Is.EqualTo(ExpectedSmartcardRedirection));
-        }
-
-        [Test]
-        public void ConnectionauthenticationLevelImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RDPAuthenticationLevel, Is.EqualTo(ExpectedAuthLevel));
-        }
-
-        [Test]
+		[Test]
         public void ExceptionThrownOnBadSchemaVersion()
         {
             var badFileContents = Resources.test_rdcman_v2_2_badschemaversion;
@@ -322,5 +138,61 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
             var badFileContents = Resources.test_rdcman_noversion;
             Assert.That(() => _deserializer.Deserialize(badFileContents), Throws.TypeOf<FileFormatException>());
         }
+
+        private static IEnumerable<TestCaseData> ExpectedPropertyValues()
+        {
+	        return new[]
+	        {
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.Name), ExpectedName).SetName(nameof(ConnectionInfo.Name)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Hostname), ExpectedHostname).SetName(nameof(ConnectionInfo.Hostname)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Description), ExpectedDescription).SetName(nameof(ConnectionInfo.Description)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Username), ExpectedUsername).SetName(nameof(ConnectionInfo.Username)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Domain), ExpectedDomain).SetName(nameof(ConnectionInfo.Domain)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Protocol), ProtocolType.RDP).SetName(nameof(ConnectionInfo.Protocol)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.UseConsoleSession), ExpectedUseConsoleSession).SetName(nameof(ConnectionInfo.UseConsoleSession)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Port), ExpectedPort).SetName(nameof(ConnectionInfo.Port)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUsageMethod), ExpectedGatewayUsageMethod).SetName(nameof(ConnectionInfo.RDGatewayUsageMethod)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayHostname), ExpectedGatewayHostname).SetName(nameof(ConnectionInfo.RDGatewayHostname)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUsername), ExpectedGatewayUsername).SetName(nameof(ConnectionInfo.RDGatewayUsername)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayDomain), ExpectedGatewayDomain).SetName(nameof(ConnectionInfo.RDGatewayDomain)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Resolution), ExpectedRdpResolution).SetName(nameof(ConnectionInfo.Resolution)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Colors), ExpectedRdpColorDepth).SetName(nameof(ConnectionInfo.Colors)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSound), ExpectedAudioRedirection).SetName(nameof(ConnectionInfo.RedirectSound)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectKeys), ExpectedKeyRedirection).SetName(nameof(ConnectionInfo.RedirectKeys)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDPAuthenticationLevel), ExpectedAuthLevel).SetName(nameof(ConnectionInfo.RDPAuthenticationLevel)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSmartCards), ExpectedSmartcardRedirection).SetName(nameof(ConnectionInfo.RedirectSmartCards)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPrinters), ExpectedPrinterRedirection).SetName(nameof(ConnectionInfo.RedirectPrinters)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPorts), ExpectedPortRedirection).SetName(nameof(ConnectionInfo.RedirectPorts)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectDiskDrives), ExpectedDriveRedirection).SetName(nameof(ConnectionInfo.RedirectDiskDrives)),
+			};
+        }
+
+        private static IEnumerable<TestCaseData> NullPropertyValues()
+        {
+			return new[]
+			{
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Name)).SetName(nameof(ConnectionInfo.Name)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Hostname)).SetName(nameof(ConnectionInfo.Hostname)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Description)).SetName(nameof(ConnectionInfo.Description)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Username)).SetName(nameof(ConnectionInfo.Username)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Domain)).SetName(nameof(ConnectionInfo.Domain)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Protocol)).SetName(nameof(ConnectionInfo.Protocol)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.UseConsoleSession)).SetName(nameof(ConnectionInfo.UseConsoleSession)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Port)).SetName(nameof(ConnectionInfo.Port)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUsageMethod)).SetName(nameof(ConnectionInfo.RDGatewayUsageMethod)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayHostname)).SetName(nameof(ConnectionInfo.RDGatewayHostname)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUsername)).SetName(nameof(ConnectionInfo.RDGatewayUsername)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayDomain)).SetName(nameof(ConnectionInfo.RDGatewayDomain)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Resolution)).SetName(nameof(ConnectionInfo.Resolution)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Colors)).SetName(nameof(ConnectionInfo.Colors)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSound)).SetName(nameof(ConnectionInfo.RedirectSound)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectKeys)).SetName(nameof(ConnectionInfo.RedirectKeys)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDPAuthenticationLevel)).SetName(nameof(ConnectionInfo.RDPAuthenticationLevel)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSmartCards)).SetName(nameof(ConnectionInfo.RedirectSmartCards)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPrinters)).SetName(nameof(ConnectionInfo.RedirectPrinters)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPorts)).SetName(nameof(ConnectionInfo.RedirectPorts)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectDiskDrives)).SetName(nameof(ConnectionInfo.RedirectDiskDrives)),
+			};
+		}
     }
 }

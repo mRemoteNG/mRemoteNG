@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -35,7 +35,6 @@ namespace mRemoteNG.UI.Window
 
         #region Private Methods
 
-
         #region Event Handlers
 
         private void ADImport_Load(object sender, EventArgs e)
@@ -58,7 +57,7 @@ namespace mRemoteNG.UI.Window
             else
                 importDestination = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
 
-            Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination, chkSubOU.Checked);
+            Import.ImportFromActiveDirectory(ActiveDirectoryTree.AdPath, importDestination, chkSubOU.Checked);
         }
 
         /*
@@ -81,6 +80,7 @@ namespace mRemoteNG.UI.Window
             ChangeDomain();
         }
 
+        // ReSharper disable once UnusedParameter.Local
         private void ActiveDirectoryTree_ADPathChanged(object sender)
         {
             EnableDisableImportButton();
@@ -106,7 +106,7 @@ namespace mRemoteNG.UI.Window
 
         private void EnableDisableImportButton()
         {
-            btnImport.Enabled = !string.IsNullOrEmpty(ActiveDirectoryTree.ADPath);
+            btnImport.Enabled = !string.IsNullOrEmpty(ActiveDirectoryTree.AdPath);
         }
 
         #endregion

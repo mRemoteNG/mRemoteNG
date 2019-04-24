@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Forms
         private readonly string _pageName;
         private readonly DisplayProperties _display = new DisplayProperties();
 
-        public FrmOptions(): this(Language.strStartupExit)
+        public FrmOptions() : this(Language.strStartupExit)
         {
         }
 
@@ -37,6 +37,9 @@ namespace mRemoteNG.UI.Forms
             // Handle the main page here and the individual pages in
             // AddOptionsPagesToListView()  -- one less foreach loop....
             Text = Language.strOptionsPageTitle;
+            btnOK.Text = Language.strButtonOK;
+            btnCancel.Text = Language.strButtonCancel;
+            btnApply.Text = Language.strButtonApply;
             ApplyTheme();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
@@ -108,7 +111,7 @@ namespace mRemoteNG.UI.Forms
                 break;
             }
 
-            if(!isSet)
+            if (!isSet)
                 lstOptionPages.Items[0].Selected = true;
         }
 
@@ -124,6 +127,7 @@ namespace mRemoteNG.UI.Forms
                 Debug.WriteLine(page.PageName);
                 page.SaveSettings();
             }
+
             Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
             Settings.Default.Save();
         }
@@ -145,6 +149,7 @@ namespace mRemoteNG.UI.Forms
                 Debug.WriteLine(page.PageName);
                 page.RevertSettings();
             }
+
             Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
         }
     }

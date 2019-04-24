@@ -33,8 +33,9 @@ namespace mRemoteNG.UI.Controls.Base
                 base.OnPaint(e);
                 return;
             }
+
             //Reusing the textbox colors
-            var titleColor =  _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground");
+            var titleColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground");
             //var backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Backgorund");
             var lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Line");
 
@@ -47,7 +48,8 @@ namespace mRemoteNG.UI.Controls.Base
 
 
             //var state = Enabled ? GroupBoxState.Normal : GroupBoxState.Disabled;
-            var flags = TextFormatFlags.PreserveGraphicsTranslateTransform | TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.TextBoxControl |TextFormatFlags.WordBreak;
+            var flags = TextFormatFlags.PreserveGraphicsTranslateTransform | TextFormatFlags.PreserveGraphicsClipping |
+                        TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak;
 
             if (!ShowKeyboardCues)
                 flags |= TextFormatFlags.HidePrefix;
@@ -60,7 +62,8 @@ namespace mRemoteNG.UI.Controls.Base
             var bounds = new Rectangle(0, 0, Width, Height);
             var rectangle = bounds;
             rectangle.Width -= 8;
-            var size = TextRenderer.MeasureText(e.Graphics, Text, Font, new Size(rectangle.Width, rectangle.Height), flags);
+            var size = TextRenderer.MeasureText(e.Graphics, Text, Font, new Size(rectangle.Width, rectangle.Height),
+                                                flags);
             rectangle.Width = size.Width;
             rectangle.Height = size.Height;
             if ((flags & TextFormatFlags.Right) == TextFormatFlags.Right)
@@ -75,16 +78,22 @@ namespace mRemoteNG.UI.Controls.Base
             {
                 var num = bounds.Top + (Font.Height / 2);
                 //Left line
-                e.Graphics.DrawLine(pen, bounds.Left + Padding.Left , num - Padding.Top, bounds.Left + Padding.Left, bounds.Height - Padding.Bottom);
+                e.Graphics.DrawLine(pen, bounds.Left + Padding.Left, num - Padding.Top, bounds.Left + Padding.Left,
+                                    bounds.Height - Padding.Bottom);
                 //Bottom line
-                e.Graphics.DrawLine(pen, bounds.Left + Padding.Left, bounds.Height - Padding.Bottom, bounds.Width -Padding.Right, bounds.Height -Padding.Bottom);
+                e.Graphics.DrawLine(pen, bounds.Left + Padding.Left, bounds.Height - Padding.Bottom,
+                                    bounds.Width - Padding.Right, bounds.Height - Padding.Bottom);
                 //Beside text line
-                e.Graphics.DrawLine(pen, bounds.Left +Padding.Left, num - Padding.Top, rectangle.X - 3, num - Padding.Top);
+                e.Graphics.DrawLine(pen, bounds.Left + Padding.Left, num - Padding.Top, rectangle.X - 3,
+                                    num - Padding.Top);
                 //Top line cutted
-                e.Graphics.DrawLine(pen, rectangle.X + rectangle.Width + 2, num - Padding.Top, bounds.Width - Padding.Right, num - Padding.Top);
+                e.Graphics.DrawLine(pen, rectangle.X + rectangle.Width + 2, num - Padding.Top,
+                                    bounds.Width - Padding.Right, num - Padding.Top);
                 //Right line
-                e.Graphics.DrawLine(pen, bounds.Width - Padding.Right, num - Padding.Top, bounds.Width - Padding.Right, bounds.Height - Padding.Bottom);
+                e.Graphics.DrawLine(pen, bounds.Width - Padding.Right, num - Padding.Top, bounds.Width - Padding.Right,
+                                    bounds.Height - Padding.Bottom);
             }
+
             RaisePaintEvent(this, e);
         }
 
@@ -94,9 +103,9 @@ namespace mRemoteNG.UI.Controls.Base
             // 
             // NGGroupBox
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResumeLayout(false);
-
         }
     }
 }

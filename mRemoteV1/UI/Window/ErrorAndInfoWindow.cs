@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Collections;
 using System.Globalization;
@@ -13,17 +13,17 @@ using Message = mRemoteNG.Messages.Message;
 
 namespace mRemoteNG.UI.Window
 {
-	public partial class ErrorAndInfoWindow : BaseWindow
-	{
+    public partial class ErrorAndInfoWindow : BaseWindow
+    {
         private ControlLayout _layout = ControlLayout.Vertical;
         private readonly ThemeManager _themeManager;
-	    private readonly DisplayProperties _display;
+        private readonly DisplayProperties _display;
 
         public DockContent PreviousActiveForm { get; set; }
 
-	    public ErrorAndInfoWindow() : this(new DockContent())
-	    {
-	    }
+        public ErrorAndInfoWindow() : this(new DockContent())
+        {
+        }
 
         public ErrorAndInfoWindow(DockContent panel)
         {
@@ -41,22 +41,25 @@ namespace mRemoteNG.UI.Window
         }
 
         #region Form Stuff
-        private void ErrorsAndInfos_Load(object sender, EventArgs e)
-		{
-		}
 
-		private void ApplyLanguage()
-		{
-			clmMessage.Text = Language.strColumnMessage;
-			cMenMCCopy.Text = Language.strMenuNotificationsCopyAll;
-			cMenMCDelete.Text = Language.strMenuNotificationsDeleteAll;
-			TabText = Language.strMenuNotifications;
-			Text = Language.strMenuNotifications;
-		}
+        private void ErrorsAndInfos_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void ApplyLanguage()
+        {
+            clmMessage.Text = Language.strColumnMessage;
+            cMenMCCopy.Text = Language.strMenuNotificationsCopyAll;
+            cMenMCDelete.Text = Language.strMenuNotificationsDeleteAll;
+            TabText = Language.strMenuNotifications;
+            Text = Language.strMenuNotifications;
+        }
+
         #endregion
 
         #region Private Methods
-        private new void  ApplyTheme()
+
+        private new void ApplyTheme()
         {
             if (!_themeManager.ActiveAndExtended) return;
             lvErrorCollector.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
@@ -74,297 +77,342 @@ namespace mRemoteNG.UI.Window
         {
             imgListMC.ImageSize = _display.ScaleSize(imgListMC.ImageSize);
             imgListMC.Images.Add(_display.ScaleImage(Resources.brick));
-			imgListMC.Images.Add(_display.ScaleImage(Resources.InformationSmall));
-			imgListMC.Images.Add(_display.ScaleImage(Resources.WarningSmall));
-			imgListMC.Images.Add(_display.ScaleImage(Resources.ErrorSmall));
-		}
+            imgListMC.Images.Add(_display.ScaleImage(Resources.InformationSmall));
+            imgListMC.Images.Add(_display.ScaleImage(Resources.WarningSmall));
+            imgListMC.Images.Add(_display.ScaleImage(Resources.ErrorSmall));
+        }
 
-		private void LayoutVertical()
-		{
-			try
-			{
-				pnlErrorMsg.Location = new Point(0, Height - _display.ScaleHeight(200));
-				pnlErrorMsg.Size = new Size(Width, Height - pnlErrorMsg.Top);
-				pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-				txtMsgText.Size = new Size(
-				    pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
-				    pnlErrorMsg.Height - _display.ScaleHeight(20));
-				lvErrorCollector.Location = new Point(0, 0);
-				lvErrorCollector.Size = new Size(Width, Height - pnlErrorMsg.Height - _display.ScaleHeight(5));
-				lvErrorCollector.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+        private void LayoutVertical()
+        {
+            try
+            {
+                pnlErrorMsg.Location = new Point(0, Height - _display.ScaleHeight(200));
+                pnlErrorMsg.Size = new Size(Width, Height - pnlErrorMsg.Top);
+                pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+                txtMsgText.Size = new Size(
+                                           pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
+                                           pnlErrorMsg.Height - _display.ScaleHeight(20));
+                lvErrorCollector.Location = new Point(0, 0);
+                lvErrorCollector.Size = new Size(Width, Height - pnlErrorMsg.Height - _display.ScaleHeight(5));
+                lvErrorCollector.Anchor =
+                    AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
-				_layout = ControlLayout.Vertical;
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "LayoutVertical (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
+                _layout = ControlLayout.Vertical;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "LayoutVertical (UI.Window.ErrorsAndInfos) failed" +
+                                                    Environment.NewLine + ex.Message, true);
+            }
+        }
 
-		private void LayoutHorizontal()
-		{
-			try
-			{
-				pnlErrorMsg.Location = new Point(0, 0);
-				pnlErrorMsg.Size = new Size(_display.ScaleWidth(200), Height);
-				pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top;
+        private void LayoutHorizontal()
+        {
+            try
+            {
+                pnlErrorMsg.Location = new Point(0, 0);
+                pnlErrorMsg.Size = new Size(_display.ScaleWidth(200), Height);
+                pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top;
 
                 txtMsgText.Size = new Size(
-				    pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
-				    pnlErrorMsg.Height - _display.ScaleHeight(20));
-				lvErrorCollector.Location = new Point(pnlErrorMsg.Width + _display.ScaleWidth(5), 0);
-				lvErrorCollector.Size = new Size(Width - pnlErrorMsg.Width - _display.ScaleWidth(5), Height);
-				lvErrorCollector.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+                                           pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
+                                           pnlErrorMsg.Height - _display.ScaleHeight(20));
+                lvErrorCollector.Location = new Point(pnlErrorMsg.Width + _display.ScaleWidth(5), 0);
+                lvErrorCollector.Size = new Size(Width - pnlErrorMsg.Width - _display.ScaleWidth(5), Height);
+                lvErrorCollector.Anchor =
+                    AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
-				_layout = ControlLayout.Horizontal;
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
+                _layout = ControlLayout.Horizontal;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" +
+                                                    Environment.NewLine + ex.Message, true);
+            }
+        }
 
-		private void ErrorsAndInfos_Resize(object sender, EventArgs e)
-		{
-			try
-			{
-				if (Width > Height)
-				{
-					if (_layout == ControlLayout.Vertical)
-						LayoutHorizontal();
-				}
-				else
-				{
-					if (_layout == ControlLayout.Horizontal)
-						LayoutVertical();
-				}
+        private void ErrorsAndInfos_Resize(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Width > Height)
+                {
+                    if (_layout == ControlLayout.Vertical)
+                        LayoutHorizontal();
+                }
+                else
+                {
+                    if (_layout == ControlLayout.Horizontal)
+                        LayoutVertical();
+                }
 
-				lvErrorCollector.Columns[0].Width = lvErrorCollector.Width - 20;
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
+                lvErrorCollector.Columns[0].Width = lvErrorCollector.Width - 20;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" +
+                                                    Environment.NewLine + ex.Message, true);
+            }
+        }
 
-		private void SetStyleWhenNoMessageSelected()
-		{
-			try
-			{
-				pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+        private void SetStyleWhenNoMessageSelected()
+        {
+            try
+            {
+                pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
                 pbError.Image = null;
-				txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
                 txtMsgText.Text = "";
                 lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
                 lblMsgDate.Text = "";
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" +
+                                                    Environment.NewLine +
+                                                    ex.Message, true);
+            }
+        }
 
-		private void MC_KeyDown(object sender, KeyEventArgs e)
-		{
-			try
-			{
-			    if (e.KeyCode != Keys.Escape) return;
-			    try
-			    {
-			        if (PreviousActiveForm != null)
-			            PreviousActiveForm.Show(FrmMain.Default.pnlDock);
-			        else
-			            Windows.TreeForm.Show(FrmMain.Default.pnlDock);
-			    }
-			    catch (Exception)
-			    {
-			        // ignored
-			    }
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
+        private void MC_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode != Keys.Escape) return;
+                try
+                {
+                    if (PreviousActiveForm != null)
+                        PreviousActiveForm.Show(FrmMain.Default.pnlDock);
+                    else
+                        Windows.TreeForm.Show(FrmMain.Default.pnlDock);
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" +
+                                                    Environment.NewLine + ex.Message, true);
+            }
+        }
 
-		private void lvErrorCollector_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			try
-			{
-				if (lvErrorCollector.SelectedItems.Count == 0 | lvErrorCollector.SelectedItems.Count > 1)
-				{
-					SetStyleWhenNoMessageSelected();
-					return;
-				}
+        private void lvErrorCollector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lvErrorCollector.SelectedItems.Count == 0 | lvErrorCollector.SelectedItems.Count > 1)
+                {
+                    SetStyleWhenNoMessageSelected();
+                    return;
+                }
 
-				var sItem = lvErrorCollector.SelectedItems[0];
+                var sItem = lvErrorCollector.SelectedItems[0];
                 var eMsg = (Message)sItem.Tag;
-				switch (eMsg.Class)
-				{
+                switch (eMsg.Class)
+                {
                     case MessageClass.DebugMsg:
-				        pbError.Image = _display.ScaleImage(Resources.brick);
-                        if(_themeManager.ThemingActive)
+                        pbError.Image = _display.ScaleImage(Resources.brick);
+                        if (_themeManager.ThemingActive)
                         {
                             pnlErrorMsg.BackColor = Color.LightSteelBlue;
                             txtMsgText.BackColor = Color.LightSteelBlue;
                             lblMsgDate.BackColor = Color.LightSteelBlue;
                         }
+
                         break;
-					case MessageClass.InformationMsg:
-						pbError.Image = _display.ScaleImage(Resources.Information);
+                    case MessageClass.InformationMsg:
+                        pbError.Image = _display.ScaleImage(Resources.Information);
                         if (_themeManager.ThemingActive)
                         {
                             pnlErrorMsg.BackColor = Color.LightSteelBlue;
-						    txtMsgText.BackColor = Color.LightSteelBlue;
+                            txtMsgText.BackColor = Color.LightSteelBlue;
                             lblMsgDate.BackColor = Color.LightSteelBlue;
                         }
+
                         break;
-					case MessageClass.WarningMsg:
-						pbError.Image = _display.ScaleImage(Resources.Warning);
+                    case MessageClass.WarningMsg:
+                        pbError.Image = _display.ScaleImage(Resources.Warning);
                         if (_themeManager.ActiveAndExtended)
                         {
                             //Inverse colors for dramatic effect
-                            pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
-                            pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor ("WarningText_Background");
-                            txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
-                            txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
-                            lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
-                            lblMsgDate.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                            pnlErrorMsg.BackColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                            pnlErrorMsg.ForeColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                            txtMsgText.BackColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                            txtMsgText.ForeColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
+                            lblMsgDate.BackColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Foreground");
+                            lblMsgDate.ForeColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("WarningText_Background");
                         }
+
                         break;
-					case MessageClass.ErrorMsg:
-						pbError.Image = _display.ScaleImage(Resources._Error);
+                    case MessageClass.ErrorMsg:
+                        pbError.Image = _display.ScaleImage(Resources._Error);
                         if (_themeManager.ActiveAndExtended)
                         {
-                            pnlErrorMsg.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
-                            pnlErrorMsg.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
-                            txtMsgText.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
-                            txtMsgText.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
-                            lblMsgDate.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
-                            lblMsgDate.ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                            pnlErrorMsg.BackColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                            pnlErrorMsg.ForeColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                            txtMsgText.BackColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                            txtMsgText.ForeColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
+                            lblMsgDate.BackColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Foreground");
+                            lblMsgDate.ForeColor =
+                                _themeManager.ActiveTheme.ExtendedPalette.getColor("ErrorText_Background");
                         }
+
                         break;
-				}
+                }
 
-				lblMsgDate.Text = eMsg.Date.ToString(CultureInfo.InvariantCulture);
-				txtMsgText.Text = eMsg.Text;
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
+                lblMsgDate.Text = eMsg.Date.ToString(CultureInfo.InvariantCulture);
+                txtMsgText.Text = eMsg.Text;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" +
+                                                    Environment.NewLine +
+                                                    ex.Message, true);
+            }
+        }
 
-		private void cMenMC_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			if (lvErrorCollector.Items.Count > 0)
-			{
-				cMenMCCopy.Enabled = true;
-				cMenMCDelete.Enabled = true;
-			}
-			else
-			{
-				cMenMCCopy.Enabled = false;
-				cMenMCDelete.Enabled = false;
-			}
+        private void cMenMC_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (lvErrorCollector.Items.Count > 0)
+            {
+                cMenMCCopy.Enabled = true;
+                cMenMCDelete.Enabled = true;
+                pbError.Visible = true;
+            }
+            else
+            {
+                cMenMCCopy.Enabled = false;
+                cMenMCDelete.Enabled = false;
+            }
 
-			if (lvErrorCollector.SelectedItems.Count > 0)
-			{
-				cMenMCCopy.Text = Language.strMenuCopy;
-				cMenMCDelete.Text = Language.strMenuNotificationsDelete;
-			}
-			else
-			{
-				cMenMCCopy.Text = Language.strMenuNotificationsCopyAll;
-				cMenMCDelete.Text = Language.strMenuNotificationsDeleteAll;
-			}
-		}
+            if (lvErrorCollector.SelectedItems.Count > 0)
+            {
+                cMenMCCopy.Text = Language.strMenuCopy;
+                cMenMCDelete.Text = Language.strMenuNotificationsDelete;
+            }
+            else
+            {
+                cMenMCCopy.Text = Language.strMenuNotificationsCopyAll;
+                cMenMCDelete.Text = Language.strMenuNotificationsDeleteAll;
+            }
+        }
 
-		private void cMenMCCopy_Click(object sender, EventArgs e)
-		{
-			CopyMessagesToClipboard();
-		}
+        private void cMenMCCopy_Click(object sender, EventArgs e)
+        {
+            CopyMessagesToClipboard();
+        }
 
-		private void CopyMessagesToClipboard()
-		{
-			try
-			{
-				IEnumerable items;
-				if (lvErrorCollector.SelectedItems.Count > 0)
-				{
-					items = lvErrorCollector.SelectedItems;
-				}
-				else
-				{
-					items = lvErrorCollector.Items;
-				}
+        private void CopyMessagesToClipboard()
+        {
+            try
+            {
+                IEnumerable items;
+                if (lvErrorCollector.SelectedItems.Count > 0)
+                {
+                    items = lvErrorCollector.SelectedItems;
+                }
+                else
+                {
+                    items = lvErrorCollector.Items;
+                }
 
-				var stringBuilder = new StringBuilder();
-				stringBuilder.AppendLine("----------");
+                var stringBuilder = new StringBuilder();
+                stringBuilder.AppendLine("----------");
 
-				lvErrorCollector.BeginUpdate();
+                lvErrorCollector.BeginUpdate();
 
-			    foreach (ListViewItem item in items)
-				{
+                foreach (ListViewItem item in items)
+                {
                     if (!(item.Tag is Message message))
-					{
-						continue;
-					}
+                    {
+                        continue;
+                    }
 
-					stringBuilder.AppendLine(message.Class.ToString());
-					stringBuilder.AppendLine(message.Date.ToString(CultureInfo.InvariantCulture));
-					stringBuilder.AppendLine(message.Text);
-					stringBuilder.AppendLine("----------");
-				}
+                    stringBuilder.AppendLine(message.Class.ToString());
+                    stringBuilder.AppendLine(message.Date.ToString(CultureInfo.InvariantCulture));
+                    stringBuilder.AppendLine(message.Text);
+                    stringBuilder.AppendLine("----------");
+                }
 
-				Clipboard.SetText(stringBuilder.ToString());
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.CopyMessagesToClipboard() failed." + Environment.NewLine + ex.Message, true);
-			}
-			finally
-			{
-				lvErrorCollector.EndUpdate();
-			}
-		}
+                Clipboard.SetText(stringBuilder.ToString());
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "UI.Window.ErrorsAndInfos.CopyMessagesToClipboard() failed." +
+                                                    Environment.NewLine + ex.Message,
+                                                    true);
+            }
+            finally
+            {
+                lvErrorCollector.EndUpdate();
+            }
+        }
 
-		private void cMenMCDelete_Click(object sender, EventArgs e)
-		{
-			DeleteMessages();
-		}
+        private void cMenMCDelete_Click(object sender, EventArgs e)
+        {
+            DeleteMessages();
+        }
 
-		private void DeleteMessages()
-		{
-			try
-			{
-				lvErrorCollector.BeginUpdate();
+        private void DeleteMessages()
+        {
+            try
+            {
+                lvErrorCollector.BeginUpdate();
 
-				if (lvErrorCollector.SelectedItems.Count > 0)
-				{
-					foreach (ListViewItem item in lvErrorCollector.SelectedItems)
-						item.Remove();
-				}
-				else
-				{
-					lvErrorCollector.Items.Clear();
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.DeleteMessages() failed" + Environment.NewLine + ex.Message, true);
-			}
-			finally
-			{
-				lvErrorCollector.EndUpdate();
-			}
-		}
+                if (lvErrorCollector.SelectedItems.Count > 0)
+                {
+                    foreach (ListViewItem item in lvErrorCollector.SelectedItems)
+                        item.Remove();
+                }
+                else
+                {
+                    lvErrorCollector.Items.Clear();
+                }
+
+                if (lvErrorCollector.Items.Count == 0)
+                {
+                    pbError.Visible = false;
+                    txtMsgText.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "UI.Window.ErrorsAndInfos.DeleteMessages() failed" +
+                                                    Environment.NewLine + ex.Message, true);
+            }
+            finally
+            {
+                lvErrorCollector.EndUpdate();
+            }
+        }
+
         #endregion
 
-	    private enum ControlLayout
-		{
-			Vertical = 0,
-			Horizontal = 1
-		}
-	}
+        private enum ControlLayout
+        {
+            Vertical = 0,
+            Horizontal = 1
+        }
+    }
 }

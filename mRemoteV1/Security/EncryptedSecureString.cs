@@ -1,11 +1,13 @@
-﻿using System.Security;
+﻿using System;
+using System.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using Org.BouncyCastle.Security;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Security
 {
-    public class EncryptedSecureString
+    public class EncryptedSecureString : IDisposable
     {
         private static SecureString _machineKey;
         private SecureString _secureString;
@@ -51,8 +53,25 @@ namespace mRemoteNG.Security
             {
                 machineKeyString += (char)random.Next(33, 126);
             }
-            
+
             return machineKeyString.ConvertToSecureString();
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposing) return;
+
+            if(_machineKey != null)
+                _machineKey.Dispose();
+
+            if(_secureString != null)
+            _secureString.Dispose();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

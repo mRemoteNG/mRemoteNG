@@ -20,6 +20,7 @@ namespace mRemoteNG.Connection
         private readonly List<string> _activeConnections = new List<string>();
 
         public IEnumerable<string> ActiveConnections => _activeConnections;
+
         public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
         {
             OpenConnection(containerInfo, force, null);
@@ -61,6 +62,7 @@ namespace mRemoteNG.Connection
         }
 
         #region Private
+
         private void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
         {
             var children = containerInfo.Children;
@@ -80,7 +82,8 @@ namespace mRemoteNG.Connection
             {
                 if (connectionInfo.Hostname == "" && connectionInfo.Protocol != ProtocolType.IntApp)
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strConnectionOpenFailedNoHostname);
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                        Language.strConnectionOpenFailedNoHostname);
                     return;
                 }
 
@@ -142,24 +145,26 @@ namespace mRemoteNG.Connection
                 // the new structure is ConnectionWindow.Controls[0].ActiveDocument.Controls[0]
                 //                                       DockPanel                  InterfaceControl
                 if (!(Runtime.WindowList[i] is ConnectionWindow connectionWindow)) continue;
-                if(connectionWindow.Controls.Count < 1) continue;
+                if (connectionWindow.Controls.Count < 1) continue;
                 if (!(connectionWindow.Controls[0] is DockPanel cwDp)) continue;
                 foreach (var dockContent in cwDp.Documents)
                 {
-                    var tab = (ConnectionTab) dockContent;
+                    var tab = (ConnectionTab)dockContent;
                     var ic = InterfaceControl.FindInterfaceControl(tab);
                     if (ic == null) continue;
                     if (ic.Info == connectionInfo)
                         return ic;
                 }
             }
+
             return null;
         }
 
         private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
             string connectionPanel;
-            if (connectionInfo.Panel == "" || force.HasFlag(ConnectionInfo.Force.OverridePanel) || Settings.Default.AlwaysShowPanelSelectionDlg)
+            if (connectionInfo.Panel == "" || force.HasFlag(ConnectionInfo.Force.OverridePanel) ||
+                Settings.Default.AlwaysShowPanelSelectionDlg)
             {
                 var frmPnl = new FrmChoosePanel();
                 if (frmPnl.ShowDialog() == DialogResult.OK)
@@ -174,15 +179,16 @@ namespace mRemoteNG.Connection
             else
             {
                 //Return the current panel if exist, if not return default panel
-                if(TabHelper.Instance.CurrentPanel != null)
+                if (TabHelper.Instance.CurrentPanel != null)
                 {
                     connectionPanel = TabHelper.Instance.CurrentPanel.TabText;
                 }
                 else
                 {
                     connectionPanel = connectionInfo.Panel;
-                } 
+                }
             }
+
             return connectionPanel;
         }
 
@@ -207,9 +213,9 @@ namespace mRemoteNG.Connection
 
             var extT = Runtime.ExternalToolsService.GetExtAppByName(connectionInfo.ExtApp);
 
-            if(extT == null) return connectionContainer;
+            if (extT == null) return connectionContainer;
 
-            if(extT.Icon != null)
+            if (extT.Icon != null)
                 ((ConnectionTab)connectionContainer).Icon = extT.Icon;
 
             return connectionContainer;
@@ -220,7 +226,7 @@ namespace mRemoteNG.Connection
             newProtocol.Closed += ((ConnectionWindow)connectionForm).Prot_Event_Closed;
         }
 
-        private  void SetConnectionEventHandlers(ProtocolBase newProtocol)
+        private void SetConnectionEventHandlers(ProtocolBase newProtocol)
         {
             newProtocol.Disconnected += Prot_Event_Disconnected;
             newProtocol.Connected += Prot_Event_Connected;
@@ -228,13 +234,17 @@ namespace mRemoteNG.Connection
             newProtocol.ErrorOccured += Prot_Event_ErrorOccured;
         }
 
-        private static void BuildConnectionInterfaceController(ConnectionInfo connectionInfo, ProtocolBase newProtocol, Control connectionContainer)
+        private static void BuildConnectionInterfaceController(ConnectionInfo connectionInfo,
+                                                               ProtocolBase newProtocol,
+                                                               Control connectionContainer)
         {
             newProtocol.InterfaceControl = new InterfaceControl(connectionContainer, newProtocol, connectionInfo);
         }
+
         #endregion
 
         #region Event handlers
+
         private static void Prot_Event_Disconnected(object sender, string disconnectedMessage, int? reasonCode)
         {
             try
@@ -251,11 +261,11 @@ namespace mRemoteNG.Connection
                 }
 
                 Runtime.MessageCollector.AddMessage(msgClass,
-                    string.Format(
-                        Language.strProtocolEventDisconnected,
-                        disconnectedMessage,
-                        prot.InterfaceControl.Info.Hostname,
-                        prot.InterfaceControl.Info.Protocol.ToString()));
+                                                    string.Format(
+                                                                  Language.strProtocolEventDisconnected,
+                                                                  disconnectedMessage,
+                                                                  prot.InterfaceControl.Info.Hostname,
+                                                                  prot.InterfaceControl.Info.Protocol.ToString()));
             }
             catch (Exception ex)
             {
@@ -268,16 +278,21 @@ namespace mRemoteNG.Connection
             try
             {
                 var prot = (ProtocolBase)sender;
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent,
+                                                    true);
                 string connDetail;
-                if (prot.InterfaceControl.Info.Hostname == "" && prot.InterfaceControl.Info.Protocol == ProtocolType.IntApp)
+                if (prot.InterfaceControl.Info.Hostname == "" &&
+                    prot.InterfaceControl.Info.Protocol == ProtocolType.IntApp)
                     connDetail = prot.InterfaceControl.Info.ExtApp;
                 else if (prot.InterfaceControl.Info.Hostname != "")
                     connDetail = prot.InterfaceControl.Info.Hostname;
                 else
                     connDetail = "UNKNOWN";
 
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnenctionClosedByUser, connDetail, prot.InterfaceControl.Info.Protocol, Environment.UserName));
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                    string.Format(Language.strConnenctionClosedByUser, connDetail,
+                                                                  prot.InterfaceControl.Info.Protocol,
+                                                                  Environment.UserName));
                 prot.InterfaceControl.Info.OpenConnections.Remove(prot);
                 if (_activeConnections.Contains(prot.InterfaceControl.Info.ConstantID))
                     _activeConnections.Remove(prot.InterfaceControl.Info.ConstantID);
@@ -295,21 +310,27 @@ namespace mRemoteNG.Connection
         private static void Prot_Event_Connected(object sender)
         {
             var prot = (ProtocolBase)sender;
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected, true);
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol, Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected,
+                                                true);
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                string.Format(Language.strConnectionEventConnectedDetail,
+                                                              prot.InterfaceControl.Info.Hostname,
+                                                              prot.InterfaceControl.Info.Protocol, Environment.UserName,
+                                                              prot.InterfaceControl.Info.Description,
+                                                              prot.InterfaceControl.Info.UserField));
         }
 
         private static void Prot_Event_ErrorOccured(object sender, string errorMessage, int? errorCode)
         {
             try
             {
-                var prot = (ProtocolBase) sender;
+                var prot = (ProtocolBase)sender;
 
                 var msg = string.Format(
-                    Language.strConnectionEventErrorOccured,
-                    errorMessage,
-                    prot.InterfaceControl.Info.Hostname,
-                    errorCode?.ToString() ?? "-");
+                                        Language.strConnectionEventErrorOccured,
+                                        errorMessage,
+                                        prot.InterfaceControl.Info.Hostname,
+                                        errorCode?.ToString() ?? "-");
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, msg);
             }
             catch (Exception ex)
@@ -317,6 +338,7 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionEventConnectionFailed, ex);
             }
         }
+
         #endregion
     }
 }

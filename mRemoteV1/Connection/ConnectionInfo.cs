@@ -1,3 +1,8 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -10,55 +15,52 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
 
 
 namespace mRemoteNG.Connection
 {
     [DefaultProperty("Name")]
     public class ConnectionInfo : AbstractConnectionRecord, IHasParent, IInheritable
-    {        
+    {
+        private ConnectionInfoInheritance _inheritance;
+
         #region Public Properties
+
         [Browsable(false)]
-        public ConnectionInfoInheritance Inheritance { get; set; }
+        public ConnectionInfoInheritance Inheritance
+        {
+            get => _inheritance;
+            set => _inheritance = _inheritance.Parent != this
+                ? _inheritance.Clone(this)
+                : value;
+        }
 
-	    [Browsable(false)]
-	    public ProtocolList OpenConnections { get; protected set; }
+        [Browsable(false)] public ProtocolList OpenConnections { get; protected set; }
 
-	    [Browsable(false)]
-        public virtual bool IsContainer { get; set; }
+        [Browsable(false)] public virtual bool IsContainer { get; set; }
 
-	    [Browsable(false)]
-        public bool IsDefault { get; set; }
+        [Browsable(false)] public bool IsDefault { get; set; }
 
-	    [Browsable(false)]
-	    public ContainerInfo Parent { get; internal set; }
-
-        //[Browsable(false)]
-        //private int PositionID { get; set; }
+        [Browsable(false)] public ContainerInfo Parent { get; internal set; }
 
         [Browsable(false)]
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public bool IsQuickConnect { get; set; }
 
-	    [Browsable(false)]
-        public bool PleaseConnect { get; set; }
-	    #endregion
+        [Browsable(false)] public bool PleaseConnect { get; set; }
+
+        #endregion
 
         #region Constructors
 
-	    public ConnectionInfo()
-			: this(Guid.NewGuid().ToString())
-	    {
-	    }
+        public ConnectionInfo()
+            : this(Guid.NewGuid().ToString())
+        {
+        }
 
         public ConnectionInfo(string uniqueId)
-			: base(uniqueId)
-		{
+            : base(uniqueId)
+        {
             SetTreeDisplayDefaults();
             SetConnectionDefaults();
             SetProtocolDefaults();
@@ -69,56 +71,61 @@ namespace mRemoteNG.Connection
             SetVncDefaults();
             SetNonBrowsablePropertiesDefaults();
             SetDefaults();
-		}
-        #endregion
-			
-        #region Public Methods
-		public virtual ConnectionInfo Clone()
-		{
-		    var newConnectionInfo = new ConnectionInfo();
-            newConnectionInfo.CopyFrom(this);
-		    newConnectionInfo.Inheritance = Inheritance.Clone();
-            newConnectionInfo.Inheritance.Parent = newConnectionInfo;
-            return newConnectionInfo;
-		}
+        }
 
-	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
-	    {
-	        var properties = GetType().BaseType?.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
-	        if (properties == null) return;
-	        foreach (var property in properties)
-	        {
-	            if (property.Name == nameof(Parent)) continue;
-	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
+        #endregion
+
+        #region Public Methods
+
+        public virtual ConnectionInfo Clone()
+        {
+            var newConnectionInfo = new ConnectionInfo();
+            newConnectionInfo.CopyFrom(this);
+            return newConnectionInfo;
+        }
+
+        /// <summary>
+        /// Copies all connection and inheritance values
+        /// from the given <see cref="sourceConnectionInfo"/>.
+        /// </summary>
+        /// <param name="sourceConnectionInfo"></param>
+        public void CopyFrom(ConnectionInfo sourceConnectionInfo)
+        {
+            var properties = GetType().BaseType?.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
+            if (properties == null) return;
+            foreach (var property in properties)
+            {
+                if (property.Name == nameof(Parent)) continue;
+                var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
                 property.SetValue(this, remotePropertyValue, null);
-	        }
-            var clonedInheritance = sourceConnectionInfo.Inheritance.Clone();
-            clonedInheritance.Parent = this;
+            }
+
+            var clonedInheritance = sourceConnectionInfo.Inheritance.Clone(this);
             Inheritance = clonedInheritance;
         }
 
-	    public virtual TreeNodeType GetTreeNodeType()
-	    {
-	        return TreeNodeType.Connection;
-	    }
+        public virtual TreeNodeType GetTreeNodeType()
+        {
+            return TreeNodeType.Connection;
+        }
 
         private void SetDefaults()
-		{
-			if (Port == 0)
-			{
-				SetDefaultPort();
-			}
-		}
-			
-		public int GetDefaultPort()
-		{
-			return GetDefaultPort(Protocol);
-		}
-			
-		public void SetDefaultPort()
-		{
-			Port = GetDefaultPort();
-		}
+        {
+            if (Port == 0)
+            {
+                SetDefaultPort();
+            }
+        }
+
+        public int GetDefaultPort()
+        {
+            return GetDefaultPort(Protocol);
+        }
+
+        public void SetDefaultPort()
+        {
+            Port = GetDefaultPort();
+        }
 
         protected virtual IEnumerable<PropertyInfo> GetProperties(string[] excludedPropertyNames)
         {
@@ -127,60 +134,68 @@ namespace mRemoteNG.Connection
             return filteredProperties;
         }
 
-	    public virtual IEnumerable<PropertyInfo> GetSerializableProperties()
-	    {
-			var excludedProperties = new[] { "Parent", "Name", "Hostname", "Port", "Inheritance", "OpenConnections",
-				"IsContainer", "IsDefault", "PositionID", "ConstantID", "TreeNode", "IsQuickConnect", "PleaseConnect" };
+        public virtual IEnumerable<PropertyInfo> GetSerializableProperties()
+        {
+            var excludedProperties = new[]
+            {
+                "Parent", "Name", "Hostname", "Port", "Inheritance", "OpenConnections",
+                "IsContainer", "IsDefault", "PositionID", "ConstantID", "TreeNode", "IsQuickConnect", "PleaseConnect"
+            };
 
-		    return GetProperties(excludedProperties);
-	    }
+            return GetProperties(excludedProperties);
+        }
 
-	    public virtual void SetParent(ContainerInfo newParent)
-	    {
+        public virtual void SetParent(ContainerInfo newParent)
+        {
             RemoveParent();
-		    newParent?.AddChild(this);
-	    }
+            newParent?.AddChild(this);
+        }
 
         public void RemoveParent()
         {
             Parent?.RemoveChild(this);
         }
 
-	    public ConnectionInfo GetRootParent()
-	    {
-	        return Parent != null ? Parent.GetRootParent() : this;
-	    }
+        public ConnectionInfo GetRootParent()
+        {
+            return Parent != null ? Parent.GetRootParent() : this;
+        }
 
-	    #endregion
+        #endregion
 
         #region Public Enumerations
+
         [Flags()]
         public enum Force
-		{
-			None = 0,
-			UseConsoleSession = 1,
-			Fullscreen = 2,
-			DoNotJump = 4,
-			OverridePanel = 8,
-			DontUseConsoleSession = 16,
-			NoCredentials = 32
-		}
+        {
+            None = 0,
+            UseConsoleSession = 1,
+            Fullscreen = 2,
+            DoNotJump = 4,
+            OverridePanel = 8,
+            DontUseConsoleSession = 16,
+            NoCredentials = 32,
+            ViewOnly = 64
+        }
+
         #endregion
-			
+
         #region Private Methods
+
         protected override TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
         {
             if (!ShouldThisPropertyBeInherited(propertyName))
                 return value;
 
-            var couldGetInheritedValue = TryGetInheritedPropertyValue<TPropertyType>(propertyName, out var inheritedValue);
+            var couldGetInheritedValue =
+                TryGetInheritedPropertyValue<TPropertyType>(propertyName, out var inheritedValue);
 
             return couldGetInheritedValue
                 ? inheritedValue
                 : value;
         }
 
-	    private bool ShouldThisPropertyBeInherited(string propertyName)
+        private bool ShouldThisPropertyBeInherited(string propertyName)
         {
             return ParentIsValidInheritanceTarget() && IsInheritanceTurnedOnForThisProperty(propertyName);
         }
@@ -194,7 +209,8 @@ namespace mRemoteNG.Connection
         {
             var inheritType = Inheritance.GetType();
             var inheritPropertyInfo = inheritType.GetProperty(propertyName);
-            var inheritPropertyValue = inheritPropertyInfo != null && Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, null));
+            var inheritPropertyValue = inheritPropertyInfo != null &&
+                                       Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, null));
             return inheritPropertyValue;
         }
 
@@ -205,24 +221,28 @@ namespace mRemoteNG.Connection
                 var connectionInfoType = Parent.GetType();
                 var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
                 if (parentPropertyInfo == null)
-                    throw new NullReferenceException($"Could not retrieve property data for property '{propertyName}' on parent node '{Parent?.Name}'");
+                    throw new NullReferenceException(
+                        $"Could not retrieve property data for property '{propertyName}' on parent node '{Parent?.Name}'"
+                    );
 
                 inheritedValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
                 return true;
             }
             catch (Exception e)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace($"Error retrieving inherited property '{propertyName}'", e);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    $"Error retrieving inherited property '{propertyName}'", e
+                );
                 inheritedValue = default(TPropertyType);
                 return false;
             }
         }
 
-		private static int GetDefaultPort(ProtocolType protocol)
-		{
-			try
-			{
-			    // ReSharper disable once SwitchStatementMissingSomeCases
+        private static int GetDefaultPort(ProtocolType protocol)
+        {
+            try
+            {
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (protocol)
                 {
                     case ProtocolType.RDP:
@@ -248,14 +268,15 @@ namespace mRemoteNG.Connection
                     case ProtocolType.IntApp:
                         return (int)IntegratedProgram.Defaults.Port;
                 }
+
                 return 0;
-			}
-			catch (Exception ex)
-			{
+            }
+            catch (Exception ex)
+            {
                 Runtime.MessageCollector.AddExceptionMessage(Language.strConnectionSetDefaultPortFailed, ex);
                 return 0;
-			}
-		}
+            }
+        }
 
         private void SetTreeDisplayDefaults()
         {
@@ -276,31 +297,54 @@ namespace mRemoteNG.Connection
             ExtApp = Settings.Default.ConDefaultExtApp;
             Port = 0;
             PuttySession = Settings.Default.ConDefaultPuttySession;
-            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength) Enum.Parse(typeof(IcaProtocol.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
+            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength),
+                                                                               Settings
+                                                                                   .Default
+                                                                                   .ConDefaultICAEncryptionStrength);
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
-            RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel) Enum.Parse(typeof(RdpProtocol.AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
+            RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel)Enum.Parse(
+                                                                                 typeof(RdpProtocol.AuthenticationLevel
+                                                                                 ),
+                                                                                 Settings
+                                                                                     .Default
+                                                                                     .ConDefaultRDPAuthenticationLevel);
             RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
             RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
-            RenderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
+            RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine),
+                                                                   Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
         }
 
         private void SetRdGatewayDefaults()
         {
-            RDGatewayUsageMethod = (RdpProtocol.RDGatewayUsageMethod) Enum.Parse(typeof(RdpProtocol.RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
+            RDGatewayUsageMethod = (RdpProtocol.RDGatewayUsageMethod)Enum.Parse(
+                                                                                typeof(RdpProtocol.RDGatewayUsageMethod
+                                                                                ),
+                                                                                Settings
+                                                                                    .Default
+                                                                                    .ConDefaultRDGatewayUsageMethod);
             RDGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
-            RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(RdpProtocol.RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
+            RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials)Enum.Parse(
+                                                                                                          typeof(
+                                                                                                              RdpProtocol
+                                                                                                              .RDGatewayUseConnectionCredentials
+                                                                                                          ),
+                                                                                                          Settings
+                                                                                                              .Default
+                                                                                                              .ConDefaultRDGatewayUseConnectionCredentials);
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
         }
 
-        private void SetAppearanceDefaults() 
+        private void SetAppearanceDefaults()
         {
-            Resolution = (RdpProtocol.RDPResolutions) Enum.Parse(typeof(RdpProtocol.RDPResolutions), Settings.Default.ConDefaultResolution);
+            Resolution = (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions),
+                                                                Settings.Default.ConDefaultResolution);
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
-            Colors = (RdpProtocol.RDPColors) Enum.Parse(typeof(RdpProtocol.RDPColors), Settings.Default.ConDefaultColors);
+            Colors = (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors),
+                                                       Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
             DisplayWallpaper = Settings.Default.ConDefaultDisplayWallpaper;
             DisplayThemes = Settings.Default.ConDefaultDisplayThemes;
@@ -316,8 +360,11 @@ namespace mRemoteNG.Connection
             RedirectClipboard = Settings.Default.ConDefaultRedirectClipboard;
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
-            RedirectSound = (RdpProtocol.RDPSounds) Enum.Parse(typeof(RdpProtocol.RDPSounds), Settings.Default.ConDefaultRedirectSound);            
-            SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
+            RedirectSound = (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds),
+                                                              Settings.Default.ConDefaultRedirectSound);
+            SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality),
+                                                                   Settings.Default.ConDefaultSoundQuality);
+            RedirectAudioCapture = Settings.Default.ConDefaultRedirectAudioCapture;
         }
 
         private void SetMiscDefaults()
@@ -326,35 +373,44 @@ namespace mRemoteNG.Connection
             PostExtApp = Settings.Default.ConDefaultPostExtApp;
             MacAddress = Settings.Default.ConDefaultMacAddress;
             UserField = Settings.Default.ConDefaultUserField;
+            Favorite = Settings.Default.ConDefaultFavorite;
         }
 
         private void SetVncDefaults()
         {
-            VNCCompression = (ProtocolVNC.Compression) Enum.Parse(typeof(ProtocolVNC.Compression), Settings.Default.ConDefaultVNCCompression);
-            VNCEncoding = (ProtocolVNC.Encoding) Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
-            VNCAuthMode = (ProtocolVNC.AuthMode) Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
-            VNCProxyType = (ProtocolVNC.ProxyType) Enum.Parse(typeof(ProtocolVNC.ProxyType), Settings.Default.ConDefaultVNCProxyType);
+            VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression),
+                                                                 Settings.Default.ConDefaultVNCCompression);
+            VNCEncoding =
+                (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
+            VNCAuthMode =
+                (ProtocolVNC.AuthMode)Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
+            VNCProxyType = (ProtocolVNC.ProxyType)Enum.Parse(typeof(ProtocolVNC.ProxyType),
+                                                             Settings.Default.ConDefaultVNCProxyType);
             VNCProxyIP = Settings.Default.ConDefaultVNCProxyIP;
             VNCProxyPort = Settings.Default.ConDefaultVNCProxyPort;
             VNCProxyUsername = Settings.Default.ConDefaultVNCProxyUsername;
             VNCProxyPassword = Settings.Default.ConDefaultVNCProxyPassword;
-            VNCColors = (ProtocolVNC.Colors) Enum.Parse(typeof(ProtocolVNC.Colors), Settings.Default.ConDefaultVNCColors);
-            VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode) Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), Settings.Default.ConDefaultVNCSmartSizeMode);
+            VNCColors = (ProtocolVNC.Colors)Enum.Parse(typeof(ProtocolVNC.Colors),
+                                                       Settings.Default.ConDefaultVNCColors);
+            VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Enum.Parse(typeof(ProtocolVNC.SmartSizeMode),
+                                                                     Settings.Default.ConDefaultVNCSmartSizeMode);
             VNCViewOnly = Settings.Default.ConDefaultVNCViewOnly;
         }
 
         private void SetNonBrowsablePropertiesDefaults()
         {
-            Inheritance = new ConnectionInfoInheritance(this);
+            _inheritance = new ConnectionInfoInheritance(this);
             SetNewOpenConnectionList();
             //PositionID = 0;
         }
 
         private void SetNewOpenConnectionList()
-	    {
-	        OpenConnections = new ProtocolList();
-	        OpenConnections.CollectionChanged += (sender, args) => RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));
-	    }
+        {
+            OpenConnections = new ProtocolList();
+            OpenConnections.CollectionChanged += (sender, args) =>
+                RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));
+        }
+
         #endregion
     }
 }

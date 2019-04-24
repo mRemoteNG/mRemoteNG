@@ -11,16 +11,16 @@ namespace mRemoteNG.UI.GraphicsUtilities
         // Dpi of a 'normal' definition screen
         private const int BaselineDpi = 96;
 
-        
+
         public SizeF GetResolutionScalingFactor()
         {
             //This method could be optimized, as it is called for every control / subcontrol 
             //and causes overhead for 100s in the options page
             using (var f = new Form())
-             {
+            {
                 var g = f.CreateGraphics();
-                return  new SizeF(g.DpiX / BaselineDpi, g.DpiY / BaselineDpi); 
-             }
+                return new SizeF(g.DpiX / BaselineDpi, g.DpiY / BaselineDpi);
+            }
         }
     }
 }

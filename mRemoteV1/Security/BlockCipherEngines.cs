@@ -1,5 +1,5 @@
-﻿
-// ReSharper disable InconsistentNaming
+﻿// ReSharper disable InconsistentNaming
+
 namespace mRemoteNG.Security
 {
     public enum BlockCipherEngines

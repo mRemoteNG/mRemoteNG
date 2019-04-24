@@ -1,5 +1,4 @@
-﻿
-namespace mRemoteNG.Security.KeyDerivation
+﻿namespace mRemoteNG.Security.KeyDerivation
 {
     public interface IKeyDerivationFunction
     {

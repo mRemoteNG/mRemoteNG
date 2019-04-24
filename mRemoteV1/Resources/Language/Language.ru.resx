@@ -1151,10 +1151,10 @@ VncSharp Control Version {0}</value>
     <value>Не указано внешнее приложение.</value>
   </data>
 	<data name="strNoInformation" xml:space="preserve">
-    <value>Нет</value>
+    <value>ничто</value>
   </data>
 	<data name="strNone" xml:space="preserve">
-    <value>Нет</value>
+    <value>ничто</value>
   </data>
 	<data name="strNormal" xml:space="preserve">
     <value>Нормальный</value>
@@ -2242,7 +2242,7 @@ mRemoteNG сейчас прекратит работу и начнет проц�
     <value>Время ожидания в секундах:</value>
   </data>
 	<data name="strActiveDirectory" xml:space="preserve">
-		<value>Active Directory</value>
+		<value>Активный каталог</value>
 	</data>
 	<data name="strCommandExitProgram" xml:space="preserve">
 		<value>В&amp;ыход {0}</value>
@@ -2281,10 +2281,10 @@ mRemoteNG сейчас прекратит работу и начнет проц�
 		<value>HTTP</value>
 	</data>
 	<data name="strHttpGecko" xml:space="preserve">
-		<value>Gecko (Firefox)</value>
+		<value>геккон (Firefox)</value>
 	</data>
 	<data name="strHttpInternetExplorer" xml:space="preserve">
-		<value>Internet Explorer</value>
+		<value>Интернет Эксплорер</value>
 	</data>
 	<data name="strHttps" xml:space="preserve">
 		<value>HTTPS</value>
@@ -2299,7 +2299,7 @@ mRemoteNG сейчас прекратит работу и начнет проц�
 		<value>Импортировать не удалось</value>
 	</data>
 	<data name="strImportLocationCommandButtons" xml:space="preserve">
-		<value>Under the root{0}{1}|Under the selected folder{0}{2}</value>
+		<value>Под корнем {0} {1} | Под выбранной папке {0} {2}</value>
 	</data>
 	<data name="strImportLocationContent" xml:space="preserve">
 		<value>Где бы вы хотели разместить импортируемое содержимое?</value>
@@ -2606,9 +2606,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
 	<data name="strOptionsThemeNewThemeText" xml:space="preserve">
 		<value>Введите новое название темы</value>
 	</data>
-	<data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
-		<value>Внимание: для отключения тем требуется перезапуск или полностью применить новый</value>
-	</data>
 	<data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
 		<value>Темы не загружены, проверьте, существуют ли по умолчанию темы mRemoteNG в папке «Темы»</value>
 	</data>
@@ -2672,16 +2669,97 @@ mRemoteNG сейчас прекратит работу и начнет проц�
 	<data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
 		<value>Создайте пустую панель при запуске mRemoteNG</value>
 	</data>
-  <data name="strMenuDisconnectOther" xml:space="preserve">
-    <value>Отключить остальные вкладки</value>
-  </data>
-  <data name="strMenuDisconnectOthersRight" xml:space="preserve">
+	<data name="strMenuDisconnectOthersRight" xml:space="preserve">
     <value>Отключить вкладки справа</value>
   </data>
-  <data name="strConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+	<data name="strConfirmCloseConnectionOthersInstruction" xml:space="preserve">
     <value>Хотите закрыть все подключения, кроме "{0}"?</value>
   </data>
-  <data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
+	<data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
     <value>Хотите закрыть все подключения справа от "{0}"?</value>
   </data>
+	<data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
+		<value>Параметр безопасности Windows «Системная криптография: использовать FIPS-совместимые алгоритмы для шифрования, хеширования и подписывания» включен.
+
+См. Статью поддержки Microsoft по адресу http://support.microsoft.com/kb/811833 для получения дополнительной информации.
+
+{0} не является полностью FIPS совместимый. Нажмите OK, чтобы продолжить по своему усмотрению, или Отмена, чтобы выйти.</value>
+	</data>
+	<data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
+		<value>Укажите, будут ли буфер обмена должен использоваться совместно.</value>
+	</data>
+	<data name="strPropertyNameRedirectClipboard" xml:space="preserve">
+		<value>буфер обмена</value>
+	</data>
+	<data name="strOptionsThemeChangeWarning" xml:space="preserve">
+		<value>Предупреждение: перезагрузка требуется для принятия каких-либо изменений конфигурации темы.</value>
+	</data>
+	<data name="strIPRange" xml:space="preserve">
+		<value>Должно быть от 0 до 255</value>
+	</data>
+	<data name="strOutOfRange" xml:space="preserve">
+		<value>Вне зоны доступа</value>
+	</data>
+	<data name="strDelete" xml:space="preserve">
+		<value>Удалять...</value>
+	</data>
+	<data name="strReconnectAllConnections" xml:space="preserve">
+		<value>Переподключить все соединения</value>
+	</data>
+	<data name="strUltraVNCSingleClick" xml:space="preserve">
+		<value>UltraVNC SingleClick</value>
+	</data>
+	<data name="strMenuDisconnectOthers" xml:space="preserve">
+		<value>Отключите все Но этот</value>
+	</data>
+	<data name="AutomaticReconnectError" xml:space="preserve">
+		<value>Произошла ошибка при попытке переподключиться к узлу RDP '{0}'</value>
+	</data>
+	<data name="ChangeConnectionResolutionError" xml:space="preserve">
+		<value>Произошла ошибка при попытке изменить разрешение соединения для размещения «{0}»</value>
+	</data>
+	<data name="StackTrace" xml:space="preserve">
+		<value>Трассировка стека</value>
+	</data>
+	<data name="ExceptionMessage" xml:space="preserve">
+		<value>Сообщение исключения</value>
+	</data>
+	<data name="mRemoteNGUnhandledException" xml:space="preserve">
+		<value>mRemoteNG необработанное исключение</value>
+	</data>
+	<data name="UnhandledExceptionOccured" xml:space="preserve">
+		<value>Произошло необработанное исключение</value>
+	</data>
+	<data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
+		<value>Это исключение заставит mRemoteNG закрыться</value>
+	</data>
+	<data name="strMenuCopyHostname" xml:space="preserve">
+		<value>Копировать имя хоста</value>
+	</data>
+	<data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+		<value>Разместите панель поиска над деревом соединений</value>
+	</data>
+	<data name="strPortScanSinglePort" xml:space="preserve">
+		<value>Для сканирования одного порта, выберите «Первый порт» только.</value>
+	</data>
+	<data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
+		<value>Отслеживать активное соединение в дереве соединений</value>
+	</data>
+	<data name="strAlwaysShowConnectionTabs" xml:space="preserve">
+		<value>Всегда показывать вкладки подключения</value>
+	</data>
+	<data name="strReleaseChannel" xml:space="preserve">
+		<value>Канал выпуска</value>
+	</data>
+	<data name="strReleaseChannelExplanation" xml:space="preserve">
+		<value>Стабильный канал включает только финальные релизы.
+Бета-канал включает в себя Betas и релиз кандидатов.
+Канал разработки включает в себя Альф, Betas и релиз кандидатов.</value>
+	</data>
+	<data name="strButtonApply" xml:space="preserve">
+		<value>Подать заявление</value>
+	</data>
+	<data name="strCategoryProxy" xml:space="preserve">
+		<value>Proxy</value>
+	</data>
 </root>

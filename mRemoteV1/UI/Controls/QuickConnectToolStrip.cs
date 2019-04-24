@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -82,11 +83,13 @@ namespace mRemoteNG.UI.Controls
             // tsQuickConnect
             // 
             Dock = DockStyle.None;
-            Items.AddRange(new ToolStripItem[] {
-            _lblQuickConnect,
-            _cmbQuickConnect,
-            _btnQuickConnect,
-            _btnConnections});
+            Items.AddRange(new ToolStripItem[]
+            {
+                _lblQuickConnect,
+                _cmbQuickConnect,
+                _btnQuickConnect,
+                _btnConnections
+            });
             Location = new Point(3, 24);
             Name = "tsQuickConnect";
             Size = new Size(_display.ScaleWidth(387), 25);
@@ -136,8 +139,10 @@ namespace mRemoteNG.UI.Controls
         private void ApplyTheme()
         {
             if (!_themeManager.ThemingActive) return;
-            vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
-            vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version,
+                                         _themeManager.ActiveTheme.Theme);
+            vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version,
+                                         _themeManager.ActiveTheme.Theme);
 
             if (!_themeManager.ActiveAndExtended) return;
             _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
@@ -145,6 +150,7 @@ namespace mRemoteNG.UI.Controls
         }
 
         #region Quick Connect
+
         private void PopulateQuickConnectProtocolMenu()
         {
             try
@@ -159,6 +165,7 @@ namespace mRemoteNG.UI.Controls
                         menuItem.Checked = true;
                         _btnQuickConnect.Text = Settings.Default.QuickConnectProtocol;
                     }
+
                     _mnuQuickConnectProtocol.Items.Add(menuItem);
                 }
             }
@@ -182,12 +189,16 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                var connectionInfo = Runtime.ConnectionsService.CreateQuickConnect(_cmbQuickConnect.Text.Trim(), Converter.StringToProtocol(Settings.Default.QuickConnectProtocol));
+                var connectionInfo = Runtime.ConnectionsService.CreateQuickConnect(_cmbQuickConnect.Text.Trim(),
+                                                                                   Converter.StringToProtocol(Settings
+                                                                                                              .Default
+                                                                                                              .QuickConnectProtocol));
                 if (connectionInfo == null)
                 {
                     _cmbQuickConnect.Focus();
                     return;
                 }
+
                 _cmbQuickConnect.Add(connectionInfo);
                 ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
             }
@@ -220,9 +231,11 @@ namespace mRemoteNG.UI.Controls
                 menuItem.Checked = menuItem.Text.Equals(protocol);
             }
         }
+
         #endregion
 
         #region Connections DropDown
+
         private void btnConnections_DropDownOpening(object sender, EventArgs e)
         {
             _btnConnections.DropDownItems.Clear();
@@ -232,15 +245,37 @@ namespace mRemoteNG.UI.Controls
             };
 
             // ReSharper disable once CoVariantArrayConversion
-            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionsService.ConnectionTreeModel).ToArray();
+            ToolStripItem[] rootMenuItems = menuItemsConverter
+                                            .CreateToolStripDropDownItems(Runtime.ConnectionsService
+                                                                                 .ConnectionTreeModel).ToArray();
             _btnConnections.DropDownItems.AddRange(rootMenuItems);
 
+            ToolStripMenuItem favorites = new ToolStripMenuItem(Language.Favorites, Resources.star);
+            var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
+            List<ToolStripMenuItem> favoritesList = new List<ToolStripMenuItem>();
+
+            foreach (var node in rootNodes)
+            {
+                foreach (var containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
+                {
+                    var favoriteMenuItem = new ToolStripMenuItem
+                    {
+                        Text = containerInfo.Name,
+                        Tag = containerInfo,
+                        Image = containerInfo.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause
+                    };
+                    favoriteMenuItem.MouseUp += ConnectionsMenuItem_MouseUp;
+                    favoritesList.Add(favoriteMenuItem);
+                }
+            }
+            favorites.DropDownItems.AddRange(favoritesList.ToArray());
+            _btnConnections.DropDownItems.Add(favorites);
         }
 
         private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            var menuItem = (ToolStripMenuItem) sender;
+            var menuItem = (ToolStripMenuItem)sender;
 
             switch (menuItem.Tag)
             {
@@ -254,10 +289,12 @@ namespace mRemoteNG.UI.Controls
                     break;
             }
         }
+
         #endregion
 
         // CodeAyalysis doesn't like null propagation
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "components")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "components")]
         protected override void Dispose(bool disposing)
         {
             try

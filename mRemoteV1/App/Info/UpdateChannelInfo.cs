@@ -1,4 +1,5 @@
 ﻿using System;
+
 // ReSharper disable InconsistentNaming
 
 namespace mRemoteNG.App.Info
@@ -27,7 +28,9 @@ namespace mRemoteNG.App.Info
 
         private static string GetChannelFileName(string channel)
         {
-            return Runtime.IsPortableEdition ? GetChannelFileNamePortableEdition(channel) : GetChannelFileNameNormalEdition(channel);
+            return Runtime.IsPortableEdition
+                ? GetChannelFileNamePortableEdition(channel)
+                : GetChannelFileNameNormalEdition(channel);
         }
 
         private static string GetChannelFileNameNormalEdition(string channel)
@@ -62,7 +65,8 @@ namespace mRemoteNG.App.Info
 
         private static Uri GetUpdateTxtUri(string channel)
         {
-            return new Uri(new Uri(Settings.Default.UpdateAddress), new Uri(GetChannelFileName(channel), UriKind.Relative));
+            return new Uri(new Uri(Settings.Default.UpdateAddress),
+                           new Uri(GetChannelFileName(channel), UriKind.Relative));
         }
 
         private static bool IsValidChannel(string s)

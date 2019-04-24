@@ -13,7 +13,9 @@ namespace mRemoteNG.Credential
 
         public IEnumerable<ICredentialRepository> CredentialRepositories => _repositoryList;
 
-        public CredentialServiceFacade(ICredentialRepositoryList repositoryList, ILoader<IEnumerable<ICredentialRepository>> loader, ISaver<IEnumerable<ICredentialRepository>> saver)
+        public CredentialServiceFacade(ICredentialRepositoryList repositoryList,
+                                       ILoader<IEnumerable<ICredentialRepository>> loader,
+                                       ISaver<IEnumerable<ICredentialRepository>> saver)
         {
             if (repositoryList == null)
                 throw new ArgumentNullException(nameof(repositoryList));
@@ -62,22 +64,28 @@ namespace mRemoteNG.Credential
         }
 
         #region Setup
+
         private void SetupEventHandlers()
         {
             _repositoryList.RepositoriesUpdated += HandleRepositoriesUpdatedEvent;
             _repositoryList.CredentialsUpdated += HandleCredentialsUpdatedEvent;
         }
 
-        private void HandleRepositoriesUpdatedEvent(object sender, CollectionUpdatedEventArgs<ICredentialRepository> collectionUpdatedEventArgs)
+        private void HandleRepositoriesUpdatedEvent(object sender,
+                                                    CollectionUpdatedEventArgs<ICredentialRepository>
+                                                        collectionUpdatedEventArgs)
         {
             SaveRepositoryList();
         }
 
-        private void HandleCredentialsUpdatedEvent(object sender, CollectionUpdatedEventArgs<ICredentialRecord> collectionUpdatedEventArgs)
+        private void HandleCredentialsUpdatedEvent(object sender,
+                                                   CollectionUpdatedEventArgs<ICredentialRecord>
+                                                       collectionUpdatedEventArgs)
         {
             var repo = sender as ICredentialRepository;
             repo?.SaveCredentials(repo.Config.Key);
         }
+
         #endregion
     }
 }

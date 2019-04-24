@@ -163,10 +163,10 @@
     <value>Einstellungen jetzt anpassen</value>
   </data>
   <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
-    <value>Verwende die empfohlenen Einstellungen</value>
+    <value>Empfohlenen Einstellungen verwenden</value>
   </data>
   <data name="strAskUpdatesContent" xml:space="preserve">
-    <value>{0} kann automatisch nach Updates suchen, die neue Funktionen und Bug Fixes enthalten können. Es wird empfohlen, dass Sie {0}, erlauben wöchentlich nach Updates zu suchen.</value>
+    <value>{0} kann automatisch nach Updates suchen, die neue Funktionen und Fehlerbehebungen enthalten können. Es wird empfohlen, dass Sie {0} erlauben wöchentlich nach Updates zu suchen.</value>
   </data>
   <data name="strAskUpdatesMainInstruction" xml:space="preserve">
     <value>Automatische Update-Einstellungen</value>
@@ -451,7 +451,8 @@ VncSharp Control Version {0}</value>
     <value>Möchten Sie die Verbindung "{0}" schließen?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>Sind sie sicher, dass Sie das Panel "{0}" schließen möchten? Alle Verbindungen, die es enthält, werden ebenfalls geschlossen.</value>
+    <value>Sind Sie sicher, dass Sie das Panel "{0}" schließen möchten?
+Alle Verbindungen die es enthält werden ebenfalls geschlossen.</value>
   </data>
   <data name="strConfirmDeleteExternalTool" xml:space="preserve">
     <value>Sind Sie sicher, dass Sie das extene Programm "{0}" entfernen möchten?</value>
@@ -580,7 +581,7 @@ Starte mit neuer Datei.</value>
     <value>Wollen Sie ohne Passwort fortfahren?</value>
   </data>
   <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
-    <value>Bei leeren Benutzername-, Passwort- oder Domänenfeldern benutze:</value>
+    <value>Bei leeren Feldern für Benutzername, Passwort oder Domäne verwende:</value>
   </data>
   <data name="strEnc128Bit" xml:space="preserve">
     <value>128 Bit</value>
@@ -742,7 +743,7 @@ Starte mit neuer Datei.</value>
     <value>Setzen der Auflösung fehlgschlagen!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
-    <value>Quick connect Registerkarten identifizieren, indem das Präfix "Quick:" benutzt wird</value>
+    <value>QuickConnect-Tabs identifizieren, indem das Präfix "Quick" benutzt wird</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Von Active Directory importieren</value>
@@ -940,16 +941,16 @@ Starte mit neuer Datei.</value>
     <value>STRG-ESC</value>
   </data>
   <data name="strMenuDelete" xml:space="preserve">
-    <value>Löschen...</value>
+    <value>Löschen</value>
   </data>
   <data name="strMenuDeleteConnection" xml:space="preserve">
-    <value>Verbindung löschen...</value>
+    <value>Verbindung löschen</value>
   </data>
   <data name="strMenuDeleteExternalTool" xml:space="preserve">
     <value>Entfernen</value>
   </data>
   <data name="strMenuDeleteFolder" xml:space="preserve">
-    <value>Ordner löschen...</value>
+    <value>Ordner löschen</value>
   </data>
   <data name="strMenuDisconnect" xml:space="preserve">
     <value>Trennen</value>
@@ -1015,7 +1016,7 @@ Starte mit neuer Datei.</value>
     <value>Alle Löschen</value>
   </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
-    <value>Verbindungsdatei öffnen...</value>
+    <value>Verbindungsdatei öffnen</value>
   </data>
   <data name="strMenuOptions" xml:space="preserve">
     <value>Optionen</value>
@@ -1057,7 +1058,7 @@ Starte mit neuer Datei.</value>
     <value>Verbindungsdatei speichern</value>
   </data>
   <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
-    <value>Verbindungsdatei speichern unter...</value>
+    <value>Verbindungsdatei speichern unter</value>
   </data>
   <data name="strMenuScreenshot" xml:space="preserve">
     <value>Bildschirmschnappschuss</value>
@@ -1081,7 +1082,7 @@ Starte mit neuer Datei.</value>
     <value>Text anzeigen</value>
   </data>
   <data name="strMenuSmartSize" xml:space="preserve">
-    <value>SmartSize (RDP/VNC)</value>
+    <value>Smart-Size-Modus (RDP/VNC)</value>
   </data>
   <data name="strMenuSSHFileTransfer" xml:space="preserve">
     <value>SSH-Dateiübertragung</value>
@@ -1102,7 +1103,7 @@ Starte mit neuer Datei.</value>
     <value>&amp;Ansicht</value>
   </data>
   <data name="strMenuViewOnly" xml:space="preserve">
-    <value>Nur Ansicht (VNC)</value>
+    <value>View-Only-Modus</value>
   </data>
   <data name="strMenuWebsite" xml:space="preserve">
     <value>Webseite</value>
@@ -1117,7 +1118,7 @@ Starte mit neuer Datei.</value>
     <value>Nach oben</value>
   </data>
   <data name="strMyCurrentWindowsCreds" xml:space="preserve">
-    <value>meine aktuellen (Windows-Anmeldeinformationen)</value>
+    <value>meine aktuellen Windows-Anmeldeinformationen</value>
   </data>
   <data name="strNever" xml:space="preserve">
     <value>Niemals</value>
@@ -1147,7 +1148,7 @@ Starte mit neuer Datei.</value>
     <value>Kein externes Programm definiert!</value>
   </data>
   <data name="strNoInformation" xml:space="preserve">
-    <value>keine</value>
+    <value>keine Anmeldeinformationen</value>
   </data>
   <data name="strNone" xml:space="preserve">
     <value>Keine Angabe</value>
@@ -1156,7 +1157,7 @@ Starte mit neuer Datei.</value>
     <value>Normal</value>
   </data>
   <data name="strNoSmartSize" xml:space="preserve">
-    <value>Keine automatische Größenanpassung (SmartSize)</value>
+    <value>Keine automatische Größenanpassung (Smart-Size)</value>
   </data>
   <data name="strNoUpdateAvailable" xml:space="preserve">
     <value>Keine Updates verfügbar</value>
@@ -1172,7 +1173,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Offene Ports</value>
   </data>
   <data name="strOptionsTabTheme" xml:space="preserve">
-    <value>Aussehen</value>
+    <value>Theme</value>
   </data>
   <data name="strOptionsThemeButtonDelete" xml:space="preserve">
     <value>&amp;Löschen</value>
@@ -1466,7 +1467,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Auflösung</value>
   </data>
   <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
-    <value>SmartSize-Modus</value>
+    <value>Smart-Size-Modus</value>
   </data>
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Verwende Konsole</value>
@@ -1885,7 +1886,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Erster Port</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
-    <value>Anfang/Ende</value>
+    <value>Start/Ende</value>
   </data>
   <data name="strStatus" xml:space="preserve">
     <value>Status</value>
@@ -2159,7 +2160,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Benutzt die DockPanel Suite von [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Log File schreiben (mRemoteNG.log)</value>
+    <value>Logfile schreiben (mRemoteNG.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner Pfad:</value>
@@ -2168,7 +2169,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Ja</value>
   </data>
   <data name="strMenuReconnectAll" xml:space="preserve">
-    <value>Wiederverbinden aller offener Verbindungen</value>
+    <value>Alle offenen Verbindungen neu verbinden</value>
   </data>
   <data name="strButtonLaunch" xml:space="preserve">
     <value>&amp;Starten</value>
@@ -2305,7 +2306,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>&amp;Nochmal versuchen</value>
   </data>
   <data name="strExternalToolDefaultName" xml:space="preserve">
-    <value>Neues externes Werkzeug</value>
+    <value>Neues externes Programm</value>
   </data>
   <data name="strLoadFromSqlFailedContent" xml:space="preserve">
     <value>Die Verbindungsinformationen konnten nicht vom SQL-Server geladen werden.</value>
@@ -2353,7 +2354,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Dieser Knoten ist nicht verschiebbar.</value>
   </data>
   <data name="strEncryptionBlockCipherMode" xml:space="preserve">
-    <value>Block Cipher-Modus</value>
+    <value>Block-Cipher-Modus</value>
   </data>
   <data name="strShowTheseMessageTypes" xml:space="preserve">
     <value>Zeige diese Nachrichtentypen</value>
@@ -2419,7 +2420,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Verbindung testen</value>
   </data>
   <data name="strExportToFileMenuItem" xml:space="preserve">
-    <value>In Datei &amp;exportieren...</value>
+    <value>In Datei &amp;exportieren</value>
   </data>
   <data name="strImportFileFailedContent" xml:space="preserve">
     <value>Beim Importieren der Datei ist ein Fehler aufgetreten ("{0}").</value>
@@ -2436,12 +2437,8 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
   <data name="strLogTheseMessageTypes" xml:space="preserve">
     <value>Diese Nachrichtentypen protokollieren</value>
   </data>
-  <data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
-    <value>Warnung! Ein Neustart ist notwendig um ein Theme zu deaktivieren oder anzuwenden</value>
-  </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>
-Es werden keine Themes geladen, vergewissern Sie sich, dass das standard mremoteNG-Theme im Ordner 'themes' vorhanden ist</value>
+    <value>Es werden keine Themes geladen, vergewissern Sie sich, dass das Standard mremoteNG-Theme im Ordner 'themes' vorhanden ist</value>
   </data>
   <data name="LoginFailedForUser" xml:space="preserve">
     <value>Login fehlgeschlagen für Benutzer '{0}'.</value>
@@ -2506,11 +2503,10 @@ Es konnte kein Anmeldedatensatz mit der ID "{0}" für den Verbindungsdatensatz m
 Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   </data>
   <data name="strChooseLogPath" xml:space="preserve">
-    <value>
-Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
+    <value>Wählen Sie einen Pfad für das mRemoteNG-Logfile</value>
   </data>
   <data name="strLogFilePath" xml:space="preserve">
-    <value>Pfad der Protokolldatei</value>
+    <value>Pfad des Logfiles</value>
   </data>
   <data name="strChoosePath" xml:space="preserve">
     <value>Pfad auswählen</value>
@@ -2616,5 +2612,61 @@ Wählen Sie einen Pfad für die mRemoteNG-Protokolldatei</value>
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Suchleiste über den Verbindungen anzeigen</value>
+  </data>
+  <data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Erstelle ein leeres Panel, wenn mRemoteNG gestartet wird</value>
+  </data>
+  <data name="strReleaseChannel" xml:space="preserve">
+    <value>Update-Kanal</value>
+  </data>
+  <data name="strReleaseChannelExplanation" xml:space="preserve">
+    <value>Stable enthält nur finale Versionen.
+Beta beinhaltet Betas &amp; Release Candidates.
+Development umfasst Alphas, Betas und Release Candidates.</value>
+  </data>
+  <data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Aktive Verbindung im Verbindungsbaum verfolgen</value>
+  </data>
+  <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
+    <value>Iterationen der Ableitungsfunktion</value>
+  </data>
+  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>UTF8-Kodierung für RDP Eigenschaft "Load Balance Info" verwenden</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Anmeldedaten</value>
+  </data>
+  <data name="strButtonApply" xml:space="preserve">
+    <value>Anwenden</value>
+  </data>
+  <data name="strOptionsThemeChangeWarning" xml:space="preserve">
+    <value>Warnung: Ein Neustart ist erforderlich, um Änderungen am Theme anzuwenden.</value>
+  </data>
+  <data name="strPropertyNameRedirectClipboard" xml:space="preserve">
+    <value>Zwischenablage</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
+    <value>Umleitung der Zwischenablage erlauben.</value>
+  </data>
+  <data name="strMultiSshToolbar" xml:space="preserve">
+    <value>Multi-SSH Symbolleiste</value>
+  </data>
+  <data name="strPropertyDescriptionFavorite" xml:space="preserve">
+    <value>Zeige diese Verbindung in den Favoriten</value>
+  </data>
+  <data name="strPropertyNameFavorite" xml:space="preserve">
+    <value>Favorit</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favoriten</value>
+  </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Suchbegriff löschen</value>
+  </data>
+  <data name="ConnectInViewOnlyMode" xml:space="preserve">
+    <value>Im View-Only-Modus verbinden</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Leerzeichen nicht aus Benutzernamen entfernen</value>
   </data>
 </root>

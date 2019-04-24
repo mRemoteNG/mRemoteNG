@@ -49,7 +49,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnThemeDelete
             // 
-            this.btnThemeDelete._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnThemeDelete._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnThemeDelete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnThemeDelete.Location = new System.Drawing.Point(507, 3);
             this.btnThemeDelete.Name = "btnThemeDelete";
@@ -61,7 +61,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnThemeNew
             // 
-            this.btnThemeNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnThemeNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnThemeNew.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnThemeNew.Location = new System.Drawing.Point(407, 3);
             this.btnThemeNew.Name = "btnThemeNew";

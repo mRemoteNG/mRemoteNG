@@ -23,6 +23,7 @@ namespace mRemoteNG.Config.Settings
                 memoryStream.Position = 0;
                 xdoc = XDocument.Load(memoryStream, LoadOptions.SetBaseUri);
             }
+
             return $"{xdoc.Declaration}{Environment.NewLine}{xdoc}";
         }
     }
