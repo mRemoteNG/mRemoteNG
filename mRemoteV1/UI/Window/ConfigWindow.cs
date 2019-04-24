@@ -836,6 +836,7 @@ namespace mRemoteNG.UI.Window
                     strHide.Add("RedirectClipboard");
                     strHide.Add("RedirectSmartCards");
                     strHide.Add("RedirectSound");
+                    strHide.Add("RedirectAudioCapture");
                     strHide.Add("RenderingEngine");
                     strHide.Add("Resolution");
                     strHide.Add("AutomaticResize");
@@ -949,6 +950,7 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
+                            strHide.Add("RedirectAudioCapture");
                             strHide.Add("RenderingEngine");
                             strHide.Add("Resolution");
                             strHide.Add("AutomaticResize");
@@ -997,6 +999,7 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
+                            strHide.Add("RedirectAudioCapture");
                             strHide.Add("RenderingEngine");
                             strHide.Add("Resolution");
                             strHide.Add("AutomaticResize");
@@ -1042,6 +1045,7 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
+                            strHide.Add("RedirectAudioCapture");
                             strHide.Add("RenderingEngine");
                             strHide.Add("Resolution");
                             strHide.Add("AutomaticResize");
@@ -1088,6 +1092,7 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
+                            strHide.Add("RedirectAudioCapture");
                             strHide.Add("RenderingEngine");
                             strHide.Add("Resolution");
                             strHide.Add("AutomaticResize");
@@ -1135,6 +1140,7 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
+                            strHide.Add("RedirectAudioCapture");
                             strHide.Add("RenderingEngine");
                             strHide.Add("Resolution");
                             strHide.Add("AutomaticResize");
@@ -1182,6 +1188,7 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
+                            strHide.Add("RedirectAudioCapture");
                             strHide.Add("RenderingEngine");
                             strHide.Add("Resolution");
                             strHide.Add("AutomaticResize");
@@ -1230,6 +1237,7 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
+                            strHide.Add("RedirectAudioCapture");
                             strHide.Add("Resolution");
                             strHide.Add("AutomaticResize");
                             strHide.Add("UseConsoleSession");
@@ -1272,6 +1280,7 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
+                            strHide.Add("RedirectAudioCapture");
                             strHide.Add("RenderingEngine");
                             strHide.Add("AutomaticResize");
                             strHide.Add("UseConsoleSession");
@@ -1315,6 +1324,7 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectClipboard");
                             strHide.Add("RedirectSmartCards");
                             strHide.Add("RedirectSound");
+                            strHide.Add("RedirectAudioCapture");
                             strHide.Add("RenderingEngine");
                             strHide.Add("Resolution");
                             strHide.Add("AutomaticResize");
@@ -1377,6 +1387,8 @@ namespace mRemoteNG.UI.Window
                             strHide.Add("RedirectSmartCards");
                         if (conI.Inheritance.RedirectSound)
                             strHide.Add("RedirectSound");
+                        if (conI.Inheritance.RedirectAudioCapture)
+                            strHide.Add("RedirectAudioCapture");
                         if (conI.Inheritance.Resolution)
                             strHide.Add("Resolution");
                         if (conI.Inheritance.AutomaticResize)

@@ -293,6 +293,12 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool SoundQuality { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectAudioCapture"),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectAudioCapture"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RedirectAudioCapture { get; set; }
+
         #endregion
 
         #region Misc

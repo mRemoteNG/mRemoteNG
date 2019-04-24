@@ -613,6 +613,18 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultRedirectAudioCapture {
+            get {
+                return ((bool)(this["ConDefaultRedirectAudioCapture"]));
+            }
+            set {
+                this["ConDefaultRedirectAudioCapture"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int MaxPuttyWaitTime {
             get {
@@ -1028,6 +1040,18 @@ namespace mRemoteNG {
             }
             set {
                 this["InhDefaultRedirectSound"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRedirectAudioCapture {
+            get {
+                return ((bool)(this["InhDefaultRedirectAudioCapture"]));
+            }
+            set {
+                this["InhDefaultRedirectAudioCapture"] = value;
             }
         }
         
@@ -2818,8 +2842,8 @@ namespace mRemoteNG {
                 this["InhDefaultFavorite"] = value;
             }
         }
-		
-		[global::System.Configuration.UserScopedSettingAttribute()]
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("mssql")]
         public string SQLServerType {

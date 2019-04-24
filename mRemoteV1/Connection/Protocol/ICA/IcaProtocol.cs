@@ -1,4 +1,4 @@
-using AxWFICALib;
+﻿using AxWFICALib;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Messages;
