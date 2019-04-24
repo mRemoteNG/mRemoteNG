@@ -5002,7 +5002,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select how remote sound should be redirected..
+        ///   Looks up a localized string similar to Select whether the default audio input device on the remote machine should be redirected to this computer..
         /// </summary>
         internal static string strPropertyDescriptionRedirectAudioCapture {
             get {
@@ -5011,7 +5011,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select whether clipboard should be shared..
+        ///   Looks up a localized string similar to Select whether the clipboard should be shared..
         /// </summary>
         internal static string strPropertyDescriptionRedirectClipboard {
             get {
