@@ -1063,6 +1063,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CHANGELOG.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CREDITS.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
     <None Include="Resources\Templates\AppIcon.psd" />
