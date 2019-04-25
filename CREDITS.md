@@ -135,3 +135,8 @@ ObjectListView
 Copyright © 2006-2016 Phillip Piper  
 GNU General Public License (GPL) Version 3  
 https://sourceforge.net/projects/objectlistview/
+
+Markdig  
+Copyright © 2016-2019 Alexandre Mutel  
+BSD 2-Clause "Simplified"  
+https://github.com/lunet-io/markdig
