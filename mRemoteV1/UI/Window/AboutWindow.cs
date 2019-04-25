@@ -122,7 +122,7 @@ namespace mRemoteNG.UI.Window
                         i++;
                         if (i <= 128 || line != string.Empty) continue;
                         changelog +=
-                            $"{Environment.NewLine}***See CHANGELOG.md for full History...***{Environment.NewLine}";
+                            $"{Environment.NewLine}***See [CHANGELOG.md](https://github.com/mRemoteNG/mRemoteNG/blob/develop/CHANGELOG.md) for full History...***{Environment.NewLine}";
                         break;
                     }
                 }
