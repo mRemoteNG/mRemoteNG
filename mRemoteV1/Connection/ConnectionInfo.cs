@@ -197,7 +197,10 @@ namespace mRemoteNG.Connection
 
         private bool ShouldThisPropertyBeInherited(string propertyName)
         {
-            return ParentIsValidInheritanceTarget() && IsInheritanceTurnedOnForThisProperty(propertyName);
+            return
+                Inheritance.InheritanceActive &&
+                ParentIsValidInheritanceTarget() &&
+                IsInheritanceTurnedOnForThisProperty(propertyName);
         }
 
         private bool ParentIsValidInheritanceTarget()
