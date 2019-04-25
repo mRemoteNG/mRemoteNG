@@ -133,8 +133,8 @@ namespace mRemoteNG.UI.Window
                 var creditsHtml = Markdown.ToHtml(credits, pipeline);
                 creditsHtml = $"<body style=\"font-family:arial,helvetica,sans-serif;font-size:12px;\" bgcolor=\"{backgroundColor}\">{creditsHtml}</body>";
 
-                gwbChangeLog.LoadHtml(changelogHtml);
-                gwbCredits.LoadHtml(creditsHtml);
+                gwbChangeLog.LoadHtml(changelogHtml.Replace("©", "&copy;"));
+                gwbCredits.LoadHtml(creditsHtml.Replace("©", "&copy;"));
             }
             catch (Exception ex)
             {
