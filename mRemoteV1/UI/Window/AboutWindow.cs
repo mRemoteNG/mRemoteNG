@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
+using System.Drawing;
 using System.IO;
 using System.Text;
+using Gecko;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using Markdig;
-using System.Diagnostics;
-using System.Drawing;
-using Gecko;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
@@ -27,17 +26,21 @@ namespace mRemoteNG.UI.Window
             FontOverrider.FontOverride(this);
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
+            ApplyTheme();
+            ApplyEditions();
+            LoadDocuments();
         }
 
         #endregion
 
         #region Private Methods
-		private void ApplyLanguage()
-		{
-			lblLicense.Text = Language.strLabelReleasedUnderGPL;
-			TabText = Language.strAbout;
-			Text = Language.strAbout;
-		}
+
+        private void ApplyLanguage()
+        {
+            lblLicense.Text = Language.strLabelReleasedUnderGPL;
+            TabText = Language.strAbout;
+            Text = Language.strAbout;
+        }
 
         private new void ApplyTheme()
         {
@@ -50,20 +53,12 @@ namespace mRemoteNG.UI.Window
             pnlBottom.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
             pnlTop.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             pnlTop.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-
-            //gwbCredits.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            //gwbCredits.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background"); ;
-            //gwbCredits.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground"); ;
-
-            //gwbCHangelog.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            //gwbCHangelog.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background"); ;
-            //gwbCHangelog.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground"); ;
         }
 
         private void ApplyEditions()
         {
 #if PORTABLE
-            lblTitle.Text += " " + Language.strLabelPortableEdition;
+            lblTitle.Text += $@" {Language.strLabelPortableEdition}";
 #endif
         }
 
@@ -94,17 +89,14 @@ namespace mRemoteNG.UI.Window
 
         #region Form Stuff
 
-        private void About_Load(object sender, EventArgs e)
+        private void LoadDocuments()
         {
-            ApplyTheme();
-            ApplyEditions();
-
             try
             {
                 lblCopyright.Text = GeneralAppInfo.Copyright;
                 lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion}";
-
                 var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+                var backgroundColor = ColorTranslator.ToHtml(ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background"));
 
                 // AppVeyor seems to pull text files in UNIX format... This messes up the display on the about screen...
                 //
@@ -117,44 +109,37 @@ namespace mRemoteNG.UI.Window
                 // did not work at all despite it CLEARLY ending with \n when pulled from AppVeyor...
                 // The Changelog is a bit long anyways... Limit the number of lines to something reasonable.
 
-                if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.md"))
-	            {
-                    var changelog = "";
-                    
-                    using (var sR = new StreamReader(GeneralAppInfo.HomePath + "\\CHANGELOG.md", Encoding.UTF8, true))
+                if (!File.Exists(GeneralAppInfo.HomePath + @"\CREDITS.md") && !File.Exists(GeneralAppInfo.HomePath + @"\CHANGELOG.md")) return;
+
+                var changelog = "";
+                using (var sR = new StreamReader(GeneralAppInfo.HomePath + @"\CHANGELOG.md", Encoding.UTF8, true))
+                {
+                    string line;
+                    var i = 0;
+                    while ((line = sR.ReadLine()) != null)
                     {
-                        string line;
-                        var i = 0;
-                        while ((line = sR.ReadLine()) != null)
-                        {
-                            changelog += line + Environment.NewLine;
-                            i++;
-                            if (i > 128 && line == string.Empty)
-                            {
-                                changelog += $"{Environment.NewLine}***See CHANGELOG.md for full History...***{Environment.NewLine}";
-                                break;
-                            }
-                        }
+                        changelog += line + Environment.NewLine;
+                        i++;
+                        if (i <= 128 || line != string.Empty) continue;
+                        changelog +=
+                            $"{Environment.NewLine}***See CHANGELOG.md for full History...***{Environment.NewLine}";
+                        break;
                     }
-
-                    var result = Markdown.ToHtml(changelog, pipeline);
-                    var color = ColorTranslator.ToHtml(ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background"));
-                    result = "<body style=\"font-family:arial,helvetica,sans-serif;font-size:12px;\" bgcolor=\"" + color + "\">" + result + "</body>";
-                    gwbChangeLog.LoadHtml(result);
                 }
+                var changelogHtml = Markdown.ToHtml(changelog, pipeline);
+                changelogHtml = $"<body style=\"font-family:arial,helvetica,sans-serif;font-size:12px;\" bgcolor=\"{backgroundColor}\">{changelogHtml}</body>";
 
-	            if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.md"))
-	            {
-                    var changelog = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.md", Encoding.UTF8, true).ReadToEnd();
-                    var result = Markdown.ToHtml(changelog, pipeline);
-                    var color = ColorTranslator.ToHtml(ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background"));
-                    result = "<body style=\"font-family:arial,helvetica,sans-serif;font-size:12px;\" bgcolor=\"" + color + "\">" + result + "</body>";
-                    gwbCredits.LoadHtml(result);
-                }
+                var credits = new StreamReader(GeneralAppInfo.HomePath + @"\CREDITS.md", Encoding.UTF8, true).ReadToEnd();
+                var creditsHtml = Markdown.ToHtml(credits, pipeline);
+                creditsHtml = $"<body style=\"font-family:arial,helvetica,sans-serif;font-size:12px;\" bgcolor=\"{backgroundColor}\">{creditsHtml}</body>";
+
+                gwbChangeLog.LoadHtml(changelogHtml);
+                gwbCredits.LoadHtml(creditsHtml);
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Loading About failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                    "Loading About failed" + Environment.NewLine + ex.Message, true);
             }
         }
 

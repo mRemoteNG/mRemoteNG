@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Window
 {
-    public partial class AboutWindow : BaseWindow
+    public partial class AboutWindow
     {
         #region  Windows Form Designer generated code
         private void InitializeComponent()
@@ -174,7 +174,6 @@
             this.Name = "AboutWindow";
             this.TabText = "About";
             this.Text = "About";
-            this.Load += new System.EventHandler(this.About_Load);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
