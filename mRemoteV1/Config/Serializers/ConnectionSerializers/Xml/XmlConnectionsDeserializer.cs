@@ -321,6 +321,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Colors = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPColors>("Colors");
                     connectionInfo.Resolution = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPResolutions>("Resolution");
                     connectionInfo.RedirectSound = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPSounds>("RedirectSound");
+                    connectionInfo.RedirectAudioCapture = xmlnode.GetAttributeAsBool("RedirectAudioCapture");
                 }
                 else
                 {
@@ -346,6 +347,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                     }
 
                     connectionInfo.RedirectSound = xmlnode.GetAttributeAsEnum<RdpProtocol.RDPSounds>("RedirectSound");
+                    connectionInfo.RedirectAudioCapture = xmlnode.GetAttributeAsBool("RedirectAudioCapture");
                 }
 
                 if (_confVersion >= 1.3)
@@ -368,6 +370,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Inheritance.RedirectSmartCards =
                         xmlnode.GetAttributeAsBool("InheritRedirectSmartCards");
                     connectionInfo.Inheritance.RedirectSound = xmlnode.GetAttributeAsBool("InheritRedirectSound");
+                    connectionInfo.Inheritance.RedirectAudioCapture = xmlnode.GetAttributeAsBool("RedirectAudioCapture");
                     connectionInfo.Inheritance.Resolution = xmlnode.GetAttributeAsBool("InheritResolution");
                     connectionInfo.Inheritance.UseConsoleSession =
                         xmlnode.GetAttributeAsBool("InheritUseConsoleSession");

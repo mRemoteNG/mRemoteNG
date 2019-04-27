@@ -127,6 +127,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds), (string)dataRow["RedirectSound"]);
             connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality),
                                                                                   (string)dataRow["SoundQuality"]);
+            connectionInfo.RedirectAudioCapture = (bool)dataRow["RedirectAudioCapture"];
+
             connectionInfo.RedirectKeys = (bool)dataRow["RedirectKeys"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
             connectionInfo.PostExtApp = (string)dataRow["PostExtApp"];
@@ -187,6 +189,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.RedirectSmartCards = (bool)dataRow["InheritRedirectSmartCards"];
             connectionInfo.Inheritance.RedirectSound = (bool)dataRow["InheritRedirectSound"];
             connectionInfo.Inheritance.SoundQuality = (bool)dataRow["InheritSoundQuality"];
+            connectionInfo.Inheritance.RedirectAudioCapture = (bool)dataRow["InheritRedirectAudioCapture"];
             connectionInfo.Inheritance.Resolution = (bool)dataRow["InheritResolution"];
             connectionInfo.Inheritance.AutomaticResize = (bool)dataRow["InheritAutomaticResize"];
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];

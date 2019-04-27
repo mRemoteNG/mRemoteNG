@@ -285,6 +285,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.RedirectSound = value;
             }
 
+            if (headers.Contains("RedirectAudioCapture"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectAudioCapture")], out value))
+                    connectionRecord.RedirectAudioCapture = value;
+            }
+
             if (headers.Contains("RedirectKeys"))
             {
                 bool value;
@@ -769,6 +776,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSoundQuality")], out value))
                     connectionRecord.Inheritance.SoundQuality = value;
+            }
+
+            if (headers.Contains("InheritRedirectAudioCapture"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectAudioCapture")], out value))
+                    connectionRecord.Inheritance.RedirectAudioCapture = value;
             }
 
             #endregion

@@ -105,6 +105,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("RedirectClipboard", typeof(bool));
             dataTable.Columns.Add("RedirectSmartCards", typeof(bool));
             dataTable.Columns.Add("RedirectSound", typeof(string));
+            dataTable.Columns.Add("RedirectAudioCapture", typeof(bool));
             dataTable.Columns.Add("RedirectKeys", typeof(bool));
             dataTable.Columns.Add("Connected", typeof(bool));
             dataTable.Columns.Add("PreExtApp", typeof(string));
@@ -150,6 +151,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("InheritRedirectClipboard", typeof(bool));
             dataTable.Columns.Add("InheritRedirectSmartCards", typeof(bool));
             dataTable.Columns.Add("InheritRedirectSound", typeof(bool));
+            dataTable.Columns.Add("InheritRedirectAudioCapture", typeof(bool));
             dataTable.Columns.Add("InheritResolution", typeof(bool));
             dataTable.Columns.Add("InheritUseConsoleSession", typeof(bool));
             dataTable.Columns.Add("InheritUseCredSsp", typeof(bool));
@@ -257,6 +259,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RedirectSmartCards"] = connectionInfo.RedirectSmartCards;
             dataRow["RedirectSound"] = connectionInfo.RedirectSound;
             dataRow["SoundQuality"] = connectionInfo.SoundQuality;
+            dataRow["RedirectAudioCapture"] = connectionInfo.RedirectAudioCapture;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
             dataRow["Connected"] =
                 false; // TODO: this column can eventually be removed. we now save this property locally
@@ -307,6 +310,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritRedirectSmartCards"] = connectionInfo.Inheritance.RedirectSmartCards;
                 dataRow["InheritRedirectSound"] = connectionInfo.Inheritance.RedirectSound;
                 dataRow["InheritSoundQuality"] = connectionInfo.Inheritance.SoundQuality;
+                dataRow["InheritRedirectAudioCapture"] = connectionInfo.Inheritance.RedirectAudioCapture;
                 dataRow["InheritResolution"] = connectionInfo.Inheritance.Resolution;
                 dataRow["InheritAutomaticResize"] = connectionInfo.Inheritance.AutomaticResize;
                 dataRow["InheritUseConsoleSession"] = connectionInfo.Inheritance.UseConsoleSession;
@@ -367,6 +371,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritRedirectSmartCards"] = false;
                 dataRow["InheritRedirectSound"] = false;
                 dataRow["InheritSoundQuality"] = false;
+                dataRow["InheritRedirectAudioCapture"] = false;
                 dataRow["InheritResolution"] = false;
                 dataRow["InheritAutomaticResize"] = false;
                 dataRow["InheritUseConsoleSession"] = false;

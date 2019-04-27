@@ -1473,13 +1473,16 @@ If you run into such an error, please create a new connection file!</value>
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
-    <value>Select whether clipboard should be shared.</value>
+    <value>Select whether the clipboard should be shared.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local smart cards should be available on the remote host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+    <value>Select whether the default audio input device on the remote machine should be redirected to this computer.</value>
   </data>
   <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Select one of the available rendering engines that will be used to display HTML.</value>
@@ -1642,6 +1645,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sounds</value>
+  </data>
+  <data name="strPropertyNameRedirectAudioCapture" xml:space="preserve">
+    <value>Audio Capture</value>
   </data>
   <data name="strPropertyNameRenderingEngine" xml:space="preserve">
     <value>Rendering Engine</value>
@@ -2790,7 +2796,16 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Favorites" xml:space="preserve">
     <value>Favorites</value>
   </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Clear search string</value>
+  </data>
   <data name="ConnectInViewOnlyMode" xml:space="preserve">
     <value>Connect in View Only mode</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Do not trim spaces from usernames</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Environment</value>
   </data>
 </root>

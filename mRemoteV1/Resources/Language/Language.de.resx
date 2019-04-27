@@ -2660,7 +2660,13 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="Favorites" xml:space="preserve">
     <value>Favoriten</value>
   </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Suchbegriff löschen</value>
+  </data>
   <data name="ConnectInViewOnlyMode" xml:space="preserve">
     <value>Im View-Only-Modus verbinden</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Leerzeichen nicht aus Benutzernamen entfernen</value>
   </data>
 </root>

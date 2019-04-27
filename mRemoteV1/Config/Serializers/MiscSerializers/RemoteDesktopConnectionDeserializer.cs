@@ -128,6 +128,9 @@ namespace mRemoteNG.Config.Serializers
                             break;
                     }
                     break;
+                case "redirectaudiocapture":
+                    connectionInfo.RedirectAudioCapture = value == "1";
+                    break;
                 case "loadbalanceinfo":
                     connectionInfo.LoadBalanceInfo = value;
                     break;

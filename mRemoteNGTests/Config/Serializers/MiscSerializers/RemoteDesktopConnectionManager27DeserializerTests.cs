@@ -91,7 +91,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 		[TestCaseSource(nameof(NullPropertyValues))]
         public void PropertiesWithoutValuesAreIgnored(Func<ConnectionInfo, object> propSelector)
         {
-	        var connectionTreeModel = _deserializer.Deserialize(Resources.test_rdcman_v2_7_schema3_null_values);
+	        var connectionTreeModel = _deserializer.Deserialize(Resources.test_rdcman_v2_7_schema3_empty_values);
 
 	        var importedConnection = connectionTreeModel
 		        .GetRecursiveChildList()
@@ -103,7 +103,22 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 			Assert.That(propSelector(importedConnection), Is.EqualTo(propSelector(new ConnectionInfo())));
         }
 
-        [Test]
+        [TestCaseSource(nameof(NullPropertyValues))]
+        public void NonExistantPropertiesAreIgnored(Func<ConnectionInfo, object> propSelector)
+        {
+	        var connectionTreeModel = _deserializer.Deserialize(Resources.test_rdcman_v2_7_schema3_null_values);
+
+	        var importedConnection = connectionTreeModel
+		        .GetRecursiveChildList()
+		        .OfType<ContainerInfo>()
+		        .First(node => node.Name == "Group1")
+		        .Children
+		        .First();
+
+	        Assert.That(propSelector(importedConnection), Is.EqualTo(propSelector(new ConnectionInfo())));
+        }
+
+		[Test]
         public void ExceptionThrownOnBadSchemaVersion()
         {
             var badFileContents = Resources.test_rdcman_v2_2_badschemaversion;
