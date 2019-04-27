@@ -4,12 +4,29 @@ environment:
     - PYTHON: "C:\\Python37"
       PYTHON_VERSION: "3.7.3"
       PYTHON_ARCH: "32"
-init:
-  - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
+#init:
+#  - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
 
 install:
-  - "%PYTHON%/Scripts/pip.exe install sphinx"
-  - "%PYTHON%/Scripts/pip.exe install sphinx_rtd_theme"
+  # Prepend newly installed Python to the PATH of this build (this cannot be
+  # done from inside the powershell script as it would require to restart
+  # the parent CMD process).
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+
+  # Check that we have the expected version and architecture for Python
+  - "python --version"
+  - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
+
+  # Upgrade to the latest version of pip to avoid it displaying warnings
+  # about it being out of date.
+  - "python -m pip install --upgrade pip"
+
+  # Install the build dependencies of the project. If some dependencies contain
+  # compiled extensions and are not provided as pre-built wheel packages,
+  # pip will build them from source using the MSVC compiler matching the
+  # target Python version and architecture
+  - "python -m pip install sphinx"
+  - "python -m pip install sphinx_rtd_theme"
 
 pull_requests:
   do_not_increment_build_number: true
