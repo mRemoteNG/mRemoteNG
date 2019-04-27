@@ -1,11 +1,6 @@
-﻿
-
-using mRemoteNG.Connection;
-using mRemoteNG.Tree;
-
-namespace mRemoteNG.UI.Window
+﻿namespace mRemoteNG.UI.Window
 {
-	public partial class ConnectionTreeWindow : BaseWindow
+    public partial class ConnectionTreeWindow : BaseWindow
 	{
         #region  Windows Form Designer generated code
 		internal System.Windows.Forms.MenuStrip msMain;
@@ -33,11 +28,11 @@ namespace mRemoteNG.UI.Window
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this.pbSearch = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
             this.txtSearch = new mRemoteNG.UI.Controls.Base.NGSearchBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.searchBoxLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.olvConnections)).BeginInit();
             this.msMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.searchBoxLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // olvConnections
@@ -175,19 +170,19 @@ namespace mRemoteNG.UI.Window
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.pbSearch, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtSearch);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 390);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(204, 21);
-            this.tableLayoutPanel1.TabIndex = 32;
+            this.searchBoxLayoutPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.searchBoxLayoutPanel.ColumnCount = 2;
+            this.searchBoxLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.searchBoxLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.searchBoxLayoutPanel.Controls.Add(this.pbSearch, 0, 0);
+            this.searchBoxLayoutPanel.Controls.Add(this.txtSearch);
+            this.searchBoxLayoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.searchBoxLayoutPanel.Location = new System.Drawing.Point(0, 390);
+            this.searchBoxLayoutPanel.Name = "searchBoxLayoutPanel";
+            this.searchBoxLayoutPanel.RowCount = 1;
+            this.searchBoxLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.searchBoxLayoutPanel.Size = new System.Drawing.Size(204, 21);
+            this.searchBoxLayoutPanel.TabIndex = 32;
             // 
             // ConnectionTreeWindow
             // 
@@ -195,7 +190,7 @@ namespace mRemoteNG.UI.Window
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(204, 411);
             this.Controls.Add(this.olvConnections);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.searchBoxLayoutPanel);
             this.Controls.Add(this.msMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
@@ -208,8 +203,8 @@ namespace mRemoteNG.UI.Window
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.searchBoxLayoutPanel.ResumeLayout(false);
+            this.searchBoxLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,7 +216,7 @@ namespace mRemoteNG.UI.Window
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
         internal Controls.Base.NGPictureBox pbSearch;
         internal Controls.Base.NGSearchBox txtSearch;
-        public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        public System.Windows.Forms.TableLayoutPanel searchBoxLayoutPanel;
         internal System.Windows.Forms.ToolStripMenuItem mMenFavorites;
     }
 }

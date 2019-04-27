@@ -22,9 +22,18 @@ namespace mRemoteNG.Connection
     [DefaultProperty("Name")]
     public class ConnectionInfo : AbstractConnectionRecord, IHasParent, IInheritable
     {
+        private ConnectionInfoInheritance _inheritance;
+
         #region Public Properties
 
-        [Browsable(false)] public ConnectionInfoInheritance Inheritance { get; set; }
+        [Browsable(false)]
+        public ConnectionInfoInheritance Inheritance
+        {
+            get => _inheritance;
+            set => _inheritance = _inheritance.Parent != this
+                ? _inheritance.Clone(this)
+                : value;
+        }
 
         [Browsable(false)] public ProtocolList OpenConnections { get; protected set; }
 
@@ -72,11 +81,14 @@ namespace mRemoteNG.Connection
         {
             var newConnectionInfo = new ConnectionInfo();
             newConnectionInfo.CopyFrom(this);
-            newConnectionInfo.Inheritance = Inheritance.Clone();
-            newConnectionInfo.Inheritance.Parent = newConnectionInfo;
             return newConnectionInfo;
         }
 
+        /// <summary>
+        /// Copies all connection and inheritance values
+        /// from the given <see cref="sourceConnectionInfo"/>.
+        /// </summary>
+        /// <param name="sourceConnectionInfo"></param>
         public void CopyFrom(ConnectionInfo sourceConnectionInfo)
         {
             var properties = GetType().BaseType?.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
@@ -88,8 +100,7 @@ namespace mRemoteNG.Connection
                 property.SetValue(this, remotePropertyValue, null);
             }
 
-            var clonedInheritance = sourceConnectionInfo.Inheritance.Clone();
-            clonedInheritance.Parent = this;
+            var clonedInheritance = sourceConnectionInfo.Inheritance.Clone(this);
             Inheritance = clonedInheritance;
         }
 
@@ -353,6 +364,7 @@ namespace mRemoteNG.Connection
                                                               Settings.Default.ConDefaultRedirectSound);
             SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality),
                                                                    Settings.Default.ConDefaultSoundQuality);
+            RedirectAudioCapture = Settings.Default.ConDefaultRedirectAudioCapture;
         }
 
         private void SetMiscDefaults()
@@ -387,7 +399,7 @@ namespace mRemoteNG.Connection
 
         private void SetNonBrowsablePropertiesDefaults()
         {
-            Inheritance = new ConnectionInfoInheritance(this);
+            _inheritance = new ConnectionInfoInheritance(this);
             SetNewOpenConnectionList();
             //PositionID = 0;
         }

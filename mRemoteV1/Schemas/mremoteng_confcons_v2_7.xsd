@@ -69,6 +69,7 @@
         <xs:attribute name="RedirectSmartCards" type="xs:boolean" use="required" />
         <xs:attribute name="RedirectSound" type="xs:string" use="required" />
         <xs:attribute name="SoundQuality" type="xs:string" use="required" />
+        <xs:attribute name="RedirectAudioCapture" type="xs:boolean" use="required" />
         <xs:attribute name="RedirectKeys" type="xs:boolean" use="required" />
         <xs:attribute name="Connected" type="xs:boolean" use="required" />
         <xs:attribute name="PreExtApp" type="xs:string" use="required" />
@@ -117,6 +118,7 @@
         <xs:attribute name="InheritRedirectSmartCards" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritRedirectSound" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritSoundQuality" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritRedirectAudioCapture" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritResolution" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritAutomaticResize" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUseConsoleSession" type="xs:boolean" use="optional" />

@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 {
-    public abstract class ConfigWindowSpecialTestsBase
+	public abstract class ConfigWindowSpecialTestsBase
     {
         protected abstract ProtocolType Protocol { get; }
         protected bool TestAgainstContainerInfo { get; set; } = false;
@@ -20,10 +20,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             ConnectionInfo = ConfigWindowGeneralTests.ConstructConnectionInfo(Protocol, TestAgainstContainerInfo);
             ExpectedPropertyList = ConfigWindowGeneralTests.BuildExpectedConnectionInfoPropertyList(Protocol, TestAgainstContainerInfo);
 
-            ConfigWindow = new ConfigWindow
-            {
-                PropertiesVisible = true,
-            };
+            ConfigWindow = new ConfigWindow();
         }
 
         public void RunVerification()
