@@ -1,4 +1,6 @@
 version: 1.76.{build}
+environment:
+  APPVEYOR_RDP_PASSWORD: network21
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 on_finish:
