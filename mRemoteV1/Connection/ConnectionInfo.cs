@@ -298,41 +298,26 @@ namespace mRemoteNG.Connection
             Port = 0;
             PuttySession = Settings.Default.ConDefaultPuttySession;
             ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength),
-                                                                               Settings
-                                                                                   .Default
-                                                                                   .ConDefaultICAEncryptionStrength);
+                                                                               Settings.Default.ConDefaultICAEncryptionStrength);
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
-            RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel)Enum.Parse(
-                                                                                 typeof(RdpProtocol.AuthenticationLevel
-                                                                                 ),
-                                                                                 Settings
-                                                                                     .Default
-                                                                                     .ConDefaultRDPAuthenticationLevel);
+            RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel)Enum.Parse(typeof(RdpProtocol.AuthenticationLevel),
+                                                                                 Settings.Default.ConDefaultRDPAuthenticationLevel);
             RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
             RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
             RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine),
                                                                    Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
+            UseVmId = Settings.Default.ConDefaultUseVmId;
         }
 
         private void SetRdGatewayDefaults()
         {
-            RDGatewayUsageMethod = (RdpProtocol.RDGatewayUsageMethod)Enum.Parse(
-                                                                                typeof(RdpProtocol.RDGatewayUsageMethod
-                                                                                ),
-                                                                                Settings
-                                                                                    .Default
-                                                                                    .ConDefaultRDGatewayUsageMethod);
+            RDGatewayUsageMethod = (RdpProtocol.RDGatewayUsageMethod)Enum.Parse(typeof(RdpProtocol.RDGatewayUsageMethod),
+                                                                                Settings.Default.ConDefaultRDGatewayUsageMethod);
             RDGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
-            RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials)Enum.Parse(
-                                                                                                          typeof(
-                                                                                                              RdpProtocol
-                                                                                                              .RDGatewayUseConnectionCredentials
-                                                                                                          ),
-                                                                                                          Settings
-                                                                                                              .Default
-                                                                                                              .ConDefaultRDGatewayUseConnectionCredentials);
+            RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RdpProtocol.RDGatewayUseConnectionCredentials),
+                                                                                                          Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
@@ -380,10 +365,8 @@ namespace mRemoteNG.Connection
         {
             VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression),
                                                                  Settings.Default.ConDefaultVNCCompression);
-            VNCEncoding =
-                (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
-            VNCAuthMode =
-                (ProtocolVNC.AuthMode)Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
+            VNCEncoding = (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
+            VNCAuthMode = (ProtocolVNC.AuthMode)Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
             VNCProxyType = (ProtocolVNC.ProxyType)Enum.Parse(typeof(ProtocolVNC.ProxyType),
                                                              Settings.Default.ConDefaultVNCProxyType);
             VNCProxyIP = Settings.Default.ConDefaultVNCProxyIP;
@@ -401,7 +384,6 @@ namespace mRemoteNG.Connection
         {
             _inheritance = new ConnectionInfoInheritance(this);
             SetNewOpenConnectionList();
-            //PositionID = 0;
         }
 
         private void SetNewOpenConnectionList()

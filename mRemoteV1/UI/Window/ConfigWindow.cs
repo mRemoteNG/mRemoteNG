@@ -682,9 +682,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(
-                                                             "UI.Window.Config.propertyGridContextMenu_Opening() failed.",
-                                                             ex);
+                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenu_Opening() failed.", ex);
             }
         }
 
@@ -701,9 +699,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(
-                                                             "UI.Window.Config.propertyGridContextMenuReset_Click() failed.",
-                                                             ex);
+                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenuReset_Click() failed.", ex);
             }
         }
 

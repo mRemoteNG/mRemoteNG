@@ -248,7 +248,18 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 strHide.Add(nameof(AbstractConnectionRecord.SoundQuality));
             }
 
-            return strHide;
+            if (SelectedConnectionInfo.UseVmId)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.Username));
+                strHide.Add(nameof(AbstractConnectionRecord.Domain));
+                strHide.Add(nameof(AbstractConnectionRecord.Password));
+            }
+            else if (!SelectedConnectionInfo.UseVmId)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.VmId));
+            }
+
+                return strHide;
         }
 
         private List<string> SpecialVncExclusions()
