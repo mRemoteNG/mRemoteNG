@@ -2878,5 +2878,41 @@ namespace mRemoteNG {
                 this["DoNotTrimUsername"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultVmId {
+            get {
+                return ((string)(this["ConDefaultVmId"]));
+            }
+            set {
+                this["ConDefaultVmId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultVmId {
+            get {
+                return ((bool)(this["InhDefaultVmId"]));
+            }
+            set {
+                this["InhDefaultVmId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultUseVmId {
+            get {
+                return ((bool)(this["InhDefaultUseVmId"]));
+            }
+            set {
+                this["InhDefaultUseVmId"] = value;
+            }
+        }
     }
 }

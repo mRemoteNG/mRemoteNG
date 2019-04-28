@@ -44,6 +44,9 @@
 
         <xs:attribute name="Hostname" type="xs:string" use="required" />
         <xs:attribute name="Protocol" type="xs:string" use="required" />
+        <xs:attribute name="VmId" type="xs:string" use="required" />
+        <xs:attribute name="UseVmId" type="xs:boolean" use="required" />
+        <xs:attribute name="UseCredSsp" type="xs:boolean" use="required" />
         <xs:attribute name="PuttySession" type="xs:string" use="required" />
         <xs:attribute name="Port" type="xs:int" use="required" />
         <xs:attribute name="ConnectToConsole" type="xs:boolean" use="required" />
@@ -133,6 +136,8 @@
         <xs:attribute name="InheritPreExtApp" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritPostExtApp" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritMacAddress" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritUseCredSsp" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritUseVmId" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUserField" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritExtApp" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritFavorite" type="xs:boolean" use="optional" />

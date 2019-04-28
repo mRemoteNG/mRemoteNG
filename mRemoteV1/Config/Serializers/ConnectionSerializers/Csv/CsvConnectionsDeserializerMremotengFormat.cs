@@ -95,13 +95,14 @@ namespace mRemoteNG.Config.Serializers.Csv
             connectionRecord.Password = headers.Contains("Password") ? connectionCsv[headers.IndexOf("Password")] : "";
             connectionRecord.Domain = headers.Contains("Domain") ? connectionCsv[headers.IndexOf("Domain")] : "";
             connectionRecord.Hostname = headers.Contains("Hostname") ? connectionCsv[headers.IndexOf("Hostname")] : "";
-            connectionRecord.PuttySession =
-                headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
+            connectionRecord.VmId = headers.Contains("VmId") ? connectionCsv[headers.IndexOf("VmId")] : "";
+            connectionRecord.VmId = headers.Contains("UseVmId") ? connectionCsv[headers.IndexOf("UseVmId")] : "";
+            connectionRecord.VmId = headers.Contains("UseCredSsp") ? connectionCsv[headers.IndexOf("UseCredSsp")] : "";
+            connectionRecord.PuttySession = headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
             connectionRecord.LoadBalanceInfo = headers.Contains("LoadBalanceInfo")
                 ? connectionCsv[headers.IndexOf("LoadBalanceInfo")]
                 : "";
-            connectionRecord.PreExtApp =
-                headers.Contains("PreExtApp") ? connectionCsv[headers.IndexOf("PreExtApp")] : "";
+            connectionRecord.PreExtApp = headers.Contains("PreExtApp") ? connectionCsv[headers.IndexOf("PreExtApp")] : "";
             connectionRecord.PostExtApp =
                 headers.Contains("PostExtApp") ? connectionCsv[headers.IndexOf("PostExtApp")] : "";
             connectionRecord.MacAddress =
@@ -156,6 +157,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("UseCredSsp")], out value))
                     connectionRecord.UseCredSsp = value;
+            }
+
+            if (headers.Contains("UseVmId"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("UseVmId")], out value))
+                    connectionRecord.UseVmId = value;
             }
 
             if (headers.Contains("RenderingEngine"))
@@ -545,6 +553,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.Inheritance.UseCredSsp = value;
             }
 
+            if (headers.Contains("InheritUseVmId"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseVmId")], out value))
+                    connectionRecord.Inheritance.UseVmId = value;
+            }
+
             if (headers.Contains("InheritRenderingEngine"))
             {
                 bool value;
@@ -557,6 +572,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUsername")], out value))
                     connectionRecord.Inheritance.Username = value;
+            }
+
+            if (headers.Contains("InheritVmId"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVmId")], out value))
+                    connectionRecord.Inheritance.VmId = value;
             }
 
             if (headers.Contains("InheritICAEncryptionStrength"))

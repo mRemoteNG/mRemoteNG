@@ -189,6 +189,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("InheritRDPMinutesToIdleTimeout", typeof(bool));
             dataTable.Columns.Add("InheritRDPAlertIdleTimeout", typeof(bool));
             dataTable.Columns.Add("InheritSoundQuality", typeof(bool));
+            dataTable.Columns.Add("VmId", typeof(string));
+            dataTable.Columns.Add("UseVmId", typeof(bool));
+            dataTable.Columns.Add("InheritVmId", typeof(string));
+            dataTable.Columns.Add("InheritUseVmId", typeof(bool));
         }
 
         private void SetPrimaryKey(DataTable dataTable)
@@ -228,11 +232,13 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey)
                 : "";
             dataRow["Hostname"] = connectionInfo.Hostname;
+            dataRow["VmId"] = connectionInfo.VmId;
             dataRow["Protocol"] = connectionInfo.Protocol;
             dataRow["PuttySession"] = connectionInfo.PuttySession;
             dataRow["Port"] = connectionInfo.Port;
             dataRow["ConnectToConsole"] = connectionInfo.UseConsoleSession;
             dataRow["UseCredSsp"] = connectionInfo.UseCredSsp;
+            dataRow["UseVmId"] = connectionInfo.UseVmId;
             dataRow["RenderingEngine"] = connectionInfo.RenderingEngine;
             dataRow["ICAEncryptionStrength"] = connectionInfo.ICAEncryptionStrength;
             dataRow["RDPAuthenticationLevel"] = connectionInfo.RDPAuthenticationLevel;
@@ -312,6 +318,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritUseCredSsp"] = connectionInfo.Inheritance.UseCredSsp;
                 dataRow["InheritRenderingEngine"] = connectionInfo.Inheritance.RenderingEngine;
                 dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
+                dataRow["InheritVmId"] = connectionInfo.Inheritance.VmId;
+                dataRow["InheritUseVmId"] = connectionInfo.Inheritance.UseVmId;
                 dataRow["InheritICAEncryptionStrength"] = connectionInfo.Inheritance.ICAEncryptionStrength;
                 dataRow["InheritRDPAuthenticationLevel"] = connectionInfo.Inheritance.RDPAuthenticationLevel;
                 dataRow["InheritRDPMinutesToIdleTimeout"] = connectionInfo.Inheritance.RDPMinutesToIdleTimeout;
@@ -335,8 +343,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritVNCViewOnly"] = connectionInfo.Inheritance.VNCViewOnly;
                 dataRow["InheritRDGatewayUsageMethod"] = connectionInfo.Inheritance.RDGatewayUsageMethod;
                 dataRow["InheritRDGatewayHostname"] = connectionInfo.Inheritance.RDGatewayHostname;
-                dataRow["InheritRDGatewayUseConnectionCredentials"] =
-                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
+                dataRow["InheritRDGatewayUseConnectionCredentials"] = connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
                 dataRow["InheritRDGatewayUsername"] = connectionInfo.Inheritance.RDGatewayUsername;
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;

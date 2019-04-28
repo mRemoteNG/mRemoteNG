@@ -1104,6 +1104,7 @@
     <None Include="app.config" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
+    <None Include="Resources\Help\vmrdp.rst" />
     <None Include="Resources\Templates\AppIcon.psd" />
     <None Include="Resources\Fonts\HandelGotD.ttf" />
     <None Include="Resources\Fonts\HandelGotDBol.ttf" />
