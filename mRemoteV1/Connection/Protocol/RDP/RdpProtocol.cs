@@ -159,6 +159,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 {
                     _rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.UseCredSsp;
                     _rdpClient.AdvancedSettings8.AudioQualityMode = (uint)_connectionInfo.SoundQuality;
+
+                    if (_connectionInfo.UseVmId)
+                    {
+                        SetExtendedProperty("DisableCredentialsDelegation", true);
+                        _rdpClient.AdvancedSettings8.NegotiateSecurityLayer = false;
+                        _rdpClient.AdvancedSettings8.AuthenticationServiceClass = "Microsoft Virtual Console Service";
+                        _rdpClient.AdvancedSettings7.PCB = _connectionInfo.UseVmId ? $"{_connectionInfo.VmId};EnhancedMode=1" : _connectionInfo.VmId;
+
+                    }
                 }
 
                 SetUseConsoleSession();
