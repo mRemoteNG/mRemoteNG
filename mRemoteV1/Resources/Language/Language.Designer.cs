@@ -5146,7 +5146,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use VM ID to connect to VM running on Hyper-V.
+        ///   Looks up a localized string similar to Use VM ID to connect to VM running on Hyper-V..
         /// </summary>
         internal static string strPropertyDescriptionUseVmId {
             get {
