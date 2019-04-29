@@ -28,11 +28,10 @@ namespace mRemoteNG.UI.Window
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
             ApplyTheme();
-            ApplyEditions();
             LoadDocuments();
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -41,6 +40,11 @@ namespace mRemoteNG.UI.Window
             lblLicense.Text = Language.strLabelReleasedUnderGPL;
             TabText = Language.strAbout;
             Text = Language.strAbout;
+            lblCopyright.Text = GeneralAppInfo.Copyright;
+            lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion}";
+#if PORTABLE
+            lblTitle.Text += $@" {Language.strLabelPortableEdition}";
+#endif
         }
 
         private new void ApplyTheme()
@@ -56,37 +60,7 @@ namespace mRemoteNG.UI.Window
             pnlTop.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
-        private void ApplyEditions()
-        {
-#if PORTABLE
-            lblTitle.Text += $@" {Language.strLabelPortableEdition}";
-#endif
-        }
-
-#if false
-                private void FillLinkLabel(LinkLabel llbl, string txt, string URL)
-		        {
-			        llbl.Links.Clear();
-
-			        int Open = txt.IndexOf("[");
-			        while (Open != -1)
-			        {
-				        txt = txt.Remove(Open, 1);
-				        int Close = txt.IndexOf("]", Open);
-				        if (Close == -1)
-				        {
-					        break;
-				        }
-				        txt = txt.Remove(Close, 1);
-				        llbl.Links.Add(Open, Close - Open, URL);
-				        Open = txt.IndexOf("[", Open);
-			        }
-
-			        llbl.Text = txt;
-		        }
-#endif
-
-        #endregion
+        #endregion Private Methods
 
         #region Form Stuff
 
@@ -94,8 +68,6 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                lblCopyright.Text = GeneralAppInfo.Copyright;
-                lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion}";
                 var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
                 var backgroundColor = ColorTranslator.ToHtml(ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background"));
 
@@ -144,29 +116,12 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-#if false
-        private void llblFAMFAMFAM_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			Runtime.GoToURL(Language.strFAMFAMFAMAttributionURL);
-		}
-
-		private void llblMagicLibrary_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			Runtime.GoToURL(Language.strMagicLibraryAttributionURL);
-		}
-
-		private void llblWeifenLuo_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
-		{
-			Runtime.GoToURL(Language.strWeifenLuoAttributionURL);
-		}
-#endif
-
-        #endregion
-
         private void LinkClicked(object sender, DomMouseEventArgs e)
         {
             Process.Start(((GeckoWebBrowser)sender).StatusText);
             e.Handled = true;
         }
+
+        #endregion Form Stuff
     }
 }
