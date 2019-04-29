@@ -3,6 +3,7 @@
 Features/Enhancements:
 ----------------------
 #1414: Add "Remote Audio Capture" option for RDP
+#1389: Connection config window refactoring. Default connection info buttons now always available.
 #1336: Added ability to run External tools on folders
 #1320: Added ability to favorite items in the connection tree
 #1318: Added support for saving connections in MySQL
