@@ -5,7 +5,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
-- #1141: 'Copy Hostname' option added to connection tree context menu
 - #951: Added property to Enable/Disable Clipboard Sharing for RDP connections
 - #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
 - #1336: Added ability to run External tools on folders
@@ -23,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1141: 'Copy Hostname' option added to connection tree context menu
 - #1123: Added a dialog that will display when unhandled exceptions occur
 - #1102: Added a button to clear connections searchbox
+- #1141: 'Copy Hostname' option added to connection tree context menu
 - #1042: Added a connection icon for OSX/MacOS
 - #951: Added property to Enable/Disable Clipboard Sharing for RDP connections
 - #929: Added the hostname to certain RDP error/disconnect messages where it was missing
@@ -32,6 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #416: Added ability to Enable/Disable Clipboard Sharing for RDP connections
 - #321: Added support for displaying on HiDPI screens
 ### Changed
+- #1419: Moved CHANGELOG.TXT to CHANGELOG.md and improved about window
 - #1223: Open External Links in Default Web Browser
 - #1129: Spanish translation improvements
 - #1072: Russian translation improvements
@@ -51,6 +52,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1170: Prevent Options window from showing up in taskbar
 - #1064: "Esc" button does does not close some dialogs
 - #1044: Dragging (grabbing) the program window requires 2 clicks
+- #1423: Using tab in IP textbox
 <!-- ### Security -->
 
 ## [1.76.20] - 2019-04-12
