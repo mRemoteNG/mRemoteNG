@@ -1108,11 +1108,11 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="app.config" />
-    <None Include="CHANGELOG.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="..\CHANGELOG.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="CREDITS.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="..\CREDITS.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
