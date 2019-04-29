@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -161,5 +162,11 @@ namespace mRemoteNG.UI.Window
 #endif
 
         #endregion
+
+        private void LinkClicked(object sender, DomMouseEventArgs e)
+        {
+            Process.Start(((GeckoWebBrowser)sender).StatusText);
+            e.Handled = true;
+        }
     }
 }

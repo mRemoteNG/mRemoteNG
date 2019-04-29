@@ -132,6 +132,7 @@
             this.gwbCredits.Size = new System.Drawing.Size(552, 464);
             this.gwbCredits.TabIndex = 12;
             this.gwbCredits.UseHttpActivityObserver = false;
+            this.gwbCredits.DomClick += new System.EventHandler<Gecko.DomMouseEventArgs>(this.LinkClicked);
             // 
             // gwbChangeLog
             // 
@@ -143,6 +144,7 @@
             this.gwbChangeLog.Size = new System.Drawing.Size(553, 464);
             this.gwbChangeLog.TabIndex = 13;
             this.gwbChangeLog.UseHttpActivityObserver = false;
+            this.gwbChangeLog.DomClick += new System.EventHandler<Gecko.DomMouseEventArgs>(this.LinkClicked);
             // 
             // tlpTop
             // 
