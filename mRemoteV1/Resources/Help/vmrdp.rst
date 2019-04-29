@@ -18,6 +18,10 @@ Tis problem occurs because of the CredSSP (Credential Security Service Provider)
     .. info::
 
         See Microsoft support file [954357](https://support.microsoft.com/en-us/help/954357/when-i-use-the-virtual-machine-connection-tool-to-connect-to-a-virtual) for more information on this topic.
+    
+	.. info::
+
+        For more information on RDP error codes see [this Microsoft article](https://social.technet.microsoft.com/wiki/contents/articles/37870.rds-remote-desktop-client-disconnect-codes-and-reasons.aspx).
 
 Start the PowerShell console with administrative privileges and run the following commands:
 
