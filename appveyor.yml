@@ -3,6 +3,18 @@ environment:
   matrix:
     - PYTHON: "C:\\Python37"
 
+pull_requests:
+  do_not_increment_build_number: true
+skip_tags: true
+skip_branch_with_pr: true
+image: Visual Studio 2017
+configuration:
+- Release
+- Release Portable
+- Release Installer
+platform: x86
+shallow_clone: true
+clone_depth: 1
 install:
   - cmd: set PATH=%PATH%;C:\Python37\Scripts;C:\Python37
   # Prepend newly installed Python to the PATH of this build (this cannot be
@@ -27,21 +39,6 @@ install:
   # target Python version and architecture
   - cmd: python -m pip install sphinx
   - cmd: python -m pip install sphinx_rtd_theme
-
-pull_requests:
-  do_not_increment_build_number: true
-skip_tags: true
-skip_branch_with_pr: true
-image: Visual Studio 2017
-configuration:
-- Release
-- Release Portable
-- Release Installer
-platform: x86
-shallow_clone: true
-clone_depth: 1
-install:
-- cmd: set PATH=%PATH%;%PYTHON%/Scripts/
 - ps: >-
     date
 
@@ -55,8 +52,6 @@ before_build:
     nuget restore
 
     echo %TIME%
-    
-    echo %PATH%
 build:
   project: mRemoteV1.sln
   parallel: true
