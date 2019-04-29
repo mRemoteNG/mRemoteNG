@@ -16,7 +16,20 @@ platform: x86
 shallow_clone: true
 clone_depth: 1
 install:
-  - cmd: set PATH=%PATH%;C:\Python37\Scripts;C:\Python37
+- ps: >-
+    date
+
+    mRemoteV1\Resources\CitrixReceiver.exe ENABLE_SSON="No" /silent /noreboot /EnableCEIP=false /AutoUpdateCheck=disabled /EnableTracing=false | out-null
+
+    date
+before_build:
+- cmd: >-
+    echo %TIME%
+
+    nuget restore
+
+    echo %TIME%  
+- cmd: set PATH=%PATH%;C:\Python37\Scripts;C:\Python37
   # Prepend newly installed Python to the PATH of this build (this cannot be
   # done from inside the powershell script as it would require to restart
   # the parent CMD process).
@@ -30,28 +43,15 @@ install:
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
-  - cmd: ECHO upgrading pip
-  - cmd: python -m pip install --upgrade pip
+- cmd: ECHO upgrading pip
+- cmd: python -m pip install --upgrade pip
 
   # Install the build dependencies of the project. If some dependencies contain
   # compiled extensions and are not provided as pre-built wheel packages,
   # pip will build them from source using the MSVC compiler matching the
   # target Python version and architecture
-  - cmd: python -m pip install sphinx
-  - cmd: python -m pip install sphinx_rtd_theme
-- ps: >-
-    date
-
-    mRemoteV1\Resources\CitrixReceiver.exe ENABLE_SSON="No" /silent /noreboot /EnableCEIP=false /AutoUpdateCheck=disabled /EnableTracing=false | out-null
-
-    date
-before_build:
-- cmd: >-
-    echo %TIME%
-
-    nuget restore
-
-    echo %TIME%
+- cmd: python -m pip install sphinx
+- cmd: python -m pip install sphinx_rtd_theme
 build:
   project: mRemoteV1.sln
   parallel: true
