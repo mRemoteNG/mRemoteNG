@@ -16,7 +16,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 {
-    public class CsvConnectionsDeserializerMremotengFormatTests
+	public class CsvConnectionsDeserializerMremotengFormatTests
     {
         private CsvConnectionsDeserializerMremotengFormat _deserializer;
         private CsvConnectionsSerializerMremotengFormat _serializer;
@@ -165,7 +165,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 var ignoreProperties = new[]
                 {
                     nameof(ConnectionInfoInheritance.EverythingInherited),
-                    nameof(ConnectionInfoInheritance.Parent)
+                    nameof(ConnectionInfoInheritance.Parent),
+					nameof(ConnectionInfoInheritance.EverythingInherited)
                 };
                 var properties = typeof(ConnectionInfoInheritance)
                     .GetProperties()

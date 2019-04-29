@@ -50,6 +50,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeImportFile;
         private ToolStripMenuItem _cMenTreeImportActiveDirectory;
         private ToolStripMenuItem _cMenTreeImportPortScan;
+        private ToolStripMenuItem _cMenTreeApplyInheritanceToChildren;
         private readonly ConnectionTree _connectionTree;
         private readonly IConnectionInitiator _connectionInitiator;
 
@@ -98,6 +99,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeImportFile = new ToolStripMenuItem();
             _cMenTreeImportActiveDirectory = new ToolStripMenuItem();
             _cMenTreeImportPortScan = new ToolStripMenuItem();
+            _cMenTreeApplyInheritanceToChildren = new ToolStripMenuItem();
             _cMenTreeExportFile = new ToolStripMenuItem();
             _cMenTreeSep4 = new ToolStripSeparator();
             _cMenTreeAddConnection = new ToolStripMenuItem();
@@ -134,6 +136,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeSep4,
                 _cMenTreeAddConnection,
                 _cMenTreeAddFolder,
+                _cMenTreeApplyInheritanceToChildren,
                 _toolStripSeparator1,
                 _cMenTreeToolsSort,
                 _cMenTreeMoveUp,
@@ -396,7 +399,16 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Size = new System.Drawing.Size(199, 22);
             _cMenTreeMoveDown.Text = "Move down";
             _cMenTreeMoveDown.Click += OnMoveDownClicked;
+            // 
+            // _cMenTreeApplyInheritanceToChildren
+            // 
+            _cMenTreeApplyInheritanceToChildren.Name = "_cMenTreeApplyInheritanceToChildren";
+            _cMenTreeApplyInheritanceToChildren.Size = new System.Drawing.Size(199, 22);
+            _cMenTreeApplyInheritanceToChildren.Text = "Apply inheritance to children";
+            _cMenTreeApplyInheritanceToChildren.Click += OnApplyInheritanceToChildrenClicked;
         }
+
+        
 
         private void ApplyLanguage()
         {
@@ -872,6 +884,14 @@ namespace mRemoteNG.UI.Controls
                                                                 "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)",
                                                                 ex);
             }
+        }
+
+        private void OnApplyInheritanceToChildrenClicked(object sender, EventArgs e)
+        {
+            if (!(_connectionTree.SelectedNode is ContainerInfo container))
+                return;
+
+            container.ApplyInheritancePropertiesToChildren();
         }
 
         #endregion

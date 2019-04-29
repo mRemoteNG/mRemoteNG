@@ -398,7 +398,7 @@ namespace mRemoteNG.Connection
         /// settings for individual properties.
         /// </summary>
         [Browsable(false)]
-        public bool InheritanceActive { get; set; }
+        public bool InheritanceActive { get; set; } = true;
 
         #endregion
 

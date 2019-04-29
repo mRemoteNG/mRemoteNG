@@ -94,16 +94,6 @@ namespace mRemoteNGTests.Connection
         }
 
 	    [TestCaseSource(typeof(InheritancePropertyProvider), nameof(InheritancePropertyProvider.GetProperties))]
-	    public void MovingAConnectionUnderRootNodeDisablesInheritance(PropertyInfo property)
-	    {
-		    var rootNode = new RootNodeInfo(RootNodeType.Connection);
-		    _connectionInfo.Inheritance.EverythingInherited = true;
-			_connectionInfo.SetParent(rootNode);
-			var propertyValue = property.GetValue(_connectionInfo.Inheritance);
-			Assert.That(propertyValue, Is.False);
-	    }
-
-	    [TestCaseSource(typeof(InheritancePropertyProvider), nameof(InheritancePropertyProvider.GetProperties))]
 	    public void MovingAConnectionFromUnderRootNodeToUnderADifferentNodeEnablesInheritance(PropertyInfo property)
 	    {
 		    var rootNode = new RootNodeInfo(RootNodeType.Connection);
