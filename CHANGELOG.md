@@ -5,9 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
-- #1141: 'Copy Hostname' option added to connection tree context menu
-- #951: Added property to Enable/Disable Clipboard Sharing for RDP connections
-- #928: Add context menu items to 'Close all but this' and 'Close all tabs to the right'
+### Changed
+<!-- ### Deprecated -->
+<!-- ### Removed -->
+### Fixed
+<!-- ### Security -->
+
+## [1.77.0] - 2019-04-29
+### Added
+- #1414: Add "Remote Audio Capture" option for RDP
 - #1336: Added ability to run External tools on folders
 - #1320: Added ability to favorite items in the connection tree
 - #1318: Added support for saving connections in MySQL
@@ -32,6 +38,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #416: Added ability to Enable/Disable Clipboard Sharing for RDP connections
 - #321: Added support for displaying on HiDPI screens
 ### Changed
+- #1389: Connection config window refactoring. Default connection info buttons now always available.
 - #1223: Open External Links in Default Web Browser
 - #1129: Spanish translation improvements
 - #1072: Russian translation improvements
