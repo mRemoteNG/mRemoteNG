@@ -1748,7 +1748,7 @@ set /p buildenv=&lt;buildenv.tmp
 :: IF "%25APPVEYOR_BUILD_FOLDER"=="" ( set cert_pwd= )
 
 :: Call the post build powershell script
-powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mremotev1.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "%25cert_pwd%25" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
+powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mremotev1.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "$(CertPassword)" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
