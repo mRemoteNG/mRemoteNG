@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+### Changed
+### Fixed
+- #1428: Fixed a rare error when checking for FIPS
+- #1426: Tabbing is reversed in config window
+- #1425: Connections didn't always respect the Panel property
+
+
 ## [1.77.0] - 2019-04-29
 ### Added
 - #1414: Add "Remote Audio Capture" option for RDP
