@@ -13,6 +13,15 @@ indent_size = 4
 trim_trailing_whitespace = true
 charset = utf-8-bom
 
+# reStructuredText
+[*.rst]
+charset = utf-8
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_size = 3
+max_line_length = 120
+
 # Organize usings
 dotnet_sort_system_directives_first = true
 

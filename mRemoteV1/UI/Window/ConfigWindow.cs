@@ -278,10 +278,10 @@ namespace mRemoteNG.UI.Window
             switch (keyData)
             {
                 case (Keys.Tab | Keys.Shift):
-                    _pGrid.SelectNextGridItem();
+                    _pGrid.SelectPreviousGridItem();
                     break;
                 case Keys.Tab:
-                    _pGrid.SelectPreviousGridItem();
+                    _pGrid.SelectNextGridItem();
                     break;
             }
 

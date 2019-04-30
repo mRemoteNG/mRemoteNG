@@ -1,14 +1,14 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
-using mRemoteNG.UI.Window;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using mRemoteNG.UI.Tabs;
+using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -63,7 +63,7 @@ namespace mRemoteNG.Connection
 
         #region Private
 
-        private void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
+        private void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, ConnectionWindow conForm)
         {
             var children = containerInfo.Children;
             if (children.Count == 0) return;
@@ -76,7 +76,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
+        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, ConnectionWindow conForm)
         {
             try
             {
@@ -162,52 +162,33 @@ namespace mRemoteNG.Connection
 
         private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
-            string connectionPanel;
-            if (connectionInfo.Panel == "" || force.HasFlag(ConnectionInfo.Force.OverridePanel) ||
-                Settings.Default.AlwaysShowPanelSelectionDlg)
-            {
-                var frmPnl = new FrmChoosePanel();
-                if (frmPnl.ShowDialog() == DialogResult.OK)
-                {
-                    connectionPanel = frmPnl.Panel;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                //Return the current panel if exist, if not return default panel
-                if (TabHelper.Instance.CurrentPanel != null)
-                {
-                    connectionPanel = TabHelper.Instance.CurrentPanel.TabText;
-                }
-                else
-                {
-                    connectionPanel = connectionInfo.Panel;
-                }
-            }
+            if (connectionInfo.Panel != "" &&
+                !force.HasFlag(ConnectionInfo.Force.OverridePanel) &&
+                !Settings.Default.AlwaysShowPanelSelectionDlg)
+                return connectionInfo.Panel;
 
-            return connectionPanel;
+            var frmPnl = new FrmChoosePanel();
+            return frmPnl.ShowDialog() == DialogResult.OK
+                ? frmPnl.Panel
+                : null;
         }
 
-        private Form SetConnectionForm(Form conForm, string connectionPanel)
+        private ConnectionWindow SetConnectionForm(ConnectionWindow conForm, string connectionPanel)
         {
-            var connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel);
+            var connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel) as ConnectionWindow;
 
             if (connectionForm == null)
                 connectionForm = _panelAdder.AddPanel(connectionPanel);
             else
-                ((ConnectionWindow)connectionForm).Show(FrmMain.Default.pnlDock);
+                connectionForm.Show(FrmMain.Default.pnlDock);
 
             connectionForm.Focus();
             return connectionForm;
         }
 
-        private static Control SetConnectionContainer(ConnectionInfo connectionInfo, Form connectionForm)
+        private static Control SetConnectionContainer(ConnectionInfo connectionInfo, ConnectionWindow connectionForm)
         {
-            Control connectionContainer = ((ConnectionWindow)connectionForm).AddConnectionTab(connectionInfo);
+            Control connectionContainer = connectionForm.AddConnectionTab(connectionInfo);
 
             if (connectionInfo.Protocol != ProtocolType.IntApp) return connectionContainer;
 
