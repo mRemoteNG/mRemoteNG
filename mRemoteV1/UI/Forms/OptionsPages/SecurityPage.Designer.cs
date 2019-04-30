@@ -36,13 +36,15 @@
             this.groupAdvancedSecurityOptions = new mRemoteNG.UI.Controls.Base.NGGroupBox();
             this.numberBoxKdfIterations = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
             this.labelKdfIterations = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupAdvancedSecurityOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberBoxKdfIterations)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chkEncryptCompleteFile
             // 
-            this.chkEncryptCompleteFile._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkEncryptCompleteFile._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkEncryptCompleteFile.AutoSize = true;
             this.chkEncryptCompleteFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 3);
@@ -55,65 +57,67 @@
             // comboBoxEncryptionEngine
             // 
             this.comboBoxEncryptionEngine._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.comboBoxEncryptionEngine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxEncryptionEngine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEncryptionEngine.FormattingEnabled = true;
-            this.comboBoxEncryptionEngine.Location = new System.Drawing.Point(191, 25);
+            this.comboBoxEncryptionEngine.Location = new System.Drawing.Point(223, 3);
             this.comboBoxEncryptionEngine.Name = "comboBoxEncryptionEngine";
-            this.comboBoxEncryptionEngine.Size = new System.Drawing.Size(123, 21);
+            this.comboBoxEncryptionEngine.Size = new System.Drawing.Size(131, 21);
             this.comboBoxEncryptionEngine.Sorted = true;
             this.comboBoxEncryptionEngine.TabIndex = 1;
             // 
             // labelEncryptionEngine
             // 
             this.labelEncryptionEngine.AutoSize = true;
-            this.labelEncryptionEngine.Location = new System.Drawing.Point(9, 28);
+            this.labelEncryptionEngine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelEncryptionEngine.Location = new System.Drawing.Point(3, 0);
             this.labelEncryptionEngine.Name = "labelEncryptionEngine";
-            this.labelEncryptionEngine.Size = new System.Drawing.Size(101, 13);
+            this.labelEncryptionEngine.Size = new System.Drawing.Size(214, 26);
             this.labelEncryptionEngine.TabIndex = 0;
             this.labelEncryptionEngine.Text = "Encryption Engine";
+            this.labelEncryptionEngine.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelBlockCipher
             // 
             this.labelBlockCipher.AutoSize = true;
-            this.labelBlockCipher.Location = new System.Drawing.Point(9, 60);
+            this.labelBlockCipher.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelBlockCipher.Location = new System.Drawing.Point(3, 26);
             this.labelBlockCipher.Name = "labelBlockCipher";
-            this.labelBlockCipher.Size = new System.Drawing.Size(105, 13);
+            this.labelBlockCipher.Size = new System.Drawing.Size(214, 26);
             this.labelBlockCipher.TabIndex = 2;
             this.labelBlockCipher.Text = "Block Cipher Mode";
+            this.labelBlockCipher.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // comboBoxBlockCipher
             // 
             this.comboBoxBlockCipher._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.comboBoxBlockCipher.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxBlockCipher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBlockCipher.FormattingEnabled = true;
-            this.comboBoxBlockCipher.Location = new System.Drawing.Point(191, 57);
+            this.comboBoxBlockCipher.Location = new System.Drawing.Point(223, 29);
             this.comboBoxBlockCipher.Name = "comboBoxBlockCipher";
-            this.comboBoxBlockCipher.Size = new System.Drawing.Size(123, 21);
+            this.comboBoxBlockCipher.Size = new System.Drawing.Size(131, 21);
             this.comboBoxBlockCipher.TabIndex = 3;
             // 
             // groupAdvancedSecurityOptions
             // 
-            this.groupAdvancedSecurityOptions.Controls.Add(this.numberBoxKdfIterations);
-            this.groupAdvancedSecurityOptions.Controls.Add(this.labelKdfIterations);
-            this.groupAdvancedSecurityOptions.Controls.Add(this.comboBoxEncryptionEngine);
-            this.groupAdvancedSecurityOptions.Controls.Add(this.comboBoxBlockCipher);
-            this.groupAdvancedSecurityOptions.Controls.Add(this.labelBlockCipher);
-            this.groupAdvancedSecurityOptions.Controls.Add(this.labelEncryptionEngine);
+            this.groupAdvancedSecurityOptions.Controls.Add(this.tableLayoutPanel1);
             this.groupAdvancedSecurityOptions.Location = new System.Drawing.Point(3, 30);
             this.groupAdvancedSecurityOptions.Name = "groupAdvancedSecurityOptions";
-            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(604, 128);
+            this.groupAdvancedSecurityOptions.Size = new System.Drawing.Size(604, 112);
             this.groupAdvancedSecurityOptions.TabIndex = 1;
             this.groupAdvancedSecurityOptions.TabStop = false;
             this.groupAdvancedSecurityOptions.Text = "Advanced Security Options";
             // 
             // numberBoxKdfIterations
             // 
+            this.numberBoxKdfIterations.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numberBoxKdfIterations.Increment = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numberBoxKdfIterations.Location = new System.Drawing.Point(191, 88);
+            this.numberBoxKdfIterations.Location = new System.Drawing.Point(223, 55);
             this.numberBoxKdfIterations.Maximum = new decimal(new int[] {
             50000,
             0,
@@ -125,7 +129,7 @@
             0,
             0});
             this.numberBoxKdfIterations.Name = "numberBoxKdfIterations";
-            this.numberBoxKdfIterations.Size = new System.Drawing.Size(90, 22);
+            this.numberBoxKdfIterations.Size = new System.Drawing.Size(131, 22);
             this.numberBoxKdfIterations.TabIndex = 5;
             this.numberBoxKdfIterations.ThousandsSeparator = true;
             this.numberBoxKdfIterations.Value = new decimal(new int[] {
@@ -137,11 +141,34 @@
             // labelKdfIterations
             // 
             this.labelKdfIterations.AutoSize = true;
-            this.labelKdfIterations.Location = new System.Drawing.Point(9, 90);
+            this.labelKdfIterations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelKdfIterations.Location = new System.Drawing.Point(3, 52);
             this.labelKdfIterations.Name = "labelKdfIterations";
-            this.labelKdfIterations.Size = new System.Drawing.Size(181, 13);
+            this.labelKdfIterations.Size = new System.Drawing.Size(214, 26);
             this.labelKdfIterations.TabIndex = 4;
             this.labelKdfIterations.Text = "Key Derivation Function Iterations";
+            this.labelKdfIterations.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 220F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.labelKdfIterations, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.numberBoxKdfIterations, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.labelBlockCipher, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxEncryptionEngine, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelEncryptionEngine, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxBlockCipher, 1, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 21);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(357, 81);
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
             // SecurityPage
             // 
@@ -149,12 +176,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.chkEncryptCompleteFile);
             this.Controls.Add(this.groupAdvancedSecurityOptions);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SecurityPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.groupAdvancedSecurityOptions.ResumeLayout(false);
-            this.groupAdvancedSecurityOptions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberBoxKdfIterations)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,5 +197,6 @@
         private Controls.Base.NGGroupBox groupAdvancedSecurityOptions;
         private Controls.Base.NGNumericUpDown numberBoxKdfIterations;
         private Controls.Base.NGLabel labelKdfIterations;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

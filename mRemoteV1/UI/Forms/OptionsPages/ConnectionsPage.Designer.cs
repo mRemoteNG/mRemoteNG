@@ -150,7 +150,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = new System.Drawing.Point(3, 26);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt";
-            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(490, 17);
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(492, 17);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 1;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = global::mRemoteNG.Language.strSingleClickOnOpenConnectionSwitchesToIt;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = true;
@@ -310,7 +310,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkConnectionTreeTrackActiveConnection.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkConnectionTreeTrackActiveConnection.Location = new System.Drawing.Point(3, 49);
             this.chkConnectionTreeTrackActiveConnection.Name = "chkConnectionTreeTrackActiveConnection";
-            this.chkConnectionTreeTrackActiveConnection.Size = new System.Drawing.Size(261, 17);
+            this.chkConnectionTreeTrackActiveConnection.Size = new System.Drawing.Size(262, 17);
             this.chkConnectionTreeTrackActiveConnection.TabIndex = 10;
             this.chkConnectionTreeTrackActiveConnection.Text = "Track active connection in the connection tree";
             this.chkConnectionTreeTrackActiveConnection.UseVisualStyleBackColor = true;
