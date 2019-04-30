@@ -61,9 +61,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblUpdatesExplanation
             // 
-            this.lblUpdatesExplanation.Location = new System.Drawing.Point(3, 2);
+            this.lblUpdatesExplanation.Location = new System.Drawing.Point(4, 5);
+            this.lblUpdatesExplanation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUpdatesExplanation.Name = "lblUpdatesExplanation";
-            this.lblUpdatesExplanation.Size = new System.Drawing.Size(536, 32);
+            this.lblUpdatesExplanation.Size = new System.Drawing.Size(892, 48);
             this.lblUpdatesExplanation.TabIndex = 0;
             this.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates." +
     "";
@@ -73,17 +74,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlUpdateCheck.Controls.Add(this.btnUpdateCheckNow);
             this.pnlUpdateCheck.Controls.Add(this.chkCheckForUpdatesOnStartup);
             this.pnlUpdateCheck.Controls.Add(this.cboUpdateCheckFrequency);
-            this.pnlUpdateCheck.Location = new System.Drawing.Point(3, 38);
+            this.pnlUpdateCheck.Location = new System.Drawing.Point(4, 57);
+            this.pnlUpdateCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlUpdateCheck.Name = "pnlUpdateCheck";
-            this.pnlUpdateCheck.Size = new System.Drawing.Size(604, 79);
+            this.pnlUpdateCheck.Size = new System.Drawing.Size(906, 128);
             this.pnlUpdateCheck.TabIndex = 1;
             // 
             // btnUpdateCheckNow
             // 
             this.btnUpdateCheckNow._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
-            this.btnUpdateCheckNow.Location = new System.Drawing.Point(3, 49);
+            this.btnUpdateCheckNow.Location = new System.Drawing.Point(4, 88);
+            this.btnUpdateCheckNow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnUpdateCheckNow.Name = "btnUpdateCheckNow";
-            this.btnUpdateCheckNow.Size = new System.Drawing.Size(120, 23);
+            this.btnUpdateCheckNow.Size = new System.Drawing.Size(180, 34);
             this.btnUpdateCheckNow.TabIndex = 2;
             this.btnUpdateCheckNow.Text = "Check Now";
             this.btnUpdateCheckNow.UseVisualStyleBackColor = true;
@@ -94,9 +97,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkCheckForUpdatesOnStartup._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkCheckForUpdatesOnStartup.AutoSize = true;
             this.chkCheckForUpdatesOnStartup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(3, 4);
+            this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(4, 10);
+            this.chkCheckForUpdatesOnStartup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup";
-            this.chkCheckForUpdatesOnStartup.Size = new System.Drawing.Size(120, 17);
+            this.chkCheckForUpdatesOnStartup.Size = new System.Drawing.Size(174, 27);
             this.chkCheckForUpdatesOnStartup.TabIndex = 0;
             this.chkCheckForUpdatesOnStartup.Text = "Check for updates";
             this.chkCheckForUpdatesOnStartup.UseVisualStyleBackColor = true;
@@ -107,9 +111,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboUpdateCheckFrequency._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
             this.cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUpdateCheckFrequency.FormattingEnabled = true;
-            this.cboUpdateCheckFrequency.Location = new System.Drawing.Point(3, 22);
+            this.cboUpdateCheckFrequency.Location = new System.Drawing.Point(4, 45);
+            this.cboUpdateCheckFrequency.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency";
-            this.cboUpdateCheckFrequency.Size = new System.Drawing.Size(120, 21);
+            this.cboUpdateCheckFrequency.Size = new System.Drawing.Size(178, 31);
             this.cboUpdateCheckFrequency.TabIndex = 1;
             // 
             // lblReleaseChannelExplanation
@@ -117,11 +122,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblReleaseChannelExplanation.BackColor = System.Drawing.SystemColors.Control;
             this.lblReleaseChannelExplanation.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lblReleaseChannelExplanation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReleaseChannelExplanation.Location = new System.Drawing.Point(3, 50);
+            this.lblReleaseChannelExplanation.Location = new System.Drawing.Point(4, 82);
+            this.lblReleaseChannelExplanation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lblReleaseChannelExplanation.Multiline = true;
             this.lblReleaseChannelExplanation.Name = "lblReleaseChannelExplanation";
             this.lblReleaseChannelExplanation.ReadOnly = true;
-            this.lblReleaseChannelExplanation.Size = new System.Drawing.Size(595, 44);
+            this.lblReleaseChannelExplanation.Size = new System.Drawing.Size(892, 66);
             this.lblReleaseChannelExplanation.TabIndex = 2;
             this.lblReleaseChannelExplanation.Text = "Stable channel includes final releases only.\r\nBeta channel includes Betas & Relea" +
     "se Candidates.\r\nDevelopment Channel includes Alphas, Betas & Release Candidates." +
@@ -132,9 +138,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cboReleaseChannel._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
             this.cboReleaseChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboReleaseChannel.FormattingEnabled = true;
-            this.cboReleaseChannel.Location = new System.Drawing.Point(3, 21);
+            this.cboReleaseChannel.Location = new System.Drawing.Point(4, 32);
+            this.cboReleaseChannel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboReleaseChannel.Name = "cboReleaseChannel";
-            this.cboReleaseChannel.Size = new System.Drawing.Size(120, 21);
+            this.cboReleaseChannel.Size = new System.Drawing.Size(178, 31);
             this.cboReleaseChannel.TabIndex = 1;
             // 
             // pnlProxy
@@ -144,9 +151,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlProxy.Controls.Add(this.chkUseProxyAuthentication);
             this.pnlProxy.Controls.Add(this.pnlProxyAuthentication);
             this.pnlProxy.Controls.Add(this.btnTestProxy);
-            this.pnlProxy.Location = new System.Drawing.Point(0, 226);
+            this.pnlProxy.Location = new System.Drawing.Point(0, 357);
+            this.pnlProxy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlProxy.Name = "pnlProxy";
-            this.pnlProxy.Size = new System.Drawing.Size(610, 203);
+            this.pnlProxy.Size = new System.Drawing.Size(915, 301);
             this.pnlProxy.TabIndex = 3;
             // 
             // pnlProxyBasic
@@ -156,16 +164,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlProxyBasic.Controls.Add(this.lblProxyPort);
             this.pnlProxyBasic.Controls.Add(this.numProxyPort);
             this.pnlProxyBasic.Enabled = false;
-            this.pnlProxyBasic.Location = new System.Drawing.Point(3, 22);
+            this.pnlProxyBasic.Location = new System.Drawing.Point(4, 42);
+            this.pnlProxyBasic.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlProxyBasic.Name = "pnlProxyBasic";
-            this.pnlProxyBasic.Size = new System.Drawing.Size(604, 40);
+            this.pnlProxyBasic.Size = new System.Drawing.Size(906, 56);
             this.pnlProxyBasic.TabIndex = 1;
             // 
             // lblProxyAddress
             // 
-            this.lblProxyAddress.Location = new System.Drawing.Point(8, 0);
+            this.lblProxyAddress.Location = new System.Drawing.Point(13, 16);
+            this.lblProxyAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProxyAddress.Name = "lblProxyAddress";
-            this.lblProxyAddress.Size = new System.Drawing.Size(96, 24);
+            this.lblProxyAddress.Size = new System.Drawing.Size(144, 29);
             this.lblProxyAddress.TabIndex = 0;
             this.lblProxyAddress.Text = "Address:";
             this.lblProxyAddress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -174,16 +184,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.txtProxyAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtProxyAddress.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProxyAddress.Location = new System.Drawing.Point(110, 4);
+            this.txtProxyAddress.Location = new System.Drawing.Point(165, 17);
+            this.txtProxyAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtProxyAddress.Name = "txtProxyAddress";
-            this.txtProxyAddress.Size = new System.Drawing.Size(240, 22);
+            this.txtProxyAddress.Size = new System.Drawing.Size(359, 29);
             this.txtProxyAddress.TabIndex = 1;
             // 
             // lblProxyPort
             // 
-            this.lblProxyPort.Location = new System.Drawing.Point(350, 1);
+            this.lblProxyPort.Location = new System.Drawing.Point(532, 17);
+            this.lblProxyPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProxyPort.Name = "lblProxyPort";
-            this.lblProxyPort.Size = new System.Drawing.Size(64, 23);
+            this.lblProxyPort.Size = new System.Drawing.Size(96, 29);
             this.lblProxyPort.TabIndex = 2;
             this.lblProxyPort.Text = "Port:";
             this.lblProxyPort.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -191,7 +203,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // numProxyPort
             // 
             this.numProxyPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numProxyPort.Location = new System.Drawing.Point(420, 4);
+            this.numProxyPort.Location = new System.Drawing.Point(636, 16);
+            this.numProxyPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numProxyPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -203,7 +216,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             0,
             0});
             this.numProxyPort.Name = "numProxyPort";
-            this.numProxyPort.Size = new System.Drawing.Size(64, 22);
+            this.numProxyPort.Size = new System.Drawing.Size(96, 29);
             this.numProxyPort.TabIndex = 3;
             this.numProxyPort.Value = new decimal(new int[] {
             80,
@@ -216,9 +229,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkUseProxyForAutomaticUpdates._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkUseProxyForAutomaticUpdates.AutoSize = true;
             this.chkUseProxyForAutomaticUpdates.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(6, 0);
+            this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(9, 7);
+            this.chkUseProxyForAutomaticUpdates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkUseProxyForAutomaticUpdates.Name = "chkUseProxyForAutomaticUpdates";
-            this.chkUseProxyForAutomaticUpdates.Size = new System.Drawing.Size(176, 17);
+            this.chkUseProxyForAutomaticUpdates.Size = new System.Drawing.Size(262, 27);
             this.chkUseProxyForAutomaticUpdates.TabIndex = 0;
             this.chkUseProxyForAutomaticUpdates.Text = "Use a proxy server to connect";
             this.chkUseProxyForAutomaticUpdates.UseVisualStyleBackColor = true;
@@ -230,9 +244,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkUseProxyAuthentication.AutoSize = true;
             this.chkUseProxyAuthentication.Enabled = false;
             this.chkUseProxyAuthentication.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUseProxyAuthentication.Location = new System.Drawing.Point(27, 70);
+            this.chkUseProxyAuthentication.Location = new System.Drawing.Point(8, 106);
+            this.chkUseProxyAuthentication.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkUseProxyAuthentication.Name = "chkUseProxyAuthentication";
-            this.chkUseProxyAuthentication.Size = new System.Drawing.Size(234, 17);
+            this.chkUseProxyAuthentication.Size = new System.Drawing.Size(345, 27);
             this.chkUseProxyAuthentication.TabIndex = 2;
             this.chkUseProxyAuthentication.Text = "This proxy server requires authentication";
             this.chkUseProxyAuthentication.UseVisualStyleBackColor = true;
@@ -245,16 +260,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlProxyAuthentication.Controls.Add(this.lblProxyPassword);
             this.pnlProxyAuthentication.Controls.Add(this.txtProxyPassword);
             this.pnlProxyAuthentication.Enabled = false;
-            this.pnlProxyAuthentication.Location = new System.Drawing.Point(3, 94);
+            this.pnlProxyAuthentication.Location = new System.Drawing.Point(4, 141);
+            this.pnlProxyAuthentication.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlProxyAuthentication.Name = "pnlProxyAuthentication";
-            this.pnlProxyAuthentication.Size = new System.Drawing.Size(604, 72);
+            this.pnlProxyAuthentication.Size = new System.Drawing.Size(906, 115);
             this.pnlProxyAuthentication.TabIndex = 3;
             // 
             // lblProxyUsername
             // 
-            this.lblProxyUsername.Location = new System.Drawing.Point(8, 0);
+            this.lblProxyUsername.Location = new System.Drawing.Point(13, 19);
+            this.lblProxyUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProxyUsername.Name = "lblProxyUsername";
-            this.lblProxyUsername.Size = new System.Drawing.Size(96, 24);
+            this.lblProxyUsername.Size = new System.Drawing.Size(144, 29);
             this.lblProxyUsername.TabIndex = 0;
             this.lblProxyUsername.Text = "Username:";
             this.lblProxyUsername.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -263,16 +280,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.txtProxyUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtProxyUsername.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProxyUsername.Location = new System.Drawing.Point(110, 4);
+            this.txtProxyUsername.Location = new System.Drawing.Point(165, 19);
+            this.txtProxyUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtProxyUsername.Name = "txtProxyUsername";
-            this.txtProxyUsername.Size = new System.Drawing.Size(240, 22);
+            this.txtProxyUsername.Size = new System.Drawing.Size(359, 29);
             this.txtProxyUsername.TabIndex = 1;
             // 
             // lblProxyPassword
             // 
-            this.lblProxyPassword.Location = new System.Drawing.Point(8, 26);
+            this.lblProxyPassword.Location = new System.Drawing.Point(13, 66);
+            this.lblProxyPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProxyPassword.Name = "lblProxyPassword";
-            this.lblProxyPassword.Size = new System.Drawing.Size(96, 24);
+            this.lblProxyPassword.Size = new System.Drawing.Size(144, 29);
             this.lblProxyPassword.TabIndex = 2;
             this.lblProxyPassword.Text = "Password:";
             this.lblProxyPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -281,18 +300,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.txtProxyPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtProxyPassword.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProxyPassword.Location = new System.Drawing.Point(110, 30);
+            this.txtProxyPassword.Location = new System.Drawing.Point(165, 66);
+            this.txtProxyPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtProxyPassword.Name = "txtProxyPassword";
-            this.txtProxyPassword.Size = new System.Drawing.Size(240, 22);
+            this.txtProxyPassword.Size = new System.Drawing.Size(359, 29);
             this.txtProxyPassword.TabIndex = 3;
             this.txtProxyPassword.UseSystemPasswordChar = true;
             // 
             // btnTestProxy
             // 
             this.btnTestProxy._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
-            this.btnTestProxy.Location = new System.Drawing.Point(6, 172);
+            this.btnTestProxy.Location = new System.Drawing.Point(8, 263);
+            this.btnTestProxy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTestProxy.Name = "btnTestProxy";
-            this.btnTestProxy.Size = new System.Drawing.Size(120, 23);
+            this.btnTestProxy.Size = new System.Drawing.Size(180, 34);
             this.btnTestProxy.TabIndex = 4;
             this.btnTestProxy.Text = "Test Proxy";
             this.btnTestProxy.UseVisualStyleBackColor = true;
@@ -302,23 +323,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.groupBoxReleaseChannel.Controls.Add(this.lblReleaseChannelExplanation);
             this.groupBoxReleaseChannel.Controls.Add(this.cboReleaseChannel);
-            this.groupBoxReleaseChannel.Location = new System.Drawing.Point(3, 123);
+            this.groupBoxReleaseChannel.Location = new System.Drawing.Point(4, 193);
+            this.groupBoxReleaseChannel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxReleaseChannel.Name = "groupBoxReleaseChannel";
-            this.groupBoxReleaseChannel.Size = new System.Drawing.Size(604, 100);
+            this.groupBoxReleaseChannel.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxReleaseChannel.Size = new System.Drawing.Size(906, 156);
             this.groupBoxReleaseChannel.TabIndex = 3;
             this.groupBoxReleaseChannel.TabStop = false;
             this.groupBoxReleaseChannel.Text = "Release Channel";
             // 
             // UpdatesPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.groupBoxReleaseChannel);
             this.Controls.Add(this.lblUpdatesExplanation);
             this.Controls.Add(this.pnlUpdateCheck);
             this.Controls.Add(this.pnlProxy);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "UpdatesPage";
-            this.Size = new System.Drawing.Size(610, 490);
+            this.Size = new System.Drawing.Size(915, 735);
             this.pnlUpdateCheck.ResumeLayout(false);
             this.pnlUpdateCheck.PerformLayout();
             this.pnlProxy.ResumeLayout(false);

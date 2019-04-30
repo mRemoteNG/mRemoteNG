@@ -71,44 +71,48 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // labelSwitchToErrorsAndInfos
             // 
             this.labelSwitchToErrorsAndInfos.AutoSize = true;
-            this.labelSwitchToErrorsAndInfos.Location = new System.Drawing.Point(177, 25);
+            this.labelSwitchToErrorsAndInfos.Location = new System.Drawing.Point(266, 38);
+            this.labelSwitchToErrorsAndInfos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSwitchToErrorsAndInfos.Name = "labelSwitchToErrorsAndInfos";
-            this.labelSwitchToErrorsAndInfos.Size = new System.Drawing.Size(176, 13);
+            this.labelSwitchToErrorsAndInfos.Size = new System.Drawing.Size(257, 23);
             this.labelSwitchToErrorsAndInfos.TabIndex = 5;
             this.labelSwitchToErrorsAndInfos.Text = "Switch to Notifications panel on:";
             // 
             // chkSwitchToMCInformation
             // 
-            this.chkSwitchToMCInformation._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSwitchToMCInformation._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSwitchToMCInformation.AutoSize = true;
             this.chkSwitchToMCInformation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSwitchToMCInformation.Location = new System.Drawing.Point(195, 67);
+            this.chkSwitchToMCInformation.Location = new System.Drawing.Point(292, 100);
+            this.chkSwitchToMCInformation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkSwitchToMCInformation.Name = "chkSwitchToMCInformation";
-            this.chkSwitchToMCInformation.Size = new System.Drawing.Size(87, 17);
+            this.chkSwitchToMCInformation.Size = new System.Drawing.Size(126, 27);
             this.chkSwitchToMCInformation.TabIndex = 6;
             this.chkSwitchToMCInformation.Text = "Information";
             this.chkSwitchToMCInformation.UseVisualStyleBackColor = true;
             // 
             // chkSwitchToMCErrors
             // 
-            this.chkSwitchToMCErrors._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSwitchToMCErrors._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSwitchToMCErrors.AutoSize = true;
             this.chkSwitchToMCErrors.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSwitchToMCErrors.Location = new System.Drawing.Point(195, 113);
+            this.chkSwitchToMCErrors.Location = new System.Drawing.Point(292, 170);
+            this.chkSwitchToMCErrors.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkSwitchToMCErrors.Name = "chkSwitchToMCErrors";
-            this.chkSwitchToMCErrors.Size = new System.Drawing.Size(51, 17);
+            this.chkSwitchToMCErrors.Size = new System.Drawing.Size(73, 27);
             this.chkSwitchToMCErrors.TabIndex = 8;
             this.chkSwitchToMCErrors.Text = "Error";
             this.chkSwitchToMCErrors.UseVisualStyleBackColor = true;
             // 
             // chkSwitchToMCWarnings
             // 
-            this.chkSwitchToMCWarnings._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSwitchToMCWarnings._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSwitchToMCWarnings.AutoSize = true;
             this.chkSwitchToMCWarnings.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSwitchToMCWarnings.Location = new System.Drawing.Point(195, 90);
+            this.chkSwitchToMCWarnings.Location = new System.Drawing.Point(292, 135);
+            this.chkSwitchToMCWarnings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkSwitchToMCWarnings.Name = "chkSwitchToMCWarnings";
-            this.chkSwitchToMCWarnings.Size = new System.Drawing.Size(71, 17);
+            this.chkSwitchToMCWarnings.Size = new System.Drawing.Size(100, 27);
             this.chkSwitchToMCWarnings.TabIndex = 7;
             this.chkSwitchToMCWarnings.Text = "Warning";
             this.chkSwitchToMCWarnings.UseVisualStyleBackColor = true;
@@ -124,9 +128,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxNotifications.Controls.Add(this.chkSwitchToMCWarnings);
             this.groupBoxNotifications.Controls.Add(this.chkShowInfoInMC);
             this.groupBoxNotifications.Controls.Add(this.chkShowDebugInMC);
-            this.groupBoxNotifications.Location = new System.Drawing.Point(6, 2);
+            this.groupBoxNotifications.Location = new System.Drawing.Point(9, 3);
+            this.groupBoxNotifications.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxNotifications.Name = "groupBoxNotifications";
-            this.groupBoxNotifications.Size = new System.Drawing.Size(601, 141);
+            this.groupBoxNotifications.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxNotifications.Size = new System.Drawing.Size(902, 212);
             this.groupBoxNotifications.TabIndex = 0;
             this.groupBoxNotifications.TabStop = false;
             this.groupBoxNotifications.Text = "Notifications Panel";
@@ -134,56 +140,61 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // labelNotificationsShowTypes
             // 
             this.labelNotificationsShowTypes.AutoSize = true;
-            this.labelNotificationsShowTypes.Location = new System.Drawing.Point(6, 25);
+            this.labelNotificationsShowTypes.Location = new System.Drawing.Point(9, 38);
+            this.labelNotificationsShowTypes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelNotificationsShowTypes.Name = "labelNotificationsShowTypes";
-            this.labelNotificationsShowTypes.Size = new System.Drawing.Size(147, 13);
+            this.labelNotificationsShowTypes.Size = new System.Drawing.Size(217, 23);
             this.labelNotificationsShowTypes.TabIndex = 0;
             this.labelNotificationsShowTypes.Text = "Show these message types:";
             // 
             // chkShowErrorInMC
             // 
-            this.chkShowErrorInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkShowErrorInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkShowErrorInMC.AutoSize = true;
             this.chkShowErrorInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkShowErrorInMC.Location = new System.Drawing.Point(20, 113);
+            this.chkShowErrorInMC.Location = new System.Drawing.Point(30, 170);
+            this.chkShowErrorInMC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkShowErrorInMC.Name = "chkShowErrorInMC";
-            this.chkShowErrorInMC.Size = new System.Drawing.Size(51, 17);
+            this.chkShowErrorInMC.Size = new System.Drawing.Size(73, 27);
             this.chkShowErrorInMC.TabIndex = 4;
             this.chkShowErrorInMC.Text = "Error";
             this.chkShowErrorInMC.UseVisualStyleBackColor = true;
             // 
             // chkShowWarningInMC
             // 
-            this.chkShowWarningInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkShowWarningInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkShowWarningInMC.AutoSize = true;
             this.chkShowWarningInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkShowWarningInMC.Location = new System.Drawing.Point(20, 90);
+            this.chkShowWarningInMC.Location = new System.Drawing.Point(30, 135);
+            this.chkShowWarningInMC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkShowWarningInMC.Name = "chkShowWarningInMC";
-            this.chkShowWarningInMC.Size = new System.Drawing.Size(71, 17);
+            this.chkShowWarningInMC.Size = new System.Drawing.Size(100, 27);
             this.chkShowWarningInMC.TabIndex = 3;
             this.chkShowWarningInMC.Text = "Warning";
             this.chkShowWarningInMC.UseVisualStyleBackColor = true;
             // 
             // chkShowInfoInMC
             // 
-            this.chkShowInfoInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkShowInfoInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkShowInfoInMC.AutoSize = true;
             this.chkShowInfoInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkShowInfoInMC.Location = new System.Drawing.Point(20, 67);
+            this.chkShowInfoInMC.Location = new System.Drawing.Point(30, 100);
+            this.chkShowInfoInMC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkShowInfoInMC.Name = "chkShowInfoInMC";
-            this.chkShowInfoInMC.Size = new System.Drawing.Size(87, 17);
+            this.chkShowInfoInMC.Size = new System.Drawing.Size(126, 27);
             this.chkShowInfoInMC.TabIndex = 2;
             this.chkShowInfoInMC.Text = "Information";
             this.chkShowInfoInMC.UseVisualStyleBackColor = true;
             // 
             // chkShowDebugInMC
             // 
-            this.chkShowDebugInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkShowDebugInMC._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkShowDebugInMC.AutoSize = true;
             this.chkShowDebugInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkShowDebugInMC.Location = new System.Drawing.Point(20, 44);
+            this.chkShowDebugInMC.Location = new System.Drawing.Point(30, 66);
+            this.chkShowDebugInMC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkShowDebugInMC.Name = "chkShowDebugInMC";
-            this.chkShowDebugInMC.Size = new System.Drawing.Size(61, 17);
+            this.chkShowDebugInMC.Size = new System.Drawing.Size(87, 27);
             this.chkShowDebugInMC.TabIndex = 1;
             this.chkShowDebugInMC.Text = "Debug";
             this.chkShowDebugInMC.UseVisualStyleBackColor = true;
@@ -198,9 +209,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.groupBoxLogging.Controls.Add(this.labelLogTheseMsgTypes);
             this.groupBoxLogging.Controls.Add(this.labelLogFilePath);
             this.groupBoxLogging.Controls.Add(this.textBoxLogPath);
-            this.groupBoxLogging.Location = new System.Drawing.Point(6, 149);
+            this.groupBoxLogging.Location = new System.Drawing.Point(9, 224);
+            this.groupBoxLogging.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxLogging.Name = "groupBoxLogging";
-            this.groupBoxLogging.Size = new System.Drawing.Size(601, 158);
+            this.groupBoxLogging.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxLogging.Size = new System.Drawing.Size(902, 237);
             this.groupBoxLogging.TabIndex = 1;
             this.groupBoxLogging.TabStop = false;
             this.groupBoxLogging.Text = "Logging";
@@ -216,70 +229,76 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tblLogging.Controls.Add(this.chkLogInfoMsgs, 1, 0);
             this.tblLogging.Controls.Add(this.chkLogWarningMsgs, 2, 0);
             this.tblLogging.Controls.Add(this.chkLogErrorMsgs, 3, 0);
-            this.tblLogging.Location = new System.Drawing.Point(9, 124);
+            this.tblLogging.Location = new System.Drawing.Point(14, 186);
+            this.tblLogging.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tblLogging.Name = "tblLogging";
             this.tblLogging.RowCount = 1;
             this.tblLogging.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblLogging.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tblLogging.Size = new System.Drawing.Size(585, 25);
+            this.tblLogging.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tblLogging.Size = new System.Drawing.Size(876, 38);
             this.tblLogging.TabIndex = 7;
             // 
             // chkLogDebugMsgs
             // 
-            this.chkLogDebugMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkLogDebugMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkLogDebugMsgs.AutoSize = true;
             this.chkLogDebugMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLogDebugMsgs.Location = new System.Drawing.Point(3, 3);
+            this.chkLogDebugMsgs.Location = new System.Drawing.Point(4, 4);
+            this.chkLogDebugMsgs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkLogDebugMsgs.Name = "chkLogDebugMsgs";
-            this.chkLogDebugMsgs.Size = new System.Drawing.Size(61, 17);
+            this.chkLogDebugMsgs.Size = new System.Drawing.Size(87, 27);
             this.chkLogDebugMsgs.TabIndex = 0;
             this.chkLogDebugMsgs.Text = "Debug";
             this.chkLogDebugMsgs.UseVisualStyleBackColor = true;
             // 
             // chkLogInfoMsgs
             // 
-            this.chkLogInfoMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkLogInfoMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkLogInfoMsgs.AutoSize = true;
             this.chkLogInfoMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLogInfoMsgs.Location = new System.Drawing.Point(149, 3);
+            this.chkLogInfoMsgs.Location = new System.Drawing.Point(223, 4);
+            this.chkLogInfoMsgs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkLogInfoMsgs.Name = "chkLogInfoMsgs";
-            this.chkLogInfoMsgs.Size = new System.Drawing.Size(87, 17);
+            this.chkLogInfoMsgs.Size = new System.Drawing.Size(126, 27);
             this.chkLogInfoMsgs.TabIndex = 1;
             this.chkLogInfoMsgs.Text = "Information";
             this.chkLogInfoMsgs.UseVisualStyleBackColor = true;
             // 
             // chkLogWarningMsgs
             // 
-            this.chkLogWarningMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkLogWarningMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkLogWarningMsgs.AutoSize = true;
             this.chkLogWarningMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLogWarningMsgs.Location = new System.Drawing.Point(295, 3);
+            this.chkLogWarningMsgs.Location = new System.Drawing.Point(442, 4);
+            this.chkLogWarningMsgs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkLogWarningMsgs.Name = "chkLogWarningMsgs";
-            this.chkLogWarningMsgs.Size = new System.Drawing.Size(71, 17);
+            this.chkLogWarningMsgs.Size = new System.Drawing.Size(100, 27);
             this.chkLogWarningMsgs.TabIndex = 2;
             this.chkLogWarningMsgs.Text = "Warning";
             this.chkLogWarningMsgs.UseVisualStyleBackColor = true;
             // 
             // chkLogErrorMsgs
             // 
-            this.chkLogErrorMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkLogErrorMsgs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkLogErrorMsgs.AutoSize = true;
             this.chkLogErrorMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLogErrorMsgs.Location = new System.Drawing.Point(441, 3);
+            this.chkLogErrorMsgs.Location = new System.Drawing.Point(661, 4);
+            this.chkLogErrorMsgs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkLogErrorMsgs.Name = "chkLogErrorMsgs";
-            this.chkLogErrorMsgs.Size = new System.Drawing.Size(51, 17);
+            this.chkLogErrorMsgs.Size = new System.Drawing.Size(73, 27);
             this.chkLogErrorMsgs.TabIndex = 3;
             this.chkLogErrorMsgs.Text = "Error";
             this.chkLogErrorMsgs.UseVisualStyleBackColor = true;
             // 
             // chkLogToCurrentDir
             // 
-            this.chkLogToCurrentDir._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkLogToCurrentDir._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkLogToCurrentDir.AutoSize = true;
             this.chkLogToCurrentDir.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLogToCurrentDir.Location = new System.Drawing.Point(9, 18);
+            this.chkLogToCurrentDir.Location = new System.Drawing.Point(14, 27);
+            this.chkLogToCurrentDir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkLogToCurrentDir.Name = "chkLogToCurrentDir";
-            this.chkLogToCurrentDir.Size = new System.Drawing.Size(168, 17);
+            this.chkLogToCurrentDir.Size = new System.Drawing.Size(246, 27);
             this.chkLogToCurrentDir.TabIndex = 0;
             this.chkLogToCurrentDir.Text = "Log to application directory";
             this.chkLogToCurrentDir.UseVisualStyleBackColor = true;
@@ -287,10 +306,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonRestoreDefaultLogPath
             // 
-            this.buttonRestoreDefaultLogPath._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(495, 83);
+            this.buttonRestoreDefaultLogPath._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(650, 124);
+            this.buttonRestoreDefaultLogPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonRestoreDefaultLogPath.Name = "buttonRestoreDefaultLogPath";
-            this.buttonRestoreDefaultLogPath.Size = new System.Drawing.Size(99, 23);
+            this.buttonRestoreDefaultLogPath.Size = new System.Drawing.Size(240, 34);
             this.buttonRestoreDefaultLogPath.TabIndex = 5;
             this.buttonRestoreDefaultLogPath.Text = "Use Default";
             this.buttonRestoreDefaultLogPath.UseVisualStyleBackColor = true;
@@ -298,10 +318,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonOpenLogFile
             // 
-            this.buttonOpenLogFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonOpenLogFile.Location = new System.Drawing.Point(273, 82);
+            this.buttonOpenLogFile._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.buttonOpenLogFile.Location = new System.Drawing.Point(14, 124);
+            this.buttonOpenLogFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonOpenLogFile.Name = "buttonOpenLogFile";
-            this.buttonOpenLogFile.Size = new System.Drawing.Size(105, 23);
+            this.buttonOpenLogFile.Size = new System.Drawing.Size(158, 34);
             this.buttonOpenLogFile.TabIndex = 3;
             this.buttonOpenLogFile.Text = "Open File";
             this.buttonOpenLogFile.UseVisualStyleBackColor = true;
@@ -309,10 +330,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonSelectLogPath
             // 
-            this.buttonSelectLogPath._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonSelectLogPath.Location = new System.Drawing.Point(384, 82);
+            this.buttonSelectLogPath._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.buttonSelectLogPath.Location = new System.Drawing.Point(180, 124);
+            this.buttonSelectLogPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonSelectLogPath.Name = "buttonSelectLogPath";
-            this.buttonSelectLogPath.Size = new System.Drawing.Size(105, 23);
+            this.buttonSelectLogPath.Size = new System.Drawing.Size(158, 34);
             this.buttonSelectLogPath.TabIndex = 4;
             this.buttonSelectLogPath.Text = "Choose Path";
             this.buttonSelectLogPath.UseVisualStyleBackColor = true;
@@ -321,37 +343,43 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // labelLogTheseMsgTypes
             // 
             this.labelLogTheseMsgTypes.AutoSize = true;
-            this.labelLogTheseMsgTypes.Location = new System.Drawing.Point(6, 108);
+            this.labelLogTheseMsgTypes.Location = new System.Drawing.Point(9, 162);
+            this.labelLogTheseMsgTypes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelLogTheseMsgTypes.Name = "labelLogTheseMsgTypes";
-            this.labelLogTheseMsgTypes.Size = new System.Drawing.Size(137, 13);
+            this.labelLogTheseMsgTypes.Size = new System.Drawing.Size(204, 23);
             this.labelLogTheseMsgTypes.TabIndex = 6;
             this.labelLogTheseMsgTypes.Text = "Log these message types:";
             // 
             // labelLogFilePath
             // 
             this.labelLogFilePath.AutoSize = true;
-            this.labelLogFilePath.Location = new System.Drawing.Point(6, 38);
+            this.labelLogFilePath.Location = new System.Drawing.Point(9, 57);
+            this.labelLogFilePath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelLogFilePath.Name = "labelLogFilePath";
-            this.labelLogFilePath.Size = new System.Drawing.Size(75, 13);
+            this.labelLogFilePath.Size = new System.Drawing.Size(109, 23);
             this.labelLogFilePath.TabIndex = 1;
             this.labelLogFilePath.Text = "Log file path:";
             // 
             // textBoxLogPath
             // 
             this.textBoxLogPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxLogPath.Location = new System.Drawing.Point(9, 57);
+            this.textBoxLogPath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxLogPath.Location = new System.Drawing.Point(14, 86);
+            this.textBoxLogPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBoxLogPath.Name = "textBoxLogPath";
             this.textBoxLogPath.ReadOnly = true;
-            this.textBoxLogPath.Size = new System.Drawing.Size(585, 22);
+            this.textBoxLogPath.Size = new System.Drawing.Size(876, 29);
             this.textBoxLogPath.TabIndex = 2;
             // 
             // groupBoxPopups
             // 
             this.groupBoxPopups.Controls.Add(this.tblPopups);
             this.groupBoxPopups.Controls.Add(this.labelPopupShowTypes);
-            this.groupBoxPopups.Location = new System.Drawing.Point(6, 313);
+            this.groupBoxPopups.Location = new System.Drawing.Point(9, 470);
+            this.groupBoxPopups.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxPopups.Name = "groupBoxPopups";
-            this.groupBoxPopups.Size = new System.Drawing.Size(601, 74);
+            this.groupBoxPopups.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxPopups.Size = new System.Drawing.Size(902, 111);
             this.groupBoxPopups.TabIndex = 2;
             this.groupBoxPopups.TabStop = false;
             this.groupBoxPopups.Text = "Pop-ups";
@@ -367,58 +395,63 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tblPopups.Controls.Add(this.chkPopupError, 3, 0);
             this.tblPopups.Controls.Add(this.chkPopupInfo, 1, 0);
             this.tblPopups.Controls.Add(this.chkPopupWarning, 2, 0);
-            this.tblPopups.Location = new System.Drawing.Point(11, 40);
+            this.tblPopups.Location = new System.Drawing.Point(16, 60);
+            this.tblPopups.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tblPopups.Name = "tblPopups";
             this.tblPopups.RowCount = 1;
             this.tblPopups.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblPopups.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tblPopups.Size = new System.Drawing.Size(585, 25);
+            this.tblPopups.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.tblPopups.Size = new System.Drawing.Size(876, 38);
             this.tblPopups.TabIndex = 1;
             // 
             // chkPopupDebug
             // 
-            this.chkPopupDebug._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkPopupDebug._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkPopupDebug.AutoSize = true;
             this.chkPopupDebug.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPopupDebug.Location = new System.Drawing.Point(3, 3);
+            this.chkPopupDebug.Location = new System.Drawing.Point(4, 4);
+            this.chkPopupDebug.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkPopupDebug.Name = "chkPopupDebug";
-            this.chkPopupDebug.Size = new System.Drawing.Size(61, 17);
+            this.chkPopupDebug.Size = new System.Drawing.Size(87, 27);
             this.chkPopupDebug.TabIndex = 0;
             this.chkPopupDebug.Text = "Debug";
             this.chkPopupDebug.UseVisualStyleBackColor = true;
             // 
             // chkPopupError
             // 
-            this.chkPopupError._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkPopupError._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkPopupError.AutoSize = true;
             this.chkPopupError.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPopupError.Location = new System.Drawing.Point(441, 3);
+            this.chkPopupError.Location = new System.Drawing.Point(661, 4);
+            this.chkPopupError.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkPopupError.Name = "chkPopupError";
-            this.chkPopupError.Size = new System.Drawing.Size(51, 17);
+            this.chkPopupError.Size = new System.Drawing.Size(73, 27);
             this.chkPopupError.TabIndex = 3;
             this.chkPopupError.Text = "Error";
             this.chkPopupError.UseVisualStyleBackColor = true;
             // 
             // chkPopupInfo
             // 
-            this.chkPopupInfo._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkPopupInfo._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkPopupInfo.AutoSize = true;
             this.chkPopupInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPopupInfo.Location = new System.Drawing.Point(149, 3);
+            this.chkPopupInfo.Location = new System.Drawing.Point(223, 4);
+            this.chkPopupInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkPopupInfo.Name = "chkPopupInfo";
-            this.chkPopupInfo.Size = new System.Drawing.Size(87, 17);
+            this.chkPopupInfo.Size = new System.Drawing.Size(126, 27);
             this.chkPopupInfo.TabIndex = 1;
             this.chkPopupInfo.Text = "Information";
             this.chkPopupInfo.UseVisualStyleBackColor = true;
             // 
             // chkPopupWarning
             // 
-            this.chkPopupWarning._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkPopupWarning._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkPopupWarning.AutoSize = true;
             this.chkPopupWarning.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPopupWarning.Location = new System.Drawing.Point(295, 3);
+            this.chkPopupWarning.Location = new System.Drawing.Point(442, 4);
+            this.chkPopupWarning.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkPopupWarning.Name = "chkPopupWarning";
-            this.chkPopupWarning.Size = new System.Drawing.Size(71, 17);
+            this.chkPopupWarning.Size = new System.Drawing.Size(100, 27);
             this.chkPopupWarning.TabIndex = 2;
             this.chkPopupWarning.Text = "Warning";
             this.chkPopupWarning.UseVisualStyleBackColor = true;
@@ -426,22 +459,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // labelPopupShowTypes
             // 
             this.labelPopupShowTypes.AutoSize = true;
-            this.labelPopupShowTypes.Location = new System.Drawing.Point(8, 24);
+            this.labelPopupShowTypes.Location = new System.Drawing.Point(12, 36);
+            this.labelPopupShowTypes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPopupShowTypes.Name = "labelPopupShowTypes";
-            this.labelPopupShowTypes.Size = new System.Drawing.Size(147, 13);
+            this.labelPopupShowTypes.Size = new System.Drawing.Size(217, 23);
             this.labelPopupShowTypes.TabIndex = 0;
             this.labelPopupShowTypes.Text = "Show these message types:";
             // 
             // NotificationsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.groupBoxPopups);
             this.Controls.Add(this.groupBoxLogging);
             this.Controls.Add(this.groupBoxNotifications);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "NotificationsPage";
-            this.Size = new System.Drawing.Size(610, 490);
+            this.Size = new System.Drawing.Size(915, 735);
             this.groupBoxNotifications.ResumeLayout(false);
             this.groupBoxNotifications.PerformLayout();
             this.groupBoxLogging.ResumeLayout(false);

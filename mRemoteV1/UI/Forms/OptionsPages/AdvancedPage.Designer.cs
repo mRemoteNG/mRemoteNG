@@ -49,33 +49,36 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkAutomaticallyGetSessionInfo
             // 
-            this.chkAutomaticallyGetSessionInfo._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkAutomaticallyGetSessionInfo._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkAutomaticallyGetSessionInfo.AutoSize = true;
             this.chkAutomaticallyGetSessionInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAutomaticallyGetSessionInfo.Location = new System.Drawing.Point(3, 3);
+            this.chkAutomaticallyGetSessionInfo.Location = new System.Drawing.Point(4, 4);
+            this.chkAutomaticallyGetSessionInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkAutomaticallyGetSessionInfo.Name = "chkAutomaticallyGetSessionInfo";
-            this.chkAutomaticallyGetSessionInfo.Size = new System.Drawing.Size(220, 17);
+            this.chkAutomaticallyGetSessionInfo.Size = new System.Drawing.Size(323, 27);
             this.chkAutomaticallyGetSessionInfo.TabIndex = 0;
             this.chkAutomaticallyGetSessionInfo.Text = "Automatically get session information";
             this.chkAutomaticallyGetSessionInfo.UseVisualStyleBackColor = true;
             // 
             // lblMaximumPuttyWaitTime
             // 
-            this.lblMaximumPuttyWaitTime.Location = new System.Drawing.Point(3, 175);
+            this.lblMaximumPuttyWaitTime.Location = new System.Drawing.Point(4, 260);
+            this.lblMaximumPuttyWaitTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMaximumPuttyWaitTime.Name = "lblMaximumPuttyWaitTime";
-            this.lblMaximumPuttyWaitTime.Size = new System.Drawing.Size(364, 13);
+            this.lblMaximumPuttyWaitTime.Size = new System.Drawing.Size(546, 29);
             this.lblMaximumPuttyWaitTime.TabIndex = 7;
             this.lblMaximumPuttyWaitTime.Text = "Maximum PuTTY wait time:";
             this.lblMaximumPuttyWaitTime.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // chkAutomaticReconnect
             // 
-            this.chkAutomaticReconnect._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkAutomaticReconnect._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkAutomaticReconnect.AutoSize = true;
             this.chkAutomaticReconnect.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAutomaticReconnect.Location = new System.Drawing.Point(3, 26);
+            this.chkAutomaticReconnect.Location = new System.Drawing.Point(4, 39);
+            this.chkAutomaticReconnect.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkAutomaticReconnect.Name = "chkAutomaticReconnect";
-            this.chkAutomaticReconnect.Size = new System.Drawing.Size(430, 17);
+            this.chkAutomaticReconnect.Size = new System.Drawing.Size(645, 27);
             this.chkAutomaticReconnect.TabIndex = 1;
             this.chkAutomaticReconnect.Text = "Automatically try to reconnect when disconnected from server (RDP && ICA only)";
             this.chkAutomaticReconnect.UseVisualStyleBackColor = true;
@@ -83,14 +86,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // numPuttyWaitTime
             // 
             this.numPuttyWaitTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numPuttyWaitTime.Location = new System.Drawing.Point(373, 173);
+            this.numPuttyWaitTime.Location = new System.Drawing.Point(560, 260);
+            this.numPuttyWaitTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numPuttyWaitTime.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
             this.numPuttyWaitTime.Name = "numPuttyWaitTime";
-            this.numPuttyWaitTime.Size = new System.Drawing.Size(49, 22);
+            this.numPuttyWaitTime.Size = new System.Drawing.Size(74, 29);
             this.numPuttyWaitTime.TabIndex = 7;
             this.numPuttyWaitTime.Value = new decimal(new int[] {
             5,
@@ -100,12 +104,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseCustomPuttyPath
             // 
-            this.chkUseCustomPuttyPath._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkUseCustomPuttyPath._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkUseCustomPuttyPath.AutoSize = true;
             this.chkUseCustomPuttyPath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkUseCustomPuttyPath.Location = new System.Drawing.Point(3, 72);
+            this.chkUseCustomPuttyPath.Location = new System.Drawing.Point(4, 108);
+            this.chkUseCustomPuttyPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkUseCustomPuttyPath.Name = "chkUseCustomPuttyPath";
-            this.chkUseCustomPuttyPath.Size = new System.Drawing.Size(146, 17);
+            this.chkUseCustomPuttyPath.Size = new System.Drawing.Size(221, 27);
             this.chkUseCustomPuttyPath.TabIndex = 3;
             this.chkUseCustomPuttyPath.Text = "Use custom PuTTY path:";
             this.chkUseCustomPuttyPath.UseVisualStyleBackColor = true;
@@ -113,9 +118,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblConfigurePuttySessions
             // 
-            this.lblConfigurePuttySessions.Location = new System.Drawing.Point(3, 144);
+            this.lblConfigurePuttySessions.Location = new System.Drawing.Point(4, 207);
+            this.lblConfigurePuttySessions.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblConfigurePuttySessions.Name = "lblConfigurePuttySessions";
-            this.lblConfigurePuttySessions.Size = new System.Drawing.Size(364, 13);
+            this.lblConfigurePuttySessions.Size = new System.Drawing.Size(546, 38);
             this.lblConfigurePuttySessions.TabIndex = 5;
             this.lblConfigurePuttySessions.Text = "To configure PuTTY sessions click this button:";
             this.lblConfigurePuttySessions.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -123,14 +129,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // numUVNCSCPort
             // 
             this.numUVNCSCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.numUVNCSCPort.Location = new System.Drawing.Point(373, 218);
+            this.numUVNCSCPort.Location = new System.Drawing.Point(560, 327);
+            this.numUVNCSCPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.numUVNCSCPort.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.numUVNCSCPort.Name = "numUVNCSCPort";
-            this.numUVNCSCPort.Size = new System.Drawing.Size(72, 22);
+            this.numUVNCSCPort.Size = new System.Drawing.Size(108, 29);
             this.numUVNCSCPort.TabIndex = 8;
             this.numUVNCSCPort.Value = new decimal(new int[] {
             5500,
@@ -143,20 +150,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             this.txtCustomPuttyPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCustomPuttyPath.Enabled = false;
-            this.txtCustomPuttyPath.Location = new System.Drawing.Point(21, 95);
+            this.txtCustomPuttyPath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCustomPuttyPath.Location = new System.Drawing.Point(32, 142);
+            this.txtCustomPuttyPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCustomPuttyPath.Name = "txtCustomPuttyPath";
-            this.txtCustomPuttyPath.Size = new System.Drawing.Size(346, 22);
+            this.txtCustomPuttyPath.Size = new System.Drawing.Size(518, 29);
             this.txtCustomPuttyPath.TabIndex = 4;
             this.txtCustomPuttyPath.TextChanged += new System.EventHandler(this.txtCustomPuttyPath_TextChanged);
             // 
             // btnLaunchPutty
             // 
-            this.btnLaunchPutty._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnLaunchPutty._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnLaunchPutty.Image = global::mRemoteNG.Resources.PuttyConfig;
             this.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLaunchPutty.Location = new System.Drawing.Point(373, 138);
+            this.btnLaunchPutty.Location = new System.Drawing.Point(560, 207);
+            this.btnLaunchPutty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLaunchPutty.Name = "btnLaunchPutty";
-            this.btnLaunchPutty.Size = new System.Drawing.Size(110, 25);
+            this.btnLaunchPutty.Size = new System.Drawing.Size(165, 38);
             this.btnLaunchPutty.TabIndex = 6;
             this.btnLaunchPutty.Text = "Launch PuTTY";
             this.btnLaunchPutty.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -165,9 +175,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblUVNCSCPort
             // 
-            this.lblUVNCSCPort.Location = new System.Drawing.Point(3, 220);
+            this.lblUVNCSCPort.Location = new System.Drawing.Point(4, 327);
+            this.lblUVNCSCPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUVNCSCPort.Name = "lblUVNCSCPort";
-            this.lblUVNCSCPort.Size = new System.Drawing.Size(364, 13);
+            this.lblUVNCSCPort.Size = new System.Drawing.Size(546, 29);
             this.lblUVNCSCPort.TabIndex = 10;
             this.lblUVNCSCPort.Text = "UltraVNC SingleClick Listening Port:";
             this.lblUVNCSCPort.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -176,19 +187,21 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblSeconds
             // 
             this.lblSeconds.AutoSize = true;
-            this.lblSeconds.Location = new System.Drawing.Point(428, 175);
+            this.lblSeconds.Location = new System.Drawing.Point(642, 262);
+            this.lblSeconds.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSeconds.Name = "lblSeconds";
-            this.lblSeconds.Size = new System.Drawing.Size(49, 13);
+            this.lblSeconds.Size = new System.Drawing.Size(71, 23);
             this.lblSeconds.TabIndex = 9;
             this.lblSeconds.Text = "seconds";
             // 
             // btnBrowseCustomPuttyPath
             // 
-            this.btnBrowseCustomPuttyPath._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnBrowseCustomPuttyPath._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnBrowseCustomPuttyPath.Enabled = false;
-            this.btnBrowseCustomPuttyPath.Location = new System.Drawing.Point(373, 93);
+            this.btnBrowseCustomPuttyPath.Location = new System.Drawing.Point(560, 140);
+            this.btnBrowseCustomPuttyPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath";
-            this.btnBrowseCustomPuttyPath.Size = new System.Drawing.Size(75, 23);
+            this.btnBrowseCustomPuttyPath.Size = new System.Drawing.Size(112, 34);
             this.btnBrowseCustomPuttyPath.TabIndex = 5;
             this.btnBrowseCustomPuttyPath.Text = "Browse...";
             this.btnBrowseCustomPuttyPath.UseVisualStyleBackColor = true;
@@ -196,19 +209,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkLoadBalanceInfoUseUtf8
             // 
-            this.chkLoadBalanceInfoUseUtf8._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkLoadBalanceInfoUseUtf8._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkLoadBalanceInfoUseUtf8.AutoSize = true;
             this.chkLoadBalanceInfoUseUtf8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkLoadBalanceInfoUseUtf8.Location = new System.Drawing.Point(3, 49);
+            this.chkLoadBalanceInfoUseUtf8.Location = new System.Drawing.Point(4, 74);
+            this.chkLoadBalanceInfoUseUtf8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkLoadBalanceInfoUseUtf8.Name = "chkLoadBalanceInfoUseUtf8";
-            this.chkLoadBalanceInfoUseUtf8.Size = new System.Drawing.Size(317, 17);
+            this.chkLoadBalanceInfoUseUtf8.Size = new System.Drawing.Size(471, 27);
             this.chkLoadBalanceInfoUseUtf8.TabIndex = 2;
             this.chkLoadBalanceInfoUseUtf8.Text = "Use UTF8 encoding for RDP \"Load Balance Info\" property";
             this.chkLoadBalanceInfoUseUtf8.UseVisualStyleBackColor = true;
             // 
             // AdvancedPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.chkLoadBalanceInfoUseUtf8);
             this.Controls.Add(this.chkAutomaticallyGetSessionInfo);
@@ -223,9 +237,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.lblUVNCSCPort);
             this.Controls.Add(this.lblSeconds);
             this.Controls.Add(this.btnBrowseCustomPuttyPath);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "AdvancedPage";
-            this.Size = new System.Drawing.Size(610, 490);
+            this.Size = new System.Drawing.Size(915, 735);
             ((System.ComponentModel.ISupportInitialize)(this.numPuttyWaitTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUVNCSCPort)).EndInit();
             this.ResumeLayout(false);
