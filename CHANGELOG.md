@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 ### Changed
 ### Fixed
+- #1428: Fixed a rare error when checking for FIPS
 - #1426: Tabbing is reversed in config window
 - #1425: Connections didn't always respect the Panel property
 
@@ -40,6 +41,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - #1430: Revised options dialog to prevent components from overlapping in some translations (e.g. russian)
 - #1389: Connection config window refactoring. Default connection info buttons now always available.
+- #1384: Revised help files and switched to sphinx as a documentation system
 - #1223: Open External Links in Default Web Browser
 - #1129: Spanish translation improvements
 - #1072: Russian translation improvements
