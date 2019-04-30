@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Credential\Records\" />
+    <Folder Include="Resources\Help\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
@@ -1136,7 +1137,7 @@
     <None Include="Documentation\user_interface\quick_connect.rst" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
-    <None Include="Resources\Help\vmrdp.rst" />
+    <None Include="Documentation\howtos\vmrdp.rst" />
     <None Include="Resources\Templates\AppIcon.psd" />
     <None Include="Resources\Templates\Header_dark.psd" />
     <None Include="Resources\Templates\Header_light.psd" />
