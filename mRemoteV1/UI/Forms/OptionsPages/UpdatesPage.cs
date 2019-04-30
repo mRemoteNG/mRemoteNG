@@ -110,12 +110,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             chkUseProxyForAutomaticUpdates.Checked = Settings.Default.UpdateUseProxy;
-            pnlProxyBasic.Enabled = Settings.Default.UpdateUseProxy;
+            tblProxyBasic.Enabled = Settings.Default.UpdateUseProxy;
             txtProxyAddress.Text = Settings.Default.UpdateProxyAddress;
             numProxyPort.Value = Convert.ToDecimal(Settings.Default.UpdateProxyPort);
 
             chkUseProxyAuthentication.Checked = Settings.Default.UpdateProxyUseAuthentication;
-            pnlProxyAuthentication.Enabled = Settings.Default.UpdateProxyUseAuthentication;
+            tblProxyAuthentication.Enabled = Settings.Default.UpdateProxyUseAuthentication;
             txtProxyUsername.Text = Settings.Default.UpdateProxyAuthUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             txtProxyPassword.Text =
@@ -173,7 +173,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void chkUseProxyForAutomaticUpdates_CheckedChanged(object sender, EventArgs e)
         {
-            pnlProxyBasic.Enabled = chkUseProxyForAutomaticUpdates.Checked;
+            tblProxyBasic.Enabled = chkUseProxyForAutomaticUpdates.Checked;
             btnTestProxy.Enabled = chkUseProxyForAutomaticUpdates.Checked;
 
             if (chkUseProxyForAutomaticUpdates.Checked)
@@ -182,13 +182,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                 if (chkUseProxyAuthentication.Checked)
                 {
-                    pnlProxyAuthentication.Enabled = true;
+                    tblProxyAuthentication.Enabled = true;
                 }
             }
             else
             {
                 chkUseProxyAuthentication.Enabled = false;
-                pnlProxyAuthentication.Enabled = false;
+                tblProxyAuthentication.Enabled = false;
             }
         }
 
@@ -221,7 +221,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             if (chkUseProxyForAutomaticUpdates.Checked)
             {
-                pnlProxyAuthentication.Enabled = chkUseProxyAuthentication.Checked;
+                tblProxyAuthentication.Enabled = chkUseProxyAuthentication.Checked;
             }
         }
 
