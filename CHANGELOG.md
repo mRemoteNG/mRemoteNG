@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 ### Fixed
 - #1426: Tabbing is reversed in config window
+- #1425: Connections didn't always respect the Panel property
 
 
 ## [1.77.0] - 2019-04-29
