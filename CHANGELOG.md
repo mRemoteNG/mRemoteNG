@@ -39,7 +39,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #416: Added ability to Enable/Disable Clipboard Sharing for RDP connections
 - #321: Added support for displaying on HiDPI screens
 ### Changed
-- #1389: Connection config window refactoring. Default connection info buttons now always available.
+- #1389: Connection config window refactoring. Default connection info buttons now always available
+- #1384: Revised help files and switched to sphinx as a documentation system
 - #1223: Open External Links in Default Web Browser
 - #1129: Spanish translation improvements
 - #1072: Russian translation improvements
