@@ -46,7 +46,6 @@
         <xs:attribute name="Protocol" type="xs:string" use="required" />
         <xs:attribute name="VmId" type="xs:string" use="required" />
         <xs:attribute name="UseVmId" type="xs:boolean" use="required" />
-        <xs:attribute name="UseCredSsp" type="xs:boolean" use="required" />
         <xs:attribute name="PuttySession" type="xs:string" use="required" />
         <xs:attribute name="Port" type="xs:int" use="required" />
         <xs:attribute name="ConnectToConsole" type="xs:boolean" use="required" />
@@ -125,7 +124,6 @@
         <xs:attribute name="InheritResolution" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritAutomaticResize" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUseConsoleSession" type="xs:boolean" use="optional" />
-        <xs:attribute name="InheritUseCredSsp" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritRenderingEngine" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUsername" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritICAEncryptionStrength" type="xs:boolean" use="optional" />
@@ -137,6 +135,7 @@
         <xs:attribute name="InheritPostExtApp" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritMacAddress" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUseCredSsp" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritVmId" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUseVmId" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUserField" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritExtApp" type="xs:boolean" use="optional" />

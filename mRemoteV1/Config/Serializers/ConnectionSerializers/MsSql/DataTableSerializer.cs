@@ -191,7 +191,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("InheritSoundQuality", typeof(bool));
             dataTable.Columns.Add("VmId", typeof(string));
             dataTable.Columns.Add("UseVmId", typeof(bool));
-            dataTable.Columns.Add("InheritVmId", typeof(string));
+            dataTable.Columns.Add("InheritVmId", typeof(bool));
             dataTable.Columns.Add("InheritUseVmId", typeof(bool));
         }
 

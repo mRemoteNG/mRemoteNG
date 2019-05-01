@@ -228,6 +228,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             node.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
             node.VNCAuthMode = ProtocolVNC.AuthMode.AuthVNC;
             node.VNCProxyType = ProtocolVNC.ProxyType.ProxyNone;
+            node.UseVmId = false;
             node.Inheritance.TurnOffInheritanceCompletely();
 
             return node;
@@ -266,6 +267,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
+                        nameof(ConnectionInfo.UseVmId),
                         nameof(ConnectionInfo.UseConsoleSession),
                         nameof(ConnectionInfo.RDPAuthenticationLevel),
                         nameof(ConnectionInfo.RDPMinutesToIdleTimeout),
