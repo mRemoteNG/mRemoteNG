@@ -96,8 +96,6 @@ namespace mRemoteNG.Config.Serializers.Csv
             connectionRecord.Domain = headers.Contains("Domain") ? connectionCsv[headers.IndexOf("Domain")] : "";
             connectionRecord.Hostname = headers.Contains("Hostname") ? connectionCsv[headers.IndexOf("Hostname")] : "";
             connectionRecord.VmId = headers.Contains("VmId") ? connectionCsv[headers.IndexOf("VmId")] : "";
-            connectionRecord.VmId = headers.Contains("UseVmId") ? connectionCsv[headers.IndexOf("UseVmId")] : "";
-            connectionRecord.VmId = headers.Contains("UseCredSsp") ? connectionCsv[headers.IndexOf("UseCredSsp")] : "";
             connectionRecord.PuttySession = headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
             connectionRecord.LoadBalanceInfo = headers.Contains("LoadBalanceInfo")
                 ? connectionCsv[headers.IndexOf("LoadBalanceInfo")]
