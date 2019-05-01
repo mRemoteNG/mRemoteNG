@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -12,7 +12,7 @@ namespace mRemoteNG.App.Info
     public static class GeneralAppInfo
     {
         public const string UrlHome = "https://www.mremoteng.org/";
-        public const string UrlDonate = "https://mremoteng.org/contribute/";
+        public const string UrlDonate = "https://mremoteng.org/contribute";
         public const string UrlForum = "https://www.reddit.com/r/mRemoteNG/";
         public const string UrlBugs = "https://bugs.mremoteng.org/";
         public static string ApplicationVersion = Application.ProductVersion;

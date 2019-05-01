@@ -61,8 +61,9 @@
             this.pnlDock.DockRightPortion = 230D;
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
+            this.pnlDock.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlDock.Name = "pnlDock";
-            this.pnlDock.Size = new System.Drawing.Size(1129, 471);
+            this.pnlDock.Size = new System.Drawing.Size(1694, 765);
             this.pnlDock.TabIndex = 13;
             this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
             // 
@@ -72,15 +73,16 @@
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(2);
             this.msMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.viewMenu,
             this.toolsMenu,
             this.helpMenu});
-            this.msMain.Location = new System.Drawing.Point(3, 50);
+            this.msMain.Location = new System.Drawing.Point(3, 31);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.msMain.Size = new System.Drawing.Size(184, 25);
+            this.msMain.Size = new System.Drawing.Size(429, 35);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
@@ -90,7 +92,7 @@
             this.fileMenu.ConnectionInitiator = null;
             this.fileMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.fileMenu.Name = "mMenFile";
-            this.fileMenu.Size = new System.Drawing.Size(37, 19);
+            this.fileMenu.Size = new System.Drawing.Size(50, 29);
             this.fileMenu.Text = "&File";
             this.fileMenu.TreeWindow = null;
             this.fileMenu.DropDownOpening += new System.EventHandler(this.mainFileMenu1_DropDownOpening);
@@ -101,7 +103,7 @@
             this.viewMenu.MainForm = null;
             this.viewMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.viewMenu.Name = "mMenView";
-            this.viewMenu.Size = new System.Drawing.Size(44, 19);
+            this.viewMenu.Size = new System.Drawing.Size(61, 29);
             this.viewMenu.Text = "&View";
             this.viewMenu.TsExternalTools = null;
             this.viewMenu.TsMultiSsh = null;
@@ -114,14 +116,14 @@
             this.toolsMenu.MainForm = null;
             this.toolsMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.toolsMenu.Name = "mMenTools";
-            this.toolsMenu.Size = new System.Drawing.Size(47, 19);
+            this.toolsMenu.Size = new System.Drawing.Size(65, 29);
             this.toolsMenu.Text = "&Tools";
             // 
             // helpMenu
             // 
             this.helpMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.helpMenu.Name = "mMenInfo";
-            this.helpMenu.Size = new System.Drawing.Size(44, 19);
+            this.helpMenu.Size = new System.Drawing.Size(61, 29);
             this.helpMenu.Text = "&Help";
             this.helpMenu.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
@@ -136,11 +138,13 @@
             // tsContainer.ContentPanel
             // 
             this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1129, 471);
+            this.tsContainer.ContentPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1694, 765);
             this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsContainer.Location = new System.Drawing.Point(0, 0);
+            this.tsContainer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tsContainer.Name = "tsContainer";
-            this.tsContainer.Size = new System.Drawing.Size(1129, 571);
+            this.tsContainer.Size = new System.Drawing.Size(1694, 856);
             this.tsContainer.TabIndex = 17;
             this.tsContainer.Text = "ToolStripContainer1";
             // 
@@ -158,18 +162,20 @@
             this._quickConnectToolStrip.ConnectionInitiator = connectionInitiator1;
             this._quickConnectToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._quickConnectToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._quickConnectToolStrip.Location = new System.Drawing.Point(3, 0);
+            this._quickConnectToolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this._quickConnectToolStrip.Location = new System.Drawing.Point(432, 31);
             this._quickConnectToolStrip.Name = "_quickConnectToolStrip";
-            this._quickConnectToolStrip.Size = new System.Drawing.Size(364, 25);
+            this._quickConnectToolStrip.Size = new System.Drawing.Size(533, 33);
             this._quickConnectToolStrip.TabIndex = 18;
             // 
             // _multiSshToolStrip
             // 
             this._multiSshToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this._multiSshToolStrip.Location = new System.Drawing.Point(3, 25);
+            this._multiSshToolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this._multiSshToolStrip.Location = new System.Drawing.Point(3, 0);
             this._multiSshToolStrip.MinimumSize = new System.Drawing.Size(300, 0);
             this._multiSshToolStrip.Name = "_multiSshToolStrip";
-            this._multiSshToolStrip.Size = new System.Drawing.Size(376, 25);
+            this._multiSshToolStrip.Size = new System.Drawing.Size(558, 31);
             this._multiSshToolStrip.TabIndex = 1;
             // 
             // _externalToolsToolStrip
@@ -177,7 +183,8 @@
             this._externalToolsToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this._externalToolsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._externalToolsToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._externalToolsToolStrip.Location = new System.Drawing.Point(3, 75);
+            this._externalToolsToolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this._externalToolsToolStrip.Location = new System.Drawing.Point(3, 66);
             this._externalToolsToolStrip.Name = "_externalToolsToolStrip";
             this._externalToolsToolStrip.Size = new System.Drawing.Size(111, 25);
             this._externalToolsToolStrip.TabIndex = 17;
@@ -193,14 +200,15 @@
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1129, 571);
+            this.ClientSize = new System.Drawing.Size(1694, 856);
             this.Controls.Add(this.tsContainer);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMain;
-            this.MinimumSize = new System.Drawing.Size(400, 400);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(589, 572);
             this.Name = "FrmMain";
             this.Opacity = 0D;
             this.Text = " ";

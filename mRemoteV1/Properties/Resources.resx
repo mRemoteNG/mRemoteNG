@@ -202,9 +202,6 @@
   <data name="Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Donate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\FamFamFam\Donate.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Info" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Info.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -256,17 +253,11 @@
   <data name="WarningSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\WarningSmall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Website" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\FamFamFam\Website.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Arrow_Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Arrow_Down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Arrow_Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Arrow_Up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Bug" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\FamFamFam\Bug.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Connection_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Connection_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -294,9 +285,6 @@
   </data>
   <data name="Folder_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Folder_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\FamFamFam\Help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Page" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Page.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -333,9 +321,6 @@
   </data>
   <data name="Tools" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Tools.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Update" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\FamFamFam\Update.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Console" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Console.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -384,9 +369,6 @@
   </data>
   <data name="cog_error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\cog_error.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="user_comment" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\FamFamFam\user_comment.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="monitor_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\monitor_delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -567,5 +549,23 @@
   </data>
   <data name="star" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bug" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Bug.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Donate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Donate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Update" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Update.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_comment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\user_comment.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Website" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Website.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

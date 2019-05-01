@@ -1252,6 +1252,9 @@
     <None Include="Resources\Images\tab_edit.png" />
     <None Include="Resources\Images\tab_delete.png" />
     <None Include="Resources\Images\star.png" />
+    <None Include="Resources\Images\Bug.png" />
+    <None Include="Resources\Images\Donate.png" />
+    <None Include="Resources\Images\user_comment.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
