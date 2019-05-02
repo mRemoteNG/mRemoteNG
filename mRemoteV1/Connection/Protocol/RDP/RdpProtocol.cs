@@ -151,7 +151,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 _rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
                 _rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
                 _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
-                
+
                 _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
 
                 _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(_connectionInfo.CacheBitmaps);
@@ -163,10 +163,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     if (_connectionInfo.UseVmId)
                     {
                         SetExtendedProperty("DisableCredentialsDelegation", true);
+                        _rdpClient.AdvancedSettings7.AuthenticationServiceClass = "Microsoft Virtual Console Service";
+                        _rdpClient.AdvancedSettings8.EnableCredSspSupport = true;
                         _rdpClient.AdvancedSettings8.NegotiateSecurityLayer = false;
-                        _rdpClient.AdvancedSettings8.AuthenticationServiceClass = "Microsoft Virtual Console Service";
-                        _rdpClient.AdvancedSettings7.PCB = _connectionInfo.UseVmId ? $"{_connectionInfo.VmId};EnhancedMode=1" : _connectionInfo.VmId;
-
+                        _rdpClient.AdvancedSettings7.PCB = _connectionInfo.VmId;
                     }
                 }
 
