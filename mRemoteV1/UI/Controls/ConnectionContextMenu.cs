@@ -501,6 +501,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
             _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
+            _cMenTreeApplyInheritanceToChildren.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForRootConnectionNode()
@@ -518,6 +519,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
             _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
+            _cMenTreeApplyInheritanceToChildren.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForContainer(ContainerInfo containerInfo)
@@ -554,6 +556,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeImport.Enabled = false;
             _cMenTreeExportFile.Enabled = false;
             _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
+            _cMenTreeApplyInheritanceToChildren.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForConnectionNode(ConnectionInfo connectionInfo)
@@ -575,6 +578,8 @@ namespace mRemoteNG.UI.Controls
 
             if (connectionInfo.Protocol != ProtocolType.RDP && connectionInfo.Protocol != ProtocolType.VNC)
                 _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
+
+            _cMenTreeApplyInheritanceToChildren.Enabled = false;
         }
 
         internal void DisableShortcutKeys()
