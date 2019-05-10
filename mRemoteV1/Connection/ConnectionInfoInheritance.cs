@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Connection
 {
@@ -398,7 +399,7 @@ namespace mRemoteNG.Connection
         /// settings for individual properties.
         /// </summary>
         [Browsable(false)]
-        public bool InheritanceActive { get; set; } = true;
+        public bool InheritanceActive => !(Parent is RootNodeInfo || Parent.Parent is RootNodeInfo);
 
         #endregion
 
@@ -416,16 +417,6 @@ namespace mRemoteNG.Connection
             var newInheritance = (ConnectionInfoInheritance)MemberwiseClone();
             newInheritance.Parent = parent;
             return newInheritance;
-        }
-
-        public void EnableInheritance()
-        {
-            InheritanceActive = true;
-        }
-
-        public void DisableInheritance()
-        {
-            InheritanceActive = false;
         }
 
         public void TurnOnInheritanceCompletely()

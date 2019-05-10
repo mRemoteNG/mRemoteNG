@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -67,17 +67,5 @@ namespace mRemoteNG.Tree.Root
         }
 
         #endregion
-
-        public override void AddChildAt(ConnectionInfo newChildItem, int index)
-        {
-            newChildItem.Inheritance.DisableInheritance();
-            base.AddChildAt(newChildItem, index);
-        }
-
-        public override void RemoveChild(ConnectionInfo removalTarget)
-        {
-            removalTarget.Inheritance.EnableInheritance();
-            base.RemoveChild(removalTarget);
-        }
     }
 }

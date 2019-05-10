@@ -207,10 +207,8 @@ namespace mRemoteNG.UI.Window
         public bool CanShowProperties => SelectedTreeNode != null;
 
         public bool InheritanceVisible => _btnShowInheritance.Checked;
-        public bool CanShowInheritance => !_pGrid.RootNodeSelected &&
-                                          SelectedTreeNode != null &&
-                                          _pGrid.SelectedConnectionInfo?.Parent != null &&
-                                          !(_pGrid.SelectedConnectionInfo.Parent is RootNodeInfo);
+        public bool CanShowInheritance => SelectedTreeNode != null &&
+                                          _pGrid.SelectedConnectionInfo?.Parent != null;
 
         public bool DefaultPropertiesVisible => _btnShowDefaultProperties.Checked;
         public bool CanShowDefaultProperties => true;
