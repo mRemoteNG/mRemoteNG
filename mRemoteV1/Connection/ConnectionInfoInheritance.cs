@@ -399,7 +399,7 @@ namespace mRemoteNG.Connection
         /// settings for individual properties.
         /// </summary>
         [Browsable(false)]
-        public bool InheritanceActive => !(Parent is RootNodeInfo || Parent.Parent is RootNodeInfo);
+        public bool InheritanceActive => !(Parent is RootNodeInfo || Parent?.Parent is RootNodeInfo);
 
         #endregion
 
