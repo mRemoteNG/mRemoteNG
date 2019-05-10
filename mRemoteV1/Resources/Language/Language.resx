@@ -2793,4 +2793,10 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Environment" xml:space="preserve">
     <value>Environment</value>
   </data>
+  <data name="ApplyDefaultInheritance" xml:space="preserve">
+    <value>Apply default inheritance</value>
+  </data>
+  <data name="ApplyInheritanceToChildren" xml:space="preserve">
+    <value>Apply inheritance to children</value>
+  </data>
 </root>

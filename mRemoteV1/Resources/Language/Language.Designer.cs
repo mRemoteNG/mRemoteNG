@@ -61,6 +61,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply default inheritance.
+        /// </summary>
+        internal static string ApplyDefaultInheritance {
+            get {
+                return ResourceManager.GetString("ApplyDefaultInheritance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply inheritance to children.
+        /// </summary>
+        internal static string ApplyInheritanceToChildren {
+            get {
+                return ResourceManager.GetString("ApplyInheritanceToChildren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to reconnect to RDP host &apos;{0}&apos;.
         /// </summary>
         internal static string AutomaticReconnectError {
