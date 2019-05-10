@@ -1,4 +1,4 @@
-/* Source modified from here:
+﻿/* Source modified from here:
  * http://www.codeproject.com/Articles/11576/IP-TextBox
  * Original Author: mawnkay
  */
@@ -70,6 +70,19 @@ namespace mRemoteNG.UI.Controls
         {
             // This call is required by the Windows.Forms Form Designer.
             InitializeComponent();
+            SetTabSTopProperties();
+        }
+
+        private void SetTabSTopProperties()
+        {
+            Octet1.TabIndex = 0;
+            Octet2.TabIndex = 1;
+            Octet3.TabIndex = 2;
+            Octet4.TabIndex = 3;
+            Octet1.TabStop = true;
+            Octet2.TabStop = true;
+            Octet3.TabStop = true;
+            Octet4.TabStop = true;
         }
 
         protected override void OnLoad(EventArgs e)
