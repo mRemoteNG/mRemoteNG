@@ -6,6 +6,7 @@ namespace mRemoteNG.UI.Controls.Base
 {
     public class NGSearchBox : NGTextBox
     {
+        private bool _showDefaultText;
         private PictureBox pbClear = new PictureBox();
         private ToolTip btClearToolTip = new ToolTip();
 
@@ -36,7 +37,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         private void FocusLost(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Text))
+            if (_showDefaultText)
             {
                 Text = Language.strSearchPrompt;
                 pbClear.Visible = false;
@@ -59,7 +60,8 @@ namespace mRemoteNG.UI.Controls.Base
 
         private void NGSearchBox_TextChanged(object sender, EventArgs e)
         {
-            pbClear.Visible = Text == Language.strSearchPrompt ? false : TextLength > 0;
+            _showDefaultText = string.IsNullOrEmpty(Text);
+            pbClear.Visible = !_showDefaultText && TextLength > 0;
         }
     }
 }
