@@ -6,9 +6,12 @@ namespace mRemoteNG.UI.Controls.Base
 {
     public class NGSearchBox : NGTextBox
     {
-        private bool _showDefaultText;
+        private bool _showDefaultText = true;
+        private bool _settingDefaultText = true;
         private PictureBox pbClear = new PictureBox();
         private ToolTip btClearToolTip = new ToolTip();
+
+        //public override string Text { get; set; }
 
         public NGSearchBox()
         {
@@ -39,12 +42,17 @@ namespace mRemoteNG.UI.Controls.Base
         {
             if (_showDefaultText)
             {
+                _settingDefaultText = true;
                 Text = Language.strSearchPrompt;
                 pbClear.Visible = false;
             }
         }
 
-        private void FocusGot(object sender, EventArgs e) => Text = "";
+        private void FocusGot(object sender, EventArgs e)
+        {
+            if (_showDefaultText)
+                Text = "";
+        }
 
         private void InitializeComponent()
         {
@@ -60,8 +68,13 @@ namespace mRemoteNG.UI.Controls.Base
 
         private void NGSearchBox_TextChanged(object sender, EventArgs e)
         {
-            _showDefaultText = string.IsNullOrEmpty(Text);
+            if (!_settingDefaultText)
+            {
+                _showDefaultText = string.IsNullOrEmpty(Text);
+            }
+
             pbClear.Visible = !_showDefaultText && TextLength > 0;
+            _settingDefaultText = false;
         }
     }
 }
