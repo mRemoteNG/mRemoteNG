@@ -5,6 +5,7 @@ using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Tabs;
@@ -21,35 +22,6 @@ namespace mRemoteNG.Connection
 
         public IEnumerable<string> ActiveConnections => _activeConnections;
 
-        public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
-        {
-            OpenConnection(containerInfo, force, null);
-        }
-
-        public void OpenConnection(ConnectionInfo connectionInfo)
-        {
-            try
-            {
-                OpenConnection(connectionInfo, ConnectionInfo.Force.None);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
-            }
-        }
-
-        public void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
-        {
-            try
-            {
-                OpenConnection(connectionInfo, force, null);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
-            }
-        }
-
         public bool SwitchToOpenConnection(ConnectionInfo connectionInfo)
         {
             var interfaceControl = FindConnectionContainer(connectionInfo);
@@ -61,13 +33,15 @@ namespace mRemoteNG.Connection
             return true;
         }
 
-        #region Private
-
-        private void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, ConnectionWindow conForm)
+        public void OpenConnection(
+            ContainerInfo containerInfo,
+            ConnectionInfo.Force force = ConnectionInfo.Force.None,
+            ConnectionWindow conForm = null)
         {
-            var children = containerInfo.Children;
-            if (children.Count == 0) return;
-            foreach (var child in children)
+            if (containerInfo == null || containerInfo.Children.Count == 0)
+                return;
+
+            foreach (var child in containerInfo.Children)
             {
                 if (child is ContainerInfo childAsContainer)
                     OpenConnection(childAsContainer, force, conForm);
@@ -76,8 +50,14 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, ConnectionWindow conForm)
+        public void OpenConnection(
+            ConnectionInfo connectionInfo,
+            ConnectionInfo.Force force = ConnectionInfo.Force.None,
+            ConnectionWindow conForm = null)
         {
+            if (connectionInfo == null)
+                return;
+
             try
             {
                 if (connectionInfo.Hostname == "" && connectionInfo.Protocol != ProtocolType.IntApp)
@@ -130,6 +110,7 @@ namespace mRemoteNG.Connection
             }
         }
 
+        #region Private
         private static void StartPreConnectionExternalApp(ConnectionInfo connectionInfo)
         {
             if (connectionInfo.PreExtApp == "") return;
