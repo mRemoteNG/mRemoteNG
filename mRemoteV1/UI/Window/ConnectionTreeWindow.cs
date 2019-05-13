@@ -338,8 +338,8 @@ namespace mRemoteNG.UI.Window
             try
             {
                 if (!char.IsLetterOrDigit(e.KeyChar)) return;
-                txtSearch.Text = e.KeyChar.ToString();
                 txtSearch.Focus();
+                txtSearch.Text = e.KeyChar.ToString();
                 txtSearch.SelectionStart = txtSearch.TextLength;
             }
             catch (Exception ex)
