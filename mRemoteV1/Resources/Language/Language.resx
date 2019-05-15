@@ -2799,4 +2799,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="ApplyInheritanceToChildren" xml:space="preserve">
     <value>Apply inheritance to children</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+      <value>Edit</value>
+  </data>
 </root>
