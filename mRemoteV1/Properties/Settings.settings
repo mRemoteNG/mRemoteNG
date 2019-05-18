@@ -148,8 +148,8 @@
     </Setting>
     <Setting Name="ConDefaultRedirectSound" Type="System.String" Scope="User">
       <Value Profile="(Default)">DoNotPlay</Value>
-    </Setting>    
-      <Setting Name="ConDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
+    </Setting>
+    <Setting Name="ConDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MaxPuttyWaitTime" Type="System.Int32" Scope="User">
@@ -256,8 +256,8 @@
     </Setting>
     <Setting Name="InhDefaultRedirectSound" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>   
-      <Setting Name="InhDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
+    </Setting>
+    <Setting Name="InhDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultResolution" Type="System.Boolean" Scope="User">
@@ -570,7 +570,7 @@
       <Value Profile="(Default)">GCM</Value>
     </Setting>
     <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1000</Value>
+      <Value Profile="(Default)">10000</Value>
     </Setting>
     <Setting Name="ConDefaultSoundQuality" Type="System.String" Scope="User">
       <Value Profile="(Default)">Dynamic</Value>
