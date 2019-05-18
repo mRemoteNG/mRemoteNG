@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - #1443: Chinese (simplified) translation improvements
 - #1437: Norwegian translation improvements
+- #1239: Increased default key derivation function (KDF) iterations from 1000 to 10000
 ### Fixed
 - #1447: Exception occurs when resetting layout
 - #1439: Searching in hosts tree loses first keystroke
