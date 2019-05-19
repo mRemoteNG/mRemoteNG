@@ -11,7 +11,7 @@ namespace mRemoteNGTests.Connection
 	    [TestCaseSource(nameof(GetInheritanceProperties))]
 		public void LoadingDefaultInheritanceUpdatesAllProperties(PropertyInfo property)
         {
-			var inheritanceSource = new ConnectionInfoInheritance(new object(), true);
+			var inheritanceSource = new ConnectionInfoInheritance(new ConnectionInfo(), true);
             inheritanceSource.TurnOnInheritanceCompletely();
 	        DefaultConnectionInheritance.Instance.TurnOffInheritanceCompletely();
 
@@ -25,7 +25,7 @@ namespace mRemoteNGTests.Connection
 		[TestCaseSource(nameof(GetInheritanceProperties))]
 		public void SavingDefaultInheritanceExportsAllProperties(PropertyInfo property)
         {
-			var saveTarget = new ConnectionInfoInheritance(new object(), true);
+			var saveTarget = new ConnectionInfoInheritance(new ConnectionInfo(), true);
 	        saveTarget.TurnOffInheritanceCompletely();
 	        DefaultConnectionInheritance.Instance.TurnOnInheritanceCompletely();
 
@@ -40,7 +40,7 @@ namespace mRemoteNGTests.Connection
         public void NewInheritanceInstancesCreatedWithDefaultInheritanceValues()
         {
             DefaultConnectionInheritance.Instance.Description = true;
-            var inheritanceInstance = new ConnectionInfoInheritance(new object());
+            var inheritanceInstance = new ConnectionInfoInheritance(new ConnectionInfo());
             Assert.That(inheritanceInstance.Description, Is.True);
         }
 
@@ -48,7 +48,7 @@ namespace mRemoteNGTests.Connection
 		public void NewInheritanceInstancesCreatedWithAllDefaultInheritanceValues(PropertyInfo property)
         {
             DefaultConnectionInheritance.Instance.TurnOnInheritanceCompletely();
-            var inheritanceInstance = new ConnectionInfoInheritance(new object());
+            var inheritanceInstance = new ConnectionInfoInheritance(new ConnectionInfo());
 
 			var valueInDestination = property.GetValue(inheritanceInstance);
 	        var valueInSource = property.GetValue(DefaultConnectionInheritance.Instance);
@@ -57,7 +57,7 @@ namespace mRemoteNGTests.Connection
 
 	    private static IEnumerable<PropertyInfo> GetInheritanceProperties()
 	    {
-		    return new ConnectionInfoInheritance(new object(), true).GetProperties();
+		    return new ConnectionInfoInheritance(new ConnectionInfo(), true).GetProperties();
 	    }
 	}
 }

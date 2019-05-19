@@ -104,7 +104,9 @@ namespace mRemoteNG.Config.Serializers.Csv
                 .Append("RDGatewayUseConnectionCredentials;")
                 .Append("RDGatewayUsername;")
                 .Append("RDGatewayPassword;")
-                .Append("RDGatewayDomain;");
+                .Append("RDGatewayDomain;")
+                .Append("SoundQuality;")
+                .Append("RedirectAudioCapture;");
 
             if (!_saveFilter.SaveInheritance)
                 return;
@@ -166,6 +168,7 @@ namespace mRemoteNG.Config.Serializers.Csv
                 .Append("InheritRDPAlertIdleTimeout;")
                 .Append("InheritRDPMinutesToIdleTimeout;")
                 .Append("InheritSoundQuality;")
+				.Append("InheritRedirectAudioCapture;")
                 .Append("InheritCredentialRecord");
         }
 
@@ -246,7 +249,9 @@ namespace mRemoteNG.Config.Serializers.Csv
                 .Append(FormatForCsv(con.RDGatewayUseConnectionCredentials))
                 .Append(FormatForCsv(con.RDGatewayUsername))
                 .Append(FormatForCsv(con.RDGatewayPassword))
-                .Append(FormatForCsv(con.RDGatewayDomain));
+                .Append(FormatForCsv(con.RDGatewayDomain))
+                .Append(FormatForCsv(con.SoundQuality))
+                .Append(FormatForCsv(con.RedirectAudioCapture));
 
 
             if (!_saveFilter.SaveInheritance)
@@ -309,6 +314,7 @@ namespace mRemoteNG.Config.Serializers.Csv
                 .Append(FormatForCsv(con.Inheritance.RDPAlertIdleTimeout))
                 .Append(FormatForCsv(con.Inheritance.RDPMinutesToIdleTimeout))
                 .Append(FormatForCsv(con.Inheritance.SoundQuality))
+                .Append(FormatForCsv(con.Inheritance.RedirectAudioCapture))
                 .Append(FormatForCsv(con.Inheritance.CredentialId));
         }
 

@@ -18,7 +18,7 @@ namespace mRemoteNG.Config.Serializers
 
             foreach (var line in rdcFileContent.Split(Environment.NewLine.ToCharArray()))
             {
-                var parts = line.Split(new[] {':'}, 3);
+                var parts = line.Split(new[] { ':' }, 3);
                 if (parts.Length < 3)
                 {
                     continue;
@@ -90,7 +90,6 @@ namespace mRemoteNG.Config.Serializers
                             connectionInfo.Colors = RdpProtocol.RDPColors.Colors32Bit;
                             break;
                     }
-
                     break;
                 case "bitmapcachepersistenable":
                     connectionInfo.CacheBitmaps = value == "1";
@@ -143,10 +142,29 @@ namespace mRemoteNG.Config.Serializers
                             connectionInfo.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
                             break;
                     }
-
+                    break;
+                case "redirectaudiocapture":
+                    connectionInfo.RedirectAudioCapture = value == "1";
                     break;
                 case "loadbalanceinfo":
                     connectionInfo.LoadBalanceInfo = value;
+                    break;
+                case "gatewayusagemethod":
+                    switch (value)
+                    {
+                        case "0":
+                            connectionInfo.RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Never;
+                            break;
+                        case "1":
+                            connectionInfo.RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Always;
+                            break;
+                        case "2":
+                            connectionInfo.RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Detect;
+                            break;
+                    }
+                    break;
+                case "gatewayhostname":
+                    connectionInfo.RDGatewayHostname = value;
                     break;
             }
         }

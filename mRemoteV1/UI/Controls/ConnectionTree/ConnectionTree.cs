@@ -9,6 +9,7 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Themes;
 using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -21,6 +22,7 @@ namespace mRemoteNG.UI.Controls
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
         private readonly StatusImageList _statusImageList = new StatusImageList();
+        private ThemeManager _themeManager;
 
         private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter =
             new ConnectionTreeSearchTextFilter();
@@ -63,6 +65,29 @@ namespace mRemoteNG.UI.Controls
             InitializeComponent();
             SetupConnectionTreeView();
             UseOverlays = false;
+            _themeManager = ThemeManager.getInstance();
+            _themeManager.ThemeChanged += ThemeManagerOnThemeChanged;
+            ApplyTheme();
+        }
+
+        private void ThemeManagerOnThemeChanged()
+        {
+            ApplyTheme();
+        }
+
+        private void ApplyTheme()
+        {
+            if (!_themeManager.ActiveAndExtended)
+                return;
+
+            var themePalette = _themeManager.ActiveTheme.ExtendedPalette;
+
+            BackColor = themePalette.getColor("TreeView_Background");
+            ForeColor = themePalette.getColor("TreeView_Foreground");
+            SelectedBackColor = themePalette.getColor("Treeview_SelectedItem_Active_Background");
+            SelectedForeColor = themePalette.getColor("Treeview_SelectedItem_Active_Foreground");
+            UnfocusedSelectedBackColor = themePalette.getColor("Treeview_SelectedItem_Inactive_Background");
+            UnfocusedSelectedForeColor = themePalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
         }
 
         protected override void Dispose(bool disposing)
@@ -71,11 +96,12 @@ namespace mRemoteNG.UI.Controls
             {
                 components?.Dispose();
                 _statusImageList?.Dispose();
+
+                _themeManager.ThemeChanged -= ThemeManagerOnThemeChanged;
             }
 
             base.Dispose(disposing);
         }
-
 
         #region ConnectionTree Setup
 

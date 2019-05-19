@@ -27,6 +27,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeConnectWithOptionsConnectToConsoleSession;
         private ToolStripMenuItem _cMenTreeConnectWithOptionsNoCredentials;
         private ToolStripMenuItem _cMenTreeConnectWithOptionsConnectInFullscreen;
+        private ToolStripMenuItem _cMenTreeConnectWithOptionsViewOnly;
         private ToolStripMenuItem _cMenTreeDisconnect;
         private ToolStripSeparator _cMenTreeSep2;
         private ToolStripMenuItem _cMenTreeToolsTransferFile;
@@ -83,6 +84,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsConnectInFullscreen = new ToolStripMenuItem();
             _cMenTreeConnectWithOptionsNoCredentials = new ToolStripMenuItem();
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting = new ToolStripMenuItem();
+            _cMenTreeConnectWithOptionsViewOnly = new ToolStripMenuItem();
             _cMenTreeDisconnect = new ToolStripMenuItem();
             _cMenTreeSep1 = new ToolStripSeparator();
             _cMenTreeToolsExternalApps = new ToolStripMenuItem();
@@ -158,7 +160,8 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeConnectWithOptionsDontConnectToConsoleSession,
                 _cMenTreeConnectWithOptionsConnectInFullscreen,
                 _cMenTreeConnectWithOptionsNoCredentials,
-                _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting
+                _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting,
+                _cMenTreeConnectWithOptionsViewOnly
             });
             _cMenTreeConnectWithOptions.Name = "_cMenTreeConnectWithOptions";
             _cMenTreeConnectWithOptions.Size = new System.Drawing.Size(199, 22);
@@ -207,6 +210,15 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = "Choose panel before connecting";
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Click += OnChoosePanelBeforeConnectingClicked;
+            // 
+            // cMenTreeConnectWithOptionsViewOnly
+            // 
+            _cMenTreeConnectWithOptionsViewOnly.Image = Resources.View;
+            _cMenTreeConnectWithOptionsViewOnly.Name =
+                "_cMenTreeConnectWithOptionsViewOnly";
+            _cMenTreeConnectWithOptionsViewOnly.Size = new System.Drawing.Size(245, 22);
+            _cMenTreeConnectWithOptionsViewOnly.Text = Language.ConnectInViewOnlyMode;
+            _cMenTreeConnectWithOptionsViewOnly.Click += ConnectWithOptionsViewOnlyOnClick;
             // 
             // cMenTreeDisconnect
             // 
@@ -397,6 +409,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.strConnectInFullscreen;
             _cMenTreeConnectWithOptionsNoCredentials.Text = Language.strConnectNoCredentials;
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.strChoosePanelBeforeConnecting;
+            _cMenTreeConnectWithOptionsViewOnly.Text = Language.ConnectInViewOnlyMode;
             _cMenTreeDisconnect.Text = Language.strMenuDisconnect;
 
             _cMenTreeToolsExternalApps.Text = Language.strMenuExternalTools;
@@ -437,13 +450,13 @@ namespace mRemoteNG.UI.Controls
                 {
                     ShowHideMenuItemsForRootConnectionNode();
                 }
-                else if (_connectionTree.SelectedNode is ContainerInfo)
+                else if (_connectionTree.SelectedNode is ContainerInfo containerInfo)
                 {
-                    ShowHideMenuItemsForContainer(_connectionTree.SelectedNode);
+                    ShowHideMenuItemsForContainer(containerInfo);
                 }
-                else if (_connectionTree.SelectedNode is PuttySessionInfo)
+                else if (_connectionTree.SelectedNode is PuttySessionInfo puttyNode)
                 {
-                    ShowHideMenuItemsForPuttyNode(_connectionTree.SelectedNode);
+                    ShowHideMenuItemsForPuttyNode(puttyNode);
                 }
                 else
                 {
@@ -476,6 +489,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDelete.Enabled = false;
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
+            _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForRootConnectionNode()
@@ -492,22 +506,22 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDelete.Enabled = false;
             _cMenTreeMoveUp.Enabled = false;
             _cMenTreeMoveDown.Enabled = false;
+            _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
         }
 
-        internal void ShowHideMenuItemsForContainer(ConnectionInfo connectionInfo)
+        internal void ShowHideMenuItemsForContainer(ContainerInfo containerInfo)
         {
             _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-            _cMenTreeDisconnect.Enabled = false;
 
-            var openConnections = ((ContainerInfo)connectionInfo).Children.Sum(child => child.OpenConnections.Count);
-            if (openConnections > 0)
-                _cMenTreeDisconnect.Enabled = true;
+            var hasOpenConnections = containerInfo.Children.Any(child => child.OpenConnections.Count > 0);
+            _cMenTreeDisconnect.Enabled = hasOpenConnections;
 
             _cMenTreeToolsTransferFile.Enabled = false;
+            _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
         }
 
-        internal void ShowHideMenuItemsForPuttyNode(ConnectionInfo connectionInfo)
+        internal void ShowHideMenuItemsForPuttyNode(PuttySessionInfo connectionInfo)
         {
             _cMenTreeAddConnection.Enabled = false;
             _cMenTreeAddFolder.Enabled = false;
@@ -528,6 +542,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Enabled = false;
             _cMenTreeImport.Enabled = false;
             _cMenTreeExportFile.Enabled = false;
+            _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
         }
 
         internal void ShowHideMenuItemsForConnectionNode(ConnectionInfo connectionInfo)
@@ -546,6 +561,9 @@ namespace mRemoteNG.UI.Controls
 
             if (connectionInfo.Protocol == ProtocolType.IntApp)
                 _cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
+
+            if (connectionInfo.Protocol != ProtocolType.RDP && connectionInfo.Protocol != ProtocolType.VNC)
+                _cMenTreeConnectWithOptionsViewOnly.Enabled = false;
         }
 
         internal void DisableShortcutKeys()
@@ -690,6 +708,13 @@ namespace mRemoteNG.UI.Controls
                 _connectionInitiator.OpenConnection(_connectionTree.SelectedNode,
                                                     ConnectionInfo.Force.OverridePanel |
                                                     ConnectionInfo.Force.DoNotJump);
+        }
+
+        private void ConnectWithOptionsViewOnlyOnClick(object sender, EventArgs e)
+        {
+            var connectionTarget = _connectionTree.SelectedNode as ContainerInfo
+                                   ?? _connectionTree.SelectedNode;
+            _connectionInitiator.OpenConnection(connectionTarget, ConnectionInfo.Force.ViewOnly);
         }
 
         private void OnDisconnectClicked(object sender, EventArgs e)

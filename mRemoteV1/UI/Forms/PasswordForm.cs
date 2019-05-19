@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.Security;
+using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms
@@ -52,6 +53,7 @@ namespace mRemoteNG.UI.Forms
         private void frmPassword_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
+            ApplyTheme();
             var display = new DisplayProperties();
             pbLock.Image = display.ScaleImage(pbLock.Image);
             Height = tableLayoutPanel1.Height;
@@ -101,6 +103,17 @@ namespace mRemoteNG.UI.Forms
             lblVerify.Text = Language.strLabelVerify;
             btnCancel.Text = Language.strButtonCancel;
             btnOK.Text = Language.strButtonOK;
+        }
+
+        private void ApplyTheme()
+        {
+            if (!ThemeManager.getInstance().ActiveAndExtended)
+                return;
+
+            var activeTheme = ThemeManager.getInstance().ActiveTheme;
+
+            BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         // ReSharper disable once UnusedMethodReturnValue.Local

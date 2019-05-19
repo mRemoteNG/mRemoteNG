@@ -195,15 +195,15 @@ namespace mRemoteNG.Config.Serializers
                     gatewaySettingsNode.SelectSingleNode("./enabled")?.InnerText == "True"
                         ? RdpProtocol.RDGatewayUsageMethod.Always
                         : RdpProtocol.RDGatewayUsageMethod.Never;
-                connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText;
-                connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText;
+                connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText ?? string.Empty;
+                connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText ?? string.Empty;
 
                 var passwordNode = gatewaySettingsNode.SelectSingleNode("./password");
                 connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True" 
                     ? passwordNode.InnerText 
                     : DecryptRdcManPassword(passwordNode?.InnerText).ConvertToUnsecureString();
 
-                connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText;
+                connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText ?? string.Empty;
                 // ./logonMethod
                 // ./localBypass
                 // ./credSharing

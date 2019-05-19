@@ -84,6 +84,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                                        connectionInfo.RedirectSmartCards.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectSound", connectionInfo.RedirectSound.ToString()));
             element.Add(new XAttribute("SoundQuality", connectionInfo.SoundQuality.ToString()));
+            element.Add(new XAttribute("RedirectAudioCapture", connectionInfo.RedirectAudioCapture.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectKeys", connectionInfo.RedirectKeys.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("Connected",
                                        (connectionInfo.OpenConnections.Count > 0).ToString().ToLowerInvariant()));
@@ -157,6 +158,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 new XAttribute("InheritRedirectSmartCards", FormatInheritance(inheritance.RedirectSmartCards)),
                 new XAttribute("InheritRedirectSound", FormatInheritance(inheritance.RedirectSound)),
                 new XAttribute("InheritSoundQuality", FormatInheritance(inheritance.SoundQuality)),
+				new XAttribute("InheritRedirectAudioCapture", FormatInheritance(inheritance.RedirectAudioCapture)),
                 new XAttribute("InheritResolution", FormatInheritance(inheritance.Resolution)),
                 new XAttribute("InheritAutomaticResize", FormatInheritance(inheritance.AutomaticResize)),
                 new XAttribute("InheritUseConsoleSession", FormatInheritance(inheritance.UseConsoleSession)),

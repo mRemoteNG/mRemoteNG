@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,9 +16,9 @@ using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
+using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.UI.Tabs;
 
 namespace mRemoteNG.UI.Window
 {
@@ -367,6 +367,16 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
 
+                if (interfaceControl.Protocol is ISupportsViewOnly viewOnly)
+                {
+                    cmenTabViewOnly.Visible = true;
+                    cmenTabViewOnly.Checked = viewOnly.ViewOnly;
+                }
+                else
+                {
+                    cmenTabViewOnly.Visible = false;
+                }
+
                 if (interfaceControl.Info.Protocol == ProtocolType.RDP)
                 {
                     var rdp = (RdpProtocol)interfaceControl.Protocol;
@@ -385,18 +395,15 @@ namespace mRemoteNG.UI.Window
                 {
                     var vnc = (ProtocolVNC)interfaceControl.Protocol;
                     cmenTabSendSpecialKeys.Visible = true;
-                    cmenTabViewOnly.Visible = true;
                     cmenTabSmartSize.Visible = true;
                     cmenTabStartChat.Visible = true;
                     cmenTabRefreshScreen.Visible = true;
                     cmenTabTransferFile.Visible = false;
                     cmenTabSmartSize.Checked = vnc.SmartSize;
-                    cmenTabViewOnly.Checked = vnc.ViewOnly;
                 }
                 else
                 {
                     cmenTabSendSpecialKeys.Visible = false;
-                    cmenTabViewOnly.Visible = false;
                     cmenTabStartChat.Visible = false;
                     cmenTabRefreshScreen.Visible = false;
                     cmenTabTransferFile.Visible = false;
@@ -504,9 +511,11 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var interfaceControl = GetInterfaceControl();
-                if (!(interfaceControl?.Protocol is ProtocolVNC vnc)) return;
+                if (!(interfaceControl?.Protocol is ISupportsViewOnly viewOnly))
+                    return;
+
                 cmenTabViewOnly.Checked = !cmenTabViewOnly.Checked;
-                vnc.ToggleViewOnly();
+                viewOnly.ToggleViewOnly();
             }
             catch (Exception ex)
             {

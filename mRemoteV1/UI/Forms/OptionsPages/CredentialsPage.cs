@@ -38,8 +38,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-
             checkBoxUnlockOnStartup.Checked = Settings.Default.PromptUnlockCredReposOnStartup;
+
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (Settings.Default.EmptyCredentials)
             {

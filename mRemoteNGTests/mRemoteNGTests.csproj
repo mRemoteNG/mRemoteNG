@@ -222,6 +222,7 @@
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandlerTests.cs" />
     <Compile Include="Tree\SelectedConnectionDeletionConfirmerTests.cs" />
     <Compile Include="UI\Controls\ConnectionTreeTests.cs" />
+    <Compile Include="UI\Controls\FilteredPropertyGridTests.cs" />
     <Compile Include="UI\Controls\PageSequenceTests.cs" />
     <Compile Include="UI\Controls\SecureTextBoxTestForm.cs">
       <SubType>Form</SubType>
@@ -280,6 +281,7 @@
     <None Include="Resources\test_rdcman_v2_2_badschemaversion.rdg" />
     <None Include="Resources\test_rdcman_v2_2_schema1.rdg" />
     <None Include="Resources\test_RDCMan_v2_7_schema3.rdg" />
+    <None Include="Resources\test_rdcman_v2_7_schema3_empty_values.rdg" />
     <None Include="Resources\test_rdcman_v2_7_schema3_null_values.rdg" />
     <None Include="Resources\test_remotedesktopconnection.rdp" />
   </ItemGroup>

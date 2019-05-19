@@ -53,7 +53,8 @@ namespace mRemoteNGTests.Connection
         [Test]
         public void CloneCorrectlySetsParentOfInheritanceObject()
         {
-            var clonedConnection = _connectionInfo.Clone();
+			var originalConnection = new ConnectionInfo();
+            var clonedConnection = originalConnection.Clone();
             Assert.That(clonedConnection.Inheritance.Parent, Is.EqualTo(clonedConnection));
         }
 
@@ -135,7 +136,7 @@ namespace mRemoteNGTests.Connection
 	    {
 		    public static IEnumerable<PropertyInfo> GetProperties()
 		    {
-			    return new ConnectionInfoInheritance(new object()).GetProperties();
+			    return new ConnectionInfoInheritance(new ConnectionInfo()).GetProperties();
 		    }
 	    }
     }

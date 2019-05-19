@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
@@ -13,9 +16,6 @@ using mRemoteNG.Tools;
 using mRemoteNGTests.TestHelpers;
 using NSubstitute;
 using NUnit.Framework;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 {
@@ -150,6 +150,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RedirectPrinters = true,
                 RedirectSmartCards = true,
                 RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer,
+                RedirectAudioCapture = true,
                 RedirectKeys = true,
                 VNCCompression = ProtocolVNC.Compression.Comp4,
                 VNCEncoding = ProtocolVNC.Encoding.EncRRE,
@@ -191,7 +192,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
             public static IEnumerable InheritanceTestCases()
             {
-                var properties = new ConnectionInfoInheritance(new object()).GetProperties();
+                var properties = new ConnectionInfoInheritance(new ConnectionInfo()).GetProperties();
                 var testCases = new List<TestCaseData>();
                 var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
 

@@ -1,19 +1,18 @@
-﻿using mRemoteNG.Connection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security;
+using mRemoteNG.Config.Serializers.CredentialSerializer;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
-using mRemoteNG.Credential;
+using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using mRemoteNG.Config.Serializers.CredentialSerializer;
-using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers.Csv
 {
@@ -287,6 +286,12 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.RedirectSound = value;
             }
 
+            if (headers.Contains("RedirectAudioCapture"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectAudioCapture")], out var value))
+                    connectionRecord.RedirectAudioCapture = value;
+            }
+
             if (headers.Contains("RedirectKeys"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectKeys")], out bool value))
@@ -355,8 +360,7 @@ namespace mRemoteNG.Config.Serializers.Csv
 
             if (headers.Contains("Favorite"))
             {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("Favorite")], out value))
+                if (bool.TryParse(connectionCsv[headers.IndexOf("Favorite")], out var value))
                     connectionRecord.Favorite = value;
             }
 
@@ -700,11 +704,19 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.Inheritance.SoundQuality = value;
             }
 
+            if (headers.Contains("InheritRedirectAudioCapture"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectAudioCapture")], out value))
+                    connectionRecord.Inheritance.RedirectAudioCapture = value;
+            }
+			
             if (headers.Contains("InheritCredentialRecord"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritCredentialRecord")], out bool value))
                     connectionRecord.Inheritance.CredentialId = value;
             }
+
             #endregion
 
             return connectionRecord;

@@ -1220,7 +1220,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>&amp;View</value>
   </data>
   <data name="strMenuViewOnly" xml:space="preserve">
-    <value>View Only (VNC)</value>
+    <value>View Only</value>
   </data>
   <data name="strMenuWebsite" xml:space="preserve">
     <value>Website</value>
@@ -1473,13 +1473,16 @@ If you run into such an error, please create a new connection file!</value>
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
-    <value>Select whether clipboard should be shared.</value>
+    <value>Select whether the clipboard should be shared.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local smart cards should be available on the remote host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+    <value>Select whether the default audio input device on the remote machine should be redirected to this computer.</value>
   </data>
   <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Select one of the available rendering engines that will be used to display HTML.</value>
@@ -1642,6 +1645,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sounds</value>
+  </data>
+  <data name="strPropertyNameRedirectAudioCapture" xml:space="preserve">
+    <value>Audio Capture</value>
   </data>
   <data name="strPropertyNameRenderingEngine" xml:space="preserve">
     <value>Rendering Engine</value>
@@ -2758,11 +2764,11 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Proxy</value>
   </data>
   <data name="strMultiSSH" xml:space="preserve">
-        <value>Multi SSH:</value>
-    </data>
+    <value>Multi SSH:</value>
+  </data>
   <data name="strMultiSSHToolTip" xml:space="preserve">
-        <value>Press ENTER to send. Ctrl+C is sent immediately.</value>
-    </data>
+    <value>Press ENTER to send. Ctrl+C is sent immediately.</value>
+  </data>
   <data name="strPropertyDescriptionFavorite" xml:space="preserve">
     <value>Show this connection in the favorites menu.</value>
   </data>
@@ -2775,11 +2781,20 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Lock" xml:space="preserve">
     <value>Lock</value>
   </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Clear search string</value>
+  </data>
   <data name="strConnectionFilePathPrompt" xml:space="preserve">
     <value>Where should we save the new credential file?</value>
   </data>
+  <data name="ConnectInViewOnlyMode" xml:space="preserve">
+    <value>Connect in View Only mode</value>
+  </data>
   <data name="strConnectionPasswordPrompt" xml:space="preserve">
     <value>Set password for the credential repository</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Do not trim spaces from usernames</value>
   </data>
   <data name="strCredentialsFound" xml:space="preserve">
     <value>Credentials found</value>
@@ -2787,14 +2802,26 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strAddRecord" xml:space="preserve">
     <value>Add Record</value>
   </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Environment</value>
+  </data>
   <data name="strAddRepo" xml:space="preserve">
     <value>Add Repository</value>
+  </data>
+  <data name="EncryptionTestResultMessage" xml:space="preserve">
+      <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
   </data>
   <data name="strAutoCloseDialog" xml:space="preserve">
     <value>Automatically close this dialog after the last repository is unlocked</value>
   </data>
+  <data name="EncryptionTest" xml:space="preserve">
+      <value>Encryption Test</value>
+  </data>
   <data name="strContinue" xml:space="preserve">
     <value>Continue</value>
+  </data>
+  <data name="TestSettings" xml:space="preserve">
+      <value>Test Settings</value>
   </data>
   <data name="strEdit" xml:space="preserve">
     <value>Edit</value>

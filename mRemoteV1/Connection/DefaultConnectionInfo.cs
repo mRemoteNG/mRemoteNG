@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Configuration;
 using mRemoteNG.App;
 
@@ -7,6 +8,7 @@ namespace mRemoteNG.Connection
 {
     public class DefaultConnectionInfo : ConnectionInfo
     {
+        [Browsable(false)]
         public static DefaultConnectionInfo Instance { get; } = new DefaultConnectionInfo();
 
         private DefaultConnectionInfo()

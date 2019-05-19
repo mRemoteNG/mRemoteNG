@@ -1,3 +1,9 @@
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 using AxMSTSCLib;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
@@ -6,18 +12,12 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using MSTSCLib;
-using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
 using mRemoteNG.Security;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public class RdpProtocol : ProtocolBase
+    public class RdpProtocol : ProtocolBase, ISupportsViewOnly
     {
         /* RDP v8 requires Windows 7 with:
          * https://support.microsoft.com/en-us/kb/2592687 
@@ -26,6 +26,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
          * 
          * Windows 8+ support RDP v8 out of the box.
          */
+        private AxHost _axHost;
         private MsRdpClient8NotSafeForScripting _rdpClient;
         private Version _rdpVersion;
         private ConnectionInfo _connectionInfo;
@@ -88,6 +89,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public bool LoadBalanceInfoUseUtf8 { get; set; }
 
+        public bool ViewOnly
+        {
+            get => !_axHost.Enabled;
+            set => _axHost.Enabled = !value;
+        }
+
         #endregion
 
         #region Constructors
@@ -118,7 +125,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         Application.DoEvents();
                     }
 
-                    _rdpClient = (MsRdpClient8NotSafeForScripting)((AxMsRdpClient8NotSafeForScripting)Control).GetOcx();
+                    _axHost = (AxMsRdpClient8NotSafeForScripting)Control;
+                    _rdpClient = (MsRdpClient8NotSafeForScripting)_axHost.GetOcx();
                 }
                 catch (System.Runtime.InteropServices.COMException ex)
                 {
@@ -145,7 +153,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 _rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
                 _rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
                 _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
-
+                
                 _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
 
                 _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(_connectionInfo.CacheBitmaps);
@@ -162,6 +170,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 SetAuthenticationLevel();
                 SetLoadBalanceInfo();
                 SetRdGateway();
+                ViewOnly = Force.HasFlag(ConnectionInfo.Force.ViewOnly);
 
                 _rdpClient.ColorDepth = (int)_connectionInfo.Colors;
 
@@ -189,6 +198,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 _rdpClient.Connect();
                 base.Connect();
+
                 return true;
             }
             catch (Exception ex)
@@ -233,6 +243,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpToggleSmartSizeFailed, ex);
+            }
+        }
+
+        /// <summary>
+        /// Toggles whether the RDP ActiveX control will capture and send input events to the remote host.
+        /// The local host will continue to receive data from the remote host regardless of this setting.
+        /// </summary>
+        public void ToggleViewOnly()
+        {
+            try
+            {
+                ViewOnly = !ViewOnly;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"Could not toggle view only mode for host {_connectionInfo.Hostname}");
             }
         }
 
@@ -568,6 +594,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 _rdpClient.AdvancedSettings2.RedirectSmartCards = _connectionInfo.RedirectSmartCards;
                 _rdpClient.SecuredSettings2.AudioRedirectionMode = (int)_connectionInfo.RedirectSound;
                 _rdpClient.AdvancedSettings.DisableRdpdr = _connectionInfo.RedirectClipboard ? 0 : 1;
+                _rdpClient.AdvancedSettings8.AudioCaptureRedirectionMode = _connectionInfo.RedirectAudioCapture;
             }
             catch (Exception ex)
             {
@@ -792,7 +819,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
             [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityHigh")]
             High = 2
         }
-
 
         private enum RDPPerformanceFlags
         {
