@@ -76,8 +76,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             Settings.Default.DefaultCredentialRecord = (credentialRecordComboBox1.SelectedItem as ICredentialRecord)?.Id ?? Guid.Empty;
-
-            Settings.Default.Save();
         }
     }
 }
