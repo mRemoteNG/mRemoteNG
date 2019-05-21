@@ -917,7 +917,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Change Log:</value>
   </data>
   <data name="strLabelClosingConnections" xml:space="preserve">
-    <value>When closing connections:</value>
+    <value>When closing connections, warn me...</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Connect:</value>
@@ -2792,6 +2792,18 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="Environment" xml:space="preserve">
     <value>Environment</value>
+  </data>
+  <data name="ConnectionWarningAll" xml:space="preserve">
+    <value>... when any connection closes.</value>
+  </data>
+  <data name="ConnectionWarningMultiple" xml:space="preserve">
+    <value>... only when closing multiple connections.</value>
+  </data>
+  <data name="ConnectionWarningNever" xml:space="preserve">
+    <value>... never.</value>
+  </data>
+  <data name="ConnectionWarningExit" xml:space="preserve">
+    <value>... only when exiting mRemoteNG.</value>
   </data>
   <data name="EncryptionTestResultMessage" xml:space="preserve">
       <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
