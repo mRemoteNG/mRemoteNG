@@ -1,11 +1,13 @@
 ﻿using mRemoteNG.Config;
 using System;
+using System.Collections.Generic;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class ConnectionsPage
     {
         private readonly FrmMain _frmMain = FrmMain.Default;
+        private List<DialogList> _connectionWarning;
 
         public ConnectionsPage()
         {
@@ -24,6 +26,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
+            _connectionWarning = new List<DialogList>
+            {
+                { new DialogList( (int)ConfirmCloseEnum.Never, Language.ConnectionWarningNever)},
+                { new DialogList ((int)ConfirmCloseEnum.Exit, Language.ConnectionWarningExit)},
+                { new DialogList ((int)ConfirmCloseEnum.Multiple, Language.ConnectionWarningMultiple)},
+                { new DialogList ((int)ConfirmCloseEnum.All, Language.ConnectionWarningAll)}
+            };
+
+            comboBoxConnectionWarning.DataSource = _connectionWarning;
+            comboBoxConnectionWarning.DisplayMember = "DisplayString";
+            comboBoxConnectionWarning.ValueMember = "Index";
+
             chkSingleClickOnConnectionOpensIt.Text = Language.strSingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.strSingleClickOnOpenConnectionSwitchesToIt;
             chkConnectionTreeTrackActiveConnection.Text = Language.strTrackActiveConnectionInConnectionTree;
@@ -38,10 +52,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblAutoSave1.Text = Language.strAutoSaveEvery;
 
             lblClosingConnections.Text = Language.strLabelClosingConnections;
-            radCloseWarnAll.Text = Language.strRadioCloseWarnAll;
-            radCloseWarnMultiple.Text = Language.strRadioCloseWarnMultiple;
-            radCloseWarnExit.Text = Language.strRadioCloseWarnExit;
-            radCloseWarnNever.Text = Language.strRadioCloseWarnNever;
+
         }
 
         public override void LoadSettings()
@@ -59,21 +70,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
             numAutoSave.Value = Convert.ToDecimal(Settings.Default.AutoSaveEveryMinutes);
 
-            switch (Settings.Default.ConfirmCloseConnection)
-            {
-                case (int)ConfirmCloseEnum.Never:
-                    radCloseWarnNever.Checked = true;
-                    break;
-                case (int)ConfirmCloseEnum.Exit:
-                    radCloseWarnExit.Checked = true;
-                    break;
-                case (int)ConfirmCloseEnum.Multiple:
-                    radCloseWarnMultiple.Checked = true;
-                    break;
-                default:
-                    radCloseWarnAll.Checked = true;
-                    break;
-            }
+            comboBoxConnectionWarning.SelectedValue = Settings.Default.ConfirmCloseConnection;
+
         }
 
         public override void SaveSettings()
@@ -100,25 +98,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 _frmMain.tmrAutoSave.Enabled = false;
             }
 
-            if (radCloseWarnAll.Checked)
-            {
-                Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.All;
-            }
+            Settings.Default.ConfirmCloseConnection = (int)comboBoxConnectionWarning.SelectedValue;
 
-            if (radCloseWarnMultiple.Checked)
-            {
-                Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.Multiple;
-            }
+        }
+    }
 
-            if (radCloseWarnExit.Checked)
-            {
-                Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.Exit;
-            }
+    internal class DialogList
+    {
+        public int Index { get; set; }
+        public string DisplayString { get; set; }
 
-            if (radCloseWarnNever.Checked)
-            {
-                Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.Never;
-            }
+        public DialogList(int argIndex, string argDisplay)
+        {
+            Index = argIndex;
+            DisplayString = argDisplay;
         }
     }
 }

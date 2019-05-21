@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -138,6 +138,42 @@ namespace mRemoteNG {
         internal static string ConnectionSuccessful {
             get {
                 return ResourceManager.GetString("ConnectionSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ... when any connection closes..
+        /// </summary>
+        internal static string ConnectionWarningAll {
+            get {
+                return ResourceManager.GetString("ConnectionWarningAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ... only when exiting mRemoteNG..
+        /// </summary>
+        internal static string ConnectionWarningExit {
+            get {
+                return ResourceManager.GetString("ConnectionWarningExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ... only when closing multiple connections..
+        /// </summary>
+        internal static string ConnectionWarningMultiple {
+            get {
+                return ResourceManager.GetString("ConnectionWarningMultiple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ... never..
+        /// </summary>
+        internal static string ConnectionWarningNever {
+            get {
+                return ResourceManager.GetString("ConnectionWarningNever", resourceCulture);
             }
         }
         
@@ -2994,7 +3030,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When closing connections:.
+        ///   Looks up a localized string similar to When closing connections, warn me....
         /// </summary>
         internal static string strLabelClosingConnections {
             get {
