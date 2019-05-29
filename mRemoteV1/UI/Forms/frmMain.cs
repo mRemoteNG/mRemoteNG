@@ -28,6 +28,8 @@ using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using CefSharp;
+using CefSharp.WinForms;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -153,6 +155,9 @@ namespace mRemoteNG.UI.Forms
             Startup.Instance.InitializeProgram(messageCollector);
 
             SetMenuDependencies();
+
+            CefSettings settings = new CefSettings();
+            Cef.Initialize(settings);
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
@@ -422,6 +427,8 @@ namespace mRemoteNG.UI.Forms
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 
             IsClosing = true;
+
+            Cef.Shutdown();
 
             if (Runtime.WindowList != null)
             {

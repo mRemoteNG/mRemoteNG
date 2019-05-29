@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using Gecko;
+using CefSharp;
 using CefSharp.WinForms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
@@ -47,7 +48,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
                 else if (RenderingEngine == RenderingEngine.CEF)
                 {
-                    Control = new ChromiumWebBrowser()
+                    Control = new ChromiumWebBrowser("https://www.google.com")
                     {
                         Dock = DockStyle.Fill,
                     };
@@ -85,7 +86,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                     var GeckoBrowser = (GeckoWebBrowser)wBrowser;
                     if (GeckoBrowser != null)
                     {
-                        GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
+                        GeckoBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
                         LauncherDialog.Download += geckoBrowser_LauncherDialog_Download;
                         GeckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
                     }
@@ -99,6 +100,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                     var CEFBrowser = (ChromiumWebBrowser)wBrowser;
                     if (CEFBrowser != null)
                     {
+                        CEFBrowser.LoadingStateChanged += cefBrowser_Navigated;
                         CEFBrowser.TitleChanged += wBrowser_DocumentTitleChanged;
                     }
                     else
@@ -222,6 +224,11 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         #region Events
 
+        private void cefBrowser_Navigated(object sender, LoadingStateChangedEventArgs e)
+        {
+
+        }
+
         private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             if (!(wBrowser is WebBrowser objWebBrowser)) return;
@@ -252,9 +259,9 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
                 else if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
                 {
-                    if (((CefSharp.TitleChangedEventArgs)e).Title.Length >= 15)
+                    if (((TitleChangedEventArgs)e).Title.Length >= 15)
                     {
-                        shortTitle = ((CefSharp.TitleChangedEventArgs)e).Title.Substring(0, 10) + "...";
+                        shortTitle = ((TitleChangedEventArgs)e).Title.Substring(0, 10) + "...";
                     }
                     else
                     {
