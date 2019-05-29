@@ -61,7 +61,7 @@ namespace mRemoteNG.Config.Serializers.Xml
 
             var serializationTargetAsContainer = serializationTarget as ContainerInfo;
             if (serializationTargetAsContainer == null) return;
-            foreach (var child in serializationTargetAsContainer.Children)
+            foreach (var child in serializationTargetAsContainer.Children.ToArray())
                 CompileRecursive(child, newElement);
         }
 

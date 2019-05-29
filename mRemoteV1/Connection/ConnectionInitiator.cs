@@ -1,14 +1,15 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
-using mRemoteNG.UI.Window;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using mRemoteNG.UI.Tabs;
+using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -21,35 +22,6 @@ namespace mRemoteNG.Connection
 
         public IEnumerable<string> ActiveConnections => _activeConnections;
 
-        public void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force = ConnectionInfo.Force.None)
-        {
-            OpenConnection(containerInfo, force, null);
-        }
-
-        public void OpenConnection(ConnectionInfo connectionInfo)
-        {
-            try
-            {
-                OpenConnection(connectionInfo, ConnectionInfo.Force.None);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
-            }
-        }
-
-        public void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
-        {
-            try
-            {
-                OpenConnection(connectionInfo, force, null);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
-            }
-        }
-
         public bool SwitchToOpenConnection(ConnectionInfo connectionInfo)
         {
             var interfaceControl = FindConnectionContainer(connectionInfo);
@@ -61,13 +33,15 @@ namespace mRemoteNG.Connection
             return true;
         }
 
-        #region Private
-
-        private void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
+        public void OpenConnection(
+            ContainerInfo containerInfo,
+            ConnectionInfo.Force force = ConnectionInfo.Force.None,
+            ConnectionWindow conForm = null)
         {
-            var children = containerInfo.Children;
-            if (children.Count == 0) return;
-            foreach (var child in children)
+            if (containerInfo == null || containerInfo.Children.Count == 0)
+                return;
+
+            foreach (var child in containerInfo.Children)
             {
                 if (child is ContainerInfo childAsContainer)
                     OpenConnection(childAsContainer, force, conForm);
@@ -76,8 +50,14 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
+        public void OpenConnection(
+            ConnectionInfo connectionInfo,
+            ConnectionInfo.Force force = ConnectionInfo.Force.None,
+            ConnectionWindow conForm = null)
         {
+            if (connectionInfo == null)
+                return;
+
             try
             {
                 if (connectionInfo.Hostname == "" && connectionInfo.Protocol != ProtocolType.IntApp)
@@ -130,6 +110,7 @@ namespace mRemoteNG.Connection
             }
         }
 
+        #region Private
         private static void StartPreConnectionExternalApp(ConnectionInfo connectionInfo)
         {
             if (connectionInfo.PreExtApp == "") return;
@@ -162,52 +143,33 @@ namespace mRemoteNG.Connection
 
         private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
-            string connectionPanel;
-            if (connectionInfo.Panel == "" || force.HasFlag(ConnectionInfo.Force.OverridePanel) ||
-                Settings.Default.AlwaysShowPanelSelectionDlg)
-            {
-                var frmPnl = new FrmChoosePanel();
-                if (frmPnl.ShowDialog() == DialogResult.OK)
-                {
-                    connectionPanel = frmPnl.Panel;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                //Return the current panel if exist, if not return default panel
-                if (TabHelper.Instance.CurrentPanel != null)
-                {
-                    connectionPanel = TabHelper.Instance.CurrentPanel.TabText;
-                }
-                else
-                {
-                    connectionPanel = connectionInfo.Panel;
-                }
-            }
+            if (connectionInfo.Panel != "" &&
+                !force.HasFlag(ConnectionInfo.Force.OverridePanel) &&
+                !Settings.Default.AlwaysShowPanelSelectionDlg)
+                return connectionInfo.Panel;
 
-            return connectionPanel;
+            var frmPnl = new FrmChoosePanel();
+            return frmPnl.ShowDialog() == DialogResult.OK
+                ? frmPnl.Panel
+                : null;
         }
 
-        private Form SetConnectionForm(Form conForm, string connectionPanel)
+        private ConnectionWindow SetConnectionForm(ConnectionWindow conForm, string connectionPanel)
         {
-            var connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel);
+            var connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel) as ConnectionWindow;
 
             if (connectionForm == null)
                 connectionForm = _panelAdder.AddPanel(connectionPanel);
             else
-                ((ConnectionWindow)connectionForm).Show(FrmMain.Default.pnlDock);
+                connectionForm.Show(FrmMain.Default.pnlDock);
 
             connectionForm.Focus();
             return connectionForm;
         }
 
-        private static Control SetConnectionContainer(ConnectionInfo connectionInfo, Form connectionForm)
+        private static Control SetConnectionContainer(ConnectionInfo connectionInfo, ConnectionWindow connectionForm)
         {
-            Control connectionContainer = ((ConnectionWindow)connectionForm).AddConnectionTab(connectionInfo);
+            Control connectionContainer = connectionForm.AddConnectionTab(connectionInfo);
 
             if (connectionInfo.Protocol != ProtocolType.IntApp) return connectionContainer;
 

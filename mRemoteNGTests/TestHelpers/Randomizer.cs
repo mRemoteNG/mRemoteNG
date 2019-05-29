@@ -6,7 +6,7 @@ using Enum = System.Enum;
 
 namespace mRemoteNGTests.TestHelpers
 {
-    internal static class Randomizer
+	internal static class Randomizer
     {
         private static readonly Random Random = new Random();
 
@@ -98,7 +98,8 @@ namespace mRemoteNGTests.TestHelpers
                 if (opByType.TryGetValue(property.PropertyType, out var mutator))
                     mutator(property, con);
 
-                else if (opByType.TryGetValue(property.PropertyType.BaseType, out var mutator2))
+                else if (property.PropertyType.BaseType != null && 
+                         opByType.TryGetValue(property.PropertyType.BaseType, out var mutator2))
                     mutator2(property, con);
             }
 

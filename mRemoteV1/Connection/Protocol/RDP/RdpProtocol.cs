@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
@@ -15,7 +14,7 @@ using MSTSCLib;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public class RdpProtocol : ProtocolBase, ISupportsViewOnly
+    public partial class RdpProtocol : ProtocolBase, ISupportsViewOnly
     {
         /* RDP v8 requires Windows 7 with:
          * https://support.microsoft.com/en-us/kb/2592687 
@@ -151,7 +150,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 _rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
                 _rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
                 _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
-
+                
                 _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
 
                 _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(_connectionInfo.CacheBitmaps);
@@ -635,6 +634,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 _rdpClient.AdvancedSettings2.RedirectSmartCards = _connectionInfo.RedirectSmartCards;
                 _rdpClient.SecuredSettings2.AudioRedirectionMode = (int)_connectionInfo.RedirectSound;
                 _rdpClient.AdvancedSettings.DisableRdpdr = _connectionInfo.RedirectClipboard ? 0 : 1;
+                _rdpClient.AdvancedSettings8.AudioCaptureRedirectionMode = _connectionInfo.RedirectAudioCapture;
             }
             catch (Exception ex)
             {
@@ -816,132 +816,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
             Sounds = RDPSounds.DoNotPlay,
             Resolution = RDPResolutions.FitToWindow,
             Port = 3389
-        }
-
-        public enum RDPColors
-        {
-            [LocalizedAttributes.LocalizedDescription("strRDP256Colors")]
-            Colors256 = 8,
-
-            [LocalizedAttributes.LocalizedDescription("strRDP32768Colors")]
-            Colors15Bit = 15,
-
-            [LocalizedAttributes.LocalizedDescription("strRDP65536Colors")]
-            Colors16Bit = 16,
-
-            [LocalizedAttributes.LocalizedDescription("strRDP16777216Colors")]
-            Colors24Bit = 24,
-
-            [LocalizedAttributes.LocalizedDescription("strRDP4294967296Colors")]
-            Colors32Bit = 32
-        }
-
-        public enum RDPSounds
-        {
-            [LocalizedAttributes.LocalizedDescription("strRDPSoundBringToThisComputer")]
-            BringToThisComputer = 0,
-
-            [LocalizedAttributes.LocalizedDescription("strRDPSoundLeaveAtRemoteComputer")]
-            LeaveAtRemoteComputer = 1,
-
-            [LocalizedAttributes.LocalizedDescription("strRDPSoundDoNotPlay")]
-            DoNotPlay = 2
-        }
-
-        public enum RDPSoundQuality
-        {
-            [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityDynamic")]
-            Dynamic = 0,
-
-            [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityMedium")]
-            Medium = 1,
-
-            [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityHigh")]
-            High = 2
-        }
-
-
-        private enum RDPPerformanceFlags
-        {
-            [Description("strRDPDisableWallpaper")]
-            DisableWallpaper = 0x1,
-
-//			[Description("strRDPDisableFullWindowdrag")]DisableFullWindowDrag = 0x2,
-//			[Description("strRDPDisableMenuAnimations")]DisableMenuAnimations = 0x4,
-            [Description("strRDPDisableThemes")] DisableThemes = 0x8,
-
-//			[Description("strRDPDisableCursorShadow")]DisableCursorShadow = 0x20,
-//			[Description("strRDPDisableCursorblinking")]DisableCursorBlinking = 0x40,
-            [Description("strRDPEnableFontSmoothing")]
-            EnableFontSmoothing = 0x80,
-
-            [Description("strRDPEnableDesktopComposition")]
-            EnableDesktopComposition = 0x100
-        }
-
-        public enum RDPResolutions
-        {
-            [LocalizedAttributes.LocalizedDescription("strRDPFitToPanel")]
-            FitToWindow,
-
-            [LocalizedAttributes.LocalizedDescription("strFullscreen")]
-            Fullscreen,
-
-            [LocalizedAttributes.LocalizedDescription("strRDPSmartSize")]
-            SmartSize,
-            [Description("800x600")] Res800x600,
-            [Description("1024x768")] Res1024x768,
-            [Description("1152x864")] Res1152x864,
-            [Description("1280x800")] Res1280x800,
-            [Description("1280x1024")] Res1280x1024,
-            [Description("1366x768")] Res1366x768,
-            [Description("1440x900")] Res1440x900,
-            [Description("1600x900")] Res1600x900,
-            [Description("1600x1200")] Res1600x1200,
-            [Description("1680x1050")] Res1680x1050,
-            [Description("1920x1080")] Res1920x1080,
-            [Description("1920x1200")] Res1920x1200,
-            [Description("2048x1536")] Res2048x1536,
-            [Description("2560x1440")] Res2560x1440,
-            [Description("2560x1600")] Res2560x1600,
-            [Description("2560x2048")] Res2560x2048,
-            [Description("3840x2160")] Res3840x2160
-        }
-
-        public enum AuthenticationLevel
-        {
-            [LocalizedAttributes.LocalizedDescription("strAlwaysConnectEvenIfAuthFails")]
-            NoAuth = 0,
-
-            [LocalizedAttributes.LocalizedDescription("strDontConnectWhenAuthFails")]
-            AuthRequired = 1,
-
-            [LocalizedAttributes.LocalizedDescription("strWarnIfAuthFails")]
-            WarnOnFailedAuth = 2
-        }
-
-        public enum RDGatewayUsageMethod
-        {
-            [LocalizedAttributes.LocalizedDescription("strNever")]
-            Never = 0, // TSC_PROXY_MODE_NONE_DIRECT
-
-            [LocalizedAttributes.LocalizedDescription("strAlways")]
-            Always = 1, // TSC_PROXY_MODE_DIRECT
-
-            [LocalizedAttributes.LocalizedDescription("strDetect")]
-            Detect = 2 // TSC_PROXY_MODE_DETECT
-        }
-
-        public enum RDGatewayUseConnectionCredentials
-        {
-            [LocalizedAttributes.LocalizedDescription("strUseDifferentUsernameAndPassword")]
-            No = 0,
-
-            [LocalizedAttributes.LocalizedDescription("strUseSameUsernameAndPassword")]
-            Yes = 1,
-
-            [LocalizedAttributes.LocalizedDescription("strUseSmartCard")]
-            SmartCard = 2
         }
 
         #endregion

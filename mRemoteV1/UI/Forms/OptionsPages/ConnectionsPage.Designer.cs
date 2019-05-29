@@ -50,6 +50,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.chkPlaceSearchBarAboveConnectionTree = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkConnectionTreeTrackActiveConnection = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkDoNotTrimUsername = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRdpReconnectionCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoSave)).BeginInit();
@@ -149,7 +150,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = new System.Drawing.Point(3, 26);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt";
-            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(490, 17);
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(492, 17);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 1;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = global::mRemoteNG.Language.strSingleClickOnOpenConnectionSwitchesToIt;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = true;
@@ -184,7 +185,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlConfirmCloseConnection.Controls.Add(this.radCloseWarnMultiple);
             this.pnlConfirmCloseConnection.Controls.Add(this.radCloseWarnExit);
             this.pnlConfirmCloseConnection.Controls.Add(this.radCloseWarnNever);
-            this.pnlConfirmCloseConnection.Location = new System.Drawing.Point(3, 249);
+            this.pnlConfirmCloseConnection.Location = new System.Drawing.Point(3, 270);
             this.pnlConfirmCloseConnection.Name = "pnlConfirmCloseConnection";
             this.pnlConfirmCloseConnection.Size = new System.Drawing.Size(604, 137);
             this.pnlConfirmCloseConnection.TabIndex = 6;
@@ -281,7 +282,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tableLayoutPanel2.Controls.Add(this.lblAutoSave1, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblRDPConTimeout, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.numRDPConTimeout, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 164);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 185);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -309,15 +310,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkConnectionTreeTrackActiveConnection.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkConnectionTreeTrackActiveConnection.Location = new System.Drawing.Point(3, 49);
             this.chkConnectionTreeTrackActiveConnection.Name = "chkConnectionTreeTrackActiveConnection";
-            this.chkConnectionTreeTrackActiveConnection.Size = new System.Drawing.Size(261, 17);
+            this.chkConnectionTreeTrackActiveConnection.Size = new System.Drawing.Size(262, 17);
             this.chkConnectionTreeTrackActiveConnection.TabIndex = 10;
             this.chkConnectionTreeTrackActiveConnection.Text = "Track active connection in the connection tree";
             this.chkConnectionTreeTrackActiveConnection.UseVisualStyleBackColor = true;
+            // 
+            // chkDoNotTrimUsername
+            // 
+            this.chkDoNotTrimUsername._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkDoNotTrimUsername.AutoSize = true;
+            this.chkDoNotTrimUsername.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDoNotTrimUsername.Location = new System.Drawing.Point(3, 165);
+            this.chkDoNotTrimUsername.Name = "chkDoNotTrimUsername";
+            this.chkDoNotTrimUsername.Size = new System.Drawing.Size(143, 17);
+            this.chkDoNotTrimUsername.TabIndex = 11;
+            this.chkDoNotTrimUsername.Text = "Do not trim usernames";
+            this.chkDoNotTrimUsername.UseVisualStyleBackColor = true;
             // 
             // ConnectionsPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.chkDoNotTrimUsername);
             this.Controls.Add(this.chkConnectionTreeTrackActiveConnection);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.chkPlaceSearchBarAboveConnectionTree);
@@ -359,5 +373,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private Controls.Base.NGCheckBox chkPlaceSearchBarAboveConnectionTree;
         private Controls.Base.NGCheckBox chkConnectionTreeTrackActiveConnection;
+        private Controls.Base.NGCheckBox chkDoNotTrimUsername;
     }
 }

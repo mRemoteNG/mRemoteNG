@@ -22,9 +22,18 @@ namespace mRemoteNG.Connection
     [DefaultProperty("Name")]
     public class ConnectionInfo : AbstractConnectionRecord, IHasParent, IInheritable
     {
+        private ConnectionInfoInheritance _inheritance;
+
         #region Public Properties
 
-        [Browsable(false)] public ConnectionInfoInheritance Inheritance { get; set; }
+        [Browsable(false)]
+        public ConnectionInfoInheritance Inheritance
+        {
+            get => _inheritance;
+            set => _inheritance = _inheritance.Parent != this
+                ? _inheritance.Clone(this)
+                : value;
+        }
 
         [Browsable(false)] public ProtocolList OpenConnections { get; protected set; }
 
@@ -72,11 +81,14 @@ namespace mRemoteNG.Connection
         {
             var newConnectionInfo = new ConnectionInfo();
             newConnectionInfo.CopyFrom(this);
-            newConnectionInfo.Inheritance = Inheritance.Clone();
-            newConnectionInfo.Inheritance.Parent = newConnectionInfo;
             return newConnectionInfo;
         }
 
+        /// <summary>
+        /// Copies all connection and inheritance values
+        /// from the given <see cref="sourceConnectionInfo"/>.
+        /// </summary>
+        /// <param name="sourceConnectionInfo"></param>
         public void CopyFrom(ConnectionInfo sourceConnectionInfo)
         {
             var properties = GetType().BaseType?.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
@@ -88,8 +100,7 @@ namespace mRemoteNG.Connection
                 property.SetValue(this, remotePropertyValue, null);
             }
 
-            var clonedInheritance = sourceConnectionInfo.Inheritance.Clone();
-            clonedInheritance.Parent = this;
+            var clonedInheritance = sourceConnectionInfo.Inheritance.Clone(this);
             Inheritance = clonedInheritance;
         }
 
@@ -286,17 +297,11 @@ namespace mRemoteNG.Connection
             ExtApp = Settings.Default.ConDefaultExtApp;
             Port = 0;
             PuttySession = Settings.Default.ConDefaultPuttySession;
-            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength),
-                                                                               Settings
-                                                                                   .Default
-                                                                                   .ConDefaultICAEncryptionStrength);
+            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(
+                typeof(IcaProtocol.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
-            RDPAuthenticationLevel = (RdpProtocol.AuthenticationLevel)Enum.Parse(
-                                                                                 typeof(RdpProtocol.AuthenticationLevel
-                                                                                 ),
-                                                                                 Settings
-                                                                                     .Default
-                                                                                     .ConDefaultRDPAuthenticationLevel);
+            RDPAuthenticationLevel = (AuthenticationLevel)Enum.Parse(
+                typeof(AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
             RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
             RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
@@ -307,21 +312,11 @@ namespace mRemoteNG.Connection
 
         private void SetRdGatewayDefaults()
         {
-            RDGatewayUsageMethod = (RdpProtocol.RDGatewayUsageMethod)Enum.Parse(
-                                                                                typeof(RdpProtocol.RDGatewayUsageMethod
-                                                                                ),
-                                                                                Settings
-                                                                                    .Default
-                                                                                    .ConDefaultRDGatewayUsageMethod);
+            RDGatewayUsageMethod = (RDGatewayUsageMethod)Enum.Parse(
+                typeof(RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
             RDGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
-            RDGatewayUseConnectionCredentials = (RdpProtocol.RDGatewayUseConnectionCredentials)Enum.Parse(
-                                                                                                          typeof(
-                                                                                                              RdpProtocol
-                                                                                                              .RDGatewayUseConnectionCredentials
-                                                                                                          ),
-                                                                                                          Settings
-                                                                                                              .Default
-                                                                                                              .ConDefaultRDGatewayUseConnectionCredentials);
+            RDGatewayUseConnectionCredentials = (RDGatewayUseConnectionCredentials)Enum.Parse(
+                typeof(RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
@@ -329,11 +324,10 @@ namespace mRemoteNG.Connection
 
         private void SetAppearanceDefaults()
         {
-            Resolution = (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions),
-                                                                Settings.Default.ConDefaultResolution);
+            Resolution = (RDPResolutions)Enum.Parse(
+                typeof(RDPResolutions), Settings.Default.ConDefaultResolution);
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
-            Colors = (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors),
-                                                       Settings.Default.ConDefaultColors);
+            Colors = (RDPColors)Enum.Parse(typeof(RDPColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
             DisplayWallpaper = Settings.Default.ConDefaultDisplayWallpaper;
             DisplayThemes = Settings.Default.ConDefaultDisplayThemes;
@@ -349,10 +343,11 @@ namespace mRemoteNG.Connection
             RedirectClipboard = Settings.Default.ConDefaultRedirectClipboard;
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
-            RedirectSound = (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds),
+            RedirectSound = (RDPSounds)Enum.Parse(typeof(RDPSounds),
                                                               Settings.Default.ConDefaultRedirectSound);
-            SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality),
+            SoundQuality = (RDPSoundQuality)Enum.Parse(typeof(RDPSoundQuality),
                                                                    Settings.Default.ConDefaultSoundQuality);
+            RedirectAudioCapture = Settings.Default.ConDefaultRedirectAudioCapture;
         }
 
         private void SetMiscDefaults()
@@ -387,7 +382,7 @@ namespace mRemoteNG.Connection
 
         private void SetNonBrowsablePropertiesDefaults()
         {
-            Inheritance = new ConnectionInfoInheritance(this);
+            _inheritance = new ConnectionInfoInheritance(this);
             SetNewOpenConnectionList();
             //PositionID = 0;
         }

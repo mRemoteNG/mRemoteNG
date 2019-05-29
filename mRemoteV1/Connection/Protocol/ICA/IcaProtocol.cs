@@ -1,4 +1,4 @@
-using AxWFICALib;
+﻿using AxWFICALib;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Messages;
@@ -201,17 +201,17 @@ namespace mRemoteNG.Connection.Protocol.ICA
                     return;
                 }
 
-                if (InterfaceControl.Info.Resolution == RdpProtocol.RDPResolutions.FitToWindow)
+                if (InterfaceControl.Info.Resolution == RDPResolutions.FitToWindow)
                 {
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width,
                                              InterfaceControl.Size.Height, 0);
                 }
-                else if (InterfaceControl.Info.Resolution == RdpProtocol.RDPResolutions.SmartSize)
+                else if (InterfaceControl.Info.Resolution == RDPResolutions.SmartSize)
                 {
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width,
                                              InterfaceControl.Size.Height, 0);
                 }
-                else if (InterfaceControl.Info.Resolution == RdpProtocol.RDPResolutions.Fullscreen)
+                else if (InterfaceControl.Info.Resolution == RDPResolutions.Fullscreen)
                 {
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient,
                                              Screen.FromControl(_frmMain).Bounds.Width,
@@ -238,13 +238,13 @@ namespace mRemoteNG.Connection.Protocol.ICA
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (_info.Colors)
             {
-                case RdpProtocol.RDPColors.Colors256:
+                case RDPColors.Colors256:
                     _icaClient.SetProp("DesiredColor", "2");
                     break;
-                case RdpProtocol.RDPColors.Colors15Bit:
+                case RDPColors.Colors15Bit:
                     _icaClient.SetProp("DesiredColor", "4");
                     break;
-                case RdpProtocol.RDPColors.Colors16Bit:
+                case RDPColors.Colors16Bit:
                     _icaClient.SetProp("DesiredColor", "4");
                     break;
                 default:

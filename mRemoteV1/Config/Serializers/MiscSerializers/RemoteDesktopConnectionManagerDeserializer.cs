@@ -153,7 +153,7 @@ namespace mRemoteNG.Config.Serializers
             var logonCredentialsNode = xmlNode.SelectSingleNode("./logonCredentials");
             if (logonCredentialsNode?.Attributes?["inherit"]?.Value == "None")
             {
-                connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText;
+                connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText ?? string.Empty;
 
                 var passwordNode = logonCredentialsNode.SelectSingleNode("./password");
                 if (_schemaVersion == 1) // Version 2.2 allows clear text passwords
@@ -167,7 +167,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Password = DecryptRdcManPassword(passwordNode?.InnerText);
                 }
 
-                connectionInfo.Domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText;
+                connectionInfo.Domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText ?? string.Empty;
             }
             else
             {
@@ -197,17 +197,17 @@ namespace mRemoteNG.Config.Serializers
             {
                 connectionInfo.RDGatewayUsageMethod =
                     gatewaySettingsNode.SelectSingleNode("./enabled")?.InnerText == "True"
-                        ? RdpProtocol.RDGatewayUsageMethod.Always
-                        : RdpProtocol.RDGatewayUsageMethod.Never;
-                connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText;
-                connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText;
+                        ? RDGatewayUsageMethod.Always
+                        : RDGatewayUsageMethod.Never;
+                connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName")?.InnerText ?? string.Empty;
+                connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText ?? string.Empty;
 
                 var passwordNode = gatewaySettingsNode.SelectSingleNode("./password");
                 connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True"
                     ? passwordNode.InnerText
                     : DecryptRdcManPassword(passwordNode?.InnerText);
 
-                connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText;
+                connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText ?? string.Empty;
                 // ./logonMethod
                 // ./localBypass
                 // ./credSharing
@@ -225,21 +225,21 @@ namespace mRemoteNG.Config.Serializers
             if (remoteDesktopNode?.Attributes?["inherit"]?.Value == "None")
             {
                 connectionInfo.Resolution = 
-	                Enum.TryParse<RdpProtocol.RDPResolutions>(remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", ""), true, out var rdpResolution)
+	                Enum.TryParse<RDPResolutions>(remoteDesktopNode.SelectSingleNode("./size")?.InnerText.Replace(" ", ""), true, out var rdpResolution)
 	                ? rdpResolution
-                    : RdpProtocol.RDPResolutions.FitToWindow;
+                    : RDPResolutions.FitToWindow;
 
                 if (remoteDesktopNode.SelectSingleNode("./sameSizeAsClientArea")?.InnerText == "True")
                 {
-                    connectionInfo.Resolution = RdpProtocol.RDPResolutions.FitToWindow;
+                    connectionInfo.Resolution = RDPResolutions.FitToWindow;
                 }
 
                 if (remoteDesktopNode.SelectSingleNode("./fullScreen")?.InnerText == "True")
                 {
-                    connectionInfo.Resolution = RdpProtocol.RDPResolutions.Fullscreen;
+                    connectionInfo.Resolution = RDPResolutions.Fullscreen;
                 }
 
-                if (Enum.TryParse<RdpProtocol.RDPColors>(remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText, true, out var rdpColors))
+                if (Enum.TryParse<RDPColors>(remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText, true, out var rdpColors))
 	                connectionInfo.Colors = rdpColors;
             }
             else
@@ -256,15 +256,15 @@ namespace mRemoteNG.Config.Serializers
                 {
                     case "0": // Bring to this computer
                     case "Client":
-                        connectionInfo.RedirectSound = RdpProtocol.RDPSounds.BringToThisComputer;
+                        connectionInfo.RedirectSound = RDPSounds.BringToThisComputer;
                         break;
                     case "1": // Leave at remote computer
                     case "Remote":
-                        connectionInfo.RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer;
+                        connectionInfo.RedirectSound = RDPSounds.LeaveAtRemoteComputer;
                         break;
                     case "2": // Do not play
                     case "NoSound":
-                        connectionInfo.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
+                        connectionInfo.RedirectSound = RDPSounds.DoNotPlay;
                         break;
                 }
 
@@ -323,15 +323,15 @@ namespace mRemoteNG.Config.Serializers
                 {
                     case "0": // No authentication
                     case "None":
-                        connectionInfo.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.NoAuth;
+                        connectionInfo.RDPAuthenticationLevel = AuthenticationLevel.NoAuth;
                         break;
                     case "1": // Do not connect if authentication fails
                     case "Required":
-                        connectionInfo.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.AuthRequired;
+                        connectionInfo.RDPAuthenticationLevel = AuthenticationLevel.AuthRequired;
                         break;
                     case "2": // Warn if authentication fails
                     case "Warn":
-                        connectionInfo.RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth;
+                        connectionInfo.RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth;
                         break;
                 }
             }

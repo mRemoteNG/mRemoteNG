@@ -18,12 +18,12 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             RunVerification();
         }
 
-        [TestCase(RdpProtocol.RDGatewayUsageMethod.Always)]
-        [TestCase(RdpProtocol.RDGatewayUsageMethod.Detect)]
-        public void RdGatewayPropertiesShown_WhenRdGatewayUsageMethodIsNotNever(RdpProtocol.RDGatewayUsageMethod gatewayUsageMethod)
+        [TestCase(RDGatewayUsageMethod.Always)]
+        [TestCase(RDGatewayUsageMethod.Detect)]
+        public void RdGatewayPropertiesShown_WhenRdGatewayUsageMethodIsNotNever(RDGatewayUsageMethod gatewayUsageMethod)
         {
             ConnectionInfo.RDGatewayUsageMethod = gatewayUsageMethod;
-            ConnectionInfo.RDGatewayUseConnectionCredentials = RdpProtocol.RDGatewayUseConnectionCredentials.Yes;
+            ConnectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes;
             ExpectedPropertyList.AddRange(new []
             {
                 nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayHostname),
@@ -33,11 +33,11 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             RunVerification();
         }
 
-        [TestCase(RdpProtocol.RDGatewayUseConnectionCredentials.No)]
-        [TestCase(RdpProtocol.RDGatewayUseConnectionCredentials.SmartCard)]
-        public void RdGatewayPropertiesShown_WhenRDGatewayUseConnectionCredentialsIsNotYes(RdpProtocol.RDGatewayUseConnectionCredentials useConnectionCredentials)
+        [TestCase(RDGatewayUseConnectionCredentials.No)]
+        [TestCase(RDGatewayUseConnectionCredentials.SmartCard)]
+        public void RdGatewayPropertiesShown_WhenRDGatewayUseConnectionCredentialsIsNotYes(RDGatewayUseConnectionCredentials useConnectionCredentials)
         {
-            ConnectionInfo.RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Always;
+            ConnectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Always;
             ConnectionInfo.RDGatewayUseConnectionCredentials = useConnectionCredentials;
             ExpectedPropertyList.AddRange(new []
             {
@@ -54,15 +54,15 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         [Test]
         public void SoundQualityPropertyShown_WhenRdpSoundsSetToBringToThisComputer()
         {
-            ConnectionInfo.RedirectSound = RdpProtocol.RDPSounds.BringToThisComputer;
+            ConnectionInfo.RedirectSound = RDPSounds.BringToThisComputer;
             ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.SoundQuality));
 
             RunVerification();
         }
 
-        [TestCase(RdpProtocol.RDPResolutions.FitToWindow)]
-        [TestCase(RdpProtocol.RDPResolutions.Fullscreen)]
-        public void AutomaticResizePropertyShown_WhenResolutionIsDynamic(RdpProtocol.RDPResolutions resolution)
+        [TestCase(RDPResolutions.FitToWindow)]
+        [TestCase(RDPResolutions.Fullscreen)]
+        public void AutomaticResizePropertyShown_WhenResolutionIsDynamic(RDPResolutions resolution)
         {
             ConnectionInfo.Resolution = resolution;
             ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.AutomaticResize));

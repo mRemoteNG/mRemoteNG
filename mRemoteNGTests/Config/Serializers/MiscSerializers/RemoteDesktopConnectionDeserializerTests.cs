@@ -19,9 +19,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedGatewayHostname = "gatewayhostname.domain.com";
         private const string ExpectedLoadBalanceInfo = "tsv://MS Terminal Services Plugin.1.RDS-NAME";
         private const int ExpectedPort = 9933;
-        private const RdpProtocol.RDPColors ExpectedColors = RdpProtocol.RDPColors.Colors24Bit;
+        private const RDPColors ExpectedColors = RDPColors.Colors24Bit;
         private const bool ExpectedBitmapCaching = false;
-        private const RdpProtocol.RDPResolutions ExpectedResolutionMode = RdpProtocol.RDPResolutions.FitToWindow;
+        private const RDPResolutions ExpectedResolutionMode = RDPResolutions.FitToWindow;
         private const bool ExpectedWallpaperDisplay = true;
         private const bool ExpectedThemesDisplay = true;
         private const bool ExpectedFontSmoothing = true;
@@ -30,7 +30,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const bool ExpectedDriveRedirection = true;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
-        private const RdpProtocol.RDPSounds ExpectedSoundRedirection = RdpProtocol.RDPSounds.BringToThisComputer;
+        private const RDPSounds ExpectedSoundRedirection = RDPSounds.BringToThisComputer;
 
 
         [OneTimeSetUp]

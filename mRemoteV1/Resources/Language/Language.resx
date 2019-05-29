@@ -1473,13 +1473,16 @@ If you run into such an error, please create a new connection file!</value>
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
-    <value>Select whether clipboard should be shared.</value>
+    <value>Select whether the clipboard should be shared.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local smart cards should be available on the remote host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+    <value>Select whether the default audio input device on the remote machine should be redirected to this computer.</value>
   </data>
   <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Select one of the available rendering engines that will be used to display HTML.</value>
@@ -1642,6 +1645,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sounds</value>
+  </data>
+  <data name="strPropertyNameRedirectAudioCapture" xml:space="preserve">
+    <value>Audio Capture</value>
   </data>
   <data name="strPropertyNameRenderingEngine" xml:space="preserve">
     <value>Rendering Engine</value>
@@ -2780,5 +2786,20 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="ConnectInViewOnlyMode" xml:space="preserve">
     <value>Connect in View Only mode</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Do not trim spaces from usernames</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="EncryptionTestResultMessage" xml:space="preserve">
+      <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
+  </data>
+  <data name="EncryptionTest" xml:space="preserve">
+      <value>Encryption Test</value>
+  </data>
+  <data name="TestSettings" xml:space="preserve">
+      <value>Test Settings</value>
   </data>
 </root>

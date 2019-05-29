@@ -49,13 +49,6 @@ namespace mRemoteNG.Tools
             return passwordForm.GetKey();
         }
 
-
-        public static string CreateConstantID()
-        {
-            return Guid.NewGuid().ToString();
-        }
-
-
         public static string LeadingZero(string Number)
         {
             if (Convert.ToInt32(Number) < 10)

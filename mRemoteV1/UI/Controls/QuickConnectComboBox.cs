@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -20,6 +20,7 @@ namespace mRemoteNG.UI.Controls
             _comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
             _comboBox.DrawItem += ComboBox_DrawItem;
             _comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+            CausesValidation = false;
 
             // This makes it so that _ignoreEnter works correctly before any items are added to the combo box
             _comboBox.Items.Clear();
