@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Gecko;
+using CefSharp;
 using CefSharp.WinForms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
@@ -35,7 +36,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
                 else if (RenderingEngine == RenderingEngine.CEF)
                 {
-                    Control = new ChromiumWebBrowser()
+                    Control = new ChromiumWebBrowser("https://www.google.com")
                     {
                         Dock = DockStyle.Fill,
                     };
@@ -73,7 +74,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                     var GeckoBrowser = (GeckoWebBrowser)wBrowser;
                     if (GeckoBrowser != null)
                     {
-                        GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
+                        GeckoBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
                         GeckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
                     }
                     else
@@ -86,6 +87,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                     var CEFBrowser = (ChromiumWebBrowser)wBrowser;
                     if (CEFBrowser != null)
                     {
+                        CEFBrowser.LoadingStateChanged += cefBrowser_Navigated;
                         CEFBrowser.TitleChanged += wBrowser_DocumentTitleChanged;
                     }
                     else
@@ -209,6 +211,11 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         #region Events
 
+        private void cefBrowser_Navigated(object sender, LoadingStateChangedEventArgs e)
+        {
+
+        }
+
         private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             if (!(wBrowser is WebBrowser objWebBrowser)) return;
@@ -239,9 +246,9 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
                 else if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
                 {
-                    if (((CefSharp.TitleChangedEventArgs)e).Title.Length >= 15)
+                    if (((TitleChangedEventArgs)e).Title.Length >= 15)
                     {
-                        shortTitle = ((CefSharp.TitleChangedEventArgs)e).Title.Substring(0, 10) + "...";
+                        shortTitle = ((TitleChangedEventArgs)e).Title.Substring(0, 10) + "...";
                     }
                     else
                     {
@@ -275,51 +282,6 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
         }
 
-
-        private void geckoBrowser_DocumentTitleChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
-                string shortTitle;
-
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
-                {
-                    if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                    {
-                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                    }
-                    else
-                    {
-                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle;
-                    }
-                }
-                else
-                {
-                    if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                    }
-                    else
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
-                    }
-                }
-
-                  if (!string.IsNullOrEmpty(tabTitle))
-                  {
-                      tabP.TabText = tabTitle + @" - " + shortTitle;
-                  }
-                  else
-                  {
-                      tabP.TabText = shortTitle;
-                  }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpDocumentTileChangeFailed, ex);
-            }
-        }
 
         #endregion
 
