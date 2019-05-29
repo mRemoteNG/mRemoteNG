@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Gecko;
+using CefSharp.WinForms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
 using mRemoteNG.UI.Tabs;
@@ -31,6 +32,13 @@ namespace mRemoteNG.Connection.Protocol.Http
                         Xpcom.Initialize("Firefox");
 
                     Control = new GeckoWebBrowser();
+                }
+                else if (RenderingEngine == RenderingEngine.CEF)
+                {
+                    Control = new ChromiumWebBrowser()
+                    {
+                        Dock = DockStyle.Fill,
+                    };
                 }
                 else
                 {
@@ -73,6 +81,18 @@ namespace mRemoteNG.Connection.Protocol.Http
                         throw new Exception("Failed to initialize Gecko Rendering Engine.");
                     }
                 }
+                else if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                {
+                    var CEFBrowser = (ChromiumWebBrowser)wBrowser;
+                    if (CEFBrowser != null)
+                    {
+                        CEFBrowser.TitleChanged += wBrowser_DocumentTitleChanged;
+                    }
+                    else
+                    {
+                        throw new Exception("Failed to initialize CEF Rendering Engine.");
+                    }
+                }
                 else
                 {
                     var objWebBrowser = (WebBrowser)wBrowser;
@@ -91,6 +111,21 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpSetPropsFailed, ex);
                 return false;
+            }
+        }
+
+        ~HTTPBase()
+        {
+            try
+            {
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                {
+                    ((ChromiumWebBrowser)wBrowser).Dispose();
+                }
+            }
+            finally
+            {
+                Dispose();
             }
         }
 
@@ -126,6 +161,10 @@ namespace mRemoteNG.Connection.Protocol.Http
                     {
                         ((GeckoWebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
                     }
+                    else if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                    {
+                        ((ChromiumWebBrowser)wBrowser).Load(strHost + ":" + InterfaceControl.Info.Port);
+                    }
                     else
                     {
                         ((WebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
@@ -141,6 +180,10 @@ namespace mRemoteNG.Connection.Protocol.Http
                     if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                     {
                         ((GeckoWebBrowser)wBrowser).Navigate(strHost);
+                    }
+                    else if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                    {
+                        ((ChromiumWebBrowser)wBrowser).Load(strHost);
                     }
                     else
                     {
@@ -192,6 +235,17 @@ namespace mRemoteNG.Connection.Protocol.Http
                     else
                     {
                         shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle;
+                    }
+                }
+                else if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                {
+                    if (((CefSharp.TitleChangedEventArgs)e).Title.Length >= 15)
+                    {
+                        shortTitle = ((CefSharp.TitleChangedEventArgs)e).Title.Substring(0, 10) + "...";
+                    }
+                    else
+                    {
+                        shortTitle = ((CefSharp.TitleChangedEventArgs)e).Title;
                     }
                 }
                 else
@@ -277,7 +331,10 @@ namespace mRemoteNG.Connection.Protocol.Http
             IE = 1,
 
             [LocalizedAttributes.LocalizedDescription("strHttpGecko")]
-            Gecko = 2
+            Gecko = 2,
+
+            [LocalizedAttributes.LocalizedDescription("strHttpCEF")]
+            CEF = 3
         }
 
         #endregion
