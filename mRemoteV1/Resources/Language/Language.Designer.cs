@@ -2580,6 +2580,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to contruct the URL to load.
+        /// </summary>
+        internal static string strHTTPFailedURLBuild {
+            get {
+                return ResourceManager.GetString("strHTTPFailedURLBuild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gecko (Firefox).
         /// </summary>
         internal static string strHttpGecko {

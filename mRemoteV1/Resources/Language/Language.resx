@@ -2805,4 +2805,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strHttpCEF" xml:space="preserve">
     <value>CEF (Chromium)</value>
   </data>
+  <data name="strHTTPFailedURLBuild" xml:space="preserve">
+    <value>Failed to contruct the URL to load</value>
+  </data>
 </root>
