@@ -157,6 +157,7 @@ namespace mRemoteNG.UI.Forms
             SetMenuDependencies();
 
             CefSettings settings = new CefSettings();
+            settings.LogSeverity = CefSharp.LogSeverity.Verbose;
             Cef.Initialize(settings);
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);

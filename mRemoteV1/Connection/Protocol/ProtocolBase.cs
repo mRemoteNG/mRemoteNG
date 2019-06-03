@@ -113,11 +113,12 @@ namespace mRemoteNG.Connection.Protocol
                 if (Control == null)
                     return true;
 
+
                 Control.Name = Name;
-                Control.Parent = _interfaceControl;
                 Control.Location = _interfaceControl.Location;
                 Control.Size = InterfaceControl.Size;
                 Control.Anchor = _interfaceControl.Anchor;
+                _interfaceControl.Controls.Add(Control);
 
                 return true;
             }

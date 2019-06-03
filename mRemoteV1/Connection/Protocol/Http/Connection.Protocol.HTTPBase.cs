@@ -19,6 +19,7 @@ namespace mRemoteNG.Connection.Protocol.Http
         protected string httpOrS;
         protected int defaultPort;
         private string tabTitle;
+        private bool browserInitialised = false;
 
         #endregion
 
@@ -48,7 +49,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
                 else if (RenderingEngine == RenderingEngine.CEF)
                 {
-                    Control = new ChromiumWebBrowser("https://www.google.com")
+                    Control = new ChromiumWebBrowser("about:blank")
                     {
                         Dock = DockStyle.Fill,
                     };
@@ -89,6 +90,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                         GeckoBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
                         LauncherDialog.Download += geckoBrowser_LauncherDialog_Download;
                         GeckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
+                        browserInitialised = true;
                     }
                     else
                     {
@@ -100,7 +102,8 @@ namespace mRemoteNG.Connection.Protocol.Http
                     var CEFBrowser = (ChromiumWebBrowser)wBrowser;
                     if (CEFBrowser != null)
                     {
-                        CEFBrowser.LoadingStateChanged += cefBrowser_Navigated;
+                        CEFBrowser.IsBrowserInitializedChanged += cefBrowser_InitializedChanged;
+                        CEFBrowser.LoadingStateChanged += cefBrowser_LoadingStateChanged;
                         CEFBrowser.TitleChanged += wBrowser_DocumentTitleChanged;
                     }
                     else
@@ -118,6 +121,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                     objWebBrowser.Navigated += wBrowser_Navigated;
                     objWebBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
+                    browserInitialised = true;
                 }
 
                 return true;
@@ -148,6 +152,40 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+                {
+                    ((GeckoWebBrowser)wBrowser).Navigate(GetURL());
+                }
+                else if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                {
+                    if (browserInitialised)
+                    {
+                        ((ChromiumWebBrowser)wBrowser).Load(GetURL());
+                    }
+                }
+                else
+                {
+                    ((WebBrowser)wBrowser).Navigate(GetURL());
+                }
+
+                base.Connect();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectFailed, ex);
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private string GetURL()
+        {
+            try
+            {
                 var strHost = InterfaceControl.Info.Hostname;
                 /* 
                  * Commenting out since this codes doesn't actually do anything at this time...
@@ -172,18 +210,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                         strHost = httpOrS + "://" + strHost;
                     }
 
-                    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
-                    {
-                        ((GeckoWebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
-                    }
-                    else if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
-                    {
-                        ((ChromiumWebBrowser)wBrowser).Load(strHost + ":" + InterfaceControl.Info.Port);
-                    }
-                    else
-                    {
-                        ((WebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
-                    }
+                    strHost = strHost + ":" + InterfaceControl.Info.Port;
                 }
                 else
                 {
@@ -191,42 +218,31 @@ namespace mRemoteNG.Connection.Protocol.Http
                     {
                         strHost = httpOrS + "://" + strHost;
                     }
-
-                    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
-                    {
-                        ((GeckoWebBrowser)wBrowser).Navigate(strHost);
-                    }
-                    else if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
-                    {
-                        ((ChromiumWebBrowser)wBrowser).Load(strHost);
-                    }
-                    else
-                    {
-                        ((WebBrowser)wBrowser).Navigate(strHost);
-                    }
                 }
-
-                base.Connect();
-                return true;
+                return strHost;
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectFailed, ex);
-                return false;
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHTTPFailedURLBuild, ex);
+                return string.Empty;
             }
         }
 
         #endregion
 
-        #region Private Methods
-
-        #endregion
-
         #region Events
 
-        private void cefBrowser_Navigated(object sender, LoadingStateChangedEventArgs e)
+        private void cefBrowser_InitializedChanged(object sender, IsBrowserInitializedChangedEventArgs e)
         {
+            browserInitialised = e.IsBrowserInitialized;
+        }
 
+        private void cefBrowser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+            if (browserInitialised == true)
+            {
+                Connect();
+            }
         }
 
         private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
