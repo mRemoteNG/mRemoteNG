@@ -1,4 +1,4 @@
-using mRemoteNG.App.Info;
+﻿using mRemoteNG.App.Info;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -100,6 +100,10 @@ namespace mRemoteNG.App
                 if (Settings.Default.UseSQLServer)
                 {
                     ConnectionsService.LastSqlUpdate = DateTime.Now;
+                }
+                else
+                {
+                    ConnectionsService.LastFileUpdate =  System.IO.File.GetLastWriteTime(connectionFileName);
                 }
 
                 // re-enable sql update checking after updates are loaded

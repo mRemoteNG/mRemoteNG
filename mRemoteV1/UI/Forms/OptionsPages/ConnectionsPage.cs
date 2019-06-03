@@ -1,13 +1,15 @@
-﻿using mRemoteNG.Config;
+using mRemoteNG.Config;
 using System;
 using System.Collections.Generic;
+using mRemoteNG.Config.Connections;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class ConnectionsPage
     {
         private readonly FrmMain _frmMain = FrmMain.Default;
-        private List<DialogList> _connectionWarning;
+        private List<DropdownList> _connectionWarning;
+        private List<DropdownList> _connectionBackup;
 
         public ConnectionsPage()
         {
@@ -26,23 +28,36 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            _connectionWarning = new List<DialogList>
+            _connectionWarning = new List<DropdownList>
             {
-                { new DialogList( (int)ConfirmCloseEnum.Never, Language.ConnectionWarningNever)},
-                { new DialogList ((int)ConfirmCloseEnum.Exit, Language.ConnectionWarningExit)},
-                { new DialogList ((int)ConfirmCloseEnum.Multiple, Language.ConnectionWarningMultiple)},
-                { new DialogList ((int)ConfirmCloseEnum.All, Language.ConnectionWarningAll)}
+                { new DropdownList( (int)ConfirmCloseEnum.Never, Language.ConnectionWarningNever)},
+                { new DropdownList ((int)ConfirmCloseEnum.Exit, Language.ConnectionWarningExit)},
+                { new DropdownList ((int)ConfirmCloseEnum.Multiple, Language.ConnectionWarningMultiple)},
+                { new DropdownList ((int)ConfirmCloseEnum.All, Language.ConnectionWarningAll)}
             };
 
             comboBoxConnectionWarning.DataSource = _connectionWarning;
             comboBoxConnectionWarning.DisplayMember = "DisplayString";
             comboBoxConnectionWarning.ValueMember = "Index";
 
+            _connectionBackup = new List<DropdownList>
+            {
+                { new DropdownList ((int)ConnectionsBackupFrequencyEnum.Never, Language.ConnectionsBackupFrequencyNever)}
+                ,{ new DropdownList ((int)ConnectionsBackupFrequencyEnum.OnEdit, Language.ConnectionsBackupFrequencyOnEdit)}
+                ,{ new DropdownList ((int)ConnectionsBackupFrequencyEnum.OnExit, Language.ConnectionsBackupFrequencyOnExit)}
+                ,{ new DropdownList ((int)ConnectionsBackupFrequencyEnum.Daily, Language.ConnectionsBackupFrequencyDaily)}
+                ,{ new DropdownList ((int)ConnectionsBackupFrequencyEnum.Weekly, Language.ConnectionsBackupFrequencyWeekly)}
+                //,{ new DropdownList( (int)ConnectionsBackupFrequencyEnum.Custom, Language.ConnectionsBackupFrequencyCustom)}
+            };
+
+            cmbConnectionBackupFrequency.DataSource = _connectionBackup;
+            cmbConnectionBackupFrequency.DisplayMember = "DisplayString";
+            cmbConnectionBackupFrequency.ValueMember = "Index";
+
             chkSingleClickOnConnectionOpensIt.Text = Language.strSingleClickOnConnectionOpensIt;
             chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.strSingleClickOnOpenConnectionSwitchesToIt;
             chkConnectionTreeTrackActiveConnection.Text = Language.strTrackActiveConnectionInConnectionTree;
             chkHostnameLikeDisplayName.Text = Language.strSetHostnameLikeDisplayName;
-            chkSaveConnectionsAfterEveryEdit.Text = Language.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
             chkPlaceSearchBarAboveConnectionTree.Text = Language.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Text = Language.DoNotTrimUsername;
@@ -50,6 +65,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblRdpReconnectionCount.Text = Language.strRdpReconnectCount;
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
             lblAutoSave1.Text = Language.strAutoSaveEvery;
+            lblConnectionsBackupFrequency.Text = Language.strConnectionBackupFrequency;
 
             lblClosingConnections.Text = Language.strLabelClosingConnections;
 
@@ -61,7 +77,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = Settings.Default.SingleClickSwitchesToOpenConnection;
             chkConnectionTreeTrackActiveConnection.Checked = Settings.Default.TrackActiveConnectionInConnectionTree;
             chkHostnameLikeDisplayName.Checked = Settings.Default.SetHostnameLikeDisplayName;
-            chkSaveConnectionsAfterEveryEdit.Checked = Settings.Default.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
             chkPlaceSearchBarAboveConnectionTree.Checked = Settings.Default.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Checked = Settings.Default.DoNotTrimUsername;
@@ -72,6 +87,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             comboBoxConnectionWarning.SelectedValue = Settings.Default.ConfirmCloseConnection;
 
+            if (Settings.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.Unassigned)
+            {
+                if (Settings.Default.SaveConnectionsAfterEveryEdit)
+                {
+                    Settings.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnEdit;
+                }
+                else if (Settings.Default.SaveConsOnExit)
+                {
+                    Settings.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnExit;
+                }
+                else
+                {
+                    Settings.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.Never;
+                }
+            }
+
+            cmbConnectionBackupFrequency.SelectedValue = Settings.Default.SaveConnectionsFrequency;
+
         }
 
         public override void SaveSettings()
@@ -80,7 +113,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
             Settings.Default.TrackActiveConnectionInConnectionTree = chkConnectionTreeTrackActiveConnection.Checked;
             Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
-            Settings.Default.SaveConnectionsAfterEveryEdit = chkSaveConnectionsAfterEveryEdit.Checked;
+
             Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
             Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
             Settings.Default.DoNotTrimUsername = chkDoNotTrimUsername.Checked;
@@ -88,6 +121,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
             Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
             Settings.Default.AutoSaveEveryMinutes = (int)numAutoSave.Value;
+
             if (Settings.Default.AutoSaveEveryMinutes > 0)
             {
                 _frmMain.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes * 60000;
@@ -99,16 +133,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             Settings.Default.ConfirmCloseConnection = (int)comboBoxConnectionWarning.SelectedValue;
+            Settings.Default.SaveConnectionsFrequency = (int)cmbConnectionBackupFrequency.SelectedValue;
 
+            //Obsolete. Set to false
+            Settings.Default.SaveConnectionsAfterEveryEdit = false;
+            Settings.Default.SaveConsOnExit = false;
         }
     }
 
-    internal class DialogList
+    internal class DropdownList
     {
         public int Index { get; set; }
         public string DisplayString { get; set; }
 
-        public DialogList(int argIndex, string argDisplay)
+        public DropdownList(int argIndex, string argDisplay)
         {
             Index = argIndex;
             DisplayString = argDisplay;
