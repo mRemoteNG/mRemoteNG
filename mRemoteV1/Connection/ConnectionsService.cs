@@ -35,6 +35,7 @@ namespace mRemoteNG.Connection
         public string ConnectionFileName { get; private set; }
         public RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public DateTime LastSqlUpdate { get; set; }
+        public DateTime LastFileUpdate { get; set; }
 
         public ConnectionTreeModel ConnectionTreeModel { get; private set; }
 

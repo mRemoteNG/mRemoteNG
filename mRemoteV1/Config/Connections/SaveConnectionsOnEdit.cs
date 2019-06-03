@@ -48,12 +48,14 @@ namespace mRemoteNG.Config.Connections
 
         private void SaveConnectionOnEdit(string propertyName = "")
         {
-            if (!mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit)
-                return;
-            if (FrmMain.Default.IsClosing)
-                return;
+            //OBSOLETE: mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit is obsolete and should be removed in a future release
+            if (mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit || (mRemoteNG.Settings.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.OnEdit))
+            {
+                if (FrmMain.Default.IsClosing)
+                    return;
 
-            _connectionsService.SaveConnectionsAsync(propertyName);
+                _connectionsService.SaveConnectionsAsync(propertyName);
+            }
         }
     }
 }

@@ -40,13 +40,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblAutoSave1 = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.numAutoSave = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
             this.lblClosingConnections = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.chkSaveConnectionsAfterEveryEdit = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkUseFilterSearch = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.tableLayoutPanelRDPTimeout = new System.Windows.Forms.TableLayoutPanel();
             this.chkPlaceSearchBarAboveConnectionTree = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkConnectionTreeTrackActiveConnection = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkDoNotTrimUsername = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelBackupFile = new System.Windows.Forms.TableLayoutPanel();
+            this.lblConnectionsBackupFrequency = new System.Windows.Forms.Label();
+            this.cmbConnectionBackupFrequency = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanelConnectionsWarning = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxConnectionWarning = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).BeginInit();
@@ -54,6 +56,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ((System.ComponentModel.ISupportInitialize)(this.numAutoSave)).BeginInit();
             this.tableLayoutPanelRDPTimeout.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
+            this.tableLayoutPanelBackupFile.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxBackups)).BeginInit();
             this.tableLayoutPanelConnectionsWarning.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -190,18 +194,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblClosingConnections.Text = "When closing connections, warn me...";
             this.lblClosingConnections.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // chkSaveConnectionsAfterEveryEdit
-            // 
-            this.chkSaveConnectionsAfterEveryEdit._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
-            this.chkSaveConnectionsAfterEveryEdit.AutoSize = true;
-            this.chkSaveConnectionsAfterEveryEdit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSaveConnectionsAfterEveryEdit.Location = new System.Drawing.Point(3, 95);
-            this.chkSaveConnectionsAfterEveryEdit.Name = "chkSaveConnectionsAfterEveryEdit";
-            this.chkSaveConnectionsAfterEveryEdit.Size = new System.Drawing.Size(194, 17);
-            this.chkSaveConnectionsAfterEveryEdit.TabIndex = 7;
-            this.chkSaveConnectionsAfterEveryEdit.Text = "Save connections after every edit";
-            this.chkSaveConnectionsAfterEveryEdit.UseVisualStyleBackColor = true;
-            // 
             // chkUseFilterSearch
             // 
             this.chkUseFilterSearch._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
@@ -276,6 +268,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tableLayoutPanelMain.ColumnCount = 2;
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 600F));
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelMain.Controls.Add(this.tableLayoutPanelBackupFile, 0, 9);
             this.tableLayoutPanelMain.Controls.Add(this.tableLayoutPanelConnectionsWarning, 0, 8);
             this.tableLayoutPanelMain.Controls.Add(this.chkSingleClickOnConnectionOpensIt, 0, 0);
             this.tableLayoutPanelMain.Controls.Add(this.tableLayoutPanelRDPTimeout, 0, 7);
@@ -300,8 +293,51 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(630, 322);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(630, 412);
             this.tableLayoutPanelMain.TabIndex = 12;
+            // 
+            // tableLayoutPanelBackupFile
+            // 
+            this.tableLayoutPanelBackupFile.ColumnCount = 4;
+            this.tableLayoutPanelBackupFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelBackupFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelBackupFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelBackupFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelBackupFile.Controls.Add(this.lblConnectionsBackupFrequency, 0, 0);
+            this.tableLayoutPanelBackupFile.Controls.Add(this.cmbConnectionBackupFrequency, 1, 0);
+            this.tableLayoutPanelBackupFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelBackupFile.Location = new System.Drawing.Point(3, 283);
+            this.tableLayoutPanelBackupFile.Name = "tableLayoutPanelBackupFile";
+            this.tableLayoutPanelBackupFile.RowCount = 4;
+            this.tableLayoutPanelBackupFile.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelBackupFile.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelBackupFile.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelBackupFile.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanelBackupFile.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBackupFile.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBackupFile.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelBackupFile.Size = new System.Drawing.Size(594, 179);
+            this.tableLayoutPanelBackupFile.TabIndex = 15;
+            // 
+            // lblConnectionsBackupFrequency
+            // 
+            this.lblConnectionsBackupFrequency.AutoSize = true;
+            this.lblConnectionsBackupFrequency.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConnectionsBackupFrequency.Location = new System.Drawing.Point(3, 0);
+            this.lblConnectionsBackupFrequency.Name = "lblConnectionsBackupFrequency";
+            this.lblConnectionsBackupFrequency.Size = new System.Drawing.Size(186, 27);
+            this.lblConnectionsBackupFrequency.TabIndex = 14;
+            this.lblConnectionsBackupFrequency.Text = "Connection Backup Frequency";
+            this.lblConnectionsBackupFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbConnectionBackupFrequency
+            // 
+            this.cmbConnectionBackupFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConnectionBackupFrequency.FormattingEnabled = true;
+            this.cmbConnectionBackupFrequency.Location = new System.Drawing.Point(195, 3);
+            this.cmbConnectionBackupFrequency.Name = "cmbConnectionBackupFrequency";
+            this.cmbConnectionBackupFrequency.Size = new System.Drawing.Size(160, 21);
+            this.cmbConnectionBackupFrequency.TabIndex = 13;
             // 
             // tableLayoutPanelConnectionsWarning
             // 
@@ -334,13 +370,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.tableLayoutPanelMain);
             this.Name = "ConnectionsPage";
-            this.Size = new System.Drawing.Size(630, 322);
+            this.Size = new System.Drawing.Size(630, 412);
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRdpReconnectionCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoSave)).EndInit();
             this.tableLayoutPanelRDPTimeout.ResumeLayout(false);
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.tableLayoutPanelMain.PerformLayout();
+            this.tableLayoutPanelBackupFile.ResumeLayout(false);
+            this.tableLayoutPanelBackupFile.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxBackups)).EndInit();
             this.tableLayoutPanelConnectionsWarning.ResumeLayout(false);
             this.tableLayoutPanelConnectionsWarning.PerformLayout();
             this.ResumeLayout(false);
@@ -356,14 +395,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal Controls.Base.NGNumericUpDown numRDPConTimeout;
         internal Controls.Base.NGLabel lblRDPConTimeout;
         internal Controls.Base.NGNumericUpDown numRdpReconnectionCount;
-        internal Controls.Base.NGCheckBox chkSaveConnectionsAfterEveryEdit;
         private Controls.Base.NGCheckBox chkUseFilterSearch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelRDPTimeout;
         private Controls.Base.NGCheckBox chkPlaceSearchBarAboveConnectionTree;
         private Controls.Base.NGCheckBox chkConnectionTreeTrackActiveConnection;
         private Controls.Base.NGCheckBox chkDoNotTrimUsername;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
+        private System.Windows.Forms.ComboBox cmbConnectionBackupFrequency;
+        private System.Windows.Forms.Label lblConnectionsBackupFrequency;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBackupFile;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelConnectionsWarning;
         private System.Windows.Forms.ComboBox comboBoxConnectionWarning;
+        private System.Windows.Forms.NumericUpDown numMaxBackups;
     }
 }

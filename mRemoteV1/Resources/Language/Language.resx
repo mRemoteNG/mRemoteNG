@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -2626,9 +2626,6 @@ This page will walk you through the process of upgrading your connections file o
   <data name="DatabaseNotAvailable" xml:space="preserve">
     <value>Database '{0}' not available.</value>
   </data>
-  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
-    <value>Save connections after every edit</value>
-  </data>
   <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
     <value>Filter search matches in connection tree</value>
   </data>
@@ -2793,6 +2790,27 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Environment" xml:space="preserve">
     <value>Environment</value>
   </data>
+  <data name="ConnectionsBackupFrequencyDaily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="strConnectionBackupFrequency" xml:space="preserve">
+    <value>Connection Backup Frequency</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyWeekly" xml:space="preserve">
+    <value>Weekly</value>
+  </data>
+  <data name="strConnectionsBackupMaxCount" xml:space="preserve">
+    <value>Maximum number of backups</value>
+  </data>
+  <data name="strConnectionsBackupPath" xml:space="preserve">
+    <value>Location of connection file backup</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnEdit" xml:space="preserve">
+    <value>On Edit</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnExit" xml:space="preserve">
+    <value>On Exit</value>
+  </data>
   <data name="ConnectionWarningAll" xml:space="preserve">
     <value>... when any connection closes.</value>
   </data>
@@ -2804,5 +2822,11 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="ConnectionWarningExit" xml:space="preserve">
     <value>... only when exiting mRemoteNG.</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyNever" xml:space="preserve">
+    <value>Never backup connections</value>
+  </data>
+  <data name="strBrowse" xml:space="preserve">
+    <value>Browse...</value>
   </data>
 </root>

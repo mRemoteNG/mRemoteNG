@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
@@ -58,8 +59,35 @@ namespace mRemoteNG.App
 
         private static void SaveConnections()
         {
-            if (Settings.Default.SaveConsOnExit)
+            DateTime lastUpdate;
+            DateTime updateDate;
+            DateTime currentDate = DateTime.Now;
+
+            //OBSOLETE: Settings.Default.SaveConsOnExit is obsolete and should be removed in a future release
+            if (Settings.Default.SaveConsOnExit || (Settings.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.OnExit))
+            {
                 Runtime.ConnectionsService.SaveConnections();
+                return;
+            }
+
+            lastUpdate = Runtime.ConnectionsService.UsingDatabase ? Runtime.ConnectionsService.LastSqlUpdate : Runtime.ConnectionsService.LastFileUpdate;
+
+            switch (Settings.Default.SaveConnectionsFrequency)
+            {
+                case (int)ConnectionsBackupFrequencyEnum.Daily:
+                    updateDate = lastUpdate.AddDays(1);
+                    break;
+                case (int)ConnectionsBackupFrequencyEnum.Weekly:
+                    updateDate = lastUpdate.AddDays(7);
+                    break;
+                default:
+                    return;
+            }
+
+            if (currentDate >= updateDate)
+            {
+                Runtime.ConnectionsService.SaveConnections();
+            }
         }
 
         private static void SaveSettings(Control quickConnectToolStrip,

@@ -140,6 +140,7 @@
     <Compile Include="App\Update\UpdateFile.cs" />
     <Compile Include="App\Update\UpdateInfo.cs" />
     <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Connections\ConnectionsBackupFrequencyEnum.cs" />
     <Compile Include="Config\Connections\ConnectionsLoadedEventArgs.cs" />
     <Compile Include="Config\Connections\ConnectionsSavedEventArgs.cs" />
     <Compile Include="Config\Connections\CsvConnectionsSaver.cs" />
