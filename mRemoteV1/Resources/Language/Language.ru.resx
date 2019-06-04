@@ -2446,7 +2446,7 @@ mRemoteNG сейчас прекратит работу и начнет проц�
     <value>Минуты в режим ожидания</value>
   </data>
   <data name="strAccept" xml:space="preserve">
-    <value>Приминить</value>
+    <value>Применить</value>
   </data>
   <data name="strAdd" xml:space="preserve">
     <value>Добавить</value>

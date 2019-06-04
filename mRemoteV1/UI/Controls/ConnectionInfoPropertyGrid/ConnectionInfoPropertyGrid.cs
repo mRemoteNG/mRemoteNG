@@ -221,7 +221,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 strHide.Add(nameof(AbstractConnectionRecord.RDPAlertIdleTimeout));
             }
 
-            if (SelectedConnectionInfo.RDGatewayUsageMethod == RdpProtocol.RDGatewayUsageMethod.Never)
+            if (SelectedConnectionInfo.RDGatewayUsageMethod == RDGatewayUsageMethod.Never)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayHostname));
@@ -230,20 +230,20 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
             }
             else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials ==
-                     RdpProtocol.RDGatewayUseConnectionCredentials.Yes)
+                     RDGatewayUseConnectionCredentials.Yes)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
             }
 
-            if (!(SelectedConnectionInfo.Resolution == RdpProtocol.RDPResolutions.FitToWindow ||
-                  SelectedConnectionInfo.Resolution == RdpProtocol.RDPResolutions.Fullscreen))
+            if (!(SelectedConnectionInfo.Resolution == RDPResolutions.FitToWindow ||
+                  SelectedConnectionInfo.Resolution == RDPResolutions.Fullscreen))
             {
                 strHide.Add(nameof(AbstractConnectionRecord.AutomaticResize));
             }
 
-            if (SelectedConnectionInfo.RedirectSound != RdpProtocol.RDPSounds.BringToThisComputer)
+            if (SelectedConnectionInfo.RedirectSound != RDPSounds.BringToThisComputer)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.SoundQuality));
             }

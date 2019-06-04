@@ -31,23 +31,23 @@ namespace mRemoteNG.Connection
         private string _puttySession;
         private IcaProtocol.EncryptionStrength _icaEncryption;
         private bool _useConsoleSession;
-        private RdpProtocol.AuthenticationLevel _rdpAuthenticationLevel;
+        private AuthenticationLevel _rdpAuthenticationLevel;
         private int _rdpMinutesToIdleTimeout;
         private bool _rdpAlertIdleTimeout;
         private string _loadBalanceInfo;
         private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
 
-        private RdpProtocol.RDGatewayUsageMethod _rdGatewayUsageMethod;
+        private RDGatewayUsageMethod _rdGatewayUsageMethod;
         private string _rdGatewayHostname;
-        private RdpProtocol.RDGatewayUseConnectionCredentials _rdGatewayUseConnectionCredentials;
+        private RDGatewayUseConnectionCredentials _rdGatewayUseConnectionCredentials;
         private string _rdGatewayUsername;
         private string _rdGatewayPassword;
         private string _rdGatewayDomain;
 
-        private RdpProtocol.RDPResolutions _resolution;
+        private RDPResolutions _resolution;
         private bool _automaticResize;
-        private RdpProtocol.RDPColors _colors;
+        private RDPColors _colors;
         private bool _cacheBitmaps;
         private bool _displayWallpaper;
         private bool _displayThemes;
@@ -60,8 +60,8 @@ namespace mRemoteNG.Connection
         private bool _redirectClipboard;
         private bool _redirectPorts;
         private bool _redirectSmartCards;
-        private RdpProtocol.RDPSounds _redirectSound;
-        private RdpProtocol.RDPSoundQuality _soundQuality;
+        private RDPSounds _redirectSound;
+        private RDPSoundQuality _soundQuality;
         private bool _redirectAudioCapture;
 
         private string _preExtApp;
@@ -244,7 +244,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAuthenticationLevel"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
-        public RdpProtocol.AuthenticationLevel RDPAuthenticationLevel
+        public AuthenticationLevel RDPAuthenticationLevel
         {
             get => GetPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel);
             set => SetField(ref _rdpAuthenticationLevel, value, "RDPAuthenticationLevel");
@@ -318,7 +318,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUsageMethod"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
-        public RdpProtocol.RDGatewayUsageMethod RDGatewayUsageMethod
+        public RDGatewayUsageMethod RDGatewayUsageMethod
         {
             get => GetPropertyValue("RDGatewayUsageMethod", _rdGatewayUsageMethod);
             set => SetField(ref _rdGatewayUsageMethod, value, "RDGatewayUsageMethod");
@@ -339,7 +339,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUseConnectionCredentials"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
-        public RdpProtocol.RDGatewayUseConnectionCredentials RDGatewayUseConnectionCredentials
+        public RDGatewayUseConnectionCredentials RDGatewayUseConnectionCredentials
         {
             get => GetPropertyValue("RDGatewayUseConnectionCredentials", _rdGatewayUseConnectionCredentials);
             set => SetField(ref _rdGatewayUseConnectionCredentials, value, "RDGatewayUseConnectionCredentials");
@@ -385,7 +385,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionResolution"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP, ProtocolType.ICA)]
-        public RdpProtocol.RDPResolutions Resolution
+        public RDPResolutions Resolution
         {
             get => GetPropertyValue("Resolution", _resolution);
             set => SetField(ref _resolution, value, "Resolution");
@@ -407,7 +407,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionColors"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP, ProtocolType.ICA)]
-        public RdpProtocol.RDPColors Colors
+        public RDPColors Colors
         {
             get => GetPropertyValue("Colors", _colors);
             set => SetField(ref _colors, value, "Colors");
@@ -544,7 +544,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectSounds"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
-        public RdpProtocol.RDPSounds RedirectSound
+        public RDPSounds RedirectSound
         {
             get => GetPropertyValue("RedirectSound", _redirectSound);
             set => SetField(ref _redirectSound, value, "RedirectSound");
@@ -555,7 +555,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionSoundQuality"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
-        public RdpProtocol.RDPSoundQuality SoundQuality
+        public RDPSoundQuality SoundQuality
         {
             get => GetPropertyValue("SoundQuality", _soundQuality);
             set => SetField(ref _soundQuality, value, "SoundQuality");
