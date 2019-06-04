@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #474: Configurable backups. Can now edit/set backup frequency, backup path, and max number of backup files.
 ### Changed
 - #1443: Chinese (simplified) translation improvements
 - #1437: Norwegian translation improvements

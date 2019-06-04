@@ -18,9 +18,6 @@ Options below are for the various settings for Startup/Exit of mRemoteNG.
    * - Option
      - Default
      - Description
-   * - Save connection on exit
-     - On
-     - Save to connection file/database on exit of mRemoteNG
    * - Reconnect to previously opened sessions on startup
      - Off
      - This option will allow you to open the connection from which you where connected to after last exit of application
@@ -112,31 +109,45 @@ Connections
    * - Set hostname like display name when creating or renaming connections
      - Off
      - Will make mRemoteNG try to use the remote host hostname to set the title of the tab in mRemoteNG.
-   * - Save connections after every exit
-     - On
-     - When active mRemoteNG will save the connection tree to the active config after every exit. If inactive then you have to save using **File > Save Connection File** or keyboard shortcut Ctrl+S
    * - Filter search matches in connection tree
      - Off
      - Allows you to filter out the connections to which does not match your filter search in the connection tree. If not active the search will only select the filter to which you do search.
    * - RDP Reconnect count
      - 5
-     - 	Value in seconds
+     - Value in seconds
    * - RDP Connection Timeout
      - 20
-     - 	Value in seconds
+     - Value in seconds
    * - Auto save time in minutes (0 means disabled)
      - 0
      - Value in minutes
-   * - When closing connections
-     - Warn me when closing connections
+   * - When closing connections warn me...
+     - ... when any connection closes
      - Various options of how mRemoteNG should act when you close connections. The different options are listed below:
        ::
 
-           - Warn me when closing connections
-           - Warn me only when closing multiple connections
-           - Warn me only when exiting mRemoteNG
-           - Do not warn me when closing connections
+           - ... when any connection closes
+           - ... when closing multiple connections
+           - ... only when exiting mRemoteNG
+           - ... never
            By default a warning will come up on closing a connection. Change this value based on your prefered settings.
+   * - Connection Backup Frequency
+     - On Edit
+     - Various options of when mRemoteNG should create a backup of the connections file. The different options are listed below:
+       ::
+
+           - Never backup connections
+           - On Edit
+           - On Exit
+           - Daily
+           - Weekly
+           By default a backup will be saved every time the connections are edited. Change this value based on your prefered settings.
+   * - Maximum number of backups
+     - 10
+     - Number of backup copies of the connection file to keep.
+   * - Location of backup files
+     - (blank)
+     - Full path of backup copies of the connection files.
 
 Credentials
 ===========
