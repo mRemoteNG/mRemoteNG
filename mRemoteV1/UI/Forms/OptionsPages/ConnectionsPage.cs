@@ -148,9 +148,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
             else
             {
+                var newFileName = textBoxConnectionBackupPath.Text;
+
+                Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false,
+                    new SaveFilter(), newFileName);
+
+                if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
+                {
+                    Settings.Default.LoadConsFromCustomLocation = false;
+                }
+                else
+                {
                 Settings.Default.LoadConsFromCustomLocation = true;
-                Settings.Default.CustomConsPath = textBoxConnectionBackupPath.Text;
-                Runtime.ConnectionsService.NewConnectionsFile(textBoxConnectionBackupPath.Text);
+                    Settings.Default.CustomConsPath = newFileName;
+                }
             }
 
             //Obsolete. Set to false
