@@ -1,9 +1,10 @@
-using mRemoteNG.Config;
+﻿using mRemoteNG.Config;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -70,6 +71,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
             lblAutoSave1.Text = Language.strAutoSaveEvery;
             lblConnectionsBackupFrequency.Text = Language.strConnectionBackupFrequency;
+            lblConnectionsBackupMaxCount.Text = Language.strConnectionsBackupMaxCount;
             lblConnectionsBackupPath.Text = Language.strConnectionsBackupPath;
 
             lblClosingConnections.Text = Language.strLabelClosingConnections;
@@ -89,6 +91,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
             numAutoSave.Value = Convert.ToDecimal(Settings.Default.AutoSaveEveryMinutes);
+
+            numMaxBackups.Value = Convert.ToDecimal(Settings.Default.BackupFileKeepCount);
 
             comboBoxConnectionWarning.SelectedValue = Settings.Default.ConfirmCloseConnection;
 
@@ -127,6 +131,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
             Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
             Settings.Default.AutoSaveEveryMinutes = (int)numAutoSave.Value;
+            Settings.Default.BackupFileKeepCount = (int)numMaxBackups.Value;
 
             if (Settings.Default.AutoSaveEveryMinutes > 0)
             {
@@ -159,7 +164,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
                 else
                 {
-                Settings.Default.LoadConsFromCustomLocation = true;
+                    Settings.Default.LoadConsFromCustomLocation = true;
                     Settings.Default.CustomConsPath = newFileName;
                 }
             }
@@ -178,7 +183,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (dialogResult == DialogResult.OK)
             {
                 textBoxConnectionBackupPath.Text = saveDialog.FileName;
-    }
+            }
             else
             {
                 textBoxConnectionBackupPath.Text = String.Empty;
