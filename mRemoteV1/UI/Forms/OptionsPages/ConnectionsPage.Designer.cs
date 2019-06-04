@@ -1,4 +1,4 @@
-
+﻿
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -50,8 +50,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.textBoxConnectionBackupPath = new System.Windows.Forms.TextBox();
             this.lblConnectionsBackupPath = new System.Windows.Forms.Label();
             this.lblConnectionsBackupFrequency = new System.Windows.Forms.Label();
+            this.lblConnectionsBackupMaxCount = new System.Windows.Forms.Label();
             this.cmbConnectionBackupFrequency = new System.Windows.Forms.ComboBox();
             this.buttonBrowsePath = new System.Windows.Forms.Button();
+            this.numMaxBackups = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanelConnectionsWarning = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxConnectionWarning = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).BeginInit();
@@ -309,8 +311,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tableLayoutPanelBackupFile.Controls.Add(this.textBoxConnectionBackupPath, 1, 2);
             this.tableLayoutPanelBackupFile.Controls.Add(this.lblConnectionsBackupPath, 0, 2);
             this.tableLayoutPanelBackupFile.Controls.Add(this.lblConnectionsBackupFrequency, 0, 0);
+            this.tableLayoutPanelBackupFile.Controls.Add(this.lblConnectionsBackupMaxCount, 0, 1);
             this.tableLayoutPanelBackupFile.Controls.Add(this.cmbConnectionBackupFrequency, 1, 0);
             this.tableLayoutPanelBackupFile.Controls.Add(this.buttonBrowsePath, 2, 2);
+            this.tableLayoutPanelBackupFile.Controls.Add(this.numMaxBackups, 1, 1);
             this.tableLayoutPanelBackupFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelBackupFile.Location = new System.Drawing.Point(3, 283);
             this.tableLayoutPanelBackupFile.Name = "tableLayoutPanelBackupFile";
@@ -354,6 +358,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblConnectionsBackupFrequency.Text = "Connection Backup Frequency";
             this.lblConnectionsBackupFrequency.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblConnectionsBackupMaxCount
+            // 
+            this.lblConnectionsBackupMaxCount.AutoSize = true;
+            this.lblConnectionsBackupMaxCount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConnectionsBackupMaxCount.Location = new System.Drawing.Point(3, 27);
+            this.lblConnectionsBackupMaxCount.Name = "lblConnectionsBackupMaxCount";
+            this.lblConnectionsBackupMaxCount.Size = new System.Drawing.Size(186, 28);
+            this.lblConnectionsBackupMaxCount.TabIndex = 13;
+            this.lblConnectionsBackupMaxCount.Text = "Maximum number of backups";
+            this.lblConnectionsBackupMaxCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // cmbConnectionBackupFrequency
             // 
             this.cmbConnectionBackupFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -372,6 +387,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.buttonBrowsePath.Text = "button1";
             this.buttonBrowsePath.UseVisualStyleBackColor = true;
             this.buttonBrowsePath.Click += new System.EventHandler(this.ButtonBrowsePath_Click);
+            // 
+            // numMaxBackups
+            // 
+            this.numMaxBackups.Location = new System.Drawing.Point(195, 30);
+            this.numMaxBackups.Name = "numMaxBackups";
+            this.numMaxBackups.Size = new System.Drawing.Size(44, 22);
+            this.numMaxBackups.TabIndex = 16;
+            // 
             // tableLayoutPanelConnectionsWarning
             // 
             this.tableLayoutPanelConnectionsWarning.ColumnCount = 3;
@@ -437,6 +460,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.ComboBox cmbConnectionBackupFrequency;
         private System.Windows.Forms.Label lblConnectionsBackupFrequency;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBackupFile;
+        private System.Windows.Forms.Label lblConnectionsBackupMaxCount;
         private System.Windows.Forms.Label lblConnectionsBackupPath;
         private System.Windows.Forms.TextBox textBoxConnectionBackupPath;
         private System.Windows.Forms.Button buttonBrowsePath;

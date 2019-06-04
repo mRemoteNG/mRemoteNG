@@ -1754,6 +1754,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum number of backups.
+        /// </summary>
+        internal static string strConnectionsBackupMaxCount {
+            get {
+                return ResourceManager.GetString("strConnectionsBackupMaxCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Location of connection file backup.
         /// </summary>
         internal static string strConnectionsBackupPath {
