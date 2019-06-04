@@ -6,7 +6,7 @@ SQL Configuration
 
 .. warning::
 
-    The SQL feature is in an early beta stage and not intended for use in an productive environment! I recommend you to do a full backup of your connections and settings before switching to SQL Server.
+    The SQL feature is in an early beta stage and not intended for use in a production environment! I recommend you to do a full backup of your connections and settings before switching to SQL Server.
 
 Supported Databases
 ===================
