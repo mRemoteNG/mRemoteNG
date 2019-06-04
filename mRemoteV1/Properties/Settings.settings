@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mRemoteNG" GeneratedClassName="Settings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
@@ -148,8 +148,8 @@
     </Setting>
     <Setting Name="ConDefaultRedirectSound" Type="System.String" Scope="User">
       <Value Profile="(Default)">DoNotPlay</Value>
-    </Setting>    
-      <Setting Name="ConDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
+    </Setting>
+    <Setting Name="ConDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MaxPuttyWaitTime" Type="System.Int32" Scope="User">
@@ -256,8 +256,8 @@
     </Setting>
     <Setting Name="InhDefaultRedirectSound" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>   
-      <Setting Name="InhDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
+    </Setting>
+    <Setting Name="InhDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultResolution" Type="System.Boolean" Scope="User">
