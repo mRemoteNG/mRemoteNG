@@ -1,6 +1,8 @@
 using mRemoteNG.Config;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -27,6 +29,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void ApplyLanguage()
         {
             base.ApplyLanguage();
+
+            buttonBrowsePath.Text = Language.strBrowse;
 
             _connectionWarning = new List<DropdownList>
             {
@@ -66,6 +70,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
             lblAutoSave1.Text = Language.strAutoSaveEvery;
             lblConnectionsBackupFrequency.Text = Language.strConnectionBackupFrequency;
+            lblConnectionsBackupPath.Text = Language.strConnectionsBackupPath;
 
             lblClosingConnections.Text = Language.strLabelClosingConnections;
 
@@ -104,6 +109,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             cmbConnectionBackupFrequency.SelectedValue = Settings.Default.SaveConnectionsFrequency;
+            textBoxConnectionBackupPath.Text = Settings.Default.CustomConsPath;
 
         }
 
@@ -135,9 +141,37 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.ConfirmCloseConnection = (int)comboBoxConnectionWarning.SelectedValue;
             Settings.Default.SaveConnectionsFrequency = (int)cmbConnectionBackupFrequency.SelectedValue;
 
+            if (textBoxConnectionBackupPath.Text.Trim().Length <= 0)
+            {
+                Settings.Default.LoadConsFromCustomLocation = false;
+                Settings.Default.CustomConsPath = String.Empty;
+            }
+            else
+            {
+                Settings.Default.LoadConsFromCustomLocation = true;
+                Settings.Default.CustomConsPath = textBoxConnectionBackupPath.Text;
+                Runtime.ConnectionsService.NewConnectionsFile(textBoxConnectionBackupPath.Text);
+            }
+
             //Obsolete. Set to false
             Settings.Default.SaveConnectionsAfterEveryEdit = false;
             Settings.Default.SaveConsOnExit = false;
+        }
+
+        private void ButtonBrowsePath_Click(object sender, EventArgs e)
+        {
+            var saveDialog = DialogFactory.ConnectionsSaveAsDialog();
+
+            var dialogResult = saveDialog.ShowDialog(this);
+
+            if (dialogResult == DialogResult.OK)
+            {
+                textBoxConnectionBackupPath.Text = saveDialog.FileName;
+    }
+            else
+            {
+                textBoxConnectionBackupPath.Text = String.Empty;
+            }
         }
     }
 
