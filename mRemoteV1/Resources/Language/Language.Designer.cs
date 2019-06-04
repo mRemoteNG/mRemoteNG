@@ -1754,6 +1754,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Location of connection file backup.
+        /// </summary>
+        internal static string strConnectionsBackupPath {
+            get {
+                return ResourceManager.GetString("strConnectionsBackupPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t set default port!.
         /// </summary>
         internal static string strConnectionSetDefaultPortFailed {

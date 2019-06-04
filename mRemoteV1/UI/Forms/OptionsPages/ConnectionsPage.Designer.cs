@@ -47,8 +47,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkDoNotTrimUsername = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelBackupFile = new System.Windows.Forms.TableLayoutPanel();
+            this.textBoxConnectionBackupPath = new System.Windows.Forms.TextBox();
+            this.lblConnectionsBackupPath = new System.Windows.Forms.Label();
             this.lblConnectionsBackupFrequency = new System.Windows.Forms.Label();
             this.cmbConnectionBackupFrequency = new System.Windows.Forms.ComboBox();
+            this.buttonBrowsePath = new System.Windows.Forms.Button();
             this.tableLayoutPanelConnectionsWarning = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxConnectionWarning = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).BeginInit();
@@ -303,8 +306,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tableLayoutPanelBackupFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanelBackupFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanelBackupFile.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelBackupFile.Controls.Add(this.textBoxConnectionBackupPath, 1, 2);
+            this.tableLayoutPanelBackupFile.Controls.Add(this.lblConnectionsBackupPath, 0, 2);
             this.tableLayoutPanelBackupFile.Controls.Add(this.lblConnectionsBackupFrequency, 0, 0);
             this.tableLayoutPanelBackupFile.Controls.Add(this.cmbConnectionBackupFrequency, 1, 0);
+            this.tableLayoutPanelBackupFile.Controls.Add(this.buttonBrowsePath, 2, 2);
             this.tableLayoutPanelBackupFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelBackupFile.Location = new System.Drawing.Point(3, 283);
             this.tableLayoutPanelBackupFile.Name = "tableLayoutPanelBackupFile";
@@ -318,6 +324,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tableLayoutPanelBackupFile.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelBackupFile.Size = new System.Drawing.Size(594, 179);
             this.tableLayoutPanelBackupFile.TabIndex = 15;
+            // 
+            // textBoxConnectionBackupPath
+            // 
+            this.textBoxConnectionBackupPath.Location = new System.Drawing.Point(195, 58);
+            this.textBoxConnectionBackupPath.Name = "textBoxConnectionBackupPath";
+            this.textBoxConnectionBackupPath.Size = new System.Drawing.Size(250, 22);
+            this.textBoxConnectionBackupPath.TabIndex = 14;
+            // 
+            // lblConnectionsBackupPath
+            // 
+            this.lblConnectionsBackupPath.AutoSize = true;
+            this.lblConnectionsBackupPath.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConnectionsBackupPath.Location = new System.Drawing.Point(3, 55);
+            this.lblConnectionsBackupPath.Name = "lblConnectionsBackupPath";
+            this.lblConnectionsBackupPath.Size = new System.Drawing.Size(186, 29);
+            this.lblConnectionsBackupPath.TabIndex = 13;
+            this.lblConnectionsBackupPath.Text = "Location of connection file backup";
+            this.lblConnectionsBackupPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblConnectionsBackupFrequency
             // 
@@ -339,6 +363,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.cmbConnectionBackupFrequency.Size = new System.Drawing.Size(160, 21);
             this.cmbConnectionBackupFrequency.TabIndex = 13;
             // 
+            // buttonBrowsePath
+            // 
+            this.buttonBrowsePath.Location = new System.Drawing.Point(451, 58);
+            this.buttonBrowsePath.Name = "buttonBrowsePath";
+            this.buttonBrowsePath.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrowsePath.TabIndex = 15;
+            this.buttonBrowsePath.Text = "button1";
+            this.buttonBrowsePath.UseVisualStyleBackColor = true;
+            this.buttonBrowsePath.Click += new System.EventHandler(this.ButtonBrowsePath_Click);
             // tableLayoutPanelConnectionsWarning
             // 
             this.tableLayoutPanelConnectionsWarning.ColumnCount = 3;
@@ -404,6 +437,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.ComboBox cmbConnectionBackupFrequency;
         private System.Windows.Forms.Label lblConnectionsBackupFrequency;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBackupFile;
+        private System.Windows.Forms.Label lblConnectionsBackupPath;
+        private System.Windows.Forms.TextBox textBoxConnectionBackupPath;
+        private System.Windows.Forms.Button buttonBrowsePath;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelConnectionsWarning;
         private System.Windows.Forms.ComboBox comboBoxConnectionWarning;
         private System.Windows.Forms.NumericUpDown numMaxBackups;
