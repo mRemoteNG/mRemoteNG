@@ -156,6 +156,13 @@ namespace mRemoteNG.UI.Forms
 
             SetMenuDependencies();
 
+            //Monitor parent process exit and close subprocesses if parent process exits first
+            //This will at some point in the future becomes the default
+            CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
+
+            //For Windows 7 and above, best to include relevant app.manifest entries as well
+            Cef.EnableHighDPISupport();
+
             CefSettings settings = new CefSettings();
             settings.LogSeverity = CefSharp.LogSeverity.Verbose;
             Cef.Initialize(settings);

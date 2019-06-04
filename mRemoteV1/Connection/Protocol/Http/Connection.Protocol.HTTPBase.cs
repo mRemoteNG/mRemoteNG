@@ -20,6 +20,7 @@ namespace mRemoteNG.Connection.Protocol.Http
         protected int defaultPort;
         private string tabTitle;
         private bool browserInitialised = false;
+        private bool connectCalled = false;
 
         #endregion
 
@@ -102,7 +103,6 @@ namespace mRemoteNG.Connection.Protocol.Http
                     var CEFBrowser = (ChromiumWebBrowser)wBrowser;
                     if (CEFBrowser != null)
                     {
-                        CEFBrowser.IsBrowserInitializedChanged += cefBrowser_InitializedChanged;
                         CEFBrowser.LoadingStateChanged += cefBrowser_LoadingStateChanged;
                         CEFBrowser.TitleChanged += wBrowser_DocumentTitleChanged;
                     }
@@ -133,21 +133,6 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
         }
 
-        ~HTTPBase()
-        {
-            try
-            {
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
-                {
-                    ((ChromiumWebBrowser)wBrowser).Dispose();
-                }
-            }
-            finally
-            {
-                Dispose();
-            }
-        }
-
         public override bool Connect()
         {
             try
@@ -169,6 +154,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
 
                 base.Connect();
+                connectCalled = true;
                 return true;
             }
             catch (Exception ex)
@@ -232,16 +218,20 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         #region Events
 
-        private void cefBrowser_InitializedChanged(object sender, IsBrowserInitializedChangedEventArgs e)
-        {
-            browserInitialised = e.IsBrowserInitialized;
-        }
-
         private void cefBrowser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
-            if (browserInitialised == true)
+            browserInitialised = !e.IsLoading;
+            if (browserInitialised)
             {
-                Connect();
+                // Unhook the loading state changes now, as navigation is done by the user on links in the control
+                ((ChromiumWebBrowser)wBrowser).LoadingStateChanged -= cefBrowser_LoadingStateChanged;
+
+                // If this Connection has already been asked to connect but the browser hadn't finished initalising
+                // then the connect wouldn't have been allowed to take place, so now we can call it!
+                if (connectCalled)
+                {
+                    Connect();
+                }
             }
         }
 
