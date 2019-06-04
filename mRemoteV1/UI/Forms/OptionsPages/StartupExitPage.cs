@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -21,7 +21,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            chkSaveConsOnExit.Text = Language.strSaveConsOnExit;
             chkReconnectOnStart.Text = Language.strReconnectAtStartup;
             chkSingleInstance.Text = Language.strAllowOnlySingleInstance;
             chkProperInstallationOfComponentsAtStartup.Text = Language.strCheckProperInstallationOfComponentsAtStartup;
@@ -31,7 +30,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            Settings.Default.SaveConsOnExit = chkSaveConsOnExit.Checked;
             Settings.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
             Settings.Default.SingleInstance = chkSingleInstance.Checked;
             Settings.Default.StartupComponentsCheck = chkProperInstallationOfComponentsAtStartup.Checked;
@@ -39,7 +37,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void StartupExitPage_Load(object sender, EventArgs e)
         {
-            chkSaveConsOnExit.Checked = Settings.Default.SaveConsOnExit;
             chkReconnectOnStart.Checked = Settings.Default.OpenConsFromLastSession;
             chkSingleInstance.Checked = Settings.Default.SingleInstance;
             chkProperInstallationOfComponentsAtStartup.Checked = Settings.Default.StartupComponentsCheck;

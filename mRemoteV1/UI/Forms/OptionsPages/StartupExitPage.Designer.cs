@@ -32,41 +32,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void InitializeComponent()
 		{
             this.chkReconnectOnStart = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.chkSaveConsOnExit = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkSingleInstance = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkProperInstallationOfComponentsAtStartup = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.SuspendLayout();
             // 
             // chkReconnectOnStart
             // 
-            this.chkReconnectOnStart._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkReconnectOnStart._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkReconnectOnStart.AutoSize = true;
             this.chkReconnectOnStart.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkReconnectOnStart.Location = new System.Drawing.Point(3, 26);
+            this.chkReconnectOnStart.Location = new System.Drawing.Point(4, 4);
             this.chkReconnectOnStart.Name = "chkReconnectOnStart";
             this.chkReconnectOnStart.Size = new System.Drawing.Size(295, 17);
             this.chkReconnectOnStart.TabIndex = 1;
             this.chkReconnectOnStart.Text = "Reconnect to previously opened sessions on startup";
             this.chkReconnectOnStart.UseVisualStyleBackColor = true;
             // 
-            // chkSaveConsOnExit
-            // 
-            this.chkSaveConsOnExit._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
-            this.chkSaveConsOnExit.AutoSize = true;
-            this.chkSaveConsOnExit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSaveConsOnExit.Location = new System.Drawing.Point(3, 2);
-            this.chkSaveConsOnExit.Name = "chkSaveConsOnExit";
-            this.chkSaveConsOnExit.Size = new System.Drawing.Size(153, 17);
-            this.chkSaveConsOnExit.TabIndex = 0;
-            this.chkSaveConsOnExit.Text = "Save connections on exit";
-            this.chkSaveConsOnExit.UseVisualStyleBackColor = true;
-            // 
             // chkSingleInstance
             // 
-            this.chkSingleInstance._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSingleInstance._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSingleInstance.AutoSize = true;
             this.chkSingleInstance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkSingleInstance.Location = new System.Drawing.Point(3, 50);
+            this.chkSingleInstance.Location = new System.Drawing.Point(4, 28);
             this.chkSingleInstance.Name = "chkSingleInstance";
             this.chkSingleInstance.Size = new System.Drawing.Size(404, 17);
             this.chkSingleInstance.TabIndex = 2;
@@ -75,10 +62,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkProperInstallationOfComponentsAtStartup
             // 
-            this.chkProperInstallationOfComponentsAtStartup._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkProperInstallationOfComponentsAtStartup._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkProperInstallationOfComponentsAtStartup.AutoSize = true;
             this.chkProperInstallationOfComponentsAtStartup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkProperInstallationOfComponentsAtStartup.Location = new System.Drawing.Point(3, 74);
+            this.chkProperInstallationOfComponentsAtStartup.Location = new System.Drawing.Point(4, 52);
             this.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup";
             this.chkProperInstallationOfComponentsAtStartup.Size = new System.Drawing.Size(290, 17);
             this.chkProperInstallationOfComponentsAtStartup.TabIndex = 3;
@@ -90,10 +77,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.chkReconnectOnStart);
-            this.Controls.Add(this.chkSaveConsOnExit);
             this.Controls.Add(this.chkSingleInstance);
             this.Controls.Add(this.chkProperInstallationOfComponentsAtStartup);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "StartupExitPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.Load += new System.EventHandler(this.StartupExitPage_Load);
@@ -102,7 +87,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
 		}
 		internal Controls.Base.NGCheckBox chkReconnectOnStart;
-		internal Controls.Base.NGCheckBox chkSaveConsOnExit;
 		internal Controls.Base.NGCheckBox chkSingleInstance;
 		internal Controls.Base.NGCheckBox chkProperInstallationOfComponentsAtStartup;
 			

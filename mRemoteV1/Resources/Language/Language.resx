@@ -1968,9 +1968,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
     <value>Do you want to save the current connections file before loading another?</value>
   </data>
-  <data name="strSaveConsOnExit" xml:space="preserve">
-    <value>Save connections on exit</value>
-  </data>
   <data name="strSaveImageFilter" xml:space="preserve">
     <value>Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png</value>
   </data>
