@@ -164,7 +164,37 @@ namespace mRemoteNG.UI.Forms
             Cef.EnableHighDPISupport();
 
             CefSettings settings = new CefSettings();
-            settings.LogSeverity = CefSharp.LogSeverity.Verbose;
+            if (Runtime.IsPortableEdition)
+            {
+                settings.CachePath = Path.Combine(SettingsFileInfo.SettingsPath, "CEFCache");
+                settings.LogFile = Path.Combine(Path.GetDirectoryName(Settings.Default.LogFilePath), "mRemoteNG_cef.log");
+            }
+            else
+            {
+                settings.CachePath = Path.Combine(
+                                           Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                           Application.ProductName,
+                                           "CEF_Cache");
+                settings.LogFile = Path.Combine(Path.GetDirectoryName(Settings.Default.LogFilePath),"mRemoteNG_cef.log");
+                
+            }
+            if (Settings.Default.TextLogMessageWriterWriteDebugMsgs)
+            {
+                settings.LogSeverity = LogSeverity.Verbose;
+            }
+            else if (Settings.Default.TextLogMessageWriterWriteInfoMsgs)
+            {
+                settings.LogSeverity = LogSeverity.Info;
+            }
+            else if (Settings.Default.TextLogMessageWriterWriteWarningMsgs)
+            {
+                settings.LogSeverity = LogSeverity.Warning;
+            }
+            else if (Settings.Default.TextLogMessageWriterWriteErrorMsgs)
+            {
+                settings.LogSeverity = LogSeverity.Error;
+            }
+
             Cef.Initialize(settings);
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
