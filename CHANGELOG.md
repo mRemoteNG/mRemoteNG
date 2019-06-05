@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #1071: Added CEF (Chromium) rendering option to HTTP/HTTPS protocols
 ### Changed
 - #1443: Chinese (simplified) translation improvements
 - #1437: Norwegian translation improvements
