@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 ### Changed
+- #1468: Improved mRemoteNG startup time
 - #1443: Chinese (simplified) translation improvements
 - #1437: Norwegian translation improvements
 - #1239: Increased default key derivation function (KDF) iterations from 1000 to 10000
