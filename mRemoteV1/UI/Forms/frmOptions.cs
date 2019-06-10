@@ -77,7 +77,8 @@ namespace mRemoteNG.UI.Forms
                 {typeof(UpdatesPage).Name, new UpdatesPage {Dock = DockStyle.Fill}},
                 {typeof(ThemePage).Name, new ThemePage {Dock = DockStyle.Fill}},
                 {typeof(SecurityPage).Name, new SecurityPage {Dock = DockStyle.Fill}},
-                {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}}
+                {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}},
+                {typeof(BackupPage).Name, new BackupPage {Dock = DockStyle.Fill}}
             };
         }
 

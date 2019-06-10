@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
@@ -62,6 +62,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Name = "OptionsPage";
             ResumeLayout(false);
+        }
+    }
+    internal class DropdownList
+    {
+        public int Index { get; set; }
+        public string DisplayString { get; set; }
+
+        public DropdownList(int argIndex, string argDisplay)
+        {
+            Index = argIndex;
+            DisplayString = argDisplay;
         }
     }
 }

@@ -1566,16 +1566,16 @@ Starter med ny tilkoblingsfil.</value>
     <value>Oppretting av hurtigtilkobling mislyktes</value>
   </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
-    <value>&amp;Advar meg når tilkoblinger lukkes</value>
+    <value>Advar meg når tilkoblinger lukkes</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>Advar meg bare ved a&amp;vslutning av mRemoteNG</value>
+    <value>Advar meg bare ved avslutning av mRemoteNG</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
-    <value>Advar meg bare ved lukking av &amp;mange tilkoblinger samtidig</value>
+    <value>Advar meg bare ved lukking av mange tilkoblinger samtidig</value>
   </data>
   <data name="strRadioCloseWarnNever" xml:space="preserve">
-    <value>&amp;Ikke advar meg når tilkoblinger lukkes</value>
+    <value>Ikke advar meg når tilkoblinger lukkes</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>

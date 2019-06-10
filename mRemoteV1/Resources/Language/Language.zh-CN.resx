@@ -1762,13 +1762,13 @@ VncSharp 版本 {0}</value>
     <value>快速连接创建失败！</value>
   </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
-    <value>关闭连接时确认(&amp;W)</value>
+    <value>关闭连接时确认</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>退出 mRemoteNG 时确认(&amp;X)</value>
+    <value>退出 mRemoteNG 时确认</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
-    <value>关闭多个连接时确认(&amp;M)</value>
+    <value>关闭多个连接时确认</value>
   </data>
   <data name="strRadioCloseWarnNever" xml:space="preserve">
     <value>关闭连接时不需确认</value>

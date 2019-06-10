@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -917,7 +917,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Change Log:</value>
   </data>
   <data name="strLabelClosingConnections" xml:space="preserve">
-    <value>When closing connections, warn me...</value>
+    <value>When closing connections:</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Connect:</value>
@@ -1762,16 +1762,16 @@ If you run into such an error, please create a new connection file!</value>
     <value>Creating quick connect failed</value>
   </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
-    <value>&amp;Warn me when closing connections</value>
+    <value>Warn me when closing connections</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>Warn me only when e&amp;xiting mRemoteNG</value>
+    <value>Warn me when exiting mRemoteNG</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
-    <value>Warn me only when closing &amp;multiple connections</value>
+    <value>Warn me when closing multiple connections</value>
   </data>
   <data name="strRadioCloseWarnNever" xml:space="preserve">
-    <value>Do &amp;not warn me when closing connections</value>
+    <value>Do not warn me when closing connections</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
@@ -2808,18 +2808,6 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="ConnectionsBackupFrequencyOnExit" xml:space="preserve">
     <value>On Exit</value>
   </data>
-  <data name="ConnectionWarningAll" xml:space="preserve">
-    <value>... when any connection closes.</value>
-  </data>
-  <data name="ConnectionWarningMultiple" xml:space="preserve">
-    <value>... only when closing multiple connections.</value>
-  </data>
-  <data name="ConnectionWarningNever" xml:space="preserve">
-    <value>... never.</value>
-  </data>
-  <data name="ConnectionWarningExit" xml:space="preserve">
-    <value>... only when exiting mRemoteNG.</value>
-  </data>
   <data name="EncryptionTestResultMessage" xml:space="preserve">
       <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
   </data>
@@ -2834,5 +2822,8 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="strBrowse" xml:space="preserve">
     <value>Browse...</value>
+  </data>
+  <data name="strBackup" xml:space="preserve">
+    <value>Backup</value>
   </data>
 </root>

@@ -187,42 +187,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ... when any connection closes..
-        /// </summary>
-        internal static string ConnectionWarningAll {
-            get {
-                return ResourceManager.GetString("ConnectionWarningAll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ... only when exiting mRemoteNG..
-        /// </summary>
-        internal static string ConnectionWarningExit {
-            get {
-                return ResourceManager.GetString("ConnectionWarningExit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ... only when closing multiple connections..
-        /// </summary>
-        internal static string ConnectionWarningMultiple {
-            get {
-                return ResourceManager.GetString("ConnectionWarningMultiple", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ... never..
-        /// </summary>
-        internal static string ConnectionWarningNever {
-            get {
-                return ResourceManager.GetString("ConnectionWarningNever", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Could not find external tool with name &quot;{0}&quot;.
         /// </summary>
         internal static string CouldNotFindExternalTool {
@@ -696,6 +660,15 @@ namespace mRemoteNG {
         internal static string strBack {
             get {
                 return ResourceManager.GetString("strBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        internal static string strBackup {
+            get {
+                return ResourceManager.GetString("strBackup", resourceCulture);
             }
         }
         
@@ -3120,7 +3093,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When closing connections, warn me....
+        ///   Looks up a localized string similar to When closing connections:.
         /// </summary>
         internal static string strLabelClosingConnections {
             get {
@@ -6074,7 +6047,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Warn me when closing connections.
+        ///   Looks up a localized string similar to Warn me when closing connections.
         /// </summary>
         internal static string strRadioCloseWarnAll {
             get {
@@ -6083,7 +6056,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warn me only when e&amp;xiting mRemoteNG.
+        ///   Looks up a localized string similar to Warn me when exiting mRemoteNG.
         /// </summary>
         internal static string strRadioCloseWarnExit {
             get {
@@ -6092,7 +6065,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warn me only when closing &amp;multiple connections.
+        ///   Looks up a localized string similar to Warn me when closing multiple connections.
         /// </summary>
         internal static string strRadioCloseWarnMultiple {
             get {
@@ -6101,7 +6074,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do &amp;not warn me when closing connections.
+        ///   Looks up a localized string similar to Do not warn me when closing connections.
         /// </summary>
         internal static string strRadioCloseWarnNever {
             get {

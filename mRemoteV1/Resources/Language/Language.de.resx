@@ -1568,16 +1568,16 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Direkte Verbindung fehlgeschlagen!</value>
   </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
-    <value>&amp;Warnen, wenn Verbindungen beendet werden</value>
+    <value>Warnen, wenn eine Verbindung beendet wird</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>Warne mich nur beim B&amp;eenden von mRemoteNG</value>
+    <value>Beim Beenden immer warnen</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
-    <value>Nur beim Beenden &amp;mehrerer Verbindungen warnen</value>
+    <value>Warnen, wenn mehrerere Verbindungen beendet werden</value>
   </data>
   <data name="strRadioCloseWarnNever" xml:space="preserve">
-    <value>Nicht warnen, wenn Verbindungen beendet werden</value>
+    <value>Nie warnen</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>Rohdaten (RAW)</value>
