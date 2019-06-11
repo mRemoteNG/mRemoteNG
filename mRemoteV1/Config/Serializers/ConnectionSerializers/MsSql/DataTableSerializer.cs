@@ -281,6 +281,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
             dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
+            dataRow["RdpProtocolVersion"] = connectionInfo.RdpProtocolVersion;
+
+
             if (_saveFilter.SaveInheritance)
             {
                 dataRow["InheritCacheBitmaps"] = connectionInfo.Inheritance.CacheBitmaps;
@@ -340,6 +343,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritRDGatewayUsername"] = connectionInfo.Inheritance.RDGatewayUsername;
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;
+                dataRow["InheritRdpProtocolVersion"] = connectionInfo.Inheritance.RdpProtocolVersion;
             }
             else
             {
@@ -399,6 +403,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritRDGatewayUsername"] = false;
                 dataRow["InheritRDGatewayPassword"] = false;
                 dataRow["InheritRDGatewayDomain"] = false;
+                dataRow["InheritRdpProtocolVersion"] = false;
             }
 
             _dataTable.Rows.Add(dataRow);

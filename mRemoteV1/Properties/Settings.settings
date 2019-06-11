@@ -713,5 +713,11 @@
     <Setting Name="DoNotTrimUsername" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ConDefaultRdpProtocolVersion" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Highest</Value>
+    </Setting>
+    <Setting Name="InhDefaultRdpProtocolVersion" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

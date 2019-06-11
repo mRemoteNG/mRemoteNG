@@ -12,7 +12,7 @@ namespace mRemoteNG {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2864,6 +2864,30 @@ namespace mRemoteNG {
             }
             set {
                 this["DoNotTrimUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Highest")]
+        public string ConDefaultRdpProtocolVersion {
+            get {
+                return ((string)(this["ConDefaultRdpProtocolVersion"]));
+            }
+            set {
+                this["ConDefaultRdpProtocolVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRdpProtocolVersion {
+            get {
+                return ((bool)(this["InhDefaultRdpProtocolVersion"]));
+            }
+            set {
+                this["InhDefaultRdpProtocolVersion"] = value;
             }
         }
     }

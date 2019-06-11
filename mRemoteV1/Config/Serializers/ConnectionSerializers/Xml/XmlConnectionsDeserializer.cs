@@ -542,14 +542,15 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Favorite = xmlnode.GetAttributeAsBool("Favorite");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
+                    connectionInfo.RdpProtocolVersion = xmlnode.GetAttributeAsEnum("RdpProtocolVersion", RdpVersion.Highest);
+                    connectionInfo.Inheritance.RdpProtocolVersion = xmlnode.GetAttributeAsBool("InheritRdpProtocolVersion");
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    string.Format(Language.strGetConnectionInfoFromXmlFailed,
-                                                                  connectionInfo.Name, ConnectionFileName,
-                                                                  ex.Message));
+                    string.Format(Language.strGetConnectionInfoFromXmlFailed,
+                        connectionInfo.Name, ConnectionFileName, ex.Message));
             }
 
             return connectionInfo;
