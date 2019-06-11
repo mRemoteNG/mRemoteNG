@@ -17,12 +17,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
 		*/
     public class RdpProtocol8 : RdpProtocol7
     {
-        private new MsRdpClient8NotSafeForScripting _rdpClient;
+        private MsRdpClient8NotSafeForScripting RdpClient8 => (MsRdpClient8NotSafeForScripting)((AxHost)Control).GetOcx();
         private Size _controlBeginningSize;
+
+        protected override RdpVersion RdpProtocolVersion => RdpVersion.Rdc8;
 
         public override bool SmartSize
         {
-            get { return base.SmartSize; }
+            get => base.SmartSize;
             protected set
             {
                 base.SmartSize = value;
@@ -38,11 +40,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 base.Fullscreen = value;
                 ReconnectForResize();
             }
-        }
-
-        public RdpProtocol8()
-        {
-            Control = new AxMsRdpClient8NotSafeForScripting();
         }
 
         public override void ResizeBegin(object sender, EventArgs e)
@@ -69,10 +66,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _controlBeginningSize = Size.Empty;
         }
 
-        protected override object CreateRdpClientControl()
+        protected override AxHost CreateRdpClientControl()
         {
-            _rdpClient = (MsRdpClient8NotSafeForScripting)((AxMsRdpClient8NotSafeForScripting)Control).GetOcx();
-            return _rdpClient;
+            return new AxMsRdpClient8NotSafeForScripting();
         }
 
         private void ReconnectForResize()
@@ -98,7 +94,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var size = Fullscreen
                     ? Screen.FromControl(Control).Bounds.Size
                     : Control.Size;
-                _rdpClient.Reconnect((uint)size.Width, (uint)size.Height);
+                RdpClient8.Reconnect((uint)size.Width, (uint)size.Height);
             }
             catch (Exception ex)
             {

@@ -2,20 +2,24 @@
 using mRemoteNG.App;
 using MSTSCLib;
 using System;
+using System.Windows.Forms;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
     public class RdpProtocol7 : RdpProtocol6
     {
-        private new MsRdpClient7NotSafeForScripting _rdpClient;
+        protected override RdpVersion RdpProtocolVersion => RdpVersion.Rdc7;
 
         public override bool Initialize()
         {
-            base.Initialize();
+            if (!base.Initialize())
+                return false;
+
             try
             {
-                _rdpClient.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
-                _rdpClient.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
+                var rdpClient7 = (MsRdpClient7NotSafeForScripting)((AxHost) Control).GetOcx();
+                rdpClient7.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
+                rdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
             }
             catch (Exception ex)
             {
@@ -26,10 +30,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
             return true;
         }
 
-        protected override object CreateRdpClientControl()
+        protected override AxHost CreateRdpClientControl()
         {
-            _rdpClient = (MsRdpClient7NotSafeForScripting)((AxMsRdpClient7NotSafeForScripting)Control).GetOcx();
-            return _rdpClient;
+            return new AxMsRdpClient7NotSafeForScripting();
         }
     }
 }

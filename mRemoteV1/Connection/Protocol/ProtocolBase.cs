@@ -110,7 +110,9 @@ namespace mRemoteNG.Connection.Protocol
                 _interfaceControl.Parent.Tag = _interfaceControl;
                 _interfaceControl.Show();
 
-                if (Control == null) return true;
+                if (Control == null)
+                    return false;
+
                 Control.Name = Name;
                 Control.Parent = _interfaceControl;
                 Control.Location = _interfaceControl.Location;

@@ -7,5 +7,6 @@
         Rdc8,
         Rdc9,
         Rdc10,
+        Highest = 1000
     }
 }

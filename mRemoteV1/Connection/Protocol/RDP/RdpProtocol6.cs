@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading;
+using System.Timers;
 using System.Windows.Forms;
 using AxMSTSCLib;
 using mRemoteNG.App;
@@ -24,14 +25,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
          * 
          * Windows 8+ support RDP v8 out of the box.
          */
-        protected MsRdpClient6NotSafeForScripting _rdpClient;
-        private Version _rdpVersion;
+        private MsRdpClient6NotSafeForScripting _rdpClient;
         protected ConnectionInfo connectionInfo;
         protected bool loginComplete;
+        private Version _rdpVersion;
         private bool _redirectKeys;
         private bool _alertOnIdleDisconnect;
         private readonly DisplayProperties _displayProperties;
         private readonly FrmMain _frmMain = FrmMain.Default;
+        protected virtual RdpVersion RdpProtocolVersion => RdpVersion.Rdc6;
         private AxHost AxHost => (AxHost)Control;
 
         #region Properties
@@ -98,8 +100,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public RdpProtocol6()
         {
             _displayProperties = new DisplayProperties();
-            Control = new AxMsRdpClient6NotSafeForScripting();
             Connecting += OnConnectingDebugMessage;
+            tmrReconnect.Elapsed += tmrReconnect_Elapsed;
         }
 
         #endregion
@@ -108,10 +110,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         private void OnConnectingDebugMessage(object sender)
         {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Using RDP version: {connectionInfo.RdpProtocolVersion}");
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                $"Requesting RDP version: {connectionInfo.RdpProtocolVersion}. Using: {RdpProtocolVersion}");
         }
 
-        protected virtual object CreateRdpClientControl()
+        protected virtual AxHost CreateRdpClientControl()
         {
             return new AxMsRdpClient6NotSafeForScripting();
         }
@@ -119,6 +122,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public override bool Initialize()
         {
+            Control = CreateRdpClientControl();
             base.Initialize();
             try
             {
@@ -134,9 +138,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         Application.DoEvents();
                     }
 
-                    _rdpClient = (MsRdpClient6NotSafeForScripting)CreateRdpClientControl();
+                    _rdpClient = (MsRdpClient6NotSafeForScripting)((AxHost)Control).GetOcx();
                 }
-                catch (System.Runtime.InteropServices.COMException ex)
+                catch (COMException ex)
                 {
                     Runtime.MessageCollector.AddExceptionMessage(Language.strRdpControlCreationFailed, ex);
                     Control.Dispose();
@@ -281,6 +285,27 @@ namespace mRemoteNG.Connection.Protocol.RDP
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpFocusFailed, ex);
+            }
+        }
+
+        /// <summary>
+        /// Determines if this version of the RDP client
+        /// is supported on this machine.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsRdpVersionSupported()
+        {
+            try
+            {
+                using (var control = CreateRdpClientControl())
+                {
+                    control.CreateControl();
+                    return true;
+                }
+            }
+            catch (COMException ex)
+            {
+                return false;
             }
         }
         #endregion
@@ -749,11 +774,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
             public static readonly Version RDC70 = new Version(6, 1, 7600);
             public static readonly Version RDC80 = new Version(6, 2, 9200);
             public static readonly Version RDC81 = new Version(6, 3, 9600);
+            public static readonly Version RDC100 = new Version(10, 0, 0);
         }
 
         #region Reconnect Stuff
 
-        public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        public void tmrReconnect_Elapsed(object sender, ElapsedEventArgs e)
         {
             try
             {
@@ -770,9 +796,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(
-                                                             string.Format(Language.AutomaticReconnectError,
-                                                                           connectionInfo.Hostname),
-                                                             ex, MessageClass.WarningMsg, false);
+                    string.Format(Language.AutomaticReconnectError, connectionInfo.Hostname),
+                    ex, MessageClass.WarningMsg, false);
             }
         }
 

@@ -261,8 +261,10 @@
     <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpExtensions.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPPerformanceFlags.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol10.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpProtocol7.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpProtocol8.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol9.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPResolutions.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPSoundQuality.cs" />
