@@ -82,6 +82,12 @@ namespace mRemoteNG.Connection
         public bool Protocol { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameRdpProtocolVersion"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRdpProtocolVersion"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RdpProtocolVersion { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
          LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameExternalTool"),
          LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionExternalTool"),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]

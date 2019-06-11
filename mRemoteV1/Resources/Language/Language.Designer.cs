@@ -5020,6 +5020,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sets the version of the RDP protocol to use when opening connections..
+        /// </summary>
+        internal static string strPropertyDescriptionRdpProtocolVersion {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRdpProtocolVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select whether the default audio input device on the remote machine should be redirected to this computer..
         /// </summary>
         internal static string strPropertyDescriptionRedirectAudioCapture {
@@ -5547,6 +5556,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameRDPMinutesToIdleTimeout {
             get {
                 return ResourceManager.GetString("strPropertyNameRDPMinutesToIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RDP Protocol Version.
+        /// </summary>
+        internal static string strPropertyNameRdpProtocolVersion {
+            get {
+                return ResourceManager.GetString("strPropertyNameRdpProtocolVersion", resourceCulture);
             }
         }
         

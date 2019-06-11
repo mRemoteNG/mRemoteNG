@@ -2794,12 +2794,18 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Environment</value>
   </data>
   <data name="EncryptionTestResultMessage" xml:space="preserve">
-      <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
+    <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
   </data>
   <data name="EncryptionTest" xml:space="preserve">
-      <value>Encryption Test</value>
+    <value>Encryption Test</value>
   </data>
   <data name="TestSettings" xml:space="preserve">
-      <value>Test Settings</value>
+    <value>Test Settings</value>
+  </data>
+  <data name="strPropertyDescriptionRdpProtocolVersion" xml:space="preserve">
+    <value>Sets the version of the RDP protocol to use when opening connections.</value>
+  </data>
+  <data name="strPropertyNameRdpProtocolVersion" xml:space="preserve">
+    <value>RDP Protocol Version</value>
   </data>
 </root>

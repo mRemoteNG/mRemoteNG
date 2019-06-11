@@ -19,11 +19,11 @@ namespace mRemoteNG.Connection.Protocol
             switch (connectionInfo.Protocol)
             {
                 case ProtocolType.RDP:
-                    newProtocol = new RdpProtocol
+                    newProtocol = new RdpProtocol6
                     {
                         LoadBalanceInfoUseUtf8 = Settings.Default.RdpLoadBalanceInfoUseUtf8
                     };
-                    ((RdpProtocol)newProtocol).tmrReconnect.Elapsed += ((RdpProtocol)newProtocol).tmrReconnect_Elapsed;
+                    ((RdpProtocol6)newProtocol).tmrReconnect.Elapsed += ((RdpProtocol6)newProtocol).tmrReconnect_Elapsed;
                     break;
                 case ProtocolType.VNC:
                     newProtocol = new ProtocolVNC();

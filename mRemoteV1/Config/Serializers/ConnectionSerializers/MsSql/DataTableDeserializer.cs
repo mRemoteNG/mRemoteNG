@@ -162,6 +162,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
 
+            if (Enum.TryParse((string)dataRow["RdpProtocolVersion"], true, out RdpVersion rdpVersion))
+                connectionInfo.RdpProtocolVersion = rdpVersion;
+
             connectionInfo.Inheritance.CacheBitmaps = (bool)dataRow["InheritCacheBitmaps"];
             connectionInfo.Inheritance.Colors = (bool)dataRow["InheritColors"];
             connectionInfo.Inheritance.Description = (bool)dataRow["InheritDescription"];
@@ -219,6 +222,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.RDGatewayUsername = (bool)dataRow["InheritRDGatewayUsername"];
             connectionInfo.Inheritance.RDGatewayPassword = (bool)dataRow["InheritRDGatewayPassword"];
             connectionInfo.Inheritance.RDGatewayDomain = (bool)dataRow["InheritRDGatewayDomain"];
+            connectionInfo.Inheritance.RdpProtocolVersion = (bool)dataRow["InheritRdpProtocolVersion"];
         }
 
         private string DecryptValue(string cipherText)

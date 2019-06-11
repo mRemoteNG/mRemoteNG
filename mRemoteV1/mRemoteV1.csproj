@@ -257,15 +257,17 @@
     <Compile Include="Connection\Protocol\ISupportsViewOnly.cs" />
     <Compile Include="Connection\Protocol\RDP\RDGatewayUsageMethod.cs" />
     <Compile Include="Connection\Protocol\RDP\RDGatewayUseConnectionCredentials.cs" />
-    <Compile Include="Connection\Protocol\RDP\RdpClientWrap.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Connection\Protocol\RDP\RDPColors.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpExtensions.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPPerformanceFlags.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol7.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol8.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPResolutions.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPSoundQuality.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPSounds.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpVersion.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
     <Compile Include="Credential\PlaceholderCredentialRecord.cs" />
@@ -641,7 +643,7 @@
     <Compile Include="Connection\Protocol\ProtocolType.cs" />
     <Compile Include="Connection\Protocol\PuttyBase.cs" />
     <Compile Include="Connection\Protocol\RAW\RawProtocol.cs" />
-    <Compile Include="Connection\Protocol\RDP\RdpProtocol.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol6.cs" />
     <Compile Include="Connection\Protocol\Rlogin\Connection.Protocol.Rlogin.cs" />
     <Compile Include="Connection\Protocol\Serial\Connection.Protocol.Serial.cs" />
     <Compile Include="Connection\Protocol\SSH\Connection.Protocol.SSH1.cs" />
