@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -1045,8 +1045,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All RDP components were found and seem to be registered properly.
-        ///Remote Desktop Connection Control Version {0}.
+        ///   Looks up a localized string similar to The following RDP protocol versions are supported on this machine: {0}.
         /// </summary>
         internal static string strCcRDPOK {
             get {

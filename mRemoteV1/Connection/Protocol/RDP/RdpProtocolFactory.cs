@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
@@ -41,6 +43,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
 
             throw new ArgumentOutOfRangeException();
+        }
+
+        public List<RdpVersion> GetSupportedVersions()
+        {
+            var versions = Enum.GetValues(typeof(RdpVersion))
+                .OfType<RdpVersion>()
+                .Except(new[] {RdpVersion.Highest});
+
+            var supportedVersions = new List<RdpVersion>();
+            foreach (var version in versions)
+            {
+                if (Build(version).RdpVersionSupported())
+                    supportedVersions.Add(version);
+            }
+
+            return supportedVersions;
         }
     }
 }

@@ -332,8 +332,7 @@ Please make sure that either you have the Putty.exe in your mRemoteNG directory 
 If this check still fails or you are unable to use RDP, please consult the at {0}.</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
-    <value>All RDP components were found and seem to be registered properly.
-Remote Desktop Connection Control Version {0}</value>
+    <value>The following RDP protocol versions are supported on this machine: {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
     <value>VNC requires VncSharp.dll to be located in your mRemoteNG application folder.

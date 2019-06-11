@@ -293,7 +293,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         /// is supported on this machine.
         /// </summary>
         /// <returns></returns>
-        public bool IsRdpVersionSupported()
+        public bool RdpVersionSupported()
         {
             try
             {
@@ -303,7 +303,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     return true;
                 }
             }
-            catch (COMException ex)
+            catch (Exception ex)
             {
                 return false;
             }
