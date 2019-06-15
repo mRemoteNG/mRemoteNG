@@ -15,6 +15,7 @@ Welcome to mRemoteNG's documentation!
    
    user_interface.rst
    folders_and_inheritance.rst
+   protocols.rst
    keyboard_shortcuts.rst
    sql_configuration.rst
    command_line_switches.rst
