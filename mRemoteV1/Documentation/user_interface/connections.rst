@@ -27,7 +27,7 @@ New Connection
 
 .. tip::
 
-    When iside an SSH session you can open the PuTTY menu by holding down the CTRL key while right-clicking into the session window.
+    When inside an SSH session you can open the PuTTY menu by holding down the CTRL key while right-clicking into the session window.
 
 Creates a new connection item in the connections dialog after where cursor is present.
 
