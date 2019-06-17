@@ -43,6 +43,7 @@ namespace mRemoteNG.Messages.WriterDecorators
                     if (_filter.AllowDebugMessages) return true;
                     break;
             }
+
             return false;
         }
     }

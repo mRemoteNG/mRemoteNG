@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls.PageSequence
 {
@@ -11,7 +12,8 @@ namespace mRemoteNG.UI.Controls.PageSequence
 
         public SequencedControl()
         {
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            InitializeComponent();
         }
 
         protected virtual void RaiseNextPageEvent()
@@ -21,9 +23,9 @@ namespace mRemoteNG.UI.Controls.PageSequence
 
         protected virtual void ApplyTheme()
         {
-            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
-            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if (!ThemeManager.getInstance().ActiveAndExtended) return;
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
         protected virtual void RaisePreviousPageEvent()
@@ -34,6 +36,18 @@ namespace mRemoteNG.UI.Controls.PageSequence
         protected virtual void RaisePageReplacementEvent(SequencedControl control, RelativePagePosition pagetoReplace)
         {
             PageReplacementRequested?.Invoke(this, new SequencedPageReplcementRequestArgs(control, pagetoReplace));
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // SequencedControl
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "SequencedControl";
+            this.ResumeLayout(false);
         }
     }
 }

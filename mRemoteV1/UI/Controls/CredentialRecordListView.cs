@@ -28,11 +28,12 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        public KeyValuePair<ICredentialRecord, ICredentialRepository> SelectedObject => CastRowObject(objectListView1.SelectedObject);
+        public KeyValuePair<ICredentialRecord, ICredentialRepository> SelectedObject =>
+            CastRowObject(objectListView1.SelectedObject);
 
-        public IEnumerable<KeyValuePair<ICredentialRecord, ICredentialRepository>> SelectedObjects => 
+        public IEnumerable<KeyValuePair<ICredentialRecord, ICredentialRepository>> SelectedObjects =>
             from object item
-            in objectListView1.SelectedObjects
+                in objectListView1.SelectedObjects
             select CastRowObject(item);
 
         public bool MultipleObjectsSelected => objectListView1.SelectedObjects.Count > 1;
@@ -115,28 +116,35 @@ namespace mRemoteNG.UI.Controls
 
         private KeyValuePair<ICredentialRecord, ICredentialRepository> CastRowObject(object model)
         {
-            if (!(model is KeyValuePair<ICredentialRecord, ICredentialRepository>)) return default(KeyValuePair<ICredentialRecord, ICredentialRepository>);
+            if (!(model is KeyValuePair<ICredentialRecord, ICredentialRepository>))
+                return default(KeyValuePair<ICredentialRecord, ICredentialRepository>);
             var keyValuePair = (KeyValuePair<ICredentialRecord, ICredentialRepository>)model;
             return keyValuePair;
         }
 
-        private void CredentialRepositoryListOnRepositoriesUpdated(object sender, CollectionUpdatedEventArgs<ICredentialRepository> arg)
+        private void CredentialRepositoryListOnRepositoriesUpdated(object sender,
+                                                                   CollectionUpdatedEventArgs<ICredentialRepository>
+                                                                       arg)
         {
             SetObjectList();
         }
 
-        private void CredentialRepositoryListOnCredentialsUpdated(object sender, CollectionUpdatedEventArgs<ICredentialRecord> collectionUpdatedEventArgs)
+        private void CredentialRepositoryListOnCredentialsUpdated(object sender,
+                                                                  CollectionUpdatedEventArgs<ICredentialRecord>
+                                                                      collectionUpdatedEventArgs)
         {
             SetObjectList();
         }
 
         public event EventHandler SelectionChanged;
+
         private void RaiseSelectionChangedEvent()
         {
             SelectionChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler<CellClickEventArgs> CellClick;
+
         private void RaiseCellClickEvent(object sender, CellClickEventArgs args)
         {
             CellClick?.Invoke(sender, args);

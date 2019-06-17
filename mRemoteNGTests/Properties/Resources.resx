@@ -154,6 +154,9 @@
   <data name="dev_update_portable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dev-update-portable.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="TestImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TestImage.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="test_puttyConnectionManager_database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\test_puttyConnectionManager_database.dat;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
@@ -171,6 +174,12 @@
   </data>
   <data name="test_rdcman_v2_7_schema3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\test_RDCMan_v2_7_schema3.rdg;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="test_rdcman_v2_7_schema3_empty_values" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\test_rdcman_v2_7_schema3_empty_values.rdg;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="test_rdcman_v2_7_schema3_null_values" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\test_rdcman_v2_7_schema3_null_values.rdg;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="test_remotedesktopconnection_rdp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\test_remotedesktopconnection.rdp;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>

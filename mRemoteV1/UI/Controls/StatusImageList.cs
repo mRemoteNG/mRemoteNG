@@ -21,8 +21,8 @@ namespace mRemoteNG.UI.Controls
             {
                 ColorDepth = ColorDepth.Depth32Bit,
                 ImageSize = new Size(
-                    (int)Math.Round(16 * display.ResolutionScalingFactor.Width), 
-                    (int)Math.Round(16 * display.ResolutionScalingFactor.Height)),
+                                     (int)Math.Round(16 * display.ResolutionScalingFactor.Width),
+                                     (int)Math.Round(16 * display.ResolutionScalingFactor.Height)),
                 TransparentColor = Color.Transparent
             };
 
@@ -48,7 +48,7 @@ namespace mRemoteNG.UI.Controls
             if (connectionInfo is RootPuttySessionsNodeInfo) return "PuttySessions";
             if (connectionInfo is RootNodeInfo) return "Root";
             if (connectionInfo is ContainerInfo) return "Folder";
-            
+
             return GetConnectionIcon(connectionInfo);
         }
 
@@ -69,28 +69,27 @@ namespace mRemoteNG.UI.Controls
 
             var connected = connection.OpenConnections.Count > 0;
             var name = BuildConnectionIconName(connection.Icon, connected);
-            if (!ImageList.Images.ContainsKey(name))
+            if (ImageList.Images.ContainsKey(name)) return name;
+            var image = ConnectionIcon.FromString(connection.Icon);
+            if (image == null)
             {
-                var image = ConnectionIcon.FromString(connection.Icon);
-                if (image == null)
-                {
-                    return DefaultConnectionIcon;
-                }
-
-                ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), image);
-                ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true), Overlay(image, Resources.ConnectedOverlay));
-
+                return DefaultConnectionIcon;
             }
+
+            ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), image);
+            ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true),
+                                 Overlay(image, Resources.ConnectedOverlay));
             return name;
         }
 
         private static Bitmap Overlay(Icon background, Image foreground)
         {
-            var result = background.ToBitmap();
+            var result = new Bitmap(background.ToBitmap(), new Size(16, 16));
             using (var gr = Graphics.FromImage(result))
             {
                 gr.DrawImage(foreground, new Rectangle(0, 0, foreground.Width, foreground.Height));
             }
+
             return result;
         }
 
@@ -104,13 +103,24 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace($"Unable to fill the image list of type {nameof(StatusImageList)}", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                                                                $"Unable to fill the image list of type {nameof(StatusImageList)}",
+                                                                ex);
             }
         }
 
         public void Dispose()
         {
-            ImageList?.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ImageList?.Dispose();
+            }
         }
     }
 }

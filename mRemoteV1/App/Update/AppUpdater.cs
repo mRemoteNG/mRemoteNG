@@ -10,8 +10,9 @@ using System.Security.Cryptography;
 #if !PORTABLE
 using mRemoteNG.Tools;
 
-#else 
+#else
 using System.Windows.Forms;
+
 #endif
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -66,7 +67,12 @@ namespace mRemoteNG.App.Update
             SetProxySettings(shouldWeUseProxy, proxyAddress, port, useAuthentication, username, password);
         }
 
-        public void SetProxySettings(bool useProxy, string address, int port, bool useAuthentication, string username, string password)
+        public void SetProxySettings(bool useProxy,
+                                     string address,
+                                     int port,
+                                     bool useAuthentication,
+                                     string username,
+                                     string password)
         {
             if (useProxy && !string.IsNullOrEmpty(address))
             {
@@ -107,7 +113,8 @@ namespace mRemoteNG.App.Update
         {
             if (CurrentUpdateInfo == null || !CurrentUpdateInfo.IsValid)
             {
-                throw new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling GetChangeLogAsync().");
+                throw new InvalidOperationException(
+                                                    "CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling GetChangeLogAsync().");
             }
 
             if (IsGetChangeLogRunning)
@@ -131,27 +138,29 @@ namespace mRemoteNG.App.Update
             if (CurrentUpdateInfo == null || !CurrentUpdateInfo.IsValid)
             {
                 throw new InvalidOperationException(
-                    "CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().");
+                                                    "CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().");
             }
 #if !PORTABLE
-            CurrentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "msi"));
+            CurrentUpdateInfo.UpdateFilePath =
+ Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "msi"));
 #else
-		    var sfd = new SaveFileDialog
-		    {
-		        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
+            var sfd = new SaveFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
                 FileName = CurrentUpdateInfo.FileName,
-		        RestoreDirectory = true
-		    };
-		    if (sfd.ShowDialog() == DialogResult.OK)
-		    {
+                RestoreDirectory = true
+            };
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
                 CurrentUpdateInfo.UpdateFilePath = sfd.FileName;
             }
-		    else
-		    {
-		        return;
-		    }
+            else
+            {
+                return;
+            }
 #endif
-            DownloadUpdateWebClient.DownloadFileAsync(CurrentUpdateInfo.DownloadAddress, CurrentUpdateInfo.UpdateFilePath);
+            DownloadUpdateWebClient.DownloadFileAsync(CurrentUpdateInfo.DownloadAddress,
+                                                      CurrentUpdateInfo.UpdateFilePath);
         }
 
         #endregion
@@ -191,7 +200,9 @@ namespace mRemoteNG.App.Update
         }
 
         private static DownloadStringCompletedEventArgs NewDownloadStringCompletedEventArgs(string result,
-            Exception exception, bool cancelled, object userToken)
+                                                                                            Exception exception,
+                                                                                            bool cancelled,
+                                                                                            object userToken)
         {
             var type = typeof(DownloadStringCompletedEventArgs);
             const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
@@ -201,7 +212,7 @@ namespace mRemoteNG.App.Update
 
             if (constructor == null)
                 return null;
-            return (DownloadStringCompletedEventArgs) constructor.Invoke(arguments);
+            return (DownloadStringCompletedEventArgs)constructor.Invoke(arguments);
         }
 
         private DownloadStringCompletedEventArgs DownloadString(Uri address)
@@ -326,11 +337,13 @@ namespace mRemoteNG.App.Update
         {
             add
             {
-                GetUpdateInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Combine(GetUpdateInfoCompletedEventEvent, value);
+                GetUpdateInfoCompletedEventEvent =
+                    (AsyncCompletedEventHandler)Delegate.Combine(GetUpdateInfoCompletedEventEvent, value);
             }
             remove
             {
-                GetUpdateInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(GetUpdateInfoCompletedEventEvent, value);
+                GetUpdateInfoCompletedEventEvent =
+                    (AsyncCompletedEventHandler)Delegate.Remove(GetUpdateInfoCompletedEventEvent, value);
             }
         }
 
@@ -340,11 +353,13 @@ namespace mRemoteNG.App.Update
         {
             add
             {
-                GetChangeLogCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Combine(GetChangeLogCompletedEventEvent, value);
+                GetChangeLogCompletedEventEvent =
+                    (AsyncCompletedEventHandler)Delegate.Combine(GetChangeLogCompletedEventEvent, value);
             }
             remove
             {
-                GetChangeLogCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(GetChangeLogCompletedEventEvent, value);
+                GetChangeLogCompletedEventEvent =
+                    (AsyncCompletedEventHandler)Delegate.Remove(GetChangeLogCompletedEventEvent, value);
             }
         }
 
@@ -354,11 +369,15 @@ namespace mRemoteNG.App.Update
         {
             add
             {
-                DownloadUpdateProgressChangedEventEvent = (DownloadProgressChangedEventHandler)Delegate.Combine(DownloadUpdateProgressChangedEventEvent, value);
+                DownloadUpdateProgressChangedEventEvent =
+                    (DownloadProgressChangedEventHandler)Delegate.Combine(DownloadUpdateProgressChangedEventEvent,
+                                                                          value);
             }
             remove
             {
-                DownloadUpdateProgressChangedEventEvent = (DownloadProgressChangedEventHandler)Delegate.Remove(DownloadUpdateProgressChangedEventEvent, value);
+                DownloadUpdateProgressChangedEventEvent =
+                    (DownloadProgressChangedEventHandler)Delegate.Remove(DownloadUpdateProgressChangedEventEvent,
+                                                                         value);
             }
         }
 
@@ -368,11 +387,13 @@ namespace mRemoteNG.App.Update
         {
             add
             {
-                DownloadUpdateCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Combine(DownloadUpdateCompletedEventEvent, value);
+                DownloadUpdateCompletedEventEvent =
+                    (AsyncCompletedEventHandler)Delegate.Combine(DownloadUpdateCompletedEventEvent, value);
             }
             remove
             {
-                DownloadUpdateCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(DownloadUpdateCompletedEventEvent, value);
+                DownloadUpdateCompletedEventEvent =
+                    (AsyncCompletedEventHandler)Delegate.Remove(DownloadUpdateCompletedEventEvent, value);
             }
         }
 

@@ -37,7 +37,7 @@ namespace mRemoteNG.Tools
                 _cMen = new ContextMenuStrip
                 {
                     Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                        System.Drawing.GraphicsUnit.Point, Convert.ToByte(0)),
+                                                   System.Drawing.GraphicsUnit.Point, Convert.ToByte(0)),
                     RenderMode = ToolStripRenderMode.Professional
                 };
                 _cMen.Items.AddRange(new ToolStripItem[] {_cMenCons, cMenSep1, cMenExit});
@@ -46,7 +46,7 @@ namespace mRemoteNG.Tools
                 {
                     Text = @"mRemoteNG",
                     BalloonTipText = @"mRemoteNG",
-                    Icon = Resources.mRemote_Icon,
+                    Icon = Resources.mRemoteNG_Icon,
                     ContextMenuStrip = _cMen,
                     Visible = true
                 };
@@ -85,7 +85,9 @@ namespace mRemoteNG.Tools
             };
 
             // ReSharper disable once CoVariantArrayConversion
-            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionsService.ConnectionTreeModel).ToArray();
+            ToolStripItem[] rootMenuItems = menuItemsConverter
+                                            .CreateToolStripDropDownItems(Runtime.ConnectionsService
+                                                                                 .ConnectionTreeModel).ToArray();
             _cMenCons.DropDownItems.AddRange(rootMenuItems);
         }
 
@@ -119,7 +121,7 @@ namespace mRemoteNG.Tools
             if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
             if (FrmMain.Visible == false)
                 ShowForm();
-            _connectionInitiator.OpenConnection((ConnectionInfo) ((ToolStripMenuItem) sender).Tag);
+            _connectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
         }
 
         private static void cMenExit_Click(object sender, EventArgs e)

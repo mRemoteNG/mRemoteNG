@@ -8,14 +8,14 @@ using mRemoteNG.Connection.Protocol;
 
 namespace mRemoteNG.Tools
 {
-	public class MultiSSHController
+    public class MultiSSHController
     {
-        private ArrayList processHandlers = new ArrayList();
-        private ArrayList quickConnectConnections = new ArrayList();
-        private ArrayList previousCommands = new ArrayList();
-        private int previousCommandIndex = 0;
+        private readonly ArrayList processHandlers = new ArrayList();
+        private readonly ArrayList quickConnectConnections = new ArrayList();
+        private readonly ArrayList previousCommands = new ArrayList();
+        private int previousCommandIndex;
 
-        public int CommandHistoryLength { get; set; } = 100;
+        private int CommandHistoryLength { get; set; } = 100;
 
         public MultiSSHController(TextBox txtBox)
         {
@@ -41,7 +41,7 @@ namespace mRemoteNG.Tools
 
         private ArrayList ProcessOpenConnections(ConnectionInfo connection)
         {
-            ArrayList handlers = new ArrayList();
+            var handlers = new ArrayList();
 
             foreach (ProtocolBase _base in connection.OpenConnections)
             {
@@ -60,13 +60,15 @@ namespace mRemoteNG.Tools
             {
                 return;
             }
+
             foreach (PuttyBase proc in processHandlers)
             {
                 NativeMethods.PostMessage(proc.PuttyHandle, keyType, new IntPtr(keyData), new IntPtr(0));
             }
         }
 
-#region Event Processors
+        #region Event Processors
+
         private void refreshActiveConnections(object sender, EventArgs e)
         {
             processHandlers.Clear();
@@ -75,9 +77,10 @@ namespace mRemoteNG.Tools
                 processHandlers.AddRange(ProcessOpenConnections(connection));
             }
 
-            var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
+            var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList()
+                                                   .Where(item => item.OpenConnections.Count > 0);
 
-            foreach (ConnectionInfo connection in connectionTreeConnections)
+            foreach (var connection in connectionTreeConnections)
             {
                 processHandlers.AddRange(ProcessOpenConnections(connection));
             }
@@ -85,8 +88,7 @@ namespace mRemoteNG.Tools
 
         private void processKeyPress(object sender, KeyEventArgs e)
         {
-            TextBox txtMultiSSH = sender as TextBox;
-            if (txtMultiSSH == null) return;            
+            if (!(sender is TextBox txtMultiSSH)) return;
 
             if (processHandlers.Count == 0)
             {
@@ -111,42 +113,40 @@ namespace mRemoteNG.Tools
                 txtMultiSSH.Select(txtMultiSSH.TextLength, 0);
             }
 
-            if (e.Control == true && e.KeyCode != Keys.V && e.Alt == false)
+            if (e.Control && e.KeyCode != Keys.V && e.Alt == false)
             {
                 SendAllKeystrokes(NativeMethods.WM_KEYDOWN, e.KeyValue);
             }
 
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode != Keys.Enter) return;
+            var strLine = txtMultiSSH.Text;
+            foreach (var chr1 in strLine)
             {
-                string strLine = txtMultiSSH.Text;
-                foreach (char chr1 in strLine)
-                {
-                    SendAllKeystrokes(NativeMethods.WM_CHAR, Convert.ToByte(chr1));
-                }
-                SendAllKeystrokes(NativeMethods.WM_KEYDOWN, 13); // Enter = char13
+                SendAllKeystrokes(NativeMethods.WM_CHAR, Convert.ToByte(chr1));
             }
+
+            SendAllKeystrokes(NativeMethods.WM_KEYDOWN, 13); // Enter = char13
         }
 
         private void processKeyRelease(object sender, KeyEventArgs e)
         {
-            TextBox txtMultiSSH = sender as TextBox;
-            if (txtMultiSSH == null) return;
+            if (!(sender is TextBox txtMultiSSH)) return;
 
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode != Keys.Enter) return;
+            if (txtMultiSSH.Text.Trim() != "")
             {
-                    if (txtMultiSSH.Text.Trim() != "")
-                    {
-                        previousCommands.Add(txtMultiSSH.Text.Trim());
-                    }
-                    if (previousCommands.Count >= CommandHistoryLength)
-                    {
-                        previousCommands.RemoveAt(0);
-                    }
-
-                    previousCommandIndex = previousCommands.Count - 1;
-                    txtMultiSSH.Clear();
-                }
+                previousCommands.Add(txtMultiSSH.Text.Trim());
             }
-#endregion
+
+            if (previousCommands.Count >= CommandHistoryLength)
+            {
+                previousCommands.RemoveAt(0);
+            }
+
+            previousCommandIndex = previousCommands.Count - 1;
+            txtMultiSSH.Clear();
+        }
+
+        #endregion
     }
 }

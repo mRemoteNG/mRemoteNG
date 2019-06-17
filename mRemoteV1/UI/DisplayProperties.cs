@@ -2,16 +2,35 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Windows.Forms;
+using mRemoteNG.Tools;
+using mRemoteNG.UI.GraphicsUtilities;
 
 namespace mRemoteNG.UI
 {
     public class DisplayProperties
     {
-        // Dpi of a 'normal' definition screen
-        private const int BaselineDpi = 96;
+        private readonly IGraphicsProvider _graphicsProvider;
 
-        public SizeF ResolutionScalingFactor { get; } = GetResolutionScalingFactor();
+        public SizeF ResolutionScalingFactor => _graphicsProvider.GetResolutionScalingFactor();
+
+        /// <summary>
+        /// Creates a new <see cref="DisplayProperties"/> instance with the default
+        /// <see cref="IGraphicsProvider"/> of type <see cref="GdiPlusGraphicsProvider"/>
+        /// </summary>
+        public DisplayProperties()
+            : this(new GdiPlusGraphicsProvider())
+        {
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="DisplayProperties"/> instance with the given
+        /// <see cref="IGraphicsProvider"/>.
+        /// </summary>
+        /// <param name="graphicsProvider"></param>
+        public DisplayProperties(IGraphicsProvider graphicsProvider)
+        {
+            _graphicsProvider = graphicsProvider.ThrowIfNull(nameof(graphicsProvider));
+        }
 
         /// <summary>
         /// Scale the given nominal width value by the <see cref="ResolutionScalingFactor"/>
@@ -28,7 +47,7 @@ namespace mRemoteNG.UI
         /// <param name="height"></param>
         public int ScaleHeight(float height)
         {
-            return CalculateScaledValue(height, ResolutionScalingFactor.Width);
+            return CalculateScaledValue(height, ResolutionScalingFactor.Height);
         }
 
         /// <summary>
@@ -52,6 +71,9 @@ namespace mRemoteNG.UI
         /// </remarks>
         public Bitmap ScaleImage(Image image)
         {
+            if (image == null)
+                throw new ArgumentNullException(nameof(image));
+
             var width = ScaleWidth(image.Width);
             var height = ScaleHeight(image.Height);
             var destRect = new Rectangle(0, 0, width, height);
@@ -79,6 +101,9 @@ namespace mRemoteNG.UI
 
         public Bitmap ScaleImage(Icon icon)
         {
+            if (icon == null)
+                throw new ArgumentNullException(nameof(icon));
+
             return ScaleImage(icon.ToBitmap());
         }
 
@@ -89,14 +114,6 @@ namespace mRemoteNG.UI
         private int CalculateScaledValue(float value, float scalingValue)
         {
             return (int)Math.Round(value * scalingValue);
-        }
-
-        private static SizeF GetResolutionScalingFactor()
-        {
-            using (var g = new Form().CreateGraphics())
-            {
-                return new SizeF(g.DpiX/BaselineDpi, g.DpiY / BaselineDpi);
-            }
         }
     }
 }

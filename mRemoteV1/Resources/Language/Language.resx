@@ -508,7 +508,7 @@ VncSharp Control Version {0}</value>
     <value>Connection failed!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
-    <value>Protocol Event ErrorOccured</value>
+    <value>A connection protocol error occurred. Host: "{1}"; Error code: "{2}"; Error Description: "{0}"</value>
   </data>
   <data name="strConnectionOpenFailed" xml:space="preserve">
     <value>Opening connection failed!</value>
@@ -622,10 +622,10 @@ Starting with new connections file.</value>
     <value>Completely encrypt connection file</value>
   </data>
   <data name="strEndIP" xml:space="preserve">
-    <value>End IP</value>
+    <value>Last IP</value>
   </data>
   <data name="strEndPort" xml:space="preserve">
-    <value>End Port</value>
+    <value>Last Port</value>
   </data>
   <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
     <value>AddExternalToolsToToolBar (frmMain) failed. {0}</value>
@@ -655,11 +655,11 @@ Starting with new connections file.</value>
     <value>Encryption failed. {0}</value>
   </data>
   <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>The Windows security setting, "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing", is enabled. This setting is not compatible with {0}.
+    <value>The Windows security setting, "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing", is enabled. 
 
 See the Microsoft Support article at http://support.microsoft.com/kb/811833 for more information.
 
-{0} will now close.</value>
+{0} is not fully FIPS compliant. Click OK to proceed at your own discretion, or Cancel to Exit.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Errors</value>
@@ -1220,7 +1220,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>&amp;View</value>
   </data>
   <data name="strMenuViewOnly" xml:space="preserve">
-    <value>View Only (VNC)</value>
+    <value>View Only</value>
   </data>
   <data name="strMenuWebsite" xml:space="preserve">
     <value>Website</value>
@@ -1472,14 +1472,17 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirecClipboard" xml:space="preserve">
-    <value>Select whether clipboard should be shared.</value>
+  <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
+    <value>Select whether the clipboard should be shared.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local smart cards should be available on the remote host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+    <value>Select whether the default audio input device on the remote machine should be redirected to this computer.</value>
   </data>
   <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Select one of the available rendering engines that will be used to display HTML.</value>
@@ -1643,6 +1646,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sounds</value>
   </data>
+  <data name="strPropertyNameRedirectAudioCapture" xml:space="preserve">
+    <value>Audio Capture</value>
+  </data>
   <data name="strPropertyNameRenderingEngine" xml:space="preserve">
     <value>Rendering Engine</value>
   </data>
@@ -1683,9 +1689,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Proxy Username</value>
   </data>
   <data name="strProtocolEventDisconnected" xml:space="preserve">
-    <value>Protocol Event Disconnected.
-Message:
-{0}</value>
+    <value>Protocol Event Disconnected. Host: "{1}"; Protocol: "{2}" Message: "{0}"</value>
   </data>
   <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
     <value>Protocol Event Disconnected failed.
@@ -2070,10 +2074,10 @@ Message:
     <value>SSH transfer failed.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
-    <value>Start IP</value>
+    <value>First IP</value>
   </data>
   <data name="strStartPort" xml:space="preserve">
-    <value>Start Port</value>
+    <value>First Port</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
     <value>Startup/Exit</value>
@@ -2586,8 +2590,8 @@ This page will walk you through the process of upgrading your connections file o
   <data name="strOptionsThemeNewThemeText" xml:space="preserve">
     <value>Type the new theme name</value>
   </data>
-  <data name="strOptionsThemeThemeChaangeWarning" xml:space="preserve">
-    <value>Warning: Restart is required to disable the themes or to completely apply a new one</value>
+  <data name="strOptionsThemeChangeWarning" xml:space="preserve">
+    <value>Warning: Restart is required to commit any theme configuration change.</value>
   </data>
   <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
     <value>No themes are loaded, check that the default mRemoteNG themes exist in the 'themes' folder</value>
@@ -2638,7 +2642,7 @@ This page will walk you through the process of upgrading your connections file o
     <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
   </data>
   <data name="strTimeoutInSeconds" xml:space="preserve">
-    <value>Timeout (seconds)</value>
+    <value>Timeout [seconds]</value>
   </data>
   <data name="srtWorkingDirectory" xml:space="preserve">
     <value>Working directory:</value>
@@ -2735,6 +2739,68 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="strMenuCopyHostname" xml:space="preserve">
     <value>Copy Hostname</value>
+  </data>
+  <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Place search bar above connection tree</value>
+  </data>
+  <data name="strPortScanSinglePort" xml:space="preserve">
+    <value>To scan a single port, select the "First Port" only.</value>
+  </data>
+  <data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Track active connection in the connection tree</value>
+  </data>
+  <data name="strAlwaysShowConnectionTabs" xml:space="preserve">
+    <value>Always show connection tabs</value>
+  </data>
+  <data name="strReleaseChannel" xml:space="preserve">
+    <value>Release Channel</value>
+  </data>
+  <data name="strReleaseChannelExplanation" xml:space="preserve">
+    <value>Stable channel includes final releases only.
+Beta channel includes Betas &amp; Release Candidates.
+Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
+  </data>
+  <data name="strButtonApply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="strCategoryProxy" xml:space="preserve">
+    <value>Proxy</value>
+  </data>
+  <data name="strMultiSSH" xml:space="preserve">
+    <value>Multi SSH:</value>
+  </data>
+  <data name="strMultiSSHToolTip" xml:space="preserve">
+    <value>Press ENTER to send. Ctrl+C is sent immediately.</value>
+  </data>
+  <data name="strPropertyDescriptionFavorite" xml:space="preserve">
+    <value>Show this connection in the favorites menu.</value>
+  </data>
+  <data name="strPropertyNameFavorite" xml:space="preserve">
+    <value>Favorite</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Clear search string</value>
+  </data>
+  <data name="ConnectInViewOnlyMode" xml:space="preserve">
+    <value>Connect in View Only mode</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Do not trim spaces from usernames</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="EncryptionTestResultMessage" xml:space="preserve">
+      <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
+  </data>
+  <data name="EncryptionTest" xml:space="preserve">
+      <value>Encryption Test</value>
+  </data>
+  <data name="TestSettings" xml:space="preserve">
+      <value>Test Settings</value>
   </data>
   <data name="strShowParentInfoOnTabs" xml:space="preserve">
     <value>Show parent information on tab names</value>

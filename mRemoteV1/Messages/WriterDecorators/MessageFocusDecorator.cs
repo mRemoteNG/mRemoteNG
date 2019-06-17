@@ -15,7 +15,9 @@ namespace mRemoteNG.Messages.WriterDecorators
         private readonly ErrorAndInfoWindow _messageWindow;
         private readonly FrmMain _frmMain = FrmMain.Default;
 
-        public MessageFocusDecorator(ErrorAndInfoWindow messageWindow, IMessageTypeFilteringOptions filter, IMessageWriter decoratedWriter)
+        public MessageFocusDecorator(ErrorAndInfoWindow messageWindow,
+                                     IMessageTypeFilteringOptions filter,
+                                     IMessageWriter decoratedWriter)
         {
             _filter = filter ?? throw new ArgumentNullException(nameof(filter));
             _messageWindow = messageWindow ?? throw new ArgumentNullException(nameof(messageWindow));
@@ -46,14 +48,15 @@ namespace mRemoteNG.Messages.WriterDecorators
                     if (_filter.AllowErrorMessages) return true;
                     break;
             }
+
             return false;
         }
 
         private async Task SwitchToMessageAsync()
         {
             await Task
-                .Delay(TimeSpan.FromMilliseconds(300))
-                .ContinueWith(task => SwitchToMessage());
+                  .Delay(TimeSpan.FromMilliseconds(300))
+                  .ContinueWith(task => SwitchToMessage());
         }
 
         private void SwitchToMessage()

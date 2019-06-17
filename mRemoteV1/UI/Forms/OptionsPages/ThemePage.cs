@@ -3,32 +3,30 @@ using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Linq;
 using System.Collections.Generic;
-using System.Drawing;
 using BrightIdeasSoftware;
 using mRemoteNG.UI.Forms.Input;
+using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-    public partial class ThemePage
+    public sealed partial class ThemePage
     {
-
         #region Private Fields
-        private ThemeManager _themeManager;
-        private ThemeInfo _oriTheme;
-        private bool _oriActiveTheming;
-        List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
-        #endregion
 
+        private readonly ThemeManager _themeManager;
+        private readonly bool _oriActiveTheming;
+        private readonly List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
+
+        #endregion
 
         public ThemePage()
         {
-
             InitializeComponent();
+            PageIcon = Resources.Appearance_Icon;
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;
-            _oriTheme = _themeManager.ActiveTheme;
             _oriActiveTheming = _themeManager.ThemingActive;
         }
 
@@ -38,28 +36,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             set { }
         }
 
-        public override Icon PageIcon { get; protected set; } = Resources.Appearance_Icon;
-
         public override void ApplyLanguage()
         {
             base.ApplyLanguage();
 
             btnThemeDelete.Text = Language.strOptionsThemeButtonDelete;
             btnThemeNew.Text = Language.strOptionsThemeButtonNew;
-            labelRestart.Text = Language.strOptionsThemeThemeChaangeWarning;
-            themeEnableCombo.Text = Language.strOptionsThemeEnableTheming;
+            labelRestart.Text = Language.strOptionsThemeChangeWarning;
         }
 
         private new void ApplyTheme()
         {
             if (!_themeManager.ThemingActive)
                 return;
-            base.ApplyTheme(); 
+            base.ApplyTheme();
         }
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
             //At first we cannot create or delete themes, depends later on the type of selected theme
             btnThemeNew.Enabled = false;
             btnThemeDelete.Enabled = false;
@@ -70,20 +64,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cboTheme.SelectedItem = _themeManager.ActiveTheme;
             cboTheme_SelectionChangeCommitted(this, new EventArgs());
             cboTheme.DisplayMember = "Name";
-            //Color cell formatter 
-            listPalette.FormatCell += ListPalette_FormatCell;
-            //Load theming active property and disable controls 
-            if (_themeManager.ThemingActive)
-            {
-                themeEnableCombo.Checked = true;
-            }
-            else
-            {
-                themeEnableCombo.Checked = false;
-                cboTheme.Enabled = false;
-                // reset to the default theme when disabling theme support
-                _themeManager.ActiveTheme = _themeManager.DefaultTheme;
-            }
+
+            listPalette.FormatCell += ListPalette_FormatCell; //Color cell formatter
         }
 
         private void ListPalette_FormatCell(object sender, FormatCellEventArgs e)
@@ -97,7 +79,25 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             base.SaveSettings();
-            foreach(var updatedTheme in modifiedThemes)
+
+            Settings.Default.ThemingActive = true;
+
+            // Save the theme settings form close so we don't run into unexpected results while modifying...
+            // Prompt the user that a restart is required to apply the new theme...
+            if (cboTheme.SelectedItem != null
+            ) // LoadSettings calls SaveSettings, so these might be null the first time around
+            {
+                if (!Settings.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
+                {
+                    Settings.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
+
+                    CTaskDialog.MessageBox("Theme Changed", "Restart Required.",
+                                           "Please restart mRemoteNG to apply the selected theme.",
+                                           ETaskDialogButtons.Ok, ESysIcons.Information);
+                }
+            }
+
+            foreach (var updatedTheme in modifiedThemes)
             {
                 _themeManager.updateTheme(updatedTheme);
             }
@@ -106,36 +106,43 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void RevertSettings()
         {
             base.RevertSettings();
-            _themeManager.ActiveTheme = _oriTheme;
             _themeManager.ThemingActive = _oriActiveTheming;
         }
-
 
         #region Private Methods
 
         #region Event Handlers
 
-
-
         private void cboTheme_SelectionChangeCommitted(object sender, EventArgs e)
         {
             btnThemeNew.Enabled = false;
             btnThemeDelete.Enabled = false;
-            if (!_themeManager.ThemingActive) return;
-            _themeManager.ActiveTheme = (ThemeInfo)cboTheme.SelectedItem;
-            listPalette.ClearObjects();
-            if (!_themeManager.ActiveTheme.IsExtendable || !_themeManager.ThemingActive) return;
-            btnThemeNew.Enabled = true;
-            listPalette.ClearObjects();
+
+            // don't display listPalette if it's not an Extendable theme...
+            listPalette.CellClick -= ListPalette_CellClick;
             listPalette.Enabled = false;
-            ColorMeList();
-            if (_themeManager.ActiveTheme.IsThemeBase) return;
-            listPalette.Enabled = true;
+            listPalette.Visible = false;
+
+            if (!_themeManager.ThemingActive) return;
+
+            btnThemeNew.Enabled = true;
+
+            var selectedTheme = (ThemeInfo)cboTheme.SelectedItem;
+
+            if (selectedTheme != null && selectedTheme.IsExtendable)
+            {
+                // it's Extendable, so now we can do this more expensive operations...
+                listPalette.ClearObjects();
+                ColorMeList(selectedTheme);
+                listPalette.Enabled = true;
+                listPalette.Visible = true;
+                listPalette.CellClick += ListPalette_CellClick;
+            }
+
+            if (selectedTheme != null && selectedTheme.IsThemeBase) return;
+
             btnThemeDelete.Enabled = true;
-            listPalette.CellClick += ListPalette_CellClick;
         }
-
-
 
         /// <summary>
         /// Edit an object, since KeyValuePair value cannot be set without creating a new object, a parallel object model exist in the list
@@ -145,7 +152,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// <param name="e"></param>
         private void ListPalette_CellClick(object sender, CellClickEventArgs e)
         {
-
             var colorElem = (PseudoKeyColor)e.Model;
 
             var colorDlg = new ColorDialog
@@ -163,36 +169,43 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             colorElem.Value = colorDlg.Color;
             listPalette.RefreshObject(e.Model);
             _themeManager.refreshUI();
-
         }
 
-        private void ColorMeList()
+        private void ColorMeList(ThemeInfo ti)
         {
-            foreach (var colorElem in _themeManager.ActiveTheme.ExtendedPalette.ExtColorPalette)
+            foreach (var colorElem in ti.ExtendedPalette.ExtColorPalette)
                 listPalette.AddObject(new PseudoKeyColor(colorElem.Key, colorElem.Value));
         }
 
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
-            var name = _themeManager.ActiveTheme.Name;
-            var res = new InputBox().ShowAsDialog(Language.strOptionsThemeNewThemeCaption, Language.strOptionsThemeNewThemeText, ref name);
-            if (res != DialogResult.OK) return;
-            if (_themeManager.isThemeNameOk(name))
+            using (var frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption,
+                                                     Language.strOptionsThemeNewThemeText,
+                                                     _themeManager.ActiveTheme.Name))
             {
-                var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, name);
-                _themeManager.ActiveTheme = addedTheme;
-                LoadSettings();
-            }
-            else
-            {
-                TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
+                var dr = frmInputBox.ShowDialog();
+                if (dr != DialogResult.OK) return;
+                if (_themeManager.isThemeNameOk(frmInputBox.returnValue))
+                {
+                    var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
+                    _themeManager.ActiveTheme = addedTheme;
+                    LoadSettings();
+                }
+                else
+                {
+                    CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "",
+                                                  "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error,
+                                                  ESysIcons.Information, 0);
+                }
             }
         }
 
         private void btnThemeDelete_Click(object sender, EventArgs e)
         {
-
-            var res = TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings , Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.YesNo, TaskDialog.ESysIcons.Question, TaskDialog.ESysIcons.Information, 0);
+            var res = CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings,
+                                                    Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "",
+                                                    ETaskDialogButtons.YesNo,
+                                                    ESysIcons.Question, ESysIcons.Information, 0);
 
             if (res != DialogResult.Yes) return;
             if (modifiedThemes.Contains(_themeManager.ActiveTheme))
@@ -204,30 +217,5 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         #endregion
 
         #endregion
-
-        private void themeEnableCombo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (themeEnableCombo.Checked)
-            {
-                _themeManager.ThemingActive = true;
-                if(_themeManager.ThemingActive)
-                {
-                    themeEnableCombo.Checked = true;
-                    cboTheme.Enabled = true;
-                }
-                else
-                {
-                    TaskDialog.CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeErrorNoThemes, "", "", "", "", "", "", TaskDialog.ETaskDialogButtons.Ok, TaskDialog.ESysIcons.Error, TaskDialog.ESysIcons.Information, 0);
-                    themeEnableCombo.Checked = false;
-                }
-            }
-            else
-            {
-                _themeManager.ThemingActive = false;
-                themeEnableCombo.Checked = false;
-                cboTheme.Enabled = false;
-            }
-            LoadSettings();
-        }
     }
 }

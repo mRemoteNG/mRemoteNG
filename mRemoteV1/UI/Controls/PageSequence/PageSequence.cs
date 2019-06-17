@@ -13,18 +13,17 @@ namespace mRemoteNG.UI.Controls.PageSequence
         public IEnumerable<SequencedControl> Pages => _pages;
         public int CurrentPageIndex { get; private set; }
 
-        public PageSequence(Control pageContainer, IEnumerable<SequencedControl> pages) : this(pageContainer, pages.ToArray())
+        public PageSequence(Control pageContainer, IEnumerable<SequencedControl> pages) : this(pageContainer,
+                                                                                               pages.ToArray())
         {
         }
 
         public PageSequence(Control pageContainer, params SequencedControl[] pages)
         {
-            if (pageContainer == null)
-                throw new ArgumentNullException(nameof(pageContainer));
             if (pages == null)
                 throw new ArgumentNullException(nameof(pages));
 
-            _pageContainer = pageContainer;
+            _pageContainer = pageContainer ?? throw new ArgumentNullException(nameof(pageContainer));
             foreach (var page in pages)
             {
                 SubscribeToPageEvents(page);
@@ -61,6 +60,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
                     indexModifier++;
                     break;
             }
+
             var pageIndexToReplace = CurrentPageIndex + indexModifier;
             UnsubscribeFromPageEvents(_pages[pageIndexToReplace]);
             SubscribeToPageEvents(newPage);

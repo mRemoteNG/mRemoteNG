@@ -149,6 +149,9 @@
     <Setting Name="ConDefaultRedirectSound" Type="System.String" Scope="User">
       <Value Profile="(Default)">DoNotPlay</Value>
     </Setting>
+    <Setting Name="ConDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="MaxPuttyWaitTime" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
@@ -252,6 +255,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultRedirectSound" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultResolution" Type="System.Boolean" Scope="User">
@@ -564,7 +570,7 @@
       <Value Profile="(Default)">GCM</Value>
     </Setting>
     <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1000</Value>
+      <Value Profile="(Default)">10000</Value>
     </Setting>
     <Setting Name="ConDefaultSoundQuality" Type="System.String" Scope="User">
       <Value Profile="(Default)">Dynamic</Value>
@@ -639,7 +645,7 @@
       <Value Profile="(Default)">cs-CZ,de,el,en,en-US,es-AR,es,fr,hu,it,ja-JP,ko-KR,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-TR,zh-CN,zh-TW</Value>
     </Setting>
     <Setting Name="ThemingActive" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ConDefaultUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -682,6 +688,30 @@
     </Setting>
     <Setting Name="StartUpPanelName" Type="System.String" Scope="User">
       <Value Profile="(Default)">General</Value>
+    </Setting>
+    <Setting Name="TrackActiveConnectionInConnectionTree" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PlaceSearchBarAboveConnectionTree" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AlwaysShowConnectionTabs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="OverrideFIPSCheck" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultFavorite" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultFavorite" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SQLServerType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mssql</Value>
+    </Setting>
+    <Setting Name="DoNotTrimUsername" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ShowParentInfoOnTabs" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

@@ -3,7 +3,7 @@
 namespace mRemoteNG.UI.Forms
 {
 	
-    public partial class frmChoosePanel : System.Windows.Forms.Form
+    public partial class FrmChoosePanel : System.Windows.Forms.Form
 	{
 		//Form overrides dispose to clean up the component list.
 		[System.Diagnostics.DebuggerNonUserCode()]protected override void Dispose(bool disposing)
@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Forms
             this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnOK.Location = new System.Drawing.Point(167, 72);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(69, 23);
+            this.btnOK.Size = new System.Drawing.Size(75, 24);
             this.btnOK.TabIndex = 20;
             this.btnOK.Text = global::mRemoteNG.Language.strButtonOK;
             this.btnOK.UseVisualStyleBackColor = true;
@@ -70,30 +70,30 @@ namespace mRemoteNG.UI.Forms
             this.btnNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnNew.Image = global::mRemoteNG.Resources.Panel_Add;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(101, 70);
+            this.btnNew.Location = new System.Drawing.Point(86, 72);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(60, 27);
+            this.btnNew.Size = new System.Drawing.Size(75, 24);
             this.btnNew.TabIndex = 40;
             this.btnNew.Text = global::mRemoteNG.Language.strButtonNew;
-            this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // frmChoosePanel
+            // FrmChoosePanel
             // 
             this.AcceptButton = this.btnOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(245, 107);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.cbPanels);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = global::mRemoteNG.Resources.Panels_Icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmChoosePanel";
+            this.Name = "FrmChoosePanel";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Panel";

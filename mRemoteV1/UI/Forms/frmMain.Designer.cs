@@ -1,4 +1,4 @@
-namespace mRemoteNG.UI.Forms
+﻿namespace mRemoteNG.UI.Forms
 {
 	public partial class FrmMain : System.Windows.Forms.Form
 	{
@@ -9,10 +9,15 @@ namespace mRemoteNG.UI.Forms
 		{
 			try
 			{
-				if (disposing && components != null)
+				if (disposing)
 				{
-					components.Dispose();
-				}
+                    if(components != null)
+                        components.Dispose();
+
+                    if(_screenSystemMenu != null)
+                        _screenSystemMenu.Dispose();
+
+                }
 			}
 			finally
 			{
@@ -28,6 +33,7 @@ namespace mRemoteNG.UI.Forms
 		{
             this.components = new System.ComponentModel.Container();
             mRemoteNG.Connection.ConnectionInitiator connectionInitiator1 = new mRemoteNG.Connection.ConnectionInitiator();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new mRemoteNG.UI.Menu.MainFileMenu();
@@ -56,7 +62,7 @@ namespace mRemoteNG.UI.Forms
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
             this.pnlDock.Name = "pnlDock";
-            this.pnlDock.Size = new System.Drawing.Size(1129, 472);
+            this.pnlDock.Size = new System.Drawing.Size(1129, 471);
             this.pnlDock.TabIndex = 13;
             this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
             // 
@@ -64,7 +70,7 @@ namespace mRemoteNG.UI.Forms
             // 
             this.msMain.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
-            this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
+            this.msMain.GripMargin = new System.Windows.Forms.Padding(2);
             this.msMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
@@ -73,8 +79,8 @@ namespace mRemoteNG.UI.Forms
             this.helpMenu});
             this.msMain.Location = new System.Drawing.Point(3, 50);
             this.msMain.Name = "msMain";
-            this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.msMain.Size = new System.Drawing.Size(181, 24);
+            this.msMain.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
+            this.msMain.Size = new System.Drawing.Size(184, 25);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
@@ -82,8 +88,9 @@ namespace mRemoteNG.UI.Forms
             // fileMenu
             // 
             this.fileMenu.ConnectionInitiator = null;
+            this.fileMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.fileMenu.Name = "mMenFile";
-            this.fileMenu.Size = new System.Drawing.Size(37, 20);
+            this.fileMenu.Size = new System.Drawing.Size(37, 19);
             this.fileMenu.Text = "&File";
             this.fileMenu.TreeWindow = null;
             this.fileMenu.DropDownOpening += new System.EventHandler(this.mainFileMenu1_DropDownOpening);
@@ -92,8 +99,9 @@ namespace mRemoteNG.UI.Forms
             // 
             this.viewMenu.FullscreenHandler = null;
             this.viewMenu.MainForm = null;
+            this.viewMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.viewMenu.Name = "mMenView";
-            this.viewMenu.Size = new System.Drawing.Size(44, 20);
+            this.viewMenu.Size = new System.Drawing.Size(44, 19);
             this.viewMenu.Text = "&View";
             this.viewMenu.TsExternalTools = null;
             this.viewMenu.TsMultiSsh = null;
@@ -104,14 +112,16 @@ namespace mRemoteNG.UI.Forms
             // 
             this.toolsMenu.CredentialProviderCatalog = null;
             this.toolsMenu.MainForm = null;
+            this.toolsMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.toolsMenu.Name = "mMenTools";
-            this.toolsMenu.Size = new System.Drawing.Size(47, 20);
+            this.toolsMenu.Size = new System.Drawing.Size(47, 19);
             this.toolsMenu.Text = "&Tools";
             // 
             // helpMenu
             // 
+            this.helpMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.helpMenu.Name = "mMenInfo";
-            this.helpMenu.Size = new System.Drawing.Size(44, 20);
+            this.helpMenu.Size = new System.Drawing.Size(44, 19);
             this.helpMenu.Text = "&Help";
             this.helpMenu.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
@@ -126,7 +136,7 @@ namespace mRemoteNG.UI.Forms
             // tsContainer.ContentPanel
             // 
             this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1129, 472);
+            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1129, 471);
             this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsContainer.Location = new System.Drawing.Point(0, 0);
             this.tsContainer.Name = "tsContainer";
@@ -156,7 +166,6 @@ namespace mRemoteNG.UI.Forms
             // _multiSshToolStrip
             // 
             this._multiSshToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this._multiSshToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._multiSshToolStrip.Location = new System.Drawing.Point(3, 25);
             this._multiSshToolStrip.MinimumSize = new System.Drawing.Size(300, 0);
             this._multiSshToolStrip.Name = "_multiSshToolStrip";
@@ -168,7 +177,7 @@ namespace mRemoteNG.UI.Forms
             this._externalToolsToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this._externalToolsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._externalToolsToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._externalToolsToolStrip.Location = new System.Drawing.Point(39, 74);
+            this._externalToolsToolStrip.Location = new System.Drawing.Point(3, 75);
             this._externalToolsToolStrip.Name = "_externalToolsToolStrip";
             this._externalToolsToolStrip.Size = new System.Drawing.Size(111, 25);
             this._externalToolsToolStrip.TabIndex = 17;
@@ -188,12 +197,13 @@ namespace mRemoteNG.UI.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1129, 571);
             this.Controls.Add(this.tsContainer);
-            this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMain;
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "FrmMain";
             this.Opacity = 0D;
-            this.Text = "mRemoteNG";
+            this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);

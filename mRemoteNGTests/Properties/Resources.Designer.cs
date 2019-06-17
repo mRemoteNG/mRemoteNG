@@ -299,6 +299,58 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;RDCMan programVersion=&quot;2.7&quot; schemaVersion=&quot;3&quot;&gt;
+        ///  &lt;file&gt;
+        ///    &lt;credentialsProfiles /&gt;
+        ///    &lt;properties&gt;
+        ///      &lt;expanded&gt;True&lt;/expanded&gt;
+        ///      &lt;name&gt;test_RDCMan_connections&lt;/name&gt;
+        ///    &lt;/properties&gt;
+        ///    &lt;smartGroup&gt;
+        ///      &lt;properties&gt;
+        ///        &lt;expanded&gt;False&lt;/expanded&gt;
+        ///        &lt;name&gt;AllServers&lt;/name&gt;
+        ///      &lt;/properties&gt;
+        ///      &lt;ruleGroup operator=&quot;All&quot;&gt;
+        ///        &lt;rule&gt;
+        ///          &lt;property&gt;DisplayName&lt;/property&gt;
+        ///          &lt;operator&gt;Matches&lt;/operator&gt;
+        ///         [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string test_rdcman_v2_7_schema3_empty_values {
+            get {
+                return ResourceManager.GetString("test_rdcman_v2_7_schema3_empty_values", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;RDCMan programVersion=&quot;2.7&quot; schemaVersion=&quot;3&quot;&gt;
+        ///  &lt;file&gt;
+        ///    &lt;credentialsProfiles /&gt;
+        ///    &lt;properties&gt;
+        ///      &lt;expanded&gt;True&lt;/expanded&gt;
+        ///      &lt;name&gt;test_RDCMan_connections&lt;/name&gt;
+        ///    &lt;/properties&gt;
+        ///    &lt;smartGroup&gt;
+        ///      &lt;properties&gt;
+        ///        &lt;expanded&gt;False&lt;/expanded&gt;
+        ///        &lt;name&gt;AllServers&lt;/name&gt;
+        ///      &lt;/properties&gt;
+        ///      &lt;ruleGroup operator=&quot;All&quot;&gt;
+        ///        &lt;rule&gt;
+        ///          &lt;property&gt;DisplayName&lt;/property&gt;
+        ///          &lt;operator&gt;Matches&lt;/operator&gt;
+        ///         [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string test_rdcman_v2_7_schema3_null_values {
+            get {
+                return ResourceManager.GetString("test_rdcman_v2_7_schema3_null_values", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to screen mode id:i:1
         ///use multimon:i:0
         ///desktopwidth:i:800
@@ -326,6 +378,16 @@ namespace mRemoteNGTests.Properties {
         internal static string test_remotedesktopconnection_rdp {
             get {
                 return ResourceManager.GetString("test_remotedesktopconnection_rdp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TestImage {
+            get {
+                object obj = ResourceManager.GetObject("TestImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

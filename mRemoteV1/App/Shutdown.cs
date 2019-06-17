@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
@@ -25,7 +26,10 @@ namespace mRemoteNG.App
             ProgramRoot.CloseSingletonInstanceMutex();
         }
 
-        public static void Cleanup(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, MultiSshToolStrip multiSshToolStrip, FrmMain frmMain)
+        public static void Cleanup(Control quickConnectToolStrip,
+                                   ExternalToolsToolStrip externalToolsToolStrip,
+                                   MultiSshToolStrip multiSshToolStrip,
+                                   FrmMain frmMain)
         {
             try
             {
@@ -58,9 +62,13 @@ namespace mRemoteNG.App
                 Runtime.ConnectionsService.SaveConnections();
         }
 
-        private static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, MultiSshToolStrip multiSshToolStrip, FrmMain frmMain)
+        private static void SaveSettings(Control quickConnectToolStrip,
+                                         ExternalToolsToolStrip externalToolsToolStrip,
+                                         MultiSshToolStrip multiSshToolStrip,
+                                         FrmMain frmMain)
         {
-            Config.Settings.SettingsSaver.SaveSettings(quickConnectToolStrip, externalToolsToolStrip, multiSshToolStrip, frmMain);
+            Config.Settings.SettingsSaver.SaveSettings(quickConnectToolStrip, externalToolsToolStrip, multiSshToolStrip,
+                                                       frmMain);
         }
 
         private static void UnregisterBrowsers()

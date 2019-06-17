@@ -4,6 +4,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Text;
 
+#pragma warning disable 649
 #pragma warning disable 169
 
 namespace mRemoteNG.App
@@ -11,33 +12,41 @@ namespace mRemoteNG.App
     public static class NativeMethods
     {
         #region Functions
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool AppendMenu(IntPtr hMenu, int uFlags, IntPtr uIDNewItem, string lpNewItem);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr CreatePopupMenu();
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
-			
+        internal static extern IntPtr FindWindowEx(IntPtr parentHandle,
+                                                   IntPtr childAfter,
+                                                   string lclassName,
+                                                   string windowTitle);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr GetForegroundWindow();
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern bool InsertMenu(IntPtr hMenu, int uPosition, int uFlags, IntPtr uIDNewItem, string lpNewItem);
-			
+        internal static extern bool InsertMenu(IntPtr hMenu,
+                                               int uPosition,
+                                               int uFlags,
+                                               IntPtr uIDNewItem,
+                                               string lpNewItem);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int IsIconic(IntPtr hWnd);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool PostMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam);
 
@@ -54,31 +63,38 @@ namespace mRemoteNG.App
         internal static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, string lParam);
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        internal static extern IntPtr SendMessage([In] IntPtr hWnd, [In] uint msg, [Out] StringBuilder wParam, [In] IntPtr lParam);
+        internal static extern IntPtr SendMessage([In] IntPtr hWnd,
+                                                  [In] uint msg,
+                                                  [Out] StringBuilder wParam,
+                                                  [In] IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetForegroundWindow(IntPtr hWnd);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern bool SetMenuItemBitmaps(IntPtr hMenu, int uPosition, int uFlags, IntPtr hBitmapUnchecked, IntPtr hBitmapChecked);
-			
+        internal static extern bool SetMenuItemBitmaps(IntPtr hMenu,
+                                                       int uPosition,
+                                                       int uFlags,
+                                                       IntPtr hBitmapUnchecked,
+                                                       IntPtr hBitmapChecked);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int ShowWindow(IntPtr hWnd, int nCmdShow);
-			
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr WindowFromPoint(Point point);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
-        internal static extern int GetClassName(IntPtr hWnd, System.Text.StringBuilder lpClassName, int nMaxCount);
+        internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int GetDlgCtrlID(IntPtr hwndCtl);
@@ -92,9 +108,11 @@ namespace mRemoteNG.App
         [DllImport("kernel32", SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         internal static extern bool CloseHandle(IntPtr handle);
+
         #endregion
 
         #region Structures
+
         [StructLayout(LayoutKind.Sequential)]
         internal struct WINDOWPOS
         {
@@ -130,60 +148,71 @@ namespace mRemoteNG.App
             public long right;
             public long bottom;
         }
+
         #endregion
 
         #region Helpers
+
         public static int MAKELONG(int wLow, int wHigh)
         {
             return wLow | wHigh << 16;
         }
-			
+
         public static int MAKELPARAM(ref int wLow, ref int wHigh)
         {
             return MAKELONG(wLow, wHigh);
         }
-			
+
         public static int LOWORD(int value)
         {
             return value & 0xFFFF;
         }
-			
+
         public static int LOWORD(IntPtr value)
         {
             return LOWORD(value.ToInt32());
         }
-			
+
         public static int HIWORD(int value)
         {
             return value >> 16;
         }
-			
+
         public static int HIWORD(IntPtr value)
         {
             return HIWORD(value.ToInt32());
         }
+
         #endregion
 
         #region Constants
+
         public const int TRUE = 1;
 
         #region GetWindowLong
+
         public const int GWL_STYLE = (-16);
+
         #endregion
 
         #region AppendMenu / ModifyMenu / DeleteMenu / RemoveMenu
+
         public const int MF_BYCOMMAND = 0x0;
         public const int MF_BYPOSITION = 0x400;
         public const int MF_STRING = 0x0;
         public const int MF_POPUP = 0x10;
         public const int MF_SEPARATOR = 0x800;
+
         #endregion
 
         #region WM_LBUTTONDOWN / WM_LBUTTONUP
+
         public const int MK_LBUTTON = 0x1;
+
         #endregion
 
         #region ShowWindow
+
         public const uint SW_HIDE = 0;
         public const uint SW_SHOWNORMAL = 1;
         public const uint SW_SHOWMINIMIZED = 2;
@@ -195,9 +224,11 @@ namespace mRemoteNG.App
         public const uint SW_SHOWMINNOACTIVE = 7;
         public const uint SW_SHOWNA = 8;
         public const uint SW_RESTORE = 9;
+
         #endregion
 
         #region SetWindowPos / WM_WINDOWPOSCHANGING / WM_WINDOWPOSCHANGED
+
         /// <summary>
         /// Retains the current size (ignores the cx and cy parameters).
         /// </summary>
@@ -269,12 +300,12 @@ namespace mRemoteNG.App
         public const int SWP_NOCLIENTMOVE = 0x1000;
 
         /// <summary>
-        /// Prevents generation of the WM_SYNCPAINT message. 
+        /// Prevents generation of the WM_SYNCPAINT message.
         /// </summary>
         public const int SWP_DEFERERASE = 0x2000;
 
         /// <summary>
-        /// If the calling thread and the thread that owns the window are attached to different input queues, the system posts the request to the thread that owns the window. This prevents the calling thread from blocking its execution while other threads process the request. 
+        /// If the calling thread and the thread that owns the window are attached to different input queues, the system posts the request to the thread that owns the window. This prevents the calling thread from blocking its execution while other threads process the request.
         /// </summary>
         public const int SWP_ASYNCWINDOWPOS = 0x4000;
 
@@ -282,15 +313,19 @@ namespace mRemoteNG.App
         /// 
         /// </summary>
         public const int SWP_STATECHANGED = 0x8000;
+
         #endregion
 
         #region Window Placement Flags (WPF)
+
         public const uint WPF_SETMINPOSITION = 0x1;
         public const uint WPF_RESTORETOMAXIMIZED = 0x2;
         public const uint WPF_ASYNCWINDOWPLACEMENT = 0x4;
+
         #endregion
 
         #region WM_ACTIVATE
+
         /// <summary>
         /// 
         /// </summary>
@@ -303,14 +338,16 @@ namespace mRemoteNG.App
 
         /// <summary>
         /// Sent to both the window being activated and the window being deactivated.
-        /// If the windows use the same input queue, the message is sent synchronously, first to the window procedure of the 
-        /// top-level window being deactivated, then to the window procedure of the top-level window being activated. If the 
+        /// If the windows use the same input queue, the message is sent synchronously, first to the window procedure of the
+        /// top-level window being deactivated, then to the window procedure of the top-level window being activated. If the
         /// windows use different input queues, the message is sent asynchronously, so the window is activated immediately.
         /// </summary>
         public const int WA_CLICKACTIVE = 0x2;
+
         #endregion
 
         #region Window Messages
+
         /// <summary>
         /// Sent when an application requests that a window be created by calling the CreateWindowEx or CreateWindow function. (The message is sent before the function returns.) The window procedure of the new window receives this message after the window is created, but before the window becomes visible.
         /// </summary>
@@ -332,7 +369,7 @@ namespace mRemoteNG.App
         public const int WM_SETTEXT = 0xC;
 
         /// <summary>
-        /// Copies the text that corresponds to a window into a buffer provided by the caller. 
+        /// Copies the text that corresponds to a window into a buffer provided by the caller.
         /// </summary>
         public const int WM_GETTEXT = 0xD;
 
@@ -347,7 +384,7 @@ namespace mRemoteNG.App
         public const int WM_ACTIVATEAPP = 0x1C;
 
         /// <summary>
-        /// Sent to a window if the mouse causes the cursor to move within a window and mouse input is not captured. 
+        /// Sent to a window if the mouse causes the cursor to move within a window and mouse input is not captured.
         /// </summary>
         public const int WM_SETCURSOR = 0x20;
 
@@ -372,12 +409,12 @@ namespace mRemoteNG.App
         public const int WM_WINDOWPOSCHANGED = 0x47;
 
         /// <summary>
-        /// Posted to the window with the keyboard focus when a nonsystem key is pressed. A nonsystem key is a key that is pressed when the ALT key is not pressed. 
+        /// Posted to the window with the keyboard focus when a nonsystem key is pressed. A nonsystem key is a key that is pressed when the ALT key is not pressed.
         /// </summary>
         public const int WM_KEYDOWN = 0x100;
 
         /// <summary>
-        /// Posted to the window with the keyboard focus when a nonsystem key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed, or a keyboard key that is pressed when a window has the keyboard focus. 
+        /// Posted to the window with the keyboard focus when a nonsystem key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed, or a keyboard key that is pressed when a window has the keyboard focus.
         /// </summary>
         public const int WM_KEYUP = 0x101;
 
@@ -432,7 +469,7 @@ namespace mRemoteNG.App
         public const int WM_MBUTTONUP = 0x208;
 
         /// <summary>
-        /// Posted when the user presses the first or second X button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse. 
+        /// Posted when the user presses the first or second X button while the cursor is in the client area of a window. If the mouse is not captured, the message is posted to the window beneath the cursor. Otherwise, the message is posted to the window that has captured the mouse.
         /// </summary>
         public const int WM_XBUTTONDOWN = 0x20B;
 
@@ -447,47 +484,56 @@ namespace mRemoteNG.App
         public const int WM_PARENTNOTIFY = 0x210;
 
         /// <summary>
-        /// Sent one time to a window after it enters the moving or sizing modal loop. The window enters the moving or sizing modal loop when the user clicks the window's title bar or sizing border, or when the window passes the WM_SYSCOMMAND message to the DefWindowProc function and the wParam parameter of the message specifies the SC_MOVE or SC_SIZE value. The operation is complete when DefWindowProc returns. 
+        /// Sent one time to a window after it enters the moving or sizing modal loop. The window enters the moving or sizing modal loop when the user clicks the window's title bar or sizing border, or when the window passes the WM_SYSCOMMAND message to the DefWindowProc function and the wParam parameter of the message specifies the SC_MOVE or SC_SIZE value. The operation is complete when DefWindowProc returns.
         /// </summary>
         public const int WM_ENTERSIZEMOVE = 0x231;
 
         /// <summary>
-        /// Sent one time to a window, after it has exited the moving or sizing modal loop. The window enters the moving or sizing modal loop when the user clicks the window's title bar or sizing border, or when the window passes the WM_SYSCOMMAND message to the DefWindowProc function and the wParam parameter of the message specifies the SC_MOVE or SC_SIZE value. The operation is complete when DefWindowProc returns. 
+        /// Sent one time to a window, after it has exited the moving or sizing modal loop. The window enters the moving or sizing modal loop when the user clicks the window's title bar or sizing border, or when the window passes the WM_SYSCOMMAND message to the DefWindowProc function and the wParam parameter of the message specifies the SC_MOVE or SC_SIZE value. The operation is complete when DefWindowProc returns.
         /// </summary>
         public const int WM_EXITSIZEMOVE = 0x232;
 
         /// <summary>
-        /// Sent to the first window in the clipboard viewer chain when the content of the clipboard changes. This enables a clipboard viewer window to display the new content of the clipboard. 
+        /// Sent to the first window in the clipboard viewer chain when the content of the clipboard changes. This enables a clipboard viewer window to display the new content of the clipboard.
         /// </summary>
         public const int WM_DRAWCLIPBOARD = 0x308;
 
         /// <summary>
-        /// Sent to the first window in the clipboard viewer chain when a window is being removed from the chain. 
+        /// Sent to the first window in the clipboard viewer chain when a window is being removed from the chain.
         /// </summary>
         public const int WM_CHANGECBCHAIN = 0x30D;
+
         #endregion
 
         #region Window Styles
+
         public const int WS_MAXIMIZE = 0x1000000;
         public const int WS_VISIBLE = 0x10000000;
         public const int WS_CHILD = 0x40000000;
         public const int WS_EX_MDICHILD = 0x40;
+
         #endregion
 
         #region Virtual Key Codes
+
         public const int VK_CONTROL = 0x11;
         public const int VK_C = 0x67;
+
         #endregion
 
         #region EM
+
         public const uint ECM_FIRST = 0x1500;
         public const uint EM_SETCUEBANNER = ECM_FIRST + 1;
         public const uint EM_GETCUEBANNER = ECM_FIRST + 2;
+
         #endregion
 
         #region LB
+
         public const int LB_ERR = -1;
         public const int LB_SELECTSTRING = 0x18C;
+
         #endregion
 
         #region TCM

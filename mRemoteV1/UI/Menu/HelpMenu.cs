@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using mRemoteNG.Connection;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -40,17 +40,19 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfo
             // 
-            DropDownItems.AddRange(new ToolStripItem[] {
-            _mMenInfoHelp,
-            _mMenInfoSep1,
-            _mMenInfoWebsite,
-            _mMenInfoDonate,
-            _mMenInfoForum,
-            _mMenInfoBugReport,
-            _toolStripSeparator2,
-            _mMenToolsUpdate,
-            _mMenInfoSep2,
-            _mMenInfoAbout});
+            DropDownItems.AddRange(new ToolStripItem[]
+            {
+                _mMenInfoHelp,
+                _mMenInfoSep1,
+                _mMenInfoWebsite,
+                _mMenInfoDonate,
+                _mMenInfoForum,
+                _mMenInfoBugReport,
+                _toolStripSeparator2,
+                _mMenToolsUpdate,
+                _mMenInfoSep2,
+                _mMenInfoAbout
+            });
             Name = "mMenInfo";
             Size = new System.Drawing.Size(44, 20);
             Text = Language.strMenuHelp;
@@ -122,7 +124,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoAbout
             // 
-            _mMenInfoAbout.Image = Resources.mRemote;
+            _mMenInfoAbout.Image = Resources.mRemoteNG;
             _mMenInfoAbout.Name = "mMenInfoAbout";
             _mMenInfoAbout.Size = new System.Drawing.Size(190, 22);
             _mMenInfoAbout.Text = Language.strMenuAbout;
@@ -142,39 +144,21 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region Info
-        private void mMenToolsUpdate_Click(object sender, EventArgs e)
-        {
-            Windows.Show(WindowType.Update);
-        }
-        private void mMenInfoHelp_Click(object sender, EventArgs e)
-        {
-            Windows.Show(WindowType.Help);
-        }
 
-        private void mMenInfoForum_Click(object sender, EventArgs e)
-        {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlForum);
-        }
+        private void mMenToolsUpdate_Click(object sender, EventArgs e) => Windows.Show(WindowType.Update);
 
-        private void mMenInfoBugReport_Click(object sender, EventArgs e)
-        {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlBugs);
-        }
+        private void mMenInfoHelp_Click(object sender, EventArgs e) => Windows.Show(WindowType.Help);
 
-        private void mMenInfoWebsite_Click(object sender, EventArgs e)
-        {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlHome);
-        }
+        private void mMenInfoForum_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlForum);
 
-        private void mMenInfoDonate_Click(object sender, EventArgs e)
-        {
-            WebHelper.GoToUrl(GeneralAppInfo.UrlDonate);
-        }
+        private void mMenInfoBugReport_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlBugs);
 
-        private void mMenInfoAbout_Click(object sender, EventArgs e)
-        {
-            Windows.Show(WindowType.About);
-        }
+        private void mMenInfoWebsite_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlHome);
+
+        private void mMenInfoDonate_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlDonate);
+
+        private void mMenInfoAbout_Click(object sender, EventArgs e) => Windows.Show(WindowType.About);
+
         #endregion
     }
 }

@@ -283,9 +283,6 @@ Installer Projects/Installer/Fragments/HelpFilesFragment.wxs
 InstallerProjects/Installer/Fragments/FilesFragment.wxs
 InstallerProjects/Installer/Resources/License.rtf
 
-# user preference: .editorconfig - http://editorconfig.org/
-.editorconfig
-
 # gh-pages info
 runlocal.bat
 /_site

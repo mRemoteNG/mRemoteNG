@@ -12,7 +12,7 @@ namespace mRemoteNG {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -613,6 +613,18 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultRedirectAudioCapture {
+            get {
+                return ((bool)(this["ConDefaultRedirectAudioCapture"]));
+            }
+            set {
+                this["ConDefaultRedirectAudioCapture"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int MaxPuttyWaitTime {
             get {
@@ -1028,6 +1040,18 @@ namespace mRemoteNG {
             }
             set {
                 this["InhDefaultRedirectSound"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRedirectAudioCapture {
+            get {
+                return ((bool)(this["InhDefaultRedirectAudioCapture"]));
+            }
+            set {
+                this["InhDefaultRedirectAudioCapture"] = value;
             }
         }
         
@@ -2271,7 +2295,7 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
         public int EncryptionKeyDerivationIterations {
             get {
                 return ((int)(this["EncryptionKeyDerivationIterations"]));
@@ -2569,7 +2593,7 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ThemingActive {
             get {
                 return ((bool)(this["ThemingActive"]));
@@ -2744,6 +2768,102 @@ namespace mRemoteNG {
             }
             set {
                 this["StartUpPanelName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TrackActiveConnectionInConnectionTree {
+            get {
+                return ((bool)(this["TrackActiveConnectionInConnectionTree"]));
+            }
+            set {
+                this["TrackActiveConnectionInConnectionTree"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PlaceSearchBarAboveConnectionTree {
+            get {
+                return ((bool)(this["PlaceSearchBarAboveConnectionTree"]));
+            }
+            set {
+                this["PlaceSearchBarAboveConnectionTree"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AlwaysShowConnectionTabs {
+            get {
+                return ((bool)(this["AlwaysShowConnectionTabs"]));
+            }
+            set {
+                this["AlwaysShowConnectionTabs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OverrideFIPSCheck {
+            get {
+                return ((bool)(this["OverrideFIPSCheck"]));
+            }
+            set {
+                this["OverrideFIPSCheck"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultFavorite {
+            get {
+                return ((bool)(this["ConDefaultFavorite"]));
+            }
+            set {
+                this["ConDefaultFavorite"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultFavorite {
+            get {
+                return ((bool)(this["InhDefaultFavorite"]));
+            }
+            set {
+                this["InhDefaultFavorite"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("mssql")]
+        public string SQLServerType {
+            get {
+                return ((string)(this["SQLServerType"]));
+            }
+            set {
+                this["SQLServerType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DoNotTrimUsername {
+            get {
+                return ((bool)(this["DoNotTrimUsername"]));
+            }
+            set {
+                this["DoNotTrimUsername"] = value;
             }
         }
         

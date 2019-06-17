@@ -7,12 +7,16 @@ namespace mRemoteNG.App.Update
     public class UpdateFile
     {
         #region Public Properties
+
         // ReSharper disable MemberCanBePrivate.Local
         // ReSharper disable once MemberCanBePrivate.Global
-        public Dictionary<string, string> Items { get; } = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+        public Dictionary<string, string> Items { get; } =
+            new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+
         #endregion
 
         #region Public Methods
+
         public UpdateFile(string content)
         {
             FromString(content);
@@ -24,8 +28,8 @@ namespace mRemoteNG.App.Update
         {
             if (string.IsNullOrEmpty(content)) return;
 
-            char[] keyValueSeparators = { ':', '=' };
-            char[] commentCharacters = { '#', ';', '\'' };
+            char[] keyValueSeparators = {':', '='};
+            char[] commentCharacters = {'#', ';', '\''};
 
             // no separators means no valid update data...
             if (content.Trim().IndexOfAny(keyValueSeparators) == -1) return;
@@ -47,7 +51,7 @@ namespace mRemoteNG.App.Update
                         continue;
 
                     // make sure we have valid data in both parts before adding to the collection. If either part is empty, then it's not valid data.
-                    if(string.IsNullOrEmpty(parts[0].Trim()) || string.IsNullOrEmpty(parts[1].Trim()))
+                    if (string.IsNullOrEmpty(parts[0].Trim()) || string.IsNullOrEmpty(parts[1].Trim()))
                         continue;
 
                     Items.Add(parts[0].Trim(), parts[1].Trim());
@@ -83,13 +87,14 @@ namespace mRemoteNG.App.Update
         {
             var value = GetString("dURL");
             var sv = value.Split('/');
-            return sv[sv.Length-1];
+            return sv[sv.Length - 1];
         }
 
         public string GetChecksum(string key = "Checksum")
         {
             return GetString(key).Replace(" ", "").ToUpperInvariant();
         }
+
         #endregion
     }
 }

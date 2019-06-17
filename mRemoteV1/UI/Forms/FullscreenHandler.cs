@@ -13,10 +13,7 @@ namespace mRemoteNG.UI.Forms
 
         public bool Value
         {
-            get
-            {
-                return _value;
-            }
+            get => _value;
             set
             {
                 if (_value == value) return;
@@ -44,8 +41,10 @@ namespace mRemoteNG.UI.Forms
             {
                 _handledForm.WindowState = FormWindowState.Normal;
             }
+
             _handledForm.WindowState = FormWindowState.Maximized;
         }
+
         private void ExitFullscreen()
         {
             _handledForm.FormBorderStyle = _savedBorderStyle;

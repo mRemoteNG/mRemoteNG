@@ -157,29 +157,14 @@
   <data name="Root" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Root.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Root_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Root_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Warning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Info_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Info_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mRemote_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\mRemote_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PuttyConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\PuttyConfig.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mRemote" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\mRemote.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Play_Quick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Play_Quick.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Play_Quick_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Play_Quick_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Connections_Load" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Connections_Load.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,9 +196,6 @@
   <data name="Config" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Config.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Config_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Config_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -235,9 +217,6 @@
   <data name="Options" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Options.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Options_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Options_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Panels" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Panels.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -253,9 +232,6 @@
   <data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Save_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Save_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Screenshot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Screenshot.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -267,9 +243,6 @@
   </data>
   <data name="Screenshot_Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Screenshot_Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Screenshot_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Screenshot_Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Screenshot_Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -286,9 +259,6 @@
   <data name="Website" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Website.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Appearance_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Appearance_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Arrow_Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Arrow_Down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -297,9 +267,6 @@
   </data>
   <data name="Bug" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Bug.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Connections_SaveAs_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Connections_SaveAs_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Connection_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Connection_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -316,9 +283,6 @@
   <data name="ExtApp_Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\ExtApp_Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ExtApp_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\ExtApp_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ExtApp_Start" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\ExtApp_Start.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -334,9 +298,6 @@
   <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Help_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Help_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Page" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Page.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -348,9 +309,6 @@
   </data>
   <data name="PortScan" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\PortScan.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PortScan_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\PortScan_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Properties" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Properties.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -364,9 +322,6 @@
   <data name="Sessions" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Sessions.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Sessions_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Sessions_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Session_LogOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Session_LogOff.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -376,23 +331,11 @@
   <data name="SSHTransfer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\SSHTransfer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SSHTransfer_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\SSHTransfer_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StartupExit_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\StartupExit_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tab_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Tab_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Tools" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Tools.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Update" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Update.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Update_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Update_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Console" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Console.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -403,14 +346,8 @@
   <data name="Chat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Chat.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Panels_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\Panels_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="JumpTo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\JumpTo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Monitor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\Monitor.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -421,26 +358,14 @@
   <data name="UVNC_SC" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\UVNC_SC.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UVNC_SC_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\UVNC_SC_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Bad_Symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Bad_Symbol.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ComponentsCheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\ComponentsCheck.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ComponentsCheck_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\ComponentsCheck_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Good_Symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Good_Symbol.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ActiveDirectory_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\ActiveDirectory_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="News_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\News_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="News" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\News.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -475,9 +400,6 @@
   <data name="page_copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Images\FamFamFam\page_copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RDCMan_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\icons\rdcman_icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="puttycm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\images\puttycm.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -487,17 +409,11 @@
   <data name="green_arrow2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\green_arrow2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="shield" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\shield.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="key" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="key_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\key_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="key_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\FamFamFam\key.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="brick" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\FamFamFam\brick.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -528,5 +444,128 @@
   </data>
   <data name="loading_spinner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\loading_spinner.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Header_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\Header_dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mRemoteNG_VisualElementsManifest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tiles\mRemoteNG.VisualElementsManifest.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="VisualElements_150" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tiles\VisualElements_150.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VisualElements_70" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tiles\VisualElements_70.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ActiveDirectory_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\ActiveDirectory_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Appearance_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Appearance_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Comments_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Comments_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ComponentsCheck_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\ComponentsCheck_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Config_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Config_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ConnectionsSaveAs_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\ConnectionsSaveAs_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Database_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Database_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditPage_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\EditPage_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Error_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Error_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExtApp_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\ExtApp_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Help_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Help_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Info_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Info_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Keyboard_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Keyboard_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Key_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Key_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mRemoteNG_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\mRemoteNG_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="News_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\News_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Options_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Options_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Panels_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Panels_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PortScan_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\PortScan_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Root_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Root_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Save_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Save_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Screenshot_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Screenshot_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sessions_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Sessions_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Shield_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Shield_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SSHTransfer_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\SSHTransfer_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StartupExit_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\StartupExit_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tab_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Tab_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TabOption" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabOption.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TabOverflow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabOverflow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TabExit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\TabExit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Update_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\Update_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UVNC_SC_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons\UVNC_SC_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mRemoteNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\mRemoteNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tab_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\tab_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tab_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\tab_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tab_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\tab_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="star" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Images\star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -106,8 +106,8 @@
         <Background Type="CT_RAW" Source="FF1B1B1C" />
       </Color>
       <Color Name="TabItem">
-        <Background Type="CT_RAW" Source="FF252526" />
-        <Foreground Type="CT_RAW" Source="FFF1F1F1" />
+        <Background Type="CT_RAW" Source="FF3C3F41" />
+        <Foreground Type="CT_RAW" Source="FFBD93F9" />
       </Color>
       <Color Name="TabItemBorder">
         <Background Type="CT_RAW" Source="FF252526" />

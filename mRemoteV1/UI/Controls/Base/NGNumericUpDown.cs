@@ -2,16 +2,16 @@
 using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
+
 // ReSharper disable LocalizableElement
 
 namespace mRemoteNG.UI.Controls.Base
 {
-    //Repaint of the NumericUpDown, the composite control buttons are replaced because the 
-    //original ones cannot be themed due to protected inheritance 
+    //Repaint of the NumericUpDown, the composite control buttons are replaced because the
+    //original ones cannot be themed due to protected inheritance
     internal class NGNumericUpDown : NumericUpDown
     {
-
-        private ThemeManager _themeManager;
+        private readonly ThemeManager _themeManager;
         private NGButton Up;
         private NGButton Down;
 
@@ -23,28 +23,47 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
-            if (!_themeManager.ThemingActive) return;
+            base.OnCreateControl();
+            if (!_themeManager.ActiveAndExtended) return;
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background"); 
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
-            //Hide those nonthemable butons
+
             if (Controls.Count > 0)
-                Controls[0].Hide();
+            {
+                for (var i = 0; i < Controls.Count; i++)
+                {
+                    //Remove those non-themable buttons
+                    if (Controls[i].GetType().ToString().Equals("System.Windows.Forms.UpDownBase+UpDownButtons"))
+                        Controls.Remove(Controls[i]);
+
+                    /* This is a bit of a hack.
+                     * But if we have the buttons that we created already, redraw/return and don't add any more...
+                     *
+                     * OptionsPages are an example where the control is potentially created twice:
+                     * AddOptionsPagesToListView and then LstOptionPages_SelectedIndexChanged
+                     */
+                    if (!(Controls[i] is NGButton)) continue;
+                    if (!Controls[i].Text.Equals("\u25B2") && !Controls[i].Text.Equals("\u25BC")) continue;
+                    Invalidate();
+                    return;
+                }
+            }
+
             //Add new themable buttons
             Up = new NGButton
             {
                 Text = "\u25B2",
-                Font = new Font(Font.FontFamily, 6f)
+                Font = new Font(Font.FontFamily, 5f)
             };
-            Up.SetBounds(Width - 17, 1, 16, Height / 2 - 1);
+            Up.SetBounds(Controls.Owner.Width - 17, 2, 16, Controls.Owner.Height / 2 - 1);
             Up.Click += Up_Click;
             Down = new NGButton
             {
                 Text = "\u25BC",
-                Font = new Font(Font.FontFamily, 6f)
+                Font = new Font(Font.FontFamily, 5f)
             };
-            Down.SetBounds(Width - 17, Height/2, 16, Height / 2 - 1);
+            Down.SetBounds(Controls.Owner.Width - 17, Controls.Owner.Height / 2 + 1, 16, Controls.Owner.Height / 2 - 1);
             Down.Click += Down_Click;
             Controls.Add(Up);
             Controls.Add(Down);
@@ -63,8 +82,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnEnabledChanged(EventArgs e)
         {
-            
-            if (_themeManager.ThemingActive)
+            if (_themeManager.ActiveAndExtended)
             {
                 if (Enabled)
                 {
@@ -75,7 +93,8 @@ namespace mRemoteNG.UI.Controls.Base
                 {
                     BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
                 }
-            } 
+            }
+
             base.OnEnabledChanged(e);
             Invalidate();
         }
@@ -83,14 +102,28 @@ namespace mRemoteNG.UI.Controls.Base
 
         //Redrawing border
         protected override void OnPaint(PaintEventArgs e)
-        { 
+        {
             base.OnPaint(e);
-            if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveAndExtended) return;
             //Fix Border
             if (BorderStyle != BorderStyle.None)
-                e.Graphics.DrawRectangle(new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"), 1), 0, 0, Width - 1, Height - 1);
+                e.Graphics.DrawRectangle(
+                                         new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"),
+                                                 1), 0, 0, Width - 1,
+                                         Height - 1);
         }
 
- 
+        private void InitializeComponent()
+        {
+            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // NGNumericUpDown
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+            this.ResumeLayout(false);
+        }
     }
 }

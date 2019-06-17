@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
     Microsoft ResX Schema 
@@ -674,13 +674,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
 	</data>
 	<data name="strErrorEncryptionFailed" xml:space="preserve">
 		<value>Şifreleme başarısız. {0}</value>
-	</data>
-	<data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-		<value>Windows güvenlik ayarlarında "Sistem şifrelemesi: FIPS uyumlu algoritmaları, karıştırma ve imzalama" açıldı. Bu ayarlar {0} ile uyumlu değil.
-
-Daha fazla bilgi için http://support.microsoft.com/kb/811833 adresindeki Microsoft Destk makalesine bakın.
-
-{0} şimdi kapanacak.</value>
 	</data>
 	<data name="strErrors" xml:space="preserve">
 		<value>Hatalar</value>

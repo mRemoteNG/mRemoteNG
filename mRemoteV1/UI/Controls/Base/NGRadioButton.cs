@@ -10,15 +10,21 @@ namespace mRemoteNG.UI.Controls.Base
     class NGRadioButton : RadioButton
     {
         private ThemeManager _themeManager;
-        private Rectangle circle;
-        private Rectangle circle_small; 
+        private readonly Rectangle _circle;
+        private readonly Rectangle _circleSmall;
+        private readonly int _textXCoord;
+
         // Constructor
         public NGRadioButton()
         {
-            // Init
-            circle_small = new Rectangle(4, 4, 6, 6 );
-            circle = new Rectangle(1, 1, 12, 12 );
-           ThemeManager.getInstance().ThemeChanged += OnCreateControl; 
+            var display = new DisplayProperties();
+
+            _circleSmall = new Rectangle(display.ScaleWidth(4), display.ScaleHeight(4), display.ScaleWidth(6),
+                                         display.ScaleHeight(6));
+            _circle = new Rectangle(display.ScaleWidth(1), display.ScaleHeight(1), display.ScaleWidth(12),
+                                    display.ScaleHeight(12));
+            _textXCoord = display.ScaleWidth(16);
+            ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
 
 
@@ -34,7 +40,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             // Allows for Overlaying
@@ -70,12 +76,13 @@ namespace mRemoteNG.UI.Controls.Base
         //This class is painted with the checkbox colors, the glyph color is used for the radio inside
         protected override void OnPaint(PaintEventArgs e)
         {
-            if ( !_themeManager.ThemingActive)
+            if (!_themeManager.ActiveAndExtended)
             {
                 base.OnPaint(e);
                 return;
             }
-            // Init 
+
+            // Init
             var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -88,9 +95,8 @@ namespace mRemoteNG.UI.Controls.Base
             e.Graphics.Clear(Parent.BackColor);
             if (Enabled)
             {
-                 
-                if(Checked)
-                { 
+                if (Checked)
+                {
                     center = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph");
                 }
                 else
@@ -101,7 +107,6 @@ namespace mRemoteNG.UI.Controls.Base
                         outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Hover");
                     }
                 }
-                
             }
             else
             {
@@ -109,14 +114,24 @@ namespace mRemoteNG.UI.Controls.Base
                 fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text_Disabled");
             }
 
-            var textRect = new Rectangle(16, Padding.Top, Width - 16, Height);
-            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor, TextFormatFlags.PathEllipsis);
- 
-            g.FillEllipse(new SolidBrush(centerBack), circle);
-            g.FillEllipse(new SolidBrush(center), circle_small); 
-            g.DrawEllipse(new Pen(outline), circle);
-       
+            var textRect = new Rectangle(_textXCoord, Padding.Top, Width - 16, Height);
+            TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
+                                  TextFormatFlags.PathEllipsis);
+
+            g.FillEllipse(new SolidBrush(centerBack), _circle);
+            g.FillEllipse(new SolidBrush(center), _circleSmall);
+            g.DrawEllipse(new Pen(outline), _circle);
         }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // NGRadioButton
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResumeLayout(false);
+        }
     }
 }

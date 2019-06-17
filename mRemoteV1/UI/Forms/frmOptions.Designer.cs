@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Forms
 {
-    partial class frmOptions
+    partial class FrmOptions
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOptions));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOptions));
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.btnApply = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnCancel = new mRemoteNG.UI.Controls.Base.NGButton();
             this.btnOK = new mRemoteNG.UI.Controls.Base.NGButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -43,6 +44,7 @@
             // 
             // pnlBottom
             // 
+            this.pnlBottom.Controls.Add(this.btnApply);
             this.pnlBottom.Controls.Add(this.btnCancel);
             this.pnlBottom.Controls.Add(this.btnOK);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -51,11 +53,22 @@
             this.pnlBottom.Size = new System.Drawing.Size(764, 35);
             this.pnlBottom.TabIndex = 0;
             // 
+            // btnApply
+            // 
+            this.btnApply._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.btnApply.Location = new System.Drawing.Point(677, 5);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(75, 23);
+            this.btnApply.TabIndex = 2;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnOK_Click);
+            // 
             // btnCancel
             // 
-            this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(681, 6);
+            this.btnCancel.Location = new System.Drawing.Point(596, 5);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -65,9 +78,9 @@
             // 
             // btnOK
             // 
-            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOK.Location = new System.Drawing.Point(600, 6);
+            this.btnOK.Location = new System.Drawing.Point(515, 5);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -111,6 +124,7 @@
             this.lstOptionPages.Cursor = System.Windows.Forms.Cursors.Default;
             this.lstOptionPages.DecorateLines = true;
             this.lstOptionPages.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lstOptionPages.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstOptionPages.FullRowSelect = true;
             this.lstOptionPages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lstOptionPages.HideSelection = false;
@@ -135,7 +149,7 @@
             this.PageName.ImageAspectName = "IconImage";
             this.PageName.IsEditable = false;
             // 
-            // frmOptions
+            // FrmOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -146,11 +160,12 @@
             this.Controls.Add(this.lstOptionPages);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.pnlBottom);
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmOptions";
+            this.Name = "FrmOptions";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mRemoteNG Options";
@@ -171,5 +186,6 @@
         private Controls.Base.NGButton btnOK;
         private Controls.Base.NGButton btnCancel;
         private BrightIdeasSoftware.OLVColumn PageName;
+        private Controls.Base.NGButton btnApply;
     }
 }

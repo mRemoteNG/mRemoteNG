@@ -6,14 +6,14 @@ using System.Linq;
 
 namespace mRemoteNG.Tools.CustomCollections
 {
-	public class FullyObservableCollection<T> : IFullyNotifiableList<T>
+    public class FullyObservableCollection<T> : IFullyNotifiableList<T>
         where T : INotifyPropertyChanged
-	{
-	    private readonly IList<T> _list = new List<T>();
-	    private bool _eventsAllowed;
+    {
+        private readonly IList<T> _list = new List<T>();
+        private bool _eventsAllowed;
 
         public int Count => _list.Count;
-	    public bool IsReadOnly => _list.IsReadOnly;
+        public bool IsReadOnly => _list.IsReadOnly;
 
         public T this[int index]
         {
@@ -21,22 +21,22 @@ namespace mRemoteNG.Tools.CustomCollections
             set { _list[index] = value; }
         }
 
-	    public FullyObservableCollection()
-	    {
-	    }
+        public FullyObservableCollection()
+        {
+        }
 
-	    public FullyObservableCollection(IEnumerable<T> items)
-	    {
+        public FullyObservableCollection(IEnumerable<T> items)
+        {
             AddRange(items);
         }
 
-	    public void Add(T item)
-	    {
-	        _list.Add(item);
-	        SubscribeToChildEvents(item);
+        public void Add(T item)
+        {
+            _list.Add(item);
+            SubscribeToChildEvents(item);
             if (_eventsAllowed)
                 RaiseCollectionChangedEvent(ActionType.Added, new[] {item});
-	    }
+        }
 
         /// <summary>
         /// Adds a range of items to the collection.
@@ -44,41 +44,41 @@ namespace mRemoteNG.Tools.CustomCollections
         /// after all new items are added.
         /// </summary>
         /// <param name="items"></param>
-	    public void AddRange(IEnumerable<T> items)
+        public void AddRange(IEnumerable<T> items)
         {
             var itemsAsList = items.ToList();
-	        _eventsAllowed = false;
+            _eventsAllowed = false;
 
             foreach (var item in itemsAsList)
                 Add(item);
 
-	        _eventsAllowed = true;
+            _eventsAllowed = true;
             RaiseCollectionChangedEvent(ActionType.Added, itemsAsList);
-	    }
+        }
 
         public void Insert(int index, T item)
         {
             _list.Insert(index, item);
             SubscribeToChildEvents(item);
-            RaiseCollectionChangedEvent(ActionType.Added, new[] { item });
+            RaiseCollectionChangedEvent(ActionType.Added, new[] {item});
         }
 
-	    public bool Remove(T item)
-	    {
-	        var worked = _list.Remove(item);
-	        if (!worked) return worked;
-	        UnsubscribeFromChildEvents(item);
+        public bool Remove(T item)
+        {
+            var worked = _list.Remove(item);
+            if (!worked) return worked;
+            UnsubscribeFromChildEvents(item);
             RaiseCollectionChangedEvent(ActionType.Removed, new[] {item});
-	        return worked;
-	    }
+            return worked;
+        }
 
-	    public void RemoveAt(int index)
-	    {
-	        var item = _list[index];
-	        _list.RemoveAt(index);
-	        UnsubscribeFromChildEvents(item);
-            RaiseCollectionChangedEvent(ActionType.Removed, new[] { item });
-	    }
+        public void RemoveAt(int index)
+        {
+            var item = _list[index];
+            _list.RemoveAt(index);
+            UnsubscribeFromChildEvents(item);
+            RaiseCollectionChangedEvent(ActionType.Removed, new[] {item});
+        }
 
         public void Clear()
         {
@@ -90,9 +90,9 @@ namespace mRemoteNG.Tools.CustomCollections
         }
 
         private void SubscribeToChildEvents(INotifyPropertyChanged item)
-	    {
-	        item.PropertyChanged += ItemOnPropertyChanged;
-	    }
+        {
+            item.PropertyChanged += ItemOnPropertyChanged;
+        }
 
         private void UnsubscribeFromChildEvents(INotifyPropertyChanged item)
         {
@@ -100,12 +100,12 @@ namespace mRemoteNG.Tools.CustomCollections
         }
 
         private void ItemOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
-	    {
+        {
             if (sender is T)
-	            RaiseCollectionChangedEvent(ActionType.Updated, new []{ (T)sender });
-	    }
+                RaiseCollectionChangedEvent(ActionType.Updated, new[] {(T)sender});
+        }
 
-	    public event EventHandler<CollectionUpdatedEventArgs<T>> CollectionUpdated;
+        public event EventHandler<CollectionUpdatedEventArgs<T>> CollectionUpdated;
 
         private void RaiseCollectionChangedEvent(ActionType action, IEnumerable<T> changedItems)
         {
@@ -113,11 +113,13 @@ namespace mRemoteNG.Tools.CustomCollections
         }
 
         #region Forwarded method calls
+
         public int IndexOf(T item) => _list.IndexOf(item);
         public IEnumerator<T> GetEnumerator() => _list.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _list.GetEnumerator();
         public bool Contains(T item) => _list.Contains(item);
         public void CopyTo(T[] array, int arrayIndex) => _list.CopyTo(array, arrayIndex);
+
         #endregion
     }
 }

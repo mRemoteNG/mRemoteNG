@@ -13,6 +13,7 @@ namespace mRemoteNG.App
         private static HelpWindow _helpForm;
         private static ExternalToolsWindow _externalappsForm;
         private static PortScanWindow _portscanForm;
+        private static ScreenshotManagerWindow _screenshotmanagerForm;
         private static UltraVNCWindow _ultravncscForm;
         private static ComponentsCheckWindow _componentscheckForm;
         private static ConnectionTreeWindow _treeForm;
@@ -28,7 +29,6 @@ namespace mRemoteNG.App
         internal static ScreenshotManagerWindow ScreenshotForm { get; set; } = new ScreenshotManagerWindow();
         private static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
         internal static SSHTransferWindow SshtransferForm { get; private set; } = new SSHTransferWindow();
-
 
 
         public static void Show(WindowType windowType)
@@ -50,10 +50,11 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new frmOptions())
+                        using (var optionsForm = new FrmOptions())
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }
+
                         break;
                     case WindowType.SSHTransfer:
                         if (SshtransferForm == null || SshtransferForm.IsDisposed)
@@ -79,13 +80,18 @@ namespace mRemoteNG.App
                         _portscanForm = new PortScanWindow();
                         _portscanForm.Show(dockPanel);
                         break;
+                    case WindowType.ScreenshotManager:
+                        _screenshotmanagerForm = new ScreenshotManagerWindow();
+                        _screenshotmanagerForm.Show(dockPanel);
+                        break;
                     case WindowType.UltraVNCSC:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
                             _ultravncscForm = new UltraVNCWindow();
                         _ultravncscForm.Show(dockPanel);
                         break;
                     case WindowType.ComponentsCheck:
-                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Showing ComponentsCheck window", true);
+                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                            "Showing ComponentsCheck window", true);
                         if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
                             _componentscheckForm = new ComponentsCheckWindow();
                         _componentscheckForm.Show(dockPanel);

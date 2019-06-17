@@ -14,5 +14,16 @@ namespace mRemoteNG.UI.Controls
             else
                 base.WndProc(ref m);
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // HeadlessTabControl
+            // 
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResumeLayout(false);
+        }
     }
 }

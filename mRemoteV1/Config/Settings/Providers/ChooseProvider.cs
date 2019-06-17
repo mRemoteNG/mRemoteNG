@@ -9,5 +9,6 @@ namespace mRemoteNG.Config.Settings.Providers
 #else
     public class ChooseProvider : LocalFileSettingsProvider
 #endif
-    { }
+    {
+    }
 }

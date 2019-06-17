@@ -4,23 +4,23 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using System;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.Common;
 using System.Threading;
 
 namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsUpdateChecker : IConnectionsUpdateChecker
     {
-        private readonly SqlDatabaseConnector _sqlConnector;
-        private readonly SqlCommand _sqlQuery;
+        private readonly IDatabaseConnector _dbConnector;
+        private readonly DbCommand _dbQuery;
         private DateTime LastUpdateTime => Runtime.ConnectionsService.LastSqlUpdate;
         private DateTime _lastDatabaseUpdateTime;
 
 
         public SqlConnectionsUpdateChecker()
         {
-            _sqlConnector = DatabaseConnectorFactory.SqlDatabaseConnectorFromSettings();
-            _sqlQuery = new SqlCommand("SELECT * FROM tblUpdate", _sqlConnector.SqlConnection);
+            _dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
+            _dbQuery = _dbConnector.DbCommand("SELECT * FROM tblUpdate");
             _lastDatabaseUpdateTime = default(DateTime);
         }
 
@@ -46,11 +46,13 @@ namespace mRemoteNG.Config.Connections
         {
             try
             {
-                _sqlConnector.Connect();
+                _dbConnector.Connect();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Unable to connect to Sql DB to check for updates." + Environment.NewLine + e.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    "Unable to connect to Sql DB to check for updates." +
+                                                    Environment.NewLine + e.Message, true);
             }
         }
 
@@ -63,7 +65,9 @@ namespace mRemoteNG.Config.Connections
 
         private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
         {
-            DateTime lastSqlUpdateWithoutMilliseconds = new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond), LastUpdateTime.Kind);
+            DateTime lastSqlUpdateWithoutMilliseconds =
+                new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond),
+                             LastUpdateTime.Kind);
             return lastUpdateInDb == lastSqlUpdateWithoutMilliseconds;
         }
 
@@ -72,7 +76,7 @@ namespace mRemoteNG.Config.Connections
             var lastUpdateInDb = default(DateTime);
             try
             {
-                var sqlReader = _sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
+                var sqlReader = _dbQuery.ExecuteReader(CommandBehavior.CloseConnection);
                 sqlReader.Read();
                 if (sqlReader.HasRows)
                     lastUpdateInDb = Convert.ToDateTime(sqlReader["LastUpdate"]);
@@ -80,20 +84,25 @@ namespace mRemoteNG.Config.Connections
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Error executing Sql query to get updates from the DB." + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    "Error executing Sql query to get updates from the DB." +
+                                                    Environment.NewLine + ex.Message, true);
             }
+
             _lastDatabaseUpdateTime = lastUpdateInDb;
             return lastUpdateInDb;
         }
 
 
         public event EventHandler UpdateCheckStarted;
+
         private void RaiseUpdateCheckStartedEvent()
         {
             UpdateCheckStarted?.Invoke(this, EventArgs.Empty);
         }
 
         public event UpdateCheckFinishedEventHandler UpdateCheckFinished;
+
         private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)
         {
             var args = new ConnectionsUpdateCheckFinishedEventArgs {UpdateAvailable = updateAvailable};
@@ -101,10 +110,11 @@ namespace mRemoteNG.Config.Connections
         }
 
         public event ConnectionsUpdateAvailableEventHandler ConnectionsUpdateAvailable;
+
         private void RaiseConnectionsUpdateAvailableEvent()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Remote connection update is available");
-            var args = new ConnectionsUpdateAvailableEventArgs(_sqlConnector, _lastDatabaseUpdateTime);
+            var args = new ConnectionsUpdateAvailableEventArgs(_dbConnector, _lastDatabaseUpdateTime);
             ConnectionsUpdateAvailable?.Invoke(this, args);
         }
 
@@ -116,9 +126,9 @@ namespace mRemoteNG.Config.Connections
         private void Dispose(bool itIsSafeToDisposeManagedObjects)
         {
             if (!itIsSafeToDisposeManagedObjects) return;
-            _sqlConnector.Disconnect();
-            _sqlConnector.Dispose();
-            _sqlQuery.Dispose();
+            _dbConnector.Disconnect();
+            _dbConnector.Dispose();
+            _dbQuery.Dispose();
         }
     }
 }

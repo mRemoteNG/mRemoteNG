@@ -1,16 +1,19 @@
-﻿using BrightIdeasSoftware;
-using mRemoteNG.App;
-using mRemoteNG.Config.Putty;
-using mRemoteNG.Connection;
-using mRemoteNG.Container;
-using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
+using mRemoteNG.App;
+using mRemoteNG.Config.Putty;
+using mRemoteNG.Connection;
+using mRemoteNG.Container;
+using mRemoteNG.Themes;
+using mRemoteNG.Tools.Clipboard;
+using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.UI.Controls
@@ -19,14 +22,18 @@ namespace mRemoteNG.UI.Controls
     {
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
-	    private readonly StatusImageList _statusImageList = new StatusImageList();
-        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new ConnectionTreeSearchTextFilter();
+        private readonly StatusImageList _statusImageList = new StatusImageList();
+        private ThemeManager _themeManager;
+
+        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter =
+            new ConnectionTreeSearchTextFilter();
+
         private bool _nodeInEditMode;
         private bool _allowEdit;
         private ConnectionContextMenu _contextMenu;
         private ConnectionTreeModel _connectionTreeModel;
 
-        public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
+        public ConnectionInfo SelectedNode => (ConnectionInfo)SelectedObject;
 
         public NodeSearcher NodeSearcher { get; private set; }
 
@@ -34,9 +41,11 @@ namespace mRemoteNG.UI.Controls
 
         public IEnumerable<IConnectionTreeDelegate> PostSetupActions { get; set; } = new IConnectionTreeDelegate[0];
 
-        public ITreeNodeClickHandler<ConnectionInfo> DoubleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
+        public ITreeNodeClickHandler<ConnectionInfo> DoubleClickHandler { get; set; } =
+            new TreeNodeCompositeClickHandler();
 
-        public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
+        public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } =
+            new TreeNodeCompositeClickHandler();
 
         public ConnectionTreeModel ConnectionTreeModel
         {
@@ -57,20 +66,49 @@ namespace mRemoteNG.UI.Controls
             InitializeComponent();
             SetupConnectionTreeView();
             UseOverlays = false;
+            _themeManager = ThemeManager.getInstance();
+            _themeManager.ThemeChanged += ThemeManagerOnThemeChanged;
+            ApplyTheme();
+        }
+
+        private void ThemeManagerOnThemeChanged()
+        {
+            ApplyTheme();
+        }
+
+        private void ApplyTheme()
+        {
+            if (!_themeManager.ActiveAndExtended)
+                return;
+
+            var themePalette = _themeManager.ActiveTheme.ExtendedPalette;
+
+            BackColor = themePalette.getColor("TreeView_Background");
+            ForeColor = themePalette.getColor("TreeView_Foreground");
+            SelectedBackColor = themePalette.getColor("Treeview_SelectedItem_Active_Background");
+            SelectedForeColor = themePalette.getColor("Treeview_SelectedItem_Active_Foreground");
+            UnfocusedSelectedBackColor = themePalette.getColor("Treeview_SelectedItem_Inactive_Background");
+            UnfocusedSelectedForeColor = themePalette.getColor("Treeview_SelectedItem_Inactive_Foreground");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                components?.Dispose();
-                _statusImageList?.Dispose();
+                if(components != null)
+                    components.Dispose();
+
+                if(_statusImageList != null)
+                _statusImageList.Dispose();
+
+                _themeManager.ThemeChanged -= ThemeManagerOnThemeChanged;
             }
+
             base.Dispose(disposing);
         }
 
-
         #region ConnectionTree Setup
+
         private void SetupConnectionTreeView()
         {
             SmallImageList = _statusImageList.ImageList;
@@ -109,18 +147,16 @@ namespace mRemoteNG.UI.Controls
         {
             Collapsed += (sender, args) =>
             {
-                var container = args.Model as ContainerInfo;
-                if (container == null) return;
+                if (!(args.Model is ContainerInfo container)) return;
                 container.IsExpanded = false;
-				AutoResizeColumn(Columns[0]);
-			};
+                AutoResizeColumn(Columns[0]);
+            };
             Expanded += (sender, args) =>
             {
-                var container = args.Model as ContainerInfo;
-                if (container == null) return;
+                if (!(args.Model is ContainerInfo container)) return;
                 container.IsExpanded = true;
-				AutoResizeColumn(Columns[0]);
-			};
+                AutoResizeColumn(Columns[0]);
+            };
             SelectionChanged += tvConnections_AfterSelect;
             MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
@@ -131,34 +167,35 @@ namespace mRemoteNG.UI.Controls
             AfterLabelEdit += OnAfterLabelEdit;
         }
 
-		/// <summary>
-		/// Resizes the given column to ensure that all content is shown
-		/// </summary>
-	    private void AutoResizeColumn(ColumnHeader column)
-	    {
-		    if (InvokeRequired)
-		    {
-			    Invoke((MethodInvoker) (() => AutoResizeColumn(column)));
-			    return;
-		    }
+        /// <summary>
+        /// Resizes the given column to ensure that all content is shown
+        /// </summary>
+        private void AutoResizeColumn(ColumnHeader column)
+        {
+            if (InvokeRequired)
+            {
+                Invoke((MethodInvoker)(() => AutoResizeColumn(column)));
+                return;
+            }
 
-		    var longestIndentationAndTextWidth = int.MinValue;
-		    var horizontalScrollOffset = LowLevelScrollPosition.X;
-		    const int padding = 10;
+            var longestIndentationAndTextWidth = int.MinValue;
+            var horizontalScrollOffset = LowLevelScrollPosition.X;
+            const int padding = 10;
 
-		    for (var i = 0; i < Items.Count; i++)
-		    {
-			    var rowIndentation = Items[i].Position.X;
-			    var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
+            for (var i = 0; i < Items.Count; i++)
+            {
+                var rowIndentation = Items[i].Position.X;
+                var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
 
-				longestIndentationAndTextWidth = Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
-		    }
+                longestIndentationAndTextWidth =
+                    Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
+            }
 
-		    column.Width = longestIndentationAndTextWidth +
-		                   SmallImageSize.Width +
-		                   horizontalScrollOffset +
-		                   padding;
-		}
+            column.Width = longestIndentationAndTextWidth +
+                           SmallImageSize.Width +
+                           horizontalScrollOffset +
+                           padding;
+        }
 
         private void PopulateTreeView(ConnectionTreeModel newModel)
         {
@@ -166,8 +203,8 @@ namespace mRemoteNG.UI.Controls
             RegisterModelUpdateHandlers(newModel);
             NodeSearcher = new NodeSearcher(newModel);
             ExecutePostSetupActions();
-			AutoResizeColumn(Columns[0]);
-		}
+            AutoResizeColumn(Columns[0]);
+        }
 
         private void RegisterModelUpdateHandlers(ConnectionTreeModel newModel)
         {
@@ -198,19 +235,18 @@ namespace mRemoteNG.UI.Controls
             // Removed "TO DO" from above comment. Per #142 it apperas that this no longer occurs with ObjectListView 2.9.1
             var property = propertyChangedEventArgs.PropertyName;
             if (property != nameof(ConnectionInfo.Name)
-                && property != nameof(ConnectionInfo.OpenConnections)
-                && property != nameof(ConnectionInfo.Icon))
+             && property != nameof(ConnectionInfo.OpenConnections)
+             && property != nameof(ConnectionInfo.Icon))
             {
                 return;
             }
 
-            var senderAsConnectionInfo = sender as ConnectionInfo;
-            if (senderAsConnectionInfo == null)
+            if (!(sender is ConnectionInfo senderAsConnectionInfo))
                 return;
 
             RefreshObject(senderAsConnectionInfo);
-			AutoResizeColumn(Columns[0]);
-		}
+            AutoResizeColumn(Columns[0]);
+        }
 
         private void ExecutePostSetupActions()
         {
@@ -219,9 +255,11 @@ namespace mRemoteNG.UI.Controls
                 action.Execute(this);
             }
         }
+
         #endregion
 
         #region ConnectionTree Behavior
+
         public RootNodeInfo GetRootConnectionNode()
         {
             return (RootNodeInfo)ConnectionTreeModel.RootNodes.First(item => item is RootNodeInfo);
@@ -273,7 +311,8 @@ namespace mRemoteNG.UI.Controls
 
         private void AddNode(ConnectionInfo newNode)
         {
-            if (SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttyRoot || SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
+            if (SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttyRoot ||
+                SelectedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
                 return;
 
             // the new node will survive filtering if filtering is active
@@ -309,11 +348,9 @@ namespace mRemoteNG.UI.Controls
 
         public void RenameSelectedNode()
         {
-            if (SelectedItem != null)
-            {
-                _allowEdit = true;
-                SelectedItem.BeginEdit();
-            }
+            if (SelectedItem == null) return;
+            _allowEdit = true;
+            SelectedItem.BeginEdit();
         }
 
         public void DeleteSelectedNode()
@@ -323,9 +360,22 @@ namespace mRemoteNG.UI.Controls
             ConnectionTreeModel.DeleteNode(SelectedNode);
         }
 
-        public void CopyHostnameSelectedNode()
+        /// <summary>
+        /// Copies the Hostname of the selected connection (or the Name of
+        /// the selected container) to the given <see cref="IClipboard"/>.
+        /// </summary>
+        /// <param name="clipboard"></param>
+        public void CopyHostnameSelectedNode(IClipboard clipboard)
         {
-            Clipboard.SetText(SelectedNode.Hostname);
+            if (SelectedNode == null)
+                return;
+
+            var textToCopy = SelectedNode.IsContainer ? SelectedNode.Name : SelectedNode.Hostname;
+
+            if (string.IsNullOrEmpty(textToCopy))
+                return;
+
+            clipboard.SetText(textToCopy);
         }
 
         public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
@@ -335,8 +385,7 @@ namespace mRemoteNG.UI.Controls
 
             Runtime.ConnectionsService.BeginBatchingSaves();
 
-            var sortTargetAsContainer = sortTarget as ContainerInfo;
-            if (sortTargetAsContainer != null)
+            if (sortTarget is ContainerInfo sortTargetAsContainer)
                 sortTargetAsContainer.SortRecursive(sortDirection);
             else
                 SelectedNode.Parent.SortRecursive(sortDirection);
@@ -376,25 +425,23 @@ namespace mRemoteNG.UI.Controls
 
         private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
-			// disable filtering if necessary. prevents RefreshObjects from
-			// throwing an exception
-			var filteringEnabled = IsFiltering;
-			var filter = ModelFilter;
-			if (filteringEnabled)
-			{
-				ResetColumnFiltering();
-			}
+            // disable filtering if necessary. prevents RefreshObjects from
+            // throwing an exception
+            var filteringEnabled = IsFiltering;
+            var filter = ModelFilter;
+            if (filteringEnabled)
+            {
+                ResetColumnFiltering();
+            }
 
-			RefreshObject(sender);
-			AutoResizeColumn(Columns[0]);
+            RefreshObject(sender);
+            AutoResizeColumn(Columns[0]);
 
-			// turn filtering back on
-			if (filteringEnabled)
-			{
-				ModelFilter = filter;
-				UpdateFiltering();
-			}
-		}
+            // turn filtering back on
+            if (!filteringEnabled) return;
+            ModelFilter = filter;
+            UpdateFiltering();
+        }
 
         protected override void UpdateFiltering()
         {
@@ -410,27 +457,29 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                                                                "tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed",
+                                                                ex);
             }
         }
 
         private void OnMouse_DoubleClick(object sender, MouseEventArgs mouseEventArgs)
         {
             if (mouseEventArgs.Clicks < 2) return;
+            // ReSharper disable once NotAccessedVariable
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-	        var clickedNode = listItem?.RowObject as ConnectionInfo;
-            if (clickedNode == null) return;
+            if (!(listItem?.RowObject is ConnectionInfo clickedNode)) return;
             DoubleClickHandler.Execute(clickedNode);
         }
 
         private void OnMouse_SingleClick(object sender, MouseEventArgs mouseEventArgs)
         {
             if (mouseEventArgs.Clicks > 1) return;
+            // ReSharper disable once NotAccessedVariable
             OLVColumn column;
             var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            var clickedNode = listItem?.RowObject as ConnectionInfo;
-            if (clickedNode == null) return;
+            if (!(listItem?.RowObject is ConnectionInfo clickedNode)) return;
             SingleClickHandler.Execute(clickedNode);
         }
 
@@ -450,7 +499,9 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                                                                "tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed",
+                                                                ex);
             }
         }
 
@@ -487,9 +538,12 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                                                                "tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed",
+                                                                ex);
             }
         }
+
         #endregion
     }
 }

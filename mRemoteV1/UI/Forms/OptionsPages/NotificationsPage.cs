@@ -11,6 +11,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
+            PageIcon = Resources.Error_Icon;
         }
 
         public override string PageName
@@ -59,7 +60,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
             LoadNotificationPanelSettings();
             LoadLoggingSettings();
             LoadPopupSettings();
@@ -70,7 +70,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             SaveNotificationPanelSettings();
             SaveLoggingSettings();
             SavePopupSettings();
-            Settings.Default.Save();
         }
 
         private void LoadNotificationPanelSettings()
@@ -111,7 +110,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SwitchToMCOnInformation = chkSwitchToMCInformation.Checked;
             Settings.Default.SwitchToMCOnWarning = chkSwitchToMCWarnings.Checked;
             Settings.Default.SwitchToMCOnError = chkSwitchToMCErrors.Checked;
-            
         }
 
         private void SaveLoggingSettings()

@@ -5,7 +5,7 @@ using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Menu
 {
-	public class ToolsMenu : ToolStripMenuItem
+    public class ToolsMenu : ToolStripMenuItem
     {
         private ToolStripSeparator _mMenToolsSep1;
         private ToolStripMenuItem _mMenToolsOptions;
@@ -14,6 +14,7 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsPortScan;
         private ToolStripMenuItem _mMenToolsUvncsc;
         private ToolStripMenuItem _mMenToolsComponentsCheck;
+        private ToolStripMenuItem _mMenViewScreenshotManager;
 
         public Form MainForm { get; set; }
         public ICredentialRepositoryList CredentialProviderCatalog { get; set; }
@@ -32,18 +33,21 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsSep1 = new ToolStripSeparator();
             _mMenToolsComponentsCheck = new ToolStripMenuItem();
             _mMenToolsOptions = new ToolStripMenuItem();
-
+            _mMenViewScreenshotManager = new ToolStripMenuItem();
             // 
             // mMenTools
             // 
-            DropDownItems.AddRange(new ToolStripItem[] {
-            _mMenToolsSshTransfer,
-            _mMenToolsUvncsc,
-            _mMenToolsExternalApps,
-            _mMenToolsPortScan,
-            _mMenToolsSep1,
-            _mMenToolsComponentsCheck,
-            _mMenToolsOptions});
+            DropDownItems.AddRange(new ToolStripItem[]
+            {
+                _mMenToolsSshTransfer,
+                _mMenToolsUvncsc,
+                _mMenToolsExternalApps,
+                _mMenToolsPortScan,
+                _mMenViewScreenshotManager,
+                _mMenToolsSep1,
+                _mMenToolsComponentsCheck,
+                _mMenToolsOptions
+            });
             Name = "mMenTools";
             Size = new System.Drawing.Size(48, 20);
             Text = Language.strMenuTools;
@@ -81,6 +85,14 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsPortScan.Text = Language.strMenuPortScan;
             _mMenToolsPortScan.Click += mMenToolsPortScan_Click;
             // 
+            // mMenViewScreenshotManager
+            // 
+            _mMenViewScreenshotManager.Image = Resources.Screenshot;
+            _mMenViewScreenshotManager.Name = "mMenViewScreenshotManager";
+            _mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
+            _mMenViewScreenshotManager.Text = Language.strScreenshots;
+            _mMenViewScreenshotManager.Click += mMenViewScreenshotManager_Click;
+            // 
             // mMenToolsSep1
             // 
             _mMenToolsSep1.Name = "mMenToolsSep1";
@@ -109,11 +121,13 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsSshTransfer.Text = Language.strMenuSSHFileTransfer;
             _mMenToolsExternalApps.Text = Language.strMenuExternalTools;
             _mMenToolsPortScan.Text = Language.strMenuPortScan;
+            _mMenViewScreenshotManager.Text = Language.strScreenshots;
             _mMenToolsComponentsCheck.Text = Language.strComponentsCheck;
             _mMenToolsOptions.Text = Language.strMenuOptions;
         }
 
         #region Tools
+
         private void mMenToolsSSHTransfer_Click(object sender, EventArgs e)
         {
             Windows.Show(WindowType.SSHTransfer);
@@ -134,6 +148,11 @@ namespace mRemoteNG.UI.Menu
             Windows.Show(WindowType.PortScan);
         }
 
+        private void mMenViewScreenshotManager_Click(object sender, EventArgs e)
+        {
+            Windows.Show(WindowType.ScreenshotManager);
+        }
+
         private void mMenToolsComponentsCheck_Click(object sender, EventArgs e)
         {
             Windows.Show(WindowType.ComponentsCheck);
@@ -143,6 +162,7 @@ namespace mRemoteNG.UI.Menu
         {
             Windows.Show(WindowType.Options);
         }
+
         #endregion
     }
 }

@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using mRemoteNG.Config.Serializers;
+﻿using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
+using System.Linq;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
@@ -17,10 +17,11 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedUserName = "myusernamehere";
         private const string ExpectedDomain = "myspecialdomain";
         private const string ExpectedGatewayHostname = "gatewayhostname.domain.com";
+        private const string ExpectedLoadBalanceInfo = "tsv://MS Terminal Services Plugin.1.RDS-NAME";
         private const int ExpectedPort = 9933;
-        private const RdpProtocol.RDPColors ExpectedColors = RdpProtocol.RDPColors.Colors24Bit;
+        private const RDPColors ExpectedColors = RDPColors.Colors24Bit;
         private const bool ExpectedBitmapCaching = false;
-        private const RdpProtocol.RDPResolutions ExpectedResolutionMode = RdpProtocol.RDPResolutions.FitToWindow;
+        private const RDPResolutions ExpectedResolutionMode = RDPResolutions.FitToWindow;
         private const bool ExpectedWallpaperDisplay = true;
         private const bool ExpectedThemesDisplay = true;
         private const bool ExpectedFontSmoothing = true;
@@ -29,7 +30,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const bool ExpectedDriveRedirection = true;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
-        private const RdpProtocol.RDPSounds ExpectedSoundRedirection = RdpProtocol.RDPSounds.BringToThisComputer;
+        private const RDPSounds ExpectedSoundRedirection = RDPSounds.BringToThisComputer;
 
 
         [OneTimeSetUp]
@@ -164,6 +165,13 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         {
             var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
             Assert.That(connectionInfo.RedirectSound, Is.EqualTo(ExpectedSoundRedirection));
+        }
+
+        [Test]
+        public void LoadBalanceInfoImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.LoadBalanceInfo, Is.EqualTo(ExpectedLoadBalanceInfo));
         }
 
         //[Test]

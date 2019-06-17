@@ -2,29 +2,29 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class frmOptions : Form
+    public partial class FrmOptions : Form
     {
         private Dictionary<string, OptionsPage> _pages;
-        private ImageList _pageIconImageList;
         private readonly string _pageName;
         private readonly DisplayProperties _display = new DisplayProperties();
 
-        public frmOptions()
+        public FrmOptions() : this(Language.strStartupExit)
         {
-            InitializeComponent();
-            _pageName = Language.strStartupExit;
         }
 
-        public frmOptions(string pn)
+        public FrmOptions(string pn)
         {
+            Cursor.Current = Cursors.WaitCursor;
+            Application.DoEvents();
             InitializeComponent();
             _pageName = pn;
+            Cursor.Current = Cursors.Default;
         }
 
         private void frmOptions_Load(object sender, EventArgs e)
@@ -33,20 +33,27 @@ namespace mRemoteNG.UI.Forms
             FontOverrider.FontOverride(this);
             AddOptionsPagesToListView();
             SetInitiallyActivatedPage();
-            ApplyLanguage();
+            // ApplyLanguage();
+            // Handle the main page here and the individual pages in
+            // AddOptionsPagesToListView()  -- one less foreach loop....
+            Text = Language.strOptionsPageTitle;
+            btnOK.Text = Language.strButtonOK;
+            btnCancel.Text = Language.strButtonCancel;
+            btnApply.Text = Language.strButtonApply;
             ApplyTheme();
-            Themes.ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
             lstOptionPages.SelectedIndex = 0;
         }
 
         private void ApplyTheme()
         {
-            if (!Themes.ThemeManager.getInstance().ThemingActive) return;
-            BackColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = Themes.ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+            if (!ThemeManager.getInstance().ActiveAndExtended) return;
+            BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+            ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
+#if false
         private void ApplyLanguage()
         {
             Text = Language.strOptionsPageTitle;
@@ -55,7 +62,7 @@ namespace mRemoteNG.UI.Forms
                 optionPage.ApplyLanguage();
             }
         }
-
+#endif
         private void CompileListOfOptionsPages()
         {
             _pages = new Dictionary<string, OptionsPage>
@@ -81,6 +88,7 @@ namespace mRemoteNG.UI.Forms
 
             foreach (var page in _pages.Select(keyValuePair => keyValuePair.Value))
             {
+                page.ApplyLanguage();
                 page.LoadSettings();
                 lstOptionPages.AddObject(page);
             }
@@ -89,10 +97,7 @@ namespace mRemoteNG.UI.Forms
         private object ImageGetter(object rowobject)
         {
             var page = rowobject as OptionsPage;
-            if (page == null)
-                return Resources.Help;
-
-            return _display.ScaleImage(page.PageIcon);
+            return page?.PageIcon == null ? _display.ScaleImage(Resources.Help) : _display.ScaleImage(page.PageIcon);
         }
 
         private void SetInitiallyActivatedPage()
@@ -106,10 +111,15 @@ namespace mRemoteNG.UI.Forms
                 break;
             }
 
-            if(!isSet)
+            if (!isSet)
                 lstOptionPages.Items[0].Selected = true;
         }
 
+        /*
+         * This gets called by both OK and Apply buttons.
+         * OK sets DialogResult = OK, Apply does not (None).
+         * Apply will no close the dialog.
+         */
         private void btnOK_Click(object sender, EventArgs e)
         {
             foreach (var page in _pages.Values)
@@ -117,6 +127,7 @@ namespace mRemoteNG.UI.Forms
                 Debug.WriteLine(page.PageName);
                 page.SaveSettings();
             }
+
             Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
             Settings.Default.Save();
         }
@@ -138,7 +149,8 @@ namespace mRemoteNG.UI.Forms
                 Debug.WriteLine(page.PageName);
                 page.RevertSettings();
             }
-            Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile); 
+
+            Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
         }
     }
 }

@@ -4,15 +4,17 @@ using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	public sealed partial class CredentialsPage : OptionsPage
+    public sealed partial class CredentialsPage : OptionsPage
     {
         public CredentialsPage()
         {
             InitializeComponent();
             ApplyTheme();
+            PageIcon = Resources.Key_Icon;
         }
 
-        public override string PageName {
+        public override string PageName
+        {
             get => Language.Credentials;
             set { }
         }
@@ -31,8 +33,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (Settings.Default.EmptyCredentials)
             {
@@ -49,7 +49,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             txtCredentialsUsername.Text = Settings.Default.DefaultUsername;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+            txtCredentialsPassword.Text =
+                cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
             txtCredentialsDomain.Text = Settings.Default.DefaultDomain;
         }
 
@@ -70,10 +71,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
+            Settings.Default.DefaultPassword =
+                cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
             Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
-
-            Settings.Default.Save();
         }
 
         private void radCredentialsCustom_CheckedChanged(object sender, EventArgs e)

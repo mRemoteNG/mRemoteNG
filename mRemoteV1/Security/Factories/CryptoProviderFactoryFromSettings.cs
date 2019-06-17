@@ -4,7 +4,9 @@
     {
         public ICryptographyProvider Build()
         {
-            var provider = new CryptoProviderFactory(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode).Build();
+            var provider =
+                new CryptoProviderFactory(Settings.Default.EncryptionEngine, Settings.Default.EncryptionBlockCipherMode)
+                    .Build();
             provider.KeyDerivationIterations = Settings.Default.EncryptionKeyDerivationIterations;
             return provider;
         }

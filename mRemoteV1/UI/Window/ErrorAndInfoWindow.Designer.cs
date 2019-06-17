@@ -1,9 +1,9 @@
-
+﻿
 namespace mRemoteNG.UI.Window
 {
 	public partial class ErrorAndInfoWindow
 	{
-		internal System.Windows.Forms.PictureBox pbError;
+		internal Controls.Base.NGPictureBox pbError;
 		internal System.Windows.Forms.ListView lvErrorCollector;
 		internal System.Windows.Forms.ColumnHeader clmMessage;
 		internal Controls.Base.NGTextBox txtMsgText;
@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Window
 		{
             this.components = new System.ComponentModel.Container();
             this.txtMsgText = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.pbError = new System.Windows.Forms.PictureBox();
+            this.pbError = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
             this.lvErrorCollector = new System.Windows.Forms.ListView();
             this.clmMessage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cMenMC = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -33,6 +33,7 @@ namespace mRemoteNG.UI.Window
             // txtMsgText
             // 
             this.txtMsgText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMsgText.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMsgText.Location = new System.Drawing.Point(40, 19);
             this.txtMsgText.Multiline = true;
             this.txtMsgText.Name = "txtMsgText";
@@ -51,6 +52,7 @@ namespace mRemoteNG.UI.Window
             this.pbError.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbError.TabIndex = 0;
             this.pbError.TabStop = false;
+            this.pbError.Visible = false;
             // 
             // lvErrorCollector
             // 

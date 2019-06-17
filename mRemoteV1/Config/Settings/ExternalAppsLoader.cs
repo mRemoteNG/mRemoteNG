@@ -16,7 +16,9 @@ namespace mRemoteNG.Config.Settings
         private readonly MessageCollector _messageCollector;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 
-        public ExternalAppsLoader(FrmMain mainForm, MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip)
+        public ExternalAppsLoader(FrmMain mainForm,
+                                  MessageCollector messageCollector,
+                                  ExternalToolsToolStrip externalToolsToolStrip)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -34,13 +36,15 @@ namespace mRemoteNG.Config.Settings
         public void LoadExternalAppsFromXML()
         {
 #if !PORTABLE
-            var oldPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), GeneralAppInfo.ProductName, SettingsFileInfo.ExtAppsFilesName);
+            var oldPath =
+ Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), GeneralAppInfo.ProductName, SettingsFileInfo.ExtAppsFilesName);
 #endif
             var newPath = Path.Combine(SettingsFileInfo.SettingsPath, SettingsFileInfo.ExtAppsFilesName);
             var xDom = new XmlDocument();
             if (File.Exists(newPath))
             {
-                _messageCollector.AddMessage(MessageClass.InformationMsg, $"Loading External Apps from: {newPath}", true);
+                _messageCollector.AddMessage(MessageClass.InformationMsg, $"Loading External Apps from: {newPath}",
+                                             true);
                 xDom.Load(newPath);
             }
 #if !PORTABLE
@@ -53,13 +57,15 @@ namespace mRemoteNG.Config.Settings
 #endif
             else
             {
-                _messageCollector.AddMessage(MessageClass.WarningMsg, "Loading External Apps failed: Could not FIND file!");
+                _messageCollector.AddMessage(MessageClass.WarningMsg,
+                                             "Loading External Apps failed: Could not FIND file!");
                 return;
             }
 
             if (xDom.DocumentElement == null)
             {
-                _messageCollector.AddMessage(MessageClass.WarningMsg, "Loading External Apps failed: Could not LOAD file!");
+                _messageCollector.AddMessage(MessageClass.WarningMsg,
+                                             "Loading External Apps failed: Could not LOAD file!");
                 return;
             }
 
@@ -93,7 +99,9 @@ namespace mRemoteNG.Config.Settings
                     extA.ShowOnToolbar = bool.Parse(xEl.Attributes["ShowOnToolbar"].Value);
                 }
 
-                _messageCollector.AddMessage(MessageClass.InformationMsg, $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}", true);
+                _messageCollector.AddMessage(MessageClass.InformationMsg,
+                                             $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}",
+                                             true);
                 Runtime.ExternalToolsService.ExternalTools.Add(extA);
             }
 

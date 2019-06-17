@@ -45,11 +45,13 @@
 		public TType RedirectSmartCards { get; set; }
 		public TType RedirectSound { get; set; }
 		public TType SoundQuality { get; set; }
+		public TType RedirectAudioCapture { get; set; }
 		public TType PreExtApp { get; set; }
 		public TType PostExtApp { get; set; }
 		public TType MacAddress { get; set; }
-		public TType UserField { get; set; }
-		public TType VNCCompression { get; set; }
+        public TType UserField { get; set; }
+        public TType Favorite { get; set; }
+        public TType VNCCompression { get; set; }
 		public TType VNCEncoding { get; set; }
 		public TType VNCAuthMode { get; set; }
 		public TType VNCProxyType { get; set; }
