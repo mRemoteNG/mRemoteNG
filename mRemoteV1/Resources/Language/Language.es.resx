@@ -1334,7 +1334,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
     <value>Introduzca su nombre de usuario de autentificación en el proxy.</value>
   </data>
 	<data name="strPropertyNameAddress" xml:space="preserve">
-    <value>Nombre dle host/IP</value>
+    <value>Nombre del host/IP</value>
   </data>
 	<data name="strPropertyNameAll" xml:space="preserve">
     <value>Todo</value>
