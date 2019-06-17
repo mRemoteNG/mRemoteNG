@@ -1,4 +1,4 @@
-
+﻿
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -31,7 +31,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabsPanelsPage));
             this.chkAlwaysShowPanelTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkAlwaysShowConnectionTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.chkIdentifyQuickConnectTabs = new mRemoteNG.UI.Controls.Base.NGCheckBox();
@@ -143,12 +142,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkShowProtocolOnTabs.Text = "Show protocols on tab names";
             this.chkShowProtocolOnTabs.UseVisualStyleBackColor = true;
             // 
+            // chkShowParentInfoOnTabs
+            // 
+            this.chkShowParentInfoOnTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkShowParentInfoOnTabs.AutoSize = true;
+            this.chkShowParentInfoOnTabs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkShowParentInfoOnTabs.Location = new System.Drawing.Point(3, 187);
+            this.chkShowParentInfoOnTabs.Name = "chkShowParentInfoOnTabs";
+            this.chkShowParentInfoOnTabs.Size = new System.Drawing.Size(207, 17);
+            this.chkShowParentInfoOnTabs.TabIndex = 10;
+            this.chkShowParentInfoOnTabs.Text = "Show parent information on tab names";
+            this.chkShowParentInfoOnTabs.UseVisualStyleBackColor = true;
+            // 
             // chkCreateEmptyPanelOnStart
             // 
             this.chkCreateEmptyPanelOnStart._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkCreateEmptyPanelOnStart.AutoSize = true;
             this.chkCreateEmptyPanelOnStart.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkCreateEmptyPanelOnStart.Location = new System.Drawing.Point(3, 187);
+            this.chkCreateEmptyPanelOnStart.Location = new System.Drawing.Point(3, 210);
             this.chkCreateEmptyPanelOnStart.Name = "chkCreateEmptyPanelOnStart";
             this.chkCreateEmptyPanelOnStart.Size = new System.Drawing.Size(271, 17);
             this.chkCreateEmptyPanelOnStart.TabIndex = 7;
@@ -159,7 +170,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // txtBoxPanelName
             // 
             this.txtBoxPanelName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxPanelName.Location = new System.Drawing.Point(35, 223);
+            this.txtBoxPanelName.Location = new System.Drawing.Point(35, 253);
             this.txtBoxPanelName.Name = "txtBoxPanelName";
             this.txtBoxPanelName.Size = new System.Drawing.Size(213, 22);
             this.txtBoxPanelName.TabIndex = 8;
@@ -167,22 +178,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblPanelName
             // 
             this.lblPanelName.AutoSize = true;
-            this.lblPanelName.Location = new System.Drawing.Point(32, 207);
+            this.lblPanelName.Location = new System.Drawing.Point(32, 233);
             this.lblPanelName.Name = "lblPanelName";
             this.lblPanelName.Size = new System.Drawing.Size(69, 13);
             this.lblPanelName.TabIndex = 9;
             this.lblPanelName.Text = "Panel name:";
-            // 
-            // chkShowParentInfoOnTabs
-            // 
-            this.chkShowParentInfoOnTabs._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
-            this.chkShowParentInfoOnTabs.AutoSize = true;
-            this.chkShowParentInfoOnTabs.Location = new System.Drawing.Point(3, 164);
-            this.chkShowParentInfoOnTabs.Name = "chkShowParentInfoOnTabs";
-            this.chkShowParentInfoOnTabs.Size = new System.Drawing.Size(207, 17);
-            this.chkShowParentInfoOnTabs.TabIndex = 10;
-            this.chkShowParentInfoOnTabs.Text = "Show parent information on tab names";
-            this.chkShowParentInfoOnTabs.UseVisualStyleBackColor = true;
             // 
             // TabsPanelsPage
             // 
@@ -199,6 +199,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkShowLogonInfoOnTabs);
             this.Controls.Add(this.chkDoubleClickClosesTab);
             this.Controls.Add(this.chkShowProtocolOnTabs);
+            this.Controls.Add(this.chkShowParentInfoOnTabs);
             this.Name = "TabsPanelsPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.ResumeLayout(false);

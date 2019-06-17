@@ -1,4 +1,4 @@
-namespace mRemoteNG.UI.Forms.OptionsPages
+﻿namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class TabsPanelsPage
     {

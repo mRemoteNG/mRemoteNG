@@ -140,12 +140,13 @@ namespace mRemoteNG.UI.Window
                     }
 
                     if (titlePrefix != "")
-                        nTab.Title = $"{titlePrefix}{nTab.Title}";
+                        titleText = $"{titlePrefix}{titleText}";
                 }
 
                 var conIcon = ConnectionIcon.FromString(connectionInfo.Icon);
                 if (conIcon != null)
-                    nTab.Icon = conIcon;
+                    Icon = conIcon;
+
                 var conTab = new ConnectionTab
                 {
                     Tag = connectionInfo,
