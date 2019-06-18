@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -210,6 +210,23 @@ namespace mRemoteNG {
         internal static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+		
+        ///   Looks up a localized string similar to Encryption Test.
+        /// </summary>
+        internal static string EncryptionTest {
+            get {
+                return ResourceManager.GetString("EncryptionTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds..
+        /// </summary>
+        internal static string EncryptionTestResultMessage {
+            get {
+                return ResourceManager.GetString("EncryptionTestResultMessage", resourceCulture);
             }
         }
         
@@ -8008,6 +8025,15 @@ namespace mRemoteNG {
         internal static string TestingConnection {
             get {
                 return ResourceManager.GetString("TestingConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Settings.
+        /// </summary>
+        internal static string TestSettings {
+            get {
+                return ResourceManager.GetString("TestSettings", resourceCulture);
             }
         }
         

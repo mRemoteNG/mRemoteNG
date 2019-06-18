@@ -100,15 +100,15 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength),
                                                            (string)dataRow["ICAEncryptionStrength"]);
             connectionInfo.RDPAuthenticationLevel =
-                (RdpProtocol.AuthenticationLevel)Enum.Parse(typeof(RdpProtocol.AuthenticationLevel),
+                (AuthenticationLevel)Enum.Parse(typeof(AuthenticationLevel),
                                                             (string)dataRow["RDPAuthenticationLevel"]);
             connectionInfo.RDPMinutesToIdleTimeout = (int)dataRow["RDPMinutesToIdleTimeout"];
             connectionInfo.RDPAlertIdleTimeout = (bool)dataRow["RDPAlertIdleTimeout"];
             connectionInfo.LoadBalanceInfo = (string)dataRow["LoadBalanceInfo"];
             connectionInfo.Colors =
-                (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors), (string)dataRow["Colors"]);
+                (RDPColors)Enum.Parse(typeof(RDPColors), (string)dataRow["Colors"]);
             connectionInfo.Resolution =
-                (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions),
+                (RDPResolutions)Enum.Parse(typeof(RDPResolutions),
                                                        (string)dataRow["Resolution"]);
             connectionInfo.AutomaticResize = (bool)dataRow["AutomaticResize"];
             connectionInfo.DisplayWallpaper = (bool)dataRow["DisplayWallpaper"];
@@ -122,8 +122,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.RedirectClipboard = (bool)dataRow["RedirectClipboard"];
             connectionInfo.RedirectSmartCards = (bool)dataRow["RedirectSmartCards"];
             connectionInfo.RedirectSound =
-                (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds), (string)dataRow["RedirectSound"]);
-            connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality),
+                (RDPSounds)Enum.Parse(typeof(RDPSounds), (string)dataRow["RedirectSound"]);
+            connectionInfo.SoundQuality = (RDPSoundQuality)Enum.Parse(typeof(RDPSoundQuality),
                                                                                   (string)dataRow["SoundQuality"]);
             connectionInfo.RedirectAudioCapture = (bool)dataRow["RedirectAudioCapture"];
 
@@ -152,15 +152,12 @@ namespace mRemoteNG.Config.Serializers.MsSql
                                                                                         ["VNCSmartSizeMode"]);
             connectionInfo.VNCViewOnly = (bool)dataRow["VNCViewOnly"];
             connectionInfo.RDGatewayUsageMethod =
-                (RdpProtocol.RDGatewayUsageMethod)Enum.Parse(typeof(RdpProtocol.RDGatewayUsageMethod),
+                (RDGatewayUsageMethod)Enum.Parse(typeof(RDGatewayUsageMethod),
                                                              (string)dataRow["RDGatewayUsageMethod"]);
             connectionInfo.RDGatewayHostname = (string)dataRow["RDGatewayHostname"];
             connectionInfo.RDGatewayUseConnectionCredentials =
-                (RdpProtocol.RDGatewayUseConnectionCredentials)Enum.Parse(
-                                                                          typeof(RdpProtocol.
-                                                                              RDGatewayUseConnectionCredentials),
-                                                                          (string)dataRow
-                                                                              ["RDGatewayUseConnectionCredentials"]);
+                (RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RDGatewayUseConnectionCredentials),
+                                                            (string)dataRow["RDGatewayUseConnectionCredentials"]);
             connectionInfo.RDGatewayUsername = (string)dataRow["RDGatewayUsername"];
             connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
