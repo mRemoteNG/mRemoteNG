@@ -42,7 +42,7 @@ namespace mRemoteNG.UI.Controls
         private ToolStripMenuItem _cMenTreeMoveDown;
         private ToolStripMenuItem _cMenTreeToolsExternalApps;
         private ToolStripMenuItem _cMenTreeDuplicate;
-        private ToolStripMenuItem _cMenEditSubMenu;
+        private ToolStripMenuItem _cMenInheritanceSubMenu;
         private ToolStripMenuItem _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting;
         private ToolStripMenuItem _cMenTreeConnectWithOptionsDontConnectToConsoleSession;
         private ToolStripMenuItem _cMenTreeImport;
@@ -101,7 +101,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeImportFile = new ToolStripMenuItem();
             _cMenTreeImportActiveDirectory = new ToolStripMenuItem();
             _cMenTreeImportPortScan = new ToolStripMenuItem();
-            _cMenEditSubMenu = new ToolStripMenuItem();
+            _cMenInheritanceSubMenu = new ToolStripMenuItem();
             _cMenTreeApplyInheritanceToChildren = new ToolStripMenuItem();
             _cMenTreeApplyDefaultInheritance = new ToolStripMenuItem();
             _cMenTreeExportFile = new ToolStripMenuItem();
@@ -134,7 +134,7 @@ namespace mRemoteNG.UI.Controls
                 _cMenTreeRename,
                 _cMenTreeDelete,
                 _cMenTreeCopyHostname,
-                _cMenEditSubMenu,
+                _cMenInheritanceSubMenu,
                 _cMenTreeSep3,
                 _cMenTreeImport,
                 _cMenTreeExportFile,
@@ -406,14 +406,14 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenEditSubMenu
             // 
-            _cMenEditSubMenu.DropDownItems.AddRange(new ToolStripItem[]
+            _cMenInheritanceSubMenu.DropDownItems.AddRange(new ToolStripItem[]
             {
                 _cMenTreeApplyInheritanceToChildren,
                 _cMenTreeApplyDefaultInheritance
             });
-            _cMenEditSubMenu.Name = "_cMenEditSubMenu";
-            _cMenEditSubMenu.Size = new System.Drawing.Size(199, 22);
-            _cMenEditSubMenu.Text = "Edit";
+            _cMenInheritanceSubMenu.Name = "_cMenInheritanceSubMenu";
+            _cMenInheritanceSubMenu.Size = new System.Drawing.Size(199, 22);
+            _cMenInheritanceSubMenu.Text = "Inheritance";
             // 
             // _cMenTreeApplyInheritanceToChildren
             // 
@@ -467,7 +467,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveUp.Text = Language.strMoveUp;
             _cMenTreeMoveDown.Text = Language.strMoveDown;
 
-            _cMenEditSubMenu.Text = Language.Edit;
+            _cMenInheritanceSubMenu.Text = Language.strButtonInheritance;
             _cMenTreeApplyInheritanceToChildren.Text = Language.ApplyInheritanceToChildren;
             _cMenTreeApplyDefaultInheritance.Text = Language.ApplyDefaultInheritance;
         }
@@ -499,7 +499,7 @@ namespace mRemoteNG.UI.Controls
                     ShowHideMenuItemsForConnectionNode(_connectionTree.SelectedNode);
                 }
 
-                _cMenEditSubMenu.Enabled = _cMenEditSubMenu.DropDownItems
+                _cMenInheritanceSubMenu.Enabled = _cMenInheritanceSubMenu.DropDownItems
                     .OfType<ToolStripMenuItem>().Any(i => i.Enabled);
             }
             catch (Exception ex)
