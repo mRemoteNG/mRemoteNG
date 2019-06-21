@@ -338,8 +338,8 @@ namespace mRemoteNG.UI.Window
             try
             {
                 if (!char.IsLetterOrDigit(e.KeyChar)) return;
-                txtSearch.Text = e.KeyChar.ToString();
                 txtSearch.Focus();
+                txtSearch.Text = e.KeyChar.ToString();
                 txtSearch.SelectionStart = txtSearch.TextLength;
             }
             catch (Exception ex)
@@ -355,6 +355,8 @@ namespace mRemoteNG.UI.Window
                 if (e.KeyCode == Keys.Enter)
                 {
                     e.Handled = true;
+                    if (SelectedNode == null)
+                        return;
                     _connectionInitiator.OpenConnection(SelectedNode);
                 }
                 else if (e.Control && e.KeyCode == Keys.F)

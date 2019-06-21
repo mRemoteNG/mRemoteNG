@@ -187,6 +187,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Encryption Test.
+        /// </summary>
+        internal static string EncryptionTest {
+            get {
+                return ResourceManager.GetString("EncryptionTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds..
+        /// </summary>
+        internal static string EncryptionTestResultMessage {
+            get {
+                return ResourceManager.GetString("EncryptionTestResultMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Environment.
         /// </summary>
         internal static string Environment {
@@ -8017,6 +8035,15 @@ namespace mRemoteNG {
         internal static string TestingConnection {
             get {
                 return ResourceManager.GetString("TestingConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Settings.
+        /// </summary>
+        internal static string TestSettings {
+            get {
+                return ResourceManager.GetString("TestSettings", resourceCulture);
             }
         }
         

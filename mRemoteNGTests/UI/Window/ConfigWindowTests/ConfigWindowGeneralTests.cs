@@ -222,10 +222,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 : new ConnectionInfo();
 
             node.Protocol = protocol;
-            node.Resolution = RdpProtocol.RDPResolutions.Res800x600;
-            node.RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Never;
-            node.RDGatewayUseConnectionCredentials = RdpProtocol.RDGatewayUseConnectionCredentials.Yes;
-            node.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
+            node.Resolution = RDPResolutions.Res800x600;
+            node.RDGatewayUsageMethod = RDGatewayUsageMethod.Never;
+            node.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes;
+            node.RedirectSound = RDPSounds.DoNotPlay;
             node.VNCAuthMode = ProtocolVNC.AuthMode.AuthVNC;
             node.VNCProxyType = ProtocolVNC.ProxyType.ProxyNone;
             node.UseVmId = false;

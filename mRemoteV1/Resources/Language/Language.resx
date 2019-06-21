@@ -2793,6 +2793,15 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Environment" xml:space="preserve">
     <value>Environment</value>
   </data>
+  <data name="EncryptionTestResultMessage" xml:space="preserve">
+      <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
+  </data>
+  <data name="EncryptionTest" xml:space="preserve">
+      <value>Encryption Test</value>
+  </data>
+  <data name="TestSettings" xml:space="preserve">
+      <value>Test Settings</value>
+  </data>
   <data name="strPropertyDescriptionUseVmId" xml:space="preserve">
     <value>Use VM ID to connect to VM running on Hyper-V.</value>
   </data>

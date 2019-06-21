@@ -573,7 +573,7 @@
       <Value Profile="(Default)">GCM</Value>
     </Setting>
     <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1000</Value>
+      <Value Profile="(Default)">10000</Value>
     </Setting>
     <Setting Name="ConDefaultSoundQuality" Type="System.String" Scope="User">
       <Value Profile="(Default)">Dynamic</Value>

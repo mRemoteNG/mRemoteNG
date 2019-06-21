@@ -6,7 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 ### Changed
+- #1468: Improved mRemoteNG startup time
+- #1443: Chinese (simplified) translation improvements
+- #1437: Norwegian translation improvements
+- #1239: Increased default key derivation function (KDF) iterations from 1000 to 10000
+- Moved most RDP enums outside of the RDP protocol class. Scripts which reference these enums will need to be updated.
 ### Fixed
+- #1447: Exception occurs when resetting layout
+- #1439: Searching in hosts tree loses first keystroke
 - #1428: Fixed a rare error when checking for FIPS
 - #1426: Tabbing is reversed in config window
 - #1425: Connections didn't always respect the Panel property

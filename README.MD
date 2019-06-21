@@ -38,7 +38,7 @@ For a detailed feature list and general usage support, refer to the [User Manual
 
 ## Installation
 
-Before installing make sure you have all the required [prerequisites](https://github.com/mRemoteNG/mRemoteNG/wiki/Prerequisites).
+Before installing make sure you fullfill all the [minimum requirements](https://mremoteng.readthedocs.io/en/latest/installation/minimum_requirements.html).
 
 mRemoteNG is available as a redistributable msi package, and can be downloaded from the following locations:
 * [GitHub](https://github.com/mRemoteNG/mRemoteNG/releases)
