@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.77.0] - 2019-04-29
 ### Added
+- #1422: Added possibility to connect to virtual machines running on Hyper-V
 - #1414: Add "Remote Audio Capture" option for RDP
 - #1336: Added ability to run External tools on folders
 - #1320: Added ability to favorite items in the connection tree
