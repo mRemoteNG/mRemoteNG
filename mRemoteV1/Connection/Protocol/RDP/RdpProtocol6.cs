@@ -126,23 +126,31 @@ namespace mRemoteNG.Connection.Protocol.RDP
             base.Initialize();
             try
             {
-                Control.GotFocus += RdpClient_GotFocus;
-                Control.CreateControl();
                 connectionInfo = InterfaceControl.Info;
+                Control.GotFocus += RdpClient_GotFocus;
 
                 try
                 {
+                    Control.CreateControl();
                     while (!Control.Created)
                     {
                         Thread.Sleep(0);
                         Application.DoEvents();
                     }
 
-                    _rdpClient = (MsRdpClient6NotSafeForScripting)((AxHost)Control).GetOcx();
+                    _rdpClient = (MsRdpClient6NotSafeForScripting) ((AxHost) Control).GetOcx();
                 }
                 catch (COMException ex)
                 {
-                    Runtime.MessageCollector.AddExceptionMessage(Language.strRdpControlCreationFailed, ex);
+                    if (ex.Message.Contains("CLASS_E_CLASSNOTAVAILABLE"))
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                            string.Format(Language.RdpProtocolVersionNotSupported, connectionInfo.RdpProtocolVersion));
+                    }
+                    else
+                    {
+                        Runtime.MessageCollector.AddExceptionMessage(Language.strRdpControlCreationFailed, ex);
+                    }
                     Control.Dispose();
                     return false;
                 }
@@ -183,7 +191,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 SetRdGateway();
                 ViewOnly = Force.HasFlag(ConnectionInfo.Force.ViewOnly);
 
-                _rdpClient.ColorDepth = (int)connectionInfo.Colors;
+                _rdpClient.ColorDepth = (int) connectionInfo.Colors;
 
                 SetPerformanceFlags();
 

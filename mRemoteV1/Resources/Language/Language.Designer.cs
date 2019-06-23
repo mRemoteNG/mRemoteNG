@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -300,6 +300,15 @@ namespace mRemoteNG {
         internal static string PromptUnlockCredReposOnStartup {
             get {
                 return ResourceManager.GetString("PromptUnlockCredReposOnStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version..
+        /// </summary>
+        internal static string RdpProtocolVersionNotSupported {
+            get {
+                return ResourceManager.GetString("RdpProtocolVersionNotSupported", resourceCulture);
             }
         }
         
