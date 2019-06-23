@@ -2802,10 +2802,10 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Test Settings</value>
   </data>
   <data name="strPropertyDescriptionRdpProtocolVersion" xml:space="preserve">
-    <value>Sets the version of the RDP protocol to use when opening connections.</value>
+    <value>Sets the version of RDP to use when opening connections.</value>
   </data>
   <data name="strPropertyNameRdpProtocolVersion" xml:space="preserve">
-    <value>RDP Protocol Version</value>
+    <value>RDP Version</value>
   </data>
   <data name="strPropertyDescriptionUseVmId" xml:space="preserve">
     <value>Use VM ID to connect to VM running on Hyper-V.</value>
@@ -2820,6 +2820,6 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>VM ID</value>
   </data>
   <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
-      <value>Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version.</value>
+    <value>Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version.</value>
   </data>
 </root>

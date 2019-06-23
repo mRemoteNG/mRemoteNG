@@ -5028,7 +5028,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sets the version of the RDP protocol to use when opening connections..
+        ///   Looks up a localized string similar to Sets the version of RDP to use when opening connections..
         /// </summary>
         internal static string strPropertyDescriptionRdpProtocolVersion {
             get {
@@ -5586,7 +5586,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RDP Protocol Version.
+        ///   Looks up a localized string similar to RDP Version.
         /// </summary>
         internal static string strPropertyNameRdpProtocolVersion {
             get {
