@@ -40,7 +40,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             return true;
         }
 
-        protected override AxHost CreateRdpClientControl()
+        protected override AxHost CreateActiveXRdpClientControl()
         {
             return new AxMsRdpClient7NotSafeForScripting();
         }

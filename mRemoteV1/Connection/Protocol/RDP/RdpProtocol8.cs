@@ -66,7 +66,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _controlBeginningSize = Size.Empty;
         }
 
-        protected override AxHost CreateRdpClientControl()
+        protected override AxHost CreateActiveXRdpClientControl()
         {
             return new AxMsRdpClient8NotSafeForScripting();
         }

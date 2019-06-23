@@ -100,21 +100,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public RdpProtocol6()
         {
             _displayProperties = new DisplayProperties();
-            Connecting += OnConnectingDebugMessage;
             tmrReconnect.Elapsed += tmrReconnect_Elapsed;
         }
 
         #endregion
 
         #region Public Methods
-
-        private void OnConnectingDebugMessage(object sender)
-        {
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                $"Requesting RDP version: {connectionInfo.RdpProtocolVersion}. Using: {RdpProtocolVersion}");
-        }
-
-        protected virtual AxHost CreateRdpClientControl()
+        protected virtual AxHost CreateActiveXRdpClientControl()
         {
             return new AxMsRdpClient6NotSafeForScripting();
         }
@@ -122,88 +114,56 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public override bool Initialize()
         {
-            Control = CreateRdpClientControl();
+            connectionInfo = InterfaceControl.Info;
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                $"Requesting RDP version: {connectionInfo.RdpProtocolVersion}. Using: {RdpProtocolVersion}");
+            Control = CreateActiveXRdpClientControl();
             base.Initialize();
+
             try
             {
-                connectionInfo = InterfaceControl.Info;
-                Control.GotFocus += RdpClient_GotFocus;
-
-                try
-                {
-                    Control.CreateControl();
-                    while (!Control.Created)
-                    {
-                        Thread.Sleep(0);
-                        Application.DoEvents();
-                    }
-
-                    _rdpClient = (MsRdpClient6NotSafeForScripting) ((AxHost) Control).GetOcx();
-                }
-                catch (COMException ex)
-                {
-                    if (ex.Message.Contains("CLASS_E_CLASSNOTAVAILABLE"))
-                    {
-                        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                            string.Format(Language.RdpProtocolVersionNotSupported, connectionInfo.RdpProtocolVersion));
-                    }
-                    else
-                    {
-                        Runtime.MessageCollector.AddExceptionMessage(Language.strRdpControlCreationFailed, ex);
-                    }
-                    Control.Dispose();
+                if (!InitializeActiveXControl())
                     return false;
-                }
 
                 _rdpVersion = new Version(_rdpClient.Version);
-
-                _rdpClient.Server = connectionInfo.Hostname;
-
-                SetCredentials();
-                SetResolution();
-                _rdpClient.FullScreenTitle = connectionInfo.Name;
-
-                _alertOnIdleDisconnect = connectionInfo.RDPAlertIdleTimeout;
-                _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = connectionInfo.RDPMinutesToIdleTimeout;
-
-                //not user changeable
-                _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
-                _rdpClient.AdvancedSettings3.EnableAutoReconnect = true;
-                _rdpClient.AdvancedSettings3.MaxReconnectAttempts = Settings.Default.RdpReconnectionCount;
-                _rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
-                _rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
-                _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
-
-                _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
-
-                _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(connectionInfo.CacheBitmaps);
-                if (_rdpVersion >= Versions.RDC61)
-                {
-                    _rdpClient.AdvancedSettings7.EnableCredSspSupport = connectionInfo.UseCredSsp;
-                }
-
-                SetUseConsoleSession();
-                SetPort();
-                RedirectKeys = connectionInfo.RedirectKeys;
-                SetRedirection();
-                SetAuthenticationLevel();
-                SetLoadBalanceInfo();
-                SetRdGateway();
-                ViewOnly = Force.HasFlag(ConnectionInfo.Force.ViewOnly);
-
-                _rdpClient.ColorDepth = (int) connectionInfo.Colors;
-
-                SetPerformanceFlags();
-
-                _rdpClient.ConnectingText = Language.strConnecting;
-
-                Control.Anchor = AnchorStyles.None;
-
+                SetRdpClientProperties();
                 return true;
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpSetPropsFailed, ex);
+                return false;
+            }
+        }
+
+        private bool InitializeActiveXControl()
+        {
+            try
+            {
+                Control.GotFocus += RdpClient_GotFocus;
+                Control.CreateControl();
+                while (!Control.Created)
+                {
+                    Thread.Sleep(0);
+                    Application.DoEvents();
+                }
+                Control.Anchor = AnchorStyles.None;
+
+                _rdpClient = (MsRdpClient6NotSafeForScripting)((AxHost)Control).GetOcx();
+                return true;
+            }
+            catch (COMException ex)
+            {
+                if (ex.Message.Contains("CLASS_E_CLASSNOTAVAILABLE"))
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                        string.Format(Language.RdpProtocolVersionNotSupported, connectionInfo.RdpProtocolVersion));
+                }
+                else
+                {
+                    Runtime.MessageCollector.AddExceptionMessage(Language.strRdpControlCreationFailed, ex);
+                }
+                Control.Dispose();
                 return false;
             }
         }
@@ -305,13 +265,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             try
             {
-                using (var control = CreateRdpClientControl())
+                using (var control = CreateActiveXRdpClientControl())
                 {
                     control.CreateControl();
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }
@@ -319,6 +279,50 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 
         #region Private Methods
+
+        private void SetRdpClientProperties()
+        {
+            _rdpClient.Server = connectionInfo.Hostname;
+
+            SetCredentials();
+            SetResolution();
+            _rdpClient.FullScreenTitle = connectionInfo.Name;
+
+            _alertOnIdleDisconnect = connectionInfo.RDPAlertIdleTimeout;
+            _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = connectionInfo.RDPMinutesToIdleTimeout;
+
+            //not user changeable
+            _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
+            _rdpClient.AdvancedSettings3.EnableAutoReconnect = true;
+            _rdpClient.AdvancedSettings3.MaxReconnectAttempts = Settings.Default.RdpReconnectionCount;
+            _rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
+            _rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
+            _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
+
+            _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
+
+            _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(connectionInfo.CacheBitmaps);
+            if (_rdpVersion >= Versions.RDC61)
+            {
+                _rdpClient.AdvancedSettings7.EnableCredSspSupport = connectionInfo.UseCredSsp;
+            }
+
+            SetUseConsoleSession();
+            SetPort();
+            RedirectKeys = connectionInfo.RedirectKeys;
+            SetRedirection();
+            SetAuthenticationLevel();
+            SetLoadBalanceInfo();
+            SetRdGateway();
+            ViewOnly = Force.HasFlag(ConnectionInfo.Force.ViewOnly);
+
+            _rdpClient.ColorDepth = (int)connectionInfo.Colors;
+
+            SetPerformanceFlags();
+
+            _rdpClient.ConnectingText = Language.strConnecting;
+        }
+
         protected object GetExtendedProperty(string property)
         {
             try

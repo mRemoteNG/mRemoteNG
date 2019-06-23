@@ -10,7 +10,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
     {
         protected override RdpVersion RdpProtocolVersion => RdpVersion.Rdc9;
 
-        protected override AxHost CreateRdpClientControl()
+        protected override AxHost CreateActiveXRdpClientControl()
         {
             return new AxMsRdpClient9NotSafeForScripting();
         }
