@@ -86,6 +86,8 @@ RDP 6
 RDP 7
 -----
 
+In RDP 7, support was added for specifying the network connection type. This property is used to determine whether certain performance options will be honored by the remote server. Some performance settings (such as Display Wallpaper or Display Themes) will not work when using protocols older than RDP 7 to connect to remote hosts that are Windows 8 or higher.
+
 .. list-table::
 	:widths: 30 70
 	:header-rows: 1
