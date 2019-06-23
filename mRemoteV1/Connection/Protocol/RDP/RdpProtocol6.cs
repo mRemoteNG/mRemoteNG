@@ -592,22 +592,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var pFlags = 0;
                 if (connectionInfo.DisplayThemes == false)
                 {
-                    pFlags += Convert.ToInt32(RDPPerformanceFlags.DisableThemes);
+                    pFlags += (int)RDPPerformanceFlags.DisableThemes;
                 }
 
                 if (connectionInfo.DisplayWallpaper == false)
                 {
-                    pFlags += Convert.ToInt32(RDPPerformanceFlags.DisableWallpaper);
+                    pFlags += (int)RDPPerformanceFlags.DisableWallpaper;
                 }
 
                 if (connectionInfo.EnableFontSmoothing)
                 {
-                    pFlags += Convert.ToInt32(RDPPerformanceFlags.EnableFontSmoothing);
+                    pFlags += (int)RDPPerformanceFlags.EnableFontSmoothing;
                 }
 
                 if (connectionInfo.EnableDesktopComposition)
                 {
-                    pFlags += Convert.ToInt32(RDPPerformanceFlags.EnableDesktopComposition);
+                    pFlags += (int)RDPPerformanceFlags.EnableDesktopComposition;
                 }
 
                 _rdpClient.AdvancedSettings2.PerformanceFlags = pFlags;

@@ -7,12 +7,21 @@ namespace mRemoteNG.Connection.Protocol.RDP
         [Description("strRDPDisableWallpaper")]
         DisableWallpaper = 0x1,
 
-//			[Description("strRDPDisableFullWindowdrag")]DisableFullWindowDrag = 0x2,
-//			[Description("strRDPDisableMenuAnimations")]DisableMenuAnimations = 0x4,
-        [Description("strRDPDisableThemes")] DisableThemes = 0x8,
+//		[Description("strRDPDisableFullWindowdrag")]
+//      DisableFullWindowDrag = 0x2,
 
-//			[Description("strRDPDisableCursorShadow")]DisableCursorShadow = 0x20,
-//			[Description("strRDPDisableCursorblinking")]DisableCursorBlinking = 0x40,
+//		[Description("strRDPDisableMenuAnimations")]
+//      DisableMenuAnimations = 0x4,
+
+        [Description("strRDPDisableThemes")]
+        DisableThemes = 0x8,
+
+//		[Description("strRDPDisableCursorShadow")]
+//      DisableCursorShadow = 0x20,
+
+//		[Description("strRDPDisableCursorblinking")]
+//      DisableCursorBlinking = 0x40,
+
         [Description("strRDPEnableFontSmoothing")]
         EnableFontSmoothing = 0x80,
 
