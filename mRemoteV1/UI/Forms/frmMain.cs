@@ -696,15 +696,9 @@ namespace mRemoteNG.UI.Forms
             pnlDock.DockTopPortion = pnlDock.Height * 0.25;
             pnlDock.DockBottomPortion = pnlDock.Height * 0.25;
 
-            Windows.TreeForm.DockAreas = DockAreas.DockBottom | DockAreas.DockLeft | DockAreas.DockRight |
-                                         DockAreas.DockTop | DockAreas.Float;
             Windows.TreeForm.Show(pnlDock, DockState.DockLeft);
-            Windows.ConfigForm.DockAreas = DockAreas.DockBottom | DockAreas.DockLeft | DockAreas.DockRight |
-                                           DockAreas.DockTop | DockAreas.Float;
             Windows.ConfigForm.Show(pnlDock);
             Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
-            Windows.ErrorsForm.DockAreas = DockAreas.DockBottom | DockAreas.DockLeft | DockAreas.DockRight |
-                                           DockAreas.DockTop | DockAreas.Float;
             Windows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
             Windows.ScreenshotForm.Hide();
 

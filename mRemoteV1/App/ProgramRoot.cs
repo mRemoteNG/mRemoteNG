@@ -1,8 +1,8 @@
-﻿using mRemoteNG.UI.Forms;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
@@ -84,12 +84,18 @@ namespace mRemoteNG.App
 
         private static void ApplicationOnThreadException(object sender, ThreadExceptionEventArgs e)
         {
+            if (!FrmSplashScreen.getInstance().IsDisposed)
+                FrmSplashScreen.getInstance().Close();
+
             var window = new UnhandledExceptionWindow(e.Exception, false);
             window.ShowDialog(FrmMain.Default);
         }
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            if (!FrmSplashScreen.getInstance().IsDisposed)
+                FrmSplashScreen.getInstance().Close();
+
             var window = new UnhandledExceptionWindow(e.ExceptionObject as Exception, e.IsTerminating);
             window.ShowDialog(FrmMain.Default);
         }

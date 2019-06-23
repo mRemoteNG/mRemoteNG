@@ -20,8 +20,8 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool EverythingInherited
         {
-            get { return EverythingIsInherited(); }
-            set { SetAllValues(value); }
+            get => EverythingIsInherited();
+            set => SetAllValues(value);
         }
 
         #endregion
@@ -56,6 +56,13 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         [Browsable(true)]
         public bool Username { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameVmId"),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionVmId"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(true)]
+        public bool VmId { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
          LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNamePassword"),
@@ -146,6 +153,12 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseCredSsp"),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseCredSsp { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUseVmId"),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseVmId"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UseVmId { get; set; }
 
         #endregion
 
@@ -293,6 +306,12 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool SoundQuality { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectAudioCapture"),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectAudioCapture"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RedirectAudioCapture { get; set; }
+
         #endregion
 
         #region Misc
@@ -385,12 +404,12 @@ namespace mRemoteNG.Connection
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCViewOnly {get; set;}
         #endregion
 
-        [Browsable(false)] public object Parent { get; set; }
+        [Browsable(false)] public ConnectionInfo Parent { get; private set; }
 
         #endregion
 
 
-        public ConnectionInfoInheritance(object parent, bool ignoreDefaultInheritance = false)
+        public ConnectionInfoInheritance(ConnectionInfo parent, bool ignoreDefaultInheritance = false)
         {
             Parent = parent;
             if (!ignoreDefaultInheritance)
@@ -398,9 +417,10 @@ namespace mRemoteNG.Connection
         }
 
 
-        public ConnectionInfoInheritance Clone()
+        public ConnectionInfoInheritance Clone(ConnectionInfo parent)
         {
             var newInheritance = (ConnectionInfoInheritance)MemberwiseClone();
+            newInheritance.Parent = parent;
             newInheritance._tempInheritanceStorage = null;
             return newInheritance;
         }
@@ -425,7 +445,7 @@ namespace mRemoteNG.Connection
 
         private void StashInheritanceData()
         {
-            _tempInheritanceStorage = Clone();
+            _tempInheritanceStorage = Clone(Parent);
         }
 
         public void TurnOnInheritanceCompletely()
@@ -450,6 +470,19 @@ namespace mRemoteNG.Connection
             var properties = typeof(ConnectionInfoInheritance).GetProperties();
             var filteredProperties = properties.Where(FilterProperty);
             return filteredProperties;
+        }
+
+        /// <summary>
+        /// Gets the name of all properties where inheritance is turned on
+        /// (set to True).
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetEnabledInheritanceProperties()
+        {
+            return GetProperties()
+                .Where(property => (bool)property.GetValue(this))
+                .Select(property => property.Name)
+                .ToList();
         }
 
         private bool FilterProperty(PropertyInfo propertyInfo)

@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -79,6 +79,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear search string.
+        /// </summary>
+        internal static string ClearSearchString {
+            get {
+                return ResourceManager.GetString("ClearSearchString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a New Connection File.
         /// </summary>
         internal static string ConfigurationCreateNew {
@@ -102,6 +111,15 @@ namespace mRemoteNG {
         internal static string ConfigurationImportFile {
             get {
                 return ResourceManager.GetString("ConfigurationImportFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connect in View Only mode.
+        /// </summary>
+        internal static string ConnectInViewOnlyMode {
+            get {
+                return ResourceManager.GetString("ConnectInViewOnlyMode", resourceCulture);
             }
         }
         
@@ -156,6 +174,42 @@ namespace mRemoteNG {
         internal static string DatabaseNotAvailable {
             get {
                 return ResourceManager.GetString("DatabaseNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not trim spaces from usernames.
+        /// </summary>
+        internal static string DoNotTrimUsername {
+            get {
+                return ResourceManager.GetString("DoNotTrimUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encryption Test.
+        /// </summary>
+        internal static string EncryptionTest {
+            get {
+                return ResourceManager.GetString("EncryptionTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds..
+        /// </summary>
+        internal static string EncryptionTestResultMessage {
+            get {
+                return ResourceManager.GetString("EncryptionTestResultMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Environment.
+        /// </summary>
+        internal static string Environment {
+            get {
+                return ResourceManager.GetString("Environment", resourceCulture);
             }
         }
         
@@ -3993,7 +4047,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Only (VNC).
+        ///   Looks up a localized string similar to View Only.
         /// </summary>
         internal static string strMenuViewOnly {
             get {
@@ -4975,7 +5029,16 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select whether clipboard should be shared..
+        ///   Looks up a localized string similar to Select whether the default audio input device on the remote machine should be redirected to this computer..
+        /// </summary>
+        internal static string strPropertyDescriptionRedirectAudioCapture {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRedirectAudioCapture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select whether the clipboard should be shared..
         /// </summary>
         internal static string strPropertyDescriptionRedirectClipboard {
             get {
@@ -5110,11 +5173,29 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use VM ID to connect to VM running on Hyper-V..
+        /// </summary>
+        internal static string strPropertyDescriptionUseVmId {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionUseVmId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If you want to establish a view only connection to the host select yes..
         /// </summary>
         internal static string strPropertyDescriptionViewOnly {
             get {
                 return ResourceManager.GetString("strPropertyDescriptionViewOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ID of the Hyper-V virtual machine to connect to..
+        /// </summary>
+        internal static string strPropertyDescriptionVmId {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionVmId", resourceCulture);
             }
         }
         
@@ -5497,6 +5578,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio Capture.
+        /// </summary>
+        internal static string strPropertyNameRedirectAudioCapture {
+            get {
+                return ResourceManager.GetString("strPropertyNameRedirectAudioCapture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clipboard.
         /// </summary>
         internal static string strPropertyNameRedirectClipboard {
@@ -5632,11 +5722,29 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use VM ID.
+        /// </summary>
+        internal static string strPropertyNameUseVmId {
+            get {
+                return ResourceManager.GetString("strPropertyNameUseVmId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Only.
         /// </summary>
         internal static string strPropertyNameViewOnly {
             get {
                 return ResourceManager.GetString("strPropertyNameViewOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM ID.
+        /// </summary>
+        internal static string strPropertyNameVmId {
+            get {
+                return ResourceManager.GetString("strPropertyNameVmId", resourceCulture);
             }
         }
         
@@ -7936,6 +8044,15 @@ namespace mRemoteNG {
         internal static string TestingConnection {
             get {
                 return ResourceManager.GetString("TestingConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Settings.
+        /// </summary>
+        internal static string TestSettings {
+            get {
+                return ResourceManager.GetString("TestSettings", resourceCulture);
             }
         }
         

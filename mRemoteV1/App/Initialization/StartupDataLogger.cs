@@ -76,7 +76,7 @@ namespace mRemoteNG.App.Initialization
             var architecture = string.Empty;
             try
             {
-                foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_Processor WHERE DeviceID=\'CPU0\'")
+                foreach (var o in new ManagementObjectSearcher("SELECT AddressWidth FROM Win32_Processor WHERE DeviceID=\'CPU0\'")
                     .Get())
                 {
                     var managementObject = (ManagementObject)o;

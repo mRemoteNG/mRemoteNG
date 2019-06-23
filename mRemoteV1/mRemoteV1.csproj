@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <Import Project="..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -62,7 +63,14 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Markdig, Version=0.16.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Markdig.0.16.0\lib\net40\Markdig.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="mscorlib" />
+    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
       <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
     </Reference>
@@ -70,12 +78,17 @@
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
@@ -104,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Credential\Records\" />
+    <Folder Include="Resources\Help\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
@@ -149,7 +163,8 @@
     <Compile Include="Config\CredentialRepositoryListSaver.cs" />
     <Compile Include="Config\DatabaseConnectors\ConnectionTestResult.cs" />
     <Compile Include="Config\DatabaseConnectors\DatabaseConnectorFactory.cs" />
-    <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnectionTester.cs" />
+    <Compile Include="Config\DatabaseConnectors\DatabaseConnectionTester.cs" />
+    <Compile Include="Config\DatabaseConnectors\MSSqlDatabaseConnector.cs" />
     <Compile Include="Config\DataProviders\FileBackupCreator.cs" />
     <Compile Include="Config\DataProviders\FileBackupPruner.cs" />
     <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
@@ -160,6 +175,7 @@
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesModel.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesXmlSerializer.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlConnectionListMetaData.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionSerializerFactory.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlExtensions.cs" />
     <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
     <Compile Include="Config\CredentialRepositoryListLoader.cs" />
@@ -224,7 +240,7 @@
     <Compile Include="Config\Putty\PuttySessionsManager.cs" />
     <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
     <Compile Include="Config\DatabaseConnectors\IDatabaseConnector.cs" />
-    <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnector.cs" />
+    <Compile Include="Config\DatabaseConnectors\MySqlDatabaseConnector.cs" />
     <Compile Include="Connection\AbstractConnectionRecord.cs" />
     <Compile Include="Connection\ConnectionInfoComparer.cs" />
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />
@@ -239,11 +255,20 @@
     <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
+    <Compile Include="Connection\Protocol\RDP\AuthenticationLevel.cs" />
     <Compile Include="Connection\Protocol\RDP\AzureLoadBalanceInfoEncoder.cs" />
+    <Compile Include="Connection\Protocol\ISupportsViewOnly.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDGatewayUsageMethod.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDGatewayUseConnectionCredentials.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpClientWrap.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Connection\Protocol\RDP\RDPColors.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPPerformanceFlags.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPResolutions.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPSoundQuality.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPSounds.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Connection\WebHelper.cs" />
     <Compile Include="Credential\PlaceholderCredentialRecord.cs" />
@@ -254,6 +279,7 @@
     <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
     <Compile Include="Credential\CredentialServiceFactory.cs" />
     <Compile Include="Credential\CredentialServiceFacade.cs" />
+    <None Include="Documentation\faq.rst" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -274,6 +300,7 @@
     <Compile Include="Themes\MremoteNGThemeBase.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tools\Attributes\UsedInAllProtocolsExceptAttribute.cs" />
     <Compile Include="Tools\Clipboard\WindowsClipboard.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
     <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
@@ -340,6 +367,7 @@
     <Compile Include="Tools\MultiSSHController.cs" />
     <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
+    <Compile Include="Tools\Attributes\UsedInProtocolAttribute.cs" />
     <Compile Include="Tools\WindowsRegistry\IRegistry.cs" />
     <Compile Include="Tools\WindowsRegistry\RegistryHive.cs" />
     <Compile Include="Tools\WindowsRegistry\WindowsRegistry.cs" />
@@ -396,12 +424,22 @@
     <Compile Include="UI\Controls\Base\NGRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\Base\NGSearchBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UI\Controls\Base\NGTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\Controls\ConnectionInfoPropertyGrid\ConnectionInfoPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionInfoPropertyGrid\ConnectionInfoPropertyGrid.Designer.cs">
+      <DependentUpon>ConnectionInfoPropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionInfoPropertyGrid\PropertyMode.cs" />
     <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -722,6 +760,9 @@
     <Compile Include="UI\Window\AboutWindow.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\Window\AboutWindow.Designer.cs">
+      <DependentUpon>AboutWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Window\ActiveDirectoryImportWindow.Designer.cs">
       <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
     </Compile>
@@ -836,6 +877,9 @@
     <EmbeddedResource Include="UI\Controls\Base\NGRadioButton.resx">
       <DependentUpon>NGRadioButton.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGSearchBox.resx">
+      <DependentUpon>NGSearchBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Base\NGTextBox.resx">
       <DependentUpon>NGTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -912,6 +956,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\StartupExitPage.resx">
       <DependentUpon>StartupExitPage.cs</DependentUpon>
@@ -1075,30 +1120,51 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="app.config">
-      <SubType>Designer</SubType>
+    <None Include="app.config" />
+    <None Include="..\CHANGELOG.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\CREDITS.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Documentation\contact_mail.rst" />
+    <None Include="Documentation\howtos\bulk_connections.rst" />
+    <None Include="Documentation\folders_and_inheritance.rst" />
+    <None Include="Documentation\migrate.rst" />
+    <None Include="Documentation\troubleshooting.rst" />
+    <None Include="Documentation\user_interface\connections.rst" />
+    <None Include="Documentation\user_interface\options.rst" />
+    <None Include="Documentation\user_interface\menus.rst" />
+    <None Include="Documentation\user_interface\ssh_file_transfer.rst" />
+    <None Include="Documentation\sql_configuration.rst" />
+    <None Include="Documentation\known_issues.rst" />
+    <None Include="Documentation\installation\supported_operating_systems.rst" />
+    <None Include="Documentation\keyboard_shortcuts.rst" />
+    <None Include="Documentation\command_line_switches.rst" />
+    <None Include="Documentation\user_interface\notifications.rst" />
+    <None Include="Documentation\user_interface\import_export.rst" />
+    <None Include="Documentation\user_interface\screenshot_manager.rst" />
+    <None Include="Documentation\user_interface\port_scan.rst" />
+    <None Include="Documentation\user_interface\quick_connect.rst" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
+    <None Include="Documentation\howtos\vmrdp.rst" />
     <None Include="Resources\Templates\AppIcon.psd" />
-    <None Include="Resources\Fonts\HandelGotD.ttf" />
-    <None Include="Resources\Fonts\HandelGotDBol.ttf" />
-    <None Include="Resources\Fonts\HandelGotDLig.ttf" />
     <None Include="Resources\Templates\Header_dark.psd" />
     <None Include="Resources\Templates\Header_light.psd" />
     <None Include="Resources\Templates\Installer_Header.psd" />
     <None Include="Resources\Templates\Installer_Side.psd" />
     <None Include="Resources\Themes\darcula.vstheme">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Themes\vs2015blue.vstheme">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Themes\vs2015dark.vstheme">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Themes\vs2015light.vstheme">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Templates\VisualElements_150_dark.psd" />
     <None Include="Resources\Templates\VisualElements_150_light.psd" />
@@ -1112,6 +1178,10 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Documentation\images\connections_status.png" />
+    <None Include="Documentation\images\putty.png" />
+    <Content Include="Documentation\mssql_db_setup.sql" />
+    <Content Include="Documentation\mysql_db_setup.sql" />
     <Content Include="Firefox\AccessibleMarshal.dll" />
     <Content Include="Firefox\breakpadinjector.dll" />
     <Content Include="Firefox\d3dcompiler_47.dll" />
@@ -1131,114 +1201,37 @@
     <Content Include="Firefox\sandboxbroker.dll" />
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
-    <Content Include="Resources\Help\Screenshots\CommonProblemsRDP\credssp-error.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\CommonProblemsRDP\oracle_remediation_setting.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Config\main_top_bar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Config\main_window.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Connections\menu_top_bar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\ImportExport\export_dialog.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Main Menu\Main_Menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\basic_panels.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\panel_context_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\rdp_context_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\ssh_context_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Navigation\view_menu.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Notifications\notification_warning.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Notifications\popup_warning.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\add_new_folder.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\config_panel_01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\example_01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\example_02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\example_03.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\example_04.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\example_05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\example_06.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\new_connection.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\new_connection_test_item.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\open_connection.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\status_icon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Screenshot Manager\rightclick_screenshot.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Screenshot Manager\screenshot_manager.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\st_common_problems_rdp.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_keyboardshortcuts.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\gs_running_mremoteng.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_navigation.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Documentation\images\config_top_bar.png" />
+    <None Include="Documentation\images\connections_main.png" />
+    <None Include="Documentation\images\connections_top_bar.png" />
+    <None Include="Documentation\images\import_export_dialog.png" />
+    <None Include="Documentation\images\menus_main_menu.png" />
+    <None Include="Documentation\images\notifications_panel.png" />
+    <None Include="Documentation\images\notifications_popup.png" />
+    <None Include="Documentation\images\folders_and_inheritance_01.png" />
+    <None Include="Documentation\images\connections_config.png" />
+    <None Include="Documentation\images\folders_and_inheritance_02.png" />
+    <None Include="Documentation\images\folders_and_inheritance_03.png" />
+    <None Include="Documentation\images\folders_and_inheritance_04.png" />
+    <None Include="Documentation\images\folders_and_inheritance_05.png" />
+    <None Include="Documentation\images\folders_and_inheritance_06.png" />
+    <None Include="Documentation\images\connections_rightclick_menu.png" />
+    <None Include="Documentation\images\connections_test_item.png" />
+    <None Include="Documentation\images\connections_open.png" />
+    <None Include="Documentation\images\screenshot_manager_rightclick_menu.png" />
+    <None Include="Documentation\images\screenshot_manager_overview.png" />
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Images\Header_dark.png" />
     <None Include="Resources\Tiles\mRemoteNG.VisualElementsManifest.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Tiles\VisualElements_70.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Tiles\VisualElements_150.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Icons\Appearance_Icon.ico" />
     <None Include="Resources\Icons\mRemoteNG_Icon.ico" />
@@ -1288,93 +1281,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Help\gs_command_line_switches.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_config.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_connections.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_sql_configuration.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Index.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_port_scan.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_external_tools.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_notifications.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\gs_installation.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_menus.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_options.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\gs_prerequisites.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_quick_connect.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_import_and_export.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_screenshot_manager.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Quick Connect\01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Quick Connect\02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Quick Connect\03.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\02.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\03.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\04.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\05.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\06.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\07.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\External Tools\08.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\Screenshots\Reference\01.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\SQLScript.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Help\ui_file_transfer.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Documentation\images\quick_connect_01.png" />
+    <None Include="Documentation\images\quick_connect_02.png" />
+    <None Include="Documentation\images\quick_connect_03.png" />
     <None Include="Resources\Images\loading_spinner.gif" />
     <None Include="Resources\Images\FamFamFam\tick.png" />
     <None Include="Resources\Images\FamFamFam\bricks.png" />
@@ -1483,9 +1392,45 @@
     <None Include="Resources\Images\Good_Symbol.png" />
     <None Include="Resources\Images\ComponentsCheck.png" />
     <None Include="Resources\Images\FamFamFam\News.png" />
-    <Content Include="Resources\Help\Main.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="Documentation\conf.py" />
+    <None Include="Documentation\index.rst" />
+    <None Include="Documentation\about.rst" />
+    <None Include="Documentation\about\features.rst" />
+    <None Include="Documentation\about\license.rst" />
+    <None Include="Documentation\about\release_channels.rst" />
+    <None Include="Documentation\about\versions.rst" />
+    <None Include="Documentation\installation\install.rst" />
+    <None Include="Documentation\installation.rst" />
+    <None Include="Documentation\installation\minimum_requirements.rst" />
+    <None Include="Documentation\installation\uninstall.rst" />
+    <None Include="Documentation\howtos\jumpservers.rst" />
+    <None Include="Documentation\user_interface.rst" />
+    <None Include="Documentation\user_interface\main_window.rst" />
+    <None Include="Documentation\user_interface\panels.rst" />
+    <None Include="Documentation\external_tools_cheat_sheet.rst" />
+    <None Include="Documentation\howtos\external_tools.rst" />
+    <None Include="Documentation\user_interface\external_tools.rst" />
+    <None Include="Documentation\images\credssp-error.png" />
+    <None Include="Documentation\images\example_et_start_application_01.png" />
+    <None Include="Documentation\images\example_et_start_application_02.png" />
+    <None Include="Documentation\images\example_et_traceroute_01.png" />
+    <None Include="Documentation\images\example_et_traceroute_02.png" />
+    <None Include="Documentation\images\example_et_traceroute_03.png" />
+    <None Include="Documentation\images\example_et_traceroute_04.png" />
+    <None Include="Documentation\images\example_et_traceroute_05.png" />
+    <None Include="Documentation\images\external_tools_external_tool_properties_01.png" />
+    <None Include="Documentation\images\external_tools_main_ui_01.png" />
+    <None Include="Documentation\images\external_tools_toolbar_01.png" />
+    <None Include="Documentation\images\external_tools_tools_list_01.png" />
+    <None Include="Documentation\images\mremoteng_favicon_32.png" />
+    <None Include="Documentation\images\mremoteng_logo.png" />
+    <None Include="Documentation\images\mremoteng_main_ui.png" />
+    <None Include="Documentation\images\mremoteng_main_ui_connect_win_server.png" />
+    <None Include="Documentation\images\oracle_remediation_setting.png" />
+    <None Include="Documentation\images\user_interface_overview.png" />
+    <None Include="Documentation\images\user_interface_panels_01.png" />
+    <None Include="Documentation\images\user_interface_panels_02.png" />
+    <None Include="Documentation\images\user_interface_panels_03.png" />
     <Content Include="Icons\Anti Virus.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1709,7 +1654,7 @@ set /p buildenv=&lt;buildenv.tmp
 :: IF "%25APPVEYOR_BUILD_FOLDER"=="" ( set cert_pwd= )
 
 :: Call the post build powershell script
-powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mremotev1.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "%25cert_pwd%25" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
+powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mremotev1.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "$(CertPassword)" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -1766,6 +1711,9 @@ powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mrem
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -1783,5 +1731,6 @@ powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mrem
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Geckofx45.45.0.34\build\Geckofx45.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx45.45.0.34\build\Geckofx45.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props'))" />
   </Target>
 </Project>

@@ -24,20 +24,20 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedPassword = "passwordHere!";
         private const bool ExpectedUseConsoleSession = true;
         private const int ExpectedPort = 9933;
-        private const RdpProtocol.RDGatewayUsageMethod ExpectedGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Always;
+        private const RDGatewayUsageMethod ExpectedGatewayUsageMethod = RDGatewayUsageMethod.Always;
         private const string ExpectedGatewayHostname = "gatewayserverhost.innerdomain.net";
         private const string ExpectedGatewayUsername = "gatewayusername";
         private const string ExpectedGatewayDomain = "innerdomain";
         private const string ExpectedGatewayPassword = "gatewayPassword123";
-        private const RdpProtocol.RDPResolutions ExpectedRdpResolution = RdpProtocol.RDPResolutions.FitToWindow;
-        private const RdpProtocol.RDPColors ExpectedRdpColorDepth = RdpProtocol.RDPColors.Colors24Bit;
-        private const RdpProtocol.RDPSounds ExpectedAudioRedirection = RdpProtocol.RDPSounds.DoNotPlay;
+        private const RDPResolutions ExpectedRdpResolution = RDPResolutions.FitToWindow;
+        private const RDPColors ExpectedRdpColorDepth = RDPColors.Colors24Bit;
+        private const RDPSounds ExpectedAudioRedirection = RDPSounds.DoNotPlay;
         private const bool ExpectedKeyRedirection = true;
         private const bool ExpectedSmartcardRedirection = true;
         private const bool ExpectedDriveRedirection = true;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
-        private const RdpProtocol.AuthenticationLevel ExpectedAuthLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth;
+        private const AuthenticationLevel ExpectedAuthLevel = AuthenticationLevel.WarnOnFailedAuth;
 
 
         [OneTimeSetUp]
@@ -91,7 +91,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 		[TestCaseSource(nameof(NullPropertyValues))]
         public void PropertiesWithoutValuesAreIgnored(Func<ConnectionInfo, object> propSelector)
         {
-	        var connectionTreeModel = _deserializer.Deserialize(Resources.test_rdcman_v2_7_schema3_null_values);
+	        var connectionTreeModel = _deserializer.Deserialize(Resources.test_rdcman_v2_7_schema3_empty_values);
 
 	        var importedConnection = connectionTreeModel
 		        .GetRecursiveChildList()
@@ -103,7 +103,22 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 			Assert.That(propSelector(importedConnection), Is.EqualTo(propSelector(new ConnectionInfo())));
         }
 
-        [Test]
+        [TestCaseSource(nameof(NullPropertyValues))]
+        public void NonExistantPropertiesAreIgnored(Func<ConnectionInfo, object> propSelector)
+        {
+	        var connectionTreeModel = _deserializer.Deserialize(Resources.test_rdcman_v2_7_schema3_null_values);
+
+	        var importedConnection = connectionTreeModel
+		        .GetRecursiveChildList()
+		        .OfType<ContainerInfo>()
+		        .First(node => node.Name == "Group1")
+		        .Children
+		        .First();
+
+	        Assert.That(propSelector(importedConnection), Is.EqualTo(propSelector(new ConnectionInfo())));
+        }
+
+		[Test]
         public void ExceptionThrownOnBadSchemaVersion()
         {
             var badFileContents = Resources.test_rdcman_v2_2_badschemaversion;

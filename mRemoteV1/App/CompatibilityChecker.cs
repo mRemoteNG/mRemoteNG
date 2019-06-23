@@ -1,11 +1,11 @@
-﻿using Microsoft.Win32;
-using mRemoteNG.App.Info;
-using mRemoteNG.UI.TaskDialog;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using Microsoft.Win32;
+using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.App
 {
@@ -55,21 +55,18 @@ namespace mRemoteNG.App
 
         private static bool FipsPolicyEnabledForServer2003()
         {
-            var regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa");
-            var fipsPolicy = regKey?.GetValue("FIPSAlgorithmPolicy");
-            if (fipsPolicy == null) return false;
-            fipsPolicy = Convert.ToInt32(fipsPolicy);
-            return (int)fipsPolicy != 0;
+            var regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa");
+            if (!(regKey?.GetValue("FIPSAlgorithmPolicy") is int fipsPolicy))
+                return false;
+            return fipsPolicy != 0;
         }
 
         private static bool FipsPolicyEnabledForServer2008AndNewer()
         {
-            var regKey =
-                Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy");
-            var fipsPolicy = regKey?.GetValue("Enabled");
-            if (fipsPolicy == null) return false;
-            fipsPolicy = Convert.ToInt32(fipsPolicy);
-            return (int)fipsPolicy != 0;
+            var regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy");
+            if (!(regKey?.GetValue("Enabled") is int fipsPolicy))
+                return false;
+            return fipsPolicy != 0;
         }
 
         private static void CheckLenovoAutoScrollUtility(MessageCollector messageCollector)

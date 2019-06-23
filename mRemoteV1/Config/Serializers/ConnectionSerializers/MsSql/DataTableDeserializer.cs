@@ -89,26 +89,28 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Domain = (string)dataRow["DomainName"];
             connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
             connectionInfo.Hostname = (string)dataRow["Hostname"];
+            connectionInfo.VmId = (string)dataRow["VmId"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
             connectionInfo.PuttySession = (string)dataRow["PuttySession"];
             connectionInfo.Port = (int)dataRow["Port"];
             connectionInfo.UseConsoleSession = (bool)dataRow["ConnectToConsole"];
             connectionInfo.UseCredSsp = (bool)dataRow["UseCredSsp"];
+            connectionInfo.UseVmId = (bool)dataRow["UseVmId"];
             connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine),
                                                                                   (string)dataRow["RenderingEngine"]);
             connectionInfo.ICAEncryptionStrength =
                 (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength),
                                                            (string)dataRow["ICAEncryptionStrength"]);
             connectionInfo.RDPAuthenticationLevel =
-                (RdpProtocol.AuthenticationLevel)Enum.Parse(typeof(RdpProtocol.AuthenticationLevel),
+                (AuthenticationLevel)Enum.Parse(typeof(AuthenticationLevel),
                                                             (string)dataRow["RDPAuthenticationLevel"]);
             connectionInfo.RDPMinutesToIdleTimeout = (int)dataRow["RDPMinutesToIdleTimeout"];
             connectionInfo.RDPAlertIdleTimeout = (bool)dataRow["RDPAlertIdleTimeout"];
             connectionInfo.LoadBalanceInfo = (string)dataRow["LoadBalanceInfo"];
             connectionInfo.Colors =
-                (RdpProtocol.RDPColors)Enum.Parse(typeof(RdpProtocol.RDPColors), (string)dataRow["Colors"]);
+                (RDPColors)Enum.Parse(typeof(RDPColors), (string)dataRow["Colors"]);
             connectionInfo.Resolution =
-                (RdpProtocol.RDPResolutions)Enum.Parse(typeof(RdpProtocol.RDPResolutions),
+                (RDPResolutions)Enum.Parse(typeof(RDPResolutions),
                                                        (string)dataRow["Resolution"]);
             connectionInfo.AutomaticResize = (bool)dataRow["AutomaticResize"];
             connectionInfo.DisplayWallpaper = (bool)dataRow["DisplayWallpaper"];
@@ -122,9 +124,11 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.RedirectClipboard = (bool)dataRow["RedirectClipboard"];
             connectionInfo.RedirectSmartCards = (bool)dataRow["RedirectSmartCards"];
             connectionInfo.RedirectSound =
-                (RdpProtocol.RDPSounds)Enum.Parse(typeof(RdpProtocol.RDPSounds), (string)dataRow["RedirectSound"]);
-            connectionInfo.SoundQuality = (RdpProtocol.RDPSoundQuality)Enum.Parse(typeof(RdpProtocol.RDPSoundQuality),
+                (RDPSounds)Enum.Parse(typeof(RDPSounds), (string)dataRow["RedirectSound"]);
+            connectionInfo.SoundQuality = (RDPSoundQuality)Enum.Parse(typeof(RDPSoundQuality),
                                                                                   (string)dataRow["SoundQuality"]);
+            connectionInfo.RedirectAudioCapture = (bool)dataRow["RedirectAudioCapture"];
+
             connectionInfo.RedirectKeys = (bool)dataRow["RedirectKeys"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
             connectionInfo.PostExtApp = (string)dataRow["PostExtApp"];
@@ -150,15 +154,12 @@ namespace mRemoteNG.Config.Serializers.MsSql
                                                                                         ["VNCSmartSizeMode"]);
             connectionInfo.VNCViewOnly = (bool)dataRow["VNCViewOnly"];
             connectionInfo.RDGatewayUsageMethod =
-                (RdpProtocol.RDGatewayUsageMethod)Enum.Parse(typeof(RdpProtocol.RDGatewayUsageMethod),
+                (RDGatewayUsageMethod)Enum.Parse(typeof(RDGatewayUsageMethod),
                                                              (string)dataRow["RDGatewayUsageMethod"]);
             connectionInfo.RDGatewayHostname = (string)dataRow["RDGatewayHostname"];
             connectionInfo.RDGatewayUseConnectionCredentials =
-                (RdpProtocol.RDGatewayUseConnectionCredentials)Enum.Parse(
-                                                                          typeof(RdpProtocol.
-                                                                              RDGatewayUseConnectionCredentials),
-                                                                          (string)dataRow
-                                                                              ["RDGatewayUseConnectionCredentials"]);
+                (RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RDGatewayUseConnectionCredentials),
+                                                            (string)dataRow["RDGatewayUseConnectionCredentials"]);
             connectionInfo.RDGatewayUsername = (string)dataRow["RDGatewayUsername"];
             connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
@@ -185,10 +186,13 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.RedirectSmartCards = (bool)dataRow["InheritRedirectSmartCards"];
             connectionInfo.Inheritance.RedirectSound = (bool)dataRow["InheritRedirectSound"];
             connectionInfo.Inheritance.SoundQuality = (bool)dataRow["InheritSoundQuality"];
+            connectionInfo.Inheritance.RedirectAudioCapture = (bool)dataRow["InheritRedirectAudioCapture"];
             connectionInfo.Inheritance.Resolution = (bool)dataRow["InheritResolution"];
             connectionInfo.Inheritance.AutomaticResize = (bool)dataRow["InheritAutomaticResize"];
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];
             connectionInfo.Inheritance.UseCredSsp = (bool)dataRow["InheritUseCredSsp"];
+            connectionInfo.Inheritance.UseVmId = (bool)dataRow["InheritUseVmId"];
+            connectionInfo.Inheritance.VmId = (bool)dataRow["InheritVmId"];
             connectionInfo.Inheritance.RenderingEngine = (bool)dataRow["InheritRenderingEngine"];
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
             connectionInfo.Inheritance.ICAEncryptionStrength = (bool)dataRow["InheritICAEncryptionStrength"];

@@ -95,13 +95,12 @@ namespace mRemoteNG.Config.Serializers.Csv
             connectionRecord.Password = headers.Contains("Password") ? connectionCsv[headers.IndexOf("Password")] : "";
             connectionRecord.Domain = headers.Contains("Domain") ? connectionCsv[headers.IndexOf("Domain")] : "";
             connectionRecord.Hostname = headers.Contains("Hostname") ? connectionCsv[headers.IndexOf("Hostname")] : "";
-            connectionRecord.PuttySession =
-                headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
+            connectionRecord.VmId = headers.Contains("VmId") ? connectionCsv[headers.IndexOf("VmId")] : "";
+            connectionRecord.PuttySession = headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
             connectionRecord.LoadBalanceInfo = headers.Contains("LoadBalanceInfo")
                 ? connectionCsv[headers.IndexOf("LoadBalanceInfo")]
                 : "";
-            connectionRecord.PreExtApp =
-                headers.Contains("PreExtApp") ? connectionCsv[headers.IndexOf("PreExtApp")] : "";
+            connectionRecord.PreExtApp = headers.Contains("PreExtApp") ? connectionCsv[headers.IndexOf("PreExtApp")] : "";
             connectionRecord.PostExtApp =
                 headers.Contains("PostExtApp") ? connectionCsv[headers.IndexOf("PostExtApp")] : "";
             connectionRecord.MacAddress =
@@ -158,6 +157,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.UseCredSsp = value;
             }
 
+            if (headers.Contains("UseVmId"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("UseVmId")], out value))
+                    connectionRecord.UseVmId = value;
+            }
+
             if (headers.Contains("RenderingEngine"))
             {
                 HTTPBase.RenderingEngine value;
@@ -174,21 +180,21 @@ namespace mRemoteNG.Config.Serializers.Csv
 
             if (headers.Contains("RDPAuthenticationLevel"))
             {
-                RdpProtocol.AuthenticationLevel value;
+                AuthenticationLevel value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RDPAuthenticationLevel")], out value))
                     connectionRecord.RDPAuthenticationLevel = value;
             }
 
             if (headers.Contains("Colors"))
             {
-                RdpProtocol.RDPColors value;
+                RDPColors value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("Colors")], out value))
                     connectionRecord.Colors = value;
             }
 
             if (headers.Contains("Resolution"))
             {
-                RdpProtocol.RDPResolutions value;
+                RDPResolutions value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("Resolution")], out value))
                     connectionRecord.Resolution = value;
             }
@@ -272,9 +278,16 @@ namespace mRemoteNG.Config.Serializers.Csv
 
             if (headers.Contains("RedirectSound"))
             {
-                RdpProtocol.RDPSounds value;
+                RDPSounds value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RedirectSound")], out value))
                     connectionRecord.RedirectSound = value;
+            }
+
+            if (headers.Contains("RedirectAudioCapture"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectAudioCapture")], out value))
+                    connectionRecord.RedirectAudioCapture = value;
             }
 
             if (headers.Contains("RedirectKeys"))
@@ -342,14 +355,14 @@ namespace mRemoteNG.Config.Serializers.Csv
 
             if (headers.Contains("RDGatewayUsageMethod"))
             {
-                RdpProtocol.RDGatewayUsageMethod value;
+                RDGatewayUsageMethod value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RDGatewayUsageMethod")], out value))
                     connectionRecord.RDGatewayUsageMethod = value;
             }
 
             if (headers.Contains("RDGatewayUseConnectionCredentials"))
             {
-                RdpProtocol.RDGatewayUseConnectionCredentials value;
+                RDGatewayUseConnectionCredentials value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RDGatewayUseConnectionCredentials")], out value))
                     connectionRecord.RDGatewayUseConnectionCredentials = value;
             }
@@ -538,6 +551,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.Inheritance.UseCredSsp = value;
             }
 
+            if (headers.Contains("InheritUseVmId"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseVmId")], out value))
+                    connectionRecord.Inheritance.UseVmId = value;
+            }
+
             if (headers.Contains("InheritRenderingEngine"))
             {
                 bool value;
@@ -550,6 +570,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUsername")], out value))
                     connectionRecord.Inheritance.Username = value;
+            }
+
+            if (headers.Contains("InheritVmId"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVmId")], out value))
+                    connectionRecord.Inheritance.VmId = value;
             }
 
             if (headers.Contains("InheritICAEncryptionStrength"))
@@ -754,6 +781,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSoundQuality")], out value))
                     connectionRecord.Inheritance.SoundQuality = value;
+            }
+
+            if (headers.Contains("InheritRedirectAudioCapture"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectAudioCapture")], out value))
+                    connectionRecord.Inheritance.RedirectAudioCapture = value;
             }
 
             #endregion

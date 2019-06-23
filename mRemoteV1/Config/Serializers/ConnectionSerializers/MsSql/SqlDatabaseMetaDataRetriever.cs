@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data.SqlClient;
+using System.Data.Common;
 using System.Globalization;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -12,30 +12,31 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {
-	public class SqlDatabaseMetaDataRetriever
+    public class SqlDatabaseMetaDataRetriever
     {
-        public SqlConnectionListMetaData GetDatabaseMetaData(SqlDatabaseConnector sqlDatabaseConnector)
+        public SqlConnectionListMetaData GetDatabaseMetaData(IDatabaseConnector databaseConnector)
         {
             SqlConnectionListMetaData metaData;
-            SqlDataReader sqlDataReader = null;
+            DbDataReader dbDataReader = null;
+
             try
             {
-                var sqlCommand = new SqlCommand("SELECT * FROM tblRoot", sqlDatabaseConnector.SqlConnection);
-                if (!sqlDatabaseConnector.IsConnected)
-                    sqlDatabaseConnector.Connect();
-                sqlDataReader = sqlCommand.ExecuteReader();
-                if (!sqlDataReader.HasRows)
+                var dbCommand = databaseConnector.DbCommand("SELECT * FROM tblRoot");
+                if (!databaseConnector.IsConnected)
+                    databaseConnector.Connect();
+                dbDataReader = dbCommand.ExecuteReader();
+                if (!dbDataReader.HasRows)
                     return null; // assume new empty database
                 else
-                    sqlDataReader.Read();
+                    dbDataReader.Read();
 
                 metaData = new SqlConnectionListMetaData
                 {
-                    Name = sqlDataReader["Name"] as string ?? "",
-                    Protected = sqlDataReader["Protected"] as string ?? "",
-                    Export = (bool)sqlDataReader["Export"],
+                    Name = dbDataReader["Name"] as string ?? "",
+                    Protected = dbDataReader["Protected"] as string ?? "",
+                    Export = (bool)dbDataReader["Export"],
                     ConfVersion =
-                        new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture))
+                        new Version(Convert.ToString(dbDataReader["confVersion"], CultureInfo.InvariantCulture))
                 };
             }
             catch (Exception ex)
@@ -45,14 +46,14 @@ namespace mRemoteNG.Config.Serializers.MsSql
             }
             finally
             {
-                if (sqlDataReader != null && !sqlDataReader.IsClosed)
-                    sqlDataReader.Close();
+                if (dbDataReader != null && !dbDataReader.IsClosed)
+                    dbDataReader.Close();
             }
 
             return metaData;
         }
 
-        public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
+        public void WriteDatabaseMetaData(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
 	        var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
 	        string strProtected;
@@ -73,18 +74,16 @@ namespace mRemoteNG.Config.Serializers.MsSql
 		        strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
 	        }
 
-	        var sqlQuery = new SqlCommand("DELETE FROM tblRoot", sqlDatabaseConnector.SqlConnection);
-	        sqlQuery.ExecuteNonQuery();
+            var cmd = databaseConnector.DbCommand("DELETE FROM tblRoot");
+            cmd.ExecuteNonQuery();
 
 	        if (rootTreeNode != null)
 	        {
-		        sqlQuery =
-			        new SqlCommand(
-				        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
+		        cmd = databaseConnector.DbCommand(
+                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
 				        MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," +
-				        ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")",
-				        sqlDatabaseConnector.SqlConnection);
-		        sqlQuery.ExecuteNonQuery();
+				        ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")");
+		        cmd.ExecuteNonQuery();
 	        }
 	        else
 	        {

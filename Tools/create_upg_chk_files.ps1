@@ -30,7 +30,7 @@ function New-MsiUpdateFileContent {
     $fileContents = `
 "Version: $version
 dURL: https://github.com/mRemoteNG/mRemoteNG/releases/download/$TagName/$($MsiFile.Name)
-clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/$TagName/CHANGELOG.TXT
+clURL: https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/$TagName/CHANGELOG.md
 CertificateThumbprint: $certThumbprint
 Checksum: $hash"
     Write-Output $fileContents

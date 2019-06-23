@@ -18,7 +18,7 @@ namespace mRemoteNG.Config.Serializers
             var connectionInfo = new ConnectionInfo();
             foreach (var line in rdcFileContent.Split(Environment.NewLine.ToCharArray()))
             {
-                var parts = line.Split(new[] {':'}, 3);
+                var parts = line.Split(new[] { ':' }, 3);
                 if (parts.Length < 3)
                 {
                     continue;
@@ -60,30 +60,29 @@ namespace mRemoteNG.Config.Serializers
                     switch (value)
                     {
                         case "8":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors256;
+                            connectionInfo.Colors = RDPColors.Colors256;
                             break;
                         case "15":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors15Bit;
+                            connectionInfo.Colors = RDPColors.Colors15Bit;
                             break;
                         case "16":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors16Bit;
+                            connectionInfo.Colors = RDPColors.Colors16Bit;
                             break;
                         case "24":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors24Bit;
+                            connectionInfo.Colors = RDPColors.Colors24Bit;
                             break;
                         case "32":
-                            connectionInfo.Colors = RdpProtocol.RDPColors.Colors32Bit;
+                            connectionInfo.Colors = RDPColors.Colors32Bit;
                             break;
                     }
-
                     break;
                 case "bitmapcachepersistenable":
                     connectionInfo.CacheBitmaps = value == "1";
                     break;
                 case "screen mode id":
                     connectionInfo.Resolution = value == "2"
-                        ? RdpProtocol.RDPResolutions.Fullscreen
-                        : RdpProtocol.RDPResolutions.FitToWindow;
+                        ? RDPResolutions.Fullscreen
+                        : RDPResolutions.FitToWindow;
                     break;
                 case "connect to console":
                     connectionInfo.UseConsoleSession = value == "1";
@@ -119,19 +118,38 @@ namespace mRemoteNG.Config.Serializers
                     switch (value)
                     {
                         case "0":
-                            connectionInfo.RedirectSound = RdpProtocol.RDPSounds.BringToThisComputer;
+                            connectionInfo.RedirectSound = RDPSounds.BringToThisComputer;
                             break;
                         case "1":
-                            connectionInfo.RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer;
+                            connectionInfo.RedirectSound = RDPSounds.LeaveAtRemoteComputer;
                             break;
                         case "2":
-                            connectionInfo.RedirectSound = RdpProtocol.RDPSounds.DoNotPlay;
+                            connectionInfo.RedirectSound = RDPSounds.DoNotPlay;
                             break;
                     }
-
+                    break;
+                case "redirectaudiocapture":
+                    connectionInfo.RedirectAudioCapture = value == "1";
                     break;
                 case "loadbalanceinfo":
                     connectionInfo.LoadBalanceInfo = value;
+                    break;
+                case "gatewayusagemethod":
+                    switch (value)
+                    {
+                        case "0":
+                            connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never;
+                            break;
+                        case "1":
+                            connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Always;
+                            break;
+                        case "2":
+                            connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Detect;
+                            break;
+                    }
+                    break;
+                case "gatewayhostname":
+                    connectionInfo.RDGatewayHostname = value;
                     break;
             }
         }

@@ -149,6 +149,9 @@
     <Setting Name="ConDefaultRedirectSound" Type="System.String" Scope="User">
       <Value Profile="(Default)">DoNotPlay</Value>
     </Setting>
+    <Setting Name="ConDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="MaxPuttyWaitTime" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>
     </Setting>
@@ -252,6 +255,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultRedirectSound" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectAudioCapture" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultResolution" Type="System.Boolean" Scope="User">
@@ -503,6 +509,9 @@
     <Setting Name="ConDefaultUseCredSsp" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="ConDefaultUseVmId" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
     <Setting Name="AlwaysShowPanelTabs" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -564,7 +573,7 @@
       <Value Profile="(Default)">GCM</Value>
     </Setting>
     <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1000</Value>
+      <Value Profile="(Default)">10000</Value>
     </Setting>
     <Setting Name="ConDefaultSoundQuality" Type="System.String" Scope="User">
       <Value Profile="(Default)">Dynamic</Value>
@@ -699,6 +708,21 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="InhDefaultFavorite" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SQLServerType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mssql</Value>
+    </Setting>
+    <Setting Name="DoNotTrimUsername" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultVmId" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultVmId" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultUseVmId" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
