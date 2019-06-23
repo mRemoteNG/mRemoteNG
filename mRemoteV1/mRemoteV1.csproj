@@ -260,6 +260,7 @@
     <Compile Include="Connection\Protocol\RDP\RDPColors.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpExtensions.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpNetworkConnectionType.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPPerformanceFlags.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpProtocol10.cs" />
     <Compile Include="Connection\Protocol\RDP\RdpProtocol7.cs" />

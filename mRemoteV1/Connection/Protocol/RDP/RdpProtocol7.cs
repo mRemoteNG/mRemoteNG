@@ -20,6 +20,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var rdpClient7 = (MsRdpClient7NotSafeForScripting)((AxHost) Control).GetOcx();
                 rdpClient7.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
                 rdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
+                rdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
             }
             catch (Exception ex)
             {
