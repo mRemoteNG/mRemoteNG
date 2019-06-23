@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #1332: Added option to hide menu strip container
 ### Changed
 - #1468: Improved mRemoteNG startup time
 - #1443: Chinese (simplified) translation improvements
