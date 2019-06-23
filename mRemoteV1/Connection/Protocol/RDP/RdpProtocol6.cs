@@ -165,7 +165,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 _rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10,000 = 10 seconds)
                 _rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
                 _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
-                
+
                 _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
 
                 _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(connectionInfo.CacheBitmaps);

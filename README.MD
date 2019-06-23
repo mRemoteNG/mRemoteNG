@@ -38,23 +38,20 @@ For a detailed feature list and general usage support, refer to the [User Manual
 
 ## Installation
 
-Before installing make sure you fullfill all the [minimum requirements](https://mremoteng.readthedocs.io/en/latest/installation/minimum_requirements.html).
+mRemoteNG is supported on Windows 7 or later. Before installing make sure you fullfill all the [minimum requirements](https://mremoteng.readthedocs.io/en/latest/installation/minimum_requirements.html).
 
 mRemoteNG is available as a redistributable msi package, and can be downloaded from the following locations:
 * [GitHub](https://github.com/mRemoteNG/mRemoteNG/releases)
 * [Project Website](https://mremoteng.org/download)
-
-mRemoteNG is supported on Windows 7 or later.
-Windows 7 and Windows Server 2008 installations must ensure the [listed required updates](https://github.com/mRemoteNG/mRemoteNG/wiki/Prerequisites#full-list-of-required-windows-updates-for-windows-7--server-2008-clients) are installed and active.
 
 ## Contribute
 
 If you find mRemoteNG useful and would like to contribute, it would be greatly appreciated. When you contribute, you make it possible for the team to cover the costs of producing mRemoteNG.
 
 ### Submit Code
-Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/Development) on how to configure your development environment and submit a pull request.
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to configure your development environment and submit a pull request.
 
 ### Translate
-Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/How%20to%20Help%20Translating%20mRemoteNG) on how to help make mRemoteNG a polyglot
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to help make mRemoteNG a polyglot
 
 [![Developed with ReSharper](https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png)](https://www.jetbrains.com/resharper/)

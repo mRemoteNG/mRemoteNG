@@ -24,6 +24,7 @@ namespace mRemoteNG.Connection
         private string _username = "";
         private string _password = "";
         private string _domain = "";
+        private string _vmId = "";
 
         private ProtocolType _protocol;
         private RdpVersion _rdpProtocolVersion;
@@ -38,6 +39,7 @@ namespace mRemoteNG.Connection
         private string _loadBalanceInfo;
         private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
+        private bool _useVmId;
 
         private RDGatewayUsageMethod _rdGatewayUsageMethod;
         private string _rdGatewayHostname;
@@ -169,6 +171,16 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("Domain", _domain).Trim();
             set => SetField(ref _domain, value?.Trim(), "Domain");
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameVmId"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVmId"),
+         UsedInProtocol(ProtocolType.RDP)]
+        public string VmId
+        {
+            get => GetPropertyValue("VmId", _vmId).Trim();
+            set => SetField(ref _vmId, value?.Trim(), "VmId");
         }
 
         #endregion
@@ -319,6 +331,17 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("UseCredSsp", _useCredSsp);
             set => SetField(ref _useCredSsp, value, "UseCredSsp");
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseVmId"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseVmId"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
+        public bool UseVmId
+        {
+            get => GetPropertyValue("UseVmId", _useVmId);
+            set => SetField(ref _useVmId, value, "UseVmId");
         }
 
         #endregion

@@ -539,11 +539,15 @@ namespace mRemoteNG.Config.Serializers.Xml
                 if (_confVersion >= 2.7)
                 {
                     connectionInfo.RedirectClipboard = xmlnode.GetAttributeAsBool("RedirectClipboard");
-                    connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Favorite = xmlnode.GetAttributeAsBool("Favorite");
+                    connectionInfo.UseVmId = xmlnode.GetAttributeAsBool("UseVmId");
+                    connectionInfo.VmId = xmlnode.GetAttributeAsString("VmId");
+                    connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
                     connectionInfo.RdpProtocolVersion = xmlnode.GetAttributeAsEnum("RdpProtocolVersion", RdpVersion.Highest);
                     connectionInfo.Inheritance.RdpProtocolVersion = xmlnode.GetAttributeAsBool("InheritRdpProtocolVersion");
+                    connectionInfo.Inheritance.UseVmId = xmlnode.GetAttributeAsBool("InheritUseVmId");
+                    connectionInfo.Inheritance.VmId = xmlnode.GetAttributeAsBool("InheritVmId");
                 }
             }
             catch (Exception ex)

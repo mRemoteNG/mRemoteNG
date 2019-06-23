@@ -21,6 +21,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 rdpClient7.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
                 rdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
                 rdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
+
+                if (connectionInfo.UseVmId)
+                {
+                    SetExtendedProperty("DisableCredentialsDelegation", true);
+                    rdpClient7.AdvancedSettings7.AuthenticationServiceClass = "Microsoft Virtual Console Service";
+                    rdpClient7.AdvancedSettings8.EnableCredSspSupport = true;
+                    rdpClient7.AdvancedSettings8.NegotiateSecurityLayer = false;
+                    rdpClient7.AdvancedSettings7.PCB = $"{connectionInfo.VmId};EnhancedMode=1";
+                }
             }
             catch (Exception ex)
             {

@@ -35,6 +35,7 @@ Welcome to mRemoteNG's documentation!
    howtos/jumpservers.rst
    howtos/external_tools.rst
    howtos/bulk_connections.rst
+   howtos/vmrdp.rst
 
 .. toctree::
    :maxdepth: 2

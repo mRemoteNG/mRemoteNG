@@ -673,18 +673,13 @@ namespace mRemoteNG.UI.Window
             {
                 _propertyGridContextMenuShowHelpText.Checked = Settings.Default.ShowConfigHelpText;
                 var gridItem = _pGrid.SelectedGridItem;
-                _propertyGridContextMenuReset.Enabled = Convert.ToBoolean(
-                                                                          _pGrid.SelectedObject != null &&
+                _propertyGridContextMenuReset.Enabled = Convert.ToBoolean(_pGrid.SelectedObject != null &&
                                                                           gridItem?.PropertyDescriptor != null &&
-                                                                          gridItem.PropertyDescriptor
-                                                                                  .CanResetValue(_pGrid
-                                                                                                     .SelectedObject));
+                                                                          gridItem.PropertyDescriptor.CanResetValue(_pGrid.SelectedObject));
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(
-                                                             "UI.Window.Config.propertyGridContextMenu_Opening() failed.",
-                                                             ex);
+                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenu_Opening() failed.", ex);
             }
         }
 
@@ -701,9 +696,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(
-                                                             "UI.Window.Config.propertyGridContextMenuReset_Click() failed.",
-                                                             ex);
+                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenuReset_Click() failed.", ex);
             }
         }
 

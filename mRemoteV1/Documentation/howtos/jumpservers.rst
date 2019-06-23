@@ -19,9 +19,8 @@ more information regarding the function of bastion host and jump server then see
 
 References
 ==========
-`Wikipedia Bastion host <https://en.wikipedia.org/wiki/Bastion_host>`_
-
-`Wikipedia Jump server <https://en.wikipedia.org/wiki/Jump_server>`_
+- `Wikipedia Bastion host <https://en.wikipedia.org/wiki/Bastion_host>`_
+- `Wikipedia Jump server <https://en.wikipedia.org/wiki/Jump_server>`_
 
 Linux Server to target host
 ===========================
