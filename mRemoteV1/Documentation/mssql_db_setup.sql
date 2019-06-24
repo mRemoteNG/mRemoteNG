@@ -138,6 +138,8 @@ CREATE TABLE [dbo].[tblCons] (
 	[InheritRedirectClipboard] [bit] NOT NULL DEFAULT 0,
     [RedirectAudioCapture] [bit] NOT NULL DEFAULT 0,
     [InheritRedirectAudioCapture] [bit] NOT NULL DEFAULT 0
+    [RdpVersion] [varchar] (10) NULL,
+    [InheritRdpVersion] [bit] NOT NULL DEFAULT 0
 ) ON [PRIMARY]
 GO
  

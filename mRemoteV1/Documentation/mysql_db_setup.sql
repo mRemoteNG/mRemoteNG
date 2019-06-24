@@ -141,6 +141,8 @@ CREATE TABLE `tblCons` (
     `InheritRedirectClipboard` tinyint(1) NOT NULL DEFAULT 0,
     `RedirectAudioCapture` bit NOT NULL DEFAULT 0,
     `InheritRedirectAudioCapture` bit NOT NULL DEFAULT 0,
+    `RdpVersion` varchar(10) DEFAULT NULL,
+    `InheritRdpVersion` bit NOT NULL DEFAULT 0,
     PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3324 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
