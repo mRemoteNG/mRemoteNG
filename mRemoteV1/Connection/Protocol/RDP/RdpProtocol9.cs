@@ -1,8 +1,5 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using AxMSTSCLib;
-using mRemoteNG.App;
-using MSTSCLib;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
