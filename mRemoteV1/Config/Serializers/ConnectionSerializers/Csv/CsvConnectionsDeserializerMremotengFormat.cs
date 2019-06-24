@@ -374,10 +374,10 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.Favorite = value;
             }
 
-            if (headers.Contains("RdpProtocolVersion"))
+            if (headers.Contains("RdpVersion"))
             {
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("RdpProtocolVersion")], true, out RdpVersion version))
-                    connectionRecord.RdpProtocolVersion = version;
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("RdpVersion")], true, out RdpVersion version))
+                    connectionRecord.RdpVersion = version;
             }
 
             #region Inheritance
@@ -796,11 +796,11 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.Inheritance.RedirectAudioCapture = value;
             }
 
-            if (headers.Contains("InheritRdpProtocolVersion"))
+            if (headers.Contains("InheritRdpVersion"))
             {
                 bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRdpProtocolVersion")], out value))
-                    connectionRecord.Inheritance.RdpProtocolVersion = value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRdpVersion")], out value))
+                    connectionRecord.Inheritance.RdpVersion = value;
             }
 
             #endregion

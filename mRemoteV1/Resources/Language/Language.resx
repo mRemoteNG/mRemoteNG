@@ -2801,10 +2801,10 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="TestSettings" xml:space="preserve">
     <value>Test Settings</value>
   </data>
-  <data name="strPropertyDescriptionRdpProtocolVersion" xml:space="preserve">
+  <data name="strPropertyDescriptionRdpVersion" xml:space="preserve">
     <value>Sets the version of RDP to use when opening connections.</value>
   </data>
-  <data name="strPropertyNameRdpProtocolVersion" xml:space="preserve">
+  <data name="strPropertyNameRdpVersion" xml:space="preserve">
     <value>RDP Version</value>
   </data>
   <data name="strPropertyDescriptionUseVmId" xml:space="preserve">

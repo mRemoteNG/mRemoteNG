@@ -725,10 +725,10 @@
     <Setting Name="InhDefaultUseVmId" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ConDefaultRdpProtocolVersion" Type="System.String" Scope="User">
+    <Setting Name="ConDefaultRdpVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)">Highest</Value>
     </Setting>
-    <Setting Name="InhDefaultRdpProtocolVersion" Type="System.Boolean" Scope="User">
+    <Setting Name="InhDefaultRdpVersion" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

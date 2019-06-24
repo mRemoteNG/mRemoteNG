@@ -2914,27 +2914,28 @@ namespace mRemoteNG {
                 this["InhDefaultUseVmId"] = value;
             }
         }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Highest")]
-        public string ConDefaultRdpProtocolVersion {
+        public string ConDefaultRdpVersion {
             get {
-                return ((string)(this["ConDefaultRdpProtocolVersion"]));
+                return ((string)(this["ConDefaultRdpVersion"]));
             }
             set {
-                this["ConDefaultRdpProtocolVersion"] = value;
+                this["ConDefaultRdpVersion"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool InhDefaultRdpProtocolVersion {
+        public bool InhDefaultRdpVersion {
             get {
-                return ((bool)(this["InhDefaultRdpProtocolVersion"]));
+                return ((bool)(this["InhDefaultRdpVersion"]));
             }
             set {
-                this["InhDefaultRdpProtocolVersion"] = value;
+                this["InhDefaultRdpVersion"] = value;
             }
         }
     }

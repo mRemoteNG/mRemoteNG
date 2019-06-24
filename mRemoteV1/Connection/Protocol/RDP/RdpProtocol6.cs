@@ -116,7 +116,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             connectionInfo = InterfaceControl.Info;
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                $"Requesting RDP version: {connectionInfo.RdpProtocolVersion}. Using: {RdpProtocolVersion}");
+                $"Requesting RDP version: {connectionInfo.RdpVersion}. Using: {RdpProtocolVersion}");
             Control = CreateActiveXRdpClientControl();
             base.Initialize();
 
@@ -157,7 +157,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 if (ex.Message.Contains("CLASS_E_CLASSNOTAVAILABLE"))
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                        string.Format(Language.RdpProtocolVersionNotSupported, connectionInfo.RdpProtocolVersion));
+                        string.Format(Language.RdpProtocolVersionNotSupported, connectionInfo.RdpVersion));
                 }
                 else
                 {

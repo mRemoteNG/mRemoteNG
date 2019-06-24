@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -5030,9 +5030,9 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Sets the version of RDP to use when opening connections..
         /// </summary>
-        internal static string strPropertyDescriptionRdpProtocolVersion {
+        internal static string strPropertyDescriptionRdpVersion {
             get {
-                return ResourceManager.GetString("strPropertyDescriptionRdpProtocolVersion", resourceCulture);
+                return ResourceManager.GetString("strPropertyDescriptionRdpVersion", resourceCulture);
             }
         }
         
@@ -5588,9 +5588,9 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to RDP Version.
         /// </summary>
-        internal static string strPropertyNameRdpProtocolVersion {
+        internal static string strPropertyNameRdpVersion {
             get {
-                return ResourceManager.GetString("strPropertyNameRdpProtocolVersion", resourceCulture);
+                return ResourceManager.GetString("strPropertyNameRdpVersion", resourceCulture);
             }
         }
         

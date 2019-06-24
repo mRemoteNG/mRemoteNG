@@ -74,7 +74,7 @@ namespace mRemoteNG.Config.Serializers.Xml
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
-            element.Add(new XAttribute("RdpProtocolVersion", connectionInfo.RdpProtocolVersion.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("RdpVersion", connectionInfo.RdpVersion.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
             element.Add(new XAttribute("ConnectToConsole",
@@ -194,8 +194,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                                            connectionInfo.Inheritance.Port.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritProtocol",
                                            connectionInfo.Inheritance.Protocol.ToString().ToLowerInvariant()));
-                element.Add(new XAttribute("InheritRdpProtocolVersion",
-                    connectionInfo.Inheritance.RdpProtocolVersion.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritRdpVersion",
+                    connectionInfo.Inheritance.RdpVersion.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritPuttySession",
                                            connectionInfo.Inheritance.PuttySession.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectDiskDrives",

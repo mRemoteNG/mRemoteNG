@@ -198,14 +198,14 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNameRdpProtocolVersion"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRdpProtocolVersion"),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameRdpVersion"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRdpVersion"),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
-        public virtual RdpVersion RdpProtocolVersion
+        public virtual RdpVersion RdpVersion
         {
-            get => GetPropertyValue(nameof(RdpProtocolVersion), _rdpProtocolVersion);
-            set => SetField(ref _rdpProtocolVersion, value, nameof(RdpProtocolVersion));
+            get => GetPropertyValue(nameof(RdpVersion), _rdpProtocolVersion);
+            set => SetField(ref _rdpProtocolVersion, value, nameof(RdpVersion));
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),

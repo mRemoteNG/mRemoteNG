@@ -544,8 +544,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.VmId = xmlnode.GetAttributeAsString("VmId");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
-                    connectionInfo.RdpProtocolVersion = xmlnode.GetAttributeAsEnum("RdpProtocolVersion", RdpVersion.Highest);
-                    connectionInfo.Inheritance.RdpProtocolVersion = xmlnode.GetAttributeAsBool("InheritRdpProtocolVersion");
+                    connectionInfo.RdpVersion = xmlnode.GetAttributeAsEnum("RdpVersion", RdpVersion.Highest);
+                    connectionInfo.Inheritance.RdpVersion = xmlnode.GetAttributeAsBool("InheritRdpVersion");
                     connectionInfo.Inheritance.UseVmId = xmlnode.GetAttributeAsBool("InheritUseVmId");
                     connectionInfo.Inheritance.VmId = xmlnode.GetAttributeAsBool("InheritVmId");
                 }
