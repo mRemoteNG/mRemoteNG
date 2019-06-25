@@ -2802,4 +2802,16 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="TestSettings" xml:space="preserve">
       <value>Test Settings</value>
   </data>
+  <data name="strPropertyDescriptionUseVmId" xml:space="preserve">
+    <value>Use VM ID to connect to VM running on Hyper-V.</value>
+  </data>
+  <data name="strPropertyDescriptionVmId" xml:space="preserve">
+    <value>The ID of the Hyper-V virtual machine to connect to.</value>
+  </data>
+  <data name="strPropertyNameUseVmId" xml:space="preserve">
+    <value>Use VM ID</value>
+  </data>
+  <data name="strPropertyNameVmId" xml:space="preserve">
+    <value>VM ID</value>
+  </data>
 </root>

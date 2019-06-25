@@ -2769,7 +2769,7 @@ mRemoteNG 将退出并安装更新。</value>
     <value>Multi SSH：</value>
   </data>
   <data name="strMultiSSHToolTip" xml:space="preserve">
-    <value>按 ENTER 发送。 Ctrl+C 立即发送。</value>
+    <value>按 ENTER 发送。Ctrl+C 立即发送。</value>
   </data>
   <data name="strPropertyDescriptionFavorite" xml:space="preserve">
     <value>在收藏夹菜单中显示此连接。</value>
@@ -2791,5 +2791,14 @@ mRemoteNG 将退出并安装更新。</value>
   </data>
   <data name="Environment" xml:space="preserve">
     <value>环境</value>
+  </data>
+  <data name="EncryptionTestResultMessage" xml:space="preserve">
+    <value>使用 {1}/{2} 和 {3} 迭代加密 {0} 条目花费了 {4} 秒。</value>
+  </data>
+  <data name="EncryptionTest" xml:space="preserve">
+    <value>加密测试</value>
+  </data>
+  <data name="TestSettings" xml:space="preserve">
+    <value>测试设置</value>
   </data>
 </root>

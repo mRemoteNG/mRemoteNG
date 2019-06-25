@@ -45,6 +45,8 @@ namespace mRemoteNG.Config.Serializers.Xml
         {
             var nodeAsContainer = connectionInfo as ContainerInfo;
             element.Add(new XAttribute("Name", connectionInfo.Name));
+            element.Add(new XAttribute("VmId", connectionInfo.VmId));
+            element.Add(new XAttribute("UseVmId", connectionInfo.UseVmId));
             element.Add(new XAttribute("Type", connectionInfo.GetTreeNodeType().ToString()));
             if (nodeAsContainer != null)
                 element.Add(new XAttribute("Expanded", nodeAsContainer.IsExpanded.ToString().ToLowerInvariant()));
@@ -287,7 +289,11 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritRDGatewayPassword",
                                            connectionInfo.Inheritance.RDGatewayPassword.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRDGatewayDomain",
-                                           connectionInfo.Inheritance.RDGatewayDomain.ToString().ToLowerInvariant()));
+                    connectionInfo.Inheritance.RDGatewayDomain.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritVmId",
+                    connectionInfo.Inheritance.VmId.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritUseVmId",
+                    connectionInfo.Inheritance.UseVmId.ToString().ToLowerInvariant()));
             }
             else
             {

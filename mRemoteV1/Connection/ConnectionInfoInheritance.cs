@@ -20,8 +20,8 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool EverythingInherited
         {
-            get { return EverythingIsInherited(); }
-            set { SetAllValues(value); }
+            get => EverythingIsInherited();
+            set => SetAllValues(value);
         }
 
         #endregion
@@ -56,6 +56,13 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         [Browsable(true)]
         public bool Username { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameVmId"),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionVmId"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(true)]
+        public bool VmId { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
          LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNamePassword"),
@@ -146,6 +153,12 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseCredSsp"),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseCredSsp { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUseVmId"),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseVmId"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UseVmId { get; set; }
 
         #endregion
 

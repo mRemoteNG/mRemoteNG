@@ -248,6 +248,11 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 strHide.Add(nameof(AbstractConnectionRecord.SoundQuality));
             }
 
+            if (!SelectedConnectionInfo.UseVmId)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.VmId));
+            }
+
             return strHide;
         }
 
