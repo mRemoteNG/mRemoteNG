@@ -111,7 +111,7 @@ namespace mRemoteNG.Connection.Protocol
                 _interfaceControl.Show();
 
                 if (Control == null)
-                    return false;
+                    return true;
 
                 Control.Name = Name;
                 Control.Parent = _interfaceControl;
