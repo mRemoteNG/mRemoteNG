@@ -2054,6 +2054,18 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultUseVmId {
+            get {
+                return ((bool)(this["ConDefaultUseVmId"]));
+            }
+            set {
+                this["ConDefaultUseVmId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
         public bool AlwaysShowPanelTabs {
             get {
@@ -2864,6 +2876,42 @@ namespace mRemoteNG {
             }
             set {
                 this["DoNotTrimUsername"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultVmId {
+            get {
+                return ((string)(this["ConDefaultVmId"]));
+            }
+            set {
+                this["ConDefaultVmId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultVmId {
+            get {
+                return ((bool)(this["InhDefaultVmId"]));
+            }
+            set {
+                this["InhDefaultVmId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultUseVmId {
+            get {
+                return ((bool)(this["InhDefaultUseVmId"]));
+            }
+            set {
+                this["InhDefaultUseVmId"] = value;
             }
         }
         

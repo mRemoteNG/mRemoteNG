@@ -51,6 +51,8 @@
 		public TType MacAddress { get; set; }
         public TType UserField { get; set; }
         public TType Favorite { get; set; }
+        public TType VmId { get; set; }
+        public TType UseVmId { get; set; }
         public TType VNCCompression { get; set; }
 		public TType VNCEncoding { get; set; }
 		public TType VNCAuthMode { get; set; }

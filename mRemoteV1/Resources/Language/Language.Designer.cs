@@ -5245,11 +5245,29 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use VM ID to connect to VM running on Hyper-V..
+        /// </summary>
+        internal static string strPropertyDescriptionUseVmId {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionUseVmId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If you want to establish a view only connection to the host select yes..
         /// </summary>
         internal static string strPropertyDescriptionViewOnly {
             get {
                 return ResourceManager.GetString("strPropertyDescriptionViewOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ID of the Hyper-V virtual machine to connect to..
+        /// </summary>
+        internal static string strPropertyDescriptionVmId {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionVmId", resourceCulture);
             }
         }
         
@@ -5776,11 +5794,29 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use VM ID.
+        /// </summary>
+        internal static string strPropertyNameUseVmId {
+            get {
+                return ResourceManager.GetString("strPropertyNameUseVmId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Only.
         /// </summary>
         internal static string strPropertyNameViewOnly {
             get {
                 return ResourceManager.GetString("strPropertyNameViewOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VM ID.
+        /// </summary>
+        internal static string strPropertyNameVmId {
+            get {
+                return ResourceManager.GetString("strPropertyNameVmId", resourceCulture);
             }
         }
         

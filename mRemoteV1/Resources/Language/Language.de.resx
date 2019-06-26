@@ -2669,4 +2669,13 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="DoNotTrimUsername" xml:space="preserve">
     <value>Leerzeichen nicht aus Benutzernamen entfernen</value>
   </data>
+  <data name="strPropertyNameUseVmId" xml:space="preserve">
+    <value>Benutze VM ID</value>
+  </data>
+  <data name="strPropertyDescriptionUseVmId" xml:space="preserve">
+    <value>Verwenden Sie die VM ID, um eine Verbindung zu einer VM herzustellen die auf Hyper-V ausgeführt wird.</value>
+  </data>
+  <data name="strPropertyDescriptionVmId" xml:space="preserve">
+    <value>Die ID der virtuellen Hyper-V-Maschine, zu der eine Verbindung hergestellt werden soll.</value>
+  </data>
 </root>

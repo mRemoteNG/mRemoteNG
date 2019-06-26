@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - #474: Configurable backups. Can now edit/set backup frequency, backup path, and max number of backup files.
 ### Changed
+- #1468: Improved mRemoteNG startup time
 - #1443: Chinese (simplified) translation improvements
 - #1437: Norwegian translation improvements
 - #1239: Increased default key derivation function (KDF) iterations from 1000 to 10000
@@ -21,6 +22,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.77.0] - 2019-04-29
 ### Added
+- #1422: Added possibility to connect to virtual machines running on Hyper-V
 - #1414: Add "Remote Audio Capture" option for RDP
 - #1336: Added ability to run External tools on folders
 - #1320: Added ability to favorite items in the connection tree

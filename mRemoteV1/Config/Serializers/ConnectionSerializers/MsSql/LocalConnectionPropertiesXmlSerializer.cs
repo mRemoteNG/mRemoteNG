@@ -20,7 +20,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 .Select(m => new XElement("Node",
                                           new XAttribute("ConnectionId", m.ConnectionId),
                                           new XAttribute("Connected", m.Connected),
-                                          new XAttribute("Expanded", m.Expanded)));
+                                          new XAttribute("Expanded", m.Expanded),
+                                          new XAttribute("Favorite", m.Favorite)));
 
             var root = new XElement("LocalConnections", localConnections);
             var xdoc = new XDocument(new XDeclaration("1.0", "utf-8", null), root);
@@ -40,7 +41,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                    {
                        ConnectionId = e.Attribute("ConnectionId")?.Value,
                        Connected = bool.Parse(e.Attribute("Connected")?.Value ?? "False"),
-                       Expanded = bool.Parse(e.Attribute("Expanded")?.Value ?? "False")
+                       Expanded = bool.Parse(e.Attribute("Expanded")?.Value ?? "False"),
+                       Favorite = bool.Parse(e.Attribute("Favorite")?.Value ?? "False")
                    });
         }
 
