@@ -974,7 +974,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Language.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
