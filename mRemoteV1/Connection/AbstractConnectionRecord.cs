@@ -27,6 +27,7 @@ namespace mRemoteNG.Connection
         private string _vmId = "";
 
         private ProtocolType _protocol;
+        private RdpVersion _rdpProtocolVersion;
         private string _extApp;
         private int _port;
         private string _puttySession;
@@ -194,6 +195,17 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("Protocol", _protocol);
             set => SetField(ref _protocol, value, "Protocol");
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameRdpVersion"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRdpVersion"),
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
+        public virtual RdpVersion RdpVersion
+        {
+            get => GetPropertyValue(nameof(RdpVersion), _rdpProtocolVersion);
+            set => SetField(ref _rdpProtocolVersion, value, nameof(RdpVersion));
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),

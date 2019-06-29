@@ -2678,4 +2678,10 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="strPropertyDescriptionVmId" xml:space="preserve">
     <value>Die ID der virtuellen Hyper-V-Maschine, zu der eine Verbindung hergestellt werden soll.</value>
   </data>
+  <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
+    <value>RDP-Client konnte nicht erstellt werden. Die RDP-Protokollversion {0} wird auf diesem System nicht unterstützt. Bitte wählen Sie eine ältere Protokollversion.</value>
+  </data>
+  <data name="strPropertyDescriptionRdpVersion" xml:space="preserve">
+    <value>Legt die Version des RDP fest, die beim Öffnen von Verbindungen verwendet wird.</value>
+  </data>
 </root>

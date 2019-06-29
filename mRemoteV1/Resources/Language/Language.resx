@@ -332,8 +332,7 @@ Please make sure that either you have the Putty.exe in your mRemoteNG directory 
 If this check still fails or you are unable to use RDP, please consult the at {0}.</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
-    <value>All RDP components were found and seem to be registered properly.
-Remote Desktop Connection Control Version {0}</value>
+    <value>The following RDP protocol versions are supported on this machine: {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
     <value>VNC requires VncSharp.dll to be located in your mRemoteNG application folder.
@@ -2794,13 +2793,19 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Environment</value>
   </data>
   <data name="EncryptionTestResultMessage" xml:space="preserve">
-      <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
+    <value>Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds.</value>
   </data>
   <data name="EncryptionTest" xml:space="preserve">
-      <value>Encryption Test</value>
+    <value>Encryption Test</value>
   </data>
   <data name="TestSettings" xml:space="preserve">
-      <value>Test Settings</value>
+    <value>Test Settings</value>
+  </data>
+  <data name="strPropertyDescriptionRdpVersion" xml:space="preserve">
+    <value>Sets the version of RDP to use when opening connections.</value>
+  </data>
+  <data name="strPropertyNameRdpVersion" xml:space="preserve">
+    <value>RDP Version</value>
   </data>
   <data name="strPropertyDescriptionUseVmId" xml:space="preserve">
     <value>Use VM ID to connect to VM running on Hyper-V.</value>
@@ -2813,5 +2818,8 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="strPropertyNameVmId" xml:space="preserve">
     <value>VM ID</value>
+  </data>
+  <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
+    <value>Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version.</value>
   </data>
 </root>

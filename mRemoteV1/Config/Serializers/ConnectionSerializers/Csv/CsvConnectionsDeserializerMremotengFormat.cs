@@ -374,6 +374,12 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.Favorite = value;
             }
 
+            if (headers.Contains("RdpVersion"))
+            {
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("RdpVersion")], true, out RdpVersion version))
+                    connectionRecord.RdpVersion = version;
+            }
+
             #region Inheritance
 
             if (headers.Contains("InheritCacheBitmaps"))
@@ -788,6 +794,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectAudioCapture")], out value))
                     connectionRecord.Inheritance.RedirectAudioCapture = value;
+            }
+
+            if (headers.Contains("InheritRdpVersion"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRdpVersion")], out value))
+                    connectionRecord.Inheritance.RdpVersion = value;
             }
 
             #endregion

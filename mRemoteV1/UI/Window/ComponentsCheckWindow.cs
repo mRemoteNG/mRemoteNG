@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using AxMSTSCLib;
 using AxWFICALib;
@@ -550,33 +551,18 @@ namespace mRemoteNG.UI.Window
         private void CheckRdp()
         {
             pnlCheck1.Visible = true;
+            var rdpProtocolFactory = new RdpProtocolFactory();
+            var supportedVersions = rdpProtocolFactory.GetSupportedVersions();
 
-            try
+            if (supportedVersions.Any())
             {
-                using (var rdpClient = new AxMsRdpClient8NotSafeForScripting())
-                {
-                    rdpClient.CreateControl();
-
-                    while (!rdpClient.Created)
-                    {
-                        Thread.Sleep(10);
-                        System.Windows.Forms.Application.DoEvents();
-                    }
-
-                    if (!(new Version(rdpClient.Version) >= RdpProtocol.Versions.RDC80))
-                    {
-                        throw new Exception(
-                                            $"Found RDC Client version {rdpClient.Version} but version {RdpProtocol.Versions.RDC80} or higher is required.");
-                    }
-
-                    pbCheck1.Image = _successImage;
-                    lblCheck1.ForeColor = Color.DarkOliveGreen;
-                    lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckSucceeded;
-                    txtCheck1.Text = string.Format(Language.strCcRDPOK, rdpClient.Version);
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "RDP installed", true);
-                }
+                pbCheck1.Image = _successImage;
+                lblCheck1.ForeColor = Color.DarkOliveGreen;
+                lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckSucceeded;
+                txtCheck1.Text = string.Format(Language.strCcRDPOK, string.Join(", ", supportedVersions));
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "RDP versions installed: "+ string.Join(",", supportedVersions), true);
             }
-            catch (Exception ex)
+            else
             {
                 pbCheck1.Image = _failureImage;
                 lblCheck1.ForeColor = Color.Firebrick;
@@ -585,7 +571,6 @@ namespace mRemoteNG.UI.Window
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                                                     "RDP " + Language.strCcNotInstalledProperly, true);
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
             }
         }
 

@@ -74,6 +74,7 @@ namespace mRemoteNG.Config.Serializers.Xml
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
+            element.Add(new XAttribute("RdpVersion", connectionInfo.RdpVersion.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
             element.Add(new XAttribute("ConnectToConsole",
@@ -193,6 +194,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                                            connectionInfo.Inheritance.Port.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritProtocol",
                                            connectionInfo.Inheritance.Protocol.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritRdpVersion",
+                    connectionInfo.Inheritance.RdpVersion.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritPuttySession",
                                            connectionInfo.Inheritance.PuttySession.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectDiskDrives",
@@ -207,8 +210,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritRedirectClipboard",
                                            connectionInfo.Inheritance.RedirectClipboard.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectSmartCards",
-                                           connectionInfo
-                                               .Inheritance.RedirectSmartCards.ToString().ToLowerInvariant()));
+                                           connectionInfo.Inheritance.RedirectSmartCards.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectSound",
                                            connectionInfo.Inheritance.RedirectSound.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritSoundQuality",

@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #826: Allow selecting RDP version to use when connecting
 ### Changed
 - #1468: Improved mRemoteNG startup time
 - #1443: Chinese (simplified) translation improvements
@@ -17,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1428: Fixed a rare error when checking for FIPS
 - #1426: Tabbing is reversed in config window
 - #1425: Connections didn't always respect the Panel property
+- #323: Wallpaper always shows in RDP connections, even when turned off
 
 
 ## [1.77.0] - 2019-04-29

@@ -257,7 +257,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 }
                 else
                 {
-                    connectionInfo.Port = (int)RdpProtocol.Defaults.Port;
+                    connectionInfo.Port = (int)RdpProtocol6.Defaults.Port;
                     connectionInfo.Protocol = ProtocolType.RDP;
                 }
 
@@ -279,7 +279,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                         if (xmlnode.GetAttributeAsBool("UseVNC"))
                             connectionInfo.Port = (int)ProtocolVNC.Defaults.Port;
                         else
-                            connectionInfo.Port = (int)RdpProtocol.Defaults.Port;
+                            connectionInfo.Port = (int)RdpProtocol6.Defaults.Port;
                     }
 
                     connectionInfo.UseConsoleSession = false;
@@ -544,6 +544,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.VmId = xmlnode.GetAttributeAsString("VmId");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
+                    connectionInfo.RdpVersion = xmlnode.GetAttributeAsEnum("RdpVersion", RdpVersion.Highest);
+                    connectionInfo.Inheritance.RdpVersion = xmlnode.GetAttributeAsBool("InheritRdpVersion");
                     connectionInfo.Inheritance.UseVmId = xmlnode.GetAttributeAsBool("InheritUseVmId");
                     connectionInfo.Inheritance.VmId = xmlnode.GetAttributeAsBool("InheritVmId");
                 }
@@ -551,9 +553,8 @@ namespace mRemoteNG.Config.Serializers.Xml
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    string.Format(Language.strGetConnectionInfoFromXmlFailed,
-                                                                  connectionInfo.Name, ConnectionFileName,
-                                                                  ex.Message));
+                    string.Format(Language.strGetConnectionInfoFromXmlFailed,
+                        connectionInfo.Name, ConnectionFileName, ex.Message));
             }
 
             return connectionInfo;

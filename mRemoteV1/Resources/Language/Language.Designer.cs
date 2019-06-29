@@ -304,6 +304,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version..
+        /// </summary>
+        internal static string RdpProtocolVersionNotSupported {
+            get {
+                return ResourceManager.GetString("RdpProtocolVersionNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The selected repository is unlocked.
         /// </summary>
         internal static string RepositoryIsUnlocked {
@@ -1045,8 +1054,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All RDP components were found and seem to be registered properly.
-        ///Remote Desktop Connection Control Version {0}.
+        ///   Looks up a localized string similar to The following RDP protocol versions are supported on this machine: {0}.
         /// </summary>
         internal static string strCcRDPOK {
             get {
@@ -5020,6 +5028,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sets the version of RDP to use when opening connections..
+        /// </summary>
+        internal static string strPropertyDescriptionRdpVersion {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionRdpVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select whether the default audio input device on the remote machine should be redirected to this computer..
         /// </summary>
         internal static string strPropertyDescriptionRedirectAudioCapture {
@@ -5565,6 +5582,15 @@ namespace mRemoteNG {
         internal static string strPropertyNameRDPMinutesToIdleTimeout {
             get {
                 return ResourceManager.GetString("strPropertyNameRDPMinutesToIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RDP Version.
+        /// </summary>
+        internal static string strPropertyNameRdpVersion {
+            get {
+                return ResourceManager.GetString("strPropertyNameRdpVersion", resourceCulture);
             }
         }
         

@@ -164,25 +164,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
             public static IEnumerable InheritanceTestCases()
             {
-                var ignoreProperties = new[]
-                {
-                    nameof(ConnectionInfoInheritance.EverythingInherited),
-                    nameof(ConnectionInfoInheritance.Parent)
-                };
-                var properties = typeof(ConnectionInfoInheritance)
-                    .GetProperties()
-                    .Where(property => !ignoreProperties.Contains(property.Name));
-                var testCases = new List<TestCaseData>();
-                var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+	            var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+                var properties = testInheritance.GetProperties();
 
-                foreach (var property in properties)
-                {
-                    testCases.Add(
-                        new TestCaseData(property.Name)
-                            .Returns(property.GetValue(testInheritance)));
-                }
-
-                return testCases;
+                return properties
+	                .Select(property => 
+		                new TestCaseData(property.Name)
+			                .Returns(property.GetValue(testInheritance)))
+	                .ToList();
             }
         }
     }

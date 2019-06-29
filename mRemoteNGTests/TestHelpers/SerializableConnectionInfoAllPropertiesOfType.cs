@@ -64,5 +64,6 @@
 		public TType VNCColors { get; set; }
 		public TType VNCSmartSizeMode { get; set; }
 		public TType VNCViewOnly { get; set; }
+		public TType RdpVersion { get; set; }
 	}
 }

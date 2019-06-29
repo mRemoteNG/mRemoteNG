@@ -220,7 +220,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
                 }
                 else
                 {
-                    var resolution = RdpProtocol.GetResolutionRectangle(_info.Resolution);
+                    var resolution = _info.Resolution.GetResolutionRectangle();
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, resolution.Width,
                                              resolution.Height, 0);
                 }

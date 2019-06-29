@@ -193,6 +193,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("UseVmId", typeof(bool));
             dataTable.Columns.Add("InheritVmId", typeof(bool));
             dataTable.Columns.Add("InheritUseVmId", typeof(bool));
+            dataTable.Columns.Add("RdpVersion", typeof(string));
+            dataTable.Columns.Add("InheritRdpVersion", typeof(bool));
         }
 
         private void SetPrimaryKey(DataTable dataTable)
@@ -262,8 +264,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["SoundQuality"] = connectionInfo.SoundQuality;
             dataRow["RedirectAudioCapture"] = connectionInfo.RedirectAudioCapture;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
-            dataRow["Connected"] =
-                false; // TODO: this column can eventually be removed. we now save this property locally
+            dataRow["Connected"] = false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["PreExtApp"] = connectionInfo.PreExtApp;
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
             dataRow["MacAddress"] = connectionInfo.MacAddress;
@@ -287,6 +288,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["RDGatewayUsername"] = connectionInfo.RDGatewayUsername;
             dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
+            dataRow["RdpVersion"] = connectionInfo.RdpVersion;
+
+
             if (_saveFilter.SaveInheritance)
             {
                 dataRow["InheritCacheBitmaps"] = connectionInfo.Inheritance.CacheBitmaps;
@@ -347,6 +351,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritRDGatewayUsername"] = connectionInfo.Inheritance.RDGatewayUsername;
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;
+                dataRow["InheritRdpVersion"] = connectionInfo.Inheritance.RdpVersion;
             }
             else
             {
@@ -406,6 +411,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritRDGatewayUsername"] = false;
                 dataRow["InheritRDGatewayPassword"] = false;
                 dataRow["InheritRDGatewayDomain"] = false;
+                dataRow["InheritRdpVersion"] = false;
             }
 
             _dataTable.Rows.Add(dataRow);

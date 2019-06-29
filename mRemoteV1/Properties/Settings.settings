@@ -725,5 +725,11 @@
     <Setting Name="InhDefaultUseVmId" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ConDefaultRdpVersion" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Highest</Value>
+    </Setting>
+    <Setting Name="InhDefaultRdpVersion" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

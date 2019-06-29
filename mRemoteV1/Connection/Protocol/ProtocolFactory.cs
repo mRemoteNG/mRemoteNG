@@ -12,58 +12,46 @@ namespace mRemoteNG.Connection.Protocol
 {
     public class ProtocolFactory
     {
+        private readonly RdpProtocolFactory _rdpProtocolFactory = new RdpProtocolFactory();
+
         public ProtocolBase CreateProtocol(ConnectionInfo connectionInfo)
         {
-            var newProtocol = default(ProtocolBase);
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (connectionInfo.Protocol)
             {
                 case ProtocolType.RDP:
-                    newProtocol = new RdpProtocol
-                    {
-                        LoadBalanceInfoUseUtf8 = Settings.Default.RdpLoadBalanceInfoUseUtf8
-                    };
-                    ((RdpProtocol)newProtocol).tmrReconnect.Elapsed += ((RdpProtocol)newProtocol).tmrReconnect_Elapsed;
-                    break;
+                    var rdp = _rdpProtocolFactory.Build(connectionInfo.RdpVersion);
+                    rdp.LoadBalanceInfoUseUtf8 = Settings.Default.RdpLoadBalanceInfoUseUtf8;
+                    return rdp;
                 case ProtocolType.VNC:
-                    newProtocol = new ProtocolVNC();
-                    break;
+                    return new ProtocolVNC();
                 case ProtocolType.SSH1:
-                    newProtocol = new ProtocolSSH1();
-                    break;
+                    return new ProtocolSSH1();
                 case ProtocolType.SSH2:
-                    newProtocol = new ProtocolSSH2();
-                    break;
+                    return new ProtocolSSH2();
                 case ProtocolType.Telnet:
-                    newProtocol = new ProtocolTelnet();
-                    break;
+                    return new ProtocolTelnet();
                 case ProtocolType.Rlogin:
-                    newProtocol = new ProtocolRlogin();
-                    break;
+                    return new ProtocolRlogin();
                 case ProtocolType.RAW:
-                    newProtocol = new RawProtocol();
-                    break;
+                    return new RawProtocol();
                 case ProtocolType.HTTP:
-                    newProtocol = new ProtocolHTTP(connectionInfo.RenderingEngine);
-                    break;
+                    return new ProtocolHTTP(connectionInfo.RenderingEngine);
                 case ProtocolType.HTTPS:
-                    newProtocol = new ProtocolHTTPS(connectionInfo.RenderingEngine);
-                    break;
+                    return new ProtocolHTTPS(connectionInfo.RenderingEngine);
                 case ProtocolType.ICA:
-                    newProtocol = new IcaProtocol();
-                    ((IcaProtocol)newProtocol).tmrReconnect.Elapsed += ((IcaProtocol)newProtocol).tmrReconnect_Elapsed;
-                    break;
+                    var icaProtocol = new IcaProtocol();
+                    icaProtocol.tmrReconnect.Elapsed += icaProtocol.tmrReconnect_Elapsed;
+                    return icaProtocol;
                 case ProtocolType.IntApp:
-                    newProtocol = new IntegratedProgram();
                     if (connectionInfo.ExtApp == "")
                     {
                         throw (new Exception(Language.strNoExtAppDefined));
                     }
-
-                    break;
+                    return new IntegratedProgram();
             }
 
-            return newProtocol;
+            return default(ProtocolBase);
         }
     }
 }
