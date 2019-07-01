@@ -68,9 +68,6 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
-                var backgroundColor = ColorTranslator.ToHtml(ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background"));
-
                 // AppVeyor seems to pull text files in UNIX format... This messes up the display on the about screen...
                 //
                 // This would be MUCH faster:
@@ -83,6 +80,12 @@ namespace mRemoteNG.UI.Window
                 // The Changelog is a bit long anyways... Limit the number of lines to something reasonable.
 
                 if (!File.Exists(GeneralAppInfo.HomePath + @"\CREDITS.md") && !File.Exists(GeneralAppInfo.HomePath + @"\CHANGELOG.md")) return;
+
+                var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+                var backgroundColor = ColorTranslator.ToHtml(ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background"));
+                var foregroundColor = ColorTranslator.ToHtml(ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground"));
+                var css =
+                    $@"<head><style>body{{font-family:arial,helvetica,sans-serif;font-size:12px;color:{foregroundColor};}}a:link,a:visited,a:hover,a:active{{text-decoration:none;background-color:{foregroundColor};color:{backgroundColor};}}</style></head>";
 
                 var changelog = "";
                 using (var sR = new StreamReader(GeneralAppInfo.HomePath + @"\CHANGELOG.md", Encoding.UTF8, true))
@@ -100,11 +103,11 @@ namespace mRemoteNG.UI.Window
                     }
                 }
                 var changelogHtml = Markdown.ToHtml(changelog, pipeline);
-                changelogHtml = $"<body style=\"font-family:arial,helvetica,sans-serif;font-size:12px;\" bgcolor=\"{backgroundColor}\">{changelogHtml}</body>";
+                changelogHtml = css + $"<body bgcolor=\"{backgroundColor}\">{changelogHtml}</body>";
 
                 var credits = new StreamReader(GeneralAppInfo.HomePath + @"\CREDITS.md", Encoding.UTF8, true).ReadToEnd();
                 var creditsHtml = Markdown.ToHtml(credits, pipeline);
-                creditsHtml = $"<body style=\"font-family:arial,helvetica,sans-serif;font-size:12px;\" bgcolor=\"{backgroundColor}\">{creditsHtml}</body>";
+                creditsHtml = css + $"<body bgcolor=\"{backgroundColor}\">{creditsHtml}</body>";
 
                 gwbChangeLog.LoadHtml(changelogHtml.Replace("©", "&copy;"));
                 gwbCredits.LoadHtml(creditsHtml.Replace("©", "&copy;"));
