@@ -60,7 +60,8 @@ namespace mRemoteNG.UI.Panels
             var cMen = new ContextMenuStrip();
             var cMenRen = CreateRenameMenuItem(pnlcForm);
             var cMenScreens = CreateScreensMenuItem(pnlcForm);
-            cMen.Items.AddRange(new ToolStripItem[] {cMenRen, cMenScreens});
+            var cMenClose = CreateCloseMenuItem(pnlcForm);
+            cMen.Items.AddRange(new ToolStripItem[] {cMenRen, cMenScreens, cMenClose});
             pnlcForm.TabPageContextMenuStrip = cMen;
         }
 
@@ -89,6 +90,18 @@ namespace mRemoteNG.UI.Panels
             return cMenRen;
         }
 
+        private static ToolStripMenuItem CreateCloseMenuItem(DockContent pnlcForm)
+        {
+            var cMenClose = new ToolStripMenuItem
+            {
+                Text = Language.strButtonClose,
+                Image = Resources.Panel_Close,
+                Tag = pnlcForm
+            };
+            cMenClose.Click += cMenConnectionPanelClose_Click;
+            return cMenClose;
+        }
+
         private static void cMenConnectionPanelRename_Click(object sender, EventArgs e)
         {
             try
@@ -102,7 +115,21 @@ namespace mRemoteNG.UI.Panels
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelRename_Click: Caught Exception: ",
-                                                                ex);
+                    ex);
+            }
+        }
+
+        private static void cMenConnectionPanelClose_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
+                conW.Close();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelClose_Click: Caught Exception: ",
+                    ex);
             }
         }
 

@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #1512: Added option to close panel from right click menu
 - #826: Allow selecting RDP version to use when connecting
 ### Changed
 - #1468: Improved mRemoteNG startup time
