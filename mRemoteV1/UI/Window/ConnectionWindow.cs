@@ -316,7 +316,7 @@ namespace mRemoteNG.UI.Window
                 {
                     var tabP = (ConnectionTab)dockContent;
                     if (tabP.Tag == null) continue;
-                    tabP.silentClose = true;
+                    tabP.SilentClose = true;
                     tabP.Close();
                 }
             }
@@ -798,7 +798,7 @@ namespace mRemoteNG.UI.Window
             var protocolBase = sender as ProtocolBase;
             if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
             if (tabPage.Disposing) return;
-            tabPage.protocolClose = true;
+            tabPage.ProtocolClose = true;
             Invoke(new Action(() => tabPage.Close()));
         }
 

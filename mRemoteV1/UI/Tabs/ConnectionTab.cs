@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -13,15 +14,17 @@ namespace mRemoteNG.UI.Tabs
 {
     public partial class ConnectionTab : DockContent
     {
+        private InterfaceControl InterfaceControl => Tag as InterfaceControl;
+
         /// <summary>
         ///Silent close ignores the popup asking for confirmation
         /// </summary>
-        public bool silentClose { get; set; }
+        public bool SilentClose { get; set; }
 
         /// <summary>
         /// Protocol close ignores the interface controller cleanup and the user confirmation dialog
         /// </summary>
-        public bool protocolClose { get; set; }
+        public bool ProtocolClose { get; set; }
 
         public ConnectionTab()
         {
@@ -36,58 +39,35 @@ namespace mRemoteNG.UI.Tabs
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!protocolClose)
+            if (!ProtocolClose)
             {
-                if (!silentClose)
+                if (!SilentClose)
                 {
                     if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
                     {
-                        var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
-                                                            string
-                                                                .Format(Language.strConfirmCloseConnectionPanelMainInstruction,
-                                                                        TabText), "", "", "",
-                                                            Language.strCheckboxDoNotShowThisMessageAgain,
-                                                            ETaskDialogButtons.YesNo, ESysIcons.Question,
-                                                            ESysIcons.Question);
-                        if (CTaskDialog.VerificationChecked)
-                        {
-                            Settings.Default.ConfirmCloseConnection--;
-                        }
-
-                        if (result == DialogResult.No)
-                        {
-                            e.Cancel = true;
-                        }
-                        else
-                        {
-                            ((InterfaceControl)Tag)?.Protocol.Close();
-                        }
+                        ShowCloseConnectionTabPrompt(e);
                     }
                     else
                     {
                         // close without the confirmation prompt...
-                        ((InterfaceControl)Tag)?.Protocol.Close();
+                        InterfaceControl?.Protocol.Close();
                     }
                 }
                 else
                 {
-                    ((InterfaceControl)Tag)?.Protocol.Close();
+                    InterfaceControl?.Protocol.Close();
                 }
             }
 
             base.OnFormClosing(e);
         }
 
-
-        #region HelperFunctions  
-
         public void RefreshInterfaceController()
         {
             try
             {
-                var interfaceControl = Tag as InterfaceControl;
-                if (interfaceControl?.Info.Protocol == ProtocolType.VNC)
-                    ((ProtocolVNC)interfaceControl.Protocol).RefreshScreen();
+                if (InterfaceControl?.Info.Protocol == ProtocolType.VNC)
+                    ((ProtocolVNC)InterfaceControl.Protocol).RefreshScreen();
             }
             catch (Exception ex)
             {
@@ -95,6 +75,28 @@ namespace mRemoteNG.UI.Tabs
             }
         }
 
-        #endregion
+        private void ShowCloseConnectionTabPrompt(FormClosingEventArgs e)
+        {
+            var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
+                string.Format(Language.strConfirmCloseConnectionPanelMainInstruction, TabText),
+                "", "", "",
+                Language.strCheckboxDoNotShowThisMessageAgain,
+                ETaskDialogButtons.YesNo, ESysIcons.Question,
+                ESysIcons.Question);
+
+            if (CTaskDialog.VerificationChecked)
+            {
+                Settings.Default.ConfirmCloseConnection--;
+            }
+
+            if (result == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                InterfaceControl?.Protocol.Close();
+            }
+        }
     }
 }
