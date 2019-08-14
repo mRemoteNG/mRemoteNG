@@ -159,7 +159,7 @@ namespace mRemoteNG.UI.Window
 
         #endregion
 
-        public void reconnectAll(IConnectionInitiator initiator)
+        public void ReconnectAll(IConnectionInitiator initiator)
         {
             var controlList = new List<InterfaceControl>();
             try

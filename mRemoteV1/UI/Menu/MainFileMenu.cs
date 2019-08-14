@@ -453,7 +453,7 @@ namespace mRemoteNG.UI.Menu
                 if (!(window is ConnectionWindow connectionWindow))
                     return;
 
-                connectionWindow.reconnectAll(ConnectionInitiator);
+                connectionWindow.ReconnectAll(ConnectionInitiator);
             }
         }
 
