@@ -177,9 +177,6 @@
   <data name="strAspect" xml:space="preserve">
     <value>Aspect</value>
   </data>
-  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Automatically get session information</value>
-  </data>
   <data name="strAutoSaveEvery" xml:space="preserve">
     <value>Auto save time in minutes (0 means disabled):</value>
   </data>

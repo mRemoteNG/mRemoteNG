@@ -134,18 +134,6 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AutomaticallyGetSessionInfo {
-            get {
-                return ((bool)(this["AutomaticallyGetSessionInfo"]));
-            }
-            set {
-                this["AutomaticallyGetSessionInfo"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LoadConsFromCustomLocation {
             get {
                 return ((bool)(this["LoadConsFromCustomLocation"]));
