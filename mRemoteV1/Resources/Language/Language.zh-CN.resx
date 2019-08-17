@@ -332,8 +332,7 @@ Citrix ICA 客户端空间版本：{0}</value>
 如果此检查仍然失败或无法使用 RDP，请咨询 {0}。</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
-    <value>发现 RDP 组件。
-远程桌面版本 {0}</value>
+    <value>The following RDP protocol versions are supported on this machine: {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
     <value>VNC 要求 VncSharp.dll 位于 mRemoteNG 应用程序文件夹中。
@@ -2800,5 +2799,26 @@ mRemoteNG 将退出并安装更新。</value>
   </data>
   <data name="TestSettings" xml:space="preserve">
     <value>测试设置</value>
+  </data>
+  <data name="strPropertyDescriptionRdpVersion" xml:space="preserve">
+    <value>设置打开连接时要使用的 RDP 版本。</value>
+  </data>
+  <data name="strPropertyNameRdpVersion" xml:space="preserve">
+    <value>RDP 版本</value>
+  </data>
+  <data name="strPropertyDescriptionUseVmId" xml:space="preserve">
+    <value>使用 VM ID 连接到在 Hyper-V 上运行的 VM。</value>
+  </data>
+  <data name="strPropertyDescriptionVmId" xml:space="preserve">
+    <value>要连接到的 Hyper-V 虚拟机的 ID。</value>
+  </data>
+  <data name="strPropertyNameUseVmId" xml:space="preserve">
+    <value>使用 VM ID</value>
+  </data>
+  <data name="strPropertyNameVmId" xml:space="preserve">
+    <value>VM ID</value>
+  </data>
+  <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
+    <value>无法创建 RDP 客户端。此计算机上不支持 RDP 协议版本 {0}。请选择较旧的协议版本。</value>
   </data>
 </root>
