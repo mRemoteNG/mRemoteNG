@@ -1641,7 +1641,10 @@ Załadowano nowy plik połączeń.</value>
 	<data name="strStatus" xml:space="preserve">
     <value>Stan</value>
   </data>
-	<data name="strTabAdvanced" xml:space="preserve">
+  <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
+    <value>Przełącz do okna powiadomień dla:</value>
+  </data>
+  <data name="strTabAdvanced" xml:space="preserve">
     <value>Zaawansowane</value>
   </data>
 	<data name="strTabAppearance" xml:space="preserve">
@@ -1890,5 +1893,32 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
   </data>
 	<data name="strYes" xml:space="preserve">
     <value>Tak</value>
+  </data>
+  <data name="strShowTheseMessageTypes" xml:space="preserve">
+    <value>Wyświetlaj wiadomości następujących typów</value>
+  </data>
+  <data name="strLogFilePath" xml:space="preserve">
+    <value>Ścieżka pliku logów</value>
+  </data>
+  <data name="strLogTheseMessageTypes" xml:space="preserve">
+    <value>Loguj wiadomości następujących typów</value>
+  </data>
+  <data name="strChoosePath" xml:space="preserve">
+    <value>Wybierz katalog</value>
+  </data>
+  <data name="strOpenFile" xml:space="preserve">
+    <value>Otwórz plik</value>
+  </data>
+  <data name="strUseDefault" xml:space="preserve">
+    <value>Użyj domyślnego</value>
+  </data>
+  <data name="strLogging" xml:space="preserve">
+    <value>Logowanie</value>
+  </data>
+  <data name="strPopups" xml:space="preserve">
+    <value>Wyskakujące okienka</value>
+  </data>
+  <data name="strLogToAppDir" xml:space="preserve">
+    <value>Loguj do katalogu aplikacji</value>
   </data>
 </root>
