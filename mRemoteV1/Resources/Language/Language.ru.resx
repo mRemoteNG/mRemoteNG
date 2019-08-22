@@ -2757,7 +2757,7 @@ mRemoteNG сейчас прекратит работу и начнет проц�
 Канал разработки включает в себя Альф, Betas и релиз кандидатов.</value>
   </data>
   <data name="strButtonApply" xml:space="preserve">
-    <value>Приминить</value>
+    <value>Применить</value>
   </data>
   <data name="strCategoryProxy" xml:space="preserve">
     <value>Proxy</value>
