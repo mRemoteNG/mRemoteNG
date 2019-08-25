@@ -7,17 +7,25 @@ using System;
 using System.Collections;
 using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.Connection;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Panels
 {
     public class PanelAdder
     {
+        private readonly IConnectionInitiator _connectionInitiator;
+
+        public PanelAdder(IConnectionInitiator connectionInitiator)
+        {
+            _connectionInitiator = connectionInitiator;
+        }
+
         public ConnectionWindow AddPanel(string title = "")
         {
             try
             {
-                var connectionForm = new ConnectionWindow(new DockContent());
+                var connectionForm = new ConnectionWindow(new DockContent(), _connectionInitiator);
                 BuildConnectionWindowContextMenu(connectionForm);
                 SetConnectionWindowTitle(title, connectionForm);
                 ShowConnectionWindow(connectionForm);

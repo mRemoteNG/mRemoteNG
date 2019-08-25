@@ -21,7 +21,7 @@ namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionTreeWindow
     {
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IConnectionInitiator _connectionInitiator;
         private ThemeManager _themeManager;
 
         public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
@@ -32,12 +32,14 @@ namespace mRemoteNG.UI.Window
             set { olvConnections = value; }
         }
 
-        public ConnectionTreeWindow() : this(new DockContent())
+        public ConnectionTreeWindow(IConnectionInitiator connectionInitiator)
+            : this(new DockContent(), connectionInitiator)
         {
         }
 
-        public ConnectionTreeWindow(DockContent panel)
+        public ConnectionTreeWindow(DockContent panel, IConnectionInitiator connectionInitiator)
         {
+            _connectionInitiator = connectionInitiator;
             WindowType = WindowType.Tree;
             DockPnl = panel;
             InitializeComponent();

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using mRemoteNG.Connection;
+using NUnit.Framework;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNGTests.UI.Forms
@@ -15,7 +16,7 @@ namespace mRemoteNGTests.UI.Forms
         [SetUp]
         public void Setup()
         {
-            _optionsForm = new FrmOptions();
+            _optionsForm = new FrmOptions(new ConnectionInitiator());
             _optionsForm.Show();
         }
 

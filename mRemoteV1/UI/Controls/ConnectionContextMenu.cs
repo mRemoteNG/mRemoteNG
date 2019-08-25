@@ -54,10 +54,10 @@ namespace mRemoteNG.UI.Controls
         private readonly IConnectionInitiator _connectionInitiator;
 
 
-        public ConnectionContextMenu(ConnectionTree connectionTree)
+        public ConnectionContextMenu(ConnectionTree connectionTree, IConnectionInitiator connectionInitiator)
         {
             _connectionTree = connectionTree;
-            _connectionInitiator = new ConnectionInitiator();
+            _connectionInitiator = connectionInitiator;
             InitializeComponent();
             ApplyLanguage();
             EnableShortcutKeys();

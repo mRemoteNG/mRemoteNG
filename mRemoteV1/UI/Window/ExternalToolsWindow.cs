@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.App;
 using mRemoteNG.Config.Settings;
+using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Forms;
@@ -14,12 +15,15 @@ namespace mRemoteNG.UI.Window
 {
     public partial class ExternalToolsWindow
     {
+        private readonly IConnectionInitiator _connectionInitiator;
         private readonly ExternalAppsSaver _externalAppsSaver;
         private readonly ThemeManager _themeManager;
         private readonly FullyObservableCollection<ExternalTool> _currentlySelectedExternalTools;
 
-        public ExternalToolsWindow()
+
+        public ExternalToolsWindow(IConnectionInitiator connectionInitiator)
         {
+            _connectionInitiator = connectionInitiator;
             InitializeComponent();
             WindowType = WindowType.ExternalApps;
             DockPnl = new DockContent();
@@ -177,7 +181,10 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var externalTool = new ExternalTool(Language.strExternalToolDefaultName);
+                var externalTool = new ExternalTool(_connectionInitiator)
+                {
+                    DisplayName = Language.strExternalToolDefaultName
+                };
                 Runtime.ExternalToolsService.ExternalTools.Add(externalTool);
                 UpdateToolsListObjView();
                 ToolsListObjView.SelectedObject = externalTool;

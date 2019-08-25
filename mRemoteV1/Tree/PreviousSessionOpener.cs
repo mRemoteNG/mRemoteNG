@@ -26,7 +26,7 @@ namespace mRemoteNG.Tree
                 .Where(item =>
                            item.PleaseConnect &&
                            //ignore items that have already connected
-                           !_connectionInitiator.ActiveConnections.Contains(item.ConstantID));
+                           _connectionInitiator.ActiveConnections.All(protocol => protocol.InterfaceControl.Info.ConstantID != item.ConstantID));
 
             foreach (var connectionInfo in previouslyOpenedConnections)
             {

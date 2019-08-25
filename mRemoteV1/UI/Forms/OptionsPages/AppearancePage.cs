@@ -1,14 +1,18 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class AppearancePage
     {
-        public AppearancePage()
+        private readonly IConnectionInitiator _connectionInitiator;
+
+        public AppearancePage(IConnectionInitiator connectionInitiator)
         {
+            _connectionInitiator = connectionInitiator;
             InitializeComponent();
             ApplyTheme();
             PageIcon = Resources.Panels_Icon;
@@ -82,7 +86,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 if (Runtime.NotificationAreaIcon == null)
                 {
-                    Runtime.NotificationAreaIcon = new NotificationAreaIcon();
+                    Runtime.NotificationAreaIcon = new NotificationAreaIcon(_connectionInitiator);
                 }
             }
             else

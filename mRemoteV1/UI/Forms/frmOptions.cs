@@ -4,26 +4,30 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.Connection;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms
 {
     public partial class FrmOptions : Form
     {
+        private readonly IConnectionInitiator _connectionInitiator;
         private Dictionary<string, OptionsPage> _pages;
         private readonly string _pageName;
         private readonly DisplayProperties _display = new DisplayProperties();
 
-        public FrmOptions() : this(Language.strStartupExit)
+        public FrmOptions(IConnectionInitiator connectionInitiator)
+            : this(Language.strStartupExit, connectionInitiator)
         {
         }
 
-        public FrmOptions(string pn)
+        public FrmOptions(string pn, IConnectionInitiator connectionInitiator)
         {
             Cursor.Current = Cursors.WaitCursor;
             Application.DoEvents();
             InitializeComponent();
             _pageName = pn;
+            _connectionInitiator = connectionInitiator;
             Cursor.Current = Cursors.Default;
         }
 
@@ -68,7 +72,7 @@ namespace mRemoteNG.UI.Forms
             _pages = new Dictionary<string, OptionsPage>
             {
                 {typeof(StartupExitPage).Name, new StartupExitPage {Dock = DockStyle.Fill}},
-                {typeof(AppearancePage).Name, new AppearancePage {Dock = DockStyle.Fill}},
+                {typeof(AppearancePage).Name, new AppearancePage(_connectionInitiator) {Dock = DockStyle.Fill}},
                 {typeof(TabsPanelsPage).Name, new TabsPanelsPage {Dock = DockStyle.Fill}},
                 {typeof(NotificationsPage).Name, new NotificationsPage {Dock = DockStyle.Fill}},
                 {typeof(ConnectionsPage).Name, new ConnectionsPage {Dock = DockStyle.Fill}},

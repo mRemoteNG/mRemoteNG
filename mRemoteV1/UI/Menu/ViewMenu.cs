@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
@@ -27,7 +28,6 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenViewResetLayout;
         private ToolStripMenuItem _mMenViewLockToolbars;
         private ToolStripSeparator _toolStripSeparator1;
-        private readonly PanelAdder _panelAdder;
 
 
         public ToolStrip TsExternalTools { get; set; }
@@ -35,12 +35,12 @@ namespace mRemoteNG.UI.Menu
         public ToolStrip TsMultiSsh { get; set; }
         public FullscreenHandler FullscreenHandler { get; set; }
         public FrmMain MainForm { get; set; }
+        public IConnectionInitiator ConnectionInitiator { get; set; }
 
 
         public ViewMenu()
         {
             Initialize();
-            _panelAdder = new PanelAdder();
         }
 
         private void Initialize()
@@ -374,7 +374,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenViewAddConnectionPanel_Click(object sender, EventArgs e)
         {
-            _panelAdder.AddPanel();
+            new PanelAdder(ConnectionInitiator).AddPanel();
         }
 
         private void mMenViewExtAppsToolbar_Click(object sender, EventArgs e)

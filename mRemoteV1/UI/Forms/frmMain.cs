@@ -49,6 +49,7 @@ namespace mRemoteNG.UI.Forms
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
         private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
+        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
 
         internal FullscreenHandler Fullscreen { get; set; }
 
@@ -145,10 +146,11 @@ namespace mRemoteNG.UI.Forms
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
 
+            Windows.ConnectionInitiator = _connectionInitiator;
             Startup.Instance.InitializeProgram(messageCollector);
 
             msMain.Location = Point.Empty;
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip,
+            var settingsLoader = new SettingsLoader(this, _connectionInitiator, messageCollector, _quickConnectToolStrip,
                                                     _externalToolsToolStrip, _multiSshToolStrip, msMain);
             settingsLoader.LoadSettings();
 
@@ -193,14 +195,17 @@ namespace mRemoteNG.UI.Forms
 
             FrmSplashScreen.getInstance().Close();
 
-            if (!Settings.Default.CreateEmptyPanelOnStartUp) return;
-            var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
-                ? Settings.Default.StartUpPanelName
-                : Language.strNewPanel;
+            if (Settings.Default.CreateEmptyPanelOnStartUp)
+            {
+                var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
+                    ? Settings.Default.StartUpPanelName
+                    : Language.strNewPanel;
 
-            var panelAdder = new PanelAdder();
-            if (!panelAdder.DoesPanelExist(panelName))
-                panelAdder.AddPanel(panelName);
+                var panelAdder = new PanelAdder(_connectionInitiator);
+                if (!panelAdder.DoesPanelExist(panelName))
+                    panelAdder.AddPanel(panelName);
+            }
+
         }
 
         private void ApplyLanguage()
@@ -249,20 +254,20 @@ namespace mRemoteNG.UI.Forms
 
         private void SetMenuDependencies()
         {
-            var connectionInitiator = new ConnectionInitiator();
             fileMenu.TreeWindow = Windows.TreeForm;
-            fileMenu.ConnectionInitiator = connectionInitiator;
+            fileMenu.ConnectionInitiator = _connectionInitiator;
 
             viewMenu.TsExternalTools = _externalToolsToolStrip;
             viewMenu.TsQuickConnect = _quickConnectToolStrip;
             viewMenu.TsMultiSsh = _multiSshToolStrip;
             viewMenu.FullscreenHandler = Fullscreen;
             viewMenu.MainForm = this;
+            viewMenu.ConnectionInitiator = _connectionInitiator;
 
             toolsMenu.MainForm = this;
             toolsMenu.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
 
-            _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
+            _quickConnectToolStrip.ConnectionInitiator = _connectionInitiator;
         }
 
         //Theming support
@@ -338,7 +343,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new FrmOptions(Language.strTabUpdates))
+            using (var optionsForm = new FrmOptions(Language.strTabUpdates, _connectionInitiator))
             {
                 optionsForm.ShowDialog(this);
             }
@@ -348,13 +353,8 @@ namespace mRemoteNG.UI.Forms
         {
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 
-            var nextUpdateCheck = Convert.ToDateTime(
-                                                     Settings.Default.CheckForUpdatesLastCheck.Add(
-                                                                                                   TimeSpan
-                                                                                                       .FromDays(Convert
-                                                                                                                     .ToDouble(Settings
-                                                                                                                               .Default
-                                                                                                                               .CheckForUpdatesFrequencyDays))));
+            var updateFrequencyInDays = Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays);
+            var nextUpdateCheck = Settings.Default.CheckForUpdatesLastCheck.AddDays(updateFrequencyInDays);
 
             if (!Settings.Default.UpdatePending && DateTime.UtcNow <= nextUpdateCheck) return;
             if (!IsHandleCreated)
@@ -446,7 +446,7 @@ namespace mRemoteNG.UI.Forms
                 if (!Settings.Default.MinimizeToTray) return;
                 if (Runtime.NotificationAreaIcon == null)
                 {
-                    Runtime.NotificationAreaIcon = new NotificationAreaIcon();
+                    Runtime.NotificationAreaIcon = new NotificationAreaIcon(_connectionInitiator);
                 }
 
                 Hide();

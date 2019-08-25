@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -14,13 +14,14 @@ namespace mRemoteNG.Tools
         private readonly NotifyIcon _nI;
         private readonly ContextMenuStrip _cMen;
         private readonly ToolStripMenuItem _cMenCons;
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IConnectionInitiator _connectionInitiator;
         private static readonly FrmMain FrmMain = FrmMain.Default;
 
         public bool Disposed { get; private set; }
 
-        public NotificationAreaIcon()
+        public NotificationAreaIcon(IConnectionInitiator connectionInitiator)
         {
+            _connectionInitiator = connectionInitiator;
             try
             {
                 _cMenCons = new ToolStripMenuItem

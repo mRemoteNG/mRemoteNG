@@ -1,4 +1,5 @@
 ﻿using System;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
@@ -20,7 +21,7 @@ namespace mRemoteNG.App
 
         internal static ConnectionTreeWindow TreeForm
         {
-            get => _treeForm ?? (_treeForm = new ConnectionTreeWindow());
+            get => _treeForm ?? (_treeForm = new ConnectionTreeWindow(ConnectionInitiator));
             set => _treeForm = value;
         }
 
@@ -29,6 +30,7 @@ namespace mRemoteNG.App
         internal static ScreenshotManagerWindow ScreenshotForm { get; set; } = new ScreenshotManagerWindow();
         private static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
         internal static SSHTransferWindow SshtransferForm { get; private set; } = new SSHTransferWindow();
+        internal static IConnectionInitiator ConnectionInitiator { get; set; }
 
 
         public static void Show(WindowType windowType)
@@ -50,7 +52,7 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new FrmOptions())
+                        using (var optionsForm = new FrmOptions(ConnectionInitiator))
                         {
                             optionsForm.ShowDialog(dockPanel);
                         }
@@ -73,7 +75,7 @@ namespace mRemoteNG.App
                         break;
                     case WindowType.ExternalApps:
                         if (_externalappsForm == null || _externalappsForm.IsDisposed)
-                            _externalappsForm = new ExternalToolsWindow();
+                            _externalappsForm = new ExternalToolsWindow(ConnectionInitiator);
                         _externalappsForm.Show(dockPanel);
                         break;
                     case WindowType.PortScan:

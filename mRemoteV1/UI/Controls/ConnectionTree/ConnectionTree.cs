@@ -23,7 +23,8 @@ namespace mRemoteNG.UI.Controls
         private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
         private readonly StatusImageList _statusImageList = new StatusImageList();
-        private ThemeManager _themeManager;
+        private readonly IConnectionInitiator _connectionInitiator;
+        private readonly ThemeManager _themeManager;
 
         private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter =
             new ConnectionTreeSearchTextFilter();
@@ -63,6 +64,7 @@ namespace mRemoteNG.UI.Controls
 
         public ConnectionTree()
         {
+            _connectionInitiator = Windows.ConnectionInitiator;
             InitializeComponent();
             SetupConnectionTreeView();
             UseOverlays = false;
@@ -114,7 +116,7 @@ namespace mRemoteNG.UI.Controls
             SmallImageList = _statusImageList.ImageList;
             AddColumns(_statusImageList.ImageGetter);
             LinkModelToView();
-            _contextMenu = new ConnectionContextMenu(this);
+            _contextMenu = new ConnectionContextMenu(this, _connectionInitiator);
             ContextMenuStrip = _contextMenu;
             SetupDropSink();
             SetEventHandlers();

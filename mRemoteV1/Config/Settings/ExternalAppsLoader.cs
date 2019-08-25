@@ -4,6 +4,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
 using System.IO;
 using System.Xml;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
@@ -13,12 +14,14 @@ namespace mRemoteNG.Config.Settings
     public class ExternalAppsLoader
     {
         private readonly FrmMain _mainForm;
+        private readonly IConnectionInitiator _connectionInitiator;
         private readonly MessageCollector _messageCollector;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 
         public ExternalAppsLoader(FrmMain mainForm,
                                   MessageCollector messageCollector,
-                                  ExternalToolsToolStrip externalToolsToolStrip)
+                                  ExternalToolsToolStrip externalToolsToolStrip,
+                                  IConnectionInitiator connectionInitiator)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -30,6 +33,7 @@ namespace mRemoteNG.Config.Settings
             _mainForm = mainForm;
             _messageCollector = messageCollector;
             _externalToolsToolStrip = externalToolsToolStrip;
+            _connectionInitiator = connectionInitiator;
         }
 
 
@@ -71,7 +75,7 @@ namespace mRemoteNG.Config.Settings
 
             foreach (XmlElement xEl in xDom.DocumentElement.ChildNodes)
             {
-                var extA = new ExternalTool
+                var extA = new ExternalTool(_connectionInitiator)
                 {
                     DisplayName = xEl.Attributes["DisplayName"].Value,
                     FileName = xEl.Attributes["FileName"].Value,

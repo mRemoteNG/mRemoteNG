@@ -12,7 +12,7 @@ namespace mRemoteNGTests.Connection.Protocol
 {
 	public class IntegratedProgramTests
 	{
-		private readonly ExternalTool _extTool = new ExternalTool
+		private readonly ExternalTool _extTool = new ExternalTool(new ConnectionInitiator())
 		{
 			DisplayName = "notepad",
 			FileName = @"%windir%\system32\notepad.exe",
@@ -50,7 +50,7 @@ namespace mRemoteNGTests.Connection.Protocol
 
 		private InterfaceControl BuildInterfaceControl(string extAppName, ProtocolBase sut)
 		{
-			var connectionWindow = new ConnectionWindow(new DockContent());
+			var connectionWindow = new ConnectionWindow(new DockContent(), new ConnectionInitiator());
             var connectionInfo = new ConnectionInfo {ExtApp = extAppName, Protocol = ProtocolType.IntApp};
             return new InterfaceControl(connectionWindow, sut, connectionInfo);
 		}

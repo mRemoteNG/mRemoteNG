@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.UI.Window;
 
@@ -6,7 +7,7 @@ namespace mRemoteNG.Connection
 {
     public interface IConnectionInitiator
     {
-        IEnumerable<string> ActiveConnections { get; }
+        IEnumerable<ProtocolBase> ActiveConnections { get; }
 
         void OpenConnection(
             ContainerInfo containerInfo,

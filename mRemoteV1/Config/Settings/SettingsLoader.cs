@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -7,6 +7,7 @@ using System.Threading;
 using System.Globalization;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
+using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
@@ -23,16 +24,19 @@ namespace mRemoteNG.Config.Settings
         private readonly QuickConnectToolStrip _quickConnectToolStrip;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
         private readonly MultiSshToolStrip _multiSshToolStrip;
+        private readonly IConnectionInitiator _connectionInitiator;
 
         private FrmMain MainForm { get; }
 
 
-        public SettingsLoader(FrmMain mainForm,
-                              MessageCollector messageCollector,
-                              QuickConnectToolStrip quickConnectToolStrip,
-                              ExternalToolsToolStrip externalToolsToolStrip,
-                              MultiSshToolStrip multiSshToolStrip,
-                              MenuStrip mainMenu)
+        public SettingsLoader(
+            FrmMain mainForm,
+            IConnectionInitiator connectionInitiator,
+            MessageCollector messageCollector,
+            QuickConnectToolStrip quickConnectToolStrip,
+            ExternalToolsToolStrip externalToolsToolStrip,
+            MultiSshToolStrip multiSshToolStrip,
+            MenuStrip mainMenu)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -53,7 +57,8 @@ namespace mRemoteNG.Config.Settings
             _externalToolsToolStrip = externalToolsToolStrip;
             _multiSshToolStrip = multiSshToolStrip;
             _mainMenu = mainMenu;
-            _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector, _externalToolsToolStrip);
+            _connectionInitiator = connectionInitiator;
+            _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector, _externalToolsToolStrip, _connectionInitiator);
         }
 
         #region Public Methods
@@ -156,10 +161,10 @@ namespace mRemoteNG.Config.Settings
             MainForm.Fullscreen.Value = true;
         }
 
-        private static void SetShowSystemTrayIcon()
+        private void SetShowSystemTrayIcon()
         {
             if (mRemoteNG.Settings.Default.ShowSystemTrayIcon)
-                Runtime.NotificationAreaIcon = new NotificationAreaIcon();
+                Runtime.NotificationAreaIcon = new NotificationAreaIcon(_connectionInitiator);
         }
 
         private static void SetPuttyPath()

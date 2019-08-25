@@ -5,7 +5,6 @@ using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
-using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Tabs;
@@ -17,10 +16,13 @@ namespace mRemoteNG.Connection
 {
     public class ConnectionInitiator : IConnectionInitiator
     {
-        private readonly PanelAdder _panelAdder = new PanelAdder();
-        private readonly List<string> _activeConnections = new List<string>();
+        private readonly List<ProtocolBase> _activeConnections = new List<ProtocolBase>();
 
-        public IEnumerable<string> ActiveConnections => _activeConnections;
+        public IEnumerable<ProtocolBase> ActiveConnections => _activeConnections;
+
+        public ConnectionInitiator()
+        {
+        }
 
         public bool SwitchToOpenConnection(ConnectionInfo connectionInfo)
         {
@@ -101,7 +103,7 @@ namespace mRemoteNG.Connection
                 }
 
                 connectionInfo.OpenConnections.Add(newProtocol);
-                _activeConnections.Add(connectionInfo.ConstantID);
+                _activeConnections.Add(newProtocol);
                 FrmMain.Default.SelectedConnection = connectionInfo;
             }
             catch (Exception ex)
@@ -141,14 +143,14 @@ namespace mRemoteNG.Connection
             return null;
         }
 
-        private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
+        private string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
             if (connectionInfo.Panel != "" &&
                 !force.HasFlag(ConnectionInfo.Force.OverridePanel) &&
                 !Settings.Default.AlwaysShowPanelSelectionDlg)
                 return connectionInfo.Panel;
 
-            var frmPnl = new FrmChoosePanel();
+            var frmPnl = new FrmChoosePanel(this);
             return frmPnl.ShowDialog() == DialogResult.OK
                 ? frmPnl.Panel
                 : null;
@@ -159,7 +161,7 @@ namespace mRemoteNG.Connection
             var connectionForm = conForm ?? Runtime.WindowList.FromString(connectionPanel) as ConnectionWindow;
 
             if (connectionForm == null)
-                connectionForm = _panelAdder.AddPanel(connectionPanel);
+                connectionForm = new PanelAdder(this).AddPanel(connectionPanel);
             else
                 connectionForm.Show(FrmMain.Default.pnlDock);
 
@@ -256,8 +258,8 @@ namespace mRemoteNG.Connection
                                                                   prot.InterfaceControl.Info.Protocol,
                                                                   Environment.UserName));
                 prot.InterfaceControl.Info.OpenConnections.Remove(prot);
-                if (_activeConnections.Contains(prot.InterfaceControl.Info.ConstantID))
-                    _activeConnections.Remove(prot.InterfaceControl.Info.ConstantID);
+                if (_activeConnections.Contains(prot))
+                    _activeConnections.Remove(prot);
 
                 if (prot.InterfaceControl.Info.PostExtApp == "") return;
                 var extA = Runtime.ExternalToolsService.GetExtAppByName(prot.InterfaceControl.Info.PostExtApp);

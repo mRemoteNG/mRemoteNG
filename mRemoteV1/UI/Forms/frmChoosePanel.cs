@@ -1,5 +1,6 @@
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.Panels;
@@ -10,10 +11,10 @@ namespace mRemoteNG.UI.Forms
     {
         private readonly PanelAdder _panelAdder;
 
-        public FrmChoosePanel()
+        public FrmChoosePanel(IConnectionInitiator connectionInitiator)
         {
             InitializeComponent();
-            _panelAdder = new PanelAdder();
+            _panelAdder = new PanelAdder(connectionInitiator);
         }
 
         public string Panel

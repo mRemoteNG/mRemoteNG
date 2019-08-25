@@ -23,14 +23,15 @@ namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionWindow : BaseWindow
     {
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly IConnectionInitiator _connectionInitiator;
         private VisualStudioToolStripExtender vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         #region Public Methods
 
-        public ConnectionWindow(DockContent panel, string formText = "")
+        public ConnectionWindow(DockContent panel, IConnectionInitiator connectionInitiator, string formText = "")
         {
+            _connectionInitiator = connectionInitiator;
             if (formText == "")
             {
                 formText = Language.strNewPanel;
