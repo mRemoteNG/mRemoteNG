@@ -1,4 +1,4 @@
-using mRemoteNG.App.Info;
+﻿using mRemoteNG.App.Info;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;

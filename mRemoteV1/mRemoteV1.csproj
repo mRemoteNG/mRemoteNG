@@ -736,6 +736,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Panels\PanelAdder.cs" />
+    <Compile Include="UI\SystemKeyboardHook.cs" />
     <Compile Include="UI\Tabs\Enums.cs" />
     <Compile Include="UI\Tabs\ConnectionTab.cs">
       <SubType>Form</SubType>

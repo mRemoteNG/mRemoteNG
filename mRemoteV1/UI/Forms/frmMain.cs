@@ -53,6 +53,14 @@ namespace mRemoteNG.UI.Forms
         private readonly ThemeManager _themeManager;
         private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
+        private readonly SystemKeyboardHook _keyboardHook;
+        private bool _childProcessHeldLastFocus;
+        private bool _currentlyFixingAltTab;
+
+        /// <summary>
+        /// TRUE if any part of mrng has focus - the main window or child processes
+        /// </summary>
+        private bool _mrngFocused;
 
         internal FullscreenHandler Fullscreen { get; set; }
 
@@ -71,6 +79,7 @@ namespace mRemoteNG.UI.Forms
             ApplyTheme();
 
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
+            _keyboardHook = new SystemKeyboardHook(KeyboardHookCallback);
         }
 
         #region Properties
@@ -380,6 +389,8 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _keyboardHook?.Dispose();
+
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
             {
                 var openConnections = 0;
@@ -484,9 +495,8 @@ namespace mRemoteNG.UI.Forms
 
         // Maybe after starting putty, remove its ability to show up in alt-tab?
         // SetWindowLong(this.Handle, GWL_EXSTYLE, (GetWindowLong(this.Handle,GWL_EXSTYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
-        protected override void WndProc(ref System.Windows.Forms.Message m)
+        protected override void WndProc(ref Message m)
         {
-            const int tabKey = 0x09;
             // Listen for and handle operating system messages
             try
             {
@@ -505,41 +515,29 @@ namespace mRemoteNG.UI.Forms
 
                         Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Clicked control: {controlThatWasClicked2}");
                         break;
-                    case NativeMethods.WM_KEYDOWN:
-                    case NativeMethods.WM_SYSKEYDOWN:
-                        if (m.WParam.ToInt32() != tabKey)
-                            break;
-
-                        if ((m.LParam.ToInt32() & 0b00100000000000000000000000000000) == 0) // 29th bit ON means ALT key down
-                            break;
-
-                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "ALT-TAB PRESSED");
-
-                        break;
-                    case NativeMethods.WM_SYSKEYUP:
-                        if (m.WParam.ToInt32() != tabKey)
-                            break;
-
-                        if ((m.LParam.ToInt32() & 0b00100000000000000000000000000000) == 0) // 29th bit ON means ALT key down
-                            break;
-
-                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "ALT-TAB RELEASED");
-
-                        break;
                     case NativeMethods.WM_ACTIVATEAPP:
                         if (m.WParam.ToInt32() == 0) // mRemoteNG is being deactivated
                         {
-                            //var threadWhichIsActivating = m.LParam.ToInt32();
-                            //var activatingChildProcessWindow = _connectionInitiator.ActiveConnections
-                            //    .OfType<ExternalProcessProtocolBase>()
-                            //    .Any(prot => prot.ThreadId == threadWhichIsActivating);
-                            
+                            var threadWhichIsActivating = m.LParam.ToInt32();
+                            _childProcessHeldLastFocus = _connectionInitiator
+                                .ActiveConnections
+                                .OfType<ExternalProcessProtocolBase>()
+                                .Any(proc => proc.ThreadId == threadWhichIsActivating);
+
                             _inMouseActivate = false;
-                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "mRemoteNG main window lost focus");
+                            _mrngFocused = _childProcessHeldLastFocus;
+                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"mRemoteNG main window lost focus (_childProcessHeldLastFocus={_childProcessHeldLastFocus})");
                             break;
                         }
 
-                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "mRemoteNG main window received focus");
+                        if (_childProcessHeldLastFocus && !_mrngFocused)
+                        {
+                            ActivateConnection();
+                        }
+
+                        _childProcessHeldLastFocus = false;
+                        _mrngFocused = true;
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"mRemoteNG main window received focus (_childProcessHeldLastFocus={_childProcessHeldLastFocus})");
 
                         //var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
                         //                       ?? GetChildAtPoint(MousePosition);
@@ -640,16 +638,53 @@ namespace mRemoteNG.UI.Forms
             base.WndProc(ref m);
         }
 
-        protected override bool ProcessKeyMessage(ref Message m)
+        public int KeyboardHookCallback(int msg, NativeMethods.KBDLLHOOKSTRUCT kbd)
         {
-            if (m.WParam.ToInt32() != 0x09)
-                return false;
+            var key = (Keys) kbd.vkCode;
+            if (key.HasFlag(Keys.Tab) && kbd.flags.HasFlag(NativeMethods.KBDLLHOOKSTRUCTFlags.LLKHF_ALTDOWN))
+            {
+                if (msg == NativeMethods.WM_SYSKEYDOWN || msg == NativeMethods.WM_KEYDOWN)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"ALT-TAB PRESSED (CPF={_childProcessHeldLastFocus}, MRNGF={_mrngFocused}, IMA={_inMouseActivate}, CFAT={_currentlyFixingAltTab})");
+                    if (_childProcessHeldLastFocus && _mrngFocused && !_inMouseActivate && !_currentlyFixingAltTab)
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "FIXING ALT-TAB FOR EXTAPP");
+                        _currentlyFixingAltTab = true;
 
-            if ((m.LParam.ToInt32() & 0b00100000000000000000000000000000) == 0) // 29th bit ON means ALT key down
-                return false;
+                        // simulate an extra TAB key press. This skips focus of the mrng main window.
+                        NativeMethods.keybd_event((byte)Keys.Tab, 0, (uint)NativeMethods.KEYEVENTF.KEYUP, 0);
+                        NativeMethods.keybd_event((byte)Keys.Tab, 0, 0, 0);
 
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "ALT-TAB PRESSED");
-            return base.ProcessKeyMessage(ref m);
+                        // WndProc will never get an event when we switch from a child proc to a completely different program since the main mrng window never had focus to begin with.
+                        // Assume mrng as a whole will lose focus, even though the user could choose to retain focus on us. When Alt-tab completes, the mrng main window will
+                        // receive the focus event and we will handle the child process focusing as necessary.
+                        _mrngFocused = false;
+                        _currentlyFixingAltTab = false;
+                    }
+                }
+            }
+
+            // alt + right-shift
+            if (key.HasFlag(Keys.RShiftKey) && kbd.flags.HasFlag(NativeMethods.KBDLLHOOKSTRUCTFlags.LLKHF_ALTDOWN))
+            {
+                if (msg != NativeMethods.WM_SYSKEYUP && msg != NativeMethods.WM_KEYUP)
+                    return 0;
+
+                if (!_mrngFocused)
+                    return 0;
+
+                if (_childProcessHeldLastFocus)
+                {
+                    Focus(); // focus main window
+                    return 1;
+                }
+
+                // focus connection
+                ActivateConnection();
+                return 1;
+            }
+
+            return 0;
         }
 
         private void SimulateClick(Control control)
@@ -677,6 +712,9 @@ namespace mRemoteNG.UI.Forms
 
             //var ifc = InterfaceControl.FindInterfaceControl(tab);
             var tab = TabHelper.Instance.CurrentTab;
+            if (tab == null)
+                return;
+
             var ifc = tab.InterfaceControl;
             if (ifc == null)
             {
