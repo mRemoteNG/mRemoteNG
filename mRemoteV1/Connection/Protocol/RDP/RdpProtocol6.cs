@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
@@ -35,6 +38,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private readonly FrmMain _frmMain = FrmMain.Default;
         protected virtual RdpVersion RdpProtocolVersion => RdpVersion.Rdc6;
         private AxHost AxHost => (AxHost)Control;
+        private readonly NativeMethods.EnumWindowsProc _enumWindowsProc;
 
         #region Properties
 
@@ -101,6 +105,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             _displayProperties = new DisplayProperties();
             tmrReconnect.Elapsed += tmrReconnect_Elapsed;
+            _enumWindowsProc = LpEnumFunc;
         }
 
         #endregion
@@ -243,17 +248,54 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public override void Focus()
         {
+            var result = new List<IntPtr>();
+            var listHandle = GCHandle.Alloc(result);
             try
             {
                 if (Control.ContainsFocus == false)
                 {
-                    Control.Focus();
+                    //AxHost.Focus();
+                    //AxHost.Select();
+                    //AxHost.DoVerb(-1);
+                    //AxHost.DoVerb(-4);
+                    //AxHost.DoVerb(-5);
+
+                    NativeMethods.EnumChildWindows(AxHost.Handle, _enumWindowsProc, GCHandle.ToIntPtr(listHandle));
+                    if (result.Any())
+                    {
+                        NativeMethods.SetFocus(result[0]);
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"RDP connection focused '{connectionInfo.Name}'");
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpFocusFailed, ex);
             }
+            finally
+            {
+                if (listHandle.IsAllocated)
+                    listHandle.Free();
+            }
+        }
+
+        private bool LpEnumFunc(IntPtr hwnd, IntPtr lparam)
+        {
+            var gch = GCHandle.FromIntPtr(lparam);
+            var list = gch.Target as List<IntPtr>;
+            if (list == null)
+                throw new InvalidCastException("GCHandle Target could not be cast as List<IntPtr>");
+
+            var sb = new StringBuilder();
+            NativeMethods.GetClassName(hwnd, sb, 64);
+
+            if (sb.ToString().Equals("IHWindowClass"))
+            {
+                list.Add(hwnd);
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -672,6 +714,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 _rdpClient.OnDisconnected += RDPEvent_OnDisconnected;
                 _rdpClient.OnLeaveFullScreenMode += RDPEvent_OnLeaveFullscreenMode;
                 _rdpClient.OnIdleTimeoutNotification += RDPEvent_OnIdleTimeoutNotification;
+                //_rdpClient.OnFocusReleased += direction => Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"RDP control '{connectionInfo.Name}' released focus.");
+                //AxHost.GotFocus += (sender, args) => Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"RDP control '{connectionInfo.Name}' received focus.");
+                //AxHost.LostFocus += (sender, args) => Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"RDP control '{connectionInfo.Name}' lost focus.");
             }
             catch (Exception ex)
             {
@@ -748,7 +793,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         private void RdpClient_GotFocus(object sender, EventArgs e)
         {
-            ((ConnectionTab)Control.Parent.Parent).Focus();
+            //((ConnectionTab)Control.Parent.Parent).Focus();
         }
         #endregion
 

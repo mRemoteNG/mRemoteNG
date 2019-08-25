@@ -1088,11 +1088,19 @@ namespace mRemoteNG.UI.Tabs
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
+            App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg, "Mouse down");
             base.OnMouseDown(e);
             // suspend drag if mouse is down on active close button.
             m_suspendDrag = ActiveCloseHitTest(e.Location);
             if (!IsMouseDown)
                 IsMouseDown = true;
+
+            var tabIndex = HitTest(e.Location);
+            var tab = Tabs[tabIndex].Content as ConnectionTab;
+            if (tab == null)
+                return;
+            TabHelper.Instance.CurrentTab = tab;
+            TabHelper.Instance.RaiseTabClickedEvent();
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -1149,6 +1157,7 @@ namespace mRemoteNG.UI.Tabs
 
         protected override void OnMouseClick(MouseEventArgs e)
         {
+            App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg, "Mouse click");
             base.OnMouseClick(e);
             if (e.Button != MouseButtons.Left || Appearance != DockPane.AppearanceStyle.Document)
                 return;

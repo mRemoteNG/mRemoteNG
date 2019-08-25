@@ -7,6 +7,7 @@ using mRemoteNG.Config;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Messages;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -14,7 +15,7 @@ namespace mRemoteNG.UI.Tabs
 {
     public partial class ConnectionTab : DockContent
     {
-        private InterfaceControl InterfaceControl => Tag as InterfaceControl;
+        public InterfaceControl InterfaceControl => Tag as InterfaceControl;
 
         /// <summary>
         ///Silent close ignores the popup asking for confirmation
@@ -30,11 +31,33 @@ namespace mRemoteNG.UI.Tabs
         {
             InitializeComponent();
             GotFocus += ConnectionTab_GotFocus;
+            Activated += OnActivated;
+            Click += OnClick;
+        }
+
+        private void OnClick(object sender, EventArgs e)
+        {
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Tab clicked: '{TabText}'");
+        }
+
+        private void OnActivated(object sender, EventArgs e)
+        {
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Tab activated: '{TabText}'");
         }
 
         private void ConnectionTab_GotFocus(object sender, EventArgs e)
         {
-            TabHelper.Instance.CurrentTab = this;
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Tab received focused: '{TabText}'");
+            //TabHelper.Instance.CurrentTab = this;
+            //if (TabHelper.Instance.FocusConnection)
+            //{
+            //    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Focusing connection in tab: '{TabText}'");
+            //    InterfaceControl?.Protocol.Focus();
+            //}
+            //else
+            //{
+            //    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Dont focus connection");
+            //}
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

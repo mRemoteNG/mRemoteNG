@@ -1,4 +1,4 @@
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -23,11 +23,14 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using Message = System.Windows.Forms.Message;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -206,6 +209,18 @@ namespace mRemoteNG.UI.Forms
                     panelAdder.AddPanel(panelName);
             }
 
+            TabHelper.Instance.ActiveConnectionTabChanged += OnActiveConnectionTabChanged;
+            TabHelper.Instance.TabClicked += OnTabClicked;
+        }
+
+        private void OnTabClicked(object sender, EventArgs e)
+        {
+            ActivateConnection();
+        }
+
+        private void OnActiveConnectionTabChanged(object sender, EventArgs e)
+        {
+            ActivateConnection();
         }
 
         private void ApplyLanguage()
@@ -437,6 +452,7 @@ namespace mRemoteNG.UI.Forms
         private void frmMain_ResizeBegin(object sender, EventArgs e)
         {
             _inSizeMove = true;
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Begin app window move/resize");
         }
 
         private void frmMain_Resize(object sender, EventArgs e)
@@ -460,12 +476,17 @@ namespace mRemoteNG.UI.Forms
         private void frmMain_ResizeEnd(object sender, EventArgs e)
         {
             _inSizeMove = false;
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "End app window move/resize");
             // This handles activations from clicks that started a size/move operation
             ActivateConnection();
         }
 
+
+        // Maybe after starting putty, remove its ability to show up in alt-tab?
+        // SetWindowLong(this.Handle, GWL_EXSTYLE, (GetWindowLong(this.Handle,GWL_EXSTYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
         protected override void WndProc(ref System.Windows.Forms.Message m)
         {
+            const int tabKey = 0x09;
             // Listen for and handle operating system messages
             try
             {
@@ -474,63 +495,124 @@ namespace mRemoteNG.UI.Forms
                 {
                     case NativeMethods.WM_MOUSEACTIVATE:
                         _inMouseActivate = true;
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"_inMouseActivate = {_inMouseActivate}");
+
+                        var controlThatWasClicked2 = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
+                                                    ?? GetChildAtPoint(MousePosition);
+
+                        if (controlThatWasClicked2 == null)
+                            break;
+
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Clicked control: {controlThatWasClicked2}");
+                        break;
+                    case NativeMethods.WM_KEYDOWN:
+                    case NativeMethods.WM_SYSKEYDOWN:
+                        if (m.WParam.ToInt32() != tabKey)
+                            break;
+
+                        if ((m.LParam.ToInt32() & 0b00100000000000000000000000000000) == 0) // 29th bit ON means ALT key down
+                            break;
+
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "ALT-TAB PRESSED");
+
+                        break;
+                    case NativeMethods.WM_SYSKEYUP:
+                        if (m.WParam.ToInt32() != tabKey)
+                            break;
+
+                        if ((m.LParam.ToInt32() & 0b00100000000000000000000000000000) == 0) // 29th bit ON means ALT key down
+                            break;
+
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "ALT-TAB RELEASED");
+
                         break;
                     case NativeMethods.WM_ACTIVATEAPP:
-                        var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
-                                               ?? GetChildAtPoint(MousePosition);
-
-                        if (candidateTabToFocus is InterfaceControl)
+                        if (m.WParam.ToInt32() == 0) // mRemoteNG is being deactivated
                         {
-                            candidateTabToFocus.Parent.Focus();
+                            //var threadWhichIsActivating = m.LParam.ToInt32();
+                            //var activatingChildProcessWindow = _connectionInitiator.ActiveConnections
+                            //    .OfType<ExternalProcessProtocolBase>()
+                            //    .Any(prot => prot.ThreadId == threadWhichIsActivating);
+                            
+                            _inMouseActivate = false;
+                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "mRemoteNG main window lost focus");
+                            break;
                         }
 
-                        _inMouseActivate = false;
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "mRemoteNG main window received focus");
+
+                        //var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
+                        //                       ?? GetChildAtPoint(MousePosition);
+                        //if (candidateTabToFocus is InterfaceControl)
+                        //{
+                        //    candidateTabToFocus.Parent.Focus();
+                        //}
+
                         break;
                     case NativeMethods.WM_ACTIVATE:
-                        // Only handle this msg if it was triggered by a click
-                        if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_CLICKACTIVE)
+                        if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_ACTIVE)
                         {
-                            var controlThatWasClicked = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
-                                                     ?? GetChildAtPoint(MousePosition);
-                            if (controlThatWasClicked != null)
-                            {
-                                if (controlThatWasClicked is TreeView ||
-                                    controlThatWasClicked is ComboBox ||
-                                    controlThatWasClicked is TextBox ||
-                                    controlThatWasClicked is FrmMain)
-                                {
-                                    controlThatWasClicked.Focus();
-                                }
-                                else if (controlThatWasClicked.CanSelect ||
-                                         controlThatWasClicked is MenuStrip ||
-                                         controlThatWasClicked is ToolStrip)
-                                {
-                                    // Simulate a mouse event since one wasn't generated by Windows
-                                    SimulateClick(controlThatWasClicked);
-                                    controlThatWasClicked.Focus();
-                                }
-                                else if (controlThatWasClicked is AutoHideStripBase)
-                                {
-                                    // only focus the autohide toolstrip
-                                    controlThatWasClicked.Focus();
-                                }
-                                else
-                                {
-                                    // This handles activations from clicks that did not start a size/move operation
-                                    ActivateConnection();
-                                }
-                            }
+                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "KB ACTIVATE");
                         }
 
+                        // Only handle this msg if it was triggered by a click
+                        if (NativeMethods.LOWORD(m.WParam) != NativeMethods.WA_CLICKACTIVE)
+                            return;
+
+                        var controlThatWasClicked = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
+                                                    ?? GetChildAtPoint(MousePosition);
+
+                        if (controlThatWasClicked == null)
+                            break;
+
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Click activate: {controlThatWasClicked}");
+
+                        if (controlThatWasClicked is TreeView ||
+                            controlThatWasClicked is ComboBox ||
+                            controlThatWasClicked is TextBox ||
+                            controlThatWasClicked is FrmMain ||
+                            controlThatWasClicked is AutoHideStripBase)
+                        {
+                            controlThatWasClicked.Focus();
+                        }
+                        else if (controlThatWasClicked.CanSelect ||
+                                 controlThatWasClicked is MenuStrip ||
+                                 controlThatWasClicked is ToolStrip)
+                        {
+                            // Simulate a mouse event since one wasn't generated by Windows
+                            SimulateClick(controlThatWasClicked);
+                            controlThatWasClicked.Focus();
+                        }
+                        //else
+                        //{
+                        //    // This handles activations from clicks that did not start a size/move operation
+                        //    ActivateConnection();
+                        //}
+
                         break;
+                    case NativeMethods.WM_NCACTIVATE:
+                        //if (m.WParam.ToInt32() == 1)
+                        //    break;
+
+                        //// Never allow the mRemoteNG window to display itself as inactive. By doing this,
+                        //// we ensure focus events can propagate to child connection windows
+                        NativeMethods.DefWindowProc(Handle, Convert.ToUInt32(m.Msg), (IntPtr)1, m.LParam);
+                        m.Result = (IntPtr)1;
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Fixed main app NCACTIVATE");
+                        return;
                     case NativeMethods.WM_WINDOWPOSCHANGED:
                         // Ignore this message if the window wasn't activated
-                        var windowPos =
-                            (NativeMethods.WINDOWPOS)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.WINDOWPOS));
+                        if (!_inMouseActivate)
+                            break;
+
+                        var windowPos = (NativeMethods.WINDOWPOS)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.WINDOWPOS));
                         if ((windowPos.flags & NativeMethods.SWP_NOACTIVATE) == 0)
                         {
                             if (!_inMouseActivate && !_inSizeMove)
+                            {
+                                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "WM_WINDOWPOSCHANGED DONE");
                                 ActivateConnection();
+                            }
                         }
 
                         break;
@@ -558,6 +640,18 @@ namespace mRemoteNG.UI.Forms
             base.WndProc(ref m);
         }
 
+        protected override bool ProcessKeyMessage(ref Message m)
+        {
+            if (m.WParam.ToInt32() != 0x09)
+                return false;
+
+            if ((m.LParam.ToInt32() & 0b00100000000000000000000000000000) == 0) // 29th bit ON means ALT key down
+                return false;
+
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "ALT-TAB PRESSED");
+            return base.ProcessKeyMessage(ref m);
+        }
+
         private void SimulateClick(Control control)
         {
             var clientMousePosition = control.PointToClient(MousePosition);
@@ -571,12 +665,24 @@ namespace mRemoteNG.UI.Forms
 
         private void ActivateConnection()
         {
-            var cw = pnlDock.ActiveDocument as ConnectionWindow;
-            var dp = cw?.ActiveControl as DockPane;
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Performing special connection focus logic");
+            //var cw = pnlDock.ActiveDocument as ConnectionWindow;
+            //var dp = cw?.ActiveControl as DockPane;
 
-            if (!(dp?.ActiveContent is ConnectionTab tab)) return;
-            var ifc = InterfaceControl.FindInterfaceControl(tab);
-            if (ifc == null) return;
+            //if (!(dp?.ActiveContent is ConnectionTab tab))
+            //{
+            //    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Active content is not a tab. We won't focus a specific connection.");
+            //    return;
+            //}
+
+            //var ifc = InterfaceControl.FindInterfaceControl(tab);
+            var tab = TabHelper.Instance.CurrentTab;
+            var ifc = tab.InterfaceControl;
+            if (ifc == null)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"InterfaceControl for tab '{tab.Name}' was not found. We won't focus that connection.");
+                return;
+            }
 
             ifc.Protocol.Focus();
             var conFormWindow = ifc.FindForm();
@@ -585,7 +691,7 @@ namespace mRemoteNG.UI.Forms
 
         private void pnlDock_ActiveDocumentChanged(object sender, EventArgs e)
         {
-            ActivateConnection();
+            //ActivateConnection();
         }
 
         internal void UpdateWindowTitle()

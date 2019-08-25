@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -97,6 +98,7 @@ namespace mRemoteNG.UI.Window
         private void ConnectionWindow_GotFocus(object sender, EventArgs e)
         {
             TabHelper.Instance.CurrentPanel = this;
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Connection window focused: '{TabText}'");
         }
 
         public ConnectionTab AddConnectionTab(ConnectionInfo connectionInfo)

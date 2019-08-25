@@ -63,6 +63,12 @@ namespace mRemoteNG.Connection.Protocol
         public readonly System.Timers.Timer tmrReconnect = new System.Timers.Timer(2000);
         protected ReconnectGroup ReconnectGroup;
 
+        /// <summary>
+        /// Whether this protocol runs as a thread within the main process or if
+        /// it is an external process that is running as a child process.
+        /// </summary>
+        public virtual bool IsExternalProcess { get; } = false;
+
         protected ProtocolBase(string name)
         {
             Name = name;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
@@ -9,7 +9,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.Protocol
 {
-    public class IntegratedProgram : ProtocolBase
+    public class IntegratedProgram : ExternalProcessProtocolBase
     {
         #region Private Fields
 

@@ -63,7 +63,7 @@ namespace mRemoteNG.Tools
 
             foreach (PuttyBase proc in processHandlers)
             {
-                NativeMethods.PostMessage(proc.PuttyHandle, keyType, new IntPtr(keyData), new IntPtr(0));
+                proc.SendKeyStroke(keyType, keyData);
             }
         }
 

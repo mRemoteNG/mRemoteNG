@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using System;
 using System.Drawing;
@@ -25,6 +25,8 @@ namespace mRemoteNG.Connection
                 Location = new Point(0, 0);
                 Size = Parent.Size;
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+                GotFocus += OnGotFocus;
+                LostFocus += OnLostFocus;
                 InitializeComponent();
             }
             catch (Exception ex)
@@ -33,6 +35,16 @@ namespace mRemoteNG.Connection
                                                     "Couldn\'t create new InterfaceControl" + Environment.NewLine +
                                                     ex.Message);
             }
+        }
+
+        private void OnLostFocus(object sender, EventArgs e)
+        {
+            Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg, $"InterfaceControl lost focus '{Info.Name}'");
+        }
+
+        private void OnGotFocus(object sender, EventArgs e)
+        {
+            Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg, $"InterfaceControl gained focus '{Info.Name}'");
         }
 
         public static InterfaceControl FindInterfaceControl(DockPanel DockPnl)

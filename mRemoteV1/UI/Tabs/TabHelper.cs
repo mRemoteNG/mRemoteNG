@@ -4,11 +4,17 @@ using System;
 
 namespace mRemoteNG.UI.Tabs
 {
-    class TabHelper
+    public class TabHelper
     {
         private static readonly Lazy<TabHelper> lazyHelper = new Lazy<TabHelper>(() => new TabHelper());
 
         public static TabHelper Instance => lazyHelper.Value;
+
+        /// <summary>
+        /// Should focus events on a connection tab automatically focus
+        /// its child connection?
+        /// </summary>
+        public bool FocusConnection { get; set; } = true;
 
         private TabHelper()
         {
@@ -21,10 +27,16 @@ namespace mRemoteNG.UI.Tabs
             get => currentTab;
             set
             {
+                if (currentTab == value)
+                {
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg, $"Tab already current: '{currentTab.TabText}'");
+                    return;
+                }
+
                 currentTab = value;
                 findCurrentPanel();
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
-                                                    "Tab got focused: " + currentTab.TabText);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg, $"Current tab changed: '{currentTab.TabText}'");
+                RaiseActiveConnectionTabChangedEvent();
             }
         }
 
@@ -36,7 +48,7 @@ namespace mRemoteNG.UI.Tabs
                 currentForm = currentForm.Parent;
             }
 
-            if (currentForm != null)
+            if (currentForm != null && CurrentPanel != currentForm)
                 CurrentPanel = (ConnectionWindow)currentForm;
         }
 
@@ -47,10 +59,31 @@ namespace mRemoteNG.UI.Tabs
             get => currentPanel;
             set
             {
+                if (currentPanel == value)
+                    return;
+
                 currentPanel = value;
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
-                                                    "Panel got focused: " + currentPanel.TabText);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg, $"Current panel changed: '{currentPanel.TabText}'");
+                RaiseActivePanelChangedEvent();
             }
+        }
+
+        public event EventHandler ActivePanelChanged;
+        protected virtual void RaiseActivePanelChangedEvent()
+        {
+            ActivePanelChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler ActiveConnectionTabChanged;
+        protected virtual void RaiseActiveConnectionTabChangedEvent()
+        {
+            ActiveConnectionTabChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler TabClicked;
+        public void RaiseTabClickedEvent()
+        {
+            TabClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }
