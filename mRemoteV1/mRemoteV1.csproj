@@ -538,6 +538,7 @@
     </Compile>
     <Compile Include="UI\DialogFactory.cs" />
     <Compile Include="UI\DisplayProperties.cs" />
+    <Compile Include="UI\FocusHelpers\ExternalProcessAltTabFocusHelper.cs" />
     <Compile Include="UI\FontOverrider.cs" />
     <Compile Include="UI\FormExtensions.cs" />
     <Compile Include="UI\Forms\FrmOptions.cs">
