@@ -32,6 +32,17 @@ namespace mRemoteNG.Connection.Protocol.Http
                         Xpcom.Initialize("Firefox");
 
                     Control = new GeckoWebBrowser();
+
+                    var culture = Settings.Default.OverrideUICulture;
+                    if (string.IsNullOrEmpty(culture))
+                    {
+                        GeckoPreferences.User["intl.accept_languages"] =
+                            System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+                    }
+                    else
+                    {
+                        GeckoPreferences.User["intl.accept_languages"] = culture;
+                    }
                 }
                 else
                 {
