@@ -44,7 +44,6 @@
     <Content Include="Resources\AppIcon.ico" />
     <Content Include="Resources\Installer_Header.png" />
     <Content Include="Resources\Installer_Side.png" />
-    <Content Include="Resources\License.rtf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomActions" />

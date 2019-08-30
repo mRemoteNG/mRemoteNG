@@ -12,7 +12,7 @@
         <File Id="LicenseFile" Name="License.txt" Source="$(var.SolutionDir)COPYING.TXT" KeyPath="yes" />
       </Component>
       <Component Id="C.Readme" Guid="*">
-        <File Id="ReadmeFile" Name="Readme.txt" Source="$(var.SolutionDir)README.TXT" KeyPath="yes" />
+        <File Id="ReadmeFile" Name="Readme.txt" Source="$(var.SolutionDir)README.md" KeyPath="yes" />
       </Component>
       <Component Id="C.TileManifest" Guid="*">
         <File Id="TileManifest" Name="mRemoteNG.VisualElementsManifest.xml" Source="$(var.SolutionDir)mRemoteV1\bin\Release\mRemoteNG.VisualElementsManifest.xml" KeyPath="yes" />
