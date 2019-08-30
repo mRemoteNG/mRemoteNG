@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Windows.Forms;
 using Gecko;
@@ -9,24 +9,24 @@ using mRemoteNG.UI.Tabs;
 
 namespace mRemoteNG.Connection.Protocol.Http
 {
-    public class HttpBase : ProtocolBase
+    public class HTTPBase : ProtocolBase
     {
         #region Private Properties
 
-        protected string HttpOrHttps;
-        protected int DefaultPort;
-        private Control _wBrowser;
-        private string _tabTitle;
+        private Control wBrowser;
+        protected string httpOrS;
+        protected int defaultPort;
+        private string tabTitle;
 
         #endregion
 
         #region Public Methods
 
-        protected HttpBase(RenderingEngine renderingEngine)
+        protected HTTPBase(RenderingEngine RenderingEngine)
         {
             try
             {
-                if (renderingEngine == RenderingEngine.Gecko)
+                if (RenderingEngine == RenderingEngine.Gecko)
                 {
                     if (!Xpcom.IsInitialized)
                         Xpcom.Initialize("Firefox");
@@ -50,25 +50,25 @@ namespace mRemoteNG.Connection.Protocol.Http
 
             try
             {
-                if (InterfaceControl.Parent is ConnectionTab objConnectionTab) _tabTitle = objConnectionTab.TabText;
+                if (InterfaceControl.Parent is ConnectionTab objConnectionTab) tabTitle = objConnectionTab.TabText;
             }
             catch (Exception)
             {
-                _tabTitle = "";
+                tabTitle = "";
             }
 
             try
             {
-                _wBrowser = Control;
+                wBrowser = Control;
 
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                 {
-                    var geckoBrowser = (GeckoWebBrowser)_wBrowser;
-                    if (geckoBrowser != null)
+                    var GeckoBrowser = (GeckoWebBrowser)wBrowser;
+                    if (GeckoBrowser != null)
                     {
-                        geckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
+                        GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
                         LauncherDialog.Download += geckoBrowser_LauncherDialog_Download;
-                        geckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
+                        GeckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
                     }
                     else
                     {
@@ -77,7 +77,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
                 else
                 {
-                    var objWebBrowser = (WebBrowser)_wBrowser;
+                    var objWebBrowser = (WebBrowser)wBrowser;
                     objWebBrowser.ScrollBarsEnabled = true;
 
                     // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
@@ -101,42 +101,52 @@ namespace mRemoteNG.Connection.Protocol.Http
             try
             {
                 var strHost = InterfaceControl.Info.Hostname;
+                /* 
+                 * Commenting out since this codes doesn't actually do anything at this time...
+                 * Possibly related to MR-221 and/or MR-533 ????
+                 * 
+				string strAuth = "";
 
-                if (InterfaceControl.Info.Port != DefaultPort)
+                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
+				{
+					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(InterfaceControl.Info.Username + ":" + InterfaceControl.Info.Password)) + Environment.NewLine;
+				}
+				*/
+                if (InterfaceControl.Info.Port != defaultPort)
                 {
                     if (strHost.EndsWith("/"))
                     {
                         strHost = strHost.Substring(0, strHost.Length - 1);
                     }
 
-                    if (strHost.Contains(HttpOrHttps + "://") == false)
+                    if (strHost.Contains(httpOrS + "://") == false)
                     {
-                        strHost = HttpOrHttps + "://" + strHost;
+                        strHost = httpOrS + "://" + strHost;
                     }
 
                     if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                     {
-                        ((GeckoWebBrowser)_wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
+                        ((GeckoWebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
                     }
                     else
                     {
-                        ((WebBrowser)_wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
+                        ((WebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
                     }
                 }
                 else
                 {
-                    if (strHost.Contains(HttpOrHttps + "://") == false)
+                    if (strHost.Contains(httpOrS + "://") == false)
                     {
-                        strHost = HttpOrHttps + "://" + strHost;
+                        strHost = httpOrS + "://" + strHost;
                     }
 
                     if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                     {
-                        ((GeckoWebBrowser)_wBrowser).Navigate(strHost);
+                        ((GeckoWebBrowser)wBrowser).Navigate(strHost);
                     }
                     else
                     {
-                        ((WebBrowser)_wBrowser).Navigate(strHost);
+                        ((WebBrowser)wBrowser).Navigate(strHost);
                     }
                 }
 
@@ -160,7 +170,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
-            if (!(_wBrowser is WebBrowser objWebBrowser)) return;
+            if (!(wBrowser is WebBrowser objWebBrowser)) return;
 
             // This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
             objWebBrowser.AllowWebBrowserDrop = false;
@@ -177,35 +187,35 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                 {
-                    if (((GeckoWebBrowser)_wBrowser).DocumentTitle.Length >= 15)
+                    if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
                     {
-                        shortTitle = ((GeckoWebBrowser)_wBrowser).DocumentTitle.Substring(0, 10) + "...";
+                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
                     }
                     else
                     {
-                        shortTitle = ((GeckoWebBrowser)_wBrowser).DocumentTitle;
+                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle;
                     }
                 }
                 else
                 {
-                    if (((WebBrowser)_wBrowser).DocumentTitle.Length >= 15)
+                    if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
                     {
-                        shortTitle = ((WebBrowser)_wBrowser).DocumentTitle.Substring(0, 10) + "...";
+                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
                     }
                     else
                     {
-                        shortTitle = ((WebBrowser)_wBrowser).DocumentTitle;
+                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
                     }
                 }
 
-                if (!string.IsNullOrEmpty(_tabTitle))
-                {
-                   tabP.TabText = _tabTitle + @" - " + shortTitle;
-                }
-                else
-                {
-                   tabP.TabText = shortTitle;
-                }
+                   if (!string.IsNullOrEmpty(tabTitle))
+                   {
+                       tabP.TabText = tabTitle + @" - " + shortTitle;
+                   }
+                   else
+                   {
+                       tabP.TabText = shortTitle;
+                   }
             }
             catch (Exception ex)
             {
@@ -223,35 +233,35 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                 {
-                    if (((GeckoWebBrowser)_wBrowser).DocumentTitle.Length >= 15)
+                    if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
                     {
-                        shortTitle = ((GeckoWebBrowser)_wBrowser).DocumentTitle.Substring(0, 10) + "...";
+                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
                     }
                     else
                     {
-                        shortTitle = ((GeckoWebBrowser)_wBrowser).DocumentTitle;
+                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle;
                     }
                 }
                 else
                 {
-                    if (((WebBrowser)_wBrowser).DocumentTitle.Length >= 15)
+                    if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
                     {
-                        shortTitle = ((WebBrowser)_wBrowser).DocumentTitle.Substring(0, 10) + "...";
+                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
                     }
                     else
                     {
-                        shortTitle = ((WebBrowser)_wBrowser).DocumentTitle;
+                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
                     }
                 }
 
-                if (!string.IsNullOrEmpty(_tabTitle))
-                {
-                  tabP.TabText = _tabTitle + @" - " + shortTitle;
-                }
-                else
-                {
-                  tabP.TabText = shortTitle;
-                }
+                  if (!string.IsNullOrEmpty(tabTitle))
+                  {
+                      tabP.TabText = tabTitle + @" - " + shortTitle;
+                  }
+                  else
+                  {
+                      tabP.TabText = shortTitle;
+                  }
             }
             catch (Exception ex)
             {
@@ -261,36 +271,45 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         private void geckoBrowser_LauncherDialog_Download(object sender, Gecko.LauncherDialogEvent e)
         {
-            var objTarget = Xpcom.CreateInstance<nsILocalFile>("@mozilla.org/file/local;1");
-            using (var tmp = new nsAString(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\mremoteng.download"))
+            nsILocalFile objTarget = Xpcom.CreateInstance<nsILocalFile>("@mozilla.org/file/local;1");
+
+            using (nsAString tmp = new nsAString(@Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\temp.tmp"))
             {
                 objTarget.InitWithPath(tmp);
             }
 
             //Save file dialog
-            var saveFileDialog = new SaveFileDialog
-            {
-                Filter = "All files (*.*)|*.*",
-                FilterIndex = 2,
-                RestoreDirectory = true,
-                FileName = e.Filename
-            };
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                var source = IOService.CreateNsIUri(e.Url);
-                var dest = IOService.CreateNsIUri(new Uri(saveFileDialog.FileName).AbsoluteUri);
-                var t = (nsAStringBase)new nsAString(Path.GetFileName(saveFileDialog.FileName));
-                var persist = Xpcom.CreateInstance<nsIWebBrowserPersist>("@mozilla.org/embedding/browser/nsWebBrowserPersist;1");
-                var nst = Xpcom.CreateInstance<nsITransfer>("@mozilla.org/transfer;1");
+            saveFileDialog1.Filter = "All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FileName = e.Filename;
 
-                nst.Init(source, dest, t, e.Mime, 0, null, persist, false);
-                persist.SetPersistFlagsAttribute(2 | 32 | 16384);
-                persist.SetProgressListenerAttribute(nst);
-                persist.SaveURI(source, null, null, (uint)Gecko.nsIHttpChannelConsts.REFERRER_POLICY_NO_REFERRER, null, null, (nsISupports) dest, null);
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    nsIURI source = IOService.CreateNsIUri(e.Url);
+                    nsIURI dest = IOService.CreateNsIUri(new Uri(@saveFileDialog1.FileName).AbsoluteUri);
+                    nsAStringBase t = (nsAStringBase)new nsAString(System.IO.Path.GetFileName(@saveFileDialog1.FileName));
+
+                    nsIWebBrowserPersist persist = Xpcom.CreateInstance<nsIWebBrowserPersist>("@mozilla.org/embedding/browser/nsWebBrowserPersist;1");
+
+                    nsITransfer nst = Xpcom.CreateInstance<nsITransfer>("@mozilla.org/transfer;1");
+                    nst.Init(source, dest, t, e.Mime, 0, null, persist, false);
+
+                    if (nst != null)
+                    {
+                        persist.SetPersistFlagsAttribute(2 | 32 | 16384);
+                        persist.SetProgressListenerAttribute((nsIWebProgressListener)nst);
+                        persist.SaveURI(source, null, null, (uint)Gecko.nsIHttpChannelConsts.REFERRER_POLICY_NO_REFERRER, null, null, (nsISupports)dest, null);
+                    }
+
+                    myStream.Close();
+                }
             }
-
-            saveFileDialog.Dispose();
         }
 
         #endregion
@@ -300,7 +319,7 @@ namespace mRemoteNG.Connection.Protocol.Http
         public enum RenderingEngine
         {
             [LocalizedAttributes.LocalizedDescription("strHttpInternetExplorer")]
-            Ie = 1,
+            IE = 1,
 
             [LocalizedAttributes.LocalizedDescription("strHttpGecko")]
             Gecko = 2
