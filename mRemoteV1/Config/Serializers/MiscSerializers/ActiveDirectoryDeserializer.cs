@@ -79,8 +79,7 @@ namespace mRemoteNG.Config.Serializers
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.",
-                                                             ex);
+                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.", ex);
             }
         }
 
@@ -96,8 +95,6 @@ namespace mRemoteNG.Config.Serializers
                 Hostname = hostName,
                 Description = description
             };
-            newConnectionInfo.Inheritance.TurnOnInheritanceCompletely();
-            newConnectionInfo.Inheritance.Description = false;
 
             parentContainer.AddChild(newConnectionInfo);
         }
