@@ -1,11 +1,11 @@
-namespace mRemoteNG.Connection.Protocol.Http
+﻿namespace mRemoteNG.Connection.Protocol.Http
 {
-    public class ProtocolHTTP : HTTPBase
+    public class ProtocolHTTP : HttpBase
     {
         public ProtocolHTTP(RenderingEngine RenderingEngine) : base(RenderingEngine)
         {
-            httpOrS = "http";
-            defaultPort = (int)Defaults.Port;
+            HttpOrHttps = "http";
+            DefaultPort = (int)Defaults.Port;
         }
 
         public enum Defaults

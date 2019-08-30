@@ -96,7 +96,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.UseConsoleSession = (bool)dataRow["ConnectToConsole"];
             connectionInfo.UseCredSsp = (bool)dataRow["UseCredSsp"];
             connectionInfo.UseVmId = (bool)dataRow["UseVmId"];
-            connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine),
+            connectionInfo.RenderingEngine = (HttpBase.RenderingEngine)Enum.Parse(typeof(HttpBase.RenderingEngine),
                                                                                   (string)dataRow["RenderingEngine"]);
             connectionInfo.ICAEncryptionStrength =
                 (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength),

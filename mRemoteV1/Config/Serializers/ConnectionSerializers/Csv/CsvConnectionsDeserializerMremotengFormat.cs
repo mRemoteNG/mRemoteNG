@@ -166,7 +166,7 @@ namespace mRemoteNG.Config.Serializers.Csv
 
             if (headers.Contains("RenderingEngine"))
             {
-                HTTPBase.RenderingEngine value;
+                HttpBase.RenderingEngine value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RenderingEngine")], out value))
                     connectionRecord.RenderingEngine = value;
             }

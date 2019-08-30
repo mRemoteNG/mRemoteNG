@@ -98,7 +98,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 UseConsoleSession = true,
                 UseCredSsp = true,
                 UseVmId = false,
-                RenderingEngine = HTTPBase.RenderingEngine.Gecko,
+                RenderingEngine = HttpBase.RenderingEngine.Gecko,
                 ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
                 RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
                 Colors = RDPColors.Colors16Bit,

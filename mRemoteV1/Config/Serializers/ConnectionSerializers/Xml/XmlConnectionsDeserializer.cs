@@ -450,7 +450,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 if (_confVersion >= 1.9)
                 {
                     connectionInfo.RenderingEngine =
-                        xmlnode.GetAttributeAsEnum<HTTPBase.RenderingEngine>("RenderingEngine");
+                        xmlnode.GetAttributeAsEnum<HttpBase.RenderingEngine>("RenderingEngine");
                     connectionInfo.MacAddress = xmlnode.GetAttributeAsString("MacAddress");
                     connectionInfo.Inheritance.RenderingEngine = xmlnode.GetAttributeAsBool("InheritRenderingEngine");
                     connectionInfo.Inheritance.MacAddress = xmlnode.GetAttributeAsBool("InheritMacAddress");
