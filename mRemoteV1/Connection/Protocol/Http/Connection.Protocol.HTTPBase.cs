@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Windows.Forms;
 using Gecko;
@@ -271,45 +271,36 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         private void geckoBrowser_LauncherDialog_Download(object sender, Gecko.LauncherDialogEvent e)
         {
-            nsILocalFile objTarget = Xpcom.CreateInstance<nsILocalFile>("@mozilla.org/file/local;1");
-
-            using (nsAString tmp = new nsAString(@Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\temp.tmp"))
+            var objTarget = Xpcom.CreateInstance<nsILocalFile>("@mozilla.org/file/local;1");
+            using (var tmp = new nsAString(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\mremoteng.download"))
             {
                 objTarget.InitWithPath(tmp);
             }
 
             //Save file dialog
-            Stream myStream;
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-
-            saveFileDialog1.Filter = "All files (*.*)|*.*";
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.FileName = e.Filename;
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            var saveFileDialog = new SaveFileDialog
             {
-                if ((myStream = saveFileDialog1.OpenFile()) != null)
-                {
-                    nsIURI source = IOService.CreateNsIUri(e.Url);
-                    nsIURI dest = IOService.CreateNsIUri(new Uri(@saveFileDialog1.FileName).AbsoluteUri);
-                    nsAStringBase t = (nsAStringBase)new nsAString(System.IO.Path.GetFileName(@saveFileDialog1.FileName));
+                Filter = "All files (*.*)|*.*",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+                FileName = e.Filename
+            };
 
-                    nsIWebBrowserPersist persist = Xpcom.CreateInstance<nsIWebBrowserPersist>("@mozilla.org/embedding/browser/nsWebBrowserPersist;1");
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var source = IOService.CreateNsIUri(e.Url);
+                var dest = IOService.CreateNsIUri(new Uri(saveFileDialog.FileName).AbsoluteUri);
+                var t = (nsAStringBase)new nsAString(Path.GetFileName(saveFileDialog.FileName));
+                var persist = Xpcom.CreateInstance<nsIWebBrowserPersist>("@mozilla.org/embedding/browser/nsWebBrowserPersist;1");
+                var nst = Xpcom.CreateInstance<nsITransfer>("@mozilla.org/transfer;1");
 
-                    nsITransfer nst = Xpcom.CreateInstance<nsITransfer>("@mozilla.org/transfer;1");
-                    nst.Init(source, dest, t, e.Mime, 0, null, persist, false);
-
-                    if (nst != null)
-                    {
-                        persist.SetPersistFlagsAttribute(2 | 32 | 16384);
-                        persist.SetProgressListenerAttribute((nsIWebProgressListener)nst);
-                        persist.SaveURI(source, null, null, (uint)Gecko.nsIHttpChannelConsts.REFERRER_POLICY_NO_REFERRER, null, null, (nsISupports)dest, null);
-                    }
-
-                    myStream.Close();
-                }
+                nst.Init(source, dest, t, e.Mime, 0, null, persist, false);
+                persist.SetPersistFlagsAttribute(2 | 32 | 16384);
+                persist.SetProgressListenerAttribute(nst);
+                persist.SaveURI(source, null, null, (uint)Gecko.nsIHttpChannelConsts.REFERRER_POLICY_NO_REFERRER, null, null, (nsISupports)dest, null);
             }
+
+            saveFileDialog.Dispose();
         }
 
         #endregion
