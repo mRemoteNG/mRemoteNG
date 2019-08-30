@@ -129,9 +129,9 @@ namespace mRemoteNG.UI.Window
             this.olvHosts.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvHosts.DecorateLines = true;
             this.olvHosts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.olvHosts.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.olvHosts.FullRowSelect = true;
             this.olvHosts.GridLines = true;
-            this.olvHosts.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.olvHosts.HideSelection = false;
             this.olvHosts.Location = new System.Drawing.Point(3, 168);
             this.olvHosts.Name = "olvHosts";
@@ -152,60 +152,60 @@ namespace mRemoteNG.UI.Window
             this.importTelnetToolStripMenuItem,
             this.importVNCToolStripMenuItem});
             this.resultsMenuStrip.Name = "resultsMenuStrip";
-            this.resultsMenuStrip.Size = new System.Drawing.Size(150, 158);
+            this.resultsMenuStrip.Size = new System.Drawing.Size(148, 158);
             // 
             // importHTTPToolStripMenuItem
             // 
             this.importHTTPToolStripMenuItem.Name = "importHTTPToolStripMenuItem";
-            this.importHTTPToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.importHTTPToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.importHTTPToolStripMenuItem.Text = "Import HTTP";
             this.importHTTPToolStripMenuItem.Click += new System.EventHandler(this.importHTTPToolStripMenuItem_Click);
             // 
             // importHTTPSToolStripMenuItem
             // 
             this.importHTTPSToolStripMenuItem.Name = "importHTTPSToolStripMenuItem";
-            this.importHTTPSToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.importHTTPSToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.importHTTPSToolStripMenuItem.Text = "Import HTTPS";
             this.importHTTPSToolStripMenuItem.Click += new System.EventHandler(this.importHTTPSToolStripMenuItem_Click);
             // 
             // importRDPToolStripMenuItem
             // 
             this.importRDPToolStripMenuItem.Name = "importRDPToolStripMenuItem";
-            this.importRDPToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.importRDPToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.importRDPToolStripMenuItem.Text = "Import RDP";
             this.importRDPToolStripMenuItem.Click += new System.EventHandler(this.importRDPToolStripMenuItem_Click);
             // 
             // importRloginToolStripMenuItem
             // 
             this.importRloginToolStripMenuItem.Name = "importRloginToolStripMenuItem";
-            this.importRloginToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.importRloginToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.importRloginToolStripMenuItem.Text = "Import Rlogin";
             this.importRloginToolStripMenuItem.Click += new System.EventHandler(this.importRloginToolStripMenuItem_Click);
             // 
             // importSSH2ToolStripMenuItem
             // 
             this.importSSH2ToolStripMenuItem.Name = "importSSH2ToolStripMenuItem";
-            this.importSSH2ToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.importSSH2ToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.importSSH2ToolStripMenuItem.Text = "Import SSH2";
             this.importSSH2ToolStripMenuItem.Click += new System.EventHandler(this.importSSH2ToolStripMenuItem_Click);
             // 
             // importTelnetToolStripMenuItem
             // 
             this.importTelnetToolStripMenuItem.Name = "importTelnetToolStripMenuItem";
-            this.importTelnetToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.importTelnetToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.importTelnetToolStripMenuItem.Text = "Import Telnet";
             this.importTelnetToolStripMenuItem.Click += new System.EventHandler(this.importTelnetToolStripMenuItem_Click);
             // 
             // importVNCToolStripMenuItem
             // 
             this.importVNCToolStripMenuItem.Name = "importVNCToolStripMenuItem";
-            this.importVNCToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.importVNCToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.importVNCToolStripMenuItem.Text = "Import VNC";
             this.importVNCToolStripMenuItem.Click += new System.EventHandler(this.importVNCToolStripMenuItem_Click);
             // 
             // btnImport
             // 
-            this.btnImport._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnImport._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImport.Location = new System.Drawing.Point(765, 27);
             this.btnImport.Name = "btnImport";
@@ -412,7 +412,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnScan
             // 
-            this.btnScan._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnScan._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnScan.Image = global::mRemoteNG.Resources.Search;
             this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -427,8 +427,9 @@ namespace mRemoteNG.UI.Window
             // 
             // ngCheckFirstPort
             // 
-            this.ngCheckFirstPort._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.ngCheckFirstPort._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.ngCheckFirstPort.AutoSize = true;
+            this.ngCheckFirstPort.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ngCheckFirstPort.Location = new System.Drawing.Point(3, 51);
             this.ngCheckFirstPort.Name = "ngCheckFirstPort";
             this.ngCheckFirstPort.Size = new System.Drawing.Size(72, 17);
@@ -440,8 +441,9 @@ namespace mRemoteNG.UI.Window
             // 
             // ngCheckLastPort
             // 
-            this.ngCheckLastPort._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.ngCheckLastPort._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.ngCheckLastPort.AutoSize = true;
+            this.ngCheckLastPort.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ngCheckLastPort.Location = new System.Drawing.Point(3, 75);
             this.ngCheckLastPort.Name = "ngCheckLastPort";
             this.ngCheckLastPort.Size = new System.Drawing.Size(70, 17);

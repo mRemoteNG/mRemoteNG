@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1428: Fixed a rare error when checking for FIPS
 - #1426: Tabbing is reversed in config window
 - #1425: Connections didn't always respect the panel property
+- #841: Allow for sorting in port scan results
 - #553: Browser language not set when using Gecko rendering engine
 - #323: Wallpaper always shows in RDP connections, even when turned off
 
