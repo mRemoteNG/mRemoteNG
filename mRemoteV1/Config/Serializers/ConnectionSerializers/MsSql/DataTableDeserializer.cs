@@ -164,8 +164,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
 
-            if (Enum.TryParse((string)dataRow["RdpVersion"], true, out RdpVersion rdpVersion))
-                connectionInfo.RdpVersion = rdpVersion;
+            if (!dataRow.IsNull("RdpVersion")) // table allows null values which must be handled
+                if (Enum.TryParse((string)dataRow["RdpVersion"], true, out RdpVersion rdpVersion))
+                    connectionInfo.RdpVersion = rdpVersion;
 
             connectionInfo.Inheritance.CacheBitmaps = (bool)dataRow["InheritCacheBitmaps"];
             connectionInfo.Inheritance.Colors = (bool)dataRow["InheritColors"];

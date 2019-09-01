@@ -1336,7 +1336,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPanelName" xml:space="preserve">
     <value>Panel Name</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Password protect</value>
   </data>
   <data name="strPasswordStatusMustMatch" xml:space="preserve">
@@ -2818,5 +2818,11 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
     <value>Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version.</value>
+  </data>
+  <data name="strStartMinimized" xml:space="preserve">
+    <value>Start minimized</value>
+  </data>
+  <data name="strPropertyDescriptionPasswordProtect" xml:space="preserve">
+    <value>Set a password needed to encrypt the connection file with. You will be prompted to enter your passcode before starting mRemoteNG.</value>
   </data>
 </root>

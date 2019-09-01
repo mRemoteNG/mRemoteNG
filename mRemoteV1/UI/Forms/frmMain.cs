@@ -201,6 +201,13 @@ namespace mRemoteNG.UI.Forms
 
             FrmSplashScreen.getInstance().Close();
 
+            if (Settings.Default.StartMinimized)
+            {
+                WindowState = FormWindowState.Minimized;
+                if (Settings.Default.MinimizeToTray)
+                    ShowInTaskbar = false;
+            }
+
             if (Settings.Default.CreateEmptyPanelOnStartUp)
             {
                 var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)

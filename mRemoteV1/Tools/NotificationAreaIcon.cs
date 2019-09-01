@@ -95,9 +95,15 @@ namespace mRemoteNG.Tools
         private static void nI_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (FrmMain.Visible)
+            {
                 HideForm();
+                FrmMain.ShowInTaskbar = false;
+            }
             else
+            {
                 ShowForm();
+                FrmMain.ShowInTaskbar = true;
+            }
         }
 
         private static void ShowForm()

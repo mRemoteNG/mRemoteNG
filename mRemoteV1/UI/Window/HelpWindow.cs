@@ -1,6 +1,8 @@
 ﻿using mRemoteNG.App.Info;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
+using Gecko;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -8,28 +10,29 @@ namespace mRemoteNG.UI.Window
 {
     public class HelpWindow : BaseWindow
     {
+        private GeckoWebBrowser geckoWebBrowser;
         #region Form Init
-        private WebBrowser _wbHelp;
 
         private void InitializeComponent()
         {
-            this._wbHelp = new System.Windows.Forms.WebBrowser();
+            this.geckoWebBrowser = new Gecko.GeckoWebBrowser();
             this.SuspendLayout();
             // 
-            // wbHelp
+            // geckoWebBrowser
             // 
-            this._wbHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._wbHelp.Location = new System.Drawing.Point(0, 0);
-            this._wbHelp.MinimumSize = new System.Drawing.Size(20, 20);
-            this._wbHelp.Name = "_wbHelp";
-            this._wbHelp.ScriptErrorsSuppressed = true;
-            this._wbHelp.Size = new System.Drawing.Size(542, 323);
-            this._wbHelp.TabIndex = 1;
+            this.geckoWebBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.geckoWebBrowser.FrameEventsPropagateToMainWindow = false;
+            this.geckoWebBrowser.Location = new System.Drawing.Point(0, 0);
+            this.geckoWebBrowser.Name = "geckoWebBrowser";
+            this.geckoWebBrowser.Size = new System.Drawing.Size(542, 323);
+            this.geckoWebBrowser.TabIndex = 0;
+            this.geckoWebBrowser.UseHttpActivityObserver = false;
+            this.geckoWebBrowser.DomClick += new System.EventHandler<Gecko.DomMouseEventArgs>(this.LinkClicked);
             // 
             // HelpWindow
             // 
             this.ClientSize = new System.Drawing.Size(542, 323);
-            this.Controls.Add(this._wbHelp);
+            this.Controls.Add(this.geckoWebBrowser);
             this.Icon = global::mRemoteNG.Resources.Help_Icon;
             this.Name = "HelpWindow";
             this.TabText = "Help";
@@ -47,6 +50,8 @@ namespace mRemoteNG.UI.Window
         {
             WindowType = WindowType.Help;
             DockPnl = new DockContent();
+            if (!Xpcom.IsInitialized)
+                Xpcom.Initialize("Firefox");
             InitializeComponent();
         }
 
@@ -54,9 +59,19 @@ namespace mRemoteNG.UI.Window
 
         #region Private Methods
 
-        private void HelpWindow_Load(object sender, EventArgs e)
+        private void HelpWindow_Load(object sender, EventArgs e) => geckoWebBrowser.Navigate(GeneralAppInfo.HomePath + @"\Help\index.html");
+
+        private void LinkClicked(object sender, DomMouseEventArgs e)
         {
-            _wbHelp.Navigate(GeneralAppInfo.HomePath + @"\Help\index.html");
+            var url = ((GeckoWebBrowser) sender).StatusText;
+            if (url.StartsWith("file://"))
+            {
+                geckoWebBrowser.Navigate(url);
+                e.Handled = true;
+                return;
+            }
+            Process.Start(url);
+            e.Handled = true;
         }
 
         #endregion

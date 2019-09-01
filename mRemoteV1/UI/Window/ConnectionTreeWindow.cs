@@ -23,6 +23,7 @@ namespace mRemoteNG.UI.Window
     {
         private readonly IConnectionInitiator _connectionInitiator;
         private ThemeManager _themeManager;
+        private bool sortedAz = true;
 
         public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
 
@@ -91,7 +92,7 @@ namespace mRemoteNG.UI.Window
             mMenAddFolder.ToolTipText = Language.strAddFolder;
             mMenViewExpandAllFolders.ToolTipText = Language.strExpandAllFolders;
             mMenViewCollapseAllFolders.ToolTipText = Language.strCollapseAllFolders;
-            mMenSortAscending.ToolTipText = Language.strSortAsc;
+            mMenSort.ToolTipText = Language.strSort;
             mMenFavorites.ToolTipText = Language.Favorites;
 
             txtSearch.Text = Language.strSearchPrompt;
@@ -201,7 +202,21 @@ namespace mRemoteNG.UI.Window
                 olvConnections.CollapseAll();
                 olvConnections.Expand(olvConnections.GetRootConnectionNode());
             };
-            mMenSortAscending.Click += (sender, args) => olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
+            mMenSort.Click += (sender, args) =>
+            {
+                if (sortedAz)
+                {
+                    olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
+                    mMenSort.Image = mRemoteNG.Resources.Sort_ZA;
+                    sortedAz = false;
+                }
+                else
+                {
+                    olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Descending);
+                    mMenSort.Image = mRemoteNG.Resources.Sort_AZ;
+                    sortedAz = true;
+                }
+            };
             mMenFavorites.Click += (sender, args) =>
             {
                 mMenFavorites.DropDownItems.Clear();
