@@ -1096,6 +1096,9 @@ namespace mRemoteNG.UI.Tabs
                 IsMouseDown = true;
 
             var tabIndex = HitTest(e.Location);
+            if (tabIndex < 0 || tabIndex >= Tabs.Count)
+                return;
+
             var tab = Tabs[tabIndex].Content as ConnectionTab;
             if (tab == null)
                 return;
