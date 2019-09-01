@@ -1576,7 +1576,7 @@ namespace mRemoteNG.App
             int cbSize);
 
         [DllImport("user32.dll")]
-        public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
+        internal static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
         #endregion
 
         #region Virtual Key Codes

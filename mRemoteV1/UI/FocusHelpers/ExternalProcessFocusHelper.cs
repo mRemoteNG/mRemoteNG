@@ -162,19 +162,6 @@ namespace mRemoteNG.UI.FocusHelpers
                 }
             }
 
-            // Alt + `
-            if (key.HasFlag(Keys.Oem3) && kbd.flags.HasFlag(NativeMethods.KBDLLHOOKSTRUCTFlags.LLKHF_ALTDOWN))
-            {
-                if (msg != NativeMethods.WM_SYSKEYUP && msg != NativeMethods.WM_KEYUP)
-                    return 0;
-
-                if (!MrngFocused)
-                    return 0;
-
-                ToggleFocus();
-                return 1;
-            }
-
             return 0;
         }
 
