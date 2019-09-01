@@ -2819,4 +2819,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
     <value>Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version.</value>
   </data>
+  <data name="strStartMinimized" xml:space="preserve">
+    <value>Start minimized</value>
+  </data>
 </root>

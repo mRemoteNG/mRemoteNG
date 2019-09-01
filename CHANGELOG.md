@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1512: Added option to close panel from right click menu
 - #1434: Revised sort button in connection tree to be able to sort in both orders
 - #1400: Added file download handling to HTTP(S) connections using Gecko
+- #1385: Added option to start mRemoteNG minimized
 - #826: Allow selecting RDP version to use when connecting
 ### Changed
 - #1468: Improved mRemoteNG startup time

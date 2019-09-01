@@ -2684,4 +2684,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="strPropertyDescriptionRdpVersion" xml:space="preserve">
     <value>Legt die Version des RDP fest, die beim Öffnen von Verbindungen verwendet wird.</value>
   </data>
+  <data name="strStartMinimized" xml:space="preserve">
+    <value>Minimiert starten</value>
+  </data>
 </root>

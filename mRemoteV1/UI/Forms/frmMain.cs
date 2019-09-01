@@ -1,4 +1,4 @@
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -192,6 +192,13 @@ namespace mRemoteNG.UI.Forms
             pnlDock.ShowDocumentIcon = true;
 
             FrmSplashScreen.getInstance().Close();
+
+            if (Settings.Default.StartMinimized)
+            {
+                WindowState = FormWindowState.Minimized;
+                if (Settings.Default.MinimizeToTray)
+                    ShowInTaskbar = false;
+            }
 
             if (!Settings.Default.CreateEmptyPanelOnStartUp) return;
             var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
