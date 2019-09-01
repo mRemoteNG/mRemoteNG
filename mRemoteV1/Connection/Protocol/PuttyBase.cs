@@ -49,6 +49,7 @@ namespace mRemoteNG.Connection.Protocol
         {
             try
             {
+                base.Connect();
                 var arguments = BuildPuttyCommandLineArguments(InterfaceControl.Info);
 
                 ProtocolProcess = new Process
@@ -103,7 +104,6 @@ namespace mRemoteNG.Connection.Protocol
                                                                   InterfaceControl.Parent.Handle), true);
 
                 Resize(this, new EventArgs());
-                base.Connect();
                 return true;
             }
             catch (Exception ex)
