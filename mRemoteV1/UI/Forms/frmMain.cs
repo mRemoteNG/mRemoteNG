@@ -478,7 +478,7 @@ namespace mRemoteNG.UI.Forms
             // Listen for and handle operating system messages
             try
             {
-                if (_focusHelper?.HandleWndProc(ref m) == true)
+                if (_focusHelper?.HandleWndProc(ref m, wm => base.WndProc(ref wm)) == true)
                     return;
 
                 // ReSharper disable once SwitchStatementMissingSomeCases
@@ -494,11 +494,6 @@ namespace mRemoteNG.UI.Forms
                         Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Clicked control: {controlThatWasClicked2}");
                         break;
                     case NativeMethods.WM_ACTIVATE:
-                        if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_ACTIVE)
-                        {
-                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "KB ACTIVATE");
-                        }
-
                         // Only handle this msg if it was triggered by a click
                         if (NativeMethods.LOWORD(m.WParam) != NativeMethods.WA_CLICKACTIVE)
                             return;

@@ -368,19 +368,42 @@ namespace mRemoteNG.App
         #region Window Messages
 
         /// <summary>
-        /// Sent when an application requests that a window be created by calling the CreateWindowEx or CreateWindow function. (The message is sent before the function returns.) The window procedure of the new window receives this message after the window is created, but before the window becomes visible.
+        /// Sent when an application requests that a window be created by calling
+        /// the CreateWindowEx or CreateWindow function. (The message is sent before
+        /// the function returns.) The window procedure of the new window receives
+        /// this message after the window is created, but before the window becomes
+        /// visible.
         /// </summary>
         public const int WM_CREATE = 0x1;
 
         /// <summary>
-        /// Sent when a window is being destroyed. It is sent to the window procedure of the window being destroyed after the window is removed from the screen. This message is sent first to the window being destroyed and then to the child windows(if any) as they are destroyed.During the processing of the message, it can be assumed that all child windows still exist.
+        /// Sent when a window is being destroyed. It is sent to the window procedure
+        /// of the window being destroyed after the window is removed from the screen.
+        /// This message is sent first to the window being destroyed and then to the
+        /// child windows(if any) as they are destroyed.During the processing of the
+        /// message, it can be assumed that all child windows still exist.
         /// </summary>
         public const int WM_DESTROY = 0x2;
 
         /// <summary>
-        /// Sent to both the window being activated and the window being deactivated. If the windows use the same input queue, the message is sent synchronously, first to the window procedure of the top-level window being deactivated, then to the window procedure of the top-level window being activated. If the windows use different input queues, the message is sent asynchronously, so the window is activated immediately.
+        /// Sent to both the window being activated and the window being deactivated.
+        /// If the windows use the same input queue, the message is sent synchronously,
+        /// first to the window procedure of the top-level window being deactivated,
+        /// then to the window procedure of the top-level window being activated. If
+        /// the windows use different input queues, the message is sent asynchronously,
+        /// so the window is activated immediately.
         /// </summary>
         public const int WM_ACTIVATE = 0x6;
+
+        /// <summary>
+        /// Sent to a window after it has gained the keyboard focus.
+        /// </summary>
+        public const int WM_SETFOCUS = 0x7;
+
+        /// <summary>
+        /// Sent to a window immediately before it loses the keyboard focus.
+        /// </summary>
+        public const int WM_KILLFOCUS = 0x8;
 
         /// <summary>
         /// 

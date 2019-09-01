@@ -17,8 +17,6 @@ namespace mRemoteNG.UI.FocusHelpers
         private readonly SystemKeyboardHook _keyboardHook;
         private bool _currentlyFixingAltTab;
         private bool _childProcessHeldLastFocus;
-        private bool _mainWindowFocused;
-        private bool _connectionReleasingFocus;
         private bool _inSizeMove;
         private bool _fixingMainWindowFocus;
 
@@ -27,24 +25,20 @@ namespace mRemoteNG.UI.FocusHelpers
         /// </summary>
         public bool MrngFocused => MainWindowFocused || ChildProcessFocused;
 
+        /// <summary>
+        /// TRUE when the main mRemoteNG window has focus.
+        /// </summary>
+        public bool MainWindowFocused { get; private set; }
 
-        public bool MainWindowFocused
-        {
-            get => _mainWindowFocused;
-            set
-            {
-                if (_mainWindowFocused == value)
-                    return;
-
-                _mainWindowFocused = value;
-                // main window is receiving focus
-                if (ChildProcessHeldLastFocus && _mainWindowFocused && !_connectionReleasingFocus)
-                    ActivateConnection();
-            }
-        }
-
+        /// <summary>
+        /// TRUE when a child process (not the mRemoteNG main window) has focus.
+        /// </summary>
         public bool ChildProcessFocused => _extFocusCount > 0;
 
+        /// <summary>
+        /// TRUE when a child process was the last window within mRemoteNG
+        /// to have focus.
+        /// </summary>
         public bool ChildProcessHeldLastFocus
         {
             get => _childProcessHeldLastFocus;
@@ -119,15 +113,39 @@ namespace mRemoteNG.UI.FocusHelpers
                 return;
             }
 
-            _fixingMainWindowFocus = true;
-            //_focusMainWindowAction();
-            _fixingMainWindowFocus = false;
-
             ifc.Protocol.Focus();
-            //var conFormWindow = ifc.FindForm();
-            //((ConnectionTab) conFormWindow)?.RefreshInterfaceController();
+            var conFormWindow = ifc.FindForm();
+            ((ConnectionTab)conFormWindow)?.RefreshInterfaceController();
         }
 
+        /// <summary>
+        /// Toggle focus between the main window and the last active external app.
+        /// </summary>
+        public void ToggleFocus()
+        {
+            if (ChildProcessFocused)
+            {
+                ForceExtAppToGiveUpFocus();
+                var focused = NativeMethods.SetForegroundWindow(_mainWindowHandle);
+            }
+            else if (MainWindowFocused)
+            {
+                ActivateConnection();
+            }
+        }
+
+        /// <summary>
+        /// A hook into system keyboard events. 
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="kbd"></param>
+        /// <remarks>
+        /// This is the only way we can detect ALT-TAB events on Win10, since the EVENT_SYSTEM_SWITCHSTART and
+        /// EVENT_SYSTEM_SWITCHEND events do not seem to fire. If there is another way to detect that a user
+        /// is switching between apps using ALT-TAB, then we should try to use that. Hooking into keyboard
+        /// events like this feels dirty, as it is often used by malicious programs.
+        /// </remarks>
+        /// <returns></returns>
         private int KeyboardHookCallback(int msg, NativeMethods.KBDLLHOOKSTRUCT kbd)
         {
             var key = (Keys)kbd.vkCode;
@@ -145,28 +163,25 @@ namespace mRemoteNG.UI.FocusHelpers
             }
 
             // Alt + `
-            //if (key.HasFlag(Keys.Oem3) && kbd.flags.HasFlag(NativeMethods.KBDLLHOOKSTRUCTFlags.LLKHF_ALTDOWN))
-            //{
-            //    if (msg != NativeMethods.WM_SYSKEYUP && msg != NativeMethods.WM_KEYUP)
-            //        return 0;
+            if (key.HasFlag(Keys.Oem3) && kbd.flags.HasFlag(NativeMethods.KBDLLHOOKSTRUCTFlags.LLKHF_ALTDOWN))
+            {
+                if (msg != NativeMethods.WM_SYSKEYUP && msg != NativeMethods.WM_KEYUP)
+                    return 0;
 
-            //    if (ChildProcessFocused)
-            //    {
-            //        _connectionReleasingFocus = true;
-            //        var focused = NativeMethods.SetForegroundWindow(_mainWindowHandle);
-            //        _connectionReleasingFocus = false;
-            //        return 1;
-            //    }
+                if (!MrngFocused)
+                    return 0;
 
-            //    if (!MainWindowFocused)
-            //        return 0;
-            //    ActivateConnection();
-            //    return 1;
-            //}
+                ToggleFocus();
+                return 1;
+            }
 
             return 0;
         }
 
+        /// <summary>
+        /// Ensure that focus events on the main window are allowed to complete
+        /// without the external app stealing focus away.
+        /// </summary>
         private void ForceExtAppToGiveUpFocus()
         {
             if (!ChildProcessHeldLastFocus)
@@ -176,13 +191,18 @@ namespace mRemoteNG.UI.FocusHelpers
             ChildProcessHeldLastFocus = false;
         }
 
+        /// <summary>
+        /// When we alt-tab and an external app has focus, 
+        /// </summary>
         private void FixExternalAppAltTab()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "FIXING ALT-TAB FOR EXTAPP");
             _currentlyFixingAltTab = true;
 
             // simulate an extra TAB key press. This skips focus of the mrng main window.
+            // end the current alt-tab key press
             NativeMethods.keybd_event((byte) Keys.Tab, 0, (uint) NativeMethods.KEYEVENTF.KEYUP, 0);
+            // start a new alt-tab key press
             NativeMethods.keybd_event((byte) Keys.Tab, 0, 0, 0);
 
             // WndProc will never get an event when we switch from a child proc to a completely different program since the main mrng window never had focus to begin with.
@@ -190,11 +210,6 @@ namespace mRemoteNG.UI.FocusHelpers
             // receive the focus event and we will handle the child process focusing as necessary.
             MainWindowFocused = false;
             _currentlyFixingAltTab = false;
-        }
-
-        public void Dispose()
-        {
-            _keyboardHook?.Dispose();
         }
 
         private void ExternalWindowFocused()
@@ -216,11 +231,16 @@ namespace mRemoteNG.UI.FocusHelpers
         /// base windows own WndProc handling.
         /// </summary>
         /// <param name="m"></param>
+        /// <param name="baseWindowProcessMessage">
+        /// Call this with the current message to allow the default window handler
+        /// to process the message. Useful if you want to perform some work after
+        /// the default processing is complete.
+        /// </param>
         /// <returns>
         /// Returns true if an action has been taken which should override the
         /// base windows own WndProc handling.
         /// </returns>
-        public bool HandleWndProc(ref Message m)
+        public bool HandleWndProc(ref Message m, Action<Message> baseWindowProcessMessage)
         {
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (m.Msg)
@@ -251,6 +271,20 @@ namespace mRemoteNG.UI.FocusHelpers
                     Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"mRemoteNG main window received focus (_childProcessHeldLastFocus={ChildProcessHeldLastFocus})");
 
                     break;
+                case NativeMethods.WM_SETFOCUS:
+                    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "WM_SETFOCUS");
+                    _fixingMainWindowFocus = true;
+                    baseWindowProcessMessage(m);
+                    _fixingMainWindowFocus = false;
+                    if (ChildProcessHeldLastFocus && MainWindowFocused)
+                        ActivateConnection();
+                    return true;
+                case NativeMethods.WM_ACTIVATE:
+                    if (m.WParam.ToInt32() == NativeMethods.WA_INACTIVE)
+                        break;
+                    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "WM_ACTIVATE");
+                    break;
+
                 case NativeMethods.WM_NCACTIVATE:
                     // Never allow the mRemoteNG window to display itself as inactive. By doing this,
                     // we ensure focus events can propagate to child connection windows
@@ -283,11 +317,24 @@ namespace mRemoteNG.UI.FocusHelpers
                             ActivateConnection();
                         }
                     }
-
                     break;
             }
 
             return false;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing)
+                return;
+
+            _keyboardHook?.Dispose();
         }
     }
 }
