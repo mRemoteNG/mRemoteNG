@@ -341,8 +341,7 @@ namespace mRemoteNG.Connection.Protocol
         {
             if (!disposing) return;
 
-            if(tmrReconnect != null)
-                tmrReconnect.Dispose();
+            tmrReconnect?.Dispose();
         }
 
         public void Dispose()

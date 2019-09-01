@@ -252,6 +252,7 @@
     <Compile Include="App\ProgramRoot.cs" />
     <Compile Include="Connection\ConnectionInitiator.cs" />
     <Compile Include="Connection\ConnectionsService.cs" />
+    <Compile Include="Connection\ConnectionStartingEvent.cs" />
     <Compile Include="Connection\Converter.cs" />
     <Compile Include="Connection\DefaultConnectionInfo.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\ExternalProcessProtocolBase.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
+    <Compile Include="Connection\Protocol\IFocusable.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\AuthenticationLevel.cs" />
     <Compile Include="Connection\Protocol\RDP\AzureLoadBalanceInfoEncoder.cs" />
@@ -538,7 +540,7 @@
     </Compile>
     <Compile Include="UI\DialogFactory.cs" />
     <Compile Include="UI\DisplayProperties.cs" />
-    <Compile Include="UI\FocusHelpers\ExternalProcessAltTabFocusHelper.cs" />
+    <Compile Include="UI\FocusHelpers\ExternalProcessFocusHelper.cs" />
     <Compile Include="UI\FontOverrider.cs" />
     <Compile Include="UI\FormExtensions.cs" />
     <Compile Include="UI\Forms\FrmOptions.cs">

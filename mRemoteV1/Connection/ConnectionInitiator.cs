@@ -16,12 +16,14 @@ namespace mRemoteNG.Connection
 {
     public class ConnectionInitiator : IConnectionInitiator
     {
+        private readonly ProtocolFactory _protocolFactory;
         private readonly List<ProtocolBase> _activeConnections = new List<ProtocolBase>();
 
         public IEnumerable<ProtocolBase> ActiveConnections => _activeConnections;
 
-        public ConnectionInitiator()
+        public ConnectionInitiator(ProtocolFactory protocolFactory)
         {
+            _protocolFactory = protocolFactory;
         }
 
         public bool SwitchToOpenConnection(ConnectionInfo connectionInfo)
@@ -34,6 +36,8 @@ namespace mRemoteNG.Connection
             findForm?.Show(findForm.DockPanel);
             return true;
         }
+
+        
 
         public void OpenConnection(
             ContainerInfo containerInfo,
@@ -77,8 +81,7 @@ namespace mRemoteNG.Connection
                         return;
                 }
 
-                var protocolFactory = new ProtocolFactory();
-                var newProtocol = protocolFactory.CreateProtocol(connectionInfo);
+                var newProtocol = _protocolFactory.CreateProtocol(connectionInfo);
 
                 var connectionPanel = SetConnectionPanel(connectionInfo, force);
                 if (string.IsNullOrEmpty(connectionPanel)) return;
@@ -96,6 +99,7 @@ namespace mRemoteNG.Connection
                     return;
                 }
 
+                OnConnectionStarting(newProtocol.InterfaceControl.Info, newProtocol);
                 if (newProtocol.Connect() == false)
                 {
                     newProtocol.Close();
@@ -225,11 +229,11 @@ namespace mRemoteNG.Connection
                 }
 
                 Runtime.MessageCollector.AddMessage(msgClass,
-                                                    string.Format(
-                                                                  Language.strProtocolEventDisconnected,
-                                                                  disconnectedMessage,
-                                                                  prot.InterfaceControl.Info.Hostname,
-                                                                  prot.InterfaceControl.Info.Protocol.ToString()));
+                    string.Format(
+                        Language.strProtocolEventDisconnected,
+                        disconnectedMessage,
+                        prot.InterfaceControl.Info.Hostname,
+                        prot.InterfaceControl.Info.Protocol.ToString()));
             }
             catch (Exception ex)
             {
@@ -271,7 +275,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private static void Prot_Event_Connected(object sender)
+        private void Prot_Event_Connected(object sender)
         {
             var prot = (ProtocolBase)sender;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected,
@@ -304,5 +308,11 @@ namespace mRemoteNG.Connection
         }
 
         #endregion
+
+        public event EventHandler<ConnectionStartingEvent> ConnectionStarting;
+        protected virtual void OnConnectionStarting(ConnectionInfo connectionInfo, ProtocolBase protocolBase)
+        {
+            ConnectionStarting?.Invoke(this, new ConnectionStartingEvent(connectionInfo, protocolBase));
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.UI.Window;
 using NUnit.Framework;
 using WeifenLuo.WinFormsUI.Docking;
@@ -14,7 +15,7 @@ namespace mRemoteNGTests.UI.Window
         [SetUp]
         public void Setup()
         {
-            _connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), new ConnectionInitiator());
+            _connectionTreeWindow = new ConnectionTreeWindow(new DockContent(), new ConnectionInitiator(new ProtocolFactory()));
         }
 
         [TearDown]

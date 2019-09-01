@@ -134,7 +134,7 @@ namespace mRemoteNG.UI.Window
 
                 var conTab = new ConnectionTab
                 {
-                    Tag = connectionInfo,
+                    Tag = connectionInfo, // BUG: the Tag gets set to an InterfaceControl later on. Is this right?
                     DockAreas = DockAreas.Document | DockAreas.Float,
                     Icon = ConnectionIcon.FromString(connectionInfo.Icon),
                     TabText = titleText,

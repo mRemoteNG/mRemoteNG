@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.UI.Window;
@@ -20,5 +21,7 @@ namespace mRemoteNG.Connection
             ConnectionWindow conForm = null);
 
         bool SwitchToOpenConnection(ConnectionInfo connectionInfo);
+
+        event EventHandler<ConnectionStartingEvent> ConnectionStarting;
     }
 }

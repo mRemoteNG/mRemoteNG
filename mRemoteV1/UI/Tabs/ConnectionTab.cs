@@ -48,16 +48,7 @@ namespace mRemoteNG.UI.Tabs
         private void ConnectionTab_GotFocus(object sender, EventArgs e)
         {
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Tab received focused: '{TabText}'");
-            //TabHelper.Instance.CurrentTab = this;
-            //if (TabHelper.Instance.FocusConnection)
-            //{
-            //    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Focusing connection in tab: '{TabText}'");
-            //    InterfaceControl?.Protocol.Focus();
-            //}
-            //else
-            //{
-            //    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Dont focus connection");
-            //}
+            TabHelper.Instance.CurrentTab = this;
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

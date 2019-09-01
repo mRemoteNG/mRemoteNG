@@ -5,16 +5,37 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Connection.Protocol
 {
-    public class ExternalProcessProtocolBase : ProtocolBase
+    public abstract class ExternalProcessProtocolBase : ProtocolBase, IFocusable
     {
         private IntPtr _winEventHook;
         private NativeMethods.WinEventDelegate _setForegroundDelegate;
+        private bool _hasFocus;
 
         public override bool IsExternalProcess { get; } = true;
 
         protected Process ProtocolProcess { get; set; }
 
         protected IntPtr ProcessHandle { get; set; }
+
+        public bool HasFocus
+        {
+            get => _hasFocus;
+            private set
+            {
+                if (_hasFocus == value)
+                    return;
+
+                _hasFocus = value;
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                    string.Format("External protocol window set to {0}. name:'{1}', protocol:'{2}', pid:{3}, hwnd:{4}",
+                        _hasFocus ? "foreground" : "background",
+                        InterfaceControl.Info.Name,
+                        InterfaceControl.Info.Protocol,
+                        ProtocolProcess.Id,
+                        ProcessHandle));
+                OnFocusChanged();
+            }
+        }
 
         public int ThreadId => (int)NativeMethods.GetWindowThreadProcessId(ProcessHandle, IntPtr.Zero);
 
@@ -27,7 +48,7 @@ namespace mRemoteNG.Connection.Protocol
                 NativeMethods.EVENT_SYSTEM_FOREGROUND,
                 IntPtr.Zero,
                 _setForegroundDelegate,
-                Convert.ToUInt32(ProtocolProcess.Id),
+                /*Convert.ToUInt32(ProtocolProcess.Id)*/0,
                 0,
                 NativeMethods.WINEVENT_OUTOFCONTEXT);
 
@@ -63,16 +84,15 @@ namespace mRemoteNG.Connection.Protocol
 
             var setForegroundSuccessful = NativeMethods.SetForegroundWindow(ProcessHandle);
 
-            var logMsg = setForegroundSuccessful
-                ? "External protocol window set to foreground. "
-                : "Failed to set external protocol window to foreground. ";
-
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                logMsg +
-                $"name:'{InterfaceControl.Info.Name}', " +
-                $"protocol:'{InterfaceControl.Info.Protocol}', " +
-                $"pid:{ProtocolProcess.Id}, " +
-                $"hwnd:{ProcessHandle}");
+            if (!setForegroundSuccessful)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    "Failed to set external protocol window to foreground. " +
+                    $"name:'{InterfaceControl.Info.Name}', " +
+                    $"protocol:'{InterfaceControl.Info.Protocol}', " +
+                    $"pid:{ProtocolProcess.Id}, " +
+                    $"hwnd:{ProcessHandle}");
+            }
         }
 
         /// <summary>
@@ -88,14 +108,13 @@ namespace mRemoteNG.Connection.Protocol
         /// <param name="dwmsEventTime"></param>
         void OnWinEventSetForeground(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
-            if (hwnd != ProtocolProcess.MainWindowHandle)
-                return;
+            HasFocus = hwnd == ProcessHandle;
+        }
 
-            //Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-            //    "Exernal protocol window set to foreground. " +
-            //    $"protocol:{InterfaceControl.Info.Protocol} " +
-            //    $"pid:{ProtocolProcess.Id}, " +
-            //    $"hwnd:{ProtocolProcess.MainWindowHandle}");
+        public event EventHandler FocusChanged;
+        protected virtual void OnFocusChanged()
+        {
+            FocusChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -53,8 +53,8 @@ namespace mRemoteNG.UI.Forms
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
         private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
-        private readonly ExternalProcessAltTabFocusHelper _altTabFocusHelper;
+        private readonly IConnectionInitiator _connectionInitiator;
+        private readonly ExternalProcessFocusHelper _focusHelper;
 
         internal FullscreenHandler Fullscreen { get; set; }
 
@@ -73,7 +73,11 @@ namespace mRemoteNG.UI.Forms
             ApplyTheme();
 
             _screenSystemMenu = new ScreenSelectionSystemMenu(this);
-            _altTabFocusHelper = new ExternalProcessAltTabFocusHelper(() => Focus(), ActivateConnection);
+            var protocolFactory = new ProtocolFactory();
+            _connectionInitiator = new ConnectionInitiator(protocolFactory);
+
+            Debug.Assert(IsHandleCreated, "Expected main window handle to be created by now");
+            _focusHelper = new ExternalProcessFocusHelper(_connectionInitiator, Handle);
         }
 
         #region Properties
@@ -218,12 +222,12 @@ namespace mRemoteNG.UI.Forms
 
         private void OnTabClicked(object sender, EventArgs e)
         {
-            ActivateConnection();
+            _focusHelper.ActivateConnection();
         }
 
         private void OnActiveConnectionTabChanged(object sender, EventArgs e)
         {
-            ActivateConnection();
+            _focusHelper.ActivateConnection();
         }
 
         private void ApplyLanguage()
@@ -383,7 +387,7 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _altTabFocusHelper?.Dispose();
+            _focusHelper?.Dispose();
 
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
             {
@@ -483,7 +487,7 @@ namespace mRemoteNG.UI.Forms
             _inSizeMove = false;
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "End app window move/resize");
             // This handles activations from clicks that started a size/move operation
-            ActivateConnection();
+            _focusHelper.ActivateConnection();
         }
 
 
@@ -510,28 +514,19 @@ namespace mRemoteNG.UI.Forms
                         Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Clicked control: {controlThatWasClicked2}");
                         break;
                     case NativeMethods.WM_ACTIVATEAPP:
+                        if (_focusHelper.FixingMainWindowFocus)
+                            break;
+
                         if (m.WParam.ToInt32() == 0) // mRemoteNG is being deactivated
                         {
-                            var threadWhichIsActivating = m.LParam.ToInt32();
-                            _altTabFocusHelper.ChildProcessHeldLastFocus = _connectionInitiator
-                                .ActiveConnections
-                                .OfType<ExternalProcessProtocolBase>()
-                                .Any(proc => proc.ThreadId == threadWhichIsActivating);
-
                             _inMouseActivate = false;
-                            _altTabFocusHelper.MrngFocused = _altTabFocusHelper.ChildProcessHeldLastFocus;
-                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"mRemoteNG main window lost focus (_childProcessHeldLastFocus={_altTabFocusHelper.ChildProcessHeldLastFocus})");
+                            _focusHelper.MainWindowFocused = false;
+                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"mRemoteNG main window lost focus (_childProcessHeldLastFocus={_focusHelper.ChildProcessHeldLastFocus})");
                             break;
                         }
 
-                        if (_altTabFocusHelper.ChildProcessHeldLastFocus && !_altTabFocusHelper.MrngFocused)
-                        {
-                            ActivateConnection();
-                        }
-
-                        _altTabFocusHelper.ChildProcessHeldLastFocus = false;
-                        _altTabFocusHelper.MrngFocused = true;
-                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"mRemoteNG main window received focus (_childProcessHeldLastFocus={_altTabFocusHelper.ChildProcessHeldLastFocus})");
+                        _focusHelper.MainWindowFocused = true;
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"mRemoteNG main window received focus (_childProcessHeldLastFocus={_focusHelper.ChildProcessHeldLastFocus})");
 
                         //var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
                         //                       ?? GetChildAtPoint(MousePosition);
@@ -583,14 +578,10 @@ namespace mRemoteNG.UI.Forms
 
                         break;
                     case NativeMethods.WM_NCACTIVATE:
-                        //if (m.WParam.ToInt32() == 1)
-                        //    break;
-
                         //// Never allow the mRemoteNG window to display itself as inactive. By doing this,
                         //// we ensure focus events can propagate to child connection windows
                         NativeMethods.DefWindowProc(Handle, Convert.ToUInt32(m.Msg), (IntPtr)1, m.LParam);
                         m.Result = (IntPtr)1;
-                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Fixed main app NCACTIVATE");
                         return;
                     case NativeMethods.WM_WINDOWPOSCHANGED:
                         // Ignore this message if the window wasn't activated
@@ -603,7 +594,7 @@ namespace mRemoteNG.UI.Forms
                             if (!_inMouseActivate && !_inSizeMove)
                             {
                                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "WM_WINDOWPOSCHANGED DONE");
-                                ActivateConnection();
+                                _focusHelper.ActivateConnection();
                             }
                         }
 
@@ -643,38 +634,9 @@ namespace mRemoteNG.UI.Forms
             clientMousePosition.Y = temp_wHigh;
         }
 
-        private void ActivateConnection()
-        {
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Performing special connection focus logic");
-            //var cw = pnlDock.ActiveDocument as ConnectionWindow;
-            //var dp = cw?.ActiveControl as DockPane;
-
-            //if (!(dp?.ActiveContent is ConnectionTab tab))
-            //{
-            //    Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Active content is not a tab. We won't focus a specific connection.");
-            //    return;
-            //}
-
-            //var ifc = InterfaceControl.FindInterfaceControl(tab);
-            var tab = TabHelper.Instance.CurrentTab;
-            if (tab == null)
-                return;
-
-            var ifc = tab.InterfaceControl;
-            if (ifc == null)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"InterfaceControl for tab '{tab.Name}' was not found. We won't focus that connection.");
-                return;
-            }
-
-            ifc.Protocol.Focus();
-            var conFormWindow = ifc.FindForm();
-            ((ConnectionTab)conFormWindow)?.RefreshInterfaceController();
-        }
-
         private void pnlDock_ActiveDocumentChanged(object sender, EventArgs e)
         {
-            //ActivateConnection();
+            //_focusHelper.ActivateConnection();
         }
 
         internal void UpdateWindowTitle()
