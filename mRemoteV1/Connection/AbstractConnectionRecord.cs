@@ -143,6 +143,16 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNamePort"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPort"),
+         UsedInAllProtocolsExcept(ProtocolType.ICA)]
+        public virtual int Port
+        {
+            get => GetPropertyValue("Port", _port);
+            set => SetField(ref _port, value, "Port");
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername"),
          UsedInAllProtocolsExcept(ProtocolType.VNC, ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
@@ -217,16 +227,6 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("ExtApp", _extApp);
             set => SetField(ref _extApp, value, "ExtApp");
-        }
-
-        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNamePort"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPort"),
-         UsedInAllProtocolsExcept(ProtocolType.ICA)]
-        public virtual int Port
-        {
-            get => GetPropertyValue("Port", _port);
-            set => SetField(ref _port, value, "Port");
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
