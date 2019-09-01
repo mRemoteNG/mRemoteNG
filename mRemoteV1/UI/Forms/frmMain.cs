@@ -8,11 +8,14 @@ using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.FocusHelpers;
 using mRemoteNG.UI.Menu;
+using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
@@ -23,13 +26,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using mRemoteNG.Connection.Protocol;
-using mRemoteNG.UI.FocusHelpers;
-using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using Message = System.Windows.Forms.Message;
 
@@ -42,8 +40,6 @@ namespace mRemoteNG.UI.Forms
         public static FrmMain Default { get; } = new FrmMain();
 
         private static ClipboardchangeEventHandler _clipboardChangedEvent;
-        private bool _inSizeMove;
-        private bool _inMouseActivate;
         private IntPtr _fpChainedWindowHandle;
         private bool _usingSqlServer;
         private string _connectionsFileName;
@@ -457,13 +453,6 @@ namespace mRemoteNG.UI.Forms
         #endregion
 
         #region Window Overrides and DockPanel Stuff
-
-        private void frmMain_ResizeBegin(object sender, EventArgs e)
-        {
-            _inSizeMove = true;
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Begin app window move/resize");
-        }
-
         private void frmMain_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
@@ -482,15 +471,6 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private void frmMain_ResizeEnd(object sender, EventArgs e)
-        {
-            _inSizeMove = false;
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "End app window move/resize");
-            // This handles activations from clicks that started a size/move operation
-            _focusHelper.ActivateConnection();
-        }
-
-
         // Maybe after starting putty, remove its ability to show up in alt-tab?
         // SetWindowLong(this.Handle, GWL_EXSTYLE, (GetWindowLong(this.Handle,GWL_EXSTYLE) | WS_EX_TOOLWINDOW) & ~WS_EX_APPWINDOW);
         protected override void WndProc(ref Message m)
@@ -498,13 +478,13 @@ namespace mRemoteNG.UI.Forms
             // Listen for and handle operating system messages
             try
             {
+                if (_focusHelper?.HandleWndProc(ref m) == true)
+                    return;
+
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (m.Msg)
                 {
                     case NativeMethods.WM_MOUSEACTIVATE:
-                        _inMouseActivate = true;
-                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"_inMouseActivate = {_inMouseActivate}");
-
                         var controlThatWasClicked2 = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
                                                     ?? GetChildAtPoint(MousePosition);
 
@@ -512,29 +492,6 @@ namespace mRemoteNG.UI.Forms
                             break;
 
                         Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Clicked control: {controlThatWasClicked2}");
-                        break;
-                    case NativeMethods.WM_ACTIVATEAPP:
-                        if (_focusHelper.FixingMainWindowFocus)
-                            break;
-
-                        if (m.WParam.ToInt32() == 0) // mRemoteNG is being deactivated
-                        {
-                            _inMouseActivate = false;
-                            _focusHelper.MainWindowFocused = false;
-                            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"mRemoteNG main window lost focus (_childProcessHeldLastFocus={_focusHelper.ChildProcessHeldLastFocus})");
-                            break;
-                        }
-
-                        _focusHelper.MainWindowFocused = true;
-                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"mRemoteNG main window received focus (_childProcessHeldLastFocus={_focusHelper.ChildProcessHeldLastFocus})");
-
-                        //var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
-                        //                       ?? GetChildAtPoint(MousePosition);
-                        //if (candidateTabToFocus is InterfaceControl)
-                        //{
-                        //    candidateTabToFocus.Parent.Focus();
-                        //}
-
                         break;
                     case NativeMethods.WM_ACTIVATE:
                         if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_ACTIVE)
@@ -554,49 +511,27 @@ namespace mRemoteNG.UI.Forms
 
                         Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Click activate: {controlThatWasClicked}");
 
-                        if (controlThatWasClicked is TreeView ||
-                            controlThatWasClicked is ComboBox ||
-                            controlThatWasClicked is TextBox ||
-                            controlThatWasClicked is FrmMain ||
-                            controlThatWasClicked is AutoHideStripBase)
-                        {
-                            controlThatWasClicked.Focus();
-                        }
-                        else if (controlThatWasClicked.CanSelect ||
-                                 controlThatWasClicked is MenuStrip ||
-                                 controlThatWasClicked is ToolStrip)
-                        {
-                            // Simulate a mouse event since one wasn't generated by Windows
-                            SimulateClick(controlThatWasClicked);
-                            controlThatWasClicked.Focus();
-                        }
+                        //if (controlThatWasClicked is TreeView ||
+                        //    controlThatWasClicked is ComboBox ||
+                        //    controlThatWasClicked is TextBox ||
+                        //    controlThatWasClicked is FrmMain ||
+                        //    controlThatWasClicked is AutoHideStripBase)
+                        //{
+                        //    controlThatWasClicked.Focus();
+                        //}
+                        //else if (controlThatWasClicked.CanSelect ||
+                        //         controlThatWasClicked is MenuStrip ||
+                        //         controlThatWasClicked is ToolStrip)
+                        //{
+                        //    // Simulate a mouse event since one wasn't generated by Windows
+                        //    SimulateClick(controlThatWasClicked);
+                        //    controlThatWasClicked.Focus();
+                        //}
                         //else
                         //{
                         //    // This handles activations from clicks that did not start a size/move operation
                         //    ActivateConnection();
                         //}
-
-                        break;
-                    case NativeMethods.WM_NCACTIVATE:
-                        //// Never allow the mRemoteNG window to display itself as inactive. By doing this,
-                        //// we ensure focus events can propagate to child connection windows
-                        NativeMethods.DefWindowProc(Handle, Convert.ToUInt32(m.Msg), (IntPtr)1, m.LParam);
-                        m.Result = (IntPtr)1;
-                        return;
-                    case NativeMethods.WM_WINDOWPOSCHANGED:
-                        // Ignore this message if the window wasn't activated
-                        if (!_inMouseActivate)
-                            break;
-
-                        var windowPos = (NativeMethods.WINDOWPOS)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.WINDOWPOS));
-                        if ((windowPos.flags & NativeMethods.SWP_NOACTIVATE) == 0)
-                        {
-                            if (!_inMouseActivate && !_inSizeMove)
-                            {
-                                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "WM_WINDOWPOSCHANGED DONE");
-                                _focusHelper.ActivateConnection();
-                            }
-                        }
 
                         break;
                     case NativeMethods.WM_SYSCOMMAND:
