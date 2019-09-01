@@ -1,4 +1,4 @@
-
+﻿
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Controls;
 

@@ -6,7 +6,7 @@
 		internal System.Windows.Forms.MenuStrip msMain;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewExpandAllFolders;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewCollapseAllFolders;
-		internal System.Windows.Forms.ToolStripMenuItem mMenSortAscending;
+		internal System.Windows.Forms.ToolStripMenuItem mMenSort;
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddConnection;
 		internal System.Windows.Forms.ToolStripMenuItem mMenAddFolder;
 		public System.Windows.Forms.TreeView tvConnections;
@@ -23,7 +23,7 @@
             this.mMenAddFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewExpandAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
-            this.mMenSortAscending = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenSort = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenFavorites = new System.Windows.Forms.ToolStripMenuItem();
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this.pbSearch = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
@@ -77,7 +77,7 @@
             this.mMenAddFolder,
             this.mMenViewExpandAllFolders,
             this.mMenViewCollapseAllFolders,
-            this.mMenSortAscending,
+            this.mMenSort,
             this.mMenFavorites});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
@@ -122,10 +122,10 @@
             // 
             // mMenSortAscending
             // 
-            this.mMenSortAscending.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenSortAscending.Image = global::mRemoteNG.Resources.Sort_AZ;
-            this.mMenSortAscending.Name = "mMenSortAscending";
-            this.mMenSortAscending.Size = new System.Drawing.Size(28, 20);
+            this.mMenSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mMenSort.Image = global::mRemoteNG.Resources.Sort_AZ;
+            this.mMenSort.Name = "mMenSort";
+            this.mMenSort.Size = new System.Drawing.Size(28, 20);
             // 
             // mMenFavorites
             // 
