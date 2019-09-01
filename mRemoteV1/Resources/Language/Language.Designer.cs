@@ -5618,17 +5618,6 @@ namespace mRemoteNG
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Password protect.
-        /// </summary>
-        internal static string strPasswordProtect
-        {
-            get
-            {
-                return ResourceManager.GetString("strPasswordProtect", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   Looks up a localized string similar to Both passwords must match..
         /// </summary>
         internal static string strPasswordStatusMustMatch
@@ -6010,6 +5999,17 @@ namespace mRemoteNG
             get
             {
                 return ResourceManager.GetString("strPropertyDescriptionPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Set a password needed to encrypt the connection file with. You will be prompted to enter your passcode before starting mRemoteNG..
+        /// </summary>
+        internal static string strPropertyDescriptionPasswordProtect
+        {
+            get
+            {
+                return ResourceManager.GetString("strPropertyDescriptionPasswordProtect", resourceCulture);
             }
         }
 
@@ -6681,6 +6681,17 @@ namespace mRemoteNG
             get
             {
                 return ResourceManager.GetString("strPropertyNamePassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Password protect.
+        /// </summary>
+        internal static string strPropertyNamePasswordProtect
+        {
+            get
+            {
+                return ResourceManager.GetString("strPropertyNamePasswordProtect", resourceCulture);
             }
         }
 

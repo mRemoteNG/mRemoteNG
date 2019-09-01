@@ -1187,7 +1187,7 @@ VncSharp Control Version {0}</value>
   <data name="strPanelName" xml:space="preserve">
     <value>Название группы</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Защита паролем</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">

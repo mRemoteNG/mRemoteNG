@@ -1184,7 +1184,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="strPanelName" xml:space="preserve">
     <value>Panel-Name</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Passwortschutz</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
@@ -2686,5 +2686,8 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="strStartMinimized" xml:space="preserve">
     <value>Minimiert starten</value>
+  </data>
+  <data name="strPropertyDescriptionPasswordProtect" xml:space="preserve">
+    <value>Legen Sie ein Kennwort fest, mit dem die Verbindungsdatei verschlüsselt werden soll. Sie werden aufgefordert Ihr Passwort einzugeben, bevor Sie mRemoteNG starten.</value>
   </data>
 </root>

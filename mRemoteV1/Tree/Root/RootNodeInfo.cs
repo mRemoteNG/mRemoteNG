@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -27,27 +27,28 @@ namespace mRemoteNG.Tree.Root
 
         #region Public Properties
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous"),
          Browsable(true),
          LocalizedAttributes.LocalizedDefaultValue("strConnections"),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
         public override string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set => _name = value;
         }
-
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
+        
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous"),
          Browsable(true),
-         LocalizedAttributes.LocalizedDisplayName("strPasswordProtect"),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNamePasswordProtect"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPasswordProtect"),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public new bool Password { get; set; }
 
         [Browsable(false)]
         public string PasswordString
         {
-            get { return Password ? _customPassword : DefaultPassword; }
+            get => Password ? _customPassword : DefaultPassword;
             set
             {
                 _customPassword = value;
