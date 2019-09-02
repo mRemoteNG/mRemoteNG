@@ -80,7 +80,8 @@ namespace mRemoteNG.Config.Serializers
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.", ex);
+                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.",
+                                                             ex);
             }
         }
 
@@ -97,6 +98,8 @@ namespace mRemoteNG.Config.Serializers
                 Description = description,
                 Protocol = ProtocolType.RDP
             };
+            newConnectionInfo.Inheritance.TurnOnInheritanceCompletely();
+            newConnectionInfo.Inheritance.Description = false;
 
             parentContainer.AddChild(newConnectionInfo);
         }
