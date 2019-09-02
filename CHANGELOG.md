@@ -11,13 +11,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1385: Added option to start mRemoteNG minimized
 - #826: Allow selecting RDP version to use when connecting
 ### Changed
+- #1544: Improved Polish translations
+- #1518: Inheritance is no longer automatically enabled when importing nodes from Active Directory
 - #1468: Improved mRemoteNG startup time
 - #1443: Chinese (simplified) translation improvements
 - #1437: Norwegian translation improvements
+- #1378: Hyperlinks embedded within mRemoteNG now open in the system default browser
 - #1239: Increased default key derivation function (KDF) iterations from 1000 to 10000
 - #718: Moved port property from 'protocol' to 'connection' section
 - Moved most RDP enums outside of the RDP protocol class. Scripts which reference these enums will need to be updated.
+- Removed the "Automatically get session info" from the advanced options screen since it is no longer used.
 ### Fixed
+- #1505: About screen now better follows theme colors
+- #1493: Updated database setup scripts for MSSQL and MySQL
+- #1470: The "Favorite" setting is now properly saved in the local connection settings file (not saved in database)
 - #1447: Exception occurs when resetting layout
 - #1439: Searching in hosts tree loses first keystroke
 - #1428: Fixed a rare error when checking for FIPS
