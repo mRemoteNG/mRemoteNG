@@ -194,16 +194,6 @@ namespace mRemoteNG.Connection
             set => SetField(ref _vmId, value?.Trim(), "VmId");
         }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseEnhancedMode"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseEnhancedMode"),
-         UsedInProtocol(ProtocolType.RDP)]
-        public bool UseEnhancedMode
-        {
-            get => GetPropertyValue("EnhancedMode", _enhancedMode);
-            set => SetField(ref _enhancedMode, value, "EnhancedMode");
-        }
-
         #endregion
 
         #region Protocol
@@ -355,6 +345,15 @@ namespace mRemoteNG.Connection
             set => SetField(ref _useVmId, value, "UseVmId");
         }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseEnhancedMode"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseEnhancedMode"),
+         UsedInProtocol(ProtocolType.RDP)]
+        public bool UseEnhancedMode
+        {
+            get => GetPropertyValue("EnhancedMode", _enhancedMode);
+            set => SetField(ref _enhancedMode, value, "EnhancedMode");
+        }
         #endregion
 
         #region RD Gateway
