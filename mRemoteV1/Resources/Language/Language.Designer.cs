@@ -6289,6 +6289,17 @@ namespace mRemoteNG
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Connect to a Hyper-V host with enhanced mode enabled..
+        /// </summary>
+        internal static string strPropertyDescriptionUseEnhancedMode
+        {
+            get
+            {
+                return ResourceManager.GetString("strPropertyDescriptionUseEnhancedMode", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Feel free to enter any information you need here..
         /// </summary>
         internal static string strPropertyDescriptionUser1
@@ -6978,6 +6989,17 @@ namespace mRemoteNG
             get
             {
                 return ResourceManager.GetString("strPropertyNameUseCredSsp", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Use enhanced mode.
+        /// </summary>
+        internal static string strPropertyNameUseEnhancedMode
+        {
+            get
+            {
+                return ResourceManager.GetString("strPropertyNameUseEnhancedMode", resourceCulture);
             }
         }
 

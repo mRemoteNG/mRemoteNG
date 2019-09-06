@@ -29,8 +29,10 @@ ADD RedirectClipboard bit NOT NULL DEFAULT 0,
 	InheritRedirectClipboard bit NOT NULL DEFAULT 0,
     VmId varchar NOT NULL DEFAULT 0,
     UseVmId bit NOT NULL DEFAULT 0,
+    UseEnhancedMode bit NOT NULL DEFAULT 0,
     InheritVmId bit NOT NULL DEFAULT 0,
-    InheritUseVmId bit NOT NULL DEFAULT 0;
+    InheritUseVmId bit NOT NULL DEFAULT 0,
+    InheritUseEnhancedMode bit NOT NULL DEFAULT 0;
 UPDATE tblRoot
     SET ConfVersion='2.7'";
             var dbCommand = _databaseConnector.DbCommand(sqlText);

@@ -251,6 +251,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             if (!SelectedConnectionInfo.UseVmId)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.VmId));
+                strHide.Add(nameof(AbstractConnectionRecord.UseEnhancedMode));
             }
 
             return strHide;

@@ -117,6 +117,7 @@ namespace mRemoteNG.Config.Serializers.Csv
 
             sb.Append(FormatForCsv(con.Hostname))
               .Append(FormatForCsv(con.VmId))
+              .Append(FormatForCsv(con.UseEnhancedMode))
               .Append(FormatForCsv(con.Protocol))
               .Append(FormatForCsv(con.PuttySession))
               .Append(FormatForCsv(con.Port))
@@ -199,6 +200,7 @@ namespace mRemoteNG.Config.Serializers.Csv
               .Append(FormatForCsv(con.Inheritance.UseCredSsp))
               .Append(FormatForCsv(con.Inheritance.UseVmId))
               .Append(FormatForCsv(con.Inheritance.VmId))
+              .Append(FormatForCsv(con.Inheritance.UseEnhancedMode))
               .Append(FormatForCsv(con.Inheritance.RenderingEngine))
               .Append(FormatForCsv(con.Inheritance.Username))
               .Append(FormatForCsv(con.Inheritance.ICAEncryptionStrength))
