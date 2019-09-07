@@ -202,6 +202,7 @@
     <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion24To25Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion25To26Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion27To28Upgrader.cs" />
     <Compile Include="Config\Serializers\Versioning\SqlVersion26To27Upgrader.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackup.cs" />
@@ -291,6 +292,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Language\Language.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Themes\ColorMapTheme.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -367,6 +373,7 @@
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsService.cs" />
+    <Compile Include="Tools\SSHTunnelTypeConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
     <Compile Include="Tools\Optional.cs" />
@@ -677,11 +684,6 @@
     </Compile>
     <Compile Include="UI\Forms\PasswordForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Resources\Language\Language.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Language.resx</DependentUpon>
     </Compile>
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1015,6 +1017,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Language.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.fr.resx">
       <SubType>Designer</SubType>
@@ -1225,6 +1228,7 @@
     <None Include="Documentation\images\connections_open.png" />
     <None Include="Documentation\images\screenshot_manager_rightclick_menu.png" />
     <None Include="Documentation\images\screenshot_manager_overview.png" />
+    <Content Include="Icons\Admin.ico" />
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1272,6 +1276,10 @@
     <None Include="Resources\Images\tab_edit.png" />
     <None Include="Resources\Images\tab_delete.png" />
     <None Include="Resources\Images\star.png" />
+    <Content Include="Icons\Infrastructure.ico" />
+    <Content Include="Icons\Production.ico" />
+    <Content Include="Icons\Staging.ico" />
+    <Content Include="Icons\Test.ico" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

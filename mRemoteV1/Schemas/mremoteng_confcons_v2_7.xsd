@@ -47,6 +47,8 @@
         <xs:attribute name="RdpVersion" type="xs:string" use="required" />
         <xs:attribute name="VmId" type="xs:string" use="required" />
         <xs:attribute name="UseVmId" type="xs:boolean" use="required" />
+        <xs:attribute name="SSHTunnelConnectionName" type="xs:string" use="optional" />
+        <xs:attribute name="SSHOptions" type="xs:string" use="optional" />
         <xs:attribute name="PuttySession" type="xs:string" use="required" />
         <xs:attribute name="Port" type="xs:int" use="required" />
         <xs:attribute name="ConnectToConsole" type="xs:boolean" use="required" />
@@ -113,6 +115,8 @@
         <xs:attribute name="InheritPort" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritProtocol" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritRdpVersion" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritSSHTunnelConnectionName" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritSSHOptions" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritPuttySession" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritRedirectDiskDrives" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritRedirectKeys" type="xs:boolean" use="optional" />

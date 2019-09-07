@@ -75,6 +75,8 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
             element.Add(new XAttribute("RdpVersion", connectionInfo.RdpVersion.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("SSHTunnelConnectionName", connectionInfo.SSHTunnelConnectionName));
+            element.Add(new XAttribute("SSHOptions", connectionInfo.SSHOptions));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
             element.Add(new XAttribute("ConnectToConsole",
@@ -196,6 +198,10 @@ namespace mRemoteNG.Config.Serializers.Xml
                                            connectionInfo.Inheritance.Protocol.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRdpVersion",
                     connectionInfo.Inheritance.RdpVersion.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritSSHTunnelConnectionName",
+                                           connectionInfo.Inheritance.SSHTunnelConnectionName.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritSSHOptions",
+                                           connectionInfo.Inheritance.SSHOptions.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritPuttySession",
                                            connectionInfo.Inheritance.PuttySession.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectDiskDrives",
@@ -313,6 +319,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritPassword", falseString));
                 element.Add(new XAttribute("InheritPort", falseString));
                 element.Add(new XAttribute("InheritProtocol", falseString));
+                element.Add(new XAttribute("InheritSSHTunnelConnectionName", falseString));
+                element.Add(new XAttribute("InheritSSHOptions", falseString));
                 element.Add(new XAttribute("InheritPuttySession", falseString));
                 element.Add(new XAttribute("InheritRedirectDiskDrives", falseString));
                 element.Add(new XAttribute("InheritRedirectKeys", falseString));

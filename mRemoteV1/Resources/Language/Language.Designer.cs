@@ -592,15 +592,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically get session information.
-        /// </summary>
-        internal static string strAutomaticallyGetSessionInfo {
-            get {
-                return ResourceManager.GetString("strAutomaticallyGetSessionInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Auto save time in minutes (0 means disabled):.
         /// </summary>
         internal static string strAutoSaveEvery {
@@ -5145,6 +5136,24 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specify here additional options to be used for SSH connection. See putty documentation for further details..
+        /// </summary>
+        internal static string strPropertyDescriptionSSHOptions {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionSSHOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For connection through a SSH tunnel (jump host) specify SSH connection to be used to establish SSH tunnel..
+        /// </summary>
+        internal static string strPropertyDescriptionSSHTunnelConnection {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionSSHTunnelConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connect to the console session of the remote host..
         /// </summary>
         internal static string strPropertyDescriptionUseConsoleSession {
@@ -5699,6 +5708,24 @@ namespace mRemoteNG {
         internal static string strPropertyNameSoundQuality {
             get {
                 return ResourceManager.GetString("strPropertyNameSoundQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH Options.
+        /// </summary>
+        internal static string strPropertyNameSSHOptions {
+            get {
+                return ResourceManager.GetString("strPropertyNameSSHOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH Tunnel.
+        /// </summary>
+        internal static string strPropertyNameSSHTunnelConnection {
+            get {
+                return ResourceManager.GetString("strPropertyNameSSHTunnelConnection", resourceCulture);
             }
         }
         
@@ -7079,6 +7106,60 @@ namespace mRemoteNG {
         internal static string strSSHTransferFailed {
             get {
                 return ResourceManager.GetString("strSSHTransferFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection configuration problem. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. A connection with the name configured as SSH Tunnel and protocol SSH version 1 or SSH2 version 2 cannot be found in the connection tree. Clear SSH Tunnel configuration or specify existing SSH connection..
+        /// </summary>
+        internal static string strSSHTunnelConfigProblem {
+            get {
+                return ResourceManager.GetString("strSSHTunnelConfigProblem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel connection failed. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. Putty process terminated. Check for any problems with the connection configured as SSH Tunnel..
+        /// </summary>
+        internal static string strSSHTunnelFailed {
+            get {
+                return ResourceManager.GetString("strSSHTunnelFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel configuration problem. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. Connection configured as SSH Tunnel found in tree, but protocol is not derived from putty. Make sure connection configured as SSH Tunnel is using SSH protocol..
+        /// </summary>
+        internal static string strSSHTunnelIsNotPutty {
+            get {
+                return ResourceManager.GetString("strSSHTunnelIsNotPutty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel connection problem. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. SSH connection failed. Check for any problems with the connection configured as SSH Tunnel..
+        /// </summary>
+        internal static string strSSHTunnelNotConnected {
+            get {
+                return ResourceManager.GetString("strSSHTunnelNotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel initialization problem. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. SSH connection could not be initialized. Check for any problems with the connection configured as SSH Tunnel..
+        /// </summary>
+        internal static string strSSHTunnelNotInitialized {
+            get {
+                return ResourceManager.GetString("strSSHTunnelNotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel connection timed out. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. Local tunnel port did not become available in time. Check for any problems with the connection configured as SSH Tunnel..
+        /// </summary>
+        internal static string strSSHTunnelPortNotReadyInTime {
+            get {
+                return ResourceManager.GetString("strSSHTunnelPortNotReadyInTime", resourceCulture);
             }
         }
         

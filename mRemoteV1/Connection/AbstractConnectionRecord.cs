@@ -26,10 +26,12 @@ namespace mRemoteNG.Connection
         private string _domain = "";
         private string _vmId = "";
 
+        private string _sshTunnelConnectionName = "";
         private ProtocolType _protocol;
         private RdpVersion _rdpProtocolVersion;
         private string _extApp;
         private int _port;
+        private string _sshOptions = "";
         private string _puttySession;
         private IcaProtocol.EncryptionStrength _icaEncryption;
         private bool _useConsoleSession;
@@ -183,6 +185,17 @@ namespace mRemoteNG.Connection
             set => SetField(ref _vmId, value?.Trim(), "VmId");
         }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameSSHTunnelConnection"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionSSHTunnelConnection"),
+         TypeConverter(typeof(Tools.SSHTunnelTypeConverter)),
+         UsedInAllProtocolsExcept()]
+        public string SSHTunnelConnectionName
+        {
+            get => GetPropertyValue("SSHTunnelConnectionName", _sshTunnelConnectionName).Trim();
+            set => SetField(ref _sshTunnelConnectionName, value?.Trim(), "SSHTunnelConnectionName");
+        }
+
         #endregion
 
         #region Protocol
@@ -239,6 +252,16 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("PuttySession", _puttySession);
             set => SetField(ref _puttySession, value, "PuttySession");
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameSSHOptions"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionSSHOptions"),
+         UsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
+        public virtual string SSHOptions
+        {
+            get => GetPropertyValue("SSHOptions", _sshOptions);
+            set => SetField(ref _sshOptions, value, "SSHOptions");
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),

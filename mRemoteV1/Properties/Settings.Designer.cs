@@ -12,7 +12,7 @@ namespace mRemoteNG {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2924,6 +2924,54 @@ namespace mRemoteNG {
             }
             set {
                 this["InhDefaultRdpVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultSSHTunnelConnectionName {
+            get {
+                return ((bool)(this["InhDefaultSSHTunnelConnectionName"]));
+            }
+            set {
+                this["InhDefaultSSHTunnelConnectionName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultSSHTunnelConnectionName {
+            get {
+                return ((string)(this["ConDefaultSSHTunnelConnectionName"]));
+            }
+            set {
+                this["ConDefaultSSHTunnelConnectionName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultSSHOptions {
+            get {
+                return ((bool)(this["InhDefaultSSHOptions"]));
+            }
+            set {
+                this["InhDefaultSSHOptions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultSSHOptions {
+            get {
+                return ((string)(this["ConDefaultSSHOptions"]));
+            }
+            set {
+                this["ConDefaultSSHOptions"] = value;
             }
         }
     }

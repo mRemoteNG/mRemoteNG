@@ -534,7 +534,10 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("RDPAlertIdleTimeout");
                     connectionInfo.Inheritance.RDPAlertIdleTimeout =
                         xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");
-                }
+                    connectionInfo.SSHTunnelConnectionName = xmlnode.GetAttributeAsString("SSHTunnelConnectionName");
+                    connectionInfo.Inheritance.SSHTunnelConnectionName = xmlnode.GetAttributeAsBool("InheritSSHTunnelConnectionName");
+                    connectionInfo.SSHOptions = xmlnode.GetAttributeAsString("SSHOptions");
+                    connectionInfo.Inheritance.SSHOptions = xmlnode.GetAttributeAsBool("InheritSSHOptions");                }
 
                 if (_confVersion >= 2.7)
                 {

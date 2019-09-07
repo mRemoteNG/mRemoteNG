@@ -78,6 +78,13 @@ namespace mRemoteNG.Connection
         [Browsable(true)]
         public bool Domain { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertySSHTunnelConnection"),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionSSHTunnelConnection"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(true)]
+        public bool SSHTunnelConnectionName { get; set; }
+
         #endregion
 
         #region Protocol
@@ -105,6 +112,12 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionPort"),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool Port { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameSSHOptions"),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionSSHOptions"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool SSHOptions { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
          LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNamePuttySession"),
