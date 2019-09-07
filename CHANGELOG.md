@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 ### Changed
+- #1460: Updated GeckoFX to v60
 ### Fixed
 - #1337: Unhandled exception after closing mRemoteNG
 

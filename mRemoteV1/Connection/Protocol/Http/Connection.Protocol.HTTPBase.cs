@@ -219,14 +219,14 @@ namespace mRemoteNG.Connection.Protocol.Http
                     }
                 }
 
-                   if (!string.IsNullOrEmpty(tabTitle))
-                   {
-                       tabP.TabText = tabTitle + @" - " + shortTitle;
-                   }
-                   else
-                   {
-                       tabP.TabText = shortTitle;
-                   }
+                if (!string.IsNullOrEmpty(tabTitle))
+                {
+                   tabP.TabText = tabTitle + @" - " + shortTitle;
+                }
+                else
+                {
+                   tabP.TabText = shortTitle;
+                }
             }
             catch (Exception ex)
             {
@@ -265,14 +265,14 @@ namespace mRemoteNG.Connection.Protocol.Http
                     }
                 }
 
-                  if (!string.IsNullOrEmpty(tabTitle))
-                  {
-                      tabP.TabText = tabTitle + @" - " + shortTitle;
-                  }
-                  else
-                  {
-                      tabP.TabText = shortTitle;
-                  }
+                if (!string.IsNullOrEmpty(tabTitle))
+                {
+                  tabP.TabText = tabTitle + @" - " + shortTitle;
+                }
+                else
+                {
+                  tabP.TabText = shortTitle;
+                }
             }
             catch (Exception ex)
             {
@@ -282,7 +282,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         private void geckoBrowser_LauncherDialog_Download(object sender, Gecko.LauncherDialogEvent e)
         {
-            var objTarget = Xpcom.CreateInstance<nsILocalFile>("@mozilla.org/file/local;1");
+            var objTarget = Xpcom.CreateInstance<nsILocalFileWin>("@mozilla.org/file/local;1");
             using (var tmp = new nsAString(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\mremoteng.download"))
             {
                 objTarget.InitWithPath(tmp);
