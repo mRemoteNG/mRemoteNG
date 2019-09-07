@@ -5695,6 +5695,17 @@ namespace mRemoteNG
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to PowerShell.
+        /// </summary>
+        internal static string strPowerShell
+        {
+            get
+            {
+                return ResourceManager.GetString("strPowerShell", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to (These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!).
         /// </summary>
         internal static string strPropertiesWillOnlyBeSavedMRemoteXML

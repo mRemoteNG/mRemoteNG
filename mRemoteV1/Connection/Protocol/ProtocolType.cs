@@ -1,4 +1,4 @@
-using mRemoteNG.Tools;
+﻿using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -33,6 +33,9 @@ namespace mRemoteNG.Connection.Protocol
 
         [LocalizedAttributes.LocalizedDescription("strICA")]
         ICA = 9,
+
+        [LocalizedAttributes.LocalizedDescription("strPowerShell")]
+        PowerShell = 10,
 
         [LocalizedAttributes.LocalizedDescription("strExtApp")]
         IntApp = 20
