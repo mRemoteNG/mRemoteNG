@@ -16,11 +16,11 @@
 
 ## Types of changes
 <!--- What types of changes does your code introduce? -->
-<!--- Uncomment the line that applys to you pull request -->
-<!--- [X] Bug fix (non-breaking change which fixes an issue) -->
-<!--- [X] New feature (non-breaking change which adds functionality) -->
-<!--- [X] Breaking change (fix or feature that would cause existing functionality to change) -->
-<!--- [X] Updated translation -->
+<!--- Uncomment the line(s) that apply(s) to you pull request -->
+<!--- - Bug fix (non-breaking change which fixes an issue) -->
+<!--- - New feature (non-breaking change which adds functionality) -->
+<!--- - Breaking change (fix or feature that would cause existing functionality to change) -->
+<!--- - Updated translation -->
 
 ## Checklist:
 <!--- Go over all the following points. All of them must apply to your pull request to be merged. -->
