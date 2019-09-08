@@ -110,7 +110,7 @@ This will allow you to connect to a specific COM serial port using PuTTY.
 
 Create a new connection entry with the following information:
 
-- Name: Serial COM***X***
+- Name: Serial COM**X**
 - Protocol: Ext. App
 - External Tool: COM Serial Port
 - Port: your desired COM port # here
@@ -122,11 +122,3 @@ Windows PowerShell is a task-based command-line shell and scripting language des
 - Filename: %WINDIR%\\system32\\WindowsPowerShell\\v1.0\\PowerShell_ISE.exe
 - Arguments: args here
 - Can integrate: Yes
-
-PowerShell, Enter-PSSession
-===========================
-This will allow you to right-click a Windows connection entry and use the hostname and user/password entry to begin a remote PowerShell session.
-
-- Filename: %WINDIR%\\system32\\WindowsPowerShell\\v1.0\\PowerShell.exe
-- Arguments: -NoExit -Command "$password = ConvertTo-SecureString '%PASSWORD%' -AsPlainText -Force; $cred = New-Object System.Management.Automation.PSCredential -ArgumentList @('%Domain%\\%Username%', $password); Enter-PSSession -ComputerName %Hostname% -Credential $cred"
-- Can integrate: No
