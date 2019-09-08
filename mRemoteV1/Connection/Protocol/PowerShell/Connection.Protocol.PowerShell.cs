@@ -28,12 +28,12 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
             try
             {
                 Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     $"Attempting to start remote PowerShell session.", true);
+                                                     "Attempting to start remote PowerShell session.", true);
 
                 _consoleControl = new ConsoleControl.ConsoleControl
                 {
                     Dock = DockStyle.Fill,
-                    BackColor = Color.DarkBlue,
+                    BackColor = ColorTranslator.FromHtml("#012456"),
                     ForeColor = Color.White,
                     IsInputEnabled = true,
                     Padding = new Padding(0, 20, 0, 0)
