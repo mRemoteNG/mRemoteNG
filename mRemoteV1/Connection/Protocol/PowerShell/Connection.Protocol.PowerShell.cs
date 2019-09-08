@@ -42,34 +42,24 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
                         FileName = @"C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell.exe",
                         Arguments = $@"-NoExit -Command ""$password = ConvertTo-SecureString '{_connectionInfo.Password}' -AsPlainText -Force; $cred = New-Object System.Management.Automation.PSCredential -ArgumentList @('{_connectionInfo.Domain}\{_connectionInfo.Username}', $password); Enter-PSSession -ComputerName {_connectionInfo.Hostname} -Credential $cred"""
                     },
-                    EnableRaisingEvents = true
+                    EnableRaisingEvents = true,
                 };
-
+                
                 _process.Exited += ProcessExited;
-
                 _process.Start();
-                Thread.Sleep(500);
-                //_process.WaitForInputIdle();
-                NativeMethods.SetParent(_process.MainWindowHandle, InterfaceControl.Handle);
+                _process.WaitForInputIdle();
+
+                NativeMethods.SetParent(_process.Handle, InterfaceControl.Handle);
 
 
-                Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg, Language.strIntAppStuff, true);
-                Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     string.Format(Language.strIntAppHandle, _handle), true);
-                Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     string.Format(Language.strIntAppTitle, _process.MainWindowTitle),
-                                                     true);
-                Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     string.Format(Language.strIntAppParentHandle,
-                                                                   InterfaceControl.Parent.Handle), true);
-
-                Resize(this, new EventArgs());
+                
+                //Resize(this, new EventArgs());
                 base.Connect();
                 return true;
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector?.AddExceptionMessage(Language.strIntAppConnectionFailed, ex);
+                Runtime.MessageCollector?.AddExceptionMessage(Language.ConnectionFailed, ex);
                 return false;
             }
         }
