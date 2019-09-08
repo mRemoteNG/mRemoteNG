@@ -542,12 +542,14 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Favorite = xmlnode.GetAttributeAsBool("Favorite");
                     connectionInfo.UseVmId = xmlnode.GetAttributeAsBool("UseVmId");
                     connectionInfo.VmId = xmlnode.GetAttributeAsString("VmId");
+                    connectionInfo.UseEnhancedMode = xmlnode.GetAttributeAsBool("UseEnhancedMode");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
                     connectionInfo.RdpVersion = xmlnode.GetAttributeAsEnum("RdpVersion", RdpVersion.Highest);
                     connectionInfo.Inheritance.RdpVersion = xmlnode.GetAttributeAsBool("InheritRdpVersion");
                     connectionInfo.Inheritance.UseVmId = xmlnode.GetAttributeAsBool("InheritUseVmId");
                     connectionInfo.Inheritance.VmId = xmlnode.GetAttributeAsBool("InheritVmId");
+                    connectionInfo.Inheritance.UseEnhancedMode = xmlnode.GetAttributeAsBool("InheritUseEnhancedMode");
                 }
             }
             catch (Exception ex)
