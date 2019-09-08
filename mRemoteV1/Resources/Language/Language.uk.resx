@@ -481,7 +481,7 @@ VncSharp Control Version {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Підключення до системи "{0}" через "{1}" створеного користувача "{2}" (Опис: "{3}"; Користувач: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>З'єднатися не вдалося!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -747,9 +747,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG в актуальному стані</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>З'єднання не вдалося!</value>
   </data>
   <data name="strIntAppFocusFailed" xml:space="preserve">
     <value>Зовнішній інструмент: Помилка отримання фокусу!</value>
@@ -1462,9 +1459,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Перевірка Проксі - вдала!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>З'єднання не вдалося!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Завершити роботу Putty - не вдалося!</value>

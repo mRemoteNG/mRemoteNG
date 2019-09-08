@@ -512,7 +512,7 @@ VncSharp Control Version {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Connection to "{0}" via "{1}" established by user "{2}" (Description: "{3}"; User Field: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>接続に失敗しました</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -876,9 +876,6 @@ Starting with new connections file.</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNGは最新バージョンです</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>接続に失敗しました</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Dispose of Int App process failed!</value>
@@ -1708,9 +1705,6 @@ Message:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy test succeeded!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>接続に失敗しました</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Dispose of Putty process failed!</value>

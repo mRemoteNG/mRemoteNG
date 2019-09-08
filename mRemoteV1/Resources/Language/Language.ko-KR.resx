@@ -641,7 +641,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
 		<value>사용자 "{2}"가 설정한 "{1}"을 통해 "{0}"에 연결 (설명 : "{3}", 사용자 필드 : "{4}")</value>
 	</data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
 		<value>연결 실패!</value>
 	</data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -1003,9 +1003,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="strInheritNewConnection" xml:space="preserve">
 		<value>mRemoteNG는 최신 버전입니다</value>
-	</data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-		<value>연결 실패!</value>
 	</data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
 		<value>Dispose of Int App process failed!</value>
@@ -1823,9 +1820,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
 		<value>프록시 테스트 성공!</value>
-	</data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-		<value>연결 실패!</value>
 	</data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
 		<value>PuTTY 프로세스 폐기 실패!</value>

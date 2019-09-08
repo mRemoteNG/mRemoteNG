@@ -490,7 +490,7 @@ Alle Verbindungen die es enthält werden ebenfalls geschlossen.</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Verbindung zu "{0}" mit "{1}" hergestellt von Benutzer "{2}" (Beschreibung: "{3}"; Benutzer Feld: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Verbindung fehlgeschlagen!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -768,9 +768,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG ist aktuell</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Verbindung fehlgeschlagen!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Zerstören des Internen Programmes fehlgeschlagen!</value>
@@ -1515,9 +1512,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy-Test erfolgreich!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Verbindung fehlgeschlagen!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Zerstören von PuTTY fehlgeschlagen!</value>

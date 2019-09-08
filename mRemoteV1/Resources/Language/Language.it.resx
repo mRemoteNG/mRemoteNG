@@ -481,7 +481,7 @@ VncSharp Control versione {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Connessione a "{0}" attraverso "{1}" stabilita dall'utente "{2}" (Descrizione: "{3}"; Campo utente: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Connessione fallita!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -747,9 +747,6 @@ Creazione di un nuovo file delle connessioni.</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG è aggiornato</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Connessione fallita!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Operazione Dispose of Int App Process fallita!</value>
@@ -1497,9 +1494,6 @@ Messaggio:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Test del proxy riuscito!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Connessione fallita!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Operazione Dispose of PuTTY process fallita!</value>
