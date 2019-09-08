@@ -54,6 +54,12 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="ConsoleControl, Version=1.2.1.0, Culture=neutral, PublicKeyToken=7edd23586f5e297f, processorArchitecture=MSIL">
+      <HintPath>..\packages\ConsoleControl.1.2.1\lib\net40-client\ConsoleControl.dll</HintPath>
+    </Reference>
+    <Reference Include="ConsoleControlAPI, Version=1.2.1.0, Culture=neutral, PublicKeyToken=7c86b8a36b9c33e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\ConsoleControlAPI.1.2.1\lib\net40\ConsoleControlAPI.dll</HintPath>
+    </Reference>
     <Reference Include="Geckofx-Core, Version=60.0.37.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
       <HintPath>..\packages\Geckofx60.32.60.0.37\lib\net45\Geckofx-Core.dll</HintPath>
     </Reference>
@@ -1190,6 +1196,7 @@
     </None>
     <None Include="Documentation\images\connections_status.png" />
     <None Include="Documentation\images\putty.png" />
+    <Content Include="Console.ico" />
     <Content Include="Documentation\mssql_db_setup.sql" />
     <Content Include="Documentation\mysql_db_setup.sql" />
     <None Include="Documentation\images\config_top_bar.png" />
