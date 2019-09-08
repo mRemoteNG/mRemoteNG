@@ -1285,6 +1285,9 @@
     <None Include="Resources\Images\tab_edit.png" />
     <None Include="Resources\Images\tab_delete.png" />
     <None Include="Resources\Images\star.png" />
+    <Content Include="Icons\PowerShell.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
