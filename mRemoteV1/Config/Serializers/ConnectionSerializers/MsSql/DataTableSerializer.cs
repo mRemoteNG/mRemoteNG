@@ -82,11 +82,11 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("DomainName", typeof(string));
             dataTable.Columns.Add("Password", typeof(string));
             dataTable.Columns.Add("Hostname", typeof(string));
+            dataTable.Columns.Add("Port", typeof(int));
             dataTable.Columns.Add("Protocol", typeof(string));
             dataTable.Columns.Add("SSHTunnelConnectionName", typeof(string));
             dataTable.Columns.Add("SSHOptions", typeof(string));
             dataTable.Columns.Add("PuttySession", typeof(string));
-            dataTable.Columns.Add("Port", typeof(int));
             dataTable.Columns.Add("ConnectToConsole", typeof(bool));
             dataTable.Columns.Add("UseCredSsp", typeof(bool));
             dataTable.Columns.Add("RenderingEngine", typeof(string));
