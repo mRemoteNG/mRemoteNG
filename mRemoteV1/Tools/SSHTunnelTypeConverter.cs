@@ -7,48 +7,45 @@ using System.ComponentModel;
 
 namespace mRemoteNG.Tools
 {
-    public class SSHTunnelTypeConverter : StringConverter
+    public class SshTunnelTypeConverter : StringConverter
     {
-        public static string[] SSHTunnels
+        public static string[] SshTunnels
         {
             get
             {
-                var sshTunnelList = new List<string>();
+                var sshTunnelList = new List<string> {string.Empty};
 
                 // Add a blank entry to signify that no external tool is selected
-                sshTunnelList.Add(string.Empty);
-                sshTunnelList.AddRange(getSSHConnectionNames(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes));
+                sshTunnelList.AddRange(GetSshConnectionNames(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes));
                 return sshTunnelList.ToArray();
             }
         }
 
         // recursively traverse the connection tree to find all ConnectionInfo s of type SSH
-        private static List<string> getSSHConnectionNames(IEnumerable<ConnectionInfo> rootnodes)
+        private static IEnumerable<string> GetSshConnectionNames(IEnumerable<ConnectionInfo> rootnodes)
         {
-            List<string> result = new List<string>();
+            var result = new List<string>();
             foreach (var node in rootnodes)
-            {
                 if (node is ContainerInfo container)
                 {
-                    result.AddRange(getSSHConnectionNames(container.Children));
+                    result.AddRange(GetSshConnectionNames(container.Children));
                 }
                 else
                 {
-                    if (!(node is PuttySessionInfo)) // only allow explicetly defined SSH connections as SSH Tunnels
-                    {
-                        if (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2) result.Add(node.Name);
-                    }
+                    if (node is PuttySessionInfo) continue;
+                    if (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2)
+                        result.Add(node.Name);
                 }
-            }
+
             return result;
         }
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
-            return new StandardValuesCollection(SSHTunnels);
+            return new StandardValuesCollection(SshTunnels);
         }
 
-        public override bool GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext context)
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return true;
         }

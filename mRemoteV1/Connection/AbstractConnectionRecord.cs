@@ -199,7 +199,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameSSHTunnelConnection"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionSSHTunnelConnection"),
-         TypeConverter(typeof(Tools.SSHTunnelTypeConverter)),
+         TypeConverter(typeof(SshTunnelTypeConverter)),
          UsedInAllProtocolsExcept()]
         public string SSHTunnelConnectionName
         {
