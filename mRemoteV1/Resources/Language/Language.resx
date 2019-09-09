@@ -2825,6 +2825,12 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strPropertyNameUseEnhancedMode" xml:space="preserve">
     <value>Use enhanced mode</value>
   </data>
+  <data name="strPropertyDescriptionRDGatewayPassword" xml:space="preserve">
+    <value>Specifies the password of the Remote Desktop Gateway server.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
+    <value>Select whether microphones should be shared.</value>
+  </data>
   <data name="strPowerShell" xml:space="preserve">
     <value>PowerShell</value>
   </data>

@@ -6069,6 +6069,17 @@ namespace mRemoteNG
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Specifies the password of the Remote Desktop Gateway server..
+        /// </summary>
+        internal static string strPropertyDescriptionRDGatewayPassword
+        {
+            get
+            {
+                return ResourceManager.GetString("strPropertyDescriptionRDGatewayPassword", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Specifies when to use a Remote Desktop Gateway (RD Gateway) server..
         /// </summary>
         internal static string strPropertyDescriptionRDGatewayUsageMethod
@@ -6175,6 +6186,17 @@ namespace mRemoteNG
             get
             {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectKeys", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Select whether microphones should be shared..
+        /// </summary>
+        internal static string strPropertyDescriptionRedirectMicrophones
+        {
+            get
+            {
+                return ResourceManager.GetString("strPropertyDescriptionRedirectMicrophones", resourceCulture);
             }
         }
 
