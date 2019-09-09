@@ -312,6 +312,7 @@ namespace mRemoteNG.Connection
                                                                    Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
             UseVmId = Settings.Default.ConDefaultUseVmId;
+            UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
         }
 
         private void SetRdGatewayDefaults()

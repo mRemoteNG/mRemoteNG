@@ -25,6 +25,7 @@ namespace mRemoteNG.Connection
         private string _password = "";
         private string _domain = "";
         private string _vmId = "";
+        private bool _useEnhancedMode;
 
         private ProtocolType _protocol;
         private RdpVersion _rdpProtocolVersion;
@@ -344,6 +345,16 @@ namespace mRemoteNG.Connection
             set => SetField(ref _useVmId, value, "UseVmId");
         }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseEnhancedMode"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseEnhancedMode"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
+        public bool UseEnhancedMode
+        {
+            get => GetPropertyValue("UseEnhancedMode", _useEnhancedMode);
+            set => SetField(ref _useEnhancedMode, value, "UseEnhancedMode");
+        }
         #endregion
 
         #region RD Gateway

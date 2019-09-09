@@ -47,6 +47,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("Name", connectionInfo.Name));
             element.Add(new XAttribute("VmId", connectionInfo.VmId));
             element.Add(new XAttribute("UseVmId", connectionInfo.UseVmId));
+            element.Add(new XAttribute("UseEnhancedMode", connectionInfo.UseVmId));
             element.Add(new XAttribute("Type", connectionInfo.GetTreeNodeType().ToString()));
             if (nodeAsContainer != null)
                 element.Add(new XAttribute("Expanded", nodeAsContainer.IsExpanded.ToString().ToLowerInvariant()));
@@ -296,6 +297,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Inheritance.VmId.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritUseVmId",
                     connectionInfo.Inheritance.UseVmId.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritUseEnhancedMode",
+                    connectionInfo.Inheritance.UseEnhancedMode.ToString().ToLowerInvariant()));
             }
             else
             {

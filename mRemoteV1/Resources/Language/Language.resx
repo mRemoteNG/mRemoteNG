@@ -2819,6 +2819,12 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strPropertyDescriptionPasswordProtect" xml:space="preserve">
     <value>Set a password needed to encrypt the connection file with. You will be prompted to enter your passcode before starting mRemoteNG.</value>
   </data>
+  <data name="strPropertyDescriptionUseEnhancedMode" xml:space="preserve">
+    <value>Connect to a Hyper-V host with enhanced mode enabled.</value>
+  </data>
+  <data name="strPropertyNameUseEnhancedMode" xml:space="preserve">
+    <value>Use enhanced mode</value>
+  </data>
   <data name="strPowerShell" xml:space="preserve">
     <value>PowerShell</value>
   </data>

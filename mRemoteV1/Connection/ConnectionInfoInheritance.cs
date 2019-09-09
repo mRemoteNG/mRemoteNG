@@ -166,6 +166,12 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseVmId { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit("strPropertyNameUseEnhancedMode"),
+         LocalizedAttributes.LocalizedDescriptionInherit("strPropertyDescriptionUseEnhancedMode"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UseEnhancedMode { get; set; }
+
         #endregion
 
         #region RD Gateway

@@ -140,8 +140,10 @@ CREATE TABLE [dbo].[tblCons] (
 	InheritRdpVersion bit DEFAULT ((0)) NOT NULL,
 	VmId varchar(100),
 	UseVmId bit,
+	UseEnhancedMode bit,
 	InheritVmId bit,
-	InheritUseVmId bit
+	InheritUseVmId bit,
+	InheritUseEnhancedMode bit
 ) GO
 
 CREATE TABLE [dbo].[tblRoot] (

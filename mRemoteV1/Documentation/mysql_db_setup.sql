@@ -143,8 +143,10 @@ CREATE TABLE `tblCons` (
     `InheritRdpVersion` tinyint(1) NOT NULL DEFAULT 0,
 	`VmId` varchar(512) DEFAULT NULL,
 	`UseVmId` tinyint(1) DEFAULT NULL,
+	`UseEnhancedMode` tinyint(1) DEFAULT NULL,
 	`InheritVmId` tinyint(1) DEFAULT NULL,
 	`InheritUseVmId` tinyint(1) DEFAULT NULL,
+	`InheritUseEnhancedMode` tinyint(1) DEFAULT NULL,
     PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3324 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

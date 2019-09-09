@@ -164,6 +164,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.UseVmId = value;
             }
 
+            if (headers.Contains("UseEnhancedMode"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("UseEnhancedMode")], out value))
+                    connectionRecord.UseEnhancedMode = value;
+            }
+
             if (headers.Contains("RenderingEngine"))
             {
                 HTTPBase.RenderingEngine value;
@@ -562,6 +569,13 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseVmId")], out value))
                     connectionRecord.Inheritance.UseVmId = value;
+            }
+
+            if (headers.Contains("InheritUseEnhancedMode"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseEnhancedMode")], out value))
+                    connectionRecord.Inheritance.UseEnhancedMode = value;
             }
 
             if (headers.Contains("InheritRenderingEngine"))
