@@ -195,10 +195,14 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("InheritSoundQuality", typeof(bool));
             dataTable.Columns.Add("VmId", typeof(string));
             dataTable.Columns.Add("UseVmId", typeof(bool));
+            dataTable.Columns.Add("UseEnhancedMode", typeof(bool));
             dataTable.Columns.Add("InheritVmId", typeof(bool));
             dataTable.Columns.Add("InheritUseVmId", typeof(bool));
+            dataTable.Columns.Add("InheritUseEnhancedMode", typeof(bool));
             dataTable.Columns.Add("RdpVersion", typeof(string));
             dataTable.Columns.Add("InheritRdpVersion", typeof(bool));
+            dataTable.Columns.Add("EnhancedMode", typeof(bool));
+            dataTable.Columns.Add("InheritEnhancedMode", typeof(bool));
         }
 
         private void SetPrimaryKey(DataTable dataTable)
@@ -247,6 +251,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["ConnectToConsole"] = connectionInfo.UseConsoleSession;
             dataRow["UseCredSsp"] = connectionInfo.UseCredSsp;
             dataRow["UseVmId"] = connectionInfo.UseVmId;
+            dataRow["UseEnhancedMode"] = connectionInfo.UseEnhancedMode;
             dataRow["RenderingEngine"] = connectionInfo.RenderingEngine;
             dataRow["ICAEncryptionStrength"] = connectionInfo.ICAEncryptionStrength;
             dataRow["RDPAuthenticationLevel"] = connectionInfo.RDPAuthenticationLevel;
@@ -332,6 +337,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
                 dataRow["InheritVmId"] = connectionInfo.Inheritance.VmId;
                 dataRow["InheritUseVmId"] = connectionInfo.Inheritance.UseVmId;
+                dataRow["InheritUseEnhancedMode"] = connectionInfo.Inheritance.UseEnhancedMode;
                 dataRow["InheritICAEncryptionStrength"] = connectionInfo.Inheritance.ICAEncryptionStrength;
                 dataRow["InheritRDPAuthenticationLevel"] = connectionInfo.Inheritance.RDPAuthenticationLevel;
                 dataRow["InheritRDPMinutesToIdleTimeout"] = connectionInfo.Inheritance.RDPMinutesToIdleTimeout;

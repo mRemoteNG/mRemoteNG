@@ -5,20 +5,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+### Changed
+- #1460: Updated GeckoFX to v60
+### Fixed
+- #1337: Unhandled exception after closing mRemoteNG
+
+## [1.77.1] - 2019-09-02
+### Added
 - #1512: Added option to close panel from right click menu
+- #1434: Revised sort button in connection tree to be able to sort in both orders
+- #1400: Added file download handling to HTTP(S) connections using Gecko
+- #1385: Added option to start mRemoteNG minimized
 - #826: Allow selecting RDP version to use when connecting
 ### Changed
+- #1544: Improved Polish translations
+- #1518: Inheritance is no longer automatically enabled when importing nodes from Active Directory
 - #1468: Improved mRemoteNG startup time
 - #1443: Chinese (simplified) translation improvements
 - #1437: Norwegian translation improvements
+- #1378: Hyperlinks embedded within mRemoteNG now open in the system default browser
 - #1239: Increased default key derivation function (KDF) iterations from 1000 to 10000
+- #718: Moved port property from 'protocol' to 'connection' section
 - Moved most RDP enums outside of the RDP protocol class. Scripts which reference these enums will need to be updated.
+- Removed the "Automatically get session info" from the advanced options screen since it is no longer used.
 ### Fixed
+- #1505: About screen now better follows theme colors
+- #1493: Updated database setup scripts for MSSQL and MySQL
+- #1470: The "Favorite" setting is now properly saved in the local connection settings file (not saved in database)
 - #1447: Exception occurs when resetting layout
 - #1439: Searching in hosts tree loses first keystroke
 - #1428: Fixed a rare error when checking for FIPS
 - #1426: Tabbing is reversed in config window
-- #1425: Connections didn't always respect the Panel property
+- #1425: Connections didn't always respect the panel property
+- #841: Allow for sorting in port scan results
+- #617: Added missing description for password protect field in root node
+- #553: Browser language not set when using Gecko rendering engine
 - #323: Wallpaper always shows in RDP connections, even when turned off
 
 

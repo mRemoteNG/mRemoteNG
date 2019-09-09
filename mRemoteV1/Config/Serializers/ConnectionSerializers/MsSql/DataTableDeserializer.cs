@@ -90,6 +90,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
             connectionInfo.Hostname = (string)dataRow["Hostname"];
             connectionInfo.VmId = (string)dataRow["VmId"];
+            connectionInfo.UseEnhancedMode = (bool)dataRow["UseEnhancedMode"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
             connectionInfo.SSHTunnelConnectionName = (string)dataRow["SSHTunnelConnectionName"];
             connectionInfo.SSHOptions = (string)dataRow["SSHOptions"];
@@ -166,8 +167,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
 
-            if (Enum.TryParse((string)dataRow["RdpVersion"], true, out RdpVersion rdpVersion))
-                connectionInfo.RdpVersion = rdpVersion;
+            if (!dataRow.IsNull("RdpVersion")) // table allows null values which must be handled
+                if (Enum.TryParse((string)dataRow["RdpVersion"], true, out RdpVersion rdpVersion))
+                    connectionInfo.RdpVersion = rdpVersion;
 
             connectionInfo.Inheritance.CacheBitmaps = (bool)dataRow["InheritCacheBitmaps"];
             connectionInfo.Inheritance.Colors = (bool)dataRow["InheritColors"];
@@ -199,6 +201,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];
             connectionInfo.Inheritance.UseCredSsp = (bool)dataRow["InheritUseCredSsp"];
             connectionInfo.Inheritance.UseVmId = (bool)dataRow["InheritUseVmId"];
+            connectionInfo.Inheritance.UseEnhancedMode = (bool)dataRow["InheritUseEnhancedMode"];
             connectionInfo.Inheritance.VmId = (bool)dataRow["InheritVmId"];
             connectionInfo.Inheritance.RenderingEngine = (bool)dataRow["InheritRenderingEngine"];
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];

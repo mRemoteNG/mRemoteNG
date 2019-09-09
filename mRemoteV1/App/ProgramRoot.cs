@@ -27,7 +27,7 @@ namespace mRemoteNG.App
             CatchAllUnhandledExceptions();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            FrmSplashScreen frmSplashScreen = FrmSplashScreen.getInstance();
+            var frmSplashScreen = FrmSplashScreen.getInstance();
             frmSplashScreen.Show();
             Application.Run(FrmMain.Default);
         }

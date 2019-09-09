@@ -1336,7 +1336,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPanelName" xml:space="preserve">
     <value>Panel Name</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Password protect</value>
   </data>
   <data name="strPasswordStatusMustMatch" xml:space="preserve">
@@ -2848,5 +2848,17 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="strSSHTunnelPortNotReadyInTime" xml:space="preserve">
     <value>SSH tunnel connection timed out. Connection to: "{0}" via SSH Tunnel: "{1}" not possible. Local tunnel port did not become available in time. Check for any problems with the connection configured as SSH Tunnel.</value>
+  </data>
+  <data name="strStartMinimized" xml:space="preserve">
+    <value>Start minimized</value>
+  </data>
+  <data name="strPropertyDescriptionPasswordProtect" xml:space="preserve">
+    <value>Set a password needed to encrypt the connection file with. You will be prompted to enter your passcode before starting mRemoteNG.</value>
+  </data>
+  <data name="strPropertyDescriptionUseEnhancedMode" xml:space="preserve">
+    <value>Connect to a Hyper-V host with enhanced mode enabled.</value>
+  </data>
+  <data name="strPropertyNameUseEnhancedMode" xml:space="preserve">
+    <value>Use enhanced mode</value>
   </data>
 </root>

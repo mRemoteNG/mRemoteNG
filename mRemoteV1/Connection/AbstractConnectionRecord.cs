@@ -25,6 +25,7 @@ namespace mRemoteNG.Connection
         private string _password = "";
         private string _domain = "";
         private string _vmId = "";
+        private bool _useEnhancedMode;
 
         private string _sshTunnelConnectionName = "";
         private ProtocolType _protocol;
@@ -145,6 +146,16 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNamePort"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPort"),
+         UsedInAllProtocolsExcept(ProtocolType.ICA)]
+        public virtual int Port
+        {
+            get => GetPropertyValue("Port", _port);
+            set => SetField(ref _port, value, "Port");
+        }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
          LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername"),
          UsedInAllProtocolsExcept(ProtocolType.VNC, ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
@@ -230,16 +241,6 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("ExtApp", _extApp);
             set => SetField(ref _extApp, value, "ExtApp");
-        }
-
-        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNamePort"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPort"),
-         UsedInAllProtocolsExcept(ProtocolType.ICA)]
-        public virtual int Port
-        {
-            get => GetPropertyValue("Port", _port);
-            set => SetField(ref _port, value, "Port");
         }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
@@ -367,6 +368,16 @@ namespace mRemoteNG.Connection
             set => SetField(ref _useVmId, value, "UseVmId");
         }
 
+        [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseEnhancedMode"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseEnhancedMode"),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
+        public bool UseEnhancedMode
+        {
+            get => GetPropertyValue("UseEnhancedMode", _useEnhancedMode);
+            set => SetField(ref _useEnhancedMode, value, "UseEnhancedMode");
+        }
         #endregion
 
         #region RD Gateway

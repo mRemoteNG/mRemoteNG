@@ -12,7 +12,7 @@ namespace mRemoteNG {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2583,8 +2583,8 @@ namespace mRemoteNG {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("cs-CZ,de,el,en,en-US,es-AR,es,fr,hu,it,ja-JP,ko-KR,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-" +
-            "TR,zh-CN,zh-TW")]
+        [global::System.Configuration.DefaultSettingValueAttribute("cs-CZ,de,el,en,en-US,es-AR,es,fr,hu,it,lt,ja-JP,ko-KR,nb-NO,nl,pt,pt-BR,pl,ru,uk," +
+            "tr-TR,zh-CN,zh-TW")]
         public string SupportedUICultures {
             get {
                 return ((string)(this["SupportedUICultures"]));
@@ -2972,6 +2972,30 @@ namespace mRemoteNG {
             }
             set {
                 this["ConDefaultSSHOptions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool StartMinimized {
+            get {
+                return ((bool)(this["StartMinimized"]));
+            }
+            set {
+                this["StartMinimized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultUseEnhancedMode {
+            get {
+                return ((bool)(this["ConDefaultUseEnhancedMode"]));
+            }
+            set {
+                this["ConDefaultUseEnhancedMode"] = value;
             }
         }
     }

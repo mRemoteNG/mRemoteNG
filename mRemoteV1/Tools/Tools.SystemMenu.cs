@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using mRemoteNG.App;
 using Microsoft.Win32.SafeHandles;
@@ -86,7 +86,7 @@ namespace mRemoteNG.Tools
         protected override void Dispose(bool disposing)
         {
             if (disposed) return;
-            if (!disposing) return;
+            if (disposing) return;
 
             ReleaseHandle();
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
     Microsoft ResX Schema 
@@ -211,10 +211,13 @@
     <value>Ikona</value>
   </data>
 	<data name="strButtonImport" xml:space="preserve">
-    <value>&amp;Import</value>
+    <value>&amp;Importuj</value>
   </data>
 	<data name="strButtonInheritance" xml:space="preserve">
     <value>Dziedziczenie</value>
+  </data>
+  <data name="strButtonLaunch" xml:space="preserve">
+    <value>Uruchom</value>
   </data>
 	<data name="strButtonLaunchPutty" xml:space="preserve">
     <value>Uruchom PuTTY</value>
@@ -251,7 +254,7 @@ Proszę użyć opcji Plik - Wgraj Połączenia aby wgrać zwykłe pliki połącz
     <value>Połączenie</value>
   </data>
 	<data name="strCategoryCredentials" xml:space="preserve">
-    <value>Dane uwierzytelniające</value>
+    <value>Uwierzytelnienia</value>
   </data>
 	<data name="strCategoryDisplay" xml:space="preserve">
     <value>Wyświetl</value>
@@ -407,6 +410,9 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
 	<data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
     <value>{0} wykrył, że w systemie działa Lenovo Auto Scroll Utility. To narzędzie jest znane jako przyczyna problemów z {0}. Zaleca się, wyłączyć lub odinstalować ten program.</value>
   </data>
+  <data name="strCommandTryAgain" xml:space="preserve">
+    <value>Spróbuj ponownie</value>
+  </data>
 	<data name="strCompatibilityProblemDetected" xml:space="preserve">
     <value>Wykryto problem z kompatybilnością</value>
   </data>
@@ -507,6 +513,9 @@ Załadowano nowy plik połączeń.</value>
 	<data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Nie można zapisać pliku połączeń jako "{0}"!</value>
   </data>
+  <data name="strConnectNoCredentials" xml:space="preserve">
+    <value>Połącz się bez uwierzytelnienia</value>
+  </data>
 	<data name="strConnectToConsoleSession" xml:space="preserve">
     <value>Połącz się z sesją konsoli</value>
   </data>
@@ -558,6 +567,12 @@ Załadowano nowy plik połączeń.</value>
 	<data name="strEnc128BitLogonOnly" xml:space="preserve">
     <value>128-bit (tylko logowanie)</value>
   </data>
+  <data name="strEnc40Bit" xml:space="preserve">
+    <value>40-bitowe</value>
+  </data>
+  <data name="strEnc56Bit" xml:space="preserve">
+    <value>56-bitowe</value>
+  </data>
 	<data name="strEncBasic" xml:space="preserve">
     <value>Podstawowe</value>
   </data>
@@ -588,6 +603,9 @@ Załadowano nowy plik połączeń.</value>
 	<data name="strErrorConnectionListSaveFailed" xml:space="preserve">
     <value>Nie można zapisać listy połączeń.</value>
   </data>
+  <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
+    <value>Nie udało się uruchomić PuTTY.</value>
+  </data>
 	<data name="strErrorDecryptionFailed" xml:space="preserve">
     <value>Odszyfrowywanie nie powiodło się. {0}</value>
   </data>
@@ -612,11 +630,20 @@ Załadowano nowy plik połączeń.</value>
 	<data name="strExport" xml:space="preserve">
     <value>Eksport</value>
   </data>
+  <data name="strExportEverything" xml:space="preserve">
+    <value>Eksportuj wszystko</value>
+  </data>
+  <data name="strExportFile" xml:space="preserve">
+    <value>Eksportuj do pliku</value>
+  </data>
 	<data name="strExportmRemoteXML" xml:space="preserve">
     <value>Eksport mRemote/mRemoteNG XML</value>
   </data>
 	<data name="strExtApp" xml:space="preserve">
     <value>Aplikacja zewnętrzna</value>
+  </data>
+  <data name="strExternalToolDefaultName" xml:space="preserve">
+    <value>Nowe narzędzie zewnętrzne</value>
   </data>
 	<data name="strFAMFAMFAMAttribution" xml:space="preserve">
     <value>Zawiera ikony ze strony [FAMFAMFAM]</value>
@@ -694,7 +721,7 @@ Załadowano nowy plik połączeń.</value>
     <value>Wykonanie ICA SetCredentials nie powiodło się!</value>
   </data>
 	<data name="strImportAD" xml:space="preserve">
-    <value>Importów z Active Directory</value>
+    <value>Importuj z Active Directory</value>
   </data>
 	<data name="strImportExport" xml:space="preserve">
     <value>Importuj/Eksportuj</value>
@@ -975,6 +1002,9 @@ Załadowano nowy plik połączeń.</value>
 	<data name="strMenuReportBug" xml:space="preserve">
     <value>Zgłoś błąd</value>
   </data>
+  <data name="strMenuResetLayout" xml:space="preserve">
+    <value>Przywróć domyślny layout</value>
+  </data>
 	<data name="strMenuSaveConnectionFile" xml:space="preserve">
     <value>Zapisz plik połączeń</value>
   </data>
@@ -1101,6 +1131,9 @@ Załadowano nowy plik połączeń.</value>
 	<data name="strPanelName" xml:space="preserve">
     <value>Nazwa panelu</value>
   </data>
+  <data name="strPasswordProtect" xml:space="preserve">
+    <value>Zabezpiecz hasłem</value>
+  </data>
 	<data name="strPleaseFillAllFields" xml:space="preserve">
     <value>Wypełnij wszystkie pola</value>
   </data>
@@ -1127,6 +1160,9 @@ Załadowano nowy plik połączeń.</value>
   </data>
 	<data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
     <value>Wybierz "Tak" jeśli motyw ma być wyświetlany na zdalnym komputerze.</value>
+  </data>
+  <data name="strPropertyDescriptionName" xml:space="preserve">
+    <value>To jest nazwa, która będzie wyświetlana na drzewie połączeń.</value>
   </data>
 	<data name="strPropertyDescriptionDomain" xml:space="preserve">
     <value>Podaj domenę.</value>
@@ -1370,6 +1406,15 @@ Załadowano nowy plik połączeń.</value>
   </data>
 	<data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>&amp;Ostrzegaj przed zamknięciem połączenia</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>Ostrzegaj tylko przy zamykaniu mRemoteNG</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>Otrzegaj tylko przy zamykaniu wielu połączeń</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>Nie ostrzegaj przed zamknięciem połączeń</value>
   </data>
 	<data name="strRAW" xml:space="preserve">
     <value>RAW</value>
@@ -1641,7 +1686,10 @@ Załadowano nowy plik połączeń.</value>
 	<data name="strStatus" xml:space="preserve">
     <value>Stan</value>
   </data>
-	<data name="strTabAdvanced" xml:space="preserve">
+  <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
+    <value>Przełącz do okna powiadomień dla:</value>
+  </data>
+  <data name="strTabAdvanced" xml:space="preserve">
     <value>Zaawansowane</value>
   </data>
 	<data name="strTabAppearance" xml:space="preserve">
@@ -1890,5 +1938,47 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
   </data>
 	<data name="strYes" xml:space="preserve">
     <value>Tak</value>
+  </data>
+  <data name="strShowTheseMessageTypes" xml:space="preserve">
+    <value>Wyświetlaj wiadomości następujących typów</value>
+  </data>
+  <data name="strLogFilePath" xml:space="preserve">
+    <value>Ścieżka pliku logów</value>
+  </data>
+  <data name="strLogTheseMessageTypes" xml:space="preserve">
+    <value>Loguj wiadomości następujących typów</value>
+  </data>
+  <data name="strChoosePath" xml:space="preserve">
+    <value>Wybierz katalog</value>
+  </data>
+  <data name="strOpenFile" xml:space="preserve">
+    <value>Otwórz plik</value>
+  </data>
+  <data name="strUseDefault" xml:space="preserve">
+    <value>Użyj domyślnego</value>
+  </data>
+  <data name="strLogging" xml:space="preserve">
+    <value>Logowanie</value>
+  </data>
+  <data name="strPopups" xml:space="preserve">
+    <value>Wyskakujące okienka</value>
+  </data>
+  <data name="strLogToAppDir" xml:space="preserve">
+    <value>Loguj do katalogu aplikacji</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Uwierzytelnienia</value>
+  </data>
+  <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
+    <value>Timeout połączeń RDP</value>
+  </data>
+  <data name="srtWorkingDirectory" xml:space="preserve">
+    <value>Katalog roboczy:</value>
+  </data>
+  <data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Stwórz pusty panel przy uruchamianiu mRemoteNG</value>
+  </data>
+  <data name="strWorkingDirColumnHeader" xml:space="preserve">
+    <value>Katalog roboczy</value>
   </data>
 </root>
