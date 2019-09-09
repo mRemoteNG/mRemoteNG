@@ -1282,7 +1282,6 @@
     <Content Include="Icons\Infrastructure.ico" />
     <Content Include="Icons\Production.ico" />
     <Content Include="Icons\Staging.ico" />
-    <Content Include="Icons\Test.ico" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
