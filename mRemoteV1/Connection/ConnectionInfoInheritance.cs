@@ -79,12 +79,6 @@ namespace mRemoteNG.Connection
         public bool Domain { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
-         LocalizedAttributes.LocalizedDisplayNameInherit("strPropertyNamePort"),
-         LocalizedAttributes.LocalizedDescriptionInherit("strPropertyDescriptionPort"),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
-        public bool Port { get; set; }
-
-        [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3),
          LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertySSHTunnelConnection"),
          LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionSSHTunnelConnection"),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
