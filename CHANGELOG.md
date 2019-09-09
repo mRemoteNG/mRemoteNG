@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 - #420: SSH tunneling a.k.a. jump host
+- More connection icons (Admin, Infrastructure, Productive, Staging)
+- SSH options property to pass additional parameters into PuTTY
 ### Changed
 - #1460: Updated GeckoFX to v60
 ### Fixed
