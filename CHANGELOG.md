@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #420: SSH tunneling a.k.a. jump host
 ### Changed
 - #1460: Updated GeckoFX to v60
 ### Fixed
