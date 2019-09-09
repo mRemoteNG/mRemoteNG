@@ -114,8 +114,8 @@ namespace mRemoteNG.Connection
         public bool Port { get; set; }
 
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4),
-         LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameSSHOptions"),
-         LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionSSHOptions"),
+         LocalizedAttributes.LocalizedDisplayNameInherit("strPropertyNameSSHOptions"),
+         LocalizedAttributes.LocalizedDescriptionInherit("strPropertyDescriptionSSHOptions"),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool SSHOptions { get; set; }
 
