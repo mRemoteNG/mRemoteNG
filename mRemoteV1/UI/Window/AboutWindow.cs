@@ -121,8 +121,8 @@ namespace mRemoteNG.UI.Window
 
         private void LinkClicked(object sender, DomMouseEventArgs e)
         {
-            string url = ((GeckoWebBrowser)sender).StatusText;
-            if (url != "")
+            var url = ((GeckoWebBrowser)sender).StatusText;
+            if (!string.IsNullOrEmpty(url))
                 Process.Start(url);
             e.Handled = true;
         }
