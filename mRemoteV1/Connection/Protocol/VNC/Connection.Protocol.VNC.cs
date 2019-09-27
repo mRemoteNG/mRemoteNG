@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.ComponentModel;
+using System.Net.Sockets;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -15,22 +17,25 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
         public bool SmartSize
         {
-            get { return _VNC.Scaled; }
-            set { _VNC.Scaled = value; }
+            get { return _vnc.Scaled; }
+            set { _vnc.Scaled = value; }
         }
 
         public bool ViewOnly
         {
-            get { return _VNC.ViewOnly; }
-            set { _VNC.ViewOnly = value; }
+            get { return _vnc.ViewOnly; }
+            set { _vnc.ViewOnly = value; }
         }
 
         #endregion
 
         #region Private Declarations
 
-        private VncSharp.RemoteDesktop _VNC;
-        private ConnectionInfo Info;
+        private VncSharp.RemoteDesktop _vnc;
+        private ConnectionInfo _info;
+        private static bool _isConnectionSuccessful;
+        private static Exception _socketexception;
+        private static readonly ManualResetEvent TimeoutObject = new ManualResetEvent(false);
 
         #endregion
 
@@ -47,11 +52,9 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
             try
             {
-                _VNC = (VncSharp.RemoteDesktop)Control;
-
-                Info = InterfaceControl.Info;
-
-                _VNC.VncPort = Info.Port;
+                _vnc = (VncSharp.RemoteDesktop)Control;
+                _info = InterfaceControl.Info;
+                _vnc.VncPort = _info.Port;
 
                 return true;
             }
@@ -63,14 +66,14 @@ namespace mRemoteNG.Connection.Protocol.VNC
                 return false;
             }
         }
-
+ 
         public override bool Connect()
         {
             SetEventHandlers();
-
             try
             {
-                _VNC.Connect(Info.Hostname, Info.VNCViewOnly, Info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
+                if (TestConnect(_info.Hostname, _info.Port, 150))
+                    _vnc.Connect(_info.Hostname, _info.VNCViewOnly, _info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
             }
             catch (Exception ex)
             {
@@ -87,7 +90,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
         {
             try
             {
-                _VNC.Disconnect();
+                _vnc.Disconnect();
             }
             catch (Exception ex)
             {
@@ -105,10 +108,10 @@ namespace mRemoteNG.Connection.Protocol.VNC
                 switch (Keys)
                 {
                     case SpecialKeys.CtrlAltDel:
-                        _VNC.SendSpecialKeys(VncSharp.SpecialKeys.CtrlAltDel);
+                        _vnc.SendSpecialKeys(VncSharp.SpecialKeys.CtrlAltDel);
                         break;
                     case SpecialKeys.CtrlEsc:
-                        _VNC.SendSpecialKeys(VncSharp.SpecialKeys.CtrlEsc);
+                        _vnc.SendSpecialKeys(VncSharp.SpecialKeys.CtrlEsc);
                         break;
                 }
             }
@@ -164,7 +167,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
         {
             try
             {
-                _VNC.FullScreenUpdate();
+                _vnc.FullScreenUpdate();
             }
             catch (Exception ex)
             {
@@ -182,12 +185,12 @@ namespace mRemoteNG.Connection.Protocol.VNC
         {
             try
             {
-                _VNC.ConnectComplete += VNCEvent_Connected;
-                _VNC.ConnectionLost += VNCEvent_Disconnected;
+                _vnc.ConnectComplete += VNCEvent_Connected;
+                _vnc.ConnectionLost += VNCEvent_Disconnected;
                 FrmMain.ClipboardChanged += VNCEvent_ClipboardChanged;
-                if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials) && Info?.Password?.Length > 0)
+                if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials) && _info?.Password?.Length > 0)
                 {
-                    _VNC.GetPassword = VNCEvent_Authenticate;
+                    _vnc.GetPassword = VNCEvent_Authenticate;
                 }
             }
             catch (Exception ex)
@@ -198,6 +201,49 @@ namespace mRemoteNG.Connection.Protocol.VNC
             }
         }
 
+        private static bool TestConnect(string hostName, int port, int timeoutMSec)
+        {
+            var tcpclient = new TcpClient();
+
+            TimeoutObject.Reset();
+            tcpclient.BeginConnect(hostName, port, CallBackMethod, tcpclient);
+
+            if (TimeoutObject.WaitOne(timeoutMSec, false))
+            {
+                if (_isConnectionSuccessful) return true;
+            }
+            else
+            {
+                tcpclient.Close();
+                throw new TimeoutException($"Connection timed out to host " + hostName + " on port " + port);
+            }
+
+            return false;
+        }
+
+        private static void CallBackMethod(IAsyncResult asyncresult)
+        {
+            try
+            {
+                _isConnectionSuccessful = false;
+                var tcpclient = asyncresult.AsyncState as TcpClient;
+
+                if (tcpclient?.Client == null) return;
+
+                tcpclient.EndConnect(asyncresult);
+                _isConnectionSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                _isConnectionSuccessful = false;
+                _socketexception = ex;
+            }
+            finally
+            {
+                TimeoutObject.Set();
+            }
+        }
+
         #endregion
 
         #region Private Events & Handlers
@@ -205,7 +251,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
         private void VNCEvent_Connected(object sender, EventArgs e)
         {
             Event_Connected(this);
-            _VNC.AutoScroll = Info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
+            _vnc.AutoScroll = _info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
         }
 
         private void VNCEvent_Disconnected(object sender, EventArgs e)
@@ -217,12 +263,12 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
         private void VNCEvent_ClipboardChanged()
         {
-            _VNC.FillServerClipboard();
+            _vnc.FillServerClipboard();
         }
 
         private string VNCEvent_Authenticate()
         {
-            return Info.Password;
+            return _info.Password;
         }
 
         #endregion
