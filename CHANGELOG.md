@@ -4,14 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Fixed
-- Making a VNC connection to a host that is either off or does not have VNC causes the application not to respond for 20-30 seconds
 ### Added
 ### Changed
 - #1460: Updated GeckoFX to v60
 ### Fixed
 - #1595: Unhandled exception when trying to browse through non existent multi ssh history with keyboard key strokes
 - #1337: Unhandled exception after closing mRemoteNG
+- #359: Making a VNC connection to an unreachable host causes the application to not respond for 20-30 seconds
 
 ## [1.77.1] - 2019-09-02
 ### Added
