@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Threading;
 using System.ComponentModel;
+using System.Net;
+using System.Collections.Generic;
+using System.Net.Sockets;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -32,6 +36,10 @@ namespace mRemoteNG.Connection.Protocol.VNC
         private VncSharp.RemoteDesktop _VNC;
         private ConnectionInfo Info;
 
+        private static bool IsConnectionSuccessful = false;
+        private static Exception socketexception;
+        private static ManualResetEvent TimeoutObject = new ManualResetEvent(false);
+
         #endregion
 
         #region Public Methods
@@ -63,24 +71,24 @@ namespace mRemoteNG.Connection.Protocol.VNC
                 return false;
             }
         }
-
+ 
         public override bool Connect()
         {
             SetEventHandlers();
+                try
+                {
+                    TestConnect(Info.Hostname, Info.Port, 150);
+                    _VNC.Connect(Info.Hostname, Info.VNCViewOnly, Info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                                                        Language.strConnectionOpenFailed + Environment.NewLine +
+                                                        ex.Message);
+                    return false;
+                }
 
-            try
-            {
-                _VNC.Connect(Info.Hostname, Info.VNCViewOnly, Info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.strConnectionOpenFailed + Environment.NewLine +
-                                                    ex.Message);
-                return false;
-            }
-
-            return true;
+                return true;
         }
 
         public override void Disconnect()
@@ -195,6 +203,57 @@ namespace mRemoteNG.Connection.Protocol.VNC
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
                                                     Language.strVncSetEventHandlersFailed + Environment.NewLine +
                                                     ex.Message, true);
+            }
+        }
+
+        private static TcpClient TestConnect(string hostName, int port, int timeoutMSec)
+        {
+            TimeoutObject.Reset();
+            socketexception = null;
+
+            TcpClient tcpclient = new TcpClient();
+
+            tcpclient.BeginConnect(hostName, port, new AsyncCallback(CallBackMethod), tcpclient);
+
+            if (TimeoutObject.WaitOne(timeoutMSec, false))
+            {
+                if (IsConnectionSuccessful)
+                {
+                    return tcpclient;
+                }
+                else
+                {
+                    throw socketexception;
+                }
+            }
+            else
+            {
+                tcpclient.Close();
+                throw new TimeoutException($"Connection timed out to host " + hostName + " on port " + port);
+            }
+        }
+
+        private static void CallBackMethod(IAsyncResult asyncresult)
+        {
+            try
+            {
+                IsConnectionSuccessful = false;
+                TcpClient tcpclient = asyncresult.AsyncState as TcpClient;
+
+                if (tcpclient.Client != null)
+                {
+                    tcpclient.EndConnect(asyncresult);
+                    IsConnectionSuccessful = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                IsConnectionSuccessful = false;
+                socketexception = ex;
+            }
+            finally
+            {
+                TimeoutObject.Set();
             }
         }
 
