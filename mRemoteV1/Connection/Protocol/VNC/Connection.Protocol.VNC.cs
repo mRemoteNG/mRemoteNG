@@ -72,7 +72,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
             SetEventHandlers();
             try
             {
-                if (TestConnect(_info.Hostname, _info.Port, 150))
+                if (TestConnect(_info.Hostname, _info.Port, 500))
                     _vnc.Connect(_info.Hostname, _info.VNCViewOnly, _info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
             }
             catch (Exception ex)
