@@ -355,13 +355,8 @@ namespace mRemoteNG.UI.Forms
         {
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 
-            var nextUpdateCheck = Convert.ToDateTime(
-                                                     Settings.Default.CheckForUpdatesLastCheck.Add(
-                                                                                                   TimeSpan
-                                                                                                       .FromDays(Convert
-                                                                                                                     .ToDouble(Settings
-                                                                                                                               .Default
-                                                                                                                               .CheckForUpdatesFrequencyDays))));
+            var nextUpdateCheck =
+                Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
 
             if (!Settings.Default.UpdatePending && DateTime.UtcNow <= nextUpdateCheck) return;
             if (!IsHandleCreated)
@@ -372,6 +367,16 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Settings.Default.CloseToTray)
+            {
+                if (Runtime.NotificationAreaIcon == null)
+                    Runtime.NotificationAreaIcon = new NotificationAreaIcon();
+
+                Hide();
+                e.Cancel = true;
+                return;
+            }
+
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
             {
                 var openConnections = 0;

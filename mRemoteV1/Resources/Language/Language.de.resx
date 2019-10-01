@@ -2690,4 +2690,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="strPropertyDescriptionPasswordProtect" xml:space="preserve">
     <value>Legen Sie ein Kennwort fest, mit dem die Verbindungsdatei verschlüsselt werden soll. Sie werden aufgefordert Ihr Passwort einzugeben, bevor Sie mRemoteNG starten.</value>
   </data>
+  <data name="strCloseToSysTray" xml:space="preserve">
+    <value>In den System Tray schließen</value>
+  </data>
 </root>

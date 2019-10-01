@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
@@ -31,6 +31,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowFullConnectionsFilePathInTitle.Text = Language.strShowFullConsFilePath;
             chkShowSystemTrayIcon.Text = Language.strAlwaysShowSysTrayIcon;
             chkMinimizeToSystemTray.Text = Language.strMinimizeToSysTray;
+            chkCloseToSystemTray.Text = Language.strCloseToSysTray;
         }
 
         public override void LoadSettings()
@@ -58,6 +59,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowFullConnectionsFilePathInTitle.Checked = Settings.Default.ShowCompleteConsPathInTitle;
             chkShowSystemTrayIcon.Checked = Settings.Default.ShowSystemTrayIcon;
             chkMinimizeToSystemTray.Checked = Settings.Default.MinimizeToTray;
+            chkCloseToSystemTray.Checked = Settings.Default.CloseToTray;
         }
 
         public override void SaveSettings()
@@ -95,6 +97,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             Settings.Default.MinimizeToTray = chkMinimizeToSystemTray.Checked;
+            Settings.Default.CloseToTray = chkCloseToSystemTray.Checked;
         }
     }
 }
