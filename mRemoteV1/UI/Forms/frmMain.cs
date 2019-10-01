@@ -372,9 +372,13 @@ namespace mRemoteNG.UI.Forms
                 if (Runtime.NotificationAreaIcon == null)
                     Runtime.NotificationAreaIcon = new NotificationAreaIcon();
 
-                Hide();
-                e.Cancel = true;
-                return;
+                if (WindowState == FormWindowState.Normal || WindowState == FormWindowState.Maximized)
+                {
+                    Hide();
+                    WindowState = FormWindowState.Minimized;
+                    e.Cancel = true;
+                    return;
+                }
             }
 
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
