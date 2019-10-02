@@ -62,6 +62,7 @@ http://github.com/wwj402
 http://github.com/Fyers  
 http://github.com/pablomh  
 Damian Szczepanik (http://github.com/damianszczepanik)
+Mant1kor (https://github.com/Mant1kor)
 
 ## Included Source Code
 Command Line Arguments Parser  
