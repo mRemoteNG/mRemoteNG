@@ -61,7 +61,8 @@ Marco Sousa (http://github.com/marcomsousa)
 http://github.com/wwj402  
 http://github.com/Fyers  
 http://github.com/pablomh  
-Damian Szczepanik (http://github.com/damianszczepanik)
+Damian Szczepanik (http://github.com/damianszczepanik)  
+Mant1kor (http://github.com/Mant1kor)
 
 ## Included Source Code
 Command Line Arguments Parser  
