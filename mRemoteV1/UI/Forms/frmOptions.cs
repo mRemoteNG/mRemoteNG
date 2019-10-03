@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -120,7 +121,7 @@ namespace mRemoteNG.UI.Forms
          * OK sets DialogResult = OK, Apply does not (None).
          * Apply will no close the dialog.
          */
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             foreach (var page in _pages.Values)
             {
@@ -142,15 +143,9 @@ namespace mRemoteNG.UI.Forms
                 pnlMain.Controls.Add(page);
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
-            foreach (var page in _pages.Values)
-            {
-                Debug.WriteLine(page.PageName);
-                page.RevertSettings();
-            }
-
-            Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+            Close();
         }
     }
 }
