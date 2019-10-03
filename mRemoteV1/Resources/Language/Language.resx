@@ -2840,4 +2840,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strCloseToSysTray" xml:space="preserve">
     <value>Close to notification area</value>
   </data>
+  <data name="strWindows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
 </root>

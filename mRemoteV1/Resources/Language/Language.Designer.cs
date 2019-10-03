@@ -9857,6 +9857,17 @@ namespace mRemoteNG
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Windows.
+        /// </summary>
+        internal static string strWindows
+        {
+            get
+            {
+                return ResourceManager.GetString("strWindows", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Working directory.
         /// </summary>
         internal static string strWorkingDirColumnHeader
