@@ -139,18 +139,18 @@ namespace mRemoteNG.UI.Forms
 
         #region Startup & Shutdown
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void FrmMain_Load(object sender, EventArgs e)
         {
             var messageCollector = Runtime.MessageCollector;
+
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip,
+                _externalToolsToolStrip, _multiSshToolStrip, msMain);
+            settingsLoader.LoadSettings();
+
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
 
             Startup.Instance.InitializeProgram(messageCollector);
-
-            msMain.Location = Point.Empty;
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip,
-                                                    _externalToolsToolStrip, _multiSshToolStrip, msMain);
-            settingsLoader.LoadSettings();
 
             SetMenuDependencies();
 

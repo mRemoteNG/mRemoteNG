@@ -205,7 +205,7 @@
             this.Opacity = 0D;
             this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
-            this.Load += new System.EventHandler(this.frmMain_Load);
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.ResizeBegin += new System.EventHandler(this.frmMain_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.frmMain_ResizeEnd);
