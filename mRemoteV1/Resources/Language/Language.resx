@@ -2831,6 +2831,12 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
     <value>Select whether microphones should be shared.</value>
   </data>
+  <data name="strCloseToSysTray" xml:space="preserve">
+    <value>Close to notification area</value>
+  </data>
+  <data name="strWindows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
   <data name="strPowerShell" xml:space="preserve">
     <value>PowerShell</value>
   </data>

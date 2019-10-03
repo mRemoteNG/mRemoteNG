@@ -1526,6 +1526,17 @@ namespace mRemoteNG
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Close to notification area.
+        /// </summary>
+        internal static string strCloseToSysTray
+        {
+            get
+            {
+                return ResourceManager.GetString("strCloseToSysTray", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Collapse all folders.
         /// </summary>
         internal static string strCollapseAllFolders
@@ -9831,6 +9842,17 @@ namespace mRemoteNG
             get
             {
                 return ResourceManager.GetString("strWeifenLuoAttributionURL", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Windows.
+        /// </summary>
+        internal static string strWindows
+        {
+            get
+            {
+                return ResourceManager.GetString("strWindows", resourceCulture);
             }
         }
 

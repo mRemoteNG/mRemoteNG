@@ -99,14 +99,16 @@ namespace mRemoteNG.Tools
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
             {
                 e.SuppressKeyPress = true;
-                if (e.KeyCode == Keys.Up && previousCommandIndex - 1 >= 0)
+                switch (e.KeyCode)
                 {
-                    previousCommandIndex -= 1;
-                }
-
-                if (e.KeyCode == Keys.Down && previousCommandIndex + 1 < previousCommands.Count)
-                {
-                    previousCommandIndex += 1;
+                    case Keys.Up when previousCommandIndex - 1 >= 0:
+                        previousCommandIndex -= 1;
+                        break;
+                    case Keys.Down when previousCommandIndex + 1 < previousCommands.Count:
+                        previousCommandIndex += 1;
+                        break;
+                    default:
+                        return;
                 }
 
                 txtMultiSSH.Text = previousCommands[previousCommandIndex].ToString();
