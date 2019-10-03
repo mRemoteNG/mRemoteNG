@@ -148,7 +148,7 @@
     <value>Підключатися, навіть якщо не пройшов перевірку</value>
   </data>
 	<data name="strAlwaysShowPanelSelection" xml:space="preserve">
-    <value>Завжди показувати діалог вибору панелі при відкритті з'єднання</value>
+    <value>Завжди показувати діалог вибору вкладки при відкритті з'єднання</value>
   </data>
 	<data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Завжди показувати значок в системному треї</value>
@@ -172,7 +172,7 @@
     <value>Вигляд</value>
   </data>
 	<data name="strAutoSaveEvery" xml:space="preserve">
-    <value>Автозбереження кожні(0 - вимкнено):</value>
+    <value>Автозбереження кожні (0 - вимкнено):</value>
   </data>
 	<data name="strAutoSaveMins" xml:space="preserve">
     <value>Хвилин (0 означає вимкнено)</value>
@@ -378,7 +378,7 @@ VncSharp Control Version {0}</value>
     <value>При запуску перевіряти правильність встановлення компонентів</value>
   </data>
 	<data name="strChoosePanelBeforeConnecting" xml:space="preserve">
-    <value>Вибрати панель перед з'єднанням</value>
+    <value>Вибрати вкладку перед з'єднанням</value>
   </data>
 	<data name="strClosedPorts" xml:space="preserve">
     <value>Закриті порти</value>
@@ -439,7 +439,7 @@ VncSharp Control Version {0}</value>
 «{0}»?</value>
   </data>
 	<data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>Хочете закрити панель «{0}»? Всі її з'єднання також будуть закриті.</value>
+    <value>Дійсно хочете закрити вкладку «{0}»? Всі її з'єднання також будуть закриті.</value>
   </data>
 	<data name="strConfirmDeleteExternalTool" xml:space="preserve">
     <value>Хочете видалити зовнішній інструмент, «{0}»?</value>
@@ -460,7 +460,7 @@ VncSharp Control Version {0}</value>
     <value>Хочете закрити всі відкриті з'єднання?</value>
   </data>
 	<data name="strConfirmResetLayout" xml:space="preserve">
-    <value>Ви дійсно бажаєте скинути налаштування панелей до значень по замовчуванню?</value>
+    <value>Ви дійсно бажаєте скинути налаштування вкладок до значень по замовчуванню?</value>
   </data>
 	<data name="strConnect" xml:space="preserve">
     <value>З'єднатися</value>
@@ -754,7 +754,7 @@ VncSharp Control Version {0}</value>
     <value>Не вдалося завершити процес зовнішнього інструменту!</value>
   </data>
 	<data name="strIntAppParentHandle" xml:space="preserve">
-    <value>Панель оброблювача: {0}</value>
+    <value>Вкладка оброблювача: {0}</value>
   </data>
 	<data name="strIntAppResizeFailed" xml:space="preserve">
     <value>Зовнішній інструмент: Помилка зміни розміру!</value>
@@ -820,7 +820,7 @@ VncSharp Control Version {0}</value>
     <value>сек</value>
   </data>
 	<data name="strLabelSelectPanel" xml:space="preserve">
-    <value>Виберіть панель зі списку або натисніть кнопку Новий, щоб створити нову.</value>
+    <value>Виберіть вкладку зі списку або натисніть кнопку Новий, щоб створити нову.</value>
   </data>
 	<data name="strLabelServerStatus" xml:space="preserve">
     <value>Стан сервера:</value>
@@ -853,7 +853,7 @@ VncSharp Control Version {0}</value>
     <value>Завантаження з XML не вдалося!</value>
   </data>
 	<data name="strLocalFile" xml:space="preserve">
-    <value>Локал. файл</value>
+    <value>Локальний файл</value>
   </data>
 	<data name="strLocalFileDoesNotExist" xml:space="preserve">
     <value>Локальний файл не існує!</value>
@@ -862,7 +862,7 @@ VncSharp Control Version {0}</value>
     <value>Вихід</value>
   </data>
 	<data name="strLogWriteToFileFailed" xml:space="preserve">
-    <value>Не вдалося записати у файл звіту!</value>
+    <value>Не вдалося записати у файл журналу!</value>
   </data>
 	<data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
     <value>Неможливо зберегти звіт в папці призначення.</value>
@@ -964,7 +964,7 @@ VncSharp Control Version {0}</value>
     <value>Запуск зовнішніх інструментів</value>
   </data>
 	<data name="strMenuNewConnectionFile" xml:space="preserve">
-    <value>Новий файл з'єднання</value>
+    <value>Новий файл з'єднань</value>
   </data>
 	<data name="strMenuNewExternalTool" xml:space="preserve">
     <value>Новий зовнішній інструмент</value>
@@ -1012,10 +1012,10 @@ VncSharp Control Version {0}</value>
     <value>Скинути шаблон</value>
   </data>
 	<data name="strMenuSaveConnectionFile" xml:space="preserve">
-    <value>Зберегти файл з'єднання</value>
+    <value>Зберегти файл з'єднань</value>
   </data>
 	<data name="strMenuSaveConnectionFileAs" xml:space="preserve">
-    <value>Зберегти файл з'єднання як…</value>
+    <value>Зберегти файл з'єднань як…</value>
   </data>
 	<data name="strMenuScreenshot" xml:space="preserve">
     <value>Скріншот</value>
@@ -1060,7 +1060,7 @@ VncSharp Control Version {0}</value>
     <value>Веб-сайт</value>
   </data>
 	<data name="strMinimizeToSysTray" xml:space="preserve">
-    <value>Мінімізувати в системний трей</value>
+    <value>Мінімізувати в область сповіщень</value>
   </data>
 	<data name="strMoveDown" xml:space="preserve">
     <value>Вниз</value>
@@ -1115,7 +1115,7 @@ VncSharp Control Version {0}</value>
 Будь ласка, створіть новий файл з'єднання!</value>
   </data>
 	<data name="strOpenNewTabRight" xml:space="preserve">
-    <value>Відкрити нову вкладку праворуч від вибраної вкладки</value>
+    <value>Відкривати нову вкладку праворуч від вибраної вкладки</value>
   </data>
 	<data name="strOpenPorts" xml:space="preserve">
     <value>Відкриті порти</value>
@@ -1202,7 +1202,7 @@ VncSharp Control Version {0}</value>
     <value>Це ім'я буде відображатися в дереві з'єднань.</value>
   </data>
 	<data name="strPropertyDescriptionPanel" xml:space="preserve">
-    <value>Визначає панель, в якій буде відкрито з'єднання.</value>
+    <value>Визначає вкладку, в якій буде відкрито з'єднання.</value>
   </data>
 	<data name="strPropertyDescriptionPassword" xml:space="preserve">
     <value>Введіть пароль.</value>
@@ -1217,19 +1217,19 @@ VncSharp Control Version {0}</value>
     <value>Виберіть сесію PuTTY, яка буде використовуватися під час з'єднання.</value>
   </data>
 	<data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
-    <value>Вказує доменне ім'я, яке надає користувач для підключення до сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
+    <value>Вкажіть доменне ім'я, яке надає користувач для підключення до сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
   </data>
 	<data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
-    <value>Вказує ім'я хоста сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
+    <value>Вкажіть ім'я хоста сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
   </data>
 	<data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
-    <value>Вказує, коли використовувати сервер шлюзу віддаленого робочого столу (RD Gateway).</value>
+    <value>Вкажіть, коли використовувати сервер шлюзу віддаленого робочого столу (RD Gateway).</value>
   </data>
 	<data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
-    <value>Вказує, чи потрібно входити в шлюз, використовуючи те саме ім’я користувача й пароль, що і для з'єднання.</value>
+    <value>Вкажіть, чи потрібно входити в шлюз, використовуючи те саме ім’я користувача й пароль, що і для з'єднання.</value>
   </data>
 	<data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
-    <value>Вказує ім'я користувача, яке надає користувач для підключення до сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
+    <value>Вкажіть ім'я користувача, яке надає користувач для підключення до сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
   </data>
 	<data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
     <value>Вкажіть, чи будуть доступні локальні диски на віддаленому хості.</value>
@@ -1470,7 +1470,7 @@ VncSharp Control Version {0}</value>
     <value>Вбити процес Putty не вдалося!</value>
   </data>
 	<data name="strPuttyParentHandle" xml:space="preserve">
-    <value>Панель оброблювача подій: {0}</value>
+    <value>Вкладка оброблювача подій: {0}</value>
   </data>
 	<data name="strPuttyResizeFailed" xml:space="preserve">
     <value>Помилка зміни розміру вікна Putty!</value>
@@ -1587,7 +1587,7 @@ VncSharp Control Version {0}</value>
     <value>Не вдалося імпортувати RDP файл!</value>
   </data>
 	<data name="strRDPFitToPanel" xml:space="preserve">
-    <value>Встановити на панель</value>
+    <value>Встановити на вкладку</value>
   </data>
 	<data name="strRdpFocusFailed" xml:space="preserve">
     <value>RDP: помилка отримання фокусу!</value>
@@ -1749,10 +1749,10 @@ VncSharp Control Version {0}</value>
     <value>Перевірка оновлення SQL завершена, і доступне оновлення! Оновлюємо з’єднання.</value>
   </data>
 	<data name="strSsh1" xml:space="preserve">
-    <value>SSH версія 1</value>
+    <value>SSH версії 1</value>
   </data>
 	<data name="strSsh2" xml:space="preserve">
-    <value>SSH версія 2</value>
+    <value>SSH версії 2</value>
   </data>
 	<data name="strSSHStartTransferBG" xml:space="preserve">
     <value>Фонова передача по SSH не вдалася!</value>
@@ -1779,7 +1779,7 @@ VncSharp Control Version {0}</value>
     <value>Статус</value>
   </data>
 	<data name="strSwitchToErrorsAndInfos" xml:space="preserve">
-    <value>Перемкнутись на панель сповіщень:</value>
+    <value>Перемкнутись на панель сповіщень при:</value>
   </data>
 	<data name="strTabAdvanced" xml:space="preserve">
     <value>Додатково</value>
@@ -1930,7 +1930,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>&amp;Вихід {0}</value>
 	</data>
 	<data name="strCommandOpenConnectionFile" xml:space="preserve">
-		<value>&amp;Відкрити файл з'єднання</value>
+		<value>&amp;Відкрити файл з'єднань</value>
 	</data>
 	<data name="strCommandTryAgain" xml:space="preserve">
 		<value>&amp;Спробувати знову</value>
@@ -1976,7 +1976,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Параметри експорту</value>
 	</data>
 	<data name="strExportSelectedConnection" xml:space="preserve">
-		<value>Експортувати вибране підключення</value>
+		<value>Експортувати вибране з'єднання</value>
 	</data>
 	<data name="strExportSelectedFolder" xml:space="preserve">
 		<value>Експортувати вибрану папку</value>
@@ -2006,7 +2006,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Не вдається змінити заголовок HTTP документу!</value>
 	</data>
 	<data name="strIdentifyQuickConnectTabs" xml:space="preserve">
-		<value>Визначте вкладки швидкого підключення, додавши префікс «Quick»</value>
+		<value>Визначати вкладки швидкого підключення, додавши префікс «Quick»</value>
 	</data>
 	<data name="strImportFileFailedContent" xml:space="preserve">
 		<value>Під час імпорту файлу «{0}» сталася помилка.</value>
@@ -2102,7 +2102,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Сканування портів завершено.</value>
 	</data>
 	<data name="strPropertyDescriptionAutomaticResize" xml:space="preserve">
-		<value>Виберіть, чи слід автоматично змінювати розмір вікна з'єднання, коли змінюється розмір вікна програми, або коли перемикається в повноекранний режим. Потрібен RDC 8.0 або вище.</value>
+		<value>Виберіть, чи слід автоматично змінювати розмір вікна з'єднання, коли змінюється розмір вікна програми, або коли програма перемикається в повноекранний режим. Потрібен RDC 8.0 або вище.</value>
 	</data>
 	<data name="strPropertyDescriptionLoadBalanceInfo" xml:space="preserve">
 		<value>Визначає інформацію про балансування навантаження для використання маршрутизаторами балансування навантаження для вибору найкращого сервера.</value>
@@ -2339,7 +2339,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Завантажити</value>
 	</data>
 	<data name="strPropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
-		<value>Кількість хвилин сеансу RDP, щоб перебувати в режимі очікування перед автоматичним відключенням (0 - без обмежень)</value>
+		<value>Скільки хвилин перебувати в режимі очікування перед автоматичним відключенням RDP сеансу (0 - без обмежень)</value>
 	</data>
 	<data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
 		<value>Хвилин простою</value>
@@ -2399,7 +2399,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Відлагодження</value>
 	</data>
 	<data name="strShowTheseMessageTypes" xml:space="preserve">
-		<value>Показувати ці типи повідомлень</value>
+		<value>Показувати ці повідомлення</value>
 	</data>
 	<data name="strLogFilePath" xml:space="preserve">
 		<value>Шлях до файлу журналу</value>
@@ -2414,13 +2414,13 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Відкрити файл</value>
 	</data>
 	<data name="strUseDefault" xml:space="preserve">
-		<value>Використовувати за замовчуванням</value>
+		<value>За замовчуванням</value>
 	</data>
 	<data name="strLogging" xml:space="preserve">
 		<value>Ведення журналу</value>
 	</data>
 	<data name="strPopups" xml:space="preserve">
-		<value>Спливаючі вікна</value>
+		<value>Виринаючі вікна</value>
 	</data>
 	<data name="strLogToAppDir" xml:space="preserve">
 		<value>Записувати в каталог програми</value>
@@ -2503,7 +2503,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Введіть нову назву теми</value>
 	</data>
 	<data name="strOptionsThemeChangeWarning" xml:space="preserve">
-		<value>Попередження: для зміни будь-якої зміни конфігурації теми потрібен перезапуск.</value>
+		<value>Попередження: для зміни будь-якої конфігурації теми потрібен перезапуск.</value>
 	</data>
 	<data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
 		<value>Жодної теми не завантажено, перевірте чи присутні стандартні теми у папці «themes» mRemoteNG</value>
@@ -2581,7 +2581,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Панель Multi SSH</value>
 	</data>
 	<data name="strImportSubOUs" xml:space="preserve">
-		<value>Імпортувати дочірні OU</value>
+		<value>Імпорт дочірніх OU</value>
 	</data>
 	<data name="strMenuLockToolbars" xml:space="preserve">
 		<value>Фіксувати позиції панелі інструментів</value>
@@ -2599,7 +2599,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Використовувати кодування UTF8 для властивості RDP "Інформація про балансування"</value>
 	</data>
 	<data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
-		<value>Створювати порожню панель, при запуску mRemoteNG</value>
+		<value>Створювати порожню вкладку, при запуску mRemoteNG</value>
 	</data>
 	<data name="strIPRange" xml:space="preserve">
 		<value>Має бути між 0 і 255</value>
@@ -2688,7 +2688,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Підключіться в режимі лише для перегляду</value>
 	</data>
 	<data name="DoNotTrimUsername" xml:space="preserve">
-		<value>Не обрізати пробіли від імен користувачів</value>
+		<value>Не обрізати пробіли в іменах користувачів</value>
 	</data>
 	<data name="Environment" xml:space="preserve">
 		<value>Середовище</value>
@@ -2703,7 +2703,7 @@ mRemoteNG зараз припинить роботу і почне процес 
 		<value>Тест налаштувань</value>
 	</data>
 	<data name="strPropertyDescriptionRdpVersion" xml:space="preserve">
-		<value>Встановлює версію RDP, що буде використовуватись при відкритті з'єднань.</value>
+		<value>Встановіть версію RDP, що буде використовуватись при відкритті з'єднань.</value>
 	</data>
 	<data name="strPropertyNameRdpVersion" xml:space="preserve">
 		<value>Версія RDP</value>
@@ -2737,5 +2737,8 @@ mRemoteNG зараз припинить роботу і почне процес 
 	</data>
 	<data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
 		<value>Виберіть, чи слід спільно використовувати мікрофони.</value>
+	</data>
+	<data name="strCloseToSysTray" xml:space="preserve">
+		<value>Закривати в область сповіщень</value>
 	</data>
 </root>
