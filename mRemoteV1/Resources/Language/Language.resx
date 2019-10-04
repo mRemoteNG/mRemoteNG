@@ -2220,10 +2220,10 @@ If you run into such an error, please create a new connection file!</value>
     <value>Information ({0})</value>
   </data>
   <data name="strTitlePassword" xml:space="preserve">
-    <value>Password</value>
+    <value>mRemoteNG password</value>
   </data>
   <data name="strTitlePasswordWithName" xml:space="preserve">
-    <value>Password for {0}</value>
+    <value>mRemoteNG password for {0}</value>
   </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
     <value>Select Panel</value>

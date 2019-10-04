@@ -2030,7 +2030,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Informationen ({0})</value>
   </data>
   <data name="strTitlePassword" xml:space="preserve">
-    <value>Passwort</value>
+    <value>mRemoteNG Passwort</value>
   </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
     <value>Wähle Panel</value>
@@ -2336,7 +2336,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Lastausgleichsinfo</value>
   </data>
   <data name="strTitlePasswordWithName" xml:space="preserve">
-    <value>Passwort für {0}</value>
+    <value>mRemoteNG  Passwort für {0}</value>
   </data>
   <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
     <value>RDP-Verbindungs-Timeout</value>

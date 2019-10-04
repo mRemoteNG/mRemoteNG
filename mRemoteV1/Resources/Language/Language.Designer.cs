@@ -9295,7 +9295,7 @@ namespace mRemoteNG
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Password.
+        ///   Looks up a localized string similar to mRemoteNG password.
         /// </summary>
         internal static string strTitlePassword
         {
@@ -9306,7 +9306,7 @@ namespace mRemoteNG
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Password for {0}.
+        ///   Looks up a localized string similar to mRemoteNG password for {0}.
         /// </summary>
         internal static string strTitlePasswordWithName
         {
