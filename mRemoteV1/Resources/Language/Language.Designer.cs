@@ -147,6 +147,17 @@ namespace mRemoteNG
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Connection failed!.
+        /// </summary>
+        internal static string ConnectionFailed
+        {
+            get
+            {
+                return ResourceManager.GetString("ConnectionFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to The connection file could not be found..
         /// </summary>
         internal static string ConnectionFileNotFound
@@ -1956,17 +1967,6 @@ namespace mRemoteNG
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to Connection failed!.
-        /// </summary>
-        internal static string strConnectionEventConnectionFailed
-        {
-            get
-            {
-                return ResourceManager.GetString("strConnectionEventConnectionFailed", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   Looks up a localized string similar to A connection protocol error occurred. Host: &quot;{1}&quot;; Error code: &quot;{2}&quot;; Error Description: &quot;{0}&quot;.
         /// </summary>
         internal static string strConnectionEventErrorOccured
@@ -3512,17 +3512,6 @@ namespace mRemoteNG
             get
             {
                 return ResourceManager.GetString("strInheritNewConnection", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Connection failed!.
-        /// </summary>
-        internal static string strIntAppConnectionFailed
-        {
-            get
-            {
-                return ResourceManager.GetString("strIntAppConnectionFailed", resourceCulture);
             }
         }
 
@@ -5706,6 +5695,17 @@ namespace mRemoteNG
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to PowerShell.
+        /// </summary>
+        internal static string strPowerShell
+        {
+            get
+            {
+                return ResourceManager.GetString("strPowerShell", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to (These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!).
         /// </summary>
         internal static string strPropertiesWillOnlyBeSavedMRemoteXML
@@ -7199,17 +7199,6 @@ namespace mRemoteNG
             get
             {
                 return ResourceManager.GetString("strProxyTestSucceeded", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Connection failed!.
-        /// </summary>
-        internal static string strPuttyConnectionFailed
-        {
-            get
-            {
-                return ResourceManager.GetString("strPuttyConnectionFailed", resourceCulture);
             }
         }
 

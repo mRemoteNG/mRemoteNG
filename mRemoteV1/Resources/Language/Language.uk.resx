@@ -477,7 +477,7 @@ VncSharp Control Version {0}</value>
 	<data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Підключення до системи «{0}» через «{1}» створеного користувача «{2}» (Опис: «{3}»; Користувач: «{4}»)</value>
   </data>
-	<data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>З'єднатися не вдалося!</value>
   </data>
 	<data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -741,10 +741,7 @@ VncSharp Control Version {0}</value>
 	<data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG не потребує оновлення</value>
   </data>
-	<data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>З'єднання не вдалося!</value>
-  </data>
-	<data name="strIntAppFocusFailed" xml:space="preserve">
+  <data name="strIntAppFocusFailed" xml:space="preserve">
     <value>Зовнішній інструмент: Помилка отримання фокусу!</value>
   </data>
 	<data name="strIntAppHandle" xml:space="preserve">
@@ -1451,11 +1448,8 @@ VncSharp Control Version {0}</value>
 	<data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Перевірка уроксі успішна!</value>
   </data>
-	<data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>З'єднання не вдалося!</value>
-  </data>
-	<data name="strPuttyDisposeFailed" xml:space="preserve">
-    <value>Завершити роботу Putty не вдалося!</value>
+  <data name="strPuttyDisposeFailed" xml:space="preserve">
+    <value>Завершити роботу Putty - не вдалося!</value>
   </data>
 	<data name="strPuttyFocusFailed" xml:space="preserve">
     <value>Не вдається встановити фокус!</value>

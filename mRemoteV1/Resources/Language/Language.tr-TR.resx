@@ -499,7 +499,7 @@ VncSharp Kontrol Sürümü {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
 		<value>"{2}" kullanıcısı tarafından kurulan "{1}" yoluyla "{0}" bağlantısı (Açıklama: "{3}"; Kullanıcı Alanı: "{4}")</value>
 	</data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
 		<value>Bağlantı başarısız!</value>
 	</data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -1358,9 +1358,6 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
   <data name="strInheritNewConnection" xml:space="preserve">
 		<value>mRemoteNG güncel</value>
 	</data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-		<value>Bağlantı başarısız!</value>
-	</data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
 		<value>Int App kaldırma işlemi başarısız!</value>
 	</data>
@@ -1850,9 +1847,6 @@ Mesaj:
 	</data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
 		<value>Proxy testi başarılı!</value>
-	</data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-		<value>Bağlantı başarısız!</value>
 	</data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
 		<value>Putty işleminin kapatma başarısız oldu!</value>

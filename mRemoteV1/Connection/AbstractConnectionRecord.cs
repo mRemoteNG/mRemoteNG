@@ -177,7 +177,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameDomain)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionDomain)),
-         UsedInProtocol(ProtocolType.RDP, ProtocolType.ICA, ProtocolType.IntApp)]
+         UsedInProtocol(ProtocolType.RDP, ProtocolType.ICA, ProtocolType.IntApp, ProtocolType.PowerShell)]
         public string Domain
         {
             get => GetPropertyValue("Domain", _domain).Trim();

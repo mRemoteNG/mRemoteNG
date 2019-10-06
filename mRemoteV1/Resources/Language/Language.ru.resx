@@ -490,7 +490,7 @@ VncSharp Control Version {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Подключение к системе "{0}" через "{1}" созданого пользователя "{2}" (Описание: "{3}"; Пользователь: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Подключиться не удалось!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -768,9 +768,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG в актуальном состоянии</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Подключение не удалось!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Не удалось завершить процесс внутреннего приложения!</value>
@@ -1519,9 +1516,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Проверка Прокси - удачна!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Подключение не удалось!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Завершить Putty - не удалось!</value>

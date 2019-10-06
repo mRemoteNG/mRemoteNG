@@ -142,3 +142,8 @@ Markdig
 Copyright © 2016-2019 Alexandre Mutel  
 BSD 2-Clause "Simplified"  
 https://github.com/lunet-io/markdig
+
+ConsoleControl
+Copyright © 2015 Dave Kerr
+MIT License
+https://github.com/dwmkerr/consolecontrol

@@ -14,7 +14,6 @@ using System.Data;
 using System.Linq;
 using System.Security;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Serializers.MsSql

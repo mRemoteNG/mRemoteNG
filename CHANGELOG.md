@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 - #545: Option to minimize to system tray on closing
+- #283: Support for native PowerShell remoting as new protocol
 ### Changed
 - #1460: Updated GeckoFX to v60
 ### Fixed

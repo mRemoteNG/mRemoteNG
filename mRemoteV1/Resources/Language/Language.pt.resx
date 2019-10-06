@@ -466,7 +466,7 @@
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>ligação como "{0}" via "{1}" estabelecido pelo utilizador "{2}" (Descrição: "{3}"; Campo de utilizador: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Ligação falhada!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -737,9 +737,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>O mRemoteNG está atualizado</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Falha na ligação!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Libertação do Int App falhou!</value>
@@ -1481,9 +1478,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Teste de proxy bem sucedido!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Falha na ligação!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Libertação do processo PuTTY falhado!</value>

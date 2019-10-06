@@ -34,6 +34,9 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription(nameof(Language.strICA))]
         ICA = 9,
 
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.strPowerShell))]
+        PowerShell = 10,
+
         [LocalizedAttributes.LocalizedDescription(nameof(Language.strExtApp))]
         IntApp = 20
     }

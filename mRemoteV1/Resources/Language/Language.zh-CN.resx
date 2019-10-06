@@ -503,7 +503,7 @@ VncSharp 版本 {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>通过{1}到主机{0}的连接，已被用户{2}打开（说明：“{3}”，自定义信息：“{4}”）</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>连接失败！</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -872,9 +872,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG 已经是最新版本。</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>连接失败！</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>清除内部程序进程失败！</value>
@@ -1702,9 +1699,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>代理服务器测试成功！</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>连接失败！</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>清除 Putty 进程失败！</value>
