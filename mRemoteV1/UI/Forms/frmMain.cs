@@ -141,18 +141,18 @@ namespace mRemoteNG.UI.Forms
 
         #region Startup & Shutdown
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void FrmMain_Load(object sender, EventArgs e)
         {
             var messageCollector = Runtime.MessageCollector;
+
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip,
+                _externalToolsToolStrip, _multiSshToolStrip, msMain);
+            settingsLoader.LoadSettings();
+
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
 
             Startup.Instance.InitializeProgram(messageCollector);
-
-            msMain.Location = Point.Empty;
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip,
-                                                    _externalToolsToolStrip, _multiSshToolStrip, msMain);
-            settingsLoader.LoadSettings();
 
             SetMenuDependencies();
 
@@ -235,6 +235,13 @@ namespace mRemoteNG.UI.Forms
             pnlDock.ShowDocumentIcon = true;
 
             FrmSplashScreen.getInstance().Close();
+
+            if (Settings.Default.StartMinimized)
+            {
+                WindowState = FormWindowState.Minimized;
+                if (Settings.Default.MinimizeToTray)
+                    ShowInTaskbar = false;
+            }
 
             if (!Settings.Default.CreateEmptyPanelOnStartUp) return;
             var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
@@ -391,13 +398,8 @@ namespace mRemoteNG.UI.Forms
         {
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 
-            var nextUpdateCheck = Convert.ToDateTime(
-                                                     Settings.Default.CheckForUpdatesLastCheck.Add(
-                                                                                                   TimeSpan
-                                                                                                       .FromDays(Convert
-                                                                                                                     .ToDouble(Settings
-                                                                                                                               .Default
-                                                                                                                               .CheckForUpdatesFrequencyDays))));
+            var nextUpdateCheck =
+                Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
 
             if (!Settings.Default.UpdatePending && DateTime.UtcNow <= nextUpdateCheck) return;
             if (!IsHandleCreated)
@@ -408,6 +410,20 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Settings.Default.CloseToTray)
+            {
+                if (Runtime.NotificationAreaIcon == null)
+                    Runtime.NotificationAreaIcon = new NotificationAreaIcon();
+
+                if (WindowState == FormWindowState.Normal || WindowState == FormWindowState.Maximized)
+                {
+                    Hide();
+                    WindowState = FormWindowState.Minimized;
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
             {
                 var openConnections = 0;

@@ -332,8 +332,7 @@ Citrix ICA 客户端空间版本：{0}</value>
 如果此检查仍然失败或无法使用 RDP，请咨询 {0}。</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
-    <value>发现 RDP 组件。
-远程桌面版本 {0}</value>
+    <value>The following RDP protocol versions are supported on this machine: {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
     <value>VNC 要求 VncSharp.dll 位于 mRemoteNG 应用程序文件夹中。
@@ -504,7 +503,7 @@ VncSharp 版本 {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>通过{1}到主机{0}的连接，已被用户{2}打开（说明：“{3}”，自定义信息：“{4}”）</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>连接失败！</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -873,9 +872,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG 已经是最新版本。</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>连接失败！</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>清除内部程序进程失败！</value>
@@ -1340,7 +1336,7 @@ VncSharp 版本 {0}</value>
   <data name="strPanelName" xml:space="preserve">
     <value>面板名称</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>密码保护</value>
   </data>
   <data name="strPasswordStatusMustMatch" xml:space="preserve">
@@ -1703,9 +1699,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>代理服务器测试成功！</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>连接失败！</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>清除 Putty 进程失败！</value>
@@ -2769,7 +2762,7 @@ mRemoteNG 将退出并安装更新。</value>
     <value>Multi SSH：</value>
   </data>
   <data name="strMultiSSHToolTip" xml:space="preserve">
-    <value>按 ENTER 发送。 Ctrl+C 立即发送。</value>
+    <value>按 ENTER 发送。Ctrl+C 立即发送。</value>
   </data>
   <data name="strPropertyDescriptionFavorite" xml:space="preserve">
     <value>在收藏夹菜单中显示此连接。</value>
@@ -2791,5 +2784,35 @@ mRemoteNG 将退出并安装更新。</value>
   </data>
   <data name="Environment" xml:space="preserve">
     <value>环境</value>
+  </data>
+  <data name="EncryptionTestResultMessage" xml:space="preserve">
+    <value>使用 {1}/{2} 和 {3} 迭代加密 {0} 条目花费了 {4} 秒。</value>
+  </data>
+  <data name="EncryptionTest" xml:space="preserve">
+    <value>加密测试</value>
+  </data>
+  <data name="TestSettings" xml:space="preserve">
+    <value>测试设置</value>
+  </data>
+  <data name="strPropertyDescriptionRdpVersion" xml:space="preserve">
+    <value>设置打开连接时要使用的 RDP 版本。</value>
+  </data>
+  <data name="strPropertyNameRdpVersion" xml:space="preserve">
+    <value>RDP 版本</value>
+  </data>
+  <data name="strPropertyDescriptionUseVmId" xml:space="preserve">
+    <value>使用 VM ID 连接到在 Hyper-V 上运行的 VM。</value>
+  </data>
+  <data name="strPropertyDescriptionVmId" xml:space="preserve">
+    <value>要连接到的 Hyper-V 虚拟机的 ID。</value>
+  </data>
+  <data name="strPropertyNameUseVmId" xml:space="preserve">
+    <value>使用 VM ID</value>
+  </data>
+  <data name="strPropertyNameVmId" xml:space="preserve">
+    <value>VM ID</value>
+  </data>
+  <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
+    <value>无法创建 RDP 客户端。此计算机上不支持 RDP 协议版本 {0}。请选择较旧的协议版本。</value>
   </data>
 </root>

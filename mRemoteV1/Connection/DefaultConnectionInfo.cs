@@ -30,15 +30,13 @@ namespace mRemoteNG.Connection
                     var expectedPropertyName = propertyNameMutator(property.Name);
                     var propertyFromSource = typeof(TSource).GetProperty(expectedPropertyName);
                     if (propertyFromSource == null)
-                        throw new SettingsPropertyNotFoundException(
-                                                                    $"No property with name '{expectedPropertyName}' found.");
+                        throw new SettingsPropertyNotFoundException($"No property with name '{expectedPropertyName}' found.");
 
                     var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
 
                     if (property.PropertyType.IsEnum)
                     {
-                        property.SetValue(Instance, Enum.Parse(property.PropertyType, valueFromSource.ToString()),
-                                          null);
+                        property.SetValue(Instance, Enum.Parse(property.PropertyType, valueFromSource.ToString()), null);
                         continue;
                     }
 
@@ -46,15 +44,12 @@ namespace mRemoteNG.Connection
                 }
                 catch (Exception ex)
                 {
-                    Runtime.MessageCollector?.AddExceptionStackTrace(
-                                                                     $"Error loading default connectioninfo property {property.Name}",
-                                                                     ex);
+                    Runtime.MessageCollector?.AddExceptionStackTrace($"Error loading default connectioninfo property {property.Name}", ex);
                 }
             }
         }
 
-        public void SaveTo<TDestination>(TDestination destinationInstance,
-                                         Func<string, string> propertyNameMutator = null)
+        public void SaveTo<TDestination>(TDestination destinationInstance, Func<string, string> propertyNameMutator = null)
         {
             if (propertyNameMutator == null)
                 propertyNameMutator = (a) => a;
@@ -69,8 +64,7 @@ namespace mRemoteNG.Connection
                     var propertyFromDestination = typeof(TDestination).GetProperty(expectedPropertyName);
 
                     if (propertyFromDestination == null)
-                        throw new SettingsPropertyNotFoundException(
-                                                                    $"No property with name '{expectedPropertyName}' found.");
+                        throw new SettingsPropertyNotFoundException($"No property with name '{expectedPropertyName}' found.");
 
                     // ensure value is of correct type
                     var value = Convert.ChangeType(property.GetValue(Instance, null),
@@ -80,9 +74,7 @@ namespace mRemoteNG.Connection
                 }
                 catch (Exception ex)
                 {
-                    Runtime.MessageCollector?.AddExceptionStackTrace(
-                                                                     $"Error saving default connectioninfo property {property.Name}",
-                                                                     ex);
+                    Runtime.MessageCollector?.AddExceptionStackTrace($"Error saving default connectioninfo property {property.Name}", ex);
                 }
             }
         }

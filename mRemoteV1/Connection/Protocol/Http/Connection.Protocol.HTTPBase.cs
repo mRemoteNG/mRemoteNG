@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using Gecko;
 using CefSharp;
@@ -35,6 +36,17 @@ namespace mRemoteNG.Connection.Protocol.Http
                         Xpcom.Initialize("Firefox");
 
                     Control = new GeckoWebBrowser();
+
+                    var culture = Settings.Default.OverrideUICulture;
+                    if (string.IsNullOrEmpty(culture))
+                    {
+                        GeckoPreferences.User["intl.accept_languages"] =
+                            System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+                    }
+                    else
+                    {
+                        GeckoPreferences.User["intl.accept_languages"] = culture;
+                    }
                 }
                 else if (RenderingEngine == RenderingEngine.CEF)
                 {
@@ -77,6 +89,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                     if (GeckoBrowser != null)
                     {
                         GeckoBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
+                        LauncherDialog.Download += geckoBrowser_LauncherDialog_Download;
                         GeckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
                         browserInitialised = true;
                     }
@@ -273,14 +286,14 @@ namespace mRemoteNG.Connection.Protocol.Http
                     }
                 }
 
-                   if (!string.IsNullOrEmpty(tabTitle))
-                   {
-                       tabP.TabText = tabTitle + @" - " + shortTitle;
-                   }
-                   else
-                   {
-                       tabP.TabText = shortTitle;
-                   }
+                if (!string.IsNullOrEmpty(tabTitle))
+                {
+                   tabP.TabText = tabTitle + @" - " + shortTitle;
+                }
+                else
+                {
+                   tabP.TabText = shortTitle;
+                }
             }
             catch (Exception ex)
             {
@@ -288,6 +301,39 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
         }
 
+        private void geckoBrowser_LauncherDialog_Download(object sender, Gecko.LauncherDialogEvent e)
+        {
+            var objTarget = Xpcom.CreateInstance<nsILocalFileWin>("@mozilla.org/file/local;1");
+            using (var tmp = new nsAString(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\mremoteng.download"))
+            {
+                objTarget.InitWithPath(tmp);
+            }
+
+            //Save file dialog
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "All files (*.*)|*.*",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+                FileName = e.Filename
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var source = IOService.CreateNsIUri(e.Url);
+                var dest = IOService.CreateNsIUri(new Uri(saveFileDialog.FileName).AbsoluteUri);
+                var t = (nsAStringBase)new nsAString(Path.GetFileName(saveFileDialog.FileName));
+                var persist = Xpcom.CreateInstance<nsIWebBrowserPersist>("@mozilla.org/embedding/browser/nsWebBrowserPersist;1");
+                var nst = Xpcom.CreateInstance<nsITransfer>("@mozilla.org/transfer;1");
+
+                nst.Init(source, dest, t, e.Mime, 0, null, persist, false);
+                persist.SetPersistFlagsAttribute(2 | 32 | 16384);
+                persist.SetProgressListenerAttribute(nst);
+                persist.SaveURI(source, null, null, (uint)Gecko.nsIHttpChannelConsts.REFERRER_POLICY_NO_REFERRER, null, null, (nsISupports)dest, null);
+            }
+
+            saveFileDialog.Dispose();
+        }
 
         #endregion
 
@@ -295,13 +341,13 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         public enum RenderingEngine
         {
-            [LocalizedAttributes.LocalizedDescription("strHttpInternetExplorer")]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpInternetExplorer))]
             IE = 1,
 
-            [LocalizedAttributes.LocalizedDescription("strHttpGecko")]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpGecko))]
             Gecko = 2,
 
-            [LocalizedAttributes.LocalizedDescription("strHttpCEF")]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpCEF))]
             CEF = 3
         }
 

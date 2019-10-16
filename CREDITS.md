@@ -1,37 +1,37 @@
 # Contributors
 ## Current mRemoteNG dev team
-David Sparer (github.com/sparerd)  
-Sean Kaim (github.com/kmscode)  
-Faryan Rezagholi (github.com/farosch)  
+David Sparer (http://github.com/sparerd)  
+Sean Kaim (http://github.com/kmscode)  
+Faryan Rezagholi (http://github.com/farosch)  
 
 Thanks for the awesome new website!  
-Bennett Blodinger (github.com/benwa)
+Bennett Blodinger (http://github.com/benwa)
 
-Joe Cefoli (github.com/jcefoli)  
-countchappy (github.com/countchappy)  
+Joe Cefoli (http://github.com/jcefoli)  
+countchappy (http://github.com/countchappy)  
 Tony Lambert  
-Julien Roncaglia (github.com/vbfox)  
-github.com/peterchenadded  
-Brandon Wulf (github.com/mrwulf)  
-Pedro Rodrigues (github.com/pedro2555)  
-github.com/dekelMP  
-Bruce (github.com/brucetp)  
-Camilo Alvarez (github.com/jotatsu)  
-github.com/DamianBis  
-github.com/pfjason  
-github.com/sirLoaf  
-github.com/Fyers  
-Vladimir Semenov (github.com/sli-pro)  
-Stephan (github.com/st-schuler)  
-Aleksey Reytsman (github.com/areytsman)  
-Cristian Abelleira (github.com/CrAbelleira)  
-github.com/MitchellBot  
+Julien Roncaglia (http://github.com/vbfox)  
+http://github.com/peterchenadded  
+Brandon Wulf (http://github.com/mrwulf)  
+Pedro Rodrigues (http://github.com/pedro2555)  
+http://github.com/dekelMP  
+Bruce (http://github.com/brucetp)  
+Camilo Alvarez (http://github.com/jotatsu)  
+http://github.com/DamianBis  
+http://github.com/pfjason  
+http://github.com/sirLoaf  
+http://github.com/Fyers  
+Vladimir Semenov (http://github.com/sli-pro)  
+Stephan (http://github.com/st-schuler)  
+Aleksey Reytsman (http://github.com/areytsman)  
+Cristian Abelleira (http://github.com/CrAbelleira)  
+http://github.com/MitchellBot
 
 ## Past Contributors
 Felix Deimel - mRemote original developer  
 Riley McArdle - mRemoteNG original developer  
 
-Hayato Iriumi (github.com/hiriumi)  
+Hayato Iriumi (http://github.com/hiriumi)  
 Jason Barbier  
 Wiktor Beryt  
 Lionel Caignec  
@@ -41,8 +41,8 @@ Tom Hiller
 Apisitt Rattana  
 Andreas Rehm  
 David Vidmar  
-github.com/Brandhor  
-Dimitrij (github.com/Kvarkas)  
+http://github.com/Brandhor  
+Dimitrij (http://github.com/Kvarkas)  
 
 ## Translators
 Eugenio "Ryo567" Martínez  
@@ -50,17 +50,19 @@ Mathieu Pape
 Emanuel Silva  
 Robert Siwiec  
 Hayato Iriumi  
-Sebastien Thieury (github.com/SebThieu)  
+Sebastien Thieury (http://github.com/SebThieu)  
 Riza Emet  
-Lukas Plachy (github.com/rheingold)  
+Lukas Plachy (http://github.com/rheingold)  
 Gyuha Shin  
-Stefan (github.com/polluks)  
-github.com/emazv72  
-Vladimir Semenov (github.com/sli-pro)  
-Marco Sousa (github.com/marcomsousa)  
-github.com/wwj402  
-github.com/Fyers  
-github.com/pablomh  
+Stefan (http://github.com/polluks)  
+http://github.com/emazv72  
+Vladimir Semenov (http://github.com/sli-pro)  
+Marco Sousa (http://github.com/marcomsousa)  
+http://github.com/wwj402  
+http://github.com/Fyers  
+http://github.com/pablomh  
+Damian Szczepanik (http://github.com/damianszczepanik)  
+Mant1kor (http://github.com/Mant1kor)
 
 ## Included Source Code
 Command Line Arguments Parser  
@@ -129,7 +131,7 @@ https://github.com/sshnet/SSH.NET
 VncSharp  
 Copyright © 2004-2009 David Humphrey  
 GNU General Public License (GPL) Version 2  
-https://github.com/humphd/VncSharp
+https://github.com/humphd/VncSharp [Archived]
 
 ObjectListView  
 Copyright © 2006-2016 Phillip Piper  
@@ -140,3 +142,8 @@ Markdig
 Copyright © 2016-2019 Alexandre Mutel  
 BSD 2-Clause "Simplified"  
 https://github.com/lunet-io/markdig
+
+ConsoleControl
+Copyright © 2015 Dave Kerr
+MIT License
+https://github.com/dwmkerr/consolecontrol

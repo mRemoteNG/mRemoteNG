@@ -110,7 +110,8 @@ namespace mRemoteNG.Connection.Protocol
                 _interfaceControl.Parent.Tag = _interfaceControl;
                 _interfaceControl.Show();
 
-                if (Control == null) return true;
+                if (Control == null)
+                    return true;
 
                 Control.Name = Name;
                 Control.Location = _interfaceControl.Location;
@@ -164,8 +165,7 @@ namespace mRemoteNG.Connection.Protocol
                     catch (Exception ex)
                     {
                         Runtime.MessageCollector?.AddExceptionStackTrace(
-                                                                         "Couldn't dispose control, probably form is already closed (Connection.Protocol.Base)",
-                                                                         ex);
+                            "Couldn't dispose control, probably form is already closed (Connection.Protocol.Base)", ex);
                     }
                 }
 
@@ -185,15 +185,14 @@ namespace mRemoteNG.Connection.Protocol
                 catch (Exception ex)
                 {
                     Runtime.MessageCollector?.AddExceptionStackTrace(
-                                                                     "Couldn't set InterfaceControl.Parent.Tag or Dispose Interface, probably form is already closed (Connection.Protocol.Base)",
-                                                                     ex);
+                        "Couldn't set InterfaceControl.Parent.Tag or Dispose Interface, " +
+                        "probably form is already closed (Connection.Protocol.Base)", ex);
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector?.AddExceptionStackTrace(
-                                                                 "Couldn't Close InterfaceControl BG (Connection.Protocol.Base)",
-                                                                 ex);
+                    "Couldn't Close InterfaceControl BG (Connection.Protocol.Base)", ex);
             }
         }
 
@@ -334,10 +333,8 @@ namespace mRemoteNG.Connection.Protocol
 
         private void Dispose(bool disposing)
         {
-            if (!disposing) return;
-
-            if(tmrReconnect != null)
-                tmrReconnect.Dispose();
+            if (disposing) return;
+            tmrReconnect?.Dispose();
         }
 
         public void Dispose()

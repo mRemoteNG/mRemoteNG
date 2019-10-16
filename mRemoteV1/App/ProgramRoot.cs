@@ -27,7 +27,7 @@ namespace mRemoteNG.App
             CatchAllUnhandledExceptions();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            FrmSplashScreen frmSplashScreen = FrmSplashScreen.getInstance();
+            var frmSplashScreen = FrmSplashScreen.getInstance();
             frmSplashScreen.Show();
             Application.Run(FrmMain.Default);
         }
@@ -88,8 +88,11 @@ namespace mRemoteNG.App
             if (!FrmSplashScreen.getInstance().IsDisposed)
                 FrmSplashScreen.getInstance().Close();
 
+            if (FrmMain.Default.IsDisposed) return;
+            
             var window = new UnhandledExceptionWindow(e.Exception, false);
             window.ShowDialog(FrmMain.Default);
+            
         }
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)

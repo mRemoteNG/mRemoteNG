@@ -46,6 +46,12 @@ namespace mRemoteNG.UI.Controls
             _themeManager.ThemeChanged += ApplyTheme;
             PopulateQuickConnectProtocolMenu();
             ApplyTheme();
+            ApplyLanguage();
+        }
+
+        private void ApplyLanguage()
+        {
+            _lblQuickConnect.Text = Language.strQuickConnect;
         }
 
         private void Initialize()

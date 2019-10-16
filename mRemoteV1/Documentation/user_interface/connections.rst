@@ -23,7 +23,11 @@ New Connection
 
 .. tip::
 
-    You can also duplicate an already created connection if you want to follow some sort of template of a connection. Just right click on folder or connection to duplicate the item. The information is then carried over for editing. This can save a lot of time when the connection list is large.
+    You can also duplicate an existing connection. Just right click on folder or connection to duplicate the item. The information is then carried over for editing. This can save a lot of time when the connection list is large.
+
+.. tip::
+
+    When inside an SSH session you can open the PuTTY menu by holding down the CTRL key while right-clicking into the session window.
 
 Creates a new connection item in the connections dialog after where cursor is present.
 

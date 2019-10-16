@@ -7,6 +7,7 @@ using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
+using mRemoteNG.Connection.Protocol.PowerShell;
 using mRemoteNG.Connection.Protocol.RAW;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.Rlogin;
@@ -246,7 +247,7 @@ namespace mRemoteNG.Connection
                 switch (protocol)
                 {
                     case ProtocolType.RDP:
-                        return (int)RdpProtocol.Defaults.Port;
+                        return (int)RdpProtocol6.Defaults.Port;
                     case ProtocolType.VNC:
                         return (int)ProtocolVNC.Defaults.Port;
                     case ProtocolType.SSH1:
@@ -265,6 +266,8 @@ namespace mRemoteNG.Connection
                         return (int)ProtocolHTTPS.Defaults.Port;
                     case ProtocolType.ICA:
                         return (int)IcaProtocol.Defaults.Port;
+                    case ProtocolType.PowerShell:
+                        return (int)ProtocolPowerShell.Defaults.Port;
                     case ProtocolType.IntApp:
                         return (int)IntegratedProgram.Defaults.Port;
                 }
@@ -308,6 +311,8 @@ namespace mRemoteNG.Connection
             RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine),
                                                                    Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
+            UseVmId = Settings.Default.ConDefaultUseVmId;
+            UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
         }
 
         private void SetRdGatewayDefaults()
@@ -363,10 +368,8 @@ namespace mRemoteNG.Connection
         {
             VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression),
                                                                  Settings.Default.ConDefaultVNCCompression);
-            VNCEncoding =
-                (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
-            VNCAuthMode =
-                (ProtocolVNC.AuthMode)Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
+            VNCEncoding = (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
+            VNCAuthMode = (ProtocolVNC.AuthMode)Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
             VNCProxyType = (ProtocolVNC.ProxyType)Enum.Parse(typeof(ProtocolVNC.ProxyType),
                                                              Settings.Default.ConDefaultVNCProxyType);
             VNCProxyIP = Settings.Default.ConDefaultVNCProxyIP;
@@ -384,7 +387,6 @@ namespace mRemoteNG.Connection
         {
             _inheritance = new ConnectionInfoInheritance(this);
             SetNewOpenConnectionList();
-            //PositionID = 0;
         }
 
         private void SetNewOpenConnectionList()

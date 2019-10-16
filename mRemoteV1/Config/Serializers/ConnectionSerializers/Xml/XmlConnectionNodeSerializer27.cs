@@ -45,6 +45,9 @@ namespace mRemoteNG.Config.Serializers.Xml
         {
             var nodeAsContainer = connectionInfo as ContainerInfo;
             element.Add(new XAttribute("Name", connectionInfo.Name));
+            element.Add(new XAttribute("VmId", connectionInfo.VmId));
+            element.Add(new XAttribute("UseVmId", connectionInfo.UseVmId));
+            element.Add(new XAttribute("UseEnhancedMode", connectionInfo.UseVmId));
             element.Add(new XAttribute("Type", connectionInfo.GetTreeNodeType().ToString()));
             if (nodeAsContainer != null)
                 element.Add(new XAttribute("Expanded", nodeAsContainer.IsExpanded.ToString().ToLowerInvariant()));
@@ -72,6 +75,7 @@ namespace mRemoteNG.Config.Serializers.Xml
 
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
+            element.Add(new XAttribute("RdpVersion", connectionInfo.RdpVersion.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
             element.Add(new XAttribute("ConnectToConsole",
@@ -191,6 +195,8 @@ namespace mRemoteNG.Config.Serializers.Xml
                                            connectionInfo.Inheritance.Port.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritProtocol",
                                            connectionInfo.Inheritance.Protocol.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritRdpVersion",
+                    connectionInfo.Inheritance.RdpVersion.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritPuttySession",
                                            connectionInfo.Inheritance.PuttySession.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectDiskDrives",
@@ -205,8 +211,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritRedirectClipboard",
                                            connectionInfo.Inheritance.RedirectClipboard.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectSmartCards",
-                                           connectionInfo
-                                               .Inheritance.RedirectSmartCards.ToString().ToLowerInvariant()));
+                                           connectionInfo.Inheritance.RedirectSmartCards.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRedirectSound",
                                            connectionInfo.Inheritance.RedirectSound.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritSoundQuality",
@@ -287,7 +292,13 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritRDGatewayPassword",
                                            connectionInfo.Inheritance.RDGatewayPassword.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRDGatewayDomain",
-                                           connectionInfo.Inheritance.RDGatewayDomain.ToString().ToLowerInvariant()));
+                    connectionInfo.Inheritance.RDGatewayDomain.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritVmId",
+                    connectionInfo.Inheritance.VmId.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritUseVmId",
+                    connectionInfo.Inheritance.UseVmId.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritUseEnhancedMode",
+                    connectionInfo.Inheritance.UseEnhancedMode.ToString().ToLowerInvariant()));
             }
             else
             {

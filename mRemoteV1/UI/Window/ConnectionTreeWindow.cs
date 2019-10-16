@@ -23,14 +23,11 @@ namespace mRemoteNG.UI.Window
     {
         private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private ThemeManager _themeManager;
+        private bool _sortedAz = true;
 
-        public ConnectionInfo SelectedNode => olvConnections.SelectedNode;
+        public ConnectionInfo SelectedNode => ConnectionTree.SelectedNode;
 
-        public ConnectionTree ConnectionTree
-        {
-            get { return olvConnections; }
-            set { olvConnections = value; }
-        }
+        public ConnectionTree ConnectionTree { get; set; }
 
         public ConnectionTreeWindow() : this(new DockContent())
         {
@@ -89,7 +86,7 @@ namespace mRemoteNG.UI.Window
             mMenAddFolder.ToolTipText = Language.strAddFolder;
             mMenViewExpandAllFolders.ToolTipText = Language.strExpandAllFolders;
             mMenViewCollapseAllFolders.ToolTipText = Language.strCollapseAllFolders;
-            mMenSortAscending.ToolTipText = Language.strSortAsc;
+            mMenSort.ToolTipText = Language.strSort;
             mMenFavorites.ToolTipText = Language.Favorites;
 
             txtSearch.Text = Language.strSearchPrompt;
@@ -102,7 +99,7 @@ namespace mRemoteNG.UI.Window
 
             var activeTheme = _themeManager.ActiveTheme;
             vsToolStripExtender.SetStyle(msMain, activeTheme.Version, activeTheme.Theme);
-            vsToolStripExtender.SetStyle(olvConnections.ContextMenuStrip, activeTheme.Version,
+            vsToolStripExtender.SetStyle(ConnectionTree.ContextMenuStrip, activeTheme.Version,
                 activeTheme.Theme);
 
             if (!_themeManager.ActiveAndExtended)
@@ -123,17 +120,11 @@ namespace mRemoteNG.UI.Window
 
         private void SetConnectionTreeEventHandlers()
         {
-            olvConnections.NodeDeletionConfirmer = new SelectedConnectionDeletionConfirmer(prompt =>
-                                                                                               CTaskDialog
-                                                                                                   .MessageBox(Application.ProductName,
-                                                                                                               prompt,
-                                                                                                               "",
-                                                                                                               ETaskDialogButtons
-                                                                                                                   .YesNo,
-                                                                                                               ESysIcons
-                                                                                                                   .Question));
-            olvConnections.KeyDown += tvConnections_KeyDown;
-            olvConnections.KeyPress += tvConnections_KeyPress;
+            ConnectionTree.NodeDeletionConfirmer =
+                new SelectedConnectionDeletionConfirmer(prompt => CTaskDialog.MessageBox(
+                    Application.ProductName,prompt,"",ETaskDialogButtons.YesNo,ESysIcons.Question));
+            ConnectionTree.KeyDown += TvConnections_KeyDown;
+            ConnectionTree.KeyPress += TvConnections_KeyPress;
             SetTreePostSetupActions();
             SetConnectionTreeClickHandlers();
             Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
@@ -150,7 +141,7 @@ namespace mRemoteNG.UI.Window
             if (Settings.Default.OpenConsFromLastSession && !Settings.Default.NoReconnect)
                 actions.Add(new PreviousSessionOpener(_connectionInitiator));
 
-            olvConnections.PostSetupActions = actions;
+            ConnectionTree.PostSetupActions = actions;
         }
 
         private void SetConnectionTreeClickHandlers()
@@ -158,7 +149,7 @@ namespace mRemoteNG.UI.Window
             var singleClickHandlers = new List<ITreeNodeClickHandler<ConnectionInfo>>();
             var doubleClickHandlers = new List<ITreeNodeClickHandler<ConnectionInfo>>
             {
-                new ExpandNodeClickHandler(olvConnections)
+                new ExpandNodeClickHandler(ConnectionTree)
             };
 
             if (Settings.Default.SingleClickOnConnectionOpensIt)
@@ -169,22 +160,21 @@ namespace mRemoteNG.UI.Window
             if (Settings.Default.SingleClickSwitchesToOpenConnection)
                 singleClickHandlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
 
-            olvConnections.SingleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = singleClickHandlers};
-            olvConnections.DoubleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = doubleClickHandlers};
+            ConnectionTree.SingleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = singleClickHandlers};
+            ConnectionTree.DoubleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = doubleClickHandlers};
         }
 
-        private void ConnectionsServiceOnConnectionsLoaded(object o,
-                                                           ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+        private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
-            if (olvConnections.InvokeRequired)
+            if (ConnectionTree.InvokeRequired)
             {
-                olvConnections.Invoke(() => ConnectionsServiceOnConnectionsLoaded(o, connectionsLoadedEventArgs));
+                ConnectionTree.Invoke(() => ConnectionsServiceOnConnectionsLoaded(o, connectionsLoadedEventArgs));
                 return;
             }
 
-            olvConnections.ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
-            olvConnections.SelectedObject = connectionsLoadedEventArgs.NewConnectionTreeModel.RootNodes
-                                                                      .OfType<RootNodeInfo>().FirstOrDefault();
+            ConnectionTree.ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
+            ConnectionTree.SelectedObject =
+                connectionsLoadedEventArgs.NewConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().FirstOrDefault();
         }
 
         #endregion
@@ -193,18 +183,32 @@ namespace mRemoteNG.UI.Window
 
         private void SetMenuEventHandlers()
         {
-            mMenViewExpandAllFolders.Click += (sender, args) => olvConnections.ExpandAll();
+            mMenViewExpandAllFolders.Click += (sender, args) => ConnectionTree.ExpandAll();
             mMenViewCollapseAllFolders.Click += (sender, args) =>
             {
-                olvConnections.CollapseAll();
-                olvConnections.Expand(olvConnections.GetRootConnectionNode());
+                ConnectionTree.CollapseAll();
+                ConnectionTree.Expand(ConnectionTree.GetRootConnectionNode());
             };
-            mMenSortAscending.Click += (sender, args) => olvConnections.SortRecursive(olvConnections.GetRootConnectionNode(), ListSortDirection.Ascending);
+            mMenSort.Click += (sender, args) =>
+            {
+                if (_sortedAz)
+                {
+                    ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Ascending);
+                    mMenSort.Image = mRemoteNG.Resources.Sort_ZA;
+                    _sortedAz = false;
+                }
+                else
+                {
+                    ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Descending);
+                    mMenSort.Image = mRemoteNG.Resources.Sort_AZ;
+                    _sortedAz = true;
+                }
+            };
             mMenFavorites.Click += (sender, args) =>
             {
                 mMenFavorites.DropDownItems.Clear();
                 var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
-                List<ToolStripMenuItem> favoritesList = new List<ToolStripMenuItem>();
+                var favoritesList = new List<ToolStripMenuItem>();
 
                 foreach (var node in rootNodes)
                 {
@@ -236,21 +240,21 @@ namespace mRemoteNG.UI.Window
 
         #region Tree Context Menu
 
-        private void cMenTreeAddConnection_Click(object sender, EventArgs e)
+        private void CMenTreeAddConnection_Click(object sender, EventArgs e)
         {
-            olvConnections.AddConnection();
+            ConnectionTree.AddConnection();
         }
 
-        private void cMenTreeAddFolder_Click(object sender, EventArgs e)
+        private void CMenTreeAddFolder_Click(object sender, EventArgs e)
         {
-            olvConnections.AddFolder();
+            ConnectionTree.AddFolder();
         }
 
         #endregion
 
         #region Search
 
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        private void TxtSearch_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
@@ -258,24 +262,24 @@ namespace mRemoteNG.UI.Window
                 {
                     case Keys.Escape:
                         e.Handled = true;
-                        olvConnections.Focus();
+                        ConnectionTree.Focus();
                         break;
                     case Keys.Up:
                     {
-                        var match = olvConnections.NodeSearcher.PreviousMatch();
+                        var match = ConnectionTree.NodeSearcher.PreviousMatch();
                         JumpToNode(match);
                         e.Handled = true;
                         break;
                     }
                     case Keys.Down:
                     {
-                        var match = olvConnections.NodeSearcher.NextMatch();
+                        var match = ConnectionTree.NodeSearcher.NextMatch();
                         JumpToNode(match);
                         e.Handled = true;
                         break;
                     }
                     default:
-                        tvConnections_KeyDown(sender, e);
+                        TvConnections_KeyDown(sender, e);
                         break;
                 }
             }
@@ -296,17 +300,17 @@ namespace mRemoteNG.UI.Window
             {
                 if (txtSearch.Text == "" || txtSearch.Text == Language.strSearchPrompt)
                 {
-                    olvConnections.RemoveFilter();
+                    ConnectionTree.RemoveFilter();
                     return;
                 }
 
-                olvConnections.ApplyFilter(txtSearch.Text);
+                ConnectionTree.ApplyFilter(txtSearch.Text);
             }
             else
             {
                 if (txtSearch.Text == "") return;
-                olvConnections.NodeSearcher?.SearchByName(txtSearch.Text);
-                JumpToNode(olvConnections.NodeSearcher?.CurrentMatch);
+                ConnectionTree.NodeSearcher?.SearchByName(txtSearch.Text);
+                JumpToNode(ConnectionTree.NodeSearcher?.CurrentMatch);
             }
         }
 
@@ -314,13 +318,13 @@ namespace mRemoteNG.UI.Window
         {
             if (connectionInfo == null)
             {
-                olvConnections.SelectedObject = null;
+                ConnectionTree.SelectedObject = null;
                 return;
             }
 
             ExpandParentsRecursive(connectionInfo);
-            olvConnections.SelectObject(connectionInfo);
-            olvConnections.EnsureModelVisible(connectionInfo);
+            ConnectionTree.SelectObject(connectionInfo);
+            ConnectionTree.EnsureModelVisible(connectionInfo);
         }
 
         private void ExpandParentsRecursive(ConnectionInfo connectionInfo)
@@ -328,12 +332,12 @@ namespace mRemoteNG.UI.Window
             while (true)
             {
                 if (connectionInfo?.Parent == null) return;
-                olvConnections.Expand(connectionInfo.Parent);
+                ConnectionTree.Expand(connectionInfo.Parent);
                 connectionInfo = connectionInfo.Parent;
             }
         }
 
-        private void tvConnections_KeyPress(object sender, KeyPressEventArgs e)
+        private void TvConnections_KeyPress(object sender, KeyPressEventArgs e)
         {
             try
             {
@@ -348,7 +352,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        private void tvConnections_KeyDown(object sender, KeyEventArgs e)
+        private void TvConnections_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {

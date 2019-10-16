@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,2451 +59,2445 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<data name="strAbout" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strAbout" xml:space="preserve">
 		<value>mRemoteNG 정보</value>
 	</data>
-	<data name="strActive" xml:space="preserve">
+  <data name="strActive" xml:space="preserve">
 		<value>활성</value>
 	</data>
-	<data name="strActiveDirectory" xml:space="preserve">
+  <data name="strActiveDirectory" xml:space="preserve">
 		<value>Active Directory</value>
 	</data>
-	<data name="strActivity" xml:space="preserve">
+  <data name="strActivity" xml:space="preserve">
 		<value>Activity</value>
 	</data>
-	<data name="strAddConnection" xml:space="preserve">
+  <data name="strAddConnection" xml:space="preserve">
 		<value>새 연결</value>
 	</data>
-	<data name="strAddFolder" xml:space="preserve">
+  <data name="strAddFolder" xml:space="preserve">
 		<value>새 폴더</value>
 	</data>
-	<data name="strAddNodeFromXmlFailed" xml:space="preserve">
+  <data name="strAddNodeFromXmlFailed" xml:space="preserve">
 		<value>AddNodeFromXML 실패!</value>
 	</data>
-	<data name="strAddNodesFromSqlFailed" xml:space="preserve">
+  <data name="strAddNodesFromSqlFailed" xml:space="preserve">
 		<value>AddNodesFromSQL 실패!</value>
 	</data>
-	<data name="strAllowOnlySingleInstance" xml:space="preserve">
+  <data name="strAllowOnlySingleInstance" xml:space="preserve">
 		<value>어플리케이션에 단일 인스턴스만 허용(mRemoteNG 재시작 필요)</value>
 	</data>
-	<data name="strAlways" xml:space="preserve">
+  <data name="strAlways" xml:space="preserve">
 		<value>항상</value>
 	</data>
-	<data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
+  <data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
 		<value>인증이 실패하더라도 항상 연결</value>
 	</data>
-	<data name="strAlwaysShowPanelSelection" xml:space="preserve">
+  <data name="strAlwaysShowPanelSelection" xml:space="preserve">
 		<value>연결시 패널 선택 대화상자 항상 표시</value>
 	</data>
-	<data name="strAlwaysShowPanelTabs" xml:space="preserve">
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
 		<value>패널 탭 항상 표시</value>
 	</data>
-	<data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
+  <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
 		<value>알림 영역 아이콘 항상 표시</value>
 	</data>
-	<data name="strAskUpdatesCommandAskLater" xml:space="preserve">
+  <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
 		<value>다음에 다시 묻기</value>
 	</data>
-	<data name="strAskUpdatesCommandCustom" xml:space="preserve">
+  <data name="strAskUpdatesCommandCustom" xml:space="preserve">
 		<value>지금 사용자 설정</value>
 	</data>
-	<data name="strAskUpdatesCommandRecommended" xml:space="preserve">
+  <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
 		<value>권장 설정 사용</value>
 	</data>
-	<data name="strAskUpdatesContent" xml:space="preserve">
+  <data name="strAskUpdatesContent" xml:space="preserve">
 		<value>{0}은 새로운 기능 및 버그 수정을 제공 할 수있는 업데이트를 자동으로 확인할 수 있습니다. 매주 업데이트를 확인하도록 {0}을 허용하는 것이 좋습니다.</value>
 	</data>
-	<data name="strAskUpdatesMainInstruction" xml:space="preserve">
+  <data name="strAskUpdatesMainInstruction" xml:space="preserve">
 		<value>자동 업데이트 설정</value>
 	</data>
-	<data name="strAspect" xml:space="preserve">
+  <data name="strAspect" xml:space="preserve">
 		<value>양상</value>
 	</data>
-	<data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
+  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
 		<value>세션 정보를 자동으로 얻음</value>
 	</data>
-	<data name="strAutoSaveEvery" xml:space="preserve">
+  <data name="strAutoSaveEvery" xml:space="preserve">
 		<value>자동 저장 간격 :</value>
 	</data>
-	<data name="strAutoSaveMins" xml:space="preserve">
+  <data name="strAutoSaveMins" xml:space="preserve">
 		<value>분 ( 0은 비활성화)</value>
 	</data>
-	<data name="strAvailableVersion" xml:space="preserve">
+  <data name="strAvailableVersion" xml:space="preserve">
 		<value>최종 버전</value>
 	</data>
-	<data name="strButtonBrowse" xml:space="preserve">
+  <data name="strButtonBrowse" xml:space="preserve">
 		<value>검색(&amp;B)</value>
 	</data>
-	<data name="strButtonCancel" xml:space="preserve">
+  <data name="strButtonCancel" xml:space="preserve">
 		<value>취소(&amp;C)</value>
 	</data>
-	<data name="strButtonChange" xml:space="preserve">
+  <data name="strButtonChange" xml:space="preserve">
 		<value>변경</value>
 	</data>
-	<data name="strButtonClose" xml:space="preserve">
+  <data name="strButtonClose" xml:space="preserve">
 		<value>닫기(&amp;C)</value>
 	</data>
-	<data name="strButtonDefaultInheritance" xml:space="preserve">
+  <data name="strButtonDefaultInheritance" xml:space="preserve">
 		<value>기본 상속</value>
 	</data>
-	<data name="strButtonDefaultProperties" xml:space="preserve">
+  <data name="strButtonDefaultProperties" xml:space="preserve">
 		<value>기본 속성</value>
 	</data>
-	<data name="strButtonDisconnect" xml:space="preserve">
+  <data name="strButtonDisconnect" xml:space="preserve">
 		<value>연결 끊기</value>
 	</data>
-	<data name="strButtonIcon" xml:space="preserve">
+  <data name="strButtonIcon" xml:space="preserve">
 		<value>아이콘</value>
 	</data>
-	<data name="strButtonImport" xml:space="preserve">
+  <data name="strButtonImport" xml:space="preserve">
 		<value>임포트(&amp;I)</value>
 	</data>
-	<data name="strButtonInheritance" xml:space="preserve">
+  <data name="strButtonInheritance" xml:space="preserve">
 		<value>상속</value>
 	</data>
-	<data name="strButtonLaunch" xml:space="preserve">
+  <data name="strButtonLaunch" xml:space="preserve">
 		<value>시작(&amp;L)</value>
 	</data>
-	<data name="strButtonLaunchPutty" xml:space="preserve">
+  <data name="strButtonLaunchPutty" xml:space="preserve">
 		<value>PuTTY 시작</value>
 	</data>
-	<data name="strButtonNew" xml:space="preserve">
+  <data name="strButtonNew" xml:space="preserve">
 		<value>신규(&amp;N)</value>
 	</data>
-	<data name="strButtonOK" xml:space="preserve">
+  <data name="strButtonOK" xml:space="preserve">
 		<value>확인(&amp;O)</value>
 	</data>
-	<data name="strButtonProperties" xml:space="preserve">
+  <data name="strButtonProperties" xml:space="preserve">
 		<value>등록정보</value>
 	</data>
-	<data name="strButtonScan" xml:space="preserve">
+  <data name="strButtonScan" xml:space="preserve">
 		<value>스캔(&amp;S)</value>
 	</data>
-	<data name="strButtonStop" xml:space="preserve">
+  <data name="strButtonStop" xml:space="preserve">
 		<value>중단(&amp;S)</value>
 	</data>
-	<data name="strButtonTestProxy" xml:space="preserve">
+  <data name="strButtonTestProxy" xml:space="preserve">
 		<value>포록시 테스트</value>
 	</data>
-	<data name="strCannotImportNormalSessionFile" xml:space="preserve">
+  <data name="strCannotImportNormalSessionFile" xml:space="preserve">
 		<value>일반 연결 파일은 가져올 수 없습니다.
 Please use File - Load Connections for normal connection files!</value>
 	</data>
-	<data name="strCannotStartPortScan" xml:space="preserve">
+  <data name="strCannotStartPortScan" xml:space="preserve">
 		<value>포트 스캔을 시작 할 수 없습니다. 잘못된 IP 형식 입니다.</value>
 	</data>
-	<data name="strCategoryAppearance" xml:space="preserve">
+  <data name="strCategoryAppearance" xml:space="preserve">
 		<value>모양</value>
 	</data>
-	<data name="strCategoryConnection" xml:space="preserve">
+  <data name="strCategoryConnection" xml:space="preserve">
 		<value>연결</value>
 	</data>
-	<data name="strCategoryCredentials" xml:space="preserve">
+  <data name="strCategoryCredentials" xml:space="preserve">
 		<value>자격증명</value>
 	</data>
-	<data name="strCategoryDisplay" xml:space="preserve">
+  <data name="strCategoryDisplay" xml:space="preserve">
 		<value>표시</value>
 	</data>
-	<data name="strCategoryGateway" xml:space="preserve">
+  <data name="strCategoryGateway" xml:space="preserve">
 		<value>게이트웨이</value>
 	</data>
-	<data name="strCategoryGeneral" xml:space="preserve">
+  <data name="strCategoryGeneral" xml:space="preserve">
 		<value>일반</value>
 	</data>
-	<data name="strCategoryMiscellaneous" xml:space="preserve">
+  <data name="strCategoryMiscellaneous" xml:space="preserve">
 		<value>기타</value>
 	</data>
-	<data name="strCategoryProtocol" xml:space="preserve">
+  <data name="strCategoryProtocol" xml:space="preserve">
 		<value>프로토콜</value>
 	</data>
-	<data name="strCategoryRedirect" xml:space="preserve">
+  <data name="strCategoryRedirect" xml:space="preserve">
 		<value>리디렉션</value>
 	</data>
-	<data name="strCcAlwaysShowScreen" xml:space="preserve">
+  <data name="strCcAlwaysShowScreen" xml:space="preserve">
 		<value>시작시 항상 이 화면 표시</value>
 	</data>
-	<data name="strCcCheckAgain" xml:space="preserve">
+  <data name="strCcCheckAgain" xml:space="preserve">
 		<value>새로 고침</value>
 	</data>
-	<data name="strCcCheckFailed" xml:space="preserve">
+  <data name="strCcCheckFailed" xml:space="preserve">
 		<value>검사 실패!</value>
 	</data>
-	<data name="strCcCheckSucceeded" xml:space="preserve">
+  <data name="strCcCheckSucceeded" xml:space="preserve">
 		<value>검사 성공!</value>
 	</data>
-	<data name="strCcEOLFailed" xml:space="preserve">
+  <data name="strCcEOLFailed" xml:space="preserve">
 		<value>(RDP) 세션 기능을 사용하려면 시스템에 eolwtscom.dll의 사본이 있어야합니다.
 mRemoteNG는이 구성 요소와 함께 제공되지만 mRemoteNG 설치 프로그램을 사용하지 않으면 자동으로 등록되지 않습니다.
 수동으로 등록하려면 상승 된 명령 프롬프트에서 다음 명령을 실행하십시오. regsvr32 "C : \ Program Files \ mRemoteNG \ eolwtscom.dll"(여기서 C : \ Program Files \ mRemoteNG \은 mRemoteNG 설치 경로 임).
 이 검사가 여전히 실패하거나 (RDP) 세션 기능을 사용할 수없는 경우 http://forum.mremoteng.org/의 mRemoteNG 포럼을 참조하십시오.</value>
 	</data>
-	<data name="strCcEOLOK" xml:space="preserve">
+  <data name="strCcEOLOK" xml:space="preserve">
 		<value>EOLWTSCOM이 발견되어 등록 된 것으로 보입니다.</value>
 	</data>
-	<data name="strCcGeckoFailed" xml:space="preserve">
+  <data name="strCcGeckoFailed" xml:space="preserve">
 		<value>Gecko 렌더링 엔진을 사용하려면 옵션에 XULrunner 1.8.1.x와 설치 경로가 있어야합니다.
 XULrunner 1.8.1.3은 ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/에서 다운로드 할 수 있습니다.
 다운로드가 끝나면 원하는 경로로 패키지의 압축을 풉니 다. 그런 다음 mRemoteNG에서 Tools - Options - Advanced로 이동하여 XULrunner 경로 필드에 올바른 경로를 입력하십시오.
 그래도이 수표를 통과하거나 mRemoteNG의 게코 엔진을 사용할 수 없다면 mRemoteNG 포럼 (http://forum.mremoteng.org/)에 문의하십시오.</value>
 	</data>
-	<data name="strCcGeckoOK" xml:space="preserve">
+  <data name="strCcGeckoOK" xml:space="preserve">
 		<value>GeckoFx가 발견되어 설치 된 것으로 보입니다.</value>
 	</data>
-	<data name="strCcICAFailed" xml:space="preserve">
+  <data name="strCcICAFailed" xml:space="preserve">
 		<value>ICA를 사용하려면 XenDesktop Online Plugin이 설치되어 있고 wfica.ocx 라이브러리가 등록되어 있어야합니다. 클라이언트는 http://www.citrix.com/download/에서 다운로드 할 수 있습니다.
 XenDesktop Online Plugin이 설치되어 있고 검사가 여전히 실패하면 wfica.ocx를 수동으로 등록 해보십시오.
 이렇게하려면 실행 대화 상자 (시작 - 실행)를 열고 다음을 입력하십시오. regsvr32 "c : ₩ Program Files ₩ Citrix ₩ ICA Client ₩ wfica.ocx"(여기서 c : \ Program Files \ Citrix \ ICA Client \는 XenDesktop Online Plugin 설치 경로).
 그래도이 수표를 통과하거나 mRemoteNG에서 ICA를 사용할 수 없다면 mRemoteNG 포럼 (http://forum.mremoteng.org/)을 참조하십시오.</value>
 	</data>
-	<data name="strCcICAOK" xml:space="preserve">
+  <data name="strCcICAOK" xml:space="preserve">
 		<value>모든 ICA 구성 요소가 발견되어 제대로 등록 된 것으로 보입니다.
 Citrix ICA 클라이언트 제어 버전 {0}</value>
 	</data>
-	<data name="strCcNotInstalledProperly" xml:space="preserve">
+  <data name="strCcNotInstalledProperly" xml:space="preserve">
 		<value>제대로 설치가 되어 있지 않습니다.</value>
 	</data>
-	<data name="strCcPuttyFailed" xml:space="preserve">
+  <data name="strCcPuttyFailed" xml:space="preserve">
 		<value>SSH, Telnet, Rlogin 및 RAW 프로토콜은 PuTTY가 작동해야합니다. PuTTY는 모든 mRemoteNG 패키지와 함께 제공되며 설치 경로에 있습니다.
 putty.exe가 mRemoteNG 디렉토리 (기본값 : c : \ Program Files \ mRemoteNG \)에 있거나 PuTTY 실행 파일의 유효한 경로를 옵션 (도구 - 옵션 - 고급 - 사용자 정의 PuTTY)에 지정했는지 확인하십시오 통로)</value>
 	</data>
-	<data name="strCcPuttyOK" xml:space="preserve">
+  <data name="strCcPuttyOK" xml:space="preserve">
 		<value>PuTTY 실행 파일을 찾았으므로 사용할 준비가되었습니다.</value>
 	</data>
-	<data name="strCcRDPFailed" xml:space="preserve">
+  <data name="strCcRDPFailed" xml:space="preserve">
 		<value>RDP가 제대로 작동하려면 적어도 원격 데스크톱 연결 (터미널 서비스) 클라이언트 8.0이 설치되어 있어야합니다. 다음 사이트에서 다운로드 할 수 있습니다. http://support.microsoft.com/kb/925876
 이 검사가 여전히 실패하거나 RDP를 사용할 수없는 경우 mRemoteNG 포럼 (http://forum.mremoteng.org/)을 참조하십시오.</value>
 	</data>
-	<data name="strCcRDPOK" xml:space="preserve">
+  <data name="strCcRDPOK" xml:space="preserve">
 		<value>모든 RDP 구성 요소가 발견되어 제대로 등록 된 것으로 보입니다.
 원격 데스크톱 연결 제어 버전 {0}</value>
 	</data>
-	<data name="strCcVNCFailed" xml:space="preserve">
+  <data name="strCcVNCFailed" xml:space="preserve">
 		<value>VNC를 사용하려면 mRemoteNG 응용 프로그램 폴더에 VncSharp.dll이 있어야합니다.
 mRemoteNG 응용 프로그램 폴더 (일반적으로 C : \ Program Files \ mRemoteNG \)에 VncSharp.dll 파일이 있는지 확인하십시오.
 그래도 확인을 통과 할 수 없거나 mRemoteNG에서 VNC를 사용할 수 없다면 mRemoteNG 포럼 (http://forum.mremoteng.org/)에 문의하십시오.</value>
 	</data>
-	<data name="strCcVNCOK" xml:space="preserve">
+  <data name="strCcVNCOK" xml:space="preserve">
 		<value>모든 VNC 구성 요소가 발견되어 제대로 등록 된 것으로 보입니다.
 VncSharp 제어 버전 {0}</value>
 	</data>
-	<data name="strCheckboxAutomaticReconnect" xml:space="preserve">
+  <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
 		<value>서버와의 연결이 끊어지면 자동으로 다시 연결을 시도합니다 (RDP &amp;&amp; ICA 만 해당).</value>
 	</data>
-	<data name="strCheckboxDomain" xml:space="preserve">
+  <data name="strCheckboxDomain" xml:space="preserve">
 		<value>도메인</value>
 	</data>
-	<data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
 		<value>이 메시지를 다시 표시 안 함.</value>
 	</data>
-	<data name="strCheckboxInheritance" xml:space="preserve">
+  <data name="strCheckboxInheritance" xml:space="preserve">
 		<value>상속</value>
 	</data>
-	<data name="strCheckboxPassword" xml:space="preserve">
+  <data name="strCheckboxPassword" xml:space="preserve">
 		<value>암호</value>
 	</data>
-	<data name="strCheckboxProxyAuthentication" xml:space="preserve">
+  <data name="strCheckboxProxyAuthentication" xml:space="preserve">
 		<value>이 프록시 서버에는 인증이 필요합니다</value>
 	</data>
-	<data name="strCheckboxPuttyPath" xml:space="preserve">
+  <data name="strCheckboxPuttyPath" xml:space="preserve">
 		<value>사용자 정의 PuTTY 경로 사용 :</value>
 	</data>
-	<data name="strCheckboxReconnectWhenReady" xml:space="preserve">
+  <data name="strCheckboxReconnectWhenReady" xml:space="preserve">
 		<value>준비되면 다시 연결</value>
 	</data>
-	<data name="strCheckboxUpdateUseProxy" xml:space="preserve">
+  <data name="strCheckboxUpdateUseProxy" xml:space="preserve">
 		<value>프록시 서버를 사용해서 연결</value>
 	</data>
-	<data name="strCheckboxUsername" xml:space="preserve">
+  <data name="strCheckboxUsername" xml:space="preserve">
 		<value>사용자 이름</value>
 	</data>
-	<data name="strCheckboxWaitForExit" xml:space="preserve">
+  <data name="strCheckboxWaitForExit" xml:space="preserve">
 		<value>종료까지 대기</value>
 	</data>
-	<data name="strCheckForUpdate" xml:space="preserve">
+  <data name="strCheckForUpdate" xml:space="preserve">
 		<value>다시 확인</value>
 	</data>
-	<data name="strCheckForUpdatesOnStartup" xml:space="preserve">
+  <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
 		<value>시작시 업데이트 확인</value>
 	</data>
-	<data name="strCheckNow" xml:space="preserve">
+  <data name="strCheckNow" xml:space="preserve">
 		<value>지금 확인</value>
 	</data>
-	<data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
+  <data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
 		<value>시작시 구성 요소가 제대로 설치되었는지 확인</value>
 	</data>
-	<data name="strChoosePanelBeforeConnecting" xml:space="preserve">
+  <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
 		<value>연결 전에 패널 선택</value>
 	</data>
-	<data name="strClosedPorts" xml:space="preserve">
+  <data name="strClosedPorts" xml:space="preserve">
 		<value>닫힌 포트</value>
 	</data>
-	<data name="strCollapseAllFolders" xml:space="preserve">
+  <data name="strCollapseAllFolders" xml:space="preserve">
 		<value>모든 폴더 접기</value>
 	</data>
-	<data name="strLogging" xml:space="preserve">
+  <data name="strLogging" xml:space="preserve">
 		<value>로깅</value>
 	</data>
-	<data name="strPopups" xml:space="preserve">
+  <data name="strPopups" xml:space="preserve">
 		<value>팝업</value>
 	</data>
-	<data name="strLogToAppDir" xml:space="preserve">
+  <data name="strLogToAppDir" xml:space="preserve">
 		<value>응용 프로그램 디렉토리에 로그</value>
 	</data>
-	<data name="strAssignedCredential" xml:space="preserve">
+  <data name="strAssignedCredential" xml:space="preserve">
 		<value>할당 된 자격 증명</value>
 	</data>
-	<data name="strHttpsInsecureAllowAlways" xml:space="preserve">
+  <data name="strHttpsInsecureAllowAlways" xml:space="preserve">
 		<value>항상 허용</value>
 	</data>
-	<data name="strHttpsInsecureAllowOnce" xml:space="preserve">
+  <data name="strHttpsInsecureAllowOnce" xml:space="preserve">
 		<value>한번 허용</value>
 	</data>
-	<data name="strHttpsInsecureDontAllow" xml:space="preserve">
+  <data name="strHttpsInsecureDontAllow" xml:space="preserve">
 		<value>허용 안함</value>
 	</data>
-	<data name="strHttpsInsecurePrompt" xml:space="preserve">
+  <data name="strHttpsInsecurePrompt" xml:space="preserve">
 		<value>URL에 대한 안전하지 않은 인증서 허용 : {0}?</value>
 	</data>
-	<data name="strHttpsInsecurePromptTitle" xml:space="preserve">
+  <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
 		<value>안전하지 않은 인증서를 허용 하시겠습니까?</value>
 	</data>
-	<data name="strDebug" xml:space="preserve">
+  <data name="strDebug" xml:space="preserve">
 		<value>디버그</value>
 	</data>
-	<data name="strShowTheseMessageTypes" xml:space="preserve">
+  <data name="strShowTheseMessageTypes" xml:space="preserve">
 		<value>이 메시지 형시 표시</value>
 	</data>
-	<data name="strLogFilePath" xml:space="preserve">
+  <data name="strLogFilePath" xml:space="preserve">
 		<value>로그 파일 경로</value>
 	</data>
-	<data name="strLogTheseMessageTypes" xml:space="preserve">
+  <data name="strLogTheseMessageTypes" xml:space="preserve">
 		<value>이 메시지 형식 로그</value>
 	</data>
-	<data name="strChoosePath" xml:space="preserve">
+  <data name="strChoosePath" xml:space="preserve">
 		<value>경로 선택</value>
 	</data>
-	<data name="strOpenFile" xml:space="preserve">
+  <data name="strOpenFile" xml:space="preserve">
 		<value>파일 열기</value>
 	</data>
-	<data name="strUseDefault" xml:space="preserve">
+  <data name="strUseDefault" xml:space="preserve">
 		<value>기본값 사용</value>
 	</data>
-	<data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
+  <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
 		<value>자격 증명 레코드 {0}을 (를) 삭제 하시겠습니까?</value>
 	</data>
-	<data name="strFindMatchingCredentialFailed" xml:space="preserve">
+  <data name="strFindMatchingCredentialFailed" xml:space="preserve">
 		<value>ID가 "{1}"인 연결 레코드에 대해 "{0}"과 일치하는 자격증명 레코드를 찾을 수 없습니다.</value>
 	</data>
-	<data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+  <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
 		<value>비활성으로 인해 RDP 세션 연결이 끊어진 후 알림 수신 여부 선택</value>
 	</data>
-	<data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+  <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
 		<value>유휴 연결 끊김 경고</value>
 	</data>
-	<data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+  <data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
 		<value>비밀번호는 {0} 이상의 문자를 포함해야합니다 : {1}</value>
 	</data>
-	<data name="strPasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+  <data name="strPasswordContainsLowerCaseConstraintHint" xml:space="preserve">
 		<value>비밀번호는 적어도 소문자가 {0} 이상이어야합니다.</value>
 	</data>
-	<data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
+  <data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
 		<value>비밀번호는 최소한 {0} 숫자를 포함해야합니다.</value>
 	</data>
-	<data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+  <data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
 		<value>비밀번호는 적어도 {0} 이상의 대문자를 포함해야합니다.</value>
 	</data>
-	<data name="strPasswordLengthConstraintHint" xml:space="preserve">
+  <data name="strPasswordLengthConstraintHint" xml:space="preserve">
 		<value>암호 길이는 {0}에서 {1} 사이 여야합니다.</value>
 	</data>
-	<data name="strChooseLogPath" xml:space="preserve">
+  <data name="strChooseLogPath" xml:space="preserve">
 		<value>mRemoteNG 로그 파일의 경로 선택</value>
 	</data>
-	<data name="strCredentialEditor" xml:space="preserve">
+  <data name="strCredentialEditor" xml:space="preserve">
 		<value>자격 증명 편집기</value>
 	</data>
-	<data name="strCredentialManager" xml:space="preserve">
+  <data name="strCredentialManager" xml:space="preserve">
 		<value>자격 증명 관리자</value>
 	</data>
-	<data name="strID" xml:space="preserve">
+  <data name="strID" xml:space="preserve">
 		<value>ID</value>
 	</data>
-	<data name="strRemove" xml:space="preserve">
+  <data name="strRemove" xml:space="preserve">
 		<value>제거</value>
 	</data>
-	<data name="strTitle" xml:space="preserve">
+  <data name="strTitle" xml:space="preserve">
 		<value>타이틀</value>
 	</data>
-	<data name="strPropertyDescriptionCredential" xml:space="preserve">
+  <data name="strPropertyDescriptionCredential" xml:space="preserve">
 		<value>이 연결에 사용할 자격 증명을 선택.</value>
 	</data>
-	<data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+  <data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
 		<value>유휴(idle) 분</value>
 	</data>
-	<data name="strAccept" xml:space="preserve">
+  <data name="strAccept" xml:space="preserve">
 		<value>동의</value>
 	</data>
-	<data name="strAdd" xml:space="preserve">
+  <data name="strAdd" xml:space="preserve">
 		<value>추가</value>
 	</data>
-	<data name="strPropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
+  <data name="strPropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
 		<value>자동으로 연결을 끊기 전에 RDP 세션이 유휴 상태가되는 시간 (제한 없이 사용 : 0)</value>
 	</data>
-	<data name="strPropertyNameSoundQuality" xml:space="preserve">
+  <data name="strPropertyNameSoundQuality" xml:space="preserve">
 		<value>음질</value>
 	</data>
-	<data name="strUpdatePortableDownloadComplete" xml:space="preserve">
+  <data name="strUpdatePortableDownloadComplete" xml:space="preserve">
 		<value>다운로드 완료!</value>
 	</data>
-	<data name="strDownloadPortable" xml:space="preserve">
+  <data name="strDownloadPortable" xml:space="preserve">
 		<value>다운로드</value>
 	</data>
-	<data name="strEncryptionEngine" xml:space="preserve">
+  <data name="strEncryptionEngine" xml:space="preserve">
 		<value>암호화 엔진</value>
 	</data>
-	<data name="strTabSecurity" xml:space="preserve">
+  <data name="strTabSecurity" xml:space="preserve">
 		<value>보안</value>
 	</data>
-	<data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
+  <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
 		<value>키 유도 함수 반복</value>
 	</data>
-	<data name="strRDPSoundQualityDynamic" xml:space="preserve">
+  <data name="strRDPSoundQualityDynamic" xml:space="preserve">
 		<value>동적</value>
 	</data>
-	<data name="strRDPSoundQualityHigh" xml:space="preserve">
+  <data name="strRDPSoundQualityHigh" xml:space="preserve">
 		<value>높음</value>
 	</data>
-	<data name="strRDPSoundQualityMedium" xml:space="preserve">
+  <data name="strRDPSoundQualityMedium" xml:space="preserve">
 		<value>중간</value>
 	</data>
-	<data name="strPropertyDescriptionSoundQuality" xml:space="preserve">
+  <data name="strPropertyDescriptionSoundQuality" xml:space="preserve">
 		<value>프로토콜에서 제공하는 음질을 선택하십시오 : 동적, 중간, 높음</value>
 	</data>
-	<data name="strColumnArguments" xml:space="preserve">
+  <data name="strColumnArguments" xml:space="preserve">
 		<value>인수</value>
 	</data>
-	<data name="strColumnDisplayName" xml:space="preserve">
+  <data name="strColumnDisplayName" xml:space="preserve">
 		<value>표시 이름</value>
 	</data>
-	<data name="strColumnFilename" xml:space="preserve">
+  <data name="strColumnFilename" xml:space="preserve">
 		<value>파일 이름</value>
 	</data>
-	<data name="strColumnHostnameIP" xml:space="preserve">
+  <data name="strColumnHostnameIP" xml:space="preserve">
 		<value>호스트 이름 / IP</value>
 	</data>
-	<data name="strColumnMessage" xml:space="preserve">
+  <data name="strColumnMessage" xml:space="preserve">
 		<value>메시지</value>
 	</data>
-	<data name="strColumnUsername" xml:space="preserve">
+  <data name="strColumnUsername" xml:space="preserve">
 		<value>사용자 이름</value>
 	</data>
-	<data name="strColumnWaitForExit" xml:space="preserve">
+  <data name="strColumnWaitForExit" xml:space="preserve">
 		<value>종료 대기</value>
 	</data>
-	<data name="strCommandExitProgram" xml:space="preserve">
+  <data name="strCommandExitProgram" xml:space="preserve">
 		<value>종료 (&amp;X) {0}</value>
 	</data>
-	<data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
+  <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
 		<value>명령 줄 인수를 구문 분석 할 수 없음!</value>
 	</data>
-	<data name="strCommandOpenConnectionFile" xml:space="preserve">
+  <data name="strCommandOpenConnectionFile" xml:space="preserve">
 		<value>연결 파일 열기(&amp;O)</value>
 	</data>
-	<data name="strCommandTryAgain" xml:space="preserve">
+  <data name="strCommandTryAgain" xml:space="preserve">
 		<value>다시 시도(&amp;T)</value>
 	</data>
-	<data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
 		<value>{0}이 시스템에서 실행중인 레노버 자동 스크롤 유틸리티를 감지했습니다. 이 유틸리티는 당신이 비활성화하거나 제거하는 것이 좋습니다 {0}.에 문제를 일으킨다 고 알려져있다.</value>
 	</data>
-	<data name="strCompatibilityProblemDetected" xml:space="preserve">
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
 		<value>호환성 문제 감지</value>
 	</data>
-	<data name="strComponentsCheck" xml:space="preserve">
+  <data name="strComponentsCheck" xml:space="preserve">
 		<value>구성 요소 확인</value>
 	</data>
-	<data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+  <data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
 		<value>btnIcon_Click 실패!</value>
 	</data>
-	<data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
+  <data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
 		<value>ShowHideGridItems 실패!</value>
 	</data>
-	<data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
+  <data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
 		<value>IconMenu_Click 실패!</value>
 	</data>
-	<data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
+  <data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
 		<value>속성 그리드 오브젝트 실패!</value>
 	</data>
-	<data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+  <data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
 		<value>SetHostStatus 실패!</value>
 	</data>
-	<data name="strConfigPropertyGridValueFailed" xml:space="preserve">
+  <data name="strConfigPropertyGridValueFailed" xml:space="preserve">
 		<value>pGrid_PopertyValueChanged 실패!</value>
 	</data>
-	<data name="strConfigUiLoadFailed" xml:space="preserve">
+  <data name="strConfigUiLoadFailed" xml:space="preserve">
 		<value>구성 UI 로드 실패!</value>
 	</data>
-	<data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
+  <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
 		<value>연결을 닫으시겠습니까 "{0}"?</value>
 	</data>
-	<data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
+  <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
 		<value>패널을 닫으시겠습니까 "{0}"? 포함 된 모든 연결도 닫힙니다.</value>
 	</data>
-	<data name="strConfirmDeleteExternalTool" xml:space="preserve">
+  <data name="strConfirmDeleteExternalTool" xml:space="preserve">
 		<value>외부 도구를 삭제 하시겠습니까 "{0}"?</value>
 	</data>
-	<data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
+  <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
 		<value>선택한 외부 도구를 삭제 하시겠습니까 "{0}"?</value>
 	</data>
-	<data name="strConfirmDeleteNodeConnection" xml:space="preserve">
+  <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
 		<value>연결을 삭제 하시겠습니까 "{0}"?</value>
 	</data>
-	<data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
 		<value>당신이 빈 폴더를 삭제 하시겠습니까 "{0}"?</value>
 	</data>
-	<data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
 		<value>폴더를 삭제 하시겠습니까 "{0}"? 포함 된 모든 폴더 또는 연결도 삭제됩니다.</value>
 	</data>
-	<data name="strConfirmExitMainInstruction" xml:space="preserve">
+  <data name="strConfirmExitMainInstruction" xml:space="preserve">
 		<value>열려있는 모든 연결을 닫으시겠습니까?</value>
 	</data>
-	<data name="strConfirmResetLayout" xml:space="preserve">
+  <data name="strConfirmResetLayout" xml:space="preserve">
 		<value>기본 레이아웃 패널을 재설정 하시겠습니까?</value>
 	</data>
-	<data name="strConnect" xml:space="preserve">
+  <data name="strConnect" xml:space="preserve">
 		<value>연결</value>
 	</data>
-	<data name="strConnectInFullscreen" xml:space="preserve">
+  <data name="strConnectInFullscreen" xml:space="preserve">
 		<value>전체 화면 모드에서 연결</value>
 	</data>
-	<data name="strConnecting" xml:space="preserve">
+  <data name="strConnecting" xml:space="preserve">
 		<value>연결 중 ...</value>
 	</data>
-	<data name="strConnectionEventConnected" xml:space="preserve">
+  <data name="strConnectionEventConnected" xml:space="preserve">
 		<value>프로토콜 이벤트 연결</value>
 	</data>
-	<data name="strConnectionEventConnectedDetail" xml:space="preserve">
+  <data name="strConnectionEventConnectedDetail" xml:space="preserve">
 		<value>사용자 "{2}"가 설정한 "{1}"을 통해 "{0}"에 연결 (설명 : "{3}", 사용자 필드 : "{4}")</value>
 	</data>
-	<data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
 		<value>연결 실패!</value>
 	</data>
-	<data name="strConnectionEventErrorOccured" xml:space="preserve">
+  <data name="strConnectionEventErrorOccured" xml:space="preserve">
 		<value>프로토콜 이벤트 오류 발생.</value>
 	</data>
-	<data name="strConnectionOpenFailed" xml:space="preserve">
+  <data name="strConnectionOpenFailed" xml:space="preserve">
 		<value>열기 연결에 실패했습니다!</value>
 	</data>
-	<data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+  <data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
 		<value>연결을 열 수 없습니다 : 호스트 이름 지정이 안됨!</value>
 	</data>
-	<data name="strConnectionRdpErrorDetail" xml:space="preserve">
+  <data name="strConnectionRdpErrorDetail" xml:space="preserve">
 		<value>RDP 오류!
 오류 코드 : {0}
 오류 설명 : {1}</value>
 	</data>
-	<data name="strConnections" xml:space="preserve">
+  <data name="strConnections" xml:space="preserve">
 		<value>연결</value>
 	</data>
-	<data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
+  <data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
 		<value>기본 포트를 설정할 수 없습니다!</value>
 	</data>
-	<data name="strConnectionsFileBackupFailed" xml:space="preserve">
+  <data name="strConnectionsFileBackupFailed" xml:space="preserve">
 		<value>연결 파일의 백업을 생성 할 수 없습니다!</value>
 	</data>
-	<data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
+  <data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
 		<value>연결 파일을 가져올 수 없습니다!</value>
 	</data>
-	<data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+  <data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
 		<value>연결 파일은 "{0}"를 로드 할 수 없습니다!</value>
 	</data>
-	<data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
+  <data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
 		<value>연결 파일은 "{0}"를 로드 할 수 없습니다!
 새로운 연결 파일과 함께 시작.</value>
 	</data>
-	<data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
+  <data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
 		<value>연결 파일을 저장할 수 없습니다!</value>
 	</data>
-	<data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
+  <data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
 		<value>"{0}"로 연결 파일을 저장할 수 없습니다!</value>
 	</data>
-	<data name="strConnectNoCredentials" xml:space="preserve">
+  <data name="strConnectNoCredentials" xml:space="preserve">
 		<value>자격 증명없이 연결</value>
 	</data>
-	<data name="strConnectToConsoleSession" xml:space="preserve">
+  <data name="strConnectToConsoleSession" xml:space="preserve">
 		<value>세션을 콘솔에 연결</value>
 	</data>
-	<data name="strConnectWithOptions" xml:space="preserve">
+  <data name="strConnectWithOptions" xml:space="preserve">
 		<value>연결 (옵션 사용) </value>
 	</data>
-	<data name="strConnenctionClosedByUser" xml:space="preserve">
+  <data name="strConnenctionClosedByUser" xml:space="preserve">
 		<value>사용자 {2}이(가) {1} 통해 {0}에 연결.</value>
 	</data>
-	<data name="strConnenctionClosedByUserDetail" xml:space="preserve">
+  <data name="strConnenctionClosedByUserDetail" xml:space="preserve">
 		<value>사용자 {2}이(가) {1} 통해 {0}에 연결. (설명:"{3}";사용자 입력란:"{4}")</value>
 	</data>
-	<data name="strConnenctionCloseEvent" xml:space="preserve">
+  <data name="strConnenctionCloseEvent" xml:space="preserve">
 		<value>연결 이벤트 닫힘.</value>
 	</data>
-	<data name="strConnenctionCloseEventFailed" xml:space="preserve">
+  <data name="strConnenctionCloseEventFailed" xml:space="preserve">
 		<value>연결 이벤트 담힘 실패.</value>
 	</data>
-	<data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
+  <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
 		<value>새로운 연결 파일을 생성 할 수 없습니다!</value>
 	</data>
-	<data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
 		<value>FilteredPropertyGrid에서의 ToolStrip 컨트롤을 찾을 수 없습니다.</value>
 	</data>
-	<data name="strCurrentVersion" xml:space="preserve">
+  <data name="strCurrentVersion" xml:space="preserve">
 		<value>설치된 버전</value>
 	</data>
-	<data name="strDefaultTheme" xml:space="preserve">
+  <data name="strDefaultTheme" xml:space="preserve">
 		<value>기본 테마</value>
 	</data>
-	<data name="strDetect" xml:space="preserve">
+  <data name="strDetect" xml:space="preserve">
 		<value>검색</value>
 	</data>
-	<data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
+  <data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
 		<value>콘솔 세션에 연결하지 않음</value>
 	</data>
-	<data name="strDontConnectWhenAuthFails" xml:space="preserve">
+  <data name="strDontConnectWhenAuthFails" xml:space="preserve">
 		<value>인증에 실패하면 연결하지 않음</value>
 	</data>
-	<data name="strDoubleClickTabClosesIt" xml:space="preserve">
+  <data name="strDoubleClickTabClosesIt" xml:space="preserve">
 		<value>더블 클릭으로 탭 닫기</value>
 	</data>
-	<data name="strDownloadAndInstall" xml:space="preserve">
+  <data name="strDownloadAndInstall" xml:space="preserve">
 		<value>다운로드 및 설치</value>
 	</data>
-	<data name="strDuplicate" xml:space="preserve">
+  <data name="strDuplicate" xml:space="preserve">
 		<value>복제</value>
 	</data>
-	<data name="strEmptyPasswordContinue" xml:space="preserve">
+  <data name="strEmptyPasswordContinue" xml:space="preserve">
 		<value>암호를 사용하지 않고 계속 하시겠습니까?</value>
 	</data>
-	<data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
+  <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
 		<value>빈 사용자 이름, 비밀번호 또는 도메인 필드의 경우 다음을 사용 :</value>
 	</data>
-	<data name="strEnc128Bit" xml:space="preserve">
+  <data name="strEnc128Bit" xml:space="preserve">
 		<value>128 비트</value>
 	</data>
-	<data name="strEnc128BitLogonOnly" xml:space="preserve">
+  <data name="strEnc128BitLogonOnly" xml:space="preserve">
 		<value>128 비트 (로그온 만)</value>
 	</data>
-	<data name="strEnc40Bit" xml:space="preserve">
+  <data name="strEnc40Bit" xml:space="preserve">
 		<value>40 비트</value>
 	</data>
-	<data name="strEnc56Bit" xml:space="preserve">
+  <data name="strEnc56Bit" xml:space="preserve">
 		<value>56 비트</value>
 	</data>
-	<data name="strEncBasic" xml:space="preserve">
+  <data name="strEncBasic" xml:space="preserve">
 		<value>기본</value>
 	</data>
-	<data name="strEncryptCompleteConnectionFile" xml:space="preserve">
+  <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
 		<value>연결 파일을 완전히 암호화</value>
 	</data>
-	<data name="strEndIP" xml:space="preserve">
+  <data name="strEndIP" xml:space="preserve">
 		<value>최종 IP</value>
 	</data>
-	<data name="strEndPort" xml:space="preserve">
+  <data name="strEndPort" xml:space="preserve">
 		<value>최종 포트</value>
 	</data>
-	<data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
 		<value>AddExternalToolsToToolBar (frmMain)가 실패. {0}</value>
 	</data>
-	<data name="strErrorAddFolderFailed" xml:space="preserve">
+  <data name="strErrorAddFolderFailed" xml:space="preserve">
 		<value>AddFolder (UI.Window.ConnectionTreeWindow)가 실패. {0}</value>
 	</data>
-	<data name="strErrorBadDatabaseVersion" xml:space="preserve">
+  <data name="strErrorBadDatabaseVersion" xml:space="preserve">
 		<value>데이터베이스 버전 {0}은 (는)이 버전의 {1}과 호환되지 않습니다.</value>
 	</data>
-	<data name="strErrorCloneNodeFailed" xml:space="preserve">
+  <data name="strErrorCloneNodeFailed" xml:space="preserve">
 		<value>CloneNode (Tree.Node)가 실패. {0}</value>
 	</data>
-	<data name="strErrorCode" xml:space="preserve">
+  <data name="strErrorCode" xml:space="preserve">
 		<value>오류 코드 {0}.</value>
 	</data>
-	<data name="strErrorConnectionListSaveFailed" xml:space="preserve">
+  <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
 		<value>연결 목록을 저장할 수 없습니다.</value>
 	</data>
-	<data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
+  <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
 		<value>PuTTY를 시작할 수 없습니다.</value>
 	</data>
-	<data name="strErrorDecryptionFailed" xml:space="preserve">
+  <data name="strErrorDecryptionFailed" xml:space="preserve">
 		<value>암호 해독에 실패. {0}</value>
 	</data>
-	<data name="strErrorEncryptionFailed" xml:space="preserve">
+  <data name="strErrorEncryptionFailed" xml:space="preserve">
 		<value>암호화에 실패. {0}</value>
 	</data>
-	<data name="strErrors" xml:space="preserve">
+  <data name="strErrors" xml:space="preserve">
 		<value>오류</value>
 	</data>
-	<data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
 		<value>시작 연결 파일을로드 할 수 없습니다. {0} {0} {2} {0} {3} {0} {0} 데이터 손실을 방지하기 위해 {1}을 종료합니다.</value>
 	</data>
-	<data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+  <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
 		<value>VerifyDatabaseVersion (Config.Connections.Save)이 실패. {0}</value>
 	</data>
-	<data name="strExpandAllFolders" xml:space="preserve">
+  <data name="strExpandAllFolders" xml:space="preserve">
 		<value>모든 폴더 확장</value>
 	</data>
-	<data name="strExperimental" xml:space="preserve">
+  <data name="strExperimental" xml:space="preserve">
 		<value>실험적</value>
 	</data>
-	<data name="strExport" xml:space="preserve">
+  <data name="strExport" xml:space="preserve">
 		<value>내보내기</value>
 	</data>
-	<data name="strExportEverything" xml:space="preserve">
+  <data name="strExportEverything" xml:space="preserve">
 		<value>모든 항목 내보내기</value>
 	</data>
-	<data name="strExportFile" xml:space="preserve">
+  <data name="strExportFile" xml:space="preserve">
 		<value>파일 내보내기</value>
 	</data>
-	<data name="strExportItems" xml:space="preserve">
+  <data name="strExportItems" xml:space="preserve">
 		<value>항목 내보내기</value>
 	</data>
-	<data name="strExportmRemoteXML" xml:space="preserve">
+  <data name="strExportmRemoteXML" xml:space="preserve">
 		<value>mRemote / mRemoteNG XML 내보내기</value>
 	</data>
-	<data name="strExportProperties" xml:space="preserve">
+  <data name="strExportProperties" xml:space="preserve">
 		<value>속성 내보내기</value>
 	</data>
-	<data name="strExportSelectedConnection" xml:space="preserve">
+  <data name="strExportSelectedConnection" xml:space="preserve">
 		<value>현재 선택된 연결 내보내기</value>
 	</data>
-	<data name="strExportSelectedFolder" xml:space="preserve">
+  <data name="strExportSelectedFolder" xml:space="preserve">
 		<value>현재 선택된 폴더 내보내기</value>
 	</data>
-	<data name="strExportToFileMenuItem" xml:space="preserve">
+  <data name="strExportToFileMenuItem" xml:space="preserve">
 		<value>파일 내보내기(&amp;E)</value>
 	</data>
-	<data name="strExtApp" xml:space="preserve">
+  <data name="strExtApp" xml:space="preserve">
 		<value>Ext. App</value>
 	</data>
-	<data name="strExternalToolDefaultName" xml:space="preserve">
+  <data name="strExternalToolDefaultName" xml:space="preserve">
 		<value>새로운 외부 도구</value>
 	</data>
-	<data name="strFAMFAMFAMAttribution" xml:space="preserve">
+  <data name="strFAMFAMFAMAttribution" xml:space="preserve">
 		<value>아이콘을 포함 by [FAMFAMFAM]</value>
 	</data>
-	<data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
+  <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
 		<value>http://www.famfamfam.com/</value>
 	</data>
-	<data name="strFileFormatLabel" xml:space="preserve">
+  <data name="strFileFormatLabel" xml:space="preserve">
 		<value>파일 형식(&amp;F):</value>
 	</data>
-	<data name="strFilterAll" xml:space="preserve">
+  <data name="strFilterAll" xml:space="preserve">
 		<value>모든 파일 (*.*)</value>
 	</data>
-	<data name="strFilterAllImportable" xml:space="preserve">
+  <data name="strFilterAllImportable" xml:space="preserve">
 		<value>가져올 수있는 모든 파일</value>
 	</data>
-	<data name="strFilterApplication" xml:space="preserve">
+  <data name="strFilterApplication" xml:space="preserve">
 		<value>응용 프로그램 파일 (*.exe)</value>
 	</data>
-	<data name="strFiltermRemoteCSV" xml:space="preserve">
+  <data name="strFiltermRemoteCSV" xml:space="preserve">
 		<value>mRemote CSV 파일 (*.csv)</value>
 	</data>
-	<data name="strFiltermRemoteXML" xml:space="preserve">
+  <data name="strFiltermRemoteXML" xml:space="preserve">
 		<value>mRemote XML 파일 (*.XML)</value>
 	</data>
-	<data name="strFilterPuttyConnectionManager" xml:space="preserve">
+  <data name="strFilterPuttyConnectionManager" xml:space="preserve">
 		<value>PuTTY 연결 관리자 파일</value>
 	</data>
-	<data name="strFilterRdgFiles" xml:space="preserve">
+  <data name="strFilterRdgFiles" xml:space="preserve">
 		<value>원격 데스크톱 연결 관리자 파일 (*.rdg)</value>
 	</data>
-	<data name="strFilterRDP" xml:space="preserve">
+  <data name="strFilterRDP" xml:space="preserve">
 		<value>RDP 파일 (*.rdp)</value>
 	</data>
-	<data name="strFiltervRD2008CSV" xml:space="preserve">
+  <data name="strFiltervRD2008CSV" xml:space="preserve">
 		<value>visionapp 원격 데스크톱 2008 CSV 파일 (*.csv)</value>
 	</data>
-	<data name="strFormatInherit" xml:space="preserve">
+  <data name="strFormatInherit" xml:space="preserve">
 		<value>{0} 상속</value>
 	</data>
-	<data name="strFormatInheritDescription" xml:space="preserve">
+  <data name="strFormatInheritDescription" xml:space="preserve">
 		<value>상속 된 속성에 대한 설명 : {0}</value>
 	</data>
-	<data name="strFree" xml:space="preserve">
+  <data name="strFree" xml:space="preserve">
 		<value>Free</value>
 	</data>
-	<data name="strFullscreen" xml:space="preserve">
+  <data name="strFullscreen" xml:space="preserve">
 		<value>전체 화면</value>
 	</data>
-	<data name="strGeneral" xml:space="preserve">
+  <data name="strGeneral" xml:space="preserve">
 		<value>일반</value>
 	</data>
-	<data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
+  <data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
 		<value>SQL에서 연결 정보 가져 오기 실패</value>
 	</data>
-	<data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
+  <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
 		<value>"{1}"에서 "{0}"에 대한 연결 항목을로드하는 중 오류가 발생. {2}</value>
 	</data>
-	<data name="strGroupboxAutomaticReconnect" xml:space="preserve">
+  <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
 		<value>자동 다시 연결</value>
 	</data>
-	<data name="strGroupboxConnection" xml:space="preserve">
+  <data name="strGroupboxConnection" xml:space="preserve">
 		<value>연결</value>
 	</data>
-	<data name="strGroupboxExternalToolProperties" xml:space="preserve">
+  <data name="strGroupboxExternalToolProperties" xml:space="preserve">
 		<value>외부 도구 속성</value>
 	</data>
-	<data name="strGroupboxFiles" xml:space="preserve">
+  <data name="strGroupboxFiles" xml:space="preserve">
 		<value>파일</value>
 	</data>
-	<data name="strHost" xml:space="preserve">
+  <data name="strHost" xml:space="preserve">
 		<value>호스트</value>
 	</data>
-	<data name="strHttp" xml:space="preserve">
+  <data name="strHttp" xml:space="preserve">
 		<value>HTTP</value>
 	</data>
-	<data name="strHttpConnectFailed" xml:space="preserve">
+  <data name="strHttpConnectFailed" xml:space="preserve">
 		<value>HTTP 연결 실패!</value>
 	</data>
-	<data name="strHttpConnectionFailed" xml:space="preserve">
+  <data name="strHttpConnectionFailed" xml:space="preserve">
 		<value>새로운 HTTP 연결을 만들 수 없습니다!</value>
 	</data>
-	<data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
+  <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
 		<value>HTTP 문서 타일 변경 실패!</value>
 	</data>
-	<data name="strHttpGecko" xml:space="preserve">
+  <data name="strHttpGecko" xml:space="preserve">
 		<value>Gecko (Firefox)</value>
 	</data>
-	<data name="strHttpInternetExplorer" xml:space="preserve">
+  <data name="strHttpInternetExplorer" xml:space="preserve">
 		<value>인터넷 익스플로러</value>
 	</data>
-	<data name="strHttps" xml:space="preserve">
+  <data name="strHttps" xml:space="preserve">
 		<value>HTTPS</value>
 	</data>
-	<data name="strHttpSetPropsFailed" xml:space="preserve">
+  <data name="strHttpSetPropsFailed" xml:space="preserve">
 		<value>HTTP Props 설정에 실패!</value>
 	</data>
-	<data name="strICA" xml:space="preserve">
+  <data name="strICA" xml:space="preserve">
 		<value>ICA</value>
 	</data>
-	<data name="strIcaConnectionFailed" xml:space="preserve">
+  <data name="strIcaConnectionFailed" xml:space="preserve">
 		<value>새 ICA 연결을 생성할 수 없습니다.</value>
 	</data>
-	<data name="strIcaControlFailed" xml:space="preserve">
+  <data name="strIcaControlFailed" xml:space="preserve">
 		<value>ICA 플러그 인을 로드하지 못 했습니다!</value>
 	</data>
-	<data name="strIcaSetCredentialsFailed" xml:space="preserve">
+  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
 		<value>ICA SetCredentials failed!</value>
 	</data>
-	<data name="strIcaSetEventHandlersFailed" xml:space="preserve">
+  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
 		<value>ICA Set Event Handlers Failed!</value>
 	</data>
-	<data name="strIcaSetPropsFailed" xml:space="preserve">
+  <data name="strIcaSetPropsFailed" xml:space="preserve">
 		<value>ICA Set Props Failed!</value>
 	</data>
-	<data name="strIcaSetResolutionFailed" xml:space="preserve">
+  <data name="strIcaSetResolutionFailed" xml:space="preserve">
 		<value>ICA Set Resolution Failed!</value>
 	</data>
-	<data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
 		<value>"빠른"접두어를 추가하여 빠른 연결 탭을 확인하십시오.</value>
 	</data>
-	<data name="strImportAD" xml:space="preserve">
+  <data name="strImportAD" xml:space="preserve">
 		<value>Active Directory에서 가져 오기</value>
 	</data>
-	<data name="strImportExport" xml:space="preserve">
+  <data name="strImportExport" xml:space="preserve">
 		<value>가져오기/내보내기</value>
 	</data>
-	<data name="strImportFileFailedContent" xml:space="preserve">
+  <data name="strImportFileFailedContent" xml:space="preserve">
 		<value>"{0}"파일을 가져 오는 중 오류가 발생했습니다.</value>
 	</data>
-	<data name="strImportFileFailedMainInstruction" xml:space="preserve">
+  <data name="strImportFileFailedMainInstruction" xml:space="preserve">
 		<value>가져 오기 실패</value>
 	</data>
-	<data name="strImportFromFileMenuItem" xml:space="preserve">
+  <data name="strImportFromFileMenuItem" xml:space="preserve">
 		<value>파일에서 가져 오기(&amp;F) ...</value>
 	</data>
-	<data name="strImportLocationCommandButtons" xml:space="preserve">
+  <data name="strImportLocationCommandButtons" xml:space="preserve">
 		<value>루트 {0} {1} | 아래에서 선택한 폴더 {0} {2}</value>
 	</data>
-	<data name="strImportLocationContent" xml:space="preserve">
+  <data name="strImportLocationContent" xml:space="preserve">
 		<value>가져온 항목에 어디에 적용하시겠습니까?</value>
 	</data>
-	<data name="strImportLocationMainInstruction" xml:space="preserve">
+  <data name="strImportLocationMainInstruction" xml:space="preserve">
 		<value>가져 오기 위치</value>
 	</data>
-	<data name="strImportMenuItem" xml:space="preserve">
+  <data name="strImportMenuItem" xml:space="preserve">
 		<value>가져 오기(&amp;I)</value>
 	</data>
-	<data name="strImportmRemoteXML" xml:space="preserve">
+  <data name="strImportmRemoteXML" xml:space="preserve">
 		<value>가져 오기 mRemote / mRemoteNG XML</value>
 	</data>
-	<data name="strImportPortScan" xml:space="preserve">
+  <data name="strImportPortScan" xml:space="preserve">
 		<value>포트 검사에서 가져 오기</value>
 	</data>
-	<data name="strImportRDPFiles" xml:space="preserve">
+  <data name="strImportRDPFiles" xml:space="preserve">
 		<value>.rdp 파일에서 가져 오기</value>
 	</data>
-	<data name="strInactive" xml:space="preserve">
+  <data name="strInactive" xml:space="preserve">
 		<value>비활성</value>
 	</data>
-	<data name="strInformations" xml:space="preserve">
+  <data name="strInformations" xml:space="preserve">
 		<value>정보</value>
 	</data>
-	<data name="strInheritNewConnection" xml:space="preserve">
+  <data name="strInheritNewConnection" xml:space="preserve">
 		<value>mRemoteNG는 최신 버전입니다</value>
 	</data>
-	<data name="strIntAppConnectionFailed" xml:space="preserve">
-		<value>연결 실패!</value>
-	</data>
-	<data name="strIntAppDisposeFailed" xml:space="preserve">
+  <data name="strIntAppDisposeFailed" xml:space="preserve">
 		<value>Dispose of Int App process failed!</value>
 	</data>
-	<data name="strIntAppFocusFailed" xml:space="preserve">
+  <data name="strIntAppFocusFailed" xml:space="preserve">
 		<value>Int App Focus Failed!</value>
 	</data>
-	<data name="strIntAppHandle" xml:space="preserve">
+  <data name="strIntAppHandle" xml:space="preserve">
 		<value>Int App Handle: {0}</value>
 	</data>
-	<data name="strIntAppKillFailed" xml:space="preserve">
+  <data name="strIntAppKillFailed" xml:space="preserve">
 		<value>Killing Int App Process failed!</value>
 	</data>
-	<data name="strIntAppParentHandle" xml:space="preserve">
+  <data name="strIntAppParentHandle" xml:space="preserve">
 		<value>패널 핸들 : {0}</value>
 	</data>
-	<data name="strIntAppResizeFailed" xml:space="preserve">
+  <data name="strIntAppResizeFailed" xml:space="preserve">
 		<value>Int App Resize failed!</value>
 	</data>
-	<data name="strIntAppStuff" xml:space="preserve">
+  <data name="strIntAppStuff" xml:space="preserve">
 		<value>--- IntApp Stuff ---</value>
 	</data>
-	<data name="strIntAppTitle" xml:space="preserve">
+  <data name="strIntAppTitle" xml:space="preserve">
 		<value>Int App Title: {0}</value>
 	</data>
-	<data name="strKeysCtrlAltDel" xml:space="preserve">
+  <data name="strKeysCtrlAltDel" xml:space="preserve">
 		<value>CTRL-ALT-DEL</value>
 	</data>
-	<data name="strKeysCtrlEsc" xml:space="preserve">
+  <data name="strKeysCtrlEsc" xml:space="preserve">
 		<value>CTRL-ESC</value>
 	</data>
-	<data name="strLabelAddress" xml:space="preserve">
+  <data name="strLabelAddress" xml:space="preserve">
 		<value>주소:</value>
 	</data>
-	<data name="strLabelArguments" xml:space="preserve">
+  <data name="strLabelArguments" xml:space="preserve">
 		<value>인수 :</value>
 	</data>
-	<data name="strLabelChangeLog" xml:space="preserve">
+  <data name="strLabelChangeLog" xml:space="preserve">
 		<value>변경 로그 :</value>
 	</data>
-	<data name="strLabelClosingConnections" xml:space="preserve">
+  <data name="strLabelClosingConnections" xml:space="preserve">
 		<value>연결을 닫을 때 :</value>
 	</data>
-	<data name="strLabelConnect" xml:space="preserve">
+  <data name="strLabelConnect" xml:space="preserve">
 		<value>연결(&amp;C)</value>
 	</data>
-	<data name="strLabelDisplayName" xml:space="preserve">
+  <data name="strLabelDisplayName" xml:space="preserve">
 		<value>표시 이름</value>
 	</data>
-	<data name="strLabelDomain" xml:space="preserve">
+  <data name="strLabelDomain" xml:space="preserve">
 		<value>도메인:</value>
 	</data>
-	<data name="strLabelFilename" xml:space="preserve">
+  <data name="strLabelFilename" xml:space="preserve">
 		<value>파일 이름:</value>
 	</data>
-	<data name="strLabelHostname" xml:space="preserve">
+  <data name="strLabelHostname" xml:space="preserve">
 		<value>호스트 이름 :</value>
 	</data>
-	<data name="strLabelOptions" xml:space="preserve">
+  <data name="strLabelOptions" xml:space="preserve">
 		<value>옵션 :</value>
 	</data>
-	<data name="strLabelPassword" xml:space="preserve">
+  <data name="strLabelPassword" xml:space="preserve">
 		<value>암호:</value>
 	</data>
-	<data name="strLabelPort" xml:space="preserve">
+  <data name="strLabelPort" xml:space="preserve">
 		<value>포트:</value>
 	</data>
-	<data name="strLabelPortableEdition" xml:space="preserve">
+  <data name="strLabelPortableEdition" xml:space="preserve">
 		<value>휴대용 버전</value>
 	</data>
-	<data name="strLabelProtocol" xml:space="preserve">
+  <data name="strLabelProtocol" xml:space="preserve">
 		<value>프로토콜:</value>
 	</data>
-	<data name="strLabelPuttySessionsConfig" xml:space="preserve">
+  <data name="strLabelPuttySessionsConfig" xml:space="preserve">
 		<value>PuTTY 세션을 구성하려면이 단추를 누르십시오:</value>
 	</data>
-	<data name="strLabelPuttyTimeout" xml:space="preserve">
+  <data name="strLabelPuttyTimeout" xml:space="preserve">
 		<value>Maximum PuTTY and integrated external tools wait time:</value>
 	</data>
-	<data name="strLabelReleasedUnderGPL" xml:space="preserve">
+  <data name="strLabelReleasedUnderGPL" xml:space="preserve">
 		<value>GNU 일반 공중 사용 허가서 (GPL)</value>
 	</data>
-	<data name="strLabelSeconds" xml:space="preserve">
+  <data name="strLabelSeconds" xml:space="preserve">
 		<value>초</value>
 	</data>
-	<data name="strLabelSelectPanel" xml:space="preserve">
+  <data name="strLabelSelectPanel" xml:space="preserve">
 		<value>아래 목록에서 패널을 선택하거나 새로 만들기를 클릭하여 새 패널을 추가하십시오. 확인을 클릭하여 계속하십시오.</value>
 	</data>
-	<data name="strLabelServerStatus" xml:space="preserve">
+  <data name="strLabelServerStatus" xml:space="preserve">
 		<value>서버 상태 :</value>
 	</data>
-	<data name="strLabelSQLDatabaseName" xml:space="preserve">
+  <data name="strLabelSQLDatabaseName" xml:space="preserve">
 		<value>데이터 베이스:</value>
 	</data>
-	<data name="strLabelSQLServerDatabaseName" xml:space="preserve">
+  <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
 		<value>데이터 베이스:</value>
 	</data>
-	<data name="strLabelUsername" xml:space="preserve">
+  <data name="strLabelUsername" xml:space="preserve">
 		<value>사용자 이름:</value>
 	</data>
-	<data name="strLabelVerify" xml:space="preserve">
+  <data name="strLabelVerify" xml:space="preserve">
 		<value>검증:</value>
 	</data>
-	<data name="strLanguage" xml:space="preserve">
+  <data name="strLanguage" xml:space="preserve">
 		<value>언어</value>
 	</data>
-	<data name="strLanguageDefault" xml:space="preserve">
+  <data name="strLanguageDefault" xml:space="preserve">
 		<value>(자동 감지)</value>
 	</data>
-	<data name="strLanguageRestartRequired" xml:space="preserve">
+  <data name="strLanguageRestartRequired" xml:space="preserve">
 		<value>언어 변경 사항이 적용 되려면 {0}를 다시 시작해야합니다.</value>
 	</data>
-	<data name="strLoadFromSqlFailed" xml:space="preserve">
+  <data name="strLoadFromSqlFailed" xml:space="preserve">
 		<value>SQL에서 로드 실패</value>
 	</data>
-	<data name="strLoadFromSqlFailedContent" xml:space="preserve">
+  <data name="strLoadFromSqlFailedContent" xml:space="preserve">
 		<value>연결 정보를 SQL 서버에서 로드 할 수 없습니다.</value>
 	</data>
-	<data name="strLoadFromXmlFailed" xml:space="preserve">
+  <data name="strLoadFromXmlFailed" xml:space="preserve">
 		<value>XML에서 로드 실패!</value>
 	</data>
-	<data name="strLocalFile" xml:space="preserve">
+  <data name="strLocalFile" xml:space="preserve">
 		<value>로컬 파일</value>
 	</data>
-	<data name="strLocalFileDoesNotExist" xml:space="preserve">
+  <data name="strLocalFileDoesNotExist" xml:space="preserve">
 		<value>로컬 파일이 존재하지 않습니다!</value>
 	</data>
-	<data name="strLogOff" xml:space="preserve">
+  <data name="strLogOff" xml:space="preserve">
 		<value>로그 오프</value>
 	</data>
-	<data name="strLogWriteToFileFailed" xml:space="preserve">
+  <data name="strLogWriteToFileFailed" xml:space="preserve">
 		<value>보고서 파일에 쓰지 못했습니다!</value>
 	</data>
-	<data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
+  <data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
 		<value>보고서를 최종 위치에 저장할 수 없습니다.</value>
 	</data>
-	<data name="strMagicLibraryAttribution" xml:space="preserve">
+  <data name="strMagicLibraryAttribution" xml:space="preserve">
 		<value>[Crownwood Software]의 Magic 라이브러리 사용</value>
 	</data>
-	<data name="strMagicLibraryAttributionURL" xml:space="preserve">
+  <data name="strMagicLibraryAttributionURL" xml:space="preserve">
 		<value>http://www.dotnetmagic.com/</value>
 	</data>
-	<data name="strMenuAbout" xml:space="preserve">
+  <data name="strMenuAbout" xml:space="preserve">
 		<value>mRemoteNG정보</value>
 	</data>
-	<data name="strMenuAddConnectionPanel" xml:space="preserve">
+  <data name="strMenuAddConnectionPanel" xml:space="preserve">
 		<value>연결 패널 추가</value>
 	</data>
-	<data name="strMenuCheckForUpdates" xml:space="preserve">
+  <data name="strMenuCheckForUpdates" xml:space="preserve">
 		<value>업데이트 확인</value>
 	</data>
-	<data name="strMenuConfig" xml:space="preserve">
+  <data name="strMenuConfig" xml:space="preserve">
 		<value>구성</value>
 	</data>
-	<data name="strMenuConnect" xml:space="preserve">
+  <data name="strMenuConnect" xml:space="preserve">
 		<value>연결</value>
 	</data>
-	<data name="strMenuConnectionPanels" xml:space="preserve">
+  <data name="strMenuConnectionPanels" xml:space="preserve">
 		<value>연결 패널</value>
 	</data>
-	<data name="strMenuConnections" xml:space="preserve">
+  <data name="strMenuConnections" xml:space="preserve">
 		<value>연결</value>
 	</data>
-	<data name="strMenuConnectionsAndConfig" xml:space="preserve">
+  <data name="strMenuConnectionsAndConfig" xml:space="preserve">
 		<value>연결 및 구성</value>
 	</data>
-	<data name="strMenuCopy" xml:space="preserve">
+  <data name="strMenuCopy" xml:space="preserve">
 		<value>복사</value>
 	</data>
-	<data name="strMenuCtrlAltDel" xml:space="preserve">
+  <data name="strMenuCtrlAltDel" xml:space="preserve">
 		<value>Ctrl-Alt-Del</value>
 	</data>
-	<data name="strMenuCtrlEsc" xml:space="preserve">
+  <data name="strMenuCtrlEsc" xml:space="preserve">
 		<value>Ctrl-Esc</value>
 	</data>
-	<data name="strMenuDelete" xml:space="preserve">
+  <data name="strMenuDelete" xml:space="preserve">
 		<value>삭제...</value>
 	</data>
-	<data name="strMenuDeleteConnection" xml:space="preserve">
+  <data name="strMenuDeleteConnection" xml:space="preserve">
 		<value>연결 삭제 ...</value>
 	</data>
-	<data name="strMenuDeleteExternalTool" xml:space="preserve">
+  <data name="strMenuDeleteExternalTool" xml:space="preserve">
 		<value>외부 도구를 삭제 ...</value>
 	</data>
-	<data name="strMenuDeleteFolder" xml:space="preserve">
+  <data name="strMenuDeleteFolder" xml:space="preserve">
 		<value>폴더 삭제 ...</value>
 	</data>
-	<data name="strMenuDisconnect" xml:space="preserve">
+  <data name="strMenuDisconnect" xml:space="preserve">
 		<value>연결 끊기</value>
 	</data>
-	<data name="strMenuDonate" xml:space="preserve">
+  <data name="strMenuDonate" xml:space="preserve">
 		<value>기부</value>
 	</data>
-	<data name="strMenuDuplicate" xml:space="preserve">
+  <data name="strMenuDuplicate" xml:space="preserve">
 		<value>복제</value>
 	</data>
-	<data name="strMenuDuplicateConnection" xml:space="preserve">
+  <data name="strMenuDuplicateConnection" xml:space="preserve">
 		<value>중복 연결</value>
 	</data>
-	<data name="strMenuDuplicateFolder" xml:space="preserve">
+  <data name="strMenuDuplicateFolder" xml:space="preserve">
 		<value>중복 폴더</value>
 	</data>
-	<data name="strMenuDuplicateTab" xml:space="preserve">
+  <data name="strMenuDuplicateTab" xml:space="preserve">
 		<value>중복 탭</value>
 	</data>
-	<data name="strMenuExit" xml:space="preserve">
+  <data name="strMenuExit" xml:space="preserve">
 		<value>종료</value>
 	</data>
-	<data name="strMenuExternalTools" xml:space="preserve">
+  <data name="strMenuExternalTools" xml:space="preserve">
 		<value>외부 도구</value>
 	</data>
-	<data name="strMenuExternalToolsToolbar" xml:space="preserve">
+  <data name="strMenuExternalToolsToolbar" xml:space="preserve">
 		<value>외부 도구 모음</value>
 	</data>
-	<data name="strMenuFile" xml:space="preserve">
+  <data name="strMenuFile" xml:space="preserve">
 		<value>파일(&amp;F)</value>
 	</data>
-	<data name="strMenuFullScreen" xml:space="preserve">
+  <data name="strMenuFullScreen" xml:space="preserve">
 		<value>전체 화면</value>
 	</data>
-	<data name="strMenuFullScreenRDP" xml:space="preserve">
+  <data name="strMenuFullScreenRDP" xml:space="preserve">
 		<value>전체 화면 (RDP)</value>
 	</data>
-	<data name="strMenuHelp" xml:space="preserve">
+  <data name="strMenuHelp" xml:space="preserve">
 		<value>도움말(&amp;H)</value>
 	</data>
-	<data name="strMenuHelpContents" xml:space="preserve">
+  <data name="strMenuHelpContents" xml:space="preserve">
 		<value>mRemoteNG 도움말</value>
 	</data>
-	<data name="strMenuJumpTo" xml:space="preserve">
+  <data name="strMenuJumpTo" xml:space="preserve">
 		<value>바로 가기</value>
 	</data>
-	<data name="strMenuLaunchExternalTool" xml:space="preserve">
+  <data name="strMenuLaunchExternalTool" xml:space="preserve">
 		<value>외부 도구 실행</value>
 	</data>
-	<data name="strMenuNewConnectionFile" xml:space="preserve">
+  <data name="strMenuNewConnectionFile" xml:space="preserve">
 		<value>새 연결 파일</value>
 	</data>
-	<data name="strMenuNewExternalTool" xml:space="preserve">
+  <data name="strMenuNewExternalTool" xml:space="preserve">
 		<value>새로운 외부 도구</value>
 	</data>
-	<data name="strMenuNotifications" xml:space="preserve">
+  <data name="strMenuNotifications" xml:space="preserve">
 		<value>알림</value>
 	</data>
-	<data name="strMenuNotificationsCopyAll" xml:space="preserve">
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
 		<value>모두 복사</value>
 	</data>
-	<data name="strMenuNotificationsDelete" xml:space="preserve">
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
 		<value>삭제</value>
 	</data>
-	<data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
 		<value>모두 삭제</value>
 	</data>
-	<data name="strMenuOpenConnectionFile" xml:space="preserve">
+  <data name="strMenuOpenConnectionFile" xml:space="preserve">
 		<value>연결 파일 열기 ...</value>
 	</data>
-	<data name="strMenuOptions" xml:space="preserve">
+  <data name="strMenuOptions" xml:space="preserve">
 		<value>옵션</value>
 	</data>
-	<data name="strMenuPaste" xml:space="preserve">
+  <data name="strMenuPaste" xml:space="preserve">
 		<value>붙여넣기</value>
 	</data>
-	<data name="strMenuPortScan" xml:space="preserve">
+  <data name="strMenuPortScan" xml:space="preserve">
 		<value>포트 스캔</value>
 	</data>
-	<data name="strMenuQuickConnectToolbar" xml:space="preserve">
+  <data name="strMenuQuickConnectToolbar" xml:space="preserve">
 		<value>빠른 연결 도구 모음</value>
 	</data>
-	<data name="strMenuReconnect" xml:space="preserve">
+  <data name="strMenuReconnect" xml:space="preserve">
 		<value>다시 연결</value>
 	</data>
-	<data name="strMenuRefreshScreen" xml:space="preserve">
+  <data name="strMenuRefreshScreen" xml:space="preserve">
 		<value>화면 새로 고침 (VNC)</value>
 	</data>
-	<data name="strMenuRename" xml:space="preserve">
+  <data name="strMenuRename" xml:space="preserve">
 		<value>이름 바꾸기</value>
 	</data>
-	<data name="strMenuRenameConnection" xml:space="preserve">
+  <data name="strMenuRenameConnection" xml:space="preserve">
 		<value>연결 이름 바꾸기</value>
 	</data>
-	<data name="strMenuRenameFolder" xml:space="preserve">
+  <data name="strMenuRenameFolder" xml:space="preserve">
 		<value>폴더 이름 바꾸기</value>
 	</data>
-	<data name="strMenuRenameTab" xml:space="preserve">
+  <data name="strMenuRenameTab" xml:space="preserve">
 		<value>탭 이름 바꾸기</value>
 	</data>
-	<data name="strMenuReportBug" xml:space="preserve">
+  <data name="strMenuReportBug" xml:space="preserve">
 		<value>버그 신고</value>
 	</data>
-	<data name="strMenuResetLayout" xml:space="preserve">
+  <data name="strMenuResetLayout" xml:space="preserve">
 		<value>레이아웃 재설정</value>
 	</data>
-	<data name="strMenuSaveConnectionFile" xml:space="preserve">
+  <data name="strMenuSaveConnectionFile" xml:space="preserve">
 		<value>연결 파일 저장</value>
 	</data>
-	<data name="strMenuSaveConnectionFileAs" xml:space="preserve">
+  <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
 		<value>연결 파일 다른 이름으로 저장 ...</value>
 	</data>
-	<data name="strMenuScreenshot" xml:space="preserve">
+  <data name="strMenuScreenshot" xml:space="preserve">
 		<value>스크린 샷</value>
 	</data>
-	<data name="strMenuScreenshotManager" xml:space="preserve">
+  <data name="strMenuScreenshotManager" xml:space="preserve">
 		<value>스크린 샷 관리자</value>
 	</data>
-	<data name="strMenuSendSpecialKeys" xml:space="preserve">
+  <data name="strMenuSendSpecialKeys" xml:space="preserve">
 		<value>특수 키 보내기 (VNC)</value>
 	</data>
-	<data name="strMenuSessionRetrieve" xml:space="preserve">
+  <data name="strMenuSessionRetrieve" xml:space="preserve">
 		<value>검색</value>
 	</data>
-	<data name="strMenuSessions" xml:space="preserve">
+  <data name="strMenuSessions" xml:space="preserve">
 		<value>세션</value>
 	</data>
-	<data name="strMenuSessionsAndScreenshots" xml:space="preserve">
+  <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
 		<value>세션 및 스크린 샷</value>
 	</data>
-	<data name="strMenuShowHelpText" xml:space="preserve">
+  <data name="strMenuShowHelpText" xml:space="preserve">
 		<value>도움말 텍스트 표시 (&amp;H)</value>
 	</data>
-	<data name="strMenuShowText" xml:space="preserve">
+  <data name="strMenuShowText" xml:space="preserve">
 		<value>텍스트 표시</value>
 	</data>
-	<data name="strMenuSmartSize" xml:space="preserve">
+  <data name="strMenuSmartSize" xml:space="preserve">
 		<value>SmartSize (RDP / VNC)</value>
 	</data>
-	<data name="strMenuSSHFileTransfer" xml:space="preserve">
+  <data name="strMenuSSHFileTransfer" xml:space="preserve">
 		<value>SSH 파일 전송</value>
 	</data>
-	<data name="strMenuStartChat" xml:space="preserve">
+  <data name="strMenuStartChat" xml:space="preserve">
 		<value>채팅 시작 (VNC)</value>
 	</data>
-	<data name="strMenuSupportForum" xml:space="preserve">
+  <data name="strMenuSupportForum" xml:space="preserve">
 		<value>지원 포럼</value>
 	</data>
-	<data name="strMenuTools" xml:space="preserve">
+  <data name="strMenuTools" xml:space="preserve">
 		<value>도구(&amp;T)</value>
 	</data>
-	<data name="strMenuTransferFile" xml:space="preserve">
+  <data name="strMenuTransferFile" xml:space="preserve">
 		<value>파일 전송 (SSH)</value>
 	</data>
-	<data name="strMenuView" xml:space="preserve">
+  <data name="strMenuView" xml:space="preserve">
 		<value>보기(&amp;V)</value>
 	</data>
-	<data name="strMenuViewOnly" xml:space="preserve">
+  <data name="strMenuViewOnly" xml:space="preserve">
 		<value>보기 전용 (VNC)</value>
 	</data>
-	<data name="strMenuWebsite" xml:space="preserve">
+  <data name="strMenuWebsite" xml:space="preserve">
 		<value>웹 사이트</value>
 	</data>
-	<data name="strMinimizeToSysTray" xml:space="preserve">
+  <data name="strMinimizeToSysTray" xml:space="preserve">
 		<value>알림 영역 최소화</value>
 	</data>
-	<data name="strMoveDown" xml:space="preserve">
+  <data name="strMoveDown" xml:space="preserve">
 		<value>아래로 이동</value>
 	</data>
-	<data name="strMoveUp" xml:space="preserve">
+  <data name="strMoveUp" xml:space="preserve">
 		<value>위로 이동</value>
 	</data>
-	<data name="strMremoteNgCsv" xml:space="preserve">
+  <data name="strMremoteNgCsv" xml:space="preserve">
 		<value>mRemoteNG CSV</value>
 	</data>
-	<data name="strMremoteNgXml" xml:space="preserve">
+  <data name="strMremoteNgXml" xml:space="preserve">
 		<value>mRemoteNG XML</value>
 	</data>
-	<data name="strMyCurrentWindowsCreds" xml:space="preserve">
+  <data name="strMyCurrentWindowsCreds" xml:space="preserve">
 		<value>내 현재 자격 증명 (Windows 로그온 정보)</value>
 	</data>
-	<data name="strNever" xml:space="preserve">
+  <data name="strNever" xml:space="preserve">
 		<value>없음</value>
 	</data>
-	<data name="strNewConnection" xml:space="preserve">
+  <data name="strNewConnection" xml:space="preserve">
 		<value>새 연결</value>
 	</data>
-	<data name="strNewFolder" xml:space="preserve">
+  <data name="strNewFolder" xml:space="preserve">
 		<value>새 폴더</value>
 	</data>
-	<data name="strNewPanel" xml:space="preserve">
+  <data name="strNewPanel" xml:space="preserve">
 		<value>새로운 패널</value>
 	</data>
-	<data name="strNewRoot" xml:space="preserve">
+  <data name="strNewRoot" xml:space="preserve">
 		<value>새 루트</value>
 	</data>
-	<data name="strNewTitle" xml:space="preserve">
+  <data name="strNewTitle" xml:space="preserve">
 		<value>새로운 제목</value>
 	</data>
-	<data name="strNo" xml:space="preserve">
+  <data name="strNo" xml:space="preserve">
 		<value>아니요</value>
 	</data>
-	<data name="strNoCompression" xml:space="preserve">
+  <data name="strNoCompression" xml:space="preserve">
 		<value>압축 안함</value>
 	</data>
-	<data name="strNoExtAppDefined" xml:space="preserve">
+  <data name="strNoExtAppDefined" xml:space="preserve">
 		<value>No Ext. App specified.</value>
 	</data>
-	<data name="strNoInformation" xml:space="preserve">
+  <data name="strNoInformation" xml:space="preserve">
 		<value>없음</value>
 	</data>
-	<data name="strNone" xml:space="preserve">
+  <data name="strNone" xml:space="preserve">
 		<value>없음</value>
 	</data>
-	<data name="strNormal" xml:space="preserve">
+  <data name="strNormal" xml:space="preserve">
 		<value>표준</value>
 	</data>
-	<data name="strNoSmartSize" xml:space="preserve">
+  <data name="strNoSmartSize" xml:space="preserve">
 		<value>No SmartSize</value>
 	</data>
-	<data name="strNoUpdateAvailable" xml:space="preserve">
+  <data name="strNoUpdateAvailable" xml:space="preserve">
 		<value>사용 가능한 업데이트가 없습니다.</value>
 	</data>
-	<data name="strOldConffile" xml:space="preserve">
+  <data name="strOldConffile" xml:space="preserve">
 		<value>매우 초기 버전의 mRemote를 사용하여 생성 된 연결 파일을로드하려고하면 런타임 오류가 발생할 수 있습니다.
 이러한 오류가 발생하면 새 연결 파일을 만드십시오!</value>
 	</data>
-	<data name="strOpenNewTabRight" xml:space="preserve">
+  <data name="strOpenNewTabRight" xml:space="preserve">
 		<value>현재 선택된 탭의 오른쪽에 새 탭을 열기</value>
 	</data>
-	<data name="strOpenPorts" xml:space="preserve">
+  <data name="strOpenPorts" xml:space="preserve">
 		<value>열린 포트</value>
 	</data>
-	<data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
+  <data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
 		<value>삭제(&amp;D)</value>
 	</data>
-	<data name="strOptionsKeyboardButtonNew" xml:space="preserve">
+  <data name="strOptionsKeyboardButtonNew" xml:space="preserve">
 		<value>새로운(&amp;N)</value>
 	</data>
-	<data name="strOptionsKeyboardButtonReset" xml:space="preserve">
+  <data name="strOptionsKeyboardButtonReset" xml:space="preserve">
 		<value>기본값으로 재설정 (&amp;R)</value>
 	</data>
-	<data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
+  <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
 		<value>모두 기본값으로 재설정(&amp;A)</value>
 	</data>
-	<data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
+  <data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
 		<value>탭</value>
 	</data>
-	<data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
+  <data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
 		<value>다음 탭</value>
 	</data>
-	<data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
+  <data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
 		<value>이전 탭</value>
 	</data>
-	<data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
+  <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
 		<value>단축키 수정</value>
 	</data>
-	<data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
+  <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
 		<value>키보드 단축키</value>
 	</data>
-	<data name="strOptionsProxyTesting" xml:space="preserve">
+  <data name="strOptionsProxyTesting" xml:space="preserve">
 		<value>테스트 ...</value>
 	</data>
-	<data name="strOptionsTabKeyboard" xml:space="preserve">
+  <data name="strOptionsTabKeyboard" xml:space="preserve">
 		<value>키보드</value>
 	</data>
-	<data name="strOptionsTabTheme" xml:space="preserve">
+  <data name="strOptionsTabTheme" xml:space="preserve">
 		<value>테마</value>
 	</data>
-	<data name="strOptionsThemeButtonDelete" xml:space="preserve">
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
 		<value>삭제(&amp;D)</value>
 	</data>
-	<data name="strOptionsThemeButtonNew" xml:space="preserve">
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
 		<value>새로운(&amp;N)</value>
 	</data>
-	<data name="strPanelName" xml:space="preserve">
+  <data name="strPanelName" xml:space="preserve">
 		<value>패널 이름</value>
 	</data>
-	<data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
 		<value>암호 보호</value>
 	</data>
-	<data name="strPasswordStatusMustMatch" xml:space="preserve">
+  <data name="strPasswordStatusMustMatch" xml:space="preserve">
 		<value>두 암호가 일치해야합니다.</value>
 	</data>
-	<data name="strPasswordStatusTooShort" xml:space="preserve">
+  <data name="strPasswordStatusTooShort" xml:space="preserve">
 		<value>암호는 3 자 이상이어야합니다.</value>
 	</data>
-	<data name="strPleaseFillAllFields" xml:space="preserve">
+  <data name="strPleaseFillAllFields" xml:space="preserve">
 		<value>모든 입력란을 채우십시오.</value>
 	</data>
-	<data name="strPortScanComplete" xml:space="preserve">
+  <data name="strPortScanComplete" xml:space="preserve">
 		<value>포트 스캔 완료.</value>
 	</data>
-	<data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
+  <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
 		<value>포트 스캔 패널을 로드 할 수 없습니다!</value>
 	</data>
-	<data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
+  <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
 		<value>(출력 파일 형식으로 mRemote / mRemoteNG XML을 선택한 경우에만 이 속성이 저장됩니다.)</value>
 	</data>
-	<data name="strPropertyDescriptionAddress" xml:space="preserve">
+  <data name="strPropertyDescriptionAddress" xml:space="preserve">
 		<value>연결할 호스트 이름 또는 IP를 입력하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionAll" xml:space="preserve">
+  <data name="strPropertyDescriptionAll" xml:space="preserve">
 		<value>모든 상속 옵션을 토글합니다.</value>
 	</data>
-	<data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
+  <data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
 		<value>이 연결에서 사용할 인증 수준을 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
+  <data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
 		<value>VNC 서버에 대한 인증 방법을 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionAutomaticResize" xml:space="preserve">
+  <data name="strPropertyDescriptionAutomaticResize" xml:space="preserve">
 		<value>창 크기를 조정할 때 또는 전체 화면 모드를 전환 할 때 자동으로 연결의 크기를 조정할지 여부를 선택하십시오. RDC 8.0 이상이 필요합니다.</value>
 	</data>
-	<data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
+  <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
 		<value>비트 맵 캐싱 사용 여부를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionColors" xml:space="preserve">
+  <data name="strPropertyDescriptionColors" xml:space="preserve">
 		<value>사용할 색 품질을 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionCompression" xml:space="preserve">
+  <data name="strPropertyDescriptionCompression" xml:space="preserve">
 		<value>사용할 압축 값을 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionDescription" xml:space="preserve">
+  <data name="strPropertyDescriptionDescription" xml:space="preserve">
 		<value>여기에 호스트에 대한 메모 나 설명을 입력하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
+  <data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
 		<value>원격 호스트의 테마를 표시하려면 "예"를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
+  <data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
 		<value>원격 호스트의 배경 화면을 표시하려면 "예"를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionDomain" xml:space="preserve">
+  <data name="strPropertyDescriptionDomain" xml:space="preserve">
 		<value>도메인을 입력하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
+  <data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
 		<value>바탕 화면 구성을 사용할지 여부를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionEnableFontSmoothing" xml:space="preserve">
+  <data name="strPropertyDescriptionEnableFontSmoothing" xml:space="preserve">
 		<value>글꼴 다듬기 사용 여부를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionEncoding" xml:space="preserve">
+  <data name="strPropertyDescriptionEncoding" xml:space="preserve">
 		<value>사용할 인코딩 모드를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
+  <data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
 		<value>원격 호스트의 암호화 강도를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionExternalTool" xml:space="preserve">
+  <data name="strPropertyDescriptionExternalTool" xml:space="preserve">
 		<value>시작할 외부 도구를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
+  <data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
 		<value>원격 호스트와의 연결 해제 후 시작할 외부 도구를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
+  <data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
 		<value>원격 호스트에 연결되기 전에 시작할 외부 도구를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionIcon" xml:space="preserve">
+  <data name="strPropertyDescriptionIcon" xml:space="preserve">
 		<value>호스트에 연결될 때 표시 될 아이콘을 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionLoadBalanceInfo" xml:space="preserve">
+  <data name="strPropertyDescriptionLoadBalanceInfo" xml:space="preserve">
 		<value>로드 밸런싱 라우터가 최적의 서버를 선택하는 데 사용할로드 균형 조정 정보를 지정합니다.</value>
 	</data>
-	<data name="strPropertyDescriptionMACAddress" xml:space="preserve">
+  <data name="strPropertyDescriptionMACAddress" xml:space="preserve">
 		<value>외부 도구에서 사용하려는 경우 원격 호스트의 MAC 주소를 입력하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionName" xml:space="preserve">
+  <data name="strPropertyDescriptionName" xml:space="preserve">
 		<value>연결 트리에 표시 될 이름입니다.</value>
 	</data>
-	<data name="strPropertyDescriptionPanel" xml:space="preserve">
+  <data name="strPropertyDescriptionPanel" xml:space="preserve">
 		<value>연결이 열리는 패널을 지정.</value>
 	</data>
-	<data name="strPropertyDescriptionPassword" xml:space="preserve">
+  <data name="strPropertyDescriptionPassword" xml:space="preserve">
 		<value>암호 입력.</value>
 	</data>
-	<data name="strPropertyDescriptionPort" xml:space="preserve">
+  <data name="strPropertyDescriptionPort" xml:space="preserve">
 		<value>선택한 프로토콜이 수신중인 포트를 입력.</value>
 	</data>
-	<data name="strPropertyDescriptionProtocol" xml:space="preserve">
+  <data name="strPropertyDescriptionProtocol" xml:space="preserve">
 		<value>mRemoteNG가 호스트에 연결하는 데 사용해야하는 프로토콜 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionPuttySession" xml:space="preserve">
+  <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
 		<value>연결시 사용할 PuTTY 세션 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
+  <data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
 		<value>사용자가 RD 게이트웨이 서버에 연결하기 위해 제공하는 도메인 이름 지정.</value>
 	</data>
-	<data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
+  <data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
 		<value>원격 데스크톱 게이트웨이 서버의 호스트 이름을 지정.</value>
 	</data>
-	<data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
 		<value>RD 게이트웨이 (원격 데스크톱 게이트웨이) 서버를 사용할시기를 지정.</value>
 	</data>
-	<data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
 		<value>연결과 동일한 사용자 이름 및 암호를 사용하여 게이트웨이에 로그온할지 여부를 지정.</value>
 	</data>
-	<data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
+  <data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
 		<value>사용자가 RD 게이트웨이 서버에 연결하기 위해 제공하는 사용자 이름을 지정.</value>
 	</data>
-	<data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
+  <data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
 		<value>로컬 디스크 드라이브를 원격 호스트에 표시할지 여부 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
+  <data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
 		<value>키 조합 (예 : Alt-Tab)을 원격 호스트로 리디렉션해야하는지 여부 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
+  <data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
 		<value>로컬 포트 (예 : com, parallel)를 원격 호스트에 표시할지 여부 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
+  <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
 		<value>로컬 프린터를 원격 호스트에 표시할지 여부 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
+  <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
 		<value>원격 호스트에서 로컬 스마트 카드를 사용할 수 있어야하는지 여부 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
+  <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
 		<value>원격 사운드를 리디렉션하는 방법 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
+  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
 		<value>HTML을 표시하는 데 사용할 수있는 렌더링 엔진 중 하나 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionResolution" xml:space="preserve">
+  <data name="strPropertyDescriptionResolution" xml:space="preserve">
 		<value>이 연결이 열리는 해상도 또는 모드를 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
+  <data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
 		<value>사용할 SmartSize 모드 선택.</value>
 	</data>
-	<data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
+  <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
 		<value>원격 호스트의 콘솔 세션에 연결하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
 		<value>사용 가능한 경우 인증에 CredSSP (Credential Security Support Provider)를 사용하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionUser1" xml:space="preserve">
+  <data name="strPropertyDescriptionUser1" xml:space="preserve">
 		<value>여기에 필요한 정보를 언제든지 입력하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionUsername" xml:space="preserve">
+  <data name="strPropertyDescriptionUsername" xml:space="preserve">
 		<value>사용자 이름 입력.</value>
 	</data>
-	<data name="strPropertyDescriptionViewOnly" xml:space="preserve">
+  <data name="strPropertyDescriptionViewOnly" xml:space="preserve">
 		<value>호스트에 대한보기 전용 연결을 설정하려면 "예"를 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
+  <data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
 		<value>사용할 프록시 주소 입력.</value>
 	</data>
-	<data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
+  <data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
 		<value>프록시 인증을위한 비밀번호를 입력하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
+  <data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
 		<value>프록시 서버가 수신하는 포트를 입력하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
+  <data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
 		<value>프록시를 사용하여 VNC 연결을 터널링하는 경우 해당 유형을 선택하십시오.</value>
 	</data>
-	<data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
+  <data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
 		<value>프록시 인증을위한 사용자 이름을 입력하십시오.</value>
 	</data>
-	<data name="strPropertyNameAddress" xml:space="preserve">
+  <data name="strPropertyNameAddress" xml:space="preserve">
 		<value>호스트 이름 / IP</value>
 	</data>
-	<data name="strPropertyNameAll" xml:space="preserve">
+  <data name="strPropertyNameAll" xml:space="preserve">
 		<value>모든</value>
 	</data>
-	<data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
 		<value>서버 인증</value>
 	</data>
-	<data name="strPropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
 		<value>인증 모드</value>
 	</data>
-	<data name="strPropertyNameAutomaticResize" xml:space="preserve">
+  <data name="strPropertyNameAutomaticResize" xml:space="preserve">
 		<value>자동 크기 조정</value>
 	</data>
-	<data name="strPropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
 		<value>캐시 비트 맵</value>
 	</data>
-	<data name="strPropertyNameColors" xml:space="preserve">
+  <data name="strPropertyNameColors" xml:space="preserve">
 		<value>색</value>
 	</data>
-	<data name="strPropertyNameCompression" xml:space="preserve">
+  <data name="strPropertyNameCompression" xml:space="preserve">
 		<value>압축</value>
 	</data>
-	<data name="strPropertyNameDescription" xml:space="preserve">
+  <data name="strPropertyNameDescription" xml:space="preserve">
 		<value>설명</value>
 	</data>
-	<data name="strPropertyNameDisplayThemes" xml:space="preserve">
+  <data name="strPropertyNameDisplayThemes" xml:space="preserve">
 		<value>테마 표시</value>
 	</data>
-	<data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
+  <data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
 		<value>바탕 화면 표시</value>
 	</data>
-	<data name="strPropertyNameDomain" xml:space="preserve">
+  <data name="strPropertyNameDomain" xml:space="preserve">
 		<value>도메인</value>
 	</data>
-	<data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
 		<value>바탕 화면 구성</value>
 	</data>
-	<data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
 		<value>글꼴 다듬기</value>
 	</data>
-	<data name="strPropertyNameEncoding" xml:space="preserve">
+  <data name="strPropertyNameEncoding" xml:space="preserve">
 		<value>인코딩</value>
 	</data>
-	<data name="strPropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="strPropertyNameEncryptionStrength" xml:space="preserve">
 		<value>암호화 강도</value>
 	</data>
-	<data name="strPropertyNameExternalTool" xml:space="preserve">
+  <data name="strPropertyNameExternalTool" xml:space="preserve">
 		<value>외부 도구</value>
 	</data>
-	<data name="strPropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
 		<value>External Tool After</value>
 	</data>
-	<data name="strPropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="strPropertyNameExternalToolBefore" xml:space="preserve">
 		<value>External Tool Before</value>
 	</data>
-	<data name="strPropertyNameIcon" xml:space="preserve">
+  <data name="strPropertyNameIcon" xml:space="preserve">
 		<value>아이콘</value>
 	</data>
-	<data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
+  <data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
 		<value>로드 균형 정보</value>
 	</data>
-	<data name="strPropertyNameMACAddress" xml:space="preserve">
+  <data name="strPropertyNameMACAddress" xml:space="preserve">
 		<value>MAC 주소</value>
 	</data>
-	<data name="strPropertyNameName" xml:space="preserve">
+  <data name="strPropertyNameName" xml:space="preserve">
 		<value>이름</value>
 	</data>
-	<data name="strPropertyNamePanel" xml:space="preserve">
+  <data name="strPropertyNamePanel" xml:space="preserve">
 		<value>패널</value>
 	</data>
-	<data name="strPropertyNamePassword" xml:space="preserve">
+  <data name="strPropertyNamePassword" xml:space="preserve">
 		<value>암호</value>
 	</data>
-	<data name="strPropertyNamePort" xml:space="preserve">
+  <data name="strPropertyNamePort" xml:space="preserve">
 		<value>포트</value>
 	</data>
-	<data name="strPropertyNameProtocol" xml:space="preserve">
+  <data name="strPropertyNameProtocol" xml:space="preserve">
 		<value>프로토콜</value>
 	</data>
-	<data name="strPropertyNamePuttySession" xml:space="preserve">
+  <data name="strPropertyNamePuttySession" xml:space="preserve">
 		<value>PuTTY 세션</value>
 	</data>
-	<data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
 		<value>게이트웨이 도메인</value>
 	</data>
-	<data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
 		<value>게이트웨이 호스트 이름</value>
 	</data>
-	<data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
 		<value>원격 데스크톱 게이트웨이 암호</value>
 	</data>
-	<data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
 		<value>게이트웨이 사용</value>
 	</data>
-	<data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
 		<value>게이트웨이 자격 증명</value>
 	</data>
-	<data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
 		<value>게이트웨이 사용자 이름</value>
 	</data>
-	<data name="strPropertyNameRedirectDrives" xml:space="preserve">
+  <data name="strPropertyNameRedirectDrives" xml:space="preserve">
 		<value>디스크 드라이브</value>
 	</data>
-	<data name="strPropertyNameRedirectKeys" xml:space="preserve">
+  <data name="strPropertyNameRedirectKeys" xml:space="preserve">
 		<value>키 조합</value>
 	</data>
-	<data name="strPropertyNameRedirectPorts" xml:space="preserve">
+  <data name="strPropertyNameRedirectPorts" xml:space="preserve">
 		<value>포트</value>
 	</data>
-	<data name="strPropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
 		<value>프린터</value>
 	</data>
-	<data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
 		<value>스마트 카드</value>
 	</data>
-	<data name="strPropertyNameRedirectSounds" xml:space="preserve">
+  <data name="strPropertyNameRedirectSounds" xml:space="preserve">
 		<value>사운드</value>
 	</data>
-	<data name="strPropertyNameRenderingEngine" xml:space="preserve">
+  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
 		<value>렌더링 엔진</value>
 	</data>
-	<data name="strPropertyNameResolution" xml:space="preserve">
+  <data name="strPropertyNameResolution" xml:space="preserve">
 		<value>해상도</value>
 	</data>
-	<data name="strPropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
 		<value>SmartSize 모드</value>
 	</data>
-	<data name="strPropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
 		<value>콘솔 세션 사용</value>
 	</data>
-	<data name="strPropertyNameUseCredSsp" xml:space="preserve">
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
 		<value>CredSSP 사용</value>
 	</data>
-	<data name="strPropertyNameUser1" xml:space="preserve">
+  <data name="strPropertyNameUser1" xml:space="preserve">
 		<value>입력란 사용</value>
 	</data>
-	<data name="strPropertyNameUsername" xml:space="preserve">
+  <data name="strPropertyNameUsername" xml:space="preserve">
 		<value>사용자 이름</value>
 	</data>
-	<data name="strPropertyNameViewOnly" xml:space="preserve">
+  <data name="strPropertyNameViewOnly" xml:space="preserve">
 		<value>보기 전용</value>
 	</data>
-	<data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
+  <data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
 		<value>프록시 주소</value>
 	</data>
-	<data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
+  <data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
 		<value>프록시 암호</value>
 	</data>
-	<data name="strPropertyNameVNCProxyPort" xml:space="preserve">
+  <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
 		<value>프록시 포트</value>
 	</data>
-	<data name="strPropertyNameVNCProxyType" xml:space="preserve">
+  <data name="strPropertyNameVNCProxyType" xml:space="preserve">
 		<value>프록시 유형</value>
 	</data>
-	<data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
+  <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
 		<value>프록시 사용자 이름</value>
 	</data>
-	<data name="strProtocolEventDisconnected" xml:space="preserve">
+  <data name="strProtocolEventDisconnected" xml:space="preserve">
 		<value>프로토콜 이벤트 연결이 끊어졌습니다.
 메시지:
 {0}</value>
 	</data>
-	<data name="strProtocolEventDisconnectFailed" xml:space="preserve">
+  <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
 		<value>프로토콜 이벤트 연결이 끊어졌습니다.
 {0}</value>
 	</data>
-	<data name="strProtocolToImport" xml:space="preserve">
+  <data name="strProtocolToImport" xml:space="preserve">
 		<value>가져올 프로토콜</value>
 	</data>
-	<data name="strProxyTestFailed" xml:space="preserve">
+  <data name="strProxyTestFailed" xml:space="preserve">
 		<value>프록시 테스트 실패!</value>
 	</data>
-	<data name="strProxyTestSucceeded" xml:space="preserve">
+  <data name="strProxyTestSucceeded" xml:space="preserve">
 		<value>프록시 테스트 성공!</value>
 	</data>
-	<data name="strPuttyConnectionFailed" xml:space="preserve">
-		<value>연결 실패!</value>
-	</data>
-	<data name="strPuttyDisposeFailed" xml:space="preserve">
+  <data name="strPuttyDisposeFailed" xml:space="preserve">
 		<value>PuTTY 프로세스 폐기 실패!</value>
 	</data>
-	<data name="strPuttyFocusFailed" xml:space="preserve">
+  <data name="strPuttyFocusFailed" xml:space="preserve">
 		<value>포커스를 설정할 수 없습니다!</value>
 	</data>
-	<data name="strPuttyGetSessionsFailed" xml:space="preserve">
+  <data name="strPuttyGetSessionsFailed" xml:space="preserve">
 		<value>PuTTY 세션 실패!</value>
 	</data>
-	<data name="strPuttyHandle" xml:space="preserve">
+  <data name="strPuttyHandle" xml:space="preserve">
 		<value>Putty Handle: {0}</value>
 	</data>
-	<data name="strPuttyKillFailed" xml:space="preserve">
+  <data name="strPuttyKillFailed" xml:space="preserve">
 		<value>PuTTY 프로세스를 죽이지 못했습니다!</value>
 	</data>
-	<data name="strPuttyParentHandle" xml:space="preserve">
+  <data name="strPuttyParentHandle" xml:space="preserve">
 		<value>패널 핸들 : {0}</value>
 	</data>
-	<data name="strPuttyResizeFailed" xml:space="preserve">
+  <data name="strPuttyResizeFailed" xml:space="preserve">
 		<value>PuTTY 크기 조정 실패!</value>
 	</data>
-	<data name="strPuttySavedSessionsRootName" xml:space="preserve">
+  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
 		<value>PuTTY 저장된 세션</value>
 	</data>
-	<data name="strPuttySessionSettings" xml:space="preserve">
+  <data name="strPuttySessionSettings" xml:space="preserve">
 		<value>PuTTY 세션 설정</value>
 	</data>
-	<data name="strPuttySettings" xml:space="preserve">
+  <data name="strPuttySettings" xml:space="preserve">
 		<value>PuTTY 설정</value>
 	</data>
-	<data name="strPuttyShowSettingsDialogFailed" xml:space="preserve">
+  <data name="strPuttyShowSettingsDialogFailed" xml:space="preserve">
 		<value>PuTTY 설정 대화 상자가 표시되지 않았습니다!</value>
 	</data>
-	<data name="strPuttyStartFailed" xml:space="preserve">
+  <data name="strPuttyStartFailed" xml:space="preserve">
 		<value>PuTTY 시작 실패!</value>
 	</data>
-	<data name="strPuttyStuff" xml:space="preserve">
+  <data name="strPuttyStuff" xml:space="preserve">
 		<value>--- PuTTY Stuff ---</value>
 	</data>
-	<data name="strPuttyTitle" xml:space="preserve">
+  <data name="strPuttyTitle" xml:space="preserve">
 		<value>PuTTY 타이틀 : {0}</value>
 	</data>
-	<data name="strQuick" xml:space="preserve">
+  <data name="strQuick" xml:space="preserve">
 		<value>빠른 : {0}</value>
 	</data>
-	<data name="strQuickConnect" xml:space="preserve">
+  <data name="strQuickConnect" xml:space="preserve">
 		<value>빠른 연결</value>
 	</data>
-	<data name="strQuickConnectAddFailed" xml:space="preserve">
+  <data name="strQuickConnectAddFailed" xml:space="preserve">
 		<value>빠른 연결 추가 실패!</value>
 	</data>
-	<data name="strQuickConnectFailed" xml:space="preserve">
+  <data name="strQuickConnectFailed" xml:space="preserve">
 		<value>빠른 연결 만들기 실패</value>
 	</data>
-	<data name="strRadioCloseWarnAll" xml:space="preserve">
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
 		<value>연결 종료시 경고 (&amp;A)</value>
 	</data>
-	<data name="strRadioCloseWarnExit" xml:space="preserve">
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
 		<value>mRemoteNG를 종료 할 때만 경고(&amp;X)</value>
 	</data>
-	<data name="strRadioCloseWarnMultiple" xml:space="preserve">
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
 		<value>여러 연결을 닫을 때만 경고(&amp;M)</value>
 	</data>
-	<data name="strRadioCloseWarnNever" xml:space="preserve">
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
 		<value>연결을 종료 할 때 경고하지 않음(&amp;N)</value>
 	</data>
-	<data name="strRAW" xml:space="preserve">
+  <data name="strRAW" xml:space="preserve">
 		<value>RAW</value>
 	</data>
-	<data name="strRDP" xml:space="preserve">
+  <data name="strRDP" xml:space="preserve">
 		<value>RDP</value>
 	</data>
-	<data name="strRDP16777216Colors" xml:space="preserve">
+  <data name="strRDP16777216Colors" xml:space="preserve">
 		<value>16,777,216 색 (24 비트)</value>
 	</data>
-	<data name="strRDP256Colors" xml:space="preserve">
+  <data name="strRDP256Colors" xml:space="preserve">
 		<value>256 색 (8 비트)</value>
 	</data>
-	<data name="strRDP32768Colors" xml:space="preserve">
+  <data name="strRDP32768Colors" xml:space="preserve">
 		<value>32768 색 (15 비트)</value>
 	</data>
-	<data name="strRDP4294967296Colors" xml:space="preserve">
+  <data name="strRDP4294967296Colors" xml:space="preserve">
 		<value>16,777,216 색 (32 비트)</value>
 	</data>
-	<data name="strRDP65536Colors" xml:space="preserve">
+  <data name="strRDP65536Colors" xml:space="preserve">
 		<value>65536 색 (16 비트)</value>
 	</data>
-	<data name="strRdpAddResolutionFailed" xml:space="preserve">
+  <data name="strRdpAddResolutionFailed" xml:space="preserve">
 		<value>RDP에 해상도 추가 실패!</value>
 	</data>
-	<data name="strRdpAddResolutionsFailed" xml:space="preserve">
+  <data name="strRdpAddResolutionsFailed" xml:space="preserve">
 		<value>RDP에 해상도 추가 실패!</value>
 	</data>
-	<data name="strRdpAddSessionFailed" xml:space="preserve">
+  <data name="strRdpAddSessionFailed" xml:space="preserve">
 		<value>세션 추가 실패</value>
 	</data>
-	<data name="strRdpCloseConnectionFailed" xml:space="preserve">
+  <data name="strRdpCloseConnectionFailed" xml:space="preserve">
 		<value>RDP 연결을 닫지 못했습니다!</value>
 	</data>
-	<data name="strRdpControlCreationFailed" xml:space="preserve">
+  <data name="strRdpControlCreationFailed" xml:space="preserve">
 		<value>RDP 컨트롤을 만들 수 없습니다. mRemoteNG 요구 사항을 확인하십시오.</value>
 	</data>
-	<data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strRDPDisableCursorblinking" xml:space="preserve">
 		<value>커서 깜박임 해제</value>
 	</data>
-	<data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strRDPDisableCursorShadow" xml:space="preserve">
 		<value>커서 그림자 해제</value>
 	</data>
-	<data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
 		<value>전체 창 끌기 해제</value>
 	</data>
-	<data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
 		<value>메뉴 애니메이션 해제</value>
 	</data>
-	<data name="strRDPDisableThemes" xml:space="preserve">
+  <data name="strRDPDisableThemes" xml:space="preserve">
 		<value>테마 해제</value>
 	</data>
-	<data name="strRDPDisableWallpaper" xml:space="preserve">
+  <data name="strRDPDisableWallpaper" xml:space="preserve">
 		<value>바탕 화면 해제</value>
 	</data>
-	<data name="strRdpDisconnected" xml:space="preserve">
+  <data name="strRdpDisconnected" xml:space="preserve">
 		<value>RDP 연결 끊기!</value>
 	</data>
-	<data name="strRdpDisconnectFailed" xml:space="preserve">
+  <data name="strRdpDisconnectFailed" xml:space="preserve">
 		<value>RDP 연결 끊기 실패, 닫기 시도!</value>
 	</data>
-	<data name="strRdpErrorCode1" xml:space="preserve">
+  <data name="strRdpErrorCode1" xml:space="preserve">
 		<value>내부 오류 코드 1.</value>
 	</data>
-	<data name="strRdpErrorCode2" xml:space="preserve">
+  <data name="strRdpErrorCode2" xml:space="preserve">
 		<value>내부 오류 코드 2.</value>
 	</data>
-	<data name="strRdpErrorCode3" xml:space="preserve">
+  <data name="strRdpErrorCode3" xml:space="preserve">
 		<value>내부 오류 코드 3. 유효한 상태가 아닙니다.</value>
 	</data>
-	<data name="strRdpErrorCode4" xml:space="preserve">
+  <data name="strRdpErrorCode4" xml:space="preserve">
 		<value>내부 오류 코드 4.</value>
 	</data>
-	<data name="strRdpErrorConnection" xml:space="preserve">
+  <data name="strRdpErrorConnection" xml:space="preserve">
 		<value>클라이언트 연결 중에 복구 할 수없는 오류가 발생했습니다.</value>
 	</data>
-	<data name="strRdpErrorGetFailure" xml:space="preserve">
+  <data name="strRdpErrorGetFailure" xml:space="preserve">
 		<value>GetError 변경 (FatalErrors)</value>
 	</data>
-	<data name="strRdpErrorGetUnknown" xml:space="preserve">
+  <data name="strRdpErrorGetUnknown" xml:space="preserve">
 		<value>알 수없는 치명적인 RDP 오류가 발생했습니다. 오류 코드 {0}.</value>
 	</data>
-	<data name="strRdpErrorOutOfMemory" xml:space="preserve">
+  <data name="strRdpErrorOutOfMemory" xml:space="preserve">
 		<value>메모리 부족 오류가 발생했습니다.</value>
 	</data>
-	<data name="strRdpErrorUnknown" xml:space="preserve">
+  <data name="strRdpErrorUnknown" xml:space="preserve">
 		<value>알 수없는 오류가 발생했습니다.</value>
 	</data>
-	<data name="strRdpErrorWindowCreation" xml:space="preserve">
+  <data name="strRdpErrorWindowCreation" xml:space="preserve">
 		<value>창 생성 오류가 발생했습니다.</value>
 	</data>
-	<data name="strRdpErrorWinsock" xml:space="preserve">
+  <data name="strRdpErrorWinsock" xml:space="preserve">
 		<value>Winsock 초기화 오류입니다.</value>
 	</data>
-	<data name="strRdpFileCouldNotBeImported" xml:space="preserve">
+  <data name="strRdpFileCouldNotBeImported" xml:space="preserve">
 		<value>rdp 파일을 가져올 수 없습니다!</value>
 	</data>
-	<data name="strRDPFitToPanel" xml:space="preserve">
+  <data name="strRDPFitToPanel" xml:space="preserve">
 		<value>패널 맞추기</value>
 	</data>
-	<data name="strRdpFocusFailed" xml:space="preserve">
+  <data name="strRdpFocusFailed" xml:space="preserve">
 		<value>RDP 초점 실패!</value>
 	</data>
-	<data name="strRdpGatewayIsSupported" xml:space="preserve">
+  <data name="strRdpGatewayIsSupported" xml:space="preserve">
 		<value>RD 게이트웨이가 지원됩니다.</value>
 	</data>
-	<data name="strRdpGatewayNotSupported" xml:space="preserve">
+  <data name="strRdpGatewayNotSupported" xml:space="preserve">
 		<value>RD 게이트웨이는 지원되지 않습니다!</value>
 	</data>
-	<data name="strRdpGetSessionsFailed" xml:space="preserve">
+  <data name="strRdpGetSessionsFailed" xml:space="preserve">
 		<value>GetSessions 실패!</value>
 	</data>
-	<data name="strRdpReconnectCount" xml:space="preserve">
+  <data name="strRdpReconnectCount" xml:space="preserve">
 		<value>RDP 재 연결 수 :</value>
 	</data>
-	<data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
+  <data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
 		<value>RDP SetAuthenticationLevel 실패!</value>
 	</data>
-	<data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
+  <data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
 		<value>RDP SetUseConsoleSession 실패!</value>
 	</data>
-	<data name="strRdpSetConsoleSwitch" xml:space="preserve">
+  <data name="strRdpSetConsoleSwitch" xml:space="preserve">
 		<value>RDC {0}에 대한 콘솔 스위치 설정 중입니다.</value>
 	</data>
-	<data name="strRdpSetCredentialsFailed" xml:space="preserve">
+  <data name="strRdpSetCredentialsFailed" xml:space="preserve">
 		<value>RDP setCredentials 실패!</value>
 	</data>
-	<data name="strRdpSetEventHandlersFailed" xml:space="preserve">
+  <data name="strRdpSetEventHandlersFailed" xml:space="preserve">
 		<value>RDP SetEventHandlers 실패!</value>
 	</data>
-	<data name="strRdpSetGatewayFailed" xml:space="preserve">
+  <data name="strRdpSetGatewayFailed" xml:space="preserve">
 		<value>RDP SetRDGateway 실패!</value>
 	</data>
-	<data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
+  <data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
 		<value>RDP SetPerformanceFlags 실패!</value>
 	</data>
-	<data name="strRdpSetPortFailed" xml:space="preserve">
+  <data name="strRdpSetPortFailed" xml:space="preserve">
 		<value>RDP SetPort 실패!</value>
 	</data>
-	<data name="strRdpSetPropsFailed" xml:space="preserve">
+  <data name="strRdpSetPropsFailed" xml:space="preserve">
 		<value>RDP SetProps 실패!</value>
 	</data>
-	<data name="strRdpSetRedirectionFailed" xml:space="preserve">
+  <data name="strRdpSetRedirectionFailed" xml:space="preserve">
 		<value>RDP 설정 리디렉션 실패!</value>
 	</data>
-	<data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
+  <data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
 		<value>RDP 설정 리디렉션 키 실패!</value>
 	</data>
-	<data name="strRdpSetResolutionFailed" xml:space="preserve">
+  <data name="strRdpSetResolutionFailed" xml:space="preserve">
 		<value>RDP 해상도 설정 실패!</value>
 	</data>
-	<data name="strRDPSmartSize" xml:space="preserve">
+  <data name="strRDPSmartSize" xml:space="preserve">
 		<value>스마트 사이즈</value>
 	</data>
-	<data name="strRDPSoundBringToThisComputer" xml:space="preserve">
+  <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
 		<value>컴퓨터 가져 오기</value>
 	</data>
-	<data name="strRDPSoundDoNotPlay" xml:space="preserve">
+  <data name="strRDPSoundDoNotPlay" xml:space="preserve">
 		<value>재생 금지</value>
 	</data>
-	<data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+  <data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
 		<value>원격 컴퓨터 나가기</value>
 	</data>
-	<data name="strRdpToggleFullscreenFailed" xml:space="preserve">
+  <data name="strRdpToggleFullscreenFailed" xml:space="preserve">
 		<value>RDP 전체화면 전환 실패!</value>
 	</data>
-	<data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
+  <data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
 		<value>RDP SmartSize 전환 실패!</value>
 	</data>
-	<data name="strReconnectAtStartup" xml:space="preserve">
+  <data name="strReconnectAtStartup" xml:space="preserve">
 		<value>시작시 이전에 열린 세션에 다시 연결</value>
 	</data>
-	<data name="strRefresh" xml:space="preserve">
+  <data name="strRefresh" xml:space="preserve">
 		<value>새로 고침</value>
 	</data>
-	<data name="strRemoteFile" xml:space="preserve">
+  <data name="strRemoteFile" xml:space="preserve">
 		<value>원격 파일</value>
 	</data>
-	<data name="strRemoveAll" xml:space="preserve">
+  <data name="strRemoveAll" xml:space="preserve">
 		<value>모두 제거</value>
 	</data>
-	<data name="strRename" xml:space="preserve">
+  <data name="strRename" xml:space="preserve">
 		<value>이름 바꾸기</value>
 	</data>
-	<data name="strRlogin" xml:space="preserve">
+  <data name="strRlogin" xml:space="preserve">
 		<value>Rlogin</value>
 	</data>
-	<data name="strSave" xml:space="preserve">
+  <data name="strSave" xml:space="preserve">
 		<value>저장</value>
 	</data>
-	<data name="strSaveAll" xml:space="preserve">
+  <data name="strSaveAll" xml:space="preserve">
 		<value>모두 저장</value>
 	</data>
-	<data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
+  <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
 		<value>다른 연결 파일을로드하기 전에 현재 연결 파일을 저장 하시겠습니까?</value>
 	</data>
-	<data name="strSaveConsOnExit" xml:space="preserve">
+  <data name="strSaveConsOnExit" xml:space="preserve">
 		<value>종료시 연결 저장</value>
 	</data>
-	<data name="strSaveImageFilter" xml:space="preserve">
+  <data name="strSaveImageFilter" xml:space="preserve">
 		<value>Graphics Interchange Format File (.gif) | * .gif | Joint Photographic Experts Group 파일 (.jpeg) | * .jpeg | Joint Photographic Experts Group 파일 (.jpg) | * .jpg | Portable Network Graphics File (.png) | * .png</value>
 	</data>
-	<data name="strScreen" xml:space="preserve">
+  <data name="strScreen" xml:space="preserve">
 		<value>화면</value>
 	</data>
-	<data name="strScreenshot" xml:space="preserve">
+  <data name="strScreenshot" xml:space="preserve">
 		<value>스크린 샷</value>
 	</data>
-	<data name="strScreenshots" xml:space="preserve">
+  <data name="strScreenshots" xml:space="preserve">
 		<value>스크린 샷</value>
 	</data>
-	<data name="strSearchPrompt" xml:space="preserve">
+  <data name="strSearchPrompt" xml:space="preserve">
 		<value>검색</value>
 	</data>
-	<data name="strSendTo" xml:space="preserve">
+  <data name="strSendTo" xml:space="preserve">
 		<value>보내기 ...</value>
 	</data>
-	<data name="strSessionGetFailed" xml:space="preserve">
+  <data name="strSessionGetFailed" xml:space="preserve">
 		<value>세션 배경 가져오지 실패</value>
 	</data>
-	<data name="strSessionKillFailed" xml:space="preserve">
+  <data name="strSessionKillFailed" xml:space="preserve">
 		<value>세션 배경을 제거하지 못함</value>
 	</data>
-	<data name="strSetHostnameLikeDisplayName" xml:space="preserve">
+  <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
 		<value>연결을 만들거나 이름을 변경할 때 표시 이름과 같은 호스트 이름 설정</value>
 	</data>
-	<data name="strSettingMainFormTextFailed" xml:space="preserve">
+  <data name="strSettingMainFormTextFailed" xml:space="preserve">
 		<value>기본 양식 텍스트 설정 실패</value>
 	</data>
-	<data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+  <data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
 		<value>설정을 저장하거나 시스 트레이 아이콘을 삭제할 수 없습니다!</value>
 	</data>
-	<data name="strShowDescriptionTooltips" xml:space="preserve">
+  <data name="strShowDescriptionTooltips" xml:space="preserve">
 		<value>연결 트리에 설명 툴팁 표시</value>
 	</data>
-	<data name="strShowFullConsFilePath" xml:space="preserve">
+  <data name="strShowFullConsFilePath" xml:space="preserve">
 		<value>창 제목에 전체 연결 파일 경로 표시</value>
 	</data>
-	<data name="strShowLogonInfoOnTabs" xml:space="preserve">
+  <data name="strShowLogonInfoOnTabs" xml:space="preserve">
 		<value>탭 이름에 로그온 정보 표시</value>
 	</data>
-	<data name="strShowProtocolOnTabs" xml:space="preserve">
+  <data name="strShowProtocolOnTabs" xml:space="preserve">
 		<value>탭 이름에 프로토콜 표시</value>
 	</data>
-	<data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
+  <data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
 		<value>연결을 한번 클릭하면 열기</value>
 	</data>
-	<data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
+  <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
 		<value>연결 트리에서 열린 연결을 한 번 클릭하면 열린 연결 탭으로 전환.</value>
 	</data>
-	<data name="strSmartSizeModeAspect" xml:space="preserve">
+  <data name="strSmartSizeModeAspect" xml:space="preserve">
 		<value>Aspect</value>
 	</data>
-	<data name="strSmartSizeModeFree" xml:space="preserve">
+  <data name="strSmartSizeModeFree" xml:space="preserve">
 		<value>Free</value>
 	</data>
-	<data name="strSmartSizeModeNone" xml:space="preserve">
+  <data name="strSmartSizeModeNone" xml:space="preserve">
 		<value>SmartSize 사용안함</value>
 	</data>
-	<data name="strSocks5" xml:space="preserve">
+  <data name="strSocks5" xml:space="preserve">
 		<value>Socks 5</value>
 	</data>
-	<data name="strSort" xml:space="preserve">
+  <data name="strSort" xml:space="preserve">
 		<value>정렬</value>
 	</data>
-	<data name="strSortAsc" xml:space="preserve">
+  <data name="strSortAsc" xml:space="preserve">
 		<value>오름차순 (A-Z)</value>
 	</data>
-	<data name="strSortDesc" xml:space="preserve">
+  <data name="strSortDesc" xml:space="preserve">
 		<value>내림차순 (Z-A)</value>
 	</data>
-	<data name="strSpecialKeys" xml:space="preserve">
+  <data name="strSpecialKeys" xml:space="preserve">
 		<value>특수 키</value>
 	</data>
-	<data name="strSQLInfo" xml:space="preserve">
+  <data name="strSQLInfo" xml:space="preserve">
 		<value>자세한 정보는 도움말 - 시작하기 - SQL 구성을 참조하십시오!</value>
 	</data>
-	<data name="strSQLServer" xml:space="preserve">
+  <data name="strSQLServer" xml:space="preserve">
 		<value>SQL 서버</value>
 	</data>
-	<data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
+  <data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
 		<value>SQL 업데이트 확인이 완료되었으며 사용 가능한 업데이트가 있습니다! 연결을 새로 고칩니다.</value>
 	</data>
-	<data name="strSsh1" xml:space="preserve">
+  <data name="strSsh1" xml:space="preserve">
 		<value>SSH 버전 1</value>
 	</data>
-	<data name="strSsh2" xml:space="preserve">
+  <data name="strSsh2" xml:space="preserve">
 		<value>SSH 버전 2</value>
 	</data>
-	<data name="strSSHStartTransferBG" xml:space="preserve">
+  <data name="strSSHStartTransferBG" xml:space="preserve">
 		<value>SSH 배경 전송 실패!</value>
 	</data>
-	<data name="strSSHTranferSuccessful" xml:space="preserve">
+  <data name="strSSHTranferSuccessful" xml:space="preserve">
 		<value>전송 성공!</value>
 	</data>
-	<data name="strSSHTransferEndFailed" xml:space="preserve">
+  <data name="strSSHTransferEndFailed" xml:space="preserve">
 		<value>SSH 전송 종료 (UI.Window.SSHTransfer)가 실패했습니다!</value>
 	</data>
-	<data name="strSSHTransferFailed" xml:space="preserve">
+  <data name="strSSHTransferFailed" xml:space="preserve">
 		<value>SSH 전송에 실패했습니다.</value>
 	</data>
-	<data name="strStartIP" xml:space="preserve">
+  <data name="strStartIP" xml:space="preserve">
 		<value>시작 IP</value>
 	</data>
-	<data name="strStartPort" xml:space="preserve">
+  <data name="strStartPort" xml:space="preserve">
 		<value>시작 포트</value>
 	</data>
-	<data name="strStartupExit" xml:space="preserve">
+  <data name="strStartupExit" xml:space="preserve">
 		<value>시작 / 종료</value>
 	</data>
-	<data name="strStatus" xml:space="preserve">
+  <data name="strStatus" xml:space="preserve">
 		<value>상태</value>
 	</data>
-	<data name="strSwitchToErrorsAndInfos" xml:space="preserve">
+  <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
 		<value>알림 패널에서 다음으로 전환 :</value>
 	</data>
-	<data name="strTabAdvanced" xml:space="preserve">
+  <data name="strTabAdvanced" xml:space="preserve">
 		<value>고급</value>
 	</data>
-	<data name="strTabAppearance" xml:space="preserve">
+  <data name="strTabAppearance" xml:space="preserve">
 		<value>모양</value>
 	</data>
-	<data name="strTabsAndPanels" xml:space="preserve">
+  <data name="strTabsAndPanels" xml:space="preserve">
 		<value>탭 &amp; 패널</value>
 	</data>
-	<data name="strTabUpdates" xml:space="preserve">
+  <data name="strTabUpdates" xml:space="preserve">
 		<value>업데이트</value>
 	</data>
-	<data name="strTelnet" xml:space="preserve">
+  <data name="strTelnet" xml:space="preserve">
 		<value>Telnet</value>
 	</data>
-	<data name="strTheFollowing" xml:space="preserve">
+  <data name="strTheFollowing" xml:space="preserve">
 		<value>다음 :</value>
 	</data>
-	<data name="strThemeCategoryConfigPanel" xml:space="preserve">
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
 		<value>설정 패널</value>
 	</data>
-	<data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
 		<value>연결 패널</value>
 	</data>
-	<data name="strThemeCategoryGeneral" xml:space="preserve">
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
 		<value>일반</value>
 	</data>
-	<data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
 		<value>구성 패널의 배경색입니다.</value>
 	</data>
-	<data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
 		<value>구성 패널의 범주 텍스트 색상입니다.</value>
 	</data>
-	<data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
 		<value>구성 패널의 그리드 선 색상</value>
 	</data>
-	<data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
 		<value>구성 패널의 도움말 영역 배경색입니다.</value>
 	</data>
-	<data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
 		<value>구성 패널의 도움말 영역에있는 텍스트의 색상입니다.</value>
 	</data>
-	<data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
 		<value>구성 패널의 텍스트 색상입니다.</value>
 	</data>
-	<data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
 		<value>연결 패널의 배경색입니다.</value>
 	</data>
-	<data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
 		<value>연결 패널의 텍스트 색상입니다.</value>
 	</data>
-	<data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
 		<value>연결 패널의 트리 선 색상입니다.</value>
 	</data>
-	<data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
 		<value>메뉴의 배경색입니다.</value>
 	</data>
-	<data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
 		<value>메뉴의 텍스트 색상입니다.</value>
 	</data>
-	<data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
 		<value>검색 상자의 배경색입니다.</value>
 	</data>
-	<data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
 		<value>검색 상자의 텍스트 색상입니다.</value>
 	</data>
-	<data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
 		<value>검색 창에서 프롬프트 텍스트의 색상입니다.</value>
 	</data>
-	<data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
 		<value>도구 모음의 배경색입니다.</value>
 	</data>
-	<data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
 		<value>툴바의 텍스트 색상입니다.</value>
 	</data>
-	<data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
 		<value>기본 창의 배경색입니다.</value>
 	</data>
-	<data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
 		<value>구성 패널 배경색</value>
 	</data>
-	<data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
 		<value>구성 패널 범주 텍스트 색</value>
 	</data>
-	<data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
 		<value>구성 패널 그리드 선 색상</value>
 	</data>
-	<data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
 		<value>구성 패널 도움말 배경색</value>
 	</data>
-	<data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
 		<value>구성 패널 도움말 텍스트 색상</value>
 	</data>
-	<data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
 		<value>구성 패널 텍스트 색상</value>
 	</data>
-	<data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
 		<value>연결 패널 배경색</value>
 	</data>
-	<data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
 		<value>연결 패널 텍스트 색상</value>
 	</data>
-	<data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
 		<value>연결 패널 트리 선 색상</value>
 	</data>
-	<data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
 		<value>메뉴 배경 색상</value>
 	</data>
-	<data name="strThemeNameMenuTextColor" xml:space="preserve">
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
 		<value>메뉴 텍스트 색상</value>
 	</data>
-	<data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
 		<value>검색 창 배경색</value>
 	</data>
-	<data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
 		<value>검색 창 텍스트 색상</value>
 	</data>
-	<data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
 		<value>검색 창 텍스트 프롬프트 색상</value>
 	</data>
-	<data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
 		<value>도구 모음 배경색 색상</value>
 	</data>
-	<data name="strThemeNameToolbarTextColor" xml:space="preserve">
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
 		<value>도구 모음 텍스트 색상</value>
 	</data>
-	<data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
 		<value>창 배경 색상</value>
 	</data>
-	<data name="strTitleError" xml:space="preserve">
+  <data name="strTitleError" xml:space="preserve">
 		<value>오류 ({0})</value>
 	</data>
-	<data name="strTitleInformation" xml:space="preserve">
+  <data name="strTitleInformation" xml:space="preserve">
 		<value>정보 ({0})</value>
 	</data>
-	<data name="strTitlePassword" xml:space="preserve">
+  <data name="strTitlePassword" xml:space="preserve">
 		<value>암호</value>
 	</data>
-	<data name="strTitlePasswordWithName" xml:space="preserve">
+  <data name="strTitlePasswordWithName" xml:space="preserve">
 		<value>{0} 비밀번호</value>
 	</data>
-	<data name="strTitleSelectPanel" xml:space="preserve">
+  <data name="strTitleSelectPanel" xml:space="preserve">
 		<value>선택 패널</value>
 	</data>
-	<data name="strTitleWarning" xml:space="preserve">
+  <data name="strTitleWarning" xml:space="preserve">
 		<value>경고 ({0})</value>
 	</data>
-	<data name="strTransfer" xml:space="preserve">
+  <data name="strTransfer" xml:space="preserve">
 		<value>전송</value>
 	</data>
-	<data name="strTransferFailed" xml:space="preserve">
+  <data name="strTransferFailed" xml:space="preserve">
 		<value>전송 실패!</value>
 	</data>
-	<data name="strTryIntegrate" xml:space="preserve">
+  <data name="strTryIntegrate" xml:space="preserve">
 		<value>통합 시도</value>
 	</data>
-	<data name="strType" xml:space="preserve">
+  <data name="strType" xml:space="preserve">
 		<value>종류</value>
 	</data>
-	<data name="strUltraVncRepeater" xml:space="preserve">
+  <data name="strUltraVncRepeater" xml:space="preserve">
 		<value>Ultra VNC Repeater</value>
 	</data>
-	<data name="strUltraVNCSCListeningPort" xml:space="preserve">
+  <data name="strUltraVNCSCListeningPort" xml:space="preserve">
 		<value>UltraVNC SingleClick port:</value>
 	</data>
-	<data name="strUncheckProperties" xml:space="preserve">
+  <data name="strUncheckProperties" xml:space="preserve">
 		<value>저장하지 않으려는 속성을 선택 취소하십시오!</value>
 	</data>
-	<data name="strUnnamedTheme" xml:space="preserve">
+  <data name="strUnnamedTheme" xml:space="preserve">
 		<value>이름없는 테마</value>
 	</data>
-	<data name="strUpdateAvailable" xml:space="preserve">
+  <data name="strUpdateAvailable" xml:space="preserve">
 		<value>mRemoteNG에는 업데이트가 필요합니다.</value>
 	</data>
-	<data name="strUpdateCheck" xml:space="preserve">
+  <data name="strUpdateCheck" xml:space="preserve">
 		<value>mRemoteNG는 주기적으로 mRemoteNG 웹 사이트에 연결하여 업데이트를 확인합니다.</value>
 	</data>
-	<data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+  <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
 		<value>업데이트 정보를 다운로드 할 수 없습니다.</value>
 	</data>
-	<data name="strUpdateCheckFailedLabel" xml:space="preserve">
+  <data name="strUpdateCheckFailedLabel" xml:space="preserve">
 		<value>확인 실패</value>
 	</data>
-	<data name="strUpdateCheckingLabel" xml:space="preserve">
+  <data name="strUpdateCheckingLabel" xml:space="preserve">
 		<value>업데이트 확인 중 ...</value>
 	</data>
-	<data name="strUpdateCheckPortableEdition" xml:space="preserve">
+  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
 		<value>mRemoteNG Portable Edition은 현재 자동 업데이트를 지원하지 않습니다.</value>
 	</data>
-	<data name="strUpdateDownloadComplete" xml:space="preserve">
+  <data name="strUpdateDownloadComplete" xml:space="preserve">
 		<value>다운로드 완료!
 mRemoteNG는 이제 종료되고 설치로 시작됩니다.</value>
 	</data>
-	<data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+  <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
 		<value>업데이트를 다운로드 할 수 없습니다.</value>
 	</data>
-	<data name="strUpdateDownloadFailed" xml:space="preserve">
+  <data name="strUpdateDownloadFailed" xml:space="preserve">
 		<value>업데이트 다운로드가 시작되지 않을 수 있습니다.</value>
 	</data>
-	<data name="strUpdateFrequencyCustom" xml:space="preserve">
+  <data name="strUpdateFrequencyCustom" xml:space="preserve">
 		<value>{0} 일마다</value>
 	</data>
-	<data name="strUpdateFrequencyDaily" xml:space="preserve">
+  <data name="strUpdateFrequencyDaily" xml:space="preserve">
 		<value>매일</value>
 	</data>
-	<data name="strUpdateFrequencyMonthly" xml:space="preserve">
+  <data name="strUpdateFrequencyMonthly" xml:space="preserve">
 		<value>매월</value>
 	</data>
-	<data name="strUpdateFrequencyWeekly" xml:space="preserve">
+  <data name="strUpdateFrequencyWeekly" xml:space="preserve">
 		<value>매주</value>
 	</data>
-	<data name="strUpdateGetChangeLogFailed" xml:space="preserve">
+  <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
 		<value>변경 로그를 다운로드 할 수 없습니다.</value>
 	</data>
-	<data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
+  <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
 		<value>다른 사용자 이름과 암호 사용</value>
 	</data>
-	<data name="strUser" xml:space="preserve">
+  <data name="strUser" xml:space="preserve">
 		<value>사용자</value>
 	</data>
-	<data name="strUseSameUsernameAndPassword" xml:space="preserve">
+  <data name="strUseSameUsernameAndPassword" xml:space="preserve">
 		<value>동일한 사용자 이름과 암호 사용</value>
 	</data>
-	<data name="strUseSmartCard" xml:space="preserve">
+  <data name="strUseSmartCard" xml:space="preserve">
 		<value>스마트 카드 사용</value>
 	</data>
-	<data name="strUseSQLServer" xml:space="preserve">
+  <data name="strUseSQLServer" xml:space="preserve">
 		<value>SQL Server를 사용하여 연결로드 및 저장</value>
 	</data>
-	<data name="strVersion" xml:space="preserve">
+  <data name="strVersion" xml:space="preserve">
 		<value>버전</value>
 	</data>
-	<data name="strVnc" xml:space="preserve">
+  <data name="strVnc" xml:space="preserve">
 		<value>VNC</value>
 	</data>
-	<data name="strVncConnectionDisconnectFailed" xml:space="preserve">
+  <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
 		<value>VNC 연결 끊기 실패!</value>
 	</data>
-	<data name="strVncRefreshFailed" xml:space="preserve">
+  <data name="strVncRefreshFailed" xml:space="preserve">
 		<value>VNC 화면 새로 고침 실패!</value>
 	</data>
-	<data name="strVncSendSpecialKeysFailed" xml:space="preserve">
+  <data name="strVncSendSpecialKeysFailed" xml:space="preserve">
 		<value>VNC 특수 키 보내기 실패!</value>
 	</data>
-	<data name="strVncSetEventHandlersFailed" xml:space="preserve">
+  <data name="strVncSetEventHandlersFailed" xml:space="preserve">
 		<value>VNC 이벤트 처리기 설정 실패!</value>
 	</data>
-	<data name="strVncSetPropsFailed" xml:space="preserve">
+  <data name="strVncSetPropsFailed" xml:space="preserve">
 		<value>VNC 설정 실패!</value>
 	</data>
-	<data name="strVncStartChatFailed" xml:space="preserve">
+  <data name="strVncStartChatFailed" xml:space="preserve">
 		<value>VNC 채팅 시작 실패!</value>
 	</data>
-	<data name="strVncToggleSmartSizeFailed" xml:space="preserve">
+  <data name="strVncToggleSmartSizeFailed" xml:space="preserve">
 		<value>VNC SmartSize 전환 실패!</value>
 	</data>
-	<data name="strVncToggleViewOnlyFailed" xml:space="preserve">
+  <data name="strVncToggleViewOnlyFailed" xml:space="preserve">
 		<value>VNC 보기 전용 전환 실패!</value>
 	</data>
-	<data name="strWarnIfAuthFails" xml:space="preserve">
+  <data name="strWarnIfAuthFails" xml:space="preserve">
 		<value>인증 실패시 경고</value>
 	</data>
-	<data name="strWarnings" xml:space="preserve">
+  <data name="strWarnings" xml:space="preserve">
 		<value>경고</value>
 	</data>
-	<data name="strWeifenLuoAttribution" xml:space="preserve">
+  <data name="strWeifenLuoAttribution" xml:space="preserve">
 		<value>Uses the DockPanel Suite by [Weifen Luo]</value>
 	</data>
-	<data name="strWeifenLuoAttributionURL" xml:space="preserve">
+  <data name="strWeifenLuoAttributionURL" xml:space="preserve">
 		<value>http://sourceforge.net/projects/dockpanelsuite/</value>
 	</data>
-	<data name="strXULrunnerPath" xml:space="preserve">
+  <data name="strXULrunnerPath" xml:space="preserve">
 		<value>XULRunner 경로 :</value>
 	</data>
-	<data name="strYes" xml:space="preserve">
+  <data name="strYes" xml:space="preserve">
 		<value>예</value>
 	</data>
-	<data name="strMenuReconnectAll" xml:space="preserve">
+  <data name="strMenuReconnectAll" xml:space="preserve">
 		<value>모든 연결을 다시 연결</value>
 	</data>
-	<data name="strRDPOverallConnectionTimeout" xml:space="preserve">
+  <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
 		<value>RDP 연결 시간 초과</value>
 	</data>
-	<data name="strNodeAlreadyInFolder" xml:space="preserve">
+  <data name="strNodeAlreadyInFolder" xml:space="preserve">
 		<value>이 노드는 이미 이 폴더에 있습니다.</value>
 	</data>
-	<data name="strNodeCannotDragOnSelf" xml:space="preserve">
+  <data name="strNodeCannotDragOnSelf" xml:space="preserve">
 		<value>노드를 자체로 드래그 할 수 없습니다.</value>
 	</data>
-	<data name="strNodeCannotDragParentOnChild" xml:space="preserve">
+  <data name="strNodeCannotDragParentOnChild" xml:space="preserve">
 		<value>상위 노드를 하위 노드로 끌 수 없습니다.</value>
 	</data>
-	<data name="strNodeNotDraggable" xml:space="preserve">
+  <data name="strNodeNotDraggable" xml:space="preserve">
 		<value>이 노드는 드래그 할 수 없습니다.</value>
 	</data>
-	<data name="strEncryptionBlockCipherMode" xml:space="preserve">
+  <data name="strEncryptionBlockCipherMode" xml:space="preserve">
 		<value>블록 암호 모드</value>
 	</data>
 </root>

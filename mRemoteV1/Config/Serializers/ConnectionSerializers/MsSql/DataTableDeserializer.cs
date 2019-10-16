@@ -14,7 +14,6 @@ using System.Data;
 using System.Linq;
 using System.Security;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Serializers.MsSql
@@ -89,11 +88,14 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Domain = (string)dataRow["DomainName"];
             connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
             connectionInfo.Hostname = (string)dataRow["Hostname"];
+            connectionInfo.VmId = (string)dataRow["VmId"];
+            connectionInfo.UseEnhancedMode = (bool)dataRow["UseEnhancedMode"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
             connectionInfo.PuttySession = (string)dataRow["PuttySession"];
             connectionInfo.Port = (int)dataRow["Port"];
             connectionInfo.UseConsoleSession = (bool)dataRow["ConnectToConsole"];
             connectionInfo.UseCredSsp = (bool)dataRow["UseCredSsp"];
+            connectionInfo.UseVmId = (bool)dataRow["UseVmId"];
             connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine),
                                                                                   (string)dataRow["RenderingEngine"]);
             connectionInfo.ICAEncryptionStrength =
@@ -162,6 +164,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
 
+            if (!dataRow.IsNull("RdpVersion")) // table allows null values which must be handled
+                if (Enum.TryParse((string)dataRow["RdpVersion"], true, out RdpVersion rdpVersion))
+                    connectionInfo.RdpVersion = rdpVersion;
+
             connectionInfo.Inheritance.CacheBitmaps = (bool)dataRow["InheritCacheBitmaps"];
             connectionInfo.Inheritance.Colors = (bool)dataRow["InheritColors"];
             connectionInfo.Inheritance.Description = (bool)dataRow["InheritDescription"];
@@ -189,6 +195,9 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.AutomaticResize = (bool)dataRow["InheritAutomaticResize"];
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];
             connectionInfo.Inheritance.UseCredSsp = (bool)dataRow["InheritUseCredSsp"];
+            connectionInfo.Inheritance.UseVmId = (bool)dataRow["InheritUseVmId"];
+            connectionInfo.Inheritance.UseEnhancedMode = (bool)dataRow["InheritUseEnhancedMode"];
+            connectionInfo.Inheritance.VmId = (bool)dataRow["InheritVmId"];
             connectionInfo.Inheritance.RenderingEngine = (bool)dataRow["InheritRenderingEngine"];
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
             connectionInfo.Inheritance.ICAEncryptionStrength = (bool)dataRow["InheritICAEncryptionStrength"];
@@ -219,6 +228,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.RDGatewayUsername = (bool)dataRow["InheritRDGatewayUsername"];
             connectionInfo.Inheritance.RDGatewayPassword = (bool)dataRow["InheritRDGatewayPassword"];
             connectionInfo.Inheritance.RDGatewayDomain = (bool)dataRow["InheritRDGatewayDomain"];
+            connectionInfo.Inheritance.RdpVersion = (bool)dataRow["InheritRdpVersion"];
         }
 
         private string DecryptValue(string cipherText)

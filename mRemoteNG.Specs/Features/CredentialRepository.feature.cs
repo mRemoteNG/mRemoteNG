@@ -59,7 +59,7 @@ namespace mRemoteNG.Specs.Features
         
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
-            testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.OnScenarioStart();
         }
         
         public virtual void ScenarioCleanup()
@@ -73,7 +73,7 @@ namespace mRemoteNG.Specs.Features
         [Ignore("Cred Repo not implmented currently.")]
         public virtual void LoadCredentialRepository()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Load credential repository", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Load credential repository", "", new string[] {
                         "credentials"});
 #line 7
 this.ScenarioSetup(scenarioInfo);
@@ -94,7 +94,7 @@ this.ScenarioSetup(scenarioInfo);
         [Ignore("Cred Repo not implmented currently.")]
         public virtual void AddCredentialRecord()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add credential record", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add credential record", "", ((string[])(null)));
 #line 13
 this.ScenarioSetup(scenarioInfo);
 #line 14
@@ -116,7 +116,7 @@ this.ScenarioSetup(scenarioInfo);
         [Ignore("Cred Repo not implmented currently.")]
         public virtual void UnloadCredentialRepository()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unload credential repository", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unload credential repository", "", ((string[])(null)));
 #line 20
 this.ScenarioSetup(scenarioInfo);
 #line 21
