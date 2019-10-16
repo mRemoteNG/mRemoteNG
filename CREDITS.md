@@ -140,9 +140,13 @@ https://sourceforge.net/projects/objectlistview/
 
 Markdig  
 Copyright © 2016-2019 Alexandre Mutel  
-BSD 2-Clause "Simplified"  
+BSD 2-Clause License
 https://github.com/lunet-io/markdig
 
+CefSharp
+Copyright © 2019 The Chromium Embedded Framework Authors
+BSD 3-Clause License
+https://github.com/cefsharp/CefSharp
 ConsoleControl
 Copyright © 2015 Dave Kerr
 MIT License
