@@ -24,3 +24,13 @@ Select the appropriate network protocol by clicking the arrow next to the Connec
 .. figure:: /images/quick_connect_03.png
 
 If you wish to use an existing connection, select the globe icon next to the protocol button and select the appropriate connection.
+
+Configuration
+=============
+
+Quick connections take most of their configuration from the :doc:`default_connection_properties`.
+All default properties are used `except` for:
+
+- Hostname
+- Protocol
+- Port (the default port for the selected protocol is used)
