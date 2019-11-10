@@ -348,11 +348,9 @@ namespace mRemoteNG.Connection
             RedirectClipboard = Settings.Default.ConDefaultRedirectClipboard;
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
-            RedirectSound = (RDPSounds)Enum.Parse(typeof(RDPSounds),
-                                                              Settings.Default.ConDefaultRedirectSound);
-            SoundQuality = (RDPSoundQuality)Enum.Parse(typeof(RDPSoundQuality),
-                                                                   Settings.Default.ConDefaultSoundQuality);
             RedirectAudioCapture = Settings.Default.ConDefaultRedirectAudioCapture;
+            RedirectSound = (RDPSounds)Enum.Parse(typeof(RDPSounds), Settings.Default.ConDefaultRedirectSound);
+            SoundQuality = (RDPSoundQuality)Enum.Parse(typeof(RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 
         private void SetMiscDefaults()

@@ -177,9 +177,6 @@
   <data name="strAspect" xml:space="preserve">
     <value>方面</value>
   </data>
-  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>自动获取会话信息</value>
-  </data>
   <data name="strAutoSaveEvery" xml:space="preserve">
     <value>自动保存配置，每隔</value>
   </data>
@@ -332,7 +329,7 @@ Citrix ICA 客户端空间版本：{0}</value>
 如果此检查仍然失败或无法使用 RDP，请咨询 {0}。</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
-    <value>The following RDP protocol versions are supported on this machine: {0}</value>
+    <value>此计算机上支持以下 RDP 协议版本：{0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
     <value>VNC 要求 VncSharp.dll 位于 mRemoteNG 应用程序文件夹中。
@@ -2217,10 +2214,10 @@ VncSharp 版本 {0}</value>
     <value>信息 ({0})</value>
   </data>
   <data name="strTitlePassword" xml:space="preserve">
-    <value>密码</value>
+    <value>mRemoteNG 密码</value>
   </data>
   <data name="strTitlePasswordWithName" xml:space="preserve">
-    <value>{0} 的密码</value>
+    <value>{0} 的 mRemoteNG 密码</value>
   </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
     <value>选择面板</value>
@@ -2814,5 +2811,32 @@ mRemoteNG 将退出并安装更新。</value>
   </data>
   <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
     <value>无法创建 RDP 客户端。此计算机上不支持 RDP 协议版本 {0}。请选择较旧的协议版本。</value>
+  </data>
+  <data name="strStartMinimized" xml:space="preserve">
+    <value>启动时最小化</value>
+  </data>
+  <data name="strPropertyDescriptionPasswordProtect" xml:space="preserve">
+    <value>设置加密连接文件所需的密码。在开始 mRemoteNG 之前，系统将提示您输入密码。</value>
+  </data>
+  <data name="strPropertyDescriptionUseEnhancedMode" xml:space="preserve">
+    <value>连接到启用了增强模式的 Hyper-V 主机。</value>
+  </data>
+  <data name="strPropertyNameUseEnhancedMode" xml:space="preserve">
+    <value>使用增强模式</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayPassword" xml:space="preserve">
+    <value>指定远程桌面网关服务器的密码。</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
+    <value>选择是否应共享麦克风。</value>
+  </data>
+  <data name="strCloseToSysTray" xml:space="preserve">
+    <value>靠近通知区域</value>
+  </data>
+  <data name="strWindows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="strPowerShell" xml:space="preserve">
+    <value>PowerShell</value>
   </data>
 </root>
