@@ -27,6 +27,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblCredentialsUsername.Text = Language.strLabelUsername;
             lblCredentialsPassword.Text = Language.strLabelPassword;
             lblCredentialsDomain.Text = Language.strLabelDomain;
+            chkUseAdmPwd.Text = Language.strUseAdmPwd;
         }
 
         public override void LoadSettings()
@@ -44,6 +45,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
                 case "custom":
                     radCredentialsCustom.Checked = true;
+                    break;
+                case "admpwd":
+                    radCredentialsCustom.Checked = true;
+                    chkUseAdmPwd.Checked = true;
                     break;
             }
 
@@ -65,7 +70,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
             else if (radCredentialsCustom.Checked)
             {
-                Settings.Default.EmptyCredentials = "custom";
+                if (chkUseAdmPwd.Checked)
+                    Settings.Default.EmptyCredentials = "admpwd";
+                else
+                    Settings.Default.EmptyCredentials = "custom";
             }
 
             Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
@@ -84,6 +92,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtCredentialsUsername.Enabled = radCredentialsCustom.Checked;
             txtCredentialsPassword.Enabled = radCredentialsCustom.Checked;
             txtCredentialsDomain.Enabled = radCredentialsCustom.Checked;
+            chkUseAdmPwd.Enabled = radCredentialsCustom.Checked;
+        }
+
+        private void chkUseAdmPwd_CheckedChanged(object sender, EventArgs e)
+        {
+            lblCredentialsPassword.Enabled = !chkUseAdmPwd.Checked;
+            txtCredentialsPassword.Enabled = !chkUseAdmPwd.Checked;
         }
     }
 }

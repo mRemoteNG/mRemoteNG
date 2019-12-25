@@ -655,11 +655,11 @@ Starting with new connections file.</value>
     <value>Encryption failed. {0}</value>
   </data>
   <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>The Windows security setting, "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing", is enabled. This setting is not compatible with {0}.
+    <value>The Windows security setting, "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing", is enabled. 
 
 See the Microsoft Support article at http://support.microsoft.com/kb/811833 for more information.
 
-{0} will now close.</value>
+{0} is not fully FIPS compliant. Click OK to proceed at your own discretion, or Cancel to Exit.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Errors</value>
@@ -2699,5 +2699,8 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="ChangeConnectionResolutionError" xml:space="preserve">
     <value>An error occurred while trying to change the connection resolution to host '{0}'</value>
+  </data>
+  <data name="strUseAdmPwd" xml:space="preserve">
+    <value>Use AdmPwd.E to retrieve the password</value>
   </data>
 </root>

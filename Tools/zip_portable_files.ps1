@@ -56,6 +56,8 @@ if ($ConfigurationName -eq "Release Portable") {
     Remove-Item -Force  $PortableZip -ErrorAction SilentlyContinue
     & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip (Join-Path -Path $tempFolderPath -ChildPath "*.*")
     #& $SEVENZIP a -bt -mx=9 -tzip -y $PortableZip "$($SolutionDir)*.TXT"
+    (Get-FileHash -Path $PortableZip -Algorithm SHA512).Hash
+
 }
 else {
     Write-Output "We will not zip anything - this isnt a portable release build."

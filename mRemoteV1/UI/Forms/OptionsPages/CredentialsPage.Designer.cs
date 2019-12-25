@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CredentialsPage));
             this.pnlDefaultCredentials = new System.Windows.Forms.Panel();
+            this.chkUseAdmPwd = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.radCredentialsCustom = new mRemoteNG.UI.Controls.Base.NGRadioButton();
             this.lblDefaultCredentials = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.radCredentialsNoInfo = new mRemoteNG.UI.Controls.Base.NGRadioButton();
@@ -45,6 +45,7 @@
             // 
             // pnlDefaultCredentials
             // 
+            this.pnlDefaultCredentials.Controls.Add(this.chkUseAdmPwd);
             this.pnlDefaultCredentials.Controls.Add(this.radCredentialsCustom);
             this.pnlDefaultCredentials.Controls.Add(this.lblDefaultCredentials);
             this.pnlDefaultCredentials.Controls.Add(this.radCredentialsNoInfo);
@@ -57,18 +58,32 @@
             this.pnlDefaultCredentials.Controls.Add(this.lblCredentialsDomain);
             this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 3);
             this.pnlDefaultCredentials.Name = "pnlDefaultCredentials";
-            this.pnlDefaultCredentials.Size = new System.Drawing.Size(596, 175);
+            this.pnlDefaultCredentials.Size = new System.Drawing.Size(596, 210);
             this.pnlDefaultCredentials.TabIndex = 0;
+            // 
+            // chkUseAdmPwd
+            // 
+            this.chkUseAdmPwd._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkUseAdmPwd.AutoSize = true;
+            this.chkUseAdmPwd.Enabled = false;
+            this.chkUseAdmPwd.Location = new System.Drawing.Point(140, 149);
+            this.chkUseAdmPwd.Name = "chkUseAdmPwd";
+            this.chkUseAdmPwd.Size = new System.Drawing.Size(214, 17);
+            this.chkUseAdmPwd.TabIndex = 10;
+            this.chkUseAdmPwd.Text = "use AdmPwd.E to retrieve the password";
+            this.chkUseAdmPwd.UseVisualStyleBackColor = true;
+            this.chkUseAdmPwd.CheckedChanged += new System.EventHandler(this.chkUseAdmPwd_CheckedChanged);
             // 
             // radCredentialsCustom
             // 
             this.radCredentialsCustom.AutoSize = true;
+            this.radCredentialsCustom.BackColor = System.Drawing.Color.Transparent;
             this.radCredentialsCustom.Location = new System.Drawing.Point(16, 69);
             this.radCredentialsCustom.Name = "radCredentialsCustom";
             this.radCredentialsCustom.Size = new System.Drawing.Size(87, 17);
             this.radCredentialsCustom.TabIndex = 3;
             this.radCredentialsCustom.Text = "the following:";
-            this.radCredentialsCustom.UseVisualStyleBackColor = true;
+            this.radCredentialsCustom.UseVisualStyleBackColor = false;
             this.radCredentialsCustom.CheckedChanged += new System.EventHandler(this.radCredentialsCustom_CheckedChanged);
             // 
             // lblDefaultCredentials
@@ -83,6 +98,7 @@
             // radCredentialsNoInfo
             // 
             this.radCredentialsNoInfo.AutoSize = true;
+            this.radCredentialsNoInfo.BackColor = System.Drawing.Color.Transparent;
             this.radCredentialsNoInfo.Checked = true;
             this.radCredentialsNoInfo.Location = new System.Drawing.Point(16, 31);
             this.radCredentialsNoInfo.Name = "radCredentialsNoInfo";
@@ -90,23 +106,24 @@
             this.radCredentialsNoInfo.TabIndex = 1;
             this.radCredentialsNoInfo.TabStop = true;
             this.radCredentialsNoInfo.Text = "no information";
-            this.radCredentialsNoInfo.UseVisualStyleBackColor = true;
+            this.radCredentialsNoInfo.UseVisualStyleBackColor = false;
             // 
             // radCredentialsWindows
             // 
             this.radCredentialsWindows.AutoSize = true;
+            this.radCredentialsWindows.BackColor = System.Drawing.Color.Transparent;
             this.radCredentialsWindows.Location = new System.Drawing.Point(16, 50);
             this.radCredentialsWindows.Name = "radCredentialsWindows";
             this.radCredentialsWindows.Size = new System.Drawing.Size(227, 17);
             this.radCredentialsWindows.TabIndex = 2;
             this.radCredentialsWindows.Text = "my current credentials (windows logon info)";
-            this.radCredentialsWindows.UseVisualStyleBackColor = true;
+            this.radCredentialsWindows.UseVisualStyleBackColor = false;
             // 
             // txtCredentialsDomain
             // 
             this.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtCredentialsDomain.Enabled = false;
-            this.txtCredentialsDomain.Location = new System.Drawing.Point(140, 147);
+            this.txtCredentialsDomain.Location = new System.Drawing.Point(140, 172);
             this.txtCredentialsDomain.Name = "txtCredentialsDomain";
             this.txtCredentialsDomain.Size = new System.Drawing.Size(150, 20);
             this.txtCredentialsDomain.TabIndex = 9;
@@ -153,7 +170,7 @@
             // lblCredentialsDomain
             // 
             this.lblCredentialsDomain.Enabled = false;
-            this.lblCredentialsDomain.Location = new System.Drawing.Point(34, 150);
+            this.lblCredentialsDomain.Location = new System.Drawing.Point(34, 175);
             this.lblCredentialsDomain.Name = "lblCredentialsDomain";
             this.lblCredentialsDomain.Size = new System.Drawing.Size(100, 13);
             this.lblCredentialsDomain.TabIndex = 8;
@@ -166,7 +183,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlDefaultCredentials);
             this.Name = "CredentialsPage";
-            this.PageIcon = ((System.Drawing.Icon)(resources.GetObject("$this.PageIcon")));
             this.Size = new System.Drawing.Size(610, 489);
             this.pnlDefaultCredentials.ResumeLayout(false);
             this.pnlDefaultCredentials.PerformLayout();
@@ -186,5 +202,6 @@
         internal Controls.Base.NGLabel lblCredentialsPassword;
         internal Controls.Base.NGTextBox txtCredentialsUsername;
         internal Controls.Base.NGLabel lblCredentialsDomain;
+        private Controls.Base.NGCheckBox chkUseAdmPwd;
     }
 }

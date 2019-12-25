@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -812,7 +812,7 @@ namespace mRemoteNG {
         ///   Looks up a localized string similar to The (RDP) Sessions feature requires that you have a copy of eolwtscom.dll registered on your system.
         ///mRemoteNG ships with this component but it is not registered automatically if you do not use the mRemoteNG Installer.
         ///To register it manually, run the following command from an elevated command prompt: regsvr32 &quot;C:\Program Files\mRemoteNG\eolwtscom.dll&quot; (where C:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
-        ///If this check still fails or you are unable to use the (RDP) Sessions feat [rest of string was truncated]&quot;;.
+        ///If this check still fails or you are unable to use the (RDP) Sessions feature [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string strCcEOLFailed {
             get {
@@ -833,7 +833,7 @@ namespace mRemoteNG {
         ///   Looks up a localized string similar to To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
         ///You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
         ///When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
-        ///If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please c [rest of string was truncated]&quot;;.
+        ///If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please cons [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string strCcGeckoFailed {
             get {
@@ -853,7 +853,7 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
         ///If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
-        ///To do this open up the run dialog (Start - Run) and enter the following: regsvr32 &quot;c:\Program Files\Citrix\ICA Client\wfica.ocx&quot; (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin install [rest of string was truncated]&quot;;.
+        ///To do this open up the run dialog (Start - Run) and enter the following: regsvr32 &quot;c:\Program Files\Citrix\ICA Client\wfica.ocx&quot; (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin installat [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string strCcICAFailed {
             get {
@@ -2000,11 +2000,11 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Windows security setting, &quot;System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing&quot;, is enabled. This setting is not compatible with {0}.
+        ///   Looks up a localized string similar to The Windows security setting, &quot;System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing&quot;, is enabled. 
         ///
         ///See the Microsoft Support article at http://support.microsoft.com/kb/811833 for more information.
         ///
-        ///{0} will now close..
+        ///{0} is not fully FIPS compliant. Click OK to proceed at your own discretion, or Cancel to Exit..
         /// </summary>
         internal static string strErrorFipsPolicyIncompatible {
             get {
@@ -7486,6 +7486,15 @@ namespace mRemoteNG {
         internal static string strUpgrade {
             get {
                 return ResourceManager.GetString("strUpgrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use AdmPwd.E to retrieve the password.
+        /// </summary>
+        internal static string strUseAdmPwd {
+            get {
+                return ResourceManager.GetString("strUseAdmPwd", resourceCulture);
             }
         }
         

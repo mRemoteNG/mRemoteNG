@@ -12,7 +12,7 @@ namespace mRemoteNG {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2103,7 +2103,7 @@ namespace mRemoteNG {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://mremoteng.org/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://gcstoragedownload.blob.core.windows.net/download/mRemoteNG/")]
         public string UpdateAddress {
             get {
                 return ((string)(this["UpdateAddress"]));
@@ -2720,6 +2720,18 @@ namespace mRemoteNG {
             }
             set {
                 this["StartUpPanelName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OverrideFIPSCheck {
+            get {
+                return ((bool)(this["OverrideFIPSCheck"]));
+            }
+            set {
+                this["OverrideFIPSCheck"] = value;
             }
         }
     }

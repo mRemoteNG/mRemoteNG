@@ -20,9 +20,12 @@ namespace mRemoteNG.UI.Controls.Base
             base.OnCreateControl(); 
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-            Invalidate();
+            if (_themeManager.ActiveTheme != null)
+            {
+                ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+                BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+                Invalidate();
+            }
         }
          
 

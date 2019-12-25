@@ -25,10 +25,13 @@ namespace mRemoteNG.UI.Controls.Base
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             // Use the Dialog_* colors since Labels generally have the same colors as panels/dialogs/windows/etc...
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
-            ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
-            FontOverrider.FontOverride(this);
-            Invalidate();
+            if (_themeManager.ActiveTheme != null)
+            {
+                BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
+                ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
+                FontOverrider.FontOverride(this);
+                Invalidate();
+            }
         }
 
   

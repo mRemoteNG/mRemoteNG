@@ -522,7 +522,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UpdateAddress" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://mremoteng.org/</Value>
+      <Value Profile="(Default)">https://gcstoragedownload.blob.core.windows.net/download/mRemoteNG/</Value>
     </Setting>
     <Setting Name="ConDefaultLoadBalanceInfo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -676,6 +676,9 @@
     </Setting>
     <Setting Name="StartUpPanelName" Type="System.String" Scope="User">
       <Value Profile="(Default)">General</Value>
+    </Setting>
+    <Setting Name="OverrideFIPSCheck" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
