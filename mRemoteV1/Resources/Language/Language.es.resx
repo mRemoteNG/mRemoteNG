@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -486,7 +486,7 @@ Versión de Control {0} de VncSharp</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Connexión a "{0}" via "{1}" establecida por el usuario "{2}" (Descripción: "{3}"; Campo de Usuario: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>¡Conexión fallida!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -617,13 +617,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Cifrado fallido. {0}</value>
-  </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>La configuración de Seguridad de Windows, "Criptografia del sistema: Usar Algoritmos compatibles FIPS para Encripción, Hashing y Firma", esta habilitada. Esta configuración es incompatible con {0}.
-
-Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/811833 Para más información.
-
-{0} Se Cerrará.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Errores</value>
@@ -759,9 +752,6 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG está actualizado</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>¡Conexión fallida!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>¡La liberación del proceso Int App ha fallado!</value>
@@ -1178,7 +1168,7 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   <data name="strPanelName" xml:space="preserve">
     <value>Nombre del Panel</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Protegido por Contraseña</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
@@ -1341,7 +1331,7 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
     <value>Introduzca su nombre de usuario de autentificación en el proxy.</value>
   </data>
   <data name="strPropertyNameAddress" xml:space="preserve">
-    <value>Nombre dle host/IP</value>
+    <value>Nombre del host/IP</value>
   </data>
   <data name="strPropertyNameAll" xml:space="preserve">
     <value>Todo</value>
@@ -1509,9 +1499,6 @@ Mensaje:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>¡Test de Proxy correcto!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>¡Conexión fallida!</value>
   </data>
   <data name="strPuttyFocusFailed" xml:space="preserve">
     <value>¡No se pudo fikar el foco!</value>

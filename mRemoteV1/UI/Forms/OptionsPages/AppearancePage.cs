@@ -1,5 +1,4 @@
-using System;
-using System.Drawing;
+﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
@@ -26,17 +25,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.ApplyLanguage();
 
             lblLanguage.Text = Language.strLanguage;
-            lblLanguageRestartRequired.Text = string.Format(Language.strLanguageRestartRequired, Application.ProductName);
+            lblLanguageRestartRequired.Text =
+                string.Format(Language.strLanguageRestartRequired, Application.ProductName);
             chkShowDescriptionTooltipsInTree.Text = Language.strShowDescriptionTooltips;
             chkShowFullConnectionsFilePathInTitle.Text = Language.strShowFullConsFilePath;
             chkShowSystemTrayIcon.Text = Language.strAlwaysShowSysTrayIcon;
             chkMinimizeToSystemTray.Text = Language.strMinimizeToSysTray;
+            chkCloseToSystemTray.Text = Language.strCloseToSysTray;
         }
 
         public override void LoadSettings()
         {
-            base.SaveSettings();
-
             cboLanguage.Items.Clear();
             cboLanguage.Items.Add(Language.strLanguageDefault);
 
@@ -44,11 +43,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 cboLanguage.Items.Add(nativeName);
             }
+
             if (!string.IsNullOrEmpty(Settings.Default.OverrideUICulture) &&
                 SupportedCultures.IsNameSupported(Settings.Default.OverrideUICulture))
             {
                 cboLanguage.SelectedItem = SupportedCultures.get_CultureNativeName(Settings.Default.OverrideUICulture);
             }
+
             if (cboLanguage.SelectedIndex == -1)
             {
                 cboLanguage.SelectedIndex = 0;
@@ -58,11 +59,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowFullConnectionsFilePathInTitle.Checked = Settings.Default.ShowCompleteConsPathInTitle;
             chkShowSystemTrayIcon.Checked = Settings.Default.ShowSystemTrayIcon;
             chkMinimizeToSystemTray.Checked = Settings.Default.MinimizeToTray;
+            chkCloseToSystemTray.Checked = Settings.Default.CloseToTray;
         }
 
         public override void SaveSettings()
         {
-
             if (cboLanguage.SelectedIndex > 0 &&
                 SupportedCultures.IsNativeNameSupported(Convert.ToString(cboLanguage.SelectedItem)))
             {
@@ -96,8 +97,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             Settings.Default.MinimizeToTray = chkMinimizeToSystemTray.Checked;
-
-            Settings.Default.Save();
+            Settings.Default.CloseToTray = chkCloseToSystemTray.Checked;
         }
     }
 }

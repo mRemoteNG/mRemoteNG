@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Forms.Input
 {
-    partial class FrmInputBox
+    sealed partial class FrmInputBox
     {
         /// <summary>
         /// Required designer variable.

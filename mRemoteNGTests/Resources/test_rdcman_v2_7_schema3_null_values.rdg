@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RDCMan programVersion="2.7" schemaVersion="3">
+  <file>
+    <credentialsProfiles />
+    <properties>
+      <expanded>True</expanded>
+      <name>test_RDCMan_connections</name>
+    </properties>
+    <smartGroup>
+      <properties>
+        <expanded>False</expanded>
+        <name>AllServers</name>
+      </properties>
+      <ruleGroup operator="All">
+        <rule>
+          <property>DisplayName</property>
+          <operator>Matches</operator>
+          <value>server</value>
+        </rule>
+      </ruleGroup>
+    </smartGroup>
+    <group>
+      <properties>
+        <expanded>True</expanded>
+        <name>Group1</name>
+      </properties>
+      <server>
+        <properties>
+        </properties>
+        <logonCredentials inherit="None">
+        </logonCredentials>
+        <connectionSettings inherit="None">
+        </connectionSettings>
+        <gatewaySettings inherit="None">
+        </gatewaySettings>
+        <remoteDesktop inherit="None">
+        </remoteDesktop>
+        <localResources inherit="None">
+        </localResources>
+        <displaySettings inherit="None">
+        </displaySettings>
+        <securitySettings inherit="None">
+        </securitySettings>
+      </server>
+    </group>
+  </file>
+  <connected />
+  <favorites />
+  <recentlyUsed />
+</RDCMan>

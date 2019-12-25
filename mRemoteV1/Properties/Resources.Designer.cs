@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -882,14 +882,13 @@ namespace mRemoteNG {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;Application xmlns:xsi=&apos;http://www.w3.org/2001/XMLSchema-instance&apos;&gt;
-        ///  &lt;VisualElements
-        ///    BackgroundColor=&apos;#343A40&apos;
-        ///    ShowNameOnSquare150x150Logo=&apos;on&apos;
-        ///    ForegroundText=&apos;light&apos;
-        ///		Square150x150Logo=&apos;VisualElements_150.png&apos;
-        ///		Square70x70Logo=&apos;VisualElements_70.png&apos;/&gt;
-        ///&lt;/Application&gt;
-        ///.
+        ///    &lt;VisualElements
+        ///        BackgroundColor=&apos;#343A40&apos;
+        ///        ShowNameOnSquare150x150Logo=&apos;on&apos;
+        ///        ForegroundText=&apos;light&apos;
+        ///        Square150x150Logo=&apos;VisualElements_150.png&apos;
+        ///        Square70x70Logo=&apos;VisualElements_70.png&apos; /&gt;
+        ///&lt;/Application&gt;.
         /// </summary>
         internal static string mRemoteNG_VisualElementsManifest {
             get {
@@ -1043,6 +1042,16 @@ namespace mRemoteNG {
         internal static System.Drawing.Icon PortScan_Icon {
             get {
                 object obj = ResourceManager.GetObject("PortScan_Icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon PowerShell {
+            get {
+                object obj = ResourceManager.GetObject("PowerShell", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -1338,6 +1347,16 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap star {
+            get {
+                object obj = ResourceManager.GetObject("star", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon StartupExit_Icon {
@@ -1348,12 +1367,72 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tab_add {
+            get {
+                object obj = ResourceManager.GetObject("tab_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tab_delete {
+            get {
+                object obj = ResourceManager.GetObject("tab_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tab_edit {
+            get {
+                object obj = ResourceManager.GetObject("tab_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon Tab_Icon {
             get {
                 object obj = ResourceManager.GetObject("Tab_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TabExit {
+            get {
+                object obj = ResourceManager.GetObject("TabExit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TabOption {
+            get {
+                object obj = ResourceManager.GetObject("TabOption", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TabOverflow {
+            get {
+                object obj = ResourceManager.GetObject("TabOverflow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -32,19 +32,6 @@
     <para>By default, PDS Admin role is assigned to Enterprise Admins group and can be changed via PDS configuration file.</para>
     <para>Call is audited on PDS</para>
   </UpsertSupportedForest>
-  <GetSupportedForests>
-    <summary>
-      Calls PDS to get list of supported forests as configured in PDS configuration file.
-    </summary>
-    <param name="ReturnCredentials">
-      Whether or not return user name, encrypted password and key id.
-    </param>
-    <returns>List of names of AD forests as known by connected PDS instance (optionaly user name, encrypted password and key id), or null if no specific AD forests are configured and PDS just covers local AD forest.</returns>
-    <remarks>
-      <para>No specific permissions required</para>
-      <para>Call is not audited</para>
-    </remarks>
-  </GetSupportedForests>
   <ResetManagedAccountPassword>
      <summary>
        Calls PDS to request reset of managed account password in given AD forest.
@@ -168,6 +155,120 @@
        <para>Call is audited on PDS</para>
     </remarks>
   </GetManagedAccountPassword>
+  <GetPassword>
+     <summary>
+       Calls PDS to retrieve password of managed account in given AD forest.
+       Managed account can be either:
+         * Domain computer local admin account
+         * Managed domain account
+    </summary>
+     <param name="ForestName">
+      Name of AD forest.
+       Forest must be marked as supported in PDS configuration.
+       For local forest, pass null as parameter value
+    </param>
+     <param name="Identity">
+       When retrieving password of computer local admin account, pass name of computer where password of local admin account shall be retrieved. Name of the computer can be passed as one of the following:
+       * Hostname, such as MyComputer
+       * FQDN, such as mycomputer.mydomain.com
+       * Distinguished name, such as cn=MyComputer,ou=MyComputers,dc=mydomain,dc=com
+       <para/>
+       When retrieving password of managed domain account, pas the name of domain account. Account name can be passed as one of the following:
+       * sAMAccountName (without domain)
+       * userPrincipalName
+       * distinguishedName
+     </param>
+     <param name="Type">
+       Type of the account to retrieve password for. Can be one of the supported account types:
+       * LocalComputerAdmin
+       * ManagedDomainAccount
+     </param>
+     <param name="IncludePasswordHistory">Whether or not to include password history</param>
+     <param name="IsDeleted">
+      Whether computer account or managed domain account is deleted or not.
+      Note: there may be multiple deleted objects with the same name. In such case, password for most recently deleted object is returned
+    </param>
+     <returns>Password, current password expiration time and optional password history. Passwords returned are plain text</returns>
+     <remarks>
+       <para>Name of local admin account is not stored by solution. Caller is expected to know name of local managed account</para>
+       <para>
+        PDS does not try to guess domain or forest name from computer name - it searches against Global Catalog interface of AD forest passed in <paramref name="ForestName"/> parameter
+      </para>
+       <para>Caller must have Read Admin Passsword permission on given computer or user object</para>
+       <para>Call is audited on PDS</para>
+    </remarks>
+  </GetPassword>
+  <GetSecurePassword>
+    <summary>
+      Calls PDS to retrieve password of managed account in given AD forest.
+      Managed account can be either:
+      * Domain computer local admin account
+      * Managed domain account
+    </summary>
+    <param name="ForestName">
+      Name of AD forest.
+      Forest must be marked as supported in PDS configuration.
+      For local forest, pass null as parameter value
+    </param>
+    <param name="Identity">
+      When retrieving password of computer local admin account, pass name of computer where password of local admin account shall be retrieved. Name of the computer can be passed as one of the following:
+      * Hostname, such as MyComputer
+      * FQDN, such as mycomputer.mydomain.com
+      * Distinguished name, such as cn=MyComputer,ou=MyComputers,dc=mydomain,dc=com
+      <para/>
+      When retrieving password of managed domain account, pas the name of domain account. Account name can be passed as one of the following:
+      * sAMAccountName (without domain)
+      * userPrincipalName
+      * distinguishedName
+    </param>
+    <param name="Type">
+      Type of the account to retrieve password for. Can be one of the supported account types:
+      * LocalComputerAdmin
+      * ManagedDomainAccount
+    </param>
+    <param name="IncludePasswordHistory">Whether or not to include password history</param>
+    <param name="IsDeleted">
+      Whether computer account or managed domain account is deleted or not.
+      Note: there may be multiple deleted objects with the same name. In such case, password for most recently deleted object is returned
+    </param>
+    <returns>Password, current password expiration time and optional password history. Passwords returned as secure strings</returns>
+    <remarks>
+      <para>Name of local admin account is not stored by solution. Caller is expected to know name of local managed account</para>
+      <para>
+        PDS does not try to guess domain or forest name from computer name - it searches against Global Catalog interface of AD forest passed in <paramref name="ForestName"/> parameter
+      </para>
+      <para>Caller must have Read Admin Passsword permission on given computer or user object</para>
+      <para>Call is audited on PDS</para>
+    </remarks>
+  </GetSecurePassword>
+  <ResetPassword>
+     <summary>
+       Calls PDS to request reset of for given managed account in given AD forest.
+       Managed account can be either:
+       * Domain computer local admin account
+       * Managed domain account
+     </summary>
+     <param name="ForestName">
+      Name of AD forest.
+       Forest must be marked as supported in PDS configuration.
+       For local forest, pass null as parameter value
+     </param>
+     <param name="Identity">Name of computer where password of local admin account shall be reset</param>
+     <param name="Type">
+      Type of the managed account to reset password for. Can be one of the supported account types:
+      * LocalComputerAdmin
+      * ManagedDomainAccount
+     </param>
+     <param name="WhenEffective">When password reset shall occur.
+     If type of account is local computer admin account, then password will be reset during next GPO update cycle on given computer after this time.
+     If type of account is managed domain account, and WhenEffective is in the past, then password is reset immediately. If WhenEffective is in the future, then password will be scheduled for reset according to WhenEffective parameter.
+     </param>
+     <returns>Information about result of operation along with computer name and computer DN</returns>
+     <remarks>
+       <para>Caller must have Reset Admin Passsword permission on given computer or user object</para>
+       <para>Call is audited on PDS</para>
+    </remarks>
+  </ResetPassword>
   <GetLocalAdminPassword>
      <summary>
        Calls PDS to retrieve password of managed local admin account of given computer in given AD forest
@@ -225,6 +326,20 @@
        <para>Call is not audited</para>
     </remarks>
   </GetPublicKeys>
+    <GetSupportedForestNames>
+     <summary>
+       Asks PDS to return list of all supported AD forests.
+    </summary>
+     <returns>
+       Returns list of names of all supported AD forests.
+      <para>In single forest deployments, list is empty, meaning that only supported forest is the forest where solution is deployed.</para>
+     </returns>
+     <remarks>
+       <para>No specific permissions required</para>
+       <para>Call is not audited</para>
+    </remarks>
+  </GetSupportedForestNames>
+
   <GetPublicKey>
      <summary>
        Asks PDS to return public key with specified key ID

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -490,7 +490,7 @@ VncSharp Versie {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Verbinding naar "{0}" via "{1}" tot stand gebracht door gebruiker "{2}" (Omschrijving: "{3}"; Gebruiker Veld: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Connectie mislukt!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -624,13 +624,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Encryptie is mislukt. {0}</value>
-  </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>De beveiligingsinstelling voor Windows, "Systeemcryptografie: gebruik FIPS-compatibele algoritmes voor codering, hashing en ondertekening", is ingeschakeld. Deze instelling is niet compatibel met {0}.
-
-Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor meer informatie.  
-
-{0} wordt nu gesloten.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Foutmeldingen</value>
@@ -769,9 +762,6 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG is voorzien van de meest actuele versie</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Verbinding mislukt!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Sluiten Interne Applicatie mislukt!</value>
@@ -1188,7 +1178,7 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="strPanelName" xml:space="preserve">
     <value>Paneel Naam</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Beveiligen met een wachtwoord</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
@@ -1520,9 +1510,6 @@ Bericht:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy test geslaagd!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Verbinding mislukt!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Sluiten PuTTy proces mislukt!</value>

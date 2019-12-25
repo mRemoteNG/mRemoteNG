@@ -16,6 +16,7 @@ using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Security.SymmetricEncryption
@@ -115,7 +116,8 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
+                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!",
+                                            nameof(password));
 
             if (secretMessage == null || secretMessage.Length == 0)
                 throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
@@ -170,6 +172,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 //Write Cipher Text
                 binaryWriter.Write(cipherText);
             }
+
             return combinedStream.ToArray();
         }
 
@@ -180,21 +183,27 @@ namespace mRemoteNG.Security.SymmetricEncryption
             return decryptedText;
         }
 
-        private string SimpleDecryptWithPassword(string encryptedMessage, SecureString decryptionKey, int nonSecretPayloadLength = 0)
+        private string SimpleDecryptWithPassword(string encryptedMessage,
+                                                 SecureString decryptionKey,
+                                                 int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
                 return ""; //throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
-            var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(), nonSecretPayloadLength);
+            var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(),
+                                                      nonSecretPayloadLength);
             return plainText == null ? null : _encoding.GetString(plainText);
         }
 
-        private byte[] SimpleDecryptWithPassword(byte[] encryptedMessage, string password, int nonSecretPayloadLength = 0)
+        private byte[] SimpleDecryptWithPassword(byte[] encryptedMessage,
+                                                 string password,
+                                                 int nonSecretPayloadLength = 0)
         {
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
+                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!",
+                                            nameof(password));
 
             if (encryptedMessage == null || encryptedMessage.Length == 0)
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
@@ -227,13 +236,14 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
                 //Grab Nonce
                 var nonce = cipherReader.ReadBytes(NonceBitSize / 8);
-             
+
                 var parameters = new AeadParameters(new KeyParameter(key), MacBitSize, nonce, nonSecretPayload);
                 _aeadBlockCipher.Init(false, parameters);
 
                 //Decrypt Cipher Text
-                var cipherText = cipherReader.ReadBytes(encryptedMessage.Length - nonSecretPayloadLength - nonce.Length);
-                var plainText = new byte[_aeadBlockCipher.GetOutputSize(cipherText.Length)];  
+                var cipherText =
+                    cipherReader.ReadBytes(encryptedMessage.Length - nonSecretPayloadLength - nonce.Length);
+                var plainText = new byte[_aeadBlockCipher.GetOutputSize(cipherText.Length)];
 
                 try
                 {

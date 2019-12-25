@@ -5,37 +5,42 @@ using System.Web;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree.Root;
 using System.Text;
+
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.Putty
 {
     public abstract class AbstractPuttySessionsProvider
-	{
+    {
         public virtual RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo();
+
         protected virtual List<PuttySessionInfo> Sessions
         {
             get { return RootInfo.Children.OfType<PuttySessionInfo>().ToList(); }
         }
 
-	    #region Public Methods
+        #region Public Methods
+
         public abstract string[] GetSessionNames(bool raw = false);
-		public abstract PuttySessionInfo GetSession(string sessionName);
-		
-		public virtual IEnumerable<PuttySessionInfo> GetSessions()
-		{
-		    var sessionNamesFromProvider = GetSessionNames(true);
+        public abstract PuttySessionInfo GetSession(string sessionName);
+
+        public virtual IEnumerable<PuttySessionInfo> GetSessions()
+        {
+            var sessionNamesFromProvider = GetSessionNames(true);
             foreach (var sessionName in GetSessionNamesToAdd(sessionNamesFromProvider))
-			{
-				var sessionInfo = GetSession(sessionName);
-			    AddSession(sessionInfo);
-			}
-		    foreach (var session in GetSessionToRemove(sessionNamesFromProvider))
-		    {
-		        RemoveSession(session);
-		    }
+            {
+                var sessionInfo = GetSession(sessionName);
+                AddSession(sessionInfo);
+            }
+
+            foreach (var session in GetSessionToRemove(sessionNamesFromProvider))
+            {
+                RemoveSession(session);
+            }
+
             RootInfo.SortRecursive();
-			return Sessions;
-		}
+            return Sessions;
+        }
 
         private IEnumerable<string> GetSessionNamesToAdd(IEnumerable<string> sessionNamesFromProvider)
         {
@@ -47,7 +52,9 @@ namespace mRemoteNG.Config.Putty
         private IEnumerable<PuttySessionInfo> GetSessionToRemove(IEnumerable<string> sessionNamesFromProvider)
         {
             var currentlyKnownSessionNames = Sessions.Select(session => session.Name);
-            var normalizedSessionNames = sessionNamesFromProvider.Select(name => HttpUtility.UrlDecode(name, Encoding.GetEncoding("iso-8859-1")));
+            var normalizedSessionNames =
+                sessionNamesFromProvider.Select(name =>
+                                                    HttpUtility.UrlDecode(name, Encoding.GetEncoding("iso-8859-1")));
             var sessionNamesToRemove = currentlyKnownSessionNames.Except(normalizedSessionNames);
             return Sessions.Where(session => sessionNamesToRemove.Contains(session.Name));
         }
@@ -57,29 +64,43 @@ namespace mRemoteNG.Config.Putty
             if (string.IsNullOrEmpty(sessionInfo?.Name) || Sessions.Any(child => child.Name == sessionInfo.Name))
                 return;
             RootInfo.AddChild(sessionInfo);
-            RaisePuttySessionCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, sessionInfo));
+            RaisePuttySessionCollectionChangedEvent(
+                                                    new
+                                                        NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
+                                                                                         sessionInfo));
         }
 
         protected virtual void RemoveSession(PuttySessionInfo sessionInfo)
         {
             if (!Sessions.Contains(sessionInfo)) return;
             RootInfo.RemoveChild(sessionInfo);
-            RaisePuttySessionCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, sessionInfo));
+            RaisePuttySessionCollectionChangedEvent(
+                                                    new
+                                                        NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                                                                                         sessionInfo));
         }
-		
-		public virtual void StartWatcher() { }
-		
-		public virtual void StopWatcher() { }
+
+        public virtual void StartWatcher()
+        {
+        }
+
+        public virtual void StopWatcher()
+        {
+        }
+
         #endregion
-		
-		public delegate void PuttySessionChangedEventHandler(object sender, PuttySessionChangedEventArgs e);
+
+        public delegate void PuttySessionChangedEventHandler(object sender, PuttySessionChangedEventArgs e);
+
         public event PuttySessionChangedEventHandler PuttySessionChanged;
-		protected virtual void RaiseSessionChangedEvent(PuttySessionChangedEventArgs args)
-		{
+
+        protected virtual void RaiseSessionChangedEvent(PuttySessionChangedEventArgs args)
+        {
             PuttySessionChanged?.Invoke(this, args);
-		}
+        }
 
         public event NotifyCollectionChangedEventHandler PuttySessionsCollectionChanged;
+
         protected void RaisePuttySessionCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
         {
             PuttySessionsCollectionChanged?.Invoke(this, args);

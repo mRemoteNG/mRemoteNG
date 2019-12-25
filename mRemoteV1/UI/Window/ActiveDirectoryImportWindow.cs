@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Container;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Window
 {
@@ -24,10 +25,15 @@ namespace mRemoteNG.UI.Window
         private new void ApplyTheme()
         {
             base.ApplyTheme();
+            if (ActiveDirectoryTree.Controls.Count < 1) return;
+            if (!(ActiveDirectoryTree.Controls[0] is TreeView tv)) return;
+            var tm = ThemeManager.getInstance();
+            if (!tm.ActiveAndExtended) return;
+            tv.BackColor = tm.ActiveTheme.ExtendedPalette.getColor("List_Background");
+            tv.ForeColor = tm.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
         }
 
         #region Private Methods
-         
 
         #region Event Handlers
 
@@ -37,7 +43,7 @@ namespace mRemoteNG.UI.Window
             txtDomain.Text = _currentDomain;
             ActiveDirectoryTree.Domain = _currentDomain;
             EnableDisableImportButton();
-            
+
             // Domain doesn't refresh on load, so it defaults to DOMAIN without this...
             ChangeDomain();
         }
@@ -51,7 +57,7 @@ namespace mRemoteNG.UI.Window
             else
                 importDestination = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes.First();
 
-            Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, importDestination, chkSubOU.Checked);
+            Import.ImportFromActiveDirectory(ActiveDirectoryTree.AdPath, importDestination, chkSubOU.Checked);
         }
 
         /*
@@ -74,6 +80,7 @@ namespace mRemoteNG.UI.Window
             ChangeDomain();
         }
 
+        // ReSharper disable once UnusedParameter.Local
         private void ActiveDirectoryTree_ADPathChanged(object sender)
         {
             EnableDisableImportButton();
@@ -99,7 +106,7 @@ namespace mRemoteNG.UI.Window
 
         private void EnableDisableImportButton()
         {
-            btnImport.Enabled = !string.IsNullOrEmpty(ActiveDirectoryTree.ADPath);
+            btnImport.Enabled = !string.IsNullOrEmpty(ActiveDirectoryTree.AdPath);
         }
 
         #endregion

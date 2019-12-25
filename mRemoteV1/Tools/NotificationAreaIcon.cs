@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -37,7 +37,7 @@ namespace mRemoteNG.Tools
                 _cMen = new ContextMenuStrip
                 {
                     Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                        System.Drawing.GraphicsUnit.Point, Convert.ToByte(0)),
+                                                   System.Drawing.GraphicsUnit.Point, Convert.ToByte(0)),
                     RenderMode = ToolStripRenderMode.Professional
                 };
                 _cMen.Items.AddRange(new ToolStripItem[] {_cMenCons, cMenSep1, cMenExit});
@@ -85,16 +85,24 @@ namespace mRemoteNG.Tools
             };
 
             // ReSharper disable once CoVariantArrayConversion
-            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionsService.ConnectionTreeModel).ToArray();
+            ToolStripItem[] rootMenuItems = menuItemsConverter
+                                            .CreateToolStripDropDownItems(Runtime.ConnectionsService
+                                                                                 .ConnectionTreeModel).ToArray();
             _cMenCons.DropDownItems.AddRange(rootMenuItems);
         }
 
         private static void nI_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (FrmMain.Visible)
+            {
                 HideForm();
+                FrmMain.ShowInTaskbar = false;
+            }
             else
+            {
                 ShowForm();
+                FrmMain.ShowInTaskbar = true;
+            }
         }
 
         private static void ShowForm()
@@ -119,7 +127,7 @@ namespace mRemoteNG.Tools
             if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
             if (FrmMain.Visible == false)
                 ShowForm();
-            _connectionInitiator.OpenConnection((ConnectionInfo) ((ToolStripMenuItem) sender).Tag);
+            _connectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
         }
 
         private static void cMenExit_Click(object sender, EventArgs e)

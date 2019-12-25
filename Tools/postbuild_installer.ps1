@@ -33,11 +33,12 @@ Format-Table -AutoSize -Wrap -InputObject @{
     "TargetDir" = $TargetDir
     "TargetFileName" = $TargetFileName
     "ConfigurationName" = $ConfigurationName
+    "CertificatePath" = $CertificatePath
     "ExcludeFromSigning" = $ExcludeFromSigning
 }
 
 
-& "$PSScriptRoot\sign_binaries.ps1" -TargetDir $TargetDir -CertificatePath $CertificatePath -CertificatePassword $CertificatePassword -ConfigurationName $ConfigurationName -Exclude $ExcludeFromSigning
-& "$PSScriptRoot\verify_binary_signatures.ps1" -TargetDir $TargetDir -ConfigurationName $ConfigurationName -CertificatePath $CertificatePath
+& "$PSScriptRoot\sign_binaries.ps1" -TargetDir $TargetDir -CertificatePath $CertificatePath -CertificatePassword $CertificatePassword -ConfigurationName $ConfigurationName -Exclude $ExcludeFromSigning -SolutionDir $SolutionDir
+& "$PSScriptRoot\verify_binary_signatures.ps1" -TargetDir $TargetDir -ConfigurationName $ConfigurationName -CertificatePath $CertificatePath -SolutionDir $SolutionDir
 & "$PSScriptRoot\rename_installer_with_version.ps1" -SolutionDir $SolutionDir
 & "$PSScriptRoot\copy_release_installer.ps1" -SourcePath $TargetDir -DestinationDir (Join-Path -Path $SolutionDir -ChildPath "Release")

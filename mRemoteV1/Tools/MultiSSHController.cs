@@ -8,7 +8,7 @@ using mRemoteNG.Connection.Protocol;
 
 namespace mRemoteNG.Tools
 {
-	public class MultiSSHController
+    public class MultiSSHController
     {
         private readonly ArrayList processHandlers = new ArrayList();
         private readonly ArrayList quickConnectConnections = new ArrayList();
@@ -60,13 +60,15 @@ namespace mRemoteNG.Tools
             {
                 return;
             }
+
             foreach (PuttyBase proc in processHandlers)
             {
                 NativeMethods.PostMessage(proc.PuttyHandle, keyType, new IntPtr(keyData), new IntPtr(0));
             }
         }
 
-#region Event Processors
+        #region Event Processors
+
         private void refreshActiveConnections(object sender, EventArgs e)
         {
             processHandlers.Clear();
@@ -75,7 +77,8 @@ namespace mRemoteNG.Tools
                 processHandlers.AddRange(ProcessOpenConnections(connection));
             }
 
-            var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
+            var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList()
+                                                   .Where(item => item.OpenConnections.Count > 0);
 
             foreach (var connection in connectionTreeConnections)
             {
@@ -85,7 +88,7 @@ namespace mRemoteNG.Tools
 
         private void processKeyPress(object sender, KeyEventArgs e)
         {
-            if (!(sender is TextBox txtMultiSSH)) return;            
+            if (!(sender is TextBox txtMultiSSH)) return;
 
             if (processHandlers.Count == 0)
             {
@@ -96,14 +99,16 @@ namespace mRemoteNG.Tools
             if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
             {
                 e.SuppressKeyPress = true;
-                if (e.KeyCode == Keys.Up && previousCommandIndex - 1 >= 0)
+                switch (e.KeyCode)
                 {
-                    previousCommandIndex -= 1;
-                }
-
-                if (e.KeyCode == Keys.Down && previousCommandIndex + 1 < previousCommands.Count)
-                {
-                    previousCommandIndex += 1;
+                    case Keys.Up when previousCommandIndex - 1 >= 0:
+                        previousCommandIndex -= 1;
+                        break;
+                    case Keys.Down when previousCommandIndex + 1 < previousCommands.Count:
+                        previousCommandIndex += 1;
+                        break;
+                    default:
+                        return;
                 }
 
                 txtMultiSSH.Text = previousCommands[previousCommandIndex].ToString();
@@ -121,6 +126,7 @@ namespace mRemoteNG.Tools
             {
                 SendAllKeystrokes(NativeMethods.WM_CHAR, Convert.ToByte(chr1));
             }
+
             SendAllKeystrokes(NativeMethods.WM_KEYDOWN, 13); // Enter = char13
         }
 
@@ -133,6 +139,7 @@ namespace mRemoteNG.Tools
             {
                 previousCommands.Add(txtMultiSSH.Text.Trim());
             }
+
             if (previousCommands.Count >= CommandHistoryLength)
             {
                 previousCommands.RemoveAt(0);
@@ -141,6 +148,7 @@ namespace mRemoteNG.Tools
             previousCommandIndex = previousCommands.Count - 1;
             txtMultiSSH.Clear();
         }
-#endregion
+
+        #endregion
     }
 }

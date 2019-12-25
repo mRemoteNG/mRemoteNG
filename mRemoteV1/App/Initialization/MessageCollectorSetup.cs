@@ -8,7 +8,8 @@ namespace mRemoteNG.App.Initialization
 {
     public class MessageCollectorSetup
     {
-        public static void SetupMessageCollector(MessageCollector messageCollector, IList<IMessageWriter> messageWriterList)
+        public static void SetupMessageCollector(MessageCollector messageCollector,
+                                                 IList<IMessageWriter> messageWriterList)
         {
             messageCollector.CollectionChanged += (o, args) =>
             {
@@ -37,34 +38,37 @@ namespace mRemoteNG.App.Initialization
         private static IMessageWriter BuildTextLogMessageWriter()
         {
             return new MessageTypeFilterDecorator(
-                new LogMessageTypeFilteringOptions(),
-                new TextLogMessageWriter(Logger.Instance)
-            );
+                                                  new LogMessageTypeFilteringOptions(),
+                                                  new TextLogMessageWriter(Logger.Instance)
+                                                 );
         }
 
         private static IMessageWriter BuildNotificationPanelMessageWriter()
         {
-            
             return new OnlyLogMessageFilter(
-                new MessageTypeFilterDecorator(
-                    new NotificationPanelMessageFilteringOptions(),
-                    new MessageFocusDecorator(
-                        Windows.ErrorsForm,
-                        new NotificationPanelSwitchOnMessageFilteringOptions(),
-                        new NotificationPanelMessageWriter(Windows.ErrorsForm)
-                    )
-                )
-            );
+                                            new MessageTypeFilterDecorator(
+                                                                           new
+                                                                               NotificationPanelMessageFilteringOptions(),
+                                                                           new MessageFocusDecorator(
+                                                                                                     Windows.ErrorsForm,
+                                                                                                     new
+                                                                                                         NotificationPanelSwitchOnMessageFilteringOptions(),
+                                                                                                     new
+                                                                                                         NotificationPanelMessageWriter(Windows
+                                                                                                                                            .ErrorsForm)
+                                                                                                    )
+                                                                          )
+                                           );
         }
 
         private static IMessageWriter BuildPopupMessageWriter()
         {
             return new OnlyLogMessageFilter(
-                new MessageTypeFilterDecorator(
-                    new PopupMessageFilteringOptions(),
-                    new PopupMessageWriter()
-                )
-            );
+                                            new MessageTypeFilterDecorator(
+                                                                           new PopupMessageFilteringOptions(),
+                                                                           new PopupMessageWriter()
+                                                                          )
+                                           );
         }
     }
 }

@@ -2,14 +2,16 @@
 using System.Threading;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Controls
 {
-    public class ConnectionTreeTests
+	public class ConnectionTreeTests
 	{
 		private ConnectionTreeSearchTextFilter _filter;
 		private ConnectionTree _connectionTree;
@@ -73,8 +75,9 @@ namespace mRemoteNGTests.UI.Controls
 	        connectionTreeModel.AddRootNode(puttyRoot);
 
 	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
 
-	        _connectionTree.SelectedObject = puttyRoot;
+			_connectionTree.SelectedObject = puttyRoot;
 	        _connectionTree.AddConnection();
 
 	        Assert.That(puttyRoot.Children, Is.Empty);
@@ -91,8 +94,9 @@ namespace mRemoteNGTests.UI.Controls
 	        connectionTreeModel.AddRootNode(puttyRoot);
 
 	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
 
-	        _connectionTree.SelectedObject = puttyRoot;
+			_connectionTree.SelectedObject = puttyRoot;
 	        _connectionTree.AddFolder();
 
 	        Assert.That(puttyRoot.Children, Is.Empty);
@@ -106,8 +110,9 @@ namespace mRemoteNGTests.UI.Controls
 	        var root = new RootNodeInfo(RootNodeType.Connection);
 	        connectionTreeModel.AddRootNode(root);
 	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
 
-	        _connectionTree.SelectedObject = root;
+			_connectionTree.SelectedObject = root;
             _connectionTree.DuplicateSelectedNode();
 
 	        Assert.That(connectionTreeModel.RootNodes, Has.One.Items);
@@ -115,14 +120,33 @@ namespace mRemoteNGTests.UI.Controls
 
 	    [Test]
 	    [Apartment(ApartmentState.STA)]
+	    public void CanDuplicateConnectionNode()
+	    {
+		    var connectionTreeModel = new ConnectionTreeModel();
+		    var root = new RootNodeInfo(RootNodeType.Connection);
+			var con1 = new ConnectionInfo();
+			root.AddChild(con1);
+		    connectionTreeModel.AddRootNode(root);
+		    _connectionTree.ConnectionTreeModel = connectionTreeModel;
+		    _connectionTree.ExpandAll();
+
+			_connectionTree.SelectedObject = con1;
+		    _connectionTree.DuplicateSelectedNode();
+
+		    Assert.That(root.Children, Has.Exactly(2).Items);
+	    }
+
+		[Test]
+	    [Apartment(ApartmentState.STA)]
 	    public void CannotDuplicateRootPuttyNode()
 	    {
 	        var connectionTreeModel = new ConnectionTreeModel();
 	        var puttyRoot = new RootNodeInfo(RootNodeType.PuttySessions);
 	        connectionTreeModel.AddRootNode(puttyRoot);
 	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
 
-	        _connectionTree.SelectedObject = puttyRoot;
+			_connectionTree.SelectedObject = puttyRoot;
 	        _connectionTree.DuplicateSelectedNode();
 
 	        Assert.That(connectionTreeModel.RootNodes, Has.One.Items);
@@ -154,8 +178,9 @@ namespace mRemoteNGTests.UI.Controls
 	        var puttyRoot = new RootNodeInfo(RootNodeType.PuttySessions);
 	        connectionTreeModel.AddRootNode(puttyRoot);
 	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
 
-            _connectionTree.SelectedObject = null;
+			_connectionTree.SelectedObject = null;
 	        _connectionTree.DuplicateSelectedNode();
 
 	        Assert.That(connectionTreeModel.RootNodes, Has.One.Items);
@@ -194,9 +219,105 @@ namespace mRemoteNGTests.UI.Controls
 	        connectionTreeModel.AddRootNode(root);
 
 	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
-	        _connectionTree.SelectedObject = null;
+	        _connectionTree.ExpandAll();
+			_connectionTree.SelectedObject = null;
 
 	        Assert.DoesNotThrow(() => _connectionTree.RenameSelectedNode());
         }
-    }
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void CopyHostnameCopiesTheHostnameOfTheSelectedConnection()
+        {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+			var con1 = new ConnectionInfo {Hostname = "MyHost"};
+			root.AddChild(con1);
+			connectionTreeModel.AddRootNode(root);
+
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+			_connectionTree.ExpandAll();
+	        _connectionTree.SelectedObject = con1;
+
+	        var clipboard = Substitute.For<IClipboard>();
+			_connectionTree.CopyHostnameSelectedNode(clipboard);
+			clipboard.Received(1).SetText(con1.Hostname);
+        }
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void CopyHostnameCopiesTheNodeNameOfTheSelectedContainer()
+        {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+	        var container = new ContainerInfo { Name = "MyFolder" };
+	        root.AddChild(container);
+	        connectionTreeModel.AddRootNode(root);
+
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
+			_connectionTree.SelectedObject = container;
+
+	        var clipboard = Substitute.For<IClipboard>();
+			_connectionTree.CopyHostnameSelectedNode(clipboard);
+			clipboard.Received(1).SetText(container.Name);
+		}
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void CopyHostnameDoesNotCopyAnythingIfNoNodeSelected()
+        {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+	        var con1 = new ConnectionInfo { Hostname = "MyHost" };
+	        root.AddChild(con1);
+	        connectionTreeModel.AddRootNode(root);
+
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
+			_connectionTree.SelectedObject = null;
+
+			var clipboard = Substitute.For<IClipboard>();
+			_connectionTree.CopyHostnameSelectedNode(clipboard);
+			clipboard.DidNotReceiveWithAnyArgs().SetText("");
+        }
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void CopyHostnameDoesNotCopyAnythingIfHostnameOfSelectedConnectionIsEmpty()
+        {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+	        var con1 = new ConnectionInfo { Hostname = string.Empty };
+	        root.AddChild(con1);
+	        connectionTreeModel.AddRootNode(root);
+
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
+			_connectionTree.SelectedObject = con1;
+
+	        var clipboard = Substitute.For<IClipboard>();
+			_connectionTree.CopyHostnameSelectedNode(clipboard);
+			clipboard.DidNotReceiveWithAnyArgs().SetText("");
+		}
+
+        [Test]
+        [Apartment(ApartmentState.STA)]
+        public void CopyHostnameDoesNotCopyAnythingIfNameOfSelectedContainerIsEmpty()
+        {
+	        var connectionTreeModel = new ConnectionTreeModel();
+	        var root = new RootNodeInfo(RootNodeType.Connection);
+	        var con1 = new ContainerInfo { Name = string.Empty};
+	        root.AddChild(con1);
+	        connectionTreeModel.AddRootNode(root);
+
+	        _connectionTree.ConnectionTreeModel = connectionTreeModel;
+	        _connectionTree.ExpandAll();
+			_connectionTree.SelectedObject = con1;
+
+	        var clipboard = Substitute.For<IClipboard>();
+			_connectionTree.CopyHostnameSelectedNode(clipboard);
+			clipboard.DidNotReceiveWithAnyArgs().SetText("");
+		}
+	}
 }

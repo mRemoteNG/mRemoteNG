@@ -4,15 +4,16 @@
 [![Join the chat at https://gitter.im/mRemoteNG/PublicChat/](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mRemoteNG/PublicChat)
 [![PayPal](https://img.shields.io/badge/%24-PayPal-blue.svg)](https://www.paypal.me/DavidSparer)
 
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge)](https://bestpractices.coreinfrastructure.org/projects/529)
+[![Github Releases](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/total.svg?style=flat-square)](https://github.com/mRemoteNG/mRemoteNG/releases/)
 
-[![Issues In Progress](https://badge.waffle.io/mRemoteNG/mRemoteNG.png?label=In%20Progress&title=In%20Progress)](https://waffle.io/mRemoteNG/mRemoteNG)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge)](https://bestpractices.coreinfrastructure.org/projects/529)
+[![Documentation Status](https://readthedocs.org/projects/mremoteng/badge/?version=latest)](https://mremoteng.readthedocs.io/en/latest/?badge=latest)
 
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
-| Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.11/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.11) |
-| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.12/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.12) |
-| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.12/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.12) |
+| Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
+| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
+| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
 
 mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
 
@@ -37,23 +38,20 @@ For a detailed feature list and general usage support, refer to the [User Manual
 
 ## Installation
 
-Before installing make sure you have all the required [prerequisites](https://github.com/mRemoteNG/mRemoteNG/wiki/Prerequisites).
+mRemoteNG is supported on Windows 7 or later. Before installing make sure you fullfill all the [minimum requirements](https://mremoteng.readthedocs.io/en/latest/installation/minimum_requirements.html).
 
 mRemoteNG is available as a redistributable msi package, and can be downloaded from the following locations:
 * [GitHub](https://github.com/mRemoteNG/mRemoteNG/releases)
 * [Project Website](https://mremoteng.org/download)
-
-mRemoteNG is supported on Windows 7 or later.
-Windows 7 and Windows Server 2008 installations must ensure the [listed required updates](https://github.com/mRemoteNG/mRemoteNG/wiki/Prerequisites#full-list-of-required-windows-updates-for-windows-7--server-2008-clients) are installed and active.
 
 ## Contribute
 
 If you find mRemoteNG useful and would like to contribute, it would be greatly appreciated. When you contribute, you make it possible for the team to cover the costs of producing mRemoteNG.
 
 ### Submit Code
-Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/Development) on how to configure your development environment and submit a pull request.
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to configure your development environment and submit a pull request.
 
 ### Translate
-Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki/How%20to%20Help%20Translating%20mRemoteNG) on how to help make mRemoteNG a polygot
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to help make mRemoteNG a polyglot
 
 [![Developed with ReSharper](https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png)](https://www.jetbrains.com/resharper/)

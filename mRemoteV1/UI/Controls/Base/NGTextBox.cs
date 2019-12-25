@@ -1,6 +1,7 @@
-﻿using mRemoteNG.Themes;
-using System;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls.Base
 {
@@ -8,57 +9,55 @@ namespace mRemoteNG.UI.Controls.Base
     //There are some glitches on the initial draw of some controls
     public class NGTextBox : TextBox
     {
-        private ThemeManager _themeManager; 
+        private ThemeManager _themeManager;
 
-        public  NGTextBox()
-        { 
+        public NGTextBox()
+        {
+            InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
 
         protected override void OnCreateControl()
         {
-            base.OnCreateControl(); 
+            base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveAndExtended) return;
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
+            BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor(ReadOnly
+                                                                               ? "TextBox_Disabled_Background"
+                                                                               : "TextBox_Background");
             Invalidate();
         }
-         
-
 
         protected override void OnEnabledChanged(EventArgs e)
         {
             _themeManager = ThemeManager.getInstance();
-            if (_themeManager.ThemingActive)
+            _themeManager = ThemeManager.getInstance();
+            if (_themeManager.ActiveAndExtended)
             {
-                _themeManager = ThemeManager.getInstance();
-                if(_themeManager.ThemingActive)
-                { 
-                    if (Enabled)
-                    {
-                        ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
-                        BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
-                    }
-                    else
-                    {
-                        BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
-                    }
+                if (Enabled)
+                {
+                    ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
                 }
-            }                
+                else
+                {
+                    BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Background");
+                }
+            }
+
             base.OnEnabledChanged(e);
             Invalidate();
         }
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // NGTextBox
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResumeLayout(false);
-
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ResumeLayout(false);
         }
     }
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -313,7 +313,7 @@
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Σύνδεση με "{0}" μέσω "{1}" από το χρήστη "{2}" (Περιγραφή: «{3}»? Χρήστη το πεδίο: «{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Η συνδεση απέτυχε!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">

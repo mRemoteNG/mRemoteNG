@@ -1,7 +1,6 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
-
 
 
 // General Information about an assembly is controlled through the following
@@ -12,9 +11,9 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("mRemoteNG")]
 [assembly: AssemblyDescription("Multi-protocol remote connections manager")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("The mRemoteNG Team")]
 [assembly: AssemblyProduct("mRemoteNG")]
-[assembly: AssemblyCopyright("Copyright © 2018 mRemoteNG Dev Team; 2010-2013 Riley McArdle; 2007-2009 Felix Deimel")]
+[assembly: AssemblyCopyright("2019 mRemoteNG Dev Team, 2010-2013 Riley McArdle, 2007-2009 Felix Deimel")]
 [assembly: AssemblyTrademark("")]
 
 [assembly: ComVisible(false)]
@@ -33,5 +32,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // <Assembly: AssemblyVersion("1.0.*")>
 
-[assembly: AssemblyVersion("1.77.0.*")]
+[assembly: AssemblyVersion("1.77.1.*")]
 [assembly: NeutralResourcesLanguage("en")]

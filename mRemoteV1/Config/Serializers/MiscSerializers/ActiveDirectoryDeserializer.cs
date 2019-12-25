@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using mRemoteNG.App;
 using mRemoteNG.Config.Import;
 using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -55,7 +56,7 @@ namespace mRemoteNG.Config.Serializers
                     ldapSearcher.SearchRoot = new DirectoryEntry(ldapPath);
                     ldapSearcher.Filter = ldapFilter;
                     ldapSearcher.SearchScope = SearchScope.OneLevel;
-                    ldapSearcher.PropertiesToLoad.AddRange(new[] { "securityEquals", "cn", "objectClass" });
+                    ldapSearcher.PropertiesToLoad.AddRange(new[] {"securityEquals", "cn", "objectClass"});
 
                     var ldapResults = ldapSearcher.FindAll();
                     foreach (SearchResult ldapResult in ldapResults)
@@ -65,7 +66,7 @@ namespace mRemoteNG.Config.Serializers
                             if (directoryEntry.Properties["objectClass"].Contains("organizationalUnit"))
                             {
                                 // check/continue here so we don't create empty connection objects
-                                if(!_importSubOu) continue;
+                                if (!_importSubOu) continue;
 
                                 // TODO - this is a circular call. A deserializer should not call an importer
                                 ActiveDirectoryImporter.Import(ldapResult.Path, parentContainer, _importSubOu);
@@ -79,7 +80,8 @@ namespace mRemoteNG.Config.Serializers
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.", ex);
+                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.",
+                                                             ex);
             }
         }
 
@@ -93,7 +95,8 @@ namespace mRemoteNG.Config.Serializers
             {
                 Name = displayName,
                 Hostname = hostName,
-                Description = description
+                Description = description,
+                Protocol = ProtocolType.RDP
             };
             newConnectionInfo.Inheritance.TurnOnInheritanceCompletely();
             newConnectionInfo.Inheritance.Description = false;

@@ -504,7 +504,7 @@ VncSharp Control verze {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Připojení k "{0}" přes "{1}" bylo provedeno uživatelem "{2}" (Popis: "{3}"; Login: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Připojení selhalo!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -653,13 +653,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Začifrování se nezdařilo. {0}</value>
-  </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>V nastavení politik zabezepčení systému Windows je aktivována možnost "System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing" (Systémová kryptografie: Pro šifrování, hashe a podpisy využívat algoritmy odpovídají FIPS") Toto nastavení není kompatibilní s {0}.
-
-Pro další informace  navštivte článek podpory fy. Microsoft na http://support.microsoft.com/kb/811833
-
-{0} se nyní ukončí.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Chyby</value>
@@ -874,9 +867,6 @@ Pro další informace  navštivte článek podpory fy. Microsoft na http://suppo
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG je aktuální</value>
   </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Spojení selhalo!</value>
-  </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Zrušení procesu Int App process selhalo!</value>
   </data>
@@ -938,7 +928,7 @@ Pro další informace  navštivte článek podpory fy. Microsoft na http://suppo
     <value>Možnosti:</value>
   </data>
   <data name="strLabelPassword" xml:space="preserve">
-    <value>Heso:</value>
+    <value>Heslo:</value>
   </data>
   <data name="strLabelPort" xml:space="preserve">
     <value>Port:</value>
@@ -1340,7 +1330,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="strPanelName" xml:space="preserve">
     <value>Název panelu</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Chránit heslem</value>
   </data>
   <data name="strPasswordStatusMustMatch" xml:space="preserve">
@@ -1693,9 +1683,6 @@ Zpráva:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Test proxy uspěl!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Spojení selhalo!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Odstranění procesu PuTTY selhalo!</value>
@@ -2497,21 +2484,16 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
     <value>Logovat do adresáře kde je aplikace umístěna.</value>
   </data>
   <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
-    <value>+</value>
-  </data>
-  <data name="strPropertyNameRedirectMicrophones" xml:space="preserve">
-    <value>+</value>
-  </data>
-  <data name="strRDPMicrophonesLeaveAtLocalComputer" xml:space="preserve">
-    <value>+</value>
-  </data>
-  <data name="strRDPMicrophonesSendToRemoteComputer" xml:space="preserve">
-    <value>+</value>
-  </data>
-  <data name="strAssignedCredential" xml:space="preserve">
-    <value>Přiřazené přihlašovací informace</value>
-  </data>
-  <data name="strUseAdmPwd" xml:space="preserve">
-    <value>Získat heslo pomocí AdmPwd.E</value>
-  </data>
-</root>
++    <value>Zvolte jak bude přesměrováno vstupní zvukové zařízení</value>
++ </data>
++ <data name="strPropertyNameRedirectMicrophones" xml:space="preserve">
++    <value>Vstupní zvuková zařízení</value>
++ </data>
++ <data name="strRDPMicrophonesLeaveAtLocalComputer" xml:space="preserve">
++    <value>Ponechat vstup na místním počítači</value>
++ </data>
++ <data name="strRDPMicrophonesSendToRemoteComputer" xml:space="preserve">
++    <value>Vstup zaslat na vzdálený počítač</value>
++ </data><data name="strAssignedCredential" xml:space="preserve">
+     <value>Přiřazené přihlašovací informace</value>
+  </data></root>

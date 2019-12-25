@@ -41,8 +41,10 @@ namespace mRemoteNG.UI.Forms
             {
                 _handledForm.WindowState = FormWindowState.Normal;
             }
+
             _handledForm.WindowState = FormWindowState.Maximized;
         }
+
         private void ExitFullscreen()
         {
             _handledForm.FormBorderStyle = _savedBorderStyle;

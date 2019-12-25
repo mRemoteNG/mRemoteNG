@@ -43,7 +43,8 @@ namespace mRemoteNG.App.Initialization
 
             try
             {
-                foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem WHERE Primary=True").Get())
+                foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem WHERE Primary=True")
+                    .Get())
                 {
                     var managementObject = (ManagementObject)o;
                     osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
@@ -54,6 +55,7 @@ namespace mRemoteNG.App.Initialization
             {
                 _messageCollector.AddExceptionMessage("Error retrieving operating system information from WMI.", ex);
             }
+
             var osData = string.Join(" ", osVersion, servicePack);
             return osData;
         }
@@ -65,6 +67,7 @@ namespace mRemoteNG.App.Initialization
             {
                 servicePack = $"Service Pack {servicePackNumber}";
             }
+
             return servicePack;
         }
 
@@ -73,7 +76,8 @@ namespace mRemoteNG.App.Initialization
             var architecture = string.Empty;
             try
             {
-                foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_Processor WHERE DeviceID=\'CPU0\'").Get())
+                foreach (var o in new ManagementObjectSearcher("SELECT AddressWidth FROM Win32_Processor WHERE DeviceID=\'CPU0\'")
+                    .Get())
                 {
                     var managementObject = (ManagementObject)o;
                     var addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"));
@@ -84,6 +88,7 @@ namespace mRemoteNG.App.Initialization
             {
                 _messageCollector.AddExceptionMessage("Error retrieving operating system address width from WMI.", ex);
             }
+
             return architecture;
         }
 
@@ -110,7 +115,8 @@ namespace mRemoteNG.App.Initialization
 
         private void LogCultureData()
         {
-            var data = $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}";
+            var data =
+                $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}";
             _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }
     }

@@ -1,6 +1,8 @@
 ﻿namespace mRemoteNG.Themes
 {
-
+    using System.Drawing;
+    using UI.Tabs;
+    using WeifenLuo.WinFormsUI.Docking;
     using WeifenLuo.WinFormsUI.ThemeVS2015;
 
 
@@ -16,6 +18,29 @@
             Measures.AutoHideSplitterSize = 3;
             Measures.DockPadding = 2;
             ShowAutoHideContentOnHover = false;
+        }
+    }
+
+    public class MremoteDockPaneStripFactory : DockPanelExtender.IDockPaneStripFactory
+    {
+        public DockPaneStripBase CreateDockPaneStrip(DockPane pane)
+        {
+            return new DockPaneStripNG(pane);
+        }
+    }
+
+    public class MremoteFloatWindowFactory : DockPanelExtender.IFloatWindowFactory
+    {
+        public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds)
+        {
+            var activeDocumentBounds = (dockPanel?.ActiveDocument as ConnectionTab)?.Bounds;
+
+            return new FloatWindowNG(dockPanel, pane, activeDocumentBounds ?? bounds);
+        }
+
+        public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane)
+        {
+            return new FloatWindowNG(dockPanel, pane);
         }
     }
 }

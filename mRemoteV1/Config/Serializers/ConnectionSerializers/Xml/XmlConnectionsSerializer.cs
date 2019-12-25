@@ -12,7 +12,8 @@ using System.Xml.Linq;
 
 namespace mRemoteNG.Config.Serializers.Xml
 {
-    public class XmlConnectionsSerializer : ISerializer<ConnectionTreeModel,string>, ISerializer<ConnectionInfo, string>
+    public class XmlConnectionsSerializer : ISerializer<ConnectionTreeModel, string>,
+                                            ISerializer<ConnectionInfo, string>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly ISerializer<ConnectionInfo, XElement> _connectionNodeSerializer;
@@ -20,7 +21,8 @@ namespace mRemoteNG.Config.Serializers.Xml
         public Version Version => _connectionNodeSerializer.Version;
         public bool UseFullEncryption { get; set; }
 
-        public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider, ISerializer<ConnectionInfo, XElement> connectionNodeSerializer)
+        public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider,
+                                        ISerializer<ConnectionInfo, XElement> connectionNodeSerializer)
         {
             _cryptographyProvider = cryptographyProvider;
             _connectionNodeSerializer = connectionNodeSerializer;
@@ -42,7 +44,8 @@ namespace mRemoteNG.Config.Serializers.Xml
             var xml = "";
             try
             {
-                var documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, _connectionNodeSerializer);
+                var documentCompiler =
+                    new XmlConnectionsDocumentCompiler(_cryptographyProvider, _connectionNodeSerializer);
                 var xmlDocument = documentCompiler.CompileDocument(serializationTarget, UseFullEncryption);
                 xml = WriteXmlToString(xmlDocument);
             }
@@ -50,13 +53,15 @@ namespace mRemoteNG.Config.Serializers.Xml
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("SaveToXml failed", ex);
             }
+
             return xml;
         }
 
         private static string WriteXmlToString(XNode xmlDocument)
         {
             string xmlString;
-            var xmlWriterSettings = new XmlWriterSettings { Indent = true, IndentChars = "    ", Encoding = Encoding.UTF8 };
+            var xmlWriterSettings = new XmlWriterSettings
+                {Indent = true, IndentChars = "    ", Encoding = Encoding.UTF8};
             var memoryStream = new MemoryStream();
             using (var xmlTextWriter = XmlWriter.Create(memoryStream, xmlWriterSettings))
             {
@@ -66,6 +71,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 xmlString = streamReader.ReadToEnd();
             }
+
             return xmlString;
         }
     }

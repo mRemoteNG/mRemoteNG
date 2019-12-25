@@ -7,7 +7,7 @@ using static System.IO.FileMode;
 
 namespace mRemoteNG.Tools
 {
-    internal class SecureTransfer
+    internal class SecureTransfer : IDisposable
     {
         private readonly string Host;
         private readonly string User;
@@ -24,7 +24,6 @@ namespace mRemoteNG.Tools
 
         public SecureTransfer()
         {
-            
         }
 
         public SecureTransfer(string host, string user, string pass, int port, SSHTransferProtocol protocol)
@@ -36,7 +35,13 @@ namespace mRemoteNG.Tools
             Protocol = protocol;
         }
 
-        public SecureTransfer(string host, string user, string pass, int port, SSHTransferProtocol protocol, string source, string dest)
+        public SecureTransfer(string host,
+            string user,
+            string pass,
+            int port,
+            SSHTransferProtocol protocol,
+            string source,
+            string dest)
         {
             Host = host;
             User = user;
@@ -49,7 +54,7 @@ namespace mRemoteNG.Tools
 
         public void Connect()
         {
-            if(Protocol == SSHTransferProtocol.SCP)
+            if (Protocol == SSHTransferProtocol.SCP)
             {
                 ScpClt = new ScpClient(Host, Port, User, Password);
                 ScpClt.Connect();
@@ -75,8 +80,48 @@ namespace mRemoteNG.Tools
             }
         }
 
-        public void Dispose()
+
+        public void Upload()
         {
+            if (Protocol == SSHTransferProtocol.SCP)
+            {
+                if (!ScpClt.IsConnected)
+                {
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                        Language.strSSHTransferFailed + Environment.NewLine +
+                        "SCP Not Connected!");
+                    return;
+                }
+
+                ScpClt.Upload(new FileInfo(SrcFile), $"{DstFile}");
+            }
+
+            if (Protocol == SSHTransferProtocol.SFTP)
+            {
+                if (!SftpClt.IsConnected)
+                {
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+                        Language.strSSHTransferFailed + Environment.NewLine +
+                        "SFTP Not Connected!");
+                    return;
+                }
+
+                asyncResult =
+                    (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}",
+                        asyncCallback);
+            }
+        }
+
+        public enum SSHTransferProtocol
+        {
+            SCP = 0,
+            SFTP = 1
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposing) return;
+
             if (Protocol == SSHTransferProtocol.SCP)
             {
                 ScpClt.Dispose();
@@ -88,34 +133,10 @@ namespace mRemoteNG.Tools
             }
         }
 
-        public void Upload()
+        public void Dispose()
         {
-            if (Protocol == SSHTransferProtocol.SCP)
-            {
-                if (!ScpClt.IsConnected)
-                {
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + "SCP Not Connected!");
-                    return;
-                }
-
-                ScpClt.Upload(new FileInfo(SrcFile), $"{DstFile}");
-            }
-
-            if (Protocol == SSHTransferProtocol.SFTP)
-            {
-                if (!SftpClt.IsConnected)
-                {
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + "SFTP Not Connected!");
-                    return;
-                }
-                asyncResult = (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}", asyncCallback);
-            }
-        }
-
-        public enum SSHTransferProtocol
-        {
-            SCP = 0,
-            SFTP = 1
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

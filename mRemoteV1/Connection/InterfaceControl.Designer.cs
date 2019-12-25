@@ -29,7 +29,6 @@ namespace mRemoteNG.Connection
         private void InitializeComponent()
 		{
 			components = new System.ComponentModel.Container();
-			//Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		}
 	}
 }

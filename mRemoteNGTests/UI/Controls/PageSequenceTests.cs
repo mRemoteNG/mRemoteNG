@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.UI.Controls.PageSequence;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Controls

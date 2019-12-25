@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -457,7 +457,7 @@ VncSharp Control 版本 {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>使用者「{2}」透過「{1}」發佈連線到「{0}」 (描述: 「{3}」，使用者欄位: 「{4}」)</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>連線失敗!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -591,13 +591,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>加密失敗。 {0}</value>
-  </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Windows 安全性設定，「系統加密編譯: 使用 FIPS 相容演算法於加密，雜湊，以及簽章」已啟用。 此設定與 {0} 不相容。
-
-更多資訊請查看 Microsoft Support 文章於 http://support.microsoft.com/kb/811833？
-
-{0} 將關閉。</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>錯誤</value>
@@ -736,9 +729,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG 為最新</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>連線失敗!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Dispose of Int App 程序失敗!</value>
@@ -1155,7 +1145,7 @@ VncSharp Control 版本 {0}</value>
   <data name="strPanelName" xml:space="preserve">
     <value>面板名稱</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>密碼保護</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
@@ -1487,9 +1477,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy 測試成功!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>連線失敗!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Dispose of Putty process 失敗!</value>

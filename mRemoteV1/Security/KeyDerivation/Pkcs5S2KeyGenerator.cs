@@ -28,7 +28,7 @@ namespace mRemoteNG.Security.KeyDerivation
             var keyGenerator = new Pkcs5S2ParametersGenerator();
             keyGenerator.Init(passwordInBytes, salt, _iterations);
 
-            var keyParameter = (KeyParameter) keyGenerator.GenerateDerivedMacParameters(_keyBitSize);
+            var keyParameter = (KeyParameter)keyGenerator.GenerateDerivedMacParameters(_keyBitSize);
             var keyBytes = keyParameter.GetKey();
             return keyBytes;
         }

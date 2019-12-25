@@ -83,6 +83,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 PostExtApp = "SomePostExtApp",
                 MacAddress = "SomeMacAddress",
                 UserField = "SomeUserField",
+                VmId = "SomeVmId",
                 ExtApp = "SomeExtApp",
                 VNCProxyUsername = "SomeVNCProxyUsername",
                 VNCProxyPassword = "SomeVNCProxyPassword",
@@ -93,13 +94,16 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RDGatewayHostname = "SomeRDGatewayHostname",
                 Protocol = ProtocolType.ICA,
                 Port = 999,
+                Favorite = true,
                 UseConsoleSession = true,
                 UseCredSsp = true,
+                UseVmId = false,
+                UseEnhancedMode = false,
                 RenderingEngine = HTTPBase.RenderingEngine.Gecko,
                 ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
-                RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth,
-                Colors = RdpProtocol.RDPColors.Colors16Bit,
-                Resolution = RdpProtocol.RDPResolutions.Res1366x768,
+                RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
+                Colors = RDPColors.Colors16Bit,
+                Resolution = RDPResolutions.Res1366x768,
                 AutomaticResize = true,
                 DisplayWallpaper = true,
                 DisplayThemes = true,
@@ -110,7 +114,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RedirectPorts = true,
                 RedirectPrinters = true,
                 RedirectSmartCards = true,
-                RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer,
+                RedirectSound = RDPSounds.LeaveAtRemoteComputer,
+                RedirectAudioCapture = true,
                 RedirectKeys = true,
                 VNCCompression = ProtocolVNC.Compression.Comp4,
                 VNCEncoding = ProtocolVNC.Encoding.EncRRE,
@@ -120,8 +125,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 VNCColors = ProtocolVNC.Colors.Col8Bit,
                 VNCSmartSizeMode = ProtocolVNC.SmartSizeMode.SmartSAspect,
                 VNCViewOnly = true,
-                RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Detect,
-                RDGatewayUseConnectionCredentials = RdpProtocol.RDGatewayUseConnectionCredentials.SmartCard
+                RDGatewayUsageMethod = RDGatewayUsageMethod.Detect,
+                RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard
             };
         }
 
@@ -160,25 +165,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
             public static IEnumerable InheritanceTestCases()
             {
-                var ignoreProperties = new[]
-                {
-                    nameof(ConnectionInfoInheritance.EverythingInherited),
-                    nameof(ConnectionInfoInheritance.Parent)
-                };
-                var properties = typeof(ConnectionInfoInheritance)
-                    .GetProperties()
-                    .Where(property => !ignoreProperties.Contains(property.Name));
-                var testCases = new List<TestCaseData>();
-                var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+	            var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+                var properties = testInheritance.GetProperties();
 
-                foreach (var property in properties)
-                {
-                    testCases.Add(
-                        new TestCaseData(property.Name)
-                            .Returns(property.GetValue(testInheritance)));
-                }
-
-                return testCases;
+                return properties
+	                .Select(property => 
+		                new TestCaseData(property.Name)
+			                .Returns(property.GetValue(testInheritance)))
+	                .ToList();
             }
         }
     }

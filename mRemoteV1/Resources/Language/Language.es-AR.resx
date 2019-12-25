@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -260,7 +260,7 @@ VncSharp Control {0}</value>
   <data name="strConnectionEventConnected" xml:space="preserve">
     <value>Evento de protocolo conectado</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>¡Error de conexión!</value>
   </data>
   <data name="strConnectionOpenFailed" xml:space="preserve">
@@ -375,9 +375,6 @@ Descripción del Error: {1}</value>
   </data>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>La encriptación falló. {0}</value>
-  </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>La configuración de seguridad de Windows, "criptografía de sistema: usar FIPS algoritmos compatibles para codificación, algoritmos hash y firma", está habilitada. Esta configuración no es compatible con {0}.  Consulte el artículo de soporte técnico de Microsoft en http://support.microsoft.com/kb/811833 para obtener más información.  {0} se cerrará.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Errores</value>

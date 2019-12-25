@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -466,7 +466,7 @@
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>ligação como "{0}" via "{1}" estabelecido pelo utilizador "{2}" (Descrição: "{3}"; Campo de utilizador: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Ligação falhada!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -599,9 +599,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Falha de descriptografia. {0}</value>
-  </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>A configuração de segurança do Windows, "criptografia de sistema: usar FIPS compatível com algoritmos para criptografia, hash e assinatura", está habilitado. Essa configuração não é compatível com {0}.  Consulte o artigo do Microsoft Support em http://support.microsoft.com/kb/811833 para obter mais informações.  {0} agora vai ser fechado.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Erros</value>
@@ -740,9 +737,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>O mRemoteNG está atualizado</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Falha na ligação!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Libertação do Int App falhou!</value>
@@ -1155,7 +1149,7 @@ Descrição do erro: {1}</value>
   <data name="strPanelName" xml:space="preserve">
     <value>Nome do painel</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Proteger com senha</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
@@ -1484,9 +1478,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Teste de proxy bem sucedido!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Falha na ligação!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Libertação do processo PuTTY falhado!</value>

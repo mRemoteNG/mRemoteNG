@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,1935 +59,2680 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="strAbout" xml:space="preserve">
+	<xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="strAbout" xml:space="preserve">
     <value>Про програму</value>
   </data>
-  <data name="strActive" xml:space="preserve">
+	<data name="strActive" xml:space="preserve">
     <value>Активно</value>
   </data>
-  <data name="strActivity" xml:space="preserve">
+	<data name="strActivity" xml:space="preserve">
     <value>Активність</value>
   </data>
-  <data name="strAddConnection" xml:space="preserve">
+	<data name="strAddConnection" xml:space="preserve">
     <value>Нове з'єднання</value>
   </data>
-  <data name="strAddFolder" xml:space="preserve">
+	<data name="strAddFolder" xml:space="preserve">
     <value>Нова папка</value>
   </data>
-  <data name="strAddNodeFromXmlFailed" xml:space="preserve">
+	<data name="strAddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML не вдалося!</value>
   </data>
-  <data name="strAddNodesFromSqlFailed" xml:space="preserve">
+	<data name="strAddNodesFromSqlFailed" xml:space="preserve">
     <value>AddNodesFromSQL не вдалося!</value>
   </data>
-  <data name="strAllowOnlySingleInstance" xml:space="preserve">
+	<data name="strAllowOnlySingleInstance" xml:space="preserve">
     <value>Дозволити лише один екземпляр програми (необхіден перезапуск)</value>
   </data>
-  <data name="strAlways" xml:space="preserve">
+	<data name="strAlways" xml:space="preserve">
     <value>Завжди</value>
   </data>
-  <data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
+	<data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
     <value>Підключатися, навіть якщо не пройшов перевірку</value>
   </data>
-  <data name="strAlwaysShowPanelSelection" xml:space="preserve">
-    <value>Завжди показувати діалог вибору панелі при відкритті з'єднання</value>
+	<data name="strAlwaysShowPanelSelection" xml:space="preserve">
+    <value>Завжди показувати діалог вибору вкладки при відкритті з'єднання</value>
   </data>
-  <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
+	<data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Завжди показувати значок в системному треї</value>
   </data>
-  <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
+	<data name="strAskUpdatesCommandAskLater" xml:space="preserve">
     <value>Запитати пізніше</value>
   </data>
-  <data name="strAskUpdatesCommandCustom" xml:space="preserve">
+	<data name="strAskUpdatesCommandCustom" xml:space="preserve">
     <value>Налаштувати параметри зараз</value>
   </data>
-  <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
+	<data name="strAskUpdatesCommandRecommended" xml:space="preserve">
     <value>Використовувати рекомендовані параметри</value>
   </data>
-  <data name="strAskUpdatesContent" xml:space="preserve">
-    <value>{0} автоматично перевіряє наявність оновлень з новими можливостями і виправленнями помилок. Рекомендується дозволити {0} щотижневу перевірку оновлень.</value>
+	<data name="strAskUpdatesContent" xml:space="preserve">
+    <value>{0} автоматично перевіряє наявність оновлень з новими можливостями і виправленням помилок. Рекомендуємо дозволити {0} щотижневу перевірку оновлень.</value>
   </data>
-  <data name="strAskUpdatesMainInstruction" xml:space="preserve">
+	<data name="strAskUpdatesMainInstruction" xml:space="preserve">
     <value>Параметри автоматичного оновлення</value>
   </data>
-  <data name="strAspect" xml:space="preserve">
+	<data name="strAspect" xml:space="preserve">
     <value>Вигляд</value>
   </data>
-  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Автоматично отримувати інформацію про сесію</value>
+	<data name="strAutoSaveEvery" xml:space="preserve">
+    <value>Автозбереження кожні (0 - вимкнено):</value>
   </data>
-  <data name="strAutoSaveEvery" xml:space="preserve">
-    <value>Автозбереження кожні:</value>
+	<data name="strAutoSaveMins" xml:space="preserve">
+    <value>Хвилин (0 означає вимкнено)</value>
   </data>
-  <data name="strAutoSaveMins" xml:space="preserve">
-    <value>хвилин (0 означає вимкнено)</value>
+	<data name="strAvailableVersion" xml:space="preserve">
+    <value>Остання версія</value>
   </data>
-  <data name="strAvailableVersion" xml:space="preserve">
-    <value>Поточна версія</value>
+	<data name="strButtonBrowse" xml:space="preserve">
+    <value>&amp;Огляд…</value>
   </data>
-  <data name="strButtonBrowse" xml:space="preserve">
-    <value>&amp;Огляд ...</value>
+	<data name="strButtonCancel" xml:space="preserve">
+    <value>&amp;Скасувати</value>
   </data>
-  <data name="strButtonCancel" xml:space="preserve">
-    <value>&amp;Відмова</value>
-  </data>
-  <data name="strButtonChange" xml:space="preserve">
+	<data name="strButtonChange" xml:space="preserve">
     <value>Змінити</value>
   </data>
-  <data name="strButtonClose" xml:space="preserve">
+	<data name="strButtonClose" xml:space="preserve">
     <value>&amp;Закрити</value>
   </data>
-  <data name="strButtonDefaultInheritance" xml:space="preserve">
-    <value>Успадковувати по замовчуванню</value>
+	<data name="strButtonDefaultInheritance" xml:space="preserve">
+    <value>Успадковувння по замовчуванню</value>
   </data>
-  <data name="strButtonDefaultProperties" xml:space="preserve">
+	<data name="strButtonDefaultProperties" xml:space="preserve">
     <value>Властивості по замовчуванню</value>
   </data>
-  <data name="strButtonDisconnect" xml:space="preserve">
-    <value>Від'єднатися</value>
+	<data name="strButtonDisconnect" xml:space="preserve">
+    <value>Відключити</value>
   </data>
-  <data name="strButtonIcon" xml:space="preserve">
+	<data name="strButtonIcon" xml:space="preserve">
     <value>Значок</value>
   </data>
-  <data name="strButtonImport" xml:space="preserve">
+	<data name="strButtonImport" xml:space="preserve">
     <value>&amp;Імпорт</value>
   </data>
-  <data name="strButtonInheritance" xml:space="preserve">
+	<data name="strButtonInheritance" xml:space="preserve">
     <value>Успадковування</value>
   </data>
-  <data name="strButtonLaunchPutty" xml:space="preserve">
-    <value>Запуск PuTTY</value>
+	<data name="strButtonLaunchPutty" xml:space="preserve">
+    <value>Запустити PuTTY</value>
   </data>
-  <data name="strButtonNew" xml:space="preserve">
-    <value>&amp;Нова</value>
+	<data name="strButtonNew" xml:space="preserve">
+    <value>&amp;Новий</value>
   </data>
-  <data name="strButtonOK" xml:space="preserve">
+	<data name="strButtonOK" xml:space="preserve">
     <value>&amp;ОК</value>
   </data>
-  <data name="strButtonProperties" xml:space="preserve">
+	<data name="strButtonProperties" xml:space="preserve">
     <value>Властивості</value>
   </data>
-  <data name="strButtonScan" xml:space="preserve">
+	<data name="strButtonScan" xml:space="preserve">
     <value>&amp;Сканувати</value>
   </data>
-  <data name="strButtonStop" xml:space="preserve">
+	<data name="strButtonStop" xml:space="preserve">
     <value>&amp;Стоп</value>
   </data>
-  <data name="strButtonTestProxy" xml:space="preserve">
-    <value>Перевірка проксі</value>
+	<data name="strButtonTestProxy" xml:space="preserve">
+    <value>Перевірити проксі</value>
   </data>
-  <data name="strCannotImportNormalSessionFile" xml:space="preserve">
+	<data name="strCannotImportNormalSessionFile" xml:space="preserve">
     <value>Ви не можете імпортувати звичайний файл з'єднання.
 Для звичайних файлів з'єднань використовуйте Файл - Відкрити з'єднання!</value>
   </data>
-  <data name="strCannotStartPortScan" xml:space="preserve">
+	<data name="strCannotStartPortScan" xml:space="preserve">
     <value>Не вдається запустити сканування портів, невірний формат IP!</value>
   </data>
-  <data name="strCategoryAppearance" xml:space="preserve">
+	<data name="strCategoryAppearance" xml:space="preserve">
     <value>Зовнішній вигляд</value>
   </data>
-  <data name="strCategoryConnection" xml:space="preserve">
+	<data name="strCategoryConnection" xml:space="preserve">
     <value>З'єднання</value>
   </data>
-  <data name="strCategoryCredentials" xml:space="preserve">
+	<data name="strCategoryCredentials" xml:space="preserve">
     <value>Облікові дані</value>
   </data>
-  <data name="strCategoryDisplay" xml:space="preserve">
+	<data name="strCategoryDisplay" xml:space="preserve">
     <value>Вигляд</value>
   </data>
-  <data name="strCategoryGateway" xml:space="preserve">
+	<data name="strCategoryGateway" xml:space="preserve">
     <value>Шлюз</value>
   </data>
-  <data name="strCategoryGeneral" xml:space="preserve">
+	<data name="strCategoryGeneral" xml:space="preserve">
     <value>Основна</value>
   </data>
-  <data name="strCategoryMiscellaneous" xml:space="preserve">
+	<data name="strCategoryMiscellaneous" xml:space="preserve">
     <value>Різне</value>
   </data>
-  <data name="strCategoryProtocol" xml:space="preserve">
+	<data name="strCategoryProtocol" xml:space="preserve">
     <value>Протокол</value>
   </data>
-  <data name="strCategoryRedirect" xml:space="preserve">
+	<data name="strCategoryRedirect" xml:space="preserve">
     <value>Локальні ресурси</value>
   </data>
-  <data name="strCcAlwaysShowScreen" xml:space="preserve">
+	<data name="strCcAlwaysShowScreen" xml:space="preserve">
     <value>Завжди показувати це вікно при запуску</value>
   </data>
-  <data name="strCcCheckAgain" xml:space="preserve">
-    <value>Оновлення</value>
+	<data name="strCcCheckAgain" xml:space="preserve">
+    <value>Оновити</value>
   </data>
-  <data name="strCcCheckFailed" xml:space="preserve">
+	<data name="strCcCheckFailed" xml:space="preserve">
     <value>Помилка перевірки!</value>
   </data>
-  <data name="strCcCheckSucceeded" xml:space="preserve">
+	<data name="strCcCheckSucceeded" xml:space="preserve">
     <value>Успішно перевірено!</value>
   </data>
-  <data name="strCcEOLFailed" xml:space="preserve">
-    <value>Для (RDP) сесій повинна бути зареєстрована в системі eolwtscom.dll.
-mRemoteNG завантажиться з цим компонентом, але не зареєструє його автоматично.
-Щоб зареєструвати його вручну: Відкрийте (Пуск - Виконати) і введіть наступну команду: regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (де C:\Program Files\mRemoteNG \ це шлях до встановленого mRemoteNG).
-Якщо у вас все ж не виходить зареєструвати компонент для RDP - зверніться на форум mRemoteNG http://forum.mremoteng.org/</value>
+	<data name="strCcEOLFailed" xml:space="preserve">
+    <value>Функція (RDP) сесій вимагає, щоб у вас була зареєстрована копія eolwtscom.dll у вашій системі.
+mRemoteNG постачається з цим компонентом, але він не реєструється автоматично, якщо ви не використовуєте mRemoteNG Installer.
+Щоб зареєструвати його вручну, запустіть таку команду з підвищеного командного рядка від імені адміністратора: regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (де C:\Program Files\mRemoteNG\ це шлях до встановленого mRemoteNG).
+Якщо ця перевірка все-таки не є успішною, або ви не можете скористатися функцією сеансів (RDP), зверніться за адресою: {0}.</value>
   </data>
-  <data name="strCcEOLOK" xml:space="preserve">
+	<data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM знайдено і зареєстровано.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Для використання Gecko у Вас має бути встановлений XULRunner 1.8.1.x
-Ви можете завантажити XULRunner 1.8.1.3 тут: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Після завантаження вийміть пакет у будь-яку папку. Потім у mRemoteNG перейдіть в меню Інструменти - Опції - Додатково і введіть правильний шлях у полі Шлях XULRunner.
-Якщо у вас нічого не вийшло зверніться на форум mRemoteNG http://forum.mremoteng.org/</value>
+	<data name="strCcGeckoFailed" xml:space="preserve">
+    <value>Для використання Gecko Rendering Engine вам потрібен мати XULrunner 1.8.1.x та шлях до установки, вказаний у ваших опціях.
+Завантажити XULrunner 1.8.1.3 можна тут: https://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
+Після завантаження, розпакуйте архів до обраного вами шляху. Потім у mRemoteNG перейдіть в меню Інструменти - Опції - Додатково і введіть правильний шлях у полі шляху XULRunner.
+Якщо у вас нічого не вийшло зверніться за адресою: {0}.</value>
   </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
+	<data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx було знайдено і встановлено правильно.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA потрібний встановлений XenDesktop Online Plugin і зареєстрована бібліотека wfica.ocx. Ви можете завантажити клієнт тут: http://www.citrix.com/download/
+	<data name="strCcICAFailed" xml:space="preserve">
+    <value>ICA вимагає встановити XenDesktop Online Plugin та зареєструвати бібліотеку wfica.ocx. Ви можете завантажити клієнт тут: http://www.citrix.com/download/
 Якщо у вас є встановлений XenDesktop Online Plugin і нічого не працює, спробуйте зареєструвати wfica.ocx вручну.
 Для цього відкрийте (Пуск - Виконати) і введіть наступну команду: regsvr32 "C:\Program Files\Citrix\ICA Client\wfica.ocx" (де C:\Program Files\Citrix ICA Client\ це шлях до XenDesktop Online Plugin).
-Якщо у вас все таки не працює ICA в mRemoteNG зверніться на форум mRemoteNG http://forum.mremoteng.org/ "</value>
+Якщо у вас все таки не працює ICA в mRemoteNG зверніться за адресою: {0}.</value>
   </data>
-  <data name="strCcICAOK" xml:space="preserve">
+	<data name="strCcICAOK" xml:space="preserve">
     <value>Всі компоненти ICA були знайдені і зареєстровані.
 Citrix ICA Client Control версії {0}</value>
   </data>
-  <data name="strCcNotInstalledProperly" xml:space="preserve">
+	<data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>встановлений неправильно</value>
   </data>
-  <data name="strCcPuttyFailed" xml:space="preserve">
+	<data name="strCcPuttyFailed" xml:space="preserve">
     <value>SSH, Telnet, Rlogin і RAW протоколам потрібен для роботи PuTTY. PuTTY поставляється з кожним mRemoteNG і знаходиться в папці з програмою.
-Переконайтеся, що putty.exe є в папці з mRemoteNG (за замовчунням: C:\Program Files mRemoteNG\), або що ви вказали правильний шлях до виконуваного файлу PuTTY в Інструменти - Опції - Додатково - Шлях до PuTTY)</value>
+Переконайтеся, що putty.exe є в папці з mRemoteNG (за замовчунням: C:\Program Files mRemoteNG\), або ящо ви вказали правильний шлях до виконуваного файлу PuTTY в Інструменти - Опції - Додатково - Шлях до PuTTY)</value>
   </data>
-  <data name="strCcPuttyOK" xml:space="preserve">
+	<data name="strCcPuttyOK" xml:space="preserve">
     <value>Виконуваний файл PuTTY знайдений і готовий до використання.</value>
   </data>
-  <data name="strCcRDPFailed" xml:space="preserve">
-    <value>Для правильної роботи RDP необхідно мати встановлений Remote Desktop Connection (Terminal Services Client) 8.0. Ви можете отримати його тут: https://support.microsoft.com/kb/2592687
+	<data name="strCcRDPFailed" xml:space="preserve">
+    <value>Для правильної роботи RDP необхідно мати встановлений клієнт Remote Desktop Connection (Terminal Services) не менше версії 8.0. Ви можете отримати його тут: https://support.microsoft.com/kb/2592687
 Якщо у вас є встановлений RDP 8.0 і підключитися не вдається, спробуйте зареєструватися mstscax.dll вручну. Для цього відкрийте (Пуск - Виконати) і введіть наступну команду: regsvr32 "C:\Windows\system32\mstscax.dll" (де C: \ - ваш системний диск).
-Якщо у вас виникли проблеми при роботі з RDP зверніться на форум mRemoteNGhttp: / / forum.mremoteng.org /</value>
+Якщо у вас виникли проблеми при роботі з RDP зверніться зверніться за адресою: {0}.</value>
   </data>
-  <data name="strCcRDPOK" xml:space="preserve">
-    <value>Всі RDP компоненти були знайдені і зареєстровані.
-Remote Desktop Connection, Control Version {0}</value>
+	<data name="strCcRDPOK" xml:space="preserve">
+    <value>На цій машині підтримуються наступні версії протоколів RDP: {0}</value>
   </data>
-  <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC требуется VncSharp.dll который находится в папке с mRemoteNG.
- Убедитесь, что у вас есть VncSharp.dll в папке mRemoteNG (обычно C:\Program Files\mRemoteNG\).
- Если  у вас все же не работает VNC в mRemoteNG обратитесь на форум mRemoteNGhttp://forum.mremoteng.org/</value>
+	<data name="strCcVNCFailed" xml:space="preserve">
+    <value>VNC вимагає, щоб VncSharp.dll знаходився у папці додатків mRemoteNG.
+Переконайтеся, що у папці програми mRemoteNG файл VncSharp.dll (як правило, C:C:\Program Files\mRemoteNG\).
+Якщо ви все ще не можете пройти цю перевірку або використовувати VNC в mRemoteNG, будь ласка, зверніться за адресою {0}.</value>
   </data>
-  <data name="strCcVNCOK" xml:space="preserve">
+	<data name="strCcVNCOK" xml:space="preserve">
     <value>Всі VNC компоненти були знайдені і зареєстровані.
 VncSharp Control Version {0}</value>
   </data>
-  <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
+	<data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Автоматично намагатися відновити зв'язок при відключенні від сервера (тільки RDP і ICA)</value>
   </data>
-  <data name="strCheckboxDomain" xml:space="preserve">
+	<data name="strCheckboxDomain" xml:space="preserve">
     <value>Домен</value>
   </data>
-  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+	<data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Більше не показувати це повідомлення.</value>
   </data>
-  <data name="strCheckboxInheritance" xml:space="preserve">
+	<data name="strCheckboxInheritance" xml:space="preserve">
     <value>Успадковування</value>
   </data>
-  <data name="strCheckboxPassword" xml:space="preserve">
+	<data name="strCheckboxPassword" xml:space="preserve">
     <value>Пароль</value>
   </data>
-  <data name="strCheckboxProxyAuthentication" xml:space="preserve">
-    <value>Потрібна авторизація</value>
+	<data name="strCheckboxProxyAuthentication" xml:space="preserve">
+    <value>Цей проксі-сервер вимагає аутентифікації</value>
   </data>
-  <data name="strCheckboxPuttyPath" xml:space="preserve">
+	<data name="strCheckboxPuttyPath" xml:space="preserve">
     <value>Використовувати власний шлях до PuTTY:</value>
   </data>
-  <data name="strCheckboxReconnectWhenReady" xml:space="preserve">
+	<data name="strCheckboxReconnectWhenReady" xml:space="preserve">
     <value>Перепідключитися, коли буде готово</value>
   </data>
-  <data name="strCheckboxUpdateUseProxy" xml:space="preserve">
-    <value>Використовувати проксі-сервер</value>
+	<data name="strCheckboxUpdateUseProxy" xml:space="preserve">
+    <value>Використовувати проксі-сервер для підключення</value>
   </data>
-  <data name="strCheckboxUsername" xml:space="preserve">
+	<data name="strCheckboxUsername" xml:space="preserve">
     <value>Користувач</value>
   </data>
-  <data name="strCheckboxWaitForExit" xml:space="preserve">
+	<data name="strCheckboxWaitForExit" xml:space="preserve">
     <value>Чекати виходу</value>
   </data>
-  <data name="strCheckForUpdate" xml:space="preserve">
-    <value>Перевірити</value>
+	<data name="strCheckForUpdate" xml:space="preserve">
+    <value>Перевірити знову</value>
   </data>
-  <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
+	<data name="strCheckForUpdatesOnStartup" xml:space="preserve">
     <value>Перевіряти наявність оновлень при запуску</value>
   </data>
-  <data name="strCheckNow" xml:space="preserve">
-    <value>Перевірити</value>
+	<data name="strCheckNow" xml:space="preserve">
+    <value>Перевірити зараз</value>
   </data>
-  <data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
+	<data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
     <value>При запуску перевіряти правильність встановлення компонентів</value>
   </data>
-  <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
-    <value>Вибрати панель перед з'єднанням</value>
+	<data name="strChoosePanelBeforeConnecting" xml:space="preserve">
+    <value>Вибрати вкладку перед з'єднанням</value>
   </data>
-  <data name="strClosedPorts" xml:space="preserve">
+	<data name="strClosedPorts" xml:space="preserve">
     <value>Закриті порти</value>
   </data>
-  <data name="strCollapseAllFolders" xml:space="preserve">
+	<data name="strCollapseAllFolders" xml:space="preserve">
     <value>Згорнути всі папки</value>
   </data>
-  <data name="strColumnArguments" xml:space="preserve">
+	<data name="strColumnArguments" xml:space="preserve">
     <value>Аргументи</value>
   </data>
-  <data name="strColumnDisplayName" xml:space="preserve">
+	<data name="strColumnDisplayName" xml:space="preserve">
     <value>Коротке ім'я</value>
   </data>
-  <data name="strColumnFilename" xml:space="preserve">
+	<data name="strColumnFilename" xml:space="preserve">
     <value>Файл</value>
   </data>
-  <data name="strColumnHostnameIP" xml:space="preserve">
+	<data name="strColumnHostnameIP" xml:space="preserve">
     <value>Ім'я хосту/IP</value>
   </data>
-  <data name="strColumnMessage" xml:space="preserve">
+	<data name="strColumnMessage" xml:space="preserve">
     <value>Повідомлення</value>
   </data>
-  <data name="strColumnUsername" xml:space="preserve">
+	<data name="strColumnUsername" xml:space="preserve">
     <value>Користувач</value>
   </data>
-  <data name="strColumnWaitForExit" xml:space="preserve">
+	<data name="strColumnWaitForExit" xml:space="preserve">
     <value>Чекати виходу</value>
   </data>
-  <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
+	<data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Неможливо розібрати аргументи командного рядка!</value>
   </data>
-  <data name="strComponentsCheck" xml:space="preserve">
+	<data name="strComponentsCheck" xml:space="preserve">
     <value>Перевірка компонентів</value>
   </data>
-  <data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+	<data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>Помилка btnIcon_Click!</value>
   </data>
-  <data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
+	<data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
     <value>Помилка ShowHideGridItems!</value>
   </data>
-  <data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
+	<data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
     <value>Помилка IconMenu_Click!</value>
   </data>
-  <data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
+	<data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
     <value>Помилка властивостей Grid object!</value>
   </data>
-  <data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
-    <value>Помилка отримання статусу Хоста!</value>
+	<data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+    <value>Помилка SetHostStatus!</value>
   </data>
-  <data name="strConfigPropertyGridValueFailed" xml:space="preserve">
+	<data name="strConfigPropertyGridValueFailed" xml:space="preserve">
     <value>Помилка pGrid_PopertyValueChanged!</value>
   </data>
-  <data name="strConfigUiLoadFailed" xml:space="preserve">
+	<data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>Помилка завантаження Config UI!</value>
   </data>
-  <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
+	<data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>Хочете закрити з'єднання:
-"{0}"?</value>
+«{0}»?</value>
   </data>
-  <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>Хочете закрити панель "{0}"? Всі її з'єднання також будуть закриті.</value>
+	<data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
+    <value>Дійсно хочете закрити вкладку «{0}»? Всі її з'єднання також будуть закриті.</value>
   </data>
-  <data name="strConfirmDeleteExternalTool" xml:space="preserve">
-    <value>Хочете видалити зовнішній інструмент, "{0}"?</value>
+	<data name="strConfirmDeleteExternalTool" xml:space="preserve">
+    <value>Хочете видалити зовнішній інструмент, «{0}»?</value>
   </data>
-  <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
-    <value>Хочете видалити {0} вибрані зовнішні інструменти?</value>
+	<data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
+    <value>Хочете видалити {0} вибраних зовнішніх інструментів?</value>
   </data>
-  <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
-    <value>Хочете видалити з'єднання, "{0}"?</value>
+	<data name="strConfirmDeleteNodeConnection" xml:space="preserve">
+    <value>Хочете видалити з'єднання, «{0}»?</value>
   </data>
-  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
-    <value>Хочете видалити порожню папку, "{0}"?</value>
+	<data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+    <value>Хочете видалити порожню папку, «{0}»?</value>
   </data>
-  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
-    <value>Хочете видалити папку "{0}"? Будь-які папки або з'єднання, які вона містить також будуть видалені.</value>
+	<data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+    <value>Хочете видалити папку «{0}»? Будь-які папки або з'єднання, які вона містить також будуть видалені.</value>
   </data>
-  <data name="strConfirmExitMainInstruction" xml:space="preserve">
+	<data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Хочете закрити всі відкриті з'єднання?</value>
   </data>
-  <data name="strConfirmResetLayout" xml:space="preserve">
-    <value>Ви дійсно хочете скинути панелі в налаштування по замовчуванню?</value>
+	<data name="strConfirmResetLayout" xml:space="preserve">
+    <value>Ви дійсно бажаєте скинути налаштування вкладок до значень по замовчуванню?</value>
   </data>
-  <data name="strConnect" xml:space="preserve">
+	<data name="strConnect" xml:space="preserve">
     <value>З'єднатися</value>
   </data>
-  <data name="strConnectInFullscreen" xml:space="preserve">
-    <value>З'єднання в повноекранному режимі</value>
+	<data name="strConnectInFullscreen" xml:space="preserve">
+    <value>З'єднатися в повноекранному режимі</value>
   </data>
-  <data name="strConnecting" xml:space="preserve">
+	<data name="strConnecting" xml:space="preserve">
     <value>З'єднання...</value>
   </data>
-  <data name="strConnectionEventConnected" xml:space="preserve">
-    <value>Журнал з'єднань</value>
+	<data name="strConnectionEventConnected" xml:space="preserve">
+    <value>Протокол події підключено</value>
   </data>
-  <data name="strConnectionEventConnectedDetail" xml:space="preserve">
-    <value>Підключення до системи "{0}" через "{1}" створеного користувача "{2}" (Опис: "{3}"; Користувач: "{4}")</value>
+	<data name="strConnectionEventConnectedDetail" xml:space="preserve">
+    <value>Підключення до системи «{0}» через «{1}» створеного користувача «{2}» (Опис: «{3}»; Користувач: «{4}»)</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>З'єднатися не вдалося!</value>
   </data>
-  <data name="strConnectionEventErrorOccured" xml:space="preserve">
-    <value>Журнал подій ErrorOccured</value>
+	<data name="strConnectionEventErrorOccured" xml:space="preserve">
+    <value>Виникла помилка протоколу з'єднання. Хост «{1}»; Код помилки: «{2}»; Опис помилки: «{0}» </value>
   </data>
-  <data name="strConnectionOpenFailed" xml:space="preserve">
+	<data name="strConnectionOpenFailed" xml:space="preserve">
     <value>Відкрити з'єднання не вдалася!</value>
   </data>
-  <data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+	<data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Неможливо відкрити з'єднання: ім'я хоста не вказано!</value>
   </data>
-  <data name="strConnectionRdpErrorDetail" xml:space="preserve">
+	<data name="strConnectionRdpErrorDetail" xml:space="preserve">
     <value>Помилка RDP!
 Код помилки: {0}
 Опис помилки: {1}</value>
   </data>
-  <data name="strConnections" xml:space="preserve">
+	<data name="strConnections" xml:space="preserve">
     <value>З'єднання</value>
   </data>
-  <data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
-    <value>Не вдається встановити порт по замовчуванню!</value>
+	<data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
+    <value>Не вдається встановити порт за замовчуванням!</value>
   </data>
-  <data name="strConnectionsFileBackupFailed" xml:space="preserve">
+	<data name="strConnectionsFileBackupFailed" xml:space="preserve">
     <value>Не вдалося створити резервну копію файлу з'єднань!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>Не вдалося імпортувати з'єднання в файл!</value>
+	<data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
+    <value>Не вдалося імпортувати файл з'єднань!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
-    <value>Файл з'єднань "{0}" неможливо завантажити!</value>
+	<data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+    <value>Не можу завантажити файл з'єднань «{0}»!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
-    <value>Файл з'єднань "{0}" неможливо завантажити!
-Створіть новий файл з'єднань.</value>
+	<data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
+    <value>Не можу завантажити файл з'єднань «{0}»!
+Запускаюсь з новим файлом з'єднань.</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>Неможливо зберегти файл з'єднань!</value>
+	<data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
+    <value>Не вдалося зберегти файл з'єднань!</value>
   </data>
-  <data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
-    <value>Неможливо зберегти файл як з'єднання "{0}"!</value>
+	<data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
+    <value>Не вдалося зберегти файл з'єднань як «{0}»!</value>
   </data>
-  <data name="strConnectToConsoleSession" xml:space="preserve">
-    <value>З'єднання з сеансом користувача (Сеанс консолі)</value>
+	<data name="strConnectToConsoleSession" xml:space="preserve">
+    <value>З'єднатися з консольним сеансом</value>
   </data>
-  <data name="strConnectWithOptions" xml:space="preserve">
-    <value>З'єднання(з параметрами)</value>
+	<data name="strConnectWithOptions" xml:space="preserve">
+    <value>З'єднатися (з параметрами)</value>
   </data>
-  <data name="strConnenctionClosedByUser" xml:space="preserve">
-    <value>З'єднання до {0} по {1} закрито користувачем {2}.</value>
+	<data name="strConnenctionClosedByUser" xml:space="preserve">
+    <value>З'єднання до {0} через {1} закрито користувачем {2}.</value>
   </data>
-  <data name="strConnenctionClosedByUserDetail" xml:space="preserve">
-    <value>З'єднання до {0} по {1} закрито користувачем {2}. (Опис: "{3}"; Користувач: "{4}")</value>
+	<data name="strConnenctionClosedByUserDetail" xml:space="preserve">
+    <value>З'єднання до {0} через {1} закрито користувачем {2}. (Опис: «{3}»; Користувач: «{4}»)</value>
   </data>
-  <data name="strConnenctionCloseEvent" xml:space="preserve">
+	<data name="strConnenctionCloseEvent" xml:space="preserve">
     <value>З'єднання закрито</value>
   </data>
-  <data name="strConnenctionCloseEventFailed" xml:space="preserve">
+	<data name="strConnenctionCloseEventFailed" xml:space="preserve">
     <value>З'єднання закрити не вдалося!</value>
   </data>
-  <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
+	<data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Не вдається створити новий файл з'єднань!</value>
   </data>
-  <data name="strCurrentVersion" xml:space="preserve">
+	<data name="strCurrentVersion" xml:space="preserve">
     <value>Встановлена версія</value>
   </data>
-  <data name="strDetect" xml:space="preserve">
+	<data name="strDetect" xml:space="preserve">
     <value>Виявлення</value>
   </data>
-  <data name="strDontConnectWhenAuthFails" xml:space="preserve">
-    <value>Не з'єднувати без перевірки</value>
+	<data name="strDontConnectWhenAuthFails" xml:space="preserve">
+    <value>Не під'єднувати без перевірки</value>
   </data>
-  <data name="strDoubleClickTabClosesIt" xml:space="preserve">
+	<data name="strDoubleClickTabClosesIt" xml:space="preserve">
     <value>Подвійний клік для закриття вкладки</value>
   </data>
-  <data name="strDownloadAndInstall" xml:space="preserve">
-    <value>Завантаження і встановлення</value>
+	<data name="strDownloadAndInstall" xml:space="preserve">
+    <value>Завантажити і встановити</value>
   </data>
-  <data name="strDuplicate" xml:space="preserve">
+	<data name="strDuplicate" xml:space="preserve">
     <value>Дублювати</value>
   </data>
-  <data name="strEmptyPasswordContinue" xml:space="preserve">
+	<data name="strEmptyPasswordContinue" xml:space="preserve">
     <value>Бажаєте продовжити без пароля?</value>
   </data>
-  <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
+	<data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Використовувати пусте ім'я користувача, пароль або домен:</value>
   </data>
-  <data name="strEnc128Bit" xml:space="preserve">
+	<data name="strEnc128Bit" xml:space="preserve">
     <value>128-біт</value>
   </data>
-  <data name="strEnc128BitLogonOnly" xml:space="preserve">
+	<data name="strEnc128BitLogonOnly" xml:space="preserve">
     <value>128-біт (тільки при вході)</value>
   </data>
-  <data name="strEnc40Bit" xml:space="preserve">
+	<data name="strEnc40Bit" xml:space="preserve">
     <value>40-біт</value>
   </data>
-  <data name="strEnc56Bit" xml:space="preserve">
+	<data name="strEnc56Bit" xml:space="preserve">
     <value>56-біт</value>
   </data>
-  <data name="strEncBasic" xml:space="preserve">
+	<data name="strEncBasic" xml:space="preserve">
     <value>Основне</value>
   </data>
-  <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
-    <value>Шифрувати файл з'єднання</value>
+	<data name="strEncryptCompleteConnectionFile" xml:space="preserve">
+    <value>Повністю зашифрувати файл з'єднання</value>
   </data>
-  <data name="strEndIP" xml:space="preserve">
+	<data name="strEndIP" xml:space="preserve">
     <value>Кінцевий IP</value>
   </data>
-  <data name="strEndPort" xml:space="preserve">
-    <value>Кінц. порт</value>
+	<data name="strEndPort" xml:space="preserve">
+    <value>Кінцевий порт</value>
   </data>
-  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
-    <value>Помилка додавання на Панель зовнішнього інструменту (frmMain). {0}</value>
+	<data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+    <value>Помилка AddExternalToolsToToolBar (frmMain). {0}</value>
   </data>
-  <data name="strErrorAddFolderFailed" xml:space="preserve">
+	<data name="strErrorAddFolderFailed" xml:space="preserve">
     <value>Помилка AddFolder (UI.Window.Tree). {0}</value>
   </data>
-  <data name="strErrorBadDatabaseVersion" xml:space="preserve">
+	<data name="strErrorBadDatabaseVersion" xml:space="preserve">
     <value>Версія бази даних {0} не сумісна з цією версією {1}.</value>
   </data>
-  <data name="strErrorCloneNodeFailed" xml:space="preserve">
-    <value>CloneNode (Tree.Node) failed. {0}</value>
+	<data name="strErrorCloneNodeFailed" xml:space="preserve">
+    <value>Помилка CloneNode (Tree.Node). {0}</value>
   </data>
-  <data name="strErrorCode" xml:space="preserve">
-    <value>Код помилки {0}.</value>
+	<data name="strErrorCode" xml:space="preserve">
+    <value>Код помилки: {0}.</value>
   </data>
-  <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
+	<data name="strErrorConnectionListSaveFailed" xml:space="preserve">
     <value>Неможливо зберегти список з'єднань.</value>
   </data>
-  <data name="strErrorDecryptionFailed" xml:space="preserve">
+	<data name="strErrorDecryptionFailed" xml:space="preserve">
     <value>Не вдалося розшифрувати. {0}</value>
   </data>
-  <data name="strErrorEncryptionFailed" xml:space="preserve">
+	<data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Не вдалося зашифрувати. {0}</value>
   </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Налаштування системи безпеки Windows: "Використання системної криптографії FIPS-сумісних алгоритмів шифрування, хешування та підписування», включено. Це налаштування не сумісне з {0}.
-
-Див. статтю Microsoft Support на http://support.microsoft.com/kb/811833 для отримання додаткової інформації.
-
-{0} буде закрито.</value>
-  </data>
-  <data name="strErrors" xml:space="preserve">
+	<data name="strErrors" xml:space="preserve">
     <value>Помилки</value>
   </data>
-  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
-    <value>Файл з'єднання не може бути завантажений. {0}{0}{2}{0}{3}{0}{0} Для того, щоб запобігти втраті даних, {1} буде здійснено вихід.</value>
+	<data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+    <value>Файл з'єднання не може бути завантажений. {0}{0}{2}{0}{3}{0}{0} Для того, щоб запобігти втраті даних, {1} завершить роботу.</value>
   </data>
-  <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+	<data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
     <value>Помилка VerifyDatabaseVersion (Config.Connections.Save). {0}</value>
   </data>
-  <data name="strExpandAllFolders" xml:space="preserve">
+	<data name="strExpandAllFolders" xml:space="preserve">
     <value>Розкрити всі папки</value>
   </data>
-  <data name="strExperimental" xml:space="preserve">
+	<data name="strExperimental" xml:space="preserve">
     <value>Експериментально</value>
   </data>
-  <data name="strExport" xml:space="preserve">
+	<data name="strExport" xml:space="preserve">
     <value>Експорт</value>
   </data>
-  <data name="strExportmRemoteXML" xml:space="preserve">
+	<data name="strExportmRemoteXML" xml:space="preserve">
     <value>Експорт mRemote / mRemoteNG XML</value>
   </data>
-  <data name="strExtApp" xml:space="preserve">
+	<data name="strExtApp" xml:space="preserve">
     <value>Зовн. Інструмент</value>
   </data>
-  <data name="strFAMFAMFAMAttribution" xml:space="preserve">
-    <value>Використано значки [FAMFAMFAM]</value>
+	<data name="strFAMFAMFAMAttribution" xml:space="preserve">
+    <value>Використовує значки [FAMFAMFAM]</value>
   </data>
-  <data name="strFilterAll" xml:space="preserve">
+	<data name="strFilterAll" xml:space="preserve">
     <value>Всі файли (*.*)</value>
   </data>
-  <data name="strFilterApplication" xml:space="preserve">
-    <value>Файли додатків (*. EXE)</value>
+	<data name="strFilterApplication" xml:space="preserve">
+    <value>Файли додатків (*.exe)</value>
   </data>
-  <data name="strFiltermRemoteCSV" xml:space="preserve">
-    <value>mRemote CSV-файли (*. CSV)</value>
+	<data name="strFiltermRemoteCSV" xml:space="preserve">
+    <value>Файли mRemote CSV (*.csv)</value>
   </data>
-  <data name="strFiltermRemoteXML" xml:space="preserve">
-    <value>mRemote XML-файли (*. XML)</value>
+	<data name="strFiltermRemoteXML" xml:space="preserve">
+    <value>Файли mRemote XML (*.xml)</value>
   </data>
-  <data name="strFilterRDP" xml:space="preserve">
-    <value>RDP-файли (*. RDP)</value>
+	<data name="strFilterRDP" xml:space="preserve">
+    <value>Файли RDP (*.rdp)</value>
   </data>
-  <data name="strFiltervRD2008CSV" xml:space="preserve">
-    <value>visionapp Remote Desktop 2008 CSV-файли (*. CSV)</value>
+	<data name="strFiltervRD2008CSV" xml:space="preserve">
+    <value>Файли visionapp Remote Desktop 2008 CSV (*.csv)</value>
   </data>
-  <data name="strFormatInherit" xml:space="preserve">
+	<data name="strFormatInherit" xml:space="preserve">
     <value>Успадковувати {0}</value>
   </data>
-  <data name="strFormatInheritDescription" xml:space="preserve">
+	<data name="strFormatInheritDescription" xml:space="preserve">
     <value>Опис успадкованої властивості: {0}</value>
   </data>
-  <data name="strFree" xml:space="preserve">
-    <value>Free</value>
-  </data>
-  <data name="strFullscreen" xml:space="preserve">
+	<data name="strFullscreen" xml:space="preserve">
     <value>На весь екран</value>
   </data>
-  <data name="strGeneral" xml:space="preserve">
+	<data name="strGeneral" xml:space="preserve">
     <value>Головна</value>
   </data>
-  <data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
+	<data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
     <value>Отримати інформацію про з'єднання з SQL не вдалося</value>
   </data>
-  <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
-    <value>Помилка при завантаженні з'єднання "{0}" на "{1}". {2}</value>
+	<data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
+    <value>Помилка при завантаженні з'єднання «{0}» на «{1}». {2}</value>
   </data>
-  <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
+	<data name="strGroupboxAutomaticReconnect" xml:space="preserve">
     <value>Автоперепідключення</value>
   </data>
-  <data name="strGroupboxConnection" xml:space="preserve">
+	<data name="strGroupboxConnection" xml:space="preserve">
     <value>З'єднання</value>
   </data>
-  <data name="strGroupboxExternalToolProperties" xml:space="preserve">
+	<data name="strGroupboxExternalToolProperties" xml:space="preserve">
     <value>Властивості зовнішніх інструментів</value>
   </data>
-  <data name="strGroupboxFiles" xml:space="preserve">
+	<data name="strGroupboxFiles" xml:space="preserve">
     <value>Файли</value>
   </data>
-  <data name="strHost" xml:space="preserve">
+	<data name="strHost" xml:space="preserve">
     <value>Хост</value>
   </data>
-  <data name="strHttpConnectFailed" xml:space="preserve">
+	<data name="strHttpConnectFailed" xml:space="preserve">
     <value>Помилка HTTP з'єднання!</value>
   </data>
-  <data name="strHttpConnectionFailed" xml:space="preserve">
-    <value>Не вдається створити нове з'єднання HTTP!</value>
+	<data name="strHttpConnectionFailed" xml:space="preserve">
+    <value>Не вдається створити нове HTTP з'єднання!</value>
   </data>
-  <data name="strHttpSetPropsFailed" xml:space="preserve">
+	<data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Не вдалося задати параметри HTTP!</value>
   </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
+	<data name="strIcaConnectionFailed" xml:space="preserve">
     <value>Не вдається створити нове з'єднання ICA!</value>
   </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
+	<data name="strIcaControlFailed" xml:space="preserve">
     <value>Не вдалося завантажити ICA-плагін!</value>
   </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
+	<data name="strIcaSetCredentialsFailed" xml:space="preserve">
     <value>Помилка встановлення облікових даних ICA!</value>
   </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
+	<data name="strIcaSetEventHandlersFailed" xml:space="preserve">
     <value>Не вдалося встановити оброблювач подій ICA!</value>
   </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
+	<data name="strIcaSetPropsFailed" xml:space="preserve">
     <value>Не вдалося задати параметри ICA!</value>
   </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
+	<data name="strIcaSetResolutionFailed" xml:space="preserve">
     <value>Помилка встановлення дозволів ICA!</value>
   </data>
-  <data name="strImportAD" xml:space="preserve">
+	<data name="strImportAD" xml:space="preserve">
     <value>Імпорт з Active Directory</value>
   </data>
-  <data name="strImportExport" xml:space="preserve">
+	<data name="strImportExport" xml:space="preserve">
     <value>Імпорт / Експорт</value>
   </data>
-  <data name="strImportmRemoteXML" xml:space="preserve">
+	<data name="strImportmRemoteXML" xml:space="preserve">
     <value>Імпорт mRemote / mRemoteNG XML</value>
   </data>
-  <data name="strImportPortScan" xml:space="preserve">
+	<data name="strImportPortScan" xml:space="preserve">
     <value>Імпорт з просканованих портів</value>
   </data>
-  <data name="strImportRDPFiles" xml:space="preserve">
-    <value>Імпорт з. RDP-файл (ів)</value>
+	<data name="strImportRDPFiles" xml:space="preserve">
+    <value>Імпорт з RDP-файлу(ів)</value>
   </data>
-  <data name="strInactive" xml:space="preserve">
+	<data name="strInactive" xml:space="preserve">
     <value>Неактивний</value>
   </data>
-  <data name="strInformations" xml:space="preserve">
+	<data name="strInformations" xml:space="preserve">
     <value>Інформація</value>
   </data>
-  <data name="strInheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG в актуальному стані</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>З'єднання не вдалося!</value>
+	<data name="strInheritNewConnection" xml:space="preserve">
+    <value>mRemoteNG не потребує оновлення</value>
   </data>
   <data name="strIntAppFocusFailed" xml:space="preserve">
     <value>Зовнішній інструмент: Помилка отримання фокусу!</value>
   </data>
-  <data name="strIntAppHandle" xml:space="preserve">
+	<data name="strIntAppHandle" xml:space="preserve">
     <value>Оброблювач подій Зовн. інструментів: {0}</value>
   </data>
-  <data name="strIntAppKillFailed" xml:space="preserve">
+	<data name="strIntAppKillFailed" xml:space="preserve">
     <value>Не вдалося завершити процес зовнішнього інструменту!</value>
   </data>
-  <data name="strIntAppParentHandle" xml:space="preserve">
-    <value>Панель Оброблювача: {0}</value>
+	<data name="strIntAppParentHandle" xml:space="preserve">
+    <value>Вкладка оброблювача: {0}</value>
   </data>
-  <data name="strIntAppResizeFailed" xml:space="preserve">
+	<data name="strIntAppResizeFailed" xml:space="preserve">
     <value>Зовнішній інструмент: Помилка зміни розміру!</value>
   </data>
-  <data name="strIntAppTitle" xml:space="preserve">
+	<data name="strIntAppTitle" xml:space="preserve">
     <value>Заголовок зовнішнього інструменту: {0}</value>
   </data>
-  <data name="strKeysCtrlAltDel" xml:space="preserve">
-    <value>CTRL + ALT + DEL</value>
+	<data name="strKeysCtrlAltDel" xml:space="preserve">
+    <value>CTRL+ALT+DEL</value>
   </data>
-  <data name="strKeysCtrlEsc" xml:space="preserve">
-    <value>CTRL-ESC</value>
+	<data name="strKeysCtrlEsc" xml:space="preserve">
+    <value>CTRL+ESC</value>
   </data>
-  <data name="strLabelAddress" xml:space="preserve">
+	<data name="strLabelAddress" xml:space="preserve">
     <value>Адреса:</value>
   </data>
-  <data name="strLabelArguments" xml:space="preserve">
+	<data name="strLabelArguments" xml:space="preserve">
     <value>Аргументи:</value>
   </data>
-  <data name="strLabelChangeLog" xml:space="preserve">
-    <value>Історія версій:</value>
+	<data name="strLabelChangeLog" xml:space="preserve">
+    <value>Журнал змін:</value>
   </data>
-  <data name="strLabelConnect" xml:space="preserve">
+	<data name="strLabelConnect" xml:space="preserve">
     <value>&amp;З'єднання:</value>
   </data>
-  <data name="strLabelDisplayName" xml:space="preserve">
+	<data name="strLabelDisplayName" xml:space="preserve">
     <value>Коротке ім'я</value>
   </data>
-  <data name="strLabelDomain" xml:space="preserve">
+	<data name="strLabelDomain" xml:space="preserve">
     <value>Домен:</value>
   </data>
-  <data name="strLabelFilename" xml:space="preserve">
+	<data name="strLabelFilename" xml:space="preserve">
     <value>Файл:</value>
   </data>
-  <data name="strLabelHostname" xml:space="preserve">
+	<data name="strLabelHostname" xml:space="preserve">
     <value>Ім'я хосту:</value>
   </data>
-  <data name="strLabelOptions" xml:space="preserve">
+	<data name="strLabelOptions" xml:space="preserve">
     <value>Опції:</value>
   </data>
-  <data name="strLabelPassword" xml:space="preserve">
+	<data name="strLabelPassword" xml:space="preserve">
     <value>Пароль:</value>
   </data>
-  <data name="strLabelPort" xml:space="preserve">
+	<data name="strLabelPort" xml:space="preserve">
     <value>Порт:</value>
   </data>
-  <data name="strLabelPortableEdition" xml:space="preserve">
+	<data name="strLabelPortableEdition" xml:space="preserve">
     <value>Портативна версія</value>
   </data>
-  <data name="strLabelProtocol" xml:space="preserve">
+	<data name="strLabelProtocol" xml:space="preserve">
     <value>Протокол:</value>
   </data>
-  <data name="strLabelPuttySessionsConfig" xml:space="preserve">
+	<data name="strLabelPuttySessionsConfig" xml:space="preserve">
     <value>Натисніть на цю кнопку для налаштування сесій PuTTY:</value>
   </data>
-  <data name="strLabelPuttyTimeout" xml:space="preserve">
-    <value>Max. PuTTY &amp; &amp; Integrated Ext. Apps wait time:</value>
+	<data name="strLabelPuttyTimeout" xml:space="preserve">
+    <value>Максимальний час очікування PuTTY та зовнішніх інструментів:</value>
   </data>
-  <data name="strLabelReleasedUnderGPL" xml:space="preserve">
+	<data name="strLabelReleasedUnderGPL" xml:space="preserve">
     <value>Випущено під ліцензією GNU General Public License (GPL)</value>
   </data>
-  <data name="strLabelSeconds" xml:space="preserve">
+	<data name="strLabelSeconds" xml:space="preserve">
     <value>сек</value>
   </data>
-  <data name="strLabelSelectPanel" xml:space="preserve">
-    <value>Виберіть панель зі списку або натисніть кнопку Нова, щоб створити нову.</value>
+	<data name="strLabelSelectPanel" xml:space="preserve">
+    <value>Виберіть вкладку зі списку або натисніть кнопку Новий, щоб створити нову.</value>
   </data>
-  <data name="strLabelServerStatus" xml:space="preserve">
+	<data name="strLabelServerStatus" xml:space="preserve">
     <value>Стан сервера:</value>
   </data>
-  <data name="strLabelSQLDatabaseName" xml:space="preserve">
+	<data name="strLabelSQLDatabaseName" xml:space="preserve">
     <value>База даних:</value>
   </data>
-  <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
+	<data name="strLabelSQLServerDatabaseName" xml:space="preserve">
     <value>База даних:</value>
   </data>
-  <data name="strLabelUsername" xml:space="preserve">
+	<data name="strLabelUsername" xml:space="preserve">
     <value>Користувач:</value>
   </data>
-  <data name="strLabelVerify" xml:space="preserve">
+	<data name="strLabelVerify" xml:space="preserve">
     <value>Перевірка:</value>
   </data>
-  <data name="strLanguage" xml:space="preserve">
+	<data name="strLanguage" xml:space="preserve">
     <value>Мова</value>
   </data>
-  <data name="strLanguageDefault" xml:space="preserve">
+	<data name="strLanguageDefault" xml:space="preserve">
     <value>(Автовизначення)</value>
   </data>
-  <data name="strLanguageRestartRequired" xml:space="preserve">
+	<data name="strLanguageRestartRequired" xml:space="preserve">
     <value>{0} необхідно перезапустити, щоб налаштування мови вступили в силу.</value>
   </data>
-  <data name="strLoadFromSqlFailed" xml:space="preserve">
-    <value>Завантажити з SQL не вдалося!</value>
+	<data name="strLoadFromSqlFailed" xml:space="preserve">
+    <value>Завантаження з SQL не вдалося!</value>
   </data>
-  <data name="strLoadFromXmlFailed" xml:space="preserve">
-    <value>Завантажити з XML не вдалося!</value>
+	<data name="strLoadFromXmlFailed" xml:space="preserve">
+    <value>Завантаження з XML не вдалося!</value>
   </data>
-  <data name="strLocalFile" xml:space="preserve">
-    <value>Локал. файл</value>
+	<data name="strLocalFile" xml:space="preserve">
+    <value>Локальний файл</value>
   </data>
-  <data name="strLocalFileDoesNotExist" xml:space="preserve">
+	<data name="strLocalFileDoesNotExist" xml:space="preserve">
     <value>Локальний файл не існує!</value>
   </data>
-  <data name="strLogOff" xml:space="preserve">
+	<data name="strLogOff" xml:space="preserve">
     <value>Вихід</value>
   </data>
-  <data name="strLogWriteToFileFailed" xml:space="preserve">
-    <value>Записати у файл звіту не вдалося!</value>
+	<data name="strLogWriteToFileFailed" xml:space="preserve">
+    <value>Не вдалося записати у файл журналу!</value>
   </data>
-  <data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
+	<data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
     <value>Неможливо зберегти звіт в папці призначення.</value>
   </data>
-  <data name="strMagicLibraryAttribution" xml:space="preserve">
-    <value>Використано Magic library від [Crownwood Software]</value>
+	<data name="strMagicLibraryAttribution" xml:space="preserve">
+    <value>Використовує Magic library від [Crownwood Software]</value>
   </data>
-  <data name="strMenuAbout" xml:space="preserve">
+	<data name="strMenuAbout" xml:space="preserve">
     <value>Про програму</value>
   </data>
-  <data name="strMenuAddConnectionPanel" xml:space="preserve">
-    <value>Додати Панель з'єднання</value>
+	<data name="strMenuAddConnectionPanel" xml:space="preserve">
+    <value>Додати панель з'єднання</value>
   </data>
-  <data name="strMenuCheckForUpdates" xml:space="preserve">
+	<data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Перевірка наявності оновлень</value>
   </data>
-  <data name="strMenuConfig" xml:space="preserve">
+	<data name="strMenuConfig" xml:space="preserve">
     <value>Конфігурація</value>
   </data>
-  <data name="strMenuConnect" xml:space="preserve">
-    <value>З'єдуватися</value>
-  </data>
-  <data name="strMenuConnectionPanels" xml:space="preserve">
-    <value>Панель з'єднань</value>
-  </data>
-  <data name="strMenuConnections" xml:space="preserve">
+	<data name="strMenuConnect" xml:space="preserve">
     <value>З'єднання</value>
   </data>
-  <data name="strMenuConnectionsAndConfig" xml:space="preserve">
+	<data name="strMenuConnectionPanels" xml:space="preserve">
+    <value>Панель з'єднань</value>
+  </data>
+	<data name="strMenuConnections" xml:space="preserve">
+    <value>З'єднання</value>
+  </data>
+	<data name="strMenuConnectionsAndConfig" xml:space="preserve">
     <value>З'єднання та конфігурація</value>
   </data>
-  <data name="strMenuCopy" xml:space="preserve">
+	<data name="strMenuCopy" xml:space="preserve">
     <value>Копіювати</value>
   </data>
-  <data name="strMenuCtrlAltDel" xml:space="preserve">
-    <value>Ctrl-Alt-Del</value>
+	<data name="strMenuCtrlAltDel" xml:space="preserve">
+    <value>Ctrl+Alt+Del</value>
   </data>
-  <data name="strMenuCtrlEsc" xml:space="preserve">
-    <value>Ctrl-Esc</value>
+	<data name="strMenuCtrlEsc" xml:space="preserve">
+    <value>Ctrl+Esc</value>
   </data>
-  <data name="strMenuDelete" xml:space="preserve">
-    <value>Видалити...</value>
+	<data name="strMenuDelete" xml:space="preserve">
+    <value>Видалити…</value>
   </data>
-  <data name="strMenuDeleteConnection" xml:space="preserve">
-    <value>Удалить подключение ...</value>
+	<data name="strMenuDeleteConnection" xml:space="preserve">
+    <value>Видалити з'єднання…</value>
   </data>
-  <data name="strMenuDeleteExternalTool" xml:space="preserve">
-    <value>Видалити Зовнішній інструмент...</value>
+	<data name="strMenuDeleteExternalTool" xml:space="preserve">
+    <value>Видалити зовнішній інструмент…</value>
   </data>
-  <data name="strMenuDeleteFolder" xml:space="preserve">
-    <value>Видалити папку...</value>
+	<data name="strMenuDeleteFolder" xml:space="preserve">
+    <value>Видалити папку…</value>
   </data>
-  <data name="strMenuDisconnect" xml:space="preserve">
-    <value>Вимкнути</value>
+	<data name="strMenuDisconnect" xml:space="preserve">
+    <value>Відключити</value>
   </data>
-  <data name="strMenuDonate" xml:space="preserve">
-    <value>Допомогти проекту</value>
+	<data name="strMenuDonate" xml:space="preserve">
+    <value>Пожертва</value>
   </data>
-  <data name="strMenuDuplicate" xml:space="preserve">
+	<data name="strMenuDuplicate" xml:space="preserve">
     <value>Дублювати</value>
   </data>
-  <data name="strMenuDuplicateConnection" xml:space="preserve">
-    <value>Дублікат з'єднання</value>
+	<data name="strMenuDuplicateConnection" xml:space="preserve">
+    <value>Дублювати з'єднання</value>
   </data>
-  <data name="strMenuDuplicateFolder" xml:space="preserve">
+	<data name="strMenuDuplicateFolder" xml:space="preserve">
     <value>Дублювати папку</value>
   </data>
-  <data name="strMenuDuplicateTab" xml:space="preserve">
+	<data name="strMenuDuplicateTab" xml:space="preserve">
     <value>Дублювати вкладку</value>
   </data>
-  <data name="strMenuExit" xml:space="preserve">
+	<data name="strMenuExit" xml:space="preserve">
     <value>Вихід</value>
   </data>
-  <data name="strMenuExternalTools" xml:space="preserve">
+	<data name="strMenuExternalTools" xml:space="preserve">
     <value>Зовнішні інструменти</value>
   </data>
-  <data name="strMenuExternalToolsToolbar" xml:space="preserve">
-    <value>Зовнішні інструменти</value>
+	<data name="strMenuExternalToolsToolbar" xml:space="preserve">
+    <value>Панель зовнішніх інструментів</value>
   </data>
-  <data name="strMenuFile" xml:space="preserve">
+	<data name="strMenuFile" xml:space="preserve">
     <value>&amp;Файл</value>
   </data>
-  <data name="strMenuFullScreen" xml:space="preserve">
+	<data name="strMenuFullScreen" xml:space="preserve">
     <value>На весь екран</value>
   </data>
-  <data name="strMenuFullScreenRDP" xml:space="preserve">
+	<data name="strMenuFullScreenRDP" xml:space="preserve">
     <value>На весь екран (RDP)</value>
   </data>
-  <data name="strMenuHelp" xml:space="preserve">
+	<data name="strMenuHelp" xml:space="preserve">
     <value>&amp;Довідка</value>
   </data>
-  <data name="strMenuHelpContents" xml:space="preserve">
+	<data name="strMenuHelpContents" xml:space="preserve">
     <value>Довідка mRemoteNG</value>
   </data>
-  <data name="strMenuJumpTo" xml:space="preserve">
-    <value>Перейти до ..</value>
+	<data name="strMenuJumpTo" xml:space="preserve">
+    <value>Перейти до</value>
   </data>
-  <data name="strMenuLaunchExternalTool" xml:space="preserve">
+	<data name="strMenuLaunchExternalTool" xml:space="preserve">
     <value>Запуск зовнішніх інструментів</value>
   </data>
-  <data name="strMenuNewConnectionFile" xml:space="preserve">
-    <value>Новий файл з'єднання</value>
+	<data name="strMenuNewConnectionFile" xml:space="preserve">
+    <value>Новий файл з'єднань</value>
   </data>
-  <data name="strMenuNewExternalTool" xml:space="preserve">
+	<data name="strMenuNewExternalTool" xml:space="preserve">
     <value>Новий зовнішній інструмент</value>
   </data>
-  <data name="strMenuNotifications" xml:space="preserve">
-    <value>Повідомлення</value>
+	<data name="strMenuNotifications" xml:space="preserve">
+    <value>Сповіщення</value>
   </data>
-  <data name="strMenuOpenConnectionFile" xml:space="preserve">
-    <value>Відкрити файл з'єднання...</value>
+	<data name="strMenuOpenConnectionFile" xml:space="preserve">
+    <value>Відкрити файл з'єднань…</value>
   </data>
-  <data name="strMenuOptions" xml:space="preserve">
-    <value>Опції</value>
+	<data name="strMenuOptions" xml:space="preserve">
+    <value>Параметри</value>
   </data>
-  <data name="strMenuPaste" xml:space="preserve">
+	<data name="strMenuPaste" xml:space="preserve">
     <value>Вставити</value>
   </data>
-  <data name="strMenuPortScan" xml:space="preserve">
+	<data name="strMenuPortScan" xml:space="preserve">
     <value>Сканер портів</value>
   </data>
-  <data name="strMenuQuickConnectToolbar" xml:space="preserve">
-    <value>Панель Швидке з'єднання</value>
+	<data name="strMenuQuickConnectToolbar" xml:space="preserve">
+    <value>Панель швидкого з'єднання</value>
   </data>
-  <data name="strMenuReconnect" xml:space="preserve">
-    <value>Повторне з'эднання</value>
+	<data name="strMenuReconnect" xml:space="preserve">
+    <value>Повторне з'єднання</value>
   </data>
-  <data name="strMenuRefreshScreen" xml:space="preserve">
+	<data name="strMenuRefreshScreen" xml:space="preserve">
     <value>Оновити екран (VNC)</value>
   </data>
-  <data name="strMenuRename" xml:space="preserve">
+	<data name="strMenuRename" xml:space="preserve">
     <value>Перейменувати</value>
   </data>
-  <data name="strMenuRenameConnection" xml:space="preserve">
+	<data name="strMenuRenameConnection" xml:space="preserve">
     <value>Перейменувати з'єднання</value>
   </data>
-  <data name="strMenuRenameFolder" xml:space="preserve">
+	<data name="strMenuRenameFolder" xml:space="preserve">
     <value>Перейменувати папку</value>
   </data>
-  <data name="strMenuRenameTab" xml:space="preserve">
-    <value>Перейменувати закладку</value>
+	<data name="strMenuRenameTab" xml:space="preserve">
+    <value>Перейменувати вкладку</value>
   </data>
-  <data name="strMenuReportBug" xml:space="preserve">
+	<data name="strMenuReportBug" xml:space="preserve">
     <value>Повідомити про помилку</value>
   </data>
-  <data name="strMenuResetLayout" xml:space="preserve">
-    <value>Скинути налаштування</value>
+	<data name="strMenuResetLayout" xml:space="preserve">
+    <value>Скинути шаблон</value>
   </data>
-  <data name="strMenuSaveConnectionFile" xml:space="preserve">
-    <value>Зберегти з'єднання</value>
+	<data name="strMenuSaveConnectionFile" xml:space="preserve">
+    <value>Зберегти файл з'єднань</value>
   </data>
-  <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
-    <value>Сохранить подключение как...</value>
+	<data name="strMenuSaveConnectionFileAs" xml:space="preserve">
+    <value>Зберегти файл з'єднань як…</value>
   </data>
-  <data name="strMenuScreenshot" xml:space="preserve">
+	<data name="strMenuScreenshot" xml:space="preserve">
     <value>Скріншот</value>
   </data>
-  <data name="strMenuScreenshotManager" xml:space="preserve">
+	<data name="strMenuScreenshotManager" xml:space="preserve">
     <value>Менеджер скріншотів</value>
   </data>
-  <data name="strMenuSendSpecialKeys" xml:space="preserve">
+	<data name="strMenuSendSpecialKeys" xml:space="preserve">
     <value>Надіслати спец. клавіші (VNC)</value>
   </data>
-  <data name="strMenuSessions" xml:space="preserve">
+	<data name="strMenuSessions" xml:space="preserve">
     <value>Сесії</value>
   </data>
-  <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
+	<data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Сесії та скріншоти</value>
   </data>
-  <data name="strMenuShowText" xml:space="preserve">
+	<data name="strMenuShowText" xml:space="preserve">
     <value>Показати текст</value>
   </data>
-  <data name="strMenuSmartSize" xml:space="preserve">
-    <value>SmartSize (RDP / VNC)</value>
-  </data>
-  <data name="strMenuSSHFileTransfer" xml:space="preserve">
+	<data name="strMenuSSHFileTransfer" xml:space="preserve">
     <value>Передача файлів по SSH</value>
   </data>
-  <data name="strMenuStartChat" xml:space="preserve">
+	<data name="strMenuStartChat" xml:space="preserve">
     <value>Почати чат (VNC)</value>
   </data>
-  <data name="strMenuSupportForum" xml:space="preserve">
+	<data name="strMenuSupportForum" xml:space="preserve">
     <value>Форум підтримки</value>
   </data>
-  <data name="strMenuTools" xml:space="preserve">
+	<data name="strMenuTools" xml:space="preserve">
     <value>&amp;Інструменти</value>
   </data>
-  <data name="strMenuTransferFile" xml:space="preserve">
+	<data name="strMenuTransferFile" xml:space="preserve">
     <value>Передача файлів (SSH)</value>
   </data>
-  <data name="strMenuView" xml:space="preserve">
+	<data name="strMenuView" xml:space="preserve">
     <value>&amp;Вигляд</value>
   </data>
-  <data name="strMenuViewOnly" xml:space="preserve">
+	<data name="strMenuViewOnly" xml:space="preserve">
     <value>Перегляд (VNC)</value>
   </data>
-  <data name="strMenuWebsite" xml:space="preserve">
+	<data name="strMenuWebsite" xml:space="preserve">
     <value>Веб-сайт</value>
   </data>
-  <data name="strMinimizeToSysTray" xml:space="preserve">
-    <value>Мінімізувати в системний трей</value>
+	<data name="strMinimizeToSysTray" xml:space="preserve">
+    <value>Мінімізувати в область сповіщень</value>
   </data>
-  <data name="strMoveDown" xml:space="preserve">
+	<data name="strMoveDown" xml:space="preserve">
     <value>Вниз</value>
   </data>
-  <data name="strMoveUp" xml:space="preserve">
+	<data name="strMoveUp" xml:space="preserve">
     <value>Вгору</value>
   </data>
-  <data name="strMyCurrentWindowsCreds" xml:space="preserve">
+	<data name="strMyCurrentWindowsCreds" xml:space="preserve">
     <value>Мої поточні облікові дані (Windows облікові дані)</value>
   </data>
-  <data name="strNever" xml:space="preserve">
+	<data name="strNever" xml:space="preserve">
     <value>Ніколи</value>
   </data>
-  <data name="strNewConnection" xml:space="preserve">
+	<data name="strNewConnection" xml:space="preserve">
     <value>Нове з'єднання</value>
   </data>
-  <data name="strNewFolder" xml:space="preserve">
+	<data name="strNewFolder" xml:space="preserve">
     <value>Нова папка</value>
   </data>
-  <data name="strNewPanel" xml:space="preserve">
+	<data name="strNewPanel" xml:space="preserve">
     <value>Нова панель</value>
   </data>
-  <data name="strNewRoot" xml:space="preserve">
-    <value>новий кореневої</value>
+	<data name="strNewRoot" xml:space="preserve">
+    <value>Новий корінь</value>
   </data>
-  <data name="strNewTitle" xml:space="preserve">
+	<data name="strNewTitle" xml:space="preserve">
     <value>Нова назва</value>
   </data>
-  <data name="strNo" xml:space="preserve">
+	<data name="strNo" xml:space="preserve">
     <value>Ні</value>
   </data>
-  <data name="strNoCompression" xml:space="preserve">
+	<data name="strNoCompression" xml:space="preserve">
     <value>Без стискання</value>
   </data>
-  <data name="strNoExtAppDefined" xml:space="preserve">
+	<data name="strNoExtAppDefined" xml:space="preserve">
     <value>Не вказано зовнішній інструмент</value>
   </data>
-  <data name="strNoInformation" xml:space="preserve">
+	<data name="strNoInformation" xml:space="preserve">
     <value>Ні</value>
   </data>
-  <data name="strNone" xml:space="preserve">
+	<data name="strNone" xml:space="preserve">
     <value>Ні</value>
   </data>
-  <data name="strNormal" xml:space="preserve">
+	<data name="strNormal" xml:space="preserve">
     <value>Нормальний</value>
   </data>
-  <data name="strNoUpdateAvailable" xml:space="preserve">
+	<data name="strNoUpdateAvailable" xml:space="preserve">
     <value>Немає доступних оновлень</value>
   </data>
-  <data name="strOldConffile" xml:space="preserve">
-    <value>Ви намагаєтеся завантажити файл з'єднання, що створено за допомогою дуже ранніх версій mRemote, це може призвести до помилки виконання.
+	<data name="strOldConffile" xml:space="preserve">
+    <value>Ви намагаєтеся завантажити файл з'єднання, що створений за допомогою дуже ранніх версій mRemote, це може спричинити помилки виконання.
 Будь ласка, створіть новий файл з'єднання!</value>
   </data>
-  <data name="strOpenNewTabRight" xml:space="preserve">
-    <value>Відкриття нової вкладки праворуч від вибраної вкладки</value>
+	<data name="strOpenNewTabRight" xml:space="preserve">
+    <value>Відкривати нову вкладку праворуч від вибраної вкладки</value>
   </data>
-  <data name="strOpenPorts" xml:space="preserve">
+	<data name="strOpenPorts" xml:space="preserve">
     <value>Відкриті порти</value>
   </data>
-  <data name="strOptionsTabTheme" xml:space="preserve">
+	<data name="strOptionsTabTheme" xml:space="preserve">
     <value>Тема</value>
   </data>
-  <data name="strPanelName" xml:space="preserve">
-    <value>Назва групи</value>
+	<data name="strPanelName" xml:space="preserve">
+    <value>Назва панелі</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+	<data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Захист паролем</value>
   </data>
-  <data name="strPleaseFillAllFields" xml:space="preserve">
+	<data name="strPleaseFillAllFields" xml:space="preserve">
     <value>Будь ласка, заповніть всі поля</value>
   </data>
-  <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
-    <value>Не удалось загрузить панель Сканера портов!</value>
+	<data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
+    <value>Не вдалося завантажити панель сканера портів!</value>
   </data>
-  <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(Ці властивості будуть збережені тільки якщо ви виберете mRemote / mRemoteNG XML як вихідний формат файлів!)</value>
+	<data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
+    <value>(Ці властивості будуть збережені тільки якщо ви виберете mRemote / mRemoteNG XML як вихідний формат файлу!)</value>
   </data>
-  <data name="strPropertyDescriptionAddress" xml:space="preserve">
-    <value>Введіть ім'я хосту або IP до якого ви хочете підключитися.</value>
+	<data name="strPropertyDescriptionAddress" xml:space="preserve">
+    <value>Введіть ім'я хосту або IP до якого потрбіно підключитися.</value>
   </data>
-  <data name="strPropertyDescriptionAll" xml:space="preserve">
-    <value>Переключить все наследуемые параметры.</value>
+	<data name="strPropertyDescriptionAll" xml:space="preserve">
+    <value>Перемкнути усі варіанти успадкування.</value>
   </data>
-  <data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
-    <value>Оберіть рівень авторизації.</value>
+	<data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
+    <value>Виберіть рівень аутентифікації, що має використовувати це з'єднання.</value>
   </data>
-  <data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
+	<data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
     <value>Виберіть спосіб авторизації на сервері VNC.</value>
   </data>
-  <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
-    <value>Виберіть використовувати чи ні, кешування графіки.</value>
+	<data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
+    <value>Виберіть, чи використовувати кешування растрових зображень.</value>
   </data>
-  <data name="strPropertyDescriptionColors" xml:space="preserve">
-    <value>Виберіть якість кольору, яка буде використовуватися.</value>
+	<data name="strPropertyDescriptionColors" xml:space="preserve">
+    <value>Виберіть якість кольору, що буде використовуватися.</value>
   </data>
-  <data name="strPropertyDescriptionCompression" xml:space="preserve">
+	<data name="strPropertyDescriptionCompression" xml:space="preserve">
     <value>Виберіть значення стискання, яке буде використовуватися.</value>
   </data>
-  <data name="strPropertyDescriptionDescription" xml:space="preserve">
-    <value>Введіть тут примітки чи опис для з'єднання.</value>
+	<data name="strPropertyDescriptionDescription" xml:space="preserve">
+    <value>Помістіть сюди свої замітки або опис хоста.</value>
   </data>
-  <data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
-    <value>Виберіть Так, якщо хочете використовувати тему Робочого столу на віддаленому хості.</value>
+	<data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
+    <value>Виберіть «Так», якщо хочете бачити тему робочого столу віддаленого хоста.</value>
   </data>
-  <data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
-    <value>Виберіть Так, якщо хочете використовувати шпалери Робочого столу на віддаленому хості.</value>
+	<data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
+    <value>Виберіть «Так», якщо хочете бачити шпалери віддаленого хоста.</value>
   </data>
-  <data name="strPropertyDescriptionDomain" xml:space="preserve">
+	<data name="strPropertyDescriptionDomain" xml:space="preserve">
     <value>Введіть ім'я домену.</value>
   </data>
-  <data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
-    <value>Використання композиції Робочого столу на віддаленому хості.</value>
+	<data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
+    <value>Чи використовувати композицію робочого столу на віддаленому хості.</value>
   </data>
-  <data name="strPropertyDescriptionEnableFontSmoothing" xml:space="preserve">
+	<data name="strPropertyDescriptionEnableFontSmoothing" xml:space="preserve">
     <value>Використання згладжування шрифтів.</value>
   </data>
-  <data name="strPropertyDescriptionEncoding" xml:space="preserve">
-    <value>Режим кодування.</value>
+	<data name="strPropertyDescriptionEncoding" xml:space="preserve">
+    <value>Виберіть режим кодування, який буде використовуватися.</value>
   </data>
-  <data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Шифрування на віддаленому хості.</value>
+	<data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
+    <value>Виберіть ступінь шифрування віддаленого хоста.</value>
   </data>
-  <data name="strPropertyDescriptionExternalTool" xml:space="preserve">
-    <value>Зовнішній інструмент, який потрібно запустити.</value>
+	<data name="strPropertyDescriptionExternalTool" xml:space="preserve">
+    <value>Виберіть зовнішній інструмент для запуску.</value>
   </data>
-  <data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
-    <value>Внешний инструмент, который нужно запустить на удаленном компьютере после отключения.</value>
+	<data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
+    <value>Виберіть зовнішній інструмент, який потрібно запустити після відключення від віддаленого хоста.</value>
   </data>
-  <data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
-    <value>Зовнішній інструмент, який потрібно запустити на віддаленому комп'ютері до з'єднання.</value>
+	<data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
+    <value>Виберіть зовнішній інструмент, який потрібно запустити до встановлення з'єднання з віддаленим хостом.</value>
   </data>
-  <data name="strPropertyDescriptionIcon" xml:space="preserve">
-    <value>Значок, який буде відображатися при з'єднанні до хосту.</value>
+	<data name="strPropertyDescriptionIcon" xml:space="preserve">
+    <value>Виберіть піктограму, яка відображатиметься при підключенні до хоста.</value>
   </data>
-  <data name="strPropertyDescriptionMACAddress" xml:space="preserve">
-    <value>Введіть МАС-адресу віддаленого хосту, якщо ви хочете використовувати його в зовнішньому інструменті.</value>
+	<data name="strPropertyDescriptionMACAddress" xml:space="preserve">
+    <value>Введіть МАС-адресу віддаленого хоста, якщо ви хочете використовувати його в зовнішньому інструменті.</value>
   </data>
-  <data name="strPropertyDescriptionName" xml:space="preserve">
-    <value>Це ім'я, яке буде відображатися в дереві з'єднань.</value>
+	<data name="strPropertyDescriptionName" xml:space="preserve">
+    <value>Це ім'я буде відображатися в дереві з'єднань.</value>
   </data>
-  <data name="strPropertyDescriptionPanel" xml:space="preserve">
-    <value>Встанавити панель, в якій буде відкрито з'єднання.</value>
+	<data name="strPropertyDescriptionPanel" xml:space="preserve">
+    <value>Визначає вкладку, в якій буде відкрито з'єднання.</value>
   </data>
-  <data name="strPropertyDescriptionPassword" xml:space="preserve">
+	<data name="strPropertyDescriptionPassword" xml:space="preserve">
     <value>Введіть пароль.</value>
   </data>
-  <data name="strPropertyDescriptionPort" xml:space="preserve">
-    <value>Введіть порт обраного протоколу.</value>
+	<data name="strPropertyDescriptionPort" xml:space="preserve">
+    <value>Введіть порт, на якому прослуховується вибраний протокол.</value>
   </data>
-  <data name="strPropertyDescriptionProtocol" xml:space="preserve">
-    <value>Виберіть протокол, який повинен використовуватися для з'єднання.</value>
+	<data name="strPropertyDescriptionProtocol" xml:space="preserve">
+    <value>Виберіть протокол, який mRemoteNG повинен використовувати для з'єднання з хостом.</value>
   </data>
-  <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
-    <value>Виберіть сесію PuTTY, яка буде використовуватися при з'єднанні.</value>
+	<data name="strPropertyDescriptionPuttySession" xml:space="preserve">
+    <value>Виберіть сесію PuTTY, яка буде використовуватися під час з'єднання.</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
-    <value>Визначте доменне ім'я, для з'єднання до шлюзу Служб терміналів</value>
+	<data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
+    <value>Вкажіть доменне ім'я, яке надає користувач для підключення до сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
-    <value>Визначте ім'я хосту шлюзу Служб терміналів.</value>
+	<data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
+    <value>Вкажіть ім'я хоста сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
-    <value>Вкажіть, коли використовувати шлюз Служб терміналів.</value>
+	<data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+    <value>Вкажіть, коли використовувати сервер шлюзу віддаленого робочого столу (RD Gateway).</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
-    <value>Вкажіть, чи слід увійти на шлюз, який використовує те ж саме ім'я користувача та пароль з'єднання.</value>
+	<data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
+    <value>Вкажіть, чи потрібно входити в шлюз, використовуючи те саме ім’я користувача й пароль, що і для з'єднання.</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
-    <value>Вкажіть ім'я користувача, якому дозволено підключатися до шлюзу Служб терміналів.</value>
+	<data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
+    <value>Вкажіть ім'я користувача, яке надає користувач для підключення до сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
   </data>
-  <data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
+	<data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
     <value>Вкажіть, чи будуть доступні локальні диски на віддаленому хості.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
-    <value>Вкажіть, чи будуть перенаправлені локальні комбінації клавіш (наприклад, Alt-Tab) на віддалений хост.</value>
+	<data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
+    <value>Вкажіть, чи будуть перенаправлені локальні комбінації клавіш (наприклад, Alt+Tab) на віддалений хост.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
+	<data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
     <value>Вкажіть, чи будуть доступні локальні порти (тобто COM, LPT) на віддаленому хості.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
-    <value>Вкажіть, чи будуть локальні принтери доступні на віддаленому хості.</value>
+	<data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
+    <value>Вкажіть, чи локальні принтери будуть доступні на віддаленому хості.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
+	<data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Вкажіть, чи будуть локальні смарт-карти доступні на віддаленому хості.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
-    <value>Укажите, будет ли перенаправлен удаленный звук на локальный компьютер.</value>
+	<data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
+    <value>Виберіть, як слід перенаправляти віддалений звук.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Выберите один из доступных движков рендеринга, который будет использоваться для отображения HTML.</value>
+	<data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
+    <value>Виберіть один із доступних механізмів візуалізації, який використовуватиметься для відображення HTML.</value>
   </data>
-  <data name="strPropertyDescriptionResolution" xml:space="preserve">
-    <value>Виберіть роздільність екрану в дюймах або режим відображення для цього з'єднання</value>
+	<data name="strPropertyDescriptionResolution" xml:space="preserve">
+    <value>Виберіть роздільну здатність або режим, у якому відкриється це з'єднання.</value>
   </data>
-  <data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
-    <value>Виберіть SmartSize.</value>
+	<data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
+    <value>Виберіть, чи буде використовуватись режим SmartSize.</value>
   </data>
-  <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
-    <value>З'єднання до поточного сеансу віддаленого користувача.</value>
+	<data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
+    <value>Підключитися до консольного сеансу віддаленого хоста.</value>
   </data>
-  <data name="strPropertyDescriptionUser1" xml:space="preserve">
-    <value>Введіть будь-яку інформацію.</value>
+	<data name="strPropertyDescriptionUser1" xml:space="preserve">
+    <value>Не соромтеся вводити тут інформацію, яка вам потрібна.</value>
   </data>
-  <data name="strPropertyDescriptionUsername" xml:space="preserve">
+	<data name="strPropertyDescriptionUsername" xml:space="preserve">
     <value>Введіть ім'я користувача.</value>
   </data>
-  <data name="strPropertyDescriptionViewOnly" xml:space="preserve">
-    <value>Якщо ви хочете встановити режим Перегляду - виберіть Так.</value>
+	<data name="strPropertyDescriptionViewOnly" xml:space="preserve">
+    <value>Якщо ви хочете встановити підключення в режимі перегляду - виберіть «Так».</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
     <value>Введіть адресу проксі-сервера.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
     <value>Введіть пароль для авторизації на проксі-сервері.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
     <value>Введіть порт проксі-сервера.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
     <value>Якщо ви використовуєте проксі для тунелювання VNC з'єднань, виберіть тип тунелювання.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Введіть ім'я користувача для авторизації на проксі-сервері.</value>
   </data>
-  <data name="strPropertyNameAddress" xml:space="preserve">
-    <value>Ім'я хосту / IP</value>
+	<data name="strPropertyNameAddress" xml:space="preserve">
+    <value>Ім'я хоста / IP</value>
   </data>
-  <data name="strPropertyNameAll" xml:space="preserve">
+	<data name="strPropertyNameAll" xml:space="preserve">
     <value>Все</value>
   </data>
-  <data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
-    <value>Авторизація</value>
+	<data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
+    <value>Аутентифікація сервера</value>
   </data>
-  <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
-    <value>Режим авторизації</value>
+	<data name="strPropertyNameAuthenticationMode" xml:space="preserve">
+    <value>Режим аутентифікації</value>
   </data>
-  <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
+	<data name="strPropertyNameCacheBitmaps" xml:space="preserve">
     <value>Кеш графіки</value>
   </data>
-  <data name="strPropertyNameColors" xml:space="preserve">
+	<data name="strPropertyNameColors" xml:space="preserve">
     <value>Кольори</value>
   </data>
-  <data name="strPropertyNameCompression" xml:space="preserve">
+	<data name="strPropertyNameCompression" xml:space="preserve">
     <value>Стискання</value>
   </data>
-  <data name="strPropertyNameDescription" xml:space="preserve">
+	<data name="strPropertyNameDescription" xml:space="preserve">
     <value>Опис</value>
   </data>
-  <data name="strPropertyNameDisplayThemes" xml:space="preserve">
+	<data name="strPropertyNameDisplayThemes" xml:space="preserve">
     <value>Показати теми</value>
   </data>
-  <data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
+	<data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
     <value>Показати шпалери</value>
   </data>
-  <data name="strPropertyNameDomain" xml:space="preserve">
+	<data name="strPropertyNameDomain" xml:space="preserve">
     <value>Домен</value>
   </data>
-  <data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
+	<data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
     <value>Композиція робочого столу</value>
   </data>
-  <data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
-    <value>Шрифти</value>
+	<data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
+    <value>Згладжування шрифту</value>
   </data>
-  <data name="strPropertyNameEncoding" xml:space="preserve">
+	<data name="strPropertyNameEncoding" xml:space="preserve">
     <value>Кодування</value>
   </data>
-  <data name="strPropertyNameEncryptionStrength" xml:space="preserve">
+	<data name="strPropertyNameEncryptionStrength" xml:space="preserve">
     <value>Шифрування</value>
   </data>
-  <data name="strPropertyNameExternalTool" xml:space="preserve">
+	<data name="strPropertyNameExternalTool" xml:space="preserve">
     <value>Зовнішній інструмент</value>
   </data>
-  <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
-    <value>Зовн. Інстр. Після</value>
+	<data name="strPropertyNameExternalToolAfter" xml:space="preserve">
+    <value>Зовнішній інструмент після</value>
   </data>
-  <data name="strPropertyNameExternalToolBefore" xml:space="preserve">
-    <value>Зовн. Інстр. До</value>
+	<data name="strPropertyNameExternalToolBefore" xml:space="preserve">
+    <value>Зовнішній інструмент до</value>
   </data>
-  <data name="strPropertyNameIcon" xml:space="preserve">
+	<data name="strPropertyNameIcon" xml:space="preserve">
     <value>Значок</value>
   </data>
-  <data name="strPropertyNameMACAddress" xml:space="preserve">
+	<data name="strPropertyNameMACAddress" xml:space="preserve">
     <value>MAC-адреса</value>
   </data>
-  <data name="strPropertyNameName" xml:space="preserve">
+	<data name="strPropertyNameName" xml:space="preserve">
     <value>Ім'я</value>
   </data>
-  <data name="strPropertyNamePanel" xml:space="preserve">
+	<data name="strPropertyNamePanel" xml:space="preserve">
     <value>Ім'я вкладки</value>
   </data>
-  <data name="strPropertyNamePassword" xml:space="preserve">
+	<data name="strPropertyNamePassword" xml:space="preserve">
     <value>Пароль</value>
   </data>
-  <data name="strPropertyNamePort" xml:space="preserve">
+	<data name="strPropertyNamePort" xml:space="preserve">
     <value>Порт</value>
   </data>
-  <data name="strPropertyNameProtocol" xml:space="preserve">
+	<data name="strPropertyNameProtocol" xml:space="preserve">
     <value>Протокол</value>
   </data>
-  <data name="strPropertyNamePuttySession" xml:space="preserve">
-    <value>Сесії PuTTY</value>
+	<data name="strPropertyNamePuttySession" xml:space="preserve">
+    <value>Сесія PuTTY</value>
   </data>
-  <data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
-    <value>Шлюз Домена</value>
+	<data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
+    <value>Шлюз домену</value>
   </data>
-  <data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
     <value>Хост шлюзу</value>
   </data>
-  <data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
-    <value>Пароль шлюзу Служб терміналів</value>
+	<data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
+    <value>Пароль шлюзу служб терміналів</value>
   </data>
-  <data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
-    <value>Шлюз</value>
+	<data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
+    <value>Використовувати шлюз</value>
   </data>
-  <data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Облікові дані шлюзу</value>
   </data>
-  <data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
     <value>Ім'я користувача шлюзу</value>
   </data>
-  <data name="strPropertyNameRedirectDrives" xml:space="preserve">
+	<data name="strPropertyNameRedirectDrives" xml:space="preserve">
     <value>Диски</value>
   </data>
-  <data name="strPropertyNameRedirectKeys" xml:space="preserve">
+	<data name="strPropertyNameRedirectKeys" xml:space="preserve">
     <value>Комбінації клавіш</value>
   </data>
-  <data name="strPropertyNameRedirectPorts" xml:space="preserve">
+	<data name="strPropertyNameRedirectPorts" xml:space="preserve">
     <value>Порти</value>
   </data>
-  <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
+	<data name="strPropertyNameRedirectPrinters" xml:space="preserve">
     <value>Принтери</value>
   </data>
-  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+	<data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
     <value>Смарт-карти</value>
   </data>
-  <data name="strPropertyNameRedirectSounds" xml:space="preserve">
+	<data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Звуки</value>
   </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Рендеринг</value>
+	<data name="strPropertyNameRenderingEngine" xml:space="preserve">
+    <value>Рушій візуалізації</value>
   </data>
-  <data name="strPropertyNameResolution" xml:space="preserve">
-    <value>Розмір екрану</value>
+	<data name="strPropertyNameResolution" xml:space="preserve">
+    <value>Розширення екрану</value>
   </data>
-  <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
-    <value>SmartSize режим</value>
+	<data name="strPropertyNameSmartSizeMode" xml:space="preserve">
+    <value>Режим SmartSize</value>
   </data>
-  <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
-    <value>Сеанс консолі</value>
+	<data name="strPropertyNameUseConsoleSession" xml:space="preserve">
+    <value>Використовувати консольну сесію</value>
   </data>
-  <data name="strPropertyNameUser1" xml:space="preserve">
-    <value>Додатково</value>
+	<data name="strPropertyNameUser1" xml:space="preserve">
+    <value>Користувацьке поле</value>
   </data>
-  <data name="strPropertyNameUsername" xml:space="preserve">
+	<data name="strPropertyNameUsername" xml:space="preserve">
     <value>Користувач</value>
   </data>
-  <data name="strPropertyNameViewOnly" xml:space="preserve">
-    <value>Тільки Перегляд</value>
+	<data name="strPropertyNameViewOnly" xml:space="preserve">
+    <value>Режим перегляду</value>
   </data>
-  <data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
-    <value>Адреса Проксі</value>
+	<data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
+    <value>Адреса проксі</value>
   </data>
-  <data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
-    <value>Пароль Проксі</value>
+	<data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
+    <value>Пароль проксі</value>
   </data>
-  <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
-    <value>Порт Проксі</value>
+	<data name="strPropertyNameVNCProxyPort" xml:space="preserve">
+    <value>Порт проксі</value>
   </data>
-  <data name="strPropertyNameVNCProxyType" xml:space="preserve">
-    <value>Тип Проксі</value>
+	<data name="strPropertyNameVNCProxyType" xml:space="preserve">
+    <value>Тип проксі</value>
   </data>
-  <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
-    <value>Користувач Проксі</value>
+	<data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
+    <value>Користувач проксі</value>
   </data>
-  <data name="strProtocolEventDisconnected" xml:space="preserve">
-    <value>Протокол событий Отключен.
-Сообщение:
+	<data name="strProtocolEventDisconnected" xml:space="preserve">
+    <value>Протокол подій: Відключено. Хост: «{1}»; Протокол: «{2}»; Повідомлення: «{0}»</value>
+  </data>
+	<data name="strProtocolEventDisconnectFailed" xml:space="preserve">
+    <value>Протокол подій: Помилка відключення.
 {0}</value>
   </data>
-  <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
-    <value>Протокол событий Отключение не удалось.
-{0}</value>
-  </data>
-  <data name="strProtocolToImport" xml:space="preserve">
+	<data name="strProtocolToImport" xml:space="preserve">
     <value>Протокол імпорту</value>
   </data>
-  <data name="strProxyTestFailed" xml:space="preserve">
-    <value>Перевірка проксі - невдала!</value>
+	<data name="strProxyTestFailed" xml:space="preserve">
+    <value>Перевірка проксі невдала!</value>
   </data>
-  <data name="strProxyTestSucceeded" xml:space="preserve">
-    <value>Перевірка Проксі - вдала!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>З'єднання не вдалося!</value>
+	<data name="strProxyTestSucceeded" xml:space="preserve">
+    <value>Перевірка уроксі успішна!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Завершити роботу Putty - не вдалося!</value>
   </data>
-  <data name="strPuttyFocusFailed" xml:space="preserve">
+	<data name="strPuttyFocusFailed" xml:space="preserve">
     <value>Не вдається встановити фокус!</value>
   </data>
-  <data name="strPuttyGetSessionsFailed" xml:space="preserve">
+	<data name="strPuttyGetSessionsFailed" xml:space="preserve">
     <value>Отримати сесію Putty не вдалося!</value>
   </data>
-  <data name="strPuttyHandle" xml:space="preserve">
+	<data name="strPuttyHandle" xml:space="preserve">
     <value>Оброблювач подій Putty: {0}</value>
   </data>
-  <data name="strPuttyKillFailed" xml:space="preserve">
+	<data name="strPuttyKillFailed" xml:space="preserve">
     <value>Вбити процес Putty не вдалося!</value>
   </data>
-  <data name="strPuttyParentHandle" xml:space="preserve">
-    <value>Панель оброблювача подій: {0}</value>
+	<data name="strPuttyParentHandle" xml:space="preserve">
+    <value>Вкладка оброблювача подій: {0}</value>
   </data>
-  <data name="strPuttyResizeFailed" xml:space="preserve">
+	<data name="strPuttyResizeFailed" xml:space="preserve">
     <value>Помилка зміни розміру вікна Putty!</value>
   </data>
-  <data name="strPuttySettings" xml:space="preserve">
+	<data name="strPuttySettings" xml:space="preserve">
     <value>Налаштування PuTTY</value>
   </data>
-  <data name="strPuttyShowSettingsDialogFailed" xml:space="preserve">
+	<data name="strPuttyShowSettingsDialogFailed" xml:space="preserve">
     <value>Показати налаштування PuTTY не вдалося!</value>
   </data>
-  <data name="strPuttyStartFailed" xml:space="preserve">
+	<data name="strPuttyStartFailed" xml:space="preserve">
     <value>Не вдалося запустити Putty!</value>
   </data>
-  <data name="strPuttyTitle" xml:space="preserve">
+	<data name="strPuttyTitle" xml:space="preserve">
     <value>Заголовок PuTTY: {0}</value>
   </data>
-  <data name="strQuick" xml:space="preserve">
+	<data name="strQuick" xml:space="preserve">
     <value>Швидке: {0}</value>
   </data>
-  <data name="strQuickConnect" xml:space="preserve">
+	<data name="strQuickConnect" xml:space="preserve">
     <value>Швидке з'єднання</value>
   </data>
-  <data name="strQuickConnectAddFailed" xml:space="preserve">
-    <value>Помилка додавання Швидкого з'єднання!</value>
+	<data name="strQuickConnectAddFailed" xml:space="preserve">
+    <value>Помилка додавання швидкого з'єднання!</value>
   </data>
-  <data name="strQuickConnectFailed" xml:space="preserve">
+	<data name="strQuickConnectFailed" xml:space="preserve">
     <value>Створити швидке з'єднання не вдалося</value>
   </data>
-  <data name="strRAW" xml:space="preserve">
-    <value>RAW</value>
+	<data name="strRDP16777216Colors" xml:space="preserve">
+    <value>16 млн. кольорів (24-біт)</value>
   </data>
-  <data name="strRDP" xml:space="preserve">
-    <value>RDP</value>
+	<data name="strRDP256Colors" xml:space="preserve">
+    <value>256 кольорів (8-біт)</value>
   </data>
-  <data name="strRDP16777216Colors" xml:space="preserve">
-    <value>16777216 кол. (24-біт)</value>
+	<data name="strRDP32768Colors" xml:space="preserve">
+    <value>32 тис. кольорів (15-біт)</value>
   </data>
-  <data name="strRDP256Colors" xml:space="preserve">
-    <value>256 кол. (8-біт)</value>
+	<data name="strRDP4294967296Colors" xml:space="preserve">
+    <value>16 млн. кольорів (32-біт)</value>
   </data>
-  <data name="strRDP32768Colors" xml:space="preserve">
-    <value>32768 кол. (15-біт)</value>
+	<data name="strRDP65536Colors" xml:space="preserve">
+    <value>65 тис. кольорів (16-біт)</value>
   </data>
-  <data name="strRDP4294967296Colors" xml:space="preserve">
-    <value>16777216 кол. (32-біт)</value>
+	<data name="strRdpAddResolutionFailed" xml:space="preserve">
+    <value>RDP додати розширення не вдалося!</value>
   </data>
-  <data name="strRDP65536Colors" xml:space="preserve">
-    <value>65536 кол. (16-біт)</value>
+	<data name="strRdpAddResolutionsFailed" xml:space="preserve">
+    <value>RDP додати розширення не вдалося!</value>
   </data>
-  <data name="strRdpAddResolutionFailed" xml:space="preserve">
-    <value>RDP Додати дозвіл не вдалося!</value>
-  </data>
-  <data name="strRdpAddResolutionsFailed" xml:space="preserve">
-    <value>RDP Додати дозвіл не вдалося!</value>
-  </data>
-  <data name="strRdpAddSessionFailed" xml:space="preserve">
+	<data name="strRdpAddSessionFailed" xml:space="preserve">
     <value>Додати сесію не вдалося</value>
   </data>
-  <data name="strRdpCloseConnectionFailed" xml:space="preserve">
+	<data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Закрити з'єднання RDP не вдалося!</value>
   </data>
-  <data name="strRdpControlCreationFailed" xml:space="preserve">
-    <value>Не вдається створити RDP з'єднання, будь ласка, перевірте налаштування mRemoteNG.</value>
+	<data name="strRdpControlCreationFailed" xml:space="preserve">
+    <value>Неможливо створити управління RDP, перевірте вимоги mRemoteNG.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
-    <value>Вимкнути блимання курсору</value>
+	<data name="strRDPDisableCursorblinking" xml:space="preserve">
+    <value>Вимкнути моргання курсору</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+	<data name="strRDPDisableCursorShadow" xml:space="preserve">
     <value>Вимкнути тінь курсора</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+	<data name="strRDPDisableFullWindowdrag" xml:space="preserve">
     <value>Вимкнути відображення вікна при перетягуванні</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
-    <value>Вимкнути Анімацію</value>
+	<data name="strRDPDisableMenuAnimations" xml:space="preserve">
+    <value>Вимкнути анімації меню</value>
   </data>
-  <data name="strRDPDisableThemes" xml:space="preserve">
-    <value>Вимкнути Теми</value>
+	<data name="strRDPDisableThemes" xml:space="preserve">
+    <value>Вимкнути теми</value>
   </data>
-  <data name="strRDPDisableWallpaper" xml:space="preserve">
-    <value>Вимкнути шпалери Робочого столу</value>
+	<data name="strRDPDisableWallpaper" xml:space="preserve">
+    <value>Вимкнути шпалери робочого столу</value>
   </data>
-  <data name="strRdpDisconnected" xml:space="preserve">
+	<data name="strRdpDisconnected" xml:space="preserve">
     <value>RDP відключено!</value>
   </data>
-  <data name="strRdpDisconnectFailed" xml:space="preserve">
+	<data name="strRdpDisconnectFailed" xml:space="preserve">
     <value>RDP не вдалося відключити, спробуйте закрити його!</value>
   </data>
-  <data name="strRdpErrorCode1" xml:space="preserve">
+	<data name="strRdpErrorCode1" xml:space="preserve">
     <value>Внутрішня помилка: код 1.</value>
   </data>
-  <data name="strRdpErrorCode2" xml:space="preserve">
+	<data name="strRdpErrorCode2" xml:space="preserve">
     <value>Внутрішня помилка: код 2.</value>
   </data>
-  <data name="strRdpErrorCode3" xml:space="preserve">
-    <value>Внутрішня помилка: код 3. Це неприпустимий режим.</value>
+	<data name="strRdpErrorCode3" xml:space="preserve">
+    <value>Внутрішня помилка: код 3. Це неприпустимий стан.</value>
   </data>
-  <data name="strRdpErrorCode4" xml:space="preserve">
+	<data name="strRdpErrorCode4" xml:space="preserve">
     <value>Внутрішня помилка: код 4.</value>
   </data>
-  <data name="strRdpErrorConnection" xml:space="preserve">
-    <value>Сталася непоправна помилка під час з'єднання клієнта.</value>
+	<data name="strRdpErrorConnection" xml:space="preserve">
+    <value>Сталася непоправна помилка під час з'єднання з клієнтом.</value>
   </data>
-  <data name="strRdpErrorGetUnknown" xml:space="preserve">
-    <value>Виникла невідома критична помилка RDP. Код помилки {0}.</value>
+	<data name="strRdpErrorGetUnknown" xml:space="preserve">
+    <value>Виникла невідома критична помилка RDP. Код помилки: {0}.</value>
   </data>
-  <data name="strRdpErrorOutOfMemory" xml:space="preserve">
-    <value>Сталася помилка через нестачу пам'яті.</value>
+	<data name="strRdpErrorOutOfMemory" xml:space="preserve">
+    <value>Сталася помилка через брак пам'яті.</value>
   </data>
-  <data name="strRdpErrorUnknown" xml:space="preserve">
+	<data name="strRdpErrorUnknown" xml:space="preserve">
     <value>Невідома помилка.</value>
   </data>
-  <data name="strRdpErrorWindowCreation" xml:space="preserve">
+	<data name="strRdpErrorWindowCreation" xml:space="preserve">
     <value>При створенні вікна сталася помилка.</value>
   </data>
-  <data name="strRdpErrorWinsock" xml:space="preserve">
+	<data name="strRdpErrorWinsock" xml:space="preserve">
     <value>Помилка ініціалізації Winsock.</value>
   </data>
-  <data name="strRdpFileCouldNotBeImported" xml:space="preserve">
+	<data name="strRdpFileCouldNotBeImported" xml:space="preserve">
     <value>Не вдалося імпортувати RDP файл!</value>
   </data>
-  <data name="strRDPFitToPanel" xml:space="preserve">
-    <value>У вікні</value>
+	<data name="strRDPFitToPanel" xml:space="preserve">
+    <value>Встановити на вкладку</value>
   </data>
-  <data name="strRdpFocusFailed" xml:space="preserve">
+	<data name="strRdpFocusFailed" xml:space="preserve">
     <value>RDP: помилка отримання фокусу!</value>
   </data>
-  <data name="strRdpGatewayIsSupported" xml:space="preserve">
-    <value>Шлюз Служб терміналів підтримується.</value>
+	<data name="strRdpGatewayIsSupported" xml:space="preserve">
+    <value>RD Gateway підтримується.</value>
   </data>
-  <data name="strRdpGatewayNotSupported" xml:space="preserve">
-    <value>Шлюз Служб терміналів не підтримується!</value>
+	<data name="strRdpGatewayNotSupported" xml:space="preserve">
+    <value>RD Gateway не підтримується!</value>
   </data>
-  <data name="strRdpGetSessionsFailed" xml:space="preserve">
-    <value>Помилка сесії!</value>
+	<data name="strRdpGetSessionsFailed" xml:space="preserve">
+    <value>Помилка GetSessions!</value>
   </data>
-  <data name="strRdpReconnectCount" xml:space="preserve">
-    <value>К-сть перепідключень RDP:</value>
+	<data name="strRdpReconnectCount" xml:space="preserve">
+    <value>Кількість перепідключень RDP:</value>
   </data>
-  <data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
-    <value>RDP: не вдалося встановити рівень перевірки автентичності!</value>
+	<data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
+    <value>Помилка RDP SetAuthenticationLevel!</value>
   </data>
-  <data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
-    <value>RDP: Не вдалося використати консольну сесію!</value>
+	<data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
+    <value>Помилка RDP SetUseConsoleSession!</value>
   </data>
-  <data name="strRdpSetConsoleSwitch" xml:space="preserve">
-    <value>Налаштування перемикання консолей для RDC {0}.</value>
+	<data name="strRdpSetConsoleSwitch" xml:space="preserve">
+    <value>Налаштування перемикання консолі для RDC {0}.</value>
   </data>
-  <data name="strRdpSetCredentialsFailed" xml:space="preserve">
-    <value>Помилка встановлення облікових даних RDP!</value>
+	<data name="strRdpSetCredentialsFailed" xml:space="preserve">
+    <value>Помилка RDP SetCredentials!</value>
   </data>
-  <data name="strRdpSetEventHandlersFailed" xml:space="preserve">
-    <value>Не вдалося встановити оброблювач подій RDP!</value>
+	<data name="strRdpSetEventHandlersFailed" xml:space="preserve">
+    <value>Помилка RDP SetEventHandlers!</value>
   </data>
-  <data name="strRdpSetGatewayFailed" xml:space="preserve">
-    <value>Помилка встановлення шлюзу RDP!</value>
+	<data name="strRdpSetGatewayFailed" xml:space="preserve">
+    <value>Помилка RDP SetRDGateway!</value>
   </data>
-  <data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
+	<data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
     <value>Помилка RDP SetPerformanceFlags!</value>
   </data>
-  <data name="strRdpSetPortFailed" xml:space="preserve">
-    <value>Не вдалося встановити порт RDP!</value>
+	<data name="strRdpSetPortFailed" xml:space="preserve">
+    <value>Помилка RDP SetPort!</value>
   </data>
-  <data name="strRdpSetPropsFailed" xml:space="preserve">
-    <value>Не вдалося встановити параметри RDP!</value>
+	<data name="strRdpSetPropsFailed" xml:space="preserve">
+    <value>Помилка RDP SetProps!</value>
   </data>
-  <data name="strRdpSetRedirectionFailed" xml:space="preserve">
-    <value>Не вдалося встановити перенаправлення в RDP!</value>
+	<data name="strRdpSetRedirectionFailed" xml:space="preserve">
+    <value>Помилка RDP Set Redirection!</value>
   </data>
-  <data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
-    <value>Не вдалося встановити перенаправлення клавіш в RDP!</value>
+	<data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
+    <value>Помилка RDP Set Redirect Keys!</value>
   </data>
-  <data name="strRdpSetResolutionFailed" xml:space="preserve">
-    <value>Помилка встановлення дозволів  RDP!</value>
+	<data name="strRdpSetResolutionFailed" xml:space="preserve">
+    <value>Помилка RDP SetResolution!</value>
   </data>
-  <data name="strRDPSmartSize" xml:space="preserve">
-    <value>розумний розмір</value>
-  </data>
-  <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
+	<data name="strRDPSoundBringToThisComputer" xml:space="preserve">
     <value>Передати на цей комп'ютер</value>
   </data>
-  <data name="strRDPSoundDoNotPlay" xml:space="preserve">
+	<data name="strRDPSoundDoNotPlay" xml:space="preserve">
     <value>Не відтворювати</value>
   </data>
-  <data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+	<data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
     <value>Залишити на віддаленому комп'ютері</value>
   </data>
-  <data name="strRdpToggleFullscreenFailed" xml:space="preserve">
-    <value>Не вдалося переключити RDP в режим Fullscreen!</value>
+	<data name="strRdpToggleFullscreenFailed" xml:space="preserve">
+    <value>Помилка RDP ToggleFullscreen!</value>
   </data>
-  <data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
-    <value>Не вдалося переключити RDP в режим SmartSize!</value>
+	<data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
+    <value>Помилка RDP ToggleSmartSize!</value>
   </data>
-  <data name="strReconnectAtStartup" xml:space="preserve">
+	<data name="strReconnectAtStartup" xml:space="preserve">
     <value>При запуску підключатися до попередніх сесій</value>
   </data>
-  <data name="strRefresh" xml:space="preserve">
-    <value>Оновлення</value>
+	<data name="strRefresh" xml:space="preserve">
+    <value>Оновити</value>
   </data>
-  <data name="strRemoteFile" xml:space="preserve">
-    <value>Віддал. файл</value>
+	<data name="strRemoteFile" xml:space="preserve">
+    <value>Віддалений файл</value>
   </data>
-  <data name="strRemoveAll" xml:space="preserve">
+	<data name="strRemoveAll" xml:space="preserve">
     <value>Видалити все</value>
   </data>
-  <data name="strRename" xml:space="preserve">
+	<data name="strRename" xml:space="preserve">
     <value>Перейменувати</value>
   </data>
-  <data name="strRlogin" xml:space="preserve">
-    <value>Rlogin</value>
-  </data>
-  <data name="strSave" xml:space="preserve">
+	<data name="strSave" xml:space="preserve">
     <value>Зберегти</value>
   </data>
-  <data name="strSaveAll" xml:space="preserve">
+	<data name="strSaveAll" xml:space="preserve">
     <value>Зберегти все</value>
   </data>
-  <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
-    <value>Перед завантаженням нового з'єднання, хочете зберегти поточний файл з'єднання?</value>
+	<data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
+    <value>Перед завантаженням нового файлу з'єднання, хочете зберегти поточний?</value>
   </data>
-  <data name="strSaveConsOnExit" xml:space="preserve">
+	<data name="strSaveConsOnExit" xml:space="preserve">
     <value>Зберігати з'єднання при виході</value>
   </data>
-  <data name="strSaveImageFilter" xml:space="preserve">
+	<data name="strSaveImageFilter" xml:space="preserve">
     <value>Файл Graphics Interchange Format (GIF.) | *. GIF | Файл Joint Photographic Experts Group (JPEG.) | *. JPEG | Файл Joint Photographic Experts Group (JPG.) | *. JPG | Файл Portable Network Graphics (PNG). | *. PNG</value>
   </data>
-  <data name="strScreen" xml:space="preserve">
+	<data name="strScreen" xml:space="preserve">
     <value>Екран</value>
   </data>
-  <data name="strScreenshot" xml:space="preserve">
+	<data name="strScreenshot" xml:space="preserve">
     <value>Скріншот</value>
   </data>
-  <data name="strScreenshots" xml:space="preserve">
+	<data name="strScreenshots" xml:space="preserve">
     <value>Скріншоти</value>
   </data>
-  <data name="strSendTo" xml:space="preserve">
-    <value>Надіслати...</value>
+	<data name="strSendTo" xml:space="preserve">
+    <value>Надіслати…</value>
   </data>
-  <data name="strSessionGetFailed" xml:space="preserve">
+	<data name="strSessionGetFailed" xml:space="preserve">
     <value>Отримати фонову сесію не вдалося</value>
   </data>
-  <data name="strSessionKillFailed" xml:space="preserve">
+	<data name="strSessionKillFailed" xml:space="preserve">
     <value>Завершення фонової сесії не вдалося</value>
   </data>
-  <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
-    <value>Встановити ім'я хосту, як псевдонім при створенні нових з'єднань</value>
+	<data name="strSetHostnameLikeDisplayName" xml:space="preserve">
+    <value>Встановити назву хоста, як ім'я відображення при створенні чи перейменуванні нових з'єднань</value>
   </data>
-  <data name="strSettingMainFormTextFailed" xml:space="preserve">
+	<data name="strSettingMainFormTextFailed" xml:space="preserve">
     <value>Налаштування основної текстової форми не вдалося</value>
   </data>
-  <data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+	<data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
     <value>Не вдалося зберегти налаштування, або розмістити значок у системному треї!</value>
   </data>
-  <data name="strShowDescriptionTooltips" xml:space="preserve">
-    <value>Показувати підказки в дереві з'єднань</value>
+	<data name="strShowDescriptionTooltips" xml:space="preserve">
+    <value>Показувати підказки опису в дереві з'єднань</value>
   </data>
-  <data name="strShowFullConsFilePath" xml:space="preserve">
+	<data name="strShowFullConsFilePath" xml:space="preserve">
     <value>Показувати в заголовку вікна повний шлях до файлу з'єднань</value>
   </data>
-  <data name="strShowLogonInfoOnTabs" xml:space="preserve">
+	<data name="strShowLogonInfoOnTabs" xml:space="preserve">
     <value>Показати відомості про вхід у назві вкладок</value>
   </data>
-  <data name="strShowProtocolOnTabs" xml:space="preserve">
+	<data name="strShowProtocolOnTabs" xml:space="preserve">
     <value>Показувати протокол у назві вкладок</value>
   </data>
-  <data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
-    <value>Один клік по з'єднанню для його відкриття</value>
+	<data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
+    <value>Одне натискання на з'єднання відкриває його</value>
   </data>
-  <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
+	<data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Один клік по відкритому з'єднанню переключається на нього</value>
   </data>
-  <data name="strSmartSizeModeAspect" xml:space="preserve">
-    <value>Вигляд</value>
-  </data>
-  <data name="strSmartSizeModeFree" xml:space="preserve">
-    <value>Free</value>
-  </data>
-  <data name="strSocks5" xml:space="preserve">
-    <value>Socks 5</value>
-  </data>
-  <data name="strSort" xml:space="preserve">
+	<data name="strSort" xml:space="preserve">
     <value>Сортувати</value>
   </data>
-  <data name="strSortAsc" xml:space="preserve">
+	<data name="strSortAsc" xml:space="preserve">
     <value>За зростанням (A-Z)</value>
   </data>
-  <data name="strSortDesc" xml:space="preserve">
+	<data name="strSortDesc" xml:space="preserve">
     <value>За спаданням (Z-A)</value>
   </data>
-  <data name="strSpecialKeys" xml:space="preserve">
+	<data name="strSpecialKeys" xml:space="preserve">
     <value>Спеціальні клавіші</value>
   </data>
-  <data name="strSQLInfo" xml:space="preserve">
-    <value>Для додаткової інформації див. довідку - Початок роботи - конфігурація SQL!</value>
+	<data name="strSQLInfo" xml:space="preserve">
+    <value>Для додаткової інформації дивись:  Довідка - Початок роботи - Конфігурація SQL!</value>
   </data>
-  <data name="strSQLServer" xml:space="preserve">
-    <value>SQL Server:</value>
+	<data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
+    <value>Перевірка оновлення SQL завершена, і доступне оновлення! Оновлюємо з’єднання.</value>
   </data>
-  <data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
-    <value>Доступно оновлення для SQL! Оновлення з'єднання.</value>
+	<data name="strSsh1" xml:space="preserve">
+    <value>SSH версії 1</value>
   </data>
-  <data name="strSsh1" xml:space="preserve">
-    <value>SSH version 1</value>
+	<data name="strSsh2" xml:space="preserve">
+    <value>SSH версії 2</value>
   </data>
-  <data name="strSsh2" xml:space="preserve">
-    <value>SSH version 2</value>
+	<data name="strSSHStartTransferBG" xml:space="preserve">
+    <value>Фонова передача по SSH не вдалася!</value>
   </data>
-  <data name="strSSHStartTransferBG" xml:space="preserve">
-    <value>Фонова передача по SSH - не вдалося!</value>
-  </data>
-  <data name="strSSHTranferSuccessful" xml:space="preserve">
+	<data name="strSSHTranferSuccessful" xml:space="preserve">
     <value>Передано успішно!</value>
   </data>
-  <data name="strSSHTransferEndFailed" xml:space="preserve">
-    <value>Передача по SSH завершена с ошибкой (UI.Window.SSHTransfer)!</value>
+	<data name="strSSHTransferEndFailed" xml:space="preserve">
+    <value>Передача по SSH завершена помилкою (UI.Window.SSHTransfer)!</value>
   </data>
-  <data name="strSSHTransferFailed" xml:space="preserve">
+	<data name="strSSHTransferFailed" xml:space="preserve">
     <value>Помилка передавання SSH.</value>
   </data>
-  <data name="strStartIP" xml:space="preserve">
+	<data name="strStartIP" xml:space="preserve">
     <value>Початковий IP</value>
   </data>
-  <data name="strStartPort" xml:space="preserve">
-    <value>Початк. порт</value>
+	<data name="strStartPort" xml:space="preserve">
+    <value>Початковий порт</value>
   </data>
-  <data name="strStartupExit" xml:space="preserve">
+	<data name="strStartupExit" xml:space="preserve">
     <value>Запуск / Вихід</value>
   </data>
-  <data name="strStatus" xml:space="preserve">
+	<data name="strStatus" xml:space="preserve">
     <value>Статус</value>
   </data>
-  <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
-    <value>Переключиться на панель повідомлень:</value>
+	<data name="strSwitchToErrorsAndInfos" xml:space="preserve">
+    <value>Перемкнутись на панель сповіщень при:</value>
   </data>
-  <data name="strTabAdvanced" xml:space="preserve">
+	<data name="strTabAdvanced" xml:space="preserve">
     <value>Додатково</value>
   </data>
-  <data name="strTabAppearance" xml:space="preserve">
+	<data name="strTabAppearance" xml:space="preserve">
     <value>Зовнішній вигляд</value>
   </data>
-  <data name="strTabsAndPanels" xml:space="preserve">
-    <value>Вкладки і панелі</value>
+	<data name="strTabsAndPanels" xml:space="preserve">
+    <value>Вкладки та панелі</value>
   </data>
-  <data name="strTabUpdates" xml:space="preserve">
+	<data name="strTabUpdates" xml:space="preserve">
     <value>Оновлення</value>
   </data>
-  <data name="strTelnet" xml:space="preserve">
-    <value>Telnet</value>
+	<data name="strTheFollowing" xml:space="preserve">
+    <value>Наступне:</value>
   </data>
-  <data name="strTheFollowing" xml:space="preserve">
-    <value>Встановити вручну:</value>
+	<data name="strTitleError" xml:space="preserve">
+    <value>Помилка: ({0})</value>
   </data>
-  <data name="strTitleError" xml:space="preserve">
-    <value>Помилка ({0})</value>
+	<data name="strTitleInformation" xml:space="preserve">
+    <value>Інформація: ({0})</value>
   </data>
-  <data name="strTitleInformation" xml:space="preserve">
-    <value>Інформація ({0})</value>
-  </data>
-  <data name="strTitlePassword" xml:space="preserve">
+	<data name="strTitlePassword" xml:space="preserve">
     <value>Пароль</value>
   </data>
-  <data name="strTitleSelectPanel" xml:space="preserve">
-    <value>Вибір Панелі</value>
+	<data name="strTitleSelectPanel" xml:space="preserve">
+    <value>Вибеніть панель</value>
   </data>
-  <data name="strTitleWarning" xml:space="preserve">
-    <value>Попередження ({0})</value>
+	<data name="strTitleWarning" xml:space="preserve">
+    <value>Попередження: ({0})</value>
   </data>
-  <data name="strTransfer" xml:space="preserve">
-    <value>Передача</value>
+	<data name="strTransfer" xml:space="preserve">
+    <value>Передати</value>
   </data>
-  <data name="strTransferFailed" xml:space="preserve">
+	<data name="strTransferFailed" xml:space="preserve">
     <value>Передача не вдалася!</value>
   </data>
-  <data name="strTryIntegrate" xml:space="preserve">
-    <value>Інтеграція</value>
+	<data name="strTryIntegrate" xml:space="preserve">
+    <value>Спробувати інтегрувати</value>
   </data>
-  <data name="strType" xml:space="preserve">
+	<data name="strType" xml:space="preserve">
     <value>Тип</value>
   </data>
-  <data name="strUltraVncRepeater" xml:space="preserve">
-    <value>Ultra VNC Repeater</value>
-  </data>
-  <data name="strUltraVNCSCListeningPort" xml:space="preserve">
+	<data name="strUltraVNCSCListeningPort" xml:space="preserve">
     <value>Порт UltraVNC SingleClick:</value>
   </data>
-  <data name="strUncheckProperties" xml:space="preserve">
-    <value>Зніміть властивості, які не хочете зберігати!</value>
+	<data name="strUncheckProperties" xml:space="preserve">
+    <value>Зніміть параметри, які не хочете зберігати!</value>
   </data>
-  <data name="strUpdateAvailable" xml:space="preserve">
-    <value>Потрібне оновлення mRemoteNG</value>
+	<data name="strUpdateAvailable" xml:space="preserve">
+    <value>mRemoteNG потребує оновлення</value>
   </data>
-  <data name="strUpdateCheck" xml:space="preserve">
+	<data name="strUpdateCheck" xml:space="preserve">
     <value>mRemoteNG може періодично підключатися до сайту mRemoteNG для перевірки наявності оновлень.</value>
   </data>
-  <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
-    <value>Не вдалося завершити перевірку оновлень!</value>
+	<data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+    <value>Не вдалося завантажити інформацію про оновлення.</value>
   </data>
-  <data name="strUpdateCheckFailed" xml:space="preserve">
-    <value>Не вдалося перевірити наявність оновлень!</value>
-  </data>
-  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+	<data name="strUpdateCheckPortableEdition" xml:space="preserve">
     <value>Портативна версія mRemoteNG не підтримує автоматичне оновлення.</value>
   </data>
-  <data name="strUpdateDeleteFailed" xml:space="preserve">
-    <value>Помилка при видаленні файлу оновлення!</value>
-  </data>
-  <data name="strUpdateDownloadComplete" xml:space="preserve">
+	<data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>Завантаження завершено!
 mRemoteNG зараз припинить роботу і почне процес встановлення оновлення.</value>
   </data>
-  <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
-    <value>Не вдалося завершити завантаження!</value>
+	<data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+    <value>Не вдалося завантажити оновлення.</value>
   </data>
-  <data name="strUpdateDownloadFailed" xml:space="preserve">
-    <value>Не вдалося завантажити оновлення!</value>
+	<data name="strUpdateDownloadFailed" xml:space="preserve">
+    <value>Не вдалося розпочати завантаження оновлення.</value>
   </data>
-  <data name="strUpdateFrequencyCustom" xml:space="preserve">
+	<data name="strUpdateFrequencyCustom" xml:space="preserve">
     <value>Кожні {0} дн.</value>
   </data>
-  <data name="strUpdateFrequencyDaily" xml:space="preserve">
+	<data name="strUpdateFrequencyDaily" xml:space="preserve">
     <value>Щодня</value>
   </data>
-  <data name="strUpdateFrequencyMonthly" xml:space="preserve">
+	<data name="strUpdateFrequencyMonthly" xml:space="preserve">
     <value>Щомісяця</value>
   </data>
-  <data name="strUpdateFrequencyWeekly" xml:space="preserve">
+	<data name="strUpdateFrequencyWeekly" xml:space="preserve">
     <value>Щотижня</value>
   </data>
-  <data name="strUpdateStartFailed" xml:space="preserve">
-    <value>Помилка при запуску оновлення!</value>
-  </data>
-  <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
+	<data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Використовувати інше ім'я користувача і пароль</value>
   </data>
-  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
-    <value>Використовувати тільки панель повідомлень (без спливаючих підказок)</value>
-  </data>
-  <data name="strUser" xml:space="preserve">
+	<data name="strUser" xml:space="preserve">
     <value>Користувач</value>
   </data>
-  <data name="strUseSameUsernameAndPassword" xml:space="preserve">
+	<data name="strUseSameUsernameAndPassword" xml:space="preserve">
     <value>Використовувати ті ж ім'я користувача і пароль</value>
   </data>
-  <data name="strUseSmartCard" xml:space="preserve">
+	<data name="strUseSmartCard" xml:space="preserve">
     <value>Використовувати смарт-карти</value>
   </data>
-  <data name="strUseSQLServer" xml:space="preserve">
+	<data name="strUseSQLServer" xml:space="preserve">
     <value>Використовувати SQL Server для завантаження і збереження з'єднань</value>
   </data>
-  <data name="strVersion" xml:space="preserve">
+	<data name="strVersion" xml:space="preserve">
     <value>Версія</value>
   </data>
-  <data name="strVnc" xml:space="preserve">
-    <value>VNC</value>
+	<data name="strVncConnectionDisconnectFailed" xml:space="preserve">
+    <value>Не вдалося відключити VNC!</value>
   </data>
-  <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
-    <value>Не вдалося вимкнути VNC!</value>
-  </data>
-  <data name="strVncRefreshFailed" xml:space="preserve">
+	<data name="strVncRefreshFailed" xml:space="preserve">
     <value>Не вдалося оновити екран VNC!</value>
   </data>
-  <data name="strVncSendSpecialKeysFailed" xml:space="preserve">
-    <value>Не вдалося послати VNC спец. клавіші!</value>
+	<data name="strVncSendSpecialKeysFailed" xml:space="preserve">
+    <value>Помилка VNC SendSpecialKeys!</value>
   </data>
-  <data name="strVncSetEventHandlersFailed" xml:space="preserve">
+	<data name="strVncSetEventHandlersFailed" xml:space="preserve">
     <value>Не вдалося встановити оброблювач подій VNC!</value>
   </data>
-  <data name="strVncSetPropsFailed" xml:space="preserve">
+	<data name="strVncSetPropsFailed" xml:space="preserve">
     <value>Не вдалося задати параметри VNC!</value>
   </data>
-  <data name="strVncStartChatFailed" xml:space="preserve">
+	<data name="strVncStartChatFailed" xml:space="preserve">
     <value>Не вдалося почати VNC-чат!</value>
   </data>
-  <data name="strVncToggleSmartSizeFailed" xml:space="preserve">
+	<data name="strVncToggleSmartSizeFailed" xml:space="preserve">
     <value>Не вдалося переключити VNC в SmartSize!</value>
   </data>
-  <data name="strVncToggleViewOnlyFailed" xml:space="preserve">
-    <value>Не вдалося переключити VNC в режим Перегляду!</value>
+	<data name="strVncToggleViewOnlyFailed" xml:space="preserve">
+    <value>Не вдалося переключити VNC в режим перегляду!</value>
   </data>
-  <data name="strWarnIfAuthFails" xml:space="preserve">
-    <value>Попереджати, якщо не пройшов перевірку</value>
+	<data name="strWarnIfAuthFails" xml:space="preserve">
+    <value>Попередити мене, якщо аутентифікація не вдасться</value>
   </data>
-  <data name="strWarnings" xml:space="preserve">
+	<data name="strWarnings" xml:space="preserve">
     <value>Попередження</value>
   </data>
-  <data name="strWeifenLuoAttribution" xml:space="preserve">
+	<data name="strWeifenLuoAttribution" xml:space="preserve">
     <value>Використано DockPanel Suite від [Weifen Luo]</value>
   </data>
-  <data name="strWeifenLuoAttributionURL" xml:space="preserve">
-    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
-  </data>
-  <data name="strWriteLogFile" xml:space="preserve">
-    <value>Запис в лог-файл (mRemoteNG.log)</value>
-  </data>
-  <data name="strXULrunnerPath" xml:space="preserve">
+	<data name="strXULrunnerPath" xml:space="preserve">
     <value>Шлях XULRunner:</value>
   </data>
-  <data name="strYes" xml:space="preserve">
+	<data name="strYes" xml:space="preserve">
     <value>Так</value>
   </data>
+	<data name="strAlwaysShowPanelTabs" xml:space="preserve">
+		<value>Завжди показувати панель вкладок</value>
+	</data>
+	<data name="strButtonLaunch" xml:space="preserve">
+		<value>&amp;Запустити</value>
+	</data>
+	<data name="strCommandExitProgram" xml:space="preserve">
+		<value>&amp;Вихід {0}</value>
+	</data>
+	<data name="strCommandOpenConnectionFile" xml:space="preserve">
+		<value>&amp;Відкрити файл з'єднань</value>
+	</data>
+	<data name="strCommandTryAgain" xml:space="preserve">
+		<value>&amp;Спробувати знову</value>
+	</data>
+	<data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+		<value>{0} виявив запущену програму Lenovo Auto Scroll Utility. Ця програма створює проблеми з {0}. Рекомендується вимкнути або видалити її.</value>
+	</data>
+	<data name="strCompatibilityProblemDetected" xml:space="preserve">
+		<value>Виявлена проблема сумісності</value>
+	</data>
+	<data name="strConnectNoCredentials" xml:space="preserve">
+		<value>З'єднатися без облікових даних</value>
+	</data>
+	<data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+		<value>Не вдається знайти «ToolStrip control» у «FilteredPropertyGrid».</value>
+	</data>
+	<data name="strDefaultTheme" xml:space="preserve">
+		<value>Тема за замовчуванням</value>
+	</data>
+	<data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
+		<value>Не під'єднуватися до консольного сеансу</value>
+	</data>
+	<data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
+		<value>Неможливо запустити PuTTY.</value>
+	</data>
+	<data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
+		<value>Увімкнено налаштування безпеки Windows «System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing».
+
+Додаткову інформацію дивись у статті Microsoft Support на http://support.microsoft.com/kb/811833
+
+{0} не повністю сумісний з FIPS. Натисніть ОК, щоб продовжити на власний розсуд, або Скасувати для виходу.</value>
+	</data>
+	<data name="strExportEverything" xml:space="preserve">
+		<value>Експортувати все</value>
+	</data>
+	<data name="strExportFile" xml:space="preserve">
+		<value>Файл експорту</value>
+	</data>
+	<data name="strExportItems" xml:space="preserve">
+		<value>Експорт елементів</value>
+	</data>
+	<data name="strExportProperties" xml:space="preserve">
+		<value>Параметри експорту</value>
+	</data>
+	<data name="strExportSelectedConnection" xml:space="preserve">
+		<value>Експортувати вибране з'єднання</value>
+	</data>
+	<data name="strExportSelectedFolder" xml:space="preserve">
+		<value>Експортувати вибрану папку</value>
+	</data>
+	<data name="strExportToFileMenuItem" xml:space="preserve">
+		<value>&amp;Експорт у файл…</value>
+	</data>
+	<data name="strFileFormatLabel" xml:space="preserve">
+		<value>&amp;Формат файлу:</value>
+	</data>
+	<data name="Credentials" xml:space="preserve">
+		<value>Облікові дані</value>
+	</data>
+	<data name="strExternalToolDefaultName" xml:space="preserve">
+		<value>Новий зовнішній інструмент</value>
+	</data>
+	<data name="strFilterAllImportable" xml:space="preserve">
+		<value>Усі файли, які можна імпортувати</value>
+	</data>
+	<data name="strFilterPuttyConnectionManager" xml:space="preserve">
+		<value>Файли PuTTY Connection Manager</value>
+	</data>
+	<data name="strFilterRdgFiles" xml:space="preserve">
+		<value>Файли Remote Desktop Connection Manager (*.rdg)</value>
+	</data>
+	<data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
+		<value>Не вдається змінити заголовок HTTP документу!</value>
+	</data>
+	<data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+		<value>Визначати вкладки швидкого підключення, додавши префікс «Quick»</value>
+	</data>
+	<data name="strImportFileFailedContent" xml:space="preserve">
+		<value>Під час імпорту файлу «{0}» сталася помилка.</value>
+	</data>
+	<data name="strImportFileFailedMainInstruction" xml:space="preserve">
+		<value>Не вдалося імпортувати</value>
+	</data>
+	<data name="strImportFromFileMenuItem" xml:space="preserve">
+		<value>Імпорт з &amp;файлу…</value>
+	</data>
+	<data name="strImportLocationCommandButtons" xml:space="preserve">
+		<value>В корені {0}{1}|У вибраному каталозі {0}{2}</value>
+	</data>
+	<data name="strImportLocationContent" xml:space="preserve">
+		<value>Де ви хочете розмістити імпортовані елементи?</value>
+	</data>
+	<data name="strImportLocationMainInstruction" xml:space="preserve">
+		<value>Місцезнаходження імпорту</value>
+	</data>
+	<data name="strImportMenuItem" xml:space="preserve">
+		<value>&amp;Імпорт</value>
+	</data>
+	<data name="strLabelClosingConnections" xml:space="preserve">
+		<value>При закритті з'єднань:</value>
+	</data>
+	<data name="strLoadFromSqlFailedContent" xml:space="preserve">
+		<value>Інформацію про з'єднання не вдалося завантажити з SQL сервера.</value>
+	</data>
+	<data name="strMenuNotificationsCopyAll" xml:space="preserve">
+		<value>Копіювати все</value>
+	</data>
+	<data name="strMenuNotificationsDelete" xml:space="preserve">
+		<value>Видалити</value>
+	</data>
+	<data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+		<value>Видалити все</value>
+	</data>
+	<data name="strMenuSessionRetrieve" xml:space="preserve">
+		<value>Відновити</value>
+	</data>
+	<data name="strMenuShowHelpText" xml:space="preserve">
+		<value>&amp;Показати текст довідки</value>
+	</data>
+	<data name="strNoSmartSize" xml:space="preserve">
+		<value>Немає SmartSize</value>
+	</data>
+	<data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
+		<value>&amp;Видалити</value>
+	</data>
+	<data name="strOptionsKeyboardButtonNew" xml:space="preserve">
+		<value>&amp;Нова</value>
+	</data>
+	<data name="strOptionsKeyboardButtonReset" xml:space="preserve">
+		<value>&amp;Скинути до замовчування</value>
+	</data>
+	<data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
+		<value>Скинути &amp;все за замовчуванням</value>
+	</data>
+	<data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
+		<value>Вкладки</value>
+	</data>
+	<data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
+		<value>Наступна вкладка</value>
+	</data>
+	<data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
+		<value>Попередня вкладка</value>
+	</data>
+	<data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
+		<value>Змінити гарячу клавішу</value>
+	</data>
+	<data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
+		<value>Гарячі клавіші</value>
+	</data>
+	<data name="strOptionsProxyTesting" xml:space="preserve">
+		<value>Тестування…</value>
+	</data>
+	<data name="strOptionsTabKeyboard" xml:space="preserve">
+		<value>Клавіатура</value>
+	</data>
+	<data name="strOptionsThemeButtonDelete" xml:space="preserve">
+		<value>&amp;Видалити</value>
+	</data>
+	<data name="strOptionsThemeButtonNew" xml:space="preserve">
+		<value>&amp;Нова</value>
+	</data>
+	<data name="strPasswordStatusMustMatch" xml:space="preserve">
+		<value>Обидва паролі повинні збігатися.</value>
+	</data>
+	<data name="strPasswordStatusTooShort" xml:space="preserve">
+		<value>Пароль повинен містити не менше 3 символів.</value>
+	</data>
+	<data name="strPortScanComplete" xml:space="preserve">
+		<value>Сканування портів завершено.</value>
+	</data>
+	<data name="strPropertyDescriptionAutomaticResize" xml:space="preserve">
+		<value>Виберіть, чи слід автоматично змінювати розмір вікна з'єднання, коли змінюється розмір вікна програми, або коли програма перемикається в повноекранний режим. Потрібен RDC 8.0 або вище.</value>
+	</data>
+	<data name="strPropertyDescriptionLoadBalanceInfo" xml:space="preserve">
+		<value>Визначає інформацію про балансування навантаження для використання маршрутизаторами балансування навантаження для вибору найкращого сервера.</value>
+	</data>
+	<data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
+		<value>Вкажіть, чи слід ділитися буфером обміну з віддаленим хостом.</value>
+	</data>
+	<data name="strPropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+		<value>Виберіть, чи слід перенаправляти пристрій аудіо введення за замовчуванням на віддаленій машині на цей комп'ютер.</value>
+	</data>
+	<data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+		<value>Використовати Credential Security Support Provider (CredSSP) для аутентифікації, якщо він доступний.</value>
+	</data>
+	<data name="strPropertyNameAutomaticResize" xml:space="preserve">
+		<value>Автоматична зміна розміру</value>
+	</data>
+	<data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
+		<value>Інформація про балансування</value>
+	</data>
+	<data name="strPropertyNameRedirectClipboard" xml:space="preserve">
+		<value>Буфер обміну</value>
+	</data>
+	<data name="strPropertyNameRedirectAudioCapture" xml:space="preserve">
+		<value>Захоплення аудіо</value>
+	</data>
+	<data name="strPropertyNameUseCredSsp" xml:space="preserve">
+		<value>Використовувати CredSSP</value>
+	</data>
+	<data name="strPuttySavedSessionsRootName" xml:space="preserve">
+		<value>Збережені сесії PuTTY</value>
+	</data>
+	<data name="strPuttySessionSettings" xml:space="preserve">
+		<value>Налаштування сесії PuTTY</value>
+	</data>
+	<data name="strRadioCloseWarnAll" xml:space="preserve">
+		<value>&amp;Попередити мене при закритті з'єднань</value>
+	</data>
+	<data name="strRadioCloseWarnExit" xml:space="preserve">
+		<value>Попередити мене лише при &amp;виході з mRemoteNG</value>
+	</data>
+	<data name="strRadioCloseWarnMultiple" xml:space="preserve">
+		<value>Попередити мене лише при закритті &amp;декількох з'єднань</value>
+	</data>
+	<data name="strRadioCloseWarnNever" xml:space="preserve">
+		<value>&amp;Не попереджати мене при закритті з'єднань</value>
+	</data>
+	<data name="strRdpErrorGetFailure" xml:space="preserve">
+		<value>Помилка GetError (FatalErrors)</value>
+	</data>
+	<data name="strSearchPrompt" xml:space="preserve">
+		<value>Шукати</value>
+	</data>
+	<data name="strSmartSizeModeNone" xml:space="preserve">
+		<value>Без SmartSize</value>
+	</data>
+	<data name="strThemeCategoryConfigPanel" xml:space="preserve">
+		<value>Панель налаштувань</value>
+	</data>
+	<data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+		<value>Панель з'єднань</value>
+	</data>
+	<data name="strThemeCategoryGeneral" xml:space="preserve">
+		<value>Головна</value>
+	</data>
+	<data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір панелі налаштувань.</value>
+	</data>
+	<data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+		<value>Колір тексту категорії на панелі налаштувань.</value>
+	</data>
+	<data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+		<value>Колір ліній сітки на панелі налаштувань.</value>
+	</data>
+	<data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір області довідки панелі налаштувань.</value>
+	</data>
+	<data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+		<value>Колір тексту області довідки панелі налаштувань.</value>
+	</data>
+	<data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+		<value>Колір тексту на панелі налаштувань.</value>
+	</data>
+	<data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір панелі з'єднань.</value>
+	</data>
+	<data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+		<value>Колір тексту панелі з'єднань.</value>
+	</data>
+	<data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+		<value>Колір ліній дерева панелі з'єднань.</value>
+	</data>
+	<data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір меню.</value>
+	</data>
+	<data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+		<value>Колір тексту в меню.</value>
+	</data>
+	<data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір вікна пошуку.</value>
+	</data>
+	<data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+		<value>Колір тексту у вікні пошуку.</value>
+	</data>
+	<data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+		<value>Колір тексту підказки у вікні пошуку.</value>
+	</data>
+	<data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір панелей інструментів.</value>
+	</data>
+	<data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+		<value>Колір тексту панелей інструментів.</value>
+	</data>
+	<data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір головного вікна.</value>
+	</data>
+	<data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір панелі налаштувань</value>
+	</data>
+	<data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+		<value>Колір тексту категорій панелі налаштувань</value>
+	</data>
+	<data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+		<value>Колір ліній сітки панелі налаштувань</value>
+	</data>
+	<data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір довідки панелі налаштувань</value>
+	</data>
+	<data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+		<value>Колір тексту довідки панелі налаштувань</value>
+	</data>
+	<data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+		<value>Колір тексту панелі налаштувань</value>
+	</data>
+	<data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір панелі з'єднань</value>
+	</data>
+	<data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+		<value>Колір тексту панелі з'єднань</value>
+	</data>
+	<data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+		<value>Колір ліній дерева панелі з'єднань</value>
+	</data>
+	<data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір меню</value>
+	</data>
+	<data name="strThemeNameMenuTextColor" xml:space="preserve">
+		<value>Колір тексту меню</value>
+	</data>
+	<data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір поля пошуку</value>
+	</data>
+	<data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+		<value>Колір тексту поля пошуку</value>
+	</data>
+	<data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+		<value>Колір тексту підказок поля пошуку</value>
+	</data>
+	<data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір панелі інструментів</value>
+	</data>
+	<data name="strThemeNameToolbarTextColor" xml:space="preserve">
+		<value>Колір тексту панелі інструментів</value>
+	</data>
+	<data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+		<value>Фоновий колір вікна</value>
+	</data>
+	<data name="strTitlePasswordWithName" xml:space="preserve">
+		<value>Пароль для: {0}</value>
+	</data>
+	<data name="strShowOnToolbar" xml:space="preserve">
+		<value>Показати на панелі інструментів</value>
+	</data>
+	<data name="strUnnamedTheme" xml:space="preserve">
+		<value>Безіменна тема</value>
+	</data>
+	<data name="strUpdateCheckFailedLabel" xml:space="preserve">
+		<value>Не вдалося перевірити</value>
+	</data>
+	<data name="strUpdateCheckingLabel" xml:space="preserve">
+		<value>Перевірка оновлень…</value>
+	</data>
+	<data name="strUpdateGetChangeLogFailed" xml:space="preserve">
+		<value>Не вдалося завантажити журнал змін.</value>
+	</data>
+	<data name="strMenuReconnectAll" xml:space="preserve">
+		<value>Повторно підключити усі відкриті з'єднання</value>
+	</data>
+	<data name="strRDPOverallConnectionTimeout" xml:space="preserve">
+		<value>Тайм-аут RDP з'єднання</value>
+	</data>
+	<data name="strNodeAlreadyInFolder" xml:space="preserve">
+		<value>Цей вузол вже в цій папці.</value>
+	</data>
+	<data name="strNodeCannotDragOnSelf" xml:space="preserve">
+		<value>Неможливо перемістити вузол в себе.</value>
+	</data>
+	<data name="strNodeCannotDragParentOnChild" xml:space="preserve">
+		<value>Неможливо перетягнути батьківський вузол до дочірнього.</value>
+	</data>
+	<data name="strNodeNotDraggable" xml:space="preserve">
+		<value>Цей вузол не перетягується.</value>
+	</data>
+	<data name="strEncryptionBlockCipherMode" xml:space="preserve">
+		<value>Режим блочного шифру</value>
+	</data>
+	<data name="strEncryptionEngine" xml:space="preserve">
+		<value>Рушій шифрування</value>
+	</data>
+	<data name="strTabSecurity" xml:space="preserve">
+		<value>Безпека</value>
+	</data>
+	<data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
+		<value>Ітерації функції формування ключа(KDF)</value>
+	</data>
+	<data name="strRDPSoundQualityDynamic" xml:space="preserve">
+		<value>Динамічна</value>
+	</data>
+	<data name="strRDPSoundQualityHigh" xml:space="preserve">
+		<value>Висока</value>
+	</data>
+	<data name="strRDPSoundQualityMedium" xml:space="preserve">
+		<value>Середня</value>
+	</data>
+	<data name="strPropertyDescriptionSoundQuality" xml:space="preserve">
+		<value>Виберіть якість звуку: динамічна, Середня, Висока</value>
+	</data>
+	<data name="strPropertyNameSoundQuality" xml:space="preserve">
+		<value>Якість звуку</value>
+	</data>
+	<data name="strUpdatePortableDownloadComplete" xml:space="preserve">
+		<value>Завантаження завершено!</value>
+	</data>
+	<data name="strDownloadPortable" xml:space="preserve">
+		<value>Завантажити</value>
+	</data>
+	<data name="strPropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
+		<value>Скільки хвилин перебувати в режимі очікування перед автоматичним відключенням RDP сеансу (0 - без обмежень)</value>
+	</data>
+	<data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+		<value>Хвилин простою</value>
+	</data>
+	<data name="strAccept" xml:space="preserve">
+		<value>Прийняти</value>
+	</data>
+	<data name="strAdd" xml:space="preserve">
+		<value>Додати</value>
+	</data>
+	<data name="strCredentialEditor" xml:space="preserve">
+		<value>Редактор облікових даних</value>
+	</data>
+	<data name="strCredentialManager" xml:space="preserve">
+		<value>Менеджер облікових даних</value>
+	</data>
+	<data name="strRemove" xml:space="preserve">
+		<value>Видалити</value>
+	</data>
+	<data name="strTitle" xml:space="preserve">
+		<value>Заголовок</value>
+	</data>
+	<data name="strPropertyDescriptionCredential" xml:space="preserve">
+		<value>Виберіть, який обліковий запис використовувати для цього з'єднання.</value>
+	</data>
+	<data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
+		<value>Дійсно хочете видалити обліковий запис: {0}?</value>
+	</data>
+	<data name="strFindMatchingCredentialFailed" xml:space="preserve">
+		<value>Не вдалося знайти обліковий запис із ідентифікатором «{0}» для запису підключення під назвою «{1}».</value>
+	</data>
+	<data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+		<value>Виберіть, чи отримувати попередження після відключення сеансу RDP через неактивність</value>
+	</data>
+	<data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+		<value>Попереджати про відключення через неактивність</value>
+	</data>
+	<data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+		<value>Пароль повинен містити принаймні {0} таких символів: {1}</value>
+	</data>
+	<data name="strPasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+		<value>Пароль повинен містити принаймні {0} малі символи(ів)</value>
+	</data>
+	<data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
+		<value>Пароль повинен містити принаймні {0} номер(и)</value>
+	</data>
+	<data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+		<value>Пароль повинен містити принаймні {0} великі символи(ів)</value>
+	</data>
+	<data name="strPasswordLengthConstraintHint" xml:space="preserve">
+		<value>Довжина пароля повинна бути від {0} до {1}</value>
+	</data>
+	<data name="strChooseLogPath" xml:space="preserve">
+		<value>Виберіть шлях для файлу журналу mRemoteNG</value>
+	</data>
+	<data name="strDebug" xml:space="preserve">
+		<value>Відлагодження</value>
+	</data>
+	<data name="strShowTheseMessageTypes" xml:space="preserve">
+		<value>Показувати ці повідомлення</value>
+	</data>
+	<data name="strLogFilePath" xml:space="preserve">
+		<value>Шлях до файлу журналу</value>
+	</data>
+	<data name="strLogTheseMessageTypes" xml:space="preserve">
+		<value>Записувати в журнал ці типи повідомлень</value>
+	</data>
+	<data name="strChoosePath" xml:space="preserve">
+		<value>Вибрати шлях</value>
+	</data>
+	<data name="strOpenFile" xml:space="preserve">
+		<value>Відкрити файл</value>
+	</data>
+	<data name="strUseDefault" xml:space="preserve">
+		<value>За замовчуванням</value>
+	</data>
+	<data name="strLogging" xml:space="preserve">
+		<value>Ведення журналу</value>
+	</data>
+	<data name="strPopups" xml:space="preserve">
+		<value>Виринаючі вікна</value>
+	</data>
+	<data name="strLogToAppDir" xml:space="preserve">
+		<value>Записувати в каталог програми</value>
+	</data>
+	<data name="strAssignedCredential" xml:space="preserve">
+		<value>Призначені облікові дані</value>
+	</data>
+	<data name="strHttpsInsecureAllowAlways" xml:space="preserve">
+		<value>Завжди дозволяти</value>
+	</data>
+	<data name="strHttpsInsecureAllowOnce" xml:space="preserve">
+		<value>Дозволити раз</value>
+	</data>
+	<data name="strHttpsInsecureDontAllow" xml:space="preserve">
+		<value>Не дозволяти</value>
+	</data>
+	<data name="strHttpsInsecurePrompt" xml:space="preserve">
+		<value>Дозволити незахищений сертифікат для URL: {0}?</value>
+	</data>
+	<data name="strHttpsInsecurePromptTitle" xml:space="preserve">
+		<value>Дозволити незахищений сертифікат?</value>
+	</data>
+	<data name="RepositoryIsUnlocked" xml:space="preserve">
+		<value>Вибраний репозиторій розблоковано</value>
+	</data>
+	<data name="IncorrectPassword" xml:space="preserve">
+		<value>Невірний пароль</value>
+	</data>
+	<data name="Source" xml:space="preserve">
+		<value>Джерело</value>
+	</data>
+	<data name="Unlocking" xml:space="preserve">
+		<value>Розблокування</value>
+	</data>
+	<data name="UnlockCredentialRepository" xml:space="preserve">
+		<value>Розблокувати репозиторій облікових даних</value>
+	</data>
+	<data name="Unlock" xml:space="preserve">
+		<value>Розблокувати</value>
+	</data>
+	<data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
+		<value>Запитувати про розблокування репозиторія облікових даних при запуску</value>
+	</data>
+	<data name="strUpgrade" xml:space="preserve">
+		<value>Оновити</value>
+	</data>
+	<data name="strBack" xml:space="preserve">
+		<value>Назад</value>
+	</data>
+	<data name="strConnectionFilePath" xml:space="preserve">
+		<value>Шлях до файлу з'єднань</value>
+	</data>
+	<data name="strCreateAndOpenNewFile" xml:space="preserve">
+		<value>Створити та відкрити новий файл</value>
+	</data>
+	<data name="strOpenADifferentFile" xml:space="preserve">
+		<value>Відкрти інший файл</value>
+	</data>
+	<data name="strCredentialManagerUpgradeDescription" xml:space="preserve">
+		<value>У v1.76 ми запровадили систему управління обліковими записами. Ця функція вимагає суттєвих змін у тому, як ми зберігаємо та взаємодіємо з обліковими записами в mRemoteNG. Вам буде потрібно виконати одностороннє оновлення файлу з'єднань mRemoteNG.
+
+Ця сторінка проведе вас через процес оновлення файлу з'єднань або дасть можливість відкрити інший файл з'єднань, якщо ви не захочете здійснити оновлення.</value>
+	</data>
+	<data name="CredentialUnavailable" xml:space="preserve">
+		<value>Обліковий запис не доступний</value>
+	</data>
+	<data name="strOptionsThemeDeleteConfirmation" xml:space="preserve">
+		<value>Дійсно видалити цю тему?</value>
+	</data>
+	<data name="strOptionsThemeEnableTheming" xml:space="preserve">
+		<value>Увімкнути теми</value>
+	</data>
+	<data name="strOptionsThemeNewThemeCaption" xml:space="preserve">
+		<value>Нова назва теми</value>
+	</data>
+	<data name="strOptionsThemeNewThemeError" xml:space="preserve">
+		<value>Не вдається створити тему, таке ім'я вже існує, або присутні спеціальні символи</value>
+	</data>
+	<data name="strOptionsThemeNewThemeText" xml:space="preserve">
+		<value>Введіть нову назву теми</value>
+	</data>
+	<data name="strOptionsThemeChangeWarning" xml:space="preserve">
+		<value>Попередження: для зміни будь-якої конфігурації теми потрібен перезапуск.</value>
+	</data>
+	<data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
+		<value>Жодної теми не завантажено, перевірте чи присутні стандартні теми у папці «themes» mRemoteNG</value>
+	</data>
+	<data name="CouldNotFindExternalTool" xml:space="preserve">
+		<value>Не вдалося знайти зовнішній інструмент із назвою «{0}»</value>
+	</data>
+	<data name="ConfigurationCreateNew" xml:space="preserve">
+		<value>Створити новий файл з'єднання</value>
+	</data>
+	<data name="ConnectionFileNotFound" xml:space="preserve">
+		<value>Не вдалося знайти файл з'єднання.</value>
+	</data>
+	<data name="ConfigurationImportFile" xml:space="preserve">
+		<value>Імпортувати існуючий файл</value>
+	</data>
+	<data name="ConfigurationCustomPath" xml:space="preserve">
+		<value>Використовуйте спеціальний шлях до файлу</value>
+	</data>
+	<data name="TestingConnection" xml:space="preserve">
+		<value>Перевіряємо з'єднання</value>
+	</data>
+	<data name="ServerNotAccessible" xml:space="preserve">
+		<value>Сервер «{0}» недоступний.</value>
+	</data>
+	<data name="ConnectionSuccessful" xml:space="preserve">
+		<value>Підключення успішне</value>
+	</data>
+	<data name="LoginFailedForUser" xml:space="preserve">
+		<value>Не вдалося ввійти для користувача «{0}».</value>
+	</data>
+	<data name="DatabaseNotAvailable" xml:space="preserve">
+		<value>База даних «{0}» недоступна.</value>
+	</data>
+	<data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
+		<value>Зберігати з'єднання після кожного редагування</value>
+	</data>
+	<data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
+		<value>Фільтр збігів пошуку в дереві з'єднань</value>
+	</data>
+	<data name="TestConnection" xml:space="preserve">
+		<value>Тест з'єднання</value>
+	</data>
+	<data name="strLabelReadOnly" xml:space="preserve">
+		<value>Лише для читання:</value>
+	</data>
+	<data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+		<value>Використовувати кодування UTF8 для властивості RDP "Інформація про балансування"</value>
+	</data>
+	<data name="strTimeoutInSeconds" xml:space="preserve">
+		<value>Тайм-аут [секунди]</value>
+	</data>
+	<data name="srtWorkingDirectory" xml:space="preserve">
+		<value>Робочий каталог:</value>
+	</data>
+	<data name="strRunElevated" xml:space="preserve">
+		<value>Запускати з вищими правами</value>
+	</data>
+	<data name="strRunElevateHeader" xml:space="preserve">
+		<value>Запускати з вищими правами</value>
+	</data>
+	<data name="strShowOnToolbarColumnHeader" xml:space="preserve">
+		<value>Показати на панелі інструментів</value>
+	</data>
+	<data name="strTryToIntegrateColumnHeader" xml:space="preserve">
+		<value>Спробувати інтегрувати</value>
+	</data>
+	<data name="strWorkingDirColumnHeader" xml:space="preserve">
+		<value>Робочий каталог</value>
+	</data>
+	<data name="strLockToolbars" xml:space="preserve">
+		<value>Фіксувати позиції панелі інструментів</value>
+	</data>
+	<data name="strMultiSshToolbar" xml:space="preserve">
+		<value>Панель Multi SSH</value>
+	</data>
+	<data name="strImportSubOUs" xml:space="preserve">
+		<value>Імпорт дочірніх OU</value>
+	</data>
+	<data name="strMenuLockToolbars" xml:space="preserve">
+		<value>Фіксувати позиції панелі інструментів</value>
+	</data>
+	<data name="strMenuMultiSshToolbar" xml:space="preserve">
+		<value>Панель Multi SSH</value>
+	</data>
+	<data name="strAdvancedSecurityOptions" xml:space="preserve">
+		<value>Додаткові параметри безпеки</value>
+	</data>
+	<data name="strOptionsPageTitle" xml:space="preserve">
+		<value>Параметри mRemoteNG</value>
+	</data>
+	<data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+		<value>Використовувати кодування UTF8 для властивості RDP "Інформація про балансування"</value>
+	</data>
+	<data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
+		<value>Створювати порожню вкладку, при запуску mRemoteNG</value>
+	</data>
+	<data name="strIPRange" xml:space="preserve">
+		<value>Має бути між 0 і 255</value>
+	</data>
+	<data name="strOutOfRange" xml:space="preserve">
+		<value>Поза межами</value>
+	</data>
+	<data name="strDelete" xml:space="preserve">
+		<value>Видалити…</value>
+	</data>
+	<data name="strReconnectAllConnections" xml:space="preserve">
+		<value>Повторно підключити усі з'єднання</value>
+	</data>
+	<data name="strMenuDisconnectOthersRight" xml:space="preserve">
+		<value>Відключити вкладки праворуч</value>
+	</data>
+	<data name="strMenuDisconnectOthers" xml:space="preserve">
+		<value>Відключити все, окрім цієї вкладки</value>
+	</data>
+	<data name="strConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+		<value>Ви дійсно хочете закрити всі з'єднання, окрім «{0}»?</value>
+	</data>
+	<data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
+		<value>Ви дійсно хочете закрити всі з'єднання праворуч від «{0}»?</value>
+	</data>
+	<data name="AutomaticReconnectError" xml:space="preserve">
+		<value>Сталася помилка під час спроби знову підключитися до RDP хоста «{0}»</value>
+	</data>
+	<data name="ChangeConnectionResolutionError" xml:space="preserve">
+		<value>Сталася помилка під час спроби змінити роздільну здатність з'єднання на хості «{0}»</value>
+	</data>
+	<data name="ExceptionMessage" xml:space="preserve">
+		<value>Повідомлення про виняток</value>
+	</data>
+	<data name="UnhandledExceptionOccured" xml:space="preserve">
+		<value>Стався необроблений виняток</value>
+	</data>
+	<data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
+		<value>Цей виняток змусить mRemoteNG закритися</value>
+	</data>
+	<data name="strMenuCopyHostname" xml:space="preserve">
+		<value>Скопіювати ім'я хоста</value>
+	</data>
+	<data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+		<value>Розмістити рядок пошуку над деревом з'єднань</value>
+	</data>
+	<data name="strPortScanSinglePort" xml:space="preserve">
+		<value>Щоб сканувати один порт, виберіть лише «Початковий порт».</value>
+	</data>
+	<data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
+		<value>Відстежувати активне з'єднання у дереві з'єднань</value>
+	</data>
+	<data name="strAlwaysShowConnectionTabs" xml:space="preserve">
+		<value>Завжди показувати вкладки підключення</value>
+	</data>
+	<data name="strReleaseChannel" xml:space="preserve">
+		<value>Канал оновлень</value>
+	</data>
+	<data name="strReleaseChannelExplanation" xml:space="preserve">
+		<value>Канал «Stable» включає лише остаточні стабільні випуски.
+Канал «Beta» включає Beta та Release Candidate.
+Канал «Development» включає Alpha, Beta та Release Candidate версії.</value>
+	</data>
+	<data name="strButtonApply" xml:space="preserve">
+		<value>Застосувати</value>
+	</data>
+	<data name="strCategoryProxy" xml:space="preserve">
+		<value>Проксі</value>
+	</data>
+	<data name="strMultiSSHToolTip" xml:space="preserve">
+		<value>Натисніть ENTER для надсилання. Ctrl+C надсилається негайно.</value>
+	</data>
+	<data name="strPropertyDescriptionFavorite" xml:space="preserve">
+		<value>Показати це з'єднання в меню обраних.</value>
+	</data>
+	<data name="strPropertyNameFavorite" xml:space="preserve">
+		<value>Улюблене</value>
+	</data>
+	<data name="Favorites" xml:space="preserve">
+		<value>Улюблені</value>
+	</data>
+	<data name="ClearSearchString" xml:space="preserve">
+		<value>Очистити рядок пошуку</value>
+	</data>
+	<data name="ConnectInViewOnlyMode" xml:space="preserve">
+		<value>Підключіться в режимі лише для перегляду</value>
+	</data>
+	<data name="DoNotTrimUsername" xml:space="preserve">
+		<value>Не обрізати пробіли в іменах користувачів</value>
+	</data>
+	<data name="Environment" xml:space="preserve">
+		<value>Середовище</value>
+	</data>
+	<data name="EncryptionTestResultMessage" xml:space="preserve">
+		<value>Шифрування {0} записів за допомогою {1}/{2} та {3} ітерацій зайняло {4} секунд(и).</value>
+	</data>
+	<data name="EncryptionTest" xml:space="preserve">
+		<value>Тест шифрування</value>
+	</data>
+	<data name="TestSettings" xml:space="preserve">
+		<value>Тест налаштувань</value>
+	</data>
+	<data name="strPropertyDescriptionRdpVersion" xml:space="preserve">
+		<value>Встановіть версію RDP, що буде використовуватись при відкритті з'єднань.</value>
+	</data>
+	<data name="strPropertyNameRdpVersion" xml:space="preserve">
+		<value>Версія RDP</value>
+	</data>
+	<data name="strPropertyDescriptionUseVmId" xml:space="preserve">
+		<value>Використовувати VM ID для підключення до VM, що працюють на Hyper-V.</value>
+	</data>
+	<data name="strPropertyDescriptionVmId" xml:space="preserve">
+		<value>ID віртуальної машини Hyper-V, до якогї потрібно підключитися.</value>
+	</data>
+	<data name="strPropertyNameUseVmId" xml:space="preserve">
+		<value>Використовувати VM ID</value>
+	</data>
+	<data name="RdpProtocolVersionNotSupported" xml:space="preserve">
+		<value>Не вдалося створити RDP клієнт. Версія протоколу RDP {0} не підтримується на цій машині. Виберіть старішу версію протоколу.</value>
+	</data>
+	<data name="strStartMinimized" xml:space="preserve">
+		<value>Запускати згорнутим</value>
+	</data>
+	<data name="strPropertyDescriptionPasswordProtect" xml:space="preserve">
+		<value>Встановіть пароль, що необхідний для шифрування файлу з'єднань. Перед запуском mRemoteNG вам буде пропонуватись ввести цей пароль.</value>
+	</data>
+	<data name="strPropertyDescriptionUseEnhancedMode" xml:space="preserve">
+		<value>Підключатися до хоста Hyper-V із увімкненим розширеним режимом.</value>
+	</data>
+	<data name="strPropertyNameUseEnhancedMode" xml:space="preserve">
+		<value>Використовувати розширений режим</value>
+	</data>
+	<data name="strPropertyDescriptionRDGatewayPassword" xml:space="preserve">
+		<value>Вказує пароль сервера Remote Desktop Gateway.</value>
+	</data>
+	<data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
+		<value>Виберіть, чи слід спільно використовувати мікрофони.</value>
+	</data>
+	<data name="strCloseToSysTray" xml:space="preserve">
+		<value>Закривати в область сповіщень</value>
+	</data>
 </root>

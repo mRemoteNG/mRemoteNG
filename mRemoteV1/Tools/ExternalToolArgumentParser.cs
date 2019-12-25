@@ -7,7 +7,7 @@ using mRemoteNG.Tools.Cmdline;
 
 namespace mRemoteNG.Tools
 {
-	public class ExternalToolArgumentParser
+    public class ExternalToolArgumentParser
     {
         private readonly ConnectionInfo _connectionInfo;
 
@@ -116,7 +116,9 @@ namespace mRemoteNG.Tools
 
                 if (haveReplacement)
                 {
-                    var trailing = tokenEnd + 2 <= input.Length ? input.Substring(tokenEnd + 1, 1).ToCharArray()[0] : '\0';
+                    var trailing = tokenEnd + 2 <= input.Length
+                        ? input.Substring(tokenEnd + 1, 1).ToCharArray()[0]
+                        : '\0';
 
                     if (escape == EscapeType.All)
                     {
@@ -136,6 +138,7 @@ namespace mRemoteNG.Tools
                     index = tokenEnd;
                 }
             } while (true);
+
             return replacements;
         }
 
@@ -152,6 +155,7 @@ namespace mRemoteNG.Tools
                     escape = EscapeType.None;
                     break;
             }
+
             return escape;
         }
 
@@ -182,8 +186,24 @@ namespace mRemoteNG.Tools
                     replacement = _connectionInfo.Password;
                     if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "custom")
                         replacement = new LegacyRijndaelCryptographyProvider()
-                                        .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
-                                                                    Runtime.EncryptionKey);
+                            .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
+                                     Runtime.EncryptionKey);
+                    if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "admpwd")
+                    {
+                        if (_connectionInfo.Domain == ".")
+                            replacement = AdmPwd.PDSUtils.PdsWrapper.GetPassword(null, _connectionInfo.Hostname, AdmPwd.Types.IdentityType.LocalComputerAdmin, false, false).Password;
+                        else
+                        {
+                            var userName = _connectionInfo.Username;
+                            if (string.IsNullOrEmpty(userName))
+                                if (Settings.Default.EmptyCredentials == "windows")
+                                    userName = Environment.UserName;
+                                else if (Settings.Default.EmptyCredentials == "custom")
+                                    userName = Settings.Default.DefaultUsername;
+
+                            replacement = AdmPwd.PDSUtils.PdsWrapper.GetPassword(_connectionInfo.Domain, userName, AdmPwd.Types.IdentityType.ManagedDomainAccount, false, false).Password;
+                        }
+                    }
                     break;
                 case "domain":
                     replacement = _connectionInfo.Domain;
@@ -205,6 +225,7 @@ namespace mRemoteNG.Tools
                 default:
                     return original;
             }
+
             return replacement;
         }
 
@@ -227,6 +248,7 @@ namespace mRemoteNG.Tools
                     result = before + replacement.Value + after;
                 }
             }
+
             return result;
         }
 

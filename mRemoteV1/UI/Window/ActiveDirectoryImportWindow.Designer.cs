@@ -1,4 +1,4 @@
-
+﻿
 
 using mRemoteNG.Themes;
 
@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.btnImport._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnImport.Location = new System.Drawing.Point(12, 346);
+            this.btnImport.Location = new System.Drawing.Point(126, 345);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(75, 23);
             this.btnImport.TabIndex = 4;
@@ -34,6 +34,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.txtDomain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDomain.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDomain.Location = new System.Drawing.Point(12, 25);
             this.txtDomain.Name = "txtDomain";
             this.txtDomain.Size = new System.Drawing.Size(406, 22);
@@ -53,9 +54,9 @@ namespace mRemoteNG.UI.Window
             // 
             this.btnChangeDomain._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnChangeDomain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangeDomain.Location = new System.Drawing.Point(424, 25);
+            this.btnChangeDomain.Location = new System.Drawing.Point(422, 23);
             this.btnChangeDomain.Name = "btnChangeDomain";
-            this.btnChangeDomain.Size = new System.Drawing.Size(99, 23);
+            this.btnChangeDomain.Size = new System.Drawing.Size(100, 24);
             this.btnChangeDomain.TabIndex = 2;
             this.btnChangeDomain.Text = "Change";
             this.btnChangeDomain.UseVisualStyleBackColor = true;
@@ -63,27 +64,27 @@ namespace mRemoteNG.UI.Window
             // 
             // ActiveDirectoryTree
             // 
-            this.ActiveDirectoryTree.ADPath = null;
+            this.ActiveDirectoryTree.AdPath = null;
             this.ActiveDirectoryTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ActiveDirectoryTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ActiveDirectoryTree.Domain = "DOMAIN";
+            this.ActiveDirectoryTree.Domain = "";
             this.ActiveDirectoryTree.Location = new System.Drawing.Point(12, 52);
             this.ActiveDirectoryTree.Margin = new System.Windows.Forms.Padding(4);
             this.ActiveDirectoryTree.Name = "ActiveDirectoryTree";
             this.ActiveDirectoryTree.SelectedNode = null;
-            this.ActiveDirectoryTree.Size = new System.Drawing.Size(510, 271);
+            this.ActiveDirectoryTree.Size = new System.Drawing.Size(510, 285);
             this.ActiveDirectoryTree.TabIndex = 3;
-            this.ActiveDirectoryTree.ADPathChanged += new ADTree.ADtree.ADPathChangedEventHandler(this.ActiveDirectoryTree_ADPathChanged);
+            this.ActiveDirectoryTree.AdPathChanged += new ADTree.ADtree.AdPathChangedEventHandler(this.ActiveDirectoryTree_ADPathChanged);
             // 
             // btnClose
             // 
             this.btnClose._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(447, 330);
+            this.btnClose.Location = new System.Drawing.Point(422, 344);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 39);
+            this.btnClose.Size = new System.Drawing.Size(100, 24);
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -94,7 +95,8 @@ namespace mRemoteNG.UI.Window
             this.chkSubOU._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
             this.chkSubOU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSubOU.AutoSize = true;
-            this.chkSubOU.Location = new System.Drawing.Point(12, 330);
+            this.chkSubOU.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSubOU.Location = new System.Drawing.Point(12, 349);
             this.chkSubOU.Name = "chkSubOU";
             this.chkSubOU.Size = new System.Drawing.Size(108, 17);
             this.chkSubOU.TabIndex = 6;

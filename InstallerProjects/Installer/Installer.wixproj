@@ -44,7 +44,6 @@
     <Content Include="Resources\AppIcon.ico" />
     <Content Include="Resources\Installer_Header.png" />
     <Content Include="Resources\Installer_Side.png" />
-    <Content Include="Resources\License.rtf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomActions" />
@@ -115,15 +114,14 @@
 :: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.
 
 powershell -noprofile -command "sleep 2"
+
 set /p buildenv=&lt;buildenv.tmp
-set solutionDir=$(SolutionDir)\
-set targetDir=%25cd%25
-set psScriptsDir=$(SolutionDir)Tools
-set certPath=$(CertPath)
-set certPassword=$(CertPassword)
+
+:: Manual builds, set the cert password and uncomment below.
+:: IF "%25APPVEYOR_BUILD_FOLDER"=="" ( set cert_pwd=  )
 
 :: Call the post build powershell script
-powershell.exe -ExecutionPolicy Bypass -File "%25psScriptsDir%25\postbuild_installer.ps1" -SolutionDir "%25solutionDir%25" -TargetDir "%25targetDir%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "%25certPath%25" -CertificatePassword "%25certPassword%25"</PostBuildEvent>
+powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_installer.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "$(CertPassword)" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>REM Clean the TargetDir
@@ -132,7 +130,7 @@ rmdir /S /Q "$(TargetDir)"
 echo $(ConfigurationName) &gt; buildenv.tmp
 
 REM Harvest bin directory of the mRemoteV1 project
-"$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -nologo -dr INSTALLDIR -var var.HarvestPath -srd -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt"
+"$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -nologo -dr INSTALLDIR -var var.HarvestPath -srd -scom -sreg -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt"
 
 REM Convert the license file "COPYING.TXT" to "License.rtf" to be shown in the installer GUI
 "$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"</PreBuildEvent>

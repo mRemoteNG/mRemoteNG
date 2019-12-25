@@ -14,7 +14,8 @@ namespace mRemoteNG.Config.Settings
         private readonly ISerializer<DockPanel, string> _dockPanelSerializer;
         private readonly IDataProvider<string> _dataProvider;
 
-        public DockPanelLayoutSaver(ISerializer<DockPanel, string> dockPanelSerializer, IDataProvider<string> dataProvider)
+        public DockPanelLayoutSaver(ISerializer<DockPanel, string> dockPanelSerializer,
+                                    IDataProvider<string> dataProvider)
         {
             if (dockPanelSerializer == null)
                 throw new ArgumentNullException(nameof(dockPanelSerializer));

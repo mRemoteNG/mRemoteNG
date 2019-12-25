@@ -13,7 +13,8 @@ namespace mRemoteNG.Config
         private readonly IDataProvider<string> _dataProvider;
         private readonly ISecureDeserializer<string, IEnumerable<ICredentialRecord>> _deserializer;
 
-        public CredentialRecordLoader(IDataProvider<string> dataProvider, ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
+        public CredentialRecordLoader(IDataProvider<string> dataProvider,
+                                      ISecureDeserializer<string, IEnumerable<ICredentialRecord>> deserializer)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));

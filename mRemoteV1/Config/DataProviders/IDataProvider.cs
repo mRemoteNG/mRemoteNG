@@ -1,5 +1,4 @@
-﻿
-namespace mRemoteNG.Config.DataProviders
+﻿namespace mRemoteNG.Config.DataProviders
 {
     public interface IDataProvider<TFormat>
     {

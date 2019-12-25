@@ -36,10 +36,11 @@ namespace mRemoteNG.Config.Connections
         /// </summary>
         public string NewSourcePath { get; }
 
-        public ConnectionsLoadedEventArgs(
-            Optional<ConnectionTreeModel> previousTreeModelModel, ConnectionTreeModel newTreeModelModel,
-            bool previousSourceWasDatabase, bool newSourceIsDatabase,
-            string newSourcePath)
+        public ConnectionsLoadedEventArgs(Optional<ConnectionTreeModel> previousTreeModelModel,
+                                          ConnectionTreeModel newTreeModelModel,
+                                          bool previousSourceWasDatabase,
+                                          bool newSourceIsDatabase,
+                                          string newSourcePath)
         {
             if (previousTreeModelModel == null)
                 throw new ArgumentNullException(nameof(previousTreeModelModel));

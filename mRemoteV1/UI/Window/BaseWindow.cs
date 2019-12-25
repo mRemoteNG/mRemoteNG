@@ -1,16 +1,19 @@
 using mRemoteNG.Themes;
 using WeifenLuo.WinFormsUI.Docking;
+
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
 
 namespace mRemoteNG.UI.Window
 {
-	public class BaseWindow : DockContent
+    public class BaseWindow : DockContent
     {
         #region Private Variables
+
         //private WindowType _WindowType;
         //private DockContent _DockPnl;
         private ThemeManager _themeManager;
+
         #endregion
 
         #region Public Properties
@@ -20,25 +23,28 @@ namespace mRemoteNG.UI.Window
         protected DockContent DockPnl { get; set; }
 
         #endregion
-				
+
         #region Public Methods
-		public void SetFormText(string t)
-		{
-			Text = t;
-			TabText = t;
-		}
+
+        public void SetFormText(string t)
+        {
+            Text = t;
+            TabText = t;
+        }
+
         #endregion
 
         internal void ApplyTheme()
-        { 
+        {
             _themeManager = ThemeManager.getInstance();
-            if (!_themeManager.ThemingActive) return;
+            if (!_themeManager.ActiveAndExtended) return;
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
 
         #region Private Methods
+
         /*
                 private void Base_Load(object sender, EventArgs e)
                 {
@@ -52,6 +58,7 @@ namespace mRemoteNG.UI.Window
                     FrmMain.Default.ShowHidePanelTabs(this);
                 }
         */
+
         #endregion
 
         private void InitializeComponent()
@@ -61,10 +68,10 @@ namespace mRemoteNG.UI.Window
             // BaseWindow
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "BaseWindow";
             this.ResumeLayout(false);
-
         }
     }
 }

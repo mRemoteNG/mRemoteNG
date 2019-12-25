@@ -21,8 +21,10 @@ namespace mRemoteNG.Security.Factories
             ICryptographyProvider cryptoProvider;
             try
             {
-                var engine = (BlockCipherEngines)Enum.Parse(typeof(BlockCipherEngines), _element?.Attribute("EncryptionEngine")?.Value ?? "");
-                var mode = (BlockCipherModes)Enum.Parse(typeof(BlockCipherModes), _element?.Attribute("BlockCipherMode")?.Value ?? "");
+                var engine = (BlockCipherEngines)Enum.Parse(typeof(BlockCipherEngines),
+                                                            _element?.Attribute("EncryptionEngine")?.Value ?? "");
+                var mode = (BlockCipherModes)Enum.Parse(typeof(BlockCipherModes),
+                                                        _element?.Attribute("BlockCipherMode")?.Value ?? "");
                 cryptoProvider = new CryptoProviderFactory(engine, mode).Build();
 
                 var keyDerivationIterations = int.Parse(_element?.Attribute("KdfIterations")?.Value ?? "");

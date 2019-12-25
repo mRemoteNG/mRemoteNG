@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -252,7 +252,7 @@
   <data name="strConnecting" xml:space="preserve">
     <value>Kapcsolódás...</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Sikertelen kapcsolódás!</value>
   </data>
   <data name="strConnections" xml:space="preserve">

@@ -3,16 +3,16 @@
 	<Fragment>
     <ComponentGroup Id="CG.ProjectInfoFiles" Directory="INSTALLDIR">
       <Component Id="C.Changelog" Guid="*">
-        <File Id="ChangelogFile" Name="Changelog.txt" Source="$(var.SolutionDir)CHANGELOG.TXT" KeyPath="yes" />
+        <File Id="ChangelogFile" Name="Changelog.txt" Source="$(var.SolutionDir)CHANGELOG.md" KeyPath="yes" />
       </Component>
       <Component Id="C.Credits" Guid="*">
-        <File Id="CreditsFile" Name="Credits.txt" Source="$(var.SolutionDir)CREDITS.TXT" KeyPath="yes" />
+        <File Id="CreditsFile" Name="Credits.txt" Source="$(var.SolutionDir)CREDITS.md" KeyPath="yes" />
       </Component>
       <Component Id="C.License" Guid="*">
         <File Id="LicenseFile" Name="License.txt" Source="$(var.SolutionDir)COPYING.TXT" KeyPath="yes" />
       </Component>
       <Component Id="C.Readme" Guid="*">
-        <File Id="ReadmeFile" Name="Readme.txt" Source="$(var.SolutionDir)README.TXT" KeyPath="yes" />
+        <File Id="ReadmeFile" Name="Readme.txt" Source="$(var.SolutionDir)README.md" KeyPath="yes" />
       </Component>
       <Component Id="C.TileManifest" Guid="*">
         <File Id="TileManifest" Name="mRemoteNG.VisualElementsManifest.xml" Source="$(var.SolutionDir)mRemoteV1\bin\Release\mRemoteNG.VisualElementsManifest.xml" KeyPath="yes" />

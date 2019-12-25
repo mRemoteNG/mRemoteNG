@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -105,17 +105,17 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
   </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>Om</value>
@@ -127,10 +127,10 @@
     <value>Aktivitet</value>
   </data>
   <data name="strAddConnection" xml:space="preserve">
-    <value>Ny tilkobling</value>
+    <value>&amp;Ny tilkobling</value>
   </data>
   <data name="strAddFolder" xml:space="preserve">
-    <value>Ny mappe</value>
+    <value>Ny &amp;mappe</value>
   </data>
   <data name="strAddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML mislyktes!</value>
@@ -284,10 +284,10 @@ Vennligst bruk Fil - Last inn tilkoblinger for vanlige tilkoblingsfiler!</value>
     <value>Sjekk lyktes!</value>
   </data>
   <data name="strCcEOLFailed" xml:space="preserve">
-    <value>(RDP) økter-funksjonen krever at du har en registrert kopi av eolwtscom.dll på systemet.
-mRemoteNG leveres med denne komponenten, men vil ikke automatisk registrere det med mindre du kjører installasjonsprogrammet.
-For å registrere det manuelt gjør dette: Åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (der c:\Program Files\mRemoteNG\ er banen til din mRemoteNG-installasjon).
-Hvis du fortsatt ikke passerer denne kontrollen eller bruke (RDP) økter-funksjonene i mRemoteNG kan du konsultere mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+    <value>Funksjonaliteten RDP-sesjoner krever at du har en kopi av eolwtscom.dll registrert på ditt system.
+mRemoteNG inneholder denne komponenten, men hvis du ikke har kjørt installasjonsprogrammet blir den ikke automatisk registrert.
+For å registrere den manuelt, kjør den følgende kommandoen fra en elevert (administrator)-kommandolinje: regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (hvor C:\Program Files\mRemoteNG\ er stien til mRemoteNG-installasjonen).
+Hvis denne kontrollen fortsatt feiler eller RDP-sesjoner ikke fungerer, se {0}.</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM ble funnet, og synes å være korrekt registrert.</value>
@@ -296,7 +296,7 @@ Hvis du fortsatt ikke passerer denne kontrollen eller bruke (RDP) økter-funksjo
     <value>For å bruke Gecko-renderingsmotoren må du ha XULrunner 1.8.1.x installert og stien til installasjonen angitt i Alternativer.
 Du kan laste ned XULrunner 1.8.1.3 herfra: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
 Når nedlastingen er ferdig, pakk den ut til et passende sted. I mRemoteNG, gå til Verktøy - Alternativer - Avansert og skriv inn korrekt sti i XULrunner-stifeltet.
-Hvis du fremdeles ikke passerer denne kontrollen eller brukre Gecko-renderingsmotoren i mRemoteNG, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+Hvis denne kontrollen fortsatt feiler eller Gecko-renderingsmotoren i mRemoteNG ikke fungerer, vennligst se {0}.</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx ble funnet å ser ut til å være korrekt installert.</value>
@@ -305,7 +305,7 @@ Hvis du fremdeles ikke passerer denne kontrollen eller brukre Gecko-renderingsmo
     <value>ICA krever at XenDesktop Online Plugin er installert og at wfica.ocx-biblioteket er registrert. Du kan laste ned klienten herfra: http://www.citrix.com/download/
 Hvis du har XenDesktop Online Pluginen installert og kontrollen fremdeles feiler, kan du forsøke å registrere wfica.ocx manuelt.
 For å gjøre dette, åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (der c:\Program Files\Citrix\ICA Client\ er stien til XenDesktop Online Plugin-installasjonen).
-Hvis du fremdeles ikke passerer kontrollen eller bruke ICA i mRemoteNG, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+Hvis denne kontrollen fortsatt feiler eller ICA i mRemoteNG ikke fungerer, vennligst se {0}.</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>Alle ICA-komponenter ble funnet, og ser ut til å være korrekt registrert.
@@ -324,7 +324,7 @@ Vennligst kontroller at du enten har putty.exe i mRemoteNG-mappen (standard: C:\
   <data name="strCcRDPFailed" xml:space="preserve">
     <value>For at RDP skal fungere korrekt må du som et minimum ha Remote Desktop Connection (Terminal Services Client) 8.0 installert. Denne kan lastes ned herfra: https://support.microsoft.com/kb/2592687
 Hvis du har RDP 8.0 installert og kontrollen fremdeles feiler, kan du prøve å registrere mstscax.dll manuelt. For å gjøre dette, åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\windows\system32\mstscax.dll" (der c:\ er systemdisken).
-Hvis du fremdeles har problemer med å få RDP til å fungere, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+Hvis du fremdeles har problemer med å få RDP til å fungere, vennligst se {0}.</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>Alle RDP-komponenter ble funnet og ser ut til å være korrekt registrert.
@@ -333,7 +333,7 @@ Remote Desktop Connection Control Version {0}</value>
   <data name="strCcVNCFailed" xml:space="preserve">
     <value>VNC krever at VncSharp.dll finnes i mappen mRemoteNG er installert i.
 Vennligst kontroller at du har VncSharp.dll i installasjonsmappen til mRemoteNG (vanligvis C:\Program Files\mRemoteNG\).
-Hvis du ikke passerer kontrollen eller ikke får brukt VNC i mRemoteNG, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+Hvis kontrollen feiler eller VNC ikke fungerer i mRemoteNG, vennligst se {0}.</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Alle VNC-komponenter ble funnet og ser ut til å være korrekt registrert.
@@ -490,11 +490,11 @@ VncSharp Control Version {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Tilkobling til "{0}" via "{1}" etablert av bruker "{2}" (Beskrivelse: "{3}"; Brukerfelt "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Tilkobling mislyktes!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
-    <value>Protokollhendelse ErrorOccured</value>
+    <value>Feil i tilkoblingsprotokoll har oppstått. Vertt: "{1}"; Feilkode: "{2}"; Feilbeskrivelse: "{0}"</value>
   </data>
   <data name="strConnectionOpenFailed" xml:space="preserve">
     <value>Åpning av tilkobling mislyktes!</value>
@@ -624,13 +624,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
     <value>Kryptering mislyktes. {0}</value>
-  </data>
-  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Innstillingen for Windows-sikkerhet, "Systemkryptografi: Bruk FIPS-kompatible algoritmer til kryptering, nummerering og signering", er aktivert. Denne innstillingen er ikke kompatibel med {0}. 
-
-Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for mer informasjon.
-
-{0} vil bli avsluttet.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Feil</value>
@@ -769,9 +762,6 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG er oppdatert</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Tilkobling mislyktes!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Forkasting av Int App-prosess mislyktes!</value>
@@ -972,7 +962,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Kopier fane</value>
   </data>
   <data name="strMenuExit" xml:space="preserve">
-    <value>Avslutt</value>
+    <value>A&amp;vslutt</value>
   </data>
   <data name="strMenuExternalTools" xml:space="preserve">
     <value>Eksterne verktøy</value>
@@ -1002,7 +992,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Kjør eksternt verktøy</value>
   </data>
   <data name="strMenuNewConnectionFile" xml:space="preserve">
-    <value>Ny tilkoblingsfil</value>
+    <value>Ny tilkoblings&amp;fil</value>
   </data>
   <data name="strMenuNewExternalTool" xml:space="preserve">
     <value>Nytt eksternt verktøy</value>
@@ -1047,7 +1037,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Gi nytt navn til tilkobling</value>
   </data>
   <data name="strMenuRenameFolder" xml:space="preserve">
-    <value>Gi nytt navn til mappe</value>
+    <value>&amp;Gi nytt navn til mappe</value>
   </data>
   <data name="strMenuRenameTab" xml:space="preserve">
     <value>Gi nytt navn til fane</value>
@@ -1062,7 +1052,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Lagre tilkoblingsfil</value>
   </data>
   <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
-    <value>Lagre tilkoblingsfilen som...</value>
+    <value>Lagre tilkoblingsfilen &amp;som...</value>
   </data>
   <data name="strMenuScreenshot" xml:space="preserve">
     <value>Skjermbilde</value>
@@ -1098,7 +1088,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Forum for brukerstøtte</value>
   </data>
   <data name="strMenuTools" xml:space="preserve">
-    <value>&amp;Verktøy</value>
+    <value>V&amp;erktøy</value>
   </data>
   <data name="strMenuTransferFile" xml:space="preserve">
     <value>Overfør fil (SSH)</value>
@@ -1128,10 +1118,10 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Aldri</value>
   </data>
   <data name="strNewConnection" xml:space="preserve">
-    <value>Ny tilkobling</value>
+    <value>&amp;Ny tilkobling</value>
   </data>
   <data name="strNewFolder" xml:space="preserve">
-    <value>Ny mappe</value>
+    <value>Ny &amp;mappe</value>
   </data>
   <data name="strNewPanel" xml:space="preserve">
     <value>Nytt panel</value>
@@ -1187,14 +1177,14 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
   <data name="strPanelName" xml:space="preserve">
     <value>Panelnavn</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Passordbeskyttelse</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
     <value>Vennligst fyll inn alle felt</value>
   </data>
   <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
-    <value>Kunne ikke laste inn PortScan-panelet!</value>
+    <value>Kunne ikke laste inn portskanningpanelet!</value>
   </data>
   <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
     <value>(Disse egenskapene vil bare lagres dersom du velger mRemote/mRemoteNG XML som format for målfilen!)</value>
@@ -1305,7 +1295,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Velg om lokale skrivere skal vises på den eksterne verten.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Velg om lokale smart-kort skal være tilgjengelig på den eksterne verten.</value>
+    <value>Velg om lokale smartkort skal være tilgjengelig på den eksterne verten.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Velg hvordan ekstern lyd skal omadresseres.</value>
@@ -1503,9 +1493,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Proxy-brukernavn</value>
   </data>
   <data name="strProtocolEventDisconnected" xml:space="preserve">
-    <value>Protokollhendelse frakoblet.
-Melding:
-{0}</value>
+    <value>Protokollhendelse Frakoblet. Vert: "{1}"; Protokoll: "{2}" Beskjed: "{0}"</value>
   </data>
   <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
     <value>Protokollhendelse Frakoblet mislyktes.
@@ -1519,9 +1507,6 @@ Melding:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy-test var vellykket!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Tilkobling mislyktes!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Avslutning av PuTTY-prosessen mislyktes!</value>
@@ -1818,7 +1803,7 @@ Melding:
     <value>Kunne ikke lagre innstillinger eller fjerne SysTray-ikon!</value>
   </data>
   <data name="strShowDescriptionTooltips" xml:space="preserve">
-    <value>Vis verktøystips i tilkoblingstreet</value>
+    <value>Vis verktøytips i tilkoblingstreet</value>
   </data>
   <data name="strShowFullConsFilePath" xml:space="preserve">
     <value>Vis full sti til tilkoblingsfilen i vindustittel</value>
@@ -1899,7 +1884,7 @@ Melding:
     <value>Status</value>
   </data>
   <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
-    <value>Bytte til varslingspanelet på:</value>
+    <value>Bytte til varslingspanelet ved:</value>
   </data>
   <data name="strTabAdvanced" xml:space="preserve">
     <value>Avansert</value>
@@ -2128,7 +2113,7 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
     <value>Bruk et smartkort</value>
   </data>
   <data name="strUseSQLServer" xml:space="preserve">
-    <value>Bruk SQL Server for å laste inn &amp;&amp; lagre tilkoblinger</value>
+    <value>Bruk SQL Server for å laste inn og lagre tilkoblinger</value>
   </data>
   <data name="strVersion" xml:space="preserve">
     <value>Versjon</value>
@@ -2177,5 +2162,599 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
   </data>
   <data name="strYes" xml:space="preserve">
     <value>Ja</value>
+  </data>
+  <data name="strButtonLaunch" xml:space="preserve">
+    <value>&amp;Start</value>
+  </data>
+  <data name="strCommandExitProgram" xml:space="preserve">
+    <value>Avslu&amp;tt {0}</value>
+  </data>
+  <data name="strCommandOpenConnectionFile" xml:space="preserve">
+    <value>Åpne tilkoblingsfil</value>
+  </data>
+  <data name="strCommandTryAgain" xml:space="preserve">
+    <value>Prøv igjen</value>
+  </data>
+  <data name="strConnectNoCredentials" xml:space="preserve">
+    <value>Koble til uten legitimasjon</value>
+  </data>
+  <data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
+    <value>Ikke koble til konsollsesjon</value>
+  </data>
+  <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
+    <value>PuTTY kunne ikke startes.</value>
+  </data>
+  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
+    <value>Sikkerhetsinnstillingen "Systemkryptografi: Bruk FIPS-kompatible algoritmer til kryptering, hash-koding og signering" i Windows er aktivert.
+
+Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for mer informasjon.
+
+{0} er ikke fullt ut FIPS-kompatibel. Klikk OK for å fortsette, eller Avbryt for å avslutte.
+</value>
+  </data>
+  <data name="strExportEverything" xml:space="preserve">
+    <value>Eksporter alt</value>
+  </data>
+  <data name="strExportFile" xml:space="preserve">
+    <value>Eksporter fil</value>
+  </data>
+  <data name="strExportItems" xml:space="preserve">
+    <value>Eksporter elementer</value>
+  </data>
+  <data name="strExportProperties" xml:space="preserve">
+    <value>Eksporter egenskaper</value>
+  </data>
+  <data name="strExportSelectedConnection" xml:space="preserve">
+    <value>Eksporter valgt tilkobling</value>
+  </data>
+  <data name="strExportSelectedFolder" xml:space="preserve">
+    <value>Eksporter valgt mappe</value>
+  </data>
+  <data name="strExportToFileMenuItem" xml:space="preserve">
+    <value>&amp;Eksporter til fil...</value>
+  </data>
+  <data name="strExternalToolDefaultName" xml:space="preserve">
+    <value>Nytt eksternt verktøy</value>
+  </data>
+  <data name="strFileFormatLabel" xml:space="preserve">
+    <value>&amp;Filformat:</value>
+  </data>
+  <data name="strFilterAllImportable" xml:space="preserve">
+    <value>Alle filer som kan importeres</value>
+  </data>
+  <data name="strFilterPuttyConnectionManager" xml:space="preserve">
+    <value>PuTTY Connection Manager-filer</value>
+  </data>
+  <data name="strFilterRdgFiles" xml:space="preserve">
+    <value>Remote Desktop Connection Manager-filer (*.rdg)</value>
+  </data>
+  <data name="strImportFileFailedContent" xml:space="preserve">
+    <value>En feil har oppstått under import av filen "{0}".</value>
+  </data>
+  <data name="strImportFileFailedMainInstruction" xml:space="preserve">
+    <value>Import feilet</value>
+  </data>
+  <data name="strImportFromFileMenuItem" xml:space="preserve">
+    <value>Importer fra &amp;fil...</value>
+  </data>
+  <data name="strImportLocationCommandButtons" xml:space="preserve">
+    <value>Under roten{0}{1}|Under den valgte mappen{0}{2}</value>
+  </data>
+  <data name="strImportLocationContent" xml:space="preserve">
+    <value>Hvor ønsker du å plassere de importerte elementene?</value>
+  </data>
+  <data name="strImportLocationMainInstruction" xml:space="preserve">
+    <value>Importplassering</value>
+  </data>
+  <data name="strImportMenuItem" xml:space="preserve">
+    <value>&amp;Import</value>
+  </data>
+  <data name="strLoadFromSqlFailedContent" xml:space="preserve">
+    <value>Tilkoblingsinformasjonen kunne ikke lastes fra SQL server.</value>
+  </data>
+  <data name="strMenuSessionRetrieve" xml:space="preserve">
+    <value>Hent</value>
+  </data>
+  <data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
+    <value>&amp;Slett</value>
+  </data>
+  <data name="strOptionsKeyboardButtonNew" xml:space="preserve">
+    <value>&amp;Ny</value>
+  </data>
+  <data name="strOptionsKeyboardButtonReset" xml:space="preserve">
+    <value>&amp;Tilbakestill til standard</value>
+  </data>
+  <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
+    <value>Tilbakestill &amp;alt til standard</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
+    <value>Faner</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
+    <value>Neste fane</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
+    <value>Forrige fane</value>
+  </data>
+  <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
+    <value>Endre tastatursnarvei</value>
+  </data>
+  <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
+    <value>Tastatursnarveier</value>
+  </data>
+  <data name="strOptionsTabKeyboard" xml:space="preserve">
+    <value>Tastatur</value>
+  </data>
+  <data name="strPasswordStatusMustMatch" xml:space="preserve">
+    <value>Begge passordene må være like.</value>
+  </data>
+  <data name="strPasswordStatusTooShort" xml:space="preserve">
+    <value>Passordet må være minst 3 tegn langt.</value>
+  </data>
+  <data name="strPortScanComplete" xml:space="preserve">
+    <value>Portskanning ferdig.</value>
+  </data>
+  <data name="strPropertyDescriptionAutomaticResize" xml:space="preserve">
+    <value>Velg om tilkoblingen skal endre størrelse når vinduet endrer størrelse eller fullskjermsmodus slås av eller på. Krever RDC 8.0 eller høyere.</value>
+  </data>
+  <data name="strPropertyDescriptionLoadBalanceInfo" xml:space="preserve">
+    <value>Angi informasjon for lastbalanseringsrutere for å velge den beste verten.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectClipboard" xml:space="preserve">
+    <value>Velg om utklippstavlen skal deles.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+    <value>Velg om standard lydinndataenhet på den eksterne maskinen skal omadresseres til denne maskinen.</value>
+  </data>
+  <data name="strPropertyNameAutomaticResize" xml:space="preserve">
+    <value>Automatisk størrelsesendring</value>
+  </data>
+  <data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
+    <value>Lastbalanseringsinformasjon</value>
+  </data>
+  <data name="strPropertyNameRedirectClipboard" xml:space="preserve">
+    <value>Utklippstavle</value>
+  </data>
+  <data name="strPropertyNameRedirectAudioCapture" xml:space="preserve">
+    <value>Lydopptak</value>
+  </data>
+  <data name="strPuttySessionSettings" xml:space="preserve">
+    <value>PuTTY sesjonsinnstillinger</value>
+  </data>
+  <data name="strTitlePasswordWithName" xml:space="preserve">
+    <value>Passord for {0}</value>
+  </data>
+  <data name="strShowOnToolbar" xml:space="preserve">
+    <value>Vis på verktøylinjen</value>
+  </data>
+  <data name="strUpdateCheckFailedLabel" xml:space="preserve">
+    <value>Sjekk feilet</value>
+  </data>
+  <data name="strUpdateCheckingLabel" xml:space="preserve">
+    <value>Sjekker om det finnes oppdateringer...</value>
+  </data>
+  <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
+    <value>Endringsloggen kunne ikke lastes ned.</value>
+  </data>
+  <data name="strMenuReconnectAll" xml:space="preserve">
+    <value>&amp;Koble til alle åpne tilkoblinger på nytt</value>
+  </data>
+  <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
+    <value>RDP tidsavbrudd</value>
+  </data>
+  <data name="strNodeAlreadyInFolder" xml:space="preserve">
+    <value>Elementet finnes allere i denne mappen.</value>
+  </data>
+  <data name="strNodeCannotDragOnSelf" xml:space="preserve">
+    <value>Kan ikke dra elementet til seg selv.</value>
+  </data>
+  <data name="strNodeCannotDragParentOnChild" xml:space="preserve">
+    <value>Kan ikke dra foreldreelementet til underordnet element.</value>
+  </data>
+  <data name="strNodeNotDraggable" xml:space="preserve">
+    <value>Elementet kan ikke flyttes.</value>
+  </data>
+  <data name="strEncryptionBlockCipherMode" xml:space="preserve">
+    <value>Blokkrypteringsmodus</value>
+  </data>
+  <data name="strEncryptionEngine" xml:space="preserve">
+    <value>Krypteringsmotor</value>
+  </data>
+  <data name="strTabSecurity" xml:space="preserve">
+    <value>Sikkerhet</value>
+  </data>
+  <data name="strEncryptionKeyDerivationIterations" xml:space="preserve">
+    <value>Antall iterasjoner for nøkkelderivasjon</value>
+  </data>
+  <data name="strRDPSoundQualityDynamic" xml:space="preserve">
+    <value>Dynamisk</value>
+  </data>
+  <data name="strRDPSoundQualityHigh" xml:space="preserve">
+    <value>Høy</value>
+  </data>
+  <data name="strRDPSoundQualityMedium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="strPropertyDescriptionSoundQuality" xml:space="preserve">
+    <value>Velg lydkvalitet: dynamisk, medium, høy</value>
+  </data>
+  <data name="strPropertyNameSoundQuality" xml:space="preserve">
+    <value>Lydkvalitet</value>
+  </data>
+  <data name="strUpdatePortableDownloadComplete" xml:space="preserve">
+    <value>Nedlasting ferdig!</value>
+  </data>
+  <data name="strDownloadPortable" xml:space="preserve">
+    <value>Nedlasting</value>
+  </data>
+  <data name="strPropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
+    <value>Antall minutter med inaktivitet før RDP-sesjonen automatisk kobles fra (bruk 0 for ubegrenset)</value>
+  </data>
+  <data name="strPropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+    <value>Inaktivitet i minutter</value>
+  </data>
+  <data name="strAccept" xml:space="preserve">
+    <value>Godta</value>
+  </data>
+  <data name="strAdd" xml:space="preserve">
+    <value>Legg til</value>
+  </data>
+  <data name="strCredentialEditor" xml:space="preserve">
+    <value>Legitimasjonsredigering</value>
+  </data>
+  <data name="strCredentialManager" xml:space="preserve">
+    <value>Legitimasjonshåndtering</value>
+  </data>
+  <data name="strRemove" xml:space="preserve">
+    <value>Fjern</value>
+  </data>
+  <data name="strTitle" xml:space="preserve">
+    <value>Tittel</value>
+  </data>
+  <data name="strPropertyDescriptionCredential" xml:space="preserve">
+    <value>Velg hvilken legitimasjon du vil bruke for denne tilkoblingen</value>
+  </data>
+  <data name="strConfirmDeleteCredentialRecord" xml:space="preserve">
+    <value>Er du sikker på at du vil fjerne legitimasjonen {0}?</value>
+  </data>
+  <data name="strFindMatchingCredentialFailed" xml:space="preserve">
+    <value>Kunne ikke finne legitimasjon med ID "{0}" for tilkoblingen "{1}"</value>
+  </data>
+  <data name="strPropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Velg om du ønsker et varsel når RDP-sesjonen avsluttes på grunn av inaktivitet</value>
+  </data>
+  <data name="strPropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Varsel ved inaktivitet</value>
+  </data>
+  <data name="strPasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+    <value>Passordet må inneholde minst {0} av de følgende tegnene: {1}</value>
+  </data>
+  <data name="strPasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+    <value>Passordet må inneholde minst {0} små bokstaver</value>
+  </data>
+  <data name="strPasswordContainsNumbersConstraint" xml:space="preserve">
+    <value>Passordet må inneholde minst {0} tall</value>
+  </data>
+  <data name="strPasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+    <value>Passordet må inneholde minst {0} store bokstaver</value>
+  </data>
+  <data name="strPasswordLengthConstraintHint" xml:space="preserve">
+    <value>Passordlengden må være mellom {0} og {1}</value>
+  </data>
+  <data name="strChooseLogPath" xml:space="preserve">
+    <value>Velg plassering for mRemoteNGs loggfil</value>
+  </data>
+  <data name="strDebug" xml:space="preserve">
+    <value>Feilsøking</value>
+  </data>
+  <data name="strShowTheseMessageTypes" xml:space="preserve">
+    <value>Vis disse beskjedtypene</value>
+  </data>
+  <data name="strLogFilePath" xml:space="preserve">
+    <value>Sti til loggfil</value>
+  </data>
+  <data name="strLogTheseMessageTypes" xml:space="preserve">
+    <value>Logg disse beskjedtypene</value>
+  </data>
+  <data name="strChoosePath" xml:space="preserve">
+    <value>Velg sti</value>
+  </data>
+  <data name="strOpenFile" xml:space="preserve">
+    <value>Åpne fil</value>
+  </data>
+  <data name="strUseDefault" xml:space="preserve">
+    <value>Bruk standard</value>
+  </data>
+  <data name="strLogging" xml:space="preserve">
+    <value>Logging</value>
+  </data>
+  <data name="strPopups" xml:space="preserve">
+    <value>Oppsprettvinduer</value>
+  </data>
+  <data name="strLogToAppDir" xml:space="preserve">
+    <value>Logg til applikasjonens mappe</value>
+  </data>
+  <data name="strAssignedCredential" xml:space="preserve">
+    <value>Tilordnet legitimasjon</value>
+  </data>
+  <data name="strHttpsInsecureAllowAlways" xml:space="preserve">
+    <value>Tillat alltid</value>
+  </data>
+  <data name="strHttpsInsecureAllowOnce" xml:space="preserve">
+    <value>Tillat én gang</value>
+  </data>
+  <data name="strHttpsInsecureDontAllow" xml:space="preserve">
+    <value>Ikke tillat</value>
+  </data>
+  <data name="strHttpsInsecurePrompt" xml:space="preserve">
+    <value>Tillat usikkert sertifikat for URL {0}?</value>
+  </data>
+  <data name="strHttpsInsecurePromptTitle" xml:space="preserve">
+    <value>Tillat usikkert sertifikat</value>
+  </data>
+  <data name="RepositoryIsUnlocked" xml:space="preserve">
+    <value>Det valgte lageret er låst opp</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Feil passord</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Kilde</value>
+  </data>
+  <data name="Unlocking" xml:space="preserve">
+    <value>Låser opp</value>
+  </data>
+  <data name="UnlockCredentialRepository" xml:space="preserve">
+    <value>Lås opp legitimasjonslager</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Lås opp</value>
+  </data>
+  <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
+    <value>Spør om legitimasjonslagre skal låses opp ved oppstart</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Legitimasjoner</value>
+  </data>
+  <data name="strUpgrade" xml:space="preserve">
+    <value>Oppgrader</value>
+  </data>
+  <data name="strBack" xml:space="preserve">
+    <value>Tilbake</value>
+  </data>
+  <data name="strConnectionFilePath" xml:space="preserve">
+    <value>Sti til tilkoblingsfil</value>
+  </data>
+  <data name="strCreateAndOpenNewFile" xml:space="preserve">
+    <value>Lag og åpne ny fil</value>
+  </data>
+  <data name="strOpenADifferentFile" xml:space="preserve">
+    <value>Åpne en annen fil</value>
+  </data>
+  <data name="strCredentialManagerUpgradeDescription" xml:space="preserve">
+    <value>I v1.76 har vi introdusert et system for håndtering av legitimasjon. Denne funksjonaliteten krever en endring i hvordan legitimasjon lagres. For å fortsette må mRemoteNGs tilkoblingsfil oppgraderes, og denne endringen kan ikke angres.
+
+Denne siden vil lede deg gjennom stegene for å oppgradere tilkoblingsfilen, eller la deg åpne en annen tilkoblingsfil hvis du ikke ønsker å oppgradere.</value>
+  </data>
+  <data name="CredentialUnavailable" xml:space="preserve">
+    <value>Legitimasjon ikke tilgjengelig</value>
+  </data>
+  <data name="strOptionsThemeDeleteConfirmation" xml:space="preserve">
+    <value>Vil du slette dette temaet?</value>
+  </data>
+  <data name="strOptionsThemeEnableTheming" xml:space="preserve">
+    <value>Aktiver temaer</value>
+  </data>
+  <data name="strOptionsThemeNewThemeCaption" xml:space="preserve">
+    <value>Navn på nytt tema</value>
+  </data>
+  <data name="strOptionsThemeNewThemeError" xml:space="preserve">
+    <value>Kan ikke opprette tema, navnet finnes allerede eller inneholder spesialtegn</value>
+  </data>
+  <data name="strOptionsThemeNewThemeText" xml:space="preserve">
+    <value>Skriv inn navn på nytt tema</value>
+  </data>
+  <data name="strOptionsThemeChangeWarning" xml:space="preserve">
+    <value>Advarsel: applikasjonen må startes på nytt før endringer i tema trer i kraft.</value>
+  </data>
+  <data name="strOptionsThemeErrorNoThemes" xml:space="preserve">
+    <value>Ingen tema er lastet, sjekk at standard mRemoteNG-temaer finnes i 'themes'-mappen</value>
+  </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>Kunne ikke finne eksternt verktøy "{0}"</value>
+  </data>
+  <data name="ConfigurationCreateNew" xml:space="preserve">
+    <value>Lag en ny tilkoblingsfil</value>
+  </data>
+  <data name="ConnectionFileNotFound" xml:space="preserve">
+    <value>Tilkoblingsfilen ble ikke funnet.</value>
+  </data>
+  <data name="ConfigurationImportFile" xml:space="preserve">
+    <value>Importer en eksisterende fil</value>
+  </data>
+  <data name="ConfigurationCustomPath" xml:space="preserve">
+    <value>Bruk egendefinert filsti</value>
+  </data>
+  <data name="TestingConnection" xml:space="preserve">
+    <value>Tester tilkobling</value>
+  </data>
+  <data name="ServerNotAccessible" xml:space="preserve">
+    <value>Verten '{0}' var ikke tilgjengelig.</value>
+  </data>
+  <data name="ConnectionSuccessful" xml:space="preserve">
+    <value>Tilkobling vellykket</value>
+  </data>
+  <data name="LoginFailedForUser" xml:space="preserve">
+    <value>Innlogging feilet for brukeren '{0}'.</value>
+  </data>
+  <data name="DatabaseNotAvailable" xml:space="preserve">
+    <value>Databasen '{0}' er ikke tilgjengelig.</value>
+  </data>
+  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
+    <value>Lagre tilkoblinger etter hver endring</value>
+  </data>
+  <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
+    <value>Filtrer søketreff i tilkoblingstre</value>
+  </data>
+  <data name="TestConnection" xml:space="preserve">
+    <value>Test tilkobling</value>
+  </data>
+  <data name="strLabelReadOnly" xml:space="preserve">
+    <value>Bare lesemodus:</value>
+  </data>
+  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Bruk UTF8-koding for RDP "Lastbalanseringsinformasjon"-egenskap</value>
+  </data>
+  <data name="strTimeoutInSeconds" xml:space="preserve">
+    <value>Tidsavbrudd [sekunder]</value>
+  </data>
+  <data name="srtWorkingDirectory" xml:space="preserve">
+    <value>Start i:</value>
+  </data>
+  <data name="strRunElevated" xml:space="preserve">
+    <value>Kjør elevert</value>
+  </data>
+  <data name="strRunElevateHeader" xml:space="preserve">
+    <value>Elevering</value>
+  </data>
+  <data name="strShowOnToolbarColumnHeader" xml:space="preserve">
+    <value>Vis på verktøylinjens kolonne</value>
+  </data>
+  <data name="strTryToIntegrateColumnHeader" xml:space="preserve">
+    <value>Prøv å integrere</value>
+  </data>
+  <data name="strWorkingDirColumnHeader" xml:space="preserve">
+    <value>Start i</value>
+  </data>
+  <data name="strLockToolbars" xml:space="preserve">
+    <value>Lås verktøylinjeposisjoner</value>
+  </data>
+  <data name="strMultiSshToolbar" xml:space="preserve">
+    <value>Multi SSH-verktøylinje</value>
+  </data>
+  <data name="strImportSubOUs" xml:space="preserve">
+    <value>Importer under-OUer</value>
+  </data>
+  <data name="strMenuLockToolbars" xml:space="preserve">
+    <value>Lås verktøylinjeposisjoner</value>
+  </data>
+  <data name="strMenuMultiSshToolbar" xml:space="preserve">
+    <value>Multi SSH-verktøylinje</value>
+  </data>
+  <data name="strAdvancedSecurityOptions" xml:space="preserve">
+    <value>Avanserte sikkerhetsvalg</value>
+  </data>
+  <data name="strOptionsPageTitle" xml:space="preserve">
+    <value>mRemoteNG-valg</value>
+  </data>
+  <data name="strLoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Bruk UTF8-koding for RDP "Lastbalanseringsinformasjon"-egenskap</value>
+  </data>
+  <data name="strCreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Lag et tomt panel når mRemoteNG starter</value>
+  </data>
+  <data name="strIPRange" xml:space="preserve">
+    <value>Må være mellom 0 og 255</value>
+  </data>
+  <data name="strOutOfRange" xml:space="preserve">
+    <value>Utenfor gyldig område</value>
+  </data>
+  <data name="strDelete" xml:space="preserve">
+    <value>Slett...</value>
+  </data>
+  <data name="strReconnectAllConnections" xml:space="preserve">
+    <value>Koble til alle tilkoblinger på nytt</value>
+  </data>
+  <data name="strUltraVNCSingleClick" xml:space="preserve">
+    <value>UltraVNC SingleClick</value>
+  </data>
+  <data name="strMenuDisconnectOthersRight" xml:space="preserve">
+    <value>Koble fra faner til høyre</value>
+  </data>
+  <data name="strMenuDisconnectOthers" xml:space="preserve">
+    <value>Koble fra alle unntatt denne</value>
+  </data>
+  <data name="strConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+    <value>Er du sikker på at du vil lukke alle tilkoblinger bortsett fra "{0}"?</value>
+  </data>
+  <data name="strConfirmCloseConnectionRightInstruction" xml:space="preserve">
+    <value>Er du sikker på at du vil lukke alle tilkoblinger til høyre for "{0}"?</value>
+  </data>
+  <data name="AutomaticReconnectError" xml:space="preserve">
+    <value>En feil oppsto under gjenoppretting av tilkobling til RDP-vert '{0}'</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>En feil oppsto under endring av oppløsning til vert '{0}'</value>
+  </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Stakksporing</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Unntaksbeskjed</value>
+  </data>
+  <data name="mRemoteNGUnhandledException" xml:space="preserve">
+    <value>mRemoteNG ubehandlet unntak</value>
+  </data>
+  <data name="UnhandledExceptionOccured" xml:space="preserve">
+    <value>Et ubehandlet unntak har oppstått</value>
+  </data>
+  <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
+    <value>Dette unntaket gjør at mRemoteNG må lukkes</value>
+  </data>
+  <data name="strMenuCopyHostname" xml:space="preserve">
+    <value>Kopier vertsnavn</value>
+  </data>
+  <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Plasser søkelinjen over tilkoblingstreet</value>
+  </data>
+  <data name="strPortScanSinglePort" xml:space="preserve">
+    <value>For å skanne en enkelt port, velg bare "Start-port"</value>
+  </data>
+  <data name="strTrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Vis aktiv tilkobling i tilkoblingstreet</value>
+  </data>
+  <data name="strAlwaysShowConnectionTabs" xml:space="preserve">
+    <value>Vis alltid tilkoblingsfaner</value>
+  </data>
+  <data name="strReleaseChannel" xml:space="preserve">
+    <value>Release-kanal</value>
+  </data>
+  <data name="strReleaseChannelExplanation" xml:space="preserve">
+    <value>Stable-kanalen inkluderer bare endelige versjoner.
+Beta-kanalen inkluderer beta- og release candidate-versjoner.
+Development-kanalen inkluderer alpha-, beta- og release candidate-versjoner.</value>
+  </data>
+  <data name="strButtonApply" xml:space="preserve">
+    <value>Bruk</value>
+  </data>
+  <data name="strCategoryProxy" xml:space="preserve">
+    <value>Proxy-innstillinger</value>
+  </data>
+  <data name="strMultiSSH" xml:space="preserve">
+    <value>Multi-SSH:</value>
+  </data>
+  <data name="strMultiSSHToolTip" xml:space="preserve">
+    <value>Trykk ENTER for å sende, Ctrl+C sendes umiddelbart.</value>
+  </data>
+  <data name="strPropertyDescriptionFavorite" xml:space="preserve">
+    <value>Vis denne tilkoblingen i favoritter-menyen.</value>
+  </data>
+  <data name="strPropertyNameFavorite" xml:space="preserve">
+    <value>Favoritt</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favoritter</value>
+  </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Nullstill søkestreng</value>
+  </data>
+  <data name="ConnectInViewOnlyMode" xml:space="preserve">
+    <value>Koble til i bare visningsmodus</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Ikke fjern mellomrom fra brukernavn</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Miljø</value>
   </data>
 </root>

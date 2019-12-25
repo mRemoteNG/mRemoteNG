@@ -5,7 +5,7 @@ using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Menu
 {
-	public class ToolsMenu : ToolStripMenuItem
+    public class ToolsMenu : ToolStripMenuItem
     {
         private ToolStripSeparator _mMenToolsSep1;
         private ToolStripMenuItem _mMenToolsOptions;
@@ -37,15 +37,17 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenTools
             // 
-            DropDownItems.AddRange(new ToolStripItem[] {
-            _mMenToolsSshTransfer,
-            _mMenToolsUvncsc,
-            _mMenToolsExternalApps,
-            _mMenToolsPortScan,
-            _mMenViewScreenshotManager,
-            _mMenToolsSep1,
-            _mMenToolsComponentsCheck,
-            _mMenToolsOptions});
+            DropDownItems.AddRange(new ToolStripItem[]
+            {
+                _mMenToolsSshTransfer,
+                _mMenToolsUvncsc,
+                _mMenToolsExternalApps,
+                _mMenToolsPortScan,
+                _mMenViewScreenshotManager,
+                _mMenToolsSep1,
+                _mMenToolsComponentsCheck,
+                _mMenToolsOptions
+            });
             Name = "mMenTools";
             Size = new System.Drawing.Size(48, 20);
             Text = Language.strMenuTools;
@@ -125,6 +127,7 @@ namespace mRemoteNG.UI.Menu
         }
 
         #region Tools
+
         private void mMenToolsSSHTransfer_Click(object sender, EventArgs e)
         {
             Windows.Show(WindowType.SSHTransfer);
@@ -159,6 +162,7 @@ namespace mRemoteNG.UI.Menu
         {
             Windows.Show(WindowType.Options);
         }
+
         #endregion
     }
 }

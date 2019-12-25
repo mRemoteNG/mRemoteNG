@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -450,7 +450,7 @@ Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteN
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Conexão para "{0}" via "{1}" estabelecido pelo usuário "{2}" (Descrição: "{3}"; Campo usuário: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Conexão falhou!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">

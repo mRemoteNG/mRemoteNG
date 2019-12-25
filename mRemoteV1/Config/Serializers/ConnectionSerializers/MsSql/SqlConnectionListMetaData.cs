@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security;
 
 namespace mRemoteNG.Config.Serializers.MsSql
 {

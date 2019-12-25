@@ -49,6 +49,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkUseFilterSearch = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.chkPlaceSearchBarAboveConnectionTree = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkConnectionTreeTrackActiveConnection = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.chkDoNotTrimUsername = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numRdpReconnectionCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAutoSave)).BeginInit();
@@ -119,8 +121,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSingleClickOnConnectionOpensIt
             // 
-            this.chkSingleClickOnConnectionOpensIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSingleClickOnConnectionOpensIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSingleClickOnConnectionOpensIt.AutoSize = true;
+            this.chkSingleClickOnConnectionOpensIt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleClickOnConnectionOpensIt.Location = new System.Drawing.Point(3, 3);
             this.chkSingleClickOnConnectionOpensIt.Name = "chkSingleClickOnConnectionOpensIt";
             this.chkSingleClickOnConnectionOpensIt.Size = new System.Drawing.Size(206, 17);
@@ -130,9 +133,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkHostnameLikeDisplayName
             // 
-            this.chkHostnameLikeDisplayName._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkHostnameLikeDisplayName._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkHostnameLikeDisplayName.AutoSize = true;
-            this.chkHostnameLikeDisplayName.Location = new System.Drawing.Point(3, 49);
+            this.chkHostnameLikeDisplayName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkHostnameLikeDisplayName.Location = new System.Drawing.Point(3, 72);
             this.chkHostnameLikeDisplayName.Name = "chkHostnameLikeDisplayName";
             this.chkHostnameLikeDisplayName.Size = new System.Drawing.Size(355, 17);
             this.chkHostnameLikeDisplayName.TabIndex = 2;
@@ -141,11 +145,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSingleClickOnOpenedConnectionSwitchesToIt
             // 
-            this.chkSingleClickOnOpenedConnectionSwitchesToIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.AutoSize = true;
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = new System.Drawing.Point(3, 26);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt";
-            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(490, 17);
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(492, 17);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 1;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = global::mRemoteNG.Language.strSingleClickOnOpenConnectionSwitchesToIt;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = true;
@@ -180,7 +185,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlConfirmCloseConnection.Controls.Add(this.radCloseWarnMultiple);
             this.pnlConfirmCloseConnection.Controls.Add(this.radCloseWarnExit);
             this.pnlConfirmCloseConnection.Controls.Add(this.radCloseWarnNever);
-            this.pnlConfirmCloseConnection.Location = new System.Drawing.Point(3, 226);
+            this.pnlConfirmCloseConnection.Location = new System.Drawing.Point(3, 270);
             this.pnlConfirmCloseConnection.Name = "pnlConfirmCloseConnection";
             this.pnlConfirmCloseConnection.Size = new System.Drawing.Size(604, 137);
             this.pnlConfirmCloseConnection.TabIndex = 6;
@@ -197,52 +202,57 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // radCloseWarnAll
             // 
             this.radCloseWarnAll.AutoSize = true;
+            this.radCloseWarnAll.BackColor = System.Drawing.Color.Transparent;
             this.radCloseWarnAll.Location = new System.Drawing.Point(16, 34);
             this.radCloseWarnAll.Name = "radCloseWarnAll";
             this.radCloseWarnAll.Size = new System.Drawing.Size(209, 17);
             this.radCloseWarnAll.TabIndex = 1;
             this.radCloseWarnAll.TabStop = true;
             this.radCloseWarnAll.Text = "Warn me when closing connections";
-            this.radCloseWarnAll.UseVisualStyleBackColor = true;
+            this.radCloseWarnAll.UseVisualStyleBackColor = false;
             // 
             // radCloseWarnMultiple
             // 
             this.radCloseWarnMultiple.AutoSize = true;
+            this.radCloseWarnMultiple.BackColor = System.Drawing.Color.Transparent;
             this.radCloseWarnMultiple.Location = new System.Drawing.Point(16, 57);
             this.radCloseWarnMultiple.Name = "radCloseWarnMultiple";
             this.radCloseWarnMultiple.Size = new System.Drawing.Size(279, 17);
             this.radCloseWarnMultiple.TabIndex = 2;
             this.radCloseWarnMultiple.TabStop = true;
             this.radCloseWarnMultiple.Text = "Warn me only when closing multiple connections";
-            this.radCloseWarnMultiple.UseVisualStyleBackColor = true;
+            this.radCloseWarnMultiple.UseVisualStyleBackColor = false;
             // 
             // radCloseWarnExit
             // 
             this.radCloseWarnExit.AutoSize = true;
+            this.radCloseWarnExit.BackColor = System.Drawing.Color.Transparent;
             this.radCloseWarnExit.Location = new System.Drawing.Point(16, 80);
             this.radCloseWarnExit.Name = "radCloseWarnExit";
             this.radCloseWarnExit.Size = new System.Drawing.Size(233, 17);
             this.radCloseWarnExit.TabIndex = 3;
             this.radCloseWarnExit.TabStop = true;
             this.radCloseWarnExit.Text = "Warn me only when exiting mRemoteNG";
-            this.radCloseWarnExit.UseVisualStyleBackColor = true;
+            this.radCloseWarnExit.UseVisualStyleBackColor = false;
             // 
             // radCloseWarnNever
             // 
             this.radCloseWarnNever.AutoSize = true;
+            this.radCloseWarnNever.BackColor = System.Drawing.Color.Transparent;
             this.radCloseWarnNever.Location = new System.Drawing.Point(16, 103);
             this.radCloseWarnNever.Name = "radCloseWarnNever";
             this.radCloseWarnNever.Size = new System.Drawing.Size(246, 17);
             this.radCloseWarnNever.TabIndex = 4;
             this.radCloseWarnNever.TabStop = true;
             this.radCloseWarnNever.Text = "Do not warn me when closing connections";
-            this.radCloseWarnNever.UseVisualStyleBackColor = true;
+            this.radCloseWarnNever.UseVisualStyleBackColor = false;
             // 
             // chkSaveConnectionsAfterEveryEdit
             // 
-            this.chkSaveConnectionsAfterEveryEdit._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkSaveConnectionsAfterEveryEdit._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkSaveConnectionsAfterEveryEdit.AutoSize = true;
-            this.chkSaveConnectionsAfterEveryEdit.Location = new System.Drawing.Point(3, 72);
+            this.chkSaveConnectionsAfterEveryEdit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkSaveConnectionsAfterEveryEdit.Location = new System.Drawing.Point(3, 95);
             this.chkSaveConnectionsAfterEveryEdit.Name = "chkSaveConnectionsAfterEveryEdit";
             this.chkSaveConnectionsAfterEveryEdit.Size = new System.Drawing.Size(194, 17);
             this.chkSaveConnectionsAfterEveryEdit.TabIndex = 7;
@@ -251,9 +261,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseFilterSearch
             // 
-            this.chkUseFilterSearch._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkUseFilterSearch._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkUseFilterSearch.AutoSize = true;
-            this.chkUseFilterSearch.Location = new System.Drawing.Point(3, 95);
+            this.chkUseFilterSearch.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkUseFilterSearch.Location = new System.Drawing.Point(3, 118);
             this.chkUseFilterSearch.Name = "chkUseFilterSearch";
             this.chkUseFilterSearch.Size = new System.Drawing.Size(230, 17);
             this.chkUseFilterSearch.TabIndex = 8;
@@ -271,7 +282,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tableLayoutPanel2.Controls.Add(this.lblAutoSave1, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblRDPConTimeout, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.numRDPConTimeout, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 141);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 185);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -282,19 +293,46 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkPlaceSearchBarAboveConnectionTree
             // 
-            this.chkPlaceSearchBarAboveConnectionTree._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkPlaceSearchBarAboveConnectionTree._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
             this.chkPlaceSearchBarAboveConnectionTree.AutoSize = true;
-            this.chkPlaceSearchBarAboveConnectionTree.Location = new System.Drawing.Point(3, 118);
+            this.chkPlaceSearchBarAboveConnectionTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkPlaceSearchBarAboveConnectionTree.Location = new System.Drawing.Point(3, 141);
             this.chkPlaceSearchBarAboveConnectionTree.Name = "chkPlaceSearchBarAboveConnectionTree";
             this.chkPlaceSearchBarAboveConnectionTree.Size = new System.Drawing.Size(226, 17);
             this.chkPlaceSearchBarAboveConnectionTree.TabIndex = 8;
             this.chkPlaceSearchBarAboveConnectionTree.Text = "Place search bar above connection tree";
             this.chkPlaceSearchBarAboveConnectionTree.UseVisualStyleBackColor = true;
             // 
+            // chkConnectionTreeTrackActiveConnection
+            // 
+            this.chkConnectionTreeTrackActiveConnection._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkConnectionTreeTrackActiveConnection.AutoSize = true;
+            this.chkConnectionTreeTrackActiveConnection.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkConnectionTreeTrackActiveConnection.Location = new System.Drawing.Point(3, 49);
+            this.chkConnectionTreeTrackActiveConnection.Name = "chkConnectionTreeTrackActiveConnection";
+            this.chkConnectionTreeTrackActiveConnection.Size = new System.Drawing.Size(262, 17);
+            this.chkConnectionTreeTrackActiveConnection.TabIndex = 10;
+            this.chkConnectionTreeTrackActiveConnection.Text = "Track active connection in the connection tree";
+            this.chkConnectionTreeTrackActiveConnection.UseVisualStyleBackColor = true;
+            // 
+            // chkDoNotTrimUsername
+            // 
+            this.chkDoNotTrimUsername._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkDoNotTrimUsername.AutoSize = true;
+            this.chkDoNotTrimUsername.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDoNotTrimUsername.Location = new System.Drawing.Point(3, 165);
+            this.chkDoNotTrimUsername.Name = "chkDoNotTrimUsername";
+            this.chkDoNotTrimUsername.Size = new System.Drawing.Size(143, 17);
+            this.chkDoNotTrimUsername.TabIndex = 11;
+            this.chkDoNotTrimUsername.Text = "Do not trim usernames";
+            this.chkDoNotTrimUsername.UseVisualStyleBackColor = true;
+            // 
             // ConnectionsPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.Controls.Add(this.chkDoNotTrimUsername);
+            this.Controls.Add(this.chkConnectionTreeTrackActiveConnection);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.chkPlaceSearchBarAboveConnectionTree);
             this.Controls.Add(this.chkUseFilterSearch);
@@ -303,7 +341,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkHostnameLikeDisplayName);
             this.Controls.Add(this.chkSingleClickOnOpenedConnectionSwitchesToIt);
             this.Controls.Add(this.pnlConfirmCloseConnection);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ConnectionsPage";
             this.Size = new System.Drawing.Size(610, 490);
             ((System.ComponentModel.ISupportInitialize)(this.numRDPConTimeout)).EndInit();
@@ -335,5 +372,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private Controls.Base.NGCheckBox chkUseFilterSearch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private Controls.Base.NGCheckBox chkPlaceSearchBarAboveConnectionTree;
+        private Controls.Base.NGCheckBox chkConnectionTreeTrackActiveConnection;
+        private Controls.Base.NGCheckBox chkDoNotTrimUsername;
     }
 }
