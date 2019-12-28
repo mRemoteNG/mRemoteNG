@@ -5,6 +5,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Security;
@@ -13,9 +14,15 @@ namespace mRemoteNG.Config.Serializers.MsSql
 {
     public class DataTableSerializer : ISerializer<ConnectionInfo, DataTable>
     {
+        public readonly int DELETE = 0;
+        public readonly int ADD = 1;
+        public readonly int UPDATE = 2;
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
         private DataTable _dataTable;
+        private DataTable _sourceDataTable;
+        private Dictionary<string, int> modifiedPrimaryKeyDict = new Dictionary<string, int>();
+        private Dictionary<string, int> sourcePrimaryKeyDict = new Dictionary<string, int>();
         private const string TableName = "tblCons";
         private readonly SaveFilter _saveFilter;
         private int _currentNodeIndex;
@@ -29,6 +36,11 @@ namespace mRemoteNG.Config.Serializers.MsSql
             _saveFilter = saveFilter.ThrowIfNull(nameof(saveFilter));
             _cryptographyProvider = cryptographyProvider.ThrowIfNull(nameof(cryptographyProvider));
             _encryptionKey = encryptionKey.ThrowIfNull(nameof(encryptionKey));
+        }
+
+        public void SetSourceDataTable(DataTable sourceDataTable)
+        {
+            _sourceDataTable = sourceDataTable;
         }
 
 
@@ -51,15 +63,33 @@ namespace mRemoteNG.Config.Serializers.MsSql
         {
             _dataTable = BuildTable();
             _currentNodeIndex = 0;
+            // Register add or update row
             SerializeNodesRecursive(serializationTarget);
+            var entryToDelete = sourcePrimaryKeyDict.Keys.Where(x => !modifiedPrimaryKeyDict.ContainsKey(x)).ToList();
+            foreach( var entry in entryToDelete)
+            {
+                _dataTable.Rows.Find(entry).Delete();
+            }
             return _dataTable;
         }
 
         private DataTable BuildTable()
         {
-            var dataTable = new DataTable(TableName);
-            CreateSchema(dataTable);
-            SetPrimaryKey(dataTable);
+            DataTable dataTable;
+            if (_sourceDataTable != null)
+            {
+                dataTable = _sourceDataTable;
+            }else
+            {
+                dataTable = new DataTable(TableName);
+
+            }
+            if (dataTable.Columns.Count == 0) CreateSchema(dataTable);
+            if (dataTable.PrimaryKey.Length == 0 ) SetPrimaryKey(dataTable);
+            foreach(DataRow row in dataTable.Rows)
+            {
+                sourcePrimaryKeyDict.Add((string)row["ConstantID"], DELETE);
+            }
             return dataTable;
         }
 
@@ -219,11 +249,22 @@ namespace mRemoteNG.Config.Serializers.MsSql
         private void SerializeConnectionInfo(ConnectionInfo connectionInfo)
         {
             _currentNodeIndex++;
-            var dataRow = _dataTable.NewRow();
-            dataRow["ID"] = DBNull.Value;
+            var isNewRow = false;
+            DataRow dataRow = _dataTable.Rows.Find(connectionInfo.ConstantID);
+            if (dataRow == null)
+            {
+                dataRow = _dataTable.NewRow();
+                //dataRow["ID"] = DBNull.Value;
+                dataRow["ConstantID"] = connectionInfo.ConstantID;
+                isNewRow = true;
+                modifiedPrimaryKeyDict.Add(connectionInfo.ConstantID, ADD);
+            }
+            else
+            {
+                modifiedPrimaryKeyDict.Add(connectionInfo.ConstantID, UPDATE);
+            }
             dataRow["Name"] = connectionInfo.Name;
             dataRow["Type"] = connectionInfo.GetTreeNodeType().ToString();
-            dataRow["ConstantID"] = connectionInfo.ConstantID;
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["LastChange"] = MiscTools.DBTimeStampNow();
@@ -419,8 +460,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritRDGatewayDomain"] = false;
                 dataRow["InheritRdpVersion"] = false;
             }
-
-            _dataTable.Rows.Add(dataRow);
+            if (isNewRow)_dataTable.Rows.Add(dataRow);
         }
     }
 }
