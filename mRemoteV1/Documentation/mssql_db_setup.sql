@@ -15,7 +15,7 @@ GO
 
 CREATE TABLE [dbo].[tblCons] (
 	ID int NOT NULL IDENTITY(1,1),
-	ConstantID varchar(128),
+	ConstantID varchar(128) NOT NULL PRIMARY KEY,
 	PositionID int NOT NULL,
 	ParentID varchar(128),
 	LastChange datetime NOT NULL,
