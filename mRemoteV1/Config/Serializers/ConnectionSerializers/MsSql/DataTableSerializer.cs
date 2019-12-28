@@ -21,7 +21,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
         private readonly SecureString _encryptionKey;
         private DataTable _dataTable;
         private DataTable _sourceDataTable;
-        private Dictionary<string, int> modifiedPrimaryKeyDict = new Dictionary<string, int>();
         private Dictionary<string, int> sourcePrimaryKeyDict = new Dictionary<string, int>();
         private const string TableName = "tblCons";
         private readonly SaveFilter _saveFilter;
@@ -65,7 +64,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             _currentNodeIndex = 0;
             // Register add or update row
             SerializeNodesRecursive(serializationTarget);
-            var entryToDelete = sourcePrimaryKeyDict.Keys.Where(x => !modifiedPrimaryKeyDict.ContainsKey(x)).ToList();
+            var entryToDelete = sourcePrimaryKeyDict.Keys.ToList(); //.Where(x => !sourcePrimaryKeyDict.ContainsKey(x)).ToList();
             foreach( var entry in entryToDelete)
             {
                 _dataTable.Rows.Find(entry).Delete();
@@ -257,11 +256,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 //dataRow["ID"] = DBNull.Value;
                 dataRow["ConstantID"] = connectionInfo.ConstantID;
                 isNewRow = true;
-                modifiedPrimaryKeyDict.Add(connectionInfo.ConstantID, ADD);
             }
             else
             {
-                modifiedPrimaryKeyDict.Add(connectionInfo.ConstantID, UPDATE);
+                sourcePrimaryKeyDict.Remove(connectionInfo.ConstantID);
             }
             dataRow["Name"] = connectionInfo.Name;
             dataRow["Type"] = connectionInfo.GetTreeNodeType().ToString();
