@@ -144,7 +144,8 @@ CREATE TABLE [dbo].[tblCons] (
 	InheritVmId bit,
 	InheritUseVmId bit,
 	InheritUseEnhancedMode bit
-) GO
+) ON [PRIMARY] 
+GO
 
 CREATE TABLE [dbo].[tblRoot] (
 	[Name] [varchar] (2048) NOT NULL ,
