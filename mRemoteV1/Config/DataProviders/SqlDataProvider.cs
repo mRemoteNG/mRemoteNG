@@ -44,13 +44,46 @@ namespace mRemoteNG.Config.DataProviders
                 OpenConnection();
             if (DatabaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
             {
-                using (var sqlBulkCopy = new SqlBulkCopy((SqlConnection)DatabaseConnector.DbConnection()))
+                SqlConnection sqlConnection = (SqlConnection)DatabaseConnector.DbConnection();
+                using (SqlTransaction transaction = sqlConnection.BeginTransaction(System.Data.IsolationLevel.Serializable))
                 {
-                    foreach (DataColumn col in dataTable.Columns)
-                        sqlBulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
-                    sqlBulkCopy.DestinationTableName = "dbo.tblCons";
-                    sqlBulkCopy.WriteToServer(dataTable);
+                    using (SqlCommand sqlCommand = new SqlCommand())
+                    {
+                        sqlCommand.Connection = sqlConnection;
+                        sqlCommand.Transaction = transaction;
+                        sqlCommand.CommandText = "SELECT * FROM tblCons";
+                        using (SqlDataAdapter dataAdpater = new SqlDataAdapter())
+                        {
+                            dataAdpater.SelectCommand = sqlCommand;
+
+                            SqlCommandBuilder builder = new SqlCommandBuilder(dataAdpater);
+                            // Avoid optimistic concurrency
+                            builder.ConflictOption = ConflictOption.OverwriteChanges;
+
+
+                            dataAdpater.UpdateCommand = builder.GetUpdateCommand();
+                         
+                            dataAdpater.DeleteCommand = builder.GetDeleteCommand();
+                            dataAdpater.InsertCommand = builder.GetInsertCommand();
+
+                            dataAdpater.Update(dataTable);
+                            transaction.Commit();
+                            // First process deletes.
+                            //dataAdpater.Update(dataTable.Select(null, null, DataViewRowState.Deleted));
+                            // Next process updates.
+                            //dataAdpater.Update(dataTable.Select(null, null,DataViewRowState.ModifiedCurrent));
+                            // Finally, process inserts.
+                            //dataAdpater.Update(dataTable.Select(null, null, DataViewRowState.Added));
+                        }
+                    }
                 }
+                //using (var sqlBulkCopy = new SqlBulkCopy((SqlConnection)DatabaseConnector.DbConnection()))
+                //{
+                //    foreach (DataColumn col in dataTable.Columns)
+                //        sqlBulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                //    sqlBulkCopy.DestinationTableName = "dbo.tblCons";
+                //    sqlBulkCopy.(dataTable);
+                //}
 
             }
             else if (DatabaseConnector.GetType() == typeof(MySqlDatabaseConnector))

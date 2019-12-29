@@ -265,7 +265,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["Type"] = connectionInfo.GetTreeNodeType().ToString();
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
-            dataRow["LastChange"] = MiscTools.DBTimeStampNow();
+            //dataRow["LastChange"] = MiscTools.DBTimeStampNow();
+            dataRow["LastChange"] = DateTime.Now;
             dataRow["Expanded"] =
                 false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["Description"] = connectionInfo.Description;
