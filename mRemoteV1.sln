@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 14.0.25420.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteV1", "mRemoteV1\mRemoteV1.csproj", "{4934A491-40BC-4E5B-9166-EA1169A220F6}"
 EndProject
@@ -61,7 +61,6 @@ Global
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Debug|x86.ActiveCfg = Debug|x86
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Debug|x86.Build.0 = Debug|x86
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release Installer|Any CPU.ActiveCfg = Release|x86
-		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release Installer|Any CPU.Build.0 = Release|x86
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release Installer|x86.ActiveCfg = Release|x86
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release Installer|x86.Build.0 = Release|x86
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release Portable|Any CPU.ActiveCfg = Release Portable|x86
@@ -106,7 +105,6 @@ Global
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release Installer|Any CPU.ActiveCfg = Release|Any CPU
-		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release Installer|Any CPU.Build.0 = Release|Any CPU
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release Installer|x86.ActiveCfg = Release|Any CPU
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release Installer|x86.Build.0 = Release|Any CPU
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release Portable|Any CPU.ActiveCfg = Release|Any CPU

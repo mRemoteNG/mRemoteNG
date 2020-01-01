@@ -303,6 +303,7 @@
         This additional lookup consumes PDS service resources and requires direct connection between PDS and domain controller of user's domain, so delegation using domain Local groups in multi-forest domains should be avoided.
       </para>
     </param>
+    <param name="MandatoryGroupSids">List of Security Identifiers (SIDs) that caller additionally must be member of for calls to password reads/resets to succeed. Membership in such groups is then additional gate that allows to perform active operations. If multiple groups specified, user must be member of at least 1 of them. This helps implement additional levels of access control, such as JIT of Authentication Mechanism Assurance (AMA)</param>
     <returns>
     </returns>
     <remarks>
