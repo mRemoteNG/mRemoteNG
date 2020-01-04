@@ -245,6 +245,225 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 SerializeNodesRecursive(child);
         }
 
+        public bool isRowUpdated(ConnectionInfo connectionInfo, DataRow dataRow)
+        {
+            var isFieldNotChange = dataRow["Name"].Equals(connectionInfo.Name) &&
+            dataRow["Type"].Equals(connectionInfo.GetTreeNodeType().ToString()) &&
+            dataRow["ParentID"].Equals(connectionInfo.Parent?.ConstantID ?? "") &&
+            dataRow["PositionID"].Equals(_currentNodeIndex) &&
+            dataRow["Expanded"].Equals(false) &&
+            dataRow["Description"].Equals(connectionInfo.Description) &&
+            dataRow["Icon"].Equals(connectionInfo.Icon) &&
+            dataRow["Panel"].Equals(connectionInfo.Panel) &&
+            dataRow["Username"].Equals(_saveFilter.SaveUsername ? connectionInfo.Username : "") &&
+            dataRow["DomainName"].Equals(_saveFilter.SaveDomain ? connectionInfo.Domain : "");
+
+            isFieldNotChange = isFieldNotChange && dataRow["Hostname"].Equals(connectionInfo.Hostname);
+             isFieldNotChange = isFieldNotChange && dataRow["VmId"].Equals(connectionInfo.VmId);
+            isFieldNotChange = isFieldNotChange && dataRow["Protocol"].Equals(connectionInfo.Protocol.ToString());
+            isFieldNotChange = isFieldNotChange && dataRow["PuttySession"].Equals(connectionInfo.PuttySession);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["Port"].Equals(connectionInfo.Port);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["ConnectToConsole"].Equals(connectionInfo.UseConsoleSession);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["UseCredSsp"].Equals(connectionInfo.UseCredSsp);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["UseVmId"].Equals(connectionInfo.UseVmId);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["UseEnhancedMode"].Equals(connectionInfo.UseEnhancedMode);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["RenderingEngine"].Equals(connectionInfo.RenderingEngine.ToString());
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["ICAEncryptionStrength"].Equals(connectionInfo.ICAEncryptionStrength.ToString());
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["RDPAuthenticationLevel"].Equals(connectionInfo.RDPAuthenticationLevel.ToString());
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["RDPMinutesToIdleTimeout"].Equals(connectionInfo.RDPMinutesToIdleTimeout);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["RDPAlertIdleTimeout"].Equals(connectionInfo.RDPAlertIdleTimeout);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["LoadBalanceInfo"].Equals(connectionInfo.LoadBalanceInfo);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["Colors"].Equals(connectionInfo.Colors.ToString());
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["Resolution"].Equals(connectionInfo.Resolution.ToString());
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["AutomaticResize"].Equals(connectionInfo.AutomaticResize);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["DisplayWallpaper"].Equals(connectionInfo.DisplayWallpaper) &&
+             dataRow["DisplayThemes"].Equals(connectionInfo.DisplayThemes) &&
+             dataRow["EnableFontSmoothing"].Equals(connectionInfo.EnableFontSmoothing) &&
+             dataRow["EnableDesktopComposition"].Equals(connectionInfo.EnableDesktopComposition) &&
+             dataRow["CacheBitmaps"].Equals(connectionInfo.CacheBitmaps) &&
+             dataRow["RedirectDiskDrives"].Equals(connectionInfo.RedirectDiskDrives) &&
+             dataRow["RedirectPorts"].Equals(connectionInfo.RedirectPorts) &&
+             dataRow["RedirectPrinters"].Equals(connectionInfo.RedirectPrinters) &&
+             dataRow["RedirectClipboard"].Equals(connectionInfo.RedirectClipboard) &&
+             dataRow["RedirectSmartCards"].Equals(connectionInfo.RedirectSmartCards) &&
+             dataRow["RedirectSound"].Equals(connectionInfo.RedirectSound.ToString()) &&
+             dataRow["SoundQuality"].Equals(connectionInfo.SoundQuality.ToString()) &&
+             dataRow["RedirectAudioCapture"].Equals(connectionInfo.RedirectAudioCapture) &&
+             dataRow["RedirectKeys"].Equals(connectionInfo.RedirectKeys);
+
+            isFieldNotChange = isFieldNotChange &&
+             dataRow["Connected"].Equals(false) && // TODO: this column can eventually be removed. we now save this property locally
+             dataRow["PreExtApp"].Equals(connectionInfo.PreExtApp) &&
+             dataRow["PostExtApp"].Equals(connectionInfo.PostExtApp) &&
+             dataRow["MacAddress"].Equals(connectionInfo.MacAddress) &&
+             dataRow["UserField"].Equals(connectionInfo.UserField) &&
+             dataRow["ExtApp"].Equals(connectionInfo.ExtApp) &&
+             dataRow["VNCCompression"].Equals(connectionInfo.VNCCompression.ToString()) &&
+             dataRow["VNCEncoding"].Equals(connectionInfo.VNCEncoding.ToString()) &&
+             dataRow["VNCAuthMode"].Equals(connectionInfo.VNCAuthMode.ToString()) &&
+             dataRow["VNCProxyType"].Equals(connectionInfo.VNCProxyType.ToString()) &&
+             dataRow["VNCProxyIP"].Equals(connectionInfo.VNCProxyIP) &&
+             dataRow["VNCProxyPort"].Equals(connectionInfo.VNCProxyPort) &&
+             dataRow["VNCProxyUsername"].Equals(connectionInfo.VNCProxyUsername) &&
+             dataRow["VNCColors"].Equals(connectionInfo.VNCColors.ToString()) &&
+             dataRow["VNCSmartSizeMode"].Equals(connectionInfo.VNCSmartSizeMode.ToString()) &&
+             dataRow["VNCViewOnly"].Equals(connectionInfo.VNCViewOnly) &&
+             dataRow["RDGatewayUsageMethod"].Equals(connectionInfo.RDGatewayUsageMethod.ToString()) &&
+             dataRow["RDGatewayHostname"].Equals(connectionInfo.RDGatewayHostname) &&
+             dataRow["RDGatewayUseConnectionCredentials"].Equals(connectionInfo.RDGatewayUseConnectionCredentials.ToString()) &&
+             dataRow["RDGatewayUsername"].Equals(connectionInfo.RDGatewayUsername) &&
+             
+             dataRow["RDGatewayDomain"].Equals(connectionInfo.RDGatewayDomain) &&
+             dataRow["RdpVersion"].Equals(connectionInfo.RdpVersion.ToString());
+
+            var isInheritanceFieldNotChange = false;
+            if (_saveFilter.SaveInheritance)
+            {
+                isInheritanceFieldNotChange = (dataRow["InheritCacheBitmaps"].Equals(connectionInfo.Inheritance.CacheBitmaps) &&
+                dataRow["InheritColors"].Equals(connectionInfo.Inheritance.Colors) &&
+                dataRow["InheritDescription"].Equals(connectionInfo.Inheritance.Description) &&
+                dataRow["InheritDisplayThemes"].Equals(connectionInfo.Inheritance.DisplayThemes) &&
+                dataRow["InheritDisplayWallpaper"].Equals(connectionInfo.Inheritance.DisplayWallpaper) &&
+                dataRow["InheritEnableFontSmoothing"].Equals(connectionInfo.Inheritance.EnableFontSmoothing) &&
+                dataRow["InheritEnableDesktopComposition"].Equals(connectionInfo.Inheritance.EnableDesktopComposition) &&
+                dataRow["InheritDomain"].Equals(connectionInfo.Inheritance.Domain) &&
+                dataRow["InheritIcon"].Equals(connectionInfo.Inheritance.Icon) &&
+                dataRow["InheritPanel"].Equals(connectionInfo.Inheritance.Panel) &&
+                dataRow["InheritPassword"].Equals(connectionInfo.Inheritance.Password) &&
+                dataRow["InheritPort"].Equals(connectionInfo.Inheritance.Port) &&
+                dataRow["InheritProtocol"].Equals(connectionInfo.Inheritance.Protocol) &&
+                dataRow["InheritPuttySession"].Equals(connectionInfo.Inheritance.PuttySession) &&
+                dataRow["InheritRedirectDiskDrives"].Equals(connectionInfo.Inheritance.RedirectDiskDrives) &&
+                dataRow["InheritRedirectKeys"].Equals(connectionInfo.Inheritance.RedirectKeys) &&
+                dataRow["InheritRedirectPorts"].Equals(connectionInfo.Inheritance.RedirectPorts) &&
+                dataRow["InheritRedirectPrinters"].Equals(connectionInfo.Inheritance.RedirectPrinters) &&
+                dataRow["InheritRedirectClipboard"].Equals(connectionInfo.Inheritance.RedirectClipboard) &&
+                dataRow["InheritRedirectSmartCards"].Equals(connectionInfo.Inheritance.RedirectSmartCards) &&
+                dataRow["InheritRedirectSound"].Equals(connectionInfo.Inheritance.RedirectSound) &&
+                dataRow["InheritSoundQuality"].Equals(connectionInfo.Inheritance.SoundQuality) &&
+                dataRow["InheritRedirectAudioCapture"].Equals(connectionInfo.Inheritance.RedirectAudioCapture) &&
+                dataRow["InheritResolution"].Equals(connectionInfo.Inheritance.Resolution) &&
+                dataRow["InheritAutomaticResize"].Equals(connectionInfo.Inheritance.AutomaticResize) &&
+                dataRow["InheritUseConsoleSession"].Equals(connectionInfo.Inheritance.UseConsoleSession) &&
+                dataRow["InheritUseCredSsp"].Equals(connectionInfo.Inheritance.UseCredSsp) &&
+                dataRow["InheritRenderingEngine"].Equals(connectionInfo.Inheritance.RenderingEngine) &&
+                dataRow["InheritUsername"].Equals(connectionInfo.Inheritance.Username) &&
+                dataRow["InheritVmId"].Equals(connectionInfo.Inheritance.VmId) &&
+                dataRow["InheritUseVmId"].Equals(connectionInfo.Inheritance.UseVmId) &&
+                dataRow["InheritUseEnhancedMode"].Equals(connectionInfo.Inheritance.UseEnhancedMode) &&
+                dataRow["InheritICAEncryptionStrength"].Equals(connectionInfo.Inheritance.ICAEncryptionStrength) &&
+                dataRow["InheritRDPAuthenticationLevel"].Equals(connectionInfo.Inheritance.RDPAuthenticationLevel) &&
+                dataRow["InheritRDPMinutesToIdleTimeout"].Equals(connectionInfo.Inheritance.RDPMinutesToIdleTimeout) &&
+                dataRow["InheritRDPAlertIdleTimeout"].Equals(connectionInfo.Inheritance.RDPAlertIdleTimeout) &&
+                dataRow["InheritLoadBalanceInfo"].Equals(connectionInfo.Inheritance.LoadBalanceInfo) &&
+                dataRow["InheritPreExtApp"].Equals(connectionInfo.Inheritance.PreExtApp) &&
+                dataRow["InheritPostExtApp"].Equals(connectionInfo.Inheritance.PostExtApp) &&
+                dataRow["InheritMacAddress"].Equals(connectionInfo.Inheritance.MacAddress) &&
+                dataRow["InheritUserField"].Equals(connectionInfo.Inheritance.UserField) &&
+                dataRow["InheritExtApp"].Equals(connectionInfo.Inheritance.ExtApp) &&
+                dataRow["InheritVNCCompression"].Equals(connectionInfo.Inheritance.VNCCompression) &&
+                dataRow["InheritVNCEncoding"].Equals(connectionInfo.Inheritance.VNCEncoding) &&
+                dataRow["InheritVNCAuthMode"].Equals(connectionInfo.Inheritance.VNCAuthMode) &&
+                dataRow["InheritVNCProxyType"].Equals(connectionInfo.Inheritance.VNCProxyType) &&
+                dataRow["InheritVNCProxyIP"].Equals(connectionInfo.Inheritance.VNCProxyIP) &&
+                dataRow["InheritVNCProxyPort"].Equals(connectionInfo.Inheritance.VNCProxyPort) &&
+                dataRow["InheritVNCProxyUsername"].Equals(connectionInfo.Inheritance.VNCProxyUsername) &&
+                dataRow["InheritVNCProxyPassword"].Equals(connectionInfo.Inheritance.VNCProxyPassword) &&
+                dataRow["InheritVNCColors"].Equals(connectionInfo.Inheritance.VNCColors) &&
+                dataRow["InheritVNCSmartSizeMode"].Equals(connectionInfo.Inheritance.VNCSmartSizeMode) &&
+                dataRow["InheritVNCViewOnly"].Equals(connectionInfo.Inheritance.VNCViewOnly) &&
+                dataRow["InheritRDGatewayUsageMethod"].Equals(connectionInfo.Inheritance.RDGatewayUsageMethod) &&
+                dataRow["InheritRDGatewayHostname"].Equals(connectionInfo.Inheritance.RDGatewayHostname) &&
+                dataRow["InheritRDGatewayUseConnectionCredentials"].Equals(connectionInfo.Inheritance.RDGatewayUseConnectionCredentials) &&
+                dataRow["InheritRDGatewayUsername"].Equals(connectionInfo.Inheritance.RDGatewayUsername) &&
+                dataRow["InheritRDGatewayPassword"].Equals(connectionInfo.Inheritance.RDGatewayPassword) &&
+                dataRow["InheritRDGatewayDomain"].Equals(connectionInfo.Inheritance.RDGatewayDomain) &&
+                dataRow["InheritRdpVersion"].Equals(connectionInfo.Inheritance.RdpVersion));
+            }
+            else
+            {
+                isInheritanceFieldNotChange = (dataRow["InheritCacheBitmaps"].Equals(false) &&
+                dataRow["InheritColors"].Equals(false) &&
+                dataRow["InheritDescription"].Equals(false) &&
+                dataRow["InheritDisplayThemes"].Equals(false) &&
+                dataRow["InheritDisplayWallpaper"].Equals(false) &&
+                dataRow["InheritEnableFontSmoothing"].Equals(false) &&
+                dataRow["InheritEnableDesktopComposition"].Equals(false) &&
+                dataRow["InheritDomain"].Equals(false) &&
+                dataRow["InheritIcon"].Equals(false) &&
+                dataRow["InheritPanel"].Equals(false) &&
+                dataRow["InheritPassword"].Equals(false) &&
+                dataRow["InheritPort"].Equals(false) &&
+                dataRow["InheritProtocol"].Equals(false) &&
+                dataRow["InheritPuttySession"].Equals(false) &&
+                dataRow["InheritRedirectDiskDrives"].Equals(false) &&
+                dataRow["InheritRedirectKeys"].Equals(false) &&
+                dataRow["InheritRedirectPorts"].Equals(false) &&
+                dataRow["InheritRedirectPrinters"].Equals(false) &&
+                dataRow["InheritRedirectClipboard"].Equals(false) &&
+                dataRow["InheritRedirectSmartCards"].Equals(false) &&
+                dataRow["InheritRedirectSound"].Equals(false) &&
+                dataRow["InheritSoundQuality"].Equals(false) &&
+                dataRow["InheritRedirectAudioCapture"].Equals(false) &&
+                dataRow["InheritResolution"].Equals(false) &&
+                dataRow["InheritAutomaticResize"].Equals(false) &&
+                dataRow["InheritUseConsoleSession"].Equals(false) &&
+                dataRow["InheritUseCredSsp"].Equals(false) &&
+                dataRow["InheritRenderingEngine"].Equals(false) &&
+                dataRow["InheritUsername"].Equals(false) &&
+                dataRow["InheritICAEncryptionStrength"].Equals(false) &&
+                dataRow["InheritRDPAuthenticationLevel"].Equals(false) &&
+                dataRow["InheritRDPMinutesToIdleTimeout"].Equals(false) &&
+                dataRow["InheritRDPAlertIdleTimeout"].Equals(false) &&
+                dataRow["InheritLoadBalanceInfo"].Equals(false) &&
+                dataRow["InheritPreExtApp"].Equals(false) &&
+                dataRow["InheritPostExtApp"].Equals(false) &&
+                dataRow["InheritMacAddress"].Equals(false) &&
+                dataRow["InheritUserField"].Equals(false) &&
+                dataRow["InheritExtApp"].Equals(false) &&
+                dataRow["InheritVNCCompression"].Equals(false) &&
+                dataRow["InheritVNCEncoding"].Equals(false) &&
+                dataRow["InheritVNCAuthMode"].Equals(false) &&
+                dataRow["InheritVNCProxyType"].Equals(false) &&
+                dataRow["InheritVNCProxyIP"].Equals(false) &&
+                dataRow["InheritVNCProxyPort"].Equals(false) &&
+                dataRow["InheritVNCProxyUsername"].Equals(false) &&
+                dataRow["InheritVNCProxyPassword"].Equals(false) &&
+                dataRow["InheritVNCColors"].Equals(false) &&
+                dataRow["InheritVNCSmartSizeMode"].Equals(false) &&
+                dataRow["InheritVNCViewOnly"].Equals(false) &&
+                dataRow["InheritRDGatewayUsageMethod"].Equals(false) &&
+                dataRow["InheritRDGatewayHostname"].Equals(false) &&
+                dataRow["InheritRDGatewayUseConnectionCredentials"].Equals(false) &&
+                dataRow["InheritRDGatewayUsername"].Equals(false) &&
+                dataRow["InheritRDGatewayPassword"].Equals(false) &&
+                dataRow["InheritRDGatewayDomain"].Equals(false) &&
+                dataRow["InheritRdpVersion"].Equals(false));
+            }
+
+            var pwd = dataRow["Password"].Equals(_saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) : "") &&
+                      dataRow["VNCProxyPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey)) &&
+                      dataRow["RDGatewayPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey));
+
+            var t = _cryptographyProvider.Decrypt((String)dataRow["Password"], _encryptionKey).Equals(connectionInfo.Password);
+            return !(pwd && isFieldNotChange && isInheritanceFieldNotChange);
+        }
+
         private void SerializeConnectionInfo(ConnectionInfo connectionInfo)
         {
             _currentNodeIndex++;
@@ -261,12 +480,16 @@ namespace mRemoteNG.Config.Serializers.MsSql
             {
                 sourcePrimaryKeyDict.Remove(connectionInfo.ConstantID);
             }
+            var tmp = isRowUpdated(connectionInfo, dataRow);
+            if (!tmp){
+                return;
+            } 
             dataRow["Name"] = connectionInfo.Name;
             dataRow["Type"] = connectionInfo.GetTreeNodeType().ToString();
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
-            //dataRow["LastChange"] = MiscTools.DBTimeStampNow();
-            dataRow["LastChange"] = DateTime.Now;
+            dataRow["LastChange"] = MiscTools.DBTimeStampNow();
+            //dataRow["LastChange"] = DateTime.Now;
             dataRow["Expanded"] =
                 false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["Description"] = connectionInfo.Description;
