@@ -57,33 +57,19 @@ namespace mRemoteNG.Config.DataProviders
                             dataAdpater.SelectCommand = sqlCommand;
 
                             SqlCommandBuilder builder = new SqlCommandBuilder(dataAdpater);
-                            // Avoid optimistic concurrency
+                            // Avoid optimistic concurrency, check if it is necessary.
                             builder.ConflictOption = ConflictOption.OverwriteChanges;
 
-
                             dataAdpater.UpdateCommand = builder.GetUpdateCommand();
-                         
+
                             dataAdpater.DeleteCommand = builder.GetDeleteCommand();
                             dataAdpater.InsertCommand = builder.GetInsertCommand();
 
                             dataAdpater.Update(dataTable);
                             transaction.Commit();
-                            // First process deletes.
-                            //dataAdpater.Update(dataTable.Select(null, null, DataViewRowState.Deleted));
-                            // Next process updates.
-                            //dataAdpater.Update(dataTable.Select(null, null,DataViewRowState.ModifiedCurrent));
-                            // Finally, process inserts.
-                            //dataAdpater.Update(dataTable.Select(null, null, DataViewRowState.Added));
                         }
                     }
                 }
-                //using (var sqlBulkCopy = new SqlBulkCopy((SqlConnection)DatabaseConnector.DbConnection()))
-                //{
-                //    foreach (DataColumn col in dataTable.Columns)
-                //        sqlBulkCopy.ColumnMappings.Add(col.ColumnName, col.ColumnName);
-                //    sqlBulkCopy.DestinationTableName = "dbo.tblCons";
-                //    sqlBulkCopy.(dataTable);
-                //}
 
             }
             else if (DatabaseConnector.GetType() == typeof(MySqlDatabaseConnector))

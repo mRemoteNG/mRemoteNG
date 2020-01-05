@@ -92,7 +92,7 @@ namespace mRemoteNG.Tools
 					return new MySqlDateTime(DateTime.Now);
 				case "mssql":
 				default:
-					return (SqlDateTime)DateTime.Now;
+					return DateTime.Now;
 			}
 		}
 

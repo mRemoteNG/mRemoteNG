@@ -15,8 +15,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
     public class DataTableSerializer : ISerializer<ConnectionInfo, DataTable>
     {
         public readonly int DELETE = 0;
-        public readonly int ADD = 1;
-        public readonly int UPDATE = 2;
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly SecureString _encryptionKey;
         private DataTable _dataTable;
@@ -64,7 +62,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             _currentNodeIndex = 0;
             // Register add or update row
             SerializeNodesRecursive(serializationTarget);
-            var entryToDelete = sourcePrimaryKeyDict.Keys.ToList(); //.Where(x => !sourcePrimaryKeyDict.ContainsKey(x)).ToList();
+            var entryToDelete = sourcePrimaryKeyDict.Keys.ToList();
             foreach( var entry in entryToDelete)
             {
                 _dataTable.Rows.Find(entry).Delete();
@@ -459,8 +457,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             var pwd = dataRow["Password"].Equals(_saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) : "") &&
                       dataRow["VNCProxyPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey)) &&
                       dataRow["RDGatewayPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey));
-
-            var t = _cryptographyProvider.Decrypt((String)dataRow["Password"], _encryptionKey).Equals(connectionInfo.Password);
             return !(pwd && isFieldNotChange && isInheritanceFieldNotChange);
         }
 
@@ -472,7 +468,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             if (dataRow == null)
             {
                 dataRow = _dataTable.NewRow();
-                //dataRow["ID"] = DBNull.Value;
                 dataRow["ConstantID"] = connectionInfo.ConstantID;
                 isNewRow = true;
             }
@@ -489,7 +484,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["LastChange"] = MiscTools.DBTimeStampNow();
-            //dataRow["LastChange"] = DateTime.Now;
             dataRow["Expanded"] =
                 false; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["Description"] = connectionInfo.Description;
