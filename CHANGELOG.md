@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1595: Unhandled exception when trying to browse through non existent multi ssh history with keyboard key strokes
 - #1337: Unhandled exception after closing mRemoteNG
 - #359: Making a VNC connection to an unreachable host causes the application to not respond for 20-30 seconds
+- #1589: Update tblCons instead delete all and reinsert
 
 ## [1.77.1] - 2019-09-02
 ### Added

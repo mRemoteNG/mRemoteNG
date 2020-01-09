@@ -24,7 +24,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
         private readonly SaveFilter _saveFilter;
         private int _currentNodeIndex;
 
-        public Version Version { get; } = new Version(2, 7);
+        public Version Version { get; } = new Version(2, 8);
 
         public DataTableSerializer(SaveFilter saveFilter,
                                    ICryptographyProvider cryptographyProvider,
