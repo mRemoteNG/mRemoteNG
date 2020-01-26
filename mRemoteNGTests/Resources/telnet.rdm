@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ArrayOfConnection>
+  <Connection>
+    <ConnectionType>Telnet</ConnectionType>
+    <Description>Telnet description</Description>
+    <ID>8d77d3ac-b414-4b51-ac10-60304d63cc6f</ID>
+    <Name>telnet connection</Name>
+    <OpenEmbedded>true</OpenEmbedded>
+    <Stamp>08aaa9ff-3583-4dc0-8622-3a0f4d37a7c4</Stamp>
+    <MetaInformation>
+      <MAC>some-mac-here</MAC>
+      <PasswordHistory>
+        <PasswordHistory>
+          <LoggedModifiedBy>LEVIATHAN\David</LoggedModifiedBy>
+          <ModifiedBy>LEVIATHAN\David</ModifiedBy>
+          <ModifiedDateTime>2020-01-26T21:50:48</ModifiedDateTime>
+          <SafePassword>T2/JO7Aps+GMZG0vk5Jo8A==</SafePassword>
+        </PasswordHistory>
+      </PasswordHistory>
+    </MetaInformation>
+    <Terminal>
+      <Host>telnethost1</Host>
+      <HostPort>7648</HostPort>
+      <ProxyMode>Custom</ProxyMode>
+      <SafePassword>yLHh9AVRl8TilluPKnidMw==</SafePassword>
+      <Username>user1</Username>
+    </Terminal>
+    <TerminalMac />
+  </Connection>
+</ArrayOfConnection>

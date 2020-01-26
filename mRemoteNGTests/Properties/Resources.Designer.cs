@@ -195,6 +195,71 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfConnection&gt;
+        ///  &lt;Connection&gt;
+        ///    &lt;AuthentificationLevel&gt;WarnMe&lt;/AuthentificationLevel&gt;
+        ///    &lt;AutomaticallyClose&gt;true&lt;/AutomaticallyClose&gt;
+        ///    &lt;AutomaticallyCloseInterval&gt;17&lt;/AutomaticallyCloseInterval&gt;
+        ///    &lt;ConnectionType&gt;RDPConfigured&lt;/ConnectionType&gt;
+        ///    &lt;Console&gt;true&lt;/Console&gt;
+        ///    &lt;Description&gt;This is a general description&lt;/Description&gt;
+        ///    &lt;DesktopComposition&gt;true&lt;/DesktopComposition&gt;
+        ///    &lt;DisableBitmapCache&gt;true&lt;/DisableBitmapCache&gt;
+        ///    &lt;DisableThemes&gt;true&lt;/Disable [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string rdp_rdm_export {
+            get {
+                return ResourceManager.GetString("rdp_rdm_export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfConnection&gt;
+        ///  &lt;Connection&gt;
+        ///    &lt;ConnectionType&gt;SSHShell&lt;/ConnectionType&gt;
+        ///    &lt;Description&gt;This is a linux host description&lt;/Description&gt;
+        ///    &lt;ID&gt;44ae261f-0094-48a2-93cb-bc5abcfcc394&lt;/ID&gt;
+        ///    &lt;Name&gt;ssh connection&lt;/Name&gt;
+        ///    &lt;OpenEmbedded&gt;true&lt;/OpenEmbedded&gt;
+        ///    &lt;Stamp&gt;ab007011-2836-426f-a8e0-9fef1ff88865&lt;/Stamp&gt;
+        ///    &lt;MetaInformation&gt;
+        ///      &lt;MAC&gt;some-mac-here&lt;/MAC&gt;
+        ///      &lt;PasswordHistory&gt;
+        ///        &lt;PasswordHistory&gt;
+        ///          &lt;LoggedModifiedBy&gt;LEVIATHAN\David&lt;/LoggedMo [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ssh_rdm_export {
+            get {
+                return ResourceManager.GetString("ssh_rdm_export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfConnection&gt;
+        ///  &lt;Connection&gt;
+        ///    &lt;ConnectionType&gt;Telnet&lt;/ConnectionType&gt;
+        ///    &lt;Description&gt;Telnet description&lt;/Description&gt;
+        ///    &lt;ID&gt;8d77d3ac-b414-4b51-ac10-60304d63cc6f&lt;/ID&gt;
+        ///    &lt;Name&gt;telnet connection&lt;/Name&gt;
+        ///    &lt;OpenEmbedded&gt;true&lt;/OpenEmbedded&gt;
+        ///    &lt;Stamp&gt;08aaa9ff-3583-4dc0-8622-3a0f4d37a7c4&lt;/Stamp&gt;
+        ///    &lt;MetaInformation&gt;
+        ///      &lt;MAC&gt;some-mac-here&lt;/MAC&gt;
+        ///      &lt;PasswordHistory&gt;
+        ///        &lt;PasswordHistory&gt;
+        ///          &lt;LoggedModifiedBy&gt;LEVIATHAN\David&lt;/LoggedModifiedBy&gt;
+        ///   [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string telnet_rdm_export {
+            get {
+                return ResourceManager.GetString("telnet_rdm_export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
         ///&lt;!-- ****************************************************************--&gt;
         ///&lt;!-- *                                                              *--&gt;
@@ -414,6 +479,49 @@ namespace mRemoteNGTests.Properties {
         internal static string update_portable {
             get {
                 return ResourceManager.GetString("update_portable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfConnection&gt;
+        ///  &lt;Connection&gt;
+        ///    &lt;ConnectionSubType&gt;UltraVNC&lt;/ConnectionSubType&gt;
+        ///    &lt;ConnectionType&gt;VNC&lt;/ConnectionType&gt;
+        ///    &lt;Description&gt;This is a VNC description&lt;/Description&gt;
+        ///    &lt;ID&gt;16ff7dd6-2ac3-4e27-96cf-435b5bfe5a00&lt;/ID&gt;
+        ///    &lt;Name&gt;vnc connection&lt;/Name&gt;
+        ///    &lt;OpenEmbedded&gt;true&lt;/OpenEmbedded&gt;
+        ///    &lt;Stamp&gt;a44e3b58-2e14-47bf-8a79-0646b1e4ba46&lt;/Stamp&gt;
+        ///    &lt;MetaInformation&gt;
+        ///      &lt;MAC&gt;some-mac-here&lt;/MAC&gt;
+        ///      &lt;PasswordHistory&gt;
+        ///        &lt;PasswordHistory&gt;
+        ///          &lt;L [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string vnc_rdm_export {
+            get {
+                return ResourceManager.GetString("vnc_rdm_export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfConnection&gt;
+        ///  &lt;Connection&gt;
+        ///    &lt;ConnectionSubType&gt;FireFox&lt;/ConnectionSubType&gt;
+        ///    &lt;ConnectionType&gt;WebBrowser&lt;/ConnectionType&gt;
+        ///    &lt;Description&gt;Website description&lt;/Description&gt;
+        ///    &lt;ID&gt;65092747-6870-42c9-b8bc-35ec9fb5b3fb&lt;/ID&gt;
+        ///    &lt;Name&gt;website connection&lt;/Name&gt;
+        ///    &lt;OpenEmbedded&gt;true&lt;/OpenEmbedded&gt;
+        ///    &lt;Stamp&gt;d04a9abb-4d4c-4ba5-8ef8-1699bd84b734&lt;/Stamp&gt;
+        ///    &lt;WebBrowserApplication&gt;FireFox&lt;/WebBrowserApplication&gt;
+        ///    &lt;WebBrowserUrl&gt;https://www.google.com:8080&lt;/WebBrow [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string website_rdm_export {
+            get {
+                return ResourceManager.GetString("website_rdm_export", resourceCulture);
             }
         }
     }

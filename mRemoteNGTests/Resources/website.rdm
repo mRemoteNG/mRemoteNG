@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<ArrayOfConnection>
+  <Connection>
+    <ConnectionSubType>FireFox</ConnectionSubType>
+    <ConnectionType>WebBrowser</ConnectionType>
+    <Description>Website description</Description>
+    <ID>65092747-6870-42c9-b8bc-35ec9fb5b3fb</ID>
+    <Name>website connection</Name>
+    <OpenEmbedded>true</OpenEmbedded>
+    <Stamp>d04a9abb-4d4c-4ba5-8ef8-1699bd84b734</Stamp>
+    <WebBrowserApplication>FireFox</WebBrowserApplication>
+    <WebBrowserUrl>https://www.google.com:8080</WebBrowserUrl>
+    <MetaInformation>
+      <PasswordHistory>
+        <PasswordHistory>
+          <LoggedModifiedBy>LEVIATHAN\David</LoggedModifiedBy>
+          <ModifiedBy>LEVIATHAN\David</ModifiedBy>
+          <ModifiedDateTime>2020-01-26T22:01:26</ModifiedDateTime>
+          <SafePassword>T2/JO7Aps+GMZG0vk5Jo8A==</SafePassword>
+        </PasswordHistory>
+      </PasswordHistory>
+    </MetaInformation>
+    <Web>
+      <Domain>domain1</Domain>
+      <SafePassword>24ifhl01e7Le3Aj8NxM4ww==</SafePassword>
+      <UserName>user1</UserName>
+    </Web>
+  </Connection>
+</ArrayOfConnection>

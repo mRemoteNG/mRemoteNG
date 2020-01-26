@@ -123,6 +123,7 @@
     <Compile Include="Config\DataProviders\FileBackupCreatorTests.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderTests.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackupTests.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopManagerDeserializerTests.cs" />
     <Compile Include="Config\Serializers\ConnectionSerializers\Xml\ValidateXmlSchemas.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializerTests.cs" />
     <Compile Include="Config\CredentialHarvesterTests.cs" />
@@ -254,6 +255,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Resources\rdp.rdm" />
+    <None Include="Resources\ssh.rdm" />
+    <None Include="Resources\vnc.rdm" />
+    <None Include="Resources\website.rdm" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -273,6 +278,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Resources\confCons_v2_5.xml" />
+    <None Include="Resources\telnet.rdm" />
     <None Include="Resources\test_puttyConnectionManager_database.dat" />
     <None Include="Resources\test_rdcman_badVersionNumber.rdg" />
     <None Include="Resources\test_rdcman_noversion.rdg" />

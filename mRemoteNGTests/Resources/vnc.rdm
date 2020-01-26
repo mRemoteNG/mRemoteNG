@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<ArrayOfConnection>
+  <Connection>
+    <ConnectionSubType>UltraVNC</ConnectionSubType>
+    <ConnectionType>VNC</ConnectionType>
+    <Description>This is a VNC description</Description>
+    <ID>16ff7dd6-2ac3-4e27-96cf-435b5bfe5a00</ID>
+    <Name>vnc connection</Name>
+    <OpenEmbedded>true</OpenEmbedded>
+    <Stamp>a44e3b58-2e14-47bf-8a79-0646b1e4ba46</Stamp>
+    <MetaInformation>
+      <MAC>some-mac-here</MAC>
+      <PasswordHistory>
+        <PasswordHistory>
+          <LoggedModifiedBy>LEVIATHAN\David</LoggedModifiedBy>
+          <ModifiedBy>LEVIATHAN\David</ModifiedBy>
+          <ModifiedDateTime>2020-01-26T21:12:44</ModifiedDateTime>
+          <SafePassword>aHjuKKmVmbivKM+wovI3aA==</SafePassword>
+        </PasswordHistory>
+        <PasswordHistory>
+          <LoggedModifiedBy>LEVIATHAN\David</LoggedModifiedBy>
+          <ModifiedBy>LEVIATHAN\David</ModifiedBy>
+          <ModifiedDateTime>2020-01-26T21:08:16</ModifiedDateTime>
+          <SafePassword>uEGtwH/QfjSvKM+wovI3aA==</SafePassword>
+        </PasswordHistory>
+      </PasswordHistory>
+    </MetaInformation>
+    <VNC>
+      <CustomCompressionLevel>4</CustomCompressionLevel>
+      <DisableClipboard>true</DisableClipboard>
+      <Host>vnchost1</Host>
+      <JPEGCompressionLevel>3</JPEGCompressionLevel>
+      <MsDomain>windomain1</MsDomain>
+      <MsSafePassword>bUWiWCi7qod7YQ5XXK5LFQ==</MsSafePassword>
+      <MsUser>winuser1</MsUser>
+      <Port>9987</Port>
+      <PreferredEncoding>Tight</PreferredEncoding>
+      <ProxyHost>proxyhost:7777</ProxyHost>
+      <SafePassword>oGzaL3q/dK17YQ5XXK5LFQ==</SafePassword>
+      <ScreenColorDepth>C8</ScreenColorDepth>
+      <ViewOnly>true</ViewOnly>
+      <VNCEmbeddedType>UltraVNC</VNCEmbeddedType>
+    </VNC>
+  </Connection>
+</ArrayOfConnection>

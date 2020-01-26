@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<ArrayOfConnection>
+  <Connection>
+    <ConnectionType>SSHShell</ConnectionType>
+    <Description>This is a linux host description</Description>
+    <ID>44ae261f-0094-48a2-93cb-bc5abcfcc394</ID>
+    <Name>ssh connection</Name>
+    <OpenEmbedded>true</OpenEmbedded>
+    <Stamp>ab007011-2836-426f-a8e0-9fef1ff88865</Stamp>
+    <MetaInformation>
+      <MAC>some-mac-here</MAC>
+      <PasswordHistory>
+        <PasswordHistory>
+          <LoggedModifiedBy>LEVIATHAN\David</LoggedModifiedBy>
+          <ModifiedBy>LEVIATHAN\David</ModifiedBy>
+          <ModifiedDateTime>2020-01-26T20:46:26</ModifiedDateTime>
+          <SafePassword>rV4oZM9LrfZ6SYHIlwTwvA==</SafePassword>
+        </PasswordHistory>
+        <PasswordHistory>
+          <LoggedModifiedBy>LEVIATHAN\David</LoggedModifiedBy>
+          <ModifiedBy>LEVIATHAN\David</ModifiedBy>
+          <ModifiedDateTime>2020-01-26T14:42:38</ModifiedDateTime>
+          <SafePassword>rV4oZM9LrfbUvSh5Y2lNDw==</SafePassword>
+        </PasswordHistory>
+      </PasswordHistory>
+    </MetaInformation>
+    <Terminal>
+      <Host>mysshhost</Host>
+      <HostPort>4321</HostPort>
+      <PrivateKeyPromptForPassPhrase>false</PrivateKeyPromptForPassPhrase>
+      <SafePassword>/et4Enc7v6HUQXJP6chuhA==</SafePassword>
+      <Username>linuxuser1</Username>
+    </Terminal>
+    <TerminalMac />
+  </Connection>
+</ArrayOfConnection>
