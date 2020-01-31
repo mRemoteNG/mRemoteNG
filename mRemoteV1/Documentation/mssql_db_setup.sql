@@ -15,7 +15,7 @@ GO
 
 CREATE TABLE [dbo].[tblCons] (
 	ID int NOT NULL IDENTITY(1,1),
-	ConstantID varchar(128),
+	ConstantID varchar(128) NOT NULL PRIMARY KEY,
 	PositionID int NOT NULL,
 	ParentID varchar(128),
 	LastChange datetime NOT NULL,
@@ -140,11 +140,12 @@ CREATE TABLE [dbo].[tblCons] (
 	InheritRdpVersion bit DEFAULT ((0)) NOT NULL,
 	VmId varchar(100),
 	UseVmId bit,
-	UseEnhancedMode bit,
-	InheritVmId bit,
+	UseEnhancedMode bit DEFAULT ((0)),
+	InheritVmId bit ,
 	InheritUseVmId bit,
-	InheritUseEnhancedMode bit
-) GO
+	InheritUseEnhancedMode bit DEFAULT ((0))
+) ON [PRIMARY] 
+GO
 
 CREATE TABLE [dbo].[tblRoot] (
 	[Name] [varchar] (2048) NOT NULL ,

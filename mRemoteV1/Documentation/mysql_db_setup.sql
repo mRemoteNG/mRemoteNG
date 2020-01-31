@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS `tblCons`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tblCons` (
     `ID` int(11) NOT NULL AUTO_INCREMENT,
-    `ConstantID` varchar(128) DEFAULT NULL,
+    `ConstantID` varchar(128) NOT NULL,
     `PositionID` int(11) NOT NULL,
     `ParentID` varchar(128) DEFAULT NULL,
     `LastChange` datetime NOT NULL,
@@ -147,7 +147,8 @@ CREATE TABLE `tblCons` (
 	`InheritVmId` tinyint(1) DEFAULT NULL,
 	`InheritUseVmId` tinyint(1) DEFAULT NULL,
 	`InheritUseEnhancedMode` tinyint(1) DEFAULT NULL,
-    PRIMARY KEY (`ID`)
+    PRIMARY KEY (`ConstantID`),
+    UNIQUE (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3324 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
     

@@ -26,6 +26,7 @@ Stephan (http://github.com/st-schuler)
 Aleksey Reytsman (http://github.com/areytsman)  
 Cristian Abelleira (http://github.com/CrAbelleira)  
 http://github.com/MitchellBot
+Filippo Ferrazini (http://github.com/Filippo125)
 
 ## Past Contributors
 Felix Deimel - mRemote original developer  
