@@ -1243,7 +1243,7 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
     <value>Entrez votre mot de passe.</value>
   </data>
   <data name="strPropertyDescriptionPort" xml:space="preserve">
-    <value>Entrez le port d'écoute du protocole choisit</value>
+    <value>Entrez le port d'écoute du protocole choisi</value>
   </data>
   <data name="strPropertyDescriptionProtocol" xml:space="preserve">
     <value>Choisissez le protocole utilisé par mRemoteNG pour se connecter à l'hôte.</value>
