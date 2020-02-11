@@ -393,7 +393,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpGecko))]
             Gecko = 2,
 
-            [LocalizedAttributes.LocalizedDescription("strHttpCEF")]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpCEF))]
             CEF = 3
         }
 
