@@ -32,7 +32,7 @@ namespace mRemoteNG.Connection.Protocol
                 case ProtocolType.SSH2:
                     return new ProtocolSSH2();
                 case ProtocolType.Serial:
-					returm new ProtocolSerial();
+					return new ProtocolSerial();
                 case ProtocolType.Telnet:
                     return new ProtocolTelnet();
                 case ProtocolType.Rlogin:
