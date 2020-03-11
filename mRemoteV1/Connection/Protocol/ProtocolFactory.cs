@@ -4,6 +4,7 @@ using mRemoteNG.Connection.Protocol.RAW;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.Rlogin;
 using mRemoteNG.Connection.Protocol.SSH;
+using mRemoteNG.Connection.Protocol.Serial;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using System;
@@ -30,6 +31,8 @@ namespace mRemoteNG.Connection.Protocol
                     return new ProtocolSSH1();
                 case ProtocolType.SSH2:
                     return new ProtocolSSH2();
+                case ProtocolType.Serial:
+					returm new ProtocolSerial();
                 case ProtocolType.Telnet:
                     return new ProtocolTelnet();
                 case ProtocolType.Rlogin:
