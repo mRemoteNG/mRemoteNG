@@ -822,6 +822,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strIcaSetResolutionFailed" xml:space="preserve">
     <value>ICA Set Resolution Failed!</value>
   </data>
+  <data name="strSerial" xml:space="preserve">
+    <value>Serial</value>
+  </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identify quick connect tabs by adding the prefix "Quick:"</value>
   </data>
