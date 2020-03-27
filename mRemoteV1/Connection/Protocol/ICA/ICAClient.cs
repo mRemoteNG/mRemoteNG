@@ -1,4 +1,4 @@
-﻿#if DEBUG && !DISABLE_ICA_PROTOCOL
+﻿#if (DEBUG && !DISABLE_ICA_PROTOCOL) || !DEBUG
 
 using mRemoteNG.UI.Window;
 using System;

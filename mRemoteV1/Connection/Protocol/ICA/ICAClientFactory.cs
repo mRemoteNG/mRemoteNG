@@ -11,11 +11,12 @@ namespace mRemoteNG.Connection.Protocol.ICA
 
         public static IICAClient CreateClientInstance()
         {
-#if DEBUG && !DISABLE_ICA_PROTOCOL
+#if (DEBUG && !DISABLE_ICA_PROTOCOL) || !DEBUG
             return new ICAClient();
 #else
             return new DummyICAClient();
 #endif
+
         }
     }
 }
