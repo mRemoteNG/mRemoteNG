@@ -3,6 +3,7 @@
 using mRemoteNG.UI.Window;
 using System;
 using System.Windows.Forms;
+using AxWFICALib;
 
 namespace mRemoteNG.Connection.Protocol.ICA
 {
