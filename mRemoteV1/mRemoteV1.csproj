@@ -263,6 +263,10 @@
     <Compile Include="Connection\IInheritable.cs" />
     <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
+    <Compile Include="Connection\Protocol\ICA\DummyICAClient.cs" />
+    <Compile Include="Connection\Protocol\ICA\ICAClient.cs" />
+    <Compile Include="Connection\Protocol\ICA\ICAClientFactory.cs" />
+    <Compile Include="Connection\Protocol\ICA\IICAClient.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\AuthenticationLevel.cs" />
     <Compile Include="Connection\Protocol\RDP\AzureLoadBalanceInfoEncoder.cs" />

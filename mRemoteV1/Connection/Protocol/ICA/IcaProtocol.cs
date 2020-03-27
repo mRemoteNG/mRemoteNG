@@ -1,5 +1,4 @@
-﻿using AxWFICALib;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -10,12 +9,11 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
 
-
 namespace mRemoteNG.Connection.Protocol.ICA
 {
     public class IcaProtocol : ProtocolBase
     {
-        private AxICAClient _icaClient;
+        private IICAClient _icaClient;
         private ConnectionInfo _info;
         private readonly FrmMain _frmMain = FrmMain.Default;
 
@@ -25,7 +23,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
         {
             try
             {
-                Control = new AxICAClient();
+                _icaClient = ICAClientFactory.CreateClientInstance();
             }
             catch (Exception ex)
             {
@@ -41,9 +39,8 @@ namespace mRemoteNG.Connection.Protocol.ICA
 
             try
             {
-                _icaClient = (AxICAClient)Control;
                 _info = InterfaceControl.Info;
-                _icaClient.CreateControl();
+                Control = _icaClient.CreateControl();
 
                 while (!_icaClient.Created)
                 {
@@ -112,7 +109,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             }
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -193,9 +190,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             {
                 if (Force.HasFlag(ConnectionInfo.Force.Fullscreen))
                 {
-                    _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient,
-                                             Screen.FromControl(_frmMain).Bounds.Width,
-                                             Screen.FromControl(_frmMain).Bounds.Height, 0);
+                    _icaClient.SetWindowSize(Screen.FromControl(_frmMain).Bounds.Width, Screen.FromControl(_frmMain).Bounds.Height);
                     _icaClient.FullScreenWindow();
 
                     return;
@@ -203,26 +198,21 @@ namespace mRemoteNG.Connection.Protocol.ICA
 
                 if (InterfaceControl.Info.Resolution == RDPResolutions.FitToWindow)
                 {
-                    _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width,
-                                             InterfaceControl.Size.Height, 0);
+                    _icaClient.SetWindowSize(InterfaceControl.Size.Width, InterfaceControl.Size.Height);
                 }
                 else if (InterfaceControl.Info.Resolution == RDPResolutions.SmartSize)
                 {
-                    _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width,
-                                             InterfaceControl.Size.Height, 0);
+                    _icaClient.SetWindowSize(InterfaceControl.Size.Width, InterfaceControl.Size.Height);
                 }
                 else if (InterfaceControl.Info.Resolution == RDPResolutions.Fullscreen)
                 {
-                    _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient,
-                                             Screen.FromControl(_frmMain).Bounds.Width,
-                                             Screen.FromControl(_frmMain).Bounds.Height, 0);
+                    _icaClient.SetWindowSize(Screen.FromControl(_frmMain).Bounds.Width, Screen.FromControl(_frmMain).Bounds.Height);
                     _icaClient.FullScreenWindow();
                 }
                 else
                 {
                     var resolution = _info.Resolution.GetResolutionRectangle();
-                    _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, resolution.Width,
-                                             resolution.Height, 0);
+                    _icaClient.SetWindowSize(resolution.Width, resolution.Height);
                 }
             }
             catch (Exception ex)
@@ -241,12 +231,15 @@ namespace mRemoteNG.Connection.Protocol.ICA
                 case RDPColors.Colors256:
                     _icaClient.SetProp("DesiredColor", "2");
                     break;
+
                 case RDPColors.Colors15Bit:
                     _icaClient.SetProp("DesiredColor", "4");
                     break;
+
                 case RDPColors.Colors16Bit:
                     _icaClient.SetProp("DesiredColor", "4");
                     break;
+
                 default:
                     _icaClient.SetProp("DesiredColor", "8");
                     break;
@@ -262,14 +255,17 @@ namespace mRemoteNG.Connection.Protocol.ICA
                     _icaClient.Encrypt = true;
                     _icaClient.EncryptionLevelSession = "EncRC5-0";
                     break;
+
                 case EncryptionStrength.Encr40Bit:
                     _icaClient.Encrypt = true;
                     _icaClient.EncryptionLevelSession = "EncRC5-40";
                     break;
+
                 case EncryptionStrength.Encr56Bit:
                     _icaClient.Encrypt = true;
                     _icaClient.EncryptionLevelSession = "EncRC5-56";
                     break;
+
                 case EncryptionStrength.Encr128Bit:
                     _icaClient.Encrypt = true;
                     _icaClient.EncryptionLevelSession = "EncRC5-128";
@@ -294,7 +290,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             }
         }
 
-        #endregion
+        #endregion Private Methods
 
         #region Private Events & Handlers
 
@@ -333,7 +329,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             }
         }
 
-        #endregion
+        #endregion Private Events & Handlers
 
         #region Reconnect Stuff
 
@@ -349,7 +345,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             _icaClient.Connect();
         }
 
-        #endregion
+        #endregion Reconnect Stuff
 
         #region Enums
 
@@ -377,6 +373,6 @@ namespace mRemoteNG.Connection.Protocol.ICA
             Encr128Bit = 128
         }
 
-        #endregion
+        #endregion Enums
     }
 }

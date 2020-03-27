@@ -4,10 +4,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using AxWFICALib;
 using Gecko;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
@@ -652,7 +652,7 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                using (var ica = new AxICAClient())
+                using (var ica = ICAClientFactory.CreateClientInstance())
                 {
                     ica.Parent = this;
 
