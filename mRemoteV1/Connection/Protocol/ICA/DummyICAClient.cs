@@ -1,4 +1,5 @@
 ﻿#if DEBUG
+
 using mRemoteNG.UI.Window;
 using System;
 using System.Windows.Forms;
@@ -27,28 +28,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
         public string Domain { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool Encrypt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string EncryptionLevelSession { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey10Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey10Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey11Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey11Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey1Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey1Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey2Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey2Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey3Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey3Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey4Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey4Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey5Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey5Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey6Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey6Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey7Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey7Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey8Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey8Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey9Char { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public object Hotkey9Shift { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public ComponentsCheckWindow Parent { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool PersistentCacheEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string Title { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -75,6 +55,11 @@ namespace mRemoteNG.Connection.Protocol.ICA
             throw new NotImplementedException();
         }
 
+        public void Initialize()
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetProp(string v1, string v2)
         {
             throw new NotImplementedException();
@@ -86,4 +71,5 @@ namespace mRemoteNG.Connection.Protocol.ICA
         }
     }
 }
+
 #endif

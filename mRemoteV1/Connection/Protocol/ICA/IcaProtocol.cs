@@ -54,29 +54,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
                 SetColors();
                 SetSecurity();
 
-                //Disable hotkeys for international users
-                _icaClient.Hotkey1Shift = null;
-                _icaClient.Hotkey1Char = null;
-                _icaClient.Hotkey2Shift = null;
-                _icaClient.Hotkey2Char = null;
-                _icaClient.Hotkey3Shift = null;
-                _icaClient.Hotkey3Char = null;
-                _icaClient.Hotkey4Shift = null;
-                _icaClient.Hotkey4Char = null;
-                _icaClient.Hotkey5Shift = null;
-                _icaClient.Hotkey5Char = null;
-                _icaClient.Hotkey6Shift = null;
-                _icaClient.Hotkey6Char = null;
-                _icaClient.Hotkey7Shift = null;
-                _icaClient.Hotkey7Char = null;
-                _icaClient.Hotkey8Shift = null;
-                _icaClient.Hotkey8Char = null;
-                _icaClient.Hotkey9Shift = null;
-                _icaClient.Hotkey9Char = null;
-                _icaClient.Hotkey10Shift = null;
-                _icaClient.Hotkey10Char = null;
-                _icaClient.Hotkey11Shift = null;
-                _icaClient.Hotkey11Char = null;
+                _icaClient.Initialize();
 
                 _icaClient.PersistentCacheEnabled = _info.CacheBitmaps;
                 _icaClient.Title = _info.Name;
