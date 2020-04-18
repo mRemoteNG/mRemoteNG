@@ -172,11 +172,7 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetWinboxPath()
         {
-            ProtocolWinbox.WinboxPath = "C:\\Program Files (x86)\\winbox.exe";
-
-            //    mRemoteNG.Settings.Default.UseCustomPuttyPath
-            //    ? mRemoteNG.Settings.Default.CustomPuttyPath
-            //    : GeneralAppInfo.PuttyPath;
+            ProtocolWinbox.WinboxPath = GeneralAppInfo.WinboxPath;
         }
 
         private void EnsureSettingsAreSavedInNewestVersion()

@@ -27,6 +27,7 @@ namespace mRemoteNG.App.Info
 
         //public static string ReportingFilePath = "";
         public static readonly string PuttyPath = HomePath + "\\PuTTYNG.exe";
+        public static readonly string WinboxPath = HomePath + "\\winbox.exe";
 
         public static string UserAgent
         {
