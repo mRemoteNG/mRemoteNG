@@ -8,6 +8,7 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using System;
 using mRemoteNG.Connection.Protocol.PowerShell;
+using mRemoteNG.Connection.Protocol.Winbox;
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -46,6 +47,8 @@ namespace mRemoteNG.Connection.Protocol
                     return icaProtocol;
                 case ProtocolType.PowerShell:
                     return new ProtocolPowerShell(connectionInfo);
+                case ProtocolType.Winbox:
+                    return new ProtocolWinbox();
                 case ProtocolType.IntApp:
                     if (connectionInfo.ExtApp == "")
                     {

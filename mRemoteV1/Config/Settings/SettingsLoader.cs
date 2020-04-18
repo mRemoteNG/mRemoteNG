@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -11,7 +11,7 @@ using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
-
+using mRemoteNG.Connection.Protocol.Winbox;
 
 namespace mRemoteNG.Config.Settings
 {
@@ -69,6 +69,7 @@ namespace mRemoteNG.Config.Settings
                 SetKioskMode();
 
                 SetPuttyPath();
+                SetWinboxPath();
                 SetShowSystemTrayIcon();
                 SetAutoSave();
                 LoadExternalAppsFromXml();
@@ -167,6 +168,15 @@ namespace mRemoteNG.Config.Settings
             PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath
                 ? mRemoteNG.Settings.Default.CustomPuttyPath
                 : GeneralAppInfo.PuttyPath;
+        }
+
+        private static void SetWinboxPath()
+        {
+            ProtocolWinbox.WinboxPath = "C:\\Program Files (x86)\\winbox.exe";
+
+            //    mRemoteNG.Settings.Default.UseCustomPuttyPath
+            //    ? mRemoteNG.Settings.Default.CustomPuttyPath
+            //    : GeneralAppInfo.PuttyPath;
         }
 
         private void EnsureSettingsAreSavedInNewestVersion()

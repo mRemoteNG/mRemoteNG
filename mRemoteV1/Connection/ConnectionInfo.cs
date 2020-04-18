@@ -14,6 +14,7 @@ using mRemoteNG.Connection.Protocol.Rlogin;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Connection.Protocol.Winbox;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 
@@ -270,6 +271,8 @@ namespace mRemoteNG.Connection
                         return (int)ProtocolPowerShell.Defaults.Port;
                     case ProtocolType.IntApp:
                         return (int)IntegratedProgram.Defaults.Port;
+                    case ProtocolType.Winbox:
+                        return (int)ProtocolWinbox.Defaults.Port;
                 }
 
                 return 0;
