@@ -1290,6 +1290,10 @@
     <Content Include="Icons\PowerShell.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\winbox icon.jpg" />
+    <None Include="Resources\winbox icon.png" />
+    <None Include="Resources\winbox_icon.jpg" />
+    <None Include="Resources\winbox icon1.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
