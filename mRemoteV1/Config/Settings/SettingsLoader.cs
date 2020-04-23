@@ -172,7 +172,9 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetWinboxPath()
         {
-            ProtocolWinbox.WinboxPath = GeneralAppInfo.WinboxPath;
+            ProtocolWinbox.WinboxPath = mRemoteNG.Settings.Default.UseCustomWinboxPath
+               ? mRemoteNG.Settings.Default.CustomWinboxPath
+                : GeneralAppInfo.WinboxPath;
         }
 
         private void EnsureSettingsAreSavedInNewestVersion()

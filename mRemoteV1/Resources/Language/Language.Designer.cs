@@ -808,6 +808,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Test Winbox.
+        /// </summary>
+        internal static string strButtonTestWinbox {
+            get {
+                return ResourceManager.GetString("strButtonTestWinbox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a You cannot import a normal connection file.
         ///Please use File - Open Connection File for normal connection files!.
         /// </summary>
@@ -1179,6 +1188,15 @@ namespace mRemoteNG {
         internal static string strCheckboxWaitForExit {
             get {
                 return ResourceManager.GetString("strCheckboxWaitForExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Use custom Winbox Path.
+        /// </summary>
+        internal static string strCheckboxWinboxPath {
+            get {
+                return ResourceManager.GetString("strCheckboxWinboxPath", resourceCulture);
             }
         }
         
@@ -2139,6 +2157,15 @@ namespace mRemoteNG {
         internal static string strErrorCouldNotLaunchPutty {
             get {
                 return ResourceManager.GetString("strErrorCouldNotLaunchPutty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Winbox could not be launched..
+        /// </summary>
+        internal static string strErrorCouldNotLaunchWinbox {
+            get {
+                return ResourceManager.GetString("strErrorCouldNotLaunchWinbox", resourceCulture);
             }
         }
         

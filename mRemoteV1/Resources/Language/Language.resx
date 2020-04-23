@@ -2843,4 +2843,13 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strWinbox" xml:space="preserve">
     <value>Winbox</value>
   </data>
+  <data name="strButtonTestWinbox" xml:space="preserve">
+    <value>Test Winbox</value>
+  </data>
+  <data name="strCheckboxWinboxPath" xml:space="preserve">
+    <value>Use custom Winbox Path</value>
+  </data>
+  <data name="strErrorCouldNotLaunchWinbox" xml:space="preserve">
+    <value>Winbox could not be launched.</value>
+  </data>
 </root>

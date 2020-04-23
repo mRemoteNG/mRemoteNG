@@ -23,7 +23,6 @@ namespace mRemoteNG.Connection.Protocol.Winbox
             Port = 8291
         }
 
-        private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
         private readonly DisplayProperties _display = new DisplayProperties();
 
         #region Public Properties
@@ -172,7 +171,7 @@ namespace mRemoteNG.Connection.Protocol.Winbox
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strPuttyFocusFailed + Environment.NewLine + ex.Message,
+                                                    "Winbox - Focuse failed: " + Environment.NewLine + ex.Message,
                                                     true);
             }
         }
@@ -199,7 +198,7 @@ namespace mRemoteNG.Connection.Protocol.Winbox
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strPuttyResizeFailed + Environment.NewLine + ex.Message,
+                                                    "Winbox - Resize failed: " + Environment.NewLine + ex.Message,
                                                     true);
             }
         }
@@ -216,7 +215,7 @@ namespace mRemoteNG.Connection.Protocol.Winbox
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "Winbox - Kill process failed" + Environment.NewLine + ex.Message,
+                                                    "Winbox - Kill process failed: " + Environment.NewLine + ex.Message,
                                                     true);
             }
 
@@ -227,7 +226,7 @@ namespace mRemoteNG.Connection.Protocol.Winbox
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strPuttyDisposeFailed + Environment.NewLine + ex.Message,
+                                                    "Winbox- Cannot Dispose: " + Environment.NewLine + ex.Message,
                                                     true);
             }
 

@@ -20,6 +20,9 @@
     <Setting Name="CustomPuttyPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="CustomWinboxPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="SwitchToMCOnInformation" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -69,6 +72,9 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="UseCustomPuttyPath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseCustomWinboxPath" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="FirstStart" Type="System.Boolean" Scope="User">

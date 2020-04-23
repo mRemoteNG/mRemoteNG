@@ -5,6 +5,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.Winbox;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -42,6 +43,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnBrowseCustomPuttyPath.Text = Language.strButtonBrowse;
             chkUseCustomPuttyPath.Text = Language.strCheckboxPuttyPath;
             lblUVNCSCPort.Text = Language.strUltraVNCSCListeningPort;
+
+            chkUseCustomWinboxPath.Text = Language.strCheckboxWinboxPath;
+            btnBrowseCustomWinboxPath.Text = Language.strButtonBrowse;
+            btnLaunchWinbox.Text = Language.strButtonTestWinbox;
         }
 
         public override void LoadSettings()
@@ -55,6 +60,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             SetPuttyLaunchButtonEnabled();
 
             numUVNCSCPort.Value = Settings.Default.UVNCSCPort;
+
+            chkUseCustomWinboxPath.Checked = Settings.Default.UseCustomWinboxPath;
+            txtCustomWinboxPath.Text = Settings.Default.CustomWinboxPath;
+            SetWinboxTestButtonEnabled();
         }
 
         public override void SaveSettings()
@@ -85,6 +94,27 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
             Settings.Default.UVNCSCPort = (int)numUVNCSCPort.Value;
+
+            var winboxPathChanged = false;
+            if (Settings.Default.CustomWinboxPath != txtCustomWinboxPath.Text)
+            {
+                winboxPathChanged = true;
+                Settings.Default.CustomWinboxPath = txtCustomWinboxPath.Text;
+            }
+
+            if (Settings.Default.UseCustomWinboxPath != chkUseCustomWinboxPath.Checked)
+            {
+                winboxPathChanged = true;
+                Settings.Default.UseCustomWinboxPath = chkUseCustomWinboxPath.Checked;
+            }
+
+            if (winboxPathChanged)
+            {
+                ProtocolWinbox.WinboxPath = Settings.Default.UseCustomWinboxPath
+                    ? Settings.Default.CustomWinboxPath
+                    : GeneralAppInfo.WinboxPath;
+            }
+
         }
 
         #endregion
@@ -139,6 +169,52 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
         }
 
+        private void chkUseCustomWinboxPath_CheckedChanged(object sender, EventArgs e)
+        {
+            txtCustomWinboxPath.Enabled = chkUseCustomWinboxPath.Checked;
+            btnBrowseCustomWinboxPath.Enabled = chkUseCustomWinboxPath.Checked;
+            SetWinboxTestButtonEnabled();
+        }
+
+        private void txtCustomWinboxPath_TextChanged(object sender, EventArgs e)
+        {
+            SetWinboxTestButtonEnabled();
+        }
+
+        private void btnBrowseCustomWinboxPath_Click(object sender, EventArgs e)
+        {
+            using (var openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = $@"{Language.strFilterApplication}|*.exe|{Language.strFilterAll}|*.*";
+                openFileDialog.FileName = Path.GetFileName(GeneralAppInfo.WinboxPath);
+                openFileDialog.CheckFileExists = true;
+                openFileDialog.Multiselect = false;
+
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+                txtCustomWinboxPath.Text = openFileDialog.FileName;
+                SetWinboxTestButtonEnabled();
+            }
+        }
+
+        private void btnTestWinbox_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var puttyProcess = new PuttyProcessController();
+                var fileName = chkUseCustomWinboxPath.Checked ? txtCustomWinboxPath.Text : GeneralAppInfo.WinboxPath;
+                puttyProcess.Start(fileName);
+                puttyProcess.SetControlText("Button", "&Cancel", "&Close");
+                puttyProcess.SetControlVisible("Button", "&Open", false);
+                puttyProcess.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Language.strErrorCouldNotLaunchWinbox, Application.ProductName,
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                Runtime.MessageCollector.AddExceptionMessage(Language.strErrorCouldNotLaunchWinbox, ex);
+            }
+        }
+
         #endregion
 
         private void SetPuttyLaunchButtonEnabled()
@@ -157,6 +233,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             lblConfigurePuttySessions.Enabled = exists;
             btnLaunchPutty.Enabled = exists;
+        }
+
+        private void SetWinboxTestButtonEnabled()
+        {
+            var winboxPath = chkUseCustomWinboxPath.Checked ? txtCustomWinboxPath.Text : GeneralAppInfo.WinboxPath;
+
+            var exists = false;
+            try
+            {
+                exists = File.Exists(winboxPath);
+            }
+            catch
+            {
+                // ignored
+            }
+
+            btnLaunchWinbox.Enabled = exists;
         }
 
         #endregion
