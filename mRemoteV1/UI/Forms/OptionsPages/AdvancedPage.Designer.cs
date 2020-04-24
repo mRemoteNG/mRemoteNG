@@ -237,7 +237,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // btnLaunchWinbox
             // 
             this.btnLaunchWinbox._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
-            this.btnLaunchWinbox.Image = global::mRemoteNG.Resources.winbox_icon1;
+            this.btnLaunchWinbox.Image = global::mRemoteNG.Resources.winbox_icon;
             this.btnLaunchWinbox.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLaunchWinbox.Location = new System.Drawing.Point(373, 276);
             this.btnLaunchWinbox.Name = "btnLaunchWinbox";

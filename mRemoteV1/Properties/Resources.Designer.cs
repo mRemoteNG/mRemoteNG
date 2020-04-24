@@ -1569,9 +1569,9 @@ namespace mRemoteNG {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap winbox_icon1 {
+        internal static System.Drawing.Bitmap winbox_icon {
             get {
-                object obj = ResourceManager.GetObject("winbox icon1", resourceCulture);
+                object obj = ResourceManager.GetObject("winbox_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
