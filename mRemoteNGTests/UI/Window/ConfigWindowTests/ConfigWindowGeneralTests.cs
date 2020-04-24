@@ -361,6 +361,14 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.ExtApp),
                     });
                     break;
+                case ProtocolType.Winbox:
+                    expectedProperties.AddRange(new[]
+                    {
+                        nameof(ConnectionInfo.Username),
+                        nameof(ConnectionInfo.Password),
+                        nameof(ConnectionInfo.Port),
+                    });
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(protocol), protocol, null);
             }
