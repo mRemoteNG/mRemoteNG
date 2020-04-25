@@ -33,6 +33,7 @@ rmdir /S /Q "%SOLUTIONDIR%\mRemoteV1\bin\package"
 mkdir "%SOLUTIONDIR%\mRemoteV1\bin\package"
 copy "%SOLUTIONDIR%\*.txt" "%SOLUTIONDIR%\mRemoteV1\bin\package"
 copy "%SOLUTIONDIR%\Installer Projects\Installer\Dependencies\PuTTYNG.exe" "%SOLUTIONDIR%\mRemoteV1\bin\package"
+copy "%SOLUTIONDIR%\Installer Projects\Installer\Dependencies\winbox.exe" "%SOLUTIONDIR%\mRemoteV1\bin\package"
 
 xcopy /S /Y "%SOLUTIONDIR%\mRemoteV1\bin\Release Portable" "%SOLUTIONDIR%\mRemoteV1\bin\package"
 

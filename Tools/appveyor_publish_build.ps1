@@ -74,6 +74,7 @@ Remove-Item -Recurse "mRemoteV1\bin\package" -ErrorAction SilentlyContinue | Out
 New-Item "mRemoteV1\bin\package" -ItemType  "directory" | Out-Null
 
 Copy-Item "mRemoteV1\Resources\PuTTYNG.exe" -Destination "mRemoteV1\bin\package"
+Copy-Item "mRemoteV1\Resources\winbox.exe" -Destination "mRemoteV1\bin\package"
 
 Copy-Item "mRemoteV1\bin\Release Portable\*" -Destination "mRemoteV1\bin\package" -Recurse  -Force 
 Copy-Item "*.txt" -Destination "mRemoteV1\bin\package"

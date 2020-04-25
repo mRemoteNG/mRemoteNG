@@ -44,6 +44,7 @@ if ($ConfigurationName -eq "Release Portable") {
     New-Item $tempFolderPath -ItemType  "directory" | Out-Null
     
     Copy-Item "$($SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" -Destination $tempFolderPath
+    Copy-Item "$($SolutionDir)mRemoteV1\Resources\winbox.exe" -Destination $tempFolderPath
 
     #Write-Output "$($SolutionDir)mRemoteV1\bin\$ConfigurationName" 
     #Write-Output "$($SolutionDir)mRemoteV1\bin\package"
