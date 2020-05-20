@@ -576,7 +576,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
     <value>Basique</value>
   </data>
   <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
-    <value>Crypter complètement le fichier de connexion</value>
+    <value>Chiffrer complètement le fichier de connexion</value>
   </data>
   <data name="strEndIP" xml:space="preserve">
     <value>IP de fin</value>
