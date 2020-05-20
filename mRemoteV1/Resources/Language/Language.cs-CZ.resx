@@ -504,7 +504,7 @@ VncSharp Control verze {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Připojení k "{0}" přes "{1}" bylo provedeno uživatelem "{2}" (Popis: "{3}"; Login: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Připojení selhalo!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -866,9 +866,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG je aktuální</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Spojení selhalo!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Zrušení procesu Int App process selhalo!</value>
@@ -1686,9 +1683,6 @@ Zpráva:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Test proxy uspěl!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Spojení selhalo!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Odstranění procesu PuTTY selhalo!</value>

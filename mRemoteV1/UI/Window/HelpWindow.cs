@@ -1,7 +1,6 @@
 ﻿using mRemoteNG.App.Info;
 using System;
 using System.Diagnostics;
-using System.Windows.Forms;
 using Gecko;
 using WeifenLuo.WinFormsUI.Docking;
 

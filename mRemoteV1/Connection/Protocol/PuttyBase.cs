@@ -196,7 +196,7 @@ namespace mRemoteNG.Connection.Protocol
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strPuttyConnectionFailed + Environment.NewLine +
+                                                    Language.ConnectionFailed + Environment.NewLine +
                                                     ex.Message);
                 return false;
             }

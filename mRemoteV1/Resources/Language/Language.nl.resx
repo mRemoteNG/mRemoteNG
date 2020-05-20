@@ -490,7 +490,7 @@ VncSharp Versie {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Verbinding naar "{0}" via "{1}" tot stand gebracht door gebruiker "{2}" (Omschrijving: "{3}"; Gebruiker Veld: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Connectie mislukt!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -762,9 +762,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG is voorzien van de meest actuele versie</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Verbinding mislukt!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Sluiten Interne Applicatie mislukt!</value>
@@ -1513,9 +1510,6 @@ Bericht:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy test geslaagd!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Verbinding mislukt!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Sluiten PuTTy proces mislukt!</value>

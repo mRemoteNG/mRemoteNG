@@ -28,7 +28,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     rdpClient7.AdvancedSettings7.AuthenticationServiceClass = "Microsoft Virtual Console Service";
                     rdpClient7.AdvancedSettings8.EnableCredSspSupport = true;
                     rdpClient7.AdvancedSettings8.NegotiateSecurityLayer = false;
-                    rdpClient7.AdvancedSettings7.PCB = $"{connectionInfo.VmId};EnhancedMode=1";
+                    rdpClient7.AdvancedSettings7.PCB = $"{connectionInfo.VmId}";
                     if (connectionInfo.UseEnhancedMode)
                         rdpClient7.AdvancedSettings7.PCB += ";EnhancedMode=1";
                 }

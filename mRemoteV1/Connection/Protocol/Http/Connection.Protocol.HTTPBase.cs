@@ -320,10 +320,10 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         public enum RenderingEngine
         {
-            [LocalizedAttributes.LocalizedDescription("strHttpInternetExplorer")]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpInternetExplorer))]
             IE = 1,
 
-            [LocalizedAttributes.LocalizedDescription("strHttpGecko")]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpGecko))]
             Gecko = 2
         }
 

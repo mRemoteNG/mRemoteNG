@@ -486,7 +486,7 @@ Versión de Control {0} de VncSharp</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Connexión a "{0}" via "{1}" establecida por el usuario "{2}" (Descripción: "{3}"; Campo de Usuario: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>¡Conexión fallida!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -752,9 +752,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG está actualizado</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>¡Conexión fallida!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>¡La liberación del proceso Int App ha fallado!</value>
@@ -1502,9 +1499,6 @@ Mensaje:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>¡Test de Proxy correcto!</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>¡Conexión fallida!</value>
   </data>
   <data name="strPuttyFocusFailed" xml:space="preserve">
     <value>¡No se pudo fikar el foco!</value>

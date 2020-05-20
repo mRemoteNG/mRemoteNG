@@ -500,7 +500,7 @@ VncSharp Control Version {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Connection to "{0}" via "{1}" established by user "{2}" (Description: "{3}"; User Field: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Connection failed!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -869,9 +869,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG is up to date</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Connection failed!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Dispose of Int App process failed!</value>
@@ -1700,9 +1697,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy test succeeded!</value>
   </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Connection failed!</value>
-  </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Dispose of Putty process failed!</value>
   </data>
@@ -2220,10 +2214,10 @@ If you run into such an error, please create a new connection file!</value>
     <value>Information ({0})</value>
   </data>
   <data name="strTitlePassword" xml:space="preserve">
-    <value>Password</value>
+    <value>mRemoteNG password</value>
   </data>
   <data name="strTitlePasswordWithName" xml:space="preserve">
-    <value>Password for {0}</value>
+    <value>mRemoteNG password for {0}</value>
   </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
     <value>Select Panel</value>
@@ -2866,5 +2860,14 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="strPropertyDescriptionRedirectMicrophones" xml:space="preserve">
     <value>Select whether microphones should be shared.</value>
+  </data>
+  <data name="strCloseToSysTray" xml:space="preserve">
+    <value>Close to notification area</value>
+  </data>
+  <data name="strWindows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="strPowerShell" xml:space="preserve">
+    <value>PowerShell</value>
   </data>
 </root>

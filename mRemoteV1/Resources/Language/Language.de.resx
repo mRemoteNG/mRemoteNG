@@ -490,7 +490,7 @@ Alle Verbindungen die es enthält werden ebenfalls geschlossen.</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Verbindung zu "{0}" mit "{1}" hergestellt von Benutzer "{2}" (Beschreibung: "{3}"; Benutzer Feld: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Verbindung fehlgeschlagen!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -768,9 +768,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG ist aktuell</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Verbindung fehlgeschlagen!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Zerstören des Internen Programmes fehlgeschlagen!</value>
@@ -1516,9 +1513,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy-Test erfolgreich!</value>
   </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Verbindung fehlgeschlagen!</value>
-  </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Zerstören von PuTTY fehlgeschlagen!</value>
   </data>
@@ -2030,7 +2024,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Informationen ({0})</value>
   </data>
   <data name="strTitlePassword" xml:space="preserve">
-    <value>Passwort</value>
+    <value>mRemoteNG Passwort</value>
   </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
     <value>Wähle Panel</value>
@@ -2336,7 +2330,7 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
     <value>Lastausgleichsinfo</value>
   </data>
   <data name="strTitlePasswordWithName" xml:space="preserve">
-    <value>Passwort für {0}</value>
+    <value>mRemoteNG  Passwort für {0}</value>
   </data>
   <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
     <value>RDP-Verbindungs-Timeout</value>
@@ -2713,5 +2707,8 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="strPropertyDescriptionPasswordProtect" xml:space="preserve">
     <value>Legen Sie ein Kennwort fest, mit dem die Verbindungsdatei verschlüsselt werden soll. Sie werden aufgefordert Ihr Passwort einzugeben, bevor Sie mRemoteNG starten.</value>
+  </data>
+  <data name="strCloseToSysTray" xml:space="preserve">
+    <value>In den System Tray schließen</value>
   </data>
 </root>

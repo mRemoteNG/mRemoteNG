@@ -5,13 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
-- #420: SSH tunneling a.k.a. jump host
-- More connection icons (Admin, Infrastructure, Productive, Staging)
-- SSH options property to pass additional parameters into PuTTY
+- #545: Option to minimize to system tray on closing
+- #283: Support for native PowerShell remoting as new protocol
+- #420: SSH tunneling implemented
 ### Changed
 - #1460: Updated GeckoFX to v60
 ### Fixed
+- #1610: Menu bar changes to english when cancelling options form
+- #1595: Unhandled exception when trying to browse through non existent multi ssh history with keyboard key strokes
+- #1589: Update SQL tables instead of rewriting them
 - #1337: Unhandled exception after closing mRemoteNG
+- #359: Making a VNC connection to an unreachable host causes the application to not respond for 20-30 seconds
+- #1465: REGRESSION: Smart Cards redirection to Remote Desktop not working
+- #1632: 1.77.1 breaks RDP drive and sound redirection
+- #1713: Sound redirection does not work if Clipboard redirection is set to No
 
 ## [1.77.1] - 2019-09-02
 ### Added

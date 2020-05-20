@@ -445,7 +445,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionEventConnectionFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.ConnectionFailed, ex);
             }
         }
 

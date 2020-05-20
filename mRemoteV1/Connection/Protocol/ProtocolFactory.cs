@@ -7,6 +7,7 @@ using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using System;
+using mRemoteNG.Connection.Protocol.PowerShell;
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -43,6 +44,8 @@ namespace mRemoteNG.Connection.Protocol
                     var icaProtocol = new IcaProtocol();
                     icaProtocol.tmrReconnect.Elapsed += icaProtocol.tmrReconnect_Elapsed;
                     return icaProtocol;
+                case ProtocolType.PowerShell:
+                    return new ProtocolPowerShell(connectionInfo);
                 case ProtocolType.IntApp:
                     if (connectionInfo.ExtApp == "")
                     {
@@ -51,7 +54,7 @@ namespace mRemoteNG.Connection.Protocol
                     return new IntegratedProgram();
             }
 
-            return default(ProtocolBase);
+            return default;
         }
     }
 }

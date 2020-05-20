@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;

@@ -124,6 +124,17 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection failed!.
+        /// </summary>
+        internal static string ConnectionFailed
+        {
+            get
+            {
+                return ResourceManager.GetString("ConnectionFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to The connection file could not be found..
         /// </summary>
         internal static string ConnectionFileNotFound {
@@ -1245,6 +1256,17 @@ namespace mRemoteNG {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Close to notification area.
+        /// </summary>
+        internal static string strCloseToSysTray
+        {
+            get
+            {
+                return ResourceManager.GetString("strCloseToSysTray", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Collapse all folders.
         /// </summary>
@@ -4668,6 +4690,17 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PowerShell.
+        /// </summary>
+        internal static string strPowerShell
+        {
+            get
+            {
+                return ResourceManager.GetString("strPowerShell", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to (These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!).
         /// </summary>
         internal static string strPropertiesWillOnlyBeSavedMRemoteXML {
@@ -4976,12 +5009,14 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Specifies the password of the Remote Desktop Gateway server..
         /// </summary>
-        internal static string strPropertyDescriptionRDGatewayPassword {
-            get {
+        internal static string strPropertyDescriptionRDGatewayPassword
+        {
+            get
+            {
                 return ResourceManager.GetString("strPropertyDescriptionRDGatewayPassword", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Specifies when to use a Remote Desktop Gateway (RD Gateway) server..
         /// </summary>
@@ -5075,12 +5110,14 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Select whether microphones should be shared..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectMicrophones {
-            get {
+        internal static string strPropertyDescriptionRedirectMicrophones
+        {
+            get
+            {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectMicrophones", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Select whether local ports (ie. com, parallel) should be shown on the remote host..
         /// </summary>
@@ -7695,7 +7732,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password.
+        ///   Looks up a localized string similar to mRemoteNG password.
         /// </summary>
         internal static string strTitlePassword {
             get {
@@ -7704,7 +7741,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password for {0}.
+        ///   Looks up a localized string similar to mRemoteNG password for {0}.
         /// </summary>
         internal static string strTitlePasswordWithName {
             get {
@@ -8154,6 +8191,17 @@ namespace mRemoteNG {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Windows.
+        /// </summary>
+        internal static string strWindows
+        {
+            get
+            {
+                return ResourceManager.GetString("strWindows", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Working directory.
         /// </summary>

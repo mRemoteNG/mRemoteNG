@@ -27,21 +27,21 @@ namespace mRemoteNG.Tree.Root
 
         #region Public Properties
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous"),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryMiscellaneous)),
          Browsable(true),
-         LocalizedAttributes.LocalizedDefaultValue("strConnections"),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
+         LocalizedAttributes.LocalizedDefaultValue(nameof(Language.strConnections)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameName)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionName))]
         public override string Name
         {
             get => _name;
             set => _name = value;
         }
         
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous"),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryMiscellaneous)),
          Browsable(true),
-         LocalizedAttributes.LocalizedDisplayName("strPropertyNamePasswordProtect"),
-         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPasswordProtect"),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNamePasswordProtect)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionPasswordProtect)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public new bool Password { get; set; }
 

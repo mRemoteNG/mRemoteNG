@@ -476,7 +476,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Connexion à "{0}"via "{1}"créé par l'utilisateur "{2}"; (Description: "{3}"Champ Utilisateur: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Connexion échouée !</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -576,7 +576,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
     <value>Basique</value>
   </data>
   <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
-    <value>Crypter complètement le fichier de connexion</value>
+    <value>Chiffrer complètement le fichier de connexion</value>
   </data>
   <data name="strEndIP" xml:space="preserve">
     <value>IP de fin</value>
@@ -745,9 +745,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG est à jour</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>La connexion a échouée !</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Échec de l'arrêt du processus Int App !</value>
@@ -1246,7 +1243,7 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
     <value>Entrez votre mot de passe.</value>
   </data>
   <data name="strPropertyDescriptionPort" xml:space="preserve">
-    <value>Entrez le port d'écoute du protocole choisit</value>
+    <value>Entrez le port d'écoute du protocole choisi</value>
   </data>
   <data name="strPropertyDescriptionProtocol" xml:space="preserve">
     <value>Choisissez le protocole utilisé par mRemoteNG pour se connecter à l'hôte.</value>
@@ -1495,9 +1492,6 @@ Message:
   </data>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Test du Proxy réussi !</value>
-  </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>La connexion a échoué!</value>
   </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Échec de l'arrêt du processus Putty !</value>
