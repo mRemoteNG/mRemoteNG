@@ -248,6 +248,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.MacAddress),
                 nameof(ConnectionInfo.UserField),
                 nameof(ConnectionInfo.Favorite),
+                nameof(ConnectionInfo.SSHTunnelConnectionName),
             };
 
             if (!isContainer)
@@ -267,7 +268,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.SSHTunnelConnectionName),
                         nameof(ConnectionInfo.UseVmId),
                         nameof(ConnectionInfo.UseConsoleSession),
                         nameof(ConnectionInfo.RDPAuthenticationLevel),
@@ -298,7 +298,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     {
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.SSHTunnelConnectionName),
                         nameof(ConnectionInfo.VNCSmartSizeMode),
                         nameof(ConnectionInfo.VNCViewOnly),
                     });
@@ -311,7 +310,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.SSHOptions),
-                        nameof(ConnectionInfo.SSHTunnelConnectionName),
                         nameof(ConnectionInfo.PuttySession)
                     });
                     break;
@@ -321,7 +319,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.SSHTunnelConnectionName),
                         nameof(ConnectionInfo.PuttySession),
                     });
                     break;
@@ -332,7 +329,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.SSHTunnelConnectionName),
                         nameof(ConnectionInfo.RenderingEngine),
                     });
                     break;
@@ -342,7 +338,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
-                        nameof(ConnectionInfo.SSHTunnelConnectionName),
                         nameof(ConnectionInfo.ICAEncryptionStrength),
                         nameof(ConnectionInfo.Resolution),
                         nameof(ConnectionInfo.Colors),
@@ -365,7 +360,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.SSHTunnelConnectionName),
                         nameof(ConnectionInfo.ExtApp),
                     });
                     break;
