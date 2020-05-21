@@ -66,5 +66,7 @@
 		public TType VNCViewOnly { get; set; }
         public TType RdpVersion { get; set; }
         public TType UseEnhancedMode { get; set; }
+        public TType SSHOptions { get; set; }
+        public TType SSHTunnelConnectionName { get; set; }
     }
 }

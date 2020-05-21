@@ -299,6 +299,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Language\Language.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Themes\ColorMapTheme.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -375,6 +380,7 @@
     <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsService.cs" />
+    <Compile Include="Tools\SshTunnelTypeConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
     <Compile Include="Tools\Optional.cs" />
@@ -685,11 +691,6 @@
     </Compile>
     <Compile Include="UI\Forms\PasswordForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Resources\Language\Language.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Language.resx</DependentUpon>
     </Compile>
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1026,7 +1027,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <SubType>Designer</SubType>
-      <LastGenOutput>Language1.Designer.cs</LastGenOutput>
+      <LastGenOutput>Language.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.fr.resx">
       <SubType>Designer</SubType>
@@ -1198,6 +1199,7 @@
     <None Include="Documentation\images\connections_status.png" />
     <None Include="Documentation\images\putty.png" />
     <Content Include="Console.ico" />
+    <Content Include="Documentation\images\ssh_tunnel.png" />
     <Content Include="Documentation\mssql_db_setup.sql" />
     <Content Include="Documentation\mysql_db_setup.sql" />
     <None Include="Documentation\images\config_top_bar.png" />
@@ -1219,6 +1221,7 @@
     <None Include="Documentation\images\connections_open.png" />
     <None Include="Documentation\images\screenshot_manager_rightclick_menu.png" />
     <None Include="Documentation\images\screenshot_manager_overview.png" />
+    <Content Include="Icons\Admin.ico" />
     <Content Include="Firefox\AccessibleHandler.dll" />
     <Content Include="Firefox\AccessibleMarshal.dll" />
     <Content Include="Firefox\breakpadinjector.dll" />
@@ -1286,6 +1289,15 @@
     <None Include="Resources\Images\tab_edit.png" />
     <None Include="Resources\Images\tab_delete.png" />
     <None Include="Resources\Images\star.png" />
+    <Content Include="Icons\Infrastructure.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Production.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Staging.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icons\PowerShell.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1425,7 +1437,7 @@
     <None Include="Documentation\installation.rst" />
     <None Include="Documentation\installation\minimum_requirements.rst" />
     <None Include="Documentation\installation\uninstall.rst" />
-    <None Include="Documentation\howtos\jumpservers.rst" />
+    <None Include="Documentation\howtos\sshtunnel.rst" />
     <None Include="Documentation\user_interface.rst" />
     <None Include="Documentation\user_interface\main_window.rst" />
     <None Include="Documentation\user_interface\panels.rst" />

@@ -8,11 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG
-{
+namespace mRemoteNG {
     using System;
-
-
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,129 +22,107 @@ namespace mRemoteNG
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Language
-    {
-
+    internal class Language {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Language()
-        {
+        internal Language() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("mRemoteNG.Resources.Language.Language", typeof(Language).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to reconnect to RDP host &apos;{0}&apos;.
         /// </summary>
-        internal static string AutomaticReconnectError
-        {
-            get
-            {
+        internal static string AutomaticReconnectError {
+            get {
                 return ResourceManager.GetString("AutomaticReconnectError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An error occurred while trying to change the connection resolution to host &apos;{0}&apos;.
         /// </summary>
-        internal static string ChangeConnectionResolutionError
-        {
-            get
-            {
+        internal static string ChangeConnectionResolutionError {
+            get {
                 return ResourceManager.GetString("ChangeConnectionResolutionError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Clear search string.
         /// </summary>
-        internal static string ClearSearchString
-        {
-            get
-            {
+        internal static string ClearSearchString {
+            get {
                 return ResourceManager.GetString("ClearSearchString", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Create a New Connection File.
         /// </summary>
-        internal static string ConfigurationCreateNew
-        {
-            get
-            {
+        internal static string ConfigurationCreateNew {
+            get {
                 return ResourceManager.GetString("ConfigurationCreateNew", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use a Custom File Path.
         /// </summary>
-        internal static string ConfigurationCustomPath
-        {
-            get
-            {
+        internal static string ConfigurationCustomPath {
+            get {
                 return ResourceManager.GetString("ConfigurationCustomPath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import an Existing File.
         /// </summary>
-        internal static string ConfigurationImportFile
-        {
-            get
-            {
+        internal static string ConfigurationImportFile {
+            get {
                 return ResourceManager.GetString("ConfigurationImportFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connect in View Only mode.
         /// </summary>
-        internal static string ConnectInViewOnlyMode
-        {
-            get
-            {
+        internal static string ConnectInViewOnlyMode {
+            get {
                 return ResourceManager.GetString("ConnectInViewOnlyMode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection failed!.
         /// </summary>
@@ -160,1371 +137,1125 @@ namespace mRemoteNG
         /// <summary>
         ///   Looks up a localized string similar to The connection file could not be found..
         /// </summary>
-        internal static string ConnectionFileNotFound
-        {
-            get
-            {
+        internal static string ConnectionFileNotFound {
+            get {
                 return ResourceManager.GetString("ConnectionFileNotFound", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection successful.
         /// </summary>
-        internal static string ConnectionSuccessful
-        {
-            get
-            {
+        internal static string ConnectionSuccessful {
+            get {
                 return ResourceManager.GetString("ConnectionSuccessful", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Could not find external tool with name &quot;{0}&quot;.
         /// </summary>
-        internal static string CouldNotFindExternalTool
-        {
-            get
-            {
+        internal static string CouldNotFindExternalTool {
+            get {
                 return ResourceManager.GetString("CouldNotFindExternalTool", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Credentials.
         /// </summary>
-        internal static string Credentials
-        {
-            get
-            {
+        internal static string Credentials {
+            get {
                 return ResourceManager.GetString("Credentials", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Credential not available.
         /// </summary>
-        internal static string CredentialUnavailable
-        {
-            get
-            {
+        internal static string CredentialUnavailable {
+            get {
                 return ResourceManager.GetString("CredentialUnavailable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Database &apos;{0}&apos; not available..
         /// </summary>
-        internal static string DatabaseNotAvailable
-        {
-            get
-            {
+        internal static string DatabaseNotAvailable {
+            get {
                 return ResourceManager.GetString("DatabaseNotAvailable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not trim spaces from usernames.
         /// </summary>
-        internal static string DoNotTrimUsername
-        {
-            get
-            {
+        internal static string DoNotTrimUsername {
+            get {
                 return ResourceManager.GetString("DoNotTrimUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Encryption Test.
         /// </summary>
-        internal static string EncryptionTest
-        {
-            get
-            {
+        internal static string EncryptionTest {
+            get {
                 return ResourceManager.GetString("EncryptionTest", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Encrypting {0} entries using {1}/{2} and {3} iterations took {4} seconds..
         /// </summary>
-        internal static string EncryptionTestResultMessage
-        {
-            get
-            {
+        internal static string EncryptionTestResultMessage {
+            get {
                 return ResourceManager.GetString("EncryptionTestResultMessage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Environment.
         /// </summary>
-        internal static string Environment
-        {
-            get
-            {
+        internal static string Environment {
+            get {
                 return ResourceManager.GetString("Environment", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to This exception will force mRemoteNG to close.
         /// </summary>
-        internal static string ExceptionForcesmRemoteNGToClose
-        {
-            get
-            {
+        internal static string ExceptionForcesmRemoteNGToClose {
+            get {
                 return ResourceManager.GetString("ExceptionForcesmRemoteNGToClose", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Exception Message.
         /// </summary>
-        internal static string ExceptionMessage
-        {
-            get
-            {
+        internal static string ExceptionMessage {
+            get {
                 return ResourceManager.GetString("ExceptionMessage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Favorites.
         /// </summary>
-        internal static string Favorites
-        {
-            get
-            {
+        internal static string Favorites {
+            get {
                 return ResourceManager.GetString("Favorites", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Filter search matches in connection tree.
         /// </summary>
-        internal static string FilterSearchMatchesInConnectionTree
-        {
-            get
-            {
+        internal static string FilterSearchMatchesInConnectionTree {
+            get {
                 return ResourceManager.GetString("FilterSearchMatchesInConnectionTree", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Incorrect password.
         /// </summary>
-        internal static string IncorrectPassword
-        {
-            get
-            {
+        internal static string IncorrectPassword {
+            get {
                 return ResourceManager.GetString("IncorrectPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use UTF8 encoding for RDP &quot;Load Balance Info&quot; property.
         /// </summary>
-        internal static string LoadBalanceInfoUseUtf8
-        {
-            get
-            {
+        internal static string LoadBalanceInfoUseUtf8 {
+            get {
                 return ResourceManager.GetString("LoadBalanceInfoUseUtf8", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Login failed for user &apos;{0}&apos;..
         /// </summary>
-        internal static string LoginFailedForUser
-        {
-            get
-            {
+        internal static string LoginFailedForUser {
+            get {
                 return ResourceManager.GetString("LoginFailedForUser", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG Unhandled Exception.
         /// </summary>
-        internal static string mRemoteNGUnhandledException
-        {
-            get
-            {
+        internal static string mRemoteNGUnhandledException {
+            get {
                 return ResourceManager.GetString("mRemoteNGUnhandledException", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Place search bar above connection tree.
         /// </summary>
-        internal static string PlaceSearchBarAboveConnectionTree
-        {
-            get
-            {
+        internal static string PlaceSearchBarAboveConnectionTree {
+            get {
                 return ResourceManager.GetString("PlaceSearchBarAboveConnectionTree", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Prompt to unlock credential repositories on startup.
         /// </summary>
-        internal static string PromptUnlockCredReposOnStartup
-        {
-            get
-            {
+        internal static string PromptUnlockCredReposOnStartup {
+            get {
                 return ResourceManager.GetString("PromptUnlockCredReposOnStartup", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version..
         /// </summary>
-        internal static string RdpProtocolVersionNotSupported
-        {
-            get
-            {
+        internal static string RdpProtocolVersionNotSupported {
+            get {
                 return ResourceManager.GetString("RdpProtocolVersionNotSupported", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The selected repository is unlocked.
         /// </summary>
-        internal static string RepositoryIsUnlocked
-        {
-            get
-            {
+        internal static string RepositoryIsUnlocked {
+            get {
                 return ResourceManager.GetString("RepositoryIsUnlocked", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Save connections after every edit.
         /// </summary>
-        internal static string SaveConnectionsAfterEveryEdit
-        {
-            get
-            {
+        internal static string SaveConnectionsAfterEveryEdit {
+            get {
                 return ResourceManager.GetString("SaveConnectionsAfterEveryEdit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Server &apos;{0}&apos; was not accessible..
         /// </summary>
-        internal static string ServerNotAccessible
-        {
-            get
-            {
+        internal static string ServerNotAccessible {
+            get {
                 return ResourceManager.GetString("ServerNotAccessible", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Source.
         /// </summary>
-        internal static string Source
-        {
-            get
-            {
+        internal static string Source {
+            get {
                 return ResourceManager.GetString("Source", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Working directory:.
         /// </summary>
-        internal static string srtWorkingDirectory
-        {
-            get
-            {
+        internal static string srtWorkingDirectory {
+            get {
                 return ResourceManager.GetString("srtWorkingDirectory", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Stack trace.
         /// </summary>
-        internal static string StackTrace
-        {
-            get
-            {
+        internal static string StackTrace {
+            get {
                 return ResourceManager.GetString("StackTrace", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
-        internal static string strAbout
-        {
-            get
-            {
+        internal static string strAbout {
+            get {
                 return ResourceManager.GetString("strAbout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Accept.
         /// </summary>
-        internal static string strAccept
-        {
-            get
-            {
+        internal static string strAccept {
+            get {
                 return ResourceManager.GetString("strAccept", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
-        internal static string strActive
-        {
-            get
-            {
+        internal static string strActive {
+            get {
                 return ResourceManager.GetString("strActive", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Active Directory.
         /// </summary>
-        internal static string strActiveDirectory
-        {
-            get
-            {
+        internal static string strActiveDirectory {
+            get {
                 return ResourceManager.GetString("strActiveDirectory", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Activity.
         /// </summary>
-        internal static string strActivity
-        {
-            get
-            {
+        internal static string strActivity {
+            get {
                 return ResourceManager.GetString("strActivity", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
-        internal static string strAdd
-        {
-            get
-            {
+        internal static string strAdd {
+            get {
                 return ResourceManager.GetString("strAdd", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New Connection.
         /// </summary>
-        internal static string strAddConnection
-        {
-            get
-            {
+        internal static string strAddConnection {
+            get {
                 return ResourceManager.GetString("strAddConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New folder.
         /// </summary>
-        internal static string strAddFolder
-        {
-            get
-            {
+        internal static string strAddFolder {
+            get {
                 return ResourceManager.GetString("strAddFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to AddNodeFromXML failed!.
         /// </summary>
-        internal static string strAddNodeFromXmlFailed
-        {
-            get
-            {
+        internal static string strAddNodeFromXmlFailed {
+            get {
                 return ResourceManager.GetString("strAddNodeFromXmlFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to AddNodesFromSQL failed!.
         /// </summary>
-        internal static string strAddNodesFromSqlFailed
-        {
-            get
-            {
+        internal static string strAddNodesFromSqlFailed {
+            get {
                 return ResourceManager.GetString("strAddNodesFromSqlFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Advanced security options.
         /// </summary>
-        internal static string strAdvancedSecurityOptions
-        {
-            get
-            {
+        internal static string strAdvancedSecurityOptions {
+            get {
                 return ResourceManager.GetString("strAdvancedSecurityOptions", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Allow only a single instance of the application (mRemoteNG restart required).
         /// </summary>
-        internal static string strAllowOnlySingleInstance
-        {
-            get
-            {
+        internal static string strAllowOnlySingleInstance {
+            get {
                 return ResourceManager.GetString("strAllowOnlySingleInstance", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Always.
         /// </summary>
-        internal static string strAlways
-        {
-            get
-            {
+        internal static string strAlways {
+            get {
                 return ResourceManager.GetString("strAlways", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Always connect, even if authentication fails.
         /// </summary>
-        internal static string strAlwaysConnectEvenIfAuthFails
-        {
-            get
-            {
+        internal static string strAlwaysConnectEvenIfAuthFails {
+            get {
                 return ResourceManager.GetString("strAlwaysConnectEvenIfAuthFails", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Always show connection tabs.
         /// </summary>
-        internal static string strAlwaysShowConnectionTabs
-        {
-            get
-            {
+        internal static string strAlwaysShowConnectionTabs {
+            get {
                 return ResourceManager.GetString("strAlwaysShowConnectionTabs", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Always show panel selection dialog when opening connections.
         /// </summary>
-        internal static string strAlwaysShowPanelSelection
-        {
-            get
-            {
+        internal static string strAlwaysShowPanelSelection {
+            get {
                 return ResourceManager.GetString("strAlwaysShowPanelSelection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Always show panel tabs.
         /// </summary>
-        internal static string strAlwaysShowPanelTabs
-        {
-            get
-            {
+        internal static string strAlwaysShowPanelTabs {
+            get {
                 return ResourceManager.GetString("strAlwaysShowPanelTabs", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Always show notification area icon.
         /// </summary>
-        internal static string strAlwaysShowSysTrayIcon
-        {
-            get
-            {
+        internal static string strAlwaysShowSysTrayIcon {
+            get {
                 return ResourceManager.GetString("strAlwaysShowSysTrayIcon", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ask me again later.
         /// </summary>
-        internal static string strAskUpdatesCommandAskLater
-        {
-            get
-            {
+        internal static string strAskUpdatesCommandAskLater {
+            get {
                 return ResourceManager.GetString("strAskUpdatesCommandAskLater", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Customize the settings now.
         /// </summary>
-        internal static string strAskUpdatesCommandCustom
-        {
-            get
-            {
+        internal static string strAskUpdatesCommandCustom {
+            get {
                 return ResourceManager.GetString("strAskUpdatesCommandCustom", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use the recommended settings.
         /// </summary>
-        internal static string strAskUpdatesCommandRecommended
-        {
-            get
-            {
+        internal static string strAskUpdatesCommandRecommended {
+            get {
                 return ResourceManager.GetString("strAskUpdatesCommandRecommended", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0} can automatically check for updates that may provide new features and bug fixes. It is recommended that you allow {0} to check for updates weekly..
         /// </summary>
-        internal static string strAskUpdatesContent
-        {
-            get
-            {
+        internal static string strAskUpdatesContent {
+            get {
                 return ResourceManager.GetString("strAskUpdatesContent", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Automatic update settings.
         /// </summary>
-        internal static string strAskUpdatesMainInstruction
-        {
-            get
-            {
+        internal static string strAskUpdatesMainInstruction {
+            get {
                 return ResourceManager.GetString("strAskUpdatesMainInstruction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Aspect.
         /// </summary>
-        internal static string strAspect
-        {
-            get
-            {
+        internal static string strAspect {
+            get {
                 return ResourceManager.GetString("strAspect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Assigned Credential.
         /// </summary>
-        internal static string strAssignedCredential
-        {
-            get
-            {
+        internal static string strAssignedCredential {
+            get {
                 return ResourceManager.GetString("strAssignedCredential", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Auto save time in minutes (0 means disabled):.
         /// </summary>
-        internal static string strAutoSaveEvery
-        {
-            get
-            {
+        internal static string strAutoSaveEvery {
+            get {
                 return ResourceManager.GetString("strAutoSaveEvery", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Minutes (0 means disabled).
         /// </summary>
-        internal static string strAutoSaveMins
-        {
-            get
-            {
+        internal static string strAutoSaveMins {
+            get {
                 return ResourceManager.GetString("strAutoSaveMins", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Latest version.
         /// </summary>
-        internal static string strAvailableVersion
-        {
-            get
-            {
+        internal static string strAvailableVersion {
+            get {
                 return ResourceManager.GetString("strAvailableVersion", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
-        internal static string strBack
-        {
-            get
-            {
+        internal static string strBack {
+            get {
                 return ResourceManager.GetString("strBack", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Apply.
         /// </summary>
-        internal static string strButtonApply
-        {
-            get
-            {
+        internal static string strButtonApply {
+            get {
                 return ResourceManager.GetString("strButtonApply", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Browse....
         /// </summary>
-        internal static string strButtonBrowse
-        {
-            get
-            {
+        internal static string strButtonBrowse {
+            get {
                 return ResourceManager.GetString("strButtonBrowse", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Cancel.
         /// </summary>
-        internal static string strButtonCancel
-        {
-            get
-            {
+        internal static string strButtonCancel {
+            get {
                 return ResourceManager.GetString("strButtonCancel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Change.
         /// </summary>
-        internal static string strButtonChange
-        {
-            get
-            {
+        internal static string strButtonChange {
+            get {
                 return ResourceManager.GetString("strButtonChange", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Close.
         /// </summary>
-        internal static string strButtonClose
-        {
-            get
-            {
+        internal static string strButtonClose {
+            get {
                 return ResourceManager.GetString("strButtonClose", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Default Inheritance.
         /// </summary>
-        internal static string strButtonDefaultInheritance
-        {
-            get
-            {
+        internal static string strButtonDefaultInheritance {
+            get {
                 return ResourceManager.GetString("strButtonDefaultInheritance", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Default Properties.
         /// </summary>
-        internal static string strButtonDefaultProperties
-        {
-            get
-            {
+        internal static string strButtonDefaultProperties {
+            get {
                 return ResourceManager.GetString("strButtonDefaultProperties", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disconnect.
         /// </summary>
-        internal static string strButtonDisconnect
-        {
-            get
-            {
+        internal static string strButtonDisconnect {
+            get {
                 return ResourceManager.GetString("strButtonDisconnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Icon.
         /// </summary>
-        internal static string strButtonIcon
-        {
-            get
-            {
+        internal static string strButtonIcon {
+            get {
                 return ResourceManager.GetString("strButtonIcon", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Import.
         /// </summary>
-        internal static string strButtonImport
-        {
-            get
-            {
+        internal static string strButtonImport {
+            get {
                 return ResourceManager.GetString("strButtonImport", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Inheritance.
         /// </summary>
-        internal static string strButtonInheritance
-        {
-            get
-            {
+        internal static string strButtonInheritance {
+            get {
                 return ResourceManager.GetString("strButtonInheritance", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Launch.
         /// </summary>
-        internal static string strButtonLaunch
-        {
-            get
-            {
+        internal static string strButtonLaunch {
+            get {
                 return ResourceManager.GetString("strButtonLaunch", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Launch PuTTY.
         /// </summary>
-        internal static string strButtonLaunchPutty
-        {
-            get
-            {
+        internal static string strButtonLaunchPutty {
+            get {
                 return ResourceManager.GetString("strButtonLaunchPutty", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;New.
         /// </summary>
-        internal static string strButtonNew
-        {
-            get
-            {
+        internal static string strButtonNew {
+            get {
                 return ResourceManager.GetString("strButtonNew", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;OK.
         /// </summary>
-        internal static string strButtonOK
-        {
-            get
-            {
+        internal static string strButtonOK {
+            get {
                 return ResourceManager.GetString("strButtonOK", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Properties.
         /// </summary>
-        internal static string strButtonProperties
-        {
-            get
-            {
+        internal static string strButtonProperties {
+            get {
                 return ResourceManager.GetString("strButtonProperties", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Scan.
         /// </summary>
-        internal static string strButtonScan
-        {
-            get
-            {
+        internal static string strButtonScan {
+            get {
                 return ResourceManager.GetString("strButtonScan", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Stop.
         /// </summary>
-        internal static string strButtonStop
-        {
-            get
-            {
+        internal static string strButtonStop {
+            get {
                 return ResourceManager.GetString("strButtonStop", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Test Proxy.
         /// </summary>
-        internal static string strButtonTestProxy
-        {
-            get
-            {
+        internal static string strButtonTestProxy {
+            get {
                 return ResourceManager.GetString("strButtonTestProxy", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to You cannot import a normal connection file.
         ///Please use File - Open Connection File for normal connection files!.
         /// </summary>
-        internal static string strCannotImportNormalSessionFile
-        {
-            get
-            {
+        internal static string strCannotImportNormalSessionFile {
+            get {
                 return ResourceManager.GetString("strCannotImportNormalSessionFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot start Port Scan, incorrect IP format!.
         /// </summary>
-        internal static string strCannotStartPortScan
-        {
-            get
-            {
+        internal static string strCannotStartPortScan {
+            get {
                 return ResourceManager.GetString("strCannotStartPortScan", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Appearance.
         /// </summary>
-        internal static string strCategoryAppearance
-        {
-            get
-            {
+        internal static string strCategoryAppearance {
+            get {
                 return ResourceManager.GetString("strCategoryAppearance", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection.
         /// </summary>
-        internal static string strCategoryConnection
-        {
-            get
-            {
+        internal static string strCategoryConnection {
+            get {
                 return ResourceManager.GetString("strCategoryConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Credentials.
         /// </summary>
-        internal static string strCategoryCredentials
-        {
-            get
-            {
+        internal static string strCategoryCredentials {
+            get {
                 return ResourceManager.GetString("strCategoryCredentials", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Display.
         /// </summary>
-        internal static string strCategoryDisplay
-        {
-            get
-            {
+        internal static string strCategoryDisplay {
+            get {
                 return ResourceManager.GetString("strCategoryDisplay", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Gateway.
         /// </summary>
-        internal static string strCategoryGateway
-        {
-            get
-            {
+        internal static string strCategoryGateway {
+            get {
                 return ResourceManager.GetString("strCategoryGateway", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
-        internal static string strCategoryGeneral
-        {
-            get
-            {
+        internal static string strCategoryGeneral {
+            get {
                 return ResourceManager.GetString("strCategoryGeneral", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Miscellaneous.
         /// </summary>
-        internal static string strCategoryMiscellaneous
-        {
-            get
-            {
+        internal static string strCategoryMiscellaneous {
+            get {
                 return ResourceManager.GetString("strCategoryMiscellaneous", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Protocol.
         /// </summary>
-        internal static string strCategoryProtocol
-        {
-            get
-            {
+        internal static string strCategoryProtocol {
+            get {
                 return ResourceManager.GetString("strCategoryProtocol", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Proxy.
         /// </summary>
-        internal static string strCategoryProxy
-        {
-            get
-            {
+        internal static string strCategoryProxy {
+            get {
                 return ResourceManager.GetString("strCategoryProxy", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Redirect.
         /// </summary>
-        internal static string strCategoryRedirect
-        {
-            get
-            {
+        internal static string strCategoryRedirect {
+            get {
                 return ResourceManager.GetString("strCategoryRedirect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Always show this screen at startup.
         /// </summary>
-        internal static string strCcAlwaysShowScreen
-        {
-            get
-            {
+        internal static string strCcAlwaysShowScreen {
+            get {
                 return ResourceManager.GetString("strCcAlwaysShowScreen", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Refresh.
         /// </summary>
-        internal static string strCcCheckAgain
-        {
-            get
-            {
+        internal static string strCcCheckAgain {
+            get {
                 return ResourceManager.GetString("strCcCheckAgain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Check failed!.
         /// </summary>
-        internal static string strCcCheckFailed
-        {
-            get
-            {
+        internal static string strCcCheckFailed {
+            get {
                 return ResourceManager.GetString("strCcCheckFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Check succeeded!.
         /// </summary>
-        internal static string strCcCheckSucceeded
-        {
-            get
-            {
+        internal static string strCcCheckSucceeded {
+            get {
                 return ResourceManager.GetString("strCcCheckSucceeded", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The (RDP) Sessions feature requires that you have a copy of eolwtscom.dll registered on your system.
         ///mRemoteNG ships with this component but it is not registered automatically if you do not use the mRemoteNG Installer.
         ///To register it manually, run the following command from an elevated command prompt: regsvr32 &quot;C:\Program Files\mRemoteNG\eolwtscom.dll&quot; (where C:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
         ///If this check still fails or you are unable to use the (RDP) Sessions feat [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string strCcEOLFailed
-        {
-            get
-            {
+        internal static string strCcEOLFailed {
+            get {
                 return ResourceManager.GetString("strCcEOLFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to EOLWTSCOM was found and seems to be registered properly..
         /// </summary>
-        internal static string strCcEOLOK
-        {
-            get
-            {
+        internal static string strCcEOLOK {
+            get {
                 return ResourceManager.GetString("strCcEOLOK", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
         ///You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
         ///When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
         ///If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please c [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string strCcGeckoFailed
-        {
-            get
-            {
+        internal static string strCcGeckoFailed {
+            get {
                 return ResourceManager.GetString("strCcGeckoFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to GeckoFx was found and seems to be installed properly..
         /// </summary>
-        internal static string strCcGeckoOK
-        {
-            get
-            {
+        internal static string strCcGeckoOK {
+            get {
                 return ResourceManager.GetString("strCcGeckoOK", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
         ///If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
         ///To do this open up the run dialog (Start - Run) and enter the following: regsvr32 &quot;c:\Program Files\Citrix\ICA Client\wfica.ocx&quot; (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin install [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string strCcICAFailed
-        {
-            get
-            {
+        internal static string strCcICAFailed {
+            get {
                 return ResourceManager.GetString("strCcICAFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to All ICA components were found and seem to be registered properly.
         ///Citrix ICA Client Control Version {0}.
         /// </summary>
-        internal static string strCcICAOK
-        {
-            get
-            {
+        internal static string strCcICAOK {
+            get {
                 return ResourceManager.GetString("strCcICAOK", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to not installed properly.
         /// </summary>
-        internal static string strCcNotInstalledProperly
-        {
-            get
-            {
+        internal static string strCcNotInstalledProperly {
+            get {
                 return ResourceManager.GetString("strCcNotInstalledProperly", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path.
         ///Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path).
         /// </summary>
-        internal static string strCcPuttyFailed
-        {
-            get
-            {
+        internal static string strCcPuttyFailed {
+            get {
                 return ResourceManager.GetString("strCcPuttyFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The PuTTY executable was found and should be ready to use..
         /// </summary>
-        internal static string strCcPuttyOK
-        {
-            get
-            {
+        internal static string strCcPuttyOK {
+            get {
                 return ResourceManager.GetString("strCcPuttyOK", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services) Client 8.0 installed. You can download it here: http://support.microsoft.com/kb/925876
         ///If this check still fails or you are unable to use RDP, please consult the at {0}..
         /// </summary>
-        internal static string strCcRDPFailed
-        {
-            get
-            {
+        internal static string strCcRDPFailed {
+            get {
                 return ResourceManager.GetString("strCcRDPFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The following RDP protocol versions are supported on this machine: {0}.
         /// </summary>
-        internal static string strCcRDPOK
-        {
-            get
-            {
+        internal static string strCcRDPOK {
+            get {
                 return ResourceManager.GetString("strCcRDPOK", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC requires VncSharp.dll to be located in your mRemoteNG application folder.
         ///Please make sure that you have the VncSharp.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
         ///If you are still not able to pass this check or use VNC in mRemoteNG please consult the at {0}..
         /// </summary>
-        internal static string strCcVNCFailed
-        {
-            get
-            {
+        internal static string strCcVNCFailed {
+            get {
                 return ResourceManager.GetString("strCcVNCFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to All VNC components were found and seem to be registered properly.
         ///VncSharp Control Version {0}.
         /// </summary>
-        internal static string strCcVNCOK
-        {
-            get
-            {
+        internal static string strCcVNCOK {
+            get {
                 return ResourceManager.GetString("strCcVNCOK", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only).
         /// </summary>
-        internal static string strCheckboxAutomaticReconnect
-        {
-            get
-            {
+        internal static string strCheckboxAutomaticReconnect {
+            get {
                 return ResourceManager.GetString("strCheckboxAutomaticReconnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Domain.
         /// </summary>
-        internal static string strCheckboxDomain
-        {
-            get
-            {
+        internal static string strCheckboxDomain {
+            get {
                 return ResourceManager.GetString("strCheckboxDomain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not show this message again..
         /// </summary>
-        internal static string strCheckboxDoNotShowThisMessageAgain
-        {
-            get
-            {
+        internal static string strCheckboxDoNotShowThisMessageAgain {
+            get {
                 return ResourceManager.GetString("strCheckboxDoNotShowThisMessageAgain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Inheritance.
         /// </summary>
-        internal static string strCheckboxInheritance
-        {
-            get
-            {
+        internal static string strCheckboxInheritance {
+            get {
                 return ResourceManager.GetString("strCheckboxInheritance", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
-        internal static string strCheckboxPassword
-        {
-            get
-            {
+        internal static string strCheckboxPassword {
+            get {
                 return ResourceManager.GetString("strCheckboxPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to This proxy server requires authentication.
         /// </summary>
-        internal static string strCheckboxProxyAuthentication
-        {
-            get
-            {
+        internal static string strCheckboxProxyAuthentication {
+            get {
                 return ResourceManager.GetString("strCheckboxProxyAuthentication", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use custom PuTTY path:.
         /// </summary>
-        internal static string strCheckboxPuttyPath
-        {
-            get
-            {
+        internal static string strCheckboxPuttyPath {
+            get {
                 return ResourceManager.GetString("strCheckboxPuttyPath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reconnect when ready.
         /// </summary>
-        internal static string strCheckboxReconnectWhenReady
-        {
-            get
-            {
+        internal static string strCheckboxReconnectWhenReady {
+            get {
                 return ResourceManager.GetString("strCheckboxReconnectWhenReady", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use a proxy server to connect.
         /// </summary>
-        internal static string strCheckboxUpdateUseProxy
-        {
-            get
-            {
+        internal static string strCheckboxUpdateUseProxy {
+            get {
                 return ResourceManager.GetString("strCheckboxUpdateUseProxy", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
-        internal static string strCheckboxUsername
-        {
-            get
-            {
+        internal static string strCheckboxUsername {
+            get {
                 return ResourceManager.GetString("strCheckboxUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Wait for exit.
         /// </summary>
-        internal static string strCheckboxWaitForExit
-        {
-            get
-            {
+        internal static string strCheckboxWaitForExit {
+            get {
                 return ResourceManager.GetString("strCheckboxWaitForExit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Check Again.
         /// </summary>
-        internal static string strCheckForUpdate
-        {
-            get
-            {
+        internal static string strCheckForUpdate {
+            get {
                 return ResourceManager.GetString("strCheckForUpdate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Check for updates at startup.
         /// </summary>
-        internal static string strCheckForUpdatesOnStartup
-        {
-            get
-            {
+        internal static string strCheckForUpdatesOnStartup {
+            get {
                 return ResourceManager.GetString("strCheckForUpdatesOnStartup", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Check now.
         /// </summary>
-        internal static string strCheckNow
-        {
-            get
-            {
+        internal static string strCheckNow {
+            get {
                 return ResourceManager.GetString("strCheckNow", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Check proper installation of components at startup.
         /// </summary>
-        internal static string strCheckProperInstallationOfComponentsAtStartup
-        {
-            get
-            {
+        internal static string strCheckProperInstallationOfComponentsAtStartup {
+            get {
                 return ResourceManager.GetString("strCheckProperInstallationOfComponentsAtStartup", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose a path for the mRemoteNG log file.
         /// </summary>
-        internal static string strChooseLogPath
-        {
-            get
-            {
+        internal static string strChooseLogPath {
+            get {
                 return ResourceManager.GetString("strChooseLogPath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose panel before connecting.
         /// </summary>
-        internal static string strChoosePanelBeforeConnecting
-        {
-            get
-            {
+        internal static string strChoosePanelBeforeConnecting {
+            get {
                 return ResourceManager.GetString("strChoosePanelBeforeConnecting", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose path.
         /// </summary>
-        internal static string strChoosePath
-        {
-            get
-            {
+        internal static string strChoosePath {
+            get {
                 return ResourceManager.GetString("strChoosePath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Closed Ports.
         /// </summary>
-        internal static string strClosedPorts
-        {
-            get
-            {
+        internal static string strClosedPorts {
+            get {
                 return ResourceManager.GetString("strClosedPorts", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Close to notification area.
         /// </summary>
@@ -1539,1098 +1270,909 @@ namespace mRemoteNG
         /// <summary>
         ///   Looks up a localized string similar to Collapse all folders.
         /// </summary>
-        internal static string strCollapseAllFolders
-        {
-            get
-            {
+        internal static string strCollapseAllFolders {
+            get {
                 return ResourceManager.GetString("strCollapseAllFolders", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Arguments.
         /// </summary>
-        internal static string strColumnArguments
-        {
-            get
-            {
+        internal static string strColumnArguments {
+            get {
                 return ResourceManager.GetString("strColumnArguments", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Display Name.
         /// </summary>
-        internal static string strColumnDisplayName
-        {
-            get
-            {
+        internal static string strColumnDisplayName {
+            get {
                 return ResourceManager.GetString("strColumnDisplayName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Filename.
         /// </summary>
-        internal static string strColumnFilename
-        {
-            get
-            {
+        internal static string strColumnFilename {
+            get {
                 return ResourceManager.GetString("strColumnFilename", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Hostname/IP.
         /// </summary>
-        internal static string strColumnHostnameIP
-        {
-            get
-            {
+        internal static string strColumnHostnameIP {
+            get {
                 return ResourceManager.GetString("strColumnHostnameIP", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Message.
         /// </summary>
-        internal static string strColumnMessage
-        {
-            get
-            {
+        internal static string strColumnMessage {
+            get {
                 return ResourceManager.GetString("strColumnMessage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
-        internal static string strColumnUsername
-        {
-            get
-            {
+        internal static string strColumnUsername {
+            get {
                 return ResourceManager.GetString("strColumnUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Wait For Exit.
         /// </summary>
-        internal static string strColumnWaitForExit
-        {
-            get
-            {
+        internal static string strColumnWaitForExit {
+            get {
                 return ResourceManager.GetString("strColumnWaitForExit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to E&amp;xit {0}.
         /// </summary>
-        internal static string strCommandExitProgram
-        {
-            get
-            {
+        internal static string strCommandExitProgram {
+            get {
                 return ResourceManager.GetString("strCommandExitProgram", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t parse command line args!.
         /// </summary>
-        internal static string strCommandLineArgsCouldNotBeParsed
-        {
-            get
-            {
+        internal static string strCommandLineArgsCouldNotBeParsed {
+            get {
                 return ResourceManager.GetString("strCommandLineArgsCouldNotBeParsed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Open a connection file.
         /// </summary>
-        internal static string strCommandOpenConnectionFile
-        {
-            get
-            {
+        internal static string strCommandOpenConnectionFile {
+            get {
                 return ResourceManager.GetString("strCommandOpenConnectionFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Try again.
         /// </summary>
-        internal static string strCommandTryAgain
-        {
-            get
-            {
+        internal static string strCommandTryAgain {
+            get {
                 return ResourceManager.GetString("strCommandTryAgain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0} has detected the Lenovo Auto Scroll Utility running on this system. This utility is known to cause problems with {0}. It is recommended that you disable or uninstall it..
         /// </summary>
-        internal static string strCompatibilityLenovoAutoScrollUtilityDetected
-        {
-            get
-            {
+        internal static string strCompatibilityLenovoAutoScrollUtilityDetected {
+            get {
                 return ResourceManager.GetString("strCompatibilityLenovoAutoScrollUtilityDetected", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Compatibility problem detected.
         /// </summary>
-        internal static string strCompatibilityProblemDetected
-        {
-            get
-            {
+        internal static string strCompatibilityProblemDetected {
+            get {
                 return ResourceManager.GetString("strCompatibilityProblemDetected", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Components Check.
         /// </summary>
-        internal static string strComponentsCheck
-        {
-            get
-            {
+        internal static string strComponentsCheck {
+            get {
                 return ResourceManager.GetString("strComponentsCheck", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to btnIcon_Click failed!.
         /// </summary>
-        internal static string strConfigPropertyGridButtonIconClickFailed
-        {
-            get
-            {
+        internal static string strConfigPropertyGridButtonIconClickFailed {
+            get {
                 return ResourceManager.GetString("strConfigPropertyGridButtonIconClickFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ShowHideGridItems failed!.
         /// </summary>
-        internal static string strConfigPropertyGridHideItemsFailed
-        {
-            get
-            {
+        internal static string strConfigPropertyGridHideItemsFailed {
+            get {
                 return ResourceManager.GetString("strConfigPropertyGridHideItemsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to IconMenu_Click failed!.
         /// </summary>
-        internal static string strConfigPropertyGridMenuClickFailed
-        {
-            get
-            {
+        internal static string strConfigPropertyGridMenuClickFailed {
+            get {
                 return ResourceManager.GetString("strConfigPropertyGridMenuClickFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Property Grid object failed!.
         /// </summary>
-        internal static string strConfigPropertyGridObjectFailed
-        {
-            get
-            {
+        internal static string strConfigPropertyGridObjectFailed {
+            get {
                 return ResourceManager.GetString("strConfigPropertyGridObjectFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SetHostStatus failed!.
         /// </summary>
-        internal static string strConfigPropertyGridSetHostStatusFailed
-        {
-            get
-            {
+        internal static string strConfigPropertyGridSetHostStatusFailed {
+            get {
                 return ResourceManager.GetString("strConfigPropertyGridSetHostStatusFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to pGrid_PopertyValueChanged failed!.
         /// </summary>
-        internal static string strConfigPropertyGridValueFailed
-        {
-            get
-            {
+        internal static string strConfigPropertyGridValueFailed {
+            get {
                 return ResourceManager.GetString("strConfigPropertyGridValueFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config UI load failed!.
         /// </summary>
-        internal static string strConfigUiLoadFailed
-        {
-            get
-            {
+        internal static string strConfigUiLoadFailed {
+            get {
                 return ResourceManager.GetString("strConfigUiLoadFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do you want to close the connection:
         ///&quot;{0}&quot;?.
         /// </summary>
-        internal static string strConfirmCloseConnectionMainInstruction
-        {
-            get
-            {
+        internal static string strConfirmCloseConnectionMainInstruction {
+            get {
                 return ResourceManager.GetString("strConfirmCloseConnectionMainInstruction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to close all connections except for &quot;{0}&quot;?.
         /// </summary>
-        internal static string strConfirmCloseConnectionOthersInstruction
-        {
-            get
-            {
+        internal static string strConfirmCloseConnectionOthersInstruction {
+            get {
                 return ResourceManager.GetString("strConfirmCloseConnectionOthersInstruction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to close the panel, &quot;{0}&quot;? Any connections that it contains will also be closed..
         /// </summary>
-        internal static string strConfirmCloseConnectionPanelMainInstruction
-        {
-            get
-            {
+        internal static string strConfirmCloseConnectionPanelMainInstruction {
+            get {
                 return ResourceManager.GetString("strConfirmCloseConnectionPanelMainInstruction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to close all connections to the right of &quot;{0}&quot;?.
         /// </summary>
-        internal static string strConfirmCloseConnectionRightInstruction
-        {
-            get
-            {
+        internal static string strConfirmCloseConnectionRightInstruction {
+            get {
                 return ResourceManager.GetString("strConfirmCloseConnectionRightInstruction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the credential record, {0}?.
         /// </summary>
-        internal static string strConfirmDeleteCredentialRecord
-        {
-            get
-            {
+        internal static string strConfirmDeleteCredentialRecord {
+            get {
                 return ResourceManager.GetString("strConfirmDeleteCredentialRecord", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the external tool, &quot;{0}&quot;?.
         /// </summary>
-        internal static string strConfirmDeleteExternalTool
-        {
-            get
-            {
+        internal static string strConfirmDeleteExternalTool {
+            get {
                 return ResourceManager.GetString("strConfirmDeleteExternalTool", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the {0} selected external tools?.
         /// </summary>
-        internal static string strConfirmDeleteExternalToolMultiple
-        {
-            get
-            {
+        internal static string strConfirmDeleteExternalToolMultiple {
+            get {
                 return ResourceManager.GetString("strConfirmDeleteExternalToolMultiple", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the connection, &quot;{0}&quot;?.
         /// </summary>
-        internal static string strConfirmDeleteNodeConnection
-        {
-            get
-            {
+        internal static string strConfirmDeleteNodeConnection {
+            get {
                 return ResourceManager.GetString("strConfirmDeleteNodeConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the empty folder, &quot;{0}&quot;?.
         /// </summary>
-        internal static string strConfirmDeleteNodeFolder
-        {
-            get
-            {
+        internal static string strConfirmDeleteNodeFolder {
+            get {
                 return ResourceManager.GetString("strConfirmDeleteNodeFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the folder, &quot;{0}&quot;? Any folders or connections that it contains will also be deleted..
         /// </summary>
-        internal static string strConfirmDeleteNodeFolderNotEmpty
-        {
-            get
-            {
+        internal static string strConfirmDeleteNodeFolderNotEmpty {
+            get {
                 return ResourceManager.GetString("strConfirmDeleteNodeFolderNotEmpty", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do you want to close all open connections?.
         /// </summary>
-        internal static string strConfirmExitMainInstruction
-        {
-            get
-            {
+        internal static string strConfirmExitMainInstruction {
+            get {
                 return ResourceManager.GetString("strConfirmExitMainInstruction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to reset the panels to their default layout?.
         /// </summary>
-        internal static string strConfirmResetLayout
-        {
-            get
-            {
+        internal static string strConfirmResetLayout {
+            get {
                 return ResourceManager.GetString("strConfirmResetLayout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connect.
         /// </summary>
-        internal static string strConnect
-        {
-            get
-            {
+        internal static string strConnect {
+            get {
                 return ResourceManager.GetString("strConnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connect in fullscreen mode.
         /// </summary>
-        internal static string strConnectInFullscreen
-        {
-            get
-            {
+        internal static string strConnectInFullscreen {
+            get {
                 return ResourceManager.GetString("strConnectInFullscreen", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connecting....
         /// </summary>
-        internal static string strConnecting
-        {
-            get
-            {
+        internal static string strConnecting {
+            get {
                 return ResourceManager.GetString("strConnecting", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Protocol Event Connected.
         /// </summary>
-        internal static string strConnectionEventConnected
-        {
-            get
-            {
+        internal static string strConnectionEventConnected {
+            get {
                 return ResourceManager.GetString("strConnectionEventConnected", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection to &quot;{0}&quot; via &quot;{1}&quot; established by user &quot;{2}&quot; (Description: &quot;{3}&quot;; User Field: &quot;{4}&quot;).
         /// </summary>
-        internal static string strConnectionEventConnectedDetail
-        {
-            get
-            {
+        internal static string strConnectionEventConnectedDetail {
+            get {
                 return ResourceManager.GetString("strConnectionEventConnectedDetail", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection failed!.
+        /// </summary>
+        internal static string strConnectionEventConnectionFailed {
+            get {
+                return ResourceManager.GetString("strConnectionEventConnectionFailed", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to A connection protocol error occurred. Host: &quot;{1}&quot;; Error code: &quot;{2}&quot;; Error Description: &quot;{0}&quot;.
         /// </summary>
-        internal static string strConnectionEventErrorOccured
-        {
-            get
-            {
+        internal static string strConnectionEventErrorOccured {
+            get {
                 return ResourceManager.GetString("strConnectionEventErrorOccured", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection file path.
         /// </summary>
-        internal static string strConnectionFilePath
-        {
-            get
-            {
+        internal static string strConnectionFilePath {
+            get {
                 return ResourceManager.GetString("strConnectionFilePath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Opening connection failed!.
         /// </summary>
-        internal static string strConnectionOpenFailed
-        {
-            get
-            {
+        internal static string strConnectionOpenFailed {
+            get {
                 return ResourceManager.GetString("strConnectionOpenFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot open connection: No hostname specified!.
         /// </summary>
-        internal static string strConnectionOpenFailedNoHostname
-        {
-            get
-            {
+        internal static string strConnectionOpenFailedNoHostname {
+            get {
                 return ResourceManager.GetString("strConnectionOpenFailedNoHostname", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP error!
         ///Error Code: {0}
         ///Error Description: {1}.
         /// </summary>
-        internal static string strConnectionRdpErrorDetail
-        {
-            get
-            {
+        internal static string strConnectionRdpErrorDetail {
+            get {
                 return ResourceManager.GetString("strConnectionRdpErrorDetail", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connections.
         /// </summary>
-        internal static string strConnections
-        {
-            get
-            {
+        internal static string strConnections {
+            get {
                 return ResourceManager.GetString("strConnections", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t set default port!.
         /// </summary>
-        internal static string strConnectionSetDefaultPortFailed
-        {
-            get
-            {
+        internal static string strConnectionSetDefaultPortFailed {
+            get {
                 return ResourceManager.GetString("strConnectionSetDefaultPortFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t create backup of connections file!.
         /// </summary>
-        internal static string strConnectionsFileBackupFailed
-        {
-            get
-            {
+        internal static string strConnectionsFileBackupFailed {
+            get {
                 return ResourceManager.GetString("strConnectionsFileBackupFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t import connections file!.
         /// </summary>
-        internal static string strConnectionsFileCouldNotBeImported
-        {
-            get
-            {
+        internal static string strConnectionsFileCouldNotBeImported {
+            get {
                 return ResourceManager.GetString("strConnectionsFileCouldNotBeImported", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connections file &quot;{0}&quot; could not be loaded!.
         /// </summary>
-        internal static string strConnectionsFileCouldNotBeLoaded
-        {
-            get
-            {
+        internal static string strConnectionsFileCouldNotBeLoaded {
+            get {
                 return ResourceManager.GetString("strConnectionsFileCouldNotBeLoaded", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connections file &quot;{0}&quot; could not be loaded!
         ///Starting with new connections file..
         /// </summary>
-        internal static string strConnectionsFileCouldNotBeLoadedNew
-        {
-            get
-            {
+        internal static string strConnectionsFileCouldNotBeLoadedNew {
+            get {
                 return ResourceManager.GetString("strConnectionsFileCouldNotBeLoadedNew", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t save connections file!.
         /// </summary>
-        internal static string strConnectionsFileCouldNotBeSaved
-        {
-            get
-            {
+        internal static string strConnectionsFileCouldNotBeSaved {
+            get {
                 return ResourceManager.GetString("strConnectionsFileCouldNotBeSaved", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t save connections file as &quot;{0}&quot;!.
         /// </summary>
-        internal static string strConnectionsFileCouldNotSaveAs
-        {
-            get
-            {
+        internal static string strConnectionsFileCouldNotSaveAs {
+            get {
                 return ResourceManager.GetString("strConnectionsFileCouldNotSaveAs", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connect without credentials.
         /// </summary>
-        internal static string strConnectNoCredentials
-        {
-            get
-            {
+        internal static string strConnectNoCredentials {
+            get {
                 return ResourceManager.GetString("strConnectNoCredentials", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connect to console session.
         /// </summary>
-        internal static string strConnectToConsoleSession
-        {
-            get
-            {
+        internal static string strConnectToConsoleSession {
+            get {
                 return ResourceManager.GetString("strConnectToConsoleSession", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connect (with options).
         /// </summary>
-        internal static string strConnectWithOptions
-        {
-            get
-            {
+        internal static string strConnectWithOptions {
+            get {
                 return ResourceManager.GetString("strConnectWithOptions", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection to {0} via {1} closed by user {2}..
         /// </summary>
-        internal static string strConnenctionClosedByUser
-        {
-            get
-            {
+        internal static string strConnenctionClosedByUser {
+            get {
                 return ResourceManager.GetString("strConnenctionClosedByUser", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection to {0} via {1} closed by user {2}.  (Description: &quot;{3}&quot;; User Field: &quot;{4}&quot;).
         /// </summary>
-        internal static string strConnenctionClosedByUserDetail
-        {
-            get
-            {
+        internal static string strConnenctionClosedByUserDetail {
+            get {
                 return ResourceManager.GetString("strConnenctionClosedByUserDetail", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection Event Closed.
         /// </summary>
-        internal static string strConnenctionCloseEvent
-        {
-            get
-            {
+        internal static string strConnenctionCloseEvent {
+            get {
                 return ResourceManager.GetString("strConnenctionCloseEvent", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection Event Closed failed!.
         /// </summary>
-        internal static string strConnenctionCloseEventFailed
-        {
-            get
-            {
+        internal static string strConnenctionCloseEventFailed {
+            get {
                 return ResourceManager.GetString("strConnenctionCloseEventFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t create new connections file!.
         /// </summary>
-        internal static string strCouldNotCreateNewConnectionsFile
-        {
-            get
-            {
+        internal static string strCouldNotCreateNewConnectionsFile {
+            get {
                 return ResourceManager.GetString("strCouldNotCreateNewConnectionsFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Could not find ToolStrip control in FilteredPropertyGrid..
         /// </summary>
-        internal static string strCouldNotFindToolStripInFilteredPropertyGrid
-        {
-            get
-            {
+        internal static string strCouldNotFindToolStripInFilteredPropertyGrid {
+            get {
                 return ResourceManager.GetString("strCouldNotFindToolStripInFilteredPropertyGrid", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Create and open new file.
         /// </summary>
-        internal static string strCreateAndOpenNewFile
-        {
-            get
-            {
+        internal static string strCreateAndOpenNewFile {
+            get {
                 return ResourceManager.GetString("strCreateAndOpenNewFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Create an empty panel when mRemoteNG starts.
         /// </summary>
-        internal static string strCreateEmptyPanelOnStartUp
-        {
-            get
-            {
+        internal static string strCreateEmptyPanelOnStartUp {
+            get {
                 return ResourceManager.GetString("strCreateEmptyPanelOnStartUp", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Credential Editor.
         /// </summary>
-        internal static string strCredentialEditor
-        {
-            get
-            {
+        internal static string strCredentialEditor {
+            get {
                 return ResourceManager.GetString("strCredentialEditor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Credential Manager.
         /// </summary>
-        internal static string strCredentialManager
-        {
-            get
-            {
+        internal static string strCredentialManager {
+            get {
                 return ResourceManager.GetString("strCredentialManager", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to In v1.76 we have introduced a credential management system. This feature requires a significant change in how we store and interact with credentials within mRemoteNG. You will be required to perform a one-way upgrade of your mRemoteNG connections file.
         ///
         ///This page will walk you through the process of upgrading your connections file or give you a chance to open a different connections file if you do not want to perform the upgrade..
         /// </summary>
-        internal static string strCredentialManagerUpgradeDescription
-        {
-            get
-            {
+        internal static string strCredentialManagerUpgradeDescription {
+            get {
                 return ResourceManager.GetString("strCredentialManagerUpgradeDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Installed version.
         /// </summary>
-        internal static string strCurrentVersion
-        {
-            get
-            {
+        internal static string strCurrentVersion {
+            get {
                 return ResourceManager.GetString("strCurrentVersion", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Debug.
         /// </summary>
-        internal static string strDebug
-        {
-            get
-            {
+        internal static string strDebug {
+            get {
                 return ResourceManager.GetString("strDebug", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Default Theme.
         /// </summary>
-        internal static string strDefaultTheme
-        {
-            get
-            {
+        internal static string strDefaultTheme {
+            get {
                 return ResourceManager.GetString("strDefaultTheme", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Delete....
         /// </summary>
-        internal static string strDelete
-        {
-            get
-            {
+        internal static string strDelete {
+            get {
                 return ResourceManager.GetString("strDelete", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Detect.
         /// </summary>
-        internal static string strDetect
-        {
-            get
-            {
+        internal static string strDetect {
+            get {
                 return ResourceManager.GetString("strDetect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Don&apos;t connect to console session.
         /// </summary>
-        internal static string strDontConnectToConsoleSessionMenuItem
-        {
-            get
-            {
+        internal static string strDontConnectToConsoleSessionMenuItem {
+            get {
                 return ResourceManager.GetString("strDontConnectToConsoleSessionMenuItem", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Don&apos;t connect if authentication fails.
         /// </summary>
-        internal static string strDontConnectWhenAuthFails
-        {
-            get
-            {
+        internal static string strDontConnectWhenAuthFails {
+            get {
                 return ResourceManager.GetString("strDontConnectWhenAuthFails", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Double click on tab closes it.
         /// </summary>
-        internal static string strDoubleClickTabClosesIt
-        {
-            get
-            {
+        internal static string strDoubleClickTabClosesIt {
+            get {
                 return ResourceManager.GetString("strDoubleClickTabClosesIt", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Download and Install.
         /// </summary>
-        internal static string strDownloadAndInstall
-        {
-            get
-            {
+        internal static string strDownloadAndInstall {
+            get {
                 return ResourceManager.GetString("strDownloadAndInstall", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Download.
         /// </summary>
-        internal static string strDownloadPortable
-        {
-            get
-            {
+        internal static string strDownloadPortable {
+            get {
                 return ResourceManager.GetString("strDownloadPortable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Duplicate.
         /// </summary>
-        internal static string strDuplicate
-        {
-            get
-            {
+        internal static string strDuplicate {
+            get {
                 return ResourceManager.GetString("strDuplicate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do you want to continue with no password?.
         /// </summary>
-        internal static string strEmptyPasswordContinue
-        {
-            get
-            {
+        internal static string strEmptyPasswordContinue {
+            get {
                 return ResourceManager.GetString("strEmptyPasswordContinue", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to For empty Username, Password or Domain fields use:.
         /// </summary>
-        internal static string strEmptyUsernamePasswordDomainFields
-        {
-            get
-            {
+        internal static string strEmptyUsernamePasswordDomainFields {
+            get {
                 return ResourceManager.GetString("strEmptyUsernamePasswordDomainFields", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 128-bit.
         /// </summary>
-        internal static string strEnc128Bit
-        {
-            get
-            {
+        internal static string strEnc128Bit {
+            get {
                 return ResourceManager.GetString("strEnc128Bit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 128-bit (logon only).
         /// </summary>
-        internal static string strEnc128BitLogonOnly
-        {
-            get
-            {
+        internal static string strEnc128BitLogonOnly {
+            get {
                 return ResourceManager.GetString("strEnc128BitLogonOnly", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 40-bit.
         /// </summary>
-        internal static string strEnc40Bit
-        {
-            get
-            {
+        internal static string strEnc40Bit {
+            get {
                 return ResourceManager.GetString("strEnc40Bit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 56-bit.
         /// </summary>
-        internal static string strEnc56Bit
-        {
-            get
-            {
+        internal static string strEnc56Bit {
+            get {
                 return ResourceManager.GetString("strEnc56Bit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Basic.
         /// </summary>
-        internal static string strEncBasic
-        {
-            get
-            {
+        internal static string strEncBasic {
+            get {
                 return ResourceManager.GetString("strEncBasic", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Completely encrypt connection file.
         /// </summary>
-        internal static string strEncryptCompleteConnectionFile
-        {
-            get
-            {
+        internal static string strEncryptCompleteConnectionFile {
+            get {
                 return ResourceManager.GetString("strEncryptCompleteConnectionFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Block Cipher Mode.
         /// </summary>
-        internal static string strEncryptionBlockCipherMode
-        {
-            get
-            {
+        internal static string strEncryptionBlockCipherMode {
+            get {
                 return ResourceManager.GetString("strEncryptionBlockCipherMode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Encryption Engine.
         /// </summary>
-        internal static string strEncryptionEngine
-        {
-            get
-            {
+        internal static string strEncryptionEngine {
+            get {
                 return ResourceManager.GetString("strEncryptionEngine", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Key Derivation Function Iterations.
         /// </summary>
-        internal static string strEncryptionKeyDerivationIterations
-        {
-            get
-            {
+        internal static string strEncryptionKeyDerivationIterations {
+            get {
                 return ResourceManager.GetString("strEncryptionKeyDerivationIterations", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Last IP.
         /// </summary>
-        internal static string strEndIP
-        {
-            get
-            {
+        internal static string strEndIP {
+            get {
                 return ResourceManager.GetString("strEndIP", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Last Port.
         /// </summary>
-        internal static string strEndPort
-        {
-            get
-            {
+        internal static string strEndPort {
+            get {
                 return ResourceManager.GetString("strEndPort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to AddExternalToolsToToolBar (frmMain) failed. {0}.
         /// </summary>
-        internal static string strErrorAddExternalToolsToToolBarFailed
-        {
-            get
-            {
+        internal static string strErrorAddExternalToolsToToolBarFailed {
+            get {
                 return ResourceManager.GetString("strErrorAddExternalToolsToToolBarFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to AddFolder (UI.Window.ConnectionTreeWindow) failed. {0}.
         /// </summary>
-        internal static string strErrorAddFolderFailed
-        {
-            get
-            {
+        internal static string strErrorAddFolderFailed {
+            get {
                 return ResourceManager.GetString("strErrorAddFolderFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The database version {0} is not compatible with this version of {1}..
         /// </summary>
-        internal static string strErrorBadDatabaseVersion
-        {
-            get
-            {
+        internal static string strErrorBadDatabaseVersion {
+            get {
                 return ResourceManager.GetString("strErrorBadDatabaseVersion", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to CloneNode (Tree.Node) failed . {0}.
         /// </summary>
-        internal static string strErrorCloneNodeFailed
-        {
-            get
-            {
+        internal static string strErrorCloneNodeFailed {
+            get {
                 return ResourceManager.GetString("strErrorCloneNodeFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Error code {0}..
         /// </summary>
-        internal static string strErrorCode
-        {
-            get
-            {
+        internal static string strErrorCode {
+            get {
                 return ResourceManager.GetString("strErrorCode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The connection list could not be saved..
         /// </summary>
-        internal static string strErrorConnectionListSaveFailed
-        {
-            get
-            {
+        internal static string strErrorConnectionListSaveFailed {
+            get {
                 return ResourceManager.GetString("strErrorConnectionListSaveFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PuTTY could not be launched..
         /// </summary>
-        internal static string strErrorCouldNotLaunchPutty
-        {
-            get
-            {
+        internal static string strErrorCouldNotLaunchPutty {
+            get {
                 return ResourceManager.GetString("strErrorCouldNotLaunchPutty", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Decryption failed. {0}.
         /// </summary>
-        internal static string strErrorDecryptionFailed
-        {
-            get
-            {
+        internal static string strErrorDecryptionFailed {
+            get {
                 return ResourceManager.GetString("strErrorDecryptionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Encryption failed. {0}.
         /// </summary>
-        internal static string strErrorEncryptionFailed
-        {
-            get
-            {
+        internal static string strErrorEncryptionFailed {
+            get {
                 return ResourceManager.GetString("strErrorEncryptionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The Windows security setting, &quot;System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing&quot;, is enabled. 
         ///
@@ -2638,3062 +2180,2515 @@ namespace mRemoteNG
         ///
         ///{0} is not fully FIPS compliant. Click OK to proceed at your own discretion, or Cancel to Exit..
         /// </summary>
-        internal static string strErrorFipsPolicyIncompatible
-        {
-            get
-            {
+        internal static string strErrorFipsPolicyIncompatible {
+            get {
                 return ResourceManager.GetString("strErrorFipsPolicyIncompatible", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Errors.
         /// </summary>
-        internal static string strErrors
-        {
-            get
-            {
+        internal static string strErrors {
+            get {
                 return ResourceManager.GetString("strErrors", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The startup connection file could not be loaded.{0}{0}{2}{0}{3}{0}{0}In order to prevent data loss, {1} will now exit..
         /// </summary>
-        internal static string strErrorStartupConnectionFileLoad
-        {
-            get
-            {
+        internal static string strErrorStartupConnectionFileLoad {
+            get {
                 return ResourceManager.GetString("strErrorStartupConnectionFileLoad", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VerifyDatabaseVersion (Config.Connections.Save) failed. {0}.
         /// </summary>
-        internal static string strErrorVerifyDatabaseVersionFailed
-        {
-            get
-            {
+        internal static string strErrorVerifyDatabaseVersionFailed {
+            get {
                 return ResourceManager.GetString("strErrorVerifyDatabaseVersionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Expand all folders.
         /// </summary>
-        internal static string strExpandAllFolders
-        {
-            get
-            {
+        internal static string strExpandAllFolders {
+            get {
                 return ResourceManager.GetString("strExpandAllFolders", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Experimental.
         /// </summary>
-        internal static string strExperimental
-        {
-            get
-            {
+        internal static string strExperimental {
+            get {
                 return ResourceManager.GetString("strExperimental", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
-        internal static string strExport
-        {
-            get
-            {
+        internal static string strExport {
+            get {
                 return ResourceManager.GetString("strExport", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Export everything.
         /// </summary>
-        internal static string strExportEverything
-        {
-            get
-            {
+        internal static string strExportEverything {
+            get {
                 return ResourceManager.GetString("strExportEverything", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Export File.
         /// </summary>
-        internal static string strExportFile
-        {
-            get
-            {
+        internal static string strExportFile {
+            get {
                 return ResourceManager.GetString("strExportFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Export Items.
         /// </summary>
-        internal static string strExportItems
-        {
-            get
-            {
+        internal static string strExportItems {
+            get {
                 return ResourceManager.GetString("strExportItems", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Export mRemote/mRemoteNG XML.
         /// </summary>
-        internal static string strExportmRemoteXML
-        {
-            get
-            {
+        internal static string strExportmRemoteXML {
+            get {
                 return ResourceManager.GetString("strExportmRemoteXML", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Export Properties.
         /// </summary>
-        internal static string strExportProperties
-        {
-            get
-            {
+        internal static string strExportProperties {
+            get {
                 return ResourceManager.GetString("strExportProperties", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Export the currently selected connection.
         /// </summary>
-        internal static string strExportSelectedConnection
-        {
-            get
-            {
+        internal static string strExportSelectedConnection {
+            get {
                 return ResourceManager.GetString("strExportSelectedConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Export the currently selected folder.
         /// </summary>
-        internal static string strExportSelectedFolder
-        {
-            get
-            {
+        internal static string strExportSelectedFolder {
+            get {
                 return ResourceManager.GetString("strExportSelectedFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Export to File....
         /// </summary>
-        internal static string strExportToFileMenuItem
-        {
-            get
-            {
+        internal static string strExportToFileMenuItem {
+            get {
                 return ResourceManager.GetString("strExportToFileMenuItem", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ext. App.
         /// </summary>
-        internal static string strExtApp
-        {
-            get
-            {
+        internal static string strExtApp {
+            get {
                 return ResourceManager.GetString("strExtApp", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New External Tool.
         /// </summary>
-        internal static string strExternalToolDefaultName
-        {
-            get
-            {
+        internal static string strExternalToolDefaultName {
+            get {
                 return ResourceManager.GetString("strExternalToolDefaultName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Includes icons by [FAMFAMFAM].
         /// </summary>
-        internal static string strFAMFAMFAMAttribution
-        {
-            get
-            {
+        internal static string strFAMFAMFAMAttribution {
+            get {
                 return ResourceManager.GetString("strFAMFAMFAMAttribution", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to http://www.famfamfam.com/.
         /// </summary>
-        internal static string strFAMFAMFAMAttributionURL
-        {
-            get
-            {
+        internal static string strFAMFAMFAMAttributionURL {
+            get {
                 return ResourceManager.GetString("strFAMFAMFAMAttributionURL", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to File &amp;Format:.
         /// </summary>
-        internal static string strFileFormatLabel
-        {
-            get
-            {
+        internal static string strFileFormatLabel {
+            get {
                 return ResourceManager.GetString("strFileFormatLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to All Files (*.*).
         /// </summary>
-        internal static string strFilterAll
-        {
-            get
-            {
+        internal static string strFilterAll {
+            get {
                 return ResourceManager.GetString("strFilterAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to All importable files.
         /// </summary>
-        internal static string strFilterAllImportable
-        {
-            get
-            {
+        internal static string strFilterAllImportable {
+            get {
                 return ResourceManager.GetString("strFilterAllImportable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Application Files (*.exe).
         /// </summary>
-        internal static string strFilterApplication
-        {
-            get
-            {
+        internal static string strFilterApplication {
+            get {
                 return ResourceManager.GetString("strFilterApplication", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemote CSV Files (*.csv).
         /// </summary>
-        internal static string strFiltermRemoteCSV
-        {
-            get
-            {
+        internal static string strFiltermRemoteCSV {
+            get {
                 return ResourceManager.GetString("strFiltermRemoteCSV", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemote XML Files (*.xml).
         /// </summary>
-        internal static string strFiltermRemoteXML
-        {
-            get
-            {
+        internal static string strFiltermRemoteXML {
+            get {
                 return ResourceManager.GetString("strFiltermRemoteXML", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PuTTY Connection Manager files.
         /// </summary>
-        internal static string strFilterPuttyConnectionManager
-        {
-            get
-            {
+        internal static string strFilterPuttyConnectionManager {
+            get {
                 return ResourceManager.GetString("strFilterPuttyConnectionManager", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Remote Desktop Connection Manager files (*.rdg).
         /// </summary>
-        internal static string strFilterRdgFiles
-        {
-            get
-            {
+        internal static string strFilterRdgFiles {
+            get {
                 return ResourceManager.GetString("strFilterRdgFiles", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP Files (*.rdp).
         /// </summary>
-        internal static string strFilterRDP
-        {
-            get
-            {
+        internal static string strFilterRDP {
+            get {
                 return ResourceManager.GetString("strFilterRDP", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to visionapp Remote Desktop 2008 CSV Files (*.csv).
         /// </summary>
-        internal static string strFiltervRD2008CSV
-        {
-            get
-            {
+        internal static string strFiltervRD2008CSV {
+            get {
                 return ResourceManager.GetString("strFiltervRD2008CSV", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Could not find a credential record with ID matching &quot;{0}&quot; for the connection record named &quot;{1}&quot;..
         /// </summary>
-        internal static string strFindMatchingCredentialFailed
-        {
-            get
-            {
+        internal static string strFindMatchingCredentialFailed {
+            get {
                 return ResourceManager.GetString("strFindMatchingCredentialFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Inherit {0}.
         /// </summary>
-        internal static string strFormatInherit
-        {
-            get
-            {
+        internal static string strFormatInherit {
+            get {
                 return ResourceManager.GetString("strFormatInherit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Description of inherited property: {0}.
         /// </summary>
-        internal static string strFormatInheritDescription
-        {
-            get
-            {
+        internal static string strFormatInheritDescription {
+            get {
                 return ResourceManager.GetString("strFormatInheritDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Free.
         /// </summary>
-        internal static string strFree
-        {
-            get
-            {
+        internal static string strFree {
+            get {
                 return ResourceManager.GetString("strFree", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Fullscreen.
         /// </summary>
-        internal static string strFullscreen
-        {
-            get
-            {
+        internal static string strFullscreen {
+            get {
                 return ResourceManager.GetString("strFullscreen", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
-        internal static string strGeneral
-        {
-            get
-            {
+        internal static string strGeneral {
+            get {
                 return ResourceManager.GetString("strGeneral", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Get Connection Info From SQL failed.
         /// </summary>
-        internal static string strGetConnectionInfoFromSqlFailed
-        {
-            get
-            {
+        internal static string strGetConnectionInfoFromSqlFailed {
+            get {
                 return ResourceManager.GetString("strGetConnectionInfoFromSqlFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An error occured while loading the connection entry for &quot;{0}&quot; from &quot;{1}&quot;. {2}.
         /// </summary>
-        internal static string strGetConnectionInfoFromXmlFailed
-        {
-            get
-            {
+        internal static string strGetConnectionInfoFromXmlFailed {
+            get {
                 return ResourceManager.GetString("strGetConnectionInfoFromXmlFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Automatic Reconnect.
         /// </summary>
-        internal static string strGroupboxAutomaticReconnect
-        {
-            get
-            {
+        internal static string strGroupboxAutomaticReconnect {
+            get {
                 return ResourceManager.GetString("strGroupboxAutomaticReconnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection.
         /// </summary>
-        internal static string strGroupboxConnection
-        {
-            get
-            {
+        internal static string strGroupboxConnection {
+            get {
                 return ResourceManager.GetString("strGroupboxConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to External Tool Properties.
         /// </summary>
-        internal static string strGroupboxExternalToolProperties
-        {
-            get
-            {
+        internal static string strGroupboxExternalToolProperties {
+            get {
                 return ResourceManager.GetString("strGroupboxExternalToolProperties", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Files.
         /// </summary>
-        internal static string strGroupboxFiles
-        {
-            get
-            {
+        internal static string strGroupboxFiles {
+            get {
                 return ResourceManager.GetString("strGroupboxFiles", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Host.
         /// </summary>
-        internal static string strHost
-        {
-            get
-            {
+        internal static string strHost {
+            get {
                 return ResourceManager.GetString("strHost", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to HTTP.
         /// </summary>
-        internal static string strHttp
-        {
-            get
-            {
+        internal static string strHttp {
+            get {
                 return ResourceManager.GetString("strHttp", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to HTTP Connect Failed!.
         /// </summary>
-        internal static string strHttpConnectFailed
-        {
-            get
-            {
+        internal static string strHttpConnectFailed {
+            get {
                 return ResourceManager.GetString("strHttpConnectFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t create new HTTP Connection!.
         /// </summary>
-        internal static string strHttpConnectionFailed
-        {
-            get
-            {
+        internal static string strHttpConnectionFailed {
+            get {
                 return ResourceManager.GetString("strHttpConnectionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Changing HTTP Document Tile Failed!.
         /// </summary>
-        internal static string strHttpDocumentTileChangeFailed
-        {
-            get
-            {
+        internal static string strHttpDocumentTileChangeFailed {
+            get {
                 return ResourceManager.GetString("strHttpDocumentTileChangeFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Gecko (Firefox).
         /// </summary>
-        internal static string strHttpGecko
-        {
-            get
-            {
+        internal static string strHttpGecko {
+            get {
                 return ResourceManager.GetString("strHttpGecko", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Internet Explorer.
         /// </summary>
-        internal static string strHttpInternetExplorer
-        {
-            get
-            {
+        internal static string strHttpInternetExplorer {
+            get {
                 return ResourceManager.GetString("strHttpInternetExplorer", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to HTTPS.
         /// </summary>
-        internal static string strHttps
-        {
-            get
-            {
+        internal static string strHttps {
+            get {
                 return ResourceManager.GetString("strHttps", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Set HTTP Props failed!.
         /// </summary>
-        internal static string strHttpSetPropsFailed
-        {
-            get
-            {
+        internal static string strHttpSetPropsFailed {
+            get {
                 return ResourceManager.GetString("strHttpSetPropsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Allow Always.
         /// </summary>
-        internal static string strHttpsInsecureAllowAlways
-        {
-            get
-            {
+        internal static string strHttpsInsecureAllowAlways {
+            get {
                 return ResourceManager.GetString("strHttpsInsecureAllowAlways", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Allow Once.
         /// </summary>
-        internal static string strHttpsInsecureAllowOnce
-        {
-            get
-            {
+        internal static string strHttpsInsecureAllowOnce {
+            get {
                 return ResourceManager.GetString("strHttpsInsecureAllowOnce", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Don&apos;t Allow.
         /// </summary>
-        internal static string strHttpsInsecureDontAllow
-        {
-            get
-            {
+        internal static string strHttpsInsecureDontAllow {
+            get {
                 return ResourceManager.GetString("strHttpsInsecureDontAllow", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Allow Insecure Certificate for URL: {0}?.
         /// </summary>
-        internal static string strHttpsInsecurePrompt
-        {
-            get
-            {
+        internal static string strHttpsInsecurePrompt {
+            get {
                 return ResourceManager.GetString("strHttpsInsecurePrompt", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Allow Insecure Certificate?.
         /// </summary>
-        internal static string strHttpsInsecurePromptTitle
-        {
-            get
-            {
+        internal static string strHttpsInsecurePromptTitle {
+            get {
                 return ResourceManager.GetString("strHttpsInsecurePromptTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ICA.
         /// </summary>
-        internal static string strICA
-        {
-            get
-            {
+        internal static string strICA {
+            get {
                 return ResourceManager.GetString("strICA", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t create new ICA Connection!.
         /// </summary>
-        internal static string strIcaConnectionFailed
-        {
-            get
-            {
+        internal static string strIcaConnectionFailed {
+            get {
                 return ResourceManager.GetString("strIcaConnectionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Loading ICA Plugin failed!.
         /// </summary>
-        internal static string strIcaControlFailed
-        {
-            get
-            {
+        internal static string strIcaControlFailed {
+            get {
                 return ResourceManager.GetString("strIcaControlFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ICA SetCredentials failed!.
         /// </summary>
-        internal static string strIcaSetCredentialsFailed
-        {
-            get
-            {
+        internal static string strIcaSetCredentialsFailed {
+            get {
                 return ResourceManager.GetString("strIcaSetCredentialsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ICA Set Event Handlers Failed!.
         /// </summary>
-        internal static string strIcaSetEventHandlersFailed
-        {
-            get
-            {
+        internal static string strIcaSetEventHandlersFailed {
+            get {
                 return ResourceManager.GetString("strIcaSetEventHandlersFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ICA Set Props Failed!.
         /// </summary>
-        internal static string strIcaSetPropsFailed
-        {
-            get
-            {
+        internal static string strIcaSetPropsFailed {
+            get {
                 return ResourceManager.GetString("strIcaSetPropsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ICA Set Resolution Failed!.
         /// </summary>
-        internal static string strIcaSetResolutionFailed
-        {
-            get
-            {
+        internal static string strIcaSetResolutionFailed {
+            get {
                 return ResourceManager.GetString("strIcaSetResolutionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to ID.
         /// </summary>
-        internal static string strID
-        {
-            get
-            {
+        internal static string strID {
+            get {
                 return ResourceManager.GetString("strID", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Identify quick connect tabs by adding the prefix &quot;Quick:&quot;.
         /// </summary>
-        internal static string strIdentifyQuickConnectTabs
-        {
-            get
-            {
+        internal static string strIdentifyQuickConnectTabs {
+            get {
                 return ResourceManager.GetString("strIdentifyQuickConnectTabs", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import from Active Directory.
         /// </summary>
-        internal static string strImportAD
-        {
-            get
-            {
+        internal static string strImportAD {
+            get {
                 return ResourceManager.GetString("strImportAD", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import/Export.
         /// </summary>
-        internal static string strImportExport
-        {
-            get
-            {
+        internal static string strImportExport {
+            get {
                 return ResourceManager.GetString("strImportExport", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An error occurred while importing the file &quot;{0}&quot;..
         /// </summary>
-        internal static string strImportFileFailedContent
-        {
-            get
-            {
+        internal static string strImportFileFailedContent {
+            get {
                 return ResourceManager.GetString("strImportFileFailedContent", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import failed.
         /// </summary>
-        internal static string strImportFileFailedMainInstruction
-        {
-            get
-            {
+        internal static string strImportFileFailedMainInstruction {
+            get {
                 return ResourceManager.GetString("strImportFileFailedMainInstruction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import from &amp;File....
         /// </summary>
-        internal static string strImportFromFileMenuItem
-        {
-            get
-            {
+        internal static string strImportFromFileMenuItem {
+            get {
                 return ResourceManager.GetString("strImportFromFileMenuItem", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Under the root{0}{1}|Under the selected folder{0}{2}.
         /// </summary>
-        internal static string strImportLocationCommandButtons
-        {
-            get
-            {
+        internal static string strImportLocationCommandButtons {
+            get {
                 return ResourceManager.GetString("strImportLocationCommandButtons", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Where would you like the imported items to be placed?.
         /// </summary>
-        internal static string strImportLocationContent
-        {
-            get
-            {
+        internal static string strImportLocationContent {
+            get {
                 return ResourceManager.GetString("strImportLocationContent", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import location.
         /// </summary>
-        internal static string strImportLocationMainInstruction
-        {
-            get
-            {
+        internal static string strImportLocationMainInstruction {
+            get {
                 return ResourceManager.GetString("strImportLocationMainInstruction", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Import.
         /// </summary>
-        internal static string strImportMenuItem
-        {
-            get
-            {
+        internal static string strImportMenuItem {
+            get {
                 return ResourceManager.GetString("strImportMenuItem", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import mRemote/mRemoteNG XML.
         /// </summary>
-        internal static string strImportmRemoteXML
-        {
-            get
-            {
+        internal static string strImportmRemoteXML {
+            get {
                 return ResourceManager.GetString("strImportmRemoteXML", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import from Port Scan.
         /// </summary>
-        internal static string strImportPortScan
-        {
-            get
-            {
+        internal static string strImportPortScan {
+            get {
                 return ResourceManager.GetString("strImportPortScan", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import from RDP file(s).
         /// </summary>
-        internal static string strImportRDPFiles
-        {
-            get
-            {
+        internal static string strImportRDPFiles {
+            get {
                 return ResourceManager.GetString("strImportRDPFiles", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Import sub OUs.
         /// </summary>
-        internal static string strImportSubOUs
-        {
-            get
-            {
+        internal static string strImportSubOUs {
+            get {
                 return ResourceManager.GetString("strImportSubOUs", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Inactive.
         /// </summary>
-        internal static string strInactive
-        {
-            get
-            {
+        internal static string strInactive {
+            get {
                 return ResourceManager.GetString("strInactive", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Informations.
         /// </summary>
-        internal static string strInformations
-        {
-            get
-            {
+        internal static string strInformations {
+            get {
                 return ResourceManager.GetString("strInformations", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG is up to date.
         /// </summary>
-        internal static string strInheritNewConnection
-        {
-            get
-            {
+        internal static string strInheritNewConnection {
+            get {
                 return ResourceManager.GetString("strInheritNewConnection", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection failed!.
+        /// </summary>
+        internal static string strIntAppConnectionFailed {
+            get {
+                return ResourceManager.GetString("strIntAppConnectionFailed", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Dispose of Int App process failed!.
         /// </summary>
-        internal static string strIntAppDisposeFailed
-        {
-            get
-            {
+        internal static string strIntAppDisposeFailed {
+            get {
                 return ResourceManager.GetString("strIntAppDisposeFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Int App Focus Failed!.
         /// </summary>
-        internal static string strIntAppFocusFailed
-        {
-            get
-            {
+        internal static string strIntAppFocusFailed {
+            get {
                 return ResourceManager.GetString("strIntAppFocusFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Int App Handle: {0}.
         /// </summary>
-        internal static string strIntAppHandle
-        {
-            get
-            {
+        internal static string strIntAppHandle {
+            get {
                 return ResourceManager.GetString("strIntAppHandle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Killing Int App Process failed!.
         /// </summary>
-        internal static string strIntAppKillFailed
-        {
-            get
-            {
+        internal static string strIntAppKillFailed {
+            get {
                 return ResourceManager.GetString("strIntAppKillFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Panel Handle: {0}.
         /// </summary>
-        internal static string strIntAppParentHandle
-        {
-            get
-            {
+        internal static string strIntAppParentHandle {
+            get {
                 return ResourceManager.GetString("strIntAppParentHandle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Int App Resize failed!.
         /// </summary>
-        internal static string strIntAppResizeFailed
-        {
-            get
-            {
+        internal static string strIntAppResizeFailed {
+            get {
                 return ResourceManager.GetString("strIntAppResizeFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to --- IntApp Stuff ---.
         /// </summary>
-        internal static string strIntAppStuff
-        {
-            get
-            {
+        internal static string strIntAppStuff {
+            get {
                 return ResourceManager.GetString("strIntAppStuff", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Int App Title: {0}.
         /// </summary>
-        internal static string strIntAppTitle
-        {
-            get
-            {
+        internal static string strIntAppTitle {
+            get {
                 return ResourceManager.GetString("strIntAppTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Must Be Between 0 and 255.
         /// </summary>
-        internal static string strIPRange
-        {
-            get
-            {
+        internal static string strIPRange {
+            get {
                 return ResourceManager.GetString("strIPRange", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to CTRL-ALT-DEL.
         /// </summary>
-        internal static string strKeysCtrlAltDel
-        {
-            get
-            {
+        internal static string strKeysCtrlAltDel {
+            get {
                 return ResourceManager.GetString("strKeysCtrlAltDel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to CTRL-ESC.
         /// </summary>
-        internal static string strKeysCtrlEsc
-        {
-            get
-            {
+        internal static string strKeysCtrlEsc {
+            get {
                 return ResourceManager.GetString("strKeysCtrlEsc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Address:.
         /// </summary>
-        internal static string strLabelAddress
-        {
-            get
-            {
+        internal static string strLabelAddress {
+            get {
                 return ResourceManager.GetString("strLabelAddress", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Arguments:.
         /// </summary>
-        internal static string strLabelArguments
-        {
-            get
-            {
+        internal static string strLabelArguments {
+            get {
                 return ResourceManager.GetString("strLabelArguments", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Change Log:.
         /// </summary>
-        internal static string strLabelChangeLog
-        {
-            get
-            {
+        internal static string strLabelChangeLog {
+            get {
                 return ResourceManager.GetString("strLabelChangeLog", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to When closing connections:.
         /// </summary>
-        internal static string strLabelClosingConnections
-        {
-            get
-            {
+        internal static string strLabelClosingConnections {
+            get {
                 return ResourceManager.GetString("strLabelClosingConnections", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Connect:.
         /// </summary>
-        internal static string strLabelConnect
-        {
-            get
-            {
+        internal static string strLabelConnect {
+            get {
                 return ResourceManager.GetString("strLabelConnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Display Name.
         /// </summary>
-        internal static string strLabelDisplayName
-        {
-            get
-            {
+        internal static string strLabelDisplayName {
+            get {
                 return ResourceManager.GetString("strLabelDisplayName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Domain:.
         /// </summary>
-        internal static string strLabelDomain
-        {
-            get
-            {
+        internal static string strLabelDomain {
+            get {
                 return ResourceManager.GetString("strLabelDomain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Filename:.
         /// </summary>
-        internal static string strLabelFilename
-        {
-            get
-            {
+        internal static string strLabelFilename {
+            get {
                 return ResourceManager.GetString("strLabelFilename", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Hostname:.
         /// </summary>
-        internal static string strLabelHostname
-        {
-            get
-            {
+        internal static string strLabelHostname {
+            get {
                 return ResourceManager.GetString("strLabelHostname", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Options:.
         /// </summary>
-        internal static string strLabelOptions
-        {
-            get
-            {
+        internal static string strLabelOptions {
+            get {
                 return ResourceManager.GetString("strLabelOptions", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password:.
         /// </summary>
-        internal static string strLabelPassword
-        {
-            get
-            {
+        internal static string strLabelPassword {
+            get {
                 return ResourceManager.GetString("strLabelPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Port:.
         /// </summary>
-        internal static string strLabelPort
-        {
-            get
-            {
+        internal static string strLabelPort {
+            get {
                 return ResourceManager.GetString("strLabelPort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Portable Edition.
         /// </summary>
-        internal static string strLabelPortableEdition
-        {
-            get
-            {
+        internal static string strLabelPortableEdition {
+            get {
                 return ResourceManager.GetString("strLabelPortableEdition", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Protocol:.
         /// </summary>
-        internal static string strLabelProtocol
-        {
-            get
-            {
+        internal static string strLabelProtocol {
+            get {
                 return ResourceManager.GetString("strLabelProtocol", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to To configure PuTTY sessions click this button:.
         /// </summary>
-        internal static string strLabelPuttySessionsConfig
-        {
-            get
-            {
+        internal static string strLabelPuttySessionsConfig {
+            get {
                 return ResourceManager.GetString("strLabelPuttySessionsConfig", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Maximum PuTTY and integrated external tools wait time:.
         /// </summary>
-        internal static string strLabelPuttyTimeout
-        {
-            get
-            {
+        internal static string strLabelPuttyTimeout {
+            get {
                 return ResourceManager.GetString("strLabelPuttyTimeout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Read only:.
         /// </summary>
-        internal static string strLabelReadOnly
-        {
-            get
-            {
+        internal static string strLabelReadOnly {
+            get {
                 return ResourceManager.GetString("strLabelReadOnly", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Released under the GNU General Public License (GPL).
         /// </summary>
-        internal static string strLabelReleasedUnderGPL
-        {
-            get
-            {
+        internal static string strLabelReleasedUnderGPL {
+            get {
                 return ResourceManager.GetString("strLabelReleasedUnderGPL", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Seconds.
         /// </summary>
-        internal static string strLabelSeconds
-        {
-            get
-            {
+        internal static string strLabelSeconds {
+            get {
                 return ResourceManager.GetString("strLabelSeconds", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select a panel from the list below or click New to add a new one. Click OK to continue..
         /// </summary>
-        internal static string strLabelSelectPanel
-        {
-            get
-            {
+        internal static string strLabelSelectPanel {
+            get {
                 return ResourceManager.GetString("strLabelSelectPanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Server status:.
         /// </summary>
-        internal static string strLabelServerStatus
-        {
-            get
-            {
+        internal static string strLabelServerStatus {
+            get {
                 return ResourceManager.GetString("strLabelServerStatus", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Database:.
         /// </summary>
-        internal static string strLabelSQLDatabaseName
-        {
-            get
-            {
+        internal static string strLabelSQLDatabaseName {
+            get {
                 return ResourceManager.GetString("strLabelSQLDatabaseName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Database:.
         /// </summary>
-        internal static string strLabelSQLServerDatabaseName
-        {
-            get
-            {
+        internal static string strLabelSQLServerDatabaseName {
+            get {
                 return ResourceManager.GetString("strLabelSQLServerDatabaseName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Username:.
         /// </summary>
-        internal static string strLabelUsername
-        {
-            get
-            {
+        internal static string strLabelUsername {
+            get {
                 return ResourceManager.GetString("strLabelUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Verify:.
         /// </summary>
-        internal static string strLabelVerify
-        {
-            get
-            {
+        internal static string strLabelVerify {
+            get {
                 return ResourceManager.GetString("strLabelVerify", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
-        internal static string strLanguage
-        {
-            get
-            {
+        internal static string strLanguage {
+            get {
                 return ResourceManager.GetString("strLanguage", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to (Automatically Detect).
         /// </summary>
-        internal static string strLanguageDefault
-        {
-            get
-            {
+        internal static string strLanguageDefault {
+            get {
                 return ResourceManager.GetString("strLanguageDefault", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to {0} must be restarted before changes to the language will take effect..
         /// </summary>
-        internal static string strLanguageRestartRequired
-        {
-            get
-            {
+        internal static string strLanguageRestartRequired {
+            get {
                 return ResourceManager.GetString("strLanguageRestartRequired", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use UTF8 encoding for RDP &quot;Load Balance Info&quot; property.
         /// </summary>
-        internal static string strLoadBalanceInfoUseUtf8
-        {
-            get
-            {
+        internal static string strLoadBalanceInfoUseUtf8 {
+            get {
                 return ResourceManager.GetString("strLoadBalanceInfoUseUtf8", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Load from SQL failed.
         /// </summary>
-        internal static string strLoadFromSqlFailed
-        {
-            get
-            {
+        internal static string strLoadFromSqlFailed {
+            get {
                 return ResourceManager.GetString("strLoadFromSqlFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The connection information could not be loaded from the SQL server..
         /// </summary>
-        internal static string strLoadFromSqlFailedContent
-        {
-            get
-            {
+        internal static string strLoadFromSqlFailedContent {
+            get {
                 return ResourceManager.GetString("strLoadFromSqlFailedContent", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Load From XML failed!.
         /// </summary>
-        internal static string strLoadFromXmlFailed
-        {
-            get
-            {
+        internal static string strLoadFromXmlFailed {
+            get {
                 return ResourceManager.GetString("strLoadFromXmlFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Local file.
         /// </summary>
-        internal static string strLocalFile
-        {
-            get
-            {
+        internal static string strLocalFile {
+            get {
                 return ResourceManager.GetString("strLocalFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Local file does not exist!.
         /// </summary>
-        internal static string strLocalFileDoesNotExist
-        {
-            get
-            {
+        internal static string strLocalFileDoesNotExist {
+            get {
                 return ResourceManager.GetString("strLocalFileDoesNotExist", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Lock toolbar positions.
         /// </summary>
-        internal static string strLockToolbars
-        {
-            get
-            {
+        internal static string strLockToolbars {
+            get {
                 return ResourceManager.GetString("strLockToolbars", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Log file path.
         /// </summary>
-        internal static string strLogFilePath
-        {
-            get
-            {
+        internal static string strLogFilePath {
+            get {
                 return ResourceManager.GetString("strLogFilePath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Logging.
         /// </summary>
-        internal static string strLogging
-        {
-            get
-            {
+        internal static string strLogging {
+            get {
                 return ResourceManager.GetString("strLogging", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Logoff.
         /// </summary>
-        internal static string strLogOff
-        {
-            get
-            {
+        internal static string strLogOff {
+            get {
                 return ResourceManager.GetString("strLogOff", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Log these message types.
         /// </summary>
-        internal static string strLogTheseMessageTypes
-        {
-            get
-            {
+        internal static string strLogTheseMessageTypes {
+            get {
                 return ResourceManager.GetString("strLogTheseMessageTypes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Log to application directory.
         /// </summary>
-        internal static string strLogToAppDir
-        {
-            get
-            {
+        internal static string strLogToAppDir {
+            get {
                 return ResourceManager.GetString("strLogToAppDir", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Writing to report file failed!.
         /// </summary>
-        internal static string strLogWriteToFileFailed
-        {
-            get
-            {
+        internal static string strLogWriteToFileFailed {
+            get {
                 return ResourceManager.GetString("strLogWriteToFileFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t save report to final location..
         /// </summary>
-        internal static string strLogWriteToFileFinalLocationFailed
-        {
-            get
-            {
+        internal static string strLogWriteToFileFinalLocationFailed {
+            get {
                 return ResourceManager.GetString("strLogWriteToFileFinalLocationFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Uses the Magic library by [Crownwood Software].
         /// </summary>
-        internal static string strMagicLibraryAttribution
-        {
-            get
-            {
+        internal static string strMagicLibraryAttribution {
+            get {
                 return ResourceManager.GetString("strMagicLibraryAttribution", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to http://www.dotnetmagic.com/.
         /// </summary>
-        internal static string strMagicLibraryAttributionURL
-        {
-            get
-            {
+        internal static string strMagicLibraryAttributionURL {
+            get {
                 return ResourceManager.GetString("strMagicLibraryAttributionURL", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
-        internal static string strMenuAbout
-        {
-            get
-            {
+        internal static string strMenuAbout {
+            get {
                 return ResourceManager.GetString("strMenuAbout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Add Connection Panel.
         /// </summary>
-        internal static string strMenuAddConnectionPanel
-        {
-            get
-            {
+        internal static string strMenuAddConnectionPanel {
+            get {
                 return ResourceManager.GetString("strMenuAddConnectionPanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Check for Updates.
         /// </summary>
-        internal static string strMenuCheckForUpdates
-        {
-            get
-            {
+        internal static string strMenuCheckForUpdates {
+            get {
                 return ResourceManager.GetString("strMenuCheckForUpdates", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config.
         /// </summary>
-        internal static string strMenuConfig
-        {
-            get
-            {
+        internal static string strMenuConfig {
+            get {
                 return ResourceManager.GetString("strMenuConfig", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connect.
         /// </summary>
-        internal static string strMenuConnect
-        {
-            get
-            {
+        internal static string strMenuConnect {
+            get {
                 return ResourceManager.GetString("strMenuConnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connection Panels.
         /// </summary>
-        internal static string strMenuConnectionPanels
-        {
-            get
-            {
+        internal static string strMenuConnectionPanels {
+            get {
                 return ResourceManager.GetString("strMenuConnectionPanels", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connections.
         /// </summary>
-        internal static string strMenuConnections
-        {
-            get
-            {
+        internal static string strMenuConnections {
+            get {
                 return ResourceManager.GetString("strMenuConnections", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connections and Config.
         /// </summary>
-        internal static string strMenuConnectionsAndConfig
-        {
-            get
-            {
+        internal static string strMenuConnectionsAndConfig {
+            get {
                 return ResourceManager.GetString("strMenuConnectionsAndConfig", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Copy.
         /// </summary>
-        internal static string strMenuCopy
-        {
-            get
-            {
+        internal static string strMenuCopy {
+            get {
                 return ResourceManager.GetString("strMenuCopy", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Copy Hostname.
         /// </summary>
-        internal static string strMenuCopyHostname
-        {
-            get
-            {
+        internal static string strMenuCopyHostname {
+            get {
                 return ResourceManager.GetString("strMenuCopyHostname", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ctrl-Alt-Del.
         /// </summary>
-        internal static string strMenuCtrlAltDel
-        {
-            get
-            {
+        internal static string strMenuCtrlAltDel {
+            get {
                 return ResourceManager.GetString("strMenuCtrlAltDel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ctrl-Esc.
         /// </summary>
-        internal static string strMenuCtrlEsc
-        {
-            get
-            {
+        internal static string strMenuCtrlEsc {
+            get {
                 return ResourceManager.GetString("strMenuCtrlEsc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Delete....
         /// </summary>
-        internal static string strMenuDelete
-        {
-            get
-            {
+        internal static string strMenuDelete {
+            get {
                 return ResourceManager.GetString("strMenuDelete", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Delete Connection....
         /// </summary>
-        internal static string strMenuDeleteConnection
-        {
-            get
-            {
+        internal static string strMenuDeleteConnection {
+            get {
                 return ResourceManager.GetString("strMenuDeleteConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Delete External Tool....
         /// </summary>
-        internal static string strMenuDeleteExternalTool
-        {
-            get
-            {
+        internal static string strMenuDeleteExternalTool {
+            get {
                 return ResourceManager.GetString("strMenuDeleteExternalTool", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Delete Folder....
         /// </summary>
-        internal static string strMenuDeleteFolder
-        {
-            get
-            {
+        internal static string strMenuDeleteFolder {
+            get {
                 return ResourceManager.GetString("strMenuDeleteFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disconnect.
         /// </summary>
-        internal static string strMenuDisconnect
-        {
-            get
-            {
+        internal static string strMenuDisconnect {
+            get {
                 return ResourceManager.GetString("strMenuDisconnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disconnect All But This.
         /// </summary>
-        internal static string strMenuDisconnectOthers
-        {
-            get
-            {
+        internal static string strMenuDisconnectOthers {
+            get {
                 return ResourceManager.GetString("strMenuDisconnectOthers", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disconnect Tabs To The Right.
         /// </summary>
-        internal static string strMenuDisconnectOthersRight
-        {
-            get
-            {
+        internal static string strMenuDisconnectOthersRight {
+            get {
                 return ResourceManager.GetString("strMenuDisconnectOthersRight", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Donate.
         /// </summary>
-        internal static string strMenuDonate
-        {
-            get
-            {
+        internal static string strMenuDonate {
+            get {
                 return ResourceManager.GetString("strMenuDonate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Duplicate.
         /// </summary>
-        internal static string strMenuDuplicate
-        {
-            get
-            {
+        internal static string strMenuDuplicate {
+            get {
                 return ResourceManager.GetString("strMenuDuplicate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Duplicate Connection.
         /// </summary>
-        internal static string strMenuDuplicateConnection
-        {
-            get
-            {
+        internal static string strMenuDuplicateConnection {
+            get {
                 return ResourceManager.GetString("strMenuDuplicateConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Duplicate Folder.
         /// </summary>
-        internal static string strMenuDuplicateFolder
-        {
-            get
-            {
+        internal static string strMenuDuplicateFolder {
+            get {
                 return ResourceManager.GetString("strMenuDuplicateFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Duplicate Tab.
         /// </summary>
-        internal static string strMenuDuplicateTab
-        {
-            get
-            {
+        internal static string strMenuDuplicateTab {
+            get {
                 return ResourceManager.GetString("strMenuDuplicateTab", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
-        internal static string strMenuExit
-        {
-            get
-            {
+        internal static string strMenuExit {
+            get {
                 return ResourceManager.GetString("strMenuExit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to External Tools.
         /// </summary>
-        internal static string strMenuExternalTools
-        {
-            get
-            {
+        internal static string strMenuExternalTools {
+            get {
                 return ResourceManager.GetString("strMenuExternalTools", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to External Tools Toolbar.
         /// </summary>
-        internal static string strMenuExternalToolsToolbar
-        {
-            get
-            {
+        internal static string strMenuExternalToolsToolbar {
+            get {
                 return ResourceManager.GetString("strMenuExternalToolsToolbar", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;File.
         /// </summary>
-        internal static string strMenuFile
-        {
-            get
-            {
+        internal static string strMenuFile {
+            get {
                 return ResourceManager.GetString("strMenuFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Full Screen.
         /// </summary>
-        internal static string strMenuFullScreen
-        {
-            get
-            {
+        internal static string strMenuFullScreen {
+            get {
                 return ResourceManager.GetString("strMenuFullScreen", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Full Screen (RDP).
         /// </summary>
-        internal static string strMenuFullScreenRDP
-        {
-            get
-            {
+        internal static string strMenuFullScreenRDP {
+            get {
                 return ResourceManager.GetString("strMenuFullScreenRDP", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Help.
         /// </summary>
-        internal static string strMenuHelp
-        {
-            get
-            {
+        internal static string strMenuHelp {
+            get {
                 return ResourceManager.GetString("strMenuHelp", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG Help.
         /// </summary>
-        internal static string strMenuHelpContents
-        {
-            get
-            {
+        internal static string strMenuHelpContents {
+            get {
                 return ResourceManager.GetString("strMenuHelpContents", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Jump to.
         /// </summary>
-        internal static string strMenuJumpTo
-        {
-            get
-            {
+        internal static string strMenuJumpTo {
+            get {
                 return ResourceManager.GetString("strMenuJumpTo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Launch External Tool.
         /// </summary>
-        internal static string strMenuLaunchExternalTool
-        {
-            get
-            {
+        internal static string strMenuLaunchExternalTool {
+            get {
                 return ResourceManager.GetString("strMenuLaunchExternalTool", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Lock toolbar positions.
         /// </summary>
-        internal static string strMenuLockToolbars
-        {
-            get
-            {
+        internal static string strMenuLockToolbars {
+            get {
                 return ResourceManager.GetString("strMenuLockToolbars", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Multi SSH toolbar.
         /// </summary>
-        internal static string strMenuMultiSshToolbar
-        {
-            get
-            {
+        internal static string strMenuMultiSshToolbar {
+            get {
                 return ResourceManager.GetString("strMenuMultiSshToolbar", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New Connection File.
         /// </summary>
-        internal static string strMenuNewConnectionFile
-        {
-            get
-            {
+        internal static string strMenuNewConnectionFile {
+            get {
                 return ResourceManager.GetString("strMenuNewConnectionFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New External Tool.
         /// </summary>
-        internal static string strMenuNewExternalTool
-        {
-            get
-            {
+        internal static string strMenuNewExternalTool {
+            get {
                 return ResourceManager.GetString("strMenuNewExternalTool", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Notifications.
         /// </summary>
-        internal static string strMenuNotifications
-        {
-            get
-            {
+        internal static string strMenuNotifications {
+            get {
                 return ResourceManager.GetString("strMenuNotifications", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Copy All.
         /// </summary>
-        internal static string strMenuNotificationsCopyAll
-        {
-            get
-            {
+        internal static string strMenuNotificationsCopyAll {
+            get {
                 return ResourceManager.GetString("strMenuNotificationsCopyAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
-        internal static string strMenuNotificationsDelete
-        {
-            get
-            {
+        internal static string strMenuNotificationsDelete {
+            get {
                 return ResourceManager.GetString("strMenuNotificationsDelete", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Delete All.
         /// </summary>
-        internal static string strMenuNotificationsDeleteAll
-        {
-            get
-            {
+        internal static string strMenuNotificationsDeleteAll {
+            get {
                 return ResourceManager.GetString("strMenuNotificationsDeleteAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Open Connection File....
         /// </summary>
-        internal static string strMenuOpenConnectionFile
-        {
-            get
-            {
+        internal static string strMenuOpenConnectionFile {
+            get {
                 return ResourceManager.GetString("strMenuOpenConnectionFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
-        internal static string strMenuOptions
-        {
-            get
-            {
+        internal static string strMenuOptions {
+            get {
                 return ResourceManager.GetString("strMenuOptions", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Paste.
         /// </summary>
-        internal static string strMenuPaste
-        {
-            get
-            {
+        internal static string strMenuPaste {
+            get {
                 return ResourceManager.GetString("strMenuPaste", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Port Scan.
         /// </summary>
-        internal static string strMenuPortScan
-        {
-            get
-            {
+        internal static string strMenuPortScan {
+            get {
                 return ResourceManager.GetString("strMenuPortScan", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Quick Connect Toolbar.
         /// </summary>
-        internal static string strMenuQuickConnectToolbar
-        {
-            get
-            {
+        internal static string strMenuQuickConnectToolbar {
+            get {
                 return ResourceManager.GetString("strMenuQuickConnectToolbar", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reconnect.
         /// </summary>
-        internal static string strMenuReconnect
-        {
-            get
-            {
+        internal static string strMenuReconnect {
+            get {
                 return ResourceManager.GetString("strMenuReconnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reconnect All Open Connections.
         /// </summary>
-        internal static string strMenuReconnectAll
-        {
-            get
-            {
+        internal static string strMenuReconnectAll {
+            get {
                 return ResourceManager.GetString("strMenuReconnectAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Refresh Screen (VNC).
         /// </summary>
-        internal static string strMenuRefreshScreen
-        {
-            get
-            {
+        internal static string strMenuRefreshScreen {
+            get {
                 return ResourceManager.GetString("strMenuRefreshScreen", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rename.
         /// </summary>
-        internal static string strMenuRename
-        {
-            get
-            {
+        internal static string strMenuRename {
+            get {
                 return ResourceManager.GetString("strMenuRename", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rename Connection.
         /// </summary>
-        internal static string strMenuRenameConnection
-        {
-            get
-            {
+        internal static string strMenuRenameConnection {
+            get {
                 return ResourceManager.GetString("strMenuRenameConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rename Folder.
         /// </summary>
-        internal static string strMenuRenameFolder
-        {
-            get
-            {
+        internal static string strMenuRenameFolder {
+            get {
                 return ResourceManager.GetString("strMenuRenameFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rename Tab.
         /// </summary>
-        internal static string strMenuRenameTab
-        {
-            get
-            {
+        internal static string strMenuRenameTab {
+            get {
                 return ResourceManager.GetString("strMenuRenameTab", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Report a Bug.
         /// </summary>
-        internal static string strMenuReportBug
-        {
-            get
-            {
+        internal static string strMenuReportBug {
+            get {
                 return ResourceManager.GetString("strMenuReportBug", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reset layout.
         /// </summary>
-        internal static string strMenuResetLayout
-        {
-            get
-            {
+        internal static string strMenuResetLayout {
+            get {
                 return ResourceManager.GetString("strMenuResetLayout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Save Connection File.
         /// </summary>
-        internal static string strMenuSaveConnectionFile
-        {
-            get
-            {
+        internal static string strMenuSaveConnectionFile {
+            get {
                 return ResourceManager.GetString("strMenuSaveConnectionFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Save Connection File As....
         /// </summary>
-        internal static string strMenuSaveConnectionFileAs
-        {
-            get
-            {
+        internal static string strMenuSaveConnectionFileAs {
+            get {
                 return ResourceManager.GetString("strMenuSaveConnectionFileAs", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Screenshot.
         /// </summary>
-        internal static string strMenuScreenshot
-        {
-            get
-            {
+        internal static string strMenuScreenshot {
+            get {
                 return ResourceManager.GetString("strMenuScreenshot", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Screenshot Manager.
         /// </summary>
-        internal static string strMenuScreenshotManager
-        {
-            get
-            {
+        internal static string strMenuScreenshotManager {
+            get {
                 return ResourceManager.GetString("strMenuScreenshotManager", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Send Special Keys (VNC).
         /// </summary>
-        internal static string strMenuSendSpecialKeys
-        {
-            get
-            {
+        internal static string strMenuSendSpecialKeys {
+            get {
                 return ResourceManager.GetString("strMenuSendSpecialKeys", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Retrieve.
         /// </summary>
-        internal static string strMenuSessionRetrieve
-        {
-            get
-            {
+        internal static string strMenuSessionRetrieve {
+            get {
                 return ResourceManager.GetString("strMenuSessionRetrieve", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Sessions.
         /// </summary>
-        internal static string strMenuSessions
-        {
-            get
-            {
+        internal static string strMenuSessions {
+            get {
                 return ResourceManager.GetString("strMenuSessions", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Sessions and Screenshots.
         /// </summary>
-        internal static string strMenuSessionsAndScreenshots
-        {
-            get
-            {
+        internal static string strMenuSessionsAndScreenshots {
+            get {
                 return ResourceManager.GetString("strMenuSessionsAndScreenshots", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Show Help Text.
         /// </summary>
-        internal static string strMenuShowHelpText
-        {
-            get
-            {
+        internal static string strMenuShowHelpText {
+            get {
                 return ResourceManager.GetString("strMenuShowHelpText", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show Text.
         /// </summary>
-        internal static string strMenuShowText
-        {
-            get
-            {
+        internal static string strMenuShowText {
+            get {
                 return ResourceManager.GetString("strMenuShowText", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SmartSize (RDP/VNC).
         /// </summary>
-        internal static string strMenuSmartSize
-        {
-            get
-            {
+        internal static string strMenuSmartSize {
+            get {
                 return ResourceManager.GetString("strMenuSmartSize", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SSH File Transfer.
         /// </summary>
-        internal static string strMenuSSHFileTransfer
-        {
-            get
-            {
+        internal static string strMenuSSHFileTransfer {
+            get {
                 return ResourceManager.GetString("strMenuSSHFileTransfer", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Start Chat (VNC).
         /// </summary>
-        internal static string strMenuStartChat
-        {
-            get
-            {
+        internal static string strMenuStartChat {
+            get {
                 return ResourceManager.GetString("strMenuStartChat", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Support Forum.
         /// </summary>
-        internal static string strMenuSupportForum
-        {
-            get
-            {
+        internal static string strMenuSupportForum {
+            get {
                 return ResourceManager.GetString("strMenuSupportForum", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Tools.
         /// </summary>
-        internal static string strMenuTools
-        {
-            get
-            {
+        internal static string strMenuTools {
+            get {
                 return ResourceManager.GetString("strMenuTools", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Transfer File (SSH).
         /// </summary>
-        internal static string strMenuTransferFile
-        {
-            get
-            {
+        internal static string strMenuTransferFile {
+            get {
                 return ResourceManager.GetString("strMenuTransferFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;View.
         /// </summary>
-        internal static string strMenuView
-        {
-            get
-            {
+        internal static string strMenuView {
+            get {
                 return ResourceManager.GetString("strMenuView", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to View Only.
         /// </summary>
-        internal static string strMenuViewOnly
-        {
-            get
-            {
+        internal static string strMenuViewOnly {
+            get {
                 return ResourceManager.GetString("strMenuViewOnly", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Website.
         /// </summary>
-        internal static string strMenuWebsite
-        {
-            get
-            {
+        internal static string strMenuWebsite {
+            get {
                 return ResourceManager.GetString("strMenuWebsite", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Minimize to notification area.
         /// </summary>
-        internal static string strMinimizeToSysTray
-        {
-            get
-            {
+        internal static string strMinimizeToSysTray {
+            get {
                 return ResourceManager.GetString("strMinimizeToSysTray", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Move down.
         /// </summary>
-        internal static string strMoveDown
-        {
-            get
-            {
+        internal static string strMoveDown {
+            get {
                 return ResourceManager.GetString("strMoveDown", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Move up.
         /// </summary>
-        internal static string strMoveUp
-        {
-            get
-            {
+        internal static string strMoveUp {
+            get {
                 return ResourceManager.GetString("strMoveUp", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG CSV.
         /// </summary>
-        internal static string strMremoteNgCsv
-        {
-            get
-            {
+        internal static string strMremoteNgCsv {
+            get {
                 return ResourceManager.GetString("strMremoteNgCsv", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG XML.
         /// </summary>
-        internal static string strMremoteNgXml
-        {
-            get
-            {
+        internal static string strMremoteNgXml {
+            get {
                 return ResourceManager.GetString("strMremoteNgXml", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Multi SSH:.
         /// </summary>
-        internal static string strMultiSSH
-        {
-            get
-            {
+        internal static string strMultiSSH {
+            get {
                 return ResourceManager.GetString("strMultiSSH", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Multi SSH toolbar.
         /// </summary>
-        internal static string strMultiSshToolbar
-        {
-            get
-            {
+        internal static string strMultiSshToolbar {
+            get {
                 return ResourceManager.GetString("strMultiSshToolbar", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Press ENTER to send. Ctrl+C is sent immediately..
         /// </summary>
-        internal static string strMultiSSHToolTip
-        {
-            get
-            {
+        internal static string strMultiSSHToolTip {
+            get {
                 return ResourceManager.GetString("strMultiSSHToolTip", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to My current credentials (Windows logon information).
         /// </summary>
-        internal static string strMyCurrentWindowsCreds
-        {
-            get
-            {
+        internal static string strMyCurrentWindowsCreds {
+            get {
                 return ResourceManager.GetString("strMyCurrentWindowsCreds", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Never.
         /// </summary>
-        internal static string strNever
-        {
-            get
-            {
+        internal static string strNever {
+            get {
                 return ResourceManager.GetString("strNever", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New Connection.
         /// </summary>
-        internal static string strNewConnection
-        {
-            get
-            {
+        internal static string strNewConnection {
+            get {
                 return ResourceManager.GetString("strNewConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New Folder.
         /// </summary>
-        internal static string strNewFolder
-        {
-            get
-            {
+        internal static string strNewFolder {
+            get {
                 return ResourceManager.GetString("strNewFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New Panel.
         /// </summary>
-        internal static string strNewPanel
-        {
-            get
-            {
+        internal static string strNewPanel {
+            get {
                 return ResourceManager.GetString("strNewPanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New Root.
         /// </summary>
-        internal static string strNewRoot
-        {
-            get
-            {
+        internal static string strNewRoot {
+            get {
                 return ResourceManager.GetString("strNewRoot", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New Title.
         /// </summary>
-        internal static string strNewTitle
-        {
-            get
-            {
+        internal static string strNewTitle {
+            get {
                 return ResourceManager.GetString("strNewTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string strNo
-        {
-            get
-            {
+        internal static string strNo {
+            get {
                 return ResourceManager.GetString("strNo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No сompression.
         /// </summary>
-        internal static string strNoCompression
-        {
-            get
-            {
+        internal static string strNoCompression {
+            get {
                 return ResourceManager.GetString("strNoCompression", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to This node is already in this folder..
         /// </summary>
-        internal static string strNodeAlreadyInFolder
-        {
-            get
-            {
+        internal static string strNodeAlreadyInFolder {
+            get {
                 return ResourceManager.GetString("strNodeAlreadyInFolder", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot drag node onto itself..
         /// </summary>
-        internal static string strNodeCannotDragOnSelf
-        {
-            get
-            {
+        internal static string strNodeCannotDragOnSelf {
+            get {
                 return ResourceManager.GetString("strNodeCannotDragOnSelf", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot drag parent node onto child..
         /// </summary>
-        internal static string strNodeCannotDragParentOnChild
-        {
-            get
-            {
+        internal static string strNodeCannotDragParentOnChild {
+            get {
                 return ResourceManager.GetString("strNodeCannotDragParentOnChild", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to This node is not draggable..
         /// </summary>
-        internal static string strNodeNotDraggable
-        {
-            get
-            {
+        internal static string strNodeNotDraggable {
+            get {
                 return ResourceManager.GetString("strNodeNotDraggable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No ext. app specified..
         /// </summary>
-        internal static string strNoExtAppDefined
-        {
-            get
-            {
+        internal static string strNoExtAppDefined {
+            get {
                 return ResourceManager.GetString("strNoExtAppDefined", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        internal static string strNoInformation
-        {
-            get
-            {
+        internal static string strNoInformation {
+            get {
                 return ResourceManager.GetString("strNoInformation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        internal static string strNone
-        {
-            get
-            {
+        internal static string strNone {
+            get {
                 return ResourceManager.GetString("strNone", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Normal.
         /// </summary>
-        internal static string strNormal
-        {
-            get
-            {
+        internal static string strNormal {
+            get {
                 return ResourceManager.GetString("strNormal", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No SmartSize.
         /// </summary>
-        internal static string strNoSmartSize
-        {
-            get
-            {
+        internal static string strNoSmartSize {
+            get {
                 return ResourceManager.GetString("strNoSmartSize", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No update available.
         /// </summary>
-        internal static string strNoUpdateAvailable
-        {
-            get
-            {
+        internal static string strNoUpdateAvailable {
+            get {
                 return ResourceManager.GetString("strNoUpdateAvailable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to You are trying to load a connection file that was created using an very early version of mRemote, this could result in an runtime error.
         ///If you run into such an error, please create a new connection file!.
         /// </summary>
-        internal static string strOldConffile
-        {
-            get
-            {
+        internal static string strOldConffile {
+            get {
                 return ResourceManager.GetString("strOldConffile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Open a different file.
         /// </summary>
-        internal static string strOpenADifferentFile
-        {
-            get
-            {
+        internal static string strOpenADifferentFile {
+            get {
                 return ResourceManager.GetString("strOpenADifferentFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Open file.
         /// </summary>
-        internal static string strOpenFile
-        {
-            get
-            {
+        internal static string strOpenFile {
+            get {
                 return ResourceManager.GetString("strOpenFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Open new tab to the right of the currently selected tab.
         /// </summary>
-        internal static string strOpenNewTabRight
-        {
-            get
-            {
+        internal static string strOpenNewTabRight {
+            get {
                 return ResourceManager.GetString("strOpenNewTabRight", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Open Ports.
         /// </summary>
-        internal static string strOpenPorts
-        {
-            get
-            {
+        internal static string strOpenPorts {
+            get {
                 return ResourceManager.GetString("strOpenPorts", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Delete.
         /// </summary>
-        internal static string strOptionsKeyboardButtonDelete
-        {
-            get
-            {
+        internal static string strOptionsKeyboardButtonDelete {
+            get {
                 return ResourceManager.GetString("strOptionsKeyboardButtonDelete", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;New.
         /// </summary>
-        internal static string strOptionsKeyboardButtonNew
-        {
-            get
-            {
+        internal static string strOptionsKeyboardButtonNew {
+            get {
                 return ResourceManager.GetString("strOptionsKeyboardButtonNew", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Reset to Default.
         /// </summary>
-        internal static string strOptionsKeyboardButtonReset
-        {
-            get
-            {
+        internal static string strOptionsKeyboardButtonReset {
+            get {
                 return ResourceManager.GetString("strOptionsKeyboardButtonReset", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reset &amp;All to Default.
         /// </summary>
-        internal static string strOptionsKeyboardButtonResetAll
-        {
-            get
-            {
+        internal static string strOptionsKeyboardButtonResetAll {
+            get {
                 return ResourceManager.GetString("strOptionsKeyboardButtonResetAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Tabs.
         /// </summary>
-        internal static string strOptionsKeyboardCommandsGroupTabs
-        {
-            get
-            {
+        internal static string strOptionsKeyboardCommandsGroupTabs {
+            get {
                 return ResourceManager.GetString("strOptionsKeyboardCommandsGroupTabs", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Next tab.
         /// </summary>
-        internal static string strOptionsKeyboardCommandsNextTab
-        {
-            get
-            {
+        internal static string strOptionsKeyboardCommandsNextTab {
+            get {
                 return ResourceManager.GetString("strOptionsKeyboardCommandsNextTab", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Previous tab.
         /// </summary>
-        internal static string strOptionsKeyboardCommandsPreviousTab
-        {
-            get
-            {
+        internal static string strOptionsKeyboardCommandsPreviousTab {
+            get {
                 return ResourceManager.GetString("strOptionsKeyboardCommandsPreviousTab", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Modify shortcut.
         /// </summary>
-        internal static string strOptionsKeyboardGroupModifyShortcut
-        {
-            get
-            {
+        internal static string strOptionsKeyboardGroupModifyShortcut {
+            get {
                 return ResourceManager.GetString("strOptionsKeyboardGroupModifyShortcut", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Keyboard shortcuts.
         /// </summary>
-        internal static string strOptionsKeyboardLabelKeyboardShortcuts
-        {
-            get
-            {
+        internal static string strOptionsKeyboardLabelKeyboardShortcuts {
+            get {
                 return ResourceManager.GetString("strOptionsKeyboardLabelKeyboardShortcuts", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG Options.
         /// </summary>
-        internal static string strOptionsPageTitle
-        {
-            get
-            {
+        internal static string strOptionsPageTitle {
+            get {
                 return ResourceManager.GetString("strOptionsPageTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Testing....
         /// </summary>
-        internal static string strOptionsProxyTesting
-        {
-            get
-            {
+        internal static string strOptionsProxyTesting {
+            get {
                 return ResourceManager.GetString("strOptionsProxyTesting", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Keyboard.
         /// </summary>
-        internal static string strOptionsTabKeyboard
-        {
-            get
-            {
+        internal static string strOptionsTabKeyboard {
+            get {
                 return ResourceManager.GetString("strOptionsTabKeyboard", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Theme.
         /// </summary>
-        internal static string strOptionsTabTheme
-        {
-            get
-            {
+        internal static string strOptionsTabTheme {
+            get {
                 return ResourceManager.GetString("strOptionsTabTheme", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Delete.
         /// </summary>
-        internal static string strOptionsThemeButtonDelete
-        {
-            get
-            {
+        internal static string strOptionsThemeButtonDelete {
+            get {
                 return ResourceManager.GetString("strOptionsThemeButtonDelete", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;New.
         /// </summary>
-        internal static string strOptionsThemeButtonNew
-        {
-            get
-            {
+        internal static string strOptionsThemeButtonNew {
+            get {
                 return ResourceManager.GetString("strOptionsThemeButtonNew", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Warning: Restart is required to commit any theme configuration change..
         /// </summary>
-        internal static string strOptionsThemeChangeWarning
-        {
-            get
-            {
+        internal static string strOptionsThemeChangeWarning {
+            get {
                 return ResourceManager.GetString("strOptionsThemeChangeWarning", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do you really want to delete the theme?.
         /// </summary>
-        internal static string strOptionsThemeDeleteConfirmation
-        {
-            get
-            {
+        internal static string strOptionsThemeDeleteConfirmation {
+            get {
                 return ResourceManager.GetString("strOptionsThemeDeleteConfirmation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enable themes.
         /// </summary>
-        internal static string strOptionsThemeEnableTheming
-        {
-            get
-            {
+        internal static string strOptionsThemeEnableTheming {
+            get {
                 return ResourceManager.GetString("strOptionsThemeEnableTheming", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No themes are loaded, check that the default mRemoteNG themes exist in the &apos;themes&apos; folder.
         /// </summary>
-        internal static string strOptionsThemeErrorNoThemes
-        {
-            get
-            {
+        internal static string strOptionsThemeErrorNoThemes {
+            get {
                 return ResourceManager.GetString("strOptionsThemeErrorNoThemes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to New theme name.
         /// </summary>
-        internal static string strOptionsThemeNewThemeCaption
-        {
-            get
-            {
+        internal static string strOptionsThemeNewThemeCaption {
+            get {
                 return ResourceManager.GetString("strOptionsThemeNewThemeCaption", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cannot create theme, name already present or special characters in the name.
         /// </summary>
-        internal static string strOptionsThemeNewThemeError
-        {
-            get
-            {
+        internal static string strOptionsThemeNewThemeError {
+            get {
                 return ResourceManager.GetString("strOptionsThemeNewThemeError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Type the new theme name.
         /// </summary>
-        internal static string strOptionsThemeNewThemeText
-        {
-            get
-            {
+        internal static string strOptionsThemeNewThemeText {
+            get {
                 return ResourceManager.GetString("strOptionsThemeNewThemeText", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Out Of Range.
         /// </summary>
-        internal static string strOutOfRange
-        {
-            get
-            {
+        internal static string strOutOfRange {
+            get {
                 return ResourceManager.GetString("strOutOfRange", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Panel Name.
         /// </summary>
-        internal static string strPanelName
-        {
-            get
-            {
+        internal static string strPanelName {
+            get {
                 return ResourceManager.GetString("strPanelName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password must contain at least {0} of the following characters: {1}.
         /// </summary>
-        internal static string strPasswordConstainsSpecialCharactersConstraintHint
-        {
-            get
-            {
+        internal static string strPasswordConstainsSpecialCharactersConstraintHint {
+            get {
                 return ResourceManager.GetString("strPasswordConstainsSpecialCharactersConstraintHint", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password must contain at least {0} lower case character(s).
         /// </summary>
-        internal static string strPasswordContainsLowerCaseConstraintHint
-        {
-            get
-            {
+        internal static string strPasswordContainsLowerCaseConstraintHint {
+            get {
                 return ResourceManager.GetString("strPasswordContainsLowerCaseConstraintHint", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password must contain at least {0} number(s).
         /// </summary>
-        internal static string strPasswordContainsNumbersConstraint
-        {
-            get
-            {
+        internal static string strPasswordContainsNumbersConstraint {
+            get {
                 return ResourceManager.GetString("strPasswordContainsNumbersConstraint", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password must contain at least {0} upper case character(s).
         /// </summary>
-        internal static string strPasswordContainsUpperCaseConstraintHint
-        {
-            get
-            {
+        internal static string strPasswordContainsUpperCaseConstraintHint {
+            get {
                 return ResourceManager.GetString("strPasswordContainsUpperCaseConstraintHint", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password length must be between {0} and {1}.
         /// </summary>
-        internal static string strPasswordLengthConstraintHint
-        {
-            get
-            {
+        internal static string strPasswordLengthConstraintHint {
+            get {
                 return ResourceManager.GetString("strPasswordLengthConstraintHint", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Both passwords must match..
         /// </summary>
-        internal static string strPasswordStatusMustMatch
-        {
-            get
-            {
+        internal static string strPasswordStatusMustMatch {
+            get {
                 return ResourceManager.GetString("strPasswordStatusMustMatch", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The password must be at least 3 characters long..
         /// </summary>
-        internal static string strPasswordStatusTooShort
-        {
-            get
-            {
+        internal static string strPasswordStatusTooShort {
+            get {
                 return ResourceManager.GetString("strPasswordStatusTooShort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Please fill all fields.
         /// </summary>
-        internal static string strPleaseFillAllFields
-        {
-            get
-            {
+        internal static string strPleaseFillAllFields {
+            get {
                 return ResourceManager.GetString("strPleaseFillAllFields", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Popups.
         /// </summary>
-        internal static string strPopups
-        {
-            get
-            {
+        internal static string strPopups {
+            get {
                 return ResourceManager.GetString("strPopups", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Port scan complete..
         /// </summary>
-        internal static string strPortScanComplete
-        {
-            get
-            {
+        internal static string strPortScanComplete {
+            get {
                 return ResourceManager.GetString("strPortScanComplete", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t load PortScan panel!.
         /// </summary>
-        internal static string strPortScanCouldNotLoadPanel
-        {
-            get
-            {
+        internal static string strPortScanCouldNotLoadPanel {
+            get {
                 return ResourceManager.GetString("strPortScanCouldNotLoadPanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to To scan a single port, select the &quot;First Port&quot; only..
         /// </summary>
-        internal static string strPortScanSinglePort
-        {
-            get
-            {
+        internal static string strPortScanSinglePort {
+            get {
                 return ResourceManager.GetString("strPortScanSinglePort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PowerShell.
         /// </summary>
@@ -5708,377 +4703,309 @@ namespace mRemoteNG
         /// <summary>
         ///   Looks up a localized string similar to (These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!).
         /// </summary>
-        internal static string strPropertiesWillOnlyBeSavedMRemoteXML
-        {
-            get
-            {
+        internal static string strPropertiesWillOnlyBeSavedMRemoteXML {
+            get {
                 return ResourceManager.GetString("strPropertiesWillOnlyBeSavedMRemoteXML", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter the hostname or ip you want to connect to..
         /// </summary>
-        internal static string strPropertyDescriptionAddress
-        {
-            get
-            {
+        internal static string strPropertyDescriptionAddress {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionAddress", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Toggle all inheritance options..
         /// </summary>
-        internal static string strPropertyDescriptionAll
-        {
-            get
-            {
+        internal static string strPropertyDescriptionAll {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select which authentication level this connection should use..
         /// </summary>
-        internal static string strPropertyDescriptionAuthenticationLevel
-        {
-            get
-            {
+        internal static string strPropertyDescriptionAuthenticationLevel {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionAuthenticationLevel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select how you want to authenticate against the VNC server..
         /// </summary>
-        internal static string strPropertyDescriptionAuthenticationMode
-        {
-            get
-            {
+        internal static string strPropertyDescriptionAuthenticationMode {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionAuthenticationMode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether to automatically resize the connection when the window is resized or when fullscreen mode is toggled. Requires RDC 8.0 or higher..
         /// </summary>
-        internal static string strPropertyDescriptionAutomaticResize
-        {
-            get
-            {
+        internal static string strPropertyDescriptionAutomaticResize {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionAutomaticResize", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether to use bitmap caching or not..
         /// </summary>
-        internal static string strPropertyDescriptionCacheBitmaps
-        {
-            get
-            {
+        internal static string strPropertyDescriptionCacheBitmaps {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionCacheBitmaps", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select the colour quality to be used..
         /// </summary>
-        internal static string strPropertyDescriptionColors
-        {
-            get
-            {
+        internal static string strPropertyDescriptionColors {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionColors", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select the compression value to be used..
         /// </summary>
-        internal static string strPropertyDescriptionCompression
-        {
-            get
-            {
+        internal static string strPropertyDescriptionCompression {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionCompression", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select which credential to use for this connection..
         /// </summary>
-        internal static string strPropertyDescriptionCredential
-        {
-            get
-            {
+        internal static string strPropertyDescriptionCredential {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionCredential", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Put your notes or a description for the host here..
         /// </summary>
-        internal static string strPropertyDescriptionDescription
-        {
-            get
-            {
+        internal static string strPropertyDescriptionDescription {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select yes if the theme of the remote host should be displayed..
         /// </summary>
-        internal static string strPropertyDescriptionDisplayThemes
-        {
-            get
-            {
+        internal static string strPropertyDescriptionDisplayThemes {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionDisplayThemes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select yes if the wallpaper of the remote host should be displayed..
         /// </summary>
-        internal static string strPropertyDescriptionDisplayWallpaper
-        {
-            get
-            {
+        internal static string strPropertyDescriptionDisplayWallpaper {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionDisplayWallpaper", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter your domain..
         /// </summary>
-        internal static string strPropertyDescriptionDomain
-        {
-            get
-            {
+        internal static string strPropertyDescriptionDomain {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionDomain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether to use desktop composition or not..
         /// </summary>
-        internal static string strPropertyDescriptionEnableDesktopComposition
-        {
-            get
-            {
+        internal static string strPropertyDescriptionEnableDesktopComposition {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionEnableDesktopComposition", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether to use font smoothing or not..
         /// </summary>
-        internal static string strPropertyDescriptionEnableFontSmoothing
-        {
-            get
-            {
+        internal static string strPropertyDescriptionEnableFontSmoothing {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionEnableFontSmoothing", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select the encoding mode to be used..
         /// </summary>
-        internal static string strPropertyDescriptionEncoding
-        {
-            get
-            {
+        internal static string strPropertyDescriptionEncoding {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionEncoding", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select the encryption strength of the remote host..
         /// </summary>
-        internal static string strPropertyDescriptionEncryptionStrength
-        {
-            get
-            {
+        internal static string strPropertyDescriptionEncryptionStrength {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionEncryptionStrength", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select the external tool to be started..
         /// </summary>
-        internal static string strPropertyDescriptionExternalTool
-        {
-            get
-            {
+        internal static string strPropertyDescriptionExternalTool {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionExternalTool", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select a external tool to be started after the disconnection to the remote host..
         /// </summary>
-        internal static string strPropertyDescriptionExternalToolAfter
-        {
-            get
-            {
+        internal static string strPropertyDescriptionExternalToolAfter {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionExternalToolAfter", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select a external tool to be started before the connection to the remote host is established..
         /// </summary>
-        internal static string strPropertyDescriptionExternalToolBefore
-        {
-            get
-            {
+        internal static string strPropertyDescriptionExternalToolBefore {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionExternalToolBefore", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show this connection in the favorites menu..
         /// </summary>
-        internal static string strPropertyDescriptionFavorite
-        {
-            get
-            {
+        internal static string strPropertyDescriptionFavorite {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionFavorite", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose a icon that will be displayed when connected to the host..
         /// </summary>
-        internal static string strPropertyDescriptionIcon
-        {
-            get
-            {
+        internal static string strPropertyDescriptionIcon {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionIcon", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Specifies the load balancing information for use by load balancing routers to choose the best server..
         /// </summary>
-        internal static string strPropertyDescriptionLoadBalanceInfo
-        {
-            get
-            {
+        internal static string strPropertyDescriptionLoadBalanceInfo {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionLoadBalanceInfo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter the MAC address of the remote host if you wish to use it in an external tool..
         /// </summary>
-        internal static string strPropertyDescriptionMACAddress
-        {
-            get
-            {
+        internal static string strPropertyDescriptionMACAddress {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionMACAddress", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to This is the name that will be displayed in the connections tree..
         /// </summary>
-        internal static string strPropertyDescriptionName
-        {
-            get
-            {
+        internal static string strPropertyDescriptionName {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Sets the panel in which the connection will open..
         /// </summary>
-        internal static string strPropertyDescriptionPanel
-        {
-            get
-            {
+        internal static string strPropertyDescriptionPanel {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionPanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter your password..
         /// </summary>
-        internal static string strPropertyDescriptionPassword
-        {
-            get
-            {
+        internal static string strPropertyDescriptionPassword {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Set a password needed to encrypt the connection file with. You will be prompted to enter your passcode before starting mRemoteNG..
         /// </summary>
-        internal static string strPropertyDescriptionPasswordProtect
-        {
-            get
-            {
+        internal static string strPropertyDescriptionPasswordProtect {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionPasswordProtect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter the port the selected protocol is listening on..
         /// </summary>
-        internal static string strPropertyDescriptionPort
-        {
-            get
-            {
+        internal static string strPropertyDescriptionPort {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionPort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose the protocol mRemoteNG should use to connect to the host..
         /// </summary>
-        internal static string strPropertyDescriptionProtocol
-        {
-            get
-            {
+        internal static string strPropertyDescriptionProtocol {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionProtocol", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select a PuTTY session to be used when connecting..
         /// </summary>
-        internal static string strPropertyDescriptionPuttySession
-        {
-            get
-            {
+        internal static string strPropertyDescriptionPuttySession {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionPuttySession", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Specifies the domain name that a user provides to connect to the RD Gateway server..
         /// </summary>
-        internal static string strPropertyDescriptionRDGatewayDomain
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRDGatewayDomain {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRDGatewayDomain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Specifies the host name of the Remote Desktop Gateway server..
         /// </summary>
-        internal static string strPropertyDescriptionRDGatewayHostname
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRDGatewayHostname {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRDGatewayHostname", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Specifies the password of the Remote Desktop Gateway server..
         /// </summary>
@@ -6093,113 +5020,93 @@ namespace mRemoteNG
         /// <summary>
         ///   Looks up a localized string similar to Specifies when to use a Remote Desktop Gateway (RD Gateway) server..
         /// </summary>
-        internal static string strPropertyDescriptionRDGatewayUsageMethod
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRDGatewayUsageMethod {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRDGatewayUsageMethod", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Specifies whether or not to log on to the gateway using the same username and password as the connection..
         /// </summary>
-        internal static string strPropertyDescriptionRDGatewayUseConnectionCredentials
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRDGatewayUseConnectionCredentials {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRDGatewayUseConnectionCredentials", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Specifies the user name that a user provides to connect to the RD Gateway server..
         /// </summary>
-        internal static string strPropertyDescriptionRDGatewayUsername
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRDGatewayUsername {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRDGatewayUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether to receive an alert after the RDP session disconnects due to inactivity.
         /// </summary>
-        internal static string strPropertyDescriptionRDPAlertIdleTimeout
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRDPAlertIdleTimeout {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRDPAlertIdleTimeout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The number of minutes for the RDP session to sit idle before automatically disconnecting (for no limit use 0).
         /// </summary>
-        internal static string strPropertyDescriptionRDPMinutesToIdleTimeout
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRDPMinutesToIdleTimeout {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRDPMinutesToIdleTimeout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Sets the version of RDP to use when opening connections..
         /// </summary>
-        internal static string strPropertyDescriptionRdpVersion
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRdpVersion {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRdpVersion", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether the default audio input device on the remote machine should be redirected to this computer..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectAudioCapture
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRedirectAudioCapture {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectAudioCapture", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether the clipboard should be shared..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectClipboard
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRedirectClipboard {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectClipboard", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether local disk drives should be shown on the remote host..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectDrives
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRedirectDrives {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectDrives", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether key combinations (e.g. Alt-Tab) should be redirected to the remote host..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectKeys
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRedirectKeys {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectKeys", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether microphones should be shared..
         /// </summary>
@@ -6214,3637 +5121,3076 @@ namespace mRemoteNG
         /// <summary>
         ///   Looks up a localized string similar to Select whether local ports (ie. com, parallel) should be shown on the remote host..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectPorts
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRedirectPorts {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectPorts", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether local printers should be shown on the remote host..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectPrinters
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRedirectPrinters {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectPrinters", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether local smart cards should be available on the remote host..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectSmartCards
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRedirectSmartCards {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectSmartCards", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select how remote sound should be redirected..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectSounds
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRedirectSounds {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectSounds", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select one of the available rendering engines that will be used to display HTML..
         /// </summary>
-        internal static string strPropertyDescriptionRenderingEngine
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRenderingEngine {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRenderingEngine", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose the resolution or mode this connection will open in..
         /// </summary>
-        internal static string strPropertyDescriptionResolution
-        {
-            get
-            {
+        internal static string strPropertyDescriptionResolution {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionResolution", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select the SmartSize mode to be used..
         /// </summary>
-        internal static string strPropertyDescriptionSmartSizeMode
-        {
-            get
-            {
+        internal static string strPropertyDescriptionSmartSizeMode {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionSmartSizeMode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Choose the Sound Quality provided by the protocol: Dynamic, Medium, High.
         /// </summary>
-        internal static string strPropertyDescriptionSoundQuality
-        {
-            get
-            {
+        internal static string strPropertyDescriptionSoundQuality {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionSoundQuality", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify here additional options to be used for SSH connection. See putty documentation for further details..
+        /// </summary>
+        internal static string strPropertyDescriptionSSHOptions {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionSSHOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For connection through a SSH tunnel (jump host) specify SSH connection to be used to establish SSH tunnel..
+        /// </summary>
+        internal static string strPropertyDescriptionSSHTunnelConnection {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionSSHTunnelConnection", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Connect to the console session of the remote host..
         /// </summary>
-        internal static string strPropertyDescriptionUseConsoleSession
-        {
-            get
-            {
+        internal static string strPropertyDescriptionUseConsoleSession {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionUseConsoleSession", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use the Credential Security Support Provider (CredSSP) for authentication if it is available..
         /// </summary>
-        internal static string strPropertyDescriptionUseCredSsp
-        {
-            get
-            {
+        internal static string strPropertyDescriptionUseCredSsp {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionUseCredSsp", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connect to a Hyper-V host with enhanced mode enabled..
         /// </summary>
-        internal static string strPropertyDescriptionUseEnhancedMode
-        {
-            get
-            {
+        internal static string strPropertyDescriptionUseEnhancedMode {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionUseEnhancedMode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Feel free to enter any information you need here..
         /// </summary>
-        internal static string strPropertyDescriptionUser1
-        {
-            get
-            {
+        internal static string strPropertyDescriptionUser1 {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionUser1", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter your username..
         /// </summary>
-        internal static string strPropertyDescriptionUsername
-        {
-            get
-            {
+        internal static string strPropertyDescriptionUsername {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use VM ID to connect to VM running on Hyper-V..
         /// </summary>
-        internal static string strPropertyDescriptionUseVmId
-        {
-            get
-            {
+        internal static string strPropertyDescriptionUseVmId {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionUseVmId", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to If you want to establish a view only connection to the host select yes..
         /// </summary>
-        internal static string strPropertyDescriptionViewOnly
-        {
-            get
-            {
+        internal static string strPropertyDescriptionViewOnly {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionViewOnly", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The ID of the Hyper-V virtual machine to connect to..
         /// </summary>
-        internal static string strPropertyDescriptionVmId
-        {
-            get
-            {
+        internal static string strPropertyDescriptionVmId {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionVmId", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter the proxy address to be used..
         /// </summary>
-        internal static string strPropertyDescriptionVNCProxyAddress
-        {
-            get
-            {
+        internal static string strPropertyDescriptionVNCProxyAddress {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionVNCProxyAddress", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter your password for authenticating against the proxy..
         /// </summary>
-        internal static string strPropertyDescriptionVNCProxyPassword
-        {
-            get
-            {
+        internal static string strPropertyDescriptionVNCProxyPassword {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionVNCProxyPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter the port the proxy server listens on..
         /// </summary>
-        internal static string strPropertyDescriptionVNCProxyPort
-        {
-            get
-            {
+        internal static string strPropertyDescriptionVNCProxyPort {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionVNCProxyPort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to If you use a proxy to tunnel VNC connections, select which type it is..
         /// </summary>
-        internal static string strPropertyDescriptionVNCProxyType
-        {
-            get
-            {
+        internal static string strPropertyDescriptionVNCProxyType {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionVNCProxyType", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Enter your username for authenticating against the proxy..
         /// </summary>
-        internal static string strPropertyDescriptionVNCProxyUsername
-        {
-            get
-            {
+        internal static string strPropertyDescriptionVNCProxyUsername {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionVNCProxyUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Hostname/IP.
         /// </summary>
-        internal static string strPropertyNameAddress
-        {
-            get
-            {
+        internal static string strPropertyNameAddress {
+            get {
                 return ResourceManager.GetString("strPropertyNameAddress", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
-        internal static string strPropertyNameAll
-        {
-            get
-            {
+        internal static string strPropertyNameAll {
+            get {
                 return ResourceManager.GetString("strPropertyNameAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Server Authentication.
         /// </summary>
-        internal static string strPropertyNameAuthenticationLevel
-        {
-            get
-            {
+        internal static string strPropertyNameAuthenticationLevel {
+            get {
                 return ResourceManager.GetString("strPropertyNameAuthenticationLevel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Authentication mode.
         /// </summary>
-        internal static string strPropertyNameAuthenticationMode
-        {
-            get
-            {
+        internal static string strPropertyNameAuthenticationMode {
+            get {
                 return ResourceManager.GetString("strPropertyNameAuthenticationMode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Automatic resize.
         /// </summary>
-        internal static string strPropertyNameAutomaticResize
-        {
-            get
-            {
+        internal static string strPropertyNameAutomaticResize {
+            get {
                 return ResourceManager.GetString("strPropertyNameAutomaticResize", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Cache Bitmaps.
         /// </summary>
-        internal static string strPropertyNameCacheBitmaps
-        {
-            get
-            {
+        internal static string strPropertyNameCacheBitmaps {
+            get {
                 return ResourceManager.GetString("strPropertyNameCacheBitmaps", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Colours.
         /// </summary>
-        internal static string strPropertyNameColors
-        {
-            get
-            {
+        internal static string strPropertyNameColors {
+            get {
                 return ResourceManager.GetString("strPropertyNameColors", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Compression.
         /// </summary>
-        internal static string strPropertyNameCompression
-        {
-            get
-            {
+        internal static string strPropertyNameCompression {
+            get {
                 return ResourceManager.GetString("strPropertyNameCompression", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
-        internal static string strPropertyNameDescription
-        {
-            get
-            {
+        internal static string strPropertyNameDescription {
+            get {
                 return ResourceManager.GetString("strPropertyNameDescription", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Display Themes.
         /// </summary>
-        internal static string strPropertyNameDisplayThemes
-        {
-            get
-            {
+        internal static string strPropertyNameDisplayThemes {
+            get {
                 return ResourceManager.GetString("strPropertyNameDisplayThemes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Display Wallpaper.
         /// </summary>
-        internal static string strPropertyNameDisplayWallpaper
-        {
-            get
-            {
+        internal static string strPropertyNameDisplayWallpaper {
+            get {
                 return ResourceManager.GetString("strPropertyNameDisplayWallpaper", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Domain.
         /// </summary>
-        internal static string strPropertyNameDomain
-        {
-            get
-            {
+        internal static string strPropertyNameDomain {
+            get {
                 return ResourceManager.GetString("strPropertyNameDomain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Desktop Composition.
         /// </summary>
-        internal static string strPropertyNameEnableDesktopComposition
-        {
-            get
-            {
+        internal static string strPropertyNameEnableDesktopComposition {
+            get {
                 return ResourceManager.GetString("strPropertyNameEnableDesktopComposition", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Font Smoothing.
         /// </summary>
-        internal static string strPropertyNameEnableFontSmoothing
-        {
-            get
-            {
+        internal static string strPropertyNameEnableFontSmoothing {
+            get {
                 return ResourceManager.GetString("strPropertyNameEnableFontSmoothing", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Encoding.
         /// </summary>
-        internal static string strPropertyNameEncoding
-        {
-            get
-            {
+        internal static string strPropertyNameEncoding {
+            get {
                 return ResourceManager.GetString("strPropertyNameEncoding", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Encryption Strength.
         /// </summary>
-        internal static string strPropertyNameEncryptionStrength
-        {
-            get
-            {
+        internal static string strPropertyNameEncryptionStrength {
+            get {
                 return ResourceManager.GetString("strPropertyNameEncryptionStrength", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to External Tool.
         /// </summary>
-        internal static string strPropertyNameExternalTool
-        {
-            get
-            {
+        internal static string strPropertyNameExternalTool {
+            get {
                 return ResourceManager.GetString("strPropertyNameExternalTool", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to External Tool After.
         /// </summary>
-        internal static string strPropertyNameExternalToolAfter
-        {
-            get
-            {
+        internal static string strPropertyNameExternalToolAfter {
+            get {
                 return ResourceManager.GetString("strPropertyNameExternalToolAfter", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to External Tool Before.
         /// </summary>
-        internal static string strPropertyNameExternalToolBefore
-        {
-            get
-            {
+        internal static string strPropertyNameExternalToolBefore {
+            get {
                 return ResourceManager.GetString("strPropertyNameExternalToolBefore", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Favorite.
         /// </summary>
-        internal static string strPropertyNameFavorite
-        {
-            get
-            {
+        internal static string strPropertyNameFavorite {
+            get {
                 return ResourceManager.GetString("strPropertyNameFavorite", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Icon.
         /// </summary>
-        internal static string strPropertyNameIcon
-        {
-            get
-            {
+        internal static string strPropertyNameIcon {
+            get {
                 return ResourceManager.GetString("strPropertyNameIcon", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Load Balance Info.
         /// </summary>
-        internal static string strPropertyNameLoadBalanceInfo
-        {
-            get
-            {
+        internal static string strPropertyNameLoadBalanceInfo {
+            get {
                 return ResourceManager.GetString("strPropertyNameLoadBalanceInfo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to MAC Address.
         /// </summary>
-        internal static string strPropertyNameMACAddress
-        {
-            get
-            {
+        internal static string strPropertyNameMACAddress {
+            get {
                 return ResourceManager.GetString("strPropertyNameMACAddress", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        internal static string strPropertyNameName
-        {
-            get
-            {
+        internal static string strPropertyNameName {
+            get {
                 return ResourceManager.GetString("strPropertyNameName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Panel.
         /// </summary>
-        internal static string strPropertyNamePanel
-        {
-            get
-            {
+        internal static string strPropertyNamePanel {
+            get {
                 return ResourceManager.GetString("strPropertyNamePanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
-        internal static string strPropertyNamePassword
-        {
-            get
-            {
+        internal static string strPropertyNamePassword {
+            get {
                 return ResourceManager.GetString("strPropertyNamePassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Password protect.
         /// </summary>
-        internal static string strPropertyNamePasswordProtect
-        {
-            get
-            {
+        internal static string strPropertyNamePasswordProtect {
+            get {
                 return ResourceManager.GetString("strPropertyNamePasswordProtect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Port.
         /// </summary>
-        internal static string strPropertyNamePort
-        {
-            get
-            {
+        internal static string strPropertyNamePort {
+            get {
                 return ResourceManager.GetString("strPropertyNamePort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Protocol.
         /// </summary>
-        internal static string strPropertyNameProtocol
-        {
-            get
-            {
+        internal static string strPropertyNameProtocol {
+            get {
                 return ResourceManager.GetString("strPropertyNameProtocol", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PuTTY Session.
         /// </summary>
-        internal static string strPropertyNamePuttySession
-        {
-            get
-            {
+        internal static string strPropertyNamePuttySession {
+            get {
                 return ResourceManager.GetString("strPropertyNamePuttySession", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Gateway Domain.
         /// </summary>
-        internal static string strPropertyNameRDGatewayDomain
-        {
-            get
-            {
+        internal static string strPropertyNameRDGatewayDomain {
+            get {
                 return ResourceManager.GetString("strPropertyNameRDGatewayDomain", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Gateway Hostname.
         /// </summary>
-        internal static string strPropertyNameRDGatewayHostname
-        {
-            get
-            {
+        internal static string strPropertyNameRDGatewayHostname {
+            get {
                 return ResourceManager.GetString("strPropertyNameRDGatewayHostname", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Remote Desktop Gateway Password.
         /// </summary>
-        internal static string strPropertyNameRDGatewayPassword
-        {
-            get
-            {
+        internal static string strPropertyNameRDGatewayPassword {
+            get {
                 return ResourceManager.GetString("strPropertyNameRDGatewayPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use Gateway.
         /// </summary>
-        internal static string strPropertyNameRDGatewayUsageMethod
-        {
-            get
-            {
+        internal static string strPropertyNameRDGatewayUsageMethod {
+            get {
                 return ResourceManager.GetString("strPropertyNameRDGatewayUsageMethod", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Gateway Credentials.
         /// </summary>
-        internal static string strPropertyNameRDGatewayUseConnectionCredentials
-        {
-            get
-            {
+        internal static string strPropertyNameRDGatewayUseConnectionCredentials {
+            get {
                 return ResourceManager.GetString("strPropertyNameRDGatewayUseConnectionCredentials", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Gateway Username.
         /// </summary>
-        internal static string strPropertyNameRDGatewayUsername
-        {
-            get
-            {
+        internal static string strPropertyNameRDGatewayUsername {
+            get {
                 return ResourceManager.GetString("strPropertyNameRDGatewayUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Alert on Idle disconnect.
         /// </summary>
-        internal static string strPropertyNameRDPAlertIdleTimeout
-        {
-            get
-            {
+        internal static string strPropertyNameRDPAlertIdleTimeout {
+            get {
                 return ResourceManager.GetString("strPropertyNameRDPAlertIdleTimeout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Minutes to Idle.
         /// </summary>
-        internal static string strPropertyNameRDPMinutesToIdleTimeout
-        {
-            get
-            {
+        internal static string strPropertyNameRDPMinutesToIdleTimeout {
+            get {
                 return ResourceManager.GetString("strPropertyNameRDPMinutesToIdleTimeout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP Version.
         /// </summary>
-        internal static string strPropertyNameRdpVersion
-        {
-            get
-            {
+        internal static string strPropertyNameRdpVersion {
+            get {
                 return ResourceManager.GetString("strPropertyNameRdpVersion", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Audio Capture.
         /// </summary>
-        internal static string strPropertyNameRedirectAudioCapture
-        {
-            get
-            {
+        internal static string strPropertyNameRedirectAudioCapture {
+            get {
                 return ResourceManager.GetString("strPropertyNameRedirectAudioCapture", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Clipboard.
         /// </summary>
-        internal static string strPropertyNameRedirectClipboard
-        {
-            get
-            {
+        internal static string strPropertyNameRedirectClipboard {
+            get {
                 return ResourceManager.GetString("strPropertyNameRedirectClipboard", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disk Drives.
         /// </summary>
-        internal static string strPropertyNameRedirectDrives
-        {
-            get
-            {
+        internal static string strPropertyNameRedirectDrives {
+            get {
                 return ResourceManager.GetString("strPropertyNameRedirectDrives", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Key Combinations.
         /// </summary>
-        internal static string strPropertyNameRedirectKeys
-        {
-            get
-            {
+        internal static string strPropertyNameRedirectKeys {
+            get {
                 return ResourceManager.GetString("strPropertyNameRedirectKeys", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ports.
         /// </summary>
-        internal static string strPropertyNameRedirectPorts
-        {
-            get
-            {
+        internal static string strPropertyNameRedirectPorts {
+            get {
                 return ResourceManager.GetString("strPropertyNameRedirectPorts", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Printers.
         /// </summary>
-        internal static string strPropertyNameRedirectPrinters
-        {
-            get
-            {
+        internal static string strPropertyNameRedirectPrinters {
+            get {
                 return ResourceManager.GetString("strPropertyNameRedirectPrinters", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Smart Cards.
         /// </summary>
-        internal static string strPropertyNameRedirectSmartCards
-        {
-            get
-            {
+        internal static string strPropertyNameRedirectSmartCards {
+            get {
                 return ResourceManager.GetString("strPropertyNameRedirectSmartCards", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Sounds.
         /// </summary>
-        internal static string strPropertyNameRedirectSounds
-        {
-            get
-            {
+        internal static string strPropertyNameRedirectSounds {
+            get {
                 return ResourceManager.GetString("strPropertyNameRedirectSounds", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rendering Engine.
         /// </summary>
-        internal static string strPropertyNameRenderingEngine
-        {
-            get
-            {
+        internal static string strPropertyNameRenderingEngine {
+            get {
                 return ResourceManager.GetString("strPropertyNameRenderingEngine", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Resolution.
         /// </summary>
-        internal static string strPropertyNameResolution
-        {
-            get
-            {
+        internal static string strPropertyNameResolution {
+            get {
                 return ResourceManager.GetString("strPropertyNameResolution", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SmartSize Mode.
         /// </summary>
-        internal static string strPropertyNameSmartSizeMode
-        {
-            get
-            {
+        internal static string strPropertyNameSmartSizeMode {
+            get {
                 return ResourceManager.GetString("strPropertyNameSmartSizeMode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Sound quality.
         /// </summary>
-        internal static string strPropertyNameSoundQuality
-        {
-            get
-            {
+        internal static string strPropertyNameSoundQuality {
+            get {
                 return ResourceManager.GetString("strPropertyNameSoundQuality", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH Options.
+        /// </summary>
+        internal static string strPropertyNameSSHOptions {
+            get {
+                return ResourceManager.GetString("strPropertyNameSSHOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH Tunnel.
+        /// </summary>
+        internal static string strPropertyNameSSHTunnelConnection {
+            get {
+                return ResourceManager.GetString("strPropertyNameSSHTunnelConnection", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Use Console Session.
         /// </summary>
-        internal static string strPropertyNameUseConsoleSession
-        {
-            get
-            {
+        internal static string strPropertyNameUseConsoleSession {
+            get {
                 return ResourceManager.GetString("strPropertyNameUseConsoleSession", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use CredSSP.
         /// </summary>
-        internal static string strPropertyNameUseCredSsp
-        {
-            get
-            {
+        internal static string strPropertyNameUseCredSsp {
+            get {
                 return ResourceManager.GetString("strPropertyNameUseCredSsp", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use enhanced mode.
         /// </summary>
-        internal static string strPropertyNameUseEnhancedMode
-        {
-            get
-            {
+        internal static string strPropertyNameUseEnhancedMode {
+            get {
                 return ResourceManager.GetString("strPropertyNameUseEnhancedMode", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to User Field.
         /// </summary>
-        internal static string strPropertyNameUser1
-        {
-            get
-            {
+        internal static string strPropertyNameUser1 {
+            get {
                 return ResourceManager.GetString("strPropertyNameUser1", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
-        internal static string strPropertyNameUsername
-        {
-            get
-            {
+        internal static string strPropertyNameUsername {
+            get {
                 return ResourceManager.GetString("strPropertyNameUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use VM ID.
         /// </summary>
-        internal static string strPropertyNameUseVmId
-        {
-            get
-            {
+        internal static string strPropertyNameUseVmId {
+            get {
                 return ResourceManager.GetString("strPropertyNameUseVmId", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to View Only.
         /// </summary>
-        internal static string strPropertyNameViewOnly
-        {
-            get
-            {
+        internal static string strPropertyNameViewOnly {
+            get {
                 return ResourceManager.GetString("strPropertyNameViewOnly", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VM ID.
         /// </summary>
-        internal static string strPropertyNameVmId
-        {
-            get
-            {
+        internal static string strPropertyNameVmId {
+            get {
                 return ResourceManager.GetString("strPropertyNameVmId", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Proxy Address.
         /// </summary>
-        internal static string strPropertyNameVNCProxyAddress
-        {
-            get
-            {
+        internal static string strPropertyNameVNCProxyAddress {
+            get {
                 return ResourceManager.GetString("strPropertyNameVNCProxyAddress", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Proxy Password.
         /// </summary>
-        internal static string strPropertyNameVNCProxyPassword
-        {
-            get
-            {
+        internal static string strPropertyNameVNCProxyPassword {
+            get {
                 return ResourceManager.GetString("strPropertyNameVNCProxyPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Proxy Port.
         /// </summary>
-        internal static string strPropertyNameVNCProxyPort
-        {
-            get
-            {
+        internal static string strPropertyNameVNCProxyPort {
+            get {
                 return ResourceManager.GetString("strPropertyNameVNCProxyPort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Proxy Type.
         /// </summary>
-        internal static string strPropertyNameVNCProxyType
-        {
-            get
-            {
+        internal static string strPropertyNameVNCProxyType {
+            get {
                 return ResourceManager.GetString("strPropertyNameVNCProxyType", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Proxy Username.
         /// </summary>
-        internal static string strPropertyNameVNCProxyUsername
-        {
-            get
-            {
+        internal static string strPropertyNameVNCProxyUsername {
+            get {
                 return ResourceManager.GetString("strPropertyNameVNCProxyUsername", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Protocol Event Disconnected. Host: &quot;{1}&quot;; Protocol: &quot;{2}&quot; Message: &quot;{0}&quot;.
         /// </summary>
-        internal static string strProtocolEventDisconnected
-        {
-            get
-            {
+        internal static string strProtocolEventDisconnected {
+            get {
                 return ResourceManager.GetString("strProtocolEventDisconnected", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Protocol Event Disconnected failed.
         ///{0}.
         /// </summary>
-        internal static string strProtocolEventDisconnectFailed
-        {
-            get
-            {
+        internal static string strProtocolEventDisconnectFailed {
+            get {
                 return ResourceManager.GetString("strProtocolEventDisconnectFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Protocol to import.
         /// </summary>
-        internal static string strProtocolToImport
-        {
-            get
-            {
+        internal static string strProtocolToImport {
+            get {
                 return ResourceManager.GetString("strProtocolToImport", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Proxy test failed!.
         /// </summary>
-        internal static string strProxyTestFailed
-        {
-            get
-            {
+        internal static string strProxyTestFailed {
+            get {
                 return ResourceManager.GetString("strProxyTestFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Proxy test succeeded!.
         /// </summary>
-        internal static string strProxyTestSucceeded
-        {
-            get
-            {
+        internal static string strProxyTestSucceeded {
+            get {
                 return ResourceManager.GetString("strProxyTestSucceeded", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection failed!.
+        /// </summary>
+        internal static string strPuttyConnectionFailed {
+            get {
+                return ResourceManager.GetString("strPuttyConnectionFailed", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Dispose of Putty process failed!.
         /// </summary>
-        internal static string strPuttyDisposeFailed
-        {
-            get
-            {
+        internal static string strPuttyDisposeFailed {
+            get {
                 return ResourceManager.GetString("strPuttyDisposeFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t set focus!.
         /// </summary>
-        internal static string strPuttyFocusFailed
-        {
-            get
-            {
+        internal static string strPuttyFocusFailed {
+            get {
                 return ResourceManager.GetString("strPuttyFocusFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Get Putty Sessions Failed!.
         /// </summary>
-        internal static string strPuttyGetSessionsFailed
-        {
-            get
-            {
+        internal static string strPuttyGetSessionsFailed {
+            get {
                 return ResourceManager.GetString("strPuttyGetSessionsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Putty Handle: {0}.
         /// </summary>
-        internal static string strPuttyHandle
-        {
-            get
-            {
+        internal static string strPuttyHandle {
+            get {
                 return ResourceManager.GetString("strPuttyHandle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Killing Putty Process failed!.
         /// </summary>
-        internal static string strPuttyKillFailed
-        {
-            get
-            {
+        internal static string strPuttyKillFailed {
+            get {
                 return ResourceManager.GetString("strPuttyKillFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Panel Handle: {0}.
         /// </summary>
-        internal static string strPuttyParentHandle
-        {
-            get
-            {
+        internal static string strPuttyParentHandle {
+            get {
                 return ResourceManager.GetString("strPuttyParentHandle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Putty Resize Failed!.
         /// </summary>
-        internal static string strPuttyResizeFailed
-        {
-            get
-            {
+        internal static string strPuttyResizeFailed {
+            get {
                 return ResourceManager.GetString("strPuttyResizeFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PuTTY Saved Sessions.
         /// </summary>
-        internal static string strPuttySavedSessionsRootName
-        {
-            get
-            {
+        internal static string strPuttySavedSessionsRootName {
+            get {
                 return ResourceManager.GetString("strPuttySavedSessionsRootName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PuTTY Session Settings.
         /// </summary>
-        internal static string strPuttySessionSettings
-        {
-            get
-            {
+        internal static string strPuttySessionSettings {
+            get {
                 return ResourceManager.GetString("strPuttySessionSettings", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PuTTY Settings.
         /// </summary>
-        internal static string strPuttySettings
-        {
-            get
-            {
+        internal static string strPuttySettings {
+            get {
                 return ResourceManager.GetString("strPuttySettings", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show PuTTY Settings Dialog failed!.
         /// </summary>
-        internal static string strPuttyShowSettingsDialogFailed
-        {
-            get
-            {
+        internal static string strPuttyShowSettingsDialogFailed {
+            get {
                 return ResourceManager.GetString("strPuttyShowSettingsDialogFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Putty Start Failed!.
         /// </summary>
-        internal static string strPuttyStartFailed
-        {
-            get
-            {
+        internal static string strPuttyStartFailed {
+            get {
                 return ResourceManager.GetString("strPuttyStartFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to --- PuTTY Stuff ---.
         /// </summary>
-        internal static string strPuttyStuff
-        {
-            get
-            {
+        internal static string strPuttyStuff {
+            get {
                 return ResourceManager.GetString("strPuttyStuff", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to PuTTY Title: {0}.
         /// </summary>
-        internal static string strPuttyTitle
-        {
-            get
-            {
+        internal static string strPuttyTitle {
+            get {
                 return ResourceManager.GetString("strPuttyTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Quick: {0}.
         /// </summary>
-        internal static string strQuick
-        {
-            get
-            {
+        internal static string strQuick {
+            get {
                 return ResourceManager.GetString("strQuick", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Quick Connect.
         /// </summary>
-        internal static string strQuickConnect
-        {
-            get
-            {
+        internal static string strQuickConnect {
+            get {
                 return ResourceManager.GetString("strQuickConnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Quick Connect Add Failed!.
         /// </summary>
-        internal static string strQuickConnectAddFailed
-        {
-            get
-            {
+        internal static string strQuickConnectAddFailed {
+            get {
                 return ResourceManager.GetString("strQuickConnectAddFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Creating quick connect failed.
         /// </summary>
-        internal static string strQuickConnectFailed
-        {
-            get
-            {
+        internal static string strQuickConnectFailed {
+            get {
                 return ResourceManager.GetString("strQuickConnectFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to &amp;Warn me when closing connections.
         /// </summary>
-        internal static string strRadioCloseWarnAll
-        {
-            get
-            {
+        internal static string strRadioCloseWarnAll {
+            get {
                 return ResourceManager.GetString("strRadioCloseWarnAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Warn me only when e&amp;xiting mRemoteNG.
         /// </summary>
-        internal static string strRadioCloseWarnExit
-        {
-            get
-            {
+        internal static string strRadioCloseWarnExit {
+            get {
                 return ResourceManager.GetString("strRadioCloseWarnExit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Warn me only when closing &amp;multiple connections.
         /// </summary>
-        internal static string strRadioCloseWarnMultiple
-        {
-            get
-            {
+        internal static string strRadioCloseWarnMultiple {
+            get {
                 return ResourceManager.GetString("strRadioCloseWarnMultiple", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do &amp;not warn me when closing connections.
         /// </summary>
-        internal static string strRadioCloseWarnNever
-        {
-            get
-            {
+        internal static string strRadioCloseWarnNever {
+            get {
                 return ResourceManager.GetString("strRadioCloseWarnNever", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RAW.
         /// </summary>
-        internal static string strRAW
-        {
-            get
-            {
+        internal static string strRAW {
+            get {
                 return ResourceManager.GetString("strRAW", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP.
         /// </summary>
-        internal static string strRDP
-        {
-            get
-            {
+        internal static string strRDP {
+            get {
                 return ResourceManager.GetString("strRDP", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 16777216 Colours (24-bit).
         /// </summary>
-        internal static string strRDP16777216Colors
-        {
-            get
-            {
+        internal static string strRDP16777216Colors {
+            get {
                 return ResourceManager.GetString("strRDP16777216Colors", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 256 Colours (8-bit).
         /// </summary>
-        internal static string strRDP256Colors
-        {
-            get
-            {
+        internal static string strRDP256Colors {
+            get {
                 return ResourceManager.GetString("strRDP256Colors", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 32768 Colours (15-bit).
         /// </summary>
-        internal static string strRDP32768Colors
-        {
-            get
-            {
+        internal static string strRDP32768Colors {
+            get {
                 return ResourceManager.GetString("strRDP32768Colors", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 16777216 Colours (32-bit).
         /// </summary>
-        internal static string strRDP4294967296Colors
-        {
-            get
-            {
+        internal static string strRDP4294967296Colors {
+            get {
                 return ResourceManager.GetString("strRDP4294967296Colors", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to 65536 Colours (16-bit).
         /// </summary>
-        internal static string strRDP65536Colors
-        {
-            get
-            {
+        internal static string strRDP65536Colors {
+            get {
                 return ResourceManager.GetString("strRDP65536Colors", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP Add Resolution failed!.
         /// </summary>
-        internal static string strRdpAddResolutionFailed
-        {
-            get
-            {
+        internal static string strRdpAddResolutionFailed {
+            get {
                 return ResourceManager.GetString("strRdpAddResolutionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP Add Resolutions failed!.
         /// </summary>
-        internal static string strRdpAddResolutionsFailed
-        {
-            get
-            {
+        internal static string strRdpAddResolutionsFailed {
+            get {
                 return ResourceManager.GetString("strRdpAddResolutionsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Add Session failed.
         /// </summary>
-        internal static string strRdpAddSessionFailed
-        {
-            get
-            {
+        internal static string strRdpAddSessionFailed {
+            get {
                 return ResourceManager.GetString("strRdpAddSessionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Close RDP Connection failed!.
         /// </summary>
-        internal static string strRdpCloseConnectionFailed
-        {
-            get
-            {
+        internal static string strRdpCloseConnectionFailed {
+            get {
                 return ResourceManager.GetString("strRdpCloseConnectionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t create RDP control, please check mRemoteNG requirements..
         /// </summary>
-        internal static string strRdpControlCreationFailed
-        {
-            get
-            {
+        internal static string strRdpControlCreationFailed {
+            get {
                 return ResourceManager.GetString("strRdpControlCreationFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable Cursor blinking.
         /// </summary>
-        internal static string strRDPDisableCursorblinking
-        {
-            get
-            {
+        internal static string strRDPDisableCursorblinking {
+            get {
                 return ResourceManager.GetString("strRDPDisableCursorblinking", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable Cursor Shadow.
         /// </summary>
-        internal static string strRDPDisableCursorShadow
-        {
-            get
-            {
+        internal static string strRDPDisableCursorShadow {
+            get {
                 return ResourceManager.GetString("strRDPDisableCursorShadow", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable Full Window drag.
         /// </summary>
-        internal static string strRDPDisableFullWindowdrag
-        {
-            get
-            {
+        internal static string strRDPDisableFullWindowdrag {
+            get {
                 return ResourceManager.GetString("strRDPDisableFullWindowdrag", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable Menu Animations.
         /// </summary>
-        internal static string strRDPDisableMenuAnimations
-        {
-            get
-            {
+        internal static string strRDPDisableMenuAnimations {
+            get {
                 return ResourceManager.GetString("strRDPDisableMenuAnimations", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable Themes.
         /// </summary>
-        internal static string strRDPDisableThemes
-        {
-            get
-            {
+        internal static string strRDPDisableThemes {
+            get {
                 return ResourceManager.GetString("strRDPDisableThemes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Disable Wallpaper.
         /// </summary>
-        internal static string strRDPDisableWallpaper
-        {
-            get
-            {
+        internal static string strRDPDisableWallpaper {
+            get {
                 return ResourceManager.GetString("strRDPDisableWallpaper", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP disconnected!.
         /// </summary>
-        internal static string strRdpDisconnected
-        {
-            get
-            {
+        internal static string strRdpDisconnected {
+            get {
                 return ResourceManager.GetString("strRdpDisconnected", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP Disconnect failed, trying to close!.
         /// </summary>
-        internal static string strRdpDisconnectFailed
-        {
-            get
-            {
+        internal static string strRdpDisconnectFailed {
+            get {
                 return ResourceManager.GetString("strRdpDisconnectFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Internal error code 1..
         /// </summary>
-        internal static string strRdpErrorCode1
-        {
-            get
-            {
+        internal static string strRdpErrorCode1 {
+            get {
                 return ResourceManager.GetString("strRdpErrorCode1", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Internal error code 2..
         /// </summary>
-        internal static string strRdpErrorCode2
-        {
-            get
-            {
+        internal static string strRdpErrorCode2 {
+            get {
                 return ResourceManager.GetString("strRdpErrorCode2", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Internal error code 3. This is not a valid state..
         /// </summary>
-        internal static string strRdpErrorCode3
-        {
-            get
-            {
+        internal static string strRdpErrorCode3 {
+            get {
                 return ResourceManager.GetString("strRdpErrorCode3", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Internal error code 4..
         /// </summary>
-        internal static string strRdpErrorCode4
-        {
-            get
-            {
+        internal static string strRdpErrorCode4 {
+            get {
                 return ResourceManager.GetString("strRdpErrorCode4", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An unrecoverable error has occurred during client connection..
         /// </summary>
-        internal static string strRdpErrorConnection
-        {
-            get
-            {
+        internal static string strRdpErrorConnection {
+            get {
                 return ResourceManager.GetString("strRdpErrorConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to GetError failed (FatalErrors).
         /// </summary>
-        internal static string strRdpErrorGetFailure
-        {
-            get
-            {
+        internal static string strRdpErrorGetFailure {
+            get {
                 return ResourceManager.GetString("strRdpErrorGetFailure", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An unknown fatal RDP error has occurred.  Error code {0}..
         /// </summary>
-        internal static string strRdpErrorGetUnknown
-        {
-            get
-            {
+        internal static string strRdpErrorGetUnknown {
+            get {
                 return ResourceManager.GetString("strRdpErrorGetUnknown", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An out-of-memory error has occurred..
         /// </summary>
-        internal static string strRdpErrorOutOfMemory
-        {
-            get
-            {
+        internal static string strRdpErrorOutOfMemory {
+            get {
                 return ResourceManager.GetString("strRdpErrorOutOfMemory", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An unknown error has occurred..
         /// </summary>
-        internal static string strRdpErrorUnknown
-        {
-            get
-            {
+        internal static string strRdpErrorUnknown {
+            get {
                 return ResourceManager.GetString("strRdpErrorUnknown", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to A window-creation error has occurred..
         /// </summary>
-        internal static string strRdpErrorWindowCreation
-        {
-            get
-            {
+        internal static string strRdpErrorWindowCreation {
+            get {
                 return ResourceManager.GetString("strRdpErrorWindowCreation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Winsock initialization error..
         /// </summary>
-        internal static string strRdpErrorWinsock
-        {
-            get
-            {
+        internal static string strRdpErrorWinsock {
+            get {
                 return ResourceManager.GetString("strRdpErrorWinsock", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t import rdp file!.
         /// </summary>
-        internal static string strRdpFileCouldNotBeImported
-        {
-            get
-            {
+        internal static string strRdpFileCouldNotBeImported {
+            get {
                 return ResourceManager.GetString("strRdpFileCouldNotBeImported", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Fit To Panel.
         /// </summary>
-        internal static string strRDPFitToPanel
-        {
-            get
-            {
+        internal static string strRDPFitToPanel {
+            get {
                 return ResourceManager.GetString("strRDPFitToPanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP Focus failed!.
         /// </summary>
-        internal static string strRdpFocusFailed
-        {
-            get
-            {
+        internal static string strRdpFocusFailed {
+            get {
                 return ResourceManager.GetString("strRdpFocusFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RD Gateway is supported..
         /// </summary>
-        internal static string strRdpGatewayIsSupported
-        {
-            get
-            {
+        internal static string strRdpGatewayIsSupported {
+            get {
                 return ResourceManager.GetString("strRdpGatewayIsSupported", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RD Gateway is not supported!.
         /// </summary>
-        internal static string strRdpGatewayNotSupported
-        {
-            get
-            {
+        internal static string strRdpGatewayNotSupported {
+            get {
                 return ResourceManager.GetString("strRdpGatewayNotSupported", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to GetSessions failed!.
         /// </summary>
-        internal static string strRdpGetSessionsFailed
-        {
-            get
-            {
+        internal static string strRdpGetSessionsFailed {
+            get {
                 return ResourceManager.GetString("strRdpGetSessionsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP Connection Timeout.
         /// </summary>
-        internal static string strRDPOverallConnectionTimeout
-        {
-            get
-            {
+        internal static string strRDPOverallConnectionTimeout {
+            get {
                 return ResourceManager.GetString("strRDPOverallConnectionTimeout", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP reconnection count:.
         /// </summary>
-        internal static string strRdpReconnectCount
-        {
-            get
-            {
+        internal static string strRdpReconnectCount {
+            get {
                 return ResourceManager.GetString("strRdpReconnectCount", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP SetAuthenticationLevel failed!.
         /// </summary>
-        internal static string strRdpSetAuthenticationLevelFailed
-        {
-            get
-            {
+        internal static string strRdpSetAuthenticationLevelFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetAuthenticationLevelFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP SetUseConsoleSession failed!.
         /// </summary>
-        internal static string strRdpSetConsoleSessionFailed
-        {
-            get
-            {
+        internal static string strRdpSetConsoleSessionFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetConsoleSessionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Setting Console switch for RDC {0}..
         /// </summary>
-        internal static string strRdpSetConsoleSwitch
-        {
-            get
-            {
+        internal static string strRdpSetConsoleSwitch {
+            get {
                 return ResourceManager.GetString("strRdpSetConsoleSwitch", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP SetCredentials failed!.
         /// </summary>
-        internal static string strRdpSetCredentialsFailed
-        {
-            get
-            {
+        internal static string strRdpSetCredentialsFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetCredentialsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP SetEventHandlers failed!.
         /// </summary>
-        internal static string strRdpSetEventHandlersFailed
-        {
-            get
-            {
+        internal static string strRdpSetEventHandlersFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetEventHandlersFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP SetRDGateway failed!.
         /// </summary>
-        internal static string strRdpSetGatewayFailed
-        {
-            get
-            {
+        internal static string strRdpSetGatewayFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetGatewayFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP SetPerformanceFlags failed!.
         /// </summary>
-        internal static string strRdpSetPerformanceFlagsFailed
-        {
-            get
-            {
+        internal static string strRdpSetPerformanceFlagsFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetPerformanceFlagsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP SetPort failed!.
         /// </summary>
-        internal static string strRdpSetPortFailed
-        {
-            get
-            {
+        internal static string strRdpSetPortFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetPortFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP SetProps failed!.
         /// </summary>
-        internal static string strRdpSetPropsFailed
-        {
-            get
-            {
+        internal static string strRdpSetPropsFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetPropsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rdp Set Redirection Failed!.
         /// </summary>
-        internal static string strRdpSetRedirectionFailed
-        {
-            get
-            {
+        internal static string strRdpSetRedirectionFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetRedirectionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rdp Set Redirect Keys Failed!.
         /// </summary>
-        internal static string strRdpSetRedirectKeysFailed
-        {
-            get
-            {
+        internal static string strRdpSetRedirectKeysFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetRedirectKeysFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP SetResolution failed!.
         /// </summary>
-        internal static string strRdpSetResolutionFailed
-        {
-            get
-            {
+        internal static string strRdpSetResolutionFailed {
+            get {
                 return ResourceManager.GetString("strRdpSetResolutionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Smart Size.
         /// </summary>
-        internal static string strRDPSmartSize
-        {
-            get
-            {
+        internal static string strRDPSmartSize {
+            get {
                 return ResourceManager.GetString("strRDPSmartSize", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Bring to this computer.
         /// </summary>
-        internal static string strRDPSoundBringToThisComputer
-        {
-            get
-            {
+        internal static string strRDPSoundBringToThisComputer {
+            get {
                 return ResourceManager.GetString("strRDPSoundBringToThisComputer", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do not play.
         /// </summary>
-        internal static string strRDPSoundDoNotPlay
-        {
-            get
-            {
+        internal static string strRDPSoundDoNotPlay {
+            get {
                 return ResourceManager.GetString("strRDPSoundDoNotPlay", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Leave at remote computer.
         /// </summary>
-        internal static string strRDPSoundLeaveAtRemoteComputer
-        {
-            get
-            {
+        internal static string strRDPSoundLeaveAtRemoteComputer {
+            get {
                 return ResourceManager.GetString("strRDPSoundLeaveAtRemoteComputer", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Dynamic.
         /// </summary>
-        internal static string strRDPSoundQualityDynamic
-        {
-            get
-            {
+        internal static string strRDPSoundQualityDynamic {
+            get {
                 return ResourceManager.GetString("strRDPSoundQualityDynamic", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to High.
         /// </summary>
-        internal static string strRDPSoundQualityHigh
-        {
-            get
-            {
+        internal static string strRDPSoundQualityHigh {
+            get {
                 return ResourceManager.GetString("strRDPSoundQualityHigh", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Medium.
         /// </summary>
-        internal static string strRDPSoundQualityMedium
-        {
-            get
-            {
+        internal static string strRDPSoundQualityMedium {
+            get {
                 return ResourceManager.GetString("strRDPSoundQualityMedium", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP ToggleFullscreen failed!.
         /// </summary>
-        internal static string strRdpToggleFullscreenFailed
-        {
-            get
-            {
+        internal static string strRdpToggleFullscreenFailed {
+            get {
                 return ResourceManager.GetString("strRdpToggleFullscreenFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to RDP ToggleSmartSize failed!.
         /// </summary>
-        internal static string strRdpToggleSmartSizeFailed
-        {
-            get
-            {
+        internal static string strRdpToggleSmartSizeFailed {
+            get {
                 return ResourceManager.GetString("strRdpToggleSmartSizeFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reconnect All Connections.
         /// </summary>
-        internal static string strReconnectAllConnections
-        {
-            get
-            {
+        internal static string strReconnectAllConnections {
+            get {
                 return ResourceManager.GetString("strReconnectAllConnections", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Reconnect to previously opened sessions on startup.
         /// </summary>
-        internal static string strReconnectAtStartup
-        {
-            get
-            {
+        internal static string strReconnectAtStartup {
+            get {
                 return ResourceManager.GetString("strReconnectAtStartup", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Refresh.
         /// </summary>
-        internal static string strRefresh
-        {
-            get
-            {
+        internal static string strRefresh {
+            get {
                 return ResourceManager.GetString("strRefresh", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Release Channel.
         /// </summary>
-        internal static string strReleaseChannel
-        {
-            get
-            {
+        internal static string strReleaseChannel {
+            get {
                 return ResourceManager.GetString("strReleaseChannel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Stable channel includes final releases only.
         ///Beta channel includes Betas &amp; Release Candidates.
         ///Development Channel includes Alphas, Betas &amp; Release Candidates..
         /// </summary>
-        internal static string strReleaseChannelExplanation
-        {
-            get
-            {
+        internal static string strReleaseChannelExplanation {
+            get {
                 return ResourceManager.GetString("strReleaseChannelExplanation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Remote file.
         /// </summary>
-        internal static string strRemoteFile
-        {
-            get
-            {
+        internal static string strRemoteFile {
+            get {
                 return ResourceManager.GetString("strRemoteFile", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
-        internal static string strRemove
-        {
-            get
-            {
+        internal static string strRemove {
+            get {
                 return ResourceManager.GetString("strRemove", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Remove All.
         /// </summary>
-        internal static string strRemoveAll
-        {
-            get
-            {
+        internal static string strRemoveAll {
+            get {
                 return ResourceManager.GetString("strRemoveAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rename.
         /// </summary>
-        internal static string strRename
-        {
-            get
-            {
+        internal static string strRename {
+            get {
                 return ResourceManager.GetString("strRename", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Rlogin.
         /// </summary>
-        internal static string strRlogin
-        {
-            get
-            {
+        internal static string strRlogin {
+            get {
                 return ResourceManager.GetString("strRlogin", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Run elevated.
         /// </summary>
-        internal static string strRunElevated
-        {
-            get
-            {
+        internal static string strRunElevated {
+            get {
                 return ResourceManager.GetString("strRunElevated", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Run elevate.
         /// </summary>
-        internal static string strRunElevateHeader
-        {
-            get
-            {
+        internal static string strRunElevateHeader {
+            get {
                 return ResourceManager.GetString("strRunElevateHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        internal static string strSave
-        {
-            get
-            {
+        internal static string strSave {
+            get {
                 return ResourceManager.GetString("strSave", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Save All.
         /// </summary>
-        internal static string strSaveAll
-        {
-            get
-            {
+        internal static string strSaveAll {
+            get {
                 return ResourceManager.GetString("strSaveAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Do you want to save the current connections file before loading another?.
         /// </summary>
-        internal static string strSaveConnectionsFileBeforeOpeningAnother
-        {
-            get
-            {
+        internal static string strSaveConnectionsFileBeforeOpeningAnother {
+            get {
                 return ResourceManager.GetString("strSaveConnectionsFileBeforeOpeningAnother", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Save connections on exit.
         /// </summary>
-        internal static string strSaveConsOnExit
-        {
-            get
-            {
+        internal static string strSaveConsOnExit {
+            get {
                 return ResourceManager.GetString("strSaveConsOnExit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png.
         /// </summary>
-        internal static string strSaveImageFilter
-        {
-            get
-            {
+        internal static string strSaveImageFilter {
+            get {
                 return ResourceManager.GetString("strSaveImageFilter", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Screen.
         /// </summary>
-        internal static string strScreen
-        {
-            get
-            {
+        internal static string strScreen {
+            get {
                 return ResourceManager.GetString("strScreen", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Screenshot.
         /// </summary>
-        internal static string strScreenshot
-        {
-            get
-            {
+        internal static string strScreenshot {
+            get {
                 return ResourceManager.GetString("strScreenshot", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Screenshots.
         /// </summary>
-        internal static string strScreenshots
-        {
-            get
-            {
+        internal static string strScreenshots {
+            get {
                 return ResourceManager.GetString("strScreenshots", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
-        internal static string strSearchPrompt
-        {
-            get
-            {
+        internal static string strSearchPrompt {
+            get {
                 return ResourceManager.GetString("strSearchPrompt", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Send To....
         /// </summary>
-        internal static string strSendTo
-        {
-            get
-            {
+        internal static string strSendTo {
+            get {
                 return ResourceManager.GetString("strSendTo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Get Sessions Background failed.
         /// </summary>
-        internal static string strSessionGetFailed
-        {
-            get
-            {
+        internal static string strSessionGetFailed {
+            get {
                 return ResourceManager.GetString("strSessionGetFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Kill Session Background failed.
         /// </summary>
-        internal static string strSessionKillFailed
-        {
-            get
-            {
+        internal static string strSessionKillFailed {
+            get {
                 return ResourceManager.GetString("strSessionKillFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Set hostname like display name when creating or renaming connections.
         /// </summary>
-        internal static string strSetHostnameLikeDisplayName
-        {
-            get
-            {
+        internal static string strSetHostnameLikeDisplayName {
+            get {
                 return ResourceManager.GetString("strSetHostnameLikeDisplayName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Setting main form text failed.
         /// </summary>
-        internal static string strSettingMainFormTextFailed
-        {
-            get
-            {
+        internal static string strSettingMainFormTextFailed {
+            get {
                 return ResourceManager.GetString("strSettingMainFormTextFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t save settings or dispose SysTray Icon!.
         /// </summary>
-        internal static string strSettingsCouldNotBeSavedOrTrayDispose
-        {
-            get
-            {
+        internal static string strSettingsCouldNotBeSavedOrTrayDispose {
+            get {
                 return ResourceManager.GetString("strSettingsCouldNotBeSavedOrTrayDispose", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show description tooltips in connection tree.
         /// </summary>
-        internal static string strShowDescriptionTooltips
-        {
-            get
-            {
+        internal static string strShowDescriptionTooltips {
+            get {
                 return ResourceManager.GetString("strShowDescriptionTooltips", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show full connections file path in window title.
         /// </summary>
-        internal static string strShowFullConsFilePath
-        {
-            get
-            {
+        internal static string strShowFullConsFilePath {
+            get {
                 return ResourceManager.GetString("strShowFullConsFilePath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show logon information on tab names.
         /// </summary>
-        internal static string strShowLogonInfoOnTabs
-        {
-            get
-            {
+        internal static string strShowLogonInfoOnTabs {
+            get {
                 return ResourceManager.GetString("strShowLogonInfoOnTabs", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show On Toolbar.
         /// </summary>
-        internal static string strShowOnToolbar
-        {
-            get
-            {
+        internal static string strShowOnToolbar {
+            get {
                 return ResourceManager.GetString("strShowOnToolbar", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show on toolbar column.
         /// </summary>
-        internal static string strShowOnToolbarColumnHeader
-        {
-            get
-            {
+        internal static string strShowOnToolbarColumnHeader {
+            get {
                 return ResourceManager.GetString("strShowOnToolbarColumnHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show protocols on tab names.
         /// </summary>
-        internal static string strShowProtocolOnTabs
-        {
-            get
-            {
+        internal static string strShowProtocolOnTabs {
+            get {
                 return ResourceManager.GetString("strShowProtocolOnTabs", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Show these message types.
         /// </summary>
-        internal static string strShowTheseMessageTypes
-        {
-            get
-            {
+        internal static string strShowTheseMessageTypes {
+            get {
                 return ResourceManager.GetString("strShowTheseMessageTypes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Single click on connection opens it.
         /// </summary>
-        internal static string strSingleClickOnConnectionOpensIt
-        {
-            get
-            {
+        internal static string strSingleClickOnConnectionOpensIt {
+            get {
                 return ResourceManager.GetString("strSingleClickOnConnectionOpensIt", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Single click on opened connection in Connection Tree switches to opened Connection Tab.
         /// </summary>
-        internal static string strSingleClickOnOpenConnectionSwitchesToIt
-        {
-            get
-            {
+        internal static string strSingleClickOnOpenConnectionSwitchesToIt {
+            get {
                 return ResourceManager.GetString("strSingleClickOnOpenConnectionSwitchesToIt", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Aspect.
         /// </summary>
-        internal static string strSmartSizeModeAspect
-        {
-            get
-            {
+        internal static string strSmartSizeModeAspect {
+            get {
                 return ResourceManager.GetString("strSmartSizeModeAspect", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Free.
         /// </summary>
-        internal static string strSmartSizeModeFree
-        {
-            get
-            {
+        internal static string strSmartSizeModeFree {
+            get {
                 return ResourceManager.GetString("strSmartSizeModeFree", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to No SmartSize.
         /// </summary>
-        internal static string strSmartSizeModeNone
-        {
-            get
-            {
+        internal static string strSmartSizeModeNone {
+            get {
                 return ResourceManager.GetString("strSmartSizeModeNone", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Socks 5.
         /// </summary>
-        internal static string strSocks5
-        {
-            get
-            {
+        internal static string strSocks5 {
+            get {
                 return ResourceManager.GetString("strSocks5", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Sort.
         /// </summary>
-        internal static string strSort
-        {
-            get
-            {
+        internal static string strSort {
+            get {
                 return ResourceManager.GetString("strSort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ascending (A-Z).
         /// </summary>
-        internal static string strSortAsc
-        {
-            get
-            {
+        internal static string strSortAsc {
+            get {
                 return ResourceManager.GetString("strSortAsc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Descending (Z-A).
         /// </summary>
-        internal static string strSortDesc
-        {
-            get
-            {
+        internal static string strSortDesc {
+            get {
                 return ResourceManager.GetString("strSortDesc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Special Keys.
         /// </summary>
-        internal static string strSpecialKeys
-        {
-            get
-            {
+        internal static string strSpecialKeys {
+            get {
                 return ResourceManager.GetString("strSpecialKeys", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Please see Help - Getting started - SQL Configuration for more Info!.
         /// </summary>
-        internal static string strSQLInfo
-        {
-            get
-            {
+        internal static string strSQLInfo {
+            get {
                 return ResourceManager.GetString("strSQLInfo", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SQL Server.
         /// </summary>
-        internal static string strSQLServer
-        {
-            get
-            {
+        internal static string strSQLServer {
+            get {
                 return ResourceManager.GetString("strSQLServer", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SQL Update check finished and there is an update available! Going to refresh connections..
         /// </summary>
-        internal static string strSqlUpdateCheckUpdateAvailable
-        {
-            get
-            {
+        internal static string strSqlUpdateCheckUpdateAvailable {
+            get {
                 return ResourceManager.GetString("strSqlUpdateCheckUpdateAvailable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SSH version 1.
         /// </summary>
-        internal static string strSsh1
-        {
-            get
-            {
+        internal static string strSsh1 {
+            get {
                 return ResourceManager.GetString("strSsh1", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SSH version 2.
         /// </summary>
-        internal static string strSsh2
-        {
-            get
-            {
+        internal static string strSsh2 {
+            get {
                 return ResourceManager.GetString("strSsh2", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SSH background transfer failed!.
         /// </summary>
-        internal static string strSSHStartTransferBG
-        {
-            get
-            {
+        internal static string strSSHStartTransferBG {
+            get {
                 return ResourceManager.GetString("strSSHStartTransferBG", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Transfer successful!.
         /// </summary>
-        internal static string strSSHTranferSuccessful
-        {
-            get
-            {
+        internal static string strSSHTranferSuccessful {
+            get {
                 return ResourceManager.GetString("strSSHTranferSuccessful", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SSH Transfer End (UI.Window.SSHTransfer) failed!.
         /// </summary>
-        internal static string strSSHTransferEndFailed
-        {
-            get
-            {
+        internal static string strSSHTransferEndFailed {
+            get {
                 return ResourceManager.GetString("strSSHTransferEndFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to SSH transfer failed..
         /// </summary>
-        internal static string strSSHTransferFailed
-        {
-            get
-            {
+        internal static string strSSHTransferFailed {
+            get {
                 return ResourceManager.GetString("strSSHTransferFailed", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection configuration problem. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. A connection with the name configured as SSH Tunnel and protocol SSH version 1 or SSH2 version 2 cannot be found in the connection tree. Clear SSH Tunnel configuration or specify existing SSH connection..
+        /// </summary>
+        internal static string strSSHTunnelConfigProblem {
+            get {
+                return ResourceManager.GetString("strSSHTunnelConfigProblem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel connection failed. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. Putty process terminated. Check for any problems with the connection configured as SSH Tunnel..
+        /// </summary>
+        internal static string strSSHTunnelFailed {
+            get {
+                return ResourceManager.GetString("strSSHTunnelFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel configuration problem. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. Connection configured as SSH Tunnel found in tree, but protocol is not derived from putty. Make sure connection configured as SSH Tunnel is using SSH protocol..
+        /// </summary>
+        internal static string strSSHTunnelIsNotPutty {
+            get {
+                return ResourceManager.GetString("strSSHTunnelIsNotPutty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel connection problem. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. SSH connection failed. Check for any problems with the connection configured as SSH Tunnel..
+        /// </summary>
+        internal static string strSSHTunnelNotConnected {
+            get {
+                return ResourceManager.GetString("strSSHTunnelNotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel initialization problem. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. SSH connection could not be initialized. Check for any problems with the connection configured as SSH Tunnel..
+        /// </summary>
+        internal static string strSSHTunnelNotInitialized {
+            get {
+                return ResourceManager.GetString("strSSHTunnelNotInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SSH tunnel connection timed out. Connection to: &quot;{0}&quot; via SSH Tunnel: &quot;{1}&quot; not possible. Local tunnel port did not become available in time. Check for any problems with the connection configured as SSH Tunnel..
+        /// </summary>
+        internal static string strSSHTunnelPortNotReadyInTime {
+            get {
+                return ResourceManager.GetString("strSSHTunnelPortNotReadyInTime", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to First IP.
         /// </summary>
-        internal static string strStartIP
-        {
-            get
-            {
+        internal static string strStartIP {
+            get {
                 return ResourceManager.GetString("strStartIP", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Start minimized.
         /// </summary>
-        internal static string strStartMinimized
-        {
-            get
-            {
+        internal static string strStartMinimized {
+            get {
                 return ResourceManager.GetString("strStartMinimized", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to First Port.
         /// </summary>
-        internal static string strStartPort
-        {
-            get
-            {
+        internal static string strStartPort {
+            get {
                 return ResourceManager.GetString("strStartPort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Startup/Exit.
         /// </summary>
-        internal static string strStartupExit
-        {
-            get
-            {
+        internal static string strStartupExit {
+            get {
                 return ResourceManager.GetString("strStartupExit", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
-        internal static string strStatus
-        {
-            get
-            {
+        internal static string strStatus {
+            get {
                 return ResourceManager.GetString("strStatus", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Switch to Notifications panel on:.
         /// </summary>
-        internal static string strSwitchToErrorsAndInfos
-        {
-            get
-            {
+        internal static string strSwitchToErrorsAndInfos {
+            get {
                 return ResourceManager.GetString("strSwitchToErrorsAndInfos", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Advanced.
         /// </summary>
-        internal static string strTabAdvanced
-        {
-            get
-            {
+        internal static string strTabAdvanced {
+            get {
                 return ResourceManager.GetString("strTabAdvanced", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Appearance.
         /// </summary>
-        internal static string strTabAppearance
-        {
-            get
-            {
+        internal static string strTabAppearance {
+            get {
                 return ResourceManager.GetString("strTabAppearance", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Tabs &amp;&amp; Panels.
         /// </summary>
-        internal static string strTabsAndPanels
-        {
-            get
-            {
+        internal static string strTabsAndPanels {
+            get {
                 return ResourceManager.GetString("strTabsAndPanels", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Security.
         /// </summary>
-        internal static string strTabSecurity
-        {
-            get
-            {
+        internal static string strTabSecurity {
+            get {
                 return ResourceManager.GetString("strTabSecurity", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Updates.
         /// </summary>
-        internal static string strTabUpdates
-        {
-            get
-            {
+        internal static string strTabUpdates {
+            get {
                 return ResourceManager.GetString("strTabUpdates", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Telnet.
         /// </summary>
-        internal static string strTelnet
-        {
-            get
-            {
+        internal static string strTelnet {
+            get {
                 return ResourceManager.GetString("strTelnet", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The following:.
         /// </summary>
-        internal static string strTheFollowing
-        {
-            get
-            {
+        internal static string strTheFollowing {
+            get {
                 return ResourceManager.GetString("strTheFollowing", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config Panel.
         /// </summary>
-        internal static string strThemeCategoryConfigPanel
-        {
-            get
-            {
+        internal static string strThemeCategoryConfigPanel {
+            get {
                 return ResourceManager.GetString("strThemeCategoryConfigPanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connections Panel.
         /// </summary>
-        internal static string strThemeCategoryConnectionsPanel
-        {
-            get
-            {
+        internal static string strThemeCategoryConnectionsPanel {
+            get {
                 return ResourceManager.GetString("strThemeCategoryConnectionsPanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
-        internal static string strThemeCategoryGeneral
-        {
-            get
-            {
+        internal static string strThemeCategoryGeneral {
+            get {
                 return ResourceManager.GetString("strThemeCategoryGeneral", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The background colour of the config panel..
         /// </summary>
-        internal static string strThemeDescriptionConfigPanelBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionConfigPanelBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionConfigPanelBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the category text in the config panel..
         /// </summary>
-        internal static string strThemeDescriptionConfigPanelCategoryTextColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionConfigPanelCategoryTextColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionConfigPanelCategoryTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the grid lines in the config panel.
         /// </summary>
-        internal static string strThemeDescriptionConfigPanelGridLineColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionConfigPanelGridLineColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionConfigPanelGridLineColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The background colour of the help area of the config panel..
         /// </summary>
-        internal static string strThemeDescriptionConfigPanelHelpBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionConfigPanelHelpBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionConfigPanelHelpBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the text in the help area of the config panel..
         /// </summary>
-        internal static string strThemeDescriptionConfigPanelHelpTextColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionConfigPanelHelpTextColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionConfigPanelHelpTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the text in the config panel..
         /// </summary>
-        internal static string strThemeDescriptionConfigPanelTextColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionConfigPanelTextColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionConfigPanelTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The background colour of the connections panel..
         /// </summary>
-        internal static string strThemeDescriptionConnectionsPanelBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionConnectionsPanelBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionConnectionsPanelBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the text in the connections panel..
         /// </summary>
-        internal static string strThemeDescriptionConnectionsPanelTextColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionConnectionsPanelTextColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionConnectionsPanelTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the tree lines in the connections panel..
         /// </summary>
-        internal static string strThemeDescriptionConnectionsPanelTreeLineColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionConnectionsPanelTreeLineColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionConnectionsPanelTreeLineColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The background colour of the menus..
         /// </summary>
-        internal static string strThemeDescriptionMenuBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionMenuBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionMenuBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the text in the menus..
         /// </summary>
-        internal static string strThemeDescriptionMenuTextColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionMenuTextColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionMenuTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The background colour of the search box..
         /// </summary>
-        internal static string strThemeDescriptionSearchBoxBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionSearchBoxBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionSearchBoxBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the text in the search box..
         /// </summary>
-        internal static string strThemeDescriptionSearchBoxTextColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionSearchBoxTextColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionSearchBoxTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the prompt text in the search box..
         /// </summary>
-        internal static string strThemeDescriptionSearchBoxTextPromptColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionSearchBoxTextPromptColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionSearchBoxTextPromptColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The background colour of the toolbars..
         /// </summary>
-        internal static string strThemeDescriptionToolbarBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionToolbarBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionToolbarBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The colour of the text in the toolbars..
         /// </summary>
-        internal static string strThemeDescriptionToolbarTextColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionToolbarTextColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionToolbarTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The background colour of the main window..
         /// </summary>
-        internal static string strThemeDescriptionWindowBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeDescriptionWindowBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeDescriptionWindowBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config Panel Background Colour.
         /// </summary>
-        internal static string strThemeNameConfigPanelBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeNameConfigPanelBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeNameConfigPanelBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config Panel Category Text Colour.
         /// </summary>
-        internal static string strThemeNameConfigPanelCategoryTextColor
-        {
-            get
-            {
+        internal static string strThemeNameConfigPanelCategoryTextColor {
+            get {
                 return ResourceManager.GetString("strThemeNameConfigPanelCategoryTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config Panel Grid Line Colour.
         /// </summary>
-        internal static string strThemeNameConfigPanelGridLineColor
-        {
-            get
-            {
+        internal static string strThemeNameConfigPanelGridLineColor {
+            get {
                 return ResourceManager.GetString("strThemeNameConfigPanelGridLineColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config Panel Help Background Colour.
         /// </summary>
-        internal static string strThemeNameConfigPanelHelpBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeNameConfigPanelHelpBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeNameConfigPanelHelpBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config Panel Help Text Colour.
         /// </summary>
-        internal static string strThemeNameConfigPanelHelpTextColor
-        {
-            get
-            {
+        internal static string strThemeNameConfigPanelHelpTextColor {
+            get {
                 return ResourceManager.GetString("strThemeNameConfigPanelHelpTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Config Panel Text Colour.
         /// </summary>
-        internal static string strThemeNameConfigPanelTextColor
-        {
-            get
-            {
+        internal static string strThemeNameConfigPanelTextColor {
+            get {
                 return ResourceManager.GetString("strThemeNameConfigPanelTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connections Panel Background Colour.
         /// </summary>
-        internal static string strThemeNameConnectionsPanelBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeNameConnectionsPanelBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeNameConnectionsPanelBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connections Panel Text Colour.
         /// </summary>
-        internal static string strThemeNameConnectionsPanelTextColor
-        {
-            get
-            {
+        internal static string strThemeNameConnectionsPanelTextColor {
+            get {
                 return ResourceManager.GetString("strThemeNameConnectionsPanelTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Connections Panel Tree Line Colour.
         /// </summary>
-        internal static string strThemeNameConnectionsPanelTreeLineColor
-        {
-            get
-            {
+        internal static string strThemeNameConnectionsPanelTreeLineColor {
+            get {
                 return ResourceManager.GetString("strThemeNameConnectionsPanelTreeLineColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Menu Background Colour.
         /// </summary>
-        internal static string strThemeNameMenuBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeNameMenuBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeNameMenuBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Menu Text Colour.
         /// </summary>
-        internal static string strThemeNameMenuTextColor
-        {
-            get
-            {
+        internal static string strThemeNameMenuTextColor {
+            get {
                 return ResourceManager.GetString("strThemeNameMenuTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Search Box Background Colour.
         /// </summary>
-        internal static string strThemeNameSearchBoxBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeNameSearchBoxBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeNameSearchBoxBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Search Box Text Colour.
         /// </summary>
-        internal static string strThemeNameSearchBoxTextColor
-        {
-            get
-            {
+        internal static string strThemeNameSearchBoxTextColor {
+            get {
                 return ResourceManager.GetString("strThemeNameSearchBoxTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Search Box Text Prompt Colour.
         /// </summary>
-        internal static string strThemeNameSearchBoxTextPromptColor
-        {
-            get
-            {
+        internal static string strThemeNameSearchBoxTextPromptColor {
+            get {
                 return ResourceManager.GetString("strThemeNameSearchBoxTextPromptColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Toolbar Background Colour.
         /// </summary>
-        internal static string strThemeNameToolbarBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeNameToolbarBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeNameToolbarBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Toolbar Text Colour.
         /// </summary>
-        internal static string strThemeNameToolbarTextColor
-        {
-            get
-            {
+        internal static string strThemeNameToolbarTextColor {
+            get {
                 return ResourceManager.GetString("strThemeNameToolbarTextColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Window Background Colour.
         /// </summary>
-        internal static string strThemeNameWindowBackgroundColor
-        {
-            get
-            {
+        internal static string strThemeNameWindowBackgroundColor {
+            get {
                 return ResourceManager.GetString("strThemeNameWindowBackgroundColor", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Timeout [seconds].
         /// </summary>
-        internal static string strTimeoutInSeconds
-        {
-            get
-            {
+        internal static string strTimeoutInSeconds {
+            get {
                 return ResourceManager.GetString("strTimeoutInSeconds", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
-        internal static string strTitle
-        {
-            get
-            {
+        internal static string strTitle {
+            get {
                 return ResourceManager.GetString("strTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Error ({0}).
         /// </summary>
-        internal static string strTitleError
-        {
-            get
-            {
+        internal static string strTitleError {
+            get {
                 return ResourceManager.GetString("strTitleError", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Information ({0}).
         /// </summary>
-        internal static string strTitleInformation
-        {
-            get
-            {
+        internal static string strTitleInformation {
+            get {
                 return ResourceManager.GetString("strTitleInformation", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG password.
         /// </summary>
-        internal static string strTitlePassword
-        {
-            get
-            {
+        internal static string strTitlePassword {
+            get {
                 return ResourceManager.GetString("strTitlePassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG password for {0}.
         /// </summary>
-        internal static string strTitlePasswordWithName
-        {
-            get
-            {
+        internal static string strTitlePasswordWithName {
+            get {
                 return ResourceManager.GetString("strTitlePasswordWithName", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select Panel.
         /// </summary>
-        internal static string strTitleSelectPanel
-        {
-            get
-            {
+        internal static string strTitleSelectPanel {
+            get {
                 return ResourceManager.GetString("strTitleSelectPanel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Warning ({0}).
         /// </summary>
-        internal static string strTitleWarning
-        {
-            get
-            {
+        internal static string strTitleWarning {
+            get {
                 return ResourceManager.GetString("strTitleWarning", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Track active connection in the connection tree.
         /// </summary>
-        internal static string strTrackActiveConnectionInConnectionTree
-        {
-            get
-            {
+        internal static string strTrackActiveConnectionInConnectionTree {
+            get {
                 return ResourceManager.GetString("strTrackActiveConnectionInConnectionTree", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Transfer.
         /// </summary>
-        internal static string strTransfer
-        {
-            get
-            {
+        internal static string strTransfer {
+            get {
                 return ResourceManager.GetString("strTransfer", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Transfer failed!.
         /// </summary>
-        internal static string strTransferFailed
-        {
-            get
-            {
+        internal static string strTransferFailed {
+            get {
                 return ResourceManager.GetString("strTransferFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Try to integrate.
         /// </summary>
-        internal static string strTryIntegrate
-        {
-            get
-            {
+        internal static string strTryIntegrate {
+            get {
                 return ResourceManager.GetString("strTryIntegrate", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Try to integrate.
         /// </summary>
-        internal static string strTryToIntegrateColumnHeader
-        {
-            get
-            {
+        internal static string strTryToIntegrateColumnHeader {
+            get {
                 return ResourceManager.GetString("strTryToIntegrateColumnHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
-        internal static string strType
-        {
-            get
-            {
+        internal static string strType {
+            get {
                 return ResourceManager.GetString("strType", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Ultra VNC Repeater.
         /// </summary>
-        internal static string strUltraVncRepeater
-        {
-            get
-            {
+        internal static string strUltraVncRepeater {
+            get {
                 return ResourceManager.GetString("strUltraVncRepeater", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to UltraVNC SingleClick port:.
         /// </summary>
-        internal static string strUltraVNCSCListeningPort
-        {
-            get
-            {
+        internal static string strUltraVNCSCListeningPort {
+            get {
                 return ResourceManager.GetString("strUltraVNCSCListeningPort", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to UltraVNC SingleClick.
         /// </summary>
-        internal static string strUltraVNCSingleClick
-        {
-            get
-            {
+        internal static string strUltraVNCSingleClick {
+            get {
                 return ResourceManager.GetString("strUltraVNCSingleClick", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Uncheck the properties you want not to be saved!.
         /// </summary>
-        internal static string strUncheckProperties
-        {
-            get
-            {
+        internal static string strUncheckProperties {
+            get {
                 return ResourceManager.GetString("strUncheckProperties", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Unnamed Theme.
         /// </summary>
-        internal static string strUnnamedTheme
-        {
-            get
-            {
+        internal static string strUnnamedTheme {
+            get {
                 return ResourceManager.GetString("strUnnamedTheme", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG requires an update.
         /// </summary>
-        internal static string strUpdateAvailable
-        {
-            get
-            {
+        internal static string strUpdateAvailable {
+            get {
                 return ResourceManager.GetString("strUpdateAvailable", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG can periodically connect to the mRemoteNG website to check for updates..
         /// </summary>
-        internal static string strUpdateCheck
-        {
-            get
-            {
+        internal static string strUpdateCheck {
+            get {
                 return ResourceManager.GetString("strUpdateCheck", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The update information could not be downloaded..
         /// </summary>
-        internal static string strUpdateCheckCompleteFailed
-        {
-            get
-            {
+        internal static string strUpdateCheckCompleteFailed {
+            get {
                 return ResourceManager.GetString("strUpdateCheckCompleteFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Check failed.
         /// </summary>
-        internal static string strUpdateCheckFailedLabel
-        {
-            get
-            {
+        internal static string strUpdateCheckFailedLabel {
+            get {
                 return ResourceManager.GetString("strUpdateCheckFailedLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Checking for updates....
         /// </summary>
-        internal static string strUpdateCheckingLabel
-        {
-            get
-            {
+        internal static string strUpdateCheckingLabel {
+            get {
                 return ResourceManager.GetString("strUpdateCheckingLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to mRemoteNG Portable Edition does not currently support automatic updates..
         /// </summary>
-        internal static string strUpdateCheckPortableEdition
-        {
-            get
-            {
+        internal static string strUpdateCheckPortableEdition {
+            get {
                 return ResourceManager.GetString("strUpdateCheckPortableEdition", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Download complete!
         ///mRemoteNG will now quit and begin with the installation..
         /// </summary>
-        internal static string strUpdateDownloadComplete
-        {
-            get
-            {
+        internal static string strUpdateDownloadComplete {
+            get {
                 return ResourceManager.GetString("strUpdateDownloadComplete", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The update could not be downloaded..
         /// </summary>
-        internal static string strUpdateDownloadCompleteFailed
-        {
-            get
-            {
+        internal static string strUpdateDownloadCompleteFailed {
+            get {
                 return ResourceManager.GetString("strUpdateDownloadCompleteFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The update download could not be initiated..
         /// </summary>
-        internal static string strUpdateDownloadFailed
-        {
-            get
-            {
+        internal static string strUpdateDownloadFailed {
+            get {
                 return ResourceManager.GetString("strUpdateDownloadFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Every {0} days.
         /// </summary>
-        internal static string strUpdateFrequencyCustom
-        {
-            get
-            {
+        internal static string strUpdateFrequencyCustom {
+            get {
                 return ResourceManager.GetString("strUpdateFrequencyCustom", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Daily.
         /// </summary>
-        internal static string strUpdateFrequencyDaily
-        {
-            get
-            {
+        internal static string strUpdateFrequencyDaily {
+            get {
                 return ResourceManager.GetString("strUpdateFrequencyDaily", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Monthly.
         /// </summary>
-        internal static string strUpdateFrequencyMonthly
-        {
-            get
-            {
+        internal static string strUpdateFrequencyMonthly {
+            get {
                 return ResourceManager.GetString("strUpdateFrequencyMonthly", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Weekly.
         /// </summary>
-        internal static string strUpdateFrequencyWeekly
-        {
-            get
-            {
+        internal static string strUpdateFrequencyWeekly {
+            get {
                 return ResourceManager.GetString("strUpdateFrequencyWeekly", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The change log could not be downloaded..
         /// </summary>
-        internal static string strUpdateGetChangeLogFailed
-        {
-            get
-            {
+        internal static string strUpdateGetChangeLogFailed {
+            get {
                 return ResourceManager.GetString("strUpdateGetChangeLogFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Download Completed!.
         /// </summary>
-        internal static string strUpdatePortableDownloadComplete
-        {
-            get
-            {
+        internal static string strUpdatePortableDownloadComplete {
+            get {
                 return ResourceManager.GetString("strUpdatePortableDownloadComplete", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Upgrade.
         /// </summary>
-        internal static string strUpgrade
-        {
-            get
-            {
+        internal static string strUpgrade {
+            get {
                 return ResourceManager.GetString("strUpgrade", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use default.
         /// </summary>
-        internal static string strUseDefault
-        {
-            get
-            {
+        internal static string strUseDefault {
+            get {
                 return ResourceManager.GetString("strUseDefault", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use a different username and password.
         /// </summary>
-        internal static string strUseDifferentUsernameAndPassword
-        {
-            get
-            {
+        internal static string strUseDifferentUsernameAndPassword {
+            get {
                 return ResourceManager.GetString("strUseDifferentUsernameAndPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to User.
         /// </summary>
-        internal static string strUser
-        {
-            get
-            {
+        internal static string strUser {
+            get {
                 return ResourceManager.GetString("strUser", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use the same username and password.
         /// </summary>
-        internal static string strUseSameUsernameAndPassword
-        {
-            get
-            {
+        internal static string strUseSameUsernameAndPassword {
+            get {
                 return ResourceManager.GetString("strUseSameUsernameAndPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use a smart card.
         /// </summary>
-        internal static string strUseSmartCard
-        {
-            get
-            {
+        internal static string strUseSmartCard {
+            get {
                 return ResourceManager.GetString("strUseSmartCard", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Use SQL Server to load &amp;&amp; save connections.
         /// </summary>
-        internal static string strUseSQLServer
-        {
-            get
-            {
+        internal static string strUseSQLServer {
+            get {
                 return ResourceManager.GetString("strUseSQLServer", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Version.
         /// </summary>
-        internal static string strVersion
-        {
-            get
-            {
+        internal static string strVersion {
+            get {
                 return ResourceManager.GetString("strVersion", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC.
         /// </summary>
-        internal static string strVnc
-        {
-            get
-            {
+        internal static string strVnc {
+            get {
                 return ResourceManager.GetString("strVnc", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC disconnect failed!.
         /// </summary>
-        internal static string strVncConnectionDisconnectFailed
-        {
-            get
-            {
+        internal static string strVncConnectionDisconnectFailed {
+            get {
                 return ResourceManager.GetString("strVncConnectionDisconnectFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC Refresh Screen Failed!.
         /// </summary>
-        internal static string strVncRefreshFailed
-        {
-            get
-            {
+        internal static string strVncRefreshFailed {
+            get {
                 return ResourceManager.GetString("strVncRefreshFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC SendSpecialKeys failed!.
         /// </summary>
-        internal static string strVncSendSpecialKeysFailed
-        {
-            get
-            {
+        internal static string strVncSendSpecialKeysFailed {
+            get {
                 return ResourceManager.GetString("strVncSendSpecialKeysFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC Set Event Handlers failed!.
         /// </summary>
-        internal static string strVncSetEventHandlersFailed
-        {
-            get
-            {
+        internal static string strVncSetEventHandlersFailed {
+            get {
                 return ResourceManager.GetString("strVncSetEventHandlersFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC Set Props Failed!.
         /// </summary>
-        internal static string strVncSetPropsFailed
-        {
-            get
-            {
+        internal static string strVncSetPropsFailed {
+            get {
                 return ResourceManager.GetString("strVncSetPropsFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC Start Chat Failed!.
         /// </summary>
-        internal static string strVncStartChatFailed
-        {
-            get
-            {
+        internal static string strVncStartChatFailed {
+            get {
                 return ResourceManager.GetString("strVncStartChatFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC Toggle SmartSize Failed!.
         /// </summary>
-        internal static string strVncToggleSmartSizeFailed
-        {
-            get
-            {
+        internal static string strVncToggleSmartSizeFailed {
+            get {
                 return ResourceManager.GetString("strVncToggleSmartSizeFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to VNC Toggle ViewOnly Failed!.
         /// </summary>
-        internal static string strVncToggleViewOnlyFailed
-        {
-            get
-            {
+        internal static string strVncToggleViewOnlyFailed {
+            get {
                 return ResourceManager.GetString("strVncToggleViewOnlyFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Warn me if authentication fails.
         /// </summary>
-        internal static string strWarnIfAuthFails
-        {
-            get
-            {
+        internal static string strWarnIfAuthFails {
+            get {
                 return ResourceManager.GetString("strWarnIfAuthFails", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Warnings.
         /// </summary>
-        internal static string strWarnings
-        {
-            get
-            {
+        internal static string strWarnings {
+            get {
                 return ResourceManager.GetString("strWarnings", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Uses the DockPanel Suite by [Weifen Luo].
         /// </summary>
-        internal static string strWeifenLuoAttribution
-        {
-            get
-            {
+        internal static string strWeifenLuoAttribution {
+            get {
                 return ResourceManager.GetString("strWeifenLuoAttribution", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to http://sourceforge.net/projects/dockpanelsuite/.
         /// </summary>
-        internal static string strWeifenLuoAttributionURL
-        {
-            get
-            {
+        internal static string strWeifenLuoAttributionURL {
+            get {
                 return ResourceManager.GetString("strWeifenLuoAttributionURL", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Windows.
         /// </summary>
@@ -9859,109 +8205,89 @@ namespace mRemoteNG
         /// <summary>
         ///   Looks up a localized string similar to Working directory.
         /// </summary>
-        internal static string strWorkingDirColumnHeader
-        {
-            get
-            {
+        internal static string strWorkingDirColumnHeader {
+            get {
                 return ResourceManager.GetString("strWorkingDirColumnHeader", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to XULrunner path:.
         /// </summary>
-        internal static string strXULrunnerPath
-        {
-            get
-            {
+        internal static string strXULrunnerPath {
+            get {
                 return ResourceManager.GetString("strXULrunnerPath", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string strYes
-        {
-            get
-            {
+        internal static string strYes {
+            get {
                 return ResourceManager.GetString("strYes", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Test connection.
         /// </summary>
-        internal static string TestConnection
-        {
-            get
-            {
+        internal static string TestConnection {
+            get {
                 return ResourceManager.GetString("TestConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Testing connection.
         /// </summary>
-        internal static string TestingConnection
-        {
-            get
-            {
+        internal static string TestingConnection {
+            get {
                 return ResourceManager.GetString("TestingConnection", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Test Settings.
         /// </summary>
-        internal static string TestSettings
-        {
-            get
-            {
+        internal static string TestSettings {
+            get {
                 return ResourceManager.GetString("TestSettings", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to An unhandled exception has occurred.
         /// </summary>
-        internal static string UnhandledExceptionOccured
-        {
-            get
-            {
+        internal static string UnhandledExceptionOccured {
+            get {
                 return ResourceManager.GetString("UnhandledExceptionOccured", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Unlock.
         /// </summary>
-        internal static string Unlock
-        {
-            get
-            {
+        internal static string Unlock {
+            get {
                 return ResourceManager.GetString("Unlock", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Unlock Credential Repository.
         /// </summary>
-        internal static string UnlockCredentialRepository
-        {
-            get
-            {
+        internal static string UnlockCredentialRepository {
+            get {
                 return ResourceManager.GetString("UnlockCredentialRepository", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Unlocking.
         /// </summary>
-        internal static string Unlocking
-        {
-            get
-            {
+        internal static string Unlocking {
+            get {
                 return ResourceManager.GetString("Unlocking", resourceCulture);
             }
         }

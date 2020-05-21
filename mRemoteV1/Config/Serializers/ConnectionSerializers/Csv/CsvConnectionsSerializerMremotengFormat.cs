@@ -56,7 +56,7 @@ namespace mRemoteNG.Config.Serializers.Csv
             if (_saveFilter.SaveDomain)
                 sb.Append("Domain;");
 
-            sb.Append("Hostname;Port;VmId;Protocol;PuttySession;ConnectToConsole;UseCredSsp;UseVmId;UseEnhancedMode;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;" +
+            sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseVmId;UseEnhancedMode;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;" +
                       "LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;" +
                       "CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
                       "PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
@@ -66,7 +66,7 @@ namespace mRemoteNG.Config.Serializers.Csv
             if (_saveFilter.SaveInheritance)
                 sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;" +
                           "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;" +
-                          "InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
+                          "InheritProtocol;InheritSSHTunnelConnectionName;InheritSSHOptions;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
                           "InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;" +
                           "InheritUseConsoleSession;InheritUseCredSsp;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;" +
                           "InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;" +
@@ -119,6 +119,8 @@ namespace mRemoteNG.Config.Serializers.Csv
               .Append(FormatForCsv(con.Port))
               .Append(FormatForCsv(con.VmId))
               .Append(FormatForCsv(con.Protocol))
+              .Append(FormatForCsv(con.SSHTunnelConnectionName))
+              .Append(FormatForCsv(con.SSHOptions))
               .Append(FormatForCsv(con.PuttySession))
               .Append(FormatForCsv(con.UseConsoleSession))
               .Append(FormatForCsv(con.UseCredSsp))
@@ -186,6 +188,8 @@ namespace mRemoteNG.Config.Serializers.Csv
               .Append(FormatForCsv(con.Inheritance.Password))
               .Append(FormatForCsv(con.Inheritance.Port))
               .Append(FormatForCsv(con.Inheritance.Protocol))
+              .Append(FormatForCsv(con.Inheritance.SSHTunnelConnectionName))
+              .Append(FormatForCsv(con.Inheritance.SSHOptions))
               .Append(FormatForCsv(con.Inheritance.PuttySession))
               .Append(FormatForCsv(con.Inheritance.RedirectDiskDrives))
               .Append(FormatForCsv(con.Inheritance.RedirectKeys))

@@ -2930,6 +2930,54 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultSSHTunnelConnectionName {
+            get {
+                return ((bool)(this["InhDefaultSSHTunnelConnectionName"]));
+            }
+            set {
+                this["InhDefaultSSHTunnelConnectionName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultSSHTunnelConnectionName {
+            get {
+                return ((string)(this["ConDefaultSSHTunnelConnectionName"]));
+            }
+            set {
+                this["ConDefaultSSHTunnelConnectionName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultSSHOptions {
+            get {
+                return ((bool)(this["InhDefaultSSHOptions"]));
+            }
+            set {
+                this["InhDefaultSSHOptions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultSSHOptions {
+            get {
+                return ((string)(this["ConDefaultSSHOptions"]));
+            }
+            set {
+                this["ConDefaultSSHOptions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool StartMinimized {
             get {
                 return ((bool)(this["StartMinimized"]));

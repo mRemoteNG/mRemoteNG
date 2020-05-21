@@ -96,6 +96,10 @@ namespace mRemoteNG.Config.Serializers.Csv
             connectionRecord.Domain = headers.Contains("Domain") ? connectionCsv[headers.IndexOf("Domain")] : "";
             connectionRecord.Hostname = headers.Contains("Hostname") ? connectionCsv[headers.IndexOf("Hostname")] : "";
             connectionRecord.VmId = headers.Contains("VmId") ? connectionCsv[headers.IndexOf("VmId")] : "";
+            connectionRecord.SSHOptions =
+                headers.Contains("SSHOptions") ? connectionCsv[headers.IndexOf("SSHOptions")] : "";
+            connectionRecord.SSHTunnelConnectionName =
+                headers.Contains("SSHTunnelConnectionName") ? connectionCsv[headers.IndexOf("SSHTunnelConnectionName")] : "";
             connectionRecord.PuttySession = headers.Contains("PuttySession") ? connectionCsv[headers.IndexOf("PuttySession")] : "";
             connectionRecord.LoadBalanceInfo = headers.Contains("LoadBalanceInfo")
                 ? connectionCsv[headers.IndexOf("LoadBalanceInfo")]
@@ -478,6 +482,20 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritProtocol")], out value))
                     connectionRecord.Inheritance.Protocol = value;
+            }
+
+            if (headers.Contains("InheritSSHTunnelConnectionName"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSSHTunnelConnectionName")], out value))
+                    connectionRecord.Inheritance.SSHTunnelConnectionName = value;
+            }
+
+            if (headers.Contains("InheritSSHOptions"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSSHOptions")], out value))
+                    connectionRecord.Inheritance.SSHOptions = value;
             }
 
             if (headers.Contains("InheritPuttySession"))

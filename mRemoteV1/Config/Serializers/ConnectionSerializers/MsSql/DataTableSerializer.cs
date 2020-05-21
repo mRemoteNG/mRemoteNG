@@ -109,9 +109,11 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("DomainName", typeof(string));
             dataTable.Columns.Add("Password", typeof(string));
             dataTable.Columns.Add("Hostname", typeof(string));
-            dataTable.Columns.Add("Protocol", typeof(string));
-            dataTable.Columns.Add("PuttySession", typeof(string));
             dataTable.Columns.Add("Port", typeof(int));
+            dataTable.Columns.Add("Protocol", typeof(string));
+            dataTable.Columns.Add("SSHTunnelConnectionName", typeof(string));
+            dataTable.Columns.Add("SSHOptions", typeof(string));
+            dataTable.Columns.Add("PuttySession", typeof(string));
             dataTable.Columns.Add("ConnectToConsole", typeof(bool));
             dataTable.Columns.Add("UseCredSsp", typeof(bool));
             dataTable.Columns.Add("RenderingEngine", typeof(string));
@@ -168,6 +170,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("InheritPassword", typeof(bool));
             dataTable.Columns.Add("InheritPort", typeof(bool));
             dataTable.Columns.Add("InheritProtocol", typeof(bool));
+            dataTable.Columns.Add("InheritSSHTunnelConnectionName", typeof(bool));
+            dataTable.Columns.Add("InheritSSHOptions", typeof(bool));
             dataTable.Columns.Add("InheritPuttySession", typeof(bool));
             dataTable.Columns.Add("InheritRedirectDiskDrives", typeof(bool));
             dataTable.Columns.Add("InheritRedirectKeys", typeof(bool));
@@ -497,6 +501,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["Hostname"] = connectionInfo.Hostname;
             dataRow["VmId"] = connectionInfo.VmId;
             dataRow["Protocol"] = connectionInfo.Protocol;
+            dataRow["SSHTunnelConnectionName"] = connectionInfo.SSHTunnelConnectionName;
+            dataRow["SSHOptions"] = connectionInfo.SSHOptions;
             dataRow["PuttySession"] = connectionInfo.PuttySession;
             dataRow["Port"] = connectionInfo.Port;
             dataRow["ConnectToConsole"] = connectionInfo.UseConsoleSession;
@@ -568,6 +574,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritPassword"] = connectionInfo.Inheritance.Password;
                 dataRow["InheritPort"] = connectionInfo.Inheritance.Port;
                 dataRow["InheritProtocol"] = connectionInfo.Inheritance.Protocol;
+                dataRow["InheritSSHTunnelConnectionName"] = connectionInfo.Inheritance.SSHTunnelConnectionName;
+                dataRow["InheritSSHOptions"] = connectionInfo.Inheritance.SSHOptions;
                 dataRow["InheritPuttySession"] = connectionInfo.Inheritance.PuttySession;
                 dataRow["InheritRedirectDiskDrives"] = connectionInfo.Inheritance.RedirectDiskDrives;
                 dataRow["InheritRedirectKeys"] = connectionInfo.Inheritance.RedirectKeys;
@@ -631,6 +639,8 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritPassword"] = false;
                 dataRow["InheritPort"] = false;
                 dataRow["InheritProtocol"] = false;
+                dataRow["InheritSSHTunnelConnectionName"] = false;
+                dataRow["InheritSSHOptions"] = false;
                 dataRow["InheritPuttySession"] = false;
                 dataRow["InheritRedirectDiskDrives"] = false;
                 dataRow["InheritRedirectKeys"] = false;

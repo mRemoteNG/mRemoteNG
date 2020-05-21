@@ -50,6 +50,11 @@ namespace mRemoteNG.Connection.Protocol
 
         #region Public Methods
 
+        public bool isRunning()
+        {
+            return !PuttyProcess.HasExited;
+        }
+
         public override bool Connect()
         {
             try
@@ -136,6 +141,11 @@ namespace mRemoteNG.Connection.Protocol
                 }
 
                 PuttyProcess.StartInfo.Arguments = arguments.ToString();
+                // add additional SSH options, f.e. tunnel or noshell parameters that may be specified for the the connnection
+                if (!string.IsNullOrEmpty(InterfaceControl.Info.SSHOptions))
+                {
+                    PuttyProcess.StartInfo.Arguments += " " + InterfaceControl.Info.SSHOptions;
+                }
 
                 PuttyProcess.EnableRaisingEvents = true;
                 PuttyProcess.Exited += ProcessExited;
