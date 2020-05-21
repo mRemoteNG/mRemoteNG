@@ -1199,6 +1199,7 @@
     <None Include="Documentation\images\connections_status.png" />
     <None Include="Documentation\images\putty.png" />
     <Content Include="Console.ico" />
+    <Content Include="Documentation\images\ssh_tunnel.png" />
     <Content Include="Documentation\mssql_db_setup.sql" />
     <Content Include="Documentation\mysql_db_setup.sql" />
     <None Include="Documentation\images\config_top_bar.png" />
@@ -1436,7 +1437,7 @@
     <None Include="Documentation\installation.rst" />
     <None Include="Documentation\installation\minimum_requirements.rst" />
     <None Include="Documentation\installation\uninstall.rst" />
-    <None Include="Documentation\howtos\jumpservers.rst" />
+    <None Include="Documentation\howtos\sshtunnel.rst" />
     <None Include="Documentation\user_interface.rst" />
     <None Include="Documentation\user_interface\main_window.rst" />
     <None Include="Documentation\user_interface\panels.rst" />
