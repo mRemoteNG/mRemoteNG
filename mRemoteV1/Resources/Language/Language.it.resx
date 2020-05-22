@@ -1285,9 +1285,6 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Seleziona come l'audio remoto deve essere reindirizzato.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Seleziona uno dei motori di rendering da utilizzare per mostrare le pagine HTML.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Scegli la risoluzione o la modalità di apertura della connessione.</value>
   </data>
@@ -1437,9 +1434,6 @@ Creazione di un nuovo file delle connessioni.</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Audio</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Motore di rendering</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Risoluzione</value>

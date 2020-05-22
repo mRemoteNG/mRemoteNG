@@ -786,12 +786,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
     <value>Změna nadpisu dokumentu HTTP selhala!</value>
   </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>Gecko (Firefox)</value>
-  </data>
-  <data name="strHttpInternetExplorer" xml:space="preserve">
-    <value>Internet Explorer</value>
-  </data>
   <data name="strHttps" xml:space="preserve">
     <value>HTTPS</value>
   </data>
@@ -1468,9 +1462,6 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Vyberte, jak mají být přesměrovány zvuky ze vzdáleného hostitele.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Vyberte který vykreslovací engine má zobrazovat webové stránky HTML.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Vyberte rozlišení nebo režim, ve kterém se toto spojení otevře.</value>
   </data>
@@ -1626,9 +1617,6 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Zvuky</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Vykreslovací engine</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Rozlišení</value>

@@ -1294,9 +1294,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Seleccione cómo deberá ser redireccionado el sonido remoto.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Seleccione uno de los motores de renderizado disponibles para  mostrar HTML.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Seleccione la resolución o modo en que esta conexión será abierta.</value>
   </data>
@@ -1446,9 +1443,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sonidos</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Motor de Renderizado</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Resolución</value>

@@ -143,12 +143,6 @@ namespace mRemoteNG.Connection
         public bool LoadBalanceInfo { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryProtocol), 4),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strPropertyNameRenderingEngine)),
-         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionRenderingEngine)),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
-        public bool RenderingEngine { get; set; }
-
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryProtocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strPropertyNameUseConsoleSession)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionUseConsoleSession)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]

@@ -1307,9 +1307,6 @@ VncSharp Control Version {0}</value>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Укажите, будет ли перенаправлен удаленный звук на локальный компьютер.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Выберите один из доступных движков рендеринга, который будет использоваться для отображения HTML.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Выберите разрешение экрана в дюймах или режим отображения для этого подключения</value>
   </data>
@@ -1459,9 +1456,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Звуки</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Рендеринг</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Размер экрана</value>
@@ -2273,12 +2267,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="strHttp" xml:space="preserve">
     <value>HTTP</value>
-  </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>геккон (Firefox)</value>
-  </data>
-  <data name="strHttpInternetExplorer" xml:space="preserve">
-    <value>Интернет Эксплорер</value>
   </data>
   <data name="strHttps" xml:space="preserve">
     <value>HTTPS</value>

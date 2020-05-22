@@ -267,6 +267,7 @@
     <Compile Include="Connection\IConnectionInitiator.cs" />
     <Compile Include="Connection\IInheritable.cs" />
     <Compile Include="Connection\IHasParent.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.DownloadHandler.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\AuthenticationLevel.cs" />
@@ -304,6 +305,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Language\Language.Designer.cs" />
     <Compile Include="Resources\Themes\ColorMapTheme.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -690,11 +692,6 @@
     </Compile>
     <Compile Include="UI\Forms\PasswordForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Resources\Language\Language.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Language.resx</DependentUpon>
     </Compile>
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1170,7 +1167,6 @@
     <None Include="Documentation\user_interface\screenshot_manager.rst" />
     <None Include="Documentation\user_interface\port_scan.rst" />
     <None Include="Documentation\user_interface\quick_connect.rst" />
-    <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
     <None Include="Documentation\howtos\vmrdp.rst" />
     <None Include="Resources\Templates\AppIcon.psd" />
@@ -1226,26 +1222,6 @@
     <None Include="Documentation\images\connections_open.png" />
     <None Include="Documentation\images\screenshot_manager_rightclick_menu.png" />
     <None Include="Documentation\images\screenshot_manager_overview.png" />
-    <Content Include="Firefox\AccessibleHandler.dll" />
-    <Content Include="Firefox\AccessibleMarshal.dll" />
-    <Content Include="Firefox\breakpadinjector.dll" />
-    <Content Include="Firefox\d3dcompiler_47.dll" />
-    <Content Include="Firefox\freebl3.dll" />
-    <Content Include="Firefox\IA2Marshal.dll" />
-    <Content Include="Firefox\lgpllibs.dll" />
-    <Content Include="Firefox\libEGL.dll" />
-    <Content Include="Firefox\libGLESv2.dll" />
-    <Content Include="Firefox\mozavcodec.dll" />
-    <Content Include="Firefox\mozavutil.dll" />
-    <Content Include="Firefox\mozglue.dll" />
-    <Content Include="Firefox\nss3.dll" />
-    <Content Include="Firefox\nssckbi.dll" />
-    <Content Include="Firefox\nssdbm3.dll" />
-    <Content Include="Firefox\plugin-container.exe" />
-    <Content Include="Firefox\plugin-hang-ui.exe" />
-    <Content Include="Firefox\qipcap.dll" />
-    <Content Include="Firefox\softokn3.dll" />
-    <Content Include="Firefox\xul.dll" />
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

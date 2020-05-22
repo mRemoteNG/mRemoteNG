@@ -1300,9 +1300,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Velg hvordan ekstern lyd skal omadresseres.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Velg en av de tilgjengelige renderingsmotorene som skal brukes til å vise HTML.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Velg oppløsning eller modus denne tilkoblingen skal åpnes i.</value>
   </data>
@@ -1452,9 +1449,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Lyder</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Renderingsmotor</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Oppløsning</value>

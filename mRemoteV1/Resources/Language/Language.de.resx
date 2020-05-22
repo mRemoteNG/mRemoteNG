@@ -1304,9 +1304,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Wählen Sie, wie Töne auf dem entfernten System wiedergegeben werden sollen.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Wählen Sie eine der Rendering Engines die verwendet wird um HTML darzustellen.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Wählen Sie die Auflösung, in welcher die Verbindung geöffnet werden soll.</value>
   </data>
@@ -1456,9 +1453,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Töne</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Rendering Engine</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Auflösung</value>
@@ -2576,12 +2570,6 @@ Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   </data>
   <data name="strHttp" xml:space="preserve">
     <value>HTTP</value>
-  </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>Gecko (Firefox)</value>
-  </data>
-  <data name="strHttpInternetExplorer" xml:space="preserve">
-    <value>Internet Explorer</value>
   </data>
   <data name="strHttps" xml:space="preserve">
     <value>HTTPS</value>

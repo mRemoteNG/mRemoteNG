@@ -796,12 +796,6 @@ Starting with new connections file.</value>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
     <value>Changing HTTP Document Tile Failed!</value>
   </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>Gecko (Firefox)</value>
-  </data>
-  <data name="strHttpInternetExplorer" xml:space="preserve">
-    <value>Internet Explorer</value>
-  </data>
   <data name="strHttps" xml:space="preserve">
     <value>HTTPS</value>
   </data>
@@ -1488,9 +1482,6 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Select one of the available rendering engines that will be used to display HTML.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Choose the resolution or mode this connection will open in.</value>
   </data>
@@ -1646,9 +1637,6 @@ If you run into such an error, please create a new connection file!</comment>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>サウンド</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>レンダリングエンジン</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>解像度</value>

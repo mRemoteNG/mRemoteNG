@@ -37,9 +37,9 @@ namespace mRemoteNG.Connection.Protocol
                 case ProtocolType.RAW:
                     return new RawProtocol();
                 case ProtocolType.HTTP:
-                    return new ProtocolHTTP(connectionInfo.RenderingEngine);
+                    return new ProtocolHTTP();
                 case ProtocolType.HTTPS:
-                    return new ProtocolHTTPS(connectionInfo.RenderingEngine);
+                    return new ProtocolHTTPS();
                 case ProtocolType.ICA:
                     var icaProtocol = new IcaProtocol();
                     icaProtocol.tmrReconnect.Elapsed += icaProtocol.tmrReconnect_Elapsed;

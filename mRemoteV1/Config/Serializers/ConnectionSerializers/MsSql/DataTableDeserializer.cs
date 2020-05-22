@@ -96,8 +96,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.UseConsoleSession = (bool)dataRow["ConnectToConsole"];
             connectionInfo.UseCredSsp = (bool)dataRow["UseCredSsp"];
             connectionInfo.UseVmId = (bool)dataRow["UseVmId"];
-            connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine),
-                                                                                  (string)dataRow["RenderingEngine"]);
             connectionInfo.ICAEncryptionStrength =
                 (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength),
                                                            (string)dataRow["ICAEncryptionStrength"]);
@@ -198,7 +196,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.UseVmId = (bool)dataRow["InheritUseVmId"];
             connectionInfo.Inheritance.UseEnhancedMode = (bool)dataRow["InheritUseEnhancedMode"];
             connectionInfo.Inheritance.VmId = (bool)dataRow["InheritVmId"];
-            connectionInfo.Inheritance.RenderingEngine = (bool)dataRow["InheritRenderingEngine"];
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
             connectionInfo.Inheritance.ICAEncryptionStrength = (bool)dataRow["InheritICAEncryptionStrength"];
             connectionInfo.Inheritance.RDPAuthenticationLevel = (bool)dataRow["InheritRDPAuthenticationLevel"];

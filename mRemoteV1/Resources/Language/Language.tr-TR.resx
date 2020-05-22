@@ -1650,9 +1650,6 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
 		<value>Uzak sesin nasıl yönlendirileceğini seçin.</value>
 	</data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-		<value>HTML'yi görüntülemek için kullanılacak kullanılabilir oluşturma motorlarından birini seçin.</value>
-	</data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
 		<value>Bu bağlantının açılacağı çözünürlüğü veya modu seçin.</value>
 	</data>
@@ -1790,9 +1787,6 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
 	</data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
 		<value>Sesler</value>
-	</data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-		<value>Render Motoru</value>
 	</data>
   <data name="strPropertyNameResolution" xml:space="preserve">
 		<value>Çözünürlük</value>

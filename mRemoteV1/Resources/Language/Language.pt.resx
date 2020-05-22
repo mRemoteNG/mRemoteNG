@@ -1272,9 +1272,6 @@ Descrição do erro: {1}</value>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Selecione como o som remoto deve ser redirecionado.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Selecione um dos mecanismos de renderização disponíveis que serão usados para exibir o HTML.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Escolha a resolução ou o modo em que esta ligação será aberta.</value>
   </data>
@@ -1424,9 +1421,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sons</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Motor de renderização</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Resolução</value>

@@ -789,12 +789,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
     <value>Changing HTTP Document Tile Failed!</value>
   </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>Gecko (Firefox)</value>
-  </data>
-  <data name="strHttpInternetExplorer" xml:space="preserve">
-    <value>Internet Explorer</value>
-  </data>
   <data name="strHttps" xml:space="preserve">
     <value>HTTPS</value>
   </data>
@@ -1477,9 +1471,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyDescriptionRedirectAudioCapture" xml:space="preserve">
     <value>Select whether the default audio input device on the remote machine should be redirected to this computer.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Select one of the available rendering engines that will be used to display HTML.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Choose the resolution or mode this connection will open in.</value>
   </data>
@@ -1641,9 +1632,6 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyNameRedirectAudioCapture" xml:space="preserve">
     <value>Audio Capture</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Rendering Engine</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Resolution</value>
@@ -2840,10 +2828,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strPowerShell" xml:space="preserve">
     <value>PowerShell</value>
   </data>
-  <data name="strHttpCEF" xml:space="preserve">
-    <value>CEF (Chromium)</value>
-  </data>
-  <data name="strHTTPFailedURLBuild" xml:space="preserve">
+  <data name="strHttpFailedURLBuild" xml:space="preserve">
     <value>Failed to contruct the URL to load</value>
   </data>
 </root>

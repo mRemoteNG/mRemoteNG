@@ -171,13 +171,6 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.UseEnhancedMode = value;
             }
 
-            if (headers.Contains("RenderingEngine"))
-            {
-                HTTPBase.RenderingEngine value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("RenderingEngine")], out value))
-                    connectionRecord.RenderingEngine = value;
-            }
-
             if (headers.Contains("ICAEncryptionStrength"))
             {
                 IcaProtocol.EncryptionStrength value;
@@ -576,13 +569,6 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseEnhancedMode")], out value))
                     connectionRecord.Inheritance.UseEnhancedMode = value;
-            }
-
-            if (headers.Contains("InheritRenderingEngine"))
-            {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRenderingEngine")], out value))
-                    connectionRecord.Inheritance.RenderingEngine = value;
             }
 
             if (headers.Contains("InheritUsername"))

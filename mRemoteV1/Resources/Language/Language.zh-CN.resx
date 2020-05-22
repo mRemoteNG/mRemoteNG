@@ -789,12 +789,6 @@ VncSharp 版本 {0}</value>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
     <value>更改HTTP文档标题失败！</value>
   </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>Gecko (Firefox)</value>
-  </data>
-  <data name="strHttpInternetExplorer" xml:space="preserve">
-    <value>Internet Explorer</value>
-  </data>
   <data name="strHttps" xml:space="preserve">
     <value>HTTPS</value>
   </data>
@@ -1477,9 +1471,6 @@ VncSharp 版本 {0}</value>
   <data name="strPropertyDescriptionRedirectAudioCapture" xml:space="preserve">
     <value>选择是否应将远程计算机上的默认音频输入设备重定向到此计算机。</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>请选择一个有效的渲染显示HTML的引擎。</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>请选择此连接的默认分辨率或模式。</value>
   </data>
@@ -1641,9 +1632,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strPropertyNameRedirectAudioCapture" xml:space="preserve">
     <value>音频捕获</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>渲染引擎</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>分辨率</value>

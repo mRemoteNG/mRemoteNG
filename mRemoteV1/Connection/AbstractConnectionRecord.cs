@@ -38,7 +38,6 @@ namespace mRemoteNG.Connection
         private int _rdpMinutesToIdleTimeout;
         private bool _rdpAlertIdleTimeout;
         private string _loadBalanceInfo;
-        private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
         private bool _useVmId;
 
@@ -310,17 +309,6 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("LoadBalanceInfo", _loadBalanceInfo).Trim();
             set => SetField(ref _loadBalanceInfo, value?.Trim(), "LoadBalanceInfo");
-        }
-
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryProtocol), 3),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameRenderingEngine)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionRenderingEngine)),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
-         UsedInProtocol(ProtocolType.HTTP, ProtocolType.HTTPS)]
-        public HTTPBase.RenderingEngine RenderingEngine
-        {
-            get => GetPropertyValue("RenderingEngine", _renderingEngine);
-            set => SetField(ref _renderingEngine, value, "RenderingEngine");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryProtocol), 3),

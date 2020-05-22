@@ -1301,9 +1301,6 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Selecteer hoe externe geluiden moeten worden doorgestuurd.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Selecteer een van de beschikbare rendering engines die zullen worden gebruikt om de HTML-weergave weer te geven.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Kies de resolutie of de modus waarin deze verbinding zal worden opgezet</value>
   </data>
@@ -1453,9 +1450,6 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Geluiden</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Rendering Engine</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Resolutie</value>

@@ -923,12 +923,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
 		<value>HTTP 문서 타일 변경 실패!</value>
 	</data>
-  <data name="strHttpGecko" xml:space="preserve">
-		<value>Gecko (Firefox)</value>
-	</data>
-  <data name="strHttpInternetExplorer" xml:space="preserve">
-		<value>인터넷 익스플로러</value>
-	</data>
   <data name="strHttps" xml:space="preserve">
 		<value>HTTPS</value>
 	</data>
@@ -1605,9 +1599,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
 		<value>원격 사운드를 리디렉션하는 방법 선택.</value>
 	</data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-		<value>HTML을 표시하는 데 사용할 수있는 렌더링 엔진 중 하나 선택.</value>
-	</data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
 		<value>이 연결이 열리는 해상도 또는 모드를 선택.</value>
 	</data>
@@ -1763,9 +1754,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
 		<value>사운드</value>
-	</data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-		<value>렌더링 엔진</value>
 	</data>
   <data name="strPropertyNameResolution" xml:space="preserve">
 		<value>해상도</value>

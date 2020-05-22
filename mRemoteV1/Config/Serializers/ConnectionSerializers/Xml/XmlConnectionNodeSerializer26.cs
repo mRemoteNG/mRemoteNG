@@ -73,7 +73,6 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute("ConnectToConsole",
                                        connectionInfo.UseConsoleSession.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("UseCredSsp", connectionInfo.UseCredSsp.ToString().ToLowerInvariant()));
-            element.Add(new XAttribute("RenderingEngine", connectionInfo.RenderingEngine));
             element.Add(new XAttribute("ICAEncryptionStrength", connectionInfo.ICAEncryptionStrength));
             element.Add(new XAttribute("RDPAuthenticationLevel", connectionInfo.RDPAuthenticationLevel));
             element.Add(new XAttribute("RDPMinutesToIdleTimeout", connectionInfo.RDPMinutesToIdleTimeout));
@@ -211,8 +210,6 @@ namespace mRemoteNG.Config.Serializers.Xml
                                            connectionInfo.Inheritance.UseConsoleSession.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritUseCredSsp",
                                            connectionInfo.Inheritance.UseCredSsp.ToString().ToLowerInvariant()));
-                element.Add(new XAttribute("InheritRenderingEngine",
-                                           connectionInfo.Inheritance.RenderingEngine.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritUsername",
                                            connectionInfo.Inheritance.Username.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritICAEncryptionStrength",
@@ -305,7 +302,6 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritAutomaticResize", falseString));
                 element.Add(new XAttribute("InheritUseConsoleSession", falseString));
                 element.Add(new XAttribute("InheritUseCredSsp", falseString));
-                element.Add(new XAttribute("InheritRenderingEngine", falseString));
                 element.Add(new XAttribute("InheritUsername", falseString));
                 element.Add(new XAttribute("InheritICAEncryptionStrength", falseString));
                 element.Add(new XAttribute("InheritRDPAuthenticationLevel", falseString));

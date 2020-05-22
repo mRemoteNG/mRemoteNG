@@ -1268,9 +1268,6 @@ VncSharp Control 版本 {0}</value>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>選取如何重新導向音訊。</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>選取可用的轉譯引擎之一用來顯示 HTML。</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>顯示此連線將開啟的解析度或模式。</value>
   </data>
@@ -1420,9 +1417,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>音訊</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>轉譯引擎</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>解析度</value>

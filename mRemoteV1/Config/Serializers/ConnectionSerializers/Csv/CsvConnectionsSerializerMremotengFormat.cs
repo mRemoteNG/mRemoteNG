@@ -56,7 +56,7 @@ namespace mRemoteNG.Config.Serializers.Csv
             if (_saveFilter.SaveDomain)
                 sb.Append("Domain;");
 
-            sb.Append("Hostname;Port;VmId;Protocol;PuttySession;ConnectToConsole;UseCredSsp;UseVmId;UseEnhancedMode;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;" +
+            sb.Append("Hostname;Port;VmId;Protocol;PuttySession;ConnectToConsole;UseCredSsp;UseVmId;UseEnhancedMode;ICAEncryptionStrength;RDPAuthenticationLevel;" +
                       "LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;" +
                       "CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
                       "PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Serializers.Csv
                           "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;" +
                           "InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
                           "InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;" +
-                          "InheritUseConsoleSession;InheritUseCredSsp;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;" +
+                          "InheritUseConsoleSession;InheritUseCredSsp;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritUsername;InheritICAEncryptionStrength;" +
                           "InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;" +
                           "InheritFavorite;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;" +
                           "InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;" +
@@ -124,7 +124,6 @@ namespace mRemoteNG.Config.Serializers.Csv
               .Append(FormatForCsv(con.UseCredSsp))
               .Append(FormatForCsv(con.UseVmId))
               .Append(FormatForCsv(con.UseEnhancedMode))
-              .Append(FormatForCsv(con.RenderingEngine))
               .Append(FormatForCsv(con.ICAEncryptionStrength))
               .Append(FormatForCsv(con.RDPAuthenticationLevel))
               .Append(FormatForCsv(con.LoadBalanceInfo))
@@ -201,7 +200,6 @@ namespace mRemoteNG.Config.Serializers.Csv
               .Append(FormatForCsv(con.Inheritance.UseVmId))
               .Append(FormatForCsv(con.Inheritance.UseEnhancedMode))
               .Append(FormatForCsv(con.Inheritance.VmId))
-              .Append(FormatForCsv(con.Inheritance.RenderingEngine))
               .Append(FormatForCsv(con.Inheritance.Username))
               .Append(FormatForCsv(con.Inheritance.ICAEncryptionStrength))
               .Append(FormatForCsv(con.Inheritance.RDPAuthenticationLevel))

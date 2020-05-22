@@ -1284,9 +1284,6 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Choisi de quelle manière les sons de l'hôte distant doivent être redirigés.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
-    <value>Choisi quel moteur de rendu disponible sera utilisé pour afficher du HTML.</value>
-  </data>
   <data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Choisi la résolution ou le mode pour lesquels la connexion sera ouverte.</value>
   </data>
@@ -1436,9 +1433,6 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sons</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Moteur de rendu</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Résolution</value>
