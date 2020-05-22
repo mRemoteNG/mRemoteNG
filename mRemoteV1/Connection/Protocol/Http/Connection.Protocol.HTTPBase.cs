@@ -60,6 +60,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 {
                     CEFBrowser.LoadingStateChanged += cefBrowser_LoadingStateChanged;
                     CEFBrowser.TitleChanged += wBrowser_DocumentTitleChanged;
+                    CEFBrowser.DownloadHandler = new DownloadHandler();
                 }
                 else
                 {
