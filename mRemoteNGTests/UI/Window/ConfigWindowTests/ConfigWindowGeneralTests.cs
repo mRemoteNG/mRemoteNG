@@ -327,7 +327,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.RenderingEngine),
                     });
                     break;
                 case ProtocolType.ICA:

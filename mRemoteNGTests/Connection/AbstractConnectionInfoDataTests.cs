@@ -179,15 +179,6 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
-        public void RenderingEngineNotifiesOnValueChange()
-        {
-            var wasCalled = false;
-            _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RenderingEngine = HTTPBase.RenderingEngine.Gecko;
-            Assert.That(wasCalled, Is.True);
-        }
-
-        [Test]
         public void UseCredSspNotifiesOnValueChange()
         {
             var wasCalled = false;

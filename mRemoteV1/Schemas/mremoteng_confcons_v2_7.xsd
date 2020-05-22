@@ -52,7 +52,6 @@
         <xs:attribute name="Port" type="xs:int" use="required" />
         <xs:attribute name="ConnectToConsole" type="xs:boolean" use="required" />
         <xs:attribute name="UseCredSsp" type="xs:boolean" use="required" />
-        <xs:attribute name="RenderingEngine" type="xs:string" use="required" />
         <xs:attribute name="ICAEncryptionStrength" type="xs:string" use="required" />
         <xs:attribute name="RDPAuthenticationLevel" type="xs:string" use="required" />
         <xs:attribute name="RDPMinutesToIdleTimeout" type="xs:int" use="required" />
@@ -127,7 +126,6 @@
         <xs:attribute name="InheritResolution" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritAutomaticResize" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUseConsoleSession" type="xs:boolean" use="optional" />
-        <xs:attribute name="InheritRenderingEngine" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritUsername" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritICAEncryptionStrength" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritRDPAuthenticationLevel" type="xs:boolean" use="optional" />

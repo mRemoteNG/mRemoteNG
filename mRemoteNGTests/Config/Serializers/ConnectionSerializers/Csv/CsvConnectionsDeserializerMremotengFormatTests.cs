@@ -99,7 +99,6 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 UseCredSsp = true,
                 UseVmId = false,
                 UseEnhancedMode = false,
-                RenderingEngine = HTTPBase.RenderingEngine.Gecko,
                 ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
                 RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
                 Colors = RDPColors.Colors16Bit,

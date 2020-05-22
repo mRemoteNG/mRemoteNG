@@ -5,7 +5,6 @@ using CefSharp.WinForms;
 using mRemoteNG.App;
 using mRemoteNG.UI.Tabs;
 
-
 namespace mRemoteNG.Connection.Protocol.Http
 {
     public class HTTPBase : ProtocolBase
@@ -59,14 +58,13 @@ namespace mRemoteNG.Connection.Protocol.Http
                 if (CEFBrowser != null)
                 {
                     CEFBrowser.LoadingStateChanged += cefBrowser_LoadingStateChanged;
-                    CEFBrowser.TitleChanged += wBrowser_DocumentTitleChanged;
+                    CEFBrowser.TitleChanged += WBrowser_DocumentTitleChanged;
                     CEFBrowser.DownloadHandler = new DownloadHandler();
                 }
                 else
                 {
                     throw new Exception("Failed to initialize CEF Rendering Engine.");
                 }
-
 
                 return true;
             }
@@ -149,17 +147,17 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
         }
 
-        private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        private void WBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             if (!(wBrowser is WebBrowser objWebBrowser)) return;
 
             // This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
             objWebBrowser.AllowWebBrowserDrop = false;
 
-            objWebBrowser.Navigated -= wBrowser_Navigated;
+            objWebBrowser.Navigated -= WBrowser_Navigated;
         }
 
-        private void wBrowser_DocumentTitleChanged(object sender, EventArgs e)
+        private void WBrowser_DocumentTitleChanged(object sender, EventArgs e)
         {
             try
             {
