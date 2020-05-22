@@ -65,12 +65,6 @@
     <Reference Include="ConsoleControlAPI, Version=1.2.1.0, Culture=neutral, PublicKeyToken=7c86b8a36b9c33e2, processorArchitecture=MSIL">
       <HintPath>..\packages\ConsoleControlAPI.1.2.1\lib\net40\ConsoleControlAPI.dll</HintPath>
     </Reference>
-    <Reference Include="Geckofx-Core, Version=60.0.39.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
-      <HintPath>..\packages\Geckofx60.32.60.0.39\lib\net45\Geckofx-Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Geckofx-Winforms, Version=60.0.39.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
-      <HintPath>..\packages\Geckofx60.32.60.0.39\lib\net45\Geckofx-Winforms.dll</HintPath>
-    </Reference>
     <Reference Include="Google.Protobuf, Version=3.9.2.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.9.2\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -1729,12 +1723,10 @@ powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mrem
   <PropertyGroup>
     <PreBuildEvent>echo $(ConfigurationName) &gt; buildenv.tmp</PreBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Geckofx60.32.60.0.39\build\Geckofx60.32.targets" Condition="Exists('..\packages\Geckofx60.32.60.0.39\build\Geckofx60.32.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Geckofx60.32.60.0.39\build\Geckofx60.32.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx60.32.60.0.39\build\Geckofx60.32.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.15.1\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.15.1\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.79.1.35\build\cef.redist.x64.props'))" />
     <Error Condition="!Exists('..\packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.79.1.35\build\cef.redist.x86.props'))" />
