@@ -34,7 +34,7 @@ mRemoteNG supports the following protocols:
 * rlogin (Remote Login)
 * Raw Socket Connections
 
-For a detailed feature list and general usage support, refer to the [User Manual](https://github.com/mRemoteNG/mRemoteNG/wiki/User-Manual).
+For a detailed feature list and general usage support, refer to the [Documentation](https://mremoteng.readthedocs.io/en/latest/).
 
 ## Installation
 
