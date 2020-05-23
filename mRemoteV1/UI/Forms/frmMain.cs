@@ -30,6 +30,7 @@ using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using CefSharp;
 using CefSharp.WinForms;
+using CefSharp.SchemeHandler;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -156,6 +157,7 @@ namespace mRemoteNG.UI.Forms
 
             SetMenuDependencies();
 
+            #region CefSharp
             //Monitor parent process exit and close subprocesses if parent process exits first
             //This will at some point in the future becomes the default
             CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
@@ -174,7 +176,7 @@ namespace mRemoteNG.UI.Forms
                 settings.CachePath = Path.Combine(
                                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                                            Application.ProductName,
-                                           "CEF_Cache");
+                                           "CEFCache");
                 settings.LogFile = Path.Combine(Path.GetDirectoryName(Settings.Default.LogFilePath),"mRemoteNG_cef.log");
                 
             }
@@ -194,8 +196,20 @@ namespace mRemoteNG.UI.Forms
             {
                 settings.LogSeverity = LogSeverity.Error;
             }
-
+            
+            //Implement scheme to be allowed to view local help files
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = Cef.CefCommitHash,
+                DomainName = "help",
+                SchemeHandlerFactory = new FolderSchemeHandlerFactory(
+                    rootFolder: $@"{GeneralAppInfo.HomePath}\Help\",
+                    defaultPage: "index.html"
+                )
+            });
+            
             Cef.Initialize(settings);
+            #endregion CefSharp
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
