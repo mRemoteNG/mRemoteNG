@@ -94,15 +94,15 @@ Copyright © 2004 Marc Merritt
 Copyright © 2008 Felix Deimel  
 http://www.codeproject.com/KB/selection/ADPickerCtrl.aspx
 
+CefSharp
+Copyright © The CefSharp Authors
+MIT License
+https://github.com/cefsharp/CefSharp
+
 DockPanel Suite  
 Copyright © 2018 @roken and @lextm (formerly Weifen Luo)  
 MIT License  
 https://github.com/dockpanelsuite/dockpanelsuite
-
-GeckoFX   
-Copyright © 2016 Tom Hindle  
-Mozilla Public License  
-https://bitbucket.org/geckofx/
 
 log4net  
 Copyright © 2001-2015 The Apache Software Foundation  
