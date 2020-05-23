@@ -2666,6 +2666,30 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="strPropertyDescriptionRdpVersion" xml:space="preserve">
     <value>Legt die Version des RDP fest, die beim Öffnen von Verbindungen verwendet wird.</value>
   </data>
+  <data name="strPropertyDescriptionSSHTunnelConnection" xml:space="preserve">
+    <value>Zum Verbinden mittels eines SSH Tunnels (Jump Host) geben Sie hier den Namen der SSH Verbindung an, welche benutzt werden soll um den SSH Tunnel einzurichten.</value>
+  </data>
+  <data name="strPropertyDescriptionSSHOptions" xml:space="preserve">
+    <value>Geben Sie hier zusaetzliche Optionen an welche fuer die SSH Verbindung verwendet werden sollen. Fuer weitere Infos zu den moeglichen Optionen konsultieren sie die Putty Dokumentation.</value>
+  </data>
+  <data name="strSSHTunnelConfigProblem" xml:space="preserve">
+    <value>Konfigurationsfehler der Verbindung. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Eine Verbindung mit dem als SSH Tunnel konfiguriertem Namen konnte nicht gefunden werden. Löschen Sie die SSH Tunnel Konfiguration or geben sie eine existierende SSH Verbindung an, welche zum Aufbau eine Tunnels zum Erreichen des eigentlichen Zielsystems verwendet werden soll.</value>
+  </data>
+  <data name="strSSHTunnelIsNotPutty" xml:space="preserve">
+    <value>Konfigurationsfehler des SSH Tunnel. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Die als SSH Tunnel konfigurierte Verbindung wurde zwar gefunden, aber das zugehörige Protokoll ist nicht von Putty abgeleitet. Stellen Sie sicher dass die als SSH Tunnel konfigurierte Verbindung das SSH version 1 oder 2 Protokoll verwendet.</value>
+  </data>
+  <data name="strSSHTunnelNotInitialized" xml:space="preserve">
+    <value>Initialisierungsproblem des SSH Tunnel. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Initialisierung der SSH Verbindung fehlgeschlagen. Überprüfen Sie die als SSH Tunnel konfigurierte Verbindung auf etwaige Probleme.</value>
+  </data>
+  <data name="strSSHTunnelNotConnected" xml:space="preserve">
+    <value>Verbindungsproblem des SSH Tunnel. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. SSH Verbindungsaufbau fehlgeschlagen. Überprüfen Sie die als SSH Tunnel konfigurierte Verbindung auf etwaige Probleme.</value>
+  </data>
+  <data name="strSSHTunnelFailed" xml:space="preserve">
+    <value>SSH Tunnel Verbindung fehlgeschlagen. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Putty Prozess vorzeitig beendet. Überprüfen Sie die als SSH Tunnel konfigurierte Verbindung auf etwaige Probleme.</value>
+  </data>
+  <data name="strSSHTunnelPortNotReadyInTime" xml:space="preserve">
+    <value>Zeitüberschreitung des SSH Tunnel. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Lokaler Tunnel Port nicht vor Ablauf der Zeitüberschreitung verfügbar. Überprüfen Sie die als SSH Tunnel konfigurierte Verbindung auf etwaige Probleme.</value>
+  </data>
   <data name="strStartMinimized" xml:space="preserve">
     <value>Minimiert starten</value>
   </data>

@@ -530,8 +530,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                         xmlnode.GetAttributeAsBool("InheritRDPMinutesToIdleTimeout");
                     connectionInfo.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("RDPAlertIdleTimeout");
                     connectionInfo.Inheritance.RDPAlertIdleTimeout =
-                        xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");
-                }
+                        xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");          }
 
                 if (_confVersion >= 2.7)
                 {
@@ -540,13 +539,17 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.UseVmId = xmlnode.GetAttributeAsBool("UseVmId");
                     connectionInfo.VmId = xmlnode.GetAttributeAsString("VmId");
                     connectionInfo.UseEnhancedMode = xmlnode.GetAttributeAsBool("UseEnhancedMode");
+                    connectionInfo.RdpVersion = xmlnode.GetAttributeAsEnum("RdpVersion", RdpVersion.Highest);
+                    connectionInfo.SSHTunnelConnectionName = xmlnode.GetAttributeAsString("SSHTunnelConnectionName");
+                    connectionInfo.SSHOptions = xmlnode.GetAttributeAsString("SSHOptions");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
-                    connectionInfo.RdpVersion = xmlnode.GetAttributeAsEnum("RdpVersion", RdpVersion.Highest);
                     connectionInfo.Inheritance.RdpVersion = xmlnode.GetAttributeAsBool("InheritRdpVersion");
                     connectionInfo.Inheritance.UseVmId = xmlnode.GetAttributeAsBool("InheritUseVmId");
                     connectionInfo.Inheritance.VmId = xmlnode.GetAttributeAsBool("InheritVmId");
                     connectionInfo.Inheritance.UseEnhancedMode = xmlnode.GetAttributeAsBool("InheritUseEnhancedMode");
+                    connectionInfo.Inheritance.SSHTunnelConnectionName = xmlnode.GetAttributeAsBool("InheritSSHTunnelConnectionName");
+                    connectionInfo.Inheritance.SSHOptions = xmlnode.GetAttributeAsBool("InheritSSHOptions");
                 }
             }
             catch (Exception ex)

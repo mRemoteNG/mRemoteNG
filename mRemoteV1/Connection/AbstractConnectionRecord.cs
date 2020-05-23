@@ -27,10 +27,12 @@ namespace mRemoteNG.Connection
         private string _vmId = "";
         private bool _useEnhancedMode;
 
+        private string _sshTunnelConnectionName = "";
         private ProtocolType _protocol;
         private RdpVersion _rdpProtocolVersion;
         private string _extApp;
         private int _port;
+        private string _sshOptions = "";
         private string _puttySession;
         private IcaProtocol.EncryptionStrength _icaEncryption;
         private bool _useConsoleSession;
@@ -193,6 +195,16 @@ namespace mRemoteNG.Connection
             set => SetField(ref _vmId, value?.Trim(), "VmId");
         }
 
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 2),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameSSHTunnelConnection)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionSSHTunnelConnection)),
+         TypeConverter(typeof(SshTunnelTypeConverter)),
+         UsedInAllProtocolsExcept()]
+        public string SSHTunnelConnectionName
+        {
+            get => GetPropertyValue("SSHTunnelConnectionName", _sshTunnelConnectionName).Trim();
+            set => SetField(ref _sshTunnelConnectionName, value?.Trim(), "SSHTunnelConnectionName");
+        }
         #endregion
 
         #region Protocol
@@ -239,6 +251,16 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("PuttySession", _puttySession);
             set => SetField(ref _puttySession, value, "PuttySession");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryProtocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameSSHOptions)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionSSHOptions)),
+         UsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
+        public virtual string SSHOptions
+        {
+            get => GetPropertyValue("SSHOptions", _sshOptions);
+            set => SetField(ref _sshOptions, value, "SSHOptions");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryProtocol), 3),

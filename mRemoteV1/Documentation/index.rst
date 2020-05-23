@@ -32,7 +32,7 @@ Welcome to mRemoteNG's documentation!
    :maxdepth: 2
    :caption: HowTos
    
-   howtos/jumpservers.rst
+   howtos/sshtunnel.rst
    howtos/external_tools.rst
    howtos/bulk_connections.rst
    howtos/vmrdp.rst
