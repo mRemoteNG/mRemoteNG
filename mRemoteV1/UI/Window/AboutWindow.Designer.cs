@@ -14,9 +14,9 @@
             this.lblLicense = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.lblCopyright = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.tlpBottom = new System.Windows.Forms.TableLayoutPanel();
-            this.gwbCredits = new Gecko.GeckoWebBrowser();
-            this.gwbChangeLog = new Gecko.GeckoWebBrowser();
             this.tlpTop = new System.Windows.Forms.TableLayoutPanel();
+            this.cwbChangeLog = new CefSharp.WinForms.ChromiumWebBrowser();
+            this.cwbCredits = new CefSharp.WinForms.ChromiumWebBrowser();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlBottom.SuspendLayout();
@@ -112,8 +112,8 @@
             this.tlpBottom.ColumnCount = 2;
             this.tlpBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpBottom.Controls.Add(this.gwbCredits, 0, 0);
-            this.tlpBottom.Controls.Add(this.gwbChangeLog, 1, 0);
+            this.tlpBottom.Controls.Add(this.cwbChangeLog, 0, 0);
+            this.tlpBottom.Controls.Add(this.cwbCredits, 1, 0);
             this.tlpBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpBottom.Location = new System.Drawing.Point(0, 235);
             this.tlpBottom.Name = "tlpBottom";
@@ -121,30 +121,6 @@
             this.tlpBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpBottom.Size = new System.Drawing.Size(1117, 470);
             this.tlpBottom.TabIndex = 13;
-            // 
-            // gwbCredits
-            // 
-            this.gwbCredits.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gwbCredits.FrameEventsPropagateToMainWindow = false;
-            this.gwbCredits.Location = new System.Drawing.Point(3, 3);
-            this.gwbCredits.Name = "gwbCredits";
-            this.gwbCredits.NoDefaultContextMenu = true;
-            this.gwbCredits.Size = new System.Drawing.Size(552, 464);
-            this.gwbCredits.TabIndex = 12;
-            this.gwbCredits.UseHttpActivityObserver = false;
-            this.gwbCredits.DomClick += new System.EventHandler<Gecko.DomMouseEventArgs>(this.LinkClicked);
-            // 
-            // gwbChangeLog
-            // 
-            this.gwbChangeLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gwbChangeLog.FrameEventsPropagateToMainWindow = false;
-            this.gwbChangeLog.Location = new System.Drawing.Point(561, 3);
-            this.gwbChangeLog.Name = "gwbChangeLog";
-            this.gwbChangeLog.NoDefaultContextMenu = true;
-            this.gwbChangeLog.Size = new System.Drawing.Size(553, 464);
-            this.gwbChangeLog.TabIndex = 13;
-            this.gwbChangeLog.UseHttpActivityObserver = false;
-            this.gwbChangeLog.DomClick += new System.EventHandler<Gecko.DomMouseEventArgs>(this.LinkClicked);
             // 
             // tlpTop
             // 
@@ -160,6 +136,24 @@
             this.tlpTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tlpTop.Size = new System.Drawing.Size(1117, 235);
             this.tlpTop.TabIndex = 14;
+            // 
+            // gwbChangeLog
+            // 
+            this.cwbChangeLog.ActivateBrowserOnCreation = false;
+            this.cwbChangeLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cwbChangeLog.Location = new System.Drawing.Point(3, 3);
+            this.cwbChangeLog.Name = "gwbChangeLog";
+            this.cwbChangeLog.Size = new System.Drawing.Size(552, 464);
+            this.cwbChangeLog.TabIndex = 0;
+            // 
+            // gwbCredits
+            // 
+            this.cwbCredits.ActivateBrowserOnCreation = false;
+            this.cwbCredits.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cwbCredits.Location = new System.Drawing.Point(561, 3);
+            this.cwbCredits.Name = "gwbCredits";
+            this.cwbCredits.Size = new System.Drawing.Size(553, 464);
+            this.cwbCredits.TabIndex = 1;
             // 
             // AboutWindow
             // 
@@ -197,7 +191,7 @@
         private System.Windows.Forms.TableLayoutPanel tlpBottom;
         private System.Windows.Forms.TableLayoutPanel tlpTop;
         internal System.Windows.Forms.Panel pnlTop;
-        private Gecko.GeckoWebBrowser gwbCredits;
-        private Gecko.GeckoWebBrowser gwbChangeLog;
+        private CefSharp.WinForms.ChromiumWebBrowser cwbChangeLog;
+        private CefSharp.WinForms.ChromiumWebBrowser cwbCredits;
     }
 }

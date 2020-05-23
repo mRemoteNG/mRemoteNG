@@ -3,26 +3,25 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
-using Gecko;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using Markdig;
 using WeifenLuo.WinFormsUI.Docking;
+using CefSharp;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
+using mRemoteNG.Connection.Protocol.Http;
 
 namespace mRemoteNG.UI.Window
 {
     public partial class AboutWindow : BaseWindow
     {
-        #region Public Methods
-
         public AboutWindow()
         {
             WindowType = WindowType.About;
             DockPnl = new DockContent();
-            if (!Xpcom.IsInitialized)
-                Xpcom.Initialize("Firefox");
             InitializeComponent();
             FontOverrider.FontOverride(this);
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
@@ -30,10 +29,6 @@ namespace mRemoteNG.UI.Window
             ApplyTheme();
             LoadDocuments();
         }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         private void ApplyLanguage()
         {
@@ -60,35 +55,24 @@ namespace mRemoteNG.UI.Window
             pnlTop.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
-        #endregion Private Methods
-
-        #region Form Stuff
-
         private void LoadDocuments()
         {
             try
             {
-                // AppVeyor seems to pull text files in UNIX format... This messes up the display on the about screen...
-                //
-                // This would be MUCH faster:
-                //var UnxEndRx = new Regex(@"(?<!\r)\n$"); // Look for UNIX line endings and still Windows line endings.
-                //if (UnxEndRx.IsMatch(txtChangeLog.Text))
-                //        txtChangeLog.Text = txtChangeLog.Text.Replace("\n", Environment.NewLine);
-                //
-                // But for some reason that I couldn't figure out, the RegEx.IsMatch on CREDITS.md/txtCredits.Text
-                // did not work at all despite it CLEARLY ending with \n when pulled from AppVeyor...
-                // The Changelog is a bit long anyways... Limit the number of lines to something reasonable.
-
-                if (!File.Exists(GeneralAppInfo.HomePath + @"\CREDITS.md") && !File.Exists(GeneralAppInfo.HomePath + @"\CHANGELOG.md")) return;
+                var creditsPath = GeneralAppInfo.HomePath + @"\CREDITS.md";
+                var changelogPath = GeneralAppInfo.HomePath + @"\CHANGELOG.md";
+                if (!File.Exists(creditsPath) && !File.Exists(changelogPath)) return;
 
                 var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
                 var backgroundColor = ColorTranslator.ToHtml(ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Background"));
                 var foregroundColor = ColorTranslator.ToHtml(ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground"));
-                var css =
-                    $@"<head><style>body{{font-family:arial,helvetica,sans-serif;font-size:12px;color:{foregroundColor};}}a:link,a:visited,a:hover,a:active{{text-decoration:none;background-color:{foregroundColor};color:{backgroundColor};}}</style></head>";
+                var css = $@"<head><style>body{{font-family:arial,helvetica,sans-serif;font-size:12px;color:" +
+                    $@"{foregroundColor};}}a:link,a:visited,a:hover,a:active{{text-decoration:none;" +
+                    $@"background-color:{foregroundColor};color:{backgroundColor};}}</style></head>";
 
+                // The Changelog is a bit long anyways... Limit the number of lines to something reasonable
                 var changelog = "";
-                using (var sR = new StreamReader(GeneralAppInfo.HomePath + @"\CHANGELOG.md", Encoding.UTF8, true))
+                using (var sR = new StreamReader(changelogPath, Encoding.UTF8, true))
                 {
                     string line;
                     var i = 0;
@@ -103,14 +87,17 @@ namespace mRemoteNG.UI.Window
                     }
                 }
                 var changelogHtml = Markdown.ToHtml(changelog, pipeline);
-                changelogHtml = css + $"<body bgcolor=\"{backgroundColor}\">{changelogHtml}</body>";
+                changelogHtml = $"<html>{css}<body bgcolor=\"{backgroundColor}\">{changelogHtml}</body></html>";
 
-                var credits = new StreamReader(GeneralAppInfo.HomePath + @"\CREDITS.md", Encoding.UTF8, true).ReadToEnd();
+                var credits = new StreamReader(creditsPath, Encoding.UTF8, true).ReadToEnd();
                 var creditsHtml = Markdown.ToHtml(credits, pipeline);
-                creditsHtml = css + $"<body bgcolor=\"{backgroundColor}\">{creditsHtml}</body>";
+                creditsHtml = $"<html>{css}<body bgcolor=\"{backgroundColor}\">{creditsHtml}</body></html>";
 
-                gwbChangeLog.LoadHtml(changelogHtml.Replace("©", "&copy;"));
-                gwbCredits.LoadHtml(creditsHtml.Replace("©", "&copy;"));
+                cwbChangeLog.RequestHandler = new RequestHandler();
+                cwbCredits.RequestHandler = new RequestHandler();
+
+                cwbChangeLog.LoadHtml(changelogHtml);
+                cwbCredits.Load(creditsHtml);
             }
             catch (Exception ex)
             {
@@ -118,15 +105,5 @@ namespace mRemoteNG.UI.Window
                     "Loading About failed" + Environment.NewLine + ex.Message, true);
             }
         }
-
-        private void LinkClicked(object sender, DomMouseEventArgs e)
-        {
-            var url = ((GeckoWebBrowser)sender).StatusText;
-            if (!string.IsNullOrEmpty(url))
-                Process.Start(url);
-            e.Handled = true;
-        }
-
-        #endregion Form Stuff
     }
 }

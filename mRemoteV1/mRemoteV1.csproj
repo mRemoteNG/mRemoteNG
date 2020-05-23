@@ -292,6 +292,7 @@
     <Compile Include="Credential\CredentialServiceFactory.cs" />
     <Compile Include="Credential\CredentialServiceFacade.cs" />
     <Compile Include="Connection\Protocol\PowerShell\Connection.Protocol.PowerShell.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.RequestHandler.cs" />
     <None Include="Documentation\faq.rst" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -812,6 +813,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\WindowList.cs" />
+    <Compile Include="UI\Window\HelpWindow.Designer.cs">
+      <DependentUpon>HelpWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Window\PortScanWindow.Designer.cs">
       <DependentUpon>PortScanWindow.cs</DependentUpon>
     </Compile>
