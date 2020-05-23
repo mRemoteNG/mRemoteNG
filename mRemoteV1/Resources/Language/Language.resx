@@ -2861,4 +2861,13 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strHttpFailedURLBuild" xml:space="preserve">
     <value>Failed to contruct the URL to load</value>
   </data>
+  <data name="strLicense" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="strChangelog" xml:space="preserve">
+    <value>Changelog</value>
+  </data>
+  <data name="strCredits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
 </root>

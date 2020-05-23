@@ -1084,6 +1084,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changelog.
+        /// </summary>
+        internal static string strChangelog {
+            get {
+                return ResourceManager.GetString("strChangelog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only).
         /// </summary>
         internal static string strCheckboxAutomaticReconnect {
@@ -1616,15 +1625,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection failed!.
-        /// </summary>
-        internal static string strConnectionEventConnectionFailed {
-            get {
-                return ResourceManager.GetString("strConnectionEventConnectionFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A connection protocol error occurred. Host: &quot;{1}&quot;; Error code: &quot;{2}&quot;; Error Description: &quot;{0}&quot;.
         /// </summary>
         internal static string strConnectionEventErrorOccured {
@@ -1869,6 +1869,15 @@ namespace mRemoteNG {
         internal static string strCredentialManagerUpgradeDescription {
             get {
                 return ResourceManager.GetString("strCredentialManagerUpgradeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credits.
+        /// </summary>
+        internal static string strCredits {
+            get {
+                return ResourceManager.GetString("strCredits", resourceCulture);
             }
         }
         
@@ -2885,15 +2894,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection failed!.
-        /// </summary>
-        internal static string strIntAppConnectionFailed {
-            get {
-                return ResourceManager.GetString("strIntAppConnectionFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Dispose of Int App process failed!.
         /// </summary>
         internal static string strIntAppDisposeFailed {
@@ -3241,6 +3241,15 @@ namespace mRemoteNG {
         internal static string strLanguageRestartRequired {
             get {
                 return ResourceManager.GetString("strLanguageRestartRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License.
+        /// </summary>
+        internal static string strLicense {
+            get {
+                return ResourceManager.GetString("strLicense", resourceCulture);
             }
         }
         
@@ -5925,15 +5934,6 @@ namespace mRemoteNG {
         internal static string strProxyTestSucceeded {
             get {
                 return ResourceManager.GetString("strProxyTestSucceeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connection failed!.
-        /// </summary>
-        internal static string strPuttyConnectionFailed {
-            get {
-                return ResourceManager.GetString("strPuttyConnectionFailed", resourceCulture);
             }
         }
         
