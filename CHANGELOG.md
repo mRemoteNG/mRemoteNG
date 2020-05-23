@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #283: Support for native PowerShell remoting as new protocol
 - #420: SSH tunneling implemented
 ### Changed
-- #1460: Updated GeckoFX to v60
+- Removed IE and GeckoFX rendering engines in favor of CefSharp
 ### Fixed
 - #1610: Menu bar changes to english when cancelling options form
 - #1595: Unhandled exception when trying to browse through non existent multi ssh history with keyboard key strokes
