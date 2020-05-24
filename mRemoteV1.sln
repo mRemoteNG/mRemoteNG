@@ -18,8 +18,6 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "InstallerProje
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteNG.Specs", "mRemoteNG.Specs\mRemoteNG.Specs.csproj", "{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADTree", "ADTree\ADTree.csproj", "{EAE4E722-5F97-4454-A40C-CD2D88F87232}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Portable|Any CPU = Debug Portable|Any CPU
@@ -120,26 +118,6 @@ Global
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release|Any CPU.ActiveCfg = Release|x86
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release|x86.ActiveCfg = Release|x86
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release|x86.Build.0 = Release|x86
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Debug Portable|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Debug Portable|Any CPU.Build.0 = Debug|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Debug Portable|x86.ActiveCfg = Debug|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Debug Portable|x86.Build.0 = Debug|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Debug|x86.Build.0 = Debug|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release Installer|Any CPU.ActiveCfg = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release Installer|Any CPU.Build.0 = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release Installer|x86.ActiveCfg = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release Installer|x86.Build.0 = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release Portable|Any CPU.ActiveCfg = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release Portable|Any CPU.Build.0 = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release Portable|x86.ActiveCfg = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release Portable|x86.Build.0 = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release|x86.ActiveCfg = Release|Any CPU
-		{EAE4E722-5F97-4454-A40C-CD2D88F87232}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
