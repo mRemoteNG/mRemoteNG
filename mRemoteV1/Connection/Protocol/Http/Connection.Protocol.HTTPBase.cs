@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows.Forms;
-using CefSharp;
+﻿using CefSharp;
 using CefSharp.WinForms;
 using mRemoteNG.App;
 using mRemoteNG.UI.Tabs;
+using System;
+using System.Windows.Forms;
 
 namespace mRemoteNG.Connection.Protocol.Http
 {
@@ -80,7 +80,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             try
             {
                 if (browserInitialised) ((ChromiumWebBrowser)wBrowser).Load(GetURL());
-                
+
                 base.Connect();
                 connectCalled = true;
                 return true;
@@ -164,7 +164,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
                 string shortTitle;
 
-                
+
                 {
                     if (((TitleChangedEventArgs)e).Title.Length >= 15)
                     {
@@ -178,11 +178,11 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                 if (!string.IsNullOrEmpty(tabTitle))
                 {
-                   tabP.TabText = tabTitle + @" - " + shortTitle;
+                    tabP.TabText = tabTitle + @" - " + shortTitle;
                 }
                 else
                 {
-                   tabP.TabText = shortTitle;
+                    tabP.TabText = shortTitle;
                 }
             }
             catch (Exception ex)
