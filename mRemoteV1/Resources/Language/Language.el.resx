@@ -292,12 +292,6 @@
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>Το GeckoFx βρέθηκε και φαίνεται να έχει εγκατασταθεί σωστά.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA απαιτεί ότι είναι εγκατεστημένο το XenDesktop Online Plugin και ότι καταχωρείται η βιβλιοθήκη wfica.ocx. Μπορείτε να κατεβάσετε τον πελάτη εδώ: http://www.citrix.com/download/ αν έχετε το XenDesktop Online Plugin εγκατασταθεί και ο έλεγχος συνεχίσει να αποτυγχάνει, προσπαθήστε να εγγραφείτε wfica.ocx με μη αυτόματο τρόπο. Να κάνει αυτό ανοίγω πάνω στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (όπου c:\Program Files\Citrix\ICA Client\ είναι η διαδρομή στην εγκατάσταση XenDesktop Online Plugin). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε ICA στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/"</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Όλα τα συστατικά ICA βρέθηκαν και φαίνεται να καταχωρηθηκαν σωστά. Πρόγραμμα-πελάτη Citrix ICA ελέγχου έκδοση {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>δεν έχει εγκατασταθεί σωστά</value>
   </data>

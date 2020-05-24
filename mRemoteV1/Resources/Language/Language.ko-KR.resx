@@ -307,16 +307,6 @@ XULrunner 1.8.1.3은 ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contri
   <data name="strCcGeckoOK" xml:space="preserve">
 		<value>GeckoFx가 발견되어 설치 된 것으로 보입니다.</value>
 	</data>
-  <data name="strCcICAFailed" xml:space="preserve">
-		<value>ICA를 사용하려면 XenDesktop Online Plugin이 설치되어 있고 wfica.ocx 라이브러리가 등록되어 있어야합니다. 클라이언트는 http://www.citrix.com/download/에서 다운로드 할 수 있습니다.
-XenDesktop Online Plugin이 설치되어 있고 검사가 여전히 실패하면 wfica.ocx를 수동으로 등록 해보십시오.
-이렇게하려면 실행 대화 상자 (시작 - 실행)를 열고 다음을 입력하십시오. regsvr32 "c : ₩ Program Files ₩ Citrix ₩ ICA Client ₩ wfica.ocx"(여기서 c : \ Program Files \ Citrix \ ICA Client \는 XenDesktop Online Plugin 설치 경로).
-그래도이 수표를 통과하거나 mRemoteNG에서 ICA를 사용할 수 없다면 mRemoteNG 포럼 (http://forum.mremoteng.org/)을 참조하십시오.</value>
-	</data>
-  <data name="strCcICAOK" xml:space="preserve">
-		<value>모든 ICA 구성 요소가 발견되어 제대로 등록 된 것으로 보입니다.
-Citrix ICA 클라이언트 제어 버전 {0}</value>
-	</data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
 		<value>제대로 설치가 되어 있지 않습니다.</value>
 	</data>
@@ -934,27 +924,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
 		<value>HTTP Props 설정에 실패!</value>
-	</data>
-  <data name="strICA" xml:space="preserve">
-		<value>ICA</value>
-	</data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-		<value>새 ICA 연결을 생성할 수 없습니다.</value>
-	</data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-		<value>ICA 플러그 인을 로드하지 못 했습니다!</value>
-	</data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-		<value>ICA SetCredentials failed!</value>
-	</data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-		<value>ICA Set Event Handlers Failed!</value>
-	</data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-		<value>ICA Set Props Failed!</value>
-	</data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-		<value>ICA Set Resolution Failed!</value>
 	</data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
 		<value>"빠른"접두어를 추가하여 빠른 연결 탭을 확인하십시오.</value>

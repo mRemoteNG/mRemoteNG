@@ -299,15 +299,6 @@ Se il controllo fallisce o risulta impossibile utilizzare il motore di rendering
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx è stato rilevato e sembra installato correttamente.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA richiede che il plugin XenDesktop Online sia installato e che la libreria wfica.ocx sia registrata. Il client è scaricabile all'indirizzo http://www.citrix.com/download/
-Se il plugin XenDesktop Online è installato ma il controllo fallisce, provare a registrare wfica.ocx manualmente. Aprire la finestra "Esegui" (WIN+R) ed inserire il testo: regsvr32 "C:\Programmi\Citrix\ICA Client\wfica.ocx" (dove C:\Programmi\Citrix\ICA Client\ è il percorso di installazione del plugin XenDesktop Online).
-Se il controllo fallisce e risulta impossibile utilizzare ICA con mRemoteNG, per favore consulta il forum di mRemoteNG all'indirizzo http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Tutti i componenti ICA sono stati installati e sembrano registrati correttamente.
-Citrix ICA Client Control versione {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>non installato correttamente</value>
   </data>
@@ -702,24 +693,6 @@ Creazione di un nuovo file delle connessioni.</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Impostazione delle proprietà HTTP fallita!</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>Impossibile creare una nuova connessione ICA!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Caricamento del plugin ICA fallito!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials fallito!</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Set Event Handlers fallito!</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Set Props fallito!</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Set Resolution fallito!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Aggiungi il prefisso "Quick:" alle schede di connessioni rapide</value>

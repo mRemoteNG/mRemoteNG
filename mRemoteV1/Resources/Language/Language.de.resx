@@ -301,16 +301,6 @@ Wenn Sie noch immer Probleme mit der Gecko Engine in mRemote haben, konsultieren
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx wurde gefunden und scheint korrekt installiert zu sein.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA benötigt eine funktionierende XenDesktop-Online-Plugin-Installation und dass die Datei wfica.ocx korrekt registriert ist. Hier können Sie das Plugin herunterladen: http://www.citrix.com/download/
-Wenn sie das XenDesktop Online Plugin installiert haben und noch immer Probleme haben, diese Prüfung erfolgreich abzuschließen, versuchen Sie, die Datei wfica.ocx manuell zu registrieren.
-Öffnen Sie hierzu den Ausführen-Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\Programme\Citrix\ICA Client\wfica.ocx" (Wobei c:\Programme\Citrix\ICA Client\ ihr XenDesktop-Online-Plugin-Installationspfad ist).
-Wenn Sie noch immer Probleme mit ICA haben, konsultieren sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Alle ICA-Komponenten wurden gefunden und scheinen korrekt registriert zu sein.
-Citrix ICA Client Control Version {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>nicht korrekt installiert</value>
   </data>
@@ -723,24 +713,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Setzen der HTTP-Parameter fehlgeschlagen!</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>ICA-Verbindung fehlgeschlagen!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Einbinden des ICA-Plugins fehlgeschlagen!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>Setzen der ICA-Authenifizierung ist fehlgeschlagen!</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Setzen der Fehlerbehandlung fehlgeschlagen!</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>Setzen der ICA-Paramter fehlgeschlagen!</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>Setzen der Auflösung fehlgschlagen!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>QuickConnect-Tabs identifizieren, indem das Präfix "Quick" benutzt wird</value>
@@ -2585,9 +2557,6 @@ Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   </data>
   <data name="strHttps" xml:space="preserve">
     <value>HTTPS</value>
-  </data>
-  <data name="strICA" xml:space="preserve">
-    <value>ICA</value>
   </data>
   <data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
     <value>Tabs</value>

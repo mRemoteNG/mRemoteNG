@@ -289,10 +289,6 @@
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>找到 GeckoFx 並似乎正確註冊。</value>
   </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>找到所有 ICA 元件並似乎正確註冊。
-Citrix ICA Client Control 版本 {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>未正確安裝</value>
   </data>
@@ -684,24 +680,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>設定 HTTP Props 失敗!</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>無法建立新的 ICA 連線!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>載入 ICA Plugin 失敗!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials 失敗!</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Set Event Handlers 失敗!</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Set Props 失敗!</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Set Resolution 失敗!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>加入字首「Quick:」以識別快速連線索引標籤</value>

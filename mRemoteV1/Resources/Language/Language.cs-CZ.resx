@@ -307,16 +307,6 @@ Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalit
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx byla nalezena a zdá se, že je správně nainstalována.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>Funkcionalita ICA vyžaduje, aby byl nainstalován XenDesktop Online Plugin a knihovna wfica.ocx byla zaregistrována. Klienta můžete stáhnout zde: http://www.citrix.com/download/
-Pokud máte XenDesktop Online Plugin nainstalován a kontrola stále selhává, pokuste se zaregistrovat wfica.ocx ručně.
-K tomu otevřete dialog "Spustit" (Start-&gt;Spustit) a zadejte následující text: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (kde  c:\Program Files\Citrix\ICA Client\ je cesta ke složce s Vaší instalací XenDesktop Online Plugin).
-Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu ICA v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Všechny komponenty ICA byly nalezeny a zdají se být řádně zaregistrovány.
-Citrix ICA Client Control verze {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>není správně instalováno</value>
   </data>
@@ -797,27 +787,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Nastavení vlast. HTTP selhalo!</value>
-  </data>
-  <data name="strICA" xml:space="preserve">
-    <value>ICA</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>Nepovedo se vytvořit nové spojení ICA!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Načtení pluginu ICA Plugin selhalo!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>Metoda ICA SetCredentials selhala!</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Metoda ICA Set Event Handlers selhala!</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>Metoda ICA (nastavení vlastností) Set Props selhala!</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>Metoda ICA Set Resolution (nastavení rozlišení) selhala!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Označ záložky rychlého připojení prefixem "Quick:"</value>

@@ -301,16 +301,6 @@ Hvis denne kontrollen fortsatt feiler eller Gecko-renderingsmotoren i mRemoteNG 
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx ble funnet å ser ut til å være korrekt installert.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA krever at XenDesktop Online Plugin er installert og at wfica.ocx-biblioteket er registrert. Du kan laste ned klienten herfra: http://www.citrix.com/download/
-Hvis du har XenDesktop Online Pluginen installert og kontrollen fremdeles feiler, kan du forsøke å registrere wfica.ocx manuelt.
-For å gjøre dette, åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (der c:\Program Files\Citrix\ICA Client\ er stien til XenDesktop Online Plugin-installasjonen).
-Hvis denne kontrollen fortsatt feiler eller ICA i mRemoteNG ikke fungerer, vennligst se {0}.</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Alle ICA-komponenter ble funnet, og ser ut til å være korrekt registrert.
-Citrix ICA Client Control Version {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>ikke korrekt installert</value>
   </data>
@@ -717,24 +707,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Angi HTTP-egenskaper mislyktes!</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>Kunne ikke opprette ny ICA-tilkobling!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Innlasting av ICA Plugin mislyktes!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials mislyktes!</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Set Event Handlers mislyktes!</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Set Props mislyktes!</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Set Resolution mislyktes!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identifisere hurtigkoblingsfaner ved prefikset "Hurtig:"</value>

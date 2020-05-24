@@ -295,15 +295,6 @@ Veuillez utiliser le menu Fichier - Ouvrir un fichier de connexion pour les fich
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>XULRunner a été trouvé et semble être installé correctement.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA requiert l'installation du Plugin XenDesktop Online, ainsi que l'enregistrement de la librairie wfica.ocx. Vous pouvez télécharger le client ici : http://www.citrix.com/download/
-Si le Plugin XenDesktop Online est installé, et que la vérification des composants échoue, essayez d'enregistrer la librairie manuellement.
-Pour cela, ouvrez la fenêtre "Exécuter" (Démarrer - Exécuter), et entrez cette commande : regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Où c:\Program Files\Citrix\ICA Client\ est le chemin vers votre installation du plugin XenDesktop).
-Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, consultez le forum de mRemoteNG ici : http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Tous les composants de l'ICA ont été trouvés et semblent être enregistrés correctement. Citrix ICA Client Version Control {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>pas correctement installé </value>
   </data>
@@ -700,24 +691,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Échec de Set HTTP Props !</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>Impossible de créer une nouvelle connexion ICA !</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Le chargement du plugin ICA a échoué !</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>Échec de ICA SetCredentials !</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Échec de ICA Set Event Handlers !</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>Échec de ICA Set Props !</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>Échec de ICA Set Resolution !</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identifier les onglets de connexion rapide en ajoutant le préfixe "Rapide".</value>

@@ -341,16 +341,6 @@ Bu kontrolden hala sonuç alamıyorsanız veya Gecko Motorunu mRemoteNG'de kulla
   <data name="strCcGeckoOK" xml:space="preserve">
 		<value>GeckoFx bulundu ve düzgün kurulmuş gibi görünüyor.</value>
 	</data>
-  <data name="strCcICAFailed" xml:space="preserve">
-		<value>ICA, XenDesktop Online Plugin'in kurulu olmasını ve wfica.ocx kitaplığının kayıtlı olmasını gerektirir. İstemciyi şu adresten indirebilirsiniz: http://www.citrix.com/download/
-XenDesktop Çevrimiçi Eklentisi'ni yüklediyseniz ve kontrol hala başarısız olursa, el ile wfica.ocx kaydetmeyi deneyin.
-Bunu yapmak için çalıştır iletişim kutusunu açın (Başlat - Çalıştır) ve aşağıdakileri girin: regsvr32 "c:\Program Files\Citrix\ICA İstemci\wfica.ocx" (c:\Program Files\Citrix\ICA Client\ XenDesktop Online Plugin yüklemenizin yolu).
-Bu kontrolden sonuç alamıyorsanız veya ICA'yi mRemoteNG'de kullanamıyorsanız, http://forum.mremoteng.org/ adresindeki mRemoteNG Forumu'na başvurun "</value>
-	</data>
-  <data name="strCcICAOK" xml:space="preserve">
-		<value>Tüm ICA bileşenleri bulundu ve düzgün kaydedilmiş gibi görünüyor.
-Citrix ICA Client Control Sürümü {0}</value>
-	</data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
 		<value>Düzgün kurulmamış</value>
 	</data>
@@ -800,12 +790,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
 	</data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
 		<value>HTTP Prop'larını değiştirme başarısız!</value>
-	</data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-		<value>Yeni ICA Bağlantısı oluşturulamadı!</value>
-	</data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-		<value>ICA eklentisini yükleme başarısız!</value>
 	</data>
   <data name="strLabelSQLDatabaseName" xml:space="preserve">
 		<value>Veritabanı:</value>
@@ -1297,18 +1281,6 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
 	</data>
   <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
 		<value>Güncelleme indirilemedi.</value>
-	</data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-		<value>ICA Kimlik ayarlama başarısız!</value>
-	</data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-		<value>ICA Olay İşleyicileri Ayarlama Başarısız!</value>
-	</data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-		<value>ICA Props Ayarlama başarısız!</value>
-	</data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-		<value>ICA Çözünürlük ayarlama başarısız!</value>
 	</data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
 		<value>"Hızlı:" önekini ekleyerek hızlı bağlantı sekmelerini belirleyin</value>

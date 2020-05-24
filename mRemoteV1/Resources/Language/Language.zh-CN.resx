@@ -304,16 +304,6 @@ mRemoteNG提供此组件，但是如果没有使用 mRemoteNG 安装程序，不
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>发现 GeckoFx 组件。</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>启用 ICA 需要提前安装 XenDesktop Online 插件，并正确注册 wfica.ocx 库文件。您可以在此下载此插件：http://www.citrix.com/download/
-如果您已安装 XenDesktop Online 插件，但仍旧检测失败，请手动注册 wfica.ocx。
-请打开运行对话框（开始菜单/运行），并输入如下内容：“regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" ”（c:\Program Files\Citrix\ICA Client\ 是您安装 XenDesktop Online 插件的路径）。
-如果仍然无法通过此检查或在 mRemoteNG 中使用 ICA，请咨询 {0}。</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>发现 ICA 组件。
-Citrix ICA 客户端空间版本：{0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>安装不正确</value>
   </data>
@@ -800,27 +790,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>设置 HTTP 属性失败！</value>
-  </data>
-  <data name="strICA" xml:space="preserve">
-    <value>ICA</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>无法创建新 ICA 连接！</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>ICA 插件加载失败！</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA 凭据设置失败！</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA 事件句柄设置失败！</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>ICA 属性设置失败！</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA 分辨率设置失败！</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>通过添加前缀“快速：”来识别快速连接选项卡</value>

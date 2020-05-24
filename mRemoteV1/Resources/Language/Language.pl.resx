@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -210,7 +210,7 @@
   <data name="strButtonIcon" xml:space="preserve">
     <value>Ikona</value>
   </data>
-	<data name="strButtonImport" xml:space="preserve">
+  <data name="strButtonImport" xml:space="preserve">
     <value>&amp;Importuj</value>
   </data>
   <data name="strButtonInheritance" xml:space="preserve">
@@ -219,7 +219,7 @@
   <data name="strButtonLaunch" xml:space="preserve">
     <value>Uruchom</value>
   </data>
-	<data name="strButtonLaunchPutty" xml:space="preserve">
+  <data name="strButtonLaunchPutty" xml:space="preserve">
     <value>Uruchom PuTTY</value>
   </data>
   <data name="strButtonNew" xml:space="preserve">
@@ -299,13 +299,6 @@ Jeśli nadal nie można sprawdzić lub użyć fukcji Sesji (RDP) skonsultuj to n
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx został znaleziony i wydaje się być zainstalowany prawidłowo.</value>
-  </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA wymaga zainstalowania wtyczki Online XenDesktop, i aby była zarejestrowana biblioteka wfica.ocx. Możesz pobrać klienta tutaj: http://www.citrix.com/download/ Jeżeli masz zainstalowany Plugin Online XenDesktop a nadal nie działa, spróbuj ręcznie zarejestrować bibliotekę wfica.ocx. Aby to zrobić wybierz polecenie Uruchom (Start - Uruchom) i wprowadź w linii komend: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (gdzie c:\Program Files\Citrix\ICA Client\ jest ścieżką instalacji XenDesktop Online Plugin). Jeśli nadal nie można użyć ICA w mRemoteNG prosimy o kontakt mRemoteNG Forum na http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Wszystkie składniki ICA zostały znalezione i wydają się być poprawnie zarejestrowane. 
-Wersja klienta Citrix ICA {0}</value>
   </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>nie jest zainstalowany prawidłowo</value>
@@ -413,7 +406,7 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
   <data name="strCommandTryAgain" xml:space="preserve">
     <value>Spróbuj ponownie</value>
   </data>
-	<data name="strCompatibilityProblemDetected" xml:space="preserve">
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
     <value>Wykryto problem z kompatybilnością</value>
   </data>
   <data name="strComponentsCheck" xml:space="preserve">
@@ -516,7 +509,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="strConnectNoCredentials" xml:space="preserve">
     <value>Połącz się bez uwierzytelnienia</value>
   </data>
-	<data name="strConnectToConsoleSession" xml:space="preserve">
+  <data name="strConnectToConsoleSession" xml:space="preserve">
     <value>Połącz się z sesją konsoli</value>
   </data>
   <data name="strConnectWithOptions" xml:space="preserve">
@@ -573,7 +566,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="strEnc56Bit" xml:space="preserve">
     <value>56-bitowe</value>
   </data>
-	<data name="strEncBasic" xml:space="preserve">
+  <data name="strEncBasic" xml:space="preserve">
     <value>Podstawowe</value>
   </data>
   <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
@@ -606,7 +599,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
     <value>Nie udało się uruchomić PuTTY.</value>
   </data>
-	<data name="strErrorDecryptionFailed" xml:space="preserve">
+  <data name="strErrorDecryptionFailed" xml:space="preserve">
     <value>Odszyfrowywanie nie powiodło się. {0}</value>
   </data>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
@@ -636,7 +629,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="strExportFile" xml:space="preserve">
     <value>Eksportuj do pliku</value>
   </data>
-	<data name="strExportmRemoteXML" xml:space="preserve">
+  <data name="strExportmRemoteXML" xml:space="preserve">
     <value>Eksport mRemote/mRemoteNG XML</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
@@ -645,7 +638,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="strExternalToolDefaultName" xml:space="preserve">
     <value>Nowe narzędzie zewnętrzne</value>
   </data>
-	<data name="strFAMFAMFAMAttribution" xml:space="preserve">
+  <data name="strFAMFAMFAMAttribution" xml:space="preserve">
     <value>Zawiera ikony ze strony [FAMFAMFAM]</value>
   </data>
   <data name="strFilterAll" xml:space="preserve">
@@ -710,15 +703,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Konfiguracja ustawień HTTP nie powiodła się!</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>Nie można utworzyć nowego połączenia ICA!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Ładowanie wtyczki ICA nie powiodło się!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>Wykonanie ICA SetCredentials nie powiodło się!</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Importów z Active Directory</value>
@@ -1002,7 +986,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="strMenuResetLayout" xml:space="preserve">
     <value>Przywróć domyślny layout</value>
   </data>
-	<data name="strMenuSaveConnectionFile" xml:space="preserve">
+  <data name="strMenuSaveConnectionFile" xml:space="preserve">
     <value>Zapisz plik połączeń</value>
   </data>
   <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
@@ -1131,7 +1115,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="strPasswordProtect" xml:space="preserve">
     <value>Zabezpiecz hasłem</value>
   </data>
-	<data name="strPleaseFillAllFields" xml:space="preserve">
+  <data name="strPleaseFillAllFields" xml:space="preserve">
     <value>Wypełnij wszystkie pola</value>
   </data>
   <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
@@ -1161,7 +1145,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="strPropertyDescriptionName" xml:space="preserve">
     <value>To jest nazwa, która będzie wyświetlana na drzewie połączeń.</value>
   </data>
-	<data name="strPropertyDescriptionDomain" xml:space="preserve">
+  <data name="strPropertyDescriptionDomain" xml:space="preserve">
     <value>Podaj domenę.</value>
   </data>
   <data name="strPropertyDescriptionPassword" xml:space="preserve">
@@ -1410,7 +1394,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="strRadioCloseWarnNever" xml:space="preserve">
     <value>Nie ostrzegaj przed zamknięciem połączeń</value>
   </data>
-	<data name="strRAW" xml:space="preserve">
+  <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
   </data>
   <data name="strRDP" xml:space="preserve">

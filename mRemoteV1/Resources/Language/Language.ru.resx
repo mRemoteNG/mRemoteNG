@@ -301,16 +301,6 @@ mRemoteNG загрузится с этим компонентом, но не з�
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx был найден и установлен правильно.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA требуется установленный XenDesktop Online Plugin и зарегистрированная библиотека wfica.ocx. Вы можете скачать клиент здесь: http://www.citrix.com/download/
-Если у вас есть установленный XenDesktop Online Plugin и ничего не работает, попробуйте зарегистрировать wfica.ocx вручную.
-Для этого откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Program Files\Citrix\ICA Client\wfica.ocx" (где C:\Program Files\Citrix \ICA Client\ это путь к XenDesktop Online Plugin).
-Если у вас все же не работает ICA в mRemoteNG обратитесь на {0}.</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Все компоненты ICA были найдены и зарегистрированы.
-Citrix ICA Client Control версии {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>установлен неправильно</value>
   </data>
@@ -723,24 +713,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Не удалось задать параметры HTTP!</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>Не удается создать новое подключение ICA!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Не удалось загрузить ICA-плагин!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>Ошибка установки учетных данных ICA!</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Не удалось установить обработчик событий ICA!</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>Не удалось задать параметры ICA!</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>Ошибка установки разрешений ICA!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Определить вкладки быстрых подключений, добавляя префикс «Quick:»</value>
@@ -2282,9 +2254,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="strHttps" xml:space="preserve">
     <value>HTTPS</value>
-  </data>
-  <data name="strICA" xml:space="preserve">
-    <value>ICA</value>
   </data>
   <data name="strImportFileFailedContent" xml:space="preserve">
     <value>Произошла ошибка при импорте файла "{0}".</value>

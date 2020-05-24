@@ -301,16 +301,6 @@ Si continúa sin funcionar la comprobación ó no puede utilizar el motor Gecko 
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx ha sido localizado y parece estar instalado correctamente.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA necesita que esté instalado XenDesktop Online Plugin y que la librería wfica.ocx esté registrada. Puede descargar el cliente aquí: http://www.citrix.com/download/
-Si tiene instalado XenDesktop Online Plugin y la comprobación continúa fallando, pruebe a registrar wfica.ocx manualmente.
-Para hacer ésto, abra el diálogo ejecutar (Inicio - Ejecutar) e introduzca lo siguiente: regsvr32 "c:\Archivos de Programa\Citrix\ICA Client\wfica.ocx" (Donde c:\Archivos de Programa\Citrix\ICA Client\ es la ruta a su instalación de XenDesktop Online Plugin).
-Si continúa sin funcionar la comprobación ó no puede utilizar ICA en mRemoteNG, consulte el Foro de mRemoteNG en http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Todos los componentes de ICA han sido localizados y parecen estar registrados correctamente.
-Versión {0} de Citrix ICA Client Control</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>no instalado adecuadamente</value>
   </data>
@@ -710,24 +700,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>¡Asignación de Propiedades HTTP fallida!</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>¡No se pudo crear una nueva conexión ICA!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>¡Fallo en la carga del Plugin ICA!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>¡Asignación de Credenciales ICA fallida!</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>¡Asignación de Manejadores de Eventos ICA fallida!</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>¡Asignación de Propiedades ICA fallida!</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>¡Asignación de Resolución ICA fallida!</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Importar desde Directorio Activo</value>

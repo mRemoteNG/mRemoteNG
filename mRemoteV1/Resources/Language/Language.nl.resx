@@ -301,16 +301,6 @@ Als u nog steeds niet in staat bent om de langs check te komen gebruik dan de Ge
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA vereist dat de XenDesktop Online Plugin is geïnstalleerd is en dat de wfica.ocx bibliotheek is geregistreerd. U kunt de cliënt van deze locatie downloaden: http://www.citrix.com/download/
-Als u de XenDesktop Online Plugin heeft geïnstalleerd en de check nog niet lukt, probeer dan om handmatig wfica.ocx te registreren
-Om dit uit te voeren opent u het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Waarbij c:\Program Files\Citrix\ICA Client\ het pad is naar uw XenDesktop Online Plugin installatie).
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Alle ICA componenten werden gevonden en lijken correct te zijn geregistreerd.
-Citrix ICA Versie {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>Niet correct geïnstalleerd</value>
   </data>
@@ -717,24 +707,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Instellen HTTP Eigenschappen mislukt!</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>Kan geen nieuwe ICA Connectie aanmaken!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Laden ICA Plugin mislukt!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA instellen kenmerken mislukt!</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Instellen gebeurtenis handeling mislukt!</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Instellen Eigenschappen mislukt!</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Instellen Resolutie mislukt!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Vindt de Snel aansluit tabs met het voorzetsel "Quick"</value>

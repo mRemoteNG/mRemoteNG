@@ -294,12 +294,6 @@
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>GeckoFx foi encontrado e aparenta estar instalado corretamente.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA requer que o XenDesktop Online Plugin esteja instalado e a biblioteca wfica registrada. Você pode baixar o cliente aqui: http://www.citrix.com/download/ se você tiver o Plugin Online XenDesktop instalado e a verificação ainda falhar, tente registrar manualmente o wfica. Para fazer isso abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (onde c:\Program Files\Citrix\ICA Client\ é o caminho para a instalação do Plugin Online do XenDesktop). Se você ainda não pode passar essa verificação ou usar ICA em mRemoteNG, por favor, consulte o fórum de mRemoteNG no http://forum.mremoteng.org/"</value>
-  </data>
-  <data name="strCcICAOK" xml:space="preserve">
-    <value>Todos os componentes de ICA, foram encontrados e parecem ser registrado corretamente. Citrix ICA cliente controle versão {0}</value>
-  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>não instalado corretamente</value>
   </data>
@@ -692,24 +686,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Falhou configuração de props HTTP!</value>
-  </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
-    <value>Impossível criar nova ligação ICA!</value>
-  </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Falha ao carregar o Plugin ICA!</value>
-  </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>Falha ICA SetCredentials!</value>
-  </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Manipuladores de evento conjunto ICA falharam!</value>
-  </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
-    <value>Configuração de props ICA falhou!</value>
-  </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
-    <value>Configuração de resolução ICA falhou!</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identificar guias de ligação rápida, adicionando o prefixo "rápido:"</value>
