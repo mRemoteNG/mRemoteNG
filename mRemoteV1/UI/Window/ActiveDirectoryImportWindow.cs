@@ -34,14 +34,8 @@ namespace mRemoteNG.UI.Window
             if (!ThemeManager.getInstance().ThemingActive) return;
             base.ApplyTheme();
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            //
-            //base.ApplyTheme();
-            //if (activeDirectoryTree.Controls.Count < 1) return;
-            //if (!(activeDirectoryTree.Controls[0] is TreeView tv)) return;
-            //var tm = ThemeManager.getInstance();
-            //if (!tm.ActiveAndExtended) return;
-            //adt tv.BackColor = tm.ActiveTheme.ExtendedPalette.getColor("List_Background");
-            //tv.ForeColor = tm.ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            activeDirectoryTree.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Background");
+            activeDirectoryTree.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
         }
 
         private void BtnImport_Click(object sender, EventArgs e)
@@ -68,11 +62,11 @@ namespace mRemoteNG.UI.Window
             ChangeDomain();
         }
 
-        // ReSharper disable once UnusedParameter.Local
         private void ActiveDirectoryTree_ADPathChanged(object sender)
         {
             EnableDisableImportButton();
         }
+
         private void ApplyLanguage()
         {
             btnImport.Text = Language.strButtonImport;
