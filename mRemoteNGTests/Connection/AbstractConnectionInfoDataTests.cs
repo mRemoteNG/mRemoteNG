@@ -2,7 +2,6 @@
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using NUnit.Framework;
@@ -139,15 +138,6 @@ namespace mRemoteNGTests.Connection
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
             _testAbstractConnectionInfoData.PuttySession = "a";
-            Assert.That(wasCalled, Is.True);
-        }
-
-        [Test]
-        public void IcaEncryptionNotifiesOnValueChange()
-        {
-            var wasCalled = false;
-            _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr128BitLogonOnly;
             Assert.That(wasCalled, Is.True);
         }
 

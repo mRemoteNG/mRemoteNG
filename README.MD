@@ -27,7 +27,6 @@ mRemoteNG supports the following protocols:
 
 * RDP (Remote Desktop/Terminal Server)
 * VNC (Virtual Network Computing)
-* ICA (Citrix Independent Computing Architecture)
 * SSH (Secure Shell)
 * Telnet (TELecommunication NETwork)
 * HTTP/HTTPS (Hypertext Transfer Protocol)

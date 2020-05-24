@@ -5,7 +5,6 @@ using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Credential;
@@ -92,7 +91,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RDGatewayDomain = "SomeRDGatewayDomain",
                 VNCProxyIP = "SomeVNCProxyIP",
                 RDGatewayHostname = "SomeRDGatewayHostname",
-                Protocol = ProtocolType.ICA,
+                Protocol = ProtocolType.RDP,
                 Port = 999,
                 Favorite = true,
                 UseConsoleSession = true,
@@ -100,7 +99,6 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 UseVmId = false,
                 UseEnhancedMode = false,
                 RenderingEngine = HTTPBase.RenderingEngine.Gecko,
-                ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
                 RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
                 Colors = RDPColors.Colors16Bit,
                 Resolution = RDPResolutions.Res1366x768,

@@ -52,7 +52,6 @@
         <xs:attribute name="ConnectToConsole" type="xs:boolean" use="required" />
         <xs:attribute name="UseCredSsp" type="xs:boolean" use="required" />
         <xs:attribute name="RenderingEngine" type="xs:string" use="required" />
-        <xs:attribute name="ICAEncryptionStrength" type="xs:string" use="required" />
         <xs:attribute name="RDPAuthenticationLevel" type="xs:string" use="required" />
         <xs:attribute name="RDPMinutesToIdleTimeout" type="xs:int" use="required" />
         <xs:attribute name="RDPAlertIdleTimeout" type="xs:boolean" use="required" />

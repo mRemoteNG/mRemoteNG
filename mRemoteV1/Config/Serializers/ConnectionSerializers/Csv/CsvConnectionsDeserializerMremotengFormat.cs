@@ -4,7 +4,6 @@ using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
@@ -180,13 +179,6 @@ namespace mRemoteNG.Config.Serializers.Csv
                 HTTPBase.RenderingEngine value;
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RenderingEngine")], out value))
                     connectionRecord.RenderingEngine = value;
-            }
-
-            if (headers.Contains("ICAEncryptionStrength"))
-            {
-                IcaProtocol.EncryptionStrength value;
-                if (Enum.TryParse(connectionCsv[headers.IndexOf("ICAEncryptionStrength")], out value))
-                    connectionRecord.ICAEncryptionStrength = value;
             }
 
             if (headers.Contains("RDPAuthenticationLevel"))
@@ -615,13 +607,6 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritVmId")], out value))
                     connectionRecord.Inheritance.VmId = value;
-            }
-
-            if (headers.Contains("InheritICAEncryptionStrength"))
-            {
-                bool value;
-                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritICAEncryptionStrength")], out value))
-                    connectionRecord.Inheritance.ICAEncryptionStrength = value;
             }
 
             if (headers.Contains("InheritRDPAuthenticationLevel"))

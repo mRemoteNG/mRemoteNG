@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using AxWFICALib;
 using Gecko;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -542,7 +541,6 @@ namespace mRemoteNG.UI.Window
             CheckRdp();
             CheckVnc();
             CheckPutty();
-            CheckIca();
             CheckGeckoBrowser();
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Finished component check", true);
         }
@@ -643,36 +641,6 @@ namespace mRemoteNG.UI.Window
                                                     "PuTTY " + Language.strCcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "File " + pPath + " does not exist.",
                                                     true);
-            }
-        }
-
-        private void CheckIca()
-        {
-            pnlCheck4.Visible = true;
-
-            try
-            {
-                using (var ica = new AxICAClient())
-                {
-                    ica.Parent = this;
-
-                    pbCheck4.Image = _successImage;
-                    lblCheck4.ForeColor = Color.DarkOliveGreen;
-                    lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckSucceeded;
-                    txtCheck4.Text = string.Format(Language.strCcICAOK, ica.Version);
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "ICA installed", true);
-                }
-            }
-            catch (Exception ex)
-            {
-                pbCheck4.Image = _failureImage;
-                lblCheck4.ForeColor = Color.Firebrick;
-                lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckFailed;
-                txtCheck4.Text = string.Format(Language.strCcICAFailed, GeneralAppInfo.UrlForum);
-
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "ICA " + Language.strCcNotInstalledProperly, true);
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
             }
         }
 

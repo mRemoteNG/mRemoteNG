@@ -2,7 +2,6 @@
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
@@ -100,9 +99,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.UseVmId = (bool)dataRow["UseVmId"];
             connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine),
                                                                                   (string)dataRow["RenderingEngine"]);
-            connectionInfo.ICAEncryptionStrength =
-                (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength),
-                                                           (string)dataRow["ICAEncryptionStrength"]);
             connectionInfo.RDPAuthenticationLevel =
                 (AuthenticationLevel)Enum.Parse(typeof(AuthenticationLevel),
                                                             (string)dataRow["RDPAuthenticationLevel"]);
@@ -204,7 +200,6 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.VmId = (bool)dataRow["InheritVmId"];
             connectionInfo.Inheritance.RenderingEngine = (bool)dataRow["InheritRenderingEngine"];
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
-            connectionInfo.Inheritance.ICAEncryptionStrength = (bool)dataRow["InheritICAEncryptionStrength"];
             connectionInfo.Inheritance.RDPAuthenticationLevel = (bool)dataRow["InheritRDPAuthenticationLevel"];
             connectionInfo.Inheritance.RDPAlertIdleTimeout = (bool)dataRow["InheritRDPAlertIdleTimeout"];
             connectionInfo.Inheritance.RDPMinutesToIdleTimeout = (bool)dataRow["InheritRDPMinutesToIdleTimeout"];

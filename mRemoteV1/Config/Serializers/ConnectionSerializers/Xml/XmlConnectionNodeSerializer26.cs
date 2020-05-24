@@ -76,7 +76,6 @@ namespace mRemoteNG.Config.Serializers.Xml
                                        connectionInfo.UseConsoleSession.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("UseCredSsp", connectionInfo.UseCredSsp.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RenderingEngine", connectionInfo.RenderingEngine));
-            element.Add(new XAttribute("ICAEncryptionStrength", connectionInfo.ICAEncryptionStrength));
             element.Add(new XAttribute("RDPAuthenticationLevel", connectionInfo.RDPAuthenticationLevel));
             element.Add(new XAttribute("RDPMinutesToIdleTimeout", connectionInfo.RDPMinutesToIdleTimeout));
             element.Add(new XAttribute("RDPAlertIdleTimeout",
@@ -221,9 +220,6 @@ namespace mRemoteNG.Config.Serializers.Xml
                                            connectionInfo.Inheritance.RenderingEngine.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritUsername",
                                            connectionInfo.Inheritance.Username.ToString().ToLowerInvariant()));
-                element.Add(new XAttribute("InheritICAEncryptionStrength",
-                                           connectionInfo
-                                               .Inheritance.ICAEncryptionStrength.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritRDPAuthenticationLevel",
                                            connectionInfo
                                                .Inheritance.RDPAuthenticationLevel.ToString().ToLowerInvariant()));
@@ -315,7 +311,6 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritUseCredSsp", falseString));
                 element.Add(new XAttribute("InheritRenderingEngine", falseString));
                 element.Add(new XAttribute("InheritUsername", falseString));
-                element.Add(new XAttribute("InheritICAEncryptionStrength", falseString));
                 element.Add(new XAttribute("InheritRDPAuthenticationLevel", falseString));
                 element.Add(new XAttribute("InheritRDPMinutesToIdleTimeout", falseString));
                 element.Add(new XAttribute("InheritRDPAlertIdleTimeout", falseString));
