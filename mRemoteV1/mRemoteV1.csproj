@@ -1027,7 +1027,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <SubType>Designer</SubType>
-      <LastGenOutput>Language.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.fr.resx">
       <SubType>Designer</SubType>

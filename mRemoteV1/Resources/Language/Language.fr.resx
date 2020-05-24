@@ -2141,4 +2141,10 @@ Message:
   <data name="strYes" xml:space="preserve">
     <value>Oui</value>
   </data>
+  <data name="strLicense" xml:space="preserve">
+    <value>Licence</value>
+  </data>
+  <data name="strCredits" xml:space="preserve">
+    <value>Crédits</value>
+  </data>
 </root>
