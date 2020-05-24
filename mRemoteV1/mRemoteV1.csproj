@@ -1226,7 +1226,6 @@
     </None>
     <None Include="Documentation\images\connections_status.png" />
     <None Include="Documentation\images\putty.png" />
-    <Content Include="Console.ico" />
     <Content Include="Documentation\images\ssh_tunnel.png" />
     <Content Include="Documentation\mssql_db_setup.sql" />
     <Content Include="Documentation\mysql_db_setup.sql" />
