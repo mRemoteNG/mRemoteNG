@@ -30,19 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdTree));
-            this.TvAd = new System.Windows.Forms.TreeView();
+            this.tvActiveDirectory = new System.Windows.Forms.TreeView();
             this.ImglTree = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
-            // TvAd
+            // tvActiveDirectory
             // 
-            this.TvAd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TvAd.Location = new System.Drawing.Point(0, 0);
-            this.TvAd.Name = "TvAd";
-            this.TvAd.Size = new System.Drawing.Size(800, 450);
-            this.TvAd.TabIndex = 0;
-            this.TvAd.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TvAD_AfterExpand);
-            this.TvAd.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvAD_AfterSelect);
+            this.tvActiveDirectory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvActiveDirectory.Location = new System.Drawing.Point(0, 0);
+            this.tvActiveDirectory.Name = "tvActiveDirectory";
+            this.tvActiveDirectory.Size = new System.Drawing.Size(800, 450);
+            this.tvActiveDirectory.TabIndex = 0;
+            this.tvActiveDirectory.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TvActiveDirectory_AfterExpand);
+            this.tvActiveDirectory.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvActiveDirectory_AfterSelect);
             // 
             // ImglTree
             // 
@@ -57,18 +57,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.TvAd);
+            this.Controls.Add(this.tvActiveDirectory);
             this.Name = "AdTree";
-            this.Text = "AdTree2";
-            this.Load += new System.EventHandler(this.ADtree_Load);
+            this.Size = new System.Drawing.Size(800, 450);
+            this.Load += new System.EventHandler(this.AdTree_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TreeView TvAd;
+        private System.Windows.Forms.TreeView tvActiveDirectory;
         private System.Windows.Forms.ImageList ImglTree;
     }
 }

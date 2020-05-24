@@ -7,12 +7,34 @@ namespace mRemoteNG.UI.Controls
 {
     public partial class AdTree : UserControl
     {
+        #region Public Methods
+
         public AdTree()
         {
             InitializeComponent();
         }
 
-        private void TvAD_AfterExpand(object sender, TreeViewEventArgs e)
+        public event AdPathChangedEventHandler AdPathChanged;
+
+        public delegate void AdPathChangedEventHandler(object sender);
+
+        public string AdPath { get; set; }
+
+        public string Domain
+        {
+            private get => string.IsNullOrEmpty(_domain) == false ? _domain : Environment.UserDomainName;
+            set => _domain = value;
+        }
+
+        public object SelectedNode { get; internal set; }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private string _domain;
+
+        private void TvActiveDirectory_AfterExpand(object sender, TreeViewEventArgs e)
         {
             try
             {
@@ -25,36 +47,20 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        private void TvAD_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TvActiveDirectory_AfterSelect(object sender, TreeViewEventArgs e)
         {
             AdPath = e.Node.Tag.ToString();
             var pathChangedEvent = AdPathChanged;
             pathChangedEvent?.Invoke(this);
         }
 
-        public event AdPathChangedEventHandler AdPathChanged;
-
-        public delegate void AdPathChangedEventHandler(object sender);
-
-        private string _domain;
-
-        public string AdPath { get; set; }
-
-        public string Domain
+        private void AdTree_Load(object sender, EventArgs e)
         {
-            private get => string.IsNullOrEmpty(_domain) == false ? _domain : Environment.UserDomainName;
-            set => _domain = value;
-        }
-        public BorderStyle BorderStyle { get; internal set; }
-        public object SelectedNode { get; internal set; }
-
-        private void ADtree_Load(object sender, EventArgs e)
-        {
-            TvAd.Nodes.Clear();
+            tvActiveDirectory.Nodes.Clear();
             var treeNode = new TreeNode(Domain) { Tag = "" };
-            TvAd.Nodes.Add(treeNode);
+            tvActiveDirectory.Nodes.Add(treeNode);
             AddTreeNodes(treeNode);
-            TvAd.Nodes[0].Expand();
+            tvActiveDirectory.Nodes[0].Expand();
         }
 
         private void AddTreeNodes(TreeNode tNode)
@@ -62,7 +68,7 @@ namespace mRemoteNG.UI.Controls
             var adhelper = new ADhelper(Domain);
             adhelper.GetChildEntries(tNode.Tag.ToString());
             var enumerator = adhelper.Children.GetEnumerator();
-            TvAd.BeginUpdate();
+            tvActiveDirectory.BeginUpdate();
             while (enumerator.MoveNext())
             {
                 var flag1 = false;
@@ -102,7 +108,7 @@ namespace mRemoteNG.UI.Controls
                 node1.SelectedImageIndex = imageIndex;
             }
 
-            TvAd.EndUpdate();
+            tvActiveDirectory.EndUpdate();
         }
 
         private static int GetImageIndex(string objType)
@@ -111,5 +117,7 @@ namespace mRemoteNG.UI.Controls
                 return 2;
             return objType.Equals("OU") ? 1 : 3;
         }
+
+        #endregion Private Methods
     }
 }
