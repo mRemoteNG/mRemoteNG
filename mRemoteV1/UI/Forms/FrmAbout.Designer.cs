@@ -147,7 +147,7 @@
             this.MaximumSize = new System.Drawing.Size(20000, 10000);
             this.MinimizeBox = false;
             this.Name = "FrmAbout";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
             this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
