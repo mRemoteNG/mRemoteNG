@@ -27,9 +27,6 @@ Options below are for the various settings for Startup/Exit of mRemoteNG.
    * - Allow only a single instance of the application (mRemoteNG restart required)
      - Off
      - Enforces and makes sure only a single instance of mRemoteNG is running on the computer
-   * - Check proper installation of components at startup
-     - Off
-     - Opens the panel for Components Check on every startup
 
 Appearance
 ==========
