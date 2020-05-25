@@ -305,10 +305,7 @@ If you are still not able to pass this check or use the Gecko Engine in mRemoteN
     <value>GeckoFx was found and seems to be installed properly.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
-If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
-To do this open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin installation).
-If you are still not able to pass this check or use ICA in mRemoteNG please consult the at {0}.</value>
+    <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>All ICA components were found and seem to be registered properly.

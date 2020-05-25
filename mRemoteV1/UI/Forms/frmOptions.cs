@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
-using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -28,7 +27,7 @@ namespace mRemoteNG.UI.Forms
             Cursor.Current = Cursors.Default;
         }
 
-        private void frmOptions_Load(object sender, EventArgs e)
+        private void FrmOptions_Load(object sender, EventArgs e)
         {
             CompileListOfOptionsPages();
             FontOverrider.FontOverride(this);
@@ -78,7 +77,8 @@ namespace mRemoteNG.UI.Forms
                 {typeof(UpdatesPage).Name, new UpdatesPage {Dock = DockStyle.Fill}},
                 {typeof(ThemePage).Name, new ThemePage {Dock = DockStyle.Fill}},
                 {typeof(SecurityPage).Name, new SecurityPage {Dock = DockStyle.Fill}},
-                {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}}
+                {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}},
+                {typeof(ComponentsPage).Name, new ComponentsPage {Dock = DockStyle.Fill}},
             };
         }
 

@@ -126,14 +126,12 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Connection failed!.
         /// </summary>
-        internal static string ConnectionFailed
-        {
-            get
-            {
+        internal static string ConnectionFailed {
+            get {
                 return ResourceManager.GetString("ConnectionFailed", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The connection file could not be found..
         /// </summary>
@@ -997,9 +995,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
-        ///If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
-        ///To do this open up the run dialog (Start - Run) and enter the following: regsvr32 &quot;c:\Program Files\Citrix\ICA Client\wfica.ocx&quot; (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin install [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/.
         /// </summary>
         internal static string strCcICAFailed {
             get {
@@ -1259,14 +1255,12 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Close to notification area.
         /// </summary>
-        internal static string strCloseToSysTray
-        {
-            get
-            {
+        internal static string strCloseToSysTray {
+            get {
                 return ResourceManager.GetString("strCloseToSysTray", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Collapse all folders.
         /// </summary>
@@ -1616,15 +1610,6 @@ namespace mRemoteNG {
         internal static string strConnectionEventConnectedDetail {
             get {
                 return ResourceManager.GetString("strConnectionEventConnectedDetail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connection failed!.
-        /// </summary>
-        internal static string strConnectionEventConnectionFailed {
-            get {
-                return ResourceManager.GetString("strConnectionEventConnectionFailed", resourceCulture);
             }
         }
         
@@ -2894,15 +2879,6 @@ namespace mRemoteNG {
         internal static string strInheritNewConnection {
             get {
                 return ResourceManager.GetString("strInheritNewConnection", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connection failed!.
-        /// </summary>
-        internal static string strIntAppConnectionFailed {
-            get {
-                return ResourceManager.GetString("strIntAppConnectionFailed", resourceCulture);
             }
         }
         
@@ -4692,14 +4668,12 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to PowerShell.
         /// </summary>
-        internal static string strPowerShell
-        {
-            get
-            {
+        internal static string strPowerShell {
+            get {
                 return ResourceManager.GetString("strPowerShell", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to (These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!).
         /// </summary>
@@ -5009,14 +4983,12 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Specifies the password of the Remote Desktop Gateway server..
         /// </summary>
-        internal static string strPropertyDescriptionRDGatewayPassword
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRDGatewayPassword {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRDGatewayPassword", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Specifies when to use a Remote Desktop Gateway (RD Gateway) server..
         /// </summary>
@@ -5110,14 +5082,12 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Select whether microphones should be shared..
         /// </summary>
-        internal static string strPropertyDescriptionRedirectMicrophones
-        {
-            get
-            {
+        internal static string strPropertyDescriptionRedirectMicrophones {
+            get {
                 return ResourceManager.GetString("strPropertyDescriptionRedirectMicrophones", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Select whether local ports (ie. com, parallel) should be shown on the remote host..
         /// </summary>
@@ -5962,15 +5932,6 @@ namespace mRemoteNG {
         internal static string strProxyTestSucceeded {
             get {
                 return ResourceManager.GetString("strProxyTestSucceeded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Connection failed!.
-        /// </summary>
-        internal static string strPuttyConnectionFailed {
-            get {
-                return ResourceManager.GetString("strPuttyConnectionFailed", resourceCulture);
             }
         }
         
@@ -8194,14 +8155,12 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Windows.
         /// </summary>
-        internal static string strWindows
-        {
-            get
-            {
+        internal static string strWindows {
+            get {
                 return ResourceManager.GetString("strWindows", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Working directory.
         /// </summary>
