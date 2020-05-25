@@ -21,11 +21,13 @@
             // 
             // pbLogo
             // 
+            this.pbLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
+            this.pbLogo.BackgroundImage = global::mRemoteNG.Resources.Header_dark;
+            this.pbLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pbLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pbLogo.Image = global::mRemoteNG.Resources.Header_dark;
             this.pbLogo.Location = new System.Drawing.Point(0, 0);
             this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(450, 120);
+            this.pbLogo.Size = new System.Drawing.Size(591, 120);
             this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pbLogo.TabIndex = 1;
             this.pbLogo.TabStop = false;
@@ -44,14 +46,14 @@
             this.pnlBottom.ForeColor = System.Drawing.SystemColors.ControlText;
             this.pnlBottom.Location = new System.Drawing.Point(0, 120);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(450, 161);
+            this.pnlBottom.Size = new System.Drawing.Size(591, 161);
             this.pnlBottom.TabIndex = 1;
             // 
             // llCredits
             // 
             this.llCredits.AutoSize = true;
             this.llCredits.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.llCredits.Location = new System.Drawing.Point(3, 134);
+            this.llCredits.Location = new System.Drawing.Point(5, 134);
             this.llCredits.Name = "llCredits";
             this.llCredits.Size = new System.Drawing.Size(49, 17);
             this.llCredits.TabIndex = 10;
@@ -63,7 +65,7 @@
             // 
             this.llChangelog.AutoSize = true;
             this.llChangelog.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.llChangelog.Location = new System.Drawing.Point(3, 117);
+            this.llChangelog.Location = new System.Drawing.Point(5, 117);
             this.llChangelog.Name = "llChangelog";
             this.llChangelog.Size = new System.Drawing.Size(71, 17);
             this.llChangelog.TabIndex = 9;
@@ -75,7 +77,7 @@
             // 
             this.llLicense.AutoSize = true;
             this.llLicense.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.llLicense.Location = new System.Drawing.Point(3, 100);
+            this.llLicense.Location = new System.Drawing.Point(5, 100);
             this.llLicense.Name = "llLicense";
             this.llLicense.Size = new System.Drawing.Size(50, 17);
             this.llLicense.TabIndex = 8;
@@ -136,7 +138,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(450, 281);
+            this.ClientSize = new System.Drawing.Size(591, 281);
             this.Controls.Add(this.pnlBottom);
             this.Controls.Add(this.pbLogo);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
