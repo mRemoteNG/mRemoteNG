@@ -1562,6 +1562,9 @@
   <ItemGroup>
     <Reference Include="mscorlib" />
     <Reference Include="System.Web" />
+    <Reference Include="VncSharp">
+      <HintPath>References\VncSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -1628,9 +1631,6 @@
     </PackageReference>
     <PackageReference Include="System.Xml.Linq">
       <Version>3.5.21022.801</Version>
-    </PackageReference>
-    <PackageReference Include="VncSharp">
-      <Version>1.0.7</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
