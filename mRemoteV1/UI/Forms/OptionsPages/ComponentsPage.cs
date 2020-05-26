@@ -56,7 +56,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             CheckVnc();
             CheckPutty();
             CheckIca();
-            CheckGeckoBrowser();
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Finished component check", true);
         }
 
@@ -186,51 +185,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                                                     "ICA " + Language.strCcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
-            }
-        }
-
-        private void CheckGeckoBrowser()
-        {
-            pnlCheck5.Visible = true;
-            var geckoBad = false;
-            var geckoFxPath = Path.Combine(GeneralAppInfo.HomePath, "Firefox");
-
-            if (File.Exists(Path.Combine(GeneralAppInfo.HomePath, "Geckofx-Core.dll")))
-            {
-                if (Directory.Exists(geckoFxPath))
-                {
-                    if (!File.Exists(Path.Combine(geckoFxPath, "xul.dll")))
-                    {
-                        geckoBad = true;
-                    }
-                }
-                else
-                {
-                    geckoBad = true;
-                }
-            }
-
-            if (geckoBad == false)
-            {
-                pbCheck5.Image = Resources.Good_Symbol;
-                lblCheck5.ForeColor = Color.DarkOliveGreen;
-                lblCheck5.Text = @"Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckSucceeded;
-                if (!Xpcom.IsInitialized)
-                    Xpcom.Initialize("Firefox");
-                txtCheck5.Text = Language.strCcGeckoOK + " Version: " + Xpcom.XulRunnerVersion;
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Gecko Browser installed", true);
-            }
-            else
-            {
-                pbCheck5.Image = Resources.Bad_Symbol;
-                lblCheck5.ForeColor = Color.Firebrick;
-                lblCheck5.Text = @"Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckFailed;
-                txtCheck5.Text = string.Format(Language.strCcGeckoFailed, GeneralAppInfo.UrlForum);
-
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "Gecko " + Language.strCcNotInstalledProperly, true);
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "GeckoFx was not found in " + geckoFxPath, true);
             }
         }
     }
