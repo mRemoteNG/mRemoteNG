@@ -1,10 +1,7 @@
 ﻿
-
-using mRemoteNG.Themes;
-
 namespace mRemoteNG.UI.Window
 {
-	public partial class ActiveDirectoryImportWindow : BaseWindow
+	public partial class ActiveDirectoryImportWindow
 	{
         #region  Windows Form Designer generated code
 		private void InitializeComponent()
@@ -13,7 +10,7 @@ namespace mRemoteNG.UI.Window
             this.txtDomain = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblDomain = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.btnChangeDomain = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.ActiveDirectoryTree = new ADTree.ADtree();
+            this.activeDirectoryTree = new mRemoteNG.UI.Controls.AdTree();
             this.btnClose = new mRemoteNG.UI.Controls.Base.NGButton();
             this.chkSubOU = new mRemoteNG.UI.Controls.Base.NGCheckBox();
             this.SuspendLayout();
@@ -28,7 +25,7 @@ namespace mRemoteNG.UI.Window
             this.btnImport.TabIndex = 4;
             this.btnImport.Text = "&Import";
             this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            this.btnImport.Click += new System.EventHandler(this.BtnImport_Click);
             // 
             // txtDomain
             // 
@@ -39,7 +36,7 @@ namespace mRemoteNG.UI.Window
             this.txtDomain.Name = "txtDomain";
             this.txtDomain.Size = new System.Drawing.Size(406, 22);
             this.txtDomain.TabIndex = 1;
-            this.txtDomain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDomain_KeyDown);
+            this.txtDomain.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtDomain_KeyDown);
             // 
             // lblDomain
             // 
@@ -60,23 +57,22 @@ namespace mRemoteNG.UI.Window
             this.btnChangeDomain.TabIndex = 2;
             this.btnChangeDomain.Text = "Change";
             this.btnChangeDomain.UseVisualStyleBackColor = true;
-            this.btnChangeDomain.Click += new System.EventHandler(this.btnChangeDomain_Click);
+            this.btnChangeDomain.Click += new System.EventHandler(this.BtnChangeDomain_Click);
             // 
             // ActiveDirectoryTree
             // 
-            this.ActiveDirectoryTree.AdPath = null;
-            this.ActiveDirectoryTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.activeDirectoryTree.AdPath = null;
+            this.activeDirectoryTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ActiveDirectoryTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ActiveDirectoryTree.Domain = "";
-            this.ActiveDirectoryTree.Location = new System.Drawing.Point(12, 52);
-            this.ActiveDirectoryTree.Margin = new System.Windows.Forms.Padding(4);
-            this.ActiveDirectoryTree.Name = "ActiveDirectoryTree";
-            this.ActiveDirectoryTree.SelectedNode = null;
-            this.ActiveDirectoryTree.Size = new System.Drawing.Size(510, 285);
-            this.ActiveDirectoryTree.TabIndex = 3;
-            this.ActiveDirectoryTree.AdPathChanged += new ADTree.ADtree.AdPathChangedEventHandler(this.ActiveDirectoryTree_ADPathChanged);
+            this.activeDirectoryTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.activeDirectoryTree.Location = new System.Drawing.Point(12, 52);
+            this.activeDirectoryTree.Margin = new System.Windows.Forms.Padding(4);
+            this.activeDirectoryTree.Name = "ActiveDirectoryTree";
+            this.activeDirectoryTree.SelectedNode = null;
+            this.activeDirectoryTree.Size = new System.Drawing.Size(510, 285);
+            this.activeDirectoryTree.TabIndex = 3;
+            this.activeDirectoryTree.AdPathChanged += new mRemoteNG.UI.Controls.AdTree.AdPathChangedEventHandler(this.ActiveDirectoryTree_ADPathChanged);
             // 
             // btnClose
             // 
@@ -88,7 +84,7 @@ namespace mRemoteNG.UI.Window
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // chkSubOU
             // 
@@ -112,7 +108,7 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(534, 381);
             this.Controls.Add(this.chkSubOU);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.ActiveDirectoryTree);
+            this.Controls.Add(this.activeDirectoryTree);
             this.Controls.Add(this.lblDomain);
             this.Controls.Add(this.txtDomain);
             this.Controls.Add(this.btnChangeDomain);
@@ -122,7 +118,6 @@ namespace mRemoteNG.UI.Window
             this.Name = "ActiveDirectoryImportWindow";
             this.TabText = "Active Directory Import";
             this.Text = "Active Directory Import";
-            this.Load += new System.EventHandler(this.ADImport_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,7 +126,7 @@ namespace mRemoteNG.UI.Window
 		private Controls.Base.NGTextBox txtDomain;
 		private Controls.Base.NGLabel lblDomain;
 		private Controls.Base.NGButton btnChangeDomain;
-		private ADTree.ADtree ActiveDirectoryTree; 
+		private mRemoteNG.UI.Controls.AdTree activeDirectoryTree; 
         #endregion
 
        private Controls.Base.NGButton btnClose;
