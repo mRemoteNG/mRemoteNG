@@ -380,9 +380,6 @@
     <Setting Name="UVNCSCPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5500</Value>
     </Setting>
-    <Setting Name="StartupComponentsCheck" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="XULRunnerPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

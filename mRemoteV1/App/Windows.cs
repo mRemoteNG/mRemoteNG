@@ -14,7 +14,6 @@ namespace mRemoteNG.App
         private static PortScanWindow _portscanForm;
         private static ScreenshotManagerWindow _screenshotmanagerForm;
         private static UltraVNCWindow _ultravncscForm;
-        private static ComponentsCheckWindow _componentscheckForm;
         private static ConnectionTreeWindow _treeForm;
 
         internal static ConnectionTreeWindow TreeForm
@@ -82,13 +81,6 @@ namespace mRemoteNG.App
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
                             _ultravncscForm = new UltraVNCWindow();
                         _ultravncscForm.Show(dockPanel);
-                        break;
-                    case WindowType.ComponentsCheck:
-                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                            "Showing ComponentsCheck window", true);
-                        if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
-                            _componentscheckForm = new ComponentsCheckWindow();
-                        _componentscheckForm.Show(dockPanel);
                         break;
                 }
             }

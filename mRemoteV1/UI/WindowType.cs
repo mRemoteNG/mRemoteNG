@@ -15,6 +15,5 @@
         ExternalApps = 13,
         PortScan = 14,
         UltraVNCSC = 16,
-        ComponentsCheck = 17,
     }
 }
