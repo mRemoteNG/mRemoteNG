@@ -176,7 +176,7 @@ namespace mRemoteNG.Connection
                             testsock.Close();
                             break;
                         }
-                        catch (Exception e)
+                        catch
                         {
                             await System.Threading.Tasks.Task.Delay(1000);
                         }

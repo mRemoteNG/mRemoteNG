@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using AxWFICALib;
-using Gecko;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection.Protocol.RDP;

@@ -24,7 +24,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
         public bool ViewOnly
         {
             get { return _vnc.ViewOnly; }
-            set { _vnc.ViewOnly = value; }
+            set => _vnc.ViewOnly = value;
         }
 
         #endregion

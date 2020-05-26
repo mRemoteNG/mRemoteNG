@@ -82,6 +82,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BouncyCastle">
+      <Version>1.8.6.1</Version>
+    </PackageReference>
     <PackageReference Include="Cucumber.Messages">
       <Version>6.0.2</Version>
     </PackageReference>
