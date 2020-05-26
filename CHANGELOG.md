@@ -5,9 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #1770: Added missing RDP performance settings
 - #545: Option to minimize to system tray on closing
-- #283: Support for native PowerShell remoting as new protocol
 - #420: SSH tunneling implemented
+- #283: Support for native PowerShell remoting as new protocol
 ### Changed
 - #1767: Turned about window into a simple popup form
 - #1766: Converted components check page into options page

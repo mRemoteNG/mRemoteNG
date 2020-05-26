@@ -245,6 +245,34 @@ namespace mRemoteNG.Config.Serializers.Csv
                     connectionRecord.EnableDesktopComposition = value;
             }
 
+            if (headers.Contains("DisableFullWindowDrag"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("DisableFullWindowDrag")], out value))
+                    connectionRecord.DisableFullWindowDrag = value;
+            }
+
+            if (headers.Contains("DisableMenuAnimations"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("DisableMenuAnimations")], out value))
+                    connectionRecord.DisableMenuAnimations = value;
+            }
+
+            if (headers.Contains("DisableCursorShadow"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("DisableCursorShadow")], out value))
+                    connectionRecord.DisableCursorShadow = value;
+            }
+
+            if (headers.Contains("DisableCursorBlinking"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("DisableCursorBlinking")], out value))
+                    connectionRecord.DisableCursorBlinking = value;
+            }
+
             if (headers.Contains("CacheBitmaps"))
             {
                 bool value;
@@ -440,6 +468,34 @@ namespace mRemoteNG.Config.Serializers.Csv
                 bool value;
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritEnableDesktopComposition")], out value))
                     connectionRecord.Inheritance.EnableDesktopComposition = value;
+            }
+
+            if (headers.Contains("InheritDisableFullWindowDrag"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDisableFullWindowDrag")], out value))
+                    connectionRecord.Inheritance.DisableFullWindowDrag = value;
+            }
+
+            if (headers.Contains("InheritDisableMenuAnimations"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDisableMenuAnimations")], out value))
+                    connectionRecord.Inheritance.DisableMenuAnimations = value;
+            }
+
+            if (headers.Contains("InheritDisableCursorShadow"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDisableCursorShadow")], out value))
+                    connectionRecord.Inheritance.DisableCursorShadow = value;
+            }
+
+            if (headers.Contains("InheritDisableCursorBlinking"))
+            {
+                bool value;
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritDisableCursorBlinking")], out value))
+                    connectionRecord.Inheritance.DisableCursorBlinking = value;
             }
 
             if (headers.Contains("InheritDomain"))
