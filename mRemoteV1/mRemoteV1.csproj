@@ -267,6 +267,8 @@
     <Compile Include="Connection\IConnectionInitiator.cs" />
     <Compile Include="Connection\IInheritable.cs" />
     <Compile Include="Connection\IHasParent.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.DownloadHandler.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.RequestHandler.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.CertEvent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\AuthenticationLevel.cs" />
@@ -822,6 +824,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\WindowList.cs" />
+    <Compile Include="UI\Window\HelpWindow.Designer.cs">
+      <DependentUpon>HelpWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Window\PortScanWindow.Designer.cs">
       <DependentUpon>PortScanWindow.cs</DependentUpon>
     </Compile>
