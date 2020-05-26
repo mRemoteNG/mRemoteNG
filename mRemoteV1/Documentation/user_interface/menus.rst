@@ -95,8 +95,6 @@ Additional tools that can be used and triggered in mRemoteNG.
      - Show external tools dialog (See: :ref:`external_tools`)
    * - Port Scan
      - Show port scan dialog (See: :ref:`port_scan`)
-   * - Components Check
-     - Show installed components requirements test
    * - Options
      - Opens mRemoteNG global settings and options dialog
 

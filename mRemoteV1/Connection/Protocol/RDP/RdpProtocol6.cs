@@ -589,7 +589,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 _rdpClient.AdvancedSettings2.RedirectPrinters = connectionInfo.RedirectPrinters;
                 _rdpClient.AdvancedSettings2.RedirectSmartCards = connectionInfo.RedirectSmartCards;
                 _rdpClient.SecuredSettings2.AudioRedirectionMode = (int)connectionInfo.RedirectSound;
-                _rdpClient.AdvancedSettings.DisableRdpdr = connectionInfo.RedirectClipboard ? 0 : 1;
+                _rdpClient.AdvancedSettings6.RedirectClipboard = connectionInfo.RedirectClipboard;
             }
             catch (Exception ex)
             {

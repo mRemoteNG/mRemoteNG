@@ -232,8 +232,6 @@ namespace mRemoteNG.UI.Forms
             Windows.TreeForm.Focus();
 
             PuttySessionsManager.Instance.StartWatcher();
-            if (Settings.Default.StartupComponentsCheck)
-                Windows.Show(WindowType.ComponentsCheck);
 
             Startup.Instance.CreateConnectionsProvider(messageCollector);
 

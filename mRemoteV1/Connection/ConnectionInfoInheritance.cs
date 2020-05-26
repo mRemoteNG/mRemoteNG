@@ -83,6 +83,13 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionPort)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool Port { get; set; }
+        
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryConnection), 3),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute(nameof(Language.strPropertyNameSSHTunnelConnection)),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute(nameof(Language.strPropertyDescriptionSSHTunnelConnection)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(true)]
+        public bool SSHTunnelConnectionName { get; set; }
 
         #endregion
 
@@ -111,6 +118,12 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionPuttySession)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool PuttySession { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryProtocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strPropertyNameSSHOptions)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionSSHOptions)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool SSHOptions { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryProtocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strPropertyNameEncryptionStrength)),

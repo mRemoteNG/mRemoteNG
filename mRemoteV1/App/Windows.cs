@@ -8,14 +8,12 @@ namespace mRemoteNG.App
 {
     public static class Windows
     {
-        private static AboutWindow _aboutForm;
         private static ActiveDirectoryImportWindow _adimportForm;
         private static HelpWindow _helpForm;
         private static ExternalToolsWindow _externalappsForm;
         private static PortScanWindow _portscanForm;
         private static ScreenshotManagerWindow _screenshotmanagerForm;
         private static UltraVNCWindow _ultravncscForm;
-        private static ComponentsCheckWindow _componentscheckForm;
         private static ConnectionTreeWindow _treeForm;
 
         internal static ConnectionTreeWindow TreeForm
@@ -39,11 +37,6 @@ namespace mRemoteNG.App
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (windowType)
                 {
-                    case WindowType.About:
-                        if (_aboutForm == null || _aboutForm.IsDisposed)
-                            _aboutForm = new AboutWindow();
-                        _aboutForm.Show(dockPanel);
-                        break;
                     case WindowType.ActiveDirectoryImport:
                         if (_adimportForm == null || _adimportForm.IsDisposed)
                             _adimportForm = new ActiveDirectoryImportWindow();
@@ -88,13 +81,6 @@ namespace mRemoteNG.App
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
                             _ultravncscForm = new UltraVNCWindow();
                         _ultravncscForm.Show(dockPanel);
-                        break;
-                    case WindowType.ComponentsCheck:
-                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                            "Showing ComponentsCheck window", true);
-                        if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
-                            _componentscheckForm = new ComponentsCheckWindow();
-                        _componentscheckForm.Show(dockPanel);
                         break;
                 }
             }

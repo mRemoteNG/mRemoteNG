@@ -13,7 +13,6 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenToolsExternalApps;
         private ToolStripMenuItem _mMenToolsPortScan;
         private ToolStripMenuItem _mMenToolsUvncsc;
-        private ToolStripMenuItem _mMenToolsComponentsCheck;
         private ToolStripMenuItem _mMenViewScreenshotManager;
 
         public Form MainForm { get; set; }
@@ -31,7 +30,6 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsExternalApps = new ToolStripMenuItem();
             _mMenToolsPortScan = new ToolStripMenuItem();
             _mMenToolsSep1 = new ToolStripSeparator();
-            _mMenToolsComponentsCheck = new ToolStripMenuItem();
             _mMenToolsOptions = new ToolStripMenuItem();
             _mMenViewScreenshotManager = new ToolStripMenuItem();
             // 
@@ -45,7 +43,6 @@ namespace mRemoteNG.UI.Menu
                 _mMenToolsPortScan,
                 _mMenViewScreenshotManager,
                 _mMenToolsSep1,
-                _mMenToolsComponentsCheck,
                 _mMenToolsOptions
             });
             Name = "mMenTools";
@@ -98,14 +95,6 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsSep1.Name = "mMenToolsSep1";
             _mMenToolsSep1.Size = new System.Drawing.Size(181, 6);
             // 
-            // mMenToolsComponentsCheck
-            // 
-            _mMenToolsComponentsCheck.Image = Resources.cog_error;
-            _mMenToolsComponentsCheck.Name = "mMenToolsComponentsCheck";
-            _mMenToolsComponentsCheck.Size = new System.Drawing.Size(184, 22);
-            _mMenToolsComponentsCheck.Text = Language.strComponentsCheck;
-            _mMenToolsComponentsCheck.Click += mMenToolsComponentsCheck_Click;
-            // 
             // mMenToolsOptions
             // 
             _mMenToolsOptions.Image = Resources.Options;
@@ -122,7 +111,6 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsExternalApps.Text = Language.strMenuExternalTools;
             _mMenToolsPortScan.Text = Language.strMenuPortScan;
             _mMenViewScreenshotManager.Text = Language.strScreenshots;
-            _mMenToolsComponentsCheck.Text = Language.strComponentsCheck;
             _mMenToolsOptions.Text = Language.strMenuOptions;
         }
 
@@ -151,11 +139,6 @@ namespace mRemoteNG.UI.Menu
         private void mMenViewScreenshotManager_Click(object sender, EventArgs e)
         {
             Windows.Show(WindowType.ScreenshotManager);
-        }
-
-        private void mMenToolsComponentsCheck_Click(object sender, EventArgs e)
-        {
-            Windows.Show(WindowType.ComponentsCheck);
         }
 
         private void mMenToolsOptions_Click(object sender, EventArgs e)
