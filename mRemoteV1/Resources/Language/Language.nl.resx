@@ -292,15 +292,6 @@ Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA i
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Voor het gebruik van de Gecko Rendering Engine heb je XULrunner 1.8.1.x nodig en correcte pad naar de installatiemap welke onder Opties kunnen worden ingesteld.
-U kunt XULrunner 1.8.1.3 vanaf deze locatie downloaden: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Wanneer de download van het pakket is voltooid kunt u deze uitpakken naar een willekeurige locatie. Ga daarna vervolgens in mRemoteNG naar Extra - Opties - Geavanceerd en voer het juiste pad in naar de uitgepakte XULrunner bestanden.
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan de Gecko Engine in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA vereist dat de XenDesktop Online Plugin is geïnstalleerd is en dat de wfica.ocx bibliotheek is geregistreerd. U kunt de cliënt van deze locatie downloaden: http://www.citrix.com/download/
 Als u de XenDesktop Online Plugin heeft geïnstalleerd en de check nog niet lukt, probeer dan om handmatig wfica.ocx te registreren

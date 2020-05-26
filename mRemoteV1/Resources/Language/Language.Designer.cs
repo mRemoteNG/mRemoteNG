@@ -19,7 +19,7 @@ namespace mRemoteNG {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Language {
@@ -970,27 +970,6 @@ namespace mRemoteNG {
         internal static string strCcEOLOK {
             get {
                 return ResourceManager.GetString("strCcEOLOK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
-        ///You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-        ///When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
-        ///If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please c [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string strCcGeckoFailed {
-            get {
-                return ResourceManager.GetString("strCcGeckoFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GeckoFx was found and seems to be installed properly..
-        /// </summary>
-        internal static string strCcGeckoOK {
-            get {
-                return ResourceManager.GetString("strCcGeckoOK", resourceCulture);
             }
         }
         
@@ -2609,15 +2588,6 @@ namespace mRemoteNG {
         internal static string strHTTPFailedURLBuild {
             get {
                 return ResourceManager.GetString("strHTTPFailedURLBuild", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gecko (Firefox).
-        /// </summary>
-        internal static string strHttpGecko {
-            get {
-                return ResourceManager.GetString("strHttpGecko", resourceCulture);
             }
         }
         

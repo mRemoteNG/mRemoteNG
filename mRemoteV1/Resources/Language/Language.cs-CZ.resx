@@ -298,15 +298,6 @@ Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalit
   <data name="strCcEOLOK" xml:space="preserve">
     <value>Knihovna EOLWTSCOM byla nalezena a zdá se, že je správně zaregistrována.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Pro využití Gecko Rendering Engine musíte mít nainstalovaný XULrunner 1.8.1.x a nastavenou cestu k jeho instalační složce v Možnostech Nastavení.
-XULrunner 1.8.1.3 lze stáhnout zde: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Až jej stáhnete, rozbalte balíček do libovolné složky. Pak zvolte v mRemoteNG menu Nástroje -&gt; Možnosti -&gt; Pokročilé a zadejte cestu do políčka "Cesta ke složce XULrunner".
-Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu Gecko rendering Engine v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx byla nalezena a zdá se, že je správně nainstalována.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>Funkcionalita ICA vyžaduje, aby byl nainstalován XenDesktop Online Plugin a knihovna wfica.ocx byla zaregistrována. Klienta můžete stáhnout zde: http://www.citrix.com/download/
 Pokud máte XenDesktop Online Plugin nainstalován a kontrola stále selhává, pokuste se zaregistrovat wfica.ocx ručně.
@@ -785,9 +776,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
     <value>Změna nadpisu dokumentu HTTP selhala!</value>
-  </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>Gecko (Firefox)</value>
   </data>
   <data name="strHttpInternetExplorer" xml:space="preserve">
     <value>Internet Explorer</value>
