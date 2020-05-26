@@ -30,6 +30,7 @@ using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using CefSharp;
 using CefSharp.WinForms;
+using CefSharp.SchemeHandler;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -194,6 +195,17 @@ namespace mRemoteNG.UI.Forms
             {
                 settings.LogSeverity = LogSeverity.Error;
             }
+
+            //Implement scheme to be allowed to view local help files
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = Cef.CefCommitHash,
+                DomainName = "help",
+                SchemeHandlerFactory = new FolderSchemeHandlerFactory(
+                    rootFolder: $@"{GeneralAppInfo.HomePath}\Help\",
+                    defaultPage: "index.html"
+                )
+            });
 
             Cef.Initialize(settings);
 
