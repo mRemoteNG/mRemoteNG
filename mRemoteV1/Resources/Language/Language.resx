@@ -2870,4 +2870,13 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="strPowerShell" xml:space="preserve">
     <value>PowerShell</value>
   </data>
+  <data name="strChangelog" xml:space="preserve">
+    <value>Changelog</value>
+  </data>
+  <data name="strCredits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="strLicense" xml:space="preserve">
+    <value>License</value>
+  </data>
 </root>

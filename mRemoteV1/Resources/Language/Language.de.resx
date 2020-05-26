@@ -2711,4 +2711,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="strCloseToSysTray" xml:space="preserve">
     <value>In den System Tray schließen</value>
   </data>
+  <data name="strLicense" xml:space="preserve">
+    <value>Lizenz</value>
+  </data>
 </root>

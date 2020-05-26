@@ -8,7 +8,6 @@ namespace mRemoteNG.App
 {
     public static class Windows
     {
-        private static AboutWindow _aboutForm;
         private static ActiveDirectoryImportWindow _adimportForm;
         private static HelpWindow _helpForm;
         private static ExternalToolsWindow _externalappsForm;
@@ -39,11 +38,6 @@ namespace mRemoteNG.App
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (windowType)
                 {
-                    case WindowType.About:
-                        if (_aboutForm == null || _aboutForm.IsDisposed)
-                            _aboutForm = new AboutWindow();
-                        _aboutForm.Show(dockPanel);
-                        break;
                     case WindowType.ActiveDirectoryImport:
                         if (_adimportForm == null || _adimportForm.IsDisposed)
                             _adimportForm = new ActiveDirectoryImportWindow();
