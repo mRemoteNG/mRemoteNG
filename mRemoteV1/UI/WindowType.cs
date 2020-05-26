@@ -1,4 +1,4 @@
-namespace mRemoteNG.UI
+﻿namespace mRemoteNG.UI
 {
     public enum WindowType
     {
@@ -8,7 +8,6 @@ namespace mRemoteNG.UI
         ErrorsAndInfos = 4,
         ScreenshotManager = 5,
         Options = 6,
-        About = 8,
         Update = 9,
         SSHTransfer = 10,
         ActiveDirectoryImport = 11,
