@@ -48,9 +48,6 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ADTree">
-      <HintPath>References\ADTree.dll</HintPath>
-    </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -347,6 +344,7 @@
     <Compile Include="Themes\MremoteNGThemeBase.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tools\ADhelper.cs" />
     <Compile Include="Tools\Attributes\UsedInAllProtocolsExceptAttribute.cs" />
     <Compile Include="Tools\Clipboard\WindowsClipboard.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
@@ -439,6 +437,12 @@
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandler.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandler.cs" />
+    <Compile Include="UI\Controls\AdTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\AdTree.Designer.cs">
+      <DependentUpon>AdTree.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Base\NGButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -901,6 +905,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\AdTree.resx">
+      <DependentUpon>AdTree.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Base\NGButton.resx">
       <DependentUpon>NGButton.cs</DependentUpon>
