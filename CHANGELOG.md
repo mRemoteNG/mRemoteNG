@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #283: Support for native PowerShell remoting as new protocol
 - #420: SSH tunneling implemented
 ### Changed
+- #1767: Turned about window into a simple popup form
 - #1766: Converted components check page into options page
 - #1460: Updated GeckoFX to v60
 ### Fixed

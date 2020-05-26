@@ -1082,6 +1082,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changelog.
+        /// </summary>
+        internal static string strChangelog {
+            get {
+                return ResourceManager.GetString("strChangelog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only).
         /// </summary>
         internal static string strCheckboxAutomaticReconnect {
@@ -1858,6 +1867,15 @@ namespace mRemoteNG {
         internal static string strCredentialManagerUpgradeDescription {
             get {
                 return ResourceManager.GetString("strCredentialManagerUpgradeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credits.
+        /// </summary>
+        internal static string strCredits {
+            get {
+                return ResourceManager.GetString("strCredits", resourceCulture);
             }
         }
         
@@ -3230,6 +3248,15 @@ namespace mRemoteNG {
         internal static string strLanguageRestartRequired {
             get {
                 return ResourceManager.GetString("strLanguageRestartRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License.
+        /// </summary>
+        internal static string strLicense {
+            get {
+                return ResourceManager.GetString("strLicense", resourceCulture);
             }
         }
         
