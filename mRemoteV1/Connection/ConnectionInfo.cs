@@ -300,16 +300,13 @@ namespace mRemoteNG.Connection
             ExtApp = Settings.Default.ConDefaultExtApp;
             Port = 0;
             PuttySession = Settings.Default.ConDefaultPuttySession;
-            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(
-                typeof(IcaProtocol.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
+            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
-            RDPAuthenticationLevel = (AuthenticationLevel)Enum.Parse(
-                typeof(AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
+            RDPAuthenticationLevel = (AuthenticationLevel)Enum.Parse(typeof(AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
             RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
             RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
-            RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine),
-                                                                   Settings.Default.ConDefaultRenderingEngine);
+            RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
             UseVmId = Settings.Default.ConDefaultUseVmId;
             UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
@@ -317,11 +314,9 @@ namespace mRemoteNG.Connection
 
         private void SetRdGatewayDefaults()
         {
-            RDGatewayUsageMethod = (RDGatewayUsageMethod)Enum.Parse(
-                typeof(RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
+            RDGatewayUsageMethod = (RDGatewayUsageMethod)Enum.Parse(typeof(RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
             RDGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
-            RDGatewayUseConnectionCredentials = (RDGatewayUseConnectionCredentials)Enum.Parse(
-                typeof(RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
+            RDGatewayUseConnectionCredentials = (RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
@@ -329,8 +324,7 @@ namespace mRemoteNG.Connection
 
         private void SetAppearanceDefaults()
         {
-            Resolution = (RDPResolutions)Enum.Parse(
-                typeof(RDPResolutions), Settings.Default.ConDefaultResolution);
+            Resolution = (RDPResolutions)Enum.Parse(typeof(RDPResolutions), Settings.Default.ConDefaultResolution);
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
             Colors = (RDPColors)Enum.Parse(typeof(RDPColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
@@ -338,6 +332,10 @@ namespace mRemoteNG.Connection
             DisplayThemes = Settings.Default.ConDefaultDisplayThemes;
             EnableFontSmoothing = Settings.Default.ConDefaultEnableFontSmoothing;
             EnableDesktopComposition = Settings.Default.ConDefaultEnableDesktopComposition;
+            DisableFullWindowDrag = Settings.Default.ConDefaultDisableFullWindowDrag;
+            DisableMenuAnimations = Settings.Default.ConDefaultDisableMenuAnimations;
+            DisableCursorShadow = Settings.Default.ConDefaultDisableCursorShadow;
+            DisableCursorBlinking = Settings.Default.ConDefaultDisableCursorBlinking;
         }
 
         private void SetRedirectDefaults()
@@ -364,20 +362,16 @@ namespace mRemoteNG.Connection
 
         private void SetVncDefaults()
         {
-            VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression),
-                                                                 Settings.Default.ConDefaultVNCCompression);
+            VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression), Settings.Default.ConDefaultVNCCompression);
             VNCEncoding = (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
             VNCAuthMode = (ProtocolVNC.AuthMode)Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
-            VNCProxyType = (ProtocolVNC.ProxyType)Enum.Parse(typeof(ProtocolVNC.ProxyType),
-                                                             Settings.Default.ConDefaultVNCProxyType);
+            VNCProxyType = (ProtocolVNC.ProxyType)Enum.Parse(typeof(ProtocolVNC.ProxyType), Settings.Default.ConDefaultVNCProxyType);
             VNCProxyIP = Settings.Default.ConDefaultVNCProxyIP;
             VNCProxyPort = Settings.Default.ConDefaultVNCProxyPort;
             VNCProxyUsername = Settings.Default.ConDefaultVNCProxyUsername;
             VNCProxyPassword = Settings.Default.ConDefaultVNCProxyPassword;
-            VNCColors = (ProtocolVNC.Colors)Enum.Parse(typeof(ProtocolVNC.Colors),
-                                                       Settings.Default.ConDefaultVNCColors);
-            VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Enum.Parse(typeof(ProtocolVNC.SmartSizeMode),
-                                                                     Settings.Default.ConDefaultVNCSmartSizeMode);
+            VNCColors = (ProtocolVNC.Colors)Enum.Parse(typeof(ProtocolVNC.Colors), Settings.Default.ConDefaultVNCColors);
+            VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), Settings.Default.ConDefaultVNCSmartSizeMode);
             VNCViewOnly = Settings.Default.ConDefaultVNCViewOnly;
         }
 
@@ -390,8 +384,7 @@ namespace mRemoteNG.Connection
         private void SetNewOpenConnectionList()
         {
             OpenConnections = new ProtocolList();
-            OpenConnections.CollectionChanged += (sender, args) =>
-                RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));
+            OpenConnections.CollectionChanged += (sender, args) => RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));
         }
 
         #endregion

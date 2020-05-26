@@ -422,6 +422,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritDisplayWallpaper"].Equals(false) &&
                 dataRow["InheritEnableFontSmoothing"].Equals(false) &&
                 dataRow["InheritEnableDesktopComposition"].Equals(false) &&
+                dataRow["InheritDisableFullWindowDrag"].Equals(false) &&
+                dataRow["InheritDisableMenuAnimations"].Equals(false) &&
+                dataRow["InheritDisableCursorShadow"].Equals(false) &&
+                dataRow["InheritDisableCursorBlinking"].Equals(false) &&
                 dataRow["InheritDomain"].Equals(false) &&
                 dataRow["InheritIcon"].Equals(false) &&
                 dataRow["InheritPanel"].Equals(false) &&
@@ -538,6 +542,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["DisplayThemes"] = connectionInfo.DisplayThemes;
             dataRow["EnableFontSmoothing"] = connectionInfo.EnableFontSmoothing;
             dataRow["EnableDesktopComposition"] = connectionInfo.EnableDesktopComposition;
+            dataRow["DisableFullWindowDrag"] = connectionInfo.DisableFullWindowDrag;
+            dataRow["DisableMenuAnimations"] = connectionInfo.DisableMenuAnimations;
+            dataRow["DisableCursorShadow"] = connectionInfo.DisableCursorShadow;
+            dataRow["DisableCursorBlinking"] = connectionInfo.DisableCursorBlinking;
             dataRow["CacheBitmaps"] = connectionInfo.CacheBitmaps;
             dataRow["RedirectDiskDrives"] = connectionInfo.RedirectDiskDrives;
             dataRow["RedirectPorts"] = connectionInfo.RedirectPorts;
@@ -584,6 +592,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritDisplayWallpaper"] = connectionInfo.Inheritance.DisplayWallpaper;
                 dataRow["InheritEnableFontSmoothing"] = connectionInfo.Inheritance.EnableFontSmoothing;
                 dataRow["InheritEnableDesktopComposition"] = connectionInfo.Inheritance.EnableDesktopComposition;
+                dataRow["InheritDisableFullWindowDrag"] = connectionInfo.Inheritance.DisableFullWindowDrag;
+                dataRow["InheritDisableMenuAnimations"] = connectionInfo.Inheritance.DisableMenuAnimations;
+                dataRow["InheritDisableCursorShadow"] = connectionInfo.Inheritance.DisableCursorShadow;
+                dataRow["InheritDisableCursorBlinking"] = connectionInfo.Inheritance.DisableCursorBlinking;
                 dataRow["InheritDomain"] = connectionInfo.Inheritance.Domain;
                 dataRow["InheritIcon"] = connectionInfo.Inheritance.Icon;
                 dataRow["InheritPanel"] = connectionInfo.Inheritance.Panel;
@@ -649,6 +661,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
                 dataRow["InheritDisplayWallpaper"] = false;
                 dataRow["InheritEnableFontSmoothing"] = false;
                 dataRow["InheritEnableDesktopComposition"] = false;
+                dataRow["InheritDisableFullWindowDrag"] = false;
+                dataRow["InheritDisableMenuAnimations"] = false;
+                dataRow["InheritDisableCursorShadow"] = false;
+                dataRow["InheritDisableCursorBlinking"] = false;
                 dataRow["InheritDomain"] = false;
                 dataRow["InheritIcon"] = false;
                 dataRow["InheritPanel"] = false;
