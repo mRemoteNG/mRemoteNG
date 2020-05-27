@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1465: REGRESSION: Smart Cards redirection to Remote Desktop not working
 - #1632: 1.77.1 breaks RDP drive and sound redirection
 - #1713: Sound redirection does not work if Clipboard redirection is set to No
+- #1773: Connection issue with mysql - Missing fields in tblCons
 
 ## [1.77.1] - 2019-09-02
 ### Added
