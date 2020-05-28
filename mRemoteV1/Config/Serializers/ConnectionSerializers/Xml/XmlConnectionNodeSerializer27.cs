@@ -101,6 +101,14 @@ namespace mRemoteNG.Config.Serializers.Xml
                                        connectionInfo.EnableFontSmoothing.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("EnableDesktopComposition",
                                        connectionInfo.EnableDesktopComposition.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("DisableFullWindowDrag",
+                                       connectionInfo.DisableFullWindowDrag.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("DisableMenuAnimations",
+                                       connectionInfo.DisableMenuAnimations.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("DisableCursorShadow",
+                                       connectionInfo.DisableCursorShadow.ToString().ToLowerInvariant()));
+            element.Add(new XAttribute("DisableCursorBlinking",
+                                       connectionInfo.DisableCursorBlinking.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("CacheBitmaps", connectionInfo.CacheBitmaps.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("RedirectDiskDrives",
                                        connectionInfo.RedirectDiskDrives.ToString().ToLowerInvariant()));
@@ -183,6 +191,18 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritEnableDesktopComposition",
                                            connectionInfo
                                                .Inheritance.EnableDesktopComposition.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritDisableFullWindowDrag",
+                                           connectionInfo
+                                               .Inheritance.DisableFullWindowDrag.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritDisableMenuAnimations",
+                                           connectionInfo
+                                               .Inheritance.DisableMenuAnimations.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritDisableCursorShadow",
+                                           connectionInfo
+                                               .Inheritance.DisableCursorShadow.ToString().ToLowerInvariant()));
+                element.Add(new XAttribute("InheritDisableCursorBlinking",
+                                           connectionInfo
+                                               .Inheritance.DisableCursorBlinking.ToString().ToLowerInvariant()));
                 element.Add(new XAttribute("InheritDomain",
                                            connectionInfo.Inheritance.Domain.ToString().ToLowerInvariant()));
                 element.Add(
@@ -316,6 +336,10 @@ namespace mRemoteNG.Config.Serializers.Xml
                 element.Add(new XAttribute("InheritDisplayWallpaper", falseString));
                 element.Add(new XAttribute("InheritEnableFontSmoothing", falseString));
                 element.Add(new XAttribute("InheritEnableDesktopComposition", falseString));
+                element.Add(new XAttribute("InheritDisableFullWindowDrag", falseString));
+                element.Add(new XAttribute("InheritDisableMenuAnimations", falseString));
+                element.Add(new XAttribute("InheritDisableCursorShadow", falseString));
+                element.Add(new XAttribute("InheritDisableCursorBlinking", falseString));
                 element.Add(new XAttribute("InheritDomain", falseString));
                 element.Add(new XAttribute("InheritIcon", falseString));
                 element.Add(new XAttribute("InheritPanel", falseString));
