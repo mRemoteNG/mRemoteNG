@@ -5440,7 +5440,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable Cursor Blinking.
+        ///   Looks up a localized string similar to Disable Cursor blinking.
         /// </summary>
         internal static string strPropertyNameDisableCursorBlinking {
             get {
@@ -5458,7 +5458,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable Full Window Drag.
+        ///   Looks up a localized string similar to Disable Full Window drag.
         /// </summary>
         internal static string strPropertyNameDisableFullWindowDrag {
             get {
@@ -6337,42 +6337,6 @@ namespace mRemoteNG {
         internal static string strRdpControlCreationFailed {
             get {
                 return ResourceManager.GetString("strRdpControlCreationFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable Cursor blinking.
-        /// </summary>
-        internal static string strRDPDisableCursorblinking {
-            get {
-                return ResourceManager.GetString("strRDPDisableCursorblinking", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable Cursor Shadow.
-        /// </summary>
-        internal static string strRDPDisableCursorShadow {
-            get {
-                return ResourceManager.GetString("strRDPDisableCursorShadow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable Full Window drag.
-        /// </summary>
-        internal static string strRDPDisableFullWindowdrag {
-            get {
-                return ResourceManager.GetString("strRDPDisableFullWindowdrag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable Menu Animations.
-        /// </summary>
-        internal static string strRDPDisableMenuAnimations {
-            get {
-                return ResourceManager.GetString("strRDPDisableMenuAnimations", resourceCulture);
             }
         }
         

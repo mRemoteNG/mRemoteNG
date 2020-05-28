@@ -1575,16 +1575,16 @@ Descrição do erro: {1}</value>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Impossível criar controlo RDP, por favor verifique os requisitos mRemoteNG.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Desativar o piscar do Cursor</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Desativar a sombra do o Cursor</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Desativar o arrastar completo da janela</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Desabilitar as animações do Menu</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

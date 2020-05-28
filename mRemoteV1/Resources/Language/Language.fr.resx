@@ -1592,16 +1592,16 @@ Message:
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Impossible de lancer une connexion RDP, vérifiez les prérequis mRemoteNG.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Désactiver le curseur clignotant</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Désactiver l'Ombre du pointeur</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Désactiver le glissement de fenêtre complet</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Désactiver les animations du menu</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

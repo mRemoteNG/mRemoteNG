@@ -1923,16 +1923,16 @@ VncSharp 제어 버전 {0}</value>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
 		<value>RDP 컨트롤을 만들 수 없습니다. mRemoteNG 요구 사항을 확인하십시오.</value>
 	</data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
 		<value>커서 깜박임 해제</value>
 	</data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
 		<value>커서 그림자 해제</value>
 	</data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
 		<value>전체 창 끌기 해제</value>
 	</data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
 		<value>메뉴 애니메이션 해제</value>
 	</data>
   <data name="strRDPDisableThemes" xml:space="preserve">
