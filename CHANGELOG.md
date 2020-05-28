@@ -13,15 +13,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1766: Converted components check page into options page
 - #1460: Updated GeckoFX to v60
 ### Fixed
+- #1773: Connection issue with mysql - Missing fields in tblCons
+- #1713: Sound redirection does not work if Clipboard redirection is set to No
+- #1632: 1.77.1 breaks RDP drive and sound redirection
 - #1610: Menu bar changes to english when cancelling options form
 - #1595: Unhandled exception when trying to browse through non existent multi ssh history with keyboard key strokes
 - #1589: Update SQL tables instead of rewriting them
+- #1465: REGRESSION: Smart Cards redirection to Remote Desktop not working
 - #1337: Unhandled exception after closing mRemoteNG
 - #359: Making a VNC connection to an unreachable host causes the application to not respond for 20-30 seconds
-- #1465: REGRESSION: Smart Cards redirection to Remote Desktop not working
-- #1632: 1.77.1 breaks RDP drive and sound redirection
-- #1713: Sound redirection does not work if Clipboard redirection is set to No
-- #1773: Connection issue with mysql - Missing fields in tblCons
 
 ## [1.77.1] - 2019-09-02
 ### Added
