@@ -57,8 +57,6 @@
             // 
             this.pnlDock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDock.DockBackColor = System.Drawing.SystemColors.Control;
-            this.pnlDock.DockLeftPortion = 230D;
-            this.pnlDock.DockRightPortion = 230D;
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
             this.pnlDock.Name = "pnlDock";
