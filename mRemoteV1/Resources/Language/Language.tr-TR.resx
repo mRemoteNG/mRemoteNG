@@ -1914,16 +1914,16 @@ Mesaj:
   <data name="strRdpControlCreationFailed" xml:space="preserve">
 		<value>RDP kontrolü oluşturulamadı, lütfen mRemoteNG gereksinimlerini kontrol edin.</value>
 	</data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
 		<value>İmleci yanıp sönme özelliğini devre dışı bırak</value>
 	</data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
 		<value>İmleç Gölgesini Devre Dışı Bırak</value>
 	</data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
 		<value>Tam Pencere sürüklemeyi devre dışı bırak</value>
 	</data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
 		<value>Menü Animasyonlarını Devre Dışı Bırak</value>
 	</data>
   <data name="strRDPDisableThemes" xml:space="preserve">

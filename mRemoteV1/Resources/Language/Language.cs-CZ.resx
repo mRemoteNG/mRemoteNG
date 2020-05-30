@@ -1774,16 +1774,16 @@ Zpráva:
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Nebylo možné aktivovat ovládací prvek okna RDP, prosím zkontrolujte požadavky mRemoteNG na prerekvizity.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Vypnout blikání kurzoru</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Vypnout stín kurzoru</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Vypnout přetahování celého okna (Full Window)</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Vypnout animace menu</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

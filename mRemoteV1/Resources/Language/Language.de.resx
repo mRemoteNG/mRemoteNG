@@ -1600,16 +1600,16 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Konte das RDP-Plugin nicht einbinden, bitte prüfen Sie die mRemoteNG-Voraussetzungen.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Cursor-Blinken abschalten</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Cursorschatten deaktivieren</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Fensterinhalt beim Ziehen nicht anzeigen</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Menüanimationen deaktivieren</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">
@@ -2701,5 +2701,17 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="strLicense" xml:space="preserve">
     <value>Lizenz</value>
+  </data>
+  <data name="strPropertyDescriptionDisableCursorBlinking" xml:space="preserve">
+    <value>Legt fest, ob das Blinken des Cursors deaktiviert werden soll.</value>
+  </data>
+  <data name="strPropertyDescriptionDisableCursorShadow" xml:space="preserve">
+    <value>Legt fest, ob ein Mausschatten sichtbar sein soll.</value>
+  </data>
+  <data name="strPropertyDescriptionDisableMenuAnimations" xml:space="preserve">
+    <value>Legt fest, ob Menüs und Fenster mit Animationseffekten in der Remote-Sitzung angezeigt werden können.</value>
+  </data>
+  <data name="strPropertyDescriptionDisableFullWindowDrag" xml:space="preserve">
+    <value>Legt fest, ob der Fensterinhalt angezeigt wird, wenn Sie das Fenster an eine neue Position ziehen.</value>
   </data>
 </root>

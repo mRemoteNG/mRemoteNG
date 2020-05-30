@@ -603,25 +603,29 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 var pFlags = 0;
                 if (connectionInfo.DisplayThemes == false)
-                {
                     pFlags += (int)RDPPerformanceFlags.DisableThemes;
-                }
-
+                
                 if (connectionInfo.DisplayWallpaper == false)
-                {
                     pFlags += (int)RDPPerformanceFlags.DisableWallpaper;
-                }
-
+                
                 if (connectionInfo.EnableFontSmoothing)
-                {
                     pFlags += (int)RDPPerformanceFlags.EnableFontSmoothing;
-                }
 
                 if (connectionInfo.EnableDesktopComposition)
-                {
                     pFlags += (int)RDPPerformanceFlags.EnableDesktopComposition;
-                }
-
+                
+                if (connectionInfo.DisableFullWindowDrag)
+                    pFlags += (int)RDPPerformanceFlags.DisableFullWindowDrag;
+                
+                if (connectionInfo.DisableMenuAnimations)
+                    pFlags += (int)RDPPerformanceFlags.DisableMenuAnimations;
+                
+                if (connectionInfo.DisableCursorShadow)
+                    pFlags += (int)RDPPerformanceFlags.DisableCursorShadow;
+                
+                if (connectionInfo.DisableCursorBlinking)
+                    pFlags += (int)RDPPerformanceFlags.DisableCursorBlinking;
+                
                 _rdpClient.AdvancedSettings2.PerformanceFlags = pFlags;
             }
             catch (Exception ex)

@@ -1514,16 +1514,16 @@ VncSharp Control Version {0}</value>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Неможливо створити управління RDP, перевірте вимоги mRemoteNG.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Вимкнути моргання курсору</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Вимкнути тінь курсора</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Вимкнути відображення вікна при перетягуванні</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Вимкнути анімації меню</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

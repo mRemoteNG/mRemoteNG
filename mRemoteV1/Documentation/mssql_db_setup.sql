@@ -45,6 +45,13 @@ CREATE TABLE [dbo].[tblCons] (
 	DisplayThemes bit NOT NULL,
 	EnableFontSmoothing bit NOT NULL,
 	EnableDesktopComposition bit NOT NULL,
+
+
+	DisableFullWindowDrag bit NOT NULL,
+	DisableMenuAnimations bit NOT NULL,
+	DisableCursorShadow bit NOT NULL,
+	DisableCursorBlinking bit NOT NULL,
+
 	CacheBitmaps bit NOT NULL,
 	RedirectDiskDrives bit NOT NULL,
 	RedirectPorts bit NOT NULL,

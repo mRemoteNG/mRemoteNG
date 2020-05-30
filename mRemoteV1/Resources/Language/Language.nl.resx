@@ -1601,16 +1601,16 @@ Bericht:
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Kan geen RDP controle aanmaken, controleer mRemoteNG systeemeisen.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Cursor Knipperen Uitschakelen</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Cursor Schaduw Uitschakelen</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Slepen van volledig venster uitschakelen</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Menu Animaties Uitschakelen</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

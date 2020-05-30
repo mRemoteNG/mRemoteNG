@@ -4789,6 +4789,42 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Determines whether cursor flashes should be disabled..
+        /// </summary>
+        internal static string strPropertyDescriptionDisableCursorBlinking {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionDisableCursorBlinking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Determines whether a mouse shadow should be visible..
+        /// </summary>
+        internal static string strPropertyDescriptionDisableCursorShadow {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionDisableCursorShadow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Determines whether window content is displayed when you drag the window to a new location..
+        /// </summary>
+        internal static string strPropertyDescriptionDisableFullWindowDrag {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionDisableFullWindowDrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Determines whether menus and windows can be displayed with animation effects in the remote session..
+        /// </summary>
+        internal static string strPropertyDescriptionDisableMenuAnimations {
+            get {
+                return ResourceManager.GetString("strPropertyDescriptionDisableMenuAnimations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select yes if the theme of the remote host should be displayed..
         /// </summary>
         internal static string strPropertyDescriptionDisplayThemes {
@@ -5388,6 +5424,42 @@ namespace mRemoteNG {
         internal static string strPropertyNameDescription {
             get {
                 return ResourceManager.GetString("strPropertyNameDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Cursor blinking.
+        /// </summary>
+        internal static string strPropertyNameDisableCursorBlinking {
+            get {
+                return ResourceManager.GetString("strPropertyNameDisableCursorBlinking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Cursor Shadow.
+        /// </summary>
+        internal static string strPropertyNameDisableCursorShadow {
+            get {
+                return ResourceManager.GetString("strPropertyNameDisableCursorShadow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Full Window drag.
+        /// </summary>
+        internal static string strPropertyNameDisableFullWindowDrag {
+            get {
+                return ResourceManager.GetString("strPropertyNameDisableFullWindowDrag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Menu Animations.
+        /// </summary>
+        internal static string strPropertyNameDisableMenuAnimations {
+            get {
+                return ResourceManager.GetString("strPropertyNameDisableMenuAnimations", resourceCulture);
             }
         }
         
@@ -6253,42 +6325,6 @@ namespace mRemoteNG {
         internal static string strRdpControlCreationFailed {
             get {
                 return ResourceManager.GetString("strRdpControlCreationFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable Cursor blinking.
-        /// </summary>
-        internal static string strRDPDisableCursorblinking {
-            get {
-                return ResourceManager.GetString("strRDPDisableCursorblinking", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable Cursor Shadow.
-        /// </summary>
-        internal static string strRDPDisableCursorShadow {
-            get {
-                return ResourceManager.GetString("strRDPDisableCursorShadow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable Full Window drag.
-        /// </summary>
-        internal static string strRDPDisableFullWindowdrag {
-            get {
-                return ResourceManager.GetString("strRDPDisableFullWindowdrag", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable Menu Animations.
-        /// </summary>
-        internal static string strRDPDisableMenuAnimations {
-            get {
-                return ResourceManager.GetString("strRDPDisableMenuAnimations", resourceCulture);
             }
         }
         
