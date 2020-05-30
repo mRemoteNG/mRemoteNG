@@ -168,16 +168,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>Latest version</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>&amp;Browse...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>&amp;Cancel</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>Change</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>&amp;Close</value>
   </data>
   <data name="ButtonDefaultInheritance" xml:space="preserve">
@@ -192,31 +192,28 @@
   <data name="Icon" xml:space="preserve">
     <value>Icon</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>&amp;Import</value>
   </data>
   <data name="Inheritance" xml:space="preserve">
     <value>Inheritance</value>
   </data>
-  <data name="ButtonLaunch" xml:space="preserve">
+  <data name="_Launch" xml:space="preserve">
     <value>&amp;Launch</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>Launch PuTTY</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>&amp;New</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Properties</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>&amp;Scan</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>&amp;Stop</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -243,7 +240,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>Protocol</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>Redirect</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">
@@ -309,7 +306,7 @@ VncSharp Control Version {0}</value>
   <data name="WaitForExit" xml:space="preserve">
     <value>Wait for exit</value>
   </data>
-  <data name="CheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>Check Again</value>
   </data>
   <data name="CheckForUpdatesOnStartup" xml:space="preserve">
@@ -336,7 +333,7 @@ VncSharp Control Version {0}</value>
   <data name="Filename" xml:space="preserve">
     <value>Filename</value>
   </data>
-  <data name="ColumnMessage" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
   <data name="CommandExitProgram" xml:space="preserve">
@@ -348,7 +345,7 @@ VncSharp Control Version {0}</value>
   <data name="CommandOpenConnectionFile" xml:space="preserve">
     <value>&amp;Open a connection file</value>
   </data>
-  <data name="CommandTryAgain" xml:space="preserve">
+  <data name="_TryAgain" xml:space="preserve">
     <value>&amp;Try again</value>
   </data>
   <data name="CompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
@@ -514,16 +511,16 @@ Starting with new connections file.</value>
   <data name="Enc56Bit" xml:space="preserve">
     <value>56-bit</value>
   </data>
-  <data name="EncBasic" xml:space="preserve">
+  <data name="Basic" xml:space="preserve">
     <value>Basic</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Completely encrypt connection file</value>
   </data>
-  <data name="EndIP" xml:space="preserve">
+  <data name="LastIp" xml:space="preserve">
     <value>Last IP</value>
   </data>
-  <data name="EndPort" xml:space="preserve">
+  <data name="LastPort" xml:space="preserve">
     <value>Last Port</value>
   </data>
   <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
@@ -590,7 +587,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ExportSelectedFolder" xml:space="preserve">
     <value>Export the currently selected folder</value>
   </data>
-  <data name="ExportToFileMenuItem" xml:space="preserve">
+  <data name="_ExportToFile" xml:space="preserve">
     <value>&amp;Export to File...</value>
   </data>
   <data name="ExtApp" xml:space="preserve">
@@ -713,9 +710,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ImportFromFileMenuItem" xml:space="preserve">
     <value>Import from &amp;File...</value>
   </data>
-  <data name="ImportMenuItem" xml:space="preserve">
-    <value>&amp;Import</value>
-  </data>
   <data name="ImportPortScan" xml:space="preserve">
     <value>Import from Port Scan</value>
   </data>
@@ -743,13 +737,13 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="IntAppTitle" xml:space="preserve">
     <value>Int App Title: {0}</value>
   </data>
-  <data name="LabelAddress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>Address:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>When closing connections:</value>
   </data>
-  <data name="LabelConnect" xml:space="preserve">
+  <data name="_Connect" xml:space="preserve">
     <value>&amp;Connect:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
@@ -761,7 +755,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="LabelHostname" xml:space="preserve">
     <value>Hostname:</value>
   </data>
-  <data name="LabelPortableEdition" xml:space="preserve">
+  <data name="PortableEdition" xml:space="preserve">
     <value>Portable Edition</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
@@ -827,7 +821,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Connections and Config</value>
   </data>
-  <data name="MenuCopy" xml:space="preserve">
+  <data name="Copy" xml:space="preserve">
     <value>Copy</value>
   </data>
   <data name="CtrlAltDel" xml:space="preserve">
@@ -845,7 +839,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Delete Folder...</value>
   </data>
-  <data name="MenuDonate" xml:space="preserve">
+  <data name="Donate" xml:space="preserve">
     <value>Donate</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
@@ -857,25 +851,22 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="MenuDuplicateTab" xml:space="preserve">
     <value>Duplicate Tab</value>
   </data>
-  <data name="MenuExit" xml:space="preserve">
+  <data name="Exit" xml:space="preserve">
     <value>Exit</value>
-  </data>
-  <data name="MenuExternalTools" xml:space="preserve">
-    <value>External Tools</value>
   </data>
   <data name="MenuExternalToolsToolbar" xml:space="preserve">
     <value>External Tools Toolbar</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
+  <data name="_File" xml:space="preserve">
     <value>&amp;File</value>
   </data>
-  <data name="MenuHelp" xml:space="preserve">
+  <data name="_Help" xml:space="preserve">
     <value>&amp;Help</value>
   </data>
   <data name="MenuHelpContents" xml:space="preserve">
     <value>mRemoteNG Help</value>
   </data>
-  <data name="MenuJumpTo" xml:space="preserve">
+  <data name="JumpTo" xml:space="preserve">
     <value>Jump to</value>
   </data>
   <data name="MenuLaunchExternalTool" xml:space="preserve">
@@ -887,16 +878,13 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="MenuNewExternalTool" xml:space="preserve">
     <value>New External Tool</value>
   </data>
-  <data name="MenuNotifications" xml:space="preserve">
+  <data name="Notifications" xml:space="preserve">
     <value>Notifications</value>
   </data>
-  <data name="MenuNotificationsCopyAll" xml:space="preserve">
+  <data name="CopyAll" xml:space="preserve">
     <value>Copy All</value>
   </data>
-  <data name="MenuNotificationsDelete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="MenuNotificationsDeleteAll" xml:space="preserve">
+  <data name="DeleteAll" xml:space="preserve">
     <value>Delete All</value>
   </data>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
@@ -905,7 +893,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="Options" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="MenuPortScan" xml:space="preserve">
+  <data name="PortScan" xml:space="preserve">
     <value>Port Scan</value>
   </data>
   <data name="MenuQuickConnectToolbar" xml:space="preserve">
@@ -916,9 +904,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="MenuRefreshScreen" xml:space="preserve">
     <value>Refresh Screen (VNC)</value>
-  </data>
-  <data name="MenuRename" xml:space="preserve">
-    <value>Rename</value>
   </data>
   <data name="MenuRenameConnection" xml:space="preserve">
     <value>Rename Connection</value>
@@ -962,13 +947,13 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="MenuSupportForum" xml:space="preserve">
     <value>Support Forum</value>
   </data>
-  <data name="MenuTools" xml:space="preserve">
+  <data name="_Tools" xml:space="preserve">
     <value>&amp;Tools</value>
   </data>
   <data name="MenuTransferFile" xml:space="preserve">
     <value>Transfer File (SSH)</value>
   </data>
-  <data name="MenuView" xml:space="preserve">
+  <data name="_View" xml:space="preserve">
     <value>&amp;View</value>
   </data>
   <data name="ViewOnly" xml:space="preserve">
@@ -1047,10 +1032,10 @@ If you run into such an error, please create a new connection file!</value>
   <data name="OptionsTabTheme" xml:space="preserve">
     <value>Theme</value>
   </data>
-  <data name="OptionsThemeButtonDelete" xml:space="preserve">
+  <data name="_Delete" xml:space="preserve">
     <value>&amp;Delete</value>
   </data>
-  <data name="OptionsThemeButtonNew" xml:space="preserve">
+  <data name="_New" xml:space="preserve">
     <value>&amp;New</value>
   </data>
   <data name="PanelName" xml:space="preserve">
@@ -1263,10 +1248,10 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyNameDescription" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="PropertyNameDisplayThemes" xml:space="preserve">
+  <data name="DisplayThemes" xml:space="preserve">
     <value>Display Themes</value>
   </data>
-  <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
+  <data name="DisplayWallpaper" xml:space="preserve">
     <value>Display Wallpaper</value>
   </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
@@ -1275,13 +1260,13 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>Font Smoothing</value>
   </data>
-  <data name="PropertyNameEncoding" xml:space="preserve">
+  <data name="Encoding" xml:space="preserve">
     <value>Encoding</value>
   </data>
   <data name="PropertyNameEncryptionStrength" xml:space="preserve">
     <value>Encryption Strength</value>
   </data>
-  <data name="PropertyNameExternalTool" xml:space="preserve">
+  <data name="ExternalTool" xml:space="preserve">
     <value>External Tool</value>
   </data>
   <data name="PropertyNameExternalToolAfter" xml:space="preserve">
@@ -1296,10 +1281,10 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MAC Address</value>
   </data>
-  <data name="PropertyNameName" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="PropertyNamePanel" xml:space="preserve">
+  <data name="Panel" xml:space="preserve">
     <value>Panel</value>
   </data>
   <data name="Password" xml:space="preserve">
@@ -1335,7 +1320,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
     <value>Key Combinations</value>
   </data>
-  <data name="PropertyNameRedirectPorts" xml:space="preserve">
+  <data name="Ports" xml:space="preserve">
     <value>Ports</value>
   </data>
   <data name="PropertyNameRedirectPrinters" xml:space="preserve">
@@ -1371,19 +1356,19 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>User Field</value>
   </data>
-  <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
+  <data name="ProxyAddress" xml:space="preserve">
     <value>Proxy Address</value>
   </data>
-  <data name="PropertyNameVNCProxyPassword" xml:space="preserve">
+  <data name="ProxyPassword" xml:space="preserve">
     <value>Proxy Password</value>
   </data>
-  <data name="PropertyNameVNCProxyPort" xml:space="preserve">
+  <data name="ProxyPort" xml:space="preserve">
     <value>Proxy Port</value>
   </data>
-  <data name="PropertyNameVNCProxyType" xml:space="preserve">
+  <data name="ProxyType" xml:space="preserve">
     <value>Proxy Type</value>
   </data>
-  <data name="PropertyNameVNCProxyUsername" xml:space="preserve">
+  <data name="ProxyUsername" xml:space="preserve">
     <value>Proxy Username</value>
   </data>
   <data name="ProtocolEventDisconnected" xml:space="preserve">
@@ -1447,7 +1432,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="QuickConnectFailed" xml:space="preserve">
     <value>Creating quick connect failed</value>
   </data>
-  <data name="RadioCloseWarnAll" xml:space="preserve">
+  <data name="_CloseWarnAll" xml:space="preserve">
     <value>&amp;Warn me when closing connections</value>
   </data>
   <data name="RadioCloseWarnExit" xml:space="preserve">
@@ -1459,10 +1444,10 @@ If you run into such an error, please create a new connection file!</value>
   <data name="RadioCloseWarnNever" xml:space="preserve">
     <value>Do &amp;not warn me when closing connections</value>
   </data>
-  <data name="RAW" xml:space="preserve">
+  <data name="Raw" xml:space="preserve">
     <value>RAW</value>
   </data>
-  <data name="RDP" xml:space="preserve">
+  <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
   <data name="RDP16777216Colors" xml:space="preserve">
@@ -1585,7 +1570,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="RDPSoundBringToThisComputer" xml:space="preserve">
     <value>Bring to this computer</value>
   </data>
-  <data name="RDPSoundDoNotPlay" xml:space="preserve">
+  <data name="DoNotPlay" xml:space="preserve">
     <value>Do not play</value>
   </data>
   <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
@@ -1714,7 +1699,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="SwitchToErrorsAndInfos" xml:space="preserve">
     <value>Switch to Notifications panel on:</value>
   </data>
-  <data name="TabAdvanced" xml:space="preserve">
+  <data name="Advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
   <data name="TabsAndPanels" xml:space="preserve">
@@ -1790,13 +1775,13 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="UpdateFrequencyCustom" xml:space="preserve">
     <value>Every {0} days</value>
   </data>
-  <data name="UpdateFrequencyDaily" xml:space="preserve">
+  <data name="Daily" xml:space="preserve">
     <value>Daily</value>
   </data>
-  <data name="UpdateFrequencyMonthly" xml:space="preserve">
+  <data name="Monthly" xml:space="preserve">
     <value>Monthly</value>
   </data>
-  <data name="UpdateFrequencyWeekly" xml:space="preserve">
+  <data name="Weekly" xml:space="preserve">
     <value>Weekly</value>
   </data>
   <data name="UpdateGetChangeLogFailed" xml:space="preserve">
@@ -1856,7 +1841,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="MenuReconnectAll" xml:space="preserve">
     <value>Reconnect All Open Connections</value>
   </data>
-  <data name="RDPOverallConnectionTimeout" xml:space="preserve">
+  <data name="RdpOverallConnectionTimeout" xml:space="preserve">
     <value>RDP Connection Timeout</value>
   </data>
   <data name="NodeAlreadyInFolder" xml:space="preserve">
@@ -1883,13 +1868,13 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="EncryptionKeyDerivationIterations" xml:space="preserve">
     <value>Key Derivation Function Iterations</value>
   </data>
-  <data name="RDPSoundQualityDynamic" xml:space="preserve">
+  <data name="Dynamic" xml:space="preserve">
     <value>Dynamic</value>
   </data>
-  <data name="RDPSoundQualityHigh" xml:space="preserve">
+  <data name="High" xml:space="preserve">
     <value>High</value>
   </data>
-  <data name="RDPSoundQualityMedium" xml:space="preserve">
+  <data name="Medium" xml:space="preserve">
     <value>Medium</value>
   </data>
   <data name="PropertyDescriptionSoundQuality" xml:space="preserve">
@@ -1901,7 +1886,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="UpdatePortableDownloadComplete" xml:space="preserve">
     <value>Download Completed!</value>
   </data>
-  <data name="DownloadPortable" xml:space="preserve">
+  <data name="Download" xml:space="preserve">
     <value>Download</value>
   </data>
   <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
@@ -1984,7 +1969,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="CredentialUnavailable" xml:space="preserve">
     <value>Credential not available</value>
-    <comment>Shown when a credential is not loaded/available for use.</comment>
+    
   </data>
   <data name="OptionsThemeDeleteConfirmation" xml:space="preserve">
     <value>Do you really want to delete the theme?</value>
@@ -2055,9 +2040,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="RunElevated" xml:space="preserve">
     <value>Run elevated</value>
   </data>
-  <data name="RunElevateHeader" xml:space="preserve">
-    <value>Run elevate</value>
-  </data>
   <data name="ShowOnToolbarColumnHeader" xml:space="preserve">
     <value>Show on toolbar column</value>
   </data>
@@ -2076,9 +2058,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="MenuLockToolbars" xml:space="preserve">
     <value>Lock toolbar positions</value>
   </data>
-  <data name="MenuMultiSshToolbar" xml:space="preserve">
-    <value>Multi SSH toolbar</value>
-  </data>
   <data name="AdvancedSecurityOptions" xml:space="preserve">
     <value>Advanced security options</value>
   </data>
@@ -2095,7 +2074,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Out Of Range</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete...</value>
+    <value>Delete</value>
   </data>
   <data name="ReconnectAllConnections" xml:space="preserve">
     <value>Reconnect All Connections</value>
@@ -2133,7 +2112,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
     <value>This exception will force mRemoteNG to close</value>
   </data>
-  <data name="MenuCopyHostname" xml:space="preserve">
+  <data name="CopyHostname" xml:space="preserve">
     <value>Copy Hostname</value>
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
@@ -2153,10 +2132,10 @@ mRemoteNG will now quit and begin with the installation.</value>
 Beta channel includes Betas &amp; Release Candidates.
 Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
-  <data name="ButtonApply" xml:space="preserve">
+  <data name="Apply" xml:space="preserve">
     <value>Apply</value>
   </data>
-  <data name="CategoryProxy" xml:space="preserve">
+  <data name="Proxy" xml:space="preserve">
     <value>Proxy</value>
   </data>
   <data name="MultiSSH" xml:space="preserve">

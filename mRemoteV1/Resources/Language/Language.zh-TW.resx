@@ -165,16 +165,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>目前版本</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>瀏覽(&amp;B)...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>取消(&amp;C)</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>變更</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>關閉(&amp;C)</value>
   </data>
   <data name="ButtonDefaultInheritance" xml:space="preserve">
@@ -189,7 +189,7 @@
   <data name="Icon" xml:space="preserve">
     <value>圖示</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>匯入(&amp;I)</value>
   </data>
   <data name="Inheritance" xml:space="preserve">
@@ -198,19 +198,16 @@
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>啟動 PuTTY</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>新增(&amp;N)</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>確定(&amp;O)</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>內容</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>掃描(&amp;S)</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>停止(&amp;S)</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -237,7 +234,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>協定</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>重新導向</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">
@@ -288,7 +285,7 @@ VncSharp Control 版本 {0}</value>
   <data name="WaitForExit" xml:space="preserve">
     <value>等待結束</value>
   </data>
-  <data name="CheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>再次檢查</value>
   </data>
   <data name="CheckForUpdatesOnStartup" xml:space="preserve">
@@ -315,7 +312,7 @@ VncSharp Control 版本 {0}</value>
   <data name="Filename" xml:space="preserve">
     <value>檔案名稱</value>
   </data>
-  <data name="ColumnMessage" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>訊息</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
@@ -472,16 +469,16 @@ VncSharp Control 版本 {0}</value>
   <data name="Enc128BitLogonOnly" xml:space="preserve">
     <value>128 位元 (只有登入)</value>
   </data>
-  <data name="EncBasic" xml:space="preserve">
+  <data name="Basic" xml:space="preserve">
     <value>基本</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>完整加密連線檔案</value>
   </data>
-  <data name="EndIP" xml:space="preserve">
+  <data name="LastIp" xml:space="preserve">
     <value>結束 IP</value>
   </data>
-  <data name="EndPort" xml:space="preserve">
+  <data name="LastPort" xml:space="preserve">
     <value>結束連接埠</value>
   </data>
   <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
@@ -631,13 +628,13 @@ VncSharp Control 版本 {0}</value>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Int App 標題: {0}</value>
   </data>
-  <data name="LabelAddress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>位址:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>關閉連線時:</value>
   </data>
-  <data name="LabelConnect" xml:space="preserve">
+  <data name="_Connect" xml:space="preserve">
     <value>連線(&amp;C):</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
@@ -649,7 +646,7 @@ VncSharp Control 版本 {0}</value>
   <data name="LabelHostname" xml:space="preserve">
     <value>主機名稱:</value>
   </data>
-  <data name="LabelPortableEdition" xml:space="preserve">
+  <data name="PortableEdition" xml:space="preserve">
     <value>可攜版</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
@@ -712,7 +709,7 @@ VncSharp Control 版本 {0}</value>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>連線和組態</value>
   </data>
-  <data name="MenuCopy" xml:space="preserve">
+  <data name="Copy" xml:space="preserve">
     <value>複製</value>
   </data>
   <data name="CtrlAltDel" xml:space="preserve">
@@ -730,7 +727,7 @@ VncSharp Control 版本 {0}</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>刪除資料夾...</value>
   </data>
-  <data name="MenuDonate" xml:space="preserve">
+  <data name="Donate" xml:space="preserve">
     <value>捐贈</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
@@ -742,25 +739,22 @@ VncSharp Control 版本 {0}</value>
   <data name="MenuDuplicateTab" xml:space="preserve">
     <value>複製索引標籤</value>
   </data>
-  <data name="MenuExit" xml:space="preserve">
+  <data name="Exit" xml:space="preserve">
     <value>結束</value>
-  </data>
-  <data name="MenuExternalTools" xml:space="preserve">
-    <value>外部工具</value>
   </data>
   <data name="MenuExternalToolsToolbar" xml:space="preserve">
     <value>外部工具工具列</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
+  <data name="_File" xml:space="preserve">
     <value>檔案(&amp;F)</value>
   </data>
-  <data name="MenuHelp" xml:space="preserve">
+  <data name="_Help" xml:space="preserve">
     <value>說明(&amp;H)</value>
   </data>
   <data name="MenuHelpContents" xml:space="preserve">
     <value>mRemoteNG 說明</value>
   </data>
-  <data name="MenuJumpTo" xml:space="preserve">
+  <data name="JumpTo" xml:space="preserve">
     <value>跳至</value>
   </data>
   <data name="MenuLaunchExternalTool" xml:space="preserve">
@@ -772,16 +766,13 @@ VncSharp Control 版本 {0}</value>
   <data name="MenuNewExternalTool" xml:space="preserve">
     <value>新增外部工具</value>
   </data>
-  <data name="MenuNotifications" xml:space="preserve">
+  <data name="Notifications" xml:space="preserve">
     <value>通知</value>
   </data>
-  <data name="MenuNotificationsCopyAll" xml:space="preserve">
+  <data name="CopyAll" xml:space="preserve">
     <value>全部複製</value>
   </data>
-  <data name="MenuNotificationsDelete" xml:space="preserve">
-    <value>刪除</value>
-  </data>
-  <data name="MenuNotificationsDeleteAll" xml:space="preserve">
+  <data name="DeleteAll" xml:space="preserve">
     <value>全部刪除</value>
   </data>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
@@ -790,7 +781,7 @@ VncSharp Control 版本 {0}</value>
   <data name="Options" xml:space="preserve">
     <value>選項</value>
   </data>
-  <data name="MenuPortScan" xml:space="preserve">
+  <data name="PortScan" xml:space="preserve">
     <value>通訊埠掃描</value>
   </data>
   <data name="MenuQuickConnectToolbar" xml:space="preserve">
@@ -801,9 +792,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="MenuRefreshScreen" xml:space="preserve">
     <value>重新整理螢幕 (VNC)</value>
-  </data>
-  <data name="MenuRename" xml:space="preserve">
-    <value>重新命名</value>
   </data>
   <data name="MenuRenameConnection" xml:space="preserve">
     <value>重新命名連線</value>
@@ -847,13 +835,13 @@ VncSharp Control 版本 {0}</value>
   <data name="MenuSupportForum" xml:space="preserve">
     <value>支援討論區</value>
   </data>
-  <data name="MenuTools" xml:space="preserve">
+  <data name="_Tools" xml:space="preserve">
     <value>工具(&amp;T)</value>
   </data>
   <data name="MenuTransferFile" xml:space="preserve">
     <value>傳輸檔案 (SSH)</value>
   </data>
-  <data name="MenuView" xml:space="preserve">
+  <data name="_View" xml:space="preserve">
     <value>檢視(&amp;V)</value>
   </data>
   <data name="ViewOnly" xml:space="preserve">
@@ -923,10 +911,10 @@ VncSharp Control 版本 {0}</value>
   <data name="OptionsTabTheme" xml:space="preserve">
     <value>主題</value>
   </data>
-  <data name="OptionsThemeButtonDelete" xml:space="preserve">
+  <data name="_Delete" xml:space="preserve">
     <value>刪除(&amp;D)</value>
   </data>
-  <data name="OptionsThemeButtonNew" xml:space="preserve">
+  <data name="_New" xml:space="preserve">
     <value>新增(&amp;N)</value>
   </data>
   <data name="PanelName" xml:space="preserve">
@@ -1115,10 +1103,10 @@ VncSharp Control 版本 {0}</value>
   <data name="PropertyNameDescription" xml:space="preserve">
     <value>描述</value>
   </data>
-  <data name="PropertyNameDisplayThemes" xml:space="preserve">
+  <data name="DisplayThemes" xml:space="preserve">
     <value>顯示佈景主題</value>
   </data>
-  <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
+  <data name="DisplayWallpaper" xml:space="preserve">
     <value>顯示底色圖案</value>
   </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
@@ -1127,13 +1115,13 @@ VncSharp Control 版本 {0}</value>
   <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>字型平滑</value>
   </data>
-  <data name="PropertyNameEncoding" xml:space="preserve">
+  <data name="Encoding" xml:space="preserve">
     <value>編碼</value>
   </data>
   <data name="PropertyNameEncryptionStrength" xml:space="preserve">
     <value>加密長度</value>
   </data>
-  <data name="PropertyNameExternalTool" xml:space="preserve">
+  <data name="ExternalTool" xml:space="preserve">
     <value>外部工具</value>
   </data>
   <data name="PropertyNameExternalToolAfter" xml:space="preserve">
@@ -1145,10 +1133,10 @@ VncSharp Control 版本 {0}</value>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MAC 位址</value>
   </data>
-  <data name="PropertyNameName" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>名稱</value>
   </data>
-  <data name="PropertyNamePanel" xml:space="preserve">
+  <data name="Panel" xml:space="preserve">
     <value>面板</value>
   </data>
   <data name="Password" xml:space="preserve">
@@ -1184,7 +1172,7 @@ VncSharp Control 版本 {0}</value>
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
     <value>按鍵組合</value>
   </data>
-  <data name="PropertyNameRedirectPorts" xml:space="preserve">
+  <data name="Ports" xml:space="preserve">
     <value>連接埠</value>
   </data>
   <data name="PropertyNameRedirectPrinters" xml:space="preserve">
@@ -1214,19 +1202,19 @@ VncSharp Control 版本 {0}</value>
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>使用者欄位</value>
   </data>
-  <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
+  <data name="ProxyAddress" xml:space="preserve">
     <value>Proxy 位址</value>
   </data>
-  <data name="PropertyNameVNCProxyPassword" xml:space="preserve">
+  <data name="ProxyPassword" xml:space="preserve">
     <value>Proxy 密碼</value>
   </data>
-  <data name="PropertyNameVNCProxyPort" xml:space="preserve">
+  <data name="ProxyPort" xml:space="preserve">
     <value>Proxy 連接埠</value>
   </data>
-  <data name="PropertyNameVNCProxyType" xml:space="preserve">
+  <data name="ProxyType" xml:space="preserve">
     <value>Proxy 類型</value>
   </data>
-  <data name="PropertyNameVNCProxyUsername" xml:space="preserve">
+  <data name="ProxyUsername" xml:space="preserve">
     <value>Proxy 使用者名稱</value>
   </data>
   <data name="ProtocolEventDisconnected" xml:space="preserve">
@@ -1292,7 +1280,7 @@ VncSharp Control 版本 {0}</value>
   <data name="QuickConnectFailed" xml:space="preserve">
     <value>Creating quick connect 失敗</value>
   </data>
-  <data name="RadioCloseWarnAll" xml:space="preserve">
+  <data name="_CloseWarnAll" xml:space="preserve">
     <value>關閉連線時警告(&amp;W)</value>
   </data>
   <data name="RadioCloseWarnExit" xml:space="preserve">
@@ -1304,10 +1292,10 @@ VncSharp Control 版本 {0}</value>
   <data name="RadioCloseWarnNever" xml:space="preserve">
     <value>關閉連線時不警告我(&amp;N)</value>
   </data>
-  <data name="RAW" xml:space="preserve">
+  <data name="Raw" xml:space="preserve">
     <value>RAW</value>
   </data>
-  <data name="RDP" xml:space="preserve">
+  <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
   <data name="RDP16777216Colors" xml:space="preserve">
@@ -1430,7 +1418,7 @@ VncSharp Control 版本 {0}</value>
   <data name="RDPSoundBringToThisComputer" xml:space="preserve">
     <value>送到此電腦</value>
   </data>
-  <data name="RDPSoundDoNotPlay" xml:space="preserve">
+  <data name="DoNotPlay" xml:space="preserve">
     <value>不播放</value>
   </data>
   <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
@@ -1559,7 +1547,7 @@ VncSharp Control 版本 {0}</value>
   <data name="SwitchToErrorsAndInfos" xml:space="preserve">
     <value>切換到通知面板:</value>
   </data>
-  <data name="TabAdvanced" xml:space="preserve">
+  <data name="Advanced" xml:space="preserve">
     <value>進階</value>
   </data>
   <data name="TabsAndPanels" xml:space="preserve">
@@ -1626,13 +1614,13 @@ mRemoteNG 將立即結束並開始安裝。</value>
   <data name="UpdateFrequencyCustom" xml:space="preserve">
     <value>每隔 {0} 天</value>
   </data>
-  <data name="UpdateFrequencyDaily" xml:space="preserve">
+  <data name="Daily" xml:space="preserve">
     <value>每天</value>
   </data>
-  <data name="UpdateFrequencyMonthly" xml:space="preserve">
+  <data name="Monthly" xml:space="preserve">
     <value>每月</value>
   </data>
-  <data name="UpdateFrequencyWeekly" xml:space="preserve">
+  <data name="Weekly" xml:space="preserve">
     <value>每星期</value>
   </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">

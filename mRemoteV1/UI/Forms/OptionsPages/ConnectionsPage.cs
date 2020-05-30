@@ -34,11 +34,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkDoNotTrimUsername.Text = Language.DoNotTrimUsername;
 
             lblRdpReconnectionCount.Text = Language.RdpReconnectCount;
-            lblRDPConTimeout.Text = Language.RDPOverallConnectionTimeout;
+            lblRDPConTimeout.Text = Language.RdpOverallConnectionTimeout;
             lblAutoSave1.Text = Language.AutoSaveEvery;
 
             lblClosingConnections.Text = Language.LabelClosingConnections;
-            radCloseWarnAll.Text = Language.RadioCloseWarnAll;
+            radCloseWarnAll.Text = Language._CloseWarnAll;
             radCloseWarnMultiple.Text = Language.RadioCloseWarnMultiple;
             radCloseWarnExit.Text = Language.RadioCloseWarnExit;
             radCloseWarnNever.Text = Language.RadioCloseWarnNever;

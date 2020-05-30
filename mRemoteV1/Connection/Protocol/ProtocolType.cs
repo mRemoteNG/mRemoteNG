@@ -4,7 +4,7 @@ namespace mRemoteNG.Connection.Protocol
 {
     public enum ProtocolType
     {
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.RDP))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Rdp))]
         RDP = 0,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Vnc))]
@@ -22,7 +22,7 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Rlogin))]
         Rlogin = 5,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.RAW))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Raw))]
         RAW = 6,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Http))]

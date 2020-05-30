@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.TabAdvanced;
+            get => Language.Advanced;
             set { }
         }
 
@@ -39,7 +39,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkLoadBalanceInfoUseUtf8.Text = Language.LoadBalanceInfoUseUtf8;
             lblConfigurePuttySessions.Text = Language.LabelPuttySessionsConfig;
             btnLaunchPutty.Text = Language.ButtonLaunchPutty;
-            btnBrowseCustomPuttyPath.Text = Language.ButtonBrowse;
+            btnBrowseCustomPuttyPath.Text = Language._Browse;
             chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;
             lblUVNCSCPort.Text = Language.UltraVNCSCListeningPort;
         }

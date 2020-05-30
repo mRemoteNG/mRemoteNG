@@ -162,16 +162,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>Τρέχουσα έκδοση</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>&amp;Αναζήτηση...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>&amp;Ακύρωση</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>Αλλαγή</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>&amp;Κλείσιμο</value>
   </data>
   <data name="ButtonDefaultInheritance" xml:space="preserve">
@@ -186,7 +186,7 @@
   <data name="Icon" xml:space="preserve">
     <value>Εικονίδιο</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>&amp;Εισαγωγή</value>
   </data>
   <data name="Inheritance" xml:space="preserve">
@@ -195,19 +195,16 @@
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>Εκκίνηση του PuTTY</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>&amp; Νέο</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp;ΟΚ</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Ιδιότητες</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>&amp;Σάρωση</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>&amp;Διακοπή</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -234,7 +231,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>Πρωτόκολλο</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>Ανακατεύθυνση</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">

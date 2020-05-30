@@ -99,7 +99,7 @@ namespace mRemoteNG.Connection
         #region Display
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryDisplay)),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameName)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Name)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionName))]
         public virtual string Name
         {
@@ -127,7 +127,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryDisplay)),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNamePanel)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Panel)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPanel))]
         public virtual string Panel
         {
@@ -236,7 +236,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameExternalTool)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.ExternalTool)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionExternalTool)),
          TypeConverter(typeof(ExternalToolsTypeConverter)),
          UsedInProtocol(ProtocolType.IntApp)]
@@ -497,7 +497,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameDisplayWallpaper)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.DisplayWallpaper)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionDisplayWallpaper)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
@@ -508,7 +508,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameDisplayThemes)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.DisplayThemes)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionDisplayThemes)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
@@ -587,7 +587,7 @@ namespace mRemoteNG.Connection
 
         #region Redirect
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryRedirect), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameRedirectKeys)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectKeys)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
@@ -598,7 +598,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _redirectKeys, value, "RedirectKeys");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryRedirect), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameRedirectDrives)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectDrives)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
@@ -609,7 +609,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _redirectDiskDrives, value, "RedirectDiskDrives");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryRedirect), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameRedirectPrinters)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectPrinters)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
@@ -620,7 +620,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _redirectPrinters, value, "RedirectPrinters");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryRedirect), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameRedirectClipboard)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectClipboard)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
@@ -632,8 +632,8 @@ namespace mRemoteNG.Connection
         }
 
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryRedirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameRedirectPorts)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyDescriptionRedirectPorts)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectPorts)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
@@ -643,7 +643,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _redirectPorts, value, "RedirectPorts");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryRedirect), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameRedirectSmartCards)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectSmartCards)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
@@ -654,7 +654,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _redirectSmartCards, value, "RedirectSmartCards");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryRedirect), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameRedirectSounds)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectSounds)),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
@@ -665,7 +665,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _redirectSound, value, "RedirectSound");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryRedirect), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameSoundQuality)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSoundQuality)),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
@@ -676,7 +676,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _soundQuality, value, "SoundQuality");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryRedirect), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameRedirectAudioCapture)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectAudioCapture)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
@@ -758,7 +758,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 5),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameEncoding)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Encoding)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionEncoding)),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.VNC),
@@ -781,8 +781,8 @@ namespace mRemoteNG.Connection
             set => SetField(ref _vncAuthMode, value, "VNCAuthMode");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProxy), 7),
-            LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameVNCProxyType)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
+            LocalizedAttributes.LocalizedDisplayName(nameof(Language.ProxyType)),
             LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVNCProxyType)),
             TypeConverter(typeof(MiscTools.EnumTypeConverter)),
             UsedInProtocol(ProtocolType.VNC),
@@ -793,8 +793,8 @@ namespace mRemoteNG.Connection
             set => SetField(ref _vncProxyType, value, "VNCProxyType");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProxy), 7),
-            LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameVNCProxyAddress)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
+            LocalizedAttributes.LocalizedDisplayName(nameof(Language.ProxyAddress)),
             LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVNCProxyAddress)),
             UsedInProtocol(ProtocolType.VNC),
             Browsable(false)]
@@ -804,8 +804,8 @@ namespace mRemoteNG.Connection
             set => SetField(ref _vncProxyIp, value, "VNCProxyIP");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProxy), 7),
-            LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameVNCProxyPort)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
+            LocalizedAttributes.LocalizedDisplayName(nameof(Language.ProxyPort)),
             LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVNCProxyPort)),
             UsedInProtocol(ProtocolType.VNC),
             Browsable(false)]
@@ -815,8 +815,8 @@ namespace mRemoteNG.Connection
             set => SetField(ref _vncProxyPort, value, "VNCProxyPort");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProxy), 7),
-            LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameVNCProxyUsername)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
+            LocalizedAttributes.LocalizedDisplayName(nameof(Language.ProxyUsername)),
             LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVNCProxyUsername)),
             UsedInProtocol(ProtocolType.VNC),
             Browsable(false)]
@@ -826,8 +826,8 @@ namespace mRemoteNG.Connection
             set => SetField(ref _vncProxyUsername, value, "VNCProxyUsername");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProxy), 7),
-            LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameVNCProxyPassword)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
+            LocalizedAttributes.LocalizedDisplayName(nameof(Language.ProxyPassword)),
             LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVNCProxyPassword)),
             PasswordPropertyText(true),
             UsedInProtocol(ProtocolType.VNC),

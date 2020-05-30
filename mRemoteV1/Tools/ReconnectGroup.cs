@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 
 namespace mRemoteNG.Tools
@@ -128,7 +128,7 @@ namespace mRemoteNG.Tools
         private void ApplyLanguage()
         {
             grpAutomaticReconnect.Text = Language.GroupboxAutomaticReconnect;
-            btnClose.Text = Language.ButtonClose;
+            btnClose.Text = Language._Close;
             lblServerStatus.Text = Language.LabelServerStatus;
             chkReconnectWhenReady.Text = Language.CheckboxReconnectWhenReady;
         }

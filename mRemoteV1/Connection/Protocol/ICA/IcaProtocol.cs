@@ -361,7 +361,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 
         public enum EncryptionStrength
         {
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.EncBasic))]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.Basic))]
             EncrBasic = 1,
 
             [LocalizedAttributes.LocalizedDescription(nameof(Language.Enc128BitLogonOnly))]

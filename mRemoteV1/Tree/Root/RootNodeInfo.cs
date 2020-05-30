@@ -30,7 +30,7 @@ namespace mRemoteNG.Tree.Root
         [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryMiscellaneous)),
          Browsable(true),
          LocalizedAttributes.LocalizedDefaultValue(nameof(Language.Connections)),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNameName)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Name)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionName))]
         public override string Name
         {

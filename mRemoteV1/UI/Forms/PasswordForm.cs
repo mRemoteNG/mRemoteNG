@@ -101,8 +101,8 @@ namespace mRemoteNG.UI.Forms
 
             lblPassword.Text = Language.Password;
             lblVerify.Text = Language.LabelVerify;
-            btnCancel.Text = Language.ButtonCancel;
-            btnOK.Text = Language.ButtonOK;
+            btnCancel.Text = Language._Cancel;
+            btnOK.Text = Language._Ok;
         }
 
         private void ApplyTheme()

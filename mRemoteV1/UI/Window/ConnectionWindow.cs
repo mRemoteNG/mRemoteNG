@@ -274,7 +274,7 @@ namespace mRemoteNG.UI.Window
             cmenTabSendSpecialKeys.Text = Language.MenuSendSpecialKeys;
             cmenTabSendSpecialKeysCtrlAltDel.Text = Language.CtrlAltDel;
             cmenTabSendSpecialKeysCtrlEsc.Text = Language.CtrlEsc;
-            cmenTabExternalApps.Text = Language.MenuExternalTools;
+            cmenTabExternalApps.Text = Language._Tools;
             cmenTabRenameTab.Text = Language.MenuRenameTab;
             cmenTabDuplicateTab.Text = Language.MenuDuplicateTab;
             cmenTabReconnect.Text = Language.MenuReconnect;

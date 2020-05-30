@@ -1,4 +1,4 @@
-namespace mRemoteNG.Tools
+﻿namespace mRemoteNG.Tools
 {
     public partial class ReconnectGroup : System.Windows.Forms.UserControl
 	{
@@ -67,7 +67,7 @@ namespace mRemoteNG.Tools
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(159, 23);
             this.btnClose.TabIndex = 7;
-            this.btnClose.Text = global::mRemoteNG.Language.ButtonClose;
+            this.btnClose.Text = global::mRemoteNG.Language._Close;
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 

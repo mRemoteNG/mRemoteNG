@@ -169,16 +169,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>最新バージョン</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>&amp;Browse...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>キャンセル(&amp;C)</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>変更</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>閉じる(&amp;C)</value>
   </data>
   <data name="ButtonDefaultInheritance" xml:space="preserve">
@@ -193,31 +193,28 @@
   <data name="Icon" xml:space="preserve">
     <value>アイコン</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>インポート(&amp;I)</value>
   </data>
   <data name="Inheritance" xml:space="preserve">
     <value>Inheritance</value>
   </data>
-  <data name="ButtonLaunch" xml:space="preserve">
+  <data name="_Launch" xml:space="preserve">
     <value>立ち上げる(&amp;L)</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>PuTTYを開始</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>新規(&amp;N)</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>プロパティ</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>スキャン(&amp;S)</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>停止(&amp;S)</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -245,7 +242,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>プロトコル</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>Redirect</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">
@@ -317,7 +314,7 @@ VncSharp Control Version {0}</value>
   <data name="WaitForExit" xml:space="preserve">
     <value>終了まで待機する</value>
   </data>
-  <data name="CheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>もう一度点検する</value>
   </data>
   <data name="CheckForUpdatesOnStartup" xml:space="preserve">
@@ -346,7 +343,7 @@ VncSharp Control Version {0}</value>
   <data name="Filename" xml:space="preserve">
     <value>ファイル名</value>
   </data>
-  <data name="ColumnMessage" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>メッセージ</value>
   </data>
   <data name="CommandExitProgram" xml:space="preserve">
@@ -359,7 +356,7 @@ VncSharp Control Version {0}</value>
   <data name="CommandOpenConnectionFile" xml:space="preserve">
     <value>接続ファイルを開く(&amp;O)</value>
   </data>
-  <data name="CommandTryAgain" xml:space="preserve">
+  <data name="_TryAgain" xml:space="preserve">
     <value>再度試みる(&amp;T)</value>
   </data>
   <data name="CompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
@@ -528,16 +525,16 @@ Starting with new connections file.</value>
   <data name="Enc56Bit" xml:space="preserve">
     <value>56ビット</value>
   </data>
-  <data name="EncBasic" xml:space="preserve">
+  <data name="Basic" xml:space="preserve">
     <value>Basic</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>接続設定ファイルをすべて暗号化する</value>
   </data>
-  <data name="EndIP" xml:space="preserve">
+  <data name="LastIp" xml:space="preserve">
     <value>最終IPアドレス</value>
   </data>
-  <data name="EndPort" xml:space="preserve">
+  <data name="LastPort" xml:space="preserve">
     <value>最終ポート</value>
   </data>
   <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
@@ -597,7 +594,7 @@ Starting with new connections file.</value>
   <data name="ExportSelectedFolder" xml:space="preserve">
     <value>Export the currently selected folder</value>
   </data>
-  <data name="ExportToFileMenuItem" xml:space="preserve">
+  <data name="_ExportToFile" xml:space="preserve">
     <value>ファイルへの書き出し...(&amp;E)</value>
   </data>
   <data name="ExtApp" xml:space="preserve">
@@ -720,9 +717,6 @@ Starting with new connections file.</value>
   <data name="ImportFromFileMenuItem" xml:space="preserve">
     <value>ファイルからインポート...(&amp;F)</value>
   </data>
-  <data name="ImportMenuItem" xml:space="preserve">
-    <value>インポート(&amp;I)</value>
-  </data>
   <data name="ImportPortScan" xml:space="preserve">
     <value>ポートスキャンからインポート</value>
   </data>
@@ -750,13 +744,13 @@ Starting with new connections file.</value>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Int App Title: {0}</value>
   </data>
-  <data name="LabelAddress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>アドレス：</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>切断時：</value>
   </data>
-  <data name="LabelConnect" xml:space="preserve">
+  <data name="_Connect" xml:space="preserve">
     <value>接続(&amp;C)：</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
@@ -768,7 +762,7 @@ Starting with new connections file.</value>
   <data name="LabelHostname" xml:space="preserve">
     <value>ホスト名：</value>
   </data>
-  <data name="LabelPortableEdition" xml:space="preserve">
+  <data name="PortableEdition" xml:space="preserve">
     <value>ポータブル</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
@@ -837,7 +831,7 @@ Starting with new connections file.</value>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>接続と設定</value>
   </data>
-  <data name="MenuCopy" xml:space="preserve">
+  <data name="Copy" xml:space="preserve">
     <value>コピー</value>
   </data>
   <data name="CtrlAltDel" xml:space="preserve">
@@ -855,7 +849,7 @@ Starting with new connections file.</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>フォルダを削除...</value>
   </data>
-  <data name="MenuDonate" xml:space="preserve">
+  <data name="Donate" xml:space="preserve">
     <value>寄付のお願い</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
@@ -867,25 +861,22 @@ Starting with new connections file.</value>
   <data name="MenuDuplicateTab" xml:space="preserve">
     <value>タブを複製する</value>
   </data>
-  <data name="MenuExit" xml:space="preserve">
+  <data name="Exit" xml:space="preserve">
     <value>終了</value>
-  </data>
-  <data name="MenuExternalTools" xml:space="preserve">
-    <value>外部ツール</value>
   </data>
   <data name="MenuExternalToolsToolbar" xml:space="preserve">
     <value>外部ツールのツールバー</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
+  <data name="_File" xml:space="preserve">
     <value>ファイル(&amp;F)</value>
   </data>
-  <data name="MenuHelp" xml:space="preserve">
+  <data name="_Help" xml:space="preserve">
     <value>ヘルプ(&amp;H)</value>
   </data>
   <data name="MenuHelpContents" xml:space="preserve">
     <value>mRemoteNGヘルプ</value>
   </data>
-  <data name="MenuJumpTo" xml:space="preserve">
+  <data name="JumpTo" xml:space="preserve">
     <value>移動先</value>
   </data>
   <data name="MenuLaunchExternalTool" xml:space="preserve">
@@ -897,16 +888,13 @@ Starting with new connections file.</value>
   <data name="MenuNewExternalTool" xml:space="preserve">
     <value>新規外部ツール</value>
   </data>
-  <data name="MenuNotifications" xml:space="preserve">
+  <data name="Notifications" xml:space="preserve">
     <value>通知</value>
   </data>
-  <data name="MenuNotificationsCopyAll" xml:space="preserve">
+  <data name="CopyAll" xml:space="preserve">
     <value>全てコピー</value>
   </data>
-  <data name="MenuNotificationsDelete" xml:space="preserve">
-    <value>削除</value>
-  </data>
-  <data name="MenuNotificationsDeleteAll" xml:space="preserve">
+  <data name="DeleteAll" xml:space="preserve">
     <value>全て削除</value>
   </data>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
@@ -915,7 +903,7 @@ Starting with new connections file.</value>
   <data name="Options" xml:space="preserve">
     <value>オプション</value>
   </data>
-  <data name="MenuPortScan" xml:space="preserve">
+  <data name="PortScan" xml:space="preserve">
     <value>ポートをスキャンする</value>
   </data>
   <data name="MenuQuickConnectToolbar" xml:space="preserve">
@@ -926,9 +914,6 @@ Starting with new connections file.</value>
   </data>
   <data name="MenuRefreshScreen" xml:space="preserve">
     <value>スクリーンを更新する (VNC)</value>
-  </data>
-  <data name="MenuRename" xml:space="preserve">
-    <value>名前を変更</value>
   </data>
   <data name="MenuRenameConnection" xml:space="preserve">
     <value>接続名を変更</value>
@@ -973,13 +958,13 @@ Starting with new connections file.</value>
   <data name="MenuSupportForum" xml:space="preserve">
     <value>サポートフォーラム</value>
   </data>
-  <data name="MenuTools" xml:space="preserve">
+  <data name="_Tools" xml:space="preserve">
     <value>ツール(&amp;T)</value>
   </data>
   <data name="MenuTransferFile" xml:space="preserve">
     <value>SSHによるファイルの転送</value>
   </data>
-  <data name="MenuView" xml:space="preserve">
+  <data name="_View" xml:space="preserve">
     <value>表示(&amp;V)</value>
   </data>
   <data name="ViewOnly" xml:space="preserve">
@@ -1061,10 +1046,10 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="OptionsTabTheme" xml:space="preserve">
     <value>テーマ</value>
   </data>
-  <data name="OptionsThemeButtonDelete" xml:space="preserve">
+  <data name="_Delete" xml:space="preserve">
     <value>削除(&amp;D)</value>
   </data>
-  <data name="OptionsThemeButtonNew" xml:space="preserve">
+  <data name="_New" xml:space="preserve">
     <value>新規(&amp;N)</value>
   </data>
   <data name="PanelName" xml:space="preserve">
@@ -1273,10 +1258,10 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="PropertyNameDescription" xml:space="preserve">
     <value>説明</value>
   </data>
-  <data name="PropertyNameDisplayThemes" xml:space="preserve">
+  <data name="DisplayThemes" xml:space="preserve">
     <value>テーマの表示</value>
   </data>
-  <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
+  <data name="DisplayWallpaper" xml:space="preserve">
     <value>ウォールペーパーを表示</value>
   </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
@@ -1285,13 +1270,13 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>フォントの滑らかさ</value>
   </data>
-  <data name="PropertyNameEncoding" xml:space="preserve">
+  <data name="Encoding" xml:space="preserve">
     <value>エンコード</value>
   </data>
   <data name="PropertyNameEncryptionStrength" xml:space="preserve">
     <value>Encryption Strength</value>
   </data>
-  <data name="PropertyNameExternalTool" xml:space="preserve">
+  <data name="ExternalTool" xml:space="preserve">
     <value>外部ツール</value>
   </data>
   <data name="PropertyNameExternalToolAfter" xml:space="preserve">
@@ -1306,10 +1291,10 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MACアドレス</value>
   </data>
-  <data name="PropertyNameName" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>名前</value>
   </data>
-  <data name="PropertyNamePanel" xml:space="preserve">
+  <data name="Panel" xml:space="preserve">
     <value>パネル</value>
   </data>
   <data name="Password" xml:space="preserve">
@@ -1345,7 +1330,7 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
     <value>キーの組み合わせ</value>
   </data>
-  <data name="PropertyNameRedirectPorts" xml:space="preserve">
+  <data name="Ports" xml:space="preserve">
     <value>ポート</value>
   </data>
   <data name="PropertyNameRedirectPrinters" xml:space="preserve">
@@ -1375,21 +1360,21 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>User Field</value>
   </data>
-  <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
+  <data name="ProxyAddress" xml:space="preserve">
     <value>プロキシーのアドレス</value>
     <comment>Proxy Address</comment>
   </data>
-  <data name="PropertyNameVNCProxyPassword" xml:space="preserve">
+  <data name="ProxyPassword" xml:space="preserve">
     <value>プロキシーのパスワード</value>
     <comment>Proxy Password</comment>
   </data>
-  <data name="PropertyNameVNCProxyPort" xml:space="preserve">
+  <data name="ProxyPort" xml:space="preserve">
     <value>プロキシーのポート</value>
   </data>
-  <data name="PropertyNameVNCProxyType" xml:space="preserve">
+  <data name="ProxyType" xml:space="preserve">
     <value>プロキシーの種類</value>
   </data>
-  <data name="PropertyNameVNCProxyUsername" xml:space="preserve">
+  <data name="ProxyUsername" xml:space="preserve">
     <value>プロキシーのユーザー名</value>
   </data>
   <data name="ProtocolEventDisconnected" xml:space="preserve">
@@ -1455,7 +1440,7 @@ Message:
   <data name="QuickConnectFailed" xml:space="preserve">
     <value>Creating quick connect failed</value>
   </data>
-  <data name="RadioCloseWarnAll" xml:space="preserve">
+  <data name="_CloseWarnAll" xml:space="preserve">
     <value>&amp;Warn me when closing connections</value>
   </data>
   <data name="RadioCloseWarnExit" xml:space="preserve">
@@ -1467,10 +1452,10 @@ Message:
   <data name="RadioCloseWarnNever" xml:space="preserve">
     <value>Do &amp;not warn me when closing connections</value>
   </data>
-  <data name="RAW" xml:space="preserve">
+  <data name="Raw" xml:space="preserve">
     <value>RAW</value>
   </data>
-  <data name="RDP" xml:space="preserve">
+  <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
   <data name="RDP16777216Colors" xml:space="preserve">
@@ -1593,7 +1578,7 @@ Message:
   <data name="RDPSoundBringToThisComputer" xml:space="preserve">
     <value>このコンピューターで再生</value>
   </data>
-  <data name="RDPSoundDoNotPlay" xml:space="preserve">
+  <data name="DoNotPlay" xml:space="preserve">
     <value>再生しない</value>
   </data>
   <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
@@ -1729,7 +1714,7 @@ Message:
   <data name="SwitchToErrorsAndInfos" xml:space="preserve">
     <value>Switch to Notifications panel on:</value>
   </data>
-  <data name="TabAdvanced" xml:space="preserve">
+  <data name="Advanced" xml:space="preserve">
     <value>詳細設定</value>
   </data>
   <data name="TabsAndPanels" xml:space="preserve">
@@ -1802,13 +1787,13 @@ mRemoteNGを終了してインストールを開始します</value>
   <data name="UpdateFrequencyCustom" xml:space="preserve">
     <value>{0}日毎</value>
   </data>
-  <data name="UpdateFrequencyDaily" xml:space="preserve">
+  <data name="Daily" xml:space="preserve">
     <value>毎日</value>
   </data>
-  <data name="UpdateFrequencyMonthly" xml:space="preserve">
+  <data name="Monthly" xml:space="preserve">
     <value>毎月</value>
   </data>
-  <data name="UpdateFrequencyWeekly" xml:space="preserve">
+  <data name="Weekly" xml:space="preserve">
     <value>毎週</value>
   </data>
   <data name="UpdateGetChangeLogFailed" xml:space="preserve">

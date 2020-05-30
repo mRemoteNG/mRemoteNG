@@ -31,7 +31,7 @@ namespace mRemoteNG.Tools
 
                 var cMenSep1 = new ToolStripSeparator();
 
-                var cMenExit = new ToolStripMenuItem {Text = Language.MenuExit};
+                var cMenExit = new ToolStripMenuItem {Text = Language.Exit};
                 cMenExit.Click += cMenExit_Click;
 
                 _cMen = new ContextMenuStrip

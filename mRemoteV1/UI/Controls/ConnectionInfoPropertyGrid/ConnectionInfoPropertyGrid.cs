@@ -286,7 +286,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             {
                 SelectedConnectionInfo.SetDefaultPort();
             }
-            else if (e.ChangedItem.Label == Language.PropertyNameName)
+            else if (e.ChangedItem.Label == Language.Name)
             {
                 if (Settings.Default.SetHostnameLikeDisplayName)
                 {

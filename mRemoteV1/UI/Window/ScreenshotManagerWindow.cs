@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -180,10 +180,10 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            mMenFile.Text = Language.MenuFile;
+            mMenFile.Text = Language._File;
             mMenFileSaveAll.Text = Language.SaveAll;
             mMenFileRemoveAll.Text = Language.RemoveAll;
-            cMenScreenshotCopy.Text = Language.MenuCopy;
+            cMenScreenshotCopy.Text = Language.Copy;
             cMenScreenshotSave.Text = Language.Save;
             dlgSaveSingleImage.Filter = Language.SaveImageFilter;
             TabText = Language.Screenshots;

@@ -44,12 +44,12 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            Text = Language.MenuExternalTools;
-            TabText = Language.MenuExternalTools;
+            Text = Language.ExternalTool;
+            TabText = Language.ExternalTool;
 
-            NewToolToolstripButton.Text = Language.ButtonNew;
-            DeleteToolToolstripButton.Text = Language.OptionsThemeButtonDelete;
-            LaunchToolToolstripButton.Text = Language.ButtonLaunch;
+            NewToolToolstripButton.Text = Language._New;
+            DeleteToolToolstripButton.Text = Language.Delete;
+            LaunchToolToolstripButton.Text = Language._Launch;
 
             DisplayNameColumnHeader.Text = Language.DisplayName;
             FilenameColumnHeader.Text = Language.Filename;
@@ -57,7 +57,7 @@ namespace mRemoteNG.UI.Window
             WorkingDirColumnHeader.Text = Language.WorkingDirColumnHeader;
             WaitForExitColumnHeader.Text = Language.WaitForExit;
             TryToIntegrateColumnHeader.Text = Language.TryToIntegrate;
-            RunElevateHeader.Text = Language.RunElevateHeader;
+            RunElevateHeader.Text = Language.RunElevated;
             ShowOnToolbarColumnHeader.Text = Language.ShowOnToolbarColumnHeader;
 
             TryToIntegrateCheckBox.Text = Language.TryToIntegrate;
@@ -73,8 +73,8 @@ namespace mRemoteNG.UI.Window
             OptionsLabel.Text = Language.Options;
 
             WaitForExitCheckBox.Text = Language.WaitForExit;
-            BrowseButton.Text = Language.ButtonBrowse;
-            BrowseWorkingDir.Text = Language.ButtonBrowse;
+            BrowseButton.Text = Language._Browse;
+            BrowseWorkingDir.Text = Language._Browse;
             NewToolMenuItem.Text = Language.MenuNewExternalTool;
             DeleteToolMenuItem.Text = Language.MenuDeleteExternalTool;
             LaunchToolMenuItem.Text = Language.MenuLaunchExternalTool;

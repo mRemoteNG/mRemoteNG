@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Menu
             });
             Name = "mMenFile";
             Size = new System.Drawing.Size(37, 20);
-            Text = Language.MenuFile;
+            Text = Language._File;
             //DropDownOpening += mMenFile_DropDownOpening;
             DropDownClosed += OnDropDownClosed;
             // 
@@ -214,7 +214,7 @@ namespace mRemoteNG.UI.Menu
             });
             _mMenFileImport.Name = "mMenFileImport";
             _mMenFileImport.Size = new System.Drawing.Size(281, 22);
-            _mMenFileImport.Text = Language.ImportMenuItem;
+            _mMenFileImport.Text = Language._Import;
             // 
             // mMenFileImportFromFile
             // 
@@ -241,7 +241,7 @@ namespace mRemoteNG.UI.Menu
             // 
             _mMenFileExport.Name = "mMenFileExport";
             _mMenFileExport.Size = new System.Drawing.Size(281, 22);
-            _mMenFileExport.Text = Language.ExportToFileMenuItem;
+            _mMenFileExport.Text = Language._ExportToFile;
             _mMenFileExport.Click += mMenFileExport_Click;
             // 
             // mMenFileSep5
@@ -255,25 +255,25 @@ namespace mRemoteNG.UI.Menu
             _mMenFileExit.Name = "mMenFileExit";
             _mMenFileExit.ShortcutKeys = Keys.Alt | Keys.F4;
             _mMenFileExit.Size = new System.Drawing.Size(281, 22);
-            _mMenFileExit.Text = Language.MenuExit;
+            _mMenFileExit.Text = Language.Exit;
             _mMenFileExit.Click += mMenFileExit_Click;
         }
 
         public void ApplyLanguage()
         {
-            Text = Language.MenuFile;
+            Text = Language._File;
             _mMenFileNewConnection.Text = Language.NewConnection;
             _mMenFileNewFolder.Text = Language.NewFolder;
             _mMenFileNew.Text = Language.MenuNewConnectionFile;
             _mMenFileLoad.Text = Language.MenuOpenConnectionFile;
             _mMenFileSave.Text = Language.MenuSaveConnectionFile;
             _mMenFileSaveAs.Text = Language.MenuSaveConnectionFileAs;
-            _mMenFileImport.Text = Language.ImportMenuItem;
+            _mMenFileImport.Text = Language._Import;
             _mMenFileImportFromFile.Text = Language.ImportFromFileMenuItem;
             _mMenFileImportFromActiveDirectory.Text = Language.ImportAD;
             _mMenFileImportFromPortScan.Text = Language.ImportPortScan;
-            _mMenFileExport.Text = Language.ExportToFileMenuItem;
-            _mMenFileExit.Text = Language.MenuExit;
+            _mMenFileExport.Text = Language._ExportToFile;
+            _mMenFileExit.Text = Language.Exit;
         }
 
         #region File
@@ -329,7 +329,7 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileDuplicate.Enabled = false;
                     _mMenReconnectAll.Enabled = true;
                     _mMenFileDelete.Text = Language.Delete;
-                    _mMenFileRename.Text = Language.MenuRename;
+                    _mMenFileRename.Text = Language.Rename;
                     _mMenFileDuplicate.Text = Language.Duplicate;
                     _mMenReconnectAll.Text = Language.MenuReconnectAll;
                     break;
@@ -341,7 +341,7 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileDuplicate.Enabled = false;
                     _mMenReconnectAll.Enabled = true;
                     _mMenFileDelete.Text = Language.Delete;
-                    _mMenFileRename.Text = Language.MenuRename;
+                    _mMenFileRename.Text = Language.Rename;
                     _mMenFileDuplicate.Text = Language.Duplicate;
                     _mMenReconnectAll.Text = Language.MenuReconnectAll;
                     break;

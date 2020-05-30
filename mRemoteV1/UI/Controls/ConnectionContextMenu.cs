@@ -411,19 +411,19 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnectWithOptionsViewOnly.Text = Language.ConnectInViewOnlyMode;
             _cMenTreeDisconnect.Text = Language.Disconnect;
 
-            _cMenTreeToolsExternalApps.Text = Language.MenuExternalTools;
+            _cMenTreeToolsExternalApps.Text = Language._Tools;
             _cMenTreeToolsTransferFile.Text = Language.MenuTransferFile;
 
             _cMenTreeDuplicate.Text = Language.Duplicate;
             _cMenTreeRename.Text = Language.Rename;
             _cMenTreeDelete.Text = Language.Delete;
-            _cMenTreeCopyHostname.Text = Language.MenuCopyHostname;
+            _cMenTreeCopyHostname.Text = Language.CopyHostname;
 
-            _cMenTreeImport.Text = Language.ImportMenuItem;
+            _cMenTreeImport.Text = Language._Import;
             _cMenTreeImportFile.Text = Language.ImportFromFileMenuItem;
             _cMenTreeImportActiveDirectory.Text = Language.ImportAD;
             _cMenTreeImportPortScan.Text = Language.ImportPortScan;
-            _cMenTreeExportFile.Text = Language.ExportToFileMenuItem;
+            _cMenTreeExportFile.Text = Language._ExportToFile;
 
             _cMenTreeAddConnection.Text = Language.NewConnection;
             _cMenTreeAddFolder.Text = Language.NewFolder;

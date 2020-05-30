@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Controls
             // 
             _lblQuickConnect.Name = "lblQuickConnect";
             _lblQuickConnect.Size = new Size(55, 22);
-            _lblQuickConnect.Text = Language.LabelConnect;
+            _lblQuickConnect.Text = Language.Connect;
             _lblQuickConnect.Click += lblQuickConnect_Click;
             // 
             // cmbQuickConnect

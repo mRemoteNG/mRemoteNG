@@ -31,7 +31,7 @@ namespace mRemoteNG.Tree.Root
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryDisplay)),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNamePanel)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Panel)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPanel))]
         public override string Panel
         {

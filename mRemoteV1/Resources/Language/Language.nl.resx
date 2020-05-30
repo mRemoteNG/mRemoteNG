@@ -165,16 +165,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>Huidige Versie</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>&amp;Bladeren...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>&amp;Annuleren</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>Wijzig</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>&amp;Sluiten</value>
   </data>
   <data name="ButtonDefaultInheritance" xml:space="preserve">
@@ -189,7 +189,7 @@
   <data name="Icon" xml:space="preserve">
     <value>Icoon</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>&amp;Importeer</value>
   </data>
   <data name="Inheritance" xml:space="preserve">
@@ -198,19 +198,16 @@
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>PuTTY Starten</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>&amp;Nieuw</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Eigenschapen</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>&amp;Scan</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>&amp;Stop</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -237,7 +234,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>Protocol</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>Verwijzing</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">
@@ -308,7 +305,7 @@ VncSharp Versie {0}</value>
   <data name="WaitForExit" xml:space="preserve">
     <value>Wachten Voor Afsluiten</value>
   </data>
-  <data name="CheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>Controleer opnieuw</value>
   </data>
   <data name="CheckForUpdatesOnStartup" xml:space="preserve">
@@ -335,7 +332,7 @@ VncSharp Versie {0}</value>
   <data name="Filename" xml:space="preserve">
     <value>Bestandsnaam</value>
   </data>
-  <data name="ColumnMessage" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>Bericht</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
@@ -492,16 +489,16 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="Enc128BitLogonOnly" xml:space="preserve">
     <value>128-bit (aanmelding alleen)</value>
   </data>
-  <data name="EncBasic" xml:space="preserve">
+  <data name="Basic" xml:space="preserve">
     <value>Basis</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Volledig versleutelen connection bestand</value>
   </data>
-  <data name="EndIP" xml:space="preserve">
+  <data name="LastIp" xml:space="preserve">
     <value>Eind IP</value>
   </data>
-  <data name="EndPort" xml:space="preserve">
+  <data name="LastPort" xml:space="preserve">
     <value>Eind Poort</value>
   </data>
   <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
@@ -651,13 +648,13 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Interne Applicatie naam: {0}</value>
   </data>
-  <data name="LabelAddress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>Adres:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>Bij het sluiten van connecties:</value>
   </data>
-  <data name="LabelConnect" xml:space="preserve">
+  <data name="_Connect" xml:space="preserve">
     <value>&amp;Verbind:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
@@ -669,7 +666,7 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="LabelHostname" xml:space="preserve">
     <value>Hostnaam:</value>
   </data>
-  <data name="LabelPortableEdition" xml:space="preserve">
+  <data name="PortableEdition" xml:space="preserve">
     <value>Mobiele Editie</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
@@ -732,7 +729,7 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Verbindingen en Configuratie</value>
   </data>
-  <data name="MenuCopy" xml:space="preserve">
+  <data name="Copy" xml:space="preserve">
     <value>Kopiëren</value>
   </data>
   <data name="CtrlAltDel" xml:space="preserve">
@@ -750,7 +747,7 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Verwijder Map...</value>
   </data>
-  <data name="MenuDonate" xml:space="preserve">
+  <data name="Donate" xml:space="preserve">
     <value>Doneer</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
@@ -762,25 +759,22 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuDuplicateTab" xml:space="preserve">
     <value>Dupliceer Tab</value>
   </data>
-  <data name="MenuExit" xml:space="preserve">
+  <data name="Exit" xml:space="preserve">
     <value>Suiten</value>
-  </data>
-  <data name="MenuExternalTools" xml:space="preserve">
-    <value>Externe Applicaties</value>
   </data>
   <data name="MenuExternalToolsToolbar" xml:space="preserve">
     <value>Externe Applicaties menubalk</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
+  <data name="_File" xml:space="preserve">
     <value>&amp;Bestand</value>
   </data>
-  <data name="MenuHelp" xml:space="preserve">
+  <data name="_Help" xml:space="preserve">
     <value>&amp;Help</value>
   </data>
   <data name="MenuHelpContents" xml:space="preserve">
     <value>mRemoteNG Help</value>
   </data>
-  <data name="MenuJumpTo" xml:space="preserve">
+  <data name="JumpTo" xml:space="preserve">
     <value>Ga naar</value>
   </data>
   <data name="MenuLaunchExternalTool" xml:space="preserve">
@@ -792,16 +786,13 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuNewExternalTool" xml:space="preserve">
     <value>Nieuwe Externe Applicatie</value>
   </data>
-  <data name="MenuNotifications" xml:space="preserve">
+  <data name="Notifications" xml:space="preserve">
     <value>Notificaties</value>
   </data>
-  <data name="MenuNotificationsCopyAll" xml:space="preserve">
+  <data name="CopyAll" xml:space="preserve">
     <value>Kopieër alles</value>
   </data>
-  <data name="MenuNotificationsDelete" xml:space="preserve">
-    <value>Verwijder</value>
-  </data>
-  <data name="MenuNotificationsDeleteAll" xml:space="preserve">
+  <data name="DeleteAll" xml:space="preserve">
     <value>Verwijder alles</value>
   </data>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
@@ -810,7 +801,7 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="Options" xml:space="preserve">
     <value>Opties</value>
   </data>
-  <data name="MenuPortScan" xml:space="preserve">
+  <data name="PortScan" xml:space="preserve">
     <value>Poort Scan</value>
   </data>
   <data name="MenuQuickConnectToolbar" xml:space="preserve">
@@ -821,9 +812,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="MenuRefreshScreen" xml:space="preserve">
     <value>Vernieuw Scherm (VNC)</value>
-  </data>
-  <data name="MenuRename" xml:space="preserve">
-    <value>Hernoem</value>
   </data>
   <data name="MenuRenameConnection" xml:space="preserve">
     <value>Hernoem Connectie</value>
@@ -867,13 +855,13 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuSupportForum" xml:space="preserve">
     <value>Ondersteunings Forum</value>
   </data>
-  <data name="MenuTools" xml:space="preserve">
+  <data name="_Tools" xml:space="preserve">
     <value>&amp;Extra</value>
   </data>
   <data name="MenuTransferFile" xml:space="preserve">
     <value>Bestandsoverdracht (SSH)</value>
   </data>
-  <data name="MenuView" xml:space="preserve">
+  <data name="_View" xml:space="preserve">
     <value>&amp;Beeld</value>
   </data>
   <data name="ViewOnly" xml:space="preserve">
@@ -943,10 +931,10 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="OptionsTabTheme" xml:space="preserve">
     <value>Thema</value>
   </data>
-  <data name="OptionsThemeButtonDelete" xml:space="preserve">
+  <data name="_Delete" xml:space="preserve">
     <value>&amp;Verwijder</value>
   </data>
-  <data name="OptionsThemeButtonNew" xml:space="preserve">
+  <data name="_New" xml:space="preserve">
     <value>&amp;Nieuw</value>
   </data>
   <data name="PanelName" xml:space="preserve">
@@ -1135,10 +1123,10 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyNameDescription" xml:space="preserve">
     <value>Omschrijving</value>
   </data>
-  <data name="PropertyNameDisplayThemes" xml:space="preserve">
+  <data name="DisplayThemes" xml:space="preserve">
     <value>Thema's weergeven</value>
   </data>
-  <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
+  <data name="DisplayWallpaper" xml:space="preserve">
     <value>Bureaubladachtergrond</value>
   </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
@@ -1147,13 +1135,13 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>Lettertype vloeiend maken</value>
   </data>
-  <data name="PropertyNameEncoding" xml:space="preserve">
+  <data name="Encoding" xml:space="preserve">
     <value>Codering</value>
   </data>
   <data name="PropertyNameEncryptionStrength" xml:space="preserve">
     <value>Coderingsniveau</value>
   </data>
-  <data name="PropertyNameExternalTool" xml:space="preserve">
+  <data name="ExternalTool" xml:space="preserve">
     <value>Externe Applicatie</value>
   </data>
   <data name="PropertyNameExternalToolAfter" xml:space="preserve">
@@ -1165,10 +1153,10 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MAC Adres</value>
   </data>
-  <data name="PropertyNameName" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Naam</value>
   </data>
-  <data name="PropertyNamePanel" xml:space="preserve">
+  <data name="Panel" xml:space="preserve">
     <value>Paneel</value>
   </data>
   <data name="Password" xml:space="preserve">
@@ -1204,7 +1192,7 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
     <value>Toetsencombinaties</value>
   </data>
-  <data name="PropertyNameRedirectPorts" xml:space="preserve">
+  <data name="Ports" xml:space="preserve">
     <value>Poorten</value>
   </data>
   <data name="PropertyNameRedirectPrinters" xml:space="preserve">
@@ -1234,19 +1222,19 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Gebruiker veld</value>
   </data>
-  <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
+  <data name="ProxyAddress" xml:space="preserve">
     <value>Proxy Adres</value>
   </data>
-  <data name="PropertyNameVNCProxyPassword" xml:space="preserve">
+  <data name="ProxyPassword" xml:space="preserve">
     <value>Proxy Wachtwoord</value>
   </data>
-  <data name="PropertyNameVNCProxyPort" xml:space="preserve">
+  <data name="ProxyPort" xml:space="preserve">
     <value>Proxy Poort</value>
   </data>
-  <data name="PropertyNameVNCProxyType" xml:space="preserve">
+  <data name="ProxyType" xml:space="preserve">
     <value>Proxy-type</value>
   </data>
-  <data name="PropertyNameVNCProxyUsername" xml:space="preserve">
+  <data name="ProxyUsername" xml:space="preserve">
     <value>Proxy Gebruikersnaam</value>
   </data>
   <data name="ProtocolEventDisconnected" xml:space="preserve">
@@ -1312,7 +1300,7 @@ Bericht:
   <data name="QuickConnectFailed" xml:space="preserve">
     <value>Het aanmaken van een snelle connectie is mislukt</value>
   </data>
-  <data name="RadioCloseWarnAll" xml:space="preserve">
+  <data name="_CloseWarnAll" xml:space="preserve">
     <value>&amp;Waarschuw bij het sluiten van connecties</value>
   </data>
   <data name="RadioCloseWarnExit" xml:space="preserve">
@@ -1324,10 +1312,10 @@ Bericht:
   <data name="RadioCloseWarnNever" xml:space="preserve">
     <value>Waarschuw &amp;niet bij het sluiten van connecties</value>
   </data>
-  <data name="RAW" xml:space="preserve">
+  <data name="Raw" xml:space="preserve">
     <value>RAW</value>
   </data>
-  <data name="RDP" xml:space="preserve">
+  <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
   <data name="RDP16777216Colors" xml:space="preserve">
@@ -1450,7 +1438,7 @@ Bericht:
   <data name="RDPSoundBringToThisComputer" xml:space="preserve">
     <value>Afspelen op deze computer</value>
   </data>
-  <data name="RDPSoundDoNotPlay" xml:space="preserve">
+  <data name="DoNotPlay" xml:space="preserve">
     <value>Niet afspelen</value>
   </data>
   <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
@@ -1579,7 +1567,7 @@ Bericht:
   <data name="SwitchToErrorsAndInfos" xml:space="preserve">
     <value>Schakel Notificatiepaneel in:</value>
   </data>
-  <data name="TabAdvanced" xml:space="preserve">
+  <data name="Advanced" xml:space="preserve">
     <value>Geavanceerd</value>
   </data>
   <data name="TabsAndPanels" xml:space="preserve">
@@ -1646,13 +1634,13 @@ mRemoteNG zal nu worden gesloten en beginnen met de installatie.</value>
   <data name="UpdateFrequencyCustom" xml:space="preserve">
     <value>Elke {0} dag(en)</value>
   </data>
-  <data name="UpdateFrequencyDaily" xml:space="preserve">
+  <data name="Daily" xml:space="preserve">
     <value>Dagelijks</value>
   </data>
-  <data name="UpdateFrequencyMonthly" xml:space="preserve">
+  <data name="Monthly" xml:space="preserve">
     <value>Maandelijks</value>
   </data>
-  <data name="UpdateFrequencyWeekly" xml:space="preserve">
+  <data name="Weekly" xml:space="preserve">
     <value>Wekelijks</value>
   </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">

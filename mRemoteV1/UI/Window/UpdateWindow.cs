@@ -59,9 +59,9 @@ namespace mRemoteNG.UI.Window
         {
             Text = Language.MenuCheckForUpdates;
             TabText = Language.MenuCheckForUpdates;
-            btnCheckForUpdate.Text = Language.CheckForUpdate;
+            btnCheckForUpdate.Text = Language.CheckAgain;
             btnDownload.Text = Runtime.IsPortableEdition
-                ? Language.DownloadPortable
+                ? Language.Download
                 : Language.DownloadAndInstall;
             lblChangeLogLabel.Text = Language.Changelog;
             lblInstalledVersion.Text = Language.Version;

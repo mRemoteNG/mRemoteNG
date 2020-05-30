@@ -36,11 +36,11 @@ namespace mRemoteNG.UI
             {
                 Language.ConfigurationCreateNew,
                 Language.OpenADifferentFile,
-                Language.MenuExit
+                Language.Exit
             };
 
             if (showCancelButton)
-                commandButtons.Add(Language.ButtonCancel);
+                commandButtons.Add(Language._Cancel);
 
             var answered = false;
             while (!answered)

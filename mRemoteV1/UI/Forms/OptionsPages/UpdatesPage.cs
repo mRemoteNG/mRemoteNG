@@ -46,7 +46,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblReleaseChannelExplanation.Text = Language.ReleaseChannelExplanation;
 
             chkUseProxyForAutomaticUpdates.Text = Language.CheckboxUpdateUseProxy;
-            lblProxyAddress.Text = Language.LabelAddress;
+            lblProxyAddress.Text = Language.Address;
             lblProxyPort.Text = Language.Port;
 
             chkUseProxyAuthentication.Text = Language.CheckboxProxyAuthentication;
@@ -61,9 +61,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkCheckForUpdatesOnStartup.Checked = Settings.Default.CheckForUpdatesOnStartup;
             cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
             cboUpdateCheckFrequency.Items.Clear();
-            var nDaily = cboUpdateCheckFrequency.Items.Add(Language.UpdateFrequencyDaily);
-            var nWeekly = cboUpdateCheckFrequency.Items.Add(Language.UpdateFrequencyWeekly);
-            var nMonthly = cboUpdateCheckFrequency.Items.Add(Language.UpdateFrequencyMonthly);
+            var nDaily = cboUpdateCheckFrequency.Items.Add(Language.Daily);
+            var nWeekly = cboUpdateCheckFrequency.Items.Add(Language.Weekly);
+            var nMonthly = cboUpdateCheckFrequency.Items.Add(Language.Monthly);
             if (Settings.Default.CheckForUpdatesFrequencyDays < 1)
             {
                 chkCheckForUpdatesOnStartup.Checked = false;
@@ -129,15 +129,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.SaveSettings();
 
             Settings.Default.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked;
-            if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.UpdateFrequencyDaily)
+            if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.Daily)
             {
                 Settings.Default.CheckForUpdatesFrequencyDays = 1;
             }
-            else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.UpdateFrequencyWeekly)
+            else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.Weekly)
             {
                 Settings.Default.CheckForUpdatesFrequencyDays = 7;
             }
-            else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.UpdateFrequencyMonthly)
+            else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.Monthly)
             {
                 Settings.Default.CheckForUpdatesFrequencyDays = 31;
             }
@@ -254,12 +254,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
 
                 CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestSucceeded, "",
-                                           Language.ButtonOK, false);
+                                           Language._Ok, false);
             }
             catch (Exception ex)
             {
                 CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestFailed,
-                                           MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language.ButtonOK,
+                                           MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language._Ok,
                                            false,
                                            ESysIcons.Error,
                                            0);

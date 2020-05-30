@@ -54,10 +54,10 @@ namespace mRemoteNG.UI.Forms
             labelStackTraceHeader.Text = Language.StackTrace;
             labelEnvironment.Text = Language.Environment;
             buttonCreateBug.Text = Language.MenuReportBug;
-            buttonCopyAll.Text = Language.MenuNotificationsCopyAll;
+            buttonCopyAll.Text = Language.CopyAll;
             buttonClose.Text = _isFatal
-                ? Language.MenuExit
-                : Language.ButtonClose;
+                ? Language.Exit
+                : Language._Close;
         }
 
         private void buttonCopyAll_Click(object sender, EventArgs e)

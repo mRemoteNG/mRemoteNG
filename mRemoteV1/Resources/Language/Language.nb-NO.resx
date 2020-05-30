@@ -165,16 +165,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>Gjeldende versjon</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>&amp;Bla gjennom...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>&amp;Avbryt</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>Endre</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>&amp;Lukk</value>
   </data>
   <data name="ButtonDefaultInheritance" xml:space="preserve">
@@ -189,7 +189,7 @@
   <data name="Icon" xml:space="preserve">
     <value>Ikon</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>&amp;Importer</value>
   </data>
   <data name="Inheritance" xml:space="preserve">
@@ -198,19 +198,16 @@
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>Start PuTTY</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>&amp;Ny</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Egenskaper</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>&amp;Søk</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>&amp;Stopp</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -237,7 +234,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>Protokoll</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>Omdiriger</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">
@@ -308,7 +305,7 @@ VncSharp Control Version {0}</value>
   <data name="WaitForExit" xml:space="preserve">
     <value>Vent på avslutning</value>
   </data>
-  <data name="CheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>Sjekk igjen</value>
   </data>
   <data name="CheckForUpdatesOnStartup" xml:space="preserve">
@@ -335,7 +332,7 @@ VncSharp Control Version {0}</value>
   <data name="Filename" xml:space="preserve">
     <value>Filnavn</value>
   </data>
-  <data name="ColumnMessage" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>Melding</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
@@ -492,16 +489,16 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Enc128BitLogonOnly" xml:space="preserve">
     <value>128-biters (kun pålogging)</value>
   </data>
-  <data name="EncBasic" xml:space="preserve">
+  <data name="Basic" xml:space="preserve">
     <value>Grunnleggende</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Krypter tilkoblingsfil fullstendig</value>
   </data>
-  <data name="EndIP" xml:space="preserve">
+  <data name="LastIp" xml:space="preserve">
     <value>Siste IP</value>
   </data>
-  <data name="EndPort" xml:space="preserve">
+  <data name="LastPort" xml:space="preserve">
     <value>Siste port</value>
   </data>
   <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
@@ -651,13 +648,13 @@ Starter med ny tilkoblingsfil.</value>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Int App-tittel: {0}</value>
   </data>
-  <data name="LabelAddress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>Adresse:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>Ved lukking av tilkoblinger:</value>
   </data>
-  <data name="LabelConnect" xml:space="preserve">
+  <data name="_Connect" xml:space="preserve">
     <value>&amp;Koble til:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
@@ -669,7 +666,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="LabelHostname" xml:space="preserve">
     <value>Vertsnavn:</value>
   </data>
-  <data name="LabelPortableEdition" xml:space="preserve">
+  <data name="PortableEdition" xml:space="preserve">
     <value>Portable Edition</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
@@ -732,7 +729,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Tilkoblinger og oppsett</value>
   </data>
-  <data name="MenuCopy" xml:space="preserve">
+  <data name="Copy" xml:space="preserve">
     <value>Kopier</value>
   </data>
   <data name="CtrlAltDel" xml:space="preserve">
@@ -750,7 +747,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Slett mappe...</value>
   </data>
-  <data name="MenuDonate" xml:space="preserve">
+  <data name="Donate" xml:space="preserve">
     <value>Donér</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
@@ -762,25 +759,22 @@ Starter med ny tilkoblingsfil.</value>
   <data name="MenuDuplicateTab" xml:space="preserve">
     <value>Kopier fane</value>
   </data>
-  <data name="MenuExit" xml:space="preserve">
+  <data name="Exit" xml:space="preserve">
     <value>A&amp;vslutt</value>
-  </data>
-  <data name="MenuExternalTools" xml:space="preserve">
-    <value>Eksterne verktøy</value>
   </data>
   <data name="MenuExternalToolsToolbar" xml:space="preserve">
     <value>Eksterne verktøy-verktøylinje</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
+  <data name="_File" xml:space="preserve">
     <value>&amp;Fil</value>
   </data>
-  <data name="MenuHelp" xml:space="preserve">
+  <data name="_Help" xml:space="preserve">
     <value>&amp;Hjelp</value>
   </data>
   <data name="MenuHelpContents" xml:space="preserve">
     <value>mRemoteNG-hjelp</value>
   </data>
-  <data name="MenuJumpTo" xml:space="preserve">
+  <data name="JumpTo" xml:space="preserve">
     <value>Hopp til</value>
   </data>
   <data name="MenuLaunchExternalTool" xml:space="preserve">
@@ -792,16 +786,13 @@ Starter med ny tilkoblingsfil.</value>
   <data name="MenuNewExternalTool" xml:space="preserve">
     <value>Nytt eksternt verktøy</value>
   </data>
-  <data name="MenuNotifications" xml:space="preserve">
+  <data name="Notifications" xml:space="preserve">
     <value>Varslinger</value>
   </data>
-  <data name="MenuNotificationsCopyAll" xml:space="preserve">
+  <data name="CopyAll" xml:space="preserve">
     <value>Kopier alle</value>
   </data>
-  <data name="MenuNotificationsDelete" xml:space="preserve">
-    <value>Slett</value>
-  </data>
-  <data name="MenuNotificationsDeleteAll" xml:space="preserve">
+  <data name="DeleteAll" xml:space="preserve">
     <value>Slett alle</value>
   </data>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
@@ -810,7 +801,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Options" xml:space="preserve">
     <value>Alternativer</value>
   </data>
-  <data name="MenuPortScan" xml:space="preserve">
+  <data name="PortScan" xml:space="preserve">
     <value>Portskanning</value>
   </data>
   <data name="MenuQuickConnectToolbar" xml:space="preserve">
@@ -821,9 +812,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="MenuRefreshScreen" xml:space="preserve">
     <value>Oppdater skjerm (VNC)</value>
-  </data>
-  <data name="MenuRename" xml:space="preserve">
-    <value>Gi nytt navn</value>
   </data>
   <data name="MenuRenameConnection" xml:space="preserve">
     <value>Gi nytt navn til tilkobling</value>
@@ -867,13 +855,13 @@ Starter med ny tilkoblingsfil.</value>
   <data name="MenuSupportForum" xml:space="preserve">
     <value>Forum for brukerstøtte</value>
   </data>
-  <data name="MenuTools" xml:space="preserve">
+  <data name="_Tools" xml:space="preserve">
     <value>V&amp;erktøy</value>
   </data>
   <data name="MenuTransferFile" xml:space="preserve">
     <value>Overfør fil (SSH)</value>
   </data>
-  <data name="MenuView" xml:space="preserve">
+  <data name="_View" xml:space="preserve">
     <value>&amp;Vis</value>
   </data>
   <data name="ViewOnly" xml:space="preserve">
@@ -942,10 +930,10 @@ Starter med ny tilkoblingsfil.</value>
   <data name="OptionsTabTheme" xml:space="preserve">
     <value>Tema</value>
   </data>
-  <data name="OptionsThemeButtonDelete" xml:space="preserve">
+  <data name="_Delete" xml:space="preserve">
     <value>&amp;Slett</value>
   </data>
-  <data name="OptionsThemeButtonNew" xml:space="preserve">
+  <data name="_New" xml:space="preserve">
     <value>&amp;Ny</value>
   </data>
   <data name="PanelName" xml:space="preserve">
@@ -1134,10 +1122,10 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PropertyNameDescription" xml:space="preserve">
     <value>Beskrivelse</value>
   </data>
-  <data name="PropertyNameDisplayThemes" xml:space="preserve">
+  <data name="DisplayThemes" xml:space="preserve">
     <value>Visningstemaer</value>
   </data>
-  <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
+  <data name="DisplayWallpaper" xml:space="preserve">
     <value>Vis bakgrunnbilde</value>
   </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
@@ -1146,13 +1134,13 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>Skriftutjevning</value>
   </data>
-  <data name="PropertyNameEncoding" xml:space="preserve">
+  <data name="Encoding" xml:space="preserve">
     <value>Tekstkoding</value>
   </data>
   <data name="PropertyNameEncryptionStrength" xml:space="preserve">
     <value>Krypteringsnivå</value>
   </data>
-  <data name="PropertyNameExternalTool" xml:space="preserve">
+  <data name="ExternalTool" xml:space="preserve">
     <value>Eksternt verktøy</value>
   </data>
   <data name="PropertyNameExternalToolAfter" xml:space="preserve">
@@ -1164,10 +1152,10 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MAC-adresse</value>
   </data>
-  <data name="PropertyNameName" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Navn</value>
   </data>
-  <data name="PropertyNamePanel" xml:space="preserve">
+  <data name="Panel" xml:space="preserve">
     <value>Panel</value>
   </data>
   <data name="Password" xml:space="preserve">
@@ -1203,7 +1191,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
     <value>Tastekombinasjoner</value>
   </data>
-  <data name="PropertyNameRedirectPorts" xml:space="preserve">
+  <data name="Ports" xml:space="preserve">
     <value>Porter</value>
   </data>
   <data name="PropertyNameRedirectPrinters" xml:space="preserve">
@@ -1233,19 +1221,19 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Brukerfelt</value>
   </data>
-  <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
+  <data name="ProxyAddress" xml:space="preserve">
     <value>Proxy-adresse</value>
   </data>
-  <data name="PropertyNameVNCProxyPassword" xml:space="preserve">
+  <data name="ProxyPassword" xml:space="preserve">
     <value>Proxy-passord</value>
   </data>
-  <data name="PropertyNameVNCProxyPort" xml:space="preserve">
+  <data name="ProxyPort" xml:space="preserve">
     <value>Proxy-port</value>
   </data>
-  <data name="PropertyNameVNCProxyType" xml:space="preserve">
+  <data name="ProxyType" xml:space="preserve">
     <value>Proxy-type</value>
   </data>
-  <data name="PropertyNameVNCProxyUsername" xml:space="preserve">
+  <data name="ProxyUsername" xml:space="preserve">
     <value>Proxy-brukernavn</value>
   </data>
   <data name="ProtocolEventDisconnected" xml:space="preserve">
@@ -1309,7 +1297,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="QuickConnectFailed" xml:space="preserve">
     <value>Oppretting av hurtigtilkobling mislyktes</value>
   </data>
-  <data name="RadioCloseWarnAll" xml:space="preserve">
+  <data name="_CloseWarnAll" xml:space="preserve">
     <value>&amp;Advar meg når tilkoblinger lukkes</value>
   </data>
   <data name="RadioCloseWarnExit" xml:space="preserve">
@@ -1321,10 +1309,10 @@ Starter med ny tilkoblingsfil.</value>
   <data name="RadioCloseWarnNever" xml:space="preserve">
     <value>&amp;Ikke advar meg når tilkoblinger lukkes</value>
   </data>
-  <data name="RAW" xml:space="preserve">
+  <data name="Raw" xml:space="preserve">
     <value>RAW</value>
   </data>
-  <data name="RDP" xml:space="preserve">
+  <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
   <data name="RDP16777216Colors" xml:space="preserve">
@@ -1447,7 +1435,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="RDPSoundBringToThisComputer" xml:space="preserve">
     <value>Hent til denne datamaskinen</value>
   </data>
-  <data name="RDPSoundDoNotPlay" xml:space="preserve">
+  <data name="DoNotPlay" xml:space="preserve">
     <value>Ikke spill av</value>
   </data>
   <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
@@ -1576,7 +1564,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="SwitchToErrorsAndInfos" xml:space="preserve">
     <value>Bytte til varslingspanelet ved:</value>
   </data>
-  <data name="TabAdvanced" xml:space="preserve">
+  <data name="Advanced" xml:space="preserve">
     <value>Avansert</value>
   </data>
   <data name="TabsAndPanels" xml:space="preserve">
@@ -1643,13 +1631,13 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
   <data name="UpdateFrequencyCustom" xml:space="preserve">
     <value>Hver {0} dag</value>
   </data>
-  <data name="UpdateFrequencyDaily" xml:space="preserve">
+  <data name="Daily" xml:space="preserve">
     <value>Daglig</value>
   </data>
-  <data name="UpdateFrequencyMonthly" xml:space="preserve">
+  <data name="Monthly" xml:space="preserve">
     <value>Månedlig</value>
   </data>
-  <data name="UpdateFrequencyWeekly" xml:space="preserve">
+  <data name="Weekly" xml:space="preserve">
     <value>Ukentlig</value>
   </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
@@ -1703,7 +1691,7 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
-  <data name="ButtonLaunch" xml:space="preserve">
+  <data name="_Launch" xml:space="preserve">
     <value>&amp;Start</value>
   </data>
   <data name="CommandExitProgram" xml:space="preserve">
@@ -1712,7 +1700,7 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
   <data name="CommandOpenConnectionFile" xml:space="preserve">
     <value>Åpne tilkoblingsfil</value>
   </data>
-  <data name="CommandTryAgain" xml:space="preserve">
+  <data name="_TryAgain" xml:space="preserve">
     <value>Prøv igjen</value>
   </data>
   <data name="ConnectNoCredentials" xml:space="preserve">
@@ -1750,7 +1738,7 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="ExportSelectedFolder" xml:space="preserve">
     <value>Eksporter valgt mappe</value>
   </data>
-  <data name="ExportToFileMenuItem" xml:space="preserve">
+  <data name="_ExportToFile" xml:space="preserve">
     <value>&amp;Eksporter til fil...</value>
   </data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
@@ -1776,9 +1764,6 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   </data>
   <data name="ImportFromFileMenuItem" xml:space="preserve">
     <value>Importer fra &amp;fil...</value>
-  </data>
-  <data name="ImportMenuItem" xml:space="preserve">
-    <value>&amp;Import</value>
   </data>
   <data name="LoadFromSqlFailedContent" xml:space="preserve">
     <value>Tilkoblingsinformasjonen kunne ikke lastes fra SQL server.</value>
@@ -1831,7 +1816,7 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="MenuReconnectAll" xml:space="preserve">
     <value>&amp;Koble til alle åpne tilkoblinger på nytt</value>
   </data>
-  <data name="RDPOverallConnectionTimeout" xml:space="preserve">
+  <data name="RdpOverallConnectionTimeout" xml:space="preserve">
     <value>RDP tidsavbrudd</value>
   </data>
   <data name="NodeAlreadyInFolder" xml:space="preserve">
@@ -1858,13 +1843,13 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="EncryptionKeyDerivationIterations" xml:space="preserve">
     <value>Antall iterasjoner for nøkkelderivasjon</value>
   </data>
-  <data name="RDPSoundQualityDynamic" xml:space="preserve">
+  <data name="Dynamic" xml:space="preserve">
     <value>Dynamisk</value>
   </data>
-  <data name="RDPSoundQualityHigh" xml:space="preserve">
+  <data name="High" xml:space="preserve">
     <value>Høy</value>
   </data>
-  <data name="RDPSoundQualityMedium" xml:space="preserve">
+  <data name="Medium" xml:space="preserve">
     <value>Medium</value>
   </data>
   <data name="PropertyDescriptionSoundQuality" xml:space="preserve">
@@ -1876,7 +1861,7 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="UpdatePortableDownloadComplete" xml:space="preserve">
     <value>Nedlasting ferdig!</value>
   </data>
-  <data name="DownloadPortable" xml:space="preserve">
+  <data name="Download" xml:space="preserve">
     <value>Nedlasting</value>
   </data>
   <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
@@ -2029,9 +2014,6 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="RunElevated" xml:space="preserve">
     <value>Kjør elevert</value>
   </data>
-  <data name="RunElevateHeader" xml:space="preserve">
-    <value>Elevering</value>
-  </data>
   <data name="ShowOnToolbarColumnHeader" xml:space="preserve">
     <value>Vis på verktøylinjens kolonne</value>
   </data>
@@ -2049,9 +2031,6 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   </data>
   <data name="MenuLockToolbars" xml:space="preserve">
     <value>Lås verktøylinjeposisjoner</value>
-  </data>
-  <data name="MenuMultiSshToolbar" xml:space="preserve">
-    <value>Multi SSH-verktøylinje</value>
   </data>
   <data name="AdvancedSecurityOptions" xml:space="preserve">
     <value>Avanserte sikkerhetsvalg</value>
@@ -2107,7 +2086,7 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
     <value>Dette unntaket gjør at mRemoteNG må lukkes</value>
   </data>
-  <data name="MenuCopyHostname" xml:space="preserve">
+  <data name="CopyHostname" xml:space="preserve">
     <value>Kopier vertsnavn</value>
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
@@ -2127,10 +2106,10 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
 Beta-kanalen inkluderer beta- og release candidate-versjoner.
 Development-kanalen inkluderer alpha-, beta- og release candidate-versjoner.</value>
   </data>
-  <data name="ButtonApply" xml:space="preserve">
+  <data name="Apply" xml:space="preserve">
     <value>Bruk</value>
   </data>
-  <data name="CategoryProxy" xml:space="preserve">
+  <data name="Proxy" xml:space="preserve">
     <value>Proxy-innstillinger</value>
   </data>
   <data name="MultiSSH" xml:space="preserve">

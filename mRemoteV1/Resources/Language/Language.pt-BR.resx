@@ -162,16 +162,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>Versão atual</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>&amp; Procurar...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>&amp; Cancelar</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>Alterar</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>&amp; Fechar</value>
   </data>
   <data name="ButtonDefaultInheritance" xml:space="preserve">
@@ -186,7 +186,7 @@
   <data name="Icon" xml:space="preserve">
     <value>Ícone</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>&amp; Importar</value>
   </data>
   <data name="Inheritance" xml:space="preserve">
@@ -195,19 +195,16 @@
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>Executar o PuTTY</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>&amp; Novo</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp; OK</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Propriedades</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>&amp; Scanear</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>&amp; Parar</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -234,7 +231,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>Protocolo</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>Redirecionar</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">
@@ -283,7 +280,7 @@ Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteN
   <data name="WaitForExit" xml:space="preserve">
     <value>Esperar para sair</value>
   </data>
-  <data name="CheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>Verificar novamente</value>
   </data>
   <data name="CheckForUpdatesOnStartup" xml:space="preserve">
@@ -304,7 +301,7 @@ Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteN
   <data name="Filename" xml:space="preserve">
     <value>Nome do arquivo</value>
   </data>
-  <data name="ColumnMessage" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>Mensagem</value>
   </data>
   <data name="ComponentsCheck" xml:space="preserve">

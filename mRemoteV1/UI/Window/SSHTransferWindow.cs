@@ -357,7 +357,7 @@ namespace mRemoteNG.UI.Window
             grpFiles.Text = Language.GroupboxFiles;
             lblLocalFile.Text = Language.LocalFile + ":";
             lblRemoteFile.Text = Language.RemoteFile + ":";
-            btnBrowse.Text = Language.ButtonBrowse;
+            btnBrowse.Text = Language._Browse;
             grpConnection.Text = Language.Connection;
             lblProtocol.Text = Language.Protocol;
             lblPassword.Text = Language.Password;

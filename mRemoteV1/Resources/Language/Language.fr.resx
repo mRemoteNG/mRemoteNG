@@ -165,16 +165,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>Dernière version</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>&amp;Parcourir...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>&amp;Annuler</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>Changer</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>&amp;Fermer</value>
   </data>
   <data name="ButtonDefaultInheritance" xml:space="preserve">
@@ -189,7 +189,7 @@
   <data name="Icon" xml:space="preserve">
     <value>Icône</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>&amp;Importer</value>
   </data>
   <data name="Inheritance" xml:space="preserve">
@@ -198,19 +198,16 @@
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>Lancement de PuTTY</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>&amp;Nouveau</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Propriétés</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>&amp;Scanner</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>&amp;Arrêter</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -237,7 +234,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>Protocole</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>Rediriger</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">
@@ -300,7 +297,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="WaitForExit" xml:space="preserve">
     <value>En attente de fermeture</value>
   </data>
-  <data name="CheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>Vérifier Encore une fois</value>
   </data>
   <data name="CheckForUpdatesOnStartup" xml:space="preserve">
@@ -327,7 +324,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="Filename" xml:space="preserve">
     <value>Nom du fichier</value>
   </data>
-  <data name="ColumnMessage" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
@@ -483,16 +480,16 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="Enc128BitLogonOnly" xml:space="preserve">
     <value>128 bits (ouverture de session)</value>
   </data>
-  <data name="EncBasic" xml:space="preserve">
+  <data name="Basic" xml:space="preserve">
     <value>Basique</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Chiffrer complètement le fichier de connexion</value>
   </data>
-  <data name="EndIP" xml:space="preserve">
+  <data name="LastIp" xml:space="preserve">
     <value>IP de fin</value>
   </data>
-  <data name="EndPort" xml:space="preserve">
+  <data name="LastPort" xml:space="preserve">
     <value>Port de fin</value>
   </data>
   <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
@@ -642,13 +639,13 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="IntAppTitle" xml:space="preserve">
     <value>Titre Int App: {0}</value>
   </data>
-  <data name="LabelAddress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>Adresse :</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>Lors de la fermeture des connexions :</value>
   </data>
-  <data name="LabelConnect" xml:space="preserve">
+  <data name="_Connect" xml:space="preserve">
     <value>&amp;Connecter:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
@@ -660,7 +657,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="LabelHostname" xml:space="preserve">
     <value>Nom d'hôte :</value>
   </data>
-  <data name="LabelPortableEdition" xml:space="preserve">
+  <data name="PortableEdition" xml:space="preserve">
     <value>Édition Portable</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
@@ -723,7 +720,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Connexions et configuration</value>
   </data>
-  <data name="MenuCopy" xml:space="preserve">
+  <data name="Copy" xml:space="preserve">
     <value>Copier</value>
   </data>
   <data name="CtrlAltDel" xml:space="preserve">
@@ -741,7 +738,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Supprimer le dossier...</value>
   </data>
-  <data name="MenuDonate" xml:space="preserve">
+  <data name="Donate" xml:space="preserve">
     <value>Faire un don</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
@@ -753,25 +750,22 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="MenuDuplicateTab" xml:space="preserve">
     <value>Dupliquer l'onglet</value>
   </data>
-  <data name="MenuExit" xml:space="preserve">
+  <data name="Exit" xml:space="preserve">
     <value>Quitter</value>
-  </data>
-  <data name="MenuExternalTools" xml:space="preserve">
-    <value>Outils externes</value>
   </data>
   <data name="MenuExternalToolsToolbar" xml:space="preserve">
     <value>Barre d'outils externes</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
+  <data name="_File" xml:space="preserve">
     <value>&amp;Fichier</value>
   </data>
-  <data name="MenuHelp" xml:space="preserve">
+  <data name="_Help" xml:space="preserve">
     <value>&amp;Aide</value>
   </data>
   <data name="MenuHelpContents" xml:space="preserve">
     <value>Aide mRemoteNG</value>
   </data>
-  <data name="MenuJumpTo" xml:space="preserve">
+  <data name="JumpTo" xml:space="preserve">
     <value>Aller à</value>
   </data>
   <data name="MenuLaunchExternalTool" xml:space="preserve">
@@ -783,16 +777,13 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="MenuNewExternalTool" xml:space="preserve">
     <value>Nouvel outil externe</value>
   </data>
-  <data name="MenuNotifications" xml:space="preserve">
+  <data name="Notifications" xml:space="preserve">
     <value>Notifications</value>
   </data>
-  <data name="MenuNotificationsCopyAll" xml:space="preserve">
+  <data name="CopyAll" xml:space="preserve">
     <value>Tout copier</value>
   </data>
-  <data name="MenuNotificationsDelete" xml:space="preserve">
-    <value>Supprimer</value>
-  </data>
-  <data name="MenuNotificationsDeleteAll" xml:space="preserve">
+  <data name="DeleteAll" xml:space="preserve">
     <value>Supprimer tout</value>
   </data>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
@@ -801,7 +792,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="Options" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="MenuPortScan" xml:space="preserve">
+  <data name="PortScan" xml:space="preserve">
     <value>Scan de port</value>
   </data>
   <data name="MenuQuickConnectToolbar" xml:space="preserve">
@@ -812,9 +803,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   </data>
   <data name="MenuRefreshScreen" xml:space="preserve">
     <value>Rafraîchir l'écran (VNC)</value>
-  </data>
-  <data name="MenuRename" xml:space="preserve">
-    <value>Renommer</value>
   </data>
   <data name="MenuRenameConnection" xml:space="preserve">
     <value>Renommer la connexion</value>
@@ -858,13 +846,13 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="MenuSupportForum" xml:space="preserve">
     <value>Forum du support</value>
   </data>
-  <data name="MenuTools" xml:space="preserve">
+  <data name="_Tools" xml:space="preserve">
     <value>&amp;Outils</value>
   </data>
   <data name="MenuTransferFile" xml:space="preserve">
     <value>Transfert de fichiers (SSH)</value>
   </data>
-  <data name="MenuView" xml:space="preserve">
+  <data name="_View" xml:space="preserve">
     <value>&amp;Affichage</value>
   </data>
   <data name="ViewOnly" xml:space="preserve">
@@ -934,10 +922,10 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="OptionsTabTheme" xml:space="preserve">
     <value>Thème</value>
   </data>
-  <data name="OptionsThemeButtonDelete" xml:space="preserve">
+  <data name="_Delete" xml:space="preserve">
     <value>&amp;Supprimer</value>
   </data>
-  <data name="OptionsThemeButtonNew" xml:space="preserve">
+  <data name="_New" xml:space="preserve">
     <value>&amp;Nouveau</value>
   </data>
   <data name="PanelName" xml:space="preserve">
@@ -1126,10 +1114,10 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="PropertyNameDescription" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="PropertyNameDisplayThemes" xml:space="preserve">
+  <data name="DisplayThemes" xml:space="preserve">
     <value>Afficher le Thème</value>
   </data>
-  <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
+  <data name="DisplayWallpaper" xml:space="preserve">
     <value>Afficher le Fond d'écran</value>
   </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
@@ -1138,13 +1126,13 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>Lissage des polices</value>
   </data>
-  <data name="PropertyNameEncoding" xml:space="preserve">
+  <data name="Encoding" xml:space="preserve">
     <value>Encodage</value>
   </data>
   <data name="PropertyNameEncryptionStrength" xml:space="preserve">
     <value>Niveau de cryptage</value>
   </data>
-  <data name="PropertyNameExternalTool" xml:space="preserve">
+  <data name="ExternalTool" xml:space="preserve">
     <value>Outil externe</value>
   </data>
   <data name="PropertyNameExternalToolAfter" xml:space="preserve">
@@ -1156,10 +1144,10 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>Adresse MAC</value>
   </data>
-  <data name="PropertyNameName" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Nom</value>
   </data>
-  <data name="PropertyNamePanel" xml:space="preserve">
+  <data name="Panel" xml:space="preserve">
     <value>Panneau</value>
   </data>
   <data name="Password" xml:space="preserve">
@@ -1195,7 +1183,7 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
     <value>Combinaisons de touches</value>
   </data>
-  <data name="PropertyNameRedirectPorts" xml:space="preserve">
+  <data name="Ports" xml:space="preserve">
     <value>Ports</value>
   </data>
   <data name="PropertyNameRedirectPrinters" xml:space="preserve">
@@ -1225,19 +1213,19 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Champ utilisateur</value>
   </data>
-  <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
+  <data name="ProxyAddress" xml:space="preserve">
     <value>Adresse proxy</value>
   </data>
-  <data name="PropertyNameVNCProxyPassword" xml:space="preserve">
+  <data name="ProxyPassword" xml:space="preserve">
     <value>Mot de passe du Proxy</value>
   </data>
-  <data name="PropertyNameVNCProxyPort" xml:space="preserve">
+  <data name="ProxyPort" xml:space="preserve">
     <value>Port du Proxy</value>
   </data>
-  <data name="PropertyNameVNCProxyType" xml:space="preserve">
+  <data name="ProxyType" xml:space="preserve">
     <value>Type de proxy</value>
   </data>
-  <data name="PropertyNameVNCProxyUsername" xml:space="preserve">
+  <data name="ProxyUsername" xml:space="preserve">
     <value>Nom d'utilisateur du Proxy</value>
   </data>
   <data name="ProtocolEventDisconnected" xml:space="preserve">
@@ -1302,7 +1290,7 @@ Message:
   <data name="QuickConnectFailed" xml:space="preserve">
     <value>La connexion rapide à échouée</value>
   </data>
-  <data name="RadioCloseWarnAll" xml:space="preserve">
+  <data name="_CloseWarnAll" xml:space="preserve">
     <value>&amp;M'avertir lors de la fermeture des connexions</value>
   </data>
   <data name="RadioCloseWarnExit" xml:space="preserve">
@@ -1314,10 +1302,10 @@ Message:
   <data name="RadioCloseWarnNever" xml:space="preserve">
     <value>&amp;Ne pas m'avertir lors de la fermeture des connexions</value>
   </data>
-  <data name="RAW" xml:space="preserve">
+  <data name="Raw" xml:space="preserve">
     <value>RAW</value>
   </data>
-  <data name="RDP" xml:space="preserve">
+  <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
   <data name="RDP16777216Colors" xml:space="preserve">
@@ -1440,7 +1428,7 @@ Message:
   <data name="RDPSoundBringToThisComputer" xml:space="preserve">
     <value>Apporter à cet ordinateur</value>
   </data>
-  <data name="RDPSoundDoNotPlay" xml:space="preserve">
+  <data name="DoNotPlay" xml:space="preserve">
     <value>Ne pas jouer</value>
   </data>
   <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
@@ -1569,7 +1557,7 @@ Message:
   <data name="SwitchToErrorsAndInfos" xml:space="preserve">
     <value>Se déplacer sur le panneau des Notifications :</value>
   </data>
-  <data name="TabAdvanced" xml:space="preserve">
+  <data name="Advanced" xml:space="preserve">
     <value>Avancée</value>
   </data>
   <data name="TabsAndPanels" xml:space="preserve">
@@ -1635,13 +1623,13 @@ Message:
   <data name="UpdateFrequencyCustom" xml:space="preserve">
     <value>Chaque {0} jours</value>
   </data>
-  <data name="UpdateFrequencyDaily" xml:space="preserve">
+  <data name="Daily" xml:space="preserve">
     <value>Quotidien</value>
   </data>
-  <data name="UpdateFrequencyMonthly" xml:space="preserve">
+  <data name="Monthly" xml:space="preserve">
     <value>Mensuel</value>
   </data>
-  <data name="UpdateFrequencyWeekly" xml:space="preserve">
+  <data name="Weekly" xml:space="preserve">
     <value>Hebdomadaire</value>
   </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">

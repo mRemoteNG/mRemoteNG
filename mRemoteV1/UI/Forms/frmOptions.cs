@@ -37,9 +37,9 @@ namespace mRemoteNG.UI.Forms
             // Handle the main page here and the individual pages in
             // AddOptionsPagesToListView()  -- one less foreach loop....
             Text = Language.OptionsPageTitle;
-            btnOK.Text = Language.ButtonOK;
-            btnCancel.Text = Language.ButtonCancel;
-            btnApply.Text = Language.ButtonApply;
+            btnOK.Text = Language._Ok;
+            btnCancel.Text = Language._Cancel;
+            btnApply.Text = Language.Apply;
             ApplyTheme();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;

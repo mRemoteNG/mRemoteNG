@@ -48,11 +48,11 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            clmMessage.Text = Language.ColumnMessage;
-            cMenMCCopy.Text = Language.MenuNotificationsCopyAll;
-            cMenMCDelete.Text = Language.MenuNotificationsDeleteAll;
-            TabText = Language.MenuNotifications;
-            Text = Language.MenuNotifications;
+            clmMessage.Text = Language.Message;
+            cMenMCCopy.Text = Language.CopyAll;
+            cMenMCDelete.Text = Language.DeleteAll;
+            TabText = Language.Notifications;
+            Text = Language.Notifications;
         }
 
         #endregion
@@ -306,13 +306,13 @@ namespace mRemoteNG.UI.Window
 
             if (lvErrorCollector.SelectedItems.Count > 0)
             {
-                cMenMCCopy.Text = Language.MenuCopy;
-                cMenMCDelete.Text = Language.MenuNotificationsDelete;
+                cMenMCCopy.Text = Language.Copy;
+                cMenMCDelete.Text = Language.Delete;
             }
             else
             {
-                cMenMCCopy.Text = Language.MenuNotificationsCopyAll;
-                cMenMCDelete.Text = Language.MenuNotificationsDeleteAll;
+                cMenMCCopy.Text = Language.CopyAll;
+                cMenMCDelete.Text = Language.DeleteAll;
             }
         }
 

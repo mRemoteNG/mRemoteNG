@@ -165,16 +165,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>Aktualna wersja</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>&amp;Wybierz...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>&amp;Anuluj</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>Zmiana</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>&amp;Zamknij</value>
   </data>
   <data name="ButtonDefaultInheritance" xml:space="preserve">
@@ -189,31 +189,28 @@
   <data name="Icon" xml:space="preserve">
     <value>Ikona</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>&amp;Importuj</value>
   </data>
   <data name="Inheritance" xml:space="preserve">
     <value>Dziedziczenie</value>
   </data>
-  <data name="ButtonLaunch" xml:space="preserve">
+  <data name="_Launch" xml:space="preserve">
     <value>Uruchom</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>Uruchom PuTTY</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>&amp;Nowy</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Ustawienia</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>&amp;Skanuj</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>&amp;Stop</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -240,7 +237,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>Protokół</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>Przekierowanie</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">
@@ -302,7 +299,7 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
   <data name="WaitForExit" xml:space="preserve">
     <value>Czekaj na wyjście</value>
   </data>
-  <data name="CheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>Sprawdź ponownie</value>
   </data>
   <data name="CheckForUpdatesOnStartup" xml:space="preserve">
@@ -329,7 +326,7 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
   <data name="Filename" xml:space="preserve">
     <value>Nazwa pliku</value>
   </data>
-  <data name="ColumnMessage" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>Wiadomość</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
@@ -338,7 +335,7 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
   <data name="CompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
     <value>{0} wykrył, że w systemie działa Lenovo Auto Scroll Utility. To narzędzie jest znane jako przyczyna problemów z {0}. Zaleca się, wyłączyć lub odinstalować ten program.</value>
   </data>
-  <data name="CommandTryAgain" xml:space="preserve">
+  <data name="_TryAgain" xml:space="preserve">
     <value>Spróbuj ponownie</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
@@ -480,16 +477,16 @@ Załadowano nowy plik połączeń.</value>
   <data name="Enc56Bit" xml:space="preserve">
     <value>56-bitowe</value>
   </data>
-  <data name="EncBasic" xml:space="preserve">
+  <data name="Basic" xml:space="preserve">
     <value>Podstawowe</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Całkowicie szyfruj plik połączeń</value>
   </data>
-  <data name="EndIP" xml:space="preserve">
+  <data name="LastIp" xml:space="preserve">
     <value>Końcowe IP</value>
   </data>
-  <data name="EndPort" xml:space="preserve">
+  <data name="LastPort" xml:space="preserve">
     <value>Port końcowy</value>
   </data>
   <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
@@ -615,13 +612,13 @@ Załadowano nowy plik połączeń.</value>
   <data name="Informations" xml:space="preserve">
     <value>Informacje</value>
   </data>
-  <data name="LabelAddress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>Adres:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>Przy zamykaniu połączeń:</value>
   </data>
-  <data name="LabelConnect" xml:space="preserve">
+  <data name="_Connect" xml:space="preserve">
     <value>&amp;Połącz</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
@@ -633,7 +630,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="LabelHostname" xml:space="preserve">
     <value>Nazwa hosta:</value>
   </data>
-  <data name="LabelPortableEdition" xml:space="preserve">
+  <data name="PortableEdition" xml:space="preserve">
     <value>Wersja przenośna.</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
@@ -693,7 +690,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Połączenia i konfiguracja</value>
   </data>
-  <data name="MenuCopy" xml:space="preserve">
+  <data name="Copy" xml:space="preserve">
     <value>Kopiuj</value>
   </data>
   <data name="CtrlAltDel" xml:space="preserve">
@@ -711,7 +708,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Usuń folder...</value>
   </data>
-  <data name="MenuDonate" xml:space="preserve">
+  <data name="Donate" xml:space="preserve">
     <value>Darowizna</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
@@ -723,25 +720,22 @@ Załadowano nowy plik połączeń.</value>
   <data name="MenuDuplicateTab" xml:space="preserve">
     <value>Duplikuj zakładkę</value>
   </data>
-  <data name="MenuExit" xml:space="preserve">
+  <data name="Exit" xml:space="preserve">
     <value>Wyjście</value>
-  </data>
-  <data name="MenuExternalTools" xml:space="preserve">
-    <value>Narzędzia zewnętrzne</value>
   </data>
   <data name="MenuExternalToolsToolbar" xml:space="preserve">
     <value>Pasek narzędzi zewnętrznych</value>
   </data>
-  <data name="MenuFile" xml:space="preserve">
+  <data name="_File" xml:space="preserve">
     <value>&amp;Plik</value>
   </data>
-  <data name="MenuHelp" xml:space="preserve">
+  <data name="_Help" xml:space="preserve">
     <value>&amp;Pomoc</value>
   </data>
   <data name="MenuHelpContents" xml:space="preserve">
     <value>Pomoc mRemoteNG</value>
   </data>
-  <data name="MenuJumpTo" xml:space="preserve">
+  <data name="JumpTo" xml:space="preserve">
     <value>Idz do</value>
   </data>
   <data name="MenuLaunchExternalTool" xml:space="preserve">
@@ -753,16 +747,13 @@ Załadowano nowy plik połączeń.</value>
   <data name="MenuNewExternalTool" xml:space="preserve">
     <value>Nowe narzędzie zewnętrzne</value>
   </data>
-  <data name="MenuNotifications" xml:space="preserve">
+  <data name="Notifications" xml:space="preserve">
     <value>Powiadomienia</value>
   </data>
-  <data name="MenuNotificationsCopyAll" xml:space="preserve">
+  <data name="CopyAll" xml:space="preserve">
     <value>Kopiuj wszystko</value>
   </data>
-  <data name="MenuNotificationsDelete" xml:space="preserve">
-    <value>Usuń</value>
-  </data>
-  <data name="MenuNotificationsDeleteAll" xml:space="preserve">
+  <data name="DeleteAll" xml:space="preserve">
     <value>Usuń wszystko</value>
   </data>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
@@ -771,7 +762,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="Options" xml:space="preserve">
     <value>Opcje</value>
   </data>
-  <data name="MenuPortScan" xml:space="preserve">
+  <data name="PortScan" xml:space="preserve">
     <value>Skaner portów</value>
   </data>
   <data name="MenuQuickConnectToolbar" xml:space="preserve">
@@ -782,9 +773,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="MenuRefreshScreen" xml:space="preserve">
     <value>Odśwież ekran (VNC)</value>
-  </data>
-  <data name="MenuRename" xml:space="preserve">
-    <value>Zmień nazwę</value>
   </data>
   <data name="MenuRenameConnection" xml:space="preserve">
     <value>Zmień nazwę połączenia</value>
@@ -828,13 +816,13 @@ Załadowano nowy plik połączeń.</value>
   <data name="MenuSupportForum" xml:space="preserve">
     <value>Forum pomocy</value>
   </data>
-  <data name="MenuTools" xml:space="preserve">
+  <data name="_Tools" xml:space="preserve">
     <value>&amp;Narzędzia</value>
   </data>
   <data name="MenuTransferFile" xml:space="preserve">
     <value>Transfer pliku (SSH)</value>
   </data>
-  <data name="MenuView" xml:space="preserve">
+  <data name="_View" xml:space="preserve">
     <value>&amp;Widok</value>
   </data>
   <data name="ViewOnly" xml:space="preserve">
@@ -900,10 +888,10 @@ Załadowano nowy plik połączeń.</value>
   <data name="OptionsTabTheme" xml:space="preserve">
     <value>Motyw</value>
   </data>
-  <data name="OptionsThemeButtonDelete" xml:space="preserve">
+  <data name="_Delete" xml:space="preserve">
     <value>&amp;Usuń</value>
   </data>
-  <data name="OptionsThemeButtonNew" xml:space="preserve">
+  <data name="_New" xml:space="preserve">
     <value>&amp;Nowy</value>
   </data>
   <data name="PanelName" xml:space="preserve">
@@ -1014,10 +1002,10 @@ Załadowano nowy plik połączeń.</value>
   <data name="PropertyNameDescription" xml:space="preserve">
     <value>Opis</value>
   </data>
-  <data name="PropertyNameDisplayThemes" xml:space="preserve">
+  <data name="DisplayThemes" xml:space="preserve">
     <value>Wyświetlaj motywy</value>
   </data>
-  <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
+  <data name="DisplayWallpaper" xml:space="preserve">
     <value>Wyświetl tapetę</value>
   </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
@@ -1026,13 +1014,13 @@ Załadowano nowy plik połączeń.</value>
   <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>Wygładzenie czcionki</value>
   </data>
-  <data name="PropertyNameEncoding" xml:space="preserve">
+  <data name="Encoding" xml:space="preserve">
     <value>Kodowanie</value>
   </data>
   <data name="PropertyNameEncryptionStrength" xml:space="preserve">
     <value>Siła szyfrowania</value>
   </data>
-  <data name="PropertyNameExternalTool" xml:space="preserve">
+  <data name="ExternalTool" xml:space="preserve">
     <value>Zewnętrzne narzędzie</value>
   </data>
   <data name="PropertyNameExternalToolAfter" xml:space="preserve">
@@ -1044,10 +1032,10 @@ Załadowano nowy plik połączeń.</value>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>Adres MAC</value>
   </data>
-  <data name="PropertyNameName" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Nazwa</value>
   </data>
-  <data name="PropertyNamePanel" xml:space="preserve">
+  <data name="Panel" xml:space="preserve">
     <value>Panel</value>
   </data>
   <data name="Password" xml:space="preserve">
@@ -1083,7 +1071,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
     <value>Kombinacja klawiszy</value>
   </data>
-  <data name="PropertyNameRedirectPorts" xml:space="preserve">
+  <data name="Ports" xml:space="preserve">
     <value>Porty</value>
   </data>
   <data name="PropertyNameRedirectPrinters" xml:space="preserve">
@@ -1113,19 +1101,19 @@ Załadowano nowy plik połączeń.</value>
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Pole użytkownika</value>
   </data>
-  <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
+  <data name="ProxyAddress" xml:space="preserve">
     <value>Adres proxy</value>
   </data>
-  <data name="PropertyNameVNCProxyPassword" xml:space="preserve">
+  <data name="ProxyPassword" xml:space="preserve">
     <value>Hasło proxy</value>
   </data>
-  <data name="PropertyNameVNCProxyPort" xml:space="preserve">
+  <data name="ProxyPort" xml:space="preserve">
     <value>Port proxy</value>
   </data>
-  <data name="PropertyNameVNCProxyType" xml:space="preserve">
+  <data name="ProxyType" xml:space="preserve">
     <value>Typ proxy</value>
   </data>
-  <data name="PropertyNameVNCProxyUsername" xml:space="preserve">
+  <data name="ProxyUsername" xml:space="preserve">
     <value>Użytkownik proxy</value>
   </data>
   <data name="ProtocolToImport" xml:space="preserve">
@@ -1152,7 +1140,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="QuickConnect" xml:space="preserve">
     <value>Szybkie połączenie</value>
   </data>
-  <data name="RadioCloseWarnAll" xml:space="preserve">
+  <data name="_CloseWarnAll" xml:space="preserve">
     <value>&amp;Ostrzegaj przed zamknięciem połączenia</value>
   </data>
   <data name="RadioCloseWarnExit" xml:space="preserve">
@@ -1164,10 +1152,10 @@ Załadowano nowy plik połączeń.</value>
   <data name="RadioCloseWarnNever" xml:space="preserve">
     <value>Nie ostrzegaj przed zamknięciem połączeń</value>
   </data>
-  <data name="RAW" xml:space="preserve">
+  <data name="Raw" xml:space="preserve">
     <value>RAW</value>
   </data>
-  <data name="RDP" xml:space="preserve">
+  <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
   <data name="RDP16777216Colors" xml:space="preserve">
@@ -1260,7 +1248,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="RDPSoundBringToThisComputer" xml:space="preserve">
     <value>Przenieś na ten komputer</value>
   </data>
-  <data name="RDPSoundDoNotPlay" xml:space="preserve">
+  <data name="DoNotPlay" xml:space="preserve">
     <value>Nie odtwarzaj</value>
   </data>
   <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
@@ -1386,7 +1374,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="SwitchToErrorsAndInfos" xml:space="preserve">
     <value>Przełącz do okna powiadomień dla:</value>
   </data>
-  <data name="TabAdvanced" xml:space="preserve">
+  <data name="Advanced" xml:space="preserve">
     <value>Zaawansowane</value>
   </data>
   <data name="TabUpdates" xml:space="preserve">
@@ -1441,13 +1429,13 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
   <data name="UpdateFrequencyCustom" xml:space="preserve">
     <value>Co {0} dni</value>
   </data>
-  <data name="UpdateFrequencyDaily" xml:space="preserve">
+  <data name="Daily" xml:space="preserve">
     <value>Codziennie</value>
   </data>
-  <data name="UpdateFrequencyMonthly" xml:space="preserve">
+  <data name="Monthly" xml:space="preserve">
     <value>Miesięcznie</value>
   </data>
-  <data name="UpdateFrequencyWeekly" xml:space="preserve">
+  <data name="Weekly" xml:space="preserve">
     <value>Tygodniowo</value>
   </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
@@ -1519,7 +1507,7 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
   <data name="Credentials" xml:space="preserve">
     <value>Uwierzytelnienia</value>
   </data>
-  <data name="RDPOverallConnectionTimeout" xml:space="preserve">
+  <data name="RdpOverallConnectionTimeout" xml:space="preserve">
     <value>Timeout połączeń RDP</value>
   </data>
   <data name="WorkingDirectory" xml:space="preserve">

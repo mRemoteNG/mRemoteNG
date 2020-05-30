@@ -232,7 +232,7 @@ namespace mRemoteNG.UI.Forms
 
             grpFile.Text = Language.ExportFile;
             lblFileName.Text = Language.Filename;
-            btnBrowse.Text = Language.ButtonBrowse;
+            btnBrowse.Text = Language._Browse;
             lblFileFormat.Text = Language.FileFormatLabel;
 
             grpItems.Text = Language.ExportItems;
@@ -248,8 +248,8 @@ namespace mRemoteNG.UI.Forms
             chkInheritance.Text = Language.Inheritance;
             lblUncheckProperties.Text = Language.UncheckProperties;
 
-            btnOK.Text = Language.ButtonOK;
-            btnCancel.Text = Language.ButtonCancel;
+            btnOK.Text = Language._Ok;
+            btnCancel.Text = Language._Cancel;
         }
 
         #endregion

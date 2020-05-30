@@ -161,18 +161,18 @@ namespace mRemoteNG.UI.Window
         private void ApplyLanguage()
         {
             lblStartIP.Text = Language.StartIP;
-            lblEndIP.Text = Language.EndIP;
-            btnScan.Text = Language.ButtonScan;
-            btnImport.Text = Language.ButtonImport;
+            lblEndIP.Text = Language.LastIp;
+            btnScan.Text = Language._Scan;
+            btnImport.Text = Language._Import;
             lblOnlyImport.Text = Language.ProtocolToImport;
             clmHost.Text = Language.HostnameIp;
             clmOpenPorts.Text = Language.OpenPorts;
             clmClosedPorts.Text = Language.ClosedPorts;
             ngCheckFirstPort.Text = Language.StartPort;
-            ngCheckLastPort.Text = Language.EndPort;
+            ngCheckLastPort.Text = Language.LastPort;
             lblTimeout.Text = Language.TimeoutInSeconds;
-            TabText = Language.MenuPortScan;
-            Text = Language.MenuPortScan;
+            TabText = Language.PortScan;
+            Text = Language.PortScan;
         }
 
         private void ShowImportControls(bool controlsVisible)
@@ -227,7 +227,7 @@ namespace mRemoteNG.UI.Window
 
         private void SwitchButtonText()
         {
-            btnScan.Text = _scanning ? Language.ButtonStop : Language.ButtonScan;
+            btnScan.Text = _scanning ? Language._Stop : Language._Scan;
 
             prgBar.Maximum = 100;
             prgBar.Value = 0;

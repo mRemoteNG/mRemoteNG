@@ -1,4 +1,4 @@
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Forms.Input;
@@ -31,9 +31,9 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyLanguage()
         {
-            btnOK.Text = Language.ButtonOK;
+            btnOK.Text = Language._Ok;
             lblDescription.Text = Language.LabelSelectPanel;
-            btnNew.Text = Language.ButtonNew;
+            btnNew.Text = Language._New;
             Text = Language.TitleSelectPanel;
         }
 

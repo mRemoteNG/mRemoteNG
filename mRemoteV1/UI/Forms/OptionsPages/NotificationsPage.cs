@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.MenuNotifications;
+            get => Language.Notifications;
             set { }
         }
 
@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.ApplyLanguage();
 
             // notifications panel
-            groupBoxNotifications.Text = Language.MenuNotifications;
+            groupBoxNotifications.Text = Language.Notifications;
             labelNotificationsShowTypes.Text = Language.ShowTheseMessageTypes;
             chkShowDebugInMC.Text = Language.Debug;
             chkShowInfoInMC.Text = Language.Informations;

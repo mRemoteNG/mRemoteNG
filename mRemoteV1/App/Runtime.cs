@@ -1,4 +1,4 @@
-using mRemoteNG.App.Info;
+﻿using mRemoteNG.App.Info;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -112,7 +112,7 @@ namespace mRemoteNG.App
                 if (Settings.Default.UseSQLServer)
                 {
                     MessageCollector.AddExceptionMessage(Language.LoadFromSqlFailed, ex);
-                    var commandButtons = string.Join("|", Language.CommandTryAgain,
+                    var commandButtons = string.Join("|", Language._TryAgain,
                                                      Language.CommandOpenConnectionFile,
                                                      string.Format(Language.CommandExitProgram,
                                                                    Application.ProductName));
@@ -147,7 +147,7 @@ namespace mRemoteNG.App
                         Language.ConfigurationCreateNew,
                         Language.ConfigurationCustomPath,
                         Language.ConfigurationImportFile,
-                        Language.MenuExit
+                        Language.Exit
                     };
 
                     var answered = false;

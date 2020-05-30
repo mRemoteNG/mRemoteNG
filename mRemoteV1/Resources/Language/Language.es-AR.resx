@@ -129,16 +129,16 @@
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>Ejecutar PuTTY</value>
   </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp; OK</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Propiedades</value>
   </data>
-  <data name="ButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>&amp; Scanear</value>
   </data>
-  <data name="ButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>&amp; Parar</value>
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
@@ -184,7 +184,7 @@ VncSharp Control {0}</value>
   <data name="WaitForExit" xml:space="preserve">
     <value>Esperar a Salir</value>
   </data>
-  <data name="CheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>Pruebe nuevamente</value>
   </data>
   <data name="CheckForUpdatesOnStartup" xml:space="preserve">
@@ -304,16 +304,16 @@ VncSharp Control {0}</value>
   <data name="Enc128BitLogonOnly" xml:space="preserve">
     <value>128-bit (iniciar sesión)</value>
   </data>
-  <data name="EncBasic" xml:space="preserve">
+  <data name="Basic" xml:space="preserve">
     <value>Básica</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Encriptar completamente el archivo de conexiones</value>
   </data>
-  <data name="EndIP" xml:space="preserve">
+  <data name="LastIp" xml:space="preserve">
     <value>Último IP</value>
   </data>
-  <data name="EndPort" xml:space="preserve">
+  <data name="LastPort" xml:space="preserve">
     <value>Último puerto</value>
   </data>
   <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">

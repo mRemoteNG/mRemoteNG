@@ -141,16 +141,16 @@
   <data name="AvailableVersion" xml:space="preserve">
     <value>Aktuális verzió</value>
   </data>
-  <data name="ButtonBrowse" xml:space="preserve">
+  <data name="_Browse" xml:space="preserve">
     <value>&amp;Böngészés...</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
+  <data name="_Cancel" xml:space="preserve">
     <value>&amp;Mégsem</value>
   </data>
-  <data name="ButtonChange" xml:space="preserve">
+  <data name="Change" xml:space="preserve">
     <value>Módosít</value>
   </data>
-  <data name="ButtonClose" xml:space="preserve">
+  <data name="_Close" xml:space="preserve">
     <value>Be&amp;zár</value>
   </data>
   <data name="Disconnect" xml:space="preserve">
@@ -159,19 +159,16 @@
   <data name="Icon" xml:space="preserve">
     <value>Ikon</value>
   </data>
-  <data name="ButtonImport" xml:space="preserve">
+  <data name="_Import" xml:space="preserve">
     <value>&amp;Improtálás</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>PuTTY indítása</value>
   </data>
-  <data name="ButtonNew" xml:space="preserve">
-    <value>&amp;Új</value>
-  </data>
-  <data name="ButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="ButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Tulajdonságok</value>
   </data>
   <data name="CannotStartPortScan" xml:space="preserve">
@@ -195,7 +192,7 @@
   <data name="Protocol" xml:space="preserve">
     <value>Protokoll</value>
   </data>
-  <data name="CategoryRedirect" xml:space="preserve">
+  <data name="Redirect" xml:space="preserve">
     <value>Átirányítás</value>
   </data>
   <data name="CheckFailed" xml:space="preserve">
@@ -210,7 +207,7 @@
   <data name="Filename" xml:space="preserve">
     <value>Fájlnév</value>
   </data>
-  <data name="ColumnMessage" xml:space="preserve">
+  <data name="Message" xml:space="preserve">
     <value>Üzenet</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
@@ -249,7 +246,7 @@
   <data name="HttpConnectFailed" xml:space="preserve">
     <value>A HTTP csatlakozás nem sikerült!</value>
   </data>
-  <data name="LabelAddress" xml:space="preserve">
+  <data name="Address" xml:space="preserve">
     <value>Cím:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
@@ -261,7 +258,7 @@
   <data name="LabelHostname" xml:space="preserve">
     <value>Hosztnév:</value>
   </data>
-  <data name="LabelPortableEdition" xml:space="preserve">
+  <data name="PortableEdition" xml:space="preserve">
     <value>Hordozható kiadás</value>
   </data>
   <data name="LabelServerStatus" xml:space="preserve">
@@ -282,7 +279,7 @@
   <data name="MenuCheckForUpdates" xml:space="preserve">
     <value>Frissítés keresése</value>
   </data>
-  <data name="MenuJumpTo" xml:space="preserve">
+  <data name="JumpTo" xml:space="preserve">
     <value>Ugrás</value>
   </data>
   <data name="MenuLaunchExternalTool" xml:space="preserve">
@@ -294,7 +291,7 @@
   <data name="MenuNewExternalTool" xml:space="preserve">
     <value>Új külső eszköz</value>
   </data>
-  <data name="MenuNotifications" xml:space="preserve">
+  <data name="Notifications" xml:space="preserve">
     <value>Értesítések</value>
   </data>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
@@ -305,9 +302,6 @@
   </data>
   <data name="MenuReconnect" xml:space="preserve">
     <value>Újrakapcsolódás</value>
-  </data>
-  <data name="MenuRename" xml:space="preserve">
-    <value>Átnevezés</value>
   </data>
   <data name="MenuRenameConnection" xml:space="preserve">
     <value>Kapcsolat átnevezése</value>

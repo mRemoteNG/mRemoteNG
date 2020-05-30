@@ -294,7 +294,7 @@ namespace mRemoteNG.UI.Window
         {
             _btnShowInheritance.Text = Language.Inheritance;
             _btnShowDefaultInheritance.Text = Language.ButtonDefaultInheritance;
-            _btnShowProperties.Text = Language.ButtonProperties;
+            _btnShowProperties.Text = Language.Properties;
             _btnShowDefaultProperties.Text = Language.ButtonDefaultProperties;
             _btnIcon.Text = Language.Icon;
             _btnHostStatus.Text = Language.Status;

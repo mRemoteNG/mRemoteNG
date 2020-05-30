@@ -10,7 +10,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         [LocalizedAttributes.LocalizedDescription(nameof(Language.RDPSoundLeaveAtRemoteComputer))]
         LeaveAtRemoteComputer = 1,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.RDPSoundDoNotPlay))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.DoNotPlay))]
         DoNotPlay = 2
     }
 }

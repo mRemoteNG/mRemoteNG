@@ -205,7 +205,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
 		<value>This exception will force mRemoteNG to close</value>
 	</data>
-  <data name="MenuCopyHostname" xml:space="preserve">
+  <data name="CopyHostname" xml:space="preserve">
 		<value>Copy Hostname</value>
 	</data>
   <data name="TrackActiveConnectionInConnectionTree" xml:space="preserve">
@@ -222,10 +222,10 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
 Beta channel includes Betas &amp; Release Candidates.
 Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
 	</data>
-  <data name="ButtonApply" xml:space="preserve">
+  <data name="Apply" xml:space="preserve">
 		<value>Apply</value>
 	</data>
-  <data name="CategoryProxy" xml:space="preserve">
+  <data name="Proxy" xml:space="preserve">
 		<value>Proxy</value>
 	</data>
 </root>
