@@ -25,7 +25,21 @@ Portable version
 Crash at Startup
 ================
 
-Try deleting your `user.config <https://github.com/mRemoteNG/mRemoteNG/wiki/User-settings-file>`_ file, see https://support.microsoft.com/en-us/kb/956762
+Try deleting the :code:`user.config` file. It contains all the user-specific program settings. This file is automatically upgraded between version when new user settings are added.
+
+Installed Version
+-----------------
+
+::
+
+   %LOCALAPPDATA%\mRemoteNG\<most recently updated folder>\<mRemoteNG version>\user.config
+
+Portable Version
+----------------
+
+::
+
+   %APPDATA%\mRemoteNG\<most recently updated folder>\<mRemoteNG version>\user.config
 
 Crash Information
 =================
