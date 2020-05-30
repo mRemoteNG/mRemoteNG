@@ -164,38 +164,24 @@ namespace mRemoteNG.UI.Forms
             //For Windows 7 and above, best to include relevant app.manifest entries as well
             Cef.EnableHighDPISupport();
 
-            CefSettings settings = new CefSettings();
-            if (Runtime.IsPortableEdition)
-            {
-                settings.CachePath = Path.Combine(SettingsFileInfo.SettingsPath, "CEFCache");
-                settings.LogFile = Path.Combine(Path.GetDirectoryName(Settings.Default.LogFilePath), "mRemoteNG_cef.log");
-            }
-            else
-            {
-                settings.CachePath = Path.Combine(
-                                           Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                                           Application.ProductName,
-                                           "CEF_Cache");
-                settings.LogFile = Path.Combine(Path.GetDirectoryName(Settings.Default.LogFilePath),"mRemoteNG_cef.log");
-                
-            }
-            if (Settings.Default.TextLogMessageWriterWriteDebugMsgs)
-            {
-                settings.LogSeverity = LogSeverity.Verbose;
-            }
-            else if (Settings.Default.TextLogMessageWriterWriteInfoMsgs)
-            {
-                settings.LogSeverity = LogSeverity.Info;
-            }
-            else if (Settings.Default.TextLogMessageWriterWriteWarningMsgs)
-            {
-                settings.LogSeverity = LogSeverity.Warning;
-            }
-            else if (Settings.Default.TextLogMessageWriterWriteErrorMsgs)
-            {
-                settings.LogSeverity = LogSeverity.Error;
-            }
+            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+            if (Runtime.IsPortableEdition) dir = SettingsFileInfo.SettingsPath;
 
+            CefSettings settings = new CefSettings()
+            {
+                CachePath = Path.Combine(dir, "CEFCache"),
+                LogFile = Path.Combine(dir, "mRemoteNG_cef.log"),
+            };
+
+            if (Settings.Default.TextLogMessageWriterWriteDebugMsgs)
+                settings.LogSeverity = LogSeverity.Verbose;
+            else if (Settings.Default.TextLogMessageWriterWriteInfoMsgs)
+                settings.LogSeverity = LogSeverity.Info;
+            else if (Settings.Default.TextLogMessageWriterWriteWarningMsgs)
+                settings.LogSeverity = LogSeverity.Warning;
+            else if (Settings.Default.TextLogMessageWriterWriteErrorMsgs)
+                settings.LogSeverity = LogSeverity.Error;
+            
             //Implement scheme to be allowed to view local help files
             settings.RegisterScheme(new CefCustomScheme
             {
