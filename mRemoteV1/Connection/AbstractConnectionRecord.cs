@@ -531,7 +531,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameDisableFullWindowDrag)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionDisableFullWindowDrag)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisableFullWindowDrag
         {
             get => GetPropertyValue("DisableFullWindowDrag", _disableFullWindowDrag);
@@ -542,7 +542,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameDisableMenuAnimations)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionDisableMenuAnimations)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisableMenuAnimations
         {
             get => GetPropertyValue("DisableMenuAnimations", _disableMenuAnimations);
@@ -553,7 +553,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameDisableCursorShadow)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionDisableCursorShadow)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisableCursorShadow
         {
             get => GetPropertyValue("DisableCursorShadow", _disableCursorShadow);
@@ -564,7 +564,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameDisableCursorShadow)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionDisableCursorShadow)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool DisableCursorBlinking
         {
             get => GetPropertyValue("DisableCursorBlinking", _disableCursorBlinking);
