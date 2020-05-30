@@ -38,7 +38,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.ApplyLanguage();
 
             Text = Language.ComponentsCheck;
-            btnCheckAgain.Text = Language.CcCheckAgain;
+            btnCheckAgain.Text = Language.Refresh;
         }
 
         private void BtnCheckAgain_Click(object sender, EventArgs e)
@@ -76,7 +76,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 pbCheck1.Image = Resources.Bad_Symbol;
                 lblCheck1.ForeColor = Color.Firebrick;
-                lblCheck1.Text = "RDP (Remote Desktop) " + Language.CcCheckFailed;
+                lblCheck1.Text = "RDP (Remote Desktop) " + Language.CheckFailed;
                 txtCheck1.Text = string.Format(Language.CcRDPFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
@@ -111,7 +111,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 pbCheck2.Image = Resources.Bad_Symbol;
                 lblCheck2.ForeColor = Color.Firebrick;
-                lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.CcCheckFailed;
+                lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.CheckFailed;
                 txtCheck2.Text = string.Format(Language.CcVNCFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
@@ -147,7 +147,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 pbCheck3.Image = Resources.Bad_Symbol;
                 lblCheck3.ForeColor = Color.Firebrick;
-                lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.CcCheckFailed;
+                lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.CheckFailed;
                 txtCheck3.Text = Language.CcPuttyFailed;
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
@@ -178,7 +178,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 pbCheck4.Image = Resources.Bad_Symbol;
                 lblCheck4.ForeColor = Color.Firebrick;
-                lblCheck4.Text = @"ICA (Citrix ICA) " + Language.CcCheckFailed;
+                lblCheck4.Text = @"ICA (Citrix ICA) " + Language.CheckFailed;
                 txtCheck4.Text = string.Format(Language.CcICAFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,

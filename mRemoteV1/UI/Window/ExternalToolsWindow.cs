@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -51,28 +51,28 @@ namespace mRemoteNG.UI.Window
             DeleteToolToolstripButton.Text = Language.OptionsThemeButtonDelete;
             LaunchToolToolstripButton.Text = Language.ButtonLaunch;
 
-            DisplayNameColumnHeader.Text = Language.ColumnDisplayName;
-            FilenameColumnHeader.Text = Language.ColumnFilename;
-            ArgumentsColumnHeader.Text = Language.ColumnArguments;
+            DisplayNameColumnHeader.Text = Language.DisplayName;
+            FilenameColumnHeader.Text = Language.Filename;
+            ArgumentsColumnHeader.Text = Language.Arguments;
             WorkingDirColumnHeader.Text = Language.WorkingDirColumnHeader;
-            WaitForExitColumnHeader.Text = Language.ColumnWaitForExit;
-            TryToIntegrateColumnHeader.Text = Language.TryToIntegrateColumnHeader;
+            WaitForExitColumnHeader.Text = Language.WaitForExit;
+            TryToIntegrateColumnHeader.Text = Language.TryToIntegrate;
             RunElevateHeader.Text = Language.RunElevateHeader;
             ShowOnToolbarColumnHeader.Text = Language.ShowOnToolbarColumnHeader;
 
-            TryToIntegrateCheckBox.Text = Language.TryIntegrate;
+            TryToIntegrateCheckBox.Text = Language.TryToIntegrate;
             ShowOnToolbarCheckBox.Text = Language.ShowOnToolbar;
             RunElevatedCheckBox.Text = Language.RunElevated;
 
             PropertiesGroupBox.Text = Language.GroupboxExternalToolProperties;
 
-            DisplayNameLabel.Text = Language.LabelDisplayName;
-            FilenameLabel.Text = Language.LabelFilename;
-            ArgumentsLabel.Text = Language.LabelArguments;
-            WorkingDirLabel.Text = Language.srtWorkingDirectory;
-            OptionsLabel.Text = Language.LabelOptions;
+            DisplayNameLabel.Text = Language.DisplayName;
+            FilenameLabel.Text = Language.Filename;
+            ArgumentsLabel.Text = Language.Arguments;
+            WorkingDirLabel.Text = Language.WorkingDirectory;
+            OptionsLabel.Text = Language.Options;
 
-            WaitForExitCheckBox.Text = Language.CheckboxWaitForExit;
+            WaitForExitCheckBox.Text = Language.WaitForExit;
             BrowseButton.Text = Language.ButtonBrowse;
             BrowseWorkingDir.Text = Language.ButtonBrowse;
             NewToolMenuItem.Text = Language.MenuNewExternalTool;
@@ -337,7 +337,7 @@ namespace mRemoteNG.UI.Window
                 return;
 
             e.Text =
-                $"'{Language.CheckboxWaitForExit}' cannot be enabled if '{Language.TryIntegrate}' is enabled";
+                $"'{Language.WaitForExit}' cannot be enabled if '{Language.TryToIntegrate}' is enabled";
         }
 
         #endregion

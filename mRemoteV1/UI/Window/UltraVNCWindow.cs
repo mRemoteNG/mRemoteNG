@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using mRemoteNG.App;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            btnDisconnect.Text = Language.ButtonDisconnect;
+            btnDisconnect.Text = Language.Disconnect;
         }
 
         private void StartListening()

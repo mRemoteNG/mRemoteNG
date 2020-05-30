@@ -291,9 +291,9 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileRename.Enabled = true;
                     _mMenFileDuplicate.Enabled = false;
                     _mMenReconnectAll.Enabled = true;
-                    _mMenFileDelete.Text = Language.MenuDelete;
+                    _mMenFileDelete.Text = Language.Delete;
                     _mMenFileRename.Text = Language.MenuRenameFolder;
-                    _mMenFileDuplicate.Text = Language.MenuDuplicate;
+                    _mMenFileDuplicate.Text = Language.Duplicate;
                     _mMenReconnectAll.Text = Language.MenuReconnectAll;
                     break;
                 case TreeNodeType.Container:
@@ -328,9 +328,9 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileRename.Enabled = false;
                     _mMenFileDuplicate.Enabled = false;
                     _mMenReconnectAll.Enabled = true;
-                    _mMenFileDelete.Text = Language.MenuDelete;
+                    _mMenFileDelete.Text = Language.Delete;
                     _mMenFileRename.Text = Language.MenuRename;
-                    _mMenFileDuplicate.Text = Language.MenuDuplicate;
+                    _mMenFileDuplicate.Text = Language.Duplicate;
                     _mMenReconnectAll.Text = Language.MenuReconnectAll;
                     break;
                 default:
@@ -340,9 +340,9 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileRename.Enabled = false;
                     _mMenFileDuplicate.Enabled = false;
                     _mMenReconnectAll.Enabled = true;
-                    _mMenFileDelete.Text = Language.MenuDelete;
+                    _mMenFileDelete.Text = Language.Delete;
                     _mMenFileRename.Text = Language.MenuRename;
-                    _mMenFileDuplicate.Text = Language.MenuDuplicate;
+                    _mMenFileDuplicate.Text = Language.Duplicate;
                     _mMenReconnectAll.Text = Language.MenuReconnectAll;
                     break;
             }

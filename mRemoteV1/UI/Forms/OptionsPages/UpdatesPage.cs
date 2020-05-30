@@ -47,11 +47,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkUseProxyForAutomaticUpdates.Text = Language.CheckboxUpdateUseProxy;
             lblProxyAddress.Text = Language.LabelAddress;
-            lblProxyPort.Text = Language.LabelPort;
+            lblProxyPort.Text = Language.Port;
 
             chkUseProxyAuthentication.Text = Language.CheckboxProxyAuthentication;
-            lblProxyUsername.Text = Language.LabelUsername;
-            lblProxyPassword.Text = Language.LabelPassword;
+            lblProxyUsername.Text = Language.Username;
+            lblProxyPassword.Text = Language.Password;
 
             btnTestProxy.Text = Language.ButtonTestProxy;
         }

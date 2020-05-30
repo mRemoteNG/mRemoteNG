@@ -99,7 +99,7 @@ namespace mRemoteNG.UI.Forms
                 ? Language.TitlePassword
                 : string.Format(Language.TitlePasswordWithName, _passwordName);
 
-            lblPassword.Text = Language.LabelPassword;
+            lblPassword.Text = Language.Password;
             lblVerify.Text = Language.LabelVerify;
             btnCancel.Text = Language.ButtonCancel;
             btnOK.Text = Language.ButtonOK;

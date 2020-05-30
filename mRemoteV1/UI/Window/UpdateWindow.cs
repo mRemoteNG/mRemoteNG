@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -63,7 +63,7 @@ namespace mRemoteNG.UI.Window
             btnDownload.Text = Runtime.IsPortableEdition
                 ? Language.DownloadPortable
                 : Language.DownloadAndInstall;
-            lblChangeLogLabel.Text = Language.LabelChangeLog;
+            lblChangeLogLabel.Text = Language.Changelog;
             lblInstalledVersion.Text = Language.Version;
             lblInstalledVersionLabel.Text = $"{Language.CurrentVersion}:";
             lblLatestVersion.Text = Language.Version;
@@ -192,7 +192,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                lblStatus.Text = Language.UpdateCheckFailedLabel;
+                lblStatus.Text = Language.CheckFailed;
                 lblStatus.ForeColor = Color.OrangeRed;
 
                 Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateCheckCompleteFailed, ex);

@@ -104,7 +104,7 @@ namespace mRemoteNG.Connection.Protocol
                                                      string.Format(Language.IntAppTitle, _process.MainWindowTitle),
                                                      true);
                 Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     string.Format(Language.IntAppParentHandle,
+                                                     string.Format(Language.PanelHandle,
                                                                    InterfaceControl.Parent.Handle), true);
 
                 Resize(this, new EventArgs());

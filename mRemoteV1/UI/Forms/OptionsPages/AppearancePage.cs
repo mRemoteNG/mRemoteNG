@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.TabAppearance;
+            get => Language.Appearance;
             set { }
         }
 

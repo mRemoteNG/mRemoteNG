@@ -34,9 +34,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             chkUseSQLServer.Text = Language.UseSQLServer;
             lblSQLServer.Text = Language.LabelHostname;
-            lblSQLDatabaseName.Text = Language.LabelSQLServerDatabaseName;
-            lblSQLUsername.Text = Language.LabelUsername;
-            lblSQLPassword.Text = Language.LabelPassword;
+            lblSQLDatabaseName.Text = Language.Database;
+            lblSQLUsername.Text = Language.Username;
+            lblSQLPassword.Text = Language.Password;
             lblSQLReadOnly.Text = Language.LabelReadOnly;
             btnTestConnection.Text = Language.TestConnection;
         }

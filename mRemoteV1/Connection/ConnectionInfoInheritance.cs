@@ -14,7 +14,7 @@ namespace mRemoteNG.Connection
 
         #region General
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryGeneral)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.General)),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameAll)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAll)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
@@ -35,7 +35,7 @@ namespace mRemoteNG.Connection
         public bool Description { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryDisplay), 2),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameIcon)),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Icon)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionIcon)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool Icon { get; set; }
@@ -50,41 +50,41 @@ namespace mRemoteNG.Connection
 
         #region Connection
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryConnection), 3),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameUsername)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Username)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUsername)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         [Browsable(true)]
         public bool Username { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryConnection), 3),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameVmId)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionVmId)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         [Browsable(true)]
         public bool VmId { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryConnection), 3),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNamePassword)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Password)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionPassword)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         [Browsable(true)]
         public bool Password { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryConnection), 3),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameDomain)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Domain)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionDomain)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         [Browsable(true)]
         public bool Domain { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryConnection), 3),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNamePort)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Port)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionPort)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool Port { get; set; }
         
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryConnection), 3),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
          LocalizedAttributes.LocalizedDisplayNameInheritAttribute(nameof(Language.PropertyNameSSHTunnelConnection)),
          LocalizedAttributes.LocalizedDescriptionInheritAttribute(nameof(Language.PropertyDescriptionSSHTunnelConnection)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
@@ -95,91 +95,91 @@ namespace mRemoteNG.Connection
 
         #region Protocol
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameProtocol)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Protocol)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionProtocol)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool Protocol { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameRdpVersion)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRdpVersion)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RdpVersion { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameExternalTool)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionExternalTool)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool ExtApp { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNamePuttySession)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionPuttySession)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool PuttySession { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameSSHOptions)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSSHOptions)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool SSHOptions { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameEncryptionStrength)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionEncryptionStrength)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool ICAEncryptionStrength { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameAuthenticationLevel)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAuthenticationLevel)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RDPAuthenticationLevel { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameRDPMinutesToIdleTimeout)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRDPMinutesToIdleTimeout)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RDPMinutesToIdleTimeout { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameRDPAlertIdleTimeout)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRDPAlertIdleTimeout)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RDPAlertIdleTimeout { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameLoadBalanceInfo)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionLoadBalanceInfo)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool LoadBalanceInfo { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameRenderingEngine)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRenderingEngine)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RenderingEngine { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameUseConsoleSession)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseConsoleSession)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseConsoleSession { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameUseCredSsp)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseCredSsp)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseCredSsp { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameUseVmId)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseVmId)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseVmId { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryProtocol), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameUseEnhancedMode)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseEnhancedMode)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
@@ -229,73 +229,73 @@ namespace mRemoteNG.Connection
 
         #region Appearance
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameResolution)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionResolution)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool Resolution { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameAutomaticResize)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAutomaticResize)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool AutomaticResize { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameColors)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionColors)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool Colors { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameCacheBitmaps)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionCacheBitmaps)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool CacheBitmaps { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameDisplayWallpaper)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionDisplayWallpaper)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool DisplayWallpaper { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameDisplayThemes)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionDisplayThemes)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool DisplayThemes { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameEnableFontSmoothing)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionEnableFontSmoothing)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool EnableFontSmoothing { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameEnableDesktopComposition)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionEnableDesktopComposition)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool EnableDesktopComposition { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameDisableFullWindowDrag)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionDisableFullWindowDrag)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool DisableFullWindowDrag { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameDisableMenuAnimations)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionDisableMenuAnimations)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool DisableMenuAnimations { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameDisableCursorShadow)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionDisableCursorShadow)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool DisableCursorShadow { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 6),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 6),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameDisableCursorBlinking)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionDisableCursorBlinking)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
@@ -395,17 +395,17 @@ namespace mRemoteNG.Connection
         #endregion
 
         #region VNC
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 9), 
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 9), 
 		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameCompression)), 
 		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionCompression)), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCCompression {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 9), 
+		[LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 9), 
 		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameEncoding)), 
 		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionEncoding)), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCEncoding {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryConnection), 9), 
+		[LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 9), 
 		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameAuthenticationMode)), 
 		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAuthenticationMode)), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCAuthMode {get; set;}
@@ -435,18 +435,18 @@ namespace mRemoteNG.Connection
 		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionVNCProxyPassword)), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCProxyPassword {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 9), 
+		[LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 9), 
 		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameColors)), 
 		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionColors)), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCColors {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 9), 
+		[LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 9), 
 		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameSmartSizeMode)), 
 		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSmartSizeMode)), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCSmartSizeMode {get; set;}
 				
-		[LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryAppearance), 9), 
-		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.PropertyNameViewOnly)), 
+		[LocalizedAttributes.LocalizedCategory(nameof(Language.Appearance), 9), 
+		LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.ViewOnly)), 
 		LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionViewOnly)), 
 		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool VNCViewOnly {get; set;}
         #endregion

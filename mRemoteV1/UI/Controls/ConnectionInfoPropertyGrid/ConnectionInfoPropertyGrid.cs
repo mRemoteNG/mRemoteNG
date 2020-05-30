@@ -282,7 +282,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             if (IsShowingInheritance)
                 return;
 
-            if (e.ChangedItem.Label == Language.PropertyNameProtocol)
+            if (e.ChangedItem.Label == Language.Protocol)
             {
                 SelectedConnectionInfo.SetDefaultPort();
             }

@@ -264,21 +264,21 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            cmenTabFullscreen.Text = Language.MenuFullScreenRDP;
+            cmenTabFullscreen.Text = Language.Fullscreen;
             cmenTabSmartSize.Text = Language.MenuSmartSize;
-            cmenTabViewOnly.Text = Language.MenuViewOnly;
-            cmenTabScreenshot.Text = Language.MenuScreenshot;
+            cmenTabViewOnly.Text = Language.ViewOnly;
+            cmenTabScreenshot.Text = Language.Screenshot;
             cmenTabStartChat.Text = Language.MenuStartChat;
             cmenTabTransferFile.Text = Language.MenuTransferFile;
             cmenTabRefreshScreen.Text = Language.MenuRefreshScreen;
             cmenTabSendSpecialKeys.Text = Language.MenuSendSpecialKeys;
-            cmenTabSendSpecialKeysCtrlAltDel.Text = Language.MenuCtrlAltDel;
-            cmenTabSendSpecialKeysCtrlEsc.Text = Language.MenuCtrlEsc;
+            cmenTabSendSpecialKeysCtrlAltDel.Text = Language.CtrlAltDel;
+            cmenTabSendSpecialKeysCtrlEsc.Text = Language.CtrlEsc;
             cmenTabExternalApps.Text = Language.MenuExternalTools;
             cmenTabRenameTab.Text = Language.MenuRenameTab;
             cmenTabDuplicateTab.Text = Language.MenuDuplicateTab;
             cmenTabReconnect.Text = Language.MenuReconnect;
-            cmenTabDisconnect.Text = Language.MenuDisconnect;
+            cmenTabDisconnect.Text = Language.Disconnect;
             cmenTabDisconnectOthers.Text = Language.MenuDisconnectOthers;
             cmenTabDisconnectOthersRight.Text = Language.MenuDisconnectOthersRight;
             cmenTabPuttySettings.Text = Language.PuttySettings;

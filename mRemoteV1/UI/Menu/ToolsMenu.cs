@@ -100,7 +100,7 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsOptions.Image = Resources.Options;
             _mMenToolsOptions.Name = "mMenToolsOptions";
             _mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
-            _mMenToolsOptions.Text = Language.MenuOptions;
+            _mMenToolsOptions.Text = Language.Options;
             _mMenToolsOptions.Click += mMenToolsOptions_Click;
         }
 
@@ -111,7 +111,7 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsExternalApps.Text = Language.MenuExternalTools;
             _mMenToolsPortScan.Text = Language.MenuPortScan;
             _mMenViewScreenshotManager.Text = Language.Screenshots;
-            _mMenToolsOptions.Text = Language.MenuOptions;
+            _mMenToolsOptions.Text = Language.Options;
         }
 
         #region Tools

@@ -165,7 +165,7 @@ namespace mRemoteNG.UI.Window
             btnScan.Text = Language.ButtonScan;
             btnImport.Text = Language.ButtonImport;
             lblOnlyImport.Text = Language.ProtocolToImport;
-            clmHost.Text = Language.ColumnHostnameIP;
+            clmHost.Text = Language.HostnameIp;
             clmOpenPorts.Text = Language.OpenPorts;
             clmClosedPorts.Text = Language.ClosedPorts;
             ngCheckFirstPort.Text = Language.StartPort;

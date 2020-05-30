@@ -292,11 +292,11 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
         private void ApplyLanguage()
         {
-            _btnShowInheritance.Text = Language.ButtonInheritance;
+            _btnShowInheritance.Text = Language.Inheritance;
             _btnShowDefaultInheritance.Text = Language.ButtonDefaultInheritance;
             _btnShowProperties.Text = Language.ButtonProperties;
             _btnShowDefaultProperties.Text = Language.ButtonDefaultProperties;
-            _btnIcon.Text = Language.ButtonIcon;
+            _btnIcon.Text = Language.Icon;
             _btnHostStatus.Text = Language.Status;
             Text = Language.MenuConfig;
             TabText = Language.MenuConfig;
@@ -475,13 +475,13 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                if (e.ChangedItem.Label == Language.PropertyNameIcon)
+                if (e.ChangedItem.Label == Language.Icon)
                 {
                     var conIcon = ConnectionIcon.FromString(_pGrid.SelectedConnectionInfo.Icon);
                     if (conIcon != null)
                         _btnIcon.Image = conIcon.ToBitmap();
                 }
-                else if (e.ChangedItem.Label == Language.PropertyNameAddress)
+                else if (e.ChangedItem.Label == Language.HostnameIp)
                 {
                     SetHostStatus(_pGrid.SelectedConnectionInfo);
                 }

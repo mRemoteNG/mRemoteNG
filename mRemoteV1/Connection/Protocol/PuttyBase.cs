@@ -186,7 +186,7 @@ namespace mRemoteNG.Connection.Protocol
                                                     string.Format(Language.PuttyTitle, PuttyProcess.MainWindowTitle),
                                                     true);
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    string.Format(Language.PuttyParentHandle,
+                                                    string.Format(Language.PanelHandle,
                                                                   InterfaceControl.Parent.Handle), true);
 
                 Resize(this, new EventArgs());

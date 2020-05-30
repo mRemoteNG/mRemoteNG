@@ -118,7 +118,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnections.Image = Resources.Root;
             _mMenViewConnections.Name = "mMenViewConnections";
             _mMenViewConnections.Size = new System.Drawing.Size(228, 22);
-            _mMenViewConnections.Text = Language.MenuConnections;
+            _mMenViewConnections.Text = Language.Connections;
             _mMenViewConnections.Click += mMenViewConnections_Click;
             // 
             // mMenViewConfig
@@ -232,7 +232,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewFullscreen.Name = "mMenViewFullscreen";
             _mMenViewFullscreen.ShortcutKeys = Keys.F11;
             _mMenViewFullscreen.Size = new System.Drawing.Size(228, 22);
-            _mMenViewFullscreen.Text = Language.MenuFullScreen;
+            _mMenViewFullscreen.Text = Language.Fullscreen;
             _mMenViewFullscreen.Checked = Settings.Default.MainFormKiosk;
             _mMenViewFullscreen.Click += mMenViewFullscreen_Click;
         }
@@ -243,7 +243,7 @@ namespace mRemoteNG.UI.Menu
             Text = Language.MenuView;
             _mMenViewAddConnectionPanel.Text = Language.MenuAddConnectionPanel;
             _mMenViewConnectionPanels.Text = Language.MenuConnectionPanels;
-            _mMenViewConnections.Text = Language.MenuConnections;
+            _mMenViewConnections.Text = Language.Connections;
             _mMenViewConfig.Text = Language.MenuConfig;
             _mMenViewErrorsAndInfos.Text = Language.MenuNotifications;
             _mMenViewJumpTo.Text = Language.MenuJumpTo;
@@ -254,7 +254,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewQuickConnectToolbar.Text = Language.MenuQuickConnectToolbar;
             _mMenViewExtAppsToolbar.Text = Language.MenuExternalToolsToolbar;
             _mMenViewMultiSshToolbar.Text = Language.MultiSshToolbar;
-            _mMenViewFullscreen.Text = Language.MenuFullScreen;
+            _mMenViewFullscreen.Text = Language.Fullscreen;
         }
 
         #region View

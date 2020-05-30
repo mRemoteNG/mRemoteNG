@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Window
         private void ApplyLanguage()
         {
             btnImport.Text = Language.ButtonImport;
-            lblDomain.Text = Language.LabelDomain;
+            lblDomain.Text = Language.Domain;
             chkSubOU.Text = Language.ImportSubOUs;
             btnChangeDomain.Text = Language.ButtonChange;
             btnClose.Text = Language.ButtonClose;

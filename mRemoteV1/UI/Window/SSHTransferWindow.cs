@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using System;
 using System.IO;
 using System.Threading;
@@ -358,11 +358,11 @@ namespace mRemoteNG.UI.Window
             lblLocalFile.Text = Language.LocalFile + ":";
             lblRemoteFile.Text = Language.RemoteFile + ":";
             btnBrowse.Text = Language.ButtonBrowse;
-            grpConnection.Text = Language.GroupboxConnection;
-            lblProtocol.Text = Language.LabelProtocol;
-            lblPassword.Text = Language.LabelPassword;
+            grpConnection.Text = Language.Connection;
+            lblProtocol.Text = Language.Protocol;
+            lblPassword.Text = Language.Password;
             lblUser.Text = Language.User + ":";
-            lblPort.Text = Language.LabelPort;
+            lblPort.Text = Language.Port;
             lblHost.Text = Language.Host + ":";
             btnTransfer.Text = Language.Transfer;
             TabText = Language.MenuSSHFileTransfer;
