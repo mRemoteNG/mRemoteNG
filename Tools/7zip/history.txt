@@ -5,6 +5,21 @@ This file contains only information about changes related to that package exclus
 The full history of changes is listed in history.txt in main 7-Zip program.
 
 
+19.00          2019-02-21
+-------------------------
+- Encryption strength for 7z archives was increased:
+  the size of random initialization vector was increased from 64-bit to 128-bit,
+  and the pseudo-random number generator was improved.
+- Some bugs were fixed.
+
+
+18.06          2018-12-30
+-------------------------
+- The speed for LZMA/LZMA2 compressing was increased by 3-10%,
+  and there are minor changes in compression ratio.
+- Some bugs were fixed.
+
+
 18.05          2018-04-30
 -------------------------
 - The speed for LZMA/LZMA2 compressing was increased 
