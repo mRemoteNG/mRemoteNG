@@ -126,12 +126,6 @@
   <data name="Activity" xml:space="preserve">
     <value>Activiteit</value>
   </data>
-  <data name="AddConnection" xml:space="preserve">
-    <value>Nieuwe Connectie</value>
-  </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Nieuwe map</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML mislukt!</value>
   </data>
@@ -204,16 +198,16 @@
   <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Standaard Eigenschappen</value>
   </data>
-  <data name="ButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
     <value>Verbreek verbinding</value>
   </data>
-  <data name="ButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Icoon</value>
   </data>
   <data name="ButtonImport" xml:space="preserve">
     <value>&amp;Importeer</value>
   </data>
-  <data name="ButtonInheritance" xml:space="preserve">
+  <data name="Inheritance" xml:space="preserve">
     <value>Successierecht</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
@@ -244,14 +238,11 @@ Gebruik dan Bestand - Laad Connecties voor normale connectie bestanden!</value>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Kan Poort Scan niet starten, onjuist IP formaat!</value>
   </data>
-  <data name="CategoryAppearance" xml:space="preserve">
+  <data name="Appearance" xml:space="preserve">
     <value>Uiterlijk</value>
   </data>
-  <data name="CategoryConnection" xml:space="preserve">
+  <data name="Connection" xml:space="preserve">
     <value>Connectie</value>
-  </data>
-  <data name="CategoryCredentials" xml:space="preserve">
-    <value>Kenmerken</value>
   </data>
   <data name="CategoryDisplay" xml:space="preserve">
     <value>Scherm</value>
@@ -259,13 +250,10 @@ Gebruik dan Bestand - Laad Connecties voor normale connectie bestanden!</value>
   <data name="CategoryGateway" xml:space="preserve">
     <value>Gateway</value>
   </data>
-  <data name="CategoryGeneral" xml:space="preserve">
-    <value>Algemeen</value>
-  </data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Diversen</value>
   </data>
-  <data name="CategoryProtocol" xml:space="preserve">
+  <data name="Protocol" xml:space="preserve">
     <value>Protocol</value>
   </data>
   <data name="CategoryRedirect" xml:space="preserve">
@@ -274,10 +262,7 @@ Gebruik dan Bestand - Laad Connecties voor normale connectie bestanden!</value>
   <data name="CcAlwaysShowScreen" xml:space="preserve">
     <value>Altijd dit scherm laten zien bij opstarten</value>
   </data>
-  <data name="CcCheckAgain" xml:space="preserve">
-    <value>Vernieuwen</value>
-  </data>
-  <data name="CcCheckFailed" xml:space="preserve">
+  <data name="CheckFailed" xml:space="preserve">
     <value>Controle mislukt!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
@@ -333,17 +318,8 @@ VncSharp Versie {0}</value>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisch proberen opnieuw te verbinden wanneer de verbinding is verbroken van de server (RDP &amp;&amp; ICA Alleen)</value>
   </data>
-  <data name="CheckboxDomain" xml:space="preserve">
-    <value>Domein</value>
-  </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Toon dit bericht niet opnieuw.</value>
-  </data>
-  <data name="CheckboxInheritance" xml:space="preserve">
-    <value>Successierecht</value>
-  </data>
-  <data name="CheckboxPassword" xml:space="preserve">
-    <value>Wachtwoord</value>
   </data>
   <data name="CheckboxProxyAuthentication" xml:space="preserve">
     <value>Deze proxy server vereist authenticatie</value>
@@ -357,10 +333,10 @@ VncSharp Versie {0}</value>
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Gebruik een proxy server om verbinding te maken</value>
   </data>
-  <data name="CheckboxUsername" xml:space="preserve">
+  <data name="Username" xml:space="preserve">
     <value>Gebruikersnaam</value>
   </data>
-  <data name="CheckboxWaitForExit" xml:space="preserve">
+  <data name="WaitForExit" xml:space="preserve">
     <value>Wachten Voor Afsluiten</value>
   </data>
   <data name="CheckForUpdate" xml:space="preserve">
@@ -384,26 +360,14 @@ VncSharp Versie {0}</value>
   <data name="CollapseAllFolders" xml:space="preserve">
     <value>Klap alle mappen in</value>
   </data>
-  <data name="ColumnArguments" xml:space="preserve">
+  <data name="Arguments" xml:space="preserve">
     <value>Argumenten</value>
   </data>
-  <data name="ColumnDisplayName" xml:space="preserve">
-    <value>Weergave naam</value>
-  </data>
-  <data name="ColumnFilename" xml:space="preserve">
+  <data name="Filename" xml:space="preserve">
     <value>Bestandsnaam</value>
-  </data>
-  <data name="ColumnHostnameIP" xml:space="preserve">
-    <value>Hostnaam/IP</value>
   </data>
   <data name="ColumnMessage" xml:space="preserve">
     <value>Bericht</value>
-  </data>
-  <data name="ColumnUsername" xml:space="preserve">
-    <value>Gebruikersnaam</value>
-  </data>
-  <data name="ColumnWaitForExit" xml:space="preserve">
-    <value>Wachten Voor Afsluiten</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Kan opdrachtprompt argumenten niet parsen!</value>
@@ -685,9 +649,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisch opnieuw verbinden</value>
   </data>
-  <data name="GroupboxConnection" xml:space="preserve">
-    <value>Verbinding</value>
-  </data>
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
     <value>Externe Applicatie Eigenschappen</value>
   </data>
@@ -766,9 +727,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="IntAppKillFailed" xml:space="preserve">
     <value>Beëindigen Interne Applicatie Proces mislukt!</value>
   </data>
-  <data name="IntAppParentHandle" xml:space="preserve">
-    <value>Paneel Handeling: {0}</value>
-  </data>
   <data name="IntAppResizeFailed" xml:space="preserve">
     <value>Interne Applicatie Formaat Wijzigen mislukt!</value>
   </data>
@@ -778,20 +736,8 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Interne Applicatie naam: {0}</value>
   </data>
-  <data name="KeysCtrlAltDel" xml:space="preserve">
-    <value>CTRL-ALT-DEL</value>
-  </data>
-  <data name="KeysCtrlEsc" xml:space="preserve">
-    <value>CTRL-ESC</value>
-  </data>
   <data name="LabelAddress" xml:space="preserve">
     <value>Adres:</value>
-  </data>
-  <data name="LabelArguments" xml:space="preserve">
-    <value>Argumenten:</value>
-  </data>
-  <data name="LabelChangeLog" xml:space="preserve">
-    <value>Veranderingen:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>Bij het sluiten van connecties:</value>
@@ -799,32 +745,17 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="LabelConnect" xml:space="preserve">
     <value>&amp;Verbind:</value>
   </data>
-  <data name="LabelDisplayName" xml:space="preserve">
+  <data name="DisplayName" xml:space="preserve">
     <value>Weergavenaam</value>
   </data>
-  <data name="LabelDomain" xml:space="preserve">
-    <value>Domein:</value>
-  </data>
-  <data name="LabelFilename" xml:space="preserve">
-    <value>Bestandsnaam:</value>
+  <data name="Domain" xml:space="preserve">
+    <value>Domein</value>
   </data>
   <data name="LabelHostname" xml:space="preserve">
     <value>Hostnaam:</value>
   </data>
-  <data name="LabelOptions" xml:space="preserve">
-    <value>Opties:</value>
-  </data>
-  <data name="LabelPassword" xml:space="preserve">
-    <value>Wachtwoord:</value>
-  </data>
-  <data name="LabelPort" xml:space="preserve">
-    <value>Poort:</value>
-  </data>
   <data name="LabelPortableEdition" xml:space="preserve">
     <value>Mobiele Editie</value>
-  </data>
-  <data name="LabelProtocol" xml:space="preserve">
-    <value>Protocol:</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
     <value>Om PuTTY Sessies te configureren klik op deze knop:</value>
@@ -844,14 +775,8 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="LabelServerStatus" xml:space="preserve">
     <value>Server Status:</value>
   </data>
-  <data name="LabelSQLDatabaseName" xml:space="preserve">
+  <data name="Database" xml:space="preserve">
     <value>Database:</value>
-  </data>
-  <data name="LabelSQLServerDatabaseName" xml:space="preserve">
-    <value>Database:</value>
-  </data>
-  <data name="LabelUsername" xml:space="preserve">
-    <value>Gebruikersnaam:</value>
   </data>
   <data name="LabelVerify" xml:space="preserve">
     <value>Verifiëren:</value>
@@ -889,9 +814,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MagicLibraryAttribution" xml:space="preserve">
     <value>Maakt gebruik van de Magic bibliotheek door [Crownwood Software]</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Over</value>
-  </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Voeg Connectie Paneel toe</value>
   </data>
@@ -901,14 +823,8 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuConfig" xml:space="preserve">
     <value>Configuratie</value>
   </data>
-  <data name="MenuConnect" xml:space="preserve">
-    <value>Verbinden</value>
-  </data>
   <data name="MenuConnectionPanels" xml:space="preserve">
     <value>Connectie Panelen</value>
-  </data>
-  <data name="MenuConnections" xml:space="preserve">
-    <value>Verbindingen</value>
   </data>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Verbindingen en Configuratie</value>
@@ -916,14 +832,11 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuCopy" xml:space="preserve">
     <value>Kopiëren</value>
   </data>
-  <data name="MenuCtrlAltDel" xml:space="preserve">
+  <data name="CtrlAltDel" xml:space="preserve">
     <value>Ctrl-Alt-Del</value>
   </data>
-  <data name="MenuCtrlEsc" xml:space="preserve">
+  <data name="CtrlEsc" xml:space="preserve">
     <value>CTRL-Esc</value>
-  </data>
-  <data name="MenuDelete" xml:space="preserve">
-    <value>Verwijder...</value>
   </data>
   <data name="MenuDeleteConnection" xml:space="preserve">
     <value>Verwijder Connectie...</value>
@@ -934,14 +847,8 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Verwijder Map...</value>
   </data>
-  <data name="MenuDisconnect" xml:space="preserve">
-    <value>Verbreek verbinding</value>
-  </data>
   <data name="MenuDonate" xml:space="preserve">
     <value>Doneer</value>
-  </data>
-  <data name="MenuDuplicate" xml:space="preserve">
-    <value>Dupliceer</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
     <value>Dupliceer Connectie</value>
@@ -963,12 +870,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="MenuFile" xml:space="preserve">
     <value>&amp;Bestand</value>
-  </data>
-  <data name="MenuFullScreen" xml:space="preserve">
-    <value>Volledig Scherm</value>
-  </data>
-  <data name="MenuFullScreenRDP" xml:space="preserve">
-    <value>Volledig Scherm (RDP)</value>
   </data>
   <data name="MenuHelp" xml:space="preserve">
     <value>&amp;Help</value>
@@ -1003,7 +904,7 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
     <value>Open Connectie Bestand...</value>
   </data>
-  <data name="MenuOptions" xml:space="preserve">
+  <data name="Options" xml:space="preserve">
     <value>Opties</value>
   </data>
   <data name="MenuPaste" xml:space="preserve">
@@ -1045,9 +946,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Opslaan Connectie bestand Als...</value>
   </data>
-  <data name="MenuScreenshot" xml:space="preserve">
-    <value>Schermafbeelding</value>
-  </data>
   <data name="MenuScreenshotManager" xml:space="preserve">
     <value>Screenshot beheerder</value>
   </data>
@@ -1087,7 +985,7 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuView" xml:space="preserve">
     <value>&amp;Beeld</value>
   </data>
-  <data name="MenuViewOnly" xml:space="preserve">
+  <data name="ViewOnly" xml:space="preserve">
     <value>Alleen bekijken (VNC)</value>
   </data>
   <data name="MenuWebsite" xml:space="preserve">
@@ -1131,9 +1029,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="NoExtAppDefined" xml:space="preserve">
     <value>Geen externe applicatie opgegeven.</value>
-  </data>
-  <data name="NoInformation" xml:space="preserve">
-    <value>Geen</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>Geen</value>
@@ -1331,7 +1226,7 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Voer uw gebruikersnaam in voor authenticatie van de proxy server.</value>
   </data>
-  <data name="PropertyNameAddress" xml:space="preserve">
+  <data name="HostnameIp" xml:space="preserve">
     <value>Hostnaam/IP</value>
   </data>
   <data name="PropertyNameAll" xml:space="preserve">
@@ -1361,9 +1256,6 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
     <value>Bureaubladachtergrond</value>
   </data>
-  <data name="PropertyNameDomain" xml:space="preserve">
-    <value>Domein</value>
-  </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
     <value>Samenstelling bureaublad</value>
   </data>
@@ -1385,9 +1277,6 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyNameExternalToolBefore" xml:space="preserve">
     <value>Externe Applicatie voordat</value>
   </data>
-  <data name="PropertyNameIcon" xml:space="preserve">
-    <value>Icoon</value>
-  </data>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MAC Adres</value>
   </data>
@@ -1397,14 +1286,11 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyNamePanel" xml:space="preserve">
     <value>Paneel</value>
   </data>
-  <data name="PropertyNamePassword" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
     <value>Wachtwoord</value>
   </data>
-  <data name="PropertyNamePort" xml:space="preserve">
+  <data name="Port" xml:space="preserve">
     <value>Poort</value>
-  </data>
-  <data name="PropertyNameProtocol" xml:space="preserve">
-    <value>Protocol</value>
   </data>
   <data name="PropertyNamePuttySession" xml:space="preserve">
     <value>PuTTY Sessie</value>
@@ -1463,12 +1349,6 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Gebruiker veld</value>
   </data>
-  <data name="PropertyNameUsername" xml:space="preserve">
-    <value>Gebruikersnaam</value>
-  </data>
-  <data name="PropertyNameViewOnly" xml:space="preserve">
-    <value>Alleen bekijken</value>
-  </data>
   <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
     <value>Proxy Adres</value>
   </data>
@@ -1517,7 +1397,7 @@ Bericht:
   <data name="PuttyKillFailed" xml:space="preserve">
     <value>Beëindigen Putty Proces mislukt!</value>
   </data>
-  <data name="PuttyParentHandle" xml:space="preserve">
+  <data name="PanelHandle" xml:space="preserve">
     <value>Paneel Handeling: {0}</value>
   </data>
   <data name="PuttyResizeFailed" xml:space="preserve">
@@ -1814,15 +1694,6 @@ Bericht:
   <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Enkele klik om naar geopende verbinding om te schakelen</value>
   </data>
-  <data name="SmartSizeModeAspect" xml:space="preserve">
-    <value>Verhouding</value>
-  </data>
-  <data name="SmartSizeModeFree" xml:space="preserve">
-    <value>Vrij</value>
-  </data>
-  <data name="SmartSizeModeNone" xml:space="preserve">
-    <value>Geen SmartSize</value>
-  </data>
   <data name="Socks5" xml:space="preserve">
     <value>Socks 5</value>
   </data>
@@ -1883,9 +1754,6 @@ Bericht:
   <data name="TabAdvanced" xml:space="preserve">
     <value>Geavanceerd</value>
   </data>
-  <data name="TabAppearance" xml:space="preserve">
-    <value>Uiterlijk</value>
-  </data>
   <data name="TabsAndPanels" xml:space="preserve">
     <value>Tabbladen &amp;&amp; Panelen</value>
   </data>
@@ -1903,9 +1771,6 @@ Bericht:
   </data>
   <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
     <value>Connectie paneel</value>
-  </data>
-  <data name="ThemeCategoryGeneral" xml:space="preserve">
-    <value>Algemeen</value>
   </data>
   <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
     <value>De achtergrondkleur van het configuratie paneel.</value>
@@ -2030,7 +1895,7 @@ Bericht:
   <data name="TransferFailed" xml:space="preserve">
     <value>Overdracht mislukt!</value>
   </data>
-  <data name="TryIntegrate" xml:space="preserve">
+  <data name="TryToIntegrate" xml:space="preserve">
     <value>Probeer te integreren</value>
   </data>
   <data name="Type" xml:space="preserve">

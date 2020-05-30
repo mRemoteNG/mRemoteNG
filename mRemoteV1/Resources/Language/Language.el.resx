@@ -126,12 +126,6 @@
   <data name="Activity" xml:space="preserve">
     <value>Δραστηριότητα</value>
   </data>
-  <data name="AddConnection" xml:space="preserve">
-    <value>Νέα σύνδεση</value>
-  </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Νέος φάκελος</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML απέτυχε!</value>
   </data>
@@ -201,16 +195,16 @@
   <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Προεπιλεγμένες ιδιότητες</value>
   </data>
-  <data name="ButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
     <value>Αποσύνδεση</value>
   </data>
-  <data name="ButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Εικονίδιο</value>
   </data>
   <data name="ButtonImport" xml:space="preserve">
     <value>&amp;Εισαγωγή</value>
   </data>
-  <data name="ButtonInheritance" xml:space="preserve">
+  <data name="Inheritance" xml:space="preserve">
     <value>Κληρονομιά</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
@@ -241,14 +235,11 @@
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Δεν είναι δυνατή η εκκίνηση της σάρωσης υποδοχων, εσφαλμένη μορφή IP!</value>
   </data>
-  <data name="CategoryAppearance" xml:space="preserve">
+  <data name="Appearance" xml:space="preserve">
     <value>Εμφάνιση</value>
   </data>
-  <data name="CategoryConnection" xml:space="preserve">
+  <data name="Connection" xml:space="preserve">
     <value>Σύνδεση</value>
-  </data>
-  <data name="CategoryCredentials" xml:space="preserve">
-    <value>Πιστοποιήσεις</value>
   </data>
   <data name="CategoryDisplay" xml:space="preserve">
     <value>Οθόνη</value>
@@ -256,13 +247,10 @@
   <data name="CategoryGateway" xml:space="preserve">
     <value>Πύλη</value>
   </data>
-  <data name="CategoryGeneral" xml:space="preserve">
-    <value>Γενική</value>
-  </data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Διάφορα</value>
   </data>
-  <data name="CategoryProtocol" xml:space="preserve">
+  <data name="Protocol" xml:space="preserve">
     <value>Πρωτόκολλο</value>
   </data>
   <data name="CategoryRedirect" xml:space="preserve">
@@ -271,10 +259,7 @@
   <data name="CcAlwaysShowScreen" xml:space="preserve">
     <value>Πάντα εμφάνιση αυτής της οθόνης κατά την εκκίνηση</value>
   </data>
-  <data name="CcCheckAgain" xml:space="preserve">
-    <value>Ανανέωση</value>
-  </data>
-  <data name="CcCheckFailed" xml:space="preserve">
+  <data name="CheckFailed" xml:space="preserve">
     <value>Ο ελέγχος απέτυχε!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">

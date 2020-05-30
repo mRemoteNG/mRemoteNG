@@ -259,9 +259,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ImportLocationCommandButtons" xml:space="preserve">
 		<value>Under the root{0}{1}|Under the selected folder{0}{2}</value>
 	</data>
-  <data name="NoInformation" xml:space="preserve">
-		<value>None</value>
-	</data>
   <data name="None" xml:space="preserve">
 		<value>None</value>
 	</data>

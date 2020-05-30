@@ -126,12 +126,6 @@
   <data name="Activity" xml:space="preserve">
     <value>Активность</value>
   </data>
-  <data name="AddConnection" xml:space="preserve">
-    <value>Новое подключение</value>
-  </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Новая папка</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML не удалось!</value>
   </data>
@@ -204,16 +198,16 @@
   <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Свойства по умолчанию</value>
   </data>
-  <data name="ButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
     <value>Отключиться</value>
   </data>
-  <data name="ButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Значок</value>
   </data>
   <data name="ButtonImport" xml:space="preserve">
     <value>&amp;Импорт</value>
   </data>
-  <data name="ButtonInheritance" xml:space="preserve">
+  <data name="Inheritance" xml:space="preserve">
     <value>Наследование</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
@@ -244,14 +238,11 @@
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Не удается запустить сканирование портов, неверный формат IP!</value>
   </data>
-  <data name="CategoryAppearance" xml:space="preserve">
+  <data name="Appearance" xml:space="preserve">
     <value>Внешний вид</value>
   </data>
-  <data name="CategoryConnection" xml:space="preserve">
+  <data name="Connection" xml:space="preserve">
     <value>Подключение</value>
-  </data>
-  <data name="CategoryCredentials" xml:space="preserve">
-    <value>Учетные данные</value>
   </data>
   <data name="CategoryDisplay" xml:space="preserve">
     <value>Вид</value>
@@ -259,13 +250,10 @@
   <data name="CategoryGateway" xml:space="preserve">
     <value>Шлюз</value>
   </data>
-  <data name="CategoryGeneral" xml:space="preserve">
-    <value>Общие</value>
-  </data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Разное</value>
   </data>
-  <data name="CategoryProtocol" xml:space="preserve">
+  <data name="Protocol" xml:space="preserve">
     <value>Протокол</value>
   </data>
   <data name="CategoryRedirect" xml:space="preserve">
@@ -274,10 +262,7 @@
   <data name="CcAlwaysShowScreen" xml:space="preserve">
     <value>Всегда показывать это окно при запуске</value>
   </data>
-  <data name="CcCheckAgain" xml:space="preserve">
-    <value>Обновление</value>
-  </data>
-  <data name="CcCheckFailed" xml:space="preserve">
+  <data name="CheckFailed" xml:space="preserve">
     <value>Ошибка проверки!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
@@ -333,17 +318,8 @@ VncSharp Control Version {0}</value>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Автоматически пытаться восстановить связь при отключении от сервера (только RDP и ICA)</value>
   </data>
-  <data name="CheckboxDomain" xml:space="preserve">
-    <value>Домен</value>
-  </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Больше не показывать это сообщение.</value>
-  </data>
-  <data name="CheckboxInheritance" xml:space="preserve">
-    <value>Наследование</value>
-  </data>
-  <data name="CheckboxPassword" xml:space="preserve">
-    <value>Пароль</value>
   </data>
   <data name="CheckboxProxyAuthentication" xml:space="preserve">
     <value>Требуется авторизация</value>
@@ -357,10 +333,10 @@ VncSharp Control Version {0}</value>
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Использовать прокси-сервер</value>
   </data>
-  <data name="CheckboxUsername" xml:space="preserve">
+  <data name="Username" xml:space="preserve">
     <value>Пользователь</value>
   </data>
-  <data name="CheckboxWaitForExit" xml:space="preserve">
+  <data name="WaitForExit" xml:space="preserve">
     <value>Ждать выхода</value>
   </data>
   <data name="CheckForUpdate" xml:space="preserve">
@@ -384,26 +360,14 @@ VncSharp Control Version {0}</value>
   <data name="CollapseAllFolders" xml:space="preserve">
     <value>Свернуть все папки</value>
   </data>
-  <data name="ColumnArguments" xml:space="preserve">
+  <data name="Arguments" xml:space="preserve">
     <value>Аргументы</value>
   </data>
-  <data name="ColumnDisplayName" xml:space="preserve">
-    <value>Отображаемое имя</value>
-  </data>
-  <data name="ColumnFilename" xml:space="preserve">
+  <data name="Filename" xml:space="preserve">
     <value>Имя файла</value>
-  </data>
-  <data name="ColumnHostnameIP" xml:space="preserve">
-    <value>Имя хоста/IP</value>
   </data>
   <data name="ColumnMessage" xml:space="preserve">
     <value>Сообщение</value>
-  </data>
-  <data name="ColumnUsername" xml:space="preserve">
-    <value>Пользователь</value>
-  </data>
-  <data name="ColumnWaitForExit" xml:space="preserve">
-    <value>Ждать выхода</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Невозможно разобрать аргументы командной строки!</value>
@@ -691,9 +655,6 @@ VncSharp Control Version {0}</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Автопереподключение</value>
   </data>
-  <data name="GroupboxConnection" xml:space="preserve">
-    <value>Соединение</value>
-  </data>
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
     <value>Свойства внешнего инструмента</value>
   </data>
@@ -772,9 +733,6 @@ VncSharp Control Version {0}</value>
   <data name="IntAppKillFailed" xml:space="preserve">
     <value>Не удалось завершить процесс внутреннего приложения!</value>
   </data>
-  <data name="IntAppParentHandle" xml:space="preserve">
-    <value>Панель обработчика событий: {0}</value>
-  </data>
   <data name="IntAppResizeFailed" xml:space="preserve">
     <value>Внутренний инструмент: Ошибка изменения размера!</value>
   </data>
@@ -784,20 +742,8 @@ VncSharp Control Version {0}</value>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Заголовок внешнего инструмента: {0}</value>
   </data>
-  <data name="KeysCtrlAltDel" xml:space="preserve">
-    <value>CTRL+ALT+DEL</value>
-  </data>
-  <data name="KeysCtrlEsc" xml:space="preserve">
-    <value>CTRL-ESC</value>
-  </data>
   <data name="LabelAddress" xml:space="preserve">
     <value>Адрес:</value>
-  </data>
-  <data name="LabelArguments" xml:space="preserve">
-    <value>Аргументы:</value>
-  </data>
-  <data name="LabelChangeLog" xml:space="preserve">
-    <value>История версий:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>При закрытии подключений:</value>
@@ -805,32 +751,17 @@ VncSharp Control Version {0}</value>
   <data name="LabelConnect" xml:space="preserve">
     <value>&amp;Подключение:</value>
   </data>
-  <data name="LabelDisplayName" xml:space="preserve">
+  <data name="DisplayName" xml:space="preserve">
     <value>Отображаемое имя:</value>
   </data>
-  <data name="LabelDomain" xml:space="preserve">
-    <value>Домен:</value>
-  </data>
-  <data name="LabelFilename" xml:space="preserve">
-    <value>Имя файла:</value>
+  <data name="Domain" xml:space="preserve">
+    <value>Домен</value>
   </data>
   <data name="LabelHostname" xml:space="preserve">
     <value>Имя хоста:</value>
   </data>
-  <data name="LabelOptions" xml:space="preserve">
-    <value>Опции:</value>
-  </data>
-  <data name="LabelPassword" xml:space="preserve">
-    <value>Пароль:</value>
-  </data>
-  <data name="LabelPort" xml:space="preserve">
-    <value>Порт:</value>
-  </data>
   <data name="LabelPortableEdition" xml:space="preserve">
     <value>Портативная версия</value>
-  </data>
-  <data name="LabelProtocol" xml:space="preserve">
-    <value>Протокол:</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
     <value>Нажмите на эту кнопку для настройки сессий PuTTY:</value>
@@ -850,14 +781,8 @@ VncSharp Control Version {0}</value>
   <data name="LabelServerStatus" xml:space="preserve">
     <value>Состояние сервера:</value>
   </data>
-  <data name="LabelSQLDatabaseName" xml:space="preserve">
+  <data name="Database" xml:space="preserve">
     <value>База данных:</value>
-  </data>
-  <data name="LabelSQLServerDatabaseName" xml:space="preserve">
-    <value>База данных:</value>
-  </data>
-  <data name="LabelUsername" xml:space="preserve">
-    <value>Пользователь:</value>
   </data>
   <data name="LabelVerify" xml:space="preserve">
     <value>Проверка:</value>
@@ -895,9 +820,6 @@ VncSharp Control Version {0}</value>
   <data name="MagicLibraryAttribution" xml:space="preserve">
     <value>Использовано Magic library от [Crownwood Software]</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>О программе</value>
-  </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Добавить Панель подключения</value>
   </data>
@@ -907,14 +829,8 @@ VncSharp Control Version {0}</value>
   <data name="MenuConfig" xml:space="preserve">
     <value>Конфигурация</value>
   </data>
-  <data name="MenuConnect" xml:space="preserve">
-    <value>Подключаться</value>
-  </data>
   <data name="MenuConnectionPanels" xml:space="preserve">
     <value>Панель подключений</value>
-  </data>
-  <data name="MenuConnections" xml:space="preserve">
-    <value>Подключения</value>
   </data>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Подключения и конфигурация</value>
@@ -922,14 +838,11 @@ VncSharp Control Version {0}</value>
   <data name="MenuCopy" xml:space="preserve">
     <value>Копировать</value>
   </data>
-  <data name="MenuCtrlAltDel" xml:space="preserve">
+  <data name="CtrlAltDel" xml:space="preserve">
     <value>Ctrl-Alt-Del</value>
   </data>
-  <data name="MenuCtrlEsc" xml:space="preserve">
+  <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
-  </data>
-  <data name="MenuDelete" xml:space="preserve">
-    <value>Удалить...</value>
   </data>
   <data name="MenuDeleteConnection" xml:space="preserve">
     <value>Удалить подключение...</value>
@@ -940,14 +853,8 @@ VncSharp Control Version {0}</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Удалить папку...</value>
   </data>
-  <data name="MenuDisconnect" xml:space="preserve">
-    <value>Отключить</value>
-  </data>
   <data name="MenuDonate" xml:space="preserve">
     <value>Помочь проекту</value>
-  </data>
-  <data name="MenuDuplicate" xml:space="preserve">
-    <value>Дублировать</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
     <value>Дубликат подключения</value>
@@ -969,12 +876,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="MenuFile" xml:space="preserve">
     <value>&amp;Файл</value>
-  </data>
-  <data name="MenuFullScreen" xml:space="preserve">
-    <value>Во весь экран</value>
-  </data>
-  <data name="MenuFullScreenRDP" xml:space="preserve">
-    <value>Во весь экран (RDP)</value>
   </data>
   <data name="MenuHelp" xml:space="preserve">
     <value>&amp;Справка</value>
@@ -1009,7 +910,7 @@ VncSharp Control Version {0}</value>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
     <value>Открыть файл подключения...</value>
   </data>
-  <data name="MenuOptions" xml:space="preserve">
+  <data name="Options" xml:space="preserve">
     <value>Опции</value>
   </data>
   <data name="MenuPaste" xml:space="preserve">
@@ -1051,9 +952,6 @@ VncSharp Control Version {0}</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Сохранить подключение как...</value>
   </data>
-  <data name="MenuScreenshot" xml:space="preserve">
-    <value>Скриншот</value>
-  </data>
   <data name="MenuScreenshotManager" xml:space="preserve">
     <value>Менеджер скриншотов </value>
   </data>
@@ -1093,7 +991,7 @@ VncSharp Control Version {0}</value>
   <data name="MenuView" xml:space="preserve">
     <value>&amp;Вид</value>
   </data>
-  <data name="MenuViewOnly" xml:space="preserve">
+  <data name="ViewOnly" xml:space="preserve">
     <value>Просмотр (VNC)</value>
   </data>
   <data name="MenuWebsite" xml:space="preserve">
@@ -1137,9 +1035,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="NoExtAppDefined" xml:space="preserve">
     <value>Не указано внешнее приложение.</value>
-  </data>
-  <data name="NoInformation" xml:space="preserve">
-    <value>Нет данных</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>ничто</value>
@@ -1337,7 +1232,7 @@ VncSharp Control Version {0}</value>
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Введите имя пользователя для авторизации на прокси-сервере.</value>
   </data>
-  <data name="PropertyNameAddress" xml:space="preserve">
+  <data name="HostnameIp" xml:space="preserve">
     <value>Имя хоста / IP</value>
   </data>
   <data name="PropertyNameAll" xml:space="preserve">
@@ -1367,9 +1262,6 @@ VncSharp Control Version {0}</value>
   <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
     <value>Показать обои</value>
   </data>
-  <data name="PropertyNameDomain" xml:space="preserve">
-    <value>Домен</value>
-  </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
     <value>Композиция рабочего стола</value>
   </data>
@@ -1391,9 +1283,6 @@ VncSharp Control Version {0}</value>
   <data name="PropertyNameExternalToolBefore" xml:space="preserve">
     <value>Внеш. Инстр. До</value>
   </data>
-  <data name="PropertyNameIcon" xml:space="preserve">
-    <value>Значок</value>
-  </data>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MAC-адрес</value>
   </data>
@@ -1403,14 +1292,11 @@ VncSharp Control Version {0}</value>
   <data name="PropertyNamePanel" xml:space="preserve">
     <value>Имя вкладки</value>
   </data>
-  <data name="PropertyNamePassword" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
-  <data name="PropertyNamePort" xml:space="preserve">
+  <data name="Port" xml:space="preserve">
     <value>Порт</value>
-  </data>
-  <data name="PropertyNameProtocol" xml:space="preserve">
-    <value>Протокол</value>
   </data>
   <data name="PropertyNamePuttySession" xml:space="preserve">
     <value>Сессии PuTTY</value>
@@ -1469,12 +1355,6 @@ VncSharp Control Version {0}</value>
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Дополнительно</value>
   </data>
-  <data name="PropertyNameUsername" xml:space="preserve">
-    <value>Пользователь</value>
-  </data>
-  <data name="PropertyNameViewOnly" xml:space="preserve">
-    <value>Только Просмотр</value>
-  </data>
   <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
     <value>Адрес прокси</value>
   </data>
@@ -1523,7 +1403,7 @@ VncSharp Control Version {0}</value>
   <data name="PuttyKillFailed" xml:space="preserve">
     <value>Убить процесс Putty не удалось!</value>
   </data>
-  <data name="PuttyParentHandle" xml:space="preserve">
+  <data name="PanelHandle" xml:space="preserve">
     <value>Панель обработчиков: {0}</value>
   </data>
   <data name="PuttyResizeFailed" xml:space="preserve">
@@ -1820,15 +1700,6 @@ VncSharp Control Version {0}</value>
   <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Один клик по открытому подключению переключается на него</value>
   </data>
-  <data name="SmartSizeModeAspect" xml:space="preserve">
-    <value>Вид</value>
-  </data>
-  <data name="SmartSizeModeFree" xml:space="preserve">
-    <value>Свободный</value>
-  </data>
-  <data name="SmartSizeModeNone" xml:space="preserve">
-    <value>SmartSize недоступен</value>
-  </data>
   <data name="Socks5" xml:space="preserve">
     <value>Socks 5</value>
   </data>
@@ -1889,9 +1760,6 @@ VncSharp Control Version {0}</value>
   <data name="TabAdvanced" xml:space="preserve">
     <value>Дополнительно</value>
   </data>
-  <data name="TabAppearance" xml:space="preserve">
-    <value>Внешний вид</value>
-  </data>
   <data name="TabsAndPanels" xml:space="preserve">
     <value>Вкладки и панели</value>
   </data>
@@ -1909,9 +1777,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
     <value>Подключения</value>
-  </data>
-  <data name="ThemeCategoryGeneral" xml:space="preserve">
-    <value>Общие</value>
   </data>
   <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
     <value>Цвет фона панели конфигурации.</value>
@@ -2036,7 +1901,7 @@ VncSharp Control Version {0}</value>
   <data name="TransferFailed" xml:space="preserve">
     <value>Передача не удалась!</value>
   </data>
-  <data name="TryIntegrate" xml:space="preserve">
+  <data name="TryToIntegrate" xml:space="preserve">
     <value>Интеграция</value>
   </data>
   <data name="Type" xml:space="preserve">
@@ -2171,9 +2036,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="ShowOnToolbarColumnHeader" xml:space="preserve">
     <value>Отобразить на панели инструментов</value>
-  </data>
-  <data name="TryToIntegrateColumnHeader" xml:space="preserve">
-    <value>Попробовать интегрировать</value>
   </data>
   <data name="WorkingDirColumnHeader" xml:space="preserve">
     <value>Рабочий каталог</value>
@@ -2363,9 +2225,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="TitlePasswordWithName" xml:space="preserve">
     <value>Пароль для {0}</value>
-  </data>
-  <data name="UpdateCheckFailedLabel" xml:space="preserve">
-    <value>Ошибка проверки</value>
   </data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
     <value>Проверка обновлений...</value>
@@ -2633,7 +2492,7 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="LabelReadOnly" xml:space="preserve">
     <value>Только чтение:</value>
   </data>
-  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+  <data name="LoadBalanceInfoUseUtf8_Duplicate[1]" xml:space="preserve">
     <value>Использовать кодировку UTF8 для свойства RDP «Информация о балансе загрузки»</value>
   </data>
   <data name="MenuLockToolbars" xml:space="preserve">

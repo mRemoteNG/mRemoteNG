@@ -126,12 +126,6 @@
   <data name="Activity" xml:space="preserve">
     <value>Aktivität</value>
   </data>
-  <data name="AddConnection" xml:space="preserve">
-    <value>Neue Verbindung</value>
-  </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Neuer Ordner</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>Das Laden des Knotens über XML ist fehlgeschlagen!</value>
   </data>
@@ -204,16 +198,16 @@
   <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Standardeigenschaften</value>
   </data>
-  <data name="ButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
     <value>Trennen</value>
   </data>
-  <data name="ButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Symbol</value>
   </data>
   <data name="ButtonImport" xml:space="preserve">
     <value>&amp;Importieren</value>
   </data>
-  <data name="ButtonInheritance" xml:space="preserve">
+  <data name="Inheritance" xml:space="preserve">
     <value>Vererbung</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
@@ -244,14 +238,11 @@ Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungsdateien!<
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Die eingegebenen IP-Daten sind ungültig, kann den Port Scan nicht starten.</value>
   </data>
-  <data name="CategoryAppearance" xml:space="preserve">
+  <data name="Appearance" xml:space="preserve">
     <value>Aussehen</value>
   </data>
-  <data name="CategoryConnection" xml:space="preserve">
+  <data name="Connection" xml:space="preserve">
     <value>Verbindung</value>
-  </data>
-  <data name="CategoryCredentials" xml:space="preserve">
-    <value>Anmeldedaten</value>
   </data>
   <data name="CategoryDisplay" xml:space="preserve">
     <value>Anzeige</value>
@@ -259,13 +250,10 @@ Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungsdateien!<
   <data name="CategoryGateway" xml:space="preserve">
     <value>Gateway</value>
   </data>
-  <data name="CategoryGeneral" xml:space="preserve">
-    <value>Allgemein</value>
-  </data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Verschiedenes</value>
   </data>
-  <data name="CategoryProtocol" xml:space="preserve">
+  <data name="Protocol" xml:space="preserve">
     <value>Protokoll</value>
   </data>
   <data name="CategoryRedirect" xml:space="preserve">
@@ -274,10 +262,7 @@ Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungsdateien!<
   <data name="CcAlwaysShowScreen" xml:space="preserve">
     <value>Diesen Bildschirm bei jedem Start anzeigen</value>
   </data>
-  <data name="CcCheckAgain" xml:space="preserve">
-    <value>Aktualisieren</value>
-  </data>
-  <data name="CcCheckFailed" xml:space="preserve">
+  <data name="CheckFailed" xml:space="preserve">
     <value>Prüfung fehlgeschlagen!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
@@ -333,17 +318,8 @@ VncSharp Control Version {0}</value>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisch versuchen zu verbinden, wenn Verbindung getrennt wird (nur RDP &amp;&amp; ICA)</value>
   </data>
-  <data name="CheckboxDomain" xml:space="preserve">
-    <value>Domäne</value>
-  </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Diese Nachricht nicht erneut zeigen.</value>
-  </data>
-  <data name="CheckboxInheritance" xml:space="preserve">
-    <value>Vererbung</value>
-  </data>
-  <data name="CheckboxPassword" xml:space="preserve">
-    <value>Passwort</value>
   </data>
   <data name="CheckboxProxyAuthentication" xml:space="preserve">
     <value>Benutze Authentifizierung</value>
@@ -357,10 +333,10 @@ VncSharp Control Version {0}</value>
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Proxy für automatische Updates verwenden</value>
   </data>
-  <data name="CheckboxUsername" xml:space="preserve">
+  <data name="Username" xml:space="preserve">
     <value>Benutzername</value>
   </data>
-  <data name="CheckboxWaitForExit" xml:space="preserve">
+  <data name="WaitForExit" xml:space="preserve">
     <value>Auf Beendigung warten</value>
   </data>
   <data name="CheckForUpdate" xml:space="preserve">
@@ -384,26 +360,14 @@ VncSharp Control Version {0}</value>
   <data name="CollapseAllFolders" xml:space="preserve">
     <value>Alle Ordner schließen</value>
   </data>
-  <data name="ColumnArguments" xml:space="preserve">
+  <data name="Arguments" xml:space="preserve">
     <value>Parameter</value>
   </data>
-  <data name="ColumnDisplayName" xml:space="preserve">
-    <value>Anzeigename</value>
-  </data>
-  <data name="ColumnFilename" xml:space="preserve">
+  <data name="Filename" xml:space="preserve">
     <value>Dateiname</value>
-  </data>
-  <data name="ColumnHostnameIP" xml:space="preserve">
-    <value>Hostname/IP</value>
   </data>
   <data name="ColumnMessage" xml:space="preserve">
     <value>Nachricht</value>
-  </data>
-  <data name="ColumnUsername" xml:space="preserve">
-    <value>Benutzername</value>
-  </data>
-  <data name="ColumnWaitForExit" xml:space="preserve">
-    <value>Auf Beendigung warten</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Die Kommandozeilenparameter konnten nicht ausgewertet werden!</value>
@@ -691,9 +655,6 @@ Starte mit neuer Datei.</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisches Wiederverbinden</value>
   </data>
-  <data name="GroupboxConnection" xml:space="preserve">
-    <value>Verbindung</value>
-  </data>
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
     <value>Eigenschaften des externen Programmes</value>
   </data>
@@ -772,9 +733,6 @@ Starte mit neuer Datei.</value>
   <data name="IntAppKillFailed" xml:space="preserve">
     <value>Beenden des Internen Programmes fehlgeschlagen!</value>
   </data>
-  <data name="IntAppParentHandle" xml:space="preserve">
-    <value>Panel Handle: {0}</value>
-  </data>
   <data name="IntAppResizeFailed" xml:space="preserve">
     <value>Internes Programm Größenanpassung fehlgeschlagen!</value>
   </data>
@@ -784,20 +742,8 @@ Starte mit neuer Datei.</value>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Internes Programm Titel: {0}</value>
   </data>
-  <data name="KeysCtrlAltDel" xml:space="preserve">
-    <value>STRG-ALT-ENTF</value>
-  </data>
-  <data name="KeysCtrlEsc" xml:space="preserve">
-    <value>STRG-ESC</value>
-  </data>
   <data name="LabelAddress" xml:space="preserve">
     <value>Addresse:</value>
-  </data>
-  <data name="LabelArguments" xml:space="preserve">
-    <value>Parameter:</value>
-  </data>
-  <data name="LabelChangeLog" xml:space="preserve">
-    <value>Veränderungsprotokoll:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>Beim Schließen der Verbindungen:</value>
@@ -805,32 +751,17 @@ Starte mit neuer Datei.</value>
   <data name="LabelConnect" xml:space="preserve">
     <value>&amp;Verbinden:</value>
   </data>
-  <data name="LabelDisplayName" xml:space="preserve">
+  <data name="DisplayName" xml:space="preserve">
     <value>Anzeigename</value>
   </data>
-  <data name="LabelDomain" xml:space="preserve">
-    <value>Domäne:</value>
-  </data>
-  <data name="LabelFilename" xml:space="preserve">
-    <value>Dateiname:</value>
+  <data name="Domain" xml:space="preserve">
+    <value>Domäne</value>
   </data>
   <data name="LabelHostname" xml:space="preserve">
     <value>Hostname:</value>
   </data>
-  <data name="LabelOptions" xml:space="preserve">
-    <value>Optionen:</value>
-  </data>
-  <data name="LabelPassword" xml:space="preserve">
-    <value>Passwort:</value>
-  </data>
-  <data name="LabelPort" xml:space="preserve">
-    <value>Port:</value>
-  </data>
   <data name="LabelPortableEdition" xml:space="preserve">
     <value>Portable Edition</value>
-  </data>
-  <data name="LabelProtocol" xml:space="preserve">
-    <value>Protokoll:</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
     <value>Klicken Sie hier, um die PuTTY-Sitzung zu konfigurieren:</value>
@@ -850,14 +781,8 @@ Starte mit neuer Datei.</value>
   <data name="LabelServerStatus" xml:space="preserve">
     <value>Serverstatus:</value>
   </data>
-  <data name="LabelSQLDatabaseName" xml:space="preserve">
+  <data name="Database" xml:space="preserve">
     <value>Datenbank:</value>
-  </data>
-  <data name="LabelSQLServerDatabaseName" xml:space="preserve">
-    <value>Datenbank:</value>
-  </data>
-  <data name="LabelUsername" xml:space="preserve">
-    <value>Benutzername:</value>
   </data>
   <data name="LabelVerify" xml:space="preserve">
     <value>Überprüfen:</value>
@@ -895,9 +820,6 @@ Starte mit neuer Datei.</value>
   <data name="MagicLibraryAttribution" xml:space="preserve">
     <value>Benutzt die Magic Bibliothek von [Crownwood Software]</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Über</value>
-  </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Verbindungs-Panel hinzufügen</value>
   </data>
@@ -907,14 +829,8 @@ Starte mit neuer Datei.</value>
   <data name="MenuConfig" xml:space="preserve">
     <value>Konfiguration</value>
   </data>
-  <data name="MenuConnect" xml:space="preserve">
-    <value>Verbinden</value>
-  </data>
   <data name="MenuConnectionPanels" xml:space="preserve">
     <value>Verbindungs-Panels</value>
-  </data>
-  <data name="MenuConnections" xml:space="preserve">
-    <value>Verbindungen</value>
   </data>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Verbindungen und Konfiguration</value>
@@ -922,14 +838,11 @@ Starte mit neuer Datei.</value>
   <data name="MenuCopy" xml:space="preserve">
     <value>Kopieren</value>
   </data>
-  <data name="MenuCtrlAltDel" xml:space="preserve">
+  <data name="CtrlAltDel" xml:space="preserve">
     <value>STRG-ALT-ENTF</value>
   </data>
-  <data name="MenuCtrlEsc" xml:space="preserve">
+  <data name="CtrlEsc" xml:space="preserve">
     <value>STRG-ESC</value>
-  </data>
-  <data name="MenuDelete" xml:space="preserve">
-    <value>Löschen</value>
   </data>
   <data name="MenuDeleteConnection" xml:space="preserve">
     <value>Verbindung löschen</value>
@@ -940,14 +853,8 @@ Starte mit neuer Datei.</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Ordner löschen</value>
   </data>
-  <data name="MenuDisconnect" xml:space="preserve">
-    <value>Trennen</value>
-  </data>
   <data name="MenuDonate" xml:space="preserve">
     <value>Spenden</value>
-  </data>
-  <data name="MenuDuplicate" xml:space="preserve">
-    <value>Duplizieren</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
     <value>Verbindung duplizieren</value>
@@ -969,12 +876,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="MenuFile" xml:space="preserve">
     <value>&amp;Datei</value>
-  </data>
-  <data name="MenuFullScreen" xml:space="preserve">
-    <value>Vollbild</value>
-  </data>
-  <data name="MenuFullScreenRDP" xml:space="preserve">
-    <value>Vollbild (RDP)</value>
   </data>
   <data name="MenuHelp" xml:space="preserve">
     <value>&amp;Hilfe</value>
@@ -1006,7 +907,7 @@ Starte mit neuer Datei.</value>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
     <value>Verbindungsdatei öffnen</value>
   </data>
-  <data name="MenuOptions" xml:space="preserve">
+  <data name="Options" xml:space="preserve">
     <value>Optionen</value>
   </data>
   <data name="MenuPaste" xml:space="preserve">
@@ -1048,9 +949,6 @@ Starte mit neuer Datei.</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Verbindungsdatei speichern unter</value>
   </data>
-  <data name="MenuScreenshot" xml:space="preserve">
-    <value>Bildschirmschnappschuss</value>
-  </data>
   <data name="MenuScreenshotManager" xml:space="preserve">
     <value>Bildschirmschnappschuss-Verwaltung</value>
   </data>
@@ -1090,7 +988,7 @@ Starte mit neuer Datei.</value>
   <data name="MenuView" xml:space="preserve">
     <value>&amp;Ansicht</value>
   </data>
-  <data name="MenuViewOnly" xml:space="preserve">
+  <data name="ViewOnly" xml:space="preserve">
     <value>View-Only-Modus</value>
   </data>
   <data name="MenuWebsite" xml:space="preserve">
@@ -1134,9 +1032,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="NoExtAppDefined" xml:space="preserve">
     <value>Kein externes Programm definiert!</value>
-  </data>
-  <data name="NoInformation" xml:space="preserve">
-    <value>keine Anmeldeinformationen</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>Keine Angabe</value>
@@ -1334,7 +1229,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Geben Sie Ihren Benutzernamen ein.</value>
   </data>
-  <data name="PropertyNameAddress" xml:space="preserve">
+  <data name="HostnameIp" xml:space="preserve">
     <value>Hostname/IP</value>
   </data>
   <data name="PropertyNameAll" xml:space="preserve">
@@ -1364,9 +1259,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
     <value>Hintergrundbild anzeigen</value>
   </data>
-  <data name="PropertyNameDomain" xml:space="preserve">
-    <value>Domäne</value>
-  </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
     <value>Desktopgestaltung</value>
   </data>
@@ -1388,9 +1280,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="PropertyNameExternalToolBefore" xml:space="preserve">
     <value>Externes Programm vorher</value>
   </data>
-  <data name="PropertyNameIcon" xml:space="preserve">
-    <value>Symbol</value>
-  </data>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MAC-Adresse</value>
   </data>
@@ -1400,14 +1289,11 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="PropertyNamePanel" xml:space="preserve">
     <value>Panel</value>
   </data>
-  <data name="PropertyNamePassword" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
     <value>Passwort</value>
   </data>
-  <data name="PropertyNamePort" xml:space="preserve">
+  <data name="Port" xml:space="preserve">
     <value>Port</value>
-  </data>
-  <data name="PropertyNameProtocol" xml:space="preserve">
-    <value>Protokoll</value>
   </data>
   <data name="PropertyNamePuttySession" xml:space="preserve">
     <value>PuTTY-Sitzung</value>
@@ -1466,12 +1352,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Benutzerfeld</value>
   </data>
-  <data name="PropertyNameUsername" xml:space="preserve">
-    <value>Benutzername</value>
-  </data>
-  <data name="PropertyNameViewOnly" xml:space="preserve">
-    <value>View-Only</value>
-  </data>
   <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
     <value>Proxy-Adresse</value>
   </data>
@@ -1519,7 +1399,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="PuttyKillFailed" xml:space="preserve">
     <value>Beenden von PuTTY fehlgeschlagen!</value>
   </data>
-  <data name="PuttyParentHandle" xml:space="preserve">
+  <data name="PanelHandle" xml:space="preserve">
     <value>Panel Handle: {0}</value>
   </data>
   <data name="PuttyResizeFailed" xml:space="preserve">
@@ -1813,15 +1693,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Ein einzelner Klick auf eine geöffnete Verbindung springt zu dieser</value>
   </data>
-  <data name="SmartSizeModeAspect" xml:space="preserve">
-    <value>Aspekt</value>
-  </data>
-  <data name="SmartSizeModeFree" xml:space="preserve">
-    <value>verfügbar</value>
-  </data>
-  <data name="SmartSizeModeNone" xml:space="preserve">
-    <value>Kein SmartSize</value>
-  </data>
   <data name="Socks5" xml:space="preserve">
     <value>Socks 5</value>
   </data>
@@ -1882,9 +1753,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="TabAdvanced" xml:space="preserve">
     <value>Erweitert</value>
   </data>
-  <data name="TabAppearance" xml:space="preserve">
-    <value>Aussehen</value>
-  </data>
   <data name="TabsAndPanels" xml:space="preserve">
     <value>Tabs &amp;&amp; Panele</value>
   </data>
@@ -1902,9 +1770,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
     <value>Connections Panel</value>
-  </data>
-  <data name="ThemeCategoryGeneral" xml:space="preserve">
-    <value>Allgemein</value>
   </data>
   <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
     <value>Die Hintergrundfarbe des Config-Panels.</value>
@@ -2029,7 +1894,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="TransferFailed" xml:space="preserve">
     <value>Übertragung fehlgeschlagen!</value>
   </data>
-  <data name="TryIntegrate" xml:space="preserve">
+  <data name="TryToIntegrate" xml:space="preserve">
     <value>Integration versuchen</value>
   </data>
   <data name="Type" xml:space="preserve">
@@ -2215,9 +2080,6 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   </data>
   <data name="OptionsTabKeyboard" xml:space="preserve">
     <value>Tastatur</value>
-  </data>
-  <data name="UpdateCheckFailedLabel" xml:space="preserve">
-    <value>Prüfung fehlgeschlagen</value>
   </data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
     <value>Nach Updates suchen...</value>
@@ -2612,7 +2474,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="EncryptionKeyDerivationIterations" xml:space="preserve">
     <value>Iterationen der Ableitungsfunktion</value>
   </data>
-  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+  <data name="LoadBalanceInfoUseUtf8_Duplicate[1]" xml:space="preserve">
     <value>UTF8-Kodierung für RDP Eigenschaft "Load Balance Info" verwenden</value>
   </data>
   <data name="Credentials" xml:space="preserve">

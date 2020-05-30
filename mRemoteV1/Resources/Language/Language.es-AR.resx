@@ -126,10 +126,10 @@
   <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Propiedades por defecto</value>
   </data>
-  <data name="ButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
     <value>Desconectar</value>
   </data>
-  <data name="ButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Icono</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
@@ -149,9 +149,6 @@
   </data>
   <data name="ButtonTestProxy" xml:space="preserve">
     <value>Probar Proxy</value>
-  </data>
-  <data name="CategoryCredentials" xml:space="preserve">
-    <value>Credenciales</value>
   </data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Varios</value>
@@ -175,17 +172,8 @@ VncSharp Control {0}</value>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Intentar reconectar automáticamente cuando se desconecte (solo para RDP &amp;&amp; ICA)</value>
   </data>
-  <data name="CheckboxDomain" xml:space="preserve">
-    <value>Dominio</value>
-  </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>No mostrar este mensaje de nuevo.</value>
-  </data>
-  <data name="CheckboxInheritance" xml:space="preserve">
-    <value>Herencia</value>
-  </data>
-  <data name="CheckboxPassword" xml:space="preserve">
-    <value>Contraseña</value>
   </data>
   <data name="CheckboxProxyAuthentication" xml:space="preserve">
     <value>Este servidor proxy requiere autenticación</value>
@@ -199,10 +187,10 @@ VncSharp Control {0}</value>
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Usar un servidor proxy para conectarse</value>
   </data>
-  <data name="CheckboxUsername" xml:space="preserve">
+  <data name="Username" xml:space="preserve">
     <value>Usuario</value>
   </data>
-  <data name="CheckboxWaitForExit" xml:space="preserve">
+  <data name="WaitForExit" xml:space="preserve">
     <value>Esperar a Salir</value>
   </data>
   <data name="CheckForUpdate" xml:space="preserve">

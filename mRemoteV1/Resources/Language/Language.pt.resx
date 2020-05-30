@@ -126,12 +126,6 @@
   <data name="Activity" xml:space="preserve">
     <value>Atividade</value>
   </data>
-  <data name="AddConnection" xml:space="preserve">
-    <value>Nova ligação</value>
-  </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Nova pasta</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML falhou!</value>
   </data>
@@ -204,16 +198,16 @@
   <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Propriedades padrão</value>
   </data>
-  <data name="ButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
     <value>Desligar</value>
   </data>
-  <data name="ButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Ícone</value>
   </data>
   <data name="ButtonImport" xml:space="preserve">
     <value>&amp;Importação</value>
   </data>
-  <data name="ButtonInheritance" xml:space="preserve">
+  <data name="Inheritance" xml:space="preserve">
     <value>Herança</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
@@ -243,14 +237,11 @@
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Não é possível iniciar a procura de portas, formato de IP incorreto!</value>
   </data>
-  <data name="CategoryAppearance" xml:space="preserve">
+  <data name="Appearance" xml:space="preserve">
     <value>Aparência</value>
   </data>
-  <data name="CategoryConnection" xml:space="preserve">
+  <data name="Connection" xml:space="preserve">
     <value>Ligação</value>
-  </data>
-  <data name="CategoryCredentials" xml:space="preserve">
-    <value>Credenciais</value>
   </data>
   <data name="CategoryDisplay" xml:space="preserve">
     <value>Ecrã</value>
@@ -258,13 +249,10 @@
   <data name="CategoryGateway" xml:space="preserve">
     <value>Gateway</value>
   </data>
-  <data name="CategoryGeneral" xml:space="preserve">
-    <value>Geral</value>
-  </data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Diversos</value>
   </data>
-  <data name="CategoryProtocol" xml:space="preserve">
+  <data name="Protocol" xml:space="preserve">
     <value>Protocolo</value>
   </data>
   <data name="CategoryRedirect" xml:space="preserve">
@@ -273,10 +261,7 @@
   <data name="CcAlwaysShowScreen" xml:space="preserve">
     <value>Mostrar sempre esta informação no arranque</value>
   </data>
-  <data name="CcCheckAgain" xml:space="preserve">
-    <value>Refrescar</value>
-  </data>
-  <data name="CcCheckFailed" xml:space="preserve">
+  <data name="CheckFailed" xml:space="preserve">
     <value>Falha na verificação!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
@@ -318,17 +303,8 @@
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Tentar reconectar automaticamente quando desconectado do servidor (RDP &amp;&amp; ICA somente)</value>
   </data>
-  <data name="CheckboxDomain" xml:space="preserve">
-    <value>Domínio</value>
-  </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Não mostrar esta mensagem novamente.</value>
-  </data>
-  <data name="CheckboxInheritance" xml:space="preserve">
-    <value>Herança</value>
-  </data>
-  <data name="CheckboxPassword" xml:space="preserve">
-    <value>Senha</value>
   </data>
   <data name="CheckboxProxyAuthentication" xml:space="preserve">
     <value>Este servidor proxy requer autenticação</value>
@@ -342,10 +318,10 @@
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Usar um servidor proxy para se ligar</value>
   </data>
-  <data name="CheckboxUsername" xml:space="preserve">
+  <data name="Username" xml:space="preserve">
     <value>Nome de utilizador</value>
   </data>
-  <data name="CheckboxWaitForExit" xml:space="preserve">
+  <data name="WaitForExit" xml:space="preserve">
     <value>Esperar para sair</value>
   </data>
   <data name="CheckForUpdate" xml:space="preserve">
@@ -369,26 +345,14 @@
   <data name="CollapseAllFolders" xml:space="preserve">
     <value>Recolher todas as pastas</value>
   </data>
-  <data name="ColumnArguments" xml:space="preserve">
+  <data name="Arguments" xml:space="preserve">
     <value>Argumentos</value>
   </data>
-  <data name="ColumnDisplayName" xml:space="preserve">
-    <value>Nome a exibir</value>
-  </data>
-  <data name="ColumnFilename" xml:space="preserve">
+  <data name="Filename" xml:space="preserve">
     <value>Nome do arquivo</value>
-  </data>
-  <data name="ColumnHostnameIP" xml:space="preserve">
-    <value>HostName/IP</value>
   </data>
   <data name="ColumnMessage" xml:space="preserve">
     <value>Mensagem</value>
-  </data>
-  <data name="ColumnUsername" xml:space="preserve">
-    <value>Nome de utilizador</value>
-  </data>
-  <data name="ColumnWaitForExit" xml:space="preserve">
-    <value>Esperar para sair</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Impossível processar argumentos da linha de comando!</value>
@@ -663,9 +627,6 @@ Descrição do erro: {1}</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Ligação automática</value>
   </data>
-  <data name="GroupboxConnection" xml:space="preserve">
-    <value>Ligação</value>
-  </data>
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
     <value>Propriedades de ferramentas externas</value>
   </data>
@@ -744,9 +705,6 @@ Descrição do erro: {1}</value>
   <data name="IntAppKillFailed" xml:space="preserve">
     <value>Processo de matar Int App falhou!</value>
   </data>
-  <data name="IntAppParentHandle" xml:space="preserve">
-    <value>Painel Handle: {0}</value>
-  </data>
   <data name="IntAppResizeFailed" xml:space="preserve">
     <value>Redimensionamento do Int App falhou!</value>
   </data>
@@ -756,20 +714,8 @@ Descrição do erro: {1}</value>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Int App título: {0}</value>
   </data>
-  <data name="KeysCtrlAltDel" xml:space="preserve">
-    <value>CTRL-ALT-DEL</value>
-  </data>
-  <data name="KeysCtrlEsc" xml:space="preserve">
-    <value>CTRL-ESC</value>
-  </data>
   <data name="LabelAddress" xml:space="preserve">
     <value>Endereço:</value>
-  </data>
-  <data name="LabelArguments" xml:space="preserve">
-    <value>Argumentos:</value>
-  </data>
-  <data name="LabelChangeLog" xml:space="preserve">
-    <value>Log de alterações:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>Ao fechar ligações:</value>
@@ -777,32 +723,17 @@ Descrição do erro: {1}</value>
   <data name="LabelConnect" xml:space="preserve">
     <value>&amp;Ligar:</value>
   </data>
-  <data name="LabelDisplayName" xml:space="preserve">
+  <data name="DisplayName" xml:space="preserve">
     <value>Nome a exibir</value>
   </data>
-  <data name="LabelDomain" xml:space="preserve">
-    <value>Domínio:</value>
-  </data>
-  <data name="LabelFilename" xml:space="preserve">
-    <value>Nome do arquivo:</value>
+  <data name="Domain" xml:space="preserve">
+    <value>Domínio</value>
   </data>
   <data name="LabelHostname" xml:space="preserve">
     <value>Hostname:</value>
   </data>
-  <data name="LabelOptions" xml:space="preserve">
-    <value>Opções:</value>
-  </data>
-  <data name="LabelPassword" xml:space="preserve">
-    <value>Senha:</value>
-  </data>
-  <data name="LabelPort" xml:space="preserve">
-    <value>Porta:</value>
-  </data>
   <data name="LabelPortableEdition" xml:space="preserve">
     <value>Edição portátil</value>
-  </data>
-  <data name="LabelProtocol" xml:space="preserve">
-    <value>Protocolo:</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
     <value>Para configurar as sessões PuTTY clique neste botão:</value>
@@ -822,14 +753,8 @@ Descrição do erro: {1}</value>
   <data name="LabelServerStatus" xml:space="preserve">
     <value>Estado do servidor:</value>
   </data>
-  <data name="LabelSQLDatabaseName" xml:space="preserve">
+  <data name="Database" xml:space="preserve">
     <value>Banco de dados:</value>
-  </data>
-  <data name="LabelSQLServerDatabaseName" xml:space="preserve">
-    <value>Banco de dados:</value>
-  </data>
-  <data name="LabelUsername" xml:space="preserve">
-    <value>Nome de utilizador:</value>
   </data>
   <data name="LabelVerify" xml:space="preserve">
     <value>Verificar:</value>
@@ -867,9 +792,6 @@ Descrição do erro: {1}</value>
   <data name="MagicLibraryAttribution" xml:space="preserve">
     <value>Usa a biblioteca mágica [Crownwood Software]</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Sobre</value>
-  </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Adicionar o Painel de Ligação</value>
   </data>
@@ -879,14 +801,8 @@ Descrição do erro: {1}</value>
   <data name="MenuConfig" xml:space="preserve">
     <value>Config</value>
   </data>
-  <data name="MenuConnect" xml:space="preserve">
-    <value>Ligar</value>
-  </data>
   <data name="MenuConnectionPanels" xml:space="preserve">
     <value>Painéis de ligações</value>
-  </data>
-  <data name="MenuConnections" xml:space="preserve">
-    <value>Ligações</value>
   </data>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Configurações e ligações</value>
@@ -894,14 +810,11 @@ Descrição do erro: {1}</value>
   <data name="MenuCopy" xml:space="preserve">
     <value>Copiar</value>
   </data>
-  <data name="MenuCtrlAltDel" xml:space="preserve">
+  <data name="CtrlAltDel" xml:space="preserve">
     <value>Ctrl-Alt-Del</value>
   </data>
-  <data name="MenuCtrlEsc" xml:space="preserve">
+  <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
-  </data>
-  <data name="MenuDelete" xml:space="preserve">
-    <value>Excluir...</value>
   </data>
   <data name="MenuDeleteConnection" xml:space="preserve">
     <value>Excluir a conexão...</value>
@@ -912,14 +825,8 @@ Descrição do erro: {1}</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Excluir a pasta...</value>
   </data>
-  <data name="MenuDisconnect" xml:space="preserve">
-    <value>Desligar</value>
-  </data>
   <data name="MenuDonate" xml:space="preserve">
     <value>Doar</value>
-  </data>
-  <data name="MenuDuplicate" xml:space="preserve">
-    <value>Duplicar</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
     <value>Duplicar ligação</value>
@@ -941,12 +848,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="MenuFile" xml:space="preserve">
     <value>&amp;Arquivo</value>
-  </data>
-  <data name="MenuFullScreen" xml:space="preserve">
-    <value>Ecrã completo</value>
-  </data>
-  <data name="MenuFullScreenRDP" xml:space="preserve">
-    <value>Ecrã completo (RDP)</value>
   </data>
   <data name="MenuHelp" xml:space="preserve">
     <value>&amp;Ajuda</value>
@@ -981,7 +882,7 @@ Descrição do erro: {1}</value>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
     <value>Abrir arquivo de ligações...</value>
   </data>
-  <data name="MenuOptions" xml:space="preserve">
+  <data name="Options" xml:space="preserve">
     <value>Opções</value>
   </data>
   <data name="MenuPaste" xml:space="preserve">
@@ -1023,9 +924,6 @@ Descrição do erro: {1}</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Salvar arquivo de ligações, como...</value>
   </data>
-  <data name="MenuScreenshot" xml:space="preserve">
-    <value>Fotografia do ecrã</value>
-  </data>
   <data name="MenuScreenshotManager" xml:space="preserve">
     <value>Gestor de fotografias de ecrã</value>
   </data>
@@ -1062,7 +960,7 @@ Descrição do erro: {1}</value>
   <data name="MenuView" xml:space="preserve">
     <value>&amp;Vista</value>
   </data>
-  <data name="MenuViewOnly" xml:space="preserve">
+  <data name="ViewOnly" xml:space="preserve">
     <value>Somente ver (VNC)</value>
   </data>
   <data name="MenuWebsite" xml:space="preserve">
@@ -1106,9 +1004,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="NoExtAppDefined" xml:space="preserve">
     <value>Nenhuma App externa especificada.</value>
-  </data>
-  <data name="NoInformation" xml:space="preserve">
-    <value>Nenhum</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>Nenhum</value>
@@ -1305,7 +1200,7 @@ Descrição do erro: {1}</value>
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Digite seu nome de utilizador para se autenticar no proxy.</value>
   </data>
-  <data name="PropertyNameAddress" xml:space="preserve">
+  <data name="HostnameIp" xml:space="preserve">
     <value>HostName/IP</value>
   </data>
   <data name="PropertyNameAll" xml:space="preserve">
@@ -1335,9 +1230,6 @@ Descrição do erro: {1}</value>
   <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
     <value>Papel de parede do ecrã</value>
   </data>
-  <data name="PropertyNameDomain" xml:space="preserve">
-    <value>Domínio</value>
-  </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
     <value>Composição do desktop</value>
   </data>
@@ -1359,9 +1251,6 @@ Descrição do erro: {1}</value>
   <data name="PropertyNameExternalToolBefore" xml:space="preserve">
     <value>Ferramenta externa antes</value>
   </data>
-  <data name="PropertyNameIcon" xml:space="preserve">
-    <value>Ícone</value>
-  </data>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>Endereço MAC</value>
   </data>
@@ -1371,14 +1260,11 @@ Descrição do erro: {1}</value>
   <data name="PropertyNamePanel" xml:space="preserve">
     <value>Painel</value>
   </data>
-  <data name="PropertyNamePassword" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
     <value>Senha</value>
   </data>
-  <data name="PropertyNamePort" xml:space="preserve">
+  <data name="Port" xml:space="preserve">
     <value>Porta</value>
-  </data>
-  <data name="PropertyNameProtocol" xml:space="preserve">
-    <value>Protocolo</value>
   </data>
   <data name="PropertyNamePuttySession" xml:space="preserve">
     <value>Sessão de puTTY</value>
@@ -1437,12 +1323,6 @@ Descrição do erro: {1}</value>
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Campo de utilizador</value>
   </data>
-  <data name="PropertyNameUsername" xml:space="preserve">
-    <value>Nome de utilizador</value>
-  </data>
-  <data name="PropertyNameViewOnly" xml:space="preserve">
-    <value>Somente ver</value>
-  </data>
   <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
     <value>Endereço proxy</value>
   </data>
@@ -1488,7 +1368,7 @@ Descrição do erro: {1}</value>
   <data name="PuttyKillFailed" xml:space="preserve">
     <value>Falha em fechar o processo Putty!</value>
   </data>
-  <data name="PuttyParentHandle" xml:space="preserve">
+  <data name="PanelHandle" xml:space="preserve">
     <value>Painel Handle: {0}</value>
   </data>
   <data name="PuttyResizeFailed" xml:space="preserve">
@@ -1782,15 +1662,6 @@ Descrição do erro: {1}</value>
   <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Clique simples em ligação aberta alterna</value>
   </data>
-  <data name="SmartSizeModeAspect" xml:space="preserve">
-    <value>Aspeto</value>
-  </data>
-  <data name="SmartSizeModeFree" xml:space="preserve">
-    <value>Libertar</value>
-  </data>
-  <data name="SmartSizeModeNone" xml:space="preserve">
-    <value>Sem SmartSize</value>
-  </data>
   <data name="Socks5" xml:space="preserve">
     <value>Stocks 5</value>
   </data>
@@ -1848,9 +1719,6 @@ Descrição do erro: {1}</value>
   <data name="TabAdvanced" xml:space="preserve">
     <value>Avançado</value>
   </data>
-  <data name="TabAppearance" xml:space="preserve">
-    <value>Aparência</value>
-  </data>
   <data name="TabsAndPanels" xml:space="preserve">
     <value>Abas &amp;&amp; painéis</value>
   </data>
@@ -1868,9 +1736,6 @@ Descrição do erro: {1}</value>
   </data>
   <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
     <value>Painel de ligações</value>
-  </data>
-  <data name="ThemeCategoryGeneral" xml:space="preserve">
-    <value>Geral</value>
   </data>
   <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
     <value>A cor de fundo do painel de configuração.</value>
@@ -1971,7 +1836,7 @@ Descrição do erro: {1}</value>
   <data name="TransferFailed" xml:space="preserve">
     <value>Transferência falhada!</value>
   </data>
-  <data name="TryIntegrate" xml:space="preserve">
+  <data name="TryToIntegrate" xml:space="preserve">
     <value>Tentar integrar</value>
   </data>
   <data name="Type" xml:space="preserve">

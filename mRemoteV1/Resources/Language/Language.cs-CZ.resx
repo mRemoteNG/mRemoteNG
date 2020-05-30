@@ -129,12 +129,6 @@
   <data name="Activity" xml:space="preserve">
     <value>Aktivita</value>
   </data>
-  <data name="AddConnection" xml:space="preserve">
-    <value>Nové připojení</value>
-  </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Nová složka</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>Operace přidání uzlu (AddNodeFromXML) selhala!</value>
   </data>
@@ -207,16 +201,16 @@
   <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Výchozí vlastnosti</value>
   </data>
-  <data name="ButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
     <value>Odpojit</value>
   </data>
-  <data name="ButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Ikona</value>
   </data>
   <data name="ButtonImport" xml:space="preserve">
     <value>&amp;Importovat</value>
   </data>
-  <data name="ButtonInheritance" xml:space="preserve">
+  <data name="Inheritance" xml:space="preserve">
     <value>Z nadřazené</value>
   </data>
   <data name="ButtonLaunch" xml:space="preserve">
@@ -250,14 +244,11 @@ Prosím použijte Soubor - Otevřít seznam spojení... pro načtení souboru s 
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Nelze scanovat porty, IP adresa má nesprávný tvar!</value>
   </data>
-  <data name="CategoryAppearance" xml:space="preserve">
+  <data name="Appearance" xml:space="preserve">
     <value>Vzhled</value>
   </data>
-  <data name="CategoryConnection" xml:space="preserve">
+  <data name="Connection" xml:space="preserve">
     <value>Spojení</value>
-  </data>
-  <data name="CategoryCredentials" xml:space="preserve">
-    <value>Autentizace</value>
   </data>
   <data name="CategoryDisplay" xml:space="preserve">
     <value>Zobrazení</value>
@@ -265,13 +256,10 @@ Prosím použijte Soubor - Otevřít seznam spojení... pro načtení souboru s 
   <data name="CategoryGateway" xml:space="preserve">
     <value>Brána</value>
   </data>
-  <data name="CategoryGeneral" xml:space="preserve">
-    <value>Všeobecné</value>
-  </data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Různé</value>
   </data>
-  <data name="CategoryProtocol" xml:space="preserve">
+  <data name="Protocol" xml:space="preserve">
     <value>Protokol</value>
   </data>
   <data name="CategoryRedirect" xml:space="preserve">
@@ -280,10 +268,7 @@ Prosím použijte Soubor - Otevřít seznam spojení... pro načtení souboru s 
   <data name="CcAlwaysShowScreen" xml:space="preserve">
     <value>Vždy zobrazit tento dialog při startu</value>
   </data>
-  <data name="CcCheckAgain" xml:space="preserve">
-    <value>Obnovit</value>
-  </data>
-  <data name="CcCheckFailed" xml:space="preserve">
+  <data name="CheckFailed" xml:space="preserve">
     <value>Kontrola selhala!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
@@ -338,17 +323,8 @@ VncSharp Control verze {0}</value>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automaticky obnovit připojení v případě přerušení spojení se serverem(pouze RDP &amp;&amp; ICA)</value>
   </data>
-  <data name="CheckboxDomain" xml:space="preserve">
-    <value>Doména</value>
-  </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Tuto zprávu příště nezobrazovat.</value>
-  </data>
-  <data name="CheckboxInheritance" xml:space="preserve">
-    <value>Dle nadřazené</value>
-  </data>
-  <data name="CheckboxPassword" xml:space="preserve">
-    <value>Heslo</value>
   </data>
   <data name="CheckboxProxyAuthentication" xml:space="preserve">
     <value>Tento proxy server vyžaduje autentizaci</value>
@@ -362,10 +338,10 @@ VncSharp Control verze {0}</value>
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Pro spojení použít proxy server</value>
   </data>
-  <data name="CheckboxUsername" xml:space="preserve">
+  <data name="Username" xml:space="preserve">
     <value>Login</value>
   </data>
-  <data name="CheckboxWaitForExit" xml:space="preserve">
+  <data name="WaitForExit" xml:space="preserve">
     <value>Čekat na logout</value>
   </data>
   <data name="CheckForUpdate" xml:space="preserve">
@@ -389,26 +365,14 @@ VncSharp Control verze {0}</value>
   <data name="CollapseAllFolders" xml:space="preserve">
     <value>Sbalit vše</value>
   </data>
-  <data name="ColumnArguments" xml:space="preserve">
+  <data name="Arguments" xml:space="preserve">
     <value>Přepínače (parametry)</value>
   </data>
-  <data name="ColumnDisplayName" xml:space="preserve">
-    <value>Zobrazené jméno</value>
-  </data>
-  <data name="ColumnFilename" xml:space="preserve">
+  <data name="Filename" xml:space="preserve">
     <value>Jméno souboru</value>
-  </data>
-  <data name="ColumnHostnameIP" xml:space="preserve">
-    <value>Host/IP</value>
   </data>
   <data name="ColumnMessage" xml:space="preserve">
     <value>Zpráva</value>
-  </data>
-  <data name="ColumnUsername" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="ColumnWaitForExit" xml:space="preserve">
-    <value>Čekat na logout</value>
   </data>
   <data name="CommandExitProgram" xml:space="preserve">
     <value>E&amp;xit {0}</value>
@@ -753,9 +717,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Automaticky obnovit spojení</value>
   </data>
-  <data name="GroupboxConnection" xml:space="preserve">
-    <value>Spojení</value>
-  </data>
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
     <value>Vlastnosti externích nástrojů</value>
   </data>
@@ -867,9 +828,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="IntAppKillFailed" xml:space="preserve">
     <value>Ukončení Int App Process selhalo!</value>
   </data>
-  <data name="IntAppParentHandle" xml:space="preserve">
-    <value>Handler Panelu : {0}</value>
-  </data>
   <data name="IntAppResizeFailed" xml:space="preserve">
     <value>Metoda Int App Resize selhala!</value>
   </data>
@@ -879,20 +837,8 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Int App Název: {0}</value>
   </data>
-  <data name="KeysCtrlAltDel" xml:space="preserve">
-    <value>CTRL-ALT-DEL</value>
-  </data>
-  <data name="KeysCtrlEsc" xml:space="preserve">
-    <value>CTRL-ESC</value>
-  </data>
   <data name="LabelAddress" xml:space="preserve">
     <value>Adresa:</value>
-  </data>
-  <data name="LabelArguments" xml:space="preserve">
-    <value>Parametry:</value>
-  </data>
-  <data name="LabelChangeLog" xml:space="preserve">
-    <value>Change Log:</value>
   </data>
   <data name="LabelClosingConnections" xml:space="preserve">
     <value>Když se ukončují spojení:</value>
@@ -900,32 +846,17 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="LabelConnect" xml:space="preserve">
     <value>&amp;Připojit:</value>
   </data>
-  <data name="LabelDisplayName" xml:space="preserve">
+  <data name="DisplayName" xml:space="preserve">
     <value>Zobrazený název:</value>
   </data>
-  <data name="LabelDomain" xml:space="preserve">
-    <value>Doména:</value>
-  </data>
-  <data name="LabelFilename" xml:space="preserve">
-    <value>Název souboru:</value>
+  <data name="Domain" xml:space="preserve">
+    <value>Doména</value>
   </data>
   <data name="LabelHostname" xml:space="preserve">
     <value>Hostitel:</value>
   </data>
-  <data name="LabelOptions" xml:space="preserve">
-    <value>Možnosti:</value>
-  </data>
-  <data name="LabelPassword" xml:space="preserve">
-    <value>Heslo:</value>
-  </data>
-  <data name="LabelPort" xml:space="preserve">
-    <value>Port:</value>
-  </data>
   <data name="LabelPortableEdition" xml:space="preserve">
     <value>Přenosná verze</value>
-  </data>
-  <data name="LabelProtocol" xml:space="preserve">
-    <value>Protokol:</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
     <value>Pro konfiguraci sezení PuTTY stiskněte toto tlačítko:</value>
@@ -945,14 +876,8 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="LabelServerStatus" xml:space="preserve">
     <value>Stav Serveru:</value>
   </data>
-  <data name="LabelSQLDatabaseName" xml:space="preserve">
+  <data name="Database" xml:space="preserve">
     <value>Databáze:</value>
-  </data>
-  <data name="LabelSQLServerDatabaseName" xml:space="preserve">
-    <value>Databáze:</value>
-  </data>
-  <data name="LabelUsername" xml:space="preserve">
-    <value>Login:</value>
   </data>
   <data name="LabelVerify" xml:space="preserve">
     <value>Verifikuj:</value>
@@ -996,9 +921,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="MagicLibraryAttributionURL" xml:space="preserve">
     <value>http://www.dotnetmagic.com/</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>O aplikaci</value>
-  </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Nový panel spojení</value>
   </data>
@@ -1008,14 +930,8 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="MenuConfig" xml:space="preserve">
     <value>Nastavení</value>
   </data>
-  <data name="MenuConnect" xml:space="preserve">
-    <value>Připojit</value>
-  </data>
   <data name="MenuConnectionPanels" xml:space="preserve">
     <value>Panely</value>
-  </data>
-  <data name="MenuConnections" xml:space="preserve">
-    <value>Spojení</value>
   </data>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>Nastavení spojení</value>
@@ -1023,14 +939,11 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="MenuCopy" xml:space="preserve">
     <value>Kopírovat</value>
   </data>
-  <data name="MenuCtrlAltDel" xml:space="preserve">
+  <data name="CtrlAltDel" xml:space="preserve">
     <value>Ctrl-Alt-Del</value>
   </data>
-  <data name="MenuCtrlEsc" xml:space="preserve">
+  <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
-  </data>
-  <data name="MenuDelete" xml:space="preserve">
-    <value>Smazat...</value>
   </data>
   <data name="MenuDeleteConnection" xml:space="preserve">
     <value>Smazat spojení...</value>
@@ -1041,14 +954,8 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Smazat složku...</value>
   </data>
-  <data name="MenuDisconnect" xml:space="preserve">
-    <value>Odpojit</value>
-  </data>
   <data name="MenuDonate" xml:space="preserve">
     <value>Přispějte</value>
-  </data>
-  <data name="MenuDuplicate" xml:space="preserve">
-    <value>Klonovat</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
     <value>Klonovat připojení</value>
@@ -1070,12 +977,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="MenuFile" xml:space="preserve">
     <value>&amp;Soubor</value>
-  </data>
-  <data name="MenuFullScreen" xml:space="preserve">
-    <value>Celá obrazovka</value>
-  </data>
-  <data name="MenuFullScreenRDP" xml:space="preserve">
-    <value>Celá obrazovka (RDP)</value>
   </data>
   <data name="MenuHelp" xml:space="preserve">
     <value>&amp;Nápověda</value>
@@ -1110,7 +1011,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
     <value>Otevřít soubor seznamu spojení...</value>
   </data>
-  <data name="MenuOptions" xml:space="preserve">
+  <data name="Options" xml:space="preserve">
     <value>Možnosti</value>
   </data>
   <data name="MenuPaste" xml:space="preserve">
@@ -1151,9 +1052,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Uložit seznam spojení jako...</value>
-  </data>
-  <data name="MenuScreenshot" xml:space="preserve">
-    <value>Snímek obrazovky</value>
   </data>
   <data name="MenuScreenshotManager" xml:space="preserve">
     <value>Správa snímků obrazovek</value>
@@ -1197,7 +1095,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="MenuView" xml:space="preserve">
     <value>&amp;Zobrazení</value>
   </data>
-  <data name="MenuViewOnly" xml:space="preserve">
+  <data name="ViewOnly" xml:space="preserve">
     <value>Pouze prohlížet (VNC)</value>
   </data>
   <data name="MenuWebsite" xml:space="preserve">
@@ -1247,9 +1145,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="NoExtAppDefined" xml:space="preserve">
     <value>Nebyla specifikována ext. aplikace.</value>
-  </data>
-  <data name="NoInformation" xml:space="preserve">
-    <value>(žádné)</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>(žádné)</value>
@@ -1495,7 +1390,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Vložte vaše uživatelské jméno pro autentizaci vůči proxy serveru.</value>
   </data>
-  <data name="PropertyNameAddress" xml:space="preserve">
+  <data name="HostnameIp" xml:space="preserve">
     <value>Hostname/DN/IP</value>
   </data>
   <data name="PropertyNameAll" xml:space="preserve">
@@ -1528,9 +1423,6 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
     <value>Pozadí plochy</value>
   </data>
-  <data name="PropertyNameDomain" xml:space="preserve">
-    <value>Doména</value>
-  </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
     <value>Pokroč. plocha (Aero)</value>
   </data>
@@ -1552,9 +1444,6 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="PropertyNameExternalToolBefore" xml:space="preserve">
     <value>Externí nástroj před spoj.</value>
   </data>
-  <data name="PropertyNameIcon" xml:space="preserve">
-    <value>Ikona</value>
-  </data>
   <data name="PropertyNameLoadBalanceInfo" xml:space="preserve">
     <value>Load Balance Info</value>
   </data>
@@ -1567,14 +1456,11 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="PropertyNamePanel" xml:space="preserve">
     <value>Panel</value>
   </data>
-  <data name="PropertyNamePassword" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
     <value>Heslo</value>
   </data>
-  <data name="PropertyNamePort" xml:space="preserve">
+  <data name="Port" xml:space="preserve">
     <value>Port</value>
-  </data>
-  <data name="PropertyNameProtocol" xml:space="preserve">
-    <value>Protokol</value>
   </data>
   <data name="PropertyNamePuttySession" xml:space="preserve">
     <value>Konfigurace PuTTY</value>
@@ -1633,12 +1519,6 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Poznámka</value>
   </data>
-  <data name="PropertyNameUsername" xml:space="preserve">
-    <value>Login jméno</value>
-  </data>
-  <data name="PropertyNameViewOnly" xml:space="preserve">
-    <value>Jen sledovat</value>
-  </data>
   <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
     <value>Adresa proxy</value>
   </data>
@@ -1687,7 +1567,7 @@ Zpráva:
   <data name="PuttyKillFailed" xml:space="preserve">
     <value>Ukončení procesu PuTTY selhalo!</value>
   </data>
-  <data name="PuttyParentHandle" xml:space="preserve">
+  <data name="PanelHandle" xml:space="preserve">
     <value>Panel Handle: {0}</value>
   </data>
   <data name="PuttyResizeFailed" xml:space="preserve">
@@ -1850,7 +1730,7 @@ Zpráva:
     <value>Metoda GetSessions selhala!</value>
   </data>
   <data name="RdpReconnectCount" xml:space="preserve">
-    <value>Počet pokusů o znovunavázání spojení RDP:</value>
+    <value>Metoda RDP Počet pokusů o znovunavázání spojení RDP:</value>
   </data>
   <data name="RdpSetAuthenticationLevelFailed" xml:space="preserve">
     <value>Metoda RDP SetAuthenticationLevel selhala!</value>
@@ -1880,10 +1760,10 @@ Zpráva:
     <value>Metoda RDP SetProps selhala!</value>
   </data>
   <data name="RdpSetRedirectionFailed" xml:space="preserve">
-    <value>Metoda Rdp Set Redirection selhala!</value>
+    <value>Metoda RDP Set Redirection selhala!</value>
   </data>
   <data name="RdpSetRedirectKeysFailed" xml:space="preserve">
-    <value>Nastavení přesměrování klávesových zkratek (Rdp Set Redirect Keys) selhalo!</value>
+    <value>Metoda RDP Nastavení přesměrování klávesových zkratek (Rdp Set Redirect Keys) selhalo!</value>
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>Metoda RDP SetResolution selhala!</value>
@@ -1987,15 +1867,6 @@ Zpráva:
   <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Kliknutím na již otevřené spojení v seznamu přepne na jeho tab záložku</value>
   </data>
-  <data name="SmartSizeModeAspect" xml:space="preserve">
-    <value>Konst. poměr stran</value>
-  </data>
-  <data name="SmartSizeModeFree" xml:space="preserve">
-    <value>Volné</value>
-  </data>
-  <data name="SmartSizeModeNone" xml:space="preserve">
-    <value>Nepoužívat auto resize</value>
-  </data>
   <data name="Socks5" xml:space="preserve">
     <value>Socks 5</value>
   </data>
@@ -2056,9 +1927,6 @@ Zpráva:
   <data name="TabAdvanced" xml:space="preserve">
     <value>Pokročilé</value>
   </data>
-  <data name="TabAppearance" xml:space="preserve">
-    <value>Vzhled</value>
-  </data>
   <data name="TabsAndPanels" xml:space="preserve">
     <value>Taby &amp;&amp; Panely</value>
   </data>
@@ -2076,9 +1944,6 @@ Zpráva:
   </data>
   <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
     <value>Panel spojení</value>
-  </data>
-  <data name="ThemeCategoryGeneral" xml:space="preserve">
-    <value>Všeobecné</value>
   </data>
   <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
     <value>Barva pozadí konfiguračního panelu.</value>
@@ -2206,7 +2071,7 @@ Zpráva:
   <data name="TransferFailed" xml:space="preserve">
     <value>Přenos selhal!</value>
   </data>
-  <data name="TryIntegrate" xml:space="preserve">
+  <data name="TryToIntegrate" xml:space="preserve">
     <value>Zkouším integrovat</value>
   </data>
   <data name="Type" xml:space="preserve">
@@ -2232,9 +2097,6 @@ Zpráva:
   </data>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>Informace o aktualizacích nemohly být staženy.</value>
-  </data>
-  <data name="UpdateCheckFailedLabel" xml:space="preserve">
-    <value>Vyhledání aktualizací selhalo!</value>
   </data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
     <value>Vyhledávám aktualizace...</value>

@@ -129,12 +129,6 @@
   <data name="Activity" xml:space="preserve">
 		<value>Activity</value>
 	</data>
-  <data name="AddConnection" xml:space="preserve">
-		<value>새 연결</value>
-	</data>
-  <data name="AddFolder" xml:space="preserve">
-		<value>새 폴더</value>
-	</data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
 		<value>AddNodeFromXML 실패!</value>
 	</data>
@@ -207,16 +201,16 @@
   <data name="ButtonDefaultProperties" xml:space="preserve">
 		<value>기본 속성</value>
 	</data>
-  <data name="ButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
 		<value>연결 끊기</value>
 	</data>
-  <data name="ButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
 		<value>아이콘</value>
 	</data>
   <data name="ButtonImport" xml:space="preserve">
 		<value>임포트(&amp;I)</value>
 	</data>
-  <data name="ButtonInheritance" xml:space="preserve">
+  <data name="Inheritance" xml:space="preserve">
 		<value>상속</value>
 	</data>
   <data name="ButtonLaunch" xml:space="preserve">
@@ -250,14 +244,11 @@ Please use File - Load Connections for normal connection files!</value>
   <data name="CannotStartPortScan" xml:space="preserve">
 		<value>포트 스캔을 시작 할 수 없습니다. 잘못된 IP 형식 입니다.</value>
 	</data>
-  <data name="CategoryAppearance" xml:space="preserve">
+  <data name="Appearance" xml:space="preserve">
 		<value>모양</value>
 	</data>
-  <data name="CategoryConnection" xml:space="preserve">
+  <data name="Connection" xml:space="preserve">
 		<value>연결</value>
-	</data>
-  <data name="CategoryCredentials" xml:space="preserve">
-		<value>자격증명</value>
 	</data>
   <data name="CategoryDisplay" xml:space="preserve">
 		<value>표시</value>
@@ -265,13 +256,10 @@ Please use File - Load Connections for normal connection files!</value>
   <data name="CategoryGateway" xml:space="preserve">
 		<value>게이트웨이</value>
 	</data>
-  <data name="CategoryGeneral" xml:space="preserve">
-		<value>일반</value>
-	</data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
 		<value>기타</value>
 	</data>
-  <data name="CategoryProtocol" xml:space="preserve">
+  <data name="Protocol" xml:space="preserve">
 		<value>프로토콜</value>
 	</data>
   <data name="CategoryRedirect" xml:space="preserve">
@@ -280,10 +268,7 @@ Please use File - Load Connections for normal connection files!</value>
   <data name="CcAlwaysShowScreen" xml:space="preserve">
 		<value>시작시 항상 이 화면 표시</value>
 	</data>
-  <data name="CcCheckAgain" xml:space="preserve">
-		<value>새로 고침</value>
-	</data>
-  <data name="CcCheckFailed" xml:space="preserve">
+  <data name="CheckFailed" xml:space="preserve">
 		<value>검사 실패!</value>
 	</data>
   <data name="CcCheckSucceeded" xml:space="preserve">
@@ -338,17 +323,8 @@ VncSharp 제어 버전 {0}</value>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
 		<value>서버와의 연결이 끊어지면 자동으로 다시 연결을 시도합니다 (RDP &amp;&amp; ICA 만 해당).</value>
 	</data>
-  <data name="CheckboxDomain" xml:space="preserve">
-		<value>도메인</value>
-	</data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
 		<value>이 메시지를 다시 표시 안 함.</value>
-	</data>
-  <data name="CheckboxInheritance" xml:space="preserve">
-		<value>상속</value>
-	</data>
-  <data name="CheckboxPassword" xml:space="preserve">
-		<value>암호</value>
 	</data>
   <data name="CheckboxProxyAuthentication" xml:space="preserve">
 		<value>이 프록시 서버에는 인증이 필요합니다</value>
@@ -362,10 +338,10 @@ VncSharp 제어 버전 {0}</value>
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
 		<value>프록시 서버를 사용해서 연결</value>
 	</data>
-  <data name="CheckboxUsername" xml:space="preserve">
+  <data name="Username" xml:space="preserve">
 		<value>사용자 이름</value>
 	</data>
-  <data name="CheckboxWaitForExit" xml:space="preserve">
+  <data name="WaitForExit" xml:space="preserve">
 		<value>종료까지 대기</value>
 	</data>
   <data name="CheckForUpdate" xml:space="preserve">
@@ -527,26 +503,14 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyDescriptionSoundQuality" xml:space="preserve">
 		<value>프로토콜에서 제공하는 음질을 선택하십시오 : 동적, 중간, 높음</value>
 	</data>
-  <data name="ColumnArguments" xml:space="preserve">
+  <data name="Arguments" xml:space="preserve">
 		<value>인수</value>
 	</data>
-  <data name="ColumnDisplayName" xml:space="preserve">
-		<value>표시 이름</value>
-	</data>
-  <data name="ColumnFilename" xml:space="preserve">
+  <data name="Filename" xml:space="preserve">
 		<value>파일 이름</value>
-	</data>
-  <data name="ColumnHostnameIP" xml:space="preserve">
-		<value>호스트 이름 / IP</value>
 	</data>
   <data name="ColumnMessage" xml:space="preserve">
 		<value>메시지</value>
-	</data>
-  <data name="ColumnUsername" xml:space="preserve">
-		<value>사용자 이름</value>
-	</data>
-  <data name="ColumnWaitForExit" xml:space="preserve">
-		<value>종료 대기</value>
 	</data>
   <data name="CommandExitProgram" xml:space="preserve">
 		<value>종료 (&amp;X) {0}</value>
@@ -890,9 +854,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
 		<value>자동 다시 연결</value>
 	</data>
-  <data name="GroupboxConnection" xml:space="preserve">
-		<value>연결</value>
-	</data>
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
 		<value>외부 도구 속성</value>
 	</data>
@@ -1004,9 +965,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="IntAppKillFailed" xml:space="preserve">
 		<value>Killing Int App Process failed!</value>
 	</data>
-  <data name="IntAppParentHandle" xml:space="preserve">
-		<value>패널 핸들 : {0}</value>
-	</data>
   <data name="IntAppResizeFailed" xml:space="preserve">
 		<value>Int App Resize failed!</value>
 	</data>
@@ -1016,20 +974,8 @@ VncSharp 제어 버전 {0}</value>
   <data name="IntAppTitle" xml:space="preserve">
 		<value>Int App Title: {0}</value>
 	</data>
-  <data name="KeysCtrlAltDel" xml:space="preserve">
-		<value>CTRL-ALT-DEL</value>
-	</data>
-  <data name="KeysCtrlEsc" xml:space="preserve">
-		<value>CTRL-ESC</value>
-	</data>
   <data name="LabelAddress" xml:space="preserve">
 		<value>주소:</value>
-	</data>
-  <data name="LabelArguments" xml:space="preserve">
-		<value>인수 :</value>
-	</data>
-  <data name="LabelChangeLog" xml:space="preserve">
-		<value>변경 로그 :</value>
 	</data>
   <data name="LabelClosingConnections" xml:space="preserve">
 		<value>연결을 닫을 때 :</value>
@@ -1037,32 +983,17 @@ VncSharp 제어 버전 {0}</value>
   <data name="LabelConnect" xml:space="preserve">
 		<value>연결(&amp;C)</value>
 	</data>
-  <data name="LabelDisplayName" xml:space="preserve">
+  <data name="DisplayName" xml:space="preserve">
 		<value>표시 이름</value>
 	</data>
-  <data name="LabelDomain" xml:space="preserve">
-		<value>도메인:</value>
-	</data>
-  <data name="LabelFilename" xml:space="preserve">
-		<value>파일 이름:</value>
+  <data name="Domain" xml:space="preserve">
+		<value>도메인</value>
 	</data>
   <data name="LabelHostname" xml:space="preserve">
 		<value>호스트 이름 :</value>
 	</data>
-  <data name="LabelOptions" xml:space="preserve">
-		<value>옵션 :</value>
-	</data>
-  <data name="LabelPassword" xml:space="preserve">
-		<value>암호:</value>
-	</data>
-  <data name="LabelPort" xml:space="preserve">
-		<value>포트:</value>
-	</data>
   <data name="LabelPortableEdition" xml:space="preserve">
 		<value>휴대용 버전</value>
-	</data>
-  <data name="LabelProtocol" xml:space="preserve">
-		<value>프로토콜:</value>
 	</data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
 		<value>PuTTY 세션을 구성하려면이 단추를 누르십시오:</value>
@@ -1082,14 +1013,8 @@ VncSharp 제어 버전 {0}</value>
   <data name="LabelServerStatus" xml:space="preserve">
 		<value>서버 상태 :</value>
 	</data>
-  <data name="LabelSQLDatabaseName" xml:space="preserve">
+  <data name="Database" xml:space="preserve">
 		<value>데이터 베이스:</value>
-	</data>
-  <data name="LabelSQLServerDatabaseName" xml:space="preserve">
-		<value>데이터 베이스:</value>
-	</data>
-  <data name="LabelUsername" xml:space="preserve">
-		<value>사용자 이름:</value>
 	</data>
   <data name="LabelVerify" xml:space="preserve">
 		<value>검증:</value>
@@ -1133,9 +1058,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="MagicLibraryAttributionURL" xml:space="preserve">
 		<value>http://www.dotnetmagic.com/</value>
 	</data>
-  <data name="MenuAbout" xml:space="preserve">
-		<value>mRemoteNG정보</value>
-	</data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
 		<value>연결 패널 추가</value>
 	</data>
@@ -1145,14 +1067,8 @@ VncSharp 제어 버전 {0}</value>
   <data name="MenuConfig" xml:space="preserve">
 		<value>구성</value>
 	</data>
-  <data name="MenuConnect" xml:space="preserve">
-		<value>연결</value>
-	</data>
   <data name="MenuConnectionPanels" xml:space="preserve">
 		<value>연결 패널</value>
-	</data>
-  <data name="MenuConnections" xml:space="preserve">
-		<value>연결</value>
 	</data>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
 		<value>연결 및 구성</value>
@@ -1160,14 +1076,11 @@ VncSharp 제어 버전 {0}</value>
   <data name="MenuCopy" xml:space="preserve">
 		<value>복사</value>
 	</data>
-  <data name="MenuCtrlAltDel" xml:space="preserve">
+  <data name="CtrlAltDel" xml:space="preserve">
 		<value>Ctrl-Alt-Del</value>
 	</data>
-  <data name="MenuCtrlEsc" xml:space="preserve">
+  <data name="CtrlEsc" xml:space="preserve">
 		<value>Ctrl-Esc</value>
-	</data>
-  <data name="MenuDelete" xml:space="preserve">
-		<value>삭제...</value>
 	</data>
   <data name="MenuDeleteConnection" xml:space="preserve">
 		<value>연결 삭제 ...</value>
@@ -1178,14 +1091,8 @@ VncSharp 제어 버전 {0}</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
 		<value>폴더 삭제 ...</value>
 	</data>
-  <data name="MenuDisconnect" xml:space="preserve">
-		<value>연결 끊기</value>
-	</data>
   <data name="MenuDonate" xml:space="preserve">
 		<value>기부</value>
-	</data>
-  <data name="MenuDuplicate" xml:space="preserve">
-		<value>복제</value>
 	</data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
 		<value>중복 연결</value>
@@ -1207,12 +1114,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="MenuFile" xml:space="preserve">
 		<value>파일(&amp;F)</value>
-	</data>
-  <data name="MenuFullScreen" xml:space="preserve">
-		<value>전체 화면</value>
-	</data>
-  <data name="MenuFullScreenRDP" xml:space="preserve">
-		<value>전체 화면 (RDP)</value>
 	</data>
   <data name="MenuHelp" xml:space="preserve">
 		<value>도움말(&amp;H)</value>
@@ -1247,7 +1148,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
 		<value>연결 파일 열기 ...</value>
 	</data>
-  <data name="MenuOptions" xml:space="preserve">
+  <data name="Options" xml:space="preserve">
 		<value>옵션</value>
 	</data>
   <data name="MenuPaste" xml:space="preserve">
@@ -1288,9 +1189,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
 		<value>연결 파일 다른 이름으로 저장 ...</value>
-	</data>
-  <data name="MenuScreenshot" xml:space="preserve">
-		<value>스크린 샷</value>
 	</data>
   <data name="MenuScreenshotManager" xml:space="preserve">
 		<value>스크린 샷 관리자</value>
@@ -1334,7 +1232,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="MenuView" xml:space="preserve">
 		<value>보기(&amp;V)</value>
 	</data>
-  <data name="MenuViewOnly" xml:space="preserve">
+  <data name="ViewOnly" xml:space="preserve">
 		<value>보기 전용 (VNC)</value>
 	</data>
   <data name="MenuWebsite" xml:space="preserve">
@@ -1384,9 +1282,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="NoExtAppDefined" xml:space="preserve">
 		<value>No Ext. App specified.</value>
-	</data>
-  <data name="NoInformation" xml:space="preserve">
-		<value>없음</value>
 	</data>
   <data name="None" xml:space="preserve">
 		<value>없음</value>
@@ -1632,7 +1527,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
 		<value>프록시 인증을위한 사용자 이름을 입력하십시오.</value>
 	</data>
-  <data name="PropertyNameAddress" xml:space="preserve">
+  <data name="HostnameIp" xml:space="preserve">
 		<value>호스트 이름 / IP</value>
 	</data>
   <data name="PropertyNameAll" xml:space="preserve">
@@ -1665,9 +1560,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
 		<value>바탕 화면 표시</value>
 	</data>
-  <data name="PropertyNameDomain" xml:space="preserve">
-		<value>도메인</value>
-	</data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
 		<value>바탕 화면 구성</value>
 	</data>
@@ -1689,9 +1581,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyNameExternalToolBefore" xml:space="preserve">
 		<value>External Tool Before</value>
 	</data>
-  <data name="PropertyNameIcon" xml:space="preserve">
-		<value>아이콘</value>
-	</data>
   <data name="PropertyNameLoadBalanceInfo" xml:space="preserve">
 		<value>로드 균형 정보</value>
 	</data>
@@ -1704,14 +1593,11 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyNamePanel" xml:space="preserve">
 		<value>패널</value>
 	</data>
-  <data name="PropertyNamePassword" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
 		<value>암호</value>
 	</data>
-  <data name="PropertyNamePort" xml:space="preserve">
+  <data name="Port" xml:space="preserve">
 		<value>포트</value>
-	</data>
-  <data name="PropertyNameProtocol" xml:space="preserve">
-		<value>프로토콜</value>
 	</data>
   <data name="PropertyNamePuttySession" xml:space="preserve">
 		<value>PuTTY 세션</value>
@@ -1770,12 +1656,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyNameUser1" xml:space="preserve">
 		<value>입력란 사용</value>
 	</data>
-  <data name="PropertyNameUsername" xml:space="preserve">
-		<value>사용자 이름</value>
-	</data>
-  <data name="PropertyNameViewOnly" xml:space="preserve">
-		<value>보기 전용</value>
-	</data>
   <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
 		<value>프록시 주소</value>
 	</data>
@@ -1824,7 +1704,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="PuttyKillFailed" xml:space="preserve">
 		<value>PuTTY 프로세스를 죽이지 못했습니다!</value>
 	</data>
-  <data name="PuttyParentHandle" xml:space="preserve">
+  <data name="PanelHandle" xml:space="preserve">
 		<value>패널 핸들 : {0}</value>
 	</data>
   <data name="PuttyResizeFailed" xml:space="preserve">
@@ -2124,15 +2004,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
 		<value>연결 트리에서 열린 연결을 한 번 클릭하면 열린 연결 탭으로 전환.</value>
 	</data>
-  <data name="SmartSizeModeAspect" xml:space="preserve">
-		<value>Aspect</value>
-	</data>
-  <data name="SmartSizeModeFree" xml:space="preserve">
-		<value>Free</value>
-	</data>
-  <data name="SmartSizeModeNone" xml:space="preserve">
-		<value>SmartSize 사용안함</value>
-	</data>
   <data name="Socks5" xml:space="preserve">
 		<value>Socks 5</value>
 	</data>
@@ -2193,9 +2064,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="TabAdvanced" xml:space="preserve">
 		<value>고급</value>
 	</data>
-  <data name="TabAppearance" xml:space="preserve">
-		<value>모양</value>
-	</data>
   <data name="TabsAndPanels" xml:space="preserve">
 		<value>탭 &amp; 패널</value>
 	</data>
@@ -2213,9 +2081,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
 		<value>연결 패널</value>
-	</data>
-  <data name="ThemeCategoryGeneral" xml:space="preserve">
-		<value>일반</value>
 	</data>
   <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
 		<value>구성 패널의 배경색입니다.</value>
@@ -2343,7 +2208,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="TransferFailed" xml:space="preserve">
 		<value>전송 실패!</value>
 	</data>
-  <data name="TryIntegrate" xml:space="preserve">
+  <data name="TryToIntegrate" xml:space="preserve">
 		<value>통합 시도</value>
 	</data>
   <data name="Type" xml:space="preserve">
@@ -2369,9 +2234,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
 		<value>업데이트 정보를 다운로드 할 수 없습니다.</value>
-	</data>
-  <data name="UpdateCheckFailedLabel" xml:space="preserve">
-		<value>확인 실패</value>
 	</data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
 		<value>업데이트 확인 중 ...</value>

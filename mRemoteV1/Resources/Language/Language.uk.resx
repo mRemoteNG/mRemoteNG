@@ -126,12 +126,6 @@
   <data name="Activity" xml:space="preserve">
     <value>Активність</value>
   </data>
-  <data name="AddConnection" xml:space="preserve">
-    <value>Нове з'єднання</value>
-  </data>
-  <data name="AddFolder" xml:space="preserve">
-    <value>Нова папка</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML не вдалося!</value>
   </data>
@@ -198,16 +192,16 @@
   <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Властивості по замовчуванню</value>
   </data>
-  <data name="ButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
     <value>Відключити</value>
   </data>
-  <data name="ButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Значок</value>
   </data>
   <data name="ButtonImport" xml:space="preserve">
     <value>&amp;Імпорт</value>
   </data>
-  <data name="ButtonInheritance" xml:space="preserve">
+  <data name="Inheritance" xml:space="preserve">
     <value>Успадковування</value>
   </data>
   <data name="ButtonLaunchPutty" xml:space="preserve">
@@ -238,14 +232,11 @@
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Не вдається запустити сканування портів, невірний формат IP!</value>
   </data>
-  <data name="CategoryAppearance" xml:space="preserve">
+  <data name="Appearance" xml:space="preserve">
     <value>Зовнішній вигляд</value>
   </data>
-  <data name="CategoryConnection" xml:space="preserve">
+  <data name="Connection" xml:space="preserve">
     <value>З'єднання</value>
-  </data>
-  <data name="CategoryCredentials" xml:space="preserve">
-    <value>Облікові дані</value>
   </data>
   <data name="CategoryDisplay" xml:space="preserve">
     <value>Вигляд</value>
@@ -253,13 +244,10 @@
   <data name="CategoryGateway" xml:space="preserve">
     <value>Шлюз</value>
   </data>
-  <data name="CategoryGeneral" xml:space="preserve">
-    <value>Основна</value>
-  </data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Різне</value>
   </data>
-  <data name="CategoryProtocol" xml:space="preserve">
+  <data name="Protocol" xml:space="preserve">
     <value>Протокол</value>
   </data>
   <data name="CategoryRedirect" xml:space="preserve">
@@ -268,10 +256,7 @@
   <data name="CcAlwaysShowScreen" xml:space="preserve">
     <value>Завжди показувати це вікно при запуску</value>
   </data>
-  <data name="CcCheckAgain" xml:space="preserve">
-    <value>Оновити</value>
-  </data>
-  <data name="CcCheckFailed" xml:space="preserve">
+  <data name="CheckFailed" xml:space="preserve">
     <value>Помилка перевірки!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
@@ -326,17 +311,8 @@ VncSharp Control Version {0}</value>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Автоматично намагатися відновити зв'язок при відключенні від сервера (тільки RDP і ICA)</value>
   </data>
-  <data name="CheckboxDomain" xml:space="preserve">
-    <value>Домен</value>
-  </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Більше не показувати це повідомлення.</value>
-  </data>
-  <data name="CheckboxInheritance" xml:space="preserve">
-    <value>Успадковування</value>
-  </data>
-  <data name="CheckboxPassword" xml:space="preserve">
-    <value>Пароль</value>
   </data>
   <data name="CheckboxProxyAuthentication" xml:space="preserve">
     <value>Цей проксі-сервер вимагає аутентифікації</value>
@@ -350,10 +326,10 @@ VncSharp Control Version {0}</value>
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Використовувати проксі-сервер для підключення</value>
   </data>
-  <data name="CheckboxUsername" xml:space="preserve">
+  <data name="Username" xml:space="preserve">
     <value>Користувач</value>
   </data>
-  <data name="CheckboxWaitForExit" xml:space="preserve">
+  <data name="WaitForExit" xml:space="preserve">
     <value>Чекати виходу</value>
   </data>
   <data name="CheckForUpdate" xml:space="preserve">
@@ -377,26 +353,14 @@ VncSharp Control Version {0}</value>
   <data name="CollapseAllFolders" xml:space="preserve">
     <value>Згорнути всі папки</value>
   </data>
-  <data name="ColumnArguments" xml:space="preserve">
+  <data name="Arguments" xml:space="preserve">
     <value>Аргументи</value>
   </data>
-  <data name="ColumnDisplayName" xml:space="preserve">
-    <value>Коротке ім'я</value>
-  </data>
-  <data name="ColumnFilename" xml:space="preserve">
+  <data name="Filename" xml:space="preserve">
     <value>Файл</value>
-  </data>
-  <data name="ColumnHostnameIP" xml:space="preserve">
-    <value>Ім'я хосту/IP</value>
   </data>
   <data name="ColumnMessage" xml:space="preserve">
     <value>Повідомлення</value>
-  </data>
-  <data name="ColumnUsername" xml:space="preserve">
-    <value>Користувач</value>
-  </data>
-  <data name="ColumnWaitForExit" xml:space="preserve">
-    <value>Чекати виходу</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Неможливо розібрати аргументи командного рядка!</value>
@@ -669,9 +633,6 @@ VncSharp Control Version {0}</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Автоперепідключення</value>
   </data>
-  <data name="GroupboxConnection" xml:space="preserve">
-    <value>З'єднання</value>
-  </data>
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
     <value>Властивості зовнішніх інструментів</value>
   </data>
@@ -741,59 +702,29 @@ VncSharp Control Version {0}</value>
   <data name="IntAppKillFailed" xml:space="preserve">
     <value>Не вдалося завершити процес зовнішнього інструменту!</value>
   </data>
-  <data name="IntAppParentHandle" xml:space="preserve">
-    <value>Вкладка оброблювача: {0}</value>
-  </data>
   <data name="IntAppResizeFailed" xml:space="preserve">
     <value>Зовнішній інструмент: Помилка зміни розміру!</value>
   </data>
   <data name="IntAppTitle" xml:space="preserve">
     <value>Заголовок зовнішнього інструменту: {0}</value>
   </data>
-  <data name="KeysCtrlAltDel" xml:space="preserve">
-    <value>CTRL+ALT+DEL</value>
-  </data>
-  <data name="KeysCtrlEsc" xml:space="preserve">
-    <value>CTRL+ESC</value>
-  </data>
   <data name="LabelAddress" xml:space="preserve">
     <value>Адреса:</value>
-  </data>
-  <data name="LabelArguments" xml:space="preserve">
-    <value>Аргументи:</value>
-  </data>
-  <data name="LabelChangeLog" xml:space="preserve">
-    <value>Журнал змін:</value>
   </data>
   <data name="LabelConnect" xml:space="preserve">
     <value>&amp;З'єднання:</value>
   </data>
-  <data name="LabelDisplayName" xml:space="preserve">
+  <data name="DisplayName" xml:space="preserve">
     <value>Коротке ім'я</value>
   </data>
-  <data name="LabelDomain" xml:space="preserve">
-    <value>Домен:</value>
-  </data>
-  <data name="LabelFilename" xml:space="preserve">
-    <value>Файл:</value>
+  <data name="Domain" xml:space="preserve">
+    <value>Домен</value>
   </data>
   <data name="LabelHostname" xml:space="preserve">
     <value>Ім'я хосту:</value>
   </data>
-  <data name="LabelOptions" xml:space="preserve">
-    <value>Опції:</value>
-  </data>
-  <data name="LabelPassword" xml:space="preserve">
-    <value>Пароль:</value>
-  </data>
-  <data name="LabelPort" xml:space="preserve">
-    <value>Порт:</value>
-  </data>
   <data name="LabelPortableEdition" xml:space="preserve">
     <value>Портативна версія</value>
-  </data>
-  <data name="LabelProtocol" xml:space="preserve">
-    <value>Протокол:</value>
   </data>
   <data name="LabelPuttySessionsConfig" xml:space="preserve">
     <value>Натисніть на цю кнопку для налаштування сесій PuTTY:</value>
@@ -813,14 +744,8 @@ VncSharp Control Version {0}</value>
   <data name="LabelServerStatus" xml:space="preserve">
     <value>Стан сервера:</value>
   </data>
-  <data name="LabelSQLDatabaseName" xml:space="preserve">
+  <data name="Database" xml:space="preserve">
     <value>База даних:</value>
-  </data>
-  <data name="LabelSQLServerDatabaseName" xml:space="preserve">
-    <value>База даних:</value>
-  </data>
-  <data name="LabelUsername" xml:space="preserve">
-    <value>Користувач:</value>
   </data>
   <data name="LabelVerify" xml:space="preserve">
     <value>Перевірка:</value>
@@ -858,9 +783,6 @@ VncSharp Control Version {0}</value>
   <data name="MagicLibraryAttribution" xml:space="preserve">
     <value>Використовує Magic library від [Crownwood Software]</value>
   </data>
-  <data name="MenuAbout" xml:space="preserve">
-    <value>Про програму</value>
-  </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Додати панель з'єднання</value>
   </data>
@@ -870,14 +792,8 @@ VncSharp Control Version {0}</value>
   <data name="MenuConfig" xml:space="preserve">
     <value>Конфігурація</value>
   </data>
-  <data name="MenuConnect" xml:space="preserve">
-    <value>З'єднання</value>
-  </data>
   <data name="MenuConnectionPanels" xml:space="preserve">
     <value>Панель з'єднань</value>
-  </data>
-  <data name="MenuConnections" xml:space="preserve">
-    <value>З'єднання</value>
   </data>
   <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>З'єднання та конфігурація</value>
@@ -885,14 +801,11 @@ VncSharp Control Version {0}</value>
   <data name="MenuCopy" xml:space="preserve">
     <value>Копіювати</value>
   </data>
-  <data name="MenuCtrlAltDel" xml:space="preserve">
+  <data name="CtrlAltDel" xml:space="preserve">
     <value>Ctrl+Alt+Del</value>
   </data>
-  <data name="MenuCtrlEsc" xml:space="preserve">
+  <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl+Esc</value>
-  </data>
-  <data name="MenuDelete" xml:space="preserve">
-    <value>Видалити…</value>
   </data>
   <data name="MenuDeleteConnection" xml:space="preserve">
     <value>Видалити з'єднання…</value>
@@ -903,14 +816,8 @@ VncSharp Control Version {0}</value>
   <data name="MenuDeleteFolder" xml:space="preserve">
     <value>Видалити папку…</value>
   </data>
-  <data name="MenuDisconnect" xml:space="preserve">
-    <value>Відключити</value>
-  </data>
   <data name="MenuDonate" xml:space="preserve">
     <value>Пожертва</value>
-  </data>
-  <data name="MenuDuplicate" xml:space="preserve">
-    <value>Дублювати</value>
   </data>
   <data name="MenuDuplicateConnection" xml:space="preserve">
     <value>Дублювати з'єднання</value>
@@ -932,12 +839,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="MenuFile" xml:space="preserve">
     <value>&amp;Файл</value>
-  </data>
-  <data name="MenuFullScreen" xml:space="preserve">
-    <value>На весь екран</value>
-  </data>
-  <data name="MenuFullScreenRDP" xml:space="preserve">
-    <value>На весь екран (RDP)</value>
   </data>
   <data name="MenuHelp" xml:space="preserve">
     <value>&amp;Довідка</value>
@@ -963,7 +864,7 @@ VncSharp Control Version {0}</value>
   <data name="MenuOpenConnectionFile" xml:space="preserve">
     <value>Відкрити файл з'єднань…</value>
   </data>
-  <data name="MenuOptions" xml:space="preserve">
+  <data name="Options" xml:space="preserve">
     <value>Параметри</value>
   </data>
   <data name="MenuPaste" xml:space="preserve">
@@ -1005,9 +906,6 @@ VncSharp Control Version {0}</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Зберегти файл з'єднань як…</value>
   </data>
-  <data name="MenuScreenshot" xml:space="preserve">
-    <value>Скріншот</value>
-  </data>
   <data name="MenuScreenshotManager" xml:space="preserve">
     <value>Менеджер скріншотів</value>
   </data>
@@ -1041,7 +939,7 @@ VncSharp Control Version {0}</value>
   <data name="MenuView" xml:space="preserve">
     <value>&amp;Вигляд</value>
   </data>
-  <data name="MenuViewOnly" xml:space="preserve">
+  <data name="ViewOnly" xml:space="preserve">
     <value>Перегляд (VNC)</value>
   </data>
   <data name="MenuWebsite" xml:space="preserve">
@@ -1085,9 +983,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="NoExtAppDefined" xml:space="preserve">
     <value>Не вказано зовнішній інструмент</value>
-  </data>
-  <data name="NoInformation" xml:space="preserve">
-    <value>Ні</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>Ні</value>
@@ -1273,7 +1168,7 @@ VncSharp Control Version {0}</value>
   <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Введіть ім'я користувача для авторизації на проксі-сервері.</value>
   </data>
-  <data name="PropertyNameAddress" xml:space="preserve">
+  <data name="HostnameIp" xml:space="preserve">
     <value>Ім'я хоста / IP</value>
   </data>
   <data name="PropertyNameAll" xml:space="preserve">
@@ -1303,9 +1198,6 @@ VncSharp Control Version {0}</value>
   <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
     <value>Показати шпалери</value>
   </data>
-  <data name="PropertyNameDomain" xml:space="preserve">
-    <value>Домен</value>
-  </data>
   <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
     <value>Композиція робочого столу</value>
   </data>
@@ -1327,9 +1219,6 @@ VncSharp Control Version {0}</value>
   <data name="PropertyNameExternalToolBefore" xml:space="preserve">
     <value>Зовнішній інструмент до</value>
   </data>
-  <data name="PropertyNameIcon" xml:space="preserve">
-    <value>Значок</value>
-  </data>
   <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MAC-адреса</value>
   </data>
@@ -1339,14 +1228,11 @@ VncSharp Control Version {0}</value>
   <data name="PropertyNamePanel" xml:space="preserve">
     <value>Ім'я вкладки</value>
   </data>
-  <data name="PropertyNamePassword" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
-  <data name="PropertyNamePort" xml:space="preserve">
+  <data name="Port" xml:space="preserve">
     <value>Порт</value>
-  </data>
-  <data name="PropertyNameProtocol" xml:space="preserve">
-    <value>Протокол</value>
   </data>
   <data name="PropertyNamePuttySession" xml:space="preserve">
     <value>Сесія PuTTY</value>
@@ -1402,12 +1288,6 @@ VncSharp Control Version {0}</value>
   <data name="PropertyNameUser1" xml:space="preserve">
     <value>Користувацьке поле</value>
   </data>
-  <data name="PropertyNameUsername" xml:space="preserve">
-    <value>Користувач</value>
-  </data>
-  <data name="PropertyNameViewOnly" xml:space="preserve">
-    <value>Режим перегляду</value>
-  </data>
   <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
     <value>Адреса проксі</value>
   </data>
@@ -1454,7 +1334,7 @@ VncSharp Control Version {0}</value>
   <data name="PuttyKillFailed" xml:space="preserve">
     <value>Вбити процес Putty не вдалося!</value>
   </data>
-  <data name="PuttyParentHandle" xml:space="preserve">
+  <data name="PanelHandle" xml:space="preserve">
     <value>Вкладка оброблювача подій: {0}</value>
   </data>
   <data name="PuttyResizeFailed" xml:space="preserve">
@@ -1769,9 +1649,6 @@ VncSharp Control Version {0}</value>
   <data name="TabAdvanced" xml:space="preserve">
     <value>Додатково</value>
   </data>
-  <data name="TabAppearance" xml:space="preserve">
-    <value>Зовнішній вигляд</value>
-  </data>
   <data name="TabsAndPanels" xml:space="preserve">
     <value>Вкладки та панелі</value>
   </data>
@@ -1802,7 +1679,7 @@ VncSharp Control Version {0}</value>
   <data name="TransferFailed" xml:space="preserve">
     <value>Передача не вдалася!</value>
   </data>
-  <data name="TryIntegrate" xml:space="preserve">
+  <data name="TryToIntegrate" xml:space="preserve">
     <value>Спробувати інтегрувати</value>
   </data>
   <data name="Type" xml:space="preserve">
@@ -2140,17 +2017,11 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="SearchPrompt" xml:space="preserve">
 		<value>Шукати</value>
 	</data>
-  <data name="SmartSizeModeNone" xml:space="preserve">
-		<value>Без SmartSize</value>
-	</data>
   <data name="ThemeCategoryConfigPanel" xml:space="preserve">
 		<value>Панель налаштувань</value>
 	</data>
   <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
 		<value>Панель з'єднань</value>
-	</data>
-  <data name="ThemeCategoryGeneral" xml:space="preserve">
-		<value>Головна</value>
 	</data>
   <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
 		<value>Фоновий колір панелі налаштувань.</value>
@@ -2262,9 +2133,6 @@ mRemoteNG зараз припинить роботу і почне процес 
 	</data>
   <data name="UnnamedTheme" xml:space="preserve">
 		<value>Безіменна тема</value>
-	</data>
-  <data name="UpdateCheckFailedLabel" xml:space="preserve">
-		<value>Не вдалося перевірити</value>
 	</data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
 		<value>Перевірка оновлень…</value>
@@ -2553,9 +2421,6 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="ShowOnToolbarColumnHeader" xml:space="preserve">
 		<value>Показати на панелі інструментів</value>
 	</data>
-  <data name="TryToIntegrateColumnHeader" xml:space="preserve">
-		<value>Спробувати інтегрувати</value>
-	</data>
   <data name="WorkingDirColumnHeader" xml:space="preserve">
 		<value>Робочий каталог</value>
 	</data>
@@ -2580,7 +2445,7 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="OptionsPageTitle" xml:space="preserve">
 		<value>Параметри mRemoteNG</value>
 	</data>
-  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+  <data name="LoadBalanceInfoUseUtf8_Duplicate[1]" xml:space="preserve">
 		<value>Використовувати кодування UTF8 для властивості RDP "Інформація про балансування"</value>
 	</data>
   <data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
