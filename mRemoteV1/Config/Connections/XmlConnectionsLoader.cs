@@ -33,7 +33,7 @@ namespace mRemoteNG.Config.Connections
 
         private Optional<SecureString> PromptForPassword()
         {
-            var password = MiscTools.PasswordDialog("", false);
+            var password = MiscTools.PasswordDialog(Path.GetFileName(_connectionFilePath), false);
             return password;
         }
     }
