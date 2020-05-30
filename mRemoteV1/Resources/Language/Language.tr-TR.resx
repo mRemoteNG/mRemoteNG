@@ -120,17 +120,8 @@
   <data name="About" xml:space="preserve">
 		<value>Hakkında</value>
 	</data>
-  <data name="Active" xml:space="preserve">
-		<value>Aktif</value>
-	</data>
-  <data name="Activity" xml:space="preserve">
-		<value>Aktivite</value>
-	</data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
 		<value>XML'den node ekleme başarısız!</value>
-	</data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-		<value>SQL'den node ekleme başarısız!</value>
 	</data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
 		<value>Uygulamanın yalnızca bir örneğine izin ver (mRemoteNG yeniden başlatılmalı)</value>
@@ -168,14 +159,8 @@
   <data name="Aspect" xml:space="preserve">
 		<value>Görünüş</value>
 	</data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-		<value>Oturum bilgilerini otomatik olarak getir</value>
-	</data>
   <data name="AutoSaveEvery" xml:space="preserve">
 		<value>Otomatik kaydet her:</value>
-	</data>
-  <data name="AutoSaveMins" xml:space="preserve">
-		<value>dakikada bir (0 kapalı)</value>
 	</data>
   <data name="AvailableVersion" xml:space="preserve">
 		<value>Son sürüm</value>
@@ -243,9 +228,6 @@
   <data name="CategoryRedirect" xml:space="preserve">
 		<value>Yönlendir</value>
 	</data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-		<value>Bu ekranı her açılışta göster</value>
-	</data>
   <data name="CheckFailed" xml:space="preserve">
 		<value>Kontrol başarısız!</value>
 	</data>
@@ -299,17 +281,6 @@
 	</data>
   <data name="DownloadPortable" xml:space="preserve">
 		<value>İndir</value>
-	</data>
-  <data name="CcEOLFailed" xml:space="preserve">
-		<value>(RDP) Oturumları özelliği, sisteminizde kayıtlı eolwtscom.dll'nin bir kopyasını edinmenizi gerektirir.
-mRemoteNG bu bileşenle birlikte gelir; ancak mRemoteNG Yükleyicisi'ni kullanmazsanız otomatik olarak kaydedilmez.
-El ile kaydetmek için, bir komut isteminden şu komutu çalıştırın: 
-regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" 
-(C:\Program Files\mRemoteNG\ sizin mRemoteNG kurulumunuzun yolu).
-Bu kontrol hala başarısız olursa veya (RDP) Oturumlar özelliğini kullanamazsanız lütfen http://forum.mremoteng.org/ adresindeki mRemoteNG Forumu'na başvurun.</value>
-	</data>
-  <data name="CcEOLOK" xml:space="preserve">
-		<value>EOLWTSCOM bulundu ve düzgün kayıtlı görünüyor.</value>
 	</data>
   <data name="CcICAFailed" xml:space="preserve">
 		<value>ICA, XenDesktop Online Plugin'in kurulu olmasını ve wfica.ocx kitaplığının kayıtlı olmasını gerektirir. İstemciyi şu adresten indirebilirsiniz: http://www.citrix.com/download/
@@ -414,10 +385,6 @@ VncSharp Kontrol Sürümü {0}</value>
   <data name="ConfigUiLoadFailed" xml:space="preserve">
 		<value>Ayar arayüzü yükleme başarısız!</value>
 	</data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-		<value>Bağlantıyı kapatmak istiyor musunuz:
-"{0}"?</value>
-	</data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
 		<value>Panelini kapatmak istediğinizden emin misiniz, "{0}"? İçerdiği tüm bağlantılar da kapatılacaktır.</value>
 	</data>
@@ -470,11 +437,6 @@ VncSharp Kontrol Sürümü {0}</value>
 		<value>
 Bağlantı açılamıyor: Hostname belirtilmedi!</value>
 	</data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-		<value>RDP hatası!
-Hata Kodu: {0}
-Hata Açıklaması: {1}</value>
-	</data>
   <data name="Connections" xml:space="preserve">
 		<value>Bağlantılar</value>
 	</data>
@@ -484,9 +446,6 @@ Hata Açıklaması: {1}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
 		<value>Bağlantılar dosyasının yedeğini oluşturulamadı!</value>
 	</data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-		<value>Bağlantılar  dosyası alınamadı!</value>
-	</data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
 		<value>"{0}" bağlantı dosyası yüklenemedi!</value>
 	</data>
@@ -494,15 +453,8 @@ Hata Açıklaması: {1}</value>
 		<value>"{0}" bağlantı dosyası yüklenemedi!
 Yeni bağlantılar dosyası ile başlanıyor.</value>
 	</data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-		<value>Bağlantılar dosyası kaydedilemedi!</value>
-	</data>
   <data name="ButtonTestProxy" xml:space="preserve">
 		<value>Test Vekil Sunucu</value>
-	</data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-		<value>Normal bir bağlantı dosyasını içe aktaramazsınız.
-Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kullanın!</value>
 	</data>
   <data name="CannotStartPortScan" xml:space="preserve">
 		<value>Port taraması başlatılamadı, IP formatı geçersiz!</value>
@@ -546,9 +498,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
   <data name="ConnenctionClosedByUser" xml:space="preserve">
 		<value>{1} ile bağlanılan {0}, {2} tarafından kapatıldı.</value>
 	</data>
-  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
-		<value>{1} ile bağlanılan {0}, {2} tarafından kapatıldı. (Açıklama: "{3}"; Kullanıcı Alanı: "{4}")</value>
-	</data>
   <data name="ConnenctionCloseEvent" xml:space="preserve">
 		<value>Bağlantı kapatıldı</value>
 	</data>
@@ -563,9 +512,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
 	</data>
   <data name="CurrentVersion" xml:space="preserve">
 		<value>Yüklü sürüm</value>
-	</data>
-  <data name="DefaultTheme" xml:space="preserve">
-		<value>Varsayılan Tema</value>
 	</data>
   <data name="Detect" xml:space="preserve">
 		<value>Algıla</value>
@@ -615,12 +561,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
 		<value>Veritabanı {0} sürümü, {1} sürümüyle uyumlu değil.</value>
 	</data>
-  <data name="ErrorCloneNodeFailed" xml:space="preserve">
-		<value>Çoğaltma (Tree.Node) başarısız. {0}</value>
-	</data>
-  <data name="ErrorCode" xml:space="preserve">
-		<value>Hata kodu {0}</value>
-	</data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
 		<value>Bağlantı listesi kaydedilemedi.</value>
 	</data>
@@ -660,9 +600,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
   <data name="ExportItems" xml:space="preserve">
 		<value>Öğeleri dışa aktar</value>
 	</data>
-  <data name="ExportmRemoteXML" xml:space="preserve">
-		<value>mRemote/mRemoteNG XML dosyasını dışa aktar</value>
-	</data>
   <data name="ExportProperties" xml:space="preserve">
 		<value>Seçenekleri dışa aktar</value>
 	</data>
@@ -680,9 +617,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
 	</data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
 		<value>Yeni harici araç</value>
-	</data>
-  <data name="FAMFAMFAMAttribution" xml:space="preserve">
-		<value>[FAMFAMFAM]'ın simgelerini içerir</value>
 	</data>
   <data name="FileFormatLabel" xml:space="preserve">
 		<value>Dosya &amp;Formatı:</value>
@@ -711,9 +645,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
   <data name="FilterRDP" xml:space="preserve">
 		<value>RDP Dosyaları (*.rdp)</value>
 	</data>
-  <data name="FiltervRD2008CSV" xml:space="preserve">
-		<value>visionapp Uzak Masaüstü 2008 CSV Dosyaları (*.csv)</value>
-	</data>
   <data name="FormatInherit" xml:space="preserve">
 		<value>Miras {0}</value>
 	</data>
@@ -728,9 +659,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
 	</data>
   <data name="General" xml:space="preserve">
 		<value>Genel</value>
-	</data>
-  <data name="GetConnectionInfoFromSqlFailed" xml:space="preserve">
-		<value>SQL'den bağlantı bilgileri alma başarısız</value>
 	</data>
   <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
 		<value>"{1}" den "{0}" için bağlantı bilgileri alınırken bir hata oluştu. {2}</value>
@@ -791,18 +719,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
 	</data>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
 		<value>Yerel dosya yok!</value>
-	</data>
-  <data name="LogOff" xml:space="preserve">
-		<value>Oturumu kapat</value>
-	</data>
-  <data name="LogWriteToFileFailed" xml:space="preserve">
-		<value>Rapor dosyasına yazma başarısız!</value>
-	</data>
-  <data name="LogWriteToFileFinalLocationFailed" xml:space="preserve">
-		<value>Rapor son konumuna kaydedilemedi.</value>
-	</data>
-  <data name="MagicLibraryAttribution" xml:space="preserve">
-		<value>[Crownwood Software] tarafından sağlanan Sihirbaz kütüphanesi kullanır</value>
 	</data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
 		<value>Bağlantı Paneli Ekle</value>
@@ -891,9 +807,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
   <data name="Options" xml:space="preserve">
 		<value>Ayarlar</value>
 	</data>
-  <data name="MenuPaste" xml:space="preserve">
-		<value>Yapıştır</value>
-	</data>
   <data name="MenuPortScan" xml:space="preserve">
 		<value>Port Taraması</value>
 	</data>
@@ -930,20 +843,8 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
 		<value>Bağlantı Dosyasını Farklı Kaydet</value>
 	</data>
-  <data name="MenuScreenshotManager" xml:space="preserve">
-		<value>Ekran Görüntüsü Yöneticisi</value>
-	</data>
   <data name="MenuSendSpecialKeys" xml:space="preserve">
 		<value>Özel Tuş Gönder (VNC)</value>
-	</data>
-  <data name="MenuSessionRetrieve" xml:space="preserve">
-		<value>Kurtar</value>
-	</data>
-  <data name="MenuSessions" xml:space="preserve">
-		<value>Oturumlar</value>
-	</data>
-  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
-		<value>Oturumlar ve Ekran Görüntüleri</value>
 	</data>
   <data name="MenuShowHelpText" xml:space="preserve">
 		<value>&amp;Yardım Metnini Görüntüle</value>
@@ -1002,9 +903,6 @@ Normal bağlantı dosyaları için lütfen Dosya - Bağlantıları Yükle'yi kul
   <data name="NewPanel" xml:space="preserve">
 		<value>Yeni Panel</value>
 	</data>
-  <data name="NewRoot" xml:space="preserve">
-		<value>Yeni Kök</value>
-	</data>
   <data name="NewTitle" xml:space="preserve">
 		<value>Yeni Başlık</value>
 	</data>
@@ -1036,38 +934,8 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="OpenPorts" xml:space="preserve">
 		<value>Açık Portlar</value>
 	</data>
-  <data name="OptionsKeyboardButtonDelete" xml:space="preserve">
-		<value>&amp;Sil</value>
-	</data>
-  <data name="OptionsKeyboardButtonNew" xml:space="preserve">
-		<value>&amp;Yeni</value>
-	</data>
-  <data name="OptionsKeyboardButtonReset" xml:space="preserve">
-		<value>&amp;Varsayılana sıfırla</value>
-	</data>
-  <data name="OptionsKeyboardButtonResetAll" xml:space="preserve">
-		<value>Herşeyi &amp;Varsayılana Sıfırla</value>
-	</data>
-  <data name="OptionsKeyboardCommandsGroupTabs" xml:space="preserve">
-		<value>Sekmeler</value>
-	</data>
-  <data name="OptionsKeyboardCommandsNextTab" xml:space="preserve">
-		<value>Sonraki Sekme</value>
-	</data>
-  <data name="OptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-		<value>Önceki Sekme</value>
-	</data>
-  <data name="OptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-		<value>Kısayolu Değiştir</value>
-	</data>
-  <data name="OptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-		<value>Klavye Kısayolu</value>
-	</data>
   <data name="OptionsProxyTesting" xml:space="preserve">
 		<value>Test ediliyor...</value>
-	</data>
-  <data name="OptionsTabKeyboard" xml:space="preserve">
-		<value>Klavye</value>
 	</data>
   <data name="OptionsTabTheme" xml:space="preserve">
 		<value>Tema</value>
@@ -1086,15 +954,6 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
 	</data>
   <data name="Warnings" xml:space="preserve">
 		<value>Uyarılar</value>
-	</data>
-  <data name="WeifenLuoAttribution" xml:space="preserve">
-		<value>[Weifen Luo] tarafından sağlanan DockPanel Suite kullanılıyor</value>
-	</data>
-  <data name="WriteLogFile" xml:space="preserve">
-		<value>Günlük dosyası yaz (mRemoteNG.log)</value>
-	</data>
-  <data name="XULrunnerPath" xml:space="preserve">
-		<value>XULrunner yolu:</value>
 	</data>
   <data name="MenuReconnectAll" xml:space="preserve">
 		<value>Tüm Açık Bağlantılara Yeniden Bağlanın</value>
@@ -1135,9 +994,6 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
 		<value>Faklı bir kullanıcı adı ve parola kullan</value>
 	</data>
-  <data name="UseOnlyErrorsAndInfosPanel" xml:space="preserve">
-		<value>Yalnızca bilgilendirme panelini kullan (Açılır pencere gösterme)</value>
-	</data>
   <data name="User" xml:space="preserve">
 		<value>Kullanıcı</value>
 	</data>
@@ -1149,15 +1005,6 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
 	</data>
   <data name="Version" xml:space="preserve">
 		<value>Sürüm</value>
-	</data>
-  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
-		<value>Araç Çubuğu Arkaplan Rengi</value>
-	</data>
-  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
-		<value>Araç Çubuğu Yazı Rengi</value>
-	</data>
-  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
-		<value>Pencere Arkaplan Rengi</value>
 	</data>
   <data name="TitleError" xml:space="preserve">
 		<value>Hata ({0})</value>
@@ -1177,20 +1024,11 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="TitleWarning" xml:space="preserve">
 		<value>Uyarı ({0})</value>
 	</data>
-  <data name="TransferFailed" xml:space="preserve">
-		<value>Trasfer başarısız!</value>
-	</data>
   <data name="TryToIntegrate" xml:space="preserve">
 		<value>Bütünleştirmeyi deneyin</value>
 	</data>
-  <data name="Type" xml:space="preserve">
-		<value>Tip</value>
-	</data>
   <data name="UncheckProperties" xml:space="preserve">
 		<value>Kaydedilmesini istemediğiniz özelliklerin işaretini kaldırın!</value>
-	</data>
-  <data name="UnnamedTheme" xml:space="preserve">
-		<value>İsimsiz Tema</value>
 	</data>
   <data name="UpdateAvailable" xml:space="preserve">
 		<value>MRemoteNG bir güncelleme gerektiriyor</value>
@@ -1203,9 +1041,6 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
 	</data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
 		<value>Güncelleştirmeler kontrol ediliyor...</value>
-	</data>
-  <data name="UpdateCheckPortableEdition" xml:space="preserve">
-		<value>MRemoteNG Taşınabilir Sürümü şu anda otomatik güncellemeleri desteklemez.</value>
 	</data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
 		<value>İndirme tamamlandı!
@@ -1232,9 +1067,6 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
   <data name="ImportAD" xml:space="preserve">
 		<value>Active Directoy'den içe aktar</value>
 	</data>
-  <data name="ImportExport" xml:space="preserve">
-		<value>İçe aktar/Dışa aktar</value>
-	</data>
   <data name="ImportFileFailedContent" xml:space="preserve">
 		<value>Dosya alınırken bir hata oluştu, "{0}".</value>
 	</data>
@@ -1244,35 +1076,14 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
   <data name="ImportFromFileMenuItem" xml:space="preserve">
 		<value>&amp;Dosyadan içe aktar...</value>
 	</data>
-  <data name="ImportLocationCommandButtons" xml:space="preserve">
-		<value>{0}{1} kökünde | Seçili klasörün altındaki {0}{2}</value>
-	</data>
-  <data name="ImportLocationContent" xml:space="preserve">
-		<value>İçe aktarılan öğelerin nereye yerleştirilmesini istersiniz?</value>
-	</data>
-  <data name="ImportLocationMainInstruction" xml:space="preserve">
-		<value>İçe alma yeri</value>
-	</data>
   <data name="ImportMenuItem" xml:space="preserve">
 		<value>İçe &amp;Al</value>
-	</data>
-  <data name="ImportmRemoteXML" xml:space="preserve">
-		<value>mRemote/mRemoteNG XML dosyasını içe aktar</value>
 	</data>
   <data name="ImportPortScan" xml:space="preserve">
 		<value>Port Taramasından içe aktar</value>
 	</data>
-  <data name="ImportRDPFiles" xml:space="preserve">
-		<value>.RDP dosyasından içe aktar</value>
-	</data>
-  <data name="Inactive" xml:space="preserve">
-		<value>Pasif</value>
-	</data>
   <data name="Informations" xml:space="preserve">
 		<value>Bilgiler</value>
-	</data>
-  <data name="InheritNewConnection" xml:space="preserve">
-		<value>mRemoteNG güncel</value>
 	</data>
   <data name="IntAppDisposeFailed" xml:space="preserve">
 		<value>Int App kaldırma işlemi başarısız!</value>
@@ -1349,9 +1160,6 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
 	</data>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
 		<value>PortScan paneli yüklenemedi!</value>
-	</data>
-  <data name="PropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-		<value>(Bu özellikler yalnızca çıktı dosyası biçimi olarak mRemote / mRemoteNG XML'yi seçerseniz kaydedilir!)</value>
 	</data>
   <data name="PropertyDescriptionAddress" xml:space="preserve">
 		<value>Bağlanmak istediğiniz ana makine adını veya ip'yi girin.</value>
@@ -1431,15 +1239,6 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
   <data name="PropertyDescriptionPort" xml:space="preserve">
 		<value>Seçilen protokolün dinlediği portu girin.</value>
 	</data>
-  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
-		<value>Arama Kutusu Arkaplan Rengi</value>
-	</data>
-  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
-		<value>Arama Kutusu Metin Rengi</value>
-	</data>
-  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
-		<value>Arama Kutusu Metin İstemi Rengi</value>
-	</data>
   <data name="UseSQLServer" xml:space="preserve">
 		<value>Baplantıları yüklemek ve kaydetmek için SQL Sunucusu kullanın</value>
 	</data>
@@ -1458,53 +1257,11 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
   <data name="VncSetPropsFailed" xml:space="preserve">
 		<value>VNC Seçenek ayarlama başarısız!</value>
 	</data>
-  <data name="VncStartChatFailed" xml:space="preserve">
-		<value>VNC Sohbeti Başarısız!</value>
-	</data>
   <data name="VncToggleSmartSizeFailed" xml:space="preserve">
 		<value>VNC Akıllı Boyut Değiştirme Başarısız!</value>
 	</data>
   <data name="EncryptionBlockCipherMode" xml:space="preserve">
 		<value>Blok Şifre Modu</value>
-	</data>
-  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
-		<value>Bağlantılar Paneli Arkaplan Rengi</value>
-	</data>
-  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
-		<value>Bağlantılar Paneli Metin Rengi</value>
-	</data>
-  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
-		<value>Bağlantılar Panel Ağacı Çizgisi Rengi</value>
-	</data>
-  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
-		<value>Menü Arkaplan Rengi</value>
-	</data>
-  <data name="ThemeNameMenuTextColor" xml:space="preserve">
-		<value>Menü Metin Rengi</value>
-	</data>
-  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
-		<value>Araç çubuğu metin rengi</value>
-	</data>
-  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
-		<value>Ana pencerenin arkaplan rengi.</value>
-	</data>
-  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-		<value>Ayar Paneli Arkaplan Rengi</value>
-	</data>
-  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
-		<value>Ayar Paneli Kategori Metin Rengi</value>
-	</data>
-  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
-		<value>Ayar Paneli Izgara Çizgisi Rengi</value>
-	</data>
-  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
-		<value>Ayar Paneli Yardım Arkaplan Rengi</value>
-	</data>
-  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
-		<value>Ayar Paneli Yardım Metni Rengi</value>
-	</data>
-  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
-		<value>Ayar Paneli Metin Rengi</value>
 	</data>
   <data name="PropertyDescriptionProtocol" xml:space="preserve">
 		<value>Host bağlantısı için mRemoteNG'nin kullanması gereken protokolü seçin.</value>
@@ -1737,9 +1494,6 @@ Mesaj:
   <data name="PuttyFocusFailed" xml:space="preserve">
 		<value>Odaklama ayarlanamadı!</value>
 	</data>
-  <data name="PuttyGetSessionsFailed" xml:space="preserve">
-		<value>Putty oturumunu çağırma işlemi başarısız!</value>
-	</data>
   <data name="PuttyKillFailed" xml:space="preserve">
 		<value>Putty işlemini sonlandırma başarısız!</value>
 	</data>
@@ -1749,17 +1503,11 @@ Mesaj:
   <data name="PuttySavedSessionsRootName" xml:space="preserve">
 		<value>PuTTY kaydedilen oturumlar</value>
 	</data>
-  <data name="PuttySessionSettings" xml:space="preserve">
-		<value>PuTTY Oturum Ayaları</value>
-	</data>
   <data name="PuttySettings" xml:space="preserve">
 		<value>PuTTY Ayarları</value>
 	</data>
   <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
 		<value>PuTTY Ayarları gösterilemedi!</value>
-	</data>
-  <data name="PuttyStartFailed" xml:space="preserve">
-		<value>Putty Başlatma başarısız!</value>
 	</data>
   <data name="PuttyStuff" xml:space="preserve">
 		<value>--- PuTTY Ekibi ---</value>
@@ -1791,18 +1539,6 @@ Mesaj:
   <data name="RadioCloseWarnNever" xml:space="preserve">
 		<value>Bağlantılar kapatılırken beni uyarma</value>
 	</data>
-  <data name="RdpAddResolutionFailed" xml:space="preserve">
-		<value>RDP Çözünürlük Ekleme başarısız!</value>
-	</data>
-  <data name="RdpAddResolutionsFailed" xml:space="preserve">
-		<value>RDP Çözünürlükleri Ekle başarısız!</value>
-	</data>
-  <data name="RdpAddSessionFailed" xml:space="preserve">
-		<value>Oturum Ekleme başarısız!</value>
-	</data>
-  <data name="RdpCloseConnectionFailed" xml:space="preserve">
-		<value>RDP Bağğlantısı kapatma başarısız!</value>
-	</data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
 		<value>RDP kontrolü oluşturulamadı, lütfen mRemoteNG gereksinimlerini kontrol edin.</value>
 	</data>
@@ -1817,15 +1553,6 @@ Mesaj:
 	</data>
   <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
 		<value>Menü Animasyonlarını Devre Dışı Bırak</value>
-	</data>
-  <data name="RDPDisableThemes" xml:space="preserve">
-		<value>Temaları Devre Dışı Bırak</value>
-	</data>
-  <data name="RDPDisableWallpaper" xml:space="preserve">
-		<value>Duvar Kağıdını Devre Dışı Bırak</value>
-	</data>
-  <data name="RdpDisconnected" xml:space="preserve">
-		<value>RDP bağlantısı kesildi!</value>
 	</data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
 		<value>RDP bağlantısı kesilemedi, kapatmaya çalışılıyor!</value>
@@ -1848,9 +1575,6 @@ Mesaj:
   <data name="RdpErrorGetFailure" xml:space="preserve">
 		<value>Hata çağırma başarısız (Önemli Hatalar)</value>
 	</data>
-  <data name="RdpErrorGetUnknown" xml:space="preserve">
-		<value>Bilinmeyen bir önemli RDP hatası oluştu. Hata kodu {0}.</value>
-	</data>
   <data name="RdpErrorOutOfMemory" xml:space="preserve">
 		<value>Bir bellek yetersiz hatası oluştu.</value>
 	</data>
@@ -1863,9 +1587,6 @@ Mesaj:
   <data name="RdpErrorWinsock" xml:space="preserve">
 		<value>Winsock başlatma hatası.</value>
 	</data>
-  <data name="RdpFileCouldNotBeImported" xml:space="preserve">
-		<value>Rdp dosyası alınamadı!</value>
-	</data>
   <data name="RDPFitToPanel" xml:space="preserve">
 		<value>Panele Sığdır</value>
 	</data>
@@ -1877,9 +1598,6 @@ Mesaj:
 	</data>
   <data name="RdpGatewayNotSupported" xml:space="preserve">
 		<value>RD Ağ Geçidi desteklenmemektedir.</value>
-	</data>
-  <data name="RdpGetSessionsFailed" xml:space="preserve">
-		<value>Oturumları çağırma başarısız!</value>
 	</data>
   <data name="RdpReconnectCount" xml:space="preserve">
 		<value>RDP yeniden bağlanma sayısı:</value>
@@ -1980,17 +1698,8 @@ Mesaj:
   <data name="SendTo" xml:space="preserve">
 		<value>Gönder...</value>
 	</data>
-  <data name="SessionGetFailed" xml:space="preserve">
-		<value>Oturumların Arkaplanları alınamadı</value>
-	</data>
-  <data name="SessionKillFailed" xml:space="preserve">
-		<value>Oturumun Arkaplanı durdurulamadı</value>
-	</data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
 		<value>Bağlantılar oluştururken veya yeniden adlandırırken ana bilgisayar adını görüntü adı gibi ayarla</value>
-	</data>
-  <data name="SettingMainFormTextFailed" xml:space="preserve">
-		<value>Ana form metnini ayarlama başarısız oldu</value>
 	</data>
   <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
 		<value>Ayarlar kaydedilemiyor veya sistem tepsisi simgesi atılamıyor!</value>
@@ -2022,23 +1731,11 @@ Mesaj:
   <data name="SortDesc" xml:space="preserve">
 		<value>Azalan (Z-A)</value>
 	</data>
-  <data name="SpecialKeys" xml:space="preserve">
-		<value>Özel Tuşlar</value>
-	</data>
   <data name="SQLInfo" xml:space="preserve">
 		<value>Lütfen daha fazla bilgi için Yardım - Başlarken - SQL Yapılandırması bölümüne bakın!</value>
 	</data>
-  <data name="SqlUpdateCheckUpdateAvailable" xml:space="preserve">
-		<value>SQL Güncelleme kontrolü bitti ve kullanılabilir bir güncelleme var! Bağlantıları yenilemeye gidiliyor.</value>
-	</data>
   <data name="SSHStartTransferBG" xml:space="preserve">
 		<value>SSH arkaplan trasferi başarısız!</value>
-	</data>
-  <data name="SSHTranferSuccessful" xml:space="preserve">
-		<value>Transfer başarılı!</value>
-	</data>
-  <data name="SSHTransferEndFailed" xml:space="preserve">
-		<value>SSH Transferi bitirilemedi (UI.Window.SSHTransfer)</value>
 	</data>
   <data name="SSHTransferFailed" xml:space="preserve">
 		<value>SSH transferi başarısız.</value>
@@ -2069,56 +1766,5 @@ Mesaj:
 	</data>
   <data name="TheFollowing" xml:space="preserve">
 		<value>Aşağıdaki:</value>
-	</data>
-  <data name="ThemeCategoryConfigPanel" xml:space="preserve">
-		<value>Ayar Paneli</value>
-	</data>
-  <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
-		<value>Bağlantılar Paneli</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
-		<value>Ayar panelinin arkaplan rengi.</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
-		<value>Ayar panelindeki kategori metninin rengi.</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
-		<value>Ayar panelindeki ızgara çizgilerinin rengi</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
-		<value>Ayar panelinin yardım alanındaki arkaplan rengi.</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
-		<value>Ayar panelinin yardım alanındaki metin rengi.</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
-		<value>Ayar panelindeki metin rengi.</value>
-	</data>
-  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
-		<value>Ayar paneli arkaplan rengi.</value>
-	</data>
-  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
-		<value>Bağlantılar panelindeki metin rengi.</value>
-	</data>
-  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
-		<value>Bağlantılar panelindeki ağaç çizgilerinin rengi.</value>
-	</data>
-  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
-		<value>Menülerin arkaplan rengi.</value>
-	</data>
-  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
-		<value>Menülerin metin rengi.</value>
-	</data>
-  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
-		<value>Arama kutusunun arkaplan rengi.</value>
-	</data>
-  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
-		<value>Arama kutusunun metin rengi.</value>
-	</data>
-  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
-		<value>Arama kutusundaki istem metninin rengi.</value>
-	</data>
-  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
-		<value>Araç çubuklarının arka plan rengi.</value>
 	</data>
 </root>

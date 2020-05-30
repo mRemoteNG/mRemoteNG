@@ -120,17 +120,8 @@
   <data name="About" xml:space="preserve">
     <value>О программе</value>
   </data>
-  <data name="Active" xml:space="preserve">
-    <value>Активно</value>
-  </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Активность</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML не удалось!</value>
-  </data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-    <value>AddNodesFromSQL не удалось!</value>
   </data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>Разрешить только один экземпляр приложения (требуется перезапуск mRemoteNG)</value>
@@ -168,14 +159,8 @@
   <data name="Aspect" xml:space="preserve">
     <value>Вид</value>
   </data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Автоматически получать информацию о сессии</value>
-  </data>
   <data name="AutoSaveEvery" xml:space="preserve">
     <value>Автосохранение каждые:</value>
-  </data>
-  <data name="AutoSaveMins" xml:space="preserve">
-    <value>минут (0 означает отключено)</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Текущая версия</value>
@@ -231,10 +216,6 @@
   <data name="ButtonTestProxy" xml:space="preserve">
     <value>Проверка прокси</value>
   </data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-    <value>Вы не можете импортировать обычный файл подключения.
-Для обычных файлов подключений используйте Файл - Открыть подключение!</value>
-  </data>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Не удается запустить сканирование портов, неверный формат IP!</value>
   </data>
@@ -259,23 +240,11 @@
   <data name="CategoryRedirect" xml:space="preserve">
     <value>Локальные ресурсы</value>
   </data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-    <value>Всегда показывать это окно при запуске</value>
-  </data>
   <data name="CheckFailed" xml:space="preserve">
     <value>Ошибка проверки!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Успешно проверено!</value>
-  </data>
-  <data name="CcEOLFailed" xml:space="preserve">
-    <value>Для (RDP) сессий должна быть зарегистрирована  в системе eolwtscom.dll.
-mRemoteNG загрузится с этим компонентом, но не зарегистрирует его автоматически.
-Чтобы зарегистрировать его вручную: Откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (где C:\Program Files\mRemoteNG\ это путь к установленному mRemoteNG). 
-Если у вас все же не получается зарегистрировать компонент для RDP - обратитесь на {0}.</value>
-  </data>
-  <data name="CcEOLOK" xml:space="preserve">
-    <value>EOLWTSCOM был найден и зарегистрирован.</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
     <value>ICA требуется установленный XenDesktop Online Plugin и зарегистрированная библиотека wfica.ocx. Вы можете скачать клиент здесь: http://www.citrix.com/download/
@@ -402,10 +371,6 @@ VncSharp Control Version {0}</value>
   <data name="ConfigUiLoadFailed" xml:space="preserve">
     <value>Ошибка загрузки Config UI!</value>
   </data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Хотите закрыть подключение:
-"{0}"?</value>
-  </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Хотите закрыть панель "{0}"? Все ее подключения также будут закрыты.</value>
   </data>
@@ -457,11 +422,6 @@ VncSharp Control Version {0}</value>
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Невозможно открыть подключение: имя хоста не указано!</value>
   </data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-    <value>Ошибка RDP!
-Код ошибки: {0}
-Описание ошибки: {1}</value>
-  </data>
   <data name="Connections" xml:space="preserve">
     <value>Подключения</value>
   </data>
@@ -471,18 +431,12 @@ VncSharp Control Version {0}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>Не удалось создать резервную копию файла подключений!</value>
   </data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>Не удалось импортировать подключения в файл!</value>
-  </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Файл подключений "{0}" невозможно загрузить!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Файл подключений "{0}" невозможно загрузить!
 Создайте новый файл подключений.</value>
-  </data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>Невозможно сохранить файл подключений!</value>
   </data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Невозможно сохранить файл в качестве подключения "{0}"!</value>
@@ -495,9 +449,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>Подключение к {0} по {1} закрыто пользователем {2}.</value>
-  </data>
-  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
-    <value>Подключение к {0} по {1} закрыто пользователем {2}. (Описание: "{3}"; Пользователь: "{4}")</value>
   </data>
   <data name="ConnenctionCloseEvent" xml:space="preserve">
     <value>Подключение закрыто</value>
@@ -513,9 +464,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="CurrentVersion" xml:space="preserve">
     <value>Установленная версия</value>
-  </data>
-  <data name="DefaultTheme" xml:space="preserve">
-    <value>Тема по умолчанию</value>
   </data>
   <data name="Detect" xml:space="preserve">
     <value>Обнаружение</value>
@@ -571,12 +519,6 @@ VncSharp Control Version {0}</value>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>Версия базы данных {0} не совместима с этой версией {1}.</value>
   </data>
-  <data name="ErrorCloneNodeFailed" xml:space="preserve">
-    <value>Ошибка CloneNode (Tree.Node). {0}</value>
-  </data>
-  <data name="ErrorCode" xml:space="preserve">
-    <value>Код ошибки {0}.</value>
-  </data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>Невозможно сохранить список подключений.</value>
   </data>
@@ -604,14 +546,8 @@ VncSharp Control Version {0}</value>
   <data name="Export" xml:space="preserve">
     <value>Экспорт</value>
   </data>
-  <data name="ExportmRemoteXML" xml:space="preserve">
-    <value>Экспорт mRemote/mRemoteNG XML</value>
-  </data>
   <data name="ExtApp" xml:space="preserve">
     <value>Внешнее Приложение</value>
-  </data>
-  <data name="FAMFAMFAMAttribution" xml:space="preserve">
-    <value>Использованы значки [FAMFAMFAM]</value>
   </data>
   <data name="FilterAll" xml:space="preserve">
     <value>Все файлы (*.*)</value>
@@ -628,9 +564,6 @@ VncSharp Control Version {0}</value>
   <data name="FilterRDP" xml:space="preserve">
     <value>RDP-файлы (*. RDP)</value>
   </data>
-  <data name="FiltervRD2008CSV" xml:space="preserve">
-    <value>visionapp Remote Desktop 2008 CSV-файлы (*. CSV)</value>
-  </data>
   <data name="FormatInherit" xml:space="preserve">
     <value>Наследовать {0}</value>
   </data>
@@ -645,9 +578,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="General" xml:space="preserve">
     <value>Главная</value>
-  </data>
-  <data name="GetConnectionInfoFromSqlFailed" xml:space="preserve">
-    <value>Получить информацию о подключении из SQL не удалось</value>
   </data>
   <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
     <value>Ошибка при загрузке подключения "{0}" на "{1}". {2}</value>
@@ -700,26 +630,11 @@ VncSharp Control Version {0}</value>
   <data name="ImportAD" xml:space="preserve">
     <value>Импорт из Active Directory</value>
   </data>
-  <data name="ImportExport" xml:space="preserve">
-    <value>Импорт/Экспорт</value>
-  </data>
-  <data name="ImportmRemoteXML" xml:space="preserve">
-    <value>Импорт mRemote/mRemoteNG XML</value>
-  </data>
   <data name="ImportPortScan" xml:space="preserve">
     <value>Импорт из просканированных портов</value>
   </data>
-  <data name="ImportRDPFiles" xml:space="preserve">
-    <value>Импорт из RDP-файла (ов)</value>
-  </data>
-  <data name="Inactive" xml:space="preserve">
-    <value>Неактивный</value>
-  </data>
   <data name="Informations" xml:space="preserve">
     <value>Информация</value>
-  </data>
-  <data name="InheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG в актуальном состоянии</value>
   </data>
   <data name="IntAppDisposeFailed" xml:space="preserve">
     <value>Не удалось завершить процесс внутреннего приложения!</value>
@@ -807,18 +722,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
     <value>Локальный файл не существует!</value>
-  </data>
-  <data name="LogOff" xml:space="preserve">
-    <value>Выход</value>
-  </data>
-  <data name="LogWriteToFileFailed" xml:space="preserve">
-    <value>Записать в файл отчета не удалось!</value>
-  </data>
-  <data name="LogWriteToFileFinalLocationFailed" xml:space="preserve">
-    <value>Невозможно сохранить отчет в папке назначения.</value>
-  </data>
-  <data name="MagicLibraryAttribution" xml:space="preserve">
-    <value>Использовано Magic library от [Crownwood Software]</value>
   </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Добавить Панель подключения</value>
@@ -913,9 +816,6 @@ VncSharp Control Version {0}</value>
   <data name="Options" xml:space="preserve">
     <value>Опции</value>
   </data>
-  <data name="MenuPaste" xml:space="preserve">
-    <value>Вставить</value>
-  </data>
   <data name="MenuPortScan" xml:space="preserve">
     <value>Сканер портов</value>
   </data>
@@ -952,17 +852,8 @@ VncSharp Control Version {0}</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Сохранить подключение как...</value>
   </data>
-  <data name="MenuScreenshotManager" xml:space="preserve">
-    <value>Менеджер скриншотов </value>
-  </data>
   <data name="MenuSendSpecialKeys" xml:space="preserve">
     <value>Отправить спец. клавиши (VNC)</value>
-  </data>
-  <data name="MenuSessions" xml:space="preserve">
-    <value>Сессии</value>
-  </data>
-  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
-    <value>Сессии и скриншоты</value>
   </data>
   <data name="MenuShowHelpText" xml:space="preserve">
     <value>Показать текст справки</value>
@@ -1021,9 +912,6 @@ VncSharp Control Version {0}</value>
   <data name="NewPanel" xml:space="preserve">
     <value>Новая панель</value>
   </data>
-  <data name="NewRoot" xml:space="preserve">
-    <value>Новый корень</value>
-  </data>
   <data name="NewTitle" xml:space="preserve">
     <value>Новое название</value>
   </data>
@@ -1078,9 +966,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Не удалось загрузить панель Сканера портов!</value>
-  </data>
-  <data name="PropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(Эти свойства будут сохранены только если вы выберете mRemote/mRemoteNG XML в качестве выходного формата файлов!)</value>
   </data>
   <data name="PropertyDescriptionAddress" xml:space="preserve">
     <value>Введите имя хоста или IP к которому вы хотите подключиться.</value>
@@ -1394,9 +1279,6 @@ VncSharp Control Version {0}</value>
   <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Не удается установить фокус!</value>
   </data>
-  <data name="PuttyGetSessionsFailed" xml:space="preserve">
-    <value>Получить сессию Putty не удалось!</value>
-  </data>
   <data name="PuttyHandle" xml:space="preserve">
     <value>Обработчик Putty: {0}</value>
   </data>
@@ -1417,9 +1299,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
     <value>Показать настройки PuTTY не удалось!</value>
-  </data>
-  <data name="PuttyStartFailed" xml:space="preserve">
-    <value>Не удалось запустить Putty!</value>
   </data>
   <data name="PuttyStuff" xml:space="preserve">
     <value>--- PuTTY ---</value>
@@ -1472,18 +1351,6 @@ VncSharp Control Version {0}</value>
   <data name="RDP65536Colors" xml:space="preserve">
     <value>65536 цв. (16-бит)</value>
   </data>
-  <data name="RdpAddResolutionFailed" xml:space="preserve">
-    <value>RDP Добавить разрешение не удалось!</value>
-  </data>
-  <data name="RdpAddResolutionsFailed" xml:space="preserve">
-    <value>RDP Добавить разрешение не удалось!</value>
-  </data>
-  <data name="RdpAddSessionFailed" xml:space="preserve">
-    <value>Добавить сессию не удалось</value>
-  </data>
-  <data name="RdpCloseConnectionFailed" xml:space="preserve">
-    <value>Закрыть подключение RDP не удалось!</value>
-  </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Не удается создать RDP подключение, пожалуйста, проверьте настройки mRemoteNG.</value>
   </data>
@@ -1498,15 +1365,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Отключить Анимацию</value>
-  </data>
-  <data name="RDPDisableThemes" xml:space="preserve">
-    <value>Отключить Темы</value>
-  </data>
-  <data name="RDPDisableWallpaper" xml:space="preserve">
-    <value>Отключить обои Рабочего стола</value>
-  </data>
-  <data name="RdpDisconnected" xml:space="preserve">
-    <value>RDP отключен!</value>
   </data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
     <value>RDP не удалось отключить, попробуйте закрыть его!</value>
@@ -1529,9 +1387,6 @@ VncSharp Control Version {0}</value>
   <data name="RdpErrorGetFailure" xml:space="preserve">
     <value>Невозможно получить GetError (Критическая ошибка)</value>
   </data>
-  <data name="RdpErrorGetUnknown" xml:space="preserve">
-    <value>Произошла неизвестная критическая ошибка RDP. Код ошибки {0}.</value>
-  </data>
   <data name="RdpErrorOutOfMemory" xml:space="preserve">
     <value>Произошла ошибка из-за нехватки памяти.</value>
   </data>
@@ -1544,9 +1399,6 @@ VncSharp Control Version {0}</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Ошибка инициализации Winsock.</value>
   </data>
-  <data name="RdpFileCouldNotBeImported" xml:space="preserve">
-    <value>Не удалось импортировать RDP файл!</value>
-  </data>
   <data name="RDPFitToPanel" xml:space="preserve">
     <value>В окне</value>
   </data>
@@ -1558,9 +1410,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="RdpGatewayNotSupported" xml:space="preserve">
     <value>Шлюз Служб терминалов не поддерживается!</value>
-  </data>
-  <data name="RdpGetSessionsFailed" xml:space="preserve">
-    <value>Ошибка сессии!</value>
   </data>
   <data name="RdpReconnectCount" xml:space="preserve">
     <value>Количество переподключений RDP:</value>
@@ -1667,17 +1516,8 @@ VncSharp Control Version {0}</value>
   <data name="SendTo" xml:space="preserve">
     <value>Отправить...</value>
   </data>
-  <data name="SessionGetFailed" xml:space="preserve">
-    <value>Получить фоновую сессию не удалось</value>
-  </data>
-  <data name="SessionKillFailed" xml:space="preserve">
-    <value>Завершение фоновой сессии не удалось</value>
-  </data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Установить имя хоста, как отображаемое имя при создании новых подключений</value>
-  </data>
-  <data name="SettingMainFormTextFailed" xml:space="preserve">
-    <value>Настройка основной текстовой формы не удалось</value>
   </data>
   <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
     <value>Не удалось сохранить настройки, или разместить значок в системном трее!</value>
@@ -1712,17 +1552,11 @@ VncSharp Control Version {0}</value>
   <data name="SortDesc" xml:space="preserve">
     <value>По убыванию (Z-A)</value>
   </data>
-  <data name="SpecialKeys" xml:space="preserve">
-    <value>Специальные клавиши</value>
-  </data>
   <data name="SQLInfo" xml:space="preserve">
     <value>Для дополнительной информации см. справку - Начало работы - конфигурация SQL!</value>
   </data>
   <data name="SQLServer" xml:space="preserve">
     <value>SQL Server</value>
-  </data>
-  <data name="SqlUpdateCheckUpdateAvailable" xml:space="preserve">
-    <value>Доступно обновление для SQL! Обновите подключения.</value>
   </data>
   <data name="Ssh1" xml:space="preserve">
     <value>SSH version 1</value>
@@ -1732,12 +1566,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="SSHStartTransferBG" xml:space="preserve">
     <value>Фоновая передача по SSH - не удалась!</value>
-  </data>
-  <data name="SSHTranferSuccessful" xml:space="preserve">
-    <value>Передано успешно!</value>
-  </data>
-  <data name="SSHTransferEndFailed" xml:space="preserve">
-    <value>Передача по SSH завершена с ошибкой (UI.Window.SSHTransfer)!</value>
   </data>
   <data name="SSHTransferFailed" xml:space="preserve">
     <value>SSH ошибка передачи.</value>
@@ -1772,114 +1600,6 @@ VncSharp Control Version {0}</value>
   <data name="TheFollowing" xml:space="preserve">
     <value>Установить вручную:</value>
   </data>
-  <data name="ThemeCategoryConfigPanel" xml:space="preserve">
-    <value>Конфигурация</value>
-  </data>
-  <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
-    <value>Подключения</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Цвет фона панели конфигурации.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Цвет текста категории на панели конфигурации.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
-    <value>Цвет линий сетки на панели конфигурации</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Цвет фона области справки панели конфигурации.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Цвет текста в области справки панели конфигурации.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
-    <value>Цвет текста в панели конфигурации.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Цвет фона панели подключений.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
-    <value>Цвет текста в панели подключений.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Цвет линий дерева на панели подключений.</value>
-  </data>
-  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
-    <value>Цвет фона меню.</value>
-  </data>
-  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
-    <value>Цвет текста в меню.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Цвет фона поля поиска.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
-    <value>Цвет текста в поле поиска.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Цвет текста подсказки в поле поиска.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
-    <value>Цвет фона панели инструментов.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
-    <value>Цвет текста в панели инструментов.</value>
-  </data>
-  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
-    <value>Цвет фона главного окна.</value>
-  </data>
-  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Цвет фона панели конфигурации</value>
-  </data>
-  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Цвет текста категории панели конфигурации</value>
-  </data>
-  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
-    <value>Цвет линий сетки панели конфигурации</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Цвет фона справки панели конфигурации</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Цвет текста справки панели конфигурации</value>
-  </data>
-  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
-    <value>Цвет текста панели конфигурации</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Цвет фона панели подключений</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
-    <value>Цвет текста панели подключений</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Цвет линий дерева панели подключений</value>
-  </data>
-  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
-    <value>Цвет фона меню</value>
-  </data>
-  <data name="ThemeNameMenuTextColor" xml:space="preserve">
-    <value>Цвет текста меню</value>
-  </data>
-  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Цвет фона поля поиска</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
-    <value>Цвет текста поля поиска</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Цвет текста подсказки поля поиска</value>
-  </data>
-  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
-    <value>Цвет фона панели инструментов</value>
-  </data>
-  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
-    <value>Цвет текста панели инструментов</value>
-  </data>
-  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
-    <value>Цвет фона окна</value>
-  </data>
   <data name="TitleError" xml:space="preserve">
     <value>Ошибка ({0})</value>
   </data>
@@ -1898,14 +1618,8 @@ VncSharp Control Version {0}</value>
   <data name="Transfer" xml:space="preserve">
     <value>Передача</value>
   </data>
-  <data name="TransferFailed" xml:space="preserve">
-    <value>Передача не удалась!</value>
-  </data>
   <data name="TryToIntegrate" xml:space="preserve">
     <value>Интеграция</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Тип</value>
   </data>
   <data name="UltraVncRepeater" xml:space="preserve">
     <value>Ultra VNC Repeater</value>
@@ -1916,9 +1630,6 @@ VncSharp Control Version {0}</value>
   <data name="UncheckProperties" xml:space="preserve">
     <value>Снимите свойства, которые не хотите сохранять!</value>
   </data>
-  <data name="UnnamedTheme" xml:space="preserve">
-    <value>Безымянный тема</value>
-  </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Требуется обновление mRemoteNG</value>
   </data>
@@ -1927,9 +1638,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>Не удалось завершить проверку обновлений!</value>
-  </data>
-  <data name="UpdateCheckPortableEdition" xml:space="preserve">
-    <value>Портативная версия mRemoteNG не поддерживает автообновление.</value>
   </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>Загрузка завершена!
@@ -1989,9 +1697,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="VncSetPropsFailed" xml:space="preserve">
     <value>Не удалось задать параметры VNC!</value>
   </data>
-  <data name="VncStartChatFailed" xml:space="preserve">
-    <value>Не удалось начать VNC чат!</value>
-  </data>
   <data name="VncToggleSmartSizeFailed" xml:space="preserve">
     <value>Не удалось переключить VNC в SmartSize!</value>
   </data>
@@ -2003,15 +1708,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="Warnings" xml:space="preserve">
     <value>Предупреждения</value>
-  </data>
-  <data name="WeifenLuoAttribution" xml:space="preserve">
-    <value>Использовано DockPanel Suite от [Weifen Luo]</value>
-  </data>
-  <data name="WeifenLuoAttributionURL" xml:space="preserve">
-    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
-  </data>
-  <data name="XULrunnerPath" xml:space="preserve">
-    <value>Путь XULRunner:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
@@ -2112,9 +1808,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>Новый внешний инструмент</value>
   </data>
-  <data name="FAMFAMFAMAttributionURL" xml:space="preserve">
-    <value>http://www.famfamfam.com/</value>
-  </data>
   <data name="FilterAllImportable" xml:space="preserve">
     <value>Все импортируемые файлы</value>
   </data>
@@ -2142,23 +1835,8 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="ImportFileFailedMainInstruction" xml:space="preserve">
     <value>Импортировать не удалось</value>
   </data>
-  <data name="ImportLocationCommandButtons" xml:space="preserve">
-    <value>Под корнем {0} {1} | Под выбранной папке {0} {2}</value>
-  </data>
-  <data name="ImportLocationContent" xml:space="preserve">
-    <value>Где бы вы хотели разместить импортируемое содержимое?</value>
-  </data>
-  <data name="ImportLocationMainInstruction" xml:space="preserve">
-    <value>Место импорта</value>
-  </data>
   <data name="LoadFromSqlFailedContent" xml:space="preserve">
     <value>Не удалось загрузить информацию о соединении с SQL-сервера.</value>
-  </data>
-  <data name="MagicLibraryAttributionURL" xml:space="preserve">
-    <value>http://www.dotnetmagic.com/</value>
-  </data>
-  <data name="MenuSessionRetrieve" xml:space="preserve">
-    <value>Извлечь</value>
   </data>
   <data name="MremoteNgCsv" xml:space="preserve">
     <value>mRemoteNG CSV</value>
@@ -2166,38 +1844,8 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="MremoteNgXml" xml:space="preserve">
     <value>mRemoteNG XML</value>
   </data>
-  <data name="OptionsKeyboardButtonDelete" xml:space="preserve">
-    <value>&amp;Удалить</value>
-  </data>
-  <data name="OptionsKeyboardButtonNew" xml:space="preserve">
-    <value>&amp;Новый</value>
-  </data>
-  <data name="OptionsKeyboardButtonReset" xml:space="preserve">
-    <value>&amp;Восстановить значения по умолчанию</value>
-  </data>
-  <data name="OptionsKeyboardButtonResetAll" xml:space="preserve">
-    <value>Сбросить &amp;все по умолчанию</value>
-  </data>
-  <data name="OptionsKeyboardCommandsGroupTabs" xml:space="preserve">
-    <value>Вкладки</value>
-  </data>
-  <data name="OptionsKeyboardCommandsNextTab" xml:space="preserve">
-    <value>Новая вкладка</value>
-  </data>
-  <data name="OptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-    <value>Предыдущая вкладка</value>
-  </data>
-  <data name="OptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-    <value>Изменить ярлык</value>
-  </data>
-  <data name="OptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-    <value>Горячие клавиши</value>
-  </data>
   <data name="OptionsProxyTesting" xml:space="preserve">
     <value>Тестирование...</value>
-  </data>
-  <data name="OptionsTabKeyboard" xml:space="preserve">
-    <value>Клавиатура</value>
   </data>
   <data name="PasswordStatusMustMatch" xml:space="preserve">
     <value>Оба пароля должны совпадать.</value>
@@ -2219,9 +1867,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="PropertyNameLoadBalanceInfo" xml:space="preserve">
     <value>Информация о балансе нагрузки</value>
-  </data>
-  <data name="PuttySessionSettings" xml:space="preserve">
-    <value>Настройки сеанса PuTTY</value>
   </data>
   <data name="TitlePasswordWithName" xml:space="preserve">
     <value>Пароль для {0}</value>
@@ -2286,35 +1931,14 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="PropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Минуты в режим ожидания</value>
   </data>
-  <data name="Accept" xml:space="preserve">
-    <value>Применить</value>
-  </data>
   <data name="Add" xml:space="preserve">
     <value>Добавить</value>
-  </data>
-  <data name="CredentialEditor" xml:space="preserve">
-    <value>Редактор учетных данных</value>
-  </data>
-  <data name="CredentialManager" xml:space="preserve">
-    <value>Менеджер учетных данных</value>
-  </data>
-  <data name="ID" xml:space="preserve">
-    <value>Номер</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Удалить</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Заглавие</value>
   </data>
-  <data name="PropertyDescriptionCredential" xml:space="preserve">
-    <value>Выберите, какие учетные данные использовать для этого подключения.</value>
-  </data>
   <data name="ConfirmDeleteCredentialRecord" xml:space="preserve">
     <value>Вы действительно хотите удалить учетную запись, {0}?</value>
-  </data>
-  <data name="FindMatchingCredentialFailed" xml:space="preserve">
-    <value>Не удалось найти запись учетных данных с идентификатором соответствия "{0}" для записи соединения с именем "{1}".</value>
   </data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Выберите, следует ли получать оповещение после отключения сеанса RDP из-за неактивности</value>
@@ -2370,73 +1994,17 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="LogToAppDir" xml:space="preserve">
     <value>Войдите в каталог приложений</value>
   </data>
-  <data name="HttpsInsecureAllowAlways" xml:space="preserve">
-    <value>Разрешить однократно</value>
-  </data>
-  <data name="HttpsInsecureAllowOnce" xml:space="preserve">
-    <value>Разрешить однократно</value>
-  </data>
-  <data name="HttpsInsecureDontAllow" xml:space="preserve">
-    <value>Не разрешать</value>
-  </data>
-  <data name="HttpsInsecurePrompt" xml:space="preserve">
-    <value>Разрешить небезопасный сертификат для ссылки: {0}?</value>
-  </data>
-  <data name="HttpsInsecurePromptTitle" xml:space="preserve">
-    <value>Разрешить небезопасный сертификат?</value>
-  </data>
-  <data name="RepositoryIsUnlocked" xml:space="preserve">
-    <value>Выбранный репозиторий разблокирован</value>
-  </data>
-  <data name="IncorrectPassword" xml:space="preserve">
-    <value>неверный пароль</value>
-  </data>
-  <data name="Source" xml:space="preserve">
-    <value>Источник</value>
-  </data>
-  <data name="Unlocking" xml:space="preserve">
-    <value>Разблокирование</value>
-  </data>
-  <data name="UnlockCredentialRepository" xml:space="preserve">
-    <value>Разблокировать репозиторий учетных данных</value>
-  </data>
-  <data name="Unlock" xml:space="preserve">
-    <value>Разблокировать</value>
-  </data>
-  <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
-    <value>Запрос на разблокирование учетных записей при запуске</value>
-  </data>
   <data name="Credentials" xml:space="preserve">
     <value>Полномочия</value>
   </data>
-  <data name="Upgrade" xml:space="preserve">
-    <value>Обновить</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Назад</value>
-  </data>
-  <data name="ConnectionFilePath" xml:space="preserve">
-    <value>Путь к файлу подключения</value>
-  </data>
-  <data name="CreateAndOpenNewFile" xml:space="preserve">
-    <value>Создание и открытие нового файла</value>
-  </data>
   <data name="OpenADifferentFile" xml:space="preserve">
     <value>Открыть другой файл</value>
-  </data>
-  <data name="CredentialManagerUpgradeDescription" xml:space="preserve">
-    <value>В v1.76 мы внедрили систему управления учетными данными. Эта функция требует значительных изменений в том, как мы храним и взаимодействуем с учетными данными в mRemoteNG. Вам потребуется выполнить одностороннее обновление файла соединений mRemoteNG.
-
-На этой странице вы расскажете о процессе обновления файла подключений или предоставите возможность открыть другой файл подключений, если вы не хотите выполнять обновление.</value>
   </data>
   <data name="CredentialUnavailable" xml:space="preserve">
     <value>Учетные данные недоступны</value>
   </data>
   <data name="OptionsThemeDeleteConfirmation" xml:space="preserve">
     <value>Вы действительно хотите удалить тему?</value>
-  </data>
-  <data name="OptionsThemeEnableTheming" xml:space="preserve">
-    <value>Включить темы</value>
   </data>
   <data name="OptionsThemeNewThemeCaption" xml:space="preserve">
     <value>Новое название темы</value>
@@ -2446,9 +2014,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="OptionsThemeNewThemeText" xml:space="preserve">
     <value>Введите новое название темы</value>
-  </data>
-  <data name="OptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>Темы не загружены, проверьте, существуют ли по умолчанию темы mRemoteNG в папке «Темы»</value>
   </data>
   <data name="CouldNotFindExternalTool" xml:space="preserve">
     <value>Не удалось найти внешний инструмент с именем "{0}"</value>
@@ -2492,9 +2057,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="LabelReadOnly" xml:space="preserve">
     <value>Только чтение:</value>
   </data>
-  <data name="LoadBalanceInfoUseUtf8_Duplicate[1]" xml:space="preserve">
-    <value>Использовать кодировку UTF8 для свойства RDP «Информация о балансе загрузки»</value>
-  </data>
   <data name="MenuLockToolbars" xml:space="preserve">
     <value>Заблокировать позиции панели инструментов</value>
   </data>
@@ -2515,9 +2077,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="ConfirmCloseConnectionOthersInstruction" xml:space="preserve">
     <value>Хотите закрыть все подключения, кроме "{0}"?</value>
-  </data>
-  <data name="ConfirmCloseConnectionRightInstruction" xml:space="preserve">
-    <value>Хотите закрыть все подключения справа от "{0}"?</value>
   </data>
   <data name="ErrorFipsPolicyIncompatible" xml:space="preserve">
     <value>Параметр безопасности Windows «Системная криптография: использовать FIPS-совместимые алгоритмы для шифрования, хеширования и подписывания» включен.
@@ -2579,9 +2138,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Разместите панель поиска над деревом соединений</value>
-  </data>
-  <data name="PortScanSinglePort" xml:space="preserve">
-    <value>Для сканирования одного порта, выберите «Первый порт» только.</value>
   </data>
   <data name="TrackActiveConnectionInConnectionTree" xml:space="preserve">
     <value>Отслеживать активное соединение в дереве соединений</value>

@@ -120,20 +120,11 @@
   <data name="About" xml:space="preserve">
     <value>O Aplikaci</value>
   </data>
-  <data name="Active" xml:space="preserve">
-    <value>Aktuální</value>
-  </data>
   <data name="ActiveDirectory" xml:space="preserve">
     <value>Aktuální složka</value>
   </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Aktivita</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>Operace přidání uzlu (AddNodeFromXML) selhala!</value>
-  </data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-    <value>Operace přidání uzlu (AddNodesFromSQL) selhala!</value>
   </data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>Umožnit spuštění jen jedné instance aplikace (bude potřeba restartovat mRemoteNG)</value>
@@ -171,14 +162,8 @@
   <data name="Aspect" xml:space="preserve">
     <value>Poměr stran</value>
   </data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Automaticky získat informace o sezení</value>
-  </data>
   <data name="AutoSaveEvery" xml:space="preserve">
     <value>Automaticky ukládat každých:</value>
-  </data>
-  <data name="AutoSaveMins" xml:space="preserve">
-    <value>Minut(y) (0 = vypnuto)</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Poslední verze</value>
@@ -237,10 +222,6 @@
   <data name="ButtonTestProxy" xml:space="preserve">
     <value>Test Proxy</value>
   </data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-    <value>Hlavní  soubor s nastavenými spojeními nelze importovat. You cannot import a normal connection file.
-Prosím použijte Soubor - Otevřít seznam spojení... pro načtení souboru s nastavením spojení!</value>
-  </data>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Nelze scanovat porty, IP adresa má nesprávný tvar!</value>
   </data>
@@ -265,23 +246,11 @@ Prosím použijte Soubor - Otevřít seznam spojení... pro načtení souboru s 
   <data name="CategoryRedirect" xml:space="preserve">
     <value>Přesměrování</value>
   </data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-    <value>Vždy zobrazit tento dialog při startu</value>
-  </data>
   <data name="CheckFailed" xml:space="preserve">
     <value>Kontrola selhala!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Kontrola úspěšná!</value>
-  </data>
-  <data name="CcEOLFailed" xml:space="preserve">
-    <value>Funckionalita pro (RDP) sezení vyžaduje, abyste měli ve  Vašem systému zaregistrovánu knihovnu eolwtscom.dll .
-mRemoteNG je sice s touto komponentou dodáváno, avšak pokud jej nenainstalujete s pomocí Instalátoru, není knihovna automaticky zaregistrována.
-Pro provedení registrace ručně spusťe následující příkaz v konzoli příkazového řádku (Start-&gt;Spustit-&gt;cmd) v administrátorském režimu(!) : regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (kde  C:\Program Files\mRemoteNG\ is je cesta ke složce Vaší kopie mRemoteNG ).
-Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu RDP v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
-  </data>
-  <data name="CcEOLOK" xml:space="preserve">
-    <value>Knihovna EOLWTSCOM byla nalezena a zdá se, že je správně zaregistrována.</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
     <value>Funkcionalita ICA vyžaduje, aby byl nainstalován XenDesktop Online Plugin a knihovna wfica.ocx byla zaregistrována. Klienta můžete stáhnout zde: http://www.citrix.com/download/
@@ -416,10 +385,6 @@ VncSharp Control verze {0}</value>
   <data name="ConfigUiLoadFailed" xml:space="preserve">
     <value>Operace Config UI load selhala!</value>
   </data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Přejete si uzavřít spojení:
-"{0}"?</value>
-  </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Opravdu chcete zavřít panel "{0}"? Všechna spojení v něm obsažená budou také uzavřena.</value>
   </data>
@@ -471,11 +436,6 @@ VncSharp Control verze {0}</value>
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Nemohu navázat spojení: Nebyla specifikována adresa či jméno hostitele!</value>
   </data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-    <value>Chyba RDP!
-Kód chyby: {0}
-Popis: {1}</value>
-  </data>
   <data name="Connections" xml:space="preserve">
     <value>Spojení</value>
   </data>
@@ -485,18 +445,12 @@ Popis: {1}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>Nepovedlo se vytvořit zálohu souboru seznamu spojení!</value>
   </data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>Nepovedlo se naimportovat soubor se seznamem spojení!</value>
-  </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Nepovedlo se načíst soubor seznamu spojení "{0}"!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Nepovedlo se načíst soubor seznamu spojení "{0}"!
 Otevírám nový prázdný soubor seznamu spojení.</value>
-  </data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>Nepovedlo se uložit soubor seznamu spojení!</value>
   </data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Nepovedlo se uložit soubor seznamu spojení "{0}"!</value>
@@ -513,9 +467,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>Připojení k {0} přes {1} uzavřeno uživatelem {2}.</value>
   </data>
-  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
-    <value>Připojení k {0} přes {1} uzavřeno uživatelem {2}.  (Popis: "{3}"; Uživatel: "{4}")</value>
-  </data>
   <data name="ConnenctionCloseEvent" xml:space="preserve">
     <value>Událost uzavření spojení</value>
   </data>
@@ -530,9 +481,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="CurrentVersion" xml:space="preserve">
     <value>Instalovaná verze</value>
-  </data>
-  <data name="DefaultTheme" xml:space="preserve">
-    <value>Výchozí vzhled</value>
   </data>
   <data name="Detect" xml:space="preserve">
     <value>Detekovat</value>
@@ -591,12 +539,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>Tato verze databáze {0} není kompatibilní s touto verzí {1}.</value>
   </data>
-  <data name="ErrorCloneNodeFailed" xml:space="preserve">
-    <value>Metoda CloneNode (Tree.Node) selhala. {0}</value>
-  </data>
-  <data name="ErrorCode" xml:space="preserve">
-    <value>Kód chyby {0}.</value>
-  </data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>Seznam připojení nemohl být uložen.</value>
   </data>
@@ -636,9 +578,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="ExportItems" xml:space="preserve">
     <value>Exportovat položky</value>
   </data>
-  <data name="ExportmRemoteXML" xml:space="preserve">
-    <value>Exportovat mRemote/mRemoteNG XML</value>
-  </data>
   <data name="ExportProperties" xml:space="preserve">
     <value>Exportovat vlastnosti</value>
   </data>
@@ -656,12 +595,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>Nový Externí Nástroj</value>
-  </data>
-  <data name="FAMFAMFAMAttribution" xml:space="preserve">
-    <value>Obsahuje ikony od [FAMFAMFAM]</value>
-  </data>
-  <data name="FAMFAMFAMAttributionURL" xml:space="preserve">
-    <value>http://www.famfamfam.com/</value>
   </data>
   <data name="FileFormatLabel" xml:space="preserve">
     <value>&amp;Formát souboru:</value>
@@ -690,9 +623,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="FilterRDP" xml:space="preserve">
     <value>Soubory RDP (*.rdp)</value>
   </data>
-  <data name="FiltervRD2008CSV" xml:space="preserve">
-    <value>Soubory visionapp Remote Desktop 2008 CSV (*.csv)</value>
-  </data>
   <data name="FormatInherit" xml:space="preserve">
     <value>Převzít {0}</value>
   </data>
@@ -707,9 +637,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="General" xml:space="preserve">
     <value>Všeobecné</value>
-  </data>
-  <data name="GetConnectionInfoFromSqlFailed" xml:space="preserve">
-    <value>Získání informací o spojení z SQL selhalo (Get Connection Info From SQL)</value>
   </data>
   <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
     <value>Došlo k chybě při čtení tohoto nastavení připojení "{0}" z "{1}". {2}</value>
@@ -774,9 +701,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="ImportAD" xml:space="preserve">
     <value>Import z Active Directory</value>
   </data>
-  <data name="ImportExport" xml:space="preserve">
-    <value>Import/Export</value>
-  </data>
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>Při importování souboru "{0}" došlo k chybě.</value>
   </data>
@@ -786,35 +710,14 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="ImportFromFileMenuItem" xml:space="preserve">
     <value>Import ze &amp;souboru...</value>
   </data>
-  <data name="ImportLocationCommandButtons" xml:space="preserve">
-    <value>V rámci kořenu{0}{1}|V rámci vybrané složky{0}{2}</value>
-  </data>
-  <data name="ImportLocationContent" xml:space="preserve">
-    <value>Kam mají být umístěny importované položky?</value>
-  </data>
-  <data name="ImportLocationMainInstruction" xml:space="preserve">
-    <value>Umístění importu</value>
-  </data>
   <data name="ImportMenuItem" xml:space="preserve">
     <value>&amp;Import</value>
-  </data>
-  <data name="ImportmRemoteXML" xml:space="preserve">
-    <value>Importovat mRemote/mRemoteNG XML</value>
   </data>
   <data name="ImportPortScan" xml:space="preserve">
     <value>Importovat ze scanu portů</value>
   </data>
-  <data name="ImportRDPFiles" xml:space="preserve">
-    <value>Importovat z .RDP soburu/ů</value>
-  </data>
-  <data name="Inactive" xml:space="preserve">
-    <value>Neaktivní</value>
-  </data>
   <data name="Informations" xml:space="preserve">
     <value>Informace</value>
-  </data>
-  <data name="InheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG je aktuální</value>
   </data>
   <data name="IntAppDisposeFailed" xml:space="preserve">
     <value>Zrušení procesu Int App process selhalo!</value>
@@ -905,21 +808,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
     <value>Lokální soubor neexistuje!</value>
-  </data>
-  <data name="LogOff" xml:space="preserve">
-    <value>Logoff</value>
-  </data>
-  <data name="LogWriteToFileFailed" xml:space="preserve">
-    <value>Zápis do souboru reportu selhalo!</value>
-  </data>
-  <data name="LogWriteToFileFinalLocationFailed" xml:space="preserve">
-    <value>Nebylo možné uložit report do požadovaného umístění.</value>
-  </data>
-  <data name="MagicLibraryAttribution" xml:space="preserve">
-    <value>Využívá "Magic library" od [Crownwood Software]</value>
-  </data>
-  <data name="MagicLibraryAttributionURL" xml:space="preserve">
-    <value>http://www.dotnetmagic.com/</value>
   </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Nový panel spojení</value>
@@ -1014,9 +902,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="Options" xml:space="preserve">
     <value>Možnosti</value>
   </data>
-  <data name="MenuPaste" xml:space="preserve">
-    <value>Vložit</value>
-  </data>
   <data name="MenuPortScan" xml:space="preserve">
     <value>Scan portů</value>
   </data>
@@ -1053,20 +938,8 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Uložit seznam spojení jako...</value>
   </data>
-  <data name="MenuScreenshotManager" xml:space="preserve">
-    <value>Správa snímků obrazovek</value>
-  </data>
   <data name="MenuSendSpecialKeys" xml:space="preserve">
     <value>Poslat speciální stisk kláves (VNC)</value>
-  </data>
-  <data name="MenuSessionRetrieve" xml:space="preserve">
-    <value>Získat</value>
-  </data>
-  <data name="MenuSessions" xml:space="preserve">
-    <value>Sezení</value>
-  </data>
-  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
-    <value>Sezení a snímky obrazovek</value>
   </data>
   <data name="MenuShowHelpText" xml:space="preserve">
     <value>&amp;Zobraz texty nápovedy</value>
@@ -1131,9 +1004,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="NewPanel" xml:space="preserve">
     <value>Nový panel</value>
   </data>
-  <data name="NewRoot" xml:space="preserve">
-    <value>Nový kořen</value>
-  </data>
   <data name="NewTitle" xml:space="preserve">
     <value>Nový popisek</value>
   </data>
@@ -1168,38 +1038,8 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="OpenPorts" xml:space="preserve">
     <value>Otevřené porty</value>
   </data>
-  <data name="OptionsKeyboardButtonDelete" xml:space="preserve">
-    <value>&amp;Smazat</value>
-  </data>
-  <data name="OptionsKeyboardButtonNew" xml:space="preserve">
-    <value>&amp;Nové</value>
-  </data>
-  <data name="OptionsKeyboardButtonReset" xml:space="preserve">
-    <value>&amp;Resetovat na výchozí</value>
-  </data>
-  <data name="OptionsKeyboardButtonResetAll" xml:space="preserve">
-    <value>Resetovat &amp;všechny na výchozí</value>
-  </data>
-  <data name="OptionsKeyboardCommandsGroupTabs" xml:space="preserve">
-    <value>Taby</value>
-  </data>
-  <data name="OptionsKeyboardCommandsNextTab" xml:space="preserve">
-    <value>Další tab</value>
-  </data>
-  <data name="OptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-    <value>Předchozí tab</value>
-  </data>
-  <data name="OptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-    <value>Uprav zkratku</value>
-  </data>
-  <data name="OptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-    <value>Klévesové zkratky</value>
-  </data>
   <data name="OptionsProxyTesting" xml:space="preserve">
     <value>Ověřuji...</value>
-  </data>
-  <data name="OptionsTabKeyboard" xml:space="preserve">
-    <value>Klávesnice</value>
   </data>
   <data name="OptionsTabTheme" xml:space="preserve">
     <value>Vzhled</value>
@@ -1230,9 +1070,6 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   </data>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Nezdařilo se otevřít panel PortScan!</value>
-  </data>
-  <data name="PropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(Tyto vlastnosti se uloží pouze tehdy, pokud vyberete formát výstupního souboru typu "mRemote" nebo "mRemoteNG XML"!)</value>
   </data>
   <data name="PropertyDescriptionAddress" xml:space="preserve">
     <value>zadejte název hostitele nebo jeho IP adresu ke které se chcete připojit.</value>
@@ -1558,9 +1395,6 @@ Zpráva:
   <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Nemohu aktivovat okno (focus)!</value>
   </data>
-  <data name="PuttyGetSessionsFailed" xml:space="preserve">
-    <value>Získání seznamu konfigurací sezení/spojení PuTTY selhalo!</value>
-  </data>
   <data name="PuttyHandle" xml:space="preserve">
     <value>PuTTY Handle: {0}</value>
   </data>
@@ -1576,17 +1410,11 @@ Zpráva:
   <data name="PuttySavedSessionsRootName" xml:space="preserve">
     <value>Uložená sezení/spojení PuTTY </value>
   </data>
-  <data name="PuttySessionSettings" xml:space="preserve">
-    <value>Nastavení PuTTY sezení/spojení</value>
-  </data>
   <data name="PuttySettings" xml:space="preserve">
     <value>Nastavení PuTTY</value>
   </data>
   <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
     <value>Příkaz na zobrazení dialogového okna PuTTY Nastavení selhal!</value>
-  </data>
-  <data name="PuttyStartFailed" xml:space="preserve">
-    <value>Spuštění PuTTY selhalo!</value>
   </data>
   <data name="PuttyStuff" xml:space="preserve">
     <value>--- PuTTY výstup ---</value>
@@ -1639,18 +1467,6 @@ Zpráva:
   <data name="RDP65536Colors" xml:space="preserve">
     <value>65536 barev (16-bit)</value>
   </data>
-  <data name="RdpAddResolutionFailed" xml:space="preserve">
-    <value>Metoda RDP Add Resolution selhala!</value>
-  </data>
-  <data name="RdpAddResolutionsFailed" xml:space="preserve">
-    <value>Metoda RDP Add Resolutions selhala!</value>
-  </data>
-  <data name="RdpAddSessionFailed" xml:space="preserve">
-    <value>Metoda Add Session selhala</value>
-  </data>
-  <data name="RdpCloseConnectionFailed" xml:space="preserve">
-    <value>Metoda Close RDP Connection selhala!</value>
-  </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Nebylo možné aktivovat ovládací prvek okna RDP, prosím zkontrolujte požadavky mRemoteNG na prerekvizity.</value>
   </data>
@@ -1665,15 +1481,6 @@ Zpráva:
   </data>
   <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Vypnout animace menu</value>
-  </data>
-  <data name="RDPDisableThemes" xml:space="preserve">
-    <value>Vypnout nastavení vzhledu</value>
-  </data>
-  <data name="RDPDisableWallpaper" xml:space="preserve">
-    <value>Vypnout pozadí plochy</value>
-  </data>
-  <data name="RdpDisconnected" xml:space="preserve">
-    <value>RDP odpojeno!</value>
   </data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
     <value>Pokud o odpojední RDP selhal, zkouším uzavřít!</value>
@@ -1696,9 +1503,6 @@ Zpráva:
   <data name="RdpErrorGetFailure" xml:space="preserve">
     <value>Metoda GetError selhala (FatalErrors)</value>
   </data>
-  <data name="RdpErrorGetUnknown" xml:space="preserve">
-    <value>Došlo k neznámé nepominutelné chybě RDP.  Kód chyby {0}.</value>
-  </data>
   <data name="RdpErrorOutOfMemory" xml:space="preserve">
     <value>Došlo k chybě "nedostatek paměti".</value>
   </data>
@@ -1711,9 +1515,6 @@ Zpráva:
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Chyba inicializace Winsock.</value>
   </data>
-  <data name="RdpFileCouldNotBeImported" xml:space="preserve">
-    <value>Nezdařil se import souboru rdb!</value>
-  </data>
   <data name="RDPFitToPanel" xml:space="preserve">
     <value>Přizpůsobit panelu</value>
   </data>
@@ -1725,9 +1526,6 @@ Zpráva:
   </data>
   <data name="RdpGatewayNotSupported" xml:space="preserve">
     <value>Brána RD (RD Gateway) NENÍ podporována!</value>
-  </data>
-  <data name="RdpGetSessionsFailed" xml:space="preserve">
-    <value>Metoda GetSessions selhala!</value>
   </data>
   <data name="RdpReconnectCount" xml:space="preserve">
     <value>Metoda RDP Počet pokusů o znovunavázání spojení RDP:</value>
@@ -1834,17 +1632,8 @@ Zpráva:
   <data name="SendTo" xml:space="preserve">
     <value>Odeslat..</value>
   </data>
-  <data name="SessionGetFailed" xml:space="preserve">
-    <value>Metoda Get Sessions Background selhala</value>
-  </data>
-  <data name="SessionKillFailed" xml:space="preserve">
-    <value>Odstranění (Session Background) selhalo</value>
-  </data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Při konfiguraci spojení vyplnit DN hostitele podle zadaného názvu spojení</value>
-  </data>
-  <data name="SettingMainFormTextFailed" xml:space="preserve">
-    <value>Nastavení textu hlavního formuláře selhalo</value>
   </data>
   <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
     <value>Nebylo možné uložti nastavení nebo zrušit ikonu v oznamovací oblasti!</value>
@@ -1879,17 +1668,11 @@ Zpráva:
   <data name="SortDesc" xml:space="preserve">
     <value>Sestupně (Z-A)</value>
   </data>
-  <data name="SpecialKeys" xml:space="preserve">
-    <value>Klávesové zkratky</value>
-  </data>
   <data name="SQLInfo" xml:space="preserve">
     <value>Prosím navštivte nápovědu - Začínáme - Konfigurace SQL pro získání dalších informací!</value>
   </data>
   <data name="SQLServer" xml:space="preserve">
     <value>SQL Server</value>
-  </data>
-  <data name="SqlUpdateCheckUpdateAvailable" xml:space="preserve">
-    <value>Vyhledávání aktualizací SQL ukončeno a aktualizace jsou k dispozici. Budu aktualizovat seznam spojení.</value>
   </data>
   <data name="Ssh1" xml:space="preserve">
     <value>SSH ver 1</value>
@@ -1899,12 +1682,6 @@ Zpráva:
   </data>
   <data name="SSHStartTransferBG" xml:space="preserve">
     <value>Selhal přenos na pozadí přes SSH!</value>
-  </data>
-  <data name="SSHTranferSuccessful" xml:space="preserve">
-    <value>Přenos úspěšně dokončen!</value>
-  </data>
-  <data name="SSHTransferEndFailed" xml:space="preserve">
-    <value>Selhala metoda SSH Transfer End (UI.Window.SSHTransfer)!</value>
   </data>
   <data name="SSHTransferFailed" xml:space="preserve">
     <value>Selhal přenos přes SSH.</value>
@@ -1939,114 +1716,6 @@ Zpráva:
   <data name="TheFollowing" xml:space="preserve">
     <value>Následující:</value>
   </data>
-  <data name="ThemeCategoryConfigPanel" xml:space="preserve">
-    <value>Konfigurační panel</value>
-  </data>
-  <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
-    <value>Panel spojení</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí konfiguračního panelu.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Barva textu nadpisů kategorií v konfiguračním panelu.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
-    <value>Barva ohraničení tabulky v konfiguračním panelu</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí nápovědy v konfiguračním panelu.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Barva textu nápovědy v konfiguračním panelu.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
-    <value>Barva textu v konfiguračním panelu.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí v panelu seznamu spojení.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
-    <value>Barva textu v panelu seznamu spojení.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Barva čar stromu seznamu v panelu spojení.</value>
-  </data>
-  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí v nabídkách (menu).</value>
-  </data>
-  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
-    <value>Barva textu v nabídkách (menu).</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí v políčku pro vyhledávání.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
-    <value>Barva textu v políčku pro vyhledávání.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Barva vyskakujícího textu v políčku pro vyhledávání.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí nástrojových lišt (toolbar).</value>
-  </data>
-  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
-    <value>barva textu nástrojových lišt (toolbar).</value>
-  </data>
-  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí hlavního okna aplikace.</value>
-  </data>
-  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí konfiguračního panelu</value>
-  </data>
-  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Barva textu konfiguračního panelu</value>
-  </data>
-  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
-    <value>Barva ohraničení tabulek konfiguračního panelu</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí nápovědy konfiguračního panelu</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Barva textu nápovědy konfiguračního panelu</value>
-  </data>
-  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
-    <value>Barva textu konfiguračního panelu</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí panelu seznamu připojení</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
-    <value>Barva textu panelu seznamu připojení</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Barva čar stromu seznamu připojení</value>
-  </data>
-  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí nabídek</value>
-  </data>
-  <data name="ThemeNameMenuTextColor" xml:space="preserve">
-    <value>Barva textu nabídek</value>
-  </data>
-  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí pole vyhledávání</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
-    <value>Barva textu pole vyhledávání</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Barva textu nabídky v poli vyhledávání</value>
-  </data>
-  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí nástrojové lišty</value>
-  </data>
-  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
-    <value>Barva textu nástrojové lišty</value>
-  </data>
-  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
-    <value>Barva pozadí okna</value>
-  </data>
   <data name="TitleError" xml:space="preserve">
     <value>Chyba ({0})</value>
   </data>
@@ -2068,14 +1737,8 @@ Zpráva:
   <data name="Transfer" xml:space="preserve">
     <value>Přenést</value>
   </data>
-  <data name="TransferFailed" xml:space="preserve">
-    <value>Přenos selhal!</value>
-  </data>
   <data name="TryToIntegrate" xml:space="preserve">
     <value>Zkouším integrovat</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Typ</value>
   </data>
   <data name="UltraVncRepeater" xml:space="preserve">
     <value>Ultra VNC Repeater</value>
@@ -2085,9 +1748,6 @@ Zpráva:
   </data>
   <data name="UncheckProperties" xml:space="preserve">
     <value>Nezaškrtávejte ty vlastnosti, které nechcete uložit!</value>
-  </data>
-  <data name="UnnamedTheme" xml:space="preserve">
-    <value>Vzhled be názvu</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>mRemoteNG vyžaduje aktualizaci</value>
@@ -2100,9 +1760,6 @@ Zpráva:
   </data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
     <value>Vyhledávám aktualizace...</value>
-  </data>
-  <data name="UpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG Portable Edition nyní nepodporuje automatické aktualizace.</value>
   </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>Stahování ukončeno!
@@ -2165,9 +1822,6 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="VncSetPropsFailed" xml:space="preserve">
     <value>Nastavení VNC Set Props selhalo!</value>
   </data>
-  <data name="VncStartChatFailed" xml:space="preserve">
-    <value>Volání VNC Start Chat selhalo!</value>
-  </data>
   <data name="VncToggleSmartSizeFailed" xml:space="preserve">
     <value>Přepnutí VNC automatické velikosti (SmartSize) selhalo!</value>
   </data>
@@ -2179,15 +1833,6 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   </data>
   <data name="Warnings" xml:space="preserve">
     <value>Varování</value>
-  </data>
-  <data name="WeifenLuoAttribution" xml:space="preserve">
-    <value>Využívá DockPanel Suite od [Weifen Luo]</value>
-  </data>
-  <data name="WeifenLuoAttributionURL" xml:space="preserve">
-    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
-  </data>
-  <data name="XULrunnerPath" xml:space="preserve">
-    <value>Složka umístění XULrunner:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ano</value>
@@ -2249,35 +1894,14 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="PropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Minut neaktivity do odp.</value>
   </data>
-  <data name="Accept" xml:space="preserve">
-    <value>Akceptovat</value>
-  </data>
   <data name="Add" xml:space="preserve">
     <value>Přidat</value>
-  </data>
-  <data name="CredentialEditor" xml:space="preserve">
-    <value>Editor přihlašovacích údajů</value>
-  </data>
-  <data name="CredentialManager" xml:space="preserve">
-    <value>Správce přihlašovacích údajů</value>
-  </data>
-  <data name="ID" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Odstranit</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Název</value>
   </data>
-  <data name="PropertyDescriptionCredential" xml:space="preserve">
-    <value>Vyberte jaké přihlašovací údaje použít pro toto spojení.</value>
-  </data>
   <data name="ConfirmDeleteCredentialRecord" xml:space="preserve">
     <value>Jste si jisti že chcete odstranit záznam přihlašovacích údajů {0}?</value>
-  </data>
-  <data name="FindMatchingCredentialFailed" xml:space="preserve">
-    <value>Přihlašovací údaje s ID "{0}" nebyly nalezeny pro pozužití ve spojení jménem "{1}".</value>
   </data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Zapsat zprávu logu když se RDP sezení odpojí kvůli neaktivitě.</value>
@@ -2333,17 +1957,8 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="LogToAppDir" xml:space="preserve">
     <value>Logovat do adresáře kde je aplikace umístěna.</value>
   </data>
-  <data name="PropertyDescriptionRedirectMicrophones" xml:space="preserve">
-+    <value>Zvolte jak bude přesměrováno vstupní zvukové zařízení</value>
-+ </data>
-+ <data name="PropertyNameRedirectMicrophones" xml:space="preserve">
-+    <value>Vstupní zvuková zařízení</value>
-+ </data>
-+ <data name="RDPMicrophonesLeaveAtLocalComputer" xml:space="preserve">
-+    <value>Ponechat vstup na místním počítači</value>
-+ </data>
-+ <data name="RDPMicrophonesSendToRemoteComputer" xml:space="preserve">
-+    <value>Vstup zaslat na vzdálený počítač</value>
-+ </data><data name="AssignedCredential" xml:space="preserve">
++ 
++ 
++ <data name="AssignedCredential" xml:space="preserve">
      <value>Přiřazené přihlašovací informace</value>
   </data></root>

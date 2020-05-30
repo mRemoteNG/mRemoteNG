@@ -120,20 +120,11 @@
   <data name="About" xml:space="preserve">
 		<value>mRemoteNG 정보</value>
 	</data>
-  <data name="Active" xml:space="preserve">
-		<value>활성</value>
-	</data>
   <data name="ActiveDirectory" xml:space="preserve">
 		<value>Active Directory</value>
 	</data>
-  <data name="Activity" xml:space="preserve">
-		<value>Activity</value>
-	</data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
 		<value>AddNodeFromXML 실패!</value>
-	</data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-		<value>AddNodesFromSQL 실패!</value>
 	</data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
 		<value>어플리케이션에 단일 인스턴스만 허용(mRemoteNG 재시작 필요)</value>
@@ -171,14 +162,8 @@
   <data name="Aspect" xml:space="preserve">
 		<value>양상</value>
 	</data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-		<value>세션 정보를 자동으로 얻음</value>
-	</data>
   <data name="AutoSaveEvery" xml:space="preserve">
 		<value>자동 저장 간격 :</value>
-	</data>
-  <data name="AutoSaveMins" xml:space="preserve">
-		<value>분 ( 0은 비활성화)</value>
 	</data>
   <data name="AvailableVersion" xml:space="preserve">
 		<value>최종 버전</value>
@@ -237,10 +222,6 @@
   <data name="ButtonTestProxy" xml:space="preserve">
 		<value>포록시 테스트</value>
 	</data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-		<value>일반 연결 파일은 가져올 수 없습니다.
-Please use File - Load Connections for normal connection files!</value>
-	</data>
   <data name="CannotStartPortScan" xml:space="preserve">
 		<value>포트 스캔을 시작 할 수 없습니다. 잘못된 IP 형식 입니다.</value>
 	</data>
@@ -265,23 +246,11 @@ Please use File - Load Connections for normal connection files!</value>
   <data name="CategoryRedirect" xml:space="preserve">
 		<value>리디렉션</value>
 	</data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-		<value>시작시 항상 이 화면 표시</value>
-	</data>
   <data name="CheckFailed" xml:space="preserve">
 		<value>검사 실패!</value>
 	</data>
   <data name="CcCheckSucceeded" xml:space="preserve">
 		<value>검사 성공!</value>
-	</data>
-  <data name="CcEOLFailed" xml:space="preserve">
-		<value>(RDP) 세션 기능을 사용하려면 시스템에 eolwtscom.dll의 사본이 있어야합니다.
-mRemoteNG는이 구성 요소와 함께 제공되지만 mRemoteNG 설치 프로그램을 사용하지 않으면 자동으로 등록되지 않습니다.
-수동으로 등록하려면 상승 된 명령 프롬프트에서 다음 명령을 실행하십시오. regsvr32 "C : \ Program Files \ mRemoteNG \ eolwtscom.dll"(여기서 C : \ Program Files \ mRemoteNG \은 mRemoteNG 설치 경로 임).
-이 검사가 여전히 실패하거나 (RDP) 세션 기능을 사용할 수없는 경우 http://forum.mremoteng.org/의 mRemoteNG 포럼을 참조하십시오.</value>
-	</data>
-  <data name="CcEOLOK" xml:space="preserve">
-		<value>EOLWTSCOM이 발견되어 등록 된 것으로 보입니다.</value>
 	</data>
   <data name="CcICAFailed" xml:space="preserve">
 		<value>ICA를 사용하려면 XenDesktop Online Plugin이 설치되어 있고 wfica.ocx 라이브러리가 등록되어 있어야합니다. 클라이언트는 http://www.citrix.com/download/에서 다운로드 할 수 있습니다.
@@ -377,21 +346,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="AssignedCredential" xml:space="preserve">
 		<value>할당 된 자격 증명</value>
 	</data>
-  <data name="HttpsInsecureAllowAlways" xml:space="preserve">
-		<value>항상 허용</value>
-	</data>
-  <data name="HttpsInsecureAllowOnce" xml:space="preserve">
-		<value>한번 허용</value>
-	</data>
-  <data name="HttpsInsecureDontAllow" xml:space="preserve">
-		<value>허용 안함</value>
-	</data>
-  <data name="HttpsInsecurePrompt" xml:space="preserve">
-		<value>URL에 대한 안전하지 않은 인증서 허용 : {0}?</value>
-	</data>
-  <data name="HttpsInsecurePromptTitle" xml:space="preserve">
-		<value>안전하지 않은 인증서를 허용 하시겠습니까?</value>
-	</data>
   <data name="Debug" xml:space="preserve">
 		<value>디버그</value>
 	</data>
@@ -415,9 +369,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="ConfirmDeleteCredentialRecord" xml:space="preserve">
 		<value>자격 증명 레코드 {0}을 (를) 삭제 하시겠습니까?</value>
-	</data>
-  <data name="FindMatchingCredentialFailed" xml:space="preserve">
-		<value>ID가 "{1}"인 연결 레코드에 대해 "{0}"과 일치하는 자격증명 레코드를 찾을 수 없습니다.</value>
 	</data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
 		<value>비활성으로 인해 RDP 세션 연결이 끊어진 후 알림 수신 여부 선택</value>
@@ -443,29 +394,11 @@ VncSharp 제어 버전 {0}</value>
   <data name="ChooseLogPath" xml:space="preserve">
 		<value>mRemoteNG 로그 파일의 경로 선택</value>
 	</data>
-  <data name="CredentialEditor" xml:space="preserve">
-		<value>자격 증명 편집기</value>
-	</data>
-  <data name="CredentialManager" xml:space="preserve">
-		<value>자격 증명 관리자</value>
-	</data>
-  <data name="ID" xml:space="preserve">
-		<value>ID</value>
-	</data>
-  <data name="Remove" xml:space="preserve">
-		<value>제거</value>
-	</data>
   <data name="Title" xml:space="preserve">
 		<value>타이틀</value>
 	</data>
-  <data name="PropertyDescriptionCredential" xml:space="preserve">
-		<value>이 연결에 사용할 자격 증명을 선택.</value>
-	</data>
   <data name="PropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
 		<value>유휴(idle) 분</value>
-	</data>
-  <data name="Accept" xml:space="preserve">
-		<value>동의</value>
 	</data>
   <data name="Add" xml:space="preserve">
 		<value>추가</value>
@@ -554,9 +487,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="ConfigUiLoadFailed" xml:space="preserve">
 		<value>구성 UI 로드 실패!</value>
 	</data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-		<value>연결을 닫으시겠습니까 "{0}"?</value>
-	</data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
 		<value>패널을 닫으시겠습니까 "{0}"? 포함 된 모든 연결도 닫힙니다.</value>
 	</data>
@@ -608,11 +538,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
 		<value>연결을 열 수 없습니다 : 호스트 이름 지정이 안됨!</value>
 	</data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-		<value>RDP 오류!
-오류 코드 : {0}
-오류 설명 : {1}</value>
-	</data>
   <data name="Connections" xml:space="preserve">
 		<value>연결</value>
 	</data>
@@ -622,18 +547,12 @@ VncSharp 제어 버전 {0}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
 		<value>연결 파일의 백업을 생성 할 수 없습니다!</value>
 	</data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-		<value>연결 파일을 가져올 수 없습니다!</value>
-	</data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
 		<value>연결 파일은 "{0}"를 로드 할 수 없습니다!</value>
 	</data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
 		<value>연결 파일은 "{0}"를 로드 할 수 없습니다!
 새로운 연결 파일과 함께 시작.</value>
-	</data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-		<value>연결 파일을 저장할 수 없습니다!</value>
 	</data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
 		<value>"{0}"로 연결 파일을 저장할 수 없습니다!</value>
@@ -650,9 +569,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
 		<value>사용자 {2}이(가) {1} 통해 {0}에 연결.</value>
 	</data>
-  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
-		<value>사용자 {2}이(가) {1} 통해 {0}에 연결. (설명:"{3}";사용자 입력란:"{4}")</value>
-	</data>
   <data name="ConnenctionCloseEvent" xml:space="preserve">
 		<value>연결 이벤트 닫힘.</value>
 	</data>
@@ -667,9 +583,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="CurrentVersion" xml:space="preserve">
 		<value>설치된 버전</value>
-	</data>
-  <data name="DefaultTheme" xml:space="preserve">
-		<value>기본 테마</value>
 	</data>
   <data name="Detect" xml:space="preserve">
 		<value>검색</value>
@@ -728,12 +641,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
 		<value>데이터베이스 버전 {0}은 (는)이 버전의 {1}과 호환되지 않습니다.</value>
 	</data>
-  <data name="ErrorCloneNodeFailed" xml:space="preserve">
-		<value>CloneNode (Tree.Node)가 실패. {0}</value>
-	</data>
-  <data name="ErrorCode" xml:space="preserve">
-		<value>오류 코드 {0}.</value>
-	</data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
 		<value>연결 목록을 저장할 수 없습니다.</value>
 	</data>
@@ -773,9 +680,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="ExportItems" xml:space="preserve">
 		<value>항목 내보내기</value>
 	</data>
-  <data name="ExportmRemoteXML" xml:space="preserve">
-		<value>mRemote / mRemoteNG XML 내보내기</value>
-	</data>
   <data name="ExportProperties" xml:space="preserve">
 		<value>속성 내보내기</value>
 	</data>
@@ -793,12 +697,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
 		<value>새로운 외부 도구</value>
-	</data>
-  <data name="FAMFAMFAMAttribution" xml:space="preserve">
-		<value>아이콘을 포함 by [FAMFAMFAM]</value>
-	</data>
-  <data name="FAMFAMFAMAttributionURL" xml:space="preserve">
-		<value>http://www.famfamfam.com/</value>
 	</data>
   <data name="FileFormatLabel" xml:space="preserve">
 		<value>파일 형식(&amp;F):</value>
@@ -827,9 +725,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="FilterRDP" xml:space="preserve">
 		<value>RDP 파일 (*.rdp)</value>
 	</data>
-  <data name="FiltervRD2008CSV" xml:space="preserve">
-		<value>visionapp 원격 데스크톱 2008 CSV 파일 (*.csv)</value>
-	</data>
   <data name="FormatInherit" xml:space="preserve">
 		<value>{0} 상속</value>
 	</data>
@@ -844,9 +739,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="General" xml:space="preserve">
 		<value>일반</value>
-	</data>
-  <data name="GetConnectionInfoFromSqlFailed" xml:space="preserve">
-		<value>SQL에서 연결 정보 가져 오기 실패</value>
 	</data>
   <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
 		<value>"{1}"에서 "{0}"에 대한 연결 항목을로드하는 중 오류가 발생. {2}</value>
@@ -911,9 +803,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="ImportAD" xml:space="preserve">
 		<value>Active Directory에서 가져 오기</value>
 	</data>
-  <data name="ImportExport" xml:space="preserve">
-		<value>가져오기/내보내기</value>
-	</data>
   <data name="ImportFileFailedContent" xml:space="preserve">
 		<value>"{0}"파일을 가져 오는 중 오류가 발생했습니다.</value>
 	</data>
@@ -923,35 +812,14 @@ VncSharp 제어 버전 {0}</value>
   <data name="ImportFromFileMenuItem" xml:space="preserve">
 		<value>파일에서 가져 오기(&amp;F) ...</value>
 	</data>
-  <data name="ImportLocationCommandButtons" xml:space="preserve">
-		<value>루트 {0} {1} | 아래에서 선택한 폴더 {0} {2}</value>
-	</data>
-  <data name="ImportLocationContent" xml:space="preserve">
-		<value>가져온 항목에 어디에 적용하시겠습니까?</value>
-	</data>
-  <data name="ImportLocationMainInstruction" xml:space="preserve">
-		<value>가져 오기 위치</value>
-	</data>
   <data name="ImportMenuItem" xml:space="preserve">
 		<value>가져 오기(&amp;I)</value>
-	</data>
-  <data name="ImportmRemoteXML" xml:space="preserve">
-		<value>가져 오기 mRemote / mRemoteNG XML</value>
 	</data>
   <data name="ImportPortScan" xml:space="preserve">
 		<value>포트 검사에서 가져 오기</value>
 	</data>
-  <data name="ImportRDPFiles" xml:space="preserve">
-		<value>.rdp 파일에서 가져 오기</value>
-	</data>
-  <data name="Inactive" xml:space="preserve">
-		<value>비활성</value>
-	</data>
   <data name="Informations" xml:space="preserve">
 		<value>정보</value>
-	</data>
-  <data name="InheritNewConnection" xml:space="preserve">
-		<value>mRemoteNG는 최신 버전입니다</value>
 	</data>
   <data name="IntAppDisposeFailed" xml:space="preserve">
 		<value>Dispose of Int App process failed!</value>
@@ -1042,21 +910,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
 		<value>로컬 파일이 존재하지 않습니다!</value>
-	</data>
-  <data name="LogOff" xml:space="preserve">
-		<value>로그 오프</value>
-	</data>
-  <data name="LogWriteToFileFailed" xml:space="preserve">
-		<value>보고서 파일에 쓰지 못했습니다!</value>
-	</data>
-  <data name="LogWriteToFileFinalLocationFailed" xml:space="preserve">
-		<value>보고서를 최종 위치에 저장할 수 없습니다.</value>
-	</data>
-  <data name="MagicLibraryAttribution" xml:space="preserve">
-		<value>[Crownwood Software]의 Magic 라이브러리 사용</value>
-	</data>
-  <data name="MagicLibraryAttributionURL" xml:space="preserve">
-		<value>http://www.dotnetmagic.com/</value>
 	</data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
 		<value>연결 패널 추가</value>
@@ -1151,9 +1004,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="Options" xml:space="preserve">
 		<value>옵션</value>
 	</data>
-  <data name="MenuPaste" xml:space="preserve">
-		<value>붙여넣기</value>
-	</data>
   <data name="MenuPortScan" xml:space="preserve">
 		<value>포트 스캔</value>
 	</data>
@@ -1190,20 +1040,8 @@ VncSharp 제어 버전 {0}</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
 		<value>연결 파일 다른 이름으로 저장 ...</value>
 	</data>
-  <data name="MenuScreenshotManager" xml:space="preserve">
-		<value>스크린 샷 관리자</value>
-	</data>
   <data name="MenuSendSpecialKeys" xml:space="preserve">
 		<value>특수 키 보내기 (VNC)</value>
-	</data>
-  <data name="MenuSessionRetrieve" xml:space="preserve">
-		<value>검색</value>
-	</data>
-  <data name="MenuSessions" xml:space="preserve">
-		<value>세션</value>
-	</data>
-  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
-		<value>세션 및 스크린 샷</value>
 	</data>
   <data name="MenuShowHelpText" xml:space="preserve">
 		<value>도움말 텍스트 표시 (&amp;H)</value>
@@ -1268,9 +1106,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="NewPanel" xml:space="preserve">
 		<value>새로운 패널</value>
 	</data>
-  <data name="NewRoot" xml:space="preserve">
-		<value>새 루트</value>
-	</data>
   <data name="NewTitle" xml:space="preserve">
 		<value>새로운 제목</value>
 	</data>
@@ -1305,38 +1140,8 @@ VncSharp 제어 버전 {0}</value>
   <data name="OpenPorts" xml:space="preserve">
 		<value>열린 포트</value>
 	</data>
-  <data name="OptionsKeyboardButtonDelete" xml:space="preserve">
-		<value>삭제(&amp;D)</value>
-	</data>
-  <data name="OptionsKeyboardButtonNew" xml:space="preserve">
-		<value>새로운(&amp;N)</value>
-	</data>
-  <data name="OptionsKeyboardButtonReset" xml:space="preserve">
-		<value>기본값으로 재설정 (&amp;R)</value>
-	</data>
-  <data name="OptionsKeyboardButtonResetAll" xml:space="preserve">
-		<value>모두 기본값으로 재설정(&amp;A)</value>
-	</data>
-  <data name="OptionsKeyboardCommandsGroupTabs" xml:space="preserve">
-		<value>탭</value>
-	</data>
-  <data name="OptionsKeyboardCommandsNextTab" xml:space="preserve">
-		<value>다음 탭</value>
-	</data>
-  <data name="OptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-		<value>이전 탭</value>
-	</data>
-  <data name="OptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-		<value>단축키 수정</value>
-	</data>
-  <data name="OptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-		<value>키보드 단축키</value>
-	</data>
   <data name="OptionsProxyTesting" xml:space="preserve">
 		<value>테스트 ...</value>
-	</data>
-  <data name="OptionsTabKeyboard" xml:space="preserve">
-		<value>키보드</value>
 	</data>
   <data name="OptionsTabTheme" xml:space="preserve">
 		<value>테마</value>
@@ -1367,9 +1172,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
 		<value>포트 스캔 패널을 로드 할 수 없습니다!</value>
-	</data>
-  <data name="PropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-		<value>(출력 파일 형식으로 mRemote / mRemoteNG XML을 선택한 경우에만 이 속성이 저장됩니다.)</value>
 	</data>
   <data name="PropertyDescriptionAddress" xml:space="preserve">
 		<value>연결할 호스트 이름 또는 IP를 입력하십시오.</value>
@@ -1695,9 +1497,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="PuttyFocusFailed" xml:space="preserve">
 		<value>포커스를 설정할 수 없습니다!</value>
 	</data>
-  <data name="PuttyGetSessionsFailed" xml:space="preserve">
-		<value>PuTTY 세션 실패!</value>
-	</data>
   <data name="PuttyHandle" xml:space="preserve">
 		<value>Putty Handle: {0}</value>
 	</data>
@@ -1713,17 +1512,11 @@ VncSharp 제어 버전 {0}</value>
   <data name="PuttySavedSessionsRootName" xml:space="preserve">
 		<value>PuTTY 저장된 세션</value>
 	</data>
-  <data name="PuttySessionSettings" xml:space="preserve">
-		<value>PuTTY 세션 설정</value>
-	</data>
   <data name="PuttySettings" xml:space="preserve">
 		<value>PuTTY 설정</value>
 	</data>
   <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
 		<value>PuTTY 설정 대화 상자가 표시되지 않았습니다!</value>
-	</data>
-  <data name="PuttyStartFailed" xml:space="preserve">
-		<value>PuTTY 시작 실패!</value>
 	</data>
   <data name="PuttyStuff" xml:space="preserve">
 		<value>--- PuTTY Stuff ---</value>
@@ -1776,18 +1569,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="RDP65536Colors" xml:space="preserve">
 		<value>65536 색 (16 비트)</value>
 	</data>
-  <data name="RdpAddResolutionFailed" xml:space="preserve">
-		<value>RDP에 해상도 추가 실패!</value>
-	</data>
-  <data name="RdpAddResolutionsFailed" xml:space="preserve">
-		<value>RDP에 해상도 추가 실패!</value>
-	</data>
-  <data name="RdpAddSessionFailed" xml:space="preserve">
-		<value>세션 추가 실패</value>
-	</data>
-  <data name="RdpCloseConnectionFailed" xml:space="preserve">
-		<value>RDP 연결을 닫지 못했습니다!</value>
-	</data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
 		<value>RDP 컨트롤을 만들 수 없습니다. mRemoteNG 요구 사항을 확인하십시오.</value>
 	</data>
@@ -1802,15 +1583,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
 		<value>메뉴 애니메이션 해제</value>
-	</data>
-  <data name="RDPDisableThemes" xml:space="preserve">
-		<value>테마 해제</value>
-	</data>
-  <data name="RDPDisableWallpaper" xml:space="preserve">
-		<value>바탕 화면 해제</value>
-	</data>
-  <data name="RdpDisconnected" xml:space="preserve">
-		<value>RDP 연결 끊기!</value>
 	</data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
 		<value>RDP 연결 끊기 실패, 닫기 시도!</value>
@@ -1833,9 +1605,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="RdpErrorGetFailure" xml:space="preserve">
 		<value>GetError 변경 (FatalErrors)</value>
 	</data>
-  <data name="RdpErrorGetUnknown" xml:space="preserve">
-		<value>알 수없는 치명적인 RDP 오류가 발생했습니다. 오류 코드 {0}.</value>
-	</data>
   <data name="RdpErrorOutOfMemory" xml:space="preserve">
 		<value>메모리 부족 오류가 발생했습니다.</value>
 	</data>
@@ -1848,9 +1617,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
 		<value>Winsock 초기화 오류입니다.</value>
 	</data>
-  <data name="RdpFileCouldNotBeImported" xml:space="preserve">
-		<value>rdp 파일을 가져올 수 없습니다!</value>
-	</data>
   <data name="RDPFitToPanel" xml:space="preserve">
 		<value>패널 맞추기</value>
 	</data>
@@ -1862,9 +1628,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="RdpGatewayNotSupported" xml:space="preserve">
 		<value>RD 게이트웨이는 지원되지 않습니다!</value>
-	</data>
-  <data name="RdpGetSessionsFailed" xml:space="preserve">
-		<value>GetSessions 실패!</value>
 	</data>
   <data name="RdpReconnectCount" xml:space="preserve">
 		<value>RDP 재 연결 수 :</value>
@@ -1971,17 +1734,8 @@ VncSharp 제어 버전 {0}</value>
   <data name="SendTo" xml:space="preserve">
 		<value>보내기 ...</value>
 	</data>
-  <data name="SessionGetFailed" xml:space="preserve">
-		<value>세션 배경 가져오지 실패</value>
-	</data>
-  <data name="SessionKillFailed" xml:space="preserve">
-		<value>세션 배경을 제거하지 못함</value>
-	</data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
 		<value>연결을 만들거나 이름을 변경할 때 표시 이름과 같은 호스트 이름 설정</value>
-	</data>
-  <data name="SettingMainFormTextFailed" xml:space="preserve">
-		<value>기본 양식 텍스트 설정 실패</value>
 	</data>
   <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
 		<value>설정을 저장하거나 시스 트레이 아이콘을 삭제할 수 없습니다!</value>
@@ -2016,17 +1770,11 @@ VncSharp 제어 버전 {0}</value>
   <data name="SortDesc" xml:space="preserve">
 		<value>내림차순 (Z-A)</value>
 	</data>
-  <data name="SpecialKeys" xml:space="preserve">
-		<value>특수 키</value>
-	</data>
   <data name="SQLInfo" xml:space="preserve">
 		<value>자세한 정보는 도움말 - 시작하기 - SQL 구성을 참조하십시오!</value>
 	</data>
   <data name="SQLServer" xml:space="preserve">
 		<value>SQL 서버</value>
-	</data>
-  <data name="SqlUpdateCheckUpdateAvailable" xml:space="preserve">
-		<value>SQL 업데이트 확인이 완료되었으며 사용 가능한 업데이트가 있습니다! 연결을 새로 고칩니다.</value>
 	</data>
   <data name="Ssh1" xml:space="preserve">
 		<value>SSH 버전 1</value>
@@ -2036,12 +1784,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="SSHStartTransferBG" xml:space="preserve">
 		<value>SSH 배경 전송 실패!</value>
-	</data>
-  <data name="SSHTranferSuccessful" xml:space="preserve">
-		<value>전송 성공!</value>
-	</data>
-  <data name="SSHTransferEndFailed" xml:space="preserve">
-		<value>SSH 전송 종료 (UI.Window.SSHTransfer)가 실패했습니다!</value>
 	</data>
   <data name="SSHTransferFailed" xml:space="preserve">
 		<value>SSH 전송에 실패했습니다.</value>
@@ -2076,114 +1818,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="TheFollowing" xml:space="preserve">
 		<value>다음 :</value>
 	</data>
-  <data name="ThemeCategoryConfigPanel" xml:space="preserve">
-		<value>설정 패널</value>
-	</data>
-  <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
-		<value>연결 패널</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
-		<value>구성 패널의 배경색입니다.</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
-		<value>구성 패널의 범주 텍스트 색상입니다.</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
-		<value>구성 패널의 그리드 선 색상</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
-		<value>구성 패널의 도움말 영역 배경색입니다.</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
-		<value>구성 패널의 도움말 영역에있는 텍스트의 색상입니다.</value>
-	</data>
-  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
-		<value>구성 패널의 텍스트 색상입니다.</value>
-	</data>
-  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
-		<value>연결 패널의 배경색입니다.</value>
-	</data>
-  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
-		<value>연결 패널의 텍스트 색상입니다.</value>
-	</data>
-  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
-		<value>연결 패널의 트리 선 색상입니다.</value>
-	</data>
-  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
-		<value>메뉴의 배경색입니다.</value>
-	</data>
-  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
-		<value>메뉴의 텍스트 색상입니다.</value>
-	</data>
-  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
-		<value>검색 상자의 배경색입니다.</value>
-	</data>
-  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
-		<value>검색 상자의 텍스트 색상입니다.</value>
-	</data>
-  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
-		<value>검색 창에서 프롬프트 텍스트의 색상입니다.</value>
-	</data>
-  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
-		<value>도구 모음의 배경색입니다.</value>
-	</data>
-  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
-		<value>툴바의 텍스트 색상입니다.</value>
-	</data>
-  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
-		<value>기본 창의 배경색입니다.</value>
-	</data>
-  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-		<value>구성 패널 배경색</value>
-	</data>
-  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
-		<value>구성 패널 범주 텍스트 색</value>
-	</data>
-  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
-		<value>구성 패널 그리드 선 색상</value>
-	</data>
-  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
-		<value>구성 패널 도움말 배경색</value>
-	</data>
-  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
-		<value>구성 패널 도움말 텍스트 색상</value>
-	</data>
-  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
-		<value>구성 패널 텍스트 색상</value>
-	</data>
-  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
-		<value>연결 패널 배경색</value>
-	</data>
-  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
-		<value>연결 패널 텍스트 색상</value>
-	</data>
-  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
-		<value>연결 패널 트리 선 색상</value>
-	</data>
-  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
-		<value>메뉴 배경 색상</value>
-	</data>
-  <data name="ThemeNameMenuTextColor" xml:space="preserve">
-		<value>메뉴 텍스트 색상</value>
-	</data>
-  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
-		<value>검색 창 배경색</value>
-	</data>
-  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
-		<value>검색 창 텍스트 색상</value>
-	</data>
-  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
-		<value>검색 창 텍스트 프롬프트 색상</value>
-	</data>
-  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
-		<value>도구 모음 배경색 색상</value>
-	</data>
-  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
-		<value>도구 모음 텍스트 색상</value>
-	</data>
-  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
-		<value>창 배경 색상</value>
-	</data>
   <data name="TitleError" xml:space="preserve">
 		<value>오류 ({0})</value>
 	</data>
@@ -2205,14 +1839,8 @@ VncSharp 제어 버전 {0}</value>
   <data name="Transfer" xml:space="preserve">
 		<value>전송</value>
 	</data>
-  <data name="TransferFailed" xml:space="preserve">
-		<value>전송 실패!</value>
-	</data>
   <data name="TryToIntegrate" xml:space="preserve">
 		<value>통합 시도</value>
-	</data>
-  <data name="Type" xml:space="preserve">
-		<value>종류</value>
 	</data>
   <data name="UltraVncRepeater" xml:space="preserve">
 		<value>Ultra VNC Repeater</value>
@@ -2222,9 +1850,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="UncheckProperties" xml:space="preserve">
 		<value>저장하지 않으려는 속성을 선택 취소하십시오!</value>
-	</data>
-  <data name="UnnamedTheme" xml:space="preserve">
-		<value>이름없는 테마</value>
 	</data>
   <data name="UpdateAvailable" xml:space="preserve">
 		<value>mRemoteNG에는 업데이트가 필요합니다.</value>
@@ -2237,9 +1862,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
 		<value>업데이트 확인 중 ...</value>
-	</data>
-  <data name="UpdateCheckPortableEdition" xml:space="preserve">
-		<value>mRemoteNG Portable Edition은 현재 자동 업데이트를 지원하지 않습니다.</value>
 	</data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
 		<value>다운로드 완료!
@@ -2302,9 +1924,6 @@ mRemoteNG는 이제 종료되고 설치로 시작됩니다.</value>
   <data name="VncSetPropsFailed" xml:space="preserve">
 		<value>VNC 설정 실패!</value>
 	</data>
-  <data name="VncStartChatFailed" xml:space="preserve">
-		<value>VNC 채팅 시작 실패!</value>
-	</data>
   <data name="VncToggleSmartSizeFailed" xml:space="preserve">
 		<value>VNC SmartSize 전환 실패!</value>
 	</data>
@@ -2316,15 +1935,6 @@ mRemoteNG는 이제 종료되고 설치로 시작됩니다.</value>
 	</data>
   <data name="Warnings" xml:space="preserve">
 		<value>경고</value>
-	</data>
-  <data name="WeifenLuoAttribution" xml:space="preserve">
-		<value>Uses the DockPanel Suite by [Weifen Luo]</value>
-	</data>
-  <data name="WeifenLuoAttributionURL" xml:space="preserve">
-		<value>http://sourceforge.net/projects/dockpanelsuite/</value>
-	</data>
-  <data name="XULrunnerPath" xml:space="preserve">
-		<value>XULRunner 경로 :</value>
 	</data>
   <data name="Yes" xml:space="preserve">
 		<value>예</value>

@@ -120,17 +120,8 @@
   <data name="About" xml:space="preserve">
     <value>Over</value>
   </data>
-  <data name="Active" xml:space="preserve">
-    <value>Actief</value>
-  </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Activiteit</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML mislukt!</value>
-  </data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-    <value>Knooppunten toevoegen van XML mislukt!</value>
   </data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>Laat slechts één exemplaar van de applicatie toe (mRemoteNG herstart vereist)</value>
@@ -168,14 +159,8 @@
   <data name="Aspect" xml:space="preserve">
     <value>Verhouding</value>
   </data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Automatisch ophalen sessie informatie</value>
-  </data>
   <data name="AutoSaveEvery" xml:space="preserve">
     <value>Automatisch opslaan elke:</value>
-  </data>
-  <data name="AutoSaveMins" xml:space="preserve">
-    <value>Minuten (0 betekent uitgeschakeld)</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Huidige Versie</value>
@@ -231,10 +216,6 @@
   <data name="ButtonTestProxy" xml:space="preserve">
     <value>Test Proxy</value>
   </data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-    <value>U kunt geen normale connectie bestand importeren.
-Gebruik dan Bestand - Laad Connecties voor normale connectie bestanden!</value>
-  </data>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Kan Poort Scan niet starten, onjuist IP formaat!</value>
   </data>
@@ -259,23 +240,11 @@ Gebruik dan Bestand - Laad Connecties voor normale connectie bestanden!</value>
   <data name="CategoryRedirect" xml:space="preserve">
     <value>Verwijzing</value>
   </data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-    <value>Altijd dit scherm laten zien bij opstarten</value>
-  </data>
   <data name="CheckFailed" xml:space="preserve">
     <value>Controle mislukt!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Controle geslaagd!</value>
-  </data>
-  <data name="CcEOLFailed" xml:space="preserve">
-    <value>De (RDP) Sessies optie vereist dat u een geregistreerde versie van eolwtscom.dll op uw systeem heeft.
-mRemoteNG neemt dit onderdeel automatisch mee bij instalatie, maar zal niet automatisch registreren al u handmatig heeft geïnstalleerd, tenzij u het installatieprogramma opnieuw uitvoert.
-Om handmatig te registreren : Open het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (Waar c:\Program Files\mRemoteNG\ het pad is naar uw mRemoteNG installatie).
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcEOLOK" xml:space="preserve">
-    <value>EOLWTSCOM werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
     <value>ICA vereist dat de XenDesktop Online Plugin is geïnstalleerd is en dat de wfica.ocx bibliotheek is geregistreerd. U kunt de cliënt van deze locatie downloaden: http://www.citrix.com/download/
@@ -402,10 +371,6 @@ VncSharp Versie {0}</value>
   <data name="ConfigUiLoadFailed" xml:space="preserve">
     <value>Configuratie UI laden mislukt!</value>
   </data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Wilt u de verbinding sluiten:
-"{0}"?</value>
-  </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Weet u zeker dat u  het paneel wilt sluiten, "{0}"? Alle connecties zullen dan ook worden gesloten.</value>
   </data>
@@ -457,11 +422,6 @@ VncSharp Versie {0}</value>
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Kan verbinding niet openen: Geen hostnaam opgegeven!</value>
   </data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-    <value>RDP Foutmelding!
-Fout Code: {0}
-Foutomschrijving: {1}</value>
-  </data>
   <data name="Connections" xml:space="preserve">
     <value>Connecties</value>
   </data>
@@ -471,18 +431,12 @@ Foutomschrijving: {1}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>Kan geen back-up maken van Connectie bestand!</value>
   </data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>Kan Connectie bestand niet importeren!</value>
-  </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Connectie bestand "{0}" kon niet worden geladen!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Connectie bestand "{0}" kon niet worden geladen!
 Beginnen met nieuwe Connectie bestand.</value>
-  </data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>Kan connectie bestand niet opslaan!</value>
   </data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Kan connectie bestand niet opslaan als "{0}"!</value>
@@ -495,9 +449,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>Verbinding naar {0} via {1} gesloten door gebruiker {2}.</value>
-  </data>
-  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
-    <value>Verbinding naar {0} via {1} gesloten door gebruiker {2}.  (Omschrijving: "{3}"; Gebruiker Veld: "{4}")</value>
   </data>
   <data name="ConnenctionCloseEvent" xml:space="preserve">
     <value>Connectie gebeurtenis  gesloten</value>
@@ -513,9 +464,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="CurrentVersion" xml:space="preserve">
     <value>Geïnstalleerde versie</value>
-  </data>
-  <data name="DefaultTheme" xml:space="preserve">
-    <value>Standaard thema</value>
   </data>
   <data name="Detect" xml:space="preserve">
     <value>Detecteer</value>
@@ -565,12 +513,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>De database versie {0} is niet compatibel met deze versie van {1}.</value>
   </data>
-  <data name="ErrorCloneNodeFailed" xml:space="preserve">
-    <value>Kloon Node (Tree.Node) is mislukt. {0}</value>
-  </data>
-  <data name="ErrorCode" xml:space="preserve">
-    <value>Fout code {0}.</value>
-  </data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>De connectie lijst kan niet worden opgeslagen..</value>
   </data>
@@ -598,14 +540,8 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="Export" xml:space="preserve">
     <value>Exporteer</value>
   </data>
-  <data name="ExportmRemoteXML" xml:space="preserve">
-    <value>Exporteer mRemote/mRemoteNG XML</value>
-  </data>
   <data name="ExtApp" xml:space="preserve">
     <value>Externe Applicatie</value>
-  </data>
-  <data name="FAMFAMFAMAttribution" xml:space="preserve">
-    <value>Inclusief iconen door [FAMFAMFAM]</value>
   </data>
   <data name="FilterAll" xml:space="preserve">
     <value>Alle Bestanden(*.*)</value>
@@ -622,9 +558,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="FilterRDP" xml:space="preserve">
     <value>RDP Bestanden (*.rdp)</value>
   </data>
-  <data name="FiltervRD2008CSV" xml:space="preserve">
-    <value>visionapp Remote Desktop 2008 CSV Bestanden (*.csv)</value>
-  </data>
   <data name="FormatInherit" xml:space="preserve">
     <value>Erven {0}</value>
   </data>
@@ -639,9 +572,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="General" xml:space="preserve">
     <value>Algemeen</value>
-  </data>
-  <data name="GetConnectionInfoFromSqlFailed" xml:space="preserve">
-    <value>Ophalen Connectie Informatie van SQL mislukt</value>
   </data>
   <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
     <value>Een fout is opgetreden tijdens het laden van de verbinding voor  "{0}" van "{1}". {2}</value>
@@ -694,26 +624,11 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="ImportAD" xml:space="preserve">
     <value>Importeer van Active Directory</value>
   </data>
-  <data name="ImportExport" xml:space="preserve">
-    <value>Importeer/Exporteer</value>
-  </data>
-  <data name="ImportmRemoteXML" xml:space="preserve">
-    <value>Importeer mRemote/mRemoteNG XML</value>
-  </data>
   <data name="ImportPortScan" xml:space="preserve">
     <value>Importeer van Poort Scan</value>
   </data>
-  <data name="ImportRDPFiles" xml:space="preserve">
-    <value>Importeer van .RDP bestand(en)</value>
-  </data>
-  <data name="Inactive" xml:space="preserve">
-    <value>Inactief</value>
-  </data>
   <data name="Informations" xml:space="preserve">
     <value>Informatie</value>
-  </data>
-  <data name="InheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG is voorzien van de meest actuele versie</value>
   </data>
   <data name="IntAppDisposeFailed" xml:space="preserve">
     <value>Sluiten Interne Applicatie mislukt!</value>
@@ -801,18 +716,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
     <value>Lokaal bestand bestaat niet!</value>
-  </data>
-  <data name="LogOff" xml:space="preserve">
-    <value>Afmelden</value>
-  </data>
-  <data name="LogWriteToFileFailed" xml:space="preserve">
-    <value>Schrijven naar log bestand mislukt!</value>
-  </data>
-  <data name="LogWriteToFileFinalLocationFailed" xml:space="preserve">
-    <value>Kon log bestand niet opslaan naar definitieve locatie.</value>
-  </data>
-  <data name="MagicLibraryAttribution" xml:space="preserve">
-    <value>Maakt gebruik van de Magic bibliotheek door [Crownwood Software]</value>
   </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Voeg Connectie Paneel toe</value>
@@ -907,9 +810,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="Options" xml:space="preserve">
     <value>Opties</value>
   </data>
-  <data name="MenuPaste" xml:space="preserve">
-    <value>Plakken</value>
-  </data>
   <data name="MenuPortScan" xml:space="preserve">
     <value>Poort Scan</value>
   </data>
@@ -946,17 +846,8 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Opslaan Connectie bestand Als...</value>
   </data>
-  <data name="MenuScreenshotManager" xml:space="preserve">
-    <value>Screenshot beheerder</value>
-  </data>
   <data name="MenuSendSpecialKeys" xml:space="preserve">
     <value>Stuur Speciale toetsencombinatie (VNC)</value>
-  </data>
-  <data name="MenuSessions" xml:space="preserve">
-    <value>Sessies</value>
-  </data>
-  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
-    <value>Sessies en Screenshots</value>
   </data>
   <data name="MenuShowHelpText" xml:space="preserve">
     <value>&amp;Laat hulp zien</value>
@@ -1015,9 +906,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="NewPanel" xml:space="preserve">
     <value>Nieuw Paneel</value>
   </data>
-  <data name="NewRoot" xml:space="preserve">
-    <value>Nieuwe Root</value>
-  </data>
   <data name="NewTitle" xml:space="preserve">
     <value>Naamloos</value>
   </data>
@@ -1072,9 +960,6 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   </data>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Poortscan paneel kon niet worden geladen</value>
-  </data>
-  <data name="PropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(Deze eigenschappen worden alleen opgeslagen als u mRemote/mRemoteNG XML als output bestand formaat selecteert!)</value>
   </data>
   <data name="PropertyDescriptionAddress" xml:space="preserve">
     <value>Geef de hostnaam of IP adres op waarmee u verbinding wilt maken</value>
@@ -1388,9 +1273,6 @@ Bericht:
   <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Kan de focus niet verkrijgen!</value>
   </data>
-  <data name="PuttyGetSessionsFailed" xml:space="preserve">
-    <value>Ophalen Putty Sessies mislukt!</value>
-  </data>
   <data name="PuttyHandle" xml:space="preserve">
     <value>PuTTy Handeling: {0}</value>
   </data>
@@ -1411,9 +1293,6 @@ Bericht:
   </data>
   <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
     <value>Toon PuTTY Instellingen mislukt!</value>
-  </data>
-  <data name="PuttyStartFailed" xml:space="preserve">
-    <value>Putty Starten mislukt!</value>
   </data>
   <data name="PuttyStuff" xml:space="preserve">
     <value>--- PuTTY Spullen ---</value>
@@ -1466,18 +1345,6 @@ Bericht:
   <data name="RDP65536Colors" xml:space="preserve">
     <value>65536 Kleuren (16-bit)</value>
   </data>
-  <data name="RdpAddResolutionFailed" xml:space="preserve">
-    <value>RDP Resolutie toevoegen mislukt!</value>
-  </data>
-  <data name="RdpAddResolutionsFailed" xml:space="preserve">
-    <value>RDP Resoluties toevoegen mislukt!</value>
-  </data>
-  <data name="RdpAddSessionFailed" xml:space="preserve">
-    <value>Sessie aanmaken mislukt</value>
-  </data>
-  <data name="RdpCloseConnectionFailed" xml:space="preserve">
-    <value>Sluiten RDP verbinding is mislukt!</value>
-  </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Kan geen RDP controle aanmaken, controleer mRemoteNG systeemeisen.</value>
   </data>
@@ -1492,15 +1359,6 @@ Bericht:
   </data>
   <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Menu Animaties Uitschakelen</value>
-  </data>
-  <data name="RDPDisableThemes" xml:space="preserve">
-    <value>Thema's Uitschakelen</value>
-  </data>
-  <data name="RDPDisableWallpaper" xml:space="preserve">
-    <value>Bureaubladachtergrond Uitschakelen</value>
-  </data>
-  <data name="RdpDisconnected" xml:space="preserve">
-    <value>RDP verbinding verboken!</value>
   </data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
     <value>RDP verbreken mislukt, probeer te sluiten!</value>
@@ -1523,9 +1381,6 @@ Bericht:
   <data name="RdpErrorGetFailure" xml:space="preserve">
     <value>Ophalen foutmelding mislukt (fatale foutmelding)</value>
   </data>
-  <data name="RdpErrorGetUnknown" xml:space="preserve">
-    <value>Een onbekende fatale RDP fout opgetreden. Foutcode {0}.</value>
-  </data>
   <data name="RdpErrorOutOfMemory" xml:space="preserve">
     <value>Een out-of-memory fout is opgetreden.</value>
   </data>
@@ -1538,9 +1393,6 @@ Bericht:
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Winsock initialisatie fout.</value>
   </data>
-  <data name="RdpFileCouldNotBeImported" xml:space="preserve">
-    <value>Kan RDP-bestand niet importeren!</value>
-  </data>
   <data name="RDPFitToPanel" xml:space="preserve">
     <value>Pas aan paneel aan</value>
   </data>
@@ -1552,9 +1404,6 @@ Bericht:
   </data>
   <data name="RdpGatewayNotSupported" xml:space="preserve">
     <value>RD Gateway is niet ondersteund!</value>
-  </data>
-  <data name="RdpGetSessionsFailed" xml:space="preserve">
-    <value>Instellen sessies mislukt!</value>
   </data>
   <data name="RdpReconnectCount" xml:space="preserve">
     <value>RDP aantal malen opnieuw proberen te verbinden:</value>
@@ -1661,17 +1510,8 @@ Bericht:
   <data name="SendTo" xml:space="preserve">
     <value>Verstuur naar...</value>
   </data>
-  <data name="SessionGetFailed" xml:space="preserve">
-    <value>Ophalen van sessies van achtergrond mislukt</value>
-  </data>
-  <data name="SessionKillFailed" xml:space="preserve">
-    <value>Achtergrond Sessie beëindigen mislukt</value>
-  </data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Stel hostnaam zoals weergegeven naam in bij het ​​maken van nieuwe verbindingen</value>
-  </data>
-  <data name="SettingMainFormTextFailed" xml:space="preserve">
-    <value>Instelling hoofdformulier tekst mislukt</value>
   </data>
   <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
     <value>Kon de instellingen niet opslaan of taakbalk pictogram verwijderen!</value>
@@ -1706,17 +1546,11 @@ Bericht:
   <data name="SortDesc" xml:space="preserve">
     <value>Aflopend (Z-A)</value>
   </data>
-  <data name="SpecialKeys" xml:space="preserve">
-    <value>Speciale toetsen</value>
-  </data>
   <data name="SQLInfo" xml:space="preserve">
     <value>Zie Help - Aan de slag - SQL Configuratie voor meer informatie!</value>
   </data>
   <data name="SQLServer" xml:space="preserve">
     <value>SQL Server:</value>
-  </data>
-  <data name="SqlUpdateCheckUpdateAvailable" xml:space="preserve">
-    <value>SQL update check voltooid er is een update beschikbaar! De verbindingen worden vernieuwd.</value>
   </data>
   <data name="Ssh1" xml:space="preserve">
     <value>SSH versie 1</value>
@@ -1726,12 +1560,6 @@ Bericht:
   </data>
   <data name="SSHStartTransferBG" xml:space="preserve">
     <value>SSH achtergrond overdracht mislukt!</value>
-  </data>
-  <data name="SSHTranferSuccessful" xml:space="preserve">
-    <value>Overdracht succesvol!</value>
-  </data>
-  <data name="SSHTransferEndFailed" xml:space="preserve">
-    <value>SSH Overdracht (UI.Window.SSHTransfer) mislukt!</value>
   </data>
   <data name="SSHTransferFailed" xml:space="preserve">
     <value>SSH overdracht heeft gefaald.</value>
@@ -1766,114 +1594,6 @@ Bericht:
   <data name="TheFollowing" xml:space="preserve">
     <value>De volgende:</value>
   </data>
-  <data name="ThemeCategoryConfigPanel" xml:space="preserve">
-    <value>Configuratie paneel</value>
-  </data>
-  <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
-    <value>Connectie paneel</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
-    <value>De achtergrondkleur van het configuratie paneel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>De kleur van de categorie tekst in het configuratie paneel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
-    <value>De kleur van de gridlijnen in het configuratiepaneel</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>De achtergrondkleur van de helptekst in het configuratiepaneel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
-    <value>De tekst kleur ven de help in het configurateipaneel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
-    <value>De tekstkleur van het configuratiepaneel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>De achtergrondkleur van het connectie paneel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
-    <value>De tekstkleur van het connectie paneel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>De boomstructuur lijnen kleur in het connectie paneel.</value>
-  </data>
-  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
-    <value>De achtergrondkleur van de menu's.</value>
-  </data>
-  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
-    <value>De tekstkleur in de menu's.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
-    <value>De achtergrondkleur van de zoekboks.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
-    <value>De tekstkleur in de zoekboks.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
-    <value>De prompttekst kleur in de zoekboks.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
-    <value>De achtergrondkleur van de gereedschapsbalk.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
-    <value>De tekstkleur in de gereedschapsbalk.</value>
-  </data>
-  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
-    <value>De achtergrondkleur van het hoofdwindow.</value>
-  </data>
-  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Achtergrondkleur configuratiepaneel</value>
-  </data>
-  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Categorie tekst kleur in het configuratiepaneel</value>
-  </data>
-  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
-    <value>Lijnenkleur in het configuratiepaneel</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Help achtergrondkleur van het configuratiepaneel</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Help tekstkleur van het configuratiepaneel</value>
-  </data>
-  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
-    <value>Configuratiepaneel tekstkleur</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Achtergrondkleur connectie paneel</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
-    <value>Tekstkleur connectiepaneel</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Boomstructuur lijnen kleur connectiepaneel</value>
-  </data>
-  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
-    <value>Menu achtergrondkleur</value>
-  </data>
-  <data name="ThemeNameMenuTextColor" xml:space="preserve">
-    <value>Tekstkleur menu</value>
-  </data>
-  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Achtergrondkleur zoekboks</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
-    <value>Tekstkleur zoekboks</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Prompt tekstkleur zoekboks</value>
-  </data>
-  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
-    <value>Achtergrondkleur gereedschapsbalk</value>
-  </data>
-  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
-    <value>Tekstkleur gereedschapskleur</value>
-  </data>
-  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
-    <value>Achtergrondkleur window</value>
-  </data>
   <data name="TitleError" xml:space="preserve">
     <value>Fout ({0})</value>
   </data>
@@ -1892,14 +1612,8 @@ Bericht:
   <data name="Transfer" xml:space="preserve">
     <value>Overdracht</value>
   </data>
-  <data name="TransferFailed" xml:space="preserve">
-    <value>Overdracht mislukt!</value>
-  </data>
   <data name="TryToIntegrate" xml:space="preserve">
     <value>Probeer te integreren</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Type</value>
   </data>
   <data name="UltraVncRepeater" xml:space="preserve">
     <value>UltraVNC Repeater</value>
@@ -1910,9 +1624,6 @@ Bericht:
   <data name="UncheckProperties" xml:space="preserve">
     <value>Verwijder het vinkje bij eigenschappen die u niet wil opslaan!</value>
   </data>
-  <data name="UnnamedTheme" xml:space="preserve">
-    <value>Thema zonder naam</value>
-  </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>Er is een update voor mRemoteNG beschikbaar</value>
   </data>
@@ -1921,15 +1632,6 @@ Bericht:
   </data>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>Check voor de update voltooiing is mislukt!</value>
-  </data>
-  <data name="UpdateCheckFailed" xml:space="preserve">
-    <value>Controleren op update mislukt!</value>
-  </data>
-  <data name="UpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG Portable Edition ondersteunt momenteel geen automatische updates.</value>
-  </data>
-  <data name="UpdateDeleteFailed" xml:space="preserve">
-    <value>Fout bij verwijderen van update-bestand!</value>
   </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>Download voltooid!
@@ -1953,14 +1655,8 @@ mRemoteNG zal nu worden gesloten en beginnen met de installatie.</value>
   <data name="UpdateFrequencyWeekly" xml:space="preserve">
     <value>Wekelijks</value>
   </data>
-  <data name="UpdateStartFailed" xml:space="preserve">
-    <value>Fout bij het starten van update!</value>
-  </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Gebruik een andere gebruikersnaam en wachtwoord</value>
-  </data>
-  <data name="UseOnlyErrorsAndInfosPanel" xml:space="preserve">
-    <value>Gebruik alleen meldingenvenster (geen meldingsbox popups)</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Gebruiker</value>
@@ -1995,9 +1691,6 @@ mRemoteNG zal nu worden gesloten en beginnen met de installatie.</value>
   <data name="VncSetPropsFailed" xml:space="preserve">
     <value>VNC Eigenschappen instellen mislukt!</value>
   </data>
-  <data name="VncStartChatFailed" xml:space="preserve">
-    <value>VNC Start Chat Mislukt!</value>
-  </data>
   <data name="VncToggleSmartSizeFailed" xml:space="preserve">
     <value>VNC Wisselen Formaat wijzigen mislukt!</value>
   </data>
@@ -2009,15 +1702,6 @@ mRemoteNG zal nu worden gesloten en beginnen met de installatie.</value>
   </data>
   <data name="Warnings" xml:space="preserve">
     <value>Waarschuwingen</value>
-  </data>
-  <data name="WeifenLuoAttribution" xml:space="preserve">
-    <value>Maakt gebruik van de DockPanel Suite van [Weifen Luo]</value>
-  </data>
-  <data name="WriteLogFile" xml:space="preserve">
-    <value>Schrijf log bestand (mRemoteNG.log)</value>
-  </data>
-  <data name="XULrunnerPath" xml:space="preserve">
-    <value>XULrunner pad:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>

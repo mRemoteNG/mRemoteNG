@@ -120,17 +120,8 @@
   <data name="About" xml:space="preserve">
     <value>Om</value>
   </data>
-  <data name="Active" xml:space="preserve">
-    <value>Aktiv</value>
-  </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Aktivitet</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML mislyktes!</value>
-  </data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-    <value>AddNodesFromSQL mislyktes!</value>
   </data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>Tillat bare én instans av programmet (omstart av mRemoteNG påkrevd)</value>
@@ -168,14 +159,8 @@
   <data name="Aspect" xml:space="preserve">
     <value>Aspekt</value>
   </data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Hent sesjonsinformasjon automatisk</value>
-  </data>
   <data name="AutoSaveEvery" xml:space="preserve">
     <value>Lagre automatisk hvert:</value>
-  </data>
-  <data name="AutoSaveMins" xml:space="preserve">
-    <value>minutt (0 betyr deaktivert)</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Gjeldende versjon</value>
@@ -231,10 +216,6 @@
   <data name="ButtonTestProxy" xml:space="preserve">
     <value>Test proxy</value>
   </data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-    <value>Du kan ikke importere en vanlig tilkoblingsfil.
-Vennligst bruk Fil - Last inn tilkoblinger for vanlige tilkoblingsfiler!</value>
-  </data>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Kan ikke starte portskanning, feil IP-format!</value>
   </data>
@@ -259,23 +240,11 @@ Vennligst bruk Fil - Last inn tilkoblinger for vanlige tilkoblingsfiler!</value>
   <data name="CategoryRedirect" xml:space="preserve">
     <value>Omdiriger</value>
   </data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-    <value>Alltid vis denne skjermen ved oppstart</value>
-  </data>
   <data name="CheckFailed" xml:space="preserve">
     <value>Sjekk mislyktes!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Sjekk lyktes!</value>
-  </data>
-  <data name="CcEOLFailed" xml:space="preserve">
-    <value>Funksjonaliteten RDP-sesjoner krever at du har en kopi av eolwtscom.dll registrert på ditt system.
-mRemoteNG inneholder denne komponenten, men hvis du ikke har kjørt installasjonsprogrammet blir den ikke automatisk registrert.
-For å registrere den manuelt, kjør den følgende kommandoen fra en elevert (administrator)-kommandolinje: regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (hvor C:\Program Files\mRemoteNG\ er stien til mRemoteNG-installasjonen).
-Hvis denne kontrollen fortsatt feiler eller RDP-sesjoner ikke fungerer, se {0}.</value>
-  </data>
-  <data name="CcEOLOK" xml:space="preserve">
-    <value>EOLWTSCOM ble funnet, og synes å være korrekt registrert.</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
     <value>ICA krever at XenDesktop Online Plugin er installert og at wfica.ocx-biblioteket er registrert. Du kan laste ned klienten herfra: http://www.citrix.com/download/
@@ -402,10 +371,6 @@ VncSharp Control Version {0}</value>
   <data name="ConfigUiLoadFailed" xml:space="preserve">
     <value>Innlasting av Konfigurasjonsgrensesnitt mislyktes!</value>
   </data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Ønsker du å avslutte tilkoblingen:
-"{0}"?</value>
-  </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Er du sikker på at du ønsker å lukke panelet "{0}"? Alle tilkoblinger den inneholder vil også bli lukket.</value>
   </data>
@@ -457,11 +422,6 @@ VncSharp Control Version {0}</value>
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Kan ikke åpne forbindelse: Vertsnavn ikke angitt!</value>
   </data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-    <value>RDP-feil!
-Feilkode: {0}
-Feilbeskrivelse: {1}</value>
-  </data>
   <data name="Connections" xml:space="preserve">
     <value>Tilkoblinger</value>
   </data>
@@ -471,18 +431,12 @@ Feilbeskrivelse: {1}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>Kunne ikke opprette sikkerhetskopi av tilkoblingsfilen!</value>
   </data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>Kunne ikke importere tilkoblingsfilen!</value>
-  </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Tilkoblingsfilen "{0}" kunne ikke lastes inn!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Tilkoblingsfilen "{0}" kunne ikke lastes inn!
 Starter med ny tilkoblingsfil.</value>
-  </data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>Kunne ikke lagre tilkoblingsfilen!</value>
   </data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Kunne ikke lagre tilkoblingsfilen som "{0}"!</value>
@@ -495,9 +449,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>Tilkobling til {0} via {1} ble avsluttet av bruker {2}.</value>
-  </data>
-  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
-    <value>Tilkobling til {0} via {1} avsluttet av bruker {2}. (Beskrivelse: "{3}"; Brukerfelt: "{4}")</value>
   </data>
   <data name="ConnenctionCloseEvent" xml:space="preserve">
     <value>Tilkoblingshendelse avsluttet</value>
@@ -513,9 +464,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="CurrentVersion" xml:space="preserve">
     <value>Installert versjon</value>
-  </data>
-  <data name="DefaultTheme" xml:space="preserve">
-    <value>Standardtema</value>
   </data>
   <data name="Detect" xml:space="preserve">
     <value>Oppdag</value>
@@ -565,12 +513,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>Databaseversjonen {0} er ikke kompatibel med denne versjonen av {1}.</value>
   </data>
-  <data name="ErrorCloneNodeFailed" xml:space="preserve">
-    <value>CloneNode (Tree.Node) mislyktes. {0}</value>
-  </data>
-  <data name="ErrorCode" xml:space="preserve">
-    <value>Feilkode {0}.</value>
-  </data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>Tilkoblingslisten kan ikke lagres.</value>
   </data>
@@ -598,14 +540,8 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Export" xml:space="preserve">
     <value>Eksporter</value>
   </data>
-  <data name="ExportmRemoteXML" xml:space="preserve">
-    <value>Eksporter mRemote/mRemoteNG XML</value>
-  </data>
   <data name="ExtApp" xml:space="preserve">
     <value>Ekstern applikasjon</value>
-  </data>
-  <data name="FAMFAMFAMAttribution" xml:space="preserve">
-    <value>Inkluderer ikoner av [FAMFAMFAM]</value>
   </data>
   <data name="FilterAll" xml:space="preserve">
     <value>Alle filer (*.*)</value>
@@ -622,9 +558,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="FilterRDP" xml:space="preserve">
     <value>RDP-filer (*.rdp)</value>
   </data>
-  <data name="FiltervRD2008CSV" xml:space="preserve">
-    <value>visionapp Remote Desktop 2008 CSV-filer (*.csv)</value>
-  </data>
   <data name="FormatInherit" xml:space="preserve">
     <value>Arve {0}</value>
   </data>
@@ -639,9 +572,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="General" xml:space="preserve">
     <value>Generelt</value>
-  </data>
-  <data name="GetConnectionInfoFromSqlFailed" xml:space="preserve">
-    <value>Henting av tilkoblingsinformasjon fra SQL mislyktes</value>
   </data>
   <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
     <value>Det oppstod en feil under innlasting av tilkoblingsoppføring for "{0}" fra "{1}". {2}</value>
@@ -694,26 +624,11 @@ Starter med ny tilkoblingsfil.</value>
   <data name="ImportAD" xml:space="preserve">
     <value>Importer fra Active Directory</value>
   </data>
-  <data name="ImportExport" xml:space="preserve">
-    <value>Import/eksport</value>
-  </data>
-  <data name="ImportmRemoteXML" xml:space="preserve">
-    <value>Importere mRemote/mRemoteNG XML</value>
-  </data>
   <data name="ImportPortScan" xml:space="preserve">
     <value>Import fra Port Scan</value>
   </data>
-  <data name="ImportRDPFiles" xml:space="preserve">
-    <value>Importer fra .RDP-fil(er)</value>
-  </data>
-  <data name="Inactive" xml:space="preserve">
-    <value>Inaktiv</value>
-  </data>
   <data name="Informations" xml:space="preserve">
     <value>Informasjon</value>
-  </data>
-  <data name="InheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG er oppdatert</value>
   </data>
   <data name="IntAppDisposeFailed" xml:space="preserve">
     <value>Forkasting av Int App-prosess mislyktes!</value>
@@ -801,18 +716,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
     <value>Lokal fil eksisterer ikke!</value>
-  </data>
-  <data name="LogOff" xml:space="preserve">
-    <value>Logg av</value>
-  </data>
-  <data name="LogWriteToFileFailed" xml:space="preserve">
-    <value>Skriving til rapportfil mislyktes!</value>
-  </data>
-  <data name="LogWriteToFileFinalLocationFailed" xml:space="preserve">
-    <value>Kunne ikke lagre rapport til endelig plassering.</value>
-  </data>
-  <data name="MagicLibraryAttribution" xml:space="preserve">
-    <value>Bruker Magic-biblioteket av [Crownwood Software]</value>
   </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Legg til tilkoblingspanel</value>
@@ -907,9 +810,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Options" xml:space="preserve">
     <value>Alternativer</value>
   </data>
-  <data name="MenuPaste" xml:space="preserve">
-    <value>Lim inn</value>
-  </data>
   <data name="MenuPortScan" xml:space="preserve">
     <value>Portskanning</value>
   </data>
@@ -946,17 +846,8 @@ Starter med ny tilkoblingsfil.</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Lagre tilkoblingsfilen &amp;som...</value>
   </data>
-  <data name="MenuScreenshotManager" xml:space="preserve">
-    <value>Skjermbildeadminstrator</value>
-  </data>
   <data name="MenuSendSpecialKeys" xml:space="preserve">
     <value>Send spesialtastekombinasjoner (VNC)</value>
-  </data>
-  <data name="MenuSessions" xml:space="preserve">
-    <value>Sesjoner</value>
-  </data>
-  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
-    <value>Sesjoner og skjermbilder</value>
   </data>
   <data name="MenuShowHelpText" xml:space="preserve">
     <value>&amp;Vis hjelpetekst</value>
@@ -1015,9 +906,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="NewPanel" xml:space="preserve">
     <value>Nytt panel</value>
   </data>
-  <data name="NewRoot" xml:space="preserve">
-    <value>Nytt rotnivå</value>
-  </data>
   <data name="NewTitle" xml:space="preserve">
     <value>Ny tittel</value>
   </data>
@@ -1071,9 +959,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Kunne ikke laste inn portskanningpanelet!</value>
-  </data>
-  <data name="PropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(Disse egenskapene vil bare lagres dersom du velger mRemote/mRemoteNG XML som format for målfilen!)</value>
   </data>
   <data name="PropertyDescriptionAddress" xml:space="preserve">
     <value>Angi vertsnavnet eller IP-adressen du ønsker å koble til.</value>
@@ -1385,9 +1270,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Kunne ikke sette fokus!</value>
   </data>
-  <data name="PuttyGetSessionsFailed" xml:space="preserve">
-    <value>Henting av PuTTY-sesjoner mislyktes!</value>
-  </data>
   <data name="PuttyHandle" xml:space="preserve">
     <value>Putty Handle: {0}</value>
   </data>
@@ -1408,9 +1290,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
     <value>Vis dialog for PuTTY-innstillinger mislyktes!</value>
-  </data>
-  <data name="PuttyStartFailed" xml:space="preserve">
-    <value>Start av PuTTY mislyktes!</value>
   </data>
   <data name="PuttyStuff" xml:space="preserve">
     <value>--- PuTTY-ting ---</value>
@@ -1463,18 +1342,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="RDP65536Colors" xml:space="preserve">
     <value>65536 farger (16-biters)</value>
   </data>
-  <data name="RdpAddResolutionFailed" xml:space="preserve">
-    <value>RDP Legg til oppløsning mislyktes!</value>
-  </data>
-  <data name="RdpAddResolutionsFailed" xml:space="preserve">
-    <value>RDP Legg til oppløsninger mislyktes!</value>
-  </data>
-  <data name="RdpAddSessionFailed" xml:space="preserve">
-    <value>Legg til sesjon mislyktes</value>
-  </data>
-  <data name="RdpCloseConnectionFailed" xml:space="preserve">
-    <value>Lukk RDP-tilkobling mislyktes!</value>
-  </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Kunne ikke opprette RDP-kontroll, vennligst kontroller mRemoteNGs systemkrav.</value>
   </data>
@@ -1489,15 +1356,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Deaktiver menyanimasjoner</value>
-  </data>
-  <data name="RDPDisableThemes" xml:space="preserve">
-    <value>Deaktiver temaer</value>
-  </data>
-  <data name="RDPDisableWallpaper" xml:space="preserve">
-    <value>Deaktiver bakgrunnsbilde</value>
-  </data>
-  <data name="RdpDisconnected" xml:space="preserve">
-    <value>RDP frakoblet!</value>
   </data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
     <value>RDP-frakobling mislyktes, forsøker å lukke!</value>
@@ -1520,9 +1378,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="RdpErrorGetFailure" xml:space="preserve">
     <value>GetError mislyktes (FatalErrors)</value>
   </data>
-  <data name="RdpErrorGetUnknown" xml:space="preserve">
-    <value>Det oppstod en ukjent, uopprettelig RDP-feil.  Feilkode {0}.</value>
-  </data>
   <data name="RdpErrorOutOfMemory" xml:space="preserve">
     <value>Det oppstod en ut-av-minne-feil.</value>
   </data>
@@ -1535,9 +1390,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Feil ved initialisering av Winsock.</value>
   </data>
-  <data name="RdpFileCouldNotBeImported" xml:space="preserve">
-    <value>Kunne ikke importere RDP-fil!</value>
-  </data>
   <data name="RDPFitToPanel" xml:space="preserve">
     <value>Tilpass til panel</value>
   </data>
@@ -1549,9 +1401,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="RdpGatewayNotSupported" xml:space="preserve">
     <value>RD Gateway støttes ikke!</value>
-  </data>
-  <data name="RdpGetSessionsFailed" xml:space="preserve">
-    <value>GetSessions mislyktes!</value>
   </data>
   <data name="RdpReconnectCount" xml:space="preserve">
     <value>Antall RDP gjentilkoblingsforsøk:</value>
@@ -1658,17 +1507,8 @@ Starter med ny tilkoblingsfil.</value>
   <data name="SendTo" xml:space="preserve">
     <value>Send til...</value>
   </data>
-  <data name="SessionGetFailed" xml:space="preserve">
-    <value>Get Sessions Background mislyktes</value>
-  </data>
-  <data name="SessionKillFailed" xml:space="preserve">
-    <value>Avslutning av Session Background mislyktes</value>
-  </data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Angi vertsnavnet som visningsnavn når du oppretter eller gir nytt navn til tilkoblinger</value>
-  </data>
-  <data name="SettingMainFormTextFailed" xml:space="preserve">
-    <value>Angivelse av hovedskjematekst mislyktes</value>
   </data>
   <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
     <value>Kunne ikke lagre innstillinger eller fjerne SysTray-ikon!</value>
@@ -1703,17 +1543,11 @@ Starter med ny tilkoblingsfil.</value>
   <data name="SortDesc" xml:space="preserve">
     <value>Synkende (Z-A)</value>
   </data>
-  <data name="SpecialKeys" xml:space="preserve">
-    <value>Spesialtastekombinasjoner</value>
-  </data>
   <data name="SQLInfo" xml:space="preserve">
     <value>Vennligst se Hjelp - Komme i gang - SQL-konfigurasjon for mer informasjon!</value>
   </data>
   <data name="SQLServer" xml:space="preserve">
     <value>SQL Server</value>
-  </data>
-  <data name="SqlUpdateCheckUpdateAvailable" xml:space="preserve">
-    <value>SQL Update-sjekken er ferdig, og det er en oppdatering tilgjengelig! Oppdaterer tilkoblinger...</value>
   </data>
   <data name="Ssh1" xml:space="preserve">
     <value>SSH versjon 1</value>
@@ -1723,12 +1557,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="SSHStartTransferBG" xml:space="preserve">
     <value>SSH-bakgrunnsoverføring mislyktes!</value>
-  </data>
-  <data name="SSHTranferSuccessful" xml:space="preserve">
-    <value>Overføring er vellykket!</value>
-  </data>
-  <data name="SSHTransferEndFailed" xml:space="preserve">
-    <value>SSH Transfer End (UI.Window.SSHTransfer) mislyktes!</value>
   </data>
   <data name="SSHTransferFailed" xml:space="preserve">
     <value>SSH-overføringen mislyktes.</value>
@@ -1763,114 +1591,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="TheFollowing" xml:space="preserve">
     <value>Følgende:</value>
   </data>
-  <data name="ThemeCategoryConfigPanel" xml:space="preserve">
-    <value>Oppsettspanel</value>
-  </data>
-  <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
-    <value>Tilkoblingspanel</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfargen på oppsettspanelet.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Fargen på kategoritekst i oppsettspanelet.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
-    <value>Fargen på linjene i rutenettet i oppsettspanelet</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfargen på hjelp-området i oppsettspanelet.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Fargen på teksten i hjelp-området i oppsettspanelet.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
-    <value>Fargen på teksten i oppsettspanelet.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfargen på tilkoblingspanelet.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
-    <value>Fargen på teksten i tilkoblingspanelet.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Fargen på trelinjene i tilkoblingspanelet.</value>
-  </data>
-  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfargen på menyene.</value>
-  </data>
-  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
-    <value>Fargen på teksten i menyene.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfargen på søkeboksen.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
-    <value>Fargen på teksten i søkeboksen.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Fargen på ledeteksten i søkeboksen.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfargen på verktøylinjene.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
-    <value>Fargen på teksten i verktøylinjene.</value>
-  </data>
-  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfarge i hovedvinduet.</value>
-  </data>
-  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfarge for oppsettspanelet</value>
-  </data>
-  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Tekstfarge for oppsettspanel-kategori</value>
-  </data>
-  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
-    <value>Rutenettfarge for oppsettspanelet</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfarge for oppsettspanel-hjelp</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Tekstfarge for oppsettspanel-hjelp</value>
-  </data>
-  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
-    <value>Tekstfarge for oppsettspanelet</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfarge for tilkoblingspanelet</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
-    <value>Tekstfarge for tilkoblingspanelet</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Farge på trelinjene i tilkoblingspanelet</value>
-  </data>
-  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfarge på menyene</value>
-  </data>
-  <data name="ThemeNameMenuTextColor" xml:space="preserve">
-    <value>Tekstfarge for menytekst</value>
-  </data>
-  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfarge for søkeboksen</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
-    <value>Tekstfarge for søkeboksen</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Tekstfarge for spørsmål fra søkeboksen</value>
-  </data>
-  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfarge for verktøylinjen</value>
-  </data>
-  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
-    <value>Tekstfarge for verktøylinjen</value>
-  </data>
-  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
-    <value>Bakgrunnsfarge for vinduet</value>
-  </data>
   <data name="TitleError" xml:space="preserve">
     <value>Feil ({0})</value>
   </data>
@@ -1889,14 +1609,8 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Transfer" xml:space="preserve">
     <value>Overfør</value>
   </data>
-  <data name="TransferFailed" xml:space="preserve">
-    <value>Overføringen mislyktes!</value>
-  </data>
   <data name="TryToIntegrate" xml:space="preserve">
     <value>Prøv å integrere</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Type</value>
   </data>
   <data name="UltraVncRepeater" xml:space="preserve">
     <value>Ultra VNC Repeater</value>
@@ -1907,9 +1621,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="UncheckProperties" xml:space="preserve">
     <value>Fjern avkryssingen for egenskapene du ikke ønsker å lagre!</value>
   </data>
-  <data name="UnnamedTheme" xml:space="preserve">
-    <value>Tema uten navn</value>
-  </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>mRemoteNG krever en oppdatering</value>
   </data>
@@ -1918,15 +1629,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>Fullføring av sjekk for oppdatering mislyktes!</value>
-  </data>
-  <data name="UpdateCheckFailed" xml:space="preserve">
-    <value>Sjekk for oppdatering mislyktes!</value>
-  </data>
-  <data name="UpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG Portable Edition støtter for øyeblikket ikke automatiske oppdateringer.</value>
-  </data>
-  <data name="UpdateDeleteFailed" xml:space="preserve">
-    <value>Feil ved sletting av oppdateringsfilen!</value>
   </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>Nedlastingen er fullført!
@@ -1950,14 +1652,8 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
   <data name="UpdateFrequencyWeekly" xml:space="preserve">
     <value>Ukentlig</value>
   </data>
-  <data name="UpdateStartFailed" xml:space="preserve">
-    <value>Feil ved start av oppdatering!</value>
-  </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Bruk et annet brukernavn og/eller passord</value>
-  </data>
-  <data name="UseOnlyErrorsAndInfosPanel" xml:space="preserve">
-    <value>Bruk bare varslingspanelet (ingen popup-meldingsbokser)</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Bruker</value>
@@ -1992,9 +1688,6 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
   <data name="VncSetPropsFailed" xml:space="preserve">
     <value>VNC Set Props-handling mislyktes!</value>
   </data>
-  <data name="VncStartChatFailed" xml:space="preserve">
-    <value>VNC Start Chat mislyktes!</value>
-  </data>
   <data name="VncToggleSmartSizeFailed" xml:space="preserve">
     <value>VNC Vis/Skjul SmartSize mislyktes!</value>
   </data>
@@ -2006,15 +1699,6 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
   </data>
   <data name="Warnings" xml:space="preserve">
     <value>Advarsler</value>
-  </data>
-  <data name="WeifenLuoAttribution" xml:space="preserve">
-    <value>Bruker DockPanel Suite av [Weifen Luo]</value>
-  </data>
-  <data name="WriteLogFile" xml:space="preserve">
-    <value>Skriv loggfil (mRemoteNG.log)</value>
-  </data>
-  <data name="XULrunnerPath" xml:space="preserve">
-    <value>XULrunner filsti:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
@@ -2093,53 +1777,11 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="ImportFromFileMenuItem" xml:space="preserve">
     <value>Importer fra &amp;fil...</value>
   </data>
-  <data name="ImportLocationCommandButtons" xml:space="preserve">
-    <value>Under roten{0}{1}|Under den valgte mappen{0}{2}</value>
-  </data>
-  <data name="ImportLocationContent" xml:space="preserve">
-    <value>Hvor ønsker du å plassere de importerte elementene?</value>
-  </data>
-  <data name="ImportLocationMainInstruction" xml:space="preserve">
-    <value>Importplassering</value>
-  </data>
   <data name="ImportMenuItem" xml:space="preserve">
     <value>&amp;Import</value>
   </data>
   <data name="LoadFromSqlFailedContent" xml:space="preserve">
     <value>Tilkoblingsinformasjonen kunne ikke lastes fra SQL server.</value>
-  </data>
-  <data name="MenuSessionRetrieve" xml:space="preserve">
-    <value>Hent</value>
-  </data>
-  <data name="OptionsKeyboardButtonDelete" xml:space="preserve">
-    <value>&amp;Slett</value>
-  </data>
-  <data name="OptionsKeyboardButtonNew" xml:space="preserve">
-    <value>&amp;Ny</value>
-  </data>
-  <data name="OptionsKeyboardButtonReset" xml:space="preserve">
-    <value>&amp;Tilbakestill til standard</value>
-  </data>
-  <data name="OptionsKeyboardButtonResetAll" xml:space="preserve">
-    <value>Tilbakestill &amp;alt til standard</value>
-  </data>
-  <data name="OptionsKeyboardCommandsGroupTabs" xml:space="preserve">
-    <value>Faner</value>
-  </data>
-  <data name="OptionsKeyboardCommandsNextTab" xml:space="preserve">
-    <value>Neste fane</value>
-  </data>
-  <data name="OptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-    <value>Forrige fane</value>
-  </data>
-  <data name="OptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-    <value>Endre tastatursnarvei</value>
-  </data>
-  <data name="OptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-    <value>Tastatursnarveier</value>
-  </data>
-  <data name="OptionsTabKeyboard" xml:space="preserve">
-    <value>Tastatur</value>
   </data>
   <data name="PasswordStatusMustMatch" xml:space="preserve">
     <value>Begge passordene må være like.</value>
@@ -2173,9 +1815,6 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   </data>
   <data name="PropertyNameRedirectAudioCapture" xml:space="preserve">
     <value>Lydopptak</value>
-  </data>
-  <data name="PuttySessionSettings" xml:space="preserve">
-    <value>PuTTY sesjonsinnstillinger</value>
   </data>
   <data name="TitlePasswordWithName" xml:space="preserve">
     <value>Passord for {0}</value>
@@ -2246,32 +1885,14 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="PropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Inaktivitet i minutter</value>
   </data>
-  <data name="Accept" xml:space="preserve">
-    <value>Godta</value>
-  </data>
   <data name="Add" xml:space="preserve">
     <value>Legg til</value>
-  </data>
-  <data name="CredentialEditor" xml:space="preserve">
-    <value>Legitimasjonsredigering</value>
-  </data>
-  <data name="CredentialManager" xml:space="preserve">
-    <value>Legitimasjonshåndtering</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Fjern</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Tittel</value>
   </data>
-  <data name="PropertyDescriptionCredential" xml:space="preserve">
-    <value>Velg hvilken legitimasjon du vil bruke for denne tilkoblingen</value>
-  </data>
   <data name="ConfirmDeleteCredentialRecord" xml:space="preserve">
     <value>Er du sikker på at du vil fjerne legitimasjonen {0}?</value>
-  </data>
-  <data name="FindMatchingCredentialFailed" xml:space="preserve">
-    <value>Kunne ikke finne legitimasjon med ID "{0}" for tilkoblingen "{1}"</value>
   </data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Velg om du ønsker et varsel når RDP-sesjonen avsluttes på grunn av inaktivitet</value>
@@ -2330,73 +1951,17 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="AssignedCredential" xml:space="preserve">
     <value>Tilordnet legitimasjon</value>
   </data>
-  <data name="HttpsInsecureAllowAlways" xml:space="preserve">
-    <value>Tillat alltid</value>
-  </data>
-  <data name="HttpsInsecureAllowOnce" xml:space="preserve">
-    <value>Tillat én gang</value>
-  </data>
-  <data name="HttpsInsecureDontAllow" xml:space="preserve">
-    <value>Ikke tillat</value>
-  </data>
-  <data name="HttpsInsecurePrompt" xml:space="preserve">
-    <value>Tillat usikkert sertifikat for URL {0}?</value>
-  </data>
-  <data name="HttpsInsecurePromptTitle" xml:space="preserve">
-    <value>Tillat usikkert sertifikat</value>
-  </data>
-  <data name="RepositoryIsUnlocked" xml:space="preserve">
-    <value>Det valgte lageret er låst opp</value>
-  </data>
-  <data name="IncorrectPassword" xml:space="preserve">
-    <value>Feil passord</value>
-  </data>
-  <data name="Source" xml:space="preserve">
-    <value>Kilde</value>
-  </data>
-  <data name="Unlocking" xml:space="preserve">
-    <value>Låser opp</value>
-  </data>
-  <data name="UnlockCredentialRepository" xml:space="preserve">
-    <value>Lås opp legitimasjonslager</value>
-  </data>
-  <data name="Unlock" xml:space="preserve">
-    <value>Lås opp</value>
-  </data>
-  <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
-    <value>Spør om legitimasjonslagre skal låses opp ved oppstart</value>
-  </data>
   <data name="Credentials" xml:space="preserve">
     <value>Legitimasjoner</value>
   </data>
-  <data name="Upgrade" xml:space="preserve">
-    <value>Oppgrader</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Tilbake</value>
-  </data>
-  <data name="ConnectionFilePath" xml:space="preserve">
-    <value>Sti til tilkoblingsfil</value>
-  </data>
-  <data name="CreateAndOpenNewFile" xml:space="preserve">
-    <value>Lag og åpne ny fil</value>
-  </data>
   <data name="OpenADifferentFile" xml:space="preserve">
     <value>Åpne en annen fil</value>
-  </data>
-  <data name="CredentialManagerUpgradeDescription" xml:space="preserve">
-    <value>I v1.76 har vi introdusert et system for håndtering av legitimasjon. Denne funksjonaliteten krever en endring i hvordan legitimasjon lagres. For å fortsette må mRemoteNGs tilkoblingsfil oppgraderes, og denne endringen kan ikke angres.
-
-Denne siden vil lede deg gjennom stegene for å oppgradere tilkoblingsfilen, eller la deg åpne en annen tilkoblingsfil hvis du ikke ønsker å oppgradere.</value>
   </data>
   <data name="CredentialUnavailable" xml:space="preserve">
     <value>Legitimasjon ikke tilgjengelig</value>
   </data>
   <data name="OptionsThemeDeleteConfirmation" xml:space="preserve">
     <value>Vil du slette dette temaet?</value>
-  </data>
-  <data name="OptionsThemeEnableTheming" xml:space="preserve">
-    <value>Aktiver temaer</value>
   </data>
   <data name="OptionsThemeNewThemeCaption" xml:space="preserve">
     <value>Navn på nytt tema</value>
@@ -2409,9 +1974,6 @@ Denne siden vil lede deg gjennom stegene for å oppgradere tilkoblingsfilen, ell
   </data>
   <data name="OptionsThemeChangeWarning" xml:space="preserve">
     <value>Advarsel: applikasjonen må startes på nytt før endringer i tema trer i kraft.</value>
-  </data>
-  <data name="OptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>Ingen tema er lastet, sjekk at standard mRemoteNG-temaer finnes i 'themes'-mappen</value>
   </data>
   <data name="CouldNotFindExternalTool" xml:space="preserve">
     <value>Kunne ikke finne eksternt verktøy "{0}"</value>
@@ -2497,9 +2059,6 @@ Denne siden vil lede deg gjennom stegene for å oppgradere tilkoblingsfilen, ell
   <data name="OptionsPageTitle" xml:space="preserve">
     <value>mRemoteNG-valg</value>
   </data>
-  <data name="LoadBalanceInfoUseUtf8_Duplicate[1]" xml:space="preserve">
-    <value>Bruk UTF8-koding for RDP "Lastbalanseringsinformasjon"-egenskap</value>
-  </data>
   <data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
     <value>Lag et tomt panel når mRemoteNG starter</value>
   </data>
@@ -2527,9 +2086,6 @@ Denne siden vil lede deg gjennom stegene for å oppgradere tilkoblingsfilen, ell
   <data name="ConfirmCloseConnectionOthersInstruction" xml:space="preserve">
     <value>Er du sikker på at du vil lukke alle tilkoblinger bortsett fra "{0}"?</value>
   </data>
-  <data name="ConfirmCloseConnectionRightInstruction" xml:space="preserve">
-    <value>Er du sikker på at du vil lukke alle tilkoblinger til høyre for "{0}"?</value>
-  </data>
   <data name="AutomaticReconnectError" xml:space="preserve">
     <value>En feil oppsto under gjenoppretting av tilkobling til RDP-vert '{0}'</value>
   </data>
@@ -2556,9 +2112,6 @@ Denne siden vil lede deg gjennom stegene for å oppgradere tilkoblingsfilen, ell
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Plasser søkelinjen over tilkoblingstreet</value>
-  </data>
-  <data name="PortScanSinglePort" xml:space="preserve">
-    <value>For å skanne en enkelt port, velg bare "Start-port"</value>
   </data>
   <data name="TrackActiveConnectionInConnectionTree" xml:space="preserve">
     <value>Vis aktiv tilkobling i tilkoblingstreet</value>

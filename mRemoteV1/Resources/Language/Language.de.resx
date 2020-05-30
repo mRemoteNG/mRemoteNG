@@ -120,17 +120,8 @@
   <data name="About" xml:space="preserve">
     <value>Über</value>
   </data>
-  <data name="Active" xml:space="preserve">
-    <value>Aktiv</value>
-  </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Aktivität</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>Das Laden des Knotens über XML ist fehlgeschlagen!</value>
-  </data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-    <value>Das Laden des Knotens über SQL laden ist fehlgeschlagen!</value>
   </data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>Nur eine Instanz zulassen (mRemoteNG-Neustart benötigt)</value>
@@ -168,14 +159,8 @@
   <data name="Aspect" xml:space="preserve">
     <value>Aspekt</value>
   </data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Automatisch Sitzungsinformationen einholen</value>
-  </data>
   <data name="AutoSaveEvery" xml:space="preserve">
     <value>Automatisch speichern in Minuten (0 bedeutet deaktiviert):</value>
-  </data>
-  <data name="AutoSaveMins" xml:space="preserve">
-    <value>Minuten (0 bedeutet deaktiviert)</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Verfügbare Version</value>
@@ -231,10 +216,6 @@
   <data name="ButtonTestProxy" xml:space="preserve">
     <value>Proxy prüfen</value>
   </data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-    <value>Sie können keine Verbindungsdatei importieren.
-Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungsdateien!</value>
-  </data>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Die eingegebenen IP-Daten sind ungültig, kann den Port Scan nicht starten.</value>
   </data>
@@ -259,23 +240,11 @@ Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungsdateien!<
   <data name="CategoryRedirect" xml:space="preserve">
     <value>Umleitung</value>
   </data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-    <value>Diesen Bildschirm bei jedem Start anzeigen</value>
-  </data>
   <data name="CheckFailed" xml:space="preserve">
     <value>Prüfung fehlgeschlagen!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Prüfung erfolgreich!</value>
-  </data>
-  <data name="CcEOLFailed" xml:space="preserve">
-    <value>Die (RDP-) Sitzungsfunktion benötigt die Datei eolwtscom.dll. Diese muss korrekt registriert sein.
-Alle mRemoteNG-Pakete beinhalten diese Datei, jedoch muss sie, wenn Sie eines der nicht-Setup Pakete verwenden, manuell registriert werden.
-Öffnen Sie hierzu den Ausführen-Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\Programme\mRemoteNG\eolwtscom.dll" (Wobei c:\Programme\mRemoteNG\ Ihr mRemoteNG-Installationspfad ist).
-Wenn Sie noch immer Probleme mit der (RDP-) Sitzungsfunktion in mRemoteNG haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcEOLOK" xml:space="preserve">
-    <value>EOLWTSCOM wurde gefunden und scheint korrekt registriert zu sein.</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
     <value>ICA benötigt eine funktionierende XenDesktop-Online-Plugin-Installation und dass die Datei wfica.ocx korrekt registriert ist. Hier können Sie das Plugin herunterladen: http://www.citrix.com/download/
@@ -402,9 +371,6 @@ VncSharp Control Version {0}</value>
   <data name="ConfigUiLoadFailed" xml:space="preserve">
     <value>Laden des Konfigurationsfensters fehlgeschlagen!</value>
   </data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Möchten Sie die Verbindung "{0}" schließen?</value>
-  </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Sind Sie sicher, dass Sie das Panel "{0}" schließen möchten?
 Alle Verbindungen die es enthält werden ebenfalls geschlossen.</value>
@@ -457,11 +423,6 @@ Alle Verbindungen die es enthält werden ebenfalls geschlossen.</value>
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Öffnen der Verbindung fehlgeschlagen: Kein Hostname definiert!</value>
   </data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-    <value>RDP-Fehler!
-Fehler Code: {0}
-Fehler Beschreibung: {1}</value>
-  </data>
   <data name="Connections" xml:space="preserve">
     <value>Verbindungen</value>
   </data>
@@ -471,18 +432,12 @@ Fehler Beschreibung: {1}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>Sicherheitskopie der Verbindungsdatei konnte nicht erstellt werden!</value>
   </data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>Verbindungsdatei konnte nicht importiert werden!</value>
-  </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Verbindungsdatei "{0}" konnte nicht geladen werden!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Verbindungsdatei "{0}" konnte nicht geladen werden!
 Starte mit neuer Datei.</value>
-  </data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>Verbindungsdatei konnte nicht gespeichert werden!</value>
   </data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Verbindungsdatei konnte nicht als "{0}" gespeichert werden!</value>
@@ -495,9 +450,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>Verbindung zu {0} mit {1} wurde vom Benutzer {2} getrennt.  (Description: " &amp; Prot.InterfaceControl.Info.Description &amp; "; User Field: " &amp; Prot.InterfaceControl.Info.UserField &amp; ")"</value>
-  </data>
-  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
-    <value>Verbindung zu {0} mit {1} wurde vom Benutzer {2} getrennt.  (Beschreibung: "{3}"; Benutzer Feld: "{4}")</value>
   </data>
   <data name="ConnenctionCloseEvent" xml:space="preserve">
     <value>Ereignis Verbindung beenden</value>
@@ -513,9 +465,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="CurrentVersion" xml:space="preserve">
     <value>Aktuelle Version</value>
-  </data>
-  <data name="DefaultTheme" xml:space="preserve">
-    <value>Standard-Aussehen</value>
   </data>
   <data name="Detect" xml:space="preserve">
     <value>Erkennen</value>
@@ -571,12 +520,6 @@ Starte mit neuer Datei.</value>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>Die Datenbankversion {0} ist nicht kompatibel mit dieser Version von {1}.</value>
   </data>
-  <data name="ErrorCloneNodeFailed" xml:space="preserve">
-    <value>CloneNode (Tree.Node) ist fehlgeschlagen. {0}</value>
-  </data>
-  <data name="ErrorCode" xml:space="preserve">
-    <value>Fehler Nummer {0}.</value>
-  </data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>Die Verbindungsliste konnte nicht gespeichert werden.</value>
   </data>
@@ -604,14 +547,8 @@ Starte mit neuer Datei.</value>
   <data name="Export" xml:space="preserve">
     <value>Exportieren</value>
   </data>
-  <data name="ExportmRemoteXML" xml:space="preserve">
-    <value>mRemote/mRemoteNG XML exportieren</value>
-  </data>
   <data name="ExtApp" xml:space="preserve">
     <value>Externes Programm</value>
-  </data>
-  <data name="FAMFAMFAMAttribution" xml:space="preserve">
-    <value>Beinhaltet die Symbole von [FAMFAMFAM]</value>
   </data>
   <data name="FilterAll" xml:space="preserve">
     <value>Alle Dateien (*.*)</value>
@@ -628,9 +565,6 @@ Starte mit neuer Datei.</value>
   <data name="FilterRDP" xml:space="preserve">
     <value>RDP-Dateien (*.rdp)</value>
   </data>
-  <data name="FiltervRD2008CSV" xml:space="preserve">
-    <value>visionapp Remote Desktop 2008 CSV Dateien (*.csv)</value>
-  </data>
   <data name="FormatInherit" xml:space="preserve">
     <value>Vererbe {0}</value>
   </data>
@@ -645,9 +579,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="General" xml:space="preserve">
     <value>Allgemein</value>
-  </data>
-  <data name="GetConnectionInfoFromSqlFailed" xml:space="preserve">
-    <value>Das Laden der Verbindungsdaten über SQL ist fehlgeschlagen!</value>
   </data>
   <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
     <value>Fehler beim Laden des Verbindungseintrags für "{0}" von "{1}". {2}</value>
@@ -700,26 +631,11 @@ Starte mit neuer Datei.</value>
   <data name="ImportAD" xml:space="preserve">
     <value>Von Active Directory importieren</value>
   </data>
-  <data name="ImportExport" xml:space="preserve">
-    <value>Importieren/Exportieren</value>
-  </data>
-  <data name="ImportmRemoteXML" xml:space="preserve">
-    <value>mRemote/mRemoteNG XML importieren</value>
-  </data>
   <data name="ImportPortScan" xml:space="preserve">
     <value>Von Port Scan importieren</value>
   </data>
-  <data name="ImportRDPFiles" xml:space="preserve">
-    <value>Aus .RDP-Datei(en) importieren</value>
-  </data>
-  <data name="Inactive" xml:space="preserve">
-    <value>Inaktiv</value>
-  </data>
   <data name="Informations" xml:space="preserve">
     <value>Informationen</value>
-  </data>
-  <data name="InheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG ist aktuell</value>
   </data>
   <data name="IntAppDisposeFailed" xml:space="preserve">
     <value>Zerstören des Internen Programmes fehlgeschlagen!</value>
@@ -807,18 +723,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
     <value>Die lokale Datei existiert nicht!</value>
-  </data>
-  <data name="LogOff" xml:space="preserve">
-    <value>Abmelden</value>
-  </data>
-  <data name="LogWriteToFileFailed" xml:space="preserve">
-    <value>Schreiben des Report.log fehlgeschlagen!</value>
-  </data>
-  <data name="LogWriteToFileFinalLocationFailed" xml:space="preserve">
-    <value>Kann das Report.log nicht im Zielordner speichern!</value>
-  </data>
-  <data name="MagicLibraryAttribution" xml:space="preserve">
-    <value>Benutzt die Magic Bibliothek von [Crownwood Software]</value>
   </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Verbindungs-Panel hinzufügen</value>
@@ -910,9 +814,6 @@ Starte mit neuer Datei.</value>
   <data name="Options" xml:space="preserve">
     <value>Optionen</value>
   </data>
-  <data name="MenuPaste" xml:space="preserve">
-    <value>Einfügen</value>
-  </data>
   <data name="MenuPortScan" xml:space="preserve">
     <value>Port-Scan</value>
   </data>
@@ -949,17 +850,8 @@ Starte mit neuer Datei.</value>
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Verbindungsdatei speichern unter</value>
   </data>
-  <data name="MenuScreenshotManager" xml:space="preserve">
-    <value>Bildschirmschnappschuss-Verwaltung</value>
-  </data>
   <data name="MenuSendSpecialKeys" xml:space="preserve">
     <value>Tastenkombination senden (VNC)</value>
-  </data>
-  <data name="MenuSessions" xml:space="preserve">
-    <value>Sitzungen</value>
-  </data>
-  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
-    <value>Sitzungen and Bildschirmschnappschüsse</value>
   </data>
   <data name="MenuShowHelpText" xml:space="preserve">
     <value>&amp;Hilfetext anzeigen</value>
@@ -1018,9 +910,6 @@ Starte mit neuer Datei.</value>
   <data name="NewPanel" xml:space="preserve">
     <value>Neues Panel</value>
   </data>
-  <data name="NewRoot" xml:space="preserve">
-    <value>Neue Wurzel</value>
-  </data>
   <data name="NewTitle" xml:space="preserve">
     <value>Neuer Titel</value>
   </data>
@@ -1075,9 +964,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Kann das Port-Scan-Panel nicht laden!</value>
-  </data>
-  <data name="PropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(Diese Einstellungen werden nur gespeichert, wenn Sie mRemote XML als Dateiformat auswählen!)</value>
   </data>
   <data name="PropertyDescriptionAddress" xml:space="preserve">
     <value>Der Hostname oder die IP, zu der eine Verbinung aufgebaut werden soll.</value>
@@ -1390,9 +1276,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Setzen des Fokus fehlgeschlagen!</value>
   </data>
-  <data name="PuttyGetSessionsFailed" xml:space="preserve">
-    <value>Auslesen der PuTTY-Verbindungsliste fehlgeschlagen!</value>
-  </data>
   <data name="PuttyHandle" xml:space="preserve">
     <value>Putty Handle: {0}</value>
   </data>
@@ -1413,9 +1296,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
     <value>Anzeigen des PuTTY-Konfigurationsfensters fehlgeschlagen!</value>
-  </data>
-  <data name="PuttyStartFailed" xml:space="preserve">
-    <value>Konnte PuTTY nicht starten!</value>
   </data>
   <data name="PuttyStuff" xml:space="preserve">
     <value>--- PuTTY ---</value>
@@ -1465,18 +1345,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="RDP65536Colors" xml:space="preserve">
     <value>65536 Farben (16Bit)</value>
   </data>
-  <data name="RdpAddResolutionFailed" xml:space="preserve">
-    <value>Hinzufügen der Auflösung fehlgeschlagen!</value>
-  </data>
-  <data name="RdpAddResolutionsFailed" xml:space="preserve">
-    <value>Hinzufügen der Auflösungen fehlgeschlagen!</value>
-  </data>
-  <data name="RdpAddSessionFailed" xml:space="preserve">
-    <value>Hinzufügen der Sitzung ist fehlgeschlagen!</value>
-  </data>
-  <data name="RdpCloseConnectionFailed" xml:space="preserve">
-    <value>Schließen der RDP-Verbindung fehlgeschlagen!</value>
-  </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Konte das RDP-Plugin nicht einbinden, bitte prüfen Sie die mRemoteNG-Voraussetzungen.</value>
   </data>
@@ -1491,15 +1359,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Menüanimationen deaktivieren</value>
-  </data>
-  <data name="RDPDisableThemes" xml:space="preserve">
-    <value>Themen deaktivieren</value>
-  </data>
-  <data name="RDPDisableWallpaper" xml:space="preserve">
-    <value>Entferne Hintergrundbild</value>
-  </data>
-  <data name="RdpDisconnected" xml:space="preserve">
-    <value>RDP-Verbindung getrennt!</value>
   </data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
     <value>Trennen der Verbindung fehlgeschlagen, versuche zu schließen!</value>
@@ -1522,9 +1381,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="RdpErrorGetFailure" xml:space="preserve">
     <value>Fehler beim Auslesen der Fehlermeldung!</value>
   </data>
-  <data name="RdpErrorGetUnknown" xml:space="preserve">
-    <value>Ein unbekannter schwerer Fehler ist der RDP-Verbindung "{0}" aufgetreten!</value>
-  </data>
   <data name="RdpErrorOutOfMemory" xml:space="preserve">
     <value>Kein freier Speicher verfügbar.</value>
   </data>
@@ -1537,9 +1393,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Winsock-Initialisierung fehlgeschlagen!</value>
   </data>
-  <data name="RdpFileCouldNotBeImported" xml:space="preserve">
-    <value>RDP-Datei konnte nicht importiert werden!</value>
-  </data>
   <data name="RDPFitToPanel" xml:space="preserve">
     <value>An Panel anpassen</value>
   </data>
@@ -1551,9 +1404,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="RdpGatewayNotSupported" xml:space="preserve">
     <value>RDP-Gateway wird nicht unterstützt!</value>
-  </data>
-  <data name="RdpGetSessionsFailed" xml:space="preserve">
-    <value>Auslesen der RDP-Sitzungen fehlgeschlagen!</value>
   </data>
   <data name="RdpReconnectCount" xml:space="preserve">
     <value>RDP-Verbindungsversuche:</value>
@@ -1660,17 +1510,8 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="SendTo" xml:space="preserve">
     <value>Senden an...</value>
   </data>
-  <data name="SessionGetFailed" xml:space="preserve">
-    <value>Holen der Sitzung im Hintergrund fehlgeschlagen!</value>
-  </data>
-  <data name="SessionKillFailed" xml:space="preserve">
-    <value>Beenden der Sitzung im Hintergrund fehlgeschlagen!</value>
-  </data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Beim Anlegen einer neuen Verbindung Hostname wie Anzeigename setzen</value>
-  </data>
-  <data name="SettingMainFormTextFailed" xml:space="preserve">
-    <value>Setzen der Hauptformular-Texte fehlgeschlagen!</value>
   </data>
   <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
     <value>Konnte die Konfiguration nicht sichern oder das Tray Symbol entfernen!</value>
@@ -1705,17 +1546,11 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="SortDesc" xml:space="preserve">
     <value>Absteigend (Z-A)</value>
   </data>
-  <data name="SpecialKeys" xml:space="preserve">
-    <value>spezielle Tasten</value>
-  </data>
   <data name="SQLInfo" xml:space="preserve">
     <value>Für mehr Informationen bitte Hilfeeintrag lesen (Info - Help - Getting started - SQL Configuration)</value>
   </data>
   <data name="SQLServer" xml:space="preserve">
     <value>SQL-Server:</value>
-  </data>
-  <data name="SqlUpdateCheckUpdateAvailable" xml:space="preserve">
-    <value>SQL-Aktualisierungsprüfung beendet und es existiert eine Aktualisierung! Aktualisiere die Verbindungsdaten.</value>
   </data>
   <data name="Ssh1" xml:space="preserve">
     <value>SSH Version 1</value>
@@ -1725,12 +1560,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="SSHStartTransferBG" xml:space="preserve">
     <value>SSH Übertragung im Hintergrund fehlgeschlagen!</value>
-  </data>
-  <data name="SSHTranferSuccessful" xml:space="preserve">
-    <value>Übertragung erfolgreich!</value>
-  </data>
-  <data name="SSHTransferEndFailed" xml:space="preserve">
-    <value>SSH Abschluss der Übertragung fehlgeschlagen!</value>
   </data>
   <data name="SSHTransferFailed" xml:space="preserve">
     <value>SSH-Übertragung fehlgeschlagen.</value>
@@ -1765,114 +1594,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="TheFollowing" xml:space="preserve">
     <value>die folgenden:</value>
   </data>
-  <data name="ThemeCategoryConfigPanel" xml:space="preserve">
-    <value>Config-Panel</value>
-  </data>
-  <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
-    <value>Connections Panel</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Die Hintergrundfarbe des Config-Panels.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Die Farbe des Textes im Bedienfeld "Config".</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
-    <value>Die Farbe der Rasterlinien im Config-Panel</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Die Hintergrundfarbe des Bereichs Hilfe des Config-Panel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Die Farbe des Textes auf den Link "Hilfe" des Bereichs Config.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
-    <value>Die Farbe des Textes im Config-Panel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Die Hintergrundfarbe des Fensters Verbindungen.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
-    <value>Die Farbe des Textes im Bereich Verbindungen.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Die Farbe der Strukturlinien im Bereich Verbindungen.</value>
-  </data>
-  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
-    <value>Die Hintergrundfarbe der Menüs.</value>
-  </data>
-  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
-    <value>Die Farbe des Textes in den Menüs.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Die Hintergrundfarbe des Suchfelds.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
-    <value>Die Farbe des Textes in dem Suchfeld.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Die Farbe des Textes der Eingabeaufforderung im Suchfeld.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
-    <value>Die Hintergrundfarbe der Symbolleisten.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
-    <value>Die Farbe des Textes in den Symbolleisten.</value>
-  </data>
-  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
-    <value>Die Hintergrundfarbe des Hauptfensters.</value>
-  </data>
-  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Config-Panel-Hintergrundfarbe</value>
-  </data>
-  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Config-Panel-Kategorie-Textfarbe</value>
-  </data>
-  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
-    <value>Config-Panel-Grid-Linienfarbe</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Config-Panel-Hilfe-Hintergrundfarbe</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Config-Panel-Hilfe-Textfarbe</value>
-  </data>
-  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
-    <value>Config-Panel-Textfarbe</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Verbindungen-Panel-Hintergrund-Farbe</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
-    <value>Verbindungen-Panel-Textfarbe</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Verbindungen-Panel-Baumgrenze-Farbe</value>
-  </data>
-  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
-    <value>Menü-Hintergrund-Farbe</value>
-  </data>
-  <data name="ThemeNameMenuTextColor" xml:space="preserve">
-    <value>Menü-Textfarbe</value>
-  </data>
-  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Suchfeld-Hintergrundfarbe</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
-    <value>Suchfeld-Textfarbe</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Suchfeld-Prompt-Textfarbe</value>
-  </data>
-  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
-    <value>Symbolleiste-Hintergrundfarbe</value>
-  </data>
-  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
-    <value>Symbolleiste-Textfarbe</value>
-  </data>
-  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
-    <value>Fenster-Hintergrundfarbe</value>
-  </data>
   <data name="TitleError" xml:space="preserve">
     <value>Fehler ({0})</value>
   </data>
@@ -1891,14 +1612,8 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="Transfer" xml:space="preserve">
     <value>Übertragen</value>
   </data>
-  <data name="TransferFailed" xml:space="preserve">
-    <value>Übertragung fehlgeschlagen!</value>
-  </data>
   <data name="TryToIntegrate" xml:space="preserve">
     <value>Integration versuchen</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Typ</value>
   </data>
   <data name="UltraVncRepeater" xml:space="preserve">
     <value>Ultra Vnc Repeater</value>
@@ -1909,9 +1624,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="UncheckProperties" xml:space="preserve">
     <value>Deaktivieren Sie alle Eigenschaften, die nicht gespeichert werden sollen.</value>
   </data>
-  <data name="UnnamedTheme" xml:space="preserve">
-    <value>Unbenanntes Aussehen</value>
-  </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>mRemoteNG-Update verfügbar!</value>
   </data>
@@ -1920,12 +1632,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>Abschliessen der Prüfung auf Aktualisierung ist fehlgeschlagen!</value>
-  </data>
-  <data name="UpdateCheckFailed" xml:space="preserve">
-    <value>Prüfung auf Aktualisierung ist fehlgeschlagen!</value>
-  </data>
-  <data name="UpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG Portable Edition unterstützt derzeit keine automatische Updates.</value>
   </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>Download fertiggestellt!
@@ -1949,14 +1655,8 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="UpdateFrequencyWeekly" xml:space="preserve">
     <value>Wöchentlich</value>
   </data>
-  <data name="UpdateStartFailed" xml:space="preserve">
-    <value>Starten der Aktualisierung ist fehlgeschlagen!</value>
-  </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Anderen Benutzernamen und Passwort verwenden</value>
-  </data>
-  <data name="UseOnlyErrorsAndInfosPanel" xml:space="preserve">
-    <value>Nur Fehler- &amp;&amp; Informations-Panel benutzen (Keine Popups)</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Benutzer</value>
@@ -1991,9 +1691,6 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="VncSetPropsFailed" xml:space="preserve">
     <value>Setzen der VNC-Parameter fehlgeschlagen!</value>
   </data>
-  <data name="VncStartChatFailed" xml:space="preserve">
-    <value>Starten des VNC-Chat fehlgeschlagen!</value>
-  </data>
   <data name="VncToggleSmartSizeFailed" xml:space="preserve">
     <value>Setzen der automatischen Größenanpassung (SmartSize) fehlgeschlagen!</value>
   </data>
@@ -2005,15 +1702,6 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   </data>
   <data name="Warnings" xml:space="preserve">
     <value>Warnungen</value>
-  </data>
-  <data name="WeifenLuoAttribution" xml:space="preserve">
-    <value>Benutzt die DockPanel Suite von [Weifen Luo]</value>
-  </data>
-  <data name="WriteLogFile" xml:space="preserve">
-    <value>Logfile schreiben (mRemoteNG.log)</value>
-  </data>
-  <data name="XULrunnerPath" xml:space="preserve">
-    <value>XULrunner Pfad:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
@@ -2054,32 +1742,8 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="ImportFromFileMenuItem" xml:space="preserve">
     <value>Von &amp;Datei importieren</value>
   </data>
-  <data name="ImportLocationContent" xml:space="preserve">
-    <value>Wo sollen die importierten Elemente abgelegt werden?</value>
-  </data>
-  <data name="ImportLocationMainInstruction" xml:space="preserve">
-    <value>Import Ziel</value>
-  </data>
-  <data name="OptionsKeyboardButtonDelete" xml:space="preserve">
-    <value>&amp;Löschen</value>
-  </data>
-  <data name="OptionsKeyboardButtonNew" xml:space="preserve">
-    <value>&amp;Neu</value>
-  </data>
-  <data name="OptionsKeyboardButtonReset" xml:space="preserve">
-    <value>&amp;Neu</value>
-  </data>
-  <data name="OptionsKeyboardCommandsNextTab" xml:space="preserve">
-    <value>Nächster Tab</value>
-  </data>
-  <data name="OptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-    <value>Hotkeys ändern</value>
-  </data>
   <data name="OptionsProxyTesting" xml:space="preserve">
     <value>Testen...</value>
-  </data>
-  <data name="OptionsTabKeyboard" xml:space="preserve">
-    <value>Tastatur</value>
   </data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
     <value>Nach Updates suchen...</value>
@@ -2105,43 +1769,14 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="UpdatePortableDownloadComplete" xml:space="preserve">
     <value>Download abgeschlossen!</value>
   </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Entfernen</value>
-  </data>
   <data name="Title" xml:space="preserve">
     <value>Titel</value>
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Datei öffnen</value>
   </data>
-  <data name="HttpsInsecureAllowAlways" xml:space="preserve">
-    <value>Immer zulassen</value>
-  </data>
-  <data name="HttpsInsecureAllowOnce" xml:space="preserve">
-    <value>Einmal zulassen</value>
-  </data>
-  <data name="HttpsInsecureDontAllow" xml:space="preserve">
-    <value>Nicht erlauben</value>
-  </data>
-  <data name="IncorrectPassword" xml:space="preserve">
-    <value>Falsches Passwort</value>
-  </data>
-  <data name="Source" xml:space="preserve">
-    <value>Quelle</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Zurück</value>
-  </data>
-  <data name="CreateAndOpenNewFile" xml:space="preserve">
-    <value>Erstelle und öffne neue Datei</value>
-  </data>
   <data name="OpenADifferentFile" xml:space="preserve">
     <value>Andere Datei öffnen</value>
-  </data>
-  <data name="CredentialManagerUpgradeDescription" xml:space="preserve">
-    <value>In v1.76 haben wir ein Berechtigungsverwaltungssystem eingeführt. Diese Funktion erfordert eine erhebliche Änderung bei der Speicherung und Interaktion mit Anmeldeinformationen in mRemoteNG. Sie müssen eine Aktualisierung Ihrer mRemoteNG-Verbindungsdatei durchführen.
-
-Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdatei oder gibt Ihnen die Möglichkeit, eine andere Verbindungsdatei zu öffnen, wenn Sie das Upgrade nicht durchführen möchten.</value>
   </data>
   <data name="ConfigurationCreateNew" xml:space="preserve">
     <value>Neue Verbindungsdatei erstellen</value>
@@ -2157,12 +1792,6 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
   </data>
   <data name="LoadFromSqlFailedContent" xml:space="preserve">
     <value>Die Verbindungsinformationen konnten nicht vom SQL-Server geladen werden.</value>
-  </data>
-  <data name="OptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-    <value>Vorheriger Tab</value>
-  </data>
-  <data name="OptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-    <value>Tastenkombinationen</value>
   </data>
   <data name="PasswordStatusMustMatch" xml:space="preserve">
     <value>Die beide Passwörter müssen übereinstimmen.</value>
@@ -2230,35 +1859,14 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
   <data name="TimeoutInSeconds" xml:space="preserve">
     <value>Time-Out [Sekunden]</value>
   </data>
-  <data name="OptionsKeyboardButtonResetAll" xml:space="preserve">
-    <value>&amp;Alles zurücksetzen</value>
-  </data>
   <data name="PropertyNameAutomaticResize" xml:space="preserve">
     <value>Automatische Größenänderung</value>
-  </data>
-  <data name="PuttySessionSettings" xml:space="preserve">
-    <value>PuTTY Sitzungseinstellungen</value>
   </data>
   <data name="ShowOnToolbar" xml:space="preserve">
     <value>In der Symbolleiste anzeigen</value>
   </data>
-  <data name="Accept" xml:space="preserve">
-    <value>Akzeptieren</value>
-  </data>
-  <data name="CredentialEditor" xml:space="preserve">
-    <value>Anmeldeinformationen Editor</value>
-  </data>
   <data name="AssignedCredential" xml:space="preserve">
     <value>Zugewiesene Anmeldedaten</value>
-  </data>
-  <data name="HttpsInsecurePromptTitle" xml:space="preserve">
-    <value>Unsicheres Zertifikat zulassen?</value>
-  </data>
-  <data name="Unlock" xml:space="preserve">
-    <value>Freischalten</value>
-  </data>
-  <data name="OptionsThemeEnableTheming" xml:space="preserve">
-    <value>Themes aktivieren</value>
   </data>
   <data name="OptionsThemeNewThemeCaption" xml:space="preserve">
     <value>Neuer Thema Name</value>
@@ -2284,23 +1892,14 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
   <data name="LogTheseMessageTypes" xml:space="preserve">
     <value>Diese Nachrichtentypen protokollieren</value>
   </data>
-  <data name="OptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>Es werden keine Themes geladen, vergewissern Sie sich, dass das Standard mremoteNG-Theme im Ordner 'themes' vorhanden ist</value>
-  </data>
   <data name="LoginFailedForUser" xml:space="preserve">
     <value>Login fehlgeschlagen für Benutzer '{0}'.</value>
   </data>
   <data name="OptionsPageTitle" xml:space="preserve">
     <value>mRemoteNG Optionen</value>
   </data>
-  <data name="ImportLocationCommandButtons" xml:space="preserve">
-    <value>Unter dem Stamm {0} {1} | Unter dem ausgewählten Ordner {0} {2}</value>
-  </data>
   <data name="MenuNewExternalTool" xml:space="preserve">
     <value>Neues externes Tool</value>
-  </data>
-  <data name="MenuSessionRetrieve" xml:space="preserve">
-    <value>Abrufen</value>
   </data>
   <data name="UpdateGetChangeLogFailed" xml:space="preserve">
     <value>Der Changelog konnte nicht heruntergeladen werden.</value>
@@ -2317,15 +1916,8 @@ Diese Seite führt Sie durch den Prozess der Aktualisierung Ihrer Verbindungsdat
   <data name="Add" xml:space="preserve">
     <value>Hinzufügen</value>
   </data>
-  <data name="PropertyDescriptionCredential" xml:space="preserve">
-    <value>Wählen Sie aus, welche Anmeldeinformationen für diese Verbindung verwendet werden sollen.</value>
-  </data>
   <data name="ConfirmDeleteCredentialRecord" xml:space="preserve">
     <value>Möchten Sie die Anmeldeinformationen {0} wirklich löschen?</value>
-  </data>
-  <data name="FindMatchingCredentialFailed" xml:space="preserve">
-    <value>
-Es konnte kein Anmeldedatensatz mit der ID "{0}" für den Verbindungsdatensatz mit dem Namen "{1}" gefunden werden.</value>
   </data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Wählen Sie, ob eine Benachrichtigung empfangen werden soll, nachdem die RDP-Sitzung aufgrund von Inaktivität getrennt wurde</value>
@@ -2367,24 +1959,6 @@ Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   <data name="LogToAppDir" xml:space="preserve">
     <value>In das Anwendungsverzeichnis protokollieren</value>
   </data>
-  <data name="HttpsInsecurePrompt" xml:space="preserve">
-    <value>Unsicheres Zertifikat für URL zulassen: {0}?</value>
-  </data>
-  <data name="RepositoryIsUnlocked" xml:space="preserve">
-    <value>Das ausgewählte Repository ist entsperrt</value>
-  </data>
-  <data name="Unlocking" xml:space="preserve">
-    <value>Freischalten</value>
-  </data>
-  <data name="UnlockCredentialRepository" xml:space="preserve">
-    <value>Entsperre Credential Repository</value>
-  </data>
-  <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
-    <value>Auffordern das Credential Repository beim Start zu entsperren</value>
-  </data>
-  <data name="ConnectionFilePath" xml:space="preserve">
-    <value>Verbindungsdateipfad</value>
-  </data>
   <data name="CredentialUnavailable" xml:space="preserve">
     <value>Anmeldeinformationen nicht verfügbar</value>
   </data>
@@ -2415,14 +1989,8 @@ Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   <data name="ExportSelectedFolder" xml:space="preserve">
     <value>Den Aktuell gewählten Ordner exportieren</value>
   </data>
-  <data name="CredentialManager" xml:space="preserve">
-    <value>Anmeldeinformationen Manager</value>
-  </data>
   <data name="Popups" xml:space="preserve">
     <value>Pop-ups</value>
-  </data>
-  <data name="FAMFAMFAMAttributionURL" xml:space="preserve">
-    <value>http://www.famfamfam.com/</value>
   </data>
   <data name="ExportItems" xml:space="preserve">
     <value>Element exportieren</value>
@@ -2439,20 +2007,8 @@ Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   <data name="ICA" xml:space="preserve">
     <value>ICA</value>
   </data>
-  <data name="OptionsKeyboardCommandsGroupTabs" xml:space="preserve">
-    <value>Tabs</value>
-  </data>
-  <data name="WeifenLuoAttributionURL" xml:space="preserve">
-    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
-  </data>
   <data name="DownloadPortable" xml:space="preserve">
     <value>Download</value>
-  </data>
-  <data name="ID" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="ConfigurationFileNotFound" xml:space="preserve">
-    <value>Die Konfigurationsdatei fehlt.</value>
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Suchleiste über den Verbindungen anzeigen</value>
@@ -2473,9 +2029,6 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="EncryptionKeyDerivationIterations" xml:space="preserve">
     <value>Iterationen der Ableitungsfunktion</value>
-  </data>
-  <data name="LoadBalanceInfoUseUtf8_Duplicate[1]" xml:space="preserve">
-    <value>UTF8-Kodierung für RDP Eigenschaft "Load Balance Info" verwenden</value>
   </data>
   <data name="Credentials" xml:space="preserve">
     <value>Anmeldedaten</value>

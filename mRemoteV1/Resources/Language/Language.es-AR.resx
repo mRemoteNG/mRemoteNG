@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Active" xml:space="preserve">
-    <value>Activo</value>
-  </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Actividad</value>
-  </data>
   <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Propiedades por defecto</value>
   </data>
@@ -152,9 +146,6 @@
   </data>
   <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Varios</value>
-  </data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-    <value>Siempre mostrar esta pantalla al inicio</value>
   </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>no está correctamente instalado</value>
@@ -220,10 +211,6 @@ VncSharp Control {0}</value>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Click falló!</value>
   </data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>¿Desea cerrar la conexión:
-"{0}"?</value>
-  </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>¿Está seguro que desea cerrar el panel, "{0}"? Cualquier conexión que contenga el panel también estará cerrada.</value>
   </data>
@@ -257,11 +244,6 @@ VncSharp Control {0}</value>
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>No se puede abrir la conexión: ningún nombre de host especificado!</value>
   </data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-    <value>Error de RDP.
-Código de Error: {0} 
-Descripción del Error: {1}</value>
-  </data>
   <data name="Connections" xml:space="preserve">
     <value>Conexiones</value>
   </data>
@@ -271,14 +253,8 @@ Descripción del Error: {1}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>No se pudo crear copia de seguridad del archivo de conexiones!</value>
   </data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>No se pudo importar archivo de conexiones!</value>
-  </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>No se pudo cargar el archivo de conexiones "{0}"!</value>
-  </data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>No se pudo guardar el archivo de conexiones!</value>
   </data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>No se pudo guardar archivo de conexiones como "{0}"!</value>
@@ -291,9 +267,6 @@ Descripción del Error: {1}</value>
   </data>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>Conexión a {0} {1} vía cerrada por usuario {2}.</value>
-  </data>
-  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
-    <value>Conexión a {0} {1} vía cerrada por usuario {2}.  (Descripción: "{3}"; Campo de usuario: "{4}")</value>
   </data>
   <data name="ConnenctionCloseEvent" xml:space="preserve">
     <value>Evento de conexión cerrada</value>
@@ -348,12 +321,6 @@ Descripción del Error: {1}</value>
   </data>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>La versión de la base de datos {0} no es compatible con esta versión de {1}.</value>
-  </data>
-  <data name="ErrorCloneNodeFailed" xml:space="preserve">
-    <value>ClonarModulo (Tree.Node) falló. {0}</value>
-  </data>
-  <data name="ErrorCode" xml:space="preserve">
-    <value>Código de Error {0}.</value>
   </data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>La lista de conexiones no pudo ser guardada.</value>

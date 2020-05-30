@@ -120,20 +120,11 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="Active" xml:space="preserve">
-    <value>Active</value>
-  </data>
   <data name="ActiveDirectory" xml:space="preserve">
     <value>Active Directory</value>
   </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Activity</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML failed!</value>
-  </data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-    <value>AddNodesFromSQL failed!</value>
   </data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>Allow only a single instance of the application (mRemoteNG restart required)</value>
@@ -173,9 +164,6 @@
   </data>
   <data name="AutoSaveEvery" xml:space="preserve">
     <value>Auto save time in minutes (0 means disabled):</value>
-  </data>
-  <data name="AutoSaveMins" xml:space="preserve">
-    <value>Minutes (0 means disabled)</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Latest version</value>
@@ -234,10 +222,6 @@
   <data name="ButtonTestProxy" xml:space="preserve">
     <value>Test Proxy</value>
   </data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-    <value>You cannot import a normal connection file.
-Please use File - Open Connection File for normal connection files!</value>
-  </data>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Cannot start Port Scan, incorrect IP format!</value>
   </data>
@@ -262,23 +246,11 @@ Please use File - Open Connection File for normal connection files!</value>
   <data name="CategoryRedirect" xml:space="preserve">
     <value>Redirect</value>
   </data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-    <value>Always show this screen at startup</value>
-  </data>
   <data name="CheckFailed" xml:space="preserve">
     <value>Check failed!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Check succeeded!</value>
-  </data>
-  <data name="CcEOLFailed" xml:space="preserve">
-    <value>The (RDP) Sessions feature requires that you have a copy of eolwtscom.dll registered on your system.
-mRemoteNG ships with this component but it is not registered automatically if you do not use the mRemoteNG Installer.
-To register it manually, run the following command from an elevated command prompt: regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (where C:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
-If this check still fails or you are unable to use the (RDP) Sessions feature, please consult the at {0}.</value>
-  </data>
-  <data name="CcEOLOK" xml:space="preserve">
-    <value>EOLWTSCOM was found and seems to be registered properly.</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
     <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/</value>
@@ -409,10 +381,6 @@ VncSharp Control Version {0}</value>
   <data name="ConfigUiLoadFailed" xml:space="preserve">
     <value>Config UI load failed!</value>
   </data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Do you want to close the connection:
-"{0}"?</value>
-  </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Are you sure you want to close the panel, "{0}"? Any connections that it contains will also be closed.</value>
   </data>
@@ -464,11 +432,6 @@ VncSharp Control Version {0}</value>
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Cannot open connection: No hostname specified!</value>
   </data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-    <value>RDP error!
-Error Code: {0}
-Error Description: {1}</value>
-  </data>
   <data name="Connections" xml:space="preserve">
     <value>Connections</value>
   </data>
@@ -478,18 +441,12 @@ Error Description: {1}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>Couldn't create backup of connections file!</value>
   </data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>Couldn't import connections file!</value>
-  </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Connections file "{0}" could not be loaded!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Connections file "{0}" could not be loaded!
 Starting with new connections file.</value>
-  </data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>Couldn't save connections file!</value>
   </data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Couldn't save connections file as "{0}"!</value>
@@ -506,9 +463,6 @@ Starting with new connections file.</value>
   <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>Connection to {0} via {1} closed by user {2}.</value>
   </data>
-  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
-    <value>Connection to {0} via {1} closed by user {2}.  (Description: "{3}"; User Field: "{4}")</value>
-  </data>
   <data name="ConnenctionCloseEvent" xml:space="preserve">
     <value>Connection Event Closed</value>
   </data>
@@ -523,9 +477,6 @@ Starting with new connections file.</value>
   </data>
   <data name="CurrentVersion" xml:space="preserve">
     <value>Installed version</value>
-  </data>
-  <data name="DefaultTheme" xml:space="preserve">
-    <value>Default Theme</value>
   </data>
   <data name="Detect" xml:space="preserve">
     <value>Detect</value>
@@ -584,12 +535,6 @@ Starting with new connections file.</value>
   <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>The database version {0} is not compatible with this version of {1}.</value>
   </data>
-  <data name="ErrorCloneNodeFailed" xml:space="preserve">
-    <value>CloneNode (Tree.Node) failed . {0}</value>
-  </data>
-  <data name="ErrorCode" xml:space="preserve">
-    <value>Error code {0}.</value>
-  </data>
   <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>The connection list could not be saved.</value>
   </data>
@@ -636,9 +581,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ExportItems" xml:space="preserve">
     <value>Export Items</value>
   </data>
-  <data name="ExportmRemoteXML" xml:space="preserve">
-    <value>Export mRemote/mRemoteNG XML</value>
-  </data>
   <data name="ExportProperties" xml:space="preserve">
     <value>Export Properties</value>
   </data>
@@ -656,12 +598,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>New External Tool</value>
-  </data>
-  <data name="FAMFAMFAMAttribution" xml:space="preserve">
-    <value>Includes icons by [FAMFAMFAM]</value>
-  </data>
-  <data name="FAMFAMFAMAttributionURL" xml:space="preserve">
-    <value>http://www.famfamfam.com/</value>
   </data>
   <data name="FileFormatLabel" xml:space="preserve">
     <value>File &amp;Format:</value>
@@ -690,9 +626,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="FilterRDP" xml:space="preserve">
     <value>RDP Files (*.rdp)</value>
   </data>
-  <data name="FiltervRD2008CSV" xml:space="preserve">
-    <value>visionapp Remote Desktop 2008 CSV Files (*.csv)</value>
-  </data>
   <data name="FormatInherit" xml:space="preserve">
     <value>Inherit {0}</value>
   </data>
@@ -707,9 +640,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="General" xml:space="preserve">
     <value>General</value>
-  </data>
-  <data name="GetConnectionInfoFromSqlFailed" xml:space="preserve">
-    <value>Get Connection Info From SQL failed</value>
   </data>
   <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
     <value>An error occured while loading the connection entry for "{0}" from "{1}". {2}</value>
@@ -774,9 +704,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ImportAD" xml:space="preserve">
     <value>Import from Active Directory</value>
   </data>
-  <data name="ImportExport" xml:space="preserve">
-    <value>Import/Export</value>
-  </data>
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>An error occurred while importing the file "{0}".</value>
   </data>
@@ -786,35 +713,14 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ImportFromFileMenuItem" xml:space="preserve">
     <value>Import from &amp;File...</value>
   </data>
-  <data name="ImportLocationCommandButtons" xml:space="preserve">
-    <value>Under the root{0}{1}|Under the selected folder{0}{2}</value>
-  </data>
-  <data name="ImportLocationContent" xml:space="preserve">
-    <value>Where would you like the imported items to be placed?</value>
-  </data>
-  <data name="ImportLocationMainInstruction" xml:space="preserve">
-    <value>Import location</value>
-  </data>
   <data name="ImportMenuItem" xml:space="preserve">
     <value>&amp;Import</value>
-  </data>
-  <data name="ImportmRemoteXML" xml:space="preserve">
-    <value>Import mRemote/mRemoteNG XML</value>
   </data>
   <data name="ImportPortScan" xml:space="preserve">
     <value>Import from Port Scan</value>
   </data>
-  <data name="ImportRDPFiles" xml:space="preserve">
-    <value>Import from RDP file(s)</value>
-  </data>
-  <data name="Inactive" xml:space="preserve">
-    <value>Inactive</value>
-  </data>
   <data name="Informations" xml:space="preserve">
     <value>Informations</value>
-  </data>
-  <data name="InheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG is up to date</value>
   </data>
   <data name="IntAppDisposeFailed" xml:space="preserve">
     <value>Dispose of Int App process failed!</value>
@@ -905,21 +811,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
     <value>Local file does not exist!</value>
-  </data>
-  <data name="LogOff" xml:space="preserve">
-    <value>Logoff</value>
-  </data>
-  <data name="LogWriteToFileFailed" xml:space="preserve">
-    <value>Writing to report file failed!</value>
-  </data>
-  <data name="LogWriteToFileFinalLocationFailed" xml:space="preserve">
-    <value>Couldn't save report to final location.</value>
-  </data>
-  <data name="MagicLibraryAttribution" xml:space="preserve">
-    <value>Uses the Magic library by [Crownwood Software]</value>
-  </data>
-  <data name="MagicLibraryAttributionURL" xml:space="preserve">
-    <value>http://www.dotnetmagic.com/</value>
   </data>
   <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>Add Connection Panel</value>
@@ -1014,9 +905,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="Options" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="MenuPaste" xml:space="preserve">
-    <value>Paste</value>
-  </data>
   <data name="MenuPortScan" xml:space="preserve">
     <value>Port Scan</value>
   </data>
@@ -1053,20 +941,8 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Save Connection File As...</value>
   </data>
-  <data name="MenuScreenshotManager" xml:space="preserve">
-    <value>Screenshot Manager</value>
-  </data>
   <data name="MenuSendSpecialKeys" xml:space="preserve">
     <value>Send Special Keys (VNC)</value>
-  </data>
-  <data name="MenuSessionRetrieve" xml:space="preserve">
-    <value>Retrieve</value>
-  </data>
-  <data name="MenuSessions" xml:space="preserve">
-    <value>Sessions</value>
-  </data>
-  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
-    <value>Sessions and Screenshots</value>
   </data>
   <data name="MenuShowHelpText" xml:space="preserve">
     <value>&amp;Show Help Text</value>
@@ -1131,9 +1007,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="NewPanel" xml:space="preserve">
     <value>New Panel</value>
   </data>
-  <data name="NewRoot" xml:space="preserve">
-    <value>New Root</value>
-  </data>
   <data name="NewTitle" xml:space="preserve">
     <value>New Title</value>
   </data>
@@ -1168,38 +1041,8 @@ If you run into such an error, please create a new connection file!</value>
   <data name="OpenPorts" xml:space="preserve">
     <value>Open Ports</value>
   </data>
-  <data name="OptionsKeyboardButtonDelete" xml:space="preserve">
-    <value>&amp;Delete</value>
-  </data>
-  <data name="OptionsKeyboardButtonNew" xml:space="preserve">
-    <value>&amp;New</value>
-  </data>
-  <data name="OptionsKeyboardButtonReset" xml:space="preserve">
-    <value>&amp;Reset to Default</value>
-  </data>
-  <data name="OptionsKeyboardButtonResetAll" xml:space="preserve">
-    <value>Reset &amp;All to Default</value>
-  </data>
-  <data name="OptionsKeyboardCommandsGroupTabs" xml:space="preserve">
-    <value>Tabs</value>
-  </data>
-  <data name="OptionsKeyboardCommandsNextTab" xml:space="preserve">
-    <value>Next tab</value>
-  </data>
-  <data name="OptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-    <value>Previous tab</value>
-  </data>
-  <data name="OptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-    <value>Modify shortcut</value>
-  </data>
-  <data name="OptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard shortcuts</value>
-  </data>
   <data name="OptionsProxyTesting" xml:space="preserve">
     <value>Testing...</value>
-  </data>
-  <data name="OptionsTabKeyboard" xml:space="preserve">
-    <value>Keyboard</value>
   </data>
   <data name="OptionsTabTheme" xml:space="preserve">
     <value>Theme</value>
@@ -1230,9 +1073,6 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Couldn't load PortScan panel!</value>
-  </data>
-  <data name="PropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!)</value>
   </data>
   <data name="PropertyDescriptionAddress" xml:space="preserve">
     <value>Enter the hostname or ip you want to connect to.</value>
@@ -1568,9 +1408,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Couldn't set focus!</value>
   </data>
-  <data name="PuttyGetSessionsFailed" xml:space="preserve">
-    <value>Get Putty Sessions Failed!</value>
-  </data>
   <data name="PuttyHandle" xml:space="preserve">
     <value>Putty Handle: {0}</value>
   </data>
@@ -1586,17 +1423,11 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PuttySavedSessionsRootName" xml:space="preserve">
     <value>PuTTY Saved Sessions</value>
   </data>
-  <data name="PuttySessionSettings" xml:space="preserve">
-    <value>PuTTY Session Settings</value>
-  </data>
   <data name="PuttySettings" xml:space="preserve">
     <value>PuTTY Settings</value>
   </data>
   <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
     <value>Show PuTTY Settings Dialog failed!</value>
-  </data>
-  <data name="PuttyStartFailed" xml:space="preserve">
-    <value>Putty Start Failed!</value>
   </data>
   <data name="PuttyStuff" xml:space="preserve">
     <value>--- PuTTY Stuff ---</value>
@@ -1649,18 +1480,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="RDP65536Colors" xml:space="preserve">
     <value>65536 Colours (16-bit)</value>
   </data>
-  <data name="RdpAddResolutionFailed" xml:space="preserve">
-    <value>RDP Add Resolution failed!</value>
-  </data>
-  <data name="RdpAddResolutionsFailed" xml:space="preserve">
-    <value>RDP Add Resolutions failed!</value>
-  </data>
-  <data name="RdpAddSessionFailed" xml:space="preserve">
-    <value>Add Session failed</value>
-  </data>
-  <data name="RdpCloseConnectionFailed" xml:space="preserve">
-    <value>Close RDP Connection failed!</value>
-  </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Couldn't create RDP control, please check mRemoteNG requirements.</value>
   </data>
@@ -1675,15 +1494,6 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Disable Menu Animations</value>
-  </data>
-  <data name="RDPDisableThemes" xml:space="preserve">
-    <value>Disable Themes</value>
-  </data>
-  <data name="RDPDisableWallpaper" xml:space="preserve">
-    <value>Disable Wallpaper</value>
-  </data>
-  <data name="RdpDisconnected" xml:space="preserve">
-    <value>RDP disconnected!</value>
   </data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
     <value>RDP Disconnect failed, trying to close!</value>
@@ -1706,9 +1516,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="RdpErrorGetFailure" xml:space="preserve">
     <value>GetError failed (FatalErrors)</value>
   </data>
-  <data name="RdpErrorGetUnknown" xml:space="preserve">
-    <value>An unknown fatal RDP error has occurred.  Error code {0}.</value>
-  </data>
   <data name="RdpErrorOutOfMemory" xml:space="preserve">
     <value>An out-of-memory error has occurred.</value>
   </data>
@@ -1721,9 +1528,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Winsock initialization error.</value>
   </data>
-  <data name="RdpFileCouldNotBeImported" xml:space="preserve">
-    <value>Couldn't import rdp file!</value>
-  </data>
   <data name="RDPFitToPanel" xml:space="preserve">
     <value>Fit To Panel</value>
   </data>
@@ -1735,9 +1539,6 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="RdpGatewayNotSupported" xml:space="preserve">
     <value>RD Gateway is not supported!</value>
-  </data>
-  <data name="RdpGetSessionsFailed" xml:space="preserve">
-    <value>GetSessions failed!</value>
   </data>
   <data name="RdpReconnectCount" xml:space="preserve">
     <value>RDP reconnection count:</value>
@@ -1844,17 +1645,8 @@ If you run into such an error, please create a new connection file!</value>
   <data name="SendTo" xml:space="preserve">
     <value>Send To...</value>
   </data>
-  <data name="SessionGetFailed" xml:space="preserve">
-    <value>Get Sessions Background failed</value>
-  </data>
-  <data name="SessionKillFailed" xml:space="preserve">
-    <value>Kill Session Background failed</value>
-  </data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Set hostname like display name when creating or renaming connections</value>
-  </data>
-  <data name="SettingMainFormTextFailed" xml:space="preserve">
-    <value>Setting main form text failed</value>
   </data>
   <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
     <value>Couldn't save settings or dispose SysTray Icon!</value>
@@ -1889,17 +1681,11 @@ If you run into such an error, please create a new connection file!</value>
   <data name="SortDesc" xml:space="preserve">
     <value>Descending (Z-A)</value>
   </data>
-  <data name="SpecialKeys" xml:space="preserve">
-    <value>Special Keys</value>
-  </data>
   <data name="SQLInfo" xml:space="preserve">
     <value>Please see Help - Getting started - SQL Configuration for more Info!</value>
   </data>
   <data name="SQLServer" xml:space="preserve">
     <value>SQL Server</value>
-  </data>
-  <data name="SqlUpdateCheckUpdateAvailable" xml:space="preserve">
-    <value>SQL Update check finished and there is an update available! Going to refresh connections.</value>
   </data>
   <data name="Ssh1" xml:space="preserve">
     <value>SSH version 1</value>
@@ -1909,12 +1695,6 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="SSHStartTransferBG" xml:space="preserve">
     <value>SSH background transfer failed!</value>
-  </data>
-  <data name="SSHTranferSuccessful" xml:space="preserve">
-    <value>Transfer successful!</value>
-  </data>
-  <data name="SSHTransferEndFailed" xml:space="preserve">
-    <value>SSH Transfer End (UI.Window.SSHTransfer) failed!</value>
   </data>
   <data name="SSHTransferFailed" xml:space="preserve">
     <value>SSH transfer failed.</value>
@@ -1949,114 +1729,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="TheFollowing" xml:space="preserve">
     <value>The following:</value>
   </data>
-  <data name="ThemeCategoryConfigPanel" xml:space="preserve">
-    <value>Config Panel</value>
-  </data>
-  <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
-    <value>Connections Panel</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
-    <value>The background colour of the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>The colour of the category text in the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
-    <value>The colour of the grid lines in the config panel</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>The background colour of the help area of the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
-    <value>The colour of the text in the help area of the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
-    <value>The colour of the text in the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>The background colour of the connections panel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
-    <value>The colour of the text in the connections panel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>The colour of the tree lines in the connections panel.</value>
-  </data>
-  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
-    <value>The background colour of the menus.</value>
-  </data>
-  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
-    <value>The colour of the text in the menus.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
-    <value>The background colour of the search box.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
-    <value>The colour of the text in the search box.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
-    <value>The colour of the prompt text in the search box.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
-    <value>The background colour of the toolbars.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
-    <value>The colour of the text in the toolbars.</value>
-  </data>
-  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
-    <value>The background colour of the main window.</value>
-  </data>
-  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Config Panel Background Colour</value>
-  </data>
-  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Config Panel Category Text Colour</value>
-  </data>
-  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
-    <value>Config Panel Grid Line Colour</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Config Panel Help Background Colour</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Config Panel Help Text Colour</value>
-  </data>
-  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
-    <value>Config Panel Text Colour</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Connections Panel Background Colour</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
-    <value>Connections Panel Text Colour</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Connections Panel Tree Line Colour</value>
-  </data>
-  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
-    <value>Menu Background Colour</value>
-  </data>
-  <data name="ThemeNameMenuTextColor" xml:space="preserve">
-    <value>Menu Text Colour</value>
-  </data>
-  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Search Box Background Colour</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
-    <value>Search Box Text Colour</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Search Box Text Prompt Colour</value>
-  </data>
-  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
-    <value>Toolbar Background Colour</value>
-  </data>
-  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
-    <value>Toolbar Text Colour</value>
-  </data>
-  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
-    <value>Window Background Colour</value>
-  </data>
   <data name="TitleError" xml:space="preserve">
     <value>Error ({0})</value>
   </data>
@@ -2078,17 +1750,11 @@ If you run into such an error, please create a new connection file!</value>
   <data name="Transfer" xml:space="preserve">
     <value>Transfer</value>
   </data>
-  <data name="TransferFailed" xml:space="preserve">
-    <value>Transfer failed!</value>
-  </data>
   <data name="TryToIntegrate" xml:space="preserve">
     <value>Try to integrate</value>
   </data>
   <data name="ShowOnToolbar" xml:space="preserve">
     <value>Show On Toolbar</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Type</value>
   </data>
   <data name="UltraVncRepeater" xml:space="preserve">
     <value>Ultra VNC Repeater</value>
@@ -2098,9 +1764,6 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="UncheckProperties" xml:space="preserve">
     <value>Uncheck the properties you want not to be saved!</value>
-  </data>
-  <data name="UnnamedTheme" xml:space="preserve">
-    <value>Unnamed Theme</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>mRemoteNG requires an update</value>
@@ -2113,9 +1776,6 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="UpdateCheckingLabel" xml:space="preserve">
     <value>Checking for updates...</value>
-  </data>
-  <data name="UpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG Portable Edition does not currently support automatic updates.</value>
   </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>Download complete!
@@ -2178,9 +1838,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="VncSetPropsFailed" xml:space="preserve">
     <value>VNC Set Props Failed!</value>
   </data>
-  <data name="VncStartChatFailed" xml:space="preserve">
-    <value>VNC Start Chat Failed!</value>
-  </data>
   <data name="VncToggleSmartSizeFailed" xml:space="preserve">
     <value>VNC Toggle SmartSize Failed!</value>
   </data>
@@ -2192,15 +1849,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="Warnings" xml:space="preserve">
     <value>Warnings</value>
-  </data>
-  <data name="WeifenLuoAttribution" xml:space="preserve">
-    <value>Uses the DockPanel Suite by [Weifen Luo]</value>
-  </data>
-  <data name="WeifenLuoAttributionURL" xml:space="preserve">
-    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
-  </data>
-  <data name="XULrunnerPath" xml:space="preserve">
-    <value>XULrunner path:</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
@@ -2262,35 +1910,14 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="PropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Minutes to Idle</value>
   </data>
-  <data name="Accept" xml:space="preserve">
-    <value>Accept</value>
-  </data>
   <data name="Add" xml:space="preserve">
     <value>Add</value>
-  </data>
-  <data name="CredentialEditor" xml:space="preserve">
-    <value>Credential Editor</value>
-  </data>
-  <data name="CredentialManager" xml:space="preserve">
-    <value>Credential Manager</value>
-  </data>
-  <data name="ID" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Remove</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
   </data>
-  <data name="PropertyDescriptionCredential" xml:space="preserve">
-    <value>Select which credential to use for this connection.</value>
-  </data>
   <data name="ConfirmDeleteCredentialRecord" xml:space="preserve">
     <value>Are you sure you want to delete the credential record, {0}?</value>
-  </data>
-  <data name="FindMatchingCredentialFailed" xml:space="preserve">
-    <value>Could not find a credential record with ID matching "{0}" for the connection record named "{1}".</value>
   </data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Select whether to receive an alert after the RDP session disconnects due to inactivity</value>
@@ -2349,64 +1976,11 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="AssignedCredential" xml:space="preserve">
     <value>Assigned Credential</value>
   </data>
-  <data name="HttpsInsecureAllowAlways" xml:space="preserve">
-    <value>Allow Always</value>
-  </data>
-  <data name="HttpsInsecureAllowOnce" xml:space="preserve">
-    <value>Allow Once</value>
-  </data>
-  <data name="HttpsInsecureDontAllow" xml:space="preserve">
-    <value>Don't Allow</value>
-  </data>
-  <data name="HttpsInsecurePrompt" xml:space="preserve">
-    <value>Allow Insecure Certificate for URL: {0}?</value>
-  </data>
-  <data name="HttpsInsecurePromptTitle" xml:space="preserve">
-    <value>Allow Insecure Certificate?</value>
-  </data>
-  <data name="RepositoryIsUnlocked" xml:space="preserve">
-    <value>The selected repository is unlocked</value>
-  </data>
-  <data name="IncorrectPassword" xml:space="preserve">
-    <value>Incorrect password</value>
-  </data>
-  <data name="Source" xml:space="preserve">
-    <value>Source</value>
-  </data>
-  <data name="Unlocking" xml:space="preserve">
-    <value>Unlocking</value>
-  </data>
-  <data name="UnlockCredentialRepository" xml:space="preserve">
-    <value>Unlock Credential Repository</value>
-  </data>
-  <data name="Unlock" xml:space="preserve">
-    <value>Unlock</value>
-  </data>
-  <data name="PromptUnlockCredReposOnStartup" xml:space="preserve">
-    <value>Prompt to unlock credential repositories on startup</value>
-  </data>
   <data name="Credentials" xml:space="preserve">
     <value>Credentials</value>
   </data>
-  <data name="Upgrade" xml:space="preserve">
-    <value>Upgrade</value>
-  </data>
-  <data name="Back" xml:space="preserve">
-    <value>Back</value>
-  </data>
-  <data name="ConnectionFilePath" xml:space="preserve">
-    <value>Connection file path</value>
-  </data>
-  <data name="CreateAndOpenNewFile" xml:space="preserve">
-    <value>Create and open new file</value>
-  </data>
   <data name="OpenADifferentFile" xml:space="preserve">
     <value>Open a different file</value>
-  </data>
-  <data name="CredentialManagerUpgradeDescription" xml:space="preserve">
-    <value>In v1.76 we have introduced a credential management system. This feature requires a significant change in how we store and interact with credentials within mRemoteNG. You will be required to perform a one-way upgrade of your mRemoteNG connections file.
-
-This page will walk you through the process of upgrading your connections file or give you a chance to open a different connections file if you do not want to perform the upgrade.</value>
   </data>
   <data name="CredentialUnavailable" xml:space="preserve">
     <value>Credential not available</value>
@@ -2414,9 +1988,6 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="OptionsThemeDeleteConfirmation" xml:space="preserve">
     <value>Do you really want to delete the theme?</value>
-  </data>
-  <data name="OptionsThemeEnableTheming" xml:space="preserve">
-    <value>Enable themes</value>
   </data>
   <data name="OptionsThemeNewThemeCaption" xml:space="preserve">
     <value>New theme name</value>
@@ -2429,9 +2000,6 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="OptionsThemeChangeWarning" xml:space="preserve">
     <value>Warning: Restart is required to commit any theme configuration change.</value>
-  </data>
-  <data name="OptionsThemeErrorNoThemes" xml:space="preserve">
-    <value>No themes are loaded, check that the default mRemoteNG themes exist in the 'themes' folder</value>
   </data>
   <data name="CouldNotFindExternalTool" xml:space="preserve">
     <value>Could not find external tool with name "{0}"</value>
@@ -2517,9 +2085,6 @@ This page will walk you through the process of upgrading your connections file o
   <data name="OptionsPageTitle" xml:space="preserve">
     <value>mRemoteNG Options</value>
   </data>
-  <data name="LoadBalanceInfoUseUtf8_Duplicate[1]" xml:space="preserve">
-    <value>Use UTF8 encoding for RDP "Load Balance Info" property</value>
-  </data>
   <data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
     <value>Create an empty panel when mRemoteNG starts</value>
   </data>
@@ -2547,9 +2112,6 @@ This page will walk you through the process of upgrading your connections file o
   <data name="ConfirmCloseConnectionOthersInstruction" xml:space="preserve">
     <value>Are you sure you want to close all connections except for "{0}"?</value>
   </data>
-  <data name="ConfirmCloseConnectionRightInstruction" xml:space="preserve">
-    <value>Are you sure you want to close all connections to the right of "{0}"?</value>
-  </data>
   <data name="AutomaticReconnectError" xml:space="preserve">
     <value>An error occurred while trying to reconnect to RDP host '{0}'</value>
   </data>
@@ -2576,9 +2138,6 @@ This page will walk you through the process of upgrading your connections file o
   </data>
   <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
     <value>Place search bar above connection tree</value>
-  </data>
-  <data name="PortScanSinglePort" xml:space="preserve">
-    <value>To scan a single port, select the "First Port" only.</value>
   </data>
   <data name="TrackActiveConnectionInConnectionTree" xml:space="preserve">
     <value>Track active connection in the connection tree</value>
@@ -2701,9 +2260,6 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayPassword" xml:space="preserve">
     <value>Specifies the password of the Remote Desktop Gateway server.</value>
-  </data>
-  <data name="PropertyDescriptionRedirectMicrophones" xml:space="preserve">
-    <value>Select whether microphones should be shared.</value>
   </data>
   <data name="CloseToSysTray" xml:space="preserve">
     <value>Close to notification area</value>

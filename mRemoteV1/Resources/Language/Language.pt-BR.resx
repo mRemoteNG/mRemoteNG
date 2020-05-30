@@ -120,17 +120,8 @@
   <data name="About" xml:space="preserve">
     <value>Sobre</value>
   </data>
-  <data name="Active" xml:space="preserve">
-    <value>Ativo</value>
-  </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Atividade</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML falhou!</value>
-  </data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-    <value>AddNodesFromSQL falhou!</value>
   </data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>Permitir apenas uma única instância do aplicativo (É necessário reiniciar o mRemoteNG)</value>
@@ -165,14 +156,8 @@
   <data name="Aspect" xml:space="preserve">
     <value>Aspecto</value>
   </data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Obter automaticamente informações de sessão</value>
-  </data>
   <data name="AutoSaveEvery" xml:space="preserve">
     <value>Salvar automaticamente a cada:</value>
-  </data>
-  <data name="AutoSaveMins" xml:space="preserve">
-    <value>Minutos (0 significa desativado)</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Versão atual</value>
@@ -228,9 +213,6 @@
   <data name="ButtonTestProxy" xml:space="preserve">
     <value>Testar Proxy</value>
   </data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-    <value>Você não pode importar um arquivo de conexão normal. Por favor, use Arquivo - Carregar Conexões para os arquivos de conexão normal!</value>
-  </data>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Não é possível iniciar a varredura de portas, formato IP incorreto!</value>
   </data>
@@ -255,23 +237,11 @@
   <data name="CategoryRedirect" xml:space="preserve">
     <value>Redirecionar</value>
   </data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-    <value>Sempre mostrar esta tela na inicialização</value>
-  </data>
   <data name="CheckFailed" xml:space="preserve">
     <value>Falha na verificação!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Verificação com sucesso!</value>
-  </data>
-  <data name="CcEOLFailed" xml:space="preserve">
-    <value>O recurso de sessões (RDP) requer que você tenha uma cópia registrada do eolwtscom.dll no seu sistema. 
-mRemoteNG vem com este componente mas não o registra automaticamente a menos que você instale o pacote. 
-Para registrá-lo manualmente faça isso: Abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (onde c:\Program Files\mRemoteNG\ é o caminho para a instalação de mRemoteNG). 
-Se você ainda não conseguir passar por esta verificação ou não conseguir usar o recurso de sessões (RDP) no mRemoteNG, por favor, consulte o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcEOLOK" xml:space="preserve">
-    <value>EOLWTSCOM foi encontrada e parece ser registrado corretamente.</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
     <value>ICA requer que o XenDesktop Online Plugin esteja instalado e a biblioteca wfica.ocs registrada. Você pode baixar o cliente aqui: http://www.citrix.com/download/ 
@@ -361,10 +331,6 @@ Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteN
   <data name="ConfigUiLoadFailed" xml:space="preserve">
     <value>Config UI carregamento falhou!</value>
   </data>
-  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Você quer fechar a conexão:
-"{0}"?</value>
-  </data>
   <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Tem certeza que deseja fechar o painel, "{0}"? Todas as ligações ativas serão fechadas.</value>
   </data>
@@ -416,11 +382,6 @@ Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteN
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Não é possível abrir a conexão: nenhum nome de host especificado!</value>
   </data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-    <value>Erro RDP!
-Código de erro: {0}
-Descrição do erro: {1}</value>
-  </data>
   <data name="Connections" xml:space="preserve">
     <value>Conexões</value>
   </data>
@@ -430,16 +391,10 @@ Descrição do erro: {1}</value>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>Não foi possível criar o backup do arquivo de conexões!</value>
   </data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>Falha na importação do arquivo de conexões!</value>
-  </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Arquivo de conexões "{0}" não pôde ser carregado!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Arquivo de conexões "{0}" não pôde ser carregado! Começando com o novo arquivo de conexões.</value>
-  </data>
-  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>Não consegui salvar o arquivo de conexões!</value>
   </data>
 </root>

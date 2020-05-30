@@ -120,12 +120,6 @@
   <data name="About" xml:space="preserve">
     <value>Névjegy</value>
   </data>
-  <data name="Active" xml:space="preserve">
-    <value>Aktív</value>
-  </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Tevékenység</value>
-  </data>
   <data name="Always" xml:space="preserve">
     <value>Mindig</value>
   </data>
@@ -141,14 +135,8 @@
   <data name="AskUpdatesMainInstruction" xml:space="preserve">
     <value>Automatikus frissítés beállításai</value>
   </data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Munkamenet információk automatikus megszerzése</value>
-  </data>
   <data name="AutoSaveEvery" xml:space="preserve">
     <value>Automatikus mentés minden:</value>
-  </data>
-  <data name="AutoSaveMins" xml:space="preserve">
-    <value>Perc (0 - kikapcsolva)</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Aktuális verzió</value>
@@ -261,9 +249,6 @@
   <data name="HttpConnectFailed" xml:space="preserve">
     <value>A HTTP csatlakozás nem sikerült!</value>
   </data>
-  <data name="ImportExport" xml:space="preserve">
-    <value>Importálás/Exportálás</value>
-  </data>
   <data name="LabelAddress" xml:space="preserve">
     <value>Cím:</value>
   </data>
@@ -345,15 +330,6 @@
   <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Kapcsolatfájl mentése, mint...</value>
   </data>
-  <data name="MenuScreenshotManager" xml:space="preserve">
-    <value>Képernyőmentés kezelő</value>
-  </data>
-  <data name="MenuSessions" xml:space="preserve">
-    <value>Munkamenetek</value>
-  </data>
-  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
-    <value>Munkamanetek és képernyőmentések</value>
-  </data>
   <data name="MenuWebsite" xml:space="preserve">
     <value>Honlap</value>
   </data>
@@ -368,9 +344,6 @@
   </data>
   <data name="NewPanel" xml:space="preserve">
     <value>Új panel</value>
-  </data>
-  <data name="NewRoot" xml:space="preserve">
-    <value>Új gyökérelem</value>
   </data>
   <data name="NewTitle" xml:space="preserve">
     <value>Új cím</value>

@@ -141,108 +141,6 @@
   <data name="RDP65536Colors" xml:space="preserve">
     <value>65536 Colors (16-bit)</value>
   </data>
-  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
-    <value>The background color of the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>The color of the category text in the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
-    <value>The color of the grid lines in the config panel</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>The background color of the help area of the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
-    <value>The color of the text in the help area of the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
-    <value>The color of the text in the config panel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>The background color of the connections panel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
-    <value>The color of the text in the connections panel.</value>
-  </data>
-  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>The color of the tree lines in the connections panel.</value>
-  </data>
-  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
-    <value>The background color of the menus.</value>
-  </data>
-  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
-    <value>The color of the text in the menus.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
-    <value>The background color of the search box.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
-    <value>The color of the text in the search box.</value>
-  </data>
-  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
-    <value>The color of the prompt text in the search box.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
-    <value>The background color of the toolbars.</value>
-  </data>
-  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
-    <value>The color of the text in the toolbars.</value>
-  </data>
-  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
-    <value>The background color of the main window.</value>
-  </data>
-  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Config Panel Background Color</value>
-  </data>
-  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
-    <value>Config Panel Category Text Color</value>
-  </data>
-  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
-    <value>Config Panel Grid Line Color</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
-    <value>Config Panel Help Background Color</value>
-  </data>
-  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
-    <value>Config Panel Help Text Color</value>
-  </data>
-  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
-    <value>Config Panel Text Color</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
-    <value>Connections Panel Background Color</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
-    <value>Connections Panel Text Color</value>
-  </data>
-  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
-    <value>Connections Panel Tree Line Color</value>
-  </data>
-  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
-    <value>Menu Background Color</value>
-  </data>
-  <data name="ThemeNameMenuTextColor" xml:space="preserve">
-    <value>Menu Text Color</value>
-  </data>
-  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
-    <value>Search Box Background Color</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
-    <value>Search Box Text Color</value>
-  </data>
-  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
-    <value>Search Box Text Prompt Color</value>
-  </data>
-  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
-    <value>Toolbar Background Color</value>
-  </data>
-  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
-    <value>Toolbar Text Color</value>
-  </data>
-  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
-    <value>Window Background Color</value>
-  </data>
   <data name="ActiveDirectory" xml:space="preserve">
 		<value>Active Directory</value>
 	</data>
@@ -255,9 +153,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
 	</data>
   <data name="HttpInternetExplorer" xml:space="preserve">
 		<value>Internet Explorer</value>
-	</data>
-  <data name="ImportLocationCommandButtons" xml:space="preserve">
-		<value>Under the root{0}{1}|Under the selected folder{0}{2}</value>
 	</data>
   <data name="None" xml:space="preserve">
 		<value>None</value>
@@ -312,9 +207,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
 	</data>
   <data name="MenuCopyHostname" xml:space="preserve">
 		<value>Copy Hostname</value>
-	</data>
-  <data name="PortScanSinglePort" xml:space="preserve">
-		<value>To scan a single port, select the "First Port" only.</value>
 	</data>
   <data name="TrackActiveConnectionInConnectionTree" xml:space="preserve">
 		<value>Track active connection in the connection tree</value>

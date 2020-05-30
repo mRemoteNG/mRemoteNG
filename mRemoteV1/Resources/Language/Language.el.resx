@@ -120,17 +120,8 @@
   <data name="About" xml:space="preserve">
     <value>Σχετικά με</value>
   </data>
-  <data name="Active" xml:space="preserve">
-    <value>Ενεργό</value>
-  </data>
-  <data name="Activity" xml:space="preserve">
-    <value>Δραστηριότητα</value>
-  </data>
   <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML απέτυχε!</value>
-  </data>
-  <data name="AddNodesFromSqlFailed" xml:space="preserve">
-    <value>AddNodesFromSQL απέτυχε!</value>
   </data>
   <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>Επιτρέπετε μόνο ένα μόνο παράδειγμα της εφαρμογής (απαιτείται επανεκκίνηση του mRemoteNG)</value>
@@ -165,14 +156,8 @@
   <data name="Aspect" xml:space="preserve">
     <value>Πτυχή</value>
   </data>
-  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Αυτόματη λήψη πληροφοριών περιόδου</value>
-  </data>
   <data name="AutoSaveEvery" xml:space="preserve">
     <value>Αυτόματη αποθήκευση κάθε:</value>
-  </data>
-  <data name="AutoSaveMins" xml:space="preserve">
-    <value>Λεπτά (0 σημαίνει απενεργοποιημένο)</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Τρέχουσα έκδοση</value>
@@ -228,10 +213,6 @@
   <data name="ButtonTestProxy" xml:space="preserve">
     <value>Δοκιμή διακομιστή μεσολάβησης</value>
   </data>
-  <data name="CannotImportNormalSessionFile" xml:space="preserve">
-    <value>Δεν μπορείτε να εισαγάγετε ένα κανονικό αρχείο σύνδεσης.
-Παρακαλούμε χρησιμοποιήστε Αρχείο - Συνδέσεις φορτίου για τα κανονικά αρχεία σύνδεσης!</value>
-  </data>
   <data name="CannotStartPortScan" xml:space="preserve">
     <value>Δεν είναι δυνατή η εκκίνηση της σάρωσης υποδοχων, εσφαλμένη μορφή IP!</value>
   </data>
@@ -256,20 +237,11 @@
   <data name="CategoryRedirect" xml:space="preserve">
     <value>Ανακατεύθυνση</value>
   </data>
-  <data name="CcAlwaysShowScreen" xml:space="preserve">
-    <value>Πάντα εμφάνιση αυτής της οθόνης κατά την εκκίνηση</value>
-  </data>
   <data name="CheckFailed" xml:space="preserve">
     <value>Ο ελέγχος απέτυχε!</value>
   </data>
   <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Ο ελεγχος πέτυχε!</value>
-  </data>
-  <data name="CcEOLFailed" xml:space="preserve">
-    <value>Η δυνατότητα (RDP) συνεδρίες προϋποθέτει ότι έχετε μια εγγεγραμμένο αντίγραφο του eolwtscom.dll στο σύστημά σας. mRemoteNG πλοία με αυτό το στοιχείο αλλά θα δεν εγγραφείτε αυτόματα εκτός αν η εκτέλεση του πακέτου εγκατάστασης. Να εγγραφείτε δεν με μη αυτόματο τρόπο αυτό: Ανοίξτε στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (όπου c:\Program Files\mRemoteNG\ είναι η διαδρομή προς την εγκατάσταση mRemoteNG). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε τη δυνατότητα συνεδρίες (RDP) στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcEOLOK" xml:space="preserve">
-    <value>Το EOLWTSCOM βρέθηκε και φαίνεται να έχει καταχωρηθεί σωστά.</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
     <value>ICA απαιτεί ότι είναι εγκατεστημένο το XenDesktop Online Plugin και ότι καταχωρείται η βιβλιοθήκη wfica.ocx. Μπορείτε να κατεβάσετε τον πελάτη εδώ: http://www.citrix.com/download/ αν έχετε το XenDesktop Online Plugin εγκατασταθεί και ο έλεγχος συνεχίσει να αποτυγχάνει, προσπαθήστε να εγγραφείτε wfica.ocx με μη αυτόματο τρόπο. Να κάνει αυτό ανοίγω πάνω στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (όπου c:\Program Files\Citrix\ICA Client\ είναι η διαδρομή στην εγκατάσταση XenDesktop Online Plugin). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε ICA στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/"</value>
@@ -304,11 +276,6 @@
   <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Δεν μπορεί να ανοίχθει η σύνδεση: Το όνομα του κεντρικού υπολογιστή δεν ειναι καθορισμένο!</value>
   </data>
-  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
-    <value>RDP λάθος! 
-Κωδικός σφάλματος: {0} 
-Περιγραφή σφάλματος: {1}</value>
-  </data>
   <data name="Connections" xml:space="preserve">
     <value>Συνδέσεις</value>
   </data>
@@ -317,9 +284,6 @@
   </data>
   <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>Δεν ήταν δυνατή η δημιουργία αντιγράφων ασφαλείας των συνδέσεων αρχείου!</value>
-  </data>
-  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>Δεν ήταν δυνατή η εισαγωγή συνδέσεων αρχείου!</value>
   </data>
   <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Το αρχείο συνδέσεων "{0}" δεν μπορεί να φορτωθεί!</value>
