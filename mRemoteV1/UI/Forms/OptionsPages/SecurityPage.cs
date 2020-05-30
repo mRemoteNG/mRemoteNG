@@ -24,18 +24,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         [Browsable(false)]
         public override string PageName
         {
-            get => Language.strTabSecurity;
+            get => Language.TabSecurity;
             set { }
         }
 
         public override void ApplyLanguage()
         {
             base.ApplyLanguage();
-            chkEncryptCompleteFile.Text = Language.strEncryptCompleteConnectionFile;
-            labelBlockCipher.Text = Language.strEncryptionBlockCipherMode;
-            labelEncryptionEngine.Text = Language.strEncryptionEngine;
-            labelKdfIterations.Text = Language.strEncryptionKeyDerivationIterations;
-            groupAdvancedSecurityOptions.Text = Language.strAdvancedSecurityOptions;
+            chkEncryptCompleteFile.Text = Language.EncryptCompleteConnectionFile;
+            labelBlockCipher.Text = Language.EncryptionBlockCipherMode;
+            labelEncryptionEngine.Text = Language.EncryptionEngine;
+            labelKdfIterations.Text = Language.EncryptionKeyDerivationIterations;
+            groupAdvancedSecurityOptions.Text = Language.AdvancedSecurityOptions;
             btnTestSettings.Text = Language.TestSettings;
         }
 

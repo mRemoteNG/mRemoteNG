@@ -16,7 +16,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
     public enum Compression
     {
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strNoCompression))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.NoCompression))]
         CompNone = 99,
         [Description("0")] Comp0 = 0,
         [Description("1")] Comp1 = 1,
@@ -44,44 +44,44 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
     public enum AuthMode
     {
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strVnc))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Vnc))]
         AuthVNC,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strWindows))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Windows))]
         AuthWin
     }
 
     public enum ProxyType
     {
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strNone))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.None))]
         ProxyNone,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttp))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Http))]
         ProxyHTTP,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strSocks5))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Socks5))]
         ProxySocks5,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strUltraVncRepeater))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.UltraVncRepeater))]
         ProxyUltra
     }
 
     public enum Colors
     {
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strNormal))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Normal))]
         ColNormal,
         [Description("8-bit")] Col8Bit
     }
 
     public enum SmartSizeMode
     {
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strNoSmartSize))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.NoSmartSize))]
         SmartSNo,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strFree))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Free))]
         SmartSFree,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strAspect))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Aspect))]
         SmartSAspect
     }
 }

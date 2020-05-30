@@ -54,14 +54,14 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
                 if (isVerified == false)
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                        string.Format(Language.strErrorBadDatabaseVersion,
+                                                        string.Format(Language.ErrorBadDatabaseVersion,
                                                                       databaseVersion,
                                                                       GeneralAppInfo.ProductName));
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    string.Format(Language.strErrorVerifyDatabaseVersionFailed,
+                                                    string.Format(Language.ErrorVerifyDatabaseVersionFailed,
                                                                   ex.Message));
             }
 

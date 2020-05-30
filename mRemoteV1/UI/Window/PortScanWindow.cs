@@ -116,7 +116,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(Language.strPortScanCouldNotLoadPanel, ex);
+                Runtime.MessageCollector.AddExceptionMessage(Language.PortScanCouldNotLoadPanel, ex);
             }
         }
 
@@ -144,7 +144,7 @@ namespace mRemoteNG.UI.Window
                 }
                 else
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strCannotStartPortScan);
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.CannotStartPortScan);
                 }
             }
         }
@@ -160,19 +160,19 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            lblStartIP.Text = Language.strStartIP;
-            lblEndIP.Text = Language.strEndIP;
-            btnScan.Text = Language.strButtonScan;
-            btnImport.Text = Language.strButtonImport;
-            lblOnlyImport.Text = Language.strProtocolToImport;
-            clmHost.Text = Language.strColumnHostnameIP;
-            clmOpenPorts.Text = Language.strOpenPorts;
-            clmClosedPorts.Text = Language.strClosedPorts;
-            ngCheckFirstPort.Text = Language.strStartPort;
-            ngCheckLastPort.Text = Language.strEndPort;
-            lblTimeout.Text = Language.strTimeoutInSeconds;
-            TabText = Language.strMenuPortScan;
-            Text = Language.strMenuPortScan;
+            lblStartIP.Text = Language.StartIP;
+            lblEndIP.Text = Language.EndIP;
+            btnScan.Text = Language.ButtonScan;
+            btnImport.Text = Language.ButtonImport;
+            lblOnlyImport.Text = Language.ProtocolToImport;
+            clmHost.Text = Language.ColumnHostnameIP;
+            clmOpenPorts.Text = Language.OpenPorts;
+            clmClosedPorts.Text = Language.ClosedPorts;
+            ngCheckFirstPort.Text = Language.StartPort;
+            ngCheckLastPort.Text = Language.EndPort;
+            lblTimeout.Text = Language.TimeoutInSeconds;
+            TabText = Language.MenuPortScan;
+            Text = Language.MenuPortScan;
         }
 
         private void ShowImportControls(bool controlsVisible)
@@ -227,7 +227,7 @@ namespace mRemoteNG.UI.Window
 
         private void SwitchButtonText()
         {
-            btnScan.Text = _scanning ? Language.strButtonStop : Language.strButtonScan;
+            btnScan.Text = _scanning ? Language.ButtonStop : Language.ButtonScan;
 
             prgBar.Maximum = 100;
             prgBar.Value = 0;
@@ -266,7 +266,7 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strPortScanComplete);
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.PortScanComplete);
 
             _scanning = false;
             SwitchButtonText();

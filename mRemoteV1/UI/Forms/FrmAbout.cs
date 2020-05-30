@@ -20,18 +20,18 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            lblLicense.Text = Language.strLabelReleasedUnderGPL;
-            base.Text = Language.strAbout;
-            llChangelog.Text = Language.strChangelog;
-            llCredits.Text = Language.strCredits;
-            llLicense.Text = Language.strLicense;
+            lblLicense.Text = Language.LabelReleasedUnderGPL;
+            base.Text = Language.About;
+            llChangelog.Text = Language.Changelog;
+            llCredits.Text = Language.Credits;
+            llLicense.Text = Language.License;
             lblCopyright.Text = GeneralAppInfo.Copyright;
             lblVersion.Text = $@"Version {GeneralAppInfo.ApplicationVersion}";
             AddPortableString();
         }
 
         [Conditional("PORTABLE")]
-        private void AddPortableString() => lblTitle.Text += $@" {Language.strLabelPortableEdition}";
+        private void AddPortableString() => lblTitle.Text += $@" {Language.LabelPortableEdition}";
 
         private void ApplyTheme()
         {

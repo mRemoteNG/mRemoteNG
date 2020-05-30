@@ -16,7 +16,7 @@ namespace mRemoteNG.Security.PasswordCreation
                 throw new ArgumentException($"{nameof(minimumCount)} must be a positive value");
 
             _minimumCount = minimumCount;
-            ConstraintHint = string.Format(Language.strPasswordContainsLowerCaseConstraintHint, _minimumCount);
+            ConstraintHint = string.Format(Language.PasswordContainsLowerCaseConstraintHint, _minimumCount);
         }
 
         public bool Validate(SecureString password)

@@ -400,39 +400,39 @@ namespace mRemoteNG.UI.Controls
 
         private void ApplyLanguage()
         {
-            _cMenTreeConnect.Text = Language.strConnect;
-            _cMenTreeConnectWithOptions.Text = Language.strConnectWithOptions;
-            _cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.strConnectToConsoleSession;
+            _cMenTreeConnect.Text = Language.Connect;
+            _cMenTreeConnectWithOptions.Text = Language.ConnectWithOptions;
+            _cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.ConnectToConsoleSession;
             _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text =
-                Language.strDontConnectToConsoleSessionMenuItem;
-            _cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.strConnectInFullscreen;
-            _cMenTreeConnectWithOptionsNoCredentials.Text = Language.strConnectNoCredentials;
-            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.strChoosePanelBeforeConnecting;
+                Language.DontConnectToConsoleSessionMenuItem;
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.ConnectInFullscreen;
+            _cMenTreeConnectWithOptionsNoCredentials.Text = Language.ConnectNoCredentials;
+            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.ChoosePanelBeforeConnecting;
             _cMenTreeConnectWithOptionsViewOnly.Text = Language.ConnectInViewOnlyMode;
-            _cMenTreeDisconnect.Text = Language.strMenuDisconnect;
+            _cMenTreeDisconnect.Text = Language.MenuDisconnect;
 
-            _cMenTreeToolsExternalApps.Text = Language.strMenuExternalTools;
-            _cMenTreeToolsTransferFile.Text = Language.strMenuTransferFile;
+            _cMenTreeToolsExternalApps.Text = Language.MenuExternalTools;
+            _cMenTreeToolsTransferFile.Text = Language.MenuTransferFile;
 
-            _cMenTreeDuplicate.Text = Language.strDuplicate;
-            _cMenTreeRename.Text = Language.strRename;
-            _cMenTreeDelete.Text = Language.strMenuDelete;
-            _cMenTreeCopyHostname.Text = Language.strMenuCopyHostname;
+            _cMenTreeDuplicate.Text = Language.Duplicate;
+            _cMenTreeRename.Text = Language.Rename;
+            _cMenTreeDelete.Text = Language.MenuDelete;
+            _cMenTreeCopyHostname.Text = Language.MenuCopyHostname;
 
-            _cMenTreeImport.Text = Language.strImportMenuItem;
-            _cMenTreeImportFile.Text = Language.strImportFromFileMenuItem;
-            _cMenTreeImportActiveDirectory.Text = Language.strImportAD;
-            _cMenTreeImportPortScan.Text = Language.strImportPortScan;
-            _cMenTreeExportFile.Text = Language.strExportToFileMenuItem;
+            _cMenTreeImport.Text = Language.ImportMenuItem;
+            _cMenTreeImportFile.Text = Language.ImportFromFileMenuItem;
+            _cMenTreeImportActiveDirectory.Text = Language.ImportAD;
+            _cMenTreeImportPortScan.Text = Language.ImportPortScan;
+            _cMenTreeExportFile.Text = Language.ExportToFileMenuItem;
 
-            _cMenTreeAddConnection.Text = Language.strAddConnection;
-            _cMenTreeAddFolder.Text = Language.strAddFolder;
+            _cMenTreeAddConnection.Text = Language.AddConnection;
+            _cMenTreeAddFolder.Text = Language.AddFolder;
 
-            _cMenTreeToolsSort.Text = Language.strSort;
-            _cMenTreeToolsSortAscending.Text = Language.strSortAsc;
-            _cMenTreeToolsSortDescending.Text = Language.strSortDesc;
-            _cMenTreeMoveUp.Text = Language.strMoveUp;
-            _cMenTreeMoveDown.Text = Language.strMoveDown;
+            _cMenTreeToolsSort.Text = Language.Sort;
+            _cMenTreeToolsSortAscending.Text = Language.SortAsc;
+            _cMenTreeToolsSortDescending.Text = Language.SortDesc;
+            _cMenTreeMoveUp.Text = Language.MoveUp;
+            _cMenTreeMoveDown.Text = Language.MoveDown;
         }
 
         internal void ShowHideMenuItems()

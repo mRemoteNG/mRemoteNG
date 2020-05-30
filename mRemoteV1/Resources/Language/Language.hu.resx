@@ -117,322 +117,322 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="strAbout" xml:space="preserve">
+  <data name="About" xml:space="preserve">
     <value>Névjegy</value>
   </data>
-  <data name="strActive" xml:space="preserve">
+  <data name="Active" xml:space="preserve">
     <value>Aktív</value>
   </data>
-  <data name="strActivity" xml:space="preserve">
+  <data name="Activity" xml:space="preserve">
     <value>Tevékenység</value>
   </data>
-  <data name="strAddConnection" xml:space="preserve">
+  <data name="AddConnection" xml:space="preserve">
     <value>Új kapcsolat</value>
   </data>
-  <data name="strAddFolder" xml:space="preserve">
+  <data name="AddFolder" xml:space="preserve">
     <value>Új mappa</value>
   </data>
-  <data name="strAlways" xml:space="preserve">
+  <data name="Always" xml:space="preserve">
     <value>Mindig</value>
   </data>
-  <data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
+  <data name="AlwaysConnectEvenIfAuthFails" xml:space="preserve">
     <value>Kapcsolódj mindig, sikertelen hitelesítés esetén is</value>
   </data>
-  <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
+  <data name="AskUpdatesCommandAskLater" xml:space="preserve">
     <value>Kérdezz rá később</value>
   </data>
-  <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
+  <data name="AskUpdatesCommandRecommended" xml:space="preserve">
     <value>Javasolt beállítások használata</value>
   </data>
-  <data name="strAskUpdatesMainInstruction" xml:space="preserve">
+  <data name="AskUpdatesMainInstruction" xml:space="preserve">
     <value>Automatikus frissítés beállításai</value>
   </data>
-  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
+  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
     <value>Munkamenet információk automatikus megszerzése</value>
   </data>
-  <data name="strAutoSaveEvery" xml:space="preserve">
+  <data name="AutoSaveEvery" xml:space="preserve">
     <value>Automatikus mentés minden:</value>
   </data>
-  <data name="strAutoSaveMins" xml:space="preserve">
+  <data name="AutoSaveMins" xml:space="preserve">
     <value>Perc (0 - kikapcsolva)</value>
   </data>
-  <data name="strAvailableVersion" xml:space="preserve">
+  <data name="AvailableVersion" xml:space="preserve">
     <value>Aktuális verzió</value>
   </data>
-  <data name="strButtonBrowse" xml:space="preserve">
+  <data name="ButtonBrowse" xml:space="preserve">
     <value>&amp;Böngészés...</value>
   </data>
-  <data name="strButtonCancel" xml:space="preserve">
+  <data name="ButtonCancel" xml:space="preserve">
     <value>&amp;Mégsem</value>
   </data>
-  <data name="strButtonChange" xml:space="preserve">
+  <data name="ButtonChange" xml:space="preserve">
     <value>Módosít</value>
   </data>
-  <data name="strButtonClose" xml:space="preserve">
+  <data name="ButtonClose" xml:space="preserve">
     <value>Be&amp;zár</value>
   </data>
-  <data name="strButtonDisconnect" xml:space="preserve">
+  <data name="ButtonDisconnect" xml:space="preserve">
     <value>Kapcsolat bontása</value>
   </data>
-  <data name="strButtonIcon" xml:space="preserve">
+  <data name="ButtonIcon" xml:space="preserve">
     <value>Ikon</value>
   </data>
-  <data name="strButtonImport" xml:space="preserve">
+  <data name="ButtonImport" xml:space="preserve">
     <value>&amp;Improtálás</value>
   </data>
-  <data name="strButtonLaunchPutty" xml:space="preserve">
+  <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>PuTTY indítása</value>
   </data>
-  <data name="strButtonNew" xml:space="preserve">
+  <data name="ButtonNew" xml:space="preserve">
     <value>&amp;Új</value>
   </data>
-  <data name="strButtonOK" xml:space="preserve">
+  <data name="ButtonOK" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="strButtonProperties" xml:space="preserve">
+  <data name="ButtonProperties" xml:space="preserve">
     <value>Tulajdonságok</value>
   </data>
-  <data name="strCannotStartPortScan" xml:space="preserve">
+  <data name="CannotStartPortScan" xml:space="preserve">
     <value>Helytelen IP cím, a port szkennelés nem indítható!</value>
   </data>
-  <data name="strCategoryAppearance" xml:space="preserve">
+  <data name="CategoryAppearance" xml:space="preserve">
     <value>Megjelenés</value>
   </data>
-  <data name="strCategoryConnection" xml:space="preserve">
+  <data name="CategoryConnection" xml:space="preserve">
     <value>Kapcsolat</value>
   </data>
-  <data name="strCategoryCredentials" xml:space="preserve">
+  <data name="CategoryCredentials" xml:space="preserve">
     <value>Hitelesítés</value>
   </data>
-  <data name="strCategoryDisplay" xml:space="preserve">
+  <data name="CategoryDisplay" xml:space="preserve">
     <value>Képernyő</value>
   </data>
-  <data name="strCategoryGateway" xml:space="preserve">
+  <data name="CategoryGateway" xml:space="preserve">
     <value>Átjáró</value>
   </data>
-  <data name="strCategoryGeneral" xml:space="preserve">
+  <data name="CategoryGeneral" xml:space="preserve">
     <value>Általános</value>
   </data>
-  <data name="strCategoryMiscellaneous" xml:space="preserve">
+  <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>Egyéb</value>
   </data>
-  <data name="strCategoryProtocol" xml:space="preserve">
+  <data name="CategoryProtocol" xml:space="preserve">
     <value>Protokoll</value>
   </data>
-  <data name="strCategoryRedirect" xml:space="preserve">
+  <data name="CategoryRedirect" xml:space="preserve">
     <value>Átirányítás</value>
   </data>
-  <data name="strCcCheckFailed" xml:space="preserve">
+  <data name="CcCheckFailed" xml:space="preserve">
     <value>Az ellenőrzés sikertelen!</value>
   </data>
-  <data name="strCcCheckSucceeded" xml:space="preserve">
+  <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Az ellenőrzés sikeres!</value>
   </data>
-  <data name="strCheckboxDomain" xml:space="preserve">
+  <data name="CheckboxDomain" xml:space="preserve">
     <value>Tartomány</value>
   </data>
-  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+  <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Többé ne mutasd ezt az üzenetet.</value>
   </data>
-  <data name="strColumnFilename" xml:space="preserve">
+  <data name="ColumnFilename" xml:space="preserve">
     <value>Fájlnév</value>
   </data>
-  <data name="strColumnHostnameIP" xml:space="preserve">
+  <data name="ColumnHostnameIP" xml:space="preserve">
     <value>Kiszolgálónév/IP cím</value>
   </data>
-  <data name="strColumnMessage" xml:space="preserve">
+  <data name="ColumnMessage" xml:space="preserve">
     <value>Üzenet</value>
   </data>
-  <data name="strColumnUsername" xml:space="preserve">
+  <data name="ColumnUsername" xml:space="preserve">
     <value>Felhasználónév</value>
   </data>
-  <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
+  <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Nem értelmezhető parancssori argumentum!</value>
   </data>
-  <data name="strConnecting" xml:space="preserve">
+  <data name="Connecting" xml:space="preserve">
     <value>Kapcsolódás...</value>
   </data>
   <data name="ConnectionFailed" xml:space="preserve">
     <value>Sikertelen kapcsolódás!</value>
   </data>
-  <data name="strConnections" xml:space="preserve">
+  <data name="Connections" xml:space="preserve">
     <value>Kapcsolatok</value>
   </data>
-  <data name="strCurrentVersion" xml:space="preserve">
+  <data name="CurrentVersion" xml:space="preserve">
     <value>Telepített verzió</value>
   </data>
-  <data name="strDontConnectWhenAuthFails" xml:space="preserve">
+  <data name="DontConnectWhenAuthFails" xml:space="preserve">
     <value>Ne kapcsolódj sikertelen hitelesítéskor</value>
   </data>
-  <data name="strDoubleClickTabClosesIt" xml:space="preserve">
+  <data name="DoubleClickTabClosesIt" xml:space="preserve">
     <value>Duplaklikk a fülön bezárja azt</value>
   </data>
-  <data name="strExperimental" xml:space="preserve">
+  <data name="Experimental" xml:space="preserve">
     <value>Kísérleti</value>
   </data>
-  <data name="strFullscreen" xml:space="preserve">
+  <data name="Fullscreen" xml:space="preserve">
     <value>Teljes képernyő</value>
   </data>
-  <data name="strGeneral" xml:space="preserve">
+  <data name="General" xml:space="preserve">
     <value>Általános</value>
   </data>
-  <data name="strGroupboxFiles" xml:space="preserve">
+  <data name="GroupboxFiles" xml:space="preserve">
     <value>Fájlok</value>
   </data>
-  <data name="strHttpConnectFailed" xml:space="preserve">
+  <data name="HttpConnectFailed" xml:space="preserve">
     <value>A HTTP csatlakozás nem sikerült!</value>
   </data>
-  <data name="strImportExport" xml:space="preserve">
+  <data name="ImportExport" xml:space="preserve">
     <value>Importálás/Exportálás</value>
   </data>
-  <data name="strKeysCtrlAltDel" xml:space="preserve">
+  <data name="KeysCtrlAltDel" xml:space="preserve">
     <value>CTRL-ALT-DEL</value>
   </data>
-  <data name="strKeysCtrlEsc" xml:space="preserve">
+  <data name="KeysCtrlEsc" xml:space="preserve">
     <value>CONTROL-ESC</value>
   </data>
-  <data name="strLabelAddress" xml:space="preserve">
+  <data name="LabelAddress" xml:space="preserve">
     <value>Cím:</value>
   </data>
-  <data name="strLabelDisplayName" xml:space="preserve">
+  <data name="LabelDisplayName" xml:space="preserve">
     <value>Megjelenítendő név</value>
   </data>
-  <data name="strLabelDomain" xml:space="preserve">
+  <data name="LabelDomain" xml:space="preserve">
     <value>Tartomány:</value>
   </data>
-  <data name="strLabelFilename" xml:space="preserve">
+  <data name="LabelFilename" xml:space="preserve">
     <value>Fájlnév:</value>
   </data>
-  <data name="strLabelHostname" xml:space="preserve">
+  <data name="LabelHostname" xml:space="preserve">
     <value>Hosztnév:</value>
   </data>
-  <data name="strLabelOptions" xml:space="preserve">
+  <data name="LabelOptions" xml:space="preserve">
     <value>Opciók:</value>
   </data>
-  <data name="strLabelPassword" xml:space="preserve">
+  <data name="LabelPassword" xml:space="preserve">
     <value>Jelszó:</value>
   </data>
-  <data name="strLabelPort" xml:space="preserve">
+  <data name="LabelPort" xml:space="preserve">
     <value>Port:</value>
   </data>
-  <data name="strLabelPortableEdition" xml:space="preserve">
+  <data name="LabelPortableEdition" xml:space="preserve">
     <value>Hordozható kiadás</value>
   </data>
-  <data name="strLabelProtocol" xml:space="preserve">
+  <data name="LabelProtocol" xml:space="preserve">
     <value>Protokoll:</value>
   </data>
-  <data name="strLabelServerStatus" xml:space="preserve">
+  <data name="LabelServerStatus" xml:space="preserve">
     <value>Szerver állapot:</value>
   </data>
-  <data name="strLabelSQLDatabaseName" xml:space="preserve">
+  <data name="LabelSQLDatabaseName" xml:space="preserve">
     <value>Adatbázis:</value>
   </data>
-  <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
+  <data name="LabelSQLServerDatabaseName" xml:space="preserve">
     <value>Adatbázis:</value>
   </data>
-  <data name="strLabelUsername" xml:space="preserve">
+  <data name="LabelUsername" xml:space="preserve">
     <value>Felhasználónév:</value>
   </data>
-  <data name="strLabelVerify" xml:space="preserve">
+  <data name="LabelVerify" xml:space="preserve">
     <value>Ellenőrzés:</value>
   </data>
-  <data name="strLanguage" xml:space="preserve">
+  <data name="LanguageString" xml:space="preserve">
     <value>Nyelv</value>
   </data>
-  <data name="strLanguageDefault" xml:space="preserve">
+  <data name="LanguageDefault" xml:space="preserve">
     <value>(Automatikus észlelés)</value>
   </data>
-  <data name="strMenuAbout" xml:space="preserve">
+  <data name="MenuAbout" xml:space="preserve">
     <value>Névjegy</value>
   </data>
-  <data name="strMenuCheckForUpdates" xml:space="preserve">
+  <data name="MenuCheckForUpdates" xml:space="preserve">
     <value>Frissítés keresése</value>
   </data>
-  <data name="strMenuJumpTo" xml:space="preserve">
+  <data name="MenuJumpTo" xml:space="preserve">
     <value>Ugrás</value>
   </data>
-  <data name="strMenuLaunchExternalTool" xml:space="preserve">
+  <data name="MenuLaunchExternalTool" xml:space="preserve">
     <value>Külső eszköz indítása</value>
   </data>
-  <data name="strMenuNewConnectionFile" xml:space="preserve">
+  <data name="MenuNewConnectionFile" xml:space="preserve">
     <value>Új kapcsolatfájl</value>
   </data>
-  <data name="strMenuNewExternalTool" xml:space="preserve">
+  <data name="MenuNewExternalTool" xml:space="preserve">
     <value>Új külső eszköz</value>
   </data>
-  <data name="strMenuNotifications" xml:space="preserve">
+  <data name="MenuNotifications" xml:space="preserve">
     <value>Értesítések</value>
   </data>
-  <data name="strMenuOpenConnectionFile" xml:space="preserve">
+  <data name="MenuOpenConnectionFile" xml:space="preserve">
     <value>Kapcsolatfájl megnyitása...</value>
   </data>
-  <data name="strMenuOptions" xml:space="preserve">
+  <data name="MenuOptions" xml:space="preserve">
     <value>Opciók</value>
   </data>
-  <data name="strMenuReconnect" xml:space="preserve">
+  <data name="MenuReconnect" xml:space="preserve">
     <value>Újrakapcsolódás</value>
   </data>
-  <data name="strMenuRename" xml:space="preserve">
+  <data name="MenuRename" xml:space="preserve">
     <value>Átnevezés</value>
   </data>
-  <data name="strMenuRenameConnection" xml:space="preserve">
+  <data name="MenuRenameConnection" xml:space="preserve">
     <value>Kapcsolat átnevezése</value>
   </data>
-  <data name="strMenuRenameFolder" xml:space="preserve">
+  <data name="MenuRenameFolder" xml:space="preserve">
     <value>Könyvtár átnevezése</value>
   </data>
-  <data name="strMenuRenameTab" xml:space="preserve">
+  <data name="MenuRenameTab" xml:space="preserve">
     <value>Fül átnevezése</value>
   </data>
-  <data name="strMenuReportBug" xml:space="preserve">
+  <data name="MenuReportBug" xml:space="preserve">
     <value>Hibabejelentés</value>
   </data>
-  <data name="strMenuResetLayout" xml:space="preserve">
+  <data name="MenuResetLayout" xml:space="preserve">
     <value>Elrendezés alaphelyzetbe állítása</value>
   </data>
-  <data name="strMenuSaveConnectionFile" xml:space="preserve">
+  <data name="MenuSaveConnectionFile" xml:space="preserve">
     <value>Kapcsolatfájl mentése</value>
   </data>
-  <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
+  <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>Kapcsolatfájl mentése, mint...</value>
   </data>
-  <data name="strMenuScreenshot" xml:space="preserve">
+  <data name="MenuScreenshot" xml:space="preserve">
     <value>Képernyőmentés</value>
   </data>
-  <data name="strMenuScreenshotManager" xml:space="preserve">
+  <data name="MenuScreenshotManager" xml:space="preserve">
     <value>Képernyőmentés kezelő</value>
   </data>
-  <data name="strMenuSessions" xml:space="preserve">
+  <data name="MenuSessions" xml:space="preserve">
     <value>Munkamenetek</value>
   </data>
-  <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
+  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
     <value>Munkamanetek és képernyőmentések</value>
   </data>
-  <data name="strMenuWebsite" xml:space="preserve">
+  <data name="MenuWebsite" xml:space="preserve">
     <value>Honlap</value>
   </data>
-  <data name="strNever" xml:space="preserve">
+  <data name="Never" xml:space="preserve">
     <value>Soha</value>
   </data>
-  <data name="strNewConnection" xml:space="preserve">
+  <data name="NewConnection" xml:space="preserve">
     <value>Új kapcsolat</value>
   </data>
-  <data name="strNewFolder" xml:space="preserve">
+  <data name="NewFolder" xml:space="preserve">
     <value>Új mappa</value>
   </data>
-  <data name="strNewPanel" xml:space="preserve">
+  <data name="NewPanel" xml:space="preserve">
     <value>Új panel</value>
   </data>
-  <data name="strNewRoot" xml:space="preserve">
+  <data name="NewRoot" xml:space="preserve">
     <value>Új gyökérelem</value>
   </data>
-  <data name="strNewTitle" xml:space="preserve">
+  <data name="NewTitle" xml:space="preserve">
     <value>Új cím</value>
   </data>
-  <data name="strNo" xml:space="preserve">
+  <data name="No" xml:space="preserve">
     <value>Nem</value>
   </data>
-  <data name="strUseSQLServer" xml:space="preserve">
+  <data name="UseSQLServer" xml:space="preserve">
     <value>SQL szerver használata a kapcsolatok kezelésére</value>
   </data>
 </root>

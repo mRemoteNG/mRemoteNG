@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Forms
         private readonly string _pageName;
         private readonly DisplayProperties _display = new DisplayProperties();
 
-        public FrmOptions() : this(Language.strStartupExit)
+        public FrmOptions() : this(Language.StartupExit)
         {
         }
 
@@ -36,10 +36,10 @@ namespace mRemoteNG.UI.Forms
             // ApplyLanguage();
             // Handle the main page here and the individual pages in
             // AddOptionsPagesToListView()  -- one less foreach loop....
-            Text = Language.strOptionsPageTitle;
-            btnOK.Text = Language.strButtonOK;
-            btnCancel.Text = Language.strButtonCancel;
-            btnApply.Text = Language.strButtonApply;
+            Text = Language.OptionsPageTitle;
+            btnOK.Text = Language.ButtonOK;
+            btnCancel.Text = Language.ButtonCancel;
+            btnApply.Text = Language.ButtonApply;
             ApplyTheme();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
@@ -56,7 +56,7 @@ namespace mRemoteNG.UI.Forms
 #if false
         private void ApplyLanguage()
         {
-            Text = Language.strOptionsPageTitle;
+            Text = Language.OptionsPageTitle;
             foreach (var optionPage in _pages.Values)
             {
                 optionPage.ApplyLanguage();

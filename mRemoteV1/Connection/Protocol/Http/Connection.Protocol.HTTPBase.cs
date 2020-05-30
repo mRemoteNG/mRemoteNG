@@ -42,7 +42,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectionFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpConnectionFailed, ex);
             }
         }
 
@@ -93,7 +93,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpSetPropsFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpSetPropsFailed, ex);
                 return false;
             }
         }
@@ -120,7 +120,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpConnectFailed, ex);
                 return false;
             }
         }
@@ -164,7 +164,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHTTPFailedURLBuild, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HTTPFailedURLBuild, ex);
                 return string.Empty;
             }
         }
@@ -241,7 +241,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpDocumentTileChangeFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpDocumentTileChangeFailed, ex);
             }
         }
 
@@ -273,7 +273,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpDocumentTileChangeFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpDocumentTileChangeFailed, ex);
             }
         }
 
@@ -283,10 +283,10 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         public enum RenderingEngine
         {
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpInternetExplorer))]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpInternetExplorer))]
             IE = 1,
 
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpCEF))]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpCEF))]
             CEF = 2
         }
 

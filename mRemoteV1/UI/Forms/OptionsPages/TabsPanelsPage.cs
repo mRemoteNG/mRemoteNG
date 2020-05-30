@@ -11,7 +11,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.strTabsAndPanels.Replace("&&", "&");
+            get => Language.TabsAndPanels.Replace("&&", "&");
             set { }
         }
 
@@ -19,16 +19,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            chkAlwaysShowPanelTabs.Text = Language.strAlwaysShowPanelTabs;
-            chkAlwaysShowConnectionTabs.Text = Language.strAlwaysShowConnectionTabs;
-            chkOpenNewTabRightOfSelected.Text = Language.strOpenNewTabRight;
-            chkShowLogonInfoOnTabs.Text = Language.strShowLogonInfoOnTabs;
-            chkShowProtocolOnTabs.Text = Language.strShowProtocolOnTabs;
-            chkIdentifyQuickConnectTabs.Text = Language.strIdentifyQuickConnectTabs;
-            chkDoubleClickClosesTab.Text = Language.strDoubleClickTabClosesIt;
-            chkAlwaysShowPanelSelectionDlg.Text = Language.strAlwaysShowPanelSelection;
-            chkCreateEmptyPanelOnStart.Text = Language.strCreateEmptyPanelOnStartUp;
-            lblPanelName.Text = $@"{Language.strPanelName}:";
+            chkAlwaysShowPanelTabs.Text = Language.AlwaysShowPanelTabs;
+            chkAlwaysShowConnectionTabs.Text = Language.AlwaysShowConnectionTabs;
+            chkOpenNewTabRightOfSelected.Text = Language.OpenNewTabRight;
+            chkShowLogonInfoOnTabs.Text = Language.ShowLogonInfoOnTabs;
+            chkShowProtocolOnTabs.Text = Language.ShowProtocolOnTabs;
+            chkIdentifyQuickConnectTabs.Text = Language.IdentifyQuickConnectTabs;
+            chkDoubleClickClosesTab.Text = Language.DoubleClickTabClosesIt;
+            chkAlwaysShowPanelSelectionDlg.Text = Language.AlwaysShowPanelSelection;
+            chkCreateEmptyPanelOnStart.Text = Language.CreateEmptyPanelOnStartUp;
+            lblPanelName.Text = $@"{Language.PanelName}:";
         }
 
         public override void LoadSettings()

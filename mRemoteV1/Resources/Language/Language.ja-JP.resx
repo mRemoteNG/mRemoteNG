@@ -117,2256 +117,2256 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="strAbout" xml:space="preserve">
+  <data name="About" xml:space="preserve">
     <value>mRemoteNGについて</value>
   </data>
-  <data name="strActive" xml:space="preserve">
+  <data name="Active" xml:space="preserve">
     <value>アクティブ</value>
   </data>
-  <data name="strActiveDirectory" xml:space="preserve">
+  <data name="ActiveDirectory" xml:space="preserve">
     <value>Active Directory</value>
   </data>
-  <data name="strActivity" xml:space="preserve">
+  <data name="Activity" xml:space="preserve">
     <value>Activity</value>
   </data>
-  <data name="strAddConnection" xml:space="preserve">
+  <data name="AddConnection" xml:space="preserve">
     <value>新規接続</value>
   </data>
-  <data name="strAddFolder" xml:space="preserve">
+  <data name="AddFolder" xml:space="preserve">
     <value>新しいフォルダー</value>
   </data>
-  <data name="strAddNodeFromXmlFailed" xml:space="preserve">
+  <data name="AddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXMLは失敗しました</value>
   </data>
-  <data name="strAddNodesFromSqlFailed" xml:space="preserve">
+  <data name="AddNodesFromSqlFailed" xml:space="preserve">
     <value>AddNodesFromSQL failed!</value>
   </data>
-  <data name="strAllowOnlySingleInstance" xml:space="preserve">
+  <data name="AllowOnlySingleInstance" xml:space="preserve">
     <value>アプリケーションの単一インスタンスのみを許可する（mRemoteNGを再起動する必要があります）</value>
     <comment>Allow only a single instance of the application (mRemoteNG restart required)</comment>
   </data>
-  <data name="strAlways" xml:space="preserve">
+  <data name="Always" xml:space="preserve">
     <value>常時</value>
   </data>
-  <data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
+  <data name="AlwaysConnectEvenIfAuthFails" xml:space="preserve">
     <value>認証が失敗しても常に接続する</value>
   </data>
-  <data name="strAlwaysShowPanelSelection" xml:space="preserve">
+  <data name="AlwaysShowPanelSelection" xml:space="preserve">
     <value>Always show panel selection dialog when opening connections</value>
   </data>
-  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+  <data name="AlwaysShowPanelTabs" xml:space="preserve">
     <value>常にパネルのタブを表示</value>
   </data>
-  <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
+  <data name="AlwaysShowSysTrayIcon" xml:space="preserve">
     <value>常に通知領域アイコンを表示</value>
   </data>
-  <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
+  <data name="AskUpdatesCommandAskLater" xml:space="preserve">
     <value>もう一度後で聞く</value>
   </data>
-  <data name="strAskUpdatesCommandCustom" xml:space="preserve">
+  <data name="AskUpdatesCommandCustom" xml:space="preserve">
     <value>Customize the settings now</value>
   </data>
-  <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
+  <data name="AskUpdatesCommandRecommended" xml:space="preserve">
     <value>推奨設定を使用</value>
   </data>
-  <data name="strAskUpdatesContent" xml:space="preserve">
+  <data name="AskUpdatesContent" xml:space="preserve">
     <value>{0} can automatically check for updates that may provide new features and bug fixes. It is recommended that you allow {0} to check for updates weekly.</value>
   </data>
-  <data name="strAskUpdatesMainInstruction" xml:space="preserve">
+  <data name="AskUpdatesMainInstruction" xml:space="preserve">
     <value>自動更新設定</value>
   </data>
-  <data name="strAspect" xml:space="preserve">
+  <data name="Aspect" xml:space="preserve">
     <value>Aspect</value>
   </data>
-  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
+  <data name="AutomaticallyGetSessionInfo" xml:space="preserve">
     <value>セッション情報を自動的に取得する</value>
   </data>
-  <data name="strAutoSaveEvery" xml:space="preserve">
+  <data name="AutoSaveEvery" xml:space="preserve">
     <value>自動保存の間隔：</value>
   </data>
-  <data name="strAutoSaveMins" xml:space="preserve">
+  <data name="AutoSaveMins" xml:space="preserve">
     <value>分（0で無効にします）</value>
   </data>
-  <data name="strAvailableVersion" xml:space="preserve">
+  <data name="AvailableVersion" xml:space="preserve">
     <value>最新バージョン</value>
   </data>
-  <data name="strButtonBrowse" xml:space="preserve">
+  <data name="ButtonBrowse" xml:space="preserve">
     <value>&amp;Browse...</value>
   </data>
-  <data name="strButtonCancel" xml:space="preserve">
+  <data name="ButtonCancel" xml:space="preserve">
     <value>キャンセル(&amp;C)</value>
   </data>
-  <data name="strButtonChange" xml:space="preserve">
+  <data name="ButtonChange" xml:space="preserve">
     <value>変更</value>
   </data>
-  <data name="strButtonClose" xml:space="preserve">
+  <data name="ButtonClose" xml:space="preserve">
     <value>閉じる(&amp;C)</value>
   </data>
-  <data name="strButtonDefaultInheritance" xml:space="preserve">
+  <data name="ButtonDefaultInheritance" xml:space="preserve">
     <value>Default Inheritance</value>
   </data>
-  <data name="strButtonDefaultProperties" xml:space="preserve">
+  <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>デフォルトのプロパティ</value>
   </data>
-  <data name="strButtonDisconnect" xml:space="preserve">
+  <data name="ButtonDisconnect" xml:space="preserve">
     <value>切断</value>
   </data>
-  <data name="strButtonIcon" xml:space="preserve">
+  <data name="ButtonIcon" xml:space="preserve">
     <value>アイコン</value>
   </data>
-  <data name="strButtonImport" xml:space="preserve">
+  <data name="ButtonImport" xml:space="preserve">
     <value>インポート(&amp;I)</value>
   </data>
-  <data name="strButtonInheritance" xml:space="preserve">
+  <data name="ButtonInheritance" xml:space="preserve">
     <value>Inheritance</value>
   </data>
-  <data name="strButtonLaunch" xml:space="preserve">
+  <data name="ButtonLaunch" xml:space="preserve">
     <value>立ち上げる(&amp;L)</value>
   </data>
-  <data name="strButtonLaunchPutty" xml:space="preserve">
+  <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>PuTTYを開始</value>
   </data>
-  <data name="strButtonNew" xml:space="preserve">
+  <data name="ButtonNew" xml:space="preserve">
     <value>新規(&amp;N)</value>
   </data>
-  <data name="strButtonOK" xml:space="preserve">
+  <data name="ButtonOK" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="strButtonProperties" xml:space="preserve">
+  <data name="ButtonProperties" xml:space="preserve">
     <value>プロパティ</value>
   </data>
-  <data name="strButtonScan" xml:space="preserve">
+  <data name="ButtonScan" xml:space="preserve">
     <value>スキャン(&amp;S)</value>
   </data>
-  <data name="strButtonStop" xml:space="preserve">
+  <data name="ButtonStop" xml:space="preserve">
     <value>停止(&amp;S)</value>
   </data>
-  <data name="strButtonTestProxy" xml:space="preserve">
+  <data name="ButtonTestProxy" xml:space="preserve">
     <value>プロキシーをテストする</value>
   </data>
-  <data name="strCannotImportNormalSessionFile" xml:space="preserve">
+  <data name="CannotImportNormalSessionFile" xml:space="preserve">
     <value>You cannot import a normal connection file.
 Please use File - Open Connection File for normal connection files!</value>
   </data>
-  <data name="strCannotStartPortScan" xml:space="preserve">
+  <data name="CannotStartPortScan" xml:space="preserve">
     <value>IPアドレスのフォーマットが正しくないのでポートスキャンの開始に失敗しました</value>
     <comment>Cannot start Port Scan, incorrect IP format!</comment>
   </data>
-  <data name="strCategoryAppearance" xml:space="preserve">
+  <data name="CategoryAppearance" xml:space="preserve">
     <value>外観</value>
   </data>
-  <data name="strCategoryConnection" xml:space="preserve">
+  <data name="CategoryConnection" xml:space="preserve">
     <value>接続</value>
   </data>
-  <data name="strCategoryCredentials" xml:space="preserve">
+  <data name="CategoryCredentials" xml:space="preserve">
     <value>資格情報</value>
   </data>
-  <data name="strCategoryDisplay" xml:space="preserve">
+  <data name="CategoryDisplay" xml:space="preserve">
     <value>ディスプレイ</value>
   </data>
-  <data name="strCategoryGateway" xml:space="preserve">
+  <data name="CategoryGateway" xml:space="preserve">
     <value>ゲートウェイ</value>
   </data>
-  <data name="strCategoryGeneral" xml:space="preserve">
+  <data name="CategoryGeneral" xml:space="preserve">
     <value>一般</value>
   </data>
-  <data name="strCategoryMiscellaneous" xml:space="preserve">
+  <data name="CategoryMiscellaneous" xml:space="preserve">
     <value>その他</value>
   </data>
-  <data name="strCategoryProtocol" xml:space="preserve">
+  <data name="CategoryProtocol" xml:space="preserve">
     <value>プロトコル</value>
   </data>
-  <data name="strCategoryRedirect" xml:space="preserve">
+  <data name="CategoryRedirect" xml:space="preserve">
     <value>Redirect</value>
   </data>
-  <data name="strCcAlwaysShowScreen" xml:space="preserve">
+  <data name="CcAlwaysShowScreen" xml:space="preserve">
     <value>開始時に常に表示</value>
   </data>
-  <data name="strCcCheckAgain" xml:space="preserve">
+  <data name="CcCheckAgain" xml:space="preserve">
     <value>更新</value>
   </data>
-  <data name="strCcCheckFailed" xml:space="preserve">
+  <data name="CcCheckFailed" xml:space="preserve">
     <value>確認に失敗しました</value>
   </data>
-  <data name="strCcCheckSucceeded" xml:space="preserve">
+  <data name="CcCheckSucceeded" xml:space="preserve">
     <value>Check succeeded!</value>
   </data>
-  <data name="strCcEOLFailed" xml:space="preserve">
+  <data name="CcEOLFailed" xml:space="preserve">
     <value>The (RDP) Sessions feature requires that you have a copy of eolwtscom.dll registered on your system.
 mRemoteNG ships with this component but it is not registered automatically if you do not use the mRemoteNG Installer.
 To register it manually, run the following command from an elevated command prompt: regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (where C:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
 If this check still fails or you are unable to use the (RDP) Sessions feature, please consult the mRemoteNG Forum at http://forum.mremoteng.org/.</value>
   </data>
-  <data name="strCcEOLOK" xml:space="preserve">
+  <data name="CcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM was found and seems to be registered properly.</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
+  <data name="CcICAFailed" xml:space="preserve">
     <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
 If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
 To do this open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin installation).
 If you are still not able to pass this check or use ICA in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"</value>
   </data>
-  <data name="strCcICAOK" xml:space="preserve">
+  <data name="CcICAOK" xml:space="preserve">
     <value>All ICA components were found and seem to be registered properly.
 Citrix ICA Client Control Version {0}</value>
   </data>
-  <data name="strCcNotInstalledProperly" xml:space="preserve">
+  <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>正しくインストールされていません</value>
   </data>
-  <data name="strCcPuttyFailed" xml:space="preserve">
+  <data name="CcPuttyFailed" xml:space="preserve">
     <value>The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path.
 Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path)</value>
   </data>
-  <data name="strCcPuttyOK" xml:space="preserve">
+  <data name="CcPuttyOK" xml:space="preserve">
     <value>The PuTTY executable was found and should be ready to use.</value>
   </data>
-  <data name="strCcRDPFailed" xml:space="preserve">
+  <data name="CcRDPFailed" xml:space="preserve">
     <value />
     <comment>For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services) Client 6.0 installed. You can download it here: http://support.microsoft.com/kb/925876
 If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at http://forum.mremoteng.org/.</comment>
   </data>
-  <data name="strCcRDPOK" xml:space="preserve">
+  <data name="CcRDPOK" xml:space="preserve">
     <value />
     <comment>All RDP components were found and seem to be registered properly.　
 Remote Desktop Connection Control Version {0}</comment>
   </data>
-  <data name="strCcVNCFailed" xml:space="preserve">
+  <data name="CcVNCFailed" xml:space="preserve">
     <value>VNC requires VncSharp.dll to be located in your mRemoteNG application folder.
 Please make sure that you have the VncSharp.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
 If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
   </data>
-  <data name="strCcVNCOK" xml:space="preserve">
+  <data name="CcVNCOK" xml:space="preserve">
     <value>All VNC components were found and seem to be registered properly.
 VncSharp Control Version {0}</value>
   </data>
-  <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
+  <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>
   </data>
-  <data name="strCheckboxDomain" xml:space="preserve">
+  <data name="CheckboxDomain" xml:space="preserve">
     <value>ドメイン</value>
   </data>
-  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+  <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>このメッセージを再び表示しない</value>
   </data>
-  <data name="strCheckboxInheritance" xml:space="preserve">
+  <data name="CheckboxInheritance" xml:space="preserve">
     <value>Inheritance</value>
   </data>
-  <data name="strCheckboxPassword" xml:space="preserve">
+  <data name="CheckboxPassword" xml:space="preserve">
     <value>パスワード</value>
   </data>
-  <data name="strCheckboxProxyAuthentication" xml:space="preserve">
+  <data name="CheckboxProxyAuthentication" xml:space="preserve">
     <value>このプロキシーに接続するには資格情報が必要です</value>
   </data>
-  <data name="strCheckboxPuttyPath" xml:space="preserve">
+  <data name="CheckboxPuttyPath" xml:space="preserve">
     <value>PuTTY実行ファイルへのパス：</value>
   </data>
-  <data name="strCheckboxReconnectWhenReady" xml:space="preserve">
+  <data name="CheckboxReconnectWhenReady" xml:space="preserve">
     <value>再接続をする</value>
   </data>
-  <data name="strCheckboxUpdateUseProxy" xml:space="preserve">
+  <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>プロキシーサーバーを使用する</value>
   </data>
-  <data name="strCheckboxUsername" xml:space="preserve">
+  <data name="CheckboxUsername" xml:space="preserve">
     <value>ユーザー名</value>
   </data>
-  <data name="strCheckboxWaitForExit" xml:space="preserve">
+  <data name="CheckboxWaitForExit" xml:space="preserve">
     <value>終了まで待機する</value>
   </data>
-  <data name="strCheckForUpdate" xml:space="preserve">
+  <data name="CheckForUpdate" xml:space="preserve">
     <value>もう一度点検する</value>
   </data>
-  <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
+  <data name="CheckForUpdatesOnStartup" xml:space="preserve">
     <value>Check for updates at startup</value>
   </data>
-  <data name="strCheckNow" xml:space="preserve">
+  <data name="CheckNow" xml:space="preserve">
     <value>点検する</value>
   </data>
-  <data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
+  <data name="CheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
     <value>起動時に必要なコンポネントがインストールされているかを確認する</value>
     <comment>Check proper installation of components at startup</comment>
   </data>
-  <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
+  <data name="ChoosePanelBeforeConnecting" xml:space="preserve">
     <value>接続時にパネルを選択する</value>
     <comment>Choose panel before connecting</comment>
   </data>
-  <data name="strClosedPorts" xml:space="preserve">
+  <data name="ClosedPorts" xml:space="preserve">
     <value>閉じているポート</value>
   </data>
-  <data name="strCollapseAllFolders" xml:space="preserve">
+  <data name="CollapseAllFolders" xml:space="preserve">
     <value>すべてのフォルダを折りたたむ</value>
   </data>
-  <data name="strColumnArguments" xml:space="preserve">
+  <data name="ColumnArguments" xml:space="preserve">
     <value>パラメータ</value>
   </data>
-  <data name="strColumnDisplayName" xml:space="preserve">
+  <data name="ColumnDisplayName" xml:space="preserve">
     <value>ディスプレイ名</value>
   </data>
-  <data name="strColumnFilename" xml:space="preserve">
+  <data name="ColumnFilename" xml:space="preserve">
     <value>ファイル名</value>
   </data>
-  <data name="strColumnHostnameIP" xml:space="preserve">
+  <data name="ColumnHostnameIP" xml:space="preserve">
     <value>ホスト名/IP</value>
   </data>
-  <data name="strColumnMessage" xml:space="preserve">
+  <data name="ColumnMessage" xml:space="preserve">
     <value>メッセージ</value>
   </data>
-  <data name="strColumnUsername" xml:space="preserve">
+  <data name="ColumnUsername" xml:space="preserve">
     <value>ユーザー名</value>
   </data>
-  <data name="strColumnWaitForExit" xml:space="preserve">
+  <data name="ColumnWaitForExit" xml:space="preserve">
     <value>終了まで待機する</value>
   </data>
-  <data name="strCommandExitProgram" xml:space="preserve">
+  <data name="CommandExitProgram" xml:space="preserve">
     <value>{0}を終了(&amp;X)</value>
     <comment>E&amp;xit {0}</comment>
   </data>
-  <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
+  <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>コマンドのパラメータが正しくありません</value>
   </data>
-  <data name="strCommandOpenConnectionFile" xml:space="preserve">
+  <data name="CommandOpenConnectionFile" xml:space="preserve">
     <value>接続ファイルを開く(&amp;O)</value>
   </data>
-  <data name="strCommandTryAgain" xml:space="preserve">
+  <data name="CommandTryAgain" xml:space="preserve">
     <value>再度試みる(&amp;T)</value>
   </data>
-  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+  <data name="CompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
     <value>{0} has detected the Lenovo Auto Scroll Utility running on this system. This utility is known to cause problems with {0}. It is recommended that you disable or uninstall it.</value>
   </data>
-  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+  <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>互換性の問題が検出されました</value>
   </data>
-  <data name="strComponentsCheck" xml:space="preserve">
+  <data name="ComponentsCheck" xml:space="preserve">
     <value>コンポーネントの確認</value>
   </data>
-  <data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+  <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Clickがエラーを発生しました</value>
   </data>
-  <data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
+  <data name="ConfigPropertyGridHideItemsFailed" xml:space="preserve">
     <value>ShowHideGridItemsがエラーを発生しました</value>
   </data>
-  <data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
+  <data name="ConfigPropertyGridMenuClickFailed" xml:space="preserve">
     <value>IconMenu_Clickがエラーを発生しました</value>
   </data>
-  <data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
+  <data name="ConfigPropertyGridObjectFailed" xml:space="preserve">
     <value>プロパティを表示するグリッドがエラーを発生しました</value>
   </data>
-  <data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+  <data name="ConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
     <value>SetHostStatusがエラーを発生しました</value>
   </data>
-  <data name="strConfigPropertyGridValueFailed" xml:space="preserve">
+  <data name="ConfigPropertyGridValueFailed" xml:space="preserve">
     <value>pGrid_PopertyValueChangedがエラーを発生しました</value>
   </data>
-  <data name="strConfigUiLoadFailed" xml:space="preserve">
+  <data name="ConfigUiLoadFailed" xml:space="preserve">
     <value>Config UI loadがエラーを発生しました</value>
   </data>
-  <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
+  <data name="ConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>接続「{0}」を切断しますか？</value>
     <comment>Do you want to close the connection, "{0}"?</comment>
   </data>
-  <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
+  <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>パネル内で開いている接続も全て切断されますが、パネル「{0}」を閉じますか？</value>
   </data>
-  <data name="strConfirmDeleteExternalTool" xml:space="preserve">
+  <data name="ConfirmDeleteExternalTool" xml:space="preserve">
     <value>外部ツール「{0}」を削除してもよろしいですか？</value>
   </data>
-  <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
+  <data name="ConfirmDeleteExternalToolMultiple" xml:space="preserve">
     <value>選択された外部ツール「{0}」を削除してもよろしいですか？</value>
   </data>
-  <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
+  <data name="ConfirmDeleteNodeConnection" xml:space="preserve">
     <value>接続「{0}」を削除してもよろしいですか？</value>
     <comment>Are you sure you want to delete the connection, "{0}"?</comment>
   </data>
-  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+  <data name="ConfirmDeleteNodeFolder" xml:space="preserve">
     <value>空のフォルダ「{0}」削除してもよろしいですか？</value>
   </data>
-  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+  <data name="ConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Are you sure you want to delete the folder, "{0}"? Any folders or connections that it contains will also be deleted.</value>
   </data>
-  <data name="strConfirmExitMainInstruction" xml:space="preserve">
+  <data name="ConfirmExitMainInstruction" xml:space="preserve">
     <value>すべてのセッションを切断しますか？</value>
   </data>
-  <data name="strConfirmResetLayout" xml:space="preserve">
+  <data name="ConfirmResetLayout" xml:space="preserve">
     <value>パネル配置を初期化しますか？</value>
   </data>
-  <data name="strConnect" xml:space="preserve">
+  <data name="Connect" xml:space="preserve">
     <value>接続</value>
   </data>
-  <data name="strConnectInFullscreen" xml:space="preserve">
+  <data name="ConnectInFullscreen" xml:space="preserve">
     <value>全画面モードで接続する</value>
   </data>
-  <data name="strConnecting" xml:space="preserve">
+  <data name="Connecting" xml:space="preserve">
     <value>接続しています...</value>
   </data>
-  <data name="strConnectionEventConnected" xml:space="preserve">
+  <data name="ConnectionEventConnected" xml:space="preserve">
     <value>Protocol Event Connected</value>
   </data>
-  <data name="strConnectionEventConnectedDetail" xml:space="preserve">
+  <data name="ConnectionEventConnectedDetail" xml:space="preserve">
     <value>Connection to "{0}" via "{1}" established by user "{2}" (Description: "{3}"; User Field: "{4}")</value>
   </data>
   <data name="ConnectionFailed" xml:space="preserve">
     <value>接続に失敗しました</value>
   </data>
-  <data name="strConnectionEventErrorOccured" xml:space="preserve">
+  <data name="ConnectionEventErrorOccured" xml:space="preserve">
     <value>Protocol Event ErrorOccured</value>
   </data>
-  <data name="strConnectionOpenFailed" xml:space="preserve">
+  <data name="ConnectionOpenFailed" xml:space="preserve">
     <value>接続の開始に失敗しました</value>
   </data>
-  <data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+  <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>ホスト名が入力されていないので接続出来ません</value>
   </data>
-  <data name="strConnectionRdpErrorDetail" xml:space="preserve">
+  <data name="ConnectionRdpErrorDetail" xml:space="preserve">
     <value>RDP error!
 Error Code: {0}
 Error Description: {1}</value>
   </data>
-  <data name="strConnections" xml:space="preserve">
+  <data name="Connections" xml:space="preserve">
     <value>接続</value>
   </data>
-  <data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
+  <data name="ConnectionSetDefaultPortFailed" xml:space="preserve">
     <value>デフォルトのポートを設定できませんでした</value>
   </data>
-  <data name="strConnectionsFileBackupFailed" xml:space="preserve">
+  <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>Couldn't create backup of connections file!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
+  <data name="ConnectionsFileCouldNotBeImported" xml:space="preserve">
     <value>接続ファイルをインポートできませんでした</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+  <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Connections file "{0}" could not be loaded!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
+  <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Connections file "{0}" could not be loaded!
 Starting with new connections file.</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
+  <data name="ConnectionsFileCouldNotBeSaved" xml:space="preserve">
     <value>Couldn't save connections file!</value>
   </data>
-  <data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
+  <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Couldn't save connections file as "{0}"!</value>
   </data>
-  <data name="strConnectNoCredentials" xml:space="preserve">
+  <data name="ConnectNoCredentials" xml:space="preserve">
     <value>資格情報なしで接続</value>
   </data>
-  <data name="strConnectToConsoleSession" xml:space="preserve">
+  <data name="ConnectToConsoleSession" xml:space="preserve">
     <value>コンソールセッションに接続</value>
   </data>
-  <data name="strConnectWithOptions" xml:space="preserve">
+  <data name="ConnectWithOptions" xml:space="preserve">
     <value>オプションを使用して接続</value>
   </data>
-  <data name="strConnenctionClosedByUser" xml:space="preserve">
+  <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>ユーザー{1}によって接続「{0}」は切断されました</value>
     <comment>Connection to {0} via {1} closed by user {2}.</comment>
   </data>
-  <data name="strConnenctionClosedByUserDetail" xml:space="preserve">
+  <data name="ConnenctionClosedByUserDetail" xml:space="preserve">
     <value>Connection to {0} via {1} closed by user {2}.  (Description: "{3}"; User Field: "{4}")</value>
   </data>
-  <data name="strConnenctionCloseEvent" xml:space="preserve">
+  <data name="ConnenctionCloseEvent" xml:space="preserve">
     <value>接続イベントに失敗しました</value>
   </data>
-  <data name="strConnenctionCloseEventFailed" xml:space="preserve">
+  <data name="ConnenctionCloseEventFailed" xml:space="preserve">
     <value />
     <comment>Connection Event Closed failed!</comment>
   </data>
-  <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
+  <data name="CouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Couldn't create new connections file!</value>
   </data>
-  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+  <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Could not find ToolStrip control in FilteredPropertyGrid.</value>
   </data>
-  <data name="strCurrentVersion" xml:space="preserve">
+  <data name="CurrentVersion" xml:space="preserve">
     <value>バージョン</value>
   </data>
-  <data name="strDefaultTheme" xml:space="preserve">
+  <data name="DefaultTheme" xml:space="preserve">
     <value>デフォルトのテーマ</value>
   </data>
-  <data name="strDetect" xml:space="preserve">
+  <data name="Detect" xml:space="preserve">
     <value>検出する</value>
   </data>
-  <data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
+  <data name="DontConnectToConsoleSessionMenuItem" xml:space="preserve">
     <value>Don't connect to console session</value>
   </data>
-  <data name="strDontConnectWhenAuthFails" xml:space="preserve">
+  <data name="DontConnectWhenAuthFails" xml:space="preserve">
     <value>Don't connect if authentication fails</value>
   </data>
-  <data name="strDoubleClickTabClosesIt" xml:space="preserve">
+  <data name="DoubleClickTabClosesIt" xml:space="preserve">
     <value>ダブルクリックでタブを閉じる</value>
   </data>
-  <data name="strDownloadAndInstall" xml:space="preserve">
+  <data name="DownloadAndInstall" xml:space="preserve">
     <value>ダウンロードとインストール</value>
   </data>
-  <data name="strDuplicate" xml:space="preserve">
+  <data name="Duplicate" xml:space="preserve">
     <value>複製</value>
   </data>
-  <data name="strEmptyPasswordContinue" xml:space="preserve">
+  <data name="EmptyPasswordContinue" xml:space="preserve">
     <value>パスワード無しでよろしいですか？</value>
   </data>
-  <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
+  <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>For empty Username, Password or Domain fields use:</value>
   </data>
-  <data name="strEnc128Bit" xml:space="preserve">
+  <data name="Enc128Bit" xml:space="preserve">
     <value>128ビット</value>
   </data>
-  <data name="strEnc128BitLogonOnly" xml:space="preserve">
+  <data name="Enc128BitLogonOnly" xml:space="preserve">
     <value>128-bit (logon only)</value>
   </data>
-  <data name="strEnc40Bit" xml:space="preserve">
+  <data name="Enc40Bit" xml:space="preserve">
     <value>40ビット</value>
   </data>
-  <data name="strEnc56Bit" xml:space="preserve">
+  <data name="Enc56Bit" xml:space="preserve">
     <value>56ビット</value>
   </data>
-  <data name="strEncBasic" xml:space="preserve">
+  <data name="EncBasic" xml:space="preserve">
     <value>Basic</value>
   </data>
-  <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
+  <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>接続設定ファイルをすべて暗号化する</value>
   </data>
-  <data name="strEndIP" xml:space="preserve">
+  <data name="EndIP" xml:space="preserve">
     <value>最終IPアドレス</value>
   </data>
-  <data name="strEndPort" xml:space="preserve">
+  <data name="EndPort" xml:space="preserve">
     <value>最終ポート</value>
   </data>
-  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+  <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
     <value>AddExternalToolsToToolBar (frmMain) failed. {0}</value>
   </data>
-  <data name="strErrorAddFolderFailed" xml:space="preserve">
+  <data name="ErrorAddFolderFailed" xml:space="preserve">
     <value>AddFolder (UI.Window.Tree) failed. {0}</value>
   </data>
-  <data name="strErrorBadDatabaseVersion" xml:space="preserve">
+  <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>The database version {0} is not compatible with this version of {1}.</value>
   </data>
-  <data name="strErrorCloneNodeFailed" xml:space="preserve">
+  <data name="ErrorCloneNodeFailed" xml:space="preserve">
     <value>CloneNode (Tree.Node) failed . {0}</value>
   </data>
-  <data name="strErrorCode" xml:space="preserve">
+  <data name="ErrorCode" xml:space="preserve">
     <value>エラーコード：{0}</value>
   </data>
-  <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
+  <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>接続リストが保存できませんでした</value>
   </data>
-  <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
+  <data name="ErrorCouldNotLaunchPutty" xml:space="preserve">
     <value>PuTTYの実行に失敗しました</value>
   </data>
-  <data name="strErrorDecryptionFailed" xml:space="preserve">
+  <data name="ErrorDecryptionFailed" xml:space="preserve">
     <value>復号化に失敗しました：{0}</value>
   </data>
-  <data name="strErrorEncryptionFailed" xml:space="preserve">
+  <data name="ErrorEncryptionFailed" xml:space="preserve">
     <value>暗号化に失敗しました：{0}</value>
   </data>
-  <data name="strErrors" xml:space="preserve">
+  <data name="Errors" xml:space="preserve">
     <value>エラー</value>
   </data>
-  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+  <data name="ErrorStartupConnectionFileLoad" xml:space="preserve">
     <value>The startup connection file could not be loaded.{0}{0}{2}{0}{3}{0}{0}In order to prevent data loss, {1} will now exit.</value>
   </data>
-  <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+  <data name="ErrorVerifyDatabaseVersionFailed" xml:space="preserve">
     <value>VerifyDatabaseVersion (Config.Connections.Save) failed. {0}</value>
   </data>
-  <data name="strExpandAllFolders" xml:space="preserve">
+  <data name="ExpandAllFolders" xml:space="preserve">
     <value>すべてのフォルダを展開</value>
   </data>
-  <data name="strExperimental" xml:space="preserve">
+  <data name="Experimental" xml:space="preserve">
     <value>試験的機能</value>
   </data>
-  <data name="strExport" xml:space="preserve">
+  <data name="Export" xml:space="preserve">
     <value>エクスポート</value>
   </data>
-  <data name="strExportEverything" xml:space="preserve">
+  <data name="ExportEverything" xml:space="preserve">
     <value>すべてエクスポート</value>
   </data>
-  <data name="strExportFile" xml:space="preserve">
+  <data name="ExportFile" xml:space="preserve">
     <value>ファイルをエクスポート</value>
   </data>
-  <data name="strExportItems" xml:space="preserve">
+  <data name="ExportItems" xml:space="preserve">
     <value>アイテムをエクスポート</value>
   </data>
-  <data name="strExportmRemoteXML" xml:space="preserve">
+  <data name="ExportmRemoteXML" xml:space="preserve">
     <value>Export mRemote/mRemoteNG XML</value>
   </data>
-  <data name="strExportProperties" xml:space="preserve">
+  <data name="ExportProperties" xml:space="preserve">
     <value>プロパティのエクスポート</value>
   </data>
-  <data name="strExportSelectedConnection" xml:space="preserve">
+  <data name="ExportSelectedConnection" xml:space="preserve">
     <value>Export the currently selected connection</value>
   </data>
-  <data name="strExportSelectedFolder" xml:space="preserve">
+  <data name="ExportSelectedFolder" xml:space="preserve">
     <value>Export the currently selected folder</value>
   </data>
-  <data name="strExportToFileMenuItem" xml:space="preserve">
+  <data name="ExportToFileMenuItem" xml:space="preserve">
     <value>ファイルへの書き出し...(&amp;E)</value>
   </data>
-  <data name="strExtApp" xml:space="preserve">
+  <data name="ExtApp" xml:space="preserve">
     <value>Ext. App</value>
   </data>
-  <data name="strExternalToolDefaultName" xml:space="preserve">
+  <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>新規外部ツール</value>
   </data>
-  <data name="strFAMFAMFAMAttribution" xml:space="preserve">
+  <data name="FAMFAMFAMAttribution" xml:space="preserve">
     <value>Includes icons by [FAMFAMFAM]</value>
   </data>
-  <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
+  <data name="FAMFAMFAMAttributionURL" xml:space="preserve">
     <value>http://www.famfamfam.com/</value>
   </data>
-  <data name="strFileFormatLabel" xml:space="preserve">
+  <data name="FileFormatLabel" xml:space="preserve">
     <value>File &amp;Format:</value>
   </data>
-  <data name="strFilterAll" xml:space="preserve">
+  <data name="FilterAll" xml:space="preserve">
     <value>すべてのファイル(*.*)</value>
   </data>
-  <data name="strFilterAllImportable" xml:space="preserve">
+  <data name="FilterAllImportable" xml:space="preserve">
     <value>インポート可能なすべてのファイル</value>
   </data>
-  <data name="strFilterApplication" xml:space="preserve">
+  <data name="FilterApplication" xml:space="preserve">
     <value>実行ファイル(*.exe)</value>
   </data>
-  <data name="strFiltermRemoteCSV" xml:space="preserve">
+  <data name="FiltermRemoteCSV" xml:space="preserve">
     <value>mRemote CSVファイル(*.csv)</value>
   </data>
-  <data name="strFiltermRemoteXML" xml:space="preserve">
+  <data name="FiltermRemoteXML" xml:space="preserve">
     <value>mRemote XMLファイル(*.xml)</value>
   </data>
-  <data name="strFilterPuttyConnectionManager" xml:space="preserve">
+  <data name="FilterPuttyConnectionManager" xml:space="preserve">
     <value>PuTTY Connection Manager files</value>
   </data>
-  <data name="strFilterRdgFiles" xml:space="preserve">
+  <data name="FilterRdgFiles" xml:space="preserve">
     <value>Remote Desktop Connection Manager files (*.rdg)</value>
   </data>
-  <data name="strFilterRDP" xml:space="preserve">
+  <data name="FilterRDP" xml:space="preserve">
     <value>RDP Files (*.rdp)</value>
   </data>
-  <data name="strFiltervRD2008CSV" xml:space="preserve">
+  <data name="FiltervRD2008CSV" xml:space="preserve">
     <value>visionapp Remote Desktop 2008 CSV Files (*.csv)</value>
   </data>
-  <data name="strFormatInherit" xml:space="preserve">
+  <data name="FormatInherit" xml:space="preserve">
     <value>Inherit {0}</value>
   </data>
-  <data name="strFormatInheritDescription" xml:space="preserve">
+  <data name="FormatInheritDescription" xml:space="preserve">
     <value>Description of inherited property: {0}</value>
   </data>
-  <data name="strFree" xml:space="preserve">
+  <data name="Free" xml:space="preserve">
     <value>Free</value>
   </data>
-  <data name="strFullscreen" xml:space="preserve">
+  <data name="Fullscreen" xml:space="preserve">
     <value>全画面</value>
   </data>
-  <data name="strGeneral" xml:space="preserve">
+  <data name="General" xml:space="preserve">
     <value>一般</value>
   </data>
-  <data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
+  <data name="GetConnectionInfoFromSqlFailed" xml:space="preserve">
     <value>SQLサーバーからの接続情報の取得に失敗しました</value>
   </data>
-  <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
+  <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
     <value>An error occured while loading the connection entry for "{0}" from "{1}". {2}</value>
   </data>
-  <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
+  <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>自動的に再接続する</value>
   </data>
-  <data name="strGroupboxConnection" xml:space="preserve">
+  <data name="GroupboxConnection" xml:space="preserve">
     <value>接続</value>
   </data>
-  <data name="strGroupboxExternalToolProperties" xml:space="preserve">
+  <data name="GroupboxExternalToolProperties" xml:space="preserve">
     <value>外部ツールプロパティ</value>
   </data>
-  <data name="strGroupboxFiles" xml:space="preserve">
+  <data name="GroupboxFiles" xml:space="preserve">
     <value>ファイル</value>
   </data>
-  <data name="strHost" xml:space="preserve">
+  <data name="Host" xml:space="preserve">
     <value>ホスト</value>
   </data>
-  <data name="strHttp" xml:space="preserve">
+  <data name="Http" xml:space="preserve">
     <value>HTTP</value>
   </data>
-  <data name="strHttpConnectFailed" xml:space="preserve">
+  <data name="HttpConnectFailed" xml:space="preserve">
     <value>HTTP接続に失敗しました</value>
   </data>
-  <data name="strHttpConnectionFailed" xml:space="preserve">
+  <data name="HttpConnectionFailed" xml:space="preserve">
     <value>新規のHTTP接続に失敗しました</value>
   </data>
-  <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
+  <data name="HttpDocumentTileChangeFailed" xml:space="preserve">
     <value>Changing HTTP Document Tile Failed!</value>
   </data>
-  <data name="strHttpInternetExplorer" xml:space="preserve">
+  <data name="HttpInternetExplorer" xml:space="preserve">
     <value>Internet Explorer</value>
   </data>
-  <data name="strHttps" xml:space="preserve">
+  <data name="Https" xml:space="preserve">
     <value>HTTPS</value>
   </data>
-  <data name="strHttpSetPropsFailed" xml:space="preserve">
+  <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Set HTTP Props failed!</value>
   </data>
-  <data name="strICA" xml:space="preserve">
+  <data name="ICA" xml:space="preserve">
     <value>ICA</value>
   </data>
-  <data name="strIcaConnectionFailed" xml:space="preserve">
+  <data name="IcaConnectionFailed" xml:space="preserve">
     <value>Couldn't create new ICA Connection!</value>
   </data>
-  <data name="strIcaControlFailed" xml:space="preserve">
+  <data name="IcaControlFailed" xml:space="preserve">
     <value>Loading ICA Plugin failed!</value>
   </data>
-  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
+  <data name="IcaSetCredentialsFailed" xml:space="preserve">
     <value>ICA SetCredentials failed!</value>
   </data>
-  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
+  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
     <value>ICA Set Event Handlers Failed!</value>
   </data>
-  <data name="strIcaSetPropsFailed" xml:space="preserve">
+  <data name="IcaSetPropsFailed" xml:space="preserve">
     <value>ICA Set Props Failed!</value>
   </data>
-  <data name="strIcaSetResolutionFailed" xml:space="preserve">
+  <data name="IcaSetResolutionFailed" xml:space="preserve">
     <value>ICA Set Resolution Failed!</value>
   </data>
-  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+  <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identify quick connect tabs by adding the prefix "Quick:"</value>
   </data>
-  <data name="strImportAD" xml:space="preserve">
+  <data name="ImportAD" xml:space="preserve">
     <value>アクティブディレクトリからインポート</value>
   </data>
-  <data name="strImportExport" xml:space="preserve">
+  <data name="ImportExport" xml:space="preserve">
     <value>インポート／エクスポート</value>
   </data>
-  <data name="strImportFileFailedContent" xml:space="preserve">
+  <data name="ImportFileFailedContent" xml:space="preserve">
     <value>ファイル「{0}」のインポート中にエラーが発生しました</value>
   </data>
-  <data name="strImportFileFailedMainInstruction" xml:space="preserve">
+  <data name="ImportFileFailedMainInstruction" xml:space="preserve">
     <value>インポートに失敗しました</value>
   </data>
-  <data name="strImportFromFileMenuItem" xml:space="preserve">
+  <data name="ImportFromFileMenuItem" xml:space="preserve">
     <value>ファイルからインポート...(&amp;F)</value>
   </data>
-  <data name="strImportLocationCommandButtons" xml:space="preserve">
+  <data name="ImportLocationCommandButtons" xml:space="preserve">
     <value>Under the root{0}{1}|Under the selected folder{0}{2}</value>
   </data>
-  <data name="strImportLocationContent" xml:space="preserve">
+  <data name="ImportLocationContent" xml:space="preserve">
     <value>Where would you like the imported items to be placed?</value>
   </data>
-  <data name="strImportLocationMainInstruction" xml:space="preserve">
+  <data name="ImportLocationMainInstruction" xml:space="preserve">
     <value>Import location</value>
   </data>
-  <data name="strImportMenuItem" xml:space="preserve">
+  <data name="ImportMenuItem" xml:space="preserve">
     <value>インポート(&amp;I)</value>
   </data>
-  <data name="strImportmRemoteXML" xml:space="preserve">
+  <data name="ImportmRemoteXML" xml:space="preserve">
     <value>Import mRemote/mRemoteNG XML</value>
   </data>
-  <data name="strImportPortScan" xml:space="preserve">
+  <data name="ImportPortScan" xml:space="preserve">
     <value>ポートスキャンからインポート</value>
   </data>
-  <data name="strImportRDPFiles" xml:space="preserve">
+  <data name="ImportRDPFiles" xml:space="preserve">
     <value>Import from .RDP file(s)</value>
   </data>
-  <data name="strInactive" xml:space="preserve">
+  <data name="Inactive" xml:space="preserve">
     <value>Inactive</value>
   </data>
-  <data name="strInformations" xml:space="preserve">
+  <data name="Informations" xml:space="preserve">
     <value>情報</value>
   </data>
-  <data name="strInheritNewConnection" xml:space="preserve">
+  <data name="InheritNewConnection" xml:space="preserve">
     <value>mRemoteNGは最新バージョンです</value>
   </data>
-  <data name="strIntAppDisposeFailed" xml:space="preserve">
+  <data name="IntAppDisposeFailed" xml:space="preserve">
     <value>Dispose of Int App process failed!</value>
   </data>
-  <data name="strIntAppFocusFailed" xml:space="preserve">
+  <data name="IntAppFocusFailed" xml:space="preserve">
     <value>Int App Focus Failed!</value>
   </data>
-  <data name="strIntAppHandle" xml:space="preserve">
+  <data name="IntAppHandle" xml:space="preserve">
     <value>Int App Handle: {0}</value>
   </data>
-  <data name="strIntAppKillFailed" xml:space="preserve">
+  <data name="IntAppKillFailed" xml:space="preserve">
     <value>Killing Int App Process failed!</value>
   </data>
-  <data name="strIntAppParentHandle" xml:space="preserve">
+  <data name="IntAppParentHandle" xml:space="preserve">
     <value>Panel Handle: {0}</value>
   </data>
-  <data name="strIntAppResizeFailed" xml:space="preserve">
+  <data name="IntAppResizeFailed" xml:space="preserve">
     <value>Int App Resize failed!</value>
   </data>
-  <data name="strIntAppStuff" xml:space="preserve">
+  <data name="IntAppStuff" xml:space="preserve">
     <value>--- IntApp Stuff ---</value>
   </data>
-  <data name="strIntAppTitle" xml:space="preserve">
+  <data name="IntAppTitle" xml:space="preserve">
     <value>Int App Title: {0}</value>
   </data>
-  <data name="strKeysCtrlAltDel" xml:space="preserve">
+  <data name="KeysCtrlAltDel" xml:space="preserve">
     <value>CTRL-ALT-DEL</value>
   </data>
-  <data name="strKeysCtrlEsc" xml:space="preserve">
+  <data name="KeysCtrlEsc" xml:space="preserve">
     <value>CTRL-ESC</value>
   </data>
-  <data name="strLabelAddress" xml:space="preserve">
+  <data name="LabelAddress" xml:space="preserve">
     <value>アドレス：</value>
   </data>
-  <data name="strLabelArguments" xml:space="preserve">
+  <data name="LabelArguments" xml:space="preserve">
     <value>パラメータ：</value>
   </data>
-  <data name="strLabelChangeLog" xml:space="preserve">
+  <data name="LabelChangeLog" xml:space="preserve">
     <value>履歴：</value>
   </data>
-  <data name="strLabelClosingConnections" xml:space="preserve">
+  <data name="LabelClosingConnections" xml:space="preserve">
     <value>切断時：</value>
   </data>
-  <data name="strLabelConnect" xml:space="preserve">
+  <data name="LabelConnect" xml:space="preserve">
     <value>接続(&amp;C)：</value>
   </data>
-  <data name="strLabelDisplayName" xml:space="preserve">
+  <data name="LabelDisplayName" xml:space="preserve">
     <value>ディスプレイ名</value>
   </data>
-  <data name="strLabelDomain" xml:space="preserve">
+  <data name="LabelDomain" xml:space="preserve">
     <value>ドメイン：</value>
   </data>
-  <data name="strLabelFilename" xml:space="preserve">
+  <data name="LabelFilename" xml:space="preserve">
     <value>ファイル名：</value>
   </data>
-  <data name="strLabelHostname" xml:space="preserve">
+  <data name="LabelHostname" xml:space="preserve">
     <value>ホスト名：</value>
   </data>
-  <data name="strLabelOptions" xml:space="preserve">
+  <data name="LabelOptions" xml:space="preserve">
     <value>オプション：</value>
   </data>
-  <data name="strLabelPassword" xml:space="preserve">
+  <data name="LabelPassword" xml:space="preserve">
     <value>パスワード：</value>
   </data>
-  <data name="strLabelPort" xml:space="preserve">
+  <data name="LabelPort" xml:space="preserve">
     <value>ポート：</value>
   </data>
-  <data name="strLabelPortableEdition" xml:space="preserve">
+  <data name="LabelPortableEdition" xml:space="preserve">
     <value>ポータブル</value>
   </data>
-  <data name="strLabelProtocol" xml:space="preserve">
+  <data name="LabelProtocol" xml:space="preserve">
     <value>プロトコル：</value>
   </data>
-  <data name="strLabelPuttySessionsConfig" xml:space="preserve">
+  <data name="LabelPuttySessionsConfig" xml:space="preserve">
     <value>To configure PuTTY sessions click this button:</value>
   </data>
-  <data name="strLabelPuttyTimeout" xml:space="preserve">
+  <data name="LabelPuttyTimeout" xml:space="preserve">
     <value>Maximum PuTTY and integrated external tools wait time:</value>
   </data>
-  <data name="strLabelReleasedUnderGPL" xml:space="preserve">
+  <data name="LabelReleasedUnderGPL" xml:space="preserve">
     <value>Released under the GNU General Public License (GPL)</value>
   </data>
-  <data name="strLabelSeconds" xml:space="preserve">
+  <data name="LabelSeconds" xml:space="preserve">
     <value>秒</value>
   </data>
-  <data name="strLabelSelectPanel" xml:space="preserve">
+  <data name="LabelSelectPanel" xml:space="preserve">
     <value>パネルを選択するか新規パネルを追加してください。</value>
     <comment>Select a panel from the list below or click New to add a new one. Click OK to continue.</comment>
   </data>
-  <data name="strLabelServerStatus" xml:space="preserve">
+  <data name="LabelServerStatus" xml:space="preserve">
     <value>サーバーの状態：</value>
   </data>
-  <data name="strLabelSQLDatabaseName" xml:space="preserve">
+  <data name="LabelSQLDatabaseName" xml:space="preserve">
     <value>データベース：</value>
   </data>
-  <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
+  <data name="LabelSQLServerDatabaseName" xml:space="preserve">
     <value>データベース：</value>
   </data>
-  <data name="strLabelUsername" xml:space="preserve">
+  <data name="LabelUsername" xml:space="preserve">
     <value>ユーザー名：</value>
   </data>
-  <data name="strLabelVerify" xml:space="preserve">
+  <data name="LabelVerify" xml:space="preserve">
     <value>確認：</value>
   </data>
-  <data name="strLanguage" xml:space="preserve">
+  <data name="LanguageString" xml:space="preserve">
     <value>言語</value>
   </data>
-  <data name="strLanguageDefault" xml:space="preserve">
+  <data name="LanguageDefault" xml:space="preserve">
     <value>（自動検出）</value>
   </data>
-  <data name="strLanguageRestartRequired" xml:space="preserve">
+  <data name="LanguageRestartRequired" xml:space="preserve">
     <value>言語設定の変更を有効にするには{0}の再起動が必要です</value>
     <comment>{0} must be restarted before changes to the language will take effect.</comment>
   </data>
-  <data name="strLoadFromSqlFailed" xml:space="preserve">
+  <data name="LoadFromSqlFailed" xml:space="preserve">
     <value>SQLサーバーからの読み込みに失敗しました</value>
   </data>
-  <data name="strLoadFromSqlFailedContent" xml:space="preserve">
+  <data name="LoadFromSqlFailedContent" xml:space="preserve">
     <value>接続情報はSQLサーバーから読み込むことが出来ませんでした</value>
     <comment>The connection information could not be loaded from the SQL server.</comment>
   </data>
-  <data name="strLoadFromXmlFailed" xml:space="preserve">
+  <data name="LoadFromXmlFailed" xml:space="preserve">
     <value>XMLファイルからの読み込みに失敗しました</value>
   </data>
-  <data name="strLocalFile" xml:space="preserve">
+  <data name="LocalFile" xml:space="preserve">
     <value>ローカルファイル</value>
   </data>
-  <data name="strLocalFileDoesNotExist" xml:space="preserve">
+  <data name="LocalFileDoesNotExist" xml:space="preserve">
     <value>ファイルが存在しません</value>
   </data>
-  <data name="strLogOff" xml:space="preserve">
+  <data name="LogOff" xml:space="preserve">
     <value>ログオフ</value>
   </data>
-  <data name="strLogWriteToFileFailed" xml:space="preserve">
+  <data name="LogWriteToFileFailed" xml:space="preserve">
     <value>Writing to report file failed!</value>
   </data>
-  <data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
+  <data name="LogWriteToFileFinalLocationFailed" xml:space="preserve">
     <value>Couldn't save report to final location.</value>
   </data>
-  <data name="strMagicLibraryAttribution" xml:space="preserve">
+  <data name="MagicLibraryAttribution" xml:space="preserve">
     <value>Uses the Magic library by [Crownwood Software]</value>
   </data>
-  <data name="strMagicLibraryAttributionURL" xml:space="preserve">
+  <data name="MagicLibraryAttributionURL" xml:space="preserve">
     <value>http://www.dotnetmagic.com/</value>
   </data>
-  <data name="strMenuAbout" xml:space="preserve">
+  <data name="MenuAbout" xml:space="preserve">
     <value>mRemoteNGについて</value>
   </data>
-  <data name="strMenuAddConnectionPanel" xml:space="preserve">
+  <data name="MenuAddConnectionPanel" xml:space="preserve">
     <value>接続表示パネルの追加</value>
   </data>
-  <data name="strMenuCheckForUpdates" xml:space="preserve">
+  <data name="MenuCheckForUpdates" xml:space="preserve">
     <value>最新バージョンをチェック</value>
   </data>
-  <data name="strMenuConfig" xml:space="preserve">
+  <data name="MenuConfig" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="strMenuConnect" xml:space="preserve">
+  <data name="MenuConnect" xml:space="preserve">
     <value>接続する</value>
   </data>
-  <data name="strMenuConnectionPanels" xml:space="preserve">
+  <data name="MenuConnectionPanels" xml:space="preserve">
     <value>接続表示パネル</value>
   </data>
-  <data name="strMenuConnections" xml:space="preserve">
+  <data name="MenuConnections" xml:space="preserve">
     <value>接続</value>
   </data>
-  <data name="strMenuConnectionsAndConfig" xml:space="preserve">
+  <data name="MenuConnectionsAndConfig" xml:space="preserve">
     <value>接続と設定</value>
   </data>
-  <data name="strMenuCopy" xml:space="preserve">
+  <data name="MenuCopy" xml:space="preserve">
     <value>コピー</value>
   </data>
-  <data name="strMenuCtrlAltDel" xml:space="preserve">
+  <data name="MenuCtrlAltDel" xml:space="preserve">
     <value>Ctrl-Alt-Del</value>
   </data>
-  <data name="strMenuCtrlEsc" xml:space="preserve">
+  <data name="MenuCtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="strMenuDelete" xml:space="preserve">
+  <data name="MenuDelete" xml:space="preserve">
     <value>削除...</value>
   </data>
-  <data name="strMenuDeleteConnection" xml:space="preserve">
+  <data name="MenuDeleteConnection" xml:space="preserve">
     <value>接続を削除...</value>
   </data>
-  <data name="strMenuDeleteExternalTool" xml:space="preserve">
+  <data name="MenuDeleteExternalTool" xml:space="preserve">
     <value>外部ツールを削除...</value>
   </data>
-  <data name="strMenuDeleteFolder" xml:space="preserve">
+  <data name="MenuDeleteFolder" xml:space="preserve">
     <value>フォルダを削除...</value>
   </data>
-  <data name="strMenuDisconnect" xml:space="preserve">
+  <data name="MenuDisconnect" xml:space="preserve">
     <value>切断</value>
   </data>
-  <data name="strMenuDonate" xml:space="preserve">
+  <data name="MenuDonate" xml:space="preserve">
     <value>寄付のお願い</value>
   </data>
-  <data name="strMenuDuplicate" xml:space="preserve">
+  <data name="MenuDuplicate" xml:space="preserve">
     <value>複製</value>
   </data>
-  <data name="strMenuDuplicateConnection" xml:space="preserve">
+  <data name="MenuDuplicateConnection" xml:space="preserve">
     <value>接続を複製する</value>
   </data>
-  <data name="strMenuDuplicateFolder" xml:space="preserve">
+  <data name="MenuDuplicateFolder" xml:space="preserve">
     <value>フォルダを複製する</value>
   </data>
-  <data name="strMenuDuplicateTab" xml:space="preserve">
+  <data name="MenuDuplicateTab" xml:space="preserve">
     <value>タブを複製する</value>
   </data>
-  <data name="strMenuExit" xml:space="preserve">
+  <data name="MenuExit" xml:space="preserve">
     <value>終了</value>
   </data>
-  <data name="strMenuExternalTools" xml:space="preserve">
+  <data name="MenuExternalTools" xml:space="preserve">
     <value>外部ツール</value>
   </data>
-  <data name="strMenuExternalToolsToolbar" xml:space="preserve">
+  <data name="MenuExternalToolsToolbar" xml:space="preserve">
     <value>外部ツールのツールバー</value>
   </data>
-  <data name="strMenuFile" xml:space="preserve">
+  <data name="MenuFile" xml:space="preserve">
     <value>ファイル(&amp;F)</value>
   </data>
-  <data name="strMenuFullScreen" xml:space="preserve">
+  <data name="MenuFullScreen" xml:space="preserve">
     <value>全画面</value>
   </data>
-  <data name="strMenuFullScreenRDP" xml:space="preserve">
+  <data name="MenuFullScreenRDP" xml:space="preserve">
     <value>全画面（RDP）</value>
   </data>
-  <data name="strMenuHelp" xml:space="preserve">
+  <data name="MenuHelp" xml:space="preserve">
     <value>ヘルプ(&amp;H)</value>
   </data>
-  <data name="strMenuHelpContents" xml:space="preserve">
+  <data name="MenuHelpContents" xml:space="preserve">
     <value>mRemoteNGヘルプ</value>
   </data>
-  <data name="strMenuJumpTo" xml:space="preserve">
+  <data name="MenuJumpTo" xml:space="preserve">
     <value>移動先</value>
   </data>
-  <data name="strMenuLaunchExternalTool" xml:space="preserve">
+  <data name="MenuLaunchExternalTool" xml:space="preserve">
     <value>外部ツールの立ち上げ</value>
   </data>
-  <data name="strMenuNewConnectionFile" xml:space="preserve">
+  <data name="MenuNewConnectionFile" xml:space="preserve">
     <value>新規接続ファイル</value>
   </data>
-  <data name="strMenuNewExternalTool" xml:space="preserve">
+  <data name="MenuNewExternalTool" xml:space="preserve">
     <value>新規外部ツール</value>
   </data>
-  <data name="strMenuNotifications" xml:space="preserve">
+  <data name="MenuNotifications" xml:space="preserve">
     <value>通知</value>
   </data>
-  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+  <data name="MenuNotificationsCopyAll" xml:space="preserve">
     <value>全てコピー</value>
   </data>
-  <data name="strMenuNotificationsDelete" xml:space="preserve">
+  <data name="MenuNotificationsDelete" xml:space="preserve">
     <value>削除</value>
   </data>
-  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+  <data name="MenuNotificationsDeleteAll" xml:space="preserve">
     <value>全て削除</value>
   </data>
-  <data name="strMenuOpenConnectionFile" xml:space="preserve">
+  <data name="MenuOpenConnectionFile" xml:space="preserve">
     <value>接続ファイルを開く...</value>
   </data>
-  <data name="strMenuOptions" xml:space="preserve">
+  <data name="MenuOptions" xml:space="preserve">
     <value>オプション</value>
   </data>
-  <data name="strMenuPaste" xml:space="preserve">
+  <data name="MenuPaste" xml:space="preserve">
     <value>貼り付け</value>
   </data>
-  <data name="strMenuPortScan" xml:space="preserve">
+  <data name="MenuPortScan" xml:space="preserve">
     <value>ポートをスキャンする</value>
   </data>
-  <data name="strMenuQuickConnectToolbar" xml:space="preserve">
+  <data name="MenuQuickConnectToolbar" xml:space="preserve">
     <value>クイック接続ツールバー</value>
   </data>
-  <data name="strMenuReconnect" xml:space="preserve">
+  <data name="MenuReconnect" xml:space="preserve">
     <value>再接続</value>
   </data>
-  <data name="strMenuRefreshScreen" xml:space="preserve">
+  <data name="MenuRefreshScreen" xml:space="preserve">
     <value>スクリーンを更新する (VNC)</value>
   </data>
-  <data name="strMenuRename" xml:space="preserve">
+  <data name="MenuRename" xml:space="preserve">
     <value>名前を変更</value>
   </data>
-  <data name="strMenuRenameConnection" xml:space="preserve">
+  <data name="MenuRenameConnection" xml:space="preserve">
     <value>接続名を変更</value>
   </data>
-  <data name="strMenuRenameFolder" xml:space="preserve">
+  <data name="MenuRenameFolder" xml:space="preserve">
     <value>フォルダ名を変更</value>
   </data>
-  <data name="strMenuRenameTab" xml:space="preserve">
+  <data name="MenuRenameTab" xml:space="preserve">
     <value>タブ名を変更</value>
   </data>
-  <data name="strMenuReportBug" xml:space="preserve">
+  <data name="MenuReportBug" xml:space="preserve">
     <value>バグを報告する</value>
   </data>
-  <data name="strMenuResetLayout" xml:space="preserve">
+  <data name="MenuResetLayout" xml:space="preserve">
     <value>レイアウトを初期化</value>
   </data>
-  <data name="strMenuSaveConnectionFile" xml:space="preserve">
+  <data name="MenuSaveConnectionFile" xml:space="preserve">
     <value>接続ファイルの保存</value>
   </data>
-  <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
+  <data name="MenuSaveConnectionFileAs" xml:space="preserve">
     <value>接続ファイルを別名で保存...</value>
   </data>
-  <data name="strMenuScreenshot" xml:space="preserve">
+  <data name="MenuScreenshot" xml:space="preserve">
     <value>スクリーンキャプチャ</value>
   </data>
-  <data name="strMenuScreenshotManager" xml:space="preserve">
+  <data name="MenuScreenshotManager" xml:space="preserve">
     <value>スクリーンキャプチャの管理</value>
   </data>
-  <data name="strMenuSendSpecialKeys" xml:space="preserve">
+  <data name="MenuSendSpecialKeys" xml:space="preserve">
     <value>Send Special Keys (VNC)</value>
   </data>
-  <data name="strMenuSessionRetrieve" xml:space="preserve">
+  <data name="MenuSessionRetrieve" xml:space="preserve">
     <value>Retrieve</value>
   </data>
-  <data name="strMenuSessions" xml:space="preserve">
+  <data name="MenuSessions" xml:space="preserve">
     <value>セッション</value>
   </data>
-  <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
+  <data name="MenuSessionsAndScreenshots" xml:space="preserve">
     <value>セッションとスクリーンキャプチャ</value>
   </data>
-  <data name="strMenuShowHelpText" xml:space="preserve">
+  <data name="MenuShowHelpText" xml:space="preserve">
     <value>ヘルプ文字を表示(&amp;S)</value>
     <comment>&amp;Show Help Text</comment>
   </data>
-  <data name="strMenuShowText" xml:space="preserve">
+  <data name="MenuShowText" xml:space="preserve">
     <value>文字の表示</value>
   </data>
-  <data name="strMenuSmartSize" xml:space="preserve">
+  <data name="MenuSmartSize" xml:space="preserve">
     <value>SmartSize (RDP/VNC)</value>
   </data>
-  <data name="strMenuSSHFileTransfer" xml:space="preserve">
+  <data name="MenuSSHFileTransfer" xml:space="preserve">
     <value>SSHによるファイル転送</value>
   </data>
-  <data name="strMenuStartChat" xml:space="preserve">
+  <data name="MenuStartChat" xml:space="preserve">
     <value>Start Chat (VNC)</value>
   </data>
-  <data name="strMenuSupportForum" xml:space="preserve">
+  <data name="MenuSupportForum" xml:space="preserve">
     <value>サポートフォーラム</value>
   </data>
-  <data name="strMenuTools" xml:space="preserve">
+  <data name="MenuTools" xml:space="preserve">
     <value>ツール(&amp;T)</value>
   </data>
-  <data name="strMenuTransferFile" xml:space="preserve">
+  <data name="MenuTransferFile" xml:space="preserve">
     <value>SSHによるファイルの転送</value>
   </data>
-  <data name="strMenuView" xml:space="preserve">
+  <data name="MenuView" xml:space="preserve">
     <value>表示(&amp;V)</value>
   </data>
-  <data name="strMenuViewOnly" xml:space="preserve">
+  <data name="MenuViewOnly" xml:space="preserve">
     <value>View Only (VNC)</value>
   </data>
-  <data name="strMenuWebsite" xml:space="preserve">
+  <data name="MenuWebsite" xml:space="preserve">
     <value>ウェブサイト（英語）</value>
   </data>
-  <data name="strMinimizeToSysTray" xml:space="preserve">
+  <data name="MinimizeToSysTray" xml:space="preserve">
     <value>通知領域に最小化</value>
   </data>
-  <data name="strMoveDown" xml:space="preserve">
+  <data name="MoveDown" xml:space="preserve">
     <value>下へ移動</value>
   </data>
-  <data name="strMoveUp" xml:space="preserve">
+  <data name="MoveUp" xml:space="preserve">
     <value>上へ移動</value>
   </data>
-  <data name="strMremoteNgCsv" xml:space="preserve">
+  <data name="MremoteNgCsv" xml:space="preserve">
     <value>mRemoteNG CSVフォーマット</value>
   </data>
-  <data name="strMremoteNgXml" xml:space="preserve">
+  <data name="MremoteNgXml" xml:space="preserve">
     <value>mRemoteNG XMLフォーマット</value>
   </data>
-  <data name="strMyCurrentWindowsCreds" xml:space="preserve">
+  <data name="MyCurrentWindowsCreds" xml:space="preserve">
     <value>My current credentials (Windows logon information)</value>
   </data>
-  <data name="strNever" xml:space="preserve">
+  <data name="Never" xml:space="preserve">
     <value>なし</value>
   </data>
-  <data name="strNewConnection" xml:space="preserve">
+  <data name="NewConnection" xml:space="preserve">
     <value>新規接続</value>
   </data>
-  <data name="strNewFolder" xml:space="preserve">
+  <data name="NewFolder" xml:space="preserve">
     <value>新規フォルダ</value>
   </data>
-  <data name="strNewPanel" xml:space="preserve">
+  <data name="NewPanel" xml:space="preserve">
     <value>新規パネル</value>
   </data>
-  <data name="strNewRoot" xml:space="preserve">
+  <data name="NewRoot" xml:space="preserve">
     <value>新規ルート</value>
   </data>
-  <data name="strNewTitle" xml:space="preserve">
+  <data name="NewTitle" xml:space="preserve">
     <value>新規タイトル</value>
   </data>
-  <data name="strNo" xml:space="preserve">
+  <data name="No" xml:space="preserve">
     <value>いいえ</value>
   </data>
-  <data name="strNoCompression" xml:space="preserve">
+  <data name="NoCompression" xml:space="preserve">
     <value>圧縮なし</value>
   </data>
-  <data name="strNoExtAppDefined" xml:space="preserve">
+  <data name="NoExtAppDefined" xml:space="preserve">
     <value>No Ext. App specified.</value>
   </data>
-  <data name="strNoInformation" xml:space="preserve">
+  <data name="NoInformation" xml:space="preserve">
     <value>情報がありません</value>
   </data>
-  <data name="strNone" xml:space="preserve">
+  <data name="None" xml:space="preserve">
     <value>なし</value>
   </data>
-  <data name="strNormal" xml:space="preserve">
+  <data name="Normal" xml:space="preserve">
     <value>Normal</value>
   </data>
-  <data name="strNoSmartSize" xml:space="preserve">
+  <data name="NoSmartSize" xml:space="preserve">
     <value>No SmartSize</value>
   </data>
-  <data name="strNoUpdateAvailable" xml:space="preserve">
+  <data name="NoUpdateAvailable" xml:space="preserve">
     <value>更新はありません</value>
   </data>
-  <data name="strOldConffile" xml:space="preserve">
+  <data name="OldConffile" xml:space="preserve">
     <value>You are trying to load a connection file that was created using an very early version of mRemote, this could result in an runtime error.
 If you run into such an error, please create a new connection file!</value>
     <comment>You are trying to load a connection file that was created using an very early version of mRemote, this could result in an runtime error.
 If you run into such an error, please create a new connection file!</comment>
   </data>
-  <data name="strOpenNewTabRight" xml:space="preserve">
+  <data name="OpenNewTabRight" xml:space="preserve">
     <value>選択されているタブの右側に新規タブを作成</value>
     <comment>Open new tab to the right of the currently selected tab</comment>
   </data>
-  <data name="strOpenPorts" xml:space="preserve">
+  <data name="OpenPorts" xml:space="preserve">
     <value>Open Ports</value>
   </data>
-  <data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
+  <data name="OptionsKeyboardButtonDelete" xml:space="preserve">
     <value>削除(&amp;D)</value>
   </data>
-  <data name="strOptionsKeyboardButtonNew" xml:space="preserve">
+  <data name="OptionsKeyboardButtonNew" xml:space="preserve">
     <value>新規(&amp;N)</value>
   </data>
-  <data name="strOptionsKeyboardButtonReset" xml:space="preserve">
+  <data name="OptionsKeyboardButtonReset" xml:space="preserve">
     <value>デフォルトに戻す(&amp;R)</value>
   </data>
-  <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
+  <data name="OptionsKeyboardButtonResetAll" xml:space="preserve">
     <value>すべてデフォルトに戻す(&amp;A)</value>
     <comment>Reset &amp;All to Default</comment>
   </data>
-  <data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
+  <data name="OptionsKeyboardCommandsGroupTabs" xml:space="preserve">
     <value>タブ</value>
   </data>
-  <data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
+  <data name="OptionsKeyboardCommandsNextTab" xml:space="preserve">
     <value>新しいタブ</value>
   </data>
-  <data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
+  <data name="OptionsKeyboardCommandsPreviousTab" xml:space="preserve">
     <value>前のタブ</value>
   </data>
-  <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
+  <data name="OptionsKeyboardGroupModifyShortcut" xml:space="preserve">
     <value>ショートカットを変更する</value>
   </data>
-  <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
+  <data name="OptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
     <value>キーボードショートカット</value>
   </data>
-  <data name="strOptionsProxyTesting" xml:space="preserve">
+  <data name="OptionsProxyTesting" xml:space="preserve">
     <value>テストの実行中</value>
   </data>
-  <data name="strOptionsTabKeyboard" xml:space="preserve">
+  <data name="OptionsTabKeyboard" xml:space="preserve">
     <value>キーボード</value>
   </data>
-  <data name="strOptionsTabTheme" xml:space="preserve">
+  <data name="OptionsTabTheme" xml:space="preserve">
     <value>テーマ</value>
   </data>
-  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+  <data name="OptionsThemeButtonDelete" xml:space="preserve">
     <value>削除(&amp;D)</value>
   </data>
-  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+  <data name="OptionsThemeButtonNew" xml:space="preserve">
     <value>新規(&amp;N)</value>
   </data>
-  <data name="strPanelName" xml:space="preserve">
+  <data name="PanelName" xml:space="preserve">
     <value>パネル名</value>
   </data>
-  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
+  <data name="PropertyNamePasswordProtect" xml:space="preserve">
     <value>パスワードの保護</value>
   </data>
-  <data name="strPasswordStatusMustMatch" xml:space="preserve">
+  <data name="PasswordStatusMustMatch" xml:space="preserve">
     <value>同じパスワードを入力してください</value>
   </data>
-  <data name="strPasswordStatusTooShort" xml:space="preserve">
+  <data name="PasswordStatusTooShort" xml:space="preserve">
     <value>パスワードは最低３文字必要です</value>
   </data>
-  <data name="strPleaseFillAllFields" xml:space="preserve">
+  <data name="PleaseFillAllFields" xml:space="preserve">
     <value>全て入力してください</value>
   </data>
-  <data name="strPortScanComplete" xml:space="preserve">
+  <data name="PortScanComplete" xml:space="preserve">
     <value>ポートのスキャンが完了しました</value>
   </data>
-  <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
+  <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Couldn't load PortScan panel!</value>
   </data>
-  <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
+  <data name="PropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
     <value>(These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!)</value>
   </data>
-  <data name="strPropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionAddress" xml:space="preserve">
     <value>ホスト名かIPアドレスを入力してください</value>
   </data>
-  <data name="strPropertyDescriptionAll" xml:space="preserve">
+  <data name="PropertyDescriptionAll" xml:space="preserve">
     <value>Toggle all inheritance options.</value>
   </data>
-  <data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
+  <data name="PropertyDescriptionAuthenticationLevel" xml:space="preserve">
     <value>Select which authentication level this connection should use.</value>
   </data>
-  <data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
+  <data name="PropertyDescriptionAuthenticationMode" xml:space="preserve">
     <value>Select how you want to authenticate against the VNC server.</value>
   </data>
-  <data name="strPropertyDescriptionAutomaticResize" xml:space="preserve">
+  <data name="PropertyDescriptionAutomaticResize" xml:space="preserve">
     <value>Select whether to automatically resize the connection when the window is resized or when fullscreen mode is toggled. Requires RDC 8.0 or higher.</value>
   </data>
-  <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
+  <data name="PropertyDescriptionCacheBitmaps" xml:space="preserve">
     <value>Select whether to use bitmap caching or not.</value>
   </data>
-  <data name="strPropertyDescriptionColors" xml:space="preserve">
+  <data name="PropertyDescriptionColors" xml:space="preserve">
     <value>Select the colour quality to be used.</value>
   </data>
-  <data name="strPropertyDescriptionCompression" xml:space="preserve">
+  <data name="PropertyDescriptionCompression" xml:space="preserve">
     <value>Select the compression value to be used.</value>
   </data>
-  <data name="strPropertyDescriptionDescription" xml:space="preserve">
+  <data name="PropertyDescriptionDescription" xml:space="preserve">
     <value>Put your notes or a description for the host here.</value>
   </data>
-  <data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
+  <data name="PropertyDescriptionDisplayThemes" xml:space="preserve">
     <value>Select yes if the theme of the remote host should be displayed.</value>
   </data>
-  <data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
+  <data name="PropertyDescriptionDisplayWallpaper" xml:space="preserve">
     <value>Select yes if the wallpaper of the remote host should be displayed.</value>
   </data>
-  <data name="strPropertyDescriptionDomain" xml:space="preserve">
+  <data name="PropertyDescriptionDomain" xml:space="preserve">
     <value>ドメインを入力してください</value>
   </data>
-  <data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
+  <data name="PropertyDescriptionEnableDesktopComposition" xml:space="preserve">
     <value>Select whether to use desktop composition or not.</value>
   </data>
-  <data name="strPropertyDescriptionEnableFontSmoothing" xml:space="preserve">
+  <data name="PropertyDescriptionEnableFontSmoothing" xml:space="preserve">
     <value>Select whether to use font smoothing or not.</value>
   </data>
-  <data name="strPropertyDescriptionEncoding" xml:space="preserve">
+  <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Select the encoding mode to be used.</value>
   </data>
-  <data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
+  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
     <value>Select the encryption strength of the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionExternalTool" xml:space="preserve">
+  <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Select the external tool to be started.</value>
   </data>
-  <data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
+  <data name="PropertyDescriptionExternalToolAfter" xml:space="preserve">
     <value>Select a external tool to be started after the disconnection to the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
+  <data name="PropertyDescriptionExternalToolBefore" xml:space="preserve">
     <value>Select a external tool to be started before the connection to the remote host is established.</value>
   </data>
-  <data name="strPropertyDescriptionIcon" xml:space="preserve">
+  <data name="PropertyDescriptionIcon" xml:space="preserve">
     <value>Choose a icon that will be displayed when connected to the host.</value>
   </data>
-  <data name="strPropertyDescriptionLoadBalanceInfo" xml:space="preserve">
+  <data name="PropertyDescriptionLoadBalanceInfo" xml:space="preserve">
     <value>Specifies the load balancing information for use by load balancing routers to choose the best server.</value>
   </data>
-  <data name="strPropertyDescriptionMACAddress" xml:space="preserve">
+  <data name="PropertyDescriptionMACAddress" xml:space="preserve">
     <value>Enter the MAC address of the remote host if you wish to use it in an external tool.</value>
   </data>
-  <data name="strPropertyDescriptionName" xml:space="preserve">
+  <data name="PropertyDescriptionName" xml:space="preserve">
     <value>This is the name that will be displayed in the connections tree.</value>
   </data>
-  <data name="strPropertyDescriptionPanel" xml:space="preserve">
+  <data name="PropertyDescriptionPanel" xml:space="preserve">
     <value>接続をするパネルを指定</value>
     <comment>Sets the panel in which the connection will open.</comment>
   </data>
-  <data name="strPropertyDescriptionPassword" xml:space="preserve">
+  <data name="PropertyDescriptionPassword" xml:space="preserve">
     <value>パスワードを入力</value>
   </data>
-  <data name="strPropertyDescriptionPort" xml:space="preserve">
+  <data name="PropertyDescriptionPort" xml:space="preserve">
     <value>プロトコルのポートを入力</value>
     <comment>Enter the port the selected protocol is listening on.</comment>
   </data>
-  <data name="strPropertyDescriptionProtocol" xml:space="preserve">
+  <data name="PropertyDescriptionProtocol" xml:space="preserve">
     <value>Choose the protocol mRemoteNG should use to connect to the host.</value>
   </data>
-  <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
+  <data name="PropertyDescriptionPuttySession" xml:space="preserve">
     <value>Select a PuTTY session to be used when connecting.</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
+  <data name="PropertyDescriptionRDGatewayDomain" xml:space="preserve">
     <value>Specifies the domain name that a user provides to connect to the RD Gateway server.</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
+  <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Specifies the host name of the Remote Desktop Gateway server.</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
     <value>Specifies when to use a Remote Desktop Gateway (RD Gateway) server.</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Specifies whether or not to log on to the gateway using the same username and password as the connection.</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
+  <data name="PropertyDescriptionRDGatewayUsername" xml:space="preserve">
     <value>Specifies the user name that a user provides to connect to the RD Gateway server.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
+  <data name="PropertyDescriptionRedirectDrives" xml:space="preserve">
     <value>Select whether local disk drives should be shown on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
+  <data name="PropertyDescriptionRedirectKeys" xml:space="preserve">
     <value>Select whether key combinations (e.g. Alt-Tab) should be redirected to the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
+  <data name="PropertyDescriptionRedirectPorts" xml:space="preserve">
     <value>Select whether local ports (ie. com, parallel) should be shown on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
+  <data name="PropertyDescriptionRedirectPrinters" xml:space="preserve">
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
+  <data name="PropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local smart cards should be available on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
+  <data name="PropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
+  <data name="PropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Select one of the available rendering engines that will be used to display HTML.</value>
   </data>
-  <data name="strPropertyDescriptionResolution" xml:space="preserve">
+  <data name="PropertyDescriptionResolution" xml:space="preserve">
     <value>Choose the resolution or mode this connection will open in.</value>
   </data>
-  <data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
+  <data name="PropertyDescriptionSmartSizeMode" xml:space="preserve">
     <value>Select the SmartSize mode to be used.</value>
   </data>
-  <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
+  <data name="PropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Connect to the console session of the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+  <data name="PropertyDescriptionUseCredSsp" xml:space="preserve">
     <value>Use the Credential Security Support Provider (CredSSP) for authentication if it is available.</value>
   </data>
-  <data name="strPropertyDescriptionUser1" xml:space="preserve">
+  <data name="PropertyDescriptionUser1" xml:space="preserve">
     <value>Feel free to enter any information you need here.</value>
   </data>
-  <data name="strPropertyDescriptionUsername" xml:space="preserve">
+  <data name="PropertyDescriptionUsername" xml:space="preserve">
     <value>ユーザー名を入力してください</value>
   </data>
-  <data name="strPropertyDescriptionViewOnly" xml:space="preserve">
+  <data name="PropertyDescriptionViewOnly" xml:space="preserve">
     <value>If you want to establish a view only connection to the host select yes.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
+  <data name="PropertyDescriptionVNCProxyAddress" xml:space="preserve">
     <value>Enter the proxy address to be used.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
+  <data name="PropertyDescriptionVNCProxyPassword" xml:space="preserve">
     <value>Enter your password for authenticating against the proxy.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
+  <data name="PropertyDescriptionVNCProxyPort" xml:space="preserve">
     <value>Enter the port the proxy server listens on.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
+  <data name="PropertyDescriptionVNCProxyType" xml:space="preserve">
     <value>If you use a proxy to tunnel VNC connections, select which type it is.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
+  <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Enter your username for authenticating against the proxy.</value>
   </data>
-  <data name="strPropertyNameAddress" xml:space="preserve">
+  <data name="PropertyNameAddress" xml:space="preserve">
     <value>ホスト名またはIPアドレス</value>
   </data>
-  <data name="strPropertyNameAll" xml:space="preserve">
+  <data name="PropertyNameAll" xml:space="preserve">
     <value>全て</value>
   </data>
-  <data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
     <value>サーバー認証</value>
   </data>
-  <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="PropertyNameAuthenticationMode" xml:space="preserve">
     <value>認証モード</value>
   </data>
-  <data name="strPropertyNameAutomaticResize" xml:space="preserve">
+  <data name="PropertyNameAutomaticResize" xml:space="preserve">
     <value>自動サイズ変更</value>
   </data>
-  <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="PropertyNameCacheBitmaps" xml:space="preserve">
     <value>ビットマップをキャッシュ</value>
   </data>
-  <data name="strPropertyNameColors" xml:space="preserve">
+  <data name="PropertyNameColors" xml:space="preserve">
     <value>色</value>
   </data>
-  <data name="strPropertyNameCompression" xml:space="preserve">
+  <data name="PropertyNameCompression" xml:space="preserve">
     <value>圧縮</value>
   </data>
-  <data name="strPropertyNameDescription" xml:space="preserve">
+  <data name="PropertyNameDescription" xml:space="preserve">
     <value>説明</value>
   </data>
-  <data name="strPropertyNameDisplayThemes" xml:space="preserve">
+  <data name="PropertyNameDisplayThemes" xml:space="preserve">
     <value>テーマの表示</value>
   </data>
-  <data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
+  <data name="PropertyNameDisplayWallpaper" xml:space="preserve">
     <value>ウォールペーパーを表示</value>
   </data>
-  <data name="strPropertyNameDomain" xml:space="preserve">
+  <data name="PropertyNameDomain" xml:space="preserve">
     <value>ドメイン</value>
   </data>
-  <data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
     <value>Desktop Composition</value>
   </data>
-  <data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>フォントの滑らかさ</value>
   </data>
-  <data name="strPropertyNameEncoding" xml:space="preserve">
+  <data name="PropertyNameEncoding" xml:space="preserve">
     <value>エンコード</value>
   </data>
-  <data name="strPropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="PropertyNameEncryptionStrength" xml:space="preserve">
     <value>Encryption Strength</value>
   </data>
-  <data name="strPropertyNameExternalTool" xml:space="preserve">
+  <data name="PropertyNameExternalTool" xml:space="preserve">
     <value>外部ツール</value>
   </data>
-  <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="PropertyNameExternalToolAfter" xml:space="preserve">
     <value>External Tool After</value>
   </data>
-  <data name="strPropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="PropertyNameExternalToolBefore" xml:space="preserve">
     <value>External Tool Before</value>
   </data>
-  <data name="strPropertyNameIcon" xml:space="preserve">
+  <data name="PropertyNameIcon" xml:space="preserve">
     <value>アイコン</value>
   </data>
-  <data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
+  <data name="PropertyNameLoadBalanceInfo" xml:space="preserve">
     <value>Load Balance Info</value>
   </data>
-  <data name="strPropertyNameMACAddress" xml:space="preserve">
+  <data name="PropertyNameMACAddress" xml:space="preserve">
     <value>MACアドレス</value>
   </data>
-  <data name="strPropertyNameName" xml:space="preserve">
+  <data name="PropertyNameName" xml:space="preserve">
     <value>名前</value>
   </data>
-  <data name="strPropertyNamePanel" xml:space="preserve">
+  <data name="PropertyNamePanel" xml:space="preserve">
     <value>パネル</value>
   </data>
-  <data name="strPropertyNamePassword" xml:space="preserve">
+  <data name="PropertyNamePassword" xml:space="preserve">
     <value>パスワード</value>
   </data>
-  <data name="strPropertyNamePort" xml:space="preserve">
+  <data name="PropertyNamePort" xml:space="preserve">
     <value>ポート</value>
   </data>
-  <data name="strPropertyNameProtocol" xml:space="preserve">
+  <data name="PropertyNameProtocol" xml:space="preserve">
     <value>プロトコル</value>
   </data>
-  <data name="strPropertyNamePuttySession" xml:space="preserve">
+  <data name="PropertyNamePuttySession" xml:space="preserve">
     <value>PuTTYのセッション</value>
   </data>
-  <data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="PropertyNameRDGatewayDomain" xml:space="preserve">
     <value>ゲートウェイのドメイン</value>
   </data>
-  <data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="PropertyNameRDGatewayHostname" xml:space="preserve">
     <value>ゲートウェイのホスト名</value>
   </data>
-  <data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="PropertyNameRDGatewayPassword" xml:space="preserve">
     <value>Remote Desktop Gateway Password</value>
   </data>
-  <data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyNameRDGatewayUsageMethod" xml:space="preserve">
     <value>ゲートウェイを使用</value>
   </data>
-  <data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="PropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
     <value>ゲートウェイの資格情報</value>
   </data>
-  <data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
     <value>ゲートウェイのユーザー名</value>
   </data>
-  <data name="strPropertyNameRedirectDrives" xml:space="preserve">
+  <data name="PropertyNameRedirectDrives" xml:space="preserve">
     <value>ディスク・ドライブ</value>
   </data>
-  <data name="strPropertyNameRedirectKeys" xml:space="preserve">
+  <data name="PropertyNameRedirectKeys" xml:space="preserve">
     <value>キーの組み合わせ</value>
   </data>
-  <data name="strPropertyNameRedirectPorts" xml:space="preserve">
+  <data name="PropertyNameRedirectPorts" xml:space="preserve">
     <value>ポート</value>
   </data>
-  <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="PropertyNameRedirectPrinters" xml:space="preserve">
     <value>プリンター</value>
   </data>
-  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="PropertyNameRedirectSmartCards" xml:space="preserve">
     <value>スマートカード</value>
   </data>
-  <data name="strPropertyNameRedirectSounds" xml:space="preserve">
+  <data name="PropertyNameRedirectSounds" xml:space="preserve">
     <value>サウンド</value>
   </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
+  <data name="PropertyNameRenderingEngine" xml:space="preserve">
     <value>レンダリングエンジン</value>
   </data>
-  <data name="strPropertyNameResolution" xml:space="preserve">
+  <data name="PropertyNameResolution" xml:space="preserve">
     <value>解像度</value>
   </data>
-  <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="PropertyNameSmartSizeMode" xml:space="preserve">
     <value>スマートサイズモード</value>
   </data>
-  <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="PropertyNameUseConsoleSession" xml:space="preserve">
     <value>コンソールセッションを使用</value>
   </data>
-  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+  <data name="PropertyNameUseCredSsp" xml:space="preserve">
     <value>Use CredSSP</value>
   </data>
-  <data name="strPropertyNameUser1" xml:space="preserve">
+  <data name="PropertyNameUser1" xml:space="preserve">
     <value>User Field</value>
   </data>
-  <data name="strPropertyNameUsername" xml:space="preserve">
+  <data name="PropertyNameUsername" xml:space="preserve">
     <value>ユーザー名</value>
   </data>
-  <data name="strPropertyNameViewOnly" xml:space="preserve">
+  <data name="PropertyNameViewOnly" xml:space="preserve">
     <value>表示のみ</value>
   </data>
-  <data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
+  <data name="PropertyNameVNCProxyAddress" xml:space="preserve">
     <value>プロキシーのアドレス</value>
     <comment>Proxy Address</comment>
   </data>
-  <data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
+  <data name="PropertyNameVNCProxyPassword" xml:space="preserve">
     <value>プロキシーのパスワード</value>
     <comment>Proxy Password</comment>
   </data>
-  <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
+  <data name="PropertyNameVNCProxyPort" xml:space="preserve">
     <value>プロキシーのポート</value>
   </data>
-  <data name="strPropertyNameVNCProxyType" xml:space="preserve">
+  <data name="PropertyNameVNCProxyType" xml:space="preserve">
     <value>プロキシーの種類</value>
   </data>
-  <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
+  <data name="PropertyNameVNCProxyUsername" xml:space="preserve">
     <value>プロキシーのユーザー名</value>
   </data>
-  <data name="strProtocolEventDisconnected" xml:space="preserve">
+  <data name="ProtocolEventDisconnected" xml:space="preserve">
     <value>Protocol Event Disconnected.
 Message:
 {0}</value>
   </data>
-  <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
+  <data name="ProtocolEventDisconnectFailed" xml:space="preserve">
     <value>Protocol Event Disconnected failed.
 {0}</value>
   </data>
-  <data name="strProtocolToImport" xml:space="preserve">
+  <data name="ProtocolToImport" xml:space="preserve">
     <value>インポートするプロトコル</value>
   </data>
-  <data name="strProxyTestFailed" xml:space="preserve">
+  <data name="ProxyTestFailed" xml:space="preserve">
     <value>Proxy test failed!</value>
   </data>
-  <data name="strProxyTestSucceeded" xml:space="preserve">
+  <data name="ProxyTestSucceeded" xml:space="preserve">
     <value>Proxy test succeeded!</value>
   </data>
-  <data name="strPuttyDisposeFailed" xml:space="preserve">
+  <data name="PuttyDisposeFailed" xml:space="preserve">
     <value>Dispose of Putty process failed!</value>
   </data>
-  <data name="strPuttyFocusFailed" xml:space="preserve">
+  <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Couldn't set focus!</value>
   </data>
-  <data name="strPuttyGetSessionsFailed" xml:space="preserve">
+  <data name="PuttyGetSessionsFailed" xml:space="preserve">
     <value>Get Putty Sessions Failed!</value>
   </data>
-  <data name="strPuttyHandle" xml:space="preserve">
+  <data name="PuttyHandle" xml:space="preserve">
     <value>Putty Handle: {0}</value>
   </data>
-  <data name="strPuttyKillFailed" xml:space="preserve">
+  <data name="PuttyKillFailed" xml:space="preserve">
     <value>Killing Putty Process failed!</value>
   </data>
-  <data name="strPuttyParentHandle" xml:space="preserve">
+  <data name="PuttyParentHandle" xml:space="preserve">
     <value>Panel Handle: {0}</value>
   </data>
-  <data name="strPuttyResizeFailed" xml:space="preserve">
+  <data name="PuttyResizeFailed" xml:space="preserve">
     <value>Putty Resize Failed!</value>
   </data>
-  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
+  <data name="PuttySavedSessionsRootName" xml:space="preserve">
     <value>PuTTY Saved Sessions</value>
   </data>
-  <data name="strPuttySessionSettings" xml:space="preserve">
+  <data name="PuttySessionSettings" xml:space="preserve">
     <value>PuTTY Session Settings</value>
   </data>
-  <data name="strPuttySettings" xml:space="preserve">
+  <data name="PuttySettings" xml:space="preserve">
     <value>PuTTY Settings</value>
   </data>
-  <data name="strPuttyShowSettingsDialogFailed" xml:space="preserve">
+  <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
     <value>Show PuTTY Settings Dialog failed!</value>
   </data>
-  <data name="strPuttyStartFailed" xml:space="preserve">
+  <data name="PuttyStartFailed" xml:space="preserve">
     <value>Putty Start Failed!</value>
   </data>
-  <data name="strPuttyStuff" xml:space="preserve">
+  <data name="PuttyStuff" xml:space="preserve">
     <value>--- PuTTY Stuff ---</value>
   </data>
-  <data name="strPuttyTitle" xml:space="preserve">
+  <data name="PuttyTitle" xml:space="preserve">
     <value>PuTTY Title: {0}</value>
   </data>
-  <data name="strQuick" xml:space="preserve">
+  <data name="Quick" xml:space="preserve">
     <value>Quick: {0}</value>
   </data>
-  <data name="strQuickConnect" xml:space="preserve">
+  <data name="QuickConnect" xml:space="preserve">
     <value>クイック接続</value>
   </data>
-  <data name="strQuickConnectAddFailed" xml:space="preserve">
+  <data name="QuickConnectAddFailed" xml:space="preserve">
     <value>Quick Connect Add Failed!</value>
   </data>
-  <data name="strQuickConnectFailed" xml:space="preserve">
+  <data name="QuickConnectFailed" xml:space="preserve">
     <value>Creating quick connect failed</value>
   </data>
-  <data name="strRadioCloseWarnAll" xml:space="preserve">
+  <data name="RadioCloseWarnAll" xml:space="preserve">
     <value>&amp;Warn me when closing connections</value>
   </data>
-  <data name="strRadioCloseWarnExit" xml:space="preserve">
+  <data name="RadioCloseWarnExit" xml:space="preserve">
     <value>Warn me only when e&amp;xiting mRemoteNG</value>
   </data>
-  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+  <data name="RadioCloseWarnMultiple" xml:space="preserve">
     <value>Warn me only when closing &amp;multiple connections</value>
   </data>
-  <data name="strRadioCloseWarnNever" xml:space="preserve">
+  <data name="RadioCloseWarnNever" xml:space="preserve">
     <value>Do &amp;not warn me when closing connections</value>
   </data>
-  <data name="strRAW" xml:space="preserve">
+  <data name="RAW" xml:space="preserve">
     <value>RAW</value>
   </data>
-  <data name="strRDP" xml:space="preserve">
+  <data name="RDP" xml:space="preserve">
     <value>RDP</value>
   </data>
-  <data name="strRDP16777216Colors" xml:space="preserve">
+  <data name="RDP16777216Colors" xml:space="preserve">
     <value>16777216 Colours (24-bit)</value>
   </data>
-  <data name="strRDP256Colors" xml:space="preserve">
+  <data name="RDP256Colors" xml:space="preserve">
     <value>256 Colours (8-bit)</value>
   </data>
-  <data name="strRDP32768Colors" xml:space="preserve">
+  <data name="RDP32768Colors" xml:space="preserve">
     <value>32768 Colours (15-bit)</value>
   </data>
-  <data name="strRDP4294967296Colors" xml:space="preserve">
+  <data name="RDP4294967296Colors" xml:space="preserve">
     <value>16777216 Colours (32-bit)</value>
   </data>
-  <data name="strRDP65536Colors" xml:space="preserve">
+  <data name="RDP65536Colors" xml:space="preserve">
     <value>65536 Colours (16-bit)</value>
   </data>
-  <data name="strRdpAddResolutionFailed" xml:space="preserve">
+  <data name="RdpAddResolutionFailed" xml:space="preserve">
     <value>RDP Add Resolution failed!</value>
   </data>
-  <data name="strRdpAddResolutionsFailed" xml:space="preserve">
+  <data name="RdpAddResolutionsFailed" xml:space="preserve">
     <value>RDP Add Resolutions failed!</value>
   </data>
-  <data name="strRdpAddSessionFailed" xml:space="preserve">
+  <data name="RdpAddSessionFailed" xml:space="preserve">
     <value>セッションの追加に失敗しました</value>
   </data>
-  <data name="strRdpCloseConnectionFailed" xml:space="preserve">
+  <data name="RdpCloseConnectionFailed" xml:space="preserve">
     <value>Close RDP Connection failed!</value>
   </data>
-  <data name="strRdpControlCreationFailed" xml:space="preserve">
+  <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Couldn't create RDP control, please check mRemoteNG requirements.</value>
   </data>
-  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
+  <data name="PropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Disable Cursor blinking</value>
   </data>
-  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
+  <data name="PropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Disable Cursor Shadow</value>
   </data>
-  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
+  <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Disable Full Window drag</value>
   </data>
-  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
+  <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>メニューのアニメーションを無効にする</value>
   </data>
-  <data name="strRDPDisableThemes" xml:space="preserve">
+  <data name="RDPDisableThemes" xml:space="preserve">
     <value>テーマを無効にする</value>
   </data>
-  <data name="strRDPDisableWallpaper" xml:space="preserve">
+  <data name="RDPDisableWallpaper" xml:space="preserve">
     <value>Disable Wallpaper</value>
   </data>
-  <data name="strRdpDisconnected" xml:space="preserve">
+  <data name="RdpDisconnected" xml:space="preserve">
     <value>リモートデスクトップが切断されました</value>
   </data>
-  <data name="strRdpDisconnectFailed" xml:space="preserve">
+  <data name="RdpDisconnectFailed" xml:space="preserve">
     <value>RDP Disconnect failed, trying to close!</value>
   </data>
-  <data name="strRdpErrorCode1" xml:space="preserve">
+  <data name="RdpErrorCode1" xml:space="preserve">
     <value>Internal error code 1.</value>
   </data>
-  <data name="strRdpErrorCode2" xml:space="preserve">
+  <data name="RdpErrorCode2" xml:space="preserve">
     <value>Internal error code 2.</value>
   </data>
-  <data name="strRdpErrorCode3" xml:space="preserve">
+  <data name="RdpErrorCode3" xml:space="preserve">
     <value>Internal error code 3. This is not a valid state.</value>
   </data>
-  <data name="strRdpErrorCode4" xml:space="preserve">
+  <data name="RdpErrorCode4" xml:space="preserve">
     <value>Internal error code 4.</value>
   </data>
-  <data name="strRdpErrorConnection" xml:space="preserve">
+  <data name="RdpErrorConnection" xml:space="preserve">
     <value>An unrecoverable error has occurred during client connection.</value>
   </data>
-  <data name="strRdpErrorGetFailure" xml:space="preserve">
+  <data name="RdpErrorGetFailure" xml:space="preserve">
     <value>GetError failed (FatalErrors)</value>
   </data>
-  <data name="strRdpErrorGetUnknown" xml:space="preserve">
+  <data name="RdpErrorGetUnknown" xml:space="preserve">
     <value>An unknown fatal RDP error has occurred.  Error code {0}.</value>
   </data>
-  <data name="strRdpErrorOutOfMemory" xml:space="preserve">
+  <data name="RdpErrorOutOfMemory" xml:space="preserve">
     <value>An out-of-memory error has occurred.</value>
   </data>
-  <data name="strRdpErrorUnknown" xml:space="preserve">
+  <data name="RdpErrorUnknown" xml:space="preserve">
     <value>An unknown error has occurred.</value>
   </data>
-  <data name="strRdpErrorWindowCreation" xml:space="preserve">
+  <data name="RdpErrorWindowCreation" xml:space="preserve">
     <value>A window-creation error has occurred.</value>
   </data>
-  <data name="strRdpErrorWinsock" xml:space="preserve">
+  <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Winsock initialization error.</value>
   </data>
-  <data name="strRdpFileCouldNotBeImported" xml:space="preserve">
+  <data name="RdpFileCouldNotBeImported" xml:space="preserve">
     <value>RDPファイルのインポートに失敗しました</value>
   </data>
-  <data name="strRDPFitToPanel" xml:space="preserve">
+  <data name="RDPFitToPanel" xml:space="preserve">
     <value>Fit To Panel</value>
   </data>
-  <data name="strRdpFocusFailed" xml:space="preserve">
+  <data name="RdpFocusFailed" xml:space="preserve">
     <value>RDP Focus failed!</value>
   </data>
-  <data name="strRdpGatewayIsSupported" xml:space="preserve">
+  <data name="RdpGatewayIsSupported" xml:space="preserve">
     <value>RD Gateway is supported.</value>
   </data>
-  <data name="strRdpGatewayNotSupported" xml:space="preserve">
+  <data name="RdpGatewayNotSupported" xml:space="preserve">
     <value>RD Gateway is not supported!</value>
   </data>
-  <data name="strRdpGetSessionsFailed" xml:space="preserve">
+  <data name="RdpGetSessionsFailed" xml:space="preserve">
     <value>GetSessions failed!</value>
   </data>
-  <data name="strRdpReconnectCount" xml:space="preserve">
+  <data name="RdpReconnectCount" xml:space="preserve">
     <value>RDP reconnection count:</value>
   </data>
-  <data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
+  <data name="RdpSetAuthenticationLevelFailed" xml:space="preserve">
     <value>RDP SetAuthenticationLevel failed!</value>
   </data>
-  <data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
+  <data name="RdpSetConsoleSessionFailed" xml:space="preserve">
     <value>RDP SetUseConsoleSession failed!</value>
   </data>
-  <data name="strRdpSetConsoleSwitch" xml:space="preserve">
+  <data name="RdpSetConsoleSwitch" xml:space="preserve">
     <value>Setting Console switch for RDC {0}.</value>
   </data>
-  <data name="strRdpSetCredentialsFailed" xml:space="preserve">
+  <data name="RdpSetCredentialsFailed" xml:space="preserve">
     <value>RDP SetCredentials failed!</value>
   </data>
-  <data name="strRdpSetEventHandlersFailed" xml:space="preserve">
+  <data name="RdpSetEventHandlersFailed" xml:space="preserve">
     <value>RDP SetEventHandlers failed!</value>
   </data>
-  <data name="strRdpSetGatewayFailed" xml:space="preserve">
+  <data name="RdpSetGatewayFailed" xml:space="preserve">
     <value>RDP SetRDGateway failed!</value>
   </data>
-  <data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
+  <data name="RdpSetPerformanceFlagsFailed" xml:space="preserve">
     <value>RDP SetPerformanceFlags failed!</value>
   </data>
-  <data name="strRdpSetPortFailed" xml:space="preserve">
+  <data name="RdpSetPortFailed" xml:space="preserve">
     <value>RDP SetPort failed!</value>
   </data>
-  <data name="strRdpSetPropsFailed" xml:space="preserve">
+  <data name="RdpSetPropsFailed" xml:space="preserve">
     <value>RDP SetProps failed!</value>
   </data>
-  <data name="strRdpSetRedirectionFailed" xml:space="preserve">
+  <data name="RdpSetRedirectionFailed" xml:space="preserve">
     <value>Rdp Set Redirection Failed!</value>
   </data>
-  <data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
+  <data name="RdpSetRedirectKeysFailed" xml:space="preserve">
     <value>Rdp Set Redirect Keys Failed!</value>
   </data>
-  <data name="strRdpSetResolutionFailed" xml:space="preserve">
+  <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>RDP SetResolution failed!</value>
   </data>
-  <data name="strRDPSmartSize" xml:space="preserve">
+  <data name="RDPSmartSize" xml:space="preserve">
     <value>Smart Size</value>
   </data>
-  <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
+  <data name="RDPSoundBringToThisComputer" xml:space="preserve">
     <value>このコンピューターで再生</value>
   </data>
-  <data name="strRDPSoundDoNotPlay" xml:space="preserve">
+  <data name="RDPSoundDoNotPlay" xml:space="preserve">
     <value>再生しない</value>
   </data>
-  <data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+  <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
     <value>遠隔コンピューターで再生</value>
   </data>
-  <data name="strRdpToggleFullscreenFailed" xml:space="preserve">
+  <data name="RdpToggleFullscreenFailed" xml:space="preserve">
     <value>RDP ToggleFullscreen failed!</value>
   </data>
-  <data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
+  <data name="RdpToggleSmartSizeFailed" xml:space="preserve">
     <value>RDP ToggleSmartSize failed!</value>
   </data>
-  <data name="strReconnectAtStartup" xml:space="preserve">
+  <data name="ReconnectAtStartup" xml:space="preserve">
     <value>起動時に前セッション時の接続を開始する</value>
     <comment>Reconnect to previously opened sessions on startup</comment>
   </data>
-  <data name="strRefresh" xml:space="preserve">
+  <data name="Refresh" xml:space="preserve">
     <value>更新</value>
   </data>
-  <data name="strRemoteFile" xml:space="preserve">
+  <data name="RemoteFile" xml:space="preserve">
     <value>遠隔ファイル</value>
   </data>
-  <data name="strRemoveAll" xml:space="preserve">
+  <data name="RemoveAll" xml:space="preserve">
     <value>全て削除</value>
   </data>
-  <data name="strRename" xml:space="preserve">
+  <data name="Rename" xml:space="preserve">
     <value>名前の変更</value>
   </data>
-  <data name="strRlogin" xml:space="preserve">
+  <data name="Rlogin" xml:space="preserve">
     <value>Rlogin</value>
   </data>
-  <data name="strSave" xml:space="preserve">
+  <data name="Save" xml:space="preserve">
     <value>保存</value>
   </data>
-  <data name="strSaveAll" xml:space="preserve">
+  <data name="SaveAll" xml:space="preserve">
     <value>全て保存</value>
   </data>
-  <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
+  <data name="SaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
     <value>Do you want to save the current connections file before loading another?</value>
   </data>
-  <data name="strSaveConsOnExit" xml:space="preserve">
+  <data name="SaveConsOnExit" xml:space="preserve">
     <value>終了時に保存する</value>
   </data>
-  <data name="strSaveImageFilter" xml:space="preserve">
+  <data name="SaveImageFilter" xml:space="preserve">
     <value>Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png</value>
   </data>
-  <data name="strScreen" xml:space="preserve">
+  <data name="Screen" xml:space="preserve">
     <value>スクリーン</value>
   </data>
-  <data name="strScreenshot" xml:space="preserve">
+  <data name="Screenshot" xml:space="preserve">
     <value>スクリーンショット</value>
   </data>
-  <data name="strScreenshots" xml:space="preserve">
+  <data name="Screenshots" xml:space="preserve">
     <value>複数のスクリーンショット</value>
   </data>
-  <data name="strSearchPrompt" xml:space="preserve">
+  <data name="SearchPrompt" xml:space="preserve">
     <value>検索</value>
   </data>
-  <data name="strSendTo" xml:space="preserve">
+  <data name="SendTo" xml:space="preserve">
     <value>送信...</value>
   </data>
-  <data name="strSessionGetFailed" xml:space="preserve">
+  <data name="SessionGetFailed" xml:space="preserve">
     <value>Get Sessions Background failed</value>
   </data>
-  <data name="strSessionKillFailed" xml:space="preserve">
+  <data name="SessionKillFailed" xml:space="preserve">
     <value>Kill Session Background failed</value>
   </data>
-  <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
+  <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Set hostname like display name when creating or renaming connections</value>
   </data>
-  <data name="strSettingMainFormTextFailed" xml:space="preserve">
+  <data name="SettingMainFormTextFailed" xml:space="preserve">
     <value>Setting main form text failed</value>
   </data>
-  <data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+  <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
     <value>Couldn't save settings or dispose SysTray Icon!</value>
   </data>
-  <data name="strShowDescriptionTooltips" xml:space="preserve">
+  <data name="ShowDescriptionTooltips" xml:space="preserve">
     <value>接続ツリーに接続の説明をツールチップを表示する</value>
     <comment>Show description tooltips in connection tree</comment>
   </data>
-  <data name="strShowFullConsFilePath" xml:space="preserve">
+  <data name="ShowFullConsFilePath" xml:space="preserve">
     <value>ウィンドウのタイトルに接続設定ファイルへのフルパス名を表示する</value>
     <comment>Show full connections file path in window title</comment>
   </data>
-  <data name="strShowLogonInfoOnTabs" xml:space="preserve">
+  <data name="ShowLogonInfoOnTabs" xml:space="preserve">
     <value>タブ名と一緒にログオン情報を表示する</value>
     <comment>Show logon information on tab names</comment>
   </data>
-  <data name="strShowProtocolOnTabs" xml:space="preserve">
+  <data name="ShowProtocolOnTabs" xml:space="preserve">
     <value>タブ名と一緒にプロトコルを表示する</value>
     <comment>Show protocols on tab names</comment>
   </data>
-  <data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
+  <data name="SingleClickOnConnectionOpensIt" xml:space="preserve">
     <value>ワンクリックで接続を開始する</value>
     <comment>Single click on connection opens it</comment>
   </data>
-  <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
+  <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value />
     <comment>Single click on opened connection switches to it</comment>
   </data>
-  <data name="strSmartSizeModeAspect" xml:space="preserve">
+  <data name="SmartSizeModeAspect" xml:space="preserve">
     <value>Aspect</value>
   </data>
-  <data name="strSmartSizeModeFree" xml:space="preserve">
+  <data name="SmartSizeModeFree" xml:space="preserve">
     <value>Free</value>
   </data>
-  <data name="strSmartSizeModeNone" xml:space="preserve">
+  <data name="SmartSizeModeNone" xml:space="preserve">
     <value>No SmartSize</value>
   </data>
-  <data name="strSocks5" xml:space="preserve">
+  <data name="Socks5" xml:space="preserve">
     <value>Socks 5</value>
   </data>
-  <data name="strSort" xml:space="preserve">
+  <data name="Sort" xml:space="preserve">
     <value>並び替え</value>
   </data>
-  <data name="strSortAsc" xml:space="preserve">
+  <data name="SortAsc" xml:space="preserve">
     <value>昇順</value>
   </data>
-  <data name="strSortDesc" xml:space="preserve">
+  <data name="SortDesc" xml:space="preserve">
     <value>降順</value>
   </data>
-  <data name="strSpecialKeys" xml:space="preserve">
+  <data name="SpecialKeys" xml:space="preserve">
     <value>Special Keys</value>
   </data>
-  <data name="strSQLInfo" xml:space="preserve">
+  <data name="SQLInfo" xml:space="preserve">
     <value>Please see Help - Getting started - SQL Configuration for more Info!</value>
   </data>
-  <data name="strSQLServer" xml:space="preserve">
+  <data name="SQLServer" xml:space="preserve">
     <value>SQL Server</value>
   </data>
-  <data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
+  <data name="SqlUpdateCheckUpdateAvailable" xml:space="preserve">
     <value>SQL Update check finished and there is an update available! Going to refresh connections.</value>
   </data>
-  <data name="strSsh1" xml:space="preserve">
+  <data name="Ssh1" xml:space="preserve">
     <value>SSHバージョン1</value>
   </data>
-  <data name="strSsh2" xml:space="preserve">
+  <data name="Ssh2" xml:space="preserve">
     <value>SSHバージョン2</value>
   </data>
-  <data name="strSSHStartTransferBG" xml:space="preserve">
+  <data name="SSHStartTransferBG" xml:space="preserve">
     <value>SSH background transfer failed!</value>
   </data>
-  <data name="strSSHTranferSuccessful" xml:space="preserve">
+  <data name="SSHTranferSuccessful" xml:space="preserve">
     <value>転送に成功しました</value>
   </data>
-  <data name="strSSHTransferEndFailed" xml:space="preserve">
+  <data name="SSHTransferEndFailed" xml:space="preserve">
     <value>SSH Transfer End (UI.Window.SSHTransfer) failed!</value>
   </data>
-  <data name="strSSHTransferFailed" xml:space="preserve">
+  <data name="SSHTransferFailed" xml:space="preserve">
     <value>SSH経由の転送に失敗しました</value>
   </data>
-  <data name="strStartIP" xml:space="preserve">
+  <data name="StartIP" xml:space="preserve">
     <value>開始IP</value>
   </data>
-  <data name="strStartPort" xml:space="preserve">
+  <data name="StartPort" xml:space="preserve">
     <value>開始のポート</value>
   </data>
-  <data name="strStartupExit" xml:space="preserve">
+  <data name="StartupExit" xml:space="preserve">
     <value>起動と終了</value>
   </data>
-  <data name="strStatus" xml:space="preserve">
+  <data name="Status" xml:space="preserve">
     <value>ステータス</value>
   </data>
-  <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
+  <data name="SwitchToErrorsAndInfos" xml:space="preserve">
     <value>Switch to Notifications panel on:</value>
   </data>
-  <data name="strTabAdvanced" xml:space="preserve">
+  <data name="TabAdvanced" xml:space="preserve">
     <value>詳細設定</value>
   </data>
-  <data name="strTabAppearance" xml:space="preserve">
+  <data name="TabAppearance" xml:space="preserve">
     <value>外観</value>
   </data>
-  <data name="strTabsAndPanels" xml:space="preserve">
+  <data name="TabsAndPanels" xml:space="preserve">
     <value>タブとパネル</value>
   </data>
-  <data name="strTabUpdates" xml:space="preserve">
+  <data name="TabUpdates" xml:space="preserve">
     <value>タブの更新</value>
   </data>
-  <data name="strTelnet" xml:space="preserve">
+  <data name="Telnet" xml:space="preserve">
     <value>Telnet</value>
   </data>
-  <data name="strTheFollowing" xml:space="preserve">
+  <data name="TheFollowing" xml:space="preserve">
     <value>以下：</value>
   </data>
-  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+  <data name="ThemeCategoryConfigPanel" xml:space="preserve">
     <value>設定パネル</value>
   </data>
-  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+  <data name="ThemeCategoryConnectionsPanel" xml:space="preserve">
     <value>接続パネル</value>
   </data>
-  <data name="strThemeCategoryGeneral" xml:space="preserve">
+  <data name="ThemeCategoryGeneral" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+  <data name="ThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
     <value>設定パネルの背景色</value>
   </data>
-  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+  <data name="ThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
     <value>The colour of the category text in the config panel.</value>
   </data>
-  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+  <data name="ThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
     <value>The colour of the grid lines in the config panel</value>
   </data>
-  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+  <data name="ThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
     <value>The background colour of the help area of the config panel.</value>
   </data>
-  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+  <data name="ThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
     <value>The colour of the text in the help area of the config panel.</value>
   </data>
-  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+  <data name="ThemeDescriptionConfigPanelTextColor" xml:space="preserve">
     <value>The colour of the text in the config panel.</value>
   </data>
-  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+  <data name="ThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
     <value>The background colour of the connections panel.</value>
   </data>
-  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+  <data name="ThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
     <value>The colour of the text in the connections panel.</value>
   </data>
-  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+  <data name="ThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
     <value>The colour of the tree lines in the connections panel.</value>
   </data>
-  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+  <data name="ThemeDescriptionMenuBackgroundColor" xml:space="preserve">
     <value>The background colour of the menus.</value>
   </data>
-  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+  <data name="ThemeDescriptionMenuTextColor" xml:space="preserve">
     <value>The colour of the text in the menus.</value>
   </data>
-  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+  <data name="ThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
     <value>The background colour of the search box.</value>
   </data>
-  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+  <data name="ThemeDescriptionSearchBoxTextColor" xml:space="preserve">
     <value>The colour of the text in the search box.</value>
   </data>
-  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+  <data name="ThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
     <value>The colour of the prompt text in the search box.</value>
   </data>
-  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+  <data name="ThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
     <value>The background colour of the toolbars.</value>
   </data>
-  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+  <data name="ThemeDescriptionToolbarTextColor" xml:space="preserve">
     <value>The colour of the text in the toolbars.</value>
   </data>
-  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+  <data name="ThemeDescriptionWindowBackgroundColor" xml:space="preserve">
     <value>The background colour of the main window.</value>
   </data>
-  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+  <data name="ThemeNameConfigPanelBackgroundColor" xml:space="preserve">
     <value>Config Panel Background Colour</value>
   </data>
-  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+  <data name="ThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
     <value>Config Panel Category Text Colour</value>
   </data>
-  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+  <data name="ThemeNameConfigPanelGridLineColor" xml:space="preserve">
     <value>Config Panel Grid Line Colour</value>
   </data>
-  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+  <data name="ThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
     <value>Config Panel Help Background Colour</value>
   </data>
-  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+  <data name="ThemeNameConfigPanelHelpTextColor" xml:space="preserve">
     <value>Config Panel Help Text Colour</value>
   </data>
-  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+  <data name="ThemeNameConfigPanelTextColor" xml:space="preserve">
     <value>Config Panel Text Colour</value>
   </data>
-  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+  <data name="ThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
     <value>Connections Panel Background Colour</value>
   </data>
-  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+  <data name="ThemeNameConnectionsPanelTextColor" xml:space="preserve">
     <value>Connections Panel Text Colour</value>
   </data>
-  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+  <data name="ThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
     <value>Connections Panel Tree Line Colour</value>
   </data>
-  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+  <data name="ThemeNameMenuBackgroundColor" xml:space="preserve">
     <value>Menu Background Colour</value>
   </data>
-  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+  <data name="ThemeNameMenuTextColor" xml:space="preserve">
     <value>Menu Text Colour</value>
   </data>
-  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+  <data name="ThemeNameSearchBoxBackgroundColor" xml:space="preserve">
     <value>Search Box Background Colour</value>
   </data>
-  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+  <data name="ThemeNameSearchBoxTextColor" xml:space="preserve">
     <value>Search Box Text Colour</value>
   </data>
-  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+  <data name="ThemeNameSearchBoxTextPromptColor" xml:space="preserve">
     <value>Search Box Text Prompt Colour</value>
   </data>
-  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+  <data name="ThemeNameToolbarBackgroundColor" xml:space="preserve">
     <value>Toolbar Background Colour</value>
   </data>
-  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+  <data name="ThemeNameToolbarTextColor" xml:space="preserve">
     <value>Toolbar Text Colour</value>
   </data>
-  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+  <data name="ThemeNameWindowBackgroundColor" xml:space="preserve">
     <value>ウィンドウの背景色</value>
   </data>
-  <data name="strTitleError" xml:space="preserve">
+  <data name="TitleError" xml:space="preserve">
     <value>エラー({0})</value>
   </data>
-  <data name="strTitleInformation" xml:space="preserve">
+  <data name="TitleInformation" xml:space="preserve">
     <value>Information ({0})</value>
   </data>
-  <data name="strTitlePassword" xml:space="preserve">
+  <data name="TitlePassword" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="strTitlePasswordWithName" xml:space="preserve">
+  <data name="TitlePasswordWithName" xml:space="preserve">
     <value>Password for {0}</value>
   </data>
-  <data name="strTitleSelectPanel" xml:space="preserve">
+  <data name="TitleSelectPanel" xml:space="preserve">
     <value>パネルを選択</value>
   </data>
-  <data name="strTitleWarning" xml:space="preserve">
+  <data name="TitleWarning" xml:space="preserve">
     <value>Warning ({0})</value>
   </data>
-  <data name="strTransfer" xml:space="preserve">
+  <data name="Transfer" xml:space="preserve">
     <value>転送</value>
   </data>
-  <data name="strTransferFailed" xml:space="preserve">
+  <data name="TransferFailed" xml:space="preserve">
     <value>転送中にエラーが発生しました</value>
   </data>
-  <data name="strTryIntegrate" xml:space="preserve">
+  <data name="TryIntegrate" xml:space="preserve">
     <value>Try to integrate</value>
   </data>
-  <data name="strType" xml:space="preserve">
+  <data name="Type" xml:space="preserve">
     <value>種類</value>
   </data>
-  <data name="strUltraVncRepeater" xml:space="preserve">
+  <data name="UltraVncRepeater" xml:space="preserve">
     <value>Ultra VNC Repeater</value>
   </data>
-  <data name="strUltraVNCSCListeningPort" xml:space="preserve">
+  <data name="UltraVNCSCListeningPort" xml:space="preserve">
     <value>UltraVNC SingleClick port:</value>
   </data>
-  <data name="strUncheckProperties" xml:space="preserve">
+  <data name="UncheckProperties" xml:space="preserve">
     <value>Uncheck the properties you want not to be saved!</value>
   </data>
-  <data name="strUnnamedTheme" xml:space="preserve">
+  <data name="UnnamedTheme" xml:space="preserve">
     <value>無名のテーマ</value>
   </data>
-  <data name="strUpdateAvailable" xml:space="preserve">
+  <data name="UpdateAvailable" xml:space="preserve">
     <value>mRemoteNG requires an update</value>
   </data>
-  <data name="strUpdateCheck" xml:space="preserve">
+  <data name="UpdateCheck" xml:space="preserve">
     <value>mRemoteNG can periodically connect to the mRemoteNG website to check for updates.</value>
   </data>
-  <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+  <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>The update information could not be downloaded.</value>
   </data>
-  <data name="strUpdateCheckFailedLabel" xml:space="preserve">
+  <data name="UpdateCheckFailedLabel" xml:space="preserve">
     <value>確認に失敗しました</value>
   </data>
-  <data name="strUpdateCheckingLabel" xml:space="preserve">
+  <data name="UpdateCheckingLabel" xml:space="preserve">
     <value>更新を確認しています…</value>
   </data>
-  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+  <data name="UpdateCheckPortableEdition" xml:space="preserve">
     <value>mRemoteNG Portable Edition does not currently support automatic updates.</value>
   </data>
-  <data name="strUpdateDownloadComplete" xml:space="preserve">
+  <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>ダウンロードが終了しました
 mRemoteNGを終了してインストールを開始します</value>
   </data>
-  <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+  <data name="UpdateDownloadCompleteFailed" xml:space="preserve">
     <value>The update could not be downloaded.</value>
   </data>
-  <data name="strUpdateDownloadFailed" xml:space="preserve">
+  <data name="UpdateDownloadFailed" xml:space="preserve">
     <value>The update download could not be initiated.</value>
   </data>
-  <data name="strUpdateFrequencyCustom" xml:space="preserve">
+  <data name="UpdateFrequencyCustom" xml:space="preserve">
     <value>{0}日毎</value>
   </data>
-  <data name="strUpdateFrequencyDaily" xml:space="preserve">
+  <data name="UpdateFrequencyDaily" xml:space="preserve">
     <value>毎日</value>
   </data>
-  <data name="strUpdateFrequencyMonthly" xml:space="preserve">
+  <data name="UpdateFrequencyMonthly" xml:space="preserve">
     <value>毎月</value>
   </data>
-  <data name="strUpdateFrequencyWeekly" xml:space="preserve">
+  <data name="UpdateFrequencyWeekly" xml:space="preserve">
     <value>毎週</value>
   </data>
-  <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
+  <data name="UpdateGetChangeLogFailed" xml:space="preserve">
     <value>The change log could not be downloaded.</value>
   </data>
-  <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
+  <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Use a different username and password</value>
   </data>
-  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
+  <data name="UseOnlyErrorsAndInfosPanel" xml:space="preserve">
     <value>Use only Notifications panel (no messagebox popups)</value>
   </data>
-  <data name="strUser" xml:space="preserve">
+  <data name="User" xml:space="preserve">
     <value>ユーザー</value>
   </data>
-  <data name="strUseSameUsernameAndPassword" xml:space="preserve">
+  <data name="UseSameUsernameAndPassword" xml:space="preserve">
     <value>Use the same username and password</value>
   </data>
-  <data name="strUseSmartCard" xml:space="preserve">
+  <data name="UseSmartCard" xml:space="preserve">
     <value>Use a smart card</value>
   </data>
-  <data name="strUseSQLServer" xml:space="preserve">
+  <data name="UseSQLServer" xml:space="preserve">
     <value>接続設定の保存にSQLサーバーを使用する</value>
     <comment>Use SQL Server to load &amp;&amp; save connections</comment>
   </data>
-  <data name="strVersion" xml:space="preserve">
+  <data name="Version" xml:space="preserve">
     <value>バージョン</value>
   </data>
-  <data name="strVisionAppRemoteDesktopCsv" xml:space="preserve">
+  <data name="VisionAppRemoteDesktopCsv" xml:space="preserve">
     <value>visionapp Remote Desktop 2008 CSV</value>
   </data>
-  <data name="strVnc" xml:space="preserve">
+  <data name="Vnc" xml:space="preserve">
     <value>VNC</value>
   </data>
-  <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
+  <data name="VncConnectionDisconnectFailed" xml:space="preserve">
     <value>VNCの切断に失敗しました</value>
   </data>
-  <data name="strVncRefreshFailed" xml:space="preserve">
+  <data name="VncRefreshFailed" xml:space="preserve">
     <value>VNCのスクリーンの更新に失敗しました</value>
   </data>
-  <data name="strVncSendSpecialKeysFailed" xml:space="preserve">
+  <data name="VncSendSpecialKeysFailed" xml:space="preserve">
     <value>VNC SendSpecialKeys failed!</value>
   </data>
-  <data name="strVncSetEventHandlersFailed" xml:space="preserve">
+  <data name="VncSetEventHandlersFailed" xml:space="preserve">
     <value>VNC Set Event Handlers failed!</value>
   </data>
-  <data name="strVncSetPropsFailed" xml:space="preserve">
+  <data name="VncSetPropsFailed" xml:space="preserve">
     <value>VNC Set Props Failed!</value>
   </data>
-  <data name="strVncStartChatFailed" xml:space="preserve">
+  <data name="VncStartChatFailed" xml:space="preserve">
     <value>VNC Start Chat Failed!</value>
   </data>
-  <data name="strVncToggleSmartSizeFailed" xml:space="preserve">
+  <data name="VncToggleSmartSizeFailed" xml:space="preserve">
     <value>VNC Toggle SmartSize Failed!</value>
   </data>
-  <data name="strVncToggleViewOnlyFailed" xml:space="preserve">
+  <data name="VncToggleViewOnlyFailed" xml:space="preserve">
     <value>VNC Toggle ViewOnly Failed!</value>
   </data>
-  <data name="strWarnIfAuthFails" xml:space="preserve">
+  <data name="WarnIfAuthFails" xml:space="preserve">
     <value>認証に失敗した場合は警告する</value>
   </data>
-  <data name="strWarnings" xml:space="preserve">
+  <data name="Warnings" xml:space="preserve">
     <value>警告</value>
   </data>
-  <data name="strWeifenLuoAttribution" xml:space="preserve">
+  <data name="WeifenLuoAttribution" xml:space="preserve">
     <value>Uses the DockPanel Suite by [Weifen Luo]</value>
   </data>
-  <data name="strWeifenLuoAttributionURL" xml:space="preserve">
+  <data name="WeifenLuoAttributionURL" xml:space="preserve">
     <value>http://sourceforge.net/projects/dockpanelsuite/</value>
   </data>
-  <data name="strWriteLogFile" xml:space="preserve">
+  <data name="WriteLogFile" xml:space="preserve">
     <value>ログファイルを書き出す(mRemoteNG.log)</value>
   </data>
-  <data name="strXULrunnerPath" xml:space="preserve">
+  <data name="XULrunnerPath" xml:space="preserve">
     <value>XULRunnerのパス：</value>
   </data>
-  <data name="strYes" xml:space="preserve">
+  <data name="Yes" xml:space="preserve">
     <value>はい</value>
   </data>
 </root>

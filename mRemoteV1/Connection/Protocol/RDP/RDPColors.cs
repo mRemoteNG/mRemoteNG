@@ -4,19 +4,19 @@ namespace mRemoteNG.Connection.Protocol.RDP
 {
     public enum RDPColors
     {
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRDP256Colors))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.RDP256Colors))]
         Colors256 = 8,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRDP32768Colors))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.RDP32768Colors))]
         Colors15Bit = 15,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRDP65536Colors))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.RDP65536Colors))]
         Colors16Bit = 16,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRDP16777216Colors))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.RDP16777216Colors))]
         Colors24Bit = 24,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRDP4294967296Colors))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.RDP4294967296Colors))]
         Colors32Bit = 32
     }
 }

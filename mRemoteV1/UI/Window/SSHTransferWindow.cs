@@ -354,19 +354,19 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            grpFiles.Text = Language.strGroupboxFiles;
-            lblLocalFile.Text = Language.strLocalFile + ":";
-            lblRemoteFile.Text = Language.strRemoteFile + ":";
-            btnBrowse.Text = Language.strButtonBrowse;
-            grpConnection.Text = Language.strGroupboxConnection;
-            lblProtocol.Text = Language.strLabelProtocol;
-            lblPassword.Text = Language.strLabelPassword;
-            lblUser.Text = Language.strUser + ":";
-            lblPort.Text = Language.strLabelPort;
-            lblHost.Text = Language.strHost + ":";
-            btnTransfer.Text = Language.strTransfer;
-            TabText = Language.strMenuSSHFileTransfer;
-            Text = Language.strMenuSSHFileTransfer;
+            grpFiles.Text = Language.GroupboxFiles;
+            lblLocalFile.Text = Language.LocalFile + ":";
+            lblRemoteFile.Text = Language.RemoteFile + ":";
+            btnBrowse.Text = Language.ButtonBrowse;
+            grpConnection.Text = Language.GroupboxConnection;
+            lblProtocol.Text = Language.LabelProtocol;
+            lblPassword.Text = Language.LabelPassword;
+            lblUser.Text = Language.User + ":";
+            lblPort.Text = Language.LabelPort;
+            lblHost.Text = Language.Host + ":";
+            btnTransfer.Text = Language.Transfer;
+            TabText = Language.MenuSSHFileTransfer;
+            Text = Language.MenuSSHFileTransfer;
         }
 
         #endregion
@@ -379,13 +379,13 @@ namespace mRemoteNG.UI.Window
         {
             if (AllFieldsSet() == false)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPleaseFillAllFields);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.PleaseFillAllFields);
                 return;
             }
 
             if (File.Exists(txtLocalFile.Text) == false)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strLocalFileDoesNotExist);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.LocalFileDoesNotExist);
                 return;
             }
 
@@ -414,7 +414,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strSSHTransferFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.SSHTransferFailed, ex);
                 st?.Disconnect();
                 st?.Dispose();
             }
@@ -471,7 +471,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strSSHStartTransferBG, ex,
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.SSHStartTransferBG, ex,
                                                                 MessageClass.ErrorMsg, false);
                 st?.Disconnect();
                 st?.Dispose();
@@ -485,7 +485,7 @@ namespace mRemoteNG.UI.Window
             {
                 if (txtPassword.Text == "")
                 {
-                    if (MessageBox.Show(FrmMain.Default, Language.strEmptyPasswordContinue, @"Question?",
+                    if (MessageBox.Show(FrmMain.Default, Language.EmptyPasswordContinue, @"Question?",
                                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                     {
                         return false;

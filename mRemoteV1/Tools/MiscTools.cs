@@ -199,12 +199,12 @@ namespace mRemoteNG.Tools
             public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
             {
                 if (!(value is string)) return base.ConvertFrom(context, culture, value);
-                if (string.Equals(value.ToString(), Language.strYes, StringComparison.CurrentCultureIgnoreCase))
+                if (string.Equals(value.ToString(), Language.Yes, StringComparison.CurrentCultureIgnoreCase))
                 {
                     return true;
                 }
 
-                if (string.Equals(value.ToString(), Language.strNo, StringComparison.CurrentCultureIgnoreCase))
+                if (string.Equals(value.ToString(), Language.No, StringComparison.CurrentCultureIgnoreCase))
                 {
                     return false;
                 }
@@ -219,7 +219,7 @@ namespace mRemoteNG.Tools
             {
                 if (destinationType == typeof(string))
                 {
-                    return Convert.ToBoolean(value) ? Language.strYes : Language.strNo;
+                    return Convert.ToBoolean(value) ? Language.Yes : Language.No;
                 }
 
                 return base.ConvertTo(context, culture, value, destinationType);

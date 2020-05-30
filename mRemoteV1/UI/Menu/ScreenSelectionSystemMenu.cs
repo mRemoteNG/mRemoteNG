@@ -45,12 +45,12 @@ namespace mRemoteNG.UI.Menu
             {
                 _sysMenSubItems[i] = 200 + i;
                 _systemMenu.AppendMenuItem(popMen, SystemMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]),
-                                           Language.strScreen + " " + Convert.ToString(i + 1));
+                                           Language.Screen + " " + Convert.ToString(i + 1));
             }
 
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0,
                                        SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen,
-                                       Language.strSendTo);
+                                       Language.SendTo);
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1,
                                        SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero,
                                        null);

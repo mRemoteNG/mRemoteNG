@@ -14,7 +14,7 @@ namespace mRemoteNG.Connection
             connectionInfo.Protocol = url.StartsWith("https:") ? ProtocolType.HTTPS : ProtocolType.HTTP;
             connectionInfo.SetDefaultPort();
             if (string.IsNullOrEmpty(connectionInfo.Panel))
-                connectionInfo.Panel = Language.strGeneral;
+                connectionInfo.Panel = Language.General;
             connectionInfo.IsQuickConnect = true;
             var connectionInitiator = new ConnectionInitiator();
             connectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);

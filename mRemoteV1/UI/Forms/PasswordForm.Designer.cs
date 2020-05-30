@@ -75,7 +75,7 @@ namespace mRemoteNG.UI.Forms
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 7;
-            this.btnOK.Text = global::mRemoteNG.Language.strButtonOK;
+            this.btnOK.Text = global::mRemoteNG.Language.ButtonOK;
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
@@ -88,7 +88,7 @@ namespace mRemoteNG.UI.Forms
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = global::mRemoteNG.Language.strButtonCancel;
+            this.btnCancel.Text = global::mRemoteNG.Language.ButtonCancel;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 

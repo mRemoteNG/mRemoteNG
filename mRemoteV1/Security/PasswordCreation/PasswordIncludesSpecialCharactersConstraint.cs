@@ -29,7 +29,7 @@ namespace mRemoteNG.Security.PasswordCreation
                 throw new ArgumentNullException(nameof(specialCharacters));
 
             SpecialCharacters = specialCharacters;
-            ConstraintHint = string.Format(Language.strPasswordConstainsSpecialCharactersConstraintHint, _minimumCount,
+            ConstraintHint = string.Format(Language.PasswordConstainsSpecialCharactersConstraintHint, _minimumCount,
                                            string.Concat(SpecialCharacters));
         }
 

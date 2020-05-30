@@ -88,7 +88,7 @@ namespace mRemoteNG.UI.Menu
             });
             Name = "mMenView";
             Size = new System.Drawing.Size(44, 20);
-            Text = Language.strMenuView;
+            Text = Language.MenuView;
             //DropDownOpening += mMenView_DropDownOpening;
             // 
             // mMenViewAddConnectionPanel
@@ -96,7 +96,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewAddConnectionPanel.Image = Resources.Panel_Add;
             _mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel";
             _mMenViewAddConnectionPanel.Size = new System.Drawing.Size(228, 22);
-            _mMenViewAddConnectionPanel.Text = Language.strMenuAddConnectionPanel;
+            _mMenViewAddConnectionPanel.Text = Language.MenuAddConnectionPanel;
             _mMenViewAddConnectionPanel.Click += mMenViewAddConnectionPanel_Click;
             // 
             // mMenViewConnectionPanels
@@ -104,7 +104,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnectionPanels.Image = Resources.Panels;
             _mMenViewConnectionPanels.Name = "mMenViewConnectionPanels";
             _mMenViewConnectionPanels.Size = new System.Drawing.Size(228, 22);
-            _mMenViewConnectionPanels.Text = Language.strMenuConnectionPanels;
+            _mMenViewConnectionPanels.Text = Language.MenuConnectionPanels;
             // 
             // mMenViewSep1
             // 
@@ -118,7 +118,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnections.Image = Resources.Root;
             _mMenViewConnections.Name = "mMenViewConnections";
             _mMenViewConnections.Size = new System.Drawing.Size(228, 22);
-            _mMenViewConnections.Text = Language.strMenuConnections;
+            _mMenViewConnections.Text = Language.MenuConnections;
             _mMenViewConnections.Click += mMenViewConnections_Click;
             // 
             // mMenViewConfig
@@ -128,7 +128,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConfig.Image = Resources.cog;
             _mMenViewConfig.Name = "mMenViewConfig";
             _mMenViewConfig.Size = new System.Drawing.Size(228, 22);
-            _mMenViewConfig.Text = Language.strMenuConfig;
+            _mMenViewConfig.Text = Language.MenuConfig;
             _mMenViewConfig.Click += mMenViewConfig_Click;
             // 
             // mMenViewErrorsAndInfos
@@ -138,7 +138,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewErrorsAndInfos.Image = Resources.ErrorsAndInfos;
             _mMenViewErrorsAndInfos.Name = "mMenViewErrorsAndInfos";
             _mMenViewErrorsAndInfos.Size = new System.Drawing.Size(228, 22);
-            _mMenViewErrorsAndInfos.Text = Language.strMenuNotifications;
+            _mMenViewErrorsAndInfos.Text = Language.MenuNotifications;
             _mMenViewErrorsAndInfos.Click += mMenViewErrorsAndInfos_Click;
             // 
             // ToolStripSeparator1
@@ -156,7 +156,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewJumpTo.Image = Resources.JumpTo;
             _mMenViewJumpTo.Name = "mMenViewJumpTo";
             _mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
-            _mMenViewJumpTo.Text = Language.strMenuJumpTo;
+            _mMenViewJumpTo.Text = Language.MenuJumpTo;
             // 
             // mMenViewJumpToConnectionsConfig
             // 
@@ -164,7 +164,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewJumpToConnectionsConfig.Name = "mMenViewJumpToConnectionsConfig";
             _mMenViewJumpToConnectionsConfig.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
             _mMenViewJumpToConnectionsConfig.Size = new System.Drawing.Size(258, 22);
-            _mMenViewJumpToConnectionsConfig.Text = Language.strMenuConnectionsAndConfig;
+            _mMenViewJumpToConnectionsConfig.Text = Language.MenuConnectionsAndConfig;
             _mMenViewJumpToConnectionsConfig.Click += mMenViewJumpToConnectionsConfig_Click;
             // 
             // mMenViewJumpToErrorsInfos
@@ -173,7 +173,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewJumpToErrorsInfos.Name = "mMenViewJumpToErrorsInfos";
             _mMenViewJumpToErrorsInfos.ShortcutKeys = Keys.Control | Keys.Alt | Keys.E;
             _mMenViewJumpToErrorsInfos.Size = new System.Drawing.Size(258, 22);
-            _mMenViewJumpToErrorsInfos.Text = Language.strMenuNotifications;
+            _mMenViewJumpToErrorsInfos.Text = Language.MenuNotifications;
             _mMenViewJumpToErrorsInfos.Click += mMenViewJumpToErrorsInfos_Click;
             // 
             // mMenViewResetLayout
@@ -181,7 +181,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewResetLayout.Image = Resources.application_side_tree;
             _mMenViewResetLayout.Name = "mMenViewResetLayout";
             _mMenViewResetLayout.Size = new System.Drawing.Size(228, 22);
-            _mMenViewResetLayout.Text = Language.strMenuResetLayout;
+            _mMenViewResetLayout.Text = Language.MenuResetLayout;
             _mMenViewResetLayout.Click += mMenViewResetLayout_Click;
             // 
             // mMenViewLockToolbars
@@ -189,7 +189,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewLockToolbars.Image = Resources.application_side_tree;
             _mMenViewLockToolbars.Name = "mMenViewLockToolbars";
             _mMenViewLockToolbars.Size = new System.Drawing.Size(228, 22);
-            _mMenViewLockToolbars.Text = Language.strMenuLockToolbars;
+            _mMenViewLockToolbars.Text = Language.MenuLockToolbars;
             _mMenViewLockToolbars.Click += mMenViewLockToolbars_Click;
             // 
             // mMenViewSep2
@@ -202,7 +202,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewQuickConnectToolbar.Image = Resources.Play_Quick;
             _mMenViewQuickConnectToolbar.Name = "mMenViewQuickConnectToolbar";
             _mMenViewQuickConnectToolbar.Size = new System.Drawing.Size(228, 22);
-            _mMenViewQuickConnectToolbar.Text = Language.strMenuQuickConnectToolbar;
+            _mMenViewQuickConnectToolbar.Text = Language.MenuQuickConnectToolbar;
             _mMenViewQuickConnectToolbar.Click += mMenViewQuickConnectToolbar_Click;
             // 
             // mMenViewExtAppsToolbar
@@ -210,7 +210,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewExtAppsToolbar.Image = Resources.ExtApp;
             _mMenViewExtAppsToolbar.Name = "mMenViewExtAppsToolbar";
             _mMenViewExtAppsToolbar.Size = new System.Drawing.Size(228, 22);
-            _mMenViewExtAppsToolbar.Text = Language.strMenuExternalToolsToolbar;
+            _mMenViewExtAppsToolbar.Text = Language.MenuExternalToolsToolbar;
             _mMenViewExtAppsToolbar.Click += mMenViewExtAppsToolbar_Click;
             // 
             // mMenViewMultiSSHToolbar
@@ -218,7 +218,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewMultiSshToolbar.Image = Resources.Panels;
             _mMenViewMultiSshToolbar.Name = "mMenViewMultiSSHToolbar";
             _mMenViewMultiSshToolbar.Size = new System.Drawing.Size(279, 26);
-            _mMenViewMultiSshToolbar.Text = Language.strMenuMultiSshToolbar;
+            _mMenViewMultiSshToolbar.Text = Language.MenuMultiSshToolbar;
             _mMenViewMultiSshToolbar.Click += mMenViewMultiSSHToolbar_Click;
             // 
             // mMenViewSep3
@@ -232,7 +232,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewFullscreen.Name = "mMenViewFullscreen";
             _mMenViewFullscreen.ShortcutKeys = Keys.F11;
             _mMenViewFullscreen.Size = new System.Drawing.Size(228, 22);
-            _mMenViewFullscreen.Text = Language.strMenuFullScreen;
+            _mMenViewFullscreen.Text = Language.MenuFullScreen;
             _mMenViewFullscreen.Checked = Settings.Default.MainFormKiosk;
             _mMenViewFullscreen.Click += mMenViewFullscreen_Click;
         }
@@ -240,21 +240,21 @@ namespace mRemoteNG.UI.Menu
 
         public void ApplyLanguage()
         {
-            Text = Language.strMenuView;
-            _mMenViewAddConnectionPanel.Text = Language.strMenuAddConnectionPanel;
-            _mMenViewConnectionPanels.Text = Language.strMenuConnectionPanels;
-            _mMenViewConnections.Text = Language.strMenuConnections;
-            _mMenViewConfig.Text = Language.strMenuConfig;
-            _mMenViewErrorsAndInfos.Text = Language.strMenuNotifications;
-            _mMenViewJumpTo.Text = Language.strMenuJumpTo;
-            _mMenViewJumpToConnectionsConfig.Text = Language.strMenuConnectionsAndConfig;
-            _mMenViewJumpToErrorsInfos.Text = Language.strMenuNotifications;
-            _mMenViewResetLayout.Text = Language.strMenuResetLayout;
-            _mMenViewLockToolbars.Text = Language.strLockToolbars;
-            _mMenViewQuickConnectToolbar.Text = Language.strMenuQuickConnectToolbar;
-            _mMenViewExtAppsToolbar.Text = Language.strMenuExternalToolsToolbar;
-            _mMenViewMultiSshToolbar.Text = Language.strMultiSshToolbar;
-            _mMenViewFullscreen.Text = Language.strMenuFullScreen;
+            Text = Language.MenuView;
+            _mMenViewAddConnectionPanel.Text = Language.MenuAddConnectionPanel;
+            _mMenViewConnectionPanels.Text = Language.MenuConnectionPanels;
+            _mMenViewConnections.Text = Language.MenuConnections;
+            _mMenViewConfig.Text = Language.MenuConfig;
+            _mMenViewErrorsAndInfos.Text = Language.MenuNotifications;
+            _mMenViewJumpTo.Text = Language.MenuJumpTo;
+            _mMenViewJumpToConnectionsConfig.Text = Language.MenuConnectionsAndConfig;
+            _mMenViewJumpToErrorsInfos.Text = Language.MenuNotifications;
+            _mMenViewResetLayout.Text = Language.MenuResetLayout;
+            _mMenViewLockToolbars.Text = Language.LockToolbars;
+            _mMenViewQuickConnectToolbar.Text = Language.MenuQuickConnectToolbar;
+            _mMenViewExtAppsToolbar.Text = Language.MenuExternalToolsToolbar;
+            _mMenViewMultiSshToolbar.Text = Language.MultiSshToolbar;
+            _mMenViewFullscreen.Text = Language.MenuFullScreen;
         }
 
         #region View
@@ -350,7 +350,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
         {
-            var msgBoxResult = MessageBox.Show(Language.strConfirmResetLayout, string.Empty, MessageBoxButtons.YesNo,
+            var msgBoxResult = MessageBox.Show(Language.ConfirmResetLayout, string.Empty, MessageBoxButtons.YesNo,
                                                MessageBoxIcon.Question);
             if (msgBoxResult == DialogResult.Yes)
             {

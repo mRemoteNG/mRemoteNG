@@ -29,7 +29,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.strTabUpdates;
+            get => Language.TabUpdates;
             set { }
         }
 
@@ -37,23 +37,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            lblUpdatesExplanation.Text = Language.strUpdateCheck;
+            lblUpdatesExplanation.Text = Language.UpdateCheck;
 
-            chkCheckForUpdatesOnStartup.Text = Language.strCheckForUpdatesOnStartup;
-            btnUpdateCheckNow.Text = Language.strCheckNow;
+            chkCheckForUpdatesOnStartup.Text = Language.CheckForUpdatesOnStartup;
+            btnUpdateCheckNow.Text = Language.CheckNow;
 
-            groupBoxReleaseChannel.Text = Language.strReleaseChannel;
-            lblReleaseChannelExplanation.Text = Language.strReleaseChannelExplanation;
+            groupBoxReleaseChannel.Text = Language.ReleaseChannel;
+            lblReleaseChannelExplanation.Text = Language.ReleaseChannelExplanation;
 
-            chkUseProxyForAutomaticUpdates.Text = Language.strCheckboxUpdateUseProxy;
-            lblProxyAddress.Text = Language.strLabelAddress;
-            lblProxyPort.Text = Language.strLabelPort;
+            chkUseProxyForAutomaticUpdates.Text = Language.CheckboxUpdateUseProxy;
+            lblProxyAddress.Text = Language.LabelAddress;
+            lblProxyPort.Text = Language.LabelPort;
 
-            chkUseProxyAuthentication.Text = Language.strCheckboxProxyAuthentication;
-            lblProxyUsername.Text = Language.strLabelUsername;
-            lblProxyPassword.Text = Language.strLabelPassword;
+            chkUseProxyAuthentication.Text = Language.CheckboxProxyAuthentication;
+            lblProxyUsername.Text = Language.LabelUsername;
+            lblProxyPassword.Text = Language.LabelPassword;
 
-            btnTestProxy.Text = Language.strButtonTestProxy;
+            btnTestProxy.Text = Language.ButtonTestProxy;
         }
 
         public override void LoadSettings()
@@ -61,9 +61,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkCheckForUpdatesOnStartup.Checked = Settings.Default.CheckForUpdatesOnStartup;
             cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
             cboUpdateCheckFrequency.Items.Clear();
-            var nDaily = cboUpdateCheckFrequency.Items.Add(Language.strUpdateFrequencyDaily);
-            var nWeekly = cboUpdateCheckFrequency.Items.Add(Language.strUpdateFrequencyWeekly);
-            var nMonthly = cboUpdateCheckFrequency.Items.Add(Language.strUpdateFrequencyMonthly);
+            var nDaily = cboUpdateCheckFrequency.Items.Add(Language.UpdateFrequencyDaily);
+            var nWeekly = cboUpdateCheckFrequency.Items.Add(Language.UpdateFrequencyWeekly);
+            var nMonthly = cboUpdateCheckFrequency.Items.Add(Language.UpdateFrequencyMonthly);
             if (Settings.Default.CheckForUpdatesFrequencyDays < 1)
             {
                 chkCheckForUpdatesOnStartup.Checked = false;
@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                         break;
                     default:
                         var nCustom =
-                            cboUpdateCheckFrequency.Items.Add(string.Format(Language.strUpdateFrequencyCustom,
+                            cboUpdateCheckFrequency.Items.Add(string.Format(Language.UpdateFrequencyCustom,
                                                                             Settings
                                                                                 .Default.CheckForUpdatesFrequencyDays));
                         cboUpdateCheckFrequency.SelectedIndex = nCustom;
@@ -129,15 +129,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.SaveSettings();
 
             Settings.Default.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked;
-            if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.strUpdateFrequencyDaily)
+            if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.UpdateFrequencyDaily)
             {
                 Settings.Default.CheckForUpdatesFrequencyDays = 1;
             }
-            else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.strUpdateFrequencyWeekly)
+            else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.UpdateFrequencyWeekly)
             {
                 Settings.Default.CheckForUpdatesFrequencyDays = 7;
             }
-            else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.strUpdateFrequencyMonthly)
+            else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.UpdateFrequencyMonthly)
             {
                 Settings.Default.CheckForUpdatesFrequencyDays = 31;
             }
@@ -210,7 +210,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                                         txtProxyPassword.Text);
 
             btnTestProxy.Enabled = false;
-            btnTestProxy.Text = Language.strOptionsProxyTesting;
+            btnTestProxy.Text = Language.OptionsProxyTesting;
 
             _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
 
@@ -241,7 +241,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 _appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
 
                 btnTestProxy.Enabled = true;
-                btnTestProxy.Text = Language.strButtonTestProxy;
+                btnTestProxy.Text = Language.ButtonTestProxy;
 
                 if (e.Cancelled)
                 {
@@ -253,13 +253,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     throw e.Error;
                 }
 
-                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.strProxyTestSucceeded, "",
-                                           Language.strButtonOK, false);
+                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestSucceeded, "",
+                                           Language.ButtonOK, false);
             }
             catch (Exception ex)
             {
-                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.strProxyTestFailed,
-                                           MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language.strButtonOK,
+                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestFailed,
+                                           MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language.ButtonOK,
                                            false,
                                            ESysIcons.Error,
                                            0);

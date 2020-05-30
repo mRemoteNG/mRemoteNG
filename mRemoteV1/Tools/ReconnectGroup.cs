@@ -127,10 +127,10 @@ namespace mRemoteNG.Tools
 
         private void ApplyLanguage()
         {
-            grpAutomaticReconnect.Text = Language.strGroupboxAutomaticReconnect;
-            btnClose.Text = Language.strButtonClose;
-            lblServerStatus.Text = Language.strLabelServerStatus;
-            chkReconnectWhenReady.Text = Language.strCheckboxReconnectWhenReady;
+            grpAutomaticReconnect.Text = Language.GroupboxAutomaticReconnect;
+            btnClose.Text = Language.ButtonClose;
+            lblServerStatus.Text = Language.LabelServerStatus;
+            chkReconnectWhenReady.Text = Language.CheckboxReconnectWhenReady;
         }
     }
 }

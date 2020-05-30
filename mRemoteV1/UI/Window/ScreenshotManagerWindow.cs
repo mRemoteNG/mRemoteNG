@@ -180,14 +180,14 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            mMenFile.Text = Language.strMenuFile;
-            mMenFileSaveAll.Text = Language.strSaveAll;
-            mMenFileRemoveAll.Text = Language.strRemoveAll;
-            cMenScreenshotCopy.Text = Language.strMenuCopy;
-            cMenScreenshotSave.Text = Language.strSave;
-            dlgSaveSingleImage.Filter = Language.strSaveImageFilter;
-            TabText = Language.strScreenshots;
-            Text = Language.strScreenshots;
+            mMenFile.Text = Language.MenuFile;
+            mMenFileSaveAll.Text = Language.SaveAll;
+            mMenFileRemoveAll.Text = Language.RemoveAll;
+            cMenScreenshotCopy.Text = Language.MenuCopy;
+            cMenScreenshotSave.Text = Language.Save;
+            dlgSaveSingleImage.Filter = Language.SaveImageFilter;
+            TabText = Language.Screenshots;
+            Text = Language.Screenshots;
         }
 
         #endregion

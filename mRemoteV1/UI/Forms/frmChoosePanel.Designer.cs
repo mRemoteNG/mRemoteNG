@@ -52,7 +52,7 @@ namespace mRemoteNG.UI.Forms
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 24);
             this.btnOK.TabIndex = 20;
-            this.btnOK.Text = global::mRemoteNG.Language.strButtonOK;
+            this.btnOK.Text = global::mRemoteNG.Language.ButtonOK;
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
@@ -74,7 +74,7 @@ namespace mRemoteNG.UI.Forms
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 24);
             this.btnNew.TabIndex = 40;
-            this.btnNew.Text = global::mRemoteNG.Language.strButtonNew;
+            this.btnNew.Text = global::mRemoteNG.Language.ButtonNew;
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 

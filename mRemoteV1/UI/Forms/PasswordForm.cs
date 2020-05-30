@@ -96,13 +96,13 @@ namespace mRemoteNG.UI.Forms
         private void ApplyLanguage()
         {
             Text = string.IsNullOrEmpty(_passwordName)
-                ? Language.strTitlePassword
-                : string.Format(Language.strTitlePasswordWithName, _passwordName);
+                ? Language.TitlePassword
+                : string.Format(Language.TitlePasswordWithName, _passwordName);
 
-            lblPassword.Text = Language.strLabelPassword;
-            lblVerify.Text = Language.strLabelVerify;
-            btnCancel.Text = Language.strButtonCancel;
-            btnOK.Text = Language.strButtonOK;
+            lblPassword.Text = Language.LabelPassword;
+            lblVerify.Text = Language.LabelVerify;
+            btnCancel.Text = Language.ButtonCancel;
+            btnOK.Text = Language.ButtonOK;
         }
 
         private void ApplyTheme()
@@ -123,11 +123,11 @@ namespace mRemoteNG.UI.Forms
             {
                 if (txtPassword.Text == txtVerify.Text)
                     return true;
-                ShowStatus(Language.strPasswordStatusMustMatch);
+                ShowStatus(Language.PasswordStatusMustMatch);
                 return false;
             }
 
-            ShowStatus(Language.strPasswordStatusTooShort);
+            ShowStatus(Language.PasswordStatusTooShort);
             return false;
         }
 

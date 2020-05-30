@@ -118,7 +118,7 @@ namespace mRemoteNG.Config.Serializers
                 // Program Version 2.7 wraps these properties
                 containerPropertiesNode = containerPropertiesNode.SelectSingleNode("./properties");
             }
-            newContainer.Name = containerPropertiesNode?.SelectSingleNode("./name")?.InnerText ?? Language.strNewFolder;
+            newContainer.Name = containerPropertiesNode?.SelectSingleNode("./name")?.InnerText ?? Language.NewFolder;
             if (bool.TryParse(containerPropertiesNode?.SelectSingleNode("./expanded")?.InnerText, out var expanded))
 				newContainer.IsExpanded = expanded;
             parentContainer.AddChild(newContainer);

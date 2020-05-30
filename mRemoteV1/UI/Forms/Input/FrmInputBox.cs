@@ -20,8 +20,8 @@ namespace mRemoteNG.UI.Forms.Input
 
         private void ApplyLanguage()
         {
-            buttonOk.Text = Language.strButtonOK;
-            buttonCancel.Text = Language.strButtonCancel;
+            buttonOk.Text = Language.ButtonOK;
+            buttonCancel.Text = Language.ButtonCancel;
         }
 
         private void ApplyTheme()

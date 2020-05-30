@@ -96,7 +96,7 @@ namespace mRemoteNG.App.Initialization
         {
             var data = $"{Application.ProductName} {Application.ProductVersion}";
             if (Runtime.IsPortableEdition)
-                data += $" {Language.strLabelPortableEdition}";
+                data += $" {Language.LabelPortableEdition}";
             data += " starting.";
             _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }

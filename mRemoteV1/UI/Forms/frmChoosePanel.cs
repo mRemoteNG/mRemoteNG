@@ -31,10 +31,10 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyLanguage()
         {
-            btnOK.Text = Language.strButtonOK;
-            lblDescription.Text = Language.strLabelSelectPanel;
-            btnNew.Text = Language.strButtonNew;
-            Text = Language.strTitleSelectPanel;
+            btnOK.Text = Language.ButtonOK;
+            lblDescription.Text = Language.LabelSelectPanel;
+            btnNew.Text = Language.ButtonNew;
+            Text = Language.TitleSelectPanel;
         }
 
         private void ApplyTheme()
@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Forms
         private void btnNew_Click(object sender, System.EventArgs e)
         {
             using (var frmInputBox =
-                new FrmInputBox(Language.strNewPanel, Language.strPanelName + ":", Language.strNewPanel))
+                new FrmInputBox(Language.NewPanel, Language.PanelName + ":", Language.NewPanel))
             {
                 var dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK || string.IsNullOrEmpty(frmInputBox.returnValue)) return;

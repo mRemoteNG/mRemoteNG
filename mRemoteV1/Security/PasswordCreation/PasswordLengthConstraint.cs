@@ -23,7 +23,7 @@ namespace mRemoteNG.Security.PasswordCreation
 
             _minLength = minimumLength;
             _maxLength = maxLength;
-            ConstraintHint = string.Format(Language.strPasswordLengthConstraintHint, _minLength, _maxLength);
+            ConstraintHint = string.Format(Language.PasswordLengthConstraintHint, _minLength, _maxLength);
         }
 
         public bool Validate(SecureString password)
