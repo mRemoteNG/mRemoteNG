@@ -12,7 +12,7 @@ namespace mRemoteNG {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -1513,18 +1513,6 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool StartupComponentsCheck {
-            get {
-                return ((bool)(this["StartupComponentsCheck"]));
-            }
-            set {
-                this["StartupComponentsCheck"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string XULRunnerPath {
             get {
@@ -1916,6 +1904,54 @@ namespace mRemoteNG {
             }
             set {
                 this["InhDefaultEnableDesktopComposition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultDisableFullWindowDrag {
+            get {
+                return ((bool)(this["InhDefaultDisableFullWindowDrag"]));
+            }
+            set {
+                this["InhDefaultDisableFullWindowDrag"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultDisableMenuAnimations {
+            get {
+                return ((bool)(this["InhDefaultDisableMenuAnimations"]));
+            }
+            set {
+                this["InhDefaultDisableMenuAnimations"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultDisableCursorShadow {
+            get {
+                return ((bool)(this["InhDefaultDisableCursorShadow"]));
+            }
+            set {
+                this["InhDefaultDisableCursorShadow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultDisableCursorBlinking {
+            get {
+                return ((bool)(this["InhDefaultDisableCursorBlinking"]));
+            }
+            set {
+                this["InhDefaultDisableCursorBlinking"] = value;
             }
         }
         
@@ -2984,6 +3020,66 @@ namespace mRemoteNG {
             }
             set {
                 this["CloseToTray"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string StartupComponentsCheck {
+            get {
+                return ((string)(this["StartupComponentsCheck"]));
+            }
+            set {
+                this["StartupComponentsCheck"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultDisableFullWindowDrag {
+            get {
+                return ((bool)(this["ConDefaultDisableFullWindowDrag"]));
+            }
+            set {
+                this["ConDefaultDisableFullWindowDrag"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultDisableMenuAnimations {
+            get {
+                return ((bool)(this["ConDefaultDisableMenuAnimations"]));
+            }
+            set {
+                this["ConDefaultDisableMenuAnimations"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultDisableCursorShadow {
+            get {
+                return ((bool)(this["ConDefaultDisableCursorShadow"]));
+            }
+            set {
+                this["ConDefaultDisableCursorShadow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ConDefaultDisableCursorBlinking {
+            get {
+                return ((bool)(this["ConDefaultDisableCursorBlinking"]));
+            }
+            set {
+                this["ConDefaultDisableCursorBlinking"] = value;
             }
         }
     }

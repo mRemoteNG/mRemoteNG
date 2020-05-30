@@ -169,7 +169,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mRemoteNG Options";
-            this.Load += new System.EventHandler(this.frmOptions_Load);
+            this.Load += new System.EventHandler(this.FrmOptions_Load);
             this.pnlBottom.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lstOptionPages)).EndInit();
             this.ResumeLayout(false);

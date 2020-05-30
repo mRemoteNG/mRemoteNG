@@ -1427,13 +1427,13 @@ Załadowano nowy plik połączeń.</value>
   <data name="strRdpCloseConnectionFailed" xml:space="preserve">
     <value>Nie udało się zamknąć połączenia RDP!</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Wyłącz miganie kursora</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Wyłącz cień kursora</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Wyłącz animacje menu</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

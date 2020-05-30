@@ -37,6 +37,10 @@
 		public TType DisplayThemes { get; set; }
 		public TType EnableFontSmoothing { get; set; }
 		public TType EnableDesktopComposition { get; set; }
+		public TType DisableFullWindowDrag { get; set; }
+		public TType DisableMenuAnimations { get; set; }
+		public TType DisableCursorShadow { get; set; }
+		public TType DisableCursorBlinking { get; set; }
 		public TType RedirectKeys { get; set; }
 		public TType RedirectDiskDrives { get; set; }
 		public TType RedirectPrinters { get; set; }

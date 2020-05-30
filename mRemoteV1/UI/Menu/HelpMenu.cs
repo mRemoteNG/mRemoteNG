@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -157,7 +158,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenInfoDonate_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlDonate);
 
-        private void mMenInfoAbout_Click(object sender, EventArgs e) => Windows.Show(WindowType.About);
+        private void mMenInfoAbout_Click(object sender, EventArgs e) => FrmAbout.Instance.Show();
 
         #endregion
     }

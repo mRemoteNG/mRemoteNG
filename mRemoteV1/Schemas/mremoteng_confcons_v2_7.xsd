@@ -63,6 +63,10 @@
         <xs:attribute name="DisplayThemes" type="xs:boolean" use="required" />
         <xs:attribute name="EnableFontSmoothing" type="xs:boolean" use="required" />
         <xs:attribute name="EnableDesktopComposition" type="xs:boolean" use="required" />
+        <xs:attribute name="DisableFullWindowDrag" type="xs:boolean" use="required" />
+        <xs:attribute name="DisableMenuAnimations" type="xs:boolean" use="required" />
+        <xs:attribute name="DisableCursorShadow" type="xs:boolean" use="required" />
+        <xs:attribute name="DisableCursorBlinking" type="xs:boolean" use="required" />
         <xs:attribute name="CacheBitmaps" type="xs:boolean" use="required" />
         <xs:attribute name="RedirectDiskDrives" type="xs:boolean" use="required" />
         <xs:attribute name="RedirectPorts" type="xs:boolean" use="required" />
@@ -105,6 +109,10 @@
         <xs:attribute name="InheritDisplayWallpaper" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritEnableFontSmoothing" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritEnableDesktopComposition" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritDisableFullWindowDrag" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritDisableMenuAnimations" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritDisableCursorShadow" type="xs:boolean" use="optional" />
+        <xs:attribute name="InheritDisableCursorBlinking" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritDomain" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritIcon" type="xs:boolean" use="optional" />
         <xs:attribute name="InheritPanel" type="xs:boolean" use="optional" />

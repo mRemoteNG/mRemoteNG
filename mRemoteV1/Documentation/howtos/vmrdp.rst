@@ -39,7 +39,7 @@ Port 2179 must be open on Hyper-V server and on the machine you are connecting f
 	netsh advfirewall firewall add rule name="VMRDP" dir=out action=allow protocol=TCP localport=2179 (outgoing)
 
 In case you are facing "Unknown disconnection reason 3848" error when connecting, you need to configure a number of registry settings on your client and the Hyper-V Server to make the connection work.
-Tis problem occurs because of the CredSSP (Credential Security Service Provider) policy on the client and/or Hyper-V Server not allowing to authentication of remote users by default.
+This problem occurs because of the CredSSP (Credential Security Service Provider) policy on the client and/or Hyper-V Server not allowing to authentication of remote users by default.
 
 .. note::
 

@@ -48,12 +48,6 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ADTree">
-      <HintPath>References\ADTree.dll</HintPath>
-    </Reference>
-    <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
-      <HintPath>..\packages\K4os.Compression.LZ4.1.1.11\lib\net46\K4os.Compression.LZ4.dll</HintPath>
-    </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -89,9 +83,6 @@
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Markdig, Version=0.20.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Markdig.0.20.0\lib\netstandard2.0\Markdig.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="mscorlib" />
@@ -356,7 +347,7 @@
     <Compile Include="Themes\MremoteNGThemeBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Tools\Attributes\AttributeUsedInAllProtocolsExcept.cs" />
+    <Compile Include="Tools\Attributes\UsedInAllProtocolsExceptAttribute.cs" />
     <Compile Include="Tools\Clipboard\WindowsClipboard.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
     <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
@@ -448,6 +439,12 @@
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandler.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandler.cs" />
+    <Compile Include="UI\Controls\AdTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\AdTree.Designer.cs">
+      <DependentUpon>AdTree.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\Base\NGButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -618,6 +615,9 @@
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ComponentsPage.Designer.cs">
+      <DependentUpon>ComponentsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\CredentialsPage.cs">
       <SubType>UserControl</SubType>
@@ -808,11 +808,11 @@
     <Compile Include="UI\TaskDialog\frmTaskDialog.designer.cs">
       <DependentUpon>frmTaskDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Window\AboutWindow.cs">
+    <Compile Include="UI\Forms\FrmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Window\AboutWindow.Designer.cs">
-      <DependentUpon>AboutWindow.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmAbout.Designer.cs">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Window\ActiveDirectoryImportWindow.Designer.cs">
       <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
@@ -823,8 +823,8 @@
     <Compile Include="UI\Window\BaseWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Window\ComponentsCheckWindow.cs">
-      <SubType>Form</SubType>
+    <Compile Include="UI\Forms\OptionsPages\ComponentsPage.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Window\ConfigWindow.cs">
       <SubType>Form</SubType>
@@ -906,6 +906,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\AdTree.resx">
+      <DependentUpon>AdTree.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\Base\NGButton.resx">
       <DependentUpon>NGButton.cs</DependentUpon>
@@ -1108,8 +1111,8 @@
     <EmbeddedResource Include="UI\TaskDialog\frmTaskDialog.resx">
       <DependentUpon>frmTaskDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\AboutWindow.resx">
-      <DependentUpon>AboutWindow.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmAbout.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ActiveDirectoryImportWindow.resx">
@@ -1119,8 +1122,8 @@
     <EmbeddedResource Include="UI\Window\BaseWindow.resx">
       <DependentUpon>BaseWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\ComponentsCheckWindow.resx">
-      <DependentUpon>ComponentsCheckWindow.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ComponentsPage.resx">
+      <DependentUpon>ComponentsPage.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ConfigWindow.resx">
@@ -1200,9 +1203,9 @@
     <None Include="Documentation\user_interface\screenshot_manager.rst" />
     <None Include="Documentation\user_interface\port_scan.rst" />
     <None Include="Documentation\user_interface\quick_connect.rst" />
+    <None Include="Documentation\howtos\vmrdp.rst" />
     <None Include="Firefox\omni.ja" />
     <None Include="packages.config" />
-    <None Include="Documentation\howtos\vmrdp.rst" />
     <None Include="Resources\Templates\AppIcon.psd" />
     <None Include="Resources\Templates\Header_dark.psd" />
     <None Include="Resources\Templates\Header_light.psd" />

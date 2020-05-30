@@ -271,6 +271,30 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool EnableDesktopComposition { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryAppearance), 6),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strPropertyNameDisableFullWindowDrag)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionDisableFullWindowDrag)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool DisableFullWindowDrag { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryAppearance), 6),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strPropertyNameDisableMenuAnimations)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionDisableMenuAnimations)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool DisableMenuAnimations { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryAppearance), 6),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strPropertyNameDisableCursorShadow)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionDisableCursorShadow)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool DisableCursorShadow { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryAppearance), 6),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.strPropertyNameDisableCursorBlinking)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.strPropertyDescriptionDisableCursorBlinking)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool DisableCursorBlinking { get; set; }
+
         #endregion
 
         #region Redirect

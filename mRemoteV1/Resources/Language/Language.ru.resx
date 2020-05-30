@@ -1588,16 +1588,16 @@ VncSharp Control Version {0}</value>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Не удается создать RDP подключение, пожалуйста, проверьте настройки mRemoteNG.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Отключить мигание курсора </value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Отключить тень курсора</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Отключить отображение окна при перетаскивании</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Отключить Анимацию</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

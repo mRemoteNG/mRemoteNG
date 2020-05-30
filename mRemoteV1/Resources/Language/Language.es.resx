@@ -1556,16 +1556,16 @@ Mensaje:
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>No se pudo crear el control RDP, por favor verifique los requerimientos de mRemoteNG.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Desactivar Parpadeo del Cursor</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Desactivar Sombra del Cursor</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Desactivar Mostar Ventana al arrastrar</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Desactivar Animaciones de Menús</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

@@ -1555,16 +1555,16 @@ VncSharp Control 版本 {0}</value>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>無法建立 RDP 控制，請檢查 mRemoteNG 需求。</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>停用游標閃爍</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>停用游標陰影</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>停用完整視窗拖曳</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>停用功能表動畫</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

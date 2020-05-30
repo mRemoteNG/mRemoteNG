@@ -177,8 +177,6 @@ namespace mRemoteNG.UI.Forms
             Windows.TreeForm.Focus();
 
             PuttySessionsManager.Instance.StartWatcher();
-            if (Settings.Default.StartupComponentsCheck)
-                Windows.Show(WindowType.ComponentsCheck);
 
             Startup.Instance.CreateConnectionsProvider(messageCollector);
 
@@ -681,7 +679,7 @@ namespace mRemoteNG.UI.Forms
 					var connectionWindow = (ConnectionWindow)document;
 					if (Settings.Default.AlwaysShowConnectionTabs == false)
 					{
-						connectionWindow.TabController.HideTabsMode = TabControl.HideTabsModes.HideAlways;
+						connectionWindow.TabController.HideTabsMode = TabControl.HideTabsModes.HidepnlDock.DockLeftPortion = Always;
 					}
 					else
 					{
@@ -696,24 +694,16 @@ namespace mRemoteNG.UI.Forms
             pnlDock.Size = new Size(1, 1);
         }
 
-        #endregion
-
-        #region Screen Stuff
-
         public void SetDefaultLayout()
         {
             pnlDock.Visible = false;
 
-            pnlDock.DockLeftPortion = pnlDock.Width * 0.2;
-            pnlDock.DockRightPortion = pnlDock.Width * 0.2;
-            pnlDock.DockTopPortion = pnlDock.Height * 0.25;
-            pnlDock.DockBottomPortion = pnlDock.Height * 0.25;
-
             Windows.TreeForm.Show(pnlDock, DockState.DockLeft);
-            Windows.ConfigForm.Show(pnlDock);
-            Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
+            viewMenu._mMenViewConnections.Checked = true;
+            Windows.ConfigForm.Show(pnlDock, DockState.DockLeft);
+            viewMenu._mMenViewConfig.Checked = true;
             Windows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
-            Windows.ScreenshotForm.Hide();
+            viewMenu._mMenViewErrorsAndInfos.Checked = true;
 
             pnlDock.Visible = true;
         }

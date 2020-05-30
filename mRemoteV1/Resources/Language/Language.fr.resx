@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -105,14 +105,14 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1565,16 +1565,16 @@ Message:
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Impossible de lancer une connexion RDP, vérifiez les prérequis mRemoteNG.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Désactiver le curseur clignotant</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Désactiver l'Ombre du pointeur</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Désactiver le glissement de fenêtre complet</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Désactiver les animations du menu</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">
@@ -2119,5 +2119,8 @@ Message:
   </data>
   <data name="strYes" xml:space="preserve">
     <value>Oui</value>
+  </data>
+  <data name="strCredits" xml:space="preserve">
+    <value>Crédits</value>
   </data>
 </root>

@@ -57,6 +57,10 @@ namespace mRemoteNG.Connection
         private bool _displayThemes;
         private bool _enableFontSmoothing;
         private bool _enableDesktopComposition;
+        private bool _disableFullWindowDrag;
+        private bool _disableMenuAnimations;
+        private bool _disableCursorShadow;
+        private bool _disableCursorBlinking;
 
         private bool _redirectKeys;
         private bool _redirectDiskDrives;
@@ -523,6 +527,49 @@ namespace mRemoteNG.Connection
             set => SetField(ref _enableDesktopComposition, value, "EnableDesktopComposition");
         }
 
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryAppearance), 5),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameDisableFullWindowDrag)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionDisableFullWindowDrag)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
+        public bool DisableFullWindowDrag
+        {
+            get => GetPropertyValue("DisableFullWindowDrag", _disableFullWindowDrag);
+            set => SetField(ref _disableFullWindowDrag, value, "DisableFullWindowDrag");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryAppearance), 5),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameDisableMenuAnimations)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionDisableMenuAnimations)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
+        public bool DisableMenuAnimations
+        {
+            get => GetPropertyValue("DisableMenuAnimations", _disableMenuAnimations);
+            set => SetField(ref _disableMenuAnimations, value, "DisableMenuAnimations");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryAppearance), 5),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameDisableCursorShadow)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionDisableCursorShadow)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
+        public bool DisableCursorShadow
+        {
+            get => GetPropertyValue("DisableCursorShadow", _disableCursorShadow);
+            set => SetField(ref _disableCursorShadow, value, "DisableCursorShadow");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.strCategoryAppearance), 5),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.strPropertyNameDisableCursorShadow)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.strPropertyDescriptionDisableCursorShadow)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         UsedInProtocol(ProtocolType.RDP)]
+        public bool DisableCursorBlinking
+        {
+            get => GetPropertyValue("DisableCursorBlinking", _disableCursorBlinking);
+            set => SetField(ref _disableCursorBlinking, value, "DisableCursorBlinking");
+        }
         #endregion
 
         #region Redirect

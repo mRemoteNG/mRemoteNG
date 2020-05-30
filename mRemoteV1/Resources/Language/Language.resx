@@ -1768,16 +1768,16 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Couldn't create RDP control, please check mRemoteNG requirements.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Disable Cursor blinking</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Disable Cursor Shadow</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Disable Full Window drag</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Disable Menu Animations</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">
@@ -2838,5 +2838,26 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="strPowerShell" xml:space="preserve">
     <value>PowerShell</value>
+  </data>
+  <data name="strChangelog" xml:space="preserve">
+    <value>Changelog</value>
+  </data>
+  <data name="strCredits" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="strLicense" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="strPropertyDescriptionDisableCursorBlinking" xml:space="preserve">
+    <value>Determines whether cursor flashes should be disabled.</value>
+  </data>
+  <data name="strPropertyDescriptionDisableCursorShadow" xml:space="preserve">
+    <value>Determines whether a mouse shadow should be visible.</value>
+  </data>
+  <data name="strPropertyDescriptionDisableFullWindowDrag" xml:space="preserve">
+    <value>Determines whether window content is displayed when you drag the window to a new location.</value>
+  </data>
+  <data name="strPropertyDescriptionDisableMenuAnimations" xml:space="preserve">
+    <value>Determines whether menus and windows can be displayed with animation effects in the remote session.</value>
   </data>
 </root>
