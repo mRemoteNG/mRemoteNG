@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1690: Replaced GeckoFX (Firefox) with CefSharp (Chromium)
 ### Fixed
 - #1773: Connection issue with mysql - Missing fields in tblCons
+- #1720: Show configuration file name in title of password prompt form
 - #1713: Sound redirection does not work if Clipboard redirection is set to No
 - #1632: 1.77.1 breaks RDP drive and sound redirection
 - #1610: Menu bar changes to english when cancelling options form
