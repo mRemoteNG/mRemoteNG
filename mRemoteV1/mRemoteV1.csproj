@@ -347,6 +347,7 @@
     <Compile Include="Themes\MremoteNGThemeBase.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Tools\ADhelper.cs" />
     <Compile Include="Tools\Attributes\AttributeUsedInAllProtocolsExcept.cs" />
     <Compile Include="Tools\Clipboard\WindowsClipboard.cs" />
     <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
