@@ -1561,6 +1561,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="System" />
     <Reference Include="System.Web" />
     <Reference Include="VncSharp">
       <HintPath>References\VncSharp.dll</HintPath>
