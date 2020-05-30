@@ -62,7 +62,7 @@
     <Compile Include="Utilities\XmlCredentialRepoBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="app.config" />
     <None Include="Features\CredentialRepository.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CredentialRepository.feature.cs</LastGenOutput>
