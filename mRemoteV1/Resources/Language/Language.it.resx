@@ -291,14 +291,6 @@ Se il controllo fallisce o risulta impossibile utilizzare le sessioni RDP con mR
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM è stato rilevato e sembra essere registrato correttamente.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Per utilizzare il motore di rendering Gecko è necessario possedere XULrunner 1.8.1.x ed il percorso di installazione configurato nelle impostazioni. XULrunner 1.8.1.3 può essere scaricato al seguente indirizzo: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Quando il download è terminato, è sufficiente estrarre il pacchetto in una cartella a piacere ed  impostare tale percorso sotto Strumenti - Opzioni - Avanzate - Percorso XULrunner.
-Se il controllo fallisce o risulta impossibile utilizzare il motore di rendering Gecko con mRemoteNG, per favore consultare il forum di mRemoteNG all'indirizzo http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx è stato rilevato e sembra installato correttamente.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA richiede che il plugin XenDesktop Online sia installato e che la libreria wfica.ocx sia registrata. Il client è scaricabile all'indirizzo http://www.citrix.com/download/
 Se il plugin XenDesktop Online è installato ma il controllo fallisce, provare a registrare wfica.ocx manualmente. Aprire la finestra "Esegui" (WIN+R) ed inserire il testo: regsvr32 "C:\Programmi\Citrix\ICA Client\wfica.ocx" (dove C:\Programmi\Citrix\ICA Client\ è il percorso di installazione del plugin XenDesktop Online).

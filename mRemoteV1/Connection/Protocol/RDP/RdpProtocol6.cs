@@ -235,7 +235,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 ViewOnly = !ViewOnly;
             }
-            catch (Exception ex)
+            catch
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"Could not toggle view only mode for host {connectionInfo.Hostname}");
             }

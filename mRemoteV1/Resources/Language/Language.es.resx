@@ -292,15 +292,6 @@ Si continúa sin funcionar la comprobación ó no puede utilizar Sesiones (RDP) 
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM ha sido localizado y parece estar registrado correctamente.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Para emplear el Motor de Renderizado Gecko necesita tener XULrunner 1.8.1.x y configurada en sus opciones la ruta de instalación.
-Puede descargar XULrunner 1.8.1.3 aquí: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Cuando haya concluido la descarga, extraiga el paquete en un directorio de su elección. Entonces, en mRemoteNG vaya a Herramientas - Opciones - Avanzado e introduzca dicha ruta en el campo que indica la instalación de XULrunner.
-Si continúa sin funcionar la comprobación ó no puede utilizar el motor Gecko en mRemoteNG, consulte el Foro de mRemoteNG en http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx ha sido localizado y parece estar instalado correctamente.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA necesita que esté instalado XenDesktop Online Plugin y que la librería wfica.ocx esté registrada. Puede descargar el cliente aquí: http://www.citrix.com/download/
 Si tiene instalado XenDesktop Online Plugin y la comprobación continúa fallando, pruebe a registrar wfica.ocx manualmente.

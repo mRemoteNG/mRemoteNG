@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using mRemoteNG.Tree.Root;
-
+using System.Web;
 
 namespace mRemoteNG.Config.Putty
 {
@@ -92,7 +92,7 @@ namespace mRemoteNG.Config.Putty
                 return null;
             }
 
-            sessionName = System.Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
+            sessionName = HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
 
             var sessionFileReader = new SessionFileReader(sessionFile);
             var sessionInfo = new PuttySessionInfo

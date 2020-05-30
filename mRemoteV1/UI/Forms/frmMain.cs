@@ -28,6 +28,9 @@ using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using CefSharp;
+using CefSharp.WinForms;
+using CefSharp.SchemeHandler;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -153,6 +156,44 @@ namespace mRemoteNG.UI.Forms
             Startup.Instance.InitializeProgram(messageCollector);
 
             SetMenuDependencies();
+
+            //Monitor parent process exit and close subprocesses if parent process exits first
+            //This will at some point in the future becomes the default
+            CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
+
+            //For Windows 7 and above, best to include relevant app.manifest entries as well
+            Cef.EnableHighDPISupport();
+
+            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+            if (Runtime.IsPortableEdition) dir = SettingsFileInfo.SettingsPath;
+
+            CefSettings settings = new CefSettings()
+            {
+                CachePath = Path.Combine(dir, "CEFCache"),
+                LogFile = Path.Combine(dir, "mRemoteNG_cef.log"),
+            };
+
+            if (Settings.Default.TextLogMessageWriterWriteDebugMsgs)
+                settings.LogSeverity = LogSeverity.Verbose;
+            else if (Settings.Default.TextLogMessageWriterWriteInfoMsgs)
+                settings.LogSeverity = LogSeverity.Info;
+            else if (Settings.Default.TextLogMessageWriterWriteWarningMsgs)
+                settings.LogSeverity = LogSeverity.Warning;
+            else if (Settings.Default.TextLogMessageWriterWriteErrorMsgs)
+                settings.LogSeverity = LogSeverity.Error;
+            
+            //Implement scheme to be allowed to view local help files
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = Cef.CefCommitHash,
+                DomainName = "help",
+                SchemeHandlerFactory = new FolderSchemeHandlerFactory(
+                    rootFolder: $@"{GeneralAppInfo.HomePath}\Help\",
+                    defaultPage: "index.html"
+                )
+            });
+
+            Cef.Initialize(settings);
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
@@ -420,6 +461,8 @@ namespace mRemoteNG.UI.Forms
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 
             IsClosing = true;
+
+            Cef.Shutdown();
 
             if (Runtime.WindowList != null)
             {

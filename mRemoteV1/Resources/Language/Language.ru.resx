@@ -292,15 +292,6 @@ mRemoteNG загрузится с этим компонентом, но не з�
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM был найден и зарегистрирован.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Для использования движка Gecko у Вас должен быть установлен XULRunner 1.8.1.x
-Вы можете скачать XULRunner 1.8.1.3 здесь: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-После загрузки извлеките пакет в любую папку. Потом в mRemoteNG перейдите в меню Инструменты - Опции - Дополнительно и введите правильный путь в поле Путь XULRunner.
-Если у вас ничего не получилось обратитесь на {0}.</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx был найден и установлен правильно.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA требуется установленный XenDesktop Online Plugin и зарегистрированная библиотека wfica.ocx. Вы можете скачать клиент здесь: http://www.citrix.com/download/
 Если у вас есть установленный XenDesktop Online Plugin и ничего не работает, попробуйте зарегистрировать wfica.ocx вручную.
@@ -2273,9 +2264,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="strHttp" xml:space="preserve">
     <value>HTTP</value>
-  </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>геккон (Firefox)</value>
   </data>
   <data name="strHttpInternetExplorer" xml:space="preserve">
     <value>Интернет Эксплорер</value>

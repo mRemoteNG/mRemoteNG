@@ -1549,7 +1549,7 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("IE")]
+        [global::System.Configuration.DefaultSettingValueAttribute("CEF")]
         public string ConDefaultRenderingEngine {
             get {
                 return ((string)(this["ConDefaultRenderingEngine"]));

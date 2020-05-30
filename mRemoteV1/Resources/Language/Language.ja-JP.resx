@@ -300,15 +300,6 @@ If this check still fails or you are unable to use the (RDP) Sessions feature, p
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM was found and seems to be registered properly.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
-You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
-If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx was found and seems to be installed properly.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
 If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
@@ -795,9 +786,6 @@ Starting with new connections file.</value>
   </data>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
     <value>Changing HTTP Document Tile Failed!</value>
-  </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>Gecko (Firefox)</value>
   </data>
   <data name="strHttpInternetExplorer" xml:space="preserve">
     <value>Internet Explorer</value>

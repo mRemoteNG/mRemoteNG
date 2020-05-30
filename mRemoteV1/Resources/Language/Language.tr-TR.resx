@@ -332,15 +332,6 @@ Bu kontrol hala başarısız olursa veya (RDP) Oturumlar özelliğini kullanamaz
   <data name="strCcEOLOK" xml:space="preserve">
 		<value>EOLWTSCOM bulundu ve düzgün kayıtlı görünüyor.</value>
 	</data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-		<value>Gecko Rendering Engine'i kullanmak için, XULrunner 1.8.1.x'e sahip olmanız ve Kurulum ayarlarınızın Yollar bölümünde ayarlanması gerekir.
-XULrunner 1.8.1.3 yazılımını buradan indirebilirsiniz: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-İndirme işlemini tamamladığınızda, paketi istediğiniz bir yola ayıklayın. Ardından, Araçlar - Seçenekler - Gelişmiş'e gidin ve XULrunner yol alanına doğru yolu girin.
-Bu kontrolden hala sonuç alamıyorsanız veya Gecko Motorunu mRemoteNG'de kullanamıyorsanız, lütfen http://forum.mremoteng.org/ adresindeki mRemoteNG Forumu'na başvurun.</value>
-	</data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-		<value>GeckoFx bulundu ve düzgün kurulmuş gibi görünüyor.</value>
-	</data>
   <data name="strCcICAFailed" xml:space="preserve">
 		<value>ICA, XenDesktop Online Plugin'in kurulu olmasını ve wfica.ocx kitaplığının kayıtlı olmasını gerektirir. İstemciyi şu adresten indirebilirsiniz: http://www.citrix.com/download/
 XenDesktop Çevrimiçi Eklentisi'ni yüklediyseniz ve kontrol hala başarısız olursa, el ile wfica.ocx kaydetmeyi deneyin.

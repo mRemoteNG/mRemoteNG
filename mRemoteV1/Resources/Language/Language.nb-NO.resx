@@ -292,15 +292,6 @@ Hvis denne kontrollen fortsatt feiler eller RDP-sesjoner ikke fungerer, se {0}.<
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM ble funnet, og synes å være korrekt registrert.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>For å bruke Gecko-renderingsmotoren må du ha XULrunner 1.8.1.x installert og stien til installasjonen angitt i Alternativer.
-Du kan laste ned XULrunner 1.8.1.3 herfra: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Når nedlastingen er ferdig, pakk den ut til et passende sted. I mRemoteNG, gå til Verktøy - Alternativer - Avansert og skriv inn korrekt sti i XULrunner-stifeltet.
-Hvis denne kontrollen fortsatt feiler eller Gecko-renderingsmotoren i mRemoteNG ikke fungerer, vennligst se {0}.</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx ble funnet å ser ut til å være korrekt installert.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA krever at XenDesktop Online Plugin er installert og at wfica.ocx-biblioteket er registrert. Du kan laste ned klienten herfra: http://www.citrix.com/download/
 Hvis du har XenDesktop Online Pluginen installert og kontrollen fremdeles feiler, kan du forsøke å registrere wfica.ocx manuelt.

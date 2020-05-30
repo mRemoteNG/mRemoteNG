@@ -286,15 +286,6 @@ mRemoteNG постачається з цим компонентом, але ві
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM знайдено і зареєстровано.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Для використання Gecko Rendering Engine вам потрібен мати XULrunner 1.8.1.x та шлях до установки, вказаний у ваших опціях.
-Завантажити XULrunner 1.8.1.3 можна тут: https://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Після завантаження, розпакуйте архів до обраного вами шляху. Потім у mRemoteNG перейдіть в меню Інструменти - Опції - Додатково і введіть правильний шлях у полі шляху XULRunner.
-Якщо у вас нічого не вийшло зверніться за адресою: {0}.</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx було знайдено і встановлено правильно.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA вимагає встановити XenDesktop Online Plugin та зареєструвати бібліотеку wfica.ocx. Ви можете завантажити клієнт тут: http://www.citrix.com/download/
 Якщо у вас є встановлений XenDesktop Online Plugin і нічого не працює, спробуйте зареєструвати wfica.ocx вручну.

@@ -974,27 +974,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
-        ///You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-        ///When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
-        ///If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please c [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string strCcGeckoFailed {
-            get {
-                return ResourceManager.GetString("strCcGeckoFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to GeckoFx was found and seems to be installed properly..
-        /// </summary>
-        internal static string strCcGeckoOK {
-            get {
-                return ResourceManager.GetString("strCcGeckoOK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/.
         /// </summary>
         internal static string strCcICAFailed {
@@ -2568,6 +2547,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CEF (Chromium).
+        /// </summary>
+        internal static string strHttpCEF {
+            get {
+                return ResourceManager.GetString("strHttpCEF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HTTP Connect Failed!.
         /// </summary>
         internal static string strHttpConnectFailed {
@@ -2595,11 +2583,11 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gecko (Firefox).
+        ///   Looks up a localized string similar to Failed to contruct the URL to load.
         /// </summary>
-        internal static string strHttpGecko {
+        internal static string strHTTPFailedURLBuild {
             get {
-                return ResourceManager.GetString("strHttpGecko", resourceCulture);
+                return ResourceManager.GetString("strHTTPFailedURLBuild", resourceCulture);
             }
         }
         
