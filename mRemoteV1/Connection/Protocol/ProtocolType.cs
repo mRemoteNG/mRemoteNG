@@ -31,7 +31,7 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Https))]
         HTTPS = 8,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strPowerShell))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.PowerShell))]
         PowerShell = 10,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.ExternalTool))]

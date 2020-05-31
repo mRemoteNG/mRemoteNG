@@ -140,7 +140,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.HostnameIp)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionHostnameIp)),
-         UsedInAllProtocolsExcept()]
+         AttributeUsedInAllProtocolsExcept()]
         public virtual string Hostname
         {
             get => _hostname.Trim();
@@ -150,7 +150,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Port)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPort)),
-         UsedInAllProtocolsExcept(ProtocolType.ICA)]
+         AttributeUsedInAllProtocolsExcept()]
         public virtual int Port
         {
             get => GetPropertyValue("Port", _port);
@@ -160,7 +160,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Username)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUsername)),
-         UsedInAllProtocolsExcept(ProtocolType.VNC, ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
+         AttributeUsedInAllProtocolsExcept(ProtocolType.VNC, ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
         public virtual string Username
         {
             get => GetPropertyValue("Username", _username);
@@ -181,7 +181,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Domain)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionDomain)),
-         UsedInProtocol(ProtocolType.RDP, ProtocolType.ICA, ProtocolType.IntApp, ProtocolType.PowerShell)]
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.IntApp, ProtocolType.PowerShell)]
         public string Domain
         {
             get => GetPropertyValue("Domain", _domain).Trim();
@@ -191,7 +191,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.VmId)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVmId)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public string VmId
         {
             get => GetPropertyValue("VmId", _vmId).Trim();
@@ -259,22 +259,11 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshOptions)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshOptions)),
-         UsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
+         AttributeUsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
         public virtual string SSHOptions
         {
             get => GetPropertyValue("SSHOptions", _sshOptions);
             set => SetField(ref _sshOptions, value, "SSHOptions");
-        }
-
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.EncryptionStrength)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionEncryptionStrength)),
-         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
-         UsedInProtocol(ProtocolType.ICA)]
-        public IcaProtocol.EncryptionStrength ICAEncryptionStrength
-        {
-            get => GetPropertyValue("ICAEncryptionStrength", _icaEncryption);
-            set => SetField(ref _icaEncryption, value, "ICAEncryptionStrength");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
@@ -302,7 +291,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.MinutesToIdleTimeout)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPMinutesToIdleTimeout)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual int RDPMinutesToIdleTimeout
         {
             get => GetPropertyValue("RDPMinutesToIdleTimeout", _rdpMinutesToIdleTimeout);
@@ -319,7 +308,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.MinutesToIdleTimeout)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPAlertIdleTimeout)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RDPAlertIdleTimeout
         {
             get => GetPropertyValue("RDPAlertIdleTimeout", _rdpAlertIdleTimeout);
@@ -329,7 +318,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.LoadBalanceInfo)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionLoadBalanceInfo)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public string LoadBalanceInfo
         {
             get => GetPropertyValue("LoadBalanceInfo", _loadBalanceInfo).Trim();
@@ -397,7 +386,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayHostname)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDGatewayHostname)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayHostname
         {
             get => GetPropertyValue("RDGatewayHostname", _rdGatewayHostname).Trim();
@@ -418,7 +407,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayUsername)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDGatewayUsername)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayUsername
         {
             get => GetPropertyValue("RDGatewayUsername", _rdGatewayUsername).Trim();
@@ -439,7 +428,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayDomain)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDGatewayDomain)),
-         UsedInProtocol(ProtocolType.RDP)]
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayDomain
         {
             get => GetPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim();
@@ -794,7 +783,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
             LocalizedAttributes.LocalizedDisplayName(nameof(Language.ProxyAddress)),
             LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVNCProxyAddress)),
-            UsedInProtocol(ProtocolType.VNC),
+            AttributeUsedInProtocol(ProtocolType.VNC),
             Browsable(false)]
         public string VNCProxyIP
         {
@@ -805,7 +794,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
             LocalizedAttributes.LocalizedDisplayName(nameof(Language.ProxyPort)),
             LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVNCProxyPort)),
-            UsedInProtocol(ProtocolType.VNC),
+            AttributeUsedInProtocol(ProtocolType.VNC),
             Browsable(false)]
         public int VNCProxyPort
         {
@@ -816,7 +805,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Proxy), 7),
             LocalizedAttributes.LocalizedDisplayName(nameof(Language.ProxyUsername)),
             LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionVNCProxyUsername)),
-            UsedInProtocol(ProtocolType.VNC),
+            AttributeUsedInProtocol(ProtocolType.VNC),
             Browsable(false)]
         public string VNCProxyUsername
         {
