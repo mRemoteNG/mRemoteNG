@@ -5,19 +5,58 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #1770: Added missing RDP performance settings
 - #1332: Added option to hide menu strip container
+- #545: Option to minimize to system tray on closing
+- #420: SSH tunneling implemented
+- #283: Support for native PowerShell remoting as new protocol
 ### Changed
+- #1767: Turned about window into a simple popup form
+- #1766: Converted components check page into options page
+- #1690: Replaced GeckoFX (Firefox) with CefSharp (Chromium)
+### Fixed
+- #1773: Connection issue with mysql - Missing fields in tblCons
+- #1720: Show configuration file name in title of password prompt form
+- #1713: Sound redirection does not work if Clipboard redirection is set to No
+- #1632: 1.77.1 breaks RDP drive and sound redirection
+- #1610: Menu bar changes to english when cancelling options form
+- #1595: Unhandled exception when trying to browse through non existent multi ssh history with keyboard key strokes
+- #1589: Update SQL tables instead of rewriting them
+- #1465: REGRESSION: Smart Cards redirection to Remote Desktop not working
+- #1337: Unhandled exception after closing mRemoteNG
+- #359: Making a VNC connection to an unreachable host causes the application to not respond for 20-30 seconds
+
+## [1.77.1] - 2019-09-02
+### Added
+- #1512: Added option to close panel from right click menu
+- #1434: Revised sort button in connection tree to be able to sort in both orders
+- #1400: Added file download handling to HTTP(S) connections using Gecko
+- #1385: Added option to start mRemoteNG minimized
+- #826: Allow selecting RDP version to use when connecting
+### Changed
+- #1544: Improved Polish translations
+- #1518: Inheritance is no longer automatically enabled when importing nodes from Active Directory
 - #1468: Improved mRemoteNG startup time
 - #1443: Chinese (simplified) translation improvements
 - #1437: Norwegian translation improvements
+- #1378: Hyperlinks embedded within mRemoteNG now open in the system default browser
 - #1239: Increased default key derivation function (KDF) iterations from 1000 to 10000
+- #718: Moved port property from 'protocol' to 'connection' section
 - Moved most RDP enums outside of the RDP protocol class. Scripts which reference these enums will need to be updated.
+- Removed the "Automatically get session info" from the advanced options screen since it is no longer used.
 ### Fixed
+- #1505: About screen now better follows theme colors
+- #1493: Updated database setup scripts for MSSQL and MySQL
+- #1470: The "Favorite" setting is now properly saved in the local connection settings file (not saved in database)
 - #1447: Exception occurs when resetting layout
 - #1439: Searching in hosts tree loses first keystroke
 - #1428: Fixed a rare error when checking for FIPS
 - #1426: Tabbing is reversed in config window
-- #1425: Connections didn't always respect the Panel property
+- #1425: Connections didn't always respect the panel property
+- #841: Allow for sorting in port scan results
+- #617: Added missing description for password protect field in root node
+- #553: Browser language not set when using Gecko rendering engine
+- #323: Wallpaper always shows in RDP connections, even when turned off
 
 
 ## [1.77.0] - 2019-04-29

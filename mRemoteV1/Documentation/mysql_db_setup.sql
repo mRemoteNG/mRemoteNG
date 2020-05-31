@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS `tblCons`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tblCons` (
     `ID` int(11) NOT NULL AUTO_INCREMENT,
-    `ConstantID` varchar(128) DEFAULT NULL,
+    `ConstantID` varchar(128) NOT NULL,
     `PositionID` int(11) NOT NULL,
     `ParentID` varchar(128) DEFAULT NULL,
     `LastChange` datetime NOT NULL,
@@ -31,6 +31,8 @@ CREATE TABLE `tblCons` (
     `Username` varchar(512) DEFAULT NULL,
     `DomainName` varchar(512) DEFAULT NULL,
     `Password` varchar(1024) DEFAULT NULL,
+    `SSHTunnelConnectionName` varchar(128) NOT NULL,
+    `SSHOptions` varchar(1024) NOT NULL,
     `Hostname` varchar(512) DEFAULT NULL,
     `Protocol` varchar(32) NOT NULL,
     `PuttySession` varchar(128) DEFAULT NULL,
@@ -48,6 +50,10 @@ CREATE TABLE `tblCons` (
     `DisplayThemes` tinyint(1) NOT NULL,
     `EnableFontSmoothing` tinyint(1) NOT NULL,
     `EnableDesktopComposition` tinyint(1) NOT NULL,
+    `DisableFullWindowDrag` tinyint(1) NOT NULL,
+    `DisableMenuAnimations` tinyint(1) NOT NULL,
+    `DisableCursorShadow` tinyint(1) NOT NULL,
+    `DisableCursorBlinking` tinyint(1) NOT NULL,
     `CacheBitmaps` tinyint(1) NOT NULL,
     `RedirectDiskDrives` tinyint(1) NOT NULL,
     `RedirectPorts` tinyint(1) NOT NULL,
@@ -93,6 +99,8 @@ CREATE TABLE `tblCons` (
     `InheritPassword` tinyint(1) NOT NULL,
     `InheritPort` tinyint(1) NOT NULL,
     `InheritProtocol` tinyint(1) NOT NULL,
+    `InheritSSHTunnelConnectionName` tinyint(1) NOT NULL,
+    `InheritSSHOptions` tinyint(1) NOT NULL,
     `InheritPuttySession` tinyint(1) NOT NULL,
     `InheritRedirectDiskDrives` tinyint(1) NOT NULL,
     `InheritRedirectKeys` tinyint(1) NOT NULL,
@@ -139,9 +147,16 @@ CREATE TABLE `tblCons` (
     `InheritAutomaticResize` tinyint(1) NOT NULL DEFAULT 0,
     `RedirectClipboard` tinyint(1) NOT NULL DEFAULT 0,
     `InheritRedirectClipboard` tinyint(1) NOT NULL DEFAULT 0,
-    `RedirectAudioCapture` bit NOT NULL DEFAULT 0,
-    `InheritRedirectAudioCapture` bit NOT NULL DEFAULT 0,
-    PRIMARY KEY (`ID`)
+    `RdpVersion` varchar(10) DEFAULT NULL,
+    `InheritRdpVersion` tinyint(1) NOT NULL DEFAULT 0,
+	`VmId` varchar(512) DEFAULT NULL,
+	`UseVmId` tinyint(1) DEFAULT NULL,
+	`UseEnhancedMode` tinyint(1) DEFAULT NULL,
+	`InheritVmId` tinyint(1) DEFAULT NULL,
+	`InheritUseVmId` tinyint(1) DEFAULT NULL,
+	`InheritUseEnhancedMode` tinyint(1) DEFAULT NULL,
+    PRIMARY KEY (`ConstantID`),
+    UNIQUE (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3324 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
     

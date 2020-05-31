@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Forms
 
         #region Event Handlers
 
-        private void frmPassword_Load(object sender, EventArgs e)
+        private void FrmPassword_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
             ApplyTheme();
@@ -70,13 +70,13 @@ namespace mRemoteNG.UI.Forms
             txtVerify.Text = "";
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             if (NewPasswordMode)
                 VerifyNewPassword();
@@ -84,7 +84,7 @@ namespace mRemoteNG.UI.Forms
             DialogResult = DialogResult.OK;
         }
 
-        private void txtPassword_TextChanged(object sender, EventArgs e)
+        private void TxtPassword_TextChanged(object sender, EventArgs e)
         {
             HideStatus();
         }

@@ -98,7 +98,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 UseConsoleSession = true,
                 UseCredSsp = true,
                 UseVmId = false,
-                RenderingEngine = HTTPBase.RenderingEngine.Gecko,
+                UseEnhancedMode = false,
+                RenderingEngine = HTTPBase.RenderingEngine.CEF,
                 ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
                 RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
                 Colors = RDPColors.Colors16Bit,
@@ -108,6 +109,10 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 DisplayThemes = true,
                 EnableFontSmoothing = true,
                 EnableDesktopComposition = true,
+                DisableFullWindowDrag = false,
+                DisableMenuAnimations = false,
+                DisableCursorShadow = false,
+                DisableCursorBlinking = false,
                 CacheBitmaps = true,
                 RedirectDiskDrives = true,
                 RedirectPorts = true,
@@ -164,25 +169,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
             public static IEnumerable InheritanceTestCases()
             {
-                var ignoreProperties = new[]
-                {
-                    nameof(ConnectionInfoInheritance.EverythingInherited),
-                    nameof(ConnectionInfoInheritance.Parent)
-                };
-                var properties = typeof(ConnectionInfoInheritance)
-                    .GetProperties()
-                    .Where(property => !ignoreProperties.Contains(property.Name));
-                var testCases = new List<TestCaseData>();
-                var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+	            var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+                var properties = testInheritance.GetProperties();
 
-                foreach (var property in properties)
-                {
-                    testCases.Add(
-                        new TestCaseData(property.Name)
-                            .Returns(property.GetValue(testInheritance)));
-                }
-
-                return testCases;
+                return properties
+	                .Select(property => 
+		                new TestCaseData(property.Name)
+			                .Returns(property.GetValue(testInheritance)))
+	                .ToList();
             }
         }
     }

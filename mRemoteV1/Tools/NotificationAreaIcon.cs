@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -94,9 +94,15 @@ namespace mRemoteNG.Tools
         private static void nI_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (FrmMain.Visible)
+            {
                 HideForm();
+                FrmMain.ShowInTaskbar = false;
+            }
             else
+            {
                 ShowForm();
+                FrmMain.ShowInTaskbar = true;
+            }
         }
 
         private static void ShowForm()

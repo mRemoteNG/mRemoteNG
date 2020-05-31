@@ -14,7 +14,6 @@ using System.Data;
 using System.Linq;
 using System.Security;
 using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Serializers.MsSql
@@ -90,7 +89,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
             connectionInfo.Hostname = (string)dataRow["Hostname"];
             connectionInfo.VmId = (string)dataRow["VmId"];
+            connectionInfo.UseEnhancedMode = (bool)dataRow["UseEnhancedMode"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
+            connectionInfo.SSHTunnelConnectionName = (string)dataRow["SSHTunnelConnectionName"];
+            connectionInfo.SSHOptions = (string)dataRow["SSHOptions"];
             connectionInfo.PuttySession = (string)dataRow["PuttySession"];
             connectionInfo.Port = (int)dataRow["Port"];
             connectionInfo.UseConsoleSession = (bool)dataRow["ConnectToConsole"];
@@ -117,6 +119,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.DisplayThemes = (bool)dataRow["DisplayThemes"];
             connectionInfo.EnableFontSmoothing = (bool)dataRow["EnableFontSmoothing"];
             connectionInfo.EnableDesktopComposition = (bool)dataRow["EnableDesktopComposition"];
+            connectionInfo.DisableFullWindowDrag = (bool)dataRow["DisableFullWindowDrag"];
+            connectionInfo.DisableMenuAnimations = (bool)dataRow["DisableMenuAnimations"];
+            connectionInfo.DisableCursorShadow = (bool)dataRow["DisableCursorShadow"];
+            connectionInfo.DisableCursorBlinking = (bool)dataRow["DisableCursorBlinking"];
             connectionInfo.CacheBitmaps = (bool)dataRow["CacheBitmaps"];
             connectionInfo.RedirectDiskDrives = (bool)dataRow["RedirectDiskDrives"];
             connectionInfo.RedirectPorts = (bool)dataRow["RedirectPorts"];
@@ -164,6 +170,10 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
 
+            if (!dataRow.IsNull("RdpVersion")) // table allows null values which must be handled
+                if (Enum.TryParse((string)dataRow["RdpVersion"], true, out RdpVersion rdpVersion))
+                    connectionInfo.RdpVersion = rdpVersion;
+
             connectionInfo.Inheritance.CacheBitmaps = (bool)dataRow["InheritCacheBitmaps"];
             connectionInfo.Inheritance.Colors = (bool)dataRow["InheritColors"];
             connectionInfo.Inheritance.Description = (bool)dataRow["InheritDescription"];
@@ -171,12 +181,18 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.DisplayWallpaper = (bool)dataRow["InheritDisplayWallpaper"];
             connectionInfo.Inheritance.EnableFontSmoothing = (bool)dataRow["InheritEnableFontSmoothing"];
             connectionInfo.Inheritance.EnableDesktopComposition = (bool)dataRow["InheritEnableDesktopComposition"];
+            connectionInfo.Inheritance.DisableFullWindowDrag = (bool)dataRow["InheritDisableFullWindowDrag"];
+            connectionInfo.Inheritance.DisableMenuAnimations = (bool)dataRow["InheritDisableMenuAnimations"];
+            connectionInfo.Inheritance.DisableCursorShadow = (bool)dataRow["InheritDisableCursorShadow"];
+            connectionInfo.Inheritance.DisableCursorBlinking = (bool)dataRow["InheritDisableCursorBlinking"];
             connectionInfo.Inheritance.Domain = (bool)dataRow["InheritDomain"];
             connectionInfo.Inheritance.Icon = (bool)dataRow["InheritIcon"];
             connectionInfo.Inheritance.Panel = (bool)dataRow["InheritPanel"];
             connectionInfo.Inheritance.Password = (bool)dataRow["InheritPassword"];
             connectionInfo.Inheritance.Port = (bool)dataRow["InheritPort"];
             connectionInfo.Inheritance.Protocol = (bool)dataRow["InheritProtocol"];
+            connectionInfo.Inheritance.SSHTunnelConnectionName = (bool)dataRow["InheritSSHTunnelConnectionName"];
+            connectionInfo.Inheritance.SSHOptions = (bool)dataRow["InheritSSHOptions"];
             connectionInfo.Inheritance.PuttySession = (bool)dataRow["InheritPuttySession"];
             connectionInfo.Inheritance.RedirectDiskDrives = (bool)dataRow["InheritRedirectDiskDrives"];
             connectionInfo.Inheritance.RedirectKeys = (bool)dataRow["InheritRedirectKeys"];
@@ -192,6 +208,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.UseConsoleSession = (bool)dataRow["InheritUseConsoleSession"];
             connectionInfo.Inheritance.UseCredSsp = (bool)dataRow["InheritUseCredSsp"];
             connectionInfo.Inheritance.UseVmId = (bool)dataRow["InheritUseVmId"];
+            connectionInfo.Inheritance.UseEnhancedMode = (bool)dataRow["InheritUseEnhancedMode"];
             connectionInfo.Inheritance.VmId = (bool)dataRow["InheritVmId"];
             connectionInfo.Inheritance.RenderingEngine = (bool)dataRow["InheritRenderingEngine"];
             connectionInfo.Inheritance.Username = (bool)dataRow["InheritUsername"];
@@ -223,6 +240,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Inheritance.RDGatewayUsername = (bool)dataRow["InheritRDGatewayUsername"];
             connectionInfo.Inheritance.RDGatewayPassword = (bool)dataRow["InheritRDGatewayPassword"];
             connectionInfo.Inheritance.RDGatewayDomain = (bool)dataRow["InheritRDGatewayDomain"];
+            connectionInfo.Inheritance.RdpVersion = (bool)dataRow["InheritRdpVersion"];
         }
 
         private string DecryptValue(string cipherText)

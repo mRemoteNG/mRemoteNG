@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using mRemoteNG.App;
@@ -154,14 +153,16 @@ namespace mRemoteNG.Config.Connections
 
         private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
+            var dataProvider = new SqlDataProvider(databaseConnector);
+            var currentDataTable = dataProvider.Load();
+
             var cryptoProvider = new LegacyRijndaelCryptographyProvider();
             var serializer = new DataTableSerializer(_saveFilter, cryptoProvider,
                                                      rootTreeNode.PasswordString.ConvertToSecureString());
+            serializer.SetSourceDataTable(currentDataTable);
             var dataTable = serializer.Serialize(rootTreeNode);
-            var dataProvider = new SqlDataProvider(databaseConnector);
-
-            var dbQuery = databaseConnector.DbCommand("DELETE FROM tblCons");
-            dbQuery.ExecuteNonQuery();
+            //var dbQuery = databaseConnector.DbCommand("DELETE FROM tblCons");
+            //dbQuery.ExecuteNonQuery();
 
             dataProvider.Save(dataTable);
         }

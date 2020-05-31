@@ -292,15 +292,6 @@ mRemoteNG загрузится с этим компонентом, но не з�
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM был найден и зарегистрирован.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Для использования движка Gecko у Вас должен быть установлен XULRunner 1.8.1.x
-Вы можете скачать XULRunner 1.8.1.3 здесь: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-После загрузки извлеките пакет в любую папку. Потом в mRemoteNG перейдите в меню Инструменты - Опции - Дополнительно и введите правильный путь в поле Путь XULRunner.
-Если у вас ничего не получилось обратитесь на {0}.</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx был найден и установлен правильно.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA требуется установленный XenDesktop Online Plugin и зарегистрированная библиотека wfica.ocx. Вы можете скачать клиент здесь: http://www.citrix.com/download/
 Если у вас есть установленный XenDesktop Online Plugin и ничего не работает, попробуйте зарегистрировать wfica.ocx вручную.
@@ -490,7 +481,7 @@ VncSharp Control Version {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Подключение к системе "{0}" через "{1}" созданого пользователя "{2}" (Описание: "{3}"; Пользователь: "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Подключиться не удалось!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -768,9 +759,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG в актуальном состоянии</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Подключение не удалось!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Не удалось завершить процесс внутреннего приложения!</value>
@@ -1187,7 +1175,7 @@ VncSharp Control Version {0}</value>
   <data name="strPanelName" xml:space="preserve">
     <value>Название группы</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Защита паролем</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
@@ -1520,9 +1508,6 @@ VncSharp Control Version {0}</value>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Проверка Прокси - удачна!</value>
   </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Подключение не удалось!</value>
-  </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Завершить Putty - не удалось!</value>
   </data>
@@ -1622,16 +1607,16 @@ VncSharp Control Version {0}</value>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Не удается создать RDP подключение, пожалуйста, проверьте настройки mRemoteNG.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Отключить мигание курсора </value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Отключить тень курсора</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Отключить отображение окна при перетаскивании</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Отключить Анимацию</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">
@@ -2280,9 +2265,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="strHttp" xml:space="preserve">
     <value>HTTP</value>
   </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>геккон (Firefox)</value>
-  </data>
   <data name="strHttpInternetExplorer" xml:space="preserve">
     <value>Интернет Эксплорер</value>
   </data>
@@ -2757,7 +2739,7 @@ mRemoteNG сейчас прекратит работу и начнет проц�
 Канал разработки включает в себя Альф, Betas и релиз кандидатов.</value>
   </data>
   <data name="strButtonApply" xml:space="preserve">
-    <value>Приминить</value>
+    <value>Применить</value>
   </data>
   <data name="strCategoryProxy" xml:space="preserve">
     <value>Proxy</value>

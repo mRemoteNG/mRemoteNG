@@ -11,6 +11,7 @@ User Interface
    user_interface/panels.rst
    user_interface/menus.rst
    user_interface/connections.rst
+   user_interface/default_connection_properties.rst
    user_interface/quick_connect.rst
    user_interface/port_scan.rst
    user_interface/screenshot_manager.rst

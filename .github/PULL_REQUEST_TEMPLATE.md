@@ -15,18 +15,19 @@
 ## Screenshots (if appropriate):
 
 ## Types of changes
-<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to change)
-- [ ] Updated translation
+<!--- What types of changes does your code introduce? -->
+<!--- Uncomment the line(s) that apply(s) to you pull request -->
+<!--- - Bug fix (non-breaking change which fixes an issue) -->
+<!--- - New feature (non-breaking change which adds functionality) -->
+<!--- - Breaking change (fix or feature that would cause existing functionality to change) -->
+<!--- - Updated translation -->
 
 ## Checklist:
-<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- Go over all the following points. All of them must apply to your pull request to be merged. -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
 - [ ] I have read the **CONTRIBUTING** document.
 - [ ] My code follows the code style of this project.
+- [ ] All Tests within VisualStudio are passing
 - [ ] This pull request does not target the master branch.
-- [ ] I have updated the changelog file accordingly.
-- [ ] My change requires a change to the documentation.
-- [ ] I have updated the documentation accordingly.
+- [ ] I have updated the changelog file accordingly, if necessary.
+- [ ] I have updated the documentation accordingly, if necessary.

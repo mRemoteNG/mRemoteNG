@@ -85,8 +85,8 @@ namespace mRemoteNG.Tools
 
         protected override void Dispose(bool disposing)
         {
-            if (_disposed) return;
-            if (!disposing) return;
+            if (disposed) return;
+            if (disposing) return;
 
             ReleaseHandle();
 

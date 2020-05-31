@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -41,13 +41,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnLaunchPutty.Text = Language.strButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language.strButtonBrowse;
             chkUseCustomPuttyPath.Text = Language.strCheckboxPuttyPath;
-            chkAutomaticallyGetSessionInfo.Text = Language.strAutomaticallyGetSessionInfo;
             lblUVNCSCPort.Text = Language.strUltraVNCSCListeningPort;
         }
 
         public override void LoadSettings()
         {
-            chkAutomaticallyGetSessionInfo.Checked = Settings.Default.AutomaticallyGetSessionInfo;
             chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
             chkLoadBalanceInfoUseUtf8.Checked = Settings.Default.RdpLoadBalanceInfoUseUtf8;
             numPuttyWaitTime.Value = Settings.Default.MaxPuttyWaitTime;
@@ -61,7 +59,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void SaveSettings()
         {
-            Settings.Default.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked;
             Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
             Settings.Default.RdpLoadBalanceInfoUseUtf8 = chkLoadBalanceInfoUseUtf8.Checked;
 

@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Forms
             Cursor.Current = Cursors.Default;
         }
 
-        private void frmOptions_Load(object sender, EventArgs e)
+        private void FrmOptions_Load(object sender, EventArgs e)
         {
             CompileListOfOptionsPages();
             FontOverrider.FontOverride(this);
@@ -77,7 +77,8 @@ namespace mRemoteNG.UI.Forms
                 {typeof(UpdatesPage).Name, new UpdatesPage {Dock = DockStyle.Fill}},
                 {typeof(ThemePage).Name, new ThemePage {Dock = DockStyle.Fill}},
                 {typeof(SecurityPage).Name, new SecurityPage {Dock = DockStyle.Fill}},
-                {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}}
+                {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}},
+                {typeof(ComponentsPage).Name, new ComponentsPage {Dock = DockStyle.Fill}},
             };
         }
 
@@ -120,7 +121,7 @@ namespace mRemoteNG.UI.Forms
          * OK sets DialogResult = OK, Apply does not (None).
          * Apply will no close the dialog.
          */
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             foreach (var page in _pages.Values)
             {
@@ -142,15 +143,9 @@ namespace mRemoteNG.UI.Forms
                 pnlMain.Controls.Add(page);
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
-            foreach (var page in _pages.Values)
-            {
-                Debug.WriteLine(page.PageName);
-                page.RevertSettings();
-            }
-
-            Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+            Close();
         }
     }
 }

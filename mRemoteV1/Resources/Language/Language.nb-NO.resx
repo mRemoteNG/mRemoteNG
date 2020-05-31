@@ -292,15 +292,6 @@ Hvis denne kontrollen fortsatt feiler eller RDP-sesjoner ikke fungerer, se {0}.<
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM ble funnet, og synes å være korrekt registrert.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>For å bruke Gecko-renderingsmotoren må du ha XULrunner 1.8.1.x installert og stien til installasjonen angitt i Alternativer.
-Du kan laste ned XULrunner 1.8.1.3 herfra: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Når nedlastingen er ferdig, pakk den ut til et passende sted. I mRemoteNG, gå til Verktøy - Alternativer - Avansert og skriv inn korrekt sti i XULrunner-stifeltet.
-Hvis denne kontrollen fortsatt feiler eller Gecko-renderingsmotoren i mRemoteNG ikke fungerer, vennligst se {0}.</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx ble funnet å ser ut til å være korrekt installert.</value>
-  </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA krever at XenDesktop Online Plugin er installert og at wfica.ocx-biblioteket er registrert. Du kan laste ned klienten herfra: http://www.citrix.com/download/
 Hvis du har XenDesktop Online Pluginen installert og kontrollen fremdeles feiler, kan du forsøke å registrere wfica.ocx manuelt.
@@ -490,7 +481,7 @@ VncSharp Control Version {0}</value>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Tilkobling til "{0}" via "{1}" etablert av bruker "{2}" (Beskrivelse: "{3}"; Brukerfelt "{4}")</value>
   </data>
-  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+  <data name="ConnectionFailed" xml:space="preserve">
     <value>Tilkobling mislyktes!</value>
   </data>
   <data name="strConnectionEventErrorOccured" xml:space="preserve">
@@ -762,9 +753,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG er oppdatert</value>
-  </data>
-  <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Tilkobling mislyktes!</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Forkasting av Int App-prosess mislyktes!</value>
@@ -1180,7 +1168,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="strPanelName" xml:space="preserve">
     <value>Panelnavn</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+  <data name="strPropertyNamePasswordProtect" xml:space="preserve">
     <value>Passordbeskyttelse</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
@@ -1511,9 +1499,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy-test var vellykket!</value>
   </data>
-  <data name="strPuttyConnectionFailed" xml:space="preserve">
-    <value>Tilkobling mislyktes!</value>
-  </data>
   <data name="strPuttyDisposeFailed" xml:space="preserve">
     <value>Avslutning av PuTTY-prosessen mislyktes!</value>
   </data>
@@ -1613,16 +1598,16 @@ Starter med ny tilkoblingsfil.</value>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
     <value>Kunne ikke opprette RDP-kontroll, vennligst kontroller mRemoteNGs systemkrav.</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorBlinking" xml:space="preserve">
     <value>Deaktiver blinkende markør</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+  <data name="strPropertyNameDisableCursorShadow" xml:space="preserve">
     <value>Deaktiver markørskygge</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+  <data name="strPropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Deaktiver fullvindudragning</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+  <data name="strPropertyNameDisableMenuAnimations" xml:space="preserve">
     <value>Deaktiver menyanimasjoner</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">

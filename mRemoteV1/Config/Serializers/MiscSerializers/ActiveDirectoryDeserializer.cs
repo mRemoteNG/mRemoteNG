@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using mRemoteNG.App;
 using mRemoteNG.Config.Import;
 using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -94,7 +95,8 @@ namespace mRemoteNG.Config.Serializers
             {
                 Name = displayName,
                 Hostname = hostName,
-                Description = description
+                Description = description,
+                Protocol = ProtocolType.RDP
             };
             newConnectionInfo.Inheritance.TurnOnInheritanceCompletely();
             newConnectionInfo.Inheritance.Description = false;

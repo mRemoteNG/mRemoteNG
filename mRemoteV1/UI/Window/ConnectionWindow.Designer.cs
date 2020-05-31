@@ -63,8 +63,6 @@ namespace mRemoteNG.UI.Window
             // 
             this.connDock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.connDock.DockBackColor = System.Drawing.SystemColors.Control;
-            this.connDock.DockLeftPortion = 230D;
-            this.connDock.DockRightPortion = 230D;
             this.connDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.connDock.Location = new System.Drawing.Point(0, 0);
             this.connDock.Margin = new System.Windows.Forms.Padding(4);

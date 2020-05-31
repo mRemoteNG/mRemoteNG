@@ -11,9 +11,9 @@ namespace mRemoteNG.UI.Menu
     {
         private ToolStripMenuItem _mMenViewConnectionPanels;
         private ToolStripSeparator _mMenViewSep1;
-        private ToolStripMenuItem _mMenViewConnections;
-        private ToolStripMenuItem _mMenViewConfig;
-        private ToolStripMenuItem _mMenViewErrorsAndInfos;
+        public ToolStripMenuItem _mMenViewConnections;
+        public ToolStripMenuItem _mMenViewConfig;
+        public ToolStripMenuItem _mMenViewErrorsAndInfos;
         private ToolStripMenuItem _mMenViewAddConnectionPanel;
         private ToolStripSeparator _mMenViewSep2;
         private ToolStripMenuItem _mMenViewFullscreen;

@@ -50,7 +50,7 @@ namespace mRemoteNGTests.Connection
             DefaultConnectionInfo.Instance.SaveTo(saveTarget);
 
 			var valueInSource = property.GetValue(DefaultConnectionInfo.Instance).ToString();
-			var valueInDestination = saveTarget.GetType().GetProperty(property.Name).GetValue(saveTarget).ToString();
+			var valueInDestination = saveTarget.GetType().GetProperty(property.Name)?.GetValue(saveTarget)?.ToString();
             Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
 

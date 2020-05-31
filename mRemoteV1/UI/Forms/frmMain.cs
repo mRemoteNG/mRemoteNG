@@ -28,6 +28,9 @@ using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using CefSharp;
+using CefSharp.WinForms;
+using CefSharp.SchemeHandler;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -139,20 +142,58 @@ namespace mRemoteNG.UI.Forms
 
         #region Startup & Shutdown
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void FrmMain_Load(object sender, EventArgs e)
         {
             var messageCollector = Runtime.MessageCollector;
+
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip,
+                _externalToolsToolStrip, _multiSshToolStrip, msMain);
+            settingsLoader.LoadSettings();
+
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
             MessageCollectorSetup.BuildMessageWritersFromSettings(_messageWriters);
 
             Startup.Instance.InitializeProgram(messageCollector);
 
-            msMain.Location = Point.Empty;
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip,
-                                                    _externalToolsToolStrip, _multiSshToolStrip, msMain);
-            settingsLoader.LoadSettings();
-
             SetMenuDependencies();
+
+            //Monitor parent process exit and close subprocesses if parent process exits first
+            //This will at some point in the future becomes the default
+            CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
+
+            //For Windows 7 and above, best to include relevant app.manifest entries as well
+            Cef.EnableHighDPISupport();
+
+            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+            if (Runtime.IsPortableEdition) dir = SettingsFileInfo.SettingsPath;
+
+            CefSettings settings = new CefSettings()
+            {
+                CachePath = Path.Combine(dir, "CEFCache"),
+                LogFile = Path.Combine(dir, "mRemoteNG_cef.log"),
+            };
+
+            if (Settings.Default.TextLogMessageWriterWriteDebugMsgs)
+                settings.LogSeverity = LogSeverity.Verbose;
+            else if (Settings.Default.TextLogMessageWriterWriteInfoMsgs)
+                settings.LogSeverity = LogSeverity.Info;
+            else if (Settings.Default.TextLogMessageWriterWriteWarningMsgs)
+                settings.LogSeverity = LogSeverity.Warning;
+            else if (Settings.Default.TextLogMessageWriterWriteErrorMsgs)
+                settings.LogSeverity = LogSeverity.Error;
+            
+            //Implement scheme to be allowed to view local help files
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = Cef.CefCommitHash,
+                DomainName = "help",
+                SchemeHandlerFactory = new FolderSchemeHandlerFactory(
+                    rootFolder: $@"{GeneralAppInfo.HomePath}\Help\",
+                    defaultPage: "index.html"
+                )
+            });
+
+            Cef.Initialize(settings);
 
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
@@ -177,8 +218,6 @@ namespace mRemoteNG.UI.Forms
             Windows.TreeForm.Focus();
 
             PuttySessionsManager.Instance.StartWatcher();
-            if (Settings.Default.StartupComponentsCheck)
-                Windows.Show(WindowType.ComponentsCheck);
 
             Startup.Instance.CreateConnectionsProvider(messageCollector);
 
@@ -192,6 +231,13 @@ namespace mRemoteNG.UI.Forms
             pnlDock.ShowDocumentIcon = true;
 
             FrmSplashScreen.getInstance().Close();
+
+            if (Settings.Default.StartMinimized)
+            {
+                WindowState = FormWindowState.Minimized;
+                if (Settings.Default.MinimizeToTray)
+                    ShowInTaskbar = false;
+            }
 
             if (!Settings.Default.CreateEmptyPanelOnStartUp) return;
             var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
@@ -348,13 +394,8 @@ namespace mRemoteNG.UI.Forms
         {
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 
-            var nextUpdateCheck = Convert.ToDateTime(
-                                                     Settings.Default.CheckForUpdatesLastCheck.Add(
-                                                                                                   TimeSpan
-                                                                                                       .FromDays(Convert
-                                                                                                                     .ToDouble(Settings
-                                                                                                                               .Default
-                                                                                                                               .CheckForUpdatesFrequencyDays))));
+            var nextUpdateCheck =
+                Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
 
             if (!Settings.Default.UpdatePending && DateTime.UtcNow <= nextUpdateCheck) return;
             if (!IsHandleCreated)
@@ -365,6 +406,20 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Settings.Default.CloseToTray)
+            {
+                if (Runtime.NotificationAreaIcon == null)
+                    Runtime.NotificationAreaIcon = new NotificationAreaIcon();
+
+                if (WindowState == FormWindowState.Normal || WindowState == FormWindowState.Maximized)
+                {
+                    Hide();
+                    WindowState = FormWindowState.Minimized;
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
             {
                 var openConnections = 0;
@@ -406,6 +461,8 @@ namespace mRemoteNG.UI.Forms
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 
             IsClosing = true;
+
+            Cef.Shutdown();
 
             if (Runtime.WindowList != null)
             {
@@ -668,7 +725,7 @@ namespace mRemoteNG.UI.Forms
 					var connectionWindow = (ConnectionWindow)document;
 					if (Settings.Default.AlwaysShowConnectionTabs == false)
 					{
-						connectionWindow.TabController.HideTabsMode = TabControl.HideTabsModes.HideAlways;
+						connectionWindow.TabController.HideTabsMode = TabControl.HideTabsModes.HidepnlDock.DockLeftPortion = Always;
 					}
 					else
 					{
@@ -683,24 +740,16 @@ namespace mRemoteNG.UI.Forms
             pnlDock.Size = new Size(1, 1);
         }
 
-        #endregion
-
-        #region Screen Stuff
-
         public void SetDefaultLayout()
         {
             pnlDock.Visible = false;
 
-            pnlDock.DockLeftPortion = pnlDock.Width * 0.2;
-            pnlDock.DockRightPortion = pnlDock.Width * 0.2;
-            pnlDock.DockTopPortion = pnlDock.Height * 0.25;
-            pnlDock.DockBottomPortion = pnlDock.Height * 0.25;
-
             Windows.TreeForm.Show(pnlDock, DockState.DockLeft);
-            Windows.ConfigForm.Show(pnlDock);
-            Windows.ConfigForm.DockTo(Windows.TreeForm.Pane, DockStyle.Bottom, -1);
+            viewMenu._mMenViewConnections.Checked = true;
+            Windows.ConfigForm.Show(pnlDock, DockState.DockLeft);
+            viewMenu._mMenViewConfig.Checked = true;
             Windows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
-            Windows.ScreenshotForm.Hide();
+            viewMenu._mMenViewErrorsAndInfos.Checked = true;
 
             pnlDock.Visible = true;
         }

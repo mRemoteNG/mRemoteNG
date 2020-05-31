@@ -1,6 +1,4 @@
-﻿using mRemoteNG.Connection;
-
-namespace mRemoteNG.Tree
+﻿namespace mRemoteNG.Tree
 {
     public interface ITreeNodeClickHandler<in T>
     {

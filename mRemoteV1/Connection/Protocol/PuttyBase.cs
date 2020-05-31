@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
@@ -49,6 +49,11 @@ namespace mRemoteNG.Connection.Protocol
         #endregion
 
         #region Public Methods
+
+        public bool isRunning()
+        {
+            return !PuttyProcess.HasExited;
+        }
 
         public override bool Connect()
         {
@@ -136,6 +141,11 @@ namespace mRemoteNG.Connection.Protocol
                 }
 
                 PuttyProcess.StartInfo.Arguments = arguments.ToString();
+                // add additional SSH options, f.e. tunnel or noshell parameters that may be specified for the the connnection
+                if (!string.IsNullOrEmpty(InterfaceControl.Info.SSHOptions))
+                {
+                    PuttyProcess.StartInfo.Arguments += " " + InterfaceControl.Info.SSHOptions;
+                }
 
                 PuttyProcess.EnableRaisingEvents = true;
                 PuttyProcess.Exited += ProcessExited;
@@ -186,7 +196,7 @@ namespace mRemoteNG.Connection.Protocol
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strPuttyConnectionFailed + Environment.NewLine +
+                                                    Language.ConnectionFailed + Environment.NewLine +
                                                     ex.Message);
                 return false;
             }

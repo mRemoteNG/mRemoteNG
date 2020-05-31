@@ -13,7 +13,7 @@
 | ---------------|--------------|-----------|
 | Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
 | Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
-| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
+| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
 
 mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
 
@@ -34,7 +34,7 @@ mRemoteNG supports the following protocols:
 * rlogin (Remote Login)
 * Raw Socket Connections
 
-For a detailed feature list and general usage support, refer to the [User Manual](https://github.com/mRemoteNG/mRemoteNG/wiki/User-Manual).
+For a detailed feature list and general usage support, refer to the [Documentation](https://mremoteng.readthedocs.io/en/latest/).
 
 ## Installation
 
@@ -52,6 +52,6 @@ If you find mRemoteNG useful and would like to contribute, it would be greatly a
 Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to configure your development environment and submit a pull request.
 
 ### Translate
-Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to help make mRemoteNG a polyglot
+Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to help make mRemoteNG a polyglot.
 
 [![Developed with ReSharper](https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png)](https://www.jetbrains.com/resharper/)

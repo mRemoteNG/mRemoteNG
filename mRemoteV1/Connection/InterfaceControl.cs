@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using System;
 using System.Drawing;
@@ -13,6 +13,11 @@ namespace mRemoteNG.Connection
     {
         public ProtocolBase Protocol { get; set; }
         public ConnectionInfo Info { get; set; }
+        // in case the connection is through a SSH tunnel the Info is a copy of original info with hostname and port number overwritten with localhost and local tunnel port
+        // and the original Info is saved in the following variable
+        public ConnectionInfo OriginalInfo { get; set; }
+        // in case the connection is through a SSH tunnel the Info of the SSHTunnelConnection is also saved for reference in log messages etc.
+        public ConnectionInfo SSHTunnelInfo { get; set; }
 
 
         public InterfaceControl(Control parent, ProtocolBase protocol, ConnectionInfo info)
@@ -37,19 +42,24 @@ namespace mRemoteNG.Connection
 
         public static InterfaceControl FindInterfaceControl(DockPanel DockPnl)
         {
-            if (!(DockPnl.ActiveDocument is ConnectionTab ct)) return null;
-            if (ct.Controls.Count < 1) return null;
-            if (ct.Controls[0] is InterfaceControl ic)
-                return ic;
-
+            // instead of repeating the code, call the routine using ConnectionTab if called by DockPanel
+            if (DockPnl.ActiveDocument is ConnectionTab ct)
+                return FindInterfaceControl(ct);
             return null;
         }
 
         public static InterfaceControl FindInterfaceControl(ConnectionTab tab)
         {
             if (tab.Controls.Count < 1) return null;
-            if (tab.Controls[0] is InterfaceControl ic)
-                return ic;
+            // if the tab has more than one controls and the second is an InterfaceControl than it must be a connection through SSH tunnel
+            // and the first Control is the SSH tunnel connection and thus the second control must be returned.
+            if (tab.Controls.Count > 1)
+            {
+                if (tab.Controls[1] is InterfaceControl ic1)
+                    return ic1;
+            }
+            if (tab.Controls[0] is InterfaceControl ic0)
+                return ic0;
 
             return null;
         }

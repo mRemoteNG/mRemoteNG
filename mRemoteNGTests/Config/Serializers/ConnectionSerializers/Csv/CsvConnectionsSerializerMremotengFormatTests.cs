@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;

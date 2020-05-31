@@ -4,13 +4,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 {
     public enum RDPSoundQuality
     {
-        [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityDynamic")]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRDPSoundQualityDynamic))]
         Dynamic = 0,
 
-        [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityMedium")]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRDPSoundQualityMedium))]
         Medium = 1,
 
-        [LocalizedAttributes.LocalizedDescription("strRDPSoundQualityHigh")]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRDPSoundQualityHigh))]
         High = 2
     }
 }

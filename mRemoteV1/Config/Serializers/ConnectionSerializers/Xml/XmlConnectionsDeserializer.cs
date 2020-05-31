@@ -257,7 +257,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                 }
                 else
                 {
-                    connectionInfo.Port = (int)RdpProtocol.Defaults.Port;
+                    connectionInfo.Port = (int)RdpProtocol6.Defaults.Port;
                     connectionInfo.Protocol = ProtocolType.RDP;
                 }
 
@@ -279,7 +279,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                         if (xmlnode.GetAttributeAsBool("UseVNC"))
                             connectionInfo.Port = (int)ProtocolVNC.Defaults.Port;
                         else
-                            connectionInfo.Port = (int)RdpProtocol.Defaults.Port;
+                            connectionInfo.Port = (int)RdpProtocol6.Defaults.Port;
                     }
 
                     connectionInfo.UseConsoleSession = false;
@@ -533,8 +533,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                         xmlnode.GetAttributeAsBool("InheritRDPMinutesToIdleTimeout");
                     connectionInfo.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("RDPAlertIdleTimeout");
                     connectionInfo.Inheritance.RDPAlertIdleTimeout =
-                        xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");
-                }
+                        xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");          }
 
                 if (_confVersion >= 2.7)
                 {
@@ -542,18 +541,33 @@ namespace mRemoteNG.Config.Serializers.Xml
                     connectionInfo.Favorite = xmlnode.GetAttributeAsBool("Favorite");
                     connectionInfo.UseVmId = xmlnode.GetAttributeAsBool("UseVmId");
                     connectionInfo.VmId = xmlnode.GetAttributeAsString("VmId");
+                    connectionInfo.UseEnhancedMode = xmlnode.GetAttributeAsBool("UseEnhancedMode");
+                    connectionInfo.RdpVersion = xmlnode.GetAttributeAsEnum("RdpVersion", RdpVersion.Highest);
+                    connectionInfo.SSHTunnelConnectionName = xmlnode.GetAttributeAsString("SSHTunnelConnectionName");
+                    connectionInfo.SSHOptions = xmlnode.GetAttributeAsString("SSHOptions");
+                    connectionInfo.DisableFullWindowDrag = xmlnode.GetAttributeAsBool("DisableFullWindowDrag");
+                    connectionInfo.DisableMenuAnimations = xmlnode.GetAttributeAsBool("DisableMenuAnimations");
+                    connectionInfo.DisableCursorShadow = xmlnode.GetAttributeAsBool("DisableCursorShadow");
+                    connectionInfo.DisableCursorBlinking = xmlnode.GetAttributeAsBool("DisableCursorBlinking");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
+                    connectionInfo.Inheritance.RdpVersion = xmlnode.GetAttributeAsBool("InheritRdpVersion");
                     connectionInfo.Inheritance.UseVmId = xmlnode.GetAttributeAsBool("InheritUseVmId");
                     connectionInfo.Inheritance.VmId = xmlnode.GetAttributeAsBool("InheritVmId");
+                    connectionInfo.Inheritance.UseEnhancedMode = xmlnode.GetAttributeAsBool("InheritUseEnhancedMode");
+                    connectionInfo.Inheritance.SSHTunnelConnectionName = xmlnode.GetAttributeAsBool("InheritSSHTunnelConnectionName");
+                    connectionInfo.Inheritance.SSHOptions = xmlnode.GetAttributeAsBool("InheritSSHOptions");
+                    connectionInfo.Inheritance.DisableFullWindowDrag = xmlnode.GetAttributeAsBool("InheritDisableFullWindowDrag");
+                    connectionInfo.Inheritance.DisableMenuAnimations = xmlnode.GetAttributeAsBool("InheritDisableMenuAnimations");
+                    connectionInfo.Inheritance.DisableCursorShadow = xmlnode.GetAttributeAsBool("InheritDisableCursorShadow");
+                    connectionInfo.Inheritance.DisableCursorBlinking = xmlnode.GetAttributeAsBool("InheritDisableCursorBlinking");
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    string.Format(Language.strGetConnectionInfoFromXmlFailed,
-                                                                  connectionInfo.Name, ConnectionFileName,
-                                                                  ex.Message));
+                    string.Format(Language.strGetConnectionInfoFromXmlFailed,
+                        connectionInfo.Name, ConnectionFileName, ex.Message));
             }
 
             return connectionInfo;

@@ -4,13 +4,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 {
     public enum RDGatewayUseConnectionCredentials
     {
-        [LocalizedAttributes.LocalizedDescription("strUseDifferentUsernameAndPassword")]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.strUseDifferentUsernameAndPassword))]
         No = 0,
 
-        [LocalizedAttributes.LocalizedDescription("strUseSameUsernameAndPassword")]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.strUseSameUsernameAndPassword))]
         Yes = 1,
 
-        [LocalizedAttributes.LocalizedDescription("strUseSmartCard")]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.strUseSmartCard))]
         SmartCard = 2
     }
 }

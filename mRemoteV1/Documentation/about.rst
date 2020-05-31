@@ -12,7 +12,7 @@ The application is released under the GPLv2_ and is being managed on GitHub_.
 
 As of now mRemoteNG supports the following protocols:
 
-RDP - SSH - VNC - ICA - Telnet - RAW - RLogin - HTTP/S
+RDP - SSH - VNC - ICA - Telnet - RAW - RLogin - HTTP/S - PowerShell
 
 .. toctree::
    :maxdepth: 2
