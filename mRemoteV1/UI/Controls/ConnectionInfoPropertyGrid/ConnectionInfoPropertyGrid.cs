@@ -183,7 +183,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             {
                 Runtime.MessageCollector.AddMessage(
                     MessageClass.ErrorMsg,
-                    Language.strConfigPropertyGridHideItemsFailed +
+                    Language.ConfigPropertyGridHideItemsFailed +
                     Environment.NewLine + ex.Message, true);
             }
         }
@@ -282,11 +282,11 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             if (IsShowingInheritance)
                 return;
 
-            if (e.ChangedItem.Label == Language.strPropertyNameProtocol)
+            if (e.ChangedItem.Label == Language.Protocol)
             {
                 SelectedConnectionInfo.SetDefaultPort();
             }
-            else if (e.ChangedItem.Label == Language.strPropertyNameName)
+            else if (e.ChangedItem.Label == Language.Name)
             {
                 if (Settings.Default.SetHostnameLikeDisplayName)
                 {
@@ -310,7 +310,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             if (rootInfo.Password)
             {
                 var passwordName = Settings.Default.UseSQLServer
-                    ? Language.strSQLServer.TrimEnd(':')
+                    ? Language.SQLServer.TrimEnd(':')
                     : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
 
                 var password = MiscTools.PasswordDialog(passwordName);
@@ -348,7 +348,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                    Language.strConfigPropertyGridValueFailed + Environment.NewLine +
+                    Language.ConfigPropertyGridValueFailed + Environment.NewLine +
                     ex.Message, true);
             }
         }

@@ -69,11 +69,11 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            btnImport.Text = Language.strButtonImport;
-            lblDomain.Text = Language.strLabelDomain;
-            chkSubOU.Text = Language.strImportSubOUs;
-            btnChangeDomain.Text = Language.strButtonChange;
-            btnClose.Text = Language.strButtonClose;
+            btnImport.Text = Language._Import;
+            lblDomain.Text = Language.Domain;
+            chkSubOU.Text = Language.ImportSubOUs;
+            btnChangeDomain.Text = Language.Change;
+            btnClose.Text = Language._Close;
         }
 
         private void ChangeDomain()

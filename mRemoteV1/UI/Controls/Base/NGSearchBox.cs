@@ -41,7 +41,7 @@ namespace mRemoteNG.UI.Controls.Base
                 return;
 
             _settingDefaultText = true;
-            Text = Language.strSearchPrompt;
+            Text = Language.SearchPrompt;
             _pbClear.Visible = false;
         }
 

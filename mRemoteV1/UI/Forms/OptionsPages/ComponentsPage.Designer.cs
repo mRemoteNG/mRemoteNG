@@ -52,7 +52,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtCheck5 = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.lblCheck5 = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pbCheck5 = new System.Windows.Forms.PictureBox();
-            this.btnCheckAgain = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.btnCheck = new mRemoteNG.UI.Controls.Base.NGButton();
             this.tblCheck = new System.Windows.Forms.TableLayoutPanel();
             this.pnlCheck1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCheck1)).BeginInit();
@@ -311,18 +311,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pbCheck5.TabIndex = 0;
             this.pbCheck5.TabStop = false;
             // 
-            // btnCheckAgain
+            // btnCheck
             // 
-            this.btnCheckAgain._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
-            this.btnCheckAgain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckAgain.Location = new System.Drawing.Point(503, 453);
-            this.btnCheckAgain.Name = "btnCheckAgain";
-            this.btnCheckAgain.Size = new System.Drawing.Size(104, 23);
-            this.btnCheckAgain.TabIndex = 0;
-            this.btnCheckAgain.Text = "Check again";
-            this.btnCheckAgain.UseVisualStyleBackColor = true;
-            this.btnCheckAgain.Click += new System.EventHandler(this.BtnCheckAgain_Click);
+            this.btnCheck._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheck.Location = new System.Drawing.Point(3, 453);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(104, 23);
+            this.btnCheck.TabIndex = 0;
+            this.btnCheck.Text = "Check";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.BtnCheckAgain_Click);
             // 
             // tblCheck
             // 
@@ -333,7 +332,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tblCheck.Controls.Add(this.pnlCheck3, 0, 2);
             this.tblCheck.Controls.Add(this.pnlCheck4, 0, 3);
             this.tblCheck.Controls.Add(this.pnlCheck1, 0, 0);
-            this.tblCheck.Controls.Add(this.btnCheckAgain, 0, 5);
+            this.tblCheck.Controls.Add(this.btnCheck, 0, 5);
             this.tblCheck.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblCheck.Location = new System.Drawing.Point(0, 0);
             this.tblCheck.Name = "tblCheck";
@@ -387,7 +386,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.Panel pnlCheck5;
         private Controls.Base.NGLabel lblCheck5;
         private System.Windows.Forms.PictureBox pbCheck5;
-        private Controls.Base.NGButton btnCheckAgain;
+        private Controls.Base.NGButton btnCheck;
         private Controls.Base.NGTextBox txtCheck1;
         private Controls.Base.NGTextBox txtCheck2;
         private Controls.Base.NGTextBox txtCheck3;

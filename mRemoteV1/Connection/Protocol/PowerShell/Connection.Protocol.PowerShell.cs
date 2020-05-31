@@ -65,7 +65,7 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppFocusFailed, ex);
+                Runtime.MessageCollector.AddExceptionMessage(Language.IntAppFocusFailed, ex);
             }
         }
 
@@ -82,7 +82,7 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppResizeFailed, ex);
+                Runtime.MessageCollector.AddExceptionMessage(Language.IntAppResizeFailed, ex);
             }
         }
 

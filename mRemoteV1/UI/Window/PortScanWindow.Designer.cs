@@ -357,7 +357,6 @@ namespace mRemoteNG.UI.Window
             this.portEnd.Name = "portEnd";
             this.portEnd.Size = new System.Drawing.Size(67, 22);
             this.portEnd.TabIndex = 4;
-            this.portScanToolTip.SetToolTip(this.portEnd, global::mRemoteNG.Language.strPortScanSinglePort);
             this.portEnd.Value = new decimal(new int[] {
             65535,
             0,
@@ -377,7 +376,6 @@ namespace mRemoteNG.UI.Window
             this.portStart.Name = "portStart";
             this.portStart.Size = new System.Drawing.Size(67, 22);
             this.portStart.TabIndex = 3;
-            this.portScanToolTip.SetToolTip(this.portStart, global::mRemoteNG.Language.strPortScanSinglePort);
             this.portStart.Enter += new System.EventHandler(this.portStart_Enter);
             // 
             // pnlIp
@@ -435,7 +433,6 @@ namespace mRemoteNG.UI.Window
             this.ngCheckFirstPort.Size = new System.Drawing.Size(72, 17);
             this.ngCheckFirstPort.TabIndex = 17;
             this.ngCheckFirstPort.Text = "First Port";
-            this.portScanToolTip.SetToolTip(this.ngCheckFirstPort, global::mRemoteNG.Language.strPortScanSinglePort);
             this.ngCheckFirstPort.UseVisualStyleBackColor = true;
             this.ngCheckFirstPort.CheckedChanged += new System.EventHandler(this.NgCheckFirstPort_CheckedChanged);
             // 
@@ -449,7 +446,6 @@ namespace mRemoteNG.UI.Window
             this.ngCheckLastPort.Size = new System.Drawing.Size(70, 17);
             this.ngCheckLastPort.TabIndex = 18;
             this.ngCheckLastPort.Text = "Last Port";
-            this.portScanToolTip.SetToolTip(this.ngCheckLastPort, global::mRemoteNG.Language.strPortScanSinglePort);
             this.ngCheckLastPort.UseVisualStyleBackColor = true;
             this.ngCheckLastPort.CheckedChanged += new System.EventHandler(this.NgCheckLastPort_CheckedChanged);
             // 

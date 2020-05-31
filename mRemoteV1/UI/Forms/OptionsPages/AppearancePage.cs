@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.strTabAppearance;
+            get => Language.Appearance;
             set { }
         }
 
@@ -24,20 +24,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            lblLanguage.Text = Language.strLanguage;
+            lblLanguage.Text = Language.LanguageString;
             lblLanguageRestartRequired.Text =
-                string.Format(Language.strLanguageRestartRequired, Application.ProductName);
-            chkShowDescriptionTooltipsInTree.Text = Language.strShowDescriptionTooltips;
-            chkShowFullConnectionsFilePathInTitle.Text = Language.strShowFullConsFilePath;
-            chkShowSystemTrayIcon.Text = Language.strAlwaysShowSysTrayIcon;
-            chkMinimizeToSystemTray.Text = Language.strMinimizeToSysTray;
-            chkCloseToSystemTray.Text = Language.strCloseToSysTray;
+                string.Format(Language.LanguageRestartRequired, Application.ProductName);
+            chkShowDescriptionTooltipsInTree.Text = Language.ShowDescriptionTooltips;
+            chkShowFullConnectionsFilePathInTitle.Text = Language.ShowFullConsFilePath;
+            chkShowSystemTrayIcon.Text = Language.AlwaysShowSysTrayIcon;
+            chkMinimizeToSystemTray.Text = Language.MinimizeToSysTray;
+            chkCloseToSystemTray.Text = Language.CloseToSysTray;
         }
 
         public override void LoadSettings()
         {
             cboLanguage.Items.Clear();
-            cboLanguage.Items.Add(Language.strLanguageDefault);
+            cboLanguage.Items.Add(Language.LanguageDefault);
 
             foreach (var nativeName in SupportedCultures.CultureNativeNames)
             {

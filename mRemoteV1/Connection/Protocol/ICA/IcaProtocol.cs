@@ -30,7 +30,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strIcaControlFailed + Environment.NewLine + ex.Message,
+                                                    Language.IcaControlFailed + Environment.NewLine + ex.Message,
                                                     true);
             }
         }
@@ -88,7 +88,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strIcaSetPropsFailed + Environment.NewLine + ex.Message,
+                                                    Language.IcaSetPropsFailed + Environment.NewLine + ex.Message,
                                                     true);
                 return false;
             }
@@ -107,7 +107,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strIcaConnectionFailed + Environment.NewLine + ex.Message);
+                                                    Language.IcaConnectionFailed + Environment.NewLine + ex.Message);
                 return false;
             }
         }
@@ -182,7 +182,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strIcaSetCredentialsFailed + Environment.NewLine +
+                                                    Language.IcaSetCredentialsFailed + Environment.NewLine +
                                                     ex.Message, true);
             }
         }
@@ -228,7 +228,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strIcaSetResolutionFailed + Environment.NewLine +
+                                                    Language.IcaSetResolutionFailed + Environment.NewLine +
                                                     ex.Message, true);
             }
         }
@@ -289,7 +289,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.strIcaSetEventHandlersFailed + Environment.NewLine +
+                                                    Language.IcaSetEventHandlersFailed + Environment.NewLine +
                                                     ex.Message, true);
             }
         }
@@ -361,19 +361,19 @@ namespace mRemoteNG.Connection.Protocol.ICA
 
         public enum EncryptionStrength
         {
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.strEncBasic))]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.Basic))]
             EncrBasic = 1,
 
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.strEnc128BitLogonOnly))]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.Enc128BitLogonOnly))]
             Encr128BitLogonOnly = 127,
 
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.strEnc40Bit))]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.Enc40Bit))]
             Encr40Bit = 40,
 
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.strEnc56Bit))]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.Enc56Bit))]
             Encr56Bit = 56,
 
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.strEnc128Bit))]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.Enc128Bit))]
             Encr128Bit = 128
         }
 

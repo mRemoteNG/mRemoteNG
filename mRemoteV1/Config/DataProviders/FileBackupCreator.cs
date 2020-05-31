@@ -20,7 +20,7 @@ namespace mRemoteNG.Config.DataProviders
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(Language.strConnectionsFileBackupFailed, ex,
+                Runtime.MessageCollector.AddExceptionMessage(Language.ConnectionsFileBackupFailed, ex,
                                                              MessageClass.WarningMsg);
                 throw;
             }

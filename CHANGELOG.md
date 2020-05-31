@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1767: Turned about window into a simple popup form
 - #1766: Converted components check page into options page
 - #1690: Replaced GeckoFX (Firefox) with CefSharp (Chromium)
+- #1325: Language resource files cleanup
 ### Fixed
 - #1773: Connection issue with mysql - Missing fields in tblCons
 - #1720: Show configuration file name in title of password prompt form

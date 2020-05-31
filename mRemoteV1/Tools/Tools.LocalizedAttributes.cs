@@ -114,7 +114,7 @@ namespace mRemoteNG.Tools
                     if (!Localized)
                     {
                         Localized = true;
-                        DisplayNameValue = string.Format(Language.strFormatInherit,
+                        DisplayNameValue = string.Format(Language.FormatInherit,
                                                          Language.ResourceManager.GetString(DisplayNameValue));
                     }
 
@@ -140,7 +140,7 @@ namespace mRemoteNG.Tools
                     if (!Localized)
                     {
                         Localized = true;
-                        DescriptionValue = string.Format(Language.strFormatInheritDescription,
+                        DescriptionValue = string.Format(Language.FormatInheritDescription,
                                                          Language.ResourceManager.GetString(DescriptionValue));
                     }
 

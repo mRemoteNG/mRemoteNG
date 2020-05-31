@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.strMenuNotifications;
+            get => Language.Notifications;
             set { }
         }
 
@@ -25,37 +25,37 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.ApplyLanguage();
 
             // notifications panel
-            groupBoxNotifications.Text = Language.strMenuNotifications;
-            labelNotificationsShowTypes.Text = Language.strShowTheseMessageTypes;
-            chkShowDebugInMC.Text = Language.strDebug;
-            chkShowInfoInMC.Text = Language.strInformations;
-            chkShowWarningInMC.Text = Language.strWarnings;
-            chkShowErrorInMC.Text = Language.strErrors;
-            labelSwitchToErrorsAndInfos.Text = Language.strSwitchToErrorsAndInfos;
-            chkSwitchToMCInformation.Text = Language.strInformations;
-            chkSwitchToMCWarnings.Text = Language.strWarnings;
-            chkSwitchToMCErrors.Text = Language.strErrors;
+            groupBoxNotifications.Text = Language.Notifications;
+            labelNotificationsShowTypes.Text = Language.ShowTheseMessageTypes;
+            chkShowDebugInMC.Text = Language.Debug;
+            chkShowInfoInMC.Text = Language.Informations;
+            chkShowWarningInMC.Text = Language.Warnings;
+            chkShowErrorInMC.Text = Language.Errors;
+            labelSwitchToErrorsAndInfos.Text = Language.SwitchToErrorsAndInfos;
+            chkSwitchToMCInformation.Text = Language.Informations;
+            chkSwitchToMCWarnings.Text = Language.Warnings;
+            chkSwitchToMCErrors.Text = Language.Errors;
 
             // logging
-            groupBoxLogging.Text = Language.strLogging;
-            chkLogDebugMsgs.Text = Language.strDebug;
-            chkLogInfoMsgs.Text = Language.strInformations;
-            chkLogWarningMsgs.Text = Language.strWarnings;
-            chkLogErrorMsgs.Text = Language.strErrors;
-            chkLogToCurrentDir.Text = Language.strLogToAppDir;
-            labelLogFilePath.Text = Language.strLogFilePath;
-            labelLogTheseMsgTypes.Text = Language.strLogTheseMessageTypes;
-            buttonOpenLogFile.Text = Language.strOpenFile;
-            buttonSelectLogPath.Text = Language.strChoosePath;
-            buttonRestoreDefaultLogPath.Text = Language.strUseDefault;
+            groupBoxLogging.Text = Language.Logging;
+            chkLogDebugMsgs.Text = Language.Debug;
+            chkLogInfoMsgs.Text = Language.Informations;
+            chkLogWarningMsgs.Text = Language.Warnings;
+            chkLogErrorMsgs.Text = Language.Errors;
+            chkLogToCurrentDir.Text = Language.LogToAppDir;
+            labelLogFilePath.Text = Language.LogFilePath;
+            labelLogTheseMsgTypes.Text = Language.LogTheseMessageTypes;
+            buttonOpenLogFile.Text = Language.OpenFile;
+            buttonSelectLogPath.Text = Language.ChoosePath;
+            buttonRestoreDefaultLogPath.Text = Language.UseDefault;
 
             // popups
-            groupBoxPopups.Text = Language.strPopups;
-            labelPopupShowTypes.Text = Language.strShowTheseMessageTypes;
-            chkPopupDebug.Text = Language.strDebug;
-            chkPopupInfo.Text = Language.strInformations;
-            chkPopupWarning.Text = Language.strWarnings;
-            chkPopupError.Text = Language.strErrors;
+            groupBoxPopups.Text = Language.Popups;
+            labelPopupShowTypes.Text = Language.ShowTheseMessageTypes;
+            chkPopupDebug.Text = Language.Debug;
+            chkPopupInfo.Text = Language.Informations;
+            chkPopupWarning.Text = Language.Warnings;
+            chkPopupError.Text = Language.Errors;
         }
 
         public override void LoadSettings()
@@ -135,7 +135,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             var currentFile = textBoxLogPath.Text;
             var currentDirectory = Path.GetDirectoryName(currentFile);
-            saveFileDialogLogging.Title = Language.strChooseLogPath;
+            saveFileDialogLogging.Title = Language.ChooseLogPath;
             saveFileDialogLogging.Filter = @"Log file|*.log";
             saveFileDialogLogging.InitialDirectory = currentDirectory;
             saveFileDialogLogging.FileName = currentFile;

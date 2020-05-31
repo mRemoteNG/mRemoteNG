@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
@@ -44,40 +44,40 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            Text = Language.strMenuExternalTools;
-            TabText = Language.strMenuExternalTools;
+            Text = Language.ExternalTool;
+            TabText = Language.ExternalTool;
 
-            NewToolToolstripButton.Text = Language.strButtonNew;
-            DeleteToolToolstripButton.Text = Language.strOptionsThemeButtonDelete;
-            LaunchToolToolstripButton.Text = Language.strButtonLaunch;
+            NewToolToolstripButton.Text = Language._New;
+            DeleteToolToolstripButton.Text = Language.Delete;
+            LaunchToolToolstripButton.Text = Language._Launch;
 
-            DisplayNameColumnHeader.Text = Language.strColumnDisplayName;
-            FilenameColumnHeader.Text = Language.strColumnFilename;
-            ArgumentsColumnHeader.Text = Language.strColumnArguments;
-            WorkingDirColumnHeader.Text = Language.strWorkingDirColumnHeader;
-            WaitForExitColumnHeader.Text = Language.strColumnWaitForExit;
-            TryToIntegrateColumnHeader.Text = Language.strTryToIntegrateColumnHeader;
-            RunElevateHeader.Text = Language.strRunElevateHeader;
-            ShowOnToolbarColumnHeader.Text = Language.strShowOnToolbarColumnHeader;
+            DisplayNameColumnHeader.Text = Language.DisplayName;
+            FilenameColumnHeader.Text = Language.Filename;
+            ArgumentsColumnHeader.Text = Language.Arguments;
+            WorkingDirColumnHeader.Text = Language.WorkingDirColumnHeader;
+            WaitForExitColumnHeader.Text = Language.WaitForExit;
+            TryToIntegrateColumnHeader.Text = Language.TryToIntegrate;
+            RunElevateHeader.Text = Language.RunElevated;
+            ShowOnToolbarColumnHeader.Text = Language.ShowOnToolbarColumnHeader;
 
-            TryToIntegrateCheckBox.Text = Language.strTryIntegrate;
-            ShowOnToolbarCheckBox.Text = Language.strShowOnToolbar;
-            RunElevatedCheckBox.Text = Language.strRunElevated;
+            TryToIntegrateCheckBox.Text = Language.TryToIntegrate;
+            ShowOnToolbarCheckBox.Text = Language.ShowOnToolbar;
+            RunElevatedCheckBox.Text = Language.RunElevated;
 
-            PropertiesGroupBox.Text = Language.strGroupboxExternalToolProperties;
+            PropertiesGroupBox.Text = Language.ExternalToolProperties;
 
-            DisplayNameLabel.Text = Language.strLabelDisplayName;
-            FilenameLabel.Text = Language.strLabelFilename;
-            ArgumentsLabel.Text = Language.strLabelArguments;
-            WorkingDirLabel.Text = Language.srtWorkingDirectory;
-            OptionsLabel.Text = Language.strLabelOptions;
+            DisplayNameLabel.Text = Language.DisplayName;
+            FilenameLabel.Text = Language.Filename;
+            ArgumentsLabel.Text = Language.Arguments;
+            WorkingDirLabel.Text = Language.WorkingDirectory;
+            OptionsLabel.Text = Language.Options;
 
-            WaitForExitCheckBox.Text = Language.strCheckboxWaitForExit;
-            BrowseButton.Text = Language.strButtonBrowse;
-            BrowseWorkingDir.Text = Language.strButtonBrowse;
-            NewToolMenuItem.Text = Language.strMenuNewExternalTool;
-            DeleteToolMenuItem.Text = Language.strMenuDeleteExternalTool;
-            LaunchToolMenuItem.Text = Language.strMenuLaunchExternalTool;
+            WaitForExitCheckBox.Text = Language.WaitForExit;
+            BrowseButton.Text = Language._Browse;
+            BrowseWorkingDir.Text = Language._Browse;
+            NewToolMenuItem.Text = Language.NewExternalTool;
+            DeleteToolMenuItem.Text = Language.DeleteExternalTool;
+            LaunchToolMenuItem.Text = Language.LaunchExternalTool;
         }
 
         private new void ApplyTheme()
@@ -177,7 +177,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var externalTool = new ExternalTool(Language.strExternalToolDefaultName);
+                var externalTool = new ExternalTool(Language.ExternalToolDefaultName);
                 Runtime.ExternalToolsService.ExternalTools.Add(externalTool);
                 UpdateToolsListObjView();
                 ToolsListObjView.SelectedObject = externalTool;
@@ -195,10 +195,10 @@ namespace mRemoteNG.UI.Window
             {
                 string message;
                 if (_currentlySelectedExternalTools.Count == 1)
-                    message = string.Format(Language.strConfirmDeleteExternalTool,
+                    message = string.Format(Language.ConfirmDeleteExternalTool,
                                             _currentlySelectedExternalTools[0].DisplayName);
                 else if (_currentlySelectedExternalTools.Count > 1)
-                    message = string.Format(Language.strConfirmDeleteExternalToolMultiple,
+                    message = string.Format(Language.ConfirmDeleteExternalToolMultiple,
                                             _currentlySelectedExternalTools.Count);
                 else
                     return;
@@ -290,8 +290,8 @@ namespace mRemoteNG.UI.Window
             {
                 using (var browseDialog = new OpenFileDialog())
                 {
-                    browseDialog.Filter = string.Join("|", Language.strFilterApplication, "*.exe",
-                                                      Language.strFilterAll, "*.*");
+                    browseDialog.Filter = string.Join("|", Language.FilterApplication, "*.exe",
+                                                      Language.FilterAll, "*.*");
                     if (browseDialog.ShowDialog() != DialogResult.OK)
                         return;
                     var selectedItem = _currentlySelectedExternalTools.FirstOrDefault();
@@ -337,7 +337,7 @@ namespace mRemoteNG.UI.Window
                 return;
 
             e.Text =
-                $"'{Language.strCheckboxWaitForExit}' cannot be enabled if '{Language.strTryIntegrate}' is enabled";
+                $"'{Language.WaitForExit}' cannot be enabled if '{Language.TryToIntegrate}' is enabled";
         }
 
         #endregion

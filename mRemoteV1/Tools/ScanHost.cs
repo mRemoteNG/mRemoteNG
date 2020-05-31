@@ -152,7 +152,7 @@ namespace mRemoteNG.Tools
 
         private static string BoolToYesNo(bool value)
         {
-            return value ? Language.strYes : Language.strNo;
+            return value ? Language.Yes : Language.No;
         }
 
         public void SetAllProtocols(bool value)

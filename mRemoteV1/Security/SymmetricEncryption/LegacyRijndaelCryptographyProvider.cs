@@ -60,7 +60,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    string.Format(Language.strErrorEncryptionFailed, ex.Message));
+                                                    string.Format(Language.ErrorEncryptionFailed, ex.Message));
             }
 
             return strToEncrypt;
@@ -103,8 +103,8 @@ namespace mRemoteNG.Security.SymmetricEncryption
             }
             catch (Exception ex)
             {
-                //Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorDecryptionFailed, ex.Message));
-                throw new EncryptionException(Language.strErrorDecryptionFailed, ex);
+                //Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.ErrorDecryptionFailed, ex.Message));
+                throw new EncryptionException(Language.ErrorDecryptionFailed, ex);
             }
         }
     }

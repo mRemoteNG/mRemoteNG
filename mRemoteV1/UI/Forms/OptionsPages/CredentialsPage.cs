@@ -22,13 +22,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void ApplyLanguage()
         {
             base.ApplyLanguage();
-            lblDefaultCredentials.Text = Language.strEmptyUsernamePasswordDomainFields;
-            radCredentialsNoInfo.Text = Language.strNoInformation;
-            radCredentialsWindows.Text = Language.strMyCurrentWindowsCreds;
-            radCredentialsCustom.Text = Language.strTheFollowing;
-            lblCredentialsUsername.Text = Language.strLabelUsername;
-            lblCredentialsPassword.Text = Language.strLabelPassword;
-            lblCredentialsDomain.Text = Language.strLabelDomain;
+            lblDefaultCredentials.Text = Language.EmptyUsernamePasswordDomainFields;
+            radCredentialsNoInfo.Text = Language.None;
+            radCredentialsWindows.Text = Language.MyCurrentWindowsCreds;
+            radCredentialsCustom.Text = Language.TheFollowing;
+            lblCredentialsUsername.Text = Language.Username;
+            lblCredentialsPassword.Text = Language.Password;
+            lblCredentialsDomain.Text = Language.Domain;
         }
 
         public override void LoadSettings()

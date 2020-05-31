@@ -38,7 +38,7 @@ namespace mRemoteNG.Tools.Cmdline
             }
             catch (Exception ex)
             {
-                _messageCollector.AddExceptionMessage(Language.strCommandLineArgsCouldNotBeParsed, ex, logOnly: false);
+                _messageCollector.AddExceptionMessage(Language.CommandLineArgsCouldNotBeParsed, ex, logOnly: false);
             }
         }
 
