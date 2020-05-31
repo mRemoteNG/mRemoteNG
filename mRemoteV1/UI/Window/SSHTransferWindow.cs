@@ -414,7 +414,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.SSHTransferFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.SshTransferFailed, ex);
                 st?.Disconnect();
                 st?.Dispose();
             }
@@ -471,7 +471,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.SSHStartTransferBG, ex,
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.SshBackgroundTransferFailed, ex,
                                                                 MessageClass.ErrorMsg, false);
                 st?.Disconnect();
                 st?.Dispose();

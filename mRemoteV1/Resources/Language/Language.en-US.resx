@@ -126,19 +126,19 @@
   <data name="Colors" xml:space="preserve">
     <value>Colors</value>
   </data>
-  <data name="RDP16777216Colors" xml:space="preserve">
+  <data name="Rdp16777216Colors" xml:space="preserve">
     <value>16777216 Colors (24-bit)</value>
   </data>
-  <data name="RDP256Colors" xml:space="preserve">
+  <data name="Rdp256Colors" xml:space="preserve">
     <value>256 Colors (8-bit)</value>
   </data>
-  <data name="RDP32768Colors" xml:space="preserve">
+  <data name="Rdp32768Colors" xml:space="preserve">
     <value>32768 Colors (15-bit)</value>
   </data>
-  <data name="RDP4294967296Colors" xml:space="preserve">
+  <data name="Rdp4294967296Colors" xml:space="preserve">
     <value>16777216 Colors (32-bit)</value>
   </data>
-  <data name="RDP65536Colors" xml:space="preserve">
+  <data name="Rdp65536Colors" xml:space="preserve">
     <value>65536 Colors (16-bit)</value>
   </data>
   <data name="ActiveDirectory" xml:space="preserve">
@@ -159,9 +159,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
 	</data>
   <data name="PropertyDescriptionRedirectClipboard" xml:space="preserve">
 		<value>Select whether clipboard should be shared.</value>
-	</data>
-  <data name="PropertyNameRedirectClipboard" xml:space="preserve">
-		<value>Clipboard</value>
 	</data>
   <data name="OptionsThemeChangeWarning" xml:space="preserve">
 		<value>Warning: Restart is required to commit any theme configuration change.</value>

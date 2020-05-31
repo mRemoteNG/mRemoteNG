@@ -95,7 +95,7 @@ namespace mRemoteNG.Connection
                     if (connectionInfoSshTunnel == null)
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SSHTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SSHTunnelConnectionName));
+                            string.Format(Language.SshTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SSHTunnelConnectionName));
                         return;
                     }
                     Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
@@ -123,7 +123,7 @@ namespace mRemoteNG.Connection
                     if (!(protocolSshTunnel is PuttyBase puttyBaseSshTunnel))
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SSHTunnelIsNotPutty, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelIsNotPutty, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -137,7 +137,7 @@ namespace mRemoteNG.Connection
                     {
                         protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SSHTunnelNotInitialized, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelNotInitialized, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -145,7 +145,7 @@ namespace mRemoteNG.Connection
                     {
                         protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SSHTunnelNotConnected, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelNotConnected, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -166,7 +166,7 @@ namespace mRemoteNG.Connection
                         {
                             protocolSshTunnel.Close();
                             Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                string.Format(Language.SSHTunnelFailed, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                                string.Format(Language.SshTunnelFailed, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                             return;
                         }
 
@@ -186,7 +186,7 @@ namespace mRemoteNG.Connection
                     {
                         protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SSHTunnelPortNotReadyInTime, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelPortNotReadyInTime, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                         return;
                     }
 

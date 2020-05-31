@@ -10,10 +10,10 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Vnc))]
         VNC = 1,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.Ssh1))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.SshV1))]
         SSH1 = 2,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.Ssh2))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.SshV2))]
         SSH2 = 3,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.Telnet))]
@@ -37,7 +37,7 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription(nameof(Language.PowerShell))]
         PowerShell = 10,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.ExtApp))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.ExternalTool))]
         IntApp = 20
     }
 }

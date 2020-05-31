@@ -537,9 +537,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Export" xml:space="preserve">
     <value>Eksporter</value>
   </data>
-  <data name="ExtApp" xml:space="preserve">
-    <value>Ekstern applikasjon</value>
-  </data>
   <data name="FilterAll" xml:space="preserve">
     <value>Alle filer (*.*)</value>
   </data>
@@ -576,7 +573,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Koble til på nytt automatisk</value>
   </data>
-  <data name="GroupboxExternalToolProperties" xml:space="preserve">
+  <data name="ExternalToolProperties" xml:space="preserve">
     <value>Egenskaper for eksterne verktøy</value>
   </data>
   <data name="Files" xml:space="preserve">
@@ -846,7 +843,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="SmartSize" xml:space="preserve">
     <value>SmartSize (RDP/VNC)</value>
   </data>
-  <data name="SSHFileTransfer" xml:space="preserve">
+  <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH-filoverføring</value>
   </data>
   <data name="StartChat" xml:space="preserve">
@@ -939,7 +936,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PanelName" xml:space="preserve">
     <value>Panelnavn</value>
   </data>
-  <data name="PropertyNamePasswordProtect" xml:space="preserve">
+  <data name="PasswordProtect" xml:space="preserve">
     <value>Passordbeskyttelse</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
@@ -1104,22 +1101,22 @@ Starter med ny tilkoblingsfil.</value>
   <data name="All" xml:space="preserve">
     <value>Alle</value>
   </data>
-  <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="AuthenticationLevel" xml:space="preserve">
     <value>Server-godkjenning</value>
   </data>
-  <data name="PropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="AuthenticationMode" xml:space="preserve">
     <value>Godkjenningsmodus</value>
   </data>
-  <data name="PropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="CacheBitmaps" xml:space="preserve">
     <value>Hurtigbufring av punktgrafikk</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>Farger</value>
   </data>
-  <data name="PropertyNameCompression" xml:space="preserve">
+  <data name="Compression" xml:space="preserve">
     <value>Komprimering</value>
   </data>
-  <data name="PropertyNameDescription" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Beskrivelse</value>
   </data>
   <data name="DisplayThemes" xml:space="preserve">
@@ -1128,28 +1125,28 @@ Starter med ny tilkoblingsfil.</value>
   <data name="DisplayWallpaper" xml:space="preserve">
     <value>Vis bakgrunnbilde</value>
   </data>
-  <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="EnableDesktopComposition" xml:space="preserve">
     <value>Skrivebordskomposisjon</value>
   </data>
-  <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="FontSmoothing" xml:space="preserve">
     <value>Skriftutjevning</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>Tekstkoding</value>
   </data>
-  <data name="PropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="EncryptionStrength" xml:space="preserve">
     <value>Krypteringsnivå</value>
   </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Eksternt verktøy</value>
   </data>
-  <data name="PropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="ExternalToolAfter" xml:space="preserve">
     <value>Eksternt verktøy etter</value>
   </data>
-  <data name="PropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="ExternalToolBefore" xml:space="preserve">
     <value>Eksternt verktøy før</value>
   </data>
-  <data name="PropertyNameMACAddress" xml:space="preserve">
+  <data name="MacAddress" xml:space="preserve">
     <value>MAC-adresse</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -1164,61 +1161,61 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Port" xml:space="preserve">
     <value>Port</value>
   </data>
-  <data name="PropertyNamePuttySession" xml:space="preserve">
+  <data name="PuttySession" xml:space="preserve">
     <value>PuTTY-sesjon</value>
   </data>
-  <data name="PropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="RdpGatewayDomain" xml:space="preserve">
     <value>Gateway-domene</value>
   </data>
-  <data name="PropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="RdpGatewayHostname" xml:space="preserve">
     <value>Gateway-vertsnavn</value>
   </data>
-  <data name="PropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="RdpGatewayPassword" xml:space="preserve">
     <value>Gateway for eksternt skrivebord-passord</value>
   </data>
-  <data name="PropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="RdpGatewayUsageMethod" xml:space="preserve">
     <value>Bruk gateway</value>
   </data>
-  <data name="PropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Legitimasjon for gateway</value>
   </data>
-  <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="RdpGatewayUsername" xml:space="preserve">
     <value>Gateway-brukernavn</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Diskstasjoner</value>
   </data>
-  <data name="PropertyNameRedirectKeys" xml:space="preserve">
+  <data name="RedirectKeys" xml:space="preserve">
     <value>Tastekombinasjoner</value>
   </data>
   <data name="Ports" xml:space="preserve">
     <value>Porter</value>
   </data>
-  <data name="PropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="RedirectPrinters" xml:space="preserve">
     <value>Skrivere</value>
   </data>
-  <data name="PropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="SmartCards" xml:space="preserve">
     <value>Smartkort</value>
   </data>
-  <data name="PropertyNameRedirectSounds" xml:space="preserve">
+  <data name="RedirectSounds" xml:space="preserve">
     <value>Lyder</value>
   </data>
-  <data name="PropertyNameRenderingEngine" xml:space="preserve">
+  <data name="RenderingEngine" xml:space="preserve">
     <value>Renderingsmotor</value>
   </data>
-  <data name="PropertyNameResolution" xml:space="preserve">
+  <data name="Resolution" xml:space="preserve">
     <value>Oppløsning</value>
   </data>
-  <data name="PropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="SmartSizeMode" xml:space="preserve">
     <value>SmartSize-modus</value>
   </data>
-  <data name="PropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="UseConsoleSession" xml:space="preserve">
     <value>Bruk konsolløkt</value>
   </data>
-  <data name="PropertyNameUseCredSsp" xml:space="preserve">
+  <data name="UseCredSsp" xml:space="preserve">
     <value>Bruk CredSSP</value>
   </data>
-  <data name="PropertyNameUser1" xml:space="preserve">
+  <data name="UserField" xml:space="preserve">
     <value>Brukerfelt</value>
   </data>
   <data name="ProxyAddress" xml:space="preserve">
@@ -1315,31 +1312,31 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
-  <data name="RDP16777216Colors" xml:space="preserve">
+  <data name="Rdp16777216Colors" xml:space="preserve">
     <value>16777216 farger (24-biters)</value>
   </data>
-  <data name="RDP256Colors" xml:space="preserve">
+  <data name="Rdp256Colors" xml:space="preserve">
     <value>256 farger (8-biters)</value>
   </data>
-  <data name="RDP32768Colors" xml:space="preserve">
+  <data name="Rdp32768Colors" xml:space="preserve">
     <value>32768 farger (15-biters)</value>
   </data>
-  <data name="RDP4294967296Colors" xml:space="preserve">
+  <data name="Rdp4294967296Colors" xml:space="preserve">
     <value>16777216 farger (32-biters)</value>
   </data>
-  <data name="RDP65536Colors" xml:space="preserve">
+  <data name="Rdp65536Colors" xml:space="preserve">
     <value>65536 farger (16-biters)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Kunne ikke opprette RDP-kontroll, vennligst kontroller mRemoteNGs systemkrav.</value>
   </data>
-  <data name="PropertyNameDisableCursorBlinking" xml:space="preserve">
+  <data name="DisableCursorBlinking" xml:space="preserve">
     <value>Deaktiver blinkende markør</value>
   </data>
-  <data name="PropertyNameDisableCursorShadow" xml:space="preserve">
+  <data name="DisableCursorShadow" xml:space="preserve">
     <value>Deaktiver markørskygge</value>
   </data>
-  <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
+  <data name="DisableFullWindowDrag" xml:space="preserve">
     <value>Deaktiver fullvindudragning</value>
   </data>
   <data name="DisableMenuAnimations" xml:space="preserve">
@@ -1378,7 +1375,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Feil ved initialisering av Winsock.</value>
   </data>
-  <data name="RdpFitToPanel" xml:space="preserve">
+  <data name="FitToPanel" xml:space="preserve">
     <value>Tilpass til panel</value>
   </data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1537,16 +1534,16 @@ Starter med ny tilkoblingsfil.</value>
   <data name="SQLServer" xml:space="preserve">
     <value>SQL Server</value>
   </data>
-  <data name="Ssh1" xml:space="preserve">
+  <data name="SshV1" xml:space="preserve">
     <value>SSH versjon 1</value>
   </data>
-  <data name="Ssh2" xml:space="preserve">
+  <data name="SshV2" xml:space="preserve">
     <value>SSH versjon 2</value>
   </data>
-  <data name="SSHStartTransferBG" xml:space="preserve">
+  <data name="SshBackgroundTransferFailed" xml:space="preserve">
     <value>SSH-bakgrunnsoverføring mislyktes!</value>
   </data>
-  <data name="SSHTransferFailed" xml:space="preserve">
+  <data name="SshTransferFailed" xml:space="preserve">
     <value>SSH-overføringen mislyktes.</value>
   </data>
   <data name="FirstIp" xml:space="preserve">
@@ -1789,16 +1786,16 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="PropertyDescriptionRedirectAudioCapture" xml:space="preserve">
     <value>Velg om standard lydinndataenhet på den eksterne maskinen skal omadresseres til denne maskinen.</value>
   </data>
-  <data name="PropertyNameAutomaticResize" xml:space="preserve">
+  <data name="AutomaticResize" xml:space="preserve">
     <value>Automatisk størrelsesendring</value>
   </data>
-  <data name="PropertyNameLoadBalanceInfo" xml:space="preserve">
+  <data name="LoadBalanceInfo" xml:space="preserve">
     <value>Lastbalanseringsinformasjon</value>
   </data>
-  <data name="PropertyNameRedirectClipboard" xml:space="preserve">
+  <data name="RedirectClipboard" xml:space="preserve">
     <value>Utklippstavle</value>
   </data>
-  <data name="PropertyNameRedirectAudioCapture" xml:space="preserve">
+  <data name="RedirectAudioCapture" xml:space="preserve">
     <value>Lydopptak</value>
   </data>
   <data name="TitlePasswordWithName" xml:space="preserve">
@@ -1867,7 +1864,7 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Antall minutter med inaktivitet før RDP-sesjonen automatisk kobles fra (bruk 0 for ubegrenset)</value>
   </data>
-  <data name="PropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+  <data name="MinutesToIdleTimeout" xml:space="preserve">
     <value>Inaktivitet i minutter</value>
   </data>
   <data name="Add" xml:space="preserve">
@@ -1882,7 +1879,7 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Velg om du ønsker et varsel når RDP-sesjonen avsluttes på grunn av inaktivitet</value>
   </data>
-  <data name="PropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+  <data name="RdpAlertIdleTimeout" xml:space="preserve">
     <value>Varsel ved inaktivitet</value>
   </data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
@@ -2109,16 +2106,16 @@ Development-kanalen inkluderer alpha-, beta- og release candidate-versjoner.</va
   <data name="Proxy" xml:space="preserve">
     <value>Proxy-innstillinger</value>
   </data>
-  <data name="MultiSSH" xml:space="preserve">
+  <data name="MultiSsh" xml:space="preserve">
     <value>Multi-SSH:</value>
   </data>
-  <data name="MultiSSHToolTip" xml:space="preserve">
+  <data name="MultiSshToolTip" xml:space="preserve">
     <value>Trykk ENTER for å sende, Ctrl+C sendes umiddelbart.</value>
   </data>
   <data name="PropertyDescriptionFavorite" xml:space="preserve">
     <value>Vis denne tilkoblingen i favoritter-menyen.</value>
   </data>
-  <data name="PropertyNameFavorite" xml:space="preserve">
+  <data name="Favorite" xml:space="preserve">
     <value>Favoritt</value>
   </data>
   <data name="Favorites" xml:space="preserve">

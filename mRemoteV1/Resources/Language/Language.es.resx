@@ -530,9 +530,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="Export" xml:space="preserve">
     <value>Exportar</value>
   </data>
-  <data name="ExtApp" xml:space="preserve">
-    <value>App Externa</value>
-  </data>
   <data name="FilterAll" xml:space="preserve">
     <value>Todos los archivos (*.*)</value>
   </data>
@@ -569,7 +566,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Reconexión Automática</value>
   </data>
-  <data name="GroupboxExternalToolProperties" xml:space="preserve">
+  <data name="ExternalToolProperties" xml:space="preserve">
     <value>Propiedades de la Herramienta Externa</value>
   </data>
   <data name="Files" xml:space="preserve">
@@ -836,7 +833,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="SmartSize" xml:space="preserve">
     <value>SmartSize (RDP/VNC)</value>
   </data>
-  <data name="SSHFileTransfer" xml:space="preserve">
+  <data name="SshFileTransfer" xml:space="preserve">
     <value>Tranferencia de Archivos por SSH</value>
   </data>
   <data name="StartChat" xml:space="preserve">
@@ -930,7 +927,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="PanelName" xml:space="preserve">
     <value>Nombre del Panel</value>
   </data>
-  <data name="PropertyNamePasswordProtect" xml:space="preserve">
+  <data name="PasswordProtect" xml:space="preserve">
     <value>Protegido por Contraseña</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
@@ -1095,22 +1092,22 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="All" xml:space="preserve">
     <value>Todo</value>
   </data>
-  <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="AuthenticationLevel" xml:space="preserve">
     <value>Autentificación de servidor</value>
   </data>
-  <data name="PropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="AuthenticationMode" xml:space="preserve">
     <value>Modo de autentificación</value>
   </data>
-  <data name="PropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="CacheBitmaps" xml:space="preserve">
     <value>Cache de Bitmaps</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>Colores</value>
   </data>
-  <data name="PropertyNameCompression" xml:space="preserve">
+  <data name="Compression" xml:space="preserve">
     <value>Compresión</value>
   </data>
-  <data name="PropertyNameDescription" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Descripción</value>
   </data>
   <data name="DisplayThemes" xml:space="preserve">
@@ -1119,28 +1116,28 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="DisplayWallpaper" xml:space="preserve">
     <value>Mostrar Fondo de Pantalla</value>
   </data>
-  <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="EnableDesktopComposition" xml:space="preserve">
     <value>Composición de Escritorio</value>
   </data>
-  <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="FontSmoothing" xml:space="preserve">
     <value>Suavizado de Fuentes</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>Codificación</value>
   </data>
-  <data name="PropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="EncryptionStrength" xml:space="preserve">
     <value>Fortaleza del Cifrado</value>
   </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Herramienta Externa</value>
   </data>
-  <data name="PropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="ExternalToolAfter" xml:space="preserve">
     <value>Tras la Herramienta Externa</value>
   </data>
-  <data name="PropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="ExternalToolBefore" xml:space="preserve">
     <value>Antes de la Herramienta Externa</value>
   </data>
-  <data name="PropertyNameMACAddress" xml:space="preserve">
+  <data name="MacAddress" xml:space="preserve">
     <value>Dirección MAC</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -1155,64 +1152,64 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="Port" xml:space="preserve">
     <value>Puerto</value>
   </data>
-  <data name="PropertyNamePuttySession" xml:space="preserve">
+  <data name="PuttySession" xml:space="preserve">
     <value>Sesión PuTTY</value>
   </data>
-  <data name="PropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="RdpGatewayDomain" xml:space="preserve">
     <value>Dominio del Gateway</value>
   </data>
-  <data name="PropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="RdpGatewayHostname" xml:space="preserve">
     <value>Nombre del Gateway</value>
   </data>
-  <data name="PropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="RdpGatewayPassword" xml:space="preserve">
     <value>Contraseña del Gateway para Escritorio Remoto</value>
   </data>
-  <data name="PropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="RdpGatewayUsageMethod" xml:space="preserve">
     <value>Usar Gateway</value>
   </data>
-  <data name="PropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Credenciales del  Gateway</value>
   </data>
-  <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="RdpGatewayUsername" xml:space="preserve">
     <value>Nombre de Usuario para el Gateway</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Unidades de Disco</value>
   </data>
-  <data name="PropertyNameRedirectKeys" xml:space="preserve">
+  <data name="RedirectKeys" xml:space="preserve">
     <value>Combinaciones de Teclas</value>
   </data>
   <data name="Ports" xml:space="preserve">
     <value>Puertos</value>
   </data>
-  <data name="PropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="RedirectPrinters" xml:space="preserve">
     <value>Impresoras</value>
   </data>
-  <data name="PropertyNameRedirectClipboard" xml:space="preserve">
+  <data name="RedirectClipboard" xml:space="preserve">
     <value>Portapapeles</value>
   </data>
-  <data name="PropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="SmartCards" xml:space="preserve">
     <value>Tarjetas Inteligentes</value>
   </data>
-  <data name="PropertyNameRedirectSounds" xml:space="preserve">
+  <data name="RedirectSounds" xml:space="preserve">
     <value>Sonidos</value>
   </data>
-  <data name="PropertyNameRenderingEngine" xml:space="preserve">
+  <data name="RenderingEngine" xml:space="preserve">
     <value>Motor de Renderizado</value>
   </data>
-  <data name="PropertyNameResolution" xml:space="preserve">
+  <data name="Resolution" xml:space="preserve">
     <value>Resolución</value>
   </data>
-  <data name="PropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="SmartSizeMode" xml:space="preserve">
     <value>Modo SmartSize</value>
   </data>
-  <data name="PropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="UseConsoleSession" xml:space="preserve">
     <value>Usar Sesión de Consola</value>
   </data>
-  <data name="PropertyNameUseCredSsp" xml:space="preserve">
+  <data name="UseCredSsp" xml:space="preserve">
     <value>Usar CredSSP</value>
   </data>
-  <data name="PropertyNameUser1" xml:space="preserve">
+  <data name="UserField" xml:space="preserve">
     <value>Campo de Usuario</value>
   </data>
   <data name="ProxyAddress" xml:space="preserve">
@@ -1292,31 +1289,31 @@ Mensaje:
   <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
-  <data name="RDP16777216Colors" xml:space="preserve">
+  <data name="Rdp16777216Colors" xml:space="preserve">
     <value>16777216 Colores (24-bit)</value>
   </data>
-  <data name="RDP256Colors" xml:space="preserve">
+  <data name="Rdp256Colors" xml:space="preserve">
     <value>256 Colores (8-bit)</value>
   </data>
-  <data name="RDP32768Colors" xml:space="preserve">
+  <data name="Rdp32768Colors" xml:space="preserve">
     <value>32768 Colores (15-bit)</value>
   </data>
-  <data name="RDP4294967296Colors" xml:space="preserve">
+  <data name="Rdp4294967296Colors" xml:space="preserve">
     <value>16777216 Colores (32-bit)</value>
   </data>
-  <data name="RDP65536Colors" xml:space="preserve">
+  <data name="Rdp65536Colors" xml:space="preserve">
     <value>65536 Colores (16-bit)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>No se pudo crear el control RDP, por favor verifique los requerimientos de mRemoteNG.</value>
   </data>
-  <data name="PropertyNameDisableCursorBlinking" xml:space="preserve">
+  <data name="DisableCursorBlinking" xml:space="preserve">
     <value>Desactivar Parpadeo del Cursor</value>
   </data>
-  <data name="PropertyNameDisableCursorShadow" xml:space="preserve">
+  <data name="DisableCursorShadow" xml:space="preserve">
     <value>Desactivar Sombra del Cursor</value>
   </data>
-  <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
+  <data name="DisableFullWindowDrag" xml:space="preserve">
     <value>Desactivar Mostar Ventana al arrastrar</value>
   </data>
   <data name="DisableMenuAnimations" xml:space="preserve">
@@ -1352,7 +1349,7 @@ Mensaje:
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Error de inicialización del Winsock.</value>
   </data>
-  <data name="RdpFitToPanel" xml:space="preserve">
+  <data name="FitToPanel" xml:space="preserve">
     <value>Ajustar al panel</value>
   </data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1508,13 +1505,13 @@ Mensaje:
   <data name="SQLServer" xml:space="preserve">
     <value>SQL Server:</value>
   </data>
-  <data name="Ssh1" xml:space="preserve">
+  <data name="SshV1" xml:space="preserve">
     <value>SSH versión 1</value>
   </data>
-  <data name="Ssh2" xml:space="preserve">
+  <data name="SshV2" xml:space="preserve">
     <value>SSH versión 2</value>
   </data>
-  <data name="SSHStartTransferBG" xml:space="preserve">
+  <data name="SshBackgroundTransferFailed" xml:space="preserve">
     <value>¡Tranferencia SSH en segundo plano fallida!</value>
   </data>
   <data name="FirstIp" xml:space="preserve">

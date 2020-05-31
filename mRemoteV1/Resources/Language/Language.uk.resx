@@ -530,9 +530,6 @@ VncSharp Control Version {0}</value>
   <data name="Export" xml:space="preserve">
     <value>Експорт</value>
   </data>
-  <data name="ExtApp" xml:space="preserve">
-    <value>Зовн. Інструмент</value>
-  </data>
   <data name="FilterAll" xml:space="preserve">
     <value>Всі файли (*.*)</value>
   </data>
@@ -566,7 +563,7 @@ VncSharp Control Version {0}</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Автоперепідключення</value>
   </data>
-  <data name="GroupboxExternalToolProperties" xml:space="preserve">
+  <data name="ExternalToolProperties" xml:space="preserve">
     <value>Властивості зовнішніх інструментів</value>
   </data>
   <data name="Files" xml:space="preserve">
@@ -809,7 +806,7 @@ VncSharp Control Version {0}</value>
   <data name="ShowText" xml:space="preserve">
     <value>Показати текст</value>
   </data>
-  <data name="SSHFileTransfer" xml:space="preserve">
+  <data name="SshFileTransfer" xml:space="preserve">
     <value>Передача файлів по SSH</value>
   </data>
   <data name="StartChat" xml:space="preserve">
@@ -894,7 +891,7 @@ VncSharp Control Version {0}</value>
   <data name="PanelName" xml:space="preserve">
     <value>Назва панелі</value>
   </data>
-  <data name="PropertyNamePasswordProtect" xml:space="preserve">
+  <data name="PasswordProtect" xml:space="preserve">
     <value>Захист паролем</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
@@ -1056,22 +1053,22 @@ VncSharp Control Version {0}</value>
   <data name="All" xml:space="preserve">
     <value>Все</value>
   </data>
-  <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="AuthenticationLevel" xml:space="preserve">
     <value>Аутентифікація сервера</value>
   </data>
-  <data name="PropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="AuthenticationMode" xml:space="preserve">
     <value>Режим аутентифікації</value>
   </data>
-  <data name="PropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="CacheBitmaps" xml:space="preserve">
     <value>Кеш графіки</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>Кольори</value>
   </data>
-  <data name="PropertyNameCompression" xml:space="preserve">
+  <data name="Compression" xml:space="preserve">
     <value>Стискання</value>
   </data>
-  <data name="PropertyNameDescription" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Опис</value>
   </data>
   <data name="DisplayThemes" xml:space="preserve">
@@ -1080,28 +1077,28 @@ VncSharp Control Version {0}</value>
   <data name="DisplayWallpaper" xml:space="preserve">
     <value>Показати шпалери</value>
   </data>
-  <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="EnableDesktopComposition" xml:space="preserve">
     <value>Композиція робочого столу</value>
   </data>
-  <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="FontSmoothing" xml:space="preserve">
     <value>Згладжування шрифту</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>Кодування</value>
   </data>
-  <data name="PropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="EncryptionStrength" xml:space="preserve">
     <value>Шифрування</value>
   </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Зовнішній інструмент</value>
   </data>
-  <data name="PropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="ExternalToolAfter" xml:space="preserve">
     <value>Зовнішній інструмент після</value>
   </data>
-  <data name="PropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="ExternalToolBefore" xml:space="preserve">
     <value>Зовнішній інструмент до</value>
   </data>
-  <data name="PropertyNameMACAddress" xml:space="preserve">
+  <data name="MacAddress" xml:space="preserve">
     <value>MAC-адреса</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -1116,58 +1113,58 @@ VncSharp Control Version {0}</value>
   <data name="Port" xml:space="preserve">
     <value>Порт</value>
   </data>
-  <data name="PropertyNamePuttySession" xml:space="preserve">
+  <data name="PuttySession" xml:space="preserve">
     <value>Сесія PuTTY</value>
   </data>
-  <data name="PropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="RdpGatewayDomain" xml:space="preserve">
     <value>Шлюз домену</value>
   </data>
-  <data name="PropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="RdpGatewayHostname" xml:space="preserve">
     <value>Хост шлюзу</value>
   </data>
-  <data name="PropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="RdpGatewayPassword" xml:space="preserve">
     <value>Пароль шлюзу служб терміналів</value>
   </data>
-  <data name="PropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="RdpGatewayUsageMethod" xml:space="preserve">
     <value>Використовувати шлюз</value>
   </data>
-  <data name="PropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Облікові дані шлюзу</value>
   </data>
-  <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="RdpGatewayUsername" xml:space="preserve">
     <value>Ім'я користувача шлюзу</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Диски</value>
   </data>
-  <data name="PropertyNameRedirectKeys" xml:space="preserve">
+  <data name="RedirectKeys" xml:space="preserve">
     <value>Комбінації клавіш</value>
   </data>
   <data name="Ports" xml:space="preserve">
     <value>Порти</value>
   </data>
-  <data name="PropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="RedirectPrinters" xml:space="preserve">
     <value>Принтери</value>
   </data>
-  <data name="PropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="SmartCards" xml:space="preserve">
     <value>Смарт-карти</value>
   </data>
-  <data name="PropertyNameRedirectSounds" xml:space="preserve">
+  <data name="RedirectSounds" xml:space="preserve">
     <value>Звуки</value>
   </data>
-  <data name="PropertyNameRenderingEngine" xml:space="preserve">
+  <data name="RenderingEngine" xml:space="preserve">
     <value>Рушій візуалізації</value>
   </data>
-  <data name="PropertyNameResolution" xml:space="preserve">
+  <data name="Resolution" xml:space="preserve">
     <value>Розширення екрану</value>
   </data>
-  <data name="PropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="SmartSizeMode" xml:space="preserve">
     <value>Режим SmartSize</value>
   </data>
-  <data name="PropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="UseConsoleSession" xml:space="preserve">
     <value>Використовувати консольну сесію</value>
   </data>
-  <data name="PropertyNameUser1" xml:space="preserve">
+  <data name="UserField" xml:space="preserve">
     <value>Користувацьке поле</value>
   </data>
   <data name="ProxyAddress" xml:space="preserve">
@@ -1240,31 +1237,31 @@ VncSharp Control Version {0}</value>
   <data name="QuickConnectFailed" xml:space="preserve">
     <value>Створити швидке з'єднання не вдалося</value>
   </data>
-  <data name="RDP16777216Colors" xml:space="preserve">
+  <data name="Rdp16777216Colors" xml:space="preserve">
     <value>16 млн. кольорів (24-біт)</value>
   </data>
-  <data name="RDP256Colors" xml:space="preserve">
+  <data name="Rdp256Colors" xml:space="preserve">
     <value>256 кольорів (8-біт)</value>
   </data>
-  <data name="RDP32768Colors" xml:space="preserve">
+  <data name="Rdp32768Colors" xml:space="preserve">
     <value>32 тис. кольорів (15-біт)</value>
   </data>
-  <data name="RDP4294967296Colors" xml:space="preserve">
+  <data name="Rdp4294967296Colors" xml:space="preserve">
     <value>16 млн. кольорів (32-біт)</value>
   </data>
-  <data name="RDP65536Colors" xml:space="preserve">
+  <data name="Rdp65536Colors" xml:space="preserve">
     <value>65 тис. кольорів (16-біт)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Неможливо створити управління RDP, перевірте вимоги mRemoteNG.</value>
   </data>
-  <data name="PropertyNameDisableCursorBlinking" xml:space="preserve">
+  <data name="DisableCursorBlinking" xml:space="preserve">
     <value>Вимкнути моргання курсору</value>
   </data>
-  <data name="PropertyNameDisableCursorShadow" xml:space="preserve">
+  <data name="DisableCursorShadow" xml:space="preserve">
     <value>Вимкнути тінь курсора</value>
   </data>
-  <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
+  <data name="DisableFullWindowDrag" xml:space="preserve">
     <value>Вимкнути відображення вікна при перетягуванні</value>
   </data>
   <data name="DisableMenuAnimations" xml:space="preserve">
@@ -1300,7 +1297,7 @@ VncSharp Control Version {0}</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Помилка ініціалізації Winsock.</value>
   </data>
-  <data name="RdpFitToPanel" xml:space="preserve">
+  <data name="FitToPanel" xml:space="preserve">
     <value>Встановити на вкладку</value>
   </data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1444,16 +1441,16 @@ VncSharp Control Version {0}</value>
   <data name="SQLInfo" xml:space="preserve">
     <value>Для додаткової інформації дивись:  Довідка - Початок роботи - Конфігурація SQL!</value>
   </data>
-  <data name="Ssh1" xml:space="preserve">
+  <data name="SshV1" xml:space="preserve">
     <value>SSH версії 1</value>
   </data>
-  <data name="Ssh2" xml:space="preserve">
+  <data name="SshV2" xml:space="preserve">
     <value>SSH версії 2</value>
   </data>
-  <data name="SSHStartTransferBG" xml:space="preserve">
+  <data name="SshBackgroundTransferFailed" xml:space="preserve">
     <value>Фонова передача по SSH не вдалася!</value>
   </data>
-  <data name="SSHTransferFailed" xml:space="preserve">
+  <data name="SshTransferFailed" xml:space="preserve">
     <value>Помилка передавання SSH.</value>
   </data>
   <data name="FirstIp" xml:space="preserve">
@@ -1734,19 +1731,19 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="PropertyDescriptionUseCredSsp" xml:space="preserve">
 		<value>Використовати Credential Security Support Provider (CredSSP) для аутентифікації, якщо він доступний.</value>
 	</data>
-  <data name="PropertyNameAutomaticResize" xml:space="preserve">
+  <data name="AutomaticResize" xml:space="preserve">
 		<value>Автоматична зміна розміру</value>
 	</data>
-  <data name="PropertyNameLoadBalanceInfo" xml:space="preserve">
+  <data name="LoadBalanceInfo" xml:space="preserve">
 		<value>Інформація про балансування</value>
 	</data>
-  <data name="PropertyNameRedirectClipboard" xml:space="preserve">
+  <data name="RedirectClipboard" xml:space="preserve">
 		<value>Буфер обміну</value>
 	</data>
-  <data name="PropertyNameRedirectAudioCapture" xml:space="preserve">
+  <data name="RedirectAudioCapture" xml:space="preserve">
 		<value>Захоплення аудіо</value>
 	</data>
-  <data name="PropertyNameUseCredSsp" xml:space="preserve">
+  <data name="UseCredSsp" xml:space="preserve">
 		<value>Використовувати CredSSP</value>
 	</data>
   <data name="PuttySavedSessionsRootName" xml:space="preserve">
@@ -1836,7 +1833,7 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
 		<value>Скільки хвилин перебувати в режимі очікування перед автоматичним відключенням RDP сеансу (0 - без обмежень)</value>
 	</data>
-  <data name="PropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+  <data name="MinutesToIdleTimeout" xml:space="preserve">
 		<value>Хвилин простою</value>
 	</data>
   <data name="Add" xml:space="preserve">
@@ -1851,7 +1848,7 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
 		<value>Виберіть, чи отримувати попередження після відключення сеансу RDP через неактивність</value>
 	</data>
-  <data name="PropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+  <data name="RdpAlertIdleTimeout" xml:space="preserve">
 		<value>Попереджати про відключення через неактивність</value>
 	</data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
@@ -2066,13 +2063,13 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="Proxy" xml:space="preserve">
 		<value>Проксі</value>
 	</data>
-  <data name="MultiSSHToolTip" xml:space="preserve">
+  <data name="MultiSshToolTip" xml:space="preserve">
 		<value>Натисніть ENTER для надсилання. Ctrl+C надсилається негайно.</value>
 	</data>
   <data name="PropertyDescriptionFavorite" xml:space="preserve">
 		<value>Показати це з'єднання в меню обраних.</value>
 	</data>
-  <data name="PropertyNameFavorite" xml:space="preserve">
+  <data name="Favorite" xml:space="preserve">
 		<value>Улюблене</value>
 	</data>
   <data name="Favorites" xml:space="preserve">
@@ -2102,7 +2099,7 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="PropertyDescriptionRdpVersion" xml:space="preserve">
 		<value>Встановіть версію RDP, що буде використовуватись при відкритті з'єднань.</value>
 	</data>
-  <data name="PropertyNameRdpVersion" xml:space="preserve">
+  <data name="RdpVersion" xml:space="preserve">
 		<value>Версія RDP</value>
 	</data>
   <data name="PropertyDescriptionUseVmId" xml:space="preserve">
@@ -2111,7 +2108,7 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="PropertyDescriptionVmId" xml:space="preserve">
 		<value>ID віртуальної машини Hyper-V, до якогї потрібно підключитися.</value>
 	</data>
-  <data name="PropertyNameUseVmId" xml:space="preserve">
+  <data name="UseVmId" xml:space="preserve">
 		<value>Використовувати VM ID</value>
 	</data>
   <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
@@ -2126,7 +2123,7 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="PropertyDescriptionUseEnhancedMode" xml:space="preserve">
 		<value>Підключатися до хоста Hyper-V із увімкненим розширеним режимом.</value>
 	</data>
-  <data name="PropertyNameUseEnhancedMode" xml:space="preserve">
+  <data name="UseEnhancedMode" xml:space="preserve">
 		<value>Використовувати розширений режим</value>
 	</data>
   <data name="PropertyDescriptionRDGatewayPassword" xml:space="preserve">

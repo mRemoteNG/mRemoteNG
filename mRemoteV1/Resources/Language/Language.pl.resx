@@ -534,9 +534,6 @@ Załadowano nowy plik połączeń.</value>
   <data name="ExportFile" xml:space="preserve">
     <value>Eksportuj do pliku</value>
   </data>
-  <data name="ExtApp" xml:space="preserve">
-    <value>Aplikacja zewnętrzna</value>
-  </data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>Nowe narzędzie zewnętrzne</value>
   </data>
@@ -573,7 +570,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Połącz automatycznie</value>
   </data>
-  <data name="GroupboxExternalToolProperties" xml:space="preserve">
+  <data name="ExternalToolProperties" xml:space="preserve">
     <value>Właściwości zewnętrznego narzędzia</value>
   </data>
   <data name="Files" xml:space="preserve">
@@ -807,7 +804,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="SmartSize" xml:space="preserve">
     <value>Dopasuj (RDP/VNC)</value>
   </data>
-  <data name="SSHFileTransfer" xml:space="preserve">
+  <data name="SshFileTransfer" xml:space="preserve">
     <value>Transfer plików poprzez SSH</value>
   </data>
   <data name="StartChat" xml:space="preserve">
@@ -984,22 +981,22 @@ Załadowano nowy plik połączeń.</value>
   <data name="All" xml:space="preserve">
     <value>Wszystkie</value>
   </data>
-  <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="AuthenticationLevel" xml:space="preserve">
     <value>Autentykacja serwera</value>
   </data>
-  <data name="PropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="AuthenticationMode" xml:space="preserve">
     <value>Tryb autentykacji</value>
   </data>
-  <data name="PropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="CacheBitmaps" xml:space="preserve">
     <value>Przechowuj bitmapy w pamięci podręcznej</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>Kolory</value>
   </data>
-  <data name="PropertyNameCompression" xml:space="preserve">
+  <data name="Compression" xml:space="preserve">
     <value>Kompresja</value>
   </data>
-  <data name="PropertyNameDescription" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Opis</value>
   </data>
   <data name="DisplayThemes" xml:space="preserve">
@@ -1008,28 +1005,28 @@ Załadowano nowy plik połączeń.</value>
   <data name="DisplayWallpaper" xml:space="preserve">
     <value>Wyświetl tapetę</value>
   </data>
-  <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="EnableDesktopComposition" xml:space="preserve">
     <value>Kompozycja pulpitu</value>
   </data>
-  <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="FontSmoothing" xml:space="preserve">
     <value>Wygładzenie czcionki</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>Kodowanie</value>
   </data>
-  <data name="PropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="EncryptionStrength" xml:space="preserve">
     <value>Siła szyfrowania</value>
   </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Zewnętrzne narzędzie</value>
   </data>
-  <data name="PropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="ExternalToolAfter" xml:space="preserve">
     <value>Zewnętrzne narzędzie po</value>
   </data>
-  <data name="PropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="ExternalToolBefore" xml:space="preserve">
     <value>Zewnętrzne narzędzie przed</value>
   </data>
-  <data name="PropertyNameMACAddress" xml:space="preserve">
+  <data name="MacAddress" xml:space="preserve">
     <value>Adres MAC</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -1044,61 +1041,61 @@ Załadowano nowy plik połączeń.</value>
   <data name="Port" xml:space="preserve">
     <value>Port</value>
   </data>
-  <data name="PropertyNamePuttySession" xml:space="preserve">
+  <data name="PuttySession" xml:space="preserve">
     <value>Sesja PuTTY</value>
   </data>
-  <data name="PropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="RdpGatewayDomain" xml:space="preserve">
     <value>Domena bramy</value>
   </data>
-  <data name="PropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="RdpGatewayHostname" xml:space="preserve">
     <value>Nazwa hosta bramy</value>
   </data>
-  <data name="PropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="RdpGatewayPassword" xml:space="preserve">
     <value>Hasło bramy zdalnego pulpitu</value>
   </data>
-  <data name="PropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="RdpGatewayUsageMethod" xml:space="preserve">
     <value>Użyj bramy</value>
   </data>
-  <data name="PropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Poświadczenia bramy</value>
   </data>
-  <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="RdpGatewayUsername" xml:space="preserve">
     <value>Użytkownik bramy</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Dyski</value>
   </data>
-  <data name="PropertyNameRedirectKeys" xml:space="preserve">
+  <data name="RedirectKeys" xml:space="preserve">
     <value>Kombinacja klawiszy</value>
   </data>
   <data name="Ports" xml:space="preserve">
     <value>Porty</value>
   </data>
-  <data name="PropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="RedirectPrinters" xml:space="preserve">
     <value>Drukarki</value>
   </data>
-  <data name="PropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="SmartCards" xml:space="preserve">
     <value>Karty inteligentne</value>
   </data>
-  <data name="PropertyNameRedirectSounds" xml:space="preserve">
+  <data name="RedirectSounds" xml:space="preserve">
     <value>Dźwięki</value>
   </data>
-  <data name="PropertyNameRenderingEngine" xml:space="preserve">
+  <data name="RenderingEngine" xml:space="preserve">
     <value>Silnik renderujący</value>
   </data>
-  <data name="PropertyNameResolution" xml:space="preserve">
+  <data name="Resolution" xml:space="preserve">
     <value>Rozdzielczość</value>
   </data>
-  <data name="PropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="SmartSizeMode" xml:space="preserve">
     <value>Tryb dopasowania</value>
   </data>
-  <data name="PropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="UseConsoleSession" xml:space="preserve">
     <value>Użyj konsoli sesji</value>
   </data>
-  <data name="PropertyNameUseCredSsp" xml:space="preserve">
+  <data name="UseCredSsp" xml:space="preserve">
     <value>Użyj CredSSP</value>
   </data>
-  <data name="PropertyNameUser1" xml:space="preserve">
+  <data name="UserField" xml:space="preserve">
     <value>Pole użytkownika</value>
   </data>
   <data name="ProxyAddress" xml:space="preserve">
@@ -1158,25 +1155,25 @@ Załadowano nowy plik połączeń.</value>
   <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
-  <data name="RDP16777216Colors" xml:space="preserve">
+  <data name="Rdp16777216Colors" xml:space="preserve">
     <value>16777216 Kolorów (24-bir)</value>
   </data>
-  <data name="RDP256Colors" xml:space="preserve">
+  <data name="Rdp256Colors" xml:space="preserve">
     <value>256 Kolorów (8-bit)</value>
   </data>
-  <data name="RDP32768Colors" xml:space="preserve">
+  <data name="Rdp32768Colors" xml:space="preserve">
     <value>32768 Kolorów (15-bit)</value>
   </data>
-  <data name="RDP4294967296Colors" xml:space="preserve">
+  <data name="Rdp4294967296Colors" xml:space="preserve">
     <value>16777216 Kolorów (32-bit)</value>
   </data>
-  <data name="RDP65536Colors" xml:space="preserve">
+  <data name="Rdp65536Colors" xml:space="preserve">
     <value>65536 Kolorów (16-bit)</value>
   </data>
-  <data name="PropertyNameDisableCursorBlinking" xml:space="preserve">
+  <data name="DisableCursorBlinking" xml:space="preserve">
     <value>Wyłącz miganie kursora</value>
   </data>
-  <data name="PropertyNameDisableCursorShadow" xml:space="preserve">
+  <data name="DisableCursorShadow" xml:space="preserve">
     <value>Wyłącz cień kursora</value>
   </data>
   <data name="DisableMenuAnimations" xml:space="preserve">
@@ -1203,7 +1200,7 @@ Załadowano nowy plik połączeń.</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Inicjalizacja Winsock nie powiodła się.</value>
   </data>
-  <data name="RdpFitToPanel" xml:space="preserve">
+  <data name="FitToPanel" xml:space="preserve">
     <value>Dostosuj do panelu</value>
   </data>
   <data name="RdpGatewayIsSupported" xml:space="preserve">
@@ -1347,16 +1344,16 @@ Załadowano nowy plik połączeń.</value>
   <data name="SQLServer" xml:space="preserve">
     <value>Serwer SQL:</value>
   </data>
-  <data name="Ssh1" xml:space="preserve">
+  <data name="SshV1" xml:space="preserve">
     <value>SSH wersja 1</value>
   </data>
-  <data name="Ssh2" xml:space="preserve">
+  <data name="SshV2" xml:space="preserve">
     <value>SSH wersja 2</value>
   </data>
-  <data name="SSHStartTransferBG" xml:space="preserve">
+  <data name="SshBackgroundTransferFailed" xml:space="preserve">
     <value>Transfer SSH w tle nie powiódł się!</value>
   </data>
-  <data name="SSHTransferFailed" xml:space="preserve">
+  <data name="SshTransferFailed" xml:space="preserve">
     <value>Transfer SSH nie powiódł się.</value>
   </data>
   <data name="FirstIp" xml:space="preserve">

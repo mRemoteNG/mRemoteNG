@@ -64,7 +64,7 @@ namespace mRemoteNG.UI.Window
             ShowOnToolbarCheckBox.Text = Language.ShowOnToolbar;
             RunElevatedCheckBox.Text = Language.RunElevated;
 
-            PropertiesGroupBox.Text = Language.GroupboxExternalToolProperties;
+            PropertiesGroupBox.Text = Language.ExternalToolProperties;
 
             DisplayNameLabel.Text = Language.DisplayName;
             FilenameLabel.Text = Language.Filename;

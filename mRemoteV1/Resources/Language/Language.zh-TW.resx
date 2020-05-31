@@ -517,9 +517,6 @@ VncSharp Control 版本 {0}</value>
   <data name="Export" xml:space="preserve">
     <value>匯出</value>
   </data>
-  <data name="ExtApp" xml:space="preserve">
-    <value>結束 App</value>
-  </data>
   <data name="FilterAll" xml:space="preserve">
     <value>所有檔案 (*.*)</value>
   </data>
@@ -556,7 +553,7 @@ VncSharp Control 版本 {0}</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>自動重新連線</value>
   </data>
-  <data name="GroupboxExternalToolProperties" xml:space="preserve">
+  <data name="ExternalToolProperties" xml:space="preserve">
     <value>外部工具內容</value>
   </data>
   <data name="Files" xml:space="preserve">
@@ -826,7 +823,7 @@ VncSharp Control 版本 {0}</value>
   <data name="SmartSize" xml:space="preserve">
     <value>智慧大小 (RDP/VNC)</value>
   </data>
-  <data name="SSHFileTransfer" xml:space="preserve">
+  <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH 檔案傳輸</value>
   </data>
   <data name="StartChat" xml:space="preserve">
@@ -920,7 +917,7 @@ VncSharp Control 版本 {0}</value>
   <data name="PanelName" xml:space="preserve">
     <value>面板名稱</value>
   </data>
-  <data name="PropertyNamePasswordProtect" xml:space="preserve">
+  <data name="PasswordProtect" xml:space="preserve">
     <value>密碼保護</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
@@ -1085,22 +1082,22 @@ VncSharp Control 版本 {0}</value>
   <data name="All" xml:space="preserve">
     <value>所有</value>
   </data>
-  <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="AuthenticationLevel" xml:space="preserve">
     <value>伺服器驗證</value>
   </data>
-  <data name="PropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="AuthenticationMode" xml:space="preserve">
     <value>驗證模式</value>
   </data>
-  <data name="PropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="CacheBitmaps" xml:space="preserve">
     <value>快取點陣圖</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>色彩</value>
   </data>
-  <data name="PropertyNameCompression" xml:space="preserve">
+  <data name="Compression" xml:space="preserve">
     <value>壓縮</value>
   </data>
-  <data name="PropertyNameDescription" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>描述</value>
   </data>
   <data name="DisplayThemes" xml:space="preserve">
@@ -1109,28 +1106,28 @@ VncSharp Control 版本 {0}</value>
   <data name="DisplayWallpaper" xml:space="preserve">
     <value>顯示底色圖案</value>
   </data>
-  <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="EnableDesktopComposition" xml:space="preserve">
     <value>桌面壓縮</value>
   </data>
-  <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="FontSmoothing" xml:space="preserve">
     <value>字型平滑</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>編碼</value>
   </data>
-  <data name="PropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="EncryptionStrength" xml:space="preserve">
     <value>加密長度</value>
   </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>外部工具</value>
   </data>
-  <data name="PropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="ExternalToolAfter" xml:space="preserve">
     <value>外部工具之後</value>
   </data>
-  <data name="PropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="ExternalToolBefore" xml:space="preserve">
     <value>外部工具之前</value>
   </data>
-  <data name="PropertyNameMACAddress" xml:space="preserve">
+  <data name="MacAddress" xml:space="preserve">
     <value>MAC 位址</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -1145,61 +1142,61 @@ VncSharp Control 版本 {0}</value>
   <data name="Port" xml:space="preserve">
     <value>連接埠</value>
   </data>
-  <data name="PropertyNamePuttySession" xml:space="preserve">
+  <data name="PuttySession" xml:space="preserve">
     <value>PuTTY 工作階段</value>
   </data>
-  <data name="PropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="RdpGatewayDomain" xml:space="preserve">
     <value>閘道網域</value>
   </data>
-  <data name="PropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="RdpGatewayHostname" xml:space="preserve">
     <value>閘道主機名稱</value>
   </data>
-  <data name="PropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="RdpGatewayPassword" xml:space="preserve">
     <value>遠端桌面閘道密碼</value>
   </data>
-  <data name="PropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="RdpGatewayUsageMethod" xml:space="preserve">
     <value>使用閘道</value>
   </data>
-  <data name="PropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
     <value>閘道認證</value>
   </data>
-  <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="RdpGatewayUsername" xml:space="preserve">
     <value>閘道使用者名稱</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>磁碟機</value>
   </data>
-  <data name="PropertyNameRedirectKeys" xml:space="preserve">
+  <data name="RedirectKeys" xml:space="preserve">
     <value>按鍵組合</value>
   </data>
   <data name="Ports" xml:space="preserve">
     <value>連接埠</value>
   </data>
-  <data name="PropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="RedirectPrinters" xml:space="preserve">
     <value>印表機</value>
   </data>
-  <data name="PropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="SmartCards" xml:space="preserve">
     <value>智慧卡</value>
   </data>
-  <data name="PropertyNameRedirectSounds" xml:space="preserve">
+  <data name="RedirectSounds" xml:space="preserve">
     <value>音訊</value>
   </data>
-  <data name="PropertyNameRenderingEngine" xml:space="preserve">
+  <data name="RenderingEngine" xml:space="preserve">
     <value>轉譯引擎</value>
   </data>
-  <data name="PropertyNameResolution" xml:space="preserve">
+  <data name="Resolution" xml:space="preserve">
     <value>解析度</value>
   </data>
-  <data name="PropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="SmartSizeMode" xml:space="preserve">
     <value>智慧大小模式</value>
   </data>
-  <data name="PropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="UseConsoleSession" xml:space="preserve">
     <value>使用 Console 工作階段</value>
   </data>
-  <data name="PropertyNameUseCredSsp" xml:space="preserve">
+  <data name="UseCredSsp" xml:space="preserve">
     <value>使用 CredSSP</value>
   </data>
-  <data name="PropertyNameUser1" xml:space="preserve">
+  <data name="UserField" xml:space="preserve">
     <value>使用者欄位</value>
   </data>
   <data name="ProxyAddress" xml:space="preserve">
@@ -1298,31 +1295,31 @@ VncSharp Control 版本 {0}</value>
   <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
-  <data name="RDP16777216Colors" xml:space="preserve">
+  <data name="Rdp16777216Colors" xml:space="preserve">
     <value>16777216 色 (24 位元)</value>
   </data>
-  <data name="RDP256Colors" xml:space="preserve">
+  <data name="Rdp256Colors" xml:space="preserve">
     <value>256 色 (8 位元)</value>
   </data>
-  <data name="RDP32768Colors" xml:space="preserve">
+  <data name="Rdp32768Colors" xml:space="preserve">
     <value>32768 色 (15 位元)</value>
   </data>
-  <data name="RDP4294967296Colors" xml:space="preserve">
+  <data name="Rdp4294967296Colors" xml:space="preserve">
     <value>16777216 色 (32 位元)</value>
   </data>
-  <data name="RDP65536Colors" xml:space="preserve">
+  <data name="Rdp65536Colors" xml:space="preserve">
     <value>65536 色 (16 位元)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>無法建立 RDP 控制，請檢查 mRemoteNG 需求。</value>
   </data>
-  <data name="PropertyNameDisableCursorBlinking" xml:space="preserve">
+  <data name="DisableCursorBlinking" xml:space="preserve">
     <value>停用游標閃爍</value>
   </data>
-  <data name="PropertyNameDisableCursorShadow" xml:space="preserve">
+  <data name="DisableCursorShadow" xml:space="preserve">
     <value>停用游標陰影</value>
   </data>
-  <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
+  <data name="DisableFullWindowDrag" xml:space="preserve">
     <value>停用完整視窗拖曳</value>
   </data>
   <data name="DisableMenuAnimations" xml:space="preserve">
@@ -1361,7 +1358,7 @@ VncSharp Control 版本 {0}</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Winsock 初始化錯誤。</value>
   </data>
-  <data name="RdpFitToPanel" xml:space="preserve">
+  <data name="FitToPanel" xml:space="preserve">
     <value>符合面板</value>
   </data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1520,16 +1517,16 @@ VncSharp Control 版本 {0}</value>
   <data name="SQLServer" xml:space="preserve">
     <value>SQL 伺服器</value>
   </data>
-  <data name="Ssh1" xml:space="preserve">
+  <data name="SshV1" xml:space="preserve">
     <value>SSH 版本 1</value>
   </data>
-  <data name="Ssh2" xml:space="preserve">
+  <data name="SshV2" xml:space="preserve">
     <value>SSH 版本 2</value>
   </data>
-  <data name="SSHStartTransferBG" xml:space="preserve">
+  <data name="SshBackgroundTransferFailed" xml:space="preserve">
     <value>SSH 背景傳輸失敗!</value>
   </data>
-  <data name="SSHTransferFailed" xml:space="preserve">
+  <data name="SshTransferFailed" xml:space="preserve">
     <value>SSH 傳輸失敗。</value>
   </data>
   <data name="FirstIp" xml:space="preserve">

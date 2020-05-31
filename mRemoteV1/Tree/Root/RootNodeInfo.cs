@@ -40,7 +40,7 @@ namespace mRemoteNG.Tree.Root
         
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous)),
          Browsable(true),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNamePasswordProtect)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PasswordProtect)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPasswordProtect)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public new bool Password { get; set; }

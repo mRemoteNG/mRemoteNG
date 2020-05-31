@@ -544,9 +544,6 @@ Starte mit neuer Datei.</value>
   <data name="Export" xml:space="preserve">
     <value>Exportieren</value>
   </data>
-  <data name="ExtApp" xml:space="preserve">
-    <value>Externes Programm</value>
-  </data>
   <data name="FilterAll" xml:space="preserve">
     <value>Alle Dateien (*.*)</value>
   </data>
@@ -583,7 +580,7 @@ Starte mit neuer Datei.</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisches Wiederverbinden</value>
   </data>
-  <data name="GroupboxExternalToolProperties" xml:space="preserve">
+  <data name="ExternalToolProperties" xml:space="preserve">
     <value>Eigenschaften des externen Programmes</value>
   </data>
   <data name="Files" xml:space="preserve">
@@ -850,7 +847,7 @@ Starte mit neuer Datei.</value>
   <data name="SmartSize" xml:space="preserve">
     <value>Smart-Size-Modus (RDP/VNC)</value>
   </data>
-  <data name="SSHFileTransfer" xml:space="preserve">
+  <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH-Dateiübertragung</value>
   </data>
   <data name="StartChat" xml:space="preserve">
@@ -944,7 +941,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="PanelName" xml:space="preserve">
     <value>Panel-Name</value>
   </data>
-  <data name="PropertyNamePasswordProtect" xml:space="preserve">
+  <data name="PasswordProtect" xml:space="preserve">
     <value>Passwortschutz</value>
   </data>
   <data name="PleaseFillAllFields" xml:space="preserve">
@@ -1109,22 +1106,22 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="All" xml:space="preserve">
     <value>Alles</value>
   </data>
-  <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="AuthenticationLevel" xml:space="preserve">
     <value>Serverauthentifizierung</value>
   </data>
-  <data name="PropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="AuthenticationMode" xml:space="preserve">
     <value>Authentifizierungsmodus</value>
   </data>
-  <data name="PropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="CacheBitmaps" xml:space="preserve">
     <value>Bitmaps zwischenspeichern</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>Farben</value>
   </data>
-  <data name="PropertyNameCompression" xml:space="preserve">
+  <data name="Compression" xml:space="preserve">
     <value>Komprimierung</value>
   </data>
-  <data name="PropertyNameDescription" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Beschreibung</value>
   </data>
   <data name="DisplayThemes" xml:space="preserve">
@@ -1133,28 +1130,28 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="DisplayWallpaper" xml:space="preserve">
     <value>Hintergrundbild anzeigen</value>
   </data>
-  <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="EnableDesktopComposition" xml:space="preserve">
     <value>Desktopgestaltung</value>
   </data>
-  <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="FontSmoothing" xml:space="preserve">
     <value>Schriftglättung</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>Codierung</value>
   </data>
-  <data name="PropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="EncryptionStrength" xml:space="preserve">
     <value>Verschlüsselungsstärke</value>
   </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Externes Programm</value>
   </data>
-  <data name="PropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="ExternalToolAfter" xml:space="preserve">
     <value>Externes Programm nachher</value>
   </data>
-  <data name="PropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="ExternalToolBefore" xml:space="preserve">
     <value>Externes Programm vorher</value>
   </data>
-  <data name="PropertyNameMACAddress" xml:space="preserve">
+  <data name="MacAddress" xml:space="preserve">
     <value>MAC-Adresse</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -1169,61 +1166,61 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="Port" xml:space="preserve">
     <value>Port</value>
   </data>
-  <data name="PropertyNamePuttySession" xml:space="preserve">
+  <data name="PuttySession" xml:space="preserve">
     <value>PuTTY-Sitzung</value>
   </data>
-  <data name="PropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="RdpGatewayDomain" xml:space="preserve">
     <value>Gateway-Domäne</value>
   </data>
-  <data name="PropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="RdpGatewayHostname" xml:space="preserve">
     <value>Gateway-Hostname</value>
   </data>
-  <data name="PropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="RdpGatewayPassword" xml:space="preserve">
     <value>Gateway-Passwort</value>
   </data>
-  <data name="PropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="RdpGatewayUsageMethod" xml:space="preserve">
     <value>Verwende Gateway</value>
   </data>
-  <data name="PropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Gateway-Anmeldedaten</value>
   </data>
-  <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="RdpGatewayUsername" xml:space="preserve">
     <value>Gateway-Benutzername</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Festplatten</value>
   </data>
-  <data name="PropertyNameRedirectKeys" xml:space="preserve">
+  <data name="RedirectKeys" xml:space="preserve">
     <value>Tastenkombinationen</value>
   </data>
   <data name="Ports" xml:space="preserve">
     <value>Ports</value>
   </data>
-  <data name="PropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="RedirectPrinters" xml:space="preserve">
     <value>Drucker</value>
   </data>
-  <data name="PropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="SmartCards" xml:space="preserve">
     <value>Smartcards</value>
   </data>
-  <data name="PropertyNameRedirectSounds" xml:space="preserve">
+  <data name="RedirectSounds" xml:space="preserve">
     <value>Töne</value>
   </data>
-  <data name="PropertyNameRenderingEngine" xml:space="preserve">
+  <data name="RenderingEngine" xml:space="preserve">
     <value>Rendering Engine</value>
   </data>
-  <data name="PropertyNameResolution" xml:space="preserve">
+  <data name="Resolution" xml:space="preserve">
     <value>Auflösung</value>
   </data>
-  <data name="PropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="SmartSizeMode" xml:space="preserve">
     <value>Smart-Size-Modus</value>
   </data>
-  <data name="PropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="UseConsoleSession" xml:space="preserve">
     <value>Verwende Konsole</value>
   </data>
-  <data name="PropertyNameUseCredSsp" xml:space="preserve">
+  <data name="UseCredSsp" xml:space="preserve">
     <value>Verwenden Sie CredSSP</value>
   </data>
-  <data name="PropertyNameUser1" xml:space="preserve">
+  <data name="UserField" xml:space="preserve">
     <value>Benutzerfeld</value>
   </data>
   <data name="ProxyAddress" xml:space="preserve">
@@ -1318,31 +1315,31 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
-  <data name="RDP16777216Colors" xml:space="preserve">
+  <data name="Rdp16777216Colors" xml:space="preserve">
     <value>16777216 Farben (24Bit)</value>
   </data>
-  <data name="RDP256Colors" xml:space="preserve">
+  <data name="Rdp256Colors" xml:space="preserve">
     <value>256 Farben (8Bit)</value>
   </data>
-  <data name="RDP32768Colors" xml:space="preserve">
+  <data name="Rdp32768Colors" xml:space="preserve">
     <value>32768 Farben (15Bit)</value>
   </data>
-  <data name="RDP4294967296Colors" xml:space="preserve">
+  <data name="Rdp4294967296Colors" xml:space="preserve">
     <value>16777216 Farben (32Bit)</value>
   </data>
-  <data name="RDP65536Colors" xml:space="preserve">
+  <data name="Rdp65536Colors" xml:space="preserve">
     <value>65536 Farben (16Bit)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Konte das RDP-Plugin nicht einbinden, bitte prüfen Sie die mRemoteNG-Voraussetzungen.</value>
   </data>
-  <data name="PropertyNameDisableCursorBlinking" xml:space="preserve">
+  <data name="DisableCursorBlinking" xml:space="preserve">
     <value>Cursor-Blinken abschalten</value>
   </data>
-  <data name="PropertyNameDisableCursorShadow" xml:space="preserve">
+  <data name="DisableCursorShadow" xml:space="preserve">
     <value>Cursorschatten deaktivieren</value>
   </data>
-  <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
+  <data name="DisableFullWindowDrag" xml:space="preserve">
     <value>Fensterinhalt beim Ziehen nicht anzeigen</value>
   </data>
   <data name="DisableMenuAnimations" xml:space="preserve">
@@ -1381,7 +1378,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Winsock-Initialisierung fehlgeschlagen!</value>
   </data>
-  <data name="RdpFitToPanel" xml:space="preserve">
+  <data name="FitToPanel" xml:space="preserve">
     <value>An Panel anpassen</value>
   </data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1540,16 +1537,16 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="SQLServer" xml:space="preserve">
     <value>SQL-Server:</value>
   </data>
-  <data name="Ssh1" xml:space="preserve">
+  <data name="SshV1" xml:space="preserve">
     <value>SSH Version 1</value>
   </data>
-  <data name="Ssh2" xml:space="preserve">
+  <data name="SshV2" xml:space="preserve">
     <value>SSH Version 2</value>
   </data>
-  <data name="SSHStartTransferBG" xml:space="preserve">
+  <data name="SshBackgroundTransferFailed" xml:space="preserve">
     <value>SSH Übertragung im Hintergrund fehlgeschlagen!</value>
   </data>
-  <data name="SSHTransferFailed" xml:space="preserve">
+  <data name="SshTransferFailed" xml:space="preserve">
     <value>SSH-Übertragung fehlgeschlagen.</value>
   </data>
   <data name="FirstIp" xml:space="preserve">
@@ -1796,7 +1793,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="PropertyDescriptionLoadBalanceInfo" xml:space="preserve">
     <value>Gibt die Lastausgleichsinformationen an, die von Lastenausgleichsroutern verwendet werden, um den besten Server auszuwählen.</value>
   </data>
-  <data name="PropertyNameLoadBalanceInfo" xml:space="preserve">
+  <data name="LoadBalanceInfo" xml:space="preserve">
     <value>Lastausgleichsinfo</value>
   </data>
   <data name="TitlePasswordWithName" xml:space="preserve">
@@ -1847,7 +1844,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="TimeoutInSeconds" xml:space="preserve">
     <value>Time-Out [Sekunden]</value>
   </data>
-  <data name="PropertyNameAutomaticResize" xml:space="preserve">
+  <data name="AutomaticResize" xml:space="preserve">
     <value>Automatische Größenänderung</value>
   </data>
   <data name="ShowOnToolbar" xml:space="preserve">
@@ -1892,7 +1889,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>Die Anzahl der Minuten, die die RDP-Sitzung im Leerlauf verbleibt, bevor sie automatisch getrennt wird (0 bedeutet kein Limit)</value>
   </data>
-  <data name="PropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+  <data name="MinutesToIdleTimeout" xml:space="preserve">
     <value>Minuten zum Leerlauf</value>
   </data>
   <data name="Add" xml:space="preserve">
@@ -1904,7 +1901,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Wählen Sie, ob eine Benachrichtigung empfangen werden soll, nachdem die RDP-Sitzung aufgrund von Inaktivität getrennt wurde</value>
   </data>
-  <data name="PropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+  <data name="RdpAlertIdleTimeout" xml:space="preserve">
     <value>Benachrichtigung bei Leerlauftrennung</value>
   </data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
@@ -2021,7 +2018,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="OptionsThemeChangeWarning" xml:space="preserve">
     <value>Warnung: Ein Neustart ist erforderlich, um Änderungen am Theme anzuwenden.</value>
   </data>
-  <data name="PropertyNameRedirectClipboard" xml:space="preserve">
+  <data name="RedirectClipboard" xml:space="preserve">
     <value>Zwischenablage</value>
   </data>
   <data name="PropertyDescriptionRedirectClipboard" xml:space="preserve">
@@ -2033,7 +2030,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="PropertyDescriptionFavorite" xml:space="preserve">
     <value>Zeige diese Verbindung in den Favoriten</value>
   </data>
-  <data name="PropertyNameFavorite" xml:space="preserve">
+  <data name="Favorite" xml:space="preserve">
     <value>Favorit</value>
   </data>
   <data name="Favorites" xml:space="preserve">
@@ -2048,7 +2045,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="DoNotTrimUsername" xml:space="preserve">
     <value>Leerzeichen nicht aus Benutzernamen entfernen</value>
   </data>
-  <data name="PropertyNameUseVmId" xml:space="preserve">
+  <data name="UseVmId" xml:space="preserve">
     <value>Benutze VM ID</value>
   </data>
   <data name="PropertyDescriptionUseVmId" xml:space="preserve">
@@ -2069,22 +2066,22 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="PropertyDescriptionSSHOptions" xml:space="preserve">
     <value>Geben Sie hier zusaetzliche Optionen an welche fuer die SSH Verbindung verwendet werden sollen. Fuer weitere Infos zu den moeglichen Optionen konsultieren sie die Putty Dokumentation.</value>
   </data>
-  <data name="SSHTunnelConfigProblem" xml:space="preserve">
+  <data name="SshTunnelConfigProblem" xml:space="preserve">
     <value>Konfigurationsfehler der Verbindung. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Eine Verbindung mit dem als SSH Tunnel konfiguriertem Namen konnte nicht gefunden werden. Löschen Sie die SSH Tunnel Konfiguration or geben sie eine existierende SSH Verbindung an, welche zum Aufbau eine Tunnels zum Erreichen des eigentlichen Zielsystems verwendet werden soll.</value>
   </data>
-  <data name="SSHTunnelIsNotPutty" xml:space="preserve">
+  <data name="SshTunnelIsNotPutty" xml:space="preserve">
     <value>Konfigurationsfehler des SSH Tunnel. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Die als SSH Tunnel konfigurierte Verbindung wurde zwar gefunden, aber das zugehörige Protokoll ist nicht von Putty abgeleitet. Stellen Sie sicher dass die als SSH Tunnel konfigurierte Verbindung das SSH version 1 oder 2 Protokoll verwendet.</value>
   </data>
-  <data name="SSHTunnelNotInitialized" xml:space="preserve">
+  <data name="SshTunnelNotInitialized" xml:space="preserve">
     <value>Initialisierungsproblem des SSH Tunnel. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Initialisierung der SSH Verbindung fehlgeschlagen. Überprüfen Sie die als SSH Tunnel konfigurierte Verbindung auf etwaige Probleme.</value>
   </data>
-  <data name="SSHTunnelNotConnected" xml:space="preserve">
+  <data name="SshTunnelNotConnected" xml:space="preserve">
     <value>Verbindungsproblem des SSH Tunnel. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. SSH Verbindungsaufbau fehlgeschlagen. Überprüfen Sie die als SSH Tunnel konfigurierte Verbindung auf etwaige Probleme.</value>
   </data>
-  <data name="SSHTunnelFailed" xml:space="preserve">
+  <data name="SshTunnelFailed" xml:space="preserve">
     <value>SSH Tunnel Verbindung fehlgeschlagen. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Putty Prozess vorzeitig beendet. Überprüfen Sie die als SSH Tunnel konfigurierte Verbindung auf etwaige Probleme.</value>
   </data>
-  <data name="SSHTunnelPortNotReadyInTime" xml:space="preserve">
+  <data name="SshTunnelPortNotReadyInTime" xml:space="preserve">
     <value>Zeitüberschreitung des SSH Tunnel. Verbindung zu: "{0}" via SSH Tunnel: "{1}" nicht möglich. Lokaler Tunnel Port nicht vor Ablauf der Zeitüberschreitung verfügbar. Überprüfen Sie die als SSH Tunnel konfigurierte Verbindung auf etwaige Probleme.</value>
   </data>
   <data name="StartMinimized" xml:space="preserve">

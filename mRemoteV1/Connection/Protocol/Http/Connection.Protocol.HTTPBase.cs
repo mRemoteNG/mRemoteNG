@@ -164,7 +164,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.HTTPFailedURLBuild, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpFailedUrlBuild, ex);
                 return string.Empty;
             }
         }

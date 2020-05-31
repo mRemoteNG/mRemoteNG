@@ -590,9 +590,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="_ExportToFile" xml:space="preserve">
     <value>&amp;Export to File...</value>
   </data>
-  <data name="ExtApp" xml:space="preserve">
-    <value>Ext. App</value>
-  </data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>New External Tool</value>
   </data>
@@ -644,7 +641,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>Automatic Reconnect</value>
   </data>
-  <data name="GroupboxExternalToolProperties" xml:space="preserve">
+  <data name="ExternalToolProperties" xml:space="preserve">
     <value>External Tool Properties</value>
   </data>
   <data name="Files" xml:space="preserve">
@@ -938,7 +935,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="SmartSize" xml:space="preserve">
     <value>SmartSize (RDP/VNC)</value>
   </data>
-  <data name="SSHFileTransfer" xml:space="preserve">
+  <data name="SshFileTransfer" xml:space="preserve">
     <value>SSH File Transfer</value>
   </data>
   <data name="StartChat" xml:space="preserve">
@@ -1041,7 +1038,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PanelName" xml:space="preserve">
     <value>Panel Name</value>
   </data>
-  <data name="PropertyNamePasswordProtect" xml:space="preserve">
+  <data name="PasswordProtect" xml:space="preserve">
     <value>Password protect</value>
   </data>
   <data name="PasswordStatusMustMatch" xml:space="preserve">
@@ -1227,25 +1224,25 @@ If you run into such an error, please create a new connection file!</value>
   <data name="All" xml:space="preserve">
     <value>All</value>
   </data>
-  <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="AuthenticationLevel" xml:space="preserve">
     <value>Server Authentication</value>
   </data>
-  <data name="PropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="AuthenticationMode" xml:space="preserve">
     <value>Authentication mode</value>
   </data>
-  <data name="PropertyNameAutomaticResize" xml:space="preserve">
+  <data name="AutomaticResize" xml:space="preserve">
     <value>Automatic resize</value>
   </data>
-  <data name="PropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="CacheBitmaps" xml:space="preserve">
     <value>Cache Bitmaps</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>Colours</value>
   </data>
-  <data name="PropertyNameCompression" xml:space="preserve">
+  <data name="Compression" xml:space="preserve">
     <value>Compression</value>
   </data>
-  <data name="PropertyNameDescription" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
   <data name="DisplayThemes" xml:space="preserve">
@@ -1254,31 +1251,31 @@ If you run into such an error, please create a new connection file!</value>
   <data name="DisplayWallpaper" xml:space="preserve">
     <value>Display Wallpaper</value>
   </data>
-  <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="EnableDesktopComposition" xml:space="preserve">
     <value>Desktop Composition</value>
   </data>
-  <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="FontSmoothing" xml:space="preserve">
     <value>Font Smoothing</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>Encoding</value>
   </data>
-  <data name="PropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="EncryptionStrength" xml:space="preserve">
     <value>Encryption Strength</value>
   </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>External Tool</value>
   </data>
-  <data name="PropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="ExternalToolAfter" xml:space="preserve">
     <value>External Tool After</value>
   </data>
-  <data name="PropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="ExternalToolBefore" xml:space="preserve">
     <value>External Tool Before</value>
   </data>
-  <data name="PropertyNameLoadBalanceInfo" xml:space="preserve">
+  <data name="LoadBalanceInfo" xml:space="preserve">
     <value>Load Balance Info</value>
   </data>
-  <data name="PropertyNameMACAddress" xml:space="preserve">
+  <data name="MacAddress" xml:space="preserve">
     <value>MAC Address</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -1293,67 +1290,67 @@ If you run into such an error, please create a new connection file!</value>
   <data name="Port" xml:space="preserve">
     <value>Port</value>
   </data>
-  <data name="PropertyNamePuttySession" xml:space="preserve">
+  <data name="PuttySession" xml:space="preserve">
     <value>PuTTY Session</value>
   </data>
-  <data name="PropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="RdpGatewayDomain" xml:space="preserve">
     <value>Gateway Domain</value>
   </data>
-  <data name="PropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="RdpGatewayHostname" xml:space="preserve">
     <value>Gateway Hostname</value>
   </data>
-  <data name="PropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="RdpGatewayPassword" xml:space="preserve">
     <value>Remote Desktop Gateway Password</value>
   </data>
-  <data name="PropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="RdpGatewayUsageMethod" xml:space="preserve">
     <value>Use Gateway</value>
   </data>
-  <data name="PropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Gateway Credentials</value>
   </data>
-  <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="RdpGatewayUsername" xml:space="preserve">
     <value>Gateway Username</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Disk Drives</value>
   </data>
-  <data name="PropertyNameRedirectKeys" xml:space="preserve">
+  <data name="RedirectKeys" xml:space="preserve">
     <value>Key Combinations</value>
   </data>
   <data name="Ports" xml:space="preserve">
     <value>Ports</value>
   </data>
-  <data name="PropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="RedirectPrinters" xml:space="preserve">
     <value>Printers</value>
   </data>
-  <data name="PropertyNameRedirectClipboard" xml:space="preserve">
+  <data name="RedirectClipboard" xml:space="preserve">
     <value>Clipboard</value>
   </data>
-  <data name="PropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="SmartCards" xml:space="preserve">
     <value>Smart Cards</value>
   </data>
-  <data name="PropertyNameRedirectSounds" xml:space="preserve">
+  <data name="RedirectSounds" xml:space="preserve">
     <value>Sounds</value>
   </data>
-  <data name="PropertyNameRedirectAudioCapture" xml:space="preserve">
+  <data name="RedirectAudioCapture" xml:space="preserve">
     <value>Audio Capture</value>
   </data>
-  <data name="PropertyNameRenderingEngine" xml:space="preserve">
+  <data name="RenderingEngine" xml:space="preserve">
     <value>Rendering Engine</value>
   </data>
-  <data name="PropertyNameResolution" xml:space="preserve">
+  <data name="Resolution" xml:space="preserve">
     <value>Resolution</value>
   </data>
-  <data name="PropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="SmartSizeMode" xml:space="preserve">
     <value>SmartSize Mode</value>
   </data>
-  <data name="PropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="UseConsoleSession" xml:space="preserve">
     <value>Use Console Session</value>
   </data>
-  <data name="PropertyNameUseCredSsp" xml:space="preserve">
+  <data name="UseCredSsp" xml:space="preserve">
     <value>Use CredSSP</value>
   </data>
-  <data name="PropertyNameUser1" xml:space="preserve">
+  <data name="UserField" xml:space="preserve">
     <value>User Field</value>
   </data>
   <data name="ProxyAddress" xml:space="preserve">
@@ -1450,31 +1447,31 @@ If you run into such an error, please create a new connection file!</value>
   <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
-  <data name="RDP16777216Colors" xml:space="preserve">
+  <data name="Rdp16777216Colors" xml:space="preserve">
     <value>16777216 Colours (24-bit)</value>
   </data>
-  <data name="RDP256Colors" xml:space="preserve">
+  <data name="Rdp256Colors" xml:space="preserve">
     <value>256 Colours (8-bit)</value>
   </data>
-  <data name="RDP32768Colors" xml:space="preserve">
+  <data name="Rdp32768Colors" xml:space="preserve">
     <value>32768 Colours (15-bit)</value>
   </data>
-  <data name="RDP4294967296Colors" xml:space="preserve">
+  <data name="Rdp4294967296Colors" xml:space="preserve">
     <value>16777216 Colours (32-bit)</value>
   </data>
-  <data name="RDP65536Colors" xml:space="preserve">
+  <data name="Rdp65536Colors" xml:space="preserve">
     <value>65536 Colours (16-bit)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Couldn't create RDP control, please check mRemoteNG requirements.</value>
   </data>
-  <data name="PropertyNameDisableCursorBlinking" xml:space="preserve">
+  <data name="DisableCursorBlinking" xml:space="preserve">
     <value>Disable Cursor blinking</value>
   </data>
-  <data name="PropertyNameDisableCursorShadow" xml:space="preserve">
+  <data name="DisableCursorShadow" xml:space="preserve">
     <value>Disable Cursor Shadow</value>
   </data>
-  <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
+  <data name="DisableFullWindowDrag" xml:space="preserve">
     <value>Disable Full Window drag</value>
   </data>
   <data name="DisableMenuAnimations" xml:space="preserve">
@@ -1513,7 +1510,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Winsock initialization error.</value>
   </data>
-  <data name="RdpFitToPanel" xml:space="preserve">
+  <data name="FitToPanel" xml:space="preserve">
     <value>Fit To Panel</value>
   </data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1672,16 +1669,16 @@ If you run into such an error, please create a new connection file!</value>
   <data name="SQLServer" xml:space="preserve">
     <value>SQL Server</value>
   </data>
-  <data name="Ssh1" xml:space="preserve">
+  <data name="SshV1" xml:space="preserve">
     <value>SSH version 1</value>
   </data>
-  <data name="Ssh2" xml:space="preserve">
+  <data name="SshV2" xml:space="preserve">
     <value>SSH version 2</value>
   </data>
-  <data name="SSHStartTransferBG" xml:space="preserve">
+  <data name="SshBackgroundTransferFailed" xml:space="preserve">
     <value>SSH background transfer failed!</value>
   </data>
-  <data name="SSHTransferFailed" xml:space="preserve">
+  <data name="SshTransferFailed" xml:space="preserve">
     <value>SSH transfer failed.</value>
   </data>
   <data name="FirstIp" xml:space="preserve">
@@ -1892,7 +1889,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
     <value>The number of minutes for the RDP session to sit idle before automatically disconnecting (for no limit use 0)</value>
   </data>
-  <data name="PropertyNameRDPMinutesToIdleTimeout" xml:space="preserve">
+  <data name="MinutesToIdleTimeout" xml:space="preserve">
     <value>Minutes to Idle</value>
   </data>
   <data name="Add" xml:space="preserve">
@@ -1907,7 +1904,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Select whether to receive an alert after the RDP session disconnects due to inactivity</value>
   </data>
-  <data name="PropertyNameRDPAlertIdleTimeout" xml:space="preserve">
+  <data name="RdpAlertIdleTimeout" xml:space="preserve">
     <value>Alert on Idle disconnect</value>
   </data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
@@ -2135,16 +2132,16 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="Proxy" xml:space="preserve">
     <value>Proxy</value>
   </data>
-  <data name="MultiSSH" xml:space="preserve">
+  <data name="MultiSsh" xml:space="preserve">
     <value>Multi SSH:</value>
   </data>
-  <data name="MultiSSHToolTip" xml:space="preserve">
+  <data name="MultiSshToolTip" xml:space="preserve">
     <value>Press ENTER to send. Ctrl+C is sent immediately.</value>
   </data>
   <data name="PropertyDescriptionFavorite" xml:space="preserve">
     <value>Show this connection in the favorites menu.</value>
   </data>
-  <data name="PropertyNameFavorite" xml:space="preserve">
+  <data name="Favorite" xml:space="preserve">
     <value>Favorite</value>
   </data>
   <data name="Favorites" xml:space="preserve">
@@ -2174,7 +2171,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="PropertyDescriptionRdpVersion" xml:space="preserve">
     <value>Sets the version of RDP to use when opening connections.</value>
   </data>
-  <data name="PropertyNameRdpVersion" xml:space="preserve">
+  <data name="RdpVersion" xml:space="preserve">
     <value>RDP Version</value>
   </data>
   <data name="PropertyDescriptionUseVmId" xml:space="preserve">
@@ -2183,10 +2180,10 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="PropertyDescriptionVmId" xml:space="preserve">
     <value>The ID of the Hyper-V virtual machine to connect to.</value>
   </data>
-  <data name="PropertyNameUseVmId" xml:space="preserve">
+  <data name="UseVmId" xml:space="preserve">
     <value>Use VM ID</value>
   </data>
-  <data name="PropertyNameVmId" xml:space="preserve">
+  <data name="VmId" xml:space="preserve">
     <value>VM ID</value>
   </data>
   <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
@@ -2195,31 +2192,31 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="PropertyDescriptionSSHTunnelConnection" xml:space="preserve">
     <value>For connection through a SSH tunnel (jump host) specify SSH connection to be used to establish SSH tunnel.</value>
   </data>
-  <data name="PropertyNameSSHTunnelConnection" xml:space="preserve">
+  <data name="SshTunnel" xml:space="preserve">
     <value>SSH Tunnel</value>
   </data>
   <data name="PropertyDescriptionSSHOptions" xml:space="preserve">
     <value>Specify here additional options to be used for SSH connection. See putty documentation for further details.</value>
   </data>
-  <data name="PropertyNameSSHOptions" xml:space="preserve">
+  <data name="SshOptions" xml:space="preserve">
     <value>SSH Options</value>
   </data>
-  <data name="SSHTunnelConfigProblem" xml:space="preserve">
-    <value>Connection configuration problem. Connection to: "{0}" via SSH Tunnel: "{1}" not possible. A connection with the name configured as SSH Tunnel and protocol SSH version 1 or SSH2 version 2 cannot be found in the connection tree. Clear SSH Tunnel configuration or specify existing SSH connection.</value>
+  <data name="SshTunnelConfigProblem" xml:space="preserve">
+    <value>SSH Tunnel connection configuration problem. Connection to: "{0}" via SSH Tunnel: "{1}" not possible. A connection with the name configured as SSH Tunnel and protocol SSH version 1 or SSH2 version 2 cannot be found in the connection tree. Clear SSH Tunnel configuration or specify existing SSH connection.</value>
   </data>
-  <data name="SSHTunnelIsNotPutty" xml:space="preserve">
+  <data name="SshTunnelIsNotPutty" xml:space="preserve">
     <value>SSH tunnel configuration problem. Connection to: "{0}" via SSH Tunnel: "{1}" not possible. Connection configured as SSH Tunnel found in tree, but protocol is not derived from putty. Make sure connection configured as SSH Tunnel is using SSH protocol.</value>
   </data>
-  <data name="SSHTunnelNotInitialized" xml:space="preserve">
+  <data name="SshTunnelNotInitialized" xml:space="preserve">
     <value>SSH tunnel initialization problem. Connection to: "{0}" via SSH Tunnel: "{1}" not possible. SSH connection could not be initialized. Check for any problems with the connection configured as SSH Tunnel.</value>
   </data>
-  <data name="SSHTunnelNotConnected" xml:space="preserve">
+  <data name="SshTunnelNotConnected" xml:space="preserve">
     <value>SSH tunnel connection problem. Connection to: "{0}" via SSH Tunnel: "{1}" not possible. SSH connection failed. Check for any problems with the connection configured as SSH Tunnel.</value>
   </data>
-  <data name="SSHTunnelFailed" xml:space="preserve">
+  <data name="SshTunnelFailed" xml:space="preserve">
     <value>SSH tunnel connection failed. Connection to: "{0}" via SSH Tunnel: "{1}" not possible. Putty process terminated. Check for any problems with the connection configured as SSH Tunnel.</value>
   </data>
-  <data name="SSHTunnelPortNotReadyInTime" xml:space="preserve">
+  <data name="SshTunnelPortNotReadyInTime" xml:space="preserve">
     <value>SSH tunnel connection timed out. Connection to: "{0}" via SSH Tunnel: "{1}" not possible. Local tunnel port did not become available in time. Check for any problems with the connection configured as SSH Tunnel.</value>
   </data>
   <data name="StartMinimized" xml:space="preserve">
@@ -2231,7 +2228,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="PropertyDescriptionUseEnhancedMode" xml:space="preserve">
     <value>Connect to a Hyper-V host with enhanced mode enabled.</value>
   </data>
-  <data name="PropertyNameUseEnhancedMode" xml:space="preserve">
+  <data name="UseEnhancedMode" xml:space="preserve">
     <value>Use enhanced mode</value>
   </data>
   <data name="PropertyDescriptionRDGatewayPassword" xml:space="preserve">
@@ -2270,7 +2267,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="HttpCEF" xml:space="preserve">
     <value>CEF (Chromium)</value>
   </data>
-  <data name="HTTPFailedURLBuild" xml:space="preserve">
+  <data name="HttpFailedUrlBuild" xml:space="preserve">
     <value>Failed to contruct the URL to load</value>
   </data>
 </root>

@@ -597,9 +597,6 @@ Starting with new connections file.</value>
   <data name="_ExportToFile" xml:space="preserve">
     <value>ファイルへの書き出し...(&amp;E)</value>
   </data>
-  <data name="ExtApp" xml:space="preserve">
-    <value>Ext. App</value>
-  </data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>新規外部ツール</value>
   </data>
@@ -651,7 +648,7 @@ Starting with new connections file.</value>
   <data name="GroupboxAutomaticReconnect" xml:space="preserve">
     <value>自動的に再接続する</value>
   </data>
-  <data name="GroupboxExternalToolProperties" xml:space="preserve">
+  <data name="ExternalToolProperties" xml:space="preserve">
     <value>外部ツールプロパティ</value>
   </data>
   <data name="Files" xml:space="preserve">
@@ -949,7 +946,7 @@ Starting with new connections file.</value>
   <data name="SmartSize" xml:space="preserve">
     <value>SmartSize (RDP/VNC)</value>
   </data>
-  <data name="SSHFileTransfer" xml:space="preserve">
+  <data name="SshFileTransfer" xml:space="preserve">
     <value>SSHによるファイル転送</value>
   </data>
   <data name="StartChat" xml:space="preserve">
@@ -1055,7 +1052,7 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="PanelName" xml:space="preserve">
     <value>パネル名</value>
   </data>
-  <data name="PropertyNamePasswordProtect" xml:space="preserve">
+  <data name="PasswordProtect" xml:space="preserve">
     <value>パスワードの保護</value>
   </data>
   <data name="PasswordStatusMustMatch" xml:space="preserve">
@@ -1237,25 +1234,25 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="All" xml:space="preserve">
     <value>全て</value>
   </data>
-  <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
+  <data name="AuthenticationLevel" xml:space="preserve">
     <value>サーバー認証</value>
   </data>
-  <data name="PropertyNameAuthenticationMode" xml:space="preserve">
+  <data name="AuthenticationMode" xml:space="preserve">
     <value>認証モード</value>
   </data>
-  <data name="PropertyNameAutomaticResize" xml:space="preserve">
+  <data name="AutomaticResize" xml:space="preserve">
     <value>自動サイズ変更</value>
   </data>
-  <data name="PropertyNameCacheBitmaps" xml:space="preserve">
+  <data name="CacheBitmaps" xml:space="preserve">
     <value>ビットマップをキャッシュ</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>色</value>
   </data>
-  <data name="PropertyNameCompression" xml:space="preserve">
+  <data name="Compression" xml:space="preserve">
     <value>圧縮</value>
   </data>
-  <data name="PropertyNameDescription" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>説明</value>
   </data>
   <data name="DisplayThemes" xml:space="preserve">
@@ -1264,31 +1261,31 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="DisplayWallpaper" xml:space="preserve">
     <value>ウォールペーパーを表示</value>
   </data>
-  <data name="PropertyNameEnableDesktopComposition" xml:space="preserve">
+  <data name="EnableDesktopComposition" xml:space="preserve">
     <value>Desktop Composition</value>
   </data>
-  <data name="PropertyNameEnableFontSmoothing" xml:space="preserve">
+  <data name="FontSmoothing" xml:space="preserve">
     <value>フォントの滑らかさ</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>エンコード</value>
   </data>
-  <data name="PropertyNameEncryptionStrength" xml:space="preserve">
+  <data name="EncryptionStrength" xml:space="preserve">
     <value>Encryption Strength</value>
   </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>外部ツール</value>
   </data>
-  <data name="PropertyNameExternalToolAfter" xml:space="preserve">
+  <data name="ExternalToolAfter" xml:space="preserve">
     <value>External Tool After</value>
   </data>
-  <data name="PropertyNameExternalToolBefore" xml:space="preserve">
+  <data name="ExternalToolBefore" xml:space="preserve">
     <value>External Tool Before</value>
   </data>
-  <data name="PropertyNameLoadBalanceInfo" xml:space="preserve">
+  <data name="LoadBalanceInfo" xml:space="preserve">
     <value>Load Balance Info</value>
   </data>
-  <data name="PropertyNameMACAddress" xml:space="preserve">
+  <data name="MacAddress" xml:space="preserve">
     <value>MACアドレス</value>
   </data>
   <data name="Name" xml:space="preserve">
@@ -1303,61 +1300,61 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="Port" xml:space="preserve">
     <value>ポート</value>
   </data>
-  <data name="PropertyNamePuttySession" xml:space="preserve">
+  <data name="PuttySession" xml:space="preserve">
     <value>PuTTYのセッション</value>
   </data>
-  <data name="PropertyNameRDGatewayDomain" xml:space="preserve">
+  <data name="RdpGatewayDomain" xml:space="preserve">
     <value>ゲートウェイのドメイン</value>
   </data>
-  <data name="PropertyNameRDGatewayHostname" xml:space="preserve">
+  <data name="RdpGatewayHostname" xml:space="preserve">
     <value>ゲートウェイのホスト名</value>
   </data>
-  <data name="PropertyNameRDGatewayPassword" xml:space="preserve">
+  <data name="RdpGatewayPassword" xml:space="preserve">
     <value>Remote Desktop Gateway Password</value>
   </data>
-  <data name="PropertyNameRDGatewayUsageMethod" xml:space="preserve">
+  <data name="RdpGatewayUsageMethod" xml:space="preserve">
     <value>ゲートウェイを使用</value>
   </data>
-  <data name="PropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+  <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
     <value>ゲートウェイの資格情報</value>
   </data>
-  <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
+  <data name="RdpGatewayUsername" xml:space="preserve">
     <value>ゲートウェイのユーザー名</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>ディスク・ドライブ</value>
   </data>
-  <data name="PropertyNameRedirectKeys" xml:space="preserve">
+  <data name="RedirectKeys" xml:space="preserve">
     <value>キーの組み合わせ</value>
   </data>
   <data name="Ports" xml:space="preserve">
     <value>ポート</value>
   </data>
-  <data name="PropertyNameRedirectPrinters" xml:space="preserve">
+  <data name="RedirectPrinters" xml:space="preserve">
     <value>プリンター</value>
   </data>
-  <data name="PropertyNameRedirectSmartCards" xml:space="preserve">
+  <data name="SmartCards" xml:space="preserve">
     <value>スマートカード</value>
   </data>
-  <data name="PropertyNameRedirectSounds" xml:space="preserve">
+  <data name="RedirectSounds" xml:space="preserve">
     <value>サウンド</value>
   </data>
-  <data name="PropertyNameRenderingEngine" xml:space="preserve">
+  <data name="RenderingEngine" xml:space="preserve">
     <value>レンダリングエンジン</value>
   </data>
-  <data name="PropertyNameResolution" xml:space="preserve">
+  <data name="Resolution" xml:space="preserve">
     <value>解像度</value>
   </data>
-  <data name="PropertyNameSmartSizeMode" xml:space="preserve">
+  <data name="SmartSizeMode" xml:space="preserve">
     <value>スマートサイズモード</value>
   </data>
-  <data name="PropertyNameUseConsoleSession" xml:space="preserve">
+  <data name="UseConsoleSession" xml:space="preserve">
     <value>コンソールセッションを使用</value>
   </data>
-  <data name="PropertyNameUseCredSsp" xml:space="preserve">
+  <data name="UseCredSsp" xml:space="preserve">
     <value>Use CredSSP</value>
   </data>
-  <data name="PropertyNameUser1" xml:space="preserve">
+  <data name="UserField" xml:space="preserve">
     <value>User Field</value>
   </data>
   <data name="ProxyAddress" xml:space="preserve">
@@ -1458,31 +1455,31 @@ Message:
   <data name="Rdp" xml:space="preserve">
     <value>RDP</value>
   </data>
-  <data name="RDP16777216Colors" xml:space="preserve">
+  <data name="Rdp16777216Colors" xml:space="preserve">
     <value>16777216 Colours (24-bit)</value>
   </data>
-  <data name="RDP256Colors" xml:space="preserve">
+  <data name="Rdp256Colors" xml:space="preserve">
     <value>256 Colours (8-bit)</value>
   </data>
-  <data name="RDP32768Colors" xml:space="preserve">
+  <data name="Rdp32768Colors" xml:space="preserve">
     <value>32768 Colours (15-bit)</value>
   </data>
-  <data name="RDP4294967296Colors" xml:space="preserve">
+  <data name="Rdp4294967296Colors" xml:space="preserve">
     <value>16777216 Colours (32-bit)</value>
   </data>
-  <data name="RDP65536Colors" xml:space="preserve">
+  <data name="Rdp65536Colors" xml:space="preserve">
     <value>65536 Colours (16-bit)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Couldn't create RDP control, please check mRemoteNG requirements.</value>
   </data>
-  <data name="PropertyNameDisableCursorBlinking" xml:space="preserve">
+  <data name="DisableCursorBlinking" xml:space="preserve">
     <value>Disable Cursor blinking</value>
   </data>
-  <data name="PropertyNameDisableCursorShadow" xml:space="preserve">
+  <data name="DisableCursorShadow" xml:space="preserve">
     <value>Disable Cursor Shadow</value>
   </data>
-  <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
+  <data name="DisableFullWindowDrag" xml:space="preserve">
     <value>Disable Full Window drag</value>
   </data>
   <data name="DisableMenuAnimations" xml:space="preserve">
@@ -1521,7 +1518,7 @@ Message:
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Winsock initialization error.</value>
   </data>
-  <data name="RdpFitToPanel" xml:space="preserve">
+  <data name="FitToPanel" xml:space="preserve">
     <value>Fit To Panel</value>
   </data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1687,16 +1684,16 @@ Message:
   <data name="SQLServer" xml:space="preserve">
     <value>SQL Server</value>
   </data>
-  <data name="Ssh1" xml:space="preserve">
+  <data name="SshV1" xml:space="preserve">
     <value>SSHバージョン1</value>
   </data>
-  <data name="Ssh2" xml:space="preserve">
+  <data name="SshV2" xml:space="preserve">
     <value>SSHバージョン2</value>
   </data>
-  <data name="SSHStartTransferBG" xml:space="preserve">
+  <data name="SshBackgroundTransferFailed" xml:space="preserve">
     <value>SSH background transfer failed!</value>
   </data>
-  <data name="SSHTransferFailed" xml:space="preserve">
+  <data name="SshTransferFailed" xml:space="preserve">
     <value>SSH経由の転送に失敗しました</value>
   </data>
   <data name="FirstIp" xml:space="preserve">
