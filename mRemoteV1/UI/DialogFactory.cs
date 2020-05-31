@@ -17,7 +17,7 @@ namespace mRemoteNG.UI
                 Title = "",
                 CheckFileExists = true,
                 InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
-                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
+                Filter = Language.FiltermRemoteXML + @"|*.xml|" + Language.FilterAll + @"|*.*"
             };
         }
 
@@ -35,12 +35,12 @@ namespace mRemoteNG.UI
             var commandButtons = new List<string>
             {
                 Language.ConfigurationCreateNew,
-                Language.strOpenADifferentFile,
-                Language.strMenuExit
+                Language.OpenADifferentFile,
+                Language.Exit
             };
 
             if (showCancelButton)
-                commandButtons.Add(Language.strButtonCancel);
+                commandButtons.Add(Language._Cancel);
 
             var answered = false;
             while (!answered)
@@ -81,7 +81,7 @@ namespace mRemoteNG.UI
                 {
                     Runtime.MessageCollector.AddExceptionMessage(
                                                                  string
-                                                                     .Format(Language.strConnectionsFileCouldNotBeLoadedNew,
+                                                                     .Format(Language.ConnectionsFileCouldNotBeLoadedNew,
                                                                              connectionFileName),
                                                                  exception,
                                                                  MessageClass.WarningMsg);
@@ -102,7 +102,7 @@ namespace mRemoteNG.UI
                 InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath,
                 FileName = ConnectionsFileInfo.DefaultConnectionsFile,
                 OverwritePrompt = true,
-                Filter = Language.strFiltermRemoteXML + @"|*.xml|" + Language.strFilterAll + @"|*.*"
+                Filter = Language.FiltermRemoteXML + @"|*.xml|" + Language.FilterAll + @"|*.*"
             };
         }
     }

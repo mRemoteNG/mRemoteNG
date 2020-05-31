@@ -49,7 +49,7 @@ namespace mRemoteNG.UI.Controls
             CMenToolbarShowText.CheckState = CheckState.Checked;
             CMenToolbarShowText.Name = "cMenToolbarShowText";
             CMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
-            CMenToolbarShowText.Text = Language.strMenuShowText;
+            CMenToolbarShowText.Text = Language.ShowText;
             CMenToolbarShowText.Click += cMenToolbarShowText_Click;
         }
 
@@ -86,7 +86,7 @@ namespace mRemoteNG.UI.Controls
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddExternalToolsToToolBarFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.ErrorAddExternalToolsToToolBarFailed, ex);
             }
             finally
             {

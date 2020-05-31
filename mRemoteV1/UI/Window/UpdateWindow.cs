@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -57,17 +57,17 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            Text = Language.strMenuCheckForUpdates;
-            TabText = Language.strMenuCheckForUpdates;
-            btnCheckForUpdate.Text = Language.strCheckForUpdate;
+            Text = Language.CheckForUpdates;
+            TabText = Language.CheckForUpdates;
+            btnCheckForUpdate.Text = Language.CheckAgain;
             btnDownload.Text = Runtime.IsPortableEdition
-                ? Language.strDownloadPortable
-                : Language.strDownloadAndInstall;
-            lblChangeLogLabel.Text = Language.strLabelChangeLog;
-            lblInstalledVersion.Text = Language.strVersion;
-            lblInstalledVersionLabel.Text = $"{Language.strCurrentVersion}:";
-            lblLatestVersion.Text = Language.strVersion;
-            lblLatestVersionLabel.Text = $"{Language.strAvailableVersion}:";
+                ? Language.Download
+                : Language.DownloadAndInstall;
+            lblChangeLogLabel.Text = Language.Changelog;
+            lblInstalledVersion.Text = Language.Version;
+            lblInstalledVersionLabel.Text = $"{Language.AvailableVersion}:";
+            lblLatestVersion.Text = Language.Version;
+            lblLatestVersionLabel.Text = $"{Language.AvailableVersion}:";
         }
 
         private void btnCheckForUpdate_Click(object sender, EventArgs e)
@@ -107,7 +107,7 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            lblStatus.Text = Language.strUpdateCheckingLabel;
+            lblStatus.Text = Language.CheckForUpdates;
             lblStatus.ForeColor = SystemColors.WindowText;
             lblLatestVersionLabel.Visible = false;
             lblInstalledVersion.Visible = false;
@@ -152,7 +152,7 @@ namespace mRemoteNG.UI.Window
 
                 if (_appUpdate.IsUpdateAvailable())
                 {
-                    lblStatus.Text = Language.strUpdateAvailable;
+                    lblStatus.Text = Language.UpdateAvailable;
                     lblStatus.ForeColor = Color.OrangeRed;
                     SetVisibilityOfUpdateControls(true);
 
@@ -179,7 +179,7 @@ namespace mRemoteNG.UI.Window
                 }
                 else
                 {
-                    lblStatus.Text = Language.strNoUpdateAvailable;
+                    lblStatus.Text = Language.NoUpdateAvailable;
                     lblStatus.ForeColor = Color.ForestGreen;
 
                     if (_appUpdate.CurrentUpdateInfo == null) return;
@@ -192,10 +192,10 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                lblStatus.Text = Language.strUpdateCheckFailedLabel;
+                lblStatus.Text = Language.CheckFailed;
                 lblStatus.ForeColor = Color.OrangeRed;
 
-                Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateCheckCompleteFailed, ex);
+                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateCheckCompleteFailed, ex);
             }
         }
 
@@ -229,7 +229,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateGetChangeLogFailed, ex);
+                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateGetChangeLogFailed, ex);
             }
         }
 
@@ -252,7 +252,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateDownloadFailed, ex);
+                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateDownloadFailed, ex);
             }
         }
 
@@ -278,11 +278,11 @@ namespace mRemoteNG.UI.Window
                     throw e.Error;
 
                 if (Runtime.IsPortableEdition)
-                    MessageBox.Show(Language.strUpdatePortableDownloadComplete, Language.strMenuCheckForUpdates,
+                    MessageBox.Show(Language.UpdatePortableDownloadComplete, Language.CheckForUpdates,
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                 {
-                    if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates,
+                    if (MessageBox.Show(Language.UpdateDownloadComplete, Language.CheckForUpdates,
                                         MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
                         Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
@@ -295,7 +295,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector?.AddExceptionStackTrace(Language.strUpdateDownloadCompleteFailed, ex);
+                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateDownloadCompleteFailed, ex);
                 Runtime.MessageCollector?.AddMessage(MessageClass.ErrorMsg, ex.Message);
             }
         }

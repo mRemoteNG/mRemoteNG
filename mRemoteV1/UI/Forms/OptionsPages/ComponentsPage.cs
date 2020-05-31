@@ -26,7 +26,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.strComponentsCheck;
+            get => Language.ComponentsCheck;
             set { }
         }
 
@@ -36,8 +36,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            Text = Language.strComponentsCheck;
-            btnCheck.Text = Language.strCheckNow;
+            Text = Language.ComponentsCheck;
+            btnCheck.Text = Language.Refresh;
         }
 
         private void BtnCheckAgain_Click(object sender, EventArgs e)
@@ -62,19 +62,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 pbCheck1.Image = Resources.Good_Symbol;
                 lblCheck1.ForeColor = Color.DarkOliveGreen;
-                lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckSucceeded;
-                txtCheck1.Text = string.Format(Language.strCcRDPOK, string.Join(", ", supportedVersions));
+                lblCheck1.Text = "RDP (Remote Desktop) " + Language.CheckSucceeded;
+                txtCheck1.Text = string.Format(Language.CcRDPOK, string.Join(", ", supportedVersions));
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "RDP versions installed: "+ string.Join(",", supportedVersions), true);
             }
             else
             {
                 pbCheck1.Image = Resources.Bad_Symbol;
                 lblCheck1.ForeColor = Color.Firebrick;
-                lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckFailed;
-                txtCheck1.Text = string.Format(Language.strCcRDPFailed, GeneralAppInfo.UrlForum);
+                lblCheck1.Text = "RDP (Remote Desktop) " + Language.CheckFailed;
+                txtCheck1.Text = string.Format(Language.CcRDPFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "RDP " + Language.strCcNotInstalledProperly, true);
+                                                    "RDP " + Language.CcNotInstalledProperly, true);
             }
         }
 
@@ -96,8 +96,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                     pbCheck2.Image = Resources.Good_Symbol;
                     lblCheck2.ForeColor = Color.DarkOliveGreen;
-                    lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckSucceeded;
-                    txtCheck2.Text = string.Format(Language.strCcVNCOK, vnc.ProductVersion);
+                    lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.CheckSucceeded;
+                    txtCheck2.Text = string.Format(Language.CcVNCOK, vnc.ProductVersion);
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "VNC installed", true);
                 }
             }
@@ -105,11 +105,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 pbCheck2.Image = Resources.Bad_Symbol;
                 lblCheck2.ForeColor = Color.Firebrick;
-                lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckFailed;
-                txtCheck2.Text = string.Format(Language.strCcVNCFailed, GeneralAppInfo.UrlForum);
+                lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.CheckFailed;
+                txtCheck2.Text = string.Format(Language.CcVNCFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "VNC " + Language.strCcNotInstalledProperly, true);
+                                                    "VNC " + Language.CcNotInstalledProperly, true);
             }
         }
 
@@ -132,20 +132,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                 pbCheck3.Image = Resources.Good_Symbol;
                 lblCheck3.ForeColor = Color.DarkOliveGreen;
-                lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.strCcCheckSucceeded;
+                lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.CheckSucceeded;
                 txtCheck3.Text =
-                    $"{Language.strCcPuttyOK}{Environment.NewLine}Version: {versionInfo.ProductName} Release: {versionInfo.FileVersion}";
+                    $"{Language.CcPuttyOK}{Environment.NewLine}Version: {versionInfo.ProductName} Release: {versionInfo.FileVersion}";
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "PuTTY installed", true);
             }
             else
             {
                 pbCheck3.Image = Resources.Bad_Symbol;
                 lblCheck3.ForeColor = Color.Firebrick;
-                lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.strCcCheckFailed;
-                txtCheck3.Text = Language.strCcPuttyFailed;
+                lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.CheckFailed;
+                txtCheck3.Text = Language.CcPuttyFailed;
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "PuTTY " + Language.strCcNotInstalledProperly, true);
+                                                    "PuTTY " + Language.CcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "File " + pPath + " does not exist.",
                                                     true);
             }
@@ -163,8 +163,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                     pbCheck4.Image = Resources.Good_Symbol;
                     lblCheck4.ForeColor = Color.DarkOliveGreen;
-                    lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckSucceeded;
-                    txtCheck4.Text = string.Format(Language.strCcICAOK, ica.Version);
+                    lblCheck4.Text = @"ICA (Citrix ICA) " + Language.CheckSucceeded;
+                    txtCheck4.Text = string.Format(Language.CcICAOK, ica.Version);
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "ICA installed", true);
                 }
             }
@@ -172,11 +172,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 pbCheck4.Image = Resources.Bad_Symbol;
                 lblCheck4.ForeColor = Color.Firebrick;
-                lblCheck4.Text = @"ICA (Citrix ICA) " + Language.strCcCheckFailed;
-                txtCheck4.Text = string.Format(Language.strCcICAFailed, GeneralAppInfo.UrlForum);
+                lblCheck4.Text = @"ICA (Citrix ICA) " + Language.CheckFailed;
+                txtCheck4.Text = string.Format(Language.CcICAFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "ICA " + Language.strCcNotInstalledProperly, true);
+                                                    "ICA " + Language.CcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
             }
         }

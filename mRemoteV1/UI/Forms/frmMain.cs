@@ -242,7 +242,7 @@ namespace mRemoteNG.UI.Forms
             if (!Settings.Default.CreateEmptyPanelOnStartUp) return;
             var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
                 ? Settings.Default.StartUpPanelName
-                : Language.strNewPanel;
+                : Language.NewPanel;
 
             var panelAdder = new PanelAdder();
             if (!panelAdder.DoesPanelExist(panelName))
@@ -366,13 +366,13 @@ namespace mRemoteNG.UI.Forms
             if (Settings.Default.CheckForUpdatesAsked) return;
             string[] commandButtons =
             {
-                Language.strAskUpdatesCommandRecommended,
-                Language.strAskUpdatesCommandCustom,
-                Language.strAskUpdatesCommandAskLater
+                Language.AskUpdatesCommandRecommended,
+                Language.AskUpdatesCommandCustom,
+                Language.AskUpdatesCommandAskLater
             };
 
-            CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.strAskUpdatesMainInstruction,
-                                          string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProductName),
+            CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.AskUpdatesMainInstruction,
+                                          string.Format(Language.AskUpdatesContent, GeneralAppInfo.ProductName),
                                           "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None,
                                           ESysIcons.Question,
                                           ESysIcons.Question);
@@ -384,7 +384,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new FrmOptions(Language.strTabUpdates))
+            using (var optionsForm = new FrmOptions(Language.Updates))
             {
                 optionsForm.ShowDialog(this);
             }
@@ -441,8 +441,8 @@ namespace mRemoteNG.UI.Forms
                       openConnections > 1) || Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
                 {
                     var result = CTaskDialog.MessageBox(this, Application.ProductName,
-                                                        Language.strConfirmExitMainInstruction, "", "", "",
-                                                        Language.strCheckboxDoNotShowThisMessageAgain,
+                                                        Language.ConfirmExitMainInstruction, "", "", "",
+                                                        Language.CheckboxDoNotShowThisMessageAgain,
                                                         ETaskDialogButtons.YesNo, ESysIcons.Question,
                                                         ESysIcons.Question);
                     if (CTaskDialog.VerificationChecked)
@@ -661,7 +661,7 @@ namespace mRemoteNG.UI.Forms
                 if (Runtime.ConnectionsService.UsingDatabase)
                 {
                     titleBuilder.Append(separator);
-                    titleBuilder.Append(Language.strSQLServer.TrimEnd(':'));
+                    titleBuilder.Append(Language.SQLServer.TrimEnd(':'));
                 }
                 else
                 {

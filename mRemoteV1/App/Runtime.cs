@@ -1,4 +1,4 @@
-using mRemoteNG.App.Info;
+﻿using mRemoteNG.App.Info;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Credential;
@@ -111,13 +111,13 @@ namespace mRemoteNG.App
 
                 if (Settings.Default.UseSQLServer)
                 {
-                    MessageCollector.AddExceptionMessage(Language.strLoadFromSqlFailed, ex);
-                    var commandButtons = string.Join("|", Language.strCommandTryAgain,
-                                                     Language.strCommandOpenConnectionFile,
-                                                     string.Format(Language.strCommandExitProgram,
+                    MessageCollector.AddExceptionMessage(Language.LoadFromSqlFailed, ex);
+                    var commandButtons = string.Join("|", Language._TryAgain,
+                                                     Language.CommandOpenConnectionFile,
+                                                     string.Format(Language.CommandExitProgram,
                                                                    Application.ProductName));
-                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.strLoadFromSqlFailed,
-                                               Language.strLoadFromSqlFailedContent,
+                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.LoadFromSqlFailed,
+                                               Language.LoadFromSqlFailedContent,
                                                MiscTools.GetExceptionMessageRecursive(ex), "", "",
                                                commandButtons, false, ESysIcons.Error, ESysIcons.Error);
                     switch (CTaskDialog.CommandButtonResult)
@@ -138,7 +138,7 @@ namespace mRemoteNG.App
                 if (ex is FileNotFoundException && !withDialog)
                 {
                     MessageCollector.AddExceptionMessage(
-                                                         string.Format(Language.strConnectionsFileCouldNotBeLoadedNew,
+                                                         string.Format(Language.ConnectionsFileCouldNotBeLoadedNew,
                                                                        connectionFileName), ex,
                                                          MessageClass.InformationMsg);
 
@@ -147,7 +147,7 @@ namespace mRemoteNG.App
                         Language.ConfigurationCreateNew,
                         Language.ConfigurationCustomPath,
                         Language.ConfigurationImportFile,
-                        Language.strMenuExit
+                        Language.Exit
                     };
 
                     var answered = false;
@@ -189,7 +189,7 @@ namespace mRemoteNG.App
                         {
                             MessageCollector.AddExceptionMessage(
                                                                  string
-                                                                     .Format(Language.strConnectionsFileCouldNotBeLoadedNew,
+                                                                     .Format(Language.ConnectionsFileCouldNotBeLoadedNew,
                                                                              connectionFileName), exc,
                                                                  MessageClass.InformationMsg);
                         }
@@ -199,7 +199,7 @@ namespace mRemoteNG.App
                 }
 
                 MessageCollector.AddExceptionStackTrace(
-                                                        string.Format(Language.strConnectionsFileCouldNotBeLoaded,
+                                                        string.Format(Language.ConnectionsFileCouldNotBeLoaded,
                                                                       connectionFileName), ex);
                 if (connectionFileName != ConnectionsService.GetStartupConnectionFileName())
                 {
@@ -208,7 +208,7 @@ namespace mRemoteNG.App
                 else
                 {
                     MessageBox.Show(FrmMain.Default,
-                                    string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine,
+                                    string.Format(Language.ErrorStartupConnectionFileLoad, Environment.NewLine,
                                                   Application.ProductName,
                                                   ConnectionsService.GetStartupConnectionFileName(),
                                                   MiscTools.GetExceptionMessageRecursive(ex)),

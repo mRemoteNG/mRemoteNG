@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonOk = new mRemoteNG.UI.Controls.Base.NGButton();
+            this._Ok = new mRemoteNG.UI.Controls.Base.NGButton();
             this.buttonCancel = new mRemoteNG.UI.Controls.Base.NGButton();
             this.textBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.label = new mRemoteNG.UI.Controls.Base.NGLabel();
@@ -42,7 +42,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.buttonOk, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this._Ok, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.buttonCancel, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.textBox, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label, 0, 0);
@@ -56,17 +56,17 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(284, 81);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // buttonOk
+            // _Ok
             // 
-            this.buttonOk._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(125, 55);
-            this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 0;
-            this.buttonOk.Text = "Ok";
-            this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+            this._Ok._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this._Ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this._Ok.Location = new System.Drawing.Point(125, 55);
+            this._Ok.Name = "_Ok";
+            this._Ok.Size = new System.Drawing.Size(75, 23);
+            this._Ok.TabIndex = 0;
+            this._Ok.Text = "Ok";
+            this._Ok.UseVisualStyleBackColor = true;
+            this._Ok.Click += new System.EventHandler(this._Ok_Click);
             // 
             // buttonCancel
             // 
@@ -128,7 +128,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Controls.Base.NGButton buttonOk;
+        private Controls.Base.NGButton _Ok;
         private Controls.Base.NGButton buttonCancel;
         private Controls.Base.NGTextBox textBox;
         private Controls.Base.NGLabel label;

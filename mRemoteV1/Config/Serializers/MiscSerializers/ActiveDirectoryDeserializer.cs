@@ -38,7 +38,7 @@ namespace mRemoteNG.Config.Serializers
         private void ImportContainers(string ldapPath, ContainerInfo parentContainer)
         {
             var match = Regex.Match(ldapPath, "ou=([^,]*)", RegexOptions.IgnoreCase);
-            var name = match.Success ? match.Groups[1].Captures[0].Value : Language.strActiveDirectory;
+            var name = match.Success ? match.Groups[1].Captures[0].Value : Language.ActiveDirectory;
 
             var newContainer = new ContainerInfo {Name = name};
             parentContainer.AddChild(newContainer);

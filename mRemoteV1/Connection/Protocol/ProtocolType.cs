@@ -4,40 +4,40 @@ namespace mRemoteNG.Connection.Protocol
 {
     public enum ProtocolType
     {
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRDP))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Rdp))]
         RDP = 0,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strVnc))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Vnc))]
         VNC = 1,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strSsh1))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.SshV1))]
         SSH1 = 2,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strSsh2))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.SshV2))]
         SSH2 = 3,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strTelnet))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Telnet))]
         Telnet = 4,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRlogin))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Rlogin))]
         Rlogin = 5,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strRAW))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Raw))]
         RAW = 6,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttp))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Http))]
         HTTP = 7,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttps))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Https))]
         HTTPS = 8,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strICA))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.ICA))]
         ICA = 9,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strPowerShell))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.PowerShell))]
         PowerShell = 10,
 
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.strExtApp))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.ExternalTool))]
         IntApp = 20
     }
 }

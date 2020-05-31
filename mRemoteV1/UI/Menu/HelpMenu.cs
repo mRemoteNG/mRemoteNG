@@ -56,7 +56,7 @@ namespace mRemoteNG.UI.Menu
             });
             Name = "mMenInfo";
             Size = new System.Drawing.Size(44, 20);
-            Text = Language.strMenuHelp;
+            Text = Language._Help;
             TextDirection = ToolStripTextDirection.Horizontal;
             // 
             // mMenInfoHelp
@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoHelp.Name = "mMenInfoHelp";
             _mMenInfoHelp.ShortcutKeys = Keys.F1;
             _mMenInfoHelp.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoHelp.Text = Language.strMenuHelpContents;
+            _mMenInfoHelp.Text = Language.HelpContents;
             _mMenInfoHelp.Click += mMenInfoHelp_Click;
             // 
             // mMenInfoSep1
@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoWebsite.Image = Resources.Website;
             _mMenInfoWebsite.Name = "mMenInfoWebsite";
             _mMenInfoWebsite.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoWebsite.Text = Language.strMenuWebsite;
+            _mMenInfoWebsite.Text = Language.Website;
             _mMenInfoWebsite.Click += mMenInfoWebsite_Click;
             // 
             // mMenInfoDonate
@@ -86,7 +86,7 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoDonate.Image = Resources.Donate;
             _mMenInfoDonate.Name = "mMenInfoDonate";
             _mMenInfoDonate.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoDonate.Text = Language.strMenuDonate;
+            _mMenInfoDonate.Text = Language.Donate;
             _mMenInfoDonate.Click += mMenInfoDonate_Click;
             // 
             // mMenInfoForum
@@ -94,7 +94,7 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoForum.Image = Resources.user_comment;
             _mMenInfoForum.Name = "mMenInfoForum";
             _mMenInfoForum.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoForum.Text = Language.strMenuSupportForum;
+            _mMenInfoForum.Text = Language.SupportForum;
             _mMenInfoForum.Click += mMenInfoForum_Click;
             // 
             // mMenInfoBugReport
@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoBugReport.Image = Resources.Bug;
             _mMenInfoBugReport.Name = "mMenInfoBugReport";
             _mMenInfoBugReport.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoBugReport.Text = Language.strMenuReportBug;
+            _mMenInfoBugReport.Text = Language.ReportBug;
             _mMenInfoBugReport.Click += mMenInfoBugReport_Click;
             // 
             // ToolStripSeparator2
@@ -115,7 +115,7 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsUpdate.Image = Resources.Update;
             _mMenToolsUpdate.Name = "mMenToolsUpdate";
             _mMenToolsUpdate.Size = new System.Drawing.Size(190, 22);
-            _mMenToolsUpdate.Text = Language.strMenuCheckForUpdates;
+            _mMenToolsUpdate.Text = Language.CheckForUpdates;
             _mMenToolsUpdate.Click += mMenToolsUpdate_Click;
             // 
             // mMenInfoSep2
@@ -128,20 +128,20 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoAbout.Image = Resources.mRemoteNG;
             _mMenInfoAbout.Name = "mMenInfoAbout";
             _mMenInfoAbout.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoAbout.Text = Language.strMenuAbout;
+            _mMenInfoAbout.Text = Language.About;
             _mMenInfoAbout.Click += mMenInfoAbout_Click;
         }
 
         public void ApplyLanguage()
         {
-            Text = Language.strMenuHelp;
-            _mMenInfoHelp.Text = Language.strMenuHelpContents;
-            _mMenInfoWebsite.Text = Language.strMenuWebsite;
-            _mMenInfoDonate.Text = Language.strMenuDonate;
-            _mMenInfoForum.Text = Language.strMenuSupportForum;
-            _mMenInfoBugReport.Text = Language.strMenuReportBug;
-            _mMenToolsUpdate.Text = Language.strMenuCheckForUpdates;
-            _mMenInfoAbout.Text = Language.strMenuAbout;
+            Text = Language._Help;
+            _mMenInfoHelp.Text = Language.HelpContents;
+            _mMenInfoWebsite.Text = Language.Website;
+            _mMenInfoDonate.Text = Language.Donate;
+            _mMenInfoForum.Text = Language.SupportForum;
+            _mMenInfoBugReport.Text = Language.ReportBug;
+            _mMenToolsUpdate.Text = Language.CheckForUpdates;
+            _mMenInfoAbout.Text = Language.About;
         }
 
         #region Info

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Linq;
@@ -32,7 +32,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.strOptionsTabTheme;
+            get => Language.Theme;
             set { }
         }
 
@@ -40,9 +40,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            btnThemeDelete.Text = Language.strOptionsThemeButtonDelete;
-            btnThemeNew.Text = Language.strOptionsThemeButtonNew;
-            labelRestart.Text = Language.strOptionsThemeChangeWarning;
+            btnThemeDelete.Text = Language._Delete;
+            btnThemeNew.Text = Language._New;
+            labelRestart.Text = Language.OptionsThemeChangeWarning;
         }
 
         private new void ApplyTheme()
@@ -179,8 +179,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
-            using (var frmInputBox = new FrmInputBox(Language.strOptionsThemeNewThemeCaption,
-                                                     Language.strOptionsThemeNewThemeText,
+            using (var frmInputBox = new FrmInputBox(Language.OptionsThemeNewThemeCaption,
+                                                     Language.OptionsThemeNewThemeText,
                                                      _themeManager.ActiveTheme.Name))
             {
                 var dr = frmInputBox.ShowDialog();
@@ -193,7 +193,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
                 else
                 {
-                    CTaskDialog.ShowTaskDialogBox(this, Language.strErrors, Language.strOptionsThemeNewThemeError, "",
+                    CTaskDialog.ShowTaskDialogBox(this, Language.Errors, Language.OptionsThemeNewThemeError, "",
                                                   "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error,
                                                   ESysIcons.Information, 0);
                 }
@@ -202,8 +202,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnThemeDelete_Click(object sender, EventArgs e)
         {
-            var res = CTaskDialog.ShowTaskDialogBox(this, Language.strWarnings,
-                                                    Language.strOptionsThemeDeleteConfirmation, "", "", "", "", "", "",
+            var res = CTaskDialog.ShowTaskDialogBox(this, Language.Warnings,
+                                                    Language.OptionsThemeDeleteConfirmation, "", "", "", "", "", "",
                                                     ETaskDialogButtons.YesNo,
                                                     ESysIcons.Question, ESysIcons.Information, 0);
 

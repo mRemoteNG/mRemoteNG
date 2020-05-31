@@ -44,9 +44,9 @@ namespace mRemoteNG.UI.Tabs
                     {
                         var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
                                                             string
-                                                                .Format(Language.strConfirmCloseConnectionPanelMainInstruction,
+                                                                .Format(Language.ConfirmCloseConnectionPanelMainInstruction,
                                                                         TabText), "", "", "",
-                                                            Language.strCheckboxDoNotShowThisMessageAgain,
+                                                            Language.CheckboxDoNotShowThisMessageAgain,
                                                             ETaskDialogButtons.YesNo, ESysIcons.Question,
                                                             ESysIcons.Question);
                         if (CTaskDialog.VerificationChecked)

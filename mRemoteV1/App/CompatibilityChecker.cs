@@ -29,16 +29,16 @@ namespace mRemoteNG.App
             messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS Policy...", true);
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
 
-            var errorText = string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName);
+            var errorText = string.Format(Language.ErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName);
             messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
 
             //About to pop up a message, let's not block it...
             FrmSplashScreen.getInstance().Close();
 
             var ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName,
-                                                                Language.strCompatibilityProblemDetected, errorText, "",
+                                                                Language.CompatibilityProblemDetected, errorText, "",
                                                                 "",
-                                                                Language.strCheckboxDoNotShowThisMessageAgain,
+                                                                Language.CheckboxDoNotShowThisMessageAgain,
                                                                 ETaskDialogButtons.OkCancel, ESysIcons.Warning,
                                                                 ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked && ShouldIStayOrShouldIGo == DialogResult.OK)
@@ -87,10 +87,10 @@ namespace mRemoteNG.App
             }
 
             if (proccesses.Length <= 0) return;
-            CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected,
-                                   string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected,
+            CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected,
+                                   string.Format(Language.CompatibilityLenovoAutoScrollUtilityDetected,
                                                  Application.ProductName), "",
-                                   "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok,
+                                   "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok,
                                    ESysIcons.Warning,
                                    ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked)

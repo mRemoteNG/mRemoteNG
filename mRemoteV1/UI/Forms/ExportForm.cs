@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -167,9 +167,9 @@ namespace mRemoteNG.UI.Forms
                 saveFileDialog.OverwritePrompt = true;
 
                 var fileTypes = new List<string>();
-                fileTypes.AddRange(new[] {Language.strFiltermRemoteXML, "*.xml"});
-                fileTypes.AddRange(new[] {Language.strFiltermRemoteCSV, "*.csv"});
-                fileTypes.AddRange(new[] {Language.strFilterAll, "*.*"});
+                fileTypes.AddRange(new[] {Language.FiltermRemoteXML, "*.xml"});
+                fileTypes.AddRange(new[] {Language.FiltermRemoteCSV, "*.csv"});
+                fileTypes.AddRange(new[] {Language.FilterAll, "*.*"});
 
                 saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
                 SelectFileTypeBasedOnSaveFormat(saveFileDialog);
@@ -228,28 +228,28 @@ namespace mRemoteNG.UI.Forms
 
         private void ApplyLanguage()
         {
-            Text = Language.strExport;
+            Text = Language.Export;
 
-            grpFile.Text = Language.strExportFile;
-            lblFileName.Text = Language.strLabelFilename;
-            btnBrowse.Text = Language.strButtonBrowse;
-            lblFileFormat.Text = Language.strFileFormatLabel;
+            grpFile.Text = Language.ExportFile;
+            lblFileName.Text = Language.Filename;
+            btnBrowse.Text = Language._Browse;
+            lblFileFormat.Text = Language.FileFormat;
 
-            grpItems.Text = Language.strExportItems;
-            rdoExportEverything.Text = Language.strExportEverything;
-            rdoExportSelectedFolder.Text = Language.strExportSelectedFolder;
-            rdoExportSelectedConnection.Text = Language.strExportSelectedConnection;
+            grpItems.Text = Language.ExportItems;
+            rdoExportEverything.Text = Language.ExportEverything;
+            rdoExportSelectedFolder.Text = Language.ExportSelectedFolder;
+            rdoExportSelectedConnection.Text = Language.ExportSelectedConnection;
 
-            grpProperties.Text = Language.strExportProperties;
-            chkUsername.Text = Language.strCheckboxUsername;
-            chkPassword.Text = Language.strCheckboxPassword;
-            chkDomain.Text = Language.strCheckboxDomain;
-            chkAssignedCredential.Text = Language.strAssignedCredential;
-            chkInheritance.Text = Language.strCheckboxInheritance;
-            lblUncheckProperties.Text = Language.strUncheckProperties;
+            grpProperties.Text = Language.ExportProperties;
+            chkUsername.Text = Language.Username;
+            chkPassword.Text = Language.Password;
+            chkDomain.Text = Language.Domain;
+            chkAssignedCredential.Text = Language.AssignedCredential;
+            chkInheritance.Text = Language.Inheritance;
+            lblUncheckProperties.Text = Language.UncheckProperties;
 
-            btnOK.Text = Language.strButtonOK;
-            btnCancel.Text = Language.strButtonCancel;
+            btnOK.Text = Language._Ok;
+            btnCancel.Text = Language._Cancel;
         }
 
         #endregion
@@ -292,9 +292,9 @@ namespace mRemoteNG.UI.Forms
                 switch (Format)
                 {
                     case SaveFormat.mRXML:
-                        return Language.strMremoteNgXml;
+                        return Language.MremoteNgXml;
                     case SaveFormat.mRCSV:
-                        return Language.strMremoteNgCsv;
+                        return Language.MremoteNgCsv;
                     default:
                         return Format.ToString();
                 }

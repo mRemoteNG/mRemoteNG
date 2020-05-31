@@ -88,7 +88,7 @@ namespace mRemoteNG.Tools
                 if (!ScpClt.IsConnected)
                 {
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                        Language.strSSHTransferFailed + Environment.NewLine +
+                        Language.SshTransferFailed + Environment.NewLine +
                         "SCP Not Connected!");
                     return;
                 }
@@ -101,7 +101,7 @@ namespace mRemoteNG.Tools
                 if (!SftpClt.IsConnected)
                 {
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                        Language.strSSHTransferFailed + Environment.NewLine +
+                        Language.SshTransferFailed + Environment.NewLine +
                         "SFTP Not Connected!");
                     return;
                 }

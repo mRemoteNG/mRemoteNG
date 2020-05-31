@@ -1,4 +1,4 @@
-using mRemoteNG.Themes;
+﻿using mRemoteNG.Themes;
 using mRemoteNG.UI.Controls.Base;
 using System;
 using System.Collections.Generic;
@@ -262,28 +262,28 @@ namespace mRemoteNG.UI.TaskDialog
             {
                 case ETaskDialogButtons.YesNo:
                     bt1.Visible = false;
-                    bt2.Text = Language.strYes;
+                    bt2.Text = Language.Yes;
                     bt2.DialogResult = DialogResult.Yes;
-                    bt3.Text = Language.strNo;
+                    bt3.Text = Language.No;
                     bt3.DialogResult = DialogResult.No;
                     AcceptButton = bt2;
                     CancelButton = bt3;
                     break;
                 case ETaskDialogButtons.YesNoCancel:
-                    bt1.Text = Language.strYes;
+                    bt1.Text = Language.Yes;
                     bt1.DialogResult = DialogResult.Yes;
-                    bt2.Text = Language.strNo;
+                    bt2.Text = Language.No;
                     bt2.DialogResult = DialogResult.No;
-                    bt3.Text = Language.strButtonCancel;
+                    bt3.Text = Language._Cancel;
                     bt3.DialogResult = DialogResult.Cancel;
                     AcceptButton = bt1;
                     CancelButton = bt3;
                     break;
                 case ETaskDialogButtons.OkCancel:
                     bt1.Visible = false;
-                    bt2.Text = Language.strButtonOK;
+                    bt2.Text = Language._Ok;
                     bt2.DialogResult = DialogResult.OK;
-                    bt3.Text = Language.strButtonCancel;
+                    bt3.Text = Language._Cancel;
                     bt3.DialogResult = DialogResult.Cancel;
                     AcceptButton = bt2;
                     CancelButton = bt3;
@@ -291,7 +291,7 @@ namespace mRemoteNG.UI.TaskDialog
                 case ETaskDialogButtons.Ok:
                     bt1.Visible = false;
                     bt2.Visible = false;
-                    bt3.Text = Language.strButtonOK;
+                    bt3.Text = Language._Ok;
                     bt3.DialogResult = DialogResult.OK;
                     AcceptButton = bt3;
                     CancelButton = bt3;
@@ -299,14 +299,14 @@ namespace mRemoteNG.UI.TaskDialog
                 case ETaskDialogButtons.Close:
                     bt1.Visible = false;
                     bt2.Visible = false;
-                    bt3.Text = Language.strButtonClose;
+                    bt3.Text = Language._Close;
                     bt3.DialogResult = DialogResult.Cancel;
                     CancelButton = bt3;
                     break;
                 case ETaskDialogButtons.Cancel:
                     bt1.Visible = false;
                     bt2.Visible = false;
-                    bt3.Text = Language.strButtonCancel;
+                    bt3.Text = Language._Cancel;
                     bt3.DialogResult = DialogResult.Cancel;
                     CancelButton = bt3;
                     break;

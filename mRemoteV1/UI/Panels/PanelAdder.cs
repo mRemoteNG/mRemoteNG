@@ -51,7 +51,7 @@ namespace mRemoteNG.UI.Panels
         private static void SetConnectionWindowTitle(string title, ConnectionWindow connectionForm)
         {
             if (string.IsNullOrEmpty(title))
-                title = Language.strNewPanel;
+                title = Language.NewPanel;
             connectionForm.SetFormText(title.Replace("&", "&&"));
         }
 
@@ -69,7 +69,7 @@ namespace mRemoteNG.UI.Panels
         {
             var cMenScreens = new ToolStripMenuItem
             {
-                Text = Language.strSendTo,
+                Text = Language.SendTo,
                 Image = Resources.Monitor,
                 Tag = pnlcForm
             };
@@ -82,7 +82,7 @@ namespace mRemoteNG.UI.Panels
         {
             var cMenRen = new ToolStripMenuItem
             {
-                Text = Language.strRename,
+                Text = Language.Rename,
                 Image = Resources.Rename,
                 Tag = pnlcForm
             };
@@ -94,7 +94,7 @@ namespace mRemoteNG.UI.Panels
         {
             var cMenClose = new ToolStripMenuItem
             {
-                Text = Language.strButtonClose,
+                Text = Language._Close,
                 Image = Resources.Panel_Close,
                 Tag = pnlcForm
             };
@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Panels
             {
                 var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
 
-                using (var newTitle = new FrmInputBox(Language.strNewTitle, Language.strNewTitle + ":", ""))
+                using (var newTitle = new FrmInputBox(Language.NewTitle, Language.NewTitle + ":", ""))
                     if (newTitle.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(newTitle.returnValue))
                         conW.SetFormText(newTitle.returnValue.Replace("&", "&&"));
             }
@@ -142,7 +142,7 @@ namespace mRemoteNG.UI.Panels
 
                 for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
                 {
-                    var cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1))
+                    var cMenScreen = new ToolStripMenuItem(Language.Screen + " " + Convert.ToString(i + 1))
                     {
                         Tag = new ArrayList(),
                         Image = Resources.Monitor_GoTo

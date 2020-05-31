@@ -88,7 +88,7 @@ namespace mRemoteNG.Tree
             var dragDropEffect = DragDropEffects.None;
             if (!NodeIsDraggable(dropSource))
             {
-                _infoMessage = Language.strNodeNotDraggable;
+                _infoMessage = Language.NodeNotDraggable;
                 _enableFeedback = false;
             }
             else
@@ -127,7 +127,7 @@ namespace mRemoteNG.Tree
         {
             var dragDropEffect = DragDropEffects.None;
             if (AncestorDraggingOntoChild(dropSource, dropTarget))
-                _infoMessage = Language.strNodeCannotDragParentOnChild;
+                _infoMessage = Language.NodeCannotDragParentOnChild;
             else if (dropTarget is PuttySessionInfo || dropTarget is RootNodeInfo)
                 _enableFeedback = false;
             else
@@ -143,11 +143,11 @@ namespace mRemoteNG.Tree
         {
             var validDrag = false;
             if (NodeDraggingOntoSelf(dropSource, dropTarget))
-                _infoMessage = Language.strNodeCannotDragOnSelf;
+                _infoMessage = Language.NodeCannotDragOnSelf;
             else if (AncestorDraggingOntoChild(dropSource, dropTarget))
-                _infoMessage = Language.strNodeCannotDragParentOnChild;
+                _infoMessage = Language.NodeCannotDragParentOnChild;
             else if (DraggingOntoCurrentParent(dropSource, dropTarget))
-                _infoMessage = Language.strNodeAlreadyInFolder;
+                _infoMessage = Language.NodeAlreadyInFolder;
             else
                 validDrag = true;
             return validDrag;
