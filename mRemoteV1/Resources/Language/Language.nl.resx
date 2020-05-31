@@ -946,7 +946,7 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Poortscan paneel kon niet worden geladen</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Geef de hostnaam of IP adres op waarmee u verbinding wilt maken</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1030,7 +1030,7 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Hiermee geeft u de hostnaam van de Remote Desktop-gatewayserver op.</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Specificeert wanneer een Remote Desktop Gateway (RD-gateway-server) gebruikt moet worden.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1192,13 +1192,13 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="Ports" xml:space="preserve">
     <value>Poorten</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>Printers</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>Smartcards</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>Geluiden</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">

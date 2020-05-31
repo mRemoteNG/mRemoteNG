@@ -1056,7 +1056,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Couldn't load PortScan panel!</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Enter the hostname or ip you want to connect to.</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1146,7 +1146,7 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Specifies the host name of the Remote Desktop Gateway server.</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Specifies when to use a Remote Desktop Gateway (RD Gateway) server.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1320,19 +1320,19 @@ If you run into such an error, please create a new connection file!</value>
   <data name="Ports" xml:space="preserve">
     <value>Ports</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>Printers</value>
   </data>
-  <data name="RedirectClipboard" xml:space="preserve">
+  <data name="Clipboard" xml:space="preserve">
     <value>Clipboard</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>Smart Cards</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>Sounds</value>
   </data>
-  <data name="RedirectAudioCapture" xml:space="preserve">
+  <data name="AudioCapture" xml:space="preserve">
     <value>Audio Capture</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">
@@ -2189,13 +2189,13 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
     <value>Could not create RDP client. RDP protocol version {0} is not supported on this machine. Please choose an older protocol version.</value>
   </data>
-  <data name="PropertyDescriptionSSHTunnelConnection" xml:space="preserve">
+  <data name="PropertyDescriptionSshTunnel" xml:space="preserve">
     <value>For connection through a SSH tunnel (jump host) specify SSH connection to be used to establish SSH tunnel.</value>
   </data>
   <data name="SshTunnel" xml:space="preserve">
     <value>SSH Tunnel</value>
   </data>
-  <data name="PropertyDescriptionSSHOptions" xml:space="preserve">
+  <data name="PropertyDescriptionSshOptions" xml:space="preserve">
     <value>Specify here additional options to be used for SSH connection. See putty documentation for further details.</value>
   </data>
   <data name="SshOptions" xml:space="preserve">
@@ -2231,7 +2231,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="UseEnhancedMode" xml:space="preserve">
     <value>Use enhanced mode</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayPassword" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayPassword" xml:space="preserve">
     <value>Specifies the password of the Remote Desktop Gateway server.</value>
   </data>
   <data name="CloseToSysTray" xml:space="preserve">

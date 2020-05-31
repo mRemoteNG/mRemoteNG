@@ -1059,7 +1059,7 @@ VncSharp 版本 {0}</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>无法载入端口扫描面板！</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>请输入您要连接的主机名或 IP。</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1149,7 +1149,7 @@ VncSharp 版本 {0}</value>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>请指定远程桌面网关服务器的主机名。</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>请指定远程桌面网关服务器的时间。</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1323,19 +1323,19 @@ VncSharp 版本 {0}</value>
   <data name="Ports" xml:space="preserve">
     <value>端口</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>打印机</value>
   </data>
-  <data name="RedirectClipboard" xml:space="preserve">
+  <data name="Clipboard" xml:space="preserve">
     <value>剪贴板</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>智能卡</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>声音</value>
   </data>
-  <data name="RedirectAudioCapture" xml:space="preserve">
+  <data name="AudioCapture" xml:space="preserve">
     <value>音频捕获</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">
@@ -2203,7 +2203,7 @@ mRemoteNG 将退出并安装更新。</value>
   <data name="UseEnhancedMode" xml:space="preserve">
     <value>使用增强模式</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayPassword" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayPassword" xml:space="preserve">
     <value>指定远程桌面网关服务器的密码。</value>
   </data>
   <data name="CloseToSysTray" xml:space="preserve">

@@ -936,7 +936,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>¡No se pudo cargar el Panel de Escaneo de Puertos!</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Introduzca el nombre del host o IP con la que quiere conectar.</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1020,7 +1020,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Indica el nombre del servidor Gateway de Escritorio Remoto</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Indica cuándo usar un servidor Gateway para Escritorio Remoto (RD Gateway).</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1182,16 +1182,16 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="Ports" xml:space="preserve">
     <value>Puertos</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>Impresoras</value>
   </data>
-  <data name="RedirectClipboard" xml:space="preserve">
+  <data name="Clipboard" xml:space="preserve">
     <value>Portapapeles</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>Tarjetas Inteligentes</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>Sonidos</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">

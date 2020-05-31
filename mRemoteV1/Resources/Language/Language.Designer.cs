@@ -457,6 +457,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio Capture.
+        /// </summary>
+        internal static string AudioCapture {
+            get {
+                return ResourceManager.GetString("AudioCapture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server Authentication.
         /// </summary>
         internal static string AuthenticationLevel {
@@ -837,6 +846,15 @@ namespace mRemoteNG {
         internal static string ClearSearchString {
             get {
                 return ResourceManager.GetString("ClearSearchString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clipboard.
+        /// </summary>
+        internal static string Clipboard {
+            get {
+                return ResourceManager.GetString("Clipboard", resourceCulture);
             }
         }
         
@@ -3673,20 +3691,20 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Printers.
+        /// </summary>
+        internal static string Printers {
+            get {
+                return ResourceManager.GetString("Printers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Properties.
         /// </summary>
         internal static string Properties {
             get {
                 return ResourceManager.GetString("Properties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter the hostname or ip you want to connect to..
-        /// </summary>
-        internal static string PropertyDescriptionAddress {
-            get {
-                return ResourceManager.GetString("PropertyDescriptionAddress", resourceCulture);
             }
         }
         
@@ -3898,6 +3916,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter the hostname or ip you want to connect to..
+        /// </summary>
+        internal static string PropertyDescriptionHostnameIp {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionHostnameIp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose a icon that will be displayed when connected to the host..
         /// </summary>
         internal static string PropertyDescriptionIcon {
@@ -4006,24 +4033,6 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Specifies the password of the Remote Desktop Gateway server..
-        /// </summary>
-        internal static string PropertyDescriptionRDGatewayPassword {
-            get {
-                return ResourceManager.GetString("PropertyDescriptionRDGatewayPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Specifies when to use a Remote Desktop Gateway (RD Gateway) server..
-        /// </summary>
-        internal static string PropertyDescriptionRDGatewayUsageMethod {
-            get {
-                return ResourceManager.GetString("PropertyDescriptionRDGatewayUsageMethod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Specifies whether or not to log on to the gateway using the same username and password as the connection..
         /// </summary>
         internal static string PropertyDescriptionRDGatewayUseConnectionCredentials {
@@ -4047,6 +4056,24 @@ namespace mRemoteNG {
         internal static string PropertyDescriptionRDPAlertIdleTimeout {
             get {
                 return ResourceManager.GetString("PropertyDescriptionRDPAlertIdleTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specifies the password of the Remote Desktop Gateway server..
+        /// </summary>
+        internal static string PropertyDescriptionRdpGatewayPassword {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionRdpGatewayPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specifies when to use a Remote Desktop Gateway (RD Gateway) server..
+        /// </summary>
+        internal static string PropertyDescriptionRdpGatewayUsageMethod {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionRdpGatewayUsageMethod", resourceCulture);
             }
         }
         
@@ -4179,18 +4206,18 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to Specify here additional options to be used for SSH connection. See putty documentation for further details..
         /// </summary>
-        internal static string PropertyDescriptionSSHOptions {
+        internal static string PropertyDescriptionSshOptions {
             get {
-                return ResourceManager.GetString("PropertyDescriptionSSHOptions", resourceCulture);
+                return ResourceManager.GetString("PropertyDescriptionSshOptions", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to For connection through a SSH tunnel (jump host) specify SSH connection to be used to establish SSH tunnel..
         /// </summary>
-        internal static string PropertyDescriptionSSHTunnelConnection {
+        internal static string PropertyDescriptionSshTunnel {
             get {
-                return ResourceManager.GetString("PropertyDescriptionSSHTunnelConnection", resourceCulture);
+                return ResourceManager.GetString("PropertyDescriptionSshTunnel", resourceCulture);
             }
         }
         
@@ -5114,47 +5141,11 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Audio Capture.
-        /// </summary>
-        internal static string RedirectAudioCapture {
-            get {
-                return ResourceManager.GetString("RedirectAudioCapture", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clipboard.
-        /// </summary>
-        internal static string RedirectClipboard {
-            get {
-                return ResourceManager.GetString("RedirectClipboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Key Combinations.
         /// </summary>
         internal static string RedirectKeys {
             get {
                 return ResourceManager.GetString("RedirectKeys", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Printers.
-        /// </summary>
-        internal static string RedirectPrinters {
-            get {
-                return ResourceManager.GetString("RedirectPrinters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sounds.
-        /// </summary>
-        internal static string RedirectSounds {
-            get {
-                return ResourceManager.GetString("RedirectSounds", resourceCulture);
             }
         }
         
@@ -5661,6 +5652,15 @@ namespace mRemoteNG {
         internal static string SoundQuality {
             get {
                 return ResourceManager.GetString("SoundQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sounds.
+        /// </summary>
+        internal static string Sounds {
+            get {
+                return ResourceManager.GetString("Sounds", resourceCulture);
             }
         }
         

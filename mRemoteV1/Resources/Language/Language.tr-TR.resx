@@ -1143,7 +1143,7 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
 		<value>PortScan paneli yüklenemedi!</value>
 	</data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
 		<value>Bağlanmak istediğiniz ana makine adını veya ip'yi girin.</value>
 	</data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1257,7 +1257,7 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
 		<value>Uzak Masaüstü Ağ Geçidi sunucusunun host adını belirtir.</value>
 	</data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
 		<value>Uzak Masaüstü Ağ Geçidi (RD Ağ Geçidi) sunucusunun ne zaman kullanılacağını belirtir.</value>
 	</data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1410,13 +1410,13 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
   <data name="Ports" xml:space="preserve">
 		<value>Portlar</value>
 	</data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
 		<value>Yazıcılar</value>
 	</data>
   <data name="SmartCards" xml:space="preserve">
 		<value>Smart Kartlar</value>
 	</data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
 		<value>Sesler</value>
 	</data>
   <data name="RenderingEngine" xml:space="preserve">

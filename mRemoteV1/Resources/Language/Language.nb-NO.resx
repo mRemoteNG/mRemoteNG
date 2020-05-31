@@ -945,7 +945,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Kunne ikke laste inn portskanningpanelet!</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Angi vertsnavnet eller IP-adressen du ønsker å koble til.</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1029,7 +1029,7 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Angir vertsnavnet til Remote Desktop Gateway-serveren.</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Angir når en server for eksternt skrivebord (ES-Gateway) skal brukes.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1191,13 +1191,13 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Ports" xml:space="preserve">
     <value>Porter</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>Skrivere</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>Smartkort</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>Lyder</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">
@@ -1792,10 +1792,10 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="LoadBalanceInfo" xml:space="preserve">
     <value>Lastbalanseringsinformasjon</value>
   </data>
-  <data name="RedirectClipboard" xml:space="preserve">
+  <data name="Clipboard" xml:space="preserve">
     <value>Utklippstavle</value>
   </data>
-  <data name="RedirectAudioCapture" xml:space="preserve">
+  <data name="AudioCapture" xml:space="preserve">
     <value>Lydopptak</value>
   </data>
   <data name="TitlePasswordWithName" xml:space="preserve">

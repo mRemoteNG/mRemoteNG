@@ -86,7 +86,7 @@ namespace mRemoteNG.Connection
         
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
          LocalizedAttributes.LocalizedDisplayNameInheritAttribute(nameof(Language.SshTunnel)),
-         LocalizedAttributes.LocalizedDescriptionInheritAttribute(nameof(Language.PropertyDescriptionSSHTunnelConnection)),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute(nameof(Language.PropertyDescriptionSshTunnel)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         [Browsable(true)]
         public bool SSHTunnelConnectionName { get; set; }
@@ -121,7 +121,7 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.SshOptions)),
-         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSSHOptions)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionSshOptions)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool SSHOptions { get; set; }
 
@@ -191,7 +191,7 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 5),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.RdpGatewayUsageMethod)),
-         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRDGatewayUsageMethod)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRdpGatewayUsageMethod)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RDGatewayUsageMethod { get; set; }
 
@@ -215,7 +215,7 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 5),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.RdpGatewayPassword)),
-         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRDGatewayPassword)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRdpGatewayPassword)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RDGatewayPassword { get; set; }
 
@@ -318,13 +318,13 @@ namespace mRemoteNG.Connection
         public bool RedirectDiskDrives { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 7),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.RedirectPrinters)),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Printers)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRedirectPrinters)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RedirectPrinters { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 7),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.RedirectClipboard)),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Clipboard)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRedirectClipboard)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RedirectClipboard { get; set; }
@@ -342,7 +342,7 @@ namespace mRemoteNG.Connection
         public bool RedirectSmartCards { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 7),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.RedirectSounds)),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Sounds)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRedirectSounds)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RedirectSound { get; set; }
@@ -354,7 +354,7 @@ namespace mRemoteNG.Connection
         public bool SoundQuality { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 7),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.RedirectAudioCapture)),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.AudioCapture)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRedirectAudioCapture)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RedirectAudioCapture { get; set; }

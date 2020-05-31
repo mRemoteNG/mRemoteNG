@@ -932,7 +932,7 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Impossibile caricare il pannello di scansione delle porte!</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Inserisci il nome host o l'IP a cui ti vuoi connettere.</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1016,7 +1016,7 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Indica il nome host del server gateway RDP.</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Indica quando utilizzare il server gateway RDP.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1178,13 +1178,13 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="Ports" xml:space="preserve">
     <value>Porte</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>Stampanti</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>Smart card</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>Audio</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">

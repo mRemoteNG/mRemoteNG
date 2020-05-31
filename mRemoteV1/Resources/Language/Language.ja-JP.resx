@@ -1070,7 +1070,7 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Couldn't load PortScan panel!</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>ホスト名かIPアドレスを入力してください</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1162,7 +1162,7 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Specifies the host name of the Remote Desktop Gateway server.</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Specifies when to use a Remote Desktop Gateway (RD Gateway) server.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1330,13 +1330,13 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="Ports" xml:space="preserve">
     <value>ポート</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>プリンター</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>スマートカード</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>サウンド</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">

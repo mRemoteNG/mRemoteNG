@@ -952,7 +952,7 @@ VncSharp Control Version {0}</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Не удалось загрузить панель Сканера портов!</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Введите имя хоста или IP к которому вы хотите подключиться.</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1036,7 +1036,7 @@ VncSharp Control Version {0}</value>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Определите имя хоста шлюза Служб терминалов.</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Укажите, когда использовать шлюз Служб терминалов.</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1198,13 +1198,13 @@ VncSharp Control Version {0}</value>
   <data name="Ports" xml:space="preserve">
     <value>Порты</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>Принтеры</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>Смарт-карты</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>Звуки</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">
@@ -2061,7 +2061,7 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="PropertyDescriptionRedirectClipboard" xml:space="preserve">
     <value>Укажите, будут ли буфер обмена должен использоваться совместно.</value>
   </data>
-  <data name="RedirectClipboard" xml:space="preserve">
+  <data name="Clipboard" xml:space="preserve">
     <value>буфер обмена</value>
   </data>
   <data name="OptionsThemeChangeWarning" xml:space="preserve">

@@ -1155,7 +1155,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
 		<value>포트 스캔 패널을 로드 할 수 없습니다!</value>
 	</data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
 		<value>연결할 호스트 이름 또는 IP를 입력하십시오.</value>
 	</data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1245,7 +1245,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
 		<value>원격 데스크톱 게이트웨이 서버의 호스트 이름을 지정.</value>
 	</data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
 		<value>RD 게이트웨이 (원격 데스크톱 게이트웨이) 서버를 사용할시기를 지정.</value>
 	</data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1413,13 +1413,13 @@ VncSharp 제어 버전 {0}</value>
   <data name="Ports" xml:space="preserve">
 		<value>포트</value>
 	</data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
 		<value>프린터</value>
 	</data>
   <data name="SmartCards" xml:space="preserve">
 		<value>스마트 카드</value>
 	</data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
 		<value>사운드</value>
 	</data>
   <data name="RenderingEngine" xml:space="preserve">

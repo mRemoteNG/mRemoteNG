@@ -900,7 +900,7 @@ VncSharp Control Version {0}</value>
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Не вдалося завантажити панель сканера портів!</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Введіть ім'я хосту або IP до якого потрбіно підключитися.</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -984,7 +984,7 @@ VncSharp Control Version {0}</value>
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Вкажіть ім'я хоста сервера шлюзу віддаленого робочого столу(RD Gateway).</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Вкажіть, коли використовувати сервер шлюзу віддаленого робочого столу (RD Gateway).</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1143,13 +1143,13 @@ VncSharp Control Version {0}</value>
   <data name="Ports" xml:space="preserve">
     <value>Порти</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>Принтери</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>Смарт-карти</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>Звуки</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">
@@ -1737,10 +1737,10 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="LoadBalanceInfo" xml:space="preserve">
 		<value>Інформація про балансування</value>
 	</data>
-  <data name="RedirectClipboard" xml:space="preserve">
+  <data name="Clipboard" xml:space="preserve">
 		<value>Буфер обміну</value>
 	</data>
-  <data name="RedirectAudioCapture" xml:space="preserve">
+  <data name="AudioCapture" xml:space="preserve">
 		<value>Захоплення аудіо</value>
 	</data>
   <data name="UseCredSsp" xml:space="preserve">
@@ -2126,7 +2126,7 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="UseEnhancedMode" xml:space="preserve">
 		<value>Використовувати розширений режим</value>
 	</data>
-  <data name="PropertyDescriptionRDGatewayPassword" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayPassword" xml:space="preserve">
 		<value>Вказує пароль сервера Remote Desktop Gateway.</value>
 	</data>
   <data name="CloseToSysTray" xml:space="preserve">

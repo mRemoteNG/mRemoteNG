@@ -924,7 +924,7 @@
   <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Impossível carregar o painel PortScan!</value>
   </data>
-  <data name="PropertyDescriptionAddress" xml:space="preserve">
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
     <value>Digite o nome do host ou o ip onde pretende ligar-se.</value>
   </data>
   <data name="PropertyDescriptionAll" xml:space="preserve">
@@ -1008,7 +1008,7 @@
   <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Especifica o nome do host do servidor Gateway de área de trabalho remota.</value>
   </data>
-  <data name="PropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
     <value>Especifica quando usar um servidor de Gateway de Desktop remoto (RD Gateway).</value>
   </data>
   <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
@@ -1170,13 +1170,13 @@
   <data name="Ports" xml:space="preserve">
     <value>Portas</value>
   </data>
-  <data name="RedirectPrinters" xml:space="preserve">
+  <data name="Printers" xml:space="preserve">
     <value>Impressoras</value>
   </data>
   <data name="SmartCards" xml:space="preserve">
     <value>Smart Cards</value>
   </data>
-  <data name="RedirectSounds" xml:space="preserve">
+  <data name="Sounds" xml:space="preserve">
     <value>Sons</value>
   </data>
   <data name="RenderingEngine" xml:space="preserve">

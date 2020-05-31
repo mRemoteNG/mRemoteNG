@@ -160,7 +160,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="PropertyDescriptionRedirectClipboard" xml:space="preserve">
 		<value>Select whether clipboard should be shared.</value>
 	</data>
-  <data name="RedirectClipboard" xml:space="preserve">
+  <data name="Clipboard" xml:space="preserve">
 		<value>Clipboard</value>
 	</data>
   <data name="OptionsThemeChangeWarning" xml:space="preserve">

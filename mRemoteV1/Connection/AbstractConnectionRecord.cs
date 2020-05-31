@@ -119,7 +119,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
          TypeConverter(typeof(ConnectionIcon)),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Icon)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.Icon))]
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionIcon))]
         public virtual string Icon
         {
             get => GetPropertyValue("Icon", _icon);
@@ -141,7 +141,7 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.HostnameIp)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionAddress)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionHostnameIp)),
          UsedInAllProtocolsExcept()]
         public virtual string Hostname
         {
@@ -202,7 +202,7 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshTunnel)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSSHTunnelConnection)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshTunnel)),
          TypeConverter(typeof(SshTunnelTypeConverter)),
          UsedInAllProtocolsExcept()]
         public string SSHTunnelConnectionName
@@ -260,7 +260,7 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.SshOptions)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSSHOptions)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionSshOptions)),
          UsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
         public virtual string SSHOptions
         {
@@ -387,7 +387,7 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayUsageMethod)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDGatewayUsageMethod)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRdpGatewayUsageMethod)),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
         public RDGatewayUsageMethod RDGatewayUsageMethod
@@ -429,7 +429,7 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayPassword)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.RdpGatewayPassword)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRdpGatewayPassword)),
          PasswordPropertyText(true),
          UsedInProtocol(ProtocolType.RDP)]
         public string RDGatewayPassword
@@ -599,7 +599,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.DiskDrives)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Redirect)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectDrives)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
@@ -610,7 +610,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectPrinters)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Printers)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectPrinters)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
@@ -621,7 +621,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectClipboard)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Clipboard)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectClipboard)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
@@ -633,7 +633,7 @@ namespace mRemoteNG.Connection
 
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyDescriptionRedirectPorts)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Ports)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectPorts)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
@@ -655,7 +655,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectSounds)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Sounds)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectSounds)),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
@@ -677,7 +677,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectAudioCapture)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.AudioCapture)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectAudioCapture)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          UsedInProtocol(ProtocolType.RDP)]
