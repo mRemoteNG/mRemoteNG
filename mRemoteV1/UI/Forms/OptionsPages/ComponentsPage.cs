@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 pbCheck1.Image = Resources.Good_Symbol;
                 lblCheck1.ForeColor = Color.DarkOliveGreen;
-                lblCheck1.Text = "RDP (Remote Desktop) " + Language.CcCheckSucceeded;
+                lblCheck1.Text = "RDP (Remote Desktop) " + Language.CheckSucceeded;
                 txtCheck1.Text = string.Format(Language.CcRDPOK, string.Join(", ", supportedVersions));
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "RDP versions installed: "+ string.Join(",", supportedVersions), true);
             }
@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                     pbCheck2.Image = Resources.Good_Symbol;
                     lblCheck2.ForeColor = Color.DarkOliveGreen;
-                    lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.CcCheckSucceeded;
+                    lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.CheckSucceeded;
                     txtCheck2.Text = string.Format(Language.CcVNCOK, vnc.ProductVersion);
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "VNC installed", true);
                 }
@@ -138,7 +138,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                 pbCheck3.Image = Resources.Good_Symbol;
                 lblCheck3.ForeColor = Color.DarkOliveGreen;
-                lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.CcCheckSucceeded;
+                lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.CheckSucceeded;
                 txtCheck3.Text =
                     $"{Language.CcPuttyOK}{Environment.NewLine}Version: {versionInfo.ProductName} Release: {versionInfo.FileVersion}";
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "PuTTY installed", true);
@@ -169,7 +169,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                     pbCheck4.Image = Resources.Good_Symbol;
                     lblCheck4.ForeColor = Color.DarkOliveGreen;
-                    lblCheck4.Text = @"ICA (Citrix ICA) " + Language.CcCheckSucceeded;
+                    lblCheck4.Text = @"ICA (Citrix ICA) " + Language.CheckSucceeded;
                     txtCheck4.Text = string.Format(Language.CcICAOK, ica.Version);
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "ICA installed", true);
                 }

@@ -207,7 +207,7 @@
   <data name="_Stop" xml:space="preserve">
     <value>&amp; Parar</value>
   </data>
-  <data name="ButtonTestProxy" xml:space="preserve">
+  <data name="TestProxy" xml:space="preserve">
     <value>Testar Proxy</value>
   </data>
   <data name="CannotStartPortScan" xml:space="preserve">
@@ -219,13 +219,13 @@
   <data name="Connection" xml:space="preserve">
     <value>Conexão</value>
   </data>
-  <data name="CategoryDisplay" xml:space="preserve">
+  <data name="Display" xml:space="preserve">
     <value>Mostrar</value>
   </data>
-  <data name="CategoryGateway" xml:space="preserve">
+  <data name="Gateway" xml:space="preserve">
     <value>Gateway</value>
   </data>
-  <data name="CategoryMiscellaneous" xml:space="preserve">
+  <data name="Miscellaneous" xml:space="preserve">
     <value>Diversos</value>
   </data>
   <data name="Protocol" xml:space="preserve">
@@ -237,7 +237,7 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Falha na verificação!</value>
   </data>
-  <data name="CcCheckSucceeded" xml:space="preserve">
+  <data name="CheckSucceeded" xml:space="preserve">
     <value>Verificação com sucesso!</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">

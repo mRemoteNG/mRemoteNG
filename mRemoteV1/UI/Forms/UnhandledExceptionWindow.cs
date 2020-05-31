@@ -53,7 +53,7 @@ namespace mRemoteNG.UI.Forms
             labelExceptionMessageHeader.Text = Language.ExceptionMessage;
             labelStackTraceHeader.Text = Language.StackTrace;
             labelEnvironment.Text = Language.Environment;
-            buttonCreateBug.Text = Language.MenuReportBug;
+            buttonCreateBug.Text = Language.ReportBug;
             buttonCopyAll.Text = Language.CopyAll;
             buttonClose.Text = _isFatal
                 ? Language.Exit

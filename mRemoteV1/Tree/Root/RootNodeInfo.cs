@@ -27,7 +27,7 @@ namespace mRemoteNG.Tree.Root
 
         #region Public Properties
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryMiscellaneous)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous)),
          Browsable(true),
          LocalizedAttributes.LocalizedDefaultValue(nameof(Language.Connections)),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Name)),
@@ -38,7 +38,7 @@ namespace mRemoteNG.Tree.Root
             set => _name = value;
         }
         
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.CategoryMiscellaneous)),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous)),
          Browsable(true),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.PropertyNamePasswordProtect)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPasswordProtect)),

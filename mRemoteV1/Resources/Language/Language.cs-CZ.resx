@@ -216,7 +216,7 @@
   <data name="_Stop" xml:space="preserve">
     <value>&amp;Stop</value>
   </data>
-  <data name="ButtonTestProxy" xml:space="preserve">
+  <data name="TestProxy" xml:space="preserve">
     <value>Test Proxy</value>
   </data>
   <data name="CannotStartPortScan" xml:space="preserve">
@@ -228,13 +228,13 @@
   <data name="Connection" xml:space="preserve">
     <value>Spojení</value>
   </data>
-  <data name="CategoryDisplay" xml:space="preserve">
+  <data name="Display" xml:space="preserve">
     <value>Zobrazení</value>
   </data>
-  <data name="CategoryGateway" xml:space="preserve">
+  <data name="Gateway" xml:space="preserve">
     <value>Brána</value>
   </data>
-  <data name="CategoryMiscellaneous" xml:space="preserve">
+  <data name="Miscellaneous" xml:space="preserve">
     <value>Různé</value>
   </data>
   <data name="Protocol" xml:space="preserve">
@@ -246,7 +246,7 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Kontrola selhala!</value>
   </data>
-  <data name="CcCheckSucceeded" xml:space="preserve">
+  <data name="CheckSucceeded" xml:space="preserve">
     <value>Kontrola úspěšná!</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
@@ -476,13 +476,13 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Nepovedlo se najít ovládací prvek ToolStrip control v objektu FilteredPropertyGrid.</value>
   </data>
-  <data name="CurrentVersion" xml:space="preserve">
+  <data name="InstalledVersion" xml:space="preserve">
     <value>Instalovaná verze</value>
   </data>
   <data name="Detect" xml:space="preserve">
     <value>Detekovat</value>
   </data>
-  <data name="DontConnectToConsoleSessionMenuItem" xml:space="preserve">
+  <data name="DontConnectToConsoleSession" xml:space="preserve">
     <value>Nepovedlo se připojit do sezení konzole</value>
   </data>
   <data name="DontConnectWhenAuthFails" xml:space="preserve">
@@ -593,7 +593,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>Nový Externí Nástroj</value>
   </data>
-  <data name="FileFormatLabel" xml:space="preserve">
+  <data name="FileFormat" xml:space="preserve">
     <value>&amp;Formát souboru:</value>
   </data>
   <data name="FilterAll" xml:space="preserve">
@@ -644,7 +644,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
     <value>Vlastnosti externích nástrojů</value>
   </data>
-  <data name="GroupboxFiles" xml:space="preserve">
+  <data name="Files" xml:space="preserve">
     <value>Soubory</value>
   </data>
   <data name="Host" xml:space="preserve">
@@ -701,10 +701,10 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>Při importování souboru "{0}" došlo k chybě.</value>
   </data>
-  <data name="ImportFileFailedMainInstruction" xml:space="preserve">
+  <data name="ImportFailed" xml:space="preserve">
     <value>Import selhal</value>
   </data>
-  <data name="ImportFromFileMenuItem" xml:space="preserve">
+  <data name="ImportFromFile" xml:space="preserve">
     <value>Import ze &amp;souboru...</value>
   </data>
   <data name="ImportPortScan" xml:space="preserve">
@@ -737,7 +737,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="Address" xml:space="preserve">
     <value>Adresa:</value>
   </data>
-  <data name="LabelClosingConnections" xml:space="preserve">
+  <data name="ClosingConnections" xml:space="preserve">
     <value>Když se ukončují spojení:</value>
   </data>
   <data name="_Connect" xml:space="preserve">
@@ -749,34 +749,34 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="Domain" xml:space="preserve">
     <value>Doména</value>
   </data>
-  <data name="LabelHostname" xml:space="preserve">
+  <data name="Hostname" xml:space="preserve">
     <value>Hostitel:</value>
   </data>
   <data name="PortableEdition" xml:space="preserve">
     <value>Přenosná verze</value>
   </data>
-  <data name="LabelPuttySessionsConfig" xml:space="preserve">
+  <data name="PuttySessionsConfig" xml:space="preserve">
     <value>Pro konfiguraci sezení PuTTY stiskněte toto tlačítko:</value>
   </data>
-  <data name="LabelPuttyTimeout" xml:space="preserve">
+  <data name="PuttyTimeout" xml:space="preserve">
     <value>Maximální doba čekání na PuTTY a integrované externí nástroje:</value>
   </data>
-  <data name="LabelReleasedUnderGPL" xml:space="preserve">
+  <data name="ReleasedUnderGPL" xml:space="preserve">
     <value>Vydáno pod GNU General Public License (GPL)</value>
   </data>
-  <data name="LabelSeconds" xml:space="preserve">
+  <data name="Seconds" xml:space="preserve">
     <value>sekund</value>
   </data>
-  <data name="LabelSelectPanel" xml:space="preserve">
+  <data name="SelectPanel" xml:space="preserve">
     <value>Z níže uvedeného seznamu vyberte panel nebo stiskněte "Nový" pro přidání nového. Pro pokračování stiskněte "OK".</value>
   </data>
-  <data name="LabelServerStatus" xml:space="preserve">
+  <data name="ServerStatus" xml:space="preserve">
     <value>Stav Serveru:</value>
   </data>
   <data name="Database" xml:space="preserve">
     <value>Databáze:</value>
   </data>
-  <data name="LabelVerify" xml:space="preserve">
+  <data name="Verify" xml:space="preserve">
     <value>Verifikuj:</value>
   </data>
   <data name="LanguageString" xml:space="preserve">
@@ -803,19 +803,19 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
     <value>Lokální soubor neexistuje!</value>
   </data>
-  <data name="MenuAddConnectionPanel" xml:space="preserve">
+  <data name="AddConnectionPanel" xml:space="preserve">
     <value>Nový panel spojení</value>
   </data>
-  <data name="MenuCheckForUpdates" xml:space="preserve">
+  <data name="CheckForUpdates" xml:space="preserve">
     <value>Vyhledat aktualizace</value>
   </data>
-  <data name="MenuConfig" xml:space="preserve">
+  <data name="Config" xml:space="preserve">
     <value>Nastavení</value>
   </data>
-  <data name="MenuConnectionPanels" xml:space="preserve">
+  <data name="ConnectionPanels" xml:space="preserve">
     <value>Panely</value>
   </data>
-  <data name="MenuConnectionsAndConfig" xml:space="preserve">
+  <data name="ConnectionsAndConfig" xml:space="preserve">
     <value>Nastavení spojení</value>
   </data>
   <data name="Copy" xml:space="preserve">
@@ -827,31 +827,31 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="MenuDeleteConnection" xml:space="preserve">
+  <data name="DeleteConnection" xml:space="preserve">
     <value>Smazat spojení...</value>
   </data>
-  <data name="MenuDeleteExternalTool" xml:space="preserve">
+  <data name="DeleteExternalTool" xml:space="preserve">
     <value>Smazat vnější nástroj...</value>
   </data>
-  <data name="MenuDeleteFolder" xml:space="preserve">
+  <data name="DeleteFolder" xml:space="preserve">
     <value>Smazat složku...</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Přispějte</value>
   </data>
-  <data name="MenuDuplicateConnection" xml:space="preserve">
+  <data name="DuplicateConnection" xml:space="preserve">
     <value>Klonovat připojení</value>
   </data>
-  <data name="MenuDuplicateFolder" xml:space="preserve">
+  <data name="DuplicateFolder" xml:space="preserve">
     <value>Klonovat složku</value>
   </data>
-  <data name="MenuDuplicateTab" xml:space="preserve">
+  <data name="DuplicateTab" xml:space="preserve">
     <value>Klonovat záložku tabu</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="MenuExternalToolsToolbar" xml:space="preserve">
+  <data name="ExternalToolsToolbar" xml:space="preserve">
     <value>Nástrojová lišta externích nástrojů</value>
   </data>
   <data name="_File" xml:space="preserve">
@@ -860,19 +860,19 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="_Help" xml:space="preserve">
     <value>&amp;Nápověda</value>
   </data>
-  <data name="MenuHelpContents" xml:space="preserve">
+  <data name="HelpContents" xml:space="preserve">
     <value>Nápověda mRemoteNG</value>
   </data>
   <data name="JumpTo" xml:space="preserve">
     <value>Jít na</value>
   </data>
-  <data name="MenuLaunchExternalTool" xml:space="preserve">
+  <data name="LaunchExternalTool" xml:space="preserve">
     <value>Spustit externí nástroj</value>
   </data>
-  <data name="MenuNewConnectionFile" xml:space="preserve">
+  <data name="NewConnectionFile" xml:space="preserve">
     <value>Nový soubor seznamu spojení</value>
   </data>
-  <data name="MenuNewExternalTool" xml:space="preserve">
+  <data name="NewExternalTool" xml:space="preserve">
     <value>Nový externí nástroj</value>
   </data>
   <data name="Notifications" xml:space="preserve">
@@ -884,7 +884,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="DeleteAll" xml:space="preserve">
     <value>Smazat vše</value>
   </data>
-  <data name="MenuOpenConnectionFile" xml:space="preserve">
+  <data name="OpenConnectionFile" xml:space="preserve">
     <value>Otevřít soubor seznamu spojení...</value>
   </data>
   <data name="Options" xml:space="preserve">
@@ -893,61 +893,61 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="PortScan" xml:space="preserve">
     <value>Scan portů</value>
   </data>
-  <data name="MenuQuickConnectToolbar" xml:space="preserve">
+  <data name="QuickConnectToolbar" xml:space="preserve">
     <value>Nástrojová lišta rychlého připojení</value>
   </data>
-  <data name="MenuReconnect" xml:space="preserve">
+  <data name="Reconnect" xml:space="preserve">
     <value>Obnovit připojení</value>
   </data>
-  <data name="MenuRefreshScreen" xml:space="preserve">
+  <data name="RefreshScreen" xml:space="preserve">
     <value>Obnovit obraz (VNC)</value>
   </data>
-  <data name="MenuRenameConnection" xml:space="preserve">
+  <data name="RenameConnection" xml:space="preserve">
     <value>Přejmenovat spojení</value>
   </data>
-  <data name="MenuRenameFolder" xml:space="preserve">
+  <data name="RenameFolder" xml:space="preserve">
     <value>Přejmenovat složku</value>
   </data>
-  <data name="MenuRenameTab" xml:space="preserve">
+  <data name="RenameTab" xml:space="preserve">
     <value>Přejmonovat záložku tabu</value>
   </data>
-  <data name="MenuReportBug" xml:space="preserve">
+  <data name="ReportBug" xml:space="preserve">
     <value>Nahlásit chybu</value>
   </data>
-  <data name="MenuResetLayout" xml:space="preserve">
+  <data name="ResetLayout" xml:space="preserve">
     <value>Výchozí vzhled</value>
   </data>
-  <data name="MenuSaveConnectionFile" xml:space="preserve">
+  <data name="SaveConnectionFile" xml:space="preserve">
     <value>Uložit seznam spojení</value>
   </data>
-  <data name="MenuSaveConnectionFileAs" xml:space="preserve">
+  <data name="SaveConnectionFileAs" xml:space="preserve">
     <value>Uložit seznam spojení jako...</value>
   </data>
-  <data name="MenuSendSpecialKeys" xml:space="preserve">
+  <data name="SendSpecialKeys" xml:space="preserve">
     <value>Poslat speciální stisk kláves (VNC)</value>
   </data>
-  <data name="MenuShowHelpText" xml:space="preserve">
+  <data name="ShowHelpText" xml:space="preserve">
     <value>&amp;Zobraz texty nápovedy</value>
   </data>
-  <data name="MenuShowText" xml:space="preserve">
+  <data name="ShowText" xml:space="preserve">
     <value>Zobraz text</value>
   </data>
-  <data name="MenuSmartSize" xml:space="preserve">
+  <data name="SmartSize" xml:space="preserve">
     <value>Automatická velikost (RDP/VNC)</value>
   </data>
-  <data name="MenuSSHFileTransfer" xml:space="preserve">
+  <data name="SSHFileTransfer" xml:space="preserve">
     <value>SSH přenos souborů</value>
   </data>
-  <data name="MenuStartChat" xml:space="preserve">
+  <data name="StartChat" xml:space="preserve">
     <value>Spustit (VNC) chat</value>
   </data>
-  <data name="MenuSupportForum" xml:space="preserve">
+  <data name="SupportForum" xml:space="preserve">
     <value>Diskuzní fórum podpory</value>
   </data>
   <data name="_Tools" xml:space="preserve">
     <value>&amp;Nástroje</value>
   </data>
-  <data name="MenuTransferFile" xml:space="preserve">
+  <data name="TransferFile" xml:space="preserve">
     <value>Přenos souboru (SSH)</value>
   </data>
   <data name="_View" xml:space="preserve">
@@ -956,7 +956,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="ViewOnly" xml:space="preserve">
     <value>Pouze prohlížet (VNC)</value>
   </data>
-  <data name="MenuWebsite" xml:space="preserve">
+  <data name="Website" xml:space="preserve">
     <value>Webová stránka</value>
   </data>
   <data name="MinimizeToSysTray" xml:space="preserve">
@@ -1026,7 +1026,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="OptionsProxyTesting" xml:space="preserve">
     <value>Ověřuji...</value>
   </data>
-  <data name="OptionsTabTheme" xml:space="preserve">
+  <data name="Theme" xml:space="preserve">
     <value>Vzhled</value>
   </data>
   <data name="_Delete" xml:space="preserve">
@@ -1215,7 +1215,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="HostnameIp" xml:space="preserve">
     <value>Hostname/DN/IP</value>
   </data>
-  <data name="PropertyNameAll" xml:space="preserve">
+  <data name="All" xml:space="preserve">
     <value>Vše</value>
   </data>
   <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
@@ -1230,7 +1230,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="PropertyNameCacheBitmaps" xml:space="preserve">
     <value>Mezipaměť bitmap</value>
   </data>
-  <data name="PropertyNameColors" xml:space="preserve">
+  <data name="Colors" xml:space="preserve">
     <value>Bar. hloubka</value>
   </data>
   <data name="PropertyNameCompression" xml:space="preserve">
@@ -1305,7 +1305,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
     <value>Login brány</value>
   </data>
-  <data name="PropertyNameRedirectDrives" xml:space="preserve">
+  <data name="DiskDrives" xml:space="preserve">
     <value>Připojit lok. disky</value>
   </data>
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
@@ -1464,7 +1464,7 @@ Zpráva:
   <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Vypnout přetahování celého okna (Full Window)</value>
   </data>
-  <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
+  <data name="DisableMenuAnimations" xml:space="preserve">
     <value>Vypnout animace menu</value>
   </data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
@@ -1500,7 +1500,7 @@ Zpráva:
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Chyba inicializace Winsock.</value>
   </data>
-  <data name="RDPFitToPanel" xml:space="preserve">
+  <data name="RdpFitToPanel" xml:space="preserve">
     <value>Přizpůsobit panelu</value>
   </data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1551,16 +1551,16 @@ Zpráva:
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>Metoda RDP SetResolution selhala!</value>
   </data>
-  <data name="RDPSmartSize" xml:space="preserve">
+  <data name="RdpSmartSize" xml:space="preserve">
     <value>Autom. velikost</value>
   </data>
-  <data name="RDPSoundBringToThisComputer" xml:space="preserve">
+  <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Přehrávat v místním počítači</value>
   </data>
   <data name="DoNotPlay" xml:space="preserve">
     <value>Vůbec nepřehrávat</value>
   </data>
-  <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+  <data name="RdpSoundLeaveAtRemoteComputer" xml:space="preserve">
     <value>Přehrávat na vzdáleném počítači</value>
   </data>
   <data name="RdpToggleFullscreenFailed" xml:space="preserve">
@@ -1671,10 +1671,10 @@ Zpráva:
   <data name="SSHTransferFailed" xml:space="preserve">
     <value>Selhal přenos přes SSH.</value>
   </data>
-  <data name="StartIP" xml:space="preserve">
+  <data name="FirstIp" xml:space="preserve">
     <value>Počáteční IP</value>
   </data>
-  <data name="StartPort" xml:space="preserve">
+  <data name="FirstPort" xml:space="preserve">
     <value>Počáteční Port</value>
   </data>
   <data name="StartupExit" xml:space="preserve">
@@ -1692,7 +1692,7 @@ Zpráva:
   <data name="TabsAndPanels" xml:space="preserve">
     <value>Taby &amp;&amp; Panely</value>
   </data>
-  <data name="TabUpdates" xml:space="preserve">
+  <data name="Updates" xml:space="preserve">
     <value>Aktualizace</value>
   </data>
   <data name="Telnet" xml:space="preserve">
@@ -1743,7 +1743,7 @@ Zpráva:
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>Informace o aktualizacích nemohly být staženy.</value>
   </data>
-  <data name="UpdateCheckingLabel" xml:space="preserve">
+  <data name="CheckingForUpdates" xml:space="preserve">
     <value>Vyhledávám aktualizace...</value>
   </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
@@ -1822,7 +1822,7 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="Yes" xml:space="preserve">
     <value>Ano</value>
   </data>
-  <data name="MenuReconnectAll" xml:space="preserve">
+  <data name="ReconnectAll" xml:space="preserve">
     <value>Obnovit všechna otevřená spojení</value>
   </data>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">
@@ -1864,7 +1864,7 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="PropertyDescriptionSoundQuality" xml:space="preserve">
     <value>Vyberte si jednu z kvalit zvuku poskytovanou protokolem: Variabilní, Střední, Vvysoká</value>
   </data>
-  <data name="PropertyNameSoundQuality" xml:space="preserve">
+  <data name="SoundQuality" xml:space="preserve">
     <value>Kvalita zvuku</value>
   </data>
   <data name="UpdatePortableDownloadComplete" xml:space="preserve">

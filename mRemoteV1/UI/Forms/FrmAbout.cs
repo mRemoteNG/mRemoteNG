@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            lblLicense.Text = Language.LabelReleasedUnderGPL;
+            lblLicense.Text = Language.ReleasedUnderGPL;
             base.Text = Language.About;
             llChangelog.Text = Language.Changelog;
             llCredits.Text = Language.Credits;

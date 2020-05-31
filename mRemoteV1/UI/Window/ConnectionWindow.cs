@@ -265,22 +265,22 @@ namespace mRemoteNG.UI.Window
         private void ApplyLanguage()
         {
             cmenTabFullscreen.Text = Language.Fullscreen;
-            cmenTabSmartSize.Text = Language.MenuSmartSize;
+            cmenTabSmartSize.Text = Language.SmartSize;
             cmenTabViewOnly.Text = Language.ViewOnly;
             cmenTabScreenshot.Text = Language.Screenshot;
-            cmenTabStartChat.Text = Language.MenuStartChat;
-            cmenTabTransferFile.Text = Language.MenuTransferFile;
-            cmenTabRefreshScreen.Text = Language.MenuRefreshScreen;
-            cmenTabSendSpecialKeys.Text = Language.MenuSendSpecialKeys;
+            cmenTabStartChat.Text = Language.StartChat;
+            cmenTabTransferFile.Text = Language.TransferFile;
+            cmenTabRefreshScreen.Text = Language.RefreshScreen;
+            cmenTabSendSpecialKeys.Text = Language.SendSpecialKeys;
             cmenTabSendSpecialKeysCtrlAltDel.Text = Language.CtrlAltDel;
             cmenTabSendSpecialKeysCtrlEsc.Text = Language.CtrlEsc;
             cmenTabExternalApps.Text = Language._Tools;
-            cmenTabRenameTab.Text = Language.MenuRenameTab;
-            cmenTabDuplicateTab.Text = Language.MenuDuplicateTab;
-            cmenTabReconnect.Text = Language.MenuReconnect;
+            cmenTabRenameTab.Text = Language.RenameTab;
+            cmenTabDuplicateTab.Text = Language.DuplicateTab;
+            cmenTabReconnect.Text = Language.Reconnect;
             cmenTabDisconnect.Text = Language.Disconnect;
-            cmenTabDisconnectOthers.Text = Language.MenuDisconnectOthers;
-            cmenTabDisconnectOthersRight.Text = Language.MenuDisconnectOthersRight;
+            cmenTabDisconnectOthers.Text = Language.DisconnectOthers;
+            cmenTabDisconnectOthersRight.Text = Language.DisconnectOthersRight;
             cmenTabPuttySettings.Text = Language.PuttySettings;
         }
 

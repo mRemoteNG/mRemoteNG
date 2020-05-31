@@ -354,7 +354,7 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            grpFiles.Text = Language.GroupboxFiles;
+            grpFiles.Text = Language.Files;
             lblLocalFile.Text = Language.LocalFile + ":";
             lblRemoteFile.Text = Language.RemoteFile + ":";
             btnBrowse.Text = Language._Browse;
@@ -365,8 +365,8 @@ namespace mRemoteNG.UI.Window
             lblPort.Text = Language.Port;
             lblHost.Text = Language.Host + ":";
             btnTransfer.Text = Language.Transfer;
-            TabText = Language.MenuSSHFileTransfer;
-            Text = Language.MenuSSHFileTransfer;
+            TabText = Language.Transfer;
+            Text = Language.Transfer;
         }
 
         #endregion

@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsSshTransfer.Image = Resources.SSHTransfer;
             _mMenToolsSshTransfer.Name = "mMenToolsSSHTransfer";
             _mMenToolsSshTransfer.Size = new System.Drawing.Size(184, 22);
-            _mMenToolsSshTransfer.Text = Language.MenuSSHFileTransfer;
+            _mMenToolsSshTransfer.Text = Language.SSHFileTransfer;
             _mMenToolsSshTransfer.Click += mMenToolsSSHTransfer_Click;
             // 
             // mMenToolsUVNCSC
@@ -107,7 +107,7 @@ namespace mRemoteNG.UI.Menu
         public void ApplyLanguage()
         {
             Text = Language._Tools;
-            _mMenToolsSshTransfer.Text = Language.MenuSSHFileTransfer;
+            _mMenToolsSshTransfer.Text = Language.SSHFileTransfer;
             _mMenToolsExternalApps.Text = Language.ExternalTool;
             _mMenToolsPortScan.Text = Language.PortScan;
             _mMenViewScreenshotManager.Text = Language.Screenshots;

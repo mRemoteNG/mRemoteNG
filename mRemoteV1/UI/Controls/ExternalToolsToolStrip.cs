@@ -49,7 +49,7 @@ namespace mRemoteNG.UI.Controls
             CMenToolbarShowText.CheckState = CheckState.Checked;
             CMenToolbarShowText.Name = "cMenToolbarShowText";
             CMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
-            CMenToolbarShowText.Text = Language.MenuShowText;
+            CMenToolbarShowText.Text = Language.ShowText;
             CMenToolbarShowText.Click += cMenToolbarShowText_Click;
         }
 

@@ -75,9 +75,9 @@ namespace mRemoteNG.UI.Window
             WaitForExitCheckBox.Text = Language.WaitForExit;
             BrowseButton.Text = Language._Browse;
             BrowseWorkingDir.Text = Language._Browse;
-            NewToolMenuItem.Text = Language.MenuNewExternalTool;
-            DeleteToolMenuItem.Text = Language.MenuDeleteExternalTool;
-            LaunchToolMenuItem.Text = Language.MenuLaunchExternalTool;
+            NewToolMenuItem.Text = Language.NewExternalTool;
+            DeleteToolMenuItem.Text = Language.DeleteExternalTool;
+            LaunchToolMenuItem.Text = Language.LaunchExternalTool;
         }
 
         private new void ApplyTheme()

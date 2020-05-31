@@ -216,7 +216,7 @@
   <data name="_Stop" xml:space="preserve">
 		<value>중단(&amp;S)</value>
 	</data>
-  <data name="ButtonTestProxy" xml:space="preserve">
+  <data name="TestProxy" xml:space="preserve">
 		<value>포록시 테스트</value>
 	</data>
   <data name="CannotStartPortScan" xml:space="preserve">
@@ -228,13 +228,13 @@
   <data name="Connection" xml:space="preserve">
 		<value>연결</value>
 	</data>
-  <data name="CategoryDisplay" xml:space="preserve">
+  <data name="Display" xml:space="preserve">
 		<value>표시</value>
 	</data>
-  <data name="CategoryGateway" xml:space="preserve">
+  <data name="Gateway" xml:space="preserve">
 		<value>게이트웨이</value>
 	</data>
-  <data name="CategoryMiscellaneous" xml:space="preserve">
+  <data name="Miscellaneous" xml:space="preserve">
 		<value>기타</value>
 	</data>
   <data name="Protocol" xml:space="preserve">
@@ -246,7 +246,7 @@
   <data name="CheckFailed" xml:space="preserve">
 		<value>검사 실패!</value>
 	</data>
-  <data name="CcCheckSucceeded" xml:space="preserve">
+  <data name="CheckSucceeded" xml:space="preserve">
 		<value>검사 성공!</value>
 	</data>
   <data name="CcICAFailed" xml:space="preserve">
@@ -403,7 +403,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
 		<value>자동으로 연결을 끊기 전에 RDP 세션이 유휴 상태가되는 시간 (제한 없이 사용 : 0)</value>
 	</data>
-  <data name="PropertyNameSoundQuality" xml:space="preserve">
+  <data name="SoundQuality" xml:space="preserve">
 		<value>음질</value>
 	</data>
   <data name="UpdatePortableDownloadComplete" xml:space="preserve">
@@ -578,13 +578,13 @@ VncSharp 제어 버전 {0}</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
 		<value>FilteredPropertyGrid에서의 ToolStrip 컨트롤을 찾을 수 없습니다.</value>
 	</data>
-  <data name="CurrentVersion" xml:space="preserve">
+  <data name="InstalledVersion" xml:space="preserve">
 		<value>설치된 버전</value>
 	</data>
   <data name="Detect" xml:space="preserve">
 		<value>검색</value>
 	</data>
-  <data name="DontConnectToConsoleSessionMenuItem" xml:space="preserve">
+  <data name="DontConnectToConsoleSession" xml:space="preserve">
 		<value>콘솔 세션에 연결하지 않음</value>
 	</data>
   <data name="DontConnectWhenAuthFails" xml:space="preserve">
@@ -695,7 +695,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="ExternalToolDefaultName" xml:space="preserve">
 		<value>새로운 외부 도구</value>
 	</data>
-  <data name="FileFormatLabel" xml:space="preserve">
+  <data name="FileFormat" xml:space="preserve">
 		<value>파일 형식(&amp;F):</value>
 	</data>
   <data name="FilterAll" xml:space="preserve">
@@ -746,7 +746,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
 		<value>외부 도구 속성</value>
 	</data>
-  <data name="GroupboxFiles" xml:space="preserve">
+  <data name="Files" xml:space="preserve">
 		<value>파일</value>
 	</data>
   <data name="Host" xml:space="preserve">
@@ -803,10 +803,10 @@ VncSharp 제어 버전 {0}</value>
   <data name="ImportFileFailedContent" xml:space="preserve">
 		<value>"{0}"파일을 가져 오는 중 오류가 발생했습니다.</value>
 	</data>
-  <data name="ImportFileFailedMainInstruction" xml:space="preserve">
+  <data name="ImportFailed" xml:space="preserve">
 		<value>가져 오기 실패</value>
 	</data>
-  <data name="ImportFromFileMenuItem" xml:space="preserve">
+  <data name="ImportFromFile" xml:space="preserve">
 		<value>파일에서 가져 오기(&amp;F) ...</value>
 	</data>
   <data name="ImportPortScan" xml:space="preserve">
@@ -839,7 +839,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="Address" xml:space="preserve">
 		<value>주소:</value>
 	</data>
-  <data name="LabelClosingConnections" xml:space="preserve">
+  <data name="ClosingConnections" xml:space="preserve">
 		<value>연결을 닫을 때 :</value>
 	</data>
   <data name="_Connect" xml:space="preserve">
@@ -851,34 +851,34 @@ VncSharp 제어 버전 {0}</value>
   <data name="Domain" xml:space="preserve">
 		<value>도메인</value>
 	</data>
-  <data name="LabelHostname" xml:space="preserve">
+  <data name="Hostname" xml:space="preserve">
 		<value>호스트 이름 :</value>
 	</data>
   <data name="PortableEdition" xml:space="preserve">
 		<value>휴대용 버전</value>
 	</data>
-  <data name="LabelPuttySessionsConfig" xml:space="preserve">
+  <data name="PuttySessionsConfig" xml:space="preserve">
 		<value>PuTTY 세션을 구성하려면이 단추를 누르십시오:</value>
 	</data>
-  <data name="LabelPuttyTimeout" xml:space="preserve">
+  <data name="PuttyTimeout" xml:space="preserve">
 		<value>Maximum PuTTY and integrated external tools wait time:</value>
 	</data>
-  <data name="LabelReleasedUnderGPL" xml:space="preserve">
+  <data name="ReleasedUnderGPL" xml:space="preserve">
 		<value>GNU 일반 공중 사용 허가서 (GPL)</value>
 	</data>
-  <data name="LabelSeconds" xml:space="preserve">
+  <data name="Seconds" xml:space="preserve">
 		<value>초</value>
 	</data>
-  <data name="LabelSelectPanel" xml:space="preserve">
+  <data name="SelectPanel" xml:space="preserve">
 		<value>아래 목록에서 패널을 선택하거나 새로 만들기를 클릭하여 새 패널을 추가하십시오. 확인을 클릭하여 계속하십시오.</value>
 	</data>
-  <data name="LabelServerStatus" xml:space="preserve">
+  <data name="ServerStatus" xml:space="preserve">
 		<value>서버 상태 :</value>
 	</data>
   <data name="Database" xml:space="preserve">
 		<value>데이터 베이스:</value>
 	</data>
-  <data name="LabelVerify" xml:space="preserve">
+  <data name="Verify" xml:space="preserve">
 		<value>검증:</value>
 	</data>
   <data name="LanguageString" xml:space="preserve">
@@ -905,19 +905,19 @@ VncSharp 제어 버전 {0}</value>
   <data name="LocalFileDoesNotExist" xml:space="preserve">
 		<value>로컬 파일이 존재하지 않습니다!</value>
 	</data>
-  <data name="MenuAddConnectionPanel" xml:space="preserve">
+  <data name="AddConnectionPanel" xml:space="preserve">
 		<value>연결 패널 추가</value>
 	</data>
-  <data name="MenuCheckForUpdates" xml:space="preserve">
+  <data name="CheckForUpdates" xml:space="preserve">
 		<value>업데이트 확인</value>
 	</data>
-  <data name="MenuConfig" xml:space="preserve">
+  <data name="Config" xml:space="preserve">
 		<value>구성</value>
 	</data>
-  <data name="MenuConnectionPanels" xml:space="preserve">
+  <data name="ConnectionPanels" xml:space="preserve">
 		<value>연결 패널</value>
 	</data>
-  <data name="MenuConnectionsAndConfig" xml:space="preserve">
+  <data name="ConnectionsAndConfig" xml:space="preserve">
 		<value>연결 및 구성</value>
 	</data>
   <data name="Copy" xml:space="preserve">
@@ -929,31 +929,31 @@ VncSharp 제어 버전 {0}</value>
   <data name="CtrlEsc" xml:space="preserve">
 		<value>Ctrl-Esc</value>
 	</data>
-  <data name="MenuDeleteConnection" xml:space="preserve">
+  <data name="DeleteConnection" xml:space="preserve">
 		<value>연결 삭제 ...</value>
 	</data>
-  <data name="MenuDeleteExternalTool" xml:space="preserve">
+  <data name="DeleteExternalTool" xml:space="preserve">
 		<value>외부 도구를 삭제 ...</value>
 	</data>
-  <data name="MenuDeleteFolder" xml:space="preserve">
+  <data name="DeleteFolder" xml:space="preserve">
 		<value>폴더 삭제 ...</value>
 	</data>
   <data name="Donate" xml:space="preserve">
 		<value>기부</value>
 	</data>
-  <data name="MenuDuplicateConnection" xml:space="preserve">
+  <data name="DuplicateConnection" xml:space="preserve">
 		<value>중복 연결</value>
 	</data>
-  <data name="MenuDuplicateFolder" xml:space="preserve">
+  <data name="DuplicateFolder" xml:space="preserve">
 		<value>중복 폴더</value>
 	</data>
-  <data name="MenuDuplicateTab" xml:space="preserve">
+  <data name="DuplicateTab" xml:space="preserve">
 		<value>중복 탭</value>
 	</data>
   <data name="Exit" xml:space="preserve">
 		<value>종료</value>
 	</data>
-  <data name="MenuExternalToolsToolbar" xml:space="preserve">
+  <data name="ExternalToolsToolbar" xml:space="preserve">
 		<value>외부 도구 모음</value>
 	</data>
   <data name="_File" xml:space="preserve">
@@ -962,19 +962,19 @@ VncSharp 제어 버전 {0}</value>
   <data name="_Help" xml:space="preserve">
 		<value>도움말(&amp;H)</value>
 	</data>
-  <data name="MenuHelpContents" xml:space="preserve">
+  <data name="HelpContents" xml:space="preserve">
 		<value>mRemoteNG 도움말</value>
 	</data>
   <data name="JumpTo" xml:space="preserve">
 		<value>바로 가기</value>
 	</data>
-  <data name="MenuLaunchExternalTool" xml:space="preserve">
+  <data name="LaunchExternalTool" xml:space="preserve">
 		<value>외부 도구 실행</value>
 	</data>
-  <data name="MenuNewConnectionFile" xml:space="preserve">
+  <data name="NewConnectionFile" xml:space="preserve">
 		<value>새 연결 파일</value>
 	</data>
-  <data name="MenuNewExternalTool" xml:space="preserve">
+  <data name="NewExternalTool" xml:space="preserve">
 		<value>새로운 외부 도구</value>
 	</data>
   <data name="Notifications" xml:space="preserve">
@@ -986,7 +986,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="DeleteAll" xml:space="preserve">
 		<value>모두 삭제</value>
 	</data>
-  <data name="MenuOpenConnectionFile" xml:space="preserve">
+  <data name="OpenConnectionFile" xml:space="preserve">
 		<value>연결 파일 열기 ...</value>
 	</data>
   <data name="Options" xml:space="preserve">
@@ -995,61 +995,61 @@ VncSharp 제어 버전 {0}</value>
   <data name="PortScan" xml:space="preserve">
 		<value>포트 스캔</value>
 	</data>
-  <data name="MenuQuickConnectToolbar" xml:space="preserve">
+  <data name="QuickConnectToolbar" xml:space="preserve">
 		<value>빠른 연결 도구 모음</value>
 	</data>
-  <data name="MenuReconnect" xml:space="preserve">
+  <data name="Reconnect" xml:space="preserve">
 		<value>다시 연결</value>
 	</data>
-  <data name="MenuRefreshScreen" xml:space="preserve">
+  <data name="RefreshScreen" xml:space="preserve">
 		<value>화면 새로 고침 (VNC)</value>
 	</data>
-  <data name="MenuRenameConnection" xml:space="preserve">
+  <data name="RenameConnection" xml:space="preserve">
 		<value>연결 이름 바꾸기</value>
 	</data>
-  <data name="MenuRenameFolder" xml:space="preserve">
+  <data name="RenameFolder" xml:space="preserve">
 		<value>폴더 이름 바꾸기</value>
 	</data>
-  <data name="MenuRenameTab" xml:space="preserve">
+  <data name="RenameTab" xml:space="preserve">
 		<value>탭 이름 바꾸기</value>
 	</data>
-  <data name="MenuReportBug" xml:space="preserve">
+  <data name="ReportBug" xml:space="preserve">
 		<value>버그 신고</value>
 	</data>
-  <data name="MenuResetLayout" xml:space="preserve">
+  <data name="ResetLayout" xml:space="preserve">
 		<value>레이아웃 재설정</value>
 	</data>
-  <data name="MenuSaveConnectionFile" xml:space="preserve">
+  <data name="SaveConnectionFile" xml:space="preserve">
 		<value>연결 파일 저장</value>
 	</data>
-  <data name="MenuSaveConnectionFileAs" xml:space="preserve">
+  <data name="SaveConnectionFileAs" xml:space="preserve">
 		<value>연결 파일 다른 이름으로 저장 ...</value>
 	</data>
-  <data name="MenuSendSpecialKeys" xml:space="preserve">
+  <data name="SendSpecialKeys" xml:space="preserve">
 		<value>특수 키 보내기 (VNC)</value>
 	</data>
-  <data name="MenuShowHelpText" xml:space="preserve">
+  <data name="ShowHelpText" xml:space="preserve">
 		<value>도움말 텍스트 표시 (&amp;H)</value>
 	</data>
-  <data name="MenuShowText" xml:space="preserve">
+  <data name="ShowText" xml:space="preserve">
 		<value>텍스트 표시</value>
 	</data>
-  <data name="MenuSmartSize" xml:space="preserve">
+  <data name="SmartSize" xml:space="preserve">
 		<value>SmartSize (RDP / VNC)</value>
 	</data>
-  <data name="MenuSSHFileTransfer" xml:space="preserve">
+  <data name="SSHFileTransfer" xml:space="preserve">
 		<value>SSH 파일 전송</value>
 	</data>
-  <data name="MenuStartChat" xml:space="preserve">
+  <data name="StartChat" xml:space="preserve">
 		<value>채팅 시작 (VNC)</value>
 	</data>
-  <data name="MenuSupportForum" xml:space="preserve">
+  <data name="SupportForum" xml:space="preserve">
 		<value>지원 포럼</value>
 	</data>
   <data name="_Tools" xml:space="preserve">
 		<value>도구(&amp;T)</value>
 	</data>
-  <data name="MenuTransferFile" xml:space="preserve">
+  <data name="TransferFile" xml:space="preserve">
 		<value>파일 전송 (SSH)</value>
 	</data>
   <data name="_View" xml:space="preserve">
@@ -1058,7 +1058,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="ViewOnly" xml:space="preserve">
 		<value>보기 전용 (VNC)</value>
 	</data>
-  <data name="MenuWebsite" xml:space="preserve">
+  <data name="Website" xml:space="preserve">
 		<value>웹 사이트</value>
 	</data>
   <data name="MinimizeToSysTray" xml:space="preserve">
@@ -1128,7 +1128,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="OptionsProxyTesting" xml:space="preserve">
 		<value>테스트 ...</value>
 	</data>
-  <data name="OptionsTabTheme" xml:space="preserve">
+  <data name="Theme" xml:space="preserve">
 		<value>테마</value>
 	</data>
   <data name="_Delete" xml:space="preserve">
@@ -1317,7 +1317,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="HostnameIp" xml:space="preserve">
 		<value>호스트 이름 / IP</value>
 	</data>
-  <data name="PropertyNameAll" xml:space="preserve">
+  <data name="All" xml:space="preserve">
 		<value>모든</value>
 	</data>
   <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
@@ -1332,7 +1332,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyNameCacheBitmaps" xml:space="preserve">
 		<value>캐시 비트 맵</value>
 	</data>
-  <data name="PropertyNameColors" xml:space="preserve">
+  <data name="Colors" xml:space="preserve">
 		<value>색</value>
 	</data>
   <data name="PropertyNameCompression" xml:space="preserve">
@@ -1407,7 +1407,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
 		<value>게이트웨이 사용자 이름</value>
 	</data>
-  <data name="PropertyNameRedirectDrives" xml:space="preserve">
+  <data name="DiskDrives" xml:space="preserve">
 		<value>디스크 드라이브</value>
 	</data>
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
@@ -1566,7 +1566,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
 		<value>전체 창 끌기 해제</value>
 	</data>
-  <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
+  <data name="DisableMenuAnimations" xml:space="preserve">
 		<value>메뉴 애니메이션 해제</value>
 	</data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
@@ -1602,7 +1602,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="RdpErrorWinsock" xml:space="preserve">
 		<value>Winsock 초기화 오류입니다.</value>
 	</data>
-  <data name="RDPFitToPanel" xml:space="preserve">
+  <data name="RdpFitToPanel" xml:space="preserve">
 		<value>패널 맞추기</value>
 	</data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1653,16 +1653,16 @@ VncSharp 제어 버전 {0}</value>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
 		<value>RDP 해상도 설정 실패!</value>
 	</data>
-  <data name="RDPSmartSize" xml:space="preserve">
+  <data name="RdpSmartSize" xml:space="preserve">
 		<value>스마트 사이즈</value>
 	</data>
-  <data name="RDPSoundBringToThisComputer" xml:space="preserve">
+  <data name="RdpSoundBringToThisComputer" xml:space="preserve">
 		<value>컴퓨터 가져 오기</value>
 	</data>
   <data name="DoNotPlay" xml:space="preserve">
 		<value>재생 금지</value>
 	</data>
-  <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+  <data name="RdpSoundLeaveAtRemoteComputer" xml:space="preserve">
 		<value>원격 컴퓨터 나가기</value>
 	</data>
   <data name="RdpToggleFullscreenFailed" xml:space="preserve">
@@ -1773,10 +1773,10 @@ VncSharp 제어 버전 {0}</value>
   <data name="SSHTransferFailed" xml:space="preserve">
 		<value>SSH 전송에 실패했습니다.</value>
 	</data>
-  <data name="StartIP" xml:space="preserve">
+  <data name="FirstIp" xml:space="preserve">
 		<value>시작 IP</value>
 	</data>
-  <data name="StartPort" xml:space="preserve">
+  <data name="FirstPort" xml:space="preserve">
 		<value>시작 포트</value>
 	</data>
   <data name="StartupExit" xml:space="preserve">
@@ -1794,7 +1794,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="TabsAndPanels" xml:space="preserve">
 		<value>탭 &amp; 패널</value>
 	</data>
-  <data name="TabUpdates" xml:space="preserve">
+  <data name="Updates" xml:space="preserve">
 		<value>업데이트</value>
 	</data>
   <data name="Telnet" xml:space="preserve">
@@ -1845,7 +1845,7 @@ VncSharp 제어 버전 {0}</value>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
 		<value>업데이트 정보를 다운로드 할 수 없습니다.</value>
 	</data>
-  <data name="UpdateCheckingLabel" xml:space="preserve">
+  <data name="CheckingForUpdates" xml:space="preserve">
 		<value>업데이트 확인 중 ...</value>
 	</data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
@@ -1924,7 +1924,7 @@ mRemoteNG는 이제 종료되고 설치로 시작됩니다.</value>
   <data name="Yes" xml:space="preserve">
 		<value>예</value>
 	</data>
-  <data name="MenuReconnectAll" xml:space="preserve">
+  <data name="ReconnectAll" xml:space="preserve">
 		<value>모든 연결을 다시 연결</value>
 	</data>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">

@@ -207,7 +207,7 @@
   <data name="_Stop" xml:space="preserve">
     <value>&amp;Διακοπή</value>
   </data>
-  <data name="ButtonTestProxy" xml:space="preserve">
+  <data name="TestProxy" xml:space="preserve">
     <value>Δοκιμή διακομιστή μεσολάβησης</value>
   </data>
   <data name="CannotStartPortScan" xml:space="preserve">
@@ -219,13 +219,13 @@
   <data name="Connection" xml:space="preserve">
     <value>Σύνδεση</value>
   </data>
-  <data name="CategoryDisplay" xml:space="preserve">
+  <data name="Display" xml:space="preserve">
     <value>Οθόνη</value>
   </data>
-  <data name="CategoryGateway" xml:space="preserve">
+  <data name="Gateway" xml:space="preserve">
     <value>Πύλη</value>
   </data>
-  <data name="CategoryMiscellaneous" xml:space="preserve">
+  <data name="Miscellaneous" xml:space="preserve">
     <value>Διάφορα</value>
   </data>
   <data name="Protocol" xml:space="preserve">
@@ -237,7 +237,7 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Ο ελέγχος απέτυχε!</value>
   </data>
-  <data name="CcCheckSucceeded" xml:space="preserve">
+  <data name="CheckSucceeded" xml:space="preserve">
     <value>Ο ελεγχος πέτυχε!</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">

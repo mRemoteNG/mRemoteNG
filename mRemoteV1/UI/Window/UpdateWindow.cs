@@ -57,15 +57,15 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            Text = Language.MenuCheckForUpdates;
-            TabText = Language.MenuCheckForUpdates;
+            Text = Language.CheckForUpdates;
+            TabText = Language.CheckForUpdates;
             btnCheckForUpdate.Text = Language.CheckAgain;
             btnDownload.Text = Runtime.IsPortableEdition
                 ? Language.Download
                 : Language.DownloadAndInstall;
             lblChangeLogLabel.Text = Language.Changelog;
             lblInstalledVersion.Text = Language.Version;
-            lblInstalledVersionLabel.Text = $"{Language.CurrentVersion}:";
+            lblInstalledVersionLabel.Text = $"{Language.AvailableVersion}:";
             lblLatestVersion.Text = Language.Version;
             lblLatestVersionLabel.Text = $"{Language.AvailableVersion}:";
         }
@@ -107,7 +107,7 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            lblStatus.Text = Language.UpdateCheckingLabel;
+            lblStatus.Text = Language.CheckForUpdates;
             lblStatus.ForeColor = SystemColors.WindowText;
             lblLatestVersionLabel.Visible = false;
             lblInstalledVersion.Visible = false;
@@ -278,11 +278,11 @@ namespace mRemoteNG.UI.Window
                     throw e.Error;
 
                 if (Runtime.IsPortableEdition)
-                    MessageBox.Show(Language.UpdatePortableDownloadComplete, Language.MenuCheckForUpdates,
+                    MessageBox.Show(Language.UpdatePortableDownloadComplete, Language.CheckForUpdates,
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                 {
-                    if (MessageBox.Show(Language.UpdateDownloadComplete, Language.MenuCheckForUpdates,
+                    if (MessageBox.Show(Language.UpdateDownloadComplete, Language.CheckForUpdates,
                                         MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
                         Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);

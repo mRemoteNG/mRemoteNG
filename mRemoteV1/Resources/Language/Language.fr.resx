@@ -210,7 +210,7 @@
   <data name="_Stop" xml:space="preserve">
     <value>&amp;Arrêter</value>
   </data>
-  <data name="ButtonTestProxy" xml:space="preserve">
+  <data name="TestProxy" xml:space="preserve">
     <value>Tester le Proxy</value>
   </data>
   <data name="CannotStartPortScan" xml:space="preserve">
@@ -222,13 +222,13 @@
   <data name="Connection" xml:space="preserve">
     <value>Connexion</value>
   </data>
-  <data name="CategoryDisplay" xml:space="preserve">
+  <data name="Display" xml:space="preserve">
     <value>Affichage</value>
   </data>
-  <data name="CategoryGateway" xml:space="preserve">
+  <data name="Gateway" xml:space="preserve">
     <value>Passerelle</value>
   </data>
-  <data name="CategoryMiscellaneous" xml:space="preserve">
+  <data name="Miscellaneous" xml:space="preserve">
     <value>Autre</value>
   </data>
   <data name="Protocol" xml:space="preserve">
@@ -240,7 +240,7 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Vérification échouée !</value>
   </data>
-  <data name="CcCheckSucceeded" xml:space="preserve">
+  <data name="CheckSucceeded" xml:space="preserve">
     <value>Verification réussie !</value>
   </data>
   <data name="CcICAFailed" xml:space="preserve">
@@ -450,7 +450,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Le contrôle ToolStrip est introuvable dans le FilteredPropertyGrid.</value>
   </data>
-  <data name="CurrentVersion" xml:space="preserve">
+  <data name="InstalledVersion" xml:space="preserve">
     <value>Version installée</value>
   </data>
   <data name="Detect" xml:space="preserve">
@@ -570,7 +570,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="GroupboxExternalToolProperties" xml:space="preserve">
     <value>Propriétés de l'outil externe</value>
   </data>
-  <data name="GroupboxFiles" xml:space="preserve">
+  <data name="Files" xml:space="preserve">
     <value>Fichiers</value>
   </data>
   <data name="Host" xml:space="preserve">
@@ -642,7 +642,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="Address" xml:space="preserve">
     <value>Adresse :</value>
   </data>
-  <data name="LabelClosingConnections" xml:space="preserve">
+  <data name="ClosingConnections" xml:space="preserve">
     <value>Lors de la fermeture des connexions :</value>
   </data>
   <data name="_Connect" xml:space="preserve">
@@ -654,34 +654,34 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="Domain" xml:space="preserve">
     <value>Domaine</value>
   </data>
-  <data name="LabelHostname" xml:space="preserve">
+  <data name="Hostname" xml:space="preserve">
     <value>Nom d'hôte :</value>
   </data>
   <data name="PortableEdition" xml:space="preserve">
     <value>Édition Portable</value>
   </data>
-  <data name="LabelPuttySessionsConfig" xml:space="preserve">
+  <data name="PuttySessionsConfig" xml:space="preserve">
     <value>Pour configurer les sessions PuTTY cliquez sur ce bouton :</value>
   </data>
-  <data name="LabelPuttyTimeout" xml:space="preserve">
+  <data name="PuttyTimeout" xml:space="preserve">
     <value>Temps d'attente maximum pour Putty et les composants externes :</value>
   </data>
-  <data name="LabelReleasedUnderGPL" xml:space="preserve">
+  <data name="ReleasedUnderGPL" xml:space="preserve">
     <value>Paru sous la GNU General Public License (GPL)</value>
   </data>
-  <data name="LabelSeconds" xml:space="preserve">
+  <data name="Seconds" xml:space="preserve">
     <value>seconde</value>
   </data>
-  <data name="LabelSelectPanel" xml:space="preserve">
+  <data name="SelectPanel" xml:space="preserve">
     <value>Sélectionnez un groupe dans la liste ci-dessous ou cliquez sur Nouveau pour en ajouter un nouveau. Cliquez sur OK pour continuer.</value>
   </data>
-  <data name="LabelServerStatus" xml:space="preserve">
+  <data name="ServerStatus" xml:space="preserve">
     <value>L'état du serveur :</value>
   </data>
   <data name="Database" xml:space="preserve">
     <value>Base de données :</value>
   </data>
-  <data name="LabelVerify" xml:space="preserve">
+  <data name="Verify" xml:space="preserve">
     <value>Vérifier :</value>
   </data>
   <data name="LanguageString" xml:space="preserve">
@@ -705,19 +705,19 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="LocalFileDoesNotExist" xml:space="preserve">
     <value>Le fichier local n'existe pas !</value>
   </data>
-  <data name="MenuAddConnectionPanel" xml:space="preserve">
+  <data name="AddConnectionPanel" xml:space="preserve">
     <value>Ajouter un panneau de connexion</value>
   </data>
-  <data name="MenuCheckForUpdates" xml:space="preserve">
+  <data name="CheckForUpdates" xml:space="preserve">
     <value>Rechercher des mises à jour</value>
   </data>
-  <data name="MenuConfig" xml:space="preserve">
+  <data name="Config" xml:space="preserve">
     <value>Configuration</value>
   </data>
-  <data name="MenuConnectionPanels" xml:space="preserve">
+  <data name="ConnectionPanels" xml:space="preserve">
     <value>Panneaux de connexion</value>
   </data>
-  <data name="MenuConnectionsAndConfig" xml:space="preserve">
+  <data name="ConnectionsAndConfig" xml:space="preserve">
     <value>Connexions et configuration</value>
   </data>
   <data name="Copy" xml:space="preserve">
@@ -729,31 +729,31 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Échap</value>
   </data>
-  <data name="MenuDeleteConnection" xml:space="preserve">
+  <data name="DeleteConnection" xml:space="preserve">
     <value>Supprimer la connexion...</value>
   </data>
-  <data name="MenuDeleteExternalTool" xml:space="preserve">
+  <data name="DeleteExternalTool" xml:space="preserve">
     <value>Supprimer l'outil externe...</value>
   </data>
-  <data name="MenuDeleteFolder" xml:space="preserve">
+  <data name="DeleteFolder" xml:space="preserve">
     <value>Supprimer le dossier...</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Faire un don</value>
   </data>
-  <data name="MenuDuplicateConnection" xml:space="preserve">
+  <data name="DuplicateConnection" xml:space="preserve">
     <value>Dupliquer la connexion</value>
   </data>
-  <data name="MenuDuplicateFolder" xml:space="preserve">
+  <data name="DuplicateFolder" xml:space="preserve">
     <value>Dupliquer le dossier</value>
   </data>
-  <data name="MenuDuplicateTab" xml:space="preserve">
+  <data name="DuplicateTab" xml:space="preserve">
     <value>Dupliquer l'onglet</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Quitter</value>
   </data>
-  <data name="MenuExternalToolsToolbar" xml:space="preserve">
+  <data name="ExternalToolsToolbar" xml:space="preserve">
     <value>Barre d'outils externes</value>
   </data>
   <data name="_File" xml:space="preserve">
@@ -762,19 +762,19 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="_Help" xml:space="preserve">
     <value>&amp;Aide</value>
   </data>
-  <data name="MenuHelpContents" xml:space="preserve">
+  <data name="HelpContents" xml:space="preserve">
     <value>Aide mRemoteNG</value>
   </data>
   <data name="JumpTo" xml:space="preserve">
     <value>Aller à</value>
   </data>
-  <data name="MenuLaunchExternalTool" xml:space="preserve">
+  <data name="LaunchExternalTool" xml:space="preserve">
     <value>Lancer l'outil externe</value>
   </data>
-  <data name="MenuNewConnectionFile" xml:space="preserve">
+  <data name="NewConnectionFile" xml:space="preserve">
     <value>Nouveau fichier de connexion</value>
   </data>
-  <data name="MenuNewExternalTool" xml:space="preserve">
+  <data name="NewExternalTool" xml:space="preserve">
     <value>Nouvel outil externe</value>
   </data>
   <data name="Notifications" xml:space="preserve">
@@ -786,7 +786,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="DeleteAll" xml:space="preserve">
     <value>Supprimer tout</value>
   </data>
-  <data name="MenuOpenConnectionFile" xml:space="preserve">
+  <data name="OpenConnectionFile" xml:space="preserve">
     <value>Ouvrir un fichier de connexion...</value>
   </data>
   <data name="Options" xml:space="preserve">
@@ -795,61 +795,61 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="PortScan" xml:space="preserve">
     <value>Scan de port</value>
   </data>
-  <data name="MenuQuickConnectToolbar" xml:space="preserve">
+  <data name="QuickConnectToolbar" xml:space="preserve">
     <value>Barre de connexion rapide</value>
   </data>
-  <data name="MenuReconnect" xml:space="preserve">
+  <data name="Reconnect" xml:space="preserve">
     <value>Reconnecter</value>
   </data>
-  <data name="MenuRefreshScreen" xml:space="preserve">
+  <data name="RefreshScreen" xml:space="preserve">
     <value>Rafraîchir l'écran (VNC)</value>
   </data>
-  <data name="MenuRenameConnection" xml:space="preserve">
+  <data name="RenameConnection" xml:space="preserve">
     <value>Renommer la connexion</value>
   </data>
-  <data name="MenuRenameFolder" xml:space="preserve">
+  <data name="RenameFolder" xml:space="preserve">
     <value>Renommer le dossier</value>
   </data>
-  <data name="MenuRenameTab" xml:space="preserve">
+  <data name="RenameTab" xml:space="preserve">
     <value>Renommer l'onglet</value>
   </data>
-  <data name="MenuReportBug" xml:space="preserve">
+  <data name="ReportBug" xml:space="preserve">
     <value>Signaler un bug</value>
   </data>
-  <data name="MenuResetLayout" xml:space="preserve">
+  <data name="ResetLayout" xml:space="preserve">
     <value>Réinitialisation de la disposition des panneaux</value>
   </data>
-  <data name="MenuSaveConnectionFile" xml:space="preserve">
+  <data name="SaveConnectionFile" xml:space="preserve">
     <value>Enregistrer le fichier de connexions</value>
   </data>
-  <data name="MenuSaveConnectionFileAs" xml:space="preserve">
+  <data name="SaveConnectionFileAs" xml:space="preserve">
     <value>Enregistrer le fichier de connexions sous...</value>
   </data>
-  <data name="MenuSendSpecialKeys" xml:space="preserve">
+  <data name="SendSpecialKeys" xml:space="preserve">
     <value>Envoyer les touches spéciales (VNC)</value>
   </data>
-  <data name="MenuShowHelpText" xml:space="preserve">
+  <data name="ShowHelpText" xml:space="preserve">
     <value>&amp;Afficher le texte d'aide</value>
   </data>
-  <data name="MenuShowText" xml:space="preserve">
+  <data name="ShowText" xml:space="preserve">
     <value>Afficher le texte</value>
   </data>
-  <data name="MenuSmartSize" xml:space="preserve">
+  <data name="SmartSize" xml:space="preserve">
     <value>Taille dynamique (RDP/VNC)</value>
   </data>
-  <data name="MenuSSHFileTransfer" xml:space="preserve">
+  <data name="SSHFileTransfer" xml:space="preserve">
     <value>Transfert de fichiers SSH</value>
   </data>
-  <data name="MenuStartChat" xml:space="preserve">
+  <data name="StartChat" xml:space="preserve">
     <value>Démarrer le Chat (VNC)</value>
   </data>
-  <data name="MenuSupportForum" xml:space="preserve">
+  <data name="SupportForum" xml:space="preserve">
     <value>Forum du support</value>
   </data>
   <data name="_Tools" xml:space="preserve">
     <value>&amp;Outils</value>
   </data>
-  <data name="MenuTransferFile" xml:space="preserve">
+  <data name="TransferFile" xml:space="preserve">
     <value>Transfert de fichiers (SSH)</value>
   </data>
   <data name="_View" xml:space="preserve">
@@ -858,7 +858,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="ViewOnly" xml:space="preserve">
     <value>Voir seulement (VNC)</value>
   </data>
-  <data name="MenuWebsite" xml:space="preserve">
+  <data name="Website" xml:space="preserve">
     <value>Site Web</value>
   </data>
   <data name="MinimizeToSysTray" xml:space="preserve">
@@ -919,7 +919,7 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="OpenPorts" xml:space="preserve">
     <value>Ports ouverts</value>
   </data>
-  <data name="OptionsTabTheme" xml:space="preserve">
+  <data name="Theme" xml:space="preserve">
     <value>Thème</value>
   </data>
   <data name="_Delete" xml:space="preserve">
@@ -1093,7 +1093,7 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="HostnameIp" xml:space="preserve">
     <value>Nom d'hôte / IP</value>
   </data>
-  <data name="PropertyNameAll" xml:space="preserve">
+  <data name="All" xml:space="preserve">
     <value>Tous</value>
   </data>
   <data name="PropertyNameAuthenticationLevel" xml:space="preserve">
@@ -1105,7 +1105,7 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="PropertyNameCacheBitmaps" xml:space="preserve">
     <value>Mettre en cache les bitmaps</value>
   </data>
-  <data name="PropertyNameColors" xml:space="preserve">
+  <data name="Colors" xml:space="preserve">
     <value>Couleurs</value>
   </data>
   <data name="PropertyNameCompression" xml:space="preserve">
@@ -1177,7 +1177,7 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="PropertyNameRDGatewayUsername" xml:space="preserve">
     <value>Nom d'utilisateur pour la Passerelle RDP</value>
   </data>
-  <data name="PropertyNameRedirectDrives" xml:space="preserve">
+  <data name="DiskDrives" xml:space="preserve">
     <value>Lecteurs de disque</value>
   </data>
   <data name="PropertyNameRedirectKeys" xml:space="preserve">
@@ -1335,7 +1335,7 @@ Message:
   <data name="PropertyNameDisableFullWindowDrag" xml:space="preserve">
     <value>Désactiver le glissement de fenêtre complet</value>
   </data>
-  <data name="PropertyNameDisableMenuAnimations" xml:space="preserve">
+  <data name="DisableMenuAnimations" xml:space="preserve">
     <value>Désactiver les animations du menu</value>
   </data>
   <data name="RdpDisconnectFailed" xml:space="preserve">
@@ -1371,7 +1371,7 @@ Message:
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Erreur d'initialisation de Winsock.</value>
   </data>
-  <data name="RDPFitToPanel" xml:space="preserve">
+  <data name="RdpFitToPanel" xml:space="preserve">
     <value>Ajuster au panneau</value>
   </data>
   <data name="RdpFocusFailed" xml:space="preserve">
@@ -1422,16 +1422,16 @@ Message:
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>Échec de RDP SetResolution !</value>
   </data>
-  <data name="RDPSmartSize" xml:space="preserve">
+  <data name="RdpSmartSize" xml:space="preserve">
     <value>Taille intelligente</value>
   </data>
-  <data name="RDPSoundBringToThisComputer" xml:space="preserve">
+  <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Apporter à cet ordinateur</value>
   </data>
   <data name="DoNotPlay" xml:space="preserve">
     <value>Ne pas jouer</value>
   </data>
-  <data name="RDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+  <data name="RdpSoundLeaveAtRemoteComputer" xml:space="preserve">
     <value>Laisser à un ordinateur distant</value>
   </data>
   <data name="RdpToggleFullscreenFailed" xml:space="preserve">
@@ -1542,10 +1542,10 @@ Message:
   <data name="SSHTransferFailed" xml:space="preserve">
     <value>Échec du transfert SSH.</value>
   </data>
-  <data name="StartIP" xml:space="preserve">
+  <data name="FirstIp" xml:space="preserve">
     <value>IP de début</value>
   </data>
-  <data name="StartPort" xml:space="preserve">
+  <data name="FirstPort" xml:space="preserve">
     <value>Port de début</value>
   </data>
   <data name="StartupExit" xml:space="preserve">
@@ -1563,7 +1563,7 @@ Message:
   <data name="TabsAndPanels" xml:space="preserve">
     <value>Onglets &amp;&amp; Panneaux</value>
   </data>
-  <data name="TabUpdates" xml:space="preserve">
+  <data name="Updates" xml:space="preserve">
     <value>Mises à jour</value>
   </data>
   <data name="Telnet" xml:space="preserve">

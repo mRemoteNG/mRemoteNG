@@ -129,7 +129,7 @@ namespace mRemoteNG.Tools
         {
             grpAutomaticReconnect.Text = Language.GroupboxAutomaticReconnect;
             btnClose.Text = Language._Close;
-            lblServerStatus.Text = Language.LabelServerStatus;
+            lblServerStatus.Text = Language.ServerStatus;
             chkReconnectWhenReady.Text = Language.CheckboxReconnectWhenReady;
         }
     }

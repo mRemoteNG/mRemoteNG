@@ -126,7 +126,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileNew.Image = Resources.Connections_New;
             _mMenFileNew.Name = "mMenFileNew";
             _mMenFileNew.Size = new System.Drawing.Size(281, 22);
-            _mMenFileNew.Text = Language.MenuNewConnectionFile;
+            _mMenFileNew.Text = Language.NewConnectionFile;
             _mMenFileNew.Click += mMenFileNew_Click;
             // 
             // mMenFileLoad
@@ -135,7 +135,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileLoad.Name = "mMenFileLoad";
             _mMenFileLoad.ShortcutKeys = Keys.Control | Keys.O;
             _mMenFileLoad.Size = new System.Drawing.Size(281, 22);
-            _mMenFileLoad.Text = Language.MenuOpenConnectionFile;
+            _mMenFileLoad.Text = Language.OpenConnectionFile;
             _mMenFileLoad.Click += mMenFileLoad_Click;
             // 
             // mMenFileSave
@@ -144,7 +144,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileSave.Name = "mMenFileSave";
             _mMenFileSave.ShortcutKeys = Keys.Control | Keys.S;
             _mMenFileSave.Size = new System.Drawing.Size(281, 22);
-            _mMenFileSave.Text = Language.MenuSaveConnectionFile;
+            _mMenFileSave.Text = Language.SaveConnectionFile;
             _mMenFileSave.Click += mMenFileSave_Click;
             // 
             // mMenFileSaveAs
@@ -154,7 +154,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileSaveAs.ShortcutKeys = (Keys.Control | Keys.Shift)
                                          | Keys.S;
             _mMenFileSaveAs.Size = new System.Drawing.Size(281, 22);
-            _mMenFileSaveAs.Text = Language.MenuSaveConnectionFileAs;
+            _mMenFileSaveAs.Text = Language.SaveConnectionFileAs;
             _mMenFileSaveAs.Click += mMenFileSaveAs_Click;
             // 
             // mMenFileSep2
@@ -220,7 +220,7 @@ namespace mRemoteNG.UI.Menu
             // 
             _mMenFileImportFromFile.Name = "mMenFileImportFromFile";
             _mMenFileImportFromFile.Size = new System.Drawing.Size(235, 22);
-            _mMenFileImportFromFile.Text = Language.ImportFromFileMenuItem;
+            _mMenFileImportFromFile.Text = Language.ImportFromFile;
             _mMenFileImportFromFile.Click += mMenFileImportFromFile_Click;
             // 
             // mMenFileImportFromActiveDirectory
@@ -264,12 +264,12 @@ namespace mRemoteNG.UI.Menu
             Text = Language._File;
             _mMenFileNewConnection.Text = Language.NewConnection;
             _mMenFileNewFolder.Text = Language.NewFolder;
-            _mMenFileNew.Text = Language.MenuNewConnectionFile;
-            _mMenFileLoad.Text = Language.MenuOpenConnectionFile;
-            _mMenFileSave.Text = Language.MenuSaveConnectionFile;
-            _mMenFileSaveAs.Text = Language.MenuSaveConnectionFileAs;
+            _mMenFileNew.Text = Language.NewConnectionFile;
+            _mMenFileLoad.Text = Language.OpenConnectionFile;
+            _mMenFileSave.Text = Language.SaveConnectionFile;
+            _mMenFileSaveAs.Text = Language.SaveConnectionFileAs;
             _mMenFileImport.Text = Language._Import;
-            _mMenFileImportFromFile.Text = Language.ImportFromFileMenuItem;
+            _mMenFileImportFromFile.Text = Language.ImportFromFile;
             _mMenFileImportFromActiveDirectory.Text = Language.ImportAD;
             _mMenFileImportFromPortScan.Text = Language.ImportPortScan;
             _mMenFileExport.Text = Language._ExportToFile;
@@ -292,9 +292,9 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileDuplicate.Enabled = false;
                     _mMenReconnectAll.Enabled = true;
                     _mMenFileDelete.Text = Language.Delete;
-                    _mMenFileRename.Text = Language.MenuRenameFolder;
+                    _mMenFileRename.Text = Language.RenameFolder;
                     _mMenFileDuplicate.Text = Language.Duplicate;
-                    _mMenReconnectAll.Text = Language.MenuReconnectAll;
+                    _mMenReconnectAll.Text = Language.ReconnectAll;
                     break;
                 case TreeNodeType.Container:
                     _mMenFileNewConnection.Enabled = true;
@@ -303,10 +303,10 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileRename.Enabled = true;
                     _mMenFileDuplicate.Enabled = true;
                     _mMenReconnectAll.Enabled = true;
-                    _mMenFileDelete.Text = Language.MenuDeleteFolder;
-                    _mMenFileRename.Text = Language.MenuRenameFolder;
-                    _mMenFileDuplicate.Text = Language.MenuDuplicateFolder;
-                    _mMenReconnectAll.Text = Language.MenuReconnectAll;
+                    _mMenFileDelete.Text = Language.DeleteFolder;
+                    _mMenFileRename.Text = Language.RenameFolder;
+                    _mMenFileDuplicate.Text = Language.DuplicateFolder;
+                    _mMenReconnectAll.Text = Language.ReconnectAll;
                     break;
                 case TreeNodeType.Connection:
                     _mMenFileNewConnection.Enabled = true;
@@ -315,10 +315,10 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileRename.Enabled = true;
                     _mMenFileDuplicate.Enabled = true;
                     _mMenReconnectAll.Enabled = true;
-                    _mMenFileDelete.Text = Language.MenuDeleteConnection;
-                    _mMenFileRename.Text = Language.MenuRenameConnection;
-                    _mMenFileDuplicate.Text = Language.MenuDuplicateConnection;
-                    _mMenReconnectAll.Text = Language.MenuReconnectAll;
+                    _mMenFileDelete.Text = Language.DeleteConnection;
+                    _mMenFileRename.Text = Language.RenameConnection;
+                    _mMenFileDuplicate.Text = Language.DuplicateConnection;
+                    _mMenReconnectAll.Text = Language.ReconnectAll;
                     break;
                 case TreeNodeType.PuttyRoot:
                 case TreeNodeType.PuttySession:
@@ -331,7 +331,7 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileDelete.Text = Language.Delete;
                     _mMenFileRename.Text = Language.Rename;
                     _mMenFileDuplicate.Text = Language.Duplicate;
-                    _mMenReconnectAll.Text = Language.MenuReconnectAll;
+                    _mMenReconnectAll.Text = Language.ReconnectAll;
                     break;
                 default:
                     _mMenFileNewConnection.Enabled = true;
@@ -343,7 +343,7 @@ namespace mRemoteNG.UI.Menu
                     _mMenFileDelete.Text = Language.Delete;
                     _mMenFileRename.Text = Language.Rename;
                     _mMenFileDuplicate.Text = Language.Duplicate;
-                    _mMenReconnectAll.Text = Language.MenuReconnectAll;
+                    _mMenReconnectAll.Text = Language.ReconnectAll;
                     break;
             }
         }

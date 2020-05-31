@@ -257,7 +257,7 @@ namespace mRemoteNG.UI.Controls
                 if (theValue >= 0 && theValue <= 255)
                     return true;
 
-                MessageBox.Show(Language.IPRange, Language.OutOfRange);
+                MessageBox.Show(Language.MustBeBetween0And255, Language.OutOfRange);
                 return false;
             }
             catch

@@ -298,9 +298,9 @@ namespace mRemoteNG.UI.Window
             _btnShowDefaultProperties.Text = Language.ButtonDefaultProperties;
             _btnIcon.Text = Language.Icon;
             _btnHostStatus.Text = Language.Status;
-            Text = Language.MenuConfig;
-            TabText = Language.MenuConfig;
-            _propertyGridContextMenuShowHelpText.Text = Language.MenuShowHelpText;
+            Text = Language.Config;
+            TabText = Language.Config;
+            _propertyGridContextMenuShowHelpText.Text = Language.ShowHelpText;
         }
 
         private new void ApplyTheme()

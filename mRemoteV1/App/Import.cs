@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -40,7 +40,7 @@ namespace mRemoteNG.App
 						openFileDialog.FileNames, 
 						importDestinationContainer, 
 						Runtime.ConnectionsService,
-						fileName => MessageBox.Show(string.Format(Language.ImportFileFailedContent, fileName), Language.ImportFileFailedMainInstruction,
+						fileName => MessageBox.Show(string.Format(Language.ImportFileFailedContent, fileName), Language.AskUpdatesMainInstruction,
 							MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1));
                 }
             }

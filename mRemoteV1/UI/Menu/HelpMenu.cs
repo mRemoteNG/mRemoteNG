@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoHelp.Name = "mMenInfoHelp";
             _mMenInfoHelp.ShortcutKeys = Keys.F1;
             _mMenInfoHelp.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoHelp.Text = Language.MenuHelpContents;
+            _mMenInfoHelp.Text = Language.HelpContents;
             _mMenInfoHelp.Click += mMenInfoHelp_Click;
             // 
             // mMenInfoSep1
@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoWebsite.Image = Resources.Website;
             _mMenInfoWebsite.Name = "mMenInfoWebsite";
             _mMenInfoWebsite.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoWebsite.Text = Language.MenuWebsite;
+            _mMenInfoWebsite.Text = Language.Website;
             _mMenInfoWebsite.Click += mMenInfoWebsite_Click;
             // 
             // mMenInfoDonate
@@ -94,7 +94,7 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoForum.Image = Resources.user_comment;
             _mMenInfoForum.Name = "mMenInfoForum";
             _mMenInfoForum.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoForum.Text = Language.MenuSupportForum;
+            _mMenInfoForum.Text = Language.SupportForum;
             _mMenInfoForum.Click += mMenInfoForum_Click;
             // 
             // mMenInfoBugReport
@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoBugReport.Image = Resources.Bug;
             _mMenInfoBugReport.Name = "mMenInfoBugReport";
             _mMenInfoBugReport.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoBugReport.Text = Language.MenuReportBug;
+            _mMenInfoBugReport.Text = Language.ReportBug;
             _mMenInfoBugReport.Click += mMenInfoBugReport_Click;
             // 
             // ToolStripSeparator2
@@ -115,7 +115,7 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsUpdate.Image = Resources.Update;
             _mMenToolsUpdate.Name = "mMenToolsUpdate";
             _mMenToolsUpdate.Size = new System.Drawing.Size(190, 22);
-            _mMenToolsUpdate.Text = Language.MenuCheckForUpdates;
+            _mMenToolsUpdate.Text = Language.CheckForUpdates;
             _mMenToolsUpdate.Click += mMenToolsUpdate_Click;
             // 
             // mMenInfoSep2
@@ -135,12 +135,12 @@ namespace mRemoteNG.UI.Menu
         public void ApplyLanguage()
         {
             Text = Language._Help;
-            _mMenInfoHelp.Text = Language.MenuHelpContents;
-            _mMenInfoWebsite.Text = Language.MenuWebsite;
+            _mMenInfoHelp.Text = Language.HelpContents;
+            _mMenInfoWebsite.Text = Language.Website;
             _mMenInfoDonate.Text = Language.Donate;
-            _mMenInfoForum.Text = Language.MenuSupportForum;
-            _mMenInfoBugReport.Text = Language.MenuReportBug;
-            _mMenToolsUpdate.Text = Language.MenuCheckForUpdates;
+            _mMenInfoForum.Text = Language.SupportForum;
+            _mMenInfoBugReport.Text = Language.ReportBug;
+            _mMenToolsUpdate.Text = Language.CheckForUpdates;
             _mMenInfoAbout.Text = Language.About;
         }
 

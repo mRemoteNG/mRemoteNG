@@ -33,11 +33,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            lblSeconds.Text = Language.LabelSeconds;
-            lblMaximumPuttyWaitTime.Text = Language.LabelPuttyTimeout;
+            lblSeconds.Text = Language.Seconds;
+            lblMaximumPuttyWaitTime.Text = Language.PuttyTimeout;
             chkAutomaticReconnect.Text = Language.CheckboxAutomaticReconnect;
             chkLoadBalanceInfoUseUtf8.Text = Language.LoadBalanceInfoUseUtf8;
-            lblConfigurePuttySessions.Text = Language.LabelPuttySessionsConfig;
+            lblConfigurePuttySessions.Text = Language.PuttySessionsConfig;
             btnLaunchPutty.Text = Language.ButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language._Browse;
             chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;

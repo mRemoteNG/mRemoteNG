@@ -123,7 +123,7 @@
   <data name="PropertyDescriptionColors" xml:space="preserve">
     <value>Select the color quality to be used.</value>
   </data>
-  <data name="PropertyNameColors" xml:space="preserve">
+  <data name="Colors" xml:space="preserve">
     <value>Colors</value>
   </data>
   <data name="RDP16777216Colors" xml:space="preserve">
@@ -166,7 +166,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="OptionsThemeChangeWarning" xml:space="preserve">
 		<value>Warning: Restart is required to commit any theme configuration change.</value>
 	</data>
-  <data name="IPRange" xml:space="preserve">
+  <data name="MustBeBetween0And255" xml:space="preserve">
 		<value>Must Be Between 0 and 255</value>
 	</data>
   <data name="OutOfRange" xml:space="preserve">
@@ -181,7 +181,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="UltraVNCSingleClick" xml:space="preserve">
 		<value>UltraVNC SingleClick</value>
 	</data>
-  <data name="MenuDisconnectOthers" xml:space="preserve">
+  <data name="DisconnectOthers" xml:space="preserve">
 		<value>Disconnect All But This</value>
 	</data>
   <data name="AutomaticReconnectError" xml:space="preserve">

@@ -32,7 +32,7 @@ namespace mRemoteNG.UI.Forms
         private void ApplyLanguage()
         {
             btnOK.Text = Language._Ok;
-            lblDescription.Text = Language.LabelSelectPanel;
+            lblDescription.Text = Language.SelectPanel;
             btnNew.Text = Language._New;
             Text = Language.TitleSelectPanel;
         }

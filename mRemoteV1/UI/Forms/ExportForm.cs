@@ -233,7 +233,7 @@ namespace mRemoteNG.UI.Forms
             grpFile.Text = Language.ExportFile;
             lblFileName.Text = Language.Filename;
             btnBrowse.Text = Language._Browse;
-            lblFileFormat.Text = Language.FileFormatLabel;
+            lblFileFormat.Text = Language.FileFormat;
 
             grpItems.Text = Language.ExportItems;
             rdoExportEverything.Text = Language.ExportEverything;

@@ -384,7 +384,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new FrmOptions(Language.TabUpdates))
+            using (var optionsForm = new FrmOptions(Language.Updates))
             {
                 optionsForm.ShowDialog(this);
             }

@@ -403,8 +403,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeConnect.Text = Language.Connect;
             _cMenTreeConnectWithOptions.Text = Language.ConnectWithOptions;
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.ConnectToConsoleSession;
-            _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text =
-                Language.DontConnectToConsoleSessionMenuItem;
+            _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = Language.DontConnectToConsoleSession;
             _cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.ConnectInFullscreen;
             _cMenTreeConnectWithOptionsNoCredentials.Text = Language.ConnectNoCredentials;
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.ChoosePanelBeforeConnecting;
@@ -412,7 +411,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeDisconnect.Text = Language.Disconnect;
 
             _cMenTreeToolsExternalApps.Text = Language._Tools;
-            _cMenTreeToolsTransferFile.Text = Language.MenuTransferFile;
+            _cMenTreeToolsTransferFile.Text = Language.TransferFile;
 
             _cMenTreeDuplicate.Text = Language.Duplicate;
             _cMenTreeRename.Text = Language.Rename;
@@ -420,7 +419,7 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeCopyHostname.Text = Language.CopyHostname;
 
             _cMenTreeImport.Text = Language._Import;
-            _cMenTreeImportFile.Text = Language.ImportFromFileMenuItem;
+            _cMenTreeImportFile.Text = Language.ImportFromFile;
             _cMenTreeImportActiveDirectory.Text = Language.ImportAD;
             _cMenTreeImportPortScan.Text = Language.ImportPortScan;
             _cMenTreeExportFile.Text = Language._ExportToFile;

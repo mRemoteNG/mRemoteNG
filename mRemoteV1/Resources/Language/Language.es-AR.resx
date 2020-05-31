@@ -141,10 +141,10 @@
   <data name="_Stop" xml:space="preserve">
     <value>&amp; Parar</value>
   </data>
-  <data name="ButtonTestProxy" xml:space="preserve">
+  <data name="TestProxy" xml:space="preserve">
     <value>Probar Proxy</value>
   </data>
-  <data name="CategoryMiscellaneous" xml:space="preserve">
+  <data name="Miscellaneous" xml:space="preserve">
     <value>Varios</value>
   </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
@@ -277,7 +277,7 @@ VncSharp Control {0}</value>
   <data name="CouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>No se pudo crear el nuevo archivo de conexiones!</value>
   </data>
-  <data name="CurrentVersion" xml:space="preserve">
+  <data name="InstalledVersion" xml:space="preserve">
     <value>Versión instalada</value>
   </data>
   <data name="Detect" xml:space="preserve">
