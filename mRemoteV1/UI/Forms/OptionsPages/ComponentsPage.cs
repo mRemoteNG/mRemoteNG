@@ -20,7 +20,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ApplyTheme();
             PageIcon = Resources.ComponentsCheck_Icon;
             InitializeComponent();
-            CheckComponents();
             FontOverrider.FontOverride(this);
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
@@ -38,17 +37,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.ApplyLanguage();
 
             Text = Language.ComponentsCheck;
-            btnCheckAgain.Text = Language.Refresh;
+            btnCheck.Text = Language.Refresh;
         }
 
         private void BtnCheckAgain_Click(object sender, EventArgs e)
-        {
-            CheckComponents();
-        }
-
-        #endregion
-
-        private void CheckComponents()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Beginning component check", true);
             CheckRdp();
@@ -57,6 +49,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             CheckIca();
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Finished component check", true);
         }
+
+        #endregion
 
         private void CheckRdp()
         {
