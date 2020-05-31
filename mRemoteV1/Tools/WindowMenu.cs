@@ -7,7 +7,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace mRemoteNG.Tools
 {
-    public sealed class SystemMenu : SafeHandleZeroOrMinusOneIsInvalid, IDisposable
+    public sealed class WindowMenu : SafeHandleZeroOrMinusOneIsInvalid, IDisposable
     {
         [Flags]
         public enum Flags
@@ -20,11 +20,11 @@ namespace mRemoteNG.Tools
             WM_SYSCOMMAND = NativeMethods.WM_SYSCOMMAND
         }
 
-        private bool disposed;
+        private bool _disposed;
         internal IntPtr SystemMenuHandle;
         private readonly IntPtr FormHandle;
 
-        public SystemMenu(IntPtr Handle) : base(true)
+        public WindowMenu(IntPtr Handle) : base(true)
         {
             FormHandle = Handle;
             SystemMenuHandle = NativeMethods.GetSystemMenu(FormHandle, false);
@@ -85,12 +85,12 @@ namespace mRemoteNG.Tools
 
         protected override void Dispose(bool disposing)
         {
-            if (disposed) return;
+            if (_disposed) return;
             if (disposing) return;
 
             ReleaseHandle();
 
-            disposed = true;
+            _disposed = true;
         }
     }
 }

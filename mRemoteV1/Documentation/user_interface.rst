@@ -9,7 +9,7 @@ User Interface
 
    user_interface/main_window.rst
    user_interface/panels.rst
-   user_interface/menus.rst
+   user_interface/menu_container.rst
    user_interface/connections.rst
    user_interface/default_connection_properties.rst
    user_interface/quick_connect.rst

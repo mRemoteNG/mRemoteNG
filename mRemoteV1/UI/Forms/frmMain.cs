@@ -47,7 +47,7 @@ namespace mRemoteNG.UI.Forms
         private bool _usingSqlServer;
         private string _connectionsFileName;
         private bool _showFullPathInTitle;
-        private readonly ScreenSelectionSystemMenu _screenSystemMenu;
+        private readonly AdvancedWindowMenu _advancedWindowMenu;
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
@@ -69,7 +69,7 @@ namespace mRemoteNG.UI.Forms
             vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
             ApplyTheme();
 
-            _screenSystemMenu = new ScreenSelectionSystemMenu(this);
+            _advancedWindowMenu = new AdvancedWindowMenu(this);
         }
 
         #region Properties
@@ -221,8 +221,8 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.CreateConnectionsProvider(messageCollector);
 
-            _screenSystemMenu.BuildScreenList();
-            SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
+            _advancedWindowMenu.BuildAdditionalMenuItems();
+            SystemEvents.DisplaySettingsChanged += _advancedWindowMenu.OnDisplayChanged;
             ApplyLanguage();
 
             Opacity = 1;
@@ -535,12 +535,7 @@ namespace mRemoteNG.UI.Forms
                     case NativeMethods.WM_ACTIVATEAPP:
                         var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
                                                ?? GetChildAtPoint(MousePosition);
-
-                        if (candidateTabToFocus is InterfaceControl)
-                        {
-                            candidateTabToFocus.Parent.Focus();
-                        }
-
+                        if (candidateTabToFocus is InterfaceControl) candidateTabToFocus.Parent.Focus();
                         _inMouseActivate = false;
                         break;
                     case NativeMethods.WM_ACTIVATE:
@@ -578,7 +573,6 @@ namespace mRemoteNG.UI.Forms
                                 }
                             }
                         }
-
                         break;
                     case NativeMethods.WM_WINDOWPOSCHANGED:
                         // Ignore this message if the window wasn't activated
@@ -589,12 +583,16 @@ namespace mRemoteNG.UI.Forms
                             if (!_inMouseActivate && !_inSizeMove)
                                 ActivateConnection();
                         }
-
                         break;
                     case NativeMethods.WM_SYSCOMMAND:
-                        var screen = _screenSystemMenu.GetScreenById(m.WParam.ToInt32());
+                        if (m.WParam == new IntPtr(0))
+                            ShowHideMenu();
+                        var screen = _advancedWindowMenu.GetScreenById(m.WParam.ToInt32());
                         if (screen != null)
+                        {
                             Screens.SendFormToScreen(screen);
+                            Console.WriteLine(_advancedWindowMenu.GetScreenById(m.WParam.ToInt32()).ToString());
+                        }
                         break;
                     case NativeMethods.WM_DRAWCLIPBOARD:
                         NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
@@ -750,6 +748,8 @@ namespace mRemoteNG.UI.Forms
 
             pnlDock.Visible = true;
         }
+
+        public void ShowHideMenu() => tsContainer.TopToolStripPanelVisible = !tsContainer.TopToolStripPanelVisible;
 
         #endregion
 

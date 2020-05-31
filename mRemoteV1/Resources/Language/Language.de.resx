@@ -2108,4 +2108,7 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   <data name="PropertyDescriptionDisableFullWindowDrag" xml:space="preserve">
     <value>Legt fest, ob der Fensterinhalt angezeigt wird, wenn Sie das Fenster an eine neue Position ziehen.</value>
   </data>
+  <data name="ShowHideMenu" xml:space="preserve">
+    <value>Verstecke/Zeige Menü</value>
+  </data>
 </root>

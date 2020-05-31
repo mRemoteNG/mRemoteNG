@@ -8,7 +8,7 @@ namespace mRemoteNG.App
 {
     public static class ProgramRoot
     {
-        private static Mutex mutex;
+        private static Mutex _mutex;
 
         /// <summary>
         /// The main entry point for the application.
@@ -34,14 +34,13 @@ namespace mRemoteNG.App
 
         public static void CloseSingletonInstanceMutex()
         {
-            mutex?.Close();
+            _mutex?.Close();
         }
 
         private static void StartApplicationAsSingleInstance()
         {
             const string mutexID = "mRemoteNG_SingleInstanceMutex";
-            bool newInstanceCreated;
-            mutex = new Mutex(false, mutexID, out newInstanceCreated);
+            _mutex = new Mutex(false, mutexID, out var newInstanceCreated);
             if (!newInstanceCreated)
             {
                 SwitchToCurrentInstance();
@@ -49,7 +48,7 @@ namespace mRemoteNG.App
             }
 
             StartApplication();
-            GC.KeepAlive(mutex);
+            GC.KeepAlive(_mutex);
         }
 
         private static void SwitchToCurrentInstance()
