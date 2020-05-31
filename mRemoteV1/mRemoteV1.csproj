@@ -1565,8 +1565,6 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="VncSharp">
       <HintPath>References\VncSharp.dll</HintPath>
     </Reference>

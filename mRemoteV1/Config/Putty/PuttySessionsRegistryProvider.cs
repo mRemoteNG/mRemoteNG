@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Management;
+using System.Net;
 using System.Security.Principal;
 using System.Text;
 using System.Web;
@@ -28,10 +29,8 @@ namespace mRemoteNG.Config.Putty
             var sessionNames = new List<string>();
             foreach (var sessionName in sessionsKey.GetSubKeyNames())
             {
-                sessionNames.Add(raw
-                                     ? sessionName
-                                     : HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"),
-                                                             Encoding.GetEncoding("iso-8859-1")));
+                sessionNames.Add(raw ? sessionName
+                                     : WebUtility.UrlDecode(sessionName.Replace("+", "%2B")));
             }
 
             if (raw && !sessionNames.Contains("Default%20Settings"))
@@ -51,7 +50,7 @@ namespace mRemoteNG.Config.Putty
             var sessionKey = sessionsKey?.OpenSubKey(sessionName);
             if (sessionKey == null) return null;
 
-            sessionName = HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"), Encoding.GetEncoding("iso-8859-1"));
+            sessionName = WebUtility.UrlDecode(sessionName.Replace("+", "%2B"));
 
             var sessionInfo = new PuttySessionInfo
             {

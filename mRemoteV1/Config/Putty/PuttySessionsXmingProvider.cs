@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using mRemoteNG.Tree.Root;
 using System.Web;
+using System.Net;
 
 namespace mRemoteNG.Config.Putty
 {
@@ -40,31 +41,23 @@ namespace mRemoteNG.Config.Putty
             {
                 var sessionFileName = Path.GetFileName(sessionName);
                 // ReSharper disable once ConstantConditionalAccessQualifier
-                sessionNames.Add(raw
-                                     ? sessionFileName
-                                     : System.Web.HttpUtility.UrlDecode(sessionFileName?.Replace("+", "%2B")));
+                sessionNames.Add(raw ? sessionFileName
+                                     : WebUtility.UrlDecode(sessionFileName?.Replace("+", "%2B")));
             }
 
             if (raw)
             {
                 if (!sessionNames.Contains("Default%20Settings")) // Do not localize
-                {
                     sessionNames.Insert(0, "Default%20Settings");
-                }
             }
             else
             {
                 if (!sessionNames.Contains("Default Settings"))
-                {
                     sessionNames.Insert(0, "Default Settings");
-                }
             }
 
-            var registrySessionNames = PuttySessionsRegistryProvider.GetSessionNames(raw)
-                                                                    .Select(sessionName =>
-                                                                                string
-                                                                                    .Format(RegistrySessionNameFormat,
-                                                                                            sessionName)).ToList();
+            var registrySessionNames =
+                PuttySessionsRegistryProvider.GetSessionNames(raw).Select(sessionName => string.Format(RegistrySessionNameFormat, sessionName)).ToList();
 
             sessionNames.AddRange(registrySessionNames);
             sessionNames.Sort();
@@ -92,7 +85,7 @@ namespace mRemoteNG.Config.Putty
                 return null;
             }
 
-            sessionName = HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
+            sessionName = WebUtility.UrlDecode(sessionName.Replace("+", "%2B"));
 
             var sessionFileReader = new SessionFileReader(sessionFile);
             var sessionInfo = new PuttySessionInfo
