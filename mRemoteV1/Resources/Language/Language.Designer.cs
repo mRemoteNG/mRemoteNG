@@ -349,16 +349,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show/Hide Menu Strip.
-        /// </summary>
-        internal static string ShowHideMenu {
-            get {
-                return ResourceManager.GetString("ShowHideMenu", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Source.
+        ///   Looks up a localized string similar to Always show panel tabs.
         /// </summary>
         internal static string AlwaysShowPanelTabs {
             get {
@@ -5517,6 +5508,15 @@ namespace mRemoteNG {
         internal static string ShowHelpText {
             get {
                 return ResourceManager.GetString("ShowHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show/Hide Menu Strip.
+        /// </summary>
+        internal static string ShowHideMenu {
+            get {
+                return ResourceManager.GetString("ShowHideMenu", resourceCulture);
             }
         }
         

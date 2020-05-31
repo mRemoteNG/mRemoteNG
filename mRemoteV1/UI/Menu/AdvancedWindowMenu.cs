@@ -45,11 +45,11 @@ namespace mRemoteNG.UI.Menu
             {
                 _sysMenSubItems[i] = 200 + i;
                 _windowMenu.AppendMenuItem(popMen, WindowMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]),
-                                           Language.strScreen + " " + Convert.ToString(i + 1));
+                                           Language.Screen + " " + Convert.ToString(i + 1));
             }
             _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 0,
                 WindowMenu.Flags.MF_POPUP | WindowMenu.Flags.MF_BYPOSITION, popMen,
-                Language.strSendTo);
+                Language.SendTo);
             // option to show/hide menu strips
             _windowMenu.InsertMenuItem(_windowMenu.SystemMenuHandle, 1,
                 WindowMenu.Flags.MF_BYPOSITION, new IntPtr(0), 
