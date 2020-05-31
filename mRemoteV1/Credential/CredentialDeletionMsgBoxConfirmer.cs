@@ -31,7 +31,7 @@ namespace mRemoteNG.Credential
                                                 targetsArray.Length));
             return PromptUser(
                               string.Format(
-                                            Language.strConfirmDeleteCredentialRecord,
+                                            Language.ConfirmDeleteCredentialRecord,
                                             targetsArray.First().Title));
         }
 

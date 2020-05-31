@@ -65,7 +65,7 @@ namespace mRemoteNG.Connection
                 if (connectionInfo.Hostname == "" && connectionInfo.Protocol != ProtocolType.IntApp)
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                        Language.strConnectionOpenFailedNoHostname);
+                                                        Language.ConnectionOpenFailedNoHostname);
                     return;
                 }
 
@@ -95,7 +95,7 @@ namespace mRemoteNG.Connection
                     if (connectionInfoSshTunnel == null)
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.strSSHTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SSHTunnelConnectionName));
+                            string.Format(Language.SshTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SSHTunnelConnectionName));
                         return;
                     }
                     Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
@@ -123,7 +123,7 @@ namespace mRemoteNG.Connection
                     if (!(protocolSshTunnel is PuttyBase puttyBaseSshTunnel))
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.strSSHTunnelIsNotPutty, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelIsNotPutty, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -137,7 +137,7 @@ namespace mRemoteNG.Connection
                     {
                         protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.strSSHTunnelNotInitialized, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelNotInitialized, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -145,7 +145,7 @@ namespace mRemoteNG.Connection
                     {
                         protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.strSSHTunnelNotConnected, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelNotConnected, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -166,7 +166,7 @@ namespace mRemoteNG.Connection
                         {
                             protocolSshTunnel.Close();
                             Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                string.Format(Language.strSSHTunnelFailed, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                                string.Format(Language.SshTunnelFailed, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                             return;
                         }
 
@@ -176,7 +176,7 @@ namespace mRemoteNG.Connection
                             testsock.Close();
                             break;
                         }
-                        catch (Exception e)
+                        catch
                         {
                             await System.Threading.Tasks.Task.Delay(1000);
                         }
@@ -186,7 +186,7 @@ namespace mRemoteNG.Connection
                     {
                         protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.strSSHTunnelPortNotReadyInTime, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelPortNotReadyInTime, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -230,7 +230,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnectionOpenFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.ConnectionOpenFailed, ex);
             }
         }
 
@@ -372,14 +372,14 @@ namespace mRemoteNG.Connection
                 }
                 Runtime.MessageCollector.AddMessage(msgClass,
                                                     string.Format(
-                                                                  Language.strProtocolEventDisconnected,
+                                                                  Language.ProtocolEventDisconnected,
                                                                   disconnectedMessage,
                                                                   strHostname,
                                                                   prot.InterfaceControl.Info.Protocol.ToString()));
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strProtocolEventDisconnectFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.ProtocolEventDisconnectFailed, ex);
             }
         }
 
@@ -388,7 +388,7 @@ namespace mRemoteNG.Connection
             try
             {
                 var prot = (ProtocolBase)sender;
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent,
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.ConnenctionCloseEvent,
                                                     true);
                 string connDetail;
                 if (prot.InterfaceControl.OriginalInfo.Hostname == "" &&
@@ -400,7 +400,7 @@ namespace mRemoteNG.Connection
                     connDetail = "UNKNOWN";
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    string.Format(Language.strConnenctionClosedByUser, connDetail,
+                                                    string.Format(Language.ConnenctionClosedByUser, connDetail,
                                                                   prot.InterfaceControl.Info.Protocol,
                                                                   Environment.UserName));
                 prot.InterfaceControl.OriginalInfo.OpenConnections.Remove(prot);
@@ -413,17 +413,17 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strConnenctionCloseEventFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.ConnenctionCloseEventFailed, ex);
             }
         }
 
         private static void Prot_Event_Connected(object sender)
         {
             var prot = (ProtocolBase)sender;
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected,
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.ConnectionEventConnected,
                                                 true);
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                string.Format(Language.strConnectionEventConnectedDetail,
+                                                string.Format(Language.ConnectionEventConnectedDetail,
                                                               prot.InterfaceControl.OriginalInfo.Hostname,
                                                               prot.InterfaceControl.Info.Protocol, Environment.UserName,
                                                               prot.InterfaceControl.Info.Description,
@@ -437,7 +437,7 @@ namespace mRemoteNG.Connection
                 var prot = (ProtocolBase)sender;
 
                 var msg = string.Format(
-                                        Language.strConnectionEventErrorOccured,
+                                        Language.ConnectionEventErrorOccured,
                                         errorMessage,
                                         prot.InterfaceControl.OriginalInfo.Hostname,
                                         errorCode?.ToString() ?? "-");

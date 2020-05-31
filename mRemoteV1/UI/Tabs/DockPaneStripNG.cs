@@ -273,7 +273,7 @@ namespace mRemoteNG.UI.Tabs
 
         private static int ToolWindowTabSeperatorGapBottom => _ToolWindowTabSeperatorGapBottom;
 
-        private static string ToolTipSelect => m_toolTipSelect ?? (m_toolTipSelect = Language.strTabsAndPanels);
+        private static string ToolTipSelect => m_toolTipSelect ?? (m_toolTipSelect = Language.TabsAndPanels);
 
         private TextFormatFlags ToolWindowTextFormat
         {

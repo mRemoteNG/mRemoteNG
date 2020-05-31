@@ -197,7 +197,7 @@ namespace mRemoteNG.Tools
             newConnectionInfo.Protocol = ProtocolType.IntApp;
             newConnectionInfo.ExtApp = DisplayName;
             newConnectionInfo.Name = DisplayName;
-            newConnectionInfo.Panel = Language.strMenuExternalTools;
+            newConnectionInfo.Panel = Language._Tools;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

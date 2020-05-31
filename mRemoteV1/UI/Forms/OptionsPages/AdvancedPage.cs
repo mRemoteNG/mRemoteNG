@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.strTabAdvanced;
+            get => Language.Advanced;
             set { }
         }
 
@@ -33,15 +33,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            lblSeconds.Text = Language.strLabelSeconds;
-            lblMaximumPuttyWaitTime.Text = Language.strLabelPuttyTimeout;
-            chkAutomaticReconnect.Text = Language.strCheckboxAutomaticReconnect;
-            chkLoadBalanceInfoUseUtf8.Text = Language.strLoadBalanceInfoUseUtf8;
-            lblConfigurePuttySessions.Text = Language.strLabelPuttySessionsConfig;
-            btnLaunchPutty.Text = Language.strButtonLaunchPutty;
-            btnBrowseCustomPuttyPath.Text = Language.strButtonBrowse;
-            chkUseCustomPuttyPath.Text = Language.strCheckboxPuttyPath;
-            lblUVNCSCPort.Text = Language.strUltraVNCSCListeningPort;
+            lblSeconds.Text = Language.Seconds;
+            lblMaximumPuttyWaitTime.Text = Language.PuttyTimeout;
+            chkAutomaticReconnect.Text = Language.CheckboxAutomaticReconnect;
+            chkLoadBalanceInfoUseUtf8.Text = Language.LoadBalanceInfoUseUtf8;
+            lblConfigurePuttySessions.Text = Language.PuttySessionsConfig;
+            btnLaunchPutty.Text = Language.ButtonLaunchPutty;
+            btnBrowseCustomPuttyPath.Text = Language._Browse;
+            chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;
+            lblUVNCSCPort.Text = Language.UltraVNCSCListeningPort;
         }
 
         public override void LoadSettings()
@@ -109,7 +109,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             using (var openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = $@"{Language.strFilterApplication}|*.exe|{Language.strFilterAll}|*.*";
+                openFileDialog.Filter = $@"{Language.FilterApplication}|*.exe|{Language.FilterAll}|*.*";
                 openFileDialog.FileName = Path.GetFileName(GeneralAppInfo.PuttyPath);
                 openFileDialog.CheckFileExists = true;
                 openFileDialog.Multiselect = false;
@@ -133,9 +133,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(Language.strErrorCouldNotLaunchPutty, Application.ProductName,
+                MessageBox.Show(Language.ErrorCouldNotLaunchPutty, Application.ProductName,
                                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                Runtime.MessageCollector.AddExceptionMessage(Language.strErrorCouldNotLaunchPutty, ex);
+                Runtime.MessageCollector.AddExceptionMessage(Language.ErrorCouldNotLaunchPutty, ex);
             }
         }
 

@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.strConnections;
+            get => Language.Connections;
             set { }
         }
 
@@ -24,24 +24,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            chkSingleClickOnConnectionOpensIt.Text = Language.strSingleClickOnConnectionOpensIt;
-            chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.strSingleClickOnOpenConnectionSwitchesToIt;
-            chkConnectionTreeTrackActiveConnection.Text = Language.strTrackActiveConnectionInConnectionTree;
-            chkHostnameLikeDisplayName.Text = Language.strSetHostnameLikeDisplayName;
+            chkSingleClickOnConnectionOpensIt.Text = Language.SingleClickOnConnectionOpensIt;
+            chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.SingleClickOnOpenConnectionSwitchesToIt;
+            chkConnectionTreeTrackActiveConnection.Text = Language.TrackActiveConnectionInConnectionTree;
+            chkHostnameLikeDisplayName.Text = Language.SetHostnameLikeDisplayName;
             chkSaveConnectionsAfterEveryEdit.Text = Language.SaveConnectionsAfterEveryEdit;
             chkUseFilterSearch.Text = Language.FilterSearchMatchesInConnectionTree;
             chkPlaceSearchBarAboveConnectionTree.Text = Language.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Text = Language.DoNotTrimUsername;
 
-            lblRdpReconnectionCount.Text = Language.strRdpReconnectCount;
-            lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
-            lblAutoSave1.Text = Language.strAutoSaveEvery;
+            lblRdpReconnectionCount.Text = Language.RdpReconnectCount;
+            lblRDPConTimeout.Text = Language.RdpOverallConnectionTimeout;
+            lblAutoSave1.Text = Language.AutoSaveEvery;
 
-            lblClosingConnections.Text = Language.strLabelClosingConnections;
-            radCloseWarnAll.Text = Language.strRadioCloseWarnAll;
-            radCloseWarnMultiple.Text = Language.strRadioCloseWarnMultiple;
-            radCloseWarnExit.Text = Language.strRadioCloseWarnExit;
-            radCloseWarnNever.Text = Language.strRadioCloseWarnNever;
+            lblClosingConnections.Text = Language.ClosingConnections;
+            radCloseWarnAll.Text = Language._CloseWarnAll;
+            radCloseWarnMultiple.Text = Language.RadioCloseWarnMultiple;
+            radCloseWarnExit.Text = Language.RadioCloseWarnExit;
+            radCloseWarnNever.Text = Language.RadioCloseWarnNever;
         }
 
         public override void LoadSettings()

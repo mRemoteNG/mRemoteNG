@@ -86,7 +86,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             catch (Exception ex)
             {
                 Runtime.ConnectionsService.IsConnectionsFileLoaded = false;
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strLoadFromXmlFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.LoadFromXmlFailed, ex);
                 throw;
             }
         }
@@ -107,7 +107,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                     Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."),
                                      CultureInfo.InvariantCulture);
             else
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.OldConffile);
 
             if (!(_confVersion > MaxSupportedConfVersion)) return;
             ShowIncompatibleVersionDialogBox();
@@ -196,7 +196,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strAddNodeFromXmlFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.AddNodeFromXmlFailed, ex);
                 throw;
             }
         }
@@ -389,7 +389,7 @@ namespace mRemoteNG.Config.Serializers.Xml
                     if (xmlnode.GetAttributeAsBool("Inherit"))
                         connectionInfo.Inheritance.TurnOnInheritanceCompletely();
                     connectionInfo.Icon = xmlnode.GetAttributeAsString("Icon").Replace(".ico", "");
-                    connectionInfo.Panel = Language.strGeneral;
+                    connectionInfo.Panel = Language.General;
                 }
 
                 if (_confVersion >= 1.5)
@@ -561,7 +561,7 @@ namespace mRemoteNG.Config.Serializers.Xml
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                    string.Format(Language.strGetConnectionInfoFromXmlFailed,
+                    string.Format(Language.GetConnectionInfoFromXmlFailed,
                         connectionInfo.Name, ConnectionFileName, ex.Message));
             }
 

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Forms;
-using Gecko;
+using CefSharp;
+using CefSharp.WinForms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
 using mRemoteNG.UI.Tabs;
@@ -17,6 +17,8 @@ namespace mRemoteNG.Connection.Protocol.Http
         protected string httpOrS;
         protected int defaultPort;
         private string tabTitle;
+        private bool browserInitialised = false;
+        private bool connectCalled = false;
 
         #endregion
 
@@ -26,23 +28,12 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
-                if (RenderingEngine == RenderingEngine.Gecko)
+                if (RenderingEngine == RenderingEngine.CEF)
                 {
-                    if (!Xpcom.IsInitialized)
-                        Xpcom.Initialize("Firefox");
-
-                    Control = new GeckoWebBrowser();
-
-                    var culture = Settings.Default.OverrideUICulture;
-                    if (string.IsNullOrEmpty(culture))
+                    Control = new ChromiumWebBrowser("about:blank")
                     {
-                        GeckoPreferences.User["intl.accept_languages"] =
-                            System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-                    }
-                    else
-                    {
-                        GeckoPreferences.User["intl.accept_languages"] = culture;
-                    }
+                        Dock = DockStyle.Fill,
+                    };
                 }
                 else
                 {
@@ -51,7 +42,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectionFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpConnectionFailed, ex);
             }
         }
 
@@ -72,18 +63,17 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 wBrowser = Control;
 
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
                 {
-                    var GeckoBrowser = (GeckoWebBrowser)wBrowser;
-                    if (GeckoBrowser != null)
+                    var CEFBrowser = (ChromiumWebBrowser)wBrowser;
+                    if (CEFBrowser != null)
                     {
-                        GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
-                        LauncherDialog.Download += geckoBrowser_LauncherDialog_Download;
-                        GeckoBrowser.NSSError += CertEvent.GeckoBrowser_NSSError;
+                        CEFBrowser.LoadingStateChanged += CefBrowser_LoadingStateChanged;
+                        CEFBrowser.TitleChanged += WBrowser_DocumentTitleChanged;
                     }
                     else
                     {
-                        throw new Exception("Failed to initialize Gecko Rendering Engine.");
+                        throw new Exception("Failed to initialize CEF Rendering Engine.");
                     }
                 }
                 else
@@ -94,20 +84,52 @@ namespace mRemoteNG.Connection.Protocol.Http
                     // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
                     objWebBrowser.ScriptErrorsSuppressed = true;
 
-                    objWebBrowser.Navigated += wBrowser_Navigated;
-                    objWebBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
+                    objWebBrowser.Navigated += WBrowser_Navigated;
+                    objWebBrowser.DocumentTitleChanged += WBrowser_DocumentTitleChanged;
+                    browserInitialised = true;
                 }
 
                 return true;
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpSetPropsFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpSetPropsFailed, ex);
                 return false;
             }
         }
 
         public override bool Connect()
+        {
+            try
+            {
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                {
+                    if (browserInitialised)
+                    {
+                        ((ChromiumWebBrowser)wBrowser).Load(GetURL());
+                    }
+                }
+                else
+                {
+                    ((WebBrowser)wBrowser).Navigate(GetURL());
+                }
+
+                base.Connect();
+                connectCalled = true;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpConnectFailed, ex);
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private string GetURL()
         {
             try
             {
@@ -126,85 +148,74 @@ namespace mRemoteNG.Connection.Protocol.Http
                 if (InterfaceControl.Info.Port != defaultPort)
                 {
                     if (strHost.EndsWith("/"))
-                    {
                         strHost = strHost.Substring(0, strHost.Length - 1);
-                    }
 
                     if (strHost.Contains(httpOrS + "://") == false)
-                    {
                         strHost = httpOrS + "://" + strHost;
-                    }
 
-                    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
-                    {
-                        ((GeckoWebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
-                    }
-                    else
-                    {
-                        ((WebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
-                    }
+                    strHost = strHost + ":" + InterfaceControl.Info.Port;
                 }
                 else
                 {
                     if (strHost.Contains(httpOrS + "://") == false)
-                    {
                         strHost = httpOrS + "://" + strHost;
-                    }
-
-                    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
-                    {
-                        ((GeckoWebBrowser)wBrowser).Navigate(strHost);
-                    }
-                    else
-                    {
-                        ((WebBrowser)wBrowser).Navigate(strHost);
-                    }
                 }
-
-                base.Connect();
-                return true;
+                return strHost;
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectFailed, ex);
-                return false;
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpFailedUrlBuild, ex);
+                return string.Empty;
             }
         }
 
         #endregion
 
-        #region Private Methods
-
-        #endregion
-
         #region Events
 
-        private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        private void CefBrowser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+            browserInitialised = !e.IsLoading;
+            if (browserInitialised)
+            {
+                // Unhook the loading state changes now, as navigation is done by the user on links in the control
+                ((ChromiumWebBrowser)wBrowser).LoadingStateChanged -= CefBrowser_LoadingStateChanged;
+
+                // If this Connection has already been asked to connect but the browser hadn't finished initalising
+                // then the connect wouldn't have been allowed to take place, so now we can call it!
+                if (connectCalled)
+                {
+                    Connect();
+                }
+            }
+        }
+
+        private void WBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             if (!(wBrowser is WebBrowser objWebBrowser)) return;
 
             // This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
             objWebBrowser.AllowWebBrowserDrop = false;
 
-            objWebBrowser.Navigated -= wBrowser_Navigated;
+            objWebBrowser.Navigated -= WBrowser_Navigated;
         }
 
-        private void wBrowser_DocumentTitleChanged(object sender, EventArgs e)
+        private void WBrowser_DocumentTitleChanged(object sender, EventArgs e)
         {
             try
             {
                 if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
                 string shortTitle;
 
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
                 {
-                    if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
+                    if (((TitleChangedEventArgs)e).Title.Length >= 15)
                     {
-                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
+                        shortTitle = ((TitleChangedEventArgs)e).Title.Substring(0, 10) + "...";
                     }
                     else
                     {
-                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle;
+                        shortTitle = ((CefSharp.TitleChangedEventArgs)e).Title;
                     }
                 }
                 else
@@ -230,7 +241,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpDocumentTileChangeFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpDocumentTileChangeFailed, ex);
             }
         }
 
@@ -242,27 +253,13 @@ namespace mRemoteNG.Connection.Protocol.Http
                 if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
                 string shortTitle;
 
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+                if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
                 {
-                    if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                    {
-                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                    }
-                    else
-                    {
-                        shortTitle = ((GeckoWebBrowser)wBrowser).DocumentTitle;
-                    }
+                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
                 }
                 else
                 {
-                    if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                    }
-                    else
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
-                    }
+                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
                 }
 
                 if (!string.IsNullOrEmpty(tabTitle))
@@ -276,42 +273,8 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpDocumentTileChangeFailed, ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpDocumentTileChangeFailed, ex);
             }
-        }
-
-        private void geckoBrowser_LauncherDialog_Download(object sender, Gecko.LauncherDialogEvent e)
-        {
-            var objTarget = Xpcom.CreateInstance<nsILocalFileWin>("@mozilla.org/file/local;1");
-            using (var tmp = new nsAString(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\mremoteng.download"))
-            {
-                objTarget.InitWithPath(tmp);
-            }
-
-            //Save file dialog
-            var saveFileDialog = new SaveFileDialog
-            {
-                Filter = "All files (*.*)|*.*",
-                FilterIndex = 2,
-                RestoreDirectory = true,
-                FileName = e.Filename
-            };
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                var source = IOService.CreateNsIUri(e.Url);
-                var dest = IOService.CreateNsIUri(new Uri(saveFileDialog.FileName).AbsoluteUri);
-                var t = (nsAStringBase)new nsAString(Path.GetFileName(saveFileDialog.FileName));
-                var persist = Xpcom.CreateInstance<nsIWebBrowserPersist>("@mozilla.org/embedding/browser/nsWebBrowserPersist;1");
-                var nst = Xpcom.CreateInstance<nsITransfer>("@mozilla.org/transfer;1");
-
-                nst.Init(source, dest, t, e.Mime, 0, null, persist, false);
-                persist.SetPersistFlagsAttribute(2 | 32 | 16384);
-                persist.SetProgressListenerAttribute(nst);
-                persist.SaveURI(source, null, null, (uint)Gecko.nsIHttpChannelConsts.REFERRER_POLICY_NO_REFERRER, null, null, (nsISupports)dest, null);
-            }
-
-            saveFileDialog.Dispose();
         }
 
         #endregion
@@ -320,11 +283,11 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         public enum RenderingEngine
         {
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpInternetExplorer))]
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpInternetExplorer))]
             IE = 1,
 
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.strHttpGecko))]
-            Gecko = 2
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpCEF))]
+            CEF = 2
         }
 
         #endregion

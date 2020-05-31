@@ -28,6 +28,9 @@ using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
+using CefSharp;
+using CefSharp.WinForms;
+using CefSharp.SchemeHandler;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -44,7 +47,7 @@ namespace mRemoteNG.UI.Forms
         private bool _usingSqlServer;
         private string _connectionsFileName;
         private bool _showFullPathInTitle;
-        private readonly ScreenSelectionSystemMenu _screenSystemMenu;
+        private readonly AdvancedWindowMenu _advancedWindowMenu;
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
@@ -66,7 +69,7 @@ namespace mRemoteNG.UI.Forms
             vsToolStripExtender.DefaultRenderer = _toolStripProfessionalRenderer;
             ApplyTheme();
 
-            _screenSystemMenu = new ScreenSelectionSystemMenu(this);
+            _advancedWindowMenu = new AdvancedWindowMenu(this);
         }
 
         #region Properties
@@ -154,6 +157,44 @@ namespace mRemoteNG.UI.Forms
 
             SetMenuDependencies();
 
+            //Monitor parent process exit and close subprocesses if parent process exits first
+            //This will at some point in the future becomes the default
+            CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
+
+            //For Windows 7 and above, best to include relevant app.manifest entries as well
+            Cef.EnableHighDPISupport();
+
+            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+            if (Runtime.IsPortableEdition) dir = SettingsFileInfo.SettingsPath;
+
+            CefSettings settings = new CefSettings()
+            {
+                CachePath = Path.Combine(dir, "CEFCache"),
+                LogFile = Path.Combine(dir, "mRemoteNG_cef.log"),
+            };
+
+            if (Settings.Default.TextLogMessageWriterWriteDebugMsgs)
+                settings.LogSeverity = LogSeverity.Verbose;
+            else if (Settings.Default.TextLogMessageWriterWriteInfoMsgs)
+                settings.LogSeverity = LogSeverity.Info;
+            else if (Settings.Default.TextLogMessageWriterWriteWarningMsgs)
+                settings.LogSeverity = LogSeverity.Warning;
+            else if (Settings.Default.TextLogMessageWriterWriteErrorMsgs)
+                settings.LogSeverity = LogSeverity.Error;
+            
+            //Implement scheme to be allowed to view local help files
+            settings.RegisterScheme(new CefCustomScheme
+            {
+                SchemeName = Cef.CefCommitHash,
+                DomainName = "help",
+                SchemeHandlerFactory = new FolderSchemeHandlerFactory(
+                    rootFolder: $@"{GeneralAppInfo.HomePath}\Help\",
+                    defaultPage: "index.html"
+                )
+            });
+
+            Cef.Initialize(settings);
+
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
@@ -180,8 +221,8 @@ namespace mRemoteNG.UI.Forms
 
             Startup.Instance.CreateConnectionsProvider(messageCollector);
 
-            _screenSystemMenu.BuildScreenList();
-            SystemEvents.DisplaySettingsChanged += _screenSystemMenu.OnDisplayChanged;
+            _advancedWindowMenu.BuildAdditionalMenuItems();
+            SystemEvents.DisplaySettingsChanged += _advancedWindowMenu.OnDisplayChanged;
             ApplyLanguage();
 
             Opacity = 1;
@@ -201,7 +242,7 @@ namespace mRemoteNG.UI.Forms
             if (!Settings.Default.CreateEmptyPanelOnStartUp) return;
             var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
                 ? Settings.Default.StartUpPanelName
-                : Language.strNewPanel;
+                : Language.NewPanel;
 
             var panelAdder = new PanelAdder();
             if (!panelAdder.DoesPanelExist(panelName))
@@ -325,13 +366,13 @@ namespace mRemoteNG.UI.Forms
             if (Settings.Default.CheckForUpdatesAsked) return;
             string[] commandButtons =
             {
-                Language.strAskUpdatesCommandRecommended,
-                Language.strAskUpdatesCommandCustom,
-                Language.strAskUpdatesCommandAskLater
+                Language.AskUpdatesCommandRecommended,
+                Language.AskUpdatesCommandCustom,
+                Language.AskUpdatesCommandAskLater
             };
 
-            CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.strAskUpdatesMainInstruction,
-                                          string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProductName),
+            CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.AskUpdatesMainInstruction,
+                                          string.Format(Language.AskUpdatesContent, GeneralAppInfo.ProductName),
                                           "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None,
                                           ESysIcons.Question,
                                           ESysIcons.Question);
@@ -343,7 +384,7 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new FrmOptions(Language.strTabUpdates))
+            using (var optionsForm = new FrmOptions(Language.Updates))
             {
                 optionsForm.ShowDialog(this);
             }
@@ -400,8 +441,8 @@ namespace mRemoteNG.UI.Forms
                       openConnections > 1) || Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
                 {
                     var result = CTaskDialog.MessageBox(this, Application.ProductName,
-                                                        Language.strConfirmExitMainInstruction, "", "", "",
-                                                        Language.strCheckboxDoNotShowThisMessageAgain,
+                                                        Language.ConfirmExitMainInstruction, "", "", "",
+                                                        Language.CheckboxDoNotShowThisMessageAgain,
                                                         ETaskDialogButtons.YesNo, ESysIcons.Question,
                                                         ESysIcons.Question);
                     if (CTaskDialog.VerificationChecked)
@@ -420,6 +461,8 @@ namespace mRemoteNG.UI.Forms
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 
             IsClosing = true;
+
+            Cef.Shutdown();
 
             if (Runtime.WindowList != null)
             {
@@ -492,12 +535,7 @@ namespace mRemoteNG.UI.Forms
                     case NativeMethods.WM_ACTIVATEAPP:
                         var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
                                                ?? GetChildAtPoint(MousePosition);
-
-                        if (candidateTabToFocus is InterfaceControl)
-                        {
-                            candidateTabToFocus.Parent.Focus();
-                        }
-
+                        if (candidateTabToFocus is InterfaceControl) candidateTabToFocus.Parent.Focus();
                         _inMouseActivate = false;
                         break;
                     case NativeMethods.WM_ACTIVATE:
@@ -535,7 +573,6 @@ namespace mRemoteNG.UI.Forms
                                 }
                             }
                         }
-
                         break;
                     case NativeMethods.WM_WINDOWPOSCHANGED:
                         // Ignore this message if the window wasn't activated
@@ -546,12 +583,16 @@ namespace mRemoteNG.UI.Forms
                             if (!_inMouseActivate && !_inSizeMove)
                                 ActivateConnection();
                         }
-
                         break;
                     case NativeMethods.WM_SYSCOMMAND:
-                        var screen = _screenSystemMenu.GetScreenById(m.WParam.ToInt32());
+                        if (m.WParam == new IntPtr(0))
+                            ShowHideMenu();
+                        var screen = _advancedWindowMenu.GetScreenById(m.WParam.ToInt32());
                         if (screen != null)
+                        {
                             Screens.SendFormToScreen(screen);
+                            Console.WriteLine(_advancedWindowMenu.GetScreenById(m.WParam.ToInt32()).ToString());
+                        }
                         break;
                     case NativeMethods.WM_DRAWCLIPBOARD:
                         NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
@@ -618,7 +659,7 @@ namespace mRemoteNG.UI.Forms
                 if (Runtime.ConnectionsService.UsingDatabase)
                 {
                     titleBuilder.Append(separator);
-                    titleBuilder.Append(Language.strSQLServer.TrimEnd(':'));
+                    titleBuilder.Append(Language.SQLServer.TrimEnd(':'));
                 }
                 else
                 {
@@ -707,6 +748,8 @@ namespace mRemoteNG.UI.Forms
 
             pnlDock.Visible = true;
         }
+
+        public void ShowHideMenu() => tsContainer.TopToolStripPanelVisible = !tsContainer.TopToolStripPanelVisible;
 
         #endregion
 

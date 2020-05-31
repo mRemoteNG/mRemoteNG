@@ -117,269 +117,224 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="strActive" xml:space="preserve">
-    <value>Activo</value>
-  </data>
-  <data name="strActivity" xml:space="preserve">
-    <value>Actividad</value>
-  </data>
-  <data name="strButtonDefaultProperties" xml:space="preserve">
+  <data name="ButtonDefaultProperties" xml:space="preserve">
     <value>Propiedades por defecto</value>
   </data>
-  <data name="strButtonDisconnect" xml:space="preserve">
+  <data name="Disconnect" xml:space="preserve">
     <value>Desconectar</value>
   </data>
-  <data name="strButtonIcon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Icono</value>
   </data>
-  <data name="strButtonLaunchPutty" xml:space="preserve">
+  <data name="ButtonLaunchPutty" xml:space="preserve">
     <value>Ejecutar PuTTY</value>
   </data>
-  <data name="strButtonOK" xml:space="preserve">
+  <data name="_Ok" xml:space="preserve">
     <value>&amp; OK</value>
   </data>
-  <data name="strButtonProperties" xml:space="preserve">
+  <data name="Properties" xml:space="preserve">
     <value>Propiedades</value>
   </data>
-  <data name="strButtonScan" xml:space="preserve">
+  <data name="_Scan" xml:space="preserve">
     <value>&amp; Scanear</value>
   </data>
-  <data name="strButtonStop" xml:space="preserve">
+  <data name="_Stop" xml:space="preserve">
     <value>&amp; Parar</value>
   </data>
-  <data name="strButtonTestProxy" xml:space="preserve">
+  <data name="TestProxy" xml:space="preserve">
     <value>Probar Proxy</value>
   </data>
-  <data name="strCategoryCredentials" xml:space="preserve">
-    <value>Credenciales</value>
-  </data>
-  <data name="strCategoryMiscellaneous" xml:space="preserve">
+  <data name="Miscellaneous" xml:space="preserve">
     <value>Varios</value>
   </data>
-  <data name="strCcAlwaysShowScreen" xml:space="preserve">
-    <value>Siempre mostrar esta pantalla al inicio</value>
-  </data>
-  <data name="strCcNotInstalledProperly" xml:space="preserve">
+  <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>no está correctamente instalado</value>
   </data>
-  <data name="strCcPuttyOK" xml:space="preserve">
+  <data name="CcPuttyOK" xml:space="preserve">
     <value>El ejecutable de PuTTY se encontró y debería estar listo para usarse.</value>
   </data>
-  <data name="strCcRDPOK" xml:space="preserve">
+  <data name="CcRDPOK" xml:space="preserve">
     <value>Todos los componentes RDP se encontraron y parecen estar registrados correctamente. Versión de escritorio remoto {0}</value>
   </data>
-  <data name="strCcVNCOK" xml:space="preserve">
+  <data name="CcVNCOK" xml:space="preserve">
     <value>Todos los componentes de VNC se encontraron y parecen estar registrados correctamente.
 VncSharp Control {0}</value>
   </data>
-  <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
+  <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Intentar reconectar automáticamente cuando se desconecte (solo para RDP &amp;&amp; ICA)</value>
   </data>
-  <data name="strCheckboxDomain" xml:space="preserve">
-    <value>Dominio</value>
-  </data>
-  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+  <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>No mostrar este mensaje de nuevo.</value>
   </data>
-  <data name="strCheckboxInheritance" xml:space="preserve">
-    <value>Herencia</value>
-  </data>
-  <data name="strCheckboxPassword" xml:space="preserve">
-    <value>Contraseña</value>
-  </data>
-  <data name="strCheckboxProxyAuthentication" xml:space="preserve">
+  <data name="CheckboxProxyAuthentication" xml:space="preserve">
     <value>Este servidor proxy requiere autenticación</value>
   </data>
-  <data name="strCheckboxPuttyPath" xml:space="preserve">
+  <data name="CheckboxPuttyPath" xml:space="preserve">
     <value>Usar ruta de Putty personalizada:</value>
   </data>
-  <data name="strCheckboxReconnectWhenReady" xml:space="preserve">
+  <data name="CheckboxReconnectWhenReady" xml:space="preserve">
     <value>Vuelva a conectarse cuando esté listo</value>
   </data>
-  <data name="strCheckboxUpdateUseProxy" xml:space="preserve">
+  <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Usar un servidor proxy para conectarse</value>
   </data>
-  <data name="strCheckboxUsername" xml:space="preserve">
+  <data name="Username" xml:space="preserve">
     <value>Usuario</value>
   </data>
-  <data name="strCheckboxWaitForExit" xml:space="preserve">
+  <data name="WaitForExit" xml:space="preserve">
     <value>Esperar a Salir</value>
   </data>
-  <data name="strCheckForUpdate" xml:space="preserve">
+  <data name="CheckAgain" xml:space="preserve">
     <value>Pruebe nuevamente</value>
   </data>
-  <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
+  <data name="CheckForUpdatesOnStartup" xml:space="preserve">
     <value>Comprobar las actualizaciones y anuncios en el inicio</value>
   </data>
-  <data name="strCheckNow" xml:space="preserve">
+  <data name="CheckNow" xml:space="preserve">
     <value>Compruebe ahora</value>
   </data>
-  <data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
+  <data name="CheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
     <value>Verifique la correcta instalación de los componentes en el inicio</value>
   </data>
-  <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
+  <data name="ChoosePanelBeforeConnecting" xml:space="preserve">
     <value>Elija el panel antes de conectarse</value>
   </data>
-  <data name="strClosedPorts" xml:space="preserve">
+  <data name="ClosedPorts" xml:space="preserve">
     <value>Puertos Cerrados</value>
   </data>
-  <data name="strCollapseAllFolders" xml:space="preserve">
+  <data name="CollapseAllFolders" xml:space="preserve">
     <value>Contraer todas las carpetas</value>
   </data>
-  <data name="strComponentsCheck" xml:space="preserve">
+  <data name="ComponentsCheck" xml:space="preserve">
     <value>Comprobación de componentes</value>
   </data>
-  <data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+  <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Click falló!</value>
   </data>
-  <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>¿Desea cerrar la conexión:
-"{0}"?</value>
-  </data>
-  <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
+  <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>¿Está seguro que desea cerrar el panel, "{0}"? Cualquier conexión que contenga el panel también estará cerrada.</value>
   </data>
-  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+  <data name="ConfirmDeleteNodeFolder" xml:space="preserve">
     <value>¿Está seguro que desea eliminar la carpeta vacía, "{0}"?</value>
   </data>
-  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+  <data name="ConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>¿Está seguro que desea eliminar la carpeta "{0}"? También se eliminará cualquier carpetas o conexiones que contiene.</value>
   </data>
-  <data name="strConfirmExitMainInstruction" xml:space="preserve">
+  <data name="ConfirmExitMainInstruction" xml:space="preserve">
     <value>¿Desea cerrar todas las conexiones abiertas?</value>
   </data>
-  <data name="strConfirmResetLayout" xml:space="preserve">
+  <data name="ConfirmResetLayout" xml:space="preserve">
     <value>¿Estás seguro que deseas restablecer los paneles a su diseño predeterminado?</value>
   </data>
-  <data name="strConnect" xml:space="preserve">
+  <data name="Connect" xml:space="preserve">
     <value>Conectar</value>
   </data>
-  <data name="strConnecting" xml:space="preserve">
+  <data name="Connecting" xml:space="preserve">
     <value>Conectando...</value>
   </data>
-  <data name="strConnectionEventConnected" xml:space="preserve">
+  <data name="ConnectionEventConnected" xml:space="preserve">
     <value>Evento de protocolo conectado</value>
   </data>
   <data name="ConnectionFailed" xml:space="preserve">
     <value>¡Error de conexión!</value>
   </data>
-  <data name="strConnectionOpenFailed" xml:space="preserve">
+  <data name="ConnectionOpenFailed" xml:space="preserve">
     <value>No se pudo abrir la conexión!</value>
   </data>
-  <data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+  <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>No se puede abrir la conexión: ningún nombre de host especificado!</value>
   </data>
-  <data name="strConnectionRdpErrorDetail" xml:space="preserve">
-    <value>Error de RDP.
-Código de Error: {0} 
-Descripción del Error: {1}</value>
-  </data>
-  <data name="strConnections" xml:space="preserve">
+  <data name="Connections" xml:space="preserve">
     <value>Conexiones</value>
   </data>
-  <data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
+  <data name="ConnectionSetDefaultPortFailed" xml:space="preserve">
     <value>No se ha podido establecer el puerto predeterminado!</value>
   </data>
-  <data name="strConnectionsFileBackupFailed" xml:space="preserve">
+  <data name="ConnectionsFileBackupFailed" xml:space="preserve">
     <value>No se pudo crear copia de seguridad del archivo de conexiones!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
-    <value>No se pudo importar archivo de conexiones!</value>
-  </data>
-  <data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+  <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>No se pudo cargar el archivo de conexiones "{0}"!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
-    <value>No se pudo guardar el archivo de conexiones!</value>
-  </data>
-  <data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
+  <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>No se pudo guardar archivo de conexiones como "{0}"!</value>
   </data>
-  <data name="strConnectToConsoleSession" xml:space="preserve">
+  <data name="ConnectToConsoleSession" xml:space="preserve">
     <value>Conectar con la sesión de consola</value>
   </data>
-  <data name="strConnectWithOptions" xml:space="preserve">
+  <data name="ConnectWithOptions" xml:space="preserve">
     <value>Conectar (con opciones)</value>
   </data>
-  <data name="strConnenctionClosedByUser" xml:space="preserve">
+  <data name="ConnenctionClosedByUser" xml:space="preserve">
     <value>Conexión a {0} {1} vía cerrada por usuario {2}.</value>
   </data>
-  <data name="strConnenctionClosedByUserDetail" xml:space="preserve">
-    <value>Conexión a {0} {1} vía cerrada por usuario {2}.  (Descripción: "{3}"; Campo de usuario: "{4}")</value>
-  </data>
-  <data name="strConnenctionCloseEvent" xml:space="preserve">
+  <data name="ConnenctionCloseEvent" xml:space="preserve">
     <value>Evento de conexión cerrada</value>
   </data>
-  <data name="strConnenctionCloseEventFailed" xml:space="preserve">
+  <data name="ConnenctionCloseEventFailed" xml:space="preserve">
     <value>Evento de cerrar conexión falló!</value>
   </data>
-  <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
+  <data name="CouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>No se pudo crear el nuevo archivo de conexiones!</value>
   </data>
-  <data name="strCurrentVersion" xml:space="preserve">
+  <data name="InstalledVersion" xml:space="preserve">
     <value>Versión instalada</value>
   </data>
-  <data name="strDetect" xml:space="preserve">
+  <data name="Detect" xml:space="preserve">
     <value>Detectar</value>
   </data>
-  <data name="strDontConnectWhenAuthFails" xml:space="preserve">
+  <data name="DontConnectWhenAuthFails" xml:space="preserve">
     <value>No conectar si falla la autenticación</value>
   </data>
-  <data name="strDownloadAndInstall" xml:space="preserve">
+  <data name="DownloadAndInstall" xml:space="preserve">
     <value>Descargar e instalar</value>
   </data>
-  <data name="strDuplicate" xml:space="preserve">
+  <data name="Duplicate" xml:space="preserve">
     <value>Duplicar</value>
   </data>
-  <data name="strEmptyPasswordContinue" xml:space="preserve">
+  <data name="EmptyPasswordContinue" xml:space="preserve">
     <value>¿Desea continuar sin contraseña?</value>
   </data>
-  <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
+  <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Si desea Nombre de usuario, password o dominio vacio use:</value>
   </data>
-  <data name="strEnc128Bit" xml:space="preserve">
+  <data name="Enc128Bit" xml:space="preserve">
     <value>128-bit</value>
   </data>
-  <data name="strEnc128BitLogonOnly" xml:space="preserve">
+  <data name="Enc128BitLogonOnly" xml:space="preserve">
     <value>128-bit (iniciar sesión)</value>
   </data>
-  <data name="strEncBasic" xml:space="preserve">
+  <data name="Basic" xml:space="preserve">
     <value>Básica</value>
   </data>
-  <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
+  <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Encriptar completamente el archivo de conexiones</value>
   </data>
-  <data name="strEndIP" xml:space="preserve">
+  <data name="LastIp" xml:space="preserve">
     <value>Último IP</value>
   </data>
-  <data name="strEndPort" xml:space="preserve">
+  <data name="LastPort" xml:space="preserve">
     <value>Último puerto</value>
   </data>
-  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+  <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
     <value>BarraAgregarHerramientasExternas (frmMain) falló. {0}</value>
   </data>
-  <data name="strErrorBadDatabaseVersion" xml:space="preserve">
+  <data name="ErrorBadDatabaseVersion" xml:space="preserve">
     <value>La versión de la base de datos {0} no es compatible con esta versión de {1}.</value>
   </data>
-  <data name="strErrorCloneNodeFailed" xml:space="preserve">
-    <value>ClonarModulo (Tree.Node) falló. {0}</value>
-  </data>
-  <data name="strErrorCode" xml:space="preserve">
-    <value>Código de Error {0}.</value>
-  </data>
-  <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
+  <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
     <value>La lista de conexiones no pudo ser guardada.</value>
   </data>
-  <data name="strErrorDecryptionFailed" xml:space="preserve">
+  <data name="ErrorDecryptionFailed" xml:space="preserve">
     <value>La decriptación falló. {0}</value>
   </data>
-  <data name="strErrorEncryptionFailed" xml:space="preserve">
+  <data name="ErrorEncryptionFailed" xml:space="preserve">
     <value>La encriptación falló. {0}</value>
   </data>
-  <data name="strErrors" xml:space="preserve">
+  <data name="Errors" xml:space="preserve">
     <value>Errores</value>
   </data>
-  <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+  <data name="ErrorVerifyDatabaseVersionFailed" xml:space="preserve">
     <value>VerificarVersionBasedeDatos (Config.Connections.Save) falló. {0}</value>
   </data>
 </root>

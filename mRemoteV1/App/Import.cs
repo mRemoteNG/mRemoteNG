@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -23,13 +23,13 @@ namespace mRemoteNG.App
                     openFileDialog.Multiselect = true;
 
                     var fileTypes = new List<string>();
-                    fileTypes.AddRange(new[] {Language.strFilterAllImportable, "*.xml;*.rdp;*.rdg;*.dat;*.csv"});
-                    fileTypes.AddRange(new[] {Language.strFiltermRemoteXML, "*.xml"});
-                    fileTypes.AddRange(new[] {Language.strFiltermRemoteCSV, "*.csv"});
-                    fileTypes.AddRange(new[] {Language.strFilterRDP, "*.rdp"});
-                    fileTypes.AddRange(new[] {Language.strFilterRdgFiles, "*.rdg"});
-                    fileTypes.AddRange(new[] {Language.strFilterPuttyConnectionManager, "*.dat"});
-                    fileTypes.AddRange(new[] {Language.strFilterAll, "*.*"});
+                    fileTypes.AddRange(new[] {Language.FilterAllImportable, "*.xml;*.rdp;*.rdg;*.dat;*.csv"});
+                    fileTypes.AddRange(new[] {Language.FiltermRemoteXML, "*.xml"});
+                    fileTypes.AddRange(new[] {Language.FiltermRemoteCSV, "*.csv"});
+                    fileTypes.AddRange(new[] {Language.FilterRDP, "*.rdp"});
+                    fileTypes.AddRange(new[] {Language.FilterRdgFiles, "*.rdg"});
+                    fileTypes.AddRange(new[] {Language.FilterPuttyConnectionManager, "*.dat"});
+                    fileTypes.AddRange(new[] {Language.FilterAll, "*.*"});
 
                     openFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 
@@ -40,7 +40,7 @@ namespace mRemoteNG.App
 						openFileDialog.FileNames, 
 						importDestinationContainer, 
 						Runtime.ConnectionsService,
-						fileName => MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
+						fileName => MessageBox.Show(string.Format(Language.ImportFileFailedContent, fileName), Language.AskUpdatesMainInstruction,
 							MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1));
                 }
             }

@@ -21,7 +21,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override string PageName
         {
-            get => Language.strSQLServer.TrimEnd(':');
+            get => Language.SQLServer.TrimEnd(':');
             set { }
         }
 
@@ -29,15 +29,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            lblExperimental.Text = Language.strExperimental.ToUpper();
-            lblSQLInfo.Text = Language.strSQLInfo;
+            lblExperimental.Text = Language.Experimental.ToUpper();
+            lblSQLInfo.Text = Language.SQLInfo;
 
-            chkUseSQLServer.Text = Language.strUseSQLServer;
-            lblSQLServer.Text = Language.strLabelHostname;
-            lblSQLDatabaseName.Text = Language.strLabelSQLServerDatabaseName;
-            lblSQLUsername.Text = Language.strLabelUsername;
-            lblSQLPassword.Text = Language.strLabelPassword;
-            lblSQLReadOnly.Text = Language.strLabelReadOnly;
+            chkUseSQLServer.Text = Language.UseSQLServer;
+            lblSQLServer.Text = Language.Hostname;
+            lblSQLDatabaseName.Text = Language.Database;
+            lblSQLUsername.Text = Language.Username;
+            lblSQLPassword.Text = Language.Password;
+            lblSQLReadOnly.Text = Language.ReadOnly;
             btnTestConnection.Text = Language.TestConnection;
         }
 
@@ -151,11 +151,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
                 case ConnectionTestResult.UnknownError:
                     UpdateConnectionImage(false);
-                    lblTestConnectionResults.Text = BuildTestFailedMessage(Language.strRdpErrorUnknown);
+                    lblTestConnectionResults.Text = BuildTestFailedMessage(Language.RdpErrorUnknown);
                     break;
                 default:
                     UpdateConnectionImage(false);
-                    lblTestConnectionResults.Text = BuildTestFailedMessage(Language.strRdpErrorUnknown);
+                    lblTestConnectionResults.Text = BuildTestFailedMessage(Language.RdpErrorUnknown);
                     break;
             }
         }
@@ -169,7 +169,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private string BuildTestFailedMessage(string specificMessage)
         {
-            return Language.strConnectionOpenFailed +
+            return Language.ConnectionOpenFailed +
                    Environment.NewLine +
                    specificMessage;
         }

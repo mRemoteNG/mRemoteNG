@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Connections
                 if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                        Language.strErrorConnectionListSaveFailed);
+                                                        Language.ErrorConnectionListSaveFailed);
                     return;
                 }
 

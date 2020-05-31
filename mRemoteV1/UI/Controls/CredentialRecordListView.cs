@@ -73,9 +73,9 @@ namespace mRemoteNG.UI.Controls
 
         private void ApplyLanguage()
         {
-            olvColumnTitle.Text = Language.strTitle;
-            olvColumnUsername.Text = Language.strPropertyNameUsername;
-            olvColumnDomain.Text = Language.strPropertyNameDomain;
+            olvColumnTitle.Text = Language.Title;
+            olvColumnUsername.Text = Language.Username;
+            olvColumnDomain.Text = Language.Domain;
         }
 
         private object CredentialIdAspectGetter(object rowObject)

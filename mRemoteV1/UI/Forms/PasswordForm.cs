@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Forms
 
         #region Event Handlers
 
-        private void frmPassword_Load(object sender, EventArgs e)
+        private void FrmPassword_Load(object sender, EventArgs e)
         {
             ApplyLanguage();
             ApplyTheme();
@@ -70,13 +70,13 @@ namespace mRemoteNG.UI.Forms
             txtVerify.Text = "";
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private void btnOK_Click(object sender, EventArgs e)
+        private void BtnOK_Click(object sender, EventArgs e)
         {
             if (NewPasswordMode)
                 VerifyNewPassword();
@@ -84,7 +84,7 @@ namespace mRemoteNG.UI.Forms
             DialogResult = DialogResult.OK;
         }
 
-        private void txtPassword_TextChanged(object sender, EventArgs e)
+        private void TxtPassword_TextChanged(object sender, EventArgs e)
         {
             HideStatus();
         }
@@ -96,13 +96,13 @@ namespace mRemoteNG.UI.Forms
         private void ApplyLanguage()
         {
             Text = string.IsNullOrEmpty(_passwordName)
-                ? Language.strTitlePassword
-                : string.Format(Language.strTitlePasswordWithName, _passwordName);
+                ? Language.TitlePassword
+                : string.Format(Language.TitlePasswordWithName, _passwordName);
 
-            lblPassword.Text = Language.strLabelPassword;
-            lblVerify.Text = Language.strLabelVerify;
-            btnCancel.Text = Language.strButtonCancel;
-            btnOK.Text = Language.strButtonOK;
+            lblPassword.Text = Language.Password;
+            lblVerify.Text = Language.Verify;
+            btnCancel.Text = Language._Cancel;
+            btnOK.Text = Language._Ok;
         }
 
         private void ApplyTheme()
@@ -123,11 +123,11 @@ namespace mRemoteNG.UI.Forms
             {
                 if (txtPassword.Text == txtVerify.Text)
                     return true;
-                ShowStatus(Language.strPasswordStatusMustMatch);
+                ShowStatus(Language.PasswordStatusMustMatch);
                 return false;
             }
 
-            ShowStatus(Language.strPasswordStatusTooShort);
+            ShowStatus(Language.PasswordStatusTooShort);
             return false;
         }
 

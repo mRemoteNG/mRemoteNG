@@ -20,8 +20,8 @@ namespace mRemoteNG.UI.Forms.Input
 
         private void ApplyLanguage()
         {
-            buttonOk.Text = Language.strButtonOK;
-            buttonCancel.Text = Language.strButtonCancel;
+            _Ok.Text = Language._Ok;
+            buttonCancel.Text = Language._Cancel;
         }
 
         private void ApplyTheme()
@@ -32,7 +32,7 @@ namespace mRemoteNG.UI.Forms.Input
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
-        private void buttonOk_Click(object sender, System.EventArgs e)
+        private void _Ok_Click(object sender, System.EventArgs e)
         {
             DialogResult = DialogResult.OK;
             returnValue = textBox.Text;

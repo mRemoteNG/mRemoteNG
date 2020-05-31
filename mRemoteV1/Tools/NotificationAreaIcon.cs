@@ -25,13 +25,13 @@ namespace mRemoteNG.Tools
             {
                 _cMenCons = new ToolStripMenuItem
                 {
-                    Text = Language.strConnections,
+                    Text = Language.Connections,
                     Image = Resources.Root
                 };
 
                 var cMenSep1 = new ToolStripSeparator();
 
-                var cMenExit = new ToolStripMenuItem {Text = Language.strMenuExit};
+                var cMenExit = new ToolStripMenuItem {Text = Language.Exit};
                 cMenExit.Click += cMenExit_Click;
 
                 _cMen = new ContextMenuStrip

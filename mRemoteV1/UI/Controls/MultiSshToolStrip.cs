@@ -36,13 +36,13 @@ namespace mRemoteNG.UI.Controls
             // 
             _lblMultiSsh.Name = "_lblMultiSsh";
             _lblMultiSsh.Size = new System.Drawing.Size(77, 22);
-            _lblMultiSsh.Text = Language.strMultiSSH;
+            _lblMultiSsh.Text = Language.MultiSsh;
             // 
-            // txtMultiSSH
+            // txtMultiSsh
             // 
             _txtMultiSsh.Name = "_txtMultiSsh";
             _txtMultiSsh.Size = new System.Drawing.Size(new DisplayProperties().ScaleWidth(300), 25);
-            _txtMultiSsh.ToolTipText = Language.strMultiSSHToolTip;
+            _txtMultiSsh.ToolTipText = Language.MultiSshToolTip;
 
             Items.AddRange(new ToolStripItem[]
             {

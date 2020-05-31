@@ -33,7 +33,7 @@ namespace mRemoteNG.UI.Window
         {
             if (formText == "")
             {
-                formText = Language.strNewPanel;
+                formText = Language.NewPanel;
             }
 
             WindowType = WindowType.Connection;
@@ -264,24 +264,24 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            cmenTabFullscreen.Text = Language.strMenuFullScreenRDP;
-            cmenTabSmartSize.Text = Language.strMenuSmartSize;
-            cmenTabViewOnly.Text = Language.strMenuViewOnly;
-            cmenTabScreenshot.Text = Language.strMenuScreenshot;
-            cmenTabStartChat.Text = Language.strMenuStartChat;
-            cmenTabTransferFile.Text = Language.strMenuTransferFile;
-            cmenTabRefreshScreen.Text = Language.strMenuRefreshScreen;
-            cmenTabSendSpecialKeys.Text = Language.strMenuSendSpecialKeys;
-            cmenTabSendSpecialKeysCtrlAltDel.Text = Language.strMenuCtrlAltDel;
-            cmenTabSendSpecialKeysCtrlEsc.Text = Language.strMenuCtrlEsc;
-            cmenTabExternalApps.Text = Language.strMenuExternalTools;
-            cmenTabRenameTab.Text = Language.strMenuRenameTab;
-            cmenTabDuplicateTab.Text = Language.strMenuDuplicateTab;
-            cmenTabReconnect.Text = Language.strMenuReconnect;
-            cmenTabDisconnect.Text = Language.strMenuDisconnect;
-            cmenTabDisconnectOthers.Text = Language.strMenuDisconnectOthers;
-            cmenTabDisconnectOthersRight.Text = Language.strMenuDisconnectOthersRight;
-            cmenTabPuttySettings.Text = Language.strPuttySettings;
+            cmenTabFullscreen.Text = Language.Fullscreen;
+            cmenTabSmartSize.Text = Language.SmartSize;
+            cmenTabViewOnly.Text = Language.ViewOnly;
+            cmenTabScreenshot.Text = Language.Screenshot;
+            cmenTabStartChat.Text = Language.StartChat;
+            cmenTabTransferFile.Text = Language.TransferFile;
+            cmenTabRefreshScreen.Text = Language.RefreshScreen;
+            cmenTabSendSpecialKeys.Text = Language.SendSpecialKeys;
+            cmenTabSendSpecialKeysCtrlAltDel.Text = Language.CtrlAltDel;
+            cmenTabSendSpecialKeysCtrlEsc.Text = Language.CtrlEsc;
+            cmenTabExternalApps.Text = Language._Tools;
+            cmenTabRenameTab.Text = Language.RenameTab;
+            cmenTabDuplicateTab.Text = Language.DuplicateTab;
+            cmenTabReconnect.Text = Language.Reconnect;
+            cmenTabDisconnect.Text = Language.Disconnect;
+            cmenTabDisconnectOthers.Text = Language.DisconnectOthers;
+            cmenTabDisconnectOthersRight.Text = Language.DisconnectOthersRight;
+            cmenTabPuttySettings.Text = Language.PuttySettings;
         }
 
         private void Connection_FormClosing(object sender, FormClosingEventArgs e)
@@ -293,9 +293,9 @@ namespace mRemoteNG.UI.Window
             {
                 var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
                                                     string
-                                                        .Format(Language.strConfirmCloseConnectionPanelMainInstruction,
+                                                        .Format(Language.ConfirmCloseConnectionPanelMainInstruction,
                                                                 Text), "", "", "",
-                                                    Language.strCheckboxDoNotShowThisMessageAgain,
+                                                    Language.CheckboxDoNotShowThisMessageAgain,
                                                     ETaskDialogButtons.YesNo, ESysIcons.Question,
                                                     ESysIcons.Question);
                 if (CTaskDialog.VerificationChecked)
@@ -667,9 +667,9 @@ namespace mRemoteNG.UI.Window
             if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple)
             {
                 var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
-                                                    string.Format(Language.strConfirmCloseConnectionOthersInstruction,
+                                                    string.Format(Language.ConfirmCloseConnectionOthersInstruction,
                                                                   selectedTab.TabText), "", "", "",
-                                                    Language.strCheckboxDoNotShowThisMessageAgain,
+                                                    Language.CheckboxDoNotShowThisMessageAgain,
                                                     ETaskDialogButtons.YesNo, ESysIcons.Question,
                                                     ESysIcons.Question);
                 if (CTaskDialog.VerificationChecked)
@@ -765,7 +765,7 @@ namespace mRemoteNG.UI.Window
             {
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
-                using (var frmInputBox = new FrmInputBox(Language.strNewTitle, Language.strNewTitle,
+                using (var frmInputBox = new FrmInputBox(Language.NewTitle, Language.NewTitle,
                                                          ((ConnectionTab)interfaceControl.Parent).TabText))
                 {
                     var dr = frmInputBox.ShowDialog();

@@ -62,7 +62,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(Language.strCouldNotCreateNewConnectionsFile, ex);
+                Runtime.MessageCollector.AddExceptionMessage(Language.CouldNotCreateNewConnectionsFile, ex);
             }
         }
 
@@ -78,7 +78,7 @@ namespace mRemoteNG.Connection
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
                 newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs
-                    ? string.Format(Language.strQuick, uriBuilder.Host)
+                    ? string.Format(Language.Quick, uriBuilder.Host)
                     : uriBuilder.Host;
 
                 newConnectionInfo.Protocol = protocol;
@@ -93,7 +93,7 @@ namespace mRemoteNG.Connection
                 }
 
                 if (string.IsNullOrEmpty(newConnectionInfo.Panel))
-                    newConnectionInfo.Panel = Language.strGeneral;
+                    newConnectionInfo.Panel = Language.General;
 
                 newConnectionInfo.IsQuickConnect = true;
 
@@ -101,7 +101,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(Language.strQuickConnectFailed, ex);
+                Runtime.MessageCollector.AddExceptionMessage(Language.QuickConnectFailed, ex);
                 return null;
             }
         }
@@ -260,7 +260,7 @@ namespace mRemoteNG.Connection
             catch (Exception ex)
             {
                 Runtime.MessageCollector?.AddExceptionMessage(
-                                                              string.Format(Language.strConnectionsFileCouldNotSaveAs,
+                                                              string.Format(Language.ConnectionsFileCouldNotSaveAs,
                                                                             connectionFileName), ex, logOnly: false);
             }
             finally

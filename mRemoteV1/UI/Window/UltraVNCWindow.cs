@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using mRemoteNG.App;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            btnDisconnect.Text = Language.strButtonDisconnect;
+            btnDisconnect.Text = Language.Disconnect;
         }
 
         private void StartListening()
@@ -128,7 +128,7 @@ namespace mRemoteNG.UI.Window
                 //vnc.Show()
 
                 //vnc.StretchMode = ViewerX.ScreenStretchMode.SSM_ASPECT
-                //vnc.ListeningText = Language.strInheritListeningForIncomingVNCConnections & " " & Settings.UVNCSCPort
+                //vnc.ListeningText = Language.InheritListeningForIncomingVNCConnections & " " & Settings.UVNCSCPort
 
                 //vnc.ListenEx(Settings.UVNCSCPort)
             }

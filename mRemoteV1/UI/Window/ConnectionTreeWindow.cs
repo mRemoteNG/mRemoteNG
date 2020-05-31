@@ -79,17 +79,17 @@ namespace mRemoteNG.UI.Window
 
         private void ApplyLanguage()
         {
-            Text = Language.strConnections;
-            TabText = Language.strConnections;
+            Text = Language.Connections;
+            TabText = Language.Connections;
 
-            mMenAddConnection.ToolTipText = Language.strAddConnection;
-            mMenAddFolder.ToolTipText = Language.strAddFolder;
-            mMenViewExpandAllFolders.ToolTipText = Language.strExpandAllFolders;
-            mMenViewCollapseAllFolders.ToolTipText = Language.strCollapseAllFolders;
-            mMenSort.ToolTipText = Language.strSort;
+            mMenAddConnection.ToolTipText = Language.NewConnection;
+            mMenAddFolder.ToolTipText = Language.NewFolder;
+            mMenViewExpandAllFolders.ToolTipText = Language.ExpandAllFolders;
+            mMenViewCollapseAllFolders.ToolTipText = Language.CollapseAllFolders;
+            mMenSort.ToolTipText = Language.Sort;
             mMenFavorites.ToolTipText = Language.Favorites;
 
-            txtSearch.Text = Language.strSearchPrompt;
+            txtSearch.Text = Language.SearchPrompt;
         }
 
         private new void ApplyTheme()
@@ -298,7 +298,7 @@ namespace mRemoteNG.UI.Window
         {
             if (Settings.Default.UseFilterSearch)
             {
-                if (txtSearch.Text == "" || txtSearch.Text == Language.strSearchPrompt)
+                if (txtSearch.Text == "" || txtSearch.Text == Language.SearchPrompt)
                 {
                     ConnectionTree.RemoveFilter();
                     return;

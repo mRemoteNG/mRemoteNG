@@ -75,9 +75,9 @@ namespace mRemoteNG.UI.Forms
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 7;
-            this.btnOK.Text = global::mRemoteNG.Language.strButtonOK;
+            this.btnOK.Text = global::mRemoteNG.Language._Ok;
             this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
             // btnCancel
             // 
@@ -88,9 +88,9 @@ namespace mRemoteNG.UI.Forms
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = global::mRemoteNG.Language.strButtonCancel;
+            this.btnCancel.Text = global::mRemoteNG.Language._Cancel;
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // lblStatus
             // 
@@ -128,7 +128,7 @@ namespace mRemoteNG.UI.Forms
             this.txtVerify.Size = new System.Drawing.Size(298, 22);
             this.txtVerify.TabIndex = 4;
             this.txtVerify.UseSystemPasswordChar = true;
-            this.txtVerify.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            this.txtVerify.TextChanged += new System.EventHandler(this.TxtPassword_TextChanged);
             // 
             // txtPassword
             // 
@@ -141,7 +141,7 @@ namespace mRemoteNG.UI.Forms
             this.txtPassword.Size = new System.Drawing.Size(298, 22);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.UseSystemPasswordChar = true;
-            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            this.txtPassword.TextChanged += new System.EventHandler(this.TxtPassword_TextChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -190,7 +190,7 @@ namespace mRemoteNG.UI.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Password";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PasswordForm_FormClosed);
-            this.Load += new System.EventHandler(this.frmPassword_Load);
+            this.Load += new System.EventHandler(this.FrmPassword_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbLock)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
