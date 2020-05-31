@@ -589,8 +589,10 @@ namespace mRemoteNG.UI.Forms
                             ShowHideMenu();
                         var screen = _advancedWindowMenu.GetScreenById(m.WParam.ToInt32());
                         if (screen != null)
+                        {
                             Screens.SendFormToScreen(screen);
-                        Console.WriteLine(_advancedWindowMenu.GetScreenById(m.WParam.ToInt32()).ToString());
+                            Console.WriteLine(_advancedWindowMenu.GetScreenById(m.WParam.ToInt32()).ToString());
+                        }
                         break;
                     case NativeMethods.WM_DRAWCLIPBOARD:
                         NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
