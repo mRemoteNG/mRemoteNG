@@ -1,16 +1,26 @@
-*****
-Menus
-*****
+**************
+Menu Container
+**************
 
-.. figure:: /images/menus_main_menu.png
+Hide Menu Container
+===================
 
-In this section we are going to explain the menus located in mRemoteNG. The above screenshot shows the main menu with colors.
+You can hide the Menu Container when right-clicking the mRemoteNG title bar.
+
+.. figure:: /images/menus_hide_menu_strip.png
+
+Main Menu
+=========
+
+In this section we are going to explain the menus located in mRemoteNG.
 
 - **Red** - Anchor to move menu around the interface
 - **Green** - The menu items
 
+.. figure:: /images/menus_main_menu.png
+
 File Menu
-=========
+---------
 Contains standard commands for the application.
 
 .. list-table::
@@ -43,7 +53,7 @@ Contains standard commands for the application.
      - Exit mRemoteNG application
 
 View Menu
-=========
+---------
 Menu for additional dialogs for mRemoteNG.
 
 .. list-table::
@@ -80,7 +90,7 @@ Menu for additional dialogs for mRemoteNG.
      - Fullscreen mRemoteNG (will not fullscreen connection window but only the mRemoteNG application)
 
 Tools Menu
-==========
+----------
 Additional tools that can be used and triggered in mRemoteNG.
 
 .. list-table::
@@ -99,7 +109,7 @@ Additional tools that can be used and triggered in mRemoteNG.
      - Opens mRemoteNG global settings and options dialog
 
 Help Menu
-=========
+---------
 Get more information for the application.
 
 .. list-table::

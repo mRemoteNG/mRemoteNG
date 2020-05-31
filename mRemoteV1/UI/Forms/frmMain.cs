@@ -535,12 +535,7 @@ namespace mRemoteNG.UI.Forms
                     case NativeMethods.WM_ACTIVATEAPP:
                         var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
                                                ?? GetChildAtPoint(MousePosition);
-
-                        if (candidateTabToFocus is InterfaceControl)
-                        {
-                            candidateTabToFocus.Parent.Focus();
-                        }
-
+                        if (candidateTabToFocus is InterfaceControl) candidateTabToFocus.Parent.Focus();
                         _inMouseActivate = false;
                         break;
                     case NativeMethods.WM_ACTIVATE:
@@ -578,7 +573,6 @@ namespace mRemoteNG.UI.Forms
                                 }
                             }
                         }
-
                         break;
                     case NativeMethods.WM_WINDOWPOSCHANGED:
                         // Ignore this message if the window wasn't activated
@@ -589,7 +583,6 @@ namespace mRemoteNG.UI.Forms
                             if (!_inMouseActivate && !_inSizeMove)
                                 ActivateConnection();
                         }
-
                         break;
                     case NativeMethods.WM_SYSCOMMAND:
                         if (m.WParam == new IntPtr(0))
