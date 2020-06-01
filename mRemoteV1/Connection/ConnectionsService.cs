@@ -72,8 +72,16 @@ namespace mRemoteNG.Connection
             {
                 var uriBuilder = new UriBuilder();
                 uriBuilder.Scheme = "dummyscheme";
-                uriBuilder.Host = connectionString;
 
+                if (connectionString.Contains("@"))
+                {
+                    string[] x = connectionString.Split('@');
+                    uriBuilder.UserName = x[0];
+                    uriBuilder.Host = x[1];
+                }
+                else
+                    uriBuilder.Host = connectionString;
+                
                 var newConnectionInfo = new ConnectionInfo();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
@@ -83,6 +91,7 @@ namespace mRemoteNG.Connection
 
                 newConnectionInfo.Protocol = protocol;
                 newConnectionInfo.Hostname = uriBuilder.Host;
+                newConnectionInfo.Username = uriBuilder.UserName;
                 if (uriBuilder.Port == -1)
                 {
                     newConnectionInfo.SetDefaultPort();

@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1332: Added option to hide menu strip container
 - #545: Option to minimize to system tray on closing
 - #420: SSH tunneling implemented
+- #319: Override quick connect username when using user@domain
 - #283: Support for native PowerShell remoting as new protocol
 ### Changed
 - #1767: Turned about window into a simple popup form
