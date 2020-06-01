@@ -12,6 +12,11 @@ Prerequisites
 
 Using QuickConnect
 ==================
+
+.. tip::
+
+    You can input username and hostname simultaneously when using user@domain as connection string.
+
 To use Quick Connect, ensure the Quick Connect toolbar is enabled by selecting View and then Quick Connect Toolbar.
 Next, input a DNS host name or IP address into the box labeled "Connect". This box will also save previous entries during your session.
 
