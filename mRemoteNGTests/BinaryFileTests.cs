@@ -30,7 +30,7 @@ namespace mRemoteNGTests
             "";
 #endif
             var path = Path.GetDirectoryName(sourceFilePath);
-            var filePath = $"{path}\\..\\mRemoteV1\\bin\\{debugOrRelease}{normalOrPortable}\\mRemoteNG.exe";
+            var filePath = $"{path}\\..\\mRemoteNG\\bin\\{debugOrRelease}{normalOrPortable}\\mRemoteNG.exe";
             return filePath;
         }
 
