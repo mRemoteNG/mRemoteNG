@@ -11,7 +11,7 @@ param (
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 Write-Output "Copying THEMES folder to output"
 
-$sourceFiles = [io.path]::combine($SolutionDir , 'mRemoteV1\Resources\Themes' ) 
+$sourceFiles = [io.path]::combine($SolutionDir , 'mRemoteNG\Resources\Themes' ) 
 $DestinationDir = [io.path]::combine($TargetDir , 'Themes') 
 
 robocopy $sourceFiles $DestinationDir *.vstheme /s

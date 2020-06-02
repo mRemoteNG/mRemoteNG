@@ -26,7 +26,7 @@ param (
 )
 
 Write-Output "+=================================================================+"
-Write-Output "|                  Beginning mRemoteV1 Post Build                 |"
+Write-Output "|                  Beginning mRemoteNG Post Build                 |"
 Write-Output "+=================================================================+"
 Format-Table -AutoSize -Wrap -InputObject @{
     "SolutionDir" = $SolutionDir

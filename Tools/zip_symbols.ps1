@@ -33,7 +33,7 @@ $SEVENZIP="$($SolutionDir)Tools\7zip\7za.exe"
 if ($ConfigurationName -match "Release") {
     Write-Output "Packaging debug symbols"
    
-    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteV1\bin\$($ConfigurationName)\mRemoteNG.exe"
+    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteNG\bin\$($ConfigurationName)\mRemoteNG.exe"
 
     Write-Output "Version is $($version)"
 
