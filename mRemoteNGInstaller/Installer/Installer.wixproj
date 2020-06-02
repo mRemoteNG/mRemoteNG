@@ -14,16 +14,16 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DefineConstants>HarvestPath=..\mRemoteV1\bin\Debug;</DefineConstants>
+    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Debug;</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>HarvestPath=..\mRemoteV1\bin\Release;</DefineConstants>
+    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Release;</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug Portable' ">
-    <DefineConstants>HarvestPath=..\mRemoteV1\bin\Debug Portable;</DefineConstants>
+    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Debug Portable;</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release Portable' ">
-    <DefineConstants>HarvestPath=..\mRemoteV1\bin\Release Portable;</DefineConstants>
+    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Release Portable;</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CustomActions\CheckForInstalledWindowsUpdates.wxs" />
@@ -73,7 +73,7 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\mRemoteV1\mRemoteNG.csproj">
+    <ProjectReference Include="..\..\mRemoteNG\mRemoteNG.csproj">
       <Name>mRemoteNG</Name>
       <Project>{4934a491-40bc-4e5b-9166-ea1169a220f6}</Project>
       <Private>True</Private>
@@ -94,19 +94,19 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <LinkerAdditionalOptions>
     </LinkerAdditionalOptions>
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Release;HelpFilesHarvestPath=$(SolutionDir)mRemoteV1\Resources\Help</DefineConstants>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Release;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
     <Cultures>en-US</Cultures>
     <SuppressPdbOutput>True</SuppressPdbOutput>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <Cultures>en-US</Cultures>
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Debug;HelpFilesHarvestPath=$(SolutionDir)mRemoteV1\Resources\Help</DefineConstants>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Debug;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Portable|x86' ">
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Debug Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteV1\Resources\Help</DefineConstants>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Debug Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Portable|x86' ">
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Release Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteV1\Resources\Help</DefineConstants>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Release Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>:: When passing paths to powershell scripts, check if the path ends with a backslash "\"
