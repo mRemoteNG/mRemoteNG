@@ -24,7 +24,7 @@ namespace mRemoteNG.App
 
         private void Initialize()
         {
-            XmlConfigurator.Configure();
+            XmlConfigurator.Configure(LogManager.CreateRepository("mRemoteNG"));
             if (string.IsNullOrEmpty(Settings.Default.LogFilePath))
                 Settings.Default.LogFilePath = BuildLogFilePath();
 
@@ -33,7 +33,7 @@ namespace mRemoteNG.App
 
         public void SetLogPath(string path)
         {
-            var repository = LogManager.GetRepository();
+            var repository = LogManager.GetRepository("mRemoteNG");
             var appenders = repository.GetAppenders();
 
             foreach (var appender in appenders)
@@ -44,7 +44,7 @@ namespace mRemoteNG.App
                 fileAppender.ActivateOptions();
             }
 
-            Log = LogManager.GetLogger("Logger");
+            Log = LogManager.GetLogger("mRemoteNG", "Logger");
         }
 
         private static string BuildLogFilePath()
