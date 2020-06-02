@@ -33,21 +33,21 @@ $SEVENZIP="$($SolutionDir)Tools\7zip\7za.exe"
 if ($ConfigurationName -eq "Release Portable") {
     Write-Output "Packaging Release Portable ZIP"
    
-    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteV1\bin\$($ConfigurationName)\mRemoteNG.exe"
+    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteNG\bin\$($ConfigurationName)\mRemoteNG.exe"
 
     Write-Output "Version is $($version)"
 
     $PortableZip="$($SolutionDir)Release\mRemoteNG-Portable-$($version).zip"
 
-    $tempFolderPath = Join-Path -Path $SolutionDir -ChildPath "mRemoteV1\bin\package"
+    $tempFolderPath = Join-Path -Path $SolutionDir -ChildPath "mRemoteNG\bin\package"
     Remove-Item -Recurse $tempFolderPath -ErrorAction SilentlyContinue | Out-Null
     New-Item $tempFolderPath -ItemType  "directory" | Out-Null
     
-    Copy-Item "$($SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" -Destination $tempFolderPath
+    Copy-Item "$($SolutionDir)mRemoteNG\Resources\PuTTYNG.exe" -Destination $tempFolderPath
 
-    #Write-Output "$($SolutionDir)mRemoteV1\bin\$ConfigurationName" 
-    #Write-Output "$($SolutionDir)mRemoteV1\bin\package"
-    Copy-Item "$($SolutionDir)mRemoteV1\bin\$ConfigurationName\*" -Destination $tempFolderPath -Recurse  -Force
+    #Write-Output "$($SolutionDir)mRemoteNG\bin\$ConfigurationName" 
+    #Write-Output "$($SolutionDir)mRemoteNG\bin\package"
+    Copy-Item "$($SolutionDir)mRemoteNG\bin\$ConfigurationName\*" -Destination $tempFolderPath -Recurse  -Force
     # Delete any PDB files that accidentally get copied into the temp folder
     Get-ChildItem -Path $tempFolderPath -Filter "*.pdb" | Remove-Item
     Copy-Item "$($SolutionDir)*.txt" -Destination $tempFolderPath

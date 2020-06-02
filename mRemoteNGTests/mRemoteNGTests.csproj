@@ -283,9 +283,9 @@
     <Content Include="Resources\update.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\mRemoteV1\mRemoteV1.csproj">
+    <ProjectReference Include="..\mRemoteNG\mRemoteNG.csproj">
       <Project>{4934a491-40bc-4e5b-9166-ea1169a220f6}</Project>
-      <Name>mRemoteV1</Name>
+      <Name>mRemoteNG</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

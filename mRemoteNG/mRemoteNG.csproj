@@ -1,0 +1,1758 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4934A491-40BC-4E5B-9166-EA1169A220F6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>mRemoteNG.App.ProgramRoot</StartupObject>
+    <RootNamespace>mRemoteNG</RootNamespace>
+    <AssemblyName>mRemoteNG</AssemblyName>
+    <MyType>WindowsForms</MyType>
+    <OptionExplicit>On</OptionExplicit>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <ApplicationIcon>Resources\Icons\mRemoteNG_Icon.ico</ApplicationIcon>
+    <OptionStrict>Off</OptionStrict>
+    <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
+    <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>false</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.64.0.1</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Credential\Records\" />
+    <Folder Include="Resources\Help\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App\CompatibilityChecker.cs" />
+    <Compile Include="App\Info\GeneralAppInfo.cs" />
+    <Compile Include="App\Initialization\ConnectionIconLoader.cs" />
+    <Compile Include="App\Initialization\CredsAndConsSetup.cs" />
+    <Compile Include="App\Initialization\StartupDataLogger.cs" />
+    <Compile Include="App\Logger.cs" />
+    <Compile Include="App\Initialization\MessageCollectorSetup.cs" />
+    <Compile Include="App\NativeMethods.cs" />
+    <Compile Include="App\Runtime.cs" />
+    <Compile Include="App\Screens.cs" />
+    <Compile Include="App\Shutdown.cs" />
+    <Compile Include="App\Startup.cs" />
+    <Compile Include="App\SupportedCultures.cs" />
+    <Compile Include="App\Update\AppUpdater.cs" />
+    <Compile Include="App\Export.cs" />
+    <Compile Include="App\Import.cs" />
+    <Compile Include="App\Info\ConnectionsFileInfo.cs" />
+    <Compile Include="App\Info\CredentialsFileInfo.cs" />
+    <Compile Include="App\Info\SettingsFileInfo.cs" />
+    <Compile Include="App\Info\UpdateChannelInfo.cs" />
+    <Compile Include="App\Update\UpdateFile.cs" />
+    <Compile Include="App\Update\UpdateInfo.cs" />
+    <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Connections\ConnectionsLoadedEventArgs.cs" />
+    <Compile Include="Config\Connections\ConnectionsSavedEventArgs.cs" />
+    <Compile Include="Config\Connections\CsvConnectionsSaver.cs" />
+    <Compile Include="Config\Connections\IConnectionsLoader.cs" />
+    <Compile Include="Config\Connections\SaveConnectionsOnEdit.cs" />
+    <Compile Include="Config\Connections\SaveFormat.cs" />
+    <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateCheckFinishedEventArgs.cs" />
+    <Compile Include="Config\Connections\Multiuser\IConnectionsUpdateChecker.cs" />
+    <Compile Include="Config\Connections\Multiuser\ConnectionsUpdateAvailableEventArgs.cs" />
+    <Compile Include="Config\Connections\Multiuser\RemoteConnectionsSyncronizer.cs" />
+    <Compile Include="Config\Connections\SqlConnectionsLoader.cs" />
+    <Compile Include="Config\Connections\SqlConnectionsSaver.cs" />
+    <Compile Include="Config\Connections\XmlConnectionsLoader.cs" />
+    <Compile Include="Config\Connections\XmlConnectionsSaver.cs" />
+    <Compile Include="Config\CredentialHarvester.cs" />
+    <Compile Include="Config\CredentialRecordLoader.cs" />
+    <Compile Include="Config\CredentialRecordSaver.cs" />
+    <Compile Include="Config\CredentialRepositoryListSaver.cs" />
+    <Compile Include="Config\DatabaseConnectors\ConnectionTestResult.cs" />
+    <Compile Include="Config\DatabaseConnectors\DatabaseConnectorFactory.cs" />
+    <Compile Include="Config\DatabaseConnectors\DatabaseConnectionTester.cs" />
+    <Compile Include="Config\DatabaseConnectors\MSSqlDatabaseConnector.cs" />
+    <Compile Include="Config\DataProviders\FileBackupCreator.cs" />
+    <Compile Include="Config\DataProviders\FileBackupPruner.cs" />
+    <Compile Include="Config\DataProviders\InMemoryStringDataProvider.cs" />
+    <Compile Include="Config\ILoader.cs" />
+    <Compile Include="Config\Import\MRemoteNGCsvImporter.cs" />
+    <Compile Include="Config\ISaver.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionNodeSerializer27.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesModel.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\LocalConnectionPropertiesXmlSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlConnectionListMetaData.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionSerializerFactory.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlExtensions.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListDeserializer.cs" />
+    <Compile Include="Config\CredentialRepositoryListLoader.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordDecryptorDecorator.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialPasswordEncryptorDecorator.cs" />
+    <Compile Include="Config\Serializers\ISecureDeserializer.cs" />
+    <Compile Include="Config\Serializers\ISecureSerializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\ActiveDirectoryDeserializer.cs" />
+    <Compile Include="Config\Serializers\CredentialProviderSerializer\CredentialRepositoryListSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsDeserializerMremotengFormat.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Csv\CsvConnectionsSerializerMremotengFormat.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\DataTableDeserializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\DataTableSerializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\PortScanDeserializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\PuttyConnectionManagerDeserializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionDeserializer.cs" />
+    <Compile Include="Config\Serializers\MiscSerializers\RemoteDesktopConnectionManagerDeserializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionNodeSerializer26.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\MsSql\SqlDatabaseMetaDataRetriever.cs" />
+    <Compile Include="Config\Serializers\Versioning\IVersionUpgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion22To23Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion23To24Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion24To25Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion25To26Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion27To28Upgrader.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlVersion26To27Upgrader.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionsDecryptor.cs" />
+    <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackup.cs" />
+    <Compile Include="Config\DataProviders\SqlDataProvider.cs" />
+    <Compile Include="Config\Serializers\IDeserializer.cs" />
+    <Compile Include="Config\Import\IConnectionImporter.cs" />
+    <Compile Include="Config\Serializers\ISerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsDocumentCompiler.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsDocumentEncryptor.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsSerializer.cs" />
+    <Compile Include="Config\DataProviders\FileDataProvider.cs" />
+    <Compile Include="Config\DataProviders\IDataProvider.cs" />
+    <Compile Include="Config\Connections\Multiuser\SqlConnectionsUpdateChecker.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlConnectionsDeserializer.cs" />
+    <Compile Include="Config\Putty\PuttySessionChangedEventArgs.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialRecordDeserializer.cs" />
+    <Compile Include="Config\Serializers\CredentialSerializer\XmlCredentialRecordSerializer.cs" />
+    <Compile Include="Config\Serializers\ConnectionSerializers\Xml\XmlRootNodeSerializer.cs" />
+    <Compile Include="Config\Serializers\ConfConsEnsureConnectionsHaveIds.cs" />
+    <Compile Include="Config\Settings\DockPanelLayoutSerializer.cs" />
+    <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
+    <Compile Include="Config\Settings\ExternalAppsSaver.cs" />
+    <Compile Include="Config\Settings\DockPanelLayoutLoader.cs" />
+    <Compile Include="Config\Settings\DockPanelLayoutSaver.cs" />
+    <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />
+    <Compile Include="Config\Settings\SettingsLoader.cs" />
+    <Compile Include="Config\Settings\Providers\PortableSettingsProvider.cs" />
+    <Compile Include="Config\Settings\SettingsSaver.cs" />
+    <Compile Include="Config\ConfirmCloseEnum.cs" />
+    <Compile Include="Config\Import\ActiveDirectoryImporter.cs" />
+    <Compile Include="Config\Import\MRemoteNGXmlImporter.cs" />
+    <Compile Include="Config\Import\PortScanImporter.cs" />
+    <Compile Include="Config\Import\PuttyConnectionManagerImporter.cs" />
+    <Compile Include="Config\Import\RemoteDesktopConnectionImporter.cs" />
+    <Compile Include="Config\Import\RemoteDesktopConnectionManagerImporter.cs" />
+    <Compile Include="Config\Putty\PuttySessionsRegistryProvider.cs" />
+    <Compile Include="Config\Putty\PuttySessionsXmingProvider.cs" />
+    <Compile Include="Config\Putty\PuttySessionsManager.cs" />
+    <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
+    <Compile Include="Config\DatabaseConnectors\IDatabaseConnector.cs" />
+    <Compile Include="Config\DatabaseConnectors\MySqlDatabaseConnector.cs" />
+    <Compile Include="Connection\AbstractConnectionRecord.cs" />
+    <Compile Include="Connection\ConnectionInfoComparer.cs" />
+    <Compile Include="Connection\ConnectionInfoInheritance.cs" />
+    <Compile Include="App\ProgramRoot.cs" />
+    <Compile Include="Connection\ConnectionInitiator.cs" />
+    <Compile Include="Connection\ConnectionsService.cs" />
+    <Compile Include="Connection\Converter.cs" />
+    <Compile Include="Connection\DefaultConnectionInfo.cs" />
+    <Compile Include="Connection\DefaultConnectionInheritance.cs" />
+    <Compile Include="Connection\IConnectionInitiator.cs" />
+    <Compile Include="Connection\IInheritable.cs" />
+    <Compile Include="Connection\IHasParent.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.DownloadHandler.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.RequestHandler.cs" />
+    <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
+    <Compile Include="Connection\Protocol\RDP\AuthenticationLevel.cs" />
+    <Compile Include="Connection\Protocol\RDP\AzureLoadBalanceInfoEncoder.cs" />
+    <Compile Include="Connection\Protocol\ISupportsViewOnly.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDGatewayUsageMethod.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDGatewayUseConnectionCredentials.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPColors.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpErrorCodes.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpExtensions.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpNetworkConnectionType.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPPerformanceFlags.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol7.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol8.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol9.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocolFactory.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPResolutions.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPSoundQuality.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPSounds.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpVersion.cs" />
+    <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
+    <Compile Include="Connection\WebHelper.cs" />
+    <Compile Include="Credential\PlaceholderCredentialRecord.cs" />
+    <Compile Include="Credential\Repositories\CompositeRepositoryUnlocker.cs" />
+    <Compile Include="Credential\CredentialChangedEventArgs.cs" />
+    <Compile Include="Credential\CredentialDeletionMsgBoxConfirmer.cs" />
+    <Compile Include="Credential\CredentialDomainUserComparer.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepoUnlockerBuilder.cs" />
+    <Compile Include="Credential\CredentialServiceFactory.cs" />
+    <Compile Include="Credential\CredentialServiceFacade.cs" />
+    <Compile Include="Connection\Protocol\PowerShell\Connection.Protocol.PowerShell.cs" />
+    <None Include="Documentation\faq.rst" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Language\Language.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Themes\ColorMapTheme.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ColorMapTheme.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Security\Factories\CryptoProviderFactoryFromSettings.cs" />
+    <Compile Include="Security\Factories\LegacyInsecureCryptoProviderFactory.cs" />
+    <Compile Include="Security\ICryptoProviderFactory.cs" />
+    <Compile Include="Security\IKeyProvider.cs" />
+    <Compile Include="Security\RandomGenerator.cs" />
+    <Compile Include="Themes\ExtendedColorPalette.cs" />
+    <Compile Include="Themes\MremoteNGPaletteManipulator.cs" />
+    <Compile Include="Themes\MremoteNGThemeBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools\ADhelper.cs" />
+    <Compile Include="Tools\Attributes\UsedInAllProtocolsExceptAttribute.cs" />
+    <Compile Include="Tools\Clipboard\WindowsClipboard.cs" />
+    <Compile Include="Tools\CustomCollections\IFullyNotifiableList.cs" />
+    <Compile Include="Tools\CustomCollections\FullyObservableCollection.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepositoryChangedArgs.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepositoryList.cs" />
+    <Compile Include="Credential\CredentialRecord.cs" />
+    <Compile Include="Credential\CredentialRecordTypeConverter.cs" />
+    <Compile Include="Credential\Repositories\CredentialRepositoryConfig.cs" />
+    <Compile Include="Credential\ICredentialRecord.cs" />
+    <Compile Include="Credential\ICredentialRepositoryList.cs" />
+    <Compile Include="Credential\ICredentialRepository.cs" />
+    <Compile Include="Credential\Repositories\XmlCredentialRepositoryFactory.cs" />
+    <Compile Include="Credential\Repositories\ICredentialRepositoryConfig.cs" />
+    <Compile Include="Credential\Repositories\XmlCredentialRepository.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\LogMessageTypeFilteringOptions.cs" />
+    <Compile Include="Messages\WriterDecorators\MessageTypeFilterDecorator.cs" />
+    <Compile Include="Messages\MessageWriters\DebugConsoleMessageWriter.cs" />
+    <Compile Include="Messages\IMessage.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\IMessageTypeFilteringOptions.cs" />
+    <Compile Include="Messages\WriterDecorators\MessageFocusDecorator.cs" />
+    <Compile Include="Messages\MessageWriters\NotificationPanelMessageWriter.cs" />
+    <Compile Include="Messages\MessageWriters\IMessageWriter.cs" />
+    <Compile Include="Messages\MessageClassEnum.cs" />
+    <Compile Include="Messages\MessageCollector.cs" />
+    <Compile Include="Messages\WriterDecorators\OnlyLogMessageFilterDecorator.cs" />
+    <Compile Include="Messages\MessageWriters\PopupMessageWriter.cs" />
+    <Compile Include="Messages\MessageWriters\TextLogMessageWriter.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\NotificationPanelMessageFilteringOptions.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\NotificationPanelSwitchOnMessageFilteringOptions.cs" />
+    <Compile Include="Messages\MessageFilteringOptions\PopupMessageFilteringOptions.cs" />
+    <Compile Include="Security\Authentication\PasswordAuthenticator.cs" />
+    <Compile Include="Security\BlockCipherEngines.cs" />
+    <Compile Include="Security\BlockCipherModes.cs" />
+    <Compile Include="Security\EncryptedSecureString.cs" />
+    <Compile Include="Security\Authentication\IAuthenticator.cs" />
+    <Compile Include="Security\EncryptionException.cs" />
+    <Compile Include="Security\PasswordCreation\IPasswordConstraint.cs" />
+    <Compile Include="Security\KeyDerivation\IKeyDerivationFunction.cs" />
+    <Compile Include="Security\KeyDerivation\Pkcs5S2KeyGenerator.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesSpecialCharactersConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesUpperCaseConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesLowerCaseConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordIncludesNumbersConstraint.cs" />
+    <Compile Include="Security\PasswordCreation\PasswordLengthConstraint.cs" />
+    <Compile Include="Security\SymmetricEncryption\AeadCryptographyProvider.cs" />
+    <Compile Include="Security\SymmetricEncryption\LegacyRijndaelCryptographyProvider.cs" />
+    <Compile Include="Security\ICryptographyProvider.cs" />
+    <Compile Include="Security\SecureStringExtensions.cs" />
+    <Compile Include="Security\Factories\CryptoProviderFactory.cs" />
+    <Compile Include="Security\Factories\CryptoProviderFactoryFromXml.cs" />
+    <Compile Include="Tools\Cmdline\StartupArgumentsInterpreter.cs" />
+    <Compile Include="Tools\CustomCollections\CollectionUpdatedEventArgs.cs" />
+    <Compile Include="Config\Settings\Settings.cs" />
+    <Compile Include="Tools\DisposableAction.cs" />
+    <Compile Include="Tools\DisposableOptional.cs" />
+    <Compile Include="Tools\Extensions.cs" />
+    <Compile Include="Tools\ExternalToolArgumentParser.cs" />
+    <Compile Include="Tools\Cmdline\CmdArgumentsInterpreter.cs" />
+    <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
+    <Compile Include="Tools\ExternalToolsService.cs" />
+    <Compile Include="Tools\SshTunnelTypeConverter.cs" />
+    <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
+    <Compile Include="Tools\Optional.cs" />
+    <Compile Include="Tools\MultiSSHController.cs" />
+    <Compile Include="Tools\MouseClickSimulator.cs" />
+    <Compile Include="Tools\NotificationAreaIcon.cs" />
+    <Compile Include="Tools\Attributes\UsedInProtocolAttribute.cs" />
+    <Compile Include="Tools\WindowsRegistry\IRegistry.cs" />
+    <Compile Include="Tools\WindowsRegistry\RegistryHive.cs" />
+    <Compile Include="Tools\WindowsRegistry\WindowsRegistry.cs" />
+    <Compile Include="Tools\ScanHost.cs" />
+    <Compile Include="Tools\SecureTransfer.cs" />
+    <Compile Include="Config\Serializers\Versioning\SqlDatabaseVersionVerifier.cs" />
+    <Compile Include="Tree\AlwaysConfirmYes.cs" />
+    <Compile Include="Tools\Clipboard\IClipboard.cs" />
+    <Compile Include="Tree\SelectedConnectionDeletionConfirmer.cs" />
+    <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
+    <Compile Include="Tree\ConnectionTreeModel.cs" />
+    <Compile Include="Tree\ClickHandlers\ExpandNodeClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\ITreeNodeClickHandler.cs" />
+    <Compile Include="Tree\IConfirm.cs" />
+    <Compile Include="Tree\NodeSearcher.cs" />
+    <Compile Include="Tree\NodeType.cs" />
+    <Compile Include="Tree\ClickHandlers\OpenConnectionClickHandler.cs" />
+    <Compile Include="Tree\PreviouslyOpenedFolderExpander.cs" />
+    <Compile Include="Tree\PreviousSessionOpener.cs" />
+    <Compile Include="Tree\RootNodeExpander.cs" />
+    <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
+    <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandler.cs" />
+    <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandler.cs" />
+    <Compile Include="UI\Controls\AdTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\AdTree.Designer.cs">
+      <DependentUpon>AdTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGPictureBox.Designer.cs">
+      <DependentUpon>NGPictureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGSearchBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\Base\NGTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionInfoPropertyGrid\ConnectionInfoPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionInfoPropertyGrid\ConnectionInfoPropertyGrid.Designer.cs">
+      <DependentUpon>ConnectionInfoPropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionInfoPropertyGrid\PropertyMode.cs" />
+    <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionTree\ConnectionTree.Designer.cs">
+      <DependentUpon>ConnectionTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionTree\ConnectionTreeSearchTextFilter.cs" />
+    <Compile Include="UI\Controls\CredentialRecordComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordComboBox.Designer.cs">
+      <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\Adapters\CredentialRecordListAdaptor.cs" />
+    <Compile Include="UI\Controls\CredentialRecordListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordListBox.Designer.cs">
+      <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRecordListView.Designer.cs">
+      <DependentUpon>CredentialRecordListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRepositoryListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CredentialRepositoryListView.Designer.cs">
+      <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\ExternalToolsToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.designer.cs">
+      <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\FilteredPropertyGrid\ObjectWrapper.cs" />
+    <Compile Include="UI\Controls\ConnectionTree\IConnectionTree.cs" />
+    <Compile Include="UI\Controls\HeadlessTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ISelectionTarget.cs" />
+    <Compile Include="UI\Controls\IPTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ConnectionTree\IConnectionTreeDelegate.cs" />
+    <Compile Include="UI\Controls\ConnectionTree\NameColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\MultiSshToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\PageSequence\ISequenceChangingNotifier.cs" />
+    <Compile Include="UI\Controls\NewPasswordWithVerification.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\NewPasswordWithVerification.Designer.cs">
+      <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\NotificationMessageListViewItem.cs" />
+    <Compile Include="UI\Controls\PageSequence\PageSequence.cs" />
+    <Compile Include="UI\Controls\PageSequence\SequencedControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\PageSequence\SequencedPageReplcementRequestArgs.cs" />
+    <Compile Include="UI\Controls\QuickConnectComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\QuickConnectToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\SecureTextBox.Designer.cs">
+      <DependentUpon>SecureTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\StatusImageList.cs" />
+    <Compile Include="UI\Controls\TextBoxExtensions.cs" />
+    <Compile Include="UI\Controls\ToolStripSplitButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\DialogFactory.cs" />
+    <Compile Include="UI\DisplayProperties.cs" />
+    <Compile Include="UI\FontOverrider.cs" />
+    <Compile Include="UI\FormExtensions.cs" />
+    <Compile Include="UI\Forms\FrmOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmOptions.Designer.cs">
+      <DependentUpon>FrmOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmSplashScreen.Designer.cs">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FullscreenHandler.cs" />
+    <Compile Include="UI\Forms\Input\FrmInputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\Input\FrmInputBox.Designer.cs">
+      <DependentUpon>FrmInputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
+      <DependentUpon>AdvancedPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\AdvancedPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\AppearancePage.Designer.cs">
+      <DependentUpon>AppearancePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ComponentsPage.Designer.cs">
+      <DependentUpon>ComponentsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\CredentialsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\CredentialsPage.Designer.cs">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\NotificationsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\NotificationsPage.Designer.cs">
+      <DependentUpon>NotificationsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.Designer.cs">
+      <DependentUpon>ConnectionsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\OptionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SecurityPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SecurityPage.Designer.cs">
+      <DependentUpon>SecurityPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SqlServerPage.Designer.cs">
+      <DependentUpon>SqlServerPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SqlServerPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\StartupExitPage.Designer.cs">
+      <DependentUpon>StartupExitPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\StartupExitPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\TabsPanelsPage.Designer.cs">
+      <DependentUpon>TabsPanelsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\TabsPanelsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ThemePage.Designer.cs">
+      <DependentUpon>ThemePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ThemePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\UpdatesPage.Designer.cs">
+      <DependentUpon>UpdatesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\UpdatesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools\Authenticode.cs" />
+    <Compile Include="Tools\EnumWindows.cs" />
+    <Compile Include="Tools\PropertyGridCommandSite.cs" />
+    <Compile Include="Connection\PuttySessionInfo.cs" />
+    <Compile Include="Tree\Root\RootPuttySessionsNodeInfo.cs" />
+    <Compile Include="Themes\ThemeManager.cs" />
+    <Compile Include="Themes\ThemeSerializer.cs" />
+    <Compile Include="Connection\ConnectionIcon.cs" />
+    <Compile Include="Connection\ConnectionInfo.cs" />
+    <Compile Include="Connection\InterfaceControl.Designer.cs">
+      <DependentUpon>InterfaceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Connection\InterfaceControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Connection\Protocol\ProtocolBase.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPBase.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.cs" />
+    <Compile Include="Connection\Protocol\ICA\IcaProtocol.cs" />
+    <Compile Include="Connection\Protocol\IntegratedProgram.cs" />
+    <Compile Include="Connection\Protocol\ProtocolList.cs" />
+    <Compile Include="Connection\Protocol\ProtocolType.cs" />
+    <Compile Include="Connection\Protocol\PuttyBase.cs" />
+    <Compile Include="Connection\Protocol\RAW\RawProtocol.cs" />
+    <Compile Include="Connection\Protocol\RDP\RdpProtocol6.cs" />
+    <Compile Include="Connection\Protocol\Rlogin\Connection.Protocol.Rlogin.cs" />
+    <Compile Include="Connection\Protocol\Serial\Connection.Protocol.Serial.cs" />
+    <Compile Include="Connection\Protocol\SSH\Connection.Protocol.SSH1.cs" />
+    <Compile Include="Connection\Protocol\SSH\Connection.Protocol.SSH2.cs" />
+    <Compile Include="Connection\Protocol\Telnet\Connection.Protocol.Telnet.cs" />
+    <Compile Include="Connection\Protocol\VNC\Connection.Protocol.VNC.cs" />
+    <Compile Include="Themes\ThemeInfo.cs" />
+    <Compile Include="Tools\Cmdline\CommandLineArguments.cs" />
+    <Compile Include="Container\ContainerInfo.cs" />
+    <Compile Include="UI\Forms\FrmChoosePanel.Designer.cs">
+      <DependentUpon>FrmChoosePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmChoosePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\PasswordForm.Designer.cs">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\PasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Messages\Message.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Tree\Root\RootNodeInfo.cs" />
+    <Compile Include="Security\SaveFilter.cs" />
+    <Compile Include="Tools\IeBrowserEmulation.cs" />
+    <Compile Include="Tools\ProcessController.cs" />
+    <Compile Include="Tools\PuttyTypeDetector.cs" />
+    <Compile Include="Tools\PuttyProcessController.cs" />
+    <Compile Include="Tools\ReconnectGroup.Designer.cs">
+      <DependentUpon>ReconnectGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ReconnectGroup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools\ExternalTool.cs" />
+    <Compile Include="Tools\Tools.LocalizedAttributes.cs" />
+    <Compile Include="Tools\MiscTools.cs" />
+    <Compile Include="Tools\PortScanner.cs" />
+    <Compile Include="Tools\WindowMenu.cs" />
+    <Compile Include="Tools\Tools.WindowPlacement.cs" />
+    <Compile Include="UI\Forms\TextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UnhandledExceptionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\UnhandledExceptionWindow.Designer.cs">
+      <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\GraphicsUtilities\GdiPlusGraphicsProvider.cs" />
+    <Compile Include="UI\GraphicsUtilities\IGraphicsProvider.cs" />
+    <Compile Include="UI\Menu\HelpMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\MainFileMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\AdvancedWindowMenu.cs" />
+    <Compile Include="UI\Menu\ToolsMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Menu\ViewMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Panels\PanelAdder.cs" />
+    <Compile Include="UI\Tabs\Enums.cs" />
+    <Compile Include="UI\Tabs\ConnectionTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\ConnectionTab.Designer.cs">
+      <DependentUpon>ConnectionTab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Tabs\DockPaneStripNG.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\FloatWindowNG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\MremoteNGAutoHideStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Tabs\TabHelper.cs" />
+    <Compile Include="UI\TaskDialog\CommandButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\TaskDialog\CommandButton.designer.cs">
+      <DependentUpon>CommandButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TaskDialog\cTaskDialog.cs" />
+    <Compile Include="UI\TaskDialog\frmTaskDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TaskDialog\frmTaskDialog.designer.cs">
+      <DependentUpon>frmTaskDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FrmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FrmAbout.Designer.cs">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ActiveDirectoryImportWindow.Designer.cs">
+      <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ActiveDirectoryImportWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\BaseWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ComponentsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ConfigWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ConnectionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ConnectionWindow.Designer.cs">
+      <DependentUpon>ConnectionWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ErrorAndInfoWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ExportForm.Designer.cs">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ErrorAndInfoWindow.Designer.cs">
+      <DependentUpon>ErrorAndInfoWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ExternalToolsWindow.Designer.cs">
+      <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ExternalToolsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\HelpWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\WindowList.cs" />
+    <Compile Include="UI\Window\HelpWindow.Designer.cs">
+      <DependentUpon>HelpWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\PortScanWindow.Designer.cs">
+      <DependentUpon>PortScanWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\PortScanWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ExportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ScreenshotManagerWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\SSHTransferWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ConnectionTreeWindow.Designer.cs">
+      <DependentUpon>ConnectionTreeWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ConnectionTreeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\WindowType.cs" />
+    <Compile Include="UI\Window\UltraVNCWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\UpdateWindow.Designer.cs">
+      <DependentUpon>UpdateWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\UpdateWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.lt.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Themes\ColorMapTheme.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\AdTree.resx">
+      <DependentUpon>AdTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGButton.resx">
+      <DependentUpon>NGButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGCheckBox.resx">
+      <DependentUpon>NGCheckBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGComboBox.resx">
+      <DependentUpon>NGComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGGroupBox.resx">
+      <DependentUpon>NGGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGLabel.resx">
+      <DependentUpon>NGLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGListView.resx">
+      <DependentUpon>NGListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGNumericUpDown.resx">
+      <DependentUpon>NGNumericUpDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGRadioButton.resx">
+      <DependentUpon>NGRadioButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGSearchBox.resx">
+      <DependentUpon>NGSearchBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\Base\NGTextBox.resx">
+      <DependentUpon>NGTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\ConnectionTree\ConnectionTree.resx">
+      <DependentUpon>ConnectionTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRecordComboBox.resx">
+      <DependentUpon>CredentialRecordComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRecordListBox.resx">
+      <DependentUpon>CredentialRecordListBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRecordListView.resx">
+      <DependentUpon>CredentialRecordListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CredentialRepositoryListView.resx">
+      <DependentUpon>CredentialRepositoryListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.resx">
+      <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\HeadlessTabControl.resx">
+      <DependentUpon>HeadlessTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
+      <DependentUpon>IPTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
+      <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\PageSequence\SequencedControl.resx">
+      <DependentUpon>SequencedControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\SecureTextBox.resx">
+      <DependentUpon>SecureTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FrmChoosePanel.resx">
+      <DependentUpon>FrmChoosePanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FrmOptions.resx">
+      <DependentUpon>FrmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FrmSplashScreen.resx">
+      <DependentUpon>FrmSplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\Input\FrmInputBox.resx">
+      <DependentUpon>FrmInputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AdvancedPage.resx">
+      <DependentUpon>AdvancedPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AppearancePage.resx">
+      <DependentUpon>AppearancePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
+      <DependentUpon>ConnectionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\CredentialsPage.resx">
+      <DependentUpon>CredentialsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\NotificationsPage.resx">
+      <DependentUpon>NotificationsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\OptionsPage.resx">
+      <DependentUpon>OptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\SecurityPage.resx">
+      <DependentUpon>SecurityPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
+      <DependentUpon>SqlServerPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\StartupExitPage.resx">
+      <DependentUpon>StartupExitPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\TabsPanelsPage.resx">
+      <DependentUpon>TabsPanelsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ThemePage.resx">
+      <DependentUpon>ThemePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\UpdatesPage.resx">
+      <DependentUpon>UpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.el.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.en-US.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.es-AR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.es.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.hu.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.nb-NO.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.nl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.pt-BR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.pt.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Language.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.fr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.pl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.uk.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.zh-TW.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReconnectGroup.resx">
+      <DependentUpon>ReconnectGroup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\TextBox.resx">
+      <DependentUpon>TextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\UnhandledExceptionWindow.resx">
+      <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tabs\ConnectionTab.resx">
+      <DependentUpon>ConnectionTab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TaskDialog\CommandButton.resx">
+      <DependentUpon>CommandButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TaskDialog\frmTaskDialog.resx">
+      <DependentUpon>frmTaskDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FrmAbout.resx">
+      <DependentUpon>FrmAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ActiveDirectoryImportWindow.resx">
+      <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\BaseWindow.resx">
+      <DependentUpon>BaseWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ComponentsPage.resx">
+      <DependentUpon>ComponentsPage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ConfigWindow.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConfigWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ConnectionWindow.resx">
+      <DependentUpon>ConnectionWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ErrorAndInfoWindow.resx">
+      <DependentUpon>ErrorAndInfoWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ExternalToolsWindow.resx">
+      <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\HelpWindow.resx">
+      <DependentUpon>HelpWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\PortScanWindow.resx">
+      <DependentUpon>PortScanWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ExportForm.resx">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ScreenshotManagerWindow.resx">
+      <DependentUpon>ScreenshotManagerWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\SSHTransferWindow.resx">
+      <DependentUpon>SSHTransferWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ConnectionTreeWindow.resx">
+      <DependentUpon>ConnectionTreeWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\UltraVNCWindow.resx">
+      <DependentUpon>UltraVNCWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\UpdateWindow.resx">
+      <DependentUpon>UpdateWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\CHANGELOG.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\CREDITS.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Documentation\contact_mail.rst" />
+    <None Include="Documentation\howtos\bulk_connections.rst" />
+    <None Include="Documentation\folders_and_inheritance.rst" />
+    <None Include="Documentation\migrate.rst" />
+    <None Include="Documentation\troubleshooting.rst" />
+    <None Include="Documentation\user_interface\connections.rst" />
+    <None Include="Documentation\user_interface\options.rst" />
+    <None Include="Documentation\user_interface\menu_container.rst" />
+    <None Include="Documentation\user_interface\ssh_file_transfer.rst" />
+    <None Include="Documentation\sql_configuration.rst" />
+    <None Include="Documentation\known_issues.rst" />
+    <None Include="Documentation\installation\supported_operating_systems.rst" />
+    <None Include="Documentation\keyboard_shortcuts.rst" />
+    <None Include="Documentation\command_line_switches.rst" />
+    <None Include="Documentation\user_interface\notifications.rst" />
+    <None Include="Documentation\user_interface\import_export.rst" />
+    <None Include="Documentation\user_interface\screenshot_manager.rst" />
+    <None Include="Documentation\user_interface\port_scan.rst" />
+    <None Include="Documentation\user_interface\quick_connect.rst" />
+    <None Include="Documentation\howtos\vmrdp.rst" />
+    <None Include="Resources\Templates\AppIcon.psd" />
+    <None Include="Resources\Templates\Header_dark.psd" />
+    <None Include="Resources\Templates\Header_light.psd" />
+    <None Include="Resources\Templates\Installer_Header.psd" />
+    <None Include="Resources\Templates\Installer_Side.psd" />
+    <None Include="Resources\Themes\darcula.vstheme">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Themes\vs2015blue.vstheme">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Themes\vs2015dark.vstheme">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Themes\vs2015light.vstheme">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Templates\VisualElements_150_dark.psd" />
+    <None Include="Resources\Templates\VisualElements_150_light.psd" />
+    <None Include="Resources\Templates\VisualElements_70_dark.psd" />
+    <None Include="Resources\Templates\VisualElements_70_light.psd" />
+    <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\mremoteng_confcons_v2_7.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Documentation\images\connections_status.png" />
+    <None Include="Documentation\images\putty.png" />
+    <Content Include="Documentation\images\ssh_tunnel.png" />
+    <Content Include="Documentation\mssql_db_setup.sql" />
+    <Content Include="Documentation\mysql_db_setup.sql" />
+    <None Include="Documentation\images\config_top_bar.png" />
+    <None Include="Documentation\images\connections_main.png" />
+    <None Include="Documentation\images\connections_top_bar.png" />
+    <None Include="Documentation\images\import_export_dialog.png" />
+    <None Include="Documentation\images\menus_main_menu.png" />
+    <None Include="Documentation\images\menus_hide_menu_strip.png" />
+    <None Include="Documentation\images\notifications_panel.png" />
+    <None Include="Documentation\images\notifications_popup.png" />
+    <None Include="Documentation\images\folders_and_inheritance_01.png" />
+    <None Include="Documentation\images\connections_config.png" />
+    <None Include="Documentation\images\folders_and_inheritance_02.png" />
+    <None Include="Documentation\images\folders_and_inheritance_03.png" />
+    <None Include="Documentation\images\folders_and_inheritance_04.png" />
+    <None Include="Documentation\images\folders_and_inheritance_05.png" />
+    <None Include="Documentation\images\folders_and_inheritance_06.png" />
+    <None Include="Documentation\images\connections_rightclick_menu.png" />
+    <None Include="Documentation\images\connections_test_item.png" />
+    <None Include="Documentation\images\connections_open.png" />
+    <None Include="Documentation\images\screenshot_manager_rightclick_menu.png" />
+    <None Include="Documentation\images\screenshot_manager_overview.png" />
+    <Content Include="Icons\Console.ico" />
+    <Content Include="Icons\Admin.ico" />
+    <Content Include="Icons\Apple.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Images\Header_dark.png" />
+    <None Include="Resources\Tiles\mRemoteNG.VisualElementsManifest.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Tiles\VisualElements_70.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Tiles\VisualElements_150.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Icons\Appearance_Icon.ico" />
+    <None Include="Resources\Icons\mRemoteNG_Icon.ico" />
+    <None Include="Resources\Icons\Comments_Icon.ico" />
+    <None Include="Resources\Icons\Config_Icon.ico" />
+    <None Include="Resources\Icons\Database_Icon.ico" />
+    <None Include="Resources\Icons\Error_Icon.ico" />
+    <None Include="Resources\Icons\ExtApp_Icon.ico" />
+    <None Include="Resources\Icons\Help_Icon.ico" />
+    <None Include="Resources\Icons\Key_Icon.ico" />
+    <None Include="Resources\Icons\Keyboard_Icon.ico" />
+    <None Include="Resources\Icons\News_Icon.ico" />
+    <None Include="Resources\Icons\Options_Icon.ico" />
+    <None Include="Resources\Icons\EditPage_Icon.ico" />
+    <None Include="Resources\Icons\Panels_Icon.ico" />
+    <None Include="Resources\Icons\PortScan_Icon.ico" />
+    <None Include="Resources\Icons\Save_Icon.ico" />
+    <None Include="Resources\Icons\Screenshot_Icon.ico" />
+    <None Include="Resources\Icons\Sessions_Icon.ico" />
+    <None Include="Resources\Icons\Shield_Icon.ico" />
+    <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
+    <None Include="Resources\Icons\StartupExit_Icon.ico" />
+    <None Include="Resources\Icons\Tab_Icon.ico" />
+    <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
+    <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
+    <None Include="Resources\Icons\Info_Icon.ico" />
+    <None Include="Resources\Icons\Root_Icon.ico" />
+    <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
+    <None Include="Resources\Icons\Update_Icon.ico" />
+    <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
+    <None Include="Resources\Images\mRemoteNG.png" />
+    <None Include="Resources\Images\tab_add.png" />
+    <None Include="Resources\Images\tab_edit.png" />
+    <None Include="Resources\Images\tab_delete.png" />
+    <None Include="Resources\Images\star.png" />
+    <Content Include="Icons\Infrastructure.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Production.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Staging.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\PowerShell.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Schemas\mremoteng_credrepo_list_v1_0.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Schemas\mremoteng_creds_v1_0.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Documentation\images\quick_connect_01.png" />
+    <None Include="Documentation\images\quick_connect_02.png" />
+    <None Include="Documentation\images\quick_connect_03.png" />
+    <None Include="Resources\Images\loading_spinner.gif" />
+    <None Include="Resources\Images\FamFamFam\tick.png" />
+    <None Include="Resources\Images\FamFamFam\bricks.png" />
+    <None Include="Resources\Images\FamFamFam\brick.png" />
+    <None Include="Resources\Images\FamFamFam\bricks_greyscale.png" />
+    <None Include="Resources\Images\FamFamFam\brick_large.png" />
+    <None Include="Resources\Images\FamFamFam\brick1.png" />
+    <None Include="Resources\Images\FamFamFam\bricks1.png" />
+    <None Include="Resources\Images\xml.png" />
+    <None Include="Resources\Images\keepass_32x32.png" />
+    <None Include="Resources\Images\FamFamFam\arrow_left.png" />
+    <Content Include="Resources\Images\FamFamFam\Config.png" />
+    <Content Include="Resources\Images\FamFamFam\database.png" />
+    <None Include="Resources\Images\FamFamFam\key.png" />
+    <None Include="Resources\Images\FamFamFam\key_add.png" />
+    <None Include="Resources\Images\FamFamFam\eye.png" />
+    <None Include="Resources\Images\FamFamFam\lightbulb.png" />
+    <None Include="Resources\Images\FamFamFam\lightning.png" />
+    <None Include="Resources\Images\FamFamFam\folder_key.png" />
+    <None Include="Resources\Images\FamFamFam\exclamation.png" />
+    <Content Include="Resources\Images\FamFamFam\Link.png" />
+    <None Include="Resources\Images\FamFamFam\lock.png" />
+    <Content Include="Resources\Images\FamFamFam\page_copy.png" />
+    <Content Include="Resources\Images\green_arrow1.png" />
+    <Content Include="Resources\Images\green_arrow2.png" />
+    <None Include="Resources\Images\puttycm.png" />
+    <None Include="Resources\Images\FamFamFam\monitor_go.png" />
+    <None Include="Resources\Images\FamFamFam\monitor_delete.png" />
+    <None Include="Resources\Images\FamFamFam\user_comment.png" />
+    <None Include="Resources\Images\FamFamFam\key_delete.png" />
+    <None Include="Resources\Images\PuttySessions.png" />
+    <None Include="Resources\Images\PuttyConfig.png" />
+    <None Include="Resources\Images\Play_Quick.png" />
+    <None Include="Resources\Images\SSHTransfer.png" />
+    <None Include="Resources\Images\ErrorsAndInfos.png" />
+    <None Include="Resources\Images\Screenshot.png" />
+    <None Include="Resources\Images\Sessions.png" />
+    <None Include="Resources\Images\Connections_New.png" />
+    <None Include="Resources\Images\Connections_Load.png" />
+    <None Include="Resources\Images\Connections_SaveAs.png" />
+    <None Include="Resources\Images\Connections_Save.png" />
+    <None Include="Resources\Images\Sort_ZA.png" />
+    <None Include="Resources\Images\Sort_AZ.png" />
+    <None Include="Resources\Images\Lock.png" />
+    <None Include="Resources\Images\Refresh.png" />
+    <None Include="Resources\Images\RDP.png" />
+    <None Include="Resources\Images\PropertiesDefault.png" />
+    <None Include="Resources\Images\ExtApp.png" />
+    <None Include="Resources\Images\Duplicate.png" />
+    <None Include="Resources\Images\PortScan.png" />
+    <None Include="Resources\Images\FamFamFam\Copy.png" />
+    <None Include="Resources\Images\FamFamFam\Delete.png" />
+    <None Include="Resources\Images\FamFamFam\Donate.png" />
+    <None Include="Resources\Images\FamFamFam\Info.png" />
+    <None Include="Resources\Images\FamFamFam\Inheritance.png" />
+    <None Include="Resources\Images\FamFamFam\Keyboard.png" />
+    <None Include="Resources\Images\FamFamFam\Options.png" />
+    <None Include="Resources\Images\FamFamFam\Panel_Close.png" />
+    <None Include="Resources\Images\FamFamFam\Panels.png" />
+    <None Include="Resources\Images\FamFamFam\Panel_Add.png" />
+    <None Include="Resources\Images\FamFamFam\Quit.png" />
+    <None Include="Resources\Images\FamFamFam\Save.png" />
+    <None Include="Resources\Images\FamFamFam\Screenshot.png" />
+    <None Include="Resources\Images\FamFamFam\Screenshot_Add.png" />
+    <None Include="Resources\Images\FamFamFam\Screenshot_Copy.png" />
+    <None Include="Resources\Images\FamFamFam\Screenshot_Delete.png" />
+    <None Include="Resources\Images\FamFamFam\Screenshot_Save.png" />
+    <None Include="Resources\Images\FamFamFam\Search.png" />
+    <None Include="Resources\Images\FamFamFam\View.png" />
+    <None Include="Resources\Images\FamFamFam\Warning_Small.png" />
+    <None Include="Resources\Images\FamFamFam\Website.png" />
+    <None Include="Resources\Images\FamFamFam\ExtApp.png" />
+    <None Include="Resources\Images\FamFamFam\Sessions.png" />
+    <None Include="Resources\Images\FamFamFam\Session_LogOff.png" />
+    <None Include="Resources\Images\FamFamFam\File.png" />
+    <None Include="Resources\Images\FamFamFam\Refresh.png" />
+    <None Include="Resources\Images\FamFamFam\Properties_Default.png" />
+    <None Include="Resources\Images\FamFamFam\Properties.png" />
+    <None Include="Resources\Images\FamFamFam\Arrow_Down.png" />
+    <None Include="Resources\Images\FamFamFam\Arrow_Up.png" />
+    <None Include="Resources\Images\FamFamFam\Tools.png" />
+    <None Include="Resources\Images\FamFamFam\Bug.png" />
+    <None Include="Resources\Images\FamFamFam\Help.png" />
+    <None Include="Resources\Images\FamFamFam\Page.png" />
+    <None Include="Resources\Images\FamFamFam\SmartSize.png" />
+    <None Include="Resources\Images\FamFamFam\Update.png" />
+    <None Include="Resources\Images\FamFamFam\Folder.png" />
+    <None Include="Resources\Images\FamFamFam\Folder_Add.png" />
+    <None Include="Resources\Images\FamFamFam\Pause.png" />
+    <None Include="Resources\Images\FamFamFam\Play.png" />
+    <None Include="Resources\Images\FamFamFam\Connection_Add.png" />
+    <None Include="Resources\Images\FamFamFam\Connection_Duplicate.png" />
+    <None Include="Resources\Images\FamFamFam\ExtApp_Add.png" />
+    <None Include="Resources\Images\FamFamFam\ExtApp_Delete.png" />
+    <None Include="Resources\Images\FamFamFam\ExtApp_Start.png" />
+    <None Include="Resources\Images\FamFamFam\SSHTransfer.png" />
+    <None Include="Resources\Images\FamFamFam\PortScan.png" />
+    <None Include="Resources\Images\FamFamFam\Console.png" />
+    <None Include="Resources\Images\FamFamFam\Inheritance_Default.png" />
+    <None Include="Resources\Images\FamFamFam\Chat.png" />
+    <None Include="Resources\Images\FamFamFam\JumpTo.png" />
+    <None Include="Resources\Images\FamFamFam\Monitor_GoTo.png" />
+    <None Include="Resources\Images\FamFamFam\Monitor.png" />
+    <None Include="Resources\Images\UVNC_SC.png" />
+    <None Include="Resources\Images\Bad_Symbol.png" />
+    <None Include="Resources\Images\Good_Symbol.png" />
+    <None Include="Resources\Images\ComponentsCheck.png" />
+    <None Include="Resources\Images\FamFamFam\News.png" />
+    <None Include="Documentation\conf.py" />
+    <None Include="Documentation\index.rst" />
+    <None Include="Documentation\about.rst" />
+    <None Include="Documentation\about\features.rst" />
+    <None Include="Documentation\about\license.rst" />
+    <None Include="Documentation\about\release_channels.rst" />
+    <None Include="Documentation\about\versions.rst" />
+    <None Include="Documentation\installation\install.rst" />
+    <None Include="Documentation\installation.rst" />
+    <None Include="Documentation\installation\minimum_requirements.rst" />
+    <None Include="Documentation\installation\uninstall.rst" />
+    <None Include="Documentation\howtos\sshtunnel.rst" />
+    <None Include="Documentation\user_interface.rst" />
+    <None Include="Documentation\user_interface\main_window.rst" />
+    <None Include="Documentation\user_interface\panels.rst" />
+    <None Include="Documentation\external_tools_cheat_sheet.rst" />
+    <None Include="Documentation\howtos\external_tools.rst" />
+    <None Include="Documentation\user_interface\external_tools.rst" />
+    <None Include="Documentation\images\credssp-error.png" />
+    <None Include="Documentation\images\example_et_start_application_01.png" />
+    <None Include="Documentation\images\example_et_start_application_02.png" />
+    <None Include="Documentation\images\example_et_traceroute_01.png" />
+    <None Include="Documentation\images\example_et_traceroute_02.png" />
+    <None Include="Documentation\images\example_et_traceroute_03.png" />
+    <None Include="Documentation\images\example_et_traceroute_04.png" />
+    <None Include="Documentation\images\example_et_traceroute_05.png" />
+    <None Include="Documentation\images\external_tools_external_tool_properties_01.png" />
+    <None Include="Documentation\images\external_tools_main_ui_01.png" />
+    <None Include="Documentation\images\external_tools_toolbar_01.png" />
+    <None Include="Documentation\images\external_tools_tools_list_01.png" />
+    <None Include="Documentation\images\mremoteng_favicon_32.png" />
+    <None Include="Documentation\images\mremoteng_logo.png" />
+    <None Include="Documentation\images\mremoteng_main_ui.png" />
+    <None Include="Documentation\images\mremoteng_main_ui_connect_win_server.png" />
+    <None Include="Documentation\images\oracle_remediation_setting.png" />
+    <None Include="Documentation\images\user_interface_overview.png" />
+    <None Include="Documentation\images\user_interface_panels_01.png" />
+    <None Include="Documentation\images\user_interface_panels_02.png" />
+    <None Include="Documentation\images\user_interface_panels_03.png" />
+    <Content Include="Icons\Anti Virus.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Backup.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Build Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Database.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Domain Controller.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\ESX.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Fax.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\File Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Finance.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Firewall.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Linux.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Log.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Mail Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\mRemote.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\mRemoteNG.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\PuTTY.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Remote Desktop.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Router.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\SharePoint.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\SSH.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Switch.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Tel.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Telnet.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Terminal Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Test Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Virtual Machine.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Web Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\WiFi.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Windows.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Workstation.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Images\FamFamFam\application_side_tree.png" />
+    <None Include="Resources\Images\FamFamFam\arrow_out.png" />
+    <None Include="Resources\Images\FamFamFam\cog_error.png" />
+    <Content Include="Resources\Images\FamFamFam\cog.png" />
+    <Content Include="Resources\Images\database.bmp" />
+    <None Include="Resources\Images\Copy.png" />
+    <None Include="Properties\Settings.settings">
+      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\Images\Properties.png" />
+    <None Include="Resources\Images\Inheritance.png" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Resources\Images\WarningSmall.png" />
+    <None Include="Resources\Images\Warning.png" />
+    <None Include="Resources\Images\View.png" />
+    <None Include="Resources\Images\Update.png" />
+    <None Include="Resources\Images\Tools.png" />
+    <None Include="Resources\Images\Search.png" />
+    <None Include="Resources\Images\Screenshot_Add.png" />
+    <None Include="Resources\Images\Save.png" />
+    <None Include="Resources\Images\Root.png" />
+    <None Include="Resources\Images\Rename.png" />
+    <None Include="Resources\Images\Play.png" />
+    <None Include="Resources\Images\Pause.png" />
+    <None Include="Resources\Images\Options.png" />
+    <None Include="Resources\Images\Open.png" />
+    <None Include="Resources\Images\NewFolder.png" />
+    <None Include="Resources\Images\NewConnection.png" />
+    <None Include="Resources\Images\New.png" />
+    <None Include="Resources\Images\Minimize.png" />
+    <None Include="Resources\Images\Keyboard.png" />
+    <None Include="Resources\Images\InformationSmall.png" />
+    <None Include="Resources\Images\Information.png" />
+    <None Include="Resources\Images\Info.png" />
+    <None Include="Resources\Images\HostStatus_On.png" />
+    <None Include="Resources\Images\HostStatus_Off.png" />
+    <None Include="Resources\Images\HostStatus_Check.png" />
+    <None Include="Resources\Images\Help.png" />
+    <None Include="Resources\Images\Fullscreen.png" />
+    <None Include="Resources\Images\Folder.png" />
+    <None Include="Resources\Images\File.png" />
+    <None Include="Resources\Images\Expand.png" />
+    <None Include="Resources\Images\Exit.png" />
+    <None Include="Resources\Images\ErrorSmall.png" />
+    <None Include="Resources\Images\Error.png" />
+    <None Include="Resources\Images\Delete.png" />
+    <None Include="Resources\Images\Config.png" />
+    <None Include="Resources\Images\Collapse.png" />
+    <None Include="Resources\Images\Arrow_Up.png" />
+    <None Include="Resources\Images\Arrow_Down.png" />
+    <None Include="Resources\Images\ActiveDirectory.png" />
+    <None Include="Resources\Images\Website.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="VncSharp">
+      <HintPath>References\VncSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle">
+      <Version>1.8.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="CefSharp.Common">
+      <Version>81.3.100</Version>
+    </PackageReference>
+    <PackageReference Include="CefSharp.WinForms">
+      <Version>81.3.100</Version>
+    </PackageReference>
+    <PackageReference Include="ConsoleControl">
+      <Version>1.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="DockPanelSuite">
+      <Version>3.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="DockPanelSuite.ThemeVS2003">
+      <Version>3.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="DockPanelSuite.ThemeVS2012">
+      <Version>3.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="DockPanelSuite.ThemeVS2013">
+      <Version>3.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="DockPanelSuite.ThemeVS2015">
+      <Version>3.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Google.Protobuf">
+      <Version>3.12.1</Version>
+    </PackageReference>
+    <PackageReference Include="log4net">
+      <Version>2.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="MySql.Data">
+      <Version>8.0.20</Version>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter">
+      <Version>3.16.1</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="ObjectListView.Official">
+      <Version>2.9.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.DirectoryServices">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Common">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.IO.Packaging">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Memory">
+      <Version>4.5.4</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
+      <Version>4.7.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Security.Cryptography.ProtectedData">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Xml.Linq">
+      <Version>3.5.21022.801</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxMSTSCLib">
+      <Guid>{8C11EFA1-92C3-11D1-BC1E-00C04FA31489}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="AxWFICALib">
+      <Guid>{238F6F80-B8B4-11CF-8771-00A024541EE3}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="MSTSCLib">
+      <Guid>{8C11EFA1-92C3-11D1-BC1E-00C04FA31489}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WFICALib">
+      <Guid>{238F6F80-B8B4-11CF-8771-00A024541EE3}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>:: When passing paths to powershell scripts, check if the path ends with a backslash "\"
+:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.
+
+powershell -noprofile -command "sleep 2"
+
+set /p buildenv=&lt;buildenv.tmp
+
+:: Manual builds, set the cert password and uncomment below.
+:: IF "%25APPVEYOR_BUILD_FOLDER"=="" ( set cert_pwd= )
+
+:: Call the post build powershell script
+powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_mremoteng.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "$(CertPassword)" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <NoWarn>1591,660,661</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release\</OutputPath>
+    <NoWarn>1591,660,661</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>1</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>
+    </DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release Portable\</OutputPath>
+    <DefineConstants>PORTABLE</DefineConstants>
+    <NoWarn>1591,660,661</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Portable|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug Portable\</OutputPath>
+    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
+    <NoWarn>1591,660,661,618</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>echo $(ConfigurationName) &gt; buildenv.tmp</PreBuildEvent>
+  </PropertyGroup>
+</Project>
