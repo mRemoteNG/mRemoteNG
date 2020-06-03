@@ -310,7 +310,6 @@
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\CustomCollections\INotifyCollectionUpdated.cs" />
     <Compile Include="Tools\Optional.cs" />
-    <Compile Include="Tools\MultiSSHController.cs" />
     <Compile Include="Tools\MouseClickSimulator.cs" />
     <Compile Include="Tools\NotificationAreaIcon.cs" />
     <Compile Include="Tools\Attributes\UsedInProtocolAttribute.cs" />
@@ -1564,6 +1563,10 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
     <Reference Include="VncSharp">
       <HintPath>References\VncSharp.dll</HintPath>
     </Reference>
