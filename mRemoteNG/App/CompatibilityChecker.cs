@@ -88,7 +88,14 @@ namespace mRemoteNG.App
                 messageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
             }
 
-            if (proccesses.Length <= 0) return;
+            if (proccesses.Length <= 0)
+            {
+                messageCollector.AddMessage(MessageClass.InformationMsg, "Lenovo AutoScroll Utility not found", true);
+                return;
+            }
+
+            messageCollector.AddMessage(MessageClass.WarningMsg, "Lenovo AutoScroll Utility found", true);
+
             CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected,
                                    string.Format(Language.CompatibilityLenovoAutoScrollUtilityDetected,
                                                  Application.ProductName), "",
