@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Web;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree.Root;
-using System.Text;
 using System.Net;
 
 // ReSharper disable ArrangeAccessorOwnerBody

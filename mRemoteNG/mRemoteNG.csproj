@@ -169,7 +169,6 @@
     <Compile Include="Config\Import\RemoteDesktopConnectionImporter.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionManagerImporter.cs" />
     <Compile Include="Config\Putty\PuttySessionsRegistryProvider.cs" />
-    <Compile Include="Config\Putty\PuttySessionsXmingProvider.cs" />
     <Compile Include="Config\Putty\PuttySessionsManager.cs" />
     <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
     <Compile Include="Config\DatabaseConnectors\IDatabaseConnector.cs" />
