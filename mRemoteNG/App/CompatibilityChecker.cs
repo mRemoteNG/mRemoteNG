@@ -21,12 +21,14 @@ namespace mRemoteNG.App
         {
             if (Settings.Default.OverrideFIPSCheck)
             {
-                messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check...",
-                                            true);
+                messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check", true);
                 return;
             }
 
-            messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS Policy...", true);
+            messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS policy...", true);
+            messageCollector.AddMessage(MessageClass.InformationMsg, $"FIPS2003: {FipsPolicyEnabledForServer2003()}", true);
+            messageCollector.AddMessage(MessageClass.InformationMsg, $"FIPS2008+: {FipsPolicyEnabledForServer2008AndNewer()}", true);
+
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
 
             var errorText = string.Format(Language.ErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName);
