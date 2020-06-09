@@ -85,7 +85,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             connectionInfo.Icon = (string)dataRow["Icon"];
             connectionInfo.Panel = (string)dataRow["Panel"];
             connectionInfo.Username = (string)dataRow["Username"];
-            connectionInfo.Domain = (string)dataRow["DomainName"];
+            connectionInfo.Domain = (string)dataRow["Domain"];
             connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
             connectionInfo.Hostname = (string)dataRow["Hostname"];
             connectionInfo.VmId = (string)dataRow["VmId"];

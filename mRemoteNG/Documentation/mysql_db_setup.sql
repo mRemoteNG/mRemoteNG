@@ -37,7 +37,7 @@ CREATE TABLE `tblCons` (
 	`DisableMenuAnimations` tinyint(1) NOT NULL,
 	`DisplayThemes` tinyint(1) NOT NULL,
 	`DisplayWallpaper` tinyint(1) NOT NULL,
-	`DomainName` varchar(512) DEFAULT NULL,
+	`Domain` varchar(512) DEFAULT NULL,
 	`EnableDesktopComposition` tinyint(1) NOT NULL,
 	`EnableFontSmoothing` tinyint(1) NOT NULL,
 	`ExtApp` varchar(256) DEFAULT NULL,

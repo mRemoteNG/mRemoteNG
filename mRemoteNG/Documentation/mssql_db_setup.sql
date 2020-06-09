@@ -34,7 +34,7 @@ CREATE TABLE [dbo].[tblCons] (
 	DisableMenuAnimations bit NOT NULL,
 	DisplayThemes bit NOT NULL,
 	DisplayWallpaper bit NOT NULL,
-	DomainName varchar(512),
+	Domain varchar(512),
 	EnableDesktopComposition bit NOT NULL,
 	EnableFontSmoothing bit NOT NULL,
 	ExtApp varchar(256),
