@@ -5,15 +5,17 @@
 <p align="center">
   mRemoteNG is an open source, multi-protocol, remote connections manager that allows you to view all of your remote connections in a simple, yet powerful tabbed interface
 </p>
-
-[![Twitter Follow](https://img.shields.io/twitter/follow/mRemoteNG.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=mRemoteNG)
-[![Join the chat at https://gitter.im/mRemoteNG/PublicChat/](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mRemoteNG/PublicChat)
-[![PayPal](https://img.shields.io/badge/%24-PayPal-blue.svg)](https://www.paypal.me/DavidSparer)
+  
+![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/mremoteng?label=Reddit&logo=Reddit&style=flat-square)
+![Twitter Follow](https://img.shields.io/twitter/follow/mremoteng?color=%231DA1F2&label=Twitter&logo=Twitter&style=flat-square)
+![Gitter](https://img.shields.io/gitter/room/mRemoteNG/PublicChat?label=Join%20the%20Chat&logo=Gitter&style=flat-square)
+[![PayPal](https://img.shields.io/badge/%24-PayPal-blue.svg?label=Donate&logo=PayPal&style=flat-square)](https://www.paypal.me/DavidSparer)
 
 [![Github Releases](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/total.svg?style=flat-square)](https://github.com/mRemoteNG/mRemoteNG/releases/)
+![GitHub](https://img.shields.io/github/license/mremoteng/mremoteng?label=License&style=flat-square)
 
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge)](https://bestpractices.coreinfrastructure.org/projects/529)
-[![Documentation Status](https://readthedocs.org/projects/mremoteng/badge/?version=latest)](https://mremoteng.readthedocs.io/en/latest/?badge=latest)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge?style=flat-square)](https://bestpractices.coreinfrastructure.org/projects/529)
+[![Documentation Status](https://readthedocs.org/projects/mremoteng/badge/?version=latest?style=flat-square)](https://mremoteng.readthedocs.io/en/latest/?badge=latest)
 
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
