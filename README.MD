@@ -32,8 +32,8 @@
   <a href="https://bestpractices.coreinfrastructure.org/projects/529">
     <img alt="CII Best Practices" src="https://bestpractices.coreinfrastructure.org/projects/529/badge?style=flat-square">
   </a>
-  <a href="https://mremoteng.readthedocs.io/en/latest/?badge=latest">
-    <img alt="Documentation Status" src="https://readthedocs.org/projects/mremoteng/badge/?version=latest?style=flat-square">
+  <a href='https://mremoteng.readthedocs.io/en/latest/?badge=latest'>
+    <img src='https://readthedocs.org/projects/mremoteng/badge/?version=latest' alt='Documentation Status' />
   </a>
 </p>
 
