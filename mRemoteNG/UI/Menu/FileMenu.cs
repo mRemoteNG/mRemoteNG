@@ -11,7 +11,7 @@ using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Menu
 {
-    public class MainFileMenu : ToolStripMenuItem
+    public class FileMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenFileNew;
         private ToolStripMenuItem _mMenFileLoad;
@@ -38,7 +38,7 @@ namespace mRemoteNG.UI.Menu
         public ConnectionTreeWindow TreeWindow { get; set; }
         public IConnectionInitiator ConnectionInitiator { get; set; }
 
-        public MainFileMenu()
+        public FileMenu()
         {
             Initialize();
         }

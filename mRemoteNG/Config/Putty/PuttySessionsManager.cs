@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using mRemoteNG.Tools;
@@ -24,7 +24,6 @@ namespace mRemoteNG.Config.Putty
         private PuttySessionsManager()
         {
             AddProvider(new PuttySessionsRegistryProvider());
-            AddProvider(new PuttySessionsXmingProvider());
         }
 
 
@@ -124,16 +123,7 @@ namespace mRemoteNG.Config.Putty
         private bool IsProviderEnabled(AbstractPuttySessionsProvider puttySessionsProvider)
         {
             var enabled = true;
-            if (PuttyTypeDetector.GetPuttyType() == PuttyTypeDetector.PuttyType.Xming)
-            {
-                if (puttySessionsProvider is PuttySessionsRegistryProvider)
-                    enabled = false;
-            }
-            else
-            {
-                if (puttySessionsProvider is PuttySessionsXmingProvider)
-                    enabled = false;
-            }
+            if (!(puttySessionsProvider is PuttySessionsRegistryProvider)) enabled = false;
 
             return enabled;
         }

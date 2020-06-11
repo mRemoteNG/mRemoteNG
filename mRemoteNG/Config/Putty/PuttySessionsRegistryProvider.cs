@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Management;
 using System.Net;
 using System.Security.Principal;
-using System.Text;
-using System.Web;
 using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.Connection;

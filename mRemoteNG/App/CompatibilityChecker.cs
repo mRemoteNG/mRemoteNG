@@ -21,12 +21,14 @@ namespace mRemoteNG.App
         {
             if (Settings.Default.OverrideFIPSCheck)
             {
-                messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check...",
-                                            true);
+                messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check", true);
                 return;
             }
 
-            messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS Policy...", true);
+            messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS policy...", true);
+            messageCollector.AddMessage(MessageClass.InformationMsg, $"FIPS2003: {FipsPolicyEnabledForServer2003()}", true);
+            messageCollector.AddMessage(MessageClass.InformationMsg, $"FIPS2008+: {FipsPolicyEnabledForServer2008AndNewer()}", true);
+
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
 
             var errorText = string.Format(Language.ErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName);
@@ -86,7 +88,14 @@ namespace mRemoteNG.App
                 messageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
             }
 
-            if (proccesses.Length <= 0) return;
+            if (proccesses.Length <= 0)
+            {
+                messageCollector.AddMessage(MessageClass.InformationMsg, "Lenovo AutoScroll Utility not found", true);
+                return;
+            }
+
+            messageCollector.AddMessage(MessageClass.WarningMsg, "Lenovo AutoScroll Utility found", true);
+
             CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected,
                                    string.Format(Language.CompatibilityLenovoAutoScrollUtilityDetected,
                                                  Application.ProductName), "",

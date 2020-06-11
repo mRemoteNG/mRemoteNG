@@ -36,7 +36,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
-            this.fileMenu = new mRemoteNG.UI.Menu.MainFileMenu();
+            this.fileMenu = new mRemoteNG.UI.Menu.FileMenu();
             this.viewMenu = new mRemoteNG.UI.Menu.ViewMenu();
             this.toolsMenu = new mRemoteNG.UI.Menu.ToolsMenu();
             this.helpMenu = new mRemoteNG.UI.Menu.HelpMenu();
@@ -224,7 +224,7 @@
 		internal System.Windows.Forms.Timer tmrAutoSave;
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
         private System.ComponentModel.IContainer components;
-        private Menu.MainFileMenu fileMenu;
+        private Menu.FileMenu fileMenu;
         private Menu.ViewMenu viewMenu;
         private Menu.ToolsMenu toolsMenu;
         private Menu.HelpMenu helpMenu;

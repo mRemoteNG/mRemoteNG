@@ -3014,6 +3014,18 @@ namespace mRemoteNG {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultUseEnhancedMode {
+            get {
+                return ((bool)(this["InhDefaultUseEnhancedMode"]));
+            }
+            set {
+                this["InhDefaultUseEnhancedMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool CloseToTray {
             get {
                 return ((bool)(this["CloseToTray"]));

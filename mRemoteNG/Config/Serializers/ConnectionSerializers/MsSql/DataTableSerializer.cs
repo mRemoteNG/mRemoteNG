@@ -106,7 +106,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataTable.Columns.Add("Icon", typeof(string));
             dataTable.Columns.Add("Panel", typeof(string));
             dataTable.Columns.Add("Username", typeof(string));
-            dataTable.Columns.Add("DomainName", typeof(string));
+            dataTable.Columns.Add("Domain", typeof(string));
             dataTable.Columns.Add("Password", typeof(string));
             dataTable.Columns.Add("Hostname", typeof(string));
             dataTable.Columns.Add("Port", typeof(int));
@@ -264,7 +264,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["Icon"].Equals(connectionInfo.Icon) &&
             dataRow["Panel"].Equals(connectionInfo.Panel) &&
             dataRow["Username"].Equals(_saveFilter.SaveUsername ? connectionInfo.Username : "") &&
-            dataRow["DomainName"].Equals(_saveFilter.SaveDomain ? connectionInfo.Domain : "");
+            dataRow["Domain"].Equals(_saveFilter.SaveDomain ? connectionInfo.Domain : "");
 
             isFieldNotChange = isFieldNotChange && dataRow["Hostname"].Equals(connectionInfo.Hostname);
              isFieldNotChange = isFieldNotChange && dataRow["VmId"].Equals(connectionInfo.VmId);
@@ -508,7 +508,7 @@ namespace mRemoteNG.Config.Serializers.MsSql
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
             dataRow["Username"] = _saveFilter.SaveUsername ? connectionInfo.Username : "";
-            dataRow["DomainName"] = _saveFilter.SaveDomain ? connectionInfo.Domain : "";
+            dataRow["Domain"] = _saveFilter.SaveDomain ? connectionInfo.Domain : "";
             dataRow["Password"] = _saveFilter.SavePassword
                 ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey)
                 : "";
