@@ -64,7 +64,6 @@ CREATE TABLE `tblCons` (
 	`RdpVersion` varchar(10) DEFAULT NULL,
 	`RedirectAudioCapture` tinyint(1) NOT NULL,
 	`RedirectClipboard` tinyint(1) NOT NULL DEFAULT 0,
-	`RedirectClipboard` tinyint(1) NOT NULL,
 	`RedirectDiskDrives` tinyint(1) NOT NULL,
 	`RedirectKeys` tinyint(1) NOT NULL,
 	`RedirectPorts` tinyint(1) NOT NULL,

@@ -63,7 +63,6 @@ CREATE TABLE [dbo].[tblCons] (
 	RdpVersion varchar(10),
 	RedirectAudioCapture bit NOT NULL,
 	RedirectClipboard bit DEFAULT ((0)) NOT NULL,
-	RedirectClipboard bit NOT NULL,
 	RedirectDiskDrives bit NOT NULL,
 	RedirectKeys bit NOT NULL,
 	RedirectPorts bit NOT NULL,
