@@ -1,4 +1,10 @@
-# Welcome to the mRemoteNG project!
+<p align="center">
+  <img width="500" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/logo.png">
+</p>
+  
+<p align="center">
+  mRemoteNG is an open source, multi-protocol, remote connections manager that allows you to view all of your remote connections in a simple, yet powerful tabbed interface
+</p>
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/mRemoteNG.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=mRemoteNG)
 [![Join the chat at https://gitter.im/mRemoteNG/PublicChat/](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mRemoteNG/PublicChat)
@@ -12,18 +18,11 @@
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
 | Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
-| Beta | | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.15/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.15) |
-| Development | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
-
-mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
+| Prerelease | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
 
 ## Features
 
-mRemoteNG is a fork of mRemote: an open source, tabbed, multi-protocol, remote connections manager. mRemoteNG adds bug fixes and new features to mRemote.
-
-It allows you to view all of your remote connections in a simple yet powerful tabbed interface.
-
-mRemoteNG supports the following protocols:
+The following protocols are supported:
 
 * RDP (Remote Desktop/Terminal Server)
 * VNC (Virtual Network Computing)
@@ -38,9 +37,8 @@ For a detailed feature list and general usage support, refer to the [Documentati
 
 ## Installation
 
-mRemoteNG is supported on Windows 7 or later. Before installing make sure you fullfill all the [minimum requirements](https://mremoteng.readthedocs.io/en/latest/installation/minimum_requirements.html).
-
-mRemoteNG is available as a redistributable msi package, and can be downloaded from the following locations:
+Before installing make sure you fullfill all the [minimum requirements](https://mremoteng.readthedocs.io/en/latest/installation/minimum_requirements.html).
+We support Microsoft Windows 7 or later. mRemoteNG is available as a redistributable MSI package or as a portable ZIP package, and can be downloaded from the following locations:
 * [GitHub](https://github.com/mRemoteNG/mRemoteNG/releases)
 * [Project Website](https://mremoteng.org/download)
 
