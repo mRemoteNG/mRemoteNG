@@ -5,17 +5,39 @@
 <p align="center">
   mRemoteNG is an open source, multi-protocol, remote connections manager that allows you to view all of your remote connections in a simple, yet powerful tabbed interface
 </p>
-  
-![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/mremoteng?label=Reddit&logo=Reddit&style=flat-square)
-![Twitter Follow](https://img.shields.io/twitter/follow/mremoteng?color=%231DA1F2&label=Twitter&logo=Twitter&style=flat-square)
-![Gitter](https://img.shields.io/gitter/room/mRemoteNG/PublicChat?label=Join%20the%20Chat&logo=Gitter&style=flat-square)
-[![PayPal](https://img.shields.io/badge/%24-PayPal-blue.svg?label=Donate&logo=PayPal&style=flat-square)](https://www.paypal.me/DavidSparer)
 
-[![Github Releases](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/total.svg?style=flat-square)](https://github.com/mRemoteNG/mRemoteNG/releases/)
-![GitHub](https://img.shields.io/github/license/mremoteng/mremoteng?label=License&style=flat-square)
+<p align="center">
+  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/mremoteng/mremoteng/total?label=Overall%20Downloads&style=for-the-badge">
+</p>
 
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/529/badge?style=flat-square)](https://bestpractices.coreinfrastructure.org/projects/529)
-[![Documentation Status](https://readthedocs.org/projects/mremoteng/badge/?version=latest?style=flat-square)](https://mremoteng.readthedocs.io/en/latest/?badge=latest)
+<p align="center">
+  <a href="https://www.reddit.com/r/mRemoteNG/">
+    <img alt="Subreddit subscribers" src="https://img.shields.io/reddit/subreddit-subscribers/mremoteng?label=Reddit&logo=Reddit&style=flat-square">
+  </a>
+  <a href="https://twitter.com/mremoteng">
+    <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/mremoteng?color=%231DA1F2&label=Twitter&logo=Twitter&style=flat-square">
+  </a>
+  <a href="https://gitter.im/mRemoteNG/PublicChat">
+    <img alt="Gitter" src="https://img.shields.io/gitter/room/mRemoteNG/PublicChat?label=Join%20the%20Chat&logo=Gitter&style=flat-square">
+  </a>  
+  <a href="https://www.paypal.me/DavidSparer">
+    <img alt="PayPal" src="https://img.shields.io/badge/%24-PayPal-blue.svg?label=Donate&logo=PayPal&style=flat-square">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/mRemoteNG/mRemoteNG/blob/develop/COPYING.TXT">
+    <img alt="License" src="https://img.shields.io/github/license/mremoteng/mremoteng?label=License&style=flat-square">
+  </a>
+  <a href="https://bestpractices.coreinfrastructure.org/projects/529">
+    <img alt="CII Best Practices" src="https://bestpractices.coreinfrastructure.org/projects/529/badge?style=flat-square">
+  </a>
+  <a href="https://mremoteng.readthedocs.io/en/latest/?badge=latest">
+    <img alt="Documentation Status" src="https://readthedocs.org/projects/mremoteng/badge/?version=latest?style=flat-square">
+  </a>
+</p>
+
+---
 
 | Update Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
@@ -54,4 +76,6 @@ Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to
 ### Translate
 Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to help make mRemoteNG a polyglot.
 
-[![Developed with ReSharper](https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png)](https://www.jetbrains.com/resharper/)
+<p align="center">
+  <img alt="Developed with ReSharper" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png">
+</p>
