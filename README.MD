@@ -27,10 +27,10 @@
 
 <p align="center">
   <a href="https://github.com/mRemoteNG/mRemoteNG/blob/develop/COPYING.TXT">
-    <img alt="License" src="https://img.shields.io/github/license/mremoteng/mremoteng?label=License&style=flat-square">
+    <img alt="License" src="https://img.shields.io/github/license/mremoteng/mremoteng?label=License&style=flat">
   </a>
   <a href="https://bestpractices.coreinfrastructure.org/projects/529">
-    <img alt="CII Best Practices" src="https://bestpractices.coreinfrastructure.org/projects/529/badge?style=flat-square">
+    <img alt="CII Best Practices" src="https://bestpractices.coreinfrastructure.org/projects/529/badge?style=flat">
   </a>
   <a href='https://mremoteng.readthedocs.io/en/latest/?badge=latest'>
     <img src='https://readthedocs.org/projects/mremoteng/badge/?version=latest' alt='Documentation Status' />
