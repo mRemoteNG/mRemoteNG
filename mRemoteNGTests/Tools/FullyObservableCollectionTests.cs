@@ -99,7 +99,7 @@ namespace mRemoteNGTests.Tools
         {
             var wasCalled = false;
             var item = Substitute.For<INotifyPropertyChanged>();
-            var list = new FullyObservableCollection<INotifyPropertyChanged> { item };
+            var list = new FullyObservableCollection<INotifyPropertyChanged> {item};
             list.Remove(item);
             list.CollectionUpdated += (sender, args) => wasCalled = true;
             RaiseEvent(item);
@@ -108,7 +108,8 @@ namespace mRemoteNGTests.Tools
 
         private void RaiseEvent(INotifyPropertyChanged item)
         {
-            item.PropertyChanged += Raise.Event<PropertyChangedEventHandler>(item, new PropertyChangedEventArgs("test"));
+            item.PropertyChanged +=
+                Raise.Event<PropertyChangedEventHandler>(item, new PropertyChangedEventArgs("test"));
         }
     }
 }

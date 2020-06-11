@@ -68,7 +68,8 @@ namespace mRemoteNGTests.Security
         [Test]
         public void DecryptionFailureThrowsException()
         {
-            ActualValueDelegate<string> decryptMethod = () => _rijndaelCryptographyProvider.Decrypt(CipherText, "wrongKey".ConvertToSecureString());
+            ActualValueDelegate<string> decryptMethod = () =>
+                _rijndaelCryptographyProvider.Decrypt(CipherText, "wrongKey".ConvertToSecureString());
             Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
 

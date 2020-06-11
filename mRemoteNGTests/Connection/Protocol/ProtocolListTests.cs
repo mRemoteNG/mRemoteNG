@@ -59,7 +59,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void CountUpdatesToReflectCurrentList()
         {
-            var protArray = new[] { _protocol1, _protocol2, _protocol3 };
+            var protArray = new[] {_protocol1, _protocol2, _protocol3};
             _protocolList.AddRange(protArray);
             Assert.That(_protocolList.Count == protArray.Length);
         }
@@ -75,7 +75,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void ClearResetsList()
         {
-            var protArray = new[] { _protocol1, _protocol2, _protocol3 };
+            var protArray = new[] {_protocol1, _protocol2, _protocol3};
             _protocolList.AddRange(protArray);
             _protocolList.Clear();
             Assert.That(_protocolList.Count == 0);
@@ -84,7 +84,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void IntIndexerReturnsCorrectObject()
         {
-            var protArray = new[] { _protocol1, _protocol2, _protocol3 };
+            var protArray = new[] {_protocol1, _protocol2, _protocol3};
             _protocolList.AddRange(protArray);
             Assert.That(_protocolList[1], Is.EqualTo(protArray[1]));
         }
@@ -92,7 +92,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void ObjectIndexerReturnsCorrectObject()
         {
-            var protArray = new[] { _protocol1, _protocol2, _protocol3 };
+            var protArray = new[] {_protocol1, _protocol2, _protocol3};
             _protocolList.AddRange(protArray);
             Assert.That(_protocolList[_protocol3], Is.EqualTo(_protocol3));
         }
@@ -100,7 +100,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void IndexerSafelyHandlesUnknownObjects()
         {
-            var protArray = new[] { _protocol1, _protocol2, _protocol3 };
+            var protArray = new[] {_protocol1, _protocol2, _protocol3};
             _protocolList.AddRange(protArray);
             Assert.That(_protocolList["unacceptablevalue"], Is.EqualTo(null));
         }
@@ -108,7 +108,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void RemovingNonexistantObjectFromListDoesNothing()
         {
-            Assert.DoesNotThrow(()=> _protocolList.Remove(_protocol1));
+            Assert.DoesNotThrow(() => _protocolList.Remove(_protocol1));
         }
 
         [Test]
@@ -132,7 +132,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void AddRangeCollectionChangedEventContainsAddedObjects()
         {
-            var protArray = new[] { _protocol1, _protocol2, _protocol3 };
+            var protArray = new[] {_protocol1, _protocol2, _protocol3};
             IList nodeListFromEvent = new ArrayList();
             _protocolList.CollectionChanged += (sender, args) => nodeListFromEvent = args.NewItems;
             _protocolList.AddRange(protArray);
@@ -146,7 +146,7 @@ namespace mRemoteNGTests.Connection.Protocol
             _protocolList.Add(_protocol1);
             _protocolList.CollectionChanged += (sender, args) => nodeListFromEvent = args.OldItems;
             _protocolList.Remove(_protocol1);
-            Assert.That(nodeListFromEvent, Is.EquivalentTo(new[] { _protocol1 }));
+            Assert.That(nodeListFromEvent, Is.EquivalentTo(new[] {_protocol1}));
         }
 
         [Test]
@@ -180,7 +180,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void AddCollectionChangedEventHasCorrectAction()
         {
-            NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
+            var collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.Add(_protocol1);
             Assert.That(collectionChangedAction, Is.EqualTo(NotifyCollectionChangedAction.Add));
@@ -189,16 +189,16 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void AddRangeCollectionChangedEventHasCorrectAction()
         {
-            NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
+            var collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
-            _protocolList.AddRange(new []{_protocol1});
+            _protocolList.AddRange(new[] {_protocol1});
             Assert.That(collectionChangedAction, Is.EqualTo(NotifyCollectionChangedAction.Add));
         }
 
         [Test]
         public void RemoveCollectionChangedEventHasCorrectAction()
         {
-            NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
+            var collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.Add(_protocol1);
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.Remove(_protocol1);
@@ -208,7 +208,7 @@ namespace mRemoteNGTests.Connection.Protocol
         [Test]
         public void ClearCollectionChangedEventHasCorrectAction()
         {
-            NotifyCollectionChangedAction collectionChangedAction = NotifyCollectionChangedAction.Move;
+            var collectionChangedAction = NotifyCollectionChangedAction.Move;
             _protocolList.Add(_protocol1);
             _protocolList.CollectionChanged += (sender, args) => collectionChangedAction = args.Action;
             _protocolList.Clear();

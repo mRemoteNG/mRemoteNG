@@ -30,8 +30,8 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.IcaControlFailed + Environment.NewLine + ex.Message,
-                                                    true);
+                    Language.IcaControlFailed + Environment.NewLine + ex.Message,
+                    true);
             }
         }
 
@@ -41,7 +41,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 
             try
             {
-                _icaClient = (AxICAClient)Control;
+                _icaClient = (AxICAClient) Control;
                 _info = InterfaceControl.Info;
                 _icaClient.CreateControl();
 
@@ -88,8 +88,8 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.IcaSetPropsFailed + Environment.NewLine + ex.Message,
-                                                    true);
+                    Language.IcaSetPropsFailed + Environment.NewLine + ex.Message,
+                    true);
                 return false;
             }
         }
@@ -107,7 +107,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.IcaConnectionFailed + Environment.NewLine + ex.Message);
+                    Language.IcaConnectionFailed + Environment.NewLine + ex.Message);
                 return false;
             }
         }
@@ -120,10 +120,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
         {
             try
             {
-                if (Force.HasFlag(ConnectionInfo.Force.NoCredentials))
-                {
-                    return;
-                }
+                if (Force.HasFlag(ConnectionInfo.Force.NoCredentials)) return;
 
                 var user = _info?.Username ?? "";
                 var pass = _info?.Password ?? "";
@@ -132,13 +129,9 @@ namespace mRemoteNG.Connection.Protocol.ICA
                 if (string.IsNullOrEmpty(user))
                 {
                     if (Settings.Default.EmptyCredentials == "windows")
-                    {
                         _icaClient.Username = Environment.UserName;
-                    }
                     else if (Settings.Default.EmptyCredentials == "custom")
-                    {
                         _icaClient.Username = Settings.Default.DefaultUsername;
-                    }
                 }
                 else
                 {
@@ -148,15 +141,13 @@ namespace mRemoteNG.Connection.Protocol.ICA
                 if (string.IsNullOrEmpty(pass))
                 {
                     if (Settings.Default.EmptyCredentials == "custom")
-                    {
                         if (Settings.Default.DefaultPassword != "")
                         {
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                             _icaClient.SetProp("ClearPassword",
-                                               cryptographyProvider.Decrypt(Settings.Default.DefaultPassword,
-                                                                            Runtime.EncryptionKey));
+                                cryptographyProvider.Decrypt(Settings.Default.DefaultPassword,
+                                    Runtime.EncryptionKey));
                         }
-                    }
                 }
                 else
                 {
@@ -166,13 +157,9 @@ namespace mRemoteNG.Connection.Protocol.ICA
                 if (string.IsNullOrEmpty(dom))
                 {
                     if (Settings.Default.EmptyCredentials == "windows")
-                    {
                         _icaClient.Domain = Environment.UserDomainName;
-                    }
                     else if (Settings.Default.EmptyCredentials == "custom")
-                    {
                         _icaClient.Domain = Settings.Default.DefaultDomain;
-                    }
                 }
                 else
                 {
@@ -182,8 +169,8 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.IcaSetCredentialsFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.IcaSetCredentialsFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -194,8 +181,8 @@ namespace mRemoteNG.Connection.Protocol.ICA
                 if (Force.HasFlag(ConnectionInfo.Force.Fullscreen))
                 {
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient,
-                                             Screen.FromControl(_frmMain).Bounds.Width,
-                                             Screen.FromControl(_frmMain).Bounds.Height, 0);
+                        Screen.FromControl(_frmMain).Bounds.Width,
+                        Screen.FromControl(_frmMain).Bounds.Height, 0);
                     _icaClient.FullScreenWindow();
 
                     return;
@@ -204,32 +191,32 @@ namespace mRemoteNG.Connection.Protocol.ICA
                 if (InterfaceControl.Info.Resolution == RDPResolutions.FitToWindow)
                 {
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width,
-                                             InterfaceControl.Size.Height, 0);
+                        InterfaceControl.Size.Height, 0);
                 }
                 else if (InterfaceControl.Info.Resolution == RDPResolutions.SmartSize)
                 {
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, InterfaceControl.Size.Width,
-                                             InterfaceControl.Size.Height, 0);
+                        InterfaceControl.Size.Height, 0);
                 }
                 else if (InterfaceControl.Info.Resolution == RDPResolutions.Fullscreen)
                 {
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient,
-                                             Screen.FromControl(_frmMain).Bounds.Width,
-                                             Screen.FromControl(_frmMain).Bounds.Height, 0);
+                        Screen.FromControl(_frmMain).Bounds.Width,
+                        Screen.FromControl(_frmMain).Bounds.Height, 0);
                     _icaClient.FullScreenWindow();
                 }
                 else
                 {
                     var resolution = _info.Resolution.GetResolutionRectangle();
                     _icaClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, resolution.Width,
-                                             resolution.Height, 0);
+                        resolution.Height, 0);
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.IcaSetResolutionFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.IcaSetResolutionFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -289,8 +276,8 @@ namespace mRemoteNG.Connection.Protocol.ICA
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.IcaSetEventHandlersFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.IcaSetEventHandlersFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -321,8 +308,8 @@ namespace mRemoteNG.Connection.Protocol.ICA
             {
                 ReconnectGroup = new ReconnectGroup();
                 //this.Load += ReconnectGroup_Load;
-                ReconnectGroup.Left = (int)(((double)Control.Width / 2) - ((double)ReconnectGroup.Width / 2));
-                ReconnectGroup.Top = (int)(((double)Control.Height / 2) - ((double)ReconnectGroup.Height / 2));
+                ReconnectGroup.Left = (int) ((double) Control.Width / 2 - (double) ReconnectGroup.Width / 2);
+                ReconnectGroup.Top = (int) ((double) Control.Height / 2 - (double) ReconnectGroup.Height / 2);
                 ReconnectGroup.Parent = Control;
                 ReconnectGroup.Show();
                 tmrReconnect.Enabled = true;

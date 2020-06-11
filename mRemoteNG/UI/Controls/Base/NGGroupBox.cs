@@ -20,10 +20,7 @@ namespace mRemoteNG.UI.Controls.Base
         {
             base.OnCreateControl();
             _themeManager = ThemeManager.getInstance();
-            if (_themeManager.ThemingActive)
-            {
-                Invalidate();
-            }
+            if (_themeManager.ThemingActive) Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -63,11 +60,11 @@ namespace mRemoteNG.UI.Controls.Base
             var rectangle = bounds;
             rectangle.Width -= 8;
             var size = TextRenderer.MeasureText(e.Graphics, Text, Font, new Size(rectangle.Width, rectangle.Height),
-                                                flags);
+                flags);
             rectangle.Width = size.Width;
             rectangle.Height = size.Height;
             if ((flags & TextFormatFlags.Right) == TextFormatFlags.Right)
-                rectangle.X = (bounds.Right - rectangle.Width) - 8;
+                rectangle.X = bounds.Right - rectangle.Width - 8;
             else
                 rectangle.X += 8;
             TextRenderer.DrawText(e.Graphics, Text, Font, rectangle, titleColor, flags);
@@ -76,22 +73,22 @@ namespace mRemoteNG.UI.Controls.Base
                 rectangle.Inflate(2, 0);
             using (var pen = new Pen(lineColor))
             {
-                var num = bounds.Top + (Font.Height / 2);
+                var num = bounds.Top + Font.Height / 2;
                 //Left line
                 e.Graphics.DrawLine(pen, bounds.Left + Padding.Left, num - Padding.Top, bounds.Left + Padding.Left,
-                                    bounds.Height - Padding.Bottom);
+                    bounds.Height - Padding.Bottom);
                 //Bottom line
                 e.Graphics.DrawLine(pen, bounds.Left + Padding.Left, bounds.Height - Padding.Bottom,
-                                    bounds.Width - Padding.Right, bounds.Height - Padding.Bottom);
+                    bounds.Width - Padding.Right, bounds.Height - Padding.Bottom);
                 //Beside text line
                 e.Graphics.DrawLine(pen, bounds.Left + Padding.Left, num - Padding.Top, rectangle.X - 3,
-                                    num - Padding.Top);
+                    num - Padding.Top);
                 //Top line cutted
                 e.Graphics.DrawLine(pen, rectangle.X + rectangle.Width + 2, num - Padding.Top,
-                                    bounds.Width - Padding.Right, num - Padding.Top);
+                    bounds.Width - Padding.Right, num - Padding.Top);
                 //Right line
                 e.Graphics.DrawLine(pen, bounds.Width - Padding.Right, num - Padding.Top, bounds.Width - Padding.Right,
-                                    bounds.Height - Padding.Bottom);
+                    bounds.Height - Padding.Bottom);
             }
 
             RaisePaintEvent(this, e);
@@ -99,13 +96,13 @@ namespace mRemoteNG.UI.Controls.Base
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // NGGroupBox
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResumeLayout(false);
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular,
+                GraphicsUnit.Point, (byte) 0);
+            ResumeLayout(false);
         }
     }
 }

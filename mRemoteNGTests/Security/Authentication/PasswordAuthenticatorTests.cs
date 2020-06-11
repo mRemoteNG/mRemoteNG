@@ -19,13 +19,15 @@ namespace mRemoteNGTests.Security.Authentication
         public void Setup()
         {
             _cryptographyProvider = new AeadCryptographyProvider {KeyDerivationIterations = 10000};
-            _cipherText = "MPELiwk7+xeNlruIyt5uxTvVB+/RLVoLdUGnwY4CWCqwKe7T2IBwWo4oaKum5hdv7447g5m2nZsYPrfARSlotQB4r1KZQg==";
+            _cipherText =
+                "MPELiwk7+xeNlruIyt5uxTvVB+/RLVoLdUGnwY4CWCqwKe7T2IBwWo4oaKum5hdv7447g5m2nZsYPrfARSlotQB4r1KZQg==";
         }
 
         [Test]
         public void AuthenticatingWithCorrectPasswordReturnsTrue()
         {
-            var authenticator = new PasswordAuthenticator(_cryptographyProvider, _cipherText, () => Optional<SecureString>.Empty);
+            var authenticator =
+                new PasswordAuthenticator(_cryptographyProvider, _cipherText, () => Optional<SecureString>.Empty);
             var authenticated = authenticator.Authenticate(_correctPassword);
             Assert.That(authenticated);
         }
@@ -33,7 +35,8 @@ namespace mRemoteNGTests.Security.Authentication
         [Test]
         public void AuthenticatingWithWrongPasswordReturnsFalse()
         {
-            var authenticator = new PasswordAuthenticator(_cryptographyProvider, _cipherText, () => Optional<SecureString>.Empty);
+            var authenticator =
+                new PasswordAuthenticator(_cryptographyProvider, _cipherText, () => Optional<SecureString>.Empty);
             var authenticated = authenticator.Authenticate(_wrongPassword);
             Assert.That(!authenticated);
         }
@@ -58,6 +61,7 @@ namespace mRemoteNGTests.Security.Authentication
         public void AuthenticationRequestorNotCalledWhenInitialPasswordIsCorrect()
         {
             var wasCalled = false;
+
             Optional<SecureString> AuthenticationRequestor()
             {
                 wasCalled = true;
@@ -89,7 +93,8 @@ namespace mRemoteNGTests.Security.Authentication
         public void AuthenticatorRespectsMaxAttempts()
         {
             var authAttempts = 0;
-            Optional<SecureString>  AuthenticationRequestor()
+
+            Optional<SecureString> AuthenticationRequestor()
             {
                 authAttempts++;
                 return _wrongPassword;
@@ -105,6 +110,7 @@ namespace mRemoteNGTests.Security.Authentication
         {
             const int customMaxAttempts = 5;
             var authAttempts = 0;
+
             Optional<SecureString> AuthenticationRequestor()
             {
                 authAttempts++;

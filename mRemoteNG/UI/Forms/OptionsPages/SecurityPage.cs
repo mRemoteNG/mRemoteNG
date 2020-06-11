@@ -51,9 +51,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
-            Settings.Default.EncryptionEngine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
-            Settings.Default.EncryptionBlockCipherMode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
-            Settings.Default.EncryptionKeyDerivationIterations = (int)numberBoxKdfIterations.Value;
+            Settings.Default.EncryptionEngine = (BlockCipherEngines) comboBoxEncryptionEngine.SelectedItem;
+            Settings.Default.EncryptionBlockCipherMode = (BlockCipherModes) comboBoxBlockCipher.SelectedItem;
+            Settings.Default.EncryptionKeyDerivationIterations = (int) numberBoxKdfIterations.Value;
         }
 
         public override void RevertSettings()
@@ -82,7 +82,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cryptographyProvider.KeyDerivationIterations = (int) numberBoxKdfIterations.Value;
 
             var serializerFactory = new XmlConnectionSerializerFactory();
-            var serializer = serializerFactory.Build(cryptographyProvider, connectionTree, useFullEncryption: chkEncryptCompleteFile.Checked);
+            var serializer = serializerFactory.Build(cryptographyProvider, connectionTree,
+                useFullEncryption: chkEncryptCompleteFile.Checked);
             var nodeCount = connectionTree.GetRecursiveChildList().Count;
 
             var timer = Stopwatch.StartNew();
@@ -92,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             MessageBox.Show(this,
                 string.Format(Language.EncryptionTestResultMessage,
-                nodeCount, engine, mode, numberBoxKdfIterations.Value, timer.Elapsed.TotalSeconds),
+                    nodeCount, engine, mode, numberBoxKdfIterations.Value, timer.Elapsed.TotalSeconds),
                 Language.EncryptionTest,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);

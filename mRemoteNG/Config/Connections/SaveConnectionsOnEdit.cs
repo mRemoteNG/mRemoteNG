@@ -20,7 +20,7 @@ namespace mRemoteNG.Config.Connections
         }
 
         private void ConnectionsServiceOnConnectionsLoaded(object sender,
-                                                           ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+            ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
             connectionsLoadedEventArgs.NewConnectionTreeModel.CollectionChanged +=
                 ConnectionTreeModelOnCollectionChanged;
@@ -34,14 +34,14 @@ namespace mRemoteNG.Config.Connections
         }
 
         private void ConnectionTreeModelOnPropertyChanged(object sender,
-                                                          PropertyChangedEventArgs propertyChangedEventArgs)
+            PropertyChangedEventArgs propertyChangedEventArgs)
         {
             SaveConnectionOnEdit(propertyChangedEventArgs.PropertyName);
         }
 
         private void ConnectionTreeModelOnCollectionChanged(object sender,
-                                                            NotifyCollectionChangedEventArgs
-                                                                notifyCollectionChangedEventArgs)
+            NotifyCollectionChangedEventArgs
+                notifyCollectionChangedEventArgs)
         {
             SaveConnectionOnEdit();
         }

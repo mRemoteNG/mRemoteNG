@@ -37,9 +37,9 @@ namespace mRemoteNGTests.Config.Serializers
         private XDocument CreateTestDocument()
         {
             var xdoc = new XDocument();
-            xdoc.Add(new XElement("Root", 
+            xdoc.Add(new XElement("Root",
                 new XElement("Node",
-                    new XAttribute("Thingy",""))));
+                    new XAttribute("Thingy", ""))));
             return xdoc;
         }
     }

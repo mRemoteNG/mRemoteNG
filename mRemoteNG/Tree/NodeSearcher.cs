@@ -25,12 +25,10 @@ namespace mRemoteNG.Tree
             var nodes = _connectionTreeModel.GetRecursiveChildList();
             var searchTextLower = searchText.ToLowerInvariant();
             foreach (var node in nodes)
-            {
                 if (node.Name.ToLowerInvariant().Contains(searchTextLower) ||
                     node.Description.ToLowerInvariant().Contains(searchTextLower) ||
                     node.Hostname.ToLowerInvariant().Contains(searchTextLower))
                     Matches.Add(node);
-            }
 
             if (Matches.Count > 0)
                 CurrentMatch = Matches.First();

@@ -7,8 +7,14 @@ namespace mRemoteNG.Tools.Clipboard
     /// </summary>
     public class WindowsClipboard : IClipboard
     {
-        public string GetText() => WinClipboard.GetText();
+        public string GetText()
+        {
+            return WinClipboard.GetText();
+        }
 
-        public void SetText(string text) => WinClipboard.SetText(text);
+        public void SetText(string text)
+        {
+            WinClipboard.SetText(text);
+        }
     }
 }

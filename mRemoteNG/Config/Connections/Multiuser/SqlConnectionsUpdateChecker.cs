@@ -51,8 +51,8 @@ namespace mRemoteNG.Config.Connections
             catch (Exception e)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "Unable to connect to Sql DB to check for updates." +
-                                                    Environment.NewLine + e.Message, true);
+                    "Unable to connect to Sql DB to check for updates." +
+                    Environment.NewLine + e.Message, true);
             }
         }
 
@@ -60,14 +60,14 @@ namespace mRemoteNG.Config.Connections
         {
             var lastUpdateInDb = GetLastUpdateTimeFromDbResponse();
             var amTheLastoneUpdated = CheckIfIAmTheLastOneUpdated(lastUpdateInDb);
-            return (lastUpdateInDb > LastUpdateTime && !amTheLastoneUpdated);
+            return lastUpdateInDb > LastUpdateTime && !amTheLastoneUpdated;
         }
 
         private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
         {
-            DateTime lastSqlUpdateWithoutMilliseconds =
-                new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond),
-                             LastUpdateTime.Kind);
+            var lastSqlUpdateWithoutMilliseconds =
+                new DateTime(LastUpdateTime.Ticks - LastUpdateTime.Ticks % TimeSpan.TicksPerSecond,
+                    LastUpdateTime.Kind);
             return lastUpdateInDb == lastSqlUpdateWithoutMilliseconds;
         }
 
@@ -85,8 +85,8 @@ namespace mRemoteNG.Config.Connections
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "Error executing Sql query to get updates from the DB." +
-                                                    Environment.NewLine + ex.Message, true);
+                    "Error executing Sql query to get updates from the DB." +
+                    Environment.NewLine + ex.Message, true);
             }
 
             _lastDatabaseUpdateTime = lastUpdateInDb;

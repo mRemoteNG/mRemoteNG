@@ -16,23 +16,21 @@ namespace mRemoteNG.Tools
         private static void SetBrowserFeatureControlKey(string feature, string appName, uint value)
         {
             if (Environment.Is64BitOperatingSystem)
-            {
                 using (var key = Registry.CurrentUser.CreateSubKey(
-                                                                   string
-                                                                       .Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
-                                                                               feature),
-                                                                   RegistryKeyPermissionCheck.ReadWriteSubTree))
+                    string
+                        .Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
+                            feature),
+                    RegistryKeyPermissionCheck.ReadWriteSubTree))
                 {
                     key?.SetValue(appName, value, RegistryValueKind.DWord);
                 }
-            }
 
 
             using (var key = Registry.CurrentUser.CreateSubKey(
-                                                               string
-                                                                   .Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
-                                                                           feature),
-                                                               RegistryKeyPermissionCheck.ReadWriteSubTree))
+                string
+                    .Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
+                        feature),
+                RegistryKeyPermissionCheck.ReadWriteSubTree))
             {
                 key?.SetValue(appName, value, RegistryValueKind.DWord);
             }
@@ -42,24 +40,22 @@ namespace mRemoteNG.Tools
         private static void DeleteBrowserFeatureControlKey(string feature, string appName)
         {
             if (Environment.Is64BitOperatingSystem)
-            {
                 using (var key = Registry.CurrentUser.OpenSubKey(
-                                                                 string
-                                                                     .Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
-                                                                             feature),
-                                                                 RegistryKeyPermissionCheck.ReadWriteSubTree))
+                    string
+                        .Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
+                            feature),
+                    RegistryKeyPermissionCheck.ReadWriteSubTree))
                 {
                     if (key?.GetValueNames().Contains(appName) ?? false)
                         key.DeleteValue(appName);
                 }
-            }
 
 
             using (var key = Registry.CurrentUser.CreateSubKey(
-                                                               string
-                                                                   .Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
-                                                                           feature),
-                                                               RegistryKeyPermissionCheck.ReadWriteSubTree))
+                string
+                    .Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
+                        feature),
+                RegistryKeyPermissionCheck.ReadWriteSubTree))
             {
                 if (key?.GetValueNames().Contains(appName) ?? false)
                     key.DeleteValue(appName);
@@ -77,9 +73,7 @@ namespace mRemoteNG.Tools
             // make sure the control is not running inside Visual Studio Designer
             if (string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0 ||
                 string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0)
-            {
                 return;
-            }
 
             SetBrowserFeatureControlKey("FEATURE_BROWSER_EMULATION", fileName, GetBrowserEmulationMode());
             // Webpages containing standards-based !DOCTYPE directives are displayed in IE10 Standards mode.
@@ -119,9 +113,7 @@ namespace mRemoteNG.Tools
             // make sure the control is not running inside Visual Studio Designer
             if (string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0 ||
                 string.Compare(fileName, "XDesProc.exe", StringComparison.OrdinalIgnoreCase) == 0)
-            {
                 return;
-            }
 
             DeleteBrowserFeatureControlKey("FEATURE_BROWSER_EMULATION", fileName);
             // Webpages containing standards-based !DOCTYPE directives are displayed in IE10 Standards mode.
@@ -159,8 +151,8 @@ namespace mRemoteNG.Tools
             // default to IE9.
 
             using (var ieKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Internet Explorer",
-                                                                RegistryKeyPermissionCheck.ReadSubTree,
-                                                                RegistryRights.QueryValues))
+                RegistryKeyPermissionCheck.ReadSubTree,
+                RegistryRights.QueryValues))
             {
                 if (ieKey != null)
                 {
@@ -168,10 +160,7 @@ namespace mRemoteNG.Tools
                     if (null == version)
                     {
                         version = ieKey.GetValue("Version");
-                        if (version == null)
-                        {
-                            throw new ApplicationException("Microsoft Internet Explorer is required!");
-                        }
+                        if (version == null) throw new ApplicationException("Microsoft Internet Explorer is required!");
                     }
 
                     int.TryParse(version.ToString().Split('.')[0], out browserVersion);
@@ -193,7 +182,7 @@ namespace mRemoteNG.Tools
                 // Webpages containing standards-based !DOCTYPE directives are displayed in IE8 mode. Default value for Internet Explorer 8
 				case 8:
 					mode = 8000;
-					break; 
+					break;
 #endif
                 // Internet Explorer 9. Webpages containing standards-based !DOCTYPE directives are displayed in IE9 mode. Default value for Internet Explorer 9.
                 case 9:

@@ -26,10 +26,9 @@ namespace mRemoteNG.Config.Putty
 
             var sessionNames = new List<string>();
             foreach (var sessionName in sessionsKey.GetSubKeyNames())
-            {
-                sessionNames.Add(raw ? sessionName
-                                     : WebUtility.UrlDecode(sessionName.Replace("+", "%2B")));
-            }
+                sessionNames.Add(raw
+                    ? sessionName
+                    : WebUtility.UrlDecode(sessionName.Replace("+", "%2B")));
 
             if (raw && !sessionNames.Contains("Default%20Settings"))
                 sessionNames.Insert(0, "Default%20Settings");
@@ -109,7 +108,7 @@ namespace mRemoteNG.Config.Putty
                 var currentUserSid = WindowsIdentity.GetCurrent().User?.Value;
                 var key = string.Join("\\", currentUserSid, PuttySessionsKey).Replace("\\", "\\\\");
                 var query = new WqlEventQuery(
-                                              $"SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{key}\'");
+                    $"SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{key}\'");
                 _eventWatcher = new ManagementEventWatcher(query);
                 _eventWatcher.EventArrived += OnManagementEventArrived;
                 _eventWatcher.Start();
@@ -117,7 +116,7 @@ namespace mRemoteNG.Config.Putty
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("PuttySessions.Watcher.StartWatching() failed.", ex,
-                                                             MessageClass.WarningMsg);
+                    MessageClass.WarningMsg);
             }
         }
 

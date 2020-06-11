@@ -44,7 +44,7 @@ namespace mRemoteNG.Config.Connections
             var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);
             var cryptoProvider = new LegacyRijndaelCryptographyProvider();
 
-            var metaData = metaDataRetriever.GetDatabaseMetaData(connector) ?? 
+            var metaData = metaDataRetriever.GetDatabaseMetaData(connector) ??
                            HandleFirstRun(metaDataRetriever, connector);
             var decryptionKey = GetDecryptionKey(metaData);
 
@@ -66,7 +66,7 @@ namespace mRemoteNG.Config.Connections
             var authenticator = new PasswordAuthenticator(cryptographyProvider, cipherText, AuthenticationRequestor);
             var authenticated =
                 authenticator.Authenticate(new RootNodeInfo(RootNodeType.Connection).DefaultPassword
-                                                                                    .ConvertToSecureString());
+                    .ConvertToSecureString());
 
             if (authenticated)
                 return authenticator.LastAuthenticatedPassword;
@@ -81,9 +81,9 @@ namespace mRemoteNG.Config.Connections
             rootNode
                 .GetRecursiveChildList()
                 .Join(localConnectionProperties,
-                      con => con.ConstantID,
-                      locals => locals.ConnectionId,
-                      (con, locals) => new {Connection = con, LocalProperties = locals})
+                    con => con.ConstantID,
+                    locals => locals.ConnectionId,
+                    (con, locals) => new {Connection = con, LocalProperties = locals})
                 .ForEach(x =>
                 {
                     x.Connection.PleaseConnect = x.LocalProperties.Connected;
@@ -93,10 +93,11 @@ namespace mRemoteNG.Config.Connections
                 });
         }
 
-        private SqlConnectionListMetaData HandleFirstRun(SqlDatabaseMetaDataRetriever metaDataRetriever, IDatabaseConnector connector)
+        private SqlConnectionListMetaData HandleFirstRun(SqlDatabaseMetaDataRetriever metaDataRetriever,
+            IDatabaseConnector connector)
         {
-	        metaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector);
-	        return metaDataRetriever.GetDatabaseMetaData(connector);
-		}
+            metaDataRetriever.WriteDatabaseMetaData(new RootNodeInfo(RootNodeType.Connection), connector);
+            return metaDataRetriever.GetDatabaseMetaData(connector);
+        }
     }
 }

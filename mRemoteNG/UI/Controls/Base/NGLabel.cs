@@ -98,13 +98,13 @@ namespace mRemoteNG.UI.Controls.Base
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // NGLabel
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResumeLayout(false);
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular,
+                GraphicsUnit.Point, (byte) 0);
+            ResumeLayout(false);
         }
     }
 }

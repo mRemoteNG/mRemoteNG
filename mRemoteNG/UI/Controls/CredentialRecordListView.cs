@@ -15,7 +15,7 @@ namespace mRemoteNG.UI.Controls
 
         public ICredentialRepositoryList CredentialRepositoryList
         {
-            get { return _credentialRepositoryList; }
+            get => _credentialRepositoryList;
             set
             {
                 _credentialRepositoryList.RepositoriesUpdated -= CredentialRepositoryListOnRepositoriesUpdated;
@@ -63,10 +63,8 @@ namespace mRemoteNG.UI.Controls
         {
             var objects = new Dictionary<ICredentialRecord, ICredentialRepository>();
             foreach (var repository in _credentialRepositoryList.CredentialProviders)
-            {
-                foreach (var credential in repository.CredentialRecords)
-                    objects.Add(credential, repository);
-            }
+            foreach (var credential in repository.CredentialRecords)
+                objects.Add(credential, repository);
 
             objectListView1.SetObjects(objects, true);
         }
@@ -118,20 +116,20 @@ namespace mRemoteNG.UI.Controls
         {
             if (!(model is KeyValuePair<ICredentialRecord, ICredentialRepository>))
                 return default(KeyValuePair<ICredentialRecord, ICredentialRepository>);
-            var keyValuePair = (KeyValuePair<ICredentialRecord, ICredentialRepository>)model;
+            var keyValuePair = (KeyValuePair<ICredentialRecord, ICredentialRepository>) model;
             return keyValuePair;
         }
 
         private void CredentialRepositoryListOnRepositoriesUpdated(object sender,
-                                                                   CollectionUpdatedEventArgs<ICredentialRepository>
-                                                                       arg)
+            CollectionUpdatedEventArgs<ICredentialRepository>
+                arg)
         {
             SetObjectList();
         }
 
         private void CredentialRepositoryListOnCredentialsUpdated(object sender,
-                                                                  CollectionUpdatedEventArgs<ICredentialRecord>
-                                                                      collectionUpdatedEventArgs)
+            CollectionUpdatedEventArgs<ICredentialRecord>
+                collectionUpdatedEventArgs)
         {
             SetObjectList();
         }

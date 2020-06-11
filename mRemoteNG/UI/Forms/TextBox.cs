@@ -10,8 +10,7 @@ namespace mRemoteNG.UI.Forms
     {
         #region Public Properties
 
-        [Category("Behavior"),
-         DefaultValue(false)]
+        [Category("Behavior")] [DefaultValue(false)]
         private bool _SelectAllOnFocus;
 
         public bool SelectAllOnFocus
@@ -45,10 +44,7 @@ namespace mRemoteNG.UI.Forms
             base.OnMouseUp(e);
 
             if (_focusHandled) return;
-            if (SelectionLength == 0)
-            {
-                SelectAll();
-            }
+            if (SelectionLength == 0) SelectAll();
 
             _focusHandled = true;
         }
@@ -63,13 +59,13 @@ namespace mRemoteNG.UI.Forms
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // TextBox
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResumeLayout(false);
+            Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point, (byte) 0);
+            ResumeLayout(false);
         }
     }
 }

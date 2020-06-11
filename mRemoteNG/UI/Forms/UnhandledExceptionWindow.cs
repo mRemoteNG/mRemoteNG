@@ -63,17 +63,17 @@ namespace mRemoteNG.UI.Forms
         private void buttonCopyAll_Click(object sender, EventArgs e)
         {
             var text = new StringBuilder()
-               .AppendLine("```")
-               .AppendLine(labelExceptionMessageHeader.Text)
-               .AppendLine("\"" + textBoxExceptionMessage.Text + "\"")
-               .AppendLine()
-               .AppendLine(labelStackTraceHeader.Text)
-               .AppendLine(textBoxStackTrace.Text)
-               .AppendLine()
-               .AppendLine(labelEnvironment.Text)
-               .AppendLine(textBoxEnvironment.Text)
-               .AppendLine("```")
-               .ToString();
+                .AppendLine("```")
+                .AppendLine(labelExceptionMessageHeader.Text)
+                .AppendLine("\"" + textBoxExceptionMessage.Text + "\"")
+                .AppendLine()
+                .AppendLine(labelStackTraceHeader.Text)
+                .AppendLine(textBoxStackTrace.Text)
+                .AppendLine()
+                .AppendLine(labelEnvironment.Text)
+                .AppendLine(textBoxEnvironment.Text)
+                .AppendLine("```")
+                .ToString();
 
             Clipboard.SetText(text);
         }

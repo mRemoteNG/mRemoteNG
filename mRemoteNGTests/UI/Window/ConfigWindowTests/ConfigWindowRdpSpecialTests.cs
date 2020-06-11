@@ -23,7 +23,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         {
             ConnectionInfo.RDGatewayUsageMethod = gatewayUsageMethod;
             ConnectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes;
-            ExpectedPropertyList.AddRange(new []
+            ExpectedPropertyList.AddRange(new[]
             {
                 nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayHostname),
                 nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials)
@@ -34,11 +34,12 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 
         [TestCase(RDGatewayUseConnectionCredentials.No)]
         [TestCase(RDGatewayUseConnectionCredentials.SmartCard)]
-        public void RdGatewayPropertiesShown_WhenRDGatewayUseConnectionCredentialsIsNotYes(RDGatewayUseConnectionCredentials useConnectionCredentials)
+        public void RdGatewayPropertiesShown_WhenRDGatewayUseConnectionCredentialsIsNotYes(
+            RDGatewayUseConnectionCredentials useConnectionCredentials)
         {
             ConnectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Always;
             ConnectionInfo.RDGatewayUseConnectionCredentials = useConnectionCredentials;
-            ExpectedPropertyList.AddRange(new []
+            ExpectedPropertyList.AddRange(new[]
             {
                 nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayHostname),
                 nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUsername),

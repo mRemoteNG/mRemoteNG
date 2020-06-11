@@ -28,14 +28,15 @@ namespace mRemoteNGTests.IntegrationTests
             var keyProvider = Substitute.For<IKeyProvider>();
             keyProvider.GetKey().Returns(_key);
             var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.CCM).Build();
-            _serializer = new XmlCredentialPasswordEncryptorDecorator(cryptoProvider, new XmlCredentialRecordSerializer());
+            _serializer =
+                new XmlCredentialPasswordEncryptorDecorator(cryptoProvider, new XmlCredentialRecordSerializer());
             _deserializer = new XmlCredentialPasswordDecryptorDecorator(new XmlCredentialRecordDeserializer());
         }
 
         [Test]
         public void WeCanSerializeAndDeserializeXmlCredentials()
         {
-            var credentials = new[] { new CredentialRecord(), new CredentialRecord() };
+            var credentials = new[] {new CredentialRecord(), new CredentialRecord()};
             var serializedCredentials = _serializer.Serialize(credentials, _key);
             var deserializedCredentials = _deserializer.Deserialize(serializedCredentials, _key);
             Assert.That(deserializedCredentials.Count(), Is.EqualTo(2));

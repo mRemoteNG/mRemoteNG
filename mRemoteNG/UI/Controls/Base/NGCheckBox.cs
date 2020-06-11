@@ -120,14 +120,12 @@ namespace mRemoteNG.UI.Controls.Base
             }
 
             if (Checked)
-            {
                 // | \uE001 | &#xE001; |  |  is the tick/check mark and it exists in Segoe UI Symbol at least...
                 e.Graphics.DrawString("\uE001", new Font("Segoe UI Symbol", 7.75f), new SolidBrush(glyph), -4, 0);
-            }
 
             var textRect = new Rectangle(_textXCoord, 0, Width - 16, Height);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
-                                  TextFormatFlags.PathEllipsis);
+                TextFormatFlags.PathEllipsis);
         }
 
         private void InitializeComponent()

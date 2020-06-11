@@ -12,10 +12,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         public void UserDomainPropertiesShown_WhenAuthModeIsWindows()
         {
             ConnectionInfo.VNCAuthMode = ProtocolVNC.AuthMode.AuthWin;
-            ExpectedPropertyList.AddRange(new []
+            ExpectedPropertyList.AddRange(new[]
             {
                 nameof(ConnectionInfo.Username),
-                nameof(ConnectionInfo.Domain),
+                nameof(ConnectionInfo.Domain)
             });
         }
 
@@ -30,7 +30,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.VNCProxyIP),
                 nameof(ConnectionInfo.VNCProxyPort),
                 nameof(ConnectionInfo.VNCProxyUsername),
-                nameof(ConnectionInfo.VNCProxyPassword),
+                nameof(ConnectionInfo.VNCProxyPassword)
             });
         }
     }

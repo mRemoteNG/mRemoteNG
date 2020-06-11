@@ -10,7 +10,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.App
 {
-	public static class Import
+    public static class Import
     {
         public static void ImportFromFile(ContainerInfo importDestinationContainer)
         {
@@ -36,12 +36,13 @@ namespace mRemoteNG.App
                     if (openFileDialog.ShowDialog() != DialogResult.OK)
                         return;
 
-					HeadlessFileImport(
-						openFileDialog.FileNames, 
-						importDestinationContainer, 
-						Runtime.ConnectionsService,
-						fileName => MessageBox.Show(string.Format(Language.ImportFileFailedContent, fileName), Language.AskUpdatesMainInstruction,
-							MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1));
+                    HeadlessFileImport(
+                        openFileDialog.FileNames,
+                        importDestinationContainer,
+                        Runtime.ConnectionsService,
+                        fileName => MessageBox.Show(string.Format(Language.ImportFileFailedContent, fileName),
+                            Language.AskUpdatesMainInstruction,
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1));
                 }
             }
             catch (Exception ex)
@@ -51,39 +52,38 @@ namespace mRemoteNG.App
         }
 
         public static void HeadlessFileImport(
-	        IEnumerable<string> filePaths, 
-	        ContainerInfo importDestinationContainer, 
-	        ConnectionsService connectionsService,
-	        Action<string> exceptionAction = null)
+            IEnumerable<string> filePaths,
+            ContainerInfo importDestinationContainer,
+            ConnectionsService connectionsService,
+            Action<string> exceptionAction = null)
         {
-	        using (connectionsService.BatchedSavingContext())
-	        {
-		        foreach (var fileName in filePaths)
-		        {
-			        try
-			        {
-				        var importer = BuildConnectionImporterFromFileExtension(fileName);
-				        importer.Import(fileName, importDestinationContainer);
-			        }
-			        catch (Exception ex)
-			        {
-				        exceptionAction?.Invoke(fileName);
-				        Runtime.MessageCollector.AddExceptionMessage($"Error occurred while importing file '{fileName}'.", ex);
-			        }
-		        }
-	        }
-		}
+            using (connectionsService.BatchedSavingContext())
+            {
+                foreach (var fileName in filePaths)
+                    try
+                    {
+                        var importer = BuildConnectionImporterFromFileExtension(fileName);
+                        importer.Import(fileName, importDestinationContainer);
+                    }
+                    catch (Exception ex)
+                    {
+                        exceptionAction?.Invoke(fileName);
+                        Runtime.MessageCollector.AddExceptionMessage(
+                            $"Error occurred while importing file '{fileName}'.", ex);
+                    }
+            }
+        }
 
         public static void ImportFromActiveDirectory(string ldapPath,
-                                                     ContainerInfo importDestinationContainer,
-                                                     bool importSubOu)
+            ContainerInfo importDestinationContainer,
+            bool importSubOu)
         {
             try
             {
-	            using (Runtime.ConnectionsService.BatchedSavingContext())
-	            {
-					ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOu);
-	            }
+                using (Runtime.ConnectionsService.BatchedSavingContext())
+                {
+                    ActiveDirectoryImporter.Import(ldapPath, importDestinationContainer, importSubOu);
+                }
             }
             catch (Exception ex)
             {
@@ -92,16 +92,16 @@ namespace mRemoteNG.App
         }
 
         public static void ImportFromPortScan(IEnumerable<ScanHost> hosts,
-                                              ProtocolType protocol,
-                                              ContainerInfo importDestinationContainer)
+            ProtocolType protocol,
+            ContainerInfo importDestinationContainer)
         {
             try
             {
-	            using (Runtime.ConnectionsService.BatchedSavingContext())
-	            {
-					var importer = new PortScanImporter(protocol);
-					importer.Import(hosts, importDestinationContainer);
-	            }
+                using (Runtime.ConnectionsService.BatchedSavingContext())
+                {
+                    var importer = new PortScanImporter(protocol);
+                    importer.Import(hosts, importDestinationContainer);
+                }
             }
             catch (Exception ex)
             {

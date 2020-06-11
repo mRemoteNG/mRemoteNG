@@ -64,7 +64,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 lblCheck1.ForeColor = Color.DarkOliveGreen;
                 lblCheck1.Text = "RDP (Remote Desktop) " + Language.CheckSucceeded;
                 txtCheck1.Text = string.Format(Language.CcRDPOK, string.Join(", ", supportedVersions));
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "RDP versions installed: "+ string.Join(",", supportedVersions), true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                    "RDP versions installed: " + string.Join(",", supportedVersions), true);
             }
             else
             {
@@ -74,7 +75,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 txtCheck1.Text = string.Format(Language.CcRDPFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "RDP " + Language.CcNotInstalledProperly, true);
+                    "RDP " + Language.CcNotInstalledProperly, true);
             }
         }
 
@@ -109,7 +110,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 txtCheck2.Text = string.Format(Language.CcVNCFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "VNC " + Language.CcNotInstalledProperly, true);
+                    "VNC " + Language.CcNotInstalledProperly, true);
             }
         }
 
@@ -118,13 +119,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlCheck3.Visible = true;
             string pPath;
             if (Settings.Default.UseCustomPuttyPath == false)
-            {
                 pPath = GeneralAppInfo.HomePath + "\\PuTTYNG.exe";
-            }
             else
-            {
                 pPath = Settings.Default.CustomPuttyPath;
-            }
 
             if (File.Exists(pPath))
             {
@@ -145,9 +142,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 txtCheck3.Text = Language.CcPuttyFailed;
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "PuTTY " + Language.CcNotInstalledProperly, true);
+                    "PuTTY " + Language.CcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "File " + pPath + " does not exist.",
-                                                    true);
+                    true);
             }
         }
 
@@ -176,7 +173,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 txtCheck4.Text = string.Format(Language.CcICAFailed, GeneralAppInfo.UrlForum);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "ICA " + Language.CcNotInstalledProperly, true);
+                    "ICA " + Language.CcNotInstalledProperly, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
             }
         }

@@ -112,10 +112,7 @@ namespace mRemoteNG.Connection
 
         private void SetDefaults()
         {
-            if (Port == 0)
-            {
-                SetDefaultPort();
-            }
+            if (Port == 0) SetDefaultPort();
         }
 
         public int GetDefaultPort()
@@ -226,7 +223,7 @@ namespace mRemoteNG.Connection
                         $"Could not retrieve property data for property '{propertyName}' on parent node '{Parent?.Name}'"
                     );
 
-                inheritedValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
+                inheritedValue = (TPropertyType) parentPropertyInfo.GetValue(Parent, null);
                 return true;
             }
             catch (Exception e)
@@ -247,29 +244,29 @@ namespace mRemoteNG.Connection
                 switch (protocol)
                 {
                     case ProtocolType.RDP:
-                        return (int)RdpProtocol6.Defaults.Port;
+                        return (int) RdpProtocol6.Defaults.Port;
                     case ProtocolType.VNC:
-                        return (int)ProtocolVNC.Defaults.Port;
+                        return (int) ProtocolVNC.Defaults.Port;
                     case ProtocolType.SSH1:
-                        return (int)ProtocolSSH1.Defaults.Port;
+                        return (int) ProtocolSSH1.Defaults.Port;
                     case ProtocolType.SSH2:
-                        return (int)ProtocolSSH2.Defaults.Port;
+                        return (int) ProtocolSSH2.Defaults.Port;
                     case ProtocolType.Telnet:
-                        return (int)ProtocolTelnet.Defaults.Port;
+                        return (int) ProtocolTelnet.Defaults.Port;
                     case ProtocolType.Rlogin:
-                        return (int)ProtocolRlogin.Defaults.Port;
+                        return (int) ProtocolRlogin.Defaults.Port;
                     case ProtocolType.RAW:
-                        return (int)RawProtocol.Defaults.Port;
+                        return (int) RawProtocol.Defaults.Port;
                     case ProtocolType.HTTP:
-                        return (int)ProtocolHTTP.Defaults.Port;
+                        return (int) ProtocolHTTP.Defaults.Port;
                     case ProtocolType.HTTPS:
-                        return (int)ProtocolHTTPS.Defaults.Port;
+                        return (int) ProtocolHTTPS.Defaults.Port;
                     case ProtocolType.ICA:
-                        return (int)IcaProtocol.Defaults.Port;
+                        return (int) IcaProtocol.Defaults.Port;
                     case ProtocolType.PowerShell:
-                        return (int)ProtocolPowerShell.Defaults.Port;
+                        return (int) ProtocolPowerShell.Defaults.Port;
                     case ProtocolType.IntApp:
-                        return (int)IntegratedProgram.Defaults.Port;
+                        return (int) IntegratedProgram.Defaults.Port;
                 }
 
                 return 0;
@@ -296,17 +293,20 @@ namespace mRemoteNG.Connection
 
         private void SetProtocolDefaults()
         {
-            Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Settings.Default.ConDefaultProtocol);
+            Protocol = (ProtocolType) Enum.Parse(typeof(ProtocolType), Settings.Default.ConDefaultProtocol);
             ExtApp = Settings.Default.ConDefaultExtApp;
             Port = 0;
             PuttySession = Settings.Default.ConDefaultPuttySession;
-            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength)Enum.Parse(typeof(IcaProtocol.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
+            ICAEncryptionStrength = (IcaProtocol.EncryptionStrength) Enum.Parse(typeof(IcaProtocol.EncryptionStrength),
+                Settings.Default.ConDefaultICAEncryptionStrength);
             UseConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
-            RDPAuthenticationLevel = (AuthenticationLevel)Enum.Parse(typeof(AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
+            RDPAuthenticationLevel = (AuthenticationLevel) Enum.Parse(typeof(AuthenticationLevel),
+                Settings.Default.ConDefaultRDPAuthenticationLevel);
             RDPMinutesToIdleTimeout = Settings.Default.ConDefaultRDPMinutesToIdleTimeout;
             RDPAlertIdleTimeout = Settings.Default.ConDefaultRDPAlertIdleTimeout;
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
-            RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
+            RenderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine),
+                Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
             UseVmId = Settings.Default.ConDefaultUseVmId;
             UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
@@ -314,9 +314,12 @@ namespace mRemoteNG.Connection
 
         private void SetRdGatewayDefaults()
         {
-            RDGatewayUsageMethod = (RDGatewayUsageMethod)Enum.Parse(typeof(RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
+            RDGatewayUsageMethod = (RDGatewayUsageMethod) Enum.Parse(typeof(RDGatewayUsageMethod),
+                Settings.Default.ConDefaultRDGatewayUsageMethod);
             RDGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
-            RDGatewayUseConnectionCredentials = (RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
+            RDGatewayUseConnectionCredentials = (RDGatewayUseConnectionCredentials) Enum.Parse(
+                typeof(RDGatewayUseConnectionCredentials),
+                Settings.Default.ConDefaultRDGatewayUseConnectionCredentials);
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
@@ -324,9 +327,9 @@ namespace mRemoteNG.Connection
 
         private void SetAppearanceDefaults()
         {
-            Resolution = (RDPResolutions)Enum.Parse(typeof(RDPResolutions), Settings.Default.ConDefaultResolution);
+            Resolution = (RDPResolutions) Enum.Parse(typeof(RDPResolutions), Settings.Default.ConDefaultResolution);
             AutomaticResize = Settings.Default.ConDefaultAutomaticResize;
-            Colors = (RDPColors)Enum.Parse(typeof(RDPColors), Settings.Default.ConDefaultColors);
+            Colors = (RDPColors) Enum.Parse(typeof(RDPColors), Settings.Default.ConDefaultColors);
             CacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
             DisplayWallpaper = Settings.Default.ConDefaultDisplayWallpaper;
             DisplayThemes = Settings.Default.ConDefaultDisplayThemes;
@@ -347,8 +350,9 @@ namespace mRemoteNG.Connection
             RedirectPorts = Settings.Default.ConDefaultRedirectPorts;
             RedirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
             RedirectAudioCapture = Settings.Default.ConDefaultRedirectAudioCapture;
-            RedirectSound = (RDPSounds)Enum.Parse(typeof(RDPSounds), Settings.Default.ConDefaultRedirectSound);
-            SoundQuality = (RDPSoundQuality)Enum.Parse(typeof(RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
+            RedirectSound = (RDPSounds) Enum.Parse(typeof(RDPSounds), Settings.Default.ConDefaultRedirectSound);
+            SoundQuality =
+                (RDPSoundQuality) Enum.Parse(typeof(RDPSoundQuality), Settings.Default.ConDefaultSoundQuality);
         }
 
         private void SetMiscDefaults()
@@ -362,16 +366,22 @@ namespace mRemoteNG.Connection
 
         private void SetVncDefaults()
         {
-            VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression), Settings.Default.ConDefaultVNCCompression);
-            VNCEncoding = (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
-            VNCAuthMode = (ProtocolVNC.AuthMode)Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
-            VNCProxyType = (ProtocolVNC.ProxyType)Enum.Parse(typeof(ProtocolVNC.ProxyType), Settings.Default.ConDefaultVNCProxyType);
+            VNCCompression = (ProtocolVNC.Compression) Enum.Parse(typeof(ProtocolVNC.Compression),
+                Settings.Default.ConDefaultVNCCompression);
+            VNCEncoding =
+                (ProtocolVNC.Encoding) Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
+            VNCAuthMode =
+                (ProtocolVNC.AuthMode) Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
+            VNCProxyType = (ProtocolVNC.ProxyType) Enum.Parse(typeof(ProtocolVNC.ProxyType),
+                Settings.Default.ConDefaultVNCProxyType);
             VNCProxyIP = Settings.Default.ConDefaultVNCProxyIP;
             VNCProxyPort = Settings.Default.ConDefaultVNCProxyPort;
             VNCProxyUsername = Settings.Default.ConDefaultVNCProxyUsername;
             VNCProxyPassword = Settings.Default.ConDefaultVNCProxyPassword;
-            VNCColors = (ProtocolVNC.Colors)Enum.Parse(typeof(ProtocolVNC.Colors), Settings.Default.ConDefaultVNCColors);
-            VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), Settings.Default.ConDefaultVNCSmartSizeMode);
+            VNCColors = (ProtocolVNC.Colors) Enum.Parse(typeof(ProtocolVNC.Colors),
+                Settings.Default.ConDefaultVNCColors);
+            VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode) Enum.Parse(typeof(ProtocolVNC.SmartSizeMode),
+                Settings.Default.ConDefaultVNCSmartSizeMode);
             VNCViewOnly = Settings.Default.ConDefaultVNCViewOnly;
         }
 
@@ -384,7 +394,8 @@ namespace mRemoteNG.Connection
         private void SetNewOpenConnectionList()
         {
             OpenConnections = new ProtocolList();
-            OpenConnections.CollectionChanged += (sender, args) => RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));
+            OpenConnections.CollectionChanged += (sender, args) =>
+                RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));
         }
 
         #endregion

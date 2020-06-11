@@ -25,6 +25,9 @@ namespace mRemoteNG.Credential
             Id = id.FirstOrDefault();
         }
 
-        public override string ToString() => Language.CredentialUnavailable;
+        public override string ToString()
+        {
+            return Language.CredentialUnavailable;
+        }
     }
 }

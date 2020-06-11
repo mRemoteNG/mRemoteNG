@@ -101,11 +101,9 @@ namespace mRemoteNG.UI.Controls
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 // ReSharper disable once UseNullPropagation
                 if (components != null)
                     components.Dispose();
-            }
 
             base.Dispose(disposing);
         }
@@ -195,7 +193,7 @@ namespace mRemoteNG.UI.Controls
             this.Octet1.BackColor = System.Drawing.SystemColors.Menu;
             this.Octet1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Octet1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular,
-                                                       System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.Octet1.Location = new System.Drawing.Point(1, 1);
             this.Octet1.MaxLength = 3;
             this.Octet1.Name = "Octet1";
@@ -233,7 +231,7 @@ namespace mRemoteNG.UI.Controls
             // 
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.Name = "IPTextBox";
             this.Size = new System.Drawing.Size(124, 18);
             this.panel1.ResumeLayout(false);
@@ -308,7 +306,9 @@ namespace mRemoteNG.UI.Controls
             }
             //Do nothing if the keypress is not numeral, backspace, or '.'
             else
+            {
                 e.Handled = true;
+            }
         }
 
         /* Performs KeyPress analysis and handling to ensure a valid ip octet is
@@ -352,7 +352,9 @@ namespace mRemoteNG.UI.Controls
                 }
             }
             else
+            {
                 e.Handled = true;
+            }
         }
 
         /* Performs KeyPress analysis and handling to ensure a valid ip octet is
@@ -396,7 +398,9 @@ namespace mRemoteNG.UI.Controls
                 }
             }
             else
+            {
                 e.Handled = true;
+            }
         }
 
         /* Performs KeyPress analysis and handling to ensure a valid ip octet is
@@ -422,13 +426,15 @@ namespace mRemoteNG.UI.Controls
                 }
             }
             else
+            {
                 e.Handled = true;
+            }
         }
 
         // Selects All text in a box for overwriting upon entering the box
         private void Box_Enter(object sender, EventArgs e)
         {
-            var tb = (TextBox)sender;
+            var tb = (TextBox) sender;
             tb.SelectAll();
         }
     }

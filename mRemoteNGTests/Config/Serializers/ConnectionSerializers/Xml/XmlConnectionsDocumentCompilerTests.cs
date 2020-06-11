@@ -31,7 +31,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             _connectionTreeModel = SetupConnectionTreeModel();
             _cryptographyProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
             var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
-                _cryptographyProvider, 
+                _cryptographyProvider,
                 _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
             _documentCompiler = new XmlConnectionsDocumentCompiler(_cryptographyProvider, connectionNodeSerializer);
@@ -47,7 +47,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         [Test]
         public void DocumentHasRootConnectionElement()
         {
-            var xdoc =_documentCompiler.CompileDocument(_connectionTreeModel, false);
+            var xdoc = _documentCompiler.CompileDocument(_connectionTreeModel, false);
             var rootElementName = xdoc.Root?.Name.LocalName;
             Assert.That(rootElementName, Is.EqualTo("Connections"));
         }
@@ -99,14 +99,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 
         private void BuildTreeNodes()
         {
-            _folder1 = new ContainerInfo { Name = "folder1" };
-            _folder2 = new ContainerInfo { Name = "folder2" };
-            _folder3 = new ContainerInfo { Name = "folder3" };
-            _con0 = new ConnectionInfo { Name = "con0" };
-            _con1 = new ConnectionInfo { Name = "con1" };
-            _con2 = new ConnectionInfo { Name = "con2" };
-            _con3 = new ConnectionInfo { Name = "con3" };
-            _con4 = new ConnectionInfo { Name = "con4" };
+            _folder1 = new ContainerInfo {Name = "folder1"};
+            _folder2 = new ContainerInfo {Name = "folder2"};
+            _folder3 = new ContainerInfo {Name = "folder3"};
+            _con0 = new ConnectionInfo {Name = "con0"};
+            _con1 = new ConnectionInfo {Name = "con1"};
+            _con2 = new ConnectionInfo {Name = "con2"};
+            _con3 = new ConnectionInfo {Name = "con3"};
+            _con4 = new ConnectionInfo {Name = "con4"};
         }
     }
 }

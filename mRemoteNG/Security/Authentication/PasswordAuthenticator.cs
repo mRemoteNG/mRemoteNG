@@ -15,8 +15,8 @@ namespace mRemoteNG.Security.Authentication
         public SecureString LastAuthenticatedPassword { get; private set; }
 
         public PasswordAuthenticator(ICryptographyProvider cryptographyProvider,
-                                     string cipherText,
-                                     Func<Optional<SecureString>> authenticationRequestor)
+            string cipherText,
+            Func<Optional<SecureString>> authenticationRequestor)
         {
             _cryptographyProvider = cryptographyProvider.ThrowIfNull(nameof(cryptographyProvider));
             _cipherText = cipherText.ThrowIfNullOrEmpty(nameof(cipherText));

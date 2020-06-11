@@ -22,8 +22,10 @@ namespace mRemoteNGTests.TestHelpers
         {
             var model = new ConnectionTreeModel();
             var root = new RootNodeInfo(RootNodeType.Connection);
-            var folder1 = new ContainerInfo { Name = "folder1", Username = "user1", Domain = "domain1", Password = "password1" };
-            var folder2 = new ContainerInfo { Name = "folder2", Username = "user2", Domain = "domain2", Password = "password2" };
+            var folder1 = new ContainerInfo
+                {Name = "folder1", Username = "user1", Domain = "domain1", Password = "password1"};
+            var folder2 = new ContainerInfo
+                {Name = "folder2", Username = "user2", Domain = "domain2", Password = "password2"};
             var folder3 = new ContainerInfo
             {
                 Name = "folder3",
@@ -34,8 +36,10 @@ namespace mRemoteNGTests.TestHelpers
                     Password = true
                 }
             };
-            var con1 = new ConnectionInfo { Name = "Con1", Username = "user1", Domain = "domain1", Password = "password1" };
-            var con2 = new ConnectionInfo { Name = "Con2", Username = "user2", Domain = "domain2", Password = "password2" };
+            var con1 = new ConnectionInfo
+                {Name = "Con1", Username = "user1", Domain = "domain1", Password = "password1"};
+            var con2 = new ConnectionInfo
+                {Name = "Con2", Username = "user2", Domain = "domain2", Password = "password2"};
             var con3 = new ContainerInfo
             {
                 Name = "con3",

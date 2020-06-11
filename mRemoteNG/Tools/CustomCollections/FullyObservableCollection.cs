@@ -17,8 +17,8 @@ namespace mRemoteNG.Tools.CustomCollections
 
         public T this[int index]
         {
-            get { return _list[index]; }
-            set { _list[index] = value; }
+            get => _list[index];
+            set => _list[index] = value;
         }
 
         public FullyObservableCollection()
@@ -102,7 +102,7 @@ namespace mRemoteNG.Tools.CustomCollections
         private void ItemOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (sender is T)
-                RaiseCollectionChangedEvent(ActionType.Updated, new[] {(T)sender});
+                RaiseCollectionChangedEvent(ActionType.Updated, new[] {(T) sender});
         }
 
         public event EventHandler<CollectionUpdatedEventArgs<T>> CollectionUpdated;
@@ -114,11 +114,30 @@ namespace mRemoteNG.Tools.CustomCollections
 
         #region Forwarded method calls
 
-        public int IndexOf(T item) => _list.IndexOf(item);
-        public IEnumerator<T> GetEnumerator() => _list.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => _list.GetEnumerator();
-        public bool Contains(T item) => _list.Contains(item);
-        public void CopyTo(T[] array, int arrayIndex) => _list.CopyTo(array, arrayIndex);
+        public int IndexOf(T item)
+        {
+            return _list.IndexOf(item);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _list.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _list.GetEnumerator();
+        }
+
+        public bool Contains(T item)
+        {
+            return _list.Contains(item);
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            _list.CopyTo(array, arrayIndex);
+        }
 
         #endregion
     }

@@ -83,8 +83,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 PuttySessionsManager.Instance.AddSessions();
             }
 
-            Settings.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
-            Settings.Default.UVNCSCPort = (int)numUVNCSCPort.Value;
+            Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
+            Settings.Default.UVNCSCPort = (int) numUVNCSCPort.Value;
         }
 
         #endregion
@@ -134,7 +134,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             catch (Exception ex)
             {
                 MessageBox.Show(Language.ErrorCouldNotLaunchPutty, Application.ProductName,
-                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 Runtime.MessageCollector.AddExceptionMessage(Language.ErrorCouldNotLaunchPutty, ex);
             }
         }

@@ -19,7 +19,9 @@ namespace mRemoteNGTests.IntegrationTests
         private XmlConnectionsSerializer _serializer;
         private XmlConnectionsDeserializer _deserializer;
         private ConnectionTreeModel _originalModel;
-        private readonly ICryptoProviderFactory _cryptoFactory = new CryptoProviderFactory(BlockCipherEngines.AES , BlockCipherModes.GCM);
+
+        private readonly ICryptoProviderFactory _cryptoFactory =
+            new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM);
 
         [SetUp]
         public void Setup()
@@ -27,7 +29,7 @@ namespace mRemoteNGTests.IntegrationTests
             _originalModel = SetupConnectionTreeModel();
             var cryptoProvider = _cryptoFactory.Build();
             var nodeSerializer = new XmlConnectionNodeSerializer27(
-                cryptoProvider, 
+                cryptoProvider,
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
             _serializer = new XmlConnectionsSerializer(cryptoProvider, nodeSerializer);
@@ -64,10 +66,11 @@ namespace mRemoteNGTests.IntegrationTests
         [Test]
         public void SerializeAndDeserializePropertiesWithInternationalCharacters()
         {
-            var originalConnectionInfo = new ConnectionInfo {Name = "con1", Description = "£°úg¶┬ä" };
+            var originalConnectionInfo = new ConnectionInfo {Name = "con1", Description = "£°úg¶┬ä"};
             var serializedContent = _serializer.Serialize(originalConnectionInfo);
             var deserializedModel = _deserializer.Deserialize(serializedContent);
-            var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
+            var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList()
+                .First(node => node.Name == originalConnectionInfo.Name);
             Assert.That(deserializedConnectionInfo.Description, Is.EqualTo(originalConnectionInfo.Description));
         }
 
@@ -78,7 +81,7 @@ namespace mRemoteNGTests.IntegrationTests
             var cryptoProvider = _cryptoFactory.Build();
             cryptoProvider.KeyDerivationIterations = 5000;
             var nodeSerializer = new XmlConnectionNodeSerializer27(
-                cryptoProvider, 
+                cryptoProvider,
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
             _serializer = new XmlConnectionsSerializer(cryptoProvider, nodeSerializer);
@@ -92,14 +95,15 @@ namespace mRemoteNGTests.IntegrationTests
         [Test]
         public void GuidCreatedIfNonExistedInXml()
         {
-            var originalConnectionInfo = new ConnectionInfo { Name = "con1" };
+            var originalConnectionInfo = new ConnectionInfo {Name = "con1"};
             var serializedContent = _serializer.Serialize(originalConnectionInfo);
 
             // remove GUID from connection xml
             serializedContent = serializedContent.Replace(originalConnectionInfo.ConstantID, "");
 
             var deserializedModel = _deserializer.Deserialize(serializedContent);
-            var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList().First(node => node.Name == originalConnectionInfo.Name);
+            var deserializedConnectionInfo = deserializedModel.GetRecursiveChildList()
+                .First(node => node.Name == originalConnectionInfo.Name);
             Assert.That(Guid.TryParse(deserializedConnectionInfo.ConstantID, out var guid));
         }
 
@@ -132,7 +136,8 @@ namespace mRemoteNGTests.IntegrationTests
         public void AllInheritanceCorrectWhenSerializingThenDeserializing()
         {
             var originalConnectionInfo = new ConnectionInfo();
-            originalConnectionInfo.Inheritance.ToggleAllBooleanProperties(excludeProperties: nameof(ConnectionInfoInheritance.EverythingInherited));
+            originalConnectionInfo.Inheritance.ToggleAllBooleanProperties(
+                excludeProperties: nameof(ConnectionInfoInheritance.EverythingInherited));
             var container = new ContainerInfo();
             container.AddChild(originalConnectionInfo);
 
@@ -173,14 +178,14 @@ namespace mRemoteNGTests.IntegrationTests
              */
             var connectionTreeModel = new ConnectionTreeModel();
             var rootNode = new RootNodeInfo(RootNodeType.Connection);
-            var folder1 = new ContainerInfo { Name = "folder1" };
-            var folder2 = new ContainerInfo { Name = "folder2" };
-            var folder3 = new ContainerInfo { Name = "folder3" };
-            var con0 = new ConnectionInfo { Name = "con0" };
-            var con1 = new ConnectionInfo { Name = "con1" };
-            var con2 = new ConnectionInfo { Name = "con2" };
-            var con3 = new ConnectionInfo { Name = "con3" };
-            var con4 = new ConnectionInfo { Name = "con4" };
+            var folder1 = new ContainerInfo {Name = "folder1"};
+            var folder2 = new ContainerInfo {Name = "folder2"};
+            var folder3 = new ContainerInfo {Name = "folder3"};
+            var con0 = new ConnectionInfo {Name = "con0"};
+            var con1 = new ConnectionInfo {Name = "con1"};
+            var con2 = new ConnectionInfo {Name = "con2"};
+            var con3 = new ConnectionInfo {Name = "con3"};
+            var con4 = new ConnectionInfo {Name = "con4"};
             rootNode.AddChild(folder1);
             rootNode.AddChild(folder2);
             rootNode.AddChild(con0);

@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {
-	public class XmlRootNodeSerializerTests
+    public class XmlRootNodeSerializerTests
     {
         private XmlRootNodeSerializer _rootNodeSerializer;
         private ICryptographyProvider _cryptographyProvider;
@@ -34,7 +34,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         }
 
         [Test]
-		[SetUICulture("en-US")]
+        [SetUICulture("en-US")]
         public void RootNodeInfoNameSerialized()
         {
             var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
@@ -76,7 +76,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         [TestCase(false)]
         public void FullFileEncryptionFlagSerialized(bool fullFileEncryption)
         {
-            var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version, fullFileEncryption);
+            var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version,
+                fullFileEncryption);
             var attributeValue = element.Attribute(XName.Get("FullFileEncryption"))?.Value;
             Assert.That(bool.Parse(attributeValue), Is.EqualTo(fullFileEncryption));
         }
@@ -90,7 +91,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             _rootNodeInfo.PasswordString = customPassword;
             var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
             var attributeValue = element.Attribute(XName.Get("Protected"))?.Value;
-            var attributeValuePlainText = _cryptographyProvider.Decrypt(attributeValue, _rootNodeInfo.PasswordString.ConvertToSecureString());
+            var attributeValuePlainText =
+                _cryptographyProvider.Decrypt(attributeValue, _rootNodeInfo.PasswordString.ConvertToSecureString());
             Assert.That(attributeValuePlainText, Is.EqualTo(expectedPlainText));
         }
 
@@ -110,12 +112,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
                 get
                 {
                     foreach (var engine in Enum.GetValues(typeof(BlockCipherEngines)))
-                    {
-                        foreach (var mode in Enum.GetValues(typeof(BlockCipherModes)))
-                        {
-                            yield return new TestCaseData(engine, mode);
-                        }
-                    }
+                    foreach (var mode in Enum.GetValues(typeof(BlockCipherModes)))
+                        yield return new TestCaseData(engine, mode);
                 }
             }
         }

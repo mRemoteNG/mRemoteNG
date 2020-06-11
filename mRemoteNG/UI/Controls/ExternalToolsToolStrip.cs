@@ -73,7 +73,7 @@ namespace mRemoteNG.UI.Controls
                 foreach (var tool in Runtime.ExternalToolsService.ExternalTools)
                 {
                     if (!tool.ShowOnToolbar) continue;
-                    var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
+                    var button = (ToolStripButton) Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
                     if (CMenToolbarShowText.Checked)
                         button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
                     else
@@ -96,17 +96,19 @@ namespace mRemoteNG.UI.Controls
 
         private static void tsExtAppEntry_Click(object sender, EventArgs e)
         {
-            var extA = (ExternalTool)((ToolStripButton)sender).Tag;
+            var extA = (ExternalTool) ((ToolStripButton) sender).Tag;
 
             var selectedTreeNode = Windows.TreeForm.SelectedNode;
-            if (selectedTreeNode != null && selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection |
-                selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
+            if (selectedTreeNode != null && (selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection) |
+                (selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession))
+            {
                 extA.Start(selectedTreeNode);
+            }
             else
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    "No connection was selected, external tool may return errors.",
-                                                    true);
+                    "No connection was selected, external tool may return errors.",
+                    true);
                 extA.Start();
             }
         }
@@ -114,14 +116,12 @@ namespace mRemoteNG.UI.Controls
         public void SwitchToolBarText(bool show)
         {
             foreach (ToolStripButton tItem in Items)
-            {
                 if (show)
                     tItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
                 else
                     tItem.DisplayStyle = tItem.Image != null
                         ? ToolStripItemDisplayStyle.Image
                         : ToolStripItemDisplayStyle.ImageAndText;
-            }
 
             CMenToolbarShowText.Checked = show;
         }

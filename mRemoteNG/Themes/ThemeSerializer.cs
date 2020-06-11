@@ -53,14 +53,12 @@ namespace mRemoteNG.Themes
             //Cause we cannot default the theme for the default theme
             var extColorLoader = new MremoteNGPaletteManipulator(bytes, defaultTheme?.ExtendedPalette);
             var loadedTheme = new ThemeInfo(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename,
-                                            VisualStudioToolStripExtender.VsVersion.Vs2015, extColorLoader.getColors());
+                VisualStudioToolStripExtender.VsVersion.Vs2015, extColorLoader.getColors());
             if (new[] {"darcula", "vs2015blue", "vs2015dark", "vs2015light"}.Contains(
-                                                                                      Path
-                                                                                          .GetFileNameWithoutExtension(filename))
+                Path
+                    .GetFileNameWithoutExtension(filename))
             )
-            {
                 loadedTheme.IsThemeBase = true;
-            }
 
             loadedTheme.IsExtendable = true;
             return loadedTheme;

@@ -4,6 +4,7 @@ using mRemoteNG.Config;
 using mRemoteNG.Credential;
 using NSubstitute;
 using NUnit.Framework;
+
 // ReSharper disable ObjectCreationAsStatement
 
 namespace mRemoteNGTests.Credential
@@ -33,13 +34,15 @@ namespace mRemoteNGTests.Credential
         [Test]
         public void CantProvideNullRepoLoaderToCtor()
         {
-            Assert.Throws<ArgumentNullException>(() => new CredentialServiceFacade(_credentialRepositoryList, null, _saver));
+            Assert.Throws<ArgumentNullException>(() =>
+                new CredentialServiceFacade(_credentialRepositoryList, null, _saver));
         }
 
         [Test]
         public void CantProvideNullRepoSaverToCtor()
         {
-            Assert.Throws<ArgumentNullException>(() => new CredentialServiceFacade(_credentialRepositoryList, _loader, null));
+            Assert.Throws<ArgumentNullException>(() =>
+                new CredentialServiceFacade(_credentialRepositoryList, _loader, null));
         }
 
         [Test]
@@ -77,7 +80,7 @@ namespace mRemoteNGTests.Credential
         public void LoadRepoListsAddsRepoFromLoader()
         {
             var repo = Substitute.For<ICredentialRepository>();
-            _loader.Load().Returns(new[] { repo });
+            _loader.Load().Returns(new[] {repo});
             _credentialService.LoadRepositoryList();
             _credentialRepositoryList.Received().AddProvider(repo);
         }

@@ -21,7 +21,9 @@ namespace mRemoteNGTests.UI.Controls
         {
             _textBoxExtensionsTestForm.Dispose();
             while (_textBoxExtensionsTestForm.Disposing)
-            { }
+            {
+            }
+
             _textBoxExtensionsTestForm = null;
         }
 

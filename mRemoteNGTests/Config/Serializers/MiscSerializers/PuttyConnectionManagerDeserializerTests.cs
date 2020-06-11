@@ -104,7 +104,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 
         private ConnectionInfo GetSshConnection()
         {
-            var sshFolder = _rootImportedFolder.Children.OfType<ContainerInfo>().First(node => node.Name == "SSHFolder");
+            var sshFolder = _rootImportedFolder.Children.OfType<ContainerInfo>()
+                .First(node => node.Name == "SSHFolder");
             return sshFolder.Children.First();
         }
     }

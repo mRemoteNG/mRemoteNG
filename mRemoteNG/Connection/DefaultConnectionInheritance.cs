@@ -29,8 +29,8 @@ namespace mRemoteNG.Connection
                 if (propertyFromSettings == null)
                 {
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                        $"DefaultConInherit-LoadFrom: Could not load {property.Name}",
-                                                        true);
+                        $"DefaultConInherit-LoadFrom: Could not load {property.Name}",
+                        true);
                     continue;
                 }
 
@@ -40,7 +40,7 @@ namespace mRemoteNG.Connection
         }
 
         public void SaveTo<TDestination>(TDestination destinationInstance,
-                                         Func<string, string> propertyNameMutator = null)
+            Func<string, string> propertyNameMutator = null)
         {
             if (propertyNameMutator == null) propertyNameMutator = a => a;
             var inheritanceProperties = GetProperties();
@@ -51,8 +51,8 @@ namespace mRemoteNG.Connection
                 if (propertyFromSettings == null)
                 {
                     Runtime.MessageCollector?.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                         $"DefaultConInherit-SaveTo: Could not load {property.Name}",
-                                                         true);
+                        $"DefaultConInherit-SaveTo: Could not load {property.Name}",
+                        true);
                     continue;
                 }
 

@@ -4,26 +4,26 @@
     {
         public bool AllowDebugMessages
         {
-            get { return Settings.Default.TextLogMessageWriterWriteDebugMsgs; }
-            set { Settings.Default.TextLogMessageWriterWriteDebugMsgs = value; }
+            get => Settings.Default.TextLogMessageWriterWriteDebugMsgs;
+            set => Settings.Default.TextLogMessageWriterWriteDebugMsgs = value;
         }
 
         public bool AllowInfoMessages
         {
-            get { return Settings.Default.TextLogMessageWriterWriteInfoMsgs; }
-            set { Settings.Default.TextLogMessageWriterWriteInfoMsgs = value; }
+            get => Settings.Default.TextLogMessageWriterWriteInfoMsgs;
+            set => Settings.Default.TextLogMessageWriterWriteInfoMsgs = value;
         }
 
         public bool AllowWarningMessages
         {
-            get { return Settings.Default.TextLogMessageWriterWriteWarningMsgs; }
-            set { Settings.Default.TextLogMessageWriterWriteWarningMsgs = value; }
+            get => Settings.Default.TextLogMessageWriterWriteWarningMsgs;
+            set => Settings.Default.TextLogMessageWriterWriteWarningMsgs = value;
         }
 
         public bool AllowErrorMessages
         {
-            get { return Settings.Default.TextLogMessageWriterWriteErrorMsgs; }
-            set { Settings.Default.TextLogMessageWriterWriteErrorMsgs = value; }
+            get => Settings.Default.TextLogMessageWriterWriteErrorMsgs;
+            set => Settings.Default.TextLogMessageWriterWriteErrorMsgs = value;
         }
     }
 }

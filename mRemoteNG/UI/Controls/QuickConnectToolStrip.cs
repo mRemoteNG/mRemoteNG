@@ -146,9 +146,9 @@ namespace mRemoteNG.UI.Controls
         {
             if (!_themeManager.ThemingActive) return;
             vsToolStripExtender.SetStyle(_mnuQuickConnectProtocol, _themeManager.ActiveTheme.Version,
-                                         _themeManager.ActiveTheme.Theme);
+                _themeManager.ActiveTheme.Theme);
             vsToolStripExtender.SetStyle(_mnuConnections, _themeManager.ActiveTheme.Version,
-                                         _themeManager.ActiveTheme.Theme);
+                _themeManager.ActiveTheme.Theme);
 
             if (!_themeManager.ActiveAndExtended) return;
             _cmbQuickConnect.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Background");
@@ -196,9 +196,9 @@ namespace mRemoteNG.UI.Controls
             try
             {
                 var connectionInfo = Runtime.ConnectionsService.CreateQuickConnect(_cmbQuickConnect.Text.Trim(),
-                                                                                   Converter.StringToProtocol(Settings
-                                                                                                              .Default
-                                                                                                              .QuickConnectProtocol));
+                    Converter.StringToProtocol(Settings
+                        .Default
+                        .QuickConnectProtocol));
                 if (connectionInfo == null)
                 {
                     _cmbQuickConnect.Focus();
@@ -233,9 +233,7 @@ namespace mRemoteNG.UI.Controls
             Settings.Default.QuickConnectProtocol = protocol;
             _btnQuickConnect.Text = protocol;
             foreach (ToolStripMenuItem menuItem in _mnuQuickConnectProtocol.Items)
-            {
                 menuItem.Checked = menuItem.Text.Equals(protocol);
-            }
         }
 
         #endregion
@@ -252,28 +250,28 @@ namespace mRemoteNG.UI.Controls
 
             // ReSharper disable once CoVariantArrayConversion
             ToolStripItem[] rootMenuItems = menuItemsConverter
-                                            .CreateToolStripDropDownItems(Runtime.ConnectionsService
-                                                                                 .ConnectionTreeModel).ToArray();
+                .CreateToolStripDropDownItems(Runtime.ConnectionsService
+                    .ConnectionTreeModel).ToArray();
             _btnConnections.DropDownItems.AddRange(rootMenuItems);
 
-            ToolStripMenuItem favorites = new ToolStripMenuItem(Language.Favorites, Resources.star);
+            var favorites = new ToolStripMenuItem(Language.Favorites, Resources.star);
             var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
-            List<ToolStripMenuItem> favoritesList = new List<ToolStripMenuItem>();
+            var favoritesList = new List<ToolStripMenuItem>();
 
             foreach (var node in rootNodes)
+            foreach (var containerInfo in
+                Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
             {
-                foreach (var containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
+                var favoriteMenuItem = new ToolStripMenuItem
                 {
-                    var favoriteMenuItem = new ToolStripMenuItem
-                    {
-                        Text = containerInfo.Name,
-                        Tag = containerInfo,
-                        Image = containerInfo.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause
-                    };
-                    favoriteMenuItem.MouseUp += ConnectionsMenuItem_MouseUp;
-                    favoritesList.Add(favoriteMenuItem);
-                }
+                    Text = containerInfo.Name,
+                    Tag = containerInfo,
+                    Image = containerInfo.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause
+                };
+                favoriteMenuItem.MouseUp += ConnectionsMenuItem_MouseUp;
+                favoritesList.Add(favoriteMenuItem);
             }
+
             favorites.DropDownItems.AddRange(favoritesList.ToArray());
             _btnConnections.DropDownItems.Add(favorites);
         }
@@ -281,7 +279,7 @@ namespace mRemoteNG.UI.Controls
         private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            var menuItem = (ToolStripMenuItem)sender;
+            var menuItem = (ToolStripMenuItem) sender;
 
             switch (menuItem.Tag)
             {

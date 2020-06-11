@@ -18,11 +18,8 @@ namespace mRemoteNG.Config.Serializers
             var connectionInfo = new ConnectionInfo();
             foreach (var line in rdcFileContent.Split(Environment.NewLine.ToCharArray()))
             {
-                var parts = line.Split(new[] { ':' }, 3);
-                if (parts.Length < 3)
-                {
-                    continue;
-                }
+                var parts = line.Split(new[] {':'}, 3);
+                if (parts.Length < 3) continue;
 
                 var key = parts[0].Trim();
                 var value = parts[2].Trim();
@@ -75,6 +72,7 @@ namespace mRemoteNG.Config.Serializers
                             connectionInfo.Colors = RDPColors.Colors32Bit;
                             break;
                     }
+
                     break;
                 case "bitmapcachepersistenable":
                     connectionInfo.CacheBitmaps = value == "1";
@@ -127,6 +125,7 @@ namespace mRemoteNG.Config.Serializers
                             connectionInfo.RedirectSound = RDPSounds.DoNotPlay;
                             break;
                     }
+
                     break;
                 case "redirectaudiocapture":
                     connectionInfo.RedirectAudioCapture = value == "1";
@@ -147,6 +146,7 @@ namespace mRemoteNG.Config.Serializers
                             connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Detect;
                             break;
                     }
+
                     break;
                 case "gatewayhostname":
                     connectionInfo.RDGatewayHostname = value;

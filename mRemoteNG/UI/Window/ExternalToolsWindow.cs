@@ -85,7 +85,7 @@ namespace mRemoteNG.UI.Window
             if (!_themeManager.ThemingActive) return;
             vsToolStripExtender.SetStyle(ToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
             vsToolStripExtender.SetStyle(ToolsContextMenuStrip, _themeManager.ActiveTheme.Version,
-                                         _themeManager.ActiveTheme.Theme);
+                _themeManager.ActiveTheme.Theme);
             //Apply the extended palette
 
             ToolStripContainer.TopToolStripPanel.BackColor =
@@ -116,10 +116,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                foreach (var externalTool in _currentlySelectedExternalTools)
-                {
-                    externalTool.Start();
-                }
+                foreach (var externalTool in _currentlySelectedExternalTools) externalTool.Start();
             }
             catch (Exception ex)
             {
@@ -160,8 +157,8 @@ namespace mRemoteNG.UI.Window
         #region Event Handlers
 
         private void CurrentlySelectedExternalToolsOnCollectionUpdated(object sender,
-                                                                       CollectionUpdatedEventArgs<ExternalTool>
-                                                                           collectionUpdatedEventArgs)
+            CollectionUpdatedEventArgs<ExternalTool>
+                collectionUpdatedEventArgs)
         {
             UpdateEditorControls();
         }
@@ -196,21 +193,19 @@ namespace mRemoteNG.UI.Window
                 string message;
                 if (_currentlySelectedExternalTools.Count == 1)
                     message = string.Format(Language.ConfirmDeleteExternalTool,
-                                            _currentlySelectedExternalTools[0].DisplayName);
+                        _currentlySelectedExternalTools[0].DisplayName);
                 else if (_currentlySelectedExternalTools.Count > 1)
                     message = string.Format(Language.ConfirmDeleteExternalToolMultiple,
-                                            _currentlySelectedExternalTools.Count);
+                        _currentlySelectedExternalTools.Count);
                 else
                     return;
 
                 if (MessageBox.Show(FrmMain.Default, message, "Question?", MessageBoxButtons.YesNo,
-                                    MessageBoxIcon.Question) != DialogResult.Yes)
+                    MessageBoxIcon.Question) != DialogResult.Yes)
                     return;
 
                 foreach (var externalTool in _currentlySelectedExternalTools)
-                {
                     Runtime.ExternalToolsService.ExternalTools.Remove(externalTool);
-                }
 
                 var firstDeletedNode = _currentlySelectedExternalTools.FirstOrDefault();
                 var oldSelectedIndex = ToolsListObjView.IndexOf(firstDeletedNode);
@@ -244,17 +239,14 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(
-                                                             "UI.Window.ExternalTools.ToolsListObjView_SelectedIndexChanged() failed.",
-                                                             ex);
+                    "UI.Window.ExternalTools.ToolsListObjView_SelectedIndexChanged() failed.",
+                    ex);
             }
         }
 
         private void ToolsListObjView_DoubleClick(object sender, EventArgs e)
         {
-            if (ToolsListObjView.SelectedItems.Count > 0)
-            {
-                LaunchTool();
-            }
+            if (ToolsListObjView.SelectedItems.Count > 0) LaunchTool();
         }
 
         private void PropertyControl_ChangedOrLostFocus(object sender, EventArgs e)
@@ -279,8 +271,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(
-                                                             "UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.",
-                                                             ex);
+                    "UI.Window.ExternalTools.PropertyControl_ChangedOrLostFocus() failed.",
+                    ex);
             }
         }
 
@@ -291,7 +283,7 @@ namespace mRemoteNG.UI.Window
                 using (var browseDialog = new OpenFileDialog())
                 {
                     browseDialog.Filter = string.Join("|", Language.FilterApplication, "*.exe",
-                                                      Language.FilterAll, "*.*");
+                        Language.FilterAll, "*.*");
                     if (browseDialog.ShowDialog() != DialogResult.OK)
                         return;
                     var selectedItem = _currentlySelectedExternalTools.FirstOrDefault();
@@ -303,7 +295,7 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.BrowseButton_Click() failed.",
-                                                             ex);
+                    ex);
             }
         }
 
@@ -324,7 +316,7 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("UI.Window.ExternalTools.BrowseButton_Click() failed.",
-                                                             ex);
+                    ex);
             }
         }
 

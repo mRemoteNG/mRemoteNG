@@ -4,10 +4,10 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Forms
 {
-	[TestFixture]
+    [TestFixture]
     public class PasswordFormTests
     {
-        PasswordForm _passwordForm;
+        private PasswordForm _passwordForm;
 
         [SetUp]
         public void Setup()
@@ -23,11 +23,12 @@ namespace mRemoteNGTests.UI.Forms
             while (_passwordForm.Disposing)
             {
             }
+
             _passwordForm = null;
         }
 
         [Test]
-		[SetUICulture("en-US")]
+        [SetUICulture("en-US")]
         public void PasswordFormText()
         {
             var formTester = new FormTester("PasswordForm");
@@ -37,9 +38,9 @@ namespace mRemoteNGTests.UI.Forms
         [Test]
         public void ClickingCancelClosesPasswordForm()
         {
-            bool eventFired = false;
+            var eventFired = false;
             _passwordForm.FormClosed += (o, e) => eventFired = true;
-            ButtonTester cancelButton = new ButtonTester("btnCancel", _passwordForm);
+            var cancelButton = new ButtonTester("btnCancel", _passwordForm);
             cancelButton.Click();
             Assert.That(eventFired, Is.True);
         }

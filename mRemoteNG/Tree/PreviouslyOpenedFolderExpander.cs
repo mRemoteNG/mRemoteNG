@@ -11,7 +11,7 @@ namespace mRemoteNG.Tree
         {
             var rootNode = connectionTree.GetRootConnectionNode();
             var containerList = connectionTree.ConnectionTreeModel.GetRecursiveChildList(rootNode)
-                                              .OfType<ContainerInfo>();
+                .OfType<ContainerInfo>();
             var previouslyExpandedNodes = containerList.Where(container => container.IsExpanded);
             connectionTree.ExpandedObjects = previouslyExpandedNodes;
             connectionTree.InvokeRebuildAll(true);

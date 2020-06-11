@@ -17,7 +17,8 @@ namespace mRemoteNG.Config.DatabaseConnectors
             return DatabaseConnector(sqlType, sqlHost, sqlCatalog, sqlUsername, sqlPassword);
         }
 
-        public static IDatabaseConnector DatabaseConnector(string type, string server, string database, string username, string password)
+        public static IDatabaseConnector DatabaseConnector(string type, string server, string database, string username,
+            string password)
         {
             switch (type)
             {

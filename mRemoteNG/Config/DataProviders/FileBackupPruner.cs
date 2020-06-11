@@ -20,13 +20,10 @@ namespace mRemoteNG.Config.DataProviders
                 return;
 
             var filesToDelete = files
-                                .OrderByDescending(s => s)
-                                .Skip(maxBackupsToKeep);
+                .OrderByDescending(s => s)
+                .Skip(maxBackupsToKeep);
 
-            foreach (var file in filesToDelete)
-            {
-                File.Delete(file);
-            }
+            foreach (var file in filesToDelete) File.Delete(file);
         }
     }
 }

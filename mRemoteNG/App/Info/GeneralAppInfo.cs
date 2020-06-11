@@ -19,8 +19,8 @@ namespace mRemoteNG.App.Info
         public static readonly string ProductName = Application.ProductName;
 
         public static readonly string Copyright =
-            ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(),
-                                                                      typeof(AssemblyCopyrightAttribute), false))
+            ((AssemblyCopyrightAttribute) Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(),
+                typeof(AssemblyCopyrightAttribute), false))
             .Copyright;
 
         public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
@@ -39,10 +39,7 @@ namespace mRemoteNG.App.Info
                         ? $"Windows NT {OSVersion.Version.Major}.{OSVersion.Version.Minor}"
                         : OSVersion.VersionString
                 };
-                if (Is64BitProcess)
-                {
-                    details.Add("WOW64");
-                }
+                if (Is64BitProcess) details.Add("WOW64");
 
                 details.Add(Thread.CurrentThread.CurrentUICulture.Name);
                 details.Add($".NET CLR {Environment.Version}");

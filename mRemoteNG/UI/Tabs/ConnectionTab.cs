@@ -40,38 +40,31 @@ namespace mRemoteNG.UI.Tabs
             {
                 if (!silentClose)
                 {
-                    if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
+                    if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.All)
                     {
                         var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
-                                                            string
-                                                                .Format(Language.ConfirmCloseConnectionPanelMainInstruction,
-                                                                        TabText), "", "", "",
-                                                            Language.CheckboxDoNotShowThisMessageAgain,
-                                                            ETaskDialogButtons.YesNo, ESysIcons.Question,
-                                                            ESysIcons.Question);
-                        if (CTaskDialog.VerificationChecked)
-                        {
-                            Settings.Default.ConfirmCloseConnection--;
-                        }
+                            string
+                                .Format(Language.ConfirmCloseConnectionPanelMainInstruction,
+                                    TabText), "", "", "",
+                            Language.CheckboxDoNotShowThisMessageAgain,
+                            ETaskDialogButtons.YesNo, ESysIcons.Question,
+                            ESysIcons.Question);
+                        if (CTaskDialog.VerificationChecked) Settings.Default.ConfirmCloseConnection--;
 
                         if (result == DialogResult.No)
-                        {
                             e.Cancel = true;
-                        }
                         else
-                        {
-                            ((InterfaceControl)Tag)?.Protocol.Close();
-                        }
+                            ((InterfaceControl) Tag)?.Protocol.Close();
                     }
                     else
                     {
                         // close without the confirmation prompt...
-                        ((InterfaceControl)Tag)?.Protocol.Close();
+                        ((InterfaceControl) Tag)?.Protocol.Close();
                     }
                 }
                 else
                 {
-                    ((InterfaceControl)Tag)?.Protocol.Close();
+                    ((InterfaceControl) Tag)?.Protocol.Close();
                 }
             }
 
@@ -79,7 +72,7 @@ namespace mRemoteNG.UI.Tabs
         }
 
 
-        #region HelperFunctions  
+        #region HelperFunctions
 
         public void RefreshInterfaceController()
         {
@@ -87,7 +80,7 @@ namespace mRemoteNG.UI.Tabs
             {
                 var interfaceControl = Tag as InterfaceControl;
                 if (interfaceControl?.Info.Protocol == ProtocolType.VNC)
-                    ((ProtocolVNC)interfaceControl.Protocol).RefreshScreen();
+                    ((ProtocolVNC) interfaceControl.Protocol).RefreshScreen();
             }
             catch (Exception ex)
             {

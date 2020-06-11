@@ -36,7 +36,7 @@ namespace mRemoteNG.Config.DataProviders
             if (DbUserIsReadOnly())
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    "Trying to save connections but the SQL read only checkbox is checked, aborting!");
+                    "Trying to save connections but the SQL read only checkbox is checked, aborting!");
                 return;
             }
 
@@ -44,19 +44,19 @@ namespace mRemoteNG.Config.DataProviders
                 OpenConnection();
             if (DatabaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
             {
-                SqlConnection sqlConnection = (SqlConnection)DatabaseConnector.DbConnection();
-                using (SqlTransaction transaction = sqlConnection.BeginTransaction(System.Data.IsolationLevel.Serializable))
+                var sqlConnection = (SqlConnection) DatabaseConnector.DbConnection();
+                using (var transaction = sqlConnection.BeginTransaction(IsolationLevel.Serializable))
                 {
-                    using (SqlCommand sqlCommand = new SqlCommand())
+                    using (var sqlCommand = new SqlCommand())
                     {
                         sqlCommand.Connection = sqlConnection;
                         sqlCommand.Transaction = transaction;
                         sqlCommand.CommandText = "SELECT * FROM tblCons";
-                        using (SqlDataAdapter dataAdpater = new SqlDataAdapter())
+                        using (var dataAdpater = new SqlDataAdapter())
                         {
                             dataAdpater.SelectCommand = sqlCommand;
 
-                            SqlCommandBuilder builder = new SqlCommandBuilder(dataAdpater);
+                            var builder = new SqlCommandBuilder(dataAdpater);
                             // Avoid optimistic concurrency, check if it is necessary.
                             builder.ConflictOption = ConflictOption.OverwriteChanges;
 
@@ -70,22 +70,21 @@ namespace mRemoteNG.Config.DataProviders
                         }
                     }
                 }
-
             }
             else if (DatabaseConnector.GetType() == typeof(MySqlDatabaseConnector))
             {
                 var dbConnection = (MySqlConnection) DatabaseConnector.DbConnection();
-                using (MySqlTransaction transaction = dbConnection.BeginTransaction(System.Data.IsolationLevel.Serializable))
+                using (var transaction = dbConnection.BeginTransaction(IsolationLevel.Serializable))
                 {
-                    using (MySqlCommand sqlCommand = new MySqlCommand())
+                    using (var sqlCommand = new MySqlCommand())
                     {
                         sqlCommand.Connection = dbConnection;
                         sqlCommand.Transaction = transaction;
                         sqlCommand.CommandText = "SELECT * FROM tblCons";
-                        using (MySqlDataAdapter dataAdapter = new MySqlDataAdapter(sqlCommand))
+                        using (var dataAdapter = new MySqlDataAdapter(sqlCommand))
                         {
                             dataAdapter.UpdateBatchSize = 1000;
-                            using (MySqlCommandBuilder cb = new MySqlCommandBuilder(dataAdapter))
+                            using (var cb = new MySqlCommandBuilder(dataAdapter))
                             {
                                 dataAdapter.Update(dataTable);
                                 transaction.Commit();

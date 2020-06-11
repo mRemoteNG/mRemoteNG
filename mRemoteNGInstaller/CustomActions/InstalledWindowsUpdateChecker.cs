@@ -33,15 +33,19 @@ namespace CustomActions
             const string query = "SELECT * FROM Win32_QuickFixEngineering";
             var installedUpdates = new ArrayList();
             var searcher = new ManagementObjectSearcher(_managementScope, new ObjectQuery(query));
-            foreach(var o in searcher.Get())
+            foreach (var o in searcher.Get())
             {
                 var queryObj = (ManagementObject) o;
                 installedUpdates.Add(queryObj["HotFixID"]);
             }
+
             return installedUpdates;
         }
 
-        public bool IsUpdateInstalled(string kb) => IsUpdateInstalled(new[] {kb});
+        public bool IsUpdateInstalled(string kb)
+        {
+            return IsUpdateInstalled(new[] {kb});
+        }
 
         public bool IsUpdateInstalled(IEnumerable<string> kbList)
         {
@@ -66,6 +70,7 @@ namespace CustomActions
                 whereClause += $"HotFixID='{kb}'";
                 counter++;
             }
+
             return whereClause;
         }
     }

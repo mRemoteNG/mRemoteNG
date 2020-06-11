@@ -38,9 +38,7 @@ namespace mRemoteNG.UI.Forms
 
             _handledForm.FormBorderStyle = FormBorderStyle.None;
             if (_handledForm.WindowState == FormWindowState.Maximized)
-            {
                 _handledForm.WindowState = FormWindowState.Normal;
-            }
 
             _handledForm.WindowState = FormWindowState.Maximized;
         }

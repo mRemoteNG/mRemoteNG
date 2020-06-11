@@ -23,7 +23,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
         public Version Upgrade()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                "Upgrading database from version 2.7 to version 2.8.");
+                "Upgrading database from version 2.7 to version 2.8.");
 
             const string mySqlText = @"
 ALTER TABLE tblCons MODIFY COLUMN ID INT;
@@ -47,14 +47,15 @@ UPDATE tblRoot SET ConfVersion='2.8';";
                 dbCommand = _databaseConnector.DbCommand(msSqlText1);
                 dbCommand.ExecuteNonQuery();
                 dbCommand = _databaseConnector.DbCommand(msSqlText2);
-            } else if (_databaseConnector.GetType() == typeof(MySqlDatabaseConnector))
+            }
+            else if (_databaseConnector.GetType() == typeof(MySqlDatabaseConnector))
             {
                 dbCommand = _databaseConnector.DbCommand(mySqlText);
-            } else
+            }
+            else
             {
                 throw new Exception("Unknow database backend");
             }
-
 
 
             dbCommand.ExecuteNonQuery();

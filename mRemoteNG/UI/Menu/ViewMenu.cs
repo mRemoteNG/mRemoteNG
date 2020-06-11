@@ -275,7 +275,7 @@ namespace mRemoteNG.UI.Menu
             for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
             {
                 var tItem = new ToolStripMenuItem(Runtime.WindowList[i].Text,
-                                                  Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
+                        Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
                     {Tag = Runtime.WindowList[i]};
                 _mMenViewConnectionPanels.DropDownItems.Add(tItem);
             }
@@ -285,8 +285,8 @@ namespace mRemoteNG.UI.Menu
 
         private void ConnectionPanelMenuItem_Click(object sender, EventArgs e)
         {
-            ((BaseWindow)((ToolStripMenuItem)sender).Tag).Show(MainForm.pnlDock);
-            ((BaseWindow)((ToolStripMenuItem)sender).Tag).Focus();
+            ((BaseWindow) ((ToolStripMenuItem) sender).Tag).Show(MainForm.pnlDock);
+            ((BaseWindow) ((ToolStripMenuItem) sender).Tag).Focus();
         }
 
         private void mMenViewConnections_Click(object sender, EventArgs e)
@@ -334,13 +334,9 @@ namespace mRemoteNG.UI.Menu
         private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
         {
             if (MainForm.pnlDock.ActiveContent == Windows.TreeForm)
-            {
                 Windows.ConfigForm.Activate();
-            }
             else
-            {
                 Windows.TreeForm.Activate();
-            }
         }
 
         private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
@@ -351,11 +347,8 @@ namespace mRemoteNG.UI.Menu
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
         {
             var msgBoxResult = MessageBox.Show(Language.ConfirmResetLayout, string.Empty, MessageBoxButtons.YesNo,
-                                               MessageBoxIcon.Question);
-            if (msgBoxResult == DialogResult.Yes)
-            {
-                MainForm.SetDefaultLayout();
-            }
+                MessageBoxIcon.Question);
+            if (msgBoxResult == DialogResult.Yes) MainForm.SetDefaultLayout();
         }
 
         private void mMenViewLockToolbars_Click(object sender, EventArgs eventArgs)

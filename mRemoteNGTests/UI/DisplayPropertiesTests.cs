@@ -103,14 +103,14 @@ namespace mRemoteNGTests.UI
         public void AttemptingToScaleANullImageWillThrowAnException()
         {
             var sut = new DisplayProperties(Substitute.For<IGraphicsProvider>());
-            Assert.Throws<ArgumentNullException>(() => sut.ScaleImage((Image)null));
+            Assert.Throws<ArgumentNullException>(() => sut.ScaleImage((Image) null));
         }
 
         [Test]
         public void AttemptingToScaleANullIconWillThrowAnException()
         {
             var sut = new DisplayProperties(Substitute.For<IGraphicsProvider>());
-            Assert.Throws<ArgumentNullException>(() => sut.ScaleImage((Icon)null));
+            Assert.Throws<ArgumentNullException>(() => sut.ScaleImage((Icon) null));
         }
 
         [Test]

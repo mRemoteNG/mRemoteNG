@@ -103,10 +103,10 @@ namespace mRemoteNG.Tools
         #endregion
 
         public ExternalTool(string displayName = "",
-                            string fileName = "",
-                            string arguments = "",
-                            string workingDir = "",
-                            bool runElevated = false)
+            string fileName = "",
+            string arguments = "",
+            string workingDir = "",
+            bool runElevated = false)
         {
             DisplayName = displayName;
             FileName = fileName;
@@ -122,7 +122,7 @@ namespace mRemoteNG.Tools
                 if (string.IsNullOrEmpty(FileName))
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                        "ExternalApp.Start() failed: FileName cannot be blank.");
+                        "ExternalApp.Start() failed: FileName cannot be blank.");
                     return;
                 }
 
@@ -150,10 +150,7 @@ namespace mRemoteNG.Tools
             SetProcessProperties(process, ConnectionInfo);
             process.Start();
 
-            if (WaitForExit)
-            {
-                process.WaitForExit();
-            }
+            if (WaitForExit) process.WaitForExit();
         }
 
         private void SetProcessProperties(Process process, ConnectionInfo startConnectionInfo)

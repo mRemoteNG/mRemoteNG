@@ -22,17 +22,20 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             var connectionTreeModel = SetupConnectionTreeModel();
             var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
             var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
-                cryptoProvider, 
+                cryptoProvider,
                 connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
-            _originalDocument = new XmlConnectionsDocumentCompiler(cryptoProvider, connectionNodeSerializer).CompileDocument(connectionTreeModel, false);
+            _originalDocument =
+                new XmlConnectionsDocumentCompiler(cryptoProvider, connectionNodeSerializer).CompileDocument(
+                    connectionTreeModel, false);
             _documentEncryptor = new XmlConnectionsDocumentEncryptor(cryptoProvider);
         }
 
         [Test]
         public void RootNodeValueIsEncrypted()
         {
-            var encryptedDocument = _documentEncryptor.EncryptDocument(_originalDocument, "mR3m".ConvertToSecureString());
+            var encryptedDocument =
+                _documentEncryptor.EncryptDocument(_originalDocument, "mR3m".ConvertToSecureString());
             var encryptedContent = encryptedDocument.Root?.Value;
             Assert.That(encryptedContent, Is.Not.EqualTo(string.Empty));
         }
@@ -52,14 +55,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
              */
             var connectionTreeModel = new ConnectionTreeModel();
             var rootNode = new RootNodeInfo(RootNodeType.Connection);
-            var folder1 = new ContainerInfo { Name = "folder1" };
-            var folder2 = new ContainerInfo { Name = "folder2" };
-            var folder3 = new ContainerInfo { Name = "folder3" };
-            var con0 = new ConnectionInfo { Name = "con0" };
-            var con1 = new ConnectionInfo { Name = "con1" };
-            var con2 = new ConnectionInfo { Name = "con2" };
-            var con3 = new ConnectionInfo { Name = "con3" };
-            var con4 = new ConnectionInfo { Name = "con4" };
+            var folder1 = new ContainerInfo {Name = "folder1"};
+            var folder2 = new ContainerInfo {Name = "folder2"};
+            var folder3 = new ContainerInfo {Name = "folder3"};
+            var con0 = new ConnectionInfo {Name = "con0"};
+            var con1 = new ConnectionInfo {Name = "con1"};
+            var con2 = new ConnectionInfo {Name = "con2"};
+            var con3 = new ConnectionInfo {Name = "con3"};
+            var con4 = new ConnectionInfo {Name = "con4"};
             rootNode.AddChild(folder1);
             rootNode.AddChild(folder2);
             rootNode.AddChild(con0);

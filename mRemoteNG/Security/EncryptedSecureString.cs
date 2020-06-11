@@ -49,10 +49,7 @@ namespace mRemoteNG.Security
             random.SetSeed(random.GenerateSeed(128));
 
             var machineKeyString = "";
-            for (var x = 0; x < keySize; x++)
-            {
-                machineKeyString += (char)random.Next(33, 126);
-            }
+            for (var x = 0; x < keySize; x++) machineKeyString += (char) random.Next(33, 126);
 
             return machineKeyString.ConvertToSecureString();
         }
@@ -61,11 +58,11 @@ namespace mRemoteNG.Security
         {
             if (!disposing) return;
 
-            if(_machineKey != null)
+            if (_machineKey != null)
                 _machineKey.Dispose();
 
-            if(_secureString != null)
-            _secureString.Dispose();
+            if (_secureString != null)
+                _secureString.Dispose();
         }
 
         public void Dispose()

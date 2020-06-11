@@ -19,22 +19,24 @@ namespace mRemoteNGTests.Credential
         public void ClickingYesReturnsTrue()
         {
             var deletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MockClickYes);
-            Assert.That(deletionConfirmer.Confirm(new[] { _credentialRecord }), Is.True);
+            Assert.That(deletionConfirmer.Confirm(new[] {_credentialRecord}), Is.True);
         }
 
         [Test]
         public void ClickingNoReturnsFalse()
         {
             var deletionConfirmer = new CredentialDeletionMsgBoxConfirmer(MockClickNo);
-            Assert.That(deletionConfirmer.Confirm(new [] { _credentialRecord }), Is.False);
+            Assert.That(deletionConfirmer.Confirm(new[] {_credentialRecord}), Is.False);
         }
 
-        private DialogResult MockClickYes(string promptMessage, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
+        private DialogResult MockClickYes(string promptMessage, string title, MessageBoxButtons buttons,
+            MessageBoxIcon icon)
         {
             return DialogResult.Yes;
         }
 
-        private DialogResult MockClickNo(string promptMessage, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
+        private DialogResult MockClickNo(string promptMessage, string title, MessageBoxButtons buttons,
+            MessageBoxIcon icon)
         {
             return DialogResult.No;
         }

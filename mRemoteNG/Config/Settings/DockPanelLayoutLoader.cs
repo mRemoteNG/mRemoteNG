@@ -31,7 +31,7 @@ namespace mRemoteNG.Config.Settings
             {
                 while (_mainForm.pnlDock.Contents.Count > 0)
                 {
-                    var dc = (DockContent)_mainForm.pnlDock.Contents[0];
+                    var dc = (DockContent) _mainForm.pnlDock.Contents[0];
                     dc.Close();
                 }
 

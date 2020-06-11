@@ -70,7 +70,7 @@ namespace mRemoteNGSpecs.StepDefinitions
         {
             _credentialRepository.UnloadCredentials();
         }
-        
+
         [Then(@"the credentials in the repository will no longer be available")]
         public void ThenTheCredentialsInTheRepositoryWillNoLongerBeAvailable()
         {

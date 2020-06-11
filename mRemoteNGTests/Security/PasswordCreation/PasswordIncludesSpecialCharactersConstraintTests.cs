@@ -54,7 +54,7 @@ namespace mRemoteNGTests.Security.PasswordCreation
         public void PasswordWithoutCustomCharsFailsValidation()
         {
             var password = "hello!".ConvertToSecureString();
-            _specialCharactersConstraint = new PasswordIncludesSpecialCharactersConstraint(new[] { '(' });
+            _specialCharactersConstraint = new PasswordIncludesSpecialCharactersConstraint(new[] {'('});
             Assert.That(_specialCharactersConstraint.Validate(password), Is.False);
         }
 

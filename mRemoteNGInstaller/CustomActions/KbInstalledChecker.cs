@@ -15,7 +15,10 @@ namespace CustomActions
             _session = session;
         }
 
-        public bool Execute(string acceptedKb, string returnVar) => Execute(new[] {acceptedKb}, returnVar);
+        public bool Execute(string acceptedKb, string returnVar)
+        {
+            return Execute(new[] {acceptedKb}, returnVar);
+        }
 
         public bool Execute(IEnumerable<string> acceptedKbs, string returnVar)
         {

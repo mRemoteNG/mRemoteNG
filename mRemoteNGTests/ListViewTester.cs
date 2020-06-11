@@ -110,13 +110,7 @@ namespace mRemoteNGTests
         /// </remarks>
         /// <value>The ControlTester at the specified index.</value>
         /// <param name="index">The index of the ListViewTester.</param>
-        public new ListViewTester this[int index]
-        {
-            get
-            {
-                return new ListViewTester(this, index);
-            }
-        }
+        public new ListViewTester this[int index] => new ListViewTester(this, index);
 
         /// <summary>
         /// Provides access to all of the Properties of the ListBox.
@@ -125,45 +119,24 @@ namespace mRemoteNGTests
         /// Allows typed access to all of the properties of the underlying control.
         /// </remarks>
         /// <value>The underlying control.</value>
-        public ListView Properties
-        {
-            get
-            {
-                return (ListView)Control;
-            }
-        }
+        public ListView Properties => (ListView) Control;
 
         /// <summary>
         /// Helper method to return the List View's Items property
         /// </summary>
-        public ListView.ListViewItemCollection Items
-        {
-            get
-            {
-                return Properties.Items;
-            }
-        }
+        public ListView.ListViewItemCollection Items => Properties.Items;
 
         /// <summary>
         /// Helper method to return the columns of the list view
         /// </summary>
-        public ListView.ColumnHeaderCollection Columns
-        {
-            get
-            {
-                return Properties.Columns;
-            }
-        }
+        public ListView.ColumnHeaderCollection Columns => Properties.Columns;
 
         /// <summary>
         /// Clears the selections from the list box.
         /// </summary>
         public void ClearSelected()
         {
-            foreach (ListViewItem item in Properties.Items)
-            {
-                item.Selected = false;
-            }
+            foreach (ListViewItem item in Properties.Items) item.Selected = false;
         }
 
         /// <summary>
@@ -182,12 +155,9 @@ namespace mRemoteNGTests
         /// <param name="text">The item to select.</param>
         public void Select(string text)
         {
-            int index = FindItemByString(text);
+            var index = FindItemByString(text);
 
-            if (ItemFound(index))
-            {
-                Select(index);
-            }
+            if (ItemFound(index)) Select(index);
         }
 
         /// <summary>
@@ -196,10 +166,7 @@ namespace mRemoteNGTests
         /// <param name="items"></param>
         public void SelectItems(string[] items)
         {
-            foreach (string item in items)
-            {
-                Select(item);
-            }
+            foreach (var item in items) Select(item);
         }
 
         /// <summary>
@@ -208,20 +175,13 @@ namespace mRemoteNGTests
         /// <param name="matchList"></param>
         public bool SelectedItemsMatch(string[] matches)
         {
-            ArrayList matchList = new ArrayList(matches);
+            var matchList = new ArrayList(matches);
 
-            if (matchList.Count != Properties.SelectedItems.Count)
-            {
-                return false;
-            }
+            if (matchList.Count != Properties.SelectedItems.Count) return false;
 
             foreach (ListViewItem item in Properties.SelectedItems)
-            {
                 if (!matchList.Contains(item.Text))
-                {
                     return false;
-                }
-            }
 
             return true;
         }
@@ -235,13 +195,9 @@ namespace mRemoteNGTests
 
         private int FindItemByString(string text)
         {
-            for (int i = 0; i < Properties.Items.Count; i++)
-            {
+            for (var i = 0; i < Properties.Items.Count; i++)
                 if (Properties.Items[i].Text == text)
-                {
                     return i;
-                }
-            }
 
             return -1;
         }

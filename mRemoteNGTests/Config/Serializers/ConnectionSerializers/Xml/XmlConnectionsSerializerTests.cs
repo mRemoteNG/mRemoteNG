@@ -17,7 +17,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         private XmlConnectionsSerializer _serializer;
         private ConnectionTreeModel _connectionTreeModel;
         private ICryptographyProvider _cryptographyProvider;
-        
+
 
         [SetUp]
         public void Setup()
@@ -25,7 +25,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             _connectionTreeModel = SetupConnectionTreeModel();
             _cryptographyProvider = new AeadCryptographyProvider();
             var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
-                _cryptographyProvider, 
+                _cryptographyProvider,
                 _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
             _serializer = new XmlConnectionsSerializer(_cryptographyProvider, connectionNodeSerializer);
@@ -37,7 +37,9 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             var serializedConnections = _serializer.Serialize(_connectionTreeModel);
             var xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(serializedConnections);
-            var nodeCon4 = xmlDoc.DocumentElement?.SelectSingleNode("Node[@Name='folder2']/Node[@Name='folder3']/Node[@Name='con4']");
+            var nodeCon4 =
+                xmlDoc.DocumentElement?.SelectSingleNode(
+                    "Node[@Name='folder2']/Node[@Name='folder3']/Node[@Name='con4']");
             Assert.That(nodeCon4, Is.Not.Null);
         }
 
@@ -89,14 +91,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
              */
             var connectionTreeModel = new ConnectionTreeModel();
             var rootNode = new RootNodeInfo(RootNodeType.Connection);
-            var folder1 = new ContainerInfo { Name = "folder1" };
-            var folder2 = new ContainerInfo { Name = "folder2" };
-            var folder3 = new ContainerInfo { Name = "folder3" };
-            var con0 = new ConnectionInfo { Name = "con0" };
-            var con1 = new ConnectionInfo { Name = "con1" };
-            var con2 = new ConnectionInfo { Name = "con2" };
-            var con3 = new ConnectionInfo { Name = "con3" };
-            var con4 = new ConnectionInfo { Name = "con4" };
+            var folder1 = new ContainerInfo {Name = "folder1"};
+            var folder2 = new ContainerInfo {Name = "folder2"};
+            var folder3 = new ContainerInfo {Name = "folder3"};
+            var con0 = new ConnectionInfo {Name = "con0"};
+            var con1 = new ConnectionInfo {Name = "con1"};
+            var con2 = new ConnectionInfo {Name = "con2"};
+            var con3 = new ConnectionInfo {Name = "con3"};
+            var con4 = new ConnectionInfo {Name = "con4"};
             rootNode.AddChild(folder1);
             rootNode.AddChild(folder2);
             rootNode.AddChild(con0);

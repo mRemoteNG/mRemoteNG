@@ -64,7 +64,7 @@ namespace mRemoteNG.Tools
 
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)_optional).GetEnumerator();
+            return ((IEnumerable<T>) _optional).GetEnumerator();
         }
 
         #endregion
@@ -95,11 +95,11 @@ namespace mRemoteNG.Tools
                 return 1;
             // neither are empty, compare wrapped objects directly
             if (_optional[0] is IComparable<T>)
-                return ((IComparable<T>)_optional[0]).CompareTo(other.First());
+                return ((IComparable<T>) _optional[0]).CompareTo(other.First());
 
             throw new ArgumentException(string.Format(
-                                                      "Cannot compare objects. Optional type {0} is not comparable to itself",
-                                                      typeof(T).FullName));
+                "Cannot compare objects. Optional type {0} is not comparable to itself",
+                typeof(T).FullName));
         }
 
         #endregion
@@ -116,7 +116,7 @@ namespace mRemoteNG.Tools
                 return Equals(objAsOptional);
 
             if (obj is T)
-                Equals((T)obj);
+                Equals((T) obj);
 
             return false;
         }

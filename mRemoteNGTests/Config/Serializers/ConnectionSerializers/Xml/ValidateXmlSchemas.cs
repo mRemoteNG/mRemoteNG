@@ -73,7 +73,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 #if DEBUG
                 "Debug";
 #else
-				"Release";
+                "Release";
 #endif
 
             const string normalOrPortable =

@@ -28,10 +28,7 @@ namespace mRemoteNG.UI.Controls
 
         private void ComboBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter & _comboBox.DroppedDown)
-            {
-                _ignoreEnter = true;
-            }
+            if ((e.KeyCode == Keys.Enter) & _comboBox.DroppedDown) _ignoreEnter = true;
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -40,15 +37,12 @@ namespace mRemoteNG.UI.Controls
             if (e.KeyCode == Keys.Enter)
             {
                 // Only connect if Enter was not pressed while the combo box was dropped down
-                if (!_ignoreEnter)
-                {
-                    OnConnectRequested(new ConnectRequestedEventArgs(_comboBox.Text));
-                }
+                if (!_ignoreEnter) OnConnectRequested(new ConnectRequestedEventArgs(_comboBox.Text));
 
                 _ignoreEnter = false;
                 e.Handled = true;
             }
-            else if (e.KeyCode == Keys.Delete & _comboBox.DroppedDown)
+            else if ((e.KeyCode == Keys.Delete) & _comboBox.DroppedDown)
             {
                 if (_comboBox.SelectedIndex != -1)
                 {
@@ -59,10 +53,7 @@ namespace mRemoteNG.UI.Controls
                     _comboBox.DroppedDown = false;
                     _comboBox.Items.Remove(item);
                     _comboBox.SelectedIndex = -1;
-                    if (_comboBox.Items.Count != 0)
-                    {
-                        _comboBox.DroppedDown = true;
-                    }
+                    if (_comboBox.Items.Count != 0) _comboBox.DroppedDown = true;
                 }
 
                 e.Handled = true;
@@ -71,29 +62,23 @@ namespace mRemoteNG.UI.Controls
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!(_comboBox.SelectedItem is HistoryItem))
-            {
-                return;
-            }
+            if (!(_comboBox.SelectedItem is HistoryItem)) return;
 
-            var historyItem = (HistoryItem)_comboBox.SelectedItem;
+            var historyItem = (HistoryItem) _comboBox.SelectedItem;
             OnProtocolChanged(new ProtocolChangedEventArgs(historyItem.ConnectionInfo.Protocol));
         }
 
         private static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
             var comboBox = sender as ComboBox;
-            if (comboBox == null)
-            {
-                return;
-            }
+            if (comboBox == null) return;
 
             var drawItem = comboBox.Items[e.Index];
 
             string drawString;
             if (drawItem is HistoryItem)
             {
-                var historyItem = (HistoryItem)drawItem;
+                var historyItem = (HistoryItem) drawItem;
                 drawString = historyItem.ToString(true);
             }
             else
@@ -103,7 +88,7 @@ namespace mRemoteNG.UI.Controls
 
             e.DrawBackground();
             e.Graphics.DrawString(drawString, e.Font, new SolidBrush(e.ForeColor),
-                                  new RectangleF(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height));
+                new RectangleF(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height));
             e.DrawFocusRectangle();
         }
 
@@ -113,15 +98,9 @@ namespace mRemoteNG.UI.Controls
 
             public bool Equals(HistoryItem other)
             {
-                if (ConnectionInfo.Hostname != other.ConnectionInfo.Hostname)
-                {
-                    return false;
-                }
+                if (ConnectionInfo.Hostname != other.ConnectionInfo.Hostname) return false;
 
-                if (ConnectionInfo.Port != other.ConnectionInfo.Port)
-                {
-                    return false;
-                }
+                if (ConnectionInfo.Port != other.ConnectionInfo.Port) return false;
 
                 return ConnectionInfo.Protocol == other.ConnectionInfo.Protocol;
             }
@@ -134,10 +113,7 @@ namespace mRemoteNG.UI.Controls
             public string ToString(bool includeProtocol)
             {
                 var port = string.Empty;
-                if (ConnectionInfo.Port != ConnectionInfo.GetDefaultPort())
-                {
-                    port = $":{ConnectionInfo.Port}";
-                }
+                if (ConnectionInfo.Port != ConnectionInfo.GetDefaultPort()) port = $":{ConnectionInfo.Port}";
 
                 return includeProtocol
                     ? $"{ConnectionInfo.Hostname}{port} ({ConnectionInfo.Protocol})"
@@ -149,16 +125,10 @@ namespace mRemoteNG.UI.Controls
         {
             foreach (var item in _comboBox.Items)
             {
-                if (!(item is HistoryItem))
-                {
-                    continue;
-                }
+                if (!(item is HistoryItem)) continue;
 
-                var historyItem = (HistoryItem)item;
-                if (historyItem.Equals(searchItem))
-                {
-                    return true;
-                }
+                var historyItem = (HistoryItem) item;
+                if (historyItem.Equals(searchItem)) return true;
             }
 
             return false;
@@ -169,10 +139,7 @@ namespace mRemoteNG.UI.Controls
             try
             {
                 var historyItem = new HistoryItem {ConnectionInfo = connectionInfo};
-                if (!Exists(historyItem))
-                {
-                    _comboBox.Items.Insert(0, historyItem);
-                }
+                if (!Exists(historyItem)) _comboBox.Items.Insert(0, historyItem);
             }
             catch (Exception ex)
             {
@@ -198,14 +165,10 @@ namespace mRemoteNG.UI.Controls
 
         public event ConnectRequestedEventHandler ConnectRequested
         {
-            add
-            {
-                ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Combine(ConnectRequestedEvent, value);
-            }
-            remove
-            {
-                ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Remove(ConnectRequestedEvent, value);
-            }
+            add => ConnectRequestedEvent =
+                (ConnectRequestedEventHandler) Delegate.Combine(ConnectRequestedEvent, value);
+            remove => ConnectRequestedEvent =
+                (ConnectRequestedEventHandler) Delegate.Remove(ConnectRequestedEvent, value);
         }
 
 
@@ -231,8 +194,8 @@ namespace mRemoteNG.UI.Controls
 
         public event ProtocolChangedEventHandler ProtocolChanged
         {
-            add { ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Combine(ProtocolChangedEvent, value); }
-            remove { ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Remove(ProtocolChangedEvent, value); }
+            add => ProtocolChangedEvent = (ProtocolChangedEventHandler) Delegate.Combine(ProtocolChangedEvent, value);
+            remove => ProtocolChangedEvent = (ProtocolChangedEventHandler) Delegate.Remove(ProtocolChangedEvent, value);
         }
 
 

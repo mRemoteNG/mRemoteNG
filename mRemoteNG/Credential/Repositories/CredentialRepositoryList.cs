@@ -39,10 +39,7 @@ namespace mRemoteNG.Credential.Repositories
         public IEnumerable<ICredentialRecord> GetCredentialRecords()
         {
             var list = new List<ICredentialRecord>();
-            foreach (var repository in CredentialProviders)
-            {
-                list.AddRange(repository.CredentialRecords);
-            }
+            foreach (var repository in CredentialProviders) list.AddRange(repository.CredentialRecords);
 
             return list;
         }
@@ -50,7 +47,7 @@ namespace mRemoteNG.Credential.Repositories
         public ICredentialRecord GetCredentialRecord(Guid id)
         {
             return CredentialProviders.SelectMany(repo => repo.CredentialRecords)
-                                      .FirstOrDefault(record => record.Id.Equals(id));
+                .FirstOrDefault(record => record.Id.Equals(id));
         }
 
         public IEnumerator<ICredentialRepository> GetEnumerator()
@@ -69,7 +66,7 @@ namespace mRemoteNG.Credential.Repositories
         private void RaiseRepositoriesUpdatedEvent(ActionType action, IEnumerable<ICredentialRepository> changedItems)
         {
             RepositoriesUpdated?.Invoke(this,
-                                        new CollectionUpdatedEventArgs<ICredentialRepository>(action, changedItems));
+                new CollectionUpdatedEventArgs<ICredentialRepository>(action, changedItems));
         }
 
         private void RaiseCredentialsUpdatedEvent(object sender, CollectionUpdatedEventArgs<ICredentialRecord> args)

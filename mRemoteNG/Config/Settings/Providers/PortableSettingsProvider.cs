@@ -46,7 +46,7 @@ namespace mRemoteNG.Config.Settings.Providers
 
         private string _filePath =>
             Path.Combine(Path.GetDirectoryName(Application.ExecutablePath) ?? throw new InvalidOperationException(),
-                         $"{ApplicationName}.settings");
+                $"{ApplicationName}.settings");
 
         private XmlNode _localSettingsNode => GetSettingsNode(_localSettingsNodeName);
 
@@ -113,17 +113,15 @@ namespace mRemoteNG.Config.Settings.Providers
         }
 
         public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context,
-                                                                          SettingsPropertyCollection collection)
+            SettingsPropertyCollection collection)
         {
             var values = new SettingsPropertyValueCollection();
 
             foreach (SettingsProperty property in collection)
-            {
                 values.Add(new SettingsPropertyValue(property)
                 {
                     SerializedValue = GetValue(property)
                 });
-            }
 
             return values;
         }
@@ -135,7 +133,9 @@ namespace mRemoteNG.Config.Settings.Providers
             var settingNode = targetNode.SelectSingleNode($"setting[@name='{propertyValue.Name}']");
 
             if (settingNode != null)
+            {
                 settingNode.InnerText = propertyValue.SerializedValue.ToString();
+            }
             else
             {
                 settingNode = _rootDocument.CreateElement("setting");
@@ -164,10 +164,8 @@ namespace mRemoteNG.Config.Settings.Providers
         private static bool IsGlobal(SettingsProperty property)
         {
             foreach (DictionaryEntry attribute in property.Attributes)
-            {
-                if ((Attribute)attribute.Value is SettingsManageabilityAttribute)
+                if ((Attribute) attribute.Value is SettingsManageabilityAttribute)
                     return true;
-            }
 
             return false;
         }

@@ -16,7 +16,6 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const ProtocolType ExpectedProtocolType = ProtocolType.SSH2;
 
 
-
         [OneTimeSetUp]
         public void OnetimeSetup()
         {
@@ -26,7 +25,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
                 Ssh = true
             };
             _deserializer = new PortScanDeserializer(ProtocolType.SSH2);
-            var connectionTreeModel = _deserializer.Deserialize(new[] { host });
+            var connectionTreeModel = _deserializer.Deserialize(new[] {host});
             var root = connectionTreeModel.RootNodes.First();
             _importedConnectionInfo = root.Children.First();
         }

@@ -31,7 +31,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 if (_description == null)
                     InitDescription();
 
-                return (string)_description?[id];
+                return (string) _description?[id];
             }
             catch (Exception ex)
             {

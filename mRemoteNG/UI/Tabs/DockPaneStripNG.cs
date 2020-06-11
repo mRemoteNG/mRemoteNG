@@ -115,7 +115,7 @@ namespace mRemoteNG.UI.Tabs
             {
                 var rect = ClientRectangle;
                 return new Rectangle(rect.X, rect.Top + ToolWindowStripGapTop, rect.Width,
-                                     rect.Height - ToolWindowStripGapTop - ToolWindowStripGapBottom);
+                    rect.Height - ToolWindowStripGapTop - ToolWindowStripGapBottom);
             }
         }
 
@@ -125,7 +125,7 @@ namespace mRemoteNG.UI.Tabs
             {
                 var rect = ClientRectangle;
                 return new Rectangle(rect.X, rect.Top + DocumentStripGapTop, rect.Width,
-                                     rect.Height + DocumentStripGapTop - DocumentStripGapBottom);
+                    rect.Height + DocumentStripGapTop - DocumentStripGapBottom);
             }
         }
 
@@ -164,9 +164,9 @@ namespace mRemoteNG.UI.Tabs
             {
                 if (m_buttonOverflow != null) return m_buttonOverflow;
                 m_buttonOverflow = new InertButton(
-                                                   DockPane.DockPanel.Theme.ImageService.DockPaneHover_OptionOverflow,
-                                                   DockPane.DockPanel.Theme.ImageService.DockPane_OptionOverflow,
-                                                   DockPane.DockPanel.Theme.ImageService.DockPanePress_OptionOverflow);
+                    DockPane.DockPanel.Theme.ImageService.DockPaneHover_OptionOverflow,
+                    DockPane.DockPanel.Theme.ImageService.DockPane_OptionOverflow,
+                    DockPane.DockPanel.Theme.ImageService.DockPanePress_OptionOverflow);
                 m_buttonOverflow.Click += WindowList_Click;
                 Controls.Add(m_buttonOverflow);
 
@@ -180,9 +180,9 @@ namespace mRemoteNG.UI.Tabs
             {
                 if (m_buttonWindowList != null) return m_buttonWindowList;
                 m_buttonWindowList = new InertButton(
-                                                     DockPane.DockPanel.Theme.ImageService.DockPaneHover_List,
-                                                     DockPane.DockPanel.Theme.ImageService.DockPane_List,
-                                                     DockPane.DockPanel.Theme.ImageService.DockPanePress_List);
+                    DockPane.DockPanel.Theme.ImageService.DockPaneHover_List,
+                    DockPane.DockPanel.Theme.ImageService.DockPane_List,
+                    DockPane.DockPanel.Theme.ImageService.DockPanePress_List);
                 m_buttonWindowList.Click += WindowList_Click;
                 Controls.Add(m_buttonWindowList);
 
@@ -358,12 +358,13 @@ namespace mRemoteNG.UI.Tabs
         }
 
         // This seems like a bogus warning - suppressing since Components is being disposed...
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "<Components>k__BackingField")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "<Components>k__BackingField")]
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                if(Components != null)
+                if (Components != null)
                     Components.Dispose();
 
                 if (m_boldFont != null)
@@ -371,7 +372,6 @@ namespace mRemoteNG.UI.Tabs
                     m_boldFont.Dispose();
                     m_boldFont = null;
                 }
-
             }
 
             base.Dispose(disposing);
@@ -390,8 +390,8 @@ namespace mRemoteNG.UI.Tabs
                 return 0;
 
             var height = Math.Max(TextFont.Height + (PatchController.EnableHighDpi == true ? DocumentIconGapBottom : 0),
-                                  ToolWindowImageHeight + ToolWindowImageGapTop + ToolWindowImageGapBottom)
-                       + ToolWindowStripGapTop + ToolWindowStripGapBottom;
+                             ToolWindowImageHeight + ToolWindowImageGapTop + ToolWindowImageGapBottom)
+                         + ToolWindowStripGapTop + ToolWindowStripGapBottom;
 
             return height;
         }
@@ -400,10 +400,10 @@ namespace mRemoteNG.UI.Tabs
         {
             var height =
                 Math.Max(
-                         TextFont.Height + DocumentTabGapTop +
-                         (PatchController.EnableHighDpi == true ? DocumentIconGapBottom : 0),
-                         ButtonOverflow.Height + DocumentButtonGapTop + DocumentButtonGapBottom)
-              + DocumentStripGapBottom + DocumentStripGapTop;
+                    TextFont.Height + DocumentTabGapTop +
+                    (PatchController.EnableHighDpi == true ? DocumentIconGapBottom : 0),
+                    ButtonOverflow.Height + DocumentButtonGapTop + DocumentButtonGapBottom)
+                + DocumentStripGapBottom + DocumentStripGapTop;
 
             return height;
         }
@@ -413,10 +413,8 @@ namespace mRemoteNG.UI.Tabs
             base.OnPaint(e);
             CalculateTabs();
             if (Appearance == DockPane.AppearanceStyle.Document && DockPane.ActiveContent != null)
-            {
                 if (EnsureDocumentTabVisible(DockPane.ActiveContent, false))
                     CalculateTabs();
-            }
 
             DrawTabStrip(e.Graphics);
         }
@@ -507,7 +505,7 @@ namespace mRemoteNG.UI.Tabs
             var countTabs = Tabs.Count;
             foreach (var tab1 in Tabs)
             {
-                var tab = (MremoteNGTab)tab1;
+                var tab = (MremoteNGTab) tab1;
                 tab.MaxWidth = GetMaxTabWidth(Tabs.IndexOf(tab));
                 tab.Flag = false;
             }
@@ -523,7 +521,7 @@ namespace mRemoteNG.UI.Tabs
                 anyWidthWithinAverage = false;
                 foreach (var tab1 in Tabs)
                 {
-                    var tab = (MremoteNGTab)tab1;
+                    var tab = (MremoteNGTab) tab1;
                     if (tab.Flag)
                         continue;
 
@@ -542,10 +540,10 @@ namespace mRemoteNG.UI.Tabs
             // If any tab width not set yet, set it to the average width
             if (remainedTabs > 0)
             {
-                var roundUpWidth = (totalWidth - totalAllocatedWidth) - (averageWidth * remainedTabs);
+                var roundUpWidth = totalWidth - totalAllocatedWidth - averageWidth * remainedTabs;
                 foreach (var tab1 in Tabs)
                 {
-                    var tab = (MremoteNGTab)tab1;
+                    var tab = (MremoteNGTab) tab1;
                     if (tab.Flag)
                         continue;
 
@@ -556,7 +554,9 @@ namespace mRemoteNG.UI.Tabs
                         roundUpWidth--;
                     }
                     else
+                    {
                         tab.TabWidth = averageWidth;
+                    }
                 }
             }
 
@@ -564,7 +564,7 @@ namespace mRemoteNG.UI.Tabs
             var x = rectTabStrip.X + ToolWindowStripGapLeft;
             foreach (var tab1 in Tabs)
             {
-                var tab = (MremoteNGTab)tab1;
+                var tab = (MremoteNGTab) tab1;
                 tab.TabX = x;
                 x += tab.TabWidth;
             }
@@ -656,7 +656,7 @@ namespace mRemoteNG.UI.Tabs
                 x = rectTabStrip.X;
                 foreach (var tab1 in Tabs)
                 {
-                    var tab = (MremoteNGTab)tab1;
+                    var tab = (MremoteNGTab) tab1;
                     tab.TabX = x;
                     x += tab.TabWidth;
                 }
@@ -702,7 +702,7 @@ namespace mRemoteNG.UI.Tabs
             var content = Tabs[index].Content;
             var sizeString = TextRenderer.MeasureText(content.DockHandler.TabText, TextFont);
             return ToolWindowImageWidth + sizeString.Width + ToolWindowImageGapLeft
-                 + ToolWindowImageGapRight + ToolWindowTextGapRight;
+                   + ToolWindowImageGapRight + ToolWindowTextGapRight;
         }
 
         private const int TAB_CLOSE_BUTTON_WIDTH = 30;
@@ -712,7 +712,7 @@ namespace mRemoteNG.UI.Tabs
             var content = Tabs[index].Content;
             var height = GetTabRectangle_Document(index).Height;
             var sizeText = TextRenderer.MeasureText(content.DockHandler.TabText, BoldFont,
-                                                    new Size(DocumentTabMaxWidth, height), DocumentTextFormat);
+                new Size(DocumentTabMaxWidth, height), DocumentTextFormat);
 
             int width;
             if (DockPane.DockPanel.ShowDocumentIcon)
@@ -730,9 +730,9 @@ namespace mRemoteNG.UI.Tabs
             // IMPORTANT: fill background.
             var rectTabStrip = TabStripRectangle;
             g.FillRectangle(
-                            DockPane.DockPanel.Theme.PaintingService.GetBrush(DockPane.DockPanel.Theme.ColorPalette
-                                                                                      .MainWindowActive
-                                                                                      .Background), rectTabStrip);
+                DockPane.DockPanel.Theme.PaintingService.GetBrush(DockPane.DockPanel.Theme.ColorPalette
+                    .MainWindowActive
+                    .Background), rectTabStrip);
 
             if (Appearance == DockPane.AppearanceStyle.Document)
                 DrawTabStrip_Document(g);
@@ -781,7 +781,7 @@ namespace mRemoteNG.UI.Tabs
                     tabUnderLineColor = DockPane.DockPanel.Theme.ColorPalette.TabSelectedInactive.Background;
 
                 g.DrawLine(DockPane.DockPanel.Theme.PaintingService.GetPen(tabUnderLineColor, 4), rectTabStrip.Left,
-                           rectTabStrip.Bottom, rectTabStrip.Right, rectTabStrip.Bottom);
+                    rectTabStrip.Bottom, rectTabStrip.Right, rectTabStrip.Bottom);
             }
 
             g.SetClip(DrawHelper.RtlTransform(this, rectTabOnly));
@@ -799,7 +799,7 @@ namespace mRemoteNG.UI.Tabs
             var borderColor = DockPane.DockPanel.Theme.ColorPalette.ToolWindowBorder;
 
             g.DrawLine(DockPane.DockPanel.Theme.PaintingService.GetPen(borderColor), rect.Left, rect.Top,
-                       rect.Right, rect.Top);
+                rect.Right, rect.Top);
 
             for (var i = 0; i < Tabs.Count; i++)
             {
@@ -820,14 +820,14 @@ namespace mRemoteNG.UI.Tabs
         {
             var rectTabStrip = TabStripRectangle;
 
-            var tab = (MremoteNGTab)Tabs[index];
+            var tab = (MremoteNGTab) Tabs[index];
             return new Rectangle(tab.TabX, rectTabStrip.Y, tab.TabWidth, rectTabStrip.Height);
         }
 
         private Rectangle GetTabRectangle_Document(int index)
         {
             var rectTabStrip = TabStripRectangle;
-            var tab = (MremoteNGTab)Tabs[index];
+            var tab = (MremoteNGTab) Tabs[index];
 
             var rect = new Rectangle
             {
@@ -892,14 +892,14 @@ namespace mRemoteNG.UI.Tabs
             if (tab.Rectangle == null) return;
             var rect = tab.Rectangle.Value;
             var rectIcon = new Rectangle(
-                                         rect.X + ToolWindowImageGapLeft,
-                                         rect.Y + rect.Height - ToolWindowImageGapBottom - ToolWindowImageHeight,
-                                         ToolWindowImageWidth, ToolWindowImageHeight);
+                rect.X + ToolWindowImageGapLeft,
+                rect.Y + rect.Height - ToolWindowImageGapBottom - ToolWindowImageHeight,
+                ToolWindowImageWidth, ToolWindowImageHeight);
             var rectText = PatchController.EnableHighDpi == true
                 ? new Rectangle(
-                                rect.X + ToolWindowImageGapLeft,
-                                rect.Y + rect.Height - ToolWindowImageGapBottom - TextFont.Height,
-                                ToolWindowImageWidth, TextFont.Height)
+                    rect.X + ToolWindowImageGapLeft,
+                    rect.Y + rect.Height - ToolWindowImageGapBottom - TextFont.Height,
+                    ToolWindowImageWidth, TextFont.Height)
                 : rectIcon;
             rectText.X += rectIcon.Width + ToolWindowImageGapRight;
             rectText.Width = rect.Width - rectIcon.Width - ToolWindowImageGapLeft -
@@ -928,13 +928,13 @@ namespace mRemoteNG.UI.Tabs
 
                 g.FillRectangle(DockPane.DockPanel.Theme.PaintingService.GetBrush(backgroundColor), rect);
                 g.DrawLine(DockPane.DockPanel.Theme.PaintingService.GetPen(borderColor), rect.Left, rect.Top,
-                           rect.Left, rect.Bottom);
+                    rect.Left, rect.Bottom);
                 g.DrawLine(DockPane.DockPanel.Theme.PaintingService.GetPen(borderColor), rect.Left, rect.Bottom - 1,
-                           rect.Right, rect.Bottom - 1);
+                    rect.Right, rect.Bottom - 1);
                 g.DrawLine(DockPane.DockPanel.Theme.PaintingService.GetPen(borderColor), rect.Right - 1, rect.Top,
-                           rect.Right - 1, rect.Bottom);
+                    rect.Right - 1, rect.Bottom);
                 TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, TextFont, rectText, textColor,
-                                      ToolWindowTextFormat);
+                    ToolWindowTextFormat);
             }
             else
             {
@@ -953,9 +953,9 @@ namespace mRemoteNG.UI.Tabs
 
                 g.FillRectangle(DockPane.DockPanel.Theme.PaintingService.GetBrush(backgroundColor), rect);
                 g.DrawLine(DockPane.DockPanel.Theme.PaintingService.GetPen(borderColor), rect.Left, rect.Top,
-                           rect.Right, rect.Top);
+                    rect.Right, rect.Top);
                 TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, TextFont, rectText, textColor,
-                                      ToolWindowTextFormat);
+                    ToolWindowTextFormat);
             }
 
             if (rectTab.Contains(rectIcon))
@@ -971,14 +971,14 @@ namespace mRemoteNG.UI.Tabs
 
             var rectCloseButton = GetCloseButtonRect(rect);
             var rectIcon = new Rectangle(
-                                         rect.X + DocumentIconGapLeft,
-                                         rect.Y + rect.Height - DocumentIconGapBottom - DocumentIconHeight,
-                                         DocumentIconWidth, DocumentIconHeight);
+                rect.X + DocumentIconGapLeft,
+                rect.Y + rect.Height - DocumentIconGapBottom - DocumentIconHeight,
+                DocumentIconWidth, DocumentIconHeight);
             var rectText = PatchController.EnableHighDpi == true
                 ? new Rectangle(
-                                rect.X + DocumentIconGapLeft,
-                                rect.Y + rect.Height - DocumentIconGapBottom - TextFont.Height,
-                                DocumentIconWidth, TextFont.Height)
+                    rect.X + DocumentIconGapLeft,
+                    rect.Y + rect.Height - DocumentIconGapBottom - TextFont.Height,
+                    DocumentIconWidth, TextFont.Height)
                 : rectIcon;
             if (DockPane.DockPanel.ShowDocumentIcon)
             {
@@ -989,7 +989,9 @@ namespace mRemoteNG.UI.Tabs
                 rectText.Height = rect.Height;
             }
             else
+            {
                 rectText.Width = rect.Width - DocumentIconGapLeft - DocumentTextGapRight - rectCloseButton.Width;
+            }
 
             var rectTab = DrawHelper.RtlTransform(this, rect);
             var rectBack = DrawHelper.RtlTransform(this, rect);
@@ -1111,9 +1113,7 @@ namespace mRemoteNG.UI.Tabs
                 {
                     if (Appearance == DockPane.AppearanceStyle.ToolWindow ||
                         Appearance == DockPane.AppearanceStyle.Document)
-                    {
                         tabUpdate = SetMouseOverTab(tab.Content == DockPane.ActiveContent ? null : tab.Content);
-                    }
 
                     if (!string.IsNullOrEmpty(tab.Content.DockHandler.ToolTipText))
                         toolTip = tab.Content.DockHandler.ToolTipText;
@@ -1127,8 +1127,8 @@ namespace mRemoteNG.UI.Tabs
                         var closeButtonRect = GetCloseButtonRect(tabRect);
                         var mouseRect = new Rectangle(mousePos, new Size(1, 1));
                         buttonUpdate = SetActiveClose(closeButtonRect.IntersectsWith(mouseRect)
-                                                          ? closeButtonRect
-                                                          : Rectangle.Empty);
+                            ? closeButtonRect
+                            : Rectangle.Empty);
                     }
                 }
             }
@@ -1168,15 +1168,12 @@ namespace mRemoteNG.UI.Tabs
 
         private Rectangle GetCloseButtonRect(Rectangle rectTab)
         {
-            if (Appearance != DockPane.AppearanceStyle.Document)
-            {
-                return Rectangle.Empty;
-            }
+            if (Appearance != DockPane.AppearanceStyle.Document) return Rectangle.Empty;
 
             const int gap = 3;
             var imageSize = PatchController.EnableHighDpi == true ? rectTab.Height - gap * 2 : 15;
             return new Rectangle(rectTab.X + rectTab.Width - imageSize - gap - 1, rectTab.Y + gap, imageSize,
-                                 imageSize);
+                imageSize);
         }
 
         private void WindowList_Click(object sender, EventArgs e)
@@ -1184,7 +1181,7 @@ namespace mRemoteNG.UI.Tabs
             SelectMenu.Items.Clear();
             foreach (var tab1 in Tabs)
             {
-                var tab = (MremoteNGTab)tab1;
+                var tab = (MremoteNGTab) tab1;
                 var content = tab.Content;
                 var item = SelectMenu.Items.Add(content.DockHandler.TabText, content.DockHandler.Icon.ToBitmap());
                 item.Tag = tab.Content;
@@ -1193,14 +1190,14 @@ namespace mRemoteNG.UI.Tabs
 
             var workingArea =
                 Screen.GetWorkingArea(ButtonWindowList.PointToScreen(new Point(ButtonWindowList.Width / 2,
-                                                                               ButtonWindowList.Height / 2)));
+                    ButtonWindowList.Height / 2)));
             var menu = new Rectangle(
-                                     ButtonWindowList.PointToScreen(new Point(0,
-                                                                              ButtonWindowList.Location.Y +
-                                                                              ButtonWindowList.Height)),
-                                     SelectMenu.Size);
+                ButtonWindowList.PointToScreen(new Point(0,
+                    ButtonWindowList.Location.Y +
+                    ButtonWindowList.Height)),
+                SelectMenu.Size);
             var menuMargined = new Rectangle(menu.X - SelectMenuMargin, menu.Y - SelectMenuMargin,
-                                             menu.Width + SelectMenuMargin, menu.Height + SelectMenuMargin);
+                menu.Width + SelectMenuMargin, menu.Height + SelectMenuMargin);
             if (workingArea.Contains(menuMargined))
             {
                 SelectMenu.Show(menu.Location);
@@ -1209,9 +1206,9 @@ namespace mRemoteNG.UI.Tabs
             {
                 var newPoint = menu.Location;
                 newPoint.X = DrawHelper.Balance(SelectMenu.Width, SelectMenuMargin, newPoint.X, workingArea.Left,
-                                                workingArea.Right);
+                    workingArea.Right);
                 newPoint.Y = DrawHelper.Balance(SelectMenu.Size.Height, SelectMenuMargin, newPoint.Y, workingArea.Top,
-                                                workingArea.Bottom);
+                    workingArea.Bottom);
                 var button = ButtonWindowList.PointToScreen(new Point(0, ButtonWindowList.Height));
                 if (newPoint.Y < button.Y)
                 {
@@ -1229,7 +1226,7 @@ namespace mRemoteNG.UI.Tabs
         private void ContextMenuItem_Click(object sender, EventArgs e)
         {
             if (!(sender is ToolStripMenuItem item)) return;
-            var content = (IDockContent)item.Tag;
+            var content = (IDockContent) item.Tag;
             DockPane.ActiveContent = content;
         }
 
@@ -1295,10 +1292,7 @@ namespace mRemoteNG.UI.Tabs
         {
             CloseProtocol();
 
-            if (PatchController.EnableMemoryLeakFix == true)
-            {
-                ContentClosed();
-            }
+            if (PatchController.EnableMemoryLeakFix == true) ContentClosed();
         }
 
         protected override int HitTest(Point point)
@@ -1319,11 +1313,9 @@ namespace mRemoteNG.UI.Tabs
         protected override bool MouseDownActivateTest(MouseEventArgs e)
         {
             var result = base.MouseDownActivateTest(e);
-            if (result && (e.Button == MouseButtons.Left) && (Appearance == DockPane.AppearanceStyle.Document))
-            {
+            if (result && e.Button == MouseButtons.Left && Appearance == DockPane.AppearanceStyle.Document)
                 // don't activate if mouse is down on active close button
                 result = !ActiveCloseHitTest(e.Location);
-            }
 
             return result;
         }
@@ -1339,7 +1331,8 @@ namespace mRemoteNG.UI.Tabs
         {
             var path = GetTabOutline(tab, true, false);
             var rectangle = path.GetBounds();
-            return new Rectangle((int)rectangle.Left, (int)rectangle.Top, (int)rectangle.Width, (int)rectangle.Height);
+            return new Rectangle((int) rectangle.Left, (int) rectangle.Top, (int) rectangle.Width,
+                (int) rectangle.Height);
         }
 
         private Rectangle ActiveClose { get; set; }
@@ -1389,7 +1382,7 @@ namespace mRemoteNG.UI.Tabs
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == (int)Msgs.WM_LBUTTONDBLCLK)
+            if (m.Msg == (int) Msgs.WM_LBUTTONDBLCLK)
             {
                 // If the option is not set, do nothing. Do not send the message to base.
                 if (!Settings.Default.DoubleClickOnTabClosesIt) return;
@@ -1398,10 +1391,7 @@ namespace mRemoteNG.UI.Tabs
                 //DockPane.CloseActiveContent();
                 CloseProtocol();
 
-                if (PatchController.EnableMemoryLeakFix == true)
-                {
-                    ContentClosed();
-                }
+                if (PatchController.EnableMemoryLeakFix == true) ContentClosed();
 
                 return;
             }

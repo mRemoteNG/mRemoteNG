@@ -33,7 +33,7 @@ namespace mRemoteNG.UI.Controls
         private ConnectionContextMenu _contextMenu;
         private ConnectionTreeModel _connectionTreeModel;
 
-        public ConnectionInfo SelectedNode => (ConnectionInfo)SelectedObject;
+        public ConnectionInfo SelectedNode => (ConnectionInfo) SelectedObject;
 
         public NodeSearcher NodeSearcher { get; private set; }
 
@@ -95,11 +95,11 @@ namespace mRemoteNG.UI.Controls
         {
             if (disposing)
             {
-                if(components != null)
+                if (components != null)
                     components.Dispose();
 
-                if(_statusImageList != null)
-                _statusImageList.Dispose();
+                if (_statusImageList != null)
+                    _statusImageList.Dispose();
 
                 _themeManager.ThemeChanged -= ThemeManagerOnThemeChanged;
             }
@@ -132,7 +132,7 @@ namespace mRemoteNG.UI.Controls
                 var itemAsContainer = item as ContainerInfo;
                 return itemAsContainer?.Children.Count > 0;
             };
-            ChildrenGetter = item => ((ContainerInfo)item).Children;
+            ChildrenGetter = item => ((ContainerInfo) item).Children;
         }
 
         private void SetupDropSink()
@@ -174,7 +174,7 @@ namespace mRemoteNG.UI.Controls
         {
             if (InvokeRequired)
             {
-                Invoke((MethodInvoker)(() => AutoResizeColumn(column)));
+                Invoke((MethodInvoker) (() => AutoResizeColumn(column)));
                 return;
             }
 
@@ -235,11 +235,9 @@ namespace mRemoteNG.UI.Controls
             // Removed "TO DO" from above comment. Per #142 it apperas that this no longer occurs with ObjectListView 2.9.1
             var property = propertyChangedEventArgs.PropertyName;
             if (property != nameof(ConnectionInfo.Name)
-             && property != nameof(ConnectionInfo.OpenConnections)
-             && property != nameof(ConnectionInfo.Icon))
-            {
+                && property != nameof(ConnectionInfo.OpenConnections)
+                && property != nameof(ConnectionInfo.Icon))
                 return;
-            }
 
             if (!(sender is ConnectionInfo senderAsConnectionInfo))
                 return;
@@ -250,10 +248,7 @@ namespace mRemoteNG.UI.Controls
 
         private void ExecutePostSetupActions()
         {
-            foreach (var action in PostSetupActions)
-            {
-                action.Execute(this);
-            }
+            foreach (var action in PostSetupActions) action.Execute(this);
         }
 
         #endregion
@@ -262,12 +257,12 @@ namespace mRemoteNG.UI.Controls
 
         public RootNodeInfo GetRootConnectionNode()
         {
-            return (RootNodeInfo)ConnectionTreeModel.RootNodes.First(item => item is RootNodeInfo);
+            return (RootNodeInfo) ConnectionTreeModel.RootNodes.First(item => item is RootNodeInfo);
         }
 
         public void Invoke(Action action)
         {
-            Invoke((Delegate)action);
+            Invoke((Delegate) action);
         }
 
         public void InvokeExpand(object model)
@@ -319,7 +314,7 @@ namespace mRemoteNG.UI.Controls
             _connectionTreeSearchTextFilter.SpecialInclusionList.Add(newNode);
 
             // use root node if no node is selected
-            ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
+            var parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
             DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
             var selectedContainer = parentNode as ContainerInfo;
@@ -429,10 +424,7 @@ namespace mRemoteNG.UI.Controls
             // throwing an exception
             var filteringEnabled = IsFiltering;
             var filter = ModelFilter;
-            if (filteringEnabled)
-            {
-                ResetColumnFiltering();
-            }
+            if (filteringEnabled) ResetColumnFiltering();
 
             RefreshObject(sender);
             AutoResizeColumn(Columns[0]);
@@ -458,8 +450,8 @@ namespace mRemoteNG.UI.Controls
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                    "tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed",
+                    ex);
             }
         }
 
@@ -494,14 +486,14 @@ namespace mRemoteNG.UI.Controls
                     return;
                 }
 
-                var nodeProducingTooltip = (ConnectionInfo)e.Model;
+                var nodeProducingTooltip = (ConnectionInfo) e.Model;
                 e.Text = nodeProducingTooltip.Description;
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                    "tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed",
+                    ex);
             }
         }
 
@@ -539,8 +531,8 @@ namespace mRemoteNG.UI.Controls
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                    "tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed",
+                    ex);
             }
         }
 

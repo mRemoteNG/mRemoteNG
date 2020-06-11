@@ -20,8 +20,8 @@ namespace mRemoteNGTests.Config.Serializers
         {
             _saveFilter = new SaveFilter();
             _dataTableSerializer = new DataTableSerializer(
-                _saveFilter, 
-                new LegacyRijndaelCryptographyProvider(), 
+                _saveFilter,
+                new LegacyRijndaelCryptographyProvider(),
                 new SecureString());
         }
 
@@ -76,7 +76,6 @@ namespace mRemoteNGTests.Config.Serializers
             var dataTable = _dataTableSerializer.Serialize(model);
             Assert.That(dataTable.Rows[0]["InheritUsername"], Is.Not.EqualTo(""));
         }
-
 
 
         [Test]

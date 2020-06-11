@@ -16,13 +16,13 @@ namespace mRemoteNG.Tools
     {
         #region Properties
 
-        public static int SshPort { get; set; } = (int)ProtocolSSH1.Defaults.Port;
-        public static int TelnetPort { get; set; } = (int)ProtocolTelnet.Defaults.Port;
-        public static int HttpPort { get; set; } = (int)ProtocolHTTP.Defaults.Port;
-        public static int HttpsPort { get; set; } = (int)ProtocolHTTPS.Defaults.Port;
-        public static int RloginPort { get; set; } = (int)ProtocolRlogin.Defaults.Port;
-        public static int RdpPort { get; set; } = (int)RdpProtocol6.Defaults.Port;
-        public static int VncPort { get; set; } = (int)ProtocolVNC.Defaults.Port;
+        public static int SshPort { get; set; } = (int) ProtocolSSH1.Defaults.Port;
+        public static int TelnetPort { get; set; } = (int) ProtocolTelnet.Defaults.Port;
+        public static int HttpPort { get; set; } = (int) ProtocolHTTP.Defaults.Port;
+        public static int HttpsPort { get; set; } = (int) ProtocolHTTPS.Defaults.Port;
+        public static int RloginPort { get; set; } = (int) ProtocolRlogin.Defaults.Port;
+        public static int RdpPort { get; set; } = (int) RdpProtocol6.Defaults.Port;
+        public static int VncPort { get; set; } = (int) ProtocolVNC.Defaults.Port;
         public ArrayList OpenPorts { get; set; }
         public ArrayList ClosedPorts { get; set; }
         public bool Rdp { get; set; }
@@ -39,10 +39,7 @@ namespace mRemoteNG.Tools
         {
             get
             {
-                if (string.IsNullOrEmpty(HostName) || HostName == HostIp)
-                {
-                    return HostIp;
-                }
+                if (string.IsNullOrEmpty(HostName) || HostName == HostIp) return HostIp;
 
                 return HostName.Split('.')[0];
             }
@@ -86,50 +83,26 @@ namespace mRemoteNG.Tools
             }
         }
 
-        public string RdpName
-        {
-            get { return BoolToYesNo(Rdp); }
-        }
+        public string RdpName => BoolToYesNo(Rdp);
 
-        public string VncName
-        {
-            get { return BoolToYesNo(Vnc); }
-        }
+        public string VncName => BoolToYesNo(Vnc);
 
-        public string SshName
-        {
-            get { return BoolToYesNo(Rdp); }
-        }
+        public string SshName => BoolToYesNo(Rdp);
 
-        public string TelnetName
-        {
-            get { return BoolToYesNo(Telnet); }
-        }
+        public string TelnetName => BoolToYesNo(Telnet);
 
-        public string RloginName
-        {
-            get { return BoolToYesNo(Rlogin); }
-        }
+        public string RloginName => BoolToYesNo(Rlogin);
 
-        public string HttpName
-        {
-            get { return BoolToYesNo(Http); }
-        }
+        public string HttpName => BoolToYesNo(Http);
 
-        public string HttpsName
-        {
-            get { return BoolToYesNo(Https); }
-        }
+        public string HttpsName => BoolToYesNo(Https);
 
         public string OpenPortsName
         {
             get
             {
                 var strOpen = "";
-                foreach (int p in OpenPorts)
-                {
-                    strOpen += p + ", ";
-                }
+                foreach (int p in OpenPorts) strOpen += p + ", ";
 
                 return strOpen;
             }
@@ -140,10 +113,7 @@ namespace mRemoteNG.Tools
             get
             {
                 var strClosed = "";
-                foreach (int p in ClosedPorts)
-                {
-                    strClosed += p + ", ";
-                }
+                foreach (int p in ClosedPorts) strClosed += p + ", ";
 
                 return strClosed;
             }

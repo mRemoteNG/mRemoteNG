@@ -19,10 +19,7 @@ namespace mRemoteNG.App
 
             frmMain.Location = screen.Bounds.Location;
 
-            if (wasMax)
-            {
-                frmMain.WindowState = FormWindowState.Maximized;
-            }
+            if (wasMax) frmMain.WindowState = FormWindowState.Maximized;
         }
 
         public static void SendPanelToScreen(DockContent panel, Screen screen)

@@ -29,14 +29,16 @@ namespace mRemoteNGTests.Tree
             _connectionTree.ConnectionTreeModel.Returns(connectionTreeModel);
             _connectionTree.GetRootConnectionNode().Returns(connectionTreeModel.RootNodes[0]);
             _folderExpander.Execute(_connectionTree);
-            Assert.That(_connectionTree.ExpandedObjects, Is.EquivalentTo(connectionTreeModel.GetRecursiveChildList().OfType<ContainerInfo>().Where(info => info.IsExpanded)));
+            Assert.That(_connectionTree.ExpandedObjects,
+                Is.EquivalentTo(connectionTreeModel.GetRecursiveChildList().OfType<ContainerInfo>()
+                    .Where(info => info.IsExpanded)));
         }
 
         private ConnectionTreeModel GenerateConnectionTreeModel()
         {
             var connectionTreeModel = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection) { IsExpanded = true };
-            var folder1 = new ContainerInfo { IsExpanded = true };
+            var root = new RootNodeInfo(RootNodeType.Connection) {IsExpanded = true};
+            var folder1 = new ContainerInfo {IsExpanded = true};
             var folder2 = new ContainerInfo();
             var con1 = new ConnectionInfo();
             root.AddChild(folder1);

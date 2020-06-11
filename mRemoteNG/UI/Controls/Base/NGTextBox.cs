@@ -24,8 +24,8 @@ namespace mRemoteNG.UI.Controls.Base
             if (!_themeManager.ActiveAndExtended) return;
             ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Foreground");
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor(ReadOnly
-                                                                               ? "TextBox_Disabled_Background"
-                                                                               : "TextBox_Background");
+                ? "TextBox_Disabled_Background"
+                : "TextBox_Background");
             Invalidate();
         }
 

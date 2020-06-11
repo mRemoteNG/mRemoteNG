@@ -27,26 +27,18 @@ namespace mRemoteNG.Tools
                 foreach (var method in methods)
                 {
                     var commandAttributes = method.GetCustomAttributes(typeof(CommandAttribute), true);
-                    if (commandAttributes.Length == 0)
-                    {
-                        continue;
-                    }
+                    if (commandAttributes.Length == 0) continue;
 
-                    var commandAttribute = (CommandAttribute)commandAttributes[0];
-                    if (!commandAttribute.Command)
-                    {
-                        continue;
-                    }
+                    var commandAttribute = (CommandAttribute) commandAttributes[0];
+                    if (!commandAttribute.Command) continue;
 
                     var displayName = method.Name;
                     var displayNameAttributes = method.GetCustomAttributes(typeof(DisplayNameAttribute), true);
                     if (displayNameAttributes.Length != 0)
                     {
-                        var displayNameAttribute = (DisplayNameAttribute)displayNameAttributes[0];
+                        var displayNameAttribute = (DisplayNameAttribute) displayNameAttributes[0];
                         if (!string.IsNullOrEmpty(displayNameAttribute.DisplayName))
-                        {
                             displayName = displayNameAttribute.DisplayName;
-                        }
                     }
 
                     objectVerbs.Add(new DesignerVerb(displayName, new EventHandler(VerbEventHandler)));
@@ -59,10 +51,7 @@ namespace mRemoteNG.Tools
         private void VerbEventHandler(object sender, EventArgs e)
         {
             var verb = sender as DesignerVerb;
-            if (verb == null)
-            {
-                return;
-            }
+            if (verb == null) return;
 
             // ReSharper disable VBPossibleMistakenCallToGetType.2
             var methods = TheObject.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
@@ -70,26 +59,18 @@ namespace mRemoteNG.Tools
             foreach (var method in methods)
             {
                 var commandAttributes = method.GetCustomAttributes(typeof(CommandAttribute), true);
-                if (commandAttributes.Length == 0)
-                {
-                    continue;
-                }
+                if (commandAttributes.Length == 0) continue;
 
-                var commandAttribute = (CommandAttribute)commandAttributes[0];
-                if (!commandAttribute.Command)
-                {
-                    continue;
-                }
+                var commandAttribute = (CommandAttribute) commandAttributes[0];
+                if (!commandAttribute.Command) continue;
 
                 var displayName = method.Name;
                 var displayNameAttributes = method.GetCustomAttributes(typeof(DisplayNameAttribute), true);
                 if (displayNameAttributes.Length != 0)
                 {
-                    var displayNameAttribute = (DisplayNameAttribute)displayNameAttributes[0];
+                    var displayNameAttribute = (DisplayNameAttribute) displayNameAttributes[0];
                     if (!string.IsNullOrEmpty(displayNameAttribute.DisplayName))
-                    {
                         displayName = displayNameAttribute.DisplayName;
-                    }
                 }
 
                 if (verb.Text != displayName) continue;

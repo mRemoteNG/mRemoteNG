@@ -28,7 +28,7 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
             try
             {
                 Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     "Attempting to start remote PowerShell session.", true);
+                    "Attempting to start remote PowerShell session.", true);
 
                 _consoleControl = new ConsoleControl.ConsoleControl
                 {
@@ -41,11 +41,11 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
 
                 _consoleControl.StartProcess(@"C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell.exe",
                     $@"-NoExit -Command ""$password = ConvertTo-SecureString '{_connectionInfo.Password}' -AsPlainText -Force; $cred = New-Object System.Management.Automation.PSCredential -ArgumentList @('{_connectionInfo.Domain}\{_connectionInfo.Username}', $password); Enter-PSSession -ComputerName {_connectionInfo.Hostname} -Credential $cred""");
-                
+
                 while (!_consoleControl.IsHandleCreated) break;
                 _handle = _consoleControl.Handle;
                 NativeMethods.SetParent(_handle, InterfaceControl.Handle);
-                
+
                 Resize(this, new EventArgs());
                 base.Connect();
                 return true;
@@ -75,10 +75,10 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
             {
                 if (InterfaceControl.Size == Size.Empty) return;
                 NativeMethods.MoveWindow(_handle, -SystemInformation.FrameBorderSize.Width,
-                                         -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height),
-                                         InterfaceControl.Width + SystemInformation.FrameBorderSize.Width * 2,
-                                         InterfaceControl.Height + SystemInformation.CaptionHeight +
-                                         SystemInformation.FrameBorderSize.Height * 2, true);
+                    -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height),
+                    InterfaceControl.Width + SystemInformation.FrameBorderSize.Width * 2,
+                    InterfaceControl.Height + SystemInformation.CaptionHeight +
+                    SystemInformation.FrameBorderSize.Height * 2, true);
             }
             catch (Exception ex)
             {

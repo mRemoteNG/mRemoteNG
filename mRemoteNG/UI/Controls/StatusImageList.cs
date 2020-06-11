@@ -21,8 +21,8 @@ namespace mRemoteNG.UI.Controls
             {
                 ColorDepth = ColorDepth.Depth32Bit,
                 ImageSize = new Size(
-                                     (int)Math.Round(16 * display.ResolutionScalingFactor.Width),
-                                     (int)Math.Round(16 * display.ResolutionScalingFactor.Height)),
+                    (int) Math.Round(16 * display.ResolutionScalingFactor.Width),
+                    (int) Math.Round(16 * display.ResolutionScalingFactor.Height)),
                 TransparentColor = Color.Transparent
             };
 
@@ -62,23 +62,17 @@ namespace mRemoteNG.UI.Controls
 
         private string GetConnectionIcon(ConnectionInfo connection)
         {
-            if (string.IsNullOrEmpty(connection.Icon))
-            {
-                return DefaultConnectionIcon;
-            }
+            if (string.IsNullOrEmpty(connection.Icon)) return DefaultConnectionIcon;
 
             var connected = connection.OpenConnections.Count > 0;
             var name = BuildConnectionIconName(connection.Icon, connected);
             if (ImageList.Images.ContainsKey(name)) return name;
             var image = ConnectionIcon.FromString(connection.Icon);
-            if (image == null)
-            {
-                return DefaultConnectionIcon;
-            }
+            if (image == null) return DefaultConnectionIcon;
 
             ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), image);
             ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true),
-                                 Overlay(image, Resources.ConnectedOverlay));
+                Overlay(image, Resources.ConnectedOverlay));
             return name;
         }
 
@@ -104,8 +98,8 @@ namespace mRemoteNG.UI.Controls
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                $"Unable to fill the image list of type {nameof(StatusImageList)}",
-                                                                ex);
+                    $"Unable to fill the image list of type {nameof(StatusImageList)}",
+                    ex);
             }
         }
 
@@ -117,10 +111,7 @@ namespace mRemoteNG.UI.Controls
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ImageList?.Dispose();
-            }
+            if (disposing) ImageList?.Dispose();
         }
     }
 }

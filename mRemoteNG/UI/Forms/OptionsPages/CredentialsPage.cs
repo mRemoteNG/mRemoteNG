@@ -57,17 +57,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             if (radCredentialsNoInfo.Checked)
-            {
                 Settings.Default.EmptyCredentials = "noinfo";
-            }
             else if (radCredentialsWindows.Checked)
-            {
                 Settings.Default.EmptyCredentials = "windows";
-            }
-            else if (radCredentialsCustom.Checked)
-            {
-                Settings.Default.EmptyCredentials = "custom";
-            }
+            else if (radCredentialsCustom.Checked) Settings.Default.EmptyCredentials = "custom";
 
             Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();

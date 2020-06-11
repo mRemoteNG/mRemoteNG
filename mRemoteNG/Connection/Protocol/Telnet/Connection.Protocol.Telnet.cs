@@ -4,7 +4,7 @@ namespace mRemoteNG.Connection.Protocol.Telnet
     {
         public ProtocolTelnet()
         {
-            this.PuttyProtocol = Putty_Protocol.telnet;
+            PuttyProtocol = Putty_Protocol.telnet;
         }
 
         public enum Defaults

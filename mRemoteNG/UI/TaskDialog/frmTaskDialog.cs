@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.TaskDialog
             {
                 foreach (var rb in _radioButtonCtrls)
                     if (rb.Checked)
-                        return (int)rb.Tag;
+                        return (int) rb.Tag;
                 return -1;
             }
         }
@@ -399,13 +399,13 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         private Image ResizeBitmap(Image srcImg, int newWidth, int newHeight)
         {
-            var percentWidth = _display.ScaleWidth(newWidth) / (float)srcImg.Width;
-            var percentHeight = _display.ScaleHeight(newHeight) / (float)srcImg.Height;
+            var percentWidth = _display.ScaleWidth(newWidth) / (float) srcImg.Width;
+            var percentHeight = _display.ScaleHeight(newHeight) / (float) srcImg.Height;
 
             var resizePercent = percentHeight < percentWidth ? percentHeight : percentWidth;
 
-            var w = (int)(srcImg.Width * resizePercent);
-            var h = (int)(srcImg.Height * resizePercent);
+            var w = (int) (srcImg.Width * resizePercent);
+            var h = (int) (srcImg.Height * resizePercent);
             var b = new Bitmap(w, h);
 
             using (var g = Graphics.FromImage(b))
@@ -428,7 +428,7 @@ namespace mRemoteNG.UI.TaskDialog
             using (var g = Graphics.FromHwnd(lb.Handle))
             {
                 var stringSize = g.MeasureString(text, textFont, layoutSize);
-                lb.Height = (int)stringSize.Height + 4;
+                lb.Height = (int) stringSize.Height + 4;
             }
         }
 
@@ -441,7 +441,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         private void CommandButton_Click(object sender, EventArgs e)
         {
-            CommandButtonClickedIndex = (int)((CommandButton)sender).Tag;
+            CommandButtonClickedIndex = (int) ((CommandButton) sender).Tag;
             DialogResult = DialogResult.OK;
         }
 
@@ -494,7 +494,6 @@ namespace mRemoteNG.UI.TaskDialog
         private void frmTaskDialog_Shown(object sender, EventArgs e)
         {
             if (CTaskDialog.PlaySystemSounds)
-            {
                 switch (MainIcon)
                 {
                     case ESysIcons.Error:
@@ -512,7 +511,6 @@ namespace mRemoteNG.UI.TaskDialog
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-            }
 
             _focusControl?.Focus();
         }

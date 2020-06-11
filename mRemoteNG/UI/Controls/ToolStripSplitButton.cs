@@ -7,7 +7,7 @@ namespace mRemoteNG.UI.Controls
     {
         public new ToolStripDropDown DropDown
         {
-            get { return base.DropDown; }
+            get => base.DropDown;
             set
             {
                 if (base.DropDown != value)
@@ -20,20 +20,14 @@ namespace mRemoteNG.UI.Controls
 
         private void DropDown_Closing(object sender, ToolStripDropDownClosingEventArgs e)
         {
-            if (e.CloseReason != ToolStripDropDownCloseReason.AppClicked)
-            {
-                return;
-            }
+            if (e.CloseReason != ToolStripDropDownCloseReason.AppClicked) return;
 
-            Rectangle dropDownButtonBoundsClient = DropDownButtonBounds; // Relative to the ToolStripSplitButton
+            var dropDownButtonBoundsClient = DropDownButtonBounds; // Relative to the ToolStripSplitButton
             dropDownButtonBoundsClient.Offset(Bounds.Location); // Relative to the parent of the ToolStripSplitButton
-            Rectangle dropDownButtonBoundsScreen =
+            var dropDownButtonBoundsScreen =
                 GetCurrentParent().RectangleToScreen(dropDownButtonBoundsClient); // Relative to the screen
 
-            if (dropDownButtonBoundsScreen.Contains(Control.MousePosition))
-            {
-                e.Cancel = true;
-            }
+            if (dropDownButtonBoundsScreen.Contains(Control.MousePosition)) e.Cancel = true;
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -45,13 +39,9 @@ namespace mRemoteNG.UI.Controls
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (_dropDownVisibleOnMouseDown)
-            {
                 DropDown.Close();
-            }
             else
-            {
                 base.OnMouseUp(e);
-            }
         }
 
         private bool _dropDownVisibleOnMouseDown;

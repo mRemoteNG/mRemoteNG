@@ -65,21 +65,18 @@ namespace mRemoteNG.UI.Controls.Base
 
         private void NGListView_FormatCell(object sender, FormatCellEventArgs e)
         {
-            if (e.Column.IsVisible)
-            {
-                e.SubItem.Decoration = deco;
-            }
+            if (e.Column.IsVisible) e.SubItem.Decoration = deco;
         }
 
         private void InitializeComponent()
         {
-            ((ISupportInitialize)(this)).BeginInit();
+            ((ISupportInitialize) this).BeginInit();
             SuspendLayout();
             // 
             // NGListView
             // 
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ((ISupportInitialize)(this)).EndInit();
+            ((ISupportInitialize) this).EndInit();
             ResumeLayout(false);
         }
     }

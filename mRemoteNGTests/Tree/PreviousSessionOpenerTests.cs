@@ -41,9 +41,9 @@ namespace mRemoteNGTests.Tree
         private RootNodeInfo BuildTree()
         {
             var root = new RootNodeInfo(RootNodeType.Connection);
-            root.AddChild(new ConnectionInfo { PleaseConnect = true });
+            root.AddChild(new ConnectionInfo {PleaseConnect = true});
             root.AddChild(new ConnectionInfo());
-            root.AddChild(new ConnectionInfo { PleaseConnect = true });
+            root.AddChild(new ConnectionInfo {PleaseConnect = true});
             return root;
         }
     }

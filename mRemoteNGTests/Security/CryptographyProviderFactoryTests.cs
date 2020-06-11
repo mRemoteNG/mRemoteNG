@@ -31,12 +31,8 @@ namespace mRemoteNGTests.Security
                 get
                 {
                     foreach (var engine in Enum.GetValues(typeof(BlockCipherEngines)))
-                    {
-                        foreach (var mode in Enum.GetValues(typeof(BlockCipherModes)))
-                        {
-                            yield return new TestCaseData(engine, mode);
-                        }
-                    }
+                    foreach (var mode in Enum.GetValues(typeof(BlockCipherModes)))
+                        yield return new TestCaseData(engine, mode);
                 }
             }
         }

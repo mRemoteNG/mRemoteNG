@@ -5,7 +5,7 @@
     //  The PropertyChanged event is raised after a setting's value is changed.
     //  The SettingsLoaded event is raised after the setting values are loaded.
     //  The SettingsSaving event is raised before the setting values are saved.
-    [global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
+    [System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
     internal sealed partial class Settings
     {
         public Settings()

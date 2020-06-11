@@ -17,7 +17,6 @@ namespace mRemoteNGTests.Config
 #pragma warning disable 618
     public class CredentialHarvesterTests
     {
-
         private CredentialHarvester _credentialHarvester;
         private ICryptographyProvider _cryptographyProvider;
         private SecureString _key;
@@ -33,7 +32,7 @@ namespace mRemoteNGTests.Config
         [Test]
         public void HarvestsUsername()
         {
-            var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
+            var connection = new ConnectionInfo {Username = "myuser", Domain = "somedomain", Password = "mypass"};
             var xdoc = CreateTestData(connection);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
             Assert.That(credentials.Single().Username, Is.EqualTo(connection.Username));
@@ -42,7 +41,7 @@ namespace mRemoteNGTests.Config
         [Test]
         public void HarvestsDomain()
         {
-            var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
+            var connection = new ConnectionInfo {Username = "myuser", Domain = "somedomain", Password = "mypass"};
             var xdoc = CreateTestData(connection);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
             Assert.That(credentials.Single().Domain, Is.EqualTo(connection.Domain));
@@ -51,7 +50,7 @@ namespace mRemoteNGTests.Config
         [Test]
         public void HarvestsPassword()
         {
-            var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
+            var connection = new ConnectionInfo {Username = "myuser", Domain = "somedomain", Password = "mypass"};
             var xdoc = CreateTestData(connection);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
             Assert.That(credentials.Single().Password.ConvertToUnsecureString(), Is.EqualTo(connection.Password));
@@ -72,7 +71,7 @@ namespace mRemoteNGTests.Config
             var container = new ContainerInfo();
             var con1 = new ConnectionInfo {Username = "blah"};
             var con2 = new ConnectionInfo {Username = "something"};
-            container.AddChildRange(new [] {con1, con2});
+            container.AddChildRange(new[] {con1, con2});
             var xdoc = CreateTestData(container);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
             Assert.That(credentials.Count(), Is.EqualTo(2));
@@ -82,9 +81,9 @@ namespace mRemoteNGTests.Config
         public void OnlyReturnsUniqueCredentials()
         {
             var container = new ContainerInfo();
-            var con1 = new ConnectionInfo { Username = "something" };
-            var con2 = new ConnectionInfo { Username = "something" };
-            container.AddChildRange(new[] { con1, con2 });
+            var con1 = new ConnectionInfo {Username = "something"};
+            var con2 = new ConnectionInfo {Username = "something"};
+            container.AddChildRange(new[] {con1, con2});
             var xdoc = CreateTestData(container);
             var credentials = _credentialHarvester.Harvest(xdoc, _key);
             Assert.That(credentials.Count(), Is.EqualTo(1));
@@ -93,7 +92,7 @@ namespace mRemoteNGTests.Config
         [Test]
         public void CredentialMapCorrectForSingleCredential()
         {
-            var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = "mypass" };
+            var connection = new ConnectionInfo {Username = "myuser", Domain = "somedomain", Password = "mypass"};
             var connectionGuid = Guid.Parse(connection.ConstantID);
             var xdoc = CreateTestData(connection);
             _credentialHarvester.Harvest(xdoc, _key);
@@ -105,9 +104,9 @@ namespace mRemoteNGTests.Config
         public void CredentialMapDoesntContainDuplicateCredentialObjects()
         {
             var container = new ContainerInfo();
-            var con1 = new ConnectionInfo { Username = "something" };
-            var con2 = new ConnectionInfo { Username = "something" };
-            container.AddChildRange(new[] { con1, con2 });
+            var con1 = new ConnectionInfo {Username = "something"};
+            var con2 = new ConnectionInfo {Username = "something"};
+            container.AddChildRange(new[] {con1, con2});
             var xdoc = CreateTestData(container);
             var con1Id = Guid.Parse(con1.ConstantID);
             var con2Id = Guid.Parse(con2.ConstantID);

@@ -122,7 +122,7 @@ namespace mRemoteNG.UI.Window
         {
             ConnectionTree.NodeDeletionConfirmer =
                 new SelectedConnectionDeletionConfirmer(prompt => CTaskDialog.MessageBox(
-                    Application.ProductName,prompt,"",ETaskDialogButtons.YesNo,ESysIcons.Question));
+                    Application.ProductName, prompt, "", ETaskDialogButtons.YesNo, ESysIcons.Question));
             ConnectionTree.KeyDown += TvConnections_KeyDown;
             ConnectionTree.KeyPress += TvConnections_KeyPress;
             SetTreePostSetupActions();
@@ -164,7 +164,8 @@ namespace mRemoteNG.UI.Window
             ConnectionTree.DoubleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = doubleClickHandlers};
         }
 
-        private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+        private void ConnectionsServiceOnConnectionsLoaded(object o,
+            ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
             if (ConnectionTree.InvokeRequired)
             {
@@ -194,13 +195,13 @@ namespace mRemoteNG.UI.Window
                 if (_sortedAz)
                 {
                     ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Ascending);
-                    mMenSort.Image = mRemoteNG.Resources.Sort_ZA;
+                    mMenSort.Image = Resources.Sort_ZA;
                     _sortedAz = false;
                 }
                 else
                 {
                     ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Descending);
-                    mMenSort.Image = mRemoteNG.Resources.Sort_AZ;
+                    mMenSort.Image = Resources.Sort_AZ;
                     _sortedAz = true;
                 }
             };
@@ -211,18 +212,17 @@ namespace mRemoteNG.UI.Window
                 var favoritesList = new List<ToolStripMenuItem>();
 
                 foreach (var node in rootNodes)
+                foreach (var containerInfo in Runtime.ConnectionsService.ConnectionTreeModel
+                    .GetRecursiveFavoriteChildList(node))
                 {
-                    foreach (var containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
+                    var favoriteMenuItem = new ToolStripMenuItem
                     {
-                        var favoriteMenuItem = new ToolStripMenuItem
-                        {
-                            Text = containerInfo.Name,
-                            Tag = containerInfo,
-                            Image = containerInfo.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause
-                        };
-                        favoriteMenuItem.MouseUp += FavoriteMenuItem_MouseUp;
-                        favoritesList.Add(favoriteMenuItem);
-                    }
+                        Text = containerInfo.Name,
+                        Tag = containerInfo,
+                        Image = containerInfo.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause
+                    };
+                    favoriteMenuItem.MouseUp += FavoriteMenuItem_MouseUp;
+                    favoritesList.Add(favoriteMenuItem);
                 }
 
                 mMenFavorites.DropDownItems.AddRange(favoritesList.ToArray());
@@ -232,8 +232,8 @@ namespace mRemoteNG.UI.Window
 
         private void FavoriteMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
-            if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
-            _connectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
+            if (((ToolStripMenuItem) sender).Tag is ContainerInfo) return;
+            _connectionInitiator.OpenConnection((ConnectionInfo) ((ToolStripMenuItem) sender).Tag);
         }
 
         #endregion
@@ -285,7 +285,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    "txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 
@@ -348,7 +349,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_KeyPress (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    "tvConnections_KeyPress (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 
@@ -372,7 +374,8 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
+                Runtime.MessageCollector.AddExceptionStackTrace(
+                    "tvConnections_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 

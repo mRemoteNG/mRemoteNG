@@ -79,12 +79,14 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         }
 
 
-        private string GenerateXml(BlockCipherEngines engine = BlockCipherEngines.AES, BlockCipherModes mode = BlockCipherModes.GCM, int interations = 1000)
+        private string GenerateXml(BlockCipherEngines engine = BlockCipherEngines.AES,
+            BlockCipherModes mode = BlockCipherModes.GCM, int interations = 1000)
         {
-            return $"<Credentials EncryptionEngine=\"{engine}\" BlockCipherMode=\"{mode}\" KdfIterations=\"{interations}\" SchemaVersion=\"1.0\">" +
-                        $"<Credential Id=\"{_id}\" Title=\"{Title}\" Username=\"{Username}\" Domain=\"{Domain}\" Password=\"{PlaintextPassword}\" />" +
-                        $"<Credential Id=\"{Guid.NewGuid()}\" Title=\"{Title}\" Username=\"{Username}\" Domain=\"{Domain}\" Password=\"{PlaintextPassword}\" />" +
-                    "</Credentials>";
+            return
+                $"<Credentials EncryptionEngine=\"{engine}\" BlockCipherMode=\"{mode}\" KdfIterations=\"{interations}\" SchemaVersion=\"1.0\">" +
+                $"<Credential Id=\"{_id}\" Title=\"{Title}\" Username=\"{Username}\" Domain=\"{Domain}\" Password=\"{PlaintextPassword}\" />" +
+                $"<Credential Id=\"{Guid.NewGuid()}\" Title=\"{Title}\" Username=\"{Username}\" Domain=\"{Domain}\" Password=\"{PlaintextPassword}\" />" +
+                "</Credentials>";
         }
     }
 }

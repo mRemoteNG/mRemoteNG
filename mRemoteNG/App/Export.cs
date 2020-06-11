@@ -28,7 +28,9 @@ namespace mRemoteNG.App
                 using (var exportForm = new ExportForm())
                 {
                     if (selectedNode?.GetTreeNodeType() == TreeNodeType.Container)
+                    {
                         exportForm.SelectedFolder = selectedNode as ContainerInfo;
+                    }
                     else if (selectedNode?.GetTreeNodeType() == TreeNodeType.Connection)
                     {
                         if (selectedNode.Parent.GetTreeNodeType() == TreeNodeType.Container)
@@ -69,9 +71,9 @@ namespace mRemoteNG.App
         }
 
         private static void SaveExportFile(string fileName,
-                                           SaveFormat saveFormat,
-                                           SaveFilter saveFilter,
-                                           ConnectionInfo exportTarget)
+            SaveFormat saveFormat,
+            SaveFilter saveFilter,
+            ConnectionInfo exportTarget)
         {
             try
             {
@@ -82,14 +84,14 @@ namespace mRemoteNG.App
                         var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
                         var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
                         var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
-                                                                                         cryptographyProvider,
-                                                                                         rootNode?.PasswordString
-                                                                                                 .ConvertToSecureString() ??
-                                                                                         new RootNodeInfo(RootNodeType
-                                                                                                              .Connection)
-                                                                                             .PasswordString
-                                                                                             .ConvertToSecureString(),
-                                                                                         saveFilter);
+                            cryptographyProvider,
+                            rootNode?.PasswordString
+                                .ConvertToSecureString() ??
+                            new RootNodeInfo(RootNodeType
+                                    .Connection)
+                                .PasswordString
+                                .ConvertToSecureString(),
+                            saveFilter);
                         serializer = new XmlConnectionsSerializer(cryptographyProvider, connectionNodeSerializer);
                         break;
                     case SaveFormat.mRCSV:

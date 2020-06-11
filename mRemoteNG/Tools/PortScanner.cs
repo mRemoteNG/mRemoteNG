@@ -22,11 +22,11 @@ namespace mRemoteNG.Tools
         #region Public Methods
 
         public PortScanner(IPAddress ipAddress1,
-                           IPAddress ipAddress2,
-                           int port1,
-                           int port2,
-                           int timeoutInMilliseconds = 5000,
-                           bool checkDefaultPortsOnly = false)
+            IPAddress ipAddress2,
+            int port1,
+            int port2,
+            int timeoutInMilliseconds = 5000,
+            bool checkDefaultPortsOnly = false)
         {
             var ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
             var ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
@@ -51,12 +51,8 @@ namespace mRemoteNG.Tools
                     ScanHost.RdpPort, ScanHost.VncPort
                 });
             else
-            {
                 for (var port = portStart; port <= portEnd; port++)
-                {
                     _ports.Add(port);
-                }
-            }
 
             _ipAddresses.Clear();
             _ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
@@ -74,10 +70,7 @@ namespace mRemoteNG.Tools
 
         public void StopScan()
         {
-            foreach (var p in _pings)
-            {
-                p.SendAsyncCancel();
-            }
+            foreach (var p in _pings) p.SendAsyncCancel();
 
             _scanThread.Abort();
         }
@@ -109,8 +102,8 @@ namespace mRemoteNG.Tools
             {
                 _hostCount = 0;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...",
-                                                    true);
+                    $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...",
+                    true);
                 foreach (var ipAddress in _ipAddresses)
                 {
                     RaiseBeginHostScanEvent(ipAddress);
@@ -126,16 +119,16 @@ namespace mRemoteNG.Tools
                     catch (Exception ex)
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                            $"Tools.PortScan: Ping failed for {ipAddress} {Environment.NewLine} {ex.Message}",
-                                                            true);
+                            $"Tools.PortScan: Ping failed for {ipAddress} {Environment.NewLine} {ex.Message}",
+                            true);
                     }
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    $"StartScanBG failed (Tools.PortScan) {Environment.NewLine} {ex.Message}",
-                                                    true);
+                    $"StartScanBG failed (Tools.PortScan) {Environment.NewLine} {ex.Message}",
+                    true);
             }
         }
 
@@ -145,7 +138,7 @@ namespace mRemoteNG.Tools
         private void PingSender_PingCompleted(object sender, PingCompletedEventArgs e)
         {
             // used for clean up later...
-            var p = (Ping)sender;
+            var p = (Ping) sender;
 
             // UserState is the IP Address
             var ip = e.UserState.ToString();
@@ -153,14 +146,14 @@ namespace mRemoteNG.Tools
             _hostCount++;
 
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                $"Tools.PortScan: Scanning {_hostCount} of {_ipAddresses.Count} hosts: {scanHost.HostIp}",
-                                                true);
+                $"Tools.PortScan: Scanning {_hostCount} of {_ipAddresses.Count} hosts: {scanHost.HostIp}",
+                true);
 
 
             if (e.Cancelled)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    $"Tools.PortScan: CANCELLED host: {scanHost.HostIp}", true);
+                    $"Tools.PortScan: CANCELLED host: {scanHost.HostIp}", true);
                 // cleanup
                 p.PingCompleted -= PingSender_PingCompleted;
                 p.Dispose();
@@ -170,8 +163,8 @@ namespace mRemoteNG.Tools
             if (e.Error != null)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    $"Ping failed to {e.UserState} {Environment.NewLine} {e.Error.Message}",
-                                                    true);
+                    $"Ping failed to {e.UserState} {Environment.NewLine} {e.Error.Message}",
+                    true);
                 scanHost.ClosedPorts.AddRange(_ports);
                 scanHost.SetAllProtocols(false);
             }
@@ -185,14 +178,11 @@ namespace mRemoteNG.Tools
                 catch (Exception dnsex)
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                        $"Tools.PortScan: Could not resolve {scanHost.HostIp} {Environment.NewLine} {dnsex.Message}",
-                                                        true);
+                        $"Tools.PortScan: Could not resolve {scanHost.HostIp} {Environment.NewLine} {dnsex.Message}",
+                        true);
                 }
 
-                if (string.IsNullOrEmpty(scanHost.HostName))
-                {
-                    scanHost.HostName = scanHost.HostIp;
-                }
+                if (string.IsNullOrEmpty(scanHost.HostName)) scanHost.HostName = scanHost.HostIp;
 
                 foreach (var port in _ports)
                 {
@@ -211,39 +201,24 @@ namespace mRemoteNG.Tools
                     }
 
                     if (port == ScanHost.SshPort)
-                    {
                         scanHost.Ssh = isPortOpen;
-                    }
                     else if (port == ScanHost.TelnetPort)
-                    {
                         scanHost.Telnet = isPortOpen;
-                    }
                     else if (port == ScanHost.HttpPort)
-                    {
                         scanHost.Http = isPortOpen;
-                    }
                     else if (port == ScanHost.HttpsPort)
-                    {
                         scanHost.Https = isPortOpen;
-                    }
                     else if (port == ScanHost.RloginPort)
-                    {
                         scanHost.Rlogin = isPortOpen;
-                    }
                     else if (port == ScanHost.RdpPort)
-                    {
                         scanHost.Rdp = isPortOpen;
-                    }
-                    else if (port == ScanHost.VncPort)
-                    {
-                        scanHost.Vnc = isPortOpen;
-                    }
+                    else if (port == ScanHost.VncPort) scanHost.Vnc = isPortOpen;
                 }
             }
             else if (e.Reply.Status != IPStatus.Success)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    $"Ping did not complete to {e.UserState} : {e.Reply.Status}", true);
+                    $"Ping did not complete to {e.UserState} : {e.Reply.Status}", true);
                 scanHost.ClosedPorts.AddRange(_ports);
                 scanHost.SetAllProtocols(false);
             }
@@ -254,7 +229,7 @@ namespace mRemoteNG.Tools
 
             var h = string.IsNullOrEmpty(scanHost.HostName) ? "HostNameNotFound" : scanHost.HostName;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                $"Tools.PortScan: Scan of {scanHost.HostIp} ({h}) complete.", true);
+                $"Tools.PortScan: Scan of {scanHost.HostIp} ({h}) complete.", true);
 
             _scannedHosts.Add(scanHost);
             RaiseHostScannedEvent(scanHost, _hostCount, _ipAddresses.Count);
@@ -300,16 +275,10 @@ namespace mRemoteNG.Tools
 
         private static int IpAddressToInt32(IPAddress ipAddress)
         {
-            if (ipAddress.AddressFamily != AddressFamily.InterNetwork)
-            {
-                throw (new ArgumentException("ipAddress"));
-            }
+            if (ipAddress.AddressFamily != AddressFamily.InterNetwork) throw new ArgumentException("ipAddress");
 
             var addressBytes = ipAddress.GetAddressBytes(); // in network order (big-endian)
-            if (BitConverter.IsLittleEndian)
-            {
-                Array.Reverse(addressBytes); // to host order (little-endian)
-            }
+            if (BitConverter.IsLittleEndian) Array.Reverse(addressBytes); // to host order (little-endian)
 
             Debug.Assert(addressBytes.Length == 4);
 
@@ -319,10 +288,7 @@ namespace mRemoteNG.Tools
         private static IPAddress IpAddressFromInt32(int ipAddress)
         {
             var addressBytes = BitConverter.GetBytes(ipAddress); // in host order
-            if (BitConverter.IsLittleEndian)
-            {
-                Array.Reverse(addressBytes); // to network order (big-endian)
-            }
+            if (BitConverter.IsLittleEndian) Array.Reverse(addressBytes); // to network order (big-endian)
 
             Debug.Assert(addressBytes.Length == 4);
 

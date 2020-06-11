@@ -7,7 +7,7 @@ namespace mRemoteNG.UI.Controls.Base
 {
     // total replace of RadioButton to avoid disabled state inconsistency on the themes
     // and glyph color inconsistency
-    class NGRadioButton : RadioButton
+    internal class NGRadioButton : RadioButton
     {
         private ThemeManager _themeManager;
         private readonly Rectangle _circle;
@@ -20,9 +20,9 @@ namespace mRemoteNG.UI.Controls.Base
             var display = new DisplayProperties();
 
             _circleSmall = new Rectangle(display.ScaleWidth(4), display.ScaleHeight(4), display.ScaleWidth(6),
-                                         display.ScaleHeight(6));
+                display.ScaleHeight(6));
             _circle = new Rectangle(display.ScaleWidth(1), display.ScaleHeight(1), display.ScaleWidth(12),
-                                    display.ScaleHeight(12));
+                display.ScaleHeight(12));
             _textXCoord = display.ScaleWidth(16);
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
@@ -103,9 +103,7 @@ namespace mRemoteNG.UI.Controls.Base
                 {
                     center = Color.Transparent;
                     if (_mice == MouseState.HOVER)
-                    {
                         outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border_Hover");
-                    }
                 }
             }
             else
@@ -116,7 +114,7 @@ namespace mRemoteNG.UI.Controls.Base
 
             var textRect = new Rectangle(_textXCoord, Padding.Top, Width - 16, Height);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
-                                  TextFormatFlags.PathEllipsis);
+                TextFormatFlags.PathEllipsis);
 
             g.FillEllipse(new SolidBrush(centerBack), _circle);
             g.FillEllipse(new SolidBrush(center), _circleSmall);
@@ -125,13 +123,13 @@ namespace mRemoteNG.UI.Controls.Base
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // NGRadioButton
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResumeLayout(false);
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular,
+                GraphicsUnit.Point, (byte) 0);
+            ResumeLayout(false);
         }
     }
 }

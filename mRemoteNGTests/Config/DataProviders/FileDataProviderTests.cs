@@ -6,17 +6,17 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.DataProviders
 {
-	public class FileDataProviderTests
+    public class FileDataProviderTests
     {
         private FileDataProvider _dataProvider;
         private string _testFilePath;
-	    private string _testFileDirectory;
+        private string _testFileDirectory;
 
         [SetUp]
         public void Setup()
         {
             _testFilePath = FileTestHelpers.NewTempFilePath();
-	        _testFileDirectory = Path.GetDirectoryName(_testFilePath);
+            _testFileDirectory = Path.GetDirectoryName(_testFilePath);
             _dataProvider = new FileDataProvider(_testFilePath);
         }
 

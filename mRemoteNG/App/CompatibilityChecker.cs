@@ -21,13 +21,16 @@ namespace mRemoteNG.App
         {
             if (Settings.Default.OverrideFIPSCheck)
             {
-                messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check", true);
+                messageCollector.AddMessage(MessageClass.InformationMsg, "OverrideFIPSCheck is set. Will skip check",
+                    true);
                 return;
             }
 
             messageCollector.AddMessage(MessageClass.InformationMsg, "Checking FIPS policy...", true);
-            messageCollector.AddMessage(MessageClass.InformationMsg, $"FIPS2003: {FipsPolicyEnabledForServer2003()}", true);
-            messageCollector.AddMessage(MessageClass.InformationMsg, $"FIPS2008+: {FipsPolicyEnabledForServer2008AndNewer()}", true);
+            messageCollector.AddMessage(MessageClass.InformationMsg, $"FIPS2003: {FipsPolicyEnabledForServer2003()}",
+                true);
+            messageCollector.AddMessage(MessageClass.InformationMsg,
+                $"FIPS2008+: {FipsPolicyEnabledForServer2008AndNewer()}", true);
 
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
 
@@ -38,11 +41,11 @@ namespace mRemoteNG.App
             FrmSplashScreen.getInstance().Close();
 
             var ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName,
-                                                                Language.CompatibilityProblemDetected, errorText, "",
-                                                                "",
-                                                                Language.CheckboxDoNotShowThisMessageAgain,
-                                                                ETaskDialogButtons.OkCancel, ESysIcons.Warning,
-                                                                ESysIcons.Warning);
+                Language.CompatibilityProblemDetected, errorText, "",
+                "",
+                Language.CheckboxDoNotShowThisMessageAgain,
+                ETaskDialogButtons.OkCancel, ESysIcons.Warning,
+                ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked && ShouldIStayOrShouldIGo == DialogResult.OK)
             {
                 messageCollector.AddMessage(MessageClass.ErrorMsg, "User requests that FIPS check be overridden", true);
@@ -97,11 +100,11 @@ namespace mRemoteNG.App
             messageCollector.AddMessage(MessageClass.WarningMsg, "Lenovo AutoScroll Utility found", true);
 
             CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected,
-                                   string.Format(Language.CompatibilityLenovoAutoScrollUtilityDetected,
-                                                 Application.ProductName), "",
-                                   "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok,
-                                   ESysIcons.Warning,
-                                   ESysIcons.Warning);
+                string.Format(Language.CompatibilityLenovoAutoScrollUtilityDetected,
+                    Application.ProductName), "",
+                "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok,
+                ESysIcons.Warning,
+                ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked)
                 Settings.Default.CompatibilityWarnLenovoAutoScrollUtility = false;
         }

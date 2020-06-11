@@ -21,14 +21,14 @@ namespace mRemoteNG.UI.TaskDialog
         private const int TOP_MARGIN = 10;
         private const int ARROW_WIDTH = 19;
 
-        enum eButtonState
+        private enum eButtonState
         {
             Normal,
             MouseOver,
             Down
         }
 
-        eButtonState m_State = eButtonState.Normal;
+        private eButtonState m_State = eButtonState.Normal;
 
         #endregion
 
@@ -40,7 +40,7 @@ namespace mRemoteNG.UI.TaskDialog
         // Override this to make sure the control is invalidated (repainted) when 'Text' is changed
         public override string Text
         {
-            get { return base.Text; }
+            get => base.Text;
             set
             {
                 base.Text = value;
@@ -54,14 +54,14 @@ namespace mRemoteNG.UI.TaskDialog
         private Font SmallFont { get; set; }
 
         // AutoHeight determines whether the button automatically resizes itself to fit the Text
-        bool m_autoHeight = true;
+        private bool m_autoHeight = true;
 
         [Browsable(true)]
         [Category("Behavior")]
         [DefaultValue(true)]
         public bool AutoHeight
         {
-            get { return m_autoHeight; }
+            get => m_autoHeight;
             set
             {
                 m_autoHeight = value;
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         public int GetBestHeight()
         {
-            return (TOP_MARGIN * 2) + (int)GetSmallTextSizeF().Height + (int)GetLargeTextSizeF().Height;
+            return TOP_MARGIN * 2 + (int) GetSmallTextSizeF().Height + (int) GetLargeTextSizeF().Height;
         }
 
         #endregion
@@ -103,13 +103,13 @@ namespace mRemoteNG.UI.TaskDialog
         #region PRIVATE ROUTINES
 
         //--------------------------------------------------------------------------------
-        string GetLargeText()
+        private string GetLargeText()
         {
             var lines = Text.Split('\n');
             return lines[0];
         }
 
-        string GetSmallText()
+        private string GetSmallText()
         {
             if (Text.IndexOf('\n') < 0)
                 return "";
@@ -122,7 +122,7 @@ namespace mRemoteNG.UI.TaskDialog
             return s.Trim('\n');
         }
 
-        SizeF GetLargeTextSizeF()
+        private SizeF GetLargeTextSizeF()
         {
             var x = LEFT_MARGIN + ARROW_WIDTH + 5;
             var mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F); // presume RIGHT_MARGIN = LEFT_MARGIN
@@ -131,7 +131,7 @@ namespace mRemoteNG.UI.TaskDialog
             return textSize;
         }
 
-        SizeF GetSmallTextSizeF()
+        private SizeF GetSmallTextSizeF()
         {
             var s = GetSmallText();
             if (s == "") return new SizeF(0, 0);
@@ -171,7 +171,7 @@ namespace mRemoteNG.UI.TaskDialog
             const LinearGradientMode mode = LinearGradientMode.Vertical;
 
             var newRect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1,
-                                        ClientRectangle.Height - 1);
+                ClientRectangle.Height - 1);
 
             var img = imgArrow1;
 
@@ -225,20 +225,20 @@ namespace mRemoteNG.UI.TaskDialog
             var szL = GetLargeTextSizeF();
             //e.Graphics.DrawString(largetext, base.Font, new SolidBrush(text_color), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN), szL));
             TextRenderer.DrawText(e.Graphics, largetext, Font,
-                                  new Rectangle(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN, (int)szL.Width,
-                                                (int)szL.Height), fore,
-                                  TextFormatFlags.Default);
+                new Rectangle(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN, (int) szL.Width,
+                    (int) szL.Height), fore,
+                TextFormatFlags.Default);
 
             if (smalltext != "")
             {
                 var szS = GetSmallTextSizeF();
                 e.Graphics.DrawString(smalltext, SmallFont, new SolidBrush(fore),
-                                      new
-                                          RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height),
-                                                     szS));
+                    new
+                        RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int) szL.Height),
+                            szS));
             }
 
-            e.Graphics.DrawImage(img, new Point(LEFT_MARGIN, TOP_MARGIN + (int)(szL.Height / 2) - img.Height / 2));
+            e.Graphics.DrawImage(img, new Point(LEFT_MARGIN, TOP_MARGIN + (int) (szL.Height / 2) - img.Height / 2));
         }
 
         //--------------------------------------------------------------------------------

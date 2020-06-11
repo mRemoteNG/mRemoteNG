@@ -20,11 +20,8 @@ namespace mRemoteNG.Tools
 
             protected override string GetLocalizedString(string value)
             {
-                string OrderPrefix = "";
-                for (int x = 0; x <= MaxOrder - Order; x++)
-                {
-                    OrderPrefix += Convert.ToString("\t");
-                }
+                var OrderPrefix = "";
+                for (var x = 0; x <= MaxOrder - Order; x++) OrderPrefix += Convert.ToString("\t");
 
                 return OrderPrefix + Language.ResourceManager.GetString(value);
             }
@@ -115,7 +112,7 @@ namespace mRemoteNG.Tools
                     {
                         Localized = true;
                         DisplayNameValue = string.Format(Language.FormatInherit,
-                                                         Language.ResourceManager.GetString(DisplayNameValue));
+                            Language.ResourceManager.GetString(DisplayNameValue));
                     }
 
                     return base.DisplayName;
@@ -141,7 +138,7 @@ namespace mRemoteNG.Tools
                     {
                         Localized = true;
                         DescriptionValue = string.Format(Language.FormatInheritDescription,
-                                                         Language.ResourceManager.GetString(DescriptionValue));
+                            Language.ResourceManager.GetString(DescriptionValue));
                     }
 
                     return base.Description;

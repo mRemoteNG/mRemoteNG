@@ -27,9 +27,9 @@ namespace mRemoteNG.App
         }
 
         public static void Cleanup(Control quickConnectToolStrip,
-                                   ExternalToolsToolStrip externalToolsToolStrip,
-                                   MultiSshToolStrip multiSshToolStrip,
-                                   FrmMain frmMain)
+            ExternalToolsToolStrip externalToolsToolStrip,
+            MultiSshToolStrip multiSshToolStrip,
+            FrmMain frmMain)
         {
             try
             {
@@ -63,12 +63,12 @@ namespace mRemoteNG.App
         }
 
         private static void SaveSettings(Control quickConnectToolStrip,
-                                         ExternalToolsToolStrip externalToolsToolStrip,
-                                         MultiSshToolStrip multiSshToolStrip,
-                                         FrmMain frmMain)
+            ExternalToolsToolStrip externalToolsToolStrip,
+            MultiSshToolStrip multiSshToolStrip,
+            FrmMain frmMain)
         {
             Config.Settings.SettingsSaver.SaveSettings(quickConnectToolStrip, externalToolsToolStrip, multiSshToolStrip,
-                                                       frmMain);
+                frmMain);
         }
 
         private static void UnregisterBrowsers()

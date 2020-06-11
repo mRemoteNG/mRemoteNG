@@ -52,7 +52,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
             try
             {
-                _vnc = (VncSharp.RemoteDesktop)Control;
+                _vnc = (VncSharp.RemoteDesktop) Control;
                 _info = InterfaceControl.Info;
                 _vnc.VncPort = _info.Port;
 
@@ -61,12 +61,12 @@ namespace mRemoteNG.Connection.Protocol.VNC
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncSetPropsFailed + Environment.NewLine + ex.Message,
-                                                    true);
+                    Language.VncSetPropsFailed + Environment.NewLine + ex.Message,
+                    true);
                 return false;
             }
         }
- 
+
         public override bool Connect()
         {
             SetEventHandlers();
@@ -78,8 +78,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.ConnectionOpenFailed + Environment.NewLine +
-                                                    ex.Message);
+                    Language.ConnectionOpenFailed + Environment.NewLine +
+                    ex.Message);
                 return false;
             }
 
@@ -95,8 +95,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncConnectionDisconnectFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.VncConnectionDisconnectFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -118,8 +118,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncSendSpecialKeysFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.VncSendSpecialKeysFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -133,8 +133,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncToggleSmartSizeFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.VncToggleSmartSizeFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -147,8 +147,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncToggleViewOnlyFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.VncToggleViewOnlyFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -172,8 +172,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncRefreshFailed + Environment.NewLine + ex.Message,
-                                                    true);
+                    Language.VncRefreshFailed + Environment.NewLine + ex.Message,
+                    true);
             }
         }
 
@@ -189,15 +189,13 @@ namespace mRemoteNG.Connection.Protocol.VNC
                 _vnc.ConnectionLost += VNCEvent_Disconnected;
                 FrmMain.ClipboardChanged += VNCEvent_ClipboardChanged;
                 if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials) && _info?.Password?.Length > 0)
-                {
                     _vnc.GetPassword = VNCEvent_Authenticate;
-                }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncSetEventHandlersFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.VncSetEventHandlersFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 

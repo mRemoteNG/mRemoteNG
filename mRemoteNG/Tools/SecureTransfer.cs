@@ -69,15 +69,9 @@ namespace mRemoteNG.Tools
 
         public void Disconnect()
         {
-            if (Protocol == SSHTransferProtocol.SCP)
-            {
-                ScpClt.Disconnect();
-            }
+            if (Protocol == SSHTransferProtocol.SCP) ScpClt.Disconnect();
 
-            if (Protocol == SSHTransferProtocol.SFTP)
-            {
-                SftpClt.Disconnect();
-            }
+            if (Protocol == SSHTransferProtocol.SFTP) SftpClt.Disconnect();
         }
 
 
@@ -107,7 +101,7 @@ namespace mRemoteNG.Tools
                 }
 
                 asyncResult =
-                    (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}",
+                    (SftpUploadAsyncResult) SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}",
                         asyncCallback);
             }
         }
@@ -122,15 +116,9 @@ namespace mRemoteNG.Tools
         {
             if (!disposing) return;
 
-            if (Protocol == SSHTransferProtocol.SCP)
-            {
-                ScpClt.Dispose();
-            }
+            if (Protocol == SSHTransferProtocol.SCP) ScpClt.Dispose();
 
-            if (Protocol == SSHTransferProtocol.SFTP)
-            {
-                SftpClt.Dispose();
-            }
+            if (Protocol == SSHTransferProtocol.SFTP) SftpClt.Dispose();
         }
 
         public void Dispose()

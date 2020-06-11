@@ -23,8 +23,8 @@ namespace mRemoteNG.Config.DataProviders
             catch (FileNotFoundException ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                $"Could not load file. File does not exist '{FilePath}'",
-                                                                ex);
+                    $"Could not load file. File does not exist '{FilePath}'",
+                    ex);
             }
             catch (Exception ex)
             {

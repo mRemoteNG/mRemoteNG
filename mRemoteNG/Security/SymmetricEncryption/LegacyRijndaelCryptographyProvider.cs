@@ -60,7 +60,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    string.Format(Language.ErrorEncryptionFailed, ex.Message));
+                    string.Format(Language.ErrorEncryptionFailed, ex.Message));
             }
 
             return strToEncrypt;
@@ -91,7 +91,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                     rijndaelManaged.IV = iv;
 
                     var cryptoStream = new CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor(),
-                                                        CryptoStreamMode.Read);
+                        CryptoStreamMode.Read);
                     using (var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true))
                     {
                         plaintext = streamReader.ReadToEnd();

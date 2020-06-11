@@ -15,9 +15,7 @@ namespace mRemoteNG.Tools
                 externalToolList.Add(string.Empty);
 
                 foreach (var externalTool in App.Runtime.ExternalToolsService.ExternalTools)
-                {
                     externalToolList.Add(externalTool.DisplayName);
-                }
 
                 return externalToolList.ToArray();
             }
@@ -28,7 +26,7 @@ namespace mRemoteNG.Tools
             return new StandardValuesCollection(ExternalTools);
         }
 
-        public override bool GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext context)
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return true;
         }

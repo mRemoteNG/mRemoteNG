@@ -63,15 +63,15 @@ namespace mRemoteNG.UI.Window
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // BaseWindow
             // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "BaseWindow";
-            this.ResumeLayout(false);
+            ClientSize = new System.Drawing.Size(284, 261);
+            Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point, (byte) 0);
+            Name = "BaseWindow";
+            ResumeLayout(false);
         }
     }
 }

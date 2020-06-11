@@ -27,9 +27,9 @@ namespace mRemoteNG.Connection
         {
             var interfaceControl = FindConnectionContainer(connectionInfo);
             if (interfaceControl == null) return false;
-            var connT = (ConnectionTab)interfaceControl.FindForm();
+            var connT = (ConnectionTab) interfaceControl.FindForm();
             connT?.Focus();
-            var findForm = (ConnectionTab)interfaceControl.FindForm();
+            var findForm = (ConnectionTab) interfaceControl.FindForm();
             findForm?.Show(findForm.DockPanel);
             return true;
         }
@@ -43,12 +43,10 @@ namespace mRemoteNG.Connection
                 return;
 
             foreach (var child in containerInfo.Children)
-            {
                 if (child is ContainerInfo childAsContainer)
                     OpenConnection(childAsContainer, force, conForm);
                 else
                     OpenConnection(child, force, conForm);
-            }
         }
 
         // async is necessary so UI can update while OpenConnection waits for tunnel connection to get ready in case of connection through SSH tunnel
@@ -65,17 +63,15 @@ namespace mRemoteNG.Connection
                 if (connectionInfo.Hostname == "" && connectionInfo.Protocol != ProtocolType.IntApp)
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                        Language.ConnectionOpenFailedNoHostname);
+                        Language.ConnectionOpenFailedNoHostname);
                     return;
                 }
 
                 StartPreConnectionExternalApp(connectionInfo);
 
                 if (!force.HasFlag(ConnectionInfo.Force.DoNotJump))
-                {
                     if (SwitchToOpenConnection(connectionInfo))
                         return;
-                }
 
                 var protocolFactory = new ProtocolFactory();
                 var connectionPanel = SetConnectionPanel(connectionInfo, force);
@@ -87,30 +83,38 @@ namespace mRemoteNG.Connection
                 // in case of connection through SSH tunnel, connectionInfo gets cloned, so that modification of its name, hostname and port do not modify the original connection info
                 // connectionInfoOriginal points to the original connection info in either case, for where its needed later on.
                 var connectionInfoOriginal = connectionInfo;
-                ConnectionInfo connectionInfoSshTunnel = null; // SSH tunnel connection info will be set if SSH tunnel connection is configured, can be found and connected.
+                ConnectionInfo
+                    connectionInfoSshTunnel =
+                        null; // SSH tunnel connection info will be set if SSH tunnel connection is configured, can be found and connected.
                 if (!string.IsNullOrEmpty(connectionInfoOriginal.SSHTunnelConnectionName))
                 {
                     // Find the connection info specified as SSH tunnel in the connections tree
-                    connectionInfoSshTunnel = getSSHConnectionInfoByName(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes, connectionInfoOriginal.SSHTunnelConnectionName);
+                    connectionInfoSshTunnel = getSSHConnectionInfoByName(
+                        Runtime.ConnectionsService.ConnectionTreeModel.RootNodes,
+                        connectionInfoOriginal.SSHTunnelConnectionName);
                     if (connectionInfoSshTunnel == null)
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SSHTunnelConnectionName));
+                            string.Format(Language.SshTunnelConfigProblem, connectionInfoOriginal.Name,
+                                connectionInfoOriginal.SSHTunnelConnectionName));
                         return;
                     }
+
                     Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
                         $"SSH Tunnel connection '{connectionInfoOriginal.SSHTunnelConnectionName}' configured for '{connectionInfoOriginal.Name}' found. Finding free local port for use as local tunnel port ...");
                     // determine a free local port to use as local tunnel port
                     var l = new System.Net.Sockets.TcpListener(System.Net.IPAddress.Loopback, 0);
                     l.Start();
-                    var localSshTunnelPort = ((System.Net.IPEndPoint)l.LocalEndpoint).Port;
+                    var localSshTunnelPort = ((System.Net.IPEndPoint) l.LocalEndpoint).Port;
                     l.Stop();
                     Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
                         $"{localSshTunnelPort} will be used as local tunnel port. Establishing SSH connection to '{connectionInfoSshTunnel.Hostname}' with additional tunnel options for target connection ...");
 
                     // clone SSH tunnel connection as tunnel options will be added to it, and those changes shall not be saved to the configuration
                     connectionInfoSshTunnel = connectionInfoSshTunnel.Clone();
-                    connectionInfoSshTunnel.SSHOptions += " -L " + localSshTunnelPort + ":" + connectionInfoOriginal.Hostname + ":" + connectionInfoOriginal.Port;
+                    connectionInfoSshTunnel.SSHOptions += " -L " + localSshTunnelPort + ":" +
+                                                          connectionInfoOriginal.Hostname + ":" +
+                                                          connectionInfoOriginal.Port;
 
                     // clone target connection info as its hostname will be changed to localhost and port to local tunnel port to establish connection through tunnel, and those changes shall not be saved to the configuration
                     connectionInfo = connectionInfoOriginal.Clone();
@@ -123,7 +127,8 @@ namespace mRemoteNG.Connection
                     if (!(protocolSshTunnel is PuttyBase puttyBaseSshTunnel))
                     {
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelIsNotPutty, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelIsNotPutty, connectionInfoOriginal.Name,
+                                connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -137,7 +142,8 @@ namespace mRemoteNG.Connection
                     {
                         protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelNotInitialized, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelNotInitialized, connectionInfoOriginal.Name,
+                                connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -145,7 +151,8 @@ namespace mRemoteNG.Connection
                     {
                         protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelNotConnected, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelNotConnected, connectionInfoOriginal.Name,
+                                connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -153,7 +160,8 @@ namespace mRemoteNG.Connection
                         "Putty started for SSH connection for tunnel. Waiting for local tunnel port to become available ...");
 
                     // wait until SSH tunnel connection is ready, by checking if local port can be connected to, but max 60 sec.
-                    var testsock = new System.Net.Sockets.Socket(System.Net.Sockets.SocketType.Stream, System.Net.Sockets.ProtocolType.Tcp);
+                    var testsock = new System.Net.Sockets.Socket(System.Net.Sockets.SocketType.Stream,
+                        System.Net.Sockets.ProtocolType.Tcp);
                     var stopwatch = System.Diagnostics.Stopwatch.StartNew();
                     while (stopwatch.ElapsedMilliseconds < 60000)
                     {
@@ -166,7 +174,8 @@ namespace mRemoteNG.Connection
                         {
                             protocolSshTunnel.Close();
                             Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                string.Format(Language.SshTunnelFailed, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                                string.Format(Language.SshTunnelFailed, connectionInfoOriginal.Name,
+                                    connectionInfoSshTunnel.Name));
                             return;
                         }
 
@@ -186,7 +195,8 @@ namespace mRemoteNG.Connection
                     {
                         protocolSshTunnel.Close();
                         Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelPortNotReadyInTime, connectionInfoOriginal.Name, connectionInfoSshTunnel.Name));
+                            string.Format(Language.SshTunnelPortNotReadyInTime, connectionInfoOriginal.Name,
+                                connectionInfoSshTunnel.Name));
                         return;
                     }
 
@@ -202,7 +212,8 @@ namespace mRemoteNG.Connection
                 SetConnectionFormEventHandlers(newProtocol, connectionForm);
                 SetConnectionEventHandlers(newProtocol);
                 // in case of connection through SSH tunnel the container is already defined and must be use, else it needs to be created here
-                if (connectionContainer == null) connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
+                if (connectionContainer == null)
+                    connectionContainer = SetConnectionContainer(connectionInfo, connectionForm);
                 BuildConnectionInterfaceController(connectionInfo, newProtocol, connectionContainer);
                 // in case of connection through SSH tunnel the connectionInfo was modified but connectionInfoOriginal in all cases retains the original info
                 // and is stored in interface control for further use
@@ -235,7 +246,8 @@ namespace mRemoteNG.Connection
         }
 
         // recursively traverse the tree to find ConnectionInfo of a specific name
-        private ConnectionInfo getSSHConnectionInfoByName(IEnumerable<ConnectionInfo> rootnodes, string SSHTunnelConnectionName)
+        private ConnectionInfo getSSHConnectionInfoByName(IEnumerable<ConnectionInfo> rootnodes,
+            string SSHTunnelConnectionName)
         {
             ConnectionInfo result = null;
             foreach (var node in rootnodes)
@@ -246,14 +258,18 @@ namespace mRemoteNG.Connection
                 }
                 else
                 {
-                    if (node.Name == SSHTunnelConnectionName && (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2)) result = node;
+                    if (node.Name == SSHTunnelConnectionName &&
+                        (node.Protocol == ProtocolType.SSH1 || node.Protocol == ProtocolType.SSH2)) result = node;
                 }
+
                 if (result != null) break;
             }
+
             return result;
         }
 
         #region Private
+
         private static void StartPreConnectionExternalApp(ConnectionInfo connectionInfo)
         {
             if (connectionInfo.PreExtApp == "") return;
@@ -273,7 +289,7 @@ namespace mRemoteNG.Connection
                 if (!(connectionWindow.Controls[0] is DockPanel cwDp)) continue;
                 foreach (var dockContent in cwDp.Documents)
                 {
-                    var tab = (ConnectionTab)dockContent;
+                    var tab = (ConnectionTab) dockContent;
                     var ic = InterfaceControl.FindInterfaceControl(tab);
                     if (ic == null) continue;
                     if (ic.Info == connectionInfo || ic.OriginalInfo == connectionInfo)
@@ -321,14 +337,14 @@ namespace mRemoteNG.Connection
             if (extT == null) return connectionContainer;
 
             if (extT.Icon != null)
-                ((ConnectionTab)connectionContainer).Icon = extT.Icon;
+                ((ConnectionTab) connectionContainer).Icon = extT.Icon;
 
             return connectionContainer;
         }
 
         private static void SetConnectionFormEventHandlers(ProtocolBase newProtocol, Form connectionForm)
         {
-            newProtocol.Closed += ((ConnectionWindow)connectionForm).Prot_Event_Closed;
+            newProtocol.Closed += ((ConnectionWindow) connectionForm).Prot_Event_Closed;
         }
 
         private void SetConnectionEventHandlers(ProtocolBase newProtocol)
@@ -340,8 +356,8 @@ namespace mRemoteNG.Connection
         }
 
         private static void BuildConnectionInterfaceController(ConnectionInfo connectionInfo,
-                                                               ProtocolBase newProtocol,
-                                                               Control connectionContainer)
+            ProtocolBase newProtocol,
+            Control connectionContainer)
         {
             newProtocol.InterfaceControl = new InterfaceControl(connectionContainer, newProtocol, connectionInfo);
         }
@@ -354,28 +370,22 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                var prot = (ProtocolBase)sender;
+                var prot = (ProtocolBase) sender;
                 var msgClass = MessageClass.InformationMsg;
 
                 if (prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
-                {
                     if (reasonCode > 3)
-                    {
                         msgClass = MessageClass.WarningMsg;
-                    }
-                }
 
                 var strHostname = prot.InterfaceControl.OriginalInfo.Hostname;
                 if (prot.InterfaceControl.SSHTunnelInfo != null)
-                {
                     strHostname += " via SSH Tunnel " + prot.InterfaceControl.SSHTunnelInfo.Name;
-                }
                 Runtime.MessageCollector.AddMessage(msgClass,
-                                                    string.Format(
-                                                                  Language.ProtocolEventDisconnected,
-                                                                  disconnectedMessage,
-                                                                  strHostname,
-                                                                  prot.InterfaceControl.Info.Protocol.ToString()));
+                    string.Format(
+                        Language.ProtocolEventDisconnected,
+                        disconnectedMessage,
+                        strHostname,
+                        prot.InterfaceControl.Info.Protocol.ToString()));
             }
             catch (Exception ex)
             {
@@ -387,9 +397,9 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                var prot = (ProtocolBase)sender;
+                var prot = (ProtocolBase) sender;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.ConnenctionCloseEvent,
-                                                    true);
+                    true);
                 string connDetail;
                 if (prot.InterfaceControl.OriginalInfo.Hostname == "" &&
                     prot.InterfaceControl.Info.Protocol == ProtocolType.IntApp)
@@ -400,9 +410,9 @@ namespace mRemoteNG.Connection
                     connDetail = "UNKNOWN";
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    string.Format(Language.ConnenctionClosedByUser, connDetail,
-                                                                  prot.InterfaceControl.Info.Protocol,
-                                                                  Environment.UserName));
+                    string.Format(Language.ConnenctionClosedByUser, connDetail,
+                        prot.InterfaceControl.Info.Protocol,
+                        Environment.UserName));
                 prot.InterfaceControl.OriginalInfo.OpenConnections.Remove(prot);
                 if (_activeConnections.Contains(prot.InterfaceControl.Info.ConstantID))
                     _activeConnections.Remove(prot.InterfaceControl.Info.ConstantID);
@@ -419,28 +429,28 @@ namespace mRemoteNG.Connection
 
         private static void Prot_Event_Connected(object sender)
         {
-            var prot = (ProtocolBase)sender;
+            var prot = (ProtocolBase) sender;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.ConnectionEventConnected,
-                                                true);
+                true);
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                string.Format(Language.ConnectionEventConnectedDetail,
-                                                              prot.InterfaceControl.OriginalInfo.Hostname,
-                                                              prot.InterfaceControl.Info.Protocol, Environment.UserName,
-                                                              prot.InterfaceControl.Info.Description,
-                                                              prot.InterfaceControl.Info.UserField));
+                string.Format(Language.ConnectionEventConnectedDetail,
+                    prot.InterfaceControl.OriginalInfo.Hostname,
+                    prot.InterfaceControl.Info.Protocol, Environment.UserName,
+                    prot.InterfaceControl.Info.Description,
+                    prot.InterfaceControl.Info.UserField));
         }
 
         private static void Prot_Event_ErrorOccured(object sender, string errorMessage, int? errorCode)
         {
             try
             {
-                var prot = (ProtocolBase)sender;
+                var prot = (ProtocolBase) sender;
 
                 var msg = string.Format(
-                                        Language.ConnectionEventErrorOccured,
-                                        errorMessage,
-                                        prot.InterfaceControl.OriginalInfo.Hostname,
-                                        errorCode?.ToString() ?? "-");
+                    Language.ConnectionEventErrorOccured,
+                    errorMessage,
+                    prot.InterfaceControl.OriginalInfo.Hostname,
+                    errorCode?.ToString() ?? "-");
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, msg);
             }
             catch (Exception ex)

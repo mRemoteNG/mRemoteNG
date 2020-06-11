@@ -32,7 +32,7 @@ namespace mRemoteNG.Config.Connections
             {
                 var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
                 var serializerFactory = new XmlConnectionSerializerFactory();
-                
+
                 var xmlConnectionsSerializer = serializerFactory.Build(
                     cryptographyProvider,
                     connectionTreeModel,

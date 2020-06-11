@@ -71,7 +71,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void ListPalette_FormatCell(object sender, FormatCellEventArgs e)
         {
             if (e.ColumnIndex != ColorCol.Index) return;
-            var colorElem = (PseudoKeyColor)e.Model;
+            var colorElem = (PseudoKeyColor) e.Model;
             e.SubItem.BackColor = colorElem.Value;
         }
 
@@ -86,21 +86,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // Prompt the user that a restart is required to apply the new theme...
             if (cboTheme.SelectedItem != null
             ) // LoadSettings calls SaveSettings, so these might be null the first time around
-            {
-                if (!Settings.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
+                if (!Settings.Default.ThemeName.Equals(((ThemeInfo) cboTheme.SelectedItem).Name))
                 {
-                    Settings.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
+                    Settings.Default.ThemeName = ((ThemeInfo) cboTheme.SelectedItem).Name;
 
                     CTaskDialog.MessageBox("Theme Changed", "Restart Required.",
-                                           "Please restart mRemoteNG to apply the selected theme.",
-                                           ETaskDialogButtons.Ok, ESysIcons.Information);
+                        "Please restart mRemoteNG to apply the selected theme.",
+                        ETaskDialogButtons.Ok, ESysIcons.Information);
                 }
-            }
 
-            foreach (var updatedTheme in modifiedThemes)
-            {
-                _themeManager.updateTheme(updatedTheme);
-            }
+            foreach (var updatedTheme in modifiedThemes) _themeManager.updateTheme(updatedTheme);
         }
 
         public override void RevertSettings()
@@ -127,7 +122,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             btnThemeNew.Enabled = true;
 
-            var selectedTheme = (ThemeInfo)cboTheme.SelectedItem;
+            var selectedTheme = (ThemeInfo) cboTheme.SelectedItem;
 
             if (selectedTheme != null && selectedTheme.IsExtendable)
             {
@@ -152,7 +147,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// <param name="e"></param>
         private void ListPalette_CellClick(object sender, CellClickEventArgs e)
         {
-            var colorElem = (PseudoKeyColor)e.Model;
+            var colorElem = (PseudoKeyColor) e.Model;
 
             var colorDlg = new ColorDialog
             {
@@ -180,8 +175,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
             using (var frmInputBox = new FrmInputBox(Language.OptionsThemeNewThemeCaption,
-                                                     Language.OptionsThemeNewThemeText,
-                                                     _themeManager.ActiveTheme.Name))
+                Language.OptionsThemeNewThemeText,
+                _themeManager.ActiveTheme.Name))
             {
                 var dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK) return;
@@ -194,8 +189,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 else
                 {
                     CTaskDialog.ShowTaskDialogBox(this, Language.Errors, Language.OptionsThemeNewThemeError, "",
-                                                  "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error,
-                                                  ESysIcons.Information, 0);
+                        "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error,
+                        ESysIcons.Information, 0);
                 }
             }
         }
@@ -203,9 +198,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void btnThemeDelete_Click(object sender, EventArgs e)
         {
             var res = CTaskDialog.ShowTaskDialogBox(this, Language.Warnings,
-                                                    Language.OptionsThemeDeleteConfirmation, "", "", "", "", "", "",
-                                                    ETaskDialogButtons.YesNo,
-                                                    ESysIcons.Question, ESysIcons.Information, 0);
+                Language.OptionsThemeDeleteConfirmation, "", "", "", "", "", "",
+                ETaskDialogButtons.YesNo,
+                ESysIcons.Question, ESysIcons.Information, 0);
 
             if (res != DialogResult.Yes) return;
             if (modifiedThemes.Contains(_themeManager.ActiveTheme))

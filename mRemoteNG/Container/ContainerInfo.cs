@@ -16,7 +16,12 @@ namespace mRemoteNG.Container
 
         [Browsable(false)] public List<ConnectionInfo> Children { get; } = new List<ConnectionInfo>();
 
-        [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
+        [Category("")]
+        [Browsable(false)]
+        [ReadOnly(false)]
+        [Bindable(false)]
+        [DefaultValue("")]
+        [DesignOnly(false)]
         public bool IsExpanded
         {
             get => _isExpanded;
@@ -26,7 +31,7 @@ namespace mRemoteNG.Container
         [Browsable(false)]
         public override bool IsContainer
         {
-            get { return true; }
+            get => true;
             set { }
         }
 
@@ -80,16 +85,13 @@ namespace mRemoteNG.Container
             Children.Insert(index, newChildItem);
             SubscribeToChildEvents(newChildItem);
             RaiseCollectionChangedEvent(this,
-                                        new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
-                                                                             newChildItem));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
+                    newChildItem));
         }
 
         public void AddChildRange(IEnumerable<ConnectionInfo> newChildren)
         {
-            foreach (var child in newChildren)
-            {
-                AddChild(child);
-            }
+            foreach (var child in newChildren) AddChild(child);
         }
 
         public virtual void RemoveChild(ConnectionInfo removalTarget)
@@ -99,16 +101,13 @@ namespace mRemoteNG.Container
             Children.Remove(removalTarget);
             UnsubscribeToChildEvents(removalTarget);
             RaiseCollectionChangedEvent(this,
-                                        new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
-                                                                             removalTarget));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                    removalTarget));
         }
 
         public void RemoveChildRange(IEnumerable<ConnectionInfo> removalTargets)
         {
-            foreach (var child in removalTargets)
-            {
-                RemoveChild(child);
-            }
+            foreach (var child in removalTargets) RemoveChild(child);
         }
 
         public void SetChildPosition(ConnectionInfo child, int newIndex)
@@ -119,9 +118,9 @@ namespace mRemoteNG.Container
             if (newIndex > Children.Count) newIndex = Children.Count;
             Children.Insert(newIndex, child);
             RaiseCollectionChangedEvent(this,
-                                        new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, child,
-                                                                             newIndex,
-                                                                             originalIndex));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, child,
+                    newIndex,
+                    originalIndex));
         }
 
         public void SetChildAbove(ConnectionInfo childToPromote, ConnectionInfo reference)
@@ -172,7 +171,7 @@ namespace mRemoteNG.Container
         }
 
         public void SortOn<TProperty>(Func<ConnectionInfo, TProperty> propertyToCompare,
-                                      ListSortDirection sortDirection = ListSortDirection.Ascending)
+            ListSortDirection sortDirection = ListSortDirection.Ascending)
             where TProperty : IComparable<TProperty>
         {
             var connectionComparer = new ConnectionInfoComparer<TProperty>(propertyToCompare)
@@ -181,7 +180,7 @@ namespace mRemoteNG.Container
             };
             Children.Sort(connectionComparer);
             RaiseCollectionChangedEvent(this,
-                                        new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public void SortRecursive(ListSortDirection sortDirection = ListSortDirection.Ascending)
@@ -190,7 +189,7 @@ namespace mRemoteNG.Container
         }
 
         public void SortOnRecursive<TProperty>(Func<ConnectionInfo, TProperty> propertyToCompare,
-                                               ListSortDirection sortDirection = ListSortDirection.Ascending)
+            ListSortDirection sortDirection = ListSortDirection.Ascending)
             where TProperty : IComparable<TProperty>
         {
             foreach (var child in Children.OfType<ContainerInfo>())
@@ -260,6 +259,7 @@ namespace mRemoteNG.Container
                 if (childContainer != null)
                     childList.AddRange(GetRecursiveFavoritChildList(childContainer));
             }
+
             return childList;
         }
 
@@ -274,6 +274,7 @@ namespace mRemoteNG.Container
                 if (childContainer != null)
                     childList.AddRange(GetRecursiveFavoritChildList(childContainer));
             }
+
             return childList;
         }
 

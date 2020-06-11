@@ -175,7 +175,7 @@ namespace mRemoteNG.UI.Window
                 DefaultRenderer = _toolStripProfessionalRenderer
             };
             vsToolStripExtender.SetStyle(cMenScreenshot, ThemeManager.getInstance().ActiveTheme.Version,
-                                         ThemeManager.getInstance().ActiveTheme.Theme);
+                ThemeManager.getInstance().ActiveTheme.Theme);
         }
 
         private void ApplyLanguage()
@@ -235,8 +235,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    "AddScreenshot (UI.Window.ScreenshotManager) failed" +
-                                                    Environment.NewLine + ex.Message, true);
+                    "AddScreenshot (UI.Window.ScreenshotManager) failed" +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -248,18 +248,12 @@ namespace mRemoteNG.UI.Window
         {
             cMenScreenshot.Tag = sender;
 
-            if (e.Button == MouseButtons.Left)
-            {
-                OpenScreenshot((PictureBox)sender);
-            }
+            if (e.Button == MouseButtons.Left) OpenScreenshot((PictureBox) sender);
         }
 
         private void pbScreenshotOpen_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                CloseOpenedScreenshot((Form)((PictureBox)sender).Parent);
-            }
+            if (e.Button == MouseButtons.Left) CloseOpenedScreenshot((Form) ((PictureBox) sender).Parent);
         }
 
         private void CloseOpenedScreenshot(Form form)
@@ -304,8 +298,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    "OpenScreenshot (UI.Window.ScreenshotManager) failed" +
-                                                    Environment.NewLine + ex.Message, true);
+                    "OpenScreenshot (UI.Window.ScreenshotManager) failed" +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -313,14 +307,14 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                ((PictureBox)((Button)sender).Parent).Dispose();
+                ((PictureBox) ((Button) sender).Parent).Dispose();
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    "btnCloseScreenshot_Click (UI.Window.ScreenshotManager) failed" +
-                                                    Environment.NewLine + ex.Message,
-                                                    true);
+                    "btnCloseScreenshot_Click (UI.Window.ScreenshotManager) failed" +
+                    Environment.NewLine + ex.Message,
+                    true);
             }
         }
 
@@ -347,7 +341,7 @@ namespace mRemoteNG.UI.Window
 
                 if (dlgSaveAllImages.ShowDialog() != DialogResult.OK) return;
                 foreach (var fPath in Directory.GetFiles(dlgSaveAllImages.SelectedPath, "Screenshot_*",
-                                                         SearchOption.TopDirectoryOnly))
+                    SearchOption.TopDirectoryOnly))
                 {
                     var f = new FileInfo(fPath);
 
@@ -355,24 +349,24 @@ namespace mRemoteNG.UI.Window
                     fCount = fCount.Replace(f.Extension, "");
                     fCount = fCount.Replace("Screenshot_", "");
 
-                    pCount = (int)(double.Parse(fCount) + 1);
+                    pCount = (int) (double.Parse(fCount) + 1);
                 }
 
                 foreach (Control ctrl in flpScreenshots.Controls)
                 {
                     if (!(ctrl is PictureBox)) continue;
                     (ctrl as PictureBox).Image.Save(
-                                                    dlgSaveAllImages.SelectedPath + "\\Screenshot_" +
-                                                    Tools.MiscTools.LeadingZero(Convert.ToString(pCount)) + ".png",
-                                                    System.Drawing.Imaging.ImageFormat.Png);
+                        dlgSaveAllImages.SelectedPath + "\\Screenshot_" +
+                        Tools.MiscTools.LeadingZero(Convert.ToString(pCount)) + ".png",
+                        System.Drawing.Imaging.ImageFormat.Png);
                     pCount++;
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    "SaveAllImages (UI.Window.ScreenshotManager) failed" +
-                                                    Environment.NewLine + ex.Message, true);
+                    "SaveAllImages (UI.Window.ScreenshotManager) failed" +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -385,14 +379,14 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                Clipboard.SetImage(((PictureBox)cMenScreenshot.Tag).Image);
+                Clipboard.SetImage(((PictureBox) cMenScreenshot.Tag).Image);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    "CopyImageToClipboard (UI.Window.ScreenshotManager) failed" +
-                                                    Environment.NewLine + ex.Message,
-                                                    true);
+                    "CopyImageToClipboard (UI.Window.ScreenshotManager) failed" +
+                    Environment.NewLine + ex.Message,
+                    true);
             }
         }
 
@@ -408,33 +402,33 @@ namespace mRemoteNG.UI.Window
                 if (dlgSaveSingleImage.ShowDialog() != DialogResult.OK) return;
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (dlgSaveSingleImage.FileName
-                                          .Substring(dlgSaveSingleImage
-                                                     .FileName.LastIndexOf(".", StringComparison.Ordinal) + 1)
-                                          .ToLower())
+                    .Substring(dlgSaveSingleImage
+                        .FileName.LastIndexOf(".", StringComparison.Ordinal) + 1)
+                    .ToLower())
                 {
                     case "gif":
-                        ((PictureBox)cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName,
-                                                                    System.Drawing.Imaging.ImageFormat.Gif);
+                        ((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName,
+                            System.Drawing.Imaging.ImageFormat.Gif);
                         break;
                     case "jpeg":
-                        ((PictureBox)cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName,
-                                                                    System.Drawing.Imaging.ImageFormat.Jpeg);
+                        ((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName,
+                            System.Drawing.Imaging.ImageFormat.Jpeg);
                         break;
                     case "jpg":
-                        ((PictureBox)cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName,
-                                                                    System.Drawing.Imaging.ImageFormat.Jpeg);
+                        ((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName,
+                            System.Drawing.Imaging.ImageFormat.Jpeg);
                         break;
                     case "png":
-                        ((PictureBox)cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName,
-                                                                    System.Drawing.Imaging.ImageFormat.Png);
+                        ((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName,
+                            System.Drawing.Imaging.ImageFormat.Png);
                         break;
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    "SaveSingleImage (UI.Window.ScreenshotManager) failed" +
-                                                    Environment.NewLine + ex.Message, true);
+                    "SaveSingleImage (UI.Window.ScreenshotManager) failed" +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 

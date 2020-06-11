@@ -84,11 +84,8 @@ namespace mRemoteNG.Connection.Protocol
                         var password = "";
 
                         if (!string.IsNullOrEmpty(InterfaceControl.Info?.Username))
-                        {
                             username = InterfaceControl.Info.Username;
-                        }
                         else
-                        {
                             // ReSharper disable once SwitchStatementMissingSomeCases
                             switch (Settings.Default.EmptyCredentials)
                             {
@@ -99,7 +96,6 @@ namespace mRemoteNG.Connection.Protocol
                                     username = Settings.Default.DefaultUsername;
                                     break;
                             }
-                        }
 
                         if (!string.IsNullOrEmpty(InterfaceControl.Info?.Password))
                         {
@@ -111,23 +107,17 @@ namespace mRemoteNG.Connection.Protocol
                             {
                                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                                 password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword,
-                                                                        Runtime.EncryptionKey);
+                                    Runtime.EncryptionKey);
                             }
                         }
 
-                        arguments.Add("-" + (int)PuttySSHVersion);
+                        arguments.Add("-" + (int) PuttySSHVersion);
 
                         if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials))
                         {
-                            if (!string.IsNullOrEmpty(username))
-                            {
-                                arguments.Add("-l", username);
-                            }
+                            if (!string.IsNullOrEmpty(username)) arguments.Add("-l", username);
 
-                            if (!string.IsNullOrEmpty(password))
-                            {
-                                arguments.Add("-pw", password);
-                            }
+                            if (!string.IsNullOrEmpty(password)) arguments.Add("-pw", password);
                         }
                     }
 
@@ -135,17 +125,12 @@ namespace mRemoteNG.Connection.Protocol
                     arguments.Add(InterfaceControl.Info.Hostname);
                 }
 
-                if (_isPuttyNg)
-                {
-                    arguments.Add("-hwndparent", InterfaceControl.Handle.ToString());
-                }
+                if (_isPuttyNg) arguments.Add("-hwndparent", InterfaceControl.Handle.ToString());
 
                 PuttyProcess.StartInfo.Arguments = arguments.ToString();
                 // add additional SSH options, f.e. tunnel or noshell parameters that may be specified for the the connnection
                 if (!string.IsNullOrEmpty(InterfaceControl.Info.SSHOptions))
-                {
                     PuttyProcess.StartInfo.Arguments += " " + InterfaceControl.Info.SSHOptions;
-                }
 
                 PuttyProcess.EnableRaisingEvents = true;
                 PuttyProcess.Exited += ProcessExited;
@@ -154,13 +139,13 @@ namespace mRemoteNG.Connection.Protocol
                 PuttyProcess.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
 
                 var startTicks = Environment.TickCount;
-                while (PuttyHandle.ToInt32() == 0 &
-                       Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
+                while ((PuttyHandle.ToInt32() == 0) &
+                       (Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000))
                 {
                     if (_isPuttyNg)
                     {
                         PuttyHandle = NativeMethods.FindWindowEx(
-                                                                 InterfaceControl.Handle, new IntPtr(0), null, null);
+                            InterfaceControl.Handle, new IntPtr(0), null, null);
                     }
                     else
                     {
@@ -168,26 +153,20 @@ namespace mRemoteNG.Connection.Protocol
                         PuttyHandle = PuttyProcess.MainWindowHandle;
                     }
 
-                    if (PuttyHandle.ToInt32() == 0)
-                    {
-                        Thread.Sleep(0);
-                    }
+                    if (PuttyHandle.ToInt32() == 0) Thread.Sleep(0);
                 }
 
-                if (!_isPuttyNg)
-                {
-                    NativeMethods.SetParent(PuttyHandle, InterfaceControl.Handle);
-                }
+                if (!_isPuttyNg) NativeMethods.SetParent(PuttyHandle, InterfaceControl.Handle);
 
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.PuttyStuff, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    string.Format(Language.PuttyHandle, PuttyHandle), true);
+                    string.Format(Language.PuttyHandle, PuttyHandle), true);
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    string.Format(Language.PuttyTitle, PuttyProcess.MainWindowTitle),
-                                                    true);
+                    string.Format(Language.PuttyTitle, PuttyProcess.MainWindowTitle),
+                    true);
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    string.Format(Language.PanelHandle,
-                                                                  InterfaceControl.Parent.Handle), true);
+                    string.Format(Language.PanelHandle,
+                        InterfaceControl.Parent.Handle), true);
 
                 Resize(this, new EventArgs());
                 base.Connect();
@@ -196,8 +175,8 @@ namespace mRemoteNG.Connection.Protocol
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ConnectionFailed + Environment.NewLine +
-                                                    ex.Message);
+                    Language.ConnectionFailed + Environment.NewLine +
+                    ex.Message);
                 return false;
             }
         }
@@ -211,8 +190,8 @@ namespace mRemoteNG.Connection.Protocol
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.PuttyFocusFailed + Environment.NewLine + ex.Message,
-                                                    true);
+                    Language.PuttyFocusFailed + Environment.NewLine + ex.Message,
+                    true);
             }
         }
 
@@ -234,18 +213,18 @@ namespace mRemoteNG.Connection.Protocol
                     var scaledFrameBorderWidth = _display.ScaleWidth(SystemInformation.FrameBorderSize.Width);
 
                     NativeMethods.MoveWindow(PuttyHandle, -scaledFrameBorderWidth,
-                                             -(SystemInformation.CaptionHeight + scaledFrameBorderHeight),
-                                             InterfaceControl.Width + scaledFrameBorderWidth * 2,
-                                             InterfaceControl.Height + SystemInformation.CaptionHeight +
-                                             scaledFrameBorderHeight * 2,
-                                             true);
+                        -(SystemInformation.CaptionHeight + scaledFrameBorderHeight),
+                        InterfaceControl.Width + scaledFrameBorderWidth * 2,
+                        InterfaceControl.Height + SystemInformation.CaptionHeight +
+                        scaledFrameBorderHeight * 2,
+                        true);
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.PuttyResizeFailed + Environment.NewLine + ex.Message,
-                                                    true);
+                    Language.PuttyResizeFailed + Environment.NewLine + ex.Message,
+                    true);
             }
         }
 
@@ -253,16 +232,13 @@ namespace mRemoteNG.Connection.Protocol
         {
             try
             {
-                if (PuttyProcess.HasExited == false)
-                {
-                    PuttyProcess.Kill();
-                }
+                if (PuttyProcess.HasExited == false) PuttyProcess.Kill();
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.PuttyKillFailed + Environment.NewLine + ex.Message,
-                                                    true);
+                    Language.PuttyKillFailed + Environment.NewLine + ex.Message,
+                    true);
             }
 
             try
@@ -272,8 +248,8 @@ namespace mRemoteNG.Connection.Protocol
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.PuttyDisposeFailed + Environment.NewLine + ex.Message,
-                                                    true);
+                    Language.PuttyDisposeFailed + Environment.NewLine + ex.Message,
+                    true);
             }
 
             base.Close();
@@ -283,14 +259,14 @@ namespace mRemoteNG.Connection.Protocol
         {
             try
             {
-                NativeMethods.PostMessage(PuttyHandle, NativeMethods.WM_SYSCOMMAND, (IntPtr)IDM_RECONF, (IntPtr)0);
+                NativeMethods.PostMessage(PuttyHandle, NativeMethods.WM_SYSCOMMAND, (IntPtr) IDM_RECONF, (IntPtr) 0);
                 NativeMethods.SetForegroundWindow(PuttyHandle);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.PuttyShowSettingsDialogFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.PuttyShowSettingsDialogFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 

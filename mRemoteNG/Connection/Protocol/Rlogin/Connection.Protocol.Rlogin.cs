@@ -4,7 +4,7 @@ namespace mRemoteNG.Connection.Protocol.Rlogin
     {
         public ProtocolRlogin()
         {
-            this.PuttyProtocol = Putty_Protocol.rlogin;
+            PuttyProtocol = Putty_Protocol.rlogin;
         }
 
         public enum Defaults

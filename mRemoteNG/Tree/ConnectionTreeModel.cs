@@ -19,8 +19,8 @@ namespace mRemoteNG.Tree
             rootNode.CollectionChanged += RaiseCollectionChangedEvent;
             rootNode.PropertyChanged += RaisePropertyChangedEvent;
             RaiseCollectionChangedEvent(this,
-                                        new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
-                                                                             rootNode));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
+                    rootNode));
         }
 
         public void RemoveRootNode(ContainerInfo rootNode)
@@ -30,17 +30,14 @@ namespace mRemoteNG.Tree
             rootNode.PropertyChanged -= RaisePropertyChangedEvent;
             RootNodes.Remove(rootNode);
             RaiseCollectionChangedEvent(this,
-                                        new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
-                                                                             rootNode));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                    rootNode));
         }
 
         public IReadOnlyList<ConnectionInfo> GetRecursiveChildList()
         {
             var list = new List<ConnectionInfo>();
-            foreach (var rootNode in RootNodes)
-            {
-                list.AddRange(GetRecursiveChildList(rootNode));
-            }
+            foreach (var rootNode in RootNodes) list.AddRange(GetRecursiveChildList(rootNode));
 
             return list;
         }

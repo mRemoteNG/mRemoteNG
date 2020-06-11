@@ -9,7 +9,7 @@ namespace mRemoteNG.UI.Controls
         {
             AspectName = "Name";
             FillsFreeSpace = false;
-            AspectGetter = item => ((ConnectionInfo)item).Name;
+            AspectGetter = item => ((ConnectionInfo) item).Name;
             ImageGetter = imageGetterDelegate;
             AutoCompleteEditor = false;
         }

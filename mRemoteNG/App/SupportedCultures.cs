@@ -22,7 +22,6 @@ namespace mRemoteNG.App
         private SupportedCultures()
         {
             foreach (var CultureName in Settings.Default.SupportedUICultures.Split(','))
-            {
                 try
                 {
                     var CultureInfo = new CultureInfo(CultureName.Trim());
@@ -31,9 +30,8 @@ namespace mRemoteNG.App
                 catch (Exception ex)
                 {
                     Debug.Print(
-                                $"An exception occurred while adding the culture {CultureName} to the list of supported cultures. {ex.StackTrace}");
+                        $"An exception occurred while adding the culture {CultureName} to the list of supported cultures. {ex.StackTrace}");
                 }
-            }
         }
 
         // fix CA2229 - https://docs.microsoft.com/en-us/visualstudio/code-quality/ca2229-implement-serialization-constructors?view=vs-2017
@@ -61,14 +59,10 @@ namespace mRemoteNG.App
             SingletonInstance.Values.CopyTo(NativeNames, 0);
 
             for (var Index = 0; Index <= SingletonInstance.Count; Index++)
-            {
                 if (NativeNames[Index] == CultureNativeName)
-                {
                     return Names[Index];
-                }
-            }
 
-            throw (new KeyNotFoundException());
+            throw new KeyNotFoundException();
         }
 
         public static string get_CultureNativeName(string CultureName)
@@ -81,10 +75,7 @@ namespace mRemoteNG.App
             get
             {
                 var ValueList = new List<string>();
-                foreach (var Value in SingletonInstance.Values)
-                {
-                    ValueList.Add(Value);
-                }
+                foreach (var Value in SingletonInstance.Values) ValueList.Add(Value);
 
                 return ValueList;
             }

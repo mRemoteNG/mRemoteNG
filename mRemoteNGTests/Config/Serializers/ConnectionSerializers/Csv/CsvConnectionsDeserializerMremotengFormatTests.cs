@@ -29,7 +29,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             _serializer = new CsvConnectionsSerializerMremotengFormat(new SaveFilter(), credentialRepositoryList);
         }
 
-        [TestCaseSource(typeof(DeserializationTestSource), nameof(DeserializationTestSource.ConnectionPropertyTestCases))]
+        [TestCaseSource(typeof(DeserializationTestSource),
+            nameof(DeserializationTestSource.ConnectionPropertyTestCases))]
         public object ConnectionPropertiesDeserializedCorrectly(string propertyToCheck)
         {
             var csv = _serializer.Serialize(GetTestConnection());
@@ -46,7 +47,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             var deserializedConnections = _deserializer.Deserialize(csv);
             var connection = deserializedConnections.GetRecursiveChildList().FirstOrDefault();
             connection?.RemoveParent();
-            var propertyValue = typeof(ConnectionInfoInheritance).GetProperty(propertyToCheck)?.GetValue(connection?.Inheritance);
+            var propertyValue = typeof(ConnectionInfoInheritance).GetProperty(propertyToCheck)
+                ?.GetValue(connection?.Inheritance);
             return propertyValue;
         }
 
@@ -161,7 +163,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 {
                     testCases.Add(
                         new TestCaseData(property.Name)
-                        .Returns(property.GetValue(testConnectionInfo)));
+                            .Returns(property.GetValue(testConnectionInfo)));
                 }
 
                 return testCases;
@@ -169,14 +171,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
             public static IEnumerable InheritanceTestCases()
             {
-	            var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+                var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
                 var properties = testInheritance.GetProperties();
 
                 return properties
-	                .Select(property => 
-		                new TestCaseData(property.Name)
-			                .Returns(property.GetValue(testInheritance)))
-	                .ToList();
+                    .Select(property =>
+                        new TestCaseData(property.Name)
+                            .Returns(property.GetValue(testInheritance)))
+                    .ToList();
             }
         }
     }

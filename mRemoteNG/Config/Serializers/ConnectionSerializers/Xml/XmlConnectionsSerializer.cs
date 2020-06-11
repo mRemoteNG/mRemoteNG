@@ -13,7 +13,7 @@ using System.Xml.Linq;
 namespace mRemoteNG.Config.Serializers.Xml
 {
     public class XmlConnectionsSerializer : ISerializer<ConnectionTreeModel, string>,
-                                            ISerializer<ConnectionInfo, string>
+        ISerializer<ConnectionInfo, string>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
         private readonly ISerializer<ConnectionInfo, XElement> _connectionNodeSerializer;
@@ -22,7 +22,7 @@ namespace mRemoteNG.Config.Serializers.Xml
         public bool UseFullEncryption { get; set; }
 
         public XmlConnectionsSerializer(ICryptographyProvider cryptographyProvider,
-                                        ISerializer<ConnectionInfo, XElement> connectionNodeSerializer)
+            ISerializer<ConnectionInfo, XElement> connectionNodeSerializer)
         {
             _cryptographyProvider = cryptographyProvider;
             _connectionNodeSerializer = connectionNodeSerializer;
@@ -30,7 +30,7 @@ namespace mRemoteNG.Config.Serializers.Xml
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
+            var rootNode = (RootNodeInfo) connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return SerializeConnectionsData(rootNode);
         }
 

@@ -16,8 +16,8 @@ namespace mRemoteNG.Messages.WriterDecorators
         private readonly FrmMain _frmMain = FrmMain.Default;
 
         public MessageFocusDecorator(ErrorAndInfoWindow messageWindow,
-                                     IMessageTypeFilteringOptions filter,
-                                     IMessageWriter decoratedWriter)
+            IMessageTypeFilteringOptions filter,
+            IMessageWriter decoratedWriter)
         {
             _filter = filter ?? throw new ArgumentNullException(nameof(filter));
             _messageWindow = messageWindow ?? throw new ArgumentNullException(nameof(messageWindow));
@@ -55,15 +55,15 @@ namespace mRemoteNG.Messages.WriterDecorators
         private async Task SwitchToMessageAsync()
         {
             await Task
-                  .Delay(TimeSpan.FromMilliseconds(300))
-                  .ContinueWith(task => SwitchToMessage());
+                .Delay(TimeSpan.FromMilliseconds(300))
+                .ContinueWith(task => SwitchToMessage());
         }
 
         private void SwitchToMessage()
         {
             if (_messageWindow.InvokeRequired)
             {
-                _frmMain.Invoke((MethodInvoker)SwitchToMessage);
+                _frmMain.Invoke((MethodInvoker) SwitchToMessage);
                 return;
             }
 
@@ -71,7 +71,7 @@ namespace mRemoteNG.Messages.WriterDecorators
             if (_messageWindow.DockState == DockState.Unknown)
                 return;
 
-            _messageWindow.PreviousActiveForm = (DockContent)_frmMain.pnlDock.ActiveContent;
+            _messageWindow.PreviousActiveForm = (DockContent) _frmMain.pnlDock.ActiveContent;
 
             // Show the notifications panel solution:
             // https://stackoverflow.com/questions/13843604/calling-up-dockpanel-suites-autohidden-dockcontent-programmatically

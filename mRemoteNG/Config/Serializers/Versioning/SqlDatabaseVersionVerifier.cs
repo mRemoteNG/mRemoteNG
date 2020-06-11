@@ -25,10 +25,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
             {
                 var databaseVersion = dbVersion;
 
-                if (databaseVersion.Equals(new Version()))
-                {
-                    return true;
-                }
+                if (databaseVersion.Equals(new Version())) return true;
 
                 var dbUpgraders = new IVersionUpgrader[]
                 {
@@ -37,16 +34,12 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     new SqlVersion24To25Upgrader(_databaseConnector),
                     new SqlVersion25To26Upgrader(_databaseConnector),
                     new SqlVersion26To27Upgrader(_databaseConnector),
-                    new SqlVersion27To28Upgrader(_databaseConnector),
+                    new SqlVersion27To28Upgrader(_databaseConnector)
                 };
 
                 foreach (var upgrader in dbUpgraders)
-                {
                     if (upgrader.CanUpgrade(databaseVersion))
-                    {
                         databaseVersion = upgrader.Upgrade();
-                    }
-                }
 
                 // DB is at the highest current supported version
                 if (databaseVersion.CompareTo(new Version(2, 8)) == 0)
@@ -54,15 +47,15 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
                 if (isVerified == false)
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                        string.Format(Language.ErrorBadDatabaseVersion,
-                                                                      databaseVersion,
-                                                                      GeneralAppInfo.ProductName));
+                        string.Format(Language.ErrorBadDatabaseVersion,
+                            databaseVersion,
+                            GeneralAppInfo.ProductName));
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    string.Format(Language.ErrorVerifyDatabaseVersionFailed,
-                                                                  ex.Message));
+                    string.Format(Language.ErrorVerifyDatabaseVersionFailed,
+                        ex.Message));
             }
 
             return isVerified;

@@ -53,9 +53,7 @@ namespace mRemoteNG.UI.Forms
             cbPanels.Items.Clear();
 
             for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
-            {
                 cbPanels.Items.Add(Runtime.WindowList[i].Text.Replace("&&", "&"));
-            }
 
             if (cbPanels.Items.Count > 0)
             {

@@ -18,8 +18,8 @@ namespace mRemoteNG.Config.Serializers
 
         public int KeyDerivationIterations
         {
-            get { return _cryptographyProvider.KeyDerivationIterations; }
-            set { _cryptographyProvider.KeyDerivationIterations = value; }
+            get => _cryptographyProvider.KeyDerivationIterations;
+            set => _cryptographyProvider.KeyDerivationIterations = value;
         }
 
 
@@ -30,8 +30,8 @@ namespace mRemoteNG.Config.Serializers
         }
 
         public XmlConnectionsDecryptor(BlockCipherEngines blockCipherEngine,
-                                       BlockCipherModes blockCipherMode,
-                                       RootNodeInfo rootNodeInfo)
+            BlockCipherModes blockCipherMode,
+            RootNodeInfo rootNodeInfo)
         {
             _cryptographyProvider = new CryptoProviderFactory(blockCipherEngine, blockCipherMode).Build();
             _rootNodeInfo = rootNodeInfo;
@@ -90,7 +90,7 @@ namespace mRemoteNG.Config.Serializers
             {
                 connectionsFileIsNotEncrypted =
                     _cryptographyProvider.Decrypt(protectedString,
-                                                  _rootNodeInfo.PasswordString.ConvertToSecureString()) ==
+                        _rootNodeInfo.PasswordString.ConvertToSecureString()) ==
                     "ThisIsNotProtected";
             }
             catch (EncryptionException)

@@ -12,11 +12,8 @@ namespace mRemoteNG.UI
             {
                 var ctlChild = tempLoopVarCtlChild;
                 ctlChild.Font = new Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style,
-                                         ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
-                if (ctlChild.Controls.Count > 0)
-                {
-                    FontOverride(ctlChild);
-                }
+                    ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
+                if (ctlChild.Controls.Count > 0) FontOverride(ctlChild);
             }
         }
     }

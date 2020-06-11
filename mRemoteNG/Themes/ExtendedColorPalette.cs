@@ -63,16 +63,12 @@ namespace mRemoteNG.Themes
             //Invisible colors are not good, might  indicate missing color from the palette as is represented by 00000000
             if (retColor != Color.Empty && retColor.A != 0) return retColor;
             if (DefaultColorPalette != null)
-            {
                 retColor = DefaultColorPalette.ContainsKey(colorKey) ? DefaultColorPalette[colorKey] : Color.Empty;
-            }
 
             //why are we here?, just avoid a crash
             if (retColor == Color.Empty)
-            {
                 //Fail to pink , because why not
                 retColor = Color.Pink;
-            }
 
             return retColor;
         }

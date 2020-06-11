@@ -19,7 +19,10 @@ namespace mRemoteNGTests.UI.Controls
         public void TearDown()
         {
             _testForm.Close();
-            while (_testForm.Disposing) { }
+            while (_testForm.Disposing)
+            {
+            }
+
             _testForm = null;
         }
 

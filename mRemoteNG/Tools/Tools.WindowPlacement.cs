@@ -20,28 +20,24 @@ namespace mRemoteNG.Tools
 
         public Form Form
         {
-            get { return _form; }
-            set { _form = value; }
+            get => _form;
+            set => _form = value;
         }
 
         public bool RestoreToMaximized
         {
             get
             {
-                NativeMethods.WINDOWPLACEMENT windowPlacement = GetWindowPlacement();
+                var windowPlacement = GetWindowPlacement();
                 return Convert.ToBoolean(windowPlacement.flags & NativeMethods.WPF_RESTORETOMAXIMIZED);
             }
             set
             {
-                NativeMethods.WINDOWPLACEMENT windowPlacement = GetWindowPlacement();
+                var windowPlacement = GetWindowPlacement();
                 if (value)
-                {
                     windowPlacement.flags = windowPlacement.flags | NativeMethods.WPF_RESTORETOMAXIMIZED;
-                }
                 else
-                {
                     windowPlacement.flags = windowPlacement.flags & ~NativeMethods.WPF_RESTORETOMAXIMIZED;
-                }
 
                 SetWindowPlacement(windowPlacement);
             }
@@ -53,13 +49,10 @@ namespace mRemoteNG.Tools
 
         private NativeMethods.WINDOWPLACEMENT GetWindowPlacement()
         {
-            if (_form == null)
-            {
-                throw (new NullReferenceException("WindowPlacement.Form is not set."));
-            }
+            if (_form == null) throw new NullReferenceException("WindowPlacement.Form is not set.");
 
-            NativeMethods.WINDOWPLACEMENT windowPlacement = new NativeMethods.WINDOWPLACEMENT();
-            windowPlacement.length = (uint)Marshal.SizeOf(windowPlacement);
+            var windowPlacement = new NativeMethods.WINDOWPLACEMENT();
+            windowPlacement.length = (uint) Marshal.SizeOf(windowPlacement);
             try
             {
                 NativeMethods.GetWindowPlacement(_form.Handle, ref windowPlacement);
@@ -73,12 +66,9 @@ namespace mRemoteNG.Tools
 
         private bool SetWindowPlacement(NativeMethods.WINDOWPLACEMENT windowPlacement)
         {
-            if (_form == null)
-            {
-                throw (new NullReferenceException("WindowPlacement.Form is not set."));
-            }
+            if (_form == null) throw new NullReferenceException("WindowPlacement.Form is not set.");
 
-            windowPlacement.length = (uint)Marshal.SizeOf(windowPlacement);
+            windowPlacement.length = (uint) Marshal.SizeOf(windowPlacement);
             try
             {
                 return NativeMethods.SetWindowPlacement(_form.Handle, ref windowPlacement);

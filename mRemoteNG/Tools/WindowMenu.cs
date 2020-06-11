@@ -38,7 +38,7 @@ namespace mRemoteNG.Tools
 
         public void AppendMenuItem(IntPtr ParentMenu, Flags Flags, IntPtr ID, string Text)
         {
-            NativeMethods.AppendMenu(ParentMenu, (int)Flags, ID, Text);
+            NativeMethods.AppendMenu(ParentMenu, (int) Flags, ID, Text);
         }
 
         public IntPtr CreatePopupMenuItem()
@@ -48,14 +48,14 @@ namespace mRemoteNG.Tools
 
         public bool InsertMenuItem(IntPtr SysMenu, int Position, Flags Flags, IntPtr SubMenu, string Text)
         {
-            return NativeMethods.InsertMenu(SysMenu, Position, (int)Flags, SubMenu, Text);
+            return NativeMethods.InsertMenu(SysMenu, Position, (int) Flags, SubMenu, Text);
         }
 
         public IntPtr SetBitmap(IntPtr Menu, int Position, Flags Flags, Bitmap Bitmap)
         {
-            return new IntPtr(Convert.ToInt32(NativeMethods.SetMenuItemBitmaps(Menu, Position, (int)Flags,
-                                                                               Bitmap.GetHbitmap(),
-                                                                               Bitmap.GetHbitmap())));
+            return new IntPtr(Convert.ToInt32(NativeMethods.SetMenuItemBitmaps(Menu, Position, (int) Flags,
+                Bitmap.GetHbitmap(),
+                Bitmap.GetHbitmap())));
         }
 
         protected override bool ReleaseHandle()

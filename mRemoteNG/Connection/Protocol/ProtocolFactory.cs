@@ -47,10 +47,7 @@ namespace mRemoteNG.Connection.Protocol
                 case ProtocolType.PowerShell:
                     return new ProtocolPowerShell(connectionInfo);
                 case ProtocolType.IntApp:
-                    if (connectionInfo.ExtApp == "")
-                    {
-                        throw (new Exception(Language.NoExtAppDefined));
-                    }
+                    if (connectionInfo.ExtApp == "") throw new Exception(Language.NoExtAppDefined);
                     return new IntegratedProgram();
             }
 

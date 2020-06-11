@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Tree
 {
-	public class NodeSearcherTests
+    public class NodeSearcherTests
     {
         private NodeSearcher _nodeSearcher;
         private ContainerInfo _folder1;
@@ -37,21 +37,22 @@ namespace mRemoteNGTests.Tree
         public void SearchByDescriptionReturnsAllExpectedMatches()
         {
             var matches = _nodeSearcher.SearchByName("description");
-            Assert.That(matches.ToList(), Is.EquivalentTo(new[] { _folder1, _folder2, _con1, _con2, _con3, _con4, _con5 }));
+            Assert.That(matches.ToList(),
+                Is.EquivalentTo(new[] {_folder1, _folder2, _con1, _con2, _con3, _con4, _con5}));
         }
 
         [Test]
         public void SearchByDescription1ReturnsAllExpectedMatches()
         {
             var matches = _nodeSearcher.SearchByName("description1");
-            Assert.That(matches.ToList(), Is.EquivalentTo(new[] { _folder1 }));
+            Assert.That(matches.ToList(), Is.EquivalentTo(new[] {_folder1}));
         }
 
         [Test]
         public void SearchByHostname1ReturnsAllExpectedMatches()
         {
             var matches = _nodeSearcher.SearchByName("hostname1");
-            Assert.That(matches.ToList(), Is.EquivalentTo(new[] { _folder1 }));
+            Assert.That(matches.ToList(), Is.EquivalentTo(new[] {_folder1}));
         }
 
         [Test]
@@ -96,26 +97,26 @@ namespace mRemoteNGTests.Tree
              */
             var connectionTreeModel = new ConnectionTreeModel();
             var root = new RootNodeInfo(RootNodeType.Connection);
-            _folder1 = new ContainerInfo { Name = "folder1", Description = "description1", Hostname = "hostname1" };
-            _con1 = new ConnectionInfo { Name = "con1", Description="description2", Hostname="hostname2" };
-            _con2 = new ConnectionInfo { Name = "con2", Description="description3", Hostname="hostname3" };
-            _folder2 = new ContainerInfo { Name = "folder2", Description="description4", Hostname="hostname4" };
-            _con3 = new ConnectionInfo { Name = "con3", Description="description5", Hostname="hostname5" };
-            _con4 = new ConnectionInfo { Name = "con4", Description="description6", Hostname="hostname6" };
-            _con5 = new ConnectionInfo { Name = "con5", Description="description7", Hostname="hostname7" };
+            _folder1 = new ContainerInfo {Name = "folder1", Description = "description1", Hostname = "hostname1"};
+            _con1 = new ConnectionInfo {Name = "con1", Description = "description2", Hostname = "hostname2"};
+            _con2 = new ConnectionInfo {Name = "con2", Description = "description3", Hostname = "hostname3"};
+            _folder2 = new ContainerInfo {Name = "folder2", Description = "description4", Hostname = "hostname4"};
+            _con3 = new ConnectionInfo {Name = "con3", Description = "description5", Hostname = "hostname5"};
+            _con4 = new ConnectionInfo {Name = "con4", Description = "description6", Hostname = "hostname6"};
+            _con5 = new ConnectionInfo {Name = "con5", Description = "description7", Hostname = "hostname7"};
 
-			_folder1.Inheritance.TurnOffInheritanceCompletely();
-			_con1.Inheritance.TurnOffInheritanceCompletely();
-			_con2.Inheritance.TurnOffInheritanceCompletely();
-			_folder2.Inheritance.TurnOffInheritanceCompletely();
-			_con3.Inheritance.TurnOffInheritanceCompletely();
-			_con4.Inheritance.TurnOffInheritanceCompletely();
-			_con5.Inheritance.TurnOffInheritanceCompletely();
+            _folder1.Inheritance.TurnOffInheritanceCompletely();
+            _con1.Inheritance.TurnOffInheritanceCompletely();
+            _con2.Inheritance.TurnOffInheritanceCompletely();
+            _folder2.Inheritance.TurnOffInheritanceCompletely();
+            _con3.Inheritance.TurnOffInheritanceCompletely();
+            _con4.Inheritance.TurnOffInheritanceCompletely();
+            _con5.Inheritance.TurnOffInheritanceCompletely();
 
             connectionTreeModel.AddRootNode(root);
-            root.AddChildRange(new [] { _folder1, _folder2, _con5 });
-            _folder1.AddChildRange(new [] { _con1, _con2 });
-            _folder2.AddChildRange(new[] { _con3, _con4 });
+            root.AddChildRange(new[] {_folder1, _folder2, _con5});
+            _folder1.AddChildRange(new[] {_con1, _con2});
+            _folder2.AddChildRange(new[] {_con3, _con4});
 
             return connectionTreeModel;
         }

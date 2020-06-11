@@ -3,7 +3,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Tabs
 {
-    class FloatWindowNG : FloatWindow
+    internal class FloatWindowNG : FloatWindow
     {
         public FloatWindowNG(DockPanel dockPanel, DockPane pane)
             : base(dockPanel, pane)

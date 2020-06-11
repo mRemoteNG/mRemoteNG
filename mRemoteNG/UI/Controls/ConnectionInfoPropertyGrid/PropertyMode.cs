@@ -5,6 +5,6 @@
         Connection,
         Inheritance,
         DefaultConnection,
-        DefaultInheritance,
+        DefaultInheritance
     }
 }

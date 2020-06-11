@@ -65,10 +65,10 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
             baseSerializer.Serialize(null).ReturnsForAnyArgs(
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 "<Root>" +
-                    $"<Element1 Password=\"{randomString}\" />" +
-                    $"<Element1 Password=\"{randomString}\">" +
-                        $"<Element1 Password=\"{randomString}\" />" +
-                    "</Element1>" +
+                $"<Element1 Password=\"{randomString}\" />" +
+                $"<Element1 Password=\"{randomString}\">" +
+                $"<Element1 Password=\"{randomString}\" />" +
+                "</Element1>" +
                 "</Root>");
             return baseSerializer;
         }

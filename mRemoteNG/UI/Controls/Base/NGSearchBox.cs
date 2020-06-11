@@ -51,14 +51,14 @@ namespace mRemoteNG.UI.Controls.Base
                 Text = "";
         }
 
-        private void PbClear_Click(object sender, EventArgs e) => Text = string.Empty;
+        private void PbClear_Click(object sender, EventArgs e)
+        {
+            Text = string.Empty;
+        }
 
         private void NGSearchBox_TextChanged(object sender, EventArgs e)
         {
-            if (!_settingDefaultText)
-            {
-                _showDefaultText = string.IsNullOrEmpty(Text);
-            }
+            if (!_settingDefaultText) _showDefaultText = string.IsNullOrEmpty(Text);
 
             _pbClear.Visible = !_showDefaultText && TextLength > 0;
             _settingDefaultText = false;

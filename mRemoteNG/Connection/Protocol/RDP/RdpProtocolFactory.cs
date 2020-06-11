@@ -29,7 +29,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             var versions = Enum.GetValues(typeof(RdpVersion))
                 .OfType<RdpVersion>()
-                .Except(new[] { RdpVersion.Highest })
+                .Except(new[] {RdpVersion.Highest})
                 .Reverse();
 
             foreach (var version in versions)
@@ -50,10 +50,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             var supportedVersions = new List<RdpVersion>();
             foreach (var version in versions)
-            {
                 if (Build(version).RdpVersionSupported())
                     supportedVersions.Add(version);
-            }
 
             return supportedVersions;
         }

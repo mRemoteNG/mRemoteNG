@@ -7,7 +7,7 @@ namespace mRemoteNG.UI.Controls
 {
     public partial class CredentialRecordListBox : ListBox
     {
-        public new ICredentialRecord SelectedItem => (ICredentialRecord)base.SelectedItem;
+        public new ICredentialRecord SelectedItem => (ICredentialRecord) base.SelectedItem;
         public ICredentialRecord NoneSelection { get; } = new CredentialRecord {Title = $"--{Language.None}--"};
         public ICredentialRecord AddNewSelection { get; } = new CredentialRecord {Title = $"--{Language.Add}--"};
 
@@ -32,10 +32,7 @@ namespace mRemoteNG.UI.Controls
             Items.Add(NoneSelection);
             Items.Add(AddNewSelection);
 
-            foreach (var credential in listOfCredentialRecords)
-            {
-                Items.Add(credential);
-            }
+            foreach (var credential in listOfCredentialRecords) Items.Add(credential);
         }
     }
 }

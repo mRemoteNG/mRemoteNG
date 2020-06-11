@@ -26,19 +26,19 @@ namespace mRemoteNG.Credential
             if (targetsArray.Length == 0) return false;
             if (targetsArray.Length > 1)
                 return PromptUser(
-                                  string.Format(
-                                                "Are you sure you want to delete these {0} selected credentials?",
-                                                targetsArray.Length));
+                    string.Format(
+                        "Are you sure you want to delete these {0} selected credentials?",
+                        targetsArray.Length));
             return PromptUser(
-                              string.Format(
-                                            Language.ConfirmDeleteCredentialRecord,
-                                            targetsArray.First().Title));
+                string.Format(
+                    Language.ConfirmDeleteCredentialRecord,
+                    targetsArray.First().Title));
         }
 
         private bool PromptUser(string promptMessage)
         {
             var msgBoxResponse = _confirmationFunc.Invoke(promptMessage, Application.ProductName,
-                                                          MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return msgBoxResponse == DialogResult.Yes;
         }
     }

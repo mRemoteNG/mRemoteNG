@@ -12,7 +12,6 @@ namespace mRemoteNGTests.UI.Controls
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
     }
 }

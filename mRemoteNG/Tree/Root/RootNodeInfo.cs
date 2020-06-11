@@ -27,22 +27,22 @@ namespace mRemoteNG.Tree.Root
 
         #region Public Properties
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous)),
-         Browsable(true),
-         LocalizedAttributes.LocalizedDefaultValue(nameof(Language.Connections)),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Name)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionName))]
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous))]
+        [Browsable(true)]
+        [LocalizedAttributes.LocalizedDefaultValue(nameof(Language.Connections))]
+        [LocalizedAttributes.LocalizedDisplayName(nameof(Language.Name))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionName))]
         public override string Name
         {
             get => _name;
             set => _name = value;
         }
-        
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous)),
-         Browsable(true),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.PasswordProtect)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPasswordProtect)),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous))]
+        [Browsable(true)]
+        [LocalizedAttributes.LocalizedDisplayName(nameof(Language.PasswordProtect))]
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPasswordProtect))]
+        [TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public new bool Password { get; set; }
 
         [Browsable(false)]

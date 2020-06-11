@@ -6,7 +6,7 @@ using Enum = System.Enum;
 
 namespace mRemoteNGTests.TestHelpers
 {
-	internal static class Randomizer
+    internal static class Randomizer
     {
         private static readonly Random Random = new Random();
 
@@ -23,7 +23,8 @@ namespace mRemoteNGTests.TestHelpers
             return Random.Next() % 2 == 0;
         }
 
-        internal static int RandomInt(int minValue = int.MinValue, int maxValue = int.MaxValue, params int[] excludeInts)
+        internal static int RandomInt(int minValue = int.MinValue, int maxValue = int.MaxValue,
+            params int[] excludeInts)
         {
             return GetNonExcludedValue(() => Random.Next(minValue, maxValue), excludeInts);
         }
@@ -31,13 +32,13 @@ namespace mRemoteNGTests.TestHelpers
         internal static DateTime RandomDateTime(params DateTime[] excludeTimes)
         {
             var date = GetNonExcludedValue(() =>
-                new DateTime(
-                    RandomInt(minValue: 1990, maxValue: 2019),
-                    RandomInt(minValue: 1, maxValue: 13),
-                    RandomInt(minValue: 1, maxValue: 29),
-                    RandomInt(minValue: 0, maxValue: 24),
-                    RandomInt(minValue: 0, maxValue: 60),
-                    RandomInt(minValue: 0, maxValue: 60)),
+                    new DateTime(
+                        RandomInt(1990, 2019),
+                        RandomInt(1, 13),
+                        RandomInt(1, 29),
+                        RandomInt(0, 24),
+                        RandomInt(0, 60),
+                        RandomInt(0, 60)),
                 excludeTimes);
 
             return date;
@@ -48,7 +49,7 @@ namespace mRemoteNGTests.TestHelpers
             if (!typeof(T).IsEnum)
                 throw new ArgumentException("T must be an enum");
 
-            return (T)RandomEnum(typeof(T), excludeValues);
+            return (T) RandomEnum(typeof(T), excludeValues);
         }
 
         internal static object RandomEnum(Type enumType, params object[] excludeValues)
@@ -81,11 +82,11 @@ namespace mRemoteNGTests.TestHelpers
         {
             var opByType = new Dictionary<Type, Action<PropertyInfo, T>>
             {
-                { typeof(int), (p, c) =>  p.SetValue(c, RandomInt(minValue: 0, excludeInts:(int)p.GetValue(c))) },
-                { typeof(bool), (p, c) =>  p.SetValue(c, !(bool)p.GetValue(c)) },
-                { typeof(string), (p, c) =>  p.SetValue(c, RandomString((string)p.GetValue(c))) },
-                { typeof(DateTime), (p, c) =>  p.SetValue(c, RandomDateTime((DateTime)p.GetValue(c))) },
-                { typeof(Enum), (p, c) =>  p.SetValue(c, RandomEnum(p.PropertyType, p.GetValue(c))) },
+                {typeof(int), (p, c) => p.SetValue(c, RandomInt(0, excludeInts: (int) p.GetValue(c)))},
+                {typeof(bool), (p, c) => p.SetValue(c, !(bool) p.GetValue(c))},
+                {typeof(string), (p, c) => p.SetValue(c, RandomString((string) p.GetValue(c)))},
+                {typeof(DateTime), (p, c) => p.SetValue(c, RandomDateTime((DateTime) p.GetValue(c)))},
+                {typeof(Enum), (p, c) => p.SetValue(c, RandomEnum(p.PropertyType, p.GetValue(c)))}
             };
 
             var settableProperties = con
@@ -94,14 +95,12 @@ namespace mRemoteNGTests.TestHelpers
                 .Where(p => p.GetSetMethod() != null);
 
             foreach (var property in settableProperties)
-            {
                 if (opByType.TryGetValue(property.PropertyType, out var mutator))
                     mutator(property, con);
 
-                else if (property.PropertyType.BaseType != null && 
+                else if (property.PropertyType.BaseType != null &&
                          opByType.TryGetValue(property.PropertyType.BaseType, out var mutator2))
                     mutator2(property, con);
-            }
 
             return con;
         }
@@ -120,14 +119,14 @@ namespace mRemoteNGTests.TestHelpers
             var settableBooleanProperties = obj
                 .GetType()
                 .GetProperties()
-                .Where(p => 
-                    p.GetSetMethod() != null && 
+                .Where(p =>
+                    p.GetSetMethod() != null &&
                     p.PropertyType == typeof(bool) &&
                     !excludeProperties.Contains(p.Name));
 
             foreach (var property in settableBooleanProperties)
             {
-                var currentValue = (bool)property.GetValue(obj);
+                var currentValue = (bool) property.GetValue(obj);
                 property.SetValue(obj, !currentValue);
             }
 

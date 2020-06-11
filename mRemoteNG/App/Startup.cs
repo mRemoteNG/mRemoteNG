@@ -68,24 +68,16 @@ namespace mRemoteNG.App
         public void CheckForUpdate()
         {
             if (_appUpdate == null)
-            {
                 _appUpdate = new AppUpdater();
-            }
-            else if (_appUpdate.IsGetUpdateInfoRunning)
-            {
-                return;
-            }
+            else if (_appUpdate.IsGetUpdateInfoRunning) return;
 
             var nextUpdateCheck =
                 Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(
-                                                                                 TimeSpan
-                                                                                     .FromDays(Convert.ToDouble(Settings
-                                                                                                                .Default
-                                                                                                                .CheckForUpdatesFrequencyDays))));
-            if (!Settings.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
-            {
-                return;
-            }
+                    TimeSpan
+                        .FromDays(Convert.ToDouble(Settings
+                            .Default
+                            .CheckForUpdatesFrequencyDays))));
+            if (!Settings.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck) return;
 
             _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
             _appUpdate.GetUpdateInfoAsync();
@@ -103,20 +95,11 @@ namespace mRemoteNG.App
             {
                 _appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
 
-                if (e.Cancelled)
-                {
-                    return;
-                }
+                if (e.Cancelled) return;
 
-                if (e.Error != null)
-                {
-                    throw e.Error;
-                }
+                if (e.Error != null) throw e.Error;
 
-                if (_appUpdate.IsUpdateAvailable())
-                {
-                    Windows.Show(WindowType.Update);
-                }
+                if (_appUpdate.IsUpdateAvailable()) Windows.Show(WindowType.Update);
             }
             catch (Exception ex)
             {

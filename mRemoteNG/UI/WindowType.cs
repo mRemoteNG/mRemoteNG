@@ -14,6 +14,6 @@
         Help = 12,
         ExternalApps = 13,
         PortScan = 14,
-        UltraVNCSC = 16,
+        UltraVNCSC = 16
     }
 }

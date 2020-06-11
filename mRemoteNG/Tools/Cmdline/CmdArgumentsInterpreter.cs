@@ -25,7 +25,7 @@ namespace mRemoteNG.Tools.Cmdline
         // Retrieve a parameter value if it exists
         public string this[string param]
         {
-            get { return (_parameters[param]); }
+            get { return _parameters[param]; }
         }
 
         public CmdArgumentsInterpreter(IEnumerable<string> args)
@@ -66,12 +66,8 @@ namespace mRemoteNG.Tools.Cmdline
                             // Found just a parameter
                             // The last parameter is still waiting. With no value, set it to true.
                             if (parameter != null)
-                            {
                                 if (!_parameters.ContainsKey(parameter))
-                                {
                                     _parameters.Add(parameter, "true");
-                                }
-                            }
 
                             parameter = Parts[1];
                             break;
@@ -79,12 +75,8 @@ namespace mRemoteNG.Tools.Cmdline
                             // Parameter with enclosed value
                             // The last parameter is still waiting. With no value, set it to true.
                             if (parameter != null)
-                            {
                                 if (!_parameters.ContainsKey(parameter))
-                                {
                                     _parameters.Add(parameter, "true");
-                                }
-                            }
 
                             parameter = Parts[1];
                             // Remove possible enclosing characters (",')

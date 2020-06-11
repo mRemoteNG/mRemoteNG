@@ -43,12 +43,8 @@ namespace mRemoteNG.UI.Controls
             var handlers = new ArrayList();
 
             foreach (ProtocolBase _base in connection.OpenConnections)
-            {
                 if (_base.GetType().IsSubclassOf(typeof(PuttyBase)))
-                {
-                    handlers.Add((PuttyBase)_base);
-                }
-            }
+                    handlers.Add((PuttyBase) _base);
 
             return handlers;
         }
@@ -58,9 +54,7 @@ namespace mRemoteNG.UI.Controls
             if (processHandlers.Count == 0) return;
 
             foreach (PuttyBase proc in processHandlers)
-            {
                 NativeMethods.PostMessage(proc.PuttyHandle, keyType, new IntPtr(keyData), new IntPtr(0));
-            }
         }
 
         #region Key Event Handler
@@ -69,17 +63,13 @@ namespace mRemoteNG.UI.Controls
         {
             processHandlers.Clear();
             foreach (ConnectionInfo connection in quickConnectConnections)
-            {
                 processHandlers.AddRange(ProcessOpenConnections(connection));
-            }
 
             var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList()
-                                                   .Where(item => item.OpenConnections.Count > 0);
+                .Where(item => item.OpenConnections.Count > 0);
 
             foreach (var connection in connectionTreeConnections)
-            {
                 processHandlers.AddRange(ProcessOpenConnections(connection));
-            }
         }
 
         private void ProcessKeyPress(object sender, KeyEventArgs e)
@@ -101,23 +91,20 @@ namespace mRemoteNG.UI.Controls
                             return;
                     }
                 }
-                catch { }
+                catch
+                {
+                }
 
                 txtMultiSsh.Text = previousCommands[previousCommandIndex].ToString();
                 txtMultiSsh.SelectAll();
             }
 
             if (e.Control && e.KeyCode != Keys.V && e.Alt == false)
-            {
                 SendAllKeystrokes(NativeMethods.WM_KEYDOWN, e.KeyValue);
-            }
 
             if (e.KeyCode == Keys.Enter)
             {
-                foreach (var chr1 in txtMultiSsh.Text)
-                {
-                    SendAllKeystrokes(NativeMethods.WM_CHAR, Convert.ToByte(chr1));
-                }
+                foreach (var chr1 in txtMultiSsh.Text) SendAllKeystrokes(NativeMethods.WM_CHAR, Convert.ToByte(chr1));
 
                 SendAllKeystrokes(NativeMethods.WM_KEYDOWN, 13); // Enter = char13
             }
@@ -141,10 +128,8 @@ namespace mRemoteNG.UI.Controls
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                if(components != null)
+                if (components != null)
                     components.Dispose();
-            }
 
             base.Dispose(disposing);
         }
@@ -184,6 +169,5 @@ namespace mRemoteNG.UI.Controls
         }
 
         #endregion
-
     }
 }

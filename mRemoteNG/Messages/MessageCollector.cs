@@ -45,21 +45,21 @@ namespace mRemoteNG.Messages
         }
 
         public void AddExceptionMessage(string message,
-                                        Exception ex,
-                                        MessageClass msgClass = MessageClass.ErrorMsg,
-                                        bool logOnly = true)
+            Exception ex,
+            MessageClass msgClass = MessageClass.ErrorMsg,
+            bool logOnly = true)
         {
             AddMessage(msgClass, message + Environment.NewLine + Tools.MiscTools.GetExceptionMessageRecursive(ex),
-                       logOnly);
+                logOnly);
         }
 
         public void AddExceptionStackTrace(string message,
-                                           Exception ex,
-                                           MessageClass msgClass = MessageClass.ErrorMsg,
-                                           bool logOnly = true)
+            Exception ex,
+            MessageClass msgClass = MessageClass.ErrorMsg,
+            bool logOnly = true)
         {
             AddMessage(msgClass, message + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace,
-                       logOnly);
+                logOnly);
         }
 
         public void ClearMessages()

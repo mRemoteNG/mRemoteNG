@@ -20,12 +20,12 @@ namespace mRemoteNGTests
 #if DEBUG
 				"Debug";
 #else
-				"Release";
+                "Release";
 #endif
 
             const string normalOrPortable =
 #if PORTABLE
-            " Portable";
+                " Portable";
 #else
             "";
 #endif
@@ -53,14 +53,14 @@ namespace mRemoteNGTests
 
             var br = new BinaryReader(stream);
 
-            if (br.ReadInt16() != 0x5A4D)       //No MZ Header
+            if (br.ReadInt16() != 0x5A4D) //No MZ Header
                 return false;
 
             br.BaseStream.Position = 0x3C;
-            var peHeaderLocation = br.ReadInt32();         //Get the PE header location.
+            var peHeaderLocation = br.ReadInt32(); //Get the PE header location.
 
             br.BaseStream.Position = peHeaderLocation;
-            if (br.ReadInt32() != 0x4550)       //No PE header
+            if (br.ReadInt32() != 0x4550) //No PE header
                 return false;
 
             br.BaseStream.Position += 0x12;

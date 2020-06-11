@@ -25,10 +25,10 @@ namespace mRemoteNG.Themes
         #region Constructors
 
         public ThemeInfo(string themeName,
-                         ThemeBase inTheme,
-                         string inURI,
-                         VisualStudioToolStripExtender.VsVersion inVersion,
-                         ExtendedColorPalette inExtendedPalette)
+            ThemeBase inTheme,
+            string inURI,
+            VisualStudioToolStripExtender.VsVersion inVersion,
+            ExtendedColorPalette inExtendedPalette)
         {
             _name = themeName;
             _theme = inTheme;
@@ -45,9 +45,9 @@ namespace mRemoteNG.Themes
         }
 
         public ThemeInfo(string themeName,
-                         ThemeBase inTheme,
-                         string inURI,
-                         VisualStudioToolStripExtender.VsVersion inVersion)
+            ThemeBase inTheme,
+            string inURI,
+            VisualStudioToolStripExtender.VsVersion inVersion)
         {
             _name = themeName;
             _theme = inTheme;
@@ -91,10 +91,7 @@ namespace mRemoteNG.Themes
             get => _name;
             set
             {
-                if (string.Equals(_name, value, StringComparison.InvariantCulture))
-                {
-                    return;
-                }
+                if (string.Equals(_name, value, StringComparison.InvariantCulture)) return;
 
                 _name = value;
             }
@@ -105,10 +102,7 @@ namespace mRemoteNG.Themes
             get => _theme;
             set
             {
-                if (value != null && _theme == value)
-                {
-                    return;
-                }
+                if (value != null && _theme == value) return;
 
                 _theme = value;
                 setCustomExtenders();
@@ -120,10 +114,7 @@ namespace mRemoteNG.Themes
             get => _URI;
             set
             {
-                if (value != null && _URI == value)
-                {
-                    return;
-                }
+                if (value != null && _URI == value) return;
 
                 _URI = value;
             }
@@ -134,10 +125,7 @@ namespace mRemoteNG.Themes
             get => _version;
             set
             {
-                if (Equals(_version, value))
-                {
-                    return;
-                }
+                if (Equals(_version, value)) return;
 
                 _version = value;
             }
@@ -148,10 +136,7 @@ namespace mRemoteNG.Themes
             get => _extendedPalette;
             set
             {
-                if (_extendedPalette != null && _extendedPalette == value)
-                {
-                    return;
-                }
+                if (_extendedPalette != null && _extendedPalette == value) return;
 
                 _extendedPalette = value;
             }

@@ -40,14 +40,14 @@ namespace mRemoteNG.UI.Controls.PageSequence
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // SequencedControl
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "SequencedControl";
-            this.ResumeLayout(false);
+            Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point, (byte) 0);
+            Name = "SequencedControl";
+            ResumeLayout(false);
         }
     }
 }

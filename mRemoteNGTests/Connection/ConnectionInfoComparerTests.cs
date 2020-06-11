@@ -13,8 +13,8 @@ namespace mRemoteNGTests.Connection
         [OneTimeSetUp]
         public void OnetimeSetup()
         {
-            _con1 = new ConnectionInfo { Name = "a" };
-            _con2 = new ConnectionInfo { Name = "b" };
+            _con1 = new ConnectionInfo {Name = "a"};
+            _con2 = new ConnectionInfo {Name = "b"};
         }
 
         [Test]

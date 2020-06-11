@@ -48,7 +48,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             get
             {
                 var cipherEngine = _aeadBlockCipher.AlgorithmName.Split('/')[0];
-                return (BlockCipherEngines)Enum.Parse(typeof(BlockCipherEngines), cipherEngine);
+                return (BlockCipherEngines) Enum.Parse(typeof(BlockCipherEngines), cipherEngine);
             }
         }
 
@@ -57,7 +57,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             get
             {
                 var cipherMode = _aeadBlockCipher.AlgorithmName.Split('/')[1];
-                return (BlockCipherModes)Enum.Parse(typeof(BlockCipherModes), cipherMode);
+                return (BlockCipherModes) Enum.Parse(typeof(BlockCipherModes), cipherMode);
             }
         }
 
@@ -117,7 +117,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
                 throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!",
-                                            nameof(password));
+                    nameof(password));
 
             if (secretMessage == null || secretMessage.Length == 0)
                 throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
@@ -184,26 +184,26 @@ namespace mRemoteNG.Security.SymmetricEncryption
         }
 
         private string SimpleDecryptWithPassword(string encryptedMessage,
-                                                 SecureString decryptionKey,
-                                                 int nonSecretPayloadLength = 0)
+            SecureString decryptionKey,
+            int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
                 return ""; //throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
             var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(),
-                                                      nonSecretPayloadLength);
+                nonSecretPayloadLength);
             return plainText == null ? null : _encoding.GetString(plainText);
         }
 
         private byte[] SimpleDecryptWithPassword(byte[] encryptedMessage,
-                                                 string password,
-                                                 int nonSecretPayloadLength = 0)
+            string password,
+            int nonSecretPayloadLength = 0)
         {
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
                 throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!",
-                                            nameof(password));
+                    nameof(password));
 
             if (encryptedMessage == null || encryptedMessage.Length == 0)
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));

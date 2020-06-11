@@ -8,9 +8,9 @@ namespace mRemoteNG.Config.Serializers.Xml
     public class XmlRootNodeSerializer
     {
         public XElement SerializeRootNodeInfo(RootNodeInfo rootNodeInfo,
-                                              ICryptographyProvider cryptographyProvider,
-                                              Version version,
-                                              bool fullFileEncryption = false)
+            ICryptographyProvider cryptographyProvider,
+            Version version,
+            bool fullFileEncryption = false)
         {
             XNamespace xmlNamespace = "http://mremoteng.org";
             var element = new XElement(xmlNamespace + "Connections");
@@ -21,14 +21,14 @@ namespace mRemoteNG.Config.Serializers.Xml
             element.Add(new XAttribute(XName.Get("BlockCipherMode"), cryptographyProvider.CipherMode));
             element.Add(new XAttribute(XName.Get("KdfIterations"), cryptographyProvider.KeyDerivationIterations));
             element.Add(new XAttribute(XName.Get("FullFileEncryption"),
-                                       fullFileEncryption.ToString().ToLowerInvariant()));
+                fullFileEncryption.ToString().ToLowerInvariant()));
             element.Add(CreateProtectedAttribute(rootNodeInfo, cryptographyProvider));
             element.Add(new XAttribute(XName.Get("ConfVersion"), version.ToString(2)));
             return element;
         }
 
         private XAttribute CreateProtectedAttribute(RootNodeInfo rootNodeInfo,
-                                                    ICryptographyProvider cryptographyProvider)
+            ICryptographyProvider cryptographyProvider)
         {
             var attribute = new XAttribute(XName.Get("Protected"), "");
             var plainText = rootNodeInfo.Password ? "ThisIsProtected" : "ThisIsNotProtected";

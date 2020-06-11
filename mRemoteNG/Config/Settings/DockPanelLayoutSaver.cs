@@ -15,7 +15,7 @@ namespace mRemoteNG.Config.Settings
         private readonly IDataProvider<string> _dataProvider;
 
         public DockPanelLayoutSaver(ISerializer<DockPanel, string> dockPanelSerializer,
-                                    IDataProvider<string> dataProvider)
+            IDataProvider<string> dataProvider)
         {
             if (dockPanelSerializer == null)
                 throw new ArgumentNullException(nameof(dockPanelSerializer));
@@ -31,9 +31,7 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 if (Directory.Exists(SettingsFileInfo.SettingsPath) == false)
-                {
                     Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
-                }
 
                 var serializedLayout = _dockPanelSerializer.Serialize(FrmMain.Default.pnlDock);
                 _dataProvider.Save(serializedLayout);

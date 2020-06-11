@@ -56,7 +56,7 @@ namespace mRemoteNG.App
             var singletonInstanceWindowHandle = GetRunningSingletonInstanceWindowHandle();
             if (singletonInstanceWindowHandle == IntPtr.Zero) return;
             if (NativeMethods.IsIconic(singletonInstanceWindowHandle) != 0)
-                NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int)NativeMethods.SW_RESTORE);
+                NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int) NativeMethods.SW_RESTORE);
             NativeMethods.SetForegroundWindow(singletonInstanceWindowHandle);
         }
 
@@ -65,12 +65,10 @@ namespace mRemoteNG.App
             var windowHandle = IntPtr.Zero;
             var currentProcess = Process.GetCurrentProcess();
             foreach (var enumeratedProcess in Process.GetProcessesByName(currentProcess.ProcessName))
-            {
                 if (enumeratedProcess.Id != currentProcess.Id &&
                     enumeratedProcess.MainModule.FileName == currentProcess.MainModule.FileName &&
                     enumeratedProcess.MainWindowHandle != IntPtr.Zero)
                     windowHandle = enumeratedProcess.MainWindowHandle;
-            }
 
             return windowHandle;
         }
@@ -88,10 +86,9 @@ namespace mRemoteNG.App
                 FrmSplashScreen.getInstance().Close();
 
             if (FrmMain.Default.IsDisposed) return;
-            
+
             var window = new UnhandledExceptionWindow(e.Exception, false);
             window.ShowDialog(FrmMain.Default);
-            
         }
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)

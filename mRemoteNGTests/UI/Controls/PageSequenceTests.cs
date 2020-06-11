@@ -38,7 +38,7 @@ namespace mRemoteNGTests.UI.Controls
         [Test]
         public void CallingNextAdvancesPage()
         {
-            var pages = new[] { new SequencedControl(), new SequencedControl(), new SequencedControl() };
+            var pages = new[] {new SequencedControl(), new SequencedControl(), new SequencedControl()};
             _pageSequence = new PageSequence(_parentControl, pages);
             _pageSequence.NextPage();
             Assert.That(_pageSequence.CurrentPageIndex, Is.EqualTo(1));
@@ -47,7 +47,7 @@ namespace mRemoteNGTests.UI.Controls
         [Test]
         public void CallingPreviousGoesBackAPage()
         {
-            var pages = new[] { new SequencedControl(), new SequencedControl(), new SequencedControl() };
+            var pages = new[] {new SequencedControl(), new SequencedControl(), new SequencedControl()};
             _pageSequence = new PageSequence(_parentControl, pages);
             _pageSequence.NextPage();
             _pageSequence.NextPage();

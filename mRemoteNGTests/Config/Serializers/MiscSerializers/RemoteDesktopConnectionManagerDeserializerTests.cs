@@ -66,7 +66,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         {
             var rootNode = _connectionTreeModel.RootNodes.First();
             var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var rootNodeContents = importedRdcmanRootNode.Children.Count(node => node.Name == "Group1" || node.Name == "Group2");
+            var rootNodeContents =
+                importedRdcmanRootNode.Children.Count(node => node.Name == "Group1" || node.Name == "Group2");
             Assert.That(rootNodeContents, Is.EqualTo(2));
         }
 

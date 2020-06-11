@@ -9,14 +9,14 @@ namespace mRemoteNG.App.Initialization
     public class MessageCollectorSetup
     {
         public static void SetupMessageCollector(MessageCollector messageCollector,
-                                                 IList<IMessageWriter> messageWriterList)
+            IList<IMessageWriter> messageWriterList)
         {
             messageCollector.CollectionChanged += (o, args) =>
             {
                 var messages = args.NewItems.Cast<IMessage>().ToArray();
                 foreach (var printer in messageWriterList)
-                    foreach (var message in messages)
-                        printer.Write(message);
+                foreach (var message in messages)
+                    printer.Write(message);
             };
         }
 
@@ -38,37 +38,37 @@ namespace mRemoteNG.App.Initialization
         private static IMessageWriter BuildTextLogMessageWriter()
         {
             return new MessageTypeFilterDecorator(
-                                                  new LogMessageTypeFilteringOptions(),
-                                                  new TextLogMessageWriter(Logger.Instance)
-                                                 );
+                new LogMessageTypeFilteringOptions(),
+                new TextLogMessageWriter(Logger.Instance)
+            );
         }
 
         private static IMessageWriter BuildNotificationPanelMessageWriter()
         {
             return new OnlyLogMessageFilter(
-                                            new MessageTypeFilterDecorator(
-                                                                           new
-                                                                               NotificationPanelMessageFilteringOptions(),
-                                                                           new MessageFocusDecorator(
-                                                                                                     Windows.ErrorsForm,
-                                                                                                     new
-                                                                                                         NotificationPanelSwitchOnMessageFilteringOptions(),
-                                                                                                     new
-                                                                                                         NotificationPanelMessageWriter(Windows
-                                                                                                                                            .ErrorsForm)
-                                                                                                    )
-                                                                          )
-                                           );
+                new MessageTypeFilterDecorator(
+                    new
+                        NotificationPanelMessageFilteringOptions(),
+                    new MessageFocusDecorator(
+                        Windows.ErrorsForm,
+                        new
+                            NotificationPanelSwitchOnMessageFilteringOptions(),
+                        new
+                            NotificationPanelMessageWriter(Windows
+                                .ErrorsForm)
+                    )
+                )
+            );
         }
 
         private static IMessageWriter BuildPopupMessageWriter()
         {
             return new OnlyLogMessageFilter(
-                                            new MessageTypeFilterDecorator(
-                                                                           new PopupMessageFilteringOptions(),
-                                                                           new PopupMessageWriter()
-                                                                          )
-                                           );
+                new MessageTypeFilterDecorator(
+                    new PopupMessageFilteringOptions(),
+                    new PopupMessageWriter()
+                )
+            );
         }
     }
 }

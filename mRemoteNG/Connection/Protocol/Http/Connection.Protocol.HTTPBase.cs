@@ -29,16 +29,12 @@ namespace mRemoteNG.Connection.Protocol.Http
             try
             {
                 if (RenderingEngine == RenderingEngine.CEF)
-                {
                     Control = new ChromiumWebBrowser("about:blank")
                     {
-                        Dock = DockStyle.Fill,
+                        Dock = DockStyle.Fill
                     };
-                }
                 else
-                {
                     Control = new WebBrowser();
-                }
             }
             catch (Exception ex)
             {
@@ -65,7 +61,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
                 {
-                    var CEFBrowser = (ChromiumWebBrowser)wBrowser;
+                    var CEFBrowser = (ChromiumWebBrowser) wBrowser;
                     if (CEFBrowser != null)
                     {
                         CEFBrowser.LoadingStateChanged += CefBrowser_LoadingStateChanged;
@@ -78,7 +74,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
                 else
                 {
-                    var objWebBrowser = (WebBrowser)wBrowser;
+                    var objWebBrowser = (WebBrowser) wBrowser;
                     objWebBrowser.ScrollBarsEnabled = true;
 
                     // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
@@ -104,14 +100,11 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
                 {
-                    if (browserInitialised)
-                    {
-                        ((ChromiumWebBrowser)wBrowser).Load(GetURL());
-                    }
+                    if (browserInitialised) ((ChromiumWebBrowser) wBrowser).Load(GetURL());
                 }
                 else
                 {
-                    ((WebBrowser)wBrowser).Navigate(GetURL());
+                    ((WebBrowser) wBrowser).Navigate(GetURL());
                 }
 
                 base.Connect();
@@ -160,6 +153,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                     if (strHost.Contains(httpOrS + "://") == false)
                         strHost = httpOrS + "://" + strHost;
                 }
+
                 return strHost;
             }
             catch (Exception ex)
@@ -179,14 +173,11 @@ namespace mRemoteNG.Connection.Protocol.Http
             if (browserInitialised)
             {
                 // Unhook the loading state changes now, as navigation is done by the user on links in the control
-                ((ChromiumWebBrowser)wBrowser).LoadingStateChanged -= CefBrowser_LoadingStateChanged;
+                ((ChromiumWebBrowser) wBrowser).LoadingStateChanged -= CefBrowser_LoadingStateChanged;
 
                 // If this Connection has already been asked to connect but the browser hadn't finished initalising
                 // then the connect wouldn't have been allowed to take place, so now we can call it!
-                if (connectCalled)
-                {
-                    Connect();
-                }
+                if (connectCalled) Connect();
             }
         }
 
@@ -209,35 +200,23 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
                 {
-                    if (((TitleChangedEventArgs)e).Title.Length >= 15)
-                    {
-                        shortTitle = ((TitleChangedEventArgs)e).Title.Substring(0, 10) + "...";
-                    }
+                    if (((TitleChangedEventArgs) e).Title.Length >= 15)
+                        shortTitle = ((TitleChangedEventArgs) e).Title.Substring(0, 10) + "...";
                     else
-                    {
-                        shortTitle = ((CefSharp.TitleChangedEventArgs)e).Title;
-                    }
+                        shortTitle = ((TitleChangedEventArgs) e).Title;
                 }
                 else
                 {
-                    if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                    }
+                    if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
+                        shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
                     else
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
-                    }
+                        shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
                 }
 
                 if (!string.IsNullOrEmpty(tabTitle))
-                {
-                   tabP.TabText = tabTitle + @" - " + shortTitle;
-                }
+                    tabP.TabText = tabTitle + @" - " + shortTitle;
                 else
-                {
-                   tabP.TabText = shortTitle;
-                }
+                    tabP.TabText = shortTitle;
             }
             catch (Exception ex)
             {
@@ -253,23 +232,15 @@ namespace mRemoteNG.Connection.Protocol.Http
                 if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
                 string shortTitle;
 
-                if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                {
-                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                }
+                if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
+                    shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
                 else
-                {
-                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
-                }
+                    shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
 
                 if (!string.IsNullOrEmpty(tabTitle))
-                {
-                  tabP.TabText = tabTitle + @" - " + shortTitle;
-                }
+                    tabP.TabText = tabTitle + @" - " + shortTitle;
                 else
-                {
-                  tabP.TabText = shortTitle;
-                }
+                    tabP.TabText = shortTitle;
             }
             catch (Exception ex)
             {

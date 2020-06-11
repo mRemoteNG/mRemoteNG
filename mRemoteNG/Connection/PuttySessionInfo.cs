@@ -20,16 +20,18 @@ namespace mRemoteNG.Connection
 
         [ReadOnly(true)] public override string Name { get; set; }
 
-        [ReadOnly(true), Browsable(false)] public override string Description { get; set; }
+        [ReadOnly(true)] [Browsable(false)] public override string Description { get; set; }
 
-        [ReadOnly(true), Browsable(false)]
+        [ReadOnly(true)]
+        [Browsable(false)]
         public override string Icon
         {
             get => "PuTTY";
             set { }
         }
 
-        [ReadOnly(true), Browsable(false)]
+        [ReadOnly(true)]
+        [Browsable(false)]
         public override string Panel
         {
             get => Parent?.Panel;
@@ -40,37 +42,32 @@ namespace mRemoteNG.Connection
 
         [ReadOnly(true)] public override string Username { get; set; }
 
-        [ReadOnly(true), Browsable(false)] public override string Password { get; set; }
+        [ReadOnly(true)] [Browsable(false)] public override string Password { get; set; }
 
         [ReadOnly(true)] public override ProtocolType Protocol { get; set; }
 
         [ReadOnly(true)] public override int Port { get; set; }
 
-        [ReadOnly(true), Browsable(false)] public override string PreExtApp { get; set; }
+        [ReadOnly(true)] [Browsable(false)] public override string PreExtApp { get; set; }
 
-        [ReadOnly(true), Browsable(false)] public override string PostExtApp { get; set; }
+        [ReadOnly(true)] [Browsable(false)] public override string PostExtApp { get; set; }
 
-        [ReadOnly(true), Browsable(false)] public override string MacAddress { get; set; }
+        [ReadOnly(true)] [Browsable(false)] public override string MacAddress { get; set; }
 
-        [ReadOnly(true), Browsable(false)] public override string UserField { get; set; }
+        [ReadOnly(true)] [Browsable(false)] public override string UserField { get; set; }
 
         #endregion
 
-        [Command(), LocalizedAttributes.LocalizedDisplayName("strPuttySessionSettings")]
+        [Command()]
+        [LocalizedAttributes.LocalizedDisplayName("strPuttySessionSettings")]
         public void SessionSettings()
         {
             try
             {
                 var puttyProcess = new PuttyProcessController();
-                if (!puttyProcess.Start())
-                {
-                    return;
-                }
+                if (!puttyProcess.Start()) return;
 
-                if (puttyProcess.SelectListBoxItem(PuttySession))
-                {
-                    puttyProcess.ClickButton("&Load");
-                }
+                if (puttyProcess.SelectListBoxItem(PuttySession)) puttyProcess.ClickButton("&Load");
 
                 puttyProcess.SetControlText("Button", "&Cancel", "&Close");
                 puttyProcess.SetControlVisible("Button", "&Open", false);
@@ -78,8 +75,8 @@ namespace mRemoteNG.Connection
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ErrorCouldNotLaunchPutty + Environment.NewLine +
-                                                    ex.Message);
+                    Language.ErrorCouldNotLaunchPutty + Environment.NewLine +
+                    ex.Message);
             }
         }
 
@@ -94,7 +91,7 @@ namespace mRemoteNG.Connection
         public ISite Site
         {
             get => new PropertyGridCommandSite(this);
-            set => throw (new NotImplementedException());
+            set => throw new NotImplementedException();
         }
 
         public void Dispose()

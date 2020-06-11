@@ -14,7 +14,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
         public int CurrentPageIndex { get; private set; }
 
         public PageSequence(Control pageContainer, IEnumerable<SequencedControl> pages) : this(pageContainer,
-                                                                                               pages.ToArray())
+            pages.ToArray())
         {
         }
 
@@ -112,10 +112,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
         protected virtual void Dispose(bool disposing)
         {
             if (!disposing) return;
-            foreach (var page in _pages)
-            {
-                UnsubscribeFromPageEvents(page);
-            }
+            foreach (var page in _pages) UnsubscribeFromPageEvents(page);
         }
     }
 }

@@ -121,25 +121,25 @@ namespace mRemoteNG.UI.Controls.Base
             //not by general usage of iamges in buttons
             if (Image != null)
             {
-                SizeF stringSize = e.Graphics.MeasureString(Text, Font);
+                var stringSize = e.Graphics.MeasureString(Text, Font);
 
-                e.Graphics.DrawImageUnscaled(Image, Width / 2 - (int)stringSize.Width / 2 - Image.Width,
-                                             Height / 2 - Image.Height / 2);
+                e.Graphics.DrawImageUnscaled(Image, Width / 2 - (int) stringSize.Width / 2 - Image.Width,
+                    Height / 2 - Image.Height / 2);
             }
 
             TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, fore,
-                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
         }
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // NGButton
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResumeLayout(false);
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular,
+                GraphicsUnit.Point, (byte) 0);
+            ResumeLayout(false);
         }
     }
 }

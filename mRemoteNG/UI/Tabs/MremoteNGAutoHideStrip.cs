@@ -43,7 +43,6 @@ namespace mRemoteNG.UI.Tabs
             get
             {
                 if (_stringFormatTabHorizontal == null)
-                {
                     _stringFormatTabHorizontal = new StringFormat
                     {
                         Alignment = StringAlignment.Near,
@@ -51,7 +50,6 @@ namespace mRemoteNG.UI.Tabs
                         FormatFlags = StringFormatFlags.NoWrap,
                         Trimming = StringTrimming.None
                     };
-                }
 
                 if (RightToLeft == RightToLeft.Yes)
                     _stringFormatTabHorizontal.FormatFlags |= StringFormatFlags.DirectionRightToLeft;
@@ -198,16 +196,14 @@ namespace mRemoteNG.UI.Tabs
             if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
             {
                 var matrixRotated = new Matrix();
-                matrixRotated.RotateAt(90, new PointF(rectTabStrip.X + (float)rectTabStrip.Height / 2,
-                                                      rectTabStrip.Y + (float)rectTabStrip.Height / 2));
+                matrixRotated.RotateAt(90, new PointF(rectTabStrip.X + (float) rectTabStrip.Height / 2,
+                    rectTabStrip.Y + (float) rectTabStrip.Height / 2));
                 g.Transform = matrixRotated;
             }
 
             foreach (var pane in GetPanes(dockState))
-            {
-                foreach (TabNG tab in pane.AutoHideTabs)
-                    DrawTab(g, tab);
-            }
+            foreach (TabNG tab in pane.AutoHideTabs)
+                DrawTab(g, tab);
 
             g.Transform = matrixIdentity;
         }
@@ -263,7 +259,7 @@ namespace mRemoteNG.UI.Tabs
             var rectTab = GetTabRectangle(tab, transformed);
             if (rtlTransform)
                 rectTab = RtlTransform(rectTab, dockState);
-            var upTab = (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockBottomAutoHide);
+            var upTab = dockState == DockState.DockLeftAutoHide || dockState == DockState.DockBottomAutoHide;
             DrawHelper.GetRoundedCornerTab(GraphicsPath, rectTab, upTab);
 
             return GraphicsPath;
@@ -313,7 +309,7 @@ namespace mRemoteNG.UI.Tabs
                         new Point(rectTransform.X, rectTransform.Y)
                     };
 
-                    using (var rotatedIcon = new Icon(((Form)content).Icon, 16, 16))
+                    using (var rotatedIcon = new Icon(((Form) content).Icon, 16, 16))
                     {
                         g.DrawImage(rotatedIcon.ToBitmap(), rotationPoints);
                     }
@@ -321,7 +317,7 @@ namespace mRemoteNG.UI.Tabs
                 else
                 {
                     // Draw the icon normally without any rotation.
-                    g.DrawIcon(((Form)content).Icon, RtlTransform(rectImage, dockState));
+                    g.DrawIcon(((Form) content).Icon, RtlTransform(rectImage, dockState));
                 }
 
                 // Draw the text
@@ -334,10 +330,10 @@ namespace mRemoteNG.UI.Tabs
 
                 if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
                     g.DrawString(content.DockHandler.TabText, TextFont, new SolidBrush(textColor), rectText,
-                                 StringFormatTabVertical);
+                        StringFormatTabVertical);
                 else
                     g.DrawString(content.DockHandler.TabText, TextFont, new SolidBrush(textColor), rectText,
-                                 StringFormatTabHorizontal);
+                        StringFormatTabHorizontal);
 
                 // Set rotate back
                 g.Transform = matrixRotate;
@@ -365,7 +361,7 @@ namespace mRemoteNG.UI.Tabs
             if (dockState == DockState.DockLeftAutoHide && leftPanes > 0)
             {
                 x = 0;
-                y = (topPanes == 0) ? 0 : height;
+                y = topPanes == 0 ? 0 : height;
                 width = Height - (topPanes == 0 ? 0 : height) - (bottomPanes == 0 ? 0 : height);
             }
             else if (dockState == DockState.DockRightAutoHide && rightPanes > 0)
@@ -373,7 +369,7 @@ namespace mRemoteNG.UI.Tabs
                 x = Width - height;
                 if (leftPanes != 0 && x < height)
                     x = height;
-                y = (topPanes == 0) ? 0 : height;
+                y = topPanes == 0 ? 0 : height;
                 width = Height - (topPanes == 0 ? 0 : height) - (bottomPanes == 0 ? 0 : height);
             }
             else if (dockState == DockState.DockTopAutoHide && topPanes > 0)
@@ -391,12 +387,11 @@ namespace mRemoteNG.UI.Tabs
                 width = Width - (leftPanes == 0 ? 0 : height) - (rightPanes == 0 ? 0 : height);
             }
             else
-                return Rectangle.Empty;
-
-            if (width == 0 || height == 0)
             {
                 return Rectangle.Empty;
             }
+
+            if (width == 0 || height == 0) return Rectangle.Empty;
 
             var rect = new Rectangle(x, y, width, height);
             return transformed ? GetTransformedRectangle(dockState, rect) : rect;
@@ -436,19 +431,19 @@ namespace mRemoteNG.UI.Tabs
 
             var pts = new PointF[1];
             // the center of the rectangle
-            pts[0].X = rect.X + (float)rect.Width / 2;
-            pts[0].Y = rect.Y + (float)rect.Height / 2;
+            pts[0].X = rect.X + (float) rect.Width / 2;
+            pts[0].Y = rect.Y + (float) rect.Height / 2;
             var rectTabStrip = GetLogicalTabStripRectangle(dockState);
             using (var matrix = new Matrix())
             {
-                matrix.RotateAt(90, new PointF(rectTabStrip.X + (float)rectTabStrip.Height / 2,
-                                               rectTabStrip.Y + (float)rectTabStrip.Height / 2));
+                matrix.RotateAt(90, new PointF(rectTabStrip.X + (float) rectTabStrip.Height / 2,
+                    rectTabStrip.Y + (float) rectTabStrip.Height / 2));
                 matrix.TransformPoints(pts);
             }
 
-            return new Rectangle((int)(pts[0].X - (float)rect.Height / 2 + .5F),
-                                 (int)(pts[0].Y - (float)rect.Width / 2 + .5F),
-                                 rect.Height, rect.Width);
+            return new Rectangle((int) (pts[0].X - (float) rect.Height / 2 + .5F),
+                (int) (pts[0].Y - (float) rect.Width / 2 + .5F),
+                rect.Height, rect.Width);
         }
 
         protected override IDockContent HitTest(Point point)
@@ -460,13 +455,11 @@ namespace mRemoteNG.UI.Tabs
                     continue;
 
                 foreach (var pane in GetPanes(state))
+                foreach (TabNG tab in pane.AutoHideTabs)
                 {
-                    foreach (TabNG tab in pane.AutoHideTabs)
-                    {
-                        var path = GetTabOutline(tab, true, true);
-                        if (path.IsVisible(point))
-                            return tab.Content;
-                    }
+                    var path = GetTabOutline(tab, true, true);
+                    if (path.IsVisible(point))
+                        return tab.Content;
                 }
             }
 
@@ -475,16 +468,16 @@ namespace mRemoteNG.UI.Tabs
 
         protected override Rectangle GetTabBounds(Tab tab)
         {
-            var path = GetTabOutline((TabNG)tab, true, true);
+            var path = GetTabOutline((TabNG) tab, true, true);
             var bounds = path.GetBounds();
-            return new Rectangle((int)bounds.Left, (int)bounds.Top, (int)bounds.Width, (int)bounds.Height);
+            return new Rectangle((int) bounds.Left, (int) bounds.Top, (int) bounds.Width, (int) bounds.Height);
         }
 
         protected override int MeasureHeight()
         {
             return Math.Max(ImageGapBottom +
                             ImageGapTop + ImageHeight,
-                            TextFont.Height) + TabGapTop;
+                TextFont.Height) + TabGapTop;
         }
 
         protected override void OnRefreshChanges()

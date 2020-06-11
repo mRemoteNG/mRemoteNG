@@ -18,8 +18,8 @@ namespace mRemoteNG.Credential.Repositories
         public bool IsLoaded { get; private set; }
 
         public XmlCredentialRepository(ICredentialRepositoryConfig config,
-                                       CredentialRecordSaver credentialRecordSaver,
-                                       CredentialRecordLoader credentialRecordLoader)
+            CredentialRecordSaver credentialRecordSaver,
+            CredentialRecordLoader credentialRecordLoader)
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
@@ -30,7 +30,7 @@ namespace mRemoteNG.Credential.Repositories
 
             Config = config;
             CredentialRecords = new FullyObservableCollection<ICredentialRecord>();
-            ((FullyObservableCollection<ICredentialRecord>)CredentialRecords).CollectionUpdated +=
+            ((FullyObservableCollection<ICredentialRecord>) CredentialRecords).CollectionUpdated +=
                 RaiseCredentialsUpdatedEvent;
             Config.PropertyChanged += (sender, args) => RaiseRepositoryConfigUpdatedEvent(args);
             _credentialRecordSaver = credentialRecordSaver;
@@ -76,7 +76,7 @@ namespace mRemoteNG.Credential.Repositories
         }
 
         protected virtual void RaiseCredentialsUpdatedEvent(object sender,
-                                                            CollectionUpdatedEventArgs<ICredentialRecord> args)
+            CollectionUpdatedEventArgs<ICredentialRecord> args)
         {
             CredentialsUpdated?.Invoke(this, args);
         }

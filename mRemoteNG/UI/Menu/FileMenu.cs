@@ -110,8 +110,8 @@ namespace mRemoteNG.UI.Menu
             // 
             _mMenFileNewFolder.Image = Resources.Folder_Add;
             _mMenFileNewFolder.Name = "mMenFileNewFolder";
-            _mMenFileNewFolder.ShortcutKeys = (Keys.Control | Keys.Shift)
-                                            | Keys.N;
+            _mMenFileNewFolder.ShortcutKeys = Keys.Control | Keys.Shift
+                                                           | Keys.N;
             _mMenFileNewFolder.Size = new System.Drawing.Size(281, 22);
             _mMenFileNewFolder.Text = Language.NewFolder;
             _mMenFileNewFolder.Click += mMenFileNewFolder_Click;
@@ -151,8 +151,8 @@ namespace mRemoteNG.UI.Menu
             // 
             _mMenFileSaveAs.Image = Resources.Connections_SaveAs;
             _mMenFileSaveAs.Name = "mMenFileSaveAs";
-            _mMenFileSaveAs.ShortcutKeys = (Keys.Control | Keys.Shift)
-                                         | Keys.S;
+            _mMenFileSaveAs.ShortcutKeys = Keys.Control | Keys.Shift
+                                                        | Keys.S;
             _mMenFileSaveAs.Size = new System.Drawing.Size(281, 22);
             _mMenFileSaveAs.Text = Language.SaveConnectionFileAs;
             _mMenFileSaveAs.Click += mMenFileSaveAs_Click;
@@ -372,10 +372,7 @@ namespace mRemoteNG.UI.Menu
         {
             using (var saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
             {
-                if (saveFileDialog.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
+                if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
                 Runtime.ConnectionsService.NewConnectionsFile(saveFileDialog.FileName);
             }
@@ -386,7 +383,7 @@ namespace mRemoteNG.UI.Menu
             if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
             {
                 var msgBoxResult = MessageBox.Show(Language.SaveConnectionsFileBeforeOpeningAnother,
-                                                   Language.Save, MessageBoxButtons.YesNoCancel);
+                    Language.Save, MessageBoxButtons.YesNoCancel);
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (msgBoxResult)
                 {
@@ -416,7 +413,7 @@ namespace mRemoteNG.UI.Menu
                 var newFileName = saveFileDialog.FileName;
 
                 Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false,
-                                                           new SaveFilter(), newFileName);
+                    new SaveFilter(), newFileName);
 
                 if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
                 {

@@ -32,10 +32,7 @@ namespace mRemoteNG.Config.Putty
                 AddSession(sessionInfo);
             }
 
-            foreach (var session in GetSessionToRemove(sessionNamesFromProvider))
-            {
-                RemoveSession(session);
-            }
+            foreach (var session in GetSessionToRemove(sessionNamesFromProvider)) RemoveSession(session);
 
             RootInfo.SortRecursive();
             return Sessions;
@@ -53,7 +50,7 @@ namespace mRemoteNG.Config.Putty
             var currentlyKnownSessionNames = Sessions.Select(session => session.Name);
             var normalizedSessionNames =
                 sessionNamesFromProvider.Select(name =>
-                                                    WebUtility.UrlDecode(name));
+                    WebUtility.UrlDecode(name));
             var sessionNamesToRemove = currentlyKnownSessionNames.Except(normalizedSessionNames);
             return Sessions.Where(session => sessionNamesToRemove.Contains(session.Name));
         }
@@ -64,9 +61,9 @@ namespace mRemoteNG.Config.Putty
                 return;
             RootInfo.AddChild(sessionInfo);
             RaisePuttySessionCollectionChangedEvent(
-                                                    new
-                                                        NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
-                                                                                         sessionInfo));
+                new
+                    NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
+                        sessionInfo));
         }
 
         protected virtual void RemoveSession(PuttySessionInfo sessionInfo)
@@ -74,9 +71,9 @@ namespace mRemoteNG.Config.Putty
             if (!Sessions.Contains(sessionInfo)) return;
             RootInfo.RemoveChild(sessionInfo);
             RaisePuttySessionCollectionChangedEvent(
-                                                    new
-                                                        NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
-                                                                                         sessionInfo));
+                new
+                    NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                        sessionInfo));
         }
 
         public virtual void StartWatcher()

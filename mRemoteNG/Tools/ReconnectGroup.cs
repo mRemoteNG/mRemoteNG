@@ -76,8 +76,8 @@ namespace mRemoteNG.Tools
 
         public event CloseClickedEventHandler CloseClicked
         {
-            add => CloseClickedEvent = (CloseClickedEventHandler)Delegate.Combine(CloseClickedEvent, value);
-            remove => CloseClickedEvent = (CloseClickedEventHandler)Delegate.Remove(CloseClickedEvent, value);
+            add => CloseClickedEvent = (CloseClickedEventHandler) Delegate.Combine(CloseClickedEvent, value);
+            remove => CloseClickedEvent = (CloseClickedEventHandler) Delegate.Remove(CloseClickedEvent, value);
         }
 
 

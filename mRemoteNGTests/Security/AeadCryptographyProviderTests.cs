@@ -66,12 +66,8 @@ namespace mRemoteNGTests.Security
             var engineChoices = Enum.GetValues(typeof(BlockCipherEngines));
             var modeChoices = Enum.GetValues(typeof(BlockCipherModes));
             foreach (var engine in engineChoices)
-            {
-                foreach (var mode in modeChoices)
-                {
-                    combinationList.Add(new[] { engine, mode });
-                }
-            }
+            foreach (var mode in modeChoices)
+                combinationList.Add(new[] {engine, mode});
             return combinationList;
         }
 
@@ -79,7 +75,8 @@ namespace mRemoteNGTests.Security
         public void DecryptionFailureThrowsException()
         {
             var cipherText = _cryptographyProvider.Encrypt(_plainText, _encryptionKey);
-            ActualValueDelegate<string> decryptMethod = () => _cryptographyProvider.Decrypt(cipherText, "wrongKey".ConvertToSecureString());
+            ActualValueDelegate<string> decryptMethod = () =>
+                _cryptographyProvider.Decrypt(cipherText, "wrongKey".ConvertToSecureString());
             Assert.That(decryptMethod, Throws.TypeOf<EncryptionException>());
         }
 
@@ -111,12 +108,8 @@ namespace mRemoteNGTests.Security
                 get
                 {
                     foreach (var engine in Enum.GetValues(typeof(BlockCipherEngines)))
-                    {
-                        foreach (var mode in Enum.GetValues(typeof(BlockCipherModes)))
-                        {
-                            yield return new TestCaseData(engine, mode);
-                        }
-                    }
+                    foreach (var mode in Enum.GetValues(typeof(BlockCipherModes)))
+                        yield return new TestCaseData(engine, mode);
                 }
             }
         }

@@ -16,13 +16,11 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 if (Directory.Exists(SettingsFileInfo.SettingsPath) == false)
-                {
                     Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
-                }
 
                 var xmlTextWriter =
                     new XmlTextWriter(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.ExtAppsFilesName,
-                                      Encoding.UTF8)
+                        Encoding.UTF8)
                     {
                         Formatting = Formatting.Indented,
                         Indentation = 4

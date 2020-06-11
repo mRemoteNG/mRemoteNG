@@ -10,13 +10,14 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Connection
 {
-	public class AbstractConnectionInfoDataTests
+    public class AbstractConnectionInfoDataTests
     {
 #pragma warning disable 618
-        private class TestAbstractConnectionInfoData : AbstractConnectionRecord {
-	        public TestAbstractConnectionInfoData() : base(Guid.NewGuid().ToString())
-	        {
-	        }
+        private class TestAbstractConnectionInfoData : AbstractConnectionRecord
+        {
+            public TestAbstractConnectionInfoData() : base(Guid.NewGuid().ToString())
+            {
+            }
         }
 #pragma warning restore 618
         private TestAbstractConnectionInfoData _testAbstractConnectionInfoData;
@@ -219,7 +220,8 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard;
+            _testAbstractConnectionInfoData.RDGatewayUseConnectionCredentials =
+                RDGatewayUseConnectionCredentials.SmartCard;
             Assert.That(wasCalled, Is.True);
         }
 

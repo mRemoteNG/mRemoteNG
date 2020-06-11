@@ -15,7 +15,7 @@ namespace mRemoteNG.UI.Controls
 
         public ICredentialRepositoryList CredentialRepositoryList
         {
-            get { return _credentialRepositoryList; }
+            get => _credentialRepositoryList;
             set
             {
                 _credentialRepositoryList.RepositoriesUpdated -= OnRepositoriesUpdated;
@@ -44,11 +44,11 @@ namespace mRemoteNG.UI.Controls
 
         private void SetupObjectListView()
         {
-            olvColumnTitle.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Title;
-            olvColumnProvider.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.TypeName;
-            olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Source;
-            olvColumnId.AspectGetter = rowObject => ((ICredentialRepository)rowObject).Config.Id;
-            olvColumnIsLoaded.AspectGetter = rowObject => ((ICredentialRepository)rowObject).IsLoaded;
+            olvColumnTitle.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Title;
+            olvColumnProvider.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.TypeName;
+            olvColumnSource.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Source;
+            olvColumnId.AspectGetter = rowObject => ((ICredentialRepository) rowObject).Config.Id;
+            olvColumnIsLoaded.AspectGetter = rowObject => ((ICredentialRepository) rowObject).IsLoaded;
             SetListObjects(CredentialRepositoryList.CredentialProviders);
             objectListView1.SelectionChanged += (sender, args) => RaiseSelectionChangedEvent();
             objectListView1.MouseDoubleClick += ObjectListView1OnMouseDoubleClick;

@@ -22,7 +22,8 @@ namespace mRemoteNGTests.UI.Window
             _connectionTreeWindow.Close();
         }
 
-        [Test, Apartment(ApartmentState.STA)]
+        [Test]
+        [Apartment(ApartmentState.STA)]
         public void CanShowWindow()
         {
             _connectionTreeWindow.Show();

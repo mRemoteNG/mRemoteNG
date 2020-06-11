@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Controls
         [Browsable(true)]
         public char PasswordChar
         {
-            get { return _passwordChar; }
+            get => _passwordChar;
             set
             {
                 _passwordChar = value;
@@ -32,7 +32,7 @@ namespace mRemoteNG.UI.Controls
         [Browsable(true)]
         public bool UseSystemPasswordChar
         {
-            get { return _useSystemPasswordChar; }
+            get => _useSystemPasswordChar;
             set
             {
                 _useSystemPasswordChar = value;

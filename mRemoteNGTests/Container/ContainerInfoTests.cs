@@ -49,7 +49,7 @@ namespace mRemoteNGTests.Container
         [Test]
         public void AddRangeAddsAllItems()
         {
-            var collection = new[] { _con1, _con2, _con3 };
+            var collection = new[] {_con1, _con2, _con3};
             _containerInfo.AddChildRange(collection);
             Assert.That(_containerInfo.Children, Is.EquivalentTo(collection));
         }
@@ -73,16 +73,17 @@ namespace mRemoteNGTests.Container
         [Test]
         public void RemoveRangeRemovesAllIndicatedItems()
         {
-            var collection = new[] { _con1, _con2, new ContainerInfo() };
+            var collection = new[] {_con1, _con2, new ContainerInfo()};
             _containerInfo.AddChildRange(collection);
             _containerInfo.RemoveChildRange(collection);
-            Assert.That(_containerInfo.Children, Does.Not.Contains(collection[0]).And.Not.Contains(collection[1]).And.Not.Contains(collection[2]));
+            Assert.That(_containerInfo.Children,
+                Does.Not.Contains(collection[0]).And.Not.Contains(collection[1]).And.Not.Contains(collection[2]));
         }
 
         [Test]
         public void RemoveRangeDoesNotRemoveUntargetedMembers()
         {
-            var collection = new[] { _con1, _con2, new ContainerInfo() };
+            var collection = new[] {_con1, _con2, new ContainerInfo()};
             _containerInfo.AddChildRange(collection);
             _containerInfo.AddChild(_con3);
             _containerInfo.RemoveChildRange(collection);
@@ -183,7 +184,7 @@ namespace mRemoteNGTests.Container
             var referenceChildIndexBeforeMove = _containerInfo.Children.IndexOf(_con1);
             _containerInfo.SetChildBelow(_con3, _con1);
             var targetsNewIndex = _containerInfo.Children.IndexOf(_con3);
-            Assert.That(targetsNewIndex, Is.EqualTo(referenceChildIndexBeforeMove+1));
+            Assert.That(targetsNewIndex, Is.EqualTo(referenceChildIndexBeforeMove + 1));
         }
 
         [Test]
@@ -367,7 +368,7 @@ namespace mRemoteNGTests.Container
             _containerInfo.AddChild(_con2);
             _containerInfo.AddChild(_con1);
             _containerInfo.AddChild(_con3);
-            _containerInfo.SortOn(node=> node.ConstantID);
+            _containerInfo.SortOn(node => node.ConstantID);
             var orderAfterSort = _containerInfo.Children.ToArray();
             Assert.That(orderAfterSort, Is.Ordered.Ascending.By(nameof(ConnectionInfo.ConstantID)));
         }

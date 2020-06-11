@@ -42,45 +42,21 @@ namespace mRemoteNG.UI.Window
         {
             get
             {
-                if (string.IsNullOrEmpty(ipStart.Octet1.Text))
-                {
-                    return false;
-                }
+                if (string.IsNullOrEmpty(ipStart.Octet1.Text)) return false;
 
-                if (string.IsNullOrEmpty(ipStart.Octet2.Text))
-                {
-                    return false;
-                }
+                if (string.IsNullOrEmpty(ipStart.Octet2.Text)) return false;
 
-                if (string.IsNullOrEmpty(ipStart.Octet3.Text))
-                {
-                    return false;
-                }
+                if (string.IsNullOrEmpty(ipStart.Octet3.Text)) return false;
 
-                if (string.IsNullOrEmpty(ipStart.Octet4.Text))
-                {
-                    return false;
-                }
+                if (string.IsNullOrEmpty(ipStart.Octet4.Text)) return false;
 
-                if (string.IsNullOrEmpty(ipEnd.Octet1.Text))
-                {
-                    return false;
-                }
+                if (string.IsNullOrEmpty(ipEnd.Octet1.Text)) return false;
 
-                if (string.IsNullOrEmpty(ipEnd.Octet2.Text))
-                {
-                    return false;
-                }
+                if (string.IsNullOrEmpty(ipEnd.Octet2.Text)) return false;
 
-                if (string.IsNullOrEmpty(ipEnd.Octet3.Text))
-                {
-                    return false;
-                }
+                if (string.IsNullOrEmpty(ipEnd.Octet3.Text)) return false;
 
-                if (string.IsNullOrEmpty(ipEnd.Octet4.Text))
-                {
-                    return false;
-                }
+                if (string.IsNullOrEmpty(ipEnd.Octet4.Text)) return false;
 
                 return true;
             }
@@ -139,20 +115,16 @@ namespace mRemoteNG.UI.Window
             else
             {
                 if (IpsValid)
-                {
                     StartScan();
-                }
                 else
-                {
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.CannotStartPortScan);
-                }
             }
         }
 
         private void btnImport_Click(object sender, EventArgs e)
         {
             var protocol =
-                (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
+                (ProtocolType) Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
             importSelectedHosts(protocol);
         }
 
@@ -196,11 +168,11 @@ namespace mRemoteNG.UI.Window
                 var ipAddressEnd = IPAddress.Parse(ipEnd.Text);
 
                 if (!ngCheckFirstPort.Checked && !ngCheckLastPort.Checked)
-                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int)portStart.Value,
-                                                   (int)portEnd.Value, (int)numericSelectorTimeout.Value * 1000, true);
+                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value,
+                        (int) portEnd.Value, (int) numericSelectorTimeout.Value * 1000, true);
                 else
-                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int)portStart.Value,
-                                                   (int)portEnd.Value, (int)numericSelectorTimeout.Value * 1000);
+                    _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value,
+                        (int) portEnd.Value, (int) numericSelectorTimeout.Value * 1000);
 
                 _portScanner.BeginHostScan += PortScanner_BeginHostScan;
                 _portScanner.HostScanned += PortScanner_HostScanned;
@@ -245,7 +217,7 @@ namespace mRemoteNG.UI.Window
             if (InvokeRequired)
             {
                 Invoke(new PortScannerHostScannedDelegate(PortScanner_HostScanned),
-                       new object[] {host, scannedCount, totalCount});
+                    new object[] {host, scannedCount, totalCount});
                 return;
             }
 
@@ -277,15 +249,12 @@ namespace mRemoteNG.UI.Window
         private void importSelectedHosts(ProtocolType protocol)
         {
             var hosts = new List<ScanHost>();
-            foreach (ScanHost host in olvHosts.SelectedObjects)
-            {
-                hosts.Add(host);
-            }
+            foreach (ScanHost host in olvHosts.SelectedObjects) hosts.Add(host);
 
             if (hosts.Count < 1)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "Could not import host(s) from port scan context menu");
+                    "Could not import host(s) from port scan context menu");
                 return;
             }
 
@@ -300,13 +269,13 @@ namespace mRemoteNG.UI.Window
         private ContainerInfo GetDestinationContainerForImportedHosts()
         {
             var selectedNode = Windows.TreeForm.SelectedNode
-                            ?? Windows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>()
-                                      .First();
+                               ?? Windows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>()
+                                   .First();
 
             // if a putty node is selected, place imported connections in the root connection node
             if (selectedNode is RootPuttySessionsNodeInfo || selectedNode is PuttySessionInfo)
                 selectedNode = Windows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>()
-                                      .First();
+                    .First();
 
             // if the selected node is a connection, use its parent container
             var selectedTreeNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;

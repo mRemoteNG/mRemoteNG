@@ -64,14 +64,16 @@ namespace mRemoteNGTests.Connection
         [Test]
         public void GetPropertiesReturnsListOfSettableProperties()
         {
-            var hasIconProperty = _inheritance.GetProperties().Contains(typeof(ConnectionInfoInheritance).GetProperty("Icon"));
+            var hasIconProperty = _inheritance.GetProperties()
+                .Contains(typeof(ConnectionInfoInheritance).GetProperty("Icon"));
             Assert.That(hasIconProperty, Is.True);
         }
 
         [Test]
         public void GetPropertiesExludesPropertiesThatShouldNotBeSet()
         {
-            var hasEverythingInheritedProperty = _inheritance.GetProperties().Contains(typeof(ConnectionInfoInheritance).GetProperty("EverythingInherited"));
+            var hasEverythingInheritedProperty = _inheritance.GetProperties()
+                .Contains(typeof(ConnectionInfoInheritance).GetProperty("EverythingInherited"));
             Assert.That(hasEverythingInheritedProperty, Is.False);
         }
 
@@ -80,7 +82,7 @@ namespace mRemoteNGTests.Connection
         {
             var expectedSetting = false;
 
-            var container = new ContainerInfo { AutomaticResize = expectedSetting };
+            var container = new ContainerInfo {AutomaticResize = expectedSetting};
             var con1 = new ConnectionInfo
             {
                 AutomaticResize = true,
@@ -95,10 +97,9 @@ namespace mRemoteNGTests.Connection
         {
             var allPropertiesTrue = true;
             foreach (var property in _inheritanceProperties)
-            {
-                if (PropertyIsBoolean(property) && PropertyIsChangedWhenSettingInheritAll(property) && BooleanPropertyIsSetToFalse(property))
+                if (PropertyIsBoolean(property) && PropertyIsChangedWhenSettingInheritAll(property) &&
+                    BooleanPropertyIsSetToFalse(property))
                     allPropertiesTrue = false;
-            }
             return allPropertiesTrue;
         }
 
@@ -106,10 +107,9 @@ namespace mRemoteNGTests.Connection
         {
             var allPropertiesFalse = true;
             foreach (var property in _inheritanceProperties)
-            {
-                if (PropertyIsBoolean(property) && PropertyIsChangedWhenSettingInheritAll(property) && BooleanPropertyIsSetToTrue(property))
+                if (PropertyIsBoolean(property) && PropertyIsChangedWhenSettingInheritAll(property) &&
+                    BooleanPropertyIsSetToTrue(property))
                     allPropertiesFalse = false;
-            }
             return allPropertiesFalse;
         }
 
@@ -121,17 +121,17 @@ namespace mRemoteNGTests.Connection
 
         private bool PropertyIsBoolean(PropertyInfo property)
         {
-            return (property.PropertyType.Name == typeof(bool).Name);
+            return property.PropertyType.Name == typeof(bool).Name;
         }
 
         private bool BooleanPropertyIsSetToFalse(PropertyInfo property)
         {
-            return (bool)property.GetValue(_inheritance) == false;
+            return (bool) property.GetValue(_inheritance) == false;
         }
 
         private bool BooleanPropertyIsSetToTrue(PropertyInfo property)
         {
-            return (bool)property.GetValue(_inheritance);
+            return (bool) property.GetValue(_inheritance);
         }
     }
 }

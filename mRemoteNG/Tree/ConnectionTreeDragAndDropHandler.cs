@@ -21,14 +21,14 @@ namespace mRemoteNG.Tree
         public void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
         {
             if (!(e.TargetModel is ConnectionInfo dropTarget)) return;
-            var dropSource = (ConnectionInfo)e.SourceModels[0];
+            var dropSource = (ConnectionInfo) e.SourceModels[0];
             DropModel(dropSource, dropTarget, e.DropTargetLocation);
             e.Handled = true;
         }
 
         public void DropModel(ConnectionInfo dropSource,
-                              ConnectionInfo dropTarget,
-                              DropTargetLocation dropTargetLocation)
+            ConnectionInfo dropTarget,
+            DropTargetLocation dropTargetLocation)
         {
             switch (dropTargetLocation)
             {
@@ -82,8 +82,8 @@ namespace mRemoteNG.Tree
         }
 
         public DragDropEffects CanModelDrop(ConnectionInfo dropSource,
-                                            ConnectionInfo dropTarget,
-                                            DropTargetLocation dropTargetLocation)
+            ConnectionInfo dropTarget,
+            DropTargetLocation dropTargetLocation)
         {
             var dragDropEffect = DragDropEffects.None;
             if (!NodeIsDraggable(dropSource))
@@ -92,6 +92,7 @@ namespace mRemoteNG.Tree
                 _enableFeedback = false;
             }
             else
+            {
                 switch (dropTargetLocation)
                 {
                     case DropTargetLocation.Item:
@@ -102,6 +103,7 @@ namespace mRemoteNG.Tree
                         dragDropEffect = HandleCanDropBetweenItems(dropSource, dropTarget);
                         break;
                 }
+            }
 
             return dragDropEffect;
         }
@@ -127,9 +129,13 @@ namespace mRemoteNG.Tree
         {
             var dragDropEffect = DragDropEffects.None;
             if (AncestorDraggingOntoChild(dropSource, dropTarget))
+            {
                 _infoMessage = Language.NodeCannotDragParentOnChild;
+            }
             else if (dropTarget is PuttySessionInfo || dropTarget is RootNodeInfo)
+            {
                 _enableFeedback = false;
+            }
             else
             {
                 dragDropEffect = DragDropEffects.Move;

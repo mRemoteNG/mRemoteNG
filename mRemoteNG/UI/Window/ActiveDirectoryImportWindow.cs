@@ -34,8 +34,10 @@ namespace mRemoteNG.UI.Window
             if (!ThemeManager.getInstance().ThemingActive) return;
             base.ApplyTheme();
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            activeDirectoryTree.BackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Background");
-            activeDirectoryTree.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
+            activeDirectoryTree.BackColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Background");
+            activeDirectoryTree.ForeColor =
+                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("List_Item_Foreground");
         }
 
         private void BtnImport_Click(object sender, EventArgs e)
@@ -87,6 +89,7 @@ namespace mRemoteNG.UI.Window
         {
             btnImport.Enabled = !string.IsNullOrEmpty(activeDirectoryTree.AdPath);
         }
+
         private void BtnClose_Click(object sender, EventArgs e)
         {
             Close();

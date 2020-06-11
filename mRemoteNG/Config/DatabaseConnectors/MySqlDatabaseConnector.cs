@@ -29,14 +29,14 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         public bool IsConnected
         {
-            get { return (_dbConnection.State == ConnectionState.Open); }
+            get { return _dbConnection.State == ConnectionState.Open; }
         }
 
         public MySqlDatabaseConnector(string host, string database, string username, string password)
         {
-            string[] hostParts = host.Split(new char[]{':'}, 2);
+            var hostParts = host.Split(new char[] {':'}, 2);
             _dbHost = hostParts[0];
-            _dbPort = (hostParts.Length == 2)?hostParts[1]:"3306";
+            _dbPort = hostParts.Length == 2 ? hostParts[1] : "3306";
             _dbName = database;
             _dbUsername = username;
             _dbPassword = password;
@@ -51,7 +51,8 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         private void BuildSqlConnectionString()
         {
-            _dbConnectionString = $"server={_dbHost};user={_dbUsername};database={_dbName};port={_dbPort};password={_dbPassword}";
+            _dbConnectionString =
+                $"server={_dbHost};user={_dbUsername};database={_dbName};port={_dbPort};password={_dbPassword}";
         }
 
         public void Connect()
@@ -78,6 +79,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
         {
             Dispose(true);
         }
+
         private void Dispose(bool itIsSafeToFreeManagedObjects)
         {
             if (!itIsSafeToFreeManagedObjects) return;

@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Panels
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "Couldn\'t add panel" + Environment.NewLine + ex.Message);
+                    "Couldn\'t add panel" + Environment.NewLine + ex.Message);
                 return null;
             }
         }
@@ -35,7 +35,7 @@ namespace mRemoteNG.UI.Panels
         public bool DoesPanelExist(string panelName)
         {
             return Runtime.WindowList?.OfType<ConnectionWindow>().Any(w => w.TabText == panelName)
-                ?? false;
+                   ?? false;
         }
 
         private static void ShowConnectionWindow(ConnectionWindow connectionForm)
@@ -106,11 +106,13 @@ namespace mRemoteNG.UI.Panels
         {
             try
             {
-                var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
+                var conW = (ConnectionWindow) ((ToolStripMenuItem) sender).Tag;
 
                 using (var newTitle = new FrmInputBox(Language.NewTitle, Language.NewTitle + ":", ""))
+                {
                     if (newTitle.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(newTitle.returnValue))
                         conW.SetFormText(newTitle.returnValue.Replace("&", "&&"));
+                }
             }
             catch (Exception ex)
             {
@@ -123,7 +125,7 @@ namespace mRemoteNG.UI.Panels
         {
             try
             {
-                var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
+                var conW = (ConnectionWindow) ((ToolStripMenuItem) sender).Tag;
                 conW.Close();
             }
             catch (Exception ex)
@@ -137,7 +139,7 @@ namespace mRemoteNG.UI.Panels
         {
             try
             {
-                var cMenScreens = (ToolStripMenuItem)sender;
+                var cMenScreens = (ToolStripMenuItem) sender;
                 cMenScreens.DropDownItems.Clear();
 
                 for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
@@ -147,8 +149,8 @@ namespace mRemoteNG.UI.Panels
                         Tag = new ArrayList(),
                         Image = Resources.Monitor_GoTo
                     };
-                    ((ArrayList)cMenScreen.Tag).Add(Screen.AllScreens[i]);
-                    ((ArrayList)cMenScreen.Tag).Add(cMenScreens.Tag);
+                    ((ArrayList) cMenScreen.Tag).Add(Screen.AllScreens[i]);
+                    ((ArrayList) cMenScreen.Tag).Add(cMenScreens.Tag);
                     cMenScreen.Click += cMenConnectionPanelScreen_Click;
                     cMenScreens.DropDownItems.Add(cMenScreen);
                 }
@@ -156,8 +158,8 @@ namespace mRemoteNG.UI.Panels
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "cMenConnectionPanelScreens_DropDownOpening: Caught Exception: ",
-                                                                ex);
+                    "cMenConnectionPanelScreens_DropDownOpening: Caught Exception: ",
+                    ex);
             }
         }
 
@@ -167,26 +169,19 @@ namespace mRemoteNG.UI.Panels
             DockContent panel = null;
             try
             {
-                var tagEnumeration = (IEnumerable)((ToolStripMenuItem)sender).Tag;
+                var tagEnumeration = (IEnumerable) ((ToolStripMenuItem) sender).Tag;
                 if (tagEnumeration == null) return;
                 foreach (var obj in tagEnumeration)
-                {
                     if (obj is Screen screen1)
-                    {
                         screen = screen1;
-                    }
-                    else if (obj is DockContent)
-                    {
-                        panel = (DockContent)obj;
-                    }
-                }
+                    else if (obj is DockContent) panel = (DockContent) obj;
 
                 Screens.SendPanelToScreen(panel, screen);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("cMenConnectionPanelScreen_Click: Caught Exception: ",
-                                                                ex);
+                    ex);
             }
         }
     }

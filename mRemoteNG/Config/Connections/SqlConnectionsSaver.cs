@@ -20,16 +20,16 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Connections
 {
-	public class SqlConnectionsSaver : ISaver<ConnectionTreeModel>
+    public class SqlConnectionsSaver : ISaver<ConnectionTreeModel>
     {
         private readonly SaveFilter _saveFilter;
         private readonly ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> _localPropertiesSerializer;
         private readonly IDataProvider<string> _dataProvider;
 
         public SqlConnectionsSaver(SaveFilter saveFilter,
-                                   ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string>
-                                       localPropertieSerializer,
-                                   IDataProvider<string> localPropertiesDataProvider)
+            ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string>
+                localPropertieSerializer,
+            IDataProvider<string> localPropertiesDataProvider)
         {
             if (saveFilter == null)
                 throw new ArgumentNullException(nameof(saveFilter));
@@ -47,14 +47,14 @@ namespace mRemoteNG.Config.Connections
             if (PropertyIsLocalOnly(propertyNameTrigger))
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                                                    $"Property {propertyNameTrigger} is local only. Not saving to database.");
+                    $"Property {propertyNameTrigger} is local only. Not saving to database.");
                 return;
             }
 
             if (SqlUserIsReadOnly())
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    "Trying to save connection tree but the SQL read only checkbox is checked, aborting!");
+                    "Trying to save connection tree but the SQL read only checkbox is checked, aborting!");
                 return;
             }
 
@@ -68,14 +68,13 @@ namespace mRemoteNG.Config.Connections
                 if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                        Language.ErrorConnectionListSaveFailed);
+                        Language.ErrorConnectionListSaveFailed);
                     return;
                 }
 
                 metaDataRetriever.WriteDatabaseMetaData(rootTreeNode, dbConnector);
                 UpdateConnectionsTable(rootTreeNode, dbConnector);
                 UpdateUpdatesTable(dbConnector);
-
             }
 
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved connections to database");
@@ -103,7 +102,7 @@ namespace mRemoteNG.Config.Connections
                 ConnectionId = info.ConstantID,
                 Connected = info.OpenConnections.Count > 0,
                 Expanded = info is ContainerInfo c && c.IsExpanded,
-                Favorite = info.Favorite,
+                Favorite = info.Favorite
             });
 
             var serializedProperties = _localPropertiesSerializer.Serialize(a);
@@ -147,7 +146,7 @@ namespace mRemoteNG.Config.Connections
             else
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
+                    $"UpdateRootNodeTable: rootTreeNode was null. Could not insert!");
             }
         }
 
@@ -158,7 +157,7 @@ namespace mRemoteNG.Config.Connections
 
             var cryptoProvider = new LegacyRijndaelCryptographyProvider();
             var serializer = new DataTableSerializer(_saveFilter, cryptoProvider,
-                                                     rootTreeNode.PasswordString.ConvertToSecureString());
+                rootTreeNode.PasswordString.ConvertToSecureString());
             serializer.SetSourceDataTable(currentDataTable);
             var dataTable = serializer.Serialize(rootTreeNode);
             //var dbQuery = databaseConnector.DbCommand("DELETE FROM tblCons");
@@ -171,7 +170,8 @@ namespace mRemoteNG.Config.Connections
         {
             var dbQuery = databaseConnector.DbCommand("DELETE FROM tblUpdate");
             dbQuery.ExecuteNonQuery();
-            dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')");
+            dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" +
+                                                  MiscTools.DBDate(DateTime.Now) + "\')");
             dbQuery.ExecuteNonQuery();
         }
 

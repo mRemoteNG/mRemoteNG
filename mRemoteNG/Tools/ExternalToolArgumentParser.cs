@@ -96,10 +96,7 @@ namespace mRemoteNG.Tools
                 variableName = input.Substring(variableNameStart, variableNameLength);
 
                 var replacementValue = token;
-                if (!isEnvironmentVariable)
-                {
-                    replacementValue = GetVariableReplacement(variableName, token);
-                }
+                if (!isEnvironmentVariable) replacementValue = GetVariableReplacement(variableName, token);
 
                 var haveReplacement = false;
 
@@ -187,7 +184,7 @@ namespace mRemoteNG.Tools
                     if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "custom")
                         replacement = new LegacyRijndaelCryptographyProvider()
                             .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
-                                     Runtime.EncryptionKey);
+                                Runtime.EncryptionKey);
                     break;
                 case "domain":
                     replacement = _connectionInfo.Domain;
@@ -219,19 +216,14 @@ namespace mRemoteNG.Tools
             var result = input;
 
             for (index = result.Length; index >= 0; index--)
-            {
                 foreach (var replacement in replacements)
                 {
-                    if (replacement.Start != index)
-                    {
-                        continue;
-                    }
+                    if (replacement.Start != index) continue;
 
                     var before = result.Substring(0, replacement.Start);
                     var after = result.Substring(replacement.Start + replacement.Length);
                     result = before + replacement.Value + after;
                 }
-            }
 
             return result;
         }

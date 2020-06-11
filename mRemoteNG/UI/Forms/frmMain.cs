@@ -83,10 +83,7 @@ namespace mRemoteNG.UI.Forms
             get => _usingSqlServer;
             set
             {
-                if (_usingSqlServer == value)
-                {
-                    return;
-                }
+                if (_usingSqlServer == value) return;
 
                 _usingSqlServer = value;
                 UpdateWindowTitle();
@@ -98,10 +95,7 @@ namespace mRemoteNG.UI.Forms
             get => _connectionsFileName;
             set
             {
-                if (_connectionsFileName == value)
-                {
-                    return;
-                }
+                if (_connectionsFileName == value) return;
 
                 _connectionsFileName = value;
                 UpdateWindowTitle();
@@ -113,10 +107,7 @@ namespace mRemoteNG.UI.Forms
             get => _showFullPathInTitle;
             set
             {
-                if (_showFullPathInTitle == value)
-                {
-                    return;
-                }
+                if (_showFullPathInTitle == value) return;
 
                 _showFullPathInTitle = value;
                 UpdateWindowTitle();
@@ -128,10 +119,7 @@ namespace mRemoteNG.UI.Forms
             get => _selectedConnection;
             set
             {
-                if (_selectedConnection == value)
-                {
-                    return;
-                }
+                if (_selectedConnection == value) return;
 
                 _selectedConnection = value;
                 UpdateWindowTitle();
@@ -164,13 +152,14 @@ namespace mRemoteNG.UI.Forms
             //For Windows 7 and above, best to include relevant app.manifest entries as well
             Cef.EnableHighDPISupport();
 
-            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
+            var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                Application.ProductName);
             if (Runtime.IsPortableEdition) dir = SettingsFileInfo.SettingsPath;
 
-            CefSettings settings = new CefSettings()
+            var settings = new CefSettings()
             {
                 CachePath = Path.Combine(dir, "CEFCache"),
-                LogFile = Path.Combine(dir, "mRemoteNG_cef.log"),
+                LogFile = Path.Combine(dir, "mRemoteNG_cef.log")
             };
 
             if (Settings.Default.TextLogMessageWriterWriteDebugMsgs)
@@ -181,14 +170,14 @@ namespace mRemoteNG.UI.Forms
                 settings.LogSeverity = LogSeverity.Warning;
             else if (Settings.Default.TextLogMessageWriterWriteErrorMsgs)
                 settings.LogSeverity = LogSeverity.Error;
-            
+
             //Implement scheme to be allowed to view local help files
             settings.RegisterScheme(new CefCustomScheme
             {
                 SchemeName = Cef.CefCommitHash,
                 DomainName = "help",
                 SchemeHandlerFactory = new FolderSchemeHandlerFactory(
-                    rootFolder: $@"{GeneralAppInfo.HomePath}\Help\",
+                    $@"{GeneralAppInfo.HomePath}\Help\",
                     defaultPage: "index.html"
                 )
             });
@@ -270,27 +259,25 @@ namespace mRemoteNG.UI.Forms
             var toolbars = new ToolStrip[]
                 {_quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip, msMain};
             foreach (var toolbar in toolbars)
-            {
                 toolbar.GripStyle = shouldBeLocked
                     ? ToolStripGripStyle.Hidden
                     : ToolStripGripStyle.Visible;
-            }
         }
 
         private void ConnectionsServiceOnConnectionsLoaded(object sender,
-                                                           ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+            ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
             UpdateWindowTitle();
         }
 
         private void ConnectionsServiceOnConnectionsSaved(object sender,
-                                                          ConnectionsSavedEventArgs connectionsSavedEventArgs)
+            ConnectionsSavedEventArgs connectionsSavedEventArgs)
         {
             if (connectionsSavedEventArgs.UsingDatabase)
                 return;
 
             _backupPruner.PruneBackupFiles(connectionsSavedEventArgs.ConnectionFileName,
-                                           Settings.Default.BackupFileKeepCount);
+                Settings.Default.BackupFileKeepCount);
         }
 
         private void SetMenuDependencies()
@@ -335,13 +322,13 @@ namespace mRemoteNG.UI.Forms
             try
             {
                 vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version,
-                                             _themeManager.ActiveTheme.Theme);
+                    _themeManager.ActiveTheme.Theme);
                 vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version,
-                                             _themeManager.ActiveTheme.Theme);
+                    _themeManager.ActiveTheme.Theme);
                 vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version,
-                                             _themeManager.ActiveTheme.Theme);
+                    _themeManager.ActiveTheme.Theme);
                 vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version,
-                                             _themeManager.ActiveTheme.Theme);
+                    _themeManager.ActiveTheme.Theme);
 
                 if (!_themeManager.ActiveAndExtended) return;
                 tsContainer.TopToolStripPanel.BackColor =
@@ -372,15 +359,13 @@ namespace mRemoteNG.UI.Forms
             };
 
             CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.AskUpdatesMainInstruction,
-                                          string.Format(Language.AskUpdatesContent, GeneralAppInfo.ProductName),
-                                          "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None,
-                                          ESysIcons.Question,
-                                          ESysIcons.Question);
+                string.Format(Language.AskUpdatesContent, GeneralAppInfo.ProductName),
+                "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None,
+                ESysIcons.Question,
+                ESysIcons.Question);
 
-            if (CTaskDialog.CommandButtonResult == 0 | CTaskDialog.CommandButtonResult == 1)
-            {
+            if ((CTaskDialog.CommandButtonResult == 0) | (CTaskDialog.CommandButtonResult == 1))
                 Settings.Default.CheckForUpdatesAsked = true;
-            }
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
@@ -395,7 +380,8 @@ namespace mRemoteNG.UI.Forms
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 
             var nextUpdateCheck =
-                Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
+                Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(
+                    TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
 
             if (!Settings.Default.UpdatePending && DateTime.UtcNow <= nextUpdateCheck) return;
             if (!IsHandleCreated)
@@ -424,7 +410,6 @@ namespace mRemoteNG.UI.Forms
             {
                 var openConnections = 0;
                 if (pnlDock.Contents.Count > 0)
-                {
                     foreach (var dc in pnlDock.Contents)
                     {
                         if (!(dc is ConnectionWindow cw)) continue;
@@ -433,22 +418,19 @@ namespace mRemoteNG.UI.Forms
                         if (dp.Contents.Count > 0)
                             openConnections += dp.Contents.Count;
                     }
-                }
 
                 if (openConnections > 0 &&
-                    (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All |
-                     (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple &
-                      openConnections > 1) || Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
+                    ((Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.All) |
+                     ((Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Multiple) &
+                      (openConnections > 1)) ||
+                     Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Exit))
                 {
                     var result = CTaskDialog.MessageBox(this, Application.ProductName,
-                                                        Language.ConfirmExitMainInstruction, "", "", "",
-                                                        Language.CheckboxDoNotShowThisMessageAgain,
-                                                        ETaskDialogButtons.YesNo, ESysIcons.Question,
-                                                        ESysIcons.Question);
-                    if (CTaskDialog.VerificationChecked)
-                    {
-                        Settings.Default.ConfirmCloseConnection--;
-                    }
+                        Language.ConfirmExitMainInstruction, "", "", "",
+                        Language.CheckboxDoNotShowThisMessageAgain,
+                        ETaskDialogButtons.YesNo, ESysIcons.Question,
+                        ESysIcons.Question);
+                    if (CTaskDialog.VerificationChecked) Settings.Default.ConfirmCloseConnection--;
 
                     if (result == DialogResult.No)
                     {
@@ -465,12 +447,8 @@ namespace mRemoteNG.UI.Forms
             Cef.Shutdown();
 
             if (Runtime.WindowList != null)
-            {
                 foreach (BaseWindow window in Runtime.WindowList)
-                {
                     window.Close();
-                }
-            }
 
             Shutdown.StartUpdate();
 
@@ -501,10 +479,7 @@ namespace mRemoteNG.UI.Forms
             if (WindowState == FormWindowState.Minimized)
             {
                 if (!Settings.Default.MinimizeToTray) return;
-                if (Runtime.NotificationAreaIcon == null)
-                {
-                    Runtime.NotificationAreaIcon = new NotificationAreaIcon();
-                }
+                if (Runtime.NotificationAreaIcon == null) Runtime.NotificationAreaIcon = new NotificationAreaIcon();
 
                 Hide();
             }
@@ -534,7 +509,7 @@ namespace mRemoteNG.UI.Forms
                         break;
                     case NativeMethods.WM_ACTIVATEAPP:
                         var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
-                                               ?? GetChildAtPoint(MousePosition);
+                                                  ?? GetChildAtPoint(MousePosition);
                         if (candidateTabToFocus is InterfaceControl) candidateTabToFocus.Parent.Focus();
                         _inMouseActivate = false;
                         break;
@@ -543,7 +518,7 @@ namespace mRemoteNG.UI.Forms
                         if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_CLICKACTIVE)
                         {
                             var controlThatWasClicked = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
-                                                     ?? GetChildAtPoint(MousePosition);
+                                                        ?? GetChildAtPoint(MousePosition);
                             if (controlThatWasClicked != null)
                             {
                                 if (controlThatWasClicked is TreeView ||
@@ -573,16 +548,15 @@ namespace mRemoteNG.UI.Forms
                                 }
                             }
                         }
+
                         break;
                     case NativeMethods.WM_WINDOWPOSCHANGED:
                         // Ignore this message if the window wasn't activated
                         var windowPos =
-                            (NativeMethods.WINDOWPOS)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.WINDOWPOS));
+                            (NativeMethods.WINDOWPOS) Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.WINDOWPOS));
                         if ((windowPos.flags & NativeMethods.SWP_NOACTIVATE) == 0)
-                        {
                             if (!_inMouseActivate && !_inSizeMove)
                                 ActivateConnection();
-                        }
                         break;
                     case NativeMethods.WM_SYSCOMMAND:
                         if (m.WParam == new IntPtr(0))
@@ -593,6 +567,7 @@ namespace mRemoteNG.UI.Forms
                             Screens.SendFormToScreen(screen);
                             Console.WriteLine(_advancedWindowMenu.GetScreenById(m.WParam.ToInt32()).ToString());
                         }
+
                         break;
                     case NativeMethods.WM_DRAWCLIPBOARD:
                         NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
@@ -618,8 +593,8 @@ namespace mRemoteNG.UI.Forms
             var clientMousePosition = control.PointToClient(MousePosition);
             var temp_wLow = clientMousePosition.X;
             var temp_wHigh = clientMousePosition.Y;
-            NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, (IntPtr)NativeMethods.MK_LBUTTON,
-                                      (IntPtr)NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
+            NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, (IntPtr) NativeMethods.MK_LBUTTON,
+                (IntPtr) NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
             clientMousePosition.X = temp_wLow;
             clientMousePosition.Y = temp_wHigh;
         }
@@ -635,7 +610,7 @@ namespace mRemoteNG.UI.Forms
 
             ifc.Protocol.Focus();
             var conFormWindow = ifc.FindForm();
-            ((ConnectionTab)conFormWindow)?.RefreshInterfaceController();
+            ((ConnectionTab) conFormWindow)?.RefreshInterfaceController();
         }
 
         private void pnlDock_ActiveDocumentChanged(object sender, EventArgs e)
@@ -667,8 +642,8 @@ namespace mRemoteNG.UI.Forms
                     {
                         titleBuilder.Append(separator);
                         titleBuilder.Append(Settings.Default.ShowCompleteConsPathInTitle
-                                                ? Runtime.ConnectionsService.ConnectionFileName
-                                                : Path.GetFileName(Runtime.ConnectionsService.ConnectionFileName));
+                            ? Runtime.ConnectionsService.ConnectionFileName
+                            : Path.GetFileName(Runtime.ConnectionsService.ConnectionFileName));
                     }
                 }
             }
@@ -698,11 +673,9 @@ namespace mRemoteNG.UI.Forms
                 var nonConnectionPanelCount = 0;
                 foreach (var dockContent in pnlDock.Documents)
                 {
-                    var document = (DockContent)dockContent;
+                    var document = (DockContent) dockContent;
                     if ((closingDocument == null || document != closingDocument) && !(document is ConnectionWindow))
-                    {
                         nonConnectionPanelCount++;
-                    }
                 }
 
                 newDocumentStyle = nonConnectionPanelCount == 0
@@ -720,7 +693,8 @@ namespace mRemoteNG.UI.Forms
 					var connectionWindow = (ConnectionWindow)document;
 					if (Settings.Default.AlwaysShowConnectionTabs == false)
 					{
-						connectionWindow.TabController.HideTabsMode = TabControl.HideTabsModes.HidepnlDock.DockLeftPortion = Always;
+						connectionWindow.TabController.HideTabsMode =
+ TabControl.HideTabsModes.HidepnlDock.DockLeftPortion = Always;
 					}
 					else
 					{
@@ -749,7 +723,10 @@ namespace mRemoteNG.UI.Forms
             pnlDock.Visible = true;
         }
 
-        public void ShowHideMenu() => tsContainer.TopToolStripPanelVisible = !tsContainer.TopToolStripPanelVisible;
+        public void ShowHideMenu()
+        {
+            tsContainer.TopToolStripPanelVisible = !tsContainer.TopToolStripPanelVisible;
+        }
 
         #endregion
 
@@ -761,10 +738,10 @@ namespace mRemoteNG.UI.Forms
         {
             add =>
                 _clipboardChangedEvent =
-                    (ClipboardchangeEventHandler)Delegate.Combine(_clipboardChangedEvent, value);
+                    (ClipboardchangeEventHandler) Delegate.Combine(_clipboardChangedEvent, value);
             remove =>
                 _clipboardChangedEvent =
-                    (ClipboardchangeEventHandler)Delegate.Remove(_clipboardChangedEvent, value);
+                    (ClipboardchangeEventHandler) Delegate.Remove(_clipboardChangedEvent, value);
         }
 
         #endregion

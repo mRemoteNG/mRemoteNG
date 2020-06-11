@@ -30,7 +30,6 @@ namespace mRemoteNG.UI.Controls.Base
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
 
             if (Controls.Count > 0)
-            {
                 for (var i = 0; i < Controls.Count; i++)
                 {
                     //Remove those non-themable buttons
@@ -48,7 +47,6 @@ namespace mRemoteNG.UI.Controls.Base
                     Invalidate();
                     return;
                 }
-            }
 
             //Add new themable buttons
             Up = new NGButton
@@ -108,22 +106,22 @@ namespace mRemoteNG.UI.Controls.Base
             //Fix Border
             if (BorderStyle != BorderStyle.None)
                 e.Graphics.DrawRectangle(
-                                         new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"),
-                                                 1), 0, 0, Width - 1,
-                                         Height - 1);
+                    new Pen(_themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Border"),
+                        1), 0, 0, Width - 1,
+                    Height - 1);
         }
 
         private void InitializeComponent()
         {
-            ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            this.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) this).BeginInit();
+            SuspendLayout();
             // 
             // NGNumericUpDown
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
-            this.ResumeLayout(false);
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular,
+                GraphicsUnit.Point, (byte) 0);
+            ((System.ComponentModel.ISupportInitialize) this).EndInit();
+            ResumeLayout(false);
         }
     }
 }

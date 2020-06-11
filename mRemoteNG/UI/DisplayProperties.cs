@@ -113,7 +113,7 @@ namespace mRemoteNG.UI
         /// <param name="width"></param>
         private int CalculateScaledValue(float value, float scalingValue)
         {
-            return (int)Math.Round(value * scalingValue);
+            return (int) Math.Round(value * scalingValue);
         }
     }
 }

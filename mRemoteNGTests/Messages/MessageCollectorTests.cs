@@ -74,7 +74,7 @@ namespace mRemoteNGTests.Messages
             _messageCollector.CollectionChanged += (sender, args) => notificationCount++;
             var msg1 = Substitute.For<IMessage>();
             var msg2 = Substitute.For<IMessage>();
-            _messageCollector.AddMessages(new[] { msg1, msg2 });
+            _messageCollector.AddMessages(new[] {msg1, msg2});
             Assert.That(notificationCount, Is.EqualTo(1));
         }
 

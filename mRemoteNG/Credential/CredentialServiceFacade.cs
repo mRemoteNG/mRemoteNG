@@ -14,8 +14,8 @@ namespace mRemoteNG.Credential
         public IEnumerable<ICredentialRepository> CredentialRepositories => _repositoryList;
 
         public CredentialServiceFacade(ICredentialRepositoryList repositoryList,
-                                       ILoader<IEnumerable<ICredentialRepository>> loader,
-                                       ISaver<IEnumerable<ICredentialRepository>> saver)
+            ILoader<IEnumerable<ICredentialRepository>> loader,
+            ISaver<IEnumerable<ICredentialRepository>> saver)
         {
             if (repositoryList == null)
                 throw new ArgumentNullException(nameof(repositoryList));
@@ -37,10 +37,7 @@ namespace mRemoteNG.Credential
 
         public void LoadRepositoryList()
         {
-            foreach (var repository in _loader.Load())
-            {
-                _repositoryList.AddProvider(repository);
-            }
+            foreach (var repository in _loader.Load()) _repositoryList.AddProvider(repository);
         }
 
         public void AddRepository(ICredentialRepository repository)
@@ -72,15 +69,15 @@ namespace mRemoteNG.Credential
         }
 
         private void HandleRepositoriesUpdatedEvent(object sender,
-                                                    CollectionUpdatedEventArgs<ICredentialRepository>
-                                                        collectionUpdatedEventArgs)
+            CollectionUpdatedEventArgs<ICredentialRepository>
+                collectionUpdatedEventArgs)
         {
             SaveRepositoryList();
         }
 
         private void HandleCredentialsUpdatedEvent(object sender,
-                                                   CollectionUpdatedEventArgs<ICredentialRecord>
-                                                       collectionUpdatedEventArgs)
+            CollectionUpdatedEventArgs<ICredentialRecord>
+                collectionUpdatedEventArgs)
         {
             var repo = sender as ICredentialRepository;
             repo?.SaveCredentials(repo.Config.Key);

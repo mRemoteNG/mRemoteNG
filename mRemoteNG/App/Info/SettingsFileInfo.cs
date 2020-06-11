@@ -21,9 +21,9 @@ namespace mRemoteNG.App.Info
         public static string ThemesFileName { get; } = "Themes.xml";
 
         public static string ThemeFolder { get; } =
-            SettingsPath != null ? Path.Combine(SettingsPath, "Themes") : String.Empty;
+            SettingsPath != null ? Path.Combine(SettingsPath, "Themes") : string.Empty;
 
         public static string InstalledThemeFolder { get; } =
-            ExePath != null ? Path.Combine(ExePath, "Themes") : String.Empty;
+            ExePath != null ? Path.Combine(ExePath, "Themes") : string.Empty;
     }
 }

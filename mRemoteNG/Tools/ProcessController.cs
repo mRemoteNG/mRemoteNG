@@ -37,7 +37,7 @@ namespace mRemoteNG.Tools
                 return false;
 
             var nCmdShow = visible ? NativeMethods.SW_SHOW : NativeMethods.SW_HIDE;
-            NativeMethods.ShowWindow(controlHandle, (int)nCmdShow);
+            NativeMethods.ShowWindow(controlHandle, (int) nCmdShow);
             return true;
         }
 
@@ -50,8 +50,8 @@ namespace mRemoteNG.Tools
             if (controlHandle == IntPtr.Zero)
                 return false;
 
-            var result = NativeMethods.SendMessage(controlHandle, NativeMethods.WM_SETTEXT, (IntPtr)0,
-                                                   new StringBuilder(newText));
+            var result = NativeMethods.SendMessage(controlHandle, NativeMethods.WM_SETTEXT, (IntPtr) 0,
+                new StringBuilder(newText));
             return result.ToInt32() == NativeMethods.TRUE;
         }
 
@@ -64,8 +64,8 @@ namespace mRemoteNG.Tools
             if (listBoxHandle == IntPtr.Zero)
                 return false;
 
-            var result = NativeMethods.SendMessage(listBoxHandle, NativeMethods.LB_SELECTSTRING, (IntPtr)(-1),
-                                                   new StringBuilder(itemText));
+            var result = NativeMethods.SendMessage(listBoxHandle, NativeMethods.LB_SELECTSTRING, (IntPtr) (-1),
+                new StringBuilder(itemText));
             return result.ToInt32() != NativeMethods.LB_ERR;
         }
 
@@ -79,7 +79,7 @@ namespace mRemoteNG.Tools
                 return false;
 
             var buttonControlId = NativeMethods.GetDlgCtrlID(buttonHandle);
-            NativeMethods.SendMessage(Handle, NativeMethods.WM_COMMAND, (IntPtr)buttonControlId, buttonHandle);
+            NativeMethods.SendMessage(Handle, NativeMethods.WM_COMMAND, (IntPtr) buttonControlId, buttonHandle);
 
             return true;
         }
@@ -114,14 +114,11 @@ namespace mRemoteNG.Tools
             Handle = IntPtr.Zero;
             var startTicks = Environment.TickCount;
             while (Handle == IntPtr.Zero &&
-                   Environment.TickCount < startTicks + (Settings.Default.MaxPuttyWaitTime * 1000))
+                   Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
             {
                 Process.Refresh();
                 Handle = Process.MainWindowHandle;
-                if (Handle == IntPtr.Zero)
-                {
-                    System.Threading.Thread.Sleep(0);
-                }
+                if (Handle == IntPtr.Zero) System.Threading.Thread.Sleep(0);
             }
 
             return Handle;
@@ -152,7 +149,7 @@ namespace mRemoteNG.Tools
                 else
                 {
                     NativeMethods.SendMessage(control, NativeMethods.WM_GETTEXT, new IntPtr(stringBuilder.Capacity),
-                                              stringBuilder);
+                        stringBuilder);
                     if (stringBuilder.ToString() != text) continue;
                     controlHandle = control;
                     break;
@@ -168,7 +165,7 @@ namespace mRemoteNG.Tools
         {
             if (!disposing) return;
 
-            if(Process != null)
+            if (Process != null)
                 Process.Dispose();
 
             Handle = IntPtr.Zero;

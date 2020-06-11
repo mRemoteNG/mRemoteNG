@@ -25,16 +25,16 @@ namespace mRemoteNG.Tools
             catch (ArgumentException AEx)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "GetIconFromFile failed (Tools.Misc) - using default icon" +
-                                                    Environment.NewLine + AEx.Message,
-                                                    true);
+                    "GetIconFromFile failed (Tools.Misc) - using default icon" +
+                    Environment.NewLine + AEx.Message,
+                    true);
                 return Resources.mRemoteNG_Icon;
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "GetIconFromFile failed (Tools.Misc)" + Environment.NewLine +
-                                                    ex.Message, true);
+                    "GetIconFromFile failed (Tools.Misc)" + Environment.NewLine +
+                    ex.Message, true);
                 return null;
             }
         }
@@ -51,50 +51,47 @@ namespace mRemoteNG.Tools
 
         public static string LeadingZero(string Number)
         {
-            if (Convert.ToInt32(Number) < 10)
-            {
-                return "0" + Number;
-            }
+            if (Convert.ToInt32(Number) < 10) return "0" + Number;
 
             return Number;
         }
 
 
         public static string DBDate(DateTime Dt)
-		{
-			switch (Settings.Default.SQLServerType)
-			{
-				case "mysql":
-					return Dt.ToString("yyyy/MM/dd HH:mm:ss");
-				case "mssql":
-				default:
-					return Dt.ToString("yyyyMMdd HH:mm:ss");
-			}
-		}
+        {
+            switch (Settings.Default.SQLServerType)
+            {
+                case "mysql":
+                    return Dt.ToString("yyyy/MM/dd HH:mm:ss");
+                case "mssql":
+                default:
+                    return Dt.ToString("yyyyMMdd HH:mm:ss");
+            }
+        }
 
-		public static Type DBTimeStampType()
-		{
-			switch (Settings.Default.SQLServerType)
-			{
-				case "mysql":
-					return typeof(MySqlDateTime);
-				case "mssql":
-				default:
-					return typeof(SqlDateTime);
-			}
-		}
+        public static Type DBTimeStampType()
+        {
+            switch (Settings.Default.SQLServerType)
+            {
+                case "mysql":
+                    return typeof(MySqlDateTime);
+                case "mssql":
+                default:
+                    return typeof(SqlDateTime);
+            }
+        }
 
-		public static object DBTimeStampNow()
-		{
-			switch (Settings.Default.SQLServerType)
-			{
-				case "mysql":
-					return new MySqlDateTime(DateTime.Now);
-				case "mssql":
-				default:
-					return DateTime.Now;
-			}
-		}
+        public static object DBTimeStampNow()
+        {
+            switch (Settings.Default.SQLServerType)
+            {
+                case "mysql":
+                    return new MySqlDateTime(DateTime.Now);
+                case "mssql":
+                default:
+                    return DateTime.Now;
+            }
+        }
 
         public static string PrepareValueForDB(string Text)
         {
@@ -123,9 +120,9 @@ namespace mRemoteNG.Tools
                 if (sender != null)
                 {
                     var bmp = new Bitmap(sender.Width, sender.Height, PixelFormat.Format32bppRgb);
-                    Graphics g = Graphics.FromImage(bmp);
+                    var g = Graphics.FromImage(bmp);
                     g.CopyFromScreen(sender.PointToScreen(Point.Empty), Point.Empty, bmp.Size,
-                                     CopyPixelOperation.SourceCopy);
+                        CopyPixelOperation.SourceCopy);
                     return bmp;
                 }
             }
@@ -152,13 +149,13 @@ namespace mRemoteNG.Tools
             }
 
             public override object ConvertTo(ITypeDescriptorContext context,
-                                             CultureInfo culture,
-                                             object value,
-                                             Type destType)
+                CultureInfo culture,
+                object value,
+                Type destType)
             {
                 if (value == null) return null;
                 var fi = _enumType.GetField(Enum.GetName(_enumType, value));
-                var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+                var dna = (DescriptionAttribute) Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
 
                 return dna != null ? dna.Description : value.ToString();
             }
@@ -172,15 +169,12 @@ namespace mRemoteNG.Tools
             {
                 foreach (var fi in _enumType.GetFields())
                 {
-                    var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+                    var dna = (DescriptionAttribute) Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
 
-                    if (dna != null && (string)value == dna.Description)
-                    {
-                        return Enum.Parse(_enumType, fi.Name);
-                    }
+                    if (dna != null && (string) value == dna.Description) return Enum.Parse(_enumType, fi.Name);
                 }
 
-                return value != null ? Enum.Parse(_enumType, (string)value) : null;
+                return value != null ? Enum.Parse(_enumType, (string) value) : null;
             }
         }
 
@@ -200,27 +194,20 @@ namespace mRemoteNG.Tools
             {
                 if (!(value is string)) return base.ConvertFrom(context, culture, value);
                 if (string.Equals(value.ToString(), Language.Yes, StringComparison.CurrentCultureIgnoreCase))
-                {
                     return true;
-                }
 
                 if (string.Equals(value.ToString(), Language.No, StringComparison.CurrentCultureIgnoreCase))
-                {
                     return false;
-                }
 
                 throw new Exception("Values must be \"Yes\" or \"No\"");
             }
 
             public override object ConvertTo(ITypeDescriptorContext context,
-                                             CultureInfo culture,
-                                             object value,
-                                             Type destinationType)
+                CultureInfo culture,
+                object value,
+                Type destinationType)
             {
-                if (destinationType == typeof(string))
-                {
-                    return Convert.ToBoolean(value) ? Language.Yes : Language.No;
-                }
+                if (destinationType == typeof(string)) return Convert.ToBoolean(value) ? Language.Yes : Language.No;
 
                 return base.ConvertTo(context, culture, value, destinationType);
             }

@@ -14,26 +14,14 @@ namespace mRemoteNG.Tools
 
         public static PuttyType GetPuttyType(string filename)
         {
-            if (IsPuttyNg(filename))
-            {
-                return PuttyType.PuttyNg;
-            }
+            if (IsPuttyNg(filename)) return PuttyType.PuttyNg;
 
-            if (IsKitty(filename))
-            {
-                return PuttyType.Kitty;
-            }
+            if (IsKitty(filename)) return PuttyType.Kitty;
 
-            if (IsXming(filename))
-            {
-                return PuttyType.Xming;
-            }
+            if (IsXming(filename)) return PuttyType.Xming;
 
             // Check this last
-            if (IsPutty(filename))
-            {
-                return PuttyType.Putty;
-            }
+            if (IsPutty(filename)) return PuttyType.Putty;
 
             return PuttyType.Unknown;
         }
@@ -53,27 +41,27 @@ namespace mRemoteNG.Tools
         private static bool IsKitty(string filename)
         {
             return !string.IsNullOrEmpty(filename) && File.Exists(filename) && Convert.ToBoolean(
-                                                                                                 FileVersionInfo
-                                                                                                     .GetVersionInfo(filename)
-                                                                                                     .InternalName
-                                                                                                     .Contains("PuTTY") &&
-                                                                                                 FileVersionInfo
-                                                                                                     .GetVersionInfo(filename)
-                                                                                                     .Comments
-                                                                                                     .Contains("KiTTY"));
+                FileVersionInfo
+                    .GetVersionInfo(filename)
+                    .InternalName
+                    .Contains("PuTTY") &&
+                FileVersionInfo
+                    .GetVersionInfo(filename)
+                    .Comments
+                    .Contains("KiTTY"));
         }
 
         private static bool IsXming(string filename)
         {
             return !string.IsNullOrEmpty(filename) && File.Exists(filename) && Convert.ToBoolean(
-                                                                                                 FileVersionInfo
-                                                                                                     .GetVersionInfo(filename)
-                                                                                                     .InternalName
-                                                                                                     .Contains("PuTTY") &&
-                                                                                                 FileVersionInfo
-                                                                                                     .GetVersionInfo(filename)
-                                                                                                     .ProductVersion
-                                                                                                     .Contains("Xming"));
+                FileVersionInfo
+                    .GetVersionInfo(filename)
+                    .InternalName
+                    .Contains("PuTTY") &&
+                FileVersionInfo
+                    .GetVersionInfo(filename)
+                    .ProductVersion
+                    .Contains("Xming"));
         }
 
         public enum PuttyType

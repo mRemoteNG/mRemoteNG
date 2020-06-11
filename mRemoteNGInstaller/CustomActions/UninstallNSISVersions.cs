@@ -8,7 +8,10 @@ namespace CustomActions
     public class UninstallNsisVersions
     {
         private const string RegistryPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
-        private const string RegistryPathWow6432 = "Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
+
+        private const string RegistryPathWow6432 =
+            "Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
+
         private RegistryKey _activeRegistryPath;
 
 
@@ -24,10 +27,7 @@ namespace CustomActions
             var uninstallString = GetLegacyUninstallString();
             var forceNonTempUninstaller = $"_?={uninstallString.Replace("Uninstall.exe", "").Replace(@"""", "")}";
             var silentUninstall = "";
-            if (silent)
-            {
-                silentUninstall = "/S";
-            }
+            if (silent) silentUninstall = "/S";
             var processStartInfo = new ProcessStartInfo(uninstallString)
             {
                 UseShellExecute = true,
@@ -35,14 +35,12 @@ namespace CustomActions
             };
             var uninstallProcess = Process.Start(processStartInfo);
             while (uninstallProcess != null && uninstallProcess.HasExited == false)
-            {
                 Debug.WriteLine("Waiting for uninstaller to exit");
-            }
         }
 
         public bool IsLegacymRemoteNgInstalled()
         {
-            return (_activeRegistryPath != null);
+            return _activeRegistryPath != null;
         }
 
         public string GetLegacyUninstallString()

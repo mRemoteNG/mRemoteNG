@@ -20,10 +20,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         public void Add(params string[] argumentArray)
         {
-            foreach (var argument in argumentArray)
-            {
-                Add(argument);
-            }
+            foreach (var argument in argumentArray) Add(argument);
         }
 
         public void AddFileName(string fileName, bool forceQuotes = false)
@@ -50,10 +47,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         public static string EscapeBackslashes(string argument)
         {
-            if (string.IsNullOrEmpty(argument))
-            {
-                return argument;
-            }
+            if (string.IsNullOrEmpty(argument)) return argument;
 
             // Sequence of backslashes followed by a double quote:
             //     double up all the backslashes and escape the double quote
@@ -62,10 +56,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         public static string EscapeBackslashesForTrailingQuote(string argument)
         {
-            if (string.IsNullOrEmpty(argument))
-            {
-                return argument;
-            }
+            if (string.IsNullOrEmpty(argument)) return argument;
 
             // Sequence of backslashes followed by the end of the string
             // (which will become a double quote):
@@ -75,10 +66,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         public static string QuoteArgument(string argument, bool forceQuotes = false)
         {
-            if (!forceQuotes && !string.IsNullOrEmpty(argument) && !argument.Contains(" "))
-            {
-                return argument;
-            }
+            if (!forceQuotes && !string.IsNullOrEmpty(argument) && !argument.Contains(" ")) return argument;
 
             return "\"" + EscapeBackslashesForTrailingQuote(argument) + "\"";
         }
@@ -96,17 +84,11 @@ namespace mRemoteNG.Tools.Cmdline
         {
             var text = argument.Text;
 
-            if (argument.IsFileName)
-            {
-                text = PrefixFileName(text);
-            }
+            if (argument.IsFileName) text = PrefixFileName(text);
 
             text = EscapeBackslashes(text);
             text = QuoteArgument(text, argument.ForceQuotes);
-            if (escapeForShell)
-            {
-                text = EscapeShellMetacharacters(text);
-            }
+            if (escapeForShell) text = EscapeShellMetacharacters(text);
 
             return text;
         }

@@ -31,8 +31,8 @@ namespace mRemoteNG.Connection.Protocol
             if (_externalTool == null)
             {
                 Runtime.MessageCollector?.AddMessage(MessageClass.ErrorMsg,
-                                                     string.Format(Language.CouldNotFindExternalTool,
-                                                                   InterfaceControl.Info.ExtApp));
+                    string.Format(Language.CouldNotFindExternalTool,
+                        InterfaceControl.Info.ExtApp));
                 return false;
             }
 
@@ -46,7 +46,7 @@ namespace mRemoteNG.Connection.Protocol
             try
             {
                 Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     $"Attempting to start: {_externalTool.DisplayName}", true);
+                    $"Attempting to start: {_externalTool.DisplayName}", true);
 
                 if (_externalTool.TryIntegrate == false)
                 {
@@ -57,8 +57,8 @@ namespace mRemoteNG.Connection.Protocol
                      * Close();
                      */
                     Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                         $"Assuming no other errors/exceptions occurred immediately before this message regarding {_externalTool.DisplayName}, the next \"closed by user\" message can be ignored",
-                                                         true);
+                        $"Assuming no other errors/exceptions occurred immediately before this message regarding {_externalTool.DisplayName}, the next \"closed by user\" message can be ignored",
+                        true);
                     return false;
                 }
 
@@ -81,31 +81,25 @@ namespace mRemoteNG.Connection.Protocol
                 _process.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
 
                 var startTicks = Environment.TickCount;
-                while (_handle.ToInt32() == 0 &
-                       Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
+                while ((_handle.ToInt32() == 0) &
+                       (Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000))
                 {
                     _process.Refresh();
-                    if (_process.MainWindowTitle != "Default IME")
-                    {
-                        _handle = _process.MainWindowHandle;
-                    }
+                    if (_process.MainWindowTitle != "Default IME") _handle = _process.MainWindowHandle;
 
-                    if (_handle.ToInt32() == 0)
-                    {
-                        Thread.Sleep(0);
-                    }
+                    if (_handle.ToInt32() == 0) Thread.Sleep(0);
                 }
 
                 NativeMethods.SetParent(_handle, InterfaceControl.Handle);
                 Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg, Language.IntAppStuff, true);
                 Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     string.Format(Language.IntAppHandle, _handle), true);
+                    string.Format(Language.IntAppHandle, _handle), true);
                 Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     string.Format(Language.IntAppTitle, _process.MainWindowTitle),
-                                                     true);
+                    string.Format(Language.IntAppTitle, _process.MainWindowTitle),
+                    true);
                 Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     string.Format(Language.PanelHandle,
-                                                                   InterfaceControl.Parent.Handle), true);
+                    string.Format(Language.PanelHandle,
+                        InterfaceControl.Parent.Handle), true);
 
                 Resize(this, new EventArgs());
                 base.Connect();
@@ -136,10 +130,10 @@ namespace mRemoteNG.Connection.Protocol
             {
                 if (InterfaceControl.Size == Size.Empty) return;
                 NativeMethods.MoveWindow(_handle, -SystemInformation.FrameBorderSize.Width,
-                                         -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height),
-                                         InterfaceControl.Width + SystemInformation.FrameBorderSize.Width * 2,
-                                         InterfaceControl.Height + SystemInformation.CaptionHeight +
-                                         SystemInformation.FrameBorderSize.Height * 2, true);
+                    -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height),
+                    InterfaceControl.Width + SystemInformation.FrameBorderSize.Width * 2,
+                    InterfaceControl.Height + SystemInformation.CaptionHeight +
+                    SystemInformation.FrameBorderSize.Height * 2, true);
             }
             catch (Exception ex)
             {
@@ -157,10 +151,7 @@ namespace mRemoteNG.Connection.Protocol
             {
                 try
                 {
-                    if (!_process.HasExited)
-                    {
-                        _process.Kill();
-                    }
+                    if (!_process.HasExited) _process.Kill();
                 }
                 catch (Exception ex)
                 {
@@ -169,10 +160,7 @@ namespace mRemoteNG.Connection.Protocol
 
                 try
                 {
-                    if (!_process.HasExited)
-                    {
-                        _process.Dispose();
-                    }
+                    if (!_process.HasExited) _process.Dispose();
                 }
                 catch (Exception ex)
                 {

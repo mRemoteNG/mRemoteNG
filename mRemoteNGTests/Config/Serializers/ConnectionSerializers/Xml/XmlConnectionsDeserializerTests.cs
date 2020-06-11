@@ -29,14 +29,16 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             _connectionTreeModel = null;
         }
 
-        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+            nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
         public void DeserializingCreatesRootNode(Datagram testData)
         {
             Setup(testData.ConfCons, testData.Password);
             Assert.That(_connectionTreeModel.RootNodes, Is.Not.Empty);
         }
 
-        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+            nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
         public void RootNodeHasThreeChildren(Datagram testData)
         {
             Setup(testData.ConfCons, testData.Password);
@@ -44,7 +46,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             Assert.That(connectionRoot.Children.Count, Is.EqualTo(3));
         }
 
-        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+            nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
         public void RootContainsFolder1(Datagram testData)
         {
             Setup(testData.ConfCons, testData.Password);
@@ -52,7 +55,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             Assert.That(ContainsNodeNamed("Folder1", connectionRoot.Children), Is.True);
         }
 
-        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+            nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
         public void Folder1ContainsThreeConnections(Datagram testData)
         {
             Setup(testData.ConfCons, testData.Password);
@@ -62,7 +66,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             Assert.That(folder1ConnectionCount, Is.EqualTo(3));
         }
 
-        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+            nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
         public void Folder2ContainsThreeNodes(Datagram testData)
         {
             Setup(testData.ConfCons, testData.Password);
@@ -72,7 +77,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             Assert.That(folder1Count, Is.EqualTo(3));
         }
 
-        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+            nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
         public void Folder21HasTwoNodes(Datagram testData)
         {
             Setup(testData.ConfCons, testData.Password);
@@ -82,7 +88,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             Assert.That(folder21.Children.Count, Is.EqualTo(2));
         }
 
-        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+            nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
         public void Folder211HasOneConnection(Datagram testData)
         {
             Setup(testData.ConfCons, testData.Password);
@@ -94,7 +101,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             Assert.That(connectionCount, Is.EqualTo(1));
         }
 
-        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+            nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
         public void Folder22InheritsUsername(Datagram testData)
         {
             Setup(testData.ConfCons, testData.Password);
@@ -104,7 +112,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             Assert.That(folder22.Inheritance.Username, Is.True);
         }
 
-        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData), nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
+        [TestCaseSource(typeof(XmlConnectionsDeserializerFixtureData),
+            nameof(XmlConnectionsDeserializerFixtureData.FixtureParams))]
         public void ExpandedPropertyGetsDeserialized(Datagram testData)
         {
             Setup(testData.ConfCons, testData.Password);
@@ -119,7 +128,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 
         private ContainerInfo GetFolderNamed(string name, IEnumerable<ConnectionInfo> list)
         {
-            var folder = list.First(node => (node is ContainerInfo && node.Name == name)) as ContainerInfo;
+            var folder = list.First(node => node is ContainerInfo && node.Name == name) as ContainerInfo;
             return folder;
         }
     }
@@ -131,13 +140,19 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             get
             {
                 yield return new TestCaseData(new Datagram("confCons v2.5", Resources.confCons_v2_5, "mR3m"));
-                yield return new TestCaseData(new Datagram("confCons v2.5 fullencryption", Resources.confCons_v2_5_fullencryption, "mR3m"));
-                yield return new TestCaseData(new Datagram("confCons v2.5 custompassword,fullencryption", Resources.confCons_v2_5_passwordis_Password_fullencryption, "Password"));
+                yield return new TestCaseData(new Datagram("confCons v2.5 fullencryption",
+                    Resources.confCons_v2_5_fullencryption, "mR3m"));
+                yield return new TestCaseData(new Datagram("confCons v2.5 custompassword,fullencryption",
+                    Resources.confCons_v2_5_passwordis_Password_fullencryption, "Password"));
                 yield return new TestCaseData(new Datagram("confCons v2.6", Resources.confCons_v2_6, "mR3m"));
-                yield return new TestCaseData(new Datagram("confCons v2.6 5k Iterations", Resources.confCons_v2_6_5k_iterations, "mR3m"));
-                yield return new TestCaseData(new Datagram("confCons v2.6 fullencryption", Resources.confCons_v2_6_fullencryption, "mR3m"));
-                yield return new TestCaseData(new Datagram("confCons v2.6 custompassword", Resources.confCons_v2_6_passwordis_Password, "Password"));
-                yield return new TestCaseData(new Datagram("confCons v2.6 custompassword,fullencryption", Resources.confCons_v2_6_passwordis_Password_fullencryption, "Password"));
+                yield return new TestCaseData(new Datagram("confCons v2.6 5k Iterations",
+                    Resources.confCons_v2_6_5k_iterations, "mR3m"));
+                yield return new TestCaseData(new Datagram("confCons v2.6 fullencryption",
+                    Resources.confCons_v2_6_fullencryption, "mR3m"));
+                yield return new TestCaseData(new Datagram("confCons v2.6 custompassword",
+                    Resources.confCons_v2_6_passwordis_Password, "Password"));
+                yield return new TestCaseData(new Datagram("confCons v2.6 custompassword,fullencryption",
+                    Resources.confCons_v2_6_passwordis_Password_fullencryption, "Password"));
             }
         }
     }

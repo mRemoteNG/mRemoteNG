@@ -21,9 +21,9 @@ namespace mRemoteNG.App
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr FindWindowEx(IntPtr parentHandle,
-                                                   IntPtr childAfter,
-                                                   string lclassName,
-                                                   string windowTitle);
+            IntPtr childAfter,
+            string lclassName,
+            string windowTitle);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr GetForegroundWindow();
@@ -33,10 +33,10 @@ namespace mRemoteNG.App
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool InsertMenu(IntPtr hMenu,
-                                               int uPosition,
-                                               int uFlags,
-                                               IntPtr uIDNewItem,
-                                               string lpNewItem);
+            int uPosition,
+            int uFlags,
+            IntPtr uIDNewItem,
+            string lpNewItem);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int IsIconic(IntPtr hWnd);
@@ -64,9 +64,9 @@ namespace mRemoteNG.App
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr SendMessage([In] IntPtr hWnd,
-                                                  [In] uint msg,
-                                                  [Out] StringBuilder wParam,
-                                                  [In] IntPtr lParam);
+            [In] uint msg,
+            [Out] StringBuilder wParam,
+            [In] IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
@@ -76,10 +76,10 @@ namespace mRemoteNG.App
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetMenuItemBitmaps(IntPtr hMenu,
-                                                       int uPosition,
-                                                       int uFlags,
-                                                       IntPtr hBitmapUnchecked,
-                                                       IntPtr hBitmapChecked);
+            int uPosition,
+            int uFlags,
+            IntPtr hBitmapUnchecked,
+            IntPtr hBitmapChecked);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
@@ -155,7 +155,7 @@ namespace mRemoteNG.App
 
         public static int MAKELONG(int wLow, int wHigh)
         {
-            return wLow | wHigh << 16;
+            return wLow | (wHigh << 16);
         }
 
         public static int MAKELPARAM(ref int wLow, ref int wHigh)
@@ -191,7 +191,7 @@ namespace mRemoteNG.App
 
         #region GetWindowLong
 
-        public const int GWL_STYLE = (-16);
+        public const int GWL_STYLE = -16;
 
         #endregion
 

@@ -46,7 +46,7 @@ namespace mRemoteNG.App.Initialization
                 foreach (var o in new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem WHERE Primary=True")
                     .Get())
                 {
-                    var managementObject = (ManagementObject)o;
+                    var managementObject = (ManagementObject) o;
                     osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
                     servicePack = GetOSServicePack(servicePack, managementObject);
                 }
@@ -63,10 +63,7 @@ namespace mRemoteNG.App.Initialization
         private string GetOSServicePack(string servicePack, ManagementObject managementObject)
         {
             var servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
-            if (servicePackNumber != 0)
-            {
-                servicePack = $"Service Pack {servicePackNumber}";
-            }
+            if (servicePackNumber != 0) servicePack = $"Service Pack {servicePackNumber}";
 
             return servicePack;
         }
@@ -76,10 +73,11 @@ namespace mRemoteNG.App.Initialization
             var architecture = string.Empty;
             try
             {
-                foreach (var o in new ManagementObjectSearcher("SELECT AddressWidth FROM Win32_Processor WHERE DeviceID=\'CPU0\'")
+                foreach (var o in new ManagementObjectSearcher(
+                        "SELECT AddressWidth FROM Win32_Processor WHERE DeviceID=\'CPU0\'")
                     .Get())
                 {
-                    var managementObject = (ManagementObject)o;
+                    var managementObject = (ManagementObject) o;
                     var addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"));
                     architecture = $"{addressWidth}-bit";
                 }

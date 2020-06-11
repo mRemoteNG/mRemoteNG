@@ -57,7 +57,7 @@ namespace mRemoteNG.UI.Controls
         private void AdTree_Load(object sender, EventArgs e)
         {
             tvActiveDirectory.Nodes.Clear();
-            var treeNode = new TreeNode(Domain) { Tag = "" };
+            var treeNode = new TreeNode(Domain) {Tag = ""};
             tvActiveDirectory.Nodes.Add(treeNode);
             AddTreeNodes(treeNode);
             tvActiveDirectory.Nodes[0].Expand();

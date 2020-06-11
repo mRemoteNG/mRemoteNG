@@ -30,7 +30,7 @@ namespace mRemoteNG.Security.PasswordCreation
 
             SpecialCharacters = specialCharacters;
             ConstraintHint = string.Format(Language.PasswordConstainsSpecialCharactersConstraintHint, _minimumCount,
-                                           string.Concat(SpecialCharacters));
+                string.Concat(SpecialCharacters));
         }
 
         public bool Validate(SecureString password)

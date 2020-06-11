@@ -69,35 +69,37 @@ namespace mRemoteNG.UI.Controls.Base
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
             {
                 itemBrush = new SolidBrush(
-                                           _themeManager
-                                               .ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground"));
+                    _themeManager
+                        .ActiveTheme.ExtendedPalette.getColor("List_Item_Selected_Foreground"));
                 e.Graphics.FillRectangle(
-                                         new SolidBrush(_themeManager
-                                                        .ActiveTheme.ExtendedPalette
-                                                        .getColor("List_Item_Selected_Background")),
-                                         e.Bounds);
+                    new SolidBrush(_themeManager
+                        .ActiveTheme.ExtendedPalette
+                        .getColor("List_Item_Selected_Background")),
+                    e.Bounds);
             }
             else
+            {
                 e.Graphics.FillRectangle(
-                                         new SolidBrush(_themeManager
-                                                        .ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")),
-                                         e.Bounds);
+                    new SolidBrush(_themeManager
+                        .ActiveTheme.ExtendedPalette.getColor("ComboBox_Background")),
+                    e.Bounds);
+            }
 
             if (Items.Count > 0)
             {
                 if (string.IsNullOrEmpty(DisplayMember))
+                {
                     e.Graphics.DrawString(Items[index].ToString(), e.Font, itemBrush, e.Bounds,
-                                          StringFormat.GenericDefault);
+                        StringFormat.GenericDefault);
+                }
                 else
                 {
                     if (Items[index].GetType().GetProperty(DisplayMember) != null)
-                    {
                         e.Graphics.DrawString(
-                                              Items[index]
-                                                  .GetType().GetProperty(DisplayMember)?.GetValue(Items[index], null)
-                                                  .ToString(),
-                                              e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
-                    }
+                            Items[index]
+                                .GetType().GetProperty(DisplayMember)?.GetValue(Items[index], null)
+                                .ToString(),
+                            e.Font, itemBrush, e.Bounds, StringFormat.GenericDefault);
                 }
             }
 
@@ -155,18 +157,18 @@ namespace mRemoteNG.UI.Controls.Base
             //Text
             var textRect = new Rectangle(2, 2, Width - 20, Height - 4);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, Fore, Back,
-                                  TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
         }
 
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // NGComboBox
             // 
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                                System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResumeLayout(false);
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular,
+                GraphicsUnit.Point, (byte) 0);
+            ResumeLayout(false);
         }
     }
 }

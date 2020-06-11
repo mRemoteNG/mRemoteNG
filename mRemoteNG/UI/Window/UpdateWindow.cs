@@ -83,10 +83,7 @@ namespace mRemoteNG.UI.Window
         private void pbUpdateImage_Click(object sender, EventArgs e)
         {
             var linkUri = pbUpdateImage.Tag as Uri;
-            if (linkUri == null || linkUri.IsFile || linkUri.IsUnc || linkUri.IsLoopback)
-            {
-                return;
-            }
+            if (linkUri == null || linkUri.IsFile || linkUri.IsUnc || linkUri.IsLoopback) return;
 
             Process.Start(linkUri.ToString());
         }
@@ -98,14 +95,9 @@ namespace mRemoteNG.UI.Window
         private void CheckForUpdate()
         {
             if (_appUpdate == null)
-            {
                 _appUpdate = new AppUpdater();
-                //_appUpdate.Load += _appUpdate.Update_Load;
-            }
-            else if (_appUpdate.IsGetUpdateInfoRunning)
-            {
-                return;
-            }
+            //_appUpdate.Load += _appUpdate.Update_Load;
+            else if (_appUpdate.IsGetUpdateInfoRunning) return;
 
             lblStatus.Text = Language.CheckForUpdates;
             lblStatus.ForeColor = SystemColors.WindowText;
@@ -140,15 +132,9 @@ namespace mRemoteNG.UI.Window
                 lblInstalledVersionLabel.Visible = true;
                 btnCheckForUpdate.Visible = true;
 
-                if (e.Cancelled)
-                {
-                    return;
-                }
+                if (e.Cancelled) return;
 
-                if (e.Error != null)
-                {
-                    throw e.Error;
-                }
+                if (e.Error != null) throw e.Error;
 
                 if (_appUpdate.IsUpdateAvailable())
                 {
@@ -278,19 +264,17 @@ namespace mRemoteNG.UI.Window
                     throw e.Error;
 
                 if (Runtime.IsPortableEdition)
+                {
                     MessageBox.Show(Language.UpdatePortableDownloadComplete, Language.CheckForUpdates,
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 else
                 {
                     if (MessageBox.Show(Language.UpdateDownloadComplete, Language.CheckForUpdates,
-                                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-                    {
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                         Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
-                    }
                     else
-                    {
                         File.Delete(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
-                    }
                 }
             }
             catch (Exception ex)

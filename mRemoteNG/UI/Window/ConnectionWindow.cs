@@ -31,10 +31,7 @@ namespace mRemoteNG.UI.Window
 
         public ConnectionWindow(DockContent panel, string formText = "")
         {
-            if (formText == "")
-            {
-                formText = Language.NewPanel;
-            }
+            if (formText == "") formText = Language.NewPanel;
 
             WindowType = WindowType.Connection;
             DockPnl = panel;
@@ -151,7 +148,7 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("AddConnectionTab (UI.Window.ConnectionWindow) failed",
-                                                             ex);
+                    ex);
             }
 
             return null;
@@ -166,8 +163,8 @@ namespace mRemoteNG.UI.Window
             {
                 foreach (var dockContent in connDock.DocumentsToArray())
                 {
-                    var tab = (ConnectionTab)dockContent;
-                    controlList.Add((InterfaceControl)tab.Tag);
+                    var tab = (ConnectionTab) dockContent;
+                    controlList.Add((InterfaceControl) tab.Tag);
                 }
 
                 foreach (var iControl in controlList)
@@ -217,7 +214,7 @@ namespace mRemoteNG.UI.Window
                 DefaultRenderer = _toolStripProfessionalRenderer
             };
             vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version,
-                                         ThemeManager.getInstance().ActiveTheme.Theme);
+                ThemeManager.getInstance().ActiveTheme.Theme);
 
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
             connDock.DockBackColor =
@@ -287,21 +284,18 @@ namespace mRemoteNG.UI.Window
         private void Connection_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!FrmMain.Default.IsClosing &&
-                (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All & connDock.Documents.Any() ||
-                 Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple &
-                 connDock.Documents.Count() > 1))
+                ((Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.All) & connDock.Documents.Any() ||
+                 (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Multiple) &
+                 (connDock.Documents.Count() > 1)))
             {
                 var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
-                                                    string
-                                                        .Format(Language.ConfirmCloseConnectionPanelMainInstruction,
-                                                                Text), "", "", "",
-                                                    Language.CheckboxDoNotShowThisMessageAgain,
-                                                    ETaskDialogButtons.YesNo, ESysIcons.Question,
-                                                    ESysIcons.Question);
-                if (CTaskDialog.VerificationChecked)
-                {
-                    Settings.Default.ConfirmCloseConnection--;
-                }
+                    string
+                        .Format(Language.ConfirmCloseConnectionPanelMainInstruction,
+                            Text), "", "", "",
+                    Language.CheckboxDoNotShowThisMessageAgain,
+                    ETaskDialogButtons.YesNo, ESysIcons.Question,
+                    ESysIcons.Question);
+                if (CTaskDialog.VerificationChecked) Settings.Default.ConfirmCloseConnection--;
 
                 if (result == DialogResult.No)
                 {
@@ -314,7 +308,7 @@ namespace mRemoteNG.UI.Window
             {
                 foreach (var dockContent in connDock.Documents.ToArray())
                 {
-                    var tabP = (ConnectionTab)dockContent;
+                    var tabP = (ConnectionTab) dockContent;
                     if (tabP.Tag == null) continue;
                     tabP.silentClose = true;
                     tabP.Close();
@@ -323,7 +317,7 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("UI.Window.Connection.Connection_FormClosing() failed",
-                                                             ex);
+                    ex);
             }
         }
 
@@ -375,7 +369,7 @@ namespace mRemoteNG.UI.Window
 
                 if (interfaceControl.Info.Protocol == ProtocolType.RDP)
                 {
-                    var rdp = (RdpProtocol6)interfaceControl.Protocol;
+                    var rdp = (RdpProtocol6) interfaceControl.Protocol;
                     cmenTabFullscreen.Visible = true;
                     cmenTabFullscreen.Checked = rdp.Fullscreen;
                     cmenTabSmartSize.Visible = true;
@@ -389,7 +383,7 @@ namespace mRemoteNG.UI.Window
 
                 if (interfaceControl.Info.Protocol == ProtocolType.VNC)
                 {
-                    var vnc = (ProtocolVNC)interfaceControl.Protocol;
+                    var vnc = (ProtocolVNC) interfaceControl.Protocol;
                     cmenTabSendSpecialKeys.Visible = true;
                     cmenTabSmartSize.Visible = true;
                     cmenTabStartChat.Visible = true;
@@ -405,11 +399,9 @@ namespace mRemoteNG.UI.Window
                     cmenTabTransferFile.Visible = false;
                 }
 
-                if (interfaceControl.Info.Protocol == ProtocolType.SSH1 |
-                    interfaceControl.Info.Protocol == ProtocolType.SSH2)
-                {
+                if ((interfaceControl.Info.Protocol == ProtocolType.SSH1) |
+                    (interfaceControl.Info.Protocol == ProtocolType.SSH2))
                     cmenTabTransferFile.Visible = true;
-                }
 
                 cmenTabPuttySettings.Visible = interfaceControl.Protocol is PuttyBase;
 
@@ -418,7 +410,7 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("ShowHideMenuButtons (UI.Window.ConnectionWindow) failed",
-                                                             ex);
+                    ex);
             }
         }
 
@@ -455,8 +447,8 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
 
-                if (interfaceControl.Info.Protocol == ProtocolType.SSH1 |
-                    interfaceControl.Info.Protocol == ProtocolType.SSH2)
+                if ((interfaceControl.Info.Protocol == ProtocolType.SSH1) |
+                    (interfaceControl.Info.Protocol == ProtocolType.SSH2))
                     SshTransferFile();
                 else if (interfaceControl.Info.Protocol == ProtocolType.VNC)
                     VncTransferFile();
@@ -572,7 +564,7 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("ToggleFullscreen (UI.Window.ConnectionWindow) failed",
-                                                             ex);
+                    ex);
             }
         }
 
@@ -587,8 +579,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(
-                                                             "ShowPuttySettingsDialog (UI.Window.ConnectionWindow) failed",
-                                                             ex);
+                    "ShowPuttySettingsDialog (UI.Window.ConnectionWindow) failed",
+                    ex);
             }
         }
 
@@ -617,15 +609,15 @@ namespace mRemoteNG.UI.Window
                         Image = externalTool.Image ?? Resources.mRemoteNG_Icon.ToBitmap()
                     };
 
-                    nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem)sender).Tag as ExternalTool);
+                    nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem) sender).Tag as ExternalTool);
                     cmenTabExternalApps.DropDownItems.Add(nItem);
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionWindow)",
-                                                                ex);
+                    "cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionWindow)",
+                    ex);
             }
         }
 
@@ -639,15 +631,15 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(
-                                                             "cmenTabExternalAppsEntry_Click failed (UI.Window.ConnectionWindow)",
-                                                             ex);
+                    "cmenTabExternalAppsEntry_Click failed (UI.Window.ConnectionWindow)",
+                    ex);
             }
         }
 
 
         private void CloseTabMenu()
         {
-            var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            var selectedTab = (ConnectionTab) GetInterfaceControl()?.Parent;
             if (selectedTab == null) return;
 
             try
@@ -662,34 +654,25 @@ namespace mRemoteNG.UI.Window
 
         private void CloseOtherTabs()
         {
-            var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            var selectedTab = (ConnectionTab) GetInterfaceControl()?.Parent;
             if (selectedTab == null) return;
-            if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple)
+            if (Settings.Default.ConfirmCloseConnection == (int) ConfirmCloseEnum.Multiple)
             {
                 var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
-                                                    string.Format(Language.ConfirmCloseConnectionOthersInstruction,
-                                                                  selectedTab.TabText), "", "", "",
-                                                    Language.CheckboxDoNotShowThisMessageAgain,
-                                                    ETaskDialogButtons.YesNo, ESysIcons.Question,
-                                                    ESysIcons.Question);
-                if (CTaskDialog.VerificationChecked)
-                {
-                    Settings.Default.ConfirmCloseConnection--;
-                }
+                    string.Format(Language.ConfirmCloseConnectionOthersInstruction,
+                        selectedTab.TabText), "", "", "",
+                    Language.CheckboxDoNotShowThisMessageAgain,
+                    ETaskDialogButtons.YesNo, ESysIcons.Question,
+                    ESysIcons.Question);
+                if (CTaskDialog.VerificationChecked) Settings.Default.ConfirmCloseConnection--;
 
-                if (result == DialogResult.No)
-                {
-                    return;
-                }
+                if (result == DialogResult.No) return;
             }
 
             foreach (var dockContent in connDock.DocumentsToArray())
             {
-                var tab = (ConnectionTab)dockContent;
-                if (selectedTab != tab)
-                {
-                    tab.Close();
-                }
+                var tab = (ConnectionTab) dockContent;
+                if (selectedTab != tab) tab.Close();
             }
         }
 
@@ -697,7 +680,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+                var selectedTab = (ConnectionTab) GetInterfaceControl()?.Parent;
                 if (selectedTab == null) return;
                 var dockPane = selectedTab.Pane;
 
@@ -705,7 +688,7 @@ namespace mRemoteNG.UI.Window
                 var connectionsToClose = new List<ConnectionTab>();
                 foreach (var dockContent in dockPane.Contents)
                 {
-                    var tab = (ConnectionTab)dockContent;
+                    var tab = (ConnectionTab) dockContent;
                     if (pastTabToKeepAlive)
                         connectionsToClose.Add(tab);
 
@@ -713,10 +696,7 @@ namespace mRemoteNG.UI.Window
                         pastTabToKeepAlive = true;
                 }
 
-                foreach (var tab in connectionsToClose)
-                {
-                    tab.Close();
-                }
+                foreach (var tab in connectionsToClose) tab.Close();
             }
             catch (Exception ex)
             {
@@ -746,7 +726,7 @@ namespace mRemoteNG.UI.Window
                 if (interfaceControl == null)
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                        "Reconnect (UI.Window.ConnectionWindow) failed. Could not find InterfaceControl.");
+                        "Reconnect (UI.Window.ConnectionWindow) failed. Could not find InterfaceControl.");
                     return;
                 }
 
@@ -766,12 +746,12 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
                 using (var frmInputBox = new FrmInputBox(Language.NewTitle, Language.NewTitle,
-                                                         ((ConnectionTab)interfaceControl.Parent).TabText))
+                    ((ConnectionTab) interfaceControl.Parent).TabText))
                 {
                     var dr = frmInputBox.ShowDialog();
                     if (dr != DialogResult.OK) return;
                     if (!string.IsNullOrEmpty(frmInputBox.returnValue))
-                        ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&");
+                        ((ConnectionTab) interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&");
                 }
             }
             catch (Exception ex)

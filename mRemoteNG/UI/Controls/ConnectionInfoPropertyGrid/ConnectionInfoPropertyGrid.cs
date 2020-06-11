@@ -20,7 +20,9 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 {
     public partial class ConnectionInfoPropertyGrid : FilteredPropertyGrid.FilteredPropertyGrid
     {
-        private readonly Dictionary<Type, IEnumerable<PropertyInfo>> _propertyCache = new Dictionary<Type, IEnumerable<PropertyInfo>>();
+        private readonly Dictionary<Type, IEnumerable<PropertyInfo>> _propertyCache =
+            new Dictionary<Type, IEnumerable<PropertyInfo>>();
+
         private ConnectionInfo _selectedConnectionInfo;
         private PropertyMode _propertyMode;
 
@@ -119,20 +121,16 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 if (RootNodeSelected && PropertyMode == PropertyMode.Connection)
                 {
                     if (SelectedConnectionInfo is RootPuttySessionsNodeInfo)
-                    {
                         BrowsableProperties = new[]
                         {
                             nameof(RootPuttySessionsNodeInfo.Name)
                         };
-                    }
                     else if (SelectedConnectionInfo is RootNodeInfo)
-                    {
                         BrowsableProperties = new[]
                         {
                             nameof(RootNodeInfo.Name),
                             nameof(RootNodeInfo.Password)
                         };
-                    }
 
                     Refresh();
                     return;
@@ -141,10 +139,10 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 // set all browsable properties valid for this connection's protocol
                 BrowsableProperties =
                     GetPropertiesForGridObject(SelectedObject)
-                    .Where(property =>
-                        IsValidForProtocol(property, SelectedConnectionInfo.Protocol, IsShowingInheritance))
-                    .Select(property => property.Name)
-                    .ToArray();
+                        .Where(property =>
+                            IsValidForProtocol(property, SelectedConnectionInfo.Protocol, IsShowingInheritance))
+                        .Select(property => property.Name)
+                        .ToArray();
 
                 var strHide = new List<string>();
 
@@ -217,9 +215,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             var strHide = new List<string>();
 
             if (SelectedConnectionInfo.RDPMinutesToIdleTimeout <= 0)
-            {
                 strHide.Add(nameof(AbstractConnectionRecord.RDPAlertIdleTimeout));
-            }
 
             if (SelectedConnectionInfo.RDGatewayUsageMethod == RDGatewayUsageMethod.Never)
             {
@@ -239,14 +235,10 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
             if (!(SelectedConnectionInfo.Resolution == RDPResolutions.FitToWindow ||
                   SelectedConnectionInfo.Resolution == RDPResolutions.Fullscreen))
-            {
                 strHide.Add(nameof(AbstractConnectionRecord.AutomaticResize));
-            }
 
             if (SelectedConnectionInfo.RedirectSound != RDPSounds.BringToThisComputer)
-            {
                 strHide.Add(nameof(AbstractConnectionRecord.SoundQuality));
-            }
 
             if (!SelectedConnectionInfo.UseVmId)
             {
@@ -283,17 +275,11 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 return;
 
             if (e.ChangedItem.Label == Language.Protocol)
-            {
                 SelectedConnectionInfo.SetDefaultPort();
-            }
             else if (e.ChangedItem.Label == Language.Name)
-            {
                 if (Settings.Default.SetHostnameLikeDisplayName)
-                {
                     if (!string.IsNullOrEmpty(SelectedConnectionInfo.Name))
                         SelectedConnectionInfo.Hostname = SelectedConnectionInfo.Name;
-                }
-            }
 
             if (IsShowingDefaultProperties)
                 DefaultConnectionInfo.Instance.SaveTo(Settings.Default, a => "ConDefault" + a);

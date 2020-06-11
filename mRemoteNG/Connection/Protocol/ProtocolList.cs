@@ -16,7 +16,7 @@ namespace mRemoteNG.Connection.Protocol
                 if (@base != null)
                     return @base;
                 if (index is int)
-                    return (ProtocolBase)List[Convert.ToInt32(index)];
+                    return (ProtocolBase) List[Convert.ToInt32(index)];
                 return null;
             }
         }
@@ -31,18 +31,15 @@ namespace mRemoteNG.Connection.Protocol
         {
             List.Add(cProt);
             RaiseCollectionChangedEvent(this,
-                                        new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cProt));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cProt));
         }
 
         public void AddRange(ProtocolBase[] cProt)
         {
-            foreach (var cP in cProt)
-            {
-                List.Add(cP);
-            }
+            foreach (var cP in cProt) List.Add(cP);
 
             RaiseCollectionChangedEvent(this,
-                                        new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cProt));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cProt));
         }
 
         public void Remove(ProtocolBase cProt)
@@ -54,8 +51,8 @@ namespace mRemoteNG.Connection.Protocol
 
                 List.Remove(cProt);
                 RaiseCollectionChangedEvent(this,
-                                            new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
-                                                                                 cProt));
+                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                        cProt));
             }
             catch (Exception)
             {
@@ -69,7 +66,7 @@ namespace mRemoteNG.Connection.Protocol
 
             List.Clear();
             RaiseCollectionChangedEvent(this,
-                                        new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;

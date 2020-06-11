@@ -31,7 +31,10 @@ namespace mRemoteNG.UI.Window
         }
 
         [Conditional("PORTABLE")]
-        private void AddPortableString() => lblTitle.Text += $@" {Language.PortableEdition}";
+        private void AddPortableString()
+        {
+            lblTitle.Text += $@" {Language.PortableEdition}";
+        }
 
         private void ApplyTheme()
         {

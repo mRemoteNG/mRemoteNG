@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Controls
             // cMenTree
             // 
             Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
-                                           System.Drawing.GraphicsUnit.Point, 0);
+                System.Drawing.GraphicsUnit.Point, 0);
             Items.AddRange(new ToolStripItem[]
             {
                 _cMenTreeConnect,
@@ -441,31 +441,21 @@ namespace mRemoteNG.UI.Controls
                 Enabled = true;
                 EnableMenuItemsRecursive(Items);
                 if (_connectionTree.SelectedNode is RootPuttySessionsNodeInfo)
-                {
                     ShowHideMenuItemsForRootPuttyNode();
-                }
                 else if (_connectionTree.SelectedNode is RootNodeInfo)
-                {
                     ShowHideMenuItemsForRootConnectionNode();
-                }
                 else if (_connectionTree.SelectedNode is ContainerInfo containerInfo)
-                {
                     ShowHideMenuItemsForContainer(containerInfo);
-                }
                 else if (_connectionTree.SelectedNode is PuttySessionInfo puttyNode)
-                {
                     ShowHideMenuItemsForPuttyNode(puttyNode);
-                }
                 else
-                {
                     ShowHideMenuItemsForConnectionNode(_connectionTree.SelectedNode);
-                }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "ShowHideMenuItems (UI.Controls.ConnectionContextMenu) failed",
-                                                                ex);
+                    "ShowHideMenuItems (UI.Controls.ConnectionContextMenu) failed",
+                    ex);
             }
         }
 
@@ -527,7 +517,7 @@ namespace mRemoteNG.UI.Controls
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+            if (!((connectionInfo.Protocol == ProtocolType.SSH1) | (connectionInfo.Protocol == ProtocolType.SSH2)))
                 _cMenTreeToolsTransferFile.Enabled = false;
 
             _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
@@ -548,10 +538,10 @@ namespace mRemoteNG.UI.Controls
             if (connectionInfo.OpenConnections.Count == 0)
                 _cMenTreeDisconnect.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+            if (!((connectionInfo.Protocol == ProtocolType.SSH1) | (connectionInfo.Protocol == ProtocolType.SSH2)))
                 _cMenTreeToolsTransferFile.Enabled = false;
 
-            if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.ICA))
+            if (!((connectionInfo.Protocol == ProtocolType.RDP) | (connectionInfo.Protocol == ProtocolType.ICA)))
             {
                 _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
                 _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
@@ -576,7 +566,7 @@ namespace mRemoteNG.UI.Controls
 
         internal void EnableShortcutKeys()
         {
-            _cMenTreeConnect.ShortcutKeys = ((Keys.Control | Keys.Shift) | Keys.C);
+            _cMenTreeConnect.ShortcutKeys = Keys.Control | Keys.Shift | Keys.C;
             _cMenTreeDuplicate.ShortcutKeys = Keys.Control | Keys.D;
             _cMenTreeRename.ShortcutKeys = Keys.F2;
             _cMenTreeDelete.ShortcutKeys = Keys.Delete;
@@ -589,16 +579,10 @@ namespace mRemoteNG.UI.Controls
             foreach (ToolStripItem item in items)
             {
                 var menuItem = item as ToolStripMenuItem;
-                if (menuItem == null)
-                {
-                    continue;
-                }
+                if (menuItem == null) continue;
 
                 menuItem.Enabled = enable;
-                if (menuItem.HasDropDownItems)
-                {
-                    EnableMenuItemsRecursive(menuItem.DropDownItems, enable);
-                }
+                if (menuItem.HasDropDownItems) EnableMenuItemsRecursive(menuItem.DropDownItems, enable);
             }
         }
 
@@ -608,7 +592,7 @@ namespace mRemoteNG.UI.Controls
             {
                 ResetExternalAppMenu();
 
-                foreach (ExternalTool extA in Runtime.ExternalToolsService.ExternalTools)
+                foreach (var extA in Runtime.ExternalToolsService.ExternalTools)
                 {
                     var menuItem = new ToolStripMenuItem
                     {
@@ -624,8 +608,8 @@ namespace mRemoteNG.UI.Controls
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionTreeWindow)",
-                                                                ex);
+                    "cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionTreeWindow)",
+                    ex);
             }
         }
 
@@ -654,12 +638,12 @@ namespace mRemoteNG.UI.Controls
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
                 _connectionInitiator.OpenConnection(selectedNodeAsContainer,
-                                                    ConnectionInfo.Force.UseConsoleSession |
-                                                    ConnectionInfo.Force.DoNotJump);
+                    ConnectionInfo.Force.UseConsoleSession |
+                    ConnectionInfo.Force.DoNotJump);
             else
                 _connectionInitiator.OpenConnection(_connectionTree.SelectedNode,
-                                                    ConnectionInfo.Force.UseConsoleSession |
-                                                    ConnectionInfo.Force.DoNotJump);
+                    ConnectionInfo.Force.UseConsoleSession |
+                    ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnDontConnectToConsoleSessionClicked(object sender, EventArgs e)
@@ -667,12 +651,12 @@ namespace mRemoteNG.UI.Controls
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
                 _connectionInitiator.OpenConnection(selectedNodeAsContainer,
-                                                    ConnectionInfo.Force.DontUseConsoleSession |
-                                                    ConnectionInfo.Force.DoNotJump);
+                    ConnectionInfo.Force.DontUseConsoleSession |
+                    ConnectionInfo.Force.DoNotJump);
             else
                 _connectionInitiator.OpenConnection(_connectionTree.SelectedNode,
-                                                    ConnectionInfo.Force.DontUseConsoleSession |
-                                                    ConnectionInfo.Force.DoNotJump);
+                    ConnectionInfo.Force.DontUseConsoleSession |
+                    ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnConnectInFullscreenClicked(object sender, EventArgs e)
@@ -680,10 +664,10 @@ namespace mRemoteNG.UI.Controls
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
                 _connectionInitiator.OpenConnection(selectedNodeAsContainer,
-                                                    ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+                    ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
             else
                 _connectionInitiator.OpenConnection(_connectionTree.SelectedNode,
-                                                    ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+                    ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
         }
 
         private void OnConnectWithNoCredentialsClick(object sender, EventArgs e)
@@ -700,12 +684,12 @@ namespace mRemoteNG.UI.Controls
             var selectedNodeAsContainer = _connectionTree.SelectedNode as ContainerInfo;
             if (selectedNodeAsContainer != null)
                 _connectionInitiator.OpenConnection(selectedNodeAsContainer,
-                                                    ConnectionInfo.Force.OverridePanel |
-                                                    ConnectionInfo.Force.DoNotJump);
+                    ConnectionInfo.Force.OverridePanel |
+                    ConnectionInfo.Force.DoNotJump);
             else
                 _connectionInitiator.OpenConnection(_connectionTree.SelectedNode,
-                                                    ConnectionInfo.Force.OverridePanel |
-                                                    ConnectionInfo.Force.DoNotJump);
+                    ConnectionInfo.Force.OverridePanel |
+                    ConnectionInfo.Force.DoNotJump);
         }
 
         private void ConnectWithOptionsViewOnlyOnClick(object sender, EventArgs e)
@@ -727,28 +711,18 @@ namespace mRemoteNG.UI.Controls
                 if (connectionInfo == null) return;
                 var nodeAsContainer = connectionInfo as ContainerInfo;
                 if (nodeAsContainer != null)
-                {
                     foreach (var child in nodeAsContainer.Children)
-                    {
                         for (var i = 0; i <= child.OpenConnections.Count - 1; i++)
-                        {
                             child.OpenConnections[i].Disconnect();
-                        }
-                    }
-                }
                 else
-                {
                     for (var i = 0; i <= connectionInfo.OpenConnections.Count - 1; i++)
-                    {
                         connectionInfo.OpenConnections[i].Disconnect();
-                    }
-                }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "DisconnectConnection (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                    "DisconnectConnection (UI.Window.ConnectionTreeWindow) failed",
+                    ex);
             }
         }
 
@@ -770,8 +744,8 @@ namespace mRemoteNG.UI.Controls
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "SSHTransferFile (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                    "SSHTransferFile (UI.Window.ConnectionTreeWindow) failed",
+                    ex);
             }
         }
 
@@ -853,23 +827,23 @@ namespace mRemoteNG.UI.Controls
 
         private void OnExternalToolClicked(object sender, EventArgs e)
         {
-            StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+            StartExternalApp((ExternalTool) ((ToolStripMenuItem) sender).Tag);
         }
 
         private void StartExternalApp(ExternalTool externalTool)
         {
             try
             {
-                if (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Connection |
-                    _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession |
-                    _connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Container)
+                if ((_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Connection) |
+                    (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession) |
+                    (_connectionTree.SelectedNode.GetTreeNodeType() == TreeNodeType.Container))
                     externalTool.Start(_connectionTree.SelectedNode);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)",
-                                                                ex);
+                    "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)",
+                    ex);
             }
         }
 

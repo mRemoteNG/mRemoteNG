@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.DataProviders
 {
-	public class FileDataProviderWithRollingBackupTests
+    public class FileDataProviderWithRollingBackupTests
     {
         private FileDataProviderWithRollingBackup _dataProvider;
         private string _testFilePath;
@@ -25,9 +25,9 @@ namespace mRemoteNGTests.Config.DataProviders
         [TearDown]
         public void Teardown()
         {
-			if (Directory.Exists(_testFileDirectory))
-				Directory.Delete(_testFileDirectory, true);
-		}
+            if (Directory.Exists(_testFileDirectory))
+                Directory.Delete(_testFileDirectory, true);
+        }
 
         [Test]
         public void RollingBackupCreatedIfRegularBackupExists()
@@ -37,7 +37,7 @@ namespace mRemoteNGTests.Config.DataProviders
                 _dataProvider.Save("");
                 Thread.Sleep(100);
             }
-                
+
             var rollingBackupFiles = Directory.GetFiles(_testFileDirectory, _testFileRollingBackup);
             Assert.That(rollingBackupFiles.Length, Is.EqualTo(2));
         }

@@ -60,7 +60,6 @@ namespace mRemoteNG.Config.Serializers
 
                     var ldapResults = ldapSearcher.FindAll();
                     foreach (SearchResult ldapResult in ldapResults)
-                    {
                         using (var directoryEntry = ldapResult.GetDirectoryEntry())
                         {
                             if (directoryEntry.Properties["objectClass"].Contains("organizationalUnit"))
@@ -75,13 +74,12 @@ namespace mRemoteNG.Config.Serializers
 
                             DeserializeConnection(directoryEntry, parentContainer);
                         }
-                    }
                 }
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.",
-                                                             ex);
+                    ex);
             }
         }
 

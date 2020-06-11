@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Connection
 {
-	public class ConnectionInfoTests
+    public class ConnectionInfoTests
     {
         private ConnectionInfo _connectionInfo;
         private const string TestDomain = "somedomain";
@@ -53,7 +53,7 @@ namespace mRemoteNGTests.Connection
         [Test]
         public void CloneCorrectlySetsParentOfInheritanceObject()
         {
-			var originalConnection = new ConnectionInfo();
+            var originalConnection = new ConnectionInfo();
             var clonedConnection = originalConnection.Clone();
             Assert.That(clonedConnection.Inheritance.Parent, Is.EqualTo(clonedConnection));
         }
@@ -93,29 +93,29 @@ namespace mRemoteNGTests.Connection
             Assert.That(nameOfModifiedProperty, Is.EqualTo("OpenConnections"));
         }
 
-	    [TestCaseSource(typeof(InheritancePropertyProvider), nameof(InheritancePropertyProvider.GetProperties))]
-	    public void MovingAConnectionUnderRootNodeDisablesInheritance(PropertyInfo property)
-	    {
-		    var rootNode = new RootNodeInfo(RootNodeType.Connection);
-		    _connectionInfo.Inheritance.EverythingInherited = true;
-			_connectionInfo.SetParent(rootNode);
-			var propertyValue = property.GetValue(_connectionInfo.Inheritance);
-			Assert.That(propertyValue, Is.False);
-	    }
+        [TestCaseSource(typeof(InheritancePropertyProvider), nameof(InheritancePropertyProvider.GetProperties))]
+        public void MovingAConnectionUnderRootNodeDisablesInheritance(PropertyInfo property)
+        {
+            var rootNode = new RootNodeInfo(RootNodeType.Connection);
+            _connectionInfo.Inheritance.EverythingInherited = true;
+            _connectionInfo.SetParent(rootNode);
+            var propertyValue = property.GetValue(_connectionInfo.Inheritance);
+            Assert.That(propertyValue, Is.False);
+        }
 
-	    [TestCaseSource(typeof(InheritancePropertyProvider), nameof(InheritancePropertyProvider.GetProperties))]
-	    public void MovingAConnectionFromUnderRootNodeToUnderADifferentNodeEnablesInheritance(PropertyInfo property)
-	    {
-		    var rootNode = new RootNodeInfo(RootNodeType.Connection);
-			var otherContainer = new ContainerInfo();
-		    _connectionInfo.Inheritance.EverythingInherited = true;
-		    _connectionInfo.SetParent(rootNode);
-			_connectionInfo.SetParent(otherContainer);
-		    var propertyValue = property.GetValue(_connectionInfo.Inheritance);
-		    Assert.That(propertyValue, Is.True);
-	    }
+        [TestCaseSource(typeof(InheritancePropertyProvider), nameof(InheritancePropertyProvider.GetProperties))]
+        public void MovingAConnectionFromUnderRootNodeToUnderADifferentNodeEnablesInheritance(PropertyInfo property)
+        {
+            var rootNode = new RootNodeInfo(RootNodeType.Connection);
+            var otherContainer = new ContainerInfo();
+            _connectionInfo.Inheritance.EverythingInherited = true;
+            _connectionInfo.SetParent(rootNode);
+            _connectionInfo.SetParent(otherContainer);
+            var propertyValue = property.GetValue(_connectionInfo.Inheritance);
+            Assert.That(propertyValue, Is.True);
+        }
 
-		[TestCase(ProtocolType.HTTP, ExpectedResult = 80)]
+        [TestCase(ProtocolType.HTTP, ExpectedResult = 80)]
         [TestCase(ProtocolType.HTTPS, ExpectedResult = 443)]
         [TestCase(ProtocolType.ICA, ExpectedResult = 1494)]
         [TestCase(ProtocolType.IntApp, ExpectedResult = 0)]
@@ -132,12 +132,12 @@ namespace mRemoteNGTests.Connection
             return _connectionInfo.GetDefaultPort();
         }
 
-	    private class InheritancePropertyProvider
-	    {
-		    public static IEnumerable<PropertyInfo> GetProperties()
-		    {
-			    return new ConnectionInfoInheritance(new ConnectionInfo()).GetProperties();
-		    }
-	    }
+        private class InheritancePropertyProvider
+        {
+            public static IEnumerable<PropertyInfo> GetProperties()
+            {
+                return new ConnectionInfoInheritance(new ConnectionInfo()).GetProperties();
+            }
+        }
     }
 }

@@ -17,10 +17,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             try
             {
-                var rdpClient7 = (MsRdpClient7NotSafeForScripting)((AxHost) Control).GetOcx();
-                rdpClient7.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
+                var rdpClient7 = (MsRdpClient7NotSafeForScripting) ((AxHost) Control).GetOcx();
+                rdpClient7.AdvancedSettings8.AudioQualityMode = (uint) connectionInfo.SoundQuality;
                 rdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
-                rdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
+                rdpClient7.AdvancedSettings8.NetworkConnectionType = (int) RdpNetworkConnectionType.Modem;
 
                 if (connectionInfo.UseVmId)
                 {

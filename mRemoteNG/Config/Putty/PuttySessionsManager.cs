@@ -31,10 +31,7 @@ namespace mRemoteNG.Config.Putty
 
         public void AddSessions()
         {
-            foreach (var provider in Providers)
-            {
-                AddSessionsFromProvider(provider);
-            }
+            foreach (var provider in Providers) AddSessionsFromProvider(provider);
         }
 
         private void AddSessionsFromProvider(AbstractPuttySessionsProvider puttySessionProvider)
@@ -73,9 +70,9 @@ namespace mRemoteNG.Config.Putty
             _providers.Add(newProvider);
             newProvider.PuttySessionsCollectionChanged += RaisePuttySessionCollectionChangedEvent;
             RaiseSessionProvidersCollectionChangedEvent(
-                                                        new
-                                                            NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
-                                                                                             newProvider));
+                new
+                    NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
+                        newProvider));
         }
 
         public void AddProviders(IEnumerable<AbstractPuttySessionsProvider> newProviders)
@@ -90,9 +87,9 @@ namespace mRemoteNG.Config.Putty
             _providers.Remove(providerToRemove);
             providerToRemove.PuttySessionsCollectionChanged -= RaisePuttySessionCollectionChangedEvent;
             RaiseSessionProvidersCollectionChangedEvent(
-                                                        new
-                                                            NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
-                                                                                             providerToRemove));
+                new
+                    NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
+                        providerToRemove));
         }
 
         public void PuttySessionChanged(object sender, PuttySessionChangedEventArgs e)
@@ -109,10 +106,7 @@ namespace mRemoteNG.Config.Putty
             var sessionNames = new List<string>();
             foreach (var provider in Providers)
             {
-                if (!IsProviderEnabled(provider))
-                {
-                    continue;
-                }
+                if (!IsProviderEnabled(provider)) continue;
 
                 sessionNames.AddRange(provider.GetSessionNames(raw));
             }

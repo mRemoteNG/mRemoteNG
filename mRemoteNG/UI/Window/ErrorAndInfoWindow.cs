@@ -90,8 +90,8 @@ namespace mRemoteNG.UI.Window
                 pnlErrorMsg.Size = new Size(Width, Height - pnlErrorMsg.Top);
                 pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
                 txtMsgText.Size = new Size(
-                                           pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
-                                           pnlErrorMsg.Height - _display.ScaleHeight(20));
+                    pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
+                    pnlErrorMsg.Height - _display.ScaleHeight(20));
                 lvErrorCollector.Location = new Point(0, 0);
                 lvErrorCollector.Size = new Size(Width, Height - pnlErrorMsg.Height - _display.ScaleHeight(5));
                 lvErrorCollector.Anchor =
@@ -102,8 +102,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "LayoutVertical (UI.Window.ErrorsAndInfos) failed" +
-                                                    Environment.NewLine + ex.Message, true);
+                    "LayoutVertical (UI.Window.ErrorsAndInfos) failed" +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -116,8 +116,8 @@ namespace mRemoteNG.UI.Window
                 pnlErrorMsg.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Top;
 
                 txtMsgText.Size = new Size(
-                                           pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
-                                           pnlErrorMsg.Height - _display.ScaleHeight(20));
+                    pnlErrorMsg.Width - pbError.Width - _display.ScaleWidth(8),
+                    pnlErrorMsg.Height - _display.ScaleHeight(20));
                 lvErrorCollector.Location = new Point(pnlErrorMsg.Width + _display.ScaleWidth(5), 0);
                 lvErrorCollector.Size = new Size(Width - pnlErrorMsg.Width - _display.ScaleWidth(5), Height);
                 lvErrorCollector.Anchor =
@@ -128,8 +128,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" +
-                                                    Environment.NewLine + ex.Message, true);
+                    "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -153,8 +153,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" +
-                                                    Environment.NewLine + ex.Message, true);
+                    "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -172,9 +172,9 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" +
-                                                    Environment.NewLine +
-                                                    ex.Message, true);
+                    "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" +
+                    Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -198,8 +198,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" +
-                                                    Environment.NewLine + ex.Message, true);
+                    "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -207,14 +207,14 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                if (lvErrorCollector.SelectedItems.Count == 0 | lvErrorCollector.SelectedItems.Count > 1)
+                if ((lvErrorCollector.SelectedItems.Count == 0) | (lvErrorCollector.SelectedItems.Count > 1))
                 {
                     SetStyleWhenNoMessageSelected();
                     return;
                 }
 
                 var sItem = lvErrorCollector.SelectedItems[0];
-                var eMsg = (Message)sItem.Tag;
+                var eMsg = (Message) sItem.Tag;
                 switch (eMsg.Class)
                 {
                     case MessageClass.DebugMsg:
@@ -284,9 +284,9 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" +
-                                                    Environment.NewLine +
-                                                    ex.Message, true);
+                    "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" +
+                    Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -327,13 +327,9 @@ namespace mRemoteNG.UI.Window
             {
                 IEnumerable items;
                 if (lvErrorCollector.SelectedItems.Count > 0)
-                {
                     items = lvErrorCollector.SelectedItems;
-                }
                 else
-                {
                     items = lvErrorCollector.Items;
-                }
 
                 var stringBuilder = new StringBuilder();
                 stringBuilder.AppendLine("----------");
@@ -342,10 +338,7 @@ namespace mRemoteNG.UI.Window
 
                 foreach (ListViewItem item in items)
                 {
-                    if (!(item.Tag is Message message))
-                    {
-                        continue;
-                    }
+                    if (!(item.Tag is Message message)) continue;
 
                     stringBuilder.AppendLine(message.Class.ToString());
                     stringBuilder.AppendLine(message.Date.ToString(CultureInfo.InvariantCulture));
@@ -358,9 +351,9 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "UI.Window.ErrorsAndInfos.CopyMessagesToClipboard() failed." +
-                                                    Environment.NewLine + ex.Message,
-                                                    true);
+                    "UI.Window.ErrorsAndInfos.CopyMessagesToClipboard() failed." +
+                    Environment.NewLine + ex.Message,
+                    true);
             }
             finally
             {
@@ -380,14 +373,10 @@ namespace mRemoteNG.UI.Window
                 lvErrorCollector.BeginUpdate();
 
                 if (lvErrorCollector.SelectedItems.Count > 0)
-                {
                     foreach (ListViewItem item in lvErrorCollector.SelectedItems)
                         item.Remove();
-                }
                 else
-                {
                     lvErrorCollector.Items.Clear();
-                }
 
                 if (lvErrorCollector.Items.Count == 0)
                 {
@@ -398,8 +387,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    "UI.Window.ErrorsAndInfos.DeleteMessages() failed" +
-                                                    Environment.NewLine + ex.Message, true);
+                    "UI.Window.ErrorsAndInfos.DeleteMessages() failed" +
+                    Environment.NewLine + ex.Message, true);
             }
             finally
             {

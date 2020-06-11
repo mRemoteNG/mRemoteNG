@@ -4,7 +4,7 @@ using System;
 
 namespace mRemoteNG.UI.Tabs
 {
-    class TabHelper
+    internal class TabHelper
     {
         private static readonly Lazy<TabHelper> lazyHelper = new Lazy<TabHelper>(() => new TabHelper());
 
@@ -24,20 +24,17 @@ namespace mRemoteNG.UI.Tabs
                 currentTab = value;
                 findCurrentPanel();
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
-                                                    "Tab got focused: " + currentTab.TabText);
+                    "Tab got focused: " + currentTab.TabText);
             }
         }
 
         private void findCurrentPanel()
         {
             var currentForm = currentTab.Parent;
-            while (currentForm != null && !(currentForm is ConnectionWindow))
-            {
-                currentForm = currentForm.Parent;
-            }
+            while (currentForm != null && !(currentForm is ConnectionWindow)) currentForm = currentForm.Parent;
 
             if (currentForm != null)
-                CurrentPanel = (ConnectionWindow)currentForm;
+                CurrentPanel = (ConnectionWindow) currentForm;
         }
 
         private ConnectionWindow currentPanel;
@@ -49,7 +46,7 @@ namespace mRemoteNG.UI.Tabs
             {
                 currentPanel = value;
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
-                                                    "Panel got focused: " + currentPanel.TabText);
+                    "Panel got focused: " + currentPanel.TabText);
             }
         }
     }

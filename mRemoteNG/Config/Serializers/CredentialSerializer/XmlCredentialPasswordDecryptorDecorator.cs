@@ -45,8 +45,8 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
         }
 
         private void DecryptAuthHeader(XElement rootElement,
-                                       ICryptographyProvider cryptographyProvider,
-                                       SecureString key)
+            ICryptographyProvider cryptographyProvider,
+            SecureString key)
         {
             var authAttribute = rootElement.Attribute("Auth");
             if (authAttribute == null)

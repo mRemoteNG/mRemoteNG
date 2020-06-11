@@ -66,7 +66,7 @@ namespace mRemoteNG.App.Info
         private static Uri GetUpdateTxtUri(string channel)
         {
             return new Uri(new Uri(Settings.Default.UpdateAddress),
-                           new Uri(GetChannelFileName(channel), UriKind.Relative));
+                new Uri(GetChannelFileName(channel), UriKind.Relative));
         }
 
         private static bool IsValidChannel(string s)

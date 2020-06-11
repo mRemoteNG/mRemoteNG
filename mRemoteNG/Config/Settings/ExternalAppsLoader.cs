@@ -17,8 +17,8 @@ namespace mRemoteNG.Config.Settings
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 
         public ExternalAppsLoader(FrmMain mainForm,
-                                  MessageCollector messageCollector,
-                                  ExternalToolsToolStrip externalToolsToolStrip)
+            MessageCollector messageCollector,
+            ExternalToolsToolStrip externalToolsToolStrip)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -44,7 +44,7 @@ namespace mRemoteNG.Config.Settings
             if (File.Exists(newPath))
             {
                 _messageCollector.AddMessage(MessageClass.InformationMsg, $"Loading External Apps from: {newPath}",
-                                             true);
+                    true);
                 xDom.Load(newPath);
             }
 #if !PORTABLE
@@ -58,14 +58,14 @@ namespace mRemoteNG.Config.Settings
             else
             {
                 _messageCollector.AddMessage(MessageClass.WarningMsg,
-                                             "Loading External Apps failed: Could not FIND file!");
+                    "Loading External Apps failed: Could not FIND file!");
                 return;
             }
 
             if (xDom.DocumentElement == null)
             {
                 _messageCollector.AddMessage(MessageClass.WarningMsg,
-                                             "Loading External Apps failed: Could not LOAD file!");
+                    "Loading External Apps failed: Could not LOAD file!");
                 return;
             }
 
@@ -84,24 +84,17 @@ namespace mRemoteNG.Config.Settings
                 if (xEl.HasAttribute("RunElevated"))
                     extA.RunElevated = bool.Parse(xEl.Attributes["RunElevated"].Value);
 
-                if (xEl.HasAttribute("WaitForExit"))
-                {
-                    extA.WaitForExit = bool.Parse(xEl.Attributes["WaitForExit"].Value);
-                }
+                if (xEl.HasAttribute("WaitForExit")) extA.WaitForExit = bool.Parse(xEl.Attributes["WaitForExit"].Value);
 
                 if (xEl.HasAttribute("TryToIntegrate"))
-                {
                     extA.TryIntegrate = bool.Parse(xEl.Attributes["TryToIntegrate"].Value);
-                }
 
                 if (xEl.HasAttribute("ShowOnToolbar"))
-                {
                     extA.ShowOnToolbar = bool.Parse(xEl.Attributes["ShowOnToolbar"].Value);
-                }
 
                 _messageCollector.AddMessage(MessageClass.InformationMsg,
-                                             $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}",
-                                             true);
+                    $"Adding External App: {extA.DisplayName} {extA.FileName} {extA.Arguments}",
+                    true);
                 Runtime.ExternalToolsService.ExternalTools.Add(extA);
             }
 

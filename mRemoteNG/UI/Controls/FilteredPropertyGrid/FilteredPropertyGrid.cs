@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
         /// Contain a reference to the collection of properties to show in the parent PropertyGrid.
         /// </summary>
         /// <remarks>By default, m_PropertyDescriptors contain all the properties of the object. </remarks>
-        readonly List<PropertyDescriptor> _propertyDescriptors = new List<PropertyDescriptor>();
+        private readonly List<PropertyDescriptor> _propertyDescriptors = new List<PropertyDescriptor>();
 
         /// <summary>
         /// Contain a reference to the array of properties to display in the PropertyGrid.
@@ -113,7 +113,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
         {
             get =>
                 _mWrapper != null
-                    ? ((ObjectWrapper)base.SelectedObject).SelectedObject
+                    ? ((ObjectWrapper) base.SelectedObject).SelectedObject
                     : null;
             set
             {
@@ -141,10 +141,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
         public List<GridItem> GetVisibleGridItems()
         {
             var gridRoot = SelectedGridItem;
-            while (gridRoot.GridItemType != GridItemType.Root)
-            {
-                gridRoot = gridRoot.Parent;
-            }
+            while (gridRoot.GridItemType != GridItemType.Root) gridRoot = gridRoot.Parent;
             return GetVisibleGridItemsRecursive(gridRoot, new List<GridItem>());
         }
 
@@ -156,10 +153,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
             if (item.Expandable && !item.Expanded)
                 return gridItems;
 
-            foreach (GridItem child in item.GridItems)
-            {
-                GetVisibleGridItemsRecursive(child, gridItems);
-            }
+            foreach (GridItem child in item.GridItems) GetVisibleGridItemsRecursive(child, gridItems);
 
             return gridItems;
         }
@@ -175,10 +169,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
             if (startItem.GridItemType == GridItemType.Property)
             {
                 startIndex--;
-                if (startIndex < 0)
-                {
-                    startIndex = gridItems.Count - 1;
-                }
+                if (startIndex < 0) startIndex = gridItems.Count - 1;
             }
 
             var previousIndex = 0;
@@ -216,10 +207,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
             if (startItem.GridItemType == GridItemType.Property)
             {
                 startIndex++;
-                if (startIndex >= gridItems.Count)
-                {
-                    startIndex = 0;
-                }
+                if (startIndex >= gridItems.Count) startIndex = 0;
             }
 
             var nextIndex = 0;
@@ -303,11 +291,9 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
             _propertyDescriptors.Clear();
             // Check whether the list is filtered 
             if (_browsableAttributes != null && _browsableAttributes.Count > 0)
-            {
                 // Add to the list the attributes that need to be displayed.
                 foreach (Attribute attribute in _browsableAttributes)
                     ShowAttribute(attribute);
-            }
 
             // Display if necessary, some properties
             if (_mBrowsableProperties != null && _mBrowsableProperties.Length > 0)
@@ -318,7 +304,8 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
                     var property = allproperties[propertyname];
 
                     if (property == null)
-                        throw new InvalidOperationException($"Property '{propertyname}' not found on object '{_mWrapper.GetClassName()}'");
+                        throw new InvalidOperationException(
+                            $"Property '{propertyname}' not found on object '{_mWrapper.GetClassName()}'");
 
                     ShowProperty(property);
                 }
@@ -329,11 +316,11 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
             {
                 // Fill the collection with all the properties.
                 var originalPropertyDescriptors = TypeDescriptor
-                                                  .GetProperties(_mWrapper.SelectedObject)
-                                                  .OfType<PropertyDescriptor>()
-                                                  .Where(PropertyDoesntHaveBrowsableFalseAttribute);
+                    .GetProperties(_mWrapper.SelectedObject)
+                    .OfType<PropertyDescriptor>()
+                    .Where(PropertyDoesntHaveBrowsableFalseAttribute);
 
-                foreach (PropertyDescriptor propertyDescriptor in originalPropertyDescriptors)
+                foreach (var propertyDescriptor in originalPropertyDescriptors)
                     _propertyDescriptors.Add(propertyDescriptor);
             }
 
@@ -344,7 +331,6 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 
             // Hide if necessary, some properties
             if (_mHiddenProperties != null && _mHiddenProperties.Length > 0)
-            {
                 // Remove from the list the properties that mustn't be displayed.
                 foreach (var propertyname in _mHiddenProperties)
                 {
@@ -353,7 +339,6 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
                     // Remove from the list the property
                     HideProperty(property);
                 }
-            }
         }
 
         /// <summary>

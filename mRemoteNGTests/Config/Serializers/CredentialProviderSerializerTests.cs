@@ -29,7 +29,7 @@ namespace mRemoteNGTests.Config.Serializers
         public void SerializeExists()
         {
             var mockProvider = InitializeMockProvider();
-            var providers = new[] { mockProvider };
+            var providers = new[] {mockProvider};
             var serializedContent = _credentialProviderSerializer.Serialize(providers);
             Assert.That(serializedContent, Is.Not.Null);
         }

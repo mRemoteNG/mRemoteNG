@@ -83,9 +83,9 @@ namespace mRemoteNG.UI.Window
             //
             //pGrid
             //
-            _pGrid.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom)
-                           | AnchorStyles.Left)
-                          | AnchorStyles.Right;
+            _pGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+                                             | AnchorStyles.Left
+                                             | AnchorStyles.Right;
             _pGrid.BrowsableProperties = null;
             _pGrid.ContextMenuStrip = PropertyGridContextMenu;
             _pGrid.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
@@ -207,6 +207,7 @@ namespace mRemoteNG.UI.Window
         public bool CanShowProperties => SelectedTreeNode != null;
 
         public bool InheritanceVisible => _btnShowInheritance.Checked;
+
         public bool CanShowInheritance => !_pGrid.RootNodeSelected &&
                                           SelectedTreeNode != null &&
                                           _pGrid.SelectedConnectionInfo?.Parent != null &&
@@ -277,7 +278,7 @@ namespace mRemoteNG.UI.Window
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (keyData)
             {
-                case (Keys.Tab | Keys.Shift):
+                case Keys.Tab | Keys.Shift:
                     _pGrid.SelectPreviousGridItem();
                     break;
                 case Keys.Tab:
@@ -287,9 +288,11 @@ namespace mRemoteNG.UI.Window
 
             return true; // Handled
         }
+
         #endregion
 
         #region Private Methods
+
         private void ApplyLanguage()
         {
             _btnShowInheritance.Text = Language.Inheritance;
@@ -429,7 +432,7 @@ namespace mRemoteNG.UI.Window
                 if (toolStrip == null)
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                        Language.CouldNotFindToolStripInFilteredPropertyGrid, true);
+                        Language.CouldNotFindToolStripInFilteredPropertyGrid, true);
                     return;
                 }
 
@@ -452,8 +455,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ConfigUiLoadFailed + Environment.NewLine + ex.Message,
-                                                    true);
+                    Language.ConfigUiLoadFailed + Environment.NewLine + ex.Message,
+                    true);
             }
         }
 
@@ -489,8 +492,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ConfigPropertyGridValueFailed + Environment.NewLine +
-                                                    ex.Message, true);
+                    Language.ConfigPropertyGridValueFailed + Environment.NewLine +
+                    ex.Message, true);
             }
         }
 
@@ -545,15 +548,15 @@ namespace mRemoteNG.UI.Window
                 }
 
                 var mPos = new Point(
-                                     new Size(PointToScreen(new Point(e.Location.X + _pGrid.Width - 100,
-                                                                      e.Location.Y))));
+                    new Size(PointToScreen(new Point(e.Location.X + _pGrid.Width - 100,
+                        e.Location.Y))));
                 CMenIcons.Show(mPos);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ConfigPropertyGridButtonIconClickFailed +
-                                                    Environment.NewLine + ex.Message, true);
+                    Language.ConfigPropertyGridButtonIconClickFailed +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -561,10 +564,10 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var connectionInfo = (ConnectionInfo)_pGrid.SelectedObject;
+                var connectionInfo = (ConnectionInfo) _pGrid.SelectedObject;
                 if (connectionInfo == null) return;
 
-                var selectedMenuItem = (ToolStripMenuItem)sender;
+                var selectedMenuItem = (ToolStripMenuItem) sender;
 
                 var iconName = selectedMenuItem?.Text;
                 if (string.IsNullOrEmpty(iconName)) return;
@@ -582,8 +585,8 @@ namespace mRemoteNG.UI.Window
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ConfigPropertyGridMenuClickFailed +
-                                                    Environment.NewLine + ex.Message, true);
+                    Language.ConfigPropertyGridMenuClickFailed +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -605,21 +608,21 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                var pReply = pingSender.Send((string)hostName);
+                var pReply = pingSender.Send((string) hostName);
                 if (pReply?.Status == IPStatus.Success)
                 {
-                    if ((string)_btnHostStatus.Tag == "checking")
+                    if ((string) _btnHostStatus.Tag == "checking")
                         ShowStatusImage(Resources.HostStatus_On);
                 }
                 else
                 {
-                    if ((string)_btnHostStatus.Tag == "checking")
+                    if ((string) _btnHostStatus.Tag == "checking")
                         ShowStatusImage(Resources.HostStatus_Off);
                 }
             }
             catch (Exception)
             {
-                if ((string)_btnHostStatus.Tag == "checking")
+                if ((string) _btnHostStatus.Tag == "checking")
                     ShowStatusImage(Resources.HostStatus_Off);
             }
         }
@@ -653,13 +656,13 @@ namespace mRemoteNG.UI.Window
                 _pThread = new Thread(CheckHostAlive);
                 _pThread.SetApartmentState(ApartmentState.STA);
                 _pThread.IsBackground = true;
-                _pThread.Start(((ConnectionInfo)connectionInfo).Hostname);
+                _pThread.Start(((ConnectionInfo) connectionInfo).Hostname);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ConfigPropertyGridSetHostStatusFailed +
-                                                    Environment.NewLine + ex.Message, true);
+                    Language.ConfigPropertyGridSetHostStatusFailed +
+                    Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -675,11 +678,13 @@ namespace mRemoteNG.UI.Window
                 var gridItem = _pGrid.SelectedGridItem;
                 _propertyGridContextMenuReset.Enabled = Convert.ToBoolean(_pGrid.SelectedObject != null &&
                                                                           gridItem?.PropertyDescriptor != null &&
-                                                                          gridItem.PropertyDescriptor.CanResetValue(_pGrid.SelectedObject));
+                                                                          gridItem.PropertyDescriptor.CanResetValue(
+                                                                              _pGrid.SelectedObject));
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenu_Opening() failed.", ex);
+                Runtime.MessageCollector.AddExceptionMessage(
+                    "UI.Window.Config.propertyGridContextMenu_Opening() failed.", ex);
             }
         }
 
@@ -690,13 +695,12 @@ namespace mRemoteNG.UI.Window
                 var gridItem = _pGrid.SelectedGridItem;
                 if (_pGrid.SelectedObject != null && gridItem?.PropertyDescriptor != null &&
                     gridItem.PropertyDescriptor.CanResetValue(_pGrid.SelectedObject))
-                {
                     _pGrid.ResetSelectedProperty();
-                }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenuReset_Click() failed.", ex);
+                Runtime.MessageCollector.AddExceptionMessage(
+                    "UI.Window.Config.propertyGridContextMenuReset_Click() failed.", ex);
             }
         }
 

@@ -59,7 +59,7 @@ namespace mRemoteNGTests.Credential
         [Test]
         public void SelectionIsClearedIfThereAreNoMoreLockedRepositories()
         {
-            foreach(var repo in _repos)
+            foreach (var repo in _repos)
                 repo.IsLoaded.Returns(true);
             _repositoryUnlocker.SelectNextLockedRepository();
             Assert.That(_repositoryUnlocker.SelectedRepository, Is.Null);
@@ -96,7 +96,7 @@ namespace mRemoteNGTests.Credential
         private IList<ICredentialRepository> BuildRepos(int count)
         {
             var list = new List<ICredentialRepository>();
-            for (var i=0; i < count; i++)
+            for (var i = 0; i < count; i++)
                 list.Add(Substitute.For<ICredentialRepository>());
             return list;
         }

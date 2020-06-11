@@ -43,10 +43,7 @@ namespace mRemoteNG.UI
 
         public void AddRange(BaseWindow[] uiWindow)
         {
-            foreach (var uW in uiWindow)
-            {
-                List.Add(uW);
-            }
+            foreach (var uW in uiWindow) List.Add(uW);
         }
 
         public void Remove(BaseWindow uiWindow)
@@ -58,12 +55,8 @@ namespace mRemoteNG.UI
         {
             CleanUp();
             for (var i = 0; i < List.Count; i++)
-            {
                 if (this[i].Text == uiWindow.Replace("&", "&&"))
-                {
                     return this[i];
-                }
-            }
 
             return null;
         }

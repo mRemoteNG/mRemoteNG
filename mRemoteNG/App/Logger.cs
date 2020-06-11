@@ -38,7 +38,7 @@ namespace mRemoteNG.App
 
             foreach (var appender in appenders)
             {
-                var fileAppender = (RollingFileAppender)appender;
+                var fileAppender = (RollingFileAppender) appender;
                 if (fileAppender == null || fileAppender.Name != "LogFileAppender") continue;
                 fileAppender.File = path;
                 fileAppender.ActivateOptions();
@@ -59,7 +59,7 @@ namespace mRemoteNG.App
         private static string GetLogPathNormalEdition()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                                Application.ProductName);
+                Application.ProductName);
         }
 
         private static string GetLogPathPortableEdition()

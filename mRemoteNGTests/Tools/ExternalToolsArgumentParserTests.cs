@@ -58,7 +58,6 @@ namespace mRemoteNGTests.Tools
         }
 
 
-
         private class ParserTestsDataSource
         {
             public static IEnumerable TestCases
@@ -92,14 +91,20 @@ namespace mRemoteNGTests.Tools
                     yield return new TestCaseData("%USERFIELD%").Returns(StringAfterAllEscaping);
                     yield return new TestCaseData("%-USERFIELD%").Returns(StringAfterMetacharacterEscaping);
                     yield return new TestCaseData("%!USERFIELD%").Returns(StringAfterNoEscaping);
-                    yield return new TestCaseData("%%") {TestName = "EmptyVariableTagsNotParsed" }.Returns("%%");
-                    yield return new TestCaseData("/k echo %!USERNAME%") { TestName = "ParsingWorksWhenVariableIsNotInFirstPosition" }.Returns(SampleCommandString);
-                    yield return new TestCaseData("%COMSPEC%") { TestName = "EnvironmentVariablesParsed" }.Returns(Environment.GetEnvironmentVariable("comspec"));
-                    yield return new TestCaseData("%UNSUPPORTEDPARAMETER%") { TestName = "UnsupportedParametersNotParsed" }.Returns("%UNSUPPORTEDPARAMETER%");
-                    yield return new TestCaseData(@"\%COMSPEC\%") { TestName = "BackslashEscapedEnvironmentVariablesParsed" }.Returns(Environment.GetEnvironmentVariable("comspec"));
-                    yield return new TestCaseData(@"^%COMSPEC^%") { TestName = "ChevronEscapedEnvironmentVariablesNotParsed" }.Returns("%COMSPEC%");
+                    yield return new TestCaseData("%%") {TestName = "EmptyVariableTagsNotParsed"}.Returns("%%");
+                    yield return new TestCaseData("/k echo %!USERNAME%")
+                        {TestName = "ParsingWorksWhenVariableIsNotInFirstPosition"}.Returns(SampleCommandString);
+                    yield return new TestCaseData("%COMSPEC%") {TestName = "EnvironmentVariablesParsed"}.Returns(
+                        Environment.GetEnvironmentVariable("comspec"));
+                    yield return new TestCaseData("%UNSUPPORTEDPARAMETER%")
+                        {TestName = "UnsupportedParametersNotParsed"}.Returns("%UNSUPPORTEDPARAMETER%");
+                    yield return new TestCaseData(@"\%COMSPEC\%")
+                            {TestName = "BackslashEscapedEnvironmentVariablesParsed"}
+                        .Returns(Environment.GetEnvironmentVariable("comspec"));
+                    yield return new TestCaseData(@"^%COMSPEC^%")
+                        {TestName = "ChevronEscapedEnvironmentVariablesNotParsed"}.Returns("%COMSPEC%");
                 }
             }
-    }
+        }
     }
 }

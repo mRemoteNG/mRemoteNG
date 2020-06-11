@@ -39,12 +39,14 @@ namespace mRemoteNGTests.Config.Serializers.CredentialSerializers
         private string GenerateCredentialXml(bool includeAuthHeader = true)
         {
             var cryptoProvider = new AeadCryptographyProvider();
-            var authHeader = includeAuthHeader ? $"Auth=\"{cryptoProvider.Encrypt("someheader", _decryptionKey)}\"" : "";
+            var authHeader = includeAuthHeader
+                ? $"Auth=\"{cryptoProvider.Encrypt("someheader", _decryptionKey)}\""
+                : "";
             var encryptedPassword = cryptoProvider.Encrypt(_unencryptedPassword, _decryptionKey);
             return
                 "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
                 $"<Credentials EncryptionEngine=\"{cryptoProvider.CipherEngine}\" BlockCipherMode=\"{cryptoProvider.CipherMode}\" KdfIterations=\"{cryptoProvider.KeyDerivationIterations}\" {authHeader} SchemaVersion=\"1.0\">" +
-                    $"<Credential Id=\"ce6b0397-d476-4ffe-884b-dbe9347a88a8\" Title=\"New Credential\" Username=\"asdfasdf\" Domain=\"\" Password=\"{encryptedPassword}\" />" +
+                $"<Credential Id=\"ce6b0397-d476-4ffe-884b-dbe9347a88a8\" Title=\"New Credential\" Username=\"asdfasdf\" Domain=\"\" Password=\"{encryptedPassword}\" />" +
                 "</Credentials>";
         }
     }

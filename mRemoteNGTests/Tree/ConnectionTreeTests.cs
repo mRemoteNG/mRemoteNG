@@ -30,7 +30,8 @@ namespace mRemoteNGTests.Tree
         }
 
 
-        [Test, Apartment(ApartmentState.STA)]
+        [Test]
+        [Apartment(ApartmentState.STA)]
         public void CanDeleteLastFolderInTheTree()
         {
             var lastFolder = new ContainerInfo();

@@ -12,7 +12,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 {
-	public class ConfigWindowGeneralTests
+    public class ConfigWindowGeneralTests
     {
         private ConfigWindow _configWindow;
 
@@ -23,7 +23,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         }
 
         [TestCaseSource(nameof(ConnectionInfoGeneralTestCases))]
-        public void PropertyGridShowCorrectPropertiesForConnectionInfo(ConnectionInfo connectionInfo, IEnumerable<string> expectedVisibleProperties)
+        public void PropertyGridShowCorrectPropertiesForConnectionInfo(ConnectionInfo connectionInfo,
+            IEnumerable<string> expectedVisibleProperties)
         {
             _configWindow.SelectedTreeNode = connectionInfo;
             Assert.That(_configWindow.VisibleObjectProperties, Is.EquivalentTo(expectedVisibleProperties));
@@ -35,7 +36,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             var expectedVisibleProperties = new[]
             {
                 nameof(RootNodeInfo.Name),
-                nameof(RootNodeInfo.Password),
+                nameof(RootNodeInfo.Password)
             };
 
             _configWindow.SelectedTreeNode = new RootNodeInfo(RootNodeType.Connection);
@@ -47,99 +48,101 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         {
             var expectedVisibleProperties = new[]
             {
-                nameof(RootNodeInfo.Name),
+                nameof(RootNodeInfo.Name)
             };
 
             _configWindow.SelectedTreeNode = new RootPuttySessionsNodeInfo();
             Assert.That(_configWindow.VisibleObjectProperties, Is.EquivalentTo(expectedVisibleProperties));
         }
 
-		[Test]
+        [Test]
         public void SwitchFromInheritanceToConnectionPropertiesWhenClickingRootNode()
         {
-			// connection with a normal parent container
-			var connection = new ConnectionInfo();
-			connection.SetParent(new ContainerInfo());
+            // connection with a normal parent container
+            var connection = new ConnectionInfo();
+            connection.SetParent(new ContainerInfo());
 
-			_configWindow.SelectedTreeNode = connection;
-			_configWindow.ShowInheritanceProperties();
+            _configWindow.SelectedTreeNode = connection;
+            _configWindow.ShowInheritanceProperties();
 
-	        _configWindow.SelectedTreeNode = new RootNodeInfo(RootNodeType.Connection);
-			Assert.That(_configWindow.PropertiesVisible, Is.True, 
-				() => "The property mode should switch from inheritance to connection properties when clicking on the root node.");
-		}
+            _configWindow.SelectedTreeNode = new RootNodeInfo(RootNodeType.Connection);
+            Assert.That(_configWindow.PropertiesVisible, Is.True,
+                () =>
+                    "The property mode should switch from inheritance to connection properties when clicking on the root node.");
+        }
 
         [Test]
         public void SwitchFromInheritanceToConnectionPropertiesWhenClickingRootPuttyNode()
         {
-	        // connection with a normal parent container
-	        var connection = new ConnectionInfo();
-	        connection.SetParent(new ContainerInfo());
+            // connection with a normal parent container
+            var connection = new ConnectionInfo();
+            connection.SetParent(new ContainerInfo());
 
-	        _configWindow.SelectedTreeNode = connection;
-	        _configWindow.ShowInheritanceProperties();
+            _configWindow.SelectedTreeNode = connection;
+            _configWindow.ShowInheritanceProperties();
 
-	        _configWindow.SelectedTreeNode = new RootPuttySessionsNodeInfo();
-	        Assert.That(_configWindow.PropertiesVisible, Is.True,
-		        () => "The property mode should switch from inheritance to connection properties when clicking on the root node.");
+            _configWindow.SelectedTreeNode = new RootPuttySessionsNodeInfo();
+            Assert.That(_configWindow.PropertiesVisible, Is.True,
+                () =>
+                    "The property mode should switch from inheritance to connection properties when clicking on the root node.");
         }
 
-		[Test]
+        [Test]
         public void SwitchFromInheritanceToConnectionPropertiesWhenClickingChildOfRootNode()
         {
-	        // connection with a normal parent container
-			var root = new RootNodeInfo(RootNodeType.Connection);
-			var containerWhoseParentIsRoot = new ContainerInfo();
-	        var connection = new ConnectionInfo();
-	        root.AddChild(containerWhoseParentIsRoot);
-			containerWhoseParentIsRoot.AddChild(connection);
+            // connection with a normal parent container
+            var root = new RootNodeInfo(RootNodeType.Connection);
+            var containerWhoseParentIsRoot = new ContainerInfo();
+            var connection = new ConnectionInfo();
+            root.AddChild(containerWhoseParentIsRoot);
+            containerWhoseParentIsRoot.AddChild(connection);
 
-	        _configWindow.SelectedTreeNode = connection;
-	        _configWindow.ShowInheritanceProperties();
+            _configWindow.SelectedTreeNode = connection;
+            _configWindow.ShowInheritanceProperties();
 
-	        _configWindow.SelectedTreeNode = containerWhoseParentIsRoot;
-	        Assert.That(_configWindow.PropertiesVisible, Is.True,
-		        () => "The property mode should switch from inheritance to connection properties " +
-		              "when clicking on a container whose parent is the root node.");
+            _configWindow.SelectedTreeNode = containerWhoseParentIsRoot;
+            Assert.That(_configWindow.PropertiesVisible, Is.True,
+                () => "The property mode should switch from inheritance to connection properties " +
+                      "when clicking on a container whose parent is the root node.");
         }
 
-		[TestCaseSource(nameof(EveryNodeType))]
+        [TestCaseSource(nameof(EveryNodeType))]
         public void DefaultConnectionPropertiesCanBeShownRegardlessOfWhichNodeIsSelected(ConnectionInfo selectedObject)
         {
-	        _configWindow.SelectedTreeNode = selectedObject;
-			Assert.That(_configWindow.CanShowDefaultProperties, Is.True);
+            _configWindow.SelectedTreeNode = selectedObject;
+            Assert.That(_configWindow.CanShowDefaultProperties, Is.True);
         }
 
         [TestCaseSource(nameof(EveryNodeType))]
         public void DefaultInheritancePropertiesCanBeShownRegardlessOfWhichNodeIsSelected(ConnectionInfo selectedObject)
         {
-	        _configWindow.SelectedTreeNode = selectedObject;
-	        Assert.That(_configWindow.CanShowDefaultInheritance, Is.True);
+            _configWindow.SelectedTreeNode = selectedObject;
+            Assert.That(_configWindow.CanShowDefaultInheritance, Is.True);
         }
 
         [TestCaseSource(nameof(EveryNodeType))]
-		public void ConnectionPropertiesCanAlwaysBeShownUnlessNothingIsSelected(ConnectionInfo selectedObject)
+        public void ConnectionPropertiesCanAlwaysBeShownUnlessNothingIsSelected(ConnectionInfo selectedObject)
         {
-	        _configWindow.SelectedTreeNode = selectedObject;
+            _configWindow.SelectedTreeNode = selectedObject;
 
-	        var selectedObjectNotNull = selectedObject != null;
-	        Assert.That(_configWindow.CanShowProperties, Is.EqualTo(selectedObjectNotNull));
-		}
+            var selectedObjectNotNull = selectedObject != null;
+            Assert.That(_configWindow.CanShowProperties, Is.EqualTo(selectedObjectNotNull));
+        }
 
-		[TestCaseSource(nameof(EveryNodeType))]
-		public void InheritancePropertiesAreVisibleInCertainCases(ConnectionInfo selectedObject)
-		{
-			_configWindow.SelectedTreeNode = selectedObject;
+        [TestCaseSource(nameof(EveryNodeType))]
+        public void InheritancePropertiesAreVisibleInCertainCases(ConnectionInfo selectedObject)
+        {
+            _configWindow.SelectedTreeNode = selectedObject;
 
-			var shouldBeAvailable = selectedObject != null &&
-									!(selectedObject is RootNodeInfo) &&
-									!(selectedObject is PuttySessionInfo) &&
-									!(selectedObject.Parent is RootNodeInfo);
+            var shouldBeAvailable = selectedObject != null &&
+                                    !(selectedObject is RootNodeInfo) &&
+                                    !(selectedObject is PuttySessionInfo) &&
+                                    !(selectedObject.Parent is RootNodeInfo);
 
-			Assert.That(_configWindow.CanShowInheritance, Is.EqualTo(shouldBeAvailable));
-		}
+            Assert.That(_configWindow.CanShowInheritance, Is.EqualTo(shouldBeAvailable));
+        }
 
-		private static IEnumerable<TestCaseData> ConnectionInfoGeneralTestCases()
+        private static IEnumerable<TestCaseData> ConnectionInfoGeneralTestCases()
         {
             var protocolTypes = typeof(ProtocolType).GetEnumValues().OfType<ProtocolType>();
             var testCases = new List<TestCaseData>();
@@ -162,62 +165,62 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             return testCases;
         }
 
-		private static IEnumerable<TestCaseData> EveryNodeType()
-		{
-			var protocolTypes = typeof(ProtocolType).GetEnumValues().OfType<ProtocolType>().ToList();
-			var root = new RootNodeInfo(RootNodeType.Connection);
-			var container = new ContainerInfo();
-			var connectionsWithNormalParent = protocolTypes
-				.Select(protocolType =>
-				{
-					var c = new ConnectionInfo {Protocol = protocolType};
-					c.SetParent(container);
-					return new TestCaseData(c).SetName(protocolType + ", Connection, NormalParent");
-				});
+        private static IEnumerable<TestCaseData> EveryNodeType()
+        {
+            var protocolTypes = typeof(ProtocolType).GetEnumValues().OfType<ProtocolType>().ToList();
+            var root = new RootNodeInfo(RootNodeType.Connection);
+            var container = new ContainerInfo();
+            var connectionsWithNormalParent = protocolTypes
+                .Select(protocolType =>
+                {
+                    var c = new ConnectionInfo {Protocol = protocolType};
+                    c.SetParent(container);
+                    return new TestCaseData(c).SetName(protocolType + ", Connection, NormalParent");
+                });
 
-			var connectionsWithRootParent = protocolTypes
-				.Select(protocolType =>
-				{
-					var c = new ConnectionInfo { Protocol = protocolType };
-					c.SetParent(root);
-					return new TestCaseData(c).SetName(protocolType + ", Connection, RootParent");
-				});
+            var connectionsWithRootParent = protocolTypes
+                .Select(protocolType =>
+                {
+                    var c = new ConnectionInfo {Protocol = protocolType};
+                    c.SetParent(root);
+                    return new TestCaseData(c).SetName(protocolType + ", Connection, RootParent");
+                });
 
-			var contianersWithNormalParent = protocolTypes
-				.Select(protocolType =>
-				{
-					var c = new ContainerInfo { Protocol = protocolType };
-					c.SetParent(container);
-					return new TestCaseData(c).SetName(protocolType + ", Connection, NormalParent");
-				});
+            var contianersWithNormalParent = protocolTypes
+                .Select(protocolType =>
+                {
+                    var c = new ContainerInfo {Protocol = protocolType};
+                    c.SetParent(container);
+                    return new TestCaseData(c).SetName(protocolType + ", Connection, NormalParent");
+                });
 
-			var containersWithRootParent = protocolTypes
-				.Select(protocolType =>
-				{
-					var c = new ContainerInfo { Protocol = protocolType };
-					c.SetParent(root);
-					return new TestCaseData(c).SetName(protocolType + ", Connection, RootParent");
-				});
+            var containersWithRootParent = protocolTypes
+                .Select(protocolType =>
+                {
+                    var c = new ContainerInfo {Protocol = protocolType};
+                    c.SetParent(root);
+                    return new TestCaseData(c).SetName(protocolType + ", Connection, RootParent");
+                });
 
-			return connectionsWithNormalParent
-				.Concat(connectionsWithRootParent)
-				.Concat(contianersWithNormalParent)
-				.Concat(containersWithRootParent)
-				.Concat(new[]
-				{
-					new TestCaseData(root).SetName("RootNode"),
-					new TestCaseData(new RootPuttySessionsNodeInfo()).SetName("RootPuttyNode"), 
-					new TestCaseData(new PuttySessionInfo()).SetName("PuttyNode"), 
-					new TestCaseData(null).SetName("Null"), 
-				});
-		}
+            return connectionsWithNormalParent
+                .Concat(connectionsWithRootParent)
+                .Concat(contianersWithNormalParent)
+                .Concat(containersWithRootParent)
+                .Concat(new[]
+                {
+                    new TestCaseData(root).SetName("RootNode"),
+                    new TestCaseData(new RootPuttySessionsNodeInfo()).SetName("RootPuttyNode"),
+                    new TestCaseData(new PuttySessionInfo()).SetName("PuttyNode"),
+                    new TestCaseData(null).SetName("Null")
+                });
+        }
 
         internal static ConnectionInfo ConstructConnectionInfo(ProtocolType protocol, bool isContainer)
         {
             // build connection info. set certain connection properties so
             // that toggled properties are hidden in the property grid. We
             // will test those separately in the special protocol tests.
-            var node = isContainer 
+            var node = isContainer
                 ? new ContainerInfo()
                 : new ConnectionInfo();
 
@@ -248,21 +251,19 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.MacAddress),
                 nameof(ConnectionInfo.UserField),
                 nameof(ConnectionInfo.Favorite),
-                nameof(ConnectionInfo.SSHTunnelConnectionName),
+                nameof(ConnectionInfo.SSHTunnelConnectionName)
             };
 
             if (!isContainer)
-            {
-                expectedProperties.AddRange(new []
+                expectedProperties.AddRange(new[]
                 {
-                    nameof(ConnectionInfo.Hostname),
+                    nameof(ConnectionInfo.Hostname)
                 });
-            }
 
             switch (protocol)
             {
                 case ProtocolType.RDP:
-                    expectedProperties.AddRange(new []
+                    expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
@@ -294,21 +295,21 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSmartCards),
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
-						nameof(ConnectionInfo.RdpVersion)
+                        nameof(ConnectionInfo.RdpVersion)
                     });
                     break;
                 case ProtocolType.VNC:
-                    expectedProperties.AddRange(new []
+                    expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.VNCSmartSizeMode),
-                        nameof(ConnectionInfo.VNCViewOnly),
+                        nameof(ConnectionInfo.VNCViewOnly)
                     });
                     break;
                 case ProtocolType.SSH1:
                 case ProtocolType.SSH2:
-                    expectedProperties.AddRange(new []
+                    expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
@@ -323,21 +324,21 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.PuttySession),
+                        nameof(ConnectionInfo.PuttySession)
                     });
                     break;
                 case ProtocolType.HTTP:
                 case ProtocolType.HTTPS:
-                    expectedProperties.AddRange(new []
+                    expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.RenderingEngine),
+                        nameof(ConnectionInfo.RenderingEngine)
                     });
                     break;
                 case ProtocolType.ICA:
-                    expectedProperties.AddRange(new []
+                    expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
@@ -345,7 +346,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.ICAEncryptionStrength),
                         nameof(ConnectionInfo.Resolution),
                         nameof(ConnectionInfo.Colors),
-                        nameof(ConnectionInfo.CacheBitmaps),
+                        nameof(ConnectionInfo.CacheBitmaps)
                     });
                     break;
                 case ProtocolType.PowerShell:
@@ -354,7 +355,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
-                        nameof(ConnectionInfo.Port),
+                        nameof(ConnectionInfo.Port)
                     });
                     break;
                 case ProtocolType.IntApp:
@@ -364,7 +365,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
-                        nameof(ConnectionInfo.ExtApp),
+                        nameof(ConnectionInfo.ExtApp)
                     });
                     break;
                 default:

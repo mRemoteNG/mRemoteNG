@@ -36,10 +36,7 @@ namespace mRemoteNG.Themes
                 if (_xml.DocumentElement == null) continue;
                 var colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
                 var color = colorNodeList != null && colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
-                if (color != null)
-                {
-                    newPalette.addColor(colorName, ColorTranslator.FromHtml($"#{color}"));
-                }
+                if (color != null) newPalette.addColor(colorName, ColorTranslator.FromHtml($"#{color}"));
             }
 
             return newPalette;

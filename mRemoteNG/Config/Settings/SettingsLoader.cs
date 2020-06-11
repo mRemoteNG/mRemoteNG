@@ -28,11 +28,11 @@ namespace mRemoteNG.Config.Settings
 
 
         public SettingsLoader(FrmMain mainForm,
-                              MessageCollector messageCollector,
-                              QuickConnectToolStrip quickConnectToolStrip,
-                              ExternalToolsToolStrip externalToolsToolStrip,
-                              MultiSshToolStrip multiSshToolStrip,
-                              MenuStrip mainMenu)
+            MessageCollector messageCollector,
+            QuickConnectToolStrip quickConnectToolStrip,
+            ExternalToolsToolStrip externalToolsToolStrip,
+            MultiSshToolStrip multiSshToolStrip,
+            MenuStrip mainMenu)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -98,8 +98,8 @@ namespace mRemoteNG.Config.Settings
                 !SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture)) return;
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(mRemoteNG.Settings.Default.OverrideUICulture);
             _messageCollector.AddMessage(MessageClass.InformationMsg,
-                                         $"Override Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}",
-                                         true);
+                $"Override Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}",
+                true);
         }
 
         private void SetApplicationWindowPositionAndSize()
@@ -121,9 +121,7 @@ namespace mRemoteNG.Config.Settings
             }
 
             if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Maximized)
-            {
                 MainForm.WindowState = FormWindowState.Maximized;
-            }
 
             // Make sure the form is visible on the screen
             const int minHorizontal = 300;
