@@ -1106,6 +1106,7 @@
     <None Include="Documentation\user_interface\port_scan.rst" />
     <None Include="Documentation\user_interface\quick_connect.rst" />
     <None Include="Documentation\howtos\vmrdp.rst" />
+    <None Include="README.MD" />
     <None Include="Resources\Templates\AppIcon.psd" />
     <None Include="Resources\Templates\Header_dark.psd" />
     <None Include="Resources\Templates\Header_light.psd" />
@@ -1137,6 +1138,7 @@
     </None>
     <None Include="Documentation\images\connections_status.png" />
     <None Include="Documentation\images\putty.png" />
+    <Content Include="COPYING.TXT" />
     <Content Include="Documentation\images\ssh_tunnel.png" />
     <Content Include="Documentation\mssql_db_setup.sql" />
     <Content Include="Documentation\mysql_db_setup.sql" />
