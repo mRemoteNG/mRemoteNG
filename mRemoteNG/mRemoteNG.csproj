@@ -49,7 +49,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Credential\Records\" />
-    <Folder Include="Resources\Help\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />

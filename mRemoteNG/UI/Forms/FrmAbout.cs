@@ -41,6 +41,14 @@ namespace mRemoteNG.UI.Window
             pnlBottom.ForeColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            e.Cancel = true;
+            Hide();
+        }
+
         private void llLicense_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://github.com/mRemoteNG/mRemoteNG/blob/develop/COPYING.TXT");
