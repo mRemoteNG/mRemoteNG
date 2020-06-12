@@ -105,7 +105,7 @@ namespace mRemoteNG.Config.Settings
                 Runtime.ExternalToolsService.ExternalTools.Add(extA);
             }
 
-            _externalToolsToolStrip.SwitchToolBarText(mRemoteNG.Settings.Default.ExtAppsTBShowText);
+            _externalToolsToolStrip.SwitchToolBarText(Properties.Settings.Default.ExtAppsTBShowText);
             _externalToolsToolStrip.AddExternalToolsToToolBar();
         }
     }

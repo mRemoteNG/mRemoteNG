@@ -7,11 +7,11 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-
-namespace mRemoteNG.Config.Serializers
+namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
 	public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
     {

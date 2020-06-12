@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Tools;
+﻿using mRemoteNG.Resources.Language;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {

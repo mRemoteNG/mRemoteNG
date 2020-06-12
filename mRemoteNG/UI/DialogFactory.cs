@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.UI

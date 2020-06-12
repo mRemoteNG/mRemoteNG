@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Security;
 using System.Text;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security.KeyDerivation;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;

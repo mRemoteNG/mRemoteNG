@@ -15,6 +15,8 @@ using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree;
 
 

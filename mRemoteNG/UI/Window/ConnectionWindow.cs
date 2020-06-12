@@ -11,6 +11,8 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Messages;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -614,7 +616,7 @@ namespace mRemoteNG.UI.Window
                         /* rare failure here. While ExternalTool.Image already tries to default this
                          * try again so it's not null/doesn't crash.
                          */
-                        Image = externalTool.Image ?? Resources.mRemoteNG_Icon.ToBitmap()
+                        Image = externalTool.Image ?? Properties.Resources.mRemoteNG_Icon.ToBitmap()
                     };
 
                     nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem)sender).Tag as ExternalTool);

@@ -1,10 +1,10 @@
-﻿using mRemoteNG.App.Info;
-using mRemoteNG.Themes;
+﻿using System.Diagnostics;
 using System.Windows.Forms;
-using System.Diagnostics;
-using mRemoteNG.UI.Forms;
+using mRemoteNG.App.Info;
+using mRemoteNG.Resources.Language;
+using mRemoteNG.Themes;
 
-namespace mRemoteNG.UI.Window
+namespace mRemoteNG.UI.Forms
 {
     public partial class FrmAbout : Form
     {

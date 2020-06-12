@@ -67,7 +67,7 @@
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(159, 23);
             this.btnClose.TabIndex = 7;
-            this.btnClose.Text = global::mRemoteNG.Language._Close;
+            this.btnClose.Text = global::mRemoteNG.Resources.Language.Language._Close;
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -89,13 +89,13 @@
             this.chkReconnectWhenReady.Name = "chkReconnectWhenReady";
             this.chkReconnectWhenReady.Size = new System.Drawing.Size(140, 17);
             this.chkReconnectWhenReady.TabIndex = 6;
-            this.chkReconnectWhenReady.Text = global::mRemoteNG.Language.CheckboxReconnectWhenReady;
+            this.chkReconnectWhenReady.Text = global::mRemoteNG.Resources.Language.Language.CheckboxReconnectWhenReady;
             this.chkReconnectWhenReady.UseVisualStyleBackColor = true;
             this.chkReconnectWhenReady.CheckedChanged += new System.EventHandler(this.chkReconnectWhenReady_CheckedChanged);
             // 
             // pbServerStatus
             // 
-            this.pbServerStatus.Image = global::mRemoteNG.Resources.HostStatus_Check;
+            this.pbServerStatus.Image = global::mRemoteNG.Properties.Resources.HostStatus_Check;
             this.pbServerStatus.Location = new System.Drawing.Point(99, 23);
             this.pbServerStatus.Name = "pbServerStatus";
             this.pbServerStatus.Size = new System.Drawing.Size(16, 16);

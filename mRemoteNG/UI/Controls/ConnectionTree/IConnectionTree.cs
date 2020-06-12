@@ -3,8 +3,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-
-namespace mRemoteNG.UI.Controls
+namespace mRemoteNG.UI.Controls.ConnectionTree
 {
     public interface IConnectionTree
     {

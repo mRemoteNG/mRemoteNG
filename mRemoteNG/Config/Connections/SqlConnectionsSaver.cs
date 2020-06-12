@@ -7,11 +7,12 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.MsSql;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql;
 using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
@@ -177,7 +178,7 @@ namespace mRemoteNG.Config.Connections
 
         private bool SqlUserIsReadOnly()
         {
-            return mRemoteNG.Settings.Default.SQLReadOnly;
+            return Properties.Settings.Default.SQLReadOnly;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Controls.Base
 {
@@ -26,7 +27,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         private void AddClearButton()
         {
-            _pbClear.Image = Resources.Delete;
+            _pbClear.Image = Properties.Resources.Delete;
             _pbClear.Width = 20;
             _pbClear.Dock = DockStyle.Right;
             _pbClear.Cursor = Cursors.Default;

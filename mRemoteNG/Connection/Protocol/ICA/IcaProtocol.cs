@@ -9,6 +9,8 @@ using System;
 using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Connection.Protocol.ICA

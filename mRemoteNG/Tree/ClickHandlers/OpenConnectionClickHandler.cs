@@ -1,8 +1,7 @@
 ﻿using System;
 using mRemoteNG.Connection;
 
-
-namespace mRemoteNG.Tree
+namespace mRemoteNG.Tree.ClickHandlers
 {
     public class OpenConnectionClickHandler : ITreeNodeClickHandler<ConnectionInfo>
     {

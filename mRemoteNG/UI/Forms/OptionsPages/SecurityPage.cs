@@ -4,7 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.Config.Serializers.Xml;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 
@@ -18,7 +20,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PopulateEncryptionEngineDropDown();
             PopulateBlockCipherDropDown();
             ApplyTheme();
-            PageIcon = Resources.Shield_Icon;
+            PageIcon = Properties.Resources.Shield_Icon;
         }
 
         [Browsable(false)]

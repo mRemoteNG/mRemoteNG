@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace mRemoteNG.Config.Serializers.MsSql
+namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
 {
     public class LocalConnectionPropertiesXmlSerializer :
         ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string>,

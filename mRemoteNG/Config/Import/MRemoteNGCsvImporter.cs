@@ -2,7 +2,7 @@
 using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers.Csv;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Csv;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
 

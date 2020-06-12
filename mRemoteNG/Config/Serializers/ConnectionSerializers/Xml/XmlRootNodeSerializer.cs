@@ -1,9 +1,9 @@
-﻿using mRemoteNG.Security;
-using mRemoteNG.Tree.Root;
-using System;
+﻿using System;
 using System.Xml.Linq;
+using mRemoteNG.Security;
+using mRemoteNG.Tree.Root;
 
-namespace mRemoteNG.Config.Serializers.Xml
+namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
     public class XmlRootNodeSerializer
     {

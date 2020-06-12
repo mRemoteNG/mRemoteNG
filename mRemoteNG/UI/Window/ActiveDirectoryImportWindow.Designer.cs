@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.btnChangeDomain);
             this.Controls.Add(this.btnImport);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = global::mRemoteNG.Resources.ActiveDirectory_Icon;
+            this.Icon = global::mRemoteNG.Properties.Resources.ActiveDirectory_Icon;
             this.Name = "ActiveDirectoryImportWindow";
             this.TabText = "Active Directory Import";
             this.Text = "Active Directory Import";

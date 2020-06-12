@@ -6,6 +6,7 @@ using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.UI.Window
@@ -102,7 +103,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.btnTransfer._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
             this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTransfer.Image = global::mRemoteNG.Resources.SSHTransfer;
+            this.btnTransfer.Image = global::mRemoteNG.Properties.Resources.SSHTransfer;
             this.btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTransfer.Location = new System.Drawing.Point(562, 145);
             this.btnTransfer.Name = "btnTransfer";

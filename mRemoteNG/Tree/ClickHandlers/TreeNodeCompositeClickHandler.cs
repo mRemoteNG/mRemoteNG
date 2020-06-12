@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using mRemoteNG.Connection;
 
-
-namespace mRemoteNG.Tree
+namespace mRemoteNG.Tree.ClickHandlers
 {
     public class TreeNodeCompositeClickHandler : ITreeNodeClickHandler<ConnectionInfo>
     {

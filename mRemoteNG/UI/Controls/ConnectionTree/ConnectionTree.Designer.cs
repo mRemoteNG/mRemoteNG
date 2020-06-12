@@ -1,4 +1,4 @@
-﻿namespace mRemoteNG.UI.Controls
+﻿namespace mRemoteNG.UI.Controls.ConnectionTree
 {
     partial class ConnectionTree
     {

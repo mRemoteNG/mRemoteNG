@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
+using mRemoteNG.Properties;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools.Cmdline;
 

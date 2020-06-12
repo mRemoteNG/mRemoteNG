@@ -31,6 +31,8 @@ using WeifenLuo.WinFormsUI.Docking;
 using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.SchemeHandler;
+using mRemoteNG.Resources.Language;
+using Settings = mRemoteNG.Properties.Settings;
 
 // ReSharper disable MemberCanBePrivate.Global
 

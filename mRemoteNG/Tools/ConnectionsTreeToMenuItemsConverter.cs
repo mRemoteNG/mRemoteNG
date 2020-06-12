@@ -56,18 +56,18 @@ namespace mRemoteNG.Tools
             var nodeAsContainer = node as ContainerInfo;
             if (nodeAsContainer != null)
             {
-                menuItem.Image = Resources.Folder;
+                menuItem.Image = Properties.Resources.Folder;
                 menuItem.Tag = nodeAsContainer;
                 AddSubMenuNodes(nodeAsContainer.Children, menuItem);
             }
             else if (node.GetTreeNodeType() == TreeNodeType.PuttySession)
             {
-                menuItem.Image = Resources.PuttySessions;
+                menuItem.Image = Properties.Resources.PuttySessions;
                 menuItem.Tag = node;
             }
             else if (node.GetTreeNodeType() == TreeNodeType.Connection)
             {
-                menuItem.Image = node.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause;
+                menuItem.Image = node.OpenConnections.Count > 0 ? Properties.Resources.Play : Properties.Resources.Pause;
                 menuItem.Tag = node;
             }
 

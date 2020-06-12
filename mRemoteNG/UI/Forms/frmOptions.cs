@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Configuration;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -99,7 +101,7 @@ namespace mRemoteNG.UI.Forms
         private object ImageGetter(object rowobject)
         {
             var page = rowobject as OptionsPage;
-            return page?.PageIcon == null ? _display.ScaleImage(Resources.Help) : _display.ScaleImage(page.PageIcon);
+            return page?.PageIcon == null ? _display.ScaleImage(Properties.Resources.Help) : _display.ScaleImage(page.PageIcon);
         }
 
         private void SetInitiallyActivatedPage()

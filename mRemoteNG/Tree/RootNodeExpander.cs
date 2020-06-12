@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Controls.ConnectionTree;
 
 
 namespace mRemoteNG.Tree

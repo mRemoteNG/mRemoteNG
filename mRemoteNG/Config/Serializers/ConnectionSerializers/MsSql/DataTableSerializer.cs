@@ -1,16 +1,16 @@
-﻿using mRemoteNG.Connection;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Security;
+using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Security;
 
-namespace mRemoteNG.Config.Serializers.MsSql
+namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
 {
     public class DataTableSerializer : ISerializer<ConnectionInfo, DataTable>
     {

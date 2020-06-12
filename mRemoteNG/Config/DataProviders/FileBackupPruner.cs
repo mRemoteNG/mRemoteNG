@@ -13,7 +13,7 @@ namespace mRemoteNG.Config.DataProviders
             if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(directoryName))
                 return;
 
-            var searchPattern = string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, "*");
+            var searchPattern = string.Format(Properties.Settings.Default.BackupFileNameFormat, fileName, "*");
             var files = Directory.GetFiles(directoryName, searchPattern);
 
             if (files.Length <= maxBackupsToKeep)

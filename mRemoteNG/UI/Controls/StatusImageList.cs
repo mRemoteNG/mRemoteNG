@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Controls
 
             ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), image);
             ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true),
-                                 Overlay(image, Resources.ConnectedOverlay));
+                                 Overlay(image, Properties.Resources.ConnectedOverlay));
             return name;
         }
 
@@ -97,9 +97,9 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                imageList.Images.Add("Root", Resources.Root);
-                imageList.Images.Add("Folder", Resources.Folder);
-                imageList.Images.Add("PuttySessions", Resources.PuttySessions);
+                imageList.Images.Add("Root", Properties.Resources.Root);
+                imageList.Images.Add("Folder", Properties.Resources.Folder);
+                imageList.Images.Add("PuttySessions", Properties.Resources.PuttySessions);
             }
             catch (Exception ex)
             {

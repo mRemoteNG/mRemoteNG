@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using mRemoteNG.Messages.MessageFilteringOptions;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;

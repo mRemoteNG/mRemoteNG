@@ -7,12 +7,12 @@ namespace mRemoteNG.Config.DatabaseConnectors
     {
         public static IDatabaseConnector DatabaseConnectorFromSettings()
         {
-            var sqlType = mRemoteNG.Settings.Default.SQLServerType;
-            var sqlHost = mRemoteNG.Settings.Default.SQLHost;
-            var sqlCatalog = mRemoteNG.Settings.Default.SQLDatabaseName;
-            var sqlUsername = mRemoteNG.Settings.Default.SQLUser;
+            var sqlType = Properties.Settings.Default.SQLServerType;
+            var sqlHost = Properties.Settings.Default.SQLHost;
+            var sqlCatalog = Properties.Settings.Default.SQLDatabaseName;
+            var sqlUsername = Properties.Settings.Default.SQLUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var sqlPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, Runtime.EncryptionKey);
+            var sqlPassword = cryptographyProvider.Decrypt(Properties.Settings.Default.SQLPass, Runtime.EncryptionKey);
 
             return DatabaseConnector(sqlType, sqlHost, sqlCatalog, sqlUsername, sqlPassword);
         }

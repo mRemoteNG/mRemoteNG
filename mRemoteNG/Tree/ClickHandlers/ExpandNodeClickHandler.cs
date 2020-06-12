@@ -1,10 +1,9 @@
 ﻿using System;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Controls.ConnectionTree;
 
-
-namespace mRemoteNG.Tree
+namespace mRemoteNG.Tree.ClickHandlers
 {
     public class ExpandNodeClickHandler : ITreeNodeClickHandler<ConnectionInfo>
     {

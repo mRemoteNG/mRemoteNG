@@ -1,4 +1,4 @@
-﻿namespace mRemoteNG.Tree
+﻿namespace mRemoteNG.Tree.ClickHandlers
 {
     public interface ITreeNodeClickHandler<in T>
     {

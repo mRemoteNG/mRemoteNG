@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;

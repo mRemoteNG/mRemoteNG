@@ -25,32 +25,32 @@ namespace mRemoteNG.Config.Settings
                     frmMain.WindowState = FormWindowState.Maximized;
                 }
 
-                mRemoteNG.Settings.Default.MainFormLocation = frmMain.Location;
-                mRemoteNG.Settings.Default.MainFormSize = frmMain.Size;
+                Properties.Settings.Default.MainFormLocation = frmMain.Location;
+                Properties.Settings.Default.MainFormSize = frmMain.Size;
 
                 if (frmMain.WindowState != FormWindowState.Normal)
                 {
-                    mRemoteNG.Settings.Default.MainFormRestoreLocation = frmMain.RestoreBounds.Location;
-                    mRemoteNG.Settings.Default.MainFormRestoreSize = frmMain.RestoreBounds.Size;
+                    Properties.Settings.Default.MainFormRestoreLocation = frmMain.RestoreBounds.Location;
+                    Properties.Settings.Default.MainFormRestoreSize = frmMain.RestoreBounds.Size;
                 }
 
-                mRemoteNG.Settings.Default.MainFormState = frmMain.WindowState;
+                Properties.Settings.Default.MainFormState = frmMain.WindowState;
 
                 if (frmMain.Fullscreen != null)
                 {
-                    mRemoteNG.Settings.Default.MainFormKiosk = frmMain.Fullscreen.Value;
+                    Properties.Settings.Default.MainFormKiosk = frmMain.Fullscreen.Value;
                 }
 
-                mRemoteNG.Settings.Default.FirstStart = false;
-                mRemoteNG.Settings.Default.ResetPanels = false;
-                mRemoteNG.Settings.Default.ResetToolbars = false;
-                mRemoteNG.Settings.Default.NoReconnect = false;
+                Properties.Settings.Default.FirstStart = false;
+                Properties.Settings.Default.ResetPanels = false;
+                Properties.Settings.Default.ResetToolbars = false;
+                Properties.Settings.Default.NoReconnect = false;
 
                 SaveExternalAppsToolbarLocation(externalToolsToolStrip);
                 SaveQuickConnectToolbarLocation(quickConnectToolStrip);
                 SaveMultiSshToolbarLocation(multiSshToolStrip);
 
-                mRemoteNG.Settings.Default.Save();
+                Properties.Settings.Default.Save();
 
                 SaveDockPanelLayout();
                 SaveExternalApps();
@@ -63,35 +63,35 @@ namespace mRemoteNG.Config.Settings
 
         private static void SaveExternalAppsToolbarLocation(ExternalToolsToolStrip externalToolsToolStrip)
         {
-            mRemoteNG.Settings.Default.ExtAppsTBLocation = externalToolsToolStrip.Location;
-            mRemoteNG.Settings.Default.ExtAppsTBVisible = externalToolsToolStrip.Visible;
-            mRemoteNG.Settings.Default.ExtAppsTBShowText = externalToolsToolStrip.CMenToolbarShowText.Checked;
+            Properties.Settings.Default.ExtAppsTBLocation = externalToolsToolStrip.Location;
+            Properties.Settings.Default.ExtAppsTBVisible = externalToolsToolStrip.Visible;
+            Properties.Settings.Default.ExtAppsTBShowText = externalToolsToolStrip.CMenToolbarShowText.Checked;
 
             if (externalToolsToolStrip.Parent != null)
             {
-                mRemoteNG.Settings.Default.ExtAppsTBParentDock = externalToolsToolStrip.Parent.Dock.ToString();
+                Properties.Settings.Default.ExtAppsTBParentDock = externalToolsToolStrip.Parent.Dock.ToString();
             }
         }
 
         private static void SaveQuickConnectToolbarLocation(Control quickConnectToolStrip)
         {
-            mRemoteNG.Settings.Default.QuickyTBLocation = quickConnectToolStrip.Location;
-            mRemoteNG.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
+            Properties.Settings.Default.QuickyTBLocation = quickConnectToolStrip.Location;
+            Properties.Settings.Default.QuickyTBVisible = quickConnectToolStrip.Visible;
 
             if (quickConnectToolStrip.Parent != null)
             {
-                mRemoteNG.Settings.Default.QuickyTBParentDock = quickConnectToolStrip.Parent.Dock.ToString();
+                Properties.Settings.Default.QuickyTBParentDock = quickConnectToolStrip.Parent.Dock.ToString();
             }
         }
 
         private static void SaveMultiSshToolbarLocation(MultiSshToolStrip multiSshToolStrip)
         {
-            mRemoteNG.Settings.Default.MultiSshToolbarLocation = multiSshToolStrip.Location;
-            mRemoteNG.Settings.Default.MultiSshToolbarVisible = multiSshToolStrip.Visible;
+            Properties.Settings.Default.MultiSshToolbarLocation = multiSshToolStrip.Location;
+            Properties.Settings.Default.MultiSshToolbarVisible = multiSshToolStrip.Visible;
 
             if (multiSshToolStrip.Parent != null)
             {
-                mRemoteNG.Settings.Default.MultiSshToolbarParentDock = multiSshToolStrip.Parent.Dock.ToString();
+                Properties.Settings.Default.MultiSshToolbarParentDock = multiSshToolStrip.Parent.Dock.ToString();
             }
         }
 

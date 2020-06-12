@@ -1,10 +1,10 @@
 ﻿using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using System;
 using System.IO;
 using System.Security;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 
 namespace mRemoteNG.Config.Connections
 {

@@ -4,7 +4,7 @@ using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-namespace mRemoteNG.Config.Serializers.Xml
+namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
     public class XmlConnectionSerializerFactory
     {

@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Security.SymmetricEncryption

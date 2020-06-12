@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Properties;
 
 namespace mRemoteNG.App.Initialization
 {

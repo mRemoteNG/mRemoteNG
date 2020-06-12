@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
 
 
@@ -26,7 +28,7 @@ namespace mRemoteNG.Tools
                 _cMenCons = new ToolStripMenuItem
                 {
                     Text = Language.Connections,
-                    Image = Resources.Root
+                    Image = Properties.Resources.Root
                 };
 
                 var cMenSep1 = new ToolStripSeparator();
@@ -46,7 +48,7 @@ namespace mRemoteNG.Tools
                 {
                     Text = @"mRemoteNG",
                     BalloonTipText = @"mRemoteNG",
-                    Icon = Resources.mRemoteNG_Icon,
+                    Icon = Properties.Resources.mRemoteNG_Icon,
                     ContextMenuStrip = _cMen,
                     Visible = true
                 };

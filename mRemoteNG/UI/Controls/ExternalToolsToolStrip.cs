@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 

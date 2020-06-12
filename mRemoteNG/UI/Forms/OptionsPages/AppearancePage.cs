@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -11,7 +13,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Resources.Panels_Icon;
+            PageIcon = Properties.Resources.Panels_Icon;
         }
 
         public override string PageName

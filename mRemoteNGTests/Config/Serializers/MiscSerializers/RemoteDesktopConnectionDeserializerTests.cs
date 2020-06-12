@@ -5,6 +5,7 @@ using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 using System.Linq;
+using mRemoteNG.Config.Serializers.MiscSerializers;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {

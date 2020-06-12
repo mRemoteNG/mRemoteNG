@@ -4,6 +4,7 @@ using CefSharp;
 using CefSharp.WinForms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Tabs;
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
+using mRemoteNG.Properties;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 

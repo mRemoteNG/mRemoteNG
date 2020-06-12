@@ -412,7 +412,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.btnScan._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
             this.btnScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScan.Image = global::mRemoteNG.Resources.Search;
+            this.btnScan.Image = global::mRemoteNG.Properties.Resources.Search;
             this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnScan.Location = new System.Drawing.Point(765, 99);
             this.btnScan.Name = "btnScan";

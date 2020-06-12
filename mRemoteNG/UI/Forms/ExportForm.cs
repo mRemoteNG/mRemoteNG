@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms

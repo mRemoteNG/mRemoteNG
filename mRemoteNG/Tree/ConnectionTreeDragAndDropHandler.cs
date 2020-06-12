@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree.Root;
 
 

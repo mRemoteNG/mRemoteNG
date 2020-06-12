@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -51,7 +52,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsSSHTransfer
             // 
-            _mMenToolsSshTransfer.Image = Resources.SSHTransfer;
+            _mMenToolsSshTransfer.Image = Properties.Resources.SSHTransfer;
             _mMenToolsSshTransfer.Name = "mMenToolsSSHTransfer";
             _mMenToolsSshTransfer.Size = new System.Drawing.Size(184, 22);
             _mMenToolsSshTransfer.Text = Language.SshFileTransfer;
@@ -59,7 +60,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsUVNCSC
             // 
-            _mMenToolsUvncsc.Image = Resources.UVNC_SC;
+            _mMenToolsUvncsc.Image = Properties.Resources.UVNC_SC;
             _mMenToolsUvncsc.Name = "mMenToolsUVNCSC";
             _mMenToolsUvncsc.Size = new System.Drawing.Size(184, 22);
             _mMenToolsUvncsc.Text = Language.UltraVNCSingleClick;
@@ -68,7 +69,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsExternalApps
             // 
-            _mMenToolsExternalApps.Image = Resources.ExtApp;
+            _mMenToolsExternalApps.Image = Properties.Resources.ExtApp;
             _mMenToolsExternalApps.Name = "mMenToolsExternalApps";
             _mMenToolsExternalApps.Size = new System.Drawing.Size(184, 22);
             _mMenToolsExternalApps.Text = Language.ExternalTool;
@@ -76,7 +77,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsPortScan
             // 
-            _mMenToolsPortScan.Image = Resources.PortScan;
+            _mMenToolsPortScan.Image = Properties.Resources.PortScan;
             _mMenToolsPortScan.Name = "mMenToolsPortScan";
             _mMenToolsPortScan.Size = new System.Drawing.Size(184, 22);
             _mMenToolsPortScan.Text = Language.PortScan;
@@ -84,7 +85,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenViewScreenshotManager
             // 
-            _mMenViewScreenshotManager.Image = Resources.Screenshot;
+            _mMenViewScreenshotManager.Image = Properties.Resources.Screenshot;
             _mMenViewScreenshotManager.Name = "mMenViewScreenshotManager";
             _mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
             _mMenViewScreenshotManager.Text = Language.Screenshots;
@@ -97,7 +98,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsOptions
             // 
-            _mMenToolsOptions.Image = Resources.Options;
+            _mMenToolsOptions.Image = Properties.Resources.Options;
             _mMenToolsOptions.Name = "mMenToolsOptions";
             _mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
             _mMenToolsOptions.Text = Language.Options;

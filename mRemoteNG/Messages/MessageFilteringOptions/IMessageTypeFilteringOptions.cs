@@ -1,4 +1,4 @@
-﻿namespace mRemoteNG.Messages
+﻿namespace mRemoteNG.Messages.MessageFilteringOptions
 {
     public interface IMessageTypeFilteringOptions
     {

@@ -8,10 +8,14 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 using mRemoteNG.Tree;
+using mRemoteNG.Tree.ClickHandlers;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Controls.ConnectionTree;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -194,13 +198,13 @@ namespace mRemoteNG.UI.Window
                 if (_sortedAz)
                 {
                     ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Ascending);
-                    mMenSort.Image = mRemoteNG.Resources.Sort_ZA;
+                    mMenSort.Image = Properties.Resources.Sort_ZA;
                     _sortedAz = false;
                 }
                 else
                 {
                     ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Descending);
-                    mMenSort.Image = mRemoteNG.Resources.Sort_AZ;
+                    mMenSort.Image = Properties.Resources.Sort_AZ;
                     _sortedAz = true;
                 }
             };
@@ -218,7 +222,7 @@ namespace mRemoteNG.UI.Window
                         {
                             Text = containerInfo.Name,
                             Tag = containerInfo,
-                            Image = containerInfo.OpenConnections.Count > 0 ? Resources.Play : Resources.Pause
+                            Image = containerInfo.OpenConnections.Count > 0 ? Properties.Resources.Play : Properties.Resources.Pause
                         };
                         favoriteMenuItem.MouseUp += FavoriteMenuItem_MouseUp;
                         favoritesList.Add(favoriteMenuItem);

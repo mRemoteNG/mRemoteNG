@@ -1,5 +1,4 @@
-﻿using mRemoteNG.Config.Serializers.Xml;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
@@ -10,6 +9,7 @@ using NUnit.Framework;
 using System;
 using System.Linq;
 using System.Text;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 
 
 namespace mRemoteNGTests.IntegrationTests
