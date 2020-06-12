@@ -10,7 +10,7 @@ This how to provides you with all the information you need to get things running
 To be able to connect to the virtual machine we need its' id.
 You can find it by executing the following powershell command on the Hyper-V server:
 
-.. code-block:: powershell
+.. code-block:: 
 
    Get-VM | select Name, ID
 
@@ -27,13 +27,13 @@ You must be a member of the *Administrators* **and** *Hyper-V Administrators* gr
 If this is not the case your user has to be granted access to remotely access the machine.
 The following Powershell command achieves this:
 
-.. code-block:: powershell
+.. code-block:: 
 
    Grant-VMConnectAccess -VMName <VMNAME> -UserName <DOMAIN>\\<USERNAME>
 
 Port 2179 must be open on Hyper-V server and on the machine you are connecting from. Use the following command to open the ports on the firewall if needed:
 
-.. code-block:: powershell
+.. code-block:: 
 
    netsh advfirewall firewall add rule name="VMRDP" dir=in action=allow protocol=TCP localport=2179 (incoming)
 	netsh advfirewall firewall add rule name="VMRDP" dir=out action=allow protocol=TCP localport=2179 (outgoing)
@@ -51,7 +51,7 @@ This problem occurs because of the CredSSP (Credential Security Service Provider
 
 Start the PowerShell console with administrative privileges and run the following commands:
 
-.. code-block:: powershell
+.. code-block:: 
 
    New-ItemProperty -Path HKLM\:\SYSTEM\CurrentControlSet\Control\Lsa\Credssp\PolicyDefaults\AllowDefaultCredentialsDomain -Name Hyper-V -PropertyType String -Value "*" -Force
    New-ItemProperty -Path HKLM\:\SYSTEM\CurrentControlSet\Control\Lsa\Credssp\PolicyDefaults\AllowSavedCredentialsDomain -Name Hyper-V -PropertyType String -Value "*" -Force
