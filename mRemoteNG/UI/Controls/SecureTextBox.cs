@@ -1,10 +1,9 @@
 ﻿using System.Security;
 using mRemoteNG.Security;
-using mRemoteNG.UI.Controls.Base;
 
 namespace mRemoteNG.UI.Controls
 {
-    public partial class SecureTextBox : NGTextBox
+    public partial class SecureTextBox : MrngTextBox
     {
         public SecureString SecString { get; private set; } = new SecureString();
 

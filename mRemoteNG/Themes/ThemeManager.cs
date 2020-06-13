@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using mRemoteNG.Messages;
+using mRemoteNG.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Themes

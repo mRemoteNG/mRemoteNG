@@ -7,6 +7,7 @@ using System.Text;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
 using Message = mRemoteNG.Messages.Message;
@@ -76,10 +77,10 @@ namespace mRemoteNG.UI.Window
         private void FillImageList()
         {
             imgListMC.ImageSize = _display.ScaleSize(imgListMC.ImageSize);
-            imgListMC.Images.Add(_display.ScaleImage(Resources.brick));
-            imgListMC.Images.Add(_display.ScaleImage(Resources.InformationSmall));
-            imgListMC.Images.Add(_display.ScaleImage(Resources.WarningSmall));
-            imgListMC.Images.Add(_display.ScaleImage(Resources.ErrorSmall));
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.brick));
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.InformationSmall));
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.WarningSmall));
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.ErrorSmall));
         }
 
         private void LayoutVertical()
@@ -218,7 +219,7 @@ namespace mRemoteNG.UI.Window
                 switch (eMsg.Class)
                 {
                     case MessageClass.DebugMsg:
-                        pbError.Image = _display.ScaleImage(Resources.brick);
+                        pbError.Image = _display.ScaleImage(Properties.Resources.brick);
                         if (_themeManager.ThemingActive)
                         {
                             pnlErrorMsg.BackColor = Color.LightSteelBlue;
@@ -228,7 +229,7 @@ namespace mRemoteNG.UI.Window
 
                         break;
                     case MessageClass.InformationMsg:
-                        pbError.Image = _display.ScaleImage(Resources.Information);
+                        pbError.Image = _display.ScaleImage(Properties.Resources.Information);
                         if (_themeManager.ThemingActive)
                         {
                             pnlErrorMsg.BackColor = Color.LightSteelBlue;
@@ -238,7 +239,7 @@ namespace mRemoteNG.UI.Window
 
                         break;
                     case MessageClass.WarningMsg:
-                        pbError.Image = _display.ScaleImage(Resources.Warning);
+                        pbError.Image = _display.ScaleImage(Properties.Resources.Warning);
                         if (_themeManager.ActiveAndExtended)
                         {
                             //Inverse colors for dramatic effect
@@ -258,7 +259,7 @@ namespace mRemoteNG.UI.Window
 
                         break;
                     case MessageClass.ErrorMsg:
-                        pbError.Image = _display.ScaleImage(Resources._Error);
+                        pbError.Image = _display.ScaleImage(Properties.Resources._Error);
                         if (_themeManager.ActiveAndExtended)
                         {
                             pnlErrorMsg.BackColor =

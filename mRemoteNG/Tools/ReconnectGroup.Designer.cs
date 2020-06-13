@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.Tools
+﻿using mRemoteNG.UI.Controls;
+
+namespace mRemoteNG.Tools
 {
     public partial class ReconnectGroup : System.Windows.Forms.UserControl
 	{
@@ -26,10 +28,10 @@
 		{
             this.components = new System.ComponentModel.Container();
             this.grpAutomaticReconnect = new System.Windows.Forms.GroupBox();
-            this.lblAnimation = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.btnClose = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.lblServerStatus = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.chkReconnectWhenReady = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.lblAnimation = new mRemoteNG.UI.Controls.MrngLabel();
+            this.btnClose = new MrngButton();
+            this.lblServerStatus = new mRemoteNG.UI.Controls.MrngLabel();
+            this.chkReconnectWhenReady = new MrngCheckBox();
             this.pbServerStatus = new System.Windows.Forms.PictureBox();
             this.tmrAnimation = new System.Windows.Forms.Timer(this.components);
             this.grpAutomaticReconnect.SuspendLayout();
@@ -61,13 +63,13 @@
             // 
             // btnClose
             // 
-            this.btnClose._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnClose._mice = MrngButton.MouseState.HOVER;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Location = new System.Drawing.Point(6, 67);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(159, 23);
             this.btnClose.TabIndex = 7;
-            this.btnClose.Text = global::mRemoteNG.Language._Close;
+            this.btnClose.Text = global::mRemoteNG.Resources.Language.Language._Close;
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -82,20 +84,20 @@
             // 
             // chkReconnectWhenReady
             // 
-            this.chkReconnectWhenReady._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkReconnectWhenReady._mice = MrngCheckBox.MouseState.HOVER;
             this.chkReconnectWhenReady.AutoSize = true;
             this.chkReconnectWhenReady.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkReconnectWhenReady.Location = new System.Drawing.Point(18, 44);
             this.chkReconnectWhenReady.Name = "chkReconnectWhenReady";
             this.chkReconnectWhenReady.Size = new System.Drawing.Size(140, 17);
             this.chkReconnectWhenReady.TabIndex = 6;
-            this.chkReconnectWhenReady.Text = global::mRemoteNG.Language.CheckboxReconnectWhenReady;
+            this.chkReconnectWhenReady.Text = global::mRemoteNG.Resources.Language.Language.CheckboxReconnectWhenReady;
             this.chkReconnectWhenReady.UseVisualStyleBackColor = true;
             this.chkReconnectWhenReady.CheckedChanged += new System.EventHandler(this.chkReconnectWhenReady_CheckedChanged);
             // 
             // pbServerStatus
             // 
-            this.pbServerStatus.Image = global::mRemoteNG.Resources.HostStatus_Check;
+            this.pbServerStatus.Image = global::mRemoteNG.Properties.Resources.HostStatus_Check;
             this.pbServerStatus.Location = new System.Drawing.Point(99, 23);
             this.pbServerStatus.Name = "pbServerStatus";
             this.pbServerStatus.Size = new System.Drawing.Size(16, 16);
@@ -125,12 +127,12 @@
 
 		}
 		internal System.Windows.Forms.GroupBox grpAutomaticReconnect;
-		internal UI.Controls.Base.NGButton btnClose;
-		internal UI.Controls.Base.NGLabel lblServerStatus;
-		internal UI.Controls.Base.NGCheckBox chkReconnectWhenReady;
+		internal MrngButton btnClose;
+		internal UI.Controls.MrngLabel lblServerStatus;
+		internal MrngCheckBox chkReconnectWhenReady;
 		internal System.Windows.Forms.PictureBox pbServerStatus;
 		internal System.Windows.Forms.Timer tmrAnimation;
-		internal UI.Controls.Base.NGLabel lblAnimation;
+		internal UI.Controls.MrngLabel lblAnimation;
         private System.ComponentModel.IContainer components;
     }
 }

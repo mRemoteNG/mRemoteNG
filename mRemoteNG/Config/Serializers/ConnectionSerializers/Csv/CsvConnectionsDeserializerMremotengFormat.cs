@@ -10,7 +10,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-namespace mRemoteNG.Config.Serializers.Csv
+namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 {
     public class CsvConnectionsDeserializerMremotengFormat : IDeserializer<string, ConnectionTreeModel>
     {

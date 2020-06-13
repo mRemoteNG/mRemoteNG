@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Menu

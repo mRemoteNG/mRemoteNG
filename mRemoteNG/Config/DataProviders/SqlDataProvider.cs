@@ -108,7 +108,7 @@ namespace mRemoteNG.Config.DataProviders
 
         private bool DbUserIsReadOnly()
         {
-            return mRemoteNG.Settings.Default.SQLReadOnly;
+            return Properties.Settings.Default.SQLReadOnly;
         }
     }
 }

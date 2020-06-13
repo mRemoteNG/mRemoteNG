@@ -1,7 +1,7 @@
 ﻿using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 
-namespace mRemoteNG.UI.Controls
+namespace mRemoteNG.UI.Controls.ConnectionTree
 {
     public class NameColumn : OLVColumn
     {

@@ -1,4 +1,9 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.Globalization;
+using System.Security;
+using System.Windows.Forms;
+using System.Xml;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -6,20 +11,15 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
-using System;
-using System.Globalization;
-using System.Security;
-using System.Windows.Forms;
-using System.Xml;
-using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 
-namespace mRemoteNG.Config.Serializers.Xml
+namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
     public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
     {

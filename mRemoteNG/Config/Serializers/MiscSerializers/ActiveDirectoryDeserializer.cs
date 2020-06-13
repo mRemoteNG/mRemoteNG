@@ -6,12 +6,12 @@ using mRemoteNG.Config.Import;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-
-namespace mRemoteNG.Config.Serializers
+namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
     public class ActiveDirectoryDeserializer
     {

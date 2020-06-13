@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using System.IO;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
 
@@ -77,7 +78,7 @@ namespace mRemoteNG.UI.Window
                 mMenFileSaveAll,
                 mMenFileRemoveAll
             });
-            mMenFile.Image = Resources.File;
+            mMenFile.Image = Properties.Resources.File;
             mMenFile.Name = "mMenFile";
             mMenFile.Size = new Size(53, 20);
             mMenFile.Text = "&File";
@@ -85,7 +86,7 @@ namespace mRemoteNG.UI.Window
             // 
             // mMenFileSaveAll
             // 
-            mMenFileSaveAll.Image = Resources.Screenshot_Save;
+            mMenFileSaveAll.Image = Properties.Resources.Screenshot_Save;
             mMenFileSaveAll.Name = "mMenFileSaveAll";
             mMenFileSaveAll.Size = new Size(130, 22);
             mMenFileSaveAll.Text = "Save All";
@@ -93,7 +94,7 @@ namespace mRemoteNG.UI.Window
             // 
             // mMenFileRemoveAll
             // 
-            mMenFileRemoveAll.Image = Resources.Screenshot_Delete;
+            mMenFileRemoveAll.Image = Properties.Resources.Screenshot_Delete;
             mMenFileRemoveAll.Name = "mMenFileRemoveAll";
             mMenFileRemoveAll.Size = new Size(130, 22);
             mMenFileRemoveAll.Text = "Remove All";
@@ -111,7 +112,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cMenScreenshotCopy
             // 
-            cMenScreenshotCopy.Image = Resources.Screenshot_Copy;
+            cMenScreenshotCopy.Image = Properties.Resources.Screenshot_Copy;
             cMenScreenshotCopy.Name = "cMenScreenshotCopy";
             cMenScreenshotCopy.Size = new Size(102, 22);
             cMenScreenshotCopy.Text = "Copy";
@@ -119,7 +120,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cMenScreenshotSave
             // 
-            cMenScreenshotSave.Image = Resources.Screenshot_Save;
+            cMenScreenshotSave.Image = Properties.Resources.Screenshot_Save;
             cMenScreenshotSave.Name = "cMenScreenshotSave";
             cMenScreenshotSave.Size = new Size(102, 22);
             cMenScreenshotSave.Text = "Save";
@@ -142,7 +143,7 @@ namespace mRemoteNG.UI.Window
             Controls.Add(msMain);
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             HideOnClose = true;
-            Icon = Resources.Screenshot_Icon;
+            Icon = Properties.Resources.Screenshot_Icon;
             MainMenuStrip = msMain;
             Name = "ScreenshotManagerWindow";
             TabText = "Screenshots";

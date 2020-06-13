@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using AxMSTSCLib;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using MSTSCLib;
 
 namespace mRemoteNG.Connection.Protocol.RDP

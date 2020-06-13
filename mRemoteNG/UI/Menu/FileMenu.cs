@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
@@ -99,7 +101,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileNewConnection
             // 
-            _mMenFileNewConnection.Image = Resources.Connection_Add;
+            _mMenFileNewConnection.Image = Properties.Resources.Connection_Add;
             _mMenFileNewConnection.Name = "mMenFileNewConnection";
             _mMenFileNewConnection.ShortcutKeys = Keys.Control | Keys.N;
             _mMenFileNewConnection.Size = new System.Drawing.Size(281, 22);
@@ -108,7 +110,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileNewFolder
             // 
-            _mMenFileNewFolder.Image = Resources.Folder_Add;
+            _mMenFileNewFolder.Image = Properties.Resources.Folder_Add;
             _mMenFileNewFolder.Name = "mMenFileNewFolder";
             _mMenFileNewFolder.ShortcutKeys = (Keys.Control | Keys.Shift)
                                             | Keys.N;
@@ -123,7 +125,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileNew
             // 
-            _mMenFileNew.Image = Resources.Connections_New;
+            _mMenFileNew.Image = Properties.Resources.Connections_New;
             _mMenFileNew.Name = "mMenFileNew";
             _mMenFileNew.Size = new System.Drawing.Size(281, 22);
             _mMenFileNew.Text = Language.NewConnectionFile;
@@ -131,7 +133,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileLoad
             // 
-            _mMenFileLoad.Image = Resources.Connections_Load;
+            _mMenFileLoad.Image = Properties.Resources.Connections_Load;
             _mMenFileLoad.Name = "mMenFileLoad";
             _mMenFileLoad.ShortcutKeys = Keys.Control | Keys.O;
             _mMenFileLoad.Size = new System.Drawing.Size(281, 22);
@@ -140,7 +142,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileSave
             // 
-            _mMenFileSave.Image = Resources.Connections_Save;
+            _mMenFileSave.Image = Properties.Resources.Connections_Save;
             _mMenFileSave.Name = "mMenFileSave";
             _mMenFileSave.ShortcutKeys = Keys.Control | Keys.S;
             _mMenFileSave.Size = new System.Drawing.Size(281, 22);
@@ -149,7 +151,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileSaveAs
             // 
-            _mMenFileSaveAs.Image = Resources.Connections_SaveAs;
+            _mMenFileSaveAs.Image = Properties.Resources.Connections_SaveAs;
             _mMenFileSaveAs.Name = "mMenFileSaveAs";
             _mMenFileSaveAs.ShortcutKeys = (Keys.Control | Keys.Shift)
                                          | Keys.S;
@@ -164,7 +166,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileDelete
             // 
-            _mMenFileDelete.Image = Resources.Delete;
+            _mMenFileDelete.Image = Properties.Resources.Delete;
             _mMenFileDelete.Name = "mMenFileDelete";
             _mMenFileDelete.Size = new System.Drawing.Size(281, 22);
             _mMenFileDelete.Text = Language.Delete;
@@ -172,7 +174,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileRename
             // 
-            _mMenFileRename.Image = Resources.Rename;
+            _mMenFileRename.Image = Properties.Resources.Rename;
             _mMenFileRename.Name = "mMenFileRename";
             _mMenFileRename.Size = new System.Drawing.Size(281, 22);
             _mMenFileRename.Text = Language.Rename;
@@ -180,7 +182,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileDuplicate
             // 
-            _mMenFileDuplicate.Image = Resources.page_copy;
+            _mMenFileDuplicate.Image = Properties.Resources.page_copy;
             _mMenFileDuplicate.Name = "mMenFileDuplicate";
             _mMenFileDuplicate.Size = new System.Drawing.Size(281, 22);
             _mMenFileDuplicate.Text = Language.Duplicate;
@@ -193,7 +195,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenReconnectAll
             // 
-            _mMenReconnectAll.Image = Resources.Refresh;
+            _mMenReconnectAll.Image = Properties.Resources.Refresh;
             _mMenReconnectAll.Name = "mMenReconnectAll";
             _mMenReconnectAll.Size = new System.Drawing.Size(281, 22);
             _mMenReconnectAll.Text = Language.ReconnectAllConnections;
@@ -251,7 +253,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileExit
             // 
-            _mMenFileExit.Image = Resources.Quit;
+            _mMenFileExit.Image = Properties.Resources.Quit;
             _mMenFileExit.Name = "mMenFileExit";
             _mMenFileExit.ShortcutKeys = Keys.Alt | Keys.F4;
             _mMenFileExit.Size = new System.Drawing.Size(281, 22);

@@ -2,6 +2,7 @@ using System.IO;
 using System.Linq;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Container;
 
 

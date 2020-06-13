@@ -1,4 +1,6 @@
+﻿
 
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -30,14 +32,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            this.lblLanguageRestartRequired = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.cboLanguage = new mRemoteNG.UI.Controls.Base.NGComboBox();
-            this.lblLanguage = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.chkShowFullConnectionsFilePathInTitle = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.chkShowDescriptionTooltipsInTree = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.chkShowSystemTrayIcon = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.chkMinimizeToSystemTray = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.chkCloseToSystemTray = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.lblLanguageRestartRequired = new mRemoteNG.UI.Controls.MrngLabel();
+            this.cboLanguage = new MrngComboBox();
+            this.lblLanguage = new mRemoteNG.UI.Controls.MrngLabel();
+            this.chkShowFullConnectionsFilePathInTitle = new MrngCheckBox();
+            this.chkShowDescriptionTooltipsInTree = new MrngCheckBox();
+            this.chkShowSystemTrayIcon = new MrngCheckBox();
+            this.chkMinimizeToSystemTray = new MrngCheckBox();
+            this.chkCloseToSystemTray = new MrngCheckBox();
             this.SuspendLayout();
             // 
             // lblLanguageRestartRequired
@@ -51,7 +53,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboLanguage
             // 
-            this.cboLanguage._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.cboLanguage._mice = MrngComboBox.MouseState.HOVER;
             this.cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLanguage.FormattingEnabled = true;
             this.cboLanguage.Location = new System.Drawing.Point(3, 24);
@@ -71,7 +73,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowFullConnectionsFilePathInTitle
             // 
-            this.chkShowFullConnectionsFilePathInTitle._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkShowFullConnectionsFilePathInTitle._mice = MrngCheckBox.MouseState.OUT;
             this.chkShowFullConnectionsFilePathInTitle.AutoSize = true;
             this.chkShowFullConnectionsFilePathInTitle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(3, 127);
@@ -83,7 +85,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowDescriptionTooltipsInTree
             // 
-            this.chkShowDescriptionTooltipsInTree._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkShowDescriptionTooltipsInTree._mice = MrngCheckBox.MouseState.OUT;
             this.chkShowDescriptionTooltipsInTree.AutoSize = true;
             this.chkShowDescriptionTooltipsInTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowDescriptionTooltipsInTree.Location = new System.Drawing.Point(3, 104);
@@ -95,7 +97,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowSystemTrayIcon
             // 
-            this.chkShowSystemTrayIcon._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkShowSystemTrayIcon._mice = MrngCheckBox.MouseState.OUT;
             this.chkShowSystemTrayIcon.AutoSize = true;
             this.chkShowSystemTrayIcon.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowSystemTrayIcon.Location = new System.Drawing.Point(3, 173);
@@ -107,7 +109,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkMinimizeToSystemTray
             // 
-            this.chkMinimizeToSystemTray._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkMinimizeToSystemTray._mice = MrngCheckBox.MouseState.OUT;
             this.chkMinimizeToSystemTray.AutoSize = true;
             this.chkMinimizeToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkMinimizeToSystemTray.Location = new System.Drawing.Point(3, 196);
@@ -119,7 +121,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkCloseToSystemTray
             // 
-            this.chkCloseToSystemTray._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkCloseToSystemTray._mice = MrngCheckBox.MouseState.OUT;
             this.chkCloseToSystemTray.AutoSize = true;
             this.chkCloseToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCloseToSystemTray.Location = new System.Drawing.Point(3, 219);
@@ -147,13 +149,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.PerformLayout();
 
 		}
-		internal Controls.Base.NGLabel lblLanguageRestartRequired;
-		internal Controls.Base.NGComboBox cboLanguage;
-		internal Controls.Base.NGLabel lblLanguage;
-		internal Controls.Base.NGCheckBox chkShowFullConnectionsFilePathInTitle;
-		internal Controls.Base.NGCheckBox chkShowDescriptionTooltipsInTree;
-		internal Controls.Base.NGCheckBox chkShowSystemTrayIcon;
-		internal Controls.Base.NGCheckBox chkMinimizeToSystemTray;
-        internal Controls.Base.NGCheckBox chkCloseToSystemTray;
+		internal Controls.MrngLabel lblLanguageRestartRequired;
+		internal MrngComboBox cboLanguage;
+		internal Controls.MrngLabel lblLanguage;
+		internal MrngCheckBox chkShowFullConnectionsFilePathInTitle;
+		internal MrngCheckBox chkShowDescriptionTooltipsInTree;
+		internal MrngCheckBox chkShowSystemTrayIcon;
+		internal MrngCheckBox chkMinimizeToSystemTray;
+        internal MrngCheckBox chkCloseToSystemTray;
     }
 }

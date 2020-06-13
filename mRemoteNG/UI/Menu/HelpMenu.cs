@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Resources.Language;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Menu
@@ -61,7 +63,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoHelp
             // 
-            _mMenInfoHelp.Image = Resources.Help;
+            _mMenInfoHelp.Image = Properties.Resources.Help;
             _mMenInfoHelp.Name = "mMenInfoHelp";
             _mMenInfoHelp.ShortcutKeys = Keys.F1;
             _mMenInfoHelp.Size = new System.Drawing.Size(190, 22);
@@ -75,7 +77,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoWebsite
             // 
-            _mMenInfoWebsite.Image = Resources.Website;
+            _mMenInfoWebsite.Image = Properties.Resources.Website;
             _mMenInfoWebsite.Name = "mMenInfoWebsite";
             _mMenInfoWebsite.Size = new System.Drawing.Size(190, 22);
             _mMenInfoWebsite.Text = Language.Website;
@@ -83,7 +85,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoDonate
             // 
-            _mMenInfoDonate.Image = Resources.Donate;
+            _mMenInfoDonate.Image = Properties.Resources.Donate;
             _mMenInfoDonate.Name = "mMenInfoDonate";
             _mMenInfoDonate.Size = new System.Drawing.Size(190, 22);
             _mMenInfoDonate.Text = Language.Donate;
@@ -91,7 +93,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoForum
             // 
-            _mMenInfoForum.Image = Resources.user_comment;
+            _mMenInfoForum.Image = Properties.Resources.user_comment;
             _mMenInfoForum.Name = "mMenInfoForum";
             _mMenInfoForum.Size = new System.Drawing.Size(190, 22);
             _mMenInfoForum.Text = Language.SupportForum;
@@ -99,7 +101,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoBugReport
             // 
-            _mMenInfoBugReport.Image = Resources.Bug;
+            _mMenInfoBugReport.Image = Properties.Resources.Bug;
             _mMenInfoBugReport.Name = "mMenInfoBugReport";
             _mMenInfoBugReport.Size = new System.Drawing.Size(190, 22);
             _mMenInfoBugReport.Text = Language.ReportBug;
@@ -112,7 +114,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsUpdate
             // 
-            _mMenToolsUpdate.Image = Resources.Update;
+            _mMenToolsUpdate.Image = Properties.Resources.Update;
             _mMenToolsUpdate.Name = "mMenToolsUpdate";
             _mMenToolsUpdate.Size = new System.Drawing.Size(190, 22);
             _mMenToolsUpdate.Text = Language.CheckForUpdates;
@@ -125,7 +127,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoAbout
             // 
-            _mMenInfoAbout.Image = Resources.mRemoteNG;
+            _mMenInfoAbout.Image = Properties.Resources.mRemoteNG;
             _mMenInfoAbout.Name = "mMenInfoAbout";
             _mMenInfoAbout.Size = new System.Drawing.Size(190, 22);
             _mMenInfoAbout.Text = Language.About;

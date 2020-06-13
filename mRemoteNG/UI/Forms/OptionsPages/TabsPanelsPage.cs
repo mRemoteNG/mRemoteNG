@@ -1,3 +1,6 @@
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
+
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public sealed partial class TabsPanelsPage
@@ -6,7 +9,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Resources.Tab_Icon;
+            PageIcon = Properties.Resources.Tab_Icon;
         }
 
         public override string PageName

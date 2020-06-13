@@ -1,4 +1,8 @@
-﻿namespace mRemoteNG.UI.Window
+﻿using mRemoteNG.Tree.ClickHandlers;
+using mRemoteNG.UI.Controls;
+using mRemoteNG.UI.Controls.ConnectionTree;
+
+namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionTreeWindow : BaseWindow
 	{
@@ -14,10 +18,10 @@
 		{
             this.components = new System.ComponentModel.Container();
             mRemoteNG.Tree.ConnectionTreeModel connectionTreeModel2 = new mRemoteNG.Tree.ConnectionTreeModel();
-            mRemoteNG.Tree.TreeNodeCompositeClickHandler treeNodeCompositeClickHandler3 = new mRemoteNG.Tree.TreeNodeCompositeClickHandler();
+            TreeNodeCompositeClickHandler treeNodeCompositeClickHandler3 = new TreeNodeCompositeClickHandler();
             mRemoteNG.Tree.AlwaysConfirmYes alwaysConfirmYes2 = new mRemoteNG.Tree.AlwaysConfirmYes();
-            mRemoteNG.Tree.TreeNodeCompositeClickHandler treeNodeCompositeClickHandler4 = new mRemoteNG.Tree.TreeNodeCompositeClickHandler();
-            this.ConnectionTree = new mRemoteNG.UI.Controls.ConnectionTree();
+            TreeNodeCompositeClickHandler treeNodeCompositeClickHandler4 = new TreeNodeCompositeClickHandler();
+            this.ConnectionTree = new ConnectionTree();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.mMenAddConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenAddFolder = new System.Windows.Forms.ToolStripMenuItem();
@@ -26,8 +30,8 @@
             this.mMenSort = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenFavorites = new System.Windows.Forms.ToolStripMenuItem();
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-            this.pbSearch = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
-            this.txtSearch = new mRemoteNG.UI.Controls.Base.NGSearchBox();
+            this.pbSearch = new MrngPictureBox(this.components);
+            this.txtSearch = new mRemoteNG.UI.Controls.MrngSearchBox();
             this.searchBoxLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.ConnectionTree)).BeginInit();
             this.msMain.SuspendLayout();
@@ -43,7 +47,7 @@
             this.ConnectionTree.ConnectionTreeModel = connectionTreeModel2;
             this.ConnectionTree.Cursor = System.Windows.Forms.Cursors.Default;
             this.ConnectionTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            treeNodeCompositeClickHandler3.ClickHandlers = new mRemoteNG.Tree.ITreeNodeClickHandler<mRemoteNG.Connection.ConnectionInfo>[0];
+            treeNodeCompositeClickHandler3.ClickHandlers = new ITreeNodeClickHandler<mRemoteNG.Connection.ConnectionInfo>[0];
             this.ConnectionTree.DoubleClickHandler = treeNodeCompositeClickHandler3;
             this.ConnectionTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectionTree.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
@@ -54,11 +58,11 @@
             this.ConnectionTree.MultiSelect = false;
             this.ConnectionTree.Name = "ConnectionTree";
             this.ConnectionTree.NodeDeletionConfirmer = alwaysConfirmYes2;
-            this.ConnectionTree.PostSetupActions = new mRemoteNG.UI.Controls.IConnectionTreeDelegate[0];
+            this.ConnectionTree.PostSetupActions = new IConnectionTreeDelegate[0];
             this.ConnectionTree.SelectedBackColor = System.Drawing.SystemColors.Highlight;
             this.ConnectionTree.SelectedForeColor = System.Drawing.SystemColors.HighlightText;
             this.ConnectionTree.ShowGroups = false;
-            treeNodeCompositeClickHandler4.ClickHandlers = new mRemoteNG.Tree.ITreeNodeClickHandler<mRemoteNG.Connection.ConnectionInfo>[0];
+            treeNodeCompositeClickHandler4.ClickHandlers = new ITreeNodeClickHandler<mRemoteNG.Connection.ConnectionInfo>[0];
             this.ConnectionTree.SingleClickHandler = treeNodeCompositeClickHandler4;
             this.ConnectionTree.Size = new System.Drawing.Size(204, 366);
             this.ConnectionTree.TabIndex = 20;
@@ -90,7 +94,7 @@
             // mMenAddConnection
             // 
             this.mMenAddConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenAddConnection.Image = global::mRemoteNG.Resources.Connection_Add;
+            this.mMenAddConnection.Image = global::mRemoteNG.Properties.Resources.Connection_Add;
             this.mMenAddConnection.Name = "mMenAddConnection";
             this.mMenAddConnection.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.mMenAddConnection.Size = new System.Drawing.Size(24, 20);
@@ -99,7 +103,7 @@
             // mMenAddFolder
             // 
             this.mMenAddFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenAddFolder.Image = global::mRemoteNG.Resources.Folder_Add;
+            this.mMenAddFolder.Image = global::mRemoteNG.Properties.Resources.Folder_Add;
             this.mMenAddFolder.Name = "mMenAddFolder";
             this.mMenAddFolder.Size = new System.Drawing.Size(28, 20);
             this.mMenAddFolder.Click += new System.EventHandler(this.CMenTreeAddFolder_Click);
@@ -107,7 +111,7 @@
             // mMenViewExpandAllFolders
             // 
             this.mMenViewExpandAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenViewExpandAllFolders.Image = global::mRemoteNG.Resources.Expand;
+            this.mMenViewExpandAllFolders.Image = global::mRemoteNG.Properties.Resources.Expand;
             this.mMenViewExpandAllFolders.Name = "mMenViewExpandAllFolders";
             this.mMenViewExpandAllFolders.Size = new System.Drawing.Size(28, 20);
             this.mMenViewExpandAllFolders.Text = "Expand all folders";
@@ -115,7 +119,7 @@
             // mMenViewCollapseAllFolders
             // 
             this.mMenViewCollapseAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenViewCollapseAllFolders.Image = global::mRemoteNG.Resources.Collapse;
+            this.mMenViewCollapseAllFolders.Image = global::mRemoteNG.Properties.Resources.Collapse;
             this.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders";
             this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(28, 20);
             this.mMenViewCollapseAllFolders.Text = "Collapse all folders";
@@ -123,14 +127,14 @@
             // mMenSortAscending
             // 
             this.mMenSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenSort.Image = global::mRemoteNG.Resources.Sort_AZ;
+            this.mMenSort.Image = global::mRemoteNG.Properties.Resources.Sort_AZ;
             this.mMenSort.Name = "mMenSort";
             this.mMenSort.Size = new System.Drawing.Size(28, 20);
             // 
             // mMenFavorites
             // 
             this.mMenFavorites.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenFavorites.Image = global::mRemoteNG.Resources.star;
+            this.mMenFavorites.Image = global::mRemoteNG.Properties.Resources.star;
             this.mMenFavorites.Name = "mMenFavorites";
             this.mMenFavorites.Size = new System.Drawing.Size(28, 20);
             this.mMenFavorites.Text = "Favorites";
@@ -142,7 +146,7 @@
             // pbSearch
             // 
             this.pbSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbSearch.Image = global::mRemoteNG.Resources.Search;
+            this.pbSearch.Image = global::mRemoteNG.Properties.Resources.Search;
             this.pbSearch.Location = new System.Drawing.Point(0, 0);
             this.pbSearch.Margin = new System.Windows.Forms.Padding(0);
             this.pbSearch.Name = "pbSearch";
@@ -193,7 +197,7 @@
             this.Controls.Add(this.msMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
-            this.Icon = global::mRemoteNG.Resources.Root_Icon;
+            this.Icon = global::mRemoteNG.Properties.Resources.Root_Icon;
             this.Name = "ConnectionTreeWindow";
             this.TabText = "Connections";
             this.Text = "Connections";
@@ -212,8 +216,8 @@
 
         private System.ComponentModel.IContainer components;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
-        internal Controls.Base.NGPictureBox pbSearch;
-        internal Controls.Base.NGSearchBox txtSearch;
+        internal MrngPictureBox pbSearch;
+        internal Controls.MrngSearchBox txtSearch;
         public System.Windows.Forms.TableLayoutPanel searchBoxLayoutPanel;
         internal System.Windows.Forms.ToolStripMenuItem mMenFavorites;
     }

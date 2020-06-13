@@ -1,5 +1,7 @@
 ﻿
 
+using mRemoteNG.UI.Controls;
+
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	
@@ -18,24 +20,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
-            this.lblSQLDatabaseName = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.txtSQLDatabaseName = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblExperimental = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.chkUseSQLServer = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.lblSQLUsername = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.txtSQLPassword = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblSQLInfo = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblSQLServer = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.txtSQLUsername = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.txtSQLServer = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblSQLPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.btnTestConnection = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.lblSQLDatabaseName = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtSQLDatabaseName = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblExperimental = new mRemoteNG.UI.Controls.MrngLabel();
+            this.chkUseSQLServer = new MrngCheckBox();
+            this.lblSQLUsername = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtSQLPassword = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblSQLInfo = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblSQLServer = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtSQLUsername = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.txtSQLServer = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblSQLPassword = new mRemoteNG.UI.Controls.MrngLabel();
+            this.btnTestConnection = new MrngButton();
             this.imgConnectionStatus = new System.Windows.Forms.PictureBox();
-            this.lblTestConnectionResults = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.chkSQLReadOnly = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.lblSQLReadOnly = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblSQLType = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.txtSQLType = new mRemoteNG.UI.Controls.Base.NGComboBox();
+            this.lblTestConnectionResults = new mRemoteNG.UI.Controls.MrngLabel();
+            this.chkSQLReadOnly = new MrngCheckBox();
+            this.lblSQLReadOnly = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblSQLType = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtSQLType = new MrngComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.imgConnectionStatus)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -79,7 +81,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseSQLServer
             // 
-            this.chkUseSQLServer._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkUseSQLServer._mice = MrngCheckBox.MouseState.OUT;
             this.chkUseSQLServer.AutoSize = true;
             this.chkUseSQLServer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseSQLServer.Location = new System.Drawing.Point(3, 76);
@@ -173,7 +175,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnTestConnection
             // 
-            this.btnTestConnection._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.btnTestConnection._mice = MrngButton.MouseState.OUT;
             this.btnTestConnection.Enabled = false;
             this.btnTestConnection.Location = new System.Drawing.Point(3, 267);
             this.btnTestConnection.Name = "btnTestConnection";
@@ -185,7 +187,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // imgConnectionStatus
             // 
-            this.imgConnectionStatus.Image = global::mRemoteNG.Resources.Help;
+            this.imgConnectionStatus.Image = global::mRemoteNG.Properties.Resources.Help;
             this.imgConnectionStatus.Location = new System.Drawing.Point(162, 272);
             this.imgConnectionStatus.Name = "imgConnectionStatus";
             this.imgConnectionStatus.Size = new System.Drawing.Size(16, 16);
@@ -204,7 +206,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSQLReadOnly
             // 
-            this.chkSQLReadOnly._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkSQLReadOnly._mice = MrngCheckBox.MouseState.OUT;
             this.chkSQLReadOnly.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSQLReadOnly.AutoSize = true;
@@ -239,7 +241,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // txtSQLType
             // 
-            this.txtSQLType._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.txtSQLType._mice = MrngComboBox.MouseState.HOVER;
             this.txtSQLType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSQLType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtSQLType.FormattingEnabled = true;
@@ -302,24 +304,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.PerformLayout();
 
 		}
-		internal Controls.Base.NGLabel lblSQLDatabaseName;
-		internal Controls.Base.NGTextBox txtSQLDatabaseName;
-		internal Controls.Base.NGLabel lblExperimental;
-		internal Controls.Base.NGCheckBox chkUseSQLServer;
-		internal Controls.Base.NGLabel lblSQLUsername;
-		internal Controls.Base.NGTextBox txtSQLPassword;
-		internal Controls.Base.NGLabel lblSQLInfo;
-		internal Controls.Base.NGLabel lblSQLServer;
-		internal Controls.Base.NGTextBox txtSQLUsername;
-		internal Controls.Base.NGTextBox txtSQLServer;
-		internal Controls.Base.NGLabel lblSQLPassword;
-        private Controls.Base.NGButton btnTestConnection;
+		internal Controls.MrngLabel lblSQLDatabaseName;
+		internal Controls.MrngTextBox txtSQLDatabaseName;
+		internal Controls.MrngLabel lblExperimental;
+		internal MrngCheckBox chkUseSQLServer;
+		internal Controls.MrngLabel lblSQLUsername;
+		internal Controls.MrngTextBox txtSQLPassword;
+		internal Controls.MrngLabel lblSQLInfo;
+		internal Controls.MrngLabel lblSQLServer;
+		internal Controls.MrngTextBox txtSQLUsername;
+		internal Controls.MrngTextBox txtSQLServer;
+		internal Controls.MrngLabel lblSQLPassword;
+        private MrngButton btnTestConnection;
         private System.Windows.Forms.PictureBox imgConnectionStatus;
-        private Controls.Base.NGLabel lblTestConnectionResults;
-        private Controls.Base.NGCheckBox chkSQLReadOnly;
-        internal Controls.Base.NGLabel lblSQLReadOnly;
-		internal Controls.Base.NGLabel lblSQLType;
-		private Controls.Base.NGComboBox txtSQLType;
+        private Controls.MrngLabel lblTestConnectionResults;
+        private MrngCheckBox chkSQLReadOnly;
+        internal Controls.MrngLabel lblSQLReadOnly;
+		internal Controls.MrngLabel lblSQLType;
+		private MrngComboBox txtSQLType;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

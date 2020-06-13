@@ -7,6 +7,7 @@ using System.Reflection;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
 using System.Security.Cryptography;
+using mRemoteNG.Properties;
 #if !PORTABLE
 using mRemoteNG.Tools;
 

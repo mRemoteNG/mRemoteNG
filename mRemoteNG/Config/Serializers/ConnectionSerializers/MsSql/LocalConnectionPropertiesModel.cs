@@ -1,4 +1,4 @@
-﻿namespace mRemoteNG.Config.Serializers.MsSql
+﻿namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
 {
     public class LocalConnectionPropertiesModel
     {

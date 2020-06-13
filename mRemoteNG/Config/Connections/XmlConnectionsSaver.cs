@@ -2,7 +2,7 @@
 using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
-using mRemoteNG.Config.Serializers.Xml;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
@@ -37,7 +37,7 @@ namespace mRemoteNG.Config.Connections
                     cryptographyProvider,
                     connectionTreeModel,
                     _saveFilter,
-                    mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile);
+                    Properties.Settings.Default.EncryptCompleteConnectionsFile);
 
                 var rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
                 var xml = xmlConnectionsSerializer.Serialize(rootNode);

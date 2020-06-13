@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.Messages
+﻿using mRemoteNG.Properties;
+
+namespace mRemoteNG.Messages.MessageFilteringOptions
 {
     public class PopupMessageFilteringOptions : IMessageTypeFilteringOptions
     {

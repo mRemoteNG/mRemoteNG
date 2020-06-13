@@ -1,5 +1,4 @@
-﻿using mRemoteNG.Config.Serializers.Xml;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
@@ -11,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {

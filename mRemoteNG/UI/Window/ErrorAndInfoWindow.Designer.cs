@@ -1,12 +1,14 @@
 ﻿
+using mRemoteNG.UI.Controls;
+
 namespace mRemoteNG.UI.Window
 {
 	public partial class ErrorAndInfoWindow
 	{
-		internal Controls.Base.NGPictureBox pbError;
+		internal MrngPictureBox pbError;
 		internal System.Windows.Forms.ListView lvErrorCollector;
 		internal System.Windows.Forms.ColumnHeader clmMessage;
-		internal Controls.Base.NGTextBox txtMsgText;
+		internal Controls.MrngTextBox txtMsgText;
 		internal System.Windows.Forms.ImageList imgListMC;
 		internal System.Windows.Forms.ContextMenuStrip cMenMC;
 		internal System.Windows.Forms.ToolStripMenuItem cMenMCCopy;
@@ -15,15 +17,15 @@ namespace mRemoteNG.UI.Window
         private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            this.txtMsgText = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.pbError = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
+            this.txtMsgText = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.pbError = new MrngPictureBox(this.components);
             this.lvErrorCollector = new System.Windows.Forms.ListView();
             this.clmMessage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cMenMC = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMenMCCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.cMenMCDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.imgListMC = new System.Windows.Forms.ImageList(this.components);
-            this.lblMsgDate = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblMsgDate = new mRemoteNG.UI.Controls.MrngLabel();
             this.pnlErrorMsg = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbError)).BeginInit();
             this.cMenMC.SuspendLayout();
@@ -80,7 +82,7 @@ namespace mRemoteNG.UI.Window
             // 
             // clmMessage
             // 
-            this.clmMessage.Text = global::mRemoteNG.Language.Message;
+            this.clmMessage.Text = global::mRemoteNG.Resources.Language.Language.Message;
             this.clmMessage.Width = 184;
             // 
             // cMenMC
@@ -96,20 +98,20 @@ namespace mRemoteNG.UI.Window
             // 
             // cMenMCCopy
             // 
-            this.cMenMCCopy.Image = global::mRemoteNG.Resources.Copy;
+            this.cMenMCCopy.Image = global::mRemoteNG.Properties.Resources.Copy;
             this.cMenMCCopy.Name = "cMenMCCopy";
             this.cMenMCCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.cMenMCCopy.Size = new System.Drawing.Size(140, 22);
-            this.cMenMCCopy.Text = global::mRemoteNG.Language.Copy;
+            this.cMenMCCopy.Text = global::mRemoteNG.Resources.Language.Language.Copy;
             this.cMenMCCopy.Click += new System.EventHandler(this.cMenMCCopy_Click);
             // 
             // cMenMCDelete
             // 
-            this.cMenMCDelete.Image = global::mRemoteNG.Resources.Delete;
+            this.cMenMCDelete.Image = global::mRemoteNG.Properties.Resources.Delete;
             this.cMenMCDelete.Name = "cMenMCDelete";
             this.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.cMenMCDelete.Size = new System.Drawing.Size(140, 22);
-            this.cMenMCDelete.Text = global::mRemoteNG.Language.Delete;
+            this.cMenMCDelete.Text = global::mRemoteNG.Resources.Language.Language.Delete;
             this.cMenMCDelete.Click += new System.EventHandler(this.cMenMCDelete_Click);
             // 
             // imgListMC
@@ -149,9 +151,9 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.pnlErrorMsg);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
-            this.Icon = global::mRemoteNG.Resources.Info_Icon;
+            this.Icon = global::mRemoteNG.Properties.Resources.Info_Icon;
             this.Name = "ErrorAndInfoWindow";
-            this.TabText = global::mRemoteNG.Language.Notifications;
+            this.TabText = global::mRemoteNG.Resources.Language.Language.Notifications;
             this.Text = "Notifications";
             this.Load += new System.EventHandler(this.ErrorsAndInfos_Load);
             this.Resize += new System.EventHandler(this.ErrorsAndInfos_Resize);
@@ -164,7 +166,7 @@ namespace mRemoteNG.UI.Window
 		}
 
         private System.ComponentModel.IContainer components;
-        internal Controls.Base.NGLabel lblMsgDate;
+        internal Controls.MrngLabel lblMsgDate;
         internal System.Windows.Forms.Panel pnlErrorMsg;
     }
 }

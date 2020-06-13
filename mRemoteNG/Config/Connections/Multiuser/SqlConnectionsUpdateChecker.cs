@@ -1,13 +1,12 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.Config.Connections.Multiuser;
-using mRemoteNG.Config.DatabaseConnectors;
-using mRemoteNG.Messages;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.Common;
 using System.Threading;
+using mRemoteNG.App;
+using mRemoteNG.Config.DatabaseConnectors;
+using mRemoteNG.Messages;
 
-namespace mRemoteNG.Config.Connections
+namespace mRemoteNG.Config.Connections.Multiuser
 {
     public class SqlConnectionsUpdateChecker : IConnectionsUpdateChecker
     {

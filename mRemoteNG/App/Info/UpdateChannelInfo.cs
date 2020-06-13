@@ -1,4 +1,5 @@
 ﻿using System;
+using mRemoteNG.Properties;
 
 // ReSharper disable InconsistentNaming
 

@@ -2,6 +2,7 @@
 using System.IO;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Config.DataProviders
 {
@@ -15,7 +16,7 @@ namespace mRemoteNG.Config.DataProviders
                     return;
 
                 var backupFileName =
-                    string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, DateTime.Now);
+                    string.Format(Properties.Settings.Default.BackupFileNameFormat, fileName, DateTime.Now);
                 File.Copy(fileName, backupFileName);
             }
             catch (Exception ex)
@@ -38,7 +39,7 @@ namespace mRemoteNG.Config.DataProviders
 
         private bool FeatureIsTurnedOff()
         {
-            return mRemoteNG.Settings.Default.BackupFileKeepCount == 0;
+            return Properties.Settings.Default.BackupFileKeepCount == 0;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Properties;
 using mRemoteNG.Tree.Root;
 
 

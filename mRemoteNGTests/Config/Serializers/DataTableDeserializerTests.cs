@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Security;
-using mRemoteNG.Config.Serializers.MsSql;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql;
 using mRemoteNG.Connection;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.objectListView1 = new mRemoteNG.UI.Controls.Base.NGListView();
+            this.objectListView1 = new mRemoteNG.UI.Controls.MrngListView();
             this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -118,7 +118,7 @@
 
         #endregion
 
-        private Base.NGListView objectListView1;
+        private MrngListView objectListView1;
         private BrightIdeasSoftware.OLVColumn olvColumnCredentialId;
         private BrightIdeasSoftware.OLVColumn olvColumnTitle;
         private BrightIdeasSoftware.OLVColumn olvColumnUsername;

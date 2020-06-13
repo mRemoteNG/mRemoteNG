@@ -48,7 +48,7 @@ namespace mRemoteNG.Config.Connections
 
         private void SaveConnectionOnEdit(string propertyName = "")
         {
-            if (!mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit)
+            if (!Properties.Settings.Default.SaveConnectionsAfterEveryEdit)
                 return;
             if (FrmMain.Default.IsClosing)
                 return;

@@ -7,6 +7,8 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using System;
 using mRemoteNG.Connection.Protocol.PowerShell;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol
 {

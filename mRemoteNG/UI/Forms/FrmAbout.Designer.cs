@@ -1,4 +1,4 @@
-﻿namespace mRemoteNG.UI.Window
+﻿namespace mRemoteNG.UI.Forms
 {
     public partial class FrmAbout
     {
@@ -11,10 +11,10 @@
             this.llCredits = new System.Windows.Forms.LinkLabel();
             this.llChangelog = new System.Windows.Forms.LinkLabel();
             this.llLicense = new System.Windows.Forms.LinkLabel();
-            this.lblTitle = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblVersion = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblLicense = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblCopyright = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblTitle = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblVersion = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblLicense = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblCopyright = new mRemoteNG.UI.Controls.MrngLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
@@ -22,7 +22,7 @@
             // pbLogo
             // 
             this.pbLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(58)))), ((int)(((byte)(64)))));
-            this.pbLogo.BackgroundImage = global::mRemoteNG.Resources.Header_dark;
+            this.pbLogo.BackgroundImage = global::mRemoteNG.Properties.Resources.Header_dark;
             this.pbLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pbLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pbLogo.Location = new System.Drawing.Point(0, 0);
@@ -161,10 +161,10 @@
         }
         #endregion
 
-        internal Controls.Base.NGLabel lblCopyright;
-        internal Controls.Base.NGLabel lblTitle;
-        internal Controls.Base.NGLabel lblVersion;
-        internal Controls.Base.NGLabel lblLicense;
+        internal Controls.MrngLabel lblCopyright;
+        internal Controls.MrngLabel lblTitle;
+        internal Controls.MrngLabel lblVersion;
+        internal Controls.MrngLabel lblLicense;
         internal System.Windows.Forms.Panel pnlBottom;
         internal System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.LinkLabel llCredits;

@@ -8,6 +8,8 @@ using System.IO;
 using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
 using MySql.Data.Types;
 using static System.String;
@@ -28,7 +30,7 @@ namespace mRemoteNG.Tools
                                                     "GetIconFromFile failed (Tools.Misc) - using default icon" +
                                                     Environment.NewLine + AEx.Message,
                                                     true);
-                return Resources.mRemoteNG_Icon;
+                return Properties.Resources.mRemoteNG_Icon;
             }
             catch (Exception ex)
             {
@@ -45,7 +47,7 @@ namespace mRemoteNG.Tools
             if (!splash.IsDisposed && splash.Visible)
                 splash.Close();
 
-            var passwordForm = new PasswordForm(passwordName, verify);
+            var passwordForm = new FrmPassword(passwordName, verify);
             return passwordForm.GetKey();
         }
 

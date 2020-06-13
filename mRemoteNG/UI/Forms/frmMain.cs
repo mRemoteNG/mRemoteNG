@@ -31,6 +31,9 @@ using WeifenLuo.WinFormsUI.Docking;
 using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.SchemeHandler;
+using mRemoteNG.Resources.Language;
+using mRemoteNG.UI.Controls;
+using Settings = mRemoteNG.Properties.Settings;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -548,7 +551,7 @@ namespace mRemoteNG.UI.Forms
                             {
                                 if (controlThatWasClicked is TreeView ||
                                     controlThatWasClicked is ComboBox ||
-                                    controlThatWasClicked is TextBox ||
+                                    controlThatWasClicked is MrngTextBox ||
                                     controlThatWasClicked is FrmMain)
                                 {
                                     controlThatWasClicked.Focus();

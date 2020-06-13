@@ -1,21 +1,21 @@
-﻿using mRemoteNG.App;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Security;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
-using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Security;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 
-namespace mRemoteNG.Config.Serializers.MsSql
+namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
 {
     public class DataTableDeserializer : IDeserializer<DataTable, ConnectionTreeModel>
     {

@@ -1,11 +1,11 @@
-﻿using mRemoteNG.Connection;
-using mRemoteNG.Container;
-using mRemoteNG.Security;
-using System;
+﻿using System;
 using System.Security;
 using System.Xml.Linq;
+using mRemoteNG.Connection;
+using mRemoteNG.Container;
+using mRemoteNG.Security;
 
-namespace mRemoteNG.Config.Serializers.Xml
+namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
     // ReSharper disable once InconsistentNaming
     public class XmlConnectionNodeSerializer26 : ISerializer<ConnectionInfo, XElement>

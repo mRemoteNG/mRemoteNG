@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using mRemoteNG.Messages;
+using mRemoteNG.Messages.MessageFilteringOptions;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Messages.WriterDecorators;
 

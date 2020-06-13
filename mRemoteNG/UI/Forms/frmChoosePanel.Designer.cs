@@ -1,5 +1,7 @@
 ﻿
 
+using mRemoteNG.UI.Controls;
+
 namespace mRemoteNG.UI.Forms
 {
 	
@@ -29,15 +31,15 @@ namespace mRemoteNG.UI.Forms
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            this.cbPanels = new mRemoteNG.UI.Controls.Base.NGComboBox();
-            this.btnOK = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.lblDescription = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.btnNew = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.cbPanels = new MrngComboBox();
+            this.btnOK = new MrngButton();
+            this.lblDescription = new mRemoteNG.UI.Controls.MrngLabel();
+            this.btnNew = new MrngButton();
             this.SuspendLayout();
             // 
             // cbPanels
             // 
-            this.cbPanels._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.cbPanels._mice = MrngComboBox.MouseState.HOVER;
             this.cbPanels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPanels.FormattingEnabled = true;
             this.cbPanels.Location = new System.Drawing.Point(12, 42);
@@ -47,12 +49,12 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnOK
             // 
-            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnOK._mice = MrngButton.MouseState.HOVER;
             this.btnOK.Location = new System.Drawing.Point(167, 72);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 24);
             this.btnOK.TabIndex = 20;
-            this.btnOK.Text = global::mRemoteNG.Language._Ok;
+            this.btnOK.Text = global::mRemoteNG.Resources.Language.Language._Ok;
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
@@ -67,14 +69,14 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnNew
             // 
-            this.btnNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
-            this.btnNew.Image = global::mRemoteNG.Resources.Panel_Add;
+            this.btnNew._mice = MrngButton.MouseState.HOVER;
+            this.btnNew.Image = global::mRemoteNG.Properties.Resources.Panel_Add;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNew.Location = new System.Drawing.Point(86, 72);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 24);
             this.btnNew.TabIndex = 40;
-            this.btnNew.Text = global::mRemoteNG.Language._New;
+            this.btnNew.Text = global::mRemoteNG.Resources.Language.Language._New;
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -90,7 +92,7 @@ namespace mRemoteNG.UI.Forms
             this.Controls.Add(this.cbPanels);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = global::mRemoteNG.Resources.Panels_Icon;
+            this.Icon = global::mRemoteNG.Properties.Resources.Panels_Icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmChoosePanel";
@@ -101,9 +103,9 @@ namespace mRemoteNG.UI.Forms
             this.ResumeLayout(false);
 
 		}
-		internal Controls.Base.NGComboBox cbPanels;
-		internal Controls.Base.NGButton btnOK;
-		internal Controls.Base.NGLabel lblDescription;
-		internal Controls.Base.NGButton btnNew;
+		internal MrngComboBox cbPanels;
+		internal MrngButton btnOK;
+		internal Controls.MrngLabel lblDescription;
+		internal MrngButton btnNew;
 	}
 }

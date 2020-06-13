@@ -74,7 +74,7 @@ namespace mRemoteNG.Config.Settings
                 LoadExternalAppsFromXml();
                 SetAlwaysShowPanelTabs();
 
-                if (mRemoteNG.Settings.Default.ResetToolbars)
+                if (Properties.Settings.Default.ResetToolbars)
                     SetToolbarsDefault();
                 else
                     LoadToolbarsFromSettings();
@@ -87,16 +87,16 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetAlwaysShowPanelTabs()
         {
-            if (mRemoteNG.Settings.Default.AlwaysShowPanelTabs)
+            if (Properties.Settings.Default.AlwaysShowPanelTabs)
                 FrmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
 
         private void SetSupportedCulture()
         {
-            if (mRemoteNG.Settings.Default.OverrideUICulture == "" ||
-                !SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture)) return;
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(mRemoteNG.Settings.Default.OverrideUICulture);
+            if (Properties.Settings.Default.OverrideUICulture == "" ||
+                !SupportedCultures.IsNameSupported(Properties.Settings.Default.OverrideUICulture)) return;
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.OverrideUICulture);
             _messageCollector.AddMessage(MessageClass.InformationMsg,
                                          $"Override Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}",
                                          true);
@@ -105,22 +105,22 @@ namespace mRemoteNG.Config.Settings
         private void SetApplicationWindowPositionAndSize()
         {
             MainForm.WindowState = FormWindowState.Normal;
-            if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Normal)
+            if (Properties.Settings.Default.MainFormState == FormWindowState.Normal)
             {
-                if (!mRemoteNG.Settings.Default.MainFormLocation.IsEmpty)
-                    MainForm.Location = mRemoteNG.Settings.Default.MainFormLocation;
-                if (!mRemoteNG.Settings.Default.MainFormSize.IsEmpty)
-                    MainForm.Size = mRemoteNG.Settings.Default.MainFormSize;
+                if (!Properties.Settings.Default.MainFormLocation.IsEmpty)
+                    MainForm.Location = Properties.Settings.Default.MainFormLocation;
+                if (!Properties.Settings.Default.MainFormSize.IsEmpty)
+                    MainForm.Size = Properties.Settings.Default.MainFormSize;
             }
             else
             {
-                if (!mRemoteNG.Settings.Default.MainFormRestoreLocation.IsEmpty)
-                    MainForm.Location = mRemoteNG.Settings.Default.MainFormRestoreLocation;
-                if (!mRemoteNG.Settings.Default.MainFormRestoreSize.IsEmpty)
-                    MainForm.Size = mRemoteNG.Settings.Default.MainFormRestoreSize;
+                if (!Properties.Settings.Default.MainFormRestoreLocation.IsEmpty)
+                    MainForm.Location = Properties.Settings.Default.MainFormRestoreLocation;
+                if (!Properties.Settings.Default.MainFormRestoreSize.IsEmpty)
+                    MainForm.Size = Properties.Settings.Default.MainFormRestoreSize;
             }
 
-            if (mRemoteNG.Settings.Default.MainFormState == FormWindowState.Maximized)
+            if (Properties.Settings.Default.MainFormState == FormWindowState.Maximized)
             {
                 MainForm.WindowState = FormWindowState.Maximized;
             }
@@ -145,33 +145,33 @@ namespace mRemoteNG.Config.Settings
 
         private void SetAutoSave()
         {
-            if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes <= 0) return;
-            MainForm.tmrAutoSave.Interval = mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000;
+            if (Properties.Settings.Default.AutoSaveEveryMinutes <= 0) return;
+            MainForm.tmrAutoSave.Interval = Properties.Settings.Default.AutoSaveEveryMinutes * 60000;
             MainForm.tmrAutoSave.Enabled = true;
         }
 
         private void SetKioskMode()
         {
-            if (!mRemoteNG.Settings.Default.MainFormKiosk) return;
+            if (!Properties.Settings.Default.MainFormKiosk) return;
             MainForm.Fullscreen.Value = true;
         }
 
         private static void SetShowSystemTrayIcon()
         {
-            if (mRemoteNG.Settings.Default.ShowSystemTrayIcon)
+            if (Properties.Settings.Default.ShowSystemTrayIcon)
                 Runtime.NotificationAreaIcon = new NotificationAreaIcon();
         }
 
         private static void SetPuttyPath()
         {
-            PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath
-                ? mRemoteNG.Settings.Default.CustomPuttyPath
+            PuttyBase.PuttyPath = Properties.Settings.Default.UseCustomPuttyPath
+                ? Properties.Settings.Default.CustomPuttyPath
                 : GeneralAppInfo.PuttyPath;
         }
 
         private void EnsureSettingsAreSavedInNewestVersion()
         {
-            if (mRemoteNG.Settings.Default.DoUpgrade)
+            if (Properties.Settings.Default.DoUpgrade)
                 UpgradeSettingsVersion();
         }
 
@@ -179,20 +179,20 @@ namespace mRemoteNG.Config.Settings
         {
             try
             {
-                mRemoteNG.Settings.Default.Save();
-                mRemoteNG.Settings.Default.Upgrade();
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
             }
             catch (Exception ex)
             {
                 _messageCollector.AddExceptionMessage("Settings.Upgrade() failed", ex);
             }
 
-            mRemoteNG.Settings.Default.DoUpgrade = false;
+            Properties.Settings.Default.DoUpgrade = false;
 
             // Clear pending update flag
             // This is used for automatic updates, not for settings migration, but it
             // needs to be cleared here because we know that we just updated.
-            mRemoteNG.Settings.Default.UpdatePending = false;
+            Properties.Settings.Default.UpdatePending = false;
         }
 
         private void SetToolbarsDefault()
@@ -236,30 +236,30 @@ namespace mRemoteNG.Config.Settings
         private void AddQuickConnectPanel()
         {
             SetToolstripGripStyle(_quickConnectToolStrip);
-            _quickConnectToolStrip.Visible = mRemoteNG.Settings.Default.QuickyTBVisible;
-            var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.QuickyTBParentDock);
-            toolStripPanel.Join(_quickConnectToolStrip, mRemoteNG.Settings.Default.QuickyTBLocation);
+            _quickConnectToolStrip.Visible = Properties.Settings.Default.QuickyTBVisible;
+            var toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.QuickyTBParentDock);
+            toolStripPanel.Join(_quickConnectToolStrip, Properties.Settings.Default.QuickyTBLocation);
         }
 
         private void AddExternalAppsPanel()
         {
             SetToolstripGripStyle(_externalToolsToolStrip);
-            _externalToolsToolStrip.Visible = mRemoteNG.Settings.Default.ExtAppsTBVisible;
-            var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.ExtAppsTBParentDock);
-            toolStripPanel.Join(_externalToolsToolStrip, mRemoteNG.Settings.Default.ExtAppsTBLocation);
+            _externalToolsToolStrip.Visible = Properties.Settings.Default.ExtAppsTBVisible;
+            var toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.ExtAppsTBParentDock);
+            toolStripPanel.Join(_externalToolsToolStrip, Properties.Settings.Default.ExtAppsTBLocation);
         }
 
         private void AddMultiSshPanel()
         {
             SetToolstripGripStyle(_multiSshToolStrip);
-            _multiSshToolStrip.Visible = mRemoteNG.Settings.Default.MultiSshToolbarVisible;
-            var toolStripPanel = ToolStripPanelFromString(mRemoteNG.Settings.Default.MultiSshToolbarParentDock);
-            toolStripPanel.Join(_multiSshToolStrip, mRemoteNG.Settings.Default.MultiSshToolbarLocation);
+            _multiSshToolStrip.Visible = Properties.Settings.Default.MultiSshToolbarVisible;
+            var toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.MultiSshToolbarParentDock);
+            toolStripPanel.Join(_multiSshToolStrip, Properties.Settings.Default.MultiSshToolbarLocation);
         }
 
         private void SetToolstripGripStyle(ToolStrip toolbar)
         {
-            toolbar.GripStyle = mRemoteNG.Settings.Default.LockToolbars
+            toolbar.GripStyle = Properties.Settings.Default.LockToolbars
                 ? ToolStripGripStyle.Hidden
                 : ToolStripGripStyle.Visible;
         }

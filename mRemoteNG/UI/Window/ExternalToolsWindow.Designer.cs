@@ -1,5 +1,6 @@
-
+﻿
 using mRemoteNG.Themes;
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Window
 {
@@ -13,34 +14,34 @@ namespace mRemoteNG.UI.Window
         internal BrightIdeasSoftware.OLVColumn TryToIntegrateColumnHeader;
 	    internal BrightIdeasSoftware.OLVColumn WorkingDirColumnHeader;
 	    internal BrightIdeasSoftware.OLVColumn RunElevateHeader;
-		internal Controls.Base.NGTextBox DisplayNameTextBox;
+		internal Controls.MrngTextBox DisplayNameTextBox;
         internal BrightIdeasSoftware.OLVColumn ShowOnToolbarColumnHeader;
-		internal Controls.Base.NGLabel DisplayNameLabel;
-		internal Controls.Base.NGTextBox ArgumentsCheckBox;
-		internal Controls.Base.NGTextBox FilenameTextBox;
-		internal Controls.Base.NGLabel ArgumentsLabel;
-		internal Controls.Base.NGLabel FilenameLabel;
-		internal Controls.Base.NGButton BrowseButton; 
+		internal Controls.MrngLabel DisplayNameLabel;
+		internal Controls.MrngTextBox ArgumentsCheckBox;
+		internal Controls.MrngTextBox FilenameTextBox;
+		internal Controls.MrngLabel ArgumentsLabel;
+		internal Controls.MrngLabel FilenameLabel;
+		internal MrngButton BrowseButton; 
 		internal System.Windows.Forms.ContextMenuStrip ToolsContextMenuStrip;
 		internal System.Windows.Forms.ToolStripMenuItem NewToolMenuItem;
 		internal System.Windows.Forms.ToolStripMenuItem DeleteToolMenuItem;
 		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
 		internal System.Windows.Forms.ToolStripMenuItem LaunchToolMenuItem; 
-		internal Controls.Base.NGCheckBox WaitForExitCheckBox;
-		internal Controls.Base.NGLabel OptionsLabel;
-		internal Controls.Base.NGCheckBox TryToIntegrateCheckBox;
-        internal Controls.Base.NGCheckBox ShowOnToolbarCheckBox;
-        internal Controls.Base.NGListView ToolsListObjView;
-	    internal Controls.Base.NGLabel WorkingDirLabel;
-	    internal Controls.Base.NGTextBox WorkingDirTextBox;
-	    internal Controls.Base.NGButton BrowseWorkingDir;
-	    internal Controls.Base.NGCheckBox RunElevatedCheckBox;
+		internal MrngCheckBox WaitForExitCheckBox;
+		internal Controls.MrngLabel OptionsLabel;
+		internal MrngCheckBox TryToIntegrateCheckBox;
+        internal MrngCheckBox ShowOnToolbarCheckBox;
+        internal Controls.MrngListView ToolsListObjView;
+	    internal Controls.MrngLabel WorkingDirLabel;
+	    internal Controls.MrngTextBox WorkingDirTextBox;
+	    internal MrngButton BrowseWorkingDir;
+	    internal MrngCheckBox RunElevatedCheckBox;
 
         private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExternalToolsWindow));
-            this.ToolsListObjView = new mRemoteNG.UI.Controls.Base.NGListView();
+            this.ToolsListObjView = new mRemoteNG.UI.Controls.MrngListView();
             this.DisplayNameColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.FilenameColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ArgumentsColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -54,23 +55,23 @@ namespace mRemoteNG.UI.Window
             this.DeleteToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LaunchToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PropertiesGroupBox = new mRemoteNG.UI.Controls.Base.NGGroupBox();
+            this.PropertiesGroupBox = new MrngGroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.DisplayNameLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.ShowOnToolbarCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.WorkingDirTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.DisplayNameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.FilenameTextBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.FilenameLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.RunElevatedCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.ArgumentsLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.TryToIntegrateCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.WorkingDirLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.OptionsLabel = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.WaitForExitCheckBox = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.BrowseButton = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.BrowseWorkingDir = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.DisplayNameLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.ShowOnToolbarCheckBox = new MrngCheckBox();
+            this.WorkingDirTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.DisplayNameTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.FilenameTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.FilenameLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.RunElevatedCheckBox = new MrngCheckBox();
+            this.ArgumentsLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.TryToIntegrateCheckBox = new MrngCheckBox();
+            this.WorkingDirLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.OptionsLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.WaitForExitCheckBox = new MrngCheckBox();
+            this.BrowseButton = new MrngButton();
+            this.BrowseWorkingDir = new MrngButton();
             this.ToolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.ToolStrip = new System.Windows.Forms.ToolStrip();
             this.NewToolToolstripButton = new System.Windows.Forms.ToolStripButton();
@@ -214,7 +215,7 @@ namespace mRemoteNG.UI.Window
             // 
             // NewToolMenuItem
             // 
-            this.NewToolMenuItem.Image = global::mRemoteNG.Resources.ExtApp_Add;
+            this.NewToolMenuItem.Image = global::mRemoteNG.Properties.Resources.ExtApp_Add;
             this.NewToolMenuItem.Name = "NewToolMenuItem";
             this.NewToolMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F4)));
             this.NewToolMenuItem.Size = new System.Drawing.Size(219, 22);
@@ -224,7 +225,7 @@ namespace mRemoteNG.UI.Window
             // DeleteToolMenuItem
             // 
             this.DeleteToolMenuItem.Enabled = false;
-            this.DeleteToolMenuItem.Image = global::mRemoteNG.Resources.ExtApp_Delete;
+            this.DeleteToolMenuItem.Image = global::mRemoteNG.Properties.Resources.ExtApp_Delete;
             this.DeleteToolMenuItem.Name = "DeleteToolMenuItem";
             this.DeleteToolMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.DeleteToolMenuItem.Size = new System.Drawing.Size(219, 22);
@@ -239,7 +240,7 @@ namespace mRemoteNG.UI.Window
             // LaunchToolMenuItem
             // 
             this.LaunchToolMenuItem.Enabled = false;
-            this.LaunchToolMenuItem.Image = global::mRemoteNG.Resources.ExtApp_Start;
+            this.LaunchToolMenuItem.Image = global::mRemoteNG.Properties.Resources.ExtApp_Start;
             this.LaunchToolMenuItem.Name = "LaunchToolMenuItem";
             this.LaunchToolMenuItem.Size = new System.Drawing.Size(219, 22);
             this.LaunchToolMenuItem.Text = "Launch External Tool";
@@ -308,7 +309,7 @@ namespace mRemoteNG.UI.Window
             // 
             // ShowOnToolbarCheckBox
             // 
-            this.ShowOnToolbarCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.ShowOnToolbarCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.ShowOnToolbarCheckBox.AutoSize = true;
             this.ShowOnToolbarCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShowOnToolbarCheckBox.Location = new System.Drawing.Point(239, 133);
@@ -381,7 +382,7 @@ namespace mRemoteNG.UI.Window
             // 
             // RunElevatedCheckBox
             // 
-            this.RunElevatedCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.RunElevatedCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.RunElevatedCheckBox.AutoSize = true;
             this.RunElevatedCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RunElevatedCheckBox.Location = new System.Drawing.Point(113, 133);
@@ -406,7 +407,7 @@ namespace mRemoteNG.UI.Window
             // 
             // TryToIntegrateCheckBox
             // 
-            this.TryToIntegrateCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.TryToIntegrateCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.TryToIntegrateCheckBox.AutoSize = true;
             this.TryToIntegrateCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TryToIntegrateCheckBox.Location = new System.Drawing.Point(239, 107);
@@ -442,7 +443,7 @@ namespace mRemoteNG.UI.Window
             // 
             // WaitForExitCheckBox
             // 
-            this.WaitForExitCheckBox._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.WaitForExitCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.WaitForExitCheckBox.AutoSize = true;
             this.WaitForExitCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WaitForExitCheckBox.Location = new System.Drawing.Point(113, 107);
@@ -457,7 +458,7 @@ namespace mRemoteNG.UI.Window
             // 
             // BrowseButton
             // 
-            this.BrowseButton._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.BrowseButton._mice = MrngButton.MouseState.HOVER;
             this.BrowseButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BrowseButton.Location = new System.Drawing.Point(723, 29);
             this.BrowseButton.Name = "BrowseButton";
@@ -470,7 +471,7 @@ namespace mRemoteNG.UI.Window
             // 
             // BrowseWorkingDir
             // 
-            this.BrowseWorkingDir._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.BrowseWorkingDir._mice = MrngButton.MouseState.HOVER;
             this.BrowseWorkingDir.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BrowseWorkingDir.Location = new System.Drawing.Point(723, 81);
             this.BrowseWorkingDir.Name = "BrowseWorkingDir";
@@ -516,7 +517,7 @@ namespace mRemoteNG.UI.Window
             // 
             // NewToolToolstripButton
             // 
-            this.NewToolToolstripButton.Image = global::mRemoteNG.Resources.ExtApp_Add;
+            this.NewToolToolstripButton.Image = global::mRemoteNG.Properties.Resources.ExtApp_Add;
             this.NewToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.NewToolToolstripButton.Name = "NewToolToolstripButton";
             this.NewToolToolstripButton.Size = new System.Drawing.Size(51, 22);
@@ -526,7 +527,7 @@ namespace mRemoteNG.UI.Window
             // DeleteToolToolstripButton
             // 
             this.DeleteToolToolstripButton.Enabled = false;
-            this.DeleteToolToolstripButton.Image = global::mRemoteNG.Resources.ExtApp_Delete;
+            this.DeleteToolToolstripButton.Image = global::mRemoteNG.Properties.Resources.ExtApp_Delete;
             this.DeleteToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.DeleteToolToolstripButton.Name = "DeleteToolToolstripButton";
             this.DeleteToolToolstripButton.Size = new System.Drawing.Size(60, 22);
@@ -541,7 +542,7 @@ namespace mRemoteNG.UI.Window
             // LaunchToolToolstripButton
             // 
             this.LaunchToolToolstripButton.Enabled = false;
-            this.LaunchToolToolstripButton.Image = global::mRemoteNG.Resources.ExtApp_Start;
+            this.LaunchToolToolstripButton.Image = global::mRemoteNG.Properties.Resources.ExtApp_Start;
             this.LaunchToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.LaunchToolToolstripButton.Name = "LaunchToolToolstripButton";
             this.LaunchToolToolstripButton.Size = new System.Drawing.Size(66, 22);
@@ -590,7 +591,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         private System.ComponentModel.IContainer components;
-        internal Controls.Base.NGGroupBox PropertiesGroupBox;
+        internal MrngGroupBox PropertiesGroupBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
