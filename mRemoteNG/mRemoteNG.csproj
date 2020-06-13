@@ -649,9 +649,6 @@
     <Compile Include="Tools\PortScanner.cs" />
     <Compile Include="Tools\WindowMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
-    <Compile Include="UI\Forms\TextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="UI\Forms\FrmUnhandledException.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -994,9 +991,6 @@
     <EmbeddedResource Include="Tools\ReconnectGroup.resx">
       <DependentUpon>ReconnectGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\TextBox.resx">
-      <DependentUpon>TextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FrmUnhandledException.resx">
       <DependentUpon>FrmUnhandledException.cs</DependentUpon>

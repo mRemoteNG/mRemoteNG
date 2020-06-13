@@ -1,6 +1,4 @@
-﻿using TextBox = mRemoteNG.UI.Forms.TextBox;
-
-namespace mRemoteNG.UI.Forms
+﻿namespace mRemoteNG.UI.Forms
 {
 	public 
 	partial class FrmPassword : System.Windows.Forms.Form
@@ -42,8 +40,8 @@ namespace mRemoteNG.UI.Forms
             this.btnCancel = new mRemoteNG.UI.Controls.Base.NGButton();
             this.lblStatus = new mRemoteNG.UI.Controls.Base.NGLabel();
             this.pbLock = new System.Windows.Forms.PictureBox();
-            this.txtVerify = new mRemoteNG.UI.Forms.TextBox();
-            this.txtPassword = new mRemoteNG.UI.Forms.TextBox();
+            this.txtVerify = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.txtPassword = new mRemoteNG.UI.Controls.Base.NGTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLock)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -124,7 +122,6 @@ namespace mRemoteNG.UI.Forms
             this.tableLayoutPanel1.SetColumnSpan(this.txtVerify, 2);
             this.txtVerify.Location = new System.Drawing.Point(73, 66);
             this.txtVerify.Name = "txtVerify";
-            this.txtVerify.SelectAllOnFocus = true;
             this.txtVerify.Size = new System.Drawing.Size(298, 22);
             this.txtVerify.TabIndex = 4;
             this.txtVerify.UseSystemPasswordChar = true;
@@ -137,7 +134,6 @@ namespace mRemoteNG.UI.Forms
             this.tableLayoutPanel1.SetColumnSpan(this.txtPassword, 2);
             this.txtPassword.Location = new System.Drawing.Point(73, 25);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.SelectAllOnFocus = true;
             this.txtPassword.Size = new System.Drawing.Size(298, 22);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.UseSystemPasswordChar = true;
@@ -197,8 +193,8 @@ namespace mRemoteNG.UI.Forms
             this.ResumeLayout(false);
 
 		}
-        private TextBox txtPassword;
-		private TextBox txtVerify;
+        private Controls.Base.NGTextBox txtPassword;
+		private Controls.Base.NGTextBox txtVerify;
 		private Controls.Base.NGLabel lblPassword;
 		private Controls.Base.NGLabel lblVerify;
 		private Controls.Base.NGButton btnOK;
