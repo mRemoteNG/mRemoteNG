@@ -492,7 +492,7 @@
     <Compile Include="UI\Forms\FrmSplashScreen.Designer.cs">
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\FullscreenHandler.cs" />
+    <Compile Include="UI\FullscreenHandler.cs" />
     <Compile Include="UI\Forms\FrmInputBox.cs">
       <SubType>Form</SubType>
     </Compile>

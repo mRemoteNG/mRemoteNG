@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace mRemoteNG.UI.Forms
+namespace mRemoteNG.UI
 {
     public class FullscreenHandler
     {
