@@ -1083,7 +1083,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\COPYING.TXT">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Documentation\contact_mail.rst" />
     <None Include="Documentation\howtos\bulk_connections.rst" />
@@ -1346,7 +1346,6 @@
     <None Include="Resources\Images\FamFamFam\News.png" />
     <None Include="Documentation\conf.py" />
     <None Include="Documentation\index.rst" />
-    <None Include="Documentation\about.rst" />
     <None Include="Documentation\installation.rst" />
     <None Include="Documentation\howtos\sshtunnel.rst" />
     <None Include="Documentation\user_interface.rst" />
