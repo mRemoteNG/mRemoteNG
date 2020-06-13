@@ -4,7 +4,7 @@ if([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) {
 }
 
 $appvDir = $Env:APPVEYOR_BUILD_FOLDER
-	
+
 $SIGCHECK="Tools\exes\sigcheck.exe"
 $SEVENZIP="Tools\7zip\7za.exe"
 
@@ -14,8 +14,8 @@ Write-Output "Decrypt Cert"
 & appveyor-tools\secure-file -decrypt "$($Env:cert_path).enc" -secret "$Env:cert_decrypt_pwd"
 
 if(-Not (Test-Path $Env:cert_path)) {
-		Write-Output "decrypt cert does not exist..."
-		Throw "Could not decrypt cert"
+    Write-Output "decrypt cert does not exist..."
+    Throw "Could not decrypt cert"
 }
 
 Write-Output "Restoring NuGets"
@@ -40,11 +40,11 @@ Write-Output "Creating debug symbols ZIP file $($outputZipPath)"
 Remove-Item -Force  $outputZipPath -ErrorAction SilentlyContinue
 $SymPath = (Join-Path -Path "mRemoteNG\bin\Release" -ChildPath "*.pdb")
 if(Test-Path "$SymPath") {
-	& $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $outputZipPath "$SymPath"
+    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $outputZipPath "$SymPath"
 } else {
-	Write-Output "No Debugging Symbols Found..."
+    Write-Output "No Debugging Symbols Found..."
 }
-    
+
 
 Write-Output "Build Release Portable"
 & msbuild "$($appvDir)\mRemoteNG.sln" /nologo /t:Clean,Build /p:Configuration="Release Portable" /p:Platform=x86 /p:CertPath="$($Env:cert_path)" /p:CertPassword="$Env:cert_pwd" /m /verbosity:normal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
@@ -60,12 +60,12 @@ $zipFilePrefix = "mRemoteNG-Portable-symbols"
 $outputZipPath="Release\$zipFilePrefix-$($version).zip"
 
 Write-Output "Creating debug symbols ZIP file $($outputZipPath)"
-Remove-Item -Force  $outputZipPath -ErrorAction SilentlyContinue
-$SymPath = (Join-Path -Path "mRemoteNG\bin\Release Portable" -ChildPath "*.pdb")
+Remove-Item -Force $outputZipPath -ErrorAction SilentlyContinue
+$SymPath = "mRemoteNG\bin\Release Portable\*.pdb"
 if(Test-Path "$SymPath") {
-	& $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $outputZipPath "$SymPath"
+    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $outputZipPath "$SymPath"
 } else {
-	Write-Output "No Debugging Symbols Found..."
+    Write-Output "No Debugging Symbols Found..."
 }
 
 $PortableZip="Release\mRemoteNG-Portable-$($version).zip"
