@@ -4,15 +4,15 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
     //This class is only minimally themed as textboxes onPaint are hard to theme (system wm paint control most of the drawing process
     //There are some glitches on the initial draw of some controls
-    public class NGTextBox : TextBox
+    public class mrngTextBox : TextBox
     {
         private ThemeManager _themeManager;
 
-        public NGTextBox()
+        public mrngTextBox()
         {
             InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;

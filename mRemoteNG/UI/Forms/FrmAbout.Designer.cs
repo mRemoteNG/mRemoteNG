@@ -11,10 +11,10 @@
             this.llCredits = new System.Windows.Forms.LinkLabel();
             this.llChangelog = new System.Windows.Forms.LinkLabel();
             this.llLicense = new System.Windows.Forms.LinkLabel();
-            this.lblTitle = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblVersion = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblLicense = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblCopyright = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblTitle = new mRemoteNG.UI.Controls.mrngLabel();
+            this.lblVersion = new mRemoteNG.UI.Controls.mrngLabel();
+            this.lblLicense = new mRemoteNG.UI.Controls.mrngLabel();
+            this.lblCopyright = new mRemoteNG.UI.Controls.mrngLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
@@ -161,10 +161,10 @@
         }
         #endregion
 
-        internal Controls.Base.NGLabel lblCopyright;
-        internal Controls.Base.NGLabel lblTitle;
-        internal Controls.Base.NGLabel lblVersion;
-        internal Controls.Base.NGLabel lblLicense;
+        internal Controls.mrngLabel lblCopyright;
+        internal Controls.mrngLabel lblTitle;
+        internal Controls.mrngLabel lblVersion;
+        internal Controls.mrngLabel lblLicense;
         internal System.Windows.Forms.Panel pnlBottom;
         internal System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.LinkLabel llCredits;

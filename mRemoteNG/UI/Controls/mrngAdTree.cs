@@ -5,11 +5,11 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls
 {
-    public partial class AdTree : UserControl
+    public partial class mrngAdTree : UserControl
     {
         #region Public Methods
 
-        public AdTree()
+        public mrngAdTree()
         {
             InitializeComponent();
         }

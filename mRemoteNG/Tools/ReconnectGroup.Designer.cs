@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.Tools
+﻿using mRemoteNG.UI.Controls;
+
+namespace mRemoteNG.Tools
 {
     public partial class ReconnectGroup : System.Windows.Forms.UserControl
 	{
@@ -26,10 +28,10 @@
 		{
             this.components = new System.ComponentModel.Container();
             this.grpAutomaticReconnect = new System.Windows.Forms.GroupBox();
-            this.lblAnimation = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.btnClose = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.lblServerStatus = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.chkReconnectWhenReady = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.lblAnimation = new mRemoteNG.UI.Controls.mrngLabel();
+            this.btnClose = new mrngButton();
+            this.lblServerStatus = new mRemoteNG.UI.Controls.mrngLabel();
+            this.chkReconnectWhenReady = new mrngCheckBox();
             this.pbServerStatus = new System.Windows.Forms.PictureBox();
             this.tmrAnimation = new System.Windows.Forms.Timer(this.components);
             this.grpAutomaticReconnect.SuspendLayout();
@@ -61,7 +63,7 @@
             // 
             // btnClose
             // 
-            this.btnClose._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnClose._mice = mrngButton.MouseState.HOVER;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Location = new System.Drawing.Point(6, 67);
             this.btnClose.Name = "btnClose";
@@ -82,7 +84,7 @@
             // 
             // chkReconnectWhenReady
             // 
-            this.chkReconnectWhenReady._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.HOVER;
+            this.chkReconnectWhenReady._mice = mrngCheckBox.MouseState.HOVER;
             this.chkReconnectWhenReady.AutoSize = true;
             this.chkReconnectWhenReady.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkReconnectWhenReady.Location = new System.Drawing.Point(18, 44);
@@ -125,12 +127,12 @@
 
 		}
 		internal System.Windows.Forms.GroupBox grpAutomaticReconnect;
-		internal UI.Controls.Base.NGButton btnClose;
-		internal UI.Controls.Base.NGLabel lblServerStatus;
-		internal UI.Controls.Base.NGCheckBox chkReconnectWhenReady;
+		internal mrngButton btnClose;
+		internal UI.Controls.mrngLabel lblServerStatus;
+		internal mrngCheckBox chkReconnectWhenReady;
 		internal System.Windows.Forms.PictureBox pbServerStatus;
 		internal System.Windows.Forms.Timer tmrAnimation;
-		internal UI.Controls.Base.NGLabel lblAnimation;
+		internal UI.Controls.mrngLabel lblAnimation;
         private System.ComponentModel.IContainer components;
     }
 }

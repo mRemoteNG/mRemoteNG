@@ -1,12 +1,12 @@
-﻿using mRemoteNG.Themes;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
     //Extended ComboBox class, the NGComboBox onPaint completely repaint the control as does the item painting
     //warning: THe DropDown style rendering is glitchy in this control, only use DropDownList or correct the rendering method
-    internal class NGComboBox : ComboBox
+    internal class mrngComboBox : ComboBox
     {
         private ThemeManager _themeManager;
 
@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Controls.Base
 
         public MouseState _mice { get; set; }
 
-        public NGComboBox()
+        public mrngComboBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

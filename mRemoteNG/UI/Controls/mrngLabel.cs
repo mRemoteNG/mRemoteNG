@@ -3,17 +3,17 @@ using mRemoteNG.Themes;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
     //Themable label to overide the winforms behavior of drawing the forecolor of disabled with a system color
     //This class repaints the control to avoid Disabled state mismatch of the theme
     [ToolboxBitmap(typeof(Label))]
-    public class NGLabel : Label
+    public class mrngLabel : Label
     {
         private ThemeManager _themeManager;
         private TextFormatFlags _textFormatFlags;
 
-        public NGLabel()
+        public mrngLabel()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

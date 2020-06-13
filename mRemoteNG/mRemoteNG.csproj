@@ -334,49 +334,49 @@
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\ClickHandlers\SwitchToConnectionClickHandler.cs" />
     <Compile Include="Tree\ClickHandlers\TreeNodeCompositeClickHandler.cs" />
-    <Compile Include="UI\Controls\AdTree.cs">
+    <Compile Include="UI\Controls\mrngAdTree.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Controls\AdTree.Designer.cs">
-      <DependentUpon>AdTree.cs</DependentUpon>
+    <Compile Include="UI\Controls\mrngAdTree.Designer.cs">
+      <DependentUpon>mrngAdTree.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGButton.cs">
+    <Compile Include="UI\Controls\mrngButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGCheckBox.cs">
+    <Compile Include="UI\Controls\mrngCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGComboBox.cs">
+    <Compile Include="UI\Controls\mrngComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGGroupBox.cs">
+    <Compile Include="UI\Controls\mrngGroupBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGLabel.cs">
+    <Compile Include="UI\Controls\mrngLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGListView.cs">
+    <Compile Include="UI\Controls\mrngListView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGNumericUpDown.cs">
+    <Compile Include="UI\Controls\mrngNumericUpDown.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGPictureBox.cs">
+    <Compile Include="UI\Controls\mrngPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGPictureBox.Designer.cs">
-      <DependentUpon>NGPictureBox.cs</DependentUpon>
+    <Compile Include="UI\Controls\mrngPictureBox.Designer.cs">
+      <DependentUpon>mrngPictureBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGProgressBar.cs">
+    <Compile Include="UI\Controls\mrngProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGRadioButton.cs">
+    <Compile Include="UI\Controls\mrngRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGSearchBox.cs">
+    <Compile Include="UI\Controls\mrngSearchBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\Base\NGTextBox.cs">
+    <Compile Include="UI\Controls\mrngTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
@@ -436,7 +436,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\ISelectionTarget.cs" />
-    <Compile Include="UI\Controls\IPTextBox.cs">
+    <Compile Include="UI\Controls\mrngIpTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Controls\ConnectionTree\IConnectionTreeDelegate.cs" />
@@ -803,38 +803,38 @@
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\AdTree.resx">
-      <DependentUpon>AdTree.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngAdTree.resx">
+      <DependentUpon>mrngAdTree.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGButton.resx">
-      <DependentUpon>NGButton.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngButton.resx">
+      <DependentUpon>mrngButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGCheckBox.resx">
-      <DependentUpon>NGCheckBox.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngCheckBox.resx">
+      <DependentUpon>mrngCheckBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGComboBox.resx">
-      <DependentUpon>NGComboBox.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngComboBox.resx">
+      <DependentUpon>mrngComboBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGGroupBox.resx">
-      <DependentUpon>NGGroupBox.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngGroupBox.resx">
+      <DependentUpon>mrngGroupBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGLabel.resx">
-      <DependentUpon>NGLabel.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngLabel.resx">
+      <DependentUpon>mrngLabel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGListView.resx">
-      <DependentUpon>NGListView.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngListView.resx">
+      <DependentUpon>mrngListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGNumericUpDown.resx">
-      <DependentUpon>NGNumericUpDown.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngNumericUpDown.resx">
+      <DependentUpon>mrngNumericUpDown.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGRadioButton.resx">
-      <DependentUpon>NGRadioButton.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngRadioButton.resx">
+      <DependentUpon>mrngRadioButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGSearchBox.resx">
-      <DependentUpon>NGSearchBox.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngSearchBox.resx">
+      <DependentUpon>mrngSearchBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\Base\NGTextBox.resx">
-      <DependentUpon>NGTextBox.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngTextBox.resx">
+      <DependentUpon>mrngTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\ConnectionTree\ConnectionTree.resx">
       <DependentUpon>ConnectionTree.cs</DependentUpon>
@@ -857,8 +857,8 @@
     <EmbeddedResource Include="UI\Controls\HeadlessTabControl.resx">
       <DependentUpon>HeadlessTabControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
-      <DependentUpon>IPTextBox.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Controls\mrngIpTextBox.resx">
+      <DependentUpon>mrngIpTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\NewPasswordWithVerification.resx">
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>

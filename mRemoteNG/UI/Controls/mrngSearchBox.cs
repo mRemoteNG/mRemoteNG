@@ -2,16 +2,16 @@
 using System.Windows.Forms;
 using mRemoteNG.Resources.Language;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
-    public class NGSearchBox : NGTextBox
+    public class mrngSearchBox : mrngTextBox
     {
         private bool _showDefaultText = true;
         private bool _settingDefaultText = true;
         private readonly PictureBox _pbClear = new PictureBox();
         private readonly ToolTip _btClearToolTip = new ToolTip();
 
-        public NGSearchBox()
+        public mrngSearchBox()
         {
             TextChanged += NGSearchBox_TextChanged;
             LostFocus += FocusLost;

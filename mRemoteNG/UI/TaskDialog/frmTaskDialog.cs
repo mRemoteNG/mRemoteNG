@@ -1,10 +1,10 @@
 ﻿using mRemoteNG.Themes;
-using mRemoteNG.UI.Controls.Base;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.TaskDialog
 {
@@ -21,7 +21,7 @@ namespace mRemoteNG.UI.TaskDialog
         private readonly Font _mainInstructionFont =
             new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
-        private readonly List<NGRadioButton> _radioButtonCtrls = new List<NGRadioButton>();
+        private readonly List<mrngRadioButton> _radioButtonCtrls = new List<mrngRadioButton>();
         private readonly DisplayProperties _display = new DisplayProperties();
         private Control _focusControl;
 
@@ -215,7 +215,7 @@ namespace mRemoteNG.UI.TaskDialog
                 var pnlHeight = _display.ScaleHeight(12);
                 for (var i = 0; i < arr.Length; i++)
                 {
-                    var rb = new NGRadioButton {Parent = pnlRadioButtons};
+                    var rb = new mrngRadioButton {Parent = pnlRadioButtons};
                     rb.Location = new Point(_display.ScaleWidth(60), _display.ScaleHeight(4) + i * rb.Height);
                     rb.Text = arr[i];
                     rb.Tag = i;

@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.UI.Forms
+﻿using mRemoteNG.UI.Controls;
+
+namespace mRemoteNG.UI.Forms
 {
     sealed partial class FrmInputBox
     {
@@ -29,10 +31,10 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this._Ok = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.buttonCancel = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.textBox = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.label = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this._Ok = new mrngButton();
+            this.buttonCancel = new mrngButton();
+            this.textBox = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.label = new mRemoteNG.UI.Controls.mrngLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +60,7 @@
             // 
             // _Ok
             // 
-            this._Ok._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this._Ok._mice = mrngButton.MouseState.HOVER;
             this._Ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this._Ok.Location = new System.Drawing.Point(125, 55);
             this._Ok.Name = "_Ok";
@@ -70,7 +72,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.buttonCancel._mice = mrngButton.MouseState.HOVER;
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(206, 55);
@@ -128,9 +130,9 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Controls.Base.NGButton _Ok;
-        private Controls.Base.NGButton buttonCancel;
-        private Controls.Base.NGTextBox textBox;
-        private Controls.Base.NGLabel label;
+        private mrngButton _Ok;
+        private mrngButton buttonCancel;
+        private Controls.mrngTextBox textBox;
+        private Controls.mrngLabel label;
     }
 }

@@ -8,10 +8,10 @@ namespace mRemoteNG.UI.Window
 	{
         #region  Windows Form Designer generated code
 				
-		internal Controls.Base.NGLabel lblEndIP;
-		internal Controls.Base.NGLabel lblStartIP;
-		internal IPTextBox ipEnd;
-		internal Controls.Base.NGListView olvHosts;
+		internal Controls.mrngLabel lblEndIP;
+		internal Controls.mrngLabel lblStartIP;
+		internal mrngIpTextBox ipEnd;
+		internal Controls.mrngListView olvHosts;
 		internal BrightIdeasSoftware.OLVColumn clmHost;
 		internal BrightIdeasSoftware.OLVColumn clmSSH;
 		internal BrightIdeasSoftware.OLVColumn clmTelnet;
@@ -22,23 +22,23 @@ namespace mRemoteNG.UI.Window
 		internal BrightIdeasSoftware.OLVColumn clmVNC;
 		internal BrightIdeasSoftware.OLVColumn clmOpenPorts;
 		internal BrightIdeasSoftware.OLVColumn clmClosedPorts;
-		internal Controls.Base.NGProgressBar prgBar;
-		internal Controls.Base.NGLabel lblOnlyImport;
-		internal Controls.Base.NGComboBox cbProtocol;
-		internal Controls.Base.NGNumericUpDown portEnd;
-		internal Controls.Base.NGNumericUpDown portStart;
-		internal Controls.Base.NGButton btnImport;
-		internal IPTextBox ipStart;
+		internal Controls.mrngProgressBar prgBar;
+		internal Controls.mrngLabel lblOnlyImport;
+		internal mrngComboBox cbProtocol;
+		internal Controls.mrngNumericUpDown portEnd;
+		internal Controls.mrngNumericUpDown portStart;
+		internal mrngButton btnImport;
+		internal mrngIpTextBox ipStart;
 				
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PortScanWindow));
-            this.ipStart = new mRemoteNG.UI.Controls.IPTextBox();
-            this.ipEnd = new mRemoteNG.UI.Controls.IPTextBox();
-            this.lblStartIP = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblEndIP = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.olvHosts = new mRemoteNG.UI.Controls.Base.NGListView();
+            this.ipStart = new mRemoteNG.UI.Controls.mrngIpTextBox();
+            this.ipEnd = new mRemoteNG.UI.Controls.mrngIpTextBox();
+            this.lblStartIP = new mRemoteNG.UI.Controls.mrngLabel();
+            this.lblEndIP = new mRemoteNG.UI.Controls.mrngLabel();
+            this.olvHosts = new mRemoteNG.UI.Controls.mrngListView();
             this.resultsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importHTTPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importHTTPSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,9 +47,9 @@ namespace mRemoteNG.UI.Window
             this.importSSH2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importTelnetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importVNCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnImport = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.cbProtocol = new mRemoteNG.UI.Controls.Base.NGComboBox();
-            this.lblOnlyImport = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.btnImport = new mrngButton();
+            this.cbProtocol = new mrngComboBox();
+            this.lblOnlyImport = new mRemoteNG.UI.Controls.mrngLabel();
             this.clmHost = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.clmSSH = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.clmTelnet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -60,15 +60,15 @@ namespace mRemoteNG.UI.Window
             this.clmVNC = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.clmOpenPorts = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.clmClosedPorts = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.prgBar = new mRemoteNG.UI.Controls.Base.NGProgressBar();
-            this.numericSelectorTimeout = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
+            this.prgBar = new mRemoteNG.UI.Controls.mrngProgressBar();
+            this.numericSelectorTimeout = new mRemoteNG.UI.Controls.mrngNumericUpDown();
             this.lblTimeout = new System.Windows.Forms.Label();
-            this.portEnd = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
-            this.portStart = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
+            this.portEnd = new mRemoteNG.UI.Controls.mrngNumericUpDown();
+            this.portStart = new mRemoteNG.UI.Controls.mrngNumericUpDown();
             this.pnlIp = new System.Windows.Forms.TableLayoutPanel();
-            this.btnScan = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.ngCheckFirstPort = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.ngCheckLastPort = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+            this.btnScan = new mrngButton();
+            this.ngCheckFirstPort = new mrngCheckBox();
+            this.ngCheckLastPort = new mrngCheckBox();
             this.pnlImport = new System.Windows.Forms.TableLayoutPanel();
             this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
             this.portScanToolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -205,7 +205,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnImport
             // 
-            this.btnImport._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.btnImport._mice = mrngButton.MouseState.OUT;
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImport.Location = new System.Drawing.Point(765, 27);
             this.btnImport.Name = "btnImport";
@@ -217,7 +217,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cbProtocol
             // 
-            this.cbProtocol._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.cbProtocol._mice = mrngComboBox.MouseState.HOVER;
             this.cbProtocol.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbProtocol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProtocol.FormattingEnabled = true;
@@ -410,7 +410,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnScan
             // 
-            this.btnScan._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.btnScan._mice = mrngButton.MouseState.OUT;
             this.btnScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnScan.Image = global::mRemoteNG.Properties.Resources.Search;
             this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -425,7 +425,7 @@ namespace mRemoteNG.UI.Window
             // 
             // ngCheckFirstPort
             // 
-            this.ngCheckFirstPort._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.ngCheckFirstPort._mice = mrngCheckBox.MouseState.OUT;
             this.ngCheckFirstPort.AutoSize = true;
             this.ngCheckFirstPort.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ngCheckFirstPort.Location = new System.Drawing.Point(3, 51);
@@ -438,7 +438,7 @@ namespace mRemoteNG.UI.Window
             // 
             // ngCheckLastPort
             // 
-            this.ngCheckLastPort._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.ngCheckLastPort._mice = mrngCheckBox.MouseState.OUT;
             this.ngCheckLastPort.AutoSize = true;
             this.ngCheckLastPort.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ngCheckLastPort.Location = new System.Drawing.Point(3, 75);
@@ -524,13 +524,13 @@ namespace mRemoteNG.UI.Window
         private System.Windows.Forms.ToolStripMenuItem importTelnetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importVNCToolStripMenuItem;
 		private System.Windows.Forms.Label lblTimeout;
-		private Controls.Base.NGNumericUpDown numericSelectorTimeout;
+		private Controls.mrngNumericUpDown numericSelectorTimeout;
         private System.Windows.Forms.TableLayoutPanel pnlIp;
         private System.Windows.Forms.TableLayoutPanel pnlImport;
-        internal Controls.Base.NGButton btnScan;
+        internal mrngButton btnScan;
         private System.Windows.Forms.TableLayoutPanel pnlMain;
-        private Controls.Base.NGCheckBox ngCheckFirstPort;
-        private Controls.Base.NGCheckBox ngCheckLastPort;
+        private mrngCheckBox ngCheckFirstPort;
+        private mrngCheckBox ngCheckLastPort;
         private System.Windows.Forms.ToolTip portScanToolTip;
     }
 }

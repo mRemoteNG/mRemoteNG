@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.UI.Forms
+﻿using mRemoteNG.UI.Controls;
+
+namespace mRemoteNG.UI.Forms
 {
 	public 
 	partial class FrmPassword : System.Windows.Forms.Form
@@ -34,14 +36,14 @@
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
-            this.lblPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblVerify = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.btnOK = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.btnCancel = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.lblStatus = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblPassword = new mRemoteNG.UI.Controls.mrngLabel();
+            this.lblVerify = new mRemoteNG.UI.Controls.mrngLabel();
+            this.btnOK = new mrngButton();
+            this.btnCancel = new mrngButton();
+            this.lblStatus = new mRemoteNG.UI.Controls.mrngLabel();
             this.pbLock = new System.Windows.Forms.PictureBox();
-            this.txtVerify = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.txtPassword = new mRemoteNG.UI.Controls.Base.NGTextBox();
+            this.txtVerify = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.txtPassword = new mRemoteNG.UI.Controls.mrngTextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLock)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -67,7 +69,7 @@
             // 
             // btnOK
             // 
-            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnOK._mice = mrngButton.MouseState.HOVER;
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Location = new System.Drawing.Point(215, 124);
             this.btnOK.Name = "btnOK";
@@ -79,7 +81,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnCancel._mice = mrngButton.MouseState.HOVER;
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(296, 124);
@@ -193,13 +195,13 @@
             this.ResumeLayout(false);
 
 		}
-        private Controls.Base.NGTextBox txtPassword;
-		private Controls.Base.NGTextBox txtVerify;
-		private Controls.Base.NGLabel lblPassword;
-		private Controls.Base.NGLabel lblVerify;
-		private Controls.Base.NGButton btnOK;
-		private Controls.Base.NGButton btnCancel;
-		private Controls.Base.NGLabel lblStatus;
+        private Controls.mrngTextBox txtPassword;
+		private Controls.mrngTextBox txtVerify;
+		private Controls.mrngLabel lblPassword;
+		private Controls.mrngLabel lblVerify;
+		private mrngButton btnOK;
+		private mrngButton btnCancel;
+		private Controls.mrngLabel lblStatus;
 		private System.Windows.Forms.PictureBox pbLock;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }

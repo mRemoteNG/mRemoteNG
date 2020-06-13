@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
     //Extended CheckBox class, the NGCheckBox onPaint completely repaint the control
 
@@ -11,14 +11,14 @@ namespace mRemoteNG.UI.Controls.Base
     // CheckBoxRenderer:
     // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.checkboxrenderer?view=netframework-4.6
     //
-    public class NGCheckBox : CheckBox
+    public class mrngCheckBox : CheckBox
     {
         private ThemeManager _themeManager;
         private readonly Size _checkboxSize;
         private readonly int _checkboxYCoord;
         private readonly int _textXCoord;
 
-        public NGCheckBox()
+        public mrngCheckBox()
         {
             InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;

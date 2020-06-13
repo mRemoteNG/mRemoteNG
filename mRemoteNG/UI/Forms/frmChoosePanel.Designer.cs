@@ -1,5 +1,7 @@
 ﻿
 
+using mRemoteNG.UI.Controls;
+
 namespace mRemoteNG.UI.Forms
 {
 	
@@ -29,15 +31,15 @@ namespace mRemoteNG.UI.Forms
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            this.cbPanels = new mRemoteNG.UI.Controls.Base.NGComboBox();
-            this.btnOK = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.lblDescription = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.btnNew = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.cbPanels = new mrngComboBox();
+            this.btnOK = new mrngButton();
+            this.lblDescription = new mRemoteNG.UI.Controls.mrngLabel();
+            this.btnNew = new mrngButton();
             this.SuspendLayout();
             // 
             // cbPanels
             // 
-            this.cbPanels._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.cbPanels._mice = mrngComboBox.MouseState.HOVER;
             this.cbPanels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPanels.FormattingEnabled = true;
             this.cbPanels.Location = new System.Drawing.Point(12, 42);
@@ -47,7 +49,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnOK
             // 
-            this.btnOK._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnOK._mice = mrngButton.MouseState.HOVER;
             this.btnOK.Location = new System.Drawing.Point(167, 72);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 24);
@@ -67,7 +69,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnNew
             // 
-            this.btnNew._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.HOVER;
+            this.btnNew._mice = mrngButton.MouseState.HOVER;
             this.btnNew.Image = global::mRemoteNG.Properties.Resources.Panel_Add;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNew.Location = new System.Drawing.Point(86, 72);
@@ -101,9 +103,9 @@ namespace mRemoteNG.UI.Forms
             this.ResumeLayout(false);
 
 		}
-		internal Controls.Base.NGComboBox cbPanels;
-		internal Controls.Base.NGButton btnOK;
-		internal Controls.Base.NGLabel lblDescription;
-		internal Controls.Base.NGButton btnNew;
+		internal mrngComboBox cbPanels;
+		internal mrngButton btnOK;
+		internal Controls.mrngLabel lblDescription;
+		internal mrngButton btnNew;
 	}
 }

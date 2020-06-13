@@ -30,16 +30,16 @@
         {
             this.pnlDefaultCredentials = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtCredentialsUsername = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.txtCredentialsPassword = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.txtCredentialsDomain = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblCredentialsDomain = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblCredentialsUsername = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.lblCredentialsPassword = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.radCredentialsCustom = new mRemoteNG.UI.Controls.Base.NGRadioButton();
-            this.lblDefaultCredentials = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.radCredentialsNoInfo = new mRemoteNG.UI.Controls.Base.NGRadioButton();
-            this.radCredentialsWindows = new mRemoteNG.UI.Controls.Base.NGRadioButton();
+            this.txtCredentialsUsername = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.txtCredentialsPassword = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.txtCredentialsDomain = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.lblCredentialsDomain = new mRemoteNG.UI.Controls.mrngLabel();
+            this.lblCredentialsUsername = new mRemoteNG.UI.Controls.mrngLabel();
+            this.lblCredentialsPassword = new mRemoteNG.UI.Controls.mrngLabel();
+            this.radCredentialsCustom = new mRemoteNG.UI.Controls.mrngRadioButton();
+            this.lblDefaultCredentials = new mRemoteNG.UI.Controls.mrngLabel();
+            this.radCredentialsNoInfo = new mRemoteNG.UI.Controls.mrngRadioButton();
+            this.radCredentialsWindows = new mRemoteNG.UI.Controls.mrngRadioButton();
             this.pnlDefaultCredentials.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -206,16 +206,16 @@
 
         #endregion
         internal System.Windows.Forms.Panel pnlDefaultCredentials;
-        internal Controls.Base.NGRadioButton radCredentialsCustom;
-        internal Controls.Base.NGLabel lblDefaultCredentials;
-        internal Controls.Base.NGRadioButton radCredentialsNoInfo;
-        internal Controls.Base.NGRadioButton radCredentialsWindows;
-        internal Controls.Base.NGTextBox txtCredentialsDomain;
-        internal Controls.Base.NGLabel lblCredentialsUsername;
-        internal Controls.Base.NGTextBox txtCredentialsPassword;
-        internal Controls.Base.NGLabel lblCredentialsPassword;
-        internal Controls.Base.NGTextBox txtCredentialsUsername;
-        internal Controls.Base.NGLabel lblCredentialsDomain;
+        internal Controls.mrngRadioButton radCredentialsCustom;
+        internal Controls.mrngLabel lblDefaultCredentials;
+        internal Controls.mrngRadioButton radCredentialsNoInfo;
+        internal Controls.mrngRadioButton radCredentialsWindows;
+        internal Controls.mrngTextBox txtCredentialsDomain;
+        internal Controls.mrngLabel lblCredentialsUsername;
+        internal Controls.mrngTextBox txtCredentialsPassword;
+        internal Controls.mrngLabel lblCredentialsPassword;
+        internal Controls.mrngTextBox txtCredentialsUsername;
+        internal Controls.mrngLabel lblCredentialsDomain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

@@ -1,15 +1,14 @@
-﻿using mRemoteNG.Themes;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
 
-
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
     [ToolboxBitmap(typeof(Button))]
     //Extended button class, the button onPaint completely repaint the control
-    public class NGButton : Button
+    public class mrngButton : Button
     {
         private ThemeManager _themeManager;
 
@@ -23,7 +22,7 @@ namespace mRemoteNG.UI.Controls.Base
             OUT
         }
 
-        public NGButton()
+        public mrngButton()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

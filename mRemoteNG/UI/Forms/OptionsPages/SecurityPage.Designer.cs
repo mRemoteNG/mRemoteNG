@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.UI.Forms.OptionsPages
+﻿using mRemoteNG.UI.Controls;
+
+namespace mRemoteNG.UI.Forms.OptionsPages
 {
     sealed partial class SecurityPage
     {
@@ -28,16 +30,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.chkEncryptCompleteFile = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-            this.comboBoxEncryptionEngine = new mRemoteNG.UI.Controls.Base.NGComboBox();
-            this.labelEncryptionEngine = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.labelBlockCipher = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.comboBoxBlockCipher = new mRemoteNG.UI.Controls.Base.NGComboBox();
-            this.groupAdvancedSecurityOptions = new mRemoteNG.UI.Controls.Base.NGGroupBox();
+            this.chkEncryptCompleteFile = new mrngCheckBox();
+            this.comboBoxEncryptionEngine = new mrngComboBox();
+            this.labelEncryptionEngine = new mRemoteNG.UI.Controls.mrngLabel();
+            this.labelBlockCipher = new mRemoteNG.UI.Controls.mrngLabel();
+            this.comboBoxBlockCipher = new mrngComboBox();
+            this.groupAdvancedSecurityOptions = new mrngGroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnTestSettings = new mRemoteNG.UI.Controls.Base.NGButton();
-            this.labelKdfIterations = new mRemoteNG.UI.Controls.Base.NGLabel();
-            this.numberBoxKdfIterations = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
+            this.btnTestSettings = new mrngButton();
+            this.labelKdfIterations = new mRemoteNG.UI.Controls.mrngLabel();
+            this.numberBoxKdfIterations = new mRemoteNG.UI.Controls.mrngNumericUpDown();
             this.groupAdvancedSecurityOptions.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberBoxKdfIterations)).BeginInit();
@@ -45,7 +47,7 @@
             // 
             // chkEncryptCompleteFile
             // 
-            this.chkEncryptCompleteFile._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+            this.chkEncryptCompleteFile._mice = mrngCheckBox.MouseState.OUT;
             this.chkEncryptCompleteFile.AutoSize = true;
             this.chkEncryptCompleteFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 3);
@@ -57,7 +59,7 @@
             // 
             // comboBoxEncryptionEngine
             // 
-            this.comboBoxEncryptionEngine._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.comboBoxEncryptionEngine._mice = mrngComboBox.MouseState.HOVER;
             this.comboBoxEncryptionEngine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxEncryptionEngine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEncryptionEngine.FormattingEnabled = true;
@@ -91,7 +93,7 @@
             // 
             // comboBoxBlockCipher
             // 
-            this.comboBoxBlockCipher._mice = mRemoteNG.UI.Controls.Base.NGComboBox.MouseState.HOVER;
+            this.comboBoxBlockCipher._mice = mrngComboBox.MouseState.HOVER;
             this.comboBoxBlockCipher.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxBlockCipher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBlockCipher.FormattingEnabled = true;
@@ -136,7 +138,7 @@
             // 
             // btnTestSettings
             // 
-            this.btnTestSettings._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.btnTestSettings._mice = mrngButton.MouseState.OUT;
             this.btnTestSettings.AutoSize = true;
             this.btnTestSettings.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnTestSettings.Location = new System.Drawing.Point(240, 85);
@@ -207,15 +209,15 @@
 
         #endregion
 
-        internal Controls.Base.NGCheckBox chkEncryptCompleteFile;
-        private Controls.Base.NGComboBox comboBoxEncryptionEngine;
-        private Controls.Base.NGLabel labelEncryptionEngine;
-        private Controls.Base.NGLabel labelBlockCipher;
-        private Controls.Base.NGComboBox comboBoxBlockCipher;
-        private Controls.Base.NGGroupBox groupAdvancedSecurityOptions;
-        private Controls.Base.NGNumericUpDown numberBoxKdfIterations;
-        private Controls.Base.NGLabel labelKdfIterations;
+        internal mrngCheckBox chkEncryptCompleteFile;
+        private mrngComboBox comboBoxEncryptionEngine;
+        private Controls.mrngLabel labelEncryptionEngine;
+        private Controls.mrngLabel labelBlockCipher;
+        private mrngComboBox comboBoxBlockCipher;
+        private mrngGroupBox groupAdvancedSecurityOptions;
+        private Controls.mrngNumericUpDown numberBoxKdfIterations;
+        private Controls.mrngLabel labelKdfIterations;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Controls.Base.NGButton btnTestSettings;
+        private mrngButton btnTestSettings;
     }
 }

@@ -2,15 +2,15 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
     // Repaint of a ProgressBar on a flat style
-    internal class NGProgressBar : ProgressBar
+    internal class mrngProgressBar : ProgressBar
     {
         private ThemeManager _themeManager;
 
 
-        public NGProgressBar()
+        public mrngProgressBar()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

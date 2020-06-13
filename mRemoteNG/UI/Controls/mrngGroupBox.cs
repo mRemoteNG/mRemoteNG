@@ -1,16 +1,16 @@
-﻿using mRemoteNG.Themes;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.Themes;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
     //Groupbox is colored using the innerTab colors as the vstheme doesnt have explicit groupbox palettes (at least completes)
     //This clas completely repaints the control
-    public class NGGroupBox : GroupBox
+    public class mrngGroupBox : GroupBox
     {
         private ThemeManager _themeManager;
 
-        public NGGroupBox()
+        public mrngGroupBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

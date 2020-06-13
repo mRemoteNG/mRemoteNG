@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.Tree.ClickHandlers;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.ConnectionTree;
 
 namespace mRemoteNG.UI.Window
@@ -29,8 +30,8 @@ namespace mRemoteNG.UI.Window
             this.mMenSort = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenFavorites = new System.Windows.Forms.ToolStripMenuItem();
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-            this.pbSearch = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
-            this.txtSearch = new mRemoteNG.UI.Controls.Base.NGSearchBox();
+            this.pbSearch = new mrngPictureBox(this.components);
+            this.txtSearch = new mRemoteNG.UI.Controls.mrngSearchBox();
             this.searchBoxLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.ConnectionTree)).BeginInit();
             this.msMain.SuspendLayout();
@@ -215,8 +216,8 @@ namespace mRemoteNG.UI.Window
 
         private System.ComponentModel.IContainer components;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
-        internal Controls.Base.NGPictureBox pbSearch;
-        internal Controls.Base.NGSearchBox txtSearch;
+        internal mrngPictureBox pbSearch;
+        internal Controls.mrngSearchBox txtSearch;
         public System.Windows.Forms.TableLayoutPanel searchBoxLayoutPanel;
         internal System.Windows.Forms.ToolStripMenuItem mMenFavorites;
     }

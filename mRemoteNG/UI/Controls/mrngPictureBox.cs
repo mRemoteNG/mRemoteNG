@@ -2,18 +2,18 @@
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
-    public partial class NGPictureBox : PictureBox
+    public partial class mrngPictureBox : PictureBox
     {
         private ThemeManager _themeManager;
 
-        public NGPictureBox()
+        public mrngPictureBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
 
-        public NGPictureBox(IContainer container)
+        public mrngPictureBox(IContainer container)
         {
             container.Add(this);
 

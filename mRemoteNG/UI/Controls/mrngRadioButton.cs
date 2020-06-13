@@ -3,11 +3,11 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
     // total replace of RadioButton to avoid disabled state inconsistency on the themes
     // and glyph color inconsistency
-    class NGRadioButton : RadioButton
+    class mrngRadioButton : RadioButton
     {
         private ThemeManager _themeManager;
         private readonly Rectangle _circle;
@@ -15,7 +15,7 @@ namespace mRemoteNG.UI.Controls.Base
         private readonly int _textXCoord;
 
         // Constructor
-        public NGRadioButton()
+        public mrngRadioButton()
         {
             var display = new DisplayProperties();
 

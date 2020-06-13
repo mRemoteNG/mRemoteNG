@@ -1,4 +1,6 @@
+﻿
 
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -30,18 +32,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
-			this.lblMaximumPuttyWaitTime = new mRemoteNG.UI.Controls.Base.NGLabel();
-			this.chkAutomaticReconnect = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-			this.numPuttyWaitTime = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
-			this.chkUseCustomPuttyPath = new mRemoteNG.UI.Controls.Base.NGCheckBox();
-			this.lblConfigurePuttySessions = new mRemoteNG.UI.Controls.Base.NGLabel();
-			this.numUVNCSCPort = new mRemoteNG.UI.Controls.Base.NGNumericUpDown();
-			this.txtCustomPuttyPath = new mRemoteNG.UI.Controls.Base.NGTextBox();
-			this.btnLaunchPutty = new mRemoteNG.UI.Controls.Base.NGButton();
-			this.lblUVNCSCPort = new mRemoteNG.UI.Controls.Base.NGLabel();
-			this.lblSeconds = new mRemoteNG.UI.Controls.Base.NGLabel();
-			this.btnBrowseCustomPuttyPath = new mRemoteNG.UI.Controls.Base.NGButton();
-			this.chkLoadBalanceInfoUseUtf8 = new mRemoteNG.UI.Controls.Base.NGCheckBox();
+			this.lblMaximumPuttyWaitTime = new mRemoteNG.UI.Controls.mrngLabel();
+			this.chkAutomaticReconnect = new mrngCheckBox();
+			this.numPuttyWaitTime = new mRemoteNG.UI.Controls.mrngNumericUpDown();
+			this.chkUseCustomPuttyPath = new mrngCheckBox();
+			this.lblConfigurePuttySessions = new mRemoteNG.UI.Controls.mrngLabel();
+			this.numUVNCSCPort = new mRemoteNG.UI.Controls.mrngNumericUpDown();
+			this.txtCustomPuttyPath = new mRemoteNG.UI.Controls.mrngTextBox();
+			this.btnLaunchPutty = new mrngButton();
+			this.lblUVNCSCPort = new mRemoteNG.UI.Controls.mrngLabel();
+			this.lblSeconds = new mRemoteNG.UI.Controls.mrngLabel();
+			this.btnBrowseCustomPuttyPath = new mrngButton();
+			this.chkLoadBalanceInfoUseUtf8 = new mrngCheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.numPuttyWaitTime)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numUVNCSCPort)).BeginInit();
 			this.SuspendLayout();
@@ -57,7 +59,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// chkAutomaticReconnect
 			// 
-			this.chkAutomaticReconnect._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+			this.chkAutomaticReconnect._mice = mrngCheckBox.MouseState.OUT;
 			this.chkAutomaticReconnect.AutoSize = true;
 			this.chkAutomaticReconnect.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.chkAutomaticReconnect.Location = new System.Drawing.Point(3, 3);
@@ -87,7 +89,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// chkUseCustomPuttyPath
 			// 
-			this.chkUseCustomPuttyPath._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+			this.chkUseCustomPuttyPath._mice = mrngCheckBox.MouseState.OUT;
 			this.chkUseCustomPuttyPath.AutoSize = true;
 			this.chkUseCustomPuttyPath.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.chkUseCustomPuttyPath.Location = new System.Drawing.Point(3, 49);
@@ -139,7 +141,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// btnLaunchPutty
 			// 
-			this.btnLaunchPutty._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+			this.btnLaunchPutty._mice = mrngButton.MouseState.OUT;
 			this.btnLaunchPutty.Image = global::mRemoteNG.Properties.Resources.PuttyConfig;
 			this.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnLaunchPutty.Location = new System.Drawing.Point(373, 109);
@@ -172,7 +174,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// btnBrowseCustomPuttyPath
 			// 
-			this.btnBrowseCustomPuttyPath._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+			this.btnBrowseCustomPuttyPath._mice = mrngButton.MouseState.OUT;
 			this.btnBrowseCustomPuttyPath.Enabled = false;
 			this.btnBrowseCustomPuttyPath.Location = new System.Drawing.Point(373, 71);
 			this.btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath";
@@ -184,7 +186,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			// 
 			// chkLoadBalanceInfoUseUtf8
 			// 
-			this.chkLoadBalanceInfoUseUtf8._mice = mRemoteNG.UI.Controls.Base.NGCheckBox.MouseState.OUT;
+			this.chkLoadBalanceInfoUseUtf8._mice = mrngCheckBox.MouseState.OUT;
 			this.chkLoadBalanceInfoUseUtf8.AutoSize = true;
 			this.chkLoadBalanceInfoUseUtf8.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.chkLoadBalanceInfoUseUtf8.Location = new System.Drawing.Point(3, 26);
@@ -219,17 +221,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.PerformLayout();
 
 		}
-		internal Controls.Base.NGLabel lblMaximumPuttyWaitTime;
-		internal Controls.Base.NGCheckBox chkAutomaticReconnect;
-		internal Controls.Base.NGNumericUpDown numPuttyWaitTime;
-		internal Controls.Base.NGCheckBox chkUseCustomPuttyPath;
-		internal Controls.Base.NGLabel lblConfigurePuttySessions;
-		internal Controls.Base.NGNumericUpDown numUVNCSCPort;
-		internal Controls.Base.NGTextBox txtCustomPuttyPath;
-		internal Controls.Base.NGButton btnLaunchPutty;
-		internal Controls.Base.NGLabel lblUVNCSCPort;
-		internal Controls.Base.NGLabel lblSeconds;
-		internal Controls.Base.NGButton btnBrowseCustomPuttyPath;
-        private Controls.Base.NGCheckBox chkLoadBalanceInfoUseUtf8;
+		internal Controls.mrngLabel lblMaximumPuttyWaitTime;
+		internal mrngCheckBox chkAutomaticReconnect;
+		internal Controls.mrngNumericUpDown numPuttyWaitTime;
+		internal mrngCheckBox chkUseCustomPuttyPath;
+		internal Controls.mrngLabel lblConfigurePuttySessions;
+		internal Controls.mrngNumericUpDown numUVNCSCPort;
+		internal Controls.mrngTextBox txtCustomPuttyPath;
+		internal mrngButton btnLaunchPutty;
+		internal Controls.mrngLabel lblUVNCSCPort;
+		internal Controls.mrngLabel lblSeconds;
+		internal mrngButton btnBrowseCustomPuttyPath;
+        private mrngCheckBox chkLoadBalanceInfoUseUtf8;
     }
 }

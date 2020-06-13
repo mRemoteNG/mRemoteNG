@@ -3,18 +3,18 @@ using System.Drawing;
 using BrightIdeasSoftware;
 using mRemoteNG.Themes;
 
-namespace mRemoteNG.UI.Controls.Base
+namespace mRemoteNG.UI.Controls
 {
     //Simple coloring of ObjectListView
     //This is subclassed to avoid repeating the code in multiple places
-    internal class NGListView : ObjectListView
+    internal class mrngListView : ObjectListView
     {
         private CellBorderDecoration deco;
 
         //Control if the gridlines are styled, must be set before the OnCreateControl is fired
         public bool DecorateLines { get; set; } = true;
 
-        public NGListView()
+        public mrngListView()
         {
             InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;

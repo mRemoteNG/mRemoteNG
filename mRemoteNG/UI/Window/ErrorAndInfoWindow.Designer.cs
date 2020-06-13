@@ -1,12 +1,14 @@
 ﻿
+using mRemoteNG.UI.Controls;
+
 namespace mRemoteNG.UI.Window
 {
 	public partial class ErrorAndInfoWindow
 	{
-		internal Controls.Base.NGPictureBox pbError;
+		internal mrngPictureBox pbError;
 		internal System.Windows.Forms.ListView lvErrorCollector;
 		internal System.Windows.Forms.ColumnHeader clmMessage;
-		internal Controls.Base.NGTextBox txtMsgText;
+		internal Controls.mrngTextBox txtMsgText;
 		internal System.Windows.Forms.ImageList imgListMC;
 		internal System.Windows.Forms.ContextMenuStrip cMenMC;
 		internal System.Windows.Forms.ToolStripMenuItem cMenMCCopy;
@@ -15,15 +17,15 @@ namespace mRemoteNG.UI.Window
         private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            this.txtMsgText = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.pbError = new mRemoteNG.UI.Controls.Base.NGPictureBox(this.components);
+            this.txtMsgText = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.pbError = new mrngPictureBox(this.components);
             this.lvErrorCollector = new System.Windows.Forms.ListView();
             this.clmMessage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cMenMC = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMenMCCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.cMenMCDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.imgListMC = new System.Windows.Forms.ImageList(this.components);
-            this.lblMsgDate = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.lblMsgDate = new mRemoteNG.UI.Controls.mrngLabel();
             this.pnlErrorMsg = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbError)).BeginInit();
             this.cMenMC.SuspendLayout();
@@ -164,7 +166,7 @@ namespace mRemoteNG.UI.Window
 		}
 
         private System.ComponentModel.IContainer components;
-        internal Controls.Base.NGLabel lblMsgDate;
+        internal Controls.mrngLabel lblMsgDate;
         internal System.Windows.Forms.Panel pnlErrorMsg;
     }
 }

@@ -1,5 +1,7 @@
 ﻿
 
+using mRemoteNG.UI.Controls;
+
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
 
@@ -33,26 +35,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void InitializeComponent()
         {
             this.pnlCheck1 = new System.Windows.Forms.Panel();
-            this.txtCheck1 = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblCheck1 = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtCheck1 = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.lblCheck1 = new mRemoteNG.UI.Controls.mrngLabel();
             this.pbCheck1 = new System.Windows.Forms.PictureBox();
             this.pnlCheck2 = new System.Windows.Forms.Panel();
-            this.txtCheck2 = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblCheck2 = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtCheck2 = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.lblCheck2 = new mRemoteNG.UI.Controls.mrngLabel();
             this.pbCheck2 = new System.Windows.Forms.PictureBox();
             this.pnlCheck3 = new System.Windows.Forms.Panel();
-            this.txtCheck3 = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblCheck3 = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtCheck3 = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.lblCheck3 = new mRemoteNG.UI.Controls.mrngLabel();
             this.pbCheck3 = new System.Windows.Forms.PictureBox();
             this.pnlCheck4 = new System.Windows.Forms.Panel();
-            this.txtCheck4 = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblCheck4 = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtCheck4 = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.lblCheck4 = new mRemoteNG.UI.Controls.mrngLabel();
             this.pbCheck4 = new System.Windows.Forms.PictureBox();
             this.pnlCheck5 = new System.Windows.Forms.Panel();
-            this.txtCheck5 = new mRemoteNG.UI.Controls.Base.NGTextBox();
-            this.lblCheck5 = new mRemoteNG.UI.Controls.Base.NGLabel();
+            this.txtCheck5 = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.lblCheck5 = new mRemoteNG.UI.Controls.mrngLabel();
             this.pbCheck5 = new System.Windows.Forms.PictureBox();
-            this.btnCheck = new mRemoteNG.UI.Controls.Base.NGButton();
+            this.btnCheck = new mrngButton();
             this.tblCheck = new System.Windows.Forms.TableLayoutPanel();
             this.pnlCheck1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCheck1)).BeginInit();
@@ -313,7 +315,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnCheck
             // 
-            this.btnCheck._mice = mRemoteNG.UI.Controls.Base.NGButton.MouseState.OUT;
+            this.btnCheck._mice = mrngButton.MouseState.OUT;
             this.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheck.Location = new System.Drawing.Point(3, 453);
             this.btnCheck.Name = "btnCheck";
@@ -373,25 +375,25 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         }
         private System.Windows.Forms.PictureBox pbCheck1;
-        private Controls.Base.NGLabel lblCheck1;
+        private Controls.mrngLabel lblCheck1;
         private System.Windows.Forms.Panel pnlCheck2;
-        private Controls.Base.NGLabel lblCheck2;
+        private Controls.mrngLabel lblCheck2;
         private System.Windows.Forms.PictureBox pbCheck2;
         private System.Windows.Forms.Panel pnlCheck3;
-        private Controls.Base.NGLabel lblCheck3;
+        private Controls.mrngLabel lblCheck3;
         private System.Windows.Forms.PictureBox pbCheck3;
         private System.Windows.Forms.Panel pnlCheck4;
-        private Controls.Base.NGLabel lblCheck4;
+        private Controls.mrngLabel lblCheck4;
         private System.Windows.Forms.PictureBox pbCheck4;
         private System.Windows.Forms.Panel pnlCheck5;
-        private Controls.Base.NGLabel lblCheck5;
+        private Controls.mrngLabel lblCheck5;
         private System.Windows.Forms.PictureBox pbCheck5;
-        private Controls.Base.NGButton btnCheck;
-        private Controls.Base.NGTextBox txtCheck1;
-        private Controls.Base.NGTextBox txtCheck2;
-        private Controls.Base.NGTextBox txtCheck3;
-        private Controls.Base.NGTextBox txtCheck4;
-        private Controls.Base.NGTextBox txtCheck5;
+        private mrngButton btnCheck;
+        private Controls.mrngTextBox txtCheck1;
+        private Controls.mrngTextBox txtCheck2;
+        private Controls.mrngTextBox txtCheck3;
+        private Controls.mrngTextBox txtCheck4;
+        private Controls.mrngTextBox txtCheck5;
         private System.Windows.Forms.Panel pnlCheck1;
         private System.Windows.Forms.TableLayoutPanel tblCheck;
     }

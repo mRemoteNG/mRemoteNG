@@ -1,6 +1,6 @@
-﻿namespace mRemoteNG.UI.Controls.Base
+﻿namespace mRemoteNG.UI.Controls
 {
-    partial class NGPictureBox
+    partial class mrngPictureBox
     {
         /// <summary>
         /// Required designer variable.
