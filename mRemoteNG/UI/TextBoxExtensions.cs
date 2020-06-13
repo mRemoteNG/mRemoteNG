@@ -3,7 +3,7 @@ using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.App;
 
-namespace mRemoteNG.UI.Controls
+namespace mRemoteNG.UI
 {
     public static class TextBoxExtensions
     {

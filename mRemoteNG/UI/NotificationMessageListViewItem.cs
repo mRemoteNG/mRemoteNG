@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using mRemoteNG.Messages;
 
-namespace mRemoteNG.UI.Controls
+namespace mRemoteNG.UI
 {
     public class NotificationMessageListViewItem : ListViewItem
     {

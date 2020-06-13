@@ -435,7 +435,7 @@
     <Compile Include="UI\Controls\HeadlessTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Controls\ISelectionTarget.cs" />
+    <Compile Include="UI\ISelectionTarget.cs" />
     <Compile Include="UI\Controls\mrngIpTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -453,7 +453,7 @@
     <Compile Include="UI\Controls\NewPasswordWithVerification.Designer.cs">
       <DependentUpon>NewPasswordWithVerification.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\NotificationMessageListViewItem.cs" />
+    <Compile Include="UI\NotificationMessageListViewItem.cs" />
     <Compile Include="UI\Controls\PageSequence\PageSequence.cs" />
     <Compile Include="UI\Controls\PageSequence\SequencedControl.cs">
       <SubType>UserControl</SubType>
@@ -471,8 +471,8 @@
     <Compile Include="UI\Controls\SecureTextBox.Designer.cs">
       <DependentUpon>SecureTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\StatusImageList.cs" />
-    <Compile Include="UI\Controls\TextBoxExtensions.cs" />
+    <Compile Include="UI\StatusImageList.cs" />
+    <Compile Include="UI\TextBoxExtensions.cs" />
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
     </Compile>

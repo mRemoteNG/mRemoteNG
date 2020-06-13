@@ -6,8 +6,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
 
-
-namespace mRemoteNG.UI.Controls
+namespace mRemoteNG.UI
 {
     public class StatusImageList : IDisposable
     {

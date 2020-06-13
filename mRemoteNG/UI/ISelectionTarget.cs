@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace mRemoteNG.UI.Controls
+namespace mRemoteNG.UI
 {
     public interface ISelectionTarget<out T>
     {
