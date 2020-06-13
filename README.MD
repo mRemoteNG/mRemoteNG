@@ -68,12 +68,9 @@ For a detailed feature list and general usage support, refer to the [Documentati
 
 - [Windows 10](https://en.wikipedia.org/wiki/Windows_10)
 - [Windows 8.1](https://en.wikipedia.org/wiki/Windows_8.1)
-- [Windows 7](https://en.wikipedia.org/wiki/Windows_7) (See: _Minimum Requirements_)
 - [Windows Server 2019](https://en.wikipedia.org/wiki/Windows_Server_2019)
 - [Windows Server 2016](https://en.wikipedia.org/wiki/Windows_Server_2016)
 - [Windows Server 2012 R2](https://en.wikipedia.org/wiki/Windows_Server_2012_R2)
-- [Windows Server 2012](https://en.wikipedia.org/wiki/Windows_Server_2012)
-- [Windows Server 2008 R2](https://en.wikipedia.org/wiki/Windows_Server_2008_R2) (See: _Minimum Requirements_)
 
 ### Packaging
 
@@ -100,28 +97,8 @@ You will need to compile it yourself using Visual Studio.
 * [Microsoft .NET Framework 4.0](https://www.microsoft.com/en-us/download/details.aspx?id=17851)
 * Microsoft Terminal Service Client 6.0 or later
   * Needed if you use RDP. mstscax.dll and/or msrdp.ocx be registered.
-* [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)
-  * Needed if you use Telnet, SSH, Rlogin or RAW. Included in all packages
-  * An appropriate and integrated version is included with mRemoteNG
 * [Citrix ICA Client](https://www.citrix.com/downloads/citrix-receiver.html)
   * Needed if you use ICA. wfica.ocx must be registered
-
-### Suggested for Windows 7 and Windows 2008 R2 Clients
-
-_You can use powershell to check if the hotfixes are installed. Example: `Get-HotFix | where {$_.HotFixID -eq "KB2574819" -and $_.HotFixID -eq "KB2592687"}`_
-
-The following updates are suggested (but not required) for Windows 7 / Windows Server 2008 clients:
-
-- [KB2857650](https://support.microsoft.com/en-us/kb/2857650) - Update that improves the RemoteApp and Desktop Connections features is available for Windows 7
-- [KB2830477](https://support.microsoft.com/en-us/kb/2830477) - Update for RemoteApp and Desktop Connections feature is available for Windows
-- [KB2913751](https://support.microsoft.com/en-us/kb/2913751) - Smart card redirection in remote sessions fails in a Windows 7 SP1-based RDP 8.1 client
-- [KB2923545](https://support.microsoft.com/en-us/kb/2923545) - Update for RDP 8.1 is available for Windows 7 SP1
-- [KB2574819](https://support.microsoft.com/en-us/kb/2574819) - Adds support for DTLS in Windows 7 SP1 and Windows Server 2008 R2 SP1
-- [KB2592687](https://support.microsoft.com/en-us/kb/2592687) - RDP 8.0 update for Windows 7 and Windows Server 2008 R2
-- [KB2965788](https://support.microsoft.com/en-us/kb/2965788) - MS14-030: Description of the security update for Remote Desktop Security Release for Windows: June 10, 2014
-- [KB2985461](https://support.microsoft.com/en-us/kb/2985461) - Error 0x800401f0 when you update RemoteApp and Desktop Connections feeds in Windows 7 or Windows Server 2008 R2
-- [KB2984972](https://support.microsoft.com/en-us/kb/2984972) - Update for RDC 7.1to support restricted administration logons on Windows 7 and Windows Server 2008 R2
-- [KB2984976](https://support.microsoft.com/en-us/kb/2984976) - RDP 8.0 update for restricted administration on Windows 7 or Windows Server 2008 R2
 
 ### Download
 
