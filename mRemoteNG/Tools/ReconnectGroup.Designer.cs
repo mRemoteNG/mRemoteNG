@@ -28,10 +28,10 @@ namespace mRemoteNG.Tools
 		{
             this.components = new System.ComponentModel.Container();
             this.grpAutomaticReconnect = new System.Windows.Forms.GroupBox();
-            this.lblAnimation = new mRemoteNG.UI.Controls.mrngLabel();
-            this.btnClose = new mrngButton();
-            this.lblServerStatus = new mRemoteNG.UI.Controls.mrngLabel();
-            this.chkReconnectWhenReady = new mrngCheckBox();
+            this.lblAnimation = new mRemoteNG.UI.Controls.MrngLabel();
+            this.btnClose = new MrngButton();
+            this.lblServerStatus = new mRemoteNG.UI.Controls.MrngLabel();
+            this.chkReconnectWhenReady = new MrngCheckBox();
             this.pbServerStatus = new System.Windows.Forms.PictureBox();
             this.tmrAnimation = new System.Windows.Forms.Timer(this.components);
             this.grpAutomaticReconnect.SuspendLayout();
@@ -63,7 +63,7 @@ namespace mRemoteNG.Tools
             // 
             // btnClose
             // 
-            this.btnClose._mice = mrngButton.MouseState.HOVER;
+            this.btnClose._mice = MrngButton.MouseState.HOVER;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Location = new System.Drawing.Point(6, 67);
             this.btnClose.Name = "btnClose";
@@ -84,7 +84,7 @@ namespace mRemoteNG.Tools
             // 
             // chkReconnectWhenReady
             // 
-            this.chkReconnectWhenReady._mice = mrngCheckBox.MouseState.HOVER;
+            this.chkReconnectWhenReady._mice = MrngCheckBox.MouseState.HOVER;
             this.chkReconnectWhenReady.AutoSize = true;
             this.chkReconnectWhenReady.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkReconnectWhenReady.Location = new System.Drawing.Point(18, 44);
@@ -127,12 +127,12 @@ namespace mRemoteNG.Tools
 
 		}
 		internal System.Windows.Forms.GroupBox grpAutomaticReconnect;
-		internal mrngButton btnClose;
-		internal UI.Controls.mrngLabel lblServerStatus;
-		internal mrngCheckBox chkReconnectWhenReady;
+		internal MrngButton btnClose;
+		internal UI.Controls.MrngLabel lblServerStatus;
+		internal MrngCheckBox chkReconnectWhenReady;
 		internal System.Windows.Forms.PictureBox pbServerStatus;
 		internal System.Windows.Forms.Timer tmrAnimation;
-		internal UI.Controls.mrngLabel lblAnimation;
+		internal UI.Controls.MrngLabel lblAnimation;
         private System.ComponentModel.IContainer components;
     }
 }

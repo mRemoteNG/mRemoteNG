@@ -16,51 +16,51 @@ namespace mRemoteNG.UI.Window
     {
         #region Form Init
 
-        private mrngProgressBar pbStatus;
-        private mrngButton btnTransfer;
-        private mrngTextBox txtUser;
-        private mrngTextBox txtPassword;
-        private mrngTextBox txtHost;
-        private mrngTextBox txtPort;
-        private mrngLabel lblHost;
-        private mrngLabel lblPort;
-        private mrngLabel lblUser;
-        private mrngLabel lblPassword;
-        private mrngLabel lblProtocol;
-        private mrngRadioButton radProtSCP;
-        private mrngRadioButton radProtSFTP;
-        private mrngGroupBox grpConnection;
-        private mrngButton btnBrowse;
-        private mrngLabel lblRemoteFile;
-        private mrngTextBox txtRemoteFile;
-        private mrngTextBox txtLocalFile;
-        private mrngLabel lblLocalFile;
-        private mrngGroupBox grpFiles;
+        private MrngProgressBar pbStatus;
+        private MrngButton btnTransfer;
+        private MrngTextBox txtUser;
+        private MrngTextBox txtPassword;
+        private MrngTextBox txtHost;
+        private MrngTextBox txtPort;
+        private MrngLabel lblHost;
+        private MrngLabel lblPort;
+        private MrngLabel lblUser;
+        private MrngLabel lblPassword;
+        private MrngLabel lblProtocol;
+        private MrngRadioButton radProtSCP;
+        private MrngRadioButton radProtSFTP;
+        private MrngGroupBox grpConnection;
+        private MrngButton btnBrowse;
+        private MrngLabel lblRemoteFile;
+        private MrngTextBox txtRemoteFile;
+        private MrngTextBox txtLocalFile;
+        private MrngLabel lblLocalFile;
+        private MrngGroupBox grpFiles;
 
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources =
                 new System.ComponentModel.ComponentResourceManager(typeof(SSHTransferWindow));
-            grpFiles = new mrngGroupBox();
-            lblLocalFile = new mrngLabel();
-            txtLocalFile = new mrngTextBox();
-            btnTransfer = new mrngButton();
-            txtRemoteFile = new mrngTextBox();
-            lblRemoteFile = new mrngLabel();
-            btnBrowse = new mrngButton();
-            grpConnection = new mrngGroupBox();
-            radProtSFTP = new mrngRadioButton();
-            radProtSCP = new mrngRadioButton();
-            lblProtocol = new mrngLabel();
-            lblPassword = new mrngLabel();
-            lblUser = new mrngLabel();
-            lblPort = new mrngLabel();
-            lblHost = new mrngLabel();
-            txtPort = new mrngTextBox();
-            txtHost = new mrngTextBox();
-            txtPassword = new mrngTextBox();
-            txtUser = new mrngTextBox();
-            pbStatus = new mrngProgressBar();
+            grpFiles = new MrngGroupBox();
+            lblLocalFile = new MrngLabel();
+            txtLocalFile = new MrngTextBox();
+            btnTransfer = new MrngButton();
+            txtRemoteFile = new MrngTextBox();
+            lblRemoteFile = new MrngLabel();
+            btnBrowse = new MrngButton();
+            grpConnection = new MrngGroupBox();
+            radProtSFTP = new MrngRadioButton();
+            radProtSCP = new MrngRadioButton();
+            lblProtocol = new MrngLabel();
+            lblPassword = new MrngLabel();
+            lblUser = new MrngLabel();
+            lblPort = new MrngLabel();
+            lblHost = new MrngLabel();
+            txtPort = new MrngTextBox();
+            txtHost = new MrngTextBox();
+            txtPassword = new MrngTextBox();
+            txtUser = new MrngTextBox();
+            pbStatus = new MrngProgressBar();
             grpFiles.SuspendLayout();
             grpConnection.SuspendLayout();
             SuspendLayout();
@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnTransfer
             // 
-            btnTransfer._mice = mrngButton.MouseState.HOVER;
+            btnTransfer._mice = MrngButton.MouseState.HOVER;
             btnTransfer.FlatStyle = FlatStyle.Flat;
             btnTransfer.Image = Properties.Resources.SSHTransfer;
             btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -135,7 +135,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnBrowse
             // 
-            btnBrowse._mice = mrngButton.MouseState.HOVER;
+            btnBrowse._mice = MrngButton.MouseState.HOVER;
             btnBrowse.FlatStyle = FlatStyle.Flat;
             btnBrowse.Location = new System.Drawing.Point(566, 28);
             btnBrowse.Name = "btnBrowse";

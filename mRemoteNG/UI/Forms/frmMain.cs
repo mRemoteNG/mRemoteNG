@@ -551,7 +551,7 @@ namespace mRemoteNG.UI.Forms
                             {
                                 if (controlThatWasClicked is TreeView ||
                                     controlThatWasClicked is ComboBox ||
-                                    controlThatWasClicked is mrngTextBox ||
+                                    controlThatWasClicked is MrngTextBox ||
                                     controlThatWasClicked is FrmMain)
                                 {
                                     controlThatWasClicked.Focus();

@@ -33,16 +33,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
-            this.chkReconnectOnStart = new mrngCheckBox();
-            this.chkSaveConsOnExit = new mrngCheckBox();
-            this.chkSingleInstance = new mrngCheckBox();
-            this.chkProperInstallationOfComponentsAtStartup = new mrngCheckBox();
-            this.chkStartMinimized = new mrngCheckBox();
+            this.chkReconnectOnStart = new MrngCheckBox();
+            this.chkSaveConsOnExit = new MrngCheckBox();
+            this.chkSingleInstance = new MrngCheckBox();
+            this.chkProperInstallationOfComponentsAtStartup = new MrngCheckBox();
+            this.chkStartMinimized = new MrngCheckBox();
             this.SuspendLayout();
             // 
             // chkReconnectOnStart
             // 
-            this.chkReconnectOnStart._mice = mrngCheckBox.MouseState.OUT;
+            this.chkReconnectOnStart._mice = MrngCheckBox.MouseState.OUT;
             this.chkReconnectOnStart.AutoSize = true;
             this.chkReconnectOnStart.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkReconnectOnStart.Location = new System.Drawing.Point(3, 26);
@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSaveConsOnExit
             // 
-            this.chkSaveConsOnExit._mice = mrngCheckBox.MouseState.OUT;
+            this.chkSaveConsOnExit._mice = MrngCheckBox.MouseState.OUT;
             this.chkSaveConsOnExit.AutoSize = true;
             this.chkSaveConsOnExit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSaveConsOnExit.Location = new System.Drawing.Point(3, 2);
@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSingleInstance
             // 
-            this.chkSingleInstance._mice = mrngCheckBox.MouseState.OUT;
+            this.chkSingleInstance._mice = MrngCheckBox.MouseState.OUT;
             this.chkSingleInstance.AutoSize = true;
             this.chkSingleInstance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSingleInstance.Location = new System.Drawing.Point(3, 50);
@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkProperInstallationOfComponentsAtStartup
             // 
-            this.chkProperInstallationOfComponentsAtStartup._mice = mrngCheckBox.MouseState.OUT;
+            this.chkProperInstallationOfComponentsAtStartup._mice = MrngCheckBox.MouseState.OUT;
             this.chkProperInstallationOfComponentsAtStartup.AutoSize = true;
             this.chkProperInstallationOfComponentsAtStartup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkProperInstallationOfComponentsAtStartup.Location = new System.Drawing.Point(3, 74);
@@ -90,7 +90,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkStartMinimized
             // 
-            this.chkStartMinimized._mice = mrngCheckBox.MouseState.OUT;
+            this.chkStartMinimized._mice = MrngCheckBox.MouseState.OUT;
             this.chkStartMinimized.AutoSize = true;
             this.chkStartMinimized.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkStartMinimized.Location = new System.Drawing.Point(3, 97);
@@ -116,10 +116,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.PerformLayout();
 
 		}
-		internal mrngCheckBox chkReconnectOnStart;
-		internal mrngCheckBox chkSaveConsOnExit;
-		internal mrngCheckBox chkSingleInstance;
-		internal mrngCheckBox chkProperInstallationOfComponentsAtStartup;
-        internal mrngCheckBox chkStartMinimized;
+		internal MrngCheckBox chkReconnectOnStart;
+		internal MrngCheckBox chkSaveConsOnExit;
+		internal MrngCheckBox chkSingleInstance;
+		internal MrngCheckBox chkProperInstallationOfComponentsAtStartup;
+        internal MrngCheckBox chkStartMinimized;
     }
 }

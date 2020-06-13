@@ -1,9 +1,9 @@
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls
 {
-    public class ToolStripSplitButton : System.Windows.Forms.ToolStripSplitButton
+    public class MrngToolStripSplitButton : System.Windows.Forms.ToolStripSplitButton
     {
         public new ToolStripDropDown DropDown
         {

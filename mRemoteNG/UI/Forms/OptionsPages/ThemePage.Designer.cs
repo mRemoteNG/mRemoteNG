@@ -32,14 +32,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            this.btnThemeDelete = new mrngButton();
-            this.btnThemeNew = new mrngButton();
-            this.cboTheme = new mrngComboBox();
-            this.listPalette = new mRemoteNG.UI.Controls.mrngListView();
+            this.btnThemeDelete = new MrngButton();
+            this.btnThemeNew = new MrngButton();
+            this.cboTheme = new MrngComboBox();
+            this.listPalette = new mRemoteNG.UI.Controls.MrngListView();
             this.keyCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ColorCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ColorNameCol = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.labelRestart = new mRemoteNG.UI.Controls.mrngLabel();
+            this.labelRestart = new mRemoteNG.UI.Controls.MrngLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
@@ -51,7 +51,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnThemeDelete
             // 
-            this.btnThemeDelete._mice = mrngButton.MouseState.OUT;
+            this.btnThemeDelete._mice = MrngButton.MouseState.OUT;
             this.btnThemeDelete.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnThemeDelete.Location = new System.Drawing.Point(507, 3);
             this.btnThemeDelete.Name = "btnThemeDelete";
@@ -63,7 +63,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnThemeNew
             // 
-            this.btnThemeNew._mice = mrngButton.MouseState.OUT;
+            this.btnThemeNew._mice = MrngButton.MouseState.OUT;
             this.btnThemeNew.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnThemeNew.Location = new System.Drawing.Point(407, 3);
             this.btnThemeNew.Name = "btnThemeNew";
@@ -75,7 +75,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboTheme
             // 
-            this.cboTheme._mice = mrngComboBox.MouseState.HOVER;
+            this.cboTheme._mice = MrngComboBox.MouseState.HOVER;
             this.cboTheme.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cboTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTheme.FormattingEnabled = true;
@@ -204,11 +204,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.ResumeLayout(false);
 
 		}
-		internal mrngButton btnThemeDelete;
-		internal mrngButton btnThemeNew;
-		internal mrngComboBox cboTheme;
-        private Controls.mrngListView listPalette;
-        private Controls.mrngLabel labelRestart;
+		internal MrngButton btnThemeDelete;
+		internal MrngButton btnThemeNew;
+		internal MrngComboBox cboTheme;
+        private Controls.MrngListView listPalette;
+        private Controls.MrngLabel labelRestart;
         private BrightIdeasSoftware.OLVColumn keyCol;
         private BrightIdeasSoftware.OLVColumn ColorCol;
         private BrightIdeasSoftware.OLVColumn ColorNameCol;

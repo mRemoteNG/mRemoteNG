@@ -9,13 +9,13 @@ namespace mRemoteNG.UI.Controls
 {
     //Repaint of the NumericUpDown, the composite control buttons are replaced because the
     //original ones cannot be themed due to protected inheritance
-    internal class mrngNumericUpDown : NumericUpDown
+    internal class MrngNumericUpDown : NumericUpDown
     {
         private readonly ThemeManager _themeManager;
-        private mrngButton Up;
-        private mrngButton Down;
+        private MrngButton Up;
+        private MrngButton Down;
 
-        public mrngNumericUpDown()
+        public MrngNumericUpDown()
         {
             _themeManager = ThemeManager.getInstance();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
@@ -43,7 +43,7 @@ namespace mRemoteNG.UI.Controls
                      * OptionsPages are an example where the control is potentially created twice:
                      * AddOptionsPagesToListView and then LstOptionPages_SelectedIndexChanged
                      */
-                    if (!(Controls[i] is mrngButton)) continue;
+                    if (!(Controls[i] is MrngButton)) continue;
                     if (!Controls[i].Text.Equals("\u25B2") && !Controls[i].Text.Equals("\u25BC")) continue;
                     Invalidate();
                     return;
@@ -51,14 +51,14 @@ namespace mRemoteNG.UI.Controls
             }
 
             //Add new themable buttons
-            Up = new mrngButton
+            Up = new MrngButton
             {
                 Text = "\u25B2",
                 Font = new Font(Font.FontFamily, 5f)
             };
             Up.SetBounds(Controls.Owner.Width - 17, 2, 16, Controls.Owner.Height / 2 - 1);
             Up.Click += Up_Click;
-            Down = new mrngButton
+            Down = new MrngButton
             {
                 Text = "\u25BC",
                 Font = new Font(Font.FontFamily, 5f)

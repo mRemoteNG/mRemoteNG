@@ -31,28 +31,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            this.lblUpdatesExplanation = new mRemoteNG.UI.Controls.mrngLabel();
+            this.lblUpdatesExplanation = new mRemoteNG.UI.Controls.MrngLabel();
             this.pnlUpdateCheck = new System.Windows.Forms.Panel();
-            this.btnUpdateCheckNow = new mrngButton();
-            this.chkCheckForUpdatesOnStartup = new mrngCheckBox();
-            this.cboUpdateCheckFrequency = new mrngComboBox();
-            this.lblReleaseChannelExplanation = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.cboReleaseChannel = new mrngComboBox();
+            this.btnUpdateCheckNow = new MrngButton();
+            this.chkCheckForUpdatesOnStartup = new MrngCheckBox();
+            this.cboUpdateCheckFrequency = new MrngComboBox();
+            this.lblReleaseChannelExplanation = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.cboReleaseChannel = new MrngComboBox();
             this.pnlProxy = new System.Windows.Forms.Panel();
             this.tblProxyBasic = new System.Windows.Forms.TableLayoutPanel();
-            this.numProxyPort = new mRemoteNG.UI.Controls.mrngNumericUpDown();
-            this.lblProxyAddress = new mRemoteNG.UI.Controls.mrngLabel();
-            this.txtProxyAddress = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblProxyPort = new mRemoteNG.UI.Controls.mrngLabel();
+            this.numProxyPort = new mRemoteNG.UI.Controls.MrngNumericUpDown();
+            this.lblProxyAddress = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtProxyAddress = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblProxyPort = new mRemoteNG.UI.Controls.MrngLabel();
             this.tblProxyAuthentication = new System.Windows.Forms.TableLayoutPanel();
-            this.lblProxyPassword = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lblProxyUsername = new mRemoteNG.UI.Controls.mrngLabel();
-            this.txtProxyUsername = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.txtProxyPassword = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.chkUseProxyForAutomaticUpdates = new mrngCheckBox();
-            this.chkUseProxyAuthentication = new mrngCheckBox();
-            this.btnTestProxy = new mrngButton();
-            this.groupBoxReleaseChannel = new mrngGroupBox();
+            this.lblProxyPassword = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblProxyUsername = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtProxyUsername = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.txtProxyPassword = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.chkUseProxyForAutomaticUpdates = new MrngCheckBox();
+            this.chkUseProxyAuthentication = new MrngCheckBox();
+            this.btnTestProxy = new MrngButton();
+            this.groupBoxReleaseChannel = new MrngGroupBox();
             this.pnlUpdateCheck.SuspendLayout();
             this.pnlProxy.SuspendLayout();
             this.tblProxyBasic.SuspendLayout();
@@ -82,7 +82,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnUpdateCheckNow
             // 
-            this.btnUpdateCheckNow._mice = mrngButton.MouseState.OUT;
+            this.btnUpdateCheckNow._mice = MrngButton.MouseState.OUT;
             this.btnUpdateCheckNow.Location = new System.Drawing.Point(5, 63);
             this.btnUpdateCheckNow.Name = "btnUpdateCheckNow";
             this.btnUpdateCheckNow.Size = new System.Drawing.Size(122, 25);
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkCheckForUpdatesOnStartup
             // 
-            this.chkCheckForUpdatesOnStartup._mice = mrngCheckBox.MouseState.OUT;
+            this.chkCheckForUpdatesOnStartup._mice = MrngCheckBox.MouseState.OUT;
             this.chkCheckForUpdatesOnStartup.AutoSize = true;
             this.chkCheckForUpdatesOnStartup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(6, 11);
@@ -106,7 +106,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboUpdateCheckFrequency
             // 
-            this.cboUpdateCheckFrequency._mice = mrngComboBox.MouseState.HOVER;
+            this.cboUpdateCheckFrequency._mice = MrngComboBox.MouseState.HOVER;
             this.cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboUpdateCheckFrequency.FormattingEnabled = true;
             this.cboUpdateCheckFrequency.Location = new System.Drawing.Point(6, 34);
@@ -131,7 +131,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboReleaseChannel
             // 
-            this.cboReleaseChannel._mice = mrngComboBox.MouseState.HOVER;
+            this.cboReleaseChannel._mice = MrngComboBox.MouseState.HOVER;
             this.cboReleaseChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboReleaseChannel.FormattingEnabled = true;
             this.cboReleaseChannel.Location = new System.Drawing.Point(7, 21);
@@ -285,7 +285,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseProxyForAutomaticUpdates
             // 
-            this.chkUseProxyForAutomaticUpdates._mice = mrngCheckBox.MouseState.OUT;
+            this.chkUseProxyForAutomaticUpdates._mice = MrngCheckBox.MouseState.OUT;
             this.chkUseProxyForAutomaticUpdates.AutoSize = true;
             this.chkUseProxyForAutomaticUpdates.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseProxyForAutomaticUpdates.Location = new System.Drawing.Point(6, 5);
@@ -298,7 +298,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseProxyAuthentication
             // 
-            this.chkUseProxyAuthentication._mice = mrngCheckBox.MouseState.OUT;
+            this.chkUseProxyAuthentication._mice = MrngCheckBox.MouseState.OUT;
             this.chkUseProxyAuthentication.AutoSize = true;
             this.chkUseProxyAuthentication.Enabled = false;
             this.chkUseProxyAuthentication.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -312,7 +312,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnTestProxy
             // 
-            this.btnTestProxy._mice = mrngButton.MouseState.OUT;
+            this.btnTestProxy._mice = MrngButton.MouseState.OUT;
             this.btnTestProxy.Location = new System.Drawing.Point(6, 187);
             this.btnTestProxy.Name = "btnTestProxy";
             this.btnTestProxy.Size = new System.Drawing.Size(120, 25);
@@ -357,26 +357,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.ResumeLayout(false);
 
 		}
-		internal Controls.mrngLabel lblUpdatesExplanation;
+		internal Controls.MrngLabel lblUpdatesExplanation;
 		internal System.Windows.Forms.Panel pnlUpdateCheck;
-		internal mrngButton btnUpdateCheckNow;
-		internal mrngCheckBox chkCheckForUpdatesOnStartup;
-		internal mrngComboBox cboUpdateCheckFrequency;
+		internal MrngButton btnUpdateCheckNow;
+		internal MrngCheckBox chkCheckForUpdatesOnStartup;
+		internal MrngComboBox cboUpdateCheckFrequency;
 		internal System.Windows.Forms.Panel pnlProxy;
-		internal Controls.mrngLabel lblProxyAddress;
-		internal Controls.mrngTextBox txtProxyAddress;
-		internal Controls.mrngLabel lblProxyPort;
-		internal Controls.mrngNumericUpDown numProxyPort;
-		internal mrngCheckBox chkUseProxyForAutomaticUpdates;
-		internal mrngCheckBox chkUseProxyAuthentication;
-		internal Controls.mrngLabel lblProxyUsername;
-		internal Controls.mrngTextBox txtProxyUsername;
-		internal Controls.mrngLabel lblProxyPassword;
-		internal Controls.mrngTextBox txtProxyPassword;
-		internal mrngButton btnTestProxy;
-        private mrngComboBox cboReleaseChannel;
-        private Controls.mrngTextBox lblReleaseChannelExplanation;
-        private mrngGroupBox groupBoxReleaseChannel;
+		internal Controls.MrngLabel lblProxyAddress;
+		internal Controls.MrngTextBox txtProxyAddress;
+		internal Controls.MrngLabel lblProxyPort;
+		internal Controls.MrngNumericUpDown numProxyPort;
+		internal MrngCheckBox chkUseProxyForAutomaticUpdates;
+		internal MrngCheckBox chkUseProxyAuthentication;
+		internal Controls.MrngLabel lblProxyUsername;
+		internal Controls.MrngTextBox txtProxyUsername;
+		internal Controls.MrngLabel lblProxyPassword;
+		internal Controls.MrngTextBox txtProxyPassword;
+		internal MrngButton btnTestProxy;
+        private MrngComboBox cboReleaseChannel;
+        private Controls.MrngTextBox lblReleaseChannelExplanation;
+        private MrngGroupBox groupBoxReleaseChannel;
         private System.Windows.Forms.TableLayoutPanel tblProxyBasic;
         private System.Windows.Forms.TableLayoutPanel tblProxyAuthentication;
     }

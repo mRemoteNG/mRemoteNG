@@ -7,7 +7,7 @@ namespace mRemoteNG.UI.Controls
 {
     // total replace of RadioButton to avoid disabled state inconsistency on the themes
     // and glyph color inconsistency
-    class mrngRadioButton : RadioButton
+    class MrngRadioButton : RadioButton
     {
         private ThemeManager _themeManager;
         private readonly Rectangle _circle;
@@ -15,7 +15,7 @@ namespace mRemoteNG.UI.Controls
         private readonly int _textXCoord;
 
         // Constructor
-        public mrngRadioButton()
+        public MrngRadioButton()
         {
             var display = new DisplayProperties();
 

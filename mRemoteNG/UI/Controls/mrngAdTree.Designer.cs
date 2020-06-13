@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Controls
 {
-    partial class mrngAdTree
+    partial class MrngAdTree
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mrngAdTree));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MrngAdTree));
             this.tvActiveDirectory = new System.Windows.Forms.TreeView();
             this.ImglTree = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();

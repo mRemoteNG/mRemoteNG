@@ -14,16 +14,16 @@ namespace mRemoteNG.UI.Controls
      * An IP Address Box
      * A TextBox that only allows entry of a valid ip address
      */
-    public class mrngIpTextBox : UserControl
+    public class MrngIpTextBox : UserControl
     {
         private Panel panel1;
-        public mrngTextBox Octet1;
-        public mrngTextBox Octet2;
-        public mrngTextBox Octet3;
-        public mrngTextBox Octet4;
-        private mrngLabel label1;
-        private mrngLabel label2;
-        private mrngLabel label3;
+        public MrngTextBox Octet1;
+        public MrngTextBox Octet2;
+        public MrngTextBox Octet3;
+        public MrngTextBox Octet4;
+        private MrngLabel label1;
+        private MrngLabel label2;
+        private MrngLabel label3;
         private ToolTip toolTip1;
         private System.ComponentModel.IContainer components;
 
@@ -67,7 +67,7 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        public mrngIpTextBox()
+        public MrngIpTextBox()
         {
             // This call is required by the Windows.Forms Form Designer.
             InitializeComponent();
@@ -119,13 +119,13 @@ namespace mRemoteNG.UI.Controls
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Octet4 = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.Octet3 = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.Octet2 = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.Octet1 = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.label2 = new mRemoteNG.UI.Controls.mrngLabel();
-            this.label1 = new mRemoteNG.UI.Controls.mrngLabel();
-            this.label3 = new mRemoteNG.UI.Controls.mrngLabel();
+            this.Octet4 = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.Octet3 = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.Octet2 = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.Octet1 = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.label2 = new mRemoteNG.UI.Controls.MrngLabel();
+            this.label1 = new mRemoteNG.UI.Controls.MrngLabel();
+            this.label3 = new mRemoteNG.UI.Controls.MrngLabel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();

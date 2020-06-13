@@ -3,7 +3,7 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Controls
 {
-    public partial class SecureTextBox : mrngTextBox
+    public partial class SecureTextBox : MrngTextBox
     {
         public SecureString SecString { get; private set; } = new SecureString();
 

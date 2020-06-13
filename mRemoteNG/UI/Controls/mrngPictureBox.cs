@@ -4,16 +4,16 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
-    public partial class mrngPictureBox : PictureBox
+    public partial class MrngPictureBox : PictureBox
     {
         private ThemeManager _themeManager;
 
-        public mrngPictureBox()
+        public MrngPictureBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }
 
-        public mrngPictureBox(IContainer container)
+        public MrngPictureBox(IContainer container)
         {
             container.Add(this);
 

@@ -21,7 +21,7 @@ namespace mRemoteNG.UI.TaskDialog
         private readonly Font _mainInstructionFont =
             new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
-        private readonly List<mrngRadioButton> _radioButtonCtrls = new List<mrngRadioButton>();
+        private readonly List<MrngRadioButton> _radioButtonCtrls = new List<MrngRadioButton>();
         private readonly DisplayProperties _display = new DisplayProperties();
         private Control _focusControl;
 
@@ -215,7 +215,7 @@ namespace mRemoteNG.UI.TaskDialog
                 var pnlHeight = _display.ScaleHeight(12);
                 for (var i = 0; i < arr.Length; i++)
                 {
-                    var rb = new mrngRadioButton {Parent = pnlRadioButtons};
+                    var rb = new MrngRadioButton {Parent = pnlRadioButtons};
                     rb.Location = new Point(_display.ScaleWidth(60), _display.ScaleHeight(4) + i * rb.Height);
                     rb.Text = arr[i];
                     rb.Tag = i;

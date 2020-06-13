@@ -30,16 +30,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// </summary>
         private void InitializeComponent()
         {
-            this.chkEncryptCompleteFile = new mrngCheckBox();
-            this.comboBoxEncryptionEngine = new mrngComboBox();
-            this.labelEncryptionEngine = new mRemoteNG.UI.Controls.mrngLabel();
-            this.labelBlockCipher = new mRemoteNG.UI.Controls.mrngLabel();
-            this.comboBoxBlockCipher = new mrngComboBox();
-            this.groupAdvancedSecurityOptions = new mrngGroupBox();
+            this.chkEncryptCompleteFile = new MrngCheckBox();
+            this.comboBoxEncryptionEngine = new MrngComboBox();
+            this.labelEncryptionEngine = new mRemoteNG.UI.Controls.MrngLabel();
+            this.labelBlockCipher = new mRemoteNG.UI.Controls.MrngLabel();
+            this.comboBoxBlockCipher = new MrngComboBox();
+            this.groupAdvancedSecurityOptions = new MrngGroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnTestSettings = new mrngButton();
-            this.labelKdfIterations = new mRemoteNG.UI.Controls.mrngLabel();
-            this.numberBoxKdfIterations = new mRemoteNG.UI.Controls.mrngNumericUpDown();
+            this.btnTestSettings = new MrngButton();
+            this.labelKdfIterations = new mRemoteNG.UI.Controls.MrngLabel();
+            this.numberBoxKdfIterations = new mRemoteNG.UI.Controls.MrngNumericUpDown();
             this.groupAdvancedSecurityOptions.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberBoxKdfIterations)).BeginInit();
@@ -47,7 +47,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkEncryptCompleteFile
             // 
-            this.chkEncryptCompleteFile._mice = mrngCheckBox.MouseState.OUT;
+            this.chkEncryptCompleteFile._mice = MrngCheckBox.MouseState.OUT;
             this.chkEncryptCompleteFile.AutoSize = true;
             this.chkEncryptCompleteFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkEncryptCompleteFile.Location = new System.Drawing.Point(3, 3);
@@ -59,7 +59,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // comboBoxEncryptionEngine
             // 
-            this.comboBoxEncryptionEngine._mice = mrngComboBox.MouseState.HOVER;
+            this.comboBoxEncryptionEngine._mice = MrngComboBox.MouseState.HOVER;
             this.comboBoxEncryptionEngine.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxEncryptionEngine.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEncryptionEngine.FormattingEnabled = true;
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // comboBoxBlockCipher
             // 
-            this.comboBoxBlockCipher._mice = mrngComboBox.MouseState.HOVER;
+            this.comboBoxBlockCipher._mice = MrngComboBox.MouseState.HOVER;
             this.comboBoxBlockCipher.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBoxBlockCipher.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxBlockCipher.FormattingEnabled = true;
@@ -138,7 +138,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnTestSettings
             // 
-            this.btnTestSettings._mice = mrngButton.MouseState.OUT;
+            this.btnTestSettings._mice = MrngButton.MouseState.OUT;
             this.btnTestSettings.AutoSize = true;
             this.btnTestSettings.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnTestSettings.Location = new System.Drawing.Point(240, 85);
@@ -209,15 +209,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         #endregion
 
-        internal mrngCheckBox chkEncryptCompleteFile;
-        private mrngComboBox comboBoxEncryptionEngine;
-        private Controls.mrngLabel labelEncryptionEngine;
-        private Controls.mrngLabel labelBlockCipher;
-        private mrngComboBox comboBoxBlockCipher;
-        private mrngGroupBox groupAdvancedSecurityOptions;
-        private Controls.mrngNumericUpDown numberBoxKdfIterations;
-        private Controls.mrngLabel labelKdfIterations;
+        internal MrngCheckBox chkEncryptCompleteFile;
+        private MrngComboBox comboBoxEncryptionEngine;
+        private Controls.MrngLabel labelEncryptionEngine;
+        private Controls.MrngLabel labelBlockCipher;
+        private MrngComboBox comboBoxBlockCipher;
+        private MrngGroupBox groupAdvancedSecurityOptions;
+        private Controls.MrngNumericUpDown numberBoxKdfIterations;
+        private Controls.MrngLabel labelKdfIterations;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private mrngButton btnTestSettings;
+        private MrngButton btnTestSettings;
     }
 }

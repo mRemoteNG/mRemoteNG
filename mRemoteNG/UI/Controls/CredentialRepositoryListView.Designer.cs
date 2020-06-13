@@ -15,7 +15,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.objectListView1 = new mRemoteNG.UI.Controls.mrngListView();
+            this.objectListView1 = new mRemoteNG.UI.Controls.MrngListView();
             this.olvColumnTitle = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnProvider = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnIsLoaded = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -100,7 +100,7 @@
 
         #endregion
 
-        private mrngListView objectListView1;
+        private MrngListView objectListView1;
         private BrightIdeasSoftware.OLVColumn olvColumnProvider;
         private BrightIdeasSoftware.OLVColumn olvColumnSource;
         private BrightIdeasSoftware.OLVColumn olvColumnTitle;

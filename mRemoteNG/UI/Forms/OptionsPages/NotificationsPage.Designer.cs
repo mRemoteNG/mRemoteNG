@@ -32,37 +32,37 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		//Do not modify it using the code editor.
 		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
 		{
-            this.labelSwitchToErrorsAndInfos = new mRemoteNG.UI.Controls.mrngLabel();
-            this.chkSwitchToMCInformation = new mrngCheckBox();
-            this.chkSwitchToMCErrors = new mrngCheckBox();
-            this.chkSwitchToMCWarnings = new mrngCheckBox();
-            this.groupBoxNotifications = new mrngGroupBox();
-            this.labelNotificationsShowTypes = new mRemoteNG.UI.Controls.mrngLabel();
-            this.chkShowErrorInMC = new mrngCheckBox();
-            this.chkShowWarningInMC = new mrngCheckBox();
-            this.chkShowInfoInMC = new mrngCheckBox();
-            this.chkShowDebugInMC = new mrngCheckBox();
-            this.groupBoxLogging = new mrngGroupBox();
+            this.labelSwitchToErrorsAndInfos = new mRemoteNG.UI.Controls.MrngLabel();
+            this.chkSwitchToMCInformation = new MrngCheckBox();
+            this.chkSwitchToMCErrors = new MrngCheckBox();
+            this.chkSwitchToMCWarnings = new MrngCheckBox();
+            this.groupBoxNotifications = new MrngGroupBox();
+            this.labelNotificationsShowTypes = new mRemoteNG.UI.Controls.MrngLabel();
+            this.chkShowErrorInMC = new MrngCheckBox();
+            this.chkShowWarningInMC = new MrngCheckBox();
+            this.chkShowInfoInMC = new MrngCheckBox();
+            this.chkShowDebugInMC = new MrngCheckBox();
+            this.groupBoxLogging = new MrngGroupBox();
             this.tblLogging = new System.Windows.Forms.TableLayoutPanel();
-            this.chkLogDebugMsgs = new mrngCheckBox();
-            this.chkLogInfoMsgs = new mrngCheckBox();
-            this.chkLogWarningMsgs = new mrngCheckBox();
-            this.chkLogErrorMsgs = new mrngCheckBox();
-            this.chkLogToCurrentDir = new mrngCheckBox();
-            this.buttonRestoreDefaultLogPath = new mrngButton();
-            this.buttonOpenLogFile = new mrngButton();
-            this.buttonSelectLogPath = new mrngButton();
-            this.labelLogTheseMsgTypes = new mRemoteNG.UI.Controls.mrngLabel();
-            this.labelLogFilePath = new mRemoteNG.UI.Controls.mrngLabel();
-            this.textBoxLogPath = new mRemoteNG.UI.Controls.mrngTextBox();
+            this.chkLogDebugMsgs = new MrngCheckBox();
+            this.chkLogInfoMsgs = new MrngCheckBox();
+            this.chkLogWarningMsgs = new MrngCheckBox();
+            this.chkLogErrorMsgs = new MrngCheckBox();
+            this.chkLogToCurrentDir = new MrngCheckBox();
+            this.buttonRestoreDefaultLogPath = new MrngButton();
+            this.buttonOpenLogFile = new MrngButton();
+            this.buttonSelectLogPath = new MrngButton();
+            this.labelLogTheseMsgTypes = new mRemoteNG.UI.Controls.MrngLabel();
+            this.labelLogFilePath = new mRemoteNG.UI.Controls.MrngLabel();
+            this.textBoxLogPath = new mRemoteNG.UI.Controls.MrngTextBox();
             this.saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
-            this.groupBoxPopups = new mrngGroupBox();
+            this.groupBoxPopups = new MrngGroupBox();
             this.tblPopups = new System.Windows.Forms.TableLayoutPanel();
-            this.chkPopupDebug = new mrngCheckBox();
-            this.chkPopupError = new mrngCheckBox();
-            this.chkPopupInfo = new mrngCheckBox();
-            this.chkPopupWarning = new mrngCheckBox();
-            this.labelPopupShowTypes = new mRemoteNG.UI.Controls.mrngLabel();
+            this.chkPopupDebug = new MrngCheckBox();
+            this.chkPopupError = new MrngCheckBox();
+            this.chkPopupInfo = new MrngCheckBox();
+            this.chkPopupWarning = new MrngCheckBox();
+            this.labelPopupShowTypes = new mRemoteNG.UI.Controls.MrngLabel();
             this.groupBoxNotifications.SuspendLayout();
             this.groupBoxLogging.SuspendLayout();
             this.tblLogging.SuspendLayout();
@@ -81,7 +81,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSwitchToMCInformation
             // 
-            this.chkSwitchToMCInformation._mice = mrngCheckBox.MouseState.OUT;
+            this.chkSwitchToMCInformation._mice = MrngCheckBox.MouseState.OUT;
             this.chkSwitchToMCInformation.AutoSize = true;
             this.chkSwitchToMCInformation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSwitchToMCInformation.Location = new System.Drawing.Point(195, 64);
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSwitchToMCErrors
             // 
-            this.chkSwitchToMCErrors._mice = mrngCheckBox.MouseState.OUT;
+            this.chkSwitchToMCErrors._mice = MrngCheckBox.MouseState.OUT;
             this.chkSwitchToMCErrors.AutoSize = true;
             this.chkSwitchToMCErrors.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSwitchToMCErrors.Location = new System.Drawing.Point(195, 110);
@@ -105,7 +105,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSwitchToMCWarnings
             // 
-            this.chkSwitchToMCWarnings._mice = mrngCheckBox.MouseState.OUT;
+            this.chkSwitchToMCWarnings._mice = MrngCheckBox.MouseState.OUT;
             this.chkSwitchToMCWarnings.AutoSize = true;
             this.chkSwitchToMCWarnings.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkSwitchToMCWarnings.Location = new System.Drawing.Point(195, 87);
@@ -144,7 +144,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowErrorInMC
             // 
-            this.chkShowErrorInMC._mice = mrngCheckBox.MouseState.OUT;
+            this.chkShowErrorInMC._mice = MrngCheckBox.MouseState.OUT;
             this.chkShowErrorInMC.AutoSize = true;
             this.chkShowErrorInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowErrorInMC.Location = new System.Drawing.Point(20, 110);
@@ -156,7 +156,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowWarningInMC
             // 
-            this.chkShowWarningInMC._mice = mrngCheckBox.MouseState.OUT;
+            this.chkShowWarningInMC._mice = MrngCheckBox.MouseState.OUT;
             this.chkShowWarningInMC.AutoSize = true;
             this.chkShowWarningInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowWarningInMC.Location = new System.Drawing.Point(20, 87);
@@ -168,7 +168,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowInfoInMC
             // 
-            this.chkShowInfoInMC._mice = mrngCheckBox.MouseState.OUT;
+            this.chkShowInfoInMC._mice = MrngCheckBox.MouseState.OUT;
             this.chkShowInfoInMC.AutoSize = true;
             this.chkShowInfoInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowInfoInMC.Location = new System.Drawing.Point(20, 64);
@@ -180,7 +180,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkShowDebugInMC
             // 
-            this.chkShowDebugInMC._mice = mrngCheckBox.MouseState.OUT;
+            this.chkShowDebugInMC._mice = MrngCheckBox.MouseState.OUT;
             this.chkShowDebugInMC.AutoSize = true;
             this.chkShowDebugInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkShowDebugInMC.Location = new System.Drawing.Point(20, 41);
@@ -228,7 +228,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkLogDebugMsgs
             // 
-            this.chkLogDebugMsgs._mice = mrngCheckBox.MouseState.OUT;
+            this.chkLogDebugMsgs._mice = MrngCheckBox.MouseState.OUT;
             this.chkLogDebugMsgs.AutoSize = true;
             this.chkLogDebugMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogDebugMsgs.Location = new System.Drawing.Point(3, 3);
@@ -240,7 +240,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkLogInfoMsgs
             // 
-            this.chkLogInfoMsgs._mice = mrngCheckBox.MouseState.OUT;
+            this.chkLogInfoMsgs._mice = MrngCheckBox.MouseState.OUT;
             this.chkLogInfoMsgs.AutoSize = true;
             this.chkLogInfoMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogInfoMsgs.Location = new System.Drawing.Point(149, 3);
@@ -252,7 +252,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkLogWarningMsgs
             // 
-            this.chkLogWarningMsgs._mice = mrngCheckBox.MouseState.OUT;
+            this.chkLogWarningMsgs._mice = MrngCheckBox.MouseState.OUT;
             this.chkLogWarningMsgs.AutoSize = true;
             this.chkLogWarningMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogWarningMsgs.Location = new System.Drawing.Point(295, 3);
@@ -264,7 +264,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkLogErrorMsgs
             // 
-            this.chkLogErrorMsgs._mice = mrngCheckBox.MouseState.OUT;
+            this.chkLogErrorMsgs._mice = MrngCheckBox.MouseState.OUT;
             this.chkLogErrorMsgs.AutoSize = true;
             this.chkLogErrorMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogErrorMsgs.Location = new System.Drawing.Point(441, 3);
@@ -276,7 +276,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkLogToCurrentDir
             // 
-            this.chkLogToCurrentDir._mice = mrngCheckBox.MouseState.OUT;
+            this.chkLogToCurrentDir._mice = MrngCheckBox.MouseState.OUT;
             this.chkLogToCurrentDir.AutoSize = true;
             this.chkLogToCurrentDir.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkLogToCurrentDir.Location = new System.Drawing.Point(9, 18);
@@ -289,7 +289,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonRestoreDefaultLogPath
             // 
-            this.buttonRestoreDefaultLogPath._mice = mrngButton.MouseState.OUT;
+            this.buttonRestoreDefaultLogPath._mice = MrngButton.MouseState.OUT;
             this.buttonRestoreDefaultLogPath.Location = new System.Drawing.Point(9, 85);
             this.buttonRestoreDefaultLogPath.Name = "buttonRestoreDefaultLogPath";
             this.buttonRestoreDefaultLogPath.Size = new System.Drawing.Size(179, 25);
@@ -300,7 +300,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonOpenLogFile
             // 
-            this.buttonOpenLogFile._mice = mrngButton.MouseState.OUT;
+            this.buttonOpenLogFile._mice = MrngButton.MouseState.OUT;
             this.buttonOpenLogFile.Location = new System.Drawing.Point(378, 85);
             this.buttonOpenLogFile.Name = "buttonOpenLogFile";
             this.buttonOpenLogFile.Size = new System.Drawing.Size(105, 25);
@@ -311,7 +311,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // buttonSelectLogPath
             // 
-            this.buttonSelectLogPath._mice = mrngButton.MouseState.OUT;
+            this.buttonSelectLogPath._mice = MrngButton.MouseState.OUT;
             this.buttonSelectLogPath.Location = new System.Drawing.Point(489, 85);
             this.buttonSelectLogPath.Name = "buttonSelectLogPath";
             this.buttonSelectLogPath.Size = new System.Drawing.Size(105, 25);
@@ -380,7 +380,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkPopupDebug
             // 
-            this.chkPopupDebug._mice = mrngCheckBox.MouseState.OUT;
+            this.chkPopupDebug._mice = MrngCheckBox.MouseState.OUT;
             this.chkPopupDebug.AutoSize = true;
             this.chkPopupDebug.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPopupDebug.Location = new System.Drawing.Point(3, 3);
@@ -392,7 +392,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkPopupError
             // 
-            this.chkPopupError._mice = mrngCheckBox.MouseState.OUT;
+            this.chkPopupError._mice = MrngCheckBox.MouseState.OUT;
             this.chkPopupError.AutoSize = true;
             this.chkPopupError.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPopupError.Location = new System.Drawing.Point(441, 3);
@@ -404,7 +404,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkPopupInfo
             // 
-            this.chkPopupInfo._mice = mrngCheckBox.MouseState.OUT;
+            this.chkPopupInfo._mice = MrngCheckBox.MouseState.OUT;
             this.chkPopupInfo.AutoSize = true;
             this.chkPopupInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPopupInfo.Location = new System.Drawing.Point(149, 3);
@@ -416,7 +416,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkPopupWarning
             // 
-            this.chkPopupWarning._mice = mrngCheckBox.MouseState.OUT;
+            this.chkPopupWarning._mice = MrngCheckBox.MouseState.OUT;
             this.chkPopupWarning.AutoSize = true;
             this.chkPopupWarning.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPopupWarning.Location = new System.Drawing.Point(295, 3);
@@ -459,36 +459,36 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
 		}
 
-        internal Controls.mrngLabel labelSwitchToErrorsAndInfos;
-        internal mrngCheckBox chkSwitchToMCInformation;
-        internal mrngCheckBox chkSwitchToMCErrors;
-        internal mrngCheckBox chkSwitchToMCWarnings;
-        private Controls.mrngLabel labelNotificationsShowTypes;
-        private mrngCheckBox chkShowErrorInMC;
-        private mrngCheckBox chkShowWarningInMC;
-        private mrngCheckBox chkShowInfoInMC;
-        private mrngCheckBox chkShowDebugInMC;
+        internal Controls.MrngLabel labelSwitchToErrorsAndInfos;
+        internal MrngCheckBox chkSwitchToMCInformation;
+        internal MrngCheckBox chkSwitchToMCErrors;
+        internal MrngCheckBox chkSwitchToMCWarnings;
+        private Controls.MrngLabel labelNotificationsShowTypes;
+        private MrngCheckBox chkShowErrorInMC;
+        private MrngCheckBox chkShowWarningInMC;
+        private MrngCheckBox chkShowInfoInMC;
+        private MrngCheckBox chkShowDebugInMC;
         private System.Windows.Forms.SaveFileDialog saveFileDialogLogging;
-        private Controls.mrngLabel labelLogFilePath;
-        private Controls.mrngTextBox textBoxLogPath;
-        private mrngButton buttonSelectLogPath;
-        private Controls.mrngLabel labelLogTheseMsgTypes;
-        private mrngCheckBox chkLogErrorMsgs;
-        private mrngCheckBox chkLogWarningMsgs;
-        private mrngCheckBox chkLogInfoMsgs;
-        private mrngCheckBox chkLogDebugMsgs;
-        private mrngButton buttonOpenLogFile;
-        private mrngButton buttonRestoreDefaultLogPath;
-        private mrngCheckBox chkPopupError;
-        private Controls.mrngLabel labelPopupShowTypes;
-        private mrngCheckBox chkPopupWarning;
-        private mrngCheckBox chkPopupDebug;
-        private mrngCheckBox chkPopupInfo;
-        private mrngCheckBox chkLogToCurrentDir;
+        private Controls.MrngLabel labelLogFilePath;
+        private Controls.MrngTextBox textBoxLogPath;
+        private MrngButton buttonSelectLogPath;
+        private Controls.MrngLabel labelLogTheseMsgTypes;
+        private MrngCheckBox chkLogErrorMsgs;
+        private MrngCheckBox chkLogWarningMsgs;
+        private MrngCheckBox chkLogInfoMsgs;
+        private MrngCheckBox chkLogDebugMsgs;
+        private MrngButton buttonOpenLogFile;
+        private MrngButton buttonRestoreDefaultLogPath;
+        private MrngCheckBox chkPopupError;
+        private Controls.MrngLabel labelPopupShowTypes;
+        private MrngCheckBox chkPopupWarning;
+        private MrngCheckBox chkPopupDebug;
+        private MrngCheckBox chkPopupInfo;
+        private MrngCheckBox chkLogToCurrentDir;
         private System.Windows.Forms.TableLayoutPanel tblLogging;
         private System.Windows.Forms.TableLayoutPanel tblPopups;
-        private mrngGroupBox groupBoxNotifications;
-        private mrngGroupBox groupBoxLogging;
-        private mrngGroupBox groupBoxPopups;
+        private MrngGroupBox groupBoxNotifications;
+        private MrngGroupBox groupBoxLogging;
+        private MrngGroupBox groupBoxPopups;
     }
 }

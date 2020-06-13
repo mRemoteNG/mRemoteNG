@@ -14,34 +14,34 @@ namespace mRemoteNG.UI.Window
         internal BrightIdeasSoftware.OLVColumn TryToIntegrateColumnHeader;
 	    internal BrightIdeasSoftware.OLVColumn WorkingDirColumnHeader;
 	    internal BrightIdeasSoftware.OLVColumn RunElevateHeader;
-		internal Controls.mrngTextBox DisplayNameTextBox;
+		internal Controls.MrngTextBox DisplayNameTextBox;
         internal BrightIdeasSoftware.OLVColumn ShowOnToolbarColumnHeader;
-		internal Controls.mrngLabel DisplayNameLabel;
-		internal Controls.mrngTextBox ArgumentsCheckBox;
-		internal Controls.mrngTextBox FilenameTextBox;
-		internal Controls.mrngLabel ArgumentsLabel;
-		internal Controls.mrngLabel FilenameLabel;
-		internal mrngButton BrowseButton; 
+		internal Controls.MrngLabel DisplayNameLabel;
+		internal Controls.MrngTextBox ArgumentsCheckBox;
+		internal Controls.MrngTextBox FilenameTextBox;
+		internal Controls.MrngLabel ArgumentsLabel;
+		internal Controls.MrngLabel FilenameLabel;
+		internal MrngButton BrowseButton; 
 		internal System.Windows.Forms.ContextMenuStrip ToolsContextMenuStrip;
 		internal System.Windows.Forms.ToolStripMenuItem NewToolMenuItem;
 		internal System.Windows.Forms.ToolStripMenuItem DeleteToolMenuItem;
 		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
 		internal System.Windows.Forms.ToolStripMenuItem LaunchToolMenuItem; 
-		internal mrngCheckBox WaitForExitCheckBox;
-		internal Controls.mrngLabel OptionsLabel;
-		internal mrngCheckBox TryToIntegrateCheckBox;
-        internal mrngCheckBox ShowOnToolbarCheckBox;
-        internal Controls.mrngListView ToolsListObjView;
-	    internal Controls.mrngLabel WorkingDirLabel;
-	    internal Controls.mrngTextBox WorkingDirTextBox;
-	    internal mrngButton BrowseWorkingDir;
-	    internal mrngCheckBox RunElevatedCheckBox;
+		internal MrngCheckBox WaitForExitCheckBox;
+		internal Controls.MrngLabel OptionsLabel;
+		internal MrngCheckBox TryToIntegrateCheckBox;
+        internal MrngCheckBox ShowOnToolbarCheckBox;
+        internal Controls.MrngListView ToolsListObjView;
+	    internal Controls.MrngLabel WorkingDirLabel;
+	    internal Controls.MrngTextBox WorkingDirTextBox;
+	    internal MrngButton BrowseWorkingDir;
+	    internal MrngCheckBox RunElevatedCheckBox;
 
         private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExternalToolsWindow));
-            this.ToolsListObjView = new mRemoteNG.UI.Controls.mrngListView();
+            this.ToolsListObjView = new mRemoteNG.UI.Controls.MrngListView();
             this.DisplayNameColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.FilenameColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.ArgumentsColumnHeader = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -55,23 +55,23 @@ namespace mRemoteNG.UI.Window
             this.DeleteToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LaunchToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PropertiesGroupBox = new mrngGroupBox();
+            this.PropertiesGroupBox = new MrngGroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.DisplayNameLabel = new mRemoteNG.UI.Controls.mrngLabel();
-            this.ShowOnToolbarCheckBox = new mrngCheckBox();
-            this.WorkingDirTextBox = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.DisplayNameTextBox = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.FilenameTextBox = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.FilenameLabel = new mRemoteNG.UI.Controls.mrngLabel();
-            this.RunElevatedCheckBox = new mrngCheckBox();
-            this.ArgumentsLabel = new mRemoteNG.UI.Controls.mrngLabel();
-            this.TryToIntegrateCheckBox = new mrngCheckBox();
-            this.WorkingDirLabel = new mRemoteNG.UI.Controls.mrngLabel();
-            this.OptionsLabel = new mRemoteNG.UI.Controls.mrngLabel();
-            this.WaitForExitCheckBox = new mrngCheckBox();
-            this.BrowseButton = new mrngButton();
-            this.BrowseWorkingDir = new mrngButton();
+            this.DisplayNameLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.ShowOnToolbarCheckBox = new MrngCheckBox();
+            this.WorkingDirTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.DisplayNameTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.FilenameTextBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.ArgumentsCheckBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.FilenameLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.RunElevatedCheckBox = new MrngCheckBox();
+            this.ArgumentsLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.TryToIntegrateCheckBox = new MrngCheckBox();
+            this.WorkingDirLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.OptionsLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.WaitForExitCheckBox = new MrngCheckBox();
+            this.BrowseButton = new MrngButton();
+            this.BrowseWorkingDir = new MrngButton();
             this.ToolStripContainer = new System.Windows.Forms.ToolStripContainer();
             this.ToolStrip = new System.Windows.Forms.ToolStrip();
             this.NewToolToolstripButton = new System.Windows.Forms.ToolStripButton();
@@ -309,7 +309,7 @@ namespace mRemoteNG.UI.Window
             // 
             // ShowOnToolbarCheckBox
             // 
-            this.ShowOnToolbarCheckBox._mice = mrngCheckBox.MouseState.HOVER;
+            this.ShowOnToolbarCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.ShowOnToolbarCheckBox.AutoSize = true;
             this.ShowOnToolbarCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShowOnToolbarCheckBox.Location = new System.Drawing.Point(239, 133);
@@ -382,7 +382,7 @@ namespace mRemoteNG.UI.Window
             // 
             // RunElevatedCheckBox
             // 
-            this.RunElevatedCheckBox._mice = mrngCheckBox.MouseState.HOVER;
+            this.RunElevatedCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.RunElevatedCheckBox.AutoSize = true;
             this.RunElevatedCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RunElevatedCheckBox.Location = new System.Drawing.Point(113, 133);
@@ -407,7 +407,7 @@ namespace mRemoteNG.UI.Window
             // 
             // TryToIntegrateCheckBox
             // 
-            this.TryToIntegrateCheckBox._mice = mrngCheckBox.MouseState.HOVER;
+            this.TryToIntegrateCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.TryToIntegrateCheckBox.AutoSize = true;
             this.TryToIntegrateCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TryToIntegrateCheckBox.Location = new System.Drawing.Point(239, 107);
@@ -443,7 +443,7 @@ namespace mRemoteNG.UI.Window
             // 
             // WaitForExitCheckBox
             // 
-            this.WaitForExitCheckBox._mice = mrngCheckBox.MouseState.HOVER;
+            this.WaitForExitCheckBox._mice = MrngCheckBox.MouseState.HOVER;
             this.WaitForExitCheckBox.AutoSize = true;
             this.WaitForExitCheckBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WaitForExitCheckBox.Location = new System.Drawing.Point(113, 107);
@@ -458,7 +458,7 @@ namespace mRemoteNG.UI.Window
             // 
             // BrowseButton
             // 
-            this.BrowseButton._mice = mrngButton.MouseState.HOVER;
+            this.BrowseButton._mice = MrngButton.MouseState.HOVER;
             this.BrowseButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BrowseButton.Location = new System.Drawing.Point(723, 29);
             this.BrowseButton.Name = "BrowseButton";
@@ -471,7 +471,7 @@ namespace mRemoteNG.UI.Window
             // 
             // BrowseWorkingDir
             // 
-            this.BrowseWorkingDir._mice = mrngButton.MouseState.HOVER;
+            this.BrowseWorkingDir._mice = MrngButton.MouseState.HOVER;
             this.BrowseWorkingDir.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BrowseWorkingDir.Location = new System.Drawing.Point(723, 81);
             this.BrowseWorkingDir.Name = "BrowseWorkingDir";
@@ -591,7 +591,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         private System.ComponentModel.IContainer components;
-        internal mrngGroupBox PropertiesGroupBox;
+        internal MrngGroupBox PropertiesGroupBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

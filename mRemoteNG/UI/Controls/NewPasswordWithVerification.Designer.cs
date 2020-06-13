@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelFirstPasswordBox = new mRemoteNG.UI.Controls.mrngLabel();
-            this.labelSecondPasswordBox = new mRemoteNG.UI.Controls.mrngLabel();
-            this.labelPasswordsDontMatch = new mRemoteNG.UI.Controls.mrngLabel();
+            this.labelFirstPasswordBox = new mRemoteNG.UI.Controls.MrngLabel();
+            this.labelSecondPasswordBox = new mRemoteNG.UI.Controls.MrngLabel();
+            this.labelPasswordsDontMatch = new mRemoteNG.UI.Controls.MrngLabel();
             this.imgError = new System.Windows.Forms.PictureBox();
             this.secureTextBox2 = new mRemoteNG.UI.Controls.SecureTextBox();
             this.secureTextBox1 = new mRemoteNG.UI.Controls.SecureTextBox();
@@ -117,9 +117,9 @@
 
         private SecureTextBox secureTextBox1;
         private SecureTextBox secureTextBox2;
-        private Controls.mrngLabel labelFirstPasswordBox;
-        private Controls.mrngLabel labelSecondPasswordBox;
-        private Controls.mrngLabel labelPasswordsDontMatch;
+        private Controls.MrngLabel labelFirstPasswordBox;
+        private Controls.MrngLabel labelSecondPasswordBox;
+        private Controls.MrngLabel labelPasswordsDontMatch;
         private System.Windows.Forms.PictureBox imgError;
     }
 }

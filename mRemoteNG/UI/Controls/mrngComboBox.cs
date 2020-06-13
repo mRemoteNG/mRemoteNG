@@ -6,7 +6,7 @@ namespace mRemoteNG.UI.Controls
 {
     //Extended ComboBox class, the NGComboBox onPaint completely repaint the control as does the item painting
     //warning: THe DropDown style rendering is glitchy in this control, only use DropDownList or correct the rendering method
-    internal class mrngComboBox : ComboBox
+    internal class MrngComboBox : ComboBox
     {
         private ThemeManager _themeManager;
 
@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Controls
 
         public MouseState _mice { get; set; }
 
-        public mrngComboBox()
+        public MrngComboBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

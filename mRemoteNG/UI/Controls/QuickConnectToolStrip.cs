@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Controls
         private IContainer components;
         private ToolStripLabel _lblQuickConnect;
         private ToolStripDropDownButton _btnConnections;
-        private ToolStripSplitButton _btnQuickConnect;
+        private MrngToolStripSplitButton _btnQuickConnect;
         private ContextMenuStrip _mnuQuickConnectProtocol;
         private QuickConnectComboBox _cmbQuickConnect;
         private ContextMenuStrip _mnuConnections;
@@ -61,7 +61,7 @@ namespace mRemoteNG.UI.Controls
             components = new System.ComponentModel.Container();
             _lblQuickConnect = new ToolStripLabel();
             _cmbQuickConnect = new QuickConnectComboBox();
-            _btnQuickConnect = new ToolStripSplitButton();
+            _btnQuickConnect = new MrngToolStripSplitButton();
             _mnuQuickConnectProtocol = new ContextMenuStrip(components);
             _btnConnections = new ToolStripDropDownButton();
             _mnuConnections = new ContextMenuStrip(components);

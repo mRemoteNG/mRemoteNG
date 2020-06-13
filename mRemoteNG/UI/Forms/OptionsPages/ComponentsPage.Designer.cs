@@ -35,26 +35,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void InitializeComponent()
         {
             this.pnlCheck1 = new System.Windows.Forms.Panel();
-            this.txtCheck1 = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblCheck1 = new mRemoteNG.UI.Controls.mrngLabel();
+            this.txtCheck1 = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblCheck1 = new mRemoteNG.UI.Controls.MrngLabel();
             this.pbCheck1 = new System.Windows.Forms.PictureBox();
             this.pnlCheck2 = new System.Windows.Forms.Panel();
-            this.txtCheck2 = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblCheck2 = new mRemoteNG.UI.Controls.mrngLabel();
+            this.txtCheck2 = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblCheck2 = new mRemoteNG.UI.Controls.MrngLabel();
             this.pbCheck2 = new System.Windows.Forms.PictureBox();
             this.pnlCheck3 = new System.Windows.Forms.Panel();
-            this.txtCheck3 = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblCheck3 = new mRemoteNG.UI.Controls.mrngLabel();
+            this.txtCheck3 = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblCheck3 = new mRemoteNG.UI.Controls.MrngLabel();
             this.pbCheck3 = new System.Windows.Forms.PictureBox();
             this.pnlCheck4 = new System.Windows.Forms.Panel();
-            this.txtCheck4 = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblCheck4 = new mRemoteNG.UI.Controls.mrngLabel();
+            this.txtCheck4 = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblCheck4 = new mRemoteNG.UI.Controls.MrngLabel();
             this.pbCheck4 = new System.Windows.Forms.PictureBox();
             this.pnlCheck5 = new System.Windows.Forms.Panel();
-            this.txtCheck5 = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblCheck5 = new mRemoteNG.UI.Controls.mrngLabel();
+            this.txtCheck5 = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblCheck5 = new mRemoteNG.UI.Controls.MrngLabel();
             this.pbCheck5 = new System.Windows.Forms.PictureBox();
-            this.btnCheck = new mrngButton();
+            this.btnCheck = new MrngButton();
             this.tblCheck = new System.Windows.Forms.TableLayoutPanel();
             this.pnlCheck1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCheck1)).BeginInit();
@@ -315,7 +315,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnCheck
             // 
-            this.btnCheck._mice = mrngButton.MouseState.OUT;
+            this.btnCheck._mice = MrngButton.MouseState.OUT;
             this.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheck.Location = new System.Drawing.Point(3, 453);
             this.btnCheck.Name = "btnCheck";
@@ -375,25 +375,25 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         }
         private System.Windows.Forms.PictureBox pbCheck1;
-        private Controls.mrngLabel lblCheck1;
+        private Controls.MrngLabel lblCheck1;
         private System.Windows.Forms.Panel pnlCheck2;
-        private Controls.mrngLabel lblCheck2;
+        private Controls.MrngLabel lblCheck2;
         private System.Windows.Forms.PictureBox pbCheck2;
         private System.Windows.Forms.Panel pnlCheck3;
-        private Controls.mrngLabel lblCheck3;
+        private Controls.MrngLabel lblCheck3;
         private System.Windows.Forms.PictureBox pbCheck3;
         private System.Windows.Forms.Panel pnlCheck4;
-        private Controls.mrngLabel lblCheck4;
+        private Controls.MrngLabel lblCheck4;
         private System.Windows.Forms.PictureBox pbCheck4;
         private System.Windows.Forms.Panel pnlCheck5;
-        private Controls.mrngLabel lblCheck5;
+        private Controls.MrngLabel lblCheck5;
         private System.Windows.Forms.PictureBox pbCheck5;
-        private mrngButton btnCheck;
-        private Controls.mrngTextBox txtCheck1;
-        private Controls.mrngTextBox txtCheck2;
-        private Controls.mrngTextBox txtCheck3;
-        private Controls.mrngTextBox txtCheck4;
-        private Controls.mrngTextBox txtCheck5;
+        private MrngButton btnCheck;
+        private Controls.MrngTextBox txtCheck1;
+        private Controls.MrngTextBox txtCheck2;
+        private Controls.MrngTextBox txtCheck3;
+        private Controls.MrngTextBox txtCheck4;
+        private Controls.MrngTextBox txtCheck5;
         private System.Windows.Forms.Panel pnlCheck1;
         private System.Windows.Forms.TableLayoutPanel tblCheck;
     }

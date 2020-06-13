@@ -8,18 +8,18 @@ namespace mRemoteNG.UI.Window
         #region  Windows Form Designer generated code
 		private void InitializeComponent()
 		{
-            this.btnImport = new mrngButton();
-            this.txtDomain = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblDomain = new mRemoteNG.UI.Controls.mrngLabel();
-            this.btnChangeDomain = new mrngButton();
-            this.activeDirectoryTree = new mRemoteNG.UI.Controls.mrngAdTree();
-            this.btnClose = new mrngButton();
-            this.chkSubOU = new mrngCheckBox();
+            this.btnImport = new MrngButton();
+            this.txtDomain = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblDomain = new mRemoteNG.UI.Controls.MrngLabel();
+            this.btnChangeDomain = new MrngButton();
+            this.activeDirectoryTree = new mRemoteNG.UI.Controls.MrngAdTree();
+            this.btnClose = new MrngButton();
+            this.chkSubOU = new MrngCheckBox();
             this.SuspendLayout();
             // 
             // btnImport
             // 
-            this.btnImport._mice = mrngButton.MouseState.HOVER;
+            this.btnImport._mice = MrngButton.MouseState.HOVER;
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnImport.Location = new System.Drawing.Point(126, 345);
             this.btnImport.Name = "btnImport";
@@ -51,7 +51,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnChangeDomain
             // 
-            this.btnChangeDomain._mice = mrngButton.MouseState.HOVER;
+            this.btnChangeDomain._mice = MrngButton.MouseState.HOVER;
             this.btnChangeDomain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnChangeDomain.Location = new System.Drawing.Point(422, 23);
             this.btnChangeDomain.Name = "btnChangeDomain";
@@ -74,11 +74,11 @@ namespace mRemoteNG.UI.Window
             this.activeDirectoryTree.SelectedNode = null;
             this.activeDirectoryTree.Size = new System.Drawing.Size(510, 285);
             this.activeDirectoryTree.TabIndex = 3;
-            this.activeDirectoryTree.AdPathChanged += new mRemoteNG.UI.Controls.mrngAdTree.AdPathChangedEventHandler(this.ActiveDirectoryTree_ADPathChanged);
+            this.activeDirectoryTree.AdPathChanged += new mRemoteNG.UI.Controls.MrngAdTree.AdPathChangedEventHandler(this.ActiveDirectoryTree_ADPathChanged);
             // 
             // btnClose
             // 
-            this.btnClose._mice = mrngButton.MouseState.HOVER;
+            this.btnClose._mice = MrngButton.MouseState.HOVER;
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Location = new System.Drawing.Point(422, 344);
             this.btnClose.Name = "btnClose";
@@ -90,7 +90,7 @@ namespace mRemoteNG.UI.Window
             // 
             // chkSubOU
             // 
-            this.chkSubOU._mice = mrngCheckBox.MouseState.HOVER;
+            this.chkSubOU._mice = MrngCheckBox.MouseState.HOVER;
             this.chkSubOU.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSubOU.AutoSize = true;
             this.chkSubOU.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -124,14 +124,14 @@ namespace mRemoteNG.UI.Window
             this.PerformLayout();
 
 		}
-		private mrngButton btnImport;
-		private Controls.mrngTextBox txtDomain;
-		private Controls.mrngLabel lblDomain;
-		private mrngButton btnChangeDomain;
-		private mRemoteNG.UI.Controls.mrngAdTree activeDirectoryTree; 
+		private MrngButton btnImport;
+		private Controls.MrngTextBox txtDomain;
+		private Controls.MrngLabel lblDomain;
+		private MrngButton btnChangeDomain;
+		private mRemoteNG.UI.Controls.MrngAdTree activeDirectoryTree; 
         #endregion
 
-       private mrngButton btnClose;
-       private mrngCheckBox chkSubOU;
+       private MrngButton btnClose;
+       private MrngCheckBox chkSubOU;
     }
 }

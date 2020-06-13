@@ -6,11 +6,11 @@ namespace mRemoteNG.UI.Controls
 {
     //Groupbox is colored using the innerTab colors as the vstheme doesnt have explicit groupbox palettes (at least completes)
     //This clas completely repaints the control
-    public class mrngGroupBox : GroupBox
+    public class MrngGroupBox : GroupBox
     {
         private ThemeManager _themeManager;
 
-        public mrngGroupBox()
+        public MrngGroupBox()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

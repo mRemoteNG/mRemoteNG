@@ -8,11 +8,11 @@ namespace mRemoteNG.UI.Controls
 {
     //This class is only minimally themed as textboxes onPaint are hard to theme (system wm paint control most of the drawing process
     //There are some glitches on the initial draw of some controls
-    public class mrngTextBox : TextBox
+    public class MrngTextBox : TextBox
     {
         private ThemeManager _themeManager;
 
-        public mrngTextBox()
+        public MrngTextBox()
         {
             InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;

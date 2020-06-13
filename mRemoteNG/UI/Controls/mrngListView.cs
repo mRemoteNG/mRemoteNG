@@ -7,14 +7,14 @@ namespace mRemoteNG.UI.Controls
 {
     //Simple coloring of ObjectListView
     //This is subclassed to avoid repeating the code in multiple places
-    internal class mrngListView : ObjectListView
+    internal class MrngListView : ObjectListView
     {
         private CellBorderDecoration deco;
 
         //Control if the gridlines are styled, must be set before the OnCreateControl is fired
         public bool DecorateLines { get; set; } = true;
 
-        public mrngListView()
+        public MrngListView()
         {
             InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;

@@ -8,7 +8,7 @@ namespace mRemoteNG.UI.Controls
 {
     [ToolboxBitmap(typeof(Button))]
     //Extended button class, the button onPaint completely repaint the control
-    public class mrngButton : Button
+    public class MrngButton : Button
     {
         private ThemeManager _themeManager;
 
@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Controls
             OUT
         }
 
-        public mrngButton()
+        public MrngButton()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

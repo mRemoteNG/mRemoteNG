@@ -11,14 +11,14 @@ namespace mRemoteNG.UI.Controls
     // CheckBoxRenderer:
     // https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.checkboxrenderer?view=netframework-4.6
     //
-    public class mrngCheckBox : CheckBox
+    public class MrngCheckBox : CheckBox
     {
         private ThemeManager _themeManager;
         private readonly Size _checkboxSize;
         private readonly int _checkboxYCoord;
         private readonly int _textXCoord;
 
-        public mrngCheckBox()
+        public MrngCheckBox()
         {
             InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;

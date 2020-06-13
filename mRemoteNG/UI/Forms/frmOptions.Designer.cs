@@ -32,13 +32,13 @@ namespace mRemoteNG.UI.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOptions));
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnApply = new mrngButton();
-            this.btnCancel = new mrngButton();
-            this.btnOK = new mrngButton();
+            this.btnApply = new MrngButton();
+            this.btnCancel = new MrngButton();
+            this.btnOK = new MrngButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.lstOptionPages = new mRemoteNG.UI.Controls.mrngListView();
+            this.lstOptionPages = new mRemoteNG.UI.Controls.MrngListView();
             this.PageName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lstOptionPages)).BeginInit();
@@ -57,7 +57,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnApply
             // 
-            this.btnApply._mice = mrngButton.MouseState.OUT;
+            this.btnApply._mice = MrngButton.MouseState.OUT;
             this.btnApply.Location = new System.Drawing.Point(677, 5);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnCancel
             // 
-            this.btnCancel._mice = mrngButton.MouseState.OUT;
+            this.btnCancel._mice = MrngButton.MouseState.OUT;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(596, 5);
             this.btnCancel.Name = "btnCancel";
@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // btnOK
             // 
-            this.btnOK._mice = mrngButton.MouseState.OUT;
+            this.btnOK._mice = MrngButton.MouseState.OUT;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.Location = new System.Drawing.Point(515, 5);
             this.btnOK.Name = "btnOK";
@@ -182,12 +182,12 @@ namespace mRemoteNG.UI.Forms
 
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Splitter splitter1;
-        private Controls.mrngListView lstOptionPages;
+        private Controls.MrngListView lstOptionPages;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel pnlMain;
-        private mrngButton btnOK;
-        private mrngButton btnCancel;
+        private MrngButton btnOK;
+        private MrngButton btnCancel;
         private BrightIdeasSoftware.OLVColumn PageName;
-        private mrngButton btnApply;
+        private MrngButton btnApply;
     }
 }

@@ -20,24 +20,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
-            this.lblSQLDatabaseName = new mRemoteNG.UI.Controls.mrngLabel();
-            this.txtSQLDatabaseName = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblExperimental = new mRemoteNG.UI.Controls.mrngLabel();
-            this.chkUseSQLServer = new mrngCheckBox();
-            this.lblSQLUsername = new mRemoteNG.UI.Controls.mrngLabel();
-            this.txtSQLPassword = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblSQLInfo = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lblSQLServer = new mRemoteNG.UI.Controls.mrngLabel();
-            this.txtSQLUsername = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.txtSQLServer = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblSQLPassword = new mRemoteNG.UI.Controls.mrngLabel();
-            this.btnTestConnection = new mrngButton();
+            this.lblSQLDatabaseName = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtSQLDatabaseName = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblExperimental = new mRemoteNG.UI.Controls.MrngLabel();
+            this.chkUseSQLServer = new MrngCheckBox();
+            this.lblSQLUsername = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtSQLPassword = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblSQLInfo = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblSQLServer = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtSQLUsername = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.txtSQLServer = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblSQLPassword = new mRemoteNG.UI.Controls.MrngLabel();
+            this.btnTestConnection = new MrngButton();
             this.imgConnectionStatus = new System.Windows.Forms.PictureBox();
-            this.lblTestConnectionResults = new mRemoteNG.UI.Controls.mrngLabel();
-            this.chkSQLReadOnly = new mrngCheckBox();
-            this.lblSQLReadOnly = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lblSQLType = new mRemoteNG.UI.Controls.mrngLabel();
-            this.txtSQLType = new mrngComboBox();
+            this.lblTestConnectionResults = new mRemoteNG.UI.Controls.MrngLabel();
+            this.chkSQLReadOnly = new MrngCheckBox();
+            this.lblSQLReadOnly = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblSQLType = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtSQLType = new MrngComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.imgConnectionStatus)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -81,7 +81,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkUseSQLServer
             // 
-            this.chkUseSQLServer._mice = mrngCheckBox.MouseState.OUT;
+            this.chkUseSQLServer._mice = MrngCheckBox.MouseState.OUT;
             this.chkUseSQLServer.AutoSize = true;
             this.chkUseSQLServer.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkUseSQLServer.Location = new System.Drawing.Point(3, 76);
@@ -175,7 +175,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnTestConnection
             // 
-            this.btnTestConnection._mice = mrngButton.MouseState.OUT;
+            this.btnTestConnection._mice = MrngButton.MouseState.OUT;
             this.btnTestConnection.Enabled = false;
             this.btnTestConnection.Location = new System.Drawing.Point(3, 267);
             this.btnTestConnection.Name = "btnTestConnection";
@@ -206,7 +206,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // chkSQLReadOnly
             // 
-            this.chkSQLReadOnly._mice = mrngCheckBox.MouseState.OUT;
+            this.chkSQLReadOnly._mice = MrngCheckBox.MouseState.OUT;
             this.chkSQLReadOnly.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSQLReadOnly.AutoSize = true;
@@ -241,7 +241,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // txtSQLType
             // 
-            this.txtSQLType._mice = mrngComboBox.MouseState.HOVER;
+            this.txtSQLType._mice = MrngComboBox.MouseState.HOVER;
             this.txtSQLType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSQLType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtSQLType.FormattingEnabled = true;
@@ -304,24 +304,24 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.PerformLayout();
 
 		}
-		internal Controls.mrngLabel lblSQLDatabaseName;
-		internal Controls.mrngTextBox txtSQLDatabaseName;
-		internal Controls.mrngLabel lblExperimental;
-		internal mrngCheckBox chkUseSQLServer;
-		internal Controls.mrngLabel lblSQLUsername;
-		internal Controls.mrngTextBox txtSQLPassword;
-		internal Controls.mrngLabel lblSQLInfo;
-		internal Controls.mrngLabel lblSQLServer;
-		internal Controls.mrngTextBox txtSQLUsername;
-		internal Controls.mrngTextBox txtSQLServer;
-		internal Controls.mrngLabel lblSQLPassword;
-        private mrngButton btnTestConnection;
+		internal Controls.MrngLabel lblSQLDatabaseName;
+		internal Controls.MrngTextBox txtSQLDatabaseName;
+		internal Controls.MrngLabel lblExperimental;
+		internal MrngCheckBox chkUseSQLServer;
+		internal Controls.MrngLabel lblSQLUsername;
+		internal Controls.MrngTextBox txtSQLPassword;
+		internal Controls.MrngLabel lblSQLInfo;
+		internal Controls.MrngLabel lblSQLServer;
+		internal Controls.MrngTextBox txtSQLUsername;
+		internal Controls.MrngTextBox txtSQLServer;
+		internal Controls.MrngLabel lblSQLPassword;
+        private MrngButton btnTestConnection;
         private System.Windows.Forms.PictureBox imgConnectionStatus;
-        private Controls.mrngLabel lblTestConnectionResults;
-        private mrngCheckBox chkSQLReadOnly;
-        internal Controls.mrngLabel lblSQLReadOnly;
-		internal Controls.mrngLabel lblSQLType;
-		private mrngComboBox txtSQLType;
+        private Controls.MrngLabel lblTestConnectionResults;
+        private MrngCheckBox chkSQLReadOnly;
+        internal Controls.MrngLabel lblSQLReadOnly;
+		internal Controls.MrngLabel lblSQLType;
+		private MrngComboBox txtSQLType;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

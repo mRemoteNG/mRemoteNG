@@ -7,37 +7,37 @@ namespace mRemoteNG.UI.Window
 	public partial class UpdateWindow
 	{
         #region  Windows Form Designer generated code
-		internal Controls.mrngLabel lblStatus;
-		internal Controls.mrngTextBox txtChangeLog;
-		internal Controls.mrngLabel lblChangeLogLabel;
-		internal Controls.mrngLabel lblLatestVersionLabel;
-		internal Controls.mrngLabel lblInstalledVersionLabel;
-		internal Controls.mrngLabel lblLatestVersion;
-		internal Controls.mrngLabel lblInstalledVersion;
+		internal Controls.MrngLabel lblStatus;
+		internal Controls.MrngTextBox txtChangeLog;
+		internal Controls.MrngLabel lblChangeLogLabel;
+		internal Controls.MrngLabel lblLatestVersionLabel;
+		internal Controls.MrngLabel lblInstalledVersionLabel;
+		internal Controls.MrngLabel lblLatestVersion;
+		internal Controls.MrngLabel lblInstalledVersion;
 		internal System.Windows.Forms.PictureBox pbUpdateImage;
-		internal mrngButton btnCheckForUpdate;
+		internal MrngButton btnCheckForUpdate;
 				
 		private void InitializeComponent()
 		{
-            this.btnCheckForUpdate = new mrngButton();
-            this.lblChangeLogLabel = new mRemoteNG.UI.Controls.mrngLabel();
-            this.txtChangeLog = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.lblStatus = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lblLatestVersionLabel = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lblInstalledVersionLabel = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lblLatestVersion = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lblInstalledVersion = new mRemoteNG.UI.Controls.mrngLabel();
+            this.btnCheckForUpdate = new MrngButton();
+            this.lblChangeLogLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.txtChangeLog = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.lblStatus = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblLatestVersionLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblInstalledVersionLabel = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblLatestVersion = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblInstalledVersion = new mRemoteNG.UI.Controls.MrngLabel();
             this.pbUpdateImage = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.prgbDownload = new mRemoteNG.UI.Controls.mrngProgressBar();
-            this.btnDownload = new mrngButton();
+            this.prgbDownload = new mRemoteNG.UI.Controls.MrngProgressBar();
+            this.btnDownload = new MrngButton();
             ((System.ComponentModel.ISupportInitialize)(this.pbUpdateImage)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCheckForUpdate
             // 
-            this.btnCheckForUpdate._mice = mrngButton.MouseState.HOVER;
+            this.btnCheckForUpdate._mice = MrngButton.MouseState.HOVER;
             this.btnCheckForUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCheckForUpdate.Location = new System.Drawing.Point(3, 94);
             this.btnCheckForUpdate.Name = "btnCheckForUpdate";
@@ -184,7 +184,7 @@ namespace mRemoteNG.UI.Window
             // 
             // btnDownload
             // 
-            this.btnDownload._mice = mrngButton.MouseState.HOVER;
+            this.btnDownload._mice = MrngButton.MouseState.HOVER;
             this.tableLayoutPanel1.SetColumnSpan(this.btnDownload, 2);
             this.btnDownload.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -217,7 +217,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        internal mrngButton btnDownload;
-        internal Controls.mrngProgressBar prgbDownload;
+        internal MrngButton btnDownload;
+        internal Controls.MrngProgressBar prgbDownload;
     }
 }

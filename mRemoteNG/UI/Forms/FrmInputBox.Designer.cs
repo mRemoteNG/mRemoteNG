@@ -31,10 +31,10 @@ namespace mRemoteNG.UI.Forms
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this._Ok = new mrngButton();
-            this.buttonCancel = new mrngButton();
-            this.textBox = new mRemoteNG.UI.Controls.mrngTextBox();
-            this.label = new mRemoteNG.UI.Controls.mrngLabel();
+            this._Ok = new MrngButton();
+            this.buttonCancel = new MrngButton();
+            this.textBox = new mRemoteNG.UI.Controls.MrngTextBox();
+            this.label = new mRemoteNG.UI.Controls.MrngLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +60,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // _Ok
             // 
-            this._Ok._mice = mrngButton.MouseState.HOVER;
+            this._Ok._mice = MrngButton.MouseState.HOVER;
             this._Ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this._Ok.Location = new System.Drawing.Point(125, 55);
             this._Ok.Name = "_Ok";
@@ -72,7 +72,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // buttonCancel
             // 
-            this.buttonCancel._mice = mrngButton.MouseState.HOVER;
+            this.buttonCancel._mice = MrngButton.MouseState.HOVER;
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(206, 55);
@@ -130,9 +130,9 @@ namespace mRemoteNG.UI.Forms
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private mrngButton _Ok;
-        private mrngButton buttonCancel;
-        private Controls.mrngTextBox textBox;
-        private Controls.mrngLabel label;
+        private MrngButton _Ok;
+        private MrngButton buttonCancel;
+        private Controls.MrngTextBox textBox;
+        private Controls.MrngLabel label;
     }
 }

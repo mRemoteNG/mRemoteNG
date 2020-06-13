@@ -8,12 +8,12 @@ namespace mRemoteNG.UI.Controls
     //Themable label to overide the winforms behavior of drawing the forecolor of disabled with a system color
     //This class repaints the control to avoid Disabled state mismatch of the theme
     [ToolboxBitmap(typeof(Label))]
-    public class mrngLabel : Label
+    public class MrngLabel : Label
     {
         private ThemeManager _themeManager;
         private TextFormatFlags _textFormatFlags;
 
-        public mrngLabel()
+        public MrngLabel()
         {
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
         }

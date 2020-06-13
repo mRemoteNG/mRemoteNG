@@ -48,15 +48,15 @@ namespace mRemoteNG.UI.TaskDialog
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlExpandedInfo = new System.Windows.Forms.Panel();
             this.pnlRadioButtons = new System.Windows.Forms.Panel();
-            this.lbFooter = new mRemoteNG.UI.Controls.mrngLabel();
-            this.bt1 = new mrngButton();
-            this.bt2 = new mrngButton();
-            this.bt3 = new mrngButton();
-            this.cbVerify = new mrngCheckBox();
-            this.lbShowHideDetails = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lbExpandedInfo = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lbContent = new mRemoteNG.UI.Controls.mrngLabel();
-            this.lbMainInstruction = new mRemoteNG.UI.Controls.mrngLabel();
+            this.lbFooter = new mRemoteNG.UI.Controls.MrngLabel();
+            this.bt1 = new MrngButton();
+            this.bt2 = new MrngButton();
+            this.bt3 = new MrngButton();
+            this.cbVerify = new MrngCheckBox();
+            this.lbShowHideDetails = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lbExpandedInfo = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lbContent = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lbMainInstruction = new mRemoteNG.UI.Controls.MrngLabel();
             ((System.ComponentModel.ISupportInitialize)(this.imgMain)).BeginInit();
             this.pnlButtons.SuspendLayout();
             this.pnlFooter.SuspendLayout();
@@ -198,7 +198,7 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // bt1
             // 
-            this.bt1._mice = mrngButton.MouseState.HOVER;
+            this.bt1._mice = MrngButton.MouseState.HOVER;
             this.bt1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt1.Location = new System.Drawing.Point(218, 8);
             this.bt1.Name = "bt1";
@@ -208,7 +208,7 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // bt2
             // 
-            this.bt2._mice = mrngButton.MouseState.HOVER;
+            this.bt2._mice = MrngButton.MouseState.HOVER;
             this.bt2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt2.Location = new System.Drawing.Point(299, 8);
             this.bt2.Name = "bt2";
@@ -218,7 +218,7 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // bt3
             // 
-            this.bt3._mice = mrngButton.MouseState.HOVER;
+            this.bt3._mice = MrngButton.MouseState.HOVER;
             this.bt3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt3.Location = new System.Drawing.Point(380, 8);
             this.bt3.Name = "bt3";
@@ -228,7 +228,7 @@ namespace mRemoteNG.UI.TaskDialog
             // 
             // cbVerify
             // 
-            this.cbVerify._mice = mrngCheckBox.MouseState.HOVER;
+            this.cbVerify._mice = MrngCheckBox.MouseState.HOVER;
             this.cbVerify.AutoSize = true;
             this.cbVerify.Location = new System.Drawing.Point(13, 34);
             this.cbVerify.Name = "cbVerify";
@@ -320,26 +320,26 @@ namespace mRemoteNG.UI.TaskDialog
     #endregion
 
     private System.Windows.Forms.PictureBox imgMain;
-    private Controls.mrngLabel lbContent;
+    private Controls.MrngLabel lbContent;
     private System.Windows.Forms.Panel pnlButtons;
     private System.Windows.Forms.Panel panel2;
     private System.Windows.Forms.Panel pnlFooter;
     private System.Windows.Forms.Panel panel3;
     private System.Windows.Forms.Panel panel5;
     private System.Windows.Forms.PictureBox imgFooter;
-    private Controls.mrngLabel lbFooter;
+    private Controls.MrngLabel lbFooter;
     private System.Windows.Forms.ImageList imageList1;
-    private Controls.mrngLabel lbShowHideDetails;
+    private Controls.MrngLabel lbShowHideDetails;
     private System.Windows.Forms.Panel pnlCommandButtons;
-    private mrngCheckBox cbVerify;
+    private MrngCheckBox cbVerify;
     private System.Windows.Forms.Panel pnlMainInstruction;
     private System.Windows.Forms.Panel pnlContent;
     private System.Windows.Forms.Panel pnlExpandedInfo;
-    private Controls.mrngLabel lbExpandedInfo;
+    private Controls.MrngLabel lbExpandedInfo;
     private System.Windows.Forms.Panel pnlRadioButtons;
-    private mrngButton bt1;
-    private mrngButton bt2;
-    private mrngButton bt3;
-        private Controls.mrngLabel lbMainInstruction;
+    private MrngButton bt1;
+    private MrngButton bt2;
+    private MrngButton bt3;
+        private Controls.MrngLabel lbMainInstruction;
     }
 }

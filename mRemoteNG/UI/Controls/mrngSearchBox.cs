@@ -4,14 +4,14 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Controls
 {
-    public class mrngSearchBox : mrngTextBox
+    public class MrngSearchBox : MrngTextBox
     {
         private bool _showDefaultText = true;
         private bool _settingDefaultText = true;
         private readonly PictureBox _pbClear = new PictureBox();
         private readonly ToolTip _btClearToolTip = new ToolTip();
 
-        public mrngSearchBox()
+        public MrngSearchBox()
         {
             TextChanged += NGSearchBox_TextChanged;
             LostFocus += FocusLost;
