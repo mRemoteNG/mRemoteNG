@@ -157,6 +157,10 @@ _If you are using the Portable version, simply deleting the folder that contains
 
 * (Optional) If you would also like to delete user data remove `%LOCALAPPDATA%\mRemoteNG`
 
+## Featured Projects
+
+* [PSmRemoteNG](https://github.com/realslacker/PSmRemoteNG) A module to create mRemoteNG connection files from PowerShell.
+
 ## Contribute
 
 If you find mRemoteNG useful and would like to contribute, it would be greatly appreciated. When you contribute, you make it possible for the team to cover the costs of producing mRemoteNG.
@@ -167,6 +171,7 @@ Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to
 ### Translate
 Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to help make mRemoteNG a polyglot.
 
+</br>
 <p align="center">
   <img alt="Developed with ReSharper" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/.github/icon_ReSharper.png">
 </p>
