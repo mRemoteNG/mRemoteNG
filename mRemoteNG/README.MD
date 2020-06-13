@@ -108,7 +108,7 @@ mRemoteNG using this package is by compiling it from inside Visual Studio.
 
 ### Suggested for Windows 7 and Windows 2008 R2 Clients
 
-_You can use powershell to check if the hotfixes are installed. Example: ``Get-HotFix | where {$_.HotFixID -eq "KB2574819" -and $_.HotFixID -eq "KB2592687"}``_
+_You can use powershell to check if the hotfixes are installed. Example: `Get-HotFix | where {$_.HotFixID -eq "KB2574819" -and $_.HotFixID -eq "KB2592687"}`_
 
 The following updates are suggested (but not required) for Windows 7 / Windows Server 2008 clients:
 
@@ -125,7 +125,7 @@ The following updates are suggested (but not required) for Windows 7 / Windows S
 
 ### Download
 
-mRemoteNG is available as a redistributable MSI package or as a portable ZIP package, and can be downloaded from the following locations:
+mRemoteNG is available as a redistributable MSI package or as a portable ZIP package and can be downloaded from the following locations:
 * [GitHub](https://github.com/mRemoteNG/mRemoteNG/releases)
 * [Project Website](https://mremoteng.org/download)
 
@@ -153,17 +153,17 @@ command line.
 
 `msiexec /i C:\Path\To\mRemoteNG-Installer.msi INSTALLDIR="D:\Work Apps\mRemoteNG"`
 
-##### Ignore prerequisites during a normal install**
+##### Ignore prerequisites during a normal install
 
 `msiexec /i C:\Path\To\mRemoteNG-Installer.msi IGNOREPREREQUISITES=1`
 
-##### Ignore prerequisites during a silent install**
+##### Ignore prerequisites during a silent install
 
 `msiexec /i C:\Path\To\mRemoteNG-Installer.msi /qn IGNOREPREREQUISITES=1`
 
 ### Troubleshooting installation
 
-Turn on verbose logging by using the ``/lv* <log path>`` argument at the command line.
+Turn on verbose logging by using the `/lv* <log path>` argument at the command line.
 
 `msiexec /i C:\Path\To\mRemoteNG-Installer.msi /l*v C:\mremoteng_install.log`
 
