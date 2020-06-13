@@ -1089,7 +1089,6 @@
     <None Include="Documentation\user_interface\ssh_file_transfer.rst" />
     <None Include="Documentation\sql_configuration.rst" />
     <None Include="Documentation\known_issues.rst" />
-    <None Include="Documentation\installation\supported_operating_systems.rst" />
     <None Include="Documentation\keyboard_shortcuts.rst" />
     <None Include="Documentation\command_line_switches.rst" />
     <None Include="Documentation\user_interface\notifications.rst" />
@@ -1343,14 +1342,7 @@
     <None Include="Documentation\conf.py" />
     <None Include="Documentation\index.rst" />
     <None Include="Documentation\about.rst" />
-    <None Include="Documentation\about\features.rst" />
-    <None Include="Documentation\about\license.rst" />
-    <None Include="Documentation\about\release_channels.rst" />
-    <None Include="Documentation\about\versions.rst" />
-    <None Include="Documentation\installation\install.rst" />
     <None Include="Documentation\installation.rst" />
-    <None Include="Documentation\installation\minimum_requirements.rst" />
-    <None Include="Documentation\installation\uninstall.rst" />
     <None Include="Documentation\howtos\sshtunnel.rst" />
     <None Include="Documentation\user_interface.rst" />
     <None Include="Documentation\user_interface\main_window.rst" />
