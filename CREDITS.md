@@ -76,7 +76,7 @@ MIT License
 **[FilteredPropertyGrid](http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx)**  
 Copyright © 2006 Azuria
 
-**[InputBox](http://www.csharp-examples.net/inputbox/)**
+**[InputBox](http://www.csharp-examples.net/inputbox/)**  
 Copyright © 2016 Jan Slama
 
 **[IP TextBox](http://www.codeproject.com/Articles/11576/IP-TextBox)**  
@@ -114,7 +114,7 @@ Creative Commons Attribution 2.5 License
 Copyright © 2016  
 MIT License
 
-**[VncSharp](https://github.com/humphd/VncSharp [Archived])**  
+**[VncSharp](https://github.com/humphd/VncSharp) (Archived)**  
 Copyright © 2004-2009 David Humphrey  
 GNU General Public License (GPL) Version 2
 
