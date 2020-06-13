@@ -22,10 +22,6 @@ error searching on troubles with installing.
    - Needed if you use Telnet, SSH, Rlogin or RAW. Included in all packages.
    - An appropriate and integrated version is included with mRemoteNG.
 
-- `Citrix ICA Client <https://www.citrix.com/downloads/citrix-receiver.html>`_
-
-   - Needed if you use ICA. wfica.ocx must be registered.
-
 Suggested for Windows 7 and Windows 2008 R2 Clients
 ---------------------------------------------------
 .. tip::
