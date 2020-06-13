@@ -1346,7 +1346,6 @@
     <None Include="Resources\Images\FamFamFam\News.png" />
     <None Include="Documentation\conf.py" />
     <None Include="Documentation\index.rst" />
-    <None Include="Documentation\installation.rst" />
     <None Include="Documentation\howtos\sshtunnel.rst" />
     <None Include="Documentation\user_interface.rst" />
     <None Include="Documentation\user_interface\main_window.rst" />
