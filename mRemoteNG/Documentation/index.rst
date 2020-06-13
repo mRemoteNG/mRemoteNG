@@ -4,13 +4,6 @@ Welcome to mRemoteNG's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Introduction
-   
-   about.rst
-   installation.rst
-
-.. toctree::
-   :maxdepth: 2
    :caption: Application Handling
    
    user_interface.rst
