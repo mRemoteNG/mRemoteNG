@@ -1,10 +1,9 @@
 # Contributors
+
 ## Current mRemoteNG dev team
 David Sparer (http://github.com/sparerd)  
 Sean Kaim (http://github.com/kmscode)  
-Faryan Rezagholi (http://github.com/farosch)  
-
-Thanks for the awesome new website!  
+Faryan Rezagholi (http://github.com/farosch)
 Bennett Blodinger (http://github.com/benwa)
 
 Joe Cefoli (http://github.com/jcefoli)  
@@ -65,7 +64,7 @@ http://github.com/pablomh
 Damian Szczepanik (http://github.com/damianszczepanik)  
 Mant1kor (http://github.com/Mant1kor)
 
-## Included Source Code
+# Included Source Code
 Command Line Arguments Parser  
 Copyright © 2002 Richard Lopes  
 MIT License  
@@ -87,18 +86,17 @@ PortableSettingsProvider
 Copyright © 2014 crdx  
 https://github.com/crdx/PortableSettingsProvider
 
-
-## Included Components
 ADTree  
 Copyright © 2004 Marc Merritt  
 Copyright © 2008 Felix Deimel  
 http://www.codeproject.com/KB/selection/ADPickerCtrl.aspx
 
+# Included Components
+
 CefSharp
 Copyright © The CefSharp Authors
 MIT License
 https://github.com/cefsharp/CefSharp
-
 
 DockPanel Suite  
 Copyright © 2018 @roken and @lextm (formerly Weifen Luo)  
