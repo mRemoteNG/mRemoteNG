@@ -3,7 +3,7 @@
 </p>
   
 <p align="center">
-  mRemoteNG is an open source, multi-protocol, remote connections manager that allows you to view all of your remote connections in a simple, yet powerful tabbed interface
+  An open source, multi-protocol, tabbed remote connections manager allowing you to view all of your connections in a simple yet powerful interface
 </p>
 
 <p align="center">
