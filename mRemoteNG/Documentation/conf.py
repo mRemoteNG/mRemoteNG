@@ -19,7 +19,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'mRemoteNG'
-copyright = '2019 The mRemoteNG Team'
+copyright = '2020 The mRemoteNG Team'
 author = 'The mRemoteNG Team'
 
 # The short X.Y version
