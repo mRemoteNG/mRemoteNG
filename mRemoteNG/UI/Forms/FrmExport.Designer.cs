@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Forms
 {
-	public partial class ExportForm : Form
+	public partial class FrmExport : Form
 	{
         #region  Windows Form Designer generated code
 			

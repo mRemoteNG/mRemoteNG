@@ -2,7 +2,7 @@
 using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 
-namespace mRemoteNG.UI.Forms.Input
+namespace mRemoteNG.UI.Forms
 {
     public sealed partial class FrmInputBox : Form
     {

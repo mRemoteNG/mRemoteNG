@@ -25,7 +25,7 @@ namespace mRemoteNG.App
             {
                 var saveFilter = new SaveFilter();
 
-                using (var exportForm = new ExportForm())
+                using (var exportForm = new FrmExport())
                 {
                     if (selectedNode?.GetTreeNodeType() == TreeNodeType.Container)
                         exportForm.SelectedFolder = selectedNode as ContainerInfo;
@@ -42,10 +42,10 @@ namespace mRemoteNG.App
                     ConnectionInfo exportTarget;
                     switch (exportForm.Scope)
                     {
-                        case ExportForm.ExportScope.SelectedFolder:
+                        case FrmExport.ExportScope.SelectedFolder:
                             exportTarget = exportForm.SelectedFolder;
                             break;
-                        case ExportForm.ExportScope.SelectedConnection:
+                        case FrmExport.ExportScope.SelectedConnection:
                             exportTarget = exportForm.SelectedConnection;
                             break;
                         default:

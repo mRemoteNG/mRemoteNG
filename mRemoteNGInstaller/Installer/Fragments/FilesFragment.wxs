@@ -107,6 +107,7 @@
             
             
             
+            
             <Component Id="cmpADE94032AA8563E1E37003C8AB2D8F7E" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil6BA5B21301D77ADAE00F1DA02BFE8584" KeyPath="yes" Source="$(var.HarvestPath)\ConsoleControl.dll" />
             </Component>

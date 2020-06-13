@@ -1,4 +1,4 @@
-﻿namespace mRemoteNG.UI.Forms.Input
+﻿namespace mRemoteNG.UI.Forms
 {
     sealed partial class FrmInputBox
     {

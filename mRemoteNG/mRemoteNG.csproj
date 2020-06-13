@@ -493,10 +493,10 @@
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\FullscreenHandler.cs" />
-    <Compile Include="UI\Forms\Input\FrmInputBox.cs">
+    <Compile Include="UI\Forms\FrmInputBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\Input\FrmInputBox.Designer.cs">
+    <Compile Include="UI\Forms\FrmInputBox.Designer.cs">
       <DependentUpon>FrmInputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
@@ -618,10 +618,10 @@
     <Compile Include="UI\Forms\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\PasswordForm.Designer.cs">
-      <DependentUpon>PasswordForm.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmPassword.Designer.cs">
+      <DependentUpon>FrmPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\PasswordForm.cs">
+    <Compile Include="UI\Forms\FrmPassword.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Messages\Message.cs" />
@@ -652,11 +652,11 @@
     <Compile Include="UI\Forms\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UI\Forms\UnhandledExceptionWindow.cs">
+    <Compile Include="UI\Forms\FrmUnhandledException.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\UnhandledExceptionWindow.Designer.cs">
-      <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmUnhandledException.Designer.cs">
+      <DependentUpon>FrmUnhandledException.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\GraphicsUtilities\GdiPlusGraphicsProvider.cs" />
     <Compile Include="UI\GraphicsUtilities\IGraphicsProvider.cs" />
@@ -734,8 +734,8 @@
     <Compile Include="UI\Window\ErrorAndInfoWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\ExportForm.Designer.cs">
-      <DependentUpon>ExportForm.cs</DependentUpon>
+    <Compile Include="UI\Forms\FrmExport.Designer.cs">
+      <DependentUpon>FrmExport.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Window\ErrorAndInfoWindow.Designer.cs">
       <DependentUpon>ErrorAndInfoWindow.cs</DependentUpon>
@@ -759,7 +759,7 @@
     <Compile Include="UI\Window\PortScanWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\ExportForm.cs">
+    <Compile Include="UI\Forms\FrmExport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Window\ScreenshotManagerWindow.cs">
@@ -886,7 +886,7 @@
     <EmbeddedResource Include="UI\Forms\FrmSplashScreen.resx">
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\Input\FrmInputBox.resx">
+    <EmbeddedResource Include="UI\Forms\FrmInputBox.resx">
       <DependentUpon>FrmInputBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\AdvancedPage.resx">
@@ -926,8 +926,8 @@
     <EmbeddedResource Include="UI\Forms\OptionsPages\UpdatesPage.resx">
       <DependentUpon>UpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
-      <DependentUpon>PasswordForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmPassword.resx">
+      <DependentUpon>FrmPassword.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.de.resx">
@@ -998,8 +998,8 @@
     <EmbeddedResource Include="UI\Forms\TextBox.resx">
       <DependentUpon>TextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\UnhandledExceptionWindow.resx">
-      <DependentUpon>UnhandledExceptionWindow.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmUnhandledException.resx">
+      <DependentUpon>FrmUnhandledException.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tabs\ConnectionTab.resx">
       <DependentUpon>ConnectionTab.cs</DependentUpon>
@@ -1049,8 +1049,8 @@
       <DependentUpon>PortScanWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\ExportForm.resx">
-      <DependentUpon>ExportForm.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\FrmExport.resx">
+      <DependentUpon>FrmExport.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ScreenshotManagerWindow.resx">

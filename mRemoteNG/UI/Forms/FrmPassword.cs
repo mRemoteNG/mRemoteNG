@@ -8,7 +8,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class PasswordForm : IKeyProvider
+    public partial class FrmPassword : IKeyProvider
     {
         private readonly string _passwordName;
         private SecureString _password = new SecureString();
@@ -29,7 +29,7 @@ namespace mRemoteNG.UI.Forms
         /// password box is shown which must match the first password
         /// to continue.
         /// </param>
-        public PasswordForm(string passwordName = null, bool newPasswordMode = true)
+        public FrmPassword(string passwordName = null, bool newPasswordMode = true)
         {
             InitializeComponent();
             _passwordName = passwordName;

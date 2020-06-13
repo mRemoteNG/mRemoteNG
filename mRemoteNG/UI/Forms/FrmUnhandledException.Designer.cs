@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Forms
 {
-    partial class UnhandledExceptionWindow
+    partial class FrmUnhandledException
     {
         /// <summary>
         /// Required designer variable.

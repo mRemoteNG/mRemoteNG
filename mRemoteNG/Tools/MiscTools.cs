@@ -47,7 +47,7 @@ namespace mRemoteNG.Tools
             if (!splash.IsDisposed && splash.Visible)
                 splash.Close();
 
-            var passwordForm = new PasswordForm(passwordName, verify);
+            var passwordForm = new FrmPassword(passwordName, verify);
             return passwordForm.GetKey();
         }
 

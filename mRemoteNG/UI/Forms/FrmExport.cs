@@ -10,7 +10,7 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class ExportForm
+    public partial class FrmExport
     {
         private ThemeManager _themeManager;
 
@@ -128,7 +128,7 @@ namespace mRemoteNG.UI.Forms
 
         #region Constructors
 
-        public ExportForm()
+        public FrmExport()
         {
             InitializeComponent();
             FontOverrider.FontOverride(this);

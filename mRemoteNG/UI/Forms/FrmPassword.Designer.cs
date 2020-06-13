@@ -3,7 +3,7 @@
 namespace mRemoteNG.UI.Forms
 {
 	public 
-	partial class PasswordForm : System.Windows.Forms.Form
+	partial class FrmPassword : System.Windows.Forms.Form
 	{
 			
 		//Form overrides dispose to clean up the component list.

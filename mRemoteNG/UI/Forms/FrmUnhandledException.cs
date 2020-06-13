@@ -9,16 +9,16 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class UnhandledExceptionWindow : Form
+    public partial class FrmUnhandledException : Form
     {
         private readonly bool _isFatal;
 
-        public UnhandledExceptionWindow()
+        public FrmUnhandledException()
             : this(null, false)
         {
         }
 
-        public UnhandledExceptionWindow(Exception exception, bool isFatal)
+        public FrmUnhandledException(Exception exception, bool isFatal)
         {
             _isFatal = isFatal;
             InitializeComponent();

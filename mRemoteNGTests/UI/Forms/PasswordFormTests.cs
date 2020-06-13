@@ -7,12 +7,12 @@ namespace mRemoteNGTests.UI.Forms
 	[TestFixture]
     public class PasswordFormTests
     {
-        PasswordForm _passwordForm;
+        FrmPassword _passwordForm;
 
         [SetUp]
         public void Setup()
         {
-            _passwordForm = new PasswordForm();
+            _passwordForm = new FrmPassword();
             _passwordForm.Show();
         }
 
