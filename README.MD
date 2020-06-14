@@ -51,7 +51,7 @@
 
 The following protocols are supported:
 
-* RDP (Remote Desktop/Terminal Server)
+* RDP (Remote Desktop Protocol)
 * VNC (Virtual Network Computing)
 * ICA (Citrix Independent Computing Architecture)
 * SSH (Secure Shell)
@@ -59,6 +59,7 @@ The following protocols are supported:
 * HTTP/HTTPS (Hypertext Transfer Protocol)
 * rlogin (Remote Login)
 * Raw Socket Connections
+* Powershell remoting
 
 For a detailed feature list and general usage support, refer to the [Documentation](https://mremoteng.readthedocs.io/en/latest/).
 
