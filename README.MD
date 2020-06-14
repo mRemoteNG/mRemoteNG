@@ -108,14 +108,14 @@ mRemoteNG is available as a redistributable MSI package or as a portable ZIP pac
 
 ### Command line install
 
-The MSI package og mRemoteNG can be installed using the command line:
+The MSI package of mRemoteNG can be installed using the command line:
 
 `msiexec /i C:\Path\To\mRemoteNG-Installer.exe [INSTALLDIR=value] [IGNOREPREREQUISITES=value]`
 
 | Property | Value | Description |
 |-|-|-|
-| INSTALLDIR | `folder path` | This allows you to set the installation directory from the command line. For paths that contain spaces, enclose the path in double quotes (""). This overrides any value found in the registry. Introduced in v1.75 beta 2. |
-| IGNOREPREREQUISITES | `0` or `1` | When the ``IGNOREPREREQUISITES`` property is set to ``1``, the installer will not be halted if any prerequisite check is not met. You must still run the installer as Admin - this flag will not remove that requirement. Introduced in v1.74. |
+| INSTALLDIR | `folder path` | This allows you to set the installation directory from the command line. For paths that contain spaces, enclose the path in double quotes (""). This overrides any value found in the registry. |
+| IGNOREPREREQUISITES | `0` or `1` | When set to `1`, the installer will not be halted if any prerequisite check is not met. You must still run the installer as administrator. |
 
 #### Examples
 
