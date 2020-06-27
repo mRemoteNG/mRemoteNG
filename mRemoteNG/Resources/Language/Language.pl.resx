@@ -799,7 +799,7 @@ Załadowano nowy plik połączeń.</value>
     <value>&amp;Pokaż tekst pomocy</value>
   </data>
   <data name="ShowText" xml:space="preserve">
-    <value>Pokarz tekst</value>
+    <value>Pokaż tekst</value>
   </data>
   <data name="SmartSize" xml:space="preserve">
     <value>Dopasuj (RDP/VNC)</value>
