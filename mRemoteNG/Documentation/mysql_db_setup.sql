@@ -160,7 +160,7 @@ CREATE TABLE `tblCons` (
 	`InheritVNCProxyUsername` tinyint(1) NOT NULL,
 	`InheritVNCSmartSizeMode` tinyint(1) NOT NULL,
 	`InheritVNCViewOnly` tinyint(1) NOT NULL,
-	`InheritVmId` tinyint(1) DEFAULT NULL
+	`InheritVmId` tinyint(1) DEFAULT NULL,
     PRIMARY KEY (`ConstantID`),
     UNIQUE (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3324 DEFAULT CHARSET=latin1;
