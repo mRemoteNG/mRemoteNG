@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 
 namespace mRemoteNG.Tools
 {
-    public class ADhelper
+    public class AdHelper
     {
         private DirectoryEntry _dEntry;
 
-        public ADhelper(string domain)
+        public AdHelper(string domain)
         {
             Children = new Hashtable();
             Domain = domain;

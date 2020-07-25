@@ -1093,30 +1093,6 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("EncrBasic")]
-        public string ConDefaultICAEncryptionStrength {
-            get {
-                return ((string)(this["ConDefaultICAEncryptionStrength"]));
-            }
-            set {
-                this["ConDefaultICAEncryptionStrength"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool InhDefaultICAEncryptionStrength {
-            get {
-                return ((bool)(this["InhDefaultICAEncryptionStrength"]));
-            }
-            set {
-                this["InhDefaultICAEncryptionStrength"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultPreExtApp {
             get {

@@ -7,7 +7,6 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
@@ -400,10 +399,6 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
                 if (_confVersion >= 1.6)
                 {
-                    connectionInfo.ICAEncryptionStrength =
-                        xmlnode.GetAttributeAsEnum<IcaProtocol.EncryptionStrength>("ICAEncryptionStrength");
-                    connectionInfo.Inheritance.ICAEncryptionStrength =
-                        xmlnode.GetAttributeAsBool("InheritICAEncryptionStrength");
                     connectionInfo.PreExtApp = xmlnode.GetAttributeAsString("PreExtApp");
                     connectionInfo.PostExtApp = xmlnode.GetAttributeAsString("PostExtApp");
                     connectionInfo.Inheritance.PreExtApp = xmlnode.GetAttributeAsBool("InheritPreExtApp");

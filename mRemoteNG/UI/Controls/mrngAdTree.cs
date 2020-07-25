@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Controls
 
         private void AddTreeNodes(TreeNode tNode)
         {
-            var adhelper = new ADhelper(Domain);
+            var adhelper = new AdHelper(Domain);
             adhelper.GetChildEntries(tNode.Tag.ToString());
             var enumerator = adhelper.Children.GetEnumerator();
             tvActiveDirectory.BeginUpdate();

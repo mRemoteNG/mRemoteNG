@@ -668,28 +668,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Nastavení vlast. HTTP selhalo!</value>
   </data>
-  <data name="ICA" xml:space="preserve">
-    <value>ICA</value>
-  </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Nepovedo se vytvořit nové spojení ICA!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Načtení pluginu ICA Plugin selhalo!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>Metoda ICA SetCredentials selhala!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Metoda ICA Set Event Handlers selhala!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>Metoda ICA (nastavení vlastností) Set Props selhala!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>Metoda ICA Set Resolution (nastavení rozlišení) selhala!</value>
-  </data>
-  <data name="IdentifyQuickConnectTabs" xml:space="preserve">
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Označ záložky rychlého připojení prefixem "Quick:"</value>
   </data>
   <data name="ImportAD" xml:space="preserve">

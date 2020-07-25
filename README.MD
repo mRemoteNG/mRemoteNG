@@ -53,7 +53,6 @@ The following protocols are supported:
 
 * RDP (Remote Desktop Protocol)
 * VNC (Virtual Network Computing)
-* ICA (Citrix Independent Computing Architecture)
 * SSH (Secure Shell)
 * Telnet (TELecommunication NETwork)
 * HTTP/HTTPS (Hypertext Transfer Protocol)

@@ -127,12 +127,6 @@ namespace mRemoteNG.Connection
         public bool SSHOptions { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
-         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.EncryptionStrength)),
-         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionEncryptionStrength)),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
-        public bool ICAEncryptionStrength { get; set; }
-
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.AuthenticationLevel)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionAuthenticationLevel)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]

@@ -243,17 +243,25 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Prüfung erfolgreich!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA benötigt eine funktionierende XenDesktop-Online-Plugin-Installation und dass die Datei wfica.ocx korrekt registriert ist. Hier können Sie das Plugin herunterladen: http://www.citrix.com/download/
-Wenn sie das XenDesktop Online Plugin installiert haben und noch immer Probleme haben, diese Prüfung erfolgreich abzuschließen, versuchen Sie, die Datei wfica.ocx manuell zu registrieren.
-Öffnen Sie hierzu den Ausführen-Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\Programme\Citrix\ICA Client\wfica.ocx" (Wobei c:\Programme\Citrix\ICA Client\ ihr XenDesktop-Online-Plugin-Installationspfad ist).
-Wenn Sie noch immer Probleme mit ICA haben, konsultieren sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
+  <data name="strCcEOLFailed" xml:space="preserve">
+    <value>Die (RDP-) Sitzungsfunktion benötigt die Datei eolwtscom.dll. Diese muss korrekt registriert sein.
+Alle mRemoteNG-Pakete beinhalten diese Datei, jedoch muss sie, wenn Sie eines der nicht-Setup Pakete verwenden, manuell registriert werden.
+Öffnen Sie hierzu den Ausführen-Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\Programme\mRemoteNG\eolwtscom.dll" (Wobei c:\Programme\mRemoteNG\ Ihr mRemoteNG-Installationspfad ist).
+Wenn Sie noch immer Probleme mit der (RDP-) Sitzungsfunktion in mRemoteNG haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
   </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Alle ICA-Komponenten wurden gefunden und scheinen korrekt registriert zu sein.
-Citrix ICA Client Control Version {0}</value>
+  <data name="strCcEOLOK" xml:space="preserve">
+    <value>EOLWTSCOM wurde gefunden und scheint korrekt registriert zu sein.</value>
   </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
+  <data name="strCcGeckoFailed" xml:space="preserve">
+    <value>Um die Gecko Rendering Engine benutzen zu können, benötigen Sie XULrunner 1.8.1.x und einen korrekt eingetragenen Pfad in den Optionen.
+Hier können Sie XULrunner 1.8.1.3 herunterladen: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
+Wenn der Download abgeschlossen ist, entpacken Sie das Paket (Der Speicherort ist dabei ihnen überlassen). Als nächstes öffnen Sie (in mRemoteNG) Extras - Optionen - Erweitert und geben Sie den korrekten Pfad im XULrunner Feld an.
+Wenn Sie noch immer Probleme mit der Gecko Engine in mRemote haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
+  </data>
+  <data name="strCcGeckoOK" xml:space="preserve">
+    <value>GeckoFx wurde gefunden und scheint korrekt installiert zu sein.</value>
+  </data>
+  <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>nicht korrekt installiert</value>
   </data>
   <data name="CcPuttyFailed" xml:space="preserve">
@@ -601,25 +609,7 @@ Starte mit neuer Datei.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Setzen der HTTP-Parameter fehlgeschlagen!</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>ICA-Verbindung fehlgeschlagen!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Einbinden des ICA-Plugins fehlgeschlagen!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>Setzen der ICA-Authenifizierung ist fehlgeschlagen!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Setzen der Fehlerbehandlung fehlgeschlagen!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>Setzen der ICA-Paramter fehlgeschlagen!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>Setzen der Auflösung fehlgschlagen!</value>
-  </data>
-  <data name="IdentifyQuickConnectTabs" xml:space="preserve">
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>QuickConnect-Tabs identifizieren, indem das Präfix "Quick" benutzt wird</value>
   </data>
   <data name="ImportAD" xml:space="preserve">

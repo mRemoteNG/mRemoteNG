@@ -206,7 +206,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
         {
             return
                 property.GetCustomAttribute<BrowsableAttribute>()?.Browsable != false &&
-                (skipProtocolCheck || property.GetCustomAttribute<UsedInProtocolAttribute>()?
+                (skipProtocolCheck || property.GetCustomAttribute<AttributeUsedInProtocol>()?
                     .SupportedProtocolTypes
                     .Contains(protocol) != false);
         }

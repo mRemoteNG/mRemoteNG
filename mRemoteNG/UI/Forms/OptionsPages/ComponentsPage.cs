@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using AxWFICALib;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -48,7 +47,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             CheckRdp();
             CheckVnc();
             CheckPutty();
-            CheckIca();
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Finished component check", true);
         }
 
@@ -153,34 +151,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
         }
 
-        private void CheckIca()
-        {
-            pnlCheck4.Visible = true;
-
-            try
-            {
-                using (var ica = new AxICAClient())
-                {
-                    ica.Parent = this;
-
-                    pbCheck4.Image = Properties.Resources.Good_Symbol;
-                    lblCheck4.ForeColor = Color.DarkOliveGreen;
-                    lblCheck4.Text = @"ICA (Citrix ICA) " + Language.CheckSucceeded;
-                    txtCheck4.Text = string.Format(Language.CcICAOK, ica.Version);
-                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "ICA installed", true);
-                }
-            }
-            catch (Exception ex)
-            {
-                pbCheck4.Image = Properties.Resources.Bad_Symbol;
-                lblCheck4.ForeColor = Color.Firebrick;
-                lblCheck4.Text = @"ICA (Citrix ICA) " + Language.CheckFailed;
-                txtCheck4.Text = string.Format(Language.CcICAFailed, GeneralAppInfo.UrlForum);
-
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "ICA " + Language.CcNotInstalledProperly, true);
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, ex.Message, true);
-            }
-        }
+        
     }
 }

@@ -269,12 +269,6 @@
     <Setting Name="InhDefaultPanel" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ConDefaultICAEncryptionStrength" Type="System.String" Scope="User">
-      <Value Profile="(Default)">EncrBasic</Value>
-    </Setting>
-    <Setting Name="InhDefaultICAEncryptionStrength" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="ConDefaultPreExtApp" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

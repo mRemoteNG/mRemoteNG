@@ -243,17 +243,25 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Controle geslaagd!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA vereist dat de XenDesktop Online Plugin is geïnstalleerd is en dat de wfica.ocx bibliotheek is geregistreerd. U kunt de cliënt van deze locatie downloaden: http://www.citrix.com/download/
-Als u de XenDesktop Online Plugin heeft geïnstalleerd en de check nog niet lukt, probeer dan om handmatig wfica.ocx te registreren
-Om dit uit te voeren opent u het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Waarbij c:\Program Files\Citrix\ICA Client\ het pad is naar uw XenDesktop Online Plugin installatie).
+  <data name="strCcEOLFailed" xml:space="preserve">
+    <value>De (RDP) Sessies optie vereist dat u een geregistreerde versie van eolwtscom.dll op uw systeem heeft.
+mRemoteNG neemt dit onderdeel automatisch mee bij instalatie, maar zal niet automatisch registreren al u handmatig heeft geïnstalleerd, tenzij u het installatieprogramma opnieuw uitvoert.
+Om handmatig te registreren : Open het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (Waar c:\Program Files\mRemoteNG\ het pad is naar uw mRemoteNG installatie).
 Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
   </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Alle ICA componenten werden gevonden en lijken correct te zijn geregistreerd.
-Citrix ICA Versie {0}</value>
+  <data name="strCcEOLOK" xml:space="preserve">
+    <value>EOLWTSCOM werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
   </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
+  <data name="strCcGeckoFailed" xml:space="preserve">
+    <value>Voor het gebruik van de Gecko Rendering Engine heb je XULrunner 1.8.1.x nodig en correcte pad naar de installatiemap welke onder Opties kunnen worden ingesteld.
+U kunt XULrunner 1.8.1.3 vanaf deze locatie downloaden: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
+Wanneer de download van het pakket is voltooid kunt u deze uitpakken naar een willekeurige locatie. Ga daarna vervolgens in mRemoteNG naar Extra - Opties - Geavanceerd en voer het juiste pad in naar de uitgepakte XULrunner bestanden.
+Als u nog steeds niet in staat bent om de langs check te komen gebruik dan de Gecko Engine in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
+  </data>
+  <data name="strCcGeckoOK" xml:space="preserve">
+    <value>GeckoFx werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
+  </data>
+  <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>Niet correct geïnstalleerd</value>
   </data>
   <data name="CcPuttyFailed" xml:space="preserve">
@@ -594,25 +602,7 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Instellen HTTP Eigenschappen mislukt!</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Kan geen nieuwe ICA Connectie aanmaken!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Laden ICA Plugin mislukt!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA instellen kenmerken mislukt!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Instellen gebeurtenis handeling mislukt!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Instellen Eigenschappen mislukt!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Instellen Resolutie mislukt!</value>
-  </data>
-  <data name="IdentifyQuickConnectTabs" xml:space="preserve">
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Vindt de Snel aansluit tabs met het voorzetsel "Quick"</value>
   </data>
   <data name="ImportAD" xml:space="preserve">
