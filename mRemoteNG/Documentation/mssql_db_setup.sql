@@ -38,7 +38,7 @@ CREATE TABLE [dbo].[tblCons] (
 	[EnableDesktopComposition] bit NOT NULL,
 	[EnableFontSmoothing] bit NOT NULL,
 	[ExtApp] varchar(256),
-	[Favorite] tinyint(1) NOT NULL,
+	[Favorite] tinyint NOT NULL,
 	[Hostname] varchar(512),
 	[ICAEncryptionStrength] varchar(32) NOT NULL,
 	[Icon] varchar(128) NOT NULL,

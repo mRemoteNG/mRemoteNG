@@ -798,7 +798,7 @@ namespace mRemoteNG.UI.Window
         {
             var protocolBase = sender as ProtocolBase;
             if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
-            if (tabPage.Disposing) return;
+            if (tabPage.Disposing || tabPage.IsDisposed) return;
             tabPage.protocolClose = true;
             Invoke(new Action(() => tabPage.Close()));
         }
