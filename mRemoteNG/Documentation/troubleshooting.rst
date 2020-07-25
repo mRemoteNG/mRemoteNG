@@ -62,7 +62,7 @@ Files and Locations
 Your backup files are located in the same place as your normal connections file.
 This could be one of three places:
 
-- Normal version: `%AppData%\mRemoteNG`
+- Normal version: `%AppData%\\mRemoteNG`
 - Portable version: In the same location as mRemoteNG.exe
 - If you have saved your confCons.xml to a custom location, go there.
 
