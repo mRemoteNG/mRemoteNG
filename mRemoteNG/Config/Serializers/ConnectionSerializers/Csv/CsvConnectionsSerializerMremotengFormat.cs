@@ -62,6 +62,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                       "PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
                       "VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;" +
                       "RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;RedirectAudioCapture;RdpVersion;");
+            sb.AppendFormat("{0};", ConnectionInfo.Prop_StartProgram);
+            sb.AppendFormat("{0};", ConnectionInfo.Prop_StartProgramWorkDir);
 
             if (_saveFilter.SaveInheritance)
                 sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;" +
@@ -172,7 +174,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.RDGatewayPassword))
               .Append(FormatForCsv(con.RDGatewayDomain))
               .Append(FormatForCsv(con.RedirectAudioCapture))
-              .Append(FormatForCsv(con.RdpVersion));
+              .Append(FormatForCsv(con.RdpVersion))
+              .Append(FormatForCsv(con.StartProgram))
+              .Append(FormatForCsv(con.StartProgramWorkDir));
 
 
             if (!_saveFilter.SaveInheritance)

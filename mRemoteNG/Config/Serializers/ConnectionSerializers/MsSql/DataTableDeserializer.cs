@@ -131,6 +131,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                                                                                   (string)dataRow["SoundQuality"]);
             connectionInfo.RedirectAudioCapture = (bool)dataRow["RedirectAudioCapture"];
 
+            #region Remote Desktop Services
+            connectionInfo.StartProgram = (string)dataRow[ConnectionInfo.Prop_StartProgram];
+            connectionInfo.StartProgramWorkDir = (string)dataRow[ConnectionInfo.Prop_StartProgramWorkDir];
+            #endregion
+
             connectionInfo.RedirectKeys = (bool)dataRow["RedirectKeys"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
             connectionInfo.PostExtApp = (string)dataRow["PostExtApp"];

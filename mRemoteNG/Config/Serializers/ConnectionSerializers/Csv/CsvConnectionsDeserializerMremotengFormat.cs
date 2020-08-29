@@ -186,6 +186,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("RDGatewayHostname")]
                 : "";
 
+            connectionRecord.StartProgram = headers.Contains(ConnectionInfo.Prop_StartProgram)
+                ? connectionCsv[headers.IndexOf(ConnectionInfo.Prop_StartProgram)]
+                : "";
+
+            connectionRecord.StartProgramWorkDir = headers.Contains(ConnectionInfo.Prop_StartProgramWorkDir)
+                ? connectionCsv[headers.IndexOf(ConnectionInfo.Prop_StartProgramWorkDir)]
+                : "";
+
             if (headers.Contains("Protocol"))
             {
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("Protocol")], out ProtocolType protocolType))
