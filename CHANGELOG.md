@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #327: Added Alternative Shell for RDP settings
 - #1770: Added missing RDP performance settings
 - #1332: Added option to hide menu strip container
 - #545: Option to minimize to system tray on closing
