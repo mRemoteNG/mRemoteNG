@@ -236,6 +236,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("InheritRdpVersion", typeof(bool));
             dataTable.Columns.Add("EnhancedMode", typeof(bool));
             dataTable.Columns.Add("InheritEnhancedMode", typeof(bool));
+            dataTable.Columns.Add("Favorite", typeof(bool));
+            dataTable.Columns.Add("InheritFavorite", typeof(bool));
+            dataTable.Columns.Add("ICAEncryptionStrength", typeof(string));
+            dataTable.Columns.Add("InheritICAEncryptionStrength", typeof(bool));
             
             dataTable.Columns.Add(ConnectionInfo.Prop_StartProgram, typeof(string));
             dataTable.Columns.Add(ConnectionInfo.Prop_StartProgramWorkDir, typeof(string));
@@ -579,6 +583,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
             dataRow["RdpVersion"] = connectionInfo.RdpVersion;
+            dataRow["Favorite"] = connectionInfo.Favorite;
+            dataRow["ICAEncryptionStrength"] = string.Empty;
             
             #region Remote Desktop Services
             dataRow[ConnectionInfo.Prop_StartProgram] = connectionInfo.StartProgram;
@@ -652,6 +658,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;
                 dataRow["InheritRdpVersion"] = connectionInfo.Inheritance.RdpVersion;
+                dataRow["InheritFavorite"] = connectionInfo.Inheritance.Favorite;
+                dataRow["InheritICAEncryptionStrength"] = false;
             }
             else
             {
@@ -717,6 +725,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayPassword"] = false;
                 dataRow["InheritRDGatewayDomain"] = false;
                 dataRow["InheritRdpVersion"] = false;
+                dataRow["InheritFavorite"] = false;
+                dataRow["InheritICAEncryptionStrength"] = false;
             }
             if (isNewRow)_dataTable.Rows.Add(dataRow);
         }

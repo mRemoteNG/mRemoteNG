@@ -770,5 +770,11 @@
     <Setting Name="ConDefaultDisableCursorBlinking" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ConDefaultICAEncryptionStrength" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EncrBasic</Value>
+    </Setting>
+    <Setting Name="InhDefaultICAEncryptionStrength" Type="System.String" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
