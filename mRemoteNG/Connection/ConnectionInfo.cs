@@ -66,6 +66,7 @@ namespace mRemoteNG.Connection
             SetTreeDisplayDefaults();
             SetConnectionDefaults();
             SetProtocolDefaults();
+            SetRemoteDesktopServicesDefaults();
             SetRdGatewayDefaults();
             SetAppearanceDefaults();
             SetRedirectDefaults();
@@ -308,6 +309,12 @@ namespace mRemoteNG.Connection
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
             UseVmId = Settings.Default.ConDefaultUseVmId;
             UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
+        }
+
+        private void SetRemoteDesktopServicesDefaults()
+        {
+            StartProgram = string.Empty;
+            StartProgramWorkDir = string.Empty;
         }
 
         private void SetRdGatewayDefaults()

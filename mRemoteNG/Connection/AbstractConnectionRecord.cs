@@ -14,6 +14,11 @@ namespace mRemoteNG.Connection
 {
     public abstract class AbstractConnectionRecord : INotifyPropertyChanged
     {
+        #region Property Names
+        public const string Prop_StartProgram = "StartProgram";
+        public const string Prop_StartProgramWorkDir = "StartProgramWorkDir";
+        #endregion
+
         #region Fields
 
         private string _name;
@@ -27,7 +32,9 @@ namespace mRemoteNG.Connection
         private string _domain = "";
         private string _vmId = "";
         private bool _useEnhancedMode;
-
+        private string _startProgram = "";
+        private string _startProgramWorkDir = "";
+        
         private string _sshTunnelConnectionName = "";
         private ProtocolType _protocol;
         private RdpVersion _rdpProtocolVersion;
@@ -372,6 +379,29 @@ namespace mRemoteNG.Connection
         }
         #endregion
 
+        #region Remote Desktop Services
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RemoteDesktopServices), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RDPStartProgram)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPStartProgram)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public string StartProgram
+        {
+            get => GetPropertyValue(Prop_StartProgram, _startProgram);
+            set => SetField(ref _startProgram, value, Prop_StartProgram);
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RemoteDesktopServices), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RDPStartProgramWorkDir)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPStartProgramWorkDir)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public string StartProgramWorkDir
+        {
+            get => GetPropertyValue(Prop_StartProgramWorkDir, _startProgramWorkDir);
+            set => SetField(ref _startProgramWorkDir, value, Prop_StartProgramWorkDir);
+        }
+        #endregion
+
         #region RD Gateway
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
@@ -588,7 +618,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Redirect)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectDrives)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectDrives)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
@@ -633,7 +663,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Redirect)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectSmartCards)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectSmartCards)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP)]

@@ -293,6 +293,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _alertOnIdleDisconnect = connectionInfo.RDPAlertIdleTimeout;
             _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = connectionInfo.RDPMinutesToIdleTimeout;
 
+            #region Remote Desktop Services
+            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.StartProgram;
+            _rdpClient.SecuredSettings2.WorkDir = connectionInfo.StartProgramWorkDir;
+            #endregion
+
             //not user changeable
             _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
             _rdpClient.AdvancedSettings3.EnableAutoReconnect = true;

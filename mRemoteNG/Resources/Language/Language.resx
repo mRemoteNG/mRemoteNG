@@ -1966,7 +1966,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="CredentialUnavailable" xml:space="preserve">
     <value>Credential not available</value>
-    
   </data>
   <data name="OptionsThemeDeleteConfirmation" xml:space="preserve">
     <value>Do you really want to delete the theme?</value>
@@ -2272,5 +2271,28 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="ShowHideMenu" xml:space="preserve">
     <value>Show/Hide Menu Strip</value>
+  </data>
+  <data name="PropertyDescriptionRDPStartProgram" xml:space="preserve">
+    <value>The program to be started on the remote server upon connection.</value>
+  </data>
+  <data name="PropertyDescriptionRDPStartProgramWorkDir" xml:space="preserve">
+    <value>Specifies the working directory of the alternate shell.</value>
+  </data>
+  <data name="RDPStartProgram" xml:space="preserve">
+    <value>Alternate Shell</value>
+    <comment>https://docs.microsoft.com/en-us/windows/win32/termserv/imstscsecuredsettings-startprogram</comment>
+  </data>
+  <data name="RDPStartProgramWorkDir" xml:space="preserve">
+    <value>Alternate shell working directory</value>
+    <comment>https://docs.microsoft.com/en-us/windows/win32/termserv/imstscsecuredsettings-workdir</comment>
+  </data>
+  <data name="RedirectDrives" xml:space="preserve">
+    <value>Disk Drives</value>
+  </data>
+  <data name="RedirectSmartCards" xml:space="preserve">
+    <value>Smart Cards</value>
+  </data>
+  <data name="RemoteDesktopServices" xml:space="preserve">
+    <value>Remote Desktop Services</value>
   </data>
 </root>

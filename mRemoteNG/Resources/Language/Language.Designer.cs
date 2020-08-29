@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace mRemoteNG.Resources.Language {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -4084,6 +4087,24 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The program to be started on the remote server upon connection..
+        /// </summary>
+        internal static string PropertyDescriptionRDPStartProgram {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionRDPStartProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specifies the working directory of the alternate shell..
+        /// </summary>
+        internal static string PropertyDescriptionRDPStartProgramWorkDir {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionRDPStartProgramWorkDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sets the version of RDP to use when opening connections..
         /// </summary>
         internal static string PropertyDescriptionRdpVersion {
@@ -5057,6 +5078,24 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alternate Shell.
+        /// </summary>
+        internal static string RDPStartProgram {
+            get {
+                return ResourceManager.GetString("RDPStartProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate shell working directory.
+        /// </summary>
+        internal static string RDPStartProgramWorkDir {
+            get {
+                return ResourceManager.GetString("RDPStartProgramWorkDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RDP ToggleFullscreen failed!.
         /// </summary>
         internal static string RdpToggleFullscreenFailed {
@@ -5138,11 +5177,29 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disk Drives.
+        /// </summary>
+        internal static string RedirectDrives {
+            get {
+                return ResourceManager.GetString("RedirectDrives", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key Combinations.
         /// </summary>
         internal static string RedirectKeys {
             get {
                 return ResourceManager.GetString("RedirectKeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smart Cards.
+        /// </summary>
+        internal static string RedirectSmartCards {
+            get {
+                return ResourceManager.GetString("RedirectSmartCards", resourceCulture);
             }
         }
         
@@ -5190,6 +5247,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string ReleasedUnderGPL {
             get {
                 return ResourceManager.GetString("ReleasedUnderGPL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remote Desktop Services.
+        /// </summary>
+        internal static string RemoteDesktopServices {
+            get {
+                return ResourceManager.GetString("RemoteDesktopServices", resourceCulture);
             }
         }
         
