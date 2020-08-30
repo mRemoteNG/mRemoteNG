@@ -733,7 +733,8 @@ namespace mRemoteNG.Connection
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.StartProgram)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionStartProgram))]
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionStartProgram)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual string StartProgram
         {
             get => GetPropertyValue("StartProgram", _startProgram);
