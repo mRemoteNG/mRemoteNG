@@ -356,6 +356,7 @@ namespace mRemoteNG.Connection
             MacAddress = Settings.Default.ConDefaultMacAddress;
             UserField = Settings.Default.ConDefaultUserField;
             Favorite = Settings.Default.ConDefaultFavorite;
+            StartProgram = Settings.Default.ConDefaultStartProgram;
         }
 
         private void SetVncDefaults()

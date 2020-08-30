@@ -21,10 +21,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
     public class RdpProtocol6 : ProtocolBase, ISupportsViewOnly
     {
         /* RDP v8 requires Windows 7 with:
-         * https://support.microsoft.com/en-us/kb/2592687 
+         * https://support.microsoft.com/en-us/kb/2592687
          * OR
          * https://support.microsoft.com/en-us/kb/2923545
-         * 
+         *
          * Windows 8+ support RDP v8 out of the box.
          */
         private MsRdpClient6NotSafeForScripting _rdpClient;
@@ -302,6 +302,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
 
             _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
+
+            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.StartProgram;
 
             _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(connectionInfo.CacheBitmaps);
             if (_rdpVersion >= Versions.RDC61)
@@ -606,28 +608,28 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var pFlags = 0;
                 if (connectionInfo.DisplayThemes == false)
                     pFlags += (int)RDPPerformanceFlags.DisableThemes;
-                
+
                 if (connectionInfo.DisplayWallpaper == false)
                     pFlags += (int)RDPPerformanceFlags.DisableWallpaper;
-                
+
                 if (connectionInfo.EnableFontSmoothing)
                     pFlags += (int)RDPPerformanceFlags.EnableFontSmoothing;
 
                 if (connectionInfo.EnableDesktopComposition)
                     pFlags += (int)RDPPerformanceFlags.EnableDesktopComposition;
-                
+
                 if (connectionInfo.DisableFullWindowDrag)
                     pFlags += (int)RDPPerformanceFlags.DisableFullWindowDrag;
-                
+
                 if (connectionInfo.DisableMenuAnimations)
                     pFlags += (int)RDPPerformanceFlags.DisableMenuAnimations;
-                
+
                 if (connectionInfo.DisableCursorShadow)
                     pFlags += (int)RDPPerformanceFlags.DisableCursorShadow;
-                
+
                 if (connectionInfo.DisableCursorBlinking)
                     pFlags += (int)RDPPerformanceFlags.DisableCursorBlinking;
-                
+
                 _rdpClient.AdvancedSettings2.PerformanceFlags = pFlags;
             }
             catch (Exception ex)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.App;
@@ -130,6 +130,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("UserField", connectionInfo.UserField));
             element.Add(new XAttribute("Favorite", connectionInfo.Favorite));
             element.Add(new XAttribute("ExtApp", connectionInfo.ExtApp));
+            element.Add(new XAttribute("StartProgram", connectionInfo.StartProgram));
             element.Add(new XAttribute("VNCCompression", connectionInfo.VNCCompression));
             element.Add(new XAttribute("VNCEncoding", connectionInfo.VNCEncoding));
             element.Add(new XAttribute("VNCAuthMode", connectionInfo.VNCAuthMode));

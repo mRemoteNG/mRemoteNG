@@ -2273,4 +2273,10 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="ShowHideMenu" xml:space="preserve">
     <value>Show/Hide Menu Strip</value>
   </data>
+  <data name="PropertyDescriptionStartProgram" xml:space="preserve">
+    <value>Start Program/alternate shell</value>
+  </data>
+  <data name="StartProgram" xml:space="preserve">
+    <value>Start Program</value>
+  </data>
 </root>
