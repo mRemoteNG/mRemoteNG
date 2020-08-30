@@ -55,7 +55,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         [TestCase("Username", "")]
         [TestCase("Domain", "")]
         [TestCase("Password", "")]
-        [TestCase("InheritAutomaticResize", "false")]
+        [TestCase("InheritAutomaticResize", null)]
         public void SerializerRespectsSaveFilterSettings(string attributeName, string expectedValue)
         {
             var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
