@@ -1460,7 +1460,7 @@ VncSharp Control Version {0}</value>
     <value>Обновление</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
-    <value>Удалить файл</value>
+    <value>Удалённый файл</value>
   </data>
   <data name="RemoveAll" xml:space="preserve">
     <value>Удалить все</value>
