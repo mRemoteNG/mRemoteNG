@@ -45,16 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\CredentialRepository.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CredentialRepository.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\CredentialRepositoryList.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CredentialRepositoryList.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StepDefinitions\CredentialRepositoryListSteps.cs" />
     <Compile Include="StepDefinitions\CredentialRepositorySteps.cs" />
@@ -63,14 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Features\CredentialRepository.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>CredentialRepository.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\CredentialRepositoryList.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>CredentialRepositoryList.feature.cs</LastGenOutput>
-    </None>
+    <None Include="Features\CredentialRepository.feature" />
+    <None Include="Features\CredentialRepositoryList.feature" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
