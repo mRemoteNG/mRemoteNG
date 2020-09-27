@@ -27,10 +27,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
             return new MySqlCommand(dbCommand, (MySqlConnection) _dbConnection);
         }
 
-        public bool IsConnected
-        {
-            get { return (_dbConnection.State == ConnectionState.Open); }
-        }
+        public bool IsConnected => (_dbConnection.State == ConnectionState.Open);
 
         public MySqlDatabaseConnector(string host, string database, string username, string password)
         {

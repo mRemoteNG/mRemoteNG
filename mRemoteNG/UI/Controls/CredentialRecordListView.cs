@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Controls
 
         public ICredentialRepositoryList CredentialRepositoryList
         {
-            get { return _credentialRepositoryList; }
+            get => _credentialRepositoryList;
             set
             {
                 _credentialRepositoryList.RepositoriesUpdated -= CredentialRepositoryListOnRepositoriesUpdated;

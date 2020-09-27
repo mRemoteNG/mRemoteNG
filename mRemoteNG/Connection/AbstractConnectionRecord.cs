@@ -616,8 +616,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RedirectClipboard
         {
-            get { return GetPropertyValue("RedirectClipboard", _redirectClipboard); }
-            set { SetField(ref _redirectClipboard, value, "RedirectClipboard"); }
+            get => GetPropertyValue("RedirectClipboard", _redirectClipboard);
+            set => SetField(ref _redirectClipboard, value, "RedirectClipboard");
         }
 
 

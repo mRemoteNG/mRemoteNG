@@ -24,12 +24,9 @@ namespace mRemoteNG.Tree.Root
         [LocalizedAttributes.LocalizedDefaultValue("strPuttySavedSessionsRootName")]
         public override string Name
         {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                //Settings.Default.PuttySavedSessionsName = value;
-            }
+            get => _name;
+            set => _name = value;
+            //Settings.Default.PuttySavedSessionsName = value;
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),
@@ -37,7 +34,7 @@ namespace mRemoteNG.Tree.Root
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPanel))]
         public override string Panel
         {
-            get { return _panel; }
+            get => _panel;
             set
             {
                 _panel = value;

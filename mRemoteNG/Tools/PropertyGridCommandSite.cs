@@ -103,25 +103,16 @@ namespace mRemoteNG.Tools
             return serviceType == typeof(IMenuCommandService) ? this : null;
         }
 
-        public IComponent Component
-        {
-            get { throw new NotSupportedException(); }
-        }
+        public IComponent Component => throw new NotSupportedException();
 
-        public IContainer Container
-        {
-            get { return null; }
-        }
+        public IContainer Container => null;
 
-        public bool DesignMode
-        {
-            get { return true; }
-        }
+        public bool DesignMode => true;
 
         public string Name
         {
-            get { throw new NotSupportedException(); }
-            set { throw new NotSupportedException(); }
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
         }
 
         public void AddCommand(MenuCommand command)

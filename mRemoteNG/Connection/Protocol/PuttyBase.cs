@@ -34,10 +34,7 @@ namespace mRemoteNG.Connection.Protocol
 
         public static string PuttyPath { get; set; }
 
-        public bool Focused
-        {
-            get { return NativeMethods.GetForegroundWindow() == PuttyHandle; }
-        }
+        public bool Focused => NativeMethods.GetForegroundWindow() == PuttyHandle;
 
         #endregion
 

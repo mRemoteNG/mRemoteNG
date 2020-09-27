@@ -43,19 +43,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
         public virtual bool SmartSize
         {
             get => _rdpClient.AdvancedSettings2.SmartSizing;
-            protected set
-            {
-                _rdpClient.AdvancedSettings2.SmartSizing = value;
-            }
+            protected set => _rdpClient.AdvancedSettings2.SmartSizing = value;
         }
 
         public virtual bool Fullscreen
         {
             get => _rdpClient.FullScreen;
-            protected set
-            {
-                _rdpClient.FullScreen = value;
-            }
+            protected set => _rdpClient.FullScreen = value;
         }
 
         private bool RedirectKeys

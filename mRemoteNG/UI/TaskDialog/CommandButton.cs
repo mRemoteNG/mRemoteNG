@@ -40,7 +40,7 @@ namespace mRemoteNG.UI.TaskDialog
         // Override this to make sure the control is invalidated (repainted) when 'Text' is changed
         public override string Text
         {
-            get { return base.Text; }
+            get => base.Text;
             set
             {
                 base.Text = value;
@@ -61,7 +61,7 @@ namespace mRemoteNG.UI.TaskDialog
         [DefaultValue(true)]
         public bool AutoHeight
         {
-            get { return m_autoHeight; }
+            get => m_autoHeight;
             set
             {
                 m_autoHeight = value;

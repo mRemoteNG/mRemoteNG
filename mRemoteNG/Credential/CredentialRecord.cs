@@ -16,7 +16,7 @@ namespace mRemoteNG.Credential
 
         public string Title
         {
-            get { return _title; }
+            get => _title;
             set
             {
                 _title = value;
@@ -26,7 +26,7 @@ namespace mRemoteNG.Credential
 
         public string Username
         {
-            get { return _username; }
+            get => _username;
             set
             {
                 _username = value;
@@ -36,7 +36,7 @@ namespace mRemoteNG.Credential
 
         public SecureString Password
         {
-            get { return _password; }
+            get => _password;
             set
             {
                 _password = value;
@@ -46,7 +46,7 @@ namespace mRemoteNG.Credential
 
         public string Domain
         {
-            get { return _domain; }
+            get => _domain;
             set
             {
                 _domain = value;

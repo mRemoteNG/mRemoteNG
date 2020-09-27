@@ -199,14 +199,8 @@ namespace mRemoteNG.UI.Controls
 
         public event ConnectRequestedEventHandler ConnectRequested
         {
-            add
-            {
-                ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Combine(ConnectRequestedEvent, value);
-            }
-            remove
-            {
-                ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Remove(ConnectRequestedEvent, value);
-            }
+            add => ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Combine(ConnectRequestedEvent, value);
+            remove => ConnectRequestedEvent = (ConnectRequestedEventHandler)Delegate.Remove(ConnectRequestedEvent, value);
         }
 
 
@@ -232,8 +226,8 @@ namespace mRemoteNG.UI.Controls
 
         public event ProtocolChangedEventHandler ProtocolChanged
         {
-            add { ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Combine(ProtocolChangedEvent, value); }
-            remove { ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Remove(ProtocolChangedEvent, value); }
+            add => ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Combine(ProtocolChangedEvent, value);
+            remove => ProtocolChangedEvent = (ProtocolChangedEventHandler)Delegate.Remove(ProtocolChangedEvent, value);
         }
 
 

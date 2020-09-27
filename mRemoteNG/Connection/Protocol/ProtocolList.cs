@@ -21,10 +21,7 @@ namespace mRemoteNG.Connection.Protocol
             }
         }
 
-        public new int Count
-        {
-            get { return List.Count; }
-        }
+        public new int Count => List.Count;
 
 
         public void Add(ProtocolBase cProt)

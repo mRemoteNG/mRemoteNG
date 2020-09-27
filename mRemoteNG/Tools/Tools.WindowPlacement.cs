@@ -20,8 +20,8 @@ namespace mRemoteNG.Tools
 
         public Form Form
         {
-            get { return _form; }
-            set { _form = value; }
+            get => _form;
+            set => _form = value;
         }
 
         public bool RestoreToMaximized

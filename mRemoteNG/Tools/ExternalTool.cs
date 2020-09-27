@@ -31,19 +31,19 @@ namespace mRemoteNG.Tools
 
         public string DisplayName
         {
-            get { return _displayName; }
-            set { SetField(ref _displayName, value, nameof(DisplayName)); }
+            get => _displayName;
+            set => SetField(ref _displayName, value, nameof(DisplayName));
         }
 
         public string FileName
         {
-            get { return _fileName; }
-            set { SetField(ref _fileName, value, nameof(FileName)); }
+            get => _fileName;
+            set => SetField(ref _fileName, value, nameof(FileName));
         }
 
         public bool WaitForExit
         {
-            get { return _waitForExit; }
+            get => _waitForExit;
             set
             {
                 // WaitForExit cannot be turned on when TryIntegrate is true
@@ -55,19 +55,19 @@ namespace mRemoteNG.Tools
 
         public string Arguments
         {
-            get { return _arguments; }
-            set { SetField(ref _arguments, value, nameof(Arguments)); }
+            get => _arguments;
+            set => SetField(ref _arguments, value, nameof(Arguments));
         }
 
         public string WorkingDir
         {
-            get { return _workingDir; }
-            set { SetField(ref _workingDir, value, nameof(WorkingDir)); }
+            get => _workingDir;
+            set => SetField(ref _workingDir, value, nameof(WorkingDir));
         }
 
         public bool TryIntegrate
         {
-            get { return _tryIntegrate; }
+            get => _tryIntegrate;
             set
             {
                 // WaitForExit cannot be turned on when TryIntegrate is true
@@ -79,27 +79,21 @@ namespace mRemoteNG.Tools
 
         public bool ShowOnToolbar
         {
-            get { return _showOnToolbar; }
-            set { SetField(ref _showOnToolbar, value, nameof(ShowOnToolbar)); }
+            get => _showOnToolbar;
+            set => SetField(ref _showOnToolbar, value, nameof(ShowOnToolbar));
         }
 
         public bool RunElevated
         {
-            get { return _runElevated; }
-            set { SetField(ref _runElevated, value, nameof(RunElevated)); }
+            get => _runElevated;
+            set => SetField(ref _runElevated, value, nameof(RunElevated));
         }
 
         public ConnectionInfo ConnectionInfo { get; set; }
 
-        public Icon Icon
-        {
-            get { return File.Exists(FileName) ? MiscTools.GetIconFromFile(FileName) : Properties.Resources.mRemoteNG_Icon; }
-        }
+        public Icon Icon => File.Exists(FileName) ? MiscTools.GetIconFromFile(FileName) : Properties.Resources.mRemoteNG_Icon;
 
-        public Image Image
-        {
-            get { return Icon?.ToBitmap() ?? Properties.Resources.mRemoteNG_Icon.ToBitmap(); }
-        }
+        public Image Image => Icon?.ToBitmap() ?? Properties.Resources.mRemoteNG_Icon.ToBitmap();
 
         #endregion
 

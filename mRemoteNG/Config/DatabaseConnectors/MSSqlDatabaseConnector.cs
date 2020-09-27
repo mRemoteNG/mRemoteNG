@@ -26,10 +26,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
             return new SqlCommand(dbCommand, (SqlConnection) _dbConnection);
         }
 
-        public bool IsConnected
-        {
-            get { return (_dbConnection.State == ConnectionState.Open); }
-        }
+        public bool IsConnected => (_dbConnection.State == ConnectionState.Open);
 
         public MSSqlDatabaseConnector(string sqlServer, string catalog, string username, string password)
         {

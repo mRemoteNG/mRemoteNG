@@ -26,7 +26,7 @@ namespace mRemoteNG.Container
         [Browsable(false)]
         public override bool IsContainer
         {
-            get { return true; }
+            get => true;
             set { }
         }
 

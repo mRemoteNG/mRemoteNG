@@ -7,7 +7,7 @@ namespace mRemoteNG.UI.Controls
     {
         public new ToolStripDropDown DropDown
         {
-            get { return base.DropDown; }
+            get => base.DropDown;
             set
             {
                 if (base.DropDown != value)
