@@ -299,7 +299,7 @@
       <Version>3.0.6</Version>
     </PackageReference>
     <PackageReference Include="log4net">
-      <Version>2.0.10</Version>
+      <Version>2.0.11</Version>
     </PackageReference>
     <PackageReference Include="NSubstitute">
       <Version>4.2.2</Version>
