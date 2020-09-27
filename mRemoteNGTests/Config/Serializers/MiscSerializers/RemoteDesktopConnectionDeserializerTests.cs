@@ -1,5 +1,4 @@
-﻿using mRemoteNG.Config.Serializers;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;

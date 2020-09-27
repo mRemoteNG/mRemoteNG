@@ -5,7 +5,6 @@ using System.Globalization;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
-using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;

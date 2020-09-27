@@ -1,5 +1,4 @@
 ﻿using System;
-using mRemoteNG.Messages;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;

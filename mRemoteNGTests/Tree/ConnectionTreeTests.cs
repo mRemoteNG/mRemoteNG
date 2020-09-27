@@ -2,7 +2,6 @@
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
-using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Controls.ConnectionTree;
 using NUnit.Framework;
 

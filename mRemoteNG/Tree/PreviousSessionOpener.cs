@@ -1,6 +1,5 @@
 ﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.UI.Controls;
 using System;
 using System.Linq;
 using mRemoteNG.UI.Controls.ConnectionTree;

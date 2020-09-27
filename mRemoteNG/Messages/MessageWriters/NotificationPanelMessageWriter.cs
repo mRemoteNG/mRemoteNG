@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.UI;
-using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.Messages.MessageWriters

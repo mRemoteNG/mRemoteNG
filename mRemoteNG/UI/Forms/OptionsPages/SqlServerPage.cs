@@ -1,6 +1,5 @@
 ﻿using System;
 using mRemoteNG.App;
-using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Properties;

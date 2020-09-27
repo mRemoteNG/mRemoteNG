@@ -5,7 +5,6 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Menu
 {

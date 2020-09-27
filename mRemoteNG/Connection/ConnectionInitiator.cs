@@ -7,8 +7,6 @@ using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
-using mRemoteNG.Tools;
-using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Tabs;

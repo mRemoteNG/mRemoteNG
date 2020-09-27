@@ -1,7 +1,6 @@
 ﻿using System;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Tree;
 using mRemoteNG.Tree.ClickHandlers;
 using NSubstitute;
 using NUnit.Framework;
