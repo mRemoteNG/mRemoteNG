@@ -98,11 +98,8 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             if (disposing)
             {
-                if(components != null)
-                    components.Dispose();
-
-                if(_statusImageList != null)
-                _statusImageList.Dispose();
+                components?.Dispose();
+                _statusImageList?.Dispose();
 
                 _themeManager.ThemeChanged -= ThemeManagerOnThemeChanged;
             }
