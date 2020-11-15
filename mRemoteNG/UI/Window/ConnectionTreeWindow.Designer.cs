@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Window
             this.ConnectionTree.IsSimpleDragSource = true;
             this.ConnectionTree.LabelEdit = true;
             this.ConnectionTree.Location = new System.Drawing.Point(0, 24);
-            this.ConnectionTree.MultiSelect = false;
+            this.ConnectionTree.MultiSelect = true;
             this.ConnectionTree.Name = "ConnectionTree";
             this.ConnectionTree.NodeDeletionConfirmer = alwaysConfirmYes2;
             this.ConnectionTree.PostSetupActions = new IConnectionTreeDelegate[0];
