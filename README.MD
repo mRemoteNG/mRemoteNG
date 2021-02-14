@@ -11,14 +11,14 @@
 The only change to the original project is a connector to the Secret Server REST API.
 Set up your folder or connection like this:
 
-<img src="https://raw.githubusercontent.com/tecxx/mRemoteNG/develop/usage1.png">
+<img src="https://raw.githubusercontent.com/tecxx/mRemoteNG-SecretServer/SecretServer/usage1.png">
 
 set username to SSAPI:xxxx (where xxxx is the secret ID you want to fetch)
 leave password and domain empty
 
 when initiating the connection, a prompt appears to ask for your secret server installation data. 
 
-<img src="https://raw.githubusercontent.com/tecxx/mRemoteNG/develop/usage2.png">
+<img src="https://raw.githubusercontent.com/tecxx/mRemoteNG-SecretServer/SecretServer/usage2.png">
 
 you only need to fill out this form once, the data gets stored in the registry.
 
