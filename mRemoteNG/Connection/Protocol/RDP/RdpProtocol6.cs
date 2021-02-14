@@ -459,6 +459,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var password = connectionInfo?.Password ?? "";
                 var domain = connectionInfo?.Domain ?? "";
 
+                // RR hack - secret server api
+                if (userName.StartsWith("SSAPI:"))
+                {
+                    SecretServerInterface.SecretServerInterface.fetchSecretFromServer(userName, out userName, out password, out domain);
+                }
+
                 if (string.IsNullOrEmpty(userName))
                 {
                     if (Settings.Default.EmptyCredentials == "windows")
@@ -513,8 +519,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetCredentialsFailed, ex);
             }
         }
-
-		private uint GetDesktopScaleFactor()
+        private uint GetDesktopScaleFactor()
         {
             var scaleFactor = (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
             switch (scaleFactor)
@@ -547,11 +552,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 return 180;
             return 100;
         }
-		
+
         private void SetResolution()
         {
             try
             {
+                
                 SetExtendedProperty("DesktopScaleFactor", GetDesktopScaleFactor());
                 SetExtendedProperty("DeviceScaleFactor", GetDeviceScaleFactor());
 

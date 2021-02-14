@@ -114,6 +114,13 @@ namespace mRemoteNG.Connection.Protocol
                             }
                         }
 
+                        // RR hack - secret server api
+                        if (username.StartsWith("SSAPI:"))
+                        {
+                            var domain = ""; // dummy
+                            SecretServerInterface.SecretServerInterface.fetchSecretFromServer(username, out username, out password, out domain);
+                        }
+
                         arguments.Add("-" + (int)PuttySSHVersion);
 
                         if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials))
