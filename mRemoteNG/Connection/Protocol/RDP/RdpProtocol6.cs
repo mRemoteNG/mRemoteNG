@@ -514,13 +514,46 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
         }
 
+		private uint GetDesktopScaleFactor()
+        {
+            var scaleFactor = (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
+            switch (scaleFactor)
+            {
+                case 125:
+                    return 125;
+                case 150:
+                case 175:
+                    return 150;
+                case 200:
+                    return 200;
+            }
+            if (scaleFactor > 200)
+                return 200;
+            return 100;
+        }
+        private uint GetDeviceScaleFactor()
+        {
+            var scaleFactor = (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
+            switch (scaleFactor)
+            {
+                case 125:
+                case 150:
+                case 175:
+                    return 140;
+                case 200:
+                    return 180;
+            }
+            if (scaleFactor > 200)
+                return 180;
+            return 100;
+        }
+		
         private void SetResolution()
         {
             try
             {
-                var scaleFactor = (uint)_displayProperties.ResolutionScalingFactor.Width * 100;
-                SetExtendedProperty("DesktopScaleFactor", scaleFactor);
-                SetExtendedProperty("DeviceScaleFactor", (uint)100);
+                SetExtendedProperty("DesktopScaleFactor", GetDesktopScaleFactor());
+                SetExtendedProperty("DeviceScaleFactor", GetDeviceScaleFactor());
 
                 if (Force.HasFlag(ConnectionInfo.Force.Fullscreen))
                 {
