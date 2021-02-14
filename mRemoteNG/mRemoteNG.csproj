@@ -1646,6 +1646,16 @@
       <Isolated>False</Isolated>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AWSInterface\AWSInterface.csproj">
+      <Project>{3e3ec4eb-f6c1-4d1a-97a2-7bb2a7936fda}</Project>
+      <Name>AWSInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecretServerInterface\SecretServerInterface.csproj">
+      <Project>{cbeee1a0-b917-4f61-812b-85c4c15e80fc}</Project>
+      <Name>SecretServerInterface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>:: When passing paths to powershell scripts, check if the path ends with a backslash "\"
 :: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.

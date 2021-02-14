@@ -18,6 +18,10 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "mRemoteNGInsta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteNGSpecs", "mRemoteNGSpecs\mRemoteNGSpecs.csproj", "{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWSInterface", "AWSInterface\AWSInterface.csproj", "{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecretServerInterface", "SecretServerInterface\SecretServerInterface.csproj", "{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Portable|Any CPU = Debug Portable|Any CPU
@@ -118,6 +122,46 @@ Global
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release|Any CPU.ActiveCfg = Release|x86
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release|x86.ActiveCfg = Release|x86
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release|x86.Build.0 = Release|x86
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Debug Portable|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Debug Portable|Any CPU.Build.0 = Debug|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Debug Portable|x86.ActiveCfg = Debug|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Debug Portable|x86.Build.0 = Debug|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Debug|x86.Build.0 = Debug|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release Installer|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release Installer|Any CPU.Build.0 = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release Installer|x86.ActiveCfg = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release Installer|x86.Build.0 = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release Portable|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release Portable|Any CPU.Build.0 = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release Portable|x86.ActiveCfg = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release Portable|x86.Build.0 = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E3EC4EB-F6C1-4D1A-97A2-7BB2A7936FDA}.Release|x86.Build.0 = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Debug Portable|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Debug Portable|Any CPU.Build.0 = Debug|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Debug Portable|x86.ActiveCfg = Debug|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Debug Portable|x86.Build.0 = Debug|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Debug|x86.Build.0 = Debug|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release Installer|Any CPU.ActiveCfg = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release Installer|Any CPU.Build.0 = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release Installer|x86.ActiveCfg = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release Installer|x86.Build.0 = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release Portable|Any CPU.ActiveCfg = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release Portable|Any CPU.Build.0 = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release Portable|x86.ActiveCfg = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release Portable|x86.Build.0 = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release|x86.ActiveCfg = Release|Any CPU
+		{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
