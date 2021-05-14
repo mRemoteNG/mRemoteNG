@@ -56,7 +56,7 @@ Google Chrome is a freeware web browser developed by Google.
 
 `Internet Explorer <http://microsoft.com/ie>`_
 ==============================================
-Description
+Standard browser included with Windows installation.
 
 - Filename: C:\\Program Files\\Internet Explorer\\iexplore.exe
 - Arguments: %Hostname%
@@ -115,9 +115,19 @@ Create a new connection entry with the following information:
 - External Tool: COM Serial Port
 - Port: your desired COM port # here
 
-`Windows PowerShell (ISE) <https://msdn.microsoft.com/en-us/powershell/scripting/getting-started/fundamental/windows-powershell-integrated-scripting-environment--ise->`_
+`Windows PowerShell <https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/powershell>`_
 =========================================================================================================================================================================
 Windows PowerShell is a task-based command-line shell and scripting language designed especially for system administration.
+
+Running with suggested argument will open a PS session connected to a host. No prompt for credintials will popup.
+
+- Filename: %WINDIR%\system32\WindowsPowerShell\v1.0\PowerShell.exe
+- Arguments: -noexit $pw = \"%password%\" -replace '\^', ''; $password = ConvertTo-SecureString $pw -AsPlainText -Force; $Cred= New-Object System.Management.Automation.PSCredential (\"%username%\", $password); Enter-PSSession -ComputerName %hostname% -credential $Cred
+- Can integrate: No
+
+`Windows PowerShell (ISE) <https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/powershell_ise>`_
+=========================================================================================================================================================================
+Windows PowerShell Integrated Scripting Environment (ISE) is a graphical host application that enables you to read, write, run, debug, and test scripts and modules in a graphic-assisted environment.
 
 - Filename: %WINDIR%\\system32\\WindowsPowerShell\\v1.0\\PowerShell_ISE.exe
 - Arguments: args here
