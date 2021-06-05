@@ -1,3 +1,6 @@
+**NOTICE: This project is currently stalled and we are transitioning to a new maintainer. Please see [this stickied issue](https://github.com/mRemoteNG/mRemoteNG/issues/1949) for more details. Development help would be greatly appreciated.**
+
+<br/><br/>
 <p align="center">
   <img width="500" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/Tools/img/logo.png">
 </p>
