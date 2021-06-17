@@ -1850,7 +1850,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Verbindung testen</value>
   </data>
   <data name="_ExportToFile" xml:space="preserve">
-    <value>In Datei &amp;exportieren</value>
+    <value>In Datei &amp;exportieren...</value>
   </data>
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>Beim Importieren der Datei ist ein Fehler aufgetreten ("{0}").</value>
@@ -2100,5 +2100,68 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="ShowHideMenu" xml:space="preserve">
     <value>Verstecke/Zeige Menü</value>
+  </data>
+  <data name="WorkingDirColumnHeader" xml:space="preserve">
+    <value>Arbeitsverzeichnis</value>
+  </data>
+  <data name="WorkingDirectory" xml:space="preserve">
+    <value>Arbeitsverzeichnis:</value>
+  </data>
+  <data name="UseEnhancedMode" xml:space="preserve">
+    <value>Erweiterten Modus verwenden</value>
+  </data>
+  <data name="UnhandledExceptionOccured" xml:space="preserve">
+    <value>Eine unbehandelte Ausnahme ist aufgetreten</value>
+  </data>
+  <data name="ReconnectAllConnections" xml:space="preserve">
+    <value>Alle Verbindungen wieder verbinden</value>
+  </data>
+  <data name="QuickConnect" xml:space="preserve">
+    <value>Schnellverbindung</value>
+  </data>
+  <data name="SshOptions" xml:space="preserve">
+    <value>SSH-Optionen</value>
+  </data>
+  <data name="SshTunnel" xml:space="preserve">
+    <value>SSH-Tunnel</value>
+  </data>
+  <data name="MustBeBetween0And255" xml:space="preserve">
+    <value>Muss zwischen 0 und 255 liegen</value>
+  </data>
+  <data name="AutomaticReconnectError" xml:space="preserve">
+    <value>Beim Versuch, die Verbindung zum RDP-Host '{0}' wiederherzustellen, ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="CcNotInstalledProperly" xml:space="preserve">
+    <value>nicht richtig installiert</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>Beim Versuch, die Verbindungsauflösung auf den Host '{0}' zu ändern, ist ein Fehler aufgetreten</value>
+  </data>
+  <data name="ConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie alle Verbindungen bis auf "{0}" schließen wollen?</value>
+  </data>
+  <data name="CopyHostname" xml:space="preserve">
+    <value>Hostnamen kopieren</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="DisconnectOthers" xml:space="preserve">
+    <value>Alles außer dieser Verbindung trennen</value>
+  </data>
+  <data name="LockToolbars" xml:space="preserve">
+    <value>Position der Symbolleiste sperren</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Fehlermeldung</value>
+  </data>
+  <data name="IcaControlFailed" xml:space="preserve">
+    <value>Laden des ICA-Plugins fehlgeschlagen!</value>
+  </data>
+  <data name="IcaSetCredentialsFailed" xml:space="preserve">
+    <value>ICA SetCredentials fehlgeschlagen!</value>
+  </data>
+  <data name="IcaConnectionFailed" xml:space="preserve">
+    <value>Konnte keine neue ICA-Verbindung erstellen!</value>
   </data>
 </root>
