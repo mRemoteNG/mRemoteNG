@@ -518,7 +518,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             try
             {
-                var scaleFactor = (uint)_displayProperties.ResolutionScalingFactor.Width * 100;
+                var scaleFactor = (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
                 SetExtendedProperty("DesktopScaleFactor", scaleFactor);
                 SetExtendedProperty("DeviceScaleFactor", (uint)100);
 
