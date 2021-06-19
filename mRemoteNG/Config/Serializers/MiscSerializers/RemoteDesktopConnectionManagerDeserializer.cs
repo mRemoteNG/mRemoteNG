@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -183,7 +183,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             {
 				if (bool.TryParse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText, out var useConsole))
 					connectionInfo.UseConsoleSession = useConsole;
-                // ./startProgram
+                connectionInfo.StartProgram = connectionSettingsNode.SelectSingleNode("./startProgram")?.InnerText;
                 // ./workingDir
                 if (int.TryParse(connectionSettingsNode.SelectSingleNode("./port")?.InnerText, out var port))
 					connectionInfo.Port = port;

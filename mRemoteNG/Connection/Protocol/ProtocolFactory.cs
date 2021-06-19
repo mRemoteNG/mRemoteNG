@@ -51,7 +51,7 @@ namespace mRemoteNG.Connection.Protocol
                     return new IntegratedProgram();
             }
 
-            return default;
+            return default(ProtocolBase);
         }
     }
 }

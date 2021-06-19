@@ -72,5 +72,6 @@
         public TType UseEnhancedMode { get; set; }
         public TType SSHOptions { get; set; }
         public TType SSHTunnelConnectionName { get; set; }
+        public TType StartProgram { get; set; }
     }
 }

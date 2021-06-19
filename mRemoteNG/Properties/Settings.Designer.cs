@@ -3094,5 +3094,17 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultDisableCursorBlinking"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultStartProgram {
+            get {
+                return ((string)(this["ConDefaultStartProgram"]));
+            }
+            set {
+                this["ConDefaultStartProgram"] = value;
+            }
+        }
     }
 }

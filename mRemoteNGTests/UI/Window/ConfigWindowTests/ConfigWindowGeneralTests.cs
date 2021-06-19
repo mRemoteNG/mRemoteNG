@@ -294,7 +294,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSmartCards),
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
-						nameof(ConnectionInfo.RdpVersion)
+						nameof(ConnectionInfo.RdpVersion),
+						nameof(ConnectionInfo.StartProgram)
                     });
                     break;
                 case ProtocolType.VNC:

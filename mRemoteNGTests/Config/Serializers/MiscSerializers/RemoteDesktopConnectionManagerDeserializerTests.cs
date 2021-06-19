@@ -37,7 +37,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
         private const AuthenticationLevel ExpectedAuthLevel = AuthenticationLevel.AuthRequired;
-
+        private const string ExpectedStartProgram = "alternate shell";
 
         [OneTimeSetUp]
         public void OnetimeSetup()
@@ -321,6 +321,16 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         {
             var badFileContents = Resources.test_rdcman_noversion;
             Assert.That(() => _deserializer.Deserialize(badFileContents), Throws.TypeOf<FileFormatException>());
+        }
+
+        [Test]
+        public void StartProgramImported()
+        {
+            var rootNode = _connectionTreeModel.RootNodes.First();
+            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
+            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var connection = group1.Children.First();
+            Assert.That(connection.StartProgram, Is.EqualTo(ExpectedStartProgram));
         }
     }
 }
