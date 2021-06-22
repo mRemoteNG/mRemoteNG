@@ -90,7 +90,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="SpecFlow.NUnit.Runners">
-      <Version>3.8.14</Version>
+      <Version>3.9.8</Version>
     </PackageReference>
     <PackageReference Include="System.Memory">
       <Version>4.5.4</Version>
