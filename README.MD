@@ -1,4 +1,4 @@
-**NOTICE: This project is currently stalled and we are transitioning to a new maintainer. Please see [this stickied issue](https://github.com/mRemoteNG/mRemoteNG/issues/1949) for more details. Development help would be greatly appreciated.**
+**NOTICE: This project is currently transitув to a new maintainer. Development help would be greatly appreciated.**
 
 <br/><br/>
 <p align="center">
