@@ -1,4 +1,4 @@
-**NOTICE: This project is currently transitув to a new maintainer. Development help would be greatly appreciated.**
+**NOTICE: This project is currently transited to a new maintainer. Development help would be greatly appreciated.**
 
 <br/><br/>
 <p align="center">
