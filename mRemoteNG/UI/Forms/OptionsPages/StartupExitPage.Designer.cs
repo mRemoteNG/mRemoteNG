@@ -100,6 +100,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkStartMinimized.TabIndex = 3;
             this.chkStartMinimized.Text = "Start minimized";
             this.chkStartMinimized.UseVisualStyleBackColor = true;
+            this.chkStartMinimized.CheckedChanged += new System.EventHandler(this.chkStartMinimized_CheckedChanged);
             // 
             // chkStartFullScreen
             // 
@@ -112,6 +113,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkStartFullScreen.TabIndex = 4;
             this.chkStartFullScreen.Text = "Start Full Screen";
             this.chkStartFullScreen.UseVisualStyleBackColor = true;
+            this.chkStartFullScreen.CheckedChanged += new System.EventHandler(this.chkStartFullScreen_CheckedChanged);
             // 
             // StartupExitPage
             // 

@@ -50,5 +50,21 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkStartFullScreen.Checked = Settings.Default.StartFullScreen;
             ;
         }
+
+        private void chkStartFullScreen_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStartFullScreen.Checked && chkStartMinimized.Checked)
+            {
+                chkStartMinimized.Checked = false;
+            } 
+        }
+
+        private void chkStartMinimized_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStartMinimized.Checked && chkStartFullScreen.Checked)
+            {
+                chkStartFullScreen.Checked = false;
+            }
+        }
     }
 }

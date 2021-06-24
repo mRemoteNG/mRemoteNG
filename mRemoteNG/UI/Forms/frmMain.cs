@@ -241,6 +241,10 @@ namespace mRemoteNG.UI.Forms
                 if (Settings.Default.MinimizeToTray)
                     ShowInTaskbar = false;
             }
+            if (Settings.Default.StartFullScreen)
+            {
+                Fullscreen.Value = true;
+            }
 
             if (!Settings.Default.CreateEmptyPanelOnStartUp) return;
             var panelName = !string.IsNullOrEmpty(Settings.Default.StartUpPanelName)
