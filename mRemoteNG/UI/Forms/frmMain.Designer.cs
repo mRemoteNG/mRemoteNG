@@ -60,7 +60,7 @@
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
             this.pnlDock.Name = "pnlDock";
-            this.pnlDock.Size = new System.Drawing.Size(1129, 471);
+            this.pnlDock.Size = new System.Drawing.Size(1129, 496);
             this.pnlDock.TabIndex = 13;
             this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
             // 
@@ -78,7 +78,7 @@
             this.msMain.Location = new System.Drawing.Point(3, 50);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.msMain.Size = new System.Drawing.Size(184, 25);
+            this.msMain.Size = new System.Drawing.Size(303, 25);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
@@ -112,7 +112,7 @@
             this.toolsMenu.MainForm = null;
             this.toolsMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.toolsMenu.Name = "mMenTools";
-            this.toolsMenu.Size = new System.Drawing.Size(47, 19);
+            this.toolsMenu.Size = new System.Drawing.Size(46, 19);
             this.toolsMenu.Text = "&Tools";
             // 
             // helpMenu
@@ -134,7 +134,7 @@
             // tsContainer.ContentPanel
             // 
             this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1129, 471);
+            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1129, 496);
             this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsContainer.Location = new System.Drawing.Point(0, 0);
             this.tsContainer.Name = "tsContainer";
@@ -144,9 +144,9 @@
             // 
             // tsContainer.TopToolStripPanel
             // 
+            this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
             this.tsContainer.TopToolStripPanel.Controls.Add(this._quickConnectToolStrip);
             this.tsContainer.TopToolStripPanel.Controls.Add(this._multiSshToolStrip);
-            this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
             this.tsContainer.TopToolStripPanel.Controls.Add(this._externalToolsToolStrip);
             this.tsContainer.TopToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             // 
@@ -156,15 +156,15 @@
             this._quickConnectToolStrip.ConnectionInitiator = connectionInitiator1;
             this._quickConnectToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._quickConnectToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._quickConnectToolStrip.Location = new System.Drawing.Point(3, 0);
+            this._quickConnectToolStrip.Location = new System.Drawing.Point(114, 25);
             this._quickConnectToolStrip.Name = "_quickConnectToolStrip";
-            this._quickConnectToolStrip.Size = new System.Drawing.Size(364, 25);
+            this._quickConnectToolStrip.Size = new System.Drawing.Size(395, 25);
             this._quickConnectToolStrip.TabIndex = 18;
             // 
             // _multiSshToolStrip
             // 
             this._multiSshToolStrip.Dock = System.Windows.Forms.DockStyle.None;
-            this._multiSshToolStrip.Location = new System.Drawing.Point(3, 25);
+            this._multiSshToolStrip.Location = new System.Drawing.Point(3, 0);
             this._multiSshToolStrip.MinimumSize = new System.Drawing.Size(300, 0);
             this._multiSshToolStrip.Name = "_multiSshToolStrip";
             this._multiSshToolStrip.Size = new System.Drawing.Size(376, 25);
@@ -175,7 +175,7 @@
             this._externalToolsToolStrip.BackColor = System.Drawing.SystemColors.Control;
             this._externalToolsToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._externalToolsToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._externalToolsToolStrip.Location = new System.Drawing.Point(3, 75);
+            this._externalToolsToolStrip.Location = new System.Drawing.Point(3, 25);
             this._externalToolsToolStrip.Name = "_externalToolsToolStrip";
             this._externalToolsToolStrip.Size = new System.Drawing.Size(111, 25);
             this._externalToolsToolStrip.TabIndex = 17;
@@ -201,6 +201,7 @@
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "FrmMain";
             this.Opacity = 0D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);

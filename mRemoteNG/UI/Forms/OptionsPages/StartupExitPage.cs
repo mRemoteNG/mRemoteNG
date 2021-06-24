@@ -38,6 +38,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
             Settings.Default.SingleInstance = chkSingleInstance.Checked;
             Settings.Default.StartMinimized = chkStartMinimized.Checked;
+            Settings.Default.StartFullScreen = chkStartFullScreen.Checked;
         }
 
         private void StartupExitPage_Load(object sender, EventArgs e)
@@ -46,6 +47,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkReconnectOnStart.Checked = Settings.Default.OpenConsFromLastSession;
             chkSingleInstance.Checked = Settings.Default.SingleInstance;
             chkStartMinimized.Checked = Settings.Default.StartMinimized;
+            chkStartFullScreen.Checked = Settings.Default.StartFullScreen;
+            ;
         }
     }
 }

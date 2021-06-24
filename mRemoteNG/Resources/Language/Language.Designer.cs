@@ -5849,7 +5849,18 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("StartMinimized", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Start minimized.
+        /// </summary>
+        internal static string StartFullScreen
+        {
+            get
+            {
+                return ResourceManager.GetString("StartFullScreen", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Startup/Exit.
         /// </summary>
