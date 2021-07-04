@@ -70,6 +70,7 @@ For a detailed feature list and general usage support, refer to the [Documentati
 
 ### Supported Operating Systems
 
+- [Windows 11](https://en.wikipedia.org/wiki/Windows_11)
 - [Windows 10](https://en.wikipedia.org/wiki/Windows_10)
 - [Windows 8.1](https://en.wikipedia.org/wiki/Windows_8.1)
 - [Windows Server 2019](https://en.wikipedia.org/wiki/Windows_Server_2019)
