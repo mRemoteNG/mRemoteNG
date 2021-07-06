@@ -8,6 +8,9 @@
     <Version>1.77.2</Version>
     <Description>Multi-protocol remote connections manager</Description>
     <Copyright>2020 mRemoteNG Dev Team, 2010-2013 Riley McArdle, 2007-2009 Felix Deimel</Copyright>
+    <PackageLicenseFile>COPYING.TXT</PackageLicenseFile>
+    <PackageProjectUrl>https://mremoteng.org/</PackageProjectUrl>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,7 +29,7 @@
     <PackageReference Include="BouncyCastle" Version="1.8.9" />
     <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="CefSharp.Common" Version="91.1.211" />
-    <PackageReference Include="CefSharp.WinForms" Version="91.1.211" />
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="91.1.211" />
     <PackageReference Include="ConsoleControl" Version="1.3.0" />
     <PackageReference Include="Cucumber.Messages" Version="16.0.1" />
     <PackageReference Include="DockPanelSuite" Version="3.0.6" />
@@ -42,9 +45,11 @@
     <PackageReference Include="OpenCover" Version="4.7.1221" />
     <PackageReference Include="Renci.SshNet.Async" Version="1.4.0" />
     <PackageReference Include="ReportGenerator" Version="4.8.11" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
     <PackageReference Include="System.DirectoryServices" Version="5.0.0" />
     <PackageReference Include="System.Management" Version="5.0.0" />
+    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
     <PackageReference Include="VncSharp" Version="1.0.7" />
   </ItemGroup>
 
@@ -52,6 +57,25 @@
     <Reference Include="AxMSTSCLib">
       <HintPath>..\..\..\..\Program Files (x86)\Common Files\Microsoft Shared\Windows Simulator\16.0\AxMSTSCLib.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="..\COPYING.TXT">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
