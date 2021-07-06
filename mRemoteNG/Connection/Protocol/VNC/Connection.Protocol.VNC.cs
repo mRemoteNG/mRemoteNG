@@ -12,24 +12,8 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Connection.Protocol.VNC
 {
-    public class ProtocolVNC : ProtocolBase, ISupportsViewOnly
+    public class ProtocolVNC : ProtocolBase
     {
-        #region Properties
-
-        public bool SmartSize
-        {
-            get => _vnc.Scaled;
-            set => _vnc.Scaled = value;
-        }
-
-        public bool ViewOnly
-        {
-            get => _vnc.ViewOnly;
-            set => _vnc.ViewOnly = value;
-        }
-
-        #endregion
-
         #region Private Declarations
 
         private VncSharp.RemoteDesktop _vnc;
@@ -123,36 +107,6 @@ namespace mRemoteNG.Connection.Protocol.VNC
                                                     ex.Message, true);
             }
         }
-
-        public void ToggleSmartSize()
-        {
-            try
-            {
-                SmartSize = !SmartSize;
-                RefreshScreen();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncToggleSmartSizeFailed + Environment.NewLine +
-                                                    ex.Message, true);
-            }
-        }
-
-        public void ToggleViewOnly()
-        {
-            try
-            {
-                ViewOnly = !ViewOnly;
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncToggleViewOnlyFailed + Environment.NewLine +
-                                                    ex.Message, true);
-            }
-        }
-
 
         public void StartChat()
         {
