@@ -13,6 +13,18 @@
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Optimize>true</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <COMReference Include="MSTSCLib">
       <WrapperTool>tlbimp</WrapperTool>
@@ -28,6 +40,7 @@
   <ItemGroup>
     <PackageReference Include="BouncyCastle" Version="1.8.9" />
     <PackageReference Include="Castle.Core" Version="4.4.1" />
+    <PackageReference Include="cef.redist.x64" Version="91.1.21" />
     <PackageReference Include="CefSharp.Common" Version="91.1.211" />
     <PackageReference Include="CefSharp.WinForms.NETCore" Version="91.1.211" />
     <PackageReference Include="ConsoleControl" Version="1.3.0" />
@@ -77,5 +90,13 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="echo $(ConfigurationName) &gt; buildenv.tmp" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command=":: When passing paths to powershell scripts, check if the path ends with a backslash &quot;\&quot;&#xD;&#xA;:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.&#xD;&#xA;&#xD;&#xA;powershell -noprofile -command &quot;sleep 2&quot;&#xD;&#xA;&#xD;&#xA;set /p buildenv=&lt;buildenv.tmp&#xD;&#xA;&#xD;&#xA;:: Manual builds, set the cert password and uncomment below.&#xD;&#xA;:: IF &quot;%25APPVEYOR_BUILD_FOLDER&quot;==&quot;&quot; ( set cert_pwd= )&#xD;&#xA;&#xD;&#xA;:: Call the post build powershell script&#xD;&#xA;powershell.exe -ExecutionPolicy Bypass -File &quot;$(SolutionDir)Tools\postbuild_mremoteng.ps1&quot; -SolutionDir &quot;$(SolutionDir)\&quot; -TargetDir &quot;$(TargetDir)\&quot; -TargetFileName &quot;mRemoteNG.exe&quot; -ConfigurationName &quot;%25buildenv%25&quot; -CertificatePath &quot;$(CertPath)&quot; -CertificatePassword &quot;$(CertPassword)&quot; -ExcludeFromSigning &quot;PuTTYNG.exe&quot;" />
+  </Target>
 
 </Project>
