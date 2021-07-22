@@ -151,13 +151,13 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenInfoHelp_Click(object sender, EventArgs e) => Windows.Show(WindowType.Help);
 
-        private void mMenInfoForum_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlForum);
+        private void mMenInfoForum_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlForum);
 
-        private void mMenInfoBugReport_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlBugs);
+        private void mMenInfoBugReport_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlBugs);
 
-        private void mMenInfoWebsite_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlHome);
+        private void mMenInfoWebsite_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlHome);
 
-        private void mMenInfoDonate_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlDonate);
+        private void mMenInfoDonate_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlDonate);
 
         private void mMenInfoAbout_Click(object sender, EventArgs e) => FrmAbout.Instance.Show();
 
