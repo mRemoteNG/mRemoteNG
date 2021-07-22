@@ -102,8 +102,6 @@ You will need to compile it yourself using Visual Studio.
 * [Microsoft .NET Framework 4.0](https://www.microsoft.com/en-us/download/details.aspx?id=17851)
 * Microsoft Terminal Service Client 6.0 or later
   * Needed if you use RDP. mstscax.dll and/or msrdp.ocx be registered.
-* [Citrix ICA Client](https://www.citrix.com/downloads/citrix-receiver.html)
-  * Needed if you use ICA. wfica.ocx must be registered
 
 ### Download
 
