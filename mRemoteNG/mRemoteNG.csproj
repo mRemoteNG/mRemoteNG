@@ -37,11 +37,12 @@
     <PackageReference Include="CefSharp.WinForms.NETCore" Version="91.1.211" />
     <PackageReference Include="ConsoleControl" Version="1.3.0" />
     <PackageReference Include="Cucumber.Messages" Version="16.0.1" />
-    <PackageReference Include="DockPanelSuite" Version="3.0.6" />
-    <PackageReference Include="DockPanelSuite.ThemeVS2003" Version="3.0.6" />
-    <PackageReference Include="DockPanelSuite.ThemeVS2012" Version="3.0.6" />
-    <PackageReference Include="DockPanelSuite.ThemeVS2013" Version="3.0.6" />
-    <PackageReference Include="DockPanelSuite.ThemeVS2015" Version="3.0.6" />
+    <PackageReference Include="DockPanelSuite" Version="3.1.0-beta7" />
+    <PackageReference Include="DockPanelSuite.ThemeVS2003" Version="3.1.0-beta7" />
+    <PackageReference Include="DockPanelSuite.ThemeVS2005" Version="3.1.0-beta7" />
+    <PackageReference Include="DockPanelSuite.ThemeVS2012" Version="3.1.0-beta7" />
+    <PackageReference Include="DockPanelSuite.ThemeVS2013" Version="3.1.0-beta7" />
+    <PackageReference Include="DockPanelSuite.ThemeVS2015" Version="3.1.0-beta7" />
     <PackageReference Include="log4net" Version="2.0.12" />
     <PackageReference Include="MySql.Data" Version="8.0.25" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
