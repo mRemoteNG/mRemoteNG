@@ -11,7 +11,6 @@
         Update = 9,
         SSHTransfer = 10,
         ActiveDirectoryImport = 11,
-        Help = 12,
         ExternalApps = 13,
         PortScan = 14,
         UltraVNCSC = 16,
