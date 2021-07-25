@@ -9,7 +9,6 @@ namespace mRemoteNG.UI.Window
     {
         internal ContextMenuStrip cmenTab;
         private ToolStripMenuItem cmenTabFullscreen;
-        private ToolStripMenuItem cmenTabScreenshot;
         private ToolStripMenuItem cmenTabTransferFile;
         private ToolStripMenuItem cmenTabSendSpecialKeys;
         private ToolStripSeparator cmenTabSep1;
@@ -53,7 +52,6 @@ namespace mRemoteNG.UI.Window
             this.cmenTabSendSpecialKeysCtrlAltDel = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabSendSpecialKeysCtrlEsc = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabSep2 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmenTabScreenshot = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabPuttySettings = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabExternalApps = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTab.SuspendLayout();
@@ -88,7 +86,6 @@ namespace mRemoteNG.UI.Window
             this.cmenTabTransferFile,
             this.cmenTabSendSpecialKeys,
             this.cmenTabSep2,
-            this.cmenTabScreenshot,
             this.cmenTabPuttySettings,
             this.cmenTabExternalApps});
             this.cmenTab.Name = "cmenTab";
@@ -211,13 +208,6 @@ namespace mRemoteNG.UI.Window
             // 
             this.cmenTabSep2.Name = "cmenTabSep2";
             this.cmenTabSep2.Size = new System.Drawing.Size(227, 6);
-            // 
-            // cmenTabScreenshot
-            // 
-            this.cmenTabScreenshot.Image = global::mRemoteNG.Properties.Resources.Screenshot_Add;
-            this.cmenTabScreenshot.Name = "cmenTabScreenshot";
-            this.cmenTabScreenshot.Size = new System.Drawing.Size(230, 22);
-            this.cmenTabScreenshot.Text = "Screenshot";
             // 
             // cmenTabPuttySettings
             // 
