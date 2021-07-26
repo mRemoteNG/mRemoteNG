@@ -6,6 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <Platforms>AnyCPU;x64</Platforms>
+
+    <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

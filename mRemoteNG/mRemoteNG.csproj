@@ -11,6 +11,7 @@
     <PackageLicenseFile>COPYING.TXT</PackageLicenseFile>
     <PackageProjectUrl>https://mremoteng.org/</PackageProjectUrl>
     <Platforms>AnyCPU;ARM64;x64</Platforms>
+    <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

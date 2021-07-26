@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <Platforms>AnyCPU;x64</Platforms>
+    <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
