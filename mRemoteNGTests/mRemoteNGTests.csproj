@@ -33,4 +33,10 @@
     <ProjectReference Include="..\mRemoteNG\mRemoteNG.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
 </Project>
