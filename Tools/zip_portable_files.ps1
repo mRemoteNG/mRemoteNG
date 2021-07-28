@@ -33,7 +33,7 @@ $SEVENZIP="$($SolutionDir)Tools\7zip\7za.exe"
 if ($ConfigurationName -eq "Release Portable") {
     Write-Output "Packaging Release Portable ZIP"
    
-    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteNG\bin\$($ConfigurationName)\mRemoteNG.exe"
+    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteNG\bin\$($ConfigurationName)\net5.0-windows\mRemoteNG.exe"
 
     Write-Output "Version is $($version)"
 
