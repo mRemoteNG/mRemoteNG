@@ -42,15 +42,21 @@ Global
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Debug|x64.ActiveCfg = Debug|x64
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Debug|x64.Build.0 = Debug|x64
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release Installer|x64.ActiveCfg = Release Installer|x64
+		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release Installer|x64.Build.0 = Release Installer|x64
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release Portable|x64.ActiveCfg = Release Portable|x64
+		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release Portable|x64.Build.0 = Release Portable|x64
 		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release|x64.ActiveCfg = Release|x64
+		{1453B37F-8621-499E-B0B2-6091F76DC0BB}.Release|x64.Build.0 = Release|x64
 		{5423D985-CB48-4344-B47F-E8C6D60C8B04}.Debug Portable|x64.ActiveCfg = Debug Portable|x64
+		{5423D985-CB48-4344-B47F-E8C6D60C8B04}.Debug Portable|x64.Build.0 = Debug Portable|x64
 		{5423D985-CB48-4344-B47F-E8C6D60C8B04}.Debug|x64.ActiveCfg = Debug|x64
 		{5423D985-CB48-4344-B47F-E8C6D60C8B04}.Release Installer|x64.ActiveCfg = Release Installer|x64
 		{5423D985-CB48-4344-B47F-E8C6D60C8B04}.Release Installer|x64.Build.0 = Release Installer|x64
 		{5423D985-CB48-4344-B47F-E8C6D60C8B04}.Release Portable|x64.ActiveCfg = Release Portable|x64
 		{5423D985-CB48-4344-B47F-E8C6D60C8B04}.Release|x64.ActiveCfg = Release|x64
+		{5423D985-CB48-4344-B47F-E8C6D60C8B04}.Release|x64.Build.0 = Release|x64
 		{F0168B9F-6815-40DF-BA53-46CEE7683B68}.Debug Portable|x64.ActiveCfg = Debug Portable|x86
+		{F0168B9F-6815-40DF-BA53-46CEE7683B68}.Debug Portable|x64.Build.0 = Debug Portable|x86
 		{F0168B9F-6815-40DF-BA53-46CEE7683B68}.Debug|x64.ActiveCfg = Debug|x86
 		{F0168B9F-6815-40DF-BA53-46CEE7683B68}.Release Installer|x64.ActiveCfg = Debug Portable|x86
 		{F0168B9F-6815-40DF-BA53-46CEE7683B68}.Release Installer|x64.Build.0 = Debug Portable|x86
@@ -59,9 +65,10 @@ Global
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Debug Portable|x64.ActiveCfg = Debug Portable|x64
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Debug Portable|x64.Build.0 = Debug Portable|x64
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Debug|x64.ActiveCfg = Debug|x64
-		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Debug|x64.Build.0 = Debug|x64
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release Installer|x64.ActiveCfg = Release Installer|x64
+		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release Installer|x64.Build.0 = Release Installer|x64
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release Portable|x64.ActiveCfg = Release Portable|x64
+		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release Portable|x64.Build.0 = Release Portable|x64
 		{16AA21E2-D6B7-427D-AB7D-AA8C611B724E}.Release|x64.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
