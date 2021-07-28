@@ -47,7 +47,7 @@ if ($ConfigurationName -eq "Release Portable") {
 
     #Write-Output "$($SolutionDir)mRemoteNG\bin\$ConfigurationName" 
     #Write-Output "$($SolutionDir)mRemoteNG\bin\package"
-    Copy-Item "$($SolutionDir)mRemoteNG\bin\$ConfigurationName\*" -Destination $tempFolderPath -Recurse  -Force
+    Copy-Item "$($SolutionDir)mRemoteNG\bin\$ConfigurationName\net5.0-windows\*" -Destination $tempFolderPath -Recurse  -Force
     # Delete any PDB files that accidentally get copied into the temp folder
     Get-ChildItem -Path $tempFolderPath -Filter "*.pdb" | Remove-Item
     Copy-Item "$($SolutionDir)*.txt" -Destination $tempFolderPath
