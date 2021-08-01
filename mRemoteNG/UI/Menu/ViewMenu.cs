@@ -26,7 +26,6 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenViewMultiSshToolbar;
         private ToolStripMenuItem _mMenViewResetLayout;
         private ToolStripMenuItem _mMenViewLockToolbars;
-        private ToolStripSeparator _toolStripSeparator1;
         private readonly PanelAdder _panelAdder;
 
 
@@ -60,24 +59,22 @@ namespace mRemoteNG.UI.Menu
             _mMenViewExtAppsToolbar = new ToolStripMenuItem();
             _mMenViewMultiSshToolbar = new ToolStripMenuItem();
             _mMenViewFullscreen = new ToolStripMenuItem();
-            _toolStripSeparator1 = new ToolStripSeparator();
 
             // 
             // mMenView
             // 
             DropDownItems.AddRange(new ToolStripItem[]
             {
-                _mMenViewAddConnectionPanel,
-                _mMenViewConnectionPanels,
-                _mMenViewSep1,
                 _mMenViewConnections,
                 _mMenViewConfig,
                 _mMenViewErrorsAndInfos,
                 _mMenViewQuickConnectToolbar,
                 _mMenViewExtAppsToolbar,
                 _mMenViewMultiSshToolbar,
-                _toolStripSeparator1,
+                _mMenViewSep1,
                 _mMenReconnectAll,
+                _mMenViewAddConnectionPanel,
+                _mMenViewConnectionPanels,
                 _mMenViewResetLayout,
                 _mMenViewLockToolbars,
                 _mMenViewSep2,
@@ -142,11 +139,6 @@ namespace mRemoteNG.UI.Menu
             _mMenViewErrorsAndInfos.Size = new System.Drawing.Size(228, 22);
             _mMenViewErrorsAndInfos.Text = Language.Notifications;
             _mMenViewErrorsAndInfos.Click += mMenViewErrorsAndInfos_Click;
-            // 
-            // ToolStripSeparator1
-            // 
-            _toolStripSeparator1.Name = "ToolStripSeparator1";
-            _toolStripSeparator1.Size = new System.Drawing.Size(225, 6);
             // 
             // mMenViewResetLayout
             // 
@@ -239,7 +231,7 @@ namespace mRemoteNG.UI.Menu
                 _mMenViewConnectionPanels.DropDownItems.Add(tItem);
             }
 
-            _mMenViewConnectionPanels.Enabled = _mMenViewConnectionPanels.DropDownItems.Count > 0;
+            _mMenViewConnectionPanels.Visible = _mMenViewConnectionPanels.DropDownItems.Count > 0;
         }
 
         private void ConnectionPanelMenuItem_Click(object sender, EventArgs e)
