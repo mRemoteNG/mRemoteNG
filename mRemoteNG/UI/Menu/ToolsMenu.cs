@@ -27,8 +27,6 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsUvncsc = new ToolStripMenuItem();
             _mMenToolsExternalApps = new ToolStripMenuItem();
             _mMenToolsPortScan = new ToolStripMenuItem();
-            _mMenToolsSep1 = new ToolStripSeparator();
-            _mMenToolsOptions = new ToolStripMenuItem();
             // 
             // mMenTools
             // 
@@ -37,9 +35,7 @@ namespace mRemoteNG.UI.Menu
                 _mMenToolsSshTransfer,
                 _mMenToolsUvncsc,
                 _mMenToolsExternalApps,
-                _mMenToolsPortScan,
-                _mMenToolsSep1,
-                _mMenToolsOptions
+                _mMenToolsPortScan
             });
             Name = "mMenTools";
             Size = new System.Drawing.Size(48, 20);
@@ -77,19 +73,6 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsPortScan.Size = new System.Drawing.Size(184, 22);
             _mMenToolsPortScan.Text = Language.PortScan;
             _mMenToolsPortScan.Click += mMenToolsPortScan_Click;
-            // 
-            // mMenToolsSep1
-            // 
-            _mMenToolsSep1.Name = "mMenToolsSep1";
-            _mMenToolsSep1.Size = new System.Drawing.Size(181, 6);
-            // 
-            // mMenToolsOptions
-            // 
-            _mMenToolsOptions.Image = Properties.Resources.Options;
-            _mMenToolsOptions.Name = "mMenToolsOptions";
-            _mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
-            _mMenToolsOptions.Text = Language.Options;
-            _mMenToolsOptions.Click += mMenToolsOptions_Click;
         }
 
         public void ApplyLanguage()
@@ -98,7 +81,6 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsSshTransfer.Text = Language.SshFileTransfer;
             _mMenToolsExternalApps.Text = Language.ExternalTool;
             _mMenToolsPortScan.Text = Language.PortScan;
-            _mMenToolsOptions.Text = Language.Options;
         }
 
         #region Tools
