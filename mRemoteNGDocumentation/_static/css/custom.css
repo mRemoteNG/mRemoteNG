@@ -1,0 +1,46 @@
+
+body {
+  --themecolor: #4F8AFF;
+  color: var(--themecolor);
+}
+
+.wy-nav-content {
+  max-width: none;
+  background-color: #E9ECEF;
+}
+
+.wy-side-nav-search {
+  background-color: var(--themecolor);
+}
+
+.wy-nav-top {
+  background-color: var(--themecolor);
+}
+
+.caption-text {
+  color: var(--themecolor);
+}
+
+.reference_internal {
+  color: var(--themecolor);
+}
+
+a:link {
+  color: var(--themecolor);
+}
+
+a:visited {
+  color: var(--themecolor);
+}
+
+a:hover {
+  color: var(--themecolor);
+}
+
+a:active {
+  color: var(--themecolor);
+}
+
+a {
+  color: var(--themecolor);
+}
