@@ -240,21 +240,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Ο ελεγχος πέτυχε!</value>
   </data>
-  <data name="strCcEOLFailed" xml:space="preserve">
-    <value>Η δυνατότητα (RDP) συνεδρίες προϋποθέτει ότι έχετε μια εγγεγραμμένο αντίγραφο του eolwtscom.dll στο σύστημά σας. mRemoteNG πλοία με αυτό το στοιχείο αλλά θα δεν εγγραφείτε αυτόματα εκτός αν η εκτέλεση του πακέτου εγκατάστασης. Να εγγραφείτε δεν με μη αυτόματο τρόπο αυτό: Ανοίξτε στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (όπου c:\Program Files\mRemoteNG\ είναι η διαδρομή προς την εγκατάσταση mRemoteNG). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε τη δυνατότητα συνεδρίες (RDP) στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcEOLOK" xml:space="preserve">
-    <value>Το EOLWTSCOM βρέθηκε και φαίνεται να έχει καταχωρηθεί σωστά.</value>
-  </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Για να χρησιμοποιήσετε το μηχανισμό απόδοσης Gecko πρέπει να έχετε XULrunner 1.8.1.x και ο δρόμος για την εγκατάσταση ορίστε στις επιλογές σας. Μπορείτε να κατεβάσετε XULrunner 1.8.1.3 εδώ: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ όταν ολοκληρώσετε τη λήψη κάντε εξαγωγή του πακέτου για την πορεία της επιλογής σας. Στη συνέχεια, στο mRemoteNG πηγαίνετε στο εργαλεία - επιλογές - προηγμένες και πληκτρολογήσει τη σωστή διαδρομή στο πεδίο διαδρομή XULrunner. Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή χρησιμοποιούν την μηχανή Gecko στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>Το GeckoFx βρέθηκε και φαίνεται να έχει εγκατασταθεί σωστά.</value>
-  </data>
-  <data name="strCcNotInstalledProperly" xml:space="preserve">
-    <value>δεν έχει εγκατασταθεί σωστά</value>
-  </data>
   <data name="ConnectInFullscreen" xml:space="preserve">
     <value>Σύνδεση σε λειτουργία πλήρους οθόνης</value>
   </data>

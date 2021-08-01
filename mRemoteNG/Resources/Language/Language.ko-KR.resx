@@ -249,16 +249,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
 		<value>검사 성공!</value>
 	</data>
-  <data name="CcICAFailed" xml:space="preserve">
-		<value>ICA를 사용하려면 XenDesktop Online Plugin이 설치되어 있고 wfica.ocx 라이브러리가 등록되어 있어야합니다. 클라이언트는 http://www.citrix.com/download/에서 다운로드 할 수 있습니다.
-XenDesktop Online Plugin이 설치되어 있고 검사가 여전히 실패하면 wfica.ocx를 수동으로 등록 해보십시오.
-이렇게하려면 실행 대화 상자 (시작 - 실행)를 열고 다음을 입력하십시오. regsvr32 "c : ₩ Program Files ₩ Citrix ₩ ICA Client ₩ wfica.ocx"(여기서 c : \ Program Files \ Citrix \ ICA Client \는 XenDesktop Online Plugin 설치 경로).
-그래도이 수표를 통과하거나 mRemoteNG에서 ICA를 사용할 수 없다면 mRemoteNG 포럼 (http://forum.mremoteng.org/)을 참조하십시오.</value>
-	</data>
-  <data name="CcICAOK" xml:space="preserve">
-		<value>모든 ICA 구성 요소가 발견되어 제대로 등록 된 것으로 보입니다.
-Citrix ICA 클라이언트 제어 버전 {0}</value>
-	</data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
 		<value>제대로 설치가 되어 있지 않습니다.</value>
 	</data>
@@ -369,9 +359,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
 		<value>비활성으로 인해 RDP 세션 연결이 끊어진 후 알림 수신 여부 선택</value>
-	</data>
-  <data name="RdpAlertIdleTimeout" xml:space="preserve">
-		<value>유휴 연결 끊김 경고</value>
 	</data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
 		<value>비밀번호는 {0} 이상의 문자를 포함해야합니다 : {1}</value>
@@ -578,9 +565,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
 		<value>FilteredPropertyGrid에서의 ToolStrip 컨트롤을 찾을 수 없습니다.</value>
 	</data>
-  <data name="InstalledVersion" xml:space="preserve">
-		<value>설치된 버전</value>
-	</data>
   <data name="Detect" xml:space="preserve">
 		<value>검색</value>
 	</data>
@@ -604,21 +588,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
 		<value>빈 사용자 이름, 비밀번호 또는 도메인 필드의 경우 다음을 사용 :</value>
-	</data>
-  <data name="Enc128Bit" xml:space="preserve">
-		<value>128 비트</value>
-	</data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-		<value>128 비트 (로그온 만)</value>
-	</data>
-  <data name="Enc40Bit" xml:space="preserve">
-		<value>40 비트</value>
-	</data>
-  <data name="Enc56Bit" xml:space="preserve">
-		<value>56 비트</value>
-	</data>
-  <data name="Basic" xml:space="preserve">
-		<value>기본</value>
 	</data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
 		<value>연결 파일을 완전히 암호화</value>
@@ -770,27 +739,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
 		<value>HTTP Props 설정에 실패!</value>
 	</data>
-  <data name="ICA" xml:space="preserve">
-		<value>ICA</value>
-	</data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-		<value>새 ICA 연결을 생성할 수 없습니다.</value>
-	</data>
-  <data name="IcaControlFailed" xml:space="preserve">
-		<value>ICA 플러그 인을 로드하지 못 했습니다!</value>
-	</data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-		<value>ICA SetCredentials failed!</value>
-	</data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-		<value>ICA Set Event Handlers Failed!</value>
-	</data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-		<value>ICA Set Props Failed!</value>
-	</data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-		<value>ICA Set Resolution Failed!</value>
-	</data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
 		<value>"빠른"접두어를 추가하여 빠른 연결 탭을 확인하십시오.</value>
 	</data>
@@ -799,9 +747,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="ImportFileFailedContent" xml:space="preserve">
 		<value>"{0}"파일을 가져 오는 중 오류가 발생했습니다.</value>
-	</data>
-  <data name="ImportFailed" xml:space="preserve">
-		<value>가져 오기 실패</value>
 	</data>
   <data name="ImportFromFile" xml:space="preserve">
 		<value>파일에서 가져 오기(&amp;F) ...</value>
@@ -838,9 +783,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="ClosingConnections" xml:space="preserve">
 		<value>연결을 닫을 때 :</value>
-	</data>
-  <data name="_Connect" xml:space="preserve">
-		<value>연결(&amp;C)</value>
 	</data>
   <data name="DisplayName" xml:space="preserve">
 		<value>표시 이름</value>
@@ -914,9 +856,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="ConnectionPanels" xml:space="preserve">
 		<value>연결 패널</value>
 	</data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-		<value>연결 및 구성</value>
-	</data>
   <data name="Copy" xml:space="preserve">
 		<value>복사</value>
 	</data>
@@ -926,23 +865,11 @@ VncSharp 제어 버전 {0}</value>
   <data name="CtrlEsc" xml:space="preserve">
 		<value>Ctrl-Esc</value>
 	</data>
-  <data name="DeleteConnection" xml:space="preserve">
-		<value>연결 삭제 ...</value>
-	</data>
   <data name="DeleteExternalTool" xml:space="preserve">
 		<value>외부 도구를 삭제 ...</value>
 	</data>
-  <data name="DeleteFolder" xml:space="preserve">
-		<value>폴더 삭제 ...</value>
-	</data>
   <data name="Donate" xml:space="preserve">
 		<value>기부</value>
-	</data>
-  <data name="DuplicateConnection" xml:space="preserve">
-		<value>중복 연결</value>
-	</data>
-  <data name="DuplicateFolder" xml:space="preserve">
-		<value>중복 폴더</value>
 	</data>
   <data name="DuplicateTab" xml:space="preserve">
 		<value>중복 탭</value>
@@ -961,9 +888,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="HelpContents" xml:space="preserve">
 		<value>mRemoteNG 도움말</value>
-	</data>
-  <data name="JumpTo" xml:space="preserve">
-		<value>바로 가기</value>
 	</data>
   <data name="LaunchExternalTool" xml:space="preserve">
 		<value>외부 도구 실행</value>
@@ -1000,12 +924,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="RefreshScreen" xml:space="preserve">
 		<value>화면 새로 고침 (VNC)</value>
-	</data>
-  <data name="RenameConnection" xml:space="preserve">
-		<value>연결 이름 바꾸기</value>
-	</data>
-  <data name="RenameFolder" xml:space="preserve">
-		<value>폴더 이름 바꾸기</value>
 	</data>
   <data name="RenameTab" xml:space="preserve">
 		<value>탭 이름 바꾸기</value>
@@ -1200,9 +1118,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
 		<value>사용할 인코딩 모드를 선택하십시오.</value>
 	</data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-		<value>원격 호스트의 암호화 강도를 선택하십시오.</value>
-	</data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
 		<value>시작할 외부 도구를 선택하십시오.</value>
 	</data>
@@ -1353,9 +1268,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="Encoding" xml:space="preserve">
 		<value>인코딩</value>
 	</data>
-  <data name="EncryptionStrength" xml:space="preserve">
-		<value>암호화 강도</value>
-	</data>
   <data name="ExternalTool" xml:space="preserve">
 		<value>외부 도구</value>
 	</data>
@@ -1415,9 +1327,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="Printers" xml:space="preserve">
 		<value>프린터</value>
-	</data>
-  <data name="SmartCards" xml:space="preserve">
-		<value>스마트 카드</value>
 	</data>
   <data name="Sounds" xml:space="preserve">
 		<value>사운드</value>
@@ -1650,9 +1559,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
 		<value>RDP 해상도 설정 실패!</value>
 	</data>
-  <data name="RdpSmartSize" xml:space="preserve">
-		<value>스마트 사이즈</value>
-	</data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
 		<value>컴퓨터 가져 오기</value>
 	</data>
@@ -1842,9 +1748,6 @@ VncSharp 제어 버전 {0}</value>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
 		<value>업데이트 정보를 다운로드 할 수 없습니다.</value>
 	</data>
-  <data name="CheckingForUpdates" xml:space="preserve">
-		<value>업데이트 확인 중 ...</value>
-	</data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
 		<value>다운로드 완료!
 mRemoteNG는 이제 종료되고 설치로 시작됩니다.</value>
@@ -1920,9 +1823,6 @@ mRemoteNG는 이제 종료되고 설치로 시작됩니다.</value>
 	</data>
   <data name="Yes" xml:space="preserve">
 		<value>예</value>
-	</data>
-  <data name="ReconnectAll" xml:space="preserve">
-		<value>모든 연결을 다시 연결</value>
 	</data>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">
 		<value>RDP 연결 시간 초과</value>

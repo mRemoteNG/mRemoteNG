@@ -249,16 +249,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Kontrola úspěšná!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>Funkcionalita ICA vyžaduje, aby byl nainstalován XenDesktop Online Plugin a knihovna wfica.ocx byla zaregistrována. Klienta můžete stáhnout zde: http://www.citrix.com/download/
-Pokud máte XenDesktop Online Plugin nainstalován a kontrola stále selhává, pokuste se zaregistrovat wfica.ocx ručně.
-K tomu otevřete dialog "Spustit" (Start-&gt;Spustit) a zadejte následující text: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (kde  c:\Program Files\Citrix\ICA Client\ je cesta ke složce s Vaší instalací XenDesktop Online Plugin).
-Pokud tato kontrola stále selhává nebo nejste schopni používat funkcionalitu ICA v mRemoteNG, prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Všechny komponenty ICA byly nalezeny a zdají se být řádně zaregistrovány.
-Citrix ICA Client Control verze {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>není správně instalováno</value>
   </data>
@@ -476,9 +466,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Nepovedlo se najít ovládací prvek ToolStrip control v objektu FilteredPropertyGrid.</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Instalovaná verze</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Detekovat</value>
   </data>
@@ -502,21 +489,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Pro prázdná políčka Login, Heslo nebo Doména použít:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-bit</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (jen pro logon)</value>
-  </data>
-  <data name="Enc40Bit" xml:space="preserve">
-    <value>40-bit</value>
-  </data>
-  <data name="Enc56Bit" xml:space="preserve">
-    <value>56-bit</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Basic</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Zakódovat celý soubor seznamu připojení</value>
@@ -668,17 +640,11 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Nastavení vlast. HTTP selhalo!</value>
   </data>
-  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
-    <value>Označ záložky rychlého připojení prefixem "Quick:"</value>
-  </data>
   <data name="ImportAD" xml:space="preserve">
     <value>Import z Active Directory</value>
   </data>
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>Při importování souboru "{0}" došlo k chybě.</value>
-  </data>
-  <data name="ImportFailed" xml:space="preserve">
-    <value>Import selhal</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
     <value>Import ze &amp;souboru...</value>
@@ -715,9 +681,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>Když se ukončují spojení:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Připojit:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Zobrazený název:</value>
@@ -791,9 +754,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Panely</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Nastavení spojení</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Kopírovat</value>
   </data>
@@ -803,23 +763,11 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Smazat spojení...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Smazat vnější nástroj...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Smazat složku...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Přispějte</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Klonovat připojení</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Klonovat složku</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Klonovat záložku tabu</value>
@@ -838,9 +786,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>Nápověda mRemoteNG</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Jít na</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Spustit externí nástroj</value>
@@ -877,12 +822,6 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Obnovit obraz (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Přejmenovat spojení</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Přejmenovat složku</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Přejmonovat záložku tabu</value>
@@ -1077,9 +1016,6 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Vyberte způsob kódování přenosu.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Vyberte požadovanou sílu šifrování vzdáleného hostitele.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Vyberte externí nástroj, který má být spuštěn.</value>
   </data>
@@ -1230,9 +1166,6 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   <data name="Encoding" xml:space="preserve">
     <value>Kódování</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Síla šifrování</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Externí nástroj</value>
   </data>
@@ -1292,9 +1225,6 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
   </data>
   <data name="Printers" xml:space="preserve">
     <value>Připoj tiskárny</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Poskytuj karty</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Zvuky</value>
@@ -1527,9 +1457,6 @@ Zpráva:
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>Metoda RDP SetResolution selhala!</value>
   </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>Autom. velikost</value>
-  </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Přehrávat v místním počítači</value>
   </data>
@@ -1719,9 +1646,6 @@ Zpráva:
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>Informace o aktualizacích nemohly být staženy.</value>
   </data>
-  <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Vyhledávám aktualizace...</value>
-  </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>Stahování ukončeno!
 mRemoteNG se nyní ukončí a zahájí instalaci.</value>
@@ -1798,9 +1722,6 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="Yes" xml:space="preserve">
     <value>Ano</value>
   </data>
-  <data name="ReconnectAll" xml:space="preserve">
-    <value>Obnovit všechna otevřená spojení</value>
-  </data>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">
     <value>Čas čekání (timeout) na RDP spojení</value>
   </data>
@@ -1866,9 +1787,6 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   </data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Zapsat zprávu logu když se RDP sezení odpojí kvůli neaktivitě.</value>
-  </data>
-  <data name="RdpAlertIdleTimeout" xml:space="preserve">
-    <value>Upozornit při odpojení z neaktivity</value>
   </data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
     <value>Heslo musí obsahovat alespoň {0} z těchto písmen: {1}</value>

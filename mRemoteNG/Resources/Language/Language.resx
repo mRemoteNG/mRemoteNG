@@ -249,13 +249,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Check succeeded!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>All ICA components were found and seem to be registered properly.
-Citrix ICA Client Control Version {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>not installed properly</value>
   </data>
@@ -472,9 +465,6 @@ Starting with new connections file.</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Could not find ToolStrip control in FilteredPropertyGrid.</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Installed version</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Detect</value>
   </data>
@@ -498,21 +488,6 @@ Starting with new connections file.</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>For empty Username, Password or Domain fields use:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-bit</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (logon only)</value>
-  </data>
-  <data name="Enc40Bit" xml:space="preserve">
-    <value>40-bit</value>
-  </data>
-  <data name="Enc56Bit" xml:space="preserve">
-    <value>56-bit</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Basic</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Completely encrypt connection file</value>
@@ -671,27 +646,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Set HTTP Props failed!</value>
   </data>
-  <data name="ICA" xml:space="preserve">
-    <value>ICA</value>
-  </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Couldn't create new ICA Connection!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Loading ICA Plugin failed!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials failed!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Set Event Handlers Failed!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Set Props Failed!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Set Resolution Failed!</value>
-  </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identify quick connect tabs by adding the prefix "Quick:"</value>
   </data>
@@ -700,9 +654,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>An error occurred while importing the file "{0}".</value>
-  </data>
-  <data name="ImportFailed" xml:space="preserve">
-    <value>Import failed</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
     <value>Import from &amp;File...</value>
@@ -739,9 +690,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>When closing connections:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Connect:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Display Name</value>
@@ -815,9 +763,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Connection Panels</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Connections and Config</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Copy</value>
   </data>
@@ -827,23 +772,11 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Delete Connection...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Delete External Tool...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Delete Folder...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Donate</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Duplicate Connection</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Duplicate Folder</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Duplicate Tab</value>
@@ -862,9 +795,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>mRemoteNG Help</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Jump to</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Launch External Tool</value>
@@ -901,12 +831,6 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Refresh Screen (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Rename Connection</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Rename Folder</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Rename Tab</value>
@@ -1101,9 +1025,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Select the encoding mode to be used.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Select the encryption strength of the remote host.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Select the external tool to be started.</value>
   </data>
@@ -1260,9 +1181,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="Encoding" xml:space="preserve">
     <value>Encoding</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Encryption Strength</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>External Tool</value>
   </data>
@@ -1325,9 +1243,6 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="Clipboard" xml:space="preserve">
     <value>Clipboard</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Smart Cards</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Sounds</value>
@@ -1561,9 +1476,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>RDP SetResolution failed!</value>
   </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>Smart Size</value>
-  </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Bring to this computer</value>
   </data>
@@ -1756,9 +1668,6 @@ If you run into such an error, please create a new connection file!</value>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>The update information could not be downloaded.</value>
   </data>
-  <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Checking for updates...</value>
-  </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>Download complete!
 mRemoteNG will now quit and begin with the installation.</value>
@@ -1835,9 +1744,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="ReconnectAll" xml:space="preserve">
-    <value>Reconnect All Open Connections</value>
-  </data>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">
     <value>RDP Connection Timeout</value>
   </data>
@@ -1903,9 +1809,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Select whether to receive an alert after the RDP session disconnects due to inactivity</value>
-  </data>
-  <data name="RdpAlertIdleTimeout" xml:space="preserve">
-    <value>Alert on Idle disconnect</value>
   </data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
     <value>Password must contain at least {0} of the following characters: {1}</value>

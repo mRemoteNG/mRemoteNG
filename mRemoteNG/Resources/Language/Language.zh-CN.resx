@@ -249,16 +249,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>检查成功！</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>启用 ICA 需要提前安装 XenDesktop Online 插件，并正确注册 wfica.ocx 库文件。您可以在此下载此插件：http://www.citrix.com/download/
-如果您已安装 XenDesktop Online 插件，但仍旧检测失败，请手动注册 wfica.ocx。
-请打开运行对话框（开始菜单/运行），并输入如下内容：“regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" ”（c:\Program Files\Citrix\ICA Client\ 是您安装 XenDesktop Online 插件的路径）。
-如果仍然无法通过此检查或在 mRemoteNG 中使用 ICA，请咨询 {0}。</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>发现 ICA 组件。
-Citrix ICA 客户端空间版本：{0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>安装不正确</value>
   </data>
@@ -475,9 +465,6 @@ VncSharp 版本 {0}</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>在 FilteredPropertyGrid 中找不到 ToolStrip 控件。</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>已安装版本</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>检测</value>
   </data>
@@ -501,21 +488,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>对于空用户名、密码或域名使用：</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128 位</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128位(仅用于登录)</value>
-  </data>
-  <data name="Enc40Bit" xml:space="preserve">
-    <value>40位</value>
-  </data>
-  <data name="Enc56Bit" xml:space="preserve">
-    <value>56位</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>基本</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>完全加密连接配置文件</value>
@@ -674,27 +646,6 @@ VncSharp 版本 {0}</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>设置 HTTP 属性失败！</value>
   </data>
-  <data name="ICA" xml:space="preserve">
-    <value>ICA</value>
-  </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>无法创建新 ICA 连接！</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>ICA 插件加载失败！</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA 凭据设置失败！</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA 事件句柄设置失败！</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>ICA 属性设置失败！</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA 分辨率设置失败！</value>
-  </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>通过添加前缀“快速：”来识别快速连接选项卡</value>
   </data>
@@ -703,9 +654,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>导入文件“{0}”时发生错误。</value>
-  </data>
-  <data name="ImportFailed" xml:space="preserve">
-    <value>导入失败</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
     <value>从文件导入(&amp;F)...</value>
@@ -742,9 +690,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>当关闭连接时：</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>连接(&amp;C)</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>显示名称</value>
@@ -818,9 +763,6 @@ VncSharp 版本 {0}</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>连接面板</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>连接和配置</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>复制</value>
   </data>
@@ -830,23 +772,11 @@ VncSharp 版本 {0}</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl+Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>删除连接...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>删除外部工具...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>删除目录…</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>捐赠</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>重复连接</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>重复目录</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>重复标签</value>
@@ -865,9 +795,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>mRemoteNG 帮助</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>转到</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>启动外部工具</value>
@@ -904,12 +831,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>刷新(VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>重命名连接</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>重命名目录</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>重命名标签</value>
@@ -1104,9 +1025,6 @@ VncSharp 版本 {0}</value>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>请选择编码模式。</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>请选择远程主机的加密强度：</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>请选择要启动的外部工具。</value>
   </data>
@@ -1263,9 +1181,6 @@ VncSharp 版本 {0}</value>
   <data name="Encoding" xml:space="preserve">
     <value>编码</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>加密强度</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>外部工具</value>
   </data>
@@ -1328,9 +1243,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="Clipboard" xml:space="preserve">
     <value>剪贴板</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>智能卡</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>声音</value>
@@ -1564,9 +1476,6 @@ VncSharp 版本 {0}</value>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>RDP 分辨率设置失败！</value>
   </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>自适应大小</value>
-  </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>带到这台计算机</value>
   </data>
@@ -1759,9 +1668,6 @@ VncSharp 版本 {0}</value>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>升级检查未完成！</value>
   </data>
-  <data name="CheckingForUpdates" xml:space="preserve">
-    <value>检查更新...</value>
-  </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>下载完成！
 mRemoteNG 将退出并安装更新。</value>
@@ -1838,9 +1744,6 @@ mRemoteNG 将退出并安装更新。</value>
   <data name="Yes" xml:space="preserve">
     <value>确定</value>
   </data>
-  <data name="ReconnectAll" xml:space="preserve">
-    <value>重新连接所有打开的连接</value>
-  </data>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">
     <value>RDP 连接超时</value>
   </data>
@@ -1906,9 +1809,6 @@ mRemoteNG 将退出并安装更新。</value>
   </data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>选择是否在RDP会话由于不活动而断开连接后收到警报</value>
-  </data>
-  <data name="RdpAlertIdleTimeout" xml:space="preserve">
-    <value>空闲断开警报</value>
   </data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
     <value>密码必须至少包含 {0} 个以下所示字符：{1}</value>

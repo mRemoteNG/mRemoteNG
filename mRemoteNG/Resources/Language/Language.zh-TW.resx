@@ -243,10 +243,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>檢查成功!</value>
   </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>找到所有 ICA 元件並似乎正確註冊。
-Citrix ICA Client Control 版本 {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>未正確安裝</value>
   </data>
@@ -439,9 +435,6 @@ VncSharp Control 版本 {0}</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>無法在 FilteredPropertyGrid 找到 ToolStrip 控制。</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>安裝的版本</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>偵測</value>
   </data>
@@ -462,15 +455,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>針對空的使用者名稱、密碼或網域欄位使用:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128 位元</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128 位元 (只有登入)</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>基本</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>完整加密連線檔案</value>
@@ -574,24 +558,6 @@ VncSharp Control 版本 {0}</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>設定 HTTP Props 失敗!</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>無法建立新的 ICA 連線!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>載入 ICA Plugin 失敗!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials 失敗!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Set Event Handlers 失敗!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Set Props 失敗!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Set Resolution 失敗!</value>
-  </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>加入字首「Quick:」以識別快速連線索引標籤</value>
   </data>
@@ -630,9 +596,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>關閉連線時:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>連線(&amp;C):</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>顯示名稱</value>
@@ -703,9 +666,6 @@ VncSharp Control 版本 {0}</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>連線面板</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>連線和組態</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>複製</value>
   </data>
@@ -715,23 +675,11 @@ VncSharp Control 版本 {0}</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>刪除連線...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>刪除外部工具...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>刪除資料夾...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>捐贈</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>複製連線</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>複製資料夾</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>複製索引標籤</value>
@@ -750,9 +698,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>mRemoteNG 說明</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>跳至</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>啟動外部工具</value>
@@ -789,12 +734,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>重新整理螢幕 (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>重新命名連線</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>重新命名資料夾</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>重新命名索引標籤</value>
@@ -968,9 +907,6 @@ VncSharp Control 版本 {0}</value>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>選取使用的編碼模式。</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>選取遠端主機的加密長度。</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>選取啟動的外部工具。</value>
   </data>
@@ -1115,9 +1051,6 @@ VncSharp Control 版本 {0}</value>
   <data name="Encoding" xml:space="preserve">
     <value>編碼</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>加密長度</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>外部工具</value>
   </data>
@@ -1174,9 +1107,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="Printers" xml:space="preserve">
     <value>印表機</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>智慧卡</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>音訊</value>
@@ -1408,9 +1338,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>RDP SetResolution 失敗!</value>
-  </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>智慧大小</value>
   </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>送到此電腦</value>

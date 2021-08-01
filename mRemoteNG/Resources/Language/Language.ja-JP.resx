@@ -251,16 +251,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Check succeeded!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
-If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
-To do this open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin installation).
-If you are still not able to pass this check or use ICA in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>All ICA components were found and seem to be registered properly.
-Citrix ICA Client Control Version {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>正しくインストールされていません</value>
   </data>
@@ -486,9 +476,6 @@ Starting with new connections file.</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Could not find ToolStrip control in FilteredPropertyGrid.</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>バージョン</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>検出する</value>
   </data>
@@ -512,21 +499,6 @@ Starting with new connections file.</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>For empty Username, Password or Domain fields use:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128ビット</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (logon only)</value>
-  </data>
-  <data name="Enc40Bit" xml:space="preserve">
-    <value>40ビット</value>
-  </data>
-  <data name="Enc56Bit" xml:space="preserve">
-    <value>56ビット</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Basic</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>接続設定ファイルをすべて暗号化する</value>
@@ -678,27 +650,6 @@ Starting with new connections file.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Set HTTP Props failed!</value>
   </data>
-  <data name="ICA" xml:space="preserve">
-    <value>ICA</value>
-  </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Couldn't create new ICA Connection!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Loading ICA Plugin failed!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials failed!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Set Event Handlers Failed!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Set Props Failed!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Set Resolution Failed!</value>
-  </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identify quick connect tabs by adding the prefix "Quick:"</value>
   </data>
@@ -707,9 +658,6 @@ Starting with new connections file.</value>
   </data>
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>ファイル「{0}」のインポート中にエラーが発生しました</value>
-  </data>
-  <data name="ImportFailed" xml:space="preserve">
-    <value>インポートに失敗しました</value>
   </data>
   <data name="ImportFromFile" xml:space="preserve">
     <value>ファイルからインポート...(&amp;F)</value>
@@ -746,9 +694,6 @@ Starting with new connections file.</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>切断時：</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>接続(&amp;C)：</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>ディスプレイ名</value>
@@ -825,9 +770,6 @@ Starting with new connections file.</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>接続表示パネル</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>接続と設定</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>コピー</value>
   </data>
@@ -837,23 +779,11 @@ Starting with new connections file.</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>接続を削除...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>外部ツールを削除...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>フォルダを削除...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>寄付のお願い</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>接続を複製する</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>フォルダを複製する</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>タブを複製する</value>
@@ -872,9 +802,6 @@ Starting with new connections file.</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>mRemoteNGヘルプ</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>移動先</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>外部ツールの立ち上げ</value>
@@ -911,12 +838,6 @@ Starting with new connections file.</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>スクリーンを更新する (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>接続名を変更</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>フォルダ名を変更</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>タブ名を変更</value>
@@ -1115,9 +1036,6 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Select the encoding mode to be used.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Select the encryption strength of the remote host.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Select the external tool to be started.</value>
   </data>
@@ -1270,9 +1188,6 @@ If you run into such an error, please create a new connection file!</comment>
   <data name="Encoding" xml:space="preserve">
     <value>エンコード</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Encryption Strength</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>外部ツール</value>
   </data>
@@ -1332,9 +1247,6 @@ If you run into such an error, please create a new connection file!</comment>
   </data>
   <data name="Printers" xml:space="preserve">
     <value>プリンター</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>スマートカード</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>サウンド</value>
@@ -1569,9 +1481,6 @@ Message:
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>RDP SetResolution failed!</value>
   </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>Smart Size</value>
-  </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>このコンピューターで再生</value>
   </data>
@@ -1767,9 +1676,6 @@ Message:
   </data>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>The update information could not be downloaded.</value>
-  </data>
-  <data name="CheckingForUpdates" xml:space="preserve">
-    <value>更新を確認しています…</value>
   </data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
     <value>ダウンロードが終了しました
