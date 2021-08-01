@@ -12,6 +12,7 @@ namespace mRemoteNG.UI.Menu
 {
     public class FileMenu : ToolStripMenuItem
     {
+        private ToolStripMenuItem _mMenToolsOptions;
         private ToolStripMenuItem _mMenFileNew;
         private ToolStripMenuItem _mMenFileLoad;
         private ToolStripMenuItem _mMenFileSave;
@@ -19,7 +20,6 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenFileExit;
         private ToolStripSeparator _mMenFileSep2;
         private ToolStripSeparator _mMenFileSep1;
-        private ToolStripMenuItem _mMenReconnectAll;
 
         public ConnectionTreeWindow TreeWindow { get; set; }
         public IConnectionInitiator ConnectionInitiator { get; set; }
@@ -36,9 +36,9 @@ namespace mRemoteNG.UI.Menu
             _mMenFileSave = new ToolStripMenuItem();
             _mMenFileSaveAs = new ToolStripMenuItem();
             _mMenFileSep2 = new ToolStripSeparator();
-            _mMenReconnectAll = new ToolStripMenuItem();
             _mMenFileSep1 = new ToolStripSeparator();
             _mMenFileExit = new ToolStripMenuItem();
+            _mMenToolsOptions = new ToolStripMenuItem();
 
             // 
             // mMenFile
@@ -49,9 +49,9 @@ namespace mRemoteNG.UI.Menu
                 _mMenFileLoad,
                 _mMenFileSave,
                 _mMenFileSaveAs,
-                _mMenFileSep2,
-                _mMenReconnectAll,
                 _mMenFileSep1,
+                _mMenToolsOptions,
+                _mMenFileSep2,
                 _mMenFileExit
             });
             Name = "mMenFile";
@@ -99,18 +99,18 @@ namespace mRemoteNG.UI.Menu
             _mMenFileSep2.Name = "mMenFileSep2";
             _mMenFileSep2.Size = new System.Drawing.Size(278, 6);
             // 
-            // mMenReconnectAll
-            // 
-            _mMenReconnectAll.Image = Properties.Resources.Refresh;
-            _mMenReconnectAll.Name = "mMenReconnectAll";
-            _mMenReconnectAll.Size = new System.Drawing.Size(281, 22);
-            _mMenReconnectAll.Text = Language.ReconnectAllConnections;
-            _mMenReconnectAll.Click += mMenReconnectAll_Click;
-            // 
             // mMenFileSep1
             // 
             _mMenFileSep1.Name = "mMenFileSep3";
             _mMenFileSep1.Size = new System.Drawing.Size(278, 6);
+            // 
+            // mMenToolsOptions
+            // 
+            _mMenToolsOptions.Image = Properties.Resources.Options;
+            _mMenToolsOptions.Name = "mMenToolsOptions";
+            _mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
+            _mMenToolsOptions.Text = Language.Options;
+            _mMenToolsOptions.Click += mMenToolsOptions_Click;
             // 
             // mMenFileExit
             // 
@@ -129,6 +129,7 @@ namespace mRemoteNG.UI.Menu
             _mMenFileLoad.Text = Language.OpenConnectionFile;
             _mMenFileSave.Text = Language.SaveConnectionFile;
             _mMenFileSaveAs.Text = Language.SaveConnectionFileAs;
+            _mMenToolsOptions.Text = Language.Options;
             _mMenFileExit.Text = Language.Exit;
         }
 
@@ -196,21 +197,14 @@ namespace mRemoteNG.UI.Menu
             }
         }
 
-        private void mMenReconnectAll_Click(object sender, EventArgs e)
-        {
-            if (Runtime.WindowList == null || Runtime.WindowList.Count == 0) return;
-            foreach (BaseWindow window in Runtime.WindowList)
-            {
-                if (!(window is ConnectionWindow connectionWindow))
-                    return;
-
-                connectionWindow.reconnectAll(ConnectionInitiator);
-            }
-        }
-
         private void mMenFileExit_Click(object sender, EventArgs e)
         {
             Shutdown.Quit();
+        }
+
+        private void mMenToolsOptions_Click(object sender, EventArgs e)
+        {
+            Windows.Show(WindowType.Options);
         }
 
         #endregion

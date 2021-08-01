@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
@@ -12,6 +13,7 @@ namespace mRemoteNG.UI.Menu
     public class ViewMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenViewConnectionPanels;
+        private ToolStripMenuItem _mMenReconnectAll;
         private ToolStripSeparator _mMenViewSep1;
         public ToolStripMenuItem _mMenViewConnections;
         public ToolStripMenuItem _mMenViewConfig;
@@ -33,6 +35,7 @@ namespace mRemoteNG.UI.Menu
         public ToolStrip TsMultiSsh { get; set; }
         public FullscreenHandler FullscreenHandler { get; set; }
         public FrmMain MainForm { get; set; }
+        public IConnectionInitiator ConnectionInitiator { get; set; }
 
 
         public ViewMenu()
@@ -53,6 +56,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewLockToolbars = new ToolStripMenuItem();
             _mMenViewSep2 = new ToolStripSeparator();
             _mMenViewQuickConnectToolbar = new ToolStripMenuItem();
+            _mMenReconnectAll = new ToolStripMenuItem();
             _mMenViewExtAppsToolbar = new ToolStripMenuItem();
             _mMenViewMultiSshToolbar = new ToolStripMenuItem();
             _mMenViewFullscreen = new ToolStripMenuItem();
@@ -73,6 +77,7 @@ namespace mRemoteNG.UI.Menu
                 _mMenViewExtAppsToolbar,
                 _mMenViewMultiSshToolbar,
                 _toolStripSeparator1,
+                _mMenReconnectAll,
                 _mMenViewResetLayout,
                 _mMenViewLockToolbars,
                 _mMenViewSep2,
@@ -90,6 +95,14 @@ namespace mRemoteNG.UI.Menu
             _mMenViewAddConnectionPanel.Size = new System.Drawing.Size(228, 22);
             _mMenViewAddConnectionPanel.Text = Language.AddConnectionPanel;
             _mMenViewAddConnectionPanel.Click += mMenViewAddConnectionPanel_Click;
+            // 
+            // mMenReconnectAll
+            // 
+            _mMenReconnectAll.Image = Properties.Resources.Refresh;
+            _mMenReconnectAll.Name = "mMenReconnectAll";
+            _mMenReconnectAll.Size = new System.Drawing.Size(281, 22);
+            _mMenReconnectAll.Text = Language.ReconnectAllConnections;
+            _mMenReconnectAll.Click += mMenReconnectAll_Click;
             // 
             // mMenViewConnectionPanels
             // 
@@ -360,6 +373,18 @@ namespace mRemoteNG.UI.Menu
         {
             FullscreenHandler.Value = !FullscreenHandler.Value;
             _mMenViewFullscreen.Checked = FullscreenHandler.Value;
+        }
+
+        private void mMenReconnectAll_Click(object sender, EventArgs e)
+        {
+            if (Runtime.WindowList == null || Runtime.WindowList.Count == 0) return;
+            foreach (BaseWindow window in Runtime.WindowList)
+            {
+                if (!(window is ConnectionWindow connectionWindow))
+                    return;
+
+                connectionWindow.reconnectAll(ConnectionInitiator);
+            }
         }
 
         #endregion
