@@ -62,6 +62,7 @@ namespace mRemoteNG.UI.Menu
             // 
             _mMenFileNew.Image = Properties.Resources.Connections_New;
             _mMenFileNew.Name = "mMenFileNew";
+            _mMenFileLoad.ShortcutKeys = Keys.Control | Keys.N;
             _mMenFileNew.Size = new System.Drawing.Size(281, 22);
             _mMenFileNew.Text = Language.NewConnectionFile;
             _mMenFileNew.Click += mMenFileNew_Click;
@@ -77,7 +78,6 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileSave
             // 
-            _mMenFileSave.Image = Properties.Resources.Connections_Save;
             _mMenFileSave.Name = "mMenFileSave";
             _mMenFileSave.ShortcutKeys = Keys.Control | Keys.S;
             _mMenFileSave.Size = new System.Drawing.Size(281, 22);
@@ -86,7 +86,6 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenFileSaveAs
             // 
-            _mMenFileSaveAs.Image = Properties.Resources.Connections_SaveAs;
             _mMenFileSaveAs.Name = "mMenFileSaveAs";
             _mMenFileSaveAs.ShortcutKeys = (Keys.Control | Keys.Shift)
                                          | Keys.S;
