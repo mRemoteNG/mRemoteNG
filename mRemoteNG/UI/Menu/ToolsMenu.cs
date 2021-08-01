@@ -8,8 +8,6 @@ namespace mRemoteNG.UI.Menu
 {
     public class ToolsMenu : ToolStripMenuItem
     {
-        private ToolStripSeparator _mMenToolsSep1;
-        private ToolStripMenuItem _mMenToolsOptions;
         private ToolStripMenuItem _mMenToolsSshTransfer;
         private ToolStripMenuItem _mMenToolsExternalApps;
         private ToolStripMenuItem _mMenToolsPortScan;
@@ -30,8 +28,6 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsUvncsc = new ToolStripMenuItem();
             _mMenToolsExternalApps = new ToolStripMenuItem();
             _mMenToolsPortScan = new ToolStripMenuItem();
-            _mMenToolsSep1 = new ToolStripSeparator();
-            _mMenToolsOptions = new ToolStripMenuItem();
             _mMenViewScreenshotManager = new ToolStripMenuItem();
             // 
             // mMenTools
@@ -42,9 +38,7 @@ namespace mRemoteNG.UI.Menu
                 _mMenToolsUvncsc,
                 _mMenToolsExternalApps,
                 _mMenToolsPortScan,
-                _mMenViewScreenshotManager,
-                _mMenToolsSep1,
-                _mMenToolsOptions
+                _mMenViewScreenshotManager
             });
             Name = "mMenTools";
             Size = new System.Drawing.Size(48, 20);
@@ -90,19 +84,6 @@ namespace mRemoteNG.UI.Menu
             _mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
             _mMenViewScreenshotManager.Text = Language.Screenshots;
             _mMenViewScreenshotManager.Click += mMenViewScreenshotManager_Click;
-            // 
-            // mMenToolsSep1
-            // 
-            _mMenToolsSep1.Name = "mMenToolsSep1";
-            _mMenToolsSep1.Size = new System.Drawing.Size(181, 6);
-            // 
-            // mMenToolsOptions
-            // 
-            _mMenToolsOptions.Image = Properties.Resources.Options;
-            _mMenToolsOptions.Name = "mMenToolsOptions";
-            _mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
-            _mMenToolsOptions.Text = Language.Options;
-            _mMenToolsOptions.Click += mMenToolsOptions_Click;
         }
 
         public void ApplyLanguage()
@@ -112,7 +93,6 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsExternalApps.Text = Language.ExternalTool;
             _mMenToolsPortScan.Text = Language.PortScan;
             _mMenViewScreenshotManager.Text = Language.Screenshots;
-            _mMenToolsOptions.Text = Language.Options;
         }
 
         #region Tools
@@ -140,11 +120,6 @@ namespace mRemoteNG.UI.Menu
         private void mMenViewScreenshotManager_Click(object sender, EventArgs e)
         {
             Windows.Show(WindowType.ScreenshotManager);
-        }
-
-        private void mMenToolsOptions_Click(object sender, EventArgs e)
-        {
-            Windows.Show(WindowType.Options);
         }
 
         #endregion

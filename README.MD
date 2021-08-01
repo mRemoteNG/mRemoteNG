@@ -163,6 +163,7 @@ _If you are using the Portable version, simply deleting the folder that contains
 ## Featured Projects
 
 * [PSmRemoteNG](https://github.com/realslacker/PSmRemoteNG) A module to create mRemoteNG connection files from PowerShell.
+* [mRemoteNGOpenVPN](https://github.com/T3los/mRemoteNGOpenVPN) A script that can be embedded as an external tool to control OpenVPN.
 
 ## Contribute
 

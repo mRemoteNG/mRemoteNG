@@ -15,11 +15,11 @@ namespace mRemoteNG.UI.Menu
         private ToolStripSeparator _mMenInfoSep1;
         private ToolStripMenuItem _mMenInfoAbout;
         private ToolStripMenuItem _mMenInfoDonate;
-        private ToolStripMenuItem _mMenToolsUpdate;
         private ToolStripSeparator _mMenInfoSep2;
-        private ToolStripMenuItem _mMenInfoBugReport;
-        private ToolStripSeparator _toolStripSeparator2;
+        private ToolStripSeparator _mMenInfoSep3;
+        private ToolStripSeparator _mMenInfoSep4;
         private ToolStripMenuItem _mMenInfoForum;
+        private ToolStripMenuItem _mMenToolsUpdate;
 
         public HelpMenu()
         {
@@ -33,10 +33,10 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoWebsite = new ToolStripMenuItem();
             _mMenInfoDonate = new ToolStripMenuItem();
             _mMenInfoForum = new ToolStripMenuItem();
-            _mMenInfoBugReport = new ToolStripMenuItem();
-            _toolStripSeparator2 = new ToolStripSeparator();
-            _mMenInfoSep2 = new ToolStripSeparator();
             _mMenToolsUpdate = new ToolStripMenuItem();
+            _mMenInfoSep2 = new ToolStripSeparator();
+            _mMenInfoSep3 = new ToolStripSeparator();
+            _mMenInfoSep4 = new ToolStripSeparator();
             _mMenInfoAbout = new ToolStripMenuItem();
 
             // 
@@ -47,12 +47,12 @@ namespace mRemoteNG.UI.Menu
                 _mMenInfoHelp,
                 _mMenInfoSep1,
                 _mMenInfoWebsite,
-                _mMenInfoDonate,
                 _mMenInfoForum,
-                _mMenInfoBugReport,
-                _toolStripSeparator2,
-                _mMenToolsUpdate,
                 _mMenInfoSep2,
+                _mMenToolsUpdate,
+                _mMenInfoSep3,
+                _mMenInfoDonate,
+                _mMenInfoSep4,
                 _mMenInfoAbout
             });
             Name = "mMenInfo";
@@ -69,48 +69,6 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoHelp.Text = Language.HelpContents;
             _mMenInfoHelp.Click += mMenInfoHelp_Click;
             // 
-            // mMenInfoSep1
-            // 
-            _mMenInfoSep1.Name = "mMenInfoSep1";
-            _mMenInfoSep1.Size = new System.Drawing.Size(187, 6);
-            // 
-            // mMenInfoWebsite
-            // 
-            _mMenInfoWebsite.Image = Properties.Resources.Website;
-            _mMenInfoWebsite.Name = "mMenInfoWebsite";
-            _mMenInfoWebsite.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoWebsite.Text = Language.Website;
-            _mMenInfoWebsite.Click += mMenInfoWebsite_Click;
-            // 
-            // mMenInfoDonate
-            // 
-            _mMenInfoDonate.Image = Properties.Resources.Donate;
-            _mMenInfoDonate.Name = "mMenInfoDonate";
-            _mMenInfoDonate.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoDonate.Text = Language.Donate;
-            _mMenInfoDonate.Click += mMenInfoDonate_Click;
-            // 
-            // mMenInfoForum
-            // 
-            _mMenInfoForum.Image = Properties.Resources.user_comment;
-            _mMenInfoForum.Name = "mMenInfoForum";
-            _mMenInfoForum.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoForum.Text = Language.SupportForum;
-            _mMenInfoForum.Click += mMenInfoForum_Click;
-            // 
-            // mMenInfoBugReport
-            // 
-            _mMenInfoBugReport.Image = Properties.Resources.Bug;
-            _mMenInfoBugReport.Name = "mMenInfoBugReport";
-            _mMenInfoBugReport.Size = new System.Drawing.Size(190, 22);
-            _mMenInfoBugReport.Text = Language.ReportBug;
-            _mMenInfoBugReport.Click += mMenInfoBugReport_Click;
-            // 
-            // ToolStripSeparator2
-            // 
-            _toolStripSeparator2.Name = "ToolStripSeparator2";
-            _toolStripSeparator2.Size = new System.Drawing.Size(187, 6);
-            // 
             // mMenToolsUpdate
             // 
             _mMenToolsUpdate.Image = Properties.Resources.Update;
@@ -119,10 +77,46 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsUpdate.Text = Language.CheckForUpdates;
             _mMenToolsUpdate.Click += mMenToolsUpdate_Click;
             // 
+            // mMenInfoSep1
+            // 
+            _mMenInfoSep1.Name = "mMenInfoSep1";
+            _mMenInfoSep1.Size = new System.Drawing.Size(187, 6);
+            // 
+            // mMenInfoWebsite
+            // 
+            _mMenInfoWebsite.Name = "mMenInfoWebsite";
+            _mMenInfoWebsite.Size = new System.Drawing.Size(190, 22);
+            _mMenInfoWebsite.Text = Language.Website;
+            _mMenInfoWebsite.Click += mMenInfoWebsite_Click;
+            // 
+            // mMenInfoDonate
+            // 
+            _mMenInfoDonate.Name = "mMenInfoDonate";
+            _mMenInfoDonate.Size = new System.Drawing.Size(190, 22);
+            _mMenInfoDonate.Text = Language.Donate;
+            _mMenInfoDonate.Click += mMenInfoDonate_Click;
+            // 
+            // mMenInfoForum
+            // 
+            _mMenInfoForum.Name = "mMenInfoForum";
+            _mMenInfoForum.Size = new System.Drawing.Size(190, 22);
+            _mMenInfoForum.Text = Language.SupportForum;
+            _mMenInfoForum.Click += mMenInfoForum_Click;
+            // 
             // mMenInfoSep2
             // 
             _mMenInfoSep2.Name = "mMenInfoSep2";
             _mMenInfoSep2.Size = new System.Drawing.Size(187, 6);
+            // 
+            // mMenInfoSep3
+            // 
+            _mMenInfoSep3.Name = "mMenInfoSep2";
+            _mMenInfoSep3.Size = new System.Drawing.Size(187, 6);
+            // 
+            // mMenInfoSep4
+            // 
+            _mMenInfoSep4.Name = "mMenInfoSep2";
+            _mMenInfoSep4.Size = new System.Drawing.Size(187, 6);
             // 
             // mMenInfoAbout
             // 
@@ -140,22 +134,19 @@ namespace mRemoteNG.UI.Menu
             _mMenInfoWebsite.Text = Language.Website;
             _mMenInfoDonate.Text = Language.Donate;
             _mMenInfoForum.Text = Language.SupportForum;
-            _mMenInfoBugReport.Text = Language.ReportBug;
-            _mMenToolsUpdate.Text = Language.CheckForUpdates;
             _mMenInfoAbout.Text = Language.About;
+            _mMenToolsUpdate.Text = Language.CheckForUpdates;
         }
 
         #region Info
 
         private void mMenToolsUpdate_Click(object sender, EventArgs e) => Windows.Show(WindowType.Update);
 
-        private void mMenInfoHelp_Click(object sender, EventArgs e) => Windows.Show(WindowType.Help);
+        private void mMenInfoHelp_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlDocumentation);
 
         private void mMenInfoForum_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlForum);
 
-        private void mMenInfoBugReport_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlBugs);
-
-        private void mMenInfoWebsite_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlHome);
+        private void mMenInfoWebsite_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlHome);
 
         private void mMenInfoDonate_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlDonate);
 

@@ -91,7 +91,6 @@
             this.fileMenu.Size = new System.Drawing.Size(37, 19);
             this.fileMenu.Text = "&File";
             this.fileMenu.TreeWindow = null;
-            this.fileMenu.DropDownOpening += new System.EventHandler(this.mainFileMenu1_DropDownOpening);
             // 
             // viewMenu
             // 
