@@ -8,8 +8,6 @@ namespace mRemoteNG.UI.Menu
 {
     public class ToolsMenu : ToolStripMenuItem
     {
-        private ToolStripSeparator _mMenToolsSep1;
-        private ToolStripMenuItem _mMenToolsOptions;
         private ToolStripMenuItem _mMenToolsSshTransfer;
         private ToolStripMenuItem _mMenToolsExternalApps;
         private ToolStripMenuItem _mMenToolsPortScan;

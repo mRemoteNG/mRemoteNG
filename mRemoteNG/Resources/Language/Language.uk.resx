@@ -240,16 +240,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Успішно перевірено!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA вимагає встановити XenDesktop Online Plugin та зареєструвати бібліотеку wfica.ocx. Ви можете завантажити клієнт тут: http://www.citrix.com/download/
-Якщо у вас є встановлений XenDesktop Online Plugin і нічого не працює, спробуйте зареєструвати wfica.ocx вручну.
-Для цього відкрийте (Пуск - Виконати) і введіть наступну команду: regsvr32 "C:\Program Files\Citrix\ICA Client\wfica.ocx" (де C:\Program Files\Citrix ICA Client\ це шлях до XenDesktop Online Plugin).
-Якщо у вас все таки не працює ICA в mRemoteNG зверніться за адресою: {0}.</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Всі компоненти ICA були знайдені і зареєстровані.
-Citrix ICA Client Control версії {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>встановлений неправильно</value>
   </data>
@@ -446,9 +436,6 @@ VncSharp Control Version {0}</value>
   <data name="CouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Не вдається створити новий файл з'єднань!</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Встановлена версія</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Виявлення</value>
   </data>
@@ -469,21 +456,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Використовувати пусте ім'я користувача, пароль або домен:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-біт</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-біт (тільки при вході)</value>
-  </data>
-  <data name="Enc40Bit" xml:space="preserve">
-    <value>40-біт</value>
-  </data>
-  <data name="Enc56Bit" xml:space="preserve">
-    <value>56-біт</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Основне</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Повністю зашифрувати файл з'єднання</value>
@@ -581,24 +553,6 @@ VncSharp Control Version {0}</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Не вдалося задати параметри HTTP!</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Не вдається створити нове з'єднання ICA!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Не вдалося завантажити ICA-плагін!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>Помилка встановлення облікових даних ICA!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Не вдалося встановити оброблювач подій ICA!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>Не вдалося задати параметри ICA!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>Помилка встановлення дозволів ICA!</value>
-  </data>
   <data name="ImportAD" xml:space="preserve">
     <value>Імпорт з Active Directory</value>
   </data>
@@ -625,9 +579,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>Адреса:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;З'єднання:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Коротке ім'я</value>
@@ -698,9 +649,6 @@ VncSharp Control Version {0}</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Панель з'єднань</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>З'єднання та конфігурація</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Копіювати</value>
   </data>
@@ -710,23 +658,11 @@ VncSharp Control Version {0}</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl+Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Видалити з'єднання…</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Видалити зовнішній інструмент…</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Видалити папку…</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Пожертва</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Дублювати з'єднання</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Дублювати папку</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Дублювати вкладку</value>
@@ -745,9 +681,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>Довідка mRemoteNG</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Перейти до</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Запуск зовнішніх інструментів</value>
@@ -778,12 +711,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Оновити екран (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Перейменувати з'єднання</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Перейменувати папку</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Перейменувати вкладку</value>
@@ -942,9 +869,6 @@ VncSharp Control Version {0}</value>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Виберіть режим кодування, який буде використовуватися.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Виберіть ступінь шифрування віддаленого хоста.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Виберіть зовнішній інструмент для запуску.</value>
   </data>
@@ -1086,9 +1010,6 @@ VncSharp Control Version {0}</value>
   <data name="Encoding" xml:space="preserve">
     <value>Кодування</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Шифрування</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Зовнішній інструмент</value>
   </data>
@@ -1145,9 +1066,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="Printers" xml:space="preserve">
     <value>Принтери</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Смарт-карти</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Звуки</value>
@@ -1674,9 +1592,6 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="ImportFileFailedContent" xml:space="preserve">
 		<value>Під час імпорту файлу «{0}» сталася помилка.</value>
 	</data>
-  <data name="ImportFailed" xml:space="preserve">
-		<value>Не вдалося імпортувати</value>
-	</data>
   <data name="ImportFromFile" xml:space="preserve">
 		<value>Імпорт з &amp;файлу…</value>
 	</data>
@@ -1773,14 +1688,8 @@ mRemoteNG зараз припинить роботу і почне процес 
   <data name="ShowOnToolbar" xml:space="preserve">
 		<value>Показати на панелі інструментів</value>
 	</data>
-  <data name="CheckingForUpdates" xml:space="preserve">
-		<value>Перевірка оновлень…</value>
-	</data>
   <data name="UpdateGetChangeLogFailed" xml:space="preserve">
 		<value>Не вдалося завантажити журнал змін.</value>
-	</data>
-  <data name="ReconnectAll" xml:space="preserve">
-		<value>Повторно підключити усі відкриті з'єднання</value>
 	</data>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">
 		<value>Тайм-аут RDP з'єднання</value>
@@ -1847,9 +1756,6 @@ mRemoteNG зараз припинить роботу і почне процес 
 	</data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
 		<value>Виберіть, чи отримувати попередження після відключення сеансу RDP через неактивність</value>
-	</data>
-  <data name="RdpAlertIdleTimeout" xml:space="preserve">
-		<value>Попереджати про відключення через неактивність</value>
 	</data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
 		<value>Пароль повинен містити принаймні {0} таких символів: {1}</value>

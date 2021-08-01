@@ -243,12 +243,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Verificação com sucesso!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA requer que o XenDesktop Online Plugin esteja instalado e a biblioteca wfica registrada. Você pode baixar o cliente aqui: http://www.citrix.com/download/ se você tiver o Plugin Online XenDesktop instalado e a verificação ainda falhar, tente registrar manualmente o wfica. Para fazer isso abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (onde c:\Program Files\Citrix\ICA Client\ é o caminho para a instalação do Plugin Online do XenDesktop). Se você ainda não pode passar essa verificação ou usar ICA em mRemoteNG, por favor, consulte o fórum de mRemoteNG no http://forum.mremoteng.org/"</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Todos os componentes de ICA, foram encontrados e parecem ser registrado corretamente. Citrix ICA cliente controle versão {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>não instalado corretamente</value>
   </data>
@@ -441,9 +435,6 @@
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Não foi possível encontrar o controlo ToolStrip em FilteredPropertyGrid.</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Versão instalada</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Detetar</value>
   </data>
@@ -464,15 +455,6 @@
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Para Nome de utilizador, senha ou domínio vazios, usar:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-bit</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (apenas em início de sessão)</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Básico</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Encriptar todo o arquivo de ligações</value>
@@ -576,24 +558,6 @@
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Falhou configuração de props HTTP!</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Impossível criar nova ligação ICA!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Falha ao carregar o Plugin ICA!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>Falha ICA SetCredentials!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Manipuladores de evento conjunto ICA falharam!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>Configuração de props ICA falhou!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>Configuração de resolução ICA falhou!</value>
-  </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identificar guias de ligação rápida, adicionando o prefixo "rápido:"</value>
   </data>
@@ -632,9 +596,6 @@
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>Ao fechar ligações:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Ligar:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Nome a exibir</value>
@@ -705,9 +666,6 @@
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Painéis de ligações</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Configurações e ligações</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Copiar</value>
   </data>
@@ -717,23 +675,11 @@
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Excluir a conexão...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Excluir ferramenta externa...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Excluir a pasta...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Doar</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Duplicar ligação</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Duplicar pasta</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Duplicar Aba</value>
@@ -752,9 +698,6 @@
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>Ajuda mRemoteNG</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Ir para</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Executar Ferramenta Externa</value>
@@ -791,12 +734,6 @@
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Atualizar ecrã (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Renomear ligação</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Renomear pasta</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Renomear aba</value>
@@ -966,9 +903,6 @@
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Selecione o modo de codificação a ser usado.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Selecione a força da criptografia do host remoto.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Selecione a ferramenta externa a ser iniciada.</value>
   </data>
@@ -1113,9 +1047,6 @@
   <data name="Encoding" xml:space="preserve">
     <value>Codificação</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Força de Criptografia</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Ferramenta externa</value>
   </data>
@@ -1172,9 +1103,6 @@
   </data>
   <data name="Printers" xml:space="preserve">
     <value>Impressoras</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Smart Cards</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Sons</value>
@@ -1400,9 +1328,6 @@
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>RDP SetResolution falhou!</value>
-  </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>Tamanho inteligente</value>
   </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Trazer para este computador</value>

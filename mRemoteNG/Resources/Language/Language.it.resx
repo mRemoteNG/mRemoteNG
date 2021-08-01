@@ -243,15 +243,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Controllo riuscito!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA richiede che il plugin XenDesktop Online sia installato e che la libreria wfica.ocx sia registrata. Il client è scaricabile all'indirizzo http://www.citrix.com/download/
-Se il plugin XenDesktop Online è installato ma il controllo fallisce, provare a registrare wfica.ocx manualmente. Aprire la finestra "Esegui" (WIN+R) ed inserire il testo: regsvr32 "C:\Programmi\Citrix\ICA Client\wfica.ocx" (dove C:\Programmi\Citrix\ICA Client\ è il percorso di installazione del plugin XenDesktop Online).
-Se il controllo fallisce e risulta impossibile utilizzare ICA con mRemoteNG, per favore consulta il forum di mRemoteNG all'indirizzo http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Tutti i componenti ICA sono stati installati e sembrano registrati correttamente.
-Citrix ICA Client Control versione {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>non installato correttamente</value>
   </data>
@@ -449,9 +440,6 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="CouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Impossibile creare un nuovo file delle connessioni!</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Versione installata</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Rileva</value>
   </data>
@@ -472,15 +460,6 @@ Creazione di un nuovo file delle connessioni.</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Quando i campi "Nome utente", "Password" o "Dominio" sono vuoti, utilizza i seguenti:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-bit</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (solo accesso)</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Base</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Crittografa completamente il file delle connessioni</value>
@@ -581,24 +560,6 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Impostazione delle proprietà HTTP fallita!</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Impossibile creare una nuova connessione ICA!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Caricamento del plugin ICA fallito!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials fallito!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Set Event Handlers fallito!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Set Props fallito!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Set Resolution fallito!</value>
-  </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>Aggiungi il prefisso "Quick:" alle schede di connessioni rapide</value>
   </data>
@@ -637,9 +598,6 @@ Creazione di un nuovo file delle connessioni.</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>Alla chiusura delle connessioni:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Connetti:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Nome visualizzato</value>
@@ -710,9 +668,6 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Pannelli di connessione</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Connessioni e configurazione</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Copia</value>
   </data>
@@ -722,23 +677,11 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Elimina connessione...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Elimina applicazione esterna...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Elimina cartella...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Effettua una donazione</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Duplica connessione</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Duplica cartella</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Duplica tab</value>
@@ -757,9 +700,6 @@ Creazione di un nuovo file delle connessioni.</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>Guida di mRemoteNG</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Vai a</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Esegui applicazione esterna</value>
@@ -796,12 +736,6 @@ Creazione di un nuovo file delle connessioni.</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Aggiorna lo schermo (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Rinomina connessione</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Rinomina cartella</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Rinomina tab</value>
@@ -974,9 +908,6 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Seleziona la modalità di codifica da utilizzare.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Seleziona il livello di crittografia dell'host remoto.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Seleziona l'applicazione esterna da avviare.</value>
   </data>
@@ -1121,9 +1052,6 @@ Creazione di un nuovo file delle connessioni.</value>
   <data name="Encoding" xml:space="preserve">
     <value>Codifica</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Livello di crittografia</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Applicazione esterna</value>
   </data>
@@ -1180,9 +1108,6 @@ Creazione di un nuovo file delle connessioni.</value>
   </data>
   <data name="Printers" xml:space="preserve">
     <value>Stampanti</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Smart card</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Audio</value>
@@ -1411,9 +1336,6 @@ Messaggio:
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>RDP SetResolution fallito!</value>
-  </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>SmartSize</value>
   </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Portare su questo computer</value>

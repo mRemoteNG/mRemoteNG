@@ -243,16 +243,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Comprobación realizada!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA necesita que esté instalado XenDesktop Online Plugin y que la librería wfica.ocx esté registrada. Puede descargar el cliente aquí: http://www.citrix.com/download/
-Si tiene instalado XenDesktop Online Plugin y la comprobación continúa fallando, pruebe a registrar wfica.ocx manualmente.
-Para hacer ésto, abra el diálogo ejecutar (Inicio - Ejecutar) e introduzca lo siguiente: regsvr32 "c:\Archivos de Programa\Citrix\ICA Client\wfica.ocx" (Donde c:\Archivos de Programa\Citrix\ICA Client\ es la ruta a su instalación de XenDesktop Online Plugin).
-Si continúa sin funcionar la comprobación ó no puede utilizar ICA en mRemoteNG, consulte el Foro de mRemoteNG en http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Todos los componentes de ICA han sido localizados y parecen estar registrados correctamente.
-Versión {0} de Citrix ICA Client Control</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>no instalado adecuadamente</value>
   </data>
@@ -452,9 +442,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="CouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>¡No se pudo crear un nuevo archivo de conexiones!</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Versión Instalada</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Detectar</value>
   </data>
@@ -475,15 +462,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Para campos de Nombre de Usuario, Contraseña y Dominio vacíos usar:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-bit</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (sólo inicio de sesión)</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Básico</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Cifrar por completo el archivo de conexión</value>
@@ -587,24 +565,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>¡Asignación de Propiedades HTTP fallida!</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>¡No se pudo crear una nueva conexión ICA!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>¡Fallo en la carga del Plugin ICA!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>¡Asignación de Credenciales ICA fallida!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>¡Asignación de Manejadores de Eventos ICA fallida!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>¡Asignación de Propiedades ICA fallida!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>¡Asignación de Resolución ICA fallida!</value>
-  </data>
   <data name="ImportAD" xml:space="preserve">
     <value>Importar desde Directorio Activo</value>
   </data>
@@ -640,9 +600,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>Al cerrar las conexiones:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Conectar:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Nombre Mostrado</value>
@@ -713,9 +670,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Paneles de Conexión</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Conexiones y Configuración</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Copiar</value>
   </data>
@@ -725,23 +679,11 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Borrar Conexión...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Borrar Herramienta Externa...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Borrar Carpeta...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Donar</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Duplicar Conexión</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Duplicar Carpeta</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Duplicar Pestaña</value>
@@ -760,9 +702,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>Ayuda de mRemoteNG</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Saltar a </value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Lanzar Aplicación Externa</value>
@@ -799,12 +738,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Refrescar Pantalla (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Renombrar Conexión</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Renombrar Carpeta</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Renombrar Pestaña</value>
@@ -978,9 +911,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Seleccione el modo de codificación a emplear.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Seleccione la fortaleza de cifrado del host remoto.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Seleccione la herramienta externa a iniciar.</value>
   </data>
@@ -1125,9 +1055,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="Encoding" xml:space="preserve">
     <value>Codificación</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Fortaleza del Cifrado</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Herramienta Externa</value>
   </data>
@@ -1187,9 +1114,6 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="Clipboard" xml:space="preserve">
     <value>Portapapeles</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Tarjetas Inteligentes</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Sonidos</value>
@@ -1399,9 +1323,6 @@ Mensaje:
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>¡RDP Asignación de Resolución fallida!</value>
-  </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>Tamaño inteligente</value>
   </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Traer a este equipo</value>

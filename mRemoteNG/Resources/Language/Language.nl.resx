@@ -243,27 +243,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Controle geslaagd!</value>
   </data>
-  <data name="strCcEOLFailed" xml:space="preserve">
-    <value>De (RDP) Sessies optie vereist dat u een geregistreerde versie van eolwtscom.dll op uw systeem heeft.
-mRemoteNG neemt dit onderdeel automatisch mee bij instalatie, maar zal niet automatisch registreren al u handmatig heeft geïnstalleerd, tenzij u het installatieprogramma opnieuw uitvoert.
-Om handmatig te registreren : Open het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (Waar c:\Program Files\mRemoteNG\ het pad is naar uw mRemoteNG installatie).
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcEOLOK" xml:space="preserve">
-    <value>EOLWTSCOM werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
-  </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Voor het gebruik van de Gecko Rendering Engine heb je XULrunner 1.8.1.x nodig en correcte pad naar de installatiemap welke onder Opties kunnen worden ingesteld.
-U kunt XULrunner 1.8.1.3 vanaf deze locatie downloaden: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Wanneer de download van het pakket is voltooid kunt u deze uitpakken naar een willekeurige locatie. Ga daarna vervolgens in mRemoteNG naar Extra - Opties - Geavanceerd en voer het juiste pad in naar de uitgepakte XULrunner bestanden.
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan de Gecko Engine in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
-  </data>
-  <data name="strCcNotInstalledProperly" xml:space="preserve">
-    <value>Niet correct geïnstalleerd</value>
-  </data>
   <data name="CcPuttyFailed" xml:space="preserve">
     <value>De SSH, Telnet, Rlogin en RAW protocollen zijn nodig PuTTY om te laten functioneren. PuTTY wordt standaard geleverd bij de mRemoteNG installatie en bevind zich in het installatiepad.
 Zorg ervoor dat u ofwel de Putty.exe in uw mRemoteNG directory staat(standaard: c:\Program Files\mRemoteNG\) of een geldig pad heeft opgegeven naar het PuTTY programmabestand onder Opties (Extra - Opties - Geavanceerd - Aangepast PuTTY pad)</value>
@@ -467,9 +446,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Kan geen ToolStrip vinden in FilteredPropertyGrid.</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Geïnstalleerde versie</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Detecteer</value>
   </data>
@@ -490,15 +466,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Voor lege gebruikersnaam, wachtwoord of domein velden gebruiken:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-bit</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (aanmelding alleen)</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Basis</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Volledig versleutelen connection bestand</value>
@@ -602,9 +569,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Instellen HTTP Eigenschappen mislukt!</value>
   </data>
-  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
-    <value>Vindt de Snel aansluit tabs met het voorzetsel "Quick"</value>
-  </data>
   <data name="ImportAD" xml:space="preserve">
     <value>Importeer van Active Directory</value>
   </data>
@@ -640,9 +604,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>Bij het sluiten van connecties:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Verbind:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Weergavenaam</value>
@@ -713,9 +674,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Connectie Panelen</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Verbindingen en Configuratie</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Kopiëren</value>
   </data>
@@ -725,23 +683,11 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>CTRL-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Verwijder Connectie...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Verwijder Externe Applicatie...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Verwijder Map...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Doneer</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Dupliceer Connectie</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Dupliceer Map</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Dupliceer Tab</value>
@@ -760,9 +706,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>mRemoteNG Help</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Ga naar</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Start Externe Applicatie</value>
@@ -799,12 +742,6 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Vernieuw Scherm (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Hernoem Connectie</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Naam map wijzigen</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Hernoem Tab</value>
@@ -978,9 +915,6 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Selecteer de codering modus welke moet worden gebruikt.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Selecteer de codering sterkte van de externe host.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Selecteer een externe applicatie welke gestart moet worden.</value>
   </data>
@@ -1125,9 +1059,6 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="Encoding" xml:space="preserve">
     <value>Codering</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Coderingsniveau</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Externe Applicatie</value>
   </data>
@@ -1184,9 +1115,6 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   </data>
   <data name="Printers" xml:space="preserve">
     <value>Printers</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Smartcards</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Geluiden</value>
@@ -1418,9 +1346,6 @@ Bericht:
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>RDP instellen resolutie mislukt!</value>
-  </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>Smart Size</value>
   </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Afspelen op deze computer</value>

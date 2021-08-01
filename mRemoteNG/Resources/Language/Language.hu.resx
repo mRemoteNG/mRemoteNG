@@ -222,9 +222,6 @@
   <data name="Connections" xml:space="preserve">
     <value>Kapcsolatok</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Telepített verzió</value>
-  </data>
   <data name="DontConnectWhenAuthFails" xml:space="preserve">
     <value>Ne kapcsolódj sikertelen hitelesítéskor</value>
   </data>
@@ -279,9 +276,6 @@
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Frissítés keresése</value>
   </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Ugrás</value>
-  </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Külső eszköz indítása</value>
   </data>
@@ -302,12 +296,6 @@
   </data>
   <data name="Reconnect" xml:space="preserve">
     <value>Újrakapcsolódás</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Kapcsolat átnevezése</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Könyvtár átnevezése</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Fül átnevezése</value>

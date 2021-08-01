@@ -279,16 +279,6 @@
   <data name="Download" xml:space="preserve">
 		<value>İndir</value>
 	</data>
-  <data name="CcICAFailed" xml:space="preserve">
-		<value>ICA, XenDesktop Online Plugin'in kurulu olmasını ve wfica.ocx kitaplığının kayıtlı olmasını gerektirir. İstemciyi şu adresten indirebilirsiniz: http://www.citrix.com/download/
-XenDesktop Çevrimiçi Eklentisi'ni yüklediyseniz ve kontrol hala başarısız olursa, el ile wfica.ocx kaydetmeyi deneyin.
-Bunu yapmak için çalıştır iletişim kutusunu açın (Başlat - Çalıştır) ve aşağıdakileri girin: regsvr32 "c:\Program Files\Citrix\ICA İstemci\wfica.ocx" (c:\Program Files\Citrix\ICA Client\ XenDesktop Online Plugin yüklemenizin yolu).
-Bu kontrolden sonuç alamıyorsanız veya ICA'yi mRemoteNG'de kullanamıyorsanız, http://forum.mremoteng.org/ adresindeki mRemoteNG Forumu'na başvurun "</value>
-	</data>
-  <data name="CcICAOK" xml:space="preserve">
-		<value>Tüm ICA bileşenleri bulundu ve düzgün kaydedilmiş gibi görünüyor.
-Citrix ICA Client Control Sürümü {0}</value>
-	</data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
 		<value>Düzgün kurulmamış</value>
 	</data>
@@ -507,9 +497,6 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
 		<value>ToolStrip kontrolü FilteredPropertyGrid içinde bulunamadı.</value>
 	</data>
-  <data name="InstalledVersion" xml:space="preserve">
-		<value>Yüklü sürüm</value>
-	</data>
   <data name="Detect" xml:space="preserve">
 		<value>Algıla</value>
 	</data>
@@ -533,12 +520,6 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
 	</data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
 		<value>Boş bırakılan Kullanıcı adı, Parola ve Domain için:</value>
-	</data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-		<value>128-bit (yalnızca oturum açma)</value>
-	</data>
-  <data name="Basic" xml:space="preserve">
-		<value>Basit</value>
 	</data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
 		<value>Bağlantı dosyası şifreleme</value>
@@ -678,12 +659,6 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
 		<value>HTTP Prop'larını değiştirme başarısız!</value>
 	</data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-		<value>Yeni ICA Bağlantısı oluşturulamadı!</value>
-	</data>
-  <data name="IcaControlFailed" xml:space="preserve">
-		<value>ICA eklentisini yükleme başarısız!</value>
-	</data>
   <data name="Database" xml:space="preserve">
 		<value>Veritabanı:</value>
 	</data>
@@ -726,29 +701,14 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
   <data name="ConnectionPanels" xml:space="preserve">
 		<value>Bağlantı Paneli</value>
 	</data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-		<value>Bağlantılar ve Ayar</value>
-	</data>
   <data name="Copy" xml:space="preserve">
 		<value>Kopyala</value>
-	</data>
-  <data name="DeleteConnection" xml:space="preserve">
-		<value>Bağlantıyı Sil...</value>
 	</data>
   <data name="DeleteExternalTool" xml:space="preserve">
 		<value>Harici Aracı Sil...</value>
 	</data>
-  <data name="DeleteFolder" xml:space="preserve">
-		<value>Klasörü Sil...</value>
-	</data>
   <data name="Donate" xml:space="preserve">
 		<value>Bağış Yap</value>
-	</data>
-  <data name="DuplicateConnection" xml:space="preserve">
-		<value>Bağlantıyı Çoğalt</value>
-	</data>
-  <data name="DuplicateFolder" xml:space="preserve">
-		<value>Klasörü Çoğalt</value>
 	</data>
   <data name="DuplicateTab" xml:space="preserve">
 		<value>Sekmeyi Çoğalt</value>
@@ -767,9 +727,6 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
 	</data>
   <data name="HelpContents" xml:space="preserve">
 		<value>mRemoteNG Yardım</value>
-	</data>
-  <data name="JumpTo" xml:space="preserve">
-		<value>Atla</value>
 	</data>
   <data name="LaunchExternalTool" xml:space="preserve">
 		<value>Harici Aracı Çalıştır</value>
@@ -806,12 +763,6 @@ Yeni bağlantılar dosyası ile başlanıyor.</value>
 	</data>
   <data name="RefreshScreen" xml:space="preserve">
 		<value>Ekranı Yenile (VNC)</value>
-	</data>
-  <data name="RenameConnection" xml:space="preserve">
-		<value>Bağlantıyı Yeniden Adlandır</value>
-	</data>
-  <data name="RenameFolder" xml:space="preserve">
-		<value>Klasörü Yeniden Adlandır</value>
 	</data>
   <data name="RenameTab" xml:space="preserve">
 		<value>Sekmeyi Yeniden Adlandır</value>
@@ -940,9 +891,6 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="Warnings" xml:space="preserve">
 		<value>Uyarılar</value>
 	</data>
-  <data name="ReconnectAll" xml:space="preserve">
-		<value>Tüm Açık Bağlantılara Yeniden Bağlanın</value>
-	</data>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">
 		<value>RDP Bağlantısı Zamanaşımı</value>
 	</data>
@@ -1024,27 +972,12 @@ Böyle bir hatayla karşılaşırsanız, lütfen yeni bir bağlantı dosyası ol
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
 		<value>Güncelleştirme bilgileri indirilemedi.</value>
 	</data>
-  <data name="CheckingForUpdates" xml:space="preserve">
-		<value>Güncelleştirmeler kontrol ediliyor...</value>
-	</data>
   <data name="UpdateDownloadComplete" xml:space="preserve">
 		<value>İndirme tamamlandı!
 MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
 	</data>
   <data name="UpdateDownloadCompleteFailed" xml:space="preserve">
 		<value>Güncelleme indirilemedi.</value>
-	</data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-		<value>ICA Kimlik ayarlama başarısız!</value>
-	</data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-		<value>ICA Olay İşleyicileri Ayarlama Başarısız!</value>
-	</data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-		<value>ICA Props Ayarlama başarısız!</value>
-	</data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-		<value>ICA Çözünürlük ayarlama başarısız!</value>
 	</data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
 		<value>"Hızlı:" önekini ekleyerek hızlı bağlantı sekmelerini belirleyin</value>
@@ -1054,9 +987,6 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
 	</data>
   <data name="ImportFileFailedContent" xml:space="preserve">
 		<value>Dosya alınırken bir hata oluştu, "{0}".</value>
-	</data>
-  <data name="ImportFailed" xml:space="preserve">
-		<value>İçe alma başarısız!</value>
 	</data>
   <data name="ImportFromFile" xml:space="preserve">
 		<value>&amp;Dosyadan içe aktar...</value>
@@ -1093,9 +1023,6 @@ MRemoteNG şimdi kapanacak ve kurulum başlayacak.</value>
 	</data>
   <data name="ClosingConnections" xml:space="preserve">
 		<value>Bağlantı kapatılırken:</value>
-	</data>
-  <data name="_Connect" xml:space="preserve">
-		<value>&amp;Bağlan:</value>
 	</data>
   <data name="DisplayName" xml:space="preserve">
 		<value>Görünen Ad</value>
@@ -1187,9 +1114,6 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
 	</data>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
 		<value>Kullanılacak kodlama modunu seçin.</value>
-	</data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-		<value>Uzak host için şifreleme gücünü seçin.</value>
 	</data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
 		<value>Başlatılacak harici aracı seçin.</value>
@@ -1362,9 +1286,6 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
   <data name="Encoding" xml:space="preserve">
 		<value>Kodlama</value>
 	</data>
-  <data name="EncryptionStrength" xml:space="preserve">
-		<value>Şifreleme Gücü</value>
-	</data>
   <data name="ExternalTool" xml:space="preserve">
 		<value>Harici Araç</value>
 	</data>
@@ -1412,9 +1333,6 @@ PuTTY ve harici araçlar için en fazla bekleme süresi:</value>
 	</data>
   <data name="Printers" xml:space="preserve">
 		<value>Yazıcılar</value>
-	</data>
-  <data name="SmartCards" xml:space="preserve">
-		<value>Smart Kartlar</value>
 	</data>
   <data name="Sounds" xml:space="preserve">
 		<value>Sesler</value>
@@ -1619,9 +1537,6 @@ Mesaj:
 	</data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
 		<value>RDP Çözünürlük ayarlama başarısız!</value>
-	</data>
-  <data name="RdpSmartSize" xml:space="preserve">
-		<value>Akıllı boyut</value>
 	</data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
 		<value>Bu bilgisayara getirin</value>

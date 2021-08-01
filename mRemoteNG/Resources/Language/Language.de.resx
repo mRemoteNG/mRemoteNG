@@ -243,27 +243,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Prüfung erfolgreich!</value>
   </data>
-  <data name="strCcEOLFailed" xml:space="preserve">
-    <value>Die (RDP-) Sitzungsfunktion benötigt die Datei eolwtscom.dll. Diese muss korrekt registriert sein.
-Alle mRemoteNG-Pakete beinhalten diese Datei, jedoch muss sie, wenn Sie eines der nicht-Setup Pakete verwenden, manuell registriert werden.
-Öffnen Sie hierzu den Ausführen-Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\Programme\mRemoteNG\eolwtscom.dll" (Wobei c:\Programme\mRemoteNG\ Ihr mRemoteNG-Installationspfad ist).
-Wenn Sie noch immer Probleme mit der (RDP-) Sitzungsfunktion in mRemoteNG haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcEOLOK" xml:space="preserve">
-    <value>EOLWTSCOM wurde gefunden und scheint korrekt registriert zu sein.</value>
-  </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Um die Gecko Rendering Engine benutzen zu können, benötigen Sie XULrunner 1.8.1.x und einen korrekt eingetragenen Pfad in den Optionen.
-Hier können Sie XULrunner 1.8.1.3 herunterladen: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Wenn der Download abgeschlossen ist, entpacken Sie das Paket (Der Speicherort ist dabei ihnen überlassen). Als nächstes öffnen Sie (in mRemoteNG) Extras - Optionen - Erweitert und geben Sie den korrekten Pfad im XULrunner Feld an.
-Wenn Sie noch immer Probleme mit der Gecko Engine in mRemote haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
-  </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
-    <value>GeckoFx wurde gefunden und scheint korrekt installiert zu sein.</value>
-  </data>
-  <data name="strCcNotInstalledProperly" xml:space="preserve">
-    <value>nicht korrekt installiert</value>
-  </data>
   <data name="CcPuttyFailed" xml:space="preserve">
     <value>Die Protokolle SSH, Telnet, Rlogin und RAW benötigen PuTTY. PuTTY wird in allen mRemote Paketen mitgeliefert und befindet sich im Installationspfad.
 Bitte versichern Sie sich, dass sich die Datei PuttyNG.exe in ihrem mRemote Installationspfad befindet (Standard: c:\Programme\mRemoteNG\) oder dass Sie einen korrekten Pfad in den Optionen (Extras - Optionen - Erweitert - Eigener PuTTY-Pfad) angegeben haben.</value>
@@ -468,9 +447,6 @@ Starte mit neuer Datei.</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Das ToolStrip-Steuerelement konnte in FilteredPropertyGrid nicht gefunden werden.</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Aktuelle Version</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Erkennen</value>
   </data>
@@ -491,21 +467,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Bei leeren Feldern für Benutzername, Passwort oder Domäne verwende:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128 Bit</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128 Bit (nur Anmeldung)</value>
-  </data>
-  <data name="Enc40Bit" xml:space="preserve">
-    <value>40 Bit</value>
-  </data>
-  <data name="Enc56Bit" xml:space="preserve">
-    <value>56 Bit</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Einfach</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Verbindungsdatendatei vollständig verschlüsseln</value>
@@ -609,9 +570,6 @@ Starte mit neuer Datei.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Setzen der HTTP-Parameter fehlgeschlagen!</value>
   </data>
-  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
-    <value>QuickConnect-Tabs identifizieren, indem das Präfix "Quick" benutzt wird</value>
-  </data>
   <data name="ImportAD" xml:space="preserve">
     <value>Von Active Directory importieren</value>
   </data>
@@ -647,9 +605,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>Beim Schließen der Verbindungen:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Verbinden:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Anzeigename</value>
@@ -720,9 +675,6 @@ Starte mit neuer Datei.</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Verbindungs-Panels</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Verbindungen und Konfiguration</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Kopieren</value>
   </data>
@@ -732,23 +684,11 @@ Starte mit neuer Datei.</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>STRG-ESC</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Verbindung löschen</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Entfernen</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Ordner löschen</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Spenden</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Verbindung duplizieren</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Ordner duplizieren</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Tab klonen</value>
@@ -767,9 +707,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>Hilfe</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Springe zu</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Starten</value>
@@ -803,12 +740,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Anzeige aktualisieren (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Verbindung umbenennen</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Ordner umbenennen</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Tab umbenennen</value>
@@ -982,9 +913,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Wählen Sie die zu verwendende Codierung.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Wählen Sie die Verschlüsselungsstärke des Remote Hosts.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Wählen Sie die zu startende externe Applikation.</value>
   </data>
@@ -1129,9 +1057,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="Encoding" xml:space="preserve">
     <value>Codierung</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Verschlüsselungsstärke</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Externes Programm</value>
   </data>
@@ -1188,9 +1113,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="Printers" xml:space="preserve">
     <value>Drucker</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Smartcards</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Töne</value>
@@ -1418,9 +1340,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>Setzen der Auflösung fehlgeschlagen!</value>
-  </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>Automatisch skalieren</value>
   </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Hier wiedergeben</value>
@@ -1681,9 +1600,6 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
-  <data name="ReconnectAll" xml:space="preserve">
-    <value>Alle offenen Verbindungen neu verbinden</value>
-  </data>
   <data name="_Launch" xml:space="preserve">
     <value>&amp;Starten</value>
   </data>
@@ -1711,17 +1627,11 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="FilterAllImportable" xml:space="preserve">
     <value>Alle wichtigen Dateien</value>
   </data>
-  <data name="ImportFailed" xml:space="preserve">
-    <value>Import-Vorgang fehlgeschlagen</value>
-  </data>
   <data name="ImportFromFile" xml:space="preserve">
     <value>Von &amp;Datei importieren</value>
   </data>
   <data name="OptionsProxyTesting" xml:space="preserve">
     <value>Testen...</value>
-  </data>
-  <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Nach Updates suchen...</value>
   </data>
   <data name="EncryptionEngine" xml:space="preserve">
     <value>Verschlüsselungs-Engine</value>
@@ -1891,9 +1801,6 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Wählen Sie, ob eine Benachrichtigung empfangen werden soll, nachdem die RDP-Sitzung aufgrund von Inaktivität getrennt wurde</value>
   </data>
-  <data name="RdpAlertIdleTimeout" xml:space="preserve">
-    <value>Benachrichtigung bei Leerlauftrennung</value>
-  </data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
     <value>Das Passwort muss mindestens {0} der folgenden Zeichen enthalten: {1}</value>
   </data>
@@ -1972,9 +1879,6 @@ Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   </data>
   <data name="Https" xml:space="preserve">
     <value>HTTPS</value>
-  </data>
-  <data name="ICA" xml:space="preserve">
-    <value>ICA</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Download</value>
@@ -2154,14 +2058,5 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="ExceptionMessage" xml:space="preserve">
     <value>Fehlermeldung</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Laden des ICA-Plugins fehlgeschlagen!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials fehlgeschlagen!</value>
-  </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Konnte keine neue ICA-Verbindung erstellen!</value>
   </data>
 </root>
