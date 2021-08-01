@@ -22,10 +22,6 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenViewExtAppsToolbar;
         private ToolStripMenuItem _mMenViewQuickConnectToolbar;
         private ToolStripMenuItem _mMenViewMultiSshToolbar;
-        private ToolStripSeparator _mMenViewSep3;
-        private ToolStripMenuItem _mMenViewJumpTo;
-        private ToolStripMenuItem _mMenViewJumpToConnectionsConfig;
-        private ToolStripMenuItem _mMenViewJumpToErrorsInfos;
         private ToolStripMenuItem _mMenViewResetLayout;
         private ToolStripMenuItem _mMenViewLockToolbars;
         private ToolStripSeparator _toolStripSeparator1;
@@ -53,16 +49,12 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnections = new ToolStripMenuItem();
             _mMenViewConfig = new ToolStripMenuItem();
             _mMenViewErrorsAndInfos = new ToolStripMenuItem();
-            _mMenViewJumpTo = new ToolStripMenuItem();
-            _mMenViewJumpToConnectionsConfig = new ToolStripMenuItem();
-            _mMenViewJumpToErrorsInfos = new ToolStripMenuItem();
             _mMenViewResetLayout = new ToolStripMenuItem();
             _mMenViewLockToolbars = new ToolStripMenuItem();
             _mMenViewSep2 = new ToolStripSeparator();
             _mMenViewQuickConnectToolbar = new ToolStripMenuItem();
             _mMenViewExtAppsToolbar = new ToolStripMenuItem();
             _mMenViewMultiSshToolbar = new ToolStripMenuItem();
-            _mMenViewSep3 = new ToolStripSeparator();
             _mMenViewFullscreen = new ToolStripMenuItem();
             _toolStripSeparator1 = new ToolStripSeparator();
 
@@ -77,15 +69,13 @@ namespace mRemoteNG.UI.Menu
                 _mMenViewConnections,
                 _mMenViewConfig,
                 _mMenViewErrorsAndInfos,
-                _toolStripSeparator1,
-                _mMenViewJumpTo,
-                _mMenViewResetLayout,
-                _mMenViewLockToolbars,
-                _mMenViewSep2,
                 _mMenViewQuickConnectToolbar,
                 _mMenViewExtAppsToolbar,
                 _mMenViewMultiSshToolbar,
-                _mMenViewSep3,
+                _toolStripSeparator1,
+                _mMenViewResetLayout,
+                _mMenViewLockToolbars,
+                _mMenViewSep2,
                 _mMenViewFullscreen
             });
             Name = "mMenView";
@@ -148,36 +138,6 @@ namespace mRemoteNG.UI.Menu
             _toolStripSeparator1.Name = "ToolStripSeparator1";
             _toolStripSeparator1.Size = new System.Drawing.Size(225, 6);
             // 
-            // mMenViewJumpTo
-            // 
-            _mMenViewJumpTo.DropDownItems.AddRange(new ToolStripItem[]
-            {
-                _mMenViewJumpToConnectionsConfig,
-                _mMenViewJumpToErrorsInfos
-            });
-            _mMenViewJumpTo.Image = Properties.Resources.JumpTo;
-            _mMenViewJumpTo.Name = "mMenViewJumpTo";
-            _mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
-            _mMenViewJumpTo.Text = Language.JumpTo;
-            // 
-            // mMenViewJumpToConnectionsConfig
-            // 
-            _mMenViewJumpToConnectionsConfig.Image = Properties.Resources.Root;
-            _mMenViewJumpToConnectionsConfig.Name = "mMenViewJumpToConnectionsConfig";
-            _mMenViewJumpToConnectionsConfig.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
-            _mMenViewJumpToConnectionsConfig.Size = new System.Drawing.Size(258, 22);
-            _mMenViewJumpToConnectionsConfig.Text = Language.ConnectionsAndConfig;
-            _mMenViewJumpToConnectionsConfig.Click += mMenViewJumpToConnectionsConfig_Click;
-            // 
-            // mMenViewJumpToErrorsInfos
-            // 
-            _mMenViewJumpToErrorsInfos.Image = Properties.Resources.InformationSmall;
-            _mMenViewJumpToErrorsInfos.Name = "mMenViewJumpToErrorsInfos";
-            _mMenViewJumpToErrorsInfos.ShortcutKeys = Keys.Control | Keys.Alt | Keys.E;
-            _mMenViewJumpToErrorsInfos.Size = new System.Drawing.Size(258, 22);
-            _mMenViewJumpToErrorsInfos.Text = Language.Notifications;
-            _mMenViewJumpToErrorsInfos.Click += mMenViewJumpToErrorsInfos_Click;
-            // 
             // mMenViewResetLayout
             // 
             _mMenViewResetLayout.Image = Properties.Resources.application_side_tree;
@@ -223,11 +183,6 @@ namespace mRemoteNG.UI.Menu
             _mMenViewMultiSshToolbar.Text = Language.MultiSshToolbar;
             _mMenViewMultiSshToolbar.Click += mMenViewMultiSSHToolbar_Click;
             // 
-            // mMenViewSep3
-            // 
-            _mMenViewSep3.Name = "mMenViewSep3";
-            _mMenViewSep3.Size = new System.Drawing.Size(225, 6);
-            // 
             // mMenViewFullscreen
             // 
             _mMenViewFullscreen.Image = Properties.Resources.arrow_out;
@@ -248,9 +203,6 @@ namespace mRemoteNG.UI.Menu
             _mMenViewConnections.Text = Language.Connections;
             _mMenViewConfig.Text = Language.Config;
             _mMenViewErrorsAndInfos.Text = Language.Notifications;
-            _mMenViewJumpTo.Text = Language.JumpTo;
-            _mMenViewJumpToConnectionsConfig.Text = Language.ConnectionsAndConfig;
-            _mMenViewJumpToErrorsInfos.Text = Language.Notifications;
             _mMenViewResetLayout.Text = Language.ResetLayout;
             _mMenViewLockToolbars.Text = Language.LockToolbars;
             _mMenViewQuickConnectToolbar.Text = Language.QuickConnectToolbar;
@@ -331,23 +283,6 @@ namespace mRemoteNG.UI.Menu
                 Windows.ErrorsForm.Hide();
                 _mMenViewErrorsAndInfos.Checked = false;
             }
-        }
-
-        private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
-        {
-            if (MainForm.pnlDock.ActiveContent == Windows.TreeForm)
-            {
-                Windows.ConfigForm.Activate();
-            }
-            else
-            {
-                Windows.TreeForm.Activate();
-            }
-        }
-
-        private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
-        {
-            Windows.ErrorsForm.Activate();
         }
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
