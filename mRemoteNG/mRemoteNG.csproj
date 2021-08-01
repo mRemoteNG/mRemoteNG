@@ -224,13 +224,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Update="Resources\Tiles\mRemoteNG.VisualElementsManifest.xml">
+    <None Update="mRemoteNG.VisualElementsManifest.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Tiles\VisualElements_150.png">
+    <None Update="VisualElements_150.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Tiles\VisualElements_70.png">
+    <None Update="VisualElements_70.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\COPYING.TXT">
