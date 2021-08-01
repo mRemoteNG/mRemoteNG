@@ -780,10 +780,5 @@ namespace mRemoteNG.UI.Forms
         {
             viewMenu.mMenView_DropDownOpening(sender, e);
         }
-
-        private void mainFileMenu1_DropDownOpening(object sender, EventArgs e)
-        {
-            fileMenu.mMenFile_DropDownOpening(sender, e);
-        }
     }
 }
