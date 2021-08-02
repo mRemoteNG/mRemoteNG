@@ -1167,16 +1167,13 @@
     <None Include="Resources\Images\arrow_left.png" />
     <None Include="Resources\Images\arrow_out.png" />
     <None Include="Resources\Images\brick.png" />
-    <None Include="Resources\Images\Bug.png" />
     <None Include="Resources\Images\Chat.png" />
-    <None Include="Resources\Images\cog.png" />
     <None Include="Resources\Images\cog_error.png" />
     <None Include="Resources\Images\ConnectedOverlay.png" />
     <None Include="Resources\Images\Connection_Add.png" />
     <None Include="Resources\Images\Connection_Duplicate.png" />
     <None Include="Resources\Images\Console.png" />
     <None Include="Resources\Images\database.png" />
-    <None Include="Resources\Images\Donate.png" />
     <None Include="Resources\Images\exclamation.png" />
     <None Include="Resources\Images\ExtApp_Add.png" />
     <None Include="Resources\Images\ExtApp_Delete.png" />
@@ -1206,14 +1203,11 @@
     <None Include="Resources\Images\Screenshot_Delete.png" />
     <None Include="Resources\Images\Screenshot_Save.png" />
     <None Include="Resources\Images\Session_LogOff.png" />
-    <None Include="Resources\Images\shield.png" />
     <None Include="Resources\Images\SmartSize.png" />
-    <None Include="Resources\Images\TabExit.png" />
-    <None Include="Resources\Images\TabOption.png" />
-    <None Include="Resources\Images\TabOverflow.png" />
     <None Include="Resources\Images\tick.png" />
     <None Include="Resources\Images\user_comment.png" />
-    <None Include="Resources\Images\Warning_Small.png" />
+    <None Include="Resources\Images\Play.png" />
+    <None Include="Resources\Images\Pause.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1231,7 +1225,6 @@
     <None Include="Resources\Images\loading_spinner.gif" />
     <Content Include="Resources\Images\green_arrow1.png" />
     <Content Include="Resources\Images\green_arrow2.png" />
-    <None Include="Resources\Images\puttycm.png" />
     <None Include="Resources\Images\PuttySessions.png" />
     <None Include="Resources\Images\PuttyConfig.png" />
     <None Include="Resources\Images\Play_Quick.png" />
@@ -1247,7 +1240,6 @@
     <None Include="Resources\Images\Sort_AZ.png" />
     <None Include="Resources\Images\Lock.png" />
     <None Include="Resources\Images\Refresh.png" />
-    <None Include="Resources\Images\RDP.png" />
     <None Include="Resources\Images\PropertiesDefault.png" />
     <None Include="Resources\Images\ExtApp.png" />
     <None Include="Resources\Images\Duplicate.png" />
@@ -1361,14 +1353,11 @@
     <None Include="Resources\Images\Warning.png" />
     <None Include="Resources\Images\View.png" />
     <None Include="Resources\Images\Update.png" />
-    <None Include="Resources\Images\Tools.png" />
     <None Include="Resources\Images\Search.png" />
     <None Include="Resources\Images\Screenshot_Add.png" />
     <None Include="Resources\Images\Save.png" />
     <None Include="Resources\Images\Root.png" />
     <None Include="Resources\Images\Rename.png" />
-    <None Include="Resources\Images\Play.png" />
-    <None Include="Resources\Images\Pause.png" />
     <None Include="Resources\Images\Options.png" />
     <None Include="Resources\Images\Open.png" />
     <None Include="Resources\Images\NewFolder.png" />
@@ -1387,7 +1376,6 @@
     <None Include="Resources\Images\Folder.png" />
     <None Include="Resources\Images\File.png" />
     <None Include="Resources\Images\Expand.png" />
-    <None Include="Resources\Images\Exit.png" />
     <None Include="Resources\Images\ErrorSmall.png" />
     <None Include="Resources\Images\Error.png" />
     <None Include="Resources\Images\Delete.png" />
