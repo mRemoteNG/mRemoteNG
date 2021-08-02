@@ -1163,6 +1163,57 @@
     <Content Include="Icons\PowerShell.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Images\application_side_tree.png" />
+    <None Include="Resources\Images\arrow_left.png" />
+    <None Include="Resources\Images\arrow_out.png" />
+    <None Include="Resources\Images\brick.png" />
+    <None Include="Resources\Images\Bug.png" />
+    <None Include="Resources\Images\Chat.png" />
+    <None Include="Resources\Images\cog.png" />
+    <None Include="Resources\Images\cog_error.png" />
+    <None Include="Resources\Images\ConnectedOverlay.png" />
+    <None Include="Resources\Images\Connection_Add.png" />
+    <None Include="Resources\Images\Connection_Duplicate.png" />
+    <None Include="Resources\Images\Console.png" />
+    <None Include="Resources\Images\database.png" />
+    <None Include="Resources\Images\Donate.png" />
+    <None Include="Resources\Images\exclamation.png" />
+    <None Include="Resources\Images\ExtApp_Add.png" />
+    <None Include="Resources\Images\ExtApp_Delete.png" />
+    <None Include="Resources\Images\ExtApp_Start.png" />
+    <None Include="Resources\Images\Folder_Add.png" />
+    <None Include="Resources\Images\folder_key.png" />
+    <None Include="Resources\Images\Inheritance_Default.png" />
+    <None Include="Resources\Images\JumpTo.png" />
+    <None Include="Resources\Images\key.png" />
+    <None Include="Resources\Images\key_add.png" />
+    <None Include="Resources\Images\key_delete.png" />
+    <None Include="Resources\Images\key_go.png" />
+    <None Include="Resources\Images\Link.png" />
+    <None Include="Resources\Images\Monitor.png" />
+    <None Include="Resources\Images\monitor_delete.png" />
+    <None Include="Resources\Images\monitor_go.png" />
+    <None Include="Resources\Images\Monitor_GoTo.png" />
+    <None Include="Resources\Images\News.png" />
+    <None Include="Resources\Images\Page.png" />
+    <None Include="Resources\Images\page_copy.png" />
+    <None Include="Resources\Images\Panel_Add.png" />
+    <None Include="Resources\Images\Panel_Close.png" />
+    <None Include="Resources\Images\Panels.png" />
+    <None Include="Resources\Images\Properties_Default.png" />
+    <None Include="Resources\Images\Quit.png" />
+    <None Include="Resources\Images\Screenshot_Copy.png" />
+    <None Include="Resources\Images\Screenshot_Delete.png" />
+    <None Include="Resources\Images\Screenshot_Save.png" />
+    <None Include="Resources\Images\Session_LogOff.png" />
+    <None Include="Resources\Images\shield.png" />
+    <None Include="Resources\Images\SmartSize.png" />
+    <None Include="Resources\Images\TabExit.png" />
+    <None Include="Resources\Images\TabOption.png" />
+    <None Include="Resources\Images\TabOverflow.png" />
+    <None Include="Resources\Images\tick.png" />
+    <None Include="Resources\Images\user_comment.png" />
+    <None Include="Resources\Images\Warning_Small.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
