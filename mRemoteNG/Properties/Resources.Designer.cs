@@ -733,16 +733,6 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap keepass_32x32 {
-            get {
-                object obj = ResourceManager.GetObject("keepass_32x32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap key {
             get {
                 object obj = ResourceManager.GetObject("key", resourceCulture);
@@ -846,16 +836,6 @@ namespace mRemoteNG.Properties {
         internal static System.Drawing.Bitmap monitor_go {
             get {
                 object obj = ResourceManager.GetObject("monitor_go", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Monitor_GoTo {
-            get {
-                object obj = ResourceManager.GetObject("Monitor_GoTo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1562,16 +1542,6 @@ namespace mRemoteNG.Properties {
         internal static System.Drawing.Bitmap Website {
             get {
                 object obj = ResourceManager.GetObject("Website", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap xml {
-            get {
-                object obj = ResourceManager.GetObject("xml", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

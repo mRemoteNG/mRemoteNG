@@ -1178,8 +1178,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Images\loading_spinner.gif" />
-    <None Include="Resources\Images\xml.png" />
-    <None Include="Resources\Images\keepass_32x32.png" />
     <Content Include="Resources\Images\green_arrow1.png" />
     <Content Include="Resources\Images\green_arrow2.png" />
     <None Include="Resources\Images\puttycm.png" />
