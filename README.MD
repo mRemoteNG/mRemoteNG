@@ -2,7 +2,7 @@
 
 <br/><br/>
 <p align="center">
-  <img width="500" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/Tools/img/logo.png">
+  <img width="500" src="https://github.com/mRemoteNG/mRemoteNG/blob/develop/logo.png">
 </p>
   
 <p align="center">

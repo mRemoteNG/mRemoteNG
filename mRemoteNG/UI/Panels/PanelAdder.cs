@@ -145,7 +145,7 @@ namespace mRemoteNG.UI.Panels
                     var cMenScreen = new ToolStripMenuItem(Language.Screen + " " + Convert.ToString(i + 1))
                     {
                         Tag = new ArrayList(),
-                        Image = Properties.Resources.Monitor_GoTo
+                        Image = Properties.Resources.monitor_go
                     };
                     ((ArrayList)cMenScreen.Tag).Add(Screen.AllScreens[i]);
                     ((ArrayList)cMenScreen.Tag).Add(cMenScreens.Tag);
