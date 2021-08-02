@@ -1,10 +1,8 @@
 **NOTICE: This project currently transited to a new maintainer. Development help would be greatly appreciated.**
 
-![mRemoteNG](logo.png)
-
 <br/><br/>
 <p align="center">
-  <img width="500" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/Tools/img/logo.png">
+  <img width="500" src="https://github.com/mRemoteNG/mRemoteNG/blob/develop/logo.png">
 </p>
   
 <p align="center">
