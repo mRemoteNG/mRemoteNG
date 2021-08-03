@@ -106,7 +106,7 @@ namespace mRemoteNG.UI.Controls
             // btnQuickConnect
             // 
             _btnQuickConnect.DropDown = _mnuQuickConnectProtocol;
-            _btnQuickConnect.Image = Properties.Resources.StatusRun_16x;
+            _btnQuickConnect.Image = Properties.Resources.Run_16x;
             _btnQuickConnect.ImageTransparentColor = Color.Magenta;
             _btnQuickConnect.Margin = new Padding(0, 1, 3, 2);
             _btnQuickConnect.Name = "btnQuickConnect";
@@ -270,7 +270,7 @@ namespace mRemoteNG.UI.Controls
                     {
                         Text = containerInfo.Name,
                         Tag = containerInfo,
-                        Image = containerInfo.OpenConnections.Count > 0 ? Properties.Resources.StatusRun_16x : Properties.Resources.StatusStop_16x
+                        Image = containerInfo.OpenConnections.Count > 0 ? Properties.Resources.Run_16x : Properties.Resources.Stop_16x
                     };
                     favoriteMenuItem.MouseUp += ConnectionsMenuItem_MouseUp;
                     favoritesList.Add(favoriteMenuItem);

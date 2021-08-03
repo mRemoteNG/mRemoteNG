@@ -107,7 +107,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cMenMCDelete
             // 
-            this.cMenMCDelete.Image = global::mRemoteNG.Properties.Resources.Delete;
+            this.cMenMCDelete.Image = global::mRemoteNG.Properties.Resources.Close_16x;
             this.cMenMCDelete.Name = "cMenMCDelete";
             this.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.cMenMCDelete.Size = new System.Drawing.Size(140, 22);

@@ -221,7 +221,7 @@ namespace mRemoteNG.UI.Window
                         {
                             Text = containerInfo.Name,
                             Tag = containerInfo,
-                            Image = containerInfo.OpenConnections.Count > 0 ? Properties.Resources.StatusRun_16x : Properties.Resources.StatusStop_16x
+                            Image = containerInfo.OpenConnections.Count > 0 ? Properties.Resources.Run_16x : Properties.Resources.Stop_16x
                         };
                         favoriteMenuItem.MouseUp += FavoriteMenuItem_MouseUp;
                         favoritesList.Add(favoriteMenuItem);

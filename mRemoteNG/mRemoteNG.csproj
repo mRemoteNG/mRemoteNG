@@ -1141,14 +1141,11 @@
     <Content Include="Icons\PowerShell.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Images\application_side_tree.png" />
-    <None Include="Resources\Images\cog_error.png" />
     <None Include="Resources\ConnectedOverlay.png" />
     <None Include="Resources\Images\Connection_Duplicate.png" />
     <None Include="Resources\Images\ExtApp_Add.png" />
     <None Include="Resources\Images\ExtApp_Delete.png" />
     <None Include="Resources\Images\ExtApp_Start.png" />
-    <None Include="Resources\Images\folder_key.png" />
     <None Include="Resources\Images\Inheritance_Default.png" />
     <None Include="Resources\Images\Monitor.png" />
     <None Include="Resources\Images\monitor_delete.png" />
@@ -1194,8 +1191,6 @@
     <None Include="Resources\Settings_16x.png" />
     <None Include="Resources\SortAscending_16x.png" />
     <None Include="Resources\SortDescending_16x.png" />
-    <None Include="Resources\StatusRun_16x.png" />
-    <None Include="Resources\StatusStop_16x.png" />
     <None Include="Resources\Test_16x.png" />
     <None Include="Resources\ToggleOfficeKeyboardScheme_16x.png" />
     <None Include="Resources\NewFile_16x.png" />
@@ -1208,6 +1203,9 @@
     <None Include="Resources\SchemaCompare_16x.png" />
     <None Include="Resources\Panel_16x.png" />
     <None Include="Resources\InsertPanel_16x.png" />
+    <None Include="Resources\Run_16x.png" />
+    <None Include="Resources\Stop_16x.png" />
+    <None Include="Resources\Close_16x.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1225,7 +1223,6 @@
     <None Include="Resources\Images\ErrorsAndInfos.png" />
     <None Include="Resources\Images\Sessions.png" />
     <None Include="Resources\Images\PropertiesDefault.png" />
-    <None Include="Resources\Images\Duplicate.png" />
     <None Include="Resources\Images\Bad_Symbol.png" />
     <None Include="Resources\Images\Good_Symbol.png" />
     <Content Include="Icons\Anti Virus.ico">
@@ -1328,7 +1325,6 @@
     <None Include="Resources\Images\Information.png" />
     <None Include="Resources\Images\ErrorSmall.png" />
     <None Include="Resources\Images\Error.png" />
-    <None Include="Resources\Images\Delete.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

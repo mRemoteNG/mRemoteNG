@@ -146,7 +146,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnect
             // 
-            _cMenTreeConnect.Image = Properties.Resources.StatusRun_16x;
+            _cMenTreeConnect.Image = Properties.Resources.Run_16x;
             _cMenTreeConnect.Name = "_cMenTreeConnect";
             _cMenTreeConnect.Size = new System.Drawing.Size(199, 22);
             _cMenTreeConnect.Text = "Connect";
@@ -222,7 +222,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeDisconnect
             // 
-            _cMenTreeDisconnect.Image = Properties.Resources.StatusStop_16x;
+            _cMenTreeDisconnect.Image = Properties.Resources.Stop_16x;
             _cMenTreeDisconnect.Name = "_cMenTreeDisconnect";
             _cMenTreeDisconnect.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDisconnect.Text = "Disconnect";
@@ -271,7 +271,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeDelete
             // 
-            _cMenTreeDelete.Image = Properties.Resources.Delete;
+            _cMenTreeDelete.Image = Properties.Resources.Close_16x;
             _cMenTreeDelete.Name = "_cMenTreeDelete";
             _cMenTreeDelete.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDelete.Text = "Delete";

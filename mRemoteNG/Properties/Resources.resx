@@ -133,9 +133,6 @@
   <data name="ErrorsAndInfos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\ErrorsAndInfos.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Inheritance" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Inheritance.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -190,20 +187,11 @@
   <data name="News" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\News.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="application_side_tree" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\application_side_tree.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cog_error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\cog_error.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="monitor_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\monitor_delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="monitor_go" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\monitor_go.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="folder_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\folder_key.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ConnectedOverlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConnectedOverlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -309,9 +297,6 @@
   </data>
   <data name="PowerShell" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Icons\PowerShell.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Duplicate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Duplicate.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -427,12 +412,6 @@
   <data name="SortDescending_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SortDescending_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="StatusRun_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StatusRun_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StatusStop_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StatusStop_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Test_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Test_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -465,5 +444,14 @@
   </data>
   <data name="Panel_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Panel_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Run_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Run_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Stop_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Stop_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Close_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Close_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
