@@ -237,19 +237,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Falha na verificação!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Verificação com sucesso!</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>não instalado corretamente</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>O SSH, Telnet, Rlogin e protocolos RAW precisam PuTTY para trabalhar. PuTTY vem com cada pacote de mRemoteNG e está localizado no caminho de instalação. 
-Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteNG (padrão: c:\Program Files\mRemoteNG\) ou que você tenha especificado um caminho válido para seu executável PuTTY nas opções (ferramentas - opções - avançadas - caminho personalizado PuTTY)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>O executável PuTTY foi encontrado e está pronto para usar.</value>
-  </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Não mostre esta mensagem novamente.</value>
   </data>
@@ -294,9 +281,6 @@ Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteN
   </data>
   <data name="Message" xml:space="preserve">
     <value>Mensagem</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Validação de componentes</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Click falhou!</value>

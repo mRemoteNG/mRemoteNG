@@ -243,31 +243,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Sprawdzenie nie powiodło się!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Sprawdzenie powiodło się!</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>nie jest zainstalowany prawidłowo</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>SSH, Telnet, Rlogin i protokołów RAW używają programu PuTTY. PuTTY zawarty jest pakiecie mRemoteNG i znajduje się w ścieżce instalacji programu. 
-Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie: c:\Program Files\mRemoteNG\) lub że podałeś prawidłową ścieżkę do narzędzia PuTTY w opcjach programu(Narzędzia - Opcje - zaawansowane - ścieżka programu PuTTY)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>Aplikacja PuTTY została odnaleziona i powinna być gotowa do użytku.</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>Aby połączenia RDP działały poprawnie trzeba mieć zainstalowane Podłączanie Pulpitu Zdalnego (Klient Usług Terminalowych) w wersji 8.0. Można go pobrać ze strony: https://support.microsoft.com/kb/2592687. Jeśli RDP 8.0 jest już zainstalowany i nadal nie działają połączenia RDP, spróbuj ręcznie zarejestrować plik mstscax.dll. Aby zarejestrować plik wybierz Uruchom (Start - Uruchom) i wprowadź w linii polecń: regsvr32 "c:\windows\system32\mstscax.dll" (gdzie c:\ jest dyskiem systemowym). Jeśli nadal masz problemy z połączeniem RDP skonsultuj się z mRemoteNG Forum na http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>Wszystkie składniki RDP zostały znalezione i wydają się być poprawnie zarejestrowane. Wersja Podłączanie Pulpitu Zdalnego {0}</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC wymaga, aby biblioteka VncSharp.dll znajdowała się w folderze instalacji mRemoteNG. Upewnij się, że masz plik VncSharp.dll w folderze aplikacji mRemoteNG (domyślnie C:\Program Files\mRemoteNG\). Jeśli nadal nie można użyć VNC w mRemoteNG prosimy o kontakt mRemoteNG Forum na http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Wszystkie składniki VNC zostały znalezione i wydają się być poprawnie zarejestrowane. Wersja VncSharp {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatycznie połącz ponownie jeśli nastąpi odłączenie od serwera (tylko RDP &amp;&amp; ICA)</value>
   </data>
@@ -333,9 +308,6 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>Wykryto problem z kompatybilnością</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Sprawdzenie komponentów</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>Wykonanie btnIcon_Click nie powiodło się!</value>
@@ -1189,9 +1161,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>Przy otwarciu programu podłącz ostatnio otwarte połączenia</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Odświerz</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>Plik zdalny</value>

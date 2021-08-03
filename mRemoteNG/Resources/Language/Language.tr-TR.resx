@@ -228,9 +228,6 @@
   <data name="CheckFailed" xml:space="preserve">
 		<value>Kontrol başarısız!</value>
 	</data>
-  <data name="CheckSucceeded" xml:space="preserve">
-		<value>Kontrol başarılı!</value>
-	</data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
 		<value>Bu mesajı tekrar gösterme</value>
 	</data>
@@ -279,33 +276,6 @@
   <data name="Download" xml:space="preserve">
 		<value>İndir</value>
 	</data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-		<value>Düzgün kurulmamış</value>
-	</data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-		<value>SSH, Telnet, Rlogin ve RAW protokolleri çalışmak için PuTTY'ye ihtiyaç duyar. PuTTY her mRemoteNG paketi ile birlikte gelir ve kurulum yolunda bulunur.
-PutTy.exe'yi mRemoteNG dizininizde (varsayılan: c:\Program Files\mRemoteNG\) bulundurduğunuzdan veya PuTTY çalıştırılabilir dosyanız için Seçenekler'de (Araçlar - Seçenekler - Gelişmiş - Özel PuTTY yolu) geçerli bir yol belirttiğinizden emin olun.</value>
-	</data>
-  <data name="CcPuttyOK" xml:space="preserve">
-		<value>PuTTY çalışabilir dosyası bulundu ve kullanıma hazır.</value>
-	</data>
-  <data name="CcRDPFailed" xml:space="preserve">
-		<value>RDP'nin düzgün çalışabilmesi için Uzak Masaüstü Bağlantısı (Terminal Hizmetleri) İstemcisinin en az 8.0 sürümü yüklü olması gerekir. Onu buradan indirebilirsiniz: http://support.microsoft.com/kb/925876
-Bu kontrol hala başarısız olursa veya RDP'yi kullanamazsanız lütfen http://forum.mremoteng.org/ adresindeki mRemoteNG Forumu'na başvurun.</value>
-	</data>
-  <data name="CcRDPOK" xml:space="preserve">
-		<value>Tüm RDP bileşenleri bulundu ve düzgün bir şekilde kayıtlı görünüyorlar.
-Uzak Masaüstü Bağlantısı Kontrol Sürümü {0}</value>
-	</data>
-  <data name="CcVNCFailed" xml:space="preserve">
-		<value>VNC, VncSharp.dll dosyasının mRemoteNG uygulama klasöründe bulunmasını gerektirir.
-Lütfen VncSharp.dll dosyasını mRemoteNG uygulama klasörünüzde (genellikle C:\Program Files\mRemoteNG\) bulundurduğunuzdan emin olun.
-Bu kontrolten sonuç alamıyorsanız veya VNC'yi mRemoteNG'de kullanamıyorsanız lütfen http://forum.mremoteng.org/ adresindeki mRemoteNG Forumu'na başvurun.</value>
-	</data>
-  <data name="CcVNCOK" xml:space="preserve">
-		<value>Tüm VNC bileşenleri bulundu ve düzgün bir şekilde kayıtlı görünüyorlar.
-VncSharp Kontrol Sürümü {0}</value>
-	</data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
 		<value>Sunucu bağlantısı kesildiğinde otomatik olarak yeniden bağlanmayı deneyin (yalnızca RDP  &amp;&amp; ICA)</value>
 	</data>
@@ -347,9 +317,6 @@ VncSharp Kontrol Sürümü {0}</value>
 	</data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
 		<value>Uyumluluk sorunu tespit edildi</value>
-	</data>
-  <data name="ComponentsCheck" xml:space="preserve">
-		<value>Bileşenler Kontrolü</value>
 	</data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
 		<value>btnIcon_Click başarısız!</value>
@@ -1555,9 +1522,6 @@ Mesaj:
 	</data>
   <data name="ReconnectAtStartup" xml:space="preserve">
 		<value>Başlangıçta daha önce açılmış oturumlara yeniden bağlan</value>
-	</data>
-  <data name="Refresh" xml:space="preserve">
-		<value>Yenile</value>
 	</data>
   <data name="RemoteFile" xml:space="preserve">
 		<value>Uzak Dosya</value>

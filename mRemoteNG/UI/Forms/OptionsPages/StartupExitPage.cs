@@ -27,7 +27,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkReconnectOnStart.Text = Language.ReconnectAtStartup;
             chkSingleInstance.Text = Language.AllowOnlySingleInstance;
             chkStartMinimized.Text = Language.StartMinimized;
-            chkProperInstallationOfComponentsAtStartup.Text = Language.CheckProperInstallationOfComponentsAtStartup;
         }
 
         public override void SaveSettings()
