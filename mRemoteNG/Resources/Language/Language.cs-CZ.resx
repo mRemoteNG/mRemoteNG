@@ -246,36 +246,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Kontrola selhala!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Kontrola úspěšná!</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>není správně instalováno</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>Protokoly SSH, Telnet, Rlogin and RAW potřebují ke své práci program PuTTY. PuTTY je součástí každého balíčku s mRemoteNG a je k nalezení ve složce, kde je mRemoteNG nainstalován.
-Prosím ujistěte se, že budťo máte soubor Putty.exe ve složce vašeho mRemoteNG (výchozí je: c:\Program Files\mRemoteNG\) nebo že jste zadali správnou cestu ke složce obsahující program PuTTY v Nástrojích (menu Nástroje -&gt; Možnosti -&gt; Pokročilé -&gt; Vlastní cesta k PuTTY)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>Program PuTTY byl nalezen a měl by být připraven k použití.</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>Aby RDP fungovalo, musíte mí nainstlaovanou poslední verzi Remote Desktop Connection (Terminal Services) Client 8.0. Můžete jej stáhnout zde : http://support.microsoft.com/kb/925876
-Pokud tato kontrola stále selhává nebo nejste schopni používat RDP v mRemoteNG, prosím prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>Všechny komponenty RDP byly nalezeny a zdají se být řádně zaregistrovány.
-Remote Desktop Connection Control verze {0}</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>Funkcionalita VNC vyžaduje knihovnu VncSharp.dll ve složce s vaší instalací mRemoteNG.
-Prosím ujistěte se, že máte v aplikační složce vaší instalace mRemoteNG soubor VncSharp.dll (zpravidla složka C:\Program Files\mRemoteNG\).
-Pokud tato kontrola stále selhává nebo nejste schopni používat VNC v mRemoteNG, prosím prosím obraťte se na diskuzní fórum mRemoteNG na adrese http://forum.mremoteng.org/.</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Všechny VNC součásti byly nalezeny a zdají se být řádně zaregistrovány.
-VncSharp Control verze {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automaticky obnovit připojení v případě přerušení spojení se serverem(pouze RDP &amp;&amp; ICA)</value>
   </data>
@@ -347,9 +317,6 @@ VncSharp Control verze {0}</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>Detekován porblém s kompatibilitou</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Kontrola komponent</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>Operace btnIcon_Click selhala!</value>
@@ -1474,9 +1441,6 @@ Zpráva:
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>Znovu se připojit k předchozím otevřeným relacím při startu aplikace</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Obnovit</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>Vzdálený soubor</value>

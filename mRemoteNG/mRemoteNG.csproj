@@ -510,9 +510,6 @@
     <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\OptionsPages\ComponentsPage.Designer.cs">
-      <DependentUpon>ComponentsPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Forms\OptionsPages\CredentialsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -714,9 +711,6 @@
     <Compile Include="UI\Window\BaseWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Forms\OptionsPages\ComponentsPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="UI\Window\ConfigWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -749,9 +743,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\FrmExport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Window\ScreenshotManagerWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Window\SSHTransferWindow.cs">
@@ -1007,10 +998,6 @@
     <EmbeddedResource Include="UI\Window\BaseWindow.resx">
       <DependentUpon>BaseWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\ComponentsPage.resx">
-      <DependentUpon>ComponentsPage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ConfigWindow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ConfigWindow.cs</DependentUpon>
@@ -1033,10 +1020,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FrmExport.resx">
       <DependentUpon>FrmExport.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\ScreenshotManagerWindow.resx">
-      <DependentUpon>ScreenshotManagerWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\SSHTransferWindow.resx">
@@ -1132,14 +1115,12 @@
     <None Include="Resources\Icons\Panels_Icon.ico" />
     <None Include="Resources\Icons\PortScan_Icon.ico" />
     <None Include="Resources\Icons\Save_Icon.ico" />
-    <None Include="Resources\Icons\Screenshot_Icon.ico" />
     <None Include="Resources\Icons\Sessions_Icon.ico" />
     <None Include="Resources\Icons\Shield_Icon.ico" />
     <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
     <None Include="Resources\Icons\StartupExit_Icon.ico" />
     <None Include="Resources\Icons\Tab_Icon.ico" />
     <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
-    <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
     <None Include="Resources\Icons\Info_Icon.ico" />
     <None Include="Resources\Icons\Root_Icon.ico" />
     <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
@@ -1179,9 +1160,6 @@
     <None Include="Resources\Images\Panel_Close.png" />
     <None Include="Resources\Images\Panels.png" />
     <None Include="Resources\Images\Properties_Default.png" />
-    <None Include="Resources\Images\Screenshot_Copy.png" />
-    <None Include="Resources\Images\Screenshot_Delete.png" />
-    <None Include="Resources\Images\Screenshot_Save.png" />
     <None Include="Resources\Images\SmartSize.png" />
     <None Include="Resources\Images\Key_Delete.png" />
     <None Include="Resources\Images\Loading_Spinner.gif" />
@@ -1243,7 +1221,6 @@
   <ItemGroup>
     <None Include="Resources\Images\SSHTransfer.png" />
     <None Include="Resources\Images\ErrorsAndInfos.png" />
-    <None Include="Resources\Images\Screenshot.png" />
     <None Include="Resources\Images\Sessions.png" />
     <None Include="Resources\Images\PropertiesDefault.png" />
     <None Include="Resources\Images\ExtApp.png" />
@@ -1252,7 +1229,6 @@
     <None Include="Resources\Images\UVNC_SC.png" />
     <None Include="Resources\Images\Bad_Symbol.png" />
     <None Include="Resources\Images\Good_Symbol.png" />
-    <None Include="Resources\Images\ComponentsCheck.png" />
     <Content Include="Icons\Anti Virus.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1349,13 +1325,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Resources\Images\Properties.png" />
-    <None Include="Resources\Images\Inheritance.png" />
-    <None Include="Properties\app.manifest" />
-    <None Include="Resources\Images\WarningSmall.png" />
-    <None Include="Resources\Images\Warning.png" />
-    <None Include="Resources\Images\View.png" />
-    <None Include="Resources\Images\Screenshot_Add.png" />
     <None Include="Resources\Images\InformationSmall.png" />
     <None Include="Resources\Images\Information.png" />
     <None Include="Resources\Images\ErrorSmall.png" />

@@ -36,7 +36,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkReconnectOnStart = new mRemoteNG.UI.Controls.MrngCheckBox();
             this.chkSaveConsOnExit = new mRemoteNG.UI.Controls.MrngCheckBox();
             this.chkSingleInstance = new mRemoteNG.UI.Controls.MrngCheckBox();
-            this.chkProperInstallationOfComponentsAtStartup = new mRemoteNG.UI.Controls.MrngCheckBox();
             this.chkStartMinimized = new mRemoteNG.UI.Controls.MrngCheckBox();
             this.chkStartFullScreen = new mRemoteNG.UI.Controls.MrngCheckBox();
             this.SuspendLayout();
@@ -77,24 +76,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSingleInstance.Text = "Allow only a single instance of the application (mRemote restart required)";
             this.chkSingleInstance.UseVisualStyleBackColor = true;
             // 
-            // chkProperInstallationOfComponentsAtStartup
-            // 
-            this.chkProperInstallationOfComponentsAtStartup._mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.OUT;
-            this.chkProperInstallationOfComponentsAtStartup.AutoSize = true;
-            this.chkProperInstallationOfComponentsAtStartup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkProperInstallationOfComponentsAtStartup.Location = new System.Drawing.Point(3, 74);
-            this.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup";
-            this.chkProperInstallationOfComponentsAtStartup.Size = new System.Drawing.Size(290, 17);
-            this.chkProperInstallationOfComponentsAtStartup.TabIndex = 3;
-            this.chkProperInstallationOfComponentsAtStartup.Text = "Check proper installation of components at startup";
-            this.chkProperInstallationOfComponentsAtStartup.UseVisualStyleBackColor = true;
-            // 
             // chkStartMinimized
             // 
             this.chkStartMinimized._mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.OUT;
             this.chkStartMinimized.AutoSize = true;
             this.chkStartMinimized.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkStartMinimized.Location = new System.Drawing.Point(3, 97);
+            this.chkStartMinimized.Location = new System.Drawing.Point(3, 73);
             this.chkStartMinimized.Name = "chkStartMinimized";
             this.chkStartMinimized.Size = new System.Drawing.Size(105, 17);
             this.chkStartMinimized.TabIndex = 3;
@@ -107,7 +94,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkStartFullScreen._mice = mRemoteNG.UI.Controls.MrngCheckBox.MouseState.OUT;
             this.chkStartFullScreen.AutoSize = true;
             this.chkStartFullScreen.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkStartFullScreen.Location = new System.Drawing.Point(3, 120);
+            this.chkStartFullScreen.Location = new System.Drawing.Point(3, 96);
             this.chkStartFullScreen.Name = "chkStartFullScreen";
             this.chkStartFullScreen.Size = new System.Drawing.Size(109, 17);
             this.chkStartFullScreen.TabIndex = 4;
@@ -124,7 +111,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.Controls.Add(this.chkSaveConsOnExit);
             this.Controls.Add(this.chkSingleInstance);
             this.Controls.Add(this.chkStartMinimized);
-            this.Controls.Add(this.chkProperInstallationOfComponentsAtStartup);
             this.Name = "StartupExitPage";
             this.Size = new System.Drawing.Size(610, 490);
             this.Load += new System.EventHandler(this.StartupExitPage_Load);
@@ -135,7 +121,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		internal MrngCheckBox chkReconnectOnStart;
 		internal MrngCheckBox chkSaveConsOnExit;
 		internal MrngCheckBox chkSingleInstance;
-		internal MrngCheckBox chkProperInstallationOfComponentsAtStartup;
         internal MrngCheckBox chkStartMinimized;
         internal MrngCheckBox chkStartFullScreen;
     }

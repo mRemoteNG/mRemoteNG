@@ -246,35 +246,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>检查失败！</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>检查成功！</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>安装不正确</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>SSH、Telnet、Rlogin和RAW协议均基于PuTTY。mRemoteNG安装时会自动安装内置的PuTTY到安装目录中。
-请确保Putty.exe在mRemoteNG目录中（默认为 c:\Program Files\mRemoteNG\）或是在选项（工具/选项/高级/自定义PuTTY路径）中指定Putty的有效路径。</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>发现 PuTTY 执行文件。</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>要使 RDP 正常工作，您至少需要安装远程桌面连接（终端服务）客户端 8.0。您可以在此处下载：http://support.microsoft.com/kb/925876
-如果此检查仍然失败或无法使用 RDP，请咨询 {0}。</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>此计算机上支持以下 RDP 协议版本：{0}</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC 要求 VncSharp.dll 位于 mRemoteNG 应用程序文件夹中。
-请确认 VncSharp.dll 在您安装 mRemoteNG 的目录中（一般为 C:\Program Files\mRemoteNG\）。
-如果仍然无法通过此检查或在 mRemoteNG 中使用 VNC，请咨询 {0}。</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>发现 VNC 组件。
-VncSharp 版本 {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>服务器连接断开时，自动重试连接(仅限 RDP 和 ICA)</value>
   </data>
@@ -346,9 +317,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>检测到系统存在兼容性问题</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>组件检查</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Click 函数执行失败！</value>
@@ -1493,9 +1461,6 @@ VncSharp 版本 {0}</value>
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>启动时自动连接上次打开的会话</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>刷新</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>远程文件</value>

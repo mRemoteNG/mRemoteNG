@@ -237,36 +237,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Помилка перевірки!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Успішно перевірено!</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>встановлений неправильно</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>SSH, Telnet, Rlogin і RAW протоколам потрібен для роботи PuTTY. PuTTY поставляється з кожним mRemoteNG і знаходиться в папці з програмою.
-Переконайтеся, що putty.exe є в папці з mRemoteNG (за замовчунням: C:\Program Files mRemoteNG\), або ящо ви вказали правильний шлях до виконуваного файлу PuTTY в Інструменти - Опції - Додатково - Шлях до PuTTY)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>Виконуваний файл PuTTY знайдений і готовий до використання.</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>Для правильної роботи RDP необхідно мати встановлений клієнт Remote Desktop Connection (Terminal Services) не менше версії 8.0. Ви можете отримати його тут: https://support.microsoft.com/kb/2592687
-Якщо у вас є встановлений RDP 8.0 і підключитися не вдається, спробуйте зареєструватися mstscax.dll вручну. Для цього відкрийте (Пуск - Виконати) і введіть наступну команду: regsvr32 "C:\Windows\system32\mstscax.dll" (де C: \ - ваш системний диск).
-Якщо у вас виникли проблеми при роботі з RDP зверніться зверніться за адресою: {0}.</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>На цій машині підтримуються наступні версії протоколів RDP: {0}</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC вимагає, щоб VncSharp.dll знаходився у папці додатків mRemoteNG.
-Переконайтеся, що у папці програми mRemoteNG файл VncSharp.dll (як правило, C:C:\Program Files\mRemoteNG\).
-Якщо ви все ще не можете пройти цю перевірку або використовувати VNC в mRemoteNG, будь ласка, зверніться за адресою {0}.</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Всі VNC компоненти були знайдені і зареєстровані.
-VncSharp Control Version {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Автоматично намагатися відновити зв'язок при відключенні від сервера (тільки RDP і ICA)</value>
   </data>
@@ -323,9 +293,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Неможливо розібрати аргументи командного рядка!</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Перевірка компонентів</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>Помилка btnIcon_Click!</value>
@@ -1283,9 +1250,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>При запуску підключатися до попередніх сесій</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Оновити</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>Віддалений файл</value>

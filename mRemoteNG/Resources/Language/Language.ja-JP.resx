@@ -248,38 +248,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>確認に失敗しました</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Check succeeded!</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>正しくインストールされていません</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path.
-Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>The PuTTY executable was found and should be ready to use.</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value />
-    <comment>For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services) Client 6.0 installed. You can download it here: http://support.microsoft.com/kb/925876
-If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at http://forum.mremoteng.org/.</comment>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value />
-    <comment>All RDP components were found and seem to be registered properly.　
-Remote Desktop Connection Control Version {0}</comment>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC requires VncSharp.dll to be located in your mRemoteNG application folder.
-Please make sure that you have the VncSharp.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
-If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>All VNC components were found and seem to be registered properly.
-VncSharp Control Version {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>
   </data>
@@ -354,9 +322,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>互換性の問題が検出されました</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>コンポーネントの確認</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Clickがエラーを発生しました</value>
@@ -1499,9 +1464,6 @@ Message:
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>起動時に前セッション時の接続を開始する</value>
     <comment>Reconnect to previously opened sessions on startup</comment>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>更新</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>遠隔ファイル</value>

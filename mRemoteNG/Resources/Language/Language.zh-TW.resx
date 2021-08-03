@@ -240,23 +240,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>檢查失敗!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>檢查成功!</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>未正確安裝</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>找到 PuTTY 執行檔且準備好使用。</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>找到所有 RDP 元件並似乎正確註冊。
-Remote Desktop Connection Control 版本 {0}</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>找到所有 VNC 元件並似乎正確註冊。
-VncSharp Control 版本 {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>從伺服器中斷連線時自動嘗試重新連線 (僅限 RDP &amp;&amp; ICA)</value>
   </data>
@@ -319,9 +302,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>偵測到相容問題</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>元件檢查</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Click 失敗!</value>
@@ -1356,9 +1336,6 @@ VncSharp Control 版本 {0}</value>
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>啟動時重新連線到先前開啟的工作階段</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>重新整理</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>遠端檔案</value>

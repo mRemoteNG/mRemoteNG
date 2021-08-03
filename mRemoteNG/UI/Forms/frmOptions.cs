@@ -81,7 +81,6 @@ namespace mRemoteNG.UI.Forms
                 {typeof(ThemePage).Name, new ThemePage {Dock = DockStyle.Fill}},
                 {typeof(SecurityPage).Name, new SecurityPage {Dock = DockStyle.Fill}},
                 {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}},
-                {typeof(ComponentsPage).Name, new ComponentsPage {Dock = DockStyle.Fill}},
             };
         }
 

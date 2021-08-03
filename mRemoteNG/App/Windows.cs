@@ -10,7 +10,6 @@ namespace mRemoteNG.App
         private static ActiveDirectoryImportWindow _adimportForm;
         private static ExternalToolsWindow _externalappsForm;
         private static PortScanWindow _portscanForm;
-        private static ScreenshotManagerWindow _screenshotmanagerForm;
         private static UltraVNCWindow _ultravncscForm;
         private static ConnectionTreeWindow _treeForm;
 
@@ -22,7 +21,6 @@ namespace mRemoteNG.App
 
         internal static ConfigWindow ConfigForm { get; set; } = new ConfigWindow();
         internal static ErrorAndInfoWindow ErrorsForm { get; set; } = new ErrorAndInfoWindow();
-        internal static ScreenshotManagerWindow ScreenshotForm { get; set; } = new ScreenshotManagerWindow();
         private static UpdateWindow UpdateForm { get; set; } = new UpdateWindow();
         internal static SSHTransferWindow SshtransferForm { get; private set; } = new SSHTransferWindow();
 
@@ -65,10 +63,6 @@ namespace mRemoteNG.App
                     case WindowType.PortScan:
                         _portscanForm = new PortScanWindow();
                         _portscanForm.Show(dockPanel);
-                        break;
-                    case WindowType.ScreenshotManager:
-                        _screenshotmanagerForm = new ScreenshotManagerWindow();
-                        _screenshotmanagerForm.Show(dockPanel);
                         break;
                     case WindowType.UltraVNCSC:
                         if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
