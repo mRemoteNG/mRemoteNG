@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1850: Minify config xml
 ### Changed
 - #2013: Removed components check
+- #2011: Removed screenshot manager
 - #2010: Redesigned menus
 - #2005: Removed in-app documentation
 - #1777: Cleaned up VisualStudio project structure
