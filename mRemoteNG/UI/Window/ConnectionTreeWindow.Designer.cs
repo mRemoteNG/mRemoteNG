@@ -197,7 +197,6 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.msMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
-            this.Icon = global::mRemoteNG.Properties.Resources.Root_Icon;
             this.Name = "ConnectionTreeWindow";
             this.TabText = "Connections";
             this.Text = "Connections";

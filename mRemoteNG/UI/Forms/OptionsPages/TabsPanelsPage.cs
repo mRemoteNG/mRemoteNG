@@ -1,4 +1,4 @@
-using mRemoteNG.Properties;
+﻿using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -9,7 +9,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Properties.Resources.Tab_Icon;
+            PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Tab_16x);
         }
 
         public override string PageName

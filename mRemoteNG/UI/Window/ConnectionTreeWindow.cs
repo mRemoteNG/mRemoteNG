@@ -40,6 +40,7 @@ namespace mRemoteNG.UI.Window
         {
             WindowType = WindowType.Tree;
             DockPnl = panel;
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.ASPWebSite_16x);
             InitializeComponent();
             SetMenuEventHandlers();
             SetConnectionTreeEventHandlers();

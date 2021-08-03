@@ -23,7 +23,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public ThemePage()
         {
             InitializeComponent();
-            PageIcon = Properties.Resources.Appearance_Icon;
+            PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.AppearanceEditor_16x);
             _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ThemingActive) return;
             _themeManager = ThemeManager.getInstance();

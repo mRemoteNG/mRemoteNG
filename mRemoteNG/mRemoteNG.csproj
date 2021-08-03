@@ -19,7 +19,7 @@
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <ApplicationIcon>Resources\Icons\mRemoteNG_Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\mRemoteNG_Icon.ico</ApplicationIcon>
     <OptionStrict>Off</OptionStrict>
     <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
@@ -221,6 +221,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ImageConverter.cs" />
     <Compile Include="Resources\Language\Language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1099,33 +1100,6 @@
     <None Include="Resources\Tiles\VisualElements_150.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Icons\Appearance_Icon.ico" />
-    <None Include="Resources\Icons\mRemoteNG_Icon.ico" />
-    <None Include="Resources\Icons\Comments_Icon.ico" />
-    <None Include="Resources\Icons\Config_Icon.ico" />
-    <None Include="Resources\Icons\Database_Icon.ico" />
-    <None Include="Resources\Icons\Error_Icon.ico" />
-    <None Include="Resources\Icons\ExtApp_Icon.ico" />
-    <None Include="Resources\Icons\Help_Icon.ico" />
-    <None Include="Resources\Icons\Key_Icon.ico" />
-    <None Include="Resources\Icons\Keyboard_Icon.ico" />
-    <None Include="Resources\Icons\News_Icon.ico" />
-    <None Include="Resources\Icons\Options_Icon.ico" />
-    <None Include="Resources\Icons\EditPage_Icon.ico" />
-    <None Include="Resources\Icons\Panels_Icon.ico" />
-    <None Include="Resources\Icons\PortScan_Icon.ico" />
-    <None Include="Resources\Icons\Save_Icon.ico" />
-    <None Include="Resources\Icons\Sessions_Icon.ico" />
-    <None Include="Resources\Icons\Shield_Icon.ico" />
-    <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
-    <None Include="Resources\Icons\StartupExit_Icon.ico" />
-    <None Include="Resources\Icons\Tab_Icon.ico" />
-    <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
-    <None Include="Resources\Icons\Info_Icon.ico" />
-    <None Include="Resources\Icons\Root_Icon.ico" />
-    <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
-    <None Include="Resources\Icons\Update_Icon.ico" />
-    <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
     <Content Include="Icons\Infrastructure.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1198,6 +1172,14 @@
     <None Include="Resources\StatusInformation_16x.png" />
     <None Include="Resources\LogWarning_16x.png" />
     <None Include="Resources\LogError_16x.png" />
+    <None Include="Resources\mRemoteNG_Icon.ico" />
+    <None Include="Resources\Tab_16x.png" />
+    <None Include="Resources\SQLDatabase_16x.png" />
+    <None Include="Resources\Key_16x.png" />
+    <None Include="Resources\StartupProject_16x.png" />
+    <None Include="Resources\AppearanceEditor_16x.png" />
+    <None Include="Resources\Lock_16x.png" />
+    <None Include="Resources\Export_16x.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

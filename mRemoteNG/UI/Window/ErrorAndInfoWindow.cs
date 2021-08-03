@@ -30,6 +30,7 @@ namespace mRemoteNG.UI.Window
         {
             WindowType = WindowType.ErrorsAndInfos;
             DockPnl = panel;
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.StatusInformation_16x);
             _display = new DisplayProperties();
             InitializeComponent();
             lblMsgDate.Width = _display.ScaleWidth(lblMsgDate.Width);

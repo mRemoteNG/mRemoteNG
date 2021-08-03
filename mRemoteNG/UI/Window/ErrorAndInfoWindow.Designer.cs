@@ -151,7 +151,6 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.pnlErrorMsg);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
-            this.Icon = global::mRemoteNG.Properties.Resources.Info_Icon;
             this.Name = "ErrorAndInfoWindow";
             this.TabText = global::mRemoteNG.Resources.Language.Language.Notifications;
             this.Text = "Notifications";

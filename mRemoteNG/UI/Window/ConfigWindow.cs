@@ -195,7 +195,6 @@ namespace mRemoteNG.UI.Window
             Controls.Add(_pGrid);
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             HideOnClose = true;
-            Icon = Properties.Resources.Config_Icon;
             Name = "ConfigWindow";
             TabText = @"Config";
             Text = @"Config";
@@ -237,6 +236,7 @@ namespace mRemoteNG.UI.Window
         {
             WindowType = WindowType.Config;
             DockPnl = panel;
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
             InitializeComponent();
             ApplyLanguage();
         }

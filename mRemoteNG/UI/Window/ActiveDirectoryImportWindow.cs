@@ -17,6 +17,7 @@ namespace mRemoteNG.UI.Window
         {
             WindowType = WindowType.ActiveDirectoryImport;
             DockPnl = new DockContent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Schema_16x);
             InitializeComponent();
             FontOverrider.FontOverride(this);
             ApplyTheme();

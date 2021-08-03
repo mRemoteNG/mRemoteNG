@@ -130,90 +130,6 @@
   <data name="VisualElements_70" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tiles\VisualElements_70.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ActiveDirectory_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\ActiveDirectory_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Appearance_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Appearance_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Comments_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Comments_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Config_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Config_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ConnectionsSaveAs_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\ConnectionsSaveAs_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Database_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Database_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EditPage_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\EditPage_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Error_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Error_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExtApp_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\ExtApp_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Help_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Help_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Info_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Info_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Keyboard_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Keyboard_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Key_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Key_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mRemoteNG_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\mRemoteNG_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="News_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\News_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Options_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Options_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panels_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Panels_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PortScan_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\PortScan_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Root_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Root_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Save_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Save_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sessions_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Sessions_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Shield_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Shield_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SSHTransfer_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\SSHTransfer_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StartupExit_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\StartupExit_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tab_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Tab_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Update_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Update_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UVNC_SC_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\UVNC_SC_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PowerShell" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Icons\PowerShell.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Loading_Spinner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Loading_Spinner.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -390,5 +306,29 @@
   </data>
   <data name="ViewDownBySchema_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ViewDownBySchema_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mRemoteNG_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mRemoteNG_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Key_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Key_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SQLDatabase_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SQLDatabase_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tab_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tab_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AppearanceEditor_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AppearanceEditor_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Export_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Export_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Lock_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lock_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StartupProject_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StartupProject_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

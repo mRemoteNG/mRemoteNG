@@ -61,16 +61,6 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon ActiveDirectory_Icon {
-            get {
-                object obj = ResourceManager.GetObject("ActiveDirectory_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Add_16x {
@@ -101,12 +91,12 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon Appearance_Icon {
+        internal static System.Drawing.Bitmap AppearanceEditor_16x {
             get {
-                object obj = ResourceManager.GetObject("Appearance_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("AppearanceEditor_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -151,42 +141,12 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Comments_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Comments_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Config_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Config_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ConnectedOverlay {
             get {
                 object obj = ResourceManager.GetObject("ConnectedOverlay", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon ConnectionsSaveAs_Icon {
-            get {
-                object obj = ResourceManager.GetObject("ConnectionsSaveAs_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -207,16 +167,6 @@ namespace mRemoteNG.Properties {
             get {
                 object obj = ResourceManager.GetObject("Copy_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Database_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Database_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -251,26 +201,6 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon EditPage_Icon {
-            get {
-                object obj = ResourceManager.GetObject("EditPage_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Error_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Error_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ExpandAll_16x {
@@ -291,12 +221,12 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon ExtApp_Icon {
+        internal static System.Drawing.Bitmap Export_16x {
             get {
-                object obj = ResourceManager.GetObject("ExtApp_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("Export_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -391,16 +321,6 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Help_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Help_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap HostStatus_Check {
@@ -431,16 +351,6 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Info_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Info_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap InsertPanel_16x {
@@ -451,22 +361,12 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon Key_Icon {
+        internal static System.Drawing.Bitmap Key_16x {
             get {
-                object obj = ResourceManager.GetObject("Key_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Keyboard_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Keyboard_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("Key_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -476,6 +376,16 @@ namespace mRemoteNG.Properties {
         internal static System.Drawing.Bitmap Loading_Spinner {
             get {
                 object obj = ResourceManager.GetObject("Loading_Spinner", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lock_16x {
+            get {
+                object obj = ResourceManager.GetObject("Lock_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -557,16 +467,6 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon News_Icon {
-            get {
-                object obj = ResourceManager.GetObject("News_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap OpenFile_16x {
@@ -577,52 +477,12 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Options_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Options_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Panel_16x {
             get {
                 object obj = ResourceManager.GetObject("Panel_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Panels_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Panels_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon PortScan_Icon {
-            get {
-                object obj = ResourceManager.GetObject("PortScan_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon PowerShell {
-            get {
-                object obj = ResourceManager.GetObject("PowerShell", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -687,16 +547,6 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Root_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Root_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Run_16x {
@@ -723,16 +573,6 @@ namespace mRemoteNG.Properties {
             get {
                 object obj = ResourceManager.GetObject("Save_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Save_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Save_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -777,32 +617,12 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Sessions_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Sessions_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Settings_16x {
             get {
                 object obj = ResourceManager.GetObject("Settings_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Shield_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Shield_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -827,22 +647,22 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon SSHTransfer_Icon {
+        internal static System.Drawing.Bitmap SQLDatabase_16x {
             get {
-                object obj = ResourceManager.GetObject("SSHTransfer_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("SQLDatabase_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon StartupExit_Icon {
+        internal static System.Drawing.Bitmap StartupProject_16x {
             get {
-                object obj = ResourceManager.GetObject("StartupExit_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("StartupProject_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -877,12 +697,12 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon Tab_Icon {
+        internal static System.Drawing.Bitmap Tab_16x {
             get {
-                object obj = ResourceManager.GetObject("Tab_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("Tab_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -923,26 +743,6 @@ namespace mRemoteNG.Properties {
             get {
                 object obj = ResourceManager.GetObject("UniqueKeyError_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon Update_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Update_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
-        /// </summary>
-        internal static System.Drawing.Icon UVNC_SC_Icon {
-            get {
-                object obj = ResourceManager.GetObject("UVNC_SC_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
