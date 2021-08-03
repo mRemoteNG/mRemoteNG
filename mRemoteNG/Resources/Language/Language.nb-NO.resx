@@ -240,37 +240,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Sjekk mislyktes!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Sjekk lyktes!</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>ikke korrekt installert</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>SSH-, Telnet-, Rlogin- og RAW-protokollene trenger PuTTY for å fungere. PuTTY kommer med hver mRemoteNG-pakke, og ligger i installasjonsstien.
-Vennligst kontroller at du enten har putty.exe i mRemoteNG-mappen (standard: C:\Program Files\mRemoteNG\) eller at du har angitt en gyldig sti til putty.exe i Alternativer (Verktøy - Alternativer - Avansert - Egendefinert bane til PuTTY)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>PuTTY ble funnet og er klar til bruk.</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>For at RDP skal fungere korrekt må du som et minimum ha Remote Desktop Connection (Terminal Services Client) 8.0 installert. Denne kan lastes ned herfra: https://support.microsoft.com/kb/2592687
-Hvis du har RDP 8.0 installert og kontrollen fremdeles feiler, kan du prøve å registrere mstscax.dll manuelt. For å gjøre dette, åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\windows\system32\mstscax.dll" (der c:\ er systemdisken).
-Hvis du fremdeles har problemer med å få RDP til å fungere, vennligst se {0}.</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>Alle RDP-komponenter ble funnet og ser ut til å være korrekt registrert.
-Remote Desktop Connection Control Version {0}</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC krever at VncSharp.dll finnes i mappen mRemoteNG er installert i.
-Vennligst kontroller at du har VncSharp.dll i installasjonsmappen til mRemoteNG (vanligvis C:\Program Files\mRemoteNG\).
-Hvis kontrollen feiler eller VNC ikke fungerer i mRemoteNG, vennligst se {0}.</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Alle VNC-komponenter ble funnet og ser ut til å være korrekt registrert.
-VncSharp Control Version {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Forsøk å automatisk koble til på nytt ved frakobling fra server (kun RDP &amp;&amp; ICA)</value>
   </data>
@@ -333,9 +302,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>Kompatibilitetsproblem oppdaget</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Komponentkontroll</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Click mislyktes!</value>
@@ -1367,9 +1333,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>Koble til tidligere åpnede økter ved oppstart</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Oppdater</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>Ekstern fil</value>

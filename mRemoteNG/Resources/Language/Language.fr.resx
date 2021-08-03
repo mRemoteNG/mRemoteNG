@@ -240,30 +240,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Vérification échouée !</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Verification réussie !</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>pas correctement installé </value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>Le SSH, Telnet, rlogin et protocoles RAW nécessite PuTTY. PuTTY est fourni dans chaque paquet de mRemoteNG et se trouve dans le dossier d'installation. Assurez-vous que votre répertoire mRemoteNG (par défaut: C:\ Program Files\mRemoteNG\) contienne Putty.exe, ou que vous avez spécifié un chemin d'accès valide  dans les options (Outils - Options - Avancé - Custom PuTTY chemin d'accès)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>L'exécutable PuTTY a été trouvé et devrait être prêt à l'emploi.</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>Pour que RDP fonctionne correctement, vous devez avoir au moins Remote Desktop Connection (Terminal Services Client) 6.1 installé. Vous pouvez le télécharger ici: http://support.microsoft.com/kb/951616 Si vous avez RDP 6.1 installé et que la vérification échoue, essayez d'enregistrer mstscax.dll manuellement. Pour ce faire, ouvrez la boîte de dialogue Exécuter (Démarrer - Exécuter) et entrer la commande suivante: regsvr32 "c:\ windows\system32\mstscax.dll" (où C:\ est votre lecteur système). Si vous avez encore des difficultés à faire fonctionner RDP veuillez consulter le Forum mRemoteNG:  http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>Tous les composants RDP ont été trouvés et semblent être enregistrés correctement. Remote Desktop Connection Version Control {0}</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC nécessite VncSharp.dll qui doit se trouver dans le dossier de mRemoteNG. Assurez-vous que le fichier VncSharp.dll est présent dans le dossier de mRemoteNG (habituellement C:\Program Files\mRemoteNG\). Si la vérification de VNC échoue, veuillez consulter le Forum mRemoteNG:  http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Tous les composants VNC ont été trouvés et semblent être enregistrés correctement. Version Control VncSharp {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Reconnexion automatique en cas de déconnexion du serveur (RDP seulement)</value>
   </data>
@@ -326,9 +302,6 @@
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>Problème de compatibilité détecté</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Vérifiez les composants</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Click a échoué !</value>
@@ -1361,9 +1334,6 @@ Message:
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>Reconnecter les sessions ouvertes au démarrage</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Actualiser</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>Fichier distant</value>

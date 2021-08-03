@@ -198,9 +198,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Az ellenőrzés sikertelen!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Az ellenőrzés sikeres!</value>
-  </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Többé ne mutasd ezt az üzenetet.</value>
   </data>

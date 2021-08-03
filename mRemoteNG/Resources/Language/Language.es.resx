@@ -240,36 +240,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Comprobación fallida!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Comprobación realizada!</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>no instalado adecuadamente</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>Los protocolos SSH, Telnet, Rlogin y RAW necesitan PuTTY para funcionar. PuTTY viene con cada paquete de mRemoteNG y se encuentra en la ruta de instalación.
-Por favor, asegúrese de que tiene Putty.exe en el directorio de mRemoteNG (por defecto: c:\Archivos de Programa\mRemoteNG) ó que ha especificado una ruta correcta a su ejecutable de PuTTY en las Opciones (Herramientas-Opciones-Avanzado-Ruta personalizada a PuTTY)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>El ejecutable de PuTTY ha sido localizado y está listo para usarse.</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>Para que RDP funcione adecuadamente necesita tener instalada al menos la versión 8.0 de Remote Desktop Connection (Cliente de Servicios de Terminal). Puede descargarlo de la dirección: https://support.microsoft.com/kb/2592687. Si tiene instalado RDP 8.0 y la comprobación sigue fallando, intente registrar la librería mstscax.dll manualmente. Para hacerlo, abra el diálogo de ejecutar (Inicio-Ejecutar) e introduzca lo siguiente: regsvr32 "c:\windows\system32\mstscax.dll" (donde c:\ es su unidad de sistema).
-Si continúa teniendo problemas para hacer funcionar RDP, consulte el Foro de mRemoteNG en http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>Todos los componentes RDP han sido localizados y parecen registrados adecuadamente.
-Versión de Control {0} de la Conexión de Escritorio Remoto</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC necesita que VncSharp.dll esté situada en la carpeta donde está instalado mRemoteNG.
-Por favor, compruebe que tiene el archivo VncSharp.dll en la carpeta de instalación de mRemoteNG (normalmente C:\Archivos de Programa\mRemoteNG\).
-Si continúa sin funcionar la comprobación ó no puede utilizar VNC en mRemoteNG, consulte el Foro de mRemoteNG en http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Todos los componentes VNC han sido localizados y parecen registrados adecuadamente.
-Versión de Control {0} de VncSharp</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Tratar de reconectar automáticamente al ser desconectado del servidor (solo RDP &amp;&amp; ICA)</value>
   </data>
@@ -329,9 +299,6 @@ Versión de Control {0} de VncSharp</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>Detectado problema de compatibilidad</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Comprobación de Componentes</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>¡Error en btnIcon_Click!</value>
@@ -1341,9 +1308,6 @@ Mensaje:
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>Reconectar en el arranque sesiones previamente abiertas</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Actualziar</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>Archivo remoto</value>

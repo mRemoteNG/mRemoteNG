@@ -121,7 +121,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             var password = txtSQLPassword.Text;
 
             lblTestConnectionResults.Text = Language.TestingConnection;
-            imgConnectionStatus.Image = Properties.Resources.loading_spinner;
+            imgConnectionStatus.Image = Properties.Resources.Loading_Spinner;
             btnTestConnection.Enabled = false;
 
             var connectionTestResult =
@@ -165,7 +165,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             imgConnectionStatus.Image = connectionSuccess
                 ? Properties.Resources.tick
-                : Properties.Resources.exclamation;
+                : Properties.Resources.ErrorSmall;
         }
 
         private string BuildTestFailedMessage(string specificMessage)

@@ -240,34 +240,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Controle mislukt!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Controle geslaagd!</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>De SSH, Telnet, Rlogin en RAW protocollen zijn nodig PuTTY om te laten functioneren. PuTTY wordt standaard geleverd bij de mRemoteNG installatie en bevind zich in het installatiepad.
-Zorg ervoor dat u ofwel de Putty.exe in uw mRemoteNG directory staat(standaard: c:\Program Files\mRemoteNG\) of een geldig pad heeft opgegeven naar het PuTTY programmabestand onder Opties (Extra - Opties - Geavanceerd - Aangepast PuTTY pad)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>Het programmabestand PuTTY werd gevonden en is klaar voor gebruik</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>Om RDP goed te laten werken moet je minimaal Verbinding met extern bureaublad (Terminal Services Client) 8.0 geïnstalleerd te hebben. U kunt het hier downloaden: https://support.microsoft.com/kb/2592687
-Als u RDP 8.0 heeft geïnstalleerd en de check nog niet lukt, probeer dan om handmatig mstscax.dll te registreren. Om dit uit te voeren opent u het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende:  regsvr32 "c:\windows\system32\mstscax.dll" (Waarbij c: \ je systeem schijf is).
-Als u nog steeds niet in staat bent om de langs check te komen voor RDP raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>Alle RDP componenten werden gevonden en lijken correct te zijn geregistreerd.
-Verbinding met extern bureaublad Versie {0}</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC vereist dat VncSharp.dll in de mRemoteNG installatiemap is geplaatst.
-Zorg ervoor dat u  VncSharp.dll bestand in de  mRemoteNG installatiemap wordt geplaatst (standaard C:\Program Files\mRemoteNG\).
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan VNC in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Alle VNC componenten werden gevonden en lijken correct te zijn geregistreerd.
-VncSharp Versie {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisch proberen opnieuw te verbinden wanneer de verbinding is verbroken van de server (RDP &amp;&amp; ICA Alleen)</value>
   </data>
@@ -330,9 +302,6 @@ VncSharp Versie {0}</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>Compatibiliteits probleem ontdekt</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Controle Componenten</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Click mislukt!</value>
@@ -1364,9 +1333,6 @@ Bericht:
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>Opnieuw verbinding maken met eerder geopende sessies bij het opstarten</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Vernieuwen</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>Extern bestand</value>

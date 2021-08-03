@@ -237,9 +237,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Ο ελέγχος απέτυχε!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Ο ελεγχος πέτυχε!</value>
-  </data>
   <data name="ConnectInFullscreen" xml:space="preserve">
     <value>Σύνδεση σε λειτουργία πλήρους οθόνης</value>
   </data>

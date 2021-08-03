@@ -246,36 +246,6 @@
   <data name="CheckFailed" xml:space="preserve">
 		<value>검사 실패!</value>
 	</data>
-  <data name="CheckSucceeded" xml:space="preserve">
-		<value>검사 성공!</value>
-	</data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-		<value>제대로 설치가 되어 있지 않습니다.</value>
-	</data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-		<value>SSH, Telnet, Rlogin 및 RAW 프로토콜은 PuTTY가 작동해야합니다. PuTTY는 모든 mRemoteNG 패키지와 함께 제공되며 설치 경로에 있습니다.
-putty.exe가 mRemoteNG 디렉토리 (기본값 : c : \ Program Files \ mRemoteNG \)에 있거나 PuTTY 실행 파일의 유효한 경로를 옵션 (도구 - 옵션 - 고급 - 사용자 정의 PuTTY)에 지정했는지 확인하십시오 통로)</value>
-	</data>
-  <data name="CcPuttyOK" xml:space="preserve">
-		<value>PuTTY 실행 파일을 찾았으므로 사용할 준비가되었습니다.</value>
-	</data>
-  <data name="CcRDPFailed" xml:space="preserve">
-		<value>RDP가 제대로 작동하려면 적어도 원격 데스크톱 연결 (터미널 서비스) 클라이언트 8.0이 설치되어 있어야합니다. 다음 사이트에서 다운로드 할 수 있습니다. http://support.microsoft.com/kb/925876
-이 검사가 여전히 실패하거나 RDP를 사용할 수없는 경우 mRemoteNG 포럼 (http://forum.mremoteng.org/)을 참조하십시오.</value>
-	</data>
-  <data name="CcRDPOK" xml:space="preserve">
-		<value>모든 RDP 구성 요소가 발견되어 제대로 등록 된 것으로 보입니다.
-원격 데스크톱 연결 제어 버전 {0}</value>
-	</data>
-  <data name="CcVNCFailed" xml:space="preserve">
-		<value>VNC를 사용하려면 mRemoteNG 응용 프로그램 폴더에 VncSharp.dll이 있어야합니다.
-mRemoteNG 응용 프로그램 폴더 (일반적으로 C : \ Program Files \ mRemoteNG \)에 VncSharp.dll 파일이 있는지 확인하십시오.
-그래도 확인을 통과 할 수 없거나 mRemoteNG에서 VNC를 사용할 수 없다면 mRemoteNG 포럼 (http://forum.mremoteng.org/)에 문의하십시오.</value>
-	</data>
-  <data name="CcVNCOK" xml:space="preserve">
-		<value>모든 VNC 구성 요소가 발견되어 제대로 등록 된 것으로 보입니다.
-VncSharp 제어 버전 {0}</value>
-	</data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
 		<value>서버와의 연결이 끊어지면 자동으로 다시 연결을 시도합니다 (RDP &amp;&amp; ICA 만 해당).</value>
 	</data>
@@ -446,9 +416,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
 		<value>호환성 문제 감지</value>
-	</data>
-  <data name="ComponentsCheck" xml:space="preserve">
-		<value>구성 요소 확인</value>
 	</data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
 		<value>btnIcon_Click 실패!</value>
@@ -1576,9 +1543,6 @@ VncSharp 제어 버전 {0}</value>
 	</data>
   <data name="ReconnectAtStartup" xml:space="preserve">
 		<value>시작시 이전에 열린 세션에 다시 연결</value>
-	</data>
-  <data name="Refresh" xml:space="preserve">
-		<value>새로 고침</value>
 	</data>
   <data name="RemoteFile" xml:space="preserve">
 		<value>원격 파일</value>
