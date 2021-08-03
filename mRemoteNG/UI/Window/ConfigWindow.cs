@@ -129,7 +129,7 @@ namespace mRemoteNG.UI.Window
             //btnShowInheritance
             //
             _btnShowInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            _btnShowInheritance.Image = Properties.Resources.Inheritance;
+            _btnShowInheritance.Image = Properties.Resources.ViewDownBySchema_16x;
             _btnShowInheritance.ImageTransparentColor = Color.Magenta;
             _btnShowInheritance.Name = "_btnShowInheritance";
             _btnShowInheritance.Size = new Size(23, 22);
@@ -138,7 +138,7 @@ namespace mRemoteNG.UI.Window
             //btnShowDefaultInheritance
             //
             _btnShowDefaultInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            _btnShowDefaultInheritance.Image = Properties.Resources.Inheritance_Default;
+            _btnShowDefaultInheritance.Image = Properties.Resources.ViewDownBySchema_16x;
             _btnShowDefaultInheritance.ImageTransparentColor = Color.Magenta;
             _btnShowDefaultInheritance.Name = "_btnShowDefaultInheritance";
             _btnShowDefaultInheritance.Size = new Size(23, 22);
@@ -149,7 +149,7 @@ namespace mRemoteNG.UI.Window
             _btnShowProperties.Checked = true;
             _btnShowProperties.CheckState = CheckState.Checked;
             _btnShowProperties.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            _btnShowProperties.Image = Properties.Resources.Properties;
+            _btnShowProperties.Image = Properties.Resources.Schema_16x;
             _btnShowProperties.ImageTransparentColor = Color.Magenta;
             _btnShowProperties.Name = "_btnShowProperties";
             _btnShowProperties.Size = new Size(23, 22);
@@ -158,7 +158,7 @@ namespace mRemoteNG.UI.Window
             //btnShowDefaultProperties
             //
             _btnShowDefaultProperties.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            _btnShowDefaultProperties.Image = Properties.Resources.Properties_Default;
+            _btnShowDefaultProperties.Image = Properties.Resources.SchemaObjectProperty_16x;
             _btnShowDefaultProperties.ImageTransparentColor = Color.Magenta;
             _btnShowDefaultProperties.Name = "_btnShowDefaultProperties";
             _btnShowDefaultProperties.Size = new Size(23, 22);

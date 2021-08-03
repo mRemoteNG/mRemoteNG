@@ -95,7 +95,7 @@ namespace mRemoteNG.UI.Panels
             var cMenClose = new ToolStripMenuItem
             {
                 Text = Language._Close,
-                Image = Properties.Resources.Panel_Close,
+                Image = Properties.Resources.Close_16x,
                 Tag = pnlcForm
             };
             cMenClose.Click += cMenConnectionPanelClose_Click;

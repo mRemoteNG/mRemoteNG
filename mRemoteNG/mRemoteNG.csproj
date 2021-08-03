@@ -1126,9 +1126,6 @@
     <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
     <None Include="Resources\Icons\Update_Icon.ico" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
-    <None Include="Resources\Images\tab_add.png" />
-    <None Include="Resources\Images\tab_edit.png" />
-    <None Include="Resources\Images\tab_delete.png" />
     <Content Include="Icons\Infrastructure.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1142,15 +1139,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\ConnectedOverlay.png" />
-    <None Include="Resources\Images\Connection_Duplicate.png" />
-    <None Include="Resources\Images\Inheritance_Default.png" />
-    <None Include="Resources\Images\News.png" />
-    <None Include="Resources\Images\Page.png" />
-    <None Include="Resources\Images\Panel_Close.png" />
-    <None Include="Resources\Images\Properties_Default.png" />
-    <None Include="Resources\Images\Key_Delete.png" />
     <None Include="Resources\Loading_Spinner.gif" />
-    <None Include="Resources\Images\Page_Copy.png" />
     <None Include="Resources\AddFolder_16x.png" />
     <None Include="Resources\CloseSolution_16x.png" />
     <None Include="Resources\CollapseAll_16x.png" />
@@ -1192,7 +1181,6 @@
     <None Include="Resources\OpenFile_16x.png" />
     <None Include="Resources\Console_16x.png" />
     <None Include="Resources\SearchAndApps_16x.png" />
-    <None Include="Resources\SchemaCompare_16x.png" />
     <None Include="Resources\Panel_16x.png" />
     <None Include="Resources\InsertPanel_16x.png" />
     <None Include="Resources\Run_16x.png" />
@@ -1202,6 +1190,14 @@
     <None Include="Resources\Remove_16x.png" />
     <None Include="Resources\Add_16x.png" />
     <None Include="Resources\Monitor_16x.png" />
+    <None Include="Resources\UniqueKeyError_16x.png" />
+    <None Include="Resources\SyncArrow_16x.png" />
+    <None Include="Resources\ViewDownBySchema_16x.png" />
+    <None Include="Resources\SchemaObjectProperty_16x.png" />
+    <None Include="Resources\Schema_16x.png" />
+    <None Include="Resources\StatusInformation_16x.png" />
+    <None Include="Resources\LogWarning_16x.png" />
+    <None Include="Resources\LogError_16x.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1216,11 +1212,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Images\ErrorsAndInfos.png" />
-    <None Include="Resources\Images\Sessions.png" />
-    <None Include="Resources\Images\PropertiesDefault.png" />
-    <None Include="Resources\Images\Bad_Symbol.png" />
-    <None Include="Resources\Images\Good_Symbol.png" />
     <Content Include="Icons\Anti Virus.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1317,10 +1308,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Resources\Images\InformationSmall.png" />
-    <None Include="Resources\Images\Information.png" />
-    <None Include="Resources\Images\ErrorSmall.png" />
-    <None Include="Resources\Images\Error.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

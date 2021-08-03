@@ -194,7 +194,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsNoCredentials
             // 
-            _cMenTreeConnectWithOptionsNoCredentials.Image = Properties.Resources.Key_Delete;
+            _cMenTreeConnectWithOptionsNoCredentials.Image = Properties.Resources.UniqueKeyError_16x;
             _cMenTreeConnectWithOptionsNoCredentials.Name = "_cMenTreeConnectWithOptionsNoCredentials";
             _cMenTreeConnectWithOptionsNoCredentials.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsNoCredentials.Text = "Connect without credentials";
@@ -211,7 +211,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsViewOnly
             // 
-            _cMenTreeConnectWithOptionsViewOnly.Image = Properties.Resources.View;
+            _cMenTreeConnectWithOptionsViewOnly.Image = Properties.Resources.Monitor_16x;
             _cMenTreeConnectWithOptionsViewOnly.Name =
                 "_cMenTreeConnectWithOptionsViewOnly";
             _cMenTreeConnectWithOptionsViewOnly.Size = new System.Drawing.Size(245, 22);
@@ -240,7 +240,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeToolsTransferFile
             // 
-            _cMenTreeToolsTransferFile.Image = Properties.Resources.SchemaCompare_16x;
+            _cMenTreeToolsTransferFile.Image = Properties.Resources.SyncArrow_16x;
             _cMenTreeToolsTransferFile.Name = "_cMenTreeToolsTransferFile";
             _cMenTreeToolsTransferFile.Size = new System.Drawing.Size(199, 22);
             _cMenTreeToolsTransferFile.Text = "Transfer File (SSH)";
@@ -253,7 +253,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeDuplicate
             // 
-            _cMenTreeDuplicate.Image = Properties.Resources.Page_Copy;
+            _cMenTreeDuplicate.Image = Properties.Resources.Copy_16x;
             _cMenTreeDuplicate.Name = "_cMenTreeDuplicate";
             _cMenTreeDuplicate.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDuplicate.Text = "Duplicate";

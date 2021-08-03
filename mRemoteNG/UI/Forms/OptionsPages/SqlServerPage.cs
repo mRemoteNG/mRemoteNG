@@ -165,7 +165,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             imgConnectionStatus.Image = connectionSuccess
                 ? Properties.Resources.Test_16x
-                : Properties.Resources.ErrorSmall;
+                : Properties.Resources.LogError_16x;
         }
 
         private string BuildTestFailedMessage(string specificMessage)

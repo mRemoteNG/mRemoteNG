@@ -43,7 +43,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsSSHTransfer
             // 
-            _mMenToolsSshTransfer.Image = Properties.Resources.SchemaCompare_16x;
+            _mMenToolsSshTransfer.Image = Properties.Resources.SyncArrow_16x;
             _mMenToolsSshTransfer.Name = "mMenToolsSSHTransfer";
             _mMenToolsSshTransfer.Size = new System.Drawing.Size(184, 22);
             _mMenToolsSshTransfer.Text = Language.SshFileTransfer;
