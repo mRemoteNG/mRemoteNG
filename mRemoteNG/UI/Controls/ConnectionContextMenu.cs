@@ -169,7 +169,6 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsConnectToConsoleSession
             // 
-            _cMenTreeConnectWithOptionsConnectToConsoleSession.Image = Properties.Resources.monitor_go;
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Name =
                 "_cMenTreeConnectWithOptionsConnectToConsoleSession";
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Size = new System.Drawing.Size(245, 22);
@@ -178,7 +177,6 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsDontConnectToConsoleSession
             // 
-            _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Image = Properties.Resources.monitor_delete;
             _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Name =
                 "_cMenTreeConnectWithOptionsDontConnectToConsoleSession";
             _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Size = new System.Drawing.Size(245, 22);

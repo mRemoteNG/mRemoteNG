@@ -1143,19 +1143,11 @@
     </Content>
     <None Include="Resources\ConnectedOverlay.png" />
     <None Include="Resources\Images\Connection_Duplicate.png" />
-    <None Include="Resources\Images\ExtApp_Add.png" />
-    <None Include="Resources\Images\ExtApp_Delete.png" />
-    <None Include="Resources\Images\ExtApp_Start.png" />
     <None Include="Resources\Images\Inheritance_Default.png" />
-    <None Include="Resources\Images\Monitor.png" />
-    <None Include="Resources\Images\monitor_delete.png" />
-    <None Include="Resources\Images\monitor_go.png" />
-    <None Include="Resources\Images\Monitor_GoTo.png" />
     <None Include="Resources\Images\News.png" />
     <None Include="Resources\Images\Page.png" />
     <None Include="Resources\Images\Panel_Close.png" />
     <None Include="Resources\Images\Properties_Default.png" />
-    <None Include="Resources\Images\SmartSize.png" />
     <None Include="Resources\Images\Key_Delete.png" />
     <None Include="Resources\Loading_Spinner.gif" />
     <None Include="Resources\Images\Page_Copy.png" />
@@ -1206,6 +1198,10 @@
     <None Include="Resources\Run_16x.png" />
     <None Include="Resources\Stop_16x.png" />
     <None Include="Resources\Close_16x.png" />
+    <None Include="Resources\Resize_16x.png" />
+    <None Include="Resources\Remove_16x.png" />
+    <None Include="Resources\Add_16x.png" />
+    <None Include="Resources\Monitor_16x.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Panels
             var cMenScreens = new ToolStripMenuItem
             {
                 Text = Language.SendTo,
-                Image = Properties.Resources.Monitor,
+                Image = Properties.Resources.Monitor_16x,
                 Tag = pnlcForm
             };
             cMenScreens.DropDownItems.Add("Dummy");
@@ -145,7 +145,7 @@ namespace mRemoteNG.UI.Panels
                     var cMenScreen = new ToolStripMenuItem(Language.Screen + " " + Convert.ToString(i + 1))
                     {
                         Tag = new ArrayList(),
-                        Image = Properties.Resources.monitor_go
+                        Image = Properties.Resources.Monitor_16x
                     };
                     ((ArrayList)cMenScreen.Tag).Add(Screen.AllScreens[i]);
                     ((ArrayList)cMenScreen.Tag).Add(cMenScreens.Tag);

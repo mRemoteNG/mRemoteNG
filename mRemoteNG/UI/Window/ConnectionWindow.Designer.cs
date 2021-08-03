@@ -148,7 +148,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabSmartSize
             // 
-            this.cmenTabSmartSize.Image = global::mRemoteNG.Properties.Resources.SmartSize;
+            this.cmenTabSmartSize.Image = global::mRemoteNG.Properties.Resources.Resize_16x;
             this.cmenTabSmartSize.Name = "cmenTabSmartSize";
             this.cmenTabSmartSize.Size = new System.Drawing.Size(230, 22);
             this.cmenTabSmartSize.Text = "SmartSize (RDP/VNC)";
