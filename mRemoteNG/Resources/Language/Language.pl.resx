@@ -246,13 +246,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Sprawdzenie powiodło się!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA wymaga zainstalowania wtyczki Online XenDesktop, i aby była zarejestrowana biblioteka wfica.ocx. Możesz pobrać klienta tutaj: http://www.citrix.com/download/ Jeżeli masz zainstalowany Plugin Online XenDesktop a nadal nie działa, spróbuj ręcznie zarejestrować bibliotekę wfica.ocx. Aby to zrobić wybierz polecenie Uruchom (Start - Uruchom) i wprowadź w linii komend: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (gdzie c:\Program Files\Citrix\ICA Client\ jest ścieżką instalacji XenDesktop Online Plugin). Jeśli nadal nie można użyć ICA w mRemoteNG prosimy o kontakt mRemoteNG Forum na http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Wszystkie składniki ICA zostały znalezione i wydają się być poprawnie zarejestrowane. 
-Wersja klienta Citrix ICA {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>nie jest zainstalowany prawidłowo</value>
   </data>
@@ -441,9 +434,6 @@ Załadowano nowy plik połączeń.</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Nie można odnaleźć ToolStrip w FilteredPropertyGrid.</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Zainstalowana wersja</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Wykryj</value>
   </data>
@@ -464,21 +454,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Dla pustej nazwy pola użytkownika, hasła lub domeny użyj:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-bit</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (tylko logowanie)</value>
-  </data>
-  <data name="Enc40Bit" xml:space="preserve">
-    <value>40-bitowe</value>
-  </data>
-  <data name="Enc56Bit" xml:space="preserve">
-    <value>56-bitowe</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Podstawowe</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Całkowicie szyfruj plik połączeń</value>
@@ -591,15 +566,6 @@ Załadowano nowy plik połączeń.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Konfiguracja ustawień HTTP nie powiodła się!</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Nie można utworzyć nowego połączenia ICA!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Ładowanie wtyczki ICA nie powiodło się!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>Wykonanie ICA SetCredentials nie powiodło się!</value>
-  </data>
   <data name="ImportAD" xml:space="preserve">
     <value>Importów z Active Directory</value>
   </data>
@@ -614,9 +580,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>Przy zamykaniu połączeń:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Połącz</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Widoczna nazwa</value>
@@ -684,9 +647,6 @@ Załadowano nowy plik połączeń.</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Panele połączeń</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Połączenia i konfiguracja</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Kopiuj</value>
   </data>
@@ -696,23 +656,11 @@ Załadowano nowy plik połączeń.</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Usuń połączenie...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Skazuj zewnętrzne narzędzie...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Usuń folder...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Darowizna</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Duplikuj połączenie</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Duplikuj folder</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Duplikuj zakładkę</value>
@@ -731,9 +679,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>Pomoc mRemoteNG</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Idz do</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Uruchom narzędzie zewnętrzne</value>
@@ -770,12 +715,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Odśwież ekran (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Zmień nazwę połączenia</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Zmień nazwę folderu</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Zmień nazwę zakładki</value>
@@ -1014,9 +953,6 @@ Załadowano nowy plik połączeń.</value>
   <data name="Encoding" xml:space="preserve">
     <value>Kodowanie</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Siła szyfrowania</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Zewnętrzne narzędzie</value>
   </data>
@@ -1073,9 +1009,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="Printers" xml:space="preserve">
     <value>Drukarki</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Karty inteligentne</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Dźwięki</value>
@@ -1238,9 +1171,6 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>Wykonanie RDP SetResolution nie powiodło się!</value>
-  </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>Dopasuj rozmiar</value>
   </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Przenieś na ten komputer</value>

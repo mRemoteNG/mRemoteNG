@@ -243,16 +243,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Sjekk lyktes!</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA krever at XenDesktop Online Plugin er installert og at wfica.ocx-biblioteket er registrert. Du kan laste ned klienten herfra: http://www.citrix.com/download/
-Hvis du har XenDesktop Online Pluginen installert og kontrollen fremdeles feiler, kan du forsøke å registrere wfica.ocx manuelt.
-For å gjøre dette, åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (der c:\Program Files\Citrix\ICA Client\ er stien til XenDesktop Online Plugin-installasjonen).
-Hvis denne kontrollen fortsatt feiler eller ICA i mRemoteNG ikke fungerer, vennligst se {0}.</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Alle ICA-komponenter ble funnet, og ser ut til å være korrekt registrert.
-Citrix ICA Client Control Version {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>ikke korrekt installert</value>
   </data>
@@ -459,9 +449,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Fant ikke ToolStrip-kontroll i FilteredPropertyGrid.</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Installert versjon</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Oppdag</value>
   </data>
@@ -482,15 +469,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>For tomt brukernavn, passord eller domenefelt, bruk:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-biters</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-biters (kun pålogging)</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Grunnleggende</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Krypter tilkoblingsfil fullstendig</value>
@@ -594,24 +572,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Angi HTTP-egenskaper mislyktes!</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Kunne ikke opprette ny ICA-tilkobling!</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Innlasting av ICA Plugin mislyktes!</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials mislyktes!</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>ICA Set Event Handlers mislyktes!</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>ICA Set Props mislyktes!</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>ICA Set Resolution mislyktes!</value>
-  </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identifisere hurtigkoblingsfaner ved prefikset "Hurtig:"</value>
   </data>
@@ -650,9 +610,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>Ved lukking av tilkoblinger:</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Koble til:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Visningsnavn</value>
@@ -723,9 +680,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Tilkoblingspaneler</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Tilkoblinger og oppsett</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Kopier</value>
   </data>
@@ -735,23 +689,11 @@ Starter med ny tilkoblingsfil.</value>
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Slett tilkobling...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Slett eksternt verktøy...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Slett mappe...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Donér</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Duplisér tilkobling</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Kopier mappe</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Kopier fane</value>
@@ -770,9 +712,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>mRemoteNG-hjelp</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Hopp til</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Kjør eksternt verktøy</value>
@@ -809,12 +748,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Oppdater skjerm (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Gi nytt navn til tilkobling</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>&amp;Gi nytt navn til mappe</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Gi nytt navn til fane</value>
@@ -987,9 +920,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Velg hvilken tekstkodingsmodus som skal brukes.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Velg krypteringsstyrke for den eksterne verten.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Velg det eksterne verktøyet som skal startes.</value>
   </data>
@@ -1134,9 +1064,6 @@ Starter med ny tilkoblingsfil.</value>
   <data name="Encoding" xml:space="preserve">
     <value>Tekstkoding</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Krypteringsnivå</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Eksternt verktøy</value>
   </data>
@@ -1193,9 +1120,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="Printers" xml:space="preserve">
     <value>Skrivere</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Smartkort</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Lyder</value>
@@ -1425,9 +1349,6 @@ Starter med ny tilkoblingsfil.</value>
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>RDP SetResolution mislyktes!</value>
-  </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>SmartSize</value>
   </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Hent til denne datamaskinen</value>
@@ -1756,9 +1677,6 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="ImportFileFailedContent" xml:space="preserve">
     <value>En feil har oppstått under import av filen "{0}".</value>
   </data>
-  <data name="ImportFailed" xml:space="preserve">
-    <value>Import feilet</value>
-  </data>
   <data name="ImportFromFile" xml:space="preserve">
     <value>Importer fra &amp;fil...</value>
   </data>
@@ -1804,14 +1722,8 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   <data name="ShowOnToolbar" xml:space="preserve">
     <value>Vis på verktøylinjen</value>
   </data>
-  <data name="CheckingForUpdates" xml:space="preserve">
-    <value>Sjekker om det finnes oppdateringer...</value>
-  </data>
   <data name="UpdateGetChangeLogFailed" xml:space="preserve">
     <value>Endringsloggen kunne ikke lastes ned.</value>
-  </data>
-  <data name="ReconnectAll" xml:space="preserve">
-    <value>&amp;Koble til alle åpne tilkoblinger på nytt</value>
   </data>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">
     <value>RDP tidsavbrudd</value>
@@ -1878,9 +1790,6 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   </data>
   <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
     <value>Velg om du ønsker et varsel når RDP-sesjonen avsluttes på grunn av inaktivitet</value>
-  </data>
-  <data name="RdpAlertIdleTimeout" xml:space="preserve">
-    <value>Varsel ved inaktivitet</value>
   </data>
   <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
     <value>Passordet må inneholde minst {0} av de følgende tegnene: {1}</value>

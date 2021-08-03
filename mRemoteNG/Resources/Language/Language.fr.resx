@@ -243,15 +243,6 @@
   <data name="CheckSucceeded" xml:space="preserve">
     <value>Verification réussie !</value>
   </data>
-  <data name="CcICAFailed" xml:space="preserve">
-    <value>ICA requiert l'installation du Plugin XenDesktop Online, ainsi que l'enregistrement de la librairie wfica.ocx. Vous pouvez télécharger le client ici : http://www.citrix.com/download/
-Si le Plugin XenDesktop Online est installé, et que la vérification des composants échoue, essayez d'enregistrer la librairie manuellement.
-Pour cela, ouvrez la fenêtre "Exécuter" (Démarrer - Exécuter), et entrez cette commande : regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Où c:\Program Files\Citrix\ICA Client\ est le chemin vers votre installation du plugin XenDesktop).
-Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, consultez le forum de mRemoteNG ici : http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcICAOK" xml:space="preserve">
-    <value>Tous les composants de l'ICA ont été trouvés et semblent être enregistrés correctement. Citrix ICA Client Version Control {0}</value>
-  </data>
   <data name="CcNotInstalledProperly" xml:space="preserve">
     <value>pas correctement installé </value>
   </data>
@@ -450,9 +441,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Le contrôle ToolStrip est introuvable dans le FilteredPropertyGrid.</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Version installée</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Détecter</value>
   </data>
@@ -473,15 +461,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Pour un Login, Mot de passe ou Domaine vide, utiliser :</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128 bits</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128 bits (ouverture de session)</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Basique</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Chiffrer complètement le fichier de connexion</value>
@@ -585,24 +564,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Échec de Set HTTP Props !</value>
   </data>
-  <data name="IcaConnectionFailed" xml:space="preserve">
-    <value>Impossible de créer une nouvelle connexion ICA !</value>
-  </data>
-  <data name="IcaControlFailed" xml:space="preserve">
-    <value>Le chargement du plugin ICA a échoué !</value>
-  </data>
-  <data name="IcaSetCredentialsFailed" xml:space="preserve">
-    <value>Échec de ICA SetCredentials !</value>
-  </data>
-  <data name="IcaSetEventHandlersFailed" xml:space="preserve">
-    <value>Échec de ICA Set Event Handlers !</value>
-  </data>
-  <data name="IcaSetPropsFailed" xml:space="preserve">
-    <value>Échec de ICA Set Props !</value>
-  </data>
-  <data name="IcaSetResolutionFailed" xml:space="preserve">
-    <value>Échec de ICA Set Resolution !</value>
-  </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identifier les onglets de connexion rapide en ajoutant le préfixe "Rapide".</value>
   </data>
@@ -641,9 +602,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   </data>
   <data name="ClosingConnections" xml:space="preserve">
     <value>Lors de la fermeture des connexions :</value>
-  </data>
-  <data name="_Connect" xml:space="preserve">
-    <value>&amp;Connecter:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Nom Affiché</value>
@@ -714,9 +672,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="ConnectionPanels" xml:space="preserve">
     <value>Panneaux de connexion</value>
   </data>
-  <data name="ConnectionsAndConfig" xml:space="preserve">
-    <value>Connexions et configuration</value>
-  </data>
   <data name="Copy" xml:space="preserve">
     <value>Copier</value>
   </data>
@@ -726,23 +681,11 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="CtrlEsc" xml:space="preserve">
     <value>Ctrl-Échap</value>
   </data>
-  <data name="DeleteConnection" xml:space="preserve">
-    <value>Supprimer la connexion...</value>
-  </data>
   <data name="DeleteExternalTool" xml:space="preserve">
     <value>Supprimer l'outil externe...</value>
   </data>
-  <data name="DeleteFolder" xml:space="preserve">
-    <value>Supprimer le dossier...</value>
-  </data>
   <data name="Donate" xml:space="preserve">
     <value>Faire un don</value>
-  </data>
-  <data name="DuplicateConnection" xml:space="preserve">
-    <value>Dupliquer la connexion</value>
-  </data>
-  <data name="DuplicateFolder" xml:space="preserve">
-    <value>Dupliquer le dossier</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
     <value>Dupliquer l'onglet</value>
@@ -761,9 +704,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   </data>
   <data name="HelpContents" xml:space="preserve">
     <value>Aide mRemoteNG</value>
-  </data>
-  <data name="JumpTo" xml:space="preserve">
-    <value>Aller à</value>
   </data>
   <data name="LaunchExternalTool" xml:space="preserve">
     <value>Lancer l'outil externe</value>
@@ -800,12 +740,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   </data>
   <data name="RefreshScreen" xml:space="preserve">
     <value>Rafraîchir l'écran (VNC)</value>
-  </data>
-  <data name="RenameConnection" xml:space="preserve">
-    <value>Renommer la connexion</value>
-  </data>
-  <data name="RenameFolder" xml:space="preserve">
-    <value>Renommer le dossier</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
     <value>Renommer l'onglet</value>
@@ -979,9 +913,6 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="PropertyDescriptionEncoding" xml:space="preserve">
     <value>Choisissez l'encodage à utiliser.</value>
   </data>
-  <data name="PropertyDescriptionEncryptionStrength" xml:space="preserve">
-    <value>Sélectionnez le niveau de chiffrement de l'hôte distant.</value>
-  </data>
   <data name="PropertyDescriptionExternalTool" xml:space="preserve">
     <value>Sélectionnez l'outil externe qui doit être démarré.</value>
   </data>
@@ -1126,9 +1057,6 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="Encoding" xml:space="preserve">
     <value>Encodage</value>
   </data>
-  <data name="EncryptionStrength" xml:space="preserve">
-    <value>Niveau de cryptage</value>
-  </data>
   <data name="ExternalTool" xml:space="preserve">
     <value>Outil externe</value>
   </data>
@@ -1185,9 +1113,6 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   </data>
   <data name="Printers" xml:space="preserve">
     <value>Imprimantes</value>
-  </data>
-  <data name="SmartCards" xml:space="preserve">
-    <value>Cartes à puce</value>
   </data>
   <data name="Sounds" xml:space="preserve">
     <value>Sons</value>
@@ -1418,9 +1343,6 @@ Message:
   </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>Échec de RDP SetResolution !</value>
-  </data>
-  <data name="RdpSmartSize" xml:space="preserve">
-    <value>Taille intelligente</value>
   </data>
   <data name="RdpSoundBringToThisComputer" xml:space="preserve">
     <value>Apporter à cet ordinateur</value>

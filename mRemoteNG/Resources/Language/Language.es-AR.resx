@@ -277,9 +277,6 @@ VncSharp Control {0}</value>
   <data name="CouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>No se pudo crear el nuevo archivo de conexiones!</value>
   </data>
-  <data name="InstalledVersion" xml:space="preserve">
-    <value>Versión instalada</value>
-  </data>
   <data name="Detect" xml:space="preserve">
     <value>Detectar</value>
   </data>
@@ -297,15 +294,6 @@ VncSharp Control {0}</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Si desea Nombre de usuario, password o dominio vacio use:</value>
-  </data>
-  <data name="Enc128Bit" xml:space="preserve">
-    <value>128-bit</value>
-  </data>
-  <data name="Enc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (iniciar sesión)</value>
-  </data>
-  <data name="Basic" xml:space="preserve">
-    <value>Básica</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Encriptar completamente el archivo de conexiones</value>
