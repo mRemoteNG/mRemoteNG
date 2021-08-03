@@ -1116,14 +1116,12 @@
     <None Include="Resources\Icons\Panels_Icon.ico" />
     <None Include="Resources\Icons\PortScan_Icon.ico" />
     <None Include="Resources\Icons\Save_Icon.ico" />
-    <None Include="Resources\Icons\Screenshot_Icon.ico" />
     <None Include="Resources\Icons\Sessions_Icon.ico" />
     <None Include="Resources\Icons\Shield_Icon.ico" />
     <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
     <None Include="Resources\Icons\StartupExit_Icon.ico" />
     <None Include="Resources\Icons\Tab_Icon.ico" />
     <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
-    <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
     <None Include="Resources\Icons\Info_Icon.ico" />
     <None Include="Resources\Icons\Root_Icon.ico" />
     <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
@@ -1171,9 +1169,6 @@
     <None Include="Resources\Images\Panels.png" />
     <None Include="Resources\Images\Properties_Default.png" />
     <None Include="Resources\Images\Quit.png" />
-    <None Include="Resources\Images\Screenshot_Copy.png" />
-    <None Include="Resources\Images\Screenshot_Delete.png" />
-    <None Include="Resources\Images\Screenshot_Save.png" />
     <None Include="Resources\Images\Session_LogOff.png" />
     <None Include="Resources\Images\SmartSize.png" />
     <None Include="Resources\Images\tick.png" />
@@ -1208,7 +1203,6 @@
     <None Include="Resources\Images\Play_Quick.png" />
     <None Include="Resources\Images\SSHTransfer.png" />
     <None Include="Resources\Images\ErrorsAndInfos.png" />
-    <None Include="Resources\Images\Screenshot.png" />
     <None Include="Resources\Images\Sessions.png" />
     <None Include="Resources\Images\Connections_New.png" />
     <None Include="Resources\Images\Connections_Load.png" />
@@ -1225,7 +1219,6 @@
     <None Include="Resources\Images\UVNC_SC.png" />
     <None Include="Resources\Images\Bad_Symbol.png" />
     <None Include="Resources\Images\Good_Symbol.png" />
-    <None Include="Resources\Images\ComponentsCheck.png" />
     <Content Include="Icons\Anti Virus.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1331,7 +1324,6 @@
     <None Include="Resources\Images\View.png" />
     <None Include="Resources\Images\Update.png" />
     <None Include="Resources\Images\Search.png" />
-    <None Include="Resources\Images\Screenshot_Add.png" />
     <None Include="Resources\Images\Save.png" />
     <None Include="Resources\Images\Root.png" />
     <None Include="Resources\Images\Options.png" />

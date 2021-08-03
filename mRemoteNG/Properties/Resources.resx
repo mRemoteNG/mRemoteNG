@@ -214,21 +214,6 @@
   <data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Screenshot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Screenshot.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Screenshot_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Screenshot_Copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Screenshot_Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Screenshot_Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Search.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -322,9 +307,6 @@
   <data name="Bad_Symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Bad_Symbol.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ComponentsCheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\ComponentsCheck.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Good_Symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Good_Symbol.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -391,9 +373,6 @@
   <data name="Comments_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Comments_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ComponentsCheck_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\ComponentsCheck_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Config_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Config_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -444,9 +423,6 @@
   </data>
   <data name="Save_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Save_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Screenshot_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Sessions_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Icons\Sessions_Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
