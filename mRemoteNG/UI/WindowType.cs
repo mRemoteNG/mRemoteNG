@@ -6,7 +6,6 @@
         Connection = 1,
         Config = 2,
         ErrorsAndInfos = 4,
-        ScreenshotManager = 5,
         Options = 6,
         Update = 9,
         SSHTransfer = 10,
