@@ -240,37 +240,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Ошибка проверки!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Успешно проверено!</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>установлен неправильно</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>SSH, Telnet, Rlogin и RAW протоколам нужен для работы PuTTY. PuTTY поставляется с каждым mRemoteNG и находится в папке с программой.
-Убедитесь, что  putty.exe есть в папке с mRemoteNG (по умолчанию: C:\Program Files\mRemoteNG\), или что вы указали правильный путь к исполняемому файлу PuTTY в Инструменты - Опции - Дополнительно - Путь к PuTTY)</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>Исполняемый файл PuTTY найден и готов к использованию.</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>Для правильной работы RDP необходимо иметь установленный Remote Desktop Connection (Terminal Services Client) 8.0. Вы можете получить его здесь: https://support.microsoft.com/kb/2592687
-Если у вас есть установленный RDP 8.0 и подключиться не удается, попробуйте зарегистрироваться mstscax.dll вручную. Для этого откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Windows\system32\mstscax.dll" (где C:\ваш системный диск).
-Если у вас возникли проблемы при работе с RDP обратитесь на {0}.</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>Все RDP компоненты были найдены и зарегистрированы.
-Remote Desktop Connection, Control Version {0}</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC требуется VncSharp.dll который находится в папке с mRemoteNG.
-Убедитесь, что у вас есть VncSharp.dll в папке mRemoteNG (обычно C:\Program Files\mRemoteNG\).
-Если  у вас все же не работает VNC в mRemoteNG обратитесь на {0}.</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Все VNC компоненты были найдены и зарегистрированы.
-VncSharp Control Version {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Автоматически пытаться восстановить связь при отключении от сервера (только RDP и ICA)</value>
   </data>
@@ -333,9 +302,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>Обнаружена проблема совместимости</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Проверка компонентов</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>Ошибка btnIcon_Click!</value>
@@ -1370,9 +1336,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>При запуске подключаться к предыдущим сессиям</value>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Обновление</value>
   </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>Удалённый файл</value>

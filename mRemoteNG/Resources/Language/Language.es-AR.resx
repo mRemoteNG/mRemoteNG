@@ -147,19 +147,6 @@
   <data name="Miscellaneous" xml:space="preserve">
     <value>Varios</value>
   </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>no está correctamente instalado</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>El ejecutable de PuTTY se encontró y debería estar listo para usarse.</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>Todos los componentes RDP se encontraron y parecen estar registrados correctamente. Versión de escritorio remoto {0}</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Todos los componentes de VNC se encontraron y parecen estar registrados correctamente.
-VncSharp Control {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Intentar reconectar automáticamente cuando se desconecte (solo para RDP &amp;&amp; ICA)</value>
   </data>
@@ -204,9 +191,6 @@ VncSharp Control {0}</value>
   </data>
   <data name="CollapseAllFolders" xml:space="preserve">
     <value>Contraer todas las carpetas</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Comprobación de componentes</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>btnIcon_Click falló!</value>

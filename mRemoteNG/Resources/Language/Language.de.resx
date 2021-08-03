@@ -240,34 +240,6 @@
   <data name="CheckFailed" xml:space="preserve">
     <value>Prüfung fehlgeschlagen!</value>
   </data>
-  <data name="CheckSucceeded" xml:space="preserve">
-    <value>Prüfung erfolgreich!</value>
-  </data>
-  <data name="CcPuttyFailed" xml:space="preserve">
-    <value>Die Protokolle SSH, Telnet, Rlogin und RAW benötigen PuTTY. PuTTY wird in allen mRemote Paketen mitgeliefert und befindet sich im Installationspfad.
-Bitte versichern Sie sich, dass sich die Datei PuttyNG.exe in ihrem mRemote Installationspfad befindet (Standard: c:\Programme\mRemoteNG\) oder dass Sie einen korrekten Pfad in den Optionen (Extras - Optionen - Erweitert - Eigener PuTTY-Pfad) angegeben haben.</value>
-  </data>
-  <data name="CcPuttyOK" xml:space="preserve">
-    <value>PuTTY wurde gefunden und scheint betriebsbereit zu sein.</value>
-  </data>
-  <data name="CcRDPFailed" xml:space="preserve">
-    <value>Um RDP korrekt betreiben können, muss mindestens Remote Desktop Connection (Terminal Services Client) 6.0 installiert sein. Hier können Sie die Software herunterladen: http://support.microsoft.com/kb/951616
-Wenn Sie RDP 6.1 bereits installiert haben und die Prüfung noch immer fehlschlägt, versuchen Sie, die Datei mstscax.dll manuell zu registrieren. Öffnen Sie hierzu den Ausführen-Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\windows\system32\mstscax.dll" (Wobei c:\ Ihr System-Laufwerk ist).
-Wenn Sie noch immer Probleme mit RDP haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcRDPOK" xml:space="preserve">
-    <value>Alle RDP-Komponenten wurden gefunden und scheinen korrekt registriert zu sein.
-Remote Desktop Verbindung Control Version {0}</value>
-  </data>
-  <data name="CcVNCFailed" xml:space="preserve">
-    <value>VNC benötigt die Datei VncSharp.dll im mRemoteNG-Programmordner.
-Bitte stellen Sie sicher, dass Sie die Datei VncSharp.dll in Ihrem mRemoteNG-Programmordner haben (üblicherweise C:\Programme\mRemoteNG\).
-Wenn Sie noch immer Probleme mit VNC haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
-  </data>
-  <data name="CcVNCOK" xml:space="preserve">
-    <value>Alle VNC-Komponenten wurden gefunden und scheinen korrekt registriert zu sein.
-VncSharp Control Version {0}</value>
-  </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisch versuchen zu verbinden, wenn Verbindung getrennt wird (nur RDP &amp;&amp; ICA)</value>
   </data>
@@ -330,9 +302,6 @@ VncSharp Control Version {0}</value>
   </data>
   <data name="CompatibilityProblemDetected" xml:space="preserve">
     <value>Kompatibilitätsproblem entdeckt</value>
-  </data>
-  <data name="ComponentsCheck" xml:space="preserve">
-    <value>Komponenten prüfen</value>
   </data>
   <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
     <value>Bild Knopf Ereignis fehlgeschlagen!</value>
@@ -1359,9 +1328,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
   <data name="ReconnectAtStartup" xml:space="preserve">
     <value>Offene Verbindungen speichern und beim nächsten Start wiederverbinden</value>
   </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Aktualisieren</value>
-  </data>
   <data name="RemoteFile" xml:space="preserve">
     <value>Entfernte Datei</value>
   </data>
@@ -2034,9 +2000,6 @@ Development umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="AutomaticReconnectError" xml:space="preserve">
     <value>Beim Versuch, die Verbindung zum RDP-Host '{0}' wiederherzustellen, ist ein Fehler aufgetreten</value>
-  </data>
-  <data name="CcNotInstalledProperly" xml:space="preserve">
-    <value>nicht richtig installiert</value>
   </data>
   <data name="ChangeConnectionResolutionError" xml:space="preserve">
     <value>Beim Versuch, die Verbindungsauflösung auf den Host '{0}' zu ändern, ist ein Fehler aufgetreten</value>
