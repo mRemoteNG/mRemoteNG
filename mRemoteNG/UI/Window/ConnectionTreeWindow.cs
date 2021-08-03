@@ -197,13 +197,13 @@ namespace mRemoteNG.UI.Window
                 if (_sortedAz)
                 {
                     ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Ascending);
-                    mMenSort.Image = Properties.Resources.Sort_ZA;
+                    mMenSort.Image = Properties.Resources.SortDescending_16x;
                     _sortedAz = false;
                 }
                 else
                 {
                     ConnectionTree.SortRecursive(ConnectionTree.GetRootConnectionNode(), ListSortDirection.Descending);
-                    mMenSort.Image = Properties.Resources.Sort_AZ;
+                    mMenSort.Image = Properties.Resources.SortAscending_16x;
                     _sortedAz = true;
                 }
             };
@@ -221,7 +221,7 @@ namespace mRemoteNG.UI.Window
                         {
                             Text = containerInfo.Name,
                             Tag = containerInfo,
-                            Image = containerInfo.OpenConnections.Count > 0 ? Properties.Resources.Play : Properties.Resources.Pause
+                            Image = containerInfo.OpenConnections.Count > 0 ? Properties.Resources.StatusRun_16x : Properties.Resources.StatusStop_16x
                         };
                         favoriteMenuItem.MouseUp += FavoriteMenuItem_MouseUp;
                         favoritesList.Add(favoriteMenuItem);

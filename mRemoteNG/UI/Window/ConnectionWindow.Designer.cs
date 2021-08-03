@@ -144,7 +144,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabFullscreen
             // 
-            this.cmenTabFullscreen.Image = global::mRemoteNG.Properties.Resources.arrow_out;
+            this.cmenTabFullscreen.Image = global::mRemoteNG.Properties.Resources.FullScreen_16x;
             this.cmenTabFullscreen.Name = "cmenTabFullscreen";
             this.cmenTabFullscreen.Size = new System.Drawing.Size(230, 22);
             this.cmenTabFullscreen.Text = "Fullscreen (RDP)";
@@ -165,7 +165,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabStartChat
             // 
-            this.cmenTabStartChat.Image = global::mRemoteNG.Properties.Resources.Chat;
+            this.cmenTabStartChat.Image = global::mRemoteNG.Properties.Resources.Message_16x;
             this.cmenTabStartChat.Name = "cmenTabStartChat";
             this.cmenTabStartChat.Size = new System.Drawing.Size(230, 22);
             this.cmenTabStartChat.Text = "Start Chat (VNC)";
@@ -173,7 +173,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabRefreshScreen
             // 
-            this.cmenTabRefreshScreen.Image = global::mRemoteNG.Properties.Resources.Refresh;
+            this.cmenTabRefreshScreen.Image = global::mRemoteNG.Properties.Resources.Refresh_16x;
             this.cmenTabRefreshScreen.Name = "cmenTabRefreshScreen";
             this.cmenTabRefreshScreen.Size = new System.Drawing.Size(230, 22);
             this.cmenTabRefreshScreen.Text = "Refresh Screen (VNC)";
@@ -190,7 +190,7 @@ namespace mRemoteNG.UI.Window
             this.cmenTabSendSpecialKeys.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmenTabSendSpecialKeysCtrlAltDel,
             this.cmenTabSendSpecialKeysCtrlEsc});
-            this.cmenTabSendSpecialKeys.Image = global::mRemoteNG.Properties.Resources.Keyboard;
+            this.cmenTabSendSpecialKeys.Image = global::mRemoteNG.Properties.Resources.ToggleOfficeKeyboardScheme_16x;
             this.cmenTabSendSpecialKeys.Name = "cmenTabSendSpecialKeys";
             this.cmenTabSendSpecialKeys.Size = new System.Drawing.Size(230, 22);
             this.cmenTabSendSpecialKeys.Text = "Send special Keys (VNC)";

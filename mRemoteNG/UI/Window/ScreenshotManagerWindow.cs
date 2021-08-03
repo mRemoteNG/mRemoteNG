@@ -78,7 +78,7 @@ namespace mRemoteNG.UI.Window
                 mMenFileSaveAll,
                 mMenFileRemoveAll
             });
-            mMenFile.Image = Properties.Resources.File;
+            mMenFile.Image = Properties.Resources.Document_16x;
             mMenFile.Name = "mMenFile";
             mMenFile.Size = new Size(53, 20);
             mMenFile.Text = "&File";

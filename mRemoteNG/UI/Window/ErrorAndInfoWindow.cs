@@ -77,7 +77,7 @@ namespace mRemoteNG.UI.Window
         private void FillImageList()
         {
             imgListMC.ImageSize = _display.ScaleSize(imgListMC.ImageSize);
-            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.Brick));
+            imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.Test_16x));
             imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.InformationSmall));
             imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.WarningSmall));
             imgListMC.Images.Add(_display.ScaleImage(Properties.Resources.ErrorSmall));
@@ -219,7 +219,7 @@ namespace mRemoteNG.UI.Window
                 switch (eMsg.Class)
                 {
                     case MessageClass.DebugMsg:
-                        pbError.Image = _display.ScaleImage(Properties.Resources.Brick);
+                        pbError.Image = _display.ScaleImage(Properties.Resources.Test_16x);
                         if (_themeManager.ThemingActive)
                         {
                             pnlErrorMsg.BackColor = Color.LightSteelBlue;

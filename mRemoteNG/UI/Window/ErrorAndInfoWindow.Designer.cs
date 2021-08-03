@@ -98,7 +98,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cMenMCCopy
             // 
-            this.cMenMCCopy.Image = global::mRemoteNG.Properties.Resources.Copy;
+            this.cMenMCCopy.Image = global::mRemoteNG.Properties.Resources.Copy_16x;
             this.cMenMCCopy.Name = "cMenMCCopy";
             this.cMenMCCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.cMenMCCopy.Size = new System.Drawing.Size(140, 22);

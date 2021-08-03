@@ -56,7 +56,7 @@ namespace mRemoteNG.Tools
             var nodeAsContainer = node as ContainerInfo;
             if (nodeAsContainer != null)
             {
-                menuItem.Image = Properties.Resources.Folder;
+                menuItem.Image = Properties.Resources.FolderClosed_16x;
                 menuItem.Tag = nodeAsContainer;
                 AddSubMenuNodes(nodeAsContainer.Children, menuItem);
             }
@@ -67,7 +67,7 @@ namespace mRemoteNG.Tools
             }
             else if (node.GetTreeNodeType() == TreeNodeType.Connection)
             {
-                menuItem.Image = node.OpenConnections.Count > 0 ? Properties.Resources.Play : Properties.Resources.Pause;
+                menuItem.Image = node.OpenConnections.Count > 0 ? Properties.Resources.StatusRun_16x : Properties.Resources.StatusStop_16x;
                 menuItem.Tag = node;
             }
 

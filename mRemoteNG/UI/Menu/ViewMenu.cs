@@ -95,7 +95,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenReconnectAll
             // 
-            _mMenReconnectAll.Image = Properties.Resources.Refresh;
+            _mMenReconnectAll.Image = Properties.Resources.Refresh_16x;
             _mMenReconnectAll.Name = "mMenReconnectAll";
             _mMenReconnectAll.Size = new System.Drawing.Size(281, 22);
             _mMenReconnectAll.Text = Language.ReconnectAllConnections;
@@ -182,7 +182,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenViewFullscreen
             // 
-            _mMenViewFullscreen.Image = Properties.Resources.arrow_out;
+            _mMenViewFullscreen.Image = Properties.Resources.FullScreen_16x;
             _mMenViewFullscreen.Name = "mMenViewFullscreen";
             _mMenViewFullscreen.ShortcutKeys = Keys.F11;
             _mMenViewFullscreen.Size = new System.Drawing.Size(228, 22);

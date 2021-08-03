@@ -164,7 +164,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void UpdateConnectionImage(bool connectionSuccess)
         {
             imgConnectionStatus.Image = connectionSuccess
-                ? Properties.Resources.tick
+                ? Properties.Resources.Test_16x
                 : Properties.Resources.ErrorSmall;
         }
 

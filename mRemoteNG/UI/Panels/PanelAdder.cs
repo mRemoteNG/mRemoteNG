@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Panels
             var cMenRen = new ToolStripMenuItem
             {
                 Text = Language.Rename,
-                Image = Properties.Resources.Rename,
+                Image = Properties.Resources.Rename_16x,
                 Tag = pnlcForm
             };
             cMenRen.Click += cMenConnectionPanelRename_Click;
