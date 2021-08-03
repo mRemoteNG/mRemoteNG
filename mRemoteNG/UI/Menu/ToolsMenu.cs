@@ -51,7 +51,6 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsUVNCSC
             // 
-            _mMenToolsUvncsc.Image = Properties.Resources.UVNC_SC;
             _mMenToolsUvncsc.Name = "mMenToolsUVNCSC";
             _mMenToolsUvncsc.Size = new System.Drawing.Size(184, 22);
             _mMenToolsUvncsc.Text = Language.UltraVNCSingleClick;

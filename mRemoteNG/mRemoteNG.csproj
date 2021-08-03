@@ -1226,7 +1226,6 @@
     <None Include="Resources\Images\ExtApp.png" />
     <None Include="Resources\Images\Duplicate.png" />
     <None Include="Resources\Images\PortScan.png" />
-    <None Include="Resources\Images\UVNC_SC.png" />
     <None Include="Resources\Images\Bad_Symbol.png" />
     <None Include="Resources\Images\Good_Symbol.png" />
     <Content Include="Icons\Anti Virus.ico">
