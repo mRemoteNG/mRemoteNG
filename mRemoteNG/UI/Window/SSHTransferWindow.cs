@@ -104,7 +104,7 @@ namespace mRemoteNG.UI.Window
             // 
             btnTransfer._mice = MrngButton.MouseState.HOVER;
             btnTransfer.FlatStyle = FlatStyle.Flat;
-            btnTransfer.Image = Properties.Resources.SSHTransfer;
+            btnTransfer.Image = Properties.Resources.SchemaCompare_16x;
             btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnTransfer.Location = new System.Drawing.Point(562, 145);
             btnTransfer.Name = "btnTransfer";

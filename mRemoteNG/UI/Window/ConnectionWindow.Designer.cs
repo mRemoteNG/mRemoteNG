@@ -177,7 +177,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabTransferFile
             // 
-            this.cmenTabTransferFile.Image = global::mRemoteNG.Properties.Resources.SSHTransfer;
+            this.cmenTabTransferFile.Image = global::mRemoteNG.Properties.Resources.SchemaCompare_16x;
             this.cmenTabTransferFile.Name = "cmenTabTransferFile";
             this.cmenTabTransferFile.Size = new System.Drawing.Size(230, 22);
             this.cmenTabTransferFile.Text = "Transfer File (SSH)";

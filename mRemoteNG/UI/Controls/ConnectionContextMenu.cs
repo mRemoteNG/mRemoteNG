@@ -204,7 +204,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsChoosePanelBeforeConnecting
             // 
-            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = Properties.Resources.Panels;
+            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = Properties.Resources.Panel_16x;
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Name =
                 "_cMenTreeConnectWithOptionsChoosePanelBeforeConnecting";
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Size = new System.Drawing.Size(245, 22);
@@ -235,14 +235,14 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeToolsExternalApps
             // 
-            _cMenTreeToolsExternalApps.Image = Properties.Resources.ExtApp;
+            _cMenTreeToolsExternalApps.Image = Properties.Resources.Console_16x;
             _cMenTreeToolsExternalApps.Name = "_cMenTreeToolsExternalApps";
             _cMenTreeToolsExternalApps.Size = new System.Drawing.Size(199, 22);
             _cMenTreeToolsExternalApps.Text = "External Applications";
             // 
             // cMenTreeToolsTransferFile
             // 
-            _cMenTreeToolsTransferFile.Image = Properties.Resources.SSHTransfer;
+            _cMenTreeToolsTransferFile.Image = Properties.Resources.SchemaCompare_16x;
             _cMenTreeToolsTransferFile.Name = "_cMenTreeToolsTransferFile";
             _cMenTreeToolsTransferFile.Size = new System.Drawing.Size(199, 22);
             _cMenTreeToolsTransferFile.Text = "Transfer File (SSH)";

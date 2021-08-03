@@ -43,7 +43,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsSSHTransfer
             // 
-            _mMenToolsSshTransfer.Image = Properties.Resources.SSHTransfer;
+            _mMenToolsSshTransfer.Image = Properties.Resources.SchemaCompare_16x;
             _mMenToolsSshTransfer.Name = "mMenToolsSSHTransfer";
             _mMenToolsSshTransfer.Size = new System.Drawing.Size(184, 22);
             _mMenToolsSshTransfer.Text = Language.SshFileTransfer;
@@ -59,7 +59,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsExternalApps
             // 
-            _mMenToolsExternalApps.Image = Properties.Resources.ExtApp;
+            _mMenToolsExternalApps.Image = Properties.Resources.Console_16x;
             _mMenToolsExternalApps.Name = "mMenToolsExternalApps";
             _mMenToolsExternalApps.Size = new System.Drawing.Size(184, 22);
             _mMenToolsExternalApps.Text = Language.ExternalTool;
@@ -67,7 +67,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsPortScan
             // 
-            _mMenToolsPortScan.Image = Properties.Resources.PortScan;
+            _mMenToolsPortScan.Image = Properties.Resources.SearchAndApps_16x;
             _mMenToolsPortScan.Name = "mMenToolsPortScan";
             _mMenToolsPortScan.Size = new System.Drawing.Size(184, 22);
             _mMenToolsPortScan.Text = Language.PortScan;

@@ -213,6 +213,16 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Console_16x {
+            get {
+                object obj = ResourceManager.GetObject("Console_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Copy_16x {
             get {
                 object obj = ResourceManager.GetObject("Copy_16x", resourceCulture);
@@ -346,16 +356,6 @@ namespace mRemoteNG.Properties {
         internal static System.Drawing.Bitmap ExpandDown_16x {
             get {
                 object obj = ResourceManager.GetObject("ExpandDown_16x", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ExtApp {
-            get {
-                object obj = ResourceManager.GetObject("ExtApp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -603,6 +603,16 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap InsertPanel_16x {
+            get {
+                object obj = ResourceManager.GetObject("InsertPanel_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Key_Delete {
             get {
                 object obj = ResourceManager.GetObject("Key_Delete", resourceCulture);
@@ -779,9 +789,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Panel_Add {
+        internal static System.Drawing.Bitmap Panel_16x {
             get {
-                object obj = ResourceManager.GetObject("Panel_Add", resourceCulture);
+                object obj = ResourceManager.GetObject("Panel_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -797,32 +807,12 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Panels {
-            get {
-                object obj = ResourceManager.GetObject("Panels", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
         /// </summary>
         internal static System.Drawing.Icon Panels_Icon {
             get {
                 object obj = ResourceManager.GetObject("Panels_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PortScan {
-            get {
-                object obj = ResourceManager.GetObject("PortScan", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -959,9 +949,29 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SchemaCompare_16x {
+            get {
+                object obj = ResourceManager.GetObject("SchemaCompare_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Search_16x {
             get {
                 object obj = ResourceManager.GetObject("Search_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SearchAndApps_16x {
+            get {
+                object obj = ResourceManager.GetObject("SearchAndApps_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1032,16 +1042,6 @@ namespace mRemoteNG.Properties {
         internal static System.Drawing.Bitmap SortDescending_16x {
             get {
                 object obj = ResourceManager.GetObject("SortDescending_16x", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SSHTransfer {
-            get {
-                object obj = ResourceManager.GetObject("SSHTransfer", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

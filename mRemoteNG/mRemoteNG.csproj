@@ -1156,9 +1156,7 @@
     <None Include="Resources\Images\Monitor_GoTo.png" />
     <None Include="Resources\Images\News.png" />
     <None Include="Resources\Images\Page.png" />
-    <None Include="Resources\Images\Panel_Add.png" />
     <None Include="Resources\Images\Panel_Close.png" />
-    <None Include="Resources\Images\Panels.png" />
     <None Include="Resources\Images\Properties_Default.png" />
     <None Include="Resources\Images\SmartSize.png" />
     <None Include="Resources\Images\Key_Delete.png" />
@@ -1205,6 +1203,11 @@
     <None Include="Resources\AddItem_16x.png" />
     <None Include="Resources\ASPWebSite_16x.png" />
     <None Include="Resources\OpenFile_16x.png" />
+    <None Include="Resources\Console_16x.png" />
+    <None Include="Resources\SearchAndApps_16x.png" />
+    <None Include="Resources\SchemaCompare_16x.png" />
+    <None Include="Resources\Panel_16x.png" />
+    <None Include="Resources\InsertPanel_16x.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1219,13 +1222,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Images\SSHTransfer.png" />
     <None Include="Resources\Images\ErrorsAndInfos.png" />
     <None Include="Resources\Images\Sessions.png" />
     <None Include="Resources\Images\PropertiesDefault.png" />
-    <None Include="Resources\Images\ExtApp.png" />
     <None Include="Resources\Images\Duplicate.png" />
-    <None Include="Resources\Images\PortScan.png" />
     <None Include="Resources\Images\Bad_Symbol.png" />
     <None Include="Resources\Images\Good_Symbol.png" />
     <Content Include="Icons\Anti Virus.ico">

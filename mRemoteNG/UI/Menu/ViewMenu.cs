@@ -87,7 +87,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenViewAddConnectionPanel
             // 
-            _mMenViewAddConnectionPanel.Image = Properties.Resources.Panel_Add;
+            _mMenViewAddConnectionPanel.Image = Properties.Resources.InsertPanel_16x;
             _mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel";
             _mMenViewAddConnectionPanel.Size = new System.Drawing.Size(228, 22);
             _mMenViewAddConnectionPanel.Text = Language.AddConnectionPanel;
@@ -103,7 +103,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenViewConnectionPanels
             // 
-            _mMenViewConnectionPanels.Image = Properties.Resources.Panels;
+            _mMenViewConnectionPanels.Image = Properties.Resources.Panel_16x;
             _mMenViewConnectionPanels.Name = "mMenViewConnectionPanels";
             _mMenViewConnectionPanels.Size = new System.Drawing.Size(228, 22);
             _mMenViewConnectionPanels.Text = Language.ConnectionPanels;
