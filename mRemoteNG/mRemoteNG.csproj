@@ -1164,17 +1164,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Images\application_side_tree.png" />
-    <None Include="Resources\Images\arrow_left.png" />
     <None Include="Resources\Images\arrow_out.png" />
-    <None Include="Resources\Images\brick.png" />
-    <None Include="Resources\Images\Chat.png" />
     <None Include="Resources\Images\cog_error.png" />
     <None Include="Resources\Images\ConnectedOverlay.png" />
     <None Include="Resources\Images\Connection_Add.png" />
     <None Include="Resources\Images\Connection_Duplicate.png" />
-    <None Include="Resources\Images\Console.png" />
-    <None Include="Resources\Images\database.png" />
-    <None Include="Resources\Images\exclamation.png" />
     <None Include="Resources\Images\ExtApp_Add.png" />
     <None Include="Resources\Images\ExtApp_Delete.png" />
     <None Include="Resources\Images\ExtApp_Start.png" />
@@ -1182,10 +1176,6 @@
     <None Include="Resources\Images\folder_key.png" />
     <None Include="Resources\Images\Inheritance_Default.png" />
     <None Include="Resources\Images\JumpTo.png" />
-    <None Include="Resources\Images\key.png" />
-    <None Include="Resources\Images\key_add.png" />
-    <None Include="Resources\Images\key_delete.png" />
-    <None Include="Resources\Images\key_go.png" />
     <None Include="Resources\Images\Link.png" />
     <None Include="Resources\Images\Monitor.png" />
     <None Include="Resources\Images\monitor_delete.png" />
@@ -1193,7 +1183,6 @@
     <None Include="Resources\Images\Monitor_GoTo.png" />
     <None Include="Resources\Images\News.png" />
     <None Include="Resources\Images\Page.png" />
-    <None Include="Resources\Images\page_copy.png" />
     <None Include="Resources\Images\Panel_Add.png" />
     <None Include="Resources\Images\Panel_Close.png" />
     <None Include="Resources\Images\Panels.png" />
@@ -1208,6 +1197,13 @@
     <None Include="Resources\Images\user_comment.png" />
     <None Include="Resources\Images\Play.png" />
     <None Include="Resources\Images\Pause.png" />
+    <None Include="Resources\Images\Brick.png" />
+    <None Include="Resources\Images\Key_Delete.png" />
+    <None Include="Resources\Images\Loading_Spinner.gif" />
+    <None Include="Resources\Images\Page_Copy.png" />
+    <None Include="Resources\Images\Chat.png" />
+    <None Include="Resources\Images\Keyboard.png" />
+    <None Include="Resources\Images\Rename.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1222,7 +1218,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Images\loading_spinner.gif" />
     <Content Include="Resources\Images\green_arrow1.png" />
     <Content Include="Resources\Images\green_arrow2.png" />
     <None Include="Resources\Images\PuttySessions.png" />
@@ -1338,7 +1333,6 @@
     <Content Include="Icons\Workstation.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\database.bmp" />
     <None Include="Resources\Images\Copy.png" />
     <None Include="Properties\Settings.settings">
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
@@ -1357,17 +1351,13 @@
     <None Include="Resources\Images\Screenshot_Add.png" />
     <None Include="Resources\Images\Save.png" />
     <None Include="Resources\Images\Root.png" />
-    <None Include="Resources\Images\Rename.png" />
     <None Include="Resources\Images\Options.png" />
     <None Include="Resources\Images\Open.png" />
     <None Include="Resources\Images\NewFolder.png" />
     <None Include="Resources\Images\NewConnection.png" />
     <None Include="Resources\Images\New.png" />
-    <None Include="Resources\Images\Minimize.png" />
-    <None Include="Resources\Images\Keyboard.png" />
     <None Include="Resources\Images\InformationSmall.png" />
     <None Include="Resources\Images\Information.png" />
-    <None Include="Resources\Images\Info.png" />
     <None Include="Resources\Images\HostStatus_On.png" />
     <None Include="Resources\Images\HostStatus_Off.png" />
     <None Include="Resources\Images\HostStatus_Check.png" />

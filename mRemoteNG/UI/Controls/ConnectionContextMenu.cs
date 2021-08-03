@@ -196,7 +196,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsNoCredentials
             // 
-            _cMenTreeConnectWithOptionsNoCredentials.Image = Properties.Resources.key_delete;
+            _cMenTreeConnectWithOptionsNoCredentials.Image = Properties.Resources.Key_Delete;
             _cMenTreeConnectWithOptionsNoCredentials.Name = "_cMenTreeConnectWithOptionsNoCredentials";
             _cMenTreeConnectWithOptionsNoCredentials.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsNoCredentials.Text = "Connect without credentials";
@@ -255,7 +255,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeDuplicate
             // 
-            _cMenTreeDuplicate.Image = Properties.Resources.page_copy;
+            _cMenTreeDuplicate.Image = Properties.Resources.Page_Copy;
             _cMenTreeDuplicate.Name = "_cMenTreeDuplicate";
             _cMenTreeDuplicate.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDuplicate.Text = "Duplicate";
