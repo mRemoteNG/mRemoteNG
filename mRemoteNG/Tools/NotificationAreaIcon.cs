@@ -28,7 +28,7 @@ namespace mRemoteNG.Tools
                 _cMenCons = new ToolStripMenuItem
                 {
                     Text = Language.Connections,
-                    Image = Properties.Resources.Root
+                    Image = Properties.Resources.ASPWebSite_16x
                 };
 
                 var cMenSep1 = new ToolStripSeparator();

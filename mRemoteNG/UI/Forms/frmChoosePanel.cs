@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Forms
         public FrmChoosePanel()
         {
             InitializeComponent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Panel_16x);
             _panelAdder = new PanelAdder();
         }
 

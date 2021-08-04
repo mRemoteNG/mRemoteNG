@@ -16,7 +16,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Properties.Resources.Database_Icon;
+            PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.SQLDatabase_16x);
             _databaseConnectionTester = new DatabaseConnectionTester();
         }
 
@@ -164,8 +164,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void UpdateConnectionImage(bool connectionSuccess)
         {
             imgConnectionStatus.Image = connectionSuccess
-                ? Properties.Resources.tick
-                : Properties.Resources.ErrorSmall;
+                ? Properties.Resources.Test_16x
+                : Properties.Resources.LogError_16x;
         }
 
         private string BuildTestFailedMessage(string specificMessage)

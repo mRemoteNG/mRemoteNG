@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Properties.Resources.Config_Icon;
+            PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
             var display = new DisplayProperties();
             var img = display.ScaleImage(Properties.Resources.PuttyConfig);
             btnLaunchPutty.Image = img;

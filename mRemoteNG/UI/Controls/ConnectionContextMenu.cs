@@ -146,7 +146,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnect
             // 
-            _cMenTreeConnect.Image = Properties.Resources.Play;
+            _cMenTreeConnect.Image = Properties.Resources.Run_16x;
             _cMenTreeConnect.Name = "_cMenTreeConnect";
             _cMenTreeConnect.Size = new System.Drawing.Size(199, 22);
             _cMenTreeConnect.Text = "Connect";
@@ -169,7 +169,6 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsConnectToConsoleSession
             // 
-            _cMenTreeConnectWithOptionsConnectToConsoleSession.Image = Properties.Resources.monitor_go;
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Name =
                 "_cMenTreeConnectWithOptionsConnectToConsoleSession";
             _cMenTreeConnectWithOptionsConnectToConsoleSession.Size = new System.Drawing.Size(245, 22);
@@ -178,7 +177,6 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsDontConnectToConsoleSession
             // 
-            _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Image = Properties.Resources.monitor_delete;
             _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Name =
                 "_cMenTreeConnectWithOptionsDontConnectToConsoleSession";
             _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Size = new System.Drawing.Size(245, 22);
@@ -188,7 +186,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsConnectInFullscreen
             // 
-            _cMenTreeConnectWithOptionsConnectInFullscreen.Image = Properties.Resources.arrow_out;
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Image = Properties.Resources.FullScreen_16x;
             _cMenTreeConnectWithOptionsConnectInFullscreen.Name = "_cMenTreeConnectWithOptionsConnectInFullscreen";
             _cMenTreeConnectWithOptionsConnectInFullscreen.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsConnectInFullscreen.Text = "Connect in fullscreen";
@@ -196,7 +194,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsNoCredentials
             // 
-            _cMenTreeConnectWithOptionsNoCredentials.Image = Properties.Resources.Key_Delete;
+            _cMenTreeConnectWithOptionsNoCredentials.Image = Properties.Resources.UniqueKeyError_16x;
             _cMenTreeConnectWithOptionsNoCredentials.Name = "_cMenTreeConnectWithOptionsNoCredentials";
             _cMenTreeConnectWithOptionsNoCredentials.Size = new System.Drawing.Size(245, 22);
             _cMenTreeConnectWithOptionsNoCredentials.Text = "Connect without credentials";
@@ -204,7 +202,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsChoosePanelBeforeConnecting
             // 
-            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = Properties.Resources.Panels;
+            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = Properties.Resources.Panel_16x;
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Name =
                 "_cMenTreeConnectWithOptionsChoosePanelBeforeConnecting";
             _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Size = new System.Drawing.Size(245, 22);
@@ -213,7 +211,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeConnectWithOptionsViewOnly
             // 
-            _cMenTreeConnectWithOptionsViewOnly.Image = Properties.Resources.View;
+            _cMenTreeConnectWithOptionsViewOnly.Image = Properties.Resources.Monitor_16x;
             _cMenTreeConnectWithOptionsViewOnly.Name =
                 "_cMenTreeConnectWithOptionsViewOnly";
             _cMenTreeConnectWithOptionsViewOnly.Size = new System.Drawing.Size(245, 22);
@@ -222,7 +220,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeDisconnect
             // 
-            _cMenTreeDisconnect.Image = Properties.Resources.Pause;
+            _cMenTreeDisconnect.Image = Properties.Resources.Stop_16x;
             _cMenTreeDisconnect.Name = "_cMenTreeDisconnect";
             _cMenTreeDisconnect.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDisconnect.Text = "Disconnect";
@@ -235,14 +233,14 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeToolsExternalApps
             // 
-            _cMenTreeToolsExternalApps.Image = Properties.Resources.ExtApp;
+            _cMenTreeToolsExternalApps.Image = Properties.Resources.Console_16x;
             _cMenTreeToolsExternalApps.Name = "_cMenTreeToolsExternalApps";
             _cMenTreeToolsExternalApps.Size = new System.Drawing.Size(199, 22);
             _cMenTreeToolsExternalApps.Text = "External Applications";
             // 
             // cMenTreeToolsTransferFile
             // 
-            _cMenTreeToolsTransferFile.Image = Properties.Resources.SSHTransfer;
+            _cMenTreeToolsTransferFile.Image = Properties.Resources.SyncArrow_16x;
             _cMenTreeToolsTransferFile.Name = "_cMenTreeToolsTransferFile";
             _cMenTreeToolsTransferFile.Size = new System.Drawing.Size(199, 22);
             _cMenTreeToolsTransferFile.Text = "Transfer File (SSH)";
@@ -255,7 +253,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeDuplicate
             // 
-            _cMenTreeDuplicate.Image = Properties.Resources.Page_Copy;
+            _cMenTreeDuplicate.Image = Properties.Resources.Copy_16x;
             _cMenTreeDuplicate.Name = "_cMenTreeDuplicate";
             _cMenTreeDuplicate.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDuplicate.Text = "Duplicate";
@@ -263,7 +261,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeRename
             // 
-            _cMenTreeRename.Image = Properties.Resources.Rename;
+            _cMenTreeRename.Image = Properties.Resources.Rename_16x;
             _cMenTreeRename.Name = "_cMenTreeRename";
             _cMenTreeRename.Size = new System.Drawing.Size(199, 22);
             _cMenTreeRename.Text = "Rename";
@@ -271,7 +269,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeDelete
             // 
-            _cMenTreeDelete.Image = Properties.Resources.Delete;
+            _cMenTreeDelete.Image = Properties.Resources.Close_16x;
             _cMenTreeDelete.Name = "_cMenTreeDelete";
             _cMenTreeDelete.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDelete.Text = "Delete";
@@ -336,7 +334,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeAddConnection
             // 
-            _cMenTreeAddConnection.Image = Properties.Resources.Connection_Add;
+            _cMenTreeAddConnection.Image = Properties.Resources.AddItem_16x;
             _cMenTreeAddConnection.Name = "_cMenTreeAddConnection";
             _cMenTreeAddConnection.Size = new System.Drawing.Size(199, 22);
             _cMenTreeAddConnection.Text = "New Connection";
@@ -344,7 +342,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeAddFolder
             // 
-            _cMenTreeAddFolder.Image = Properties.Resources.Folder_Add;
+            _cMenTreeAddFolder.Image = Properties.Resources.AddFolder_16x;
             _cMenTreeAddFolder.Name = "_cMenTreeAddFolder";
             _cMenTreeAddFolder.Size = new System.Drawing.Size(199, 22);
             _cMenTreeAddFolder.Text = "New Folder";
@@ -368,7 +366,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeToolsSortAscending
             // 
-            _cMenTreeToolsSortAscending.Image = Properties.Resources.Sort_AZ;
+            _cMenTreeToolsSortAscending.Image = Properties.Resources.SortAscending_16x;
             _cMenTreeToolsSortAscending.Name = "_cMenTreeToolsSortAscending";
             _cMenTreeToolsSortAscending.Size = new System.Drawing.Size(161, 22);
             _cMenTreeToolsSortAscending.Text = "Ascending (A-Z)";
@@ -376,7 +374,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeToolsSortDescending
             // 
-            _cMenTreeToolsSortDescending.Image = Properties.Resources.Sort_ZA;
+            _cMenTreeToolsSortDescending.Image = Properties.Resources.SortDescending_16x;
             _cMenTreeToolsSortDescending.Name = "_cMenTreeToolsSortDescending";
             _cMenTreeToolsSortDescending.Size = new System.Drawing.Size(161, 22);
             _cMenTreeToolsSortDescending.Text = "Descending (Z-A)";
@@ -384,7 +382,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeMoveUp
             // 
-            _cMenTreeMoveUp.Image = Properties.Resources.Arrow_Up;
+            _cMenTreeMoveUp.Image = Properties.Resources.GlyphUp_16x;
             _cMenTreeMoveUp.Name = "_cMenTreeMoveUp";
             _cMenTreeMoveUp.Size = new System.Drawing.Size(199, 22);
             _cMenTreeMoveUp.Text = "Move up";
@@ -392,7 +390,7 @@ namespace mRemoteNG.UI.Controls
             // 
             // cMenTreeMoveDown
             // 
-            _cMenTreeMoveDown.Image = Properties.Resources.Arrow_Down;
+            _cMenTreeMoveDown.Image = Properties.Resources.GlyphDown_16x;
             _cMenTreeMoveDown.Name = "_cMenTreeMoveDown";
             _cMenTreeMoveDown.Size = new System.Drawing.Size(199, 22);
             _cMenTreeMoveDown.Text = "Move down";

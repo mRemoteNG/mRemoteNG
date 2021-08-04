@@ -62,7 +62,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoHelp
             // 
-            _mMenInfoHelp.Image = Properties.Resources.Help;
+            _mMenInfoHelp.Image = Properties.Resources.F1Help_16x;
             _mMenInfoHelp.Name = "mMenInfoHelp";
             _mMenInfoHelp.ShortcutKeys = Keys.F1;
             _mMenInfoHelp.Size = new System.Drawing.Size(190, 22);
@@ -71,7 +71,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenToolsUpdate
             // 
-            _mMenToolsUpdate.Image = Properties.Resources.Update;
+            _mMenToolsUpdate.Image = Properties.Resources.RunUpdate_16x;
             _mMenToolsUpdate.Name = "mMenToolsUpdate";
             _mMenToolsUpdate.Size = new System.Drawing.Size(190, 22);
             _mMenToolsUpdate.Text = Language.CheckForUpdates;
@@ -120,7 +120,7 @@ namespace mRemoteNG.UI.Menu
             // 
             // mMenInfoAbout
             // 
-            _mMenInfoAbout.Image = Properties.Resources.mRemoteNG;
+            _mMenInfoAbout.Image = Properties.Resources.UIAboutBox_16x;
             _mMenInfoAbout.Name = "mMenInfoAbout";
             _mMenInfoAbout.Size = new System.Drawing.Size(190, 22);
             _mMenInfoAbout.Text = Language.About;

@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Forms
         private FrmAbout()
         {
             InitializeComponent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.UIAboutBox_16x);
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
             ApplyTheme();

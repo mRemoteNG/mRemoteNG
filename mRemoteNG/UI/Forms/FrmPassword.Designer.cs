@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // pbLock
             // 
-            this.pbLock.Image = global::mRemoteNG.Properties.Resources.Lock;
+            this.pbLock.Image = global::mRemoteNG.Properties.Resources.ASPWebSite_16x;
             this.pbLock.Location = new System.Drawing.Point(3, 12);
             this.pbLock.Name = "pbLock";
             this.tableLayoutPanel1.SetRowSpan(this.pbLock, 6);
