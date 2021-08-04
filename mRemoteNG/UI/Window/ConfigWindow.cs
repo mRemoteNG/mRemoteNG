@@ -236,8 +236,8 @@ namespace mRemoteNG.UI.Window
         {
             WindowType = WindowType.Config;
             DockPnl = panel;
-            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
             InitializeComponent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
             ApplyLanguage();
         }
 

@@ -26,6 +26,7 @@ namespace mRemoteNG.UI.Forms
             Cursor.Current = Cursors.WaitCursor;
             Application.DoEvents();
             InitializeComponent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
             _pageName = pn;
             Cursor.Current = Cursors.Default;
         }

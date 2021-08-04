@@ -296,7 +296,6 @@ namespace mRemoteNG.UI.Window
             Controls.Add(pbStatus);
             Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
                                                 System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             Name = "SSHTransferWindow";
             TabText = "SSH File Transfer";
             Text = "SSH File Transfer";
@@ -350,6 +349,7 @@ namespace mRemoteNG.UI.Window
         {
             ApplyTheme();
             ApplyLanguage();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.SyncArrow_16x);
             var display = new DisplayProperties();
             btnTransfer.Image = display.ScaleImage(btnTransfer.Image);
         }
