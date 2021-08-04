@@ -98,7 +98,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cMenMCCopy
             // 
-            this.cMenMCCopy.Image = global::mRemoteNG.Properties.Resources.Copy;
+            this.cMenMCCopy.Image = global::mRemoteNG.Properties.Resources.Copy_16x;
             this.cMenMCCopy.Name = "cMenMCCopy";
             this.cMenMCCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.cMenMCCopy.Size = new System.Drawing.Size(140, 22);
@@ -107,7 +107,7 @@ namespace mRemoteNG.UI.Window
             // 
             // cMenMCDelete
             // 
-            this.cMenMCDelete.Image = global::mRemoteNG.Properties.Resources.Delete;
+            this.cMenMCDelete.Image = global::mRemoteNG.Properties.Resources.Close_16x;
             this.cMenMCDelete.Name = "cMenMCDelete";
             this.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.cMenMCDelete.Size = new System.Drawing.Size(140, 22);
@@ -151,7 +151,6 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.pnlErrorMsg);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
-            this.Icon = global::mRemoteNG.Properties.Resources.Info_Icon;
             this.Name = "ErrorAndInfoWindow";
             this.TabText = global::mRemoteNG.Resources.Language.Language.Notifications;
             this.Text = "Notifications";

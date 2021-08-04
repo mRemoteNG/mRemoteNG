@@ -94,7 +94,7 @@ namespace mRemoteNG.UI.Window
             // mMenAddConnection
             // 
             this.mMenAddConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenAddConnection.Image = global::mRemoteNG.Properties.Resources.Connection_Add;
+            this.mMenAddConnection.Image = global::mRemoteNG.Properties.Resources.AddItem_16x;
             this.mMenAddConnection.Name = "mMenAddConnection";
             this.mMenAddConnection.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
             this.mMenAddConnection.Size = new System.Drawing.Size(24, 20);
@@ -103,7 +103,7 @@ namespace mRemoteNG.UI.Window
             // mMenAddFolder
             // 
             this.mMenAddFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenAddFolder.Image = global::mRemoteNG.Properties.Resources.Folder_Add;
+            this.mMenAddFolder.Image = global::mRemoteNG.Properties.Resources.AddFolder_16x;
             this.mMenAddFolder.Name = "mMenAddFolder";
             this.mMenAddFolder.Size = new System.Drawing.Size(28, 20);
             this.mMenAddFolder.Click += new System.EventHandler(this.CMenTreeAddFolder_Click);
@@ -111,7 +111,7 @@ namespace mRemoteNG.UI.Window
             // mMenViewExpandAllFolders
             // 
             this.mMenViewExpandAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenViewExpandAllFolders.Image = global::mRemoteNG.Properties.Resources.Expand;
+            this.mMenViewExpandAllFolders.Image = global::mRemoteNG.Properties.Resources.ExpandAll_16x;
             this.mMenViewExpandAllFolders.Name = "mMenViewExpandAllFolders";
             this.mMenViewExpandAllFolders.Size = new System.Drawing.Size(28, 20);
             this.mMenViewExpandAllFolders.Text = "Expand all folders";
@@ -119,7 +119,7 @@ namespace mRemoteNG.UI.Window
             // mMenViewCollapseAllFolders
             // 
             this.mMenViewCollapseAllFolders.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenViewCollapseAllFolders.Image = global::mRemoteNG.Properties.Resources.Collapse;
+            this.mMenViewCollapseAllFolders.Image = global::mRemoteNG.Properties.Resources.CollapseAll_16x;
             this.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders";
             this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(28, 20);
             this.mMenViewCollapseAllFolders.Text = "Collapse all folders";
@@ -127,14 +127,14 @@ namespace mRemoteNG.UI.Window
             // mMenSortAscending
             // 
             this.mMenSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenSort.Image = global::mRemoteNG.Properties.Resources.Sort_AZ;
+            this.mMenSort.Image = global::mRemoteNG.Properties.Resources.SortAscending_16x;
             this.mMenSort.Name = "mMenSort";
             this.mMenSort.Size = new System.Drawing.Size(28, 20);
             // 
             // mMenFavorites
             // 
             this.mMenFavorites.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.mMenFavorites.Image = global::mRemoteNG.Properties.Resources.star;
+            this.mMenFavorites.Image = global::mRemoteNG.Properties.Resources.Favorite_16x;
             this.mMenFavorites.Name = "mMenFavorites";
             this.mMenFavorites.Size = new System.Drawing.Size(28, 20);
             this.mMenFavorites.Text = "Favorites";
@@ -146,7 +146,7 @@ namespace mRemoteNG.UI.Window
             // pbSearch
             // 
             this.pbSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbSearch.Image = global::mRemoteNG.Properties.Resources.Search;
+            this.pbSearch.Image = global::mRemoteNG.Properties.Resources.Search_16x;
             this.pbSearch.Location = new System.Drawing.Point(0, 0);
             this.pbSearch.Margin = new System.Windows.Forms.Padding(0);
             this.pbSearch.Name = "pbSearch";
@@ -197,7 +197,6 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.msMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
-            this.Icon = global::mRemoteNG.Properties.Resources.Root_Icon;
             this.Name = "ConnectionTreeWindow";
             this.TabText = "Connections";
             this.Text = "Connections";

@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Forms
             // btnNew
             // 
             this.btnNew._mice = MrngButton.MouseState.HOVER;
-            this.btnNew.Image = global::mRemoteNG.Properties.Resources.Panel_Add;
+            this.btnNew.Image = global::mRemoteNG.Properties.Resources.InsertPanel_16x;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNew.Location = new System.Drawing.Point(86, 72);
             this.btnNew.Name = "btnNew";
@@ -92,7 +92,6 @@ namespace mRemoteNG.UI.Forms
             this.Controls.Add(this.cbPanels);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = global::mRemoteNG.Properties.Resources.Panels_Icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmChoosePanel";

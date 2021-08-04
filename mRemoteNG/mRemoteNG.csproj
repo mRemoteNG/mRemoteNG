@@ -19,7 +19,7 @@
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <ApplicationIcon>Resources\Icons\mRemoteNG_Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\mRemoteNG_Icon.ico</ApplicationIcon>
     <OptionStrict>Off</OptionStrict>
     <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
@@ -221,6 +221,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ImageConverter.cs" />
     <Compile Include="Resources\Language\Language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1010,20 +1011,8 @@
       <DependentUpon>ErrorAndInfoWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\ExternalToolsWindow.resx">
-      <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\PortScanWindow.resx">
-      <DependentUpon>PortScanWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FrmExport.resx">
       <DependentUpon>FrmExport.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\SSHTransferWindow.resx">
-      <DependentUpon>SSHTransferWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ConnectionTreeWindow.resx">
@@ -1090,7 +1079,6 @@
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Images\Header_dark.png" />
     <None Include="Resources\Tiles\mRemoteNG.VisualElementsManifest.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1100,38 +1088,6 @@
     <None Include="Resources\Tiles\VisualElements_150.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Icons\Appearance_Icon.ico" />
-    <None Include="Resources\Icons\mRemoteNG_Icon.ico" />
-    <None Include="Resources\Icons\Comments_Icon.ico" />
-    <None Include="Resources\Icons\Config_Icon.ico" />
-    <None Include="Resources\Icons\Database_Icon.ico" />
-    <None Include="Resources\Icons\Error_Icon.ico" />
-    <None Include="Resources\Icons\ExtApp_Icon.ico" />
-    <None Include="Resources\Icons\Help_Icon.ico" />
-    <None Include="Resources\Icons\Key_Icon.ico" />
-    <None Include="Resources\Icons\Keyboard_Icon.ico" />
-    <None Include="Resources\Icons\News_Icon.ico" />
-    <None Include="Resources\Icons\Options_Icon.ico" />
-    <None Include="Resources\Icons\EditPage_Icon.ico" />
-    <None Include="Resources\Icons\Panels_Icon.ico" />
-    <None Include="Resources\Icons\PortScan_Icon.ico" />
-    <None Include="Resources\Icons\Save_Icon.ico" />
-    <None Include="Resources\Icons\Sessions_Icon.ico" />
-    <None Include="Resources\Icons\Shield_Icon.ico" />
-    <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
-    <None Include="Resources\Icons\StartupExit_Icon.ico" />
-    <None Include="Resources\Icons\Tab_Icon.ico" />
-    <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
-    <None Include="Resources\Icons\Info_Icon.ico" />
-    <None Include="Resources\Icons\Root_Icon.ico" />
-    <None Include="Resources\Icons\ConnectionsSaveAs_Icon.ico" />
-    <None Include="Resources\Icons\Update_Icon.ico" />
-    <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
-    <None Include="Resources\Images\mRemoteNG.png" />
-    <None Include="Resources\Images\tab_add.png" />
-    <None Include="Resources\Images\tab_edit.png" />
-    <None Include="Resources\Images\tab_delete.png" />
-    <None Include="Resources\Images\star.png" />
     <Content Include="Icons\Infrastructure.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1144,44 +1100,74 @@
     <Content Include="Icons\PowerShell.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Images\application_side_tree.png" />
-    <None Include="Resources\Images\arrow_out.png" />
-    <None Include="Resources\Images\cog_error.png" />
-    <None Include="Resources\Images\ConnectedOverlay.png" />
-    <None Include="Resources\Images\Connection_Add.png" />
-    <None Include="Resources\Images\Connection_Duplicate.png" />
-    <None Include="Resources\Images\ExtApp_Add.png" />
-    <None Include="Resources\Images\ExtApp_Delete.png" />
-    <None Include="Resources\Images\ExtApp_Start.png" />
-    <None Include="Resources\Images\Folder_Add.png" />
-    <None Include="Resources\Images\folder_key.png" />
-    <None Include="Resources\Images\Inheritance_Default.png" />
-    <None Include="Resources\Images\JumpTo.png" />
-    <None Include="Resources\Images\Link.png" />
-    <None Include="Resources\Images\Monitor.png" />
-    <None Include="Resources\Images\monitor_delete.png" />
-    <None Include="Resources\Images\monitor_go.png" />
-    <None Include="Resources\Images\Monitor_GoTo.png" />
-    <None Include="Resources\Images\News.png" />
-    <None Include="Resources\Images\Page.png" />
-    <None Include="Resources\Images\Panel_Add.png" />
-    <None Include="Resources\Images\Panel_Close.png" />
-    <None Include="Resources\Images\Panels.png" />
-    <None Include="Resources\Images\Properties_Default.png" />
-    <None Include="Resources\Images\Quit.png" />
-    <None Include="Resources\Images\Session_LogOff.png" />
-    <None Include="Resources\Images\SmartSize.png" />
-    <None Include="Resources\Images\tick.png" />
-    <None Include="Resources\Images\user_comment.png" />
-    <None Include="Resources\Images\Play.png" />
-    <None Include="Resources\Images\Pause.png" />
-    <None Include="Resources\Images\Brick.png" />
-    <None Include="Resources\Images\Key_Delete.png" />
-    <None Include="Resources\Images\Loading_Spinner.gif" />
-    <None Include="Resources\Images\Page_Copy.png" />
-    <None Include="Resources\Images\Chat.png" />
-    <None Include="Resources\Images\Keyboard.png" />
-    <None Include="Resources\Images\Rename.png" />
+    <None Include="Resources\ConnectedOverlay.png" />
+    <None Include="Resources\Loading_Spinner.gif" />
+    <None Include="Resources\AddFolder_16x.png" />
+    <None Include="Resources\CloseSolution_16x.png" />
+    <None Include="Resources\CollapseAll_16x.png" />
+    <None Include="Resources\Copy_16x.png" />
+    <None Include="Resources\Diagram_16x.png" />
+    <None Include="Resources\Disconnect_16x.png" />
+    <None Include="Resources\Document_16x.png" />
+    <None Include="Resources\ExpandAll_16x.png" />
+    <None Include="Resources\ExpandDown_16x.png" />
+    <None Include="Resources\F1Help_16x.png" />
+    <None Include="Resources\Favorite_16x.png" />
+    <None Include="Resources\FolderClosed_16x.png" />
+    <None Include="Resources\FullScreen_16x.png" />
+    <None Include="Resources\GlyphDown_16x.png" />
+    <None Include="Resources\GlyphLeft_16x.png" />
+    <None Include="Resources\GlyphRight_16x.png" />
+    <None Include="Resources\GlyphUp_16x.png" />
+    <None Include="Resources\Header_dark.png" />
+    <None Include="Resources\HostStatus_Check.png" />
+    <None Include="Resources\HostStatus_Off.png" />
+    <None Include="Resources\HostStatus_On.png" />
+    <None Include="Resources\Message_16x.png" />
+    <None Include="Resources\PuttyConfig.png" />
+    <None Include="Resources\PuttySessions.png" />
+    <None Include="Resources\Refresh_16x.png" />
+    <None Include="Resources\Rename_16x.png" />
+    <None Include="Resources\RunUpdate_16x.png" />
+    <None Include="Resources\Save_16x.png" />
+    <None Include="Resources\Search_16x.png" />
+    <None Include="Resources\Settings_16x.png" />
+    <None Include="Resources\SortAscending_16x.png" />
+    <None Include="Resources\SortDescending_16x.png" />
+    <None Include="Resources\Test_16x.png" />
+    <None Include="Resources\ToggleOfficeKeyboardScheme_16x.png" />
+    <None Include="Resources\NewFile_16x.png" />
+    <None Include="Resources\UIAboutBox_16x.png" />
+    <None Include="Resources\AddItem_16x.png" />
+    <None Include="Resources\ASPWebSite_16x.png" />
+    <None Include="Resources\OpenFile_16x.png" />
+    <None Include="Resources\Console_16x.png" />
+    <None Include="Resources\SearchAndApps_16x.png" />
+    <None Include="Resources\Panel_16x.png" />
+    <None Include="Resources\InsertPanel_16x.png" />
+    <None Include="Resources\Run_16x.png" />
+    <None Include="Resources\Stop_16x.png" />
+    <None Include="Resources\Close_16x.png" />
+    <None Include="Resources\Resize_16x.png" />
+    <None Include="Resources\Remove_16x.png" />
+    <None Include="Resources\Add_16x.png" />
+    <None Include="Resources\Monitor_16x.png" />
+    <None Include="Resources\UniqueKeyError_16x.png" />
+    <None Include="Resources\SyncArrow_16x.png" />
+    <None Include="Resources\ViewDownBySchema_16x.png" />
+    <None Include="Resources\SchemaObjectProperty_16x.png" />
+    <None Include="Resources\Schema_16x.png" />
+    <None Include="Resources\StatusInformation_16x.png" />
+    <None Include="Resources\LogWarning_16x.png" />
+    <None Include="Resources\LogError_16x.png" />
+    <None Include="Resources\mRemoteNG_Icon.ico" />
+    <None Include="Resources\Tab_16x.png" />
+    <None Include="Resources\SQLDatabase_16x.png" />
+    <None Include="Resources\Key_16x.png" />
+    <None Include="Resources\StartupProject_16x.png" />
+    <None Include="Resources\AppearanceEditor_16x.png" />
+    <None Include="Resources\Lock_16x.png" />
+    <None Include="Resources\Export_16x.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1196,29 +1182,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Images\green_arrow1.png" />
-    <Content Include="Resources\Images\green_arrow2.png" />
-    <None Include="Resources\Images\PuttySessions.png" />
-    <None Include="Resources\Images\PuttyConfig.png" />
-    <None Include="Resources\Images\Play_Quick.png" />
-    <None Include="Resources\Images\SSHTransfer.png" />
-    <None Include="Resources\Images\ErrorsAndInfos.png" />
-    <None Include="Resources\Images\Sessions.png" />
-    <None Include="Resources\Images\Connections_New.png" />
-    <None Include="Resources\Images\Connections_Load.png" />
-    <None Include="Resources\Images\Connections_SaveAs.png" />
-    <None Include="Resources\Images\Connections_Save.png" />
-    <None Include="Resources\Images\Sort_ZA.png" />
-    <None Include="Resources\Images\Sort_AZ.png" />
-    <None Include="Resources\Images\Lock.png" />
-    <None Include="Resources\Images\Refresh.png" />
-    <None Include="Resources\Images\PropertiesDefault.png" />
-    <None Include="Resources\Images\ExtApp.png" />
-    <None Include="Resources\Images\Duplicate.png" />
-    <None Include="Resources\Images\PortScan.png" />
-    <None Include="Resources\Images\UVNC_SC.png" />
-    <None Include="Resources\Images\Bad_Symbol.png" />
-    <None Include="Resources\Images\Good_Symbol.png" />
     <Content Include="Icons\Anti Virus.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1309,47 +1272,12 @@
     <Content Include="Icons\Workstation.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Images\Copy.png" />
     <None Include="Properties\Settings.settings">
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Resources\Images\Properties.png" />
-    <None Include="Resources\Images\Inheritance.png" />
-    <None Include="Properties\app.manifest" />
-    <None Include="Resources\Images\WarningSmall.png" />
-    <None Include="Resources\Images\Warning.png" />
-    <None Include="Resources\Images\View.png" />
-    <None Include="Resources\Images\Update.png" />
-    <None Include="Resources\Images\Search.png" />
-    <None Include="Resources\Images\Save.png" />
-    <None Include="Resources\Images\Root.png" />
-    <None Include="Resources\Images\Options.png" />
-    <None Include="Resources\Images\Open.png" />
-    <None Include="Resources\Images\NewFolder.png" />
-    <None Include="Resources\Images\NewConnection.png" />
-    <None Include="Resources\Images\New.png" />
-    <None Include="Resources\Images\InformationSmall.png" />
-    <None Include="Resources\Images\Information.png" />
-    <None Include="Resources\Images\HostStatus_On.png" />
-    <None Include="Resources\Images\HostStatus_Off.png" />
-    <None Include="Resources\Images\HostStatus_Check.png" />
-    <None Include="Resources\Images\Help.png" />
-    <None Include="Resources\Images\Fullscreen.png" />
-    <None Include="Resources\Images\Folder.png" />
-    <None Include="Resources\Images\File.png" />
-    <None Include="Resources\Images\Expand.png" />
-    <None Include="Resources\Images\ErrorSmall.png" />
-    <None Include="Resources\Images\Error.png" />
-    <None Include="Resources\Images\Delete.png" />
-    <None Include="Resources\Images\Config.png" />
-    <None Include="Resources\Images\Collapse.png" />
-    <None Include="Resources\Images\Arrow_Up.png" />
-    <None Include="Resources\Images\Arrow_Down.png" />
-    <None Include="Resources\Images\ActiveDirectory.png" />
-    <None Include="Resources\Images\Website.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             PopulateEncryptionEngineDropDown();
             PopulateBlockCipherDropDown();
             ApplyTheme();
-            PageIcon = Properties.Resources.Shield_Icon;
+            PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Lock_16x);
         }
 
         [Browsable(false)]

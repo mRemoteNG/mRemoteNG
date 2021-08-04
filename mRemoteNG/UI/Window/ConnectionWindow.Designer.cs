@@ -101,35 +101,35 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabDisconnect
             // 
-            this.cmenTabDisconnect.Image = global::mRemoteNG.Properties.Resources.tab_delete;
+            this.cmenTabDisconnect.Image = global::mRemoteNG.Properties.Resources.Remove_16x;
             this.cmenTabDisconnect.Name = "cmenTabDisconnect";
             this.cmenTabDisconnect.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDisconnect.Text = "Disconnect";
             // 
             // cmenTabDisconnectOthers
             // 
-            this.cmenTabDisconnectOthers.Image = global::mRemoteNG.Properties.Resources.tab_delete;
+            this.cmenTabDisconnectOthers.Image = global::mRemoteNG.Properties.Resources.Remove_16x;
             this.cmenTabDisconnectOthers.Name = "cmenTabDisconnectOthers";
             this.cmenTabDisconnectOthers.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDisconnectOthers.Text = "Disconnect Other Tabs";
             // 
             // cmenTabDisconnectOthersRight
             // 
-            this.cmenTabDisconnectOthersRight.Image = global::mRemoteNG.Properties.Resources.tab_delete;
+            this.cmenTabDisconnectOthersRight.Image = global::mRemoteNG.Properties.Resources.Remove_16x;
             this.cmenTabDisconnectOthersRight.Name = "cmenTabDisconnectOthersRight";
             this.cmenTabDisconnectOthersRight.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDisconnectOthersRight.Text = "Disconnect Tabs To The Right";
             // 
             // cmenTabRenameTab
             // 
-            this.cmenTabRenameTab.Image = global::mRemoteNG.Properties.Resources.tab_edit;
+            this.cmenTabRenameTab.Image = global::mRemoteNG.Properties.Resources.Rename_16x;
             this.cmenTabRenameTab.Name = "cmenTabRenameTab";
             this.cmenTabRenameTab.Size = new System.Drawing.Size(230, 22);
             this.cmenTabRenameTab.Text = "Rename Tab";
             // 
             // cmenTabDuplicateTab
             // 
-            this.cmenTabDuplicateTab.Image = global::mRemoteNG.Properties.Resources.tab_add;
+            this.cmenTabDuplicateTab.Image = global::mRemoteNG.Properties.Resources.Add_16x;
             this.cmenTabDuplicateTab.Name = "cmenTabDuplicateTab";
             this.cmenTabDuplicateTab.Size = new System.Drawing.Size(230, 22);
             this.cmenTabDuplicateTab.Text = "Duplicate Tab";
@@ -141,28 +141,28 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabFullscreen
             // 
-            this.cmenTabFullscreen.Image = global::mRemoteNG.Properties.Resources.arrow_out;
+            this.cmenTabFullscreen.Image = global::mRemoteNG.Properties.Resources.FullScreen_16x;
             this.cmenTabFullscreen.Name = "cmenTabFullscreen";
             this.cmenTabFullscreen.Size = new System.Drawing.Size(230, 22);
             this.cmenTabFullscreen.Text = "Fullscreen (RDP)";
             // 
             // cmenTabSmartSize
             // 
-            this.cmenTabSmartSize.Image = global::mRemoteNG.Properties.Resources.SmartSize;
+            this.cmenTabSmartSize.Image = global::mRemoteNG.Properties.Resources.Resize_16x;
             this.cmenTabSmartSize.Name = "cmenTabSmartSize";
             this.cmenTabSmartSize.Size = new System.Drawing.Size(230, 22);
             this.cmenTabSmartSize.Text = "SmartSize (RDP/VNC)";
             // 
             // cmenTabViewOnly
             // 
-            this.cmenTabViewOnly.Image = global::mRemoteNG.Properties.Resources.View;
+            this.cmenTabViewOnly.Image = global::mRemoteNG.Properties.Resources.Monitor_16x;
             this.cmenTabViewOnly.Name = "cmenTabViewOnly";
             this.cmenTabViewOnly.Size = new System.Drawing.Size(230, 22);
             this.cmenTabViewOnly.Text = "View Only (VNC)";
             // 
             // cmenTabStartChat
             // 
-            this.cmenTabStartChat.Image = global::mRemoteNG.Properties.Resources.Chat;
+            this.cmenTabStartChat.Image = global::mRemoteNG.Properties.Resources.Message_16x;
             this.cmenTabStartChat.Name = "cmenTabStartChat";
             this.cmenTabStartChat.Size = new System.Drawing.Size(230, 22);
             this.cmenTabStartChat.Text = "Start Chat (VNC)";
@@ -170,14 +170,14 @@ namespace mRemoteNG.UI.Window
             // 
             // cmenTabRefreshScreen
             // 
-            this.cmenTabRefreshScreen.Image = global::mRemoteNG.Properties.Resources.Refresh;
+            this.cmenTabRefreshScreen.Image = global::mRemoteNG.Properties.Resources.Refresh_16x;
             this.cmenTabRefreshScreen.Name = "cmenTabRefreshScreen";
             this.cmenTabRefreshScreen.Size = new System.Drawing.Size(230, 22);
             this.cmenTabRefreshScreen.Text = "Refresh Screen (VNC)";
             // 
             // cmenTabTransferFile
             // 
-            this.cmenTabTransferFile.Image = global::mRemoteNG.Properties.Resources.SSHTransfer;
+            this.cmenTabTransferFile.Image = global::mRemoteNG.Properties.Resources.SyncArrow_16x;
             this.cmenTabTransferFile.Name = "cmenTabTransferFile";
             this.cmenTabTransferFile.Size = new System.Drawing.Size(230, 22);
             this.cmenTabTransferFile.Text = "Transfer File (SSH)";
@@ -187,7 +187,7 @@ namespace mRemoteNG.UI.Window
             this.cmenTabSendSpecialKeys.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmenTabSendSpecialKeysCtrlAltDel,
             this.cmenTabSendSpecialKeysCtrlEsc});
-            this.cmenTabSendSpecialKeys.Image = global::mRemoteNG.Properties.Resources.Keyboard;
+            this.cmenTabSendSpecialKeys.Image = global::mRemoteNG.Properties.Resources.ToggleOfficeKeyboardScheme_16x;
             this.cmenTabSendSpecialKeys.Name = "cmenTabSendSpecialKeys";
             this.cmenTabSendSpecialKeys.Size = new System.Drawing.Size(230, 22);
             this.cmenTabSendSpecialKeys.Text = "Send special Keys (VNC)";
