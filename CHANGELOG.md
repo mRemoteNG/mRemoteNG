@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #283: Support for native PowerShell remoting as new protocol
 - #1850: Minify config xml
 ### Changed
+- #2014: Revised icons
 - #2013: Removed components check
 - #2011: Removed screenshot manager
 - #2010: Redesigned menus
