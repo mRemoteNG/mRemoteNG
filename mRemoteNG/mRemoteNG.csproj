@@ -1168,6 +1168,8 @@
     <None Include="Resources\AppearanceEditor_16x.png" />
     <None Include="Resources\Lock_16x.png" />
     <None Include="Resources\Export_16x.png" />
+    <None Include="Resources\Property_16x.png" />
+    <None Include="Resources\ExtendedProperty_16x.png" />
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
