@@ -1045,11 +1045,6 @@
     <None Include="..\COPYING.TXT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Templates\AppIcon.psd" />
-    <None Include="Resources\Templates\Header_dark.psd" />
-    <None Include="Resources\Templates\Header_light.psd" />
-    <None Include="Resources\Templates\Installer_Header.psd" />
-    <None Include="Resources\Templates\Installer_Side.psd" />
     <None Include="Resources\Themes\darcula.vstheme">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -1062,10 +1057,6 @@
     <None Include="Resources\Themes\vs2015light.vstheme">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Templates\VisualElements_150_dark.psd" />
-    <None Include="Resources\Templates\VisualElements_150_light.psd" />
-    <None Include="Resources\Templates\VisualElements_70_dark.psd" />
-    <None Include="Resources\Templates\VisualElements_70_light.psd" />
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
