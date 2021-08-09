@@ -407,6 +407,18 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Runtime.WindowList != null)
+            {
+                foreach (BaseWindow window in Runtime.WindowList)
+                {
+                    window.Close();
+                }
+            }
+
+            Hide();
+
+            IsClosing = true;
+
             if (Settings.Default.CloseToTray)
             {
                 if (Runtime.NotificationAreaIcon == null)
@@ -461,17 +473,7 @@ namespace mRemoteNG.UI.Forms
 
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 
-            IsClosing = true;
-
             Cef.Shutdown();
-
-            if (Runtime.WindowList != null)
-            {
-                foreach (BaseWindow window in Runtime.WindowList)
-                {
-                    window.Close();
-                }
-            }
 
             Shutdown.StartUpdate();
 
