@@ -53,12 +53,23 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         private void BuildDbConnectionStringWithCustomCredentials()
         {
-            _dbConnectionString = $"Data Source={_dbHost};Initial Catalog={_dbCatalog};User Id={_dbUsername};Password={_dbPassword}";
+            _dbConnectionString = new SqlConnectionStringBuilder
+            {
+                DataSource = _dbHost,
+                InitialCatalog = _dbCatalog,
+                UserID = _dbUsername,
+                Password = _dbPassword,
+            }.ToString();
         }
 
         private void BuildDbConnectionStringWithDefaultCredentials()
         {
-            _dbConnectionString = $"Data Source={_dbHost};Initial Catalog={_dbCatalog};Integrated Security=True";
+            _dbConnectionString = new SqlConnectionStringBuilder
+            {
+                DataSource = _dbHost,
+                InitialCatalog = _dbCatalog,
+                IntegratedSecurity = true
+            }.ToString();
         }
 
         public void Connect()

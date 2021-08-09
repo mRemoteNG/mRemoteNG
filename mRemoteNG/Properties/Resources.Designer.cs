@@ -233,6 +233,16 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ExtendedProperty_16x {
+            get {
+                object obj = ResourceManager.GetObject("ExtendedProperty_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap F1Help_16x {
             get {
                 object obj = ResourceManager.GetObject("F1Help_16x", resourceCulture);
@@ -482,6 +492,16 @@ namespace mRemoteNG.Properties {
         internal static System.Drawing.Bitmap Panel_16x {
             get {
                 object obj = ResourceManager.GetObject("Panel_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Property_16x {
+            get {
+                object obj = ResourceManager.GetObject("Property_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
