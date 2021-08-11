@@ -14,9 +14,6 @@
       <Component Id="C.Readme" Guid="1359cc74-fe51-4c6e-81f4-2bee7871c40f">
         <File Id="ReadmeFile" Name="Readme" Source="$(var.SolutionDir)README.md" KeyPath="yes" />
       </Component>
-      <Component Id="C.TileManifest" Guid="5d067bad-f6f6-466e-b1aa-d68b496026d3">
-        <File Id="TileManifest" Name="VisualElementsManifest" Source="$(var.SolutionDir)\mRemoteNG.VisualElementsManifest.xml" KeyPath="yes" />
-      </Component>
     </ComponentGroup>
   </Fragment>
 </Wix>
