@@ -7,6 +7,8 @@
 
     <Platforms>AnyCPU;x64</Platforms>
 
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
     <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer</Configurations>
   </PropertyGroup>
 

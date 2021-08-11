@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://mremoteng.org/</PackageProjectUrl>
     <Platforms>AnyCPU;ARM64;x64</Platforms>
     <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer</Configurations>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

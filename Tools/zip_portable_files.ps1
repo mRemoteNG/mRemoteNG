@@ -33,7 +33,7 @@ $SEVENZIP="$($SolutionDir)Tools\7zip\7za.exe"
 if ($ConfigurationName -eq "Release Portable") {
     Write-Output "Packaging Release Portable ZIP"
    
-    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteNG\bin\$($ConfigurationName)\net5.0-windows\mRemoteNG.exe"
+    $version = & $SIGCHECK /accepteula -q -n "$($SolutionDir)mRemoteNG\bin\$($ConfigurationName)\mRemoteNG.exe"
 
     Write-Output "Version is $($version)"
 
@@ -47,7 +47,7 @@ if ($ConfigurationName -eq "Release Portable") {
 
     #Write-Output "$($SolutionDir)mRemoteNG\bin\$ConfigurationName" 
     #Write-Output "$($SolutionDir)mRemoteNG\bin\package"
-    Copy-Item "$($SolutionDir)mRemoteNG\bin\$ConfigurationName\net5.0-windows\*" -Destination $tempFolderPath -Recurse  -Force
+    Copy-Item "$($SolutionDir)mRemoteNG\bin\$ConfigurationName\*" -Destination $tempFolderPath -Recurse  -Force
     # Delete any PDB files that accidentally get copied into the temp folder
     Get-ChildItem -Path $tempFolderPath -Filter "*.pdb" | Remove-Item
     Copy-Item "$($SolutionDir)*.txt" -Destination $tempFolderPath
