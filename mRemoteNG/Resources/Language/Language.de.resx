@@ -1860,8 +1860,8 @@ Die Passwortlänge muss zwischen {0} und {1} liegen</value>
   </data>
   <data name="ReleaseChannelExplanation" xml:space="preserve">
     <value>Stable enthält nur finale Versionen.
-Beta beinhaltet Betas &amp; Release Candidates.
-Development umfasst Alphas, Betas und Release Candidates.</value>
+Preview beinhaltet Betas &amp; Release Candidates.
+Nightly umfasst Alphas, Betas und Release Candidates.</value>
   </data>
   <data name="TrackActiveConnectionInConnectionTree" xml:space="preserve">
     <value>Aktive Verbindung im Verbindungsbaum verfolgen</value>

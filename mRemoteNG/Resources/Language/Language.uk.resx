@@ -1924,8 +1924,8 @@ mRemoteNG зараз припинить роботу і почне процес 
 	</data>
   <data name="ReleaseChannelExplanation" xml:space="preserve">
 		<value>Канал «Stable» включає лише остаточні стабільні випуски.
-Канал «Beta» включає Beta та Release Candidate.
-Канал «Development» включає Alpha, Beta та Release Candidate версії.</value>
+Канал «Preview» включає Beta та Release Candidate.
+Канал «Nightly» включає Alpha, Beta та Release Candidate версії.</value>
 	</data>
   <data name="Apply" xml:space="preserve">
 		<value>Застосувати</value>

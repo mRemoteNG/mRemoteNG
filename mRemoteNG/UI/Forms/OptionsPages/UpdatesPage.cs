@@ -93,17 +93,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
 
             var stable = cboReleaseChannel.Items.Add(UpdateChannelInfo.STABLE);
-            var beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.BETA);
-            var dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.DEV);
+            var beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.PREVIEW);
+            var dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.NIGHTLY);
             switch (Settings.Default.UpdateChannel)
             {
                 case UpdateChannelInfo.STABLE:
                     cboReleaseChannel.SelectedIndex = stable;
                     break;
-                case UpdateChannelInfo.BETA:
+                case UpdateChannelInfo.PREVIEW:
                     cboReleaseChannel.SelectedIndex = beta;
                     break;
-                case UpdateChannelInfo.DEV:
+                case UpdateChannelInfo.NIGHTLY:
                     cboReleaseChannel.SelectedIndex = dev;
                     break;
                 default:

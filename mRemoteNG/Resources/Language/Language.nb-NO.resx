@@ -1969,8 +1969,8 @@ Se Microsofts support-artikkel på http://support.microsoft.com/kb/811833 for me
   </data>
   <data name="ReleaseChannelExplanation" xml:space="preserve">
     <value>Stable-kanalen inkluderer bare endelige versjoner.
-Beta-kanalen inkluderer beta- og release candidate-versjoner.
-Development-kanalen inkluderer alpha-, beta- og release candidate-versjoner.</value>
+Preview-kanalen inkluderer beta- og release candidate-versjoner.
+Nightly-kanalen inkluderer alpha-, beta- og release candidate-versjoner.</value>
   </data>
   <data name="Apply" xml:space="preserve">
     <value>Bruk</value>

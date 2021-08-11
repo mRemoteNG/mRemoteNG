@@ -1991,8 +1991,8 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="ReleaseChannelExplanation" xml:space="preserve">
     <value>Stable channel includes final releases only.
-Beta channel includes Betas &amp; Release Candidates.
-Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
+Preview channel includes Betas &amp; Release Candidates.
+Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="Apply" xml:space="preserve">
     <value>Apply</value>
