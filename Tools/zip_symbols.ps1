@@ -24,10 +24,8 @@ Write-Output "Target Dir: '$($TargetDir)'"
 $ConfigurationName = $ConfigurationName.Trim()
 Write-Output "Config Name (trimmed): '$($ConfigurationName)'"
 
-
 # Windows Sysinternals Sigcheck from http://technet.microsoft.com/en-us/sysinternals/bb897441
 $SIGCHECK="$($SolutionDir)Tools\exes\sigcheck.exe"
-$SEVENZIP="$($SolutionDir)Tools\7zip\7za.exe"
 
 # Package Zip
 if ($ConfigurationName -match "Release") {
@@ -47,7 +45,7 @@ if ($ConfigurationName -match "Release") {
 
     Write-Output "Creating debug symbols ZIP file $($outputZipPath)"
     Remove-Item -Force  $outputZipPath -ErrorAction SilentlyContinue
-    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $outputZipPath (Join-Path -Path $TargetDir -ChildPath "*.pdb")
+    Compress-Archive (Join-Path -Path $TargetDir -ChildPath "mRemoteNG.pdb") $outputZipPath
 }
 else {
     Write-Output "We will not package debug symbols - this isnt a release build."

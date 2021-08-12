@@ -54,7 +54,7 @@ if ($ConfigurationName -eq "Release Portable") {
 
     Write-Output "Creating portable ZIP file $($PortableZip)"
     Remove-Item -Force  $PortableZip -ErrorAction SilentlyContinue
-    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip (Join-Path -Path $tempFolderPath -ChildPath "*.*")
+    Compress-Archive (Join-Path -Path $tempFolderPath -ChildPath "*.*") $PortableZip
     #& $SEVENZIP a -bt -mx=9 -tzip -y $PortableZip "$($SolutionDir)*.TXT"
 }
 else {
