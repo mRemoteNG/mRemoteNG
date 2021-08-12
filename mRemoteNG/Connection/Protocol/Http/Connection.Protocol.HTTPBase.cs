@@ -64,21 +64,8 @@ namespace mRemoteNG.Connection.Protocol.Http
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
                     var edge = (WebView2)wBrowser;
-
-                    //edge.NavigationCompleted += Edge_NavigationCompleted;// += WBrowser_Navigated;
-                    edge.TextChanged += WBrowser_DocumentTitleChanged;
-
                     
-
-                    //if (edge != null)
-                    //{
-                    //    //CEFBrowser.ContentLoading += CEFBrowser_ContentLoading;// += CefBrowser_LoadingStateChanged;
-                    //    edge.TextChanged += WBrowser_DocumentTitleChanged;
-                    //}
-                    //else
-                    //{
-                    //    throw new Exception("Failed to initialize EdgeChromium Rendering Engine.");
-                    //}
+                    edge.CoreWebView2InitializationCompleted += Edge_CoreWebView2InitializationCompleted;
                 }
                 else
                 {
@@ -100,17 +87,14 @@ namespace mRemoteNG.Connection.Protocol.Http
                 return false;
             }
         }
-        
+
         public override bool Connect()
         {
             try
             {
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    //if (browserInitialised)
-                    //{
-                        ((WebView2)wBrowser).NavigateToString((GetURL()));
-                    //}
+                    ((WebView2)wBrowser).Source = new Uri(GetURL());
                 }
                 else
                 {
@@ -174,28 +158,15 @@ namespace mRemoteNG.Connection.Protocol.Http
         #endregion
 
         #region Events
-        
-        //private void CEFBrowser_ContentLoading(object sender, Microsoft.Web.WebView2.Core.CoreWebView2ContentLoadingEventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //
-        //private void CefBrowser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
-        //{
-        //    browserInitialised = !e.IsLoading;
-        //    if (browserInitialised)
-        //    {
-        //        // Unhook the loading state changes now, as navigation is done by the user on links in the control
-        //        ((ChromiumWebBrowser)wBrowser).LoadingStateChanged -= CefBrowser_LoadingStateChanged;
-        //
-        //        // If this Connection has already been asked to connect but the browser hadn't finished initalising
-        //        // then the connect wouldn't have been allowed to take place, so now we can call it!
-        //        if (connectCalled)
-        //        {
-        //            Connect();
-        //        }
-        //    }
-        //}
+
+        private void Edge_CoreWebView2InitializationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
+        {
+            if (!e.IsSuccess)
+            {
+                //TODO: Log
+                MessageBox.Show($"WebView2 creation failed with exception = {e.InitializationException}");
+            }
+        }
 
         private void WBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
@@ -236,20 +207,20 @@ namespace mRemoteNG.Connection.Protocol.Http
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpDocumentTileChangeFailed, ex);
             }
         }
+
+        #endregion
+
+        #region Enums
+
+        public enum RenderingEngine
+        {
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpInternetExplorer))]
+            IE = 1,
+
+            [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpCEF))]
+            EdgeChromium = 2
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Enums
-
-    public enum RenderingEngine
-    {
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpInternetExplorer))]
-        IE = 1,
-
-        [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpCEF))]
-        EdgeChromium = 2
-    }
-
-    #endregion
 }
