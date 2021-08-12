@@ -228,6 +228,9 @@
     <None Update="mRemoteNG.VisualElementsManifest.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\PuTTYNG.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Schemas\mremoteng_confcons_v2_5.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
