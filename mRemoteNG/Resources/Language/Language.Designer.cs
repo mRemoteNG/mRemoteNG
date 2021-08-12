@@ -2316,7 +2316,7 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CEF (Chromium) ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edge Chromium ähnelt.
         /// </summary>
         internal static string HttpCEF {
             get {
@@ -6079,6 +6079,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string Website {
             get {
                 return ResourceManager.GetString("Website", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die WebView2 creation failed with exception ähnelt.
+        /// </summary>
+        internal static string WebView2InitializationFailed {
+            get {
+                return ResourceManager.GetString("WebView2InitializationFailed", resourceCulture);
             }
         }
         

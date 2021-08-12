@@ -1525,7 +1525,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("CEF")]
+        [global::System.Configuration.DefaultSettingValueAttribute("EdgeChromium")]
         public string ConDefaultRenderingEngine {
             get {
                 return ((string)(this["ConDefaultRenderingEngine"]));
