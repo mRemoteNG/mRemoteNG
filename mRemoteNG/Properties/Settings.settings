@@ -377,9 +377,6 @@
     <Setting Name="XULRunnerPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
-      <Value Profile="(Default)">CEF</Value>
-    </Setting>
     <Setting Name="InhDefaultRenderingEngine" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -793,6 +790,9 @@
     </Setting>
     <Setting Name="ViewMenuMultiSSH" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EdgeChromium</Value>
     </Setting>
   </Settings>
 </SettingsFile>
