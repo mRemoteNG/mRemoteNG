@@ -2147,4 +2147,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="StartProgram" xml:space="preserve">
     <value>Start Program</value>
   </data>
+  <data name="WebView2InitializationFailed" xml:space="preserve">
+    <value>WebView2 creation failed with exception</value>
+  </data>
 </root>

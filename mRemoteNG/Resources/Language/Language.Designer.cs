@@ -6083,6 +6083,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die WebView2 creation failed with exception ähnelt.
+        /// </summary>
+        internal static string WebView2InitializationFailed {
+            get {
+                return ResourceManager.GetString("WebView2InitializationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Weekly ähnelt.
         /// </summary>
         internal static string Weekly {
