@@ -2316,7 +2316,7 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die CEF (Chromium) ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Edge Chromium ähnelt.
         /// </summary>
         internal static string HttpCEF {
             get {

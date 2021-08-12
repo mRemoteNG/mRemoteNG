@@ -2133,7 +2133,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Determines whether menus and windows can be displayed with animation effects in the remote session.</value>
   </data>
   <data name="HttpCEF" xml:space="preserve">
-    <value>CEF (Chromium)</value>
+    <value>Edge Chromium</value>
   </data>
   <data name="HttpFailedUrlBuild" xml:space="preserve">
     <value>Failed to contruct the URL to load</value>

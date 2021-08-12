@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using CefSharp;
-using CefSharp.WinForms;
+using Microsoft.Web.WebView2.WinForms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
 using mRemoteNG.Resources.Language;
@@ -18,8 +17,6 @@ namespace mRemoteNG.Connection.Protocol.Http
         protected string httpOrS;
         protected int defaultPort;
         private string tabTitle;
-        private bool browserInitialised = false;
-        private bool connectCalled = false;
 
         #endregion
 
@@ -29,9 +26,9 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
-                if (RenderingEngine == RenderingEngine.CEF)
+                if (RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    Control = new ChromiumWebBrowser("about:blank")
+                    Control = new WebView2()
                     {
                         Dock = DockStyle.Fill,
                     };
@@ -64,18 +61,24 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 wBrowser = Control;
 
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    var CEFBrowser = (ChromiumWebBrowser)wBrowser;
-                    if (CEFBrowser != null)
-                    {
-                        CEFBrowser.LoadingStateChanged += CefBrowser_LoadingStateChanged;
-                        CEFBrowser.TitleChanged += WBrowser_DocumentTitleChanged;
-                    }
-                    else
-                    {
-                        throw new Exception("Failed to initialize CEF Rendering Engine.");
-                    }
+                    var edge = (WebView2)wBrowser;
+
+                    //edge.NavigationCompleted += Edge_NavigationCompleted;// += WBrowser_Navigated;
+                    edge.TextChanged += WBrowser_DocumentTitleChanged;
+
+                    
+
+                    //if (edge != null)
+                    //{
+                    //    //CEFBrowser.ContentLoading += CEFBrowser_ContentLoading;// += CefBrowser_LoadingStateChanged;
+                    //    edge.TextChanged += WBrowser_DocumentTitleChanged;
+                    //}
+                    //else
+                    //{
+                    //    throw new Exception("Failed to initialize EdgeChromium Rendering Engine.");
+                    //}
                 }
                 else
                 {
@@ -87,7 +90,6 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                     objWebBrowser.Navigated += WBrowser_Navigated;
                     objWebBrowser.DocumentTitleChanged += WBrowser_DocumentTitleChanged;
-                    browserInitialised = true;
                 }
 
                 return true;
@@ -98,17 +100,17 @@ namespace mRemoteNG.Connection.Protocol.Http
                 return false;
             }
         }
-
+        
         public override bool Connect()
         {
             try
             {
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    if (browserInitialised)
-                    {
-                        ((ChromiumWebBrowser)wBrowser).Load(GetURL());
-                    }
+                    //if (browserInitialised)
+                    //{
+                        ((WebView2)wBrowser).NavigateToString((GetURL()));
+                    //}
                 }
                 else
                 {
@@ -116,7 +118,6 @@ namespace mRemoteNG.Connection.Protocol.Http
                 }
 
                 base.Connect();
-                connectCalled = true;
                 return true;
             }
             catch (Exception ex)
@@ -173,23 +174,28 @@ namespace mRemoteNG.Connection.Protocol.Http
         #endregion
 
         #region Events
-
-        private void CefBrowser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
-        {
-            browserInitialised = !e.IsLoading;
-            if (browserInitialised)
-            {
-                // Unhook the loading state changes now, as navigation is done by the user on links in the control
-                ((ChromiumWebBrowser)wBrowser).LoadingStateChanged -= CefBrowser_LoadingStateChanged;
-
-                // If this Connection has already been asked to connect but the browser hadn't finished initalising
-                // then the connect wouldn't have been allowed to take place, so now we can call it!
-                if (connectCalled)
-                {
-                    Connect();
-                }
-            }
-        }
+        
+        //private void CEFBrowser_ContentLoading(object sender, Microsoft.Web.WebView2.Core.CoreWebView2ContentLoadingEventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //
+        //private void CefBrowser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        //{
+        //    browserInitialised = !e.IsLoading;
+        //    if (browserInitialised)
+        //    {
+        //        // Unhook the loading state changes now, as navigation is done by the user on links in the control
+        //        ((ChromiumWebBrowser)wBrowser).LoadingStateChanged -= CefBrowser_LoadingStateChanged;
+        //
+        //        // If this Connection has already been asked to connect but the browser hadn't finished initalising
+        //        // then the connect wouldn't have been allowed to take place, so now we can call it!
+        //        if (connectCalled)
+        //        {
+        //            Connect();
+        //        }
+        //    }
+        //}
 
         private void WBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
@@ -207,28 +213,13 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
                 string shortTitle;
-
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
                 {
-                    if (((TitleChangedEventArgs)e).Title.Length >= 15)
-                    {
-                        shortTitle = ((TitleChangedEventArgs)e).Title.Substring(0, 10) + "...";
-                    }
-                    else
-                    {
-                        shortTitle = ((CefSharp.TitleChangedEventArgs)e).Title;
-                    }
+                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
                 }
                 else
                 {
-                    if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                    }
-                    else
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
-                    }
+                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
                 }
 
                 if (!string.IsNullOrEmpty(tabTitle))
@@ -245,52 +236,20 @@ namespace mRemoteNG.Connection.Protocol.Http
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpDocumentTileChangeFailed, ex);
             }
         }
-
-
-        private void geckoBrowser_DocumentTitleChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
-                string shortTitle;
-
-                if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                {
-                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                }
-                else
-                {
-                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
-                }
-
-                if (!string.IsNullOrEmpty(tabTitle))
-                {
-                  tabP.TabText = tabTitle + @" - " + shortTitle;
-                }
-                else
-                {
-                  tabP.TabText = shortTitle;
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpDocumentTileChangeFailed, ex);
-            }
-        }
-
-        #endregion
-
-        #region Enums
-
-        public enum RenderingEngine
-        {
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpInternetExplorer))]
-            IE = 1,
-
-            [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpCEF))]
-            CEF = 2
-        }
-
-        #endregion
     }
+
+    #endregion
+
+    #region Enums
+
+    public enum RenderingEngine
+    {
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpInternetExplorer))]
+        IE = 1,
+
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpCEF))]
+        EdgeChromium = 2
+    }
+
+    #endregion
 }

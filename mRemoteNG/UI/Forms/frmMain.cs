@@ -28,8 +28,6 @@ using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
-using CefSharp;
-using CefSharp.WinForms;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Controls;
 using Settings = mRemoteNG.Properties.Settings;
@@ -159,12 +157,6 @@ namespace mRemoteNG.UI.Forms
 
             SetMenuDependencies();
 
-            //Monitor parent process exit and close subprocesses if parent process exits first
-            //This will at some point in the future becomes the default
-            CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
-
-            CefSetup();
-
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
@@ -223,32 +215,6 @@ namespace mRemoteNG.UI.Forms
             var panelAdder = new PanelAdder();
             if (!panelAdder.DoesPanelExist(panelName))
                 panelAdder.AddPanel(panelName);
-        }
-
-        private void CefSetup()
-        {
-            //For Windows 7 and above, best to include relevant app.manifest entries as well
-            Cef.EnableHighDPISupport();
-
-            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
-            if (Runtime.IsPortableEdition) dir = SettingsFileInfo.SettingsPath;
-
-            CefSettings settings = new CefSettings()
-            {
-                CachePath = Path.Combine(dir, "CEFCache"),
-                LogFile = Path.Combine(dir, "mRemoteNG_cef.log"),
-            };
-
-            if (Settings.Default.TextLogMessageWriterWriteDebugMsgs)
-                settings.LogSeverity = LogSeverity.Verbose;
-            else if (Settings.Default.TextLogMessageWriterWriteInfoMsgs)
-                settings.LogSeverity = LogSeverity.Info;
-            else if (Settings.Default.TextLogMessageWriterWriteWarningMsgs)
-                settings.LogSeverity = LogSeverity.Warning;
-            else if (Settings.Default.TextLogMessageWriterWriteErrorMsgs)
-                settings.LogSeverity = LogSeverity.Error;
-
-            Cef.Initialize(settings);
         }
 
         private void ApplyLanguage()
@@ -489,8 +455,6 @@ namespace mRemoteNG.UI.Forms
             }
 
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
-
-            Cef.Shutdown();
 
             Shutdown.StartUpdate();
 
