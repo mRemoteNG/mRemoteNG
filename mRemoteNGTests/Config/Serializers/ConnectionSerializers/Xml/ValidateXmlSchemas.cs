@@ -83,7 +83,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
             "";
 #endif
             var path = Path.GetDirectoryName(sourceFilePath);
-            var filePath = $@"{path}\..\..\..\..\bin\x64\{debugOrRelease}{normalOrPortable}\net5.0-windows\Schemas\{fileName}";
+            var filePath = $@"{path}\..\..\..\..\..\mRemoteNG\bin\{debugOrRelease}{normalOrPortable}\Schemas\{fileName}";
+
             return filePath;
         }
 
