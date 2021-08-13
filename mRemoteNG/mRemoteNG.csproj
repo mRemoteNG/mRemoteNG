@@ -220,12 +220,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\ImageConverter.cs" />
-    <Compile Include="Resources\Language\Language.Designer.cs">
+    <Compile Include="Language\Language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Themes\ColorMapTheme.Designer.cs">
+    <Compile Include="Themes\ColorMapTheme.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ColorMapTheme.resx</DependentUpon>
@@ -765,22 +765,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Language\Language.cs-CZ.resx">
+    <EmbeddedResource Include="Language\Language.cs-CZ.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.lt.resx">
+    <EmbeddedResource Include="Language\Language.lt.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx">
+    <EmbeddedResource Include="Language\Language.ja-JP.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.ko-KR.resx">
+    <EmbeddedResource Include="Language\Language.ko-KR.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.tr-TR.resx">
+    <EmbeddedResource Include="Language\Language.tr-TR.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Themes\ColorMapTheme.resx">
+    <EmbeddedResource Include="Themes\ColorMapTheme.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ColorMapTheme.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
@@ -909,59 +909,59 @@
       <DependentUpon>FrmPassword.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.de.resx">
+    <EmbeddedResource Include="Language\Language.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.el.resx">
+    <EmbeddedResource Include="Language\Language.el.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.en-US.resx">
+    <EmbeddedResource Include="Language\Language.en-US.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.es-AR.resx">
+    <EmbeddedResource Include="Language\Language.es-AR.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.es.resx">
+    <EmbeddedResource Include="Language\Language.es.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.hu.resx" />
-    <EmbeddedResource Include="Resources\Language\Language.it.resx">
+    <EmbeddedResource Include="Language\Language.hu.resx" />
+    <EmbeddedResource Include="Language\Language.it.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.nb-NO.resx">
+    <EmbeddedResource Include="Language\Language.nb-NO.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.nl.resx">
+    <EmbeddedResource Include="Language\Language.nl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.pt-BR.resx">
+    <EmbeddedResource Include="Language\Language.pt-BR.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.pt.resx">
+    <EmbeddedResource Include="Language\Language.pt.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.resx">
+    <EmbeddedResource Include="Language\Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.fr.resx">
+    <EmbeddedResource Include="Language\Language.fr.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.pl.resx">
+    <EmbeddedResource Include="Language\Language.pl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.ru.resx">
+    <EmbeddedResource Include="Language\Language.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.uk.resx">
+    <EmbeddedResource Include="Language\Language.uk.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.zh-CN.resx">
+    <EmbeddedResource Include="Language\Language.zh-CN.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.zh-TW.resx">
+    <EmbeddedResource Include="Language\Language.zh-TW.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -1043,16 +1043,16 @@
     <None Include="..\COPYING.TXT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Themes\darcula.vstheme">
+    <None Include="Themes\darcula.vstheme">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Themes\vs2015blue.vstheme">
+    <None Include="Themes\vs2015blue.vstheme">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Themes\vs2015dark.vstheme">
+    <None Include="Themes\vs2015dark.vstheme">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Themes\vs2015light.vstheme">
+    <None Include="Themes\vs2015light.vstheme">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Schemas\mremoteng_confcons_v2_5.xsd">
@@ -1068,13 +1068,13 @@
     <Content Include="Icons\Apple.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Tiles\mRemoteNG.VisualElementsManifest.xml">
+    <None Include="mRemoteNG.VisualElementsManifest.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Tiles\VisualElements_70.png">
+    <None Include="VisualElements_70.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Tiles\VisualElements_150.png">
+    <None Include="VisualElements_150.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Icons\Infrastructure.ico">
@@ -1159,6 +1159,9 @@
     <None Include="Resources\Export_16x.png" />
     <None Include="Resources\Property_16x.png" />
     <None Include="Resources\ExtendedProperty_16x.png" />
+    <Content Include="Resources\PuTTYNG.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

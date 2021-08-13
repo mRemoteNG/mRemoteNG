@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 

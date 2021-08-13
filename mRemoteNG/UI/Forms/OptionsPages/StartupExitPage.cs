@@ -1,6 +1,5 @@
 ﻿using System;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {

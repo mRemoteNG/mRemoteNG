@@ -7,7 +7,6 @@ using System.Text;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
 using Message = mRemoteNG.Messages.Message;

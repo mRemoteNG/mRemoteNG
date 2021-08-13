@@ -9,7 +9,6 @@ using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
 using MySql.Data.Types;
 using static System.String;

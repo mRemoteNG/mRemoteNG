@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.Credential;
-using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Controls
 {

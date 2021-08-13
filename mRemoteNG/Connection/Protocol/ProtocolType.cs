@@ -1,5 +1,4 @@
-﻿using mRemoteNG.Resources.Language;
-using mRemoteNG.Tools;
+﻿using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.Protocol
 {

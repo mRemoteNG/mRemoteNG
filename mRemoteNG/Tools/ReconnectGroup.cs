@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Tools
 {

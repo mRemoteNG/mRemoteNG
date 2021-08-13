@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.TaskDialog

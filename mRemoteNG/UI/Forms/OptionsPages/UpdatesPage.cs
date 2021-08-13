@@ -5,7 +5,6 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Update;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.TaskDialog;

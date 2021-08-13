@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using Microsoft.Web.WebView2.WinForms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Tabs;
 
 

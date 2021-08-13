@@ -2,7 +2,6 @@
 using mRemoteNG.Container;
 using System;
 using System.Windows.Forms;
-using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Tree

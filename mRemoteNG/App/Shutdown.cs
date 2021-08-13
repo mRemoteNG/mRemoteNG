@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 

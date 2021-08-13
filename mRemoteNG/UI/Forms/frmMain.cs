@@ -28,7 +28,6 @@ using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Controls;
 using Settings = mRemoteNG.Properties.Settings;
 

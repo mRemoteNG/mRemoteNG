@@ -82,7 +82,7 @@ namespace mRemoteNG.UI.Window
             // 
             // clmMessage
             // 
-            this.clmMessage.Text = global::mRemoteNG.Resources.Language.Language.Message;
+            this.clmMessage.Text = global::mRemoteNG.Language.Message;
             this.clmMessage.Width = 184;
             // 
             // cMenMC
@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Window
             this.cMenMCCopy.Name = "cMenMCCopy";
             this.cMenMCCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.cMenMCCopy.Size = new System.Drawing.Size(140, 22);
-            this.cMenMCCopy.Text = global::mRemoteNG.Resources.Language.Language.Copy;
+            this.cMenMCCopy.Text = global::mRemoteNG.Language.Copy;
             this.cMenMCCopy.Click += new System.EventHandler(this.cMenMCCopy_Click);
             // 
             // cMenMCDelete
@@ -111,7 +111,7 @@ namespace mRemoteNG.UI.Window
             this.cMenMCDelete.Name = "cMenMCDelete";
             this.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.cMenMCDelete.Size = new System.Drawing.Size(140, 22);
-            this.cMenMCDelete.Text = global::mRemoteNG.Resources.Language.Language.Delete;
+            this.cMenMCDelete.Text = global::mRemoteNG.Language.Delete;
             this.cMenMCDelete.Click += new System.EventHandler(this.cMenMCDelete_Click);
             // 
             // imgListMC
@@ -152,7 +152,7 @@ namespace mRemoteNG.UI.Window
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HideOnClose = true;
             this.Name = "ErrorAndInfoWindow";
-            this.TabText = global::mRemoteNG.Resources.Language.Language.Notifications;
+            this.TabText = global::mRemoteNG.Language.Notifications;
             this.Text = "Notifications";
             this.Load += new System.EventHandler(this.ErrorsAndInfos_Load);
             this.Resize += new System.EventHandler(this.ErrorsAndInfos_Resize);
