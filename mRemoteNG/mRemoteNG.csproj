@@ -1159,7 +1159,7 @@
     <None Include="Resources\Export_16x.png" />
     <None Include="Resources\Property_16x.png" />
     <None Include="Resources\ExtendedProperty_16x.png" />
-    <Content Include="Resources\PuTTYNG.exe">
+    <Content Include="PuTTYNG.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schemas\mremoteng_confcons_v2_6.xsd">
