@@ -5,7 +5,6 @@
 
 using System;
 using System.Windows.Forms;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls

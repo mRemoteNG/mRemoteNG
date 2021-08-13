@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages

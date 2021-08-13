@@ -4,7 +4,6 @@ using System.Linq;
 using BrightIdeasSoftware;
 using mRemoteNG.Credential;
 using mRemoteNG.Credential.Repositories;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.UI.Controls.PageSequence;
 

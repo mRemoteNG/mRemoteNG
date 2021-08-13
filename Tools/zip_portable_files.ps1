@@ -37,8 +37,6 @@ if ($ConfigurationName -eq "Release Portable") {
     $tempFolderPath = Join-Path -Path $SolutionDir -ChildPath "mRemoteNG\bin\package"
     Remove-Item -Recurse $tempFolderPath -ErrorAction SilentlyContinue | Out-Null
     New-Item $tempFolderPath -ItemType  "directory" | Out-Null
-    
-    Copy-Item "$($SolutionDir)mRemoteNG\Resources\PuTTYNG.exe" -Destination $tempFolderPath
 
     #Write-Output "$($SolutionDir)mRemoteNG\bin\$ConfigurationName" 
     #Write-Output "$($SolutionDir)mRemoteNG\bin\package"
@@ -49,8 +47,7 @@ if ($ConfigurationName -eq "Release Portable") {
 
     Write-Output "Creating portable ZIP file $($PortableZip)"
     Remove-Item -Force  $PortableZip -ErrorAction SilentlyContinue
-    & $SEVENZIP a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip (Join-Path -Path $tempFolderPath -ChildPath "*.*")
-    #& $SEVENZIP a -bt -mx=9 -tzip -y $PortableZip "$($SolutionDir)*.TXT"
+    Compress-Archive $tempFolderPath\* $PortableZip
 }
 else {
     Write-Output "We will not zip anything - this isnt a portable release build."

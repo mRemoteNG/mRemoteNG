@@ -9,7 +9,6 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.ClickHandlers;

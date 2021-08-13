@@ -13,7 +13,6 @@ using mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;

@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
 using mRemoteNG.Messages;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 using WeifenLuo.WinFormsUI.Docking;
 

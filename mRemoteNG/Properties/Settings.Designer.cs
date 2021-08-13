@@ -1525,18 +1525,6 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("CEF")]
-        public string ConDefaultRenderingEngine {
-            get {
-                return ((string)(this["ConDefaultRenderingEngine"]));
-            }
-            set {
-                this["ConDefaultRenderingEngine"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRenderingEngine {
             get {
@@ -2797,7 +2785,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool PlaceSearchBarAboveConnectionTree {
             get {
                 return ((bool)(this["PlaceSearchBarAboveConnectionTree"]));
@@ -3188,6 +3176,18 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["ViewMenuMultiSSH"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EdgeChromium")]
+        public string ConDefaultRenderingEngine {
+            get {
+                return ((string)(this["ConDefaultRenderingEngine"]));
+            }
+            set {
+                this["ConDefaultRenderingEngine"] = value;
             }
         }
     }

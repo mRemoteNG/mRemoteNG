@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Security;
 using System.Text.RegularExpressions;
-using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Security.PasswordCreation
 {

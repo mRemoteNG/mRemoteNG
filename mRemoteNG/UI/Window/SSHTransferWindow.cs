@@ -6,7 +6,6 @@ using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 
