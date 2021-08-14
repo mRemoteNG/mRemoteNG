@@ -30,8 +30,13 @@ if ($ConfigurationName -match "Release") {
         $zipFilePrefix = "mRemoteNG-symbols"
     }
 
-    $outputZipPath="$($SolutionDir)Release\$zipFilePrefix-$($version).zip"
+    $outputZipPath = "$($SolutionDir)Release\$zipFilePrefix-$($version).zip"
     $debugFile = Join-Path -Path $TargetDir -ChildPath "mRemoteNG.pdb"
+
+    # Fix for AppVeyor
+    if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
+        $outputZipPath = "Release\$zipFilePrefix-$($version).zip"
+    }
 
     Write-Output "Creating debug symbols ZIP file $($outputZipPath)"
     Compress-Archive $debugFile $outputZipPath -Force
@@ -44,6 +49,11 @@ if ($ConfigurationName -eq "Release Portable") {
     Write-Output "Packaging Release Portable ZIP"
 
     $PortableZipDst="$($SolutionDir)\Release\mRemoteNG-Portable-$($version).zip"
+
+    # Fix for AppVeyor
+    if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
+        $outputZipPath = "Release\mRemoteNG-Portable-$($version).zip"
+    }
 
     # Excluse debug symbols from folder
     $FileExclude = @("*.pdb")
