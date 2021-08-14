@@ -22,10 +22,12 @@ Write-Output "Version is $($version)"
 
 # Fix for AppVeyor
 if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
-	$path = "Release"
+	Write-Output "RUNNING VIA APPVEYOR!"
+	$AppVeyorDir = $Env:APPVEYOR_BUILD_FOLDER
+	$path = "$AppVeyorDir\Release"
 	If(!(test-path $path))
 	{
-		New-Item -ItemType Directory -Force -Path $path
+		New-Item -ItemType Directory -Force -Path $path | Out-Null
 	}
 }
 
