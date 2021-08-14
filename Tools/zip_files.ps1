@@ -20,6 +20,15 @@ $exe = Join-Path -Path $TargetDir -ChildPath $TargetFileName
 $Version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($exe).FileVersion
 Write-Output "Version is $($version)"
 
+# Fix for AppVeyor
+if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
+	$path = "Release"
+	If(!(test-path $path))
+	{
+		New-Item -ItemType Directory -Force -Path $path
+	}
+}
+
 # Package debug symbols zip file
 if ($ConfigurationName -match "Release") {
     Write-Output "Packaging debug symbols"
