@@ -3,7 +3,7 @@
 	<Fragment>
     <DirectoryRef Id="INSTALLDIR">
       <Component Id="C.PuttyNGFile" Guid="86bc1cf4-4c51-40a1-a9fe-cf9669bb883a">
-        <File Id="PuttyNGFile" Name="PuTTYNG.exe" Source="$(var.HarvestPath)\Resources\PuTTYNG.exe" KeyPath="yes" />
+        <File Id="PuttyNGFile" Name="PuTTYNG.exe" Source="$(var.HarvestPath)\PuTTYNG.exe" KeyPath="yes" />
       </Component>
     </DirectoryRef>
 	</Fragment>
