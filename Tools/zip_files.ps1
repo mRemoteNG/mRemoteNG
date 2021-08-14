@@ -22,10 +22,8 @@ Write-Output "Version is $($version)"
 
 # Fix for AppVeyor
 if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
-    If(!(test-path "Release"))
-    {
-        New-Item -ItemType Directory -Force -Path $path | Out-Null
-    }
+    if(!(test-path "Release"))
+        New-Item -ItemType Directory -Force -Path "Release" | Out-Null
 }
 
 # Package debug symbols zip file
@@ -46,7 +44,7 @@ if ($ConfigurationName -match "Release") {
         $outputZipPath = "Release\$zipFilePrefix-$($version).zip"
     }
 
-    Write-Output "Creating debug symbols ZIP file $($outputZipPath)"
+    Write-Output "Creating debug symbols ZIP file $($outputZipPath) from $($debugFile)"
     Compress-Archive $debugFile $outputZipPath -Force
 }
 
@@ -67,7 +65,7 @@ if ($ConfigurationName -eq "Release Portable") {
     $FileExclude = @("*.pdb")
     $Source = Get-ChildItem -Recurse -Path $TargetDir -Exclude $FileExclude
 
-    Write-Output "Creating portable ZIP file $($outputZipPath)"
+    Write-Output "Creating portable ZIP file $($outputZipPath) from $($Source)"
     Compress-Archive $Source $outputZipPath -Force
 }
 
