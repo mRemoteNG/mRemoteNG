@@ -22,9 +22,8 @@ Write-Output "Version is $($version)"
 
 # Fix for AppVeyor
 if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
-	Write-Output "RUNNING VIA APPVEYOR!"
 	$AppVeyorDir = $Env:APPVEYOR_BUILD_FOLDER
-	$path = "$AppVeyorDir\Release"
+	$path = "$($AppVeyorDir)\Release"
 	If(!(test-path $path))
 	{
 		New-Item -ItemType Directory -Force -Path $path | Out-Null
@@ -59,7 +58,7 @@ Write-Output ""
 if ($ConfigurationName -eq "Release Portable") {
     Write-Output "Packaging Release Portable ZIP"
 
-    $PortableZipDst="$($SolutionDir)\Release\mRemoteNG-Portable-$($version).zip"
+    $outputZipPath="$($SolutionDir)\Release\mRemoteNG-Portable-$($version).zip"
 
     # Fix for AppVeyor
     if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
@@ -70,8 +69,8 @@ if ($ConfigurationName -eq "Release Portable") {
     $FileExclude = @("*.pdb")
     $Source = Get-ChildItem -Recurse -Path $TargetDir -Exclude $FileExclude
 
-    Write-Output "Creating portable ZIP file $($PortableZipDst)"
-    Compress-Archive $Source $PortableZipDst -Force
+    Write-Output "Creating portable ZIP file $($outputZipPath)"
+    Compress-Archive $Source $outputZipPath -Force
 }
 
 Write-Output ""
