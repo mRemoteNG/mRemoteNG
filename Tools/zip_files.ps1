@@ -42,7 +42,8 @@ if ($ConfigurationName -match "Release") {
 
     # Fix for AppVeyor
     if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
-        $outputZipPath = "Release\$zipFilePrefix-$($version).zip"
+        #$outputZipPath = "Release\$zipFilePrefix-$($version).zip"
+        $outputZipPath = Join-Path -Path $SolutionDir -ChildPath "Release\$zipFilePrefix-$($version).zip"
     }
 
     Write-Output "Creating debug symbols ZIP file $($outputZipPath) from $($debugFile)"
