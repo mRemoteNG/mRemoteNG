@@ -22,8 +22,9 @@ Write-Output "Version is $($version)"
 
 # Fix for AppVeyor
 if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
-    if(!(test-path "Release"))
+    if(!(test-path "Release")) {
         New-Item -ItemType Directory -Force -Path "Release" | Out-Null
+    }
 }
 
 # Package debug symbols zip file
