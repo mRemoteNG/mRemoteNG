@@ -42,7 +42,7 @@ if ($ConfigurationName -match "Release") {
 
     # Fix for AppVeyor
     if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
-        $outputZipPath = "Release\$zipFilePrefix-$($version).zip"
+        $outputZipPath = ".\Release\$zipFilePrefix-$($version).zip"
     }
 
     Write-Output "Creating debug symbols ZIP file $($outputZipPath) from $($debugFile)"
@@ -59,7 +59,7 @@ if ($ConfigurationName -eq "Release Portable") {
 
     # Fix for AppVeyor
     if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
-        $outputZipPath = "Release\mRemoteNG-Portable-$($version).zip"
+        $outputZipPath = ".\Release\mRemoteNG-Portable-$($version).zip"
     }
 
     # Excluse debug symbols from folder
