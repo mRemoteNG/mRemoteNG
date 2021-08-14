@@ -31,10 +31,10 @@ if ($ConfigurationName -match "Release") {
     }
 
     $outputZipPath="$($SolutionDir)Release\$zipFilePrefix-$($version).zip"
+    $debugFile = Join-Path -Path $TargetDir -ChildPath "mRemoteNG.pdb"
 
     Write-Output "Creating debug symbols ZIP file $($outputZipPath)"
-    Remove-Item -Force  $outputZipPath -ErrorAction SilentlyContinue
-    Compress-Archive (Join-Path -Path $TargetDir -ChildPath "mRemoteNG.pdb") $outputZipPath -Force
+    Compress-Archive $debugFile $outputZipPath -Force
 }
 
 Write-Output ""
@@ -45,13 +45,12 @@ if ($ConfigurationName -eq "Release Portable") {
 
     $PortableZipDst="$($SolutionDir)\Release\mRemoteNG-Portable-$($version).zip"
 
-    # Excluse debug symbols
-    $exclude = @("*.pdb")
-    # get files to compress using exclusion filer
-    #$files = Get-ChildItem -Recurse -Path $TargetDir -Exclude $exclude
+    # Excluse debug symbols from folder
+    $FileExclude = @("*.pdb")
+    $Source = Get-ChildItem -Recurse -Path $TargetDir -Exclude $FileExclude
 
     Write-Output "Creating portable ZIP file $($PortableZipDst)"
-    Compress-Archive (Get-ChildItem -Recurse -Path $TargetDir -Exclude $exclude) $PortableZipDst -Force
+    Compress-Archive $Source $PortableZipDst -Force
 }
 
 Write-Output ""
