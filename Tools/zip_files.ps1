@@ -37,17 +37,21 @@ if ($ConfigurationName -match "Release") {
         $zipFilePrefix = "mRemoteNG-symbols"
     }
 
-    $outputZipPath = "$($SolutionDir)Release\$zipFilePrefix-$($version).zip"
     $debugFile = Join-Path -Path $TargetDir -ChildPath "mRemoteNG.pdb"
 
-    # Fix for AppVeyor
-    if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
-        #$outputZipPath = "Release\$zipFilePrefix-$($version).zip"
-        $outputZipPath = Join-Path -Path $SolutionDir -ChildPath "Release\$zipFilePrefix-$($version).zip"
-    }
-
     Write-Output "Creating debug symbols ZIP file $($outputZipPath) from $($debugFile)"
-    Compress-Archive $debugFile $outputZipPath -Force
+
+    # AppVeyor build
+    if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
+        $outputZipPath = "Release\$zipFilePrefix-$($version).zip"
+        #$outputZipPath = Join-Path -Path $SolutionDir -ChildPath "Release\$zipFilePrefix-$($version).zip"
+        7z a $outputZipPath $debugFile
+    }
+    # Local build
+    else {
+        $outputZipPath = "$($SolutionDir)Release\$zipFilePrefix-$($version).zip"
+        Compress-Archive $debugFile $outputZipPath -Force
+    }
 }
 
 Write-Output ""
@@ -56,18 +60,19 @@ Write-Output ""
 if ($ConfigurationName -eq "Release Portable") {
     Write-Output "Packaging Release Portable ZIP"
 
-    $outputZipPath="$($SolutionDir)\Release\mRemoteNG-Portable-$($version).zip"
-
-    # Fix for AppVeyor
-    if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
-        $outputZipPath = "Release\mRemoteNG-Portable-$($version).zip"
-    }
-
     # Exclude debug symbols from folder
     $FileExclude = @("*.pdb")
     $Source = Get-ChildItem -Recurse -Path $TargetDir -Exclude $FileExclude
 
     Write-Output "Creating portable ZIP file $($outputZipPath) from $($Source)"
+
+    # AppVeyor build
+    if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
+        $outputZipPath = "Release\mRemoteNG-Portable-$($version).zip"
+        7z a $outputZipPath $Source
+    }
+
+    $outputZipPath="$($SolutionDir)\Release\mRemoteNG-Portable-$($version).zip"
     Compress-Archive $Source $outputZipPath -Force
 }
 
