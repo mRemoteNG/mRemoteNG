@@ -99,7 +99,7 @@ You will need to compile it yourself using Visual Studio.
 ### Minimum Requirements
 
 * [Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
-* [Microsoft .NET Framework 4.0](https://www.microsoft.com/en-us/download/details.aspx?id=17851)
+* [Microsoft .NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
 * Microsoft Terminal Service Client 6.0 or later
   * Needed if you use RDP. mstscax.dll and/or msrdp.ocx be registered.
 
