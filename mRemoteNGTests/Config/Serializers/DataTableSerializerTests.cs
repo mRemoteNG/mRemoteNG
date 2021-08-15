@@ -1,15 +1,11 @@
 ﻿using System.Linq;
 using System.Security;
-using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.MsSql;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql;
 using mRemoteNG.Connection;
-using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
-using mRemoteNG.Tree.Root;
 using mRemoteNGTests.TestHelpers;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers
@@ -60,7 +56,7 @@ namespace mRemoteNGTests.Config.Serializers
             var model = CreateConnectionTreeModel();
             _saveFilter.SaveDomain = true;
             var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["DomainName"], Is.Not.EqualTo(""));
+            Assert.That(dataTable.Rows[0]["Domain"], Is.Not.EqualTo(""));
         }
 
         [Test]
@@ -98,7 +94,7 @@ namespace mRemoteNGTests.Config.Serializers
             var model = CreateConnectionTreeModel();
             _saveFilter.SaveDomain = false;
             var dataTable = _dataTableSerializer.Serialize(model);
-            Assert.That(dataTable.Rows[0]["DomainName"], Is.EqualTo(""));
+            Assert.That(dataTable.Rows[0]["Domain"], Is.EqualTo(""));
         }
 
         [Test]

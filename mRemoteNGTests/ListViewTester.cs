@@ -110,13 +110,7 @@ namespace mRemoteNGTests
         /// </remarks>
         /// <value>The ControlTester at the specified index.</value>
         /// <param name="index">The index of the ListViewTester.</param>
-        public new ListViewTester this[int index]
-        {
-            get
-            {
-                return new ListViewTester(this, index);
-            }
-        }
+        public new ListViewTester this[int index] => new ListViewTester(this, index);
 
         /// <summary>
         /// Provides access to all of the Properties of the ListBox.
@@ -125,35 +119,17 @@ namespace mRemoteNGTests
         /// Allows typed access to all of the properties of the underlying control.
         /// </remarks>
         /// <value>The underlying control.</value>
-        public ListView Properties
-        {
-            get
-            {
-                return (ListView)Control;
-            }
-        }
+        public ListView Properties => (ListView)Control;
 
         /// <summary>
         /// Helper method to return the List View's Items property
         /// </summary>
-        public ListView.ListViewItemCollection Items
-        {
-            get
-            {
-                return Properties.Items;
-            }
-        }
+        public ListView.ListViewItemCollection Items => Properties.Items;
 
         /// <summary>
         /// Helper method to return the columns of the list view
         /// </summary>
-        public ListView.ColumnHeaderCollection Columns
-        {
-            get
-            {
-                return Properties.Columns;
-            }
-        }
+        public ListView.ColumnHeaderCollection Columns => Properties.Columns;
 
         /// <summary>
         /// Clears the selections from the list box.

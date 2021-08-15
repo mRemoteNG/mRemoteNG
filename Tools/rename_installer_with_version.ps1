@@ -3,12 +3,12 @@
     $SolutionDir
 )
 
-$renameTarget = $SolutionDir + "InstallerProjects\Installer\bin\Release\en-US\mRemoteNG-Installer.msi"
+$renameTarget = $SolutionDir + "mRemoteNGInstaller\Installer\bin\Release\en-US\mRemoteNG-Installer.msi"
 
 Write-Host $SolutionDir
 Write-Host $renameTarget
 
-$targetVersionedFile = "$SolutionDir\mRemoteV1\bin\Release\mRemoteNG.exe"
+$targetVersionedFile = "$SolutionDir\mRemoteNG\bin\Release\mRemoteNG.exe"
 $version = &"$SolutionDir\Tools\exes\sigcheck.exe" /accepteula -q -n $targetVersionedFile
 
 

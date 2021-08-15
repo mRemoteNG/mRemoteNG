@@ -1,5 +1,4 @@
 ﻿using mRemoteNG.Config;
-using mRemoteNG.Config.Serializers.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -10,6 +9,7 @@ using System;
 using System.Linq;
 using System.Security;
 using System.Xml.Linq;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 
 
 namespace mRemoteNGTests.Config

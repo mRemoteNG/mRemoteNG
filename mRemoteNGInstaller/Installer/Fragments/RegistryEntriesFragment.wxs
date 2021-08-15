@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <DirectoryRef Id="TARGETDIR">
+      <Component Id="C.RegistryEntries" Guid="888643e4-4c52-45d3-801a-0d0d71c737fe">
+        <RegistryKey Root="HKLM" Key="Software\mRemoteNG">
+          <RegistryValue Type="string" Name="InstallDir" Value="[INSTALLDIR]" KeyPath="yes" />
+        </RegistryKey>
+      </Component>
+    </DirectoryRef>
+	</Fragment>
+</Wix>

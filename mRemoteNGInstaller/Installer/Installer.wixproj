@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>f0168b9f-6815-40df-ba53-46cee7683b68</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>mRemoteNG-Installer</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Debug;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Release;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug Portable' ">
+    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Debug Portable;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release Portable' ">
+    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Release Portable;</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="CustomActions\CheckForInstalledWindowsUpdates.wxs" />
+    <Compile Include="CustomActions\SaveInstallLocation.wxs" />
+    <Compile Include="CustomActions\UninstallLegacyVersions.wxs" />
+    <Compile Include="Fragments\FilesFragment.wxs" />
+    <Compile Include="Fragments\DirectoriesFragment.wxs" />
+    <Compile Include="Fragments\MainExeFragment.wxs" />
+    <Compile Include="Fragments\MiscTextFilesFragment.wxs" />
+    <Compile Include="Fragments\PuTTYNGFragment.wxs" />
+    <Compile Include="Fragments\RegistryEntriesFragment.wxs" />
+    <Compile Include="Fragments\ShortcutFragment.wxs" />
+    <Compile Include="mRemoteNG.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Filters\Harvest_Filter.xslt" />
+    <Content Include="Includes\Config.wxi" />
+    <Content Include="Resources\AppIcon.ico" />
+    <Content Include="Resources\Installer_Header.png" />
+    <Content Include="Resources\Installer_Side.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomActions" />
+    <Folder Include="CustomDialogs" />
+    <Folder Include="Fragments" />
+    <Folder Include="Includes" />
+    <Folder Include="Localizations" />
+    <Folder Include="Filters" />
+    <Folder Include="bin" />
+    <Folder Include="Resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localizations\en-US.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\mRemoteNG\mRemoteNG.csproj">
+      <Name>mRemoteNG</Name>
+      <Project>{4934a491-40bc-4e5b-9166-ea1169a220f6}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+    -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <LinkerAdditionalOptions>
+    </LinkerAdditionalOptions>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Release;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <Cultures>en-US</Cultures>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <Cultures>en-US</Cultures>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Debug;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Portable|x86' ">
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Debug Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Portable|x86' ">
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Release Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>:: When passing paths to powershell scripts, check if the path ends with a backslash "\"
+:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.
+
+powershell -noprofile -command "sleep 2"
+
+set /p buildenv=&lt;buildenv.tmp
+
+:: Manual builds, set the cert password and uncomment below.
+:: IF "%25APPVEYOR_BUILD_FOLDER"=="" ( set cert_pwd=  )
+
+:: Call the post build powershell script
+powershell.exe -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\postbuild_installer.ps1" -SolutionDir "$(SolutionDir)\" -TargetDir "%25cd%25" -TargetFileName "mRemoteNG.exe" -ConfigurationName "%25buildenv%25" -CertificatePath "$(CertPath)" -CertificatePassword "$(CertPassword)" -ExcludeFromSigning "PuTTYNG.exe"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>REM Clean the TargetDir
+rmdir /S /Q "$(TargetDir)"
+
+echo $(ConfigurationName) &gt; buildenv.tmp
+
+REM Harvest bin directory of the mRemoteNG project
+"$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteNG\bin\$(Configuration)" -ag -nologo -dr INSTALLDIR -var var.HarvestPath -srd -scom -sreg -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt"
+
+REM Convert the license file "COPYING.TXT" to "License.rtf" to be shown in the installer GUI
+"$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

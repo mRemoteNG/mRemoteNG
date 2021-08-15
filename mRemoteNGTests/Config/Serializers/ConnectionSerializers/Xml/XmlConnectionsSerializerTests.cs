@@ -1,5 +1,4 @@
-﻿using mRemoteNG.Config.Serializers.Xml;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
@@ -9,6 +8,7 @@ using NUnit.Framework;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 {
@@ -55,7 +55,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         [TestCase("Username", "")]
         [TestCase("Domain", "")]
         [TestCase("Password", "")]
-        [TestCase("InheritAutomaticResize", "false")]
+        [TestCase("InheritAutomaticResize", null)]
         public void SerializerRespectsSaveFilterSettings(string attributeName, string expectedValue)
         {
             var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
