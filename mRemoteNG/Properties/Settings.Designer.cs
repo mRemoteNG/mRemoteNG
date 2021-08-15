@@ -3190,5 +3190,17 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultRenderingEngine"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowParentInfoOnTabs {
+            get {
+                return ((bool)(this["ShowParentInfoOnTabs"]));
+            }
+            set {
+                this["ShowParentInfoOnTabs"] = value;
+            }
+        }
     }
 }

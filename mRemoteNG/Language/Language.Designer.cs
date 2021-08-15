@@ -5182,6 +5182,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show connection path on tab ähnelt.
+        /// </summary>
+        internal static string ShowParentInfoOnTabs {
+            get {
+                return ResourceManager.GetString("ShowParentInfoOnTabs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Show protocols on tab names ähnelt.
         /// </summary>
         internal static string ShowProtocolOnTabs {

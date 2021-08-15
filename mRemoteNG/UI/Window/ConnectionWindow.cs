@@ -128,6 +128,24 @@ namespace mRemoteNG.UI.Window
 
                 titleText = titleText.Replace("&", "&&");
 
+                if (Settings.Default.ShowParentInfoOnTabs)
+                {
+                    var parent = connectionInfo.Parent;
+                    var titlePrefix = "";
+                    while (parent != null && parent.Parent != null)
+                    {
+                        titlePrefix = $@"{parent.Name}\{titlePrefix}";
+                        parent = parent.Parent;
+                    }
+
+                    if (titlePrefix != "")
+                        titleText = $"{titlePrefix}{titleText}";
+                }
+
+                var conIcon = ConnectionIcon.FromString(connectionInfo.Icon);
+                if (conIcon != null)
+                    Icon = conIcon;
+
                 var conTab = new ConnectionTab
                 {
                     Tag = connectionInfo,

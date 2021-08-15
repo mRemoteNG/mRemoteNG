@@ -30,6 +30,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkDoubleClickClosesTab.Text = Language.DoubleClickTabClosesIt;
             chkAlwaysShowPanelSelectionDlg.Text = Language.AlwaysShowPanelSelection;
             chkCreateEmptyPanelOnStart.Text = Language.CreateEmptyPanelOnStartUp;
+            chkShowParentInfoOnTabs.Text = Language.ShowParentInfoOnTabs;
             lblPanelName.Text = $@"{Language.PanelName}:";
         }
 
@@ -45,6 +46,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkAlwaysShowPanelSelectionDlg.Checked = Settings.Default.AlwaysShowPanelSelectionDlg;
             chkCreateEmptyPanelOnStart.Checked = Settings.Default.CreateEmptyPanelOnStartUp;
             txtBoxPanelName.Text = Settings.Default.StartUpPanelName;
+            chkShowParentInfoOnTabs.Checked = Settings.Default.ShowParentInfoOnTabs;
             UpdatePanelNameTextBox();
         }
 
@@ -64,6 +66,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.AlwaysShowPanelSelectionDlg = chkAlwaysShowPanelSelectionDlg.Checked;
             Settings.Default.CreateEmptyPanelOnStartUp = chkCreateEmptyPanelOnStart.Checked;
             Settings.Default.StartUpPanelName = txtBoxPanelName.Text;
+            Settings.Default.ShowParentInfoOnTabs = chkShowParentInfoOnTabs.Checked;
         }
 
         private void UpdatePanelNameTextBox()

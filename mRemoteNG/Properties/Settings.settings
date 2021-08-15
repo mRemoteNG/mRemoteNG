@@ -794,5 +794,8 @@
     <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
       <Value Profile="(Default)">EdgeChromium</Value>
     </Setting>
+    <Setting Name="ShowParentInfoOnTabs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
