@@ -1,6 +1,4 @@
 ﻿using mRemoteNG.App;
-using mRemoteNG.Controls;
-using mRemoteNG.Forms;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Window;
 using NUnit.Extensions.Forms;
