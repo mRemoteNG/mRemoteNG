@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using mRemoteNG.Config.Serializers.Csv;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Csv;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Credential;
@@ -83,7 +82,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 PostExtApp = "SomePostExtApp",
                 MacAddress = "SomeMacAddress",
                 UserField = "SomeUserField",
-                Favorite = true,
+                VmId = "SomeVmId",
                 ExtApp = "SomeExtApp",
                 VNCProxyUsername = "SomeVNCProxyUsername",
                 VNCProxyPassword = "SomeVNCProxyPassword",
@@ -92,12 +91,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RDGatewayDomain = "SomeRDGatewayDomain",
                 VNCProxyIP = "SomeVNCProxyIP",
                 RDGatewayHostname = "SomeRDGatewayHostname",
-                Protocol = ProtocolType.ICA,
+                Protocol = ProtocolType.RDP,
                 Port = 999,
+                Favorite = true,
                 UseConsoleSession = true,
                 UseCredSsp = true,
-                RenderingEngine = HTTPBase.RenderingEngine.Gecko,
-                ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
+                UseVmId = false,
+                UseEnhancedMode = false,
+                RenderingEngine = HTTPBase.RenderingEngine.EdgeChromium,
                 RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
                 Colors = RDPColors.Colors16Bit,
                 Resolution = RDPResolutions.Res1366x768,
@@ -106,6 +107,10 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 DisplayThemes = true,
                 EnableFontSmoothing = true,
                 EnableDesktopComposition = true,
+                DisableFullWindowDrag = false,
+                DisableMenuAnimations = false,
+                DisableCursorShadow = false,
+                DisableCursorBlinking = false,
                 CacheBitmaps = true,
                 RedirectDiskDrives = true,
                 RedirectPorts = true,
@@ -162,25 +167,14 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
             public static IEnumerable InheritanceTestCases()
             {
-                var ignoreProperties = new[]
-                {
-                    nameof(ConnectionInfoInheritance.EverythingInherited),
-                    nameof(ConnectionInfoInheritance.Parent)
-                };
-                var properties = typeof(ConnectionInfoInheritance)
-                    .GetProperties()
-                    .Where(property => !ignoreProperties.Contains(property.Name));
-                var testCases = new List<TestCaseData>();
-                var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+	            var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+                var properties = testInheritance.GetProperties();
 
-                foreach (var property in properties)
-                {
-                    testCases.Add(
-                        new TestCaseData(property.Name)
-                            .Returns(property.GetValue(testInheritance)));
-                }
-
-                return testCases;
+                return properties
+	                .Select(property => 
+		                new TestCaseData(property.Name)
+			                .Returns(property.GetValue(testInheritance)))
+	                .ToList();
             }
         }
     }

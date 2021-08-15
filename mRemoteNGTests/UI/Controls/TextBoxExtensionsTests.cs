@@ -1,4 +1,4 @@
-﻿using mRemoteNG.UI.Controls;
+﻿using mRemoteNG.UI;
 using NUnit.Extensions.Forms;
 using NUnit.Framework;
 

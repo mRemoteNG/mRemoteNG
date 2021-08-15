@@ -1,12 +1,11 @@
 ﻿using System.Data;
 using System.Security;
-using mRemoteNG.Config.Serializers.MsSql;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql;
 using mRemoteNG.Connection;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNGTests.TestHelpers;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers

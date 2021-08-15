@@ -37,6 +37,10 @@
 		public TType DisplayThemes { get; set; }
 		public TType EnableFontSmoothing { get; set; }
 		public TType EnableDesktopComposition { get; set; }
+		public TType DisableFullWindowDrag { get; set; }
+		public TType DisableMenuAnimations { get; set; }
+		public TType DisableCursorShadow { get; set; }
+		public TType DisableCursorBlinking { get; set; }
 		public TType RedirectKeys { get; set; }
 		public TType RedirectDiskDrives { get; set; }
 		public TType RedirectPrinters { get; set; }
@@ -51,6 +55,8 @@
 		public TType MacAddress { get; set; }
         public TType UserField { get; set; }
         public TType Favorite { get; set; }
+        public TType VmId { get; set; }
+        public TType UseVmId { get; set; }
         public TType VNCCompression { get; set; }
 		public TType VNCEncoding { get; set; }
 		public TType VNCAuthMode { get; set; }
@@ -62,5 +68,10 @@
 		public TType VNCColors { get; set; }
 		public TType VNCSmartSizeMode { get; set; }
 		public TType VNCViewOnly { get; set; }
-	}
+        public TType RdpVersion { get; set; }
+        public TType UseEnhancedMode { get; set; }
+        public TType SSHOptions { get; set; }
+        public TType SSHTunnelConnectionName { get; set; }
+        public TType StartProgram { get; set; }
+    }
 }

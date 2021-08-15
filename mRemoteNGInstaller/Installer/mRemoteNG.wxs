@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
+  <Product Name="$(var.ProductNameWithPlatform)" Manufacturer="Next Generation Software"
+           Version="$(var.ProductVersion)"
+           Id="$(var.ProductCode)" 
+           UpgradeCode="$(var.UpgradeCode)" 
+           Language="1033">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <MajorUpgrade DowngradeErrorMessage="!(loc.Upgrade_NewerVersionInstalled)" Schedule="afterInstallExecute" />
+    <MediaTemplate EmbedCab="yes" />
+    <Binary Id="CustomActions.CA.dll" SourceFile="$(var.SolutionDir)mRemoteNGInstaller\CustomActions\bin\$(var.Configuration)\CustomActions.CA.dll" />
+    <Property Id="MsiLogging" Value="v" />
+    <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
+    <Property Id="ARPHELPLINK" Value="http://www.mremoteng.org" />
+    <SetProperty Id="ARPINSTALLLOCATION" Value="[INSTALLDIR]" After="CostFinalize" />
+    <Property Id="MAINEXE" Value="$(var.ExeProcessName)" />
+    <Property Id="INSTALLDIR">
+      <RegistrySearch Id='mRemoteNGRegistry' Type='raw' Root='HKLM' Key='Software\mRemoteNG' Name='InstallDir' />
+    </Property>
+    <Property Id='RDP_DTLS_KB' Value='$(var.RdpDtlsKb)' />
+    <Property Id='RDP_DTLS_UPDATE_INSTALLED' Value='0' Secure='yes' />
+    <Property Id='RDP80_KB' Value='$(var.Rdp80Kb)' />
+    <Property Id='RDP81_KB' Value='$(var.Rdp81Kb)' />
+    <Property Id='MINIMUM_RDP_VERSION_INSTALLED' Value='0' Secure='yes' />
+    <Property Id='REQUIREDDOTNETFRAMEWORKVERSION' Value='$(var.RequiredDotNetFrameworkVersion)' />
+    <Property Id='LEGACYVERSIONINSTALLED' Value='0' />
+    <PropertyRef Id="NETFRAMEWORK40FULL" />
+    <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
+    <Icon Id="AppIcon.ico" SourceFile="Resources\AppIcon.ico" />
+    <CustomActionRef Id='SaveCmdlineINSTALLDIR' />
+
+
+    <InstallUISequence>
+      <LaunchConditions After="SetWIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
+      <Custom Action="CheckIfLegacyVersionInstalled" After="LaunchConditions" />
+      <Custom Action="UninstallLegacyVersion" After="CheckIfLegacyVersionInstalled">(NOT Installed) AND (LEGACYVERSIONINSTALLED = 1)</Custom>
+    </InstallUISequence>
+
+    <InstallExecuteSequence>
+      <Custom Action="CheckIfRdpDtlsUpdateInstalled" After="AppSearch">(NOT Installed) AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
+      <Custom Action="CheckIfMinimumRdpInstalled" After="CheckIfRdpDtlsUpdateInstalled">(NOT Installed) AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
+      <LaunchConditions After="SetWIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
+      <Custom Action="CheckIfLegacyVersionInstalled" After="LaunchConditions" />
+      <Custom Action="UninstallLegacyVersion" After="CheckIfLegacyVersionInstalled">(NOT Installed) AND (LEGACYVERSIONINSTALLED = 1)</Custom>
+    </InstallExecuteSequence>
+    
+    
+    <!-- Need to be admin to install -->
+    <Condition Message="!(loc.Install_NeedToBeAdminToInstall)">
+      Privileged
+    </Condition>
+    <!-- Windows 7 or higher required -->
+    <Condition Message="!(loc.Install_OSVersionRequirement)">
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR (VersionNT >= 601) OR (VersionNT64 >= 601)]]>
+    </Condition>
+    <!-- If Windows 7, SP 1 is required -->
+    <Condition Message="!(loc.Install_Win7RequiresSP1)">
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR (VersionNT >= 602 OR VersionNT64 >= 602) OR ((VersionNT = 601 OR VersionNT64 = 601) AND ServicePackLevel >= 1)]]>
+    </Condition>
+    <!-- .Net Framework Version Condition -->
+    <Condition Message="!(loc.Install_NeedDotNetFrameworkVersion)">
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED = 1]]>
+    </Condition>
+    <!-- If Win7, require RDP DTLS update (KB2574819) -->
+    <Condition Message="!(loc.Install_RDPDtlsRequirement)">
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR (VersionNT >= 602 OR VersionNT64 >= 602) OR ((VersionNT = 601 OR VersionNT64 = 601) AND (RDP_DTLS_UPDATE_INSTALLED = 1))]]>
+    </Condition>
+    <!-- If Win7, require RDP 8.0 (KB2592687) or 8.1 (KB2830477) update  -->
+    <Condition Message="!(loc.Install_RDP80Requirement)">
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR (VersionNT >= 602 OR VersionNT64 >= 602) OR ((VersionNT = 601 OR VersionNT64 = 601) AND (MINIMUM_RDP_VERSION_INSTALLED = 1))]]>
+    </Condition>
+    
+    
+
+    <Feature Id="F.Complete" Title="!(loc.Feature_Complete)" Display="expand" AllowAdvertise="no" Level="1">
+      <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Absent="disallow" ConfigurableDirectory="INSTALLDIR" Level="1">
+        <ComponentGroupRef Id="MandatoryComponents" Primary="yes" />
+        <ComponentRef Id="C.MainExe" Primary="yes" />
+        <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
+        <ComponentRef Id="C.RegistryEntries" Primary="yes" />
+      </Feature>
+
+      <Feature Id="F.PuttyNG" Title="PuTTYNG" Absent="allow" AllowAdvertise="no" Level="1">
+        <ComponentRef Id="C.PuttyNGFile" Primary="yes" />
+      </Feature>
+
+      <Feature Id="F.DesktopShortcut" Title="!(loc.Feature_DesktopShortcut)" Absent="allow" AllowAdvertise="no" Level="1">
+        <ComponentRef Id="C.DesktopShortcut" Primary="yes" />
+      </Feature>
+
+      <Feature Id="F.ApplicationStartMenuShortcut" Title="!(loc.Feature_StartMenuShortcut)" Absent="allow" AllowAdvertise="no" Level="1">
+        <ComponentRef Id="C.ApplicationStartMenuShortcut" Primary="yes" />
+      </Feature>
+    </Feature>
+
+    <UI>
+      <UIRef Id="WixUI_FeatureTree"/>
+      <UIRef Id="WixUI_ErrorProgressText" />
+      <Publish Dialog="ExitDialog"
+        Control="Finish"
+        Event="DoAction"
+        Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+    
+    <WixVariable Id="WixUILicenseRtf" Value="Resources\License.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="Resources\Installer_Side.png" />
+    <WixVariable Id="WixUIBannerBmp" Value="Resources\Installer_Header.png" />
+    
+    <!-- Provide option to run app after install -->
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.FinishPage_LaunchMremoteNow)" />
+    <Property Id="WixShellExecTarget" Value="[#MainExeFile]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+  </Product>
+</Wix>

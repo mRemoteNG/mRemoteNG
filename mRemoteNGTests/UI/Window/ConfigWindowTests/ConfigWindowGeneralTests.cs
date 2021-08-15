@@ -228,6 +228,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             node.RedirectSound = RDPSounds.DoNotPlay;
             node.VNCAuthMode = ProtocolVNC.AuthMode.AuthVNC;
             node.VNCProxyType = ProtocolVNC.ProxyType.ProxyNone;
+            node.UseVmId = false;
             node.Inheritance.TurnOffInheritanceCompletely();
 
             return node;
@@ -247,6 +248,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.MacAddress),
                 nameof(ConnectionInfo.UserField),
                 nameof(ConnectionInfo.Favorite),
+                nameof(ConnectionInfo.SSHTunnelConnectionName),
             };
 
             if (!isContainer)
@@ -266,6 +268,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
+                        nameof(ConnectionInfo.UseVmId),
                         nameof(ConnectionInfo.UseConsoleSession),
                         nameof(ConnectionInfo.RDPAuthenticationLevel),
                         nameof(ConnectionInfo.RDPMinutesToIdleTimeout),
@@ -279,6 +282,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.DisplayThemes),
                         nameof(ConnectionInfo.EnableFontSmoothing),
                         nameof(ConnectionInfo.EnableDesktopComposition),
+                        nameof(ConnectionInfo.DisableFullWindowDrag),
+                        nameof(ConnectionInfo.DisableMenuAnimations),
+                        nameof(ConnectionInfo.DisableCursorShadow),
+                        nameof(ConnectionInfo.DisableCursorBlinking),
                         nameof(ConnectionInfo.RedirectKeys),
                         nameof(ConnectionInfo.RedirectDiskDrives),
                         nameof(ConnectionInfo.RedirectPrinters),
@@ -287,6 +294,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSmartCards),
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
+						nameof(ConnectionInfo.RdpVersion),
+						nameof(ConnectionInfo.StartProgram)
                     });
                     break;
                 case ProtocolType.VNC:
@@ -305,6 +314,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
+                        nameof(ConnectionInfo.SSHOptions),
                         nameof(ConnectionInfo.PuttySession)
                     });
                     break;
@@ -327,16 +337,13 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RenderingEngine),
                     });
                     break;
-                case ProtocolType.ICA:
-                    expectedProperties.AddRange(new []
+                case ProtocolType.PowerShell:
+                    expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
-                        nameof(ConnectionInfo.ICAEncryptionStrength),
-                        nameof(ConnectionInfo.Resolution),
-                        nameof(ConnectionInfo.Colors),
-                        nameof(ConnectionInfo.CacheBitmaps),
+                        nameof(ConnectionInfo.Port),
                     });
                     break;
                 case ProtocolType.IntApp:
