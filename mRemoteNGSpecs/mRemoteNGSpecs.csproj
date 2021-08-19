@@ -70,7 +70,7 @@
       <Version>1.8.9</Version>
     </PackageReference>
     <PackageReference Include="Cucumber.Messages">
-      <Version>6.0.2</Version>
+      <Version>16.0.1</Version>
     </PackageReference>
     <PackageReference Include="Google.Protobuf">
       <Version>3.17.3</Version>
@@ -90,7 +90,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="SpecFlow.NUnit.Runners">
-      <Version>3.9.8</Version>
+      <Version>3.9.22</Version>
     </PackageReference>
     <PackageReference Include="System.Memory">
       <Version>4.5.4</Version>
