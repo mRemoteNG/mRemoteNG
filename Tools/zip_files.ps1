@@ -69,7 +69,7 @@ if ($ConfigurationName -eq "Release Portable") {
     if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
         $outputZipPath = Join-Path -Path $SolutionDir -ChildPath "Release\mRemoteNG-Portable-$($version).zip"
         #7z a -spf $outputZipPath $Source
-        7z a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip $Source
+        7z a -bt -bd -bb1 -mx=9 -tzip -y -r $PortableZip "$($Source)"
     }
     # Local build
     else {
