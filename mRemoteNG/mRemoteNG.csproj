@@ -63,7 +63,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BouncyCastle" Version="1.8.9" />
     <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="cef.redist.x64" Version="92.0.25" />
     <PackageReference Include="CefSharp.Common" Version="91.1.230" />
@@ -83,6 +82,7 @@
     <PackageReference Include="ObjectListView" Version="2.7.1.5" />
     <PackageReference Include="ObjectListView.Official" Version="2.9.1" />
     <PackageReference Include="OpenCover" Version="4.7.1221" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
     <PackageReference Include="Renci.SshNet.Async" Version="1.4.0" />
     <PackageReference Include="ReportGenerator" Version="4.8.12" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
