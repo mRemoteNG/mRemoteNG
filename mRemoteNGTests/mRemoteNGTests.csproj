@@ -18,13 +18,11 @@
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit.Console" Version="3.12.0" />
     <PackageReference Include="NUnit.ConsoleRunner" Version="3.12.0" />
-    <PackageReference Include="NUnit.Extensions" Version="2.6.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
     <PackageReference Include="coverlet.collector" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="NUnitForms.Framework" Version="1.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,8 +31,17 @@
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
