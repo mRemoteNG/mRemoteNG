@@ -2025,4 +2025,10 @@ Nightly umfasst Alphas, Betas und Release Candidates.</value>
   <data name="WebView2InitializationFailed" xml:space="preserve">
     <value>WebView2-Erstellung fehlgeschlagen</value>
   </data>
+  <data name="ApplyDefaultInheritance" xml:space="preserve">
+    <value>Standardvererbung anwenden</value>
+  </data>
+  <data name="ApplyInheritanceToChildren" xml:space="preserve">
+    <value>Vererbung auf Kinder anwenden</value>
+  </data>
 </root>

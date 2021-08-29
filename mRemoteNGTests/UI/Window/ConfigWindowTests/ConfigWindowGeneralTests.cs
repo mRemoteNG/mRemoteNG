@@ -84,26 +84,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 		        () => "The property mode should switch from inheritance to connection properties when clicking on the root node.");
         }
 
-		[Test]
-        public void SwitchFromInheritanceToConnectionPropertiesWhenClickingChildOfRootNode()
-        {
-	        // connection with a normal parent container
-			var root = new RootNodeInfo(RootNodeType.Connection);
-			var containerWhoseParentIsRoot = new ContainerInfo();
-	        var connection = new ConnectionInfo();
-	        root.AddChild(containerWhoseParentIsRoot);
-			containerWhoseParentIsRoot.AddChild(connection);
-
-	        _configWindow.SelectedTreeNode = connection;
-	        _configWindow.ShowInheritanceProperties();
-
-	        _configWindow.SelectedTreeNode = containerWhoseParentIsRoot;
-	        Assert.That(_configWindow.PropertiesVisible, Is.True,
-		        () => "The property mode should switch from inheritance to connection properties " +
-		              "when clicking on a container whose parent is the root node.");
-        }
-
-		[TestCaseSource(nameof(EveryNodeType))]
+        [TestCaseSource(nameof(EveryNodeType))]
         public void DefaultConnectionPropertiesCanBeShownRegardlessOfWhichNodeIsSelected(ConnectionInfo selectedObject)
         {
 	        _configWindow.SelectedTreeNode = selectedObject;
@@ -165,47 +146,28 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 		private static IEnumerable<TestCaseData> EveryNodeType()
 		{
 			var protocolTypes = typeof(ProtocolType).GetEnumValues().OfType<ProtocolType>().ToList();
-			var root = new RootNodeInfo(RootNodeType.Connection);
 			var container = new ContainerInfo();
-			var connectionsWithNormalParent = protocolTypes
+			var connections = protocolTypes
 				.Select(protocolType =>
 				{
 					var c = new ConnectionInfo {Protocol = protocolType};
 					c.SetParent(container);
-					return new TestCaseData(c).SetName(protocolType + ", Connection, NormalParent");
+					return new TestCaseData(c).SetName(protocolType + ", Connection");
 				});
 
-			var connectionsWithRootParent = protocolTypes
-				.Select(protocolType =>
-				{
-					var c = new ConnectionInfo { Protocol = protocolType };
-					c.SetParent(root);
-					return new TestCaseData(c).SetName(protocolType + ", Connection, RootParent");
-				});
-
-			var contianersWithNormalParent = protocolTypes
+			var containers = protocolTypes
 				.Select(protocolType =>
 				{
 					var c = new ContainerInfo { Protocol = protocolType };
 					c.SetParent(container);
-					return new TestCaseData(c).SetName(protocolType + ", Connection, NormalParent");
+					return new TestCaseData(c).SetName(protocolType + ", Connection");
 				});
 
-			var containersWithRootParent = protocolTypes
-				.Select(protocolType =>
-				{
-					var c = new ContainerInfo { Protocol = protocolType };
-					c.SetParent(root);
-					return new TestCaseData(c).SetName(protocolType + ", Connection, RootParent");
-				});
-
-			return connectionsWithNormalParent
-				.Concat(connectionsWithRootParent)
-				.Concat(contianersWithNormalParent)
-				.Concat(containersWithRootParent)
+			return connections
+				.Concat(containers)
 				.Concat(new[]
 				{
-					new TestCaseData(root).SetName("RootNode"),
+					new TestCaseData(new RootNodeInfo(RootNodeType.Connection)).SetName("RootNode"),
 					new TestCaseData(new RootPuttySessionsNodeInfo()).SetName("RootPuttyNode"), 
 					new TestCaseData(new PuttySessionInfo()).SetName("PuttyNode"), 
 					new TestCaseData(null).SetName("Null"), 
