@@ -39,8 +39,6 @@ if ($ConfigurationName -match "Release") {
 
     $debugFile = Join-Path -Path $TargetDir -ChildPath "mRemoteNG.pdb"
 
-    Write-Output "Creating debug symbols ZIP file $($outputZipPath) from $($debugFile)"
-
     # AppVeyor build
     if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
         $outputZipPath = Join-Path -Path $SolutionDir -ChildPath "Release\$zipFilePrefix-$($version).zip"
@@ -51,24 +49,19 @@ if ($ConfigurationName -match "Release") {
         $outputZipPath = "$($SolutionDir)Release\$zipFilePrefix-$($version).zip"
         Compress-Archive $debugFile $outputZipPath -Force
     }
-}
 
-Write-Output ""
+    Remove-Item $debugFile
+}
 
 # Package portable release zip file
 if ($ConfigurationName -eq "Release Portable") {
-    Write-Output "Packaging Release Portable ZIP"
-
-    # Exclude debug symbols from folder
-    $FileExclude = @("*.pdb")
-    $Source = Get-ChildItem -Recurse -Path $TargetDir -Exclude $FileExclude
-
-    Write-Output "Creating portable ZIP file $($outputZipPath) from $($Source)"
+    Write-Output "Packaging portable ZIP file"
 
     # AppVeyor build
     if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
         $outputZipPath = Join-Path -Path $SolutionDir -ChildPath "Release\mRemoteNG-Portable-$($version).zip"
-        7z a -bt -bd -bb1 -mx=9 -tzip -y -r -spf2 $outputZipPath "$Source"
+        write-host %APPVEYOR_BUILD_FOLDER%\*
+        7z a -bt -bd -bb1 -mx=9 -tzip -y -r $outputZipPath $TargetDir\*
     }
     # Local build
     else {
