@@ -2,7 +2,7 @@
 
 <br/><br/>
 <p align="center">
-  <img width="500" src="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteNGProjectFiles/logo.png">
+  <img width="500" src="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteNGProjectFiles/Header_dark.png">
 </p>
   
 <p align="center">
@@ -177,5 +177,5 @@ Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to
 
 </br>
 <p align="center">
-  <img alt="Developed with ReSharper" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/Tools/img/icon_ReSharper.png">
+  <img alt="Developed with ReSharper" src="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteNGProjectFiles/icon_ReSharper.png">
 </p>
