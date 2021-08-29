@@ -2156,4 +2156,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="ApplyDefaultInheritance" xml:space="preserve">
     <value>Apply default inheritance</value>
   </data>
+  <data name="SmartCard" xml:space="preserve">
+    <value>SmartCard</value>
+  </data>
 </root>

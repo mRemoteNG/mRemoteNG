@@ -5245,6 +5245,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die SmartCard ähnelt.
+        /// </summary>
+        internal static string SmartCard {
+            get {
+                return ResourceManager.GetString("SmartCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die SmartSize (RDP/VNC) ähnelt.
         /// </summary>
         internal static string SmartSize {
