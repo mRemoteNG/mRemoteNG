@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>Icons\mRemoteNG.ico</ApplicationIcon>
     <Version>1.77.2</Version>
@@ -52,18 +52,17 @@
 
   <ItemGroup>
     <COMReference Include="MSTSCLib">
-      <WrapperTool>tlbimp</WrapperTool>
+      <WrapperTool>aximp</WrapperTool>
       <VersionMinor>0</VersionMinor>
       <VersionMajor>1</VersionMajor>
       <Guid>8c11efa1-92c3-11d1-bc1e-00c04fa31489</Guid>
       <Lcid>0</Lcid>
       <Isolated>false</Isolated>
-      <EmbedInteropTypes>true</EmbedInteropTypes>
+      <EmbedInteropTypes>false</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BouncyCastle" Version="1.8.9" />
     <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="ConsoleControl" Version="1.3.0" />
     <PackageReference Include="Cucumber.Messages" Version="16.0.1" />
@@ -80,6 +79,7 @@
     <PackageReference Include="ObjectListView" Version="2.7.1.5" />
     <PackageReference Include="ObjectListView.Official" Version="2.9.1" />
     <PackageReference Include="OpenCover" Version="4.7.1221" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
     <PackageReference Include="Renci.SshNet.Async" Version="1.4.0" />
     <PackageReference Include="ReportGenerator" Version="4.8.12" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
@@ -88,12 +88,6 @@
     <PackageReference Include="System.Management" Version="5.0.0" />
     <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
     <PackageReference Include="VncSharp" Version="1.0.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="AxMSTSCLib">
-      <HintPath>..\..\..\..\Program Files (x86)\Common Files\Microsoft Shared\Windows Simulator\16.0\AxMSTSCLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

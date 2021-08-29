@@ -1,10 +1,11 @@
-﻿using mRemoteNG.UI;
-using NUnit.Extensions.Forms;
+﻿using System.Threading;
+using mRemoteNG.UI;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Controls
 {
     [TestFixture]
+    [Apartment(ApartmentState.STA)]
     public class TextBoxExtensionsTests
     {
         private TextBoxExtensionsTestForm _textBoxExtensionsTestForm;
@@ -29,17 +30,17 @@ namespace mRemoteNGTests.UI.Controls
         public void SetCueBannerSetsTheBannerText()
         {
             const string text = "Type Here";
-            var textBox = new TextBoxTester(_textBoxExtensionsTestForm.textBox1.Name);
-            Assert.That(textBox.Properties.SetCueBannerText(text), Is.True);
+            var textBox = _textBoxExtensionsTestForm.textBox1;
+            Assert.That(textBox.SetCueBannerText(text), Is.True);
         }
 
         [Test]
         public void GetCueBannerReturnsCorrectValue()
         {
             const string text = "Type Here";
-            var textBox = new TextBoxTester(_textBoxExtensionsTestForm.textBox1.Name);
-            textBox.Properties.SetCueBannerText(text);
-            Assert.That(textBox.Properties.GetCueBannerText(), Is.EqualTo(text));
+            var textBox = _textBoxExtensionsTestForm.textBox1;
+            textBox.SetCueBannerText(text);
+            Assert.That(textBox.GetCueBannerText(), Is.EqualTo(text));
         }
     }
 }

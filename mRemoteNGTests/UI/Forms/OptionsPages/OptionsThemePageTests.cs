@@ -1,33 +1,34 @@
-﻿using System;
+﻿using System.Threading;
+using System.Windows.Forms;
+using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
-using mRemoteNGTests.UI.Forms;
-using NUnit.Extensions.Forms;
 
 namespace mRemoteNGTests.UI.Forms.OptionsPages
 {
     [TestFixture]
+    [Apartment(ApartmentState.STA)]
     public class OptionsThemePageTests : OptionsFormSetupAndTeardown
     {
         [Test]
         public void ThemePageLinkExistsInListView()
         {
-            ListViewTester listViewTester = new ListViewTester("PageListView", _optionsForm);
-            Assert.That(listViewTester.Items[6].Text, Does.Match("Theme"));
+            ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            Assert.That(listViewTester.Items[8].Text, Does.Match("Theme"));
         }
 
         [Test]
         public void ThemeIconShownInListView()
         {
-            ListViewTester listViewTester = new ListViewTester("PageListView", _optionsForm);
-            Assert.That(listViewTester.Items[6].ImageList, Is.Not.Null);
+            ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            Assert.That(listViewTester.Items[8].ImageList, Is.Not.Null);
         }
 
         [Test]
         public void SelectingThemePageLoadsSettings()
         {
-            ListViewTester listViewTester = new ListViewTester("PageListView", _optionsForm);
+            ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
             listViewTester.Select("Theme");
-            ButtonTester buttonTester = new ButtonTester("btnThemeNew", _optionsForm);
+            Button buttonTester = _optionsForm.FindControl<Button>("btnThemeNew");
             Assert.That(buttonTester.Text, Does.Match("New"));
         }
     }

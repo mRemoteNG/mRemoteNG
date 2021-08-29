@@ -1,10 +1,13 @@
-﻿using mRemoteNG.UI.Forms;
-using NUnit.Extensions.Forms;
+﻿using System.Threading;
+using System.Windows.Forms;
+using mRemoteNG.UI.Forms;
+using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Forms
 {
 	[TestFixture]
+    [Apartment(ApartmentState.STA)]
     public class PasswordFormTests
     {
         FrmPassword _passwordForm;
@@ -30,8 +33,7 @@ namespace mRemoteNGTests.UI.Forms
 		[SetUICulture("en-US")]
         public void PasswordFormText()
         {
-            var formTester = new FormTester("PasswordForm");
-            Assert.That(formTester.Text, Does.Match("mRemoteNG password"));
+            Assert.That(_passwordForm.Text, Does.Match("mRemoteNG password"));
         }
 
         [Test]
@@ -39,8 +41,8 @@ namespace mRemoteNGTests.UI.Forms
         {
             bool eventFired = false;
             _passwordForm.FormClosed += (o, e) => eventFired = true;
-            ButtonTester cancelButton = new ButtonTester("btnCancel", _passwordForm);
-            cancelButton.Click();
+            Button cancelButton = _passwordForm.FindControl<Button>("btnCancel");
+            cancelButton.PerformClick();
             Assert.That(eventFired, Is.True);
         }
     }
