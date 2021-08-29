@@ -1,9 +1,11 @@
-﻿using mRemoteNG.Connection.Protocol;
+﻿using System.Threading;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.VNC;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 {
+    [Apartment(ApartmentState.STA)]
     public class ConfigWindowVncSpecialTests : ConfigWindowSpecialTestsBase
     {
         protected override ProtocolType Protocol => ProtocolType.VNC;

@@ -1,9 +1,11 @@
-﻿using mRemoteNG.Connection.Protocol;
+﻿using System.Threading;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 {
+    [Apartment(ApartmentState.STA)]
     public class ConfigWindowRdpSpecialTests : ConfigWindowSpecialTestsBase
     {
         protected override ProtocolType Protocol => ProtocolType.RDP;

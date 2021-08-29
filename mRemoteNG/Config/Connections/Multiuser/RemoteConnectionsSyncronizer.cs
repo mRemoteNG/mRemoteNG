@@ -8,7 +8,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
 {
     public class RemoteConnectionsSyncronizer : IConnectionsUpdateChecker
     {
-        private readonly Timer _updateTimer;
+        private readonly System.Timers.Timer _updateTimer;
         private readonly IConnectionsUpdateChecker _updateChecker;
 
         public double TimerIntervalInMilliseconds
@@ -19,7 +19,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
         public RemoteConnectionsSyncronizer(IConnectionsUpdateChecker updateChecker)
         {
             _updateChecker = updateChecker;
-            _updateTimer = new Timer(3000);
+            _updateTimer = new System.Timers.Timer(3000);
             SetEventListeners();
         }
 

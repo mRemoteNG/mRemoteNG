@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -12,7 +13,8 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 {
-	public class ConfigWindowGeneralTests
+    [Apartment(ApartmentState.STA)]
+    public class ConfigWindowGeneralTests
     {
         private ConfigWindow _configWindow;
 

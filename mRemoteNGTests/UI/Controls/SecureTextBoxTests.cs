@@ -1,9 +1,10 @@
-﻿using mRemoteNG.Security;
-using mRemoteNGTests.NUnitExtensions;
+﻿using System.Threading;
+using mRemoteNG.Security;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Controls
 {
+    [Apartment(ApartmentState.STA)]
     public class SecureTextBoxTests
     {
         private SecureTextBoxTestForm _testForm;
@@ -26,10 +27,10 @@ namespace mRemoteNGTests.UI.Controls
         [Test]
         public void TextboxInputGetsAddedToSecureString()
         {
-            var textBox = new SecureTextBoxTester(_testForm.secureTextBox1.Name);
+            var textBox = _testForm.secureTextBox1;
             const string textToSend = "abc123";
-            textBox.Properties.Text = textToSend;
-            Assert.That(textBox.Properties.SecString.ConvertToUnsecureString(), Is.EqualTo(textToSend));
+            textBox.Text = textToSend;
+            Assert.That(textBox.SecString.ConvertToUnsecureString(), Is.EqualTo(textToSend));
         }
     }
 }
