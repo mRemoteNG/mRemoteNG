@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0-windows7.0</TargetFramework>
+    
+    <LangVersion>preview</LangVersion>
 
     <IsPackable>false</IsPackable>
 
