@@ -60,7 +60,6 @@ if ($ConfigurationName -eq "Release Portable") {
     # AppVeyor build
     if(!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
         $outputZipPath = Join-Path -Path $SolutionDir -ChildPath "Release\mRemoteNG-Portable-$($version).zip"
-        write-host %APPVEYOR_BUILD_FOLDER%\*
         7z a -bt -bd -bb1 -mx=9 -tzip -y -r $outputZipPath $TargetDir\*
     }
     # Local build
