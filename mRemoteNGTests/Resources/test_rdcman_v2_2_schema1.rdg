@@ -38,7 +38,7 @@
                 </logonCredentials>
                 <connectionSettings inherit="None">
                     <connectToConsole>True</connectToConsole>
-                    <startProgram />
+                    <startProgram>alternate shell</startProgram>
                     <workingDir />
                     <port>9933</port>
                 </connectionSettings>

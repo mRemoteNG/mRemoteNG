@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Xml.Linq;
-using mRemoteNG.Config.Serializers.Xml;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Security.SymmetricEncryption;

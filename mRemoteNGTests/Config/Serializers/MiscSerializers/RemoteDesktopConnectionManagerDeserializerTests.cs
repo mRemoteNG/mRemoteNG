@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using mRemoteNG.Config.Serializers;
+using System.IO;
+using System.Linq;
+using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
@@ -25,22 +28,24 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedPassword = "passwordHere!";
         private const bool ExpectedUseConsoleSession = true;
         private const int ExpectedPort = 9933;
-        private const RdpProtocol.RDGatewayUsageMethod ExpectedGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Always;
+        private const RDGatewayUsageMethod ExpectedGatewayUsageMethod = RDGatewayUsageMethod.Always;
         private const string ExpectedGatewayHostname = "gatewayserverhost.innerdomain.net";
         private const string ExpectedGatewayUsername = "gatewayusername";
         private const string ExpectedGatewayDomain = "innerdomain";
         private const string ExpectedGatewayPassword = "gatewayPassword123";
-        private const RdpProtocol.RDPResolutions ExpectedRdpResolution = RdpProtocol.RDPResolutions.FitToWindow;
-        private const RdpProtocol.RDPColors ExpectedRdpColorDepth = RdpProtocol.RDPColors.Colors24Bit;
-        private const RdpProtocol.RDPSounds ExpectedAudioRedirection = RdpProtocol.RDPSounds.DoNotPlay;
+        private const RDPResolutions ExpectedRdpResolution = RDPResolutions.FitToWindow;
+        private const RDPColors ExpectedRdpColorDepth = RDPColors.Colors24Bit;
+        private const RDPSounds ExpectedAudioRedirection = RDPSounds.DoNotPlay;
         private const bool ExpectedKeyRedirection = true;
         private const bool ExpectedSmartcardRedirection = true;
         private const bool ExpectedDriveRedirection = true;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
-        private const RdpProtocol.AuthenticationLevel ExpectedAuthLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth;
+        private const AuthenticationLevel ExpectedAuthLevel = AuthenticationLevel.AuthRequired;
+        private const string ExpectedStartProgram = "alternate shell";
 
-        private static IEnumerable<TestFixtureData> TestFixtureData()
+        [OneTimeSetUp]
+        public void OnetimeSetup()
         {
             return new[]
             {
@@ -288,6 +293,16 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         {
             var badFileContents = Resources.test_rdcman_noversion;
             Assert.That(() => _deserializer.Deserialize(badFileContents), Throws.TypeOf<FileFormatException>());
+        }
+
+        [Test]
+        public void StartProgramImported()
+        {
+            var rootNode = _connectionTreeModel.RootNodes.First();
+            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
+            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+            var connection = group1.Children.First();
+            Assert.That(connection.StartProgram, Is.EqualTo(ExpectedStartProgram));
         }
     }
 }

@@ -7,12 +7,12 @@ namespace mRemoteNGTests.UI.Forms
 	[TestFixture]
     public class PasswordFormTests
     {
-        PasswordForm _passwordForm;
+        FrmPassword _passwordForm;
 
         [SetUp]
         public void Setup()
         {
-            _passwordForm = new PasswordForm();
+            _passwordForm = new FrmPassword();
             _passwordForm.Show();
         }
 
@@ -30,8 +30,8 @@ namespace mRemoteNGTests.UI.Forms
 		[SetUICulture("en-US")]
         public void PasswordFormText()
         {
-            FormTester formTester = new FormTester("PasswordForm");
-            Assert.That(formTester.Text, Does.Match("Password"));
+            var formTester = new FormTester("PasswordForm");
+            Assert.That(formTester.Text, Does.Match("mRemoteNG password"));
         }
 
         [Test]

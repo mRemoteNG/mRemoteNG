@@ -117,7 +117,6 @@ namespace mRemoteNGTests.Connection
 
 		[TestCase(ProtocolType.HTTP, ExpectedResult = 80)]
         [TestCase(ProtocolType.HTTPS, ExpectedResult = 443)]
-        [TestCase(ProtocolType.ICA, ExpectedResult = 1494)]
         [TestCase(ProtocolType.IntApp, ExpectedResult = 0)]
         [TestCase(ProtocolType.RAW, ExpectedResult = 23)]
         [TestCase(ProtocolType.RDP, ExpectedResult = 3389)]

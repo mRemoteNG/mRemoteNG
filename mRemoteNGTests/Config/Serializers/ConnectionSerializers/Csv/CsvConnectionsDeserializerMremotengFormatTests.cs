@@ -7,7 +7,6 @@ using mRemoteNG.Config.Serializers.Csv;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Credential;
@@ -121,7 +120,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 PostExtApp = "SomePostExtApp",
                 MacAddress = "SomeMacAddress",
                 UserField = "SomeUserField",
-                Favorite = true,
+                VmId = "SomeVmId",
                 ExtApp = "SomeExtApp",
                 VNCProxyUsername = "SomeVNCProxyUsername",
                 VNCProxyPassword = "SomeVNCProxyPassword",
@@ -130,26 +129,32 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RDGatewayDomain = "SomeRDGatewayDomain",
                 VNCProxyIP = "SomeVNCProxyIP",
                 RDGatewayHostname = "SomeRDGatewayHostname",
-                Protocol = ProtocolType.ICA,
+                Protocol = ProtocolType.RDP,
                 Port = 999,
+                Favorite = true,
                 UseConsoleSession = true,
                 UseCredSsp = true,
-                RenderingEngine = HTTPBase.RenderingEngine.Gecko,
-                ICAEncryptionStrength = IcaProtocol.EncryptionStrength.Encr40Bit,
-                RDPAuthenticationLevel = RdpProtocol.AuthenticationLevel.WarnOnFailedAuth,
-                Colors = RdpProtocol.RDPColors.Colors16Bit,
-                Resolution = RdpProtocol.RDPResolutions.Res1366x768,
+                UseVmId = false,
+                UseEnhancedMode = false,
+                RenderingEngine = HTTPBase.RenderingEngine.EdgeChromium,
+                RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
+                Colors = RDPColors.Colors16Bit,
+                Resolution = RDPResolutions.Res1366x768,
                 AutomaticResize = true,
                 DisplayWallpaper = true,
                 DisplayThemes = true,
                 EnableFontSmoothing = true,
                 EnableDesktopComposition = true,
+                DisableFullWindowDrag = false,
+                DisableMenuAnimations = false,
+                DisableCursorShadow = false,
+                DisableCursorBlinking = false,
                 CacheBitmaps = true,
                 RedirectDiskDrives = true,
                 RedirectPorts = true,
                 RedirectPrinters = true,
                 RedirectSmartCards = true,
-                RedirectSound = RdpProtocol.RDPSounds.LeaveAtRemoteComputer,
+                RedirectSound = RDPSounds.LeaveAtRemoteComputer,
                 RedirectAudioCapture = true,
                 RedirectKeys = true,
                 VNCCompression = ProtocolVNC.Compression.Comp4,
@@ -160,8 +165,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 VNCColors = ProtocolVNC.Colors.Col8Bit,
                 VNCSmartSizeMode = ProtocolVNC.SmartSizeMode.SmartSAspect,
                 VNCViewOnly = true,
-                RDGatewayUsageMethod = RdpProtocol.RDGatewayUsageMethod.Detect,
-                RDGatewayUseConnectionCredentials = RdpProtocol.RDGatewayUseConnectionCredentials.SmartCard
+                RDGatewayUsageMethod = RDGatewayUsageMethod.Detect,
+                RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard
             };
         }
 
@@ -196,14 +201,11 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 var testCases = new List<TestCaseData>();
                 var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
 
-                foreach (var property in properties)
-                {
-                    testCases.Add(
-                        new TestCaseData(property.Name)
-                            .Returns(property.GetValue(testInheritance)));
-                }
-
-                return testCases;
+                return properties
+	                .Select(property => 
+		                new TestCaseData(property.Name)
+			                .Returns(property.GetValue(testInheritance)))
+	                .ToList();
             }
         }
     }

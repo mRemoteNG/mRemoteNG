@@ -1,9 +1,9 @@
-﻿using mRemoteNG.Config.Serializers;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 using System.Linq;
+using mRemoteNG.Config.Serializers.MiscSerializers;
 
 namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 {
@@ -19,9 +19,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedGatewayHostname = "gatewayhostname.domain.com";
         private const string ExpectedLoadBalanceInfo = "tsv://MS Terminal Services Plugin.1.RDS-NAME";
         private const int ExpectedPort = 9933;
-        private const RdpProtocol.RDPColors ExpectedColors = RdpProtocol.RDPColors.Colors24Bit;
+        private const RDPColors ExpectedColors = RDPColors.Colors24Bit;
         private const bool ExpectedBitmapCaching = false;
-        private const RdpProtocol.RDPResolutions ExpectedResolutionMode = RdpProtocol.RDPResolutions.FitToWindow;
+        private const RDPResolutions ExpectedResolutionMode = RDPResolutions.FitToWindow;
         private const bool ExpectedWallpaperDisplay = true;
         private const bool ExpectedThemesDisplay = true;
         private const bool ExpectedFontSmoothing = true;
@@ -30,8 +30,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const bool ExpectedDriveRedirection = true;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
-        private const RdpProtocol.RDPSounds ExpectedSoundRedirection = RdpProtocol.RDPSounds.BringToThisComputer;
-
+        private const RDPSounds ExpectedSoundRedirection = RDPSounds.BringToThisComputer;
+        private const string ExpectedStartProgram = "alternate shell";
 
         [OneTimeSetUp]
         public void OnetimeSetup()
@@ -151,6 +151,13 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         public void LoadBalanceInfoImportedCorrectly()
         {
             Assert.That(_deserializedConnectionInfo.LoadBalanceInfo, Is.EqualTo(ExpectedLoadBalanceInfo));
+        }
+
+        [Test]
+        public void StartProgramImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.StartProgram, Is.EqualTo(ExpectedStartProgram));
         }
 
         //[Test]
