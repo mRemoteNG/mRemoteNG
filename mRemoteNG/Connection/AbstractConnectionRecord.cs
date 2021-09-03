@@ -166,6 +166,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _port, value, "Port");
         }
 
+        [Browsable(false)]
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Username)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUsername)),
@@ -176,6 +177,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _username, Settings.Default.DoNotTrimUsername ? value : value?.Trim(), "Username");
         }
 
+        [Browsable(false)]
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Password)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPassword)),
@@ -187,6 +189,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _password, value, "Password");
         }
 
+        [Browsable(false)]
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Domain)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionDomain)),
@@ -228,7 +231,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Credentials)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionCredentials)),
-         AttributeUsedInAllProtocolsExcept(ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
+         AttributeUsedInAllProtocolsExcept()]
         [Editor(typeof(CredentialRecordListAdaptor), typeof(UITypeEditor))]
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public virtual ICredentialRecord CredentialRecord
