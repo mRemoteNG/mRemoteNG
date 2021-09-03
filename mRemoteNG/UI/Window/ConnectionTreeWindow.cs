@@ -8,12 +8,15 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Credential;
 using mRemoteNG.Properties;
 using mRemoteNG.Themes;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.ClickHandlers;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls.ConnectionTree;
+using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Forms.CredentialManager;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -30,6 +33,10 @@ namespace mRemoteNG.UI.Window
         public ConnectionInfo SelectedNode => ConnectionTree.SelectedNode;
 
         public ConnectionTree ConnectionTree { get; set; }
+
+        public CredentialService CredentialService { get; set; } = Runtime.CredentialService;
+
+        public UnlockerFormFactory UnlockerFormFactory { get; set; } = new UnlockerFormFactory();
 
         public ConnectionTreeWindow() : this(new DockContent())
         {
@@ -91,6 +98,7 @@ namespace mRemoteNG.UI.Window
             mMenViewCollapseAllFolders.ToolTipText = Language.CollapseAllFolders;
             mMenSort.ToolTipText = Language.Sort;
             mMenFavorites.ToolTipText = Language.Favorites;
+            mMenCredentials.ToolTipText = Language.Credentials;
 
             txtSearch.Text = Language.SearchPrompt;
         }
@@ -230,6 +238,11 @@ namespace mRemoteNG.UI.Window
 
                 mMenFavorites.DropDownItems.AddRange(favoritesList.ToArray());
                 mMenFavorites.ShowDropDown();
+            };
+            mMenCredentials.Click += (sender, args) =>
+            {
+                var credentialManagerForm = new CredentialManagerForm(CredentialService, UnlockerFormFactory);
+                credentialManagerForm.ShowDialog();
             };
         }
 

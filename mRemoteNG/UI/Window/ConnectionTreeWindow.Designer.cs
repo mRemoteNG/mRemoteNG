@@ -29,6 +29,7 @@ namespace mRemoteNG.UI.Window
             this.mMenViewCollapseAllFolders = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSort = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenFavorites = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenCredentials = new System.Windows.Forms.ToolStripMenuItem();
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
             this.pbSearch = new MrngPictureBox(this.components);
             this.txtSearch = new mRemoteNG.UI.Controls.MrngSearchBox();
@@ -82,6 +83,7 @@ namespace mRemoteNG.UI.Window
             this.mMenViewExpandAllFolders,
             this.mMenViewCollapseAllFolders,
             this.mMenSort,
+            this.mMenCredentials,
             this.mMenFavorites});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
@@ -138,6 +140,14 @@ namespace mRemoteNG.UI.Window
             this.mMenFavorites.Name = "mMenFavorites";
             this.mMenFavorites.Size = new System.Drawing.Size(28, 20);
             this.mMenFavorites.Text = "Favorites";
+            // 
+            // mMenCredentials
+            // 
+            this.mMenCredentials.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.mMenCredentials.Image = global::mRemoteNG.Properties.Resources.Key_16x;
+            this.mMenCredentials.Name = "mMenCredentials";
+            this.mMenCredentials.Size = new System.Drawing.Size(28, 20);
+            this.mMenCredentials.Text = "Credentials";
             // 
             // vsToolStripExtender
             // 
@@ -219,5 +229,6 @@ namespace mRemoteNG.UI.Window
         internal Controls.MrngSearchBox txtSearch;
         public System.Windows.Forms.TableLayoutPanel searchBoxLayoutPanel;
         internal System.Windows.Forms.ToolStripMenuItem mMenFavorites;
+        internal System.Windows.Forms.ToolStripMenuItem mMenCredentials;
     }
 }
