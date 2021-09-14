@@ -5,7 +5,6 @@ using System.Linq;
 using System.Collections.Generic;
 using BrightIdeasSoftware;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.UI.Forms.OptionsPages

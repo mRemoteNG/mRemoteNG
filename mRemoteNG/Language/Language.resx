@@ -2018,8 +2018,8 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="ReleaseChannelExplanation" xml:space="preserve">
     <value>Stable channel includes final releases only.
-Beta channel includes Betas &amp; Release Candidates.
-Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
+Preview channel includes Betas &amp; Release Candidates.
+Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="Apply" xml:space="preserve">
     <value>Apply</value>
@@ -2160,7 +2160,7 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Determines whether menus and windows can be displayed with animation effects in the remote session.</value>
   </data>
   <data name="HttpCEF" xml:space="preserve">
-    <value>CEF (Chromium)</value>
+    <value>Edge Chromium</value>
   </data>
   <data name="HttpFailedUrlBuild" xml:space="preserve">
     <value>Failed to contruct the URL to load</value>
@@ -2173,5 +2173,11 @@ Development Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="StartProgram" xml:space="preserve">
     <value>Start Program</value>
+  </data>
+  <data name="WebView2InitializationFailed" xml:space="preserve">
+    <value>WebView2 creation failed with exception</value>
+  </data>
+  <data name="SmartCard" xml:space="preserve">
+    <value>SmartCard</value>
   </data>
 </root>

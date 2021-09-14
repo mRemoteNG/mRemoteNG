@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #283: Support for native PowerShell remoting as new protocol
 - #1850: Minify config xml
 ### Changed
+- #2022: Replaced CefSharp with WebView2
 - #2014: Revised icons
 - #2013: Removed components check
 - #2011: Removed screenshot manager
@@ -25,6 +26,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1690: Replaced GeckoFX (Firefox) with CefSharp (Chromium)
 - #1325: Language resource files cleanup
 ### Fixed
+- #1884: Allow setting Port when using MSSQL
 - #1783: Added missing inheritance properties to SQL scripts
 - #1773: Connection issue with mysql - Missing fields in 
 - #1756: Cannot type any character on MultiSSH toolbar 

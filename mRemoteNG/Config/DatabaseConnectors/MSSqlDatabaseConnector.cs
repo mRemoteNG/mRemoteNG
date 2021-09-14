@@ -53,9 +53,12 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         private void BuildDbConnectionStringWithCustomCredentials()
         {
+            string[] hostParts = _dbHost.Split(new char[] { ':' }, 2);
+            var _dbPort = (hostParts.Length == 2) ? hostParts[1] : "1433";
+
             _dbConnectionString = new SqlConnectionStringBuilder
             {
-                DataSource = _dbHost,
+                DataSource = $"{hostParts[0]},{_dbPort}",
                 InitialCatalog = _dbCatalog,
                 UserID = _dbUsername,
                 Password = _dbPassword,

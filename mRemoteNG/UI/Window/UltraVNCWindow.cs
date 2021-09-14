@@ -1,6 +1,5 @@
 ﻿using System;
 using mRemoteNG.App;
-using mRemoteNG.Resources.Language;
 using WeifenLuo.WinFormsUI.Docking;
 
 

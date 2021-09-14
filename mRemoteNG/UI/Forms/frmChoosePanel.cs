@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Panels;
 

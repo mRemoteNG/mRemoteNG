@@ -4,7 +4,6 @@ using mRemoteNG.Tools;
 using System;
 using System.ComponentModel;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 

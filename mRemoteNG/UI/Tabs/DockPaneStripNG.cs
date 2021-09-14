@@ -6,7 +6,6 @@ using System.Security.Permissions;
 using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Tabs

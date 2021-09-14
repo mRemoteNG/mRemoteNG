@@ -28,10 +28,6 @@ using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
-using CefSharp;
-using CefSharp.WinForms;
-using CefSharp.SchemeHandler;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Controls;
 using Settings = mRemoteNG.Properties.Settings;
 
@@ -160,12 +156,6 @@ namespace mRemoteNG.UI.Forms
 
             SetMenuDependencies();
 
-            //Monitor parent process exit and close subprocesses if parent process exits first
-            //This will at some point in the future becomes the default
-            CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
-
-            CefSetup();
-
             var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
@@ -180,6 +170,8 @@ namespace mRemoteNG.UI.Forms
 
             if (Settings.Default.ResetPanels)
                 SetDefaultLayout();
+            else
+                SetLayout();
 
             Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
             Runtime.ConnectionsService.ConnectionsSaved += ConnectionsServiceOnConnectionsSaved;
@@ -224,32 +216,6 @@ namespace mRemoteNG.UI.Forms
                 panelAdder.AddPanel(panelName);
         }
 
-        private void CefSetup()
-        {
-            //For Windows 7 and above, best to include relevant app.manifest entries as well
-            Cef.EnableHighDPISupport();
-
-            string dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName);
-            if (Runtime.IsPortableEdition) dir = SettingsFileInfo.SettingsPath;
-
-            CefSettings settings = new CefSettings()
-            {
-                CachePath = Path.Combine(dir, "CEFCache"),
-                LogFile = Path.Combine(dir, "mRemoteNG_cef.log"),
-            };
-
-            if (Settings.Default.TextLogMessageWriterWriteDebugMsgs)
-                settings.LogSeverity = LogSeverity.Verbose;
-            else if (Settings.Default.TextLogMessageWriterWriteInfoMsgs)
-                settings.LogSeverity = LogSeverity.Info;
-            else if (Settings.Default.TextLogMessageWriterWriteWarningMsgs)
-                settings.LogSeverity = LogSeverity.Warning;
-            else if (Settings.Default.TextLogMessageWriterWriteErrorMsgs)
-                settings.LogSeverity = LogSeverity.Error;
-
-            Cef.Initialize(settings);
-        }
-
         private void ApplyLanguage()
         {
             fileMenu.ApplyLanguage();
@@ -260,10 +226,26 @@ namespace mRemoteNG.UI.Forms
 
         private void OnApplicationSettingChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            if (propertyChangedEventArgs.PropertyName != nameof(Settings.LockToolbars))
-                return;
-
-            LockToolbarPositions(Settings.Default.LockToolbars);
+            switch (propertyChangedEventArgs.PropertyName)
+            {
+                case nameof(Settings.LockToolbars):
+                    LockToolbarPositions(Settings.Default.LockToolbars);
+                    break;
+                case nameof(Settings.ViewMenuExternalTools):
+                    LockToolbarPositions(Settings.Default.LockToolbars);
+                    break;
+                case nameof(Settings.ViewMenuMessages):
+                    LockToolbarPositions(Settings.Default.LockToolbars);
+                    break;
+                case nameof(Settings.ViewMenuMultiSSH):
+                    LockToolbarPositions(Settings.Default.LockToolbars);
+                    break;
+                case nameof(Settings.ViewMenuQuickConnect):
+                    LockToolbarPositions(Settings.Default.LockToolbars);
+                    break;
+                default:
+                    return;
+            }
         }
 
         private void LockToolbarPositions(bool shouldBeLocked)
@@ -407,6 +389,18 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (Runtime.WindowList != null)
+            {
+                foreach (BaseWindow window in Runtime.WindowList)
+                {
+                    window.Close();
+                }
+            }
+
+            IsClosing = true;
+
+            Hide();
+
             if (Settings.Default.CloseToTray)
             {
                 if (Runtime.NotificationAreaIcon == null)
@@ -460,18 +454,6 @@ namespace mRemoteNG.UI.Forms
             }
 
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
-
-            IsClosing = true;
-
-            Cef.Shutdown();
-
-            if (Runtime.WindowList != null)
-            {
-                foreach (BaseWindow window in Runtime.WindowList)
-                {
-                    window.Close();
-                }
-            }
 
             Shutdown.StartUpdate();
 
@@ -741,11 +723,69 @@ namespace mRemoteNG.UI.Forms
             pnlDock.Visible = false;
 
             Windows.TreeForm.Show(pnlDock, DockState.DockLeft);
-            viewMenu._mMenViewConnections.Checked = true;
             Windows.ConfigForm.Show(pnlDock, DockState.DockLeft);
-            viewMenu._mMenViewConfig.Checked = true;
             Windows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
             viewMenu._mMenViewErrorsAndInfos.Checked = true;
+
+            pnlDock.Visible = true;
+        }
+
+        public void SetLayout()
+        {
+            pnlDock.Visible = false;
+
+            if (Settings.Default.ViewMenuMessages == true)
+            {
+                Windows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
+                viewMenu._mMenViewErrorsAndInfos.Checked = true;
+            }
+            else
+                viewMenu._mMenViewErrorsAndInfos.Checked = false;
+
+
+            if (Settings.Default.ViewMenuExternalTools == true)
+            {
+                viewMenu.TsExternalTools.Visible = true;
+                viewMenu._mMenViewExtAppsToolbar.Checked = true;
+            }
+            else
+            {
+                viewMenu.TsExternalTools.Visible = false;
+                viewMenu._mMenViewExtAppsToolbar.Checked = false;
+            }
+
+            if (Settings.Default.ViewMenuMultiSSH == true)
+            {
+                viewMenu.TsMultiSsh.Visible = true;
+                viewMenu._mMenViewMultiSshToolbar.Checked = true;
+            }
+            else
+            {
+                viewMenu.TsMultiSsh.Visible = false;
+                viewMenu._mMenViewMultiSshToolbar.Checked = false;
+            }
+
+            if (Settings.Default.ViewMenuQuickConnect == true)
+            {
+                viewMenu.TsQuickConnect.Visible = true;
+                viewMenu._mMenViewQuickConnectToolbar.Checked = true;
+            }
+            else
+            {
+                viewMenu.TsQuickConnect.Visible = false;
+                viewMenu._mMenViewQuickConnectToolbar.Checked = false;
+            }
+
+            if (Settings.Default.LockToolbars == true)
+            {
+                Settings.Default.LockToolbars = true;
+                viewMenu._mMenViewLockToolbars.Checked = true;                
+            }
+            else
+            {
+                Settings.Default.LockToolbars = false;
+                viewMenu._mMenViewLockToolbars.Checked = false;
+            }
 
             pnlDock.Visible = true;
         }
