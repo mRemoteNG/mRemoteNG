@@ -8,7 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG.Resources.Language {
+namespace mRemoteNG.Resources.Language
+{
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -85,7 +89,7 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;Warn me when closing connections.
+        ///   Looks up a localized string similar to Warn me when closing connections.
         /// </summary>
         internal static string _CloseWarnAll {
             get {
@@ -1284,6 +1288,51 @@ namespace mRemoteNG.Resources.Language {
         internal static string ConnectionsAndConfig {
             get {
                 return ResourceManager.GetString("ConnectionsAndConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyDaily {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyDaily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never backup connections.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyNever {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyNever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On Edit.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyOnEdit {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyOnEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On Exit.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyOnExit {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyOnExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekly.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyWeekly {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyWeekly", resourceCulture);
             }
         }
         
@@ -4219,7 +4268,7 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Program.
+        ///   Looks up a localized string similar to Start Program/alternate shell.
         /// </summary>
         internal static string PropertyDescriptionStartProgram {
             get {
@@ -5365,15 +5414,6 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save connections on exit.
-        /// </summary>
-        internal static string SaveConsOnExit {
-            get {
-                return ResourceManager.GetString("SaveConsOnExit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png.
         /// </summary>
         internal static string SaveImageFilter {
@@ -5626,15 +5666,6 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Program.
-        /// </summary>
-        internal static string StartProgram {
-            get {
-                return ResourceManager.GetString("StartProgram", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Socks 5.
         /// </summary>
         internal static string Socks5 {
@@ -5849,18 +5880,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("StartMinimized", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Start minimized.
+        ///   Looks up a localized string similar to Start Program.
         /// </summary>
-        internal static string StartFullScreen
-        {
-            get
-            {
-                return ResourceManager.GetString("StartFullScreen", resourceCulture);
+        internal static string StartProgram {
+            get {
+                return ResourceManager.GetString("StartProgram", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Startup/Exit.
         /// </summary>
@@ -5876,6 +5905,51 @@ namespace mRemoteNG.Resources.Language {
         internal static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        internal static string strBackup {
+            get {
+                return ResourceManager.GetString("strBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        internal static string strBrowse {
+            get {
+                return ResourceManager.GetString("strBrowse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection Backup Frequency.
+        /// </summary>
+        internal static string strConnectionBackupFrequency {
+            get {
+                return ResourceManager.GetString("strConnectionBackupFrequency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of backups.
+        /// </summary>
+        internal static string strConnectionsBackupMaxCount {
+            get {
+                return ResourceManager.GetString("strConnectionsBackupMaxCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location of connection file backup.
+        /// </summary>
+        internal static string strConnectionsBackupPath {
+            get {
+                return ResourceManager.GetString("strConnectionsBackupPath", resourceCulture);
             }
         }
         

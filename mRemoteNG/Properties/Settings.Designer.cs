@@ -2917,6 +2917,18 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SaveConnectionsFrequency {
+            get {
+                return ((int)(this["SaveConnectionsFrequency"]));
+            }
+            set {
+                this["SaveConnectionsFrequency"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Highest")]
         public string ConDefaultRdpVersion {
             get {

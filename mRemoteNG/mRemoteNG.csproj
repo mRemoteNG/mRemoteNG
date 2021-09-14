@@ -74,6 +74,7 @@
     <Compile Include="App\Update\UpdateFile.cs" />
     <Compile Include="App\Update\UpdateInfo.cs" />
     <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Connections\ConnectionsBackupFrequencyEnum.cs" />
     <Compile Include="Config\Connections\ConnectionsLoadedEventArgs.cs" />
     <Compile Include="Config\Connections\ConnectionsSavedEventArgs.cs" />
     <Compile Include="Config\Connections\CsvConnectionsSaver.cs" />
@@ -511,6 +512,15 @@
     <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UI\Forms\OptionsPages\BackupPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\BackupPage.Designer.cs">
+      <DependentUpon>BackupPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ComponentsPage.Designer.cs">
+      <DependentUpon>ComponentsPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\OptionsPages\CredentialsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -876,6 +886,9 @@
     <EmbeddedResource Include="UI\Forms\OptionsPages\AppearancePage.resx">
       <DependentUpon>AppearancePage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\BackupPage.resx">
+      <DependentUpon>BackupPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
       <DependentUpon>ConnectionsPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -1088,6 +1101,7 @@
     <None Include="Resources\Tiles\VisualElements_150.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Resources\Backup_Icon.ico" />
     <Content Include="Icons\Infrastructure.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

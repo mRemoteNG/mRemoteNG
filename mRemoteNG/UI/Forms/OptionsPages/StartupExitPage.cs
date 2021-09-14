@@ -23,7 +23,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            chkSaveConsOnExit.Text = Language.SaveConsOnExit;
             chkReconnectOnStart.Text = Language.ReconnectAtStartup;
             chkSingleInstance.Text = Language.AllowOnlySingleInstance;
             chkStartMinimized.Text = Language.StartMinimized;
@@ -33,7 +32,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            Settings.Default.SaveConsOnExit = chkSaveConsOnExit.Checked;
             Settings.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
             Settings.Default.SingleInstance = chkSingleInstance.Checked;
             Settings.Default.StartMinimized = chkStartMinimized.Checked;
@@ -42,7 +40,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void StartupExitPage_Load(object sender, EventArgs e)
         {
-            chkSaveConsOnExit.Checked = Settings.Default.SaveConsOnExit;
             chkReconnectOnStart.Checked = Settings.Default.OpenConsFromLastSession;
             chkSingleInstance.Checked = Settings.Default.SingleInstance;
             chkStartMinimized.Checked = Settings.Default.StartMinimized;

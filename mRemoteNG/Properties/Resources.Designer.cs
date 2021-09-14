@@ -8,7 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG.Properties {
+namespace mRemoteNG {
+    using System;
+    
+    
     using System;
     
     
