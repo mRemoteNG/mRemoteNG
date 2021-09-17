@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.PowerShell
 {

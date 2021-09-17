@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,6 +9,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {

@@ -5,6 +5,7 @@ using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Tree

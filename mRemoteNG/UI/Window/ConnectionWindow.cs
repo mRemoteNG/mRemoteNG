@@ -18,6 +18,7 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Window
 {

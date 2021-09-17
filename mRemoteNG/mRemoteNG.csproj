@@ -516,9 +516,6 @@
     <Compile Include="UI\Forms\OptionsPages\BackupPage.Designer.cs">
       <DependentUpon>BackupPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Forms\OptionsPages\ComponentsPage.Designer.cs">
-      <DependentUpon>ComponentsPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Forms\OptionsPages\CredentialsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

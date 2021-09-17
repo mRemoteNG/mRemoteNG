@@ -9,7 +9,8 @@
 //------------------------------------------------------------------------------
 
 
-namespace mRemoteNG.Resources.Language{
+namespace mRemoteNG.Resources.Language
+{
     using System;
     
     

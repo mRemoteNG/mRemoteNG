@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Initial work:
  * This work (Modern Encryption of a String C#, by James Tuley), 
  * identified by James Tuley, is free of known copyright restrictions.
@@ -16,6 +16,7 @@ using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+using mRemoteNG.Resources.Language;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 

@@ -18,6 +18,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection
 {

@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 

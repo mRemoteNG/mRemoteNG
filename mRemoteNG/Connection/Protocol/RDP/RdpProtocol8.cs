@@ -5,6 +5,7 @@ using AxMSTSCLib;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using MSTSCLib;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {

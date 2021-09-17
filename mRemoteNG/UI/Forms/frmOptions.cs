@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Configuration;
 using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -82,7 +83,7 @@ namespace mRemoteNG.UI.Forms
                 {typeof(SecurityPage).Name, new SecurityPage {Dock = DockStyle.Fill}},
                 {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}},
                 {typeof(BackupPage).Name, new BackupPage {Dock = DockStyle.Fill}},
-                {typeof(ComponentsPage).Name, new ComponentsPage {Dock = DockStyle.Fill}},
+                //{typeof(ComponentsPage).Name, new ComponentsPage {Dock = DockStyle.Fill}},
             };
         }
 

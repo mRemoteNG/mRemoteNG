@@ -3,6 +3,7 @@ using System.Management;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.App.Initialization
 {

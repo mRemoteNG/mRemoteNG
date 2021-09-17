@@ -5,6 +5,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.TaskDialog;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI
 {

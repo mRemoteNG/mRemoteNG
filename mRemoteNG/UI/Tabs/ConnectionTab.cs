@@ -9,6 +9,7 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Properties;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Tabs
 {
