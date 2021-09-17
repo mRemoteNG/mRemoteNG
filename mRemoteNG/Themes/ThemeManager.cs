@@ -1,4 +1,4 @@
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -166,18 +166,6 @@ namespace mRemoteNG.Themes
                     }
 
                     //Load the embedded themes, extended palettes are taken from the vs2015 themes, trying to match the color theme
-
-                    // 2003
-                    var vs2003 = new ThemeInfo("vs2003", new VS2003Theme(), "",
-                                               VisualStudioToolStripExtender.VsVersion.Vs2003,
-                                               ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
-                    themes.Add(vs2003.Name, vs2003);
-
-                    // 2005
-                    var vs2005 = new ThemeInfo("vs2005", new VS2005Theme(), "",
-                                               VisualStudioToolStripExtender.VsVersion.Vs2005,
-                                               ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
-                    themes.Add(vs2005.Name, vs2005);
 
                     // 2012
                     var vs2012Light = new ThemeInfo("vs2012Light", new VS2012LightTheme(), "",
