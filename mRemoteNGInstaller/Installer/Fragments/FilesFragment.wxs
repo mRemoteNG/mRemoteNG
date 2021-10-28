@@ -38,6 +38,9 @@
             <Component Id="cmp68D767AEEE842A722AECA2C65D34BE2E" Directory="INSTALLDIR" Guid="*">
                 <File Id="filCC34B59260E76EC7532DD3E23A541355" KeyPath="yes" Source="$(var.HarvestPath)\BouncyCastle.Crypto.dll" />
             </Component>
+            <Component Id="cmpEE32B1AC9DA9B3A57F47CD636A1E633F" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil7DF025433894C38CD5C38688098A6310" KeyPath="yes" Source="$(var.HarvestPath)\buildenv.tmp" />
+            </Component>
             <Component Id="cmpC80350D124B50BBA8B15EDA2785513AF" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil92BB80A0015DEE1D4E207A2B29A3F2DC" KeyPath="yes" Source="$(var.HarvestPath)\CHANGELOG.md" />
             </Component>
@@ -53,6 +56,7 @@
             <Component Id="cmp047A6C5EFDBE1E198D8108B0C9429F8D" Directory="INSTALLDIR" Guid="*">
                 <File Id="filA9AF50F71ECD31FA1809BBC6AD35FBD1" KeyPath="yes" Source="$(var.HarvestPath)\CREDITS.md" />
             </Component>
+            
             <Component Id="cmp19EC39A721B3368567C267C98B3A70BF" Directory="INSTALLDIR" Guid="*">
                 <File Id="filF4F0A4E8F055AEBFE89D956290E642D9" KeyPath="yes" Source="$(var.HarvestPath)\Google.Protobuf.dll" />
             </Component>
@@ -87,6 +91,9 @@
             <Component Id="cmp8958F261F3D830DE65AF9C2710549C88" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil75F94B8520D436392BD616D18AF233AF" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.exe.config" />
             </Component>
+            <Component Id="cmpE14CA37FA2B4B500665FA152F0B200E4" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil57C1DE7CA5F7F61A48FE0A552D501251" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.log" />
+            </Component>
             <Component Id="cmp67313C6B4CE3487E9A8165EFFE369D16" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil5F0524AF62166FF3C4DAE07F1113C0D9" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.pdb" />
             </Component>
@@ -112,6 +119,7 @@
             <Component Id="cmp2C1BBE07A32C31BCF92912D601AD4864" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil357AF76EEBAC3CE454CB549E0C337C8A" KeyPath="yes" Source="$(var.HarvestPath)\ObjectListView.dll" />
             </Component>
+            
             
             <Component Id="cmp77B4A071D4D4E81445BE03B0AD534C90" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil4560734A3E7B53FF55D3B92F7AFD23E3" KeyPath="yes" Source="$(var.HarvestPath)\README.md" />
@@ -176,8 +184,8 @@
             <Component Id="cmpCB1387F6E09FEBEA8084E857787F33EA" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil09E77F330B2D23A6F306099688F7A9C3" KeyPath="yes" Source="$(var.HarvestPath)\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll" />
             </Component>
-            <Component Id="cmp04C7B02DC48478EC5E6A10E077E158D8" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil158BE3EAEBC8F7867B09DCE2FB037B31" KeyPath="yes" Source="$(var.HarvestPath)\Zstandard.Net.dll" />
+            <Component Id="cmp643F6BC02D559138788B66788747B74E" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil9987BED6E61406EB6AADC003B6E8A6B9" KeyPath="yes" Source="$(var.HarvestPath)\ZstdNet.dll" />
             </Component>
             <Component Id="cmp46A31C5C8F6C32D00394B76FC10B878C" Directory="dir82972532CA27BEF6B972C3A142E19BC1" Guid="*">
                 <File Id="fil1BBD62B8CC672D965BD8B093F72F7E70" KeyPath="yes" Source="$(var.HarvestPath)\cs-CZ\mRemoteNG.resources.dll" />

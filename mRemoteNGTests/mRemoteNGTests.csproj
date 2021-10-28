@@ -322,7 +322,7 @@
       <Version>4.7.1221</Version>
     </PackageReference>
     <PackageReference Include="ReportGenerator">
-      <Version>4.8.12</Version>
+      <Version>4.8.13</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
       <Version>5.0.0</Version>
