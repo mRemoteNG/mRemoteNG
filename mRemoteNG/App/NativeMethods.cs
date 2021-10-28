@@ -71,6 +71,12 @@ namespace mRemoteNG.App
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
 
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        internal static extern bool ChangeClipboardChain(
+            IntPtr hWndRemove,  // handle to window to remove
+            IntPtr hWndNewNext  // handle to next window
+        );
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern bool SetForegroundWindow(IntPtr hWnd);
 

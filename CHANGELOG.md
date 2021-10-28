@@ -39,6 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1465: REGRESSION: Smart Cards redirection to Remote Desktop not working
 - #1337: Unhandled exception after closing mRemoteNG
 - #359: Making a VNC connection to an unreachable host causes the application to not respond for 20-30 seconds
+- #618: Do not break the Windows Clipboard Chain when exiting.
 
 ## [1.77.1] - 2019-09-02
 ### Added
