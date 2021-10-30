@@ -3,6 +3,7 @@ using System.ComponentModel;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Tree.Root

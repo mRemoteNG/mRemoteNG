@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using mRemoteNG.Tools;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.VNC
 {

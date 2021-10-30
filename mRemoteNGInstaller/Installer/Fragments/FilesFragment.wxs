@@ -112,6 +112,9 @@
             <Component Id="cmp8958F261F3D830DE65AF9C2710549C88" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil75F94B8520D436392BD616D18AF233AF" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.exe.config" />
             </Component>
+            <Component Id="cmpE14CA37FA2B4B500665FA152F0B200E4" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil57C1DE7CA5F7F61A48FE0A552D501251" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.log" />
+            </Component>
             <Component Id="cmp67313C6B4CE3487E9A8165EFFE369D16" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil5F0524AF62166FF3C4DAE07F1113C0D9" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.pdb" />
             </Component>
@@ -149,6 +152,7 @@
             <Component Id="cmp2C1BBE07A32C31BCF92912D601AD4864" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil357AF76EEBAC3CE454CB549E0C337C8A" KeyPath="yes" Source="$(var.HarvestPath)\ObjectListView.dll" />
             </Component>
+            
             
             <Component Id="cmp77B4A071D4D4E81445BE03B0AD534C90" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil4560734A3E7B53FF55D3B92F7AFD23E3" KeyPath="yes" Source="$(var.HarvestPath)\README.md" />

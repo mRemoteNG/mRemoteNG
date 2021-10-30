@@ -30,6 +30,7 @@ using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Controls;
 using Settings = mRemoteNG.Properties.Settings;
+using mRemoteNG.Resources.Language;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -453,6 +454,7 @@ namespace mRemoteNG.UI.Forms
                 }
             }
 
+            NativeMethods.ChangeClipboardChain(Handle, _fpChainedWindowHandle);
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 
             Shutdown.StartUpdate();
@@ -582,9 +584,25 @@ namespace mRemoteNG.UI.Forms
                         _clipboardChangedEvent?.Invoke();
                         break;
                     case NativeMethods.WM_CHANGECBCHAIN:
-                        //Send to the next window
-                        NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
-                        _fpChainedWindowHandle = m.LParam;
+                        // When a clipboard viewer window receives the WM_CHANGECBCHAIN message, 
+                        // it should call the SendMessage function to pass the message to the 
+                        // next window in the chain, unless the next window is the window 
+                        // being removed. In this case, the clipboard viewer should save 
+                        // the handle specified by the lParam parameter as the next window in the chain. 
+                        //
+                        // wParam is the Handle to the window being removed from 
+                        // the clipboard viewer chain 
+                        // lParam is the Handle to the next window in the chain 
+                        // following the window being removed. 
+                        if (m.WParam == _fpChainedWindowHandle) {
+                            // If wParam is the next clipboard viewer then it
+                            // is being removed so update pointer to the next
+                            // window in the clipboard chain
+                            _fpChainedWindowHandle = m.LParam;
+                        } else {
+                            //Send to the next window
+                            NativeMethods.SendMessage(_fpChainedWindowHandle, m.Msg, m.LParam, m.WParam);
+                        }
                         break;
                 }
             }

@@ -9,6 +9,7 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
+using mRemoteNG.Resources.Language;
 using Message = mRemoteNG.Messages.Message;
 
 namespace mRemoteNG.UI.Window

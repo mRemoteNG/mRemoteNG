@@ -8,6 +8,7 @@ using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 using mRemoteNG.Properties;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {

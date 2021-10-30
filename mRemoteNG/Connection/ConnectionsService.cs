@@ -18,6 +18,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection
 {
@@ -36,6 +37,7 @@ namespace mRemoteNG.Connection
         public string ConnectionFileName { get; private set; }
         public RemoteConnectionsSyncronizer RemoteConnectionsSyncronizer { get; set; }
         public DateTime LastSqlUpdate { get; set; }
+		public DateTime LastFileUpdate { get; set; }
 
         public ConnectionTreeModel ConnectionTreeModel { get; private set; }
 

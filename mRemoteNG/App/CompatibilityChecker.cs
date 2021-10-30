@@ -7,6 +7,7 @@ using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.App
 {

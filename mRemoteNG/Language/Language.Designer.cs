@@ -8,7 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG {
+
+namespace mRemoteNG.Resources.Language
+{
     using System;
     
     
@@ -1151,6 +1153,60 @@ namespace mRemoteNG {
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t set default port! ähnelt.
+        /// </summary>
+        internal static string ConnectionsAndConfig {
+            get {
+                return ResourceManager.GetString("ConnectionsAndConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyDaily {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyDaily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never backup connections.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyNever {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyNever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On Edit.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyOnEdit {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyOnEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On Exit.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyOnExit {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyOnExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekly.
+        /// </summary>
+        internal static string ConnectionsBackupFrequencyWeekly {
+            get {
+                return ResourceManager.GetString("ConnectionsBackupFrequencyWeekly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t set default port!.
         /// </summary>
         internal static string ConnectionSetDefaultPortFailed {
             get {
@@ -5497,7 +5553,52 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Support Forum ähnelt.
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        internal static string strBackup {
+            get {
+                return ResourceManager.GetString("strBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        internal static string strBrowse {
+            get {
+                return ResourceManager.GetString("strBrowse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection Backup Frequency.
+        /// </summary>
+        internal static string strConnectionBackupFrequency {
+            get {
+                return ResourceManager.GetString("strConnectionBackupFrequency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of backups.
+        /// </summary>
+        internal static string strConnectionsBackupMaxCount {
+            get {
+                return ResourceManager.GetString("strConnectionsBackupMaxCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location of connection file backup.
+        /// </summary>
+        internal static string strConnectionsBackupPath {
+            get {
+                return ResourceManager.GetString("strConnectionsBackupPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support Forum.
         /// </summary>
         internal static string SupportForum {
             get {

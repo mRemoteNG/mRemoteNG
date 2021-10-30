@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.Themes;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {

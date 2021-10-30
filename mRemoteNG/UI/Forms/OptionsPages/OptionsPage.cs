@@ -64,4 +64,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ResumeLayout(false);
         }
     }
+	internal class DropdownList
+    {
+        public int Index { get; set; }
+        public string DisplayString { get; set; }
+
+        public DropdownList(int argIndex, string argDisplay)
+        {
+            Index = argIndex;
+            DisplayString = argDisplay;
+        }
+    }
 }

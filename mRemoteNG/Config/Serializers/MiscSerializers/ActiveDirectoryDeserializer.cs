@@ -9,6 +9,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
