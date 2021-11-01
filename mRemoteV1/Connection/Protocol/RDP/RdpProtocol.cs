@@ -355,9 +355,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
-						    _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username;
-						    _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password;
-						    _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo?.Domain;
+							var userName = GetUserName(_connectionInfo?.Username ?? "");
+							var domain = GetDomain(_connectionInfo?.Domain ?? "");
+
+							_rdpClient.TransportSettings2.GatewayUsername = userName;
+							_rdpClient.TransportSettings2.GatewayDomain = domain;
+							_rdpClient.TransportSettings2.GatewayPassword = GetPassword((_connectionInfo?.Password ?? ""), userName, domain, _connectionInfo.Hostname);
 						}
 						else if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
 						{
@@ -365,11 +368,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						}
 						else
 						{
-                            _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.RDGatewayUsername;
-                            _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.RDGatewayPassword;
-                            _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.RDGatewayDomain;
-                            _rdpClient.TransportSettings2.GatewayCredSharing = 0;
-                        }
+							var userName = GetUserName(_connectionInfo.RDGatewayUsername);
+							var domain = GetDomain(_connectionInfo.RDGatewayDomain);
+
+							_rdpClient.TransportSettings2.GatewayUsername = userName;
+							_rdpClient.TransportSettings2.GatewayDomain = domain;
+							_rdpClient.TransportSettings2.GatewayPassword = GetPassword(_connectionInfo.RDGatewayPassword, userName, domain, _connectionInfo.Hostname);
+							_rdpClient.TransportSettings2.GatewayCredSharing = 0;
+						}
 					}
 				}
 			}
@@ -416,7 +422,60 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strRdpSetConsoleSessionFailed, ex);
 			}
 		}
-				
+
+		private string GetUserName(string userName)
+		{
+			if (string.IsNullOrEmpty(userName))
+			{
+				if (Settings.Default.EmptyCredentials == "windows")
+				{
+					userName = Environment.UserName;
+				}
+				else if (Settings.Default.EmptyCredentials == "custom" || Settings.Default.EmptyCredentials == "admpwd")
+				{
+					userName = Settings.Default.DefaultUsername;
+				}
+			}
+			return userName;
+		}
+		private string GetDomain(string domain)
+		{
+			if (string.IsNullOrEmpty(domain))
+			{
+				if (Settings.Default.EmptyCredentials == "windows")
+				{
+					domain = Environment.UserDomainName;
+				}
+				else if (Settings.Default.EmptyCredentials == "custom" || Settings.Default.EmptyCredentials == "admpwd")
+				{
+					domain = Settings.Default.DefaultDomain;
+				}
+			}
+			return domain;
+		}
+		private string GetPassword(string password, string userName, string domain, string host)
+		{
+			if (string.IsNullOrEmpty(password))
+			{
+				if (Settings.Default.EmptyCredentials == "custom")
+				{
+					if (Settings.Default.DefaultPassword != "")
+					{
+						var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+						password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+					}
+				}
+				if (Settings.Default.EmptyCredentials == "admpwd")
+				{
+					if (domain == ".")
+						password = AdmPwd.PDSUtils.PdsWrapper.GetPassword(null, host, AdmPwd.Types.IdentityType.LocalComputerAdmin, false, false).Password;
+					else
+						password = AdmPwd.PDSUtils.PdsWrapper.GetPassword(domain, userName, AdmPwd.Types.IdentityType.ManagedDomainAccount, false, false).Password;
+				}
+			}
+			return password;
+		}
+
 		private void SetCredentials()
 		{
 			try
@@ -426,57 +485,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					return;
 				}
 
-			    var userName = _connectionInfo?.Username ?? "";
-			    var password = _connectionInfo?.Password ?? "";
-			    var domain = _connectionInfo?.Domain ?? "";
-						
-				if (string.IsNullOrEmpty(userName))
-				{
-					if (Settings.Default.EmptyCredentials == "windows")
-					{
-						_rdpClient.UserName = Environment.UserName;
-					}
-					else if (Settings.Default.EmptyCredentials == "custom")
-					{
-						_rdpClient.UserName = Settings.Default.DefaultUsername;
-					}
-				}
-				else
-				{
-					_rdpClient.UserName = userName;
-				}
-						
-				if (string.IsNullOrEmpty(password))
-				{
-					if (Settings.Default.EmptyCredentials == "custom")
-					{
-						if (Settings.Default.DefaultPassword != "")
-						{
-                            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
-						}
-					}
-				}
-				else
-				{
-					_rdpClient.AdvancedSettings2.ClearTextPassword = password;
-				}
-						
-				if (string.IsNullOrEmpty(domain))
-				{
-					if (Settings.Default.EmptyCredentials == "windows")
-					{
-						_rdpClient.Domain = Environment.UserDomainName;
-					}
-					else if (Settings.Default.EmptyCredentials == "custom")
-					{
-						_rdpClient.Domain = Settings.Default.DefaultDomain;
-					}
-				}
-				else
-				{
-					_rdpClient.Domain = domain;
-				}
+				var userName = GetUserName(_connectionInfo?.Username ?? "");
+				var domain = GetDomain(_connectionInfo?.Domain ?? "");
+
+				_rdpClient.Domain = domain;
+				_rdpClient.UserName = userName;
+				_rdpClient.AdvancedSettings2.ClearTextPassword = GetPassword((_connectionInfo?.Password ?? ""), userName, domain, _connectionInfo.Hostname);
+
 			}
 			catch (Exception ex)
 			{

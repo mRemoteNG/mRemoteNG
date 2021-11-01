@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Management interface-->
+<PdsConfigWrapper>
+  <GetPds>
+    <summary>
+      Returns list of PDS discovered either form DNS or from GPO
+    </summary>
+    <returns>Returns list of PDS instances discovered</returns>
+    <remarks>
+      <para>No specific permissions required</para>
+      <para>Call is not audited</para>
+    </remarks>
+  </GetPds>
+  <GetSupportedForest>
+    <summary>
+      Calls PDS to get list of supported forests as configured in PDS configuration file.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to query list of supported forests.
+    </param>
+    <returns>List of names of AD forests as known by given PDS instance (optionaly with connection credentials and id of enryption key that is used to protect them is configuration file), or null if no specific AD forests are configured and PDS just covers local AD forest.</returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </GetSupportedForest>
+  <AddSupportedForest>
+    <summary>
+      Calls PDS to add new AD forest to list of supported forests.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance that will be target of the operation. If operating more intances of PDS, supported AD forest must be added to each of them, so as PDS configuration is consistent across all instances.
+    </param>
+    <param name="Forest">
+      Specifies parameters of the newly supported forest
+    </param>
+    <returns>Newly added supported forest.</returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </AddSupportedForest>
+  <SetSupportedForest>
+    <summary>
+      Calls PDS to update supported forest parameters (typically connection credentials).
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to perform the operation on. If operating more intances of PDS, update must be performed on each of them to ensure consistency of configuration across all instances of PDS.
+    </param>
+    <param name="Forest">
+      Specifies parameters to be updated on the forest
+    </param>
+    <returns>Updated supported forest.</returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </SetSupportedForest>
+  <RemoveSupportedForest>
+    <summary>
+      Calls PDS to add remove AD forest from list of supported forests.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to remove the forest from list of supported forests. If operating more intances of PDS, supported AD forest must be removed from each of them.
+    </param>
+    <param name="Forest">
+      Specifies parameters of the removed forest. Only DNS name of Forest is used to identify forest to be removed.
+    </param>
+    <returns>Removed forest.</returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </RemoveSupportedForest>
+  <AddSidMapping>
+    <summary>
+      Calls PDS to add maping of security principal from untrusted forest to security principal from trusted forest.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with. If operating more intances of PDS, SID mapping must be added to each of them to ensure configuration consistency.
+    </param>
+    <param name="Mapping">
+      Specifies parameters of the SID mapping.
+    </param>
+    <returns></returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </AddSidMapping>
+  <UpdateSidMapping>
+    <summary>
+      Calls PDS to modify maping of security principal from untrusted forest to security principal from trusted forest.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with. If operating more intances of PDS, SID mapping must be updated on each of them to ensure configuration consistency.
+    </param>
+    <param name="Mapping">
+      Specifies parameters of the SID mapping.
+    </param>
+    <returns></returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </UpdateSidMapping>
+  <GetSidMapping>
+    <summary>
+      Calls PDS to get configured mapings of security principal from untrusted forest to security principal from trusted forest.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with.
+    </param>
+    <returns>List of configured SID mappings</returns>
+    <remarks>
+      <para>Can be called by any authenticated user</para>
+      <para>Call is not audited</para>
+    </remarks>
+  </GetSidMapping>
+  <RemoveSidMapping>
+    <summary>
+      Calls PDS to add remove SID mappings from list of mappings.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to remove the mapping from. If operating more intances of PDS, mapping must be removed from each of them.
+    </param>
+    <param name="PrimarySid">
+      Specifies Primary SID of mapping to be removed.
+    </param>
+    <returns></returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </RemoveSidMapping>
+  <AddManagedAccountsContainer>
+    <summary>
+      Calls PDS to add AD container with accounts with automatically managed password.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with. If operating more intances of PDS, container must be added to configuration of each of them to ensure configuration consistency.
+    </param>
+    <param name="Container">
+      Specifies parameters of password for accounts located in AD container.
+    </param>
+    <returns></returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </AddManagedAccountsContainer>
+  <GetManagedAccountsContainer>
+    <summary>
+      Calls PDS to retrieve configuration of AD containers with accounts with automatically managed password.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with.
+    </param>
+    <returns>List of managed domain acocunts containers as defined in PDS configuration file.</returns>
+    <remarks>
+      <para>Can be called by any authenticated user</para>
+      <para>Call is not audited</para>
+    </remarks>
+  </GetManagedAccountsContainer>
+  <SetManagedAccountsContainer>
+    <summary>
+      Calls PDS to update configuration of AD container with accounts with automatically managed password.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with. If operating more intances of PDS, container must be updated on each of them to ensure configuration consistency.
+    </param>
+    <param name="Container">
+      Specifies parameters of password for accounts located in given AD container.
+    </param>
+    <returns></returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </SetManagedAccountsContainer>
+  <RemoveManagedAccountsContainer>
+    <summary>
+      Calls PDS to remove AD container with accounts with automatically managed password from PDS configuration.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with. If operating more intances of PDS, container must be removed from each of them to ensure configuration consistency.
+    </param>
+    <param name="DN">
+      Specifies distinguishedName of container to be removed from configuration.
+    </param>
+    <returns></returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </RemoveManagedAccountsContainer>
+  <TransferPdsAdminRole>
+    <summary>
+      Transfers PDS Admin role to security principal (user or group)
+    </summary>
+    <param name="Pds">
+      <para>Identifies PDS instance to work with.</para>
+      <para>Important: If operating more intances of PDS, configuration change must be performed on each of them to ensure configuration consistency.</para>
+    </param>
+    <param name="NewRoleHolder">
+      Name of new holder of PDS Admin role. Should include domain name.
+    </param>
+    <returns></returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </TransferPdsAdminRole>
+  <UpdateManagedAccountsParameters>
+    <summary>
+      Updates global configuration of managed domain accounts processing.<br/>
+      Note: Currently, only global parameter supported is interval of scanning of managed domain accounts for password expiration.
+    </summary>
+    <param name="Pds">
+      <para>Identifies PDS instance to work with.</para>
+      <para>Important: If operating more intances of PDS, configuration change must be performed on each of them to ensure configuration consistency.</para>
+    </param>
+    <param name="ManagementInterval">
+      Interval of scanning of managed domain accounts for password expiration.
+    </param>
+    <returns></returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </UpdateManagedAccountsParameters>
+  <GetManagedAccountsParameters>
+    <summary>
+      Returns global configuration of managed domain accounts processing.<br/>
+      Note: Currently, only global parameter supported is interval of scanning of managed domain accounts for password expiration.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with.
+    </param>
+    <returns>Global configuration of managed domain accounts processing.</returns>
+    <remarks>
+    </remarks>
+  </GetManagedAccountsParameters>
+  <GetDnsParameters>
+    <summary>
+      Returns parameters of DNS registration for PDS autodiscover SRV records.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with.
+    </param>
+    <returns>
+      <see cref="DnsParameters"/> object.
+    </returns>
+    <remarks>
+    </remarks>
+  </GetDnsParameters>
+  <UpdateDnsParameters>
+    <summary>
+      Updates parameters of DNS registration for PDS autodiscover SRV records.
+    </summary>
+    <param name="Pds">
+      <para>Identifies PDS instance to work with.</para>
+      <para>Important: If operating more intances of PDS, configuration change must be performed on each of them to ensure configuration consistency.</para>
+    </param>
+    <param name="Priority">Priority of SRV record. Null means default, which is 100.</param>
+    <param name="RegistrationInterval">How often PDS service re-registers autodiscover record to prevent its expiration. Null means default, which is 86400 seconds (1 day).</param>
+    <param name="Ttl">Time-to-live for registered SRV record. Null means default, which is 1200 seconds (20 minutes)</param>
+    <param name="UnregisterOnShutdown">Whether or not the SRV record shall be unregistered then services stops, to prevent autodiscover records pointing to non-operating PDS instance. Null means default, which is 'true'</param>
+    <param name="Weight">Weight of registered SRV record.<br/>
+    Note: Weight is not used by the solution.
+    </param>
+    <returns>
+    </returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </UpdateDnsParameters>
+  <UpdateAccessControlParameters>
+    <summary>
+      Updates parameters of access control process for password reads and resets.
+    </summary>
+    <param name="Pds">
+      <para>Identifies PDS instance to work with.</para>
+      <para>Important: If operating more intances of PDS, configuration change must be performed on each of them to ensure configuration consistency.</para>
+    </param>
+    <param name="HonorAllExtendedRightsPermission">Whether 'All extended rights' permission also includes 'Read password' and 'Reset password' permission.Null means default, which is 'false'.</param>
+    <param name="HonorFullControlPermission">Whether 'Full control' permission also includes 'Read password' and 'Reset password' permission.Null means default, which is 'false'.</param>
+    <param name="HonorLocalGroupsFromRemoteComputerDomain">
+      <para>
+        Whether PDS also evaluates membership in local groups from remote domain.
+      </para>
+      <para>
+        Consider the following scenario:
+        <list>
+          <item>PDS is installed in forest domain A</item>
+          <item>Computer account X we want know admin password for is in forest domain B</item>
+          <item>User U who wants to know admin password for computer X is also in forest domain B</item>
+          <item>User U is member of Domain local group DLG</item>
+          <item>Permission to read the admin password for computer X is delegated to group DLG</item>
+        </list>
+        In this case, when PDS is performing access check, it normally does NOT see user U being member of group DLG (because membership in Domain Local groups is not propagated to other domains in forest), and because of that, it replies with AccessDenied error. Setting this parameter to true makes PDS to perform direct lookup for local group membership of user in his home domain to make sure that complete membership is evaluated. 
+        This additional lookup consumes PDS service resources and requires direct connection between PDS and domain controller of user's domain, so delegation using domain Local groups in multi-forest domains should be avoided.
+      </para>
+    </param>
+    <param name="MandatoryGroupSids">List of Security Identifiers (SIDs) that caller additionally must be member of for calls to password reads/resets to succeed. Membership in such groups is then additional gate that allows to perform active operations. If multiple groups specified, user must be member of at least 1 of them. This helps implement additional levels of access control, such as JIT of Authentication Mechanism Assurance (AMA)</param>
+    <returns>
+    </returns>
+    <remarks>
+      <para>PDS Admin role is required to successfully call this method</para>
+      <para>Call is audited</para>
+    </remarks>
+  </UpdateAccessControlParameters>
+  <GetAccessControlsParameters>
+    <summary>
+      Returns parameters of access control process for password reads and resets.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with.
+    </param>
+    <returns>
+      <see cref="AccessControlParameters"/> object.
+    </returns>
+    <remarks>
+    </remarks>
+  </GetAccessControlsParameters>
+  <GetLicenseParameters>
+    <summary>
+      Returns parameters of current license, including path to license file.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with.
+    </param>
+    <returns>
+      <see cref="LicenseParameters"/> object.
+    </returns>
+    <remarks>
+    </remarks>
+  </GetLicenseParameters>
+  <UpdateLicenseFilePath>
+    <summary>
+      Updates path to license file.
+    </summary>
+    <param name="Pds">
+      Identifies PDS instance to work with.
+    </param>
+    <param name="FilePath">
+      Absolute or relative path to license file that Pds instance shall use.
+    </param>
+    <returns>
+      <see cref="LicenseParameters"/> object.
+    </returns>
+    <remarks>
+    </remarks>
+  </UpdateLicenseFilePath>
+
+</PdsConfigWrapper>

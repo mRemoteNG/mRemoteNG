@@ -68,7 +68,8 @@ namespace mRemoteNG.UI.Controls.Base
             Color fore;
             Color glyph;
             Color checkBorder;
- 
+            if (_themeManager.ActiveTheme == null)
+                return;
             var back = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
             if (Enabled)
             {

@@ -182,8 +182,24 @@ namespace mRemoteNG.Tools
                     replacement = _connectionInfo.Password;
                     if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "custom")
                         replacement = new LegacyRijndaelCryptographyProvider()
-                                        .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
-                                                                    Runtime.EncryptionKey);
+                            .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
+                                     Runtime.EncryptionKey);
+                    if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "admpwd")
+                    {
+                        if (_connectionInfo.Domain == ".")
+                            replacement = AdmPwd.PDSUtils.PdsWrapper.GetPassword(null, _connectionInfo.Hostname, AdmPwd.Types.IdentityType.LocalComputerAdmin, false, false).Password;
+                        else
+                        {
+                            var userName = _connectionInfo.Username;
+                            if (string.IsNullOrEmpty(userName))
+                                if (Settings.Default.EmptyCredentials == "windows")
+                                    userName = Environment.UserName;
+                                else if (Settings.Default.EmptyCredentials == "custom")
+                                    userName = Settings.Default.DefaultUsername;
+
+                            replacement = AdmPwd.PDSUtils.PdsWrapper.GetPassword(_connectionInfo.Domain, userName, AdmPwd.Types.IdentityType.ManagedDomainAccount, false, false).Password;
+                        }
+                    }
                     break;
                 case "domain":
                     replacement = _connectionInfo.Domain;

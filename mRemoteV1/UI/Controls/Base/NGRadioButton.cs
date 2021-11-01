@@ -78,6 +78,8 @@ namespace mRemoteNG.UI.Controls.Base
             // Init 
             var g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
+            if (_themeManager.ActiveTheme == null)
+                return;
 
             var fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
             var outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border");
