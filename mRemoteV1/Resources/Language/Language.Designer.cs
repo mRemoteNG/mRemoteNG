@@ -2002,7 +2002,7 @@ namespace mRemoteNG {
         /// <summary>
         ///   Looks up a localized string similar to The Windows security setting, &quot;System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing&quot;, is enabled. 
         ///
-        ///See the Microsoft Support article at http://support.microsoft.com/kb/811833 for more information.
+        ///   See the Microsoft Support article at http://support.microsoft.com/kb/811833 for more information.
         ///
         ///{0} is not fully FIPS compliant. Click OK to proceed at your own discretion, or Cancel to Exit..
         /// </summary>
