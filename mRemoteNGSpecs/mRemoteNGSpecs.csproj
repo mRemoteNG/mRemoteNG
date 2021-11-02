@@ -73,7 +73,7 @@
       <Version>16.0.1</Version>
     </PackageReference>
     <PackageReference Include="Google.Protobuf">
-      <Version>3.19.0</Version>
+      <Version>3.19.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
