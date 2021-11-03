@@ -6,6 +6,10 @@
 	This is a fork of <a href="https://github.com/mRemoteNG/mRemoteNG">mRemoteNG</a> (develop branch). It contains an interface to the Secret Server API so mRemote can connect to Thycotic Secret Server and fetch credentials. No credentials are therefore stored on the local host, which is a great improvement to security. This fork comes without support, but i will try to keep it updated once in a while.
 </p>
 
+## Update 2021-11-03
+merged latest changes from official repository
+added capability to access secret server api via SSO
+
 ## Features
 
 The only change to the original project is a connector to the Secret Server REST API.
@@ -29,6 +33,6 @@ happy mRemoting!
 ### Download
 
 If you can, please download the source and compile yourself. 
-If you need a portable binary, download it from <a href="https://web.tresorit.com/l/UDpGl#cOGSIV0fhPEafZJNatn31A">here</a>.
+If you need a portable binary, download it from <a href="https://web.tresorit.com/l/NKMfB#RWT93UKcSCNgYGhbSMgQMA">here</a>.
 
 
