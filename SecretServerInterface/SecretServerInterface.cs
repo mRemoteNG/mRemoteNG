@@ -20,11 +20,42 @@ namespace SecretServerInterface
             string authOrg = SSConnectionData.ssOrg;
             string url = SSConnectionData.ssUrl;
 
+            //using (var service = new SSWebServiceWinAuth.SSWinAuthWebService())
+            //{
+            //    // url where to retrieve secrets from
+            //    service.Url = "https://cred.domain.local/SecretServer/winauthwebservices/SSWinAuthWebService.asmx";
+
+            //    // try to authenticate to server
+            //    service.UseDefaultCredentials = true;
+                
+            //    var secret = service.GetSecret(secretID, false, null);
+
+
+            //    //var authResult = service.Authenticate(authUsername, authPassword, authOrg, authDomain);
+            //    //if (authResult.Errors.Count() > 0)
+            //    //{
+            //    //    throw new Exception($"authentication error: {authResult.Errors[0]}");
+            //    //}
+
+            //    //// set up the coderesponse structure
+            //    //SSWebService.CodeResponse[] codeResponses = new SSWebService.CodeResponse[1];
+            //    //codeResponses[0] = new SSWebService.CodeResponse();
+            //    //codeResponses[0].ErrorCode = "COMMENT";
+            //    //codeResponses[0].Comment = $"accessing secret from mRemote, username: {authUsername}";
+
+            //    //// fetch the secret
+            //    //var secret = service.GetSecret(authResult.Token, secretID, false, codeResponses);
+            //    //if (secret.Errors.Count() > 0)
+            //    //{
+            //    //    throw new Exception($"getSecret error {secret.Errors[0]}");
+            //    //}
+            //}
+
             using (var service = new SSWebService.SSWebService())
             {
                 // url where to retrieve secrets from
                 service.Url = url;
-
+                
                 // try to authenticate to server
                 var authResult = service.Authenticate(authUsername, authPassword, authOrg, authDomain);
                 if (authResult.Errors.Count() > 0)

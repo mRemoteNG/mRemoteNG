@@ -12,7 +12,7 @@ namespace SecretServerInterface.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -27,9 +27,19 @@ namespace SecretServerInterface.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://cred.domain.local/SecretServer/webservices/SSWebService.asmx")]
-        public string SecretServerInterface_local_sit_cred_SSWebService {
+        public string SecretServerInterface_SSWebService {
             get {
-                return ((string)(this["SecretServerInterface_local_sit_cred_SSWebService"]));
+                return ((string)(this["SecretServerInterface_SSWebService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://cred.sit.local/SecretServer/winauthwebservices/SSWinAuthWebService.asmx")]
+        public string SecretServerInterface_SSWinAuthWebService {
+            get {
+                return ((string)(this["SecretServerInterface_SSWinAuthWebService"]));
             }
         }
     }

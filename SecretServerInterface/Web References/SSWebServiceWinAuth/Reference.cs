@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace SecretServerInterface.SSWebService {
+namespace SecretServerInterface.SSWebServiceWinAuth {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -27,33 +27,34 @@ namespace SecretServerInterface.SSWebService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="SSWebServiceSoap", Namespace="urn:thesecretserver.com")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="SSWinAuthWebServiceSoap", Namespace="urn:thesecretserver.com")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(AuditAsOfSiteLog))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(FolderExtendedResultBase))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TrackChanges))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(GenericResult))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SqlScriptArgument2[]))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserScript[]))]
-    public partial class SSWebService : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class SSWinAuthWebService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback ApproveSecretAccessRequestOperationCompleted;
         
         private System.Threading.SendOrPostCallback DenySecretAccessRequestOperationCompleted;
         
-        private System.Threading.SendOrPostCallback AuthenticateOperationCompleted;
+        private System.Threading.SendOrPostCallback AddUserOperationCompleted;
         
-        private System.Threading.SendOrPostCallback ImpersonateUserOperationCompleted;
+        private System.Threading.SendOrPostCallback FolderCreateOperationCompleted;
         
-        private System.Threading.SendOrPostCallback AuthenticateRADIUSOperationCompleted;
+        private System.Threading.SendOrPostCallback FolderExtendedCreateOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetTokenIsValidOperationCompleted;
+        private System.Threading.SendOrPostCallback FolderExtendedGetOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback FolderExtendedUpdateOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback FolderExtendedGetNewOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetSecretLegacyOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetSecretOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetCheckOutStatusOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ChangePasswordOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetSecretsByFieldValueOperationCompleted;
         
@@ -65,8 +66,6 @@ namespace SecretServerInterface.SSWebService {
         
         private System.Threading.SendOrPostCallback SearchSecretsByExposedValuesOperationCompleted;
         
-        private System.Threading.SendOrPostCallback AddUserOperationCompleted;
-        
         private System.Threading.SendOrPostCallback SearchSecretsOperationCompleted;
         
         private System.Threading.SendOrPostCallback SearchSecretsLegacyOperationCompleted;
@@ -75,9 +74,13 @@ namespace SecretServerInterface.SSWebService {
         
         private System.Threading.SendOrPostCallback SearchSecretsByFolderLegacyOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ExpireSecretOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetFavoritesOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateIsFavoriteOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback CheckInOperationCompleted;
         
         private System.Threading.SendOrPostCallback AddSecretOperationCompleted;
         
@@ -97,45 +100,23 @@ namespace SecretServerInterface.SSWebService {
         
         private System.Threading.SendOrPostCallback VersionGetOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetCheckOutStatusOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetSecretAuditOperationCompleted;
+        
         private System.Threading.SendOrPostCallback FolderGetOperationCompleted;
         
         private System.Threading.SendOrPostCallback FolderUpdateOperationCompleted;
         
         private System.Threading.SendOrPostCallback FolderGetAllChildrenOperationCompleted;
         
-        private System.Threading.SendOrPostCallback FolderCreateOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback FolderExtendedCreateOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback FolderExtendedGetOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback FolderExtendedUpdateOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback FolderExtendedGetNewOperationCompleted;
-        
         private System.Threading.SendOrPostCallback SearchFoldersOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback DownloadFileAttachmentOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback DownloadFileAttachmentByItemIdOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback UploadFileAttachmentOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback UploadFileAttachmentByItemIdOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ExpireSecretOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SetCheckOutEnabledOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ImportXMLOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetSecretAuditOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback AddDependencyOperationCompleted;
         
         private System.Threading.SendOrPostCallback RemoveDependencyOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetDependenciesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AddDependencyOperationCompleted;
         
         private System.Threading.SendOrPostCallback CreateDependencyGroupForSecretOperationCompleted;
         
@@ -145,13 +126,23 @@ namespace SecretServerInterface.SSWebService {
         
         private System.Threading.SendOrPostCallback RemoveDependencyGroupForSecretOperationCompleted;
         
+        private System.Threading.SendOrPostCallback DownloadFileAttachmentOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback DownloadFileAttachmentByItemIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UploadFileAttachmentOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UploadFileAttachmentByItemIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ImportXMLOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SetCheckOutEnabledOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetDistributedEnginesOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetTicketSystemsOperationCompleted;
         
         private System.Threading.SendOrPostCallback AssignSiteOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback CheckInOperationCompleted;
         
         private System.Threading.SendOrPostCallback AddSecretCustomAuditOperationCompleted;
         
@@ -201,6 +192,8 @@ namespace SecretServerInterface.SSWebService {
         
         private System.Threading.SendOrPostCallback RestoreSSHCommandMenuOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ValidateTwoFactorOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetReportOperationCompleted;
         
         private System.Threading.SendOrPostCallback AddScriptOperationCompleted;
@@ -214,8 +207,8 @@ namespace SecretServerInterface.SSWebService {
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public SSWebService() {
-            this.Url = global::SecretServerInterface.Properties.Settings.Default.SecretServerInterface_SSWebService;
+        public SSWinAuthWebService() {
+            this.Url = global::SecretServerInterface.Properties.Settings.Default.SecretServerInterface_SSWinAuthWebService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -256,28 +249,28 @@ namespace SecretServerInterface.SSWebService {
         public event DenySecretAccessRequestCompletedEventHandler DenySecretAccessRequestCompleted;
         
         /// <remarks/>
-        public event AuthenticateCompletedEventHandler AuthenticateCompleted;
+        public event AddUserCompletedEventHandler AddUserCompleted;
         
         /// <remarks/>
-        public event ImpersonateUserCompletedEventHandler ImpersonateUserCompleted;
+        public event FolderCreateCompletedEventHandler FolderCreateCompleted;
         
         /// <remarks/>
-        public event AuthenticateRADIUSCompletedEventHandler AuthenticateRADIUSCompleted;
+        public event FolderExtendedCreateCompletedEventHandler FolderExtendedCreateCompleted;
         
         /// <remarks/>
-        public event GetTokenIsValidCompletedEventHandler GetTokenIsValidCompleted;
+        public event FolderExtendedGetCompletedEventHandler FolderExtendedGetCompleted;
+        
+        /// <remarks/>
+        public event FolderExtendedUpdateCompletedEventHandler FolderExtendedUpdateCompleted;
+        
+        /// <remarks/>
+        public event FolderExtendedGetNewCompletedEventHandler FolderExtendedGetNewCompleted;
         
         /// <remarks/>
         public event GetSecretLegacyCompletedEventHandler GetSecretLegacyCompleted;
         
         /// <remarks/>
         public event GetSecretCompletedEventHandler GetSecretCompleted;
-        
-        /// <remarks/>
-        public event GetCheckOutStatusCompletedEventHandler GetCheckOutStatusCompleted;
-        
-        /// <remarks/>
-        public event ChangePasswordCompletedEventHandler ChangePasswordCompleted;
         
         /// <remarks/>
         public event GetSecretsByFieldValueCompletedEventHandler GetSecretsByFieldValueCompleted;
@@ -295,9 +288,6 @@ namespace SecretServerInterface.SSWebService {
         public event SearchSecretsByExposedValuesCompletedEventHandler SearchSecretsByExposedValuesCompleted;
         
         /// <remarks/>
-        public event AddUserCompletedEventHandler AddUserCompleted;
-        
-        /// <remarks/>
         public event SearchSecretsCompletedEventHandler SearchSecretsCompleted;
         
         /// <remarks/>
@@ -310,10 +300,16 @@ namespace SecretServerInterface.SSWebService {
         public event SearchSecretsByFolderLegacyCompletedEventHandler SearchSecretsByFolderLegacyCompleted;
         
         /// <remarks/>
+        public event ExpireSecretCompletedEventHandler ExpireSecretCompleted;
+        
+        /// <remarks/>
         public event GetFavoritesCompletedEventHandler GetFavoritesCompleted;
         
         /// <remarks/>
         public event UpdateIsFavoriteCompletedEventHandler UpdateIsFavoriteCompleted;
+        
+        /// <remarks/>
+        public event CheckInCompletedEventHandler CheckInCompleted;
         
         /// <remarks/>
         public event AddSecretCompletedEventHandler AddSecretCompleted;
@@ -343,6 +339,12 @@ namespace SecretServerInterface.SSWebService {
         public event VersionGetCompletedEventHandler VersionGetCompleted;
         
         /// <remarks/>
+        public event GetCheckOutStatusCompletedEventHandler GetCheckOutStatusCompleted;
+        
+        /// <remarks/>
+        public event GetSecretAuditCompletedEventHandler GetSecretAuditCompleted;
+        
+        /// <remarks/>
         public event FolderGetCompletedEventHandler FolderGetCompleted;
         
         /// <remarks/>
@@ -352,55 +354,16 @@ namespace SecretServerInterface.SSWebService {
         public event FolderGetAllChildrenCompletedEventHandler FolderGetAllChildrenCompleted;
         
         /// <remarks/>
-        public event FolderCreateCompletedEventHandler FolderCreateCompleted;
-        
-        /// <remarks/>
-        public event FolderExtendedCreateCompletedEventHandler FolderExtendedCreateCompleted;
-        
-        /// <remarks/>
-        public event FolderExtendedGetCompletedEventHandler FolderExtendedGetCompleted;
-        
-        /// <remarks/>
-        public event FolderExtendedUpdateCompletedEventHandler FolderExtendedUpdateCompleted;
-        
-        /// <remarks/>
-        public event FolderExtendedGetNewCompletedEventHandler FolderExtendedGetNewCompleted;
-        
-        /// <remarks/>
         public event SearchFoldersCompletedEventHandler SearchFoldersCompleted;
-        
-        /// <remarks/>
-        public event DownloadFileAttachmentCompletedEventHandler DownloadFileAttachmentCompleted;
-        
-        /// <remarks/>
-        public event DownloadFileAttachmentByItemIdCompletedEventHandler DownloadFileAttachmentByItemIdCompleted;
-        
-        /// <remarks/>
-        public event UploadFileAttachmentCompletedEventHandler UploadFileAttachmentCompleted;
-        
-        /// <remarks/>
-        public event UploadFileAttachmentByItemIdCompletedEventHandler UploadFileAttachmentByItemIdCompleted;
-        
-        /// <remarks/>
-        public event ExpireSecretCompletedEventHandler ExpireSecretCompleted;
-        
-        /// <remarks/>
-        public event SetCheckOutEnabledCompletedEventHandler SetCheckOutEnabledCompleted;
-        
-        /// <remarks/>
-        public event ImportXMLCompletedEventHandler ImportXMLCompleted;
-        
-        /// <remarks/>
-        public event GetSecretAuditCompletedEventHandler GetSecretAuditCompleted;
-        
-        /// <remarks/>
-        public event AddDependencyCompletedEventHandler AddDependencyCompleted;
         
         /// <remarks/>
         public event RemoveDependencyCompletedEventHandler RemoveDependencyCompleted;
         
         /// <remarks/>
         public event GetDependenciesCompletedEventHandler GetDependenciesCompleted;
+        
+        /// <remarks/>
+        public event AddDependencyCompletedEventHandler AddDependencyCompleted;
         
         /// <remarks/>
         public event CreateDependencyGroupForSecretCompletedEventHandler CreateDependencyGroupForSecretCompleted;
@@ -415,6 +378,24 @@ namespace SecretServerInterface.SSWebService {
         public event RemoveDependencyGroupForSecretCompletedEventHandler RemoveDependencyGroupForSecretCompleted;
         
         /// <remarks/>
+        public event DownloadFileAttachmentCompletedEventHandler DownloadFileAttachmentCompleted;
+        
+        /// <remarks/>
+        public event DownloadFileAttachmentByItemIdCompletedEventHandler DownloadFileAttachmentByItemIdCompleted;
+        
+        /// <remarks/>
+        public event UploadFileAttachmentCompletedEventHandler UploadFileAttachmentCompleted;
+        
+        /// <remarks/>
+        public event UploadFileAttachmentByItemIdCompletedEventHandler UploadFileAttachmentByItemIdCompleted;
+        
+        /// <remarks/>
+        public event ImportXMLCompletedEventHandler ImportXMLCompleted;
+        
+        /// <remarks/>
+        public event SetCheckOutEnabledCompletedEventHandler SetCheckOutEnabledCompleted;
+        
+        /// <remarks/>
         public event GetDistributedEnginesCompletedEventHandler GetDistributedEnginesCompleted;
         
         /// <remarks/>
@@ -422,9 +403,6 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         public event AssignSiteCompletedEventHandler AssignSiteCompleted;
-        
-        /// <remarks/>
-        public event CheckInCompletedEventHandler CheckInCompleted;
         
         /// <remarks/>
         public event AddSecretCustomAuditCompletedEventHandler AddSecretCustomAuditCompleted;
@@ -497,6 +475,9 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         public event RestoreSSHCommandMenuCompletedEventHandler RestoreSSHCommandMenuCompleted;
+        
+        /// <remarks/>
+        public event ValidateTwoFactorCompletedEventHandler ValidateTwoFactorCompleted;
         
         /// <remarks/>
         public event GetReportCompletedEventHandler GetReportCompleted;
@@ -578,162 +559,202 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/Authenticate", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public AuthenticateResult Authenticate(string username, string password, string organization, string domain) {
-            object[] results = this.Invoke("Authenticate", new object[] {
-                        username,
-                        password,
-                        organization,
-                        domain});
-            return ((AuthenticateResult)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddUser", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult AddUser(User newUser) {
+            object[] results = this.Invoke("AddUser", new object[] {
+                        newUser});
+            return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AuthenticateAsync(string username, string password, string organization, string domain) {
-            this.AuthenticateAsync(username, password, organization, domain, null);
+        public void AddUserAsync(User newUser) {
+            this.AddUserAsync(newUser, null);
         }
         
         /// <remarks/>
-        public void AuthenticateAsync(string username, string password, string organization, string domain, object userState) {
-            if ((this.AuthenticateOperationCompleted == null)) {
-                this.AuthenticateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAuthenticateOperationCompleted);
+        public void AddUserAsync(User newUser, object userState) {
+            if ((this.AddUserOperationCompleted == null)) {
+                this.AddUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddUserOperationCompleted);
             }
-            this.InvokeAsync("Authenticate", new object[] {
-                        username,
-                        password,
-                        organization,
-                        domain}, this.AuthenticateOperationCompleted, userState);
+            this.InvokeAsync("AddUser", new object[] {
+                        newUser}, this.AddUserOperationCompleted, userState);
         }
         
-        private void OnAuthenticateOperationCompleted(object arg) {
-            if ((this.AuthenticateCompleted != null)) {
+        private void OnAddUserOperationCompleted(object arg) {
+            if ((this.AddUserCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AuthenticateCompleted(this, new AuthenticateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.AddUserCompleted(this, new AddUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/ImpersonateUser", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ImpersonateResult ImpersonateUser(string token, string username, string organization, string domain) {
-            object[] results = this.Invoke("ImpersonateUser", new object[] {
-                        token,
-                        username,
-                        organization,
-                        domain});
-            return ((ImpersonateResult)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderCreate", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public CreateFolderResult FolderCreate(string folderName, int parentFolderId, int folderTypeId) {
+            object[] results = this.Invoke("FolderCreate", new object[] {
+                        folderName,
+                        parentFolderId,
+                        folderTypeId});
+            return ((CreateFolderResult)(results[0]));
         }
         
         /// <remarks/>
-        public void ImpersonateUserAsync(string token, string username, string organization, string domain) {
-            this.ImpersonateUserAsync(token, username, organization, domain, null);
+        public void FolderCreateAsync(string folderName, int parentFolderId, int folderTypeId) {
+            this.FolderCreateAsync(folderName, parentFolderId, folderTypeId, null);
         }
         
         /// <remarks/>
-        public void ImpersonateUserAsync(string token, string username, string organization, string domain, object userState) {
-            if ((this.ImpersonateUserOperationCompleted == null)) {
-                this.ImpersonateUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnImpersonateUserOperationCompleted);
+        public void FolderCreateAsync(string folderName, int parentFolderId, int folderTypeId, object userState) {
+            if ((this.FolderCreateOperationCompleted == null)) {
+                this.FolderCreateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderCreateOperationCompleted);
             }
-            this.InvokeAsync("ImpersonateUser", new object[] {
-                        token,
-                        username,
-                        organization,
-                        domain}, this.ImpersonateUserOperationCompleted, userState);
+            this.InvokeAsync("FolderCreate", new object[] {
+                        folderName,
+                        parentFolderId,
+                        folderTypeId}, this.FolderCreateOperationCompleted, userState);
         }
         
-        private void OnImpersonateUserOperationCompleted(object arg) {
-            if ((this.ImpersonateUserCompleted != null)) {
+        private void OnFolderCreateOperationCompleted(object arg) {
+            if ((this.FolderCreateCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ImpersonateUserCompleted(this, new ImpersonateUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.FolderCreateCompleted(this, new FolderCreateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AuthenticateRADIUS", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public AuthenticateResult AuthenticateRADIUS(string username, string password, string organization, string domain, string radiusPassword) {
-            object[] results = this.Invoke("AuthenticateRADIUS", new object[] {
-                        username,
-                        password,
-                        organization,
-                        domain,
-                        radiusPassword});
-            return ((AuthenticateResult)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderExtendedCreate", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public FolderExtendedCreateResult FolderExtendedCreate(FolderExtended folder) {
+            object[] results = this.Invoke("FolderExtendedCreate", new object[] {
+                        folder});
+            return ((FolderExtendedCreateResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AuthenticateRADIUSAsync(string username, string password, string organization, string domain, string radiusPassword) {
-            this.AuthenticateRADIUSAsync(username, password, organization, domain, radiusPassword, null);
+        public void FolderExtendedCreateAsync(FolderExtended folder) {
+            this.FolderExtendedCreateAsync(folder, null);
         }
         
         /// <remarks/>
-        public void AuthenticateRADIUSAsync(string username, string password, string organization, string domain, string radiusPassword, object userState) {
-            if ((this.AuthenticateRADIUSOperationCompleted == null)) {
-                this.AuthenticateRADIUSOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAuthenticateRADIUSOperationCompleted);
+        public void FolderExtendedCreateAsync(FolderExtended folder, object userState) {
+            if ((this.FolderExtendedCreateOperationCompleted == null)) {
+                this.FolderExtendedCreateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderExtendedCreateOperationCompleted);
             }
-            this.InvokeAsync("AuthenticateRADIUS", new object[] {
-                        username,
-                        password,
-                        organization,
-                        domain,
-                        radiusPassword}, this.AuthenticateRADIUSOperationCompleted, userState);
+            this.InvokeAsync("FolderExtendedCreate", new object[] {
+                        folder}, this.FolderExtendedCreateOperationCompleted, userState);
         }
         
-        private void OnAuthenticateRADIUSOperationCompleted(object arg) {
-            if ((this.AuthenticateRADIUSCompleted != null)) {
+        private void OnFolderExtendedCreateOperationCompleted(object arg) {
+            if ((this.FolderExtendedCreateCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AuthenticateRADIUSCompleted(this, new AuthenticateRADIUSCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.FolderExtendedCreateCompleted(this, new FolderExtendedCreateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetTokenIsValid", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public TokenIsValidResult GetTokenIsValid(string token) {
-            object[] results = this.Invoke("GetTokenIsValid", new object[] {
-                        token});
-            return ((TokenIsValidResult)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderExtendedGet", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public FolderExtendedGetResult FolderExtendedGet(int folderId) {
+            object[] results = this.Invoke("FolderExtendedGet", new object[] {
+                        folderId});
+            return ((FolderExtendedGetResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetTokenIsValidAsync(string token) {
-            this.GetTokenIsValidAsync(token, null);
+        public void FolderExtendedGetAsync(int folderId) {
+            this.FolderExtendedGetAsync(folderId, null);
         }
         
         /// <remarks/>
-        public void GetTokenIsValidAsync(string token, object userState) {
-            if ((this.GetTokenIsValidOperationCompleted == null)) {
-                this.GetTokenIsValidOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTokenIsValidOperationCompleted);
+        public void FolderExtendedGetAsync(int folderId, object userState) {
+            if ((this.FolderExtendedGetOperationCompleted == null)) {
+                this.FolderExtendedGetOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderExtendedGetOperationCompleted);
             }
-            this.InvokeAsync("GetTokenIsValid", new object[] {
-                        token}, this.GetTokenIsValidOperationCompleted, userState);
+            this.InvokeAsync("FolderExtendedGet", new object[] {
+                        folderId}, this.FolderExtendedGetOperationCompleted, userState);
         }
         
-        private void OnGetTokenIsValidOperationCompleted(object arg) {
-            if ((this.GetTokenIsValidCompleted != null)) {
+        private void OnFolderExtendedGetOperationCompleted(object arg) {
+            if ((this.FolderExtendedGetCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetTokenIsValidCompleted(this, new GetTokenIsValidCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.FolderExtendedGetCompleted(this, new FolderExtendedGetCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderExtendedUpdate", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public FolderExtendedUpdateResult FolderExtendedUpdate(FolderExtended folder) {
+            object[] results = this.Invoke("FolderExtendedUpdate", new object[] {
+                        folder});
+            return ((FolderExtendedUpdateResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FolderExtendedUpdateAsync(FolderExtended folder) {
+            this.FolderExtendedUpdateAsync(folder, null);
+        }
+        
+        /// <remarks/>
+        public void FolderExtendedUpdateAsync(FolderExtended folder, object userState) {
+            if ((this.FolderExtendedUpdateOperationCompleted == null)) {
+                this.FolderExtendedUpdateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderExtendedUpdateOperationCompleted);
+            }
+            this.InvokeAsync("FolderExtendedUpdate", new object[] {
+                        folder}, this.FolderExtendedUpdateOperationCompleted, userState);
+        }
+        
+        private void OnFolderExtendedUpdateOperationCompleted(object arg) {
+            if ((this.FolderExtendedUpdateCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FolderExtendedUpdateCompleted(this, new FolderExtendedUpdateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderExtendedGetNew", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public FolderExtendedGetNewResult FolderExtendedGetNew(FolderExtendedGetNewRequest folderExtendedGetNewRequest) {
+            object[] results = this.Invoke("FolderExtendedGetNew", new object[] {
+                        folderExtendedGetNewRequest});
+            return ((FolderExtendedGetNewResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void FolderExtendedGetNewAsync(FolderExtendedGetNewRequest folderExtendedGetNewRequest) {
+            this.FolderExtendedGetNewAsync(folderExtendedGetNewRequest, null);
+        }
+        
+        /// <remarks/>
+        public void FolderExtendedGetNewAsync(FolderExtendedGetNewRequest folderExtendedGetNewRequest, object userState) {
+            if ((this.FolderExtendedGetNewOperationCompleted == null)) {
+                this.FolderExtendedGetNewOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderExtendedGetNewOperationCompleted);
+            }
+            this.InvokeAsync("FolderExtendedGetNew", new object[] {
+                        folderExtendedGetNewRequest}, this.FolderExtendedGetNewOperationCompleted, userState);
+        }
+        
+        private void OnFolderExtendedGetNewOperationCompleted(object arg) {
+            if ((this.FolderExtendedGetNewCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.FolderExtendedGetNewCompleted(this, new FolderExtendedGetNewCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecretLegacy", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSecretResult GetSecretLegacy(string token, int secretId) {
+        public GetSecretResult GetSecretLegacy(int secretId) {
             object[] results = this.Invoke("GetSecretLegacy", new object[] {
-                        token,
                         secretId});
             return ((GetSecretResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetSecretLegacyAsync(string token, int secretId) {
-            this.GetSecretLegacyAsync(token, secretId, null);
+        public void GetSecretLegacyAsync(int secretId) {
+            this.GetSecretLegacyAsync(secretId, null);
         }
         
         /// <remarks/>
-        public void GetSecretLegacyAsync(string token, int secretId, object userState) {
+        public void GetSecretLegacyAsync(int secretId, object userState) {
             if ((this.GetSecretLegacyOperationCompleted == null)) {
                 this.GetSecretLegacyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretLegacyOperationCompleted);
             }
             this.InvokeAsync("GetSecretLegacy", new object[] {
-                        token,
                         secretId}, this.GetSecretLegacyOperationCompleted, userState);
         }
         
@@ -746,9 +767,8 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSecretResult GetSecret(string token, int secretId, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> loadSettingsAndPermissions, CodeResponse[] codeResponses) {
+        public GetSecretResult GetSecret(int secretId, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> loadSettingsAndPermissions, CodeResponse[] codeResponses) {
             object[] results = this.Invoke("GetSecret", new object[] {
-                        token,
                         secretId,
                         loadSettingsAndPermissions,
                         codeResponses});
@@ -756,17 +776,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void GetSecretAsync(string token, int secretId, System.Nullable<bool> loadSettingsAndPermissions, CodeResponse[] codeResponses) {
-            this.GetSecretAsync(token, secretId, loadSettingsAndPermissions, codeResponses, null);
+        public void GetSecretAsync(int secretId, System.Nullable<bool> loadSettingsAndPermissions, CodeResponse[] codeResponses) {
+            this.GetSecretAsync(secretId, loadSettingsAndPermissions, codeResponses, null);
         }
         
         /// <remarks/>
-        public void GetSecretAsync(string token, int secretId, System.Nullable<bool> loadSettingsAndPermissions, CodeResponse[] codeResponses, object userState) {
+        public void GetSecretAsync(int secretId, System.Nullable<bool> loadSettingsAndPermissions, CodeResponse[] codeResponses, object userState) {
             if ((this.GetSecretOperationCompleted == null)) {
                 this.GetSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretOperationCompleted);
             }
             this.InvokeAsync("GetSecret", new object[] {
-                        token,
                         secretId,
                         loadSettingsAndPermissions,
                         codeResponses}, this.GetSecretOperationCompleted, userState);
@@ -780,74 +799,9 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetCheckOutStatus", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetCheckOutStatusResult GetCheckOutStatus(string token, int secretId) {
-            object[] results = this.Invoke("GetCheckOutStatus", new object[] {
-                        token,
-                        secretId});
-            return ((GetCheckOutStatusResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetCheckOutStatusAsync(string token, int secretId) {
-            this.GetCheckOutStatusAsync(token, secretId, null);
-        }
-        
-        /// <remarks/>
-        public void GetCheckOutStatusAsync(string token, int secretId, object userState) {
-            if ((this.GetCheckOutStatusOperationCompleted == null)) {
-                this.GetCheckOutStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCheckOutStatusOperationCompleted);
-            }
-            this.InvokeAsync("GetCheckOutStatus", new object[] {
-                        token,
-                        secretId}, this.GetCheckOutStatusOperationCompleted, userState);
-        }
-        
-        private void OnGetCheckOutStatusOperationCompleted(object arg) {
-            if ((this.GetCheckOutStatusCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetCheckOutStatusCompleted(this, new GetCheckOutStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/ChangePassword", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult ChangePassword(string token, string currentPassword, string newPassword) {
-            object[] results = this.Invoke("ChangePassword", new object[] {
-                        token,
-                        currentPassword,
-                        newPassword});
-            return ((WebServiceResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ChangePasswordAsync(string token, string currentPassword, string newPassword) {
-            this.ChangePasswordAsync(token, currentPassword, newPassword, null);
-        }
-        
-        /// <remarks/>
-        public void ChangePasswordAsync(string token, string currentPassword, string newPassword, object userState) {
-            if ((this.ChangePasswordOperationCompleted == null)) {
-                this.ChangePasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnChangePasswordOperationCompleted);
-            }
-            this.InvokeAsync("ChangePassword", new object[] {
-                        token,
-                        currentPassword,
-                        newPassword}, this.ChangePasswordOperationCompleted, userState);
-        }
-        
-        private void OnChangePasswordOperationCompleted(object arg) {
-            if ((this.ChangePasswordCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ChangePasswordCompleted(this, new ChangePasswordCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecretsByFieldValue", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSecretsByFieldValueResult GetSecretsByFieldValue(string token, string fieldName, string searchTerm, bool showDeleted) {
+        public GetSecretsByFieldValueResult GetSecretsByFieldValue(string fieldName, string searchTerm, bool showDeleted) {
             object[] results = this.Invoke("GetSecretsByFieldValue", new object[] {
-                        token,
                         fieldName,
                         searchTerm,
                         showDeleted});
@@ -855,17 +809,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void GetSecretsByFieldValueAsync(string token, string fieldName, string searchTerm, bool showDeleted) {
-            this.GetSecretsByFieldValueAsync(token, fieldName, searchTerm, showDeleted, null);
+        public void GetSecretsByFieldValueAsync(string fieldName, string searchTerm, bool showDeleted) {
+            this.GetSecretsByFieldValueAsync(fieldName, searchTerm, showDeleted, null);
         }
         
         /// <remarks/>
-        public void GetSecretsByFieldValueAsync(string token, string fieldName, string searchTerm, bool showDeleted, object userState) {
+        public void GetSecretsByFieldValueAsync(string fieldName, string searchTerm, bool showDeleted, object userState) {
             if ((this.GetSecretsByFieldValueOperationCompleted == null)) {
                 this.GetSecretsByFieldValueOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretsByFieldValueOperationCompleted);
             }
             this.InvokeAsync("GetSecretsByFieldValue", new object[] {
-                        token,
                         fieldName,
                         searchTerm,
                         showDeleted}, this.GetSecretsByFieldValueOperationCompleted, userState);
@@ -880,9 +833,8 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchSecretsByFieldValue", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SearchSecretsResult SearchSecretsByFieldValue(string token, string fieldName, string searchTerm, bool showDeleted, bool showRestricted) {
+        public SearchSecretsResult SearchSecretsByFieldValue(string fieldName, string searchTerm, bool showDeleted, bool showRestricted) {
             object[] results = this.Invoke("SearchSecretsByFieldValue", new object[] {
-                        token,
                         fieldName,
                         searchTerm,
                         showDeleted,
@@ -891,17 +843,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void SearchSecretsByFieldValueAsync(string token, string fieldName, string searchTerm, bool showDeleted, bool showRestricted) {
-            this.SearchSecretsByFieldValueAsync(token, fieldName, searchTerm, showDeleted, showRestricted, null);
+        public void SearchSecretsByFieldValueAsync(string fieldName, string searchTerm, bool showDeleted, bool showRestricted) {
+            this.SearchSecretsByFieldValueAsync(fieldName, searchTerm, showDeleted, showRestricted, null);
         }
         
         /// <remarks/>
-        public void SearchSecretsByFieldValueAsync(string token, string fieldName, string searchTerm, bool showDeleted, bool showRestricted, object userState) {
+        public void SearchSecretsByFieldValueAsync(string fieldName, string searchTerm, bool showDeleted, bool showRestricted, object userState) {
             if ((this.SearchSecretsByFieldValueOperationCompleted == null)) {
                 this.SearchSecretsByFieldValueOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchSecretsByFieldValueOperationCompleted);
             }
             this.InvokeAsync("SearchSecretsByFieldValue", new object[] {
-                        token,
                         fieldName,
                         searchTerm,
                         showDeleted,
@@ -917,9 +868,8 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecretsByExposedFieldValue", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSecretsByFieldValueResult GetSecretsByExposedFieldValue(string token, string fieldName, string searchTerm, bool showDeleted, bool showPartialMatches) {
+        public GetSecretsByFieldValueResult GetSecretsByExposedFieldValue(string fieldName, string searchTerm, bool showDeleted, bool showPartialMatches) {
             object[] results = this.Invoke("GetSecretsByExposedFieldValue", new object[] {
-                        token,
                         fieldName,
                         searchTerm,
                         showDeleted,
@@ -928,17 +878,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void GetSecretsByExposedFieldValueAsync(string token, string fieldName, string searchTerm, bool showDeleted, bool showPartialMatches) {
-            this.GetSecretsByExposedFieldValueAsync(token, fieldName, searchTerm, showDeleted, showPartialMatches, null);
+        public void GetSecretsByExposedFieldValueAsync(string fieldName, string searchTerm, bool showDeleted, bool showPartialMatches) {
+            this.GetSecretsByExposedFieldValueAsync(fieldName, searchTerm, showDeleted, showPartialMatches, null);
         }
         
         /// <remarks/>
-        public void GetSecretsByExposedFieldValueAsync(string token, string fieldName, string searchTerm, bool showDeleted, bool showPartialMatches, object userState) {
+        public void GetSecretsByExposedFieldValueAsync(string fieldName, string searchTerm, bool showDeleted, bool showPartialMatches, object userState) {
             if ((this.GetSecretsByExposedFieldValueOperationCompleted == null)) {
                 this.GetSecretsByExposedFieldValueOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretsByExposedFieldValueOperationCompleted);
             }
             this.InvokeAsync("GetSecretsByExposedFieldValue", new object[] {
-                        token,
                         fieldName,
                         searchTerm,
                         showDeleted,
@@ -954,9 +903,8 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchSecretsByExposedFieldValue", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SearchSecretsResult SearchSecretsByExposedFieldValue(string token, string fieldName, string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches) {
+        public SearchSecretsResult SearchSecretsByExposedFieldValue(string fieldName, string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches) {
             object[] results = this.Invoke("SearchSecretsByExposedFieldValue", new object[] {
-                        token,
                         fieldName,
                         searchTerm,
                         showDeleted,
@@ -966,17 +914,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void SearchSecretsByExposedFieldValueAsync(string token, string fieldName, string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches) {
-            this.SearchSecretsByExposedFieldValueAsync(token, fieldName, searchTerm, showDeleted, showRestricted, showPartialMatches, null);
+        public void SearchSecretsByExposedFieldValueAsync(string fieldName, string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches) {
+            this.SearchSecretsByExposedFieldValueAsync(fieldName, searchTerm, showDeleted, showRestricted, showPartialMatches, null);
         }
         
         /// <remarks/>
-        public void SearchSecretsByExposedFieldValueAsync(string token, string fieldName, string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches, object userState) {
+        public void SearchSecretsByExposedFieldValueAsync(string fieldName, string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches, object userState) {
             if ((this.SearchSecretsByExposedFieldValueOperationCompleted == null)) {
                 this.SearchSecretsByExposedFieldValueOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchSecretsByExposedFieldValueOperationCompleted);
             }
             this.InvokeAsync("SearchSecretsByExposedFieldValue", new object[] {
-                        token,
                         fieldName,
                         searchTerm,
                         showDeleted,
@@ -993,9 +940,8 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchSecretsByExposedValues", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SearchSecretsResult SearchSecretsByExposedValues(string token, string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches) {
+        public SearchSecretsResult SearchSecretsByExposedValues(string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches) {
             object[] results = this.Invoke("SearchSecretsByExposedValues", new object[] {
-                        token,
                         searchTerm,
                         showDeleted,
                         showRestricted,
@@ -1004,17 +950,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void SearchSecretsByExposedValuesAsync(string token, string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches) {
-            this.SearchSecretsByExposedValuesAsync(token, searchTerm, showDeleted, showRestricted, showPartialMatches, null);
+        public void SearchSecretsByExposedValuesAsync(string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches) {
+            this.SearchSecretsByExposedValuesAsync(searchTerm, showDeleted, showRestricted, showPartialMatches, null);
         }
         
         /// <remarks/>
-        public void SearchSecretsByExposedValuesAsync(string token, string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches, object userState) {
+        public void SearchSecretsByExposedValuesAsync(string searchTerm, bool showDeleted, bool showRestricted, bool showPartialMatches, object userState) {
             if ((this.SearchSecretsByExposedValuesOperationCompleted == null)) {
                 this.SearchSecretsByExposedValuesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchSecretsByExposedValuesOperationCompleted);
             }
             this.InvokeAsync("SearchSecretsByExposedValues", new object[] {
-                        token,
                         searchTerm,
                         showDeleted,
                         showRestricted,
@@ -1029,41 +974,9 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddUser", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult AddUser(string token, User newUser) {
-            object[] results = this.Invoke("AddUser", new object[] {
-                        token,
-                        newUser});
-            return ((WebServiceResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void AddUserAsync(string token, User newUser) {
-            this.AddUserAsync(token, newUser, null);
-        }
-        
-        /// <remarks/>
-        public void AddUserAsync(string token, User newUser, object userState) {
-            if ((this.AddUserOperationCompleted == null)) {
-                this.AddUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddUserOperationCompleted);
-            }
-            this.InvokeAsync("AddUser", new object[] {
-                        token,
-                        newUser}, this.AddUserOperationCompleted, userState);
-        }
-        
-        private void OnAddUserOperationCompleted(object arg) {
-            if ((this.AddUserCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AddUserCompleted(this, new AddUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchSecrets", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SearchSecretsResult SearchSecrets(string token, string searchTerm, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeDeleted, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeRestricted) {
+        public SearchSecretsResult SearchSecrets(string searchTerm, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeDeleted, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeRestricted) {
             object[] results = this.Invoke("SearchSecrets", new object[] {
-                        token,
                         searchTerm,
                         includeDeleted,
                         includeRestricted});
@@ -1071,17 +984,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void SearchSecretsAsync(string token, string searchTerm, System.Nullable<bool> includeDeleted, System.Nullable<bool> includeRestricted) {
-            this.SearchSecretsAsync(token, searchTerm, includeDeleted, includeRestricted, null);
+        public void SearchSecretsAsync(string searchTerm, System.Nullable<bool> includeDeleted, System.Nullable<bool> includeRestricted) {
+            this.SearchSecretsAsync(searchTerm, includeDeleted, includeRestricted, null);
         }
         
         /// <remarks/>
-        public void SearchSecretsAsync(string token, string searchTerm, System.Nullable<bool> includeDeleted, System.Nullable<bool> includeRestricted, object userState) {
+        public void SearchSecretsAsync(string searchTerm, System.Nullable<bool> includeDeleted, System.Nullable<bool> includeRestricted, object userState) {
             if ((this.SearchSecretsOperationCompleted == null)) {
                 this.SearchSecretsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchSecretsOperationCompleted);
             }
             this.InvokeAsync("SearchSecrets", new object[] {
-                        token,
                         searchTerm,
                         includeDeleted,
                         includeRestricted}, this.SearchSecretsOperationCompleted, userState);
@@ -1096,25 +1008,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchSecretsLegacy", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SearchSecretsResult SearchSecretsLegacy(string token, string searchTerm) {
+        public SearchSecretsResult SearchSecretsLegacy(string searchTerm) {
             object[] results = this.Invoke("SearchSecretsLegacy", new object[] {
-                        token,
                         searchTerm});
             return ((SearchSecretsResult)(results[0]));
         }
         
         /// <remarks/>
-        public void SearchSecretsLegacyAsync(string token, string searchTerm) {
-            this.SearchSecretsLegacyAsync(token, searchTerm, null);
+        public void SearchSecretsLegacyAsync(string searchTerm) {
+            this.SearchSecretsLegacyAsync(searchTerm, null);
         }
         
         /// <remarks/>
-        public void SearchSecretsLegacyAsync(string token, string searchTerm, object userState) {
+        public void SearchSecretsLegacyAsync(string searchTerm, object userState) {
             if ((this.SearchSecretsLegacyOperationCompleted == null)) {
                 this.SearchSecretsLegacyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchSecretsLegacyOperationCompleted);
             }
             this.InvokeAsync("SearchSecretsLegacy", new object[] {
-                        token,
                         searchTerm}, this.SearchSecretsLegacyOperationCompleted, userState);
         }
         
@@ -1127,9 +1037,8 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchSecretsByFolder", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SearchSecretsResult SearchSecretsByFolder(string token, string searchTerm, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<int> folderId, bool includeSubFolders, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeDeleted, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeRestricted) {
+        public SearchSecretsResult SearchSecretsByFolder(string searchTerm, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<int> folderId, bool includeSubFolders, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeDeleted, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeRestricted) {
             object[] results = this.Invoke("SearchSecretsByFolder", new object[] {
-                        token,
                         searchTerm,
                         folderId,
                         includeSubFolders,
@@ -1139,17 +1048,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void SearchSecretsByFolderAsync(string token, string searchTerm, System.Nullable<int> folderId, bool includeSubFolders, System.Nullable<bool> includeDeleted, System.Nullable<bool> includeRestricted) {
-            this.SearchSecretsByFolderAsync(token, searchTerm, folderId, includeSubFolders, includeDeleted, includeRestricted, null);
+        public void SearchSecretsByFolderAsync(string searchTerm, System.Nullable<int> folderId, bool includeSubFolders, System.Nullable<bool> includeDeleted, System.Nullable<bool> includeRestricted) {
+            this.SearchSecretsByFolderAsync(searchTerm, folderId, includeSubFolders, includeDeleted, includeRestricted, null);
         }
         
         /// <remarks/>
-        public void SearchSecretsByFolderAsync(string token, string searchTerm, System.Nullable<int> folderId, bool includeSubFolders, System.Nullable<bool> includeDeleted, System.Nullable<bool> includeRestricted, object userState) {
+        public void SearchSecretsByFolderAsync(string searchTerm, System.Nullable<int> folderId, bool includeSubFolders, System.Nullable<bool> includeDeleted, System.Nullable<bool> includeRestricted, object userState) {
             if ((this.SearchSecretsByFolderOperationCompleted == null)) {
                 this.SearchSecretsByFolderOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchSecretsByFolderOperationCompleted);
             }
             this.InvokeAsync("SearchSecretsByFolder", new object[] {
-                        token,
                         searchTerm,
                         folderId,
                         includeSubFolders,
@@ -1166,9 +1074,8 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchSecretsByFolderLegacy", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SearchSecretsResult SearchSecretsByFolderLegacy(string token, string searchTerm, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<int> folderId, bool includeSubFolders) {
+        public SearchSecretsResult SearchSecretsByFolderLegacy(string searchTerm, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<int> folderId, bool includeSubFolders) {
             object[] results = this.Invoke("SearchSecretsByFolderLegacy", new object[] {
-                        token,
                         searchTerm,
                         folderId,
                         includeSubFolders});
@@ -1176,17 +1083,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void SearchSecretsByFolderLegacyAsync(string token, string searchTerm, System.Nullable<int> folderId, bool includeSubFolders) {
-            this.SearchSecretsByFolderLegacyAsync(token, searchTerm, folderId, includeSubFolders, null);
+        public void SearchSecretsByFolderLegacyAsync(string searchTerm, System.Nullable<int> folderId, bool includeSubFolders) {
+            this.SearchSecretsByFolderLegacyAsync(searchTerm, folderId, includeSubFolders, null);
         }
         
         /// <remarks/>
-        public void SearchSecretsByFolderLegacyAsync(string token, string searchTerm, System.Nullable<int> folderId, bool includeSubFolders, object userState) {
+        public void SearchSecretsByFolderLegacyAsync(string searchTerm, System.Nullable<int> folderId, bool includeSubFolders, object userState) {
             if ((this.SearchSecretsByFolderLegacyOperationCompleted == null)) {
                 this.SearchSecretsByFolderLegacyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchSecretsByFolderLegacyOperationCompleted);
             }
             this.InvokeAsync("SearchSecretsByFolderLegacy", new object[] {
-                        token,
                         searchTerm,
                         folderId,
                         includeSubFolders}, this.SearchSecretsByFolderLegacyOperationCompleted, userState);
@@ -1200,27 +1106,52 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/ExpireSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult ExpireSecret(int secretId) {
+            object[] results = this.Invoke("ExpireSecret", new object[] {
+                        secretId});
+            return ((WebServiceResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ExpireSecretAsync(int secretId) {
+            this.ExpireSecretAsync(secretId, null);
+        }
+        
+        /// <remarks/>
+        public void ExpireSecretAsync(int secretId, object userState) {
+            if ((this.ExpireSecretOperationCompleted == null)) {
+                this.ExpireSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExpireSecretOperationCompleted);
+            }
+            this.InvokeAsync("ExpireSecret", new object[] {
+                        secretId}, this.ExpireSecretOperationCompleted, userState);
+        }
+        
+        private void OnExpireSecretOperationCompleted(object arg) {
+            if ((this.ExpireSecretCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ExpireSecretCompleted(this, new ExpireSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetFavorites", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetFavoritesResult GetFavorites(string token, bool includeRestricted) {
-            object[] results = this.Invoke("GetFavorites", new object[] {
-                        token,
-                        includeRestricted});
+        public GetFavoritesResult GetFavorites() {
+            object[] results = this.Invoke("GetFavorites", new object[0]);
             return ((GetFavoritesResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetFavoritesAsync(string token, bool includeRestricted) {
-            this.GetFavoritesAsync(token, includeRestricted, null);
+        public void GetFavoritesAsync() {
+            this.GetFavoritesAsync(null);
         }
         
         /// <remarks/>
-        public void GetFavoritesAsync(string token, bool includeRestricted, object userState) {
+        public void GetFavoritesAsync(object userState) {
             if ((this.GetFavoritesOperationCompleted == null)) {
                 this.GetFavoritesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetFavoritesOperationCompleted);
             }
-            this.InvokeAsync("GetFavorites", new object[] {
-                        token,
-                        includeRestricted}, this.GetFavoritesOperationCompleted, userState);
+            this.InvokeAsync("GetFavorites", new object[0], this.GetFavoritesOperationCompleted, userState);
         }
         
         private void OnGetFavoritesOperationCompleted(object arg) {
@@ -1232,26 +1163,24 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/UpdateIsFavorite", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult UpdateIsFavorite(string token, int secretId, bool isFavorite) {
+        public WebServiceResult UpdateIsFavorite(int secretId, bool isFavorite) {
             object[] results = this.Invoke("UpdateIsFavorite", new object[] {
-                        token,
                         secretId,
                         isFavorite});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void UpdateIsFavoriteAsync(string token, int secretId, bool isFavorite) {
-            this.UpdateIsFavoriteAsync(token, secretId, isFavorite, null);
+        public void UpdateIsFavoriteAsync(int secretId, bool isFavorite) {
+            this.UpdateIsFavoriteAsync(secretId, isFavorite, null);
         }
         
         /// <remarks/>
-        public void UpdateIsFavoriteAsync(string token, int secretId, bool isFavorite, object userState) {
+        public void UpdateIsFavoriteAsync(int secretId, bool isFavorite, object userState) {
             if ((this.UpdateIsFavoriteOperationCompleted == null)) {
                 this.UpdateIsFavoriteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateIsFavoriteOperationCompleted);
             }
             this.InvokeAsync("UpdateIsFavorite", new object[] {
-                        token,
                         secretId,
                         isFavorite}, this.UpdateIsFavoriteOperationCompleted, userState);
         }
@@ -1264,10 +1193,38 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/CheckIn", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult CheckIn(int secretId) {
+            object[] results = this.Invoke("CheckIn", new object[] {
+                        secretId});
+            return ((WebServiceResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CheckInAsync(int secretId) {
+            this.CheckInAsync(secretId, null);
+        }
+        
+        /// <remarks/>
+        public void CheckInAsync(int secretId, object userState) {
+            if ((this.CheckInOperationCompleted == null)) {
+                this.CheckInOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCheckInOperationCompleted);
+            }
+            this.InvokeAsync("CheckIn", new object[] {
+                        secretId}, this.CheckInOperationCompleted, userState);
+        }
+        
+        private void OnCheckInOperationCompleted(object arg) {
+            if ((this.CheckInCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CheckInCompleted(this, new CheckInCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public AddSecretResult AddSecret(string token, int secretTypeId, string secretName, int[] secretFieldIds, string[] secretItemValues, int folderId) {
+        public AddSecretResult AddSecret(int secretTypeId, string secretName, int[] secretFieldIds, string[] secretItemValues, int folderId) {
             object[] results = this.Invoke("AddSecret", new object[] {
-                        token,
                         secretTypeId,
                         secretName,
                         secretFieldIds,
@@ -1277,17 +1234,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void AddSecretAsync(string token, int secretTypeId, string secretName, int[] secretFieldIds, string[] secretItemValues, int folderId) {
-            this.AddSecretAsync(token, secretTypeId, secretName, secretFieldIds, secretItemValues, folderId, null);
+        public void AddSecretAsync(int secretTypeId, string secretName, int[] secretFieldIds, string[] secretItemValues, int folderId) {
+            this.AddSecretAsync(secretTypeId, secretName, secretFieldIds, secretItemValues, folderId, null);
         }
         
         /// <remarks/>
-        public void AddSecretAsync(string token, int secretTypeId, string secretName, int[] secretFieldIds, string[] secretItemValues, int folderId, object userState) {
+        public void AddSecretAsync(int secretTypeId, string secretName, int[] secretFieldIds, string[] secretItemValues, int folderId, object userState) {
             if ((this.AddSecretOperationCompleted == null)) {
                 this.AddSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddSecretOperationCompleted);
             }
             this.InvokeAsync("AddSecret", new object[] {
-                        token,
                         secretTypeId,
                         secretName,
                         secretFieldIds,
@@ -1304,25 +1260,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddNewSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public AddSecretResult AddNewSecret(string token, Secret secret) {
+        public AddSecretResult AddNewSecret(Secret secret) {
             object[] results = this.Invoke("AddNewSecret", new object[] {
-                        token,
                         secret});
             return ((AddSecretResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AddNewSecretAsync(string token, Secret secret) {
-            this.AddNewSecretAsync(token, secret, null);
+        public void AddNewSecretAsync(Secret secret) {
+            this.AddNewSecretAsync(secret, null);
         }
         
         /// <remarks/>
-        public void AddNewSecretAsync(string token, Secret secret, object userState) {
+        public void AddNewSecretAsync(Secret secret, object userState) {
             if ((this.AddNewSecretOperationCompleted == null)) {
                 this.AddNewSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddNewSecretOperationCompleted);
             }
             this.InvokeAsync("AddNewSecret", new object[] {
-                        token,
                         secret}, this.AddNewSecretOperationCompleted, userState);
         }
         
@@ -1335,26 +1289,24 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetNewSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSecretResult GetNewSecret(string token, int secretTypeId, int folderId) {
+        public GetSecretResult GetNewSecret(int secretTypeId, int folderId) {
             object[] results = this.Invoke("GetNewSecret", new object[] {
-                        token,
                         secretTypeId,
                         folderId});
             return ((GetSecretResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetNewSecretAsync(string token, int secretTypeId, int folderId) {
-            this.GetNewSecretAsync(token, secretTypeId, folderId, null);
+        public void GetNewSecretAsync(int secretTypeId, int folderId) {
+            this.GetNewSecretAsync(secretTypeId, folderId, null);
         }
         
         /// <remarks/>
-        public void GetNewSecretAsync(string token, int secretTypeId, int folderId, object userState) {
+        public void GetNewSecretAsync(int secretTypeId, int folderId, object userState) {
             if ((this.GetNewSecretOperationCompleted == null)) {
                 this.GetNewSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetNewSecretOperationCompleted);
             }
             this.InvokeAsync("GetNewSecret", new object[] {
-                        token,
                         secretTypeId,
                         folderId}, this.GetNewSecretOperationCompleted, userState);
         }
@@ -1368,25 +1320,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecretTemplateFields", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSecretTemplateFieldsResult GetSecretTemplateFields(string token, int secretTypeId) {
+        public GetSecretTemplateFieldsResult GetSecretTemplateFields(int secretTypeId) {
             object[] results = this.Invoke("GetSecretTemplateFields", new object[] {
-                        token,
                         secretTypeId});
             return ((GetSecretTemplateFieldsResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetSecretTemplateFieldsAsync(string token, int secretTypeId) {
-            this.GetSecretTemplateFieldsAsync(token, secretTypeId, null);
+        public void GetSecretTemplateFieldsAsync(int secretTypeId) {
+            this.GetSecretTemplateFieldsAsync(secretTypeId, null);
         }
         
         /// <remarks/>
-        public void GetSecretTemplateFieldsAsync(string token, int secretTypeId, object userState) {
+        public void GetSecretTemplateFieldsAsync(int secretTypeId, object userState) {
             if ((this.GetSecretTemplateFieldsOperationCompleted == null)) {
                 this.GetSecretTemplateFieldsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretTemplateFieldsOperationCompleted);
             }
             this.InvokeAsync("GetSecretTemplateFields", new object[] {
-                        token,
                         secretTypeId}, this.GetSecretTemplateFieldsOperationCompleted, userState);
         }
         
@@ -1399,25 +1349,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/UpdateSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult UpdateSecret(string token, Secret secret) {
+        public WebServiceResult UpdateSecret(Secret secret) {
             object[] results = this.Invoke("UpdateSecret", new object[] {
-                        token,
                         secret});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void UpdateSecretAsync(string token, Secret secret) {
-            this.UpdateSecretAsync(token, secret, null);
+        public void UpdateSecretAsync(Secret secret) {
+            this.UpdateSecretAsync(secret, null);
         }
         
         /// <remarks/>
-        public void UpdateSecretAsync(string token, Secret secret, object userState) {
+        public void UpdateSecretAsync(Secret secret, object userState) {
             if ((this.UpdateSecretOperationCompleted == null)) {
                 this.UpdateSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateSecretOperationCompleted);
             }
             this.InvokeAsync("UpdateSecret", new object[] {
-                        token,
                         secret}, this.UpdateSecretOperationCompleted, userState);
         }
         
@@ -1430,24 +1378,22 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecretTemplates", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSecretTemplatesResult GetSecretTemplates(string token) {
-            object[] results = this.Invoke("GetSecretTemplates", new object[] {
-                        token});
+        public GetSecretTemplatesResult GetSecretTemplates() {
+            object[] results = this.Invoke("GetSecretTemplates", new object[0]);
             return ((GetSecretTemplatesResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetSecretTemplatesAsync(string token) {
-            this.GetSecretTemplatesAsync(token, null);
+        public void GetSecretTemplatesAsync() {
+            this.GetSecretTemplatesAsync(null);
         }
         
         /// <remarks/>
-        public void GetSecretTemplatesAsync(string token, object userState) {
+        public void GetSecretTemplatesAsync(object userState) {
             if ((this.GetSecretTemplatesOperationCompleted == null)) {
                 this.GetSecretTemplatesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretTemplatesOperationCompleted);
             }
-            this.InvokeAsync("GetSecretTemplates", new object[] {
-                        token}, this.GetSecretTemplatesOperationCompleted, userState);
+            this.InvokeAsync("GetSecretTemplates", new object[0], this.GetSecretTemplatesOperationCompleted, userState);
         }
         
         private void OnGetSecretTemplatesOperationCompleted(object arg) {
@@ -1459,25 +1405,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GeneratePassword", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GeneratePasswordResult GeneratePassword(string token, int secretFieldId) {
+        public GeneratePasswordResult GeneratePassword(int secretFieldId) {
             object[] results = this.Invoke("GeneratePassword", new object[] {
-                        token,
                         secretFieldId});
             return ((GeneratePasswordResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GeneratePasswordAsync(string token, int secretFieldId) {
-            this.GeneratePasswordAsync(token, secretFieldId, null);
+        public void GeneratePasswordAsync(int secretFieldId) {
+            this.GeneratePasswordAsync(secretFieldId, null);
         }
         
         /// <remarks/>
-        public void GeneratePasswordAsync(string token, int secretFieldId, object userState) {
+        public void GeneratePasswordAsync(int secretFieldId, object userState) {
             if ((this.GeneratePasswordOperationCompleted == null)) {
                 this.GeneratePasswordOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGeneratePasswordOperationCompleted);
             }
             this.InvokeAsync("GeneratePassword", new object[] {
-                        token,
                         secretFieldId}, this.GeneratePasswordOperationCompleted, userState);
         }
         
@@ -1490,25 +1434,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/DeactivateSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult DeactivateSecret(string token, int secretId) {
+        public WebServiceResult DeactivateSecret(int secretId) {
             object[] results = this.Invoke("DeactivateSecret", new object[] {
-                        token,
                         secretId});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void DeactivateSecretAsync(string token, int secretId) {
-            this.DeactivateSecretAsync(token, secretId, null);
+        public void DeactivateSecretAsync(int secretId) {
+            this.DeactivateSecretAsync(secretId, null);
         }
         
         /// <remarks/>
-        public void DeactivateSecretAsync(string token, int secretId, object userState) {
+        public void DeactivateSecretAsync(int secretId, object userState) {
             if ((this.DeactivateSecretOperationCompleted == null)) {
                 this.DeactivateSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeactivateSecretOperationCompleted);
             }
             this.InvokeAsync("DeactivateSecret", new object[] {
-                        token,
                         secretId}, this.DeactivateSecretOperationCompleted, userState);
         }
         
@@ -1547,26 +1489,82 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetCheckOutStatus", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public GetCheckOutStatusResult GetCheckOutStatus(int secretId) {
+            object[] results = this.Invoke("GetCheckOutStatus", new object[] {
+                        secretId});
+            return ((GetCheckOutStatusResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetCheckOutStatusAsync(int secretId) {
+            this.GetCheckOutStatusAsync(secretId, null);
+        }
+        
+        /// <remarks/>
+        public void GetCheckOutStatusAsync(int secretId, object userState) {
+            if ((this.GetCheckOutStatusOperationCompleted == null)) {
+                this.GetCheckOutStatusOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetCheckOutStatusOperationCompleted);
+            }
+            this.InvokeAsync("GetCheckOutStatus", new object[] {
+                        secretId}, this.GetCheckOutStatusOperationCompleted, userState);
+        }
+        
+        private void OnGetCheckOutStatusOperationCompleted(object arg) {
+            if ((this.GetCheckOutStatusCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetCheckOutStatusCompleted(this, new GetCheckOutStatusCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecretAudit", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public GetSecretAuditResult GetSecretAudit(int secretId) {
+            object[] results = this.Invoke("GetSecretAudit", new object[] {
+                        secretId});
+            return ((GetSecretAuditResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetSecretAuditAsync(int secretId) {
+            this.GetSecretAuditAsync(secretId, null);
+        }
+        
+        /// <remarks/>
+        public void GetSecretAuditAsync(int secretId, object userState) {
+            if ((this.GetSecretAuditOperationCompleted == null)) {
+                this.GetSecretAuditOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretAuditOperationCompleted);
+            }
+            this.InvokeAsync("GetSecretAudit", new object[] {
+                        secretId}, this.GetSecretAuditOperationCompleted, userState);
+        }
+        
+        private void OnGetSecretAuditOperationCompleted(object arg) {
+            if ((this.GetSecretAuditCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetSecretAuditCompleted(this, new GetSecretAuditCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderGet", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetFolderResult FolderGet(string token, int folderId) {
+        public GetFolderResult FolderGet(int folderId) {
             object[] results = this.Invoke("FolderGet", new object[] {
-                        token,
                         folderId});
             return ((GetFolderResult)(results[0]));
         }
         
         /// <remarks/>
-        public void FolderGetAsync(string token, int folderId) {
-            this.FolderGetAsync(token, folderId, null);
+        public void FolderGetAsync(int folderId) {
+            this.FolderGetAsync(folderId, null);
         }
         
         /// <remarks/>
-        public void FolderGetAsync(string token, int folderId, object userState) {
+        public void FolderGetAsync(int folderId, object userState) {
             if ((this.FolderGetOperationCompleted == null)) {
                 this.FolderGetOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderGetOperationCompleted);
             }
             this.InvokeAsync("FolderGet", new object[] {
-                        token,
                         folderId}, this.FolderGetOperationCompleted, userState);
         }
         
@@ -1579,25 +1577,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderUpdate", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult FolderUpdate(string token, Folder modifiedFolder) {
+        public WebServiceResult FolderUpdate(Folder modifiedFolder) {
             object[] results = this.Invoke("FolderUpdate", new object[] {
-                        token,
                         modifiedFolder});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void FolderUpdateAsync(string token, Folder modifiedFolder) {
-            this.FolderUpdateAsync(token, modifiedFolder, null);
+        public void FolderUpdateAsync(Folder modifiedFolder) {
+            this.FolderUpdateAsync(modifiedFolder, null);
         }
         
         /// <remarks/>
-        public void FolderUpdateAsync(string token, Folder modifiedFolder, object userState) {
+        public void FolderUpdateAsync(Folder modifiedFolder, object userState) {
             if ((this.FolderUpdateOperationCompleted == null)) {
                 this.FolderUpdateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderUpdateOperationCompleted);
             }
             this.InvokeAsync("FolderUpdate", new object[] {
-                        token,
                         modifiedFolder}, this.FolderUpdateOperationCompleted, userState);
         }
         
@@ -1610,25 +1606,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderGetAllChildren", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetFoldersResult FolderGetAllChildren(string token, int parentFolderId) {
+        public GetFoldersResult FolderGetAllChildren(int parentFolderId) {
             object[] results = this.Invoke("FolderGetAllChildren", new object[] {
-                        token,
                         parentFolderId});
             return ((GetFoldersResult)(results[0]));
         }
         
         /// <remarks/>
-        public void FolderGetAllChildrenAsync(string token, int parentFolderId) {
-            this.FolderGetAllChildrenAsync(token, parentFolderId, null);
+        public void FolderGetAllChildrenAsync(int parentFolderId) {
+            this.FolderGetAllChildrenAsync(parentFolderId, null);
         }
         
         /// <remarks/>
-        public void FolderGetAllChildrenAsync(string token, int parentFolderId, object userState) {
+        public void FolderGetAllChildrenAsync(int parentFolderId, object userState) {
             if ((this.FolderGetAllChildrenOperationCompleted == null)) {
                 this.FolderGetAllChildrenOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderGetAllChildrenOperationCompleted);
             }
             this.InvokeAsync("FolderGetAllChildren", new object[] {
-                        token,
                         parentFolderId}, this.FolderGetAllChildrenOperationCompleted, userState);
         }
         
@@ -1640,185 +1634,24 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderCreate", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public CreateFolderResult FolderCreate(string token, string folderName, int parentFolderId, int folderTypeId) {
-            object[] results = this.Invoke("FolderCreate", new object[] {
-                        token,
-                        folderName,
-                        parentFolderId,
-                        folderTypeId});
-            return ((CreateFolderResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void FolderCreateAsync(string token, string folderName, int parentFolderId, int folderTypeId) {
-            this.FolderCreateAsync(token, folderName, parentFolderId, folderTypeId, null);
-        }
-        
-        /// <remarks/>
-        public void FolderCreateAsync(string token, string folderName, int parentFolderId, int folderTypeId, object userState) {
-            if ((this.FolderCreateOperationCompleted == null)) {
-                this.FolderCreateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderCreateOperationCompleted);
-            }
-            this.InvokeAsync("FolderCreate", new object[] {
-                        token,
-                        folderName,
-                        parentFolderId,
-                        folderTypeId}, this.FolderCreateOperationCompleted, userState);
-        }
-        
-        private void OnFolderCreateOperationCompleted(object arg) {
-            if ((this.FolderCreateCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.FolderCreateCompleted(this, new FolderCreateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderExtendedCreate", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public FolderExtendedCreateResult FolderExtendedCreate(string token, FolderExtended folder) {
-            object[] results = this.Invoke("FolderExtendedCreate", new object[] {
-                        token,
-                        folder});
-            return ((FolderExtendedCreateResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void FolderExtendedCreateAsync(string token, FolderExtended folder) {
-            this.FolderExtendedCreateAsync(token, folder, null);
-        }
-        
-        /// <remarks/>
-        public void FolderExtendedCreateAsync(string token, FolderExtended folder, object userState) {
-            if ((this.FolderExtendedCreateOperationCompleted == null)) {
-                this.FolderExtendedCreateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderExtendedCreateOperationCompleted);
-            }
-            this.InvokeAsync("FolderExtendedCreate", new object[] {
-                        token,
-                        folder}, this.FolderExtendedCreateOperationCompleted, userState);
-        }
-        
-        private void OnFolderExtendedCreateOperationCompleted(object arg) {
-            if ((this.FolderExtendedCreateCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.FolderExtendedCreateCompleted(this, new FolderExtendedCreateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderExtendedGet", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public FolderExtendedGetResult FolderExtendedGet(string token, int folderId) {
-            object[] results = this.Invoke("FolderExtendedGet", new object[] {
-                        token,
-                        folderId});
-            return ((FolderExtendedGetResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void FolderExtendedGetAsync(string token, int folderId) {
-            this.FolderExtendedGetAsync(token, folderId, null);
-        }
-        
-        /// <remarks/>
-        public void FolderExtendedGetAsync(string token, int folderId, object userState) {
-            if ((this.FolderExtendedGetOperationCompleted == null)) {
-                this.FolderExtendedGetOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderExtendedGetOperationCompleted);
-            }
-            this.InvokeAsync("FolderExtendedGet", new object[] {
-                        token,
-                        folderId}, this.FolderExtendedGetOperationCompleted, userState);
-        }
-        
-        private void OnFolderExtendedGetOperationCompleted(object arg) {
-            if ((this.FolderExtendedGetCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.FolderExtendedGetCompleted(this, new FolderExtendedGetCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderExtendedUpdate", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public FolderExtendedUpdateResult FolderExtendedUpdate(string token, FolderExtended folder) {
-            object[] results = this.Invoke("FolderExtendedUpdate", new object[] {
-                        token,
-                        folder});
-            return ((FolderExtendedUpdateResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void FolderExtendedUpdateAsync(string token, FolderExtended folder) {
-            this.FolderExtendedUpdateAsync(token, folder, null);
-        }
-        
-        /// <remarks/>
-        public void FolderExtendedUpdateAsync(string token, FolderExtended folder, object userState) {
-            if ((this.FolderExtendedUpdateOperationCompleted == null)) {
-                this.FolderExtendedUpdateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderExtendedUpdateOperationCompleted);
-            }
-            this.InvokeAsync("FolderExtendedUpdate", new object[] {
-                        token,
-                        folder}, this.FolderExtendedUpdateOperationCompleted, userState);
-        }
-        
-        private void OnFolderExtendedUpdateOperationCompleted(object arg) {
-            if ((this.FolderExtendedUpdateCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.FolderExtendedUpdateCompleted(this, new FolderExtendedUpdateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/FolderExtendedGetNew", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public FolderExtendedGetNewResult FolderExtendedGetNew(string token, FolderExtendedGetNewRequest folderExtendedGetNewRequest) {
-            object[] results = this.Invoke("FolderExtendedGetNew", new object[] {
-                        token,
-                        folderExtendedGetNewRequest});
-            return ((FolderExtendedGetNewResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void FolderExtendedGetNewAsync(string token, FolderExtendedGetNewRequest folderExtendedGetNewRequest) {
-            this.FolderExtendedGetNewAsync(token, folderExtendedGetNewRequest, null);
-        }
-        
-        /// <remarks/>
-        public void FolderExtendedGetNewAsync(string token, FolderExtendedGetNewRequest folderExtendedGetNewRequest, object userState) {
-            if ((this.FolderExtendedGetNewOperationCompleted == null)) {
-                this.FolderExtendedGetNewOperationCompleted = new System.Threading.SendOrPostCallback(this.OnFolderExtendedGetNewOperationCompleted);
-            }
-            this.InvokeAsync("FolderExtendedGetNew", new object[] {
-                        token,
-                        folderExtendedGetNewRequest}, this.FolderExtendedGetNewOperationCompleted, userState);
-        }
-        
-        private void OnFolderExtendedGetNewOperationCompleted(object arg) {
-            if ((this.FolderExtendedGetNewCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.FolderExtendedGetNewCompleted(this, new FolderExtendedGetNewCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchFolders", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SearchFolderResult SearchFolders(string token, string folderName) {
+        public SearchFolderResult SearchFolders(string folderName) {
             object[] results = this.Invoke("SearchFolders", new object[] {
-                        token,
                         folderName});
             return ((SearchFolderResult)(results[0]));
         }
         
         /// <remarks/>
-        public void SearchFoldersAsync(string token, string folderName) {
-            this.SearchFoldersAsync(token, folderName, null);
+        public void SearchFoldersAsync(string folderName) {
+            this.SearchFoldersAsync(folderName, null);
         }
         
         /// <remarks/>
-        public void SearchFoldersAsync(string token, string folderName, object userState) {
+        public void SearchFoldersAsync(string folderName, object userState) {
             if ((this.SearchFoldersOperationCompleted == null)) {
                 this.SearchFoldersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchFoldersOperationCompleted);
             }
             this.InvokeAsync("SearchFolders", new object[] {
-                        token,
                         folderName}, this.SearchFoldersOperationCompleted, userState);
         }
         
@@ -1826,6 +1659,219 @@ namespace SecretServerInterface.SSWebService {
             if ((this.SearchFoldersCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SearchFoldersCompleted(this, new SearchFoldersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/RemoveDependency", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult RemoveDependency(int dependencyId, int secretId) {
+            object[] results = this.Invoke("RemoveDependency", new object[] {
+                        dependencyId,
+                        secretId});
+            return ((WebServiceResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void RemoveDependencyAsync(int dependencyId, int secretId) {
+            this.RemoveDependencyAsync(dependencyId, secretId, null);
+        }
+        
+        /// <remarks/>
+        public void RemoveDependencyAsync(int dependencyId, int secretId, object userState) {
+            if ((this.RemoveDependencyOperationCompleted == null)) {
+                this.RemoveDependencyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoveDependencyOperationCompleted);
+            }
+            this.InvokeAsync("RemoveDependency", new object[] {
+                        dependencyId,
+                        secretId}, this.RemoveDependencyOperationCompleted, userState);
+        }
+        
+        private void OnRemoveDependencyOperationCompleted(object arg) {
+            if ((this.RemoveDependencyCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoveDependencyCompleted(this, new RemoveDependencyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetDependencies", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public GetDependenciesResult GetDependencies(int secretId) {
+            object[] results = this.Invoke("GetDependencies", new object[] {
+                        secretId});
+            return ((GetDependenciesResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetDependenciesAsync(int secretId) {
+            this.GetDependenciesAsync(secretId, null);
+        }
+        
+        /// <remarks/>
+        public void GetDependenciesAsync(int secretId, object userState) {
+            if ((this.GetDependenciesOperationCompleted == null)) {
+                this.GetDependenciesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDependenciesOperationCompleted);
+            }
+            this.InvokeAsync("GetDependencies", new object[] {
+                        secretId}, this.GetDependenciesOperationCompleted, userState);
+        }
+        
+        private void OnGetDependenciesOperationCompleted(object arg) {
+            if ((this.GetDependenciesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetDependenciesCompleted(this, new GetDependenciesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddDependency", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult AddDependency(Dependency dependency) {
+            object[] results = this.Invoke("AddDependency", new object[] {
+                        dependency});
+            return ((WebServiceResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void AddDependencyAsync(Dependency dependency) {
+            this.AddDependencyAsync(dependency, null);
+        }
+        
+        /// <remarks/>
+        public void AddDependencyAsync(Dependency dependency, object userState) {
+            if ((this.AddDependencyOperationCompleted == null)) {
+                this.AddDependencyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddDependencyOperationCompleted);
+            }
+            this.InvokeAsync("AddDependency", new object[] {
+                        dependency}, this.AddDependencyOperationCompleted, userState);
+        }
+        
+        private void OnAddDependencyOperationCompleted(object arg) {
+            if ((this.AddDependencyCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddDependencyCompleted(this, new AddDependencyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/CreateDependencyGroupForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult CreateDependencyGroupForSecret(string token, DependencyGroup dependencyGroup) {
+            object[] results = this.Invoke("CreateDependencyGroupForSecret", new object[] {
+                        token,
+                        dependencyGroup});
+            return ((WebServiceResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void CreateDependencyGroupForSecretAsync(string token, DependencyGroup dependencyGroup) {
+            this.CreateDependencyGroupForSecretAsync(token, dependencyGroup, null);
+        }
+        
+        /// <remarks/>
+        public void CreateDependencyGroupForSecretAsync(string token, DependencyGroup dependencyGroup, object userState) {
+            if ((this.CreateDependencyGroupForSecretOperationCompleted == null)) {
+                this.CreateDependencyGroupForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateDependencyGroupForSecretOperationCompleted);
+            }
+            this.InvokeAsync("CreateDependencyGroupForSecret", new object[] {
+                        token,
+                        dependencyGroup}, this.CreateDependencyGroupForSecretOperationCompleted, userState);
+        }
+        
+        private void OnCreateDependencyGroupForSecretOperationCompleted(object arg) {
+            if ((this.CreateDependencyGroupForSecretCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.CreateDependencyGroupForSecretCompleted(this, new CreateDependencyGroupForSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetDependencyGroupsForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public GetDependencyGroupsResult GetDependencyGroupsForSecret(string token, int secretId) {
+            object[] results = this.Invoke("GetDependencyGroupsForSecret", new object[] {
+                        token,
+                        secretId});
+            return ((GetDependencyGroupsResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetDependencyGroupsForSecretAsync(string token, int secretId) {
+            this.GetDependencyGroupsForSecretAsync(token, secretId, null);
+        }
+        
+        /// <remarks/>
+        public void GetDependencyGroupsForSecretAsync(string token, int secretId, object userState) {
+            if ((this.GetDependencyGroupsForSecretOperationCompleted == null)) {
+                this.GetDependencyGroupsForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDependencyGroupsForSecretOperationCompleted);
+            }
+            this.InvokeAsync("GetDependencyGroupsForSecret", new object[] {
+                        token,
+                        secretId}, this.GetDependencyGroupsForSecretOperationCompleted, userState);
+        }
+        
+        private void OnGetDependencyGroupsForSecretOperationCompleted(object arg) {
+            if ((this.GetDependencyGroupsForSecretCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetDependencyGroupsForSecretCompleted(this, new GetDependencyGroupsForSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/UpdateDependencyGroupForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult UpdateDependencyGroupForSecret(string token, DependencyGroup dependencyGroup) {
+            object[] results = this.Invoke("UpdateDependencyGroupForSecret", new object[] {
+                        token,
+                        dependencyGroup});
+            return ((WebServiceResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void UpdateDependencyGroupForSecretAsync(string token, DependencyGroup dependencyGroup) {
+            this.UpdateDependencyGroupForSecretAsync(token, dependencyGroup, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateDependencyGroupForSecretAsync(string token, DependencyGroup dependencyGroup, object userState) {
+            if ((this.UpdateDependencyGroupForSecretOperationCompleted == null)) {
+                this.UpdateDependencyGroupForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateDependencyGroupForSecretOperationCompleted);
+            }
+            this.InvokeAsync("UpdateDependencyGroupForSecret", new object[] {
+                        token,
+                        dependencyGroup}, this.UpdateDependencyGroupForSecretOperationCompleted, userState);
+        }
+        
+        private void OnUpdateDependencyGroupForSecretOperationCompleted(object arg) {
+            if ((this.UpdateDependencyGroupForSecretCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateDependencyGroupForSecretCompleted(this, new UpdateDependencyGroupForSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/RemoveDependencyGroupForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult RemoveDependencyGroupForSecret(string token, int dependencyGroupId) {
+            object[] results = this.Invoke("RemoveDependencyGroupForSecret", new object[] {
+                        token,
+                        dependencyGroupId});
+            return ((WebServiceResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void RemoveDependencyGroupForSecretAsync(string token, int dependencyGroupId) {
+            this.RemoveDependencyGroupForSecretAsync(token, dependencyGroupId, null);
+        }
+        
+        /// <remarks/>
+        public void RemoveDependencyGroupForSecretAsync(string token, int dependencyGroupId, object userState) {
+            if ((this.RemoveDependencyGroupForSecretOperationCompleted == null)) {
+                this.RemoveDependencyGroupForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoveDependencyGroupForSecretOperationCompleted);
+            }
+            this.InvokeAsync("RemoveDependencyGroupForSecret", new object[] {
+                        token,
+                        dependencyGroupId}, this.RemoveDependencyGroupForSecretOperationCompleted, userState);
+        }
+        
+        private void OnRemoveDependencyGroupForSecretOperationCompleted(object arg) {
+            if ((this.RemoveDependencyGroupForSecretCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoveDependencyGroupForSecretCompleted(this, new RemoveDependencyGroupForSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1966,41 +2012,38 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/ExpireSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult ExpireSecret(string token, int secretId) {
-            object[] results = this.Invoke("ExpireSecret", new object[] {
-                        token,
-                        secretId});
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/ImportXML", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult ImportXML(string xml) {
+            object[] results = this.Invoke("ImportXML", new object[] {
+                        xml});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void ExpireSecretAsync(string token, int secretId) {
-            this.ExpireSecretAsync(token, secretId, null);
+        public void ImportXMLAsync(string xml) {
+            this.ImportXMLAsync(xml, null);
         }
         
         /// <remarks/>
-        public void ExpireSecretAsync(string token, int secretId, object userState) {
-            if ((this.ExpireSecretOperationCompleted == null)) {
-                this.ExpireSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExpireSecretOperationCompleted);
+        public void ImportXMLAsync(string xml, object userState) {
+            if ((this.ImportXMLOperationCompleted == null)) {
+                this.ImportXMLOperationCompleted = new System.Threading.SendOrPostCallback(this.OnImportXMLOperationCompleted);
             }
-            this.InvokeAsync("ExpireSecret", new object[] {
-                        token,
-                        secretId}, this.ExpireSecretOperationCompleted, userState);
+            this.InvokeAsync("ImportXML", new object[] {
+                        xml}, this.ImportXMLOperationCompleted, userState);
         }
         
-        private void OnExpireSecretOperationCompleted(object arg) {
-            if ((this.ExpireSecretCompleted != null)) {
+        private void OnImportXMLOperationCompleted(object arg) {
+            if ((this.ImportXMLCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ExpireSecretCompleted(this, new ExpireSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.ImportXMLCompleted(this, new ImportXMLCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SetCheckOutEnabled", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult SetCheckOutEnabled(string token, int secretId, bool setCheckOut, bool setPasswordChangeOnCheckIn, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<int> checkOutInterval) {
+        public WebServiceResult SetCheckOutEnabled(int secretId, bool setCheckOut, bool setPasswordChangeOnCheckIn, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<int> checkOutInterval) {
             object[] results = this.Invoke("SetCheckOutEnabled", new object[] {
-                        token,
                         secretId,
                         setCheckOut,
                         setPasswordChangeOnCheckIn,
@@ -2009,17 +2052,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void SetCheckOutEnabledAsync(string token, int secretId, bool setCheckOut, bool setPasswordChangeOnCheckIn, System.Nullable<int> checkOutInterval) {
-            this.SetCheckOutEnabledAsync(token, secretId, setCheckOut, setPasswordChangeOnCheckIn, checkOutInterval, null);
+        public void SetCheckOutEnabledAsync(int secretId, bool setCheckOut, bool setPasswordChangeOnCheckIn, System.Nullable<int> checkOutInterval) {
+            this.SetCheckOutEnabledAsync(secretId, setCheckOut, setPasswordChangeOnCheckIn, checkOutInterval, null);
         }
         
         /// <remarks/>
-        public void SetCheckOutEnabledAsync(string token, int secretId, bool setCheckOut, bool setPasswordChangeOnCheckIn, System.Nullable<int> checkOutInterval, object userState) {
+        public void SetCheckOutEnabledAsync(int secretId, bool setCheckOut, bool setPasswordChangeOnCheckIn, System.Nullable<int> checkOutInterval, object userState) {
             if ((this.SetCheckOutEnabledOperationCompleted == null)) {
                 this.SetCheckOutEnabledOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSetCheckOutEnabledOperationCompleted);
             }
             this.InvokeAsync("SetCheckOutEnabled", new object[] {
-                        token,
                         secretId,
                         setCheckOut,
                         setPasswordChangeOnCheckIn,
@@ -2034,306 +2076,23 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/ImportXML", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult ImportXML(string token, string xml) {
-            object[] results = this.Invoke("ImportXML", new object[] {
-                        token,
-                        xml});
-            return ((WebServiceResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ImportXMLAsync(string token, string xml) {
-            this.ImportXMLAsync(token, xml, null);
-        }
-        
-        /// <remarks/>
-        public void ImportXMLAsync(string token, string xml, object userState) {
-            if ((this.ImportXMLOperationCompleted == null)) {
-                this.ImportXMLOperationCompleted = new System.Threading.SendOrPostCallback(this.OnImportXMLOperationCompleted);
-            }
-            this.InvokeAsync("ImportXML", new object[] {
-                        token,
-                        xml}, this.ImportXMLOperationCompleted, userState);
-        }
-        
-        private void OnImportXMLOperationCompleted(object arg) {
-            if ((this.ImportXMLCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ImportXMLCompleted(this, new ImportXMLCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecretAudit", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSecretAuditResult GetSecretAudit(string token, int secretId) {
-            object[] results = this.Invoke("GetSecretAudit", new object[] {
-                        token,
-                        secretId});
-            return ((GetSecretAuditResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetSecretAuditAsync(string token, int secretId) {
-            this.GetSecretAuditAsync(token, secretId, null);
-        }
-        
-        /// <remarks/>
-        public void GetSecretAuditAsync(string token, int secretId, object userState) {
-            if ((this.GetSecretAuditOperationCompleted == null)) {
-                this.GetSecretAuditOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretAuditOperationCompleted);
-            }
-            this.InvokeAsync("GetSecretAudit", new object[] {
-                        token,
-                        secretId}, this.GetSecretAuditOperationCompleted, userState);
-        }
-        
-        private void OnGetSecretAuditOperationCompleted(object arg) {
-            if ((this.GetSecretAuditCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetSecretAuditCompleted(this, new GetSecretAuditCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddDependency", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult AddDependency(string token, Dependency dependency) {
-            object[] results = this.Invoke("AddDependency", new object[] {
-                        token,
-                        dependency});
-            return ((WebServiceResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void AddDependencyAsync(string token, Dependency dependency) {
-            this.AddDependencyAsync(token, dependency, null);
-        }
-        
-        /// <remarks/>
-        public void AddDependencyAsync(string token, Dependency dependency, object userState) {
-            if ((this.AddDependencyOperationCompleted == null)) {
-                this.AddDependencyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddDependencyOperationCompleted);
-            }
-            this.InvokeAsync("AddDependency", new object[] {
-                        token,
-                        dependency}, this.AddDependencyOperationCompleted, userState);
-        }
-        
-        private void OnAddDependencyOperationCompleted(object arg) {
-            if ((this.AddDependencyCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.AddDependencyCompleted(this, new AddDependencyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/RemoveDependency", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult RemoveDependency(string token, int dependencyId, int secretId) {
-            object[] results = this.Invoke("RemoveDependency", new object[] {
-                        token,
-                        dependencyId,
-                        secretId});
-            return ((WebServiceResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void RemoveDependencyAsync(string token, int dependencyId, int secretId) {
-            this.RemoveDependencyAsync(token, dependencyId, secretId, null);
-        }
-        
-        /// <remarks/>
-        public void RemoveDependencyAsync(string token, int dependencyId, int secretId, object userState) {
-            if ((this.RemoveDependencyOperationCompleted == null)) {
-                this.RemoveDependencyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoveDependencyOperationCompleted);
-            }
-            this.InvokeAsync("RemoveDependency", new object[] {
-                        token,
-                        dependencyId,
-                        secretId}, this.RemoveDependencyOperationCompleted, userState);
-        }
-        
-        private void OnRemoveDependencyOperationCompleted(object arg) {
-            if ((this.RemoveDependencyCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.RemoveDependencyCompleted(this, new RemoveDependencyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetDependencies", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetDependenciesResult GetDependencies(string token, int secretId) {
-            object[] results = this.Invoke("GetDependencies", new object[] {
-                        token,
-                        secretId});
-            return ((GetDependenciesResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetDependenciesAsync(string token, int secretId) {
-            this.GetDependenciesAsync(token, secretId, null);
-        }
-        
-        /// <remarks/>
-        public void GetDependenciesAsync(string token, int secretId, object userState) {
-            if ((this.GetDependenciesOperationCompleted == null)) {
-                this.GetDependenciesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDependenciesOperationCompleted);
-            }
-            this.InvokeAsync("GetDependencies", new object[] {
-                        token,
-                        secretId}, this.GetDependenciesOperationCompleted, userState);
-        }
-        
-        private void OnGetDependenciesOperationCompleted(object arg) {
-            if ((this.GetDependenciesCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetDependenciesCompleted(this, new GetDependenciesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/CreateDependencyGroupForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult CreateDependencyGroupForSecret(string token, DependencyGroup dependencyGroup) {
-            object[] results = this.Invoke("CreateDependencyGroupForSecret", new object[] {
-                        token,
-                        dependencyGroup});
-            return ((WebServiceResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void CreateDependencyGroupForSecretAsync(string token, DependencyGroup dependencyGroup) {
-            this.CreateDependencyGroupForSecretAsync(token, dependencyGroup, null);
-        }
-        
-        /// <remarks/>
-        public void CreateDependencyGroupForSecretAsync(string token, DependencyGroup dependencyGroup, object userState) {
-            if ((this.CreateDependencyGroupForSecretOperationCompleted == null)) {
-                this.CreateDependencyGroupForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCreateDependencyGroupForSecretOperationCompleted);
-            }
-            this.InvokeAsync("CreateDependencyGroupForSecret", new object[] {
-                        token,
-                        dependencyGroup}, this.CreateDependencyGroupForSecretOperationCompleted, userState);
-        }
-        
-        private void OnCreateDependencyGroupForSecretOperationCompleted(object arg) {
-            if ((this.CreateDependencyGroupForSecretCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CreateDependencyGroupForSecretCompleted(this, new CreateDependencyGroupForSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetDependencyGroupsForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetDependencyGroupsResult GetDependencyGroupsForSecret(string token, int secretId) {
-            object[] results = this.Invoke("GetDependencyGroupsForSecret", new object[] {
-                        token,
-                        secretId});
-            return ((GetDependencyGroupsResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetDependencyGroupsForSecretAsync(string token, int secretId) {
-            this.GetDependencyGroupsForSecretAsync(token, secretId, null);
-        }
-        
-        /// <remarks/>
-        public void GetDependencyGroupsForSecretAsync(string token, int secretId, object userState) {
-            if ((this.GetDependencyGroupsForSecretOperationCompleted == null)) {
-                this.GetDependencyGroupsForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDependencyGroupsForSecretOperationCompleted);
-            }
-            this.InvokeAsync("GetDependencyGroupsForSecret", new object[] {
-                        token,
-                        secretId}, this.GetDependencyGroupsForSecretOperationCompleted, userState);
-        }
-        
-        private void OnGetDependencyGroupsForSecretOperationCompleted(object arg) {
-            if ((this.GetDependencyGroupsForSecretCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetDependencyGroupsForSecretCompleted(this, new GetDependencyGroupsForSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/UpdateDependencyGroupForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult UpdateDependencyGroupForSecret(string token, DependencyGroup dependencyGroup) {
-            object[] results = this.Invoke("UpdateDependencyGroupForSecret", new object[] {
-                        token,
-                        dependencyGroup});
-            return ((WebServiceResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void UpdateDependencyGroupForSecretAsync(string token, DependencyGroup dependencyGroup) {
-            this.UpdateDependencyGroupForSecretAsync(token, dependencyGroup, null);
-        }
-        
-        /// <remarks/>
-        public void UpdateDependencyGroupForSecretAsync(string token, DependencyGroup dependencyGroup, object userState) {
-            if ((this.UpdateDependencyGroupForSecretOperationCompleted == null)) {
-                this.UpdateDependencyGroupForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateDependencyGroupForSecretOperationCompleted);
-            }
-            this.InvokeAsync("UpdateDependencyGroupForSecret", new object[] {
-                        token,
-                        dependencyGroup}, this.UpdateDependencyGroupForSecretOperationCompleted, userState);
-        }
-        
-        private void OnUpdateDependencyGroupForSecretOperationCompleted(object arg) {
-            if ((this.UpdateDependencyGroupForSecretCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.UpdateDependencyGroupForSecretCompleted(this, new UpdateDependencyGroupForSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/RemoveDependencyGroupForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult RemoveDependencyGroupForSecret(string token, int dependencyGroupId) {
-            object[] results = this.Invoke("RemoveDependencyGroupForSecret", new object[] {
-                        token,
-                        dependencyGroupId});
-            return ((WebServiceResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void RemoveDependencyGroupForSecretAsync(string token, int dependencyGroupId) {
-            this.RemoveDependencyGroupForSecretAsync(token, dependencyGroupId, null);
-        }
-        
-        /// <remarks/>
-        public void RemoveDependencyGroupForSecretAsync(string token, int dependencyGroupId, object userState) {
-            if ((this.RemoveDependencyGroupForSecretOperationCompleted == null)) {
-                this.RemoveDependencyGroupForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoveDependencyGroupForSecretOperationCompleted);
-            }
-            this.InvokeAsync("RemoveDependencyGroupForSecret", new object[] {
-                        token,
-                        dependencyGroupId}, this.RemoveDependencyGroupForSecretOperationCompleted, userState);
-        }
-        
-        private void OnRemoveDependencyGroupForSecretOperationCompleted(object arg) {
-            if ((this.RemoveDependencyGroupForSecretCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.RemoveDependencyGroupForSecretCompleted(this, new RemoveDependencyGroupForSecretCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetDistributedEngines", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSitesResult GetDistributedEngines(string token) {
-            object[] results = this.Invoke("GetDistributedEngines", new object[] {
-                        token});
+        public GetSitesResult GetDistributedEngines() {
+            object[] results = this.Invoke("GetDistributedEngines", new object[0]);
             return ((GetSitesResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetDistributedEnginesAsync(string token) {
-            this.GetDistributedEnginesAsync(token, null);
+        public void GetDistributedEnginesAsync() {
+            this.GetDistributedEnginesAsync(null);
         }
         
         /// <remarks/>
-        public void GetDistributedEnginesAsync(string token, object userState) {
+        public void GetDistributedEnginesAsync(object userState) {
             if ((this.GetDistributedEnginesOperationCompleted == null)) {
                 this.GetDistributedEnginesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDistributedEnginesOperationCompleted);
             }
-            this.InvokeAsync("GetDistributedEngines", new object[] {
-                        token}, this.GetDistributedEnginesOperationCompleted, userState);
+            this.InvokeAsync("GetDistributedEngines", new object[0], this.GetDistributedEnginesOperationCompleted, userState);
         }
         
         private void OnGetDistributedEnginesOperationCompleted(object arg) {
@@ -2345,24 +2104,22 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetTicketSystems", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetTicketSystemsResult GetTicketSystems(string token) {
-            object[] results = this.Invoke("GetTicketSystems", new object[] {
-                        token});
+        public GetTicketSystemsResult GetTicketSystems() {
+            object[] results = this.Invoke("GetTicketSystems", new object[0]);
             return ((GetTicketSystemsResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetTicketSystemsAsync(string token) {
-            this.GetTicketSystemsAsync(token, null);
+        public void GetTicketSystemsAsync() {
+            this.GetTicketSystemsAsync(null);
         }
         
         /// <remarks/>
-        public void GetTicketSystemsAsync(string token, object userState) {
+        public void GetTicketSystemsAsync(object userState) {
             if ((this.GetTicketSystemsOperationCompleted == null)) {
                 this.GetTicketSystemsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTicketSystemsOperationCompleted);
             }
-            this.InvokeAsync("GetTicketSystems", new object[] {
-                        token}, this.GetTicketSystemsOperationCompleted, userState);
+            this.InvokeAsync("GetTicketSystems", new object[0], this.GetTicketSystemsOperationCompleted, userState);
         }
         
         private void OnGetTicketSystemsOperationCompleted(object arg) {
@@ -2374,26 +2131,24 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AssignSite", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult AssignSite(string token, int secretId, int siteId) {
+        public WebServiceResult AssignSite(int secretId, int siteId) {
             object[] results = this.Invoke("AssignSite", new object[] {
-                        token,
                         secretId,
                         siteId});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AssignSiteAsync(string token, int secretId, int siteId) {
-            this.AssignSiteAsync(token, secretId, siteId, null);
+        public void AssignSiteAsync(int secretId, int siteId) {
+            this.AssignSiteAsync(secretId, siteId, null);
         }
         
         /// <remarks/>
-        public void AssignSiteAsync(string token, int secretId, int siteId, object userState) {
+        public void AssignSiteAsync(int secretId, int siteId, object userState) {
             if ((this.AssignSiteOperationCompleted == null)) {
                 this.AssignSiteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAssignSiteOperationCompleted);
             }
             this.InvokeAsync("AssignSite", new object[] {
-                        token,
                         secretId,
                         siteId}, this.AssignSiteOperationCompleted, userState);
         }
@@ -2406,41 +2161,9 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/CheckIn", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult CheckIn(string token, int secretId) {
-            object[] results = this.Invoke("CheckIn", new object[] {
-                        token,
-                        secretId});
-            return ((WebServiceResult)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void CheckInAsync(string token, int secretId) {
-            this.CheckInAsync(token, secretId, null);
-        }
-        
-        /// <remarks/>
-        public void CheckInAsync(string token, int secretId, object userState) {
-            if ((this.CheckInOperationCompleted == null)) {
-                this.CheckInOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCheckInOperationCompleted);
-            }
-            this.InvokeAsync("CheckIn", new object[] {
-                        token,
-                        secretId}, this.CheckInOperationCompleted, userState);
-        }
-        
-        private void OnCheckInOperationCompleted(object arg) {
-            if ((this.CheckInCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CheckInCompleted(this, new CheckInCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddSecretCustomAudit", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult AddSecretCustomAudit(string token, int secretId, string notes, string ipAddress, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<int> referenceId, string ticketNumber, int userId) {
+        public WebServiceResult AddSecretCustomAudit(int secretId, string notes, string ipAddress, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<int> referenceId, string ticketNumber, int userId) {
             object[] results = this.Invoke("AddSecretCustomAudit", new object[] {
-                        token,
                         secretId,
                         notes,
                         ipAddress,
@@ -2451,17 +2174,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void AddSecretCustomAuditAsync(string token, int secretId, string notes, string ipAddress, System.Nullable<int> referenceId, string ticketNumber, int userId) {
-            this.AddSecretCustomAuditAsync(token, secretId, notes, ipAddress, referenceId, ticketNumber, userId, null);
+        public void AddSecretCustomAuditAsync(int secretId, string notes, string ipAddress, System.Nullable<int> referenceId, string ticketNumber, int userId) {
+            this.AddSecretCustomAuditAsync(secretId, notes, ipAddress, referenceId, ticketNumber, userId, null);
         }
         
         /// <remarks/>
-        public void AddSecretCustomAuditAsync(string token, int secretId, string notes, string ipAddress, System.Nullable<int> referenceId, string ticketNumber, int userId, object userState) {
+        public void AddSecretCustomAuditAsync(int secretId, string notes, string ipAddress, System.Nullable<int> referenceId, string ticketNumber, int userId, object userState) {
             if ((this.AddSecretCustomAuditOperationCompleted == null)) {
                 this.AddSecretCustomAuditOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddSecretCustomAuditOperationCompleted);
             }
             this.InvokeAsync("AddSecretCustomAudit", new object[] {
-                        token,
                         secretId,
                         notes,
                         ipAddress,
@@ -2479,9 +2201,8 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/UpdateSecretPermission", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult UpdateSecretPermission(string token, int secretId, GroupOrUserRecord groupOrUserRecord, bool view, bool edit, bool owner) {
+        public WebServiceResult UpdateSecretPermission(int secretId, GroupOrUserRecord groupOrUserRecord, bool view, bool edit, bool owner) {
             object[] results = this.Invoke("UpdateSecretPermission", new object[] {
-                        token,
                         secretId,
                         groupOrUserRecord,
                         view,
@@ -2491,17 +2212,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void UpdateSecretPermissionAsync(string token, int secretId, GroupOrUserRecord groupOrUserRecord, bool view, bool edit, bool owner) {
-            this.UpdateSecretPermissionAsync(token, secretId, groupOrUserRecord, view, edit, owner, null);
+        public void UpdateSecretPermissionAsync(int secretId, GroupOrUserRecord groupOrUserRecord, bool view, bool edit, bool owner) {
+            this.UpdateSecretPermissionAsync(secretId, groupOrUserRecord, view, edit, owner, null);
         }
         
         /// <remarks/>
-        public void UpdateSecretPermissionAsync(string token, int secretId, GroupOrUserRecord groupOrUserRecord, bool view, bool edit, bool owner, object userState) {
+        public void UpdateSecretPermissionAsync(int secretId, GroupOrUserRecord groupOrUserRecord, bool view, bool edit, bool owner, object userState) {
             if ((this.UpdateSecretPermissionOperationCompleted == null)) {
                 this.UpdateSecretPermissionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateSecretPermissionOperationCompleted);
             }
             this.InvokeAsync("UpdateSecretPermission", new object[] {
-                        token,
                         secretId,
                         groupOrUserRecord,
                         view,
@@ -2547,24 +2267,22 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/WhoAmI", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public UserInfoResult WhoAmI(string token) {
-            object[] results = this.Invoke("WhoAmI", new object[] {
-                        token});
+        public UserInfoResult WhoAmI() {
+            object[] results = this.Invoke("WhoAmI", new object[0]);
             return ((UserInfoResult)(results[0]));
         }
         
         /// <remarks/>
-        public void WhoAmIAsync(string token) {
-            this.WhoAmIAsync(token, null);
+        public void WhoAmIAsync() {
+            this.WhoAmIAsync(null);
         }
         
         /// <remarks/>
-        public void WhoAmIAsync(string token, object userState) {
+        public void WhoAmIAsync(object userState) {
             if ((this.WhoAmIOperationCompleted == null)) {
                 this.WhoAmIOperationCompleted = new System.Threading.SendOrPostCallback(this.OnWhoAmIOperationCompleted);
             }
-            this.InvokeAsync("WhoAmI", new object[] {
-                        token}, this.WhoAmIOperationCompleted, userState);
+            this.InvokeAsync("WhoAmI", new object[0], this.WhoAmIOperationCompleted, userState);
         }
         
         private void OnWhoAmIOperationCompleted(object arg) {
@@ -2576,24 +2294,22 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetAllGroups", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetAllGroupsResult GetAllGroups(string token) {
-            object[] results = this.Invoke("GetAllGroups", new object[] {
-                        token});
+        public GetAllGroupsResult GetAllGroups() {
+            object[] results = this.Invoke("GetAllGroups", new object[0]);
             return ((GetAllGroupsResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetAllGroupsAsync(string token) {
-            this.GetAllGroupsAsync(token, null);
+        public void GetAllGroupsAsync() {
+            this.GetAllGroupsAsync(null);
         }
         
         /// <remarks/>
-        public void GetAllGroupsAsync(string token, object userState) {
+        public void GetAllGroupsAsync(object userState) {
             if ((this.GetAllGroupsOperationCompleted == null)) {
                 this.GetAllGroupsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllGroupsOperationCompleted);
             }
-            this.InvokeAsync("GetAllGroups", new object[] {
-                        token}, this.GetAllGroupsOperationCompleted, userState);
+            this.InvokeAsync("GetAllGroups", new object[0], this.GetAllGroupsOperationCompleted, userState);
         }
         
         private void OnGetAllGroupsOperationCompleted(object arg) {
@@ -2605,26 +2321,24 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AssignUserToGroup", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult AssignUserToGroup(string token, int userId, int groupId) {
+        public WebServiceResult AssignUserToGroup(int userId, int groupId) {
             object[] results = this.Invoke("AssignUserToGroup", new object[] {
-                        token,
                         userId,
                         groupId});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AssignUserToGroupAsync(string token, int userId, int groupId) {
-            this.AssignUserToGroupAsync(token, userId, groupId, null);
+        public void AssignUserToGroupAsync(int userId, int groupId) {
+            this.AssignUserToGroupAsync(userId, groupId, null);
         }
         
         /// <remarks/>
-        public void AssignUserToGroupAsync(string token, int userId, int groupId, object userState) {
+        public void AssignUserToGroupAsync(int userId, int groupId, object userState) {
             if ((this.AssignUserToGroupOperationCompleted == null)) {
                 this.AssignUserToGroupOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAssignUserToGroupOperationCompleted);
             }
             this.InvokeAsync("AssignUserToGroup", new object[] {
-                        token,
                         userId,
                         groupId}, this.AssignUserToGroupOperationCompleted, userState);
         }
@@ -2638,25 +2352,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSSHLoginCredentials", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SSHCredentialsResult GetSSHLoginCredentials(string token, int secretId) {
+        public SSHCredentialsResult GetSSHLoginCredentials(int secretId) {
             object[] results = this.Invoke("GetSSHLoginCredentials", new object[] {
-                        token,
                         secretId});
             return ((SSHCredentialsResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetSSHLoginCredentialsAsync(string token, int secretId) {
-            this.GetSSHLoginCredentialsAsync(token, secretId, null);
+        public void GetSSHLoginCredentialsAsync(int secretId) {
+            this.GetSSHLoginCredentialsAsync(secretId, null);
         }
         
         /// <remarks/>
-        public void GetSSHLoginCredentialsAsync(string token, int secretId, object userState) {
+        public void GetSSHLoginCredentialsAsync(int secretId, object userState) {
             if ((this.GetSSHLoginCredentialsOperationCompleted == null)) {
                 this.GetSSHLoginCredentialsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSSHLoginCredentialsOperationCompleted);
             }
             this.InvokeAsync("GetSSHLoginCredentials", new object[] {
-                        token,
                         secretId}, this.GetSSHLoginCredentialsOperationCompleted, userState);
         }
         
@@ -2669,26 +2381,24 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSSHLoginCredentialsWithMachine", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SSHCredentialsResult GetSSHLoginCredentialsWithMachine(string token, int secretId, string machine) {
+        public SSHCredentialsResult GetSSHLoginCredentialsWithMachine(int secretId, string machine) {
             object[] results = this.Invoke("GetSSHLoginCredentialsWithMachine", new object[] {
-                        token,
                         secretId,
                         machine});
             return ((SSHCredentialsResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetSSHLoginCredentialsWithMachineAsync(string token, int secretId, string machine) {
-            this.GetSSHLoginCredentialsWithMachineAsync(token, secretId, machine, null);
+        public void GetSSHLoginCredentialsWithMachineAsync(int secretId, string machine) {
+            this.GetSSHLoginCredentialsWithMachineAsync(secretId, machine, null);
         }
         
         /// <remarks/>
-        public void GetSSHLoginCredentialsWithMachineAsync(string token, int secretId, string machine, object userState) {
+        public void GetSSHLoginCredentialsWithMachineAsync(int secretId, string machine, object userState) {
             if ((this.GetSSHLoginCredentialsWithMachineOperationCompleted == null)) {
                 this.GetSSHLoginCredentialsWithMachineOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSSHLoginCredentialsWithMachineOperationCompleted);
             }
             this.InvokeAsync("GetSSHLoginCredentialsWithMachine", new object[] {
-                        token,
                         secretId,
                         machine}, this.GetSSHLoginCredentialsWithMachineOperationCompleted, userState);
         }
@@ -2702,26 +2412,24 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchUsers", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetUsersResult SearchUsers(string token, string searchTerm, bool includeInactiveUsers) {
+        public GetUsersResult SearchUsers(string searchTerm, bool includeInactiveUsers) {
             object[] results = this.Invoke("SearchUsers", new object[] {
-                        token,
                         searchTerm,
                         includeInactiveUsers});
             return ((GetUsersResult)(results[0]));
         }
         
         /// <remarks/>
-        public void SearchUsersAsync(string token, string searchTerm, bool includeInactiveUsers) {
-            this.SearchUsersAsync(token, searchTerm, includeInactiveUsers, null);
+        public void SearchUsersAsync(string searchTerm, bool includeInactiveUsers) {
+            this.SearchUsersAsync(searchTerm, includeInactiveUsers, null);
         }
         
         /// <remarks/>
-        public void SearchUsersAsync(string token, string searchTerm, bool includeInactiveUsers, object userState) {
+        public void SearchUsersAsync(string searchTerm, bool includeInactiveUsers, object userState) {
             if ((this.SearchUsersOperationCompleted == null)) {
                 this.SearchUsersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchUsersOperationCompleted);
             }
             this.InvokeAsync("SearchUsers", new object[] {
-                        token,
                         searchTerm,
                         includeInactiveUsers}, this.SearchUsersOperationCompleted, userState);
         }
@@ -2735,25 +2443,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetUser", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetUserResult GetUser(string token, int userId) {
+        public GetUserResult GetUser(int userId) {
             object[] results = this.Invoke("GetUser", new object[] {
-                        token,
                         userId});
             return ((GetUserResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetUserAsync(string token, int userId) {
-            this.GetUserAsync(token, userId, null);
+        public void GetUserAsync(int userId) {
+            this.GetUserAsync(userId, null);
         }
         
         /// <remarks/>
-        public void GetUserAsync(string token, int userId, object userState) {
+        public void GetUserAsync(int userId, object userState) {
             if ((this.GetUserOperationCompleted == null)) {
                 this.GetUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetUserOperationCompleted);
             }
             this.InvokeAsync("GetUser", new object[] {
-                        token,
                         userId}, this.GetUserOperationCompleted, userState);
         }
         
@@ -2766,25 +2472,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/UpdateUser", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public UpdateUserResult UpdateUser(string token, User user) {
+        public UpdateUserResult UpdateUser(User user) {
             object[] results = this.Invoke("UpdateUser", new object[] {
-                        token,
                         user});
             return ((UpdateUserResult)(results[0]));
         }
         
         /// <remarks/>
-        public void UpdateUserAsync(string token, User user) {
-            this.UpdateUserAsync(token, user, null);
+        public void UpdateUserAsync(User user) {
+            this.UpdateUserAsync(user, null);
         }
         
         /// <remarks/>
-        public void UpdateUserAsync(string token, User user, object userState) {
+        public void UpdateUserAsync(User user, object userState) {
             if ((this.UpdateUserOperationCompleted == null)) {
                 this.UpdateUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateUserOperationCompleted);
             }
             this.InvokeAsync("UpdateUser", new object[] {
-                        token,
                         user}, this.UpdateUserOperationCompleted, userState);
         }
         
@@ -2797,26 +2501,24 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecretItemHistoryByFieldName", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SecretItemHistoryResult GetSecretItemHistoryByFieldName(string token, int secretId, string fieldDisplayName) {
+        public SecretItemHistoryResult GetSecretItemHistoryByFieldName(int secretId, string fieldDisplayName) {
             object[] results = this.Invoke("GetSecretItemHistoryByFieldName", new object[] {
-                        token,
                         secretId,
                         fieldDisplayName});
             return ((SecretItemHistoryResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetSecretItemHistoryByFieldNameAsync(string token, int secretId, string fieldDisplayName) {
-            this.GetSecretItemHistoryByFieldNameAsync(token, secretId, fieldDisplayName, null);
+        public void GetSecretItemHistoryByFieldNameAsync(int secretId, string fieldDisplayName) {
+            this.GetSecretItemHistoryByFieldNameAsync(secretId, fieldDisplayName, null);
         }
         
         /// <remarks/>
-        public void GetSecretItemHistoryByFieldNameAsync(string token, int secretId, string fieldDisplayName, object userState) {
+        public void GetSecretItemHistoryByFieldNameAsync(int secretId, string fieldDisplayName, object userState) {
             if ((this.GetSecretItemHistoryByFieldNameOperationCompleted == null)) {
                 this.GetSecretItemHistoryByFieldNameOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretItemHistoryByFieldNameOperationCompleted);
             }
             this.InvokeAsync("GetSecretItemHistoryByFieldName", new object[] {
-                        token,
                         secretId,
                         fieldDisplayName}, this.GetSecretItemHistoryByFieldNameOperationCompleted, userState);
         }
@@ -2830,25 +2532,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSecretPolicyForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SecretPolicyForSecretResult GetSecretPolicyForSecret(string token, int secretId) {
+        public SecretPolicyForSecretResult GetSecretPolicyForSecret(int secretId) {
             object[] results = this.Invoke("GetSecretPolicyForSecret", new object[] {
-                        token,
                         secretId});
             return ((SecretPolicyForSecretResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetSecretPolicyForSecretAsync(string token, int secretId) {
-            this.GetSecretPolicyForSecretAsync(token, secretId, null);
+        public void GetSecretPolicyForSecretAsync(int secretId) {
+            this.GetSecretPolicyForSecretAsync(secretId, null);
         }
         
         /// <remarks/>
-        public void GetSecretPolicyForSecretAsync(string token, int secretId, object userState) {
+        public void GetSecretPolicyForSecretAsync(int secretId, object userState) {
             if ((this.GetSecretPolicyForSecretOperationCompleted == null)) {
                 this.GetSecretPolicyForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSecretPolicyForSecretOperationCompleted);
             }
             this.InvokeAsync("GetSecretPolicyForSecret", new object[] {
-                        token,
                         secretId}, this.GetSecretPolicyForSecretOperationCompleted, userState);
         }
         
@@ -2861,25 +2561,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AssignSecretPolicyForSecret", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SecretPolicyForSecretResult AssignSecretPolicyForSecret(string token, SecretPolicyForSecret secretPolicyForSecret) {
+        public SecretPolicyForSecretResult AssignSecretPolicyForSecret(SecretPolicyForSecret secretPolicyForSecret) {
             object[] results = this.Invoke("AssignSecretPolicyForSecret", new object[] {
-                        token,
                         secretPolicyForSecret});
             return ((SecretPolicyForSecretResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AssignSecretPolicyForSecretAsync(string token, SecretPolicyForSecret secretPolicyForSecret) {
-            this.AssignSecretPolicyForSecretAsync(token, secretPolicyForSecret, null);
+        public void AssignSecretPolicyForSecretAsync(SecretPolicyForSecret secretPolicyForSecret) {
+            this.AssignSecretPolicyForSecretAsync(secretPolicyForSecret, null);
         }
         
         /// <remarks/>
-        public void AssignSecretPolicyForSecretAsync(string token, SecretPolicyForSecret secretPolicyForSecret, object userState) {
+        public void AssignSecretPolicyForSecretAsync(SecretPolicyForSecret secretPolicyForSecret, object userState) {
             if ((this.AssignSecretPolicyForSecretOperationCompleted == null)) {
                 this.AssignSecretPolicyForSecretOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAssignSecretPolicyForSecretOperationCompleted);
             }
             this.InvokeAsync("AssignSecretPolicyForSecret", new object[] {
-                        token,
                         secretPolicyForSecret}, this.AssignSecretPolicyForSecretOperationCompleted, userState);
         }
         
@@ -2892,26 +2590,24 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SearchSecretPolicies", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SearchSecretPoliciesResult SearchSecretPolicies(string token, string term, bool includeInactive) {
+        public SearchSecretPoliciesResult SearchSecretPolicies(string term, bool includeInactive) {
             object[] results = this.Invoke("SearchSecretPolicies", new object[] {
-                        token,
                         term,
                         includeInactive});
             return ((SearchSecretPoliciesResult)(results[0]));
         }
         
         /// <remarks/>
-        public void SearchSecretPoliciesAsync(string token, string term, bool includeInactive) {
-            this.SearchSecretPoliciesAsync(token, term, includeInactive, null);
+        public void SearchSecretPoliciesAsync(string term, bool includeInactive) {
+            this.SearchSecretPoliciesAsync(term, includeInactive, null);
         }
         
         /// <remarks/>
-        public void SearchSecretPoliciesAsync(string token, string term, bool includeInactive, object userState) {
+        public void SearchSecretPoliciesAsync(string term, bool includeInactive, object userState) {
             if ((this.SearchSecretPoliciesOperationCompleted == null)) {
                 this.SearchSecretPoliciesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSearchSecretPoliciesOperationCompleted);
             }
             this.InvokeAsync("SearchSecretPolicies", new object[] {
-                        token,
                         term,
                         includeInactive}, this.SearchSecretPoliciesOperationCompleted, userState);
         }
@@ -2925,24 +2621,22 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/RunActiveDirectorySynchronization", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult RunActiveDirectorySynchronization(string token) {
-            object[] results = this.Invoke("RunActiveDirectorySynchronization", new object[] {
-                        token});
+        public WebServiceResult RunActiveDirectorySynchronization() {
+            object[] results = this.Invoke("RunActiveDirectorySynchronization", new object[0]);
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void RunActiveDirectorySynchronizationAsync(string token) {
-            this.RunActiveDirectorySynchronizationAsync(token, null);
+        public void RunActiveDirectorySynchronizationAsync() {
+            this.RunActiveDirectorySynchronizationAsync(null);
         }
         
         /// <remarks/>
-        public void RunActiveDirectorySynchronizationAsync(string token, object userState) {
+        public void RunActiveDirectorySynchronizationAsync(object userState) {
             if ((this.RunActiveDirectorySynchronizationOperationCompleted == null)) {
                 this.RunActiveDirectorySynchronizationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRunActiveDirectorySynchronizationOperationCompleted);
             }
-            this.InvokeAsync("RunActiveDirectorySynchronization", new object[] {
-                        token}, this.RunActiveDirectorySynchronizationOperationCompleted, userState);
+            this.InvokeAsync("RunActiveDirectorySynchronization", new object[0], this.RunActiveDirectorySynchronizationOperationCompleted, userState);
         }
         
         private void OnRunActiveDirectorySynchronizationOperationCompleted(object arg) {
@@ -2954,26 +2648,24 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddGroupToActiveDirectorySynchronization", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult AddGroupToActiveDirectorySynchronization(string token, AddGroupRequestMessage addGroupRequestMessage) {
+        public WebServiceResult AddGroupToActiveDirectorySynchronization(AddGroupRequestMessage groupRequestMessage) {
             object[] results = this.Invoke("AddGroupToActiveDirectorySynchronization", new object[] {
-                        token,
-                        addGroupRequestMessage});
+                        groupRequestMessage});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AddGroupToActiveDirectorySynchronizationAsync(string token, AddGroupRequestMessage addGroupRequestMessage) {
-            this.AddGroupToActiveDirectorySynchronizationAsync(token, addGroupRequestMessage, null);
+        public void AddGroupToActiveDirectorySynchronizationAsync(AddGroupRequestMessage groupRequestMessage) {
+            this.AddGroupToActiveDirectorySynchronizationAsync(groupRequestMessage, null);
         }
         
         /// <remarks/>
-        public void AddGroupToActiveDirectorySynchronizationAsync(string token, AddGroupRequestMessage addGroupRequestMessage, object userState) {
+        public void AddGroupToActiveDirectorySynchronizationAsync(AddGroupRequestMessage groupRequestMessage, object userState) {
             if ((this.AddGroupToActiveDirectorySynchronizationOperationCompleted == null)) {
                 this.AddGroupToActiveDirectorySynchronizationOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddGroupToActiveDirectorySynchronizationOperationCompleted);
             }
             this.InvokeAsync("AddGroupToActiveDirectorySynchronization", new object[] {
-                        token,
-                        addGroupRequestMessage}, this.AddGroupToActiveDirectorySynchronizationOperationCompleted, userState);
+                        groupRequestMessage}, this.AddGroupToActiveDirectorySynchronizationOperationCompleted, userState);
         }
         
         private void OnAddGroupToActiveDirectorySynchronizationOperationCompleted(object arg) {
@@ -2985,25 +2677,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddSecretPolicy", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SecretPolicyResult AddSecretPolicy(string token, SecretPolicyDetail secretPolicy) {
+        public SecretPolicyResult AddSecretPolicy(SecretPolicyDetail secretPolicy) {
             object[] results = this.Invoke("AddSecretPolicy", new object[] {
-                        token,
                         secretPolicy});
             return ((SecretPolicyResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AddSecretPolicyAsync(string token, SecretPolicyDetail secretPolicy) {
-            this.AddSecretPolicyAsync(token, secretPolicy, null);
+        public void AddSecretPolicyAsync(SecretPolicyDetail secretPolicy) {
+            this.AddSecretPolicyAsync(secretPolicy, null);
         }
         
         /// <remarks/>
-        public void AddSecretPolicyAsync(string token, SecretPolicyDetail secretPolicy, object userState) {
+        public void AddSecretPolicyAsync(SecretPolicyDetail secretPolicy, object userState) {
             if ((this.AddSecretPolicyOperationCompleted == null)) {
                 this.AddSecretPolicyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddSecretPolicyOperationCompleted);
             }
             this.InvokeAsync("AddSecretPolicy", new object[] {
-                        token,
                         secretPolicy}, this.AddSecretPolicyOperationCompleted, userState);
         }
         
@@ -3016,24 +2706,22 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetNewSecretPolicy", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SecretPolicyResult GetNewSecretPolicy(string token) {
-            object[] results = this.Invoke("GetNewSecretPolicy", new object[] {
-                        token});
+        public SecretPolicyResult GetNewSecretPolicy() {
+            object[] results = this.Invoke("GetNewSecretPolicy", new object[0]);
             return ((SecretPolicyResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetNewSecretPolicyAsync(string token) {
-            this.GetNewSecretPolicyAsync(token, null);
+        public void GetNewSecretPolicyAsync() {
+            this.GetNewSecretPolicyAsync(null);
         }
         
         /// <remarks/>
-        public void GetNewSecretPolicyAsync(string token, object userState) {
+        public void GetNewSecretPolicyAsync(object userState) {
             if ((this.GetNewSecretPolicyOperationCompleted == null)) {
                 this.GetNewSecretPolicyOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetNewSecretPolicyOperationCompleted);
             }
-            this.InvokeAsync("GetNewSecretPolicy", new object[] {
-                        token}, this.GetNewSecretPolicyOperationCompleted, userState);
+            this.InvokeAsync("GetNewSecretPolicy", new object[0], this.GetNewSecretPolicyOperationCompleted, userState);
         }
         
         private void OnGetNewSecretPolicyOperationCompleted(object arg) {
@@ -3045,25 +2733,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetSSHCommandMenu", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSshCommandMenuResult GetSSHCommandMenu(string token, int sshCommandMenuId) {
+        public GetSshCommandMenuResult GetSSHCommandMenu(int sshCommandMenuId) {
             object[] results = this.Invoke("GetSSHCommandMenu", new object[] {
-                        token,
                         sshCommandMenuId});
             return ((GetSshCommandMenuResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetSSHCommandMenuAsync(string token, int sshCommandMenuId) {
-            this.GetSSHCommandMenuAsync(token, sshCommandMenuId, null);
+        public void GetSSHCommandMenuAsync(int sshCommandMenuId) {
+            this.GetSSHCommandMenuAsync(sshCommandMenuId, null);
         }
         
         /// <remarks/>
-        public void GetSSHCommandMenuAsync(string token, int sshCommandMenuId, object userState) {
+        public void GetSSHCommandMenuAsync(int sshCommandMenuId, object userState) {
             if ((this.GetSSHCommandMenuOperationCompleted == null)) {
                 this.GetSSHCommandMenuOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetSSHCommandMenuOperationCompleted);
             }
             this.InvokeAsync("GetSSHCommandMenu", new object[] {
-                        token,
                         sshCommandMenuId}, this.GetSSHCommandMenuOperationCompleted, userState);
         }
         
@@ -3076,9 +2762,8 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/SaveSSHCommandMenu", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSshCommandMenuResult SaveSSHCommandMenu(string token, SshCommandMenu sshCommandMenu, string commandsText, bool deleteCommands) {
+        public GetSshCommandMenuResult SaveSSHCommandMenu(SshCommandMenu sshCommandMenu, string commandsText, bool deleteCommands) {
             object[] results = this.Invoke("SaveSSHCommandMenu", new object[] {
-                        token,
                         sshCommandMenu,
                         commandsText,
                         deleteCommands});
@@ -3086,17 +2771,16 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public void SaveSSHCommandMenuAsync(string token, SshCommandMenu sshCommandMenu, string commandsText, bool deleteCommands) {
-            this.SaveSSHCommandMenuAsync(token, sshCommandMenu, commandsText, deleteCommands, null);
+        public void SaveSSHCommandMenuAsync(SshCommandMenu sshCommandMenu, string commandsText, bool deleteCommands) {
+            this.SaveSSHCommandMenuAsync(sshCommandMenu, commandsText, deleteCommands, null);
         }
         
         /// <remarks/>
-        public void SaveSSHCommandMenuAsync(string token, SshCommandMenu sshCommandMenu, string commandsText, bool deleteCommands, object userState) {
+        public void SaveSSHCommandMenuAsync(SshCommandMenu sshCommandMenu, string commandsText, bool deleteCommands, object userState) {
             if ((this.SaveSSHCommandMenuOperationCompleted == null)) {
                 this.SaveSSHCommandMenuOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveSSHCommandMenuOperationCompleted);
             }
             this.InvokeAsync("SaveSSHCommandMenu", new object[] {
-                        token,
                         sshCommandMenu,
                         commandsText,
                         deleteCommands}, this.SaveSSHCommandMenuOperationCompleted, userState);
@@ -3111,25 +2795,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetAllSSHCommandMenus", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetSshCommandMenusResult GetAllSSHCommandMenus(string token, [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeInactive) {
+        public GetSshCommandMenusResult GetAllSSHCommandMenus([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] System.Nullable<bool> includeInactive) {
             object[] results = this.Invoke("GetAllSSHCommandMenus", new object[] {
-                        token,
                         includeInactive});
             return ((GetSshCommandMenusResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetAllSSHCommandMenusAsync(string token, System.Nullable<bool> includeInactive) {
-            this.GetAllSSHCommandMenusAsync(token, includeInactive, null);
+        public void GetAllSSHCommandMenusAsync(System.Nullable<bool> includeInactive) {
+            this.GetAllSSHCommandMenusAsync(includeInactive, null);
         }
         
         /// <remarks/>
-        public void GetAllSSHCommandMenusAsync(string token, System.Nullable<bool> includeInactive, object userState) {
+        public void GetAllSSHCommandMenusAsync(System.Nullable<bool> includeInactive, object userState) {
             if ((this.GetAllSSHCommandMenusOperationCompleted == null)) {
                 this.GetAllSSHCommandMenusOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllSSHCommandMenusOperationCompleted);
             }
             this.InvokeAsync("GetAllSSHCommandMenus", new object[] {
-                        token,
                         includeInactive}, this.GetAllSSHCommandMenusOperationCompleted, userState);
         }
         
@@ -3142,25 +2824,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/DeleteSSHCommandMenu", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult DeleteSSHCommandMenu(string token, int sshCommandMenuId) {
+        public WebServiceResult DeleteSSHCommandMenu(int sshCommandMenuId) {
             object[] results = this.Invoke("DeleteSSHCommandMenu", new object[] {
-                        token,
                         sshCommandMenuId});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void DeleteSSHCommandMenuAsync(string token, int sshCommandMenuId) {
-            this.DeleteSSHCommandMenuAsync(token, sshCommandMenuId, null);
+        public void DeleteSSHCommandMenuAsync(int sshCommandMenuId) {
+            this.DeleteSSHCommandMenuAsync(sshCommandMenuId, null);
         }
         
         /// <remarks/>
-        public void DeleteSSHCommandMenuAsync(string token, int sshCommandMenuId, object userState) {
+        public void DeleteSSHCommandMenuAsync(int sshCommandMenuId, object userState) {
             if ((this.DeleteSSHCommandMenuOperationCompleted == null)) {
                 this.DeleteSSHCommandMenuOperationCompleted = new System.Threading.SendOrPostCallback(this.OnDeleteSSHCommandMenuOperationCompleted);
             }
             this.InvokeAsync("DeleteSSHCommandMenu", new object[] {
-                        token,
                         sshCommandMenuId}, this.DeleteSSHCommandMenuOperationCompleted, userState);
         }
         
@@ -3173,25 +2853,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/RestoreSSHCommandMenu", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult RestoreSSHCommandMenu(string token, int sshCommandMenuId) {
+        public WebServiceResult RestoreSSHCommandMenu(int sshCommandMenuId) {
             object[] results = this.Invoke("RestoreSSHCommandMenu", new object[] {
-                        token,
                         sshCommandMenuId});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void RestoreSSHCommandMenuAsync(string token, int sshCommandMenuId) {
-            this.RestoreSSHCommandMenuAsync(token, sshCommandMenuId, null);
+        public void RestoreSSHCommandMenuAsync(int sshCommandMenuId) {
+            this.RestoreSSHCommandMenuAsync(sshCommandMenuId, null);
         }
         
         /// <remarks/>
-        public void RestoreSSHCommandMenuAsync(string token, int sshCommandMenuId, object userState) {
+        public void RestoreSSHCommandMenuAsync(int sshCommandMenuId, object userState) {
             if ((this.RestoreSSHCommandMenuOperationCompleted == null)) {
                 this.RestoreSSHCommandMenuOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRestoreSSHCommandMenuOperationCompleted);
             }
             this.InvokeAsync("RestoreSSHCommandMenu", new object[] {
-                        token,
                         sshCommandMenuId}, this.RestoreSSHCommandMenuOperationCompleted, userState);
         }
         
@@ -3203,26 +2881,53 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/ValidateTwoFactor", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public WebServiceResult ValidateTwoFactor(string pinCode) {
+            object[] results = this.Invoke("ValidateTwoFactor", new object[] {
+                        pinCode});
+            return ((WebServiceResult)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ValidateTwoFactorAsync(string pinCode) {
+            this.ValidateTwoFactorAsync(pinCode, null);
+        }
+        
+        /// <remarks/>
+        public void ValidateTwoFactorAsync(string pinCode, object userState) {
+            if ((this.ValidateTwoFactorOperationCompleted == null)) {
+                this.ValidateTwoFactorOperationCompleted = new System.Threading.SendOrPostCallback(this.OnValidateTwoFactorOperationCompleted);
+            }
+            this.InvokeAsync("ValidateTwoFactor", new object[] {
+                        pinCode}, this.ValidateTwoFactorOperationCompleted, userState);
+        }
+        
+        private void OnValidateTwoFactorOperationCompleted(object arg) {
+            if ((this.ValidateTwoFactorCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ValidateTwoFactorCompleted(this, new ValidateTwoFactorCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetReport", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetReportResult GetReport(string token, GetReportRequest reportRequest) {
+        public GetReportResult GetReport(GetReportRequest reportRequest) {
             object[] results = this.Invoke("GetReport", new object[] {
-                        token,
                         reportRequest});
             return ((GetReportResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetReportAsync(string token, GetReportRequest reportRequest) {
-            this.GetReportAsync(token, reportRequest, null);
+        public void GetReportAsync(GetReportRequest reportRequest) {
+            this.GetReportAsync(reportRequest, null);
         }
         
         /// <remarks/>
-        public void GetReportAsync(string token, GetReportRequest reportRequest, object userState) {
+        public void GetReportAsync(GetReportRequest reportRequest, object userState) {
             if ((this.GetReportOperationCompleted == null)) {
                 this.GetReportOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetReportOperationCompleted);
             }
             this.InvokeAsync("GetReport", new object[] {
-                        token,
                         reportRequest}, this.GetReportOperationCompleted, userState);
         }
         
@@ -3235,25 +2940,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/AddScript", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public WebServiceResult AddScript(string token, UserScript newUserScript) {
+        public WebServiceResult AddScript(UserScript newUserScript) {
             object[] results = this.Invoke("AddScript", new object[] {
-                        token,
                         newUserScript});
             return ((WebServiceResult)(results[0]));
         }
         
         /// <remarks/>
-        public void AddScriptAsync(string token, UserScript newUserScript) {
-            this.AddScriptAsync(token, newUserScript, null);
+        public void AddScriptAsync(UserScript newUserScript) {
+            this.AddScriptAsync(newUserScript, null);
         }
         
         /// <remarks/>
-        public void AddScriptAsync(string token, UserScript newUserScript, object userState) {
+        public void AddScriptAsync(UserScript newUserScript, object userState) {
             if ((this.AddScriptOperationCompleted == null)) {
                 this.AddScriptOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddScriptOperationCompleted);
             }
             this.InvokeAsync("AddScript", new object[] {
-                        token,
                         newUserScript}, this.AddScriptOperationCompleted, userState);
         }
         
@@ -3266,25 +2969,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetAllScripts", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetUserScriptsResult GetAllScripts(string token, bool includeInactiveUserScripts) {
+        public GetUserScriptsResult GetAllScripts(bool includeInactiveUserScripts) {
             object[] results = this.Invoke("GetAllScripts", new object[] {
-                        token,
                         includeInactiveUserScripts});
             return ((GetUserScriptsResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetAllScriptsAsync(string token, bool includeInactiveUserScripts) {
-            this.GetAllScriptsAsync(token, includeInactiveUserScripts, null);
+        public void GetAllScriptsAsync(bool includeInactiveUserScripts) {
+            this.GetAllScriptsAsync(includeInactiveUserScripts, null);
         }
         
         /// <remarks/>
-        public void GetAllScriptsAsync(string token, bool includeInactiveUserScripts, object userState) {
+        public void GetAllScriptsAsync(bool includeInactiveUserScripts, object userState) {
             if ((this.GetAllScriptsOperationCompleted == null)) {
                 this.GetAllScriptsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllScriptsOperationCompleted);
             }
             this.InvokeAsync("GetAllScripts", new object[] {
-                        token,
                         includeInactiveUserScripts}, this.GetAllScriptsOperationCompleted, userState);
         }
         
@@ -3297,25 +2998,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/GetScript", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GetUserScriptResult GetScript(string token, int userScriptId) {
+        public GetUserScriptResult GetScript(int userScriptId) {
             object[] results = this.Invoke("GetScript", new object[] {
-                        token,
                         userScriptId});
             return ((GetUserScriptResult)(results[0]));
         }
         
         /// <remarks/>
-        public void GetScriptAsync(string token, int userScriptId) {
-            this.GetScriptAsync(token, userScriptId, null);
+        public void GetScriptAsync(int userScriptId) {
+            this.GetScriptAsync(userScriptId, null);
         }
         
         /// <remarks/>
-        public void GetScriptAsync(string token, int userScriptId, object userState) {
+        public void GetScriptAsync(int userScriptId, object userState) {
             if ((this.GetScriptOperationCompleted == null)) {
                 this.GetScriptOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetScriptOperationCompleted);
             }
             this.InvokeAsync("GetScript", new object[] {
-                        token,
                         userScriptId}, this.GetScriptOperationCompleted, userState);
         }
         
@@ -3328,25 +3027,23 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:thesecretserver.com/UpdateScript", RequestNamespace="urn:thesecretserver.com", ResponseNamespace="urn:thesecretserver.com", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public UpdateUserScriptResult UpdateScript(string token, UserScript userScript) {
+        public UpdateUserScriptResult UpdateScript(UserScript userScript) {
             object[] results = this.Invoke("UpdateScript", new object[] {
-                        token,
                         userScript});
             return ((UpdateUserScriptResult)(results[0]));
         }
         
         /// <remarks/>
-        public void UpdateScriptAsync(string token, UserScript userScript) {
-            this.UpdateScriptAsync(token, userScript, null);
+        public void UpdateScriptAsync(UserScript userScript) {
+            this.UpdateScriptAsync(userScript, null);
         }
         
         /// <remarks/>
-        public void UpdateScriptAsync(string token, UserScript userScript, object userState) {
+        public void UpdateScriptAsync(UserScript userScript, object userState) {
             if ((this.UpdateScriptOperationCompleted == null)) {
                 this.UpdateScriptOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateScriptOperationCompleted);
             }
             this.InvokeAsync("UpdateScript", new object[] {
-                        token,
                         userScript}, this.UpdateScriptOperationCompleted, userState);
         }
         
@@ -3499,6 +3196,9 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         Canceled,
+        
+        /// <remarks/>
+        Expired,
     }
     
     /// <remarks/>
@@ -4214,6 +3914,8 @@ namespace SecretServerInterface.SSWebService {
         
         private bool fido2TwoFactorField;
         
+        private int unixAuthenticationMethodField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public System.Nullable<int> Id {
@@ -4353,6 +4055,16 @@ namespace SecretServerInterface.SSWebService {
             }
             set {
                 this.fido2TwoFactorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int UnixAuthenticationMethod {
+            get {
+                return this.unixAuthenticationMethodField;
+            }
+            set {
+                this.unixAuthenticationMethodField = value;
             }
         }
     }
@@ -4875,12 +4587,22 @@ namespace SecretServerInterface.SSWebService {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Site))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class Site {
+    public partial class AuditAsOfSiteLog {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class Site : AuditAsOfSiteLog {
         
         private int siteIdField;
         
@@ -4921,6 +4643,8 @@ namespace SecretServerInterface.SSWebService {
         private int siteConnectorIdField;
         
         private SiteConnector siteConnectorField;
+        
+        private string customAuditActionField;
         
         /// <remarks/>
         public int SiteId {
@@ -5127,6 +4851,16 @@ namespace SecretServerInterface.SSWebService {
                 this.siteConnectorField = value;
             }
         }
+        
+        /// <remarks/>
+        public string CustomAuditAction {
+            get {
+                return this.customAuditActionField;
+            }
+            set {
+                this.customAuditActionField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -5283,41 +5017,394 @@ namespace SecretServerInterface.SSWebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class GetDependenciesResult {
+    public partial class DependencyScanItemField {
         
-        private Dependency[] dependenciesField;
+        private int scanItemFieldIdField;
         
-        private string[] errorsField;
+        private string nameField;
         
-        private bool successField;
+        private string valueField;
+        
+        private string parentNameField;
         
         /// <remarks/>
-        public Dependency[] Dependencies {
+        public int ScanItemFieldId {
             get {
-                return this.dependenciesField;
+                return this.scanItemFieldIdField;
             }
             set {
-                this.dependenciesField = value;
+                this.scanItemFieldIdField = value;
             }
         }
         
         /// <remarks/>
-        public string[] Errors {
+        public string Name {
             get {
-                return this.errorsField;
+                return this.nameField;
             }
             set {
-                this.errorsField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
-        public bool Success {
+        public string Value {
             get {
-                return this.successField;
+                return this.valueField;
             }
             set {
-                this.successField = value;
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ParentName {
+            get {
+                return this.parentNameField;
+            }
+            set {
+                this.parentNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class OdbcConnectionArg {
+        
+        private string nameField;
+        
+        private string valueField;
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class SqlScriptArgument {
+        
+        private string nameField;
+        
+        private object valueField;
+        
+        private DbType dbTypeField;
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public object Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public DbType DbType {
+            get {
+                return this.dbTypeField;
+            }
+            set {
+                this.dbTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public enum DbType {
+        
+        /// <remarks/>
+        AnsiString,
+        
+        /// <remarks/>
+        Binary,
+        
+        /// <remarks/>
+        Byte,
+        
+        /// <remarks/>
+        Boolean,
+        
+        /// <remarks/>
+        Currency,
+        
+        /// <remarks/>
+        Date,
+        
+        /// <remarks/>
+        DateTime,
+        
+        /// <remarks/>
+        Decimal,
+        
+        /// <remarks/>
+        Double,
+        
+        /// <remarks/>
+        Guid,
+        
+        /// <remarks/>
+        Int16,
+        
+        /// <remarks/>
+        Int32,
+        
+        /// <remarks/>
+        Int64,
+        
+        /// <remarks/>
+        Object,
+        
+        /// <remarks/>
+        SByte,
+        
+        /// <remarks/>
+        Single,
+        
+        /// <remarks/>
+        String,
+        
+        /// <remarks/>
+        Time,
+        
+        /// <remarks/>
+        UInt16,
+        
+        /// <remarks/>
+        UInt32,
+        
+        /// <remarks/>
+        UInt64,
+        
+        /// <remarks/>
+        VarNumeric,
+        
+        /// <remarks/>
+        AnsiStringFixedLength,
+        
+        /// <remarks/>
+        StringFixedLength,
+        
+        /// <remarks/>
+        Xml,
+        
+        /// <remarks/>
+        DateTime2,
+        
+        /// <remarks/>
+        DateTimeOffset,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class SshScriptArgument {
+        
+        private string nameField;
+        
+        private string valueField;
+        
+        private SshArgumentType sshTypeField;
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SshArgumentType SshType {
+            get {
+                return this.sshTypeField;
+            }
+            set {
+                this.sshTypeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public enum SshArgumentType {
+        
+        /// <remarks/>
+        Interpreted,
+        
+        /// <remarks/>
+        Literal,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class AdditionalDependencyInfoJson {
+        
+        private string regexField;
+        
+        private string powershellArgumentsField;
+        
+        private SshScriptArgument[] sshArgumentsField;
+        
+        private SqlScriptArgument[] sqlArgumentsField;
+        
+        private OdbcConnectionArg[] odbcConnectionArgumentsField;
+        
+        private DependencyScanItemField[] dependencyScanItemFieldsField;
+        
+        private string portField;
+        
+        private string databaseField;
+        
+        private string serverKeyDigestField;
+        
+        /// <remarks/>
+        public string Regex {
+            get {
+                return this.regexField;
+            }
+            set {
+                this.regexField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PowershellArguments {
+            get {
+                return this.powershellArgumentsField;
+            }
+            set {
+                this.powershellArgumentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SshScriptArgument[] SshArguments {
+            get {
+                return this.sshArgumentsField;
+            }
+            set {
+                this.sshArgumentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SqlScriptArgument[] SqlArguments {
+            get {
+                return this.sqlArgumentsField;
+            }
+            set {
+                this.sqlArgumentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public OdbcConnectionArg[] OdbcConnectionArguments {
+            get {
+                return this.odbcConnectionArgumentsField;
+            }
+            set {
+                this.odbcConnectionArgumentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public DependencyScanItemField[] DependencyScanItemFields {
+            get {
+                return this.dependencyScanItemFieldsField;
+            }
+            set {
+                this.dependencyScanItemFieldsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Port {
+            get {
+                return this.portField;
+            }
+            set {
+                this.portField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Database {
+            get {
+                return this.databaseField;
+            }
+            set {
+                this.databaseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ServerKeyDigest {
+            get {
+                return this.serverKeyDigestField;
+            }
+            set {
+                this.serverKeyDigestField = value;
             }
         }
     }
@@ -5520,550 +5607,23 @@ namespace SecretServerInterface.SSWebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class AdditionalDependencyInfoJson {
+    public partial class GetDependenciesResult {
         
-        private string regexField;
-        
-        private string powershellArgumentsField;
-        
-        private SshScriptArgument[] sshArgumentsField;
-        
-        private SqlScriptArgument[] sqlArgumentsField;
-        
-        private OdbcConnectionArg[] odbcConnectionArgumentsField;
-        
-        private DependencyScanItemField[] dependencyScanItemFieldsField;
-        
-        private string portField;
-        
-        private string databaseField;
-        
-        private string serverKeyDigestField;
-        
-        /// <remarks/>
-        public string Regex {
-            get {
-                return this.regexField;
-            }
-            set {
-                this.regexField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PowershellArguments {
-            get {
-                return this.powershellArgumentsField;
-            }
-            set {
-                this.powershellArgumentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SshScriptArgument[] SshArguments {
-            get {
-                return this.sshArgumentsField;
-            }
-            set {
-                this.sshArgumentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SqlScriptArgument[] SqlArguments {
-            get {
-                return this.sqlArgumentsField;
-            }
-            set {
-                this.sqlArgumentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public OdbcConnectionArg[] OdbcConnectionArguments {
-            get {
-                return this.odbcConnectionArgumentsField;
-            }
-            set {
-                this.odbcConnectionArgumentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public DependencyScanItemField[] DependencyScanItemFields {
-            get {
-                return this.dependencyScanItemFieldsField;
-            }
-            set {
-                this.dependencyScanItemFieldsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Port {
-            get {
-                return this.portField;
-            }
-            set {
-                this.portField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Database {
-            get {
-                return this.databaseField;
-            }
-            set {
-                this.databaseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ServerKeyDigest {
-            get {
-                return this.serverKeyDigestField;
-            }
-            set {
-                this.serverKeyDigestField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class SshScriptArgument {
-        
-        private string nameField;
-        
-        private string valueField;
-        
-        private SshArgumentType sshTypeField;
-        
-        /// <remarks/>
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SshArgumentType SshType {
-            get {
-                return this.sshTypeField;
-            }
-            set {
-                this.sshTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public enum SshArgumentType {
-        
-        /// <remarks/>
-        Interpreted,
-        
-        /// <remarks/>
-        Literal,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class SqlScriptArgument {
-        
-        private string nameField;
-        
-        private object valueField;
-        
-        private DbType dbTypeField;
-        
-        /// <remarks/>
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public object Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public DbType DbType {
-            get {
-                return this.dbTypeField;
-            }
-            set {
-                this.dbTypeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public enum DbType {
-        
-        /// <remarks/>
-        AnsiString,
-        
-        /// <remarks/>
-        Binary,
-        
-        /// <remarks/>
-        Byte,
-        
-        /// <remarks/>
-        Boolean,
-        
-        /// <remarks/>
-        Currency,
-        
-        /// <remarks/>
-        Date,
-        
-        /// <remarks/>
-        DateTime,
-        
-        /// <remarks/>
-        Decimal,
-        
-        /// <remarks/>
-        Double,
-        
-        /// <remarks/>
-        Guid,
-        
-        /// <remarks/>
-        Int16,
-        
-        /// <remarks/>
-        Int32,
-        
-        /// <remarks/>
-        Int64,
-        
-        /// <remarks/>
-        Object,
-        
-        /// <remarks/>
-        SByte,
-        
-        /// <remarks/>
-        Single,
-        
-        /// <remarks/>
-        String,
-        
-        /// <remarks/>
-        Time,
-        
-        /// <remarks/>
-        UInt16,
-        
-        /// <remarks/>
-        UInt32,
-        
-        /// <remarks/>
-        UInt64,
-        
-        /// <remarks/>
-        VarNumeric,
-        
-        /// <remarks/>
-        AnsiStringFixedLength,
-        
-        /// <remarks/>
-        StringFixedLength,
-        
-        /// <remarks/>
-        Xml,
-        
-        /// <remarks/>
-        DateTime2,
-        
-        /// <remarks/>
-        DateTimeOffset,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class OdbcConnectionArg {
-        
-        private string nameField;
-        
-        private string valueField;
-        
-        /// <remarks/>
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class DependencyScanItemField {
-        
-        private int scanItemFieldIdField;
-        
-        private string nameField;
-        
-        private string valueField;
-        
-        private string parentNameField;
-        
-        /// <remarks/>
-        public int ScanItemFieldId {
-            get {
-                return this.scanItemFieldIdField;
-            }
-            set {
-                this.scanItemFieldIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ParentName {
-            get {
-                return this.parentNameField;
-            }
-            set {
-                this.parentNameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class AuditSecret {
-        
-        private int auditSecretIdField;
-        
-        private int secretIdField;
-        
-        private System.DateTime dateRecordedField;
-        
-        private string actionField;
-        
-        private string notesField;
-        
-        private int userIdField;
-        
-        private string secretNameField;
-        
-        private string ipAddressField;
-        
-        private int referenceIdField;
-        
-        private string byUserDisplayNameField;
-        
-        private string ticketNumberField;
-        
-        /// <remarks/>
-        public int AuditSecretId {
-            get {
-                return this.auditSecretIdField;
-            }
-            set {
-                this.auditSecretIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int SecretId {
-            get {
-                return this.secretIdField;
-            }
-            set {
-                this.secretIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DateRecorded {
-            get {
-                return this.dateRecordedField;
-            }
-            set {
-                this.dateRecordedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Action {
-            get {
-                return this.actionField;
-            }
-            set {
-                this.actionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Notes {
-            get {
-                return this.notesField;
-            }
-            set {
-                this.notesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int UserId {
-            get {
-                return this.userIdField;
-            }
-            set {
-                this.userIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SecretName {
-            get {
-                return this.secretNameField;
-            }
-            set {
-                this.secretNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string IpAddress {
-            get {
-                return this.ipAddressField;
-            }
-            set {
-                this.ipAddressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int ReferenceId {
-            get {
-                return this.referenceIdField;
-            }
-            set {
-                this.referenceIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ByUserDisplayName {
-            get {
-                return this.byUserDisplayNameField;
-            }
-            set {
-                this.byUserDisplayNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TicketNumber {
-            get {
-                return this.ticketNumberField;
-            }
-            set {
-                this.ticketNumberField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class GetSecretAuditResult {
+        private Dependency[] dependenciesField;
         
         private string[] errorsField;
         
-        private AuditSecret[] secretAuditsField;
+        private bool successField;
+        
+        /// <remarks/>
+        public Dependency[] Dependencies {
+            get {
+                return this.dependenciesField;
+            }
+            set {
+                this.dependenciesField = value;
+            }
+        }
         
         /// <remarks/>
         public string[] Errors {
@@ -6076,12 +5636,12 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public AuditSecret[] SecretAudits {
+        public bool Success {
             get {
-                return this.secretAuditsField;
+                return this.successField;
             }
             set {
-                this.secretAuditsField = value;
+                this.successField = value;
             }
         }
     }
@@ -6839,162 +6399,6 @@ namespace SecretServerInterface.SSWebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class FolderExtendedGetNewRequest {
-        
-        private string folderNameField;
-        
-        private System.Nullable<int> parentFolderIdField;
-        
-        private System.Nullable<bool> inheritPermissionsField;
-        
-        /// <remarks/>
-        public string FolderName {
-            get {
-                return this.folderNameField;
-            }
-            set {
-                this.folderNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> ParentFolderId {
-            get {
-                return this.parentFolderIdField;
-            }
-            set {
-                this.parentFolderIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> InheritPermissions {
-            get {
-                return this.inheritPermissionsField;
-            }
-            set {
-                this.inheritPermissionsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FolderExtendedGetNewResult))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FolderExtendedUpdateResult))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FolderExtendedGetResult))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FolderExtendedCreateResult))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class FolderExtendedResultBase {
-        
-        private bool successField;
-        
-        private string[] errorsField;
-        
-        /// <remarks/>
-        public bool Success {
-            get {
-                return this.successField;
-            }
-            set {
-                this.successField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] Errors {
-            get {
-                return this.errorsField;
-            }
-            set {
-                this.errorsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class FolderExtendedGetNewResult : FolderExtendedResultBase {
-        
-        private FolderExtended folderField;
-        
-        /// <remarks/>
-        public FolderExtended Folder {
-            get {
-                return this.folderField;
-            }
-            set {
-                this.folderField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class FolderExtendedUpdateResult : FolderExtendedResultBase {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class FolderExtendedGetResult : FolderExtendedResultBase {
-        
-        private FolderExtended folderField;
-        
-        /// <remarks/>
-        public FolderExtended Folder {
-            get {
-                return this.folderField;
-            }
-            set {
-                this.folderField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class FolderExtendedCreateResult : FolderExtendedResultBase {
-        
-        private int folderIdField;
-        
-        /// <remarks/>
-        public int FolderId {
-            get {
-                return this.folderIdField;
-            }
-            set {
-                this.folderIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
     public partial class GetFoldersResult {
         
         private Folder[] foldersField;
@@ -7085,11 +6489,152 @@ namespace SecretServerInterface.SSWebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class VersionGetResult {
+    public partial class AuditSecret {
+        
+        private int auditSecretIdField;
+        
+        private int secretIdField;
+        
+        private System.DateTime dateRecordedField;
+        
+        private string actionField;
+        
+        private string notesField;
+        
+        private int userIdField;
+        
+        private string secretNameField;
+        
+        private string ipAddressField;
+        
+        private int referenceIdField;
+        
+        private string byUserDisplayNameField;
+        
+        private string ticketNumberField;
+        
+        /// <remarks/>
+        public int AuditSecretId {
+            get {
+                return this.auditSecretIdField;
+            }
+            set {
+                this.auditSecretIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SecretId {
+            get {
+                return this.secretIdField;
+            }
+            set {
+                this.secretIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DateRecorded {
+            get {
+                return this.dateRecordedField;
+            }
+            set {
+                this.dateRecordedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Action {
+            get {
+                return this.actionField;
+            }
+            set {
+                this.actionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Notes {
+            get {
+                return this.notesField;
+            }
+            set {
+                this.notesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int UserId {
+            get {
+                return this.userIdField;
+            }
+            set {
+                this.userIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SecretName {
+            get {
+                return this.secretNameField;
+            }
+            set {
+                this.secretNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IpAddress {
+            get {
+                return this.ipAddressField;
+            }
+            set {
+                this.ipAddressField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int ReferenceId {
+            get {
+                return this.referenceIdField;
+            }
+            set {
+                this.referenceIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ByUserDisplayName {
+            get {
+                return this.byUserDisplayNameField;
+            }
+            set {
+                this.byUserDisplayNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TicketNumber {
+            get {
+                return this.ticketNumberField;
+            }
+            set {
+                this.ticketNumberField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class GetSecretAuditResult {
         
         private string[] errorsField;
         
-        private string versionField;
+        private AuditSecret[] secretAuditsField;
         
         /// <remarks/>
         public string[] Errors {
@@ -7102,12 +6647,12 @@ namespace SecretServerInterface.SSWebService {
         }
         
         /// <remarks/>
-        public string Version {
+        public AuditSecret[] SecretAudits {
             get {
-                return this.versionField;
+                return this.secretAuditsField;
             }
             set {
-                this.versionField = value;
+                this.secretAuditsField = value;
             }
         }
     }
@@ -7118,236 +6663,19 @@ namespace SecretServerInterface.SSWebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class GeneratePasswordResult {
-        
-        private string generatedPasswordField;
-        
-        private string[] errorsField;
-        
-        /// <remarks/>
-        public string GeneratedPassword {
-            get {
-                return this.generatedPasswordField;
-            }
-            set {
-                this.generatedPasswordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] Errors {
-            get {
-                return this.errorsField;
-            }
-            set {
-                this.errorsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class SecretTemplate {
-        
-        private int idField;
-        
-        private string nameField;
-        
-        private SecretField[] fieldsField;
-        
-        /// <remarks/>
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SecretField[] Fields {
-            get {
-                return this.fieldsField;
-            }
-            set {
-                this.fieldsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class SecretField {
-        
-        private string displayNameField;
-        
-        private int idField;
-        
-        private bool isPasswordField;
-        
-        private bool isUrlField;
-        
-        private bool isNotesField;
-        
-        private bool isFileField;
-        
-        /// <remarks/>
-        public string DisplayName {
-            get {
-                return this.displayNameField;
-            }
-            set {
-                this.displayNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsPassword {
-            get {
-                return this.isPasswordField;
-            }
-            set {
-                this.isPasswordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsUrl {
-            get {
-                return this.isUrlField;
-            }
-            set {
-                this.isUrlField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsNotes {
-            get {
-                return this.isNotesField;
-            }
-            set {
-                this.isNotesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsFile {
-            get {
-                return this.isFileField;
-            }
-            set {
-                this.isFileField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class GetSecretTemplatesResult {
-        
-        private string[] errorsField;
-        
-        private SecretTemplate[] secretTemplatesField;
-        
-        /// <remarks/>
-        public string[] Errors {
-            get {
-                return this.errorsField;
-            }
-            set {
-                this.errorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SecretTemplate[] SecretTemplates {
-            get {
-                return this.secretTemplatesField;
-            }
-            set {
-                this.secretTemplatesField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class GetSecretTemplateFieldsResult {
-        
-        private string[] errorsField;
-        
-        private SecretField[] fieldsField;
-        
-        /// <remarks/>
-        public string[] Errors {
-            get {
-                return this.errorsField;
-            }
-            set {
-                this.errorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SecretField[] Fields {
-            get {
-                return this.fieldsField;
-            }
-            set {
-                this.fieldsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class AddSecretResult {
+    public partial class GetCheckOutStatusResult {
         
         private string[] errorsField;
         
         private Secret secretField;
+        
+        private int checkOutMinutesRemainingField;
+        
+        private bool isCheckedOutField;
+        
+        private string checkOutUserDisplayNameField;
+        
+        private int checkOutUserIdField;
         
         /// <remarks/>
         public string[] Errors {
@@ -7366,6 +6694,46 @@ namespace SecretServerInterface.SSWebService {
             }
             set {
                 this.secretField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int CheckOutMinutesRemaining {
+            get {
+                return this.checkOutMinutesRemainingField;
+            }
+            set {
+                this.checkOutMinutesRemainingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsCheckedOut {
+            get {
+                return this.isCheckedOutField;
+            }
+            set {
+                this.isCheckedOutField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CheckOutUserDisplayName {
+            get {
+                return this.checkOutUserDisplayNameField;
+            }
+            set {
+                this.checkOutUserDisplayNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int CheckOutUserId {
+            get {
+                return this.checkOutUserIdField;
+            }
+            set {
+                this.checkOutUserIdField = value;
             }
         }
     }
@@ -7721,6 +7089,8 @@ namespace SecretServerInterface.SSWebService {
         
         private System.Nullable<bool> restrictSshCommandsField;
         
+        private System.Nullable<int> commandRestrictionTypeField;
+        
         private System.Nullable<bool> allowOwnersUnrestrictedSshCommandsField;
         
         private System.Nullable<int> privilegedSecretIdField;
@@ -7730,6 +7100,8 @@ namespace SecretServerInterface.SSWebService {
         private GroupOrUserRecord[] approversField;
         
         private SshCommandMenuAccessPermission[] sshCommandMenuAccessPermissionsField;
+        
+        private SshCommandBlocklistPermissionDto[] sshCommandBlocklistPermissionsField;
         
         private bool isChangeToSettingsField;
         
@@ -7823,6 +7195,17 @@ namespace SecretServerInterface.SSWebService {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> CommandRestrictionType {
+            get {
+                return this.commandRestrictionTypeField;
+            }
+            set {
+                this.commandRestrictionTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public System.Nullable<bool> AllowOwnersUnrestrictedSshCommands {
             get {
                 return this.allowOwnersUnrestrictedSshCommandsField;
@@ -7870,6 +7253,16 @@ namespace SecretServerInterface.SSWebService {
             }
             set {
                 this.sshCommandMenuAccessPermissionsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SshCommandBlocklistPermissionDto[] SshCommandBlocklistPermissions {
+            get {
+                return this.sshCommandBlocklistPermissionsField;
+            }
+            set {
+                this.sshCommandBlocklistPermissionsField = value;
             }
         }
         
@@ -7974,6 +7367,88 @@ namespace SecretServerInterface.SSWebService {
             }
             set {
                 this.sshCommandMenuIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class SshCommandBlocklistPermissionDto {
+        
+        private int sshCommandBlocklistPermissionIdField;
+        
+        private System.Nullable<System.Guid> sshCommandBlocklistIdField;
+        
+        private int secretIdField;
+        
+        private int rolePermissionIdField;
+        
+        private string displayNameField;
+        
+        private string sshCommandBlocklistNameField;
+        
+        /// <remarks/>
+        public int SshCommandBlocklistPermissionId {
+            get {
+                return this.sshCommandBlocklistPermissionIdField;
+            }
+            set {
+                this.sshCommandBlocklistPermissionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.Guid> SshCommandBlocklistId {
+            get {
+                return this.sshCommandBlocklistIdField;
+            }
+            set {
+                this.sshCommandBlocklistIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int SecretId {
+            get {
+                return this.secretIdField;
+            }
+            set {
+                this.secretIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int RolePermissionId {
+            get {
+                return this.rolePermissionIdField;
+            }
+            set {
+                this.rolePermissionIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DisplayName {
+            get {
+                return this.displayNameField;
+            }
+            set {
+                this.displayNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SshCommandBlocklistName {
+            get {
+                return this.sshCommandBlocklistNameField;
+            }
+            set {
+                this.sshCommandBlocklistNameField = value;
             }
         }
     }
@@ -8138,6 +7613,297 @@ namespace SecretServerInterface.SSWebService {
             }
             set {
                 this.secretAccessRoleIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class VersionGetResult {
+        
+        private string[] errorsField;
+        
+        private string versionField;
+        
+        /// <remarks/>
+        public string[] Errors {
+            get {
+                return this.errorsField;
+            }
+            set {
+                this.errorsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Version {
+            get {
+                return this.versionField;
+            }
+            set {
+                this.versionField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class GeneratePasswordResult {
+        
+        private string generatedPasswordField;
+        
+        private string[] errorsField;
+        
+        /// <remarks/>
+        public string GeneratedPassword {
+            get {
+                return this.generatedPasswordField;
+            }
+            set {
+                this.generatedPasswordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] Errors {
+            get {
+                return this.errorsField;
+            }
+            set {
+                this.errorsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class SecretTemplate {
+        
+        private int idField;
+        
+        private string nameField;
+        
+        private SecretField[] fieldsField;
+        
+        /// <remarks/>
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SecretField[] Fields {
+            get {
+                return this.fieldsField;
+            }
+            set {
+                this.fieldsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class SecretField {
+        
+        private string displayNameField;
+        
+        private int idField;
+        
+        private bool isPasswordField;
+        
+        private bool isUrlField;
+        
+        private bool isNotesField;
+        
+        private bool isFileField;
+        
+        /// <remarks/>
+        public string DisplayName {
+            get {
+                return this.displayNameField;
+            }
+            set {
+                this.displayNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsPassword {
+            get {
+                return this.isPasswordField;
+            }
+            set {
+                this.isPasswordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsUrl {
+            get {
+                return this.isUrlField;
+            }
+            set {
+                this.isUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsNotes {
+            get {
+                return this.isNotesField;
+            }
+            set {
+                this.isNotesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool IsFile {
+            get {
+                return this.isFileField;
+            }
+            set {
+                this.isFileField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class GetSecretTemplatesResult {
+        
+        private string[] errorsField;
+        
+        private SecretTemplate[] secretTemplatesField;
+        
+        /// <remarks/>
+        public string[] Errors {
+            get {
+                return this.errorsField;
+            }
+            set {
+                this.errorsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SecretTemplate[] SecretTemplates {
+            get {
+                return this.secretTemplatesField;
+            }
+            set {
+                this.secretTemplatesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class GetSecretTemplateFieldsResult {
+        
+        private string[] errorsField;
+        
+        private SecretField[] fieldsField;
+        
+        /// <remarks/>
+        public string[] Errors {
+            get {
+                return this.errorsField;
+            }
+            set {
+                this.errorsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SecretField[] Fields {
+            get {
+                return this.fieldsField;
+            }
+            set {
+                this.fieldsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class AddSecretResult {
+        
+        private string[] errorsField;
+        
+        private Secret secretField;
+        
+        /// <remarks/>
+        public string[] Errors {
+            get {
+                return this.errorsField;
+            }
+            set {
+                this.errorsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Secret Secret {
+            get {
+                return this.secretField;
+            }
+            set {
+                this.secretField = value;
             }
         }
     }
@@ -8328,6 +8094,334 @@ namespace SecretServerInterface.SSWebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class CodeResponse {
+        
+        private string errorCodeField;
+        
+        private string commentField;
+        
+        private string additionalCommentField;
+        
+        private System.Nullable<int> ticketSystemIdField;
+        
+        /// <remarks/>
+        public string ErrorCode {
+            get {
+                return this.errorCodeField;
+            }
+            set {
+                this.errorCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Comment {
+            get {
+                return this.commentField;
+            }
+            set {
+                this.commentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string AdditionalComment {
+            get {
+                return this.additionalCommentField;
+            }
+            set {
+                this.additionalCommentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> TicketSystemId {
+            get {
+                return this.ticketSystemIdField;
+            }
+            set {
+                this.ticketSystemIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class SecretError {
+        
+        private string errorCodeField;
+        
+        private string errorMessageField;
+        
+        private bool allowsResponseField;
+        
+        private string commentTitleField;
+        
+        private string additionalCommentTitleField;
+        
+        /// <remarks/>
+        public string ErrorCode {
+            get {
+                return this.errorCodeField;
+            }
+            set {
+                this.errorCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ErrorMessage {
+            get {
+                return this.errorMessageField;
+            }
+            set {
+                this.errorMessageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool AllowsResponse {
+            get {
+                return this.allowsResponseField;
+            }
+            set {
+                this.allowsResponseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CommentTitle {
+            get {
+                return this.commentTitleField;
+            }
+            set {
+                this.commentTitleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string AdditionalCommentTitle {
+            get {
+                return this.additionalCommentTitleField;
+            }
+            set {
+                this.additionalCommentTitleField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class GetSecretResult {
+        
+        private string[] errorsField;
+        
+        private SecretError secretErrorField;
+        
+        private Secret secretField;
+        
+        /// <remarks/>
+        public string[] Errors {
+            get {
+                return this.errorsField;
+            }
+            set {
+                this.errorsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SecretError SecretError {
+            get {
+                return this.secretErrorField;
+            }
+            set {
+                this.secretErrorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Secret Secret {
+            get {
+                return this.secretField;
+            }
+            set {
+                this.secretField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class FolderExtendedGetNewRequest {
+        
+        private string folderNameField;
+        
+        private System.Nullable<int> parentFolderIdField;
+        
+        private System.Nullable<bool> inheritPermissionsField;
+        
+        /// <remarks/>
+        public string FolderName {
+            get {
+                return this.folderNameField;
+            }
+            set {
+                this.folderNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> ParentFolderId {
+            get {
+                return this.parentFolderIdField;
+            }
+            set {
+                this.parentFolderIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<bool> InheritPermissions {
+            get {
+                return this.inheritPermissionsField;
+            }
+            set {
+                this.inheritPermissionsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FolderExtendedGetNewResult))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FolderExtendedUpdateResult))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FolderExtendedGetResult))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(FolderExtendedCreateResult))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class FolderExtendedResultBase {
+        
+        private bool successField;
+        
+        private string[] errorsField;
+        
+        /// <remarks/>
+        public bool Success {
+            get {
+                return this.successField;
+            }
+            set {
+                this.successField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] Errors {
+            get {
+                return this.errorsField;
+            }
+            set {
+                this.errorsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class FolderExtendedGetNewResult : FolderExtendedResultBase {
+        
+        private FolderExtended folderField;
+        
+        /// <remarks/>
+        public FolderExtended Folder {
+            get {
+                return this.folderField;
+            }
+            set {
+                this.folderField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class FolderExtendedUpdateResult : FolderExtendedResultBase {
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class FolderExtendedGetResult : FolderExtendedResultBase {
+        
+        private FolderExtended folderField;
+        
+        /// <remarks/>
+        public FolderExtended Folder {
+            get {
+                return this.folderField;
+            }
+            set {
+                this.folderField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class FolderExtendedCreateResult : FolderExtendedResultBase {
+        
+        private int folderIdField;
+        
+        /// <remarks/>
+        public int FolderId {
+            get {
+                return this.folderIdField;
+            }
+            set {
+                this.folderIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
     public partial class SqlScriptArgument2 {
         
         private string nameField;
@@ -8437,8 +8531,8 @@ namespace SecretServerInterface.SSWebService {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PowerShellUserScript))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SshUserScript))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(PowerShellUserScript))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SqlUserScript))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
@@ -8514,15 +8608,6 @@ namespace SecretServerInterface.SSWebService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class PowerShellUserScript : UserScript {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
     public partial class SshUserScript : UserScript {
         
         private AdditionalDataSshObject additionalDataObjectField;
@@ -8536,6 +8621,15 @@ namespace SecretServerInterface.SSWebService {
                 this.additionalDataObjectField = value;
             }
         }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
+    public partial class PowerShellUserScript : UserScript {
     }
     
     /// <remarks/>
@@ -9214,382 +9308,6 @@ namespace SecretServerInterface.SSWebService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class GetCheckOutStatusResult {
-        
-        private string[] errorsField;
-        
-        private Secret secretField;
-        
-        private int checkOutMinutesRemainingField;
-        
-        private bool isCheckedOutField;
-        
-        private string checkOutUserDisplayNameField;
-        
-        private int checkOutUserIdField;
-        
-        /// <remarks/>
-        public string[] Errors {
-            get {
-                return this.errorsField;
-            }
-            set {
-                this.errorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Secret Secret {
-            get {
-                return this.secretField;
-            }
-            set {
-                this.secretField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int CheckOutMinutesRemaining {
-            get {
-                return this.checkOutMinutesRemainingField;
-            }
-            set {
-                this.checkOutMinutesRemainingField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool IsCheckedOut {
-            get {
-                return this.isCheckedOutField;
-            }
-            set {
-                this.isCheckedOutField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CheckOutUserDisplayName {
-            get {
-                return this.checkOutUserDisplayNameField;
-            }
-            set {
-                this.checkOutUserDisplayNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int CheckOutUserId {
-            get {
-                return this.checkOutUserIdField;
-            }
-            set {
-                this.checkOutUserIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class CodeResponse {
-        
-        private string errorCodeField;
-        
-        private string commentField;
-        
-        private string additionalCommentField;
-        
-        private System.Nullable<int> ticketSystemIdField;
-        
-        /// <remarks/>
-        public string ErrorCode {
-            get {
-                return this.errorCodeField;
-            }
-            set {
-                this.errorCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Comment {
-            get {
-                return this.commentField;
-            }
-            set {
-                this.commentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string AdditionalComment {
-            get {
-                return this.additionalCommentField;
-            }
-            set {
-                this.additionalCommentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> TicketSystemId {
-            get {
-                return this.ticketSystemIdField;
-            }
-            set {
-                this.ticketSystemIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class SecretError {
-        
-        private string errorCodeField;
-        
-        private string errorMessageField;
-        
-        private bool allowsResponseField;
-        
-        private string commentTitleField;
-        
-        private string additionalCommentTitleField;
-        
-        /// <remarks/>
-        public string ErrorCode {
-            get {
-                return this.errorCodeField;
-            }
-            set {
-                this.errorCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ErrorMessage {
-            get {
-                return this.errorMessageField;
-            }
-            set {
-                this.errorMessageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool AllowsResponse {
-            get {
-                return this.allowsResponseField;
-            }
-            set {
-                this.allowsResponseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CommentTitle {
-            get {
-                return this.commentTitleField;
-            }
-            set {
-                this.commentTitleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string AdditionalCommentTitle {
-            get {
-                return this.additionalCommentTitleField;
-            }
-            set {
-                this.additionalCommentTitleField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class GetSecretResult {
-        
-        private string[] errorsField;
-        
-        private SecretError secretErrorField;
-        
-        private Secret secretField;
-        
-        /// <remarks/>
-        public string[] Errors {
-            get {
-                return this.errorsField;
-            }
-            set {
-                this.errorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SecretError SecretError {
-            get {
-                return this.secretErrorField;
-            }
-            set {
-                this.secretErrorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Secret Secret {
-            get {
-                return this.secretField;
-            }
-            set {
-                this.secretField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class TokenIsValidResult {
-        
-        private string[] errorsField;
-        
-        private int maxOfflineSecondsField;
-        
-        private string versionField;
-        
-        /// <remarks/>
-        public string[] Errors {
-            get {
-                return this.errorsField;
-            }
-            set {
-                this.errorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int MaxOfflineSeconds {
-            get {
-                return this.maxOfflineSecondsField;
-            }
-            set {
-                this.maxOfflineSecondsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Version {
-            get {
-                return this.versionField;
-            }
-            set {
-                this.versionField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class ImpersonateResult {
-        
-        private string[] errorsField;
-        
-        private string tokenField;
-        
-        private string authorizeURLField;
-        
-        /// <remarks/>
-        public string[] Errors {
-            get {
-                return this.errorsField;
-            }
-            set {
-                this.errorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Token {
-            get {
-                return this.tokenField;
-            }
-            set {
-                this.tokenField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string AuthorizeURL {
-            get {
-                return this.authorizeURLField;
-            }
-            set {
-                this.authorizeURLField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:thesecretserver.com")]
-    public partial class AuthenticateResult {
-        
-        private string[] errorsField;
-        
-        private string tokenField;
-        
-        /// <remarks/>
-        public string[] Errors {
-            get {
-                return this.errorsField;
-            }
-            set {
-                this.errorsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Token {
-            get {
-                return this.tokenField;
-            }
-            set {
-                this.tokenField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(RequestApprovalResult))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
@@ -9677,104 +9395,156 @@ namespace SecretServerInterface.SSWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void AuthenticateCompletedEventHandler(object sender, AuthenticateCompletedEventArgs e);
+    public delegate void AddUserCompletedEventHandler(object sender, AddUserCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class AuthenticateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class AddUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal AuthenticateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal AddUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public AuthenticateResult Result {
+        public WebServiceResult Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((AuthenticateResult)(this.results[0]));
+                return ((WebServiceResult)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void ImpersonateUserCompletedEventHandler(object sender, ImpersonateUserCompletedEventArgs e);
+    public delegate void FolderCreateCompletedEventHandler(object sender, FolderCreateCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ImpersonateUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class FolderCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal ImpersonateUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal FolderCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public ImpersonateResult Result {
+        public CreateFolderResult Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((ImpersonateResult)(this.results[0]));
+                return ((CreateFolderResult)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void AuthenticateRADIUSCompletedEventHandler(object sender, AuthenticateRADIUSCompletedEventArgs e);
+    public delegate void FolderExtendedCreateCompletedEventHandler(object sender, FolderExtendedCreateCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class AuthenticateRADIUSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class FolderExtendedCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal AuthenticateRADIUSCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal FolderExtendedCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public AuthenticateResult Result {
+        public FolderExtendedCreateResult Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((AuthenticateResult)(this.results[0]));
+                return ((FolderExtendedCreateResult)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void GetTokenIsValidCompletedEventHandler(object sender, GetTokenIsValidCompletedEventArgs e);
+    public delegate void FolderExtendedGetCompletedEventHandler(object sender, FolderExtendedGetCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetTokenIsValidCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class FolderExtendedGetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GetTokenIsValidCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal FolderExtendedGetCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public TokenIsValidResult Result {
+        public FolderExtendedGetResult Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((TokenIsValidResult)(this.results[0]));
+                return ((FolderExtendedGetResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void FolderExtendedUpdateCompletedEventHandler(object sender, FolderExtendedUpdateCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FolderExtendedUpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FolderExtendedUpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public FolderExtendedUpdateResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((FolderExtendedUpdateResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void FolderExtendedGetNewCompletedEventHandler(object sender, FolderExtendedGetNewCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class FolderExtendedGetNewCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal FolderExtendedGetNewCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public FolderExtendedGetNewResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((FolderExtendedGetNewResult)(this.results[0]));
             }
         }
     }
@@ -9827,58 +9597,6 @@ namespace SecretServerInterface.SSWebService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((GetSecretResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void GetCheckOutStatusCompletedEventHandler(object sender, GetCheckOutStatusCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetCheckOutStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetCheckOutStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public GetCheckOutStatusResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((GetCheckOutStatusResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void ChangePasswordCompletedEventHandler(object sender, ChangePasswordCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ChangePasswordCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ChangePasswordCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public WebServiceResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((WebServiceResult)(this.results[0]));
             }
         }
     }
@@ -10015,32 +9733,6 @@ namespace SecretServerInterface.SSWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void AddUserCompletedEventHandler(object sender, AddUserCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class AddUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal AddUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public WebServiceResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((WebServiceResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void SearchSecretsCompletedEventHandler(object sender, SearchSecretsCompletedEventArgs e);
     
     /// <remarks/>
@@ -10145,6 +9837,32 @@ namespace SecretServerInterface.SSWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void ExpireSecretCompletedEventHandler(object sender, ExpireSecretCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ExpireSecretCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ExpireSecretCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WebServiceResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WebServiceResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetFavoritesCompletedEventHandler(object sender, GetFavoritesCompletedEventArgs e);
     
     /// <remarks/>
@@ -10182,6 +9900,32 @@ namespace SecretServerInterface.SSWebService {
         private object[] results;
         
         internal UpdateIsFavoriteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WebServiceResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WebServiceResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void CheckInCompletedEventHandler(object sender, CheckInCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class CheckInCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal CheckInCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -10431,6 +10175,58 @@ namespace SecretServerInterface.SSWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetCheckOutStatusCompletedEventHandler(object sender, GetCheckOutStatusCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetCheckOutStatusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetCheckOutStatusCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public GetCheckOutStatusResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((GetCheckOutStatusResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetSecretAuditCompletedEventHandler(object sender, GetSecretAuditCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetSecretAuditCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetSecretAuditCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public GetSecretAuditResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((GetSecretAuditResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void FolderGetCompletedEventHandler(object sender, FolderGetCompletedEventArgs e);
     
     /// <remarks/>
@@ -10509,136 +10305,6 @@ namespace SecretServerInterface.SSWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void FolderCreateCompletedEventHandler(object sender, FolderCreateCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class FolderCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal FolderCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CreateFolderResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CreateFolderResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void FolderExtendedCreateCompletedEventHandler(object sender, FolderExtendedCreateCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class FolderExtendedCreateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal FolderExtendedCreateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public FolderExtendedCreateResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((FolderExtendedCreateResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void FolderExtendedGetCompletedEventHandler(object sender, FolderExtendedGetCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class FolderExtendedGetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal FolderExtendedGetCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public FolderExtendedGetResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((FolderExtendedGetResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void FolderExtendedUpdateCompletedEventHandler(object sender, FolderExtendedUpdateCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class FolderExtendedUpdateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal FolderExtendedUpdateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public FolderExtendedUpdateResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((FolderExtendedUpdateResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void FolderExtendedGetNewCompletedEventHandler(object sender, FolderExtendedGetNewCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class FolderExtendedGetNewCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal FolderExtendedGetNewCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public FolderExtendedGetNewResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((FolderExtendedGetNewResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void SearchFoldersCompletedEventHandler(object sender, SearchFoldersCompletedEventArgs e);
     
     /// <remarks/>
@@ -10659,240 +10325,6 @@ namespace SecretServerInterface.SSWebService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((SearchFolderResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void DownloadFileAttachmentCompletedEventHandler(object sender, DownloadFileAttachmentCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class DownloadFileAttachmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal DownloadFileAttachmentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public FileDownloadResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((FileDownloadResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void DownloadFileAttachmentByItemIdCompletedEventHandler(object sender, DownloadFileAttachmentByItemIdCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class DownloadFileAttachmentByItemIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal DownloadFileAttachmentByItemIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public FileDownloadResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((FileDownloadResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void UploadFileAttachmentCompletedEventHandler(object sender, UploadFileAttachmentCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class UploadFileAttachmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal UploadFileAttachmentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public WebServiceResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((WebServiceResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void UploadFileAttachmentByItemIdCompletedEventHandler(object sender, UploadFileAttachmentByItemIdCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class UploadFileAttachmentByItemIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal UploadFileAttachmentByItemIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public WebServiceResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((WebServiceResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void ExpireSecretCompletedEventHandler(object sender, ExpireSecretCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ExpireSecretCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ExpireSecretCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public WebServiceResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((WebServiceResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void SetCheckOutEnabledCompletedEventHandler(object sender, SetCheckOutEnabledCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SetCheckOutEnabledCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SetCheckOutEnabledCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public WebServiceResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((WebServiceResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void ImportXMLCompletedEventHandler(object sender, ImportXMLCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ImportXMLCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ImportXMLCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public WebServiceResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((WebServiceResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void GetSecretAuditCompletedEventHandler(object sender, GetSecretAuditCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetSecretAuditCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetSecretAuditCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public GetSecretAuditResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((GetSecretAuditResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void AddDependencyCompletedEventHandler(object sender, AddDependencyCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class AddDependencyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal AddDependencyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public WebServiceResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((WebServiceResult)(this.results[0]));
             }
         }
     }
@@ -10945,6 +10377,32 @@ namespace SecretServerInterface.SSWebService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((GetDependenciesResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AddDependencyCompletedEventHandler(object sender, AddDependencyCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class AddDependencyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal AddDependencyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WebServiceResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WebServiceResult)(this.results[0]));
             }
         }
     }
@@ -11055,6 +10513,162 @@ namespace SecretServerInterface.SSWebService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void DownloadFileAttachmentCompletedEventHandler(object sender, DownloadFileAttachmentCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DownloadFileAttachmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DownloadFileAttachmentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public FileDownloadResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((FileDownloadResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void DownloadFileAttachmentByItemIdCompletedEventHandler(object sender, DownloadFileAttachmentByItemIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class DownloadFileAttachmentByItemIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal DownloadFileAttachmentByItemIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public FileDownloadResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((FileDownloadResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void UploadFileAttachmentCompletedEventHandler(object sender, UploadFileAttachmentCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UploadFileAttachmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UploadFileAttachmentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WebServiceResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WebServiceResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void UploadFileAttachmentByItemIdCompletedEventHandler(object sender, UploadFileAttachmentByItemIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UploadFileAttachmentByItemIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal UploadFileAttachmentByItemIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WebServiceResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WebServiceResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void ImportXMLCompletedEventHandler(object sender, ImportXMLCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ImportXMLCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ImportXMLCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WebServiceResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WebServiceResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void SetCheckOutEnabledCompletedEventHandler(object sender, SetCheckOutEnabledCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SetCheckOutEnabledCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SetCheckOutEnabledCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WebServiceResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WebServiceResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GetDistributedEnginesCompletedEventHandler(object sender, GetDistributedEnginesCompletedEventArgs e);
     
     /// <remarks/>
@@ -11118,32 +10732,6 @@ namespace SecretServerInterface.SSWebService {
         private object[] results;
         
         internal AssignSiteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public WebServiceResult Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((WebServiceResult)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void CheckInCompletedEventHandler(object sender, CheckInCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CheckInCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal CheckInCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -11768,6 +11356,32 @@ namespace SecretServerInterface.SSWebService {
         private object[] results;
         
         internal RestoreSSHCommandMenuCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public WebServiceResult Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((WebServiceResult)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void ValidateTwoFactorCompletedEventHandler(object sender, ValidateTwoFactorCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ValidateTwoFactorCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ValidateTwoFactorCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
