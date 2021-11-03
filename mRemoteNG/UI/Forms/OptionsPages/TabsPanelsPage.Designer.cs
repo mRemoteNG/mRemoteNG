@@ -1,6 +1,5 @@
-﻿
-
-using mRemoteNG.UI.Controls;
+﻿using mRemoteNG.UI.Controls;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -80,7 +79,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs";
             this.chkIdentifyQuickConnectTabs.Size = new System.Drawing.Size(315, 17);
             this.chkIdentifyQuickConnectTabs.TabIndex = 4;
-            this.chkIdentifyQuickConnectTabs.Text = global::mRemoteNG.Resources.Language.Language.IdentifyQuickConnectTabs;
+            this.chkIdentifyQuickConnectTabs.Text = Language.IdentifyQuickConnectTabs;
             this.chkIdentifyQuickConnectTabs.UseVisualStyleBackColor = true;
             // 
             // chkOpenNewTabRightOfSelected

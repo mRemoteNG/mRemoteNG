@@ -8,7 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG.Properties {
+//mRemoteNG.Properties
+namespace mRemoteNG.Properties
+{
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -60,9 +65,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _Error {
+        internal static System.Drawing.Bitmap Add_16x {
             get {
-                object obj = ResourceManager.GetObject("_Error", resourceCulture);
+                object obj = ResourceManager.GetObject("Add_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -70,9 +75,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _lock {
+        internal static System.Drawing.Bitmap AddFolder_16x {
             get {
-                object obj = ResourceManager.GetObject("_lock", resourceCulture);
+                object obj = ResourceManager.GetObject("AddFolder_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -80,9 +85,29 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ActiveDirectory {
+        internal static System.Drawing.Bitmap AddItem_16x {
             get {
-                object obj = ResourceManager.GetObject("ActiveDirectory", resourceCulture);
+                object obj = ResourceManager.GetObject("AddItem_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AppearanceEditor_16x {
+            get {
+                object obj = ResourceManager.GetObject("AppearanceEditor_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ASPWebSite_16x {
+            get {
+                object obj = ResourceManager.GetObject("ASPWebSite_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -90,19 +115,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon ActiveDirectory_Icon {
+        internal static System.Drawing.Icon Backup_Icon {
             get {
-                object obj = ResourceManager.GetObject("ActiveDirectory_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Appearance_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Appearance_Icon", resourceCulture);
+                object obj = ResourceManager.GetObject("Backup_Icon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -110,9 +125,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap application_side_tree {
+        internal static System.Drawing.Bitmap Close_16x {
             get {
-                object obj = ResourceManager.GetObject("application_side_tree", resourceCulture);
+                object obj = ResourceManager.GetObject("Close_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -120,9 +135,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Arrow_Down {
+        internal static System.Drawing.Bitmap CloseSolution_16x {
             get {
-                object obj = ResourceManager.GetObject("Arrow_Down", resourceCulture);
+                object obj = ResourceManager.GetObject("CloseSolution_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -130,150 +145,10 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap arrow_left {
+        internal static System.Drawing.Bitmap CollapseAll_16x {
             get {
-                object obj = ResourceManager.GetObject("arrow_left", resourceCulture);
+                object obj = ResourceManager.GetObject("CollapseAll_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap arrow_out {
-            get {
-                object obj = ResourceManager.GetObject("arrow_out", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Arrow_Up {
-            get {
-                object obj = ResourceManager.GetObject("Arrow_Up", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Bad_Symbol {
-            get {
-                object obj = ResourceManager.GetObject("Bad_Symbol", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap brick {
-            get {
-                object obj = ResourceManager.GetObject("brick", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Bug {
-            get {
-                object obj = ResourceManager.GetObject("Bug", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Chat {
-            get {
-                object obj = ResourceManager.GetObject("Chat", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap cog {
-            get {
-                object obj = ResourceManager.GetObject("cog", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap cog_error {
-            get {
-                object obj = ResourceManager.GetObject("cog_error", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Collapse {
-            get {
-                object obj = ResourceManager.GetObject("Collapse", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Comments_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Comments_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ComponentsCheck {
-            get {
-                object obj = ResourceManager.GetObject("ComponentsCheck", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon ComponentsCheck_Icon {
-            get {
-                object obj = ResourceManager.GetObject("ComponentsCheck_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Config {
-            get {
-                object obj = ResourceManager.GetObject("Config", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Config_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Config_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -290,9 +165,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Connection_Add {
+        internal static System.Drawing.Bitmap Console_16x {
             get {
-                object obj = ResourceManager.GetObject("Connection_Add", resourceCulture);
+                object obj = ResourceManager.GetObject("Console_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -300,9 +175,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Connection_Duplicate {
+        internal static System.Drawing.Bitmap Copy_16x {
             get {
-                object obj = ResourceManager.GetObject("Connection_Duplicate", resourceCulture);
+                object obj = ResourceManager.GetObject("Copy_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -310,9 +185,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Connections_Load {
+        internal static System.Drawing.Bitmap Diagram_16x {
             get {
-                object obj = ResourceManager.GetObject("Connections_Load", resourceCulture);
+                object obj = ResourceManager.GetObject("Diagram_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -320,9 +195,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Connections_New {
+        internal static System.Drawing.Bitmap Disconnect_16x {
             get {
-                object obj = ResourceManager.GetObject("Connections_New", resourceCulture);
+                object obj = ResourceManager.GetObject("Disconnect_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -330,9 +205,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Connections_Save {
+        internal static System.Drawing.Bitmap Document_16x {
             get {
-                object obj = ResourceManager.GetObject("Connections_Save", resourceCulture);
+                object obj = ResourceManager.GetObject("Document_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -340,29 +215,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Connections_SaveAs {
+        internal static System.Drawing.Bitmap ExpandAll_16x {
             get {
-                object obj = ResourceManager.GetObject("Connections_SaveAs", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon ConnectionsSaveAs_Icon {
-            get {
-                object obj = ResourceManager.GetObject("ConnectionsSaveAs_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Console {
-            get {
-                object obj = ResourceManager.GetObject("Console", resourceCulture);
+                object obj = ResourceManager.GetObject("ExpandAll_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -370,29 +225,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Copy {
+        internal static System.Drawing.Bitmap ExpandDown_16x {
             get {
-                object obj = ResourceManager.GetObject("Copy", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Database_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Database_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Delete {
-            get {
-                object obj = ResourceManager.GetObject("Delete", resourceCulture);
+                object obj = ResourceManager.GetObject("ExpandDown_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -400,39 +235,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Donate {
+        internal static System.Drawing.Bitmap Export_16x {
             get {
-                object obj = ResourceManager.GetObject("Donate", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon EditPage_Icon {
-            get {
-                object obj = ResourceManager.GetObject("EditPage_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Error_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Error_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ErrorsAndInfos {
-            get {
-                object obj = ResourceManager.GetObject("ErrorsAndInfos", resourceCulture);
+                object obj = ResourceManager.GetObject("Export_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -440,9 +245,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ErrorSmall {
+        internal static System.Drawing.Bitmap ExtendedProperty_16x {
             get {
-                object obj = ResourceManager.GetObject("ErrorSmall", resourceCulture);
+                object obj = ResourceManager.GetObject("ExtendedProperty_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -450,9 +255,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap exclamation {
+        internal static System.Drawing.Bitmap F1Help_16x {
             get {
-                object obj = ResourceManager.GetObject("exclamation", resourceCulture);
+                object obj = ResourceManager.GetObject("F1Help_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -460,9 +265,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Expand {
+        internal static System.Drawing.Bitmap Favorite_16x {
             get {
-                object obj = ResourceManager.GetObject("Expand", resourceCulture);
+                object obj = ResourceManager.GetObject("Favorite_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -470,9 +275,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ExtApp {
+        internal static System.Drawing.Bitmap FolderClosed_16x {
             get {
-                object obj = ResourceManager.GetObject("ExtApp", resourceCulture);
+                object obj = ResourceManager.GetObject("FolderClosed_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -480,9 +285,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ExtApp_Add {
+        internal static System.Drawing.Bitmap FullScreen_16x {
             get {
-                object obj = ResourceManager.GetObject("ExtApp_Add", resourceCulture);
+                object obj = ResourceManager.GetObject("FullScreen_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -490,29 +295,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ExtApp_Delete {
+        internal static System.Drawing.Bitmap GlyphDown_16x {
             get {
-                object obj = ResourceManager.GetObject("ExtApp_Delete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon ExtApp_Icon {
-            get {
-                object obj = ResourceManager.GetObject("ExtApp_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ExtApp_Start {
-            get {
-                object obj = ResourceManager.GetObject("ExtApp_Start", resourceCulture);
+                object obj = ResourceManager.GetObject("GlyphDown_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -520,9 +305,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap File {
+        internal static System.Drawing.Bitmap GlyphLeft_16x {
             get {
-                object obj = ResourceManager.GetObject("File", resourceCulture);
+                object obj = ResourceManager.GetObject("GlyphLeft_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -530,9 +315,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Folder {
+        internal static System.Drawing.Bitmap GlyphRight_16x {
             get {
-                object obj = ResourceManager.GetObject("Folder", resourceCulture);
+                object obj = ResourceManager.GetObject("GlyphRight_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -540,59 +325,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Folder_Add {
+        internal static System.Drawing.Bitmap GlyphUp_16x {
             get {
-                object obj = ResourceManager.GetObject("Folder_Add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap folder_key {
-            get {
-                object obj = ResourceManager.GetObject("folder_key", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Fullscreen {
-            get {
-                object obj = ResourceManager.GetObject("Fullscreen", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Good_Symbol {
-            get {
-                object obj = ResourceManager.GetObject("Good_Symbol", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap green_arrow1 {
-            get {
-                object obj = ResourceManager.GetObject("green_arrow1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap green_arrow2 {
-            get {
-                object obj = ResourceManager.GetObject("green_arrow2", resourceCulture);
+                object obj = ResourceManager.GetObject("GlyphUp_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -604,26 +339,6 @@ namespace mRemoteNG.Properties {
             get {
                 object obj = ResourceManager.GetObject("Header_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Help {
-            get {
-                object obj = ResourceManager.GetObject("Help", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Help_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Help_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -660,29 +375,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Info {
+        internal static System.Drawing.Bitmap InsertPanel_16x {
             get {
-                object obj = ResourceManager.GetObject("Info", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Info_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Info_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Information {
-            get {
-                object obj = ResourceManager.GetObject("Information", resourceCulture);
+                object obj = ResourceManager.GetObject("InsertPanel_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -690,9 +385,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap InformationSmall {
+        internal static System.Drawing.Bitmap Key_16x {
             get {
-                object obj = ResourceManager.GetObject("InformationSmall", resourceCulture);
+                object obj = ResourceManager.GetObject("Key_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -700,9 +395,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Inheritance {
+        internal static System.Drawing.Bitmap Loading_Spinner {
             get {
-                object obj = ResourceManager.GetObject("Inheritance", resourceCulture);
+                object obj = ResourceManager.GetObject("Loading_Spinner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -710,9 +405,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Inheritance_Default {
+        internal static System.Drawing.Bitmap Lock_16x {
             get {
-                object obj = ResourceManager.GetObject("Inheritance_Default", resourceCulture);
+                object obj = ResourceManager.GetObject("Lock_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -720,9 +415,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap JumpTo {
+        internal static System.Drawing.Bitmap LogError_16x {
             get {
-                object obj = ResourceManager.GetObject("JumpTo", resourceCulture);
+                object obj = ResourceManager.GetObject("LogError_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -730,9 +425,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap keepass_32x32 {
+        internal static System.Drawing.Bitmap LogWarning_16x {
             get {
-                object obj = ResourceManager.GetObject("keepass_32x32", resourceCulture);
+                object obj = ResourceManager.GetObject("LogWarning_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -740,9 +435,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap key {
+        internal static System.Drawing.Bitmap Message_16x {
             get {
-                object obj = ResourceManager.GetObject("key", resourceCulture);
+                object obj = ResourceManager.GetObject("Message_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -750,119 +445,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap key_add {
+        internal static System.Drawing.Bitmap Monitor_16x {
             get {
-                object obj = ResourceManager.GetObject("key_add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap key_delete {
-            get {
-                object obj = ResourceManager.GetObject("key_delete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Key_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Key_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Keyboard {
-            get {
-                object obj = ResourceManager.GetObject("Keyboard", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Keyboard_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Keyboard_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap loading_spinner {
-            get {
-                object obj = ResourceManager.GetObject("loading_spinner", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Lock {
-            get {
-                object obj = ResourceManager.GetObject("Lock", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Monitor {
-            get {
-                object obj = ResourceManager.GetObject("Monitor", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap monitor_delete {
-            get {
-                object obj = ResourceManager.GetObject("monitor_delete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap monitor_go {
-            get {
-                object obj = ResourceManager.GetObject("monitor_go", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Monitor_GoTo {
-            get {
-                object obj = ResourceManager.GetObject("Monitor_GoTo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap mRemoteNG {
-            get {
-                object obj = ResourceManager.GetObject("mRemoteNG", resourceCulture);
+                object obj = ResourceManager.GetObject("Monitor_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -896,49 +481,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap News {
+        internal static System.Drawing.Bitmap NewFile_16x {
             get {
-                object obj = ResourceManager.GetObject("News", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon News_Icon {
-            get {
-                object obj = ResourceManager.GetObject("News_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Options {
-            get {
-                object obj = ResourceManager.GetObject("Options", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Options_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Options_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Page {
-            get {
-                object obj = ResourceManager.GetObject("Page", resourceCulture);
+                object obj = ResourceManager.GetObject("NewFile_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -946,9 +491,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap page_copy {
+        internal static System.Drawing.Bitmap OpenFile_16x {
             get {
-                object obj = ResourceManager.GetObject("page_copy", resourceCulture);
+                object obj = ResourceManager.GetObject("OpenFile_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -956,9 +501,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Panel_Add {
+        internal static System.Drawing.Bitmap Panel_16x {
             get {
-                object obj = ResourceManager.GetObject("Panel_Add", resourceCulture);
+                object obj = ResourceManager.GetObject("Panel_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -966,119 +511,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Panel_Close {
+        internal static System.Drawing.Bitmap Property_16x {
             get {
-                object obj = ResourceManager.GetObject("Panel_Close", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Panels {
-            get {
-                object obj = ResourceManager.GetObject("Panels", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Panels_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Panels_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Pause {
-            get {
-                object obj = ResourceManager.GetObject("Pause", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Play {
-            get {
-                object obj = ResourceManager.GetObject("Play", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Play_Quick {
-            get {
-                object obj = ResourceManager.GetObject("Play_Quick", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PortScan {
-            get {
-                object obj = ResourceManager.GetObject("PortScan", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon PortScan_Icon {
-            get {
-                object obj = ResourceManager.GetObject("PortScan_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon PowerShell {
-            get {
-                object obj = ResourceManager.GetObject("PowerShell", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Properties {
-            get {
-                object obj = ResourceManager.GetObject("Properties", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Properties_Default {
-            get {
-                object obj = ResourceManager.GetObject("Properties_Default", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap puttycm {
-            get {
-                object obj = ResourceManager.GetObject("puttycm", resourceCulture);
+                object obj = ResourceManager.GetObject("Property_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1106,9 +541,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Quit {
+        internal static System.Drawing.Bitmap Refresh_16x {
             get {
-                object obj = ResourceManager.GetObject("Quit", resourceCulture);
+                object obj = ResourceManager.GetObject("Refresh_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1116,9 +551,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap RDP {
+        internal static System.Drawing.Bitmap Remove_16x {
             get {
-                object obj = ResourceManager.GetObject("RDP", resourceCulture);
+                object obj = ResourceManager.GetObject("Remove_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1126,9 +561,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Refresh {
+        internal static System.Drawing.Bitmap Rename_16x {
             get {
-                object obj = ResourceManager.GetObject("Refresh", resourceCulture);
+                object obj = ResourceManager.GetObject("Rename_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1136,9 +571,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Rename {
+        internal static System.Drawing.Bitmap Resize_16x {
             get {
-                object obj = ResourceManager.GetObject("Rename", resourceCulture);
+                object obj = ResourceManager.GetObject("Resize_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1146,49 +581,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Root {
+        internal static System.Drawing.Bitmap Run_16x {
             get {
-                object obj = ResourceManager.GetObject("Root", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Root_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Root_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Save {
-            get {
-                object obj = ResourceManager.GetObject("Save", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Save_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Save_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Screenshot {
-            get {
-                object obj = ResourceManager.GetObject("Screenshot", resourceCulture);
+                object obj = ResourceManager.GetObject("Run_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1196,9 +591,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_Add {
+        internal static System.Drawing.Bitmap RunUpdate_16x {
             get {
-                object obj = ResourceManager.GetObject("Screenshot_Add", resourceCulture);
+                object obj = ResourceManager.GetObject("RunUpdate_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1206,9 +601,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_Copy {
+        internal static System.Drawing.Bitmap Save_16x {
             get {
-                object obj = ResourceManager.GetObject("Screenshot_Copy", resourceCulture);
+                object obj = ResourceManager.GetObject("Save_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1216,29 +611,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_Delete {
+        internal static System.Drawing.Bitmap Schema_16x {
             get {
-                object obj = ResourceManager.GetObject("Screenshot_Delete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Screenshot_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Screenshot_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_Save {
-            get {
-                object obj = ResourceManager.GetObject("Screenshot_Save", resourceCulture);
+                object obj = ResourceManager.GetObject("Schema_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1246,9 +621,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Search {
+        internal static System.Drawing.Bitmap SchemaObjectProperty_16x {
             get {
-                object obj = ResourceManager.GetObject("Search", resourceCulture);
+                object obj = ResourceManager.GetObject("SchemaObjectProperty_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1256,9 +631,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Session_LogOff {
+        internal static System.Drawing.Bitmap Search_16x {
             get {
-                object obj = ResourceManager.GetObject("Session_LogOff", resourceCulture);
+                object obj = ResourceManager.GetObject("Search_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1266,39 +641,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Sessions {
+        internal static System.Drawing.Bitmap SearchAndApps_16x {
             get {
-                object obj = ResourceManager.GetObject("Sessions", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Sessions_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Sessions_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Shield_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Shield_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SmartSize {
-            get {
-                object obj = ResourceManager.GetObject("SmartSize", resourceCulture);
+                object obj = ResourceManager.GetObject("SearchAndApps_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1306,9 +651,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Sort_AZ {
+        internal static System.Drawing.Bitmap Settings_16x {
             get {
-                object obj = ResourceManager.GetObject("Sort_AZ", resourceCulture);
+                object obj = ResourceManager.GetObject("Settings_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1316,9 +661,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Sort_ZA {
+        internal static System.Drawing.Bitmap SortAscending_16x {
             get {
-                object obj = ResourceManager.GetObject("Sort_ZA", resourceCulture);
+                object obj = ResourceManager.GetObject("SortAscending_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1326,49 +671,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SSHTransfer {
+        internal static System.Drawing.Bitmap SortDescending_16x {
             get {
-                object obj = ResourceManager.GetObject("SSHTransfer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon SSHTransfer_Icon {
-            get {
-                object obj = ResourceManager.GetObject("SSHTransfer_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap star {
-            get {
-                object obj = ResourceManager.GetObject("star", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon StartupExit_Icon {
-            get {
-                object obj = ResourceManager.GetObject("StartupExit_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap tab_add {
-            get {
-                object obj = ResourceManager.GetObject("tab_add", resourceCulture);
+                object obj = ResourceManager.GetObject("SortDescending_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1376,9 +681,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap tab_delete {
+        internal static System.Drawing.Bitmap SQLDatabase_16x {
             get {
-                object obj = ResourceManager.GetObject("tab_delete", resourceCulture);
+                object obj = ResourceManager.GetObject("SQLDatabase_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1386,29 +691,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap tab_edit {
+        internal static System.Drawing.Bitmap StartupProject_16x {
             get {
-                object obj = ResourceManager.GetObject("tab_edit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Tab_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Tab_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TabExit {
-            get {
-                object obj = ResourceManager.GetObject("TabExit", resourceCulture);
+                object obj = ResourceManager.GetObject("StartupProject_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1416,9 +701,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TabOption {
+        internal static System.Drawing.Bitmap StatusInformation_16x {
             get {
-                object obj = ResourceManager.GetObject("TabOption", resourceCulture);
+                object obj = ResourceManager.GetObject("StatusInformation_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1426,9 +711,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TabOverflow {
+        internal static System.Drawing.Bitmap Stop_16x {
             get {
-                object obj = ResourceManager.GetObject("TabOverflow", resourceCulture);
+                object obj = ResourceManager.GetObject("Stop_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1436,9 +721,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap tick {
+        internal static System.Drawing.Bitmap SyncArrow_16x {
             get {
-                object obj = ResourceManager.GetObject("tick", resourceCulture);
+                object obj = ResourceManager.GetObject("SyncArrow_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1446,9 +731,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tools {
+        internal static System.Drawing.Bitmap Tab_16x {
             get {
-                object obj = ResourceManager.GetObject("Tools", resourceCulture);
+                object obj = ResourceManager.GetObject("Tab_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1456,29 +741,9 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Update {
+        internal static System.Drawing.Bitmap Test_16x {
             get {
-                object obj = ResourceManager.GetObject("Update", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Update_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Update_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap user_comment {
-            get {
-                object obj = ResourceManager.GetObject("user_comment", resourceCulture);
+                object obj = ResourceManager.GetObject("Test_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1486,29 +751,39 @@ namespace mRemoteNG.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap UVNC_SC {
+        internal static System.Drawing.Bitmap ToggleOfficeKeyboardScheme_16x {
             get {
-                object obj = ResourceManager.GetObject("UVNC_SC", resourceCulture);
+                object obj = ResourceManager.GetObject("ToggleOfficeKeyboardScheme_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon UVNC_SC_Icon {
-            get {
-                object obj = ResourceManager.GetObject("UVNC_SC_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap View {
+        internal static System.Drawing.Bitmap UIAboutBox_16x {
             get {
-                object obj = ResourceManager.GetObject("View", resourceCulture);
+                object obj = ResourceManager.GetObject("UIAboutBox_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UniqueKeyError_16x {
+            get {
+                object obj = ResourceManager.GetObject("UniqueKeyError_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ViewDownBySchema_16x {
+            get {
+                object obj = ResourceManager.GetObject("ViewDownBySchema_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1529,46 +804,6 @@ namespace mRemoteNG.Properties {
         internal static System.Drawing.Bitmap VisualElements_70 {
             get {
                 object obj = ResourceManager.GetObject("VisualElements_70", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Warning {
-            get {
-                object obj = ResourceManager.GetObject("Warning", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WarningSmall {
-            get {
-                object obj = ResourceManager.GetObject("WarningSmall", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Website {
-            get {
-                object obj = ResourceManager.GetObject("Website", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap xml {
-            get {
-                object obj = ResourceManager.GetObject("xml", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

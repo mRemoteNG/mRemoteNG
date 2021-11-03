@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {

@@ -98,7 +98,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 UseCredSsp = true,
                 UseVmId = false,
                 UseEnhancedMode = false,
-                RenderingEngine = HTTPBase.RenderingEngine.CEF,
+                RenderingEngine = HTTPBase.RenderingEngine.EdgeChromium,
                 RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
                 Colors = RDPColors.Colors16Bit,
                 Resolution = RDPResolutions.Res1366x768,

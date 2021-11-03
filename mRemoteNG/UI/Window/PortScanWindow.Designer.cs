@@ -412,7 +412,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.btnScan._mice = MrngButton.MouseState.OUT;
             this.btnScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnScan.Image = global::mRemoteNG.Properties.Resources.Search;
+            this.btnScan.Image = global::mRemoteNG.Properties.Resources.Search_16x;
             this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnScan.Location = new System.Drawing.Point(765, 99);
             this.btnScan.Name = "btnScan";
@@ -494,7 +494,6 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(884, 461);
             this.Controls.Add(this.pnlMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PortScanWindow";
             this.TabText = "Port Scan";
             this.Text = "Port Scan";

@@ -151,6 +151,9 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 case "gatewayhostname":
                     connectionInfo.RDGatewayHostname = value;
                     break;
+                case "alternate shell":
+                    connectionInfo.StartProgram = value;
+                    break;
             }
         }
     }

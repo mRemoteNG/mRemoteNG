@@ -96,8 +96,8 @@ namespace mRemoteNG.UI
         {
             try
             {
-                imageList.Images.Add("Root", Properties.Resources.Root);
-                imageList.Images.Add("Folder", Properties.Resources.Folder);
+                imageList.Images.Add("Root", Properties.Resources.ASPWebSite_16x);
+                imageList.Images.Add("Folder", Properties.Resources.FolderClosed_16x);
                 imageList.Images.Add("PuttySessions", Properties.Resources.PuttySessions);
             }
             catch (Exception ex)

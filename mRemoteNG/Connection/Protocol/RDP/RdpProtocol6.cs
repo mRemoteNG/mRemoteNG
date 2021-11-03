@@ -8,23 +8,23 @@ using AxMSTSCLib;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
 using MSTSCLib;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
     public class RdpProtocol6 : ProtocolBase, ISupportsViewOnly
     {
         /* RDP v8 requires Windows 7 with:
-         * https://support.microsoft.com/en-us/kb/2592687 
+         * https://support.microsoft.com/en-us/kb/2592687
          * OR
          * https://support.microsoft.com/en-us/kb/2923545
-         * 
+         *
          * Windows 8+ support RDP v8 out of the box.
          */
         private MsRdpClient6NotSafeForScripting _rdpClient;
@@ -297,6 +297,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
 
+            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.StartProgram;
+
             _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(connectionInfo.CacheBitmaps);
             if (_rdpVersion >= Versions.RDC61)
             {
@@ -519,47 +521,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetCredentialsFailed, ex);
             }
         }
-        private uint GetDesktopScaleFactor()
-        {
-            var scaleFactor = (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
-            switch (scaleFactor)
-            {
-                case 125:
-                    return 125;
-                case 150:
-                case 175:
-                    return 150;
-                case 200:
-                    return 200;
-            }
-            if (scaleFactor > 200)
-                return 200;
-            return 100;
-        }
-        private uint GetDeviceScaleFactor()
-        {
-            var scaleFactor = (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
-            switch (scaleFactor)
-            {
-                case 125:
-                case 150:
-                case 175:
-                    return 140;
-                case 200:
-                    return 180;
-            }
-            if (scaleFactor > 200)
-                return 180;
-            return 100;
-        }
 
         private void SetResolution()
         {
             try
             {
-                
-                SetExtendedProperty("DesktopScaleFactor", GetDesktopScaleFactor());
-                SetExtendedProperty("DeviceScaleFactor", GetDeviceScaleFactor());
+                var scaleFactor = (uint)(_displayProperties.ResolutionScalingFactor.Width * 100);
+                SetExtendedProperty("DesktopScaleFactor", scaleFactor);
+                SetExtendedProperty("DeviceScaleFactor", (uint)100);
 
                 if (Force.HasFlag(ConnectionInfo.Force.Fullscreen))
                 {
@@ -639,28 +608,28 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var pFlags = 0;
                 if (connectionInfo.DisplayThemes == false)
                     pFlags += (int)RDPPerformanceFlags.DisableThemes;
-                
+
                 if (connectionInfo.DisplayWallpaper == false)
                     pFlags += (int)RDPPerformanceFlags.DisableWallpaper;
-                
+
                 if (connectionInfo.EnableFontSmoothing)
                     pFlags += (int)RDPPerformanceFlags.EnableFontSmoothing;
 
                 if (connectionInfo.EnableDesktopComposition)
                     pFlags += (int)RDPPerformanceFlags.EnableDesktopComposition;
-                
+
                 if (connectionInfo.DisableFullWindowDrag)
                     pFlags += (int)RDPPerformanceFlags.DisableFullWindowDrag;
-                
+
                 if (connectionInfo.DisableMenuAnimations)
                     pFlags += (int)RDPPerformanceFlags.DisableMenuAnimations;
-                
+
                 if (connectionInfo.DisableCursorShadow)
                     pFlags += (int)RDPPerformanceFlags.DisableCursorShadow;
-                
+
                 if (connectionInfo.DisableCursorBlinking)
                     pFlags += (int)RDPPerformanceFlags.DisableCursorBlinking;
-                
+
                 _rdpClient.AdvancedSettings2.PerformanceFlags = pFlags;
             }
             catch (Exception ex)

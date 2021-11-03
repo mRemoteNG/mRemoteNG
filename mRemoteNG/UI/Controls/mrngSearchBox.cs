@@ -27,7 +27,7 @@ namespace mRemoteNG.UI.Controls
 
         private void AddClearButton()
         {
-            _pbClear.Image = Properties.Resources.Delete;
+            _pbClear.Image = Properties.Resources.Close_16x;
             _pbClear.Width = 20;
             _pbClear.Dock = DockStyle.Right;
             _pbClear.Cursor = Cursors.Default;

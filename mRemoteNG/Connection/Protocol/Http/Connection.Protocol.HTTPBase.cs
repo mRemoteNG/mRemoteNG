@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
-using CefSharp;
-using CefSharp.WinForms;
+using Microsoft.Web.WebView2.WinForms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Tabs;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Connection.Protocol.Http
@@ -14,24 +13,22 @@ namespace mRemoteNG.Connection.Protocol.Http
     {
         #region Private Properties
 
-        private Control wBrowser;
+        private Control _wBrowser;
+        private string _tabTitle;
         protected string httpOrS;
         protected int defaultPort;
-        private string tabTitle;
-        private bool browserInitialised = false;
-        private bool connectCalled = false;
 
         #endregion
 
         #region Public Methods
 
-        protected HTTPBase(RenderingEngine RenderingEngine)
+        protected HTTPBase(RenderingEngine renderingEngine)
         {
             try
             {
-                if (RenderingEngine == RenderingEngine.CEF)
+                if (renderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    Control = new ChromiumWebBrowser("about:blank")
+                    Control = new WebView2()
                     {
                         Dock = DockStyle.Fill,
                     };
@@ -53,33 +50,26 @@ namespace mRemoteNG.Connection.Protocol.Http
 
             try
             {
-                if (InterfaceControl.Parent is ConnectionTab objConnectionTab) tabTitle = objConnectionTab.TabText;
+                if (InterfaceControl.Parent is ConnectionTab objConnectionTab) _tabTitle = objConnectionTab.TabText;
             }
             catch (Exception)
             {
-                tabTitle = "";
+                _tabTitle = "";
             }
 
             try
             {
-                wBrowser = Control;
+                _wBrowser = Control;
 
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    var CEFBrowser = (ChromiumWebBrowser)wBrowser;
-                    if (CEFBrowser != null)
-                    {
-                        CEFBrowser.LoadingStateChanged += CefBrowser_LoadingStateChanged;
-                        CEFBrowser.TitleChanged += WBrowser_DocumentTitleChanged;
-                    }
-                    else
-                    {
-                        throw new Exception("Failed to initialize CEF Rendering Engine.");
-                    }
+                    var edge = (WebView2)_wBrowser;
+                    
+                    edge.CoreWebView2InitializationCompleted += Edge_CoreWebView2InitializationCompleted;
                 }
                 else
                 {
-                    var objWebBrowser = (WebBrowser)wBrowser;
+                    var objWebBrowser = (WebBrowser)_wBrowser;
                     objWebBrowser.ScrollBarsEnabled = true;
 
                     // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
@@ -87,7 +77,6 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                     objWebBrowser.Navigated += WBrowser_Navigated;
                     objWebBrowser.DocumentTitleChanged += WBrowser_DocumentTitleChanged;
-                    browserInitialised = true;
                 }
 
                 return true;
@@ -103,20 +92,16 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    if (browserInitialised)
-                    {
-                        ((ChromiumWebBrowser)wBrowser).Load(GetURL());
-                    }
+                    ((WebView2)_wBrowser).Source = new Uri(GetUrl());
                 }
                 else
                 {
-                    ((WebBrowser)wBrowser).Navigate(GetURL());
+                    ((WebBrowser)_wBrowser).Navigate(GetUrl());
                 }
 
                 base.Connect();
-                connectCalled = true;
                 return true;
             }
             catch (Exception ex)
@@ -130,22 +115,12 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         #region Private Methods
 
-        private string GetURL()
+        private string GetUrl()
         {
             try
             {
                 var strHost = InterfaceControl.Info.Hostname;
-                /* 
-                 * Commenting out since this codes doesn't actually do anything at this time...
-                 * Possibly related to MR-221 and/or MR-533 ????
-                 * 
-				string strAuth = "";
 
-                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
-				{
-					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(InterfaceControl.Info.Username + ":" + InterfaceControl.Info.Password)) + Environment.NewLine;
-				}
-				*/
                 if (InterfaceControl.Info.Port != defaultPort)
                 {
                     if (strHost.EndsWith("/"))
@@ -161,6 +136,7 @@ namespace mRemoteNG.Connection.Protocol.Http
                     if (strHost.Contains(httpOrS + "://") == false)
                         strHost = httpOrS + "://" + strHost;
                 }
+
                 return strHost;
             }
             catch (Exception ex)
@@ -174,26 +150,17 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         #region Events
 
-        private void CefBrowser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        private void Edge_CoreWebView2InitializationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {
-            browserInitialised = !e.IsLoading;
-            if (browserInitialised)
+            if (!e.IsSuccess)
             {
-                // Unhook the loading state changes now, as navigation is done by the user on links in the control
-                ((ChromiumWebBrowser)wBrowser).LoadingStateChanged -= CefBrowser_LoadingStateChanged;
-
-                // If this Connection has already been asked to connect but the browser hadn't finished initalising
-                // then the connect wouldn't have been allowed to take place, so now we can call it!
-                if (connectCalled)
-                {
-                    Connect();
-                }
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpFailedUrlBuild, e.InitializationException);
             }
         }
 
         private void WBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
-            if (!(wBrowser is WebBrowser objWebBrowser)) return;
+            if (!(_wBrowser is WebBrowser objWebBrowser)) return;
 
             // This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
             objWebBrowser.AllowWebBrowserDrop = false;
@@ -207,69 +174,22 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
                 string shortTitle;
-
-                if (InterfaceControl.Info.RenderingEngine == RenderingEngine.CEF)
+                if (((WebBrowser)_wBrowser).DocumentTitle.Length >= 15)
                 {
-                    if (((TitleChangedEventArgs)e).Title.Length >= 15)
-                    {
-                        shortTitle = ((TitleChangedEventArgs)e).Title.Substring(0, 10) + "...";
-                    }
-                    else
-                    {
-                        shortTitle = ((CefSharp.TitleChangedEventArgs)e).Title;
-                    }
+                    shortTitle = ((WebBrowser)_wBrowser).DocumentTitle.Substring(0, 10) + "...";
                 }
                 else
                 {
-                    if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                    }
-                    else
-                    {
-                        shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
-                    }
+                    shortTitle = ((WebBrowser)_wBrowser).DocumentTitle;
                 }
 
-                if (!string.IsNullOrEmpty(tabTitle))
+                if (!string.IsNullOrEmpty(_tabTitle))
                 {
-                   tabP.TabText = tabTitle + @" - " + shortTitle;
+                   tabP.TabText = _tabTitle + @" - " + shortTitle;
                 }
                 else
                 {
                    tabP.TabText = shortTitle;
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionStackTrace(Language.HttpDocumentTileChangeFailed, ex);
-            }
-        }
-
-
-        private void geckoBrowser_DocumentTitleChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
-                string shortTitle;
-
-                if (((WebBrowser)wBrowser).DocumentTitle.Length >= 15)
-                {
-                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle.Substring(0, 10) + "...";
-                }
-                else
-                {
-                    shortTitle = ((WebBrowser)wBrowser).DocumentTitle;
-                }
-
-                if (!string.IsNullOrEmpty(tabTitle))
-                {
-                  tabP.TabText = tabTitle + @" - " + shortTitle;
-                }
-                else
-                {
-                  tabP.TabText = shortTitle;
                 }
             }
             catch (Exception ex)
@@ -288,7 +208,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             IE = 1,
 
             [LocalizedAttributes.LocalizedDescription(nameof(Language.HttpCEF))]
-            CEF = 2
+            EdgeChromium = 2
         }
 
         #endregion

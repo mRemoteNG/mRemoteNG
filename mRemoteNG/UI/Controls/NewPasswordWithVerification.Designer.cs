@@ -67,7 +67,7 @@
             // 
             // imgError
             // 
-            this.imgError.Image = global::mRemoteNG.Properties.Resources.ErrorSmall;
+            this.imgError.Image = global::mRemoteNG.Properties.Resources.LogError_16x;
             this.imgError.Location = new System.Drawing.Point(3, 81);
             this.imgError.Name = "imgError";
             this.imgError.Size = new System.Drawing.Size(16, 16);

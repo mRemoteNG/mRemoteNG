@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.ComponentModel;
@@ -245,12 +245,19 @@ namespace mRemoteNG.App.Update
 
             if (!e.Cancelled && e.Error == null)
             {
-                CurrentUpdateInfo = UpdateInfo.FromString(e.Result);
-
-                Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
-                if (!Settings.Default.UpdatePending)
+                try
                 {
-                    Settings.Default.UpdatePending = IsUpdateAvailable();
+                    CurrentUpdateInfo = UpdateInfo.FromString(e.Result);
+
+                    Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
+                    if (!Settings.Default.UpdatePending)
+                    {
+                        Settings.Default.UpdatePending = IsUpdateAvailable();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    e = NewDownloadStringCompletedEventArgs(e.Result, ex, e.Cancelled, null);
                 }
             }
 

@@ -5,9 +5,9 @@ using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Connection
@@ -78,6 +78,7 @@ namespace mRemoteNG.Connection
         private string _postExtApp;
         private string _macAddress;
         private string _userField;
+        private string _startProgram;
         private bool _favorite;
 
         private ProtocolVNC.Compression _vncCompression;
@@ -588,7 +589,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Redirect)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.DiskDrives)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectDrives)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
@@ -633,7 +634,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.Redirect)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.SmartCard)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectSmartCards)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
@@ -729,6 +730,17 @@ namespace mRemoteNG.Connection
             get => GetPropertyValue("Favorite", _favorite);
             set => SetField(ref _favorite, value, "Favorite");
         }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.StartProgram)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionStartProgram)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public virtual string StartProgram
+        {
+            get => GetPropertyValue("StartProgram", _startProgram);
+            set => SetField(ref _startProgram, value, "StartProgram");
+        }
+
         #endregion
 
         #region VNC

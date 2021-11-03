@@ -1,6 +1,5 @@
-﻿
-
-using mRemoteNG.UI.Controls;
+﻿using mRemoteNG.UI.Controls;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -54,7 +53,7 @@ namespace mRemoteNG.UI.Forms
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 24);
             this.btnOK.TabIndex = 20;
-            this.btnOK.Text = global::mRemoteNG.Resources.Language.Language._Ok;
+            this.btnOK.Text = Language._Ok;
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
@@ -70,13 +69,13 @@ namespace mRemoteNG.UI.Forms
             // btnNew
             // 
             this.btnNew._mice = MrngButton.MouseState.HOVER;
-            this.btnNew.Image = global::mRemoteNG.Properties.Resources.Panel_Add;
+            this.btnNew.Image = global::mRemoteNG.Properties.Resources.InsertPanel_16x;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNew.Location = new System.Drawing.Point(86, 72);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 24);
             this.btnNew.TabIndex = 40;
-            this.btnNew.Text = global::mRemoteNG.Resources.Language.Language._New;
+            this.btnNew.Text = Language._New;
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -92,7 +91,6 @@ namespace mRemoteNG.UI.Forms
             this.Controls.Add(this.cbPanels);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = global::mRemoteNG.Properties.Resources.Panels_Icon;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmChoosePanel";

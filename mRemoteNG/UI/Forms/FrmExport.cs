@@ -5,8 +5,8 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -131,6 +131,7 @@ namespace mRemoteNG.UI.Forms
         public FrmExport()
         {
             InitializeComponent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Export_16x);
             FontOverrider.FontOverride(this);
             SelectedFolder = null;
             SelectedConnection = null;

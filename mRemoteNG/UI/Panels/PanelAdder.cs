@@ -6,8 +6,8 @@ using System;
 using System.Collections;
 using System.Linq;
 using System.Windows.Forms;
-using mRemoteNG.Resources.Language;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Panels
 {
@@ -70,7 +70,7 @@ namespace mRemoteNG.UI.Panels
             var cMenScreens = new ToolStripMenuItem
             {
                 Text = Language.SendTo,
-                Image = Properties.Resources.Monitor,
+                Image = Properties.Resources.Monitor_16x,
                 Tag = pnlcForm
             };
             cMenScreens.DropDownItems.Add("Dummy");
@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Panels
             var cMenRen = new ToolStripMenuItem
             {
                 Text = Language.Rename,
-                Image = Properties.Resources.Rename,
+                Image = Properties.Resources.Rename_16x,
                 Tag = pnlcForm
             };
             cMenRen.Click += cMenConnectionPanelRename_Click;
@@ -95,7 +95,7 @@ namespace mRemoteNG.UI.Panels
             var cMenClose = new ToolStripMenuItem
             {
                 Text = Language._Close,
-                Image = Properties.Resources.Panel_Close,
+                Image = Properties.Resources.Close_16x,
                 Tag = pnlcForm
             };
             cMenClose.Click += cMenConnectionPanelClose_Click;
@@ -145,7 +145,7 @@ namespace mRemoteNG.UI.Panels
                     var cMenScreen = new ToolStripMenuItem(Language.Screen + " " + Convert.ToString(i + 1))
                     {
                         Tag = new ArrayList(),
-                        Image = Properties.Resources.Monitor_GoTo
+                        Image = Properties.Resources.Monitor_16x
                     };
                     ((ArrayList)cMenScreen.Tag).Add(Screen.AllScreens[i]);
                     ((ArrayList)cMenScreen.Tag).Add(cMenScreens.Tag);

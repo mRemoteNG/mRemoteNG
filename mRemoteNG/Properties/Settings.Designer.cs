@@ -8,11 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG.Properties {
+namespace mRemoteNG.Properties
+{
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -1525,18 +1526,6 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("CEF")]
-        public string ConDefaultRenderingEngine {
-            get {
-                return ((string)(this["ConDefaultRenderingEngine"]));
-            }
-            set {
-                this["ConDefaultRenderingEngine"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRenderingEngine {
             get {
@@ -2797,7 +2786,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool PlaceSearchBarAboveConnectionTree {
             get {
                 return ((bool)(this["PlaceSearchBarAboveConnectionTree"]));
@@ -2912,6 +2901,18 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["InhDefaultUseVmId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SaveConnectionsFrequency {
+            get {
+                return ((int)(this["SaveConnectionsFrequency"]));
+            }
+            set {
+                this["SaveConnectionsFrequency"] = value;
             }
         }
         
@@ -3092,6 +3093,114 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["ConDefaultDisableCursorBlinking"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultStartProgram {
+            get {
+                return ((string)(this["ConDefaultStartProgram"]));
+            }
+            set {
+                this["ConDefaultStartProgram"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EncrBasic")]
+        public string ConDefaultICAEncryptionStrength {
+            get {
+                return ((string)(this["ConDefaultICAEncryptionStrength"]));
+            }
+            set {
+                this["ConDefaultICAEncryptionStrength"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public string InhDefaultICAEncryptionStrength {
+            get {
+                return ((string)(this["InhDefaultICAEncryptionStrength"]));
+            }
+            set {
+                this["InhDefaultICAEncryptionStrength"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool StartFullScreen {
+            get {
+                return ((bool)(this["StartFullScreen"]));
+            }
+            set {
+                this["StartFullScreen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ViewMenuMessages {
+            get {
+                return ((bool)(this["ViewMenuMessages"]));
+            }
+            set {
+                this["ViewMenuMessages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ViewMenuQuickConnect {
+            get {
+                return ((bool)(this["ViewMenuQuickConnect"]));
+            }
+            set {
+                this["ViewMenuQuickConnect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ViewMenuExternalTools {
+            get {
+                return ((bool)(this["ViewMenuExternalTools"]));
+            }
+            set {
+                this["ViewMenuExternalTools"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ViewMenuMultiSSH {
+            get {
+                return ((bool)(this["ViewMenuMultiSSH"]));
+            }
+            set {
+                this["ViewMenuMultiSSH"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EdgeChromium")]
+        public string ConDefaultRenderingEngine {
+            get {
+                return ((string)(this["ConDefaultRenderingEngine"]));
+            }
+            set {
+                this["ConDefaultRenderingEngine"] = value;
             }
         }
     }

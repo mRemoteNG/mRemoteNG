@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Tree
@@ -22,8 +22,11 @@ namespace mRemoteNG.Tree
         public void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
         {
             if (!(e.TargetModel is ConnectionInfo dropTarget)) return;
-            var dropSource = (ConnectionInfo)e.SourceModels[0];
-            DropModel(dropSource, dropTarget, e.DropTargetLocation);
+            foreach(var dropSource in e.SourceModels.Cast<ConnectionInfo>())
+            {
+                DropModel(dropSource, dropTarget, e.DropTargetLocation);
+            }           
+            
             e.Handled = true;
         }
 
@@ -72,13 +75,15 @@ namespace mRemoteNG.Tree
             _enableFeedback = true;
             _currentFeedbackColor = DropDeniedFeedbackColor;
             _infoMessage = null;
-            var dropSource = e.SourceModels.Cast<ConnectionInfo>().First();
-            var dropTarget = e.TargetModel as ConnectionInfo;
+            foreach (var dropSource in e.SourceModels.Cast<ConnectionInfo>())
+            {
+                var dropTarget = e.TargetModel as ConnectionInfo;
 
-            e.Effect = CanModelDrop(dropSource, dropTarget, e.DropTargetLocation);
-            e.InfoMessage = _infoMessage;
-            e.DropSink.EnableFeedback = _enableFeedback;
-            e.DropSink.FeedbackColor = _currentFeedbackColor;
+                e.Effect = CanModelDrop(dropSource, dropTarget, e.DropTargetLocation);
+                e.InfoMessage = _infoMessage;
+                e.DropSink.EnableFeedback = _enableFeedback;
+                e.DropSink.FeedbackColor = _currentFeedbackColor;
+            }
             e.Handled = true;
         }
 

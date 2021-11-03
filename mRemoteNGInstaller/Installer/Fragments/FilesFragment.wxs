@@ -2,7 +2,6 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
         <DirectoryRef Id="INSTALLDIR">
-            <Directory Id="dir98D6A82711403A099D030B08681E8442" Name="CEFCache" />
             <Directory Id="dir82972532CA27BEF6B972C3A142E19BC1" Name="cs-CZ" />
             <Directory Id="dirF7A62AAB979B938D6BCEC1392A589DA5" Name="de" />
             <Directory Id="dir62078C356EA332979A99724C7722A56A" Name="el" />
@@ -10,23 +9,20 @@
             <Directory Id="dir577231E2EF642DDF4B09B65F4BEE3BE2" Name="es" />
             <Directory Id="dir4D0A9F0DBDF1EE024E030F9E3B94104C" Name="es-AR" />
             <Directory Id="dir0B7D401DE3233449E75F31A823BF5B99" Name="fr" />
-            <Directory Id="dir0F2799FA71A14A552F2E5CD85EF758ED" Name="Help" />
             <Directory Id="dir09632C6D20BFA94E2A24ED0E6D9B2C41" Name="hu" />
             <Directory Id="dir5E6DA158F27D9CA2AB915EC6AB53B383" Name="Icons" />
             <Directory Id="dirB5B71807E9474A6ED7A421DAF6D9317F" Name="it" />
             <Directory Id="dir236726D31B8846E56F94A60B4BDA0D5D" Name="ja-JP" />
             <Directory Id="dir84F2A679A7F20EDA03A198E92F9399E3" Name="ko-KR" />
-            <Directory Id="dirC2A25BD972A0CE6CA0E5449830E3199D" Name="locales" />
             <Directory Id="dir5D4FF3A14A3EA47FCD6D9414E469A244" Name="lt" />
             <Directory Id="dir54E7E449F697FA31B946B0D847BC12FC" Name="nb-NO" />
             <Directory Id="dirAD9F3749BDE51B9EA3E808CC39488A46" Name="nl" />
             <Directory Id="dir42A5D57151A6A3E9D965C69C82893176" Name="pl" />
             <Directory Id="dirC5F627279ECABE21145A844571EF9F74" Name="pt" />
             <Directory Id="dir3CF6B6BC48181D29C167EF5DB7F05816" Name="pt-BR" />
-            <Directory Id="dir61B122782F2749F187324C134F6498C1" Name="Resources" />
             <Directory Id="dirF7C0BEA86C276F53E8C9E8E6B2629A9B" Name="ru" />
+            <Directory Id="dirB699B779DD859CB7CAD46DA4BC9017C0" Name="runtimes" />
             <Directory Id="dir54B0732D1EC7055747BB11A9069B5872" Name="Schemas" />
-            <Directory Id="dirC616523A56556EF3F429B8097FDA009B" Name="swiftshader" />
             <Directory Id="dir449D12A97ECE34898DFE89F1087779C9" Name="Themes" />
             <Directory Id="dirF50F8AE1B4079411641D2CA28D569A6E" Name="tr-TR" />
             <Directory Id="dir09CC4E618379FE7D9EB8E064B61C997C" Name="uk" />
@@ -39,89 +35,26 @@
             <Component Id="cmp35D96EA44AD8354ED2F995D3EBCCE1A7" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil19AFB7CDBA1EEFE8FFFF6028483B5EC8" KeyPath="yes" Source="$(var.HarvestPath)\AxInterop.MSTSCLib.dll" />
             </Component>
-            <Component Id="cmpC4D5BD4A4ACE1893F757BACA1178A0B0" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil3B054F892983C7A30A3E8822BFBCCAF1" KeyPath="yes" Source="$(var.HarvestPath)\AxInterop.WFICALib.dll" />
-            </Component>
             <Component Id="cmp68D767AEEE842A722AECA2C65D34BE2E" Directory="INSTALLDIR" Guid="*">
                 <File Id="filCC34B59260E76EC7532DD3E23A541355" KeyPath="yes" Source="$(var.HarvestPath)\BouncyCastle.Crypto.dll" />
             </Component>
             <Component Id="cmpEE32B1AC9DA9B3A57F47CD636A1E633F" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil7DF025433894C38CD5C38688098A6310" KeyPath="yes" Source="$(var.HarvestPath)\buildenv.tmp" />
             </Component>
-            <Component Id="cmpEB785AFB85843B3AC33B855FE1774C19" Directory="INSTALLDIR" Guid="*">
-                <File Id="filF92153A6A4829217A3090F6432F7F9BF" KeyPath="yes" Source="$(var.HarvestPath)\cef.pak" />
-            </Component>
-            <Component Id="cmp29E30D4BB3602EFA127FBC2979B0D711" Directory="INSTALLDIR" Guid="*">
-                <File Id="filF339126CA7534B68CB4ECA16838E7AA8" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.BrowserSubprocess.Core.dll" />
-            </Component>
-            <Component Id="cmp73510FF3A0AADF26374255E854FCA91B" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil13DB8D8F9C54DD33E8347CDF11FCAB6E" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.BrowserSubprocess.Core.pdb" />
-            </Component>
-            <Component Id="cmp99E7D28282752E89C43774CC6C209A9D" Directory="INSTALLDIR" Guid="*">
-                <File Id="filDA28AE3EB141715223C6B1428E018C1F" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.BrowserSubprocess.exe" />
-            </Component>
-            <Component Id="cmpA79DE2B438AC2E8EE14FCB7A0328489F" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil9575110B7F1BECFA1C185628E29A5880" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.BrowserSubprocess.pdb" />
-            </Component>
-            <Component Id="cmp90A2E8CB33B762E5EAC90BA07C08B11E" Directory="INSTALLDIR" Guid="*">
-                <File Id="filA7D45C9E4256B3358C34553C935942B4" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.Core.dll" />
-            </Component>
-            <Component Id="cmp216A2905BBACCF90D42EDCF98E1E3987" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil934055EAB857344B33BDD1627FE390F7" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.Core.pdb" />
-            </Component>
-            
-            <Component Id="cmp590590625DF439F24B8748346C4F947F" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil7FC0DFC6BC88E4E58DB03A22A09BB77D" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.dll" />
-            </Component>
-            <Component Id="cmp75251D606EED5819B1290D403A1CC1B2" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil47C3C952A0C5ED43421B12C892ADB70A" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.pdb" />
-            </Component>
-            <Component Id="cmpA41C6EE7A653A952E331B00092610B1D" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil65AC6BC6EE24BD8FC1F18F1B380974D8" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.WinForms.dll" />
-            </Component>
-            <Component Id="cmpC7970CF06BC5973A655CA54A9B6CCBC6" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil0F10FDF94BA38883FDC88AB69CA05C3D" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.WinForms.pdb" />
-            </Component>
-            <Component Id="cmp260B23704EE68B2553D0BCF8473AE65F" Directory="INSTALLDIR" Guid="*">
-                <File Id="filDC34E881859FD7FE5BCAF3C6282E590D" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.WinForms.XML" />
-            </Component>
-            <Component Id="cmp85CEC55B1E626FB7F4A2A93DB455D4A8" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil34E0071180CC2459D07D512E194A78FE" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.XML" />
-            </Component>
-            <Component Id="cmp03546C8E114D3407FDCF153555C46160" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil351C382BAD085D91B7219ACAEA2A52F9" KeyPath="yes" Source="$(var.HarvestPath)\cef_100_percent.pak" />
-            </Component>
-            <Component Id="cmp2DD444B38E678431199E8C532D79764C" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil0EA9162D78188AF38E94CF1390EE6D76" KeyPath="yes" Source="$(var.HarvestPath)\cef_200_percent.pak" />
-            </Component>
-            <Component Id="cmpC947A80225B32A6F316DCF1960A5B782" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil040AD5417913B7720B713B5C1560037D" KeyPath="yes" Source="$(var.HarvestPath)\cef_extensions.pak" />
-            </Component>
             <Component Id="cmpC80350D124B50BBA8B15EDA2785513AF" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil92BB80A0015DEE1D4E207A2B29A3F2DC" KeyPath="yes" Source="$(var.HarvestPath)\CHANGELOG.md" />
             </Component>
-            <Component Id="cmp671AE9B5018B21C55B0BA6C98FA38DF0" Directory="INSTALLDIR" Guid="*">
-                <File Id="filB2F1D5CF803E4A00F1446547BBF85A23" KeyPath="yes" Source="$(var.HarvestPath)\chrome_elf.dll" />
-            </Component>
-            
-            
-            
-            
-            
             <Component Id="cmpADE94032AA8563E1E37003C8AB2D8F7E" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil6BA5B21301D77ADAE00F1DA02BFE8584" KeyPath="yes" Source="$(var.HarvestPath)\ConsoleControl.dll" />
             </Component>
             <Component Id="cmpCD880D9D0A268B608165CA720A505323" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil2D3E8B5BFE62A4776A87A75AD6DD50EA" KeyPath="yes" Source="$(var.HarvestPath)\ConsoleControlAPI.dll" />
             </Component>
+            <Component Id="cmpACE72DC80E58B79586C1EEA5C36A1532" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil5605B38630061876CA483106C32D10F4" KeyPath="yes" Source="$(var.HarvestPath)\COPYING.TXT" />
+            </Component>
             <Component Id="cmp047A6C5EFDBE1E198D8108B0C9429F8D" Directory="INSTALLDIR" Guid="*">
                 <File Id="filA9AF50F71ECD31FA1809BBC6AD35FBD1" KeyPath="yes" Source="$(var.HarvestPath)\CREDITS.md" />
-            </Component>
-            <Component Id="cmp593B47C5A296958937B4699BB126000F" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil74C30EBEB08AD69984405E221438C865" KeyPath="yes" Source="$(var.HarvestPath)\d3dcompiler_47.dll" />
-            </Component>
-            <Component Id="cmp0472B80080FDA215C469D6CED09AA339" Directory="INSTALLDIR" Guid="*">
-                <File Id="filD10C09E4D33A9C8AA521761CCA050406" KeyPath="yes" Source="$(var.HarvestPath)\devtools_resources.pak" />
             </Component>
             
             <Component Id="cmp19EC39A721B3368567C267C98B3A70BF" Directory="INSTALLDIR" Guid="*">
@@ -130,14 +63,8 @@
             <Component Id="cmp4C51B5387780358DD249907CE9C046BF" Directory="INSTALLDIR" Guid="*">
                 <File Id="filD2242E8CA2989ECDE6218752F9E92450" KeyPath="yes" Source="$(var.HarvestPath)\Google.Protobuf.pdb" />
             </Component>
-            <Component Id="cmp2CB181F06249C39F4FEB29A2086FF619" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil623D04A95B27EA6BC5EEE006250395BB" KeyPath="yes" Source="$(var.HarvestPath)\icudtl.dat" />
-            </Component>
             <Component Id="cmp3B87E05C275CE85388D030CC01BF1E20" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil3FCEFF3CAE083B7927D5D4E4B0218A88" KeyPath="yes" Source="$(var.HarvestPath)\Interop.MSTSCLib.dll" />
-            </Component>
-            <Component Id="cmp2EBD496ED7AE86AC70CB5EB0B1101067" Directory="INSTALLDIR" Guid="*">
-                <File Id="filA635162D27B886FF77F7012E9DE3BF16" KeyPath="yes" Source="$(var.HarvestPath)\Interop.WFICALib.dll" />
             </Component>
             <Component Id="cmp3704AF810B8B1ADEB2C20918E40DA29E" Directory="INSTALLDIR" Guid="*">
                 <File Id="filD1D4DD2035A15DD71B833418EA523091" KeyPath="yes" Source="$(var.HarvestPath)\K4os.Compression.LZ4.dll" />
@@ -148,17 +75,17 @@
             <Component Id="cmp9F2B7587D0DBBAE60FACF8282508F693" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil7A31D991E2C50622F9B19BE8FF45FCF0" KeyPath="yes" Source="$(var.HarvestPath)\K4os.Hash.xxHash.dll" />
             </Component>
-            <Component Id="cmpBB0C7B993C9AF0704B701083AB25A9E6" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil680C3F803F7453BD76FB62858767E327" KeyPath="yes" Source="$(var.HarvestPath)\libcef.dll" />
-            </Component>
-            <Component Id="cmp5DDCF0CE56D406D1B8B1F93E988AED6B" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil0F4CD3729AF07C1C460E292E0F081D0A" KeyPath="yes" Source="$(var.HarvestPath)\libEGL.dll" />
-            </Component>
-            <Component Id="cmpB0CFEB9FF932521D6A75B6BE6F8D644F" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil736048FE57EC840EA5DCE88625C38E8D" KeyPath="yes" Source="$(var.HarvestPath)\libGLESv2.dll" />
-            </Component>
             <Component Id="cmp13D6573EA8CF3F99F44BAE837E2771F0" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil2991F53D601CDF7142D0A9E1B42E116E" KeyPath="yes" Source="$(var.HarvestPath)\log4net.dll" />
+            </Component>
+            <Component Id="cmp104087D18B25A9A8D2ECC5B6EA2AE79B" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil5282108DD54B6C7D192C3E9D001FD4E7" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Web.WebView2.Core.dll" />
+            </Component>
+            <Component Id="cmp3ED4B6E14797367C1383E408A6961B85" Directory="INSTALLDIR" Guid="*">
+                <File Id="filBEB43BF024BDDFB47075A1E970FB51F2" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Web.WebView2.WinForms.dll" />
+            </Component>
+            <Component Id="cmp6EED7245C933A23BDE5CBE3B4DD32858" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil157A3D211984A88620C183E777A80E6C" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Web.WebView2.Wpf.dll" />
             </Component>
             
             <Component Id="cmp8958F261F3D830DE65AF9C2710549C88" Directory="INSTALLDIR" Guid="*">
@@ -170,18 +97,15 @@
             <Component Id="cmp67313C6B4CE3487E9A8165EFFE369D16" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil5F0524AF62166FF3C4DAE07F1113C0D9" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.pdb" />
             </Component>
-            <Component Id="cmpABF26A6AF846A3692FA6A8E32221F4D3" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil070DB76E3F9C5D186E714B62ED197C0A" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.settings" />
-            </Component>
             
-            <Component Id="cmpD06244CB6ADF5768C29EFC706B8E7D4C" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil0B215B6192B3628C8A7871F5DD0E34AD" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG_cef.log" />
-            </Component>
             <Component Id="cmp1D9B3E298A697AB163089035161BFA1D" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil895DC5B7ACBE0A8A9EE74F34EAD5B5AA" KeyPath="yes" Source="$(var.HarvestPath)\MySql.Data.dll" />
             </Component>
             <Component Id="cmpFF90EFA0AE0E35A48FC042638CF77F83" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil75F15A67DE36E6CD5ADC683FD7435C78" KeyPath="yes" Source="$(var.HarvestPath)\nunit.engine.api.dll" />
+            </Component>
+            <Component Id="cmp35010F6B50302A296D9658771EC3E4FE" Directory="INSTALLDIR" Guid="*">
+                <File Id="filBB933BCEF1E4A178879D45D7E720A2F3" KeyPath="yes" Source="$(var.HarvestPath)\nunit.engine.core.dll" />
             </Component>
             <Component Id="cmp60171664B38A0BA8AFA2CCFD9DC72916" Directory="INSTALLDIR" Guid="*">
                 <File Id="filDDF0CBD906AA151260327DB6D8CEF33D" KeyPath="yes" Source="$(var.HarvestPath)\nunit.engine.dll" />
@@ -197,14 +121,14 @@
             </Component>
             
             
-            <Component Id="cmp9F1F760351DF98E43961684D66E51E03" Directory="INSTALLDIR" Guid="*">
-                <File Id="filC5069BEF030929B7F7AEB7898F21BE12" KeyPath="yes" Source="$(var.HarvestPath)\README.txt" />
+            <Component Id="cmp77B4A071D4D4E81445BE03B0AD534C90" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil4560734A3E7B53FF55D3B92F7AFD23E3" KeyPath="yes" Source="$(var.HarvestPath)\README.md" />
+            </Component>
+            <Component Id="cmp8EFDE1F21B7D56B957F262CC057CB4BA" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil56FF3B20B7AFB789C5CF4AA13D753C36" KeyPath="yes" Source="$(var.HarvestPath)\Renci.SshNet.Async.dll" />
             </Component>
             <Component Id="cmpEDFC52653A3A4D5C80AB3A0B7CE9AE35" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil9C1ED4726B58F1CD4C25AF29BDBE0F77" KeyPath="yes" Source="$(var.HarvestPath)\Renci.SshNet.dll" />
-            </Component>
-            <Component Id="cmp939A03A1D5316FD7464E1211355E0BBF" Directory="INSTALLDIR" Guid="*">
-                <File Id="filB1E02FD4DF2AD830151686A1B0813A3B" KeyPath="yes" Source="$(var.HarvestPath)\snapshot_blob.bin" />
             </Component>
             <Component Id="cmp73085246C202ABD1D96D2E5DEFB2A801" Directory="INSTALLDIR" Guid="*">
                 <File Id="filEDD81E77BF6933BF90C42AE0EFAA681B" KeyPath="yes" Source="$(var.HarvestPath)\System.Buffers.dll" />
@@ -227,11 +151,11 @@
             <Component Id="cmpF504650A7859834E56B465827ADA1936" Directory="INSTALLDIR" Guid="*">
                 <File Id="filF3505C51B6D770D84F54BDDB6F4AE5C2" KeyPath="yes" Source="$(var.HarvestPath)\System.Security.Cryptography.ProtectedData.dll" />
             </Component>
+            <Component Id="cmpC9D8421F84EA6EC63F4CC3631BDE8A90" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil33A5321649C6EF973D60D344751A3F82" KeyPath="yes" Source="$(var.HarvestPath)\testcentric.engine.metadata.dll" />
+            </Component>
             <Component Id="cmpE68C5E1DCE03F09E43EB82865185E4D3" Directory="INSTALLDIR" Guid="*">
                 <File Id="filD8044470EBD984D56CFBAD1E74376C16" KeyPath="yes" Source="$(var.HarvestPath)\Ubiety.Dns.Core.dll" />
-            </Component>
-            <Component Id="cmp49FC78DB761A2F02451F964C668157F9" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil0EFD83D2C2D8006AEF99691655F71A34" KeyPath="yes" Source="$(var.HarvestPath)\v8_context_snapshot.bin" />
             </Component>
             <Component Id="cmp706223D2ABF6685A8E778D40099041C4" Directory="INSTALLDIR" Guid="*">
                 <File Id="filB19F03244FC8ACDFED93F0A01EDD6A3F" KeyPath="yes" Source="$(var.HarvestPath)\VisualElements_150.png" />
@@ -241,6 +165,9 @@
             </Component>
             <Component Id="cmpD3A62C6E1FCA8BCCB540EA093829FB0A" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil21072501EA7C63633A3FCD306B94A95D" KeyPath="yes" Source="$(var.HarvestPath)\VncSharp.dll" />
+            </Component>
+            <Component Id="cmp74C002F3E7887C8150BBB5707FA71B13" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil2493994E030480CF99B3EF99E2E518C4" KeyPath="yes" Source="$(var.HarvestPath)\WebView2Loader.dll" />
             </Component>
             <Component Id="cmpF64D60E2A7A50FD6241ABDBE27E31F59" Directory="INSTALLDIR" Guid="*">
                 <File Id="filED0391668232DF3DEA5823C1D36F49AD" KeyPath="yes" Source="$(var.HarvestPath)\WeifenLuo.WinFormsUI.Docking.dll" />
@@ -257,14 +184,8 @@
             <Component Id="cmpCB1387F6E09FEBEA8084E857787F33EA" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil09E77F330B2D23A6F306099688F7A9C3" KeyPath="yes" Source="$(var.HarvestPath)\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll" />
             </Component>
-            <Component Id="cmp04C7B02DC48478EC5E6A10E077E158D8" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil158BE3EAEBC8F7867B09DCE2FB037B31" KeyPath="yes" Source="$(var.HarvestPath)\Zstandard.Net.dll" />
-            </Component>
-            <Component Id="cmp6A8DCC41365BD32F38E1E24B25C6EAC2" Directory="dir98D6A82711403A099D030B08681E8442" Guid="*">
-                <File Id="fil30190128E700F1FBB8209B07E7ECCFC4" KeyPath="yes" Source="$(var.HarvestPath)\CEFCache\LocalPrefs.json" />
-            </Component>
-            <Component Id="cmp49B1FB41100E5399DF5E68B0BC992438" Directory="dir98D6A82711403A099D030B08681E8442" Guid="*">
-                <File Id="filF82E5AD880D50C6F7BD108DDBB49C964" KeyPath="yes" Source="$(var.HarvestPath)\CEFCache\Visited Links" />
+            <Component Id="cmp643F6BC02D559138788B66788747B74E" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil9987BED6E61406EB6AADC003B6E8A6B9" KeyPath="yes" Source="$(var.HarvestPath)\ZstdNet.dll" />
             </Component>
             <Component Id="cmp46A31C5C8F6C32D00394B76FC10B878C" Directory="dir82972532CA27BEF6B972C3A142E19BC1" Guid="*">
                 <File Id="fil1BBD62B8CC672D965BD8B093F72F7E70" KeyPath="yes" Source="$(var.HarvestPath)\cs-CZ\mRemoteNG.resources.dll" />
@@ -286,702 +207,6 @@
             </Component>
             <Component Id="cmp40895E6FE8EC4FFA9CDEB2FB5DD15F20" Directory="dir0B7D401DE3233449E75F31A823BF5B99" Guid="*">
                 <File Id="fil715FF750208BACE83BC7DCCF4BEB3FA2" KeyPath="yes" Source="$(var.HarvestPath)\fr\mRemoteNG.resources.dll" />
-            </Component>
-            <Component Id="cmp9A52DA5916D44F6EA3D9EB22CA63DC33" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filD35FD378049DCD1EC731D1E95182E254" KeyPath="yes" Source="$(var.HarvestPath)\Help\.buildinfo" />
-            </Component>
-            <Component Id="cmp2F4DA5469B03690C072AA5FD9CB1F995" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filCD03B51FD14BC2CB3F983B053F1EE661" KeyPath="yes" Source="$(var.HarvestPath)\Help\about.html" />
-            </Component>
-            <Component Id="cmp0D1D0FA80E01DA9E4D3515FD46A2A65C" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil85667C29A93FA44F6A175F467B1AC66E" KeyPath="yes" Source="$(var.HarvestPath)\Help\command_line_switches.html" />
-            </Component>
-            <Component Id="cmp780E363EA539007E6847713986AF7297" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil5ECE118CAF729B629EA87CD1C0793AE4" KeyPath="yes" Source="$(var.HarvestPath)\Help\contact_mail.html" />
-            </Component>
-            <Component Id="cmpDBCC93FFBAD0CCC6FF4277251A122373" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filBE6BF5D880A828F4301977663DDC6224" KeyPath="yes" Source="$(var.HarvestPath)\Help\external_tools_cheat_sheet.html" />
-            </Component>
-            <Component Id="cmp45E59CD9A6B65C16B8B1A7A7B1DBE48F" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil4E9C03AB7D815D0C23E25BE41A3F1DE1" KeyPath="yes" Source="$(var.HarvestPath)\Help\faq.html" />
-            </Component>
-            <Component Id="cmpD660F461795F2CBE632FF9A2FD9FDB8B" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filB4DF2125AC77B30F11CB6255E1EF74FF" KeyPath="yes" Source="$(var.HarvestPath)\Help\folders_and_inheritance.html" />
-            </Component>
-            <Component Id="cmpBAF721CAF3CE893602FE5BC5C4BE4697" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil5D0F898480BA6A70B2B3E05D7A5BB796" KeyPath="yes" Source="$(var.HarvestPath)\Help\genindex.html" />
-            </Component>
-            <Component Id="cmp0A6751E8DF3F959DCE0A3C5F930F9584" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filA0CB5AE8D2F2EBCD55F66245274050A8" KeyPath="yes" Source="$(var.HarvestPath)\Help\index.html" />
-            </Component>
-            <Component Id="cmp0346ED435FD2649458D9B98E0CB2B06B" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filADE0E0D0762435E5E665FC3C9CA249EA" KeyPath="yes" Source="$(var.HarvestPath)\Help\installation.html" />
-            </Component>
-            <Component Id="cmpDEB0826CE61A025CBCFCDCD5A03EFDFB" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil7DCD95A3FB72CF2471445EBEA27F864E" KeyPath="yes" Source="$(var.HarvestPath)\Help\keyboard_shortcuts.html" />
-            </Component>
-            <Component Id="cmp0BA1163635F29411EA875F3D8D41FF6D" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil95B0DCC5AF7F4E98A8F6CF317AE27B7B" KeyPath="yes" Source="$(var.HarvestPath)\Help\known_issues.html" />
-            </Component>
-            <Component Id="cmp4B581FFAC510CEBFDFBA8C0E1DB75860" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filEA5A76DDED08E2A27C9B807141EA5C2C" KeyPath="yes" Source="$(var.HarvestPath)\Help\migrate.html" />
-            </Component>
-            <Component Id="cmp85D6C063DB47FB258AF589F5947D8B0C" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil46A9EEBAF19898E4F9D757EED2E284B7" KeyPath="yes" Source="$(var.HarvestPath)\Help\objects.inv" />
-            </Component>
-            <Component Id="cmp88E28B4743C5B1192ABB6C2AA1D81F0C" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filCE474E0F1DE38D6A19420886E824A0D3" KeyPath="yes" Source="$(var.HarvestPath)\Help\protocols.html" />
-            </Component>
-            <Component Id="cmpE9D2406DAA802F96504871A37203456D" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil99334B3C9C209313BFF45802651B12BE" KeyPath="yes" Source="$(var.HarvestPath)\Help\search.html" />
-            </Component>
-            <Component Id="cmp460B0716BA8341DC41E172EC04F268E6" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filBF26137561EBA263E8A6A07BE4152B41" KeyPath="yes" Source="$(var.HarvestPath)\Help\searchindex.js" />
-            </Component>
-            <Component Id="cmp44DFD69D4D37F85BB56B85DCB70B4B68" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil88F6DF4F91EC80B9A0293C808E0B878B" KeyPath="yes" Source="$(var.HarvestPath)\Help\sql_configuration.html" />
-            </Component>
-            <Component Id="cmp752781241290B8B23898A8C4755A54C4" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="filF604DB45F7619E884496099C8A70D501" KeyPath="yes" Source="$(var.HarvestPath)\Help\troubleshooting.html" />
-            </Component>
-            <Component Id="cmpBA1DEF7C435149831FAA10FDA5F8354E" Directory="dir0F2799FA71A14A552F2E5CD85EF758ED" Guid="*">
-                <File Id="fil6951627B48A2844E134806193FBCF066" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface.html" />
-            </Component>
-            <Component Id="cmpAEF326B7DC07EA2B5615ED8EBC5A62DA" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil45A8809D0B6547F04E1DFB654F33805D" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\about.doctree" />
-            </Component>
-            <Component Id="cmp77C86041CB7F1E5B13439E0E8ABE137F" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil076D861B08492A4E159427B6C1404893" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\command_line_switches.doctree" />
-            </Component>
-            <Component Id="cmpF5E18DEE4F891332659F089726D1C6AB" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil87B3FED5F2D2403A43FFC3E9562E341C" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\contact_mail.doctree" />
-            </Component>
-            <Component Id="cmpCCA896EA8B73229712A894F5FAD1F6E0" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil582AD396C4144BAD24AE9B7D3F95F04C" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\environment.pickle" />
-            </Component>
-            <Component Id="cmpD61504F4B2F05479F7F6D5E93FAD1AFF" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil111A4BAF7EFB8E745511C5D3B7B68BD7" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\external_tools_cheat_sheet.doctree" />
-            </Component>
-            <Component Id="cmp4ED2BD821BA0A15AE3A4AB8E2A1FF777" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil576A53EF20CE6E787F7A7FAEC618F012" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\faq.doctree" />
-            </Component>
-            <Component Id="cmp3CF11C288F07618EE69B09D6D54F02E3" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil26E7D41CBB10DF5F457B1E70EB849C6B" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\folders_and_inheritance.doctree" />
-            </Component>
-            <Component Id="cmp93B92562E4AAD22C6EFB63AF003F6227" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil5BAFB5DB66370C85B866ED3718CF7E6A" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\index.doctree" />
-            </Component>
-            <Component Id="cmp2C3B280E81317C072466CA152DD1B9ED" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="filDEAFC895C3035969ADCD443C50C73D34" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\installation.doctree" />
-            </Component>
-            <Component Id="cmp61E16E7C39EBA344088F91C35BBF9965" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil3C42D752EDEFB49FC0D001B44849CF8D" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\keyboard_shortcuts.doctree" />
-            </Component>
-            <Component Id="cmp7AFF4FAFA3F38587B77D7EA95ACA11E0" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil78EFCE0DEF9E14B1D5ED0EAF92A4C554" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\known_issues.doctree" />
-            </Component>
-            <Component Id="cmpB1B14D12538B15B50D47A0DE1B47CF90" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil7CAA66F4467B78E181F4951543369222" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\migrate.doctree" />
-            </Component>
-            <Component Id="cmp7EBDA1E17136D984294EAE5A3F16A6F4" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="filA8E098D22C28583D2EB655FA46981D56" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\protocols.doctree" />
-            </Component>
-            <Component Id="cmpC3406C58703A55B5C7C32B77353BD376" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil65BDE27335D65DFAAE794EDA262CEA52" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\sql_configuration.doctree" />
-            </Component>
-            <Component Id="cmp49153184E6EB09D0A404F2EFD87C8102" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="filAA61B3681EE8676E5E9495CAAACDC3F3" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\troubleshooting.doctree" />
-            </Component>
-            <Component Id="cmp158EA04FA08F2D7C44AC9E73E1969844" Directory="dir77B5EAB5ED5234CD9293566153093DA4" Guid="*">
-                <File Id="fil494805DC635A4360989DD427BF53F8FB" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface.doctree" />
-            </Component>
-            <Component Id="cmp4FCC451DC3D5ADFFE66BFC83B3BE2E61" Directory="dirDC7BF93757185D969F13053D302A5A54" Guid="*">
-                <File Id="fil395C7B75C14DA72E4A775EF2AFABEA35" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\about\features.doctree" />
-            </Component>
-            <Component Id="cmpDF248FED0DCA88A1F53865C12743A817" Directory="dirDC7BF93757185D969F13053D302A5A54" Guid="*">
-                <File Id="fil25C2722DA04CA1DA49FCFE2359CD79CE" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\about\license.doctree" />
-            </Component>
-            <Component Id="cmp66354C4849A9244F1FF12343B451D2F3" Directory="dirDC7BF93757185D969F13053D302A5A54" Guid="*">
-                <File Id="fil921A922117B8628E8B1B07169ED20198" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\about\release_channels.doctree" />
-            </Component>
-            <Component Id="cmp41B5AF45690E6FAEA1961BAAA1BBF1A4" Directory="dirDC7BF93757185D969F13053D302A5A54" Guid="*">
-                <File Id="fil637FCA322FBAD5F066365C0D85E0CE69" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\about\versions.doctree" />
-            </Component>
-            <Component Id="cmpF4A1014E9211B6D9A348411B2B9A28C0" Directory="dir94245643088B5699FBF751E8E53DD9E0" Guid="*">
-                <File Id="fil1273A25AA767829C5FC206C7C9362C50" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\howtos\bulk_connections.doctree" />
-            </Component>
-            <Component Id="cmp60FBA9AA2DC4D6E377DB6A301D2A518F" Directory="dir94245643088B5699FBF751E8E53DD9E0" Guid="*">
-                <File Id="fil78333513494DBC322817013BA76682C4" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\howtos\external_tools.doctree" />
-            </Component>
-            <Component Id="cmp82CCCFF15A9A71D2C5C7A069FC6FFBB0" Directory="dir94245643088B5699FBF751E8E53DD9E0" Guid="*">
-                <File Id="fil378B63306772DC364E45F565DEF8E465" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\howtos\sshtunnel.doctree" />
-            </Component>
-            <Component Id="cmp75526FC9051A44785D7F5D751AF6D3EF" Directory="dir94245643088B5699FBF751E8E53DD9E0" Guid="*">
-                <File Id="fil30A5EA146A8D5E75AD424CFBFC55E97F" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\howtos\vmrdp.doctree" />
-            </Component>
-            <Component Id="cmpF1854C8F5CAB0E9DB85ACDDF4BE4E535" Directory="dirF2574EEC56A936B9EAD325FAA908F82C" Guid="*">
-                <File Id="filBA81E64F999E93535803CA8D6A26D560" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\installation\install.doctree" />
-            </Component>
-            <Component Id="cmpCC91D2E2673E2A99E7F94AE21E182694" Directory="dirF2574EEC56A936B9EAD325FAA908F82C" Guid="*">
-                <File Id="filD661AA829F07DFDC743DC7E488427F47" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\installation\minimum_requirements.doctree" />
-            </Component>
-            <Component Id="cmp502CBACB593B67E84BAA39AF74F00F49" Directory="dirF2574EEC56A936B9EAD325FAA908F82C" Guid="*">
-                <File Id="filBB2172228C5E14990806DD34D3355A23" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\installation\supported_operating_systems.doctree" />
-            </Component>
-            <Component Id="cmp5B6E64CCE220D1FE0E5221060E7C2725" Directory="dirF2574EEC56A936B9EAD325FAA908F82C" Guid="*">
-                <File Id="fil94008D4986B6BCFA89A3EFDDAF9AB0AA" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\installation\uninstall.doctree" />
-            </Component>
-            <Component Id="cmpB470C58EDA2C5DAB2A54CD068939C2EF" Directory="dirDFDD308E6D53243CA8260E627CF936A2" Guid="*">
-                <File Id="fil46271A1D02A1A92BC74023C972E02207" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\protocols\rdp.doctree" />
-            </Component>
-            <Component Id="cmp2F13B81AA73CEBECDB70EA5C95B48C72" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil1DAB1D21B47D29CC499F735B5728ADFC" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\connections.doctree" />
-            </Component>
-            <Component Id="cmpEEB780344D4E1E1AE0413F498298D417" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil27A94A8188AC4CD3875C46B6A296263D" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\default_connection_properties.doctree" />
-            </Component>
-            <Component Id="cmpA7BEBCA053373105E2C403C591236CAF" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil2ED54F8DD453ACFF425462CFDB078A34" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\external_tools.doctree" />
-            </Component>
-            <Component Id="cmp66B8D39AFD690F0B7F08DF17CAE0871F" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil1B167B01EEA750A45E5F8E206751CA79" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\import_export.doctree" />
-            </Component>
-            <Component Id="cmp11FB6FAE7C1BC80AF2136B12740766EA" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil6107B73B507AB58E70DDEFE75E91465A" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\main_window.doctree" />
-            </Component>
-            <Component Id="cmp9DB2993EFC92945CFBF854EA101EFDC1" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil920AB7CC60F0BBBAE1D140FD27424177" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\menu_container.doctree" />
-            </Component>
-            <Component Id="cmp78CE5429EDC01BEA889718B986462788" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil9B64129EDC95DAADE6F311DEBC439B77" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\notifications.doctree" />
-            </Component>
-            <Component Id="cmp8067AA61AA41DE844FFDCAD9923EAD30" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil6DF6822DB9808340C8421D676C3F5370" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\options.doctree" />
-            </Component>
-            <Component Id="cmp9AD06235AD8940ADAC861569DAA22070" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil0D6BCC23EA30FC190BF14C5DBF4626C7" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\panels.doctree" />
-            </Component>
-            <Component Id="cmp6C757DD6A71AF619AE172350D9F597CB" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil562B546F364D1C5D88573EEC8368E630" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\port_scan.doctree" />
-            </Component>
-            <Component Id="cmp51E20241D365EADD44A30676447A8D1D" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="filBD51F92A7996C7736B3EE6470519EA36" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\quick_connect.doctree" />
-            </Component>
-            <Component Id="cmp47F1895E99E24C719CFE3B1ADFF1AB08" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="filB737CDF2ECD9B504E2FF4F0435DF73A9" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\screenshot_manager.doctree" />
-            </Component>
-            <Component Id="cmpE63D91483B678F1B6DE5CAC50AFB94E7" Directory="dirB831C069B68D2ED6BD66D33B4675457C" Guid="*">
-                <File Id="fil96FCB6256BF2EDBDE8C37E87AE31E892" KeyPath="yes" Source="$(var.HarvestPath)\Help\.doctrees\user_interface\ssh_file_transfer.doctree" />
-            </Component>
-            <Component Id="cmpE92C6A0B4E37A5EB40C7C08601644E35" Directory="dirF92573843B148FB3C5E614E11F0EB1B7" Guid="*">
-                <File Id="filEC105A01EDAF31F592A11E92A75C2915" KeyPath="yes" Source="$(var.HarvestPath)\Help\about\features.html" />
-            </Component>
-            <Component Id="cmpDE4C88A062DA160AEECE0F50C6FAD2DD" Directory="dirF92573843B148FB3C5E614E11F0EB1B7" Guid="*">
-                <File Id="fil84E8E0B412D20B325B827E71CBC0A924" KeyPath="yes" Source="$(var.HarvestPath)\Help\about\license.html" />
-            </Component>
-            <Component Id="cmpAF7B95BEB5000DE68BA790422FD27ECE" Directory="dirF92573843B148FB3C5E614E11F0EB1B7" Guid="*">
-                <File Id="filE95A13F3178561DCAFBE56378A0E4C33" KeyPath="yes" Source="$(var.HarvestPath)\Help\about\release_channels.html" />
-            </Component>
-            <Component Id="cmpC2265BC58D9C56807E7E8B3E498BAC74" Directory="dirF92573843B148FB3C5E614E11F0EB1B7" Guid="*">
-                <File Id="fil18141F0A7A148E341DBEDD422FC8F9D4" KeyPath="yes" Source="$(var.HarvestPath)\Help\about\versions.html" />
-            </Component>
-            <Component Id="cmpAAACBA7468DA022E2128E05B72E06BD6" Directory="dir110FF8068FC149A5967C171DFB9E90DC" Guid="*">
-                <File Id="fil699115679083BCF10F10187729CCA4E3" KeyPath="yes" Source="$(var.HarvestPath)\Help\howtos\bulk_connections.html" />
-            </Component>
-            <Component Id="cmpC6C392E63AB4915AE69210E0B4DA5FBA" Directory="dir110FF8068FC149A5967C171DFB9E90DC" Guid="*">
-                <File Id="fil218775B61B0097D187272B704A240879" KeyPath="yes" Source="$(var.HarvestPath)\Help\howtos\external_tools.html" />
-            </Component>
-            <Component Id="cmp0376933E9F8DA1A27FDD68CAF2F90D82" Directory="dir110FF8068FC149A5967C171DFB9E90DC" Guid="*">
-                <File Id="filD233693AE0019B4F81A837C6BDB06B37" KeyPath="yes" Source="$(var.HarvestPath)\Help\howtos\sshtunnel.html" />
-            </Component>
-            <Component Id="cmp76DCB0D0BDFC97486CCC9DB3FCDB3011" Directory="dir110FF8068FC149A5967C171DFB9E90DC" Guid="*">
-                <File Id="fil87C38391E434F41A35B9F1255166C9C8" KeyPath="yes" Source="$(var.HarvestPath)\Help\howtos\vmrdp.html" />
-            </Component>
-            <Component Id="cmpDEFDE528BF8AB569666120B5371D8931" Directory="dirA2DA2F536BB9F8FF0D43E1A21948CF2E" Guid="*">
-                <File Id="filBC109309DCD9740E7F7AEDA69AE1D513" KeyPath="yes" Source="$(var.HarvestPath)\Help\installation\install.html" />
-            </Component>
-            <Component Id="cmp112DA19AD9C8A3D9AC1F208816BBF1D6" Directory="dirA2DA2F536BB9F8FF0D43E1A21948CF2E" Guid="*">
-                <File Id="filBD3B6D987CF0F3B844FA54E8A059590A" KeyPath="yes" Source="$(var.HarvestPath)\Help\installation\minimum_requirements.html" />
-            </Component>
-            <Component Id="cmp630E0AEF7C1B90D9CBEC3FD914D11684" Directory="dirA2DA2F536BB9F8FF0D43E1A21948CF2E" Guid="*">
-                <File Id="filD169D5B1439D077CE7B0A47DDC9B04AD" KeyPath="yes" Source="$(var.HarvestPath)\Help\installation\supported_operating_systems.html" />
-            </Component>
-            <Component Id="cmp6DAC70190EBBDE351FFBC145ED1DCCB1" Directory="dirA2DA2F536BB9F8FF0D43E1A21948CF2E" Guid="*">
-                <File Id="filC72061D7E6FC128C8D3DCEF7C3E9E41A" KeyPath="yes" Source="$(var.HarvestPath)\Help\installation\uninstall.html" />
-            </Component>
-            <Component Id="cmp59534901E06C05C46EC3F2D5DF19FF40" Directory="dir116B422BF11290875B253964ACD432D2" Guid="*">
-                <File Id="filA0E859C663E89D9B5CF5EA1D53C75D4D" KeyPath="yes" Source="$(var.HarvestPath)\Help\protocols\rdp.html" />
-            </Component>
-            <Component Id="cmp2C411EC9D664FA18FEDDD4ADFDAFFEAA" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil1937930685517A46DE56831CE2AE5C8A" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\connections.html" />
-            </Component>
-            <Component Id="cmpB161091684A7CA6C6A57CFA2BC21531B" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="filA48965B3BC7608193EF05C66A1078764" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\default_connection_properties.html" />
-            </Component>
-            <Component Id="cmp9D235321AE2103126BF3C8AC84D12653" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="filEE682DF1502E908A17A778EDC5FD2286" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\external_tools.html" />
-            </Component>
-            <Component Id="cmp382EFF6C677C1E4ABB88783C7315E54D" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil5FEEA184307FA52C8247A57B9501CFC7" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\import_export.html" />
-            </Component>
-            <Component Id="cmp9EE3636BE23FE89408E650E355CC1DF0" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil8EE202F46929626175B59560701B4F4C" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\main_window.html" />
-            </Component>
-            <Component Id="cmp8D2704D002A9495EA425BD091879A488" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil598AD941D2FBF2B249FAB491312FDD99" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\menu_container.html" />
-            </Component>
-            <Component Id="cmp9E8654C3CE761FD0DDFF872ED624D3CD" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil8EC1F8AAFBA906545B3AC70C41E2110B" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\notifications.html" />
-            </Component>
-            <Component Id="cmpF132C4D4D8560CA48CC3A33EB820D2A9" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil04AEB8966DB0C7F2D1EC9C7F3B127347" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\options.html" />
-            </Component>
-            <Component Id="cmp25E4A3F5045503B08EC3967B5ED513E6" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil453643C81DF74834A2511AFF2C67C8ED" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\panels.html" />
-            </Component>
-            <Component Id="cmp7AC6CC806690FFDE9C1028638795A798" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil54773EF50EE315351340968B58F1DCD1" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\port_scan.html" />
-            </Component>
-            <Component Id="cmpE24E55CCA7225AECEC66195317DEC095" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="filF73F88BF093BD1A0B1E4CF6BAB5C9E24" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\quick_connect.html" />
-            </Component>
-            <Component Id="cmpA2CCADC5262B8AD2FF7CB51A71C95A20" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil76B0DBF41160E346EBFA36E05D3AEEFD" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\screenshot_manager.html" />
-            </Component>
-            <Component Id="cmpB1483D821FB50B064DC21EC3F190D592" Directory="dir1023A77C01C9E14E2E14D5AD9C553C82" Guid="*">
-                <File Id="fil037F3FE830D183F0610F53054A66D047" KeyPath="yes" Source="$(var.HarvestPath)\Help\user_interface\ssh_file_transfer.html" />
-            </Component>
-            <Component Id="cmpCD42F292DF459707DF56B17ABB51446A" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil1945766726ABF81D880DBA4A4826CF86" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\config_top_bar.png" />
-            </Component>
-            <Component Id="cmp90BACDD271C065C6D3844C3615198D15" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil7ABD7D35C6673EA7D499A37CBC138ABA" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\connections_config.png" />
-            </Component>
-            <Component Id="cmpA81718DF218AC7542973500FB8198DAA" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil0FF000444EA30D5A4FBA413EA83D58C5" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\connections_main.png" />
-            </Component>
-            <Component Id="cmp45311F63CBB7BB359B358E0DF42B587F" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil7DC5737F8CEEFAB654F851CC2080E87D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\connections_open.png" />
-            </Component>
-            <Component Id="cmp933D89F1CA1344767336227B1E689326" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil43E8DB2C1E19AD5D1E9072D4539F5AC9" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\connections_rightclick_menu.png" />
-            </Component>
-            <Component Id="cmp6BA94FACB51FD674443528E1A36B815B" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filB7FD55473B7E50C5C5C90F79789AB89A" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\connections_status.png" />
-            </Component>
-            <Component Id="cmp94D8EB91C232BB7367E27192AD46A7F8" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil06AC451D101EA83AB20330F4884D7B5D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\connections_test_item.png" />
-            </Component>
-            <Component Id="cmpBC7E881566288878472FDDF43BFD280B" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil16859FC17B3CE72A66A26A1BE316B4EA" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\connections_top_bar.png" />
-            </Component>
-            <Component Id="cmp3C3B72F52FE31876ABF88F5D82BDB10E" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filD23E9C102D09D2F61107BAD135191928" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\credssp-error.png" />
-            </Component>
-            <Component Id="cmpD9B7E992A5A89783E6C5CDA5BF0A00CE" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil19994C574E6F8E28A3E4FEE3C7542A05" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\default_properties.png" />
-            </Component>
-            <Component Id="cmp05EEBA9ADF2133F64A14462FC2A539BE" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil04653A3C7246104F0B9FA56AB6A97A2C" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\example_et_start_application_01.png" />
-            </Component>
-            <Component Id="cmpF5D6E24857B040C4E9BF4D44ECDD8C7A" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filF872AD38D756F6E4A3044E4589976A03" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\example_et_start_application_02.png" />
-            </Component>
-            <Component Id="cmp491FB152079554B59CE5B221783F1ED4" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil5EFA63C51BF4B3FCB4EB7FC4CA0C4F9B" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\example_et_traceroute_01.png" />
-            </Component>
-            <Component Id="cmpBF1F437F03DFE58EA85BC2581E1DB05D" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil95B52513D5C761B8BB3118E2D8422BE9" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\example_et_traceroute_02.png" />
-            </Component>
-            <Component Id="cmp683A487EE66570139954B41A9C0AFAA8" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil1EAE98535DE8B35B7BFC47837520AC7F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\example_et_traceroute_03.png" />
-            </Component>
-            <Component Id="cmpD03927F94923E3AD3F8D4FA0C1D9D63A" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filDC3062E5890D541B43BCC191BE429834" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\example_et_traceroute_04.png" />
-            </Component>
-            <Component Id="cmpA7A63AE6D95950BE507082BD9E2BB446" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil072BA32F13DB814A815F87D239280B0A" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\example_et_traceroute_05.png" />
-            </Component>
-            <Component Id="cmpFCA572D5A7AC9C99CD9D3983C11D087A" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil298AA52207432A817943035262BC5BE5" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\external_tools_external_tool_properties_01.png" />
-            </Component>
-            <Component Id="cmp9C319FA874F8EAB5A0CB12F8B42E9784" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filB3B2C047C7BF84A786D89DA82A3BE18C" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\external_tools_main_ui_01.png" />
-            </Component>
-            <Component Id="cmpF232B1B32F0A1C4D0CA68B7900847F67" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil913396F2D34F9822E98B4DAC972FA66E" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\external_tools_toolbar_01.png" />
-            </Component>
-            <Component Id="cmpE309AC6A7D52768DEF7E584BF62C8E3A" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil0ABF35A3D447FAD2896E57049DD04857" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\external_tools_tools_list_01.png" />
-            </Component>
-            <Component Id="cmp8A6015199FCB20A4B878264C70BBFC12" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filDA7557AFC92368DA00B1476C31B7CFF8" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\folders_and_inheritance_01.png" />
-            </Component>
-            <Component Id="cmp4D20DB41A325C9C2E26D29C90233E23C" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filE1B2D754A747FC171B59447A97D58C0D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\folders_and_inheritance_02.png" />
-            </Component>
-            <Component Id="cmp5CB520519DB6634BE92ACB37BE69D17B" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filF11FA4F4348A3444BB768AE8E0669995" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\folders_and_inheritance_03.png" />
-            </Component>
-            <Component Id="cmp932BEADC8334E41534ADEB7A8321BE05" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil86FDAD49A810ED63D44132B1805CA4A2" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\folders_and_inheritance_04.png" />
-            </Component>
-            <Component Id="cmp4495C19CBCA810E545CD1EE5DB397D62" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filA124D761C2774B19AAC723B6CA407731" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\folders_and_inheritance_05.png" />
-            </Component>
-            <Component Id="cmpB872536F6A10336BE33C7FAEDC050D45" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filEF42AE8611F4A815D240E897536AB87F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\folders_and_inheritance_06.png" />
-            </Component>
-            <Component Id="cmp40DCD646CD9DCCD345D07CDB4EDDD9A8" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filD6EFE4AC1DE672D105D00DF0E12F80BA" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\import_export_dialog.png" />
-            </Component>
-            <Component Id="cmp63B0F6BD250EB637C8BA5A1A11E4BD9D" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil44055B44007512392EFF6AF3F2613FAA" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\import_from_active_directory.png" />
-            </Component>
-            <Component Id="cmp717036A063CF34A5AA6AA46CA14FEDA9" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil96BFC50AD60DC54D6013CF92D270C99D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\import_from_port_scan.png" />
-            </Component>
-            <Component Id="cmp3CA776591E1B167F7B87C7880AB93E05" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil8966288DE33D23C743CACF4D3D166958" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\menus_hide_menu_strip.png" />
-            </Component>
-            <Component Id="cmp5AA4B2AEE7D8BF910282936B6CDC274A" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil45637BA75B7D9C38FF6EE4C583872A31" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\menus_main_menu.png" />
-            </Component>
-            <Component Id="cmpF29EC4E81F219EE7DB72C5A693474654" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil9AD1BA10FED1525930988BD5399FEF7C" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\mremoteng_main_ui.png" />
-            </Component>
-            <Component Id="cmpE222D4F88C6920D39821FA24644FC47E" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil2D15534634DEE0EB701B432DE1F3C9EC" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\mremoteng_main_ui_connect_win_server.png" />
-            </Component>
-            <Component Id="cmpA51D23F5F44991569BF7835AAB57AEBC" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil1B38EDD47B7BA8B34E0A3F1BA391996F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\notifications_panel.png" />
-            </Component>
-            <Component Id="cmpB9AED583CB45922BE213AAE1647F987A" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil758A8E8C561F87BBFB9967E27C6C770D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\notifications_popup.png" />
-            </Component>
-            <Component Id="cmp4A5D2FF0BA991741E5F8C6516CD75681" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil6F074835D4F64B107E278DF1E599C923" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\oracle_remediation_setting.png" />
-            </Component>
-            <Component Id="cmp83768A83AE4791629839F118ECA0C2D5" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil876A448ABB0F5F055924899AD793158F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\putty.png" />
-            </Component>
-            <Component Id="cmp7CA760E009E3C13A99821F8FC4A9F670" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil0B4699B67703A0B43994A0A2CE39CBAE" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\quick_connect_01.png" />
-            </Component>
-            <Component Id="cmp7940398C974035126B01F2A8D5915797" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil6DDB1D259B07B86F23B6B4E7BE9B1C16" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\quick_connect_02.png" />
-            </Component>
-            <Component Id="cmp7B8BD21DF5700BC06B815FC52F0707D7" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil35ECFDCA347FF39FB2804308699A1C6D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\quick_connect_03.png" />
-            </Component>
-            <Component Id="cmpFA2C4DF4964CC2FD5120F5C961A77DE1" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil87AB844438BD9C800D62467891F64CF0" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\screenshot_manager_overview.png" />
-            </Component>
-            <Component Id="cmp34D63556C184BBEF01CEED98CE179121" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil52ED49EA092ADF37801772188E9EFA34" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\screenshot_manager_rightclick_menu.png" />
-            </Component>
-            <Component Id="cmp9DA1367BBA6DA64BF663B6C8B4FF418A" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil14B95DE9C41C26DD9853F96114060CF0" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\ssh_file_transfer_01.png" />
-            </Component>
-            <Component Id="cmp6F93F642F2AE34F76FBE45014E0ACD54" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filDDE92BAEC6A46CD272827AD8F1D873E1" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\ssh_tunnel.png" />
-            </Component>
-            <Component Id="cmpF2B26DF94D6F01C6C5B4D7AAF558FF6A" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil5080AEFFDC144CDAB84208FBE01BEAB5" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\user_interface_overview.png" />
-            </Component>
-            <Component Id="cmp05F1EAB772F873F64FDCA4EF66A38ED8" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="filE5FB664A131ED5EBA7A56D5EF0D65C3B" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\user_interface_panels_01.png" />
-            </Component>
-            <Component Id="cmp227A5AC3159C0A147BB209047D86CE7F" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil2E30AC0A683D6A7078EFC5065D35FECC" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\user_interface_panels_02.png" />
-            </Component>
-            <Component Id="cmpC5068BAD8AB0AE3486B821743F4F1DC3" Directory="dir4BA1243D7CD1DC0C69877261705032C5" Guid="*">
-                <File Id="fil107AA0F73EE695F60CAC59596B8D0CA8" KeyPath="yes" Source="$(var.HarvestPath)\Help\_images\user_interface_panels_03.png" />
-            </Component>
-            <Component Id="cmp0908FFE142F46F107A34AC4EA7A08646" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="filD0C7F9DA2FA90363760214CFDFE3C01A" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\about.rst.txt" />
-            </Component>
-            <Component Id="cmp0E77CE74707D44E7E0500AB87E05E599" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="fil243200CFAFE4A57F0C18CB6875C1BC2C" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\command_line_switches.rst.txt" />
-            </Component>
-            <Component Id="cmp358913A48266BD53DAF120B3D7DF7C5C" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="fil8D4F13AABA7BD0976BA472AF4BD47B3F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\contact_mail.rst.txt" />
-            </Component>
-            <Component Id="cmp9C85EBA76B063DCC20419BCC8EC5BC87" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="fil973F597336FC30D29CC2CAD73720E76F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\external_tools_cheat_sheet.rst.txt" />
-            </Component>
-            <Component Id="cmpC5DBE3C753F23DEE086F6EF09B942C99" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="fil26B49F746A24E00EC63321AED6377C19" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\faq.rst.txt" />
-            </Component>
-            <Component Id="cmp4BD07D262F332C6A6CE5A0D04F9C6B44" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="filD233FDE4C00C0F0A90AE1D44D61A53B8" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\folders_and_inheritance.rst.txt" />
-            </Component>
-            <Component Id="cmp4332D22C641BA86C87D467FB331D7F5A" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="fil18D402F69DCB8A2FBADE46CC13D27964" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\index.rst.txt" />
-            </Component>
-            <Component Id="cmp0BA9DCA12D6A264E7ABCD78E2B9367A2" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="fil21F6F60AB9A0E11EBE301D2F2A4EA72F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\installation.rst.txt" />
-            </Component>
-            <Component Id="cmp08FABE221955C8BE4E3A7E6A8362F898" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="filA937A9CAAE441E578EC5199F2F23E67B" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\keyboard_shortcuts.rst.txt" />
-            </Component>
-            <Component Id="cmpB92AA36AFB18CC4610F1A7F425DAE848" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="fil4C87F3F03BC86B898CE3A857C53A9FA4" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\known_issues.rst.txt" />
-            </Component>
-            <Component Id="cmp175E1E56F931CB985291B6A2CEAA1ECC" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="filCDBF7B3E4A84E5983B11AC7B53E88D28" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\migrate.rst.txt" />
-            </Component>
-            <Component Id="cmp23F422EB00D583CCE7191B9721232FAE" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="filC79FDCC90D90857A91A759CC1E101241" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\protocols.rst.txt" />
-            </Component>
-            <Component Id="cmp2C7349C3E5065D5DCF226AED93C15AAE" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="fil73DA38340BB7B4095B80F8AB7226BDBF" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\sql_configuration.rst.txt" />
-            </Component>
-            <Component Id="cmp35C41E4E636CA9394E64DBC24D9791BA" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="filD90623F486B7FB408DDF83029733611E" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\troubleshooting.rst.txt" />
-            </Component>
-            <Component Id="cmp9C9978EFEDDA80F5BF4C5AED0459BE5A" Directory="dirFBCFF71D6BC68DEE2057464E8EE27088" Guid="*">
-                <File Id="filF733491962B9F11E7F704B8AB9546E2C" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface.rst.txt" />
-            </Component>
-            <Component Id="cmpDC96DACBD59C87301C1459B74A5E33EF" Directory="dirFC0CE4199F00CD23E81C01D9D247B702" Guid="*">
-                <File Id="fil7F74A86B51488B5A7DA27A2EF0F89A73" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\about\features.rst.txt" />
-            </Component>
-            <Component Id="cmp4AF6096B2868CDD2084C71A35BF67092" Directory="dirFC0CE4199F00CD23E81C01D9D247B702" Guid="*">
-                <File Id="fil15AEA1CAF3128C30704B279F0816E0DC" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\about\license.rst.txt" />
-            </Component>
-            <Component Id="cmp2A5B8A6245CC9707BFD679C0942AAE24" Directory="dirFC0CE4199F00CD23E81C01D9D247B702" Guid="*">
-                <File Id="filAC10490FF714322020225BB6A902A567" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\about\release_channels.rst.txt" />
-            </Component>
-            <Component Id="cmp9C2207E4977FD95D28A91121DED3E9DB" Directory="dirFC0CE4199F00CD23E81C01D9D247B702" Guid="*">
-                <File Id="filE6DF73CC0B299502CA999B45E15D9CE7" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\about\versions.rst.txt" />
-            </Component>
-            <Component Id="cmpBA908919D5DF5FE97A4BD93D61BD3AD7" Directory="dirE00B1B64F75F54620688335DB15AB5AE" Guid="*">
-                <File Id="filC7C79D57461528485EF4D374B2CE4586" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\howtos\bulk_connections.rst.txt" />
-            </Component>
-            <Component Id="cmp3C268AC250642566C0C92F351DAC07EB" Directory="dirE00B1B64F75F54620688335DB15AB5AE" Guid="*">
-                <File Id="fil82CCFEB92B0B23C74CEDC03DD1C32D7B" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\howtos\external_tools.rst.txt" />
-            </Component>
-            <Component Id="cmpC016501BF455FE63EDB7B99783FA54EC" Directory="dirE00B1B64F75F54620688335DB15AB5AE" Guid="*">
-                <File Id="fil8F9A0738F41914909489E8226A4D48BF" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\howtos\sshtunnel.rst.txt" />
-            </Component>
-            <Component Id="cmpA93AEE277548850DBDD94F05B45D4A68" Directory="dirE00B1B64F75F54620688335DB15AB5AE" Guid="*">
-                <File Id="fil36831F1DE6A0BA59FA071B43452D8E9A" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\howtos\vmrdp.rst.txt" />
-            </Component>
-            <Component Id="cmp3EB9F87729FCA7ED466E897119BE2B5C" Directory="dir37F4F29FCE1FB049DA1D6D79DD3B71D8" Guid="*">
-                <File Id="fil5999CC80FAC634E8B98E5018F217D682" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\installation\install.rst.txt" />
-            </Component>
-            <Component Id="cmp59F5AE941301A9FA78A9B72F8C5501AC" Directory="dir37F4F29FCE1FB049DA1D6D79DD3B71D8" Guid="*">
-                <File Id="filD64FECF3D58FD97987105A35CE913943" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\installation\minimum_requirements.rst.txt" />
-            </Component>
-            <Component Id="cmpBB44A30E05846B007F84CE5238983C8A" Directory="dir37F4F29FCE1FB049DA1D6D79DD3B71D8" Guid="*">
-                <File Id="filAC39A8E31D6F29FC4114531356FDA223" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\installation\supported_operating_systems.rst.txt" />
-            </Component>
-            <Component Id="cmpE7EDBB9DA60258E21CB853EE52B28EF4" Directory="dir37F4F29FCE1FB049DA1D6D79DD3B71D8" Guid="*">
-                <File Id="filC5AC27C0771B64134BE778C5F51C26B1" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\installation\uninstall.rst.txt" />
-            </Component>
-            <Component Id="cmpF85E2A20E78B19EA14E6A9CCD3BCF789" Directory="dirB85ED15EFB8BFCC3713D034A8A598D1D" Guid="*">
-                <File Id="fil580DBDA5B76105B2F231F734A7E4366A" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\protocols\rdp.rst.txt" />
-            </Component>
-            <Component Id="cmp17ED292BD672CD089845A977A258509F" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="filE9FC54AB5DFC1AD731E8AFDD0825BFB8" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\connections.rst.txt" />
-            </Component>
-            <Component Id="cmp27460BCC6971B507455D3ECC477194A3" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="fil8F9567CFA1BA15469C50B89DE5B84729" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\default_connection_properties.rst.txt" />
-            </Component>
-            <Component Id="cmpA5E9746B061C69F70C5BB934996CED3B" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="fil299E5227776FE54A7E363A8DFFEF29CF" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\external_tools.rst.txt" />
-            </Component>
-            <Component Id="cmp5189BB780BE28D42EF9A48F121675FD7" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="filB55B9CBF00F61CDD547EA9EDD8936B8D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\import_export.rst.txt" />
-            </Component>
-            <Component Id="cmp15D2847CA4C75038C2CCF32B4EFC54CC" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="filBBD93236AB688AEF2864164933D98A85" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\main_window.rst.txt" />
-            </Component>
-            <Component Id="cmp6D34AEFB7DA11A65B2F8BBCCA525591E" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="fil5A6A6078C05BF173081F854D7B2AAD39" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\menu_container.rst.txt" />
-            </Component>
-            <Component Id="cmp759A4E4159536A2119EDB0EF340F01C6" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="fil8D3FC51CFF4E2AC2DF2B3E0233C47D0F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\notifications.rst.txt" />
-            </Component>
-            <Component Id="cmpF4F884F357E1B2F45DE8DE01A421F658" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="fil25936A1C4F82A3571B5415891CF8A079" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\options.rst.txt" />
-            </Component>
-            <Component Id="cmp860632DD317B6096F4CB2C5A4079F514" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="fil618D911253092149AF20950A4993A526" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\panels.rst.txt" />
-            </Component>
-            <Component Id="cmpA1CCB9663C7D256F3F188A36273E62F6" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="fil24BC22BE0786D059FBADE387C6F4564B" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\port_scan.rst.txt" />
-            </Component>
-            <Component Id="cmpE68583DE9CA66918ECD93D95EB52FEEC" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="fil6DDF6FA18DDC28F67A576F7D2CA43853" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\quick_connect.rst.txt" />
-            </Component>
-            <Component Id="cmp46A0FDA9CF01873F3C1E04DE9F466791" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="filD78AA949FF2E830983092630A4893E8A" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\screenshot_manager.rst.txt" />
-            </Component>
-            <Component Id="cmpC2FAC98962CA354F2121F5C7A1589D00" Directory="dirDDB76AAC16BE27BC9B6364053BDAF195" Guid="*">
-                <File Id="filED73C8B3BFF0900218A8A9D3DDEE5209" KeyPath="yes" Source="$(var.HarvestPath)\Help\_sources\user_interface\ssh_file_transfer.rst.txt" />
-            </Component>
-            <Component Id="cmpC28002287DA76B899C0207651E7E46F7" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="fil15CA0996163E78EFDEFFEC30C524D997" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\basic.css" />
-            </Component>
-            <Component Id="cmp8E07B6FEBC24E82A7A069EC44EF987DE" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="fil195E10D89B2FE5606B9D3396FA6E4158" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\doctools.js" />
-            </Component>
-            <Component Id="cmp005D74D5CB3D7E57EA0733B34B6B7DC4" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="fil943497124CCEA264F541A336D1B9C60C" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\documentation_options.js" />
-            </Component>
-            <Component Id="cmp6A79E411471DDD2494C8F1EC293E619A" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="filB3DB6F8145EDF92ACD7BEFA26FE172AA" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\file.png" />
-            </Component>
-            <Component Id="cmp3735D454122777BFA2654FB3CC98C6BC" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="filE0C6CDC9D595DF9C5737664E5105C5AB" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\jquery-3.4.1.js" />
-            </Component>
-            <Component Id="cmpEBAB31EFBC2130F5CCDA19D0B06C59E2" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="filFB8F65881B2315B145C96160EECD6684" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\jquery.js" />
-            </Component>
-            <Component Id="cmpCF1A64B4F611BED228C4269583EB4186" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="filF19BEAF3E7BFA41933A444053EBA1A0B" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\language_data.js" />
-            </Component>
-            <Component Id="cmpDEB76888FF431498582EC277B1672E5C" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="filDE29B62D0464D371B9CB23DEACE5BA60" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\minus.png" />
-            </Component>
-            <Component Id="cmp945C7014BA4CB673320CBA5C9A4690DC" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="fil3B6D9B025641393E70A7E549F6FD84C2" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\plus.png" />
-            </Component>
-            <Component Id="cmp5F1795A3F79D3CF7974DED154FE05580" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="filE8F0D20B057CEA8B25ACB7927F17F88E" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\pygments.css" />
-            </Component>
-            <Component Id="cmp964B3C1A24BB504DA654737380F883EB" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="fil6174902D18D2322E26C9508988D7D464" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\searchtools.js" />
-            </Component>
-            <Component Id="cmp7617F13CE4207F0D3B66A68A49D36924" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="fil6A857D3D9EB96D043EADF7927541385F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\theme_overrides.css" />
-            </Component>
-            <Component Id="cmpBDBA586DFC228D6B2D9BC24EB58B26EF" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="fil87AFD02AA04AE0984CCAD607CCDA3665" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\underscore-1.3.1.js" />
-            </Component>
-            <Component Id="cmp9A97F47BC8EF59AB00CB019864A9E7C9" Directory="dir327E15007196F8113B2290098450CDED" Guid="*">
-                <File Id="fil6FE9CF326D5A9D6DBD1F3858FBB43596" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\underscore.js" />
-            </Component>
-            <Component Id="cmpFFB3336840529BD28F96274AB190C44C" Directory="dir0F943A7FE961F69CCC2E8F086FC3F980" Guid="*">
-                <File Id="fil544C8C6BF4FA77F342892CD7D3EA2811" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\css\badge_only.css" />
-            </Component>
-            <Component Id="cmp706E13E928D000A0489421BE09F3AB70" Directory="dir0F943A7FE961F69CCC2E8F086FC3F980" Guid="*">
-                <File Id="fil61CA49A9E43D49233CD8C1DC906B467B" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\css\theme.css" />
-            </Component>
-            <Component Id="cmp2F91D8A233583A3B3FC420D1A0597602" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil5F1C4248EB93CAC9647EB4A6FB77D610" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\fontawesome-webfont.eot" />
-            </Component>
-            <Component Id="cmp9CA1975C0062D90F734FCAEE5BEE7487" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil03439D8CC15180A9EE8E662CE14F2C4A" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\fontawesome-webfont.svg" />
-            </Component>
-            <Component Id="cmp7D8DF7B3491B14DC3FFA327B2C6D56FA" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil35F37E53A9EFFFB9CF927800708DECFE" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\fontawesome-webfont.ttf" />
-            </Component>
-            <Component Id="cmp0B4E6109336A1E7D1EEEACF7680FEBCA" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil5EC0B230AE99163CE7F057C3BD49BBD6" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\fontawesome-webfont.woff" />
-            </Component>
-            <Component Id="cmpAE3D6BD6321F4C194DCE38C414436E8D" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil306876BE1DC86925DE2C51408D901C36" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\fontawesome-webfont.woff2" />
-            </Component>
-            <Component Id="cmp60241C57BA188C33D3F51FA23F9800BC" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil0725B42EEA542C8FD44C62F55591F453" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Inconsolata-Bold.ttf" />
-            </Component>
-            <Component Id="cmpFB44899A82D0E3DC8C03304A42A9AA3B" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil61EAEE3E9A840CD33B675B50A979C905" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Inconsolata-Regular.ttf" />
-            </Component>
-            <Component Id="cmp1FAB1F55D2BBB8DEF9779235364B9D13" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="filB9E1AB6ACAC3C9BC9B783493C2E9D5AA" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Inconsolata.ttf" />
-            </Component>
-            <Component Id="cmp8D99EDF1AFFF9772FBEA4C350FEC44F1" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil61F35B08FCD9C998E6D16A3AE0694FD5" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato-Bold.ttf" />
-            </Component>
-            <Component Id="cmpA5F8D5E218813B41C4B7FB911ACB2B25" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil589917428EF1369FF9642C0F2217191D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato-Regular.ttf" />
-            </Component>
-            <Component Id="cmp4F7273B258EFF375184BCD61F7BDC7E0" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="filF11215B30CD93523E1C3359D89DA8698" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab-Bold.ttf" />
-            </Component>
-            <Component Id="cmpAD6AFF9CBE5C183A238631BCB7F677E7" Directory="dirFB6708EECE389DC59AF40BC0E8456E1F" Guid="*">
-                <File Id="fil3D5BD51F8E954EA32AAE8A26A4084105" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab-Regular.ttf" />
-            </Component>
-            <Component Id="cmpFE4400A4D78E6EC9CE5CF005BFB6A6F9" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil6648EC487C6A84D40AA8C5AA8A571D86" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-bold.eot" />
-            </Component>
-            <Component Id="cmpE254855859AF0AC706785C48A10A31A1" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil73C823F26CC01F016489C286E787EC8D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-bold.ttf" />
-            </Component>
-            <Component Id="cmp392CDC97F20A68366590E9562698DFA1" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="filA87972E78F2577211528C2CFBF6BCBCC" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-bold.woff" />
-            </Component>
-            <Component Id="cmpD36A47C0DC9C84094D79299EF928D3EE" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil5A9DAC092C54056EF26D764CCD9FA4A3" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-bold.woff2" />
-            </Component>
-            <Component Id="cmp45861869696E5BE78ED48F4599E575BA" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil555B27307B57FAF54E3BF2EA42E89AA2" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-bolditalic.eot" />
-            </Component>
-            <Component Id="cmpCFC5766E93B68B4E658A23B1CF752EC3" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="filF336D1C93BE430668602D20AE8EACBFA" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-bolditalic.ttf" />
-            </Component>
-            <Component Id="cmp03EC43F2A1405CD9755DE5BCE71EDBE1" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="filC8051A401E57D6C875C1417A00608EBF" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-bolditalic.woff" />
-            </Component>
-            <Component Id="cmp7BBC81248EBE72A0249CD9A30FB55289" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil4020055B0514CC11D1979B6FF0A08249" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-bolditalic.woff2" />
-            </Component>
-            <Component Id="cmp83E913D0FA492BEEB62BF7D248A15783" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="filE47EECD837285D20B3AD10FDC952C57D" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-italic.eot" />
-            </Component>
-            <Component Id="cmpE1011CC3A0A0D2FDA66213872459973E" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil0B5CF1BE5523F1CCAA96338CF604FF87" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-italic.ttf" />
-            </Component>
-            <Component Id="cmpE8F088E3B503ABA9EA111E87E9342A0B" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil637CC9B11622A566CDBB805AE4E45CE1" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-italic.woff" />
-            </Component>
-            <Component Id="cmpE7CD7FDC8DF199C634DEC9FC3D1D070C" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil35A82DED9902A9E057D92476499A1146" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-italic.woff2" />
-            </Component>
-            <Component Id="cmpE4A8B1DB905C1CA59B2BA1B70F1106A3" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="filE3C36E69FB4A891CD2808D3B345A8244" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-regular.eot" />
-            </Component>
-            <Component Id="cmp98361405D1EE3B36B3616E162BC7BF68" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil5AF310A77395D78D75F0DA069502490E" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-regular.ttf" />
-            </Component>
-            <Component Id="cmp2F8715158FE131BD5F9613CF9C0FC5BC" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="filFAF7CF9DE12E685728CB8C241C802CAB" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-regular.woff" />
-            </Component>
-            <Component Id="cmp5B2817FB8EB8B0C51C0FD35FDA771D6D" Directory="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Guid="*">
-                <File Id="fil2587FB8B65D787E0157ACBE5FF258FFF" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\Lato\lato-regular.woff2" />
-            </Component>
-            <Component Id="cmp92DF584FF26ADD792854E6705E447141" Directory="dir540E67CAB064C5DB1293396EB07395D5" Guid="*">
-                <File Id="fil72FFB9F39CAB088AA9DB455972A6185F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab\roboto-slab-v7-bold.eot" />
-            </Component>
-            <Component Id="cmp2C9952677C3519A2850CEBB2B4F8B537" Directory="dir540E67CAB064C5DB1293396EB07395D5" Guid="*">
-                <File Id="filE292B17C5F681191EF29BCD11FDDAE9C" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab\roboto-slab-v7-bold.ttf" />
-            </Component>
-            <Component Id="cmp97865D08B1EB454BB0C9F08B12B946EA" Directory="dir540E67CAB064C5DB1293396EB07395D5" Guid="*">
-                <File Id="filB09AD4D40A3FEBC21279F197E94F7A1F" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab\roboto-slab-v7-bold.woff" />
-            </Component>
-            <Component Id="cmp9A7C0C2A7F810FEAEB411AB29F791E4D" Directory="dir540E67CAB064C5DB1293396EB07395D5" Guid="*">
-                <File Id="fil788BE5A6CE72A6739ED5CC337905ACEA" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab\roboto-slab-v7-bold.woff2" />
-            </Component>
-            <Component Id="cmpF696C2AFC3B3E69B1EBEF15025B00BF4" Directory="dir540E67CAB064C5DB1293396EB07395D5" Guid="*">
-                <File Id="fil955AE7B5DEBEBF21C3969C30E429B061" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab\roboto-slab-v7-regular.eot" />
-            </Component>
-            <Component Id="cmp163E80071974FF608F0E8EE795AD49EB" Directory="dir540E67CAB064C5DB1293396EB07395D5" Guid="*">
-                <File Id="fil4085B354FBAF4AEF4168C9923DDD283C" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab\roboto-slab-v7-regular.ttf" />
-            </Component>
-            <Component Id="cmp0427A5A16835C16F3C2E3568FA7749C3" Directory="dir540E67CAB064C5DB1293396EB07395D5" Guid="*">
-                <File Id="fil0E8D31FD6B14900C8ECAA1DB92E196E4" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab\roboto-slab-v7-regular.woff" />
-            </Component>
-            <Component Id="cmp6B6E8CFABD72FBAEBB51748C2FCADE8D" Directory="dir540E67CAB064C5DB1293396EB07395D5" Guid="*">
-                <File Id="fil73780F7E503BE2195FEDD2190EE17F50" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\fonts\RobotoSlab\roboto-slab-v7-regular.woff2" />
-            </Component>
-            <Component Id="cmp5BB4F703A86AC1516B68D8033EB72400" Directory="dir1392BAA9E88FF3EB9705276E8750737D" Guid="*">
-                <File Id="fil26005E62C229559B499D38F28E969F00" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\js\modernizr.min.js" />
-            </Component>
-            <Component Id="cmp63300C8833ED34082C18271573A4BD35" Directory="dir1392BAA9E88FF3EB9705276E8750737D" Guid="*">
-                <File Id="filD0159245024B27F869F92469FF9B6342" KeyPath="yes" Source="$(var.HarvestPath)\Help\_static\js\theme.js" />
             </Component>
             <Component Id="cmp7E6E8D87E380B22ED7E863FC841A2368" Directory="dir09632C6D20BFA94E2A24ED0E6D9B2C41" Guid="*">
                 <File Id="filCD70EE978626DA4828A50601DEAE5556" KeyPath="yes" Source="$(var.HarvestPath)\hu\mRemoteNG.resources.dll" />
@@ -1100,165 +325,6 @@
             <Component Id="cmp0BAC93C0A0E70E5ACB66DC026BA8110E" Directory="dir84F2A679A7F20EDA03A198E92F9399E3" Guid="*">
                 <File Id="fil0B91C6F2B565FA653A19ED0161ED07EC" KeyPath="yes" Source="$(var.HarvestPath)\ko-KR\mRemoteNG.resources.dll" />
             </Component>
-            <Component Id="cmp1B8D75B534A12D2AA6C9E85C27F3B5C2" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filF343E04CB45CA330FD7D03555BDFD8B2" KeyPath="yes" Source="$(var.HarvestPath)\locales\am.pak" />
-            </Component>
-            <Component Id="cmpBB6D00A53492D2D7EC0B6B36E3AB08F5" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filDE3FC993376D25F96B23796794D744BE" KeyPath="yes" Source="$(var.HarvestPath)\locales\ar.pak" />
-            </Component>
-            <Component Id="cmpEA32BD79171C0E467B1B41A6ED829617" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filE35F3B69C0E565904E485252698E8BDB" KeyPath="yes" Source="$(var.HarvestPath)\locales\bg.pak" />
-            </Component>
-            <Component Id="cmp020F19ACA82CDE060286E97432195433" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil58B8FB84D4B4D8B5DA9B4E9FC8B00880" KeyPath="yes" Source="$(var.HarvestPath)\locales\bn.pak" />
-            </Component>
-            <Component Id="cmpC71556D9728D691E3D08ABA913EDCD2C" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil47A683CF870D8CFA150AEA5361466149" KeyPath="yes" Source="$(var.HarvestPath)\locales\ca.pak" />
-            </Component>
-            <Component Id="cmpD0AA0E33E1F40A545486CE27D7698130" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filB9E18B02618EA00AE7FD30E20490AB09" KeyPath="yes" Source="$(var.HarvestPath)\locales\cs.pak" />
-            </Component>
-            <Component Id="cmpB22E793AB0E064B0398F5217D4C10F5A" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filA2F19C6299827DCCBF5D25C7870B9B54" KeyPath="yes" Source="$(var.HarvestPath)\locales\da.pak" />
-            </Component>
-            <Component Id="cmpEB8BD998A6C12CE1E9332A904D235ED2" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filFF073A4D64A7C9EFBDCCB0E4B84CCB13" KeyPath="yes" Source="$(var.HarvestPath)\locales\de.pak" />
-            </Component>
-            <Component Id="cmp550863411F30BD7462E7F357A74D43D5" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil228B40ECB6CF0E6CA098118269A87849" KeyPath="yes" Source="$(var.HarvestPath)\locales\el.pak" />
-            </Component>
-            <Component Id="cmp391159C0D65CA97E508275A365F667AF" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil9B8DDA86CA2809848F160AF87E6639C7" KeyPath="yes" Source="$(var.HarvestPath)\locales\en-GB.pak" />
-            </Component>
-            <Component Id="cmp5C7429CF0CCA0A2F988DC61A5E0A4783" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil49A7F348F1C08F04196EBE24B20D9BA1" KeyPath="yes" Source="$(var.HarvestPath)\locales\en-US.pak" />
-            </Component>
-            <Component Id="cmpEFEB2D4955561AB4E4542C15A89B5B32" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filCAF3974878861512E4795EF326530993" KeyPath="yes" Source="$(var.HarvestPath)\locales\es-419.pak" />
-            </Component>
-            <Component Id="cmp8A30F2A960D0FC26E07CB603BDE5D345" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil1E3510FC28A149E3C3E9AAA2C619E6C5" KeyPath="yes" Source="$(var.HarvestPath)\locales\es.pak" />
-            </Component>
-            <Component Id="cmp1B22BFA7AF06A4836157E0D6A2AC7C81" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil4D5EB530E2E60DC15E4ECE5B52535A3B" KeyPath="yes" Source="$(var.HarvestPath)\locales\et.pak" />
-            </Component>
-            <Component Id="cmpC694CE163C0416F7F5C1A6405FA86B11" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil997560129DB0FE8CC434DB1387DA5D40" KeyPath="yes" Source="$(var.HarvestPath)\locales\fa.pak" />
-            </Component>
-            <Component Id="cmp026B44CD93B5AE3CDA96A9B7B7DE1D95" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil5EF49BDEFD29DF61E2C3E40DDC810EDD" KeyPath="yes" Source="$(var.HarvestPath)\locales\fi.pak" />
-            </Component>
-            <Component Id="cmp0C58F15D67050C8292C764631B322654" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filC38CE060BBA51B81F31C59949E04B4A0" KeyPath="yes" Source="$(var.HarvestPath)\locales\fil.pak" />
-            </Component>
-            <Component Id="cmp6A168A6D0BF60F488492D2016FDD3D7D" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil5BC185ABBC27545F6A24D845293883AF" KeyPath="yes" Source="$(var.HarvestPath)\locales\fr.pak" />
-            </Component>
-            <Component Id="cmpADF73400C2A118A3E1C34AA56DE00083" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil6A6A5934C431308D2AB583922879B032" KeyPath="yes" Source="$(var.HarvestPath)\locales\gu.pak" />
-            </Component>
-            <Component Id="cmpFA012C378D6346D9B8D1674115960BDE" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filAF5E0219CD5830F47E17088519B7EF6F" KeyPath="yes" Source="$(var.HarvestPath)\locales\he.pak" />
-            </Component>
-            <Component Id="cmpFE10BFF4AC9D3263C68A7AD34D1001A6" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil3465DA871C2CF1F905D46BB550EAD4CC" KeyPath="yes" Source="$(var.HarvestPath)\locales\hi.pak" />
-            </Component>
-            <Component Id="cmp933D76729090587A7B65283C73A4CEC9" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filC2DC474743A301BBB7689A3DEEF163AE" KeyPath="yes" Source="$(var.HarvestPath)\locales\hr.pak" />
-            </Component>
-            <Component Id="cmp9C3DE6F48B6EAC5F51BC8209E5C30EDF" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filB4271D6A03E1CB150DF95325E79FC4A0" KeyPath="yes" Source="$(var.HarvestPath)\locales\hu.pak" />
-            </Component>
-            <Component Id="cmp64584C3B02B6A78B0EF3245A0FEFE473" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil6EF363AE6120991043D49AE2844666D3" KeyPath="yes" Source="$(var.HarvestPath)\locales\id.pak" />
-            </Component>
-            <Component Id="cmp08B98333F544EE1A481F253A67796F06" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filE562159C88EB5418CB36C79525398005" KeyPath="yes" Source="$(var.HarvestPath)\locales\it.pak" />
-            </Component>
-            <Component Id="cmp374E425681E78F9574A574FF71722428" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filB29A320625BFFBC445D786B529FE2FEB" KeyPath="yes" Source="$(var.HarvestPath)\locales\ja.pak" />
-            </Component>
-            <Component Id="cmpE80A12ECA9E8037BAC5EDC7DABDBE411" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil04B483DDD18A0981F34920DB4BC8959D" KeyPath="yes" Source="$(var.HarvestPath)\locales\kn.pak" />
-            </Component>
-            <Component Id="cmpF81B13AB32BBE1429E867254320367B1" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil49B54C7FAC6967083E8DAB43D3B26460" KeyPath="yes" Source="$(var.HarvestPath)\locales\ko.pak" />
-            </Component>
-            <Component Id="cmp169A981B444EF17964A9E5E6CF1FFCE7" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filE0571C92BE18C63BDA76557C1E7E0BA7" KeyPath="yes" Source="$(var.HarvestPath)\locales\lt.pak" />
-            </Component>
-            <Component Id="cmp2C14D6A8D2148B82E9AA3C4B5A9244D6" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil09E251C30EC1AF141196A0ED430FB866" KeyPath="yes" Source="$(var.HarvestPath)\locales\lv.pak" />
-            </Component>
-            <Component Id="cmp6EA5236A0E09048C953E34307AA83761" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filD6F0237F09293544CA2A4480FAB0370F" KeyPath="yes" Source="$(var.HarvestPath)\locales\ml.pak" />
-            </Component>
-            <Component Id="cmp65EBAF7CC5F7D6C01175E18F16BB8A6F" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil1A2C7B35CD12A5389F7AFD36EA6B45C6" KeyPath="yes" Source="$(var.HarvestPath)\locales\mr.pak" />
-            </Component>
-            <Component Id="cmp56F6FDE624A39544ED4A19CD31ABE113" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filE90DC5C45B9D23432E63E911625D1D73" KeyPath="yes" Source="$(var.HarvestPath)\locales\ms.pak" />
-            </Component>
-            <Component Id="cmp7ADF0E1B35AFEAA2C3E648D100D1DCCB" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil690FDFC707303410F541C38361BE07E3" KeyPath="yes" Source="$(var.HarvestPath)\locales\nb.pak" />
-            </Component>
-            <Component Id="cmp026C6682D94A491BF5EE6829763CA73F" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filBCAFFD4E8DE438C86DC10C97C166280F" KeyPath="yes" Source="$(var.HarvestPath)\locales\nl.pak" />
-            </Component>
-            <Component Id="cmpEB784F92D865A14E6D69202B8E3000C3" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil71BCF18F4FAD66EE2441A727CF5670E0" KeyPath="yes" Source="$(var.HarvestPath)\locales\pl.pak" />
-            </Component>
-            <Component Id="cmpD16912F468142E2A974DF5DB5C5E1BAD" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filAA298FEEEBA1E1141115BE8F6988E3CA" KeyPath="yes" Source="$(var.HarvestPath)\locales\pt-BR.pak" />
-            </Component>
-            <Component Id="cmpA0BFD8C06ABD9C38B370E7DAAA5D1166" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filDB176878BCE0968B453C1102700588F2" KeyPath="yes" Source="$(var.HarvestPath)\locales\pt-PT.pak" />
-            </Component>
-            <Component Id="cmp7F020F42A1C1B0119421ED3973E5B9BB" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil7BBF90423B25BCA69BF3E380C3CD7B20" KeyPath="yes" Source="$(var.HarvestPath)\locales\ro.pak" />
-            </Component>
-            <Component Id="cmp4769864D0832FADFD6FB24F87930D34F" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filA2B65D6AD01446A1E29666C6E397BA3E" KeyPath="yes" Source="$(var.HarvestPath)\locales\ru.pak" />
-            </Component>
-            <Component Id="cmp211D3724749C3952BEFEF8DF3C3973BF" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil26063910F5FB1FCE84B3E49E756B2AEA" KeyPath="yes" Source="$(var.HarvestPath)\locales\sk.pak" />
-            </Component>
-            <Component Id="cmp28A18F57A1C7957CEB6226C2DD211242" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil83934B51C9563E2FC1971F37CA1BEB22" KeyPath="yes" Source="$(var.HarvestPath)\locales\sl.pak" />
-            </Component>
-            <Component Id="cmpE3B560558F7AE351423D23AFFA82483E" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil43F61AC3E1BD5E1FC6449AEF931BE3EF" KeyPath="yes" Source="$(var.HarvestPath)\locales\sr.pak" />
-            </Component>
-            <Component Id="cmp0BC848D31607A27744FD7422A0A63A7E" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil9A557436F2D211CD509F7B083FA9FE8B" KeyPath="yes" Source="$(var.HarvestPath)\locales\sv.pak" />
-            </Component>
-            <Component Id="cmp2186B99000AFCD0A6038DA24C9788347" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil017548B91D8710640BE5E9FE1412A41C" KeyPath="yes" Source="$(var.HarvestPath)\locales\sw.pak" />
-            </Component>
-            <Component Id="cmpEBFB7AC0FCF52B4833754399A1CF9C44" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filB38C2F4C5E11FD94F075D2BED5303BE8" KeyPath="yes" Source="$(var.HarvestPath)\locales\ta.pak" />
-            </Component>
-            <Component Id="cmp7B33FBE076E56915F3C698382FDF793C" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil640FCE87BD8ADEF98EBF2A698F702266" KeyPath="yes" Source="$(var.HarvestPath)\locales\te.pak" />
-            </Component>
-            <Component Id="cmp3CA3E1B1FF67221DFC354D21667D5C91" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil6BEBF1BDD6563937FFF31F916C31D834" KeyPath="yes" Source="$(var.HarvestPath)\locales\th.pak" />
-            </Component>
-            <Component Id="cmpB4108B3D6523A91005441A7A73781654" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil39B104B14FD80385387C1538109F5908" KeyPath="yes" Source="$(var.HarvestPath)\locales\tr.pak" />
-            </Component>
-            <Component Id="cmp05106526A9BFC99BE5BF039B8999D5D0" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="fil3E415DCAB1A1A947D0A68DDA5F38F771" KeyPath="yes" Source="$(var.HarvestPath)\locales\uk.pak" />
-            </Component>
-            <Component Id="cmp2A9B03FA25F11A3521F78E1E12F00770" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filC721AEC7FB3AF88EB038061D61629DA0" KeyPath="yes" Source="$(var.HarvestPath)\locales\vi.pak" />
-            </Component>
-            <Component Id="cmpB503073AA24AA6FC76850BF10C31CF59" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filF866C06FC6833FDE2869E1F3FC79DE50" KeyPath="yes" Source="$(var.HarvestPath)\locales\zh-CN.pak" />
-            </Component>
-            <Component Id="cmp2E186059BBAB57B86E85713863FAA015" Directory="dirC2A25BD972A0CE6CA0E5449830E3199D" Guid="*">
-                <File Id="filC7397185A49B5FA0845C93B37FD273B5" KeyPath="yes" Source="$(var.HarvestPath)\locales\zh-TW.pak" />
-            </Component>
             <Component Id="cmp78FEDEE0F378D2F4F0D0F26E5AA4BAA7" Directory="dir5D4FF3A14A3EA47FCD6D9414E469A244" Guid="*">
                 <File Id="filB5234976A684303D93EE2D709DAEF369" KeyPath="yes" Source="$(var.HarvestPath)\lt\mRemoteNG.resources.dll" />
             </Component>
@@ -1277,27 +343,11 @@
             <Component Id="cmp1DCD94595ED6192A198D0FC5405BB080" Directory="dir3CF6B6BC48181D29C167EF5DB7F05816" Guid="*">
                 <File Id="fil5CD3DAE410339965F6CFF69171DA3DB4" KeyPath="yes" Source="$(var.HarvestPath)\pt-BR\mRemoteNG.resources.dll" />
             </Component>
-            <Component Id="cmpBEEC0A9A86E232D54D622D93F5131C44" Directory="dirC2C39C4108DCB584F8C8263BC70E73EB" Guid="*">
-                <File Id="fil968308B8B6C2CE87C09E9BC4B33031B2" KeyPath="yes" Source="$(var.HarvestPath)\Resources\Themes\darcula.vstheme" />
-            </Component>
-            <Component Id="cmpC608083D47DDA64FF0C8054D6162281C" Directory="dirC2C39C4108DCB584F8C8263BC70E73EB" Guid="*">
-                <File Id="fil0D7C7A7FFBC4E0CB9A73A3B5633BEDD5" KeyPath="yes" Source="$(var.HarvestPath)\Resources\Themes\vs2015blue.vstheme" />
-            </Component>
-            <Component Id="cmp5D35EC40FF552186BA1BBE67D2192FB7" Directory="dirC2C39C4108DCB584F8C8263BC70E73EB" Guid="*">
-                <File Id="fil6D1B5F98211147BE4D3F3D172084736B" KeyPath="yes" Source="$(var.HarvestPath)\Resources\Themes\vs2015dark.vstheme" />
-            </Component>
-            <Component Id="cmpEAFC99D6C741C9B3CF2CF72BB8AC9392" Directory="dirC2C39C4108DCB584F8C8263BC70E73EB" Guid="*">
-                <File Id="filEB7893C4FA39AAD99A777C1C2201A94A" KeyPath="yes" Source="$(var.HarvestPath)\Resources\Themes\vs2015light.vstheme" />
-            </Component>
-            
-            <Component Id="cmpEF160F59CB17596B2DE3954FE52B3953" Directory="dir151BF9CFF17C424DB948D61798FF6623" Guid="*">
-                <File Id="fil16D487B3E626DD8384EDE52A56BFAAC3" KeyPath="yes" Source="$(var.HarvestPath)\Resources\Tiles\VisualElements_150.png" />
-            </Component>
-            <Component Id="cmpDA32FB1899B21864026B60E8509E9284" Directory="dir151BF9CFF17C424DB948D61798FF6623" Guid="*">
-                <File Id="fil5B95CC4D1081F21256EB03C046E83A94" KeyPath="yes" Source="$(var.HarvestPath)\Resources\Tiles\VisualElements_70.png" />
-            </Component>
             <Component Id="cmp14F9A7840D91A07FE79D6C6258D5872E" Directory="dirF7C0BEA86C276F53E8C9E8E6B2629A9B" Guid="*">
                 <File Id="fil84ABB736DDC19CD359E8850BB51959F7" KeyPath="yes" Source="$(var.HarvestPath)\ru\mRemoteNG.resources.dll" />
+            </Component>
+            <Component Id="cmpAB864564FF3651C4D146E03D87252A7A" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
+                <File Id="filCCD5DC5D40C6AB535B6AC22051603CB5" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\WebView2Loader.dll" />
             </Component>
             <Component Id="cmpF6021CFE1FD1DFC556CBEE9FB741CDED" Directory="dir54B0732D1EC7055747BB11A9069B5872" Guid="*">
                 <File Id="fil20F7BEFB9BCBA1C600A7AA95F5C9756A" KeyPath="yes" Source="$(var.HarvestPath)\Schemas\mremoteng_confcons_v2_5.xsd" />
@@ -1313,12 +363,6 @@
             </Component>
             <Component Id="cmp6FE9FEDBE5634AF395230BA8D500104A" Directory="dir54B0732D1EC7055747BB11A9069B5872" Guid="*">
                 <File Id="fil07B6D1F679673392A00E25C468ED6A7F" KeyPath="yes" Source="$(var.HarvestPath)\Schemas\mremoteng_creds_v1_0.xsd" />
-            </Component>
-            <Component Id="cmpFB24D10083F451DC5CF0ECF779FC0B18" Directory="dirC616523A56556EF3F429B8097FDA009B" Guid="*">
-                <File Id="filE167E3865654784A541ECC91BC55388F" KeyPath="yes" Source="$(var.HarvestPath)\swiftshader\libEGL.dll" />
-            </Component>
-            <Component Id="cmp8D1A1A9C3EEE14DA7EA72394C6B2A57B" Directory="dirC616523A56556EF3F429B8097FDA009B" Guid="*">
-                <File Id="fil91EB50E1EE74D192C7A7AD97C7080821" KeyPath="yes" Source="$(var.HarvestPath)\swiftshader\libGLESv2.dll" />
             </Component>
             <Component Id="cmp3574060B3152DDCCE44B3528A0C71B63" Directory="dir449D12A97ECE34898DFE89F1087779C9" Guid="*">
                 <File Id="fil146F3F5A21FE54B5545684791AB50136" KeyPath="yes" Source="$(var.HarvestPath)\Themes\darcula.vstheme" />
@@ -1347,133 +391,13 @@
         </ComponentGroup>
     </Fragment>
     <Fragment>
-        <DirectoryRef Id="dir327E15007196F8113B2290098450CDED">
-            <Directory Id="dir0F943A7FE961F69CCC2E8F086FC3F980" Name="css" />
+        <DirectoryRef Id="dirF3038242710747884E86633F9CAF9B21">
+            <Directory Id="dir141099046F4229F01C3B534ABFD3E870" Name="native" />
         </DirectoryRef>
     </Fragment>
     <Fragment>
-        <DirectoryRef Id="dir0F2799FA71A14A552F2E5CD85EF758ED">
-            <Directory Id="dir1023A77C01C9E14E2E14D5AD9C553C82" Name="user_interface" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir0F2799FA71A14A552F2E5CD85EF758ED">
-            <Directory Id="dir110FF8068FC149A5967C171DFB9E90DC" Name="howtos" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir0F2799FA71A14A552F2E5CD85EF758ED">
-            <Directory Id="dir116B422BF11290875B253964ACD432D2" Name="protocols" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir327E15007196F8113B2290098450CDED">
-            <Directory Id="dir1392BAA9E88FF3EB9705276E8750737D" Name="js" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir61B122782F2749F187324C134F6498C1">
-            <Directory Id="dir151BF9CFF17C424DB948D61798FF6623" Name="Tiles" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirFB6708EECE389DC59AF40BC0E8456E1F">
-            <Directory Id="dir2CB4E31ED6EEDDE62164FEAF110A4D6D" Name="Lato" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir0F2799FA71A14A552F2E5CD85EF758ED">
-            <Directory Id="dir327E15007196F8113B2290098450CDED" Name="_static" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirFBCFF71D6BC68DEE2057464E8EE27088">
-            <Directory Id="dir37F4F29FCE1FB049DA1D6D79DD3B71D8" Name="installation" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir0F2799FA71A14A552F2E5CD85EF758ED">
-            <Directory Id="dir4BA1243D7CD1DC0C69877261705032C5" Name="_images" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirFB6708EECE389DC59AF40BC0E8456E1F">
-            <Directory Id="dir540E67CAB064C5DB1293396EB07395D5" Name="RobotoSlab" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir0F2799FA71A14A552F2E5CD85EF758ED">
-            <Directory Id="dir77B5EAB5ED5234CD9293566153093DA4" Name=".doctrees" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir77B5EAB5ED5234CD9293566153093DA4">
-            <Directory Id="dir94245643088B5699FBF751E8E53DD9E0" Name="howtos" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir0F2799FA71A14A552F2E5CD85EF758ED">
-            <Directory Id="dirA2DA2F536BB9F8FF0D43E1A21948CF2E" Name="installation" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir77B5EAB5ED5234CD9293566153093DA4">
-            <Directory Id="dirB831C069B68D2ED6BD66D33B4675457C" Name="user_interface" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirFBCFF71D6BC68DEE2057464E8EE27088">
-            <Directory Id="dirB85ED15EFB8BFCC3713D034A8A598D1D" Name="protocols" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir61B122782F2749F187324C134F6498C1">
-            <Directory Id="dirC2C39C4108DCB584F8C8263BC70E73EB" Name="Themes" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir77B5EAB5ED5234CD9293566153093DA4">
-            <Directory Id="dirDC7BF93757185D969F13053D302A5A54" Name="about" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirFBCFF71D6BC68DEE2057464E8EE27088">
-            <Directory Id="dirDDB76AAC16BE27BC9B6364053BDAF195" Name="user_interface" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir77B5EAB5ED5234CD9293566153093DA4">
-            <Directory Id="dirDFDD308E6D53243CA8260E627CF936A2" Name="protocols" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirFBCFF71D6BC68DEE2057464E8EE27088">
-            <Directory Id="dirE00B1B64F75F54620688335DB15AB5AE" Name="howtos" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir77B5EAB5ED5234CD9293566153093DA4">
-            <Directory Id="dirF2574EEC56A936B9EAD325FAA908F82C" Name="installation" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir0F2799FA71A14A552F2E5CD85EF758ED">
-            <Directory Id="dirF92573843B148FB3C5E614E11F0EB1B7" Name="about" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir327E15007196F8113B2290098450CDED">
-            <Directory Id="dirFB6708EECE389DC59AF40BC0E8456E1F" Name="fonts" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir0F2799FA71A14A552F2E5CD85EF758ED">
-            <Directory Id="dirFBCFF71D6BC68DEE2057464E8EE27088" Name="_sources" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirFBCFF71D6BC68DEE2057464E8EE27088">
-            <Directory Id="dirFC0CE4199F00CD23E81C01D9D247B702" Name="about" />
+        <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
+            <Directory Id="dirF3038242710747884E86633F9CAF9B21" Name="win-x86" />
         </DirectoryRef>
     </Fragment>
 </Wix>

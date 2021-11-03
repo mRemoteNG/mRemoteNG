@@ -3,9 +3,9 @@ using System.Threading;
 using System.ComponentModel;
 using System.Net.Sockets;
 using mRemoteNG.App;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.Resources.Language;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 

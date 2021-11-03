@@ -3,7 +3,7 @@
     $SolutionDir
 )
 
-$renameTarget = $SolutionDir + "InstallerProjects\Installer\bin\Release\en-US\mRemoteNG-Installer.msi"
+$renameTarget = $SolutionDir + "mRemoteNGInstaller\Installer\bin\Release\en-US\mRemoteNG-Installer.msi"
 
 Write-Host $SolutionDir
 Write-Host $renameTarget

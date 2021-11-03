@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Properties.Resources.Error_Icon;
+            PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.LogError_16x);
         }
 
         public override string PageName

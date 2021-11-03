@@ -5,10 +5,10 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Update;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.TaskDialog;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Properties.Resources.Update_Icon;
+            PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.RunUpdate_16x);
         }
 
         #region Public Methods
@@ -93,17 +93,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
 
             var stable = cboReleaseChannel.Items.Add(UpdateChannelInfo.STABLE);
-            var beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.BETA);
-            var dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.DEV);
+            var beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.PREVIEW);
+            var dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.NIGHTLY);
             switch (Settings.Default.UpdateChannel)
             {
                 case UpdateChannelInfo.STABLE:
                     cboReleaseChannel.SelectedIndex = stable;
                     break;
-                case UpdateChannelInfo.BETA:
+                case UpdateChannelInfo.PREVIEW:
                     cboReleaseChannel.SelectedIndex = beta;
                     break;
-                case UpdateChannelInfo.DEV:
+                case UpdateChannelInfo.NIGHTLY:
                     cboReleaseChannel.SelectedIndex = dev;
                     break;
                 default:

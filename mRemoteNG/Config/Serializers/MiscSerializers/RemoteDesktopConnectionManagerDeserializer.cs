@@ -7,9 +7,9 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
@@ -183,7 +183,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             {
 				if (bool.TryParse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText, out var useConsole))
 					connectionInfo.UseConsoleSession = useConsole;
-                // ./startProgram
+                connectionInfo.StartProgram = connectionSettingsNode.SelectSingleNode("./startProgram")?.InnerText;
                 // ./workingDir
                 if (int.TryParse(connectionSettingsNode.SelectSingleNode("./port")?.InnerText, out var port))
 					connectionInfo.Port = port;

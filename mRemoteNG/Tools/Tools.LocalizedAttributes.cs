@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using mRemoteNG.Resources.Language;
 

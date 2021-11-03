@@ -12,13 +12,13 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Window
 {
@@ -77,7 +77,6 @@ namespace mRemoteNG.UI.Window
             cmenTabFullscreen.Click += (sender, args) => ToggleFullscreen();
             cmenTabSmartSize.Click += (sender, args) => ToggleSmartSize();
             cmenTabViewOnly.Click += (sender, args) => ToggleViewOnly();
-            cmenTabScreenshot.Click += (sender, args) => CreateScreenshot();
             cmenTabStartChat.Click += (sender, args) => StartChat();
             cmenTabTransferFile.Click += (sender, args) => TransferFile();
             cmenTabRefreshScreen.Click += (sender, args) => RefreshScreen();
@@ -268,7 +267,6 @@ namespace mRemoteNG.UI.Window
             cmenTabFullscreen.Text = Language.Fullscreen;
             cmenTabSmartSize.Text = Language.SmartSize;
             cmenTabViewOnly.Text = Language.ViewOnly;
-            cmenTabScreenshot.Text = Language.Screenshot;
             cmenTabStartChat.Text = Language.StartChat;
             cmenTabTransferFile.Text = Language.TransferFile;
             cmenTabRefreshScreen.Text = Language.RefreshScreen;
@@ -779,15 +777,6 @@ namespace mRemoteNG.UI.Window
             {
                 Runtime.MessageCollector.AddExceptionMessage("RenameTab (UI.Window.ConnectionWindow) failed", ex);
             }
-        }
-
-        private void CreateScreenshot()
-        {
-            cmenTab.Close();
-            Application.DoEvents();
-            //var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
-            if (TabHelper.Instance.CurrentTab == null) return;
-            Windows.ScreenshotForm.AddScreenshot(MiscTools.TakeScreenshot(TabHelper.Instance.CurrentTab));
         }
 
         #endregion
