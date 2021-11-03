@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="500" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/Tools/img/logo.png">
+  <img width="500" src="https://github.com/mRemoteNG/mRemoteNG/raw/develop/mRemoteNGProjectFiles/Header_dark.png">
 </p>
   
 <p align="center">
