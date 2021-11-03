@@ -87,6 +87,7 @@ namespace AWSInterface.Data
 
             public static string awsKeyID = "";
             public static string awsKey = "";
+            public static string region = "eu-central-1";
 
             public static void init()
             {
@@ -97,6 +98,9 @@ namespace AWSInterface.Data
                 AWSConnectionForm f = new AWSConnectionForm();
                 f.tbAccesKeyID.Text = (string)key.GetValue("KeyID");
                 f.tbAccesKey.Text = (string)key.GetValue("Key");
+                f.tbRegion.Text = (string)key.GetValue("Region");
+                if (f.tbRegion.Text == null || f.tbRegion.Text.Length < 2)
+                    f.tbRegion.Text = region;
 
                 DialogResult result = f.ShowDialog();
 
@@ -106,10 +110,13 @@ namespace AWSInterface.Data
                 // store values to memory
                 awsKeyID = f.tbAccesKeyID.Text;
                 awsKey = f.tbAccesKey.Text;
+                region = f.tbRegion.Text;
+
 
                 // write values to registry
                 key.SetValue("KeyID", awsKeyID);
                 key.SetValue("Key", awsKey);
+                key.SetValue("Region", region);
                 key.Close();
             }
         }

@@ -464,7 +464,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 // RR hack - secret server api
                 if (userName.StartsWith("SSAPI:"))
                 {
-                    SecretServerInterface.SecretServerInterface.fetchSecretFromServer(userName, out userName, out password, out domain);
+                    try
+                    {
+                        SecretServerInterface.SecretServerInterface.fetchSecretFromServer(userName, out userName, out password, out domain);
+                    }
+                    catch (Exception ex)
+                    {
+                        Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                    }
+                    
                 }
 
                 if (string.IsNullOrEmpty(userName))

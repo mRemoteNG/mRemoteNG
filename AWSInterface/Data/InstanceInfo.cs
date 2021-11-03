@@ -7,7 +7,6 @@ namespace AWSInterface
     {
         public string InstanceId { get; }
         public string Name { get; }
-        public int Userid { get; }
         public string Status { get; }
         public string PublicIP { get; }
         public string PrivateIP { get; }
@@ -26,23 +25,6 @@ namespace AWSInterface
                 case 80: Status = "Stopped"; break;
                 default: Status = "Unknown"; break;
             };
-
-            try
-            {
-                int pos = name.IndexOf("User");
-                if (pos >= 0)
-                {
-                    string temp = name.Substring(pos+4);
-                    pos = temp.IndexOf(" ");
-                    temp = temp.Substring(0, pos);
-
-                    Userid = Int32.Parse(temp);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"ERROR: {ex.Message}");
-            }
 
             PublicIP = instance.PublicIpAddress;
             PrivateIP = instance.PrivateIpAddress;

@@ -118,7 +118,14 @@ namespace mRemoteNG.Connection.Protocol
                         if (username.StartsWith("SSAPI:"))
                         {
                             var domain = ""; // dummy
-                            SecretServerInterface.SecretServerInterface.fetchSecretFromServer(username, out username, out password, out domain);
+                            try
+                            {
+                                SecretServerInterface.SecretServerInterface.fetchSecretFromServer(username, out username, out password, out domain);
+                            }
+                            catch (Exception ex)
+                            {
+                                Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                            }
                         }
 
                         arguments.Add("-" + (int)PuttySSHVersion);

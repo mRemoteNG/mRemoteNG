@@ -13,7 +13,6 @@ using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
 
-
 namespace mRemoteNG.Connection
 {
     public class ConnectionInitiator : IConnectionInitiator
@@ -67,6 +66,12 @@ namespace mRemoteNG.Connection
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
                                                         Language.ConnectionOpenFailedNoHostname);
                     return;
+                }
+
+                if (connectionInfo.Description.StartsWith("AWSAPI:"))
+                {
+                    string host = await AWSInterface.Data.EC2FetchDataService.GetEC2InstanceDataAsync(connectionInfo.Description);
+                    connectionInfo.Hostname = host;
                 }
 
                 StartPreConnectionExternalApp(connectionInfo);
