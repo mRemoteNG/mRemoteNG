@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="https://cred.sit.local/SecretServer/winauthwebservices/SSWinAuthWebService.asmx?disco" filename="SSWinAuthWebService.disco" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="https://cred.sit.local/SecretServer/winauthwebservices/SSWinAuthWebService.asmx?wsdl" filename="SSWinAuthWebService.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>
