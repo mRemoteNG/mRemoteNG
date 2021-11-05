@@ -1412,6 +1412,12 @@
       <Isolated>False</Isolated>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SecretServerInterface\SecretServerInterface.csproj">
+      <Project>{CBEEE1A0-B917-4F61-812B-85C4C15E80FC}</Project>
+      <Name>SecretServerInterface</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>:: When passing paths to powershell scripts, check if the path ends with a backslash "\"
 :: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.

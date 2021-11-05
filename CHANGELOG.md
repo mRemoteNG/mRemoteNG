@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #319: Override quick connect username when using user@domain
 - #283: Support for native PowerShell remoting as new protocol
 - #1850: Minify config xml
+- #1516: added API to access credential vault (Thycotic Secret Server) by specifying SSAPI:ID as username
 ### Changed
 - #2022: Replaced CefSharp with WebView2
 - #2014: Revised icons
