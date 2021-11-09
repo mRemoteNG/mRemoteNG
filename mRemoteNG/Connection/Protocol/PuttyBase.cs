@@ -11,6 +11,7 @@ using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using SecretServerInterface;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -114,7 +115,7 @@ namespace mRemoteNG.Connection.Protocol
                             }
                         }
 
-                        // RR hack - secret server api
+                        // access secret server api if necessary
                         if (username.StartsWith("SSAPI:"))
                         {
                             var domain = ""; // dummy

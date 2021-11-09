@@ -461,7 +461,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var password = connectionInfo?.Password ?? "";
                 var domain = connectionInfo?.Domain ?? "";
 
-                // RR hack - secret server api
+                // access secret server api if necessary
                 if (userName.StartsWith("SSAPI:"))
                 {
                     try
