@@ -91,6 +91,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             connectionInfo.UseEnhancedMode = (bool)dataRow["UseEnhancedMode"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
             connectionInfo.SSHTunnelConnectionName = (string)dataRow["SSHTunnelConnectionName"];
+            connectionInfo.OpeningCommand = (string)dataRow["OpeningCommand"];
             connectionInfo.SSHOptions = (string)dataRow["SSHOptions"];
             connectionInfo.PuttySession = (string)dataRow["PuttySession"];
             connectionInfo.Port = (int)dataRow["Port"];
@@ -188,6 +189,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             connectionInfo.Inheritance.Port = (bool)dataRow["InheritPort"];
             connectionInfo.Inheritance.Protocol = (bool)dataRow["InheritProtocol"];
             connectionInfo.Inheritance.SSHTunnelConnectionName = (bool)dataRow["InheritSSHTunnelConnectionName"];
+            connectionInfo.Inheritance.OpeningCommand = (bool)dataRow["InheritOpeningCommand"];
             connectionInfo.Inheritance.SSHOptions = (bool)dataRow["InheritSSHOptions"];
             connectionInfo.Inheritance.PuttySession = (bool)dataRow["InheritPuttySession"];
             connectionInfo.Inheritance.RedirectDiskDrives = (bool)dataRow["InheritRedirectDiskDrives"];

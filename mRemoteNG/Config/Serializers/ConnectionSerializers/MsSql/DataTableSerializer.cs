@@ -516,6 +516,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["VmId"] = connectionInfo.VmId;
             dataRow["Protocol"] = connectionInfo.Protocol;
             dataRow["SSHTunnelConnectionName"] = connectionInfo.SSHTunnelConnectionName;
+            dataRow["OpeningCommand"] = connectionInfo.OpeningCommand;
             dataRow["SSHOptions"] = connectionInfo.SSHOptions;
             dataRow["PuttySession"] = connectionInfo.PuttySession;
             dataRow["Port"] = connectionInfo.Port;
@@ -596,6 +597,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritPort"] = connectionInfo.Inheritance.Port;
                 dataRow["InheritProtocol"] = connectionInfo.Inheritance.Protocol;
                 dataRow["InheritSSHTunnelConnectionName"] = connectionInfo.Inheritance.SSHTunnelConnectionName;
+                dataRow["InheritOpeningCommand"] = connectionInfo.Inheritance.OpeningCommand;
                 dataRow["InheritSSHOptions"] = connectionInfo.Inheritance.SSHOptions;
                 dataRow["InheritPuttySession"] = connectionInfo.Inheritance.PuttySession;
                 dataRow["InheritRedirectDiskDrives"] = connectionInfo.Inheritance.RedirectDiskDrives;
