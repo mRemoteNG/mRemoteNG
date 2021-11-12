@@ -1483,34 +1483,34 @@ If you run into such an error, please create a new connection file!</value>
   <data name="SaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
     <value>Do you want to save the current connections file before loading another?</value>
   </data>
-    <data name="ConnectionsBackupFrequencyDaily" xml:space="preserve">
+  <data name="ConnectionsBackupFrequencyDaily" xml:space="preserve">
     <value>Daily</value>
   </data>
-    <data name="strConnectionBackupFrequency" xml:space="preserve">
+  <data name="strConnectionBackupFrequency" xml:space="preserve">
     <value>Connection Backup Frequency</value>
   </data>
-    <data name="ConnectionsBackupFrequencyWeekly" xml:space="preserve">
+  <data name="ConnectionsBackupFrequencyWeekly" xml:space="preserve">
     <value>Weekly</value>
   </data>
-    <data name="strConnectionsBackupMaxCount" xml:space="preserve">
+  <data name="strConnectionsBackupMaxCount" xml:space="preserve">
     <value>Maximum number of backups</value>
   </data>
-    <data name="strConnectionsBackupPath" xml:space="preserve">
+  <data name="strConnectionsBackupPath" xml:space="preserve">
     <value>Location of connection file backup</value>
   </data>
-    <data name="ConnectionsBackupFrequencyOnEdit" xml:space="preserve">
+  <data name="ConnectionsBackupFrequencyOnEdit" xml:space="preserve">
     <value>On Edit</value>
   </data>
-    <data name="ConnectionsBackupFrequencyOnExit" xml:space="preserve">
+  <data name="ConnectionsBackupFrequencyOnExit" xml:space="preserve">
     <value>On Exit</value>
   </data>
-    <data name="ConnectionsBackupFrequencyNever" xml:space="preserve">
+  <data name="ConnectionsBackupFrequencyNever" xml:space="preserve">
     <value>Never backup connections</value>
   </data>
-    <data name="strBrowse" xml:space="preserve">
+  <data name="strBrowse" xml:space="preserve">
     <value>Browse...</value>
   </data>
-    <data name="strBackup" xml:space="preserve">
+  <data name="strBackup" xml:space="preserve">
     <value>Backup</value>
   </data>
   <data name="SaveImageFilter" xml:space="preserve">
@@ -1861,7 +1861,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="CredentialUnavailable" xml:space="preserve">
     <value>Credential not available</value>
-    
   </data>
   <data name="OptionsThemeDeleteConfirmation" xml:space="preserve">
     <value>Do you really want to delete the theme?</value>
@@ -2179,5 +2178,11 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="SmartCard" xml:space="preserve">
     <value>SmartCard</value>
+  </data>
+  <data name="OpeningCommand" xml:space="preserve">
+    <value>Opening Command</value>
+  </data>
+  <data name="PropertyDescriptionOpeningCommand" xml:space="preserve">
+    <value>A command to run on the remote server after successfully connecting.</value>
   </data>
 </root>
