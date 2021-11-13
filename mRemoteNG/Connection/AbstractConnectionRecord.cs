@@ -77,6 +77,7 @@ namespace mRemoteNG.Connection
         private string _preExtApp;
         private string _postExtApp;
         private string _macAddress;
+        private string _openingCommand;
         private string _userField;
         private string _startProgram;
         private bool _favorite;
@@ -210,6 +211,16 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("SSHTunnelConnectionName", _sshTunnelConnectionName).Trim();
             set => SetField(ref _sshTunnelConnectionName, value?.Trim(), "SSHTunnelConnectionName");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+        LocalizedAttributes.LocalizedDisplayName(nameof(Language.OpeningCommand)),
+        LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionOpeningCommand)),
+           AttributeUsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
+        public virtual string OpeningCommand
+        {
+            get => GetPropertyValue("OpeningCommand", _openingCommand);
+            set => SetField(ref _openingCommand, value, "OpeningCommand");
         }
         #endregion
 
