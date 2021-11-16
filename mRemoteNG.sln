@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 14.0.25420.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteNG", "mRemoteNG\mRemoteNG.csproj", "{4934A491-40BC-4E5B-9166-EA1169A220F6}"
 EndProject
