@@ -755,7 +755,7 @@
     <Setting Name="CloseToTray" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="StartupComponentsCheck" Type="System.String" Scope="User">
+    <Setting Name="StartupComponentsCheck" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultDisableFullWindowDrag" Type="System.Boolean" Scope="User">
@@ -796,6 +796,9 @@
     </Setting>
     <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
       <Value Profile="(Default)">EdgeChromium</Value>
+    </Setting>
+    <Setting Name="OpeningCommand" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

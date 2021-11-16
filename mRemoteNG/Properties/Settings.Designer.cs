@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG.Properties { 
+namespace mRemoteNG.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -3038,9 +3038,9 @@ namespace mRemoteNG.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string StartupComponentsCheck {
+        public bool StartupComponentsCheck {
             get {
-                return ((string)(this["StartupComponentsCheck"]));
+                return ((bool)(this["StartupComponentsCheck"]));
             }
             set {
                 this["StartupComponentsCheck"] = value;
@@ -3200,6 +3200,18 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["ConDefaultRenderingEngine"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OpeningCommand {
+            get {
+                return ((string)(this["OpeningCommand"]));
+            }
+            set {
+                this["OpeningCommand"] = value;
             }
         }
     }

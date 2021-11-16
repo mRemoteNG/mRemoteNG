@@ -219,6 +219,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+      <CustomToolNamespace>mRemoteNG.Properties</CustomToolNamespace>
     </Compile>
     <Compile Include="Resources\ImageConverter.cs" />
     <Compile Include="Language\Language.Designer.cs">
@@ -631,6 +632,7 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+      <CustomToolNamespace>mRemoteNG.Properties</CustomToolNamespace>
     </Compile>
     <Compile Include="Tree\Root\RootNodeInfo.cs" />
     <Compile Include="Security\SaveFilter.cs" />
@@ -952,7 +954,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Language\Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+      <CustomToolNamespace>mRemoteNG.Resources.Language</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -976,7 +978,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+      <CustomToolNamespace>mRemoteNG.Properties</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -1278,7 +1280,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\Settings.settings">
-      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
+      <CustomToolNamespace>mRemoteNG.Properties</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
