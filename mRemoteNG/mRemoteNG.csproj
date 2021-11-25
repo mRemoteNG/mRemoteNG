@@ -262,6 +262,10 @@
   </Target>
 
   <ItemGroup>
+    <ProjectReference Include="..\SecretServerInterface\SecretServerInterface.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="92.0.25" />
   </ItemGroup>
 
