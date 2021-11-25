@@ -11,6 +11,7 @@ using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using SecretServerInterface;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -114,6 +115,20 @@ namespace mRemoteNG.Connection.Protocol
                             }
                         }
 
+                        // access secret server api if necessary
+                        if (username.StartsWith("SSAPI:"))
+                        {
+                            var domain = ""; // dummy
+                            try
+                            {
+                                SecretServerInterface.SecretServerInterface.fetchSecretFromServer(username, out username, out password, out domain);
+                            }
+                            catch (Exception ex)
+                            {
+                                Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                            }
+                        }
+
                         arguments.Add("-" + (int)PuttySSHVersion);
 
                         if (!Force.HasFlag(ConnectionInfo.Force.NoCredentials))
@@ -187,6 +202,13 @@ namespace mRemoteNG.Connection.Protocol
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
                                                     string.Format(Language.PanelHandle,
                                                                   InterfaceControl.Parent.Handle), true);
+
+                if (!string.IsNullOrEmpty(InterfaceControl.Info?.OpeningCommand))
+                {
+                    NativeMethods.SetForegroundWindow(PuttyHandle);
+                    var finalCommand = InterfaceControl.Info.OpeningCommand.TrimEnd() + "\n";
+                    SendKeys.SendWait(finalCommand);
+                }
 
                 Resize(this, new EventArgs());
                 base.Connect();

@@ -128,6 +128,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("SSHTunnelConnectionName")]
                 : "";
 
+            connectionRecord.OpeningCommand = headers.Contains("OpeningCommand")
+                ? connectionCsv[headers.IndexOf("OpeningCommand")]
+                : "";
+
             connectionRecord.PuttySession = headers.Contains("PuttySession")
                 ? connectionCsv[headers.IndexOf("PuttySession")]
                 : "";
@@ -534,6 +538,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSSHTunnelConnectionName")], out bool value))
                     connectionRecord.Inheritance.SSHTunnelConnectionName = value;
+            }
+
+            if (headers.Contains("InheritOpeningCommand"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritOpeningCommand")], out bool value))
+                    connectionRecord.Inheritance.OpeningCommand = value;
             }
 
             if (headers.Contains("InheritSSHOptions"))

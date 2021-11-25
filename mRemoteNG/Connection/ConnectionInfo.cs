@@ -357,6 +357,7 @@ namespace mRemoteNG.Connection
             UserField = Settings.Default.ConDefaultUserField;
             Favorite = Settings.Default.ConDefaultFavorite;
             StartProgram = Settings.Default.ConDefaultStartProgram;
+            OpeningCommand = Settings.Default.OpeningCommand;
         }
 
         private void SetVncDefaults()

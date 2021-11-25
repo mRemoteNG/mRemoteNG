@@ -461,6 +461,20 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var password = connectionInfo?.Password ?? "";
                 var domain = connectionInfo?.Domain ?? "";
 
+                // access secret server api if necessary
+                if (userName.StartsWith("SSAPI:"))
+                {
+                    try
+                    {
+                        SecretServerInterface.SecretServerInterface.fetchSecretFromServer(userName, out userName, out password, out domain);
+                    }
+                    catch (Exception ex)
+                    {
+                        Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                    }
+                    
+                }
+
                 if (string.IsNullOrEmpty(userName))
                 {
                     if (Settings.Default.EmptyCredentials == "windows")

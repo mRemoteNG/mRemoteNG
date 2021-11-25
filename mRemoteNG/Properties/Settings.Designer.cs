@@ -8,12 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG.Properties
-{
+namespace mRemoteNG.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -3039,9 +3038,9 @@ namespace mRemoteNG.Properties
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public string StartupComponentsCheck {
+        public bool StartupComponentsCheck {
             get {
-                return ((string)(this["StartupComponentsCheck"]));
+                return ((bool)(this["StartupComponentsCheck"]));
             }
             set {
                 this["StartupComponentsCheck"] = value;
@@ -3201,6 +3200,18 @@ namespace mRemoteNG.Properties
             }
             set {
                 this["ConDefaultRenderingEngine"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OpeningCommand {
+            get {
+                return ((string)(this["OpeningCommand"]));
+            }
+            set {
+                this["OpeningCommand"] = value;
             }
         }
     }
