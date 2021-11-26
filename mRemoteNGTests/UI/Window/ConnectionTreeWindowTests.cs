@@ -6,6 +6,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNGTests.UI.Window
 {
+    [Apartment(ApartmentState.STA)]
     public class ConnectionTreeWindowTests
     {
         private ConnectionTreeWindow _connectionTreeWindow;
