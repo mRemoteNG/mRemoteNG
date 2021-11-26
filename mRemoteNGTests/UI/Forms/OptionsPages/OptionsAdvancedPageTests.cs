@@ -1,34 +1,36 @@
-﻿using System;
+﻿using System.Threading;
+using System.Windows.Forms;
+using mRemoteNGTests.TestHelpers;
 using NUnit.Framework;
-using mRemoteNGTests.UI.Forms;
-using NUnit.Extensions.Forms;
 
 namespace mRemoteNGTests.UI.Forms.OptionsPages
 {
     [TestFixture]
+    [Apartment(ApartmentState.STA)]
     public class OptionsAdvancedPageTests : OptionsFormSetupAndTeardown
     {
         [Test]
         public void AdvancedPageLinkExistsInListView()
         {
-            ListViewTester listViewTester = new ListViewTester("PageListView", _optionsForm);
-            Assert.That(listViewTester.Items[7].Text, Does.Match("Advanced"));
+            ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            Assert.That(listViewTester.Items[10].Text, Does.Match("Advanced"));
         }
 
         [Test]
         public void AdvancedIconShownInListView()
         {
-            ListViewTester listViewTester = new ListViewTester("PageListView", _optionsForm);
-            Assert.That(listViewTester.Items[7].ImageList, Is.Not.Null);
+            ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            Assert.That(listViewTester.Items[10].ImageList, Is.Not.Null);
         }
 
         [Test]
         public void SelectingAdvancedPageLoadsSettings()
         {
-            ListViewTester listViewTester = new ListViewTester("PageListView", _optionsForm);
+            ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
             listViewTester.Select("Advanced");
-            CheckBoxTester checkboxTester = new CheckBoxTester("chkWriteLogFile", _optionsForm);
-            Assert.That(checkboxTester.Text, Does.Match("Write log file"));
+            
+            CheckBox checkboxTester = _optionsForm.FindControl<CheckBox>("chkAutomaticReconnect");
+            Assert.That(checkboxTester.Text, Is.EqualTo("Automatically try to reconnect when disconnected from server (RDP && ICA only)"));
         }
     }
 }

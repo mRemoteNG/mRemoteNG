@@ -394,7 +394,6 @@ namespace mRemoteNG.UI.Window
                     cmenTabStartChat.Visible = true;
                     cmenTabRefreshScreen.Visible = true;
                     cmenTabTransferFile.Visible = false;
-                    cmenTabSmartSize.Checked = vnc.SmartSize;
                 }
                 else
                 {
@@ -435,9 +434,6 @@ namespace mRemoteNG.UI.Window
                 {
                     case RdpProtocol6 rdp:
                         rdp.ToggleSmartSize();
-                        break;
-                    case ProtocolVNC vnc:
-                        vnc.ToggleSmartSize();
                         break;
                 }
             }

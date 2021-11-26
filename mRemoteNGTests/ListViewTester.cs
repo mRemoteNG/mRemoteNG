@@ -32,9 +32,12 @@
 
 //Contributed by: Ian Cooper
 
+using System;
 using System.Collections;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
-using NUnit.Extensions.Forms;
+using mRemoteNGTests.TestHelpers;
 
 namespace mRemoteNGTests
 {
@@ -44,8 +47,11 @@ namespace mRemoteNGTests
     /// <remarks>
     /// It includes helper methods for selecting items from the list
     /// and for clearing those selections.</remarks>
-    public class ListViewTester : ControlTester
+    public class ListViewTester
     {
+        private readonly string _name;
+        private readonly Form _form;
+
         /// <summary>
         /// Creates a ControlTester from the control name and the form instance.
         /// </summary>
@@ -56,61 +62,10 @@ namespace mRemoteNGTests
         /// <param name="name">The Control name.</param>
         /// <param name="form">The Form instance.</param>
         public ListViewTester(string name, Form form)
-            : base(name, form)
         {
+            _name = name;
+            _form = form;
         }
-
-        /// <summary>
-        /// Creates a ControlTester from the control name and the form name.
-        /// </summary>
-        /// <remarks>
-        /// It is best to use the overloaded Constructor that requires just the name 
-        /// parameter if possible.
-        /// </remarks>
-        /// <param name="name">The Control name.</param>
-        /// <param name="formName">The Form name..</param>
-        public ListViewTester(string name, string formName)
-            : base(name, formName)
-        {
-        }
-
-        /// <summary>
-        /// Creates a ControlTester from the control name.
-        /// </summary>
-        /// <remarks>
-        /// This is the best constructor.</remarks>
-        /// <param name="name">The Control name.</param>
-        public ListViewTester(string name)
-            : base(name)
-        {
-        }
-
-        /// <summary>
-        /// Creates a ControlTester from a ControlTester and an index where the
-        /// original tester's name is not unique.
-        /// </summary>
-        /// <remarks>
-        /// It is best to use the overloaded Constructor that requires just the name 
-        /// parameter if possible.
-        /// </remarks>
-        /// <param name="tester">The ControlTester.</param>
-        /// <param name="index">The index to test.</param>
-        public ListViewTester(ControlTester tester, int index)
-            : base(tester, index)
-        {
-        }
-
-        /// <summary>
-        /// Allows you to find a ListViewTester by index where the name is not unique.
-        /// </summary>
-        /// <remarks>
-        /// This was added to support the ability to find controls where their name is
-        /// not unique.  If all of your controls are uniquely named (I recommend this) then
-        /// you will not need this.
-        /// </remarks>
-        /// <value>The ControlTester at the specified index.</value>
-        /// <param name="index">The index of the ListViewTester.</param>
-        public new ListViewTester this[int index] => new ListViewTester(this, index);
 
         /// <summary>
         /// Provides access to all of the Properties of the ListBox.
@@ -119,7 +74,7 @@ namespace mRemoteNGTests
         /// Allows typed access to all of the properties of the underlying control.
         /// </remarks>
         /// <value>The underlying control.</value>
-        public ListView Properties => (ListView)Control;
+        public ListView Properties => _form.FindControl<ListView>(_name);
 
         /// <summary>
         /// Helper method to return the List View's Items property
@@ -149,7 +104,15 @@ namespace mRemoteNGTests
         public void Select(int i)
         {
             Properties.Items[i].Selected = true;
+            
             FireEvent("ItemActivate");
+        }
+
+        private void FireEvent(string eventName)
+        {
+            var ctrl = Properties;
+            MethodInfo method = typeof(ListView).GetMethod("On" + eventName, BindingFlags.Instance | BindingFlags.NonPublic);
+            method.Invoke(ctrl, new object[] { EventArgs.Empty });
         }
 
         /// <summary>
