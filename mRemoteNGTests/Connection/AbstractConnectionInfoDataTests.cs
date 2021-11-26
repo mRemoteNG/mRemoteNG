@@ -367,6 +367,15 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
+        public void OpeningCommandNotifiesOnValueChange()
+        {
+            var wasCalled = false;
+            _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
+            _testAbstractConnectionInfoData.OpeningCommand = "a";
+            Assert.That(wasCalled, Is.True);
+        }
+
+        [Test]
         public void PreExtAppNotifiesOnValueChange()
         {
             var wasCalled = false;

@@ -249,6 +249,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.UserField),
                 nameof(ConnectionInfo.Favorite),
                 nameof(ConnectionInfo.SSHTunnelConnectionName),
+                nameof(ConnectionInfo.OpeningCommand),
             };
 
             if (!isContainer)
@@ -295,7 +296,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
 						nameof(ConnectionInfo.RdpVersion),
-						nameof(ConnectionInfo.StartProgram)
+                        nameof(ConnectionInfo.OpeningCommand),
+                        nameof(ConnectionInfo.StartProgram)
                     });
                     break;
                 case ProtocolType.VNC:
