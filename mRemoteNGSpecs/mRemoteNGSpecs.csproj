@@ -18,19 +18,19 @@
 
   <ItemGroup>
     <PackageReference Include="Cucumber.Messages" Version="16.0.1" />
-    <PackageReference Include="Google.Protobuf" Version="3.17.3" />
+    <PackageReference Include="Google.Protobuf" Version="3.19.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
-    <PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
-    <PackageReference Include="SpecFlow" Version="3.9.22" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="SpecFlow" Version="3.9.40" />
     <PackageReference Include="SpecRun.Runner" Version="3.9.7" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="5.0.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
     <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
