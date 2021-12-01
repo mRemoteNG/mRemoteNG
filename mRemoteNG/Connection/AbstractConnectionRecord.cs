@@ -14,11 +14,6 @@ namespace mRemoteNG.Connection
 {
     public abstract class AbstractConnectionRecord : INotifyPropertyChanged
     {
-        #region Property Names
-        public const string Prop_StartProgram = "StartProgram";
-        public const string Prop_StartProgramWorkDir = "StartProgramWorkDir";
-        #endregion
-
         #region Fields
 
         private string _name;
@@ -32,7 +27,6 @@ namespace mRemoteNG.Connection
         private string _domain = "";
         private string _vmId = "";
         private bool _useEnhancedMode;
-        private string _startProgram = "";
         private string _startProgramWorkDir = "";
         
         private string _sshTunnelConnectionName = "";
@@ -388,29 +382,6 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("UseEnhancedMode", _useEnhancedMode);
             set => SetField(ref _useEnhancedMode, value, "UseEnhancedMode");
-        }
-        #endregion
-
-        #region Remote Desktop Services
-
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.RemoteDesktopServices), 3),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RDPStartProgram)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPStartProgram)),
-         AttributeUsedInProtocol(ProtocolType.RDP)]
-        public string StartProgram
-        {
-            get => GetPropertyValue(Prop_StartProgram, _startProgram);
-            set => SetField(ref _startProgram, value, Prop_StartProgram);
-        }
-
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.RemoteDesktopServices), 3),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RDPStartProgramWorkDir)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPStartProgramWorkDir)),
-         AttributeUsedInProtocol(ProtocolType.RDP)]
-        public string StartProgramWorkDir
-        {
-            get => GetPropertyValue(Prop_StartProgramWorkDir, _startProgramWorkDir);
-            set => SetField(ref _startProgramWorkDir, value, Prop_StartProgramWorkDir);
         }
         #endregion
 
@@ -780,6 +751,16 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("StartProgram", _startProgram);
             set => SetField(ref _startProgram, value, "StartProgram");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RDPStartProgramWorkDir)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPStartProgramWorkDir)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public virtual string StartProgramWorkDir
+        {
+            get => GetPropertyValue("StartProgramWorkDir", _startProgramWorkDir);
+            set => SetField(ref _startProgramWorkDir, value, "StartProgramWorkDir");
         }
 
         #endregion

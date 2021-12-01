@@ -546,6 +546,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.DisableMenuAnimations = xmlnode.GetAttributeAsBool("DisableMenuAnimations");
                     connectionInfo.DisableCursorShadow = xmlnode.GetAttributeAsBool("DisableCursorShadow");
                     connectionInfo.DisableCursorBlinking = xmlnode.GetAttributeAsBool("DisableCursorBlinking");
+                    connectionInfo.StartProgram = xmlnode.GetAttributeAsString("StartProgram");
+                    connectionInfo.StartProgramWorkDir = xmlnode.GetAttributeAsString("StartProgramWorkDir");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
                     connectionInfo.Inheritance.RdpVersion = xmlnode.GetAttributeAsBool("InheritRdpVersion");
@@ -560,12 +562,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.Inheritance.DisableCursorShadow = xmlnode.GetAttributeAsBool("InheritDisableCursorShadow");
                     connectionInfo.Inheritance.DisableCursorBlinking = xmlnode.GetAttributeAsBool("InheritDisableCursorBlinking");
                 }
-
-                #region Remote Desktop Services
-                // No reason to check for version of conf version, if it does not exists then it is just empty string.
-                connectionInfo.StartProgram = xmlnode.GetAttributeAsString(ConnectionInfo.Prop_StartProgram);
-                connectionInfo.StartProgramWorkDir = xmlnode.GetAttributeAsString(ConnectionInfo.Prop_StartProgramWorkDir);
-                #endregion
+                
             }
             catch (Exception ex)
             {

@@ -242,9 +242,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("InheritFavorite", typeof(bool));
             dataTable.Columns.Add("ICAEncryptionStrength", typeof(string));
             dataTable.Columns.Add("InheritICAEncryptionStrength", typeof(bool));
-            
-            dataTable.Columns.Add(ConnectionInfo.Prop_StartProgram, typeof(string));
-            dataTable.Columns.Add(ConnectionInfo.Prop_StartProgramWorkDir, typeof(string));
+            dataTable.Columns.Add("StartProgram", typeof(string));
+            dataTable.Columns.Add("StartProgramWorkDir", typeof(string));
         }
 
         private void SetPrimaryKey(DataTable dataTable)
@@ -324,8 +323,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
              dataRow["SoundQuality"].Equals(connectionInfo.SoundQuality.ToString()) &&
              dataRow["RedirectAudioCapture"].Equals(connectionInfo.RedirectAudioCapture) &&
              dataRow["RedirectKeys"].Equals(connectionInfo.RedirectKeys) &&
-             dataRow[ConnectionInfo.Prop_StartProgram].Equals(connectionInfo.StartProgram) &&
-             dataRow[ConnectionInfo.Prop_StartProgramWorkDir].Equals(connectionInfo.StartProgramWorkDir);
+             dataRow["StartProgram"].Equals(connectionInfo.StartProgram) &&
+             dataRow["StartProgramWorkDir"].Equals(connectionInfo.StartProgramWorkDir);
 
             isFieldNotChange = isFieldNotChange &&
              dataRow["Connected"].Equals(false) && // TODO: this column can eventually be removed. we now save this property locally
@@ -591,11 +590,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["RdpVersion"] = connectionInfo.RdpVersion;
             dataRow["Favorite"] = connectionInfo.Favorite;
             dataRow["ICAEncryptionStrength"] = string.Empty;
-            
-            #region Remote Desktop Services
-            dataRow[ConnectionInfo.Prop_StartProgram] = connectionInfo.StartProgram;
-            dataRow[ConnectionInfo.Prop_StartProgramWorkDir] = connectionInfo.StartProgramWorkDir;
-            #endregion
+            dataRow["Prop_StartProgram"] = connectionInfo.StartProgram;
+            dataRow["Prop_StartProgramWorkDir"] = connectionInfo.StartProgramWorkDir;
 
             if (_saveFilter.SaveInheritance)
             {
