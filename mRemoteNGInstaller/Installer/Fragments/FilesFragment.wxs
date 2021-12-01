@@ -8,6 +8,7 @@
             <Directory Id="dir8B16CA39C742773B276A9735BD3A5176" Name="en-US" />
             <Directory Id="dir577231E2EF642DDF4B09B65F4BEE3BE2" Name="es" />
             <Directory Id="dir4D0A9F0DBDF1EE024E030F9E3B94104C" Name="es-AR" />
+            <Directory Id="dirCAD1E83BD4CE375ABDB8F38597B3725B" Name="fi-FI" />
             <Directory Id="dir0B7D401DE3233449E75F31A823BF5B99" Name="fr" />
             <Directory Id="dir09632C6D20BFA94E2A24ED0E6D9B2C41" Name="hu" />
             <Directory Id="dir5E6DA158F27D9CA2AB915EC6AB53B383" Name="Icons" />
@@ -24,7 +25,6 @@
             <Directory Id="dirF7C0BEA86C276F53E8C9E8E6B2629A9B" Name="ru" />
             <Directory Id="dirB699B779DD859CB7CAD46DA4BC9017C0" Name="runtimes" />
             <Directory Id="dir54B0732D1EC7055747BB11A9069B5872" Name="Schemas" />
-            <Directory Id="dir449D12A97ECE34898DFE89F1087779C9" Name="Themes" />
             <Directory Id="dirF50F8AE1B4079411641D2CA28D569A6E" Name="tr-TR" />
             <Directory Id="dir09CC4E618379FE7D9EB8E064B61C997C" Name="uk" />
             <Directory Id="dir7615CEE1531630E53F5B99A187D27DF9" Name="zh-CN" />
@@ -36,20 +36,11 @@
             <Component Id="cmp35D96EA44AD8354ED2F995D3EBCCE1A7" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil19AFB7CDBA1EEFE8FFFF6028483B5EC8" KeyPath="yes" Source="$(var.HarvestPath)\AxInterop.MSTSCLib.dll" />
             </Component>
-            <Component Id="cmp45AD37B07A84A8DE4359911569590EC5" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil9FACBE1086DD7C9D269D0D3D247C92E4" KeyPath="yes" Source="$(var.HarvestPath)\AxMSTSCLib.dll" />
-            </Component>
             <Component Id="cmp68D767AEEE842A722AECA2C65D34BE2E" Directory="INSTALLDIR" Guid="*">
                 <File Id="filCC34B59260E76EC7532DD3E23A541355" KeyPath="yes" Source="$(var.HarvestPath)\BouncyCastle.Crypto.dll" />
             </Component>
             <Component Id="cmp9A3B2D379B0CE7EDEFF2F82ABE850DF3" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil87F50FF5306E148144A953F7C1056119" KeyPath="yes" Source="$(var.HarvestPath)\Castle.Core.dll" />
-            </Component>
-            <Component Id="cmpA41C6EE7A653A952E331B00092610B1D" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil65AC6BC6EE24BD8FC1F18F1B380974D8" KeyPath="yes" Source="$(var.HarvestPath)\CefSharp.WinForms.dll" />
-            </Component>
-            <Component Id="cmpC80350D124B50BBA8B15EDA2785513AF" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil92BB80A0015DEE1D4E207A2B29A3F2DC" KeyPath="yes" Source="$(var.HarvestPath)\CHANGELOG.md" />
             </Component>
             <Component Id="cmpADE94032AA8563E1E37003C8AB2D8F7E" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil6BA5B21301D77ADAE00F1DA02BFE8584" KeyPath="yes" Source="$(var.HarvestPath)\ConsoleControl.dll" />
@@ -57,20 +48,11 @@
             <Component Id="cmpCD880D9D0A268B608165CA720A505323" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil2D3E8B5BFE62A4776A87A75AD6DD50EA" KeyPath="yes" Source="$(var.HarvestPath)\ConsoleControlAPI.dll" />
             </Component>
-            <Component Id="cmpACE72DC80E58B79586C1EEA5C36A1532" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil5605B38630061876CA483106C32D10F4" KeyPath="yes" Source="$(var.HarvestPath)\COPYING.TXT" />
-            </Component>
-            <Component Id="cmp047A6C5EFDBE1E198D8108B0C9429F8D" Directory="INSTALLDIR" Guid="*">
-                <File Id="filA9AF50F71ECD31FA1809BBC6AD35FBD1" KeyPath="yes" Source="$(var.HarvestPath)\CREDITS.md" />
-            </Component>
             <Component Id="cmpB33DF036D353C8FDD69458B2FE71E10B" Directory="INSTALLDIR" Guid="*">
                 <File Id="filDE15699EEB9D455A194CFECACB2D34CA" KeyPath="yes" Source="$(var.HarvestPath)\Cucumber.Messages.dll" />
             </Component>
             <Component Id="cmp19EC39A721B3368567C267C98B3A70BF" Directory="INSTALLDIR" Guid="*">
                 <File Id="filF4F0A4E8F055AEBFE89D956290E642D9" KeyPath="yes" Source="$(var.HarvestPath)\Google.Protobuf.dll" />
-            </Component>
-            <Component Id="cmp4C51B5387780358DD249907CE9C046BF" Directory="INSTALLDIR" Guid="*">
-                <File Id="filD2242E8CA2989ECDE6218752F9E92450" KeyPath="yes" Source="$(var.HarvestPath)\Google.Protobuf.pdb" />
             </Component>
             <Component Id="cmp3B87E05C275CE85388D030CC01BF1E20" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil3FCEFF3CAE083B7927D5D4E4B0218A88" KeyPath="yes" Source="$(var.HarvestPath)\Interop.MSTSCLib.dll" />
@@ -109,59 +91,37 @@
                 <File Id="filAC4D49028FDDA1626E5B006C9D1ED57E" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.dll.config" />
             </Component>
             
-            <Component Id="cmp8958F261F3D830DE65AF9C2710549C88" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil75F94B8520D436392BD616D18AF233AF" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.exe.config" />
-            </Component>
-            <Component Id="cmpE14CA37FA2B4B500665FA152F0B200E4" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil57C1DE7CA5F7F61A48FE0A552D501251" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.log" />
-            </Component>
-            <Component Id="cmp67313C6B4CE3487E9A8165EFFE369D16" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil5F0524AF62166FF3C4DAE07F1113C0D9" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.pdb" />
-            </Component>
-            <Component Id="cmp5ADD4822C40EA3DDAFE9B1037E072BB3" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil39403E9524BCE6F92D520204A3B9D64D" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.runtimeconfig.dev.json" />
-            </Component>
             <Component Id="cmp9FF194CCD09E9797444CF95F7C37C75A" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil09655B2FCDF14CBBA2E03BBD3F6C58EE" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.runtimeconfig.json" />
             </Component>
             
-            <Component Id="cmpD4D2033951303A49BDE9E49853A76383" Directory="INSTALLDIR" Guid="*">
-                <File Id="filD884157C18943641A910B7531BF91796" KeyPath="yes" Source="$(var.HarvestPath)\MSTSCLib.dll" />
-            </Component>
             <Component Id="cmp1D9B3E298A697AB163089035161BFA1D" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil895DC5B7ACBE0A8A9EE74F34EAD5B5AA" KeyPath="yes" Source="$(var.HarvestPath)\MySql.Data.dll" />
             </Component>
             <Component Id="cmp1874AB219070404EED322213C6A1A49E" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil05FF769999D602AD4FA6A489C44ED290" KeyPath="yes" Source="$(var.HarvestPath)\Newtonsoft.Json.dll" />
             </Component>
-            <Component Id="cmpFF90EFA0AE0E35A48FC042638CF77F83" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil75F15A67DE36E6CD5ADC683FD7435C78" KeyPath="yes" Source="$(var.HarvestPath)\nunit.engine.api.dll" />
-            </Component>
-            <Component Id="cmp35010F6B50302A296D9658771EC3E4FE" Directory="INSTALLDIR" Guid="*">
-                <File Id="filBB933BCEF1E4A178879D45D7E720A2F3" KeyPath="yes" Source="$(var.HarvestPath)\nunit.engine.core.dll" />
-            </Component>
-            <Component Id="cmp60171664B38A0BA8AFA2CCFD9DC72916" Directory="INSTALLDIR" Guid="*">
-                <File Id="filDDF0CBD906AA151260327DB6D8CEF33D" KeyPath="yes" Source="$(var.HarvestPath)\nunit.engine.dll" />
-            </Component>
-            <Component Id="cmpD080EFC5FD4A34CFACCE171DB3A74124" Directory="INSTALLDIR" Guid="*">
-                <File Id="filDC26451611F2363A23BE363327DF051C" KeyPath="yes" Source="$(var.HarvestPath)\NUnit3.TestAdapter.dll" />
-            </Component>
-            <Component Id="cmp753C50809C27F5384311B95383EF9C58" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil70D9CF6FB96BBA4D221162ED5D619FF8" KeyPath="yes" Source="$(var.HarvestPath)\NUnit3.TestAdapter.pdb" />
-            </Component>
             <Component Id="cmp2C1BBE07A32C31BCF92912D601AD4864" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil357AF76EEBAC3CE454CB549E0C337C8A" KeyPath="yes" Source="$(var.HarvestPath)\ObjectListView.dll" />
             </Component>
             
-            
-            <Component Id="cmp77B4A071D4D4E81445BE03B0AD534C90" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil4560734A3E7B53FF55D3B92F7AFD23E3" KeyPath="yes" Source="$(var.HarvestPath)\README.md" />
-            </Component>
             <Component Id="cmp8EFDE1F21B7D56B957F262CC057CB4BA" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil56FF3B20B7AFB789C5CF4AA13D753C36" KeyPath="yes" Source="$(var.HarvestPath)\Renci.SshNet.Async.dll" />
             </Component>
             <Component Id="cmpEDFC52653A3A4D5C80AB3A0B7CE9AE35" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil9C1ED4726B58F1CD4C25AF29BDBE0F77" KeyPath="yes" Source="$(var.HarvestPath)\Renci.SshNet.dll" />
+            </Component>
+            <Component Id="cmpA00CF5661042E8A2C92E994701940B20" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil3C2ECCC2300D1A596FD61DE5BDA516B9" KeyPath="yes" Source="$(var.HarvestPath)\SecretServerInterface.dll" />
+            </Component>
+            <Component Id="cmp2E457E98C683BEF1517CF4A8D5657186" Directory="INSTALLDIR" Guid="*">
+                <File Id="filFE5CA1C47FA0D581BC8CDAB8F75D8D26" KeyPath="yes" Source="$(var.HarvestPath)\SecretServerInterface.dll.config" />
+            </Component>
+            <Component Id="cmpD6C3B20DC44B6168A4264C075091DD5C" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil9C41752260F38BCD6AABB88D2382EF23" KeyPath="yes" Source="$(var.HarvestPath)\SecretServerInterface.pdb" />
+            </Component>
+            <Component Id="cmp350CD765CB2C99BEB476F5301E5FCA43" Directory="INSTALLDIR" Guid="*">
+                <File Id="filB15E8F1F97CB8BC09EBEE0923040AAAF" KeyPath="yes" Source="$(var.HarvestPath)\SecretServerInterface.XmlSerializers.dll" />
             </Component>
             <Component Id="cmpEEF6A35F8A6BADDF0E1C90F92FE0D47E" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil0DAB9F548FB79BA6060656EC4E6D6E46" KeyPath="yes" Source="$(var.HarvestPath)\SparkleLibrary.dll" />
@@ -169,38 +129,14 @@
             <Component Id="cmp86BC7A1A19AA01D570750A0992995A12" Directory="INSTALLDIR" Guid="*">
                 <File Id="filC7FA6D9F2C5BE416FAB770BEA6E290B3" KeyPath="yes" Source="$(var.HarvestPath)\SshNet.Security.Cryptography.dll" />
             </Component>
-            <Component Id="cmp73085246C202ABD1D96D2E5DEFB2A801" Directory="INSTALLDIR" Guid="*">
-                <File Id="filEDD81E77BF6933BF90C42AE0EFAA681B" KeyPath="yes" Source="$(var.HarvestPath)\System.Buffers.dll" />
-            </Component>
             <Component Id="cmp5675881D66BF7DE0E0A868739AD7F946" Directory="INSTALLDIR" Guid="*">
                 <File Id="filDA785AFF57F9E7A7BD773E100D9E6FBA" KeyPath="yes" Source="$(var.HarvestPath)\System.Data.SqlClient.dll" />
-            </Component>
-            <Component Id="cmp03637CBBBBBBDE7AD30868DD3BE68B72" Directory="INSTALLDIR" Guid="*">
-                <File Id="filAA085C60B5E18E998DD62FB27E2F7F5F" KeyPath="yes" Source="$(var.HarvestPath)\System.Drawing.Common.dll" />
-            </Component>
-            <Component Id="cmp393A01D511253BDB987BA7277AA7C854" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil280C1A75A930667452FD5B4159A68F65" KeyPath="yes" Source="$(var.HarvestPath)\System.IO.Packaging.dll" />
             </Component>
             <Component Id="cmp4987A12F91B834B985ADB612F38026B0" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil4F83F13F1555091B8DEBF43FC616B1BB" KeyPath="yes" Source="$(var.HarvestPath)\System.Management.dll" />
             </Component>
-            <Component Id="cmp4CFC7C3721FFD91FA4E9798A516D5E97" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil1E24D2F3B531B1D76E1631314436BD58" KeyPath="yes" Source="$(var.HarvestPath)\System.Memory.dll" />
-            </Component>
-            <Component Id="cmpA780BD9CC7EF10DE58A9E17B691B0205" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil41D7AC86F0924A477EE48B3AF9E39249" KeyPath="yes" Source="$(var.HarvestPath)\System.Numerics.Vectors.dll" />
-            </Component>
-            <Component Id="cmp04E7760BC247B05C847A4A6D5D8C7091" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil8974B12282083EB6B4CB7BAC26546374" KeyPath="yes" Source="$(var.HarvestPath)\System.Runtime.CompilerServices.Unsafe.dll" />
-            </Component>
-            <Component Id="cmpF504650A7859834E56B465827ADA1936" Directory="INSTALLDIR" Guid="*">
-                <File Id="filF3505C51B6D770D84F54BDDB6F4AE5C2" KeyPath="yes" Source="$(var.HarvestPath)\System.Security.Cryptography.ProtectedData.dll" />
-            </Component>
             <Component Id="cmp6EDDA49D77DC3F324D5A589D57E0EB8A" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil72AD86A3843D345454197D19DF387B17" KeyPath="yes" Source="$(var.HarvestPath)\System.Xml.XPath.XmlDocument.dll" />
-            </Component>
-            <Component Id="cmpC9D8421F84EA6EC63F4CC3631BDE8A90" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil33A5321649C6EF973D60D344751A3F82" KeyPath="yes" Source="$(var.HarvestPath)\testcentric.engine.metadata.dll" />
             </Component>
             <Component Id="cmpE68C5E1DCE03F09E43EB82865185E4D3" Directory="INSTALLDIR" Guid="*">
                 <File Id="filD8044470EBD984D56CFBAD1E74376C16" KeyPath="yes" Source="$(var.HarvestPath)\Ubiety.Dns.Core.dll" />
@@ -213,12 +149,6 @@
             </Component>
             <Component Id="cmpD3A62C6E1FCA8BCCB540EA093829FB0A" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil21072501EA7C63633A3FCD306B94A95D" KeyPath="yes" Source="$(var.HarvestPath)\VncSharp.dll" />
-            </Component>
-            <Component Id="cmp74C002F3E7887C8150BBB5707FA71B13" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil2493994E030480CF99B3EF99E2E518C4" KeyPath="yes" Source="$(var.HarvestPath)\WebView2Loader.dll" />
-            </Component>
-            <Component Id="cmpF64D60E2A7A50FD6241ABDBE27E31F59" Directory="INSTALLDIR" Guid="*">
-                <File Id="filED0391668232DF3DEA5823C1D36F49AD" KeyPath="yes" Source="$(var.HarvestPath)\WeifenLuo.WinFormsUI.Docking.dll" />
             </Component>
             <Component Id="cmpBA753907719CFB8E5911F999855AB374" Directory="INSTALLDIR" Guid="*">
                 <File Id="filB22044E1A17BCF2A77B31ED2880C383E" KeyPath="yes" Source="$(var.HarvestPath)\WeifenLuo.WinFormsUI.Docking.ThemeVS2003.dll" />
@@ -238,8 +168,8 @@
             <Component Id="cmpC0DC2B307C8B7EAC386B3358653F76E2" Directory="INSTALLDIR" Guid="*">
                 <File Id="filD068C10054CBAFFCBA811F56643DB892" KeyPath="yes" Source="$(var.HarvestPath)\WinFormsUI.dll" />
             </Component>
-            <Component Id="cmp04C7B02DC48478EC5E6A10E077E158D8" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil158BE3EAEBC8F7867B09DCE2FB037B31" KeyPath="yes" Source="$(var.HarvestPath)\Zstandard.Net.dll" />
+            <Component Id="cmp643F6BC02D559138788B66788747B74E" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil9987BED6E61406EB6AADC003B6E8A6B9" KeyPath="yes" Source="$(var.HarvestPath)\ZstdNet.dll" />
             </Component>
             <Component Id="cmp46A31C5C8F6C32D00394B76FC10B878C" Directory="dir82972532CA27BEF6B972C3A142E19BC1" Guid="*">
                 <File Id="fil1BBD62B8CC672D965BD8B093F72F7E70" KeyPath="yes" Source="$(var.HarvestPath)\cs-CZ\mRemoteNG.resources.dll" />
@@ -258,6 +188,9 @@
             </Component>
             <Component Id="cmp40698C05218D56587A9782D00CBFDA98" Directory="dir4D0A9F0DBDF1EE024E030F9E3B94104C" Guid="*">
                 <File Id="filDE0D2DDF6B066FC5E61C6AE18CE63B9F" KeyPath="yes" Source="$(var.HarvestPath)\es-AR\mRemoteNG.resources.dll" />
+            </Component>
+            <Component Id="cmpC3F0E66945E0C0A0E019A0D6BF11BA48" Directory="dirCAD1E83BD4CE375ABDB8F38597B3725B" Guid="*">
+                <File Id="fil4E9D222811B808F3EAB32DE9DF620F90" KeyPath="yes" Source="$(var.HarvestPath)\fi-FI\mRemoteNG.resources.dll" />
             </Component>
             <Component Id="cmp40895E6FE8EC4FFA9CDEB2FB5DD15F20" Directory="dir0B7D401DE3233449E75F31A823BF5B99" Guid="*">
                 <File Id="fil715FF750208BACE83BC7DCCF4BEB3FA2" KeyPath="yes" Source="$(var.HarvestPath)\fr\mRemoteNG.resources.dll" />
@@ -415,8 +348,8 @@
             <Component Id="cmpC8D403F170EFC62EECE44C445A7B9620" Directory="dir790BB27D6E4F5B6A95574FBBC538D98F" Guid="*">
                 <File Id="fil7C71A0764E46EF94AD4F4DFC7156A272" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll" />
             </Component>
-            <Component Id="cmp4D9761BBBE20C4FF3DE2DD37E6EB2100" Directory="dir01EDB4E01E4AB4F5DD12EBD80C63A2A2" Guid="*">
-                <File Id="filB1C78495279548CBD6B43B1B8E7C9E42" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win\lib\netcoreapp2.0\System.Management.dll" />
+            <Component Id="cmp91B9CC4193A542A5C6A10A1F52FC6AAA" Directory="dir9B4F0782CF9942D78104F206EFA81030" Guid="*">
+                <File Id="fil83862DF820A12865A856EA0ACAE72D3D" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win\lib\net6.0\System.Management.dll" />
             </Component>
             <Component Id="cmpB2739C20C1F19D6173B79D6CF660EBAE" Directory="dir2C3D76D932FEC38ECE3CF992C9052F22" Guid="*">
                 <File Id="filDCA7AAABA4EC944A3EC1AABC37332413" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll" />
@@ -427,491 +360,17 @@
             <Component Id="cmpBBD0399A2C7020A0BFFB886996B79169" Directory="dir8DE1CAE5F6B03F7A6BAE17D4E78639BA" Guid="*">
                 <File Id="fil7E9426B7CDAEEE105D4AEA1A60251BCB" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-arm64\native\WebView2Loader.dll" />
             </Component>
-            <Component Id="cmpA40A8DE9F4D2635DEC7310DCE033E856" Directory="dirDFD6A8FF4D7795385A83786633B9DF63" Guid="*">
-                <File Id="fil99679BD274CB533A11C682D4B08FE52B" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\lib\netcoreapp3.0\CefSharp.Core.dll" />
-            </Component>
-            <Component Id="cmpD83034CB2964FEBD2623DCB63EAB2F94" Directory="dirDFD6A8FF4D7795385A83786633B9DF63" Guid="*">
-                <File Id="filD4161CC487DCE509F0BC8B7A3355588E" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\lib\netcoreapp3.0\CefSharp.Core.Runtime.dll" />
-            </Component>
-            <Component Id="cmp34CB9C9030AE2D5FE005ECC4E6B4632D" Directory="dirDFD6A8FF4D7795385A83786633B9DF63" Guid="*">
-                <File Id="fil20FA46EB9948B3AA6A3FDE19C48F8D8F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\lib\netcoreapp3.0\CefSharp.dll" />
-            </Component>
-            <Component Id="cmp959A46BC25F28A0EDB843DB23E71DFAB" Directory="dirE9EA02E02FD5B947525D40BB3A79F17F" Guid="*">
-                <File Id="fil0594C7630261903DCED1BC0698FB481E" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\lib\netcoreapp3.1\CefSharp.Core.dll" />
-            </Component>
-            <Component Id="cmp78D79565B8DAF2590E6FF6C3A2FFEB1C" Directory="dirE9EA02E02FD5B947525D40BB3A79F17F" Guid="*">
-                <File Id="filB1A745F3EE415D4FA6478154516A8A35" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\lib\netcoreapp3.1\CefSharp.Core.Runtime.dll" />
-            </Component>
-            <Component Id="cmp7E8D269A21BAE0F11131FD3E5B49D601" Directory="dirE9EA02E02FD5B947525D40BB3A79F17F" Guid="*">
-                <File Id="filDCCB42A3D3581462C97B152E4DC687A8" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\lib\netcoreapp3.1\CefSharp.dll" />
-            </Component>
-            <Component Id="cmp404104ECC315BAAC2D450720A4C6EED5" Directory="dirE9EA02E02FD5B947525D40BB3A79F17F" Guid="*">
-                <File Id="filB6DC9B2FE161FBFD65396CCAE4ED3D81" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\lib\netcoreapp3.1\Ijwhost.dll" />
-            </Component>
-            <Component Id="cmpD54CF3E28B302A3163E434E9526A2D5F" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="filFEEDE250BE58265D48C332149CFD9795" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\CefSharp.BrowserSubprocess.Core.dll" />
-            </Component>
-            <Component Id="cmpA0D3AB3ABEB716D985B7F887B641886D" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil1149F95C8C6DF01E170CAED8F2E6F4E6" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\CefSharp.BrowserSubprocess.dll" />
-            </Component>
-            <Component Id="cmp4AD6C656507D62419E5063B19B4014B7" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil40E6AF7D9B126866DEF7D3701E02EBE1" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\CefSharp.BrowserSubprocess.exe" />
-            </Component>
-            <Component Id="cmpB663C434017F82672A8DFD4C19D0AF8D" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil2E1853E3359A895C095B8AC6B6D448EA" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\CefSharp.BrowserSubprocess.runtimeconfig.json" />
-            </Component>
-            <Component Id="cmp9EAF874FEC80174DAE50F06610356BB4" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil51250B0DAD87B9E3EA4BDE838625EE88" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\CefSharp.dll" />
-            </Component>
-            <Component Id="cmpEBC1CAC220DBF8597E58CA0C20AACA92" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="filBB65E8F528FA87719687845C869A1300" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\chrome_100_percent.pak" />
-            </Component>
-            <Component Id="cmpB11D6DAE1BA70CEB2BF3E53C8A60D5DC" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil4E0D42339C9023BE58B10CA32685B963" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\chrome_200_percent.pak" />
-            </Component>
-            <Component Id="cmp9AB46C7F45145BB1216F897590DE92ED" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil4989BFA5C816C4464AB4D45667069F1F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\chrome_elf.dll" />
-            </Component>
-            <Component Id="cmpA0B1B8700967CDC77B88B74F36CC4D84" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="filEC6CA7A48BDFB9CACCCFA7532783D6F8" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\d3dcompiler_47.dll" />
-            </Component>
-            <Component Id="cmpC2B1F7B91E7937AE5839DBE9C7C22095" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil301DC7A2D387CF6E0E28FFF3654B7664" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\icudtl.dat" />
-            </Component>
-            <Component Id="cmp48A39F66B531AD1AA559C9DF84C737ED" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil9AFA5BA475316FE368CD73A709A6F2E8" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\Ijwhost.dll" />
-            </Component>
-            <Component Id="cmp680D4B24EDF7661C659AE6D85C10E9D3" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="filEE3B3DA333D35AAD22CAC054EDE688AF" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\libcef.dll" />
-            </Component>
-            <Component Id="cmp05E292AF269A26A8F4DF9A20C1FAC19C" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil1F22FD1051F1D75545371C9813E11EB7" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\libEGL.dll" />
-            </Component>
-            <Component Id="cmp8097B2A6543D8ABDC8463E50CE187B97" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="filFE2F8F19B16C6E9842C1C49B48C81DA8" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\libGLESv2.dll" />
-            </Component>
-            <Component Id="cmp1B6BCACEE273DE55339200C9AFB627A4" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil371B723C20C2960C6A222960E7C4FB11" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\resources.pak" />
-            </Component>
-            <Component Id="cmp2D799D97F44CD2361B7EE3FF81975D74" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="fil0AB9E559B0056ED9AA96FCDA3DE5F035" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\snapshot_blob.bin" />
-            </Component>
             <Component Id="cmpFAFA9D64A2B1D8B66ACB1C2D958C9DC5" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
                 <File Id="fil1352EAE0A6DCBF023872C40101DB9BB1" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\sni.dll" />
-            </Component>
-            <Component Id="cmpAAE128DE14D70E64BB894B7EFBF926D9" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
-                <File Id="filDFA39BAFA31BC57780394A1DE5EEA58F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\v8_context_snapshot.bin" />
             </Component>
             <Component Id="cmpA94B75651045F785CCA29EE2638258AF" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
                 <File Id="fil4CB4D838CA0B7A043E05392D9F7C1E94" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\WebView2Loader.dll" />
             </Component>
-            <Component Id="cmpA1F255641D3AA3DB0685107D451DA299" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filDD7659441A90B28AA5FF670373B98CE8" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\am.pak" />
-            </Component>
-            <Component Id="cmp481F1E5FA540990FA521BF9626FDFDBE" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil7952E439242B6C39604E67DBA93674FF" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\ar.pak" />
-            </Component>
-            <Component Id="cmpD713DCA66B082E68433059A7B59ADA65" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil68E453CDADFF0D3DF8A076AE2D98DC2C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\bg.pak" />
-            </Component>
-            <Component Id="cmp1AA1F43B12FE730C6D20860D8002F8AC" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil79B3344F492FBD8FCE41A3C38AC054FC" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\bn.pak" />
-            </Component>
-            <Component Id="cmp93F05EE05D2CE01C1855389584F77BE5" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil7A890E74D2EFE92C3015240F500B57F4" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\ca.pak" />
-            </Component>
-            <Component Id="cmp8A156E568615AB60C7BE41C0B2A23818" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil93110FDEB4120C168EFA468D8F8F59E4" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\cs.pak" />
-            </Component>
-            <Component Id="cmpAA41E354C1193685DA839F821A5A29F2" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil80D0659A2FF0E81D3FF3B0DD3CBBB387" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\da.pak" />
-            </Component>
-            <Component Id="cmpEAFEC48E3F8FDE2E8732DC7ECD61355C" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filF8F4B563603CE07C31CF7CA0CE38D235" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\de.pak" />
-            </Component>
-            <Component Id="cmp434B9F4AA9AFCE83911DEEEA7A02825B" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil43E2574FA7BC2A33F79007DC2696E73A" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\el.pak" />
-            </Component>
-            <Component Id="cmpAA2290BF55113A8CDF740AA2AEA9ED3F" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filB4649ECAB7FFC8CEDF7E137D48DCB40F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\en-GB.pak" />
-            </Component>
-            <Component Id="cmp8FF9B270EAA0643291A6897F49DE5A22" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filB5F7CCBA9375E6EC9DACE04570B546D2" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\en-US.pak" />
-            </Component>
-            <Component Id="cmp554BD8155F3A1C302AFE291D5B27C986" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil6374F28EE22F1541D233CF2B163480BA" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\es-419.pak" />
-            </Component>
-            <Component Id="cmp4F8A2CD196814BE1189269658505BC17" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filD03427C0860166C0840B90E464EF7B1D" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\es.pak" />
-            </Component>
-            <Component Id="cmp8DAE4AAB5150F224637B193E594EF677" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filA4145439F0D90761471B393B379A1189" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\et.pak" />
-            </Component>
-            <Component Id="cmpCB426366DF1D151CB3320D5ED6FB4692" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filD1E875FB393127ADE1446A3546017F62" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\fa.pak" />
-            </Component>
-            <Component Id="cmpC0119D756EC0E5F64C39F7D16FB2CF4D" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil978AF8641E9B0DE4884156F7453E0508" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\fi.pak" />
-            </Component>
-            <Component Id="cmpF504142A727716A3C8FDEB226033CC17" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil2C8688B35BC2FC7015E228A892CF27B3" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\fil.pak" />
-            </Component>
-            <Component Id="cmpB94B5CF30DE7D3B9CDE4F79312AFF7AB" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil054DE5C48B0401BB6A79ADBB86F0F689" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\fr.pak" />
-            </Component>
-            <Component Id="cmpED4CE9C774994C7BF8A2CC3D77C64863" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil48BAEB4CD2483FCE72B44B7B58BC76A7" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\gu.pak" />
-            </Component>
-            <Component Id="cmpBC2097CEA7C16E93D09B885EB8E24D48" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filDF0905ABC07BEBEE2B1E984D1BE03B66" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\he.pak" />
-            </Component>
-            <Component Id="cmp09658BB6791CF9BC19728F9FBAA972B3" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil3483A5D34A0F4E06931F00C4BDA9DC54" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\hi.pak" />
-            </Component>
-            <Component Id="cmp975A0FC1BB946BE2BE1DB3EB06FBDE59" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil5A9200490A11864D86EB6411F60A181B" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\hr.pak" />
-            </Component>
-            <Component Id="cmpB2052AEFE97C62F1607377BEE832BB02" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil9604526A39F5043C78F77F4D72C6B874" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\hu.pak" />
-            </Component>
-            <Component Id="cmp0193554E8EE78237FE3477F6FA883D35" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filDBAB88F6374925AFC1F401BB657A73F7" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\id.pak" />
-            </Component>
-            <Component Id="cmp9CDBD1DA99D07674A66927D956EFE680" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil2D4379BB57899E8B201E1403D26367CE" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\it.pak" />
-            </Component>
-            <Component Id="cmp31126DCE8F760D1D66859F8EB243D52A" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil91EA4738CF23EF125D0F7ECD881789A4" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\ja.pak" />
-            </Component>
-            <Component Id="cmpC4043D2124372132DDE7074A9398328E" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil8D32BC365DAE9A3B2A4673C1810B85DA" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\kn.pak" />
-            </Component>
-            <Component Id="cmp3250050C60014864DD154656AF11141E" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filE9C94471BF7F84B2CA41D678223B80A4" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\ko.pak" />
-            </Component>
-            <Component Id="cmpB8906CB76F539F8EFA643A69B6FCA02A" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil76EE74460DC0ED16700E37CD74439809" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\lt.pak" />
-            </Component>
-            <Component Id="cmp359DE0718470C557A4796CAF5CCD3A71" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil444947F9A52837335771A76505D4C495" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\lv.pak" />
-            </Component>
-            <Component Id="cmp205956879F57666B3BBD130DF10F13E5" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filC37BFF5ACF31FD3F48226D99BF06E314" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\ml.pak" />
-            </Component>
-            <Component Id="cmp1012BB07F44E66E5607C853378575FD5" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filAC56656FFA84F24ED69F6F0801D1070F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\mr.pak" />
-            </Component>
-            <Component Id="cmp64F5D488443531CF78AC4349B6C36634" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil6A878F40DA85F45127FBF7479661BFFA" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\ms.pak" />
-            </Component>
-            <Component Id="cmp0C8C0B209F390D9E42E4527958C82684" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil61ECC845833CA84319D1482502BB97F1" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\nb.pak" />
-            </Component>
-            <Component Id="cmpD0ACF82F5A02EDEFC8B96DEEA90C7924" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil303CFB2005B0FFD9E0C721A8706AD4B3" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\nl.pak" />
-            </Component>
-            <Component Id="cmpD36CB4F3F7D84FC7E386552920A467BE" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil93BAD65D534350C5F03090753B95F979" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\pl.pak" />
-            </Component>
-            <Component Id="cmp6F10FA2BF80BC1B669837B6F7054F7E4" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filAB7C4A65B3A4D8448331D7B9DF2AEB6E" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\pt-BR.pak" />
-            </Component>
-            <Component Id="cmpC07587AAAC54128B179F1145143FBE52" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filBD8425B9DCFB8F89DF0ECF9C1DC1049C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\pt-PT.pak" />
-            </Component>
-            <Component Id="cmp7FE03C5274775CA018F60207548F3561" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil694CB25364716797CCD43650843B2409" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\ro.pak" />
-            </Component>
-            <Component Id="cmpD57C8A9A4DB76D7EEF392DAB89972DD8" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filCF331ED3A5AFF87FE6A45737301F8B2B" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\ru.pak" />
-            </Component>
-            <Component Id="cmp2775A0E460D2458C07971965BDB8EEFB" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filD3DF0B5237601223DDAD3A6DA7C140B8" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\sk.pak" />
-            </Component>
-            <Component Id="cmpFA4101618A8D76CB0A02A1B97B750794" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filBFE55929AA65E3DF589A0BC1FE7AA015" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\sl.pak" />
-            </Component>
-            <Component Id="cmpACD0BE325F74A34D8202BB83C38A87FD" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filE98D46F0FBF21A6ACCD359B819647895" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\sr.pak" />
-            </Component>
-            <Component Id="cmp918724B215561A32D39F2A4EA2F310B1" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filA8048FDE9AB1198EE7EBE9DF2A2C0514" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\sv.pak" />
-            </Component>
-            <Component Id="cmp98C5EE267D5360B7295B67A74D542B5A" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filE151E5B72D307CF946AE2FCFE1E6B2F0" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\sw.pak" />
-            </Component>
-            <Component Id="cmp719248173D8080B6B89A308E12338B74" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filFB2ED39B1B33674DD7EB0FB38E715C01" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\ta.pak" />
-            </Component>
-            <Component Id="cmp3A1B71813196CBBCB0182D7A6FFDCA08" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil28DF93C02DCC502B0350E7549D8D3CF9" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\te.pak" />
-            </Component>
-            <Component Id="cmp701895FA16D24AFBFF69D52BAD18FC29" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil7110CEA65DA7E7F3854D673074856096" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\th.pak" />
-            </Component>
-            <Component Id="cmpEA2E615B2F989316E587A4B10A27E421" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil88AD9AB42A285793C012520301F92FF2" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\tr.pak" />
-            </Component>
-            <Component Id="cmp2E3CAFFFC645671F446954A98AAA6DAC" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil5E93C6604EE668BFA9F445AA38396557" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\uk.pak" />
-            </Component>
-            <Component Id="cmp0102C803237E18EF88E6B5CA0D968123" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filCECA82FF8015E8D10502EE06A01D8ADC" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\vi.pak" />
-            </Component>
-            <Component Id="cmpA724D2ADA0E7CA22F863E6D7A802518A" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="fil0648AF139A6F171EDDB352C5741B1A1C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\zh-CN.pak" />
-            </Component>
-            <Component Id="cmp84A37E2BB2B4982A6CEC34AD62F1FE4F" Directory="dir4B13BA504CCD16AAF93D80B154859D50" Guid="*">
-                <File Id="filA96F196AF8D867616F615F567A4FAFE9" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\locales\zh-TW.pak" />
-            </Component>
-            <Component Id="cmp9CE8737CBF04739CFA6CACF86FFFED51" Directory="dir2D239A3106B3B5B33A18D1BD85A3316D" Guid="*">
-                <File Id="fil0826A50821B6669A0E43FD58D70133FC" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\swiftshader\libEGL.dll" />
-            </Component>
-            <Component Id="cmpFCAF31E3831F53B48A58DF581610C1FC" Directory="dir2D239A3106B3B5B33A18D1BD85A3316D" Guid="*">
-                <File Id="filC4806243D7761786B810E1F97E60FDBC" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\swiftshader\libGLESv2.dll" />
-            </Component>
-            <Component Id="cmp6249F5DBF4AE092C867096FE969117B9" Directory="dir19F00F03468B087E62B8B00D3135BA13" Guid="*">
-                <File Id="fil6DC62F0A528807F22F27D208FBDA335A" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\lib\netcoreapp3.0\CefSharp.Core.dll" />
-            </Component>
-            <Component Id="cmpEDF740DE92FC4EBF1AD552C54FDA3861" Directory="dir19F00F03468B087E62B8B00D3135BA13" Guid="*">
-                <File Id="fil920B5EB041FA3C87A692AA8774EEDE01" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\lib\netcoreapp3.0\CefSharp.Core.Runtime.dll" />
-            </Component>
-            <Component Id="cmp1C4618ECC084F2BA262882DAE5B50CC2" Directory="dir19F00F03468B087E62B8B00D3135BA13" Guid="*">
-                <File Id="fil102A70F5B865AF65B12DFEC5DD44C380" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\lib\netcoreapp3.0\CefSharp.dll" />
-            </Component>
-            <Component Id="cmp4D12BF30B0B068E4FE40144A340B1BF7" Directory="dir5E102A8455055A430302E48939B2B904" Guid="*">
-                <File Id="fil45032417355C6CCD97024C52FB177FCF" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\lib\netcoreapp3.1\CefSharp.Core.dll" />
-            </Component>
-            <Component Id="cmp732DE72AC088DCF93C3325A2FF9F32CA" Directory="dir5E102A8455055A430302E48939B2B904" Guid="*">
-                <File Id="fil13917AF53790DA789CA6B63908814A7A" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\lib\netcoreapp3.1\CefSharp.Core.Runtime.dll" />
-            </Component>
-            <Component Id="cmpF75FF40BCE881BFF07891A6B9884821C" Directory="dir5E102A8455055A430302E48939B2B904" Guid="*">
-                <File Id="fil82C2C04D29034B54D1DFD3B78DF4B14C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\lib\netcoreapp3.1\CefSharp.dll" />
-            </Component>
-            <Component Id="cmp35F757332F8F6390441EADFCF6374B4F" Directory="dir5E102A8455055A430302E48939B2B904" Guid="*">
-                <File Id="filE67CBBD6E61BFE13D6D11C4FEF1A258A" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\lib\netcoreapp3.1\Ijwhost.dll" />
-            </Component>
-            <Component Id="cmp20A1DE5520C3983018B0074416012C46" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil9C93575EAD60A031F135ECB75496EAA1" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\CefSharp.BrowserSubprocess.Core.dll" />
-            </Component>
-            <Component Id="cmp3EAA89E54B0D841B177F001EC666B152" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="filC83261316904433CEBEBE54DC392B0E7" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\CefSharp.BrowserSubprocess.dll" />
-            </Component>
-            <Component Id="cmp1CB303F11C5E058072927BFF8F4C1B86" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil69C419CA0B1E058900C39485E698FF27" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\CefSharp.BrowserSubprocess.exe" />
-            </Component>
-            <Component Id="cmp1A09B8FE4FF5FDBCA13C03DC0E99EDDE" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil3F201B2468C41561D22F299505BDFB5B" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\CefSharp.BrowserSubprocess.runtimeconfig.json" />
-            </Component>
-            <Component Id="cmpEF9FC34763A49013C7DA93865E542992" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil55646EF077248A3D6CBE4881D194195B" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\CefSharp.dll" />
-            </Component>
-            <Component Id="cmp26D6C1A523C4C65DA002711C90B35B8B" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="filE892BDAFFC389996B4A2A51FAC64B053" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\chrome_100_percent.pak" />
-            </Component>
-            <Component Id="cmpE92102D98A13D5FBDCF82D7C268450AD" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="filCDC5A46065A15A61A388B6D8EA666B0D" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\chrome_200_percent.pak" />
-            </Component>
-            <Component Id="cmp6BEAFBC129855DCFF88C8D15C0B4B85C" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil025C9E2378FCDA3F77F091682A9F7C87" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\chrome_elf.dll" />
-            </Component>
-            <Component Id="cmp4F7A9881F235146B0F317DC5AC633021" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="filD405D1A8BD16991EED108F8073F3DEC7" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\d3dcompiler_47.dll" />
-            </Component>
-            <Component Id="cmp120BB95994B460C7354ACBEB51B928F2" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil71B7DEF2DF6BC4401DAD50F692E09B4F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\icudtl.dat" />
-            </Component>
-            <Component Id="cmp12C3FEA07E2A12A394BC9F9F111E8850" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="filB4B458EA0F818B69A3C33F5EA11D2272" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\Ijwhost.dll" />
-            </Component>
-            <Component Id="cmp7D6764EF35D3BA0FA5D06F522CE4B2D8" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil32667F081A9F812E7EF1013E36866F32" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\libcef.dll" />
-            </Component>
-            <Component Id="cmpCA51D1DCD702A3583DEB0C79D1745F67" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil6C51CA069D7FF507A68345A412A8DD99" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\libEGL.dll" />
-            </Component>
-            <Component Id="cmpB5A36BED65CAB4EB04ECF1B734E65F94" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="filD13B654EEEBDC10BC9DFEED44FCADC3D" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\libGLESv2.dll" />
-            </Component>
-            <Component Id="cmp8B00882A17ECCCE83D673D76C999002A" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil127024905C5FA603F102E986D34A0CFD" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\resources.pak" />
-            </Component>
-            <Component Id="cmp659BDAC9C87E3C536141A4BABE6B6E66" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil7E3F4C0F6A54479DEDBCEFFB92458F8E" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\snapshot_blob.bin" />
-            </Component>
             <Component Id="cmp320962FC6534F4036FFF98F41E83D11F" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
                 <File Id="filDBEF9ECE0A5B2CDE1B08874749F8DF6E" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\sni.dll" />
             </Component>
-            <Component Id="cmp667C44EEBE64A714990476A396FBB273" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
-                <File Id="fil15593EC15FEE6F0688D36BE026FB479F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\v8_context_snapshot.bin" />
-            </Component>
             <Component Id="cmpAB864564FF3651C4D146E03D87252A7A" Directory="dir141099046F4229F01C3B534ABFD3E870" Guid="*">
                 <File Id="filCCD5DC5D40C6AB535B6AC22051603CB5" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\WebView2Loader.dll" />
-            </Component>
-            <Component Id="cmp6158D328256FA95980A57855E175746E" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil03E476209A095219E5D2CFEC3C928AE3" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\am.pak" />
-            </Component>
-            <Component Id="cmp627746073165A91E694C868B3B917F33" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil05F0010000ED1F893E103A9FDCDE187C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\ar.pak" />
-            </Component>
-            <Component Id="cmpF63DC28D3D536F29B74B9893C789B187" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil61E3F99D915DDFB680AC59968F32E98D" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\bg.pak" />
-            </Component>
-            <Component Id="cmpD112F1ADCE95FD378FFF41A4368D58C8" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filA89F23D6C0EBD44943DE2E575C6CAAFE" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\bn.pak" />
-            </Component>
-            <Component Id="cmpB6345B5B01851824EB094889FDB758C9" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil74F213D8EB21256AC3BC4DDE62F02A15" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\ca.pak" />
-            </Component>
-            <Component Id="cmp3D4881EC1C9562E9C02F3873D0FCAED2" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil07DFCF844CAD55E0562C26C4DB7C73ED" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\cs.pak" />
-            </Component>
-            <Component Id="cmp9E21112332DD3A292A123DC82A4805DD" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil672A14BD554B6AA9268665D84824A05B" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\da.pak" />
-            </Component>
-            <Component Id="cmpD591C70791471E1AAA1A3D92528A02EE" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil38108DD9D1C7D786520B70E47B99FD28" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\de.pak" />
-            </Component>
-            <Component Id="cmpB17E35A2CC1BAB36F19EA376E9699EE0" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filB24E0509CE12D80C946CA2ABE545BBFB" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\el.pak" />
-            </Component>
-            <Component Id="cmp9D5E8600C9A212E3355859934A319C52" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil723BBE13A0D1911612CD301666AECD21" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\en-GB.pak" />
-            </Component>
-            <Component Id="cmp7240A186CA57D53CBE1D2E677801D3B2" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filC99D87A9A5D8503CA220E9648FB23468" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\en-US.pak" />
-            </Component>
-            <Component Id="cmp60E7D455BE35FEFE1DF94E2E98562326" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filEF53058C808A2B80AAE77BD801B562F5" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\es-419.pak" />
-            </Component>
-            <Component Id="cmp589157BCAB92ABEF417800532C69B6E2" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filEBED7B81EAA5F7FEE193B2371B2A9A70" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\es.pak" />
-            </Component>
-            <Component Id="cmp0F5FA9903F5E70F491AC73A04DF03F90" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil8C2F8BB0001B81451534111A2D8C4701" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\et.pak" />
-            </Component>
-            <Component Id="cmp35CEF3785E162177A120069B12E86130" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil02068BB904BDB436EC1CDE8BAF1C28CA" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\fa.pak" />
-            </Component>
-            <Component Id="cmp5C8E7DE20BA77FF39CB411C6A0E31030" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filDB14A22328347D66232DFD3F649BFC44" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\fi.pak" />
-            </Component>
-            <Component Id="cmpCF1F07DDC7E9D2E4DCF301848FB0C4C6" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil5C5BAD77E85594DC13FC94FCF62F9624" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\fil.pak" />
-            </Component>
-            <Component Id="cmpD3197568A6BECBBCAEE901DA9AF39ACB" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil6430D1FAB765B55513568D6EF533A41C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\fr.pak" />
-            </Component>
-            <Component Id="cmp0C68AB1B00A727375B7C2F17A3907B7B" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil749AA658CBF809CD0E2F09665490C77B" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\gu.pak" />
-            </Component>
-            <Component Id="cmp35A6D8073A331C7CBE7FFDA2865DBAAE" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil09FB0B66D7057336618722D0C2CE2A41" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\he.pak" />
-            </Component>
-            <Component Id="cmp5BE60EAA5CF93FCEAA47FA1D937E7E83" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filC22D26CF9B0B0F3E2E96C00236487D4A" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\hi.pak" />
-            </Component>
-            <Component Id="cmp305DA6180DA234CDCE1C8F56C3EB01E5" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil497C7E7331E59B1FBBC7C4D018DA1807" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\hr.pak" />
-            </Component>
-            <Component Id="cmp3B69D99391F3154C5F2DF79532CF2673" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil98687DD0F321393F3615A669CFAF6F2E" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\hu.pak" />
-            </Component>
-            <Component Id="cmp4B3A8A93E8FC371FB7AA67BD57CD599F" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil97C9EFA811649789957618A71EFA8B08" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\id.pak" />
-            </Component>
-            <Component Id="cmpC0C034C238088D0134B3D2F29A2896C8" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil34FE40A1E399DE9D16DFC2E6ACAC527F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\it.pak" />
-            </Component>
-            <Component Id="cmpE99CC3EE9C385A30C0C2C74DDAF66E8D" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil0E88F51E5EB886DE06D01305A55B196C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\ja.pak" />
-            </Component>
-            <Component Id="cmpCADCBF9A09C105A19B6C0488183E9FF7" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil103E25E1218503BDC7192E6C974A7546" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\kn.pak" />
-            </Component>
-            <Component Id="cmp6797206FB2B19D41ECDA6559ED440235" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil7EB3301EB2EA7D0D3DF17C7AAFA093A5" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\ko.pak" />
-            </Component>
-            <Component Id="cmp16303678B77DCF024776213D368DD3F1" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filD9AA0C49A661361F09DE20AFB5F31D29" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\lt.pak" />
-            </Component>
-            <Component Id="cmpEDDD26D33A4A11C347A5B898A088362F" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil8558A65B0F21E5334CBFFE9B225273FE" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\lv.pak" />
-            </Component>
-            <Component Id="cmpF6470E0A8E6CBF43B06B3B45DAF475A5" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil0B9B305494FF5668509493D3755E3322" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\ml.pak" />
-            </Component>
-            <Component Id="cmp40F2EA4BFEB6F0D37C974D92924B0C03" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil0BA175235240F2FC066473F912EC6101" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\mr.pak" />
-            </Component>
-            <Component Id="cmp1E0884CD4FB9029FDE2BA6ED2C253108" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filF7178071D19CB8A888C1178E18B2DE70" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\ms.pak" />
-            </Component>
-            <Component Id="cmpE47F029712AA2337134F4E44AAC80279" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil4D74DBACC9BF3C7CED0EB67007248166" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\nb.pak" />
-            </Component>
-            <Component Id="cmpAE9AB3AD29796C388A552BA225C17BB4" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil1C65AE36593821CB495807F640FA175D" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\nl.pak" />
-            </Component>
-            <Component Id="cmp4C757C4CF146A14599C47C6B75D17820" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil10ED39E6DCC078CDFEFC0E88AD3E4EF1" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\pl.pak" />
-            </Component>
-            <Component Id="cmpA384744A980767B1AB73ABB89CA08734" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil6FD3BD6B51700C140519FFE644CD86B5" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\pt-BR.pak" />
-            </Component>
-            <Component Id="cmpCFBD7CE3EFC4E885877DA3021EA25C84" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil15E9A41010898EEBF3453AF1D2C8097F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\pt-PT.pak" />
-            </Component>
-            <Component Id="cmp956B96A5AD1A39E3CEE0C050AD686A14" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filB6564D7CF3176D300FC9A39D8937B851" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\ro.pak" />
-            </Component>
-            <Component Id="cmpF7C7DE76C9C0A69FDEF45A195D1F2A59" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil25F47E0F0D1A05CF66F0E3E1844FEEC1" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\ru.pak" />
-            </Component>
-            <Component Id="cmp445C0853716F369A23C24C4570C12D9B" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filE4B786FD5F965B332F96633D3A631E9B" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\sk.pak" />
-            </Component>
-            <Component Id="cmp10C2E19DB2FC5C7269591C153D69497B" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil6CFD6AE0FF62BCA7474D26D323E8097F" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\sl.pak" />
-            </Component>
-            <Component Id="cmp9907961587727E021B4F961ABF377C0E" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filE52D8C4FC5ED68F2C398045E6AE46F57" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\sr.pak" />
-            </Component>
-            <Component Id="cmp91E2CEA7C7F8524BB3EBC9A74B426DBC" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil773A90EF87FA567BF2D1A9B523BF00AC" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\sv.pak" />
-            </Component>
-            <Component Id="cmpB4E618D1BC579F69531681B124D4473B" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filA04201894C3AD46A373A15942F16A6CE" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\sw.pak" />
-            </Component>
-            <Component Id="cmp599AD9F624B43C4604965B8F704DF8A5" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filF76806879DB469DE40465CF67EFACC7C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\ta.pak" />
-            </Component>
-            <Component Id="cmp25D9D91381EF78CFDFCCBBB437639D22" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil250E182F102D8FE8BC68B61FB208A54D" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\te.pak" />
-            </Component>
-            <Component Id="cmp681CD8BAFEFCAE4D379B8D5901AF2D8C" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil318CA45BD7F8299B81135D038895F7F7" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\th.pak" />
-            </Component>
-            <Component Id="cmpA85BECE6DE73C344B33441A4B35245D9" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filBE2CD035AF55F5CEF56D65A65E1E1EB4" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\tr.pak" />
-            </Component>
-            <Component Id="cmp60C69B598DEB7FD11BE9C7CFBA1C1301" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filD61AE7B5E7F31B429FFD61BBE2E9994A" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\uk.pak" />
-            </Component>
-            <Component Id="cmp17E1A162FECE716384E041FAEC17F7FD" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil263CA2C25CAF45E78E9DB9E6995416D2" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\vi.pak" />
-            </Component>
-            <Component Id="cmpD1C64D2FD5DEC3120CED887B5669CD30" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="fil8B26FF2D5E29625CAF33F3706A0394D3" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\zh-CN.pak" />
-            </Component>
-            <Component Id="cmpFBA4FA922DF051502B22B9F91B4383CA" Directory="dir841A328B2234FD1C08D2F1FC1BFCF76A" Guid="*">
-                <File Id="filA6704F830655FE1897578F21D4705BC8" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\locales\zh-TW.pak" />
-            </Component>
-            <Component Id="cmp8205FE9DA1A10E7E46C19C24C67FC649" Directory="dir0684CE3A21846530567AB123E483370D" Guid="*">
-                <File Id="filA1E97BB352AB5FFB0C7E02910B7E20C3" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\swiftshader\libEGL.dll" />
-            </Component>
-            <Component Id="cmp3AF6DE6ABD9D39D97BEECF9C8FBD190C" Directory="dir0684CE3A21846530567AB123E483370D" Guid="*">
-                <File Id="fil17A977BBD0A26B693F0C0DBA84A51D8C" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x86\native\swiftshader\libGLESv2.dll" />
             </Component>
             <Component Id="cmpF6021CFE1FD1DFC556CBEE9FB741CDED" Directory="dir54B0732D1EC7055747BB11A9069B5872" Guid="*">
                 <File Id="fil20F7BEFB9BCBA1C600A7AA95F5C9756A" KeyPath="yes" Source="$(var.HarvestPath)\Schemas\mremoteng_confcons_v2_5.xsd" />
@@ -928,18 +387,6 @@
             <Component Id="cmp6FE9FEDBE5634AF395230BA8D500104A" Directory="dir54B0732D1EC7055747BB11A9069B5872" Guid="*">
                 <File Id="fil07B6D1F679673392A00E25C468ED6A7F" KeyPath="yes" Source="$(var.HarvestPath)\Schemas\mremoteng_creds_v1_0.xsd" />
             </Component>
-            <Component Id="cmp3574060B3152DDCCE44B3528A0C71B63" Directory="dir449D12A97ECE34898DFE89F1087779C9" Guid="*">
-                <File Id="fil146F3F5A21FE54B5545684791AB50136" KeyPath="yes" Source="$(var.HarvestPath)\Themes\darcula.vstheme" />
-            </Component>
-            <Component Id="cmp10355C1CB059E65F1ED03458EADE7C5F" Directory="dir449D12A97ECE34898DFE89F1087779C9" Guid="*">
-                <File Id="filCE7764B2C5A95183E805582F263BCC5F" KeyPath="yes" Source="$(var.HarvestPath)\Themes\vs2015blue.vstheme" />
-            </Component>
-            <Component Id="cmpF674F6C548EBF993B72FA4EBF5ADAC21" Directory="dir449D12A97ECE34898DFE89F1087779C9" Guid="*">
-                <File Id="filA5A98FD5A7D4DEF6CDA6C3652E12EC66" KeyPath="yes" Source="$(var.HarvestPath)\Themes\vs2015dark.vstheme" />
-            </Component>
-            <Component Id="cmp785919C5C947C3DFF8751EAA846B5FA7" Directory="dir449D12A97ECE34898DFE89F1087779C9" Guid="*">
-                <File Id="fil46DE91950AEE35EDBAF9606ACF6FE1C4" KeyPath="yes" Source="$(var.HarvestPath)\Themes\vs2015light.vstheme" />
-            </Component>
             <Component Id="cmp64D2ADC91AE3713E639B495CC0518A7F" Directory="dirF50F8AE1B4079411641D2CA28D569A6E" Guid="*">
                 <File Id="fil74F215747A8E72D357A05798BFC0319D" KeyPath="yes" Source="$(var.HarvestPath)\tr-TR\mRemoteNG.resources.dll" />
             </Component>
@@ -955,28 +402,8 @@
         </ComponentGroup>
     </Fragment>
     <Fragment>
-        <DirectoryRef Id="dirF78421D30AE78B84FBB1AF80F70209FC">
-            <Directory Id="dir01EDB4E01E4AB4F5DD12EBD80C63A2A2" Name="netcoreapp2.0" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir141099046F4229F01C3B534ABFD3E870">
-            <Directory Id="dir0684CE3A21846530567AB123E483370D" Name="swiftshader" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
         <DirectoryRef Id="dirF3038242710747884E86633F9CAF9B21">
             <Directory Id="dir141099046F4229F01C3B534ABFD3E870" Name="native" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir4BE3C401C8A92EFB57CEA4FAF8AB39D5">
-            <Directory Id="dir19F00F03468B087E62B8B00D3135BA13" Name="netcoreapp3.0" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir98D160BE690DB35BE57FFB8F3DCF5AC7">
-            <Directory Id="dir1FDAA262D6465F0C185578D491403D78" Name="lib" />
         </DirectoryRef>
     </Fragment>
     <Fragment>
@@ -990,28 +417,8 @@
         </DirectoryRef>
     </Fragment>
     <Fragment>
-        <DirectoryRef Id="dir2ED89DAEE76564AD33DB582F055A5274">
-            <Directory Id="dir2D239A3106B3B5B33A18D1BD85A3316D" Name="swiftshader" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
         <DirectoryRef Id="dir98D160BE690DB35BE57FFB8F3DCF5AC7">
             <Directory Id="dir2ED89DAEE76564AD33DB582F055A5274" Name="native" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir2ED89DAEE76564AD33DB582F055A5274">
-            <Directory Id="dir4B13BA504CCD16AAF93D80B154859D50" Name="locales" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirF3038242710747884E86633F9CAF9B21">
-            <Directory Id="dir4BE3C401C8A92EFB57CEA4FAF8AB39D5" Name="lib" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir4BE3C401C8A92EFB57CEA4FAF8AB39D5">
-            <Directory Id="dir5E102A8455055A430302E48939B2B904" Name="netcoreapp3.1" />
         </DirectoryRef>
     </Fragment>
     <Fragment>
@@ -1030,11 +437,6 @@
         </DirectoryRef>
     </Fragment>
     <Fragment>
-        <DirectoryRef Id="dir141099046F4229F01C3B534ABFD3E870">
-            <Directory Id="dir841A328B2234FD1C08D2F1FC1BFCF76A" Name="locales" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
         <DirectoryRef Id="dirB699B779DD859CB7CAD46DA4BC9017C0">
             <Directory Id="dir85A01EEDCA388CEBE492AC128D8D37CC" Name="win-arm64" />
         </DirectoryRef>
@@ -1050,13 +452,8 @@
         </DirectoryRef>
     </Fragment>
     <Fragment>
-        <DirectoryRef Id="dir1FDAA262D6465F0C185578D491403D78">
-            <Directory Id="dirDFD6A8FF4D7795385A83786633B9DF63" Name="netcoreapp3.0" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dir1FDAA262D6465F0C185578D491403D78">
-            <Directory Id="dirE9EA02E02FD5B947525D40BB3A79F17F" Name="netcoreapp3.1" />
+        <DirectoryRef Id="dirF78421D30AE78B84FBB1AF80F70209FC">
+            <Directory Id="dir9B4F0782CF9942D78104F206EFA81030" Name="net6.0" />
         </DirectoryRef>
     </Fragment>
     <Fragment>

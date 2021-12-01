@@ -124,4 +124,70 @@ REM Harvest bin directory of the mRemoteNG project
 REM Convert the license file "COPYING.TXT" to "License.rtf" to be shown in the installer GUI
 "$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"</PreBuildEvent>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <Cultures>en-US</Cultures>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Debug;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <LinkerAdditionalOptions />
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Release;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <Cultures>en-US</Cultures>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Portable|x64' ">
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Debug Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Portable|x64' ">
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\x64\Release Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+    <SuppressAllWarnings>True</SuppressAllWarnings>
+    <Pedantic>False</Pedantic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <Cultures>en-US</Cultures>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Debug;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <LinkerAdditionalOptions />
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Release;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <Cultures>en-US</Cultures>
+    <SuppressPdbOutput>True</SuppressPdbOutput>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Portable|x64' ">
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Debug Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Portable|x64' ">
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\Release Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Portable|x64' ">
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Portable|x64' ">
+    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
 </Project>
