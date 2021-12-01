@@ -61,11 +61,8 @@ namespace mRemoteNG.Security
         {
             if (!disposing) return;
 
-            if(_machineKey != null)
-                _machineKey.Dispose();
-
-            if(_secureString != null)
-            _secureString.Dispose();
+            _machineKey?.Dispose();
+            _secureString?.Dispose();
         }
 
         public void Dispose()

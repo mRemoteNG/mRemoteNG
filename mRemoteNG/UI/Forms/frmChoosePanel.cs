@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Panels;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Forms
         public FrmChoosePanel()
         {
             InitializeComponent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Panel_16x);
             _panelAdder = new PanelAdder();
         }
 

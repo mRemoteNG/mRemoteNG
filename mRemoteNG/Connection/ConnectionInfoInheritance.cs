@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection
 {
@@ -91,6 +91,15 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         [Browsable(true)]
         public bool SSHTunnelConnectionName { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         LocalizedAttributes.LocalizedDisplayNameInheritAttribute(nameof(Language.OpeningCommand)),
+         LocalizedAttributes.LocalizedDescriptionInheritAttribute(nameof(Language.PropertyDescriptionOpeningCommand)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(true)]
+        public bool OpeningCommand { get; set; }
+
+        
 
         #endregion
 

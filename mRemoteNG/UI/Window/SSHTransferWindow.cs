@@ -6,9 +6,9 @@ using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Window
 {
@@ -104,7 +104,7 @@ namespace mRemoteNG.UI.Window
             // 
             btnTransfer._mice = MrngButton.MouseState.HOVER;
             btnTransfer.FlatStyle = FlatStyle.Flat;
-            btnTransfer.Image = Properties.Resources.SSHTransfer;
+            btnTransfer.Image = Properties.Resources.SyncArrow_16x;
             btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             btnTransfer.Location = new System.Drawing.Point(562, 145);
             btnTransfer.Name = "btnTransfer";
@@ -296,7 +296,6 @@ namespace mRemoteNG.UI.Window
             Controls.Add(pbStatus);
             Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
                                                 System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             Name = "SSHTransferWindow";
             TabText = "SSH File Transfer";
             Text = "SSH File Transfer";
@@ -350,6 +349,7 @@ namespace mRemoteNG.UI.Window
         {
             ApplyTheme();
             ApplyLanguage();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.SyncArrow_16x);
             var display = new DisplayProperties();
             btnTransfer.Image = display.ScaleImage(btnTransfer.Image);
         }

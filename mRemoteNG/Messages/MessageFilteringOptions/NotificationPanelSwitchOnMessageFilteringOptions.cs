@@ -6,26 +6,26 @@ namespace mRemoteNG.Messages.MessageFilteringOptions
     {
         public bool AllowDebugMessages
         {
-            get { return false; }
+            get => false;
             set { }
         }
 
         public bool AllowInfoMessages
         {
-            get { return Settings.Default.SwitchToMCOnInformation; }
-            set { Settings.Default.SwitchToMCOnInformation = value; }
+            get => Settings.Default.SwitchToMCOnInformation;
+            set => Settings.Default.SwitchToMCOnInformation = value;
         }
 
         public bool AllowWarningMessages
         {
-            get { return Settings.Default.SwitchToMCOnWarning; }
-            set { Settings.Default.SwitchToMCOnWarning = value; }
+            get => Settings.Default.SwitchToMCOnWarning;
+            set => Settings.Default.SwitchToMCOnWarning = value;
         }
 
         public bool AllowErrorMessages
         {
-            get { return Settings.Default.SwitchToMCOnError; }
-            set { Settings.Default.SwitchToMCOnError = value; }
+            get => Settings.Default.SwitchToMCOnError;
+            set => Settings.Default.SwitchToMCOnError = value;
         }
     }
 }

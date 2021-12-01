@@ -6,8 +6,8 @@ using mRemoteNG.Config.Import;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.App
 {

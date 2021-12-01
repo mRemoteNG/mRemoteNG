@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -12,7 +13,8 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 {
-	public class ConfigWindowGeneralTests
+    [Apartment(ApartmentState.STA)]
+    public class ConfigWindowGeneralTests
     {
         private ConfigWindow _configWindow;
 
@@ -249,6 +251,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.UserField),
                 nameof(ConnectionInfo.Favorite),
                 nameof(ConnectionInfo.SSHTunnelConnectionName),
+                nameof(ConnectionInfo.OpeningCommand),
             };
 
             if (!isContainer)
@@ -294,7 +297,9 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSmartCards),
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
-						nameof(ConnectionInfo.RdpVersion)
+						nameof(ConnectionInfo.RdpVersion),
+                        nameof(ConnectionInfo.OpeningCommand),
+                        nameof(ConnectionInfo.StartProgram)
                     });
                     break;
                 case ProtocolType.VNC:

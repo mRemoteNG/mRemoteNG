@@ -1,5 +1,4 @@
-﻿using mRemoteNG.Config.Serializers;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
@@ -32,7 +31,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
         private const RDPSounds ExpectedSoundRedirection = RDPSounds.BringToThisComputer;
-
+        private const string ExpectedStartProgram = "alternate shell";
 
         [OneTimeSetUp]
         public void OnetimeSetup()
@@ -173,6 +172,13 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         {
             var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
             Assert.That(connectionInfo.LoadBalanceInfo, Is.EqualTo(ExpectedLoadBalanceInfo));
+        }
+
+        [Test]
+        public void StartProgramImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.StartProgram, Is.EqualTo(ExpectedStartProgram));
         }
 
         //[Test]

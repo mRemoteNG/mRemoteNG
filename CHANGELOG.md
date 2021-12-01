@@ -6,19 +6,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 - #327: Added Alternative Shell for RDP settings
+- #1476: Configurable backups. Can now edit/set backup frequency, backup path, and max number of backup files.
+- #1427: Fix RDP local desktop scale not taking effect on remote
 - #1770: Added missing RDP performance settings
 - #1332: Added option to hide menu strip container
 - #545: Option to minimize to system tray on closing
 - #420: SSH tunneling implemented
 - #319: Override quick connect username when using user@domain
 - #283: Support for native PowerShell remoting as new protocol
+- #1850: Minify config xml
+- #1516: added API to access credential vault (Thycotic Secret Server) by specifying SSAPI:ID as username
+- #503: SSH Execute a single command after login
 ### Changed
+- #2022: Replaced CefSharp with WebView2
+- #2014: Revised icons
+- #2013: Removed components check
+- #2011: Removed screenshot manager
+- #2010: Redesigned menus
+- #2005: Removed in-app documentation
 - #1777: Cleaned up VisualStudio project structure
 - #1767: Turned about window into a simple popup form
-- #1766: Converted components check page into options page
 - #1690: Replaced GeckoFX (Firefox) with CefSharp (Chromium)
 - #1325: Language resource files cleanup
 ### Fixed
+- #1884: Allow setting Port when using MSSQL
 - #1783: Added missing inheritance properties to SQL scripts
 - #1773: Connection issue with mysql - Missing fields in 
 - #1756: Cannot type any character on MultiSSH toolbar 
@@ -31,6 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1465: REGRESSION: Smart Cards redirection to Remote Desktop not working
 - #1337: Unhandled exception after closing mRemoteNG
 - #359: Making a VNC connection to an unreachable host causes the application to not respond for 20-30 seconds
+- #618: Do not break the Windows Clipboard Chain when exiting.
 
 ## [1.77.1] - 2019-09-02
 ### Added

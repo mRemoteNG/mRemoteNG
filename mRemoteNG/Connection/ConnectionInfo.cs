@@ -15,8 +15,8 @@ using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Connection
@@ -363,6 +363,8 @@ namespace mRemoteNG.Connection
             MacAddress = Settings.Default.ConDefaultMacAddress;
             UserField = Settings.Default.ConDefaultUserField;
             Favorite = Settings.Default.ConDefaultFavorite;
+            StartProgram = Settings.Default.ConDefaultStartProgram;
+            OpeningCommand = Settings.Default.OpeningCommand;
         }
 
         private void SetVncDefaults()

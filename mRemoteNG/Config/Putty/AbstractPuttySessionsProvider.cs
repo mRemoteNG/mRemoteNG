@@ -13,10 +13,7 @@ namespace mRemoteNG.Config.Putty
     {
         public virtual RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo();
 
-        protected virtual List<PuttySessionInfo> Sessions
-        {
-            get { return RootInfo.Children.OfType<PuttySessionInfo>().ToList(); }
-        }
+        protected virtual List<PuttySessionInfo> Sessions => RootInfo.Children.OfType<PuttySessionInfo>().ToList();
 
         #region Public Methods
 

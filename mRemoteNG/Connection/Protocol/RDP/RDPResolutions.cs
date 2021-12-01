@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using mRemoteNG.Config.Serializers;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -39,7 +38,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
         private const AuthenticationLevel ExpectedAuthLevel = AuthenticationLevel.WarnOnFailedAuth;
-
+        private const string ExpectedStartProgram = "alternate shell";
 
         [OneTimeSetUp]
         public void OnetimeSetup()
@@ -165,6 +164,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPrinters), ExpectedPrinterRedirection).SetName(nameof(ConnectionInfo.RedirectPrinters)),
 		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPorts), ExpectedPortRedirection).SetName(nameof(ConnectionInfo.RedirectPorts)),
 		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectDiskDrives), ExpectedDriveRedirection).SetName(nameof(ConnectionInfo.RedirectDiskDrives)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.StartProgram), ExpectedStartProgram).SetName(nameof(ConnectionInfo.StartProgram)),
 			};
         }
 

@@ -5,8 +5,8 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Tools
@@ -28,7 +28,7 @@ namespace mRemoteNG.Tools
                 _cMenCons = new ToolStripMenuItem
                 {
                     Text = Language.Connections,
-                    Image = Properties.Resources.Root
+                    Image = Properties.Resources.ASPWebSite_16x
                 };
 
                 var cMenSep1 = new ToolStripSeparator();

@@ -1,6 +1,5 @@
-﻿
-
-using mRemoteNG.UI.Controls;
+﻿using mRemoteNG.UI.Controls;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -154,7 +153,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt";
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(492, 17);
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 1;
-            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = global::mRemoteNG.Resources.Language.Language.SingleClickOnOpenConnectionSwitchesToIt;
+            this.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.SingleClickOnOpenConnectionSwitchesToIt;
             this.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = true;
             // 
             // lblAutoSave1

@@ -1,7 +1,7 @@
 ﻿using System;
 using mRemoteNG.App;
-using mRemoteNG.Resources.Language;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.UI.Window
@@ -68,7 +68,6 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.tsMain);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular,
                                                 System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = global::mRemoteNG.Properties.Resources.UVNC_SC_Icon;
             this.Name = "UltraVNCWindow";
             this.TabText = "UltraVNC SC";
             this.Text = "UltraVNC SC";

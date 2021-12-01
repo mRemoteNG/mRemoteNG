@@ -26,6 +26,7 @@ namespace mRemoteNG.UI.Forms
             Cursor.Current = Cursors.WaitCursor;
             Application.DoEvents();
             InitializeComponent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
             _pageName = pn;
             Cursor.Current = Cursors.Default;
         }
@@ -81,7 +82,8 @@ namespace mRemoteNG.UI.Forms
                 {typeof(ThemePage).Name, new ThemePage {Dock = DockStyle.Fill}},
                 {typeof(SecurityPage).Name, new SecurityPage {Dock = DockStyle.Fill}},
                 {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}},
-                {typeof(ComponentsPage).Name, new ComponentsPage {Dock = DockStyle.Fill}},
+                {typeof(BackupPage).Name, new BackupPage {Dock = DockStyle.Fill}},
+                //{typeof(ComponentsPage).Name, new ComponentsPage {Dock = DockStyle.Fill}},
             };
         }
 
@@ -101,7 +103,7 @@ namespace mRemoteNG.UI.Forms
         private object ImageGetter(object rowobject)
         {
             var page = rowobject as OptionsPage;
-            return page?.PageIcon == null ? _display.ScaleImage(Properties.Resources.Help) : _display.ScaleImage(page.PageIcon);
+            return page?.PageIcon == null ? _display.ScaleImage(Properties.Resources.F1Help_16x) : _display.ScaleImage(page.PageIcon);
         }
 
         private void SetInitiallyActivatedPage()

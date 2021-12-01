@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mRemoteNG" GeneratedClassName="Settings" UseMySettingsClassName="true">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mRemoteNG.Properties" GeneratedClassName="Settings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
     <Setting Name="MainFormLocation" Type="System.Drawing.Point" Scope="User">
@@ -377,9 +377,6 @@
     <Setting Name="XULRunnerPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
-      <Value Profile="(Default)">CEF</Value>
-    </Setting>
     <Setting Name="InhDefaultRenderingEngine" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -696,7 +693,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="PlaceSearchBarAboveConnectionTree" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="AlwaysShowConnectionTabs" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -724,6 +721,9 @@
     </Setting>
     <Setting Name="InhDefaultUseVmId" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SaveConnectionsFrequency" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ConDefaultRdpVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)">Highest</Value>
@@ -755,7 +755,7 @@
     <Setting Name="CloseToTray" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="StartupComponentsCheck" Type="System.String" Scope="User">
+    <Setting Name="StartupComponentsCheck" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultDisableFullWindowDrag" Type="System.Boolean" Scope="User">
@@ -770,11 +770,36 @@
     <Setting Name="ConDefaultDisableCursorBlinking" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ConDefaultStartProgram" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="ConDefaultICAEncryptionStrength" Type="System.String" Scope="User">
       <Value Profile="(Default)">EncrBasic</Value>
     </Setting>
     <Setting Name="InhDefaultICAEncryptionStrength" Type="System.String" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="StartFullScreen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ViewMenuMessages" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ViewMenuQuickConnect" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ViewMenuExternalTools" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ViewMenuMultiSSH" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EdgeChromium</Value>
+    </Setting>
+    <Setting Name="OpeningCommand" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+        </Value>
     </Setting>
   </Settings>
 </SettingsFile>

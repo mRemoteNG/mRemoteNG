@@ -4,12 +4,12 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.App;
 using mRemoteNG.Config.Settings;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools.CustomCollections;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Window
 {
@@ -22,6 +22,7 @@ namespace mRemoteNG.UI.Window
         public ExternalToolsWindow()
         {
             InitializeComponent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Console_16x);
             WindowType = WindowType.ExternalApps;
             DockPnl = new DockContent();
             _themeManager = ThemeManager.getInstance();

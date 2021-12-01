@@ -16,7 +16,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public string Title
         {
-            get { return _title; }
+            get => _title;
             set
             {
                 _title = value;
@@ -26,7 +26,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public string TypeName
         {
-            get { return _typeName; }
+            get => _typeName;
             set
             {
                 _typeName = value;
@@ -36,7 +36,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public string Source
         {
-            get { return _source; }
+            get => _source;
             set
             {
                 _source = value;
@@ -46,7 +46,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public SecureString Key
         {
-            get { return _key; }
+            get => _key;
             set
             {
                 _key = value;
@@ -56,7 +56,7 @@ namespace mRemoteNG.Credential.Repositories
 
         public bool Loaded
         {
-            get { return _loaded; }
+            get => _loaded;
             set
             {
                 _loaded = value;

@@ -3,33 +3,17 @@ using System.Threading;
 using System.ComponentModel;
 using System.Net.Sockets;
 using mRemoteNG.App;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.Resources.Language;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace mRemoteNG.Connection.Protocol.VNC
 {
-    public class ProtocolVNC : ProtocolBase, ISupportsViewOnly
+    public class ProtocolVNC : ProtocolBase
     {
-        #region Properties
-
-        public bool SmartSize
-        {
-            get { return _vnc.Scaled; }
-            set { _vnc.Scaled = value; }
-        }
-
-        public bool ViewOnly
-        {
-            get { return _vnc.ViewOnly; }
-            set => _vnc.ViewOnly = value;
-        }
-
-        #endregion
-
         #region Private Declarations
 
         private VncSharp.RemoteDesktop _vnc;
@@ -123,36 +107,6 @@ namespace mRemoteNG.Connection.Protocol.VNC
                                                     ex.Message, true);
             }
         }
-
-        public void ToggleSmartSize()
-        {
-            try
-            {
-                SmartSize = !SmartSize;
-                RefreshScreen();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncToggleSmartSizeFailed + Environment.NewLine +
-                                                    ex.Message, true);
-            }
-        }
-
-        public void ToggleViewOnly()
-        {
-            try
-            {
-                ViewOnly = !ViewOnly;
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncToggleViewOnlyFailed + Environment.NewLine +
-                                                    ex.Message, true);
-            }
-        }
-
 
         public void StartChat()
         {

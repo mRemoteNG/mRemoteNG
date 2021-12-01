@@ -5,9 +5,9 @@ using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Connection
@@ -84,7 +84,9 @@ namespace mRemoteNG.Connection
         private string _preExtApp;
         private string _postExtApp;
         private string _macAddress;
+        private string _openingCommand;
         private string _userField;
+        private string _startProgram;
         private bool _favorite;
 
         private ProtocolVNC.Compression _vncCompression;
@@ -216,6 +218,16 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("SSHTunnelConnectionName", _sshTunnelConnectionName).Trim();
             set => SetField(ref _sshTunnelConnectionName, value?.Trim(), "SSHTunnelConnectionName");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+        LocalizedAttributes.LocalizedDisplayName(nameof(Language.OpeningCommand)),
+        LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionOpeningCommand)),
+           AttributeUsedInProtocol(ProtocolType.SSH1, ProtocolType.SSH2)]
+        public virtual string OpeningCommand
+        {
+            get => GetPropertyValue("OpeningCommand", _openingCommand);
+            set => SetField(ref _openingCommand, value, "OpeningCommand");
         }
         #endregion
 
@@ -618,7 +630,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectDrives)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.DiskDrives)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectDrives)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
@@ -646,8 +658,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public bool RedirectClipboard
         {
-            get { return GetPropertyValue("RedirectClipboard", _redirectClipboard); }
-            set { SetField(ref _redirectClipboard, value, "RedirectClipboard"); }
+            get => GetPropertyValue("RedirectClipboard", _redirectClipboard);
+            set => SetField(ref _redirectClipboard, value, "RedirectClipboard");
         }
 
 
@@ -663,7 +675,7 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectSmartCards)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.SmartCard)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectSmartCards)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
@@ -759,6 +771,17 @@ namespace mRemoteNG.Connection
             get => GetPropertyValue("Favorite", _favorite);
             set => SetField(ref _favorite, value, "Favorite");
         }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.StartProgram)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionStartProgram)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public virtual string StartProgram
+        {
+            get => GetPropertyValue("StartProgram", _startProgram);
+            set => SetField(ref _startProgram, value, "StartProgram");
+        }
+
         #endregion
 
         #region VNC

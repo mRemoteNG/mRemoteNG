@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SecretServerInterface.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SecretServerInterface_SSWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cred.sit.local/SecretServer/webservices/SSWebService.asmx</Value>
+    </Setting>
+    <Setting Name="SecretServerInterface_SSWinAuthWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://cred.sit.local/SecretServer/winauthwebservices/SSWinAuthWebService.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

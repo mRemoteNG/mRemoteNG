@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.UI.Controls;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -75,7 +76,7 @@ namespace mRemoteNG.UI.Forms
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 7;
-            this.btnOK.Text = global::mRemoteNG.Resources.Language.Language._Ok;
+            this.btnOK.Text = Language._Ok;
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
             // 
@@ -88,7 +89,7 @@ namespace mRemoteNG.UI.Forms
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = global::mRemoteNG.Resources.Language.Language._Cancel;
+            this.btnCancel.Text = Language._Cancel;
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
@@ -108,7 +109,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // pbLock
             // 
-            this.pbLock.Image = global::mRemoteNG.Properties.Resources.Lock;
+            this.pbLock.Image = global::mRemoteNG.Properties.Resources.ASPWebSite_16x;
             this.pbLock.Location = new System.Drawing.Point(3, 12);
             this.pbLock.Name = "pbLock";
             this.tableLayoutPanel1.SetRowSpan(this.pbLock, 6);

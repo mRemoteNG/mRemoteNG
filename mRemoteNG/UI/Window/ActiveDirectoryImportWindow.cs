@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Container;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Window
 {
@@ -17,6 +17,7 @@ namespace mRemoteNG.UI.Window
         {
             WindowType = WindowType.ActiveDirectoryImport;
             DockPnl = new DockContent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Schema_16x);
             InitializeComponent();
             FontOverrider.FontOverride(this);
             ApplyTheme();

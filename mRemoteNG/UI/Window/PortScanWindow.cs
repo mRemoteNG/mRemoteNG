@@ -8,10 +8,10 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Window
 {
@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Window
         public PortScanWindow()
         {
             InitializeComponent();
-
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.SearchAndApps_16x);
             WindowType = WindowType.PortScan;
             DockPnl = new DockContent();
             ApplyTheme();

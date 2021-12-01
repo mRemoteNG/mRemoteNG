@@ -1,5 +1,8 @@
+**NOTICE: This project currently transited to a new maintainer. Development help would be greatly appreciated.**
+
+<br/><br/>
 <p align="center">
-  <img width="500" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/Tools/img/logo.png">
+  <img width="500" src="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteNGProjectFiles/Header_dark.png">
 </p>
   
 <p align="center">
@@ -46,6 +49,7 @@
 | ---------------|--------------|-----------|
 | Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.20/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.20) |
 | Prerelease | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
+| Nightly build | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.2-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.2-nb) |
 
 ## Features
 
@@ -66,6 +70,7 @@ For a detailed feature list and general usage support, refer to the [Documentati
 
 ### Supported Operating Systems
 
+- [Windows 11](https://en.wikipedia.org/wiki/Windows_11)
 - [Windows 10](https://en.wikipedia.org/wiki/Windows_10)
 - [Windows 8.1](https://en.wikipedia.org/wiki/Windows_8.1)
 - [Windows Server 2019](https://en.wikipedia.org/wiki/Windows_Server_2019)
@@ -94,11 +99,9 @@ You will need to compile it yourself using Visual Studio.
 ### Minimum Requirements
 
 * [Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
-* [Microsoft .NET Framework 4.0](https://www.microsoft.com/en-us/download/details.aspx?id=17851)
+* [Microsoft .NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
 * Microsoft Terminal Service Client 6.0 or later
   * Needed if you use RDP. mstscax.dll and/or msrdp.ocx be registered.
-* [Citrix ICA Client](https://www.citrix.com/downloads/citrix-receiver.html)
-  * Needed if you use ICA. wfica.ocx must be registered
 
 ### Download
 
@@ -160,6 +163,7 @@ _If you are using the Portable version, simply deleting the folder that contains
 ## Featured Projects
 
 * [PSmRemoteNG](https://github.com/realslacker/PSmRemoteNG) A module to create mRemoteNG connection files from PowerShell.
+* [mRemoteNGOpenVPN](https://github.com/T3los/mRemoteNGOpenVPN) A script that can be embedded as an external tool to control OpenVPN.
 
 ## Contribute
 
@@ -173,5 +177,5 @@ Check out the [Wiki page](https://github.com/mRemoteNG/mRemoteNG/wiki) on how to
 
 </br>
 <p align="center">
-  <img alt="Developed with ReSharper" src="https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/develop/Tools/img/icon_ReSharper.png">
+  <img alt="Developed with ReSharper" src="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteNGProjectFiles/icon_ReSharper.png">
 </p>

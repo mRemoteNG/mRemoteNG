@@ -173,7 +173,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RenderingEngine = HTTPBase.RenderingEngine.CEF;
+            _testAbstractConnectionInfoData.RenderingEngine = HTTPBase.RenderingEngine.EdgeChromium;
             Assert.That(wasCalled, Is.True);
         }
 
@@ -363,6 +363,15 @@ namespace mRemoteNGTests.Connection
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
             _testAbstractConnectionInfoData.RedirectSound = RDPSounds.DoNotPlay;
+            Assert.That(wasCalled, Is.True);
+        }
+
+        [Test]
+        public void OpeningCommandNotifiesOnValueChange()
+        {
+            var wasCalled = false;
+            _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
+            _testAbstractConnectionInfoData.OpeningCommand = "a";
             Assert.That(wasCalled, Is.True);
         }
 

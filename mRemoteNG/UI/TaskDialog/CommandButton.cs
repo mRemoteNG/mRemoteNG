@@ -1,4 +1,4 @@
-using mRemoteNG.Themes;
+﻿using mRemoteNG.Themes;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -40,7 +40,7 @@ namespace mRemoteNG.UI.TaskDialog
         // Override this to make sure the control is invalidated (repainted) when 'Text' is changed
         public override string Text
         {
-            get { return base.Text; }
+            get => base.Text;
             set
             {
                 base.Text = value;
@@ -61,7 +61,7 @@ namespace mRemoteNG.UI.TaskDialog
         [DefaultValue(true)]
         public bool AutoHeight
         {
-            get { return m_autoHeight; }
+            get => m_autoHeight;
             set
             {
                 m_autoHeight = value;
@@ -152,8 +152,8 @@ namespace mRemoteNG.UI.TaskDialog
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            imgArrow1 = Properties.Resources.green_arrow1;
-            imgArrow2 = Properties.Resources.green_arrow2;
+            imgArrow1 = Properties.Resources.GlyphRight_16x;
+            imgArrow2 = Properties.Resources.GlyphRight_16x;
         }
 
         //--------------------------------------------------------------------------------

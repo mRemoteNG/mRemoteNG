@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
-using mRemoteNG.Resources.Language;
 using mRemoteNG.Themes;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Forms
         private FrmAbout()
         {
             InitializeComponent();
+            Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.UIAboutBox_16x);
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
             ApplyTheme();

@@ -14,10 +14,7 @@ namespace mRemoteNG.Config.Putty
 
         private readonly List<AbstractPuttySessionsProvider> _providers = new List<AbstractPuttySessionsProvider>();
 
-        public IEnumerable<AbstractPuttySessionsProvider> Providers
-        {
-            get { return _providers; }
-        }
+        public IEnumerable<AbstractPuttySessionsProvider> Providers => _providers;
 
         public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new List<RootPuttySessionsNodeInfo>();
 
@@ -134,10 +131,7 @@ namespace mRemoteNG.Config.Putty
 
         public class SessionList : StringConverter
         {
-            public static string[] Names
-            {
-                get { return Instance.GetSessionNames(); }
-            }
+            public static string[] Names => Instance.GetSessionNames();
 
             public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
             {

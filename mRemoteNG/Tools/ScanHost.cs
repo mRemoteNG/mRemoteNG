@@ -87,40 +87,19 @@ namespace mRemoteNG.Tools
             }
         }
 
-        public string RdpName
-        {
-            get { return BoolToYesNo(Rdp); }
-        }
+        public string RdpName => BoolToYesNo(Rdp);
 
-        public string VncName
-        {
-            get { return BoolToYesNo(Vnc); }
-        }
+        public string VncName => BoolToYesNo(Vnc);
 
-        public string SshName
-        {
-            get { return BoolToYesNo(Rdp); }
-        }
+        public string SshName => BoolToYesNo(Rdp);
 
-        public string TelnetName
-        {
-            get { return BoolToYesNo(Telnet); }
-        }
+        public string TelnetName => BoolToYesNo(Telnet);
 
-        public string RloginName
-        {
-            get { return BoolToYesNo(Rlogin); }
-        }
+        public string RloginName => BoolToYesNo(Rlogin);
 
-        public string HttpName
-        {
-            get { return BoolToYesNo(Http); }
-        }
+        public string HttpName => BoolToYesNo(Http);
 
-        public string HttpsName
-        {
-            get { return BoolToYesNo(Https); }
-        }
+        public string HttpsName => BoolToYesNo(Https);
 
         public string OpenPortsName
         {

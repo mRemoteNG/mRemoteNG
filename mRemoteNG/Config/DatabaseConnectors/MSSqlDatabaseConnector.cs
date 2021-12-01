@@ -26,10 +26,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
             return new SqlCommand(dbCommand, (SqlConnection) _dbConnection);
         }
 
-        public bool IsConnected
-        {
-            get { return (_dbConnection.State == ConnectionState.Open); }
-        }
+        public bool IsConnected => (_dbConnection.State == ConnectionState.Open);
 
         public MSSqlDatabaseConnector(string sqlServer, string catalog, string username, string password)
         {
@@ -56,12 +53,26 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         private void BuildDbConnectionStringWithCustomCredentials()
         {
-            _dbConnectionString = $"Data Source={_dbHost};Initial Catalog={_dbCatalog};User Id={_dbUsername};Password={_dbPassword}";
+            string[] hostParts = _dbHost.Split(new char[] { ':' }, 2);
+            var _dbPort = (hostParts.Length == 2) ? hostParts[1] : "1433";
+
+            _dbConnectionString = new SqlConnectionStringBuilder
+            {
+                DataSource = $"{hostParts[0]},{_dbPort}",
+                InitialCatalog = _dbCatalog,
+                UserID = _dbUsername,
+                Password = _dbPassword,
+            }.ToString();
         }
 
         private void BuildDbConnectionStringWithDefaultCredentials()
         {
-            _dbConnectionString = $"Data Source={_dbHost};Initial Catalog={_dbCatalog};Integrated Security=True";
+            _dbConnectionString = new SqlConnectionStringBuilder
+            {
+                DataSource = _dbHost,
+                InitialCatalog = _dbCatalog,
+                IntegratedSecurity = true
+            }.ToString();
         }
 
         public void Connect()
