@@ -111,12 +111,13 @@ namespace mRemoteNG.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon Backup_Icon {
+        internal static System.Drawing.Bitmap DocumentsFolder_16x
+        {
             get {
-                object obj = ResourceManager.GetObject("Backup_Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("DocumentsFolder_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
