@@ -16,7 +16,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
     {
         #region Private Declarations
 
-        private VncSharp.RemoteDesktop _vnc;
+        private VncSharpCore.RemoteDesktop _vnc;
         private ConnectionInfo _info;
         private static bool _isConnectionSuccessful;
         private static Exception _socketexception;
@@ -28,7 +28,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
         public ProtocolVNC()
         {
-            Control = new VncSharp.RemoteDesktop();
+            Control = new VncSharpCore.RemoteDesktop();
         }
 
         public override bool Initialize()
@@ -37,7 +37,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
             try
             {
-                _vnc = (VncSharp.RemoteDesktop)Control;
+                _vnc = (VncSharpCore.RemoteDesktop)Control;
                 _info = InterfaceControl.Info;
                 _vnc.VncPort = _info.Port;
 
@@ -93,10 +93,10 @@ namespace mRemoteNG.Connection.Protocol.VNC
                 switch (Keys)
                 {
                     case SpecialKeys.CtrlAltDel:
-                        _vnc.SendSpecialKeys(VncSharp.SpecialKeys.CtrlAltDel);
+                        _vnc.SendSpecialKeys(VncSharpCore.SpecialKeys.CtrlAltDel);
                         break;
                     case SpecialKeys.CtrlEsc:
-                        _vnc.SendSpecialKeys(VncSharp.SpecialKeys.CtrlEsc);
+                        _vnc.SendSpecialKeys(VncSharpCore.SpecialKeys.CtrlEsc);
                         break;
                 }
             }
