@@ -25,7 +25,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DefineConstants />
     <Optimize>false</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\x64\Release\</OutputPath>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
@@ -33,7 +33,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|x64'">
     <DefineConstants>DEBUG;PORTABLE</DefineConstants>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug Portable\</OutputPath>
+    <OutputPath>bin\x64\Debug Portable\</OutputPath>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Portable|x64'">
     <DefineConstants>PORTABLE</DefineConstants>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Release Portable\</OutputPath>
+    <OutputPath>bin\x64\Release Portable\</OutputPath>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
