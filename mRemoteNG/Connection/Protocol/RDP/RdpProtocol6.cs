@@ -302,8 +302,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
 
-            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.StartProgram;
-
             _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(connectionInfo.CacheBitmaps);
             if (_rdpVersion >= Versions.RDC61)
             {
