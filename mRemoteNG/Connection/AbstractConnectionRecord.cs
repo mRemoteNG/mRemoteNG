@@ -27,7 +27,8 @@ namespace mRemoteNG.Connection
         private string _domain = "";
         private string _vmId = "";
         private bool _useEnhancedMode;
-
+        private string _startProgramWorkDir = "";
+        
         private string _sshTunnelConnectionName = "";
         private ProtocolType _protocol;
         private RdpVersion _rdpProtocolVersion;
@@ -750,6 +751,16 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("StartProgram", _startProgram);
             set => SetField(ref _startProgram, value, "StartProgram");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RDPStartProgramWorkDir)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPStartProgramWorkDir)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public virtual string StartProgramWorkDir
+        {
+            get => GetPropertyValue("StartProgramWorkDir", _startProgramWorkDir);
+            set => SetField(ref _startProgramWorkDir, value, "StartProgramWorkDir");
         }
 
         #endregion

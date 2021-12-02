@@ -287,6 +287,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _alertOnIdleDisconnect = connectionInfo.RDPAlertIdleTimeout;
             _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = connectionInfo.RDPMinutesToIdleTimeout;
 
+            #region Remote Desktop Services
+            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.StartProgram;
+            _rdpClient.SecuredSettings2.WorkDir = connectionInfo.StartProgramWorkDir;
+            #endregion
+
             //not user changeable
             _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
             _rdpClient.AdvancedSettings3.EnableAutoReconnect = true;
@@ -296,8 +301,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
 
             _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
-
-            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.StartProgram;
 
             _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(connectionInfo.CacheBitmaps);
             if (_rdpVersion >= Versions.RDC61)

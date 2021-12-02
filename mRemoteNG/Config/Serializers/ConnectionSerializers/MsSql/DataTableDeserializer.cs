@@ -123,6 +123,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             connectionInfo.RedirectSound = (RDPSounds)Enum.Parse(typeof(RDPSounds), (string)dataRow["RedirectSound"]);
             connectionInfo.SoundQuality = (RDPSoundQuality)Enum.Parse(typeof(RDPSoundQuality), (string)dataRow["SoundQuality"]);
             connectionInfo.RedirectAudioCapture = (bool)dataRow["RedirectAudioCapture"];
+            connectionInfo.StartProgram = (string)dataRow["StartProgram"];
+            connectionInfo.StartProgramWorkDir = (string)dataRow["StartProgramWorkDir"];
             connectionInfo.RedirectKeys = (bool)dataRow["RedirectKeys"];
             connectionInfo.OpeningCommand = (string)dataRow["OpeningCommand"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
