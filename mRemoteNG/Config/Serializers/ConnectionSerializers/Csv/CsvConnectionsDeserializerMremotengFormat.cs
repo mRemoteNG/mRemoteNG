@@ -136,6 +136,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("LoadBalanceInfo")]
                 : "";
 
+            connectionRecord.OpeningCommand = headers.Contains("OpeningCommand")
+                ? connectionCsv[headers.IndexOf("OpeningCommand")]
+                : "";
+
             connectionRecord.PreExtApp = headers.Contains("PreExtApp")
                 ? connectionCsv[headers.IndexOf("PreExtApp")]
                 : "";
@@ -184,6 +188,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
             connectionRecord.RDGatewayHostname = headers.Contains("RDGatewayHostname")
                 ? connectionCsv[headers.IndexOf("RDGatewayHostname")]
+                : "";
+
+            connectionRecord.StartProgram = headers.Contains("StartProgram")
+                ? connectionCsv[headers.IndexOf("StartProgram")]
+                : "";
+
+            connectionRecord.StartProgramWorkDir = headers.Contains("StartProgramWorkDir")
+                ? connectionCsv[headers.IndexOf("StartProgramWorkDir")]
                 : "";
 
             if (headers.Contains("Protocol"))
@@ -536,6 +548,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.Inheritance.SSHTunnelConnectionName = value;
             }
 
+            if (headers.Contains("InheritOpeningCommand"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritOpeningCommand")], out bool value))
+                    connectionRecord.Inheritance.OpeningCommand = value;
+            }
+
             if (headers.Contains("InheritSSHOptions"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritSSHOptions")], out bool value))
@@ -654,6 +672,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritLoadBalanceInfo")], out bool value))
                     connectionRecord.Inheritance.LoadBalanceInfo = value;
+            }
+
+            if (headers.Contains("InheritOpeningCommand"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritOpeningCommand")], out bool value))
+                    connectionRecord.Inheritance.OpeningCommand = value;
             }
 
             if (headers.Contains("InheritPreExtApp"))

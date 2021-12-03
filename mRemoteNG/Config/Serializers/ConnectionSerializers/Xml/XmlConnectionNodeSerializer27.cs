@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.App;
@@ -76,6 +76,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
             element.Add(new XAttribute("RdpVersion", connectionInfo.RdpVersion.ToString().ToLowerInvariant()));
             element.Add(new XAttribute("SSHTunnelConnectionName", connectionInfo.SSHTunnelConnectionName));
+            element.Add(new XAttribute("OpeningCommand", connectionInfo.OpeningCommand));
             element.Add(new XAttribute("SSHOptions", connectionInfo.SSHOptions));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
@@ -115,6 +116,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("Favorite", connectionInfo.Favorite));
             element.Add(new XAttribute("ExtApp", connectionInfo.ExtApp));
             element.Add(new XAttribute("StartProgram", connectionInfo.StartProgram));
+            element.Add(new XAttribute("StartProgramWorkDir", connectionInfo.StartProgramWorkDir));
             element.Add(new XAttribute("VNCCompression", connectionInfo.VNCCompression));
             element.Add(new XAttribute("VNCEncoding", connectionInfo.VNCEncoding));
             element.Add(new XAttribute("VNCAuthMode", connectionInfo.VNCAuthMode));
@@ -194,6 +196,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     element.Add(new XAttribute("InheritRdpVersion", inheritance.RdpVersion.ToString().ToLowerInvariant()));
                 if (inheritance.SSHTunnelConnectionName)
                     element.Add(new XAttribute("InheritSSHTunnelConnectionName", inheritance.SSHTunnelConnectionName.ToString().ToLowerInvariant()));
+                if (inheritance.OpeningCommand)
+                    element.Add(new XAttribute("InheritOpeningCommand", inheritance.OpeningCommand.ToString().ToLowerInvariant()));
                 if (inheritance.SSHOptions)
                     element.Add(new XAttribute("InheritSSHOptions", inheritance.SSHOptions.ToString().ToLowerInvariant()));
                 if (inheritance.PuttySession)

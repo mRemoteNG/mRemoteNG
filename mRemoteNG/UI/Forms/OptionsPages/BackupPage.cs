@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             InitializeComponent();
             ApplyTheme();
-            PageIcon = Properties.Resources.Backup_Icon;
+            PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.DocumentsFolder_16x);
         }
 
         public override string PageName

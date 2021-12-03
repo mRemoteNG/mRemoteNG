@@ -56,12 +56,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             if (_saveFilter.SaveDomain)
                 sb.Append("Domain;");
 
-            sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
+            sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;OpeningCommand;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
                       "LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;DisableFullWindowDrag;DisableMenuAnimations;DisableCursorShadow;DisableCursorBlinking;" +
                       "CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
                       "PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
                       "VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;" +
-                      "RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;RedirectAudioCapture;RdpVersion;");
+                      "RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;RedirectAudioCapture;RdpVersion;StartProgram;StartProgramWorkDir;");
 
             if (_saveFilter.SaveInheritance)
                 sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;" +
@@ -120,6 +120,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.VmId))
               .Append(FormatForCsv(con.Protocol))
               .Append(FormatForCsv(con.SSHTunnelConnectionName))
+              .Append(FormatForCsv(con.OpeningCommand))
               .Append(FormatForCsv(con.SSHOptions))
               .Append(FormatForCsv(con.PuttySession))
               .Append(FormatForCsv(con.UseConsoleSession))
@@ -172,7 +173,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.RDGatewayPassword))
               .Append(FormatForCsv(con.RDGatewayDomain))
               .Append(FormatForCsv(con.RedirectAudioCapture))
-              .Append(FormatForCsv(con.RdpVersion));
+              .Append(FormatForCsv(con.RdpVersion))
+              .Append(FormatForCsv(con.StartProgram))
+              .Append(FormatForCsv(con.StartProgramWorkDir));
 
 
             if (!_saveFilter.SaveInheritance)
@@ -196,6 +199,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.Port))
               .Append(FormatForCsv(con.Inheritance.Protocol))
               .Append(FormatForCsv(con.Inheritance.SSHTunnelConnectionName))
+              .Append(FormatForCsv(con.Inheritance.OpeningCommand))
               .Append(FormatForCsv(con.Inheritance.SSHOptions))
               .Append(FormatForCsv(con.Inheritance.PuttySession))
               .Append(FormatForCsv(con.Inheritance.RedirectDiskDrives))

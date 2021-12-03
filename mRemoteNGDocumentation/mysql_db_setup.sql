@@ -161,6 +161,8 @@ CREATE TABLE `tblCons` (
 	`InheritVNCSmartSizeMode` tinyint(1) NOT NULL,
 	`InheritVNCViewOnly` tinyint(1) NOT NULL,
 	`InheritVmId` tinyint(1) DEFAULT NULL,
+	`StartProgram` varchar(512) DEFAULT NULL,
+	`StartProgramWorkDir` varchar(512) DEFAULT NULL,
     PRIMARY KEY (`ConstantID`),
     UNIQUE (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3324 DEFAULT CHARSET=latin1;
@@ -177,7 +179,7 @@ CREATE TABLE `tblRoot` (
     `Name` varchar(2048) NOT NULL,
     `Export` tinyint(1) NOT NULL,
     `Protected` varchar(4048) NOT NULL,
-    `ConfVersion` double NOT NULL
+    `ConfVersion` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
     

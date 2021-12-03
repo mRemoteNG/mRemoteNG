@@ -203,6 +203,13 @@ namespace mRemoteNG.Connection.Protocol
                                                     string.Format(Language.PanelHandle,
                                                                   InterfaceControl.Parent.Handle), true);
 
+                if (!string.IsNullOrEmpty(InterfaceControl.Info?.OpeningCommand))
+                {
+                    NativeMethods.SetForegroundWindow(PuttyHandle);
+                    var finalCommand = InterfaceControl.Info.OpeningCommand.TrimEnd() + "\n";
+                    SendKeys.SendWait(finalCommand);
+                }
+
                 Resize(this, new EventArgs());
                 base.Connect();
                 return true;

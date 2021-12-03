@@ -140,9 +140,9 @@ namespace mRemoteNG.Config.Connections
             {
                 dbQuery =
                     databaseConnector.DbCommand(
-                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
-                        MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," +
-                        ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")");
+                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" +
+                        MiscTools.PrepareValueForDB(rootTreeNode.Name) + "', 0, '" + strProtected + "','" +
+                        ConnectionsFileInfo.ConnectionFileVersion.ToString() + "')");
                 dbQuery.ExecuteNonQuery();
             }
             else
@@ -172,7 +172,7 @@ namespace mRemoteNG.Config.Connections
         {
             var dbQuery = databaseConnector.DbCommand("DELETE FROM tblUpdate");
             dbQuery.ExecuteNonQuery();
-            dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')");
+            dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES('" + MiscTools.DBDate(DateTime.Now) + "')");
             dbQuery.ExecuteNonQuery();
         }
 

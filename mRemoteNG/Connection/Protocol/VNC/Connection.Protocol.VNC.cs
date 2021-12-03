@@ -12,27 +12,11 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.VNC
 {
-    public class ProtocolVNC : ProtocolBase, ISupportsViewOnly
+    public class ProtocolVNC : ProtocolBase
     {
-        #region Properties
-
-        public bool SmartSize
-        {
-            get => _vnc.Scaled;
-            set => _vnc.Scaled = value;
-        }
-
-        public bool ViewOnly
-        {
-            get => _vnc.ViewOnly;
-            set => _vnc.ViewOnly = value;
-        }
-
-        #endregion
-
         #region Private Declarations
 
-        private VncSharp.RemoteDesktop _vnc;
+        private VncSharpCore.RemoteDesktop _vnc;
         private ConnectionInfo _info;
         private static bool _isConnectionSuccessful;
         private static Exception _socketexception;
@@ -44,7 +28,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
         public ProtocolVNC()
         {
-            Control = new VncSharp.RemoteDesktop();
+            Control = new VncSharpCore.RemoteDesktop();
         }
 
         public override bool Initialize()
@@ -53,7 +37,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
             try
             {
-                _vnc = (VncSharp.RemoteDesktop)Control;
+                _vnc = (VncSharpCore.RemoteDesktop)Control;
                 _info = InterfaceControl.Info;
                 _vnc.VncPort = _info.Port;
 
@@ -109,10 +93,10 @@ namespace mRemoteNG.Connection.Protocol.VNC
                 switch (Keys)
                 {
                     case SpecialKeys.CtrlAltDel:
-                        _vnc.SendSpecialKeys(VncSharp.SpecialKeys.CtrlAltDel);
+                        _vnc.SendSpecialKeys(VncSharpCore.SpecialKeys.CtrlAltDel);
                         break;
                     case SpecialKeys.CtrlEsc:
-                        _vnc.SendSpecialKeys(VncSharp.SpecialKeys.CtrlEsc);
+                        _vnc.SendSpecialKeys(VncSharpCore.SpecialKeys.CtrlEsc);
                         break;
                 }
             }
@@ -123,36 +107,6 @@ namespace mRemoteNG.Connection.Protocol.VNC
                                                     ex.Message, true);
             }
         }
-
-        public void ToggleSmartSize()
-        {
-            try
-            {
-                SmartSize = !SmartSize;
-                RefreshScreen();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncToggleSmartSizeFailed + Environment.NewLine +
-                                                    ex.Message, true);
-            }
-        }
-
-        public void ToggleViewOnly()
-        {
-            try
-            {
-                ViewOnly = !ViewOnly;
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    Language.VncToggleViewOnlyFailed + Environment.NewLine +
-                                                    ex.Message, true);
-            }
-        }
-
 
         public void StartChat()
         {

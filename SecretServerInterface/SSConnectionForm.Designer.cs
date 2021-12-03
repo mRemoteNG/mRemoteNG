@@ -194,7 +194,7 @@
             this.cbUseSSO.Location = new System.Drawing.Point(3, 113);
             this.cbUseSSO.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.cbUseSSO.Name = "cbUseSSO";
-            this.cbUseSSO.Size = new System.Drawing.Size(79, 17);
+            this.cbUseSSO.Size = new System.Drawing.Size(70, 17);
             this.cbUseSSO.TabIndex = 14;
             this.cbUseSSO.Text = "Use SSO";
             this.cbUseSSO.UseVisualStyleBackColor = true;
