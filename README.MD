@@ -73,6 +73,7 @@ For a detailed feature list and general usage support, refer to the [Documentati
 - [Windows 11](https://en.wikipedia.org/wiki/Windows_11)
 - [Windows 10](https://en.wikipedia.org/wiki/Windows_10)
 - [Windows 8.1](https://en.wikipedia.org/wiki/Windows_8.1)
+- [Windows Server 2022](https://en.wikipedia.org/wiki/Windows_Server_2022)
 - [Windows Server 2019](https://en.wikipedia.org/wiki/Windows_Server_2019)
 - [Windows Server 2016](https://en.wikipedia.org/wiki/Windows_Server_2016)
 - [Windows Server 2012 R2](https://en.wikipedia.org/wiki/Windows_Server_2012_R2)
