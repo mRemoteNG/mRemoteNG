@@ -70,7 +70,7 @@ namespace mRemoteNG.Connection
 
                 if (connectionInfo.Description.StartsWith("AWSAPI:"))
                 {
-                    string host = await AWSInterface.Data.EC2FetchDataService.GetEC2InstanceDataAsync(connectionInfo.Description);
+                    string host = await ExternalConnectors.AWS.EC2FetchDataService.GetEC2InstanceDataAsync(connectionInfo.Description);
                     connectionInfo.Hostname = host;
                 }
 

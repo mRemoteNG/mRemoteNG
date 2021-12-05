@@ -11,7 +11,6 @@ using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
-using SecretServerInterface;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -121,7 +120,7 @@ namespace mRemoteNG.Connection.Protocol
                             var domain = ""; // dummy
                             try
                             {
-                                SecretServerInterface.SecretServerInterface.fetchSecretFromServer(username, out username, out password, out domain);
+                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer(username, out username, out password, out domain);
                             }
                             catch (Exception ex)
                             {
