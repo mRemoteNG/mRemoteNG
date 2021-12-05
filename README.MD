@@ -47,9 +47,9 @@
 
 | Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
-| Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.20/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.20) |
-| Preview | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/prerelease?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
-| Nightly | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/nightly?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.2-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.2-nb) |
+| Stable | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.20/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.20) |
+| Preview | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/preview?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
+| Nightly | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/dnightly?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.2-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.2-nb) |
 
 ## Features
 
@@ -73,6 +73,7 @@ For a detailed feature list and general usage support, refer to the [Documentati
 - [Windows 11](https://en.wikipedia.org/wiki/Windows_11)
 - [Windows 10](https://en.wikipedia.org/wiki/Windows_10)
 - [Windows 8.1](https://en.wikipedia.org/wiki/Windows_8.1)
+- [Windows Server 2022](https://en.wikipedia.org/wiki/Windows_Server_2022)
 - [Windows Server 2019](https://en.wikipedia.org/wiki/Windows_Server_2019)
 - [Windows Server 2016](https://en.wikipedia.org/wiki/Windows_Server_2016)
 - [Windows Server 2012 R2](https://en.wikipedia.org/wiki/Windows_Server_2012_R2)
@@ -99,7 +100,7 @@ You will need to compile it yourself using Visual Studio.
 ### Minimum Requirements
 
 * [Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
-* [Microsoft .NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
+* [Microsoft .NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
 * Microsoft Terminal Service Client 6.0 or later
   * Needed if you use RDP. mstscax.dll and/or msrdp.ocx be registered.
 
