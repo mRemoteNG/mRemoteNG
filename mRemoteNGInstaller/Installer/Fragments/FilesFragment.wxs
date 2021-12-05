@@ -147,8 +147,8 @@
             <Component Id="cmp255D4D829FEC7E132FD1C14ECB455A2C" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil4F8AD9111B5248D2CBC3F4AD3D2EDB8B" KeyPath="yes" Source="$(var.HarvestPath)\VisualElements_70.png" />
             </Component>
-            <Component Id="cmpD3A62C6E1FCA8BCCB540EA093829FB0A" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil21072501EA7C63633A3FCD306B94A95D" KeyPath="yes" Source="$(var.HarvestPath)\VncSharp.dll" />
+            <Component Id="cmp0F95C4FB4AE66539A1C6029C40AA52E6" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil0B33C04EA75E681D3E3040870BDF6C0F" KeyPath="yes" Source="$(var.HarvestPath)\VncSharpCore.dll" />
             </Component>
             <Component Id="cmpBA753907719CFB8E5911F999855AB374" Directory="INSTALLDIR" Guid="*">
                 <File Id="filB22044E1A17BCF2A77B31ED2880C383E" KeyPath="yes" Source="$(var.HarvestPath)\WeifenLuo.WinFormsUI.Docking.ThemeVS2003.dll" />
