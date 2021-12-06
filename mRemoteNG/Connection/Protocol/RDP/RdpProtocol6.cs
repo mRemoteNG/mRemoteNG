@@ -469,7 +469,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 {
                     try
                     {
-                        SecretServerInterface.SecretServerInterface.fetchSecretFromServer(userName, out userName, out password, out domain);
+                        ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer(userName, out userName, out password, out domain);
                     }
                     catch (Exception ex)
                     {
