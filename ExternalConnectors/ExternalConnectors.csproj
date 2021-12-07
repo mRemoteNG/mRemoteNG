@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
     <UseWindowsForms>True</UseWindowsForms>
+    <Platforms>x64</Platforms>
+    <Configurations>Debug;Release;Debug Portable;Release Portable</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
