@@ -10,7 +10,7 @@
     <Copyright>2020 mRemoteNG Dev Team, 2010-2013 Riley McArdle, 2007-2009 Felix Deimel</Copyright>
     <PackageLicenseFile>COPYING.TXT</PackageLicenseFile>
     <PackageProjectUrl>https://mremoteng.org/</PackageProjectUrl>
-    <Platforms>AnyCPU;ARM64;x64</Platforms>
+    <Platforms>x64</Platforms>
     <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer</Configurations>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>preview</LangVersion>
@@ -19,7 +19,7 @@
     <DefineConstants>DEBUG</DefineConstants>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\x64\Debug\</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
