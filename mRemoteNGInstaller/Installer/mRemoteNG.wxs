@@ -90,7 +90,7 @@
     </Feature>
     
     <UI>
-      <UIRef Id="WixUI_FeatureTree"/>
+      <UIRef Id="My_WixUI_FeatureTree"/>
       <UIRef Id="WixUI_ErrorProgressText" />
       <Publish Dialog="ExitDialog"
         Control="Finish"

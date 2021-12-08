@@ -29,6 +29,8 @@
     <Compile Include="CustomActions\CheckForInstalledWindowsUpdates.wxs" />
     <Compile Include="CustomActions\SaveInstallLocation.wxs" />
     <Compile Include="CustomActions\UninstallLegacyVersions.wxs" />
+    <Compile Include="CustomDialogs\My_CustomizeDlg.wxs" />
+    <Compile Include="CustomDialogs\My_WixUI_FeatureTree.wxs" />
     <Compile Include="Fragments\FilesFragment.wxs" />
     <Compile Include="Fragments\DirectoriesFragment.wxs" />
     <Compile Include="Fragments\MainExeFragment.wxs" />
