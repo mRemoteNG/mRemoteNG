@@ -33,6 +33,12 @@
     </Fragment>
     <Fragment>
         <ComponentGroup Id="MandatoryComponents">
+            <Component Id="cmp0FFDB5713D4361B40AD821F8DA4DEE0B" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil476630E8F9CF75F8A90F5A6BE104F314" KeyPath="yes" Source="$(var.HarvestPath)\AWSSDK.Core.dll" />
+            </Component>
+            <Component Id="cmpEB77DBE680AF298F880635C9CE9E4C0F" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil27E42615D840C88A58DA9387A7D8E8C5" KeyPath="yes" Source="$(var.HarvestPath)\AWSSDK.EC2.dll" />
+            </Component>
             <Component Id="cmp35D96EA44AD8354ED2F995D3EBCCE1A7" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil19AFB7CDBA1EEFE8FFFF6028483B5EC8" KeyPath="yes" Source="$(var.HarvestPath)\AxInterop.MSTSCLib.dll" />
             </Component>
@@ -50,6 +56,12 @@
             </Component>
             <Component Id="cmpB33DF036D353C8FDD69458B2FE71E10B" Directory="INSTALLDIR" Guid="*">
                 <File Id="filDE15699EEB9D455A194CFECACB2D34CA" KeyPath="yes" Source="$(var.HarvestPath)\Cucumber.Messages.dll" />
+            </Component>
+            <Component Id="cmpD846FD49FC176CEFBA3E8411896C6DEE" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil86AC9D6CDBC2AE2AADFE752F1AD83685" KeyPath="yes" Source="$(var.HarvestPath)\ExternalConnectors.dll" />
+            </Component>
+            <Component Id="cmp0E22CC4281F53936AB57E54775E94F4C" Directory="INSTALLDIR" Guid="*">
+                <File Id="filEA870C5699E25304BC08ED0EFD930BC6" KeyPath="yes" Source="$(var.HarvestPath)\ExternalConnectors.pdb" />
             </Component>
             <Component Id="cmp19EC39A721B3368567C267C98B3A70BF" Directory="INSTALLDIR" Guid="*">
                 <File Id="filF4F0A4E8F055AEBFE89D956290E642D9" KeyPath="yes" Source="$(var.HarvestPath)\Google.Protobuf.dll" />
@@ -110,18 +122,6 @@
             </Component>
             <Component Id="cmpEDFC52653A3A4D5C80AB3A0B7CE9AE35" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil9C1ED4726B58F1CD4C25AF29BDBE0F77" KeyPath="yes" Source="$(var.HarvestPath)\Renci.SshNet.dll" />
-            </Component>
-            <Component Id="cmpA00CF5661042E8A2C92E994701940B20" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil3C2ECCC2300D1A596FD61DE5BDA516B9" KeyPath="yes" Source="$(var.HarvestPath)\SecretServerInterface.dll" />
-            </Component>
-            <Component Id="cmp2E457E98C683BEF1517CF4A8D5657186" Directory="INSTALLDIR" Guid="*">
-                <File Id="filFE5CA1C47FA0D581BC8CDAB8F75D8D26" KeyPath="yes" Source="$(var.HarvestPath)\SecretServerInterface.dll.config" />
-            </Component>
-            <Component Id="cmpD6C3B20DC44B6168A4264C075091DD5C" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil9C41752260F38BCD6AABB88D2382EF23" KeyPath="yes" Source="$(var.HarvestPath)\SecretServerInterface.pdb" />
-            </Component>
-            <Component Id="cmp350CD765CB2C99BEB476F5301E5FCA43" Directory="INSTALLDIR" Guid="*">
-                <File Id="filB15E8F1F97CB8BC09EBEE0923040AAAF" KeyPath="yes" Source="$(var.HarvestPath)\SecretServerInterface.XmlSerializers.dll" />
             </Component>
             <Component Id="cmpEEF6A35F8A6BADDF0E1C90F92FE0D47E" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil0DAB9F548FB79BA6060656EC4E6D6E46" KeyPath="yes" Source="$(var.HarvestPath)\SparkleLibrary.dll" />
