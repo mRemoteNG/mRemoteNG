@@ -16,10 +16,11 @@
           <Publish Event="Reset" Value="0">1</Publish>
           <Subscribe Event="SelectionNoItems" Attribute="Enabled" />
         </Control>
+        <!-- Remove disk count button (#1363). 
         <Control Id="DiskCost" Type="PushButton" X="91" Y="243" Width="100" Height="17" Text="!(loc.CustomizeDlgDiskCost)">
           <Publish Event="SpawnDialog" Value="DiskCostDlg">1</Publish>
           <Subscribe Event="SelectionNoItems" Attribute="Enabled" />
-        </Control>
+        </Control>-->
         <Control Id="Back" Type="PushButton" X="192" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)" />
         <Control Id="Next" Type="PushButton" X="248" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
           <Subscribe Event="SelectionNoItems" Attribute="Enabled" />
