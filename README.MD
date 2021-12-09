@@ -78,20 +78,6 @@ For a detailed feature list and general usage support, refer to the [Documentati
 - [Windows Server 2016](https://en.wikipedia.org/wiki/Windows_Server_2016)
 - [Windows Server 2012 R2](https://en.wikipedia.org/wiki/Windows_Server_2012_R2)
 
-### Packaging
-
-Downloads are provided in three different packages.
-
-#### Binary package
-
-The binary package of mRemoteNG is a compiled version of mRemoteNG which comes in an MSI installer.
-This is the most common way to install mRemoteNG and get up and running.
-
-#### Portable package
-
-The portable package contains a modified version of the executable which stores and loads all your settings from files in the application's directory.
-This package can be used to run mRemoteNG from a USB stick and preserve your configuration wherever you go.
-
 #### Source package
 
 This contains the source code from which mRemoteNG is build.
@@ -114,41 +100,16 @@ mRemoteNG is available as a redistributable MSI package or as a portable ZIP pac
 
 The MSI package of mRemoteNG can be installed using the command line:
 
-`msiexec /i C:\Path\To\mRemoteNG-Installer.exe [INSTALLDIR=value] [IGNOREPREREQUISITES=value]`
+`msiexec /i [/qn] C:\Path\To\mRemoteNG-Installer.exe [INSTALLDIR=value] [IGNOREPREREQUISITES=value] [/lv* <log path>]`
 
-| Property | Value | Description |
+| Argument/Property | Value | Description |
 |-|-|-|
-| INSTALLDIR | `folder path` | This allows you to set the installation directory from the command line. For paths that contain spaces, enclose the path in double quotes (""). This overrides any value found in the registry. |
+| /qn | `Silent Installation` | Will run the installer silently in the background. |
+| /lv* | `Silent Installation` | Will write a logfile to the specified location. (For paths that contain spaces, enclose the path in double quotes) |
+| INSTALLDIR | `folder path` | Allows you to set the installation directory from the command line. (For paths that contain spaces, enclose the path in double quotes) |
 | IGNOREPREREQUISITES | `0` or `1` | When set to `1`, the installer will not be halted if any prerequisite check is not met. You must still run the installer as administrator. |
 
-#### Examples
-
-**Install to a custom folder**
-
-`msiexec /i C:\Path\To\mRemoteNG-Installer.msi INSTALLDIR="D:\Work Apps\mRemoteNG"`
-
-**Ignore prerequisites during a normal install**
-
-`msiexec /i C:\Path\To\mRemoteNG-Installer.msi IGNOREPREREQUISITES=1`
-
-**Ignore prerequisites during a silent install**
-
-`msiexec /i C:\Path\To\mRemoteNG-Installer.msi /qn IGNOREPREREQUISITES=1`
-
-### Troubleshooting installation
-
-Turn on verbose logging by using the `/lv* <log path>` argument at the command line.
-
-`msiexec /i C:\Path\To\mRemoteNG-Installer.msi /l*v C:\mremoteng_install.log`
-
-## Uninstall
-
-### Standard Uninstall
-
-mRemoteNG basic binary package can be uninstalled with Windows Control Panel. If for some reason it does not work please
-follow information provided below for Manual Uninstall.
-
-### Manual Uninstall
+## Manual Uninstall
 
 _If you are using the Portable version, simply deleting the folder that contains mRemoteNG should be sufficient. These uninstall instructions are only necessary for the normal binary .MSI installed version of mRemoteNG_
 
