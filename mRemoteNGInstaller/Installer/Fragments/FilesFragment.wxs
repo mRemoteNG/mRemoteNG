@@ -123,6 +123,12 @@
             <Component Id="cmpEDFC52653A3A4D5C80AB3A0B7CE9AE35" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil9C1ED4726B58F1CD4C25AF29BDBE0F77" KeyPath="yes" Source="$(var.HarvestPath)\Renci.SshNet.dll" />
             </Component>
+            <Component Id="cmp71D2F22FB4AE52AFE966BBFE99795AC3" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil6C2A719CC70BFBC268546246DDB8752C" KeyPath="yes" Source="$(var.HarvestPath)\sigcheck.exe" />
+            </Component>
+            <Component Id="cmp5F7F44EF050CEBB0CC91115F98198566" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil0092CDA5A5F632801964A8973275EDAD" KeyPath="yes" Source="$(var.HarvestPath)\sigcheck64.exe" />
+            </Component>
             <Component Id="cmpEEF6A35F8A6BADDF0E1C90F92FE0D47E" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil0DAB9F548FB79BA6060656EC4E6D6E46" KeyPath="yes" Source="$(var.HarvestPath)\SparkleLibrary.dll" />
             </Component>
