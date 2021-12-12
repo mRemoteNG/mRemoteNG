@@ -37,6 +37,22 @@ Format-Table -AutoSize -Wrap -InputObject @{
     "ExcludeFromSigning" = $ExcludeFromSigning
 }
 
+# Move dlls resurses into folder
+#Remove-Item -Path "$TargetDir\libs" -Recurse -ErrorAction Ignore
+#New-Item -ItemType "directory" -Force -Path $TargetDir -Name "libs"
+#Move-Item -Path "$TargetDir\*.dll" -Destination "$TargetDir\libs" -force
+
+
+###
+
+# Move lang resurses into folder
+#Remove-Item -Path "$TargetDir\languages" -Recurse -ErrorAction Ignore
+#New-Item -ItemType "directory" -Force -Path $TargetDir -Name "languages"
+#"cs-CZ,de,el,en-US,es-AR,es,fr,hu,it,lt,ja-JP,ko-KR,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-TR,zh-CN,zh-TW,fi-FI".Split(",") | ForEach {
+#    Move-Item -Path "$TargetDir\$_" -Destination "$TargetDir\languages" -force
+# }
+###
+
 & "$PSScriptRoot\set_LargeAddressAware.ps1" -TargetDir $TargetDir -TargetFileName $TargetFileName
 & "$PSScriptRoot\verify_LargeAddressAware.ps1" -TargetDir $TargetDir -TargetFileName $TargetFileName
 & "$PSScriptRoot\tidy_files_for_release.ps1" -TargetDir $TargetDir -ConfigurationName $ConfigurationName
