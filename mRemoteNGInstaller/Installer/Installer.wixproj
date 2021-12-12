@@ -29,6 +29,8 @@
     <Compile Include="CustomActions\CheckForInstalledWindowsUpdates.wxs" />
     <Compile Include="CustomActions\SaveInstallLocation.wxs" />
     <Compile Include="CustomActions\UninstallLegacyVersions.wxs" />
+    <Compile Include="CustomDialogs\My_CustomizeDlg.wxs" />
+    <Compile Include="CustomDialogs\My_WixUI_FeatureTree.wxs" />
     <Compile Include="Fragments\FilesFragment.wxs" />
     <Compile Include="Fragments\DirectoriesFragment.wxs" />
     <Compile Include="Fragments\MainExeFragment.wxs" />
@@ -186,9 +188,6 @@ rmdir /S /Q "$(TargetDir)"
 echo $(ConfigurationName) &gt; buildenv.tmp
 
 REM Harvest bin directory of the mRemoteNG project
-"$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteNG\bin\x64\$(Configuration)" -ag -nologo -dr INSTALLDIR -var var.HarvestPath -srd -scom -sreg -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt"
-
-REM Convert the license file "COPYING.TXT" to "License.rtf" to be shown in the installer GUI
-"$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"</PreBuildEvent>
+"$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteNG\bin\x64\$(Configuration)" -ag -nologo -dr INSTALLDIR -var var.HarvestPath -srd -scom -sreg -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt"</PreBuildEvent>
   </PropertyGroup>
 </Project>

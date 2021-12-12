@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information. -->
+
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <UI>
+      <Dialog Id="My_CustomizeDlg" Width="370" Height="270" Title="!(loc.CustomizeDlg_Title)" TrackDiskSpace="yes">
+        <Control Id="Tree" Type="SelectionTree" X="25" Y="85" Width="175" Height="115" Property="_BrowseProperty" Sunken="yes" TabSkip="no" Text="!(loc.CustomizeDlgTree)" />
+        <Control Id="Browse" Type="PushButton" X="294" Y="210" Width="66" Height="17" Text="!(loc.CustomizeDlgBrowse)">
+          <Publish Event="SelectionBrowse" Value="BrowseDlg">1</Publish>
+          <Condition Action="hide">Installed</Condition>
+          <Condition Action="disable">Installed</Condition>
+        </Control>
+        <Control Id="Reset" Type="PushButton" X="10" Y="243" Width="81" Height="17" Text="!(loc.CustomizeDlgReset)">
+          <Publish Event="Reset" Value="0">1</Publish>
+          <Subscribe Event="SelectionNoItems" Attribute="Enabled" />
+        </Control>
+        <!-- Remove disk count button (#1363). 
+        <Control Id="DiskCost" Type="PushButton" X="91" Y="243" Width="100" Height="17" Text="!(loc.CustomizeDlgDiskCost)">
+          <Publish Event="SpawnDialog" Value="DiskCostDlg">1</Publish>
+          <Subscribe Event="SelectionNoItems" Attribute="Enabled" />
+        </Control>-->
+        <Control Id="Back" Type="PushButton" X="192" Y="243" Width="56" Height="17" Text="!(loc.WixUIBack)" />
+        <Control Id="Next" Type="PushButton" X="248" Y="243" Width="56" Height="17" Default="yes" Text="!(loc.WixUINext)">
+          <Subscribe Event="SelectionNoItems" Attribute="Enabled" />
+        </Control>
+        <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Cancel="yes" Text="!(loc.WixUICancel)">
+          <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+        </Control>
+        <Control Id="BannerBitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="44" TabSkip="no" Text="!(loc.CustomizeDlgBannerBitmap)" />
+        <Control Id="Text" Type="Text" X="25" Y="55" Width="320" Height="20" Text="!(loc.CustomizeDlgText)" />
+        <Control Id="BannerLine" Type="Line" X="0" Y="44" Width="370" Height="0" />
+        <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+        <Control Id="Description" Type="Text" X="25" Y="23" Width="280" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.CustomizeDlgDescription)" />
+        <Control Id="Title" Type="Text" X="15" Y="6" Width="210" Height="15" Transparent="yes" NoPrefix="yes" Text="!(loc.CustomizeDlgTitle)" />
+        <Control Id="Box" Type="GroupBox" X="210" Y="81" Width="150" Height="118" />
+        <Control Id="ItemDescription" Type="Text" X="215" Y="90" Width="131" Height="50" Text="!(loc.CustomizeDlgItemDescription)">
+          <Subscribe Event="SelectionDescription" Attribute="Text" />
+        </Control>
+        <Control Id="ItemSize" Type="Text" X="215" Y="140" Width="131" Height="50" Text="!(loc.CustomizeDlgItemSize)">
+          <Subscribe Event="SelectionSize" Attribute="Text" />
+        </Control>
+        <Control Id="Location" Type="Text" X="90" Y="210" Width="200" Height="20" Text="!(loc.CustomizeDlgLocation)">
+          <Subscribe Event="SelectionPath" Attribute="Text" />
+          <Subscribe Event="SelectionPathOn" Attribute="Visible" />
+          <Condition Action="hide">Installed</Condition>
+        </Control>
+        <Control Id="LocationLabel" Type="Text" X="25" Y="210" Width="65" Height="10" Text="!(loc.CustomizeDlgLocationLabel)">
+          <Subscribe Event="SelectionPathOn" Attribute="Visible" />
+          <Condition Action="hide">Installed</Condition>
+        </Control>
+      </Dialog>
+    </UI>
+  </Fragment>
+</Wix>

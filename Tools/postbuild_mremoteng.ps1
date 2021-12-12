@@ -25,9 +25,9 @@ param (
     $ExcludeFromSigning
 )
 
-Write-Output "+=================================================================+"
-Write-Output "|                  Beginning mRemoteNG Post Build                 |"
-Write-Output "+=================================================================+"
+Write-Output "+===========================================================================================+"
+Write-Output "|                               Beginning mRemoteNG Post Build                              |"
+Write-Output "+===========================================================================================+"
 Format-Table -AutoSize -Wrap -InputObject @{
     "SolutionDir" = $SolutionDir
     "TargetDir" = $TargetDir

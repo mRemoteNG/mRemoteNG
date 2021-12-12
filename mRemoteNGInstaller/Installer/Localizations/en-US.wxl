@@ -19,7 +19,7 @@
   <!-- Features and install options -->
   <String Id="Feature_Complete">Complete</String>
   <String Id="Feature_DesktopShortcut">Desktop Shortcut</String>
-  <String Id="Feature_StartMenuShortcut">Start menu shortcut</String>
+  <String Id="Feature_StartMenuShortcut">Start Menu Shortcut</String>
   
   <!-- GUI Page Text -->
   <String Id="FinishPage_LaunchMremoteNow" Overridable="yes">Launch mRemoteNG now</String>

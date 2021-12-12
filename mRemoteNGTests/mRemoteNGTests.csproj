@@ -7,7 +7,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>x64</Platforms>
 
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 
