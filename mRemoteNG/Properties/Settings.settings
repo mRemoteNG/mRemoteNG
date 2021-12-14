@@ -773,6 +773,9 @@
     <Setting Name="ConDefaultStartProgram" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ConDefaultStartProgramWorkDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="ConDefaultICAEncryptionStrength" Type="System.String" Scope="User">
       <Value Profile="(Default)">EncrBasic</Value>
     </Setting>
