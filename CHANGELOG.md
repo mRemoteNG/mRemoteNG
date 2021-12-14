@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1427: Fix RDP local desktop scale not taking effect on remote
 - #1770: Added missing RDP performance settings
 - #1332: Added option to hide menu strip container
+- #870: Added option to push inheritance settings to child nodes recursively
 - #545: Option to minimize to system tray on closing
 - #420: SSH tunneling implemented
 - #319: Override quick connect username when using user@domain
