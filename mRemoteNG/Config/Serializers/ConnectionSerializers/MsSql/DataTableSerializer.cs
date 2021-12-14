@@ -590,8 +590,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["RdpVersion"] = connectionInfo.RdpVersion;
             dataRow["Favorite"] = connectionInfo.Favorite;
             dataRow["ICAEncryptionStrength"] = string.Empty;
-            dataRow["Prop_StartProgram"] = connectionInfo.StartProgram;
-            dataRow["Prop_StartProgramWorkDir"] = connectionInfo.StartProgramWorkDir;
+            dataRow["StartProgram"] = connectionInfo.StartProgram;
+            dataRow["StartProgramWorkDir"] = connectionInfo.StartProgramWorkDir;
 
             if (_saveFilter.SaveInheritance)
             {
