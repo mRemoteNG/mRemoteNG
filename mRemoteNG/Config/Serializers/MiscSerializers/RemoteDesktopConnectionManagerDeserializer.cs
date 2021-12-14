@@ -184,7 +184,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 				if (bool.TryParse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText, out var useConsole))
 					connectionInfo.UseConsoleSession = useConsole;
                 connectionInfo.StartProgram = connectionSettingsNode.SelectSingleNode("./startProgram")?.InnerText;
-                // ./workingDir
+                connectionInfo.StartProgramWorkDir = connectionSettingsNode.SelectSingleNode("./startProgramWorkDir")?.InnerText;
                 if (int.TryParse(connectionSettingsNode.SelectSingleNode("./port")?.InnerText, out var port))
 					connectionInfo.Port = port;
             }

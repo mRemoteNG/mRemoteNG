@@ -73,6 +73,7 @@
         public TType SSHOptions { get; set; }
         public TType SSHTunnelConnectionName { get; set; }
         public TType StartProgram { get; set; }
+        public TType StartProgramWorkDir { get; set; }
 		public TType OpeningCommand { get; set; }
 	}
 }

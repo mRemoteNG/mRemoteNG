@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 {
-    public class CsvConnectionsDeserializerMremotengFormatTests
+	public class CsvConnectionsDeserializerMremotengFormatTests
     {
         private CsvConnectionsDeserializerMremotengFormat _deserializer;
         private CsvConnectionsSerializerMremotengFormat _serializer;
@@ -168,8 +168,17 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
             public static IEnumerable InheritanceTestCases()
             {
-	            var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
-                var properties = testInheritance.GetProperties();
+                var ignoreProperties = new[]
+                {
+                    nameof(ConnectionInfoInheritance.EverythingInherited),
+                    nameof(ConnectionInfoInheritance.Parent),
+					nameof(ConnectionInfoInheritance.EverythingInherited)
+                };
+                var properties = typeof(ConnectionInfoInheritance)
+                    .GetProperties()
+                    .Where(property => !ignoreProperties.Contains(property.Name));
+                var testCases = new List<TestCaseData>();
+                var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
 
                 return properties
 	                .Select(property => 

@@ -17,7 +17,7 @@ namespace mRemoteNGSpecs.StepDefinitions
         {
             _credentialRepositoryList = new CredentialRepositoryList();
         }
-        
+
         [Given(@"It has (.*) repositories set up")]
         public void GivenItHasRepositoriesSetUp(int numberOfCredentialRepos)
         {

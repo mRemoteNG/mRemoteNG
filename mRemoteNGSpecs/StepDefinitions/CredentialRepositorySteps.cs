@@ -16,7 +16,7 @@ namespace mRemoteNGSpecs.StepDefinitions
         [Given(@"I have a credential repository")]
         public void GivenIHaveACredentialRepository()
         {
-            var utilityFactory = new XmlCredentialRepoBuilder {EncryptionKey = _key};
+            var utilityFactory = new XmlCredentialRepoBuilder { EncryptionKey = _key };
             _credentialRepository = utilityFactory.BuildXmlCredentialRepo();
         }
 
@@ -70,7 +70,7 @@ namespace mRemoteNGSpecs.StepDefinitions
         {
             _credentialRepository.UnloadCredentials();
         }
-        
+
         [Then(@"the credentials in the repository will no longer be available")]
         public void ThenTheCredentialsInTheRepositoryWillNoLongerBeAvailable()
         {

@@ -263,6 +263,34 @@ namespace mRemoteNG.Container
             return childList;
         }
 
+        /// <summary>
+        /// Pushes the connection properties of this container to all
+        /// children recursively.
+        /// </summary>
+        public void ApplyConnectionPropertiesToChildren()
+        {
+            var children = GetRecursiveChildList();
+
+            foreach (var child in children)
+            {
+                child.CopyFrom(this);
+            }
+        }
+
+        /// <summary>
+        /// Pushes the inheritance settings of this container to all
+        /// children recursively.
+        /// </summary>
+        public void ApplyInheritancePropertiesToChildren()
+        {
+            var children = GetRecursiveChildList();
+
+            foreach (var child in children)
+            {
+                child.Inheritance = Inheritance.Clone(child);
+            }
+        }
+
         private IEnumerable<ConnectionInfo> GetRecursiveFavoritChildList(ContainerInfo container)
         {
             var childList = new List<ConnectionInfo>();
