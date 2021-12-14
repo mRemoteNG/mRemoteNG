@@ -17,6 +17,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Properties;
 using mRemoteNG.Tree;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.Connection
@@ -46,10 +47,10 @@ namespace mRemoteNG.Connection
         [Browsable(false)] public ContainerInfo Parent { get; internal set; }
 
         [Browsable(false)]
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public bool IsQuickConnect { get; set; }
 
-        [Browsable(false)] public bool PleaseConnect { get; set; }
+        [Browsable(false)]
+        public bool PleaseConnect { get; set; }
 
         #endregion
 
@@ -200,7 +201,10 @@ namespace mRemoteNG.Connection
 
         private bool ShouldThisPropertyBeInherited(string propertyName)
         {
-            return ParentIsValidInheritanceTarget() && IsInheritanceTurnedOnForThisProperty(propertyName);
+            return
+                Inheritance.InheritanceActive &&
+                ParentIsValidInheritanceTarget() &&
+                IsInheritanceTurnedOnForThisProperty(propertyName);
         }
 
         private bool ParentIsValidInheritanceTarget()

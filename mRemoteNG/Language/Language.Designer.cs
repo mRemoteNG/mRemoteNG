@@ -376,7 +376,25 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arguments.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Apply default inheritance ähnelt.
+        /// </summary>
+        internal static string ApplyDefaultInheritance {
+            get {
+                return ResourceManager.GetString("ApplyDefaultInheritance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Apply inheritance to children ähnelt.
+        /// </summary>
+        internal static string ApplyInheritanceToChildren {
+            get {
+                return ResourceManager.GetString("ApplyInheritanceToChildren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Arguments ähnelt.
         /// </summary>
         internal static string Arguments {
             get {

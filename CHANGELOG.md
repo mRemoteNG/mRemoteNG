@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1476: Configurable backups. Can now edit/set backup frequency, backup path, and max number of backup files.
 - #1427: Fix RDP local desktop scale not taking effect on remote
 - #1332: Added option to hide menu strip container
+- #870: Added option to push inheritance settings to child nodes recursively
 - #545: Option to minimize to system tray on closing
 - #503: SSH Execute a single command after login
 - #420: SSH tunneling implemented
