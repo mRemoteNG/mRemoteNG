@@ -3109,6 +3109,18 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultStartProgramWorkDir {
+            get {
+                return ((string)(this["ConDefaultStartProgramWorkDir"]));
+            }
+            set {
+                this["ConDefaultStartProgramWorkDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("EncrBasic")]
         public string ConDefaultICAEncryptionStrength {
             get {

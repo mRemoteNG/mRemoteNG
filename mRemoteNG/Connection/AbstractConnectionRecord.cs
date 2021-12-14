@@ -27,7 +27,6 @@ namespace mRemoteNG.Connection
         private string _domain = "";
         private string _vmId = "";
         private bool _useEnhancedMode;
-        private string _startProgramWorkDir = "";
         
         private string _sshTunnelConnectionName = "";
         private ProtocolType _protocol;
@@ -81,6 +80,7 @@ namespace mRemoteNG.Connection
         private string _openingCommand;
         private string _userField;
         private string _startProgram;
+        private string _startProgramWorkDir;
         private bool _favorite;
 
         private ProtocolVNC.Compression _vncCompression;
