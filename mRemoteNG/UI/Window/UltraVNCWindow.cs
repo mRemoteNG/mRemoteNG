@@ -1,6 +1,7 @@
 ﻿using System;
 using mRemoteNG.App;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.UI.Window

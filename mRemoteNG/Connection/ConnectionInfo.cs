@@ -16,6 +16,7 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
 using mRemoteNG.Tree;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree.Root;
 
 
@@ -66,6 +67,7 @@ namespace mRemoteNG.Connection
             SetTreeDisplayDefaults();
             SetConnectionDefaults();
             SetProtocolDefaults();
+            SetRemoteDesktopServicesDefaults();
             SetRdGatewayDefaults();
             SetAppearanceDefaults();
             SetRedirectDefaults();
@@ -313,6 +315,12 @@ namespace mRemoteNG.Connection
             UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
         }
 
+        private void SetRemoteDesktopServicesDefaults()
+        {
+            StartProgram = string.Empty;
+            StartProgramWorkDir = string.Empty;
+        }
+
         private void SetRdGatewayDefaults()
         {
             RDGatewayUsageMethod = (RDGatewayUsageMethod)Enum.Parse(typeof(RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
@@ -360,6 +368,7 @@ namespace mRemoteNG.Connection
             UserField = Settings.Default.ConDefaultUserField;
             Favorite = Settings.Default.ConDefaultFavorite;
             StartProgram = Settings.Default.ConDefaultStartProgram;
+            OpeningCommand = Settings.Default.OpeningCommand;
         }
 
         private void SetVncDefaults()

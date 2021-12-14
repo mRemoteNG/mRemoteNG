@@ -16,6 +16,7 @@ using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.App
 {
@@ -101,6 +102,10 @@ namespace mRemoteNG.App
                 if (Settings.Default.UseSQLServer)
                 {
                     ConnectionsService.LastSqlUpdate = DateTime.Now;
+                } 
+				else
+                {
+                    ConnectionsService.LastFileUpdate =  System.IO.File.GetLastWriteTime(connectionFileName);
                 }
 
                 // re-enable sql update checking after updates are loaded

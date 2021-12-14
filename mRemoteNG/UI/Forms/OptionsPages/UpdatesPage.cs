@@ -8,6 +8,7 @@ using mRemoteNG.Properties;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.TaskDialog;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {

@@ -18,6 +18,7 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Window
 {
@@ -393,7 +394,6 @@ namespace mRemoteNG.UI.Window
                     cmenTabStartChat.Visible = true;
                     cmenTabRefreshScreen.Visible = true;
                     cmenTabTransferFile.Visible = false;
-                    cmenTabSmartSize.Checked = vnc.SmartSize;
                 }
                 else
                 {
@@ -434,9 +434,6 @@ namespace mRemoteNG.UI.Window
                 {
                     case RdpProtocol6 rdp:
                         rdp.ToggleSmartSize();
-                        break;
-                    case ProtocolVNC vnc:
-                        vnc.ToggleSmartSize();
                         break;
                 }
             }

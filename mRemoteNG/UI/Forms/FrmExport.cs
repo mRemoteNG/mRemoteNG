@@ -6,6 +6,7 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Themes;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {

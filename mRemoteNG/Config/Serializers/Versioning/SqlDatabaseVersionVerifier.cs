@@ -2,12 +2,15 @@
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using System;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
     public class SqlDatabaseVersionVerifier
     {
+        protected readonly Version currentSupportedVersion = new Version(2, 9);
+
         private readonly IDatabaseConnector _databaseConnector;
 
         public SqlDatabaseVersionVerifier(IDatabaseConnector DatabaseConnector)
@@ -38,6 +41,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     new SqlVersion25To26Upgrader(_databaseConnector),
                     new SqlVersion26To27Upgrader(_databaseConnector),
                     new SqlVersion27To28Upgrader(_databaseConnector),
+                    new SqlVersion28To29Upgrader(_databaseConnector),
                 };
 
                 foreach (var upgrader in dbUpgraders)
@@ -49,7 +53,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                 }
 
                 // DB is at the highest current supported version
-                if (databaseVersion.CompareTo(new Version(2, 8)) == 0)
+                if (databaseVersion.CompareTo(currentSupportedVersion) == 0)
                     isVerified = true;
 
                 if (isVerified == false)

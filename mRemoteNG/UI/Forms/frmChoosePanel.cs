@@ -2,6 +2,7 @@
 using mRemoteNG.App;
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Panels;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms
 {

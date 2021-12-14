@@ -1,10 +1,11 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Security.SymmetricEncryption
@@ -23,29 +24,24 @@ namespace mRemoteNG.Security.SymmetricEncryption
             BlockSizeInBytes = 16;
         }
 
-
         public string Encrypt(string strToEncrypt, SecureString strSecret)
         {
-            if (strToEncrypt == "" || strSecret.Length == 0)
+            if (string.IsNullOrWhiteSpace(strToEncrypt) || strSecret.Length == 0)
                 return strToEncrypt;
 
             try
             {
-                var rd = new RijndaelManaged();
-
-                var md5 = new MD5CryptoServiceProvider();
+                using var aes = Aes.Create();
+                using var md5 = MD5.Create();
                 var key = md5.ComputeHash(Encoding.UTF8.GetBytes(strSecret.ConvertToUnsecureString()));
 
                 md5.Clear();
-                rd.Key = key;
-                rd.GenerateIV();
+                aes.Key = key;
+                aes.GenerateIV();
 
-                var iv = rd.IV;
-                var ms = new MemoryStream();
+                using var ms = new MemoryStream(aes.IV);
 
-                ms.Write(iv, 0, iv.Length);
-
-                var cs = new CryptoStream(ms, rd.CreateEncryptor(), CryptoStreamMode.Write);
+                var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
                 var data = Encoding.UTF8.GetBytes(strToEncrypt);
 
                 cs.Write(data, 0, data.Length);
@@ -53,7 +49,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
                 var encdata = ms.ToArray();
                 cs.Close();
-                rd.Clear();
+                aes.Clear();
 
                 return Convert.ToBase64String(encdata);
             }
@@ -73,31 +69,25 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
             try
             {
-                var plaintext = "";
+                using var aes = Aes.Create();
+                using var md5 = MD5.Create();
+                var key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
 
-                using (var rijndaelManaged = new RijndaelManaged())
-                {
-                    using (var md5 = new MD5CryptoServiceProvider())
-                    {
-                        var key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
-                        rijndaelManaged.Key = key;
-                    }
+                md5.Clear();
+                aes.Key = key;
 
-                    var ciphertext = Convert.FromBase64String(ciphertextBase64);
+                var ciphertext = Convert.FromBase64String(ciphertextBase64);
 
-                    var memoryStream = new MemoryStream(ciphertext);
-                    var iv = new byte[BlockSizeInBytes];
-                    memoryStream.Read(iv, 0, iv.Length);
-                    rijndaelManaged.IV = iv;
+                using var ms = new MemoryStream(ciphertext);
 
-                    var cryptoStream = new CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor(),
-                                                        CryptoStreamMode.Read);
-                    using (var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true))
-                    {
-                        plaintext = streamReader.ReadToEnd();
-                        rijndaelManaged.Clear();
-                    }
-                } // rijndaelManaged
+                var iv = new byte[BlockSizeInBytes];
+                ms.Read(iv, 0, iv.Length);
+                aes.IV = iv;
+
+                using var cryptoStream = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);
+                using var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true);
+                var plaintext = streamReader.ReadToEnd();
+                aes.Clear();
 
                 return plaintext;
             }

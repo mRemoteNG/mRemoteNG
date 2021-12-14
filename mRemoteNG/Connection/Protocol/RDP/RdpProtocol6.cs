@@ -14,6 +14,7 @@ using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
 using MSTSCLib;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
@@ -286,6 +287,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _alertOnIdleDisconnect = connectionInfo.RDPAlertIdleTimeout;
             _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = connectionInfo.RDPMinutesToIdleTimeout;
 
+            #region Remote Desktop Services
+            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.StartProgram;
+            _rdpClient.SecuredSettings2.WorkDir = connectionInfo.StartProgramWorkDir;
+            #endregion
+
             //not user changeable
             _rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
             _rdpClient.AdvancedSettings3.EnableAutoReconnect = true;
@@ -295,8 +301,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
 
             _rdpClient.AdvancedSettings2.overallConnectionTimeout = Settings.Default.ConRDPOverallConnectionTimeout;
-
-            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.StartProgram;
 
             _rdpClient.AdvancedSettings2.BitmapPeristence = Convert.ToInt32(connectionInfo.CacheBitmaps);
             if (_rdpVersion >= Versions.RDC61)
@@ -459,6 +463,20 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var userName = connectionInfo?.Username ?? "";
                 var password = connectionInfo?.Password ?? "";
                 var domain = connectionInfo?.Domain ?? "";
+
+                // access secret server api if necessary
+                if (userName.StartsWith("SSAPI:"))
+                {
+                    try
+                    {
+                        ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer(userName, out userName, out password, out domain);
+                    }
+                    catch (Exception ex)
+                    {
+                        Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                    }
+                    
+                }
 
                 if (string.IsNullOrEmpty(userName))
                 {

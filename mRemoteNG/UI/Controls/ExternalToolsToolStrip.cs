@@ -5,6 +5,7 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -99,7 +100,7 @@ namespace mRemoteNG.UI.Controls
             var extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
             var selectedTreeNode = Windows.TreeForm.SelectedNode;
-            if (selectedTreeNode != null && selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection |
+            if (selectedTreeNode != null && selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection ||
                 selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
                 extA.Start(selectedTreeNode);
             else

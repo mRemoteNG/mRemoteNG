@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Tools.Cmdline

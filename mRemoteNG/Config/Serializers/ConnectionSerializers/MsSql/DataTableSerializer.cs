@@ -138,6 +138,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("RedirectAudioCapture", typeof(bool));
             dataTable.Columns.Add("RedirectKeys", typeof(bool));
             dataTable.Columns.Add("Connected", typeof(bool));
+            dataTable.Columns.Add("OpeningCommand", typeof(string));
             dataTable.Columns.Add("PreExtApp", typeof(string));
             dataTable.Columns.Add("PostExtApp", typeof(string));
             dataTable.Columns.Add("MacAddress", typeof(string));
@@ -194,6 +195,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("InheritRenderingEngine", typeof(bool));
             dataTable.Columns.Add("InheritRDPAuthenticationLevel", typeof(bool));
             dataTable.Columns.Add("InheritUsername", typeof(bool));
+            dataTable.Columns.Add("InheritOpeningCommand", typeof(bool));
             dataTable.Columns.Add("InheritPreExtApp", typeof(bool));
             dataTable.Columns.Add("InheritPostExtApp", typeof(bool));
             dataTable.Columns.Add("InheritMacAddress", typeof(bool));
@@ -236,6 +238,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("InheritRdpVersion", typeof(bool));
             dataTable.Columns.Add("EnhancedMode", typeof(bool));
             dataTable.Columns.Add("InheritEnhancedMode", typeof(bool));
+            dataTable.Columns.Add("Favorite", typeof(bool));
+            dataTable.Columns.Add("InheritFavorite", typeof(bool));
+            dataTable.Columns.Add("ICAEncryptionStrength", typeof(string));
+            dataTable.Columns.Add("InheritICAEncryptionStrength", typeof(bool));
+            dataTable.Columns.Add("StartProgram", typeof(string));
+            dataTable.Columns.Add("StartProgramWorkDir", typeof(string));
         }
 
         private void SetPrimaryKey(DataTable dataTable)
@@ -314,10 +322,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
              dataRow["RedirectSound"].Equals(connectionInfo.RedirectSound.ToString()) &&
              dataRow["SoundQuality"].Equals(connectionInfo.SoundQuality.ToString()) &&
              dataRow["RedirectAudioCapture"].Equals(connectionInfo.RedirectAudioCapture) &&
-             dataRow["RedirectKeys"].Equals(connectionInfo.RedirectKeys);
+             dataRow["RedirectKeys"].Equals(connectionInfo.RedirectKeys) &&
+             dataRow["StartProgram"].Equals(connectionInfo.StartProgram) &&
+             dataRow["StartProgramWorkDir"].Equals(connectionInfo.StartProgramWorkDir);
 
             isFieldNotChange = isFieldNotChange &&
              dataRow["Connected"].Equals(false) && // TODO: this column can eventually be removed. we now save this property locally
+             dataRow["OpeningCommand"].Equals(connectionInfo.OpeningCommand) && 
              dataRow["PreExtApp"].Equals(connectionInfo.PreExtApp) &&
              dataRow["PostExtApp"].Equals(connectionInfo.PostExtApp) &&
              dataRow["MacAddress"].Equals(connectionInfo.MacAddress) &&
@@ -337,7 +348,6 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
              dataRow["RDGatewayHostname"].Equals(connectionInfo.RDGatewayHostname) &&
              dataRow["RDGatewayUseConnectionCredentials"].Equals(connectionInfo.RDGatewayUseConnectionCredentials.ToString()) &&
              dataRow["RDGatewayUsername"].Equals(connectionInfo.RDGatewayUsername) &&
-             
              dataRow["RDGatewayDomain"].Equals(connectionInfo.RDGatewayDomain) &&
              dataRow["RdpVersion"].Equals(connectionInfo.RdpVersion.ToString());
 
@@ -384,6 +394,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDPMinutesToIdleTimeout"].Equals(connectionInfo.Inheritance.RDPMinutesToIdleTimeout) &&
                 dataRow["InheritRDPAlertIdleTimeout"].Equals(connectionInfo.Inheritance.RDPAlertIdleTimeout) &&
                 dataRow["InheritLoadBalanceInfo"].Equals(connectionInfo.Inheritance.LoadBalanceInfo) &&
+                dataRow["InheritOpeningCommand"].Equals(connectionInfo.Inheritance.OpeningCommand) &&
                 dataRow["InheritPreExtApp"].Equals(connectionInfo.Inheritance.PreExtApp) &&
                 dataRow["InheritPostExtApp"].Equals(connectionInfo.Inheritance.PostExtApp) &&
                 dataRow["InheritMacAddress"].Equals(connectionInfo.Inheritance.MacAddress) &&
@@ -447,6 +458,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDPMinutesToIdleTimeout"].Equals(false) &&
                 dataRow["InheritRDPAlertIdleTimeout"].Equals(false) &&
                 dataRow["InheritLoadBalanceInfo"].Equals(false) &&
+                dataRow["InheritOpeningCommand"].Equals(false) &&
                 dataRow["InheritPreExtApp"].Equals(false) &&
                 dataRow["InheritPostExtApp"].Equals(false) &&
                 dataRow["InheritMacAddress"].Equals(false) &&
@@ -516,6 +528,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["VmId"] = connectionInfo.VmId;
             dataRow["Protocol"] = connectionInfo.Protocol;
             dataRow["SSHTunnelConnectionName"] = connectionInfo.SSHTunnelConnectionName;
+            dataRow["OpeningCommand"] = connectionInfo.OpeningCommand;
             dataRow["SSHOptions"] = connectionInfo.SSHOptions;
             dataRow["PuttySession"] = connectionInfo.PuttySession;
             dataRow["Port"] = connectionInfo.Port;
@@ -550,6 +563,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["RedirectAudioCapture"] = connectionInfo.RedirectAudioCapture;
             dataRow["RedirectKeys"] = connectionInfo.RedirectKeys;
             dataRow["Connected"] = false; // TODO: this column can eventually be removed. we now save this property locally
+            dataRow["OpeningCommand"] = connectionInfo.OpeningCommand;
             dataRow["PreExtApp"] = connectionInfo.PreExtApp;
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
             dataRow["MacAddress"] = connectionInfo.MacAddress;
@@ -574,7 +588,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["RDGatewayPassword"] = _cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey);
             dataRow["RDGatewayDomain"] = connectionInfo.RDGatewayDomain;
             dataRow["RdpVersion"] = connectionInfo.RdpVersion;
-
+            dataRow["Favorite"] = connectionInfo.Favorite;
+            dataRow["ICAEncryptionStrength"] = string.Empty;
+            dataRow["Prop_StartProgram"] = connectionInfo.StartProgram;
+            dataRow["Prop_StartProgramWorkDir"] = connectionInfo.StartProgramWorkDir;
 
             if (_saveFilter.SaveInheritance)
             {
@@ -596,6 +613,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritPort"] = connectionInfo.Inheritance.Port;
                 dataRow["InheritProtocol"] = connectionInfo.Inheritance.Protocol;
                 dataRow["InheritSSHTunnelConnectionName"] = connectionInfo.Inheritance.SSHTunnelConnectionName;
+                dataRow["InheritOpeningCommand"] = connectionInfo.Inheritance.OpeningCommand;
                 dataRow["InheritSSHOptions"] = connectionInfo.Inheritance.SSHOptions;
                 dataRow["InheritPuttySession"] = connectionInfo.Inheritance.PuttySession;
                 dataRow["InheritRedirectDiskDrives"] = connectionInfo.Inheritance.RedirectDiskDrives;
@@ -620,6 +638,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDPMinutesToIdleTimeout"] = connectionInfo.Inheritance.RDPMinutesToIdleTimeout;
                 dataRow["InheritRDPAlertIdleTimeout"] = connectionInfo.Inheritance.RDPAlertIdleTimeout;
                 dataRow["InheritLoadBalanceInfo"] = connectionInfo.Inheritance.LoadBalanceInfo;
+                dataRow["InheritOpeningCommand"] = connectionInfo.Inheritance.OpeningCommand;
                 dataRow["InheritPreExtApp"] = connectionInfo.Inheritance.PreExtApp;
                 dataRow["InheritPostExtApp"] = connectionInfo.Inheritance.PostExtApp;
                 dataRow["InheritMacAddress"] = connectionInfo.Inheritance.MacAddress;
@@ -643,6 +662,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;
                 dataRow["InheritRdpVersion"] = connectionInfo.Inheritance.RdpVersion;
+                dataRow["InheritFavorite"] = connectionInfo.Inheritance.Favorite;
+                dataRow["InheritICAEncryptionStrength"] = false;
             }
             else
             {
@@ -685,6 +706,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDPMinutesToIdleTimeout"] = false;
                 dataRow["InheritRDPAlertIdleTimeout"] = false;
                 dataRow["InheritLoadBalanceInfo"] = false;
+                dataRow["InheritOpeningCommand"] = false;
                 dataRow["InheritPreExtApp"] = false;
                 dataRow["InheritPostExtApp"] = false;
                 dataRow["InheritMacAddress"] = false;
@@ -708,6 +730,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayPassword"] = false;
                 dataRow["InheritRDGatewayDomain"] = false;
                 dataRow["InheritRdpVersion"] = false;
+                dataRow["InheritFavorite"] = false;
+                dataRow["InheritICAEncryptionStrength"] = false;
             }
             if (isNewRow)_dataTable.Rows.Add(dataRow);
         }

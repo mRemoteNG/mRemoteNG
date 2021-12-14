@@ -157,7 +157,9 @@ CREATE TABLE [dbo].[tblCons] (
 	[InheritVNCProxyUsername] bit NOT NULL,
 	[InheritVNCSmartSizeMode] bit NOT NULL,
 	[InheritVNCViewOnly] bit NOT NULL,
-	[InheritVmId] bit	
+	[InheritVmId] bit,
+	[StartProgram] varchar(512),
+	[StartProgramWorkDir] varchar(512)
 ) ON [PRIMARY] 
 GO
 
@@ -165,7 +167,7 @@ CREATE TABLE [dbo].[tblRoot] (
 	[Name] [varchar] (2048) NOT NULL ,
 	[Export] [bit] NOT NULL ,
 	[Protected] [varchar] (4048) NOT NULL ,
-	[ConfVersion] [float] NOT NULL 
+	[ConfVersion] [varchar] (15) NOT NULL 
 ) ON [PRIMARY]
 GO
  

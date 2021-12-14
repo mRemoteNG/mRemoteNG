@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Connection;
@@ -66,6 +66,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("Hostname", connectionInfo.Hostname));
             element.Add(new XAttribute("Protocol", connectionInfo.Protocol));
             element.Add(new XAttribute("SSHTunnelConnectionName", connectionInfo.SSHTunnelConnectionName));
+            element.Add(new XAttribute("OpeningCommand", connectionInfo.OpeningCommand));
             element.Add(new XAttribute("SSHOptions", connectionInfo.SSHOptions));
             element.Add(new XAttribute("PuttySession", connectionInfo.PuttySession));
             element.Add(new XAttribute("Port", connectionInfo.Port));
@@ -168,6 +169,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     element.Add(new XAttribute("InheritProtocol", inheritance.Protocol.ToString().ToLowerInvariant()));
                 if (inheritance.SSHTunnelConnectionName)
                     element.Add(new XAttribute("InheritSSHTunnelConnectionName", inheritance.SSHTunnelConnectionName.ToString().ToLowerInvariant()));
+                if (inheritance.OpeningCommand)
+                    element.Add(new XAttribute("InheritOpeningCommand", inheritance.OpeningCommand.ToString().ToLowerInvariant()));
                 if (inheritance.SSHOptions)
                     element.Add(new XAttribute("InheritSSHOptions", inheritance.SSHOptions.ToString().ToLowerInvariant()));
                 if (inheritance.PuttySession)

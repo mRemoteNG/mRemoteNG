@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mRemoteNG" GeneratedClassName="Settings" UseMySettingsClassName="true">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mRemoteNG.Properties" GeneratedClassName="Settings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
     <Setting Name="MainFormLocation" Type="System.Drawing.Point" Scope="User">
@@ -722,6 +722,9 @@
     <Setting Name="InhDefaultUseVmId" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="SaveConnectionsFrequency" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
     <Setting Name="ConDefaultRdpVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)">Highest</Value>
     </Setting>
@@ -752,7 +755,7 @@
     <Setting Name="CloseToTray" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="StartupComponentsCheck" Type="System.String" Scope="User">
+    <Setting Name="StartupComponentsCheck" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultDisableFullWindowDrag" Type="System.Boolean" Scope="User">
@@ -793,6 +796,10 @@
     </Setting>
     <Setting Name="ConDefaultRenderingEngine" Type="System.String" Scope="User">
       <Value Profile="(Default)">EdgeChromium</Value>
+    </Setting>
+    <Setting Name="OpeningCommand" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+        </Value>
     </Setting>
   </Settings>
 </SettingsFile>

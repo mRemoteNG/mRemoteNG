@@ -9,6 +9,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 

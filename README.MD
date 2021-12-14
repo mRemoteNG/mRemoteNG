@@ -2,7 +2,7 @@
 
 <br/><br/>
 <p align="center">
-  <img width="500" src="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteNGProjectFiles/Header_dark.png">
+  <img width="450" src="https://github.com/mRemoteNG/mRemoteNG/blob/develop/mRemoteNGProjectFiles/Header_dark.png">
 </p>
   
 <p align="center">
@@ -45,11 +45,11 @@
 
 ---
 
-| Update Channel | Build Status | Downloads |
+| Channel | Build Status | Downloads |
 | ---------------|--------------|-----------|
-| Stable | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/master?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/master) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.20/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.20) |
-| Prerelease | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
-| Nightly build | [![Build status](https://ci.appveyor.com/api/projects/status/k0sdbxmq90fgdmj6/branch/develop?svg=true)](https://ci.appveyor.com/project/mremoteng/mremoteng/branch/develop) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.2-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.2-nb) |
+| Stable | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.20/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.20) |
+| Preview | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/preview?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
+| Nightly | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/dnightly?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.2-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.2-nb) |
 
 ## Features
 
@@ -73,23 +73,10 @@ For a detailed feature list and general usage support, refer to the [Documentati
 - [Windows 11](https://en.wikipedia.org/wiki/Windows_11)
 - [Windows 10](https://en.wikipedia.org/wiki/Windows_10)
 - [Windows 8.1](https://en.wikipedia.org/wiki/Windows_8.1)
+- [Windows Server 2022](https://en.wikipedia.org/wiki/Windows_Server_2022)
 - [Windows Server 2019](https://en.wikipedia.org/wiki/Windows_Server_2019)
 - [Windows Server 2016](https://en.wikipedia.org/wiki/Windows_Server_2016)
 - [Windows Server 2012 R2](https://en.wikipedia.org/wiki/Windows_Server_2012_R2)
-
-### Packaging
-
-Downloads are provided in three different packages.
-
-#### Binary package
-
-The binary package of mRemoteNG is a compiled version of mRemoteNG which comes in an MSI installer.
-This is the most common way to install mRemoteNG and get up and running.
-
-#### Portable package
-
-The portable package contains a modified version of the executable which stores and loads all your settings from files in the application's directory.
-This package can be used to run mRemoteNG from a USB stick and preserve your configuration wherever you go.
 
 #### Source package
 
@@ -98,8 +85,8 @@ You will need to compile it yourself using Visual Studio.
 
 ### Minimum Requirements
 
-* [Microsoft Visual C++ Redistributable for Visual Studio 2015, 2017 and 2019](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
-* [Microsoft .NET Framework 4.0](https://www.microsoft.com/en-us/download/details.aspx?id=17851)
+* [Microsoft Visual C++ Redistributable for Visual Studio 2015 - 2022](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
+* [Microsoft .NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
 * Microsoft Terminal Service Client 6.0 or later
   * Needed if you use RDP. mstscax.dll and/or msrdp.ocx be registered.
 
@@ -113,41 +100,16 @@ mRemoteNG is available as a redistributable MSI package or as a portable ZIP pac
 
 The MSI package of mRemoteNG can be installed using the command line:
 
-`msiexec /i C:\Path\To\mRemoteNG-Installer.exe [INSTALLDIR=value] [IGNOREPREREQUISITES=value]`
+`msiexec /i [/qn] C:\Path\To\mRemoteNG-Installer.exe [INSTALLDIR=value] [IGNOREPREREQUISITES=value] [/lv* <log path>]`
 
-| Property | Value | Description |
+| Argument/Property | Value | Description |
 |-|-|-|
-| INSTALLDIR | `folder path` | This allows you to set the installation directory from the command line. For paths that contain spaces, enclose the path in double quotes (""). This overrides any value found in the registry. |
+| /qn | `Silent Installation` | Will run the installer silently in the background. |
+| /lv* | `Silent Installation` | Will write a logfile to the specified location. (For paths that contain spaces, enclose the path in double quotes) |
+| INSTALLDIR | `folder path` | Allows you to set the installation directory from the command line. (For paths that contain spaces, enclose the path in double quotes) |
 | IGNOREPREREQUISITES | `0` or `1` | When set to `1`, the installer will not be halted if any prerequisite check is not met. You must still run the installer as administrator. |
 
-#### Examples
-
-**Install to a custom folder**
-
-`msiexec /i C:\Path\To\mRemoteNG-Installer.msi INSTALLDIR="D:\Work Apps\mRemoteNG"`
-
-**Ignore prerequisites during a normal install**
-
-`msiexec /i C:\Path\To\mRemoteNG-Installer.msi IGNOREPREREQUISITES=1`
-
-**Ignore prerequisites during a silent install**
-
-`msiexec /i C:\Path\To\mRemoteNG-Installer.msi /qn IGNOREPREREQUISITES=1`
-
-### Troubleshooting installation
-
-Turn on verbose logging by using the `/lv* <log path>` argument at the command line.
-
-`msiexec /i C:\Path\To\mRemoteNG-Installer.msi /l*v C:\mremoteng_install.log`
-
-## Uninstall
-
-### Standard Uninstall
-
-mRemoteNG basic binary package can be uninstalled with Windows Control Panel. If for some reason it does not work please
-follow information provided below for Manual Uninstall.
-
-### Manual Uninstall
+## Manual Uninstall
 
 _If you are using the Portable version, simply deleting the folder that contains mRemoteNG should be sufficient. These uninstall instructions are only necessary for the normal binary .MSI installed version of mRemoteNG_
 

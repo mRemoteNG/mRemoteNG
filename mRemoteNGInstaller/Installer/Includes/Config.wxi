@@ -26,9 +26,5 @@
     <?define ProductNameWithPlatform = "$(var.ProductName) (64 bit)" ?>
     <?define Win64 = "yes" ?>
     <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
-  <?else ?>
-    <?define ProductNameWithPlatform = "$(var.ProductName)" ?>
-    <?define Win64 = "no" ?>
-    <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
   <?endif ?>
 </Include>

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -143,11 +144,11 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenInfoHelp_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlDocumentation);
 
-        private void mMenInfoForum_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlForum);
+        private void mMenInfoForum_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlForum);
 
         private void mMenInfoWebsite_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlHome);
 
-        private void mMenInfoDonate_Click(object sender, EventArgs e) => Process.Start(GeneralAppInfo.UrlDonate);
+        private void mMenInfoDonate_Click(object sender, EventArgs e) => Process.Start("explorer.exe", GeneralAppInfo.UrlDonate);
 
         private void mMenInfoAbout_Click(object sender, EventArgs e) => FrmAbout.Instance.Show();
 

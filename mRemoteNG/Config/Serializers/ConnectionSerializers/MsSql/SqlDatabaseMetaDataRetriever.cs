@@ -80,9 +80,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
 	        if (rootTreeNode != null)
 	        {
 		        cmd = databaseConnector.DbCommand(
-                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" +
-				        MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," +
-				        ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")");
+                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" +
+				        MiscTools.PrepareValueForDB(rootTreeNode.Name) + "', 0, '" + strProtected + "','" +
+				        ConnectionsFileInfo.ConnectionFileVersion.ToString() + "')");
 		        cmd.ExecuteNonQuery();
 	        }
 	        else

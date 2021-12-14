@@ -20,6 +20,7 @@ param (
 
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 
+
 #  validate release versions and if the certificate value was passed
 if ($ConfigurationName -match "Release" -And ($CertificatePath)) {
 	

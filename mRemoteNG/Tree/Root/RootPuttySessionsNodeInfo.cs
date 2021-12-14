@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.Properties;
 using mRemoteNG.Tools;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Tree.Root
 {

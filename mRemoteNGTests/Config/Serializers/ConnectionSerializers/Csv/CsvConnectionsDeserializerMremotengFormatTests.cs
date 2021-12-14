@@ -78,6 +78,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 Hostname = "SomeHostname",
                 PuttySession = "SomePuttySession",
                 LoadBalanceInfo = "SomeLoadBalanceInfo",
+                OpeningCommand = "SomeOpeningCommand",
                 PreExtApp = "SomePreExtApp",
                 PostExtApp = "SomePostExtApp",
                 MacAddress = "SomeMacAddress",

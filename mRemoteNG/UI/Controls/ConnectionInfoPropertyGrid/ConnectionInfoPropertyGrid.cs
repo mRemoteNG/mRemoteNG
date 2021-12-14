@@ -16,6 +16,7 @@ using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 {

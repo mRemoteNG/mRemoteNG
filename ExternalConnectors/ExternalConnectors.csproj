@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <OutputType>Library</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Platforms>x64</Platforms>
+    <Configurations>Debug;Release;Debug Portable;Release Portable</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.7.5.6" />
+    <PackageReference Include="AWSSDK.EC2" Version="3.7.50.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AWS\AWSConnectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TSS\SSConnectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

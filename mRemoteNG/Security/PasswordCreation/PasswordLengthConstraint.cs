@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.Security.PasswordCreation

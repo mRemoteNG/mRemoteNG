@@ -14,6 +14,7 @@ using mRemoteNG.Themes;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Resources.Language;
 
 
 namespace mRemoteNG.UI.Window
