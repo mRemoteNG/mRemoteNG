@@ -241,6 +241,18 @@
     <None Update="Schemas\mremoteng_creds_v1_0.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Themes\darcula.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Themes\vs2015blue.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Themes\vs2015dark.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Themes\vs2015light.vstheme">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="VisualElements_150.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
