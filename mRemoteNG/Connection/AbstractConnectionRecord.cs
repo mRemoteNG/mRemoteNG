@@ -79,8 +79,8 @@ namespace mRemoteNG.Connection
         private string _macAddress;
         private string _openingCommand;
         private string _userField;
-        private string _startProgram;
-        private string _startProgramWorkDir;
+        private string _RDPStartProgram;
+        private string _RDPStartProgramWorkDir;
         private bool _favorite;
 
         private ProtocolVNC.Compression _vncCompression;
@@ -744,23 +744,23 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
-         LocalizedAttributes.LocalizedDisplayName(nameof(Language.StartProgram)),
-         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionStartProgram)),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RDPStartProgram)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPStartProgram)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
-        public virtual string StartProgram
+        public virtual string RDPStartProgram
         {
-            get => GetPropertyValue("StartProgram", _startProgram);
-            set => SetField(ref _startProgram, value, "StartProgram");
+            get => GetPropertyValue("RDPStartProgram", _RDPStartProgram);
+            set => SetField(ref _RDPStartProgram, value, "RDPStartProgram");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RDPStartProgramWorkDir)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDPStartProgramWorkDir)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
-        public virtual string StartProgramWorkDir
+        public virtual string RDPStartProgramWorkDir
         {
-            get => GetPropertyValue("StartProgramWorkDir", _startProgramWorkDir);
-            set => SetField(ref _startProgramWorkDir, value, "StartProgramWorkDir");
+            get => GetPropertyValue("RDPStartProgramWorkDir", _RDPStartProgramWorkDir);
+            set => SetField(ref _RDPStartProgramWorkDir, value, "RDPStartProgramWorkDir");
         }
 
         #endregion

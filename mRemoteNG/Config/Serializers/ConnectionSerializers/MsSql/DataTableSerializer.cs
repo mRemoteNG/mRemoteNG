@@ -323,8 +323,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
              dataRow["SoundQuality"].Equals(connectionInfo.SoundQuality.ToString()) &&
              dataRow["RedirectAudioCapture"].Equals(connectionInfo.RedirectAudioCapture) &&
              dataRow["RedirectKeys"].Equals(connectionInfo.RedirectKeys) &&
-             dataRow["StartProgram"].Equals(connectionInfo.StartProgram) &&
-             dataRow["StartProgramWorkDir"].Equals(connectionInfo.StartProgramWorkDir);
+             dataRow["StartProgram"].Equals(connectionInfo.RDPStartProgram) &&
+             dataRow["StartProgramWorkDir"].Equals(connectionInfo.RDPStartProgramWorkDir);
 
             isFieldNotChange = isFieldNotChange &&
              dataRow["Connected"].Equals(false) && // TODO: this column can eventually be removed. we now save this property locally
@@ -590,8 +590,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["RdpVersion"] = connectionInfo.RdpVersion;
             dataRow["Favorite"] = connectionInfo.Favorite;
             dataRow["ICAEncryptionStrength"] = string.Empty;
-            dataRow["StartProgram"] = connectionInfo.StartProgram;
-            dataRow["StartProgramWorkDir"] = connectionInfo.StartProgramWorkDir;
+            dataRow["StartProgram"] = connectionInfo.RDPStartProgram;
+            dataRow["StartProgramWorkDir"] = connectionInfo.RDPStartProgramWorkDir;
 
             if (_saveFilter.SaveInheritance)
             {

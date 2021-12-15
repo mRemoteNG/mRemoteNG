@@ -1687,10 +1687,10 @@ mRemoteNG va se fermer et l'installation va commencer.</value>
   <data name="TestConnection" xml:space="preserve">
     <value>Tester la connexion</value>
   </data>
-  <data name="PropertyDescriptionStartProgram" xml:space="preserve">
+  <data name="PropertyDescriptionRDPStartProgram" xml:space="preserve">
     <value>Démarrer un programme / un shell alternatif</value>
   </data>
-  <data name="StartProgram" xml:space="preserve">
+  <data name="RDPStartProgram" xml:space="preserve">
     <value>Démarrer un programme</value>
   </data>
   <data name="StackTrace" xml:space="preserve">

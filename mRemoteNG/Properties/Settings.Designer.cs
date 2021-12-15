@@ -3098,24 +3098,24 @@ namespace mRemoteNG.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultStartProgram {
+        public string ConDefaultRDPStartProgram {
             get {
-                return ((string)(this["ConDefaultStartProgram"]));
+                return ((string)(this["ConDefaultRDPStartProgram"]));
             }
             set {
-                this["ConDefaultStartProgram"] = value;
+                this["ConDefaultRDPStartProgram"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultStartProgramWorkDir {
+        public string ConDefaultRDPStartProgramWorkDir {
             get {
-                return ((string)(this["ConDefaultStartProgramWorkDir"]));
+                return ((string)(this["ConDefaultRDPStartProgramWorkDir"]));
             }
             set {
-                this["ConDefaultStartProgramWorkDir"] = value;
+                this["ConDefaultRDPStartProgramWorkDir"] = value;
             }
         }
         

@@ -190,12 +190,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("RDGatewayHostname")]
                 : "";
 
-            connectionRecord.StartProgram = headers.Contains("StartProgram")
-                ? connectionCsv[headers.IndexOf("StartProgram")]
+            connectionRecord.RDPStartProgram = headers.Contains("RDPStartProgram")
+                ? connectionCsv[headers.IndexOf("RDPStartProgram")]
                 : "";
 
-            connectionRecord.StartProgramWorkDir = headers.Contains("StartProgramWorkDir")
-                ? connectionCsv[headers.IndexOf("StartProgramWorkDir")]
+            connectionRecord.RDPStartProgramWorkDir = headers.Contains("RDPStartProgramWorkDir")
+                ? connectionCsv[headers.IndexOf("RDPStartProgramWorkDir")]
                 : "";
 
             if (headers.Contains("Protocol"))

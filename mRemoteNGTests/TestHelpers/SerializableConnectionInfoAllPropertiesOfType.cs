@@ -72,8 +72,8 @@
         public TType UseEnhancedMode { get; set; }
         public TType SSHOptions { get; set; }
         public TType SSHTunnelConnectionName { get; set; }
-        public TType StartProgram { get; set; }
-        public TType StartProgramWorkDir { get; set; }
+        public TType RDPStartProgram { get; set; }
+        public TType RDPStartProgramWorkDir { get; set; }
 		public TType OpeningCommand { get; set; }
 	}
 }

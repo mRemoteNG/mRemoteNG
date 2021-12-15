@@ -261,8 +261,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectAudioCapture),
 						nameof(ConnectionInfo.RdpVersion),
                         nameof(ConnectionInfo.OpeningCommand),
-                        nameof(ConnectionInfo.StartProgram),
-                        nameof(ConnectionInfo.StartProgramWorkDir)
+                        nameof(ConnectionInfo.RDPStartProgram),
+                        nameof(ConnectionInfo.RDPStartProgramWorkDir)
                     });
                     break;
                 case ProtocolType.VNC:

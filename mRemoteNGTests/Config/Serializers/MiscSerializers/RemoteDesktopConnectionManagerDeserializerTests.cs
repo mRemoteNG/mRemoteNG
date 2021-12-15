@@ -330,7 +330,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
             var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
             var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
-            Assert.That(connection.StartProgram, Is.EqualTo(ExpectedStartProgram));
+            Assert.That(connection.RDPStartProgram, Is.EqualTo(ExpectedStartProgram));
         }
     }
 }
