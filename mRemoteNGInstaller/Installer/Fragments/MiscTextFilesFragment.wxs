@@ -5,9 +5,6 @@
       <Component Id="C.Changelog" Guid="762459f4-0460-4058-a448-d0f4e5cd4a65">
         <File Id="ChangelogFile" Name="Changelog" Source="$(var.SolutionDir)CHANGELOG.md" KeyPath="yes" />
       </Component>
-      <Component Id="C.Credits" Guid="30d1a804-209f-4535-a546-1610a76c3d1b">
-        <File Id="CreditsFile" Name="Credits" Source="$(var.SolutionDir)CREDITS.md" KeyPath="yes" />
-      </Component>
       <Component Id="C.License" Guid="89e79101-fcf9-4277-b948-1fd5f1fcae69">
         <File Id="LicenseFile" Name="License" Source="$(var.SolutionDir)COPYING.TXT" KeyPath="yes" />
       </Component>
