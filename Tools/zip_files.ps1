@@ -12,6 +12,7 @@
     $ConfigurationName
 )
 
+Write-Output ""
 Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 
 $ConfigurationName = $ConfigurationName.Trim()
@@ -46,8 +47,13 @@ if ($ConfigurationName -match "Release") {
     }
     # Local build
     else {
-        $outputZipPath = "$($SolutionDir)Release\$zipFilePrefix-$($version).zip"
-        Compress-Archive $debugFile $outputZipPath -Force
+		if (!(Test-Path -Path $debugFile -PathType Leaf))
+		{
+			$outputZipPath = "$($SolutionDir)Release\$zipFilePrefix-$($version).zip"
+			Compress-Archive $debugFile $outputZipPath -Force
+		} else {
+			write-host "File do not exist:" $debugFile", nothing to compress"
+		}
     }
 
     Remove-Item $debugFile
@@ -64,8 +70,13 @@ if ($ConfigurationName -eq "Release Portable") {
     }
     # Local build
     else {
-        $outputZipPath="$($SolutionDir)\Release\mRemoteNG-Portable-$($version).zip"
-        Compress-Archive $Source $outputZipPath -Force
+		if ($Source)
+		{
+			$outputZipPath="$($SolutionDir)\Release\mRemoteNG-Portable-$($version).zip"
+			Compress-Archive $Source $outputZipPath -Force
+		} else {
+			write-host "File do not exist:" $Source", nothing to compress"
+		}
     }
 }
 
