@@ -178,7 +178,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         public void StartProgramImportedCorrectly()
         {
             var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
-            Assert.That(connectionInfo.StartProgram, Is.EqualTo(ExpectedStartProgram));
+            Assert.That(connectionInfo.RDPStartProgram, Is.EqualTo(ExpectedStartProgram));
         }
 
         //[Test]

@@ -317,8 +317,8 @@ namespace mRemoteNG.Connection
 
         private void SetRemoteDesktopServicesDefaults()
         {
-            StartProgram = string.Empty;
-            StartProgramWorkDir = string.Empty;
+            RDPStartProgram = string.Empty;
+            RDPStartProgramWorkDir = string.Empty;
         }
 
         private void SetRdGatewayDefaults()
@@ -367,8 +367,8 @@ namespace mRemoteNG.Connection
             MacAddress = Settings.Default.ConDefaultMacAddress;
             UserField = Settings.Default.ConDefaultUserField;
             Favorite = Settings.Default.ConDefaultFavorite;
-            StartProgram = Settings.Default.ConDefaultStartProgram;
-            StartProgramWorkDir = Settings.Default.ConDefaultStartProgram;
+            RDPStartProgram = Settings.Default.ConDefaultRDPStartProgram;
+            RDPStartProgramWorkDir = Settings.Default.ConDefaultRDPStartProgram;
             OpeningCommand = Settings.Default.OpeningCommand;
         }
 

@@ -4000,15 +4000,6 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Program/alternate shell.
-        /// </summary>
-        internal static string PropertyDescriptionStartProgram {
-            get {
-                return ResourceManager.GetString("PropertyDescriptionStartProgram", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Connect to the console session of the remote host..
         /// </summary>
         internal static string PropertyDescriptionUseConsoleSession {
@@ -5610,15 +5601,6 @@ namespace mRemoteNG.Resources.Language {
         internal static string StartMinimized {
             get {
                 return ResourceManager.GetString("StartMinimized", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start Program.
-        /// </summary>
-        internal static string StartProgram {
-            get {
-                return ResourceManager.GetString("StartProgram", resourceCulture);
             }
         }
         

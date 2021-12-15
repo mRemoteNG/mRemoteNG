@@ -164,7 +164,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPrinters), ExpectedPrinterRedirection).SetName(nameof(ConnectionInfo.RedirectPrinters)),
 		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectPorts), ExpectedPortRedirection).SetName(nameof(ConnectionInfo.RedirectPorts)),
 		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectDiskDrives), ExpectedDriveRedirection).SetName(nameof(ConnectionInfo.RedirectDiskDrives)),
-		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.StartProgram), ExpectedStartProgram).SetName(nameof(ConnectionInfo.StartProgram)),
+		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDPStartProgram), ExpectedStartProgram).SetName(nameof(ConnectionInfo.RDPStartProgram)),
 			};
         }
 

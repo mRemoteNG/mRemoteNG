@@ -2181,6 +2181,14 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Alternate shell working directory</value>
     <comment>https://docs.microsoft.com/en-us/windows/win32/termserv/imstscsecuredsettings-workdir</comment>
   </data>
+  <data name="OpeningCommand" xml:space="preserve">
+    <value>TODO</value>
+    <comment></comment>
+  </data>
+  <data name="PropertyDescriptionOpeningCommand" xml:space="preserve">
+    <value>TODO</value>
+  </data>
+
   <data name="RedirectDrives" xml:space="preserve">
     <value>Disk Drives</value>
   </data>
