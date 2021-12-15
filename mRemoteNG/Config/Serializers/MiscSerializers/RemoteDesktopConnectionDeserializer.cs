@@ -152,7 +152,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     connectionInfo.RDGatewayHostname = value;
                     break;
                 case "alternate shell":
-                    connectionInfo.StartProgram = value;
+                    connectionInfo.RDPStartProgram = value;
                     break;
             }
         }

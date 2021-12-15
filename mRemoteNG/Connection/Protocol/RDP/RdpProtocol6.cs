@@ -288,8 +288,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
             _rdpClient.AdvancedSettings2.MinutesToIdleTimeout = connectionInfo.RDPMinutesToIdleTimeout;
 
             #region Remote Desktop Services
-            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.StartProgram;
-            _rdpClient.SecuredSettings2.WorkDir = connectionInfo.StartProgramWorkDir;
+            _rdpClient.SecuredSettings2.StartProgram = connectionInfo.RDPStartProgram;
+            _rdpClient.SecuredSettings2.WorkDir = connectionInfo.RDPStartProgramWorkDir;
             #endregion
 
             //not user changeable

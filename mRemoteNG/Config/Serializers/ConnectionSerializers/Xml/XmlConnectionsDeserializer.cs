@@ -541,13 +541,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.SSHTunnelConnectionName = xmlnode.GetAttributeAsString("SSHTunnelConnectionName");
                     connectionInfo.OpeningCommand = xmlnode.GetAttributeAsString("OpeningCommand");
                     connectionInfo.SSHOptions = xmlnode.GetAttributeAsString("SSHOptions");
-                    connectionInfo.StartProgram = xmlnode.GetAttributeAsString("StartProgram");
+                    connectionInfo.RDPStartProgram = xmlnode.GetAttributeAsString("StartProgram");
+                    connectionInfo.RDPStartProgramWorkDir = xmlnode.GetAttributeAsString("StartProgramWorkDir");
                     connectionInfo.DisableFullWindowDrag = xmlnode.GetAttributeAsBool("DisableFullWindowDrag");
                     connectionInfo.DisableMenuAnimations = xmlnode.GetAttributeAsBool("DisableMenuAnimations");
                     connectionInfo.DisableCursorShadow = xmlnode.GetAttributeAsBool("DisableCursorShadow");
                     connectionInfo.DisableCursorBlinking = xmlnode.GetAttributeAsBool("DisableCursorBlinking");
-                    connectionInfo.StartProgram = xmlnode.GetAttributeAsString("StartProgram");
-                    connectionInfo.StartProgramWorkDir = xmlnode.GetAttributeAsString("StartProgramWorkDir");
+                    connectionInfo.RDPStartProgram = xmlnode.GetAttributeAsString("StartProgram");
+                    connectionInfo.RDPStartProgramWorkDir = xmlnode.GetAttributeAsString("StartProgramWorkDir");
                     connectionInfo.Inheritance.RedirectClipboard = xmlnode.GetAttributeAsBool("InheritRedirectClipboard");
                     connectionInfo.Inheritance.Favorite = xmlnode.GetAttributeAsBool("InheritFavorite");
                     connectionInfo.Inheritance.RdpVersion = xmlnode.GetAttributeAsBool("InheritRdpVersion");
