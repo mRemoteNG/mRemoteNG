@@ -86,7 +86,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <LinkerAdditionalOptions>
     </LinkerAdditionalOptions>
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\x64\Release;HelpFilesHarvestPath=$(SolutionDir)mRemoteNG\Resources\Help</DefineConstants>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteNG\bin\x64\Release</DefineConstants>
     <Cultures>en-US</Cultures>
     <SuppressPdbOutput>True</SuppressPdbOutput>
   </PropertyGroup>
