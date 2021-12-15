@@ -967,7 +967,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Select whether to use bitmap caching or not.</value>
   </data>
   <data name="PropertyDescriptionColors" xml:space="preserve">
-    <value>Select the colour quality to be used.</value>
+    <value>Select the color quality to be used.</value>
   </data>
   <data name="PropertyDescriptionCompression" xml:space="preserve">
     <value>Select the compression value to be used.</value>
@@ -1126,7 +1126,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Cache Bitmaps</value>
   </data>
   <data name="Colors" xml:space="preserve">
-    <value>Colours</value>
+    <value>Colors</value>
   </data>
   <data name="Compression" xml:space="preserve">
     <value>Compression</value>
@@ -1331,19 +1331,19 @@ If you run into such an error, please create a new connection file!</value>
     <value>RDP</value>
   </data>
   <data name="Rdp16777216Colors" xml:space="preserve">
-    <value>16777216 Colours (24-bit)</value>
+    <value>16777216 Colors (24-bit)</value>
   </data>
   <data name="Rdp256Colors" xml:space="preserve">
     <value>256 Colours (8-bit)</value>
   </data>
   <data name="Rdp32768Colors" xml:space="preserve">
-    <value>32768 Colours (15-bit)</value>
+    <value>32768 Colors (15-bit)</value>
   </data>
   <data name="Rdp4294967296Colors" xml:space="preserve">
-    <value>16777216 Colours (32-bit)</value>
+    <value>16777216 Colors (32-bit)</value>
   </data>
   <data name="Rdp65536Colors" xml:space="preserve">
-    <value>65536 Colours (16-bit)</value>
+    <value>65536 Colors (16-bit)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Couldn't create RDP control, please check mRemoteNG requirements.</value>
