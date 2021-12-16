@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1690: Replaced GeckoFX (Firefox) with CefSharp (Chromium)
 - #1325: Language resource files cleanup
 ### Fixed
+- #2089: Fixed the exception thrown by menu buttons "Documentation" and "Website"
 - #2087: Fixed application crash, when the update file is launched from the application
 - #2079: Fixed theme files not being copied to output directory
 - #1884: Allow setting Port when using MSSQL
