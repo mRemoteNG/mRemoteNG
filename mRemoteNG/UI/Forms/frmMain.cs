@@ -25,6 +25,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
@@ -339,10 +340,10 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private void frmMain_Shown(object sender, EventArgs e)
+        private async void frmMain_Shown(object sender, EventArgs e)
         {
             PromptForUpdatesPreference();
-            CheckForUpdates();
+            await CheckForUpdates();
         }
 
         private void PromptForUpdatesPreference()
@@ -374,7 +375,7 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private void CheckForUpdates()
+        private async Task CheckForUpdates()
         {
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 
@@ -385,7 +386,7 @@ namespace mRemoteNG.UI.Forms
             if (!IsHandleCreated)
                 CreateHandle(); // Make sure the handle is created so that InvokeRequired returns the correct result
 
-            Startup.Instance.CheckForUpdate();
+            await Startup.Instance.CheckForUpdate();
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

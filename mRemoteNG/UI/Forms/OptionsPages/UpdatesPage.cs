@@ -159,8 +159,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         #endregion
 
-        #region Private Methods
-
         #region Event Handlers
 
         private void chkCheckForUpdatesOnStartup_CheckedChanged(object sender, EventArgs e)
@@ -194,7 +192,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
         }
 
-        private void btnTestProxy_Click(object sender, EventArgs e)
+        private async void btnTestProxy_Click(object sender, EventArgs e)
         {
             if (_appUpdate != null)
             {
@@ -210,13 +208,27 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                                         (int)numProxyPort.Value, chkUseProxyAuthentication.Checked,
                                         txtProxyUsername.Text,
                                         txtProxyPassword.Text);
+            try
+            {
+                btnTestProxy.Enabled = false;
+                btnTestProxy.Text = Language.OptionsProxyTesting;
 
-            btnTestProxy.Enabled = false;
-            btnTestProxy.Text = Language.OptionsProxyTesting;
+                await _appUpdate.GetUpdateInfoAsync();
 
-            _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
+                btnTestProxy.Enabled = true;
+                btnTestProxy.Text = Language.TestProxy;
+                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestSucceeded, "",
+                    Language._Ok, false);
+            }
+            catch (Exception ex)
+            {
+                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestFailed,
+                    MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language._Ok,
+                    false,
+                    ESysIcons.Error,
+                    0);
+            }
 
-            _appUpdate.GetUpdateInfoAsync();
         }
 
         private void chkUseProxyAuthentication_CheckedChanged(object sender, EventArgs e)
@@ -224,47 +236,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (chkUseProxyForAutomaticUpdates.Checked)
             {
                 tblProxyAuthentication.Enabled = chkUseProxyAuthentication.Checked;
-            }
-        }
-
-        #endregion
-
-        private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (InvokeRequired)
-            {
-                AsyncCompletedEventHandler myDelegate = GetUpdateInfoCompleted;
-                Invoke(myDelegate, sender, e);
-                return;
-            }
-
-            try
-            {
-                _appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
-
-                btnTestProxy.Enabled = true;
-                btnTestProxy.Text = Language.TestProxy;
-
-                if (e.Cancelled)
-                {
-                    return;
-                }
-
-                if (e.Error != null)
-                {
-                    throw e.Error;
-                }
-
-                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestSucceeded, "",
-                                           Language._Ok, false);
-            }
-            catch (Exception ex)
-            {
-                CTaskDialog.ShowCommandBox(this, Application.ProductName, Language.ProxyTestFailed,
-                                           MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language._Ok,
-                                           false,
-                                           ESysIcons.Error,
-                                           0);
             }
         }
 

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Threading.Tasks;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
@@ -65,7 +66,7 @@ namespace mRemoteNG.App
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 
-        public void CheckForUpdate()
+        public async Task CheckForUpdate()
         {
             if (_appUpdate == null)
             {
@@ -87,32 +88,9 @@ namespace mRemoteNG.App
                 return;
             }
 
-            _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
-            _appUpdate.GetUpdateInfoAsync();
-        }
-
-        private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (_frmMain.InvokeRequired)
-            {
-                _frmMain.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), sender, e);
-                return;
-            }
-
             try
             {
-                _appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
-
-                if (e.Cancelled)
-                {
-                    return;
-                }
-
-                if (e.Error != null)
-                {
-                    throw e.Error;
-                }
-
+                await _appUpdate.GetUpdateInfoAsync();
                 if (_appUpdate.IsUpdateAvailable())
                 {
                     Windows.Show(WindowType.Update);
@@ -120,7 +98,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex);
+                Runtime.MessageCollector.AddExceptionMessage("CheckForUpdate() failed.", ex);
             }
         }
     }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;
@@ -11,13 +9,14 @@ using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using System.Threading.Tasks;
 
 namespace mRemoteNG.UI.Window
 {
     public partial class UpdateWindow : BaseWindow
     {
         private AppUpdater _appUpdate;
-        private bool _isUpdateDownloadHandlerDeclared;
+        //private bool _isUpdateDownloadHandlerDeclared;
 
         #region Public Methods
 
@@ -38,12 +37,12 @@ namespace mRemoteNG.UI.Window
 
         #region Form Stuff
 
-        private void Update_Load(object sender, EventArgs e)
+        private async void Update_Load(object sender, EventArgs e)
         {
             ApplyTheme();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
-            CheckForUpdate();
+            await CheckForUpdateAsync();
         }
 
         private new void ApplyTheme()
@@ -72,14 +71,14 @@ namespace mRemoteNG.UI.Window
             lblLatestVersionLabel.Text = $"{Language.AvailableVersion}:";
         }
 
-        private void btnCheckForUpdate_Click(object sender, EventArgs e)
+        private async void btnCheckForUpdate_Click(object sender, EventArgs e)
         {
-            CheckForUpdate();
+            await CheckForUpdateAsync();
         }
 
-        private void btnDownload_Click(object sender, EventArgs e)
+        private async void btnDownload_Click(object sender, EventArgs e)
         {
-            DownloadUpdate();
+            await DownloadUpdateAsync();
         }
 
         private void pbUpdateImage_Click(object sender, EventArgs e)
@@ -97,7 +96,7 @@ namespace mRemoteNG.UI.Window
 
         #region Private Methods
 
-        private void CheckForUpdate()
+        private async Task CheckForUpdateAsync()
         {
             if (_appUpdate == null)
             {
@@ -119,38 +118,14 @@ namespace mRemoteNG.UI.Window
 
             SetVisibilityOfUpdateControls(false);
 
-            _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
-
-            _appUpdate.GetUpdateInfoAsync();
-        }
-
-        private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (InvokeRequired)
-            {
-                var myDelegate = new AsyncCompletedEventHandler(GetUpdateInfoCompleted);
-                Invoke(myDelegate, sender, e);
-                return;
-            }
-
             try
             {
-                _appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
+                await _appUpdate.GetUpdateInfoAsync();
 
                 lblInstalledVersion.Text = Application.ProductVersion;
                 lblInstalledVersion.Visible = true;
                 lblInstalledVersionLabel.Visible = true;
                 btnCheckForUpdate.Visible = true;
-
-                if (e.Cancelled)
-                {
-                    return;
-                }
-
-                if (e.Error != null)
-                {
-                    throw e.Error;
-                }
 
                 if (_appUpdate.IsUpdateAvailable())
                 {
@@ -174,8 +149,15 @@ namespace mRemoteNG.UI.Window
                         pbUpdateImage.Visible = true;
                     }
 
-                    _appUpdate.GetChangeLogCompletedEvent += GetChangeLogCompleted;
-                    _appUpdate.GetChangeLogAsync();
+                    try
+                    {
+                        var changeLog = await _appUpdate.GetChangeLogAsync();
+                        txtChangeLog.Text = changeLog.Replace("\n", Environment.NewLine);
+                    }
+                    catch (Exception ex)
+                    {
+                        Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateGetChangeLogFailed, ex);
+                    }
 
                     btnDownload.Focus();
                 }
@@ -200,7 +182,7 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateCheckCompleteFailed, ex);
             }
         }
-
+        
         private void SetVisibilityOfUpdateControls(bool visible)
         {
             lblChangeLogLabel.Visible = visible;
@@ -209,33 +191,7 @@ namespace mRemoteNG.UI.Window
             prgbDownload.Visible = visible;
         }
 
-        private void GetChangeLogCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (InvokeRequired)
-            {
-                var myDelegate = new AsyncCompletedEventHandler(GetChangeLogCompleted);
-                Invoke(myDelegate, sender, e);
-                return;
-            }
-
-            try
-            {
-                _appUpdate.GetChangeLogCompletedEvent -= GetChangeLogCompleted;
-
-                if (e.Cancelled)
-                    return;
-                if (e.Error != null)
-                    throw e.Error;
-
-                txtChangeLog.Text = _appUpdate.ChangeLog.Replace("\n", Environment.NewLine);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateGetChangeLogFailed, ex);
-            }
-        }
-
-        private void DownloadUpdate()
+        private async Task DownloadUpdateAsync()
         {
             try
             {
@@ -243,49 +199,18 @@ namespace mRemoteNG.UI.Window
                 prgbDownload.Visible = true;
                 prgbDownload.Value = 0;
 
-                if (_isUpdateDownloadHandlerDeclared == false)
-                {
-                    _appUpdate.DownloadUpdateProgressChangedEvent += DownloadUpdateProgressChanged;
-                    _appUpdate.DownloadUpdateCompletedEvent += DownloadUpdateCompleted;
-                    _isUpdateDownloadHandlerDeclared = true;
-                }
+                await _appUpdate.DownloadUpdateAsync(new Progress<int>(progress => prgbDownload.Value = progress));
 
-                _appUpdate.DownloadUpdateAsync();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateDownloadFailed, ex);
-            }
-        }
-
-        #endregion
-
-        #region Events
-
-        private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            prgbDownload.Value = e.ProgressPercentage;
-        }
-
-        private void DownloadUpdateCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            try
-            {
                 btnDownload.Enabled = true;
                 prgbDownload.Visible = false;
 
-                if (e.Cancelled)
-                    return;
-                if (e.Error != null)
-                    throw e.Error;
-
                 if (Runtime.IsPortableEdition)
                     MessageBox.Show(Language.UpdatePortableDownloadComplete, Language.CheckForUpdates,
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                 {
                     if (MessageBox.Show(Language.UpdateDownloadComplete, Language.CheckForUpdates,
-                                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
                         Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
                     }
@@ -297,8 +222,11 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
+                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateDownloadFailed, ex);
+
                 Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateDownloadCompleteFailed, ex);
                 Runtime.MessageCollector?.AddMessage(MessageClass.ErrorMsg, ex.Message);
+
             }
         }
 

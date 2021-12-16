@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 ### Added
+- #2086: Replace WebClient with async HttpClient for updater.
 - #1850: Minify config xml
 - #1770: Added missing RDP performance settings
 - #1516: added API to access credential vault (Thycotic Secret Server) by specifying SSAPI:ID as username
@@ -38,7 +39,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1720: Show configuration file name in title of password prompt form
 - #1713: Sound redirection does not work if Clipboard redirection is set to No
 - #1632: 1.77.1 breaks RDP drive and sound redirection
-- #1610: Menu bar changes to english when cancelling options form
+- #1610: Menu bar changes to english when canceling options form
 - #1595: Unhandled exception when trying to browse through non existent multi ssh history with keyboard key strokes
 - #1589: Update SQL tables instead of rewriting them
 - #1465: REGRESSION: Smart Cards redirection to Remote Desktop not working

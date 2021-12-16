@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.ComponentModel;
+using System.Net.Http;
 using System.Threading;
-using System.Reflection;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 using mRemoteNG.Properties;
 #if !PORTABLE
 using mRemoteNG.Tools;
@@ -21,29 +21,30 @@ namespace mRemoteNG.App.Update
 {
     public class AppUpdater
     {
+        private const int _bufferLength = 8192;
         private WebProxy _webProxy;
-        private Thread _getUpdateInfoThread;
-        private Thread _getChangeLogThread;
+        private HttpClient _httpClient;
+        private CancellationTokenSource _changeLogCancelToken;
+        private CancellationTokenSource _getUpdateInfoCancelToken;
 
         #region Public Properties
 
         public UpdateInfo CurrentUpdateInfo { get; private set; }
 
-        public string ChangeLog { get; private set; }
-
         public bool IsGetUpdateInfoRunning
         {
-            get { return _getUpdateInfoThread != null && _getUpdateInfoThread.IsAlive; }
+            get
+            {
+                return _getUpdateInfoCancelToken != null;
+            }
         }
 
         private bool IsGetChangeLogRunning
         {
-            get { return _getChangeLogThread != null && _getChangeLogThread.IsAlive; }
-        }
-
-        public bool IsDownloadUpdateRunning
-        {
-            get { return _downloadUpdateWebClient != null; }
+            get
+            {
+                return _changeLogCancelToken != null;
+            }
         }
 
         #endregion
@@ -52,10 +53,10 @@ namespace mRemoteNG.App.Update
 
         public AppUpdater()
         {
-            SetProxySettings();
+            SetDefaultProxySettings();
         }
 
-        private void SetProxySettings()
+        private void SetDefaultProxySettings()
         {
             var shouldWeUseProxy = Settings.Default.UpdateUseProxy;
             var proxyAddress = Settings.Default.UpdateProxyAddress;
@@ -78,13 +79,14 @@ namespace mRemoteNG.App.Update
             if (useProxy && !string.IsNullOrEmpty(address))
             {
                 _webProxy = port != 0 ? new WebProxy(address, port) : new WebProxy(address);
-
                 _webProxy.Credentials = useAuthentication ? new NetworkCredential(username, password) : null;
             }
             else
             {
                 _webProxy = null;
             }
+
+            UpdateHttpClient();
         }
 
         public bool IsUpdateAvailable()
@@ -96,54 +98,24 @@ namespace mRemoteNG.App.Update
 
             return CurrentUpdateInfo.Version > GeneralAppInfo.GetApplicationVersion();
         }
-
-        public void GetUpdateInfoAsync()
+        
+        public async Task DownloadUpdateAsync(IProgress<int> progress)
         {
             if (IsGetUpdateInfoRunning)
             {
-                _getUpdateInfoThread.Abort();
-            }
+                _getUpdateInfoCancelToken.Cancel();
+                _getUpdateInfoCancelToken.Dispose();
+                _getUpdateInfoCancelToken = null;
 
-            _getUpdateInfoThread = new Thread(GetUpdateInfo);
-            _getUpdateInfoThread.SetApartmentState(ApartmentState.STA);
-            _getUpdateInfoThread.IsBackground = true;
-            _getUpdateInfoThread.Start();
-        }
-
-        public void GetChangeLogAsync()
-        {
-            if (CurrentUpdateInfo == null || !CurrentUpdateInfo.IsValid)
-            {
-                throw new InvalidOperationException(
-                                                    "CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling GetChangeLogAsync().");
-            }
-
-            if (IsGetChangeLogRunning)
-            {
-                _getChangeLogThread.Abort();
-            }
-
-            _getChangeLogThread = new Thread(GetChangeLog);
-            _getChangeLogThread.SetApartmentState(ApartmentState.STA);
-            _getChangeLogThread.IsBackground = true;
-            _getChangeLogThread.Start();
-        }
-
-        public void DownloadUpdateAsync()
-        {
-            if (_downloadUpdateWebClient != null)
-            {
                 throw new InvalidOperationException("A previous call to DownloadUpdateAsync() is still in progress.");
             }
 
             if (CurrentUpdateInfo == null || !CurrentUpdateInfo.IsValid)
             {
-                throw new InvalidOperationException(
-                                                    "CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().");
+                throw new InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().");
             }
 #if !PORTABLE
-            CurrentUpdateInfo.UpdateFilePath =
- Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "msi"));
+            CurrentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "msi"));
 #else
             var sfd = new SaveFileDialog
             {
@@ -160,135 +132,38 @@ namespace mRemoteNG.App.Update
                 return;
             }
 #endif
-            DownloadUpdateWebClient.DownloadFileAsync(CurrentUpdateInfo.DownloadAddress,
-                                                      CurrentUpdateInfo.UpdateFilePath);
-        }
-
-        #endregion
-
-        #region Private Properties
-
-        private WebClient _downloadUpdateWebClient;
-
-        private WebClient DownloadUpdateWebClient
-        {
-            get
-            {
-                if (_downloadUpdateWebClient != null)
-                {
-                    return _downloadUpdateWebClient;
-                }
-
-                _downloadUpdateWebClient = CreateWebClient();
-
-                _downloadUpdateWebClient.DownloadProgressChanged += DownloadUpdateProgressChanged;
-                _downloadUpdateWebClient.DownloadFileCompleted += DownloadUpdateCompleted;
-
-                return _downloadUpdateWebClient;
-            }
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private WebClient CreateWebClient()
-        {
-            var webClient = new WebClient();
-            webClient.Headers.Add("user-agent", GeneralAppInfo.UserAgent);
-            webClient.Proxy = _webProxy;
-            return webClient;
-        }
-
-        private static DownloadStringCompletedEventArgs NewDownloadStringCompletedEventArgs(string result,
-                                                                                            Exception exception,
-                                                                                            bool cancelled,
-                                                                                            object userToken)
-        {
-            var type = typeof(DownloadStringCompletedEventArgs);
-            const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
-            Type[] argumentTypes = {typeof(string), typeof(Exception), typeof(bool), typeof(object)};
-            var constructor = type.GetConstructor(bindingFlags, null, argumentTypes, null);
-            object[] arguments = {result, exception, cancelled, userToken};
-
-            if (constructor == null)
-                return null;
-            return (DownloadStringCompletedEventArgs)constructor.Invoke(arguments);
-        }
-
-        private DownloadStringCompletedEventArgs DownloadString(Uri address)
-        {
-            var webClient = CreateWebClient();
-            var result = string.Empty;
-            Exception exception = null;
-            var cancelled = false;
-
             try
             {
-                result = webClient.DownloadString(address);
-            }
-            catch (ThreadAbortException)
-            {
-                cancelled = true;
-            }
-            catch (Exception ex)
-            {
-                exception = ex;
-            }
+                _getUpdateInfoCancelToken = new CancellationTokenSource();
+                using var response = await _httpClient.GetAsync(CurrentUpdateInfo.DownloadAddress, HttpCompletionOption.ResponseHeadersRead, _getUpdateInfoCancelToken.Token);
+                var buffer = new byte[_bufferLength];
+                var totalBytes = response.Content.Headers.ContentLength ?? 0;
+                var readBytes = 0L;
 
-            return NewDownloadStringCompletedEventArgs(result, exception, cancelled, null);
-        }
-
-        private void GetUpdateInfo()
-        {
-            var e = DownloadString(UpdateChannelInfo.GetUpdateChannelInfo());
-
-            if (!e.Cancelled && e.Error == null)
-            {
-                try
+                await using (var httpStream = await response.Content.ReadAsStreamAsync(_getUpdateInfoCancelToken.Token))
                 {
-                    CurrentUpdateInfo = UpdateInfo.FromString(e.Result);
+                    await using var fileStream = new FileStream(CurrentUpdateInfo.UpdateFilePath, FileMode.Create,
+                        FileAccess.Write, FileShare.None, _bufferLength, true);
 
-                    Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
-                    if (!Settings.Default.UpdatePending)
+                    while (readBytes <= totalBytes || !_getUpdateInfoCancelToken.IsCancellationRequested)
                     {
-                        Settings.Default.UpdatePending = IsUpdateAvailable();
+                        var bytesRead =
+                            await httpStream.ReadAsync(buffer, 0, _bufferLength, _getUpdateInfoCancelToken.Token);
+                        if (bytesRead == 0)
+                        {
+                            progress.Report(100);
+                            break;
+                        }
+
+                        await fileStream.WriteAsync(buffer, 0, bytesRead, _getUpdateInfoCancelToken.Token);
+
+                        readBytes += bytesRead;
+
+                        var percentComplete = (int)(readBytes * 100 / totalBytes);
+                        progress.Report(percentComplete);
                     }
                 }
-                catch (Exception ex)
-                {
-                    e = NewDownloadStringCompletedEventArgs(e.Result, ex, e.Cancelled, null);
-                }
-            }
 
-            GetUpdateInfoCompletedEventEvent?.Invoke(this, e);
-        }
-
-        private void GetChangeLog()
-        {
-            var e = DownloadString(CurrentUpdateInfo.ChangeLogAddress);
-
-            if (!e.Cancelled && e.Error == null)
-            {
-                ChangeLog = e.Result;
-            }
-
-            GetChangeLogCompletedEventEvent?.Invoke(this, e);
-        }
-
-        private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            DownloadUpdateProgressChangedEventEvent?.Invoke(sender, e);
-        }
-
-        private void DownloadUpdateCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            var raiseEventArgs = e;
-
-            if (!e.Cancelled && e.Error == null)
-            {
-                try
-                {
 #if !PORTABLE
                     var updateAuthenticode = new Authenticode(CurrentUpdateInfo.UpdateFilePath)
                     {
@@ -307,101 +182,85 @@ namespace mRemoteNG.App.Update
                     }
 #endif
 
-                    using (var cksum = SHA512.Create())
-                    {
-                        using (var stream = File.OpenRead(CurrentUpdateInfo.UpdateFilePath))
-                        {
-                            var hash = cksum.ComputeHash(stream);
-                            var hashString = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
-                            if (!hashString.Equals(CurrentUpdateInfo.Checksum))
-                                throw new Exception("SHA512 Hashes didn't match!");
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    raiseEventArgs = new AsyncCompletedEventArgs(ex, false, null);
-                }
+                using var checksum = SHA512.Create();
+                await using var stream = File.OpenRead(CurrentUpdateInfo.UpdateFilePath);
+                var hash = await checksum.ComputeHashAsync(stream);
+                var hashString = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
+                if (!hashString.Equals(CurrentUpdateInfo.Checksum))
+                    throw new Exception("SHA512 Hashes didn't match!");
+            } finally{
+                _getUpdateInfoCancelToken?.Dispose();
+                _getUpdateInfoCancelToken = null;
             }
-
-            if (raiseEventArgs.Cancelled || raiseEventArgs.Error != null)
-            {
-                File.Delete(CurrentUpdateInfo.UpdateFilePath);
-            }
-
-            DownloadUpdateCompletedEventEvent?.Invoke(this, raiseEventArgs);
-
-            _downloadUpdateWebClient.Dispose();
-            _downloadUpdateWebClient = null;
         }
 
         #endregion
 
-        #region Events
+        #region Private Methods
 
-        private AsyncCompletedEventHandler GetUpdateInfoCompletedEventEvent;
-
-        public event AsyncCompletedEventHandler GetUpdateInfoCompletedEvent
+        private void UpdateHttpClient()
         {
-            add
+            if (_httpClient != null)
             {
-                GetUpdateInfoCompletedEventEvent =
-                    (AsyncCompletedEventHandler)Delegate.Combine(GetUpdateInfoCompletedEventEvent, value);
+                _httpClient.Dispose();
             }
-            remove
+
+            var httpClientHandler = new HttpClientHandler();
+            if (_webProxy != null)
             {
-                GetUpdateInfoCompletedEventEvent =
-                    (AsyncCompletedEventHandler)Delegate.Remove(GetUpdateInfoCompletedEventEvent, value);
+                httpClientHandler.UseProxy = true;
+                httpClientHandler.Proxy = _webProxy;
+            }
+            _httpClient = new HttpClient(httpClientHandler);
+            _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(GeneralAppInfo.UserAgent);
+        }
+
+        public async Task GetUpdateInfoAsync()
+        {
+            if (IsGetUpdateInfoRunning)
+            {
+                _getUpdateInfoCancelToken.Cancel();
+                _getUpdateInfoCancelToken.Dispose();
+                _getUpdateInfoCancelToken = null;
+            }
+
+            try
+            {
+                _getUpdateInfoCancelToken = new CancellationTokenSource();
+                var updateInfo = await _httpClient.GetStringAsync(UpdateChannelInfo.GetUpdateChannelInfo(), _getUpdateInfoCancelToken.Token);
+                CurrentUpdateInfo = UpdateInfo.FromString(updateInfo);
+                Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
+
+                if (!Settings.Default.UpdatePending)
+                {
+                    Settings.Default.UpdatePending = IsUpdateAvailable();
+                }
+            }
+            finally
+            {
+                _getUpdateInfoCancelToken?.Dispose();
+                _getUpdateInfoCancelToken = null;
             }
         }
 
-        private AsyncCompletedEventHandler GetChangeLogCompletedEventEvent;
-
-        public event AsyncCompletedEventHandler GetChangeLogCompletedEvent
+        public async Task<string> GetChangeLogAsync()
         {
-            add
+            if (IsGetChangeLogRunning)
             {
-                GetChangeLogCompletedEventEvent =
-                    (AsyncCompletedEventHandler)Delegate.Combine(GetChangeLogCompletedEventEvent, value);
+                _changeLogCancelToken.Cancel();
+                _changeLogCancelToken.Dispose();
+                _changeLogCancelToken = null;
             }
-            remove
-            {
-                GetChangeLogCompletedEventEvent =
-                    (AsyncCompletedEventHandler)Delegate.Remove(GetChangeLogCompletedEventEvent, value);
-            }
-        }
 
-        private DownloadProgressChangedEventHandler DownloadUpdateProgressChangedEventEvent;
-
-        public event DownloadProgressChangedEventHandler DownloadUpdateProgressChangedEvent
-        {
-            add
+            try
             {
-                DownloadUpdateProgressChangedEventEvent =
-                    (DownloadProgressChangedEventHandler)Delegate.Combine(DownloadUpdateProgressChangedEventEvent,
-                                                                          value);
+                _changeLogCancelToken = new CancellationTokenSource();
+                return await _httpClient.GetStringAsync(CurrentUpdateInfo.ChangeLogAddress, _changeLogCancelToken.Token);
             }
-            remove
+            finally
             {
-                DownloadUpdateProgressChangedEventEvent =
-                    (DownloadProgressChangedEventHandler)Delegate.Remove(DownloadUpdateProgressChangedEventEvent,
-                                                                         value);
-            }
-        }
-
-        private AsyncCompletedEventHandler DownloadUpdateCompletedEventEvent;
-
-        public event AsyncCompletedEventHandler DownloadUpdateCompletedEvent
-        {
-            add
-            {
-                DownloadUpdateCompletedEventEvent =
-                    (AsyncCompletedEventHandler)Delegate.Combine(DownloadUpdateCompletedEventEvent, value);
-            }
-            remove
-            {
-                DownloadUpdateCompletedEventEvent =
-                    (AsyncCompletedEventHandler)Delegate.Remove(DownloadUpdateCompletedEventEvent, value);
+                _changeLogCancelToken?.Dispose();
+                _changeLogCancelToken = null;
             }
         }
 
