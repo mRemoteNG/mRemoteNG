@@ -120,7 +120,7 @@ namespace mRemoteNG.App
         private static void RunUpdateFile()
         {
             if (UpdatePending)
-                Process.Start(_updateFilePath);
+                Process.Start(new ProcessStartInfo(_updateFilePath) { UseShellExecute = true });
         }
     }
 }
