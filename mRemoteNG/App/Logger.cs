@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using log4net;
 using log4net.Appender;
@@ -35,6 +36,7 @@ namespace mRemoteNG.App
         public void SetLogPath(string path)
         {
             var repository = LogManager.GetRepository("mRemoteNG");
+            XmlConfigurator.Configure(repository, new FileInfo("log4net.config"));
             var appenders = repository.GetAppenders();
 
             foreach (var appender in appenders)
