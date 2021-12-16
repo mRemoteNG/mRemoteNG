@@ -148,10 +148,14 @@ namespace mRemoteNG.App.Update
         }
         */
 
-        public async Task DownloadUpdateAsync()
+        public async Task DownloadUpdateAsync(IProgress<int> progress)
         {
             if (IsGetUpdateInfoRunning)
             {
+                getUpdateInfoCancelToken.Cancel();
+                getUpdateInfoCancelToken.Dispose();
+                getUpdateInfoCancelToken = null;
+
                 throw new InvalidOperationException("A previous call to DownloadUpdateAsync() is still in progress.");
             }
 
@@ -161,8 +165,7 @@ namespace mRemoteNG.App.Update
                                                     "CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().");
             }
 #if !PORTABLE
-            CurrentUpdateInfo.UpdateFilePath =
- Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "msi"));
+            CurrentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName(), "msi"));
 #else
             var sfd = new SaveFileDialog
             {
@@ -179,7 +182,42 @@ namespace mRemoteNG.App.Update
                 return;
             }
 #endif
-            // TODO: DownloadUpdateWebClient.DownloadFileAsync(CurrentUpdateInfo.DownloadAddress, CurrentUpdateInfo.UpdateFilePath);
+            try
+            {
+                getUpdateInfoCancelToken = new CancellationTokenSource();
+                using (var response = await _httpClient.GetAsync(CurrentUpdateInfo.DownloadAddress,
+                           HttpCompletionOption.ResponseHeadersRead, getUpdateInfoCancelToken.Token))
+                {
+                    var buffer = new byte[8192];
+                    var totalBytes = response.Content.Headers.ContentLength ?? 0;
+                    var readBytes = 0L;
+
+                    await using var httpStream =
+                        await response.Content.ReadAsStreamAsync(getUpdateInfoCancelToken.Token);
+                    await using var fileStream = new FileStream(CurrentUpdateInfo.UpdateFilePath, FileMode.Create,
+                        FileAccess.Write, FileShare.None, buffer.Length, true);
+
+                    while (readBytes <= totalBytes || !getUpdateInfoCancelToken.IsCancellationRequested)
+                    {
+                        var bytesRead = await httpStream.ReadAsync(buffer, 0, buffer.Length, getUpdateInfoCancelToken.Token);
+                        if (bytesRead == 0)
+                        {
+                            progress.Report(100);
+                            break;
+                        }
+
+                        await fileStream.WriteAsync(buffer, 0, bytesRead, getUpdateInfoCancelToken.Token);
+
+                        readBytes += bytesRead;
+
+                        var percentComplete = (int)(readBytes * 100 / totalBytes);
+                        progress.Report(percentComplete);
+                    }
+                }
+            } finally{
+                getUpdateInfoCancelToken.Dispose();
+                getUpdateInfoCancelToken = null;
+            }
         }
 
         #endregion

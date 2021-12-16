@@ -11,13 +11,14 @@ using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using System.Threading.Tasks;
 
 namespace mRemoteNG.UI.Window
 {
     public partial class UpdateWindow : BaseWindow
     {
         private AppUpdater _appUpdate;
-        private bool _isUpdateDownloadHandlerDeclared;
+        //private bool _isUpdateDownloadHandlerDeclared;
 
         #region Public Methods
 
@@ -43,7 +44,7 @@ namespace mRemoteNG.UI.Window
             ApplyTheme();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
-            CheckForUpdate();
+            CheckForUpdateAsync();
         }
 
         private new void ApplyTheme()
@@ -74,12 +75,12 @@ namespace mRemoteNG.UI.Window
 
         private void btnCheckForUpdate_Click(object sender, EventArgs e)
         {
-            CheckForUpdate();
+            CheckForUpdateAsync();
         }
 
-        private void btnDownload_Click(object sender, EventArgs e)
+        private async void btnDownload_Click(object sender, EventArgs e)
         {
-            DownloadUpdate();
+            await DownloadUpdateAsync();
         }
 
         private void pbUpdateImage_Click(object sender, EventArgs e)
@@ -97,7 +98,7 @@ namespace mRemoteNG.UI.Window
 
         #region Private Methods
 
-        private async void CheckForUpdate()
+        private async void CheckForUpdateAsync()
         {
             if (_appUpdate == null)
             {
@@ -192,7 +193,7 @@ namespace mRemoteNG.UI.Window
             prgbDownload.Visible = visible;
         }
 
-        private void DownloadUpdate()
+        private async Task DownloadUpdateAsync()
         {
             try
             {
@@ -200,50 +201,18 @@ namespace mRemoteNG.UI.Window
                 prgbDownload.Visible = true;
                 prgbDownload.Value = 0;
 
-                if (_isUpdateDownloadHandlerDeclared == false)
-                {
-                    // _appUpdate.DownloadUpdateProgressChangedEvent += DownloadUpdateProgressChanged;
-                    // _appUpdate.DownloadUpdateCompletedEvent += DownloadUpdateCompleted;
-                    _isUpdateDownloadHandlerDeclared = true;
-                }
+                await _appUpdate.DownloadUpdateAsync(new Progress<int>(progress => prgbDownload.Value = progress));
 
-                _appUpdate.DownloadUpdateAsync();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateDownloadFailed, ex);
-            }
-        }
-
-        #endregion
-
-        #region Events
-
-
-        private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            prgbDownload.Value = e.ProgressPercentage;
-        }
-
-        private void DownloadUpdateCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            try
-            {
                 btnDownload.Enabled = true;
                 prgbDownload.Visible = false;
 
-                if (e.Cancelled)
-                    return;
-                if (e.Error != null)
-                    throw e.Error;
-
                 if (Runtime.IsPortableEdition)
                     MessageBox.Show(Language.UpdatePortableDownloadComplete, Language.CheckForUpdates,
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                 {
                     if (MessageBox.Show(Language.UpdateDownloadComplete, Language.CheckForUpdates,
-                                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                            MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
                         Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
                     }
@@ -255,8 +224,11 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
+                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateDownloadFailed, ex);
+
                 Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateDownloadCompleteFailed, ex);
                 Runtime.MessageCollector?.AddMessage(MessageClass.ErrorMsg, ex.Message);
+
             }
         }
 
