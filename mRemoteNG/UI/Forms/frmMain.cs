@@ -339,7 +339,7 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private void frmMain_Shown(object sender, EventArgs e)
+        private async void frmMain_Shown(object sender, EventArgs e)
         {
             PromptForUpdatesPreference();
             CheckForUpdates();
@@ -374,7 +374,7 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private void CheckForUpdates()
+        private async void CheckForUpdates()
         {
             if (!Settings.Default.CheckForUpdatesOnStartup) return;
 

@@ -38,7 +38,7 @@ namespace mRemoteNG.UI.Window
 
         #region Form Stuff
 
-        private void Update_Load(object sender, EventArgs e)
+        private async void Update_Load(object sender, EventArgs e)
         {
             ApplyTheme();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
@@ -97,7 +97,7 @@ namespace mRemoteNG.UI.Window
 
         #region Private Methods
 
-        private void CheckForUpdate()
+        private async void CheckForUpdate()
         {
             if (_appUpdate == null)
             {
@@ -119,38 +119,14 @@ namespace mRemoteNG.UI.Window
 
             SetVisibilityOfUpdateControls(false);
 
-            _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
-
-            _appUpdate.GetUpdateInfoAsync();
-        }
-
-        private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (InvokeRequired)
-            {
-                var myDelegate = new AsyncCompletedEventHandler(GetUpdateInfoCompleted);
-                Invoke(myDelegate, sender, e);
-                return;
-            }
-
             try
             {
-                _appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
+                await _appUpdate.GetUpdateInfoAsync();
 
                 lblInstalledVersion.Text = Application.ProductVersion;
                 lblInstalledVersion.Visible = true;
                 lblInstalledVersionLabel.Visible = true;
                 btnCheckForUpdate.Visible = true;
-
-                if (e.Cancelled)
-                {
-                    return;
-                }
-
-                if (e.Error != null)
-                {
-                    throw e.Error;
-                }
 
                 if (_appUpdate.IsUpdateAvailable())
                 {
@@ -174,8 +150,15 @@ namespace mRemoteNG.UI.Window
                         pbUpdateImage.Visible = true;
                     }
 
-                    _appUpdate.GetChangeLogCompletedEvent += GetChangeLogCompleted;
-                    _appUpdate.GetChangeLogAsync();
+                    try
+                    {
+                        var changeLog = await _appUpdate.GetChangeLogAsync();
+                        txtChangeLog.Text = changeLog.Replace("\n", Environment.NewLine);
+                    }
+                    catch (Exception ex)
+                    {
+                        Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateGetChangeLogFailed, ex);
+                    }
 
                     btnDownload.Focus();
                 }
@@ -200,39 +183,13 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateCheckCompleteFailed, ex);
             }
         }
-
+        
         private void SetVisibilityOfUpdateControls(bool visible)
         {
             lblChangeLogLabel.Visible = visible;
             txtChangeLog.Visible = visible;
             btnDownload.Visible = visible;
             prgbDownload.Visible = visible;
-        }
-
-        private void GetChangeLogCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (InvokeRequired)
-            {
-                var myDelegate = new AsyncCompletedEventHandler(GetChangeLogCompleted);
-                Invoke(myDelegate, sender, e);
-                return;
-            }
-
-            try
-            {
-                _appUpdate.GetChangeLogCompletedEvent -= GetChangeLogCompleted;
-
-                if (e.Cancelled)
-                    return;
-                if (e.Error != null)
-                    throw e.Error;
-
-                txtChangeLog.Text = _appUpdate.ChangeLog.Replace("\n", Environment.NewLine);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateGetChangeLogFailed, ex);
-            }
         }
 
         private void DownloadUpdate()
@@ -245,8 +202,8 @@ namespace mRemoteNG.UI.Window
 
                 if (_isUpdateDownloadHandlerDeclared == false)
                 {
-                    _appUpdate.DownloadUpdateProgressChangedEvent += DownloadUpdateProgressChanged;
-                    _appUpdate.DownloadUpdateCompletedEvent += DownloadUpdateCompleted;
+                    // _appUpdate.DownloadUpdateProgressChangedEvent += DownloadUpdateProgressChanged;
+                    // _appUpdate.DownloadUpdateCompletedEvent += DownloadUpdateCompleted;
                     _isUpdateDownloadHandlerDeclared = true;
                 }
 
@@ -261,6 +218,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Events
+
 
         private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
