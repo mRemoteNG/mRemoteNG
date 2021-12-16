@@ -1,10 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.ComponentModel;
 using System.Net.Http;
 using System.Threading;
-using System.Reflection;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security.SymmetricEncryption;
 using System.Security.Cryptography;
