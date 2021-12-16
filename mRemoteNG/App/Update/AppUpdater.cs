@@ -38,7 +38,6 @@ namespace mRemoteNG.App.Update
             get
             {
                 return _getUpdateInfoCancelToken != null;
-
             }
         }
 

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Threading.Tasks;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
@@ -65,7 +66,7 @@ namespace mRemoteNG.App
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 
-        public async void CheckForUpdate()
+        public async Task CheckForUpdate()
         {
             if (_appUpdate == null)
             {

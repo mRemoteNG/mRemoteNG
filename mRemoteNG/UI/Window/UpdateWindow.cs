@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Window
             ApplyTheme();
             ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             ApplyLanguage();
-            CheckForUpdateAsync();
+            await CheckForUpdateAsync();
         }
 
         private new void ApplyTheme()
@@ -73,9 +73,9 @@ namespace mRemoteNG.UI.Window
             lblLatestVersionLabel.Text = $"{Language.AvailableVersion}:";
         }
 
-        private void btnCheckForUpdate_Click(object sender, EventArgs e)
+        private async void btnCheckForUpdate_Click(object sender, EventArgs e)
         {
-            CheckForUpdateAsync();
+            await CheckForUpdateAsync();
         }
 
         private async void btnDownload_Click(object sender, EventArgs e)
@@ -98,7 +98,7 @@ namespace mRemoteNG.UI.Window
 
         #region Private Methods
 
-        private async void CheckForUpdateAsync()
+        private async Task CheckForUpdateAsync()
         {
             if (_appUpdate == null)
             {
