@@ -17,20 +17,20 @@ namespace mRemoteNGTests
         public string GetTargetPath([CallerFilePath] string sourceFilePath = "")
         {
             const string debugOrRelease =
-#if DEBUG
+            #if DEBUG
 				"Debug";
-#else
+            #else
 				"Release";
-#endif
+            #endif
 
             const string normalOrPortable =
-#if PORTABLE
-            " Portable";
-#else
+            #if PORTABLE
+                " Portable";
+            #else
             "";
-#endif
+            #endif
             var path = Path.GetDirectoryName(sourceFilePath);
-            var filePath = $"{path}\\..\\mRemoteNG\\bin\\{debugOrRelease}{normalOrPortable}\\mRemoteNG.exe";
+            var filePath = $"{path}\\..\\mRemoteNG\\bin\\x64\\{debugOrRelease}{normalOrPortable}\\mRemoteNG.exe";
             return filePath;
         }
 

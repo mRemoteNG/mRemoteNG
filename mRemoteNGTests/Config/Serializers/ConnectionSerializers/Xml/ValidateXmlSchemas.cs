@@ -49,7 +49,6 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
         {
             var sb = new StringBuilder();
             var xml = _serializer.Serialize(_connectionTreeModel);
-
             var schemaFileName = $"mremoteng_confcons_v{_serializer.Version.Major}_{_serializer.Version.Minor}.xsd";
             var schemaFile = GetTargetPath(schemaFileName);
             _xmlReaderSettings.Schemas.Add("http://mremoteng.org", schemaFile);
@@ -69,21 +68,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Xml
 
         public string GetTargetPath(string fileName, [CallerFilePath] string sourceFilePath = "")
         {
-            const string debugOrRelease =
-#if DEBUG
-                "Debug";
-#else
-				"Release";
-#endif
-
-            const string normalOrPortable =
-#if PORTABLE
-                " Portable";
-#else
-            "";
-#endif
             var path = Path.GetDirectoryName(sourceFilePath);
-            var filePath = $@"{path}\..\..\..\..\..\mRemoteNG\bin\{debugOrRelease}{normalOrPortable}\Schemas\{fileName}";
+            var filePath = $@"{path}\..\..\..\..\..\mRemoteNG\Schemas\{fileName}";
 
             return filePath;
         }
