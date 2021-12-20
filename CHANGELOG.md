@@ -31,16 +31,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1690: Replaced GeckoFX (Firefox) with CefSharp (Chromium)
 - #1325: Language resource files cleanup
 ### Fixed
+- #2096: Corrected encryption code of LegacyRijndaelCryptographyProvider
 - #2087: Fixed application crash, when the update file is launched from the application
 - #2079: Fixed theme files not being copied to output directory
 - #1884: Allow setting Port when using MSSQL
 - #1783: Added missing inheritance properties to SQL scripts
-- #1773: Connection issue with mysql - Missing fields in 
+- #1773: Connection issue with MySql - Missing fields in
 - #1756: Cannot type any character on MultiSSH toolbar 
 - #1720: Show configuration file name in title of password prompt form
 - #1713: Sound redirection does not work if Clipboard redirection is set to No
 - #1632: 1.77.1 breaks RDP drive and sound redirection
-- #1610: Menu bar changes to english when canceling options form
+- #1610: Menu bar changes to English when canceling options form
 - #1595: Unhandled exception when trying to browse through non existent multi ssh history with keyboard key strokes
 - #1589: Update SQL tables instead of rewriting them
 - #1465: REGRESSION: Smart Cards redirection to Remote Desktop not working
