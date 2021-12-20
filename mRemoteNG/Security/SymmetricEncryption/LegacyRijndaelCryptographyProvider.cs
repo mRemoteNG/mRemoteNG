@@ -32,24 +32,25 @@ namespace mRemoteNG.Security.SymmetricEncryption
             try
             {
                 using var aes = Aes.Create();
-                using var md5 = MD5.Create();
-                var key = md5.ComputeHash(Encoding.UTF8.GetBytes(strSecret.ConvertToUnsecureString()));
+                aes.BlockSize = BlockSizeInBytes * 8;
 
-                md5.Clear();
-                aes.Key = key;
-                aes.GenerateIV();
+                using (var md5 = MD5.Create())
+                {
+                    var key = md5.ComputeHash(Encoding.UTF8.GetBytes(strSecret.ConvertToUnsecureString()));
+                    aes.Key = key;
+                    aes.GenerateIV();
+                }
 
-                using var ms = new MemoryStream(aes.IV);
+                using var ms = new MemoryStream();
+                ms.Write(aes.IV, 0, BlockSizeInBytes);
 
-                var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
+                using var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
                 var data = Encoding.UTF8.GetBytes(strToEncrypt);
 
                 cs.Write(data, 0, data.Length);
                 cs.FlushFinalBlock();
 
                 var encdata = ms.ToArray();
-                cs.Close();
-                aes.Clear();
 
                 return Convert.ToBase64String(encdata);
             }
@@ -70,11 +71,13 @@ namespace mRemoteNG.Security.SymmetricEncryption
             try
             {
                 using var aes = Aes.Create();
-                using var md5 = MD5.Create();
-                var key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
+                aes.BlockSize = BlockSizeInBytes * 8;
 
-                md5.Clear();
-                aes.Key = key;
+                using (var md5 = MD5.Create())
+                {
+                    var key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
+                    aes.Key = key;
+                }
 
                 var ciphertext = Convert.FromBase64String(ciphertextBase64);
 
@@ -87,7 +90,6 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 using var cryptoStream = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);
                 using var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true);
                 var plaintext = streamReader.ReadToEnd();
-                aes.Clear();
 
                 return plaintext;
             }
