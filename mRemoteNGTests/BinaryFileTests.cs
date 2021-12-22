@@ -17,14 +17,14 @@ namespace mRemoteNGTests
         public string GetTargetPath([CallerFilePath] string sourceFilePath = "")
         {
             const string debugOrRelease =
-            #if DEBUG
+            #if DEBUG || DEBUG_PORTABLE
 				"Debug";
             #else
 				"Release";
             #endif
 
             const string normalOrPortable =
-            #if PORTABLE
+            #if PORTABLE || DEBUG_PORTABLE
                 " Portable";
             #else
             "";
