@@ -212,8 +212,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 nameof(ConnectionInfo.MacAddress),
                 nameof(ConnectionInfo.UserField),
                 nameof(ConnectionInfo.Favorite),
-                nameof(ConnectionInfo.SSHTunnelConnectionName),
-                nameof(ConnectionInfo.OpeningCommand),
+                nameof(ConnectionInfo.SSHTunnelConnectionName)
             };
 
             if (!isContainer)
@@ -260,7 +259,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
 						nameof(ConnectionInfo.RdpVersion),
-                        nameof(ConnectionInfo.OpeningCommand),
                         nameof(ConnectionInfo.RDPStartProgram),
                         nameof(ConnectionInfo.RDPStartProgramWorkDir)
                     });
@@ -282,7 +280,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.SSHOptions),
-                        nameof(ConnectionInfo.PuttySession)
+                        nameof(ConnectionInfo.PuttySession),
+                        nameof(ConnectionInfo.OpeningCommand)
                     });
                     break;
                 case ProtocolType.Telnet:
