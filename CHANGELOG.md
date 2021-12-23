@@ -31,6 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1690: Replaced GeckoFX (Firefox) with CefSharp (Chromium)
 - #1325: Language resource files cleanup
 ### Fixed
+- #2098: Fix failed BinaryFileTest
 - #2097: Fix failed tests related to mRemoteNGTests.UI.Window.ConfigWindowTests
 - #2096: Corrected encryption code of LegacyRijndaelCryptographyProvider
 - #2089: Fixed the exception thrown by menu buttons "Documentation" and "Website"
