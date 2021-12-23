@@ -19,6 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #327: Added Alternative Shell for RDP settings
 - #319: Override quick connect username when using user@domain
 - #283: Support for native PowerShell remoting as new protocol
+- #xxx: Add external connector to retrieve ip address from Amazon EC2 Instance IDs
 ### Changed
 - #2022: Replaced CefSharp with WebView2
 - #2014: Revised icons
@@ -30,6 +31,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1767: Turned about window into a simple popup form
 - #1690: Replaced GeckoFX (Firefox) with CefSharp (Chromium)
 - #1325: Language resource files cleanup
+- #xxxx: Secret Server connector via new field "API User ID" instead of SSAPI: prefix
 ### Fixed
 - #2097: Fix failed tests related to mRemoteNGTests.UI.Window.ConfigWindowTests
 - #2096: Corrected encryption code of LegacyRijndaelCryptographyProvider

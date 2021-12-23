@@ -465,11 +465,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var domain = connectionInfo?.Domain ?? "";
 
                 // access secret server api if necessary
-                if (userName.StartsWith("SSAPI:"))
+                if (!string.IsNullOrEmpty(connectionInfo?.UserViaAPI))
                 {
                     try
                     {
-                        ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer(userName, out userName, out password, out domain);
+                        ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + connectionInfo?.UserViaAPI, out userName, out password, out domain);
                     }
                     catch (Exception ex)
                     {

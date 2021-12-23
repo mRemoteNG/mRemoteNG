@@ -30,10 +30,12 @@
         {
             this.pnlDefaultCredentials = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtCredentialsUserViaAPI = new mRemoteNG.UI.Controls.MrngTextBox();
             this.txtCredentialsUsername = new mRemoteNG.UI.Controls.MrngTextBox();
             this.txtCredentialsPassword = new mRemoteNG.UI.Controls.MrngTextBox();
             this.txtCredentialsDomain = new mRemoteNG.UI.Controls.MrngTextBox();
             this.lblCredentialsDomain = new mRemoteNG.UI.Controls.MrngLabel();
+            this.lblCredentialsUserViaAPI = new mRemoteNG.UI.Controls.MrngLabel();
             this.lblCredentialsUsername = new mRemoteNG.UI.Controls.MrngLabel();
             this.lblCredentialsPassword = new mRemoteNG.UI.Controls.MrngLabel();
             this.radCredentialsCustom = new mRemoteNG.UI.Controls.MrngRadioButton();
@@ -61,12 +63,14 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.txtCredentialsUsername, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtCredentialsPassword, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtCredentialsDomain, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblCredentialsDomain, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.lblCredentialsUsername, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblCredentialsPassword, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtCredentialsUserViaAPI, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtCredentialsUsername, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtCredentialsPassword, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtCredentialsDomain, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblCredentialsUserViaAPI, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblCredentialsUsername, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblCredentialsPassword, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblCredentialsDomain, 0, 3);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(23, 85);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
@@ -75,6 +79,17 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(332, 82);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // txtCredentialsUserViaAPI
+            // 
+            this.txtCredentialsUserViaAPI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtCredentialsUserViaAPI.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtCredentialsUserViaAPI.Enabled = false;
+            this.txtCredentialsUserViaAPI.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCredentialsUserViaAPI.Location = new System.Drawing.Point(163, 3);
+            this.txtCredentialsUserViaAPI.Name = "txtCredentialsUserViaAPI";
+            this.txtCredentialsUserViaAPI.Size = new System.Drawing.Size(166, 22);
+            this.txtCredentialsUserViaAPI.TabIndex = 5;
             // 
             // txtCredentialsUsername
             // 
@@ -120,6 +135,17 @@
             this.lblCredentialsDomain.TabIndex = 8;
             this.lblCredentialsDomain.Text = "Domain:";
             this.lblCredentialsDomain.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblCredentialsUserViaAPI
+            // 
+            this.lblCredentialsUserViaAPI.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCredentialsUserViaAPI.Enabled = false;
+            this.lblCredentialsUserViaAPI.Location = new System.Drawing.Point(3, 3);
+            this.lblCredentialsUserViaAPI.Name = "lblCredentialsUserViaAPI";
+            this.lblCredentialsUserViaAPI.Size = new System.Drawing.Size(154, 19);
+            this.lblCredentialsUserViaAPI.TabIndex = 4;
+            this.lblCredentialsUserViaAPI.Text = "User via API ID:";
+            this.lblCredentialsUserViaAPI.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblCredentialsUsername
             // 
@@ -211,9 +237,11 @@
         internal Controls.MrngRadioButton radCredentialsNoInfo;
         internal Controls.MrngRadioButton radCredentialsWindows;
         internal Controls.MrngTextBox txtCredentialsDomain;
+        internal Controls.MrngLabel lblCredentialsUserViaAPI;
         internal Controls.MrngLabel lblCredentialsUsername;
         internal Controls.MrngTextBox txtCredentialsPassword;
         internal Controls.MrngLabel lblCredentialsPassword;
+        internal Controls.MrngTextBox txtCredentialsUserViaAPI;
         internal Controls.MrngTextBox txtCredentialsUsername;
         internal Controls.MrngLabel lblCredentialsDomain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

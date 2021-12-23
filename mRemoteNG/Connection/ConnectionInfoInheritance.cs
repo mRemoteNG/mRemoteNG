@@ -51,6 +51,12 @@ namespace mRemoteNG.Connection
         #endregion
 
         #region Connection
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UserViaAPI)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUserViaAPI)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        [Browsable(true)]
+        public bool UserViaAPI { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 3),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Username)),

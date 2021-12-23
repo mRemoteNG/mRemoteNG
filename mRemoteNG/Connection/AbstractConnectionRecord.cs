@@ -22,6 +22,9 @@ namespace mRemoteNG.Connection
         private string _panel;
 
         private string _hostname;
+        private string _ec2InstanceId = "";
+        private string _ec2Region = "";
+        private string _userViaAPI = "";
         private string _username = "";
         private string _password = "";
         private string _domain = "";
@@ -163,9 +166,18 @@ namespace mRemoteNG.Connection
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.UserViaAPI)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUserViaAPI)),
+         AttributeUsedInAllProtocolsExcept(ProtocolType.VNC, ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
+        public virtual string UserViaAPI
+        {
+            get => GetPropertyValue("UserViaAPI", _userViaAPI);
+            set => SetField(ref _userViaAPI, value, "UserViaAPI");
+        }
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Username)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUsername)),
-         AttributeUsedInAllProtocolsExcept(ProtocolType.VNC, ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2)]
         public virtual string Username
         {
             get => GetPropertyValue("Username", _username);
@@ -191,6 +203,26 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("Domain", _domain).Trim();
             set => SetField(ref _domain, value?.Trim(), "Domain");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
+        LocalizedAttributes.LocalizedDisplayName(nameof(Language.EC2InstanceId)),
+        LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionEC2InstanceId)),
+        AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH2)]
+        public string EC2InstanceId
+        {
+            get => GetPropertyValue("EC2InstanceId", _ec2InstanceId).Trim();
+            set => SetField(ref _ec2InstanceId, value?.Trim(), "EC2InstanceId");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
+        LocalizedAttributes.LocalizedDisplayName(nameof(Language.EC2Region)),
+        LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionEC2Region)),
+        AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH2)]
+        public string EC2Region
+        {
+            get => GetPropertyValue("EC2Region", _ec2Region).Trim();
+            set => SetField(ref _ec2Region, value?.Trim(), "EC2Region");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
