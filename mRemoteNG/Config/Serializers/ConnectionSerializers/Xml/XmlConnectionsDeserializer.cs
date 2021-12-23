@@ -562,8 +562,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.Inheritance.DisableMenuAnimations = xmlnode.GetAttributeAsBool("InheritDisableMenuAnimations");
                     connectionInfo.Inheritance.DisableCursorShadow = xmlnode.GetAttributeAsBool("InheritDisableCursorShadow");
                     connectionInfo.Inheritance.DisableCursorBlinking = xmlnode.GetAttributeAsBool("InheritDisableCursorBlinking");
+                    connectionInfo.UserViaAPI = xmlnode.GetAttributeAsString("UserViaAPI");
+                    connectionInfo.Inheritance.UserViaAPI = xmlnode.GetAttributeAsBool("InheritUserViaAPI");
+                    connectionInfo.EC2InstanceId = xmlnode.GetAttributeAsString("EC2InstanceId");
+                    connectionInfo.EC2Region = xmlnode.GetAttributeAsString("EC2Region");
                 }
-                
             }
             catch (Exception ex)
             {

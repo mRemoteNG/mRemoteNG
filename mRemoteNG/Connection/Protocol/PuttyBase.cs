@@ -82,6 +82,19 @@ namespace mRemoteNG.Connection.Protocol
                         var username = "";
                         var password = "";
 
+                        // access secret server api if necessary
+                        if (!string.IsNullOrEmpty(InterfaceControl.Info?.UserViaAPI))
+                        {
+                            var domain = ""; // dummy
+                            try
+                            {
+                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + InterfaceControl.Info?.UserViaAPI, out username, out password, out domain);
+                            }
+                            catch (Exception ex)
+                            {
+                                Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                            }
+                        }
                         if (!string.IsNullOrEmpty(InterfaceControl.Info?.Username))
                         {
                             username = InterfaceControl.Info.Username;
@@ -111,20 +124,6 @@ namespace mRemoteNG.Connection.Protocol
                                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                                 password = cryptographyProvider.Decrypt(Settings.Default.DefaultPassword,
                                                                         Runtime.EncryptionKey);
-                            }
-                        }
-
-                        // access secret server api if necessary
-                        if (username.StartsWith("SSAPI:"))
-                        {
-                            var domain = ""; // dummy
-                            try
-                            {
-                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer(username, out username, out password, out domain);
-                            }
-                            catch (Exception ex)
-                            {
-                                Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
                             }
                         }
 

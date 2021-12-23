@@ -150,6 +150,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(_saveFilter.SaveDomain
                 ? new XAttribute("RDGatewayDomain", connectionInfo.RDGatewayDomain)
                 : new XAttribute("RDGatewayDomain", ""));
+
+            element.Add(new XAttribute("UserViaAPI", connectionInfo.UserViaAPI));
+            element.Add(new XAttribute("EC2InstanceId", connectionInfo.EC2InstanceId));
+            element.Add(new XAttribute("EC2Region", connectionInfo.EC2Region));
         }
 
         private void SetInheritanceAttributes(XContainer element, IInheritable connectionInfo)
@@ -292,6 +296,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     element.Add(new XAttribute("InheritUseVmId", inheritance.UseVmId.ToString().ToLowerInvariant()));
                 if (inheritance.UseEnhancedMode)
                     element.Add(new XAttribute("InheritUseEnhancedMode", inheritance.UseEnhancedMode.ToString().ToLowerInvariant()));
+                if (inheritance.UserViaAPI)
+                    element.Add(new XAttribute("InheritUserViaAPI", inheritance.UserViaAPI.ToString().ToLowerInvariant()));
             }
         }
     }

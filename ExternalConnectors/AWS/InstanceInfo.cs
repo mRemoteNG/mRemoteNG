@@ -26,8 +26,9 @@ namespace ExternalConnectors.AWS
                 default: Status = "Unknown"; break;
             };
 
-            PublicIP = instance.PublicIpAddress;
-            PrivateIP = instance.PrivateIpAddress;
+            PublicIP = instance.PublicIpAddress ?? "";
+            PrivateIP = instance.PrivateIpAddress ?? "";
+
         }
     }
 }

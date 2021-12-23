@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
     <value>About</value>
@@ -263,6 +263,9 @@
   </data>
   <data name="CheckboxUpdateUseProxy" xml:space="preserve">
     <value>Use a proxy server to connect</value>
+  </data>
+  <data name="UserViaAPI" xml:space="preserve">
+    <value>API User ID</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
@@ -1085,6 +1088,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="PropertyDescriptionUser1" xml:space="preserve">
     <value>Feel free to enter any information you need here.</value>
+  </data>
+  <data name="PropertyDescriptionUserViaAPI" xml:space="preserve">
+    <value>Enter the ID of user data in external API (e.g. secret server). when used, leave username/password/domain fields empty</value>
   </data>
   <data name="PropertyDescriptionUsername" xml:space="preserve">
     <value>Enter your username.</value>
@@ -2183,12 +2189,10 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="OpeningCommand" xml:space="preserve">
     <value>TODO</value>
-    <comment></comment>
   </data>
   <data name="PropertyDescriptionOpeningCommand" xml:space="preserve">
     <value>TODO</value>
   </data>
-
   <data name="RedirectDrives" xml:space="preserve">
     <value>Disk Drives</value>
   </data>
@@ -2206,5 +2210,17 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="RemoteDesktopServices" xml:space="preserve">
     <value>Remote Desktop Services</value>
+  </data>
+  <data name="EC2InstanceId" xml:space="preserve">
+    <value>EC2 Instance Id</value>
+  </data>
+  <data name="EC2Region" xml:space="preserve">
+    <value>EC2 Region</value>
+  </data>
+  <data name="PropertyDescriptionEC2InstanceId" xml:space="preserve">
+    <value>use this instance id to fetch public ip from aws ec2 instance</value>
+  </data>
+  <data name="PropertyDescriptionEC2Region" xml:space="preserve">
+    <value>fetch aws instance info from this region</value>
   </data>
 </root>

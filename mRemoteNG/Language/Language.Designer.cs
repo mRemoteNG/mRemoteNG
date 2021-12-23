@@ -1626,7 +1626,50 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Domain", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to EC2InstanceId.
+        /// </summary>
+        internal static string EC2InstanceId
+        {
+            get
+            {
+                return ResourceManager.GetString("EC2InstanceId", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to PropertyDescriptionEC2InstanceId.
+        /// </summary>
+        internal static string PropertyDescriptionEC2InstanceId
+        {
+            get
+            {
+                return ResourceManager.GetString("PropertyDescriptionEC2InstanceId", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to EC2InstanceId.
+        /// </summary>
+        internal static string EC2Region
+        {
+            get
+            {
+                return ResourceManager.GetString("EC2Region", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to PropertyDescriptionEC2InstanceId.
+        /// </summary>
+        internal static string PropertyDescriptionEC2Region
+        {
+            get
+            {
+                return ResourceManager.GetString("PropertyDescriptionEC2Region", resourceCulture);
+            }
+        }
+
+
         /// <summary>
         ///   Looks up a localized string similar to Donate.
         /// </summary>
@@ -4034,7 +4077,18 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PropertyDescriptionUser1", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your username..
+        /// </summary>
+        internal static string PropertyDescriptionUserViaAPI
+        {
+            get
+            {
+                return ResourceManager.GetString("PropertyDescriptionUserViaAPI", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Enter your username..
         /// </summary>
@@ -6072,7 +6126,18 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("UserField", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        internal static string UserViaAPI
+        {
+            get
+            {
+                return ResourceManager.GetString("UserViaAPI", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>

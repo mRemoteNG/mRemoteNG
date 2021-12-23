@@ -430,7 +430,22 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultProtocol"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("eu-central-1")]
+        public string ConDefaultEC2Region
+        {
+            get
+            {
+                return ((string)(this["ConDefaultEC2Region"]));
+            }
+            set
+            {
+                this["ConDefaultEC2Region"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Default Settings")]

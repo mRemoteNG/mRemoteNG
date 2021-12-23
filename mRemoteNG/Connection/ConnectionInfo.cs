@@ -296,6 +296,7 @@ namespace mRemoteNG.Connection
         private void SetConnectionDefaults()
         {
             Hostname = string.Empty;
+            EC2Region = Settings.Default.ConDefaultEC2Region;
         }
 
         private void SetProtocolDefaults()
