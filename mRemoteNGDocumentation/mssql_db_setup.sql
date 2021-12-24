@@ -61,7 +61,7 @@ CREATE TABLE [dbo].[tblCons] (
 	[RDPAuthenticationLevel] varchar(32) NOT NULL,
 	[RDPMinutesToIdleTimeout] int NOT NULL,
 	[RdpVersion] varchar(10),
-	[RedirectAudioCapture] bit DEAFULT ((0)) NOT NULL,
+	[RedirectAudioCapture] bit DEFAULT ((0)) NOT NULL,
 	[RedirectClipboard] bit DEFAULT ((0)) NOT NULL,
 	[RedirectDiskDrives] bit NOT NULL,
 	[RedirectKeys] bit NOT NULL,
