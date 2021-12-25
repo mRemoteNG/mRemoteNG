@@ -40,6 +40,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2089: Fixed the exception thrown by menu buttons "Documentation" and "Website"
 - #2087: Fixed application crash, when the update file is launched from the application
 - #2079: Fixed theme files not being copied to output directory
+- #2012: Updated PuTTYNG to v0.76
 - #1884: Allow setting Port when using MSSQL
 - #1783: Added missing inheritance properties to SQL scripts
 - #1773: Connection issue with MySql - Missing fields in
