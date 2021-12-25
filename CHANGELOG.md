@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #319: Override quick connect username when using user@domain
 - #283: Support for native PowerShell remoting as new protocol
 ### Changed
+- #2102: Extended the field RenderingEngine from 10 chars to 16
 - #2022: Replaced CefSharp with WebView2
 - #2014: Revised icons
 - #2013: Removed components check
