@@ -44,16 +44,31 @@ namespace ExternalConnectors.TSS
                     f.cbUseSSO.Checked = ssSSO;
 
                     // show dialog
-                    _ = f.ShowDialog();
+                    while(true)
+                    {
+                        _ = f.ShowDialog();
 
-                    if (f.DialogResult != DialogResult.OK)
-                        return;
+                        if (f.DialogResult != DialogResult.OK)
+                            return;
 
-                    // store values to memory
-                    ssUsername = f.tbUsername.Text;
-                    ssPassword = f.tbPassword.Text;
-                    ssUrl = f.tbSSURL.Text;
-                    ssSSO = f.cbUseSSO.Checked;
+                        // store values to memory
+                        ssUsername = f.tbUsername.Text;
+                        ssPassword = f.tbPassword.Text;
+                        ssUrl = f.tbSSURL.Text;
+                        ssSSO = f.cbUseSSO.Checked;
+
+                        // check connection first
+                        try
+                        {
+                            if (TestCredentials() == true)
+                                break;
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("TestCredentials failed - please check your credentials");
+                        }
+                    }
+
 
                     // write values to registry
                     key.SetValue("Username", ssUsername);
@@ -69,6 +84,31 @@ namespace ExternalConnectors.TSS
                     key.Close();
                 }
 
+            }
+        }
+
+        private static bool TestCredentials()
+        {
+            string authUsername = SSConnectionData.ssUsername;
+            string authPassword = SSConnectionData.ssPassword;
+            string baseURL = SSConnectionData.ssUrl;
+
+            if (SSConnectionData.ssSSO)
+            {
+                // checking creds doesn't really make sense here, as we can't modify them anyway if something is wrong
+                return true;
+            }
+            else
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    // Authenticate:
+                    var tokenClient = new OAuth2ServiceClient(baseURL, httpClient);
+                    // call below will throw an exception if the creds are invalid
+                    var token = tokenClient.AuthorizeAsync(Grant_type.Password, authUsername, authPassword, null).Result;
+                    // here we can be sure the creds are ok - return success state
+                    return true;
+                }
             }
         }
 
