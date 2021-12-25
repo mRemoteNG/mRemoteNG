@@ -69,7 +69,7 @@ CREATE TABLE [dbo].[tblCons] (
 	[RedirectPrinters] bit NOT NULL,
 	[RedirectSmartCards] bit NOT NULL,
 	[RedirectSound] varchar(64) NOT NULL,
-	[RenderingEngine] varchar(10),
+	[RenderingEngine] varchar(16),
 	[Resolution] varchar(32) NOT NULL,
 	[SSHOptions] varchar(1024) NOT NULL,
 	[SSHTunnelConnectionName] varchar(128) NOT NULL,
