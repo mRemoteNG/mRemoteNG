@@ -26,5 +26,11 @@
             tbPassword.Enabled = !ch;
             tbUsername.Enabled = !ch;
         }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            // test connection first
+
+        }
     }
 }
