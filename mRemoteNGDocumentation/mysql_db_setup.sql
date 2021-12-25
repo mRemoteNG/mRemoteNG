@@ -70,7 +70,7 @@ CREATE TABLE `tblCons` (
 	`RedirectPrinters` tinyint(1) NOT NULL,
 	`RedirectSmartCards` tinyint(1) NOT NULL,
 	`RedirectSound` varchar(64) NOT NULL,  
-	`RenderingEngine` varchar(10) DEFAULT NULL,
+	`RenderingEngine` varchar(16) DEFAULT NULL,
 	`Resolution` varchar(32) NOT NULL,
 	`SSHOptions` varchar(1024) NOT NULL,
 	`SSHTunnelConnectionName` varchar(128) NOT NULL,

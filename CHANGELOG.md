@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #283: Support for native PowerShell remoting as new protocol
 - #xxx: Add external connector to retrieve ip address from Amazon EC2 Instance IDs
 ### Changed
+- #2102: Extended the field RenderingEngine from 10 chars to 16
 - #2022: Replaced CefSharp with WebView2
 - #2014: Revised icons
 - #2013: Removed components check
