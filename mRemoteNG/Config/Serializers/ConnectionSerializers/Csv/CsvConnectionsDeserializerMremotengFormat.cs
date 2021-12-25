@@ -101,6 +101,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("Panel")]
                 : "";
 
+            connectionRecord.Username = headers.Contains("UserViaAPI")
+                ? connectionCsv[headers.IndexOf("UserViaAPI")]
+                : "";
+
             connectionRecord.Username = headers.Contains("Username")
                 ? connectionCsv[headers.IndexOf("Username")]
                 : "";
@@ -648,6 +652,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRenderingEngine")], out bool value))
                     connectionRecord.Inheritance.RenderingEngine = value;
+            }
+
+            if (headers.Contains("InheritUserViaAPI"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUserViaAPI")], out bool value))
+                    connectionRecord.Inheritance.UserViaAPI = value;
             }
 
             if (headers.Contains("InheritUsername"))

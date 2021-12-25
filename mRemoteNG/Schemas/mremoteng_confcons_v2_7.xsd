@@ -172,5 +172,8 @@
     <xs:attribute name="StartProgram" type="xs:string" use="optional" />
     <xs:attribute name="StartProgramWorkDir" type="xs:string" use="optional" />
     <xs:attribute name="OpeningCommand" type="xs:string" use="optional" />
+    <xs:attribute name="UserViaAPI" type="xs:string" use="optional" />
+    <xs:attribute name="EC2InstanceId" type="xs:string" use="optional" />
+    <xs:attribute name="EC2Region" type="xs:string" use="optional" />
   </xs:complexType>
 </xs:schema>
