@@ -75,5 +75,8 @@
         public TType RDPStartProgram { get; set; }
         public TType RDPStartProgramWorkDir { get; set; }
 		public TType OpeningCommand { get; set; }
+		public TType UserViaAPI { get; set; }
+		public TType EC2InstanceId { get; set; }
+		public TType EC2Region { get; set; }
 	}
 }

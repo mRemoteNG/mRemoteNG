@@ -129,7 +129,10 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 VNCSmartSizeMode = ProtocolVNC.SmartSizeMode.SmartSAspect,
                 VNCViewOnly = true,
                 RDGatewayUsageMethod = RDGatewayUsageMethod.Detect,
-                RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard
+                RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard,
+                UserViaAPI = "",
+                EC2InstanceId = "",
+                EC2Region = "eu-central-1"
             };
         }
 
