@@ -61,7 +61,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                       "CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
                       "PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
                       "VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;" +
-                      "RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;RedirectAudioCapture;RdpVersion;RDPStartProgram;RDPStartProgramWorkDir;");
+                      "RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;RedirectAudioCapture;RdpVersion;RDPStartProgram;RDPStartProgramWorkDir;UserViaAPI;EC2InstanceId;EC2Region;");
 
             if (_saveFilter.SaveInheritance)
                 sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;" +
@@ -73,7 +73,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                           "InheritFavorite;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;" +
                           "InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;" +
                           "InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;" +
-                          "InheritRDGatewayPassword;InheritRDGatewayDomain;InheritRDPAlertIdleTimeout;InheritRDPMinutesToIdleTimeout;InheritSoundQuality;" +
+                          "InheritRDGatewayPassword;InheritRDGatewayDomain;InheritRDPAlertIdleTimeout;InheritRDPMinutesToIdleTimeout;InheritSoundQuality;InheritUserViaAPI;" +
                           "InheritRedirectAudioCapture;InheritRdpVersion");
         }
 
@@ -175,7 +175,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.RedirectAudioCapture))
               .Append(FormatForCsv(con.RdpVersion))
               .Append(FormatForCsv(con.RDPStartProgram))
-              .Append(FormatForCsv(con.RDPStartProgramWorkDir));
+              .Append(FormatForCsv(con.RDPStartProgramWorkDir))
+              .Append(FormatForCsv(con.UserViaAPI))
+              .Append(FormatForCsv(con.EC2InstanceId))
+              .Append(FormatForCsv(con.EC2Region));
 
 
             if (!_saveFilter.SaveInheritance)
@@ -247,7 +250,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.RDPMinutesToIdleTimeout))
               .Append(FormatForCsv(con.Inheritance.SoundQuality))
               .Append(FormatForCsv(con.Inheritance.RedirectAudioCapture))
-              .Append(FormatForCsv(con.Inheritance.RdpVersion));
+              .Append(FormatForCsv(con.Inheritance.RdpVersion))
+              .Append(FormatForCsv(con.Inheritance.UserViaAPI));
         }
 
         private string FormatForCsv(object value)
