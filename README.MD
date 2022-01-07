@@ -23,7 +23,9 @@
   <a href="https://gitter.im/mRemoteNG/PublicChat">
     <img alt="Gitter" src="https://img.shields.io/gitter/room/mRemoteNG/PublicChat?label=Join%20the%20Chat&logo=Gitter&style=flat-square">
   </a>  
-  <a href="https://www.paypal.me/DavidSparer">
+</p>
+<p align="center">
+  <a href="https://www.paypal.com/paypalme/mremoteng">
     <img alt="PayPal" src="https://img.shields.io/badge/%24-PayPal-blue.svg?label=Donate&logo=PayPal&style=flat-square">
   </a>
   <a href="bitcoin:16fUnHUM3k7W9Fvpc6dug7TAdfeGEcLbSg">
@@ -49,7 +51,7 @@
 | ---------------|--------------|-----------|
 | Stable | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.20/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.20) |
 | Preview | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/preview?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
-| Nightly | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/dnightly?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.2-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.2-nb) |
+| Nightly | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/develop?svg=true) | [![Github Releases (by Release)](https://https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/2022.01.07-1.77.2-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/2022.01.07-1.77.2-nb) |
 
 ## Features
 
