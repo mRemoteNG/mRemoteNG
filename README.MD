@@ -51,7 +51,7 @@
 | ---------------|--------------|-----------|
 | Stable | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.20/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.20) |
 | Preview | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/preview?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
-| Nightly | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/develop?svg=true) | [![Github Releases (by Release)](https://https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/2022.01.07-1.77.2-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/2022.01.07-1.77.2-nb) |
+| Nightly | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/develop?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/2022.01.07-1.77.2-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/2022.01.07-1.77.2-nb) |
 
 ## Features
 
