@@ -199,7 +199,7 @@ namespace mRemoteNG.UI.Menu
             {
                 var tItem = new ToolStripMenuItem(Runtime.WindowList[i].Text,
                                                   Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
-                    {Tag = Runtime.WindowList[i]};
+                { Tag = Runtime.WindowList[i] };
                 _mMenViewConnectionPanels.DropDownItems.Add(tItem);
             }
 
@@ -261,11 +261,13 @@ namespace mRemoteNG.UI.Menu
             {
                 Settings.Default.ViewMenuExternalTools = false;
                 _mMenViewExtAppsToolbar.Checked = false;
+                TsExternalTools.Visible = false;
             }
             else
             {
                 Settings.Default.ViewMenuExternalTools = true;
                 _mMenViewExtAppsToolbar.Checked = true;
+                TsExternalTools.Visible = true;
             }
         }
 
@@ -275,11 +277,13 @@ namespace mRemoteNG.UI.Menu
             {
                 Settings.Default.ViewMenuQuickConnect = false;
                 _mMenViewQuickConnectToolbar.Checked = false;
+                TsQuickConnect.Visible = false;
             }
             else
             {
                 Settings.Default.ViewMenuQuickConnect = true;
                 _mMenViewQuickConnectToolbar.Checked = true;
+                TsQuickConnect.Visible = true;
             }
         }
 
@@ -289,11 +293,13 @@ namespace mRemoteNG.UI.Menu
             {
                 Settings.Default.ViewMenuMultiSSH = false;
                 _mMenViewMultiSshToolbar.Checked = false;
+                TsMultiSsh.Visible = false;
             }
             else
             {
                 Settings.Default.ViewMenuMultiSSH = true;
                 _mMenViewMultiSshToolbar.Checked = true;
+                TsMultiSsh.Visible = true;
             }
         }
 
