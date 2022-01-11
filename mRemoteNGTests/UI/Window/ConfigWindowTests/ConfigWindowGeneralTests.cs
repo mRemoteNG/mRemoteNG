@@ -261,10 +261,9 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 			nameof(ConnectionInfo.RdpVersion),
                         nameof(ConnectionInfo.RDPStartProgram),
                         nameof(ConnectionInfo.RDPStartProgramWorkDir),
-			nameof(ConnectionInfo.UserViaAPI)
+			nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.EC2InstanceId),
-                        nameof(ConnectionInfo.EC2Region),
-
+                        nameof(ConnectionInfo.EC2Region)
                     });
                     break;
                 case ProtocolType.VNC:
@@ -275,9 +274,9 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.VNCSmartSizeMode),
                         nameof(ConnectionInfo.VNCViewOnly),
-			nameof(ConnectionInfo.UserViaAPI)
+			nameof(ConnectionInfo.UserViaAPI),
 			nameof(ConnectionInfo.EC2InstanceId),
-                    	nameof(ConnectionInfo.EC2Region),
+                    	nameof(ConnectionInfo.EC2Region)
                     });
                     break;
                 case ProtocolType.SSH1:
@@ -291,7 +290,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.OpeningCommand),
                         nameof(ConnectionInfo.UserViaAPI)
 			nameof(ConnectionInfo.EC2InstanceId),
-                    	nameof(ConnectionInfo.EC2Region),
+                    	nameof(ConnectionInfo.EC2Region)
                     });
                     break;
                 case ProtocolType.SSH2:
@@ -305,9 +304,9 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.OpeningCommand),
                         nameof(ConnectionInfo.EC2InstanceId),
                         nameof(ConnectionInfo.EC2Region),
-                        nameof(ConnectionInfo.UserViaAPI)
+                        nameof(ConnectionInfo.UserViaAPI),
 			nameof(ConnectionInfo.EC2InstanceId),
-                    	nameof(ConnectionInfo.EC2Region),
+                    	nameof(ConnectionInfo.EC2Region)
                     });
                     break;
                 case ProtocolType.Telnet:
