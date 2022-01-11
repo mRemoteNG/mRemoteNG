@@ -258,7 +258,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSmartCards),
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
-						nameof(ConnectionInfo.RdpVersion),
+			nameof(ConnectionInfo.RdpVersion),
                         nameof(ConnectionInfo.RDPStartProgram),
                         nameof(ConnectionInfo.RDPStartProgramWorkDir),
                         nameof(ConnectionInfo.EC2InstanceId),
@@ -269,6 +269,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.VNC:
                     expectedProperties.AddRange(new []
                     {
+			nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.VNCSmartSizeMode),
@@ -315,6 +316,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     expectedProperties.AddRange(new []
                     {
                         nameof(ConnectionInfo.UserViaAPI),
+			nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.RenderingEngine),
@@ -324,6 +326,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.UserViaAPI),
+			nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
@@ -333,6 +336,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.UserViaAPI),
+			nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
