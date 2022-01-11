@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -261,9 +261,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 			nameof(ConnectionInfo.RdpVersion),
                         nameof(ConnectionInfo.RDPStartProgram),
                         nameof(ConnectionInfo.RDPStartProgramWorkDir),
+			nameof(ConnectionInfo.UserViaAPI)
                         nameof(ConnectionInfo.EC2InstanceId),
                         nameof(ConnectionInfo.EC2Region),
-                        nameof(ConnectionInfo.UserViaAPI)
+
                     });
                     break;
                 case ProtocolType.VNC:
@@ -274,6 +275,9 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.VNCSmartSizeMode),
                         nameof(ConnectionInfo.VNCViewOnly),
+			nameof(ConnectionInfo.UserViaAPI)
+			nameof(ConnectionInfo.EC2InstanceId),
+                    	nameof(ConnectionInfo.EC2Region),
                     });
                     break;
                 case ProtocolType.SSH1:
@@ -286,6 +290,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
                         nameof(ConnectionInfo.UserViaAPI)
+			nameof(ConnectionInfo.EC2InstanceId),
+                    	nameof(ConnectionInfo.EC2Region),
                     });
                     break;
                 case ProtocolType.SSH2:
@@ -300,6 +306,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.EC2InstanceId),
                         nameof(ConnectionInfo.EC2Region),
                         nameof(ConnectionInfo.UserViaAPI)
+			nameof(ConnectionInfo.EC2InstanceId),
+                    	nameof(ConnectionInfo.EC2Region),
                     });
                     break;
                 case ProtocolType.Telnet:
