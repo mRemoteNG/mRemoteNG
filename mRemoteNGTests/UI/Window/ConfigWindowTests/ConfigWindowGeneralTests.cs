@@ -115,9 +115,9 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 			_configWindow.SelectedTreeNode = selectedObject;
 
 			var shouldBeAvailable = selectedObject != null &&
-									!(selectedObject is RootNodeInfo) &&
-									!(selectedObject is PuttySessionInfo) &&
-									!(selectedObject.Parent is RootNodeInfo);
+									selectedObject is not RootNodeInfo &&
+									selectedObject is not PuttySessionInfo &&
+									selectedObject.Parent is not RootNodeInfo;
 
 			Assert.That(_configWindow.CanShowInheritance, Is.EqualTo(shouldBeAvailable));
 		}
@@ -170,9 +170,9 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 				.Concat(new[]
 				{
 					new TestCaseData(new RootNodeInfo(RootNodeType.Connection)).SetName("RootNode"),
-					new TestCaseData(new RootPuttySessionsNodeInfo()).SetName("RootPuttyNode"), 
-					new TestCaseData(new PuttySessionInfo()).SetName("PuttyNode"), 
-					new TestCaseData(null).SetName("Null"), 
+					new TestCaseData(new RootPuttySessionsNodeInfo()).SetName("RootPuttyNode"),
+					new TestCaseData(new PuttySessionInfo()).SetName("PuttyNode"),
+					new TestCaseData(null).SetName("Null")
 				});
 		}
 
@@ -181,7 +181,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
             // build connection info. set certain connection properties so
             // that toggled properties are hidden in the property grid. We
             // will test those separately in the special protocol tests.
-            var node = isContainer 
+            var node = isContainer
                 ? new ContainerInfo()
                 : new ConnectionInfo();
 
@@ -260,7 +260,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectAudioCapture),
 						nameof(ConnectionInfo.RdpVersion),
                         nameof(ConnectionInfo.RDPStartProgram),
-                        nameof(ConnectionInfo.RDPStartProgramWorkDir)
+                        nameof(ConnectionInfo.RDPStartProgramWorkDir),
+                        nameof(ConnectionInfo.EC2InstanceId),
+                        nameof(ConnectionInfo.EC2Region),
+                        nameof(ConnectionInfo.UserViaAPI)
                     });
                     break;
                 case ProtocolType.VNC:
@@ -273,6 +276,17 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     });
                     break;
                 case ProtocolType.SSH1:
+                    expectedProperties.AddRange(new[]
+                    {
+                        nameof(ConnectionInfo.Username),
+                        nameof(ConnectionInfo.Password),
+                        nameof(ConnectionInfo.Port),
+                        nameof(ConnectionInfo.SSHOptions),
+                        nameof(ConnectionInfo.PuttySession),
+                        nameof(ConnectionInfo.OpeningCommand),
+                        nameof(ConnectionInfo.UserViaAPI)
+                    });
+                    break;
                 case ProtocolType.SSH2:
                     expectedProperties.AddRange(new []
                     {
@@ -281,7 +295,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.SSHOptions),
                         nameof(ConnectionInfo.PuttySession),
-                        nameof(ConnectionInfo.OpeningCommand)
+                        nameof(ConnectionInfo.OpeningCommand),
+                        nameof(ConnectionInfo.EC2InstanceId),
+                        nameof(ConnectionInfo.EC2Region),
+                        nameof(ConnectionInfo.UserViaAPI)
                     });
                     break;
                 case ProtocolType.Telnet:
@@ -297,7 +314,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.HTTPS:
                     expectedProperties.AddRange(new []
                     {
-                        nameof(ConnectionInfo.Username),
+                        nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.RenderingEngine),
@@ -306,7 +323,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.PowerShell:
                     expectedProperties.AddRange(new[]
                     {
-                        nameof(ConnectionInfo.Username),
+                        nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
@@ -315,7 +332,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.IntApp:
                     expectedProperties.AddRange(new[]
                     {
-                        nameof(ConnectionInfo.Username),
+                        nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
