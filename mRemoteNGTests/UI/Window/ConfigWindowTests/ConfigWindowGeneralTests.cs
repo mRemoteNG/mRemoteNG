@@ -288,7 +288,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.SSHOptions),
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
-                        nameof(ConnectionInfo.UserViaAPI)
+                        nameof(ConnectionInfo.UserViaAPI),
 			nameof(ConnectionInfo.EC2InstanceId),
                     	nameof(ConnectionInfo.EC2Region)
                     });
