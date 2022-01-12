@@ -3,6 +3,9 @@ using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.Themes;
 using mRemoteNG.Resources.Language;
+using System.Reflection;
+using mRemoteNG.Properties;
+using System.Runtime.InteropServices;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -52,20 +55,49 @@ namespace mRemoteNG.UI.Forms
 
         private void llLicense_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://github.com/mRemoteNG/mRemoteNG/blob/develop/COPYING.TXT");
+            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/COPYING.TXT");
             Close();
         }
 
         private void llChangelog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://github.com/mRemoteNG/mRemoteNG/blob/develop/CHANGELOG.md");
+            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/CHANGELOG.md");
             Close();
         }
 
         private void llCredits_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://github.com/mRemoteNG/mRemoteNG/blob/develop/CREDITS.md");
+            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/CREDITS.MD");
             Close();
+        }
+
+        private void OpenUrl(string url)
+        {
+            try
+            {
+                Process.Start(url);
+            }
+            catch
+            {
+                // hack because of this: https://github.com/dotnet/corefx/issues/10361
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    url = url.Replace("&", "^&");
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", url);
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", url);
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
     }
 }
