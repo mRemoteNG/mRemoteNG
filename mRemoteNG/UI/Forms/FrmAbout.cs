@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Forms
 
         private void llLicense_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/COPYING.TXT");
+            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/COPYING.txt");
             Close();
         }
 
@@ -67,7 +67,7 @@ namespace mRemoteNG.UI.Forms
 
         private void llCredits_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/CREDITS.MD");
+            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/CREDITS.md");
             Close();
         }
 
