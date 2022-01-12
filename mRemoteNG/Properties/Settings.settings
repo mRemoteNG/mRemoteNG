@@ -804,8 +804,16 @@
       <Value Profile="(Default)">EdgeChromium</Value>
     </Setting>
     <Setting Name="OpeningCommand" Type="System.String" Scope="User">
-      <Value Profile="(Default)">
-        </Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CurrentUpdateChannelType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">dev</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDPStartProgram" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRDPStartProgramWorkDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
