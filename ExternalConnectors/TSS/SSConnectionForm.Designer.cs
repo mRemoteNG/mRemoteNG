@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SSConnectionForm));
             this.tbSSURL = new System.Windows.Forms.TextBox();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -39,6 +40,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cbUseSSO = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbOTP = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -70,7 +73,7 @@
             this.label3.Location = new System.Drawing.Point(4, 62);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(248, 23);
+            this.label3.Size = new System.Drawing.Size(248, 31);
             this.label3.TabIndex = 5;
             this.label3.Text = "Password";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -93,7 +96,7 @@
             this.btnOK.Margin = new System.Windows.Forms.Padding(4);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(88, 26);
-            this.btnOK.TabIndex = 10;
+            this.btnOK.TabIndex = 6;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
@@ -114,37 +117,37 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.06997F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.93003F));
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tbSSURL, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cbUseSSO, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.tbUsername, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbPassword, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.cbUseSSO, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tbOTP, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 108);
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 159);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(260, 85);
+            this.label5.Location = new System.Drawing.Point(260, 124);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(536, 23);
+            this.label5.Size = new System.Drawing.Size(536, 35);
             this.label5.TabIndex = 15;
             this.label5.Text = "For SSO to work, additional IIS configuration is required!";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -176,7 +179,7 @@
             // cbUseSSO
             // 
             this.cbUseSSO.AutoSize = true;
-            this.cbUseSSO.Location = new System.Drawing.Point(4, 89);
+            this.cbUseSSO.Location = new System.Drawing.Point(4, 128);
             this.cbUseSSO.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.cbUseSSO.Name = "cbUseSSO";
             this.cbUseSSO.Size = new System.Drawing.Size(69, 19);
@@ -184,6 +187,24 @@
             this.cbUseSSO.Text = "Use SSO";
             this.cbUseSSO.UseVisualStyleBackColor = true;
             this.cbUseSSO.CheckedChanged += new System.EventHandler(this.cbUseSSO_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(3, 93);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(250, 31);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "2FA OTP (Optional)";
+            // 
+            // tbOTP
+            // 
+            this.tbOTP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbOTP.Location = new System.Drawing.Point(259, 96);
+            this.tbOTP.Name = "tbOTP";
+            this.tbOTP.Size = new System.Drawing.Size(538, 23);
+            this.tbOTP.TabIndex = 5;
             // 
             // tableLayoutPanel2
             // 
@@ -196,7 +217,7 @@
             this.tableLayoutPanel2.Controls.Add(this.btnOK, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnCancel, 3, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 148);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 225);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -208,7 +229,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(0, 108);
+            this.label4.Location = new System.Drawing.Point(0, 159);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(341, 15);
@@ -221,10 +242,11 @@
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 198);
+            this.ClientSize = new System.Drawing.Size(800, 275);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SSConnectionForm";
             this.Text = "Secret Server API Login Data";
@@ -252,5 +274,7 @@
         public System.Windows.Forms.CheckBox cbUseSSO;
         private System.Windows.Forms.Label label4;
         private Label label5;
+        private Label label6;
+        public TextBox tbOTP;
     }
 }

@@ -81,6 +81,9 @@
             <Component Id="cmp2FF0DA180F4C2676AB45A74F8FAC2364" Directory="INSTALLDIR" Guid="*">
                 <File Id="filF6DE4DE4F3A801B8647FF4037C848B54" KeyPath="yes" Source="$(var.HarvestPath)\ListViewPrinter.dll" />
             </Component>
+            <Component Id="cmp375F226751B298CD70903C1646985757" Directory="INSTALLDIR" Guid="*">
+                <File Id="filBF38EEDD7B5695007E9582D7EF347826" KeyPath="yes" Source="$(var.HarvestPath)\log4net.config" />
+            </Component>
             <Component Id="cmp13D6573EA8CF3F99F44BAE837E2771F0" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil2991F53D601CDF7142D0A9E1B42E116E" KeyPath="yes" Source="$(var.HarvestPath)\log4net.dll" />
             </Component>
@@ -98,9 +101,6 @@
             </Component>
             <Component Id="cmpFF3B070182BDDDE8AACCA3CF800537A7" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil071813CC6E65500817D01BDDD73D2B1F" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.dll" />
-            </Component>
-            <Component Id="cmpC77C2640528674DBBCF20ADD1500C112" Directory="INSTALLDIR" Guid="*">
-                <File Id="filAC4D49028FDDA1626E5B006C9D1ED57E" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.dll.config" />
             </Component>
             
             <Component Id="cmp9FF194CCD09E9797444CF95F7C37C75A" Directory="INSTALLDIR" Guid="*">
