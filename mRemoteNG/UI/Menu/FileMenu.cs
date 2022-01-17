@@ -22,7 +22,6 @@ namespace mRemoteNG.UI.Menu
         private ToolStripSeparator _mMenFileSep1;
 
         public ConnectionTreeWindow TreeWindow { get; set; }
-        public IConnectionInitiator ConnectionInitiator { get; set; }
 
         public FileMenu()
         {
