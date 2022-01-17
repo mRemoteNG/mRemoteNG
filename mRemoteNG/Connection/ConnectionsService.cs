@@ -80,17 +80,17 @@ namespace mRemoteNG.Connection
                 {
                     var x = connectionString.Split('@');
                     uriBuilder.UserName = x[0];
-                    uriBuilder.Host = x[1];
+                    connectionString = x[1];
                 }
-                if (uriBuilder.Host.Contains(":"))
+                if (connectionString.Contains(":"))
                 {
-                    var x = uriBuilder.Host.Split(':');
-                    uriBuilder.Host = x[0];
+                    var x = connectionString.Split(':');
+                    connectionString = x[0];
                     uriBuilder.Port = Convert.ToInt32(x[1]);
                 }
-                else
-                    uriBuilder.Host = connectionString;
-                
+
+                uriBuilder.Host = connectionString;
+
                 var newConnectionInfo = new ConnectionInfo();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
@@ -99,11 +99,16 @@ namespace mRemoteNG.Connection
                     : uriBuilder.Host;
 
                 newConnectionInfo.Protocol = protocol;
+                newConnectionInfo.Hostname = uriBuilder.Host;
                 newConnectionInfo.Username = uriBuilder.UserName;
 
                 if (uriBuilder.Port == -1)
                 {
                     newConnectionInfo.SetDefaultPort();
+                }
+                else
+                {
+                    newConnectionInfo.Port = uriBuilder.Port;
                 }
 
                 if (string.IsNullOrEmpty(newConnectionInfo.Panel))
