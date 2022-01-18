@@ -58,9 +58,9 @@ namespace SecretServerAuthentication.TSS
         /// <param name="refresh_token">The refresh token.  Required when refreshing a token.</param>
         /// <returns>Successful retrieval of an access token</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<TokenResponse> AuthorizeAsync(Grant_type grant_type, string username, string password, string refresh_token)
+        public System.Threading.Tasks.Task<TokenResponse> AuthorizeAsync(Grant_type grant_type, string username, string password, string refresh_token, string OTP)
         {
-            return AuthorizeAsync(grant_type, username, password, refresh_token, System.Threading.CancellationToken.None);
+            return AuthorizeAsync(grant_type, username, password, refresh_token, System.Threading.CancellationToken.None, OTP);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -71,7 +71,7 @@ namespace SecretServerAuthentication.TSS
         /// <param name="refresh_token">The refresh token.  Required when refreshing a token.</param>
         /// <returns>Successful retrieval of an access token</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<TokenResponse> AuthorizeAsync(Grant_type grant_type, string username, string password, string refresh_token, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<TokenResponse> AuthorizeAsync(Grant_type grant_type, string username, string password, string refresh_token, System.Threading.CancellationToken cancellationToken, string OTP)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/oauth2/token");
@@ -93,6 +93,9 @@ namespace SecretServerAuthentication.TSS
                         keyValues_.Add(new System.Collections.Generic.KeyValuePair<string, string>("password", ConvertToString(password, System.Globalization.CultureInfo.InvariantCulture)));
                     if (refresh_token != null)
                         keyValues_.Add(new System.Collections.Generic.KeyValuePair<string, string>("refresh_token", ConvertToString(refresh_token, System.Globalization.CultureInfo.InvariantCulture)));
+                    if (OTP != null)
+                        request_.Headers.Add("OTP", ConvertToString(OTP, System.Globalization.CultureInfo.InvariantCulture));
+
                     request_.Content = new System.Net.Http.FormUrlEncodedContent(keyValues_);
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -125,6 +128,7 @@ namespace SecretServerAuthentication.TSS
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
                             }
+
                             return objectResponse_.Object;
                         }
                         else
@@ -275,10 +279,25 @@ namespace SecretServerAuthentication.TSS
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TokenResponseToken_type Token_type { get; set; }
 
+      
+        private string _Expires_in;
         /// <summary>Authentication token expiration time, in seconds</summary>
         [Newtonsoft.Json.JsonProperty("expires_in", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Expires_in { get; set; }
+       // public string Expires_in { get; set; }
+
+        public string Expires_in
+        {
+            get { return _Expires_in; }
+            set 
+            {
+                _Expires_in = value;
+                Expires_on = DateTime.UtcNow.AddSeconds(Double.Parse(value) - 60); 
+            }
+        }
+
+        /// <summary>Authentication token expiration time in UTC</summary>              
+        public DateTime Expires_on { get; set; }
 
         /// <summary>Refresh token.  This is only provided when the server is set to allow refresh tokens for web services and when the session timeout duration is not set to Unlimited.</summary>
         [Newtonsoft.Json.JsonProperty("refresh_token", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

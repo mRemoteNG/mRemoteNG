@@ -3,13 +3,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.77.3]
 ### Fixed
 - #2125: Fixed string parsing logic for Quick Connect toolbar.
 - #2122: Fix to avoid throwing exception incase if not able decrypt connections and ask to open another one or create a new. 
 - #2117: Fix of broken Links due migration to .NET 6 and branch renaming
 ### Added
-- #xxx:  Add default setting for update channel. Set as "dev". 
+- # #2123: Thycotic Secret Server - Added 2FA OTP support
+
+## [1.77.2]
+### Added
 - #2086: Replace WebClient with async HttpClient for updater.
 - #1850: Minify config xml
 - #1770: Added missing RDP performance settings
@@ -39,6 +42,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #1325: Language resource files cleanup
 - #xxxx: Secret Server connector via new field "API User ID" instead of SSAPI: prefix
 ### Fixed
+- #2125: Fixed string parsing logic for Quick Connect toolbar.
+- #2122: Fix to avoid throwing exception incase if not able decrypt connections and ask to open another one or create a new. 
+- #2117: Fix of broken Links due migration to .NET 6 and branch renaming
 - #2098: Fix failed BinaryFileTest
 - #2097: Fix failed tests related to mRemoteNGTests.UI.Window.ConfigWindowTests
 - #2096: Corrected encryption code of LegacyRijndaelCryptographyProvider

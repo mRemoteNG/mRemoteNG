@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>Icons\mRemoteNG.ico</ApplicationIcon>
-    <Version>1.77.2</Version>
+    <Version>1.77.3</Version>
     <Description>Multi-protocol remote connections manager</Description>
     <Copyright>2022 mRemoteNG Dev Team, 2010-2013 Riley McArdle, 2007-2009 Felix Deimel</Copyright>
     <PackageLicenseFile>COPYING.TXT</PackageLicenseFile>
@@ -14,6 +14,7 @@
     <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer</Configurations>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>latest</LangVersion>
+    <PackageIcon>Header_dark.png</PackageIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>DEBUG</DefineConstants>
@@ -225,6 +226,10 @@
     </None>
     <None Update="PuTTYNG.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Header_dark.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
     <None Update="Resources\PuTTYNG.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
