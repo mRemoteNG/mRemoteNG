@@ -430,22 +430,19 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultProtocol"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("eu-central-1")]
-        public string ConDefaultEC2Region
-        {
-            get
-            {
+        public string ConDefaultEC2Region {
+            get {
                 return ((string)(this["ConDefaultEC2Region"]));
             }
-            set
-            {
+            set {
                 this["ConDefaultEC2Region"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Default Settings")]
@@ -3113,24 +3110,24 @@ namespace mRemoteNG.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultRDPStartProgram {
+        public string ConDefaultStartProgram {
             get {
-                return ((string)(this["ConDefaultRDPStartProgram"]));
+                return ((string)(this["ConDefaultStartProgram"]));
             }
             set {
-                this["ConDefaultRDPStartProgram"] = value;
+                this["ConDefaultStartProgram"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConDefaultRDPStartProgramWorkDir {
+        public string ConDefaultStartProgramWorkDir {
             get {
-                return ((string)(this["ConDefaultRDPStartProgramWorkDir"]));
+                return ((string)(this["ConDefaultStartProgramWorkDir"]));
             }
             set {
-                this["ConDefaultRDPStartProgramWorkDir"] = value;
+                this["ConDefaultStartProgramWorkDir"] = value;
             }
         }
         
@@ -3239,6 +3236,42 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["OpeningCommand"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("dev")]
+        public string CurrentUpdateChannelType {
+            get {
+                return ((string)(this["CurrentUpdateChannelType"]));
+            }
+            set {
+                this["CurrentUpdateChannelType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultRDPStartProgram {
+            get {
+                return ((string)(this["ConDefaultRDPStartProgram"]));
+            }
+            set {
+                this["ConDefaultRDPStartProgram"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultRDPStartProgramWorkDir {
+            get {
+                return ((string)(this["ConDefaultRDPStartProgramWorkDir"]));
+            }
+            set {
+                this["ConDefaultRDPStartProgramWorkDir"] = value;
             }
         }
     }

@@ -24,7 +24,6 @@ namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionTreeWindow
     {
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private ThemeManager _themeManager;
         private bool _sortedAz = true;
 
@@ -126,7 +125,7 @@ namespace mRemoteNG.UI.Window
         {
             ConnectionTree.NodeDeletionConfirmer =
                 new SelectedConnectionDeletionConfirmer(prompt => CTaskDialog.MessageBox(
-                    Application.ProductName,prompt,"",ETaskDialogButtons.YesNo,ESysIcons.Question));
+                    Application.ProductName, prompt, "", ETaskDialogButtons.YesNo, ESysIcons.Question));
             ConnectionTree.KeyDown += TvConnections_KeyDown;
             ConnectionTree.KeyPress += TvConnections_KeyPress;
             SetTreePostSetupActions();
@@ -143,7 +142,7 @@ namespace mRemoteNG.UI.Window
             };
 
             if (Settings.Default.OpenConsFromLastSession && !Settings.Default.NoReconnect)
-                actions.Add(new PreviousSessionOpener(_connectionInitiator));
+                actions.Add(new PreviousSessionOpener(Runtime.ConnectionInitiator));
 
             ConnectionTree.PostSetupActions = actions;
         }
@@ -157,15 +156,15 @@ namespace mRemoteNG.UI.Window
             };
 
             if (Settings.Default.SingleClickOnConnectionOpensIt)
-                singleClickHandlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
+                singleClickHandlers.Add(new OpenConnectionClickHandler(Runtime.ConnectionInitiator));
             else
-                doubleClickHandlers.Add(new OpenConnectionClickHandler(_connectionInitiator));
+                doubleClickHandlers.Add(new OpenConnectionClickHandler(Runtime.ConnectionInitiator));
 
             if (Settings.Default.SingleClickSwitchesToOpenConnection)
-                singleClickHandlers.Add(new SwitchToConnectionClickHandler(_connectionInitiator));
+                singleClickHandlers.Add(new SwitchToConnectionClickHandler(Runtime.ConnectionInitiator));
 
-            ConnectionTree.SingleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = singleClickHandlers};
-            ConnectionTree.DoubleClickHandler = new TreeNodeCompositeClickHandler {ClickHandlers = doubleClickHandlers};
+            ConnectionTree.SingleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = singleClickHandlers };
+            ConnectionTree.DoubleClickHandler = new TreeNodeCompositeClickHandler { ClickHandlers = doubleClickHandlers };
         }
 
         private void ConnectionsServiceOnConnectionsLoaded(object o, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
@@ -237,7 +236,7 @@ namespace mRemoteNG.UI.Window
         private void FavoriteMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
-            _connectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
+            Runtime.ConnectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
         }
 
         #endregion
@@ -269,19 +268,19 @@ namespace mRemoteNG.UI.Window
                         ConnectionTree.Focus();
                         break;
                     case Keys.Up:
-                    {
-                        var match = ConnectionTree.NodeSearcher.PreviousMatch();
-                        JumpToNode(match);
-                        e.Handled = true;
-                        break;
-                    }
+                        {
+                            var match = ConnectionTree.NodeSearcher.PreviousMatch();
+                            JumpToNode(match);
+                            e.Handled = true;
+                            break;
+                        }
                     case Keys.Down:
-                    {
-                        var match = ConnectionTree.NodeSearcher.NextMatch();
-                        JumpToNode(match);
-                        e.Handled = true;
-                        break;
-                    }
+                        {
+                            var match = ConnectionTree.NodeSearcher.NextMatch();
+                            JumpToNode(match);
+                            e.Handled = true;
+                            break;
+                        }
                     default:
                         TvConnections_KeyDown(sender, e);
                         break;
@@ -365,7 +364,7 @@ namespace mRemoteNG.UI.Window
                     e.Handled = true;
                     if (SelectedNode == null)
                         return;
-                    _connectionInitiator.OpenConnection(SelectedNode);
+                    Runtime.ConnectionInitiator.OpenConnection(SelectedNode);
                 }
                 else if (e.Control && e.KeyCode == Keys.F)
                 {

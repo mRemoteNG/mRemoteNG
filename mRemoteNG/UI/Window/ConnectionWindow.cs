@@ -24,7 +24,6 @@ namespace mRemoteNG.UI.Window
 {
     public partial class ConnectionWindow : BaseWindow
     {
-        private readonly IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private VisualStudioToolStripExtender vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
@@ -232,33 +231,33 @@ namespace mRemoteNG.UI.Window
             switch (DockState)
             {
                 case DockState.Float:
-                {
-                    if (_documentHandlersAdded)
                     {
-                        FrmMain.Default.ResizeBegin -= Connection_ResizeBegin;
-                        FrmMain.Default.ResizeEnd -= Connection_ResizeEnd;
-                        _documentHandlersAdded = false;
-                    }
+                        if (_documentHandlersAdded)
+                        {
+                            FrmMain.Default.ResizeBegin -= Connection_ResizeBegin;
+                            FrmMain.Default.ResizeEnd -= Connection_ResizeEnd;
+                            _documentHandlersAdded = false;
+                        }
 
-                    DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
-                    DockHandler.FloatPane.FloatWindow.ResizeEnd += Connection_ResizeEnd;
-                    _floatHandlersAdded = true;
-                    break;
-                }
+                        DockHandler.FloatPane.FloatWindow.ResizeBegin += Connection_ResizeBegin;
+                        DockHandler.FloatPane.FloatWindow.ResizeEnd += Connection_ResizeEnd;
+                        _floatHandlersAdded = true;
+                        break;
+                    }
                 case DockState.Document:
-                {
-                    if (_floatHandlersAdded)
                     {
-                        DockHandler.FloatPane.FloatWindow.ResizeBegin -= Connection_ResizeBegin;
-                        DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
-                        _floatHandlersAdded = false;
-                    }
+                        if (_floatHandlersAdded)
+                        {
+                            DockHandler.FloatPane.FloatWindow.ResizeBegin -= Connection_ResizeBegin;
+                            DockHandler.FloatPane.FloatWindow.ResizeEnd -= Connection_ResizeEnd;
+                            _floatHandlersAdded = false;
+                        }
 
-                    FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
-                    FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
-                    _documentHandlersAdded = true;
-                    break;
-                }
+                        FrmMain.Default.ResizeBegin += Connection_ResizeBegin;
+                        FrmMain.Default.ResizeEnd += Connection_ResizeEnd;
+                        _documentHandlersAdded = true;
+                        break;
+                    }
             }
         }
 
@@ -725,7 +724,7 @@ namespace mRemoteNG.UI.Window
             {
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
-                _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
+                Runtime.ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
             {
@@ -746,7 +745,7 @@ namespace mRemoteNG.UI.Window
                 }
 
                 Invoke(new Action(() => Prot_Event_Closed(interfaceControl.Protocol)));
-                _connectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
+                Runtime.ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
             {

@@ -24,21 +24,10 @@ namespace mRemoteNG.UI.Controls
         private ContextMenuStrip _mnuQuickConnectProtocol;
         private QuickConnectComboBox _cmbQuickConnect;
         private ContextMenuStrip _mnuConnections;
-        private IConnectionInitiator _connectionInitiator = new ConnectionInitiator();
         private readonly ThemeManager _themeManager;
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
         private readonly DisplayProperties _display;
 
-        public IConnectionInitiator ConnectionInitiator
-        {
-            get => _connectionInitiator;
-            set
-            {
-                if (value == null)
-                    return;
-                _connectionInitiator = value;
-            }
-        }
 
         public QuickConnectToolStrip()
         {
@@ -208,7 +197,7 @@ namespace mRemoteNG.UI.Controls
                 }
 
                 _cmbQuickConnect.Add(connectionInfo);
-                ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+                Runtime.ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
             {
@@ -293,7 +282,7 @@ namespace mRemoteNG.UI.Controls
                 case ContainerInfo _:
                     return;
                 case ConnectionInfo connectionInfo:
-                    ConnectionInitiator.OpenConnection(connectionInfo);
+                    Runtime.ConnectionInitiator.OpenConnection(connectionInfo);
                     break;
             }
         }

@@ -269,14 +269,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.VNC:
                     expectedProperties.AddRange(new []
                     {
-			nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.VNCSmartSizeMode),
-                        nameof(ConnectionInfo.VNCViewOnly),
-			nameof(ConnectionInfo.UserViaAPI),
-			nameof(ConnectionInfo.EC2InstanceId),
-                    	nameof(ConnectionInfo.EC2Region)
+                        nameof(ConnectionInfo.VNCViewOnly)
                     });
                     break;
                 case ProtocolType.SSH1:
@@ -289,8 +285,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
                         nameof(ConnectionInfo.UserViaAPI),
-			nameof(ConnectionInfo.EC2InstanceId),
-                    	nameof(ConnectionInfo.EC2Region)
                     });
                     break;
                 case ProtocolType.SSH2:
@@ -305,8 +299,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.EC2InstanceId),
                         nameof(ConnectionInfo.EC2Region),
                         nameof(ConnectionInfo.UserViaAPI),
-			nameof(ConnectionInfo.EC2InstanceId),
-                    	nameof(ConnectionInfo.EC2Region)
                     });
                     break;
                 case ProtocolType.Telnet:
@@ -323,7 +315,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     expectedProperties.AddRange(new []
                     {
                         nameof(ConnectionInfo.UserViaAPI),
-			nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.RenderingEngine),
@@ -333,7 +324,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.UserViaAPI),
-			nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
@@ -343,7 +333,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                     expectedProperties.AddRange(new[]
                     {
                         nameof(ConnectionInfo.UserViaAPI),
-			nameof(ConnectionInfo.Username),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),

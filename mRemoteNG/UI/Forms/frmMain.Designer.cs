@@ -32,7 +32,6 @@
         private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            mRemoteNG.Connection.ConnectionInitiator connectionInitiator1 = new mRemoteNG.Connection.ConnectionInitiator();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.msMain = new System.Windows.Forms.MenuStrip();
@@ -84,8 +83,7 @@
             this.msMain.Text = "Main Toolbar";
             // 
             // fileMenu
-            // 
-            this.fileMenu.ConnectionInitiator = null;
+            //
             this.fileMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.fileMenu.Name = "mMenFile";
             this.fileMenu.Size = new System.Drawing.Size(37, 19);
@@ -152,7 +150,6 @@
             // _quickConnectToolStrip
             // 
             this._quickConnectToolStrip.BackColor = System.Drawing.SystemColors.Control;
-            this._quickConnectToolStrip.ConnectionInitiator = connectionInitiator1;
             this._quickConnectToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this._quickConnectToolStrip.ForeColor = System.Drawing.SystemColors.ControlText;
             this._quickConnectToolStrip.Location = new System.Drawing.Point(114, 25);

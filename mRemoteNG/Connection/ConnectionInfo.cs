@@ -369,7 +369,7 @@ namespace mRemoteNG.Connection
             UserField = Settings.Default.ConDefaultUserField;
             Favorite = Settings.Default.ConDefaultFavorite;
             RDPStartProgram = Settings.Default.ConDefaultRDPStartProgram;
-            RDPStartProgramWorkDir = Settings.Default.ConDefaultRDPStartProgram;
+            RDPStartProgramWorkDir = Settings.Default.ConDefaultRDPStartProgramWorkDir;
             OpeningCommand = Settings.Default.OpeningCommand;
         }
 

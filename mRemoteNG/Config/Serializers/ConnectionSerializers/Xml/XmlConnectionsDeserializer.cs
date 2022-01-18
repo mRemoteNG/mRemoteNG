@@ -44,6 +44,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         public ConnectionTreeModel Deserialize(string xml, bool import)
         {
+            if (string.IsNullOrEmpty(xml)) return null;
             try
             {
                 LoadXmlConnectionData(xml);
@@ -95,9 +96,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         {
             CreateDecryptor(new RootNodeInfo(RootNodeType.Connection));
             connections = _decryptor.LegacyFullFileDecrypt(connections);
-            _xmlDocument = new XmlDocument();
             if (connections != "")
+            {
+                _xmlDocument = new XmlDocument();
                 _xmlDocument.LoadXml(connections);
+            }
         }
 
         private void ValidateConnectionFileVersion()
