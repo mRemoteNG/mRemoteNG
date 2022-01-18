@@ -36,6 +36,9 @@ namespace mRemoteNG.Connection.Protocol
         PowerShell = 10,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.ExternalTool))]
-        IntApp = 20
+        IntApp = 20,
+
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.Winbox))]
+        Winbox = 11
     }
 }

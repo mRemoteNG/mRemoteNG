@@ -2223,4 +2223,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="PropertyDescriptionEC2Region" xml:space="preserve">
     <value>fetch aws instance info from this region</value>
   </data>
+  <data name="Winbox" xml:space="preserve">
+    <value>Winbox</value>
+  </data>
 </root>

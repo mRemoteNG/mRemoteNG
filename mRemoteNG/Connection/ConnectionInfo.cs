@@ -18,6 +18,7 @@ using mRemoteNG.Properties;
 using mRemoteNG.Tree;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.Connection.Protocol.Winbox;
 
 
 namespace mRemoteNG.Connection
@@ -274,6 +275,8 @@ namespace mRemoteNG.Connection
                         return (int)ProtocolPowerShell.Defaults.Port;
                     case ProtocolType.IntApp:
                         return (int)IntegratedProgram.Defaults.Port;
+                    case ProtocolType.Winbox:
+                        return (int)ProtocolWinbox.Defaults.Port;
                 }
 
                 return 0;

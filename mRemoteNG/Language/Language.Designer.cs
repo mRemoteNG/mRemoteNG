@@ -6353,7 +6353,18 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Windows", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Windows.
+        /// </summary>
+        internal static string Winbox
+        {
+            get
+            {
+                return ResourceManager.GetString("Winbox", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Working directory.
         /// </summary>

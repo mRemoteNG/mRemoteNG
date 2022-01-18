@@ -9,6 +9,7 @@ using System;
 using mRemoteNG.Connection.Protocol.PowerShell;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Connection.Protocol.Winbox;
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -49,6 +50,8 @@ namespace mRemoteNG.Connection.Protocol
                         throw (new Exception(Language.NoExtAppDefined));
                     }
                     return new IntegratedProgram();
+                case ProtocolType.Winbox:
+                    return new ProtocolWinbox();
             }
 
             return default(ProtocolBase);
