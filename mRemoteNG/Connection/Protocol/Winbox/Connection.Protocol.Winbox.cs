@@ -125,12 +125,12 @@ namespace mRemoteNG.Connection.Protocol.Winbox
                     Console.WriteLine(line);
                     if (line.Contains("startServices done"))
                     {
-                        Console.WriteLine("Find connection done");
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Winbox - Find connection done");
                         break;
                     }
                     else if (line.Contains("disconnect"))
                     {
-                        Console.WriteLine("Cannot connect");
+                        Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Winbox - Cannot Connect");
                         break;
                     }
                 }
@@ -149,21 +149,13 @@ namespace mRemoteNG.Connection.Protocol.Winbox
 
                 NativeMethods.SetParent(WinboxHandle, InterfaceControl.Handle);
 
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.PuttyStuff, true);
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.PuttyHandle, WinboxHandle), true);
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.PuttyTitle, WinboxProcess.MainWindowTitle), true);
-                //::TODO not found putty parent handle
-                //Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.PuttyParentHandle, InterfaceControl.Parent.Handle), true);
-
                 Resize(this, new EventArgs());
                 base.Connect();
                 return true;
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ConnectionFailed + Environment.NewLine +
-                                                    ex.Message);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ConnectionFailed + Environment.NewLine + ex.Message);
                 return false;
             }
         }
@@ -216,7 +208,7 @@ namespace mRemoteNG.Connection.Protocol.Winbox
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.PuttyKillFailed + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Winbox - Kill process failed" + Environment.NewLine + ex.Message, true);
             }
 
             try
@@ -233,15 +225,7 @@ namespace mRemoteNG.Connection.Protocol.Winbox
 
         public void ShowSettingsDialog()
         {
-            try
-            {
-                NativeMethods.PostMessage(WinboxHandle, NativeMethods.WM_SYSCOMMAND, (IntPtr)IDM_RECONF, (IntPtr)0);
-                NativeMethods.SetForegroundWindow(WinboxHandle);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.PuttyShowSettingsDialogFailed + Environment.NewLine + ex.Message, true);
-            }
+           
         }
 
         #endregion
