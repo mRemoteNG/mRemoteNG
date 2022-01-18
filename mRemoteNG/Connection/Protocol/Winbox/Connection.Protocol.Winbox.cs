@@ -61,8 +61,9 @@ namespace mRemoteNG.Connection.Protocol.Winbox
                 {
                     StartInfo =
                     {
-                        UseShellExecute = true,
-                        FileName = WinboxPath
+                        UseShellExecute = false,
+                        FileName = WinboxPath,
+                        RedirectStandardOutput = true
                     }
                 };
 
@@ -118,16 +119,28 @@ namespace mRemoteNG.Connection.Protocol.Winbox
 
                 WinboxProcess.Start();
                 WinboxProcess.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
-
+                while (!WinboxProcess.StandardOutput.EndOfStream)
+                {
+                    var line = WinboxProcess.StandardOutput.ReadLine();
+                    Console.WriteLine(line);
+                    if (line.Contains("startServices done"))
+                    {
+                        Console.WriteLine("Find connection done");
+                        break;
+                    }
+                    else if (line.Contains("disconnect"))
+                    {
+                        Console.WriteLine("Cannot connect");
+                        break;
+                    }
+                }
                 var startTicks = Environment.TickCount;
                 while (WinboxHandle.ToInt32() == 0 &
                        Environment.TickCount < startTicks + Settings.Default.MaxPuttyWaitTime * 1000)
                 {
-                    //WinboxHandle = NativeMethods.FindWindowEx(InterfaceControl.Handle, new IntPtr(0), null, null);
+                    WinboxHandle = NativeMethods.FindWindowEx(InterfaceControl.Handle, new IntPtr(0), null, null);
                     WinboxProcess.Refresh();
                     WinboxHandle = WinboxProcess.MainWindowHandle;
-
-
                     if (WinboxHandle.ToInt32() == 0)
                     {
                         Thread.Sleep(0);
