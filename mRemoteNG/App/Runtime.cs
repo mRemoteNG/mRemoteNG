@@ -49,6 +49,8 @@ namespace mRemoteNG.App
 
         public static ICredentialRepositoryList CredentialProviderCatalog { get; } = new CredentialRepositoryList();
 
+        public static ConnectionInitiator ConnectionInitiator { get; set; } = new ConnectionInitiator();
+
         public static ConnectionsService ConnectionsService { get; } =
             new ConnectionsService(PuttySessionsManager.Instance);
 

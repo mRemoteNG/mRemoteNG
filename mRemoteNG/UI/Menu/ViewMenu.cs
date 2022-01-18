@@ -32,7 +32,6 @@ namespace mRemoteNG.UI.Menu
         public ToolStrip TsMultiSsh { get; set; }
         public FullscreenHandler FullscreenHandler { get; set; }
         public FrmMain MainForm { get; set; }
-        public IConnectionInitiator ConnectionInitiator { get; set; }
 
 
         public ViewMenu()
@@ -317,7 +316,7 @@ namespace mRemoteNG.UI.Menu
                 if (!(window is ConnectionWindow connectionWindow))
                     return;
 
-                connectionWindow.reconnectAll(ConnectionInitiator);
+                connectionWindow.reconnectAll(Runtime.ConnectionInitiator);
             }
         }
 

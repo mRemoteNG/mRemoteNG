@@ -280,9 +280,7 @@ namespace mRemoteNG.UI.Forms
 
         private void SetMenuDependencies()
         {
-            var connectionInitiator = new ConnectionInitiator();
             fileMenu.TreeWindow = Windows.TreeForm;
-            fileMenu.ConnectionInitiator = connectionInitiator;
 
             viewMenu.TsExternalTools = _externalToolsToolStrip;
             viewMenu.TsQuickConnect = _quickConnectToolStrip;
@@ -292,8 +290,6 @@ namespace mRemoteNG.UI.Forms
 
             toolsMenu.MainForm = this;
             toolsMenu.CredentialProviderCatalog = Runtime.CredentialProviderCatalog;
-
-            _quickConnectToolStrip.ConnectionInitiator = connectionInitiator;
         }
 
         //Theming support
