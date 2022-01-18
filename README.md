@@ -116,7 +116,7 @@ The MSI package of mRemoteNG can be installed using the command line:
 _If you are using the Portable version, simply deleting the folder that contains mRemoteNG should be sufficient. These uninstall instructions are only necessary for the normal binary .MSI installed version of mRemoteNG_
 
 * Delete the folder where mRemoteNG was installed. By default, this is:
-	`%PROGRAMFILES%\mRemoteNG`
+	`%PROGRAMFILES%\mRemoteNG` (for versions before 1.77 on a x64 windows its `%programfiles(x86)%\mRemoteNG`)
 
 * Delete the mRemoteNG install entry from the following location. You may search for "mRemoteNG" in the DisplayName field:
   * x86 Windows or mRemoteNG starting with v1.77: `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\`
