@@ -125,6 +125,8 @@ _If you are using the Portable version, simply deleting the folder that contains
 * (Optional) If you would also like to delete user data remove `%LOCALAPPDATA%\mRemoteNG`
 * (Optional) If you would also like to remove the connection configuration, delete `%APPDATA%\mRemoteNG`
 
+* (Optional) If no other software uses it, the "Microsoft Windows Desktop Runtime" may be uninstalled too.
+
 ## Featured Projects
 
 * [PSmRemoteNG](https://github.com/realslacker/PSmRemoteNG) A module to create mRemoteNG connection files from PowerShell.
