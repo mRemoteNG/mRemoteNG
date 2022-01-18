@@ -119,10 +119,11 @@ _If you are using the Portable version, simply deleting the folder that contains
 	`%PROGRAMFILES%\mRemoteNG`
 
 * Delete the mRemoteNG install entry from one of the following locations. Search for "mRemoteNG" in the DisplayName field:
-  * x86: ``HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\``
-  * x64: ``HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\``
+  * x86 Windows or mRemoteNG starting with v1.77: ``HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\``
+  * x64 Windows and mRemoteNG before 1.77: ``HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\``
 
 * (Optional) If you would also like to delete user data remove `%LOCALAPPDATA%\mRemoteNG`
+* (Optional) If you would also like to remove the connection configuration, delete `%APPDATA%\mRemoteNG`
 
 ## Featured Projects
 
