@@ -48,8 +48,9 @@ namespace mRemoteNG.UI.Tabs
             set
             {
                 currentPanel = value;
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
-                                                    "Panel got focused: " + currentPanel.TabText);
+                //Disabled due to interaction with popups that would show this information and cause a softlock
+                //Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
+                //                                    "Panel got focused: " + currentPanel.TabText);
             }
         }
     }

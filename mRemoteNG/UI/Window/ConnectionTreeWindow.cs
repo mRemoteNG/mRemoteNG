@@ -141,7 +141,7 @@ namespace mRemoteNG.UI.Window
                 new RootNodeExpander()
             };
 
-            if (Settings.Default.OpenConsFromLastSession && !Settings.Default.NoReconnect)
+            if (Settings.Default.OpenConsFromLastSession && !Settings.Default.NoReconnect && !Settings.Default.AlwaysShowPanelSelectionDlg)
                 actions.Add(new PreviousSessionOpener(Runtime.ConnectionInitiator));
 
             ConnectionTree.PostSetupActions = actions;
