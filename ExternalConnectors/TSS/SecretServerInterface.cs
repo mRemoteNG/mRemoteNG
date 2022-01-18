@@ -174,7 +174,7 @@ namespace ExternalConnectors.TSS
             DateTime ExpiresOn = SSConnectionData.ssTokenExpiresOn;
 
 
-            //Check if current token is valid 
+            // Check if current token is valid
             if (!String.IsNullOrEmpty(Bearer))
             {
                 if (ExpiresOn >= DateTime.UtcNow)
@@ -191,6 +191,8 @@ namespace ExternalConnectors.TSS
                         var tokenResult = token.Access_token;
 
                         SSConnectionData.ssTokenBearer = tokenResult;
+                        SSConnectionData.ssTokenRefresh = token.Refresh_token;
+                        SSConnectionData.ssTokenExpiresOn = token.Expires_on;
                         return tokenResult;
                     }
                 }
