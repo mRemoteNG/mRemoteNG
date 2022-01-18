@@ -118,7 +118,7 @@ _If you are using the Portable version, simply deleting the folder that contains
 * Delete the folder where mRemoteNG was installed. By default, this is:
 	`%PROGRAMFILES%\mRemoteNG`
 
-* Delete the mRemoteNG install entry from one of the following locations. Search for "mRemoteNG" in the DisplayName field:
+* Delete the mRemoteNG install entry from the following location. You may search for "mRemoteNG" in the DisplayName field:
   * x86 Windows or mRemoteNG starting with v1.77: ``HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\``
   * x64 Windows and mRemoteNG before 1.77: ``HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\``
 
