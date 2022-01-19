@@ -183,8 +183,8 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             {
 				if (bool.TryParse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText, out var useConsole))
 					connectionInfo.UseConsoleSession = useConsole;
-                connectionInfo.RDPStartProgram = connectionSettingsNode.SelectSingleNode("./startProgram")?.InnerText;
-                connectionInfo.RDPStartProgramWorkDir = connectionSettingsNode.SelectSingleNode("./startProgramWorkDir")?.InnerText;
+                connectionInfo.RDPStartProgram = connectionSettingsNode.SelectSingleNode("./startProgram")?.InnerText ?? string.Empty;
+                connectionInfo.RDPStartProgramWorkDir = connectionSettingsNode.SelectSingleNode("./startProgramWorkDir")?.InnerText ?? string.Empty;
                 if (int.TryParse(connectionSettingsNode.SelectSingleNode("./port")?.InnerText, out var port))
 					connectionInfo.Port = port;
             }
