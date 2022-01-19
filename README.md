@@ -94,6 +94,8 @@ You will need to compile it yourself using Visual Studio.
 
 ### Download
 
+> :star: Starting Windows 11 you can use winget to install mRemoteNG. Just run `winget install -e --id mRemoteNG.mRemoteNG`
+
 mRemoteNG is available as a redistributable MSI package or as a portable ZIP package and can be downloaded from the following locations:
 * [GitHub](https://github.com/mRemoteNG/mRemoteNG/releases)
 * [Project Website](https://mremoteng.org/download)
