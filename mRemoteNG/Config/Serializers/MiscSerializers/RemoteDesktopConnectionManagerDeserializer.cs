@@ -57,7 +57,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             if (versionAttribute != null)
             {
                 var version = new Version(versionAttribute);
-                if (!(version == new Version(2, 7)))
+                if (!(version == new Version(2, 7)) && !(version == new Version(2, 83)))
                 {
                     throw new FileFormatException($"Unsupported file version ({version}).");
                 }
