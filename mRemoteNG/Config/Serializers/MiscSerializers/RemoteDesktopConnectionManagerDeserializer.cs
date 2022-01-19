@@ -57,7 +57,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             if (versionAttribute != null)
             {
                 var version = new Version(versionAttribute);
-                if (!(version == new Version(2, 7)))
+                if (!(version == new Version(2, 7)) && !(version == new Version(2, 83)))
                 {
                     throw new FileFormatException($"Unsupported file version ({version}).");
                 }
@@ -183,8 +183,8 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             {
 				if (bool.TryParse(connectionSettingsNode.SelectSingleNode("./connectToConsole")?.InnerText, out var useConsole))
 					connectionInfo.UseConsoleSession = useConsole;
-                connectionInfo.RDPStartProgram = connectionSettingsNode.SelectSingleNode("./startProgram")?.InnerText;
-                connectionInfo.RDPStartProgramWorkDir = connectionSettingsNode.SelectSingleNode("./startProgramWorkDir")?.InnerText;
+                connectionInfo.RDPStartProgram = connectionSettingsNode.SelectSingleNode("./startProgram")?.InnerText ?? string.Empty;
+                connectionInfo.RDPStartProgramWorkDir = connectionSettingsNode.SelectSingleNode("./startProgramWorkDir")?.InnerText ?? string.Empty;
                 if (int.TryParse(connectionSettingsNode.SelectSingleNode("./port")?.InnerText, out var port))
 					connectionInfo.Port = port;
             }
