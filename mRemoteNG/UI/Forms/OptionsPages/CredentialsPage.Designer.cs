@@ -55,7 +55,7 @@
             this.pnlDefaultCredentials.Controls.Add(this.radCredentialsWindows);
             this.pnlDefaultCredentials.Location = new System.Drawing.Point(3, 3);
             this.pnlDefaultCredentials.Name = "pnlDefaultCredentials";
-            this.pnlDefaultCredentials.Size = new System.Drawing.Size(604, 167);
+            this.pnlDefaultCredentials.Size = new System.Drawing.Size(604, 200);
             this.pnlDefaultCredentials.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -77,7 +77,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(332, 82);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(332, 110);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // txtCredentialsUserViaAPI

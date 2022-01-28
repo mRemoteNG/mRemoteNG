@@ -3274,5 +3274,17 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultRDPStartProgramWorkDir"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserViaAPDefault {
+            get {
+                return ((string)(this["UserViaAPDefault"]));
+            }
+            set {
+                this["UserViaAPDefault"] = value;
+            }
+        }
     }
 }
