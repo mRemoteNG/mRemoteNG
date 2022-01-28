@@ -13,7 +13,12 @@
             if (cbUseSSO.Checked)
                 btnOK.Focus();
             else
-                tbPassword.Focus();
+            {
+                if (tbPassword.Text.Length == 0)
+                    tbPassword.Focus(); 
+                else
+                    tbOTP.Focus();
+            }
         }
 
         private void cbUseSSO_CheckedChanged(object sender, EventArgs e)
