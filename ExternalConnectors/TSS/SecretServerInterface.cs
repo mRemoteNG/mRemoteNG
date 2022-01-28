@@ -22,7 +22,7 @@ namespace ExternalConnectors.TSS
 
             public static void Init()
             {
-                if (ssPassword != "" || initdone == true)
+                if (initdone == true)
                     return;
 
                 RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\mRemoteSSInterface");
@@ -32,6 +32,7 @@ namespace ExternalConnectors.TSS
                     SSConnectionForm f = new SSConnectionForm();
                     string? un = key.GetValue("Username") as string;
                     f.tbUsername.Text = un ?? "";
+                    f.tbPassword.Text = SSConnectionData.ssPassword;    // in OTP refresh cases, this value might already be filled
 
                     string? url = key.GetValue("URL") as string;
                     if (url == null || !url.Contains("://"))
@@ -42,12 +43,9 @@ namespace ExternalConnectors.TSS
                     if (b == null || (string)b != "True")
                         ssSSO = false;
                     else
-                    {
                         ssSSO = true;
-                        initdone = true;
-                    }
                     f.cbUseSSO.Checked = ssSSO;
-
+                    
                     // show dialog
                     while (true)
                     {
@@ -66,7 +64,10 @@ namespace ExternalConnectors.TSS
                         try
                         {
                             if (TestCredentials() == true)
+                            {
+                                initdone = true;
                                 break;
+                            }
                         }
                         catch (Exception)
                         {
@@ -164,30 +165,26 @@ namespace ExternalConnectors.TSS
 
         private static string GetToken()
         {
-
-            string authUsername = SSConnectionData.ssUsername;
-            string authPassword = SSConnectionData.ssPassword;
-            string baseURL = SSConnectionData.ssUrl;
-            string OTP = SSConnectionData.ssOTP;
-            string Bearer = SSConnectionData.ssTokenBearer;
-            string Refresh = SSConnectionData.ssTokenRefresh;
-            DateTime ExpiresOn = SSConnectionData.ssTokenExpiresOn;
-
-
-            // Check if current token is valid
-            if (!String.IsNullOrEmpty(Bearer))
+            // if there is no token, fetch a fresh one
+            if (String.IsNullOrEmpty(SSConnectionData.ssTokenBearer))
             {
-                if (ExpiresOn >= DateTime.UtcNow)
+                return GetTokenFresh();
+            }
+            // if there is a token, check if it is valid
+            if (SSConnectionData.ssTokenExpiresOn >= DateTime.UtcNow)
+            {
+                return SSConnectionData.ssTokenBearer;
+            }
+            else
+            {
+                // try using refresh token
+                using (var httpClient = new HttpClient())
                 {
-                    return Bearer;
-                }
-                else
-                {
-                    //try using refresh token
-                    using (var httpClient = new HttpClient())
+                    var tokenClient = new OAuth2ServiceClient(SSConnectionData.ssUrl, httpClient);
+                    TokenResponse token = new();
+                    try
                     {
-                        var tokenClient = new OAuth2ServiceClient(baseURL, httpClient);
-                        var token = tokenClient.AuthorizeAsync(Grant_type.Refresh_token, null, null, Refresh, null).Result;
+                        token = tokenClient.AuthorizeAsync(Grant_type.Refresh_token, null, null, SSConnectionData.ssTokenRefresh, null).Result;
                         var tokenResult = token.Access_token;
 
                         SSConnectionData.ssTokenBearer = tokenResult;
@@ -195,27 +192,36 @@ namespace ExternalConnectors.TSS
                         SSConnectionData.ssTokenExpiresOn = token.Expires_on;
                         return tokenResult;
                     }
+                    catch (Exception)
+                    {
+                        // refresh token failed. maybe the refresh time is over? try to fetch a fresh one.
+                        // if OTP is used we need to ask user for a new OTP
+                        if (!String.IsNullOrEmpty(SSConnectionData.ssOTP))
+                        {
+                            SSConnectionData.initdone = false;
+                            SSConnectionData.Init();
+                        }
+                        // get a fresh token
+                        return GetTokenFresh();
+                    }
                 }
-
             }
-            else
+        }
+        static string GetTokenFresh()
+        {
+            using (var httpClient = new HttpClient())
             {
-                using (var httpClient = new HttpClient())
-                {
-                    // Authenticate:
-                    var tokenClient = new OAuth2ServiceClient(baseURL, httpClient);
-                    // call below will throw an exception if the creds are invalid
-                    var token = tokenClient.AuthorizeAsync(Grant_type.Password, authUsername, authPassword, null, OTP).Result;
-                    // here we can be sure the creds are ok - return success state                   
-                    var tokenResult = token.Access_token;
+                // Authenticate:
+                var tokenClient = new OAuth2ServiceClient(SSConnectionData.ssUrl, httpClient);
+                // call below will throw an exception if the creds are invalid
+                var token = tokenClient.AuthorizeAsync(Grant_type.Password, SSConnectionData.ssUsername, SSConnectionData.ssPassword, null, SSConnectionData.ssOTP).Result;
+                // here we can be sure the creds are ok - return success state                   
+                var tokenResult = token.Access_token;
 
-                    SSConnectionData.ssTokenBearer = tokenResult;
-                    SSConnectionData.ssTokenRefresh = token.Refresh_token;
-                    SSConnectionData.ssTokenExpiresOn = token.Expires_on;
-                    return tokenResult;
-
-
-                }
+                SSConnectionData.ssTokenBearer = tokenResult;
+                SSConnectionData.ssTokenRefresh = token.Refresh_token;
+                SSConnectionData.ssTokenExpiresOn = token.Expires_on;
+                return tokenResult;
             }
         }
 
