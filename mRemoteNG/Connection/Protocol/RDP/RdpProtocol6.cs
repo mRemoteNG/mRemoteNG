@@ -463,9 +463,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var userName = connectionInfo?.Username ?? "";
                 var password = connectionInfo?.Password ?? "";
                 var domain = connectionInfo?.Domain ?? "";
+                var UserViaAPI = connectionInfo?.UserViaAPI ?? "";
 
                 // access secret server api if necessary
-                if (!string.IsNullOrEmpty(connectionInfo?.UserViaAPI))
+                if (!string.IsNullOrEmpty(UserViaAPI))
                 {
                     try
                     {
@@ -480,13 +481,26 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (string.IsNullOrEmpty(userName))
                 {
-                    if (Settings.Default.EmptyCredentials == "windows")
+                    switch (Settings.Default.EmptyCredentials)
                     {
-                        _rdpClient.UserName = Environment.UserName;
-                    }
-                    else if (Settings.Default.EmptyCredentials == "custom")
-                    {
-                        _rdpClient.UserName = Settings.Default.DefaultUsername;
+                        case "windows":
+                            _rdpClient.UserName = Environment.UserName;
+                            break;
+                        case "custom" when !string.IsNullOrEmpty(Settings.Default.DefaultUsername):
+                            _rdpClient.UserName = Settings.Default.DefaultUsername;
+                            break;
+                        case "custom":
+                            try
+                            {
+                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + Settings.Default.UserViaAPDefault, out userName, out password, out domain);
+                                _rdpClient.UserName = userName;
+                            }
+                            catch (Exception ex)
+                            {
+                                Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                            }
+
+                            break;
                     }
                 }
                 else
@@ -513,14 +527,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (string.IsNullOrEmpty(domain))
                 {
-                    if (Settings.Default.EmptyCredentials == "windows")
+                    _rdpClient.Domain = Settings.Default.EmptyCredentials switch
                     {
-                        _rdpClient.Domain = Environment.UserDomainName;
-                    }
-                    else if (Settings.Default.EmptyCredentials == "custom")
-                    {
-                        _rdpClient.Domain = Settings.Default.DefaultDomain;
-                    }
+                        "windows" => Environment.UserDomainName,
+                        "custom" => Settings.Default.DefaultDomain,
+                        _ => _rdpClient.Domain
+                    };
                 }
                 else
                 {

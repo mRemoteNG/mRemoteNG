@@ -79,13 +79,16 @@ namespace mRemoteNG.Connection.Protocol
 
                     if (PuttyProtocol == Putty_Protocol.ssh)
                     {
-                        var username = "";
-                        var password = "";
+
+                        var username = InterfaceControl.Info?.Username ?? "";
+                        var password = InterfaceControl.Info?.Password ?? "";
+                        var domain = InterfaceControl.Info?.Domain ?? "";
+                        var UserViaAPI = InterfaceControl.Info?.UserViaAPI ?? "";
+
 
                         // access secret server api if necessary
-                        if (!string.IsNullOrEmpty(InterfaceControl.Info?.UserViaAPI))
-                        {
-                            var domain = ""; // dummy
+                        if (!string.IsNullOrEmpty(UserViaAPI)) {
+
                             try
                             {
                                 ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + InterfaceControl.Info?.UserViaAPI, out username, out password, out domain);
@@ -95,29 +98,34 @@ namespace mRemoteNG.Connection.Protocol
                                 Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
                             }
                         }
-                        if (!string.IsNullOrEmpty(InterfaceControl.Info?.Username))
+
+                        if (string.IsNullOrEmpty(username))
                         {
-                            username = InterfaceControl.Info.Username;
-                        }
-                        else
-                        {
-                            // ReSharper disable once SwitchStatementMissingSomeCases
                             switch (Settings.Default.EmptyCredentials)
                             {
                                 case "windows":
                                     username = Environment.UserName;
                                     break;
-                                case "custom":
+                                case "custom" when !string.IsNullOrEmpty(Settings.Default.DefaultUsername):
                                     username = Settings.Default.DefaultUsername;
+                                    break;
+                                case "custom":
+                                    try
+                                    {
+                                        ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer(
+                                            "SSAPI:" + Settings.Default.UserViaAPDefault, out username, out password,
+                                            out domain);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                                    }
                                     break;
                             }
                         }
+                       
 
-                        if (!string.IsNullOrEmpty(InterfaceControl.Info?.Password))
-                        {
-                            password = InterfaceControl.Info.Password;
-                        }
-                        else
+                        if (string.IsNullOrEmpty(password))
                         {
                             if (Settings.Default.EmptyCredentials == "custom")
                             {
