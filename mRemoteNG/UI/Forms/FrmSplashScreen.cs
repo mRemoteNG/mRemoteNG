@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using mRemoteNG.App.Info;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -11,7 +12,7 @@ namespace mRemoteNG.UI.Forms
         private FrmSplashScreen()
         {
             InitializeComponent();
-
+            label1.Text = $@"v. {GeneralAppInfo.ApplicationVersion}";
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
