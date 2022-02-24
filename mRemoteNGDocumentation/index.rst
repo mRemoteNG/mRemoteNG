@@ -31,6 +31,7 @@ Welcome to mRemoteNG's documentation!
    howtos/vmrdp.rst
    howtos/credvault.rst
    howtos/dynamic_host.rst
+   howtos/cyberark-psm.rst
 
 .. toctree::
    :maxdepth: 2
