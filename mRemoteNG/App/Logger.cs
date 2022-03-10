@@ -27,10 +27,10 @@ namespace mRemoteNG.App
         private void Initialize()
         {
             XmlConfigurator.Configure(LogManager.CreateRepository("mRemoteNG"));
-            if (string.IsNullOrEmpty(Settings.Default.LogFilePath))
-                Settings.Default.LogFilePath = BuildLogFilePath();
+            if (string.IsNullOrEmpty(Properties.OptionsNotificationsPage.Default.LogFilePath))
+                Properties.OptionsNotificationsPage.Default.LogFilePath = BuildLogFilePath();
 
-            SetLogPath(Settings.Default.LogToApplicationDirectory ? DefaultLogPath : Settings.Default.LogFilePath);
+            SetLogPath(Properties.OptionsNotificationsPage.Default.LogToApplicationDirectory ? DefaultLogPath : Properties.OptionsNotificationsPage.Default.LogFilePath);
         }
 
         public void SetLogPath(string path)

@@ -110,12 +110,12 @@ namespace mRemoteNG.Tools
             if (Process == null || Process.HasExited)
                 return IntPtr.Zero;
 
-            Process.WaitForInputIdle(Settings.Default.MaxPuttyWaitTime * 1000);
+            Process.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
             Handle = IntPtr.Zero;
             var startTicks = Environment.TickCount;
             while (Handle == IntPtr.Zero &&
-                   Environment.TickCount < startTicks + (Settings.Default.MaxPuttyWaitTime * 1000))
+                   Environment.TickCount < startTicks + (Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000))
             {
                 Process.Refresh();
                 Handle = Process.MainWindowHandle;
@@ -152,8 +152,7 @@ namespace mRemoteNG.Tools
                 }
                 else
                 {
-                    NativeMethods.SendMessage(control, NativeMethods.WM_GETTEXT, new IntPtr(stringBuilder.Capacity),
-                                              stringBuilder);
+                    NativeMethods.SendMessage(control, NativeMethods.WM_GETTEXT, new IntPtr(stringBuilder.Capacity), stringBuilder);
                     if (stringBuilder.ToString() != text) continue;
                     controlHandle = control;
                     break;

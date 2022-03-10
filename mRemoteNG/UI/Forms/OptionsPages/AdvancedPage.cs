@@ -48,45 +48,43 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
-            chkLoadBalanceInfoUseUtf8.Checked = Settings.Default.RdpLoadBalanceInfoUseUtf8;
-            numPuttyWaitTime.Value = Settings.Default.MaxPuttyWaitTime;
+            chkAutomaticReconnect.Checked = Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect;
+            chkLoadBalanceInfoUseUtf8.Checked = Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8;
+            numPuttyWaitTime.Value = Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime;
 
-            chkUseCustomPuttyPath.Checked = Settings.Default.UseCustomPuttyPath;
-            txtCustomPuttyPath.Text = Settings.Default.CustomPuttyPath;
+            chkUseCustomPuttyPath.Checked = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath;
+            txtCustomPuttyPath.Text = Properties.OptionsAdvancedPage.Default.CustomPuttyPath;
             SetPuttyLaunchButtonEnabled();
 
-            numUVNCSCPort.Value = Settings.Default.UVNCSCPort;
+            numUVNCSCPort.Value = Properties.OptionsAdvancedPage.Default.UVNCSCPort;
         }
 
         public override void SaveSettings()
         {
-            Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
-            Settings.Default.RdpLoadBalanceInfoUseUtf8 = chkLoadBalanceInfoUseUtf8.Checked;
+            Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
+            Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8 = chkLoadBalanceInfoUseUtf8.Checked;
 
             var puttyPathChanged = false;
-            if (Settings.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
+            if (Properties.OptionsAdvancedPage.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
             {
                 puttyPathChanged = true;
-                Settings.Default.CustomPuttyPath = txtCustomPuttyPath.Text;
+                Properties.OptionsAdvancedPage.Default.CustomPuttyPath = txtCustomPuttyPath.Text;
             }
 
-            if (Settings.Default.UseCustomPuttyPath != chkUseCustomPuttyPath.Checked)
+            if (Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath != chkUseCustomPuttyPath.Checked)
             {
                 puttyPathChanged = true;
-                Settings.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
+                Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
             }
 
             if (puttyPathChanged)
             {
-                PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath
-                    ? Settings.Default.CustomPuttyPath
-                    : GeneralAppInfo.PuttyPath;
+                PuttyBase.PuttyPath = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
                 PuttySessionsManager.Instance.AddSessions();
             }
 
-            Settings.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
-            Settings.Default.UVNCSCPort = (int)numUVNCSCPort.Value;
+            Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
+            Properties.OptionsAdvancedPage.Default.UVNCSCPort = (int)numUVNCSCPort.Value;
         }
 
         #endregion

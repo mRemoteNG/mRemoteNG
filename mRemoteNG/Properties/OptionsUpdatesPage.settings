@@ -1,0 +1,48 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mRemoteNG.Properties" GeneratedClassName="Update">
+  <Profiles />
+  <Settings>
+    <Setting Name="UpdatePending" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateChannel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">release</Value>
+    </Setting>
+    <Setting Name="UpdateAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://mremoteng.org/</Value>
+    </Setting>
+    <Setting Name="UpdateProxyAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UpdateProxyAuthPass" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UpdateProxyAuthUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UpdateProxyPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
+    <Setting Name="UpdateProxyUseAuthentication" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateUseProxy" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CurrentUpdateChannelType" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dev</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesOnStartup" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesLastCheck" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">1980-01-01</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesFrequencyDays" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesAsked" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

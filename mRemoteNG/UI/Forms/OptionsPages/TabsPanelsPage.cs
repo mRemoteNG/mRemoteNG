@@ -36,16 +36,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            chkAlwaysShowPanelTabs.Checked = Settings.Default.AlwaysShowPanelTabs;
-            chkAlwaysShowConnectionTabs.Checked = Settings.Default.AlwaysShowConnectionTabs;
-            chkOpenNewTabRightOfSelected.Checked = Settings.Default.OpenTabsRightOfSelected;
-            chkShowLogonInfoOnTabs.Checked = Settings.Default.ShowLogonInfoOnTabs;
-            chkShowProtocolOnTabs.Checked = Settings.Default.ShowProtocolOnTabs;
-            chkIdentifyQuickConnectTabs.Checked = Settings.Default.IdentifyQuickConnectTabs;
-            chkDoubleClickClosesTab.Checked = Settings.Default.DoubleClickOnTabClosesIt;
-            chkAlwaysShowPanelSelectionDlg.Checked = Settings.Default.AlwaysShowPanelSelectionDlg;
-            chkCreateEmptyPanelOnStart.Checked = Settings.Default.CreateEmptyPanelOnStartUp;
-            txtBoxPanelName.Text = Settings.Default.StartUpPanelName;
+            chkAlwaysShowPanelTabs.Checked = Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelTabs;
+            chkAlwaysShowConnectionTabs.Checked = Properties.OptionsTabsPanelsPage.Default.AlwaysShowConnectionTabs;
+            chkOpenNewTabRightOfSelected.Checked = Properties.OptionsTabsPanelsPage.Default.OpenTabsRightOfSelected;
+            chkShowLogonInfoOnTabs.Checked = Properties.OptionsTabsPanelsPage.Default.ShowLogonInfoOnTabs;
+            chkShowProtocolOnTabs.Checked = Properties.OptionsTabsPanelsPage.Default.ShowProtocolOnTabs;
+            chkIdentifyQuickConnectTabs.Checked = Properties.OptionsTabsPanelsPage.Default.IdentifyQuickConnectTabs;
+            chkDoubleClickClosesTab.Checked = Properties.OptionsTabsPanelsPage.Default.DoubleClickOnTabClosesIt;
+            chkAlwaysShowPanelSelectionDlg.Checked = Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg;
+            chkCreateEmptyPanelOnStart.Checked = Properties.OptionsTabsPanelsPage.Default.CreateEmptyPanelOnStartUp;
+            txtBoxPanelName.Text = Properties.OptionsTabsPanelsPage.Default.StartUpPanelName;
             UpdatePanelNameTextBox();
         }
 
@@ -53,18 +53,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            Settings.Default.AlwaysShowPanelTabs = chkAlwaysShowPanelTabs.Checked;
-            Settings.Default.AlwaysShowConnectionTabs = chkAlwaysShowConnectionTabs.Checked;
+            Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelTabs = chkAlwaysShowPanelTabs.Checked;
+            Properties.OptionsTabsPanelsPage.Default.AlwaysShowConnectionTabs = chkAlwaysShowConnectionTabs.Checked;
             FrmMain.Default.ShowHidePanelTabs();
 
-            Settings.Default.OpenTabsRightOfSelected = chkOpenNewTabRightOfSelected.Checked;
-            Settings.Default.ShowLogonInfoOnTabs = chkShowLogonInfoOnTabs.Checked;
-            Settings.Default.ShowProtocolOnTabs = chkShowProtocolOnTabs.Checked;
-            Settings.Default.IdentifyQuickConnectTabs = chkIdentifyQuickConnectTabs.Checked;
-            Settings.Default.DoubleClickOnTabClosesIt = chkDoubleClickClosesTab.Checked;
-            Settings.Default.AlwaysShowPanelSelectionDlg = chkAlwaysShowPanelSelectionDlg.Checked;
-            Settings.Default.CreateEmptyPanelOnStartUp = chkCreateEmptyPanelOnStart.Checked;
-            Settings.Default.StartUpPanelName = txtBoxPanelName.Text;
+            Properties.OptionsTabsPanelsPage.Default.OpenTabsRightOfSelected = chkOpenNewTabRightOfSelected.Checked;
+            Properties.OptionsTabsPanelsPage.Default.ShowLogonInfoOnTabs = chkShowLogonInfoOnTabs.Checked;
+            Properties.OptionsTabsPanelsPage.Default.ShowProtocolOnTabs = chkShowProtocolOnTabs.Checked;
+            Properties.OptionsTabsPanelsPage.Default.IdentifyQuickConnectTabs = chkIdentifyQuickConnectTabs.Checked;
+            Properties.OptionsTabsPanelsPage.Default.DoubleClickOnTabClosesIt = chkDoubleClickClosesTab.Checked;
+            Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg = chkAlwaysShowPanelSelectionDlg.Checked;
+            Properties.OptionsTabsPanelsPage.Default.CreateEmptyPanelOnStartUp = chkCreateEmptyPanelOnStart.Checked;
+            Properties.OptionsTabsPanelsPage.Default.StartUpPanelName = txtBoxPanelName.Text;
         }
 
         private void UpdatePanelNameTextBox()

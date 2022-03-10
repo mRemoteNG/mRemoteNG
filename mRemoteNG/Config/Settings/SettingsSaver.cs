@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -11,10 +11,7 @@ namespace mRemoteNG.Config.Settings
 {
     public static class SettingsSaver
     {
-        public static void SaveSettings(Control quickConnectToolStrip,
-                                        ExternalToolsToolStrip externalToolsToolStrip,
-                                        MultiSshToolStrip multiSshToolStrip,
-                                        FrmMain frmMain)
+        public static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, MultiSshToolStrip multiSshToolStrip, FrmMain frmMain)
         {
             try
             {
@@ -25,25 +22,25 @@ namespace mRemoteNG.Config.Settings
                     frmMain.WindowState = FormWindowState.Maximized;
                 }
 
-                Properties.Settings.Default.MainFormLocation = frmMain.Location;
-                Properties.Settings.Default.MainFormSize = frmMain.Size;
+                Properties.App.Default.MainFormLocation = frmMain.Location;
+                Properties.App.Default.MainFormSize = frmMain.Size;
 
                 if (frmMain.WindowState != FormWindowState.Normal)
                 {
-                    Properties.Settings.Default.MainFormRestoreLocation = frmMain.RestoreBounds.Location;
-                    Properties.Settings.Default.MainFormRestoreSize = frmMain.RestoreBounds.Size;
+                    Properties.App.Default.MainFormRestoreLocation = frmMain.RestoreBounds.Location;
+                    Properties.App.Default.MainFormRestoreSize = frmMain.RestoreBounds.Size;
                 }
 
-                Properties.Settings.Default.MainFormState = frmMain.WindowState;
+                Properties.App.Default.MainFormState = frmMain.WindowState;
 
                 if (frmMain.Fullscreen != null)
                 {
-                    Properties.Settings.Default.MainFormKiosk = frmMain.Fullscreen.Value;
+                    Properties.App.Default.MainFormKiosk = frmMain.Fullscreen.Value;
                 }
 
-                Properties.Settings.Default.FirstStart = false;
-                Properties.Settings.Default.ResetPanels = false;
-                Properties.Settings.Default.ResetToolbars = false;
+                Properties.App.Default.FirstStart = false;
+                Properties.App.Default.ResetPanels = false;
+                Properties.App.Default.ResetToolbars = false;
                 Properties.Settings.Default.NoReconnect = false;
 
                 SaveExternalAppsToolbarLocation(externalToolsToolStrip);

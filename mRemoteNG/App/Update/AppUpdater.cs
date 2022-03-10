@@ -58,23 +58,18 @@ namespace mRemoteNG.App.Update
 
         private void SetDefaultProxySettings()
         {
-            var shouldWeUseProxy = Settings.Default.UpdateUseProxy;
-            var proxyAddress = Settings.Default.UpdateProxyAddress;
-            var port = Settings.Default.UpdateProxyPort;
-            var useAuthentication = Settings.Default.UpdateProxyUseAuthentication;
-            var username = Settings.Default.UpdateProxyAuthUser;
+            var shouldWeUseProxy = Properties.OptionsUpdatesPage.Default.UpdateUseProxy;
+            var proxyAddress = Properties.OptionsUpdatesPage.Default.UpdateProxyAddress;
+            var port = Properties.OptionsUpdatesPage.Default.UpdateProxyPort;
+            var useAuthentication = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
+            var username = Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var password = cryptographyProvider.Decrypt(Settings.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
+            var password = cryptographyProvider.Decrypt(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
 
             SetProxySettings(shouldWeUseProxy, proxyAddress, port, useAuthentication, username, password);
         }
 
-        public void SetProxySettings(bool useProxy,
-                                     string address,
-                                     int port,
-                                     bool useAuthentication,
-                                     string username,
-                                     string password)
+        public void SetProxySettings(bool useProxy, string address, int port, bool useAuthentication, string username, string password)
         {
             if (useProxy && !string.IsNullOrEmpty(address))
             {
@@ -229,11 +224,11 @@ namespace mRemoteNG.App.Update
                 _getUpdateInfoCancelToken = new CancellationTokenSource();
                 var updateInfo = await _httpClient.GetStringAsync(UpdateChannelInfo.GetUpdateChannelInfo(), _getUpdateInfoCancelToken.Token);
                 CurrentUpdateInfo = UpdateInfo.FromString(updateInfo);
-                Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
+                Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
 
-                if (!Settings.Default.UpdatePending)
+                if (!Properties.OptionsUpdatesPage.Default.UpdatePending)
                 {
-                    Settings.Default.UpdatePending = IsUpdateAvailable();
+                    Properties.OptionsUpdatesPage.Default.UpdatePending = IsUpdateAvailable();
                 }
             }
             finally

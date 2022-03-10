@@ -37,7 +37,7 @@ namespace mRemoteNG.UI.Forms
             FontOverrider.FontOverride(this);
             AddOptionsPagesToListView();
             SetInitiallyActivatedPage();
-            // ApplyLanguage();
+            //ApplyLanguage();
             // Handle the main page here and the individual pages in
             // AddOptionsPagesToListView()  -- one less foreach loop....
             Text = Language.OptionsPageTitle;

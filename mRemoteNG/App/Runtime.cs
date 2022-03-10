@@ -91,17 +91,17 @@ namespace mRemoteNG.App
                         return;
 
                     connectionFileName = loadDialog.FileName;
-                    Settings.Default.UseSQLServer = false;
-                    Settings.Default.Save();
+                    Properties.OptionsDBsPage.Default.UseSQLServer = false;
+                    Properties.OptionsDBsPage.Default.Save();
                 }
-                else if (!Settings.Default.UseSQLServer)
+                else if (!Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
                     connectionFileName = ConnectionsService.GetStartupConnectionFileName();
                 }
 
-                ConnectionsService.LoadConnections(Settings.Default.UseSQLServer, false, connectionFileName);
+                ConnectionsService.LoadConnections(Properties.OptionsDBsPage.Default.UseSQLServer, false, connectionFileName);
 
-                if (Settings.Default.UseSQLServer)
+                if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
                     ConnectionsService.LastSqlUpdate = DateTime.Now;
                 } 
@@ -117,24 +117,18 @@ namespace mRemoteNG.App
             {
                 FrmSplashScreen.getInstance().Close();
 
-                if (Settings.Default.UseSQLServer)
+                if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
                     MessageCollector.AddExceptionMessage(Language.LoadFromSqlFailed, ex);
-                    var commandButtons = string.Join("|", Language._TryAgain,
-                                                     Language.CommandOpenConnectionFile,
-                                                     string.Format(Language.CommandExitProgram,
-                                                                   Application.ProductName));
-                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.LoadFromSqlFailed,
-                                               Language.LoadFromSqlFailedContent,
-                                               MiscTools.GetExceptionMessageRecursive(ex), "", "",
-                                               commandButtons, false, ESysIcons.Error, ESysIcons.Error);
+                    var commandButtons = string.Join("|", Language._TryAgain, Language.CommandOpenConnectionFile, string.Format(Language.CommandExitProgram, Application.ProductName));
+                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.LoadFromSqlFailed, Language.LoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, ESysIcons.Error, ESysIcons.Error);
                     switch (CTaskDialog.CommandButtonResult)
                     {
                         case 0:
                             LoadConnections(withDialog);
                             return;
                         case 1:
-                            Settings.Default.UseSQLServer = false;
+                            Properties.OptionsDBsPage.Default.UseSQLServer = false;
                             LoadConnections(true);
                             return;
                         default:
@@ -163,14 +157,7 @@ namespace mRemoteNG.App
                     {
                         try
                         {
-                            CTaskDialog.ShowTaskDialogBox(
-                                                          GeneralAppInfo.ProductName,
-                                                          Language.ConnectionFileNotFound,
-                                                          "", "", "", "", "",
-                                                          string.Join(" | ", commandButtons),
-                                                          ETaskDialogButtons.None,
-                                                          ESysIcons.Question,
-                                                          ESysIcons.Question);
+                            CTaskDialog.ShowTaskDialogBox(GeneralAppInfo.ProductName, Language.ConnectionFileNotFound, "", "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
 
                             switch (CTaskDialog.CommandButtonResult)
                             {
@@ -195,11 +182,7 @@ namespace mRemoteNG.App
                         }
                         catch (Exception exc)
                         {
-                            MessageCollector.AddExceptionMessage(
-                                                                 string
-                                                                     .Format(Language.ConnectionsFileCouldNotBeLoadedNew,
-                                                                             connectionFileName), exc,
-                                                                 MessageClass.InformationMsg);
+                            MessageCollector.AddExceptionMessage(string.Format(Language.ConnectionsFileCouldNotBeLoadedNew, connectionFileName), exc, MessageClass.InformationMsg);
                         }
                     }
 
@@ -215,12 +198,7 @@ namespace mRemoteNG.App
                 }
                 else
                 {
-                    MessageBox.Show(FrmMain.Default,
-                                    string.Format(Language.ErrorStartupConnectionFileLoad, Environment.NewLine,
-                                                  Application.ProductName,
-                                                  ConnectionsService.GetStartupConnectionFileName(),
-                                                  MiscTools.GetExceptionMessageRecursive(ex)),
-                                    @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(FrmMain.Default, string.Format(Language.ErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, ConnectionsService.GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)), @"Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Application.Exit();
                 }
             }

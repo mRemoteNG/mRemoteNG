@@ -23,7 +23,7 @@ namespace mRemoteNG.Connection.Protocol
             {
                 case ProtocolType.RDP:
                     var rdp = _rdpProtocolFactory.Build(connectionInfo.RdpVersion);
-                    rdp.LoadBalanceInfoUseUtf8 = Settings.Default.RdpLoadBalanceInfoUseUtf8;
+                    rdp.LoadBalanceInfoUseUtf8 = Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8;
                     return rdp;
                 case ProtocolType.VNC:
                     return new ProtocolVNC();

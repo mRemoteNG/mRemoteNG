@@ -10,10 +10,8 @@ namespace mRemoteNG.App.Initialization
         {
             new SaveConnectionsOnEdit(Runtime.ConnectionsService);
 
-            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation &&
-                !File.Exists(Runtime.ConnectionsService.GetStartupConnectionFileName()))
-                Runtime.ConnectionsService.NewConnectionsFile(Runtime.ConnectionsService
-                                                                     .GetStartupConnectionFileName());
+            if (Properties.App.Default.FirstStart && !Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.ConnectionsService.GetStartupConnectionFileName()))
+                Runtime.ConnectionsService.NewConnectionsFile(Runtime.ConnectionsService.GetStartupConnectionFileName());
 
             Runtime.LoadConnections();
         }

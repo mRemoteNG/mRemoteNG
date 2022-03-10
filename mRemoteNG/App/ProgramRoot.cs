@@ -17,7 +17,7 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
-            if (Settings.Default.SingleInstance)
+            if (Properties.OptionsStartupExitPage.Default.SingleInstance)
                 StartApplicationAsSingleInstance();
             else
                 StartApplication();

@@ -92,10 +92,80 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\OptionsBackupPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsBackupPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsAdvancedPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsAdvancedPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsAppearancePage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsAppearancePage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsConnectionsPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsConnectionsPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsCredentialsPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsCredentialsPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsDBsPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsDBsPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsNotificationsPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsNotificationsPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsSecurityPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsSecurityPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsStartupExitPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsStartupExitPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsTabsPanelsPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsTabsPanelsPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsThemePage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsThemePage.settings</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\AppUI.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppUI.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\App.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>App.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\OptionsUpdatesPage.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OptionsUpdatesPage.settings</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -217,12 +287,68 @@
     <None Update="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Properties\OptionsBackupPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsBackupPage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsAdvancedPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsAdvancedPage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsAppearancePage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsAppearancePage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsConnectionsPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsConnectionsPage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsCredentialsPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsCredentialsPage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsDBsPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsDBsPage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsNotificationsPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsNotificationsPage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsSecurityPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsSecurityPage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsStartupExitPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsStartupExitPage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsTabsPanelsPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsTabsPanelsPage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsThemePage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsThemePage.Designer.cs</LastGenOutput>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Update="mRemoteNG.VisualElementsManifest.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\AppUI.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>AppUI.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\App.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>App.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\OptionsUpdatesPage.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>OptionsUpdatesPage.Designer.cs</LastGenOutput>
     </None>
     <None Update="PuTTYNG.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -64,7 +64,7 @@ namespace mRemoteNG.Tools
 
         public static string DBDate(DateTime Dt)
 		{
-			switch (Settings.Default.SQLServerType)
+			switch (Properties.OptionsDBsPage.Default.SQLServerType)
 			{
 				case "mysql":
 					return Dt.ToString("yyyy/MM/dd HH:mm:ss");
@@ -76,7 +76,7 @@ namespace mRemoteNG.Tools
 
 		public static Type DBTimeStampType()
 		{
-			switch (Settings.Default.SQLServerType)
+			switch (Properties.OptionsDBsPage.Default.SQLServerType)
 			{
 				case "mysql":
 					return typeof(MySqlDateTime);
@@ -88,7 +88,7 @@ namespace mRemoteNG.Tools
 
 		public static object DBTimeStampNow()
 		{
-			switch (Settings.Default.SQLServerType)
+			switch (Properties.OptionsDBsPage.Default.SQLServerType)
 			{
 				case "mysql":
 					return new MySqlDateTime(DateTime.Now);

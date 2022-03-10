@@ -70,36 +70,36 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            numMaxBackups.Value = Convert.ToDecimal(Settings.Default.BackupFileKeepCount);
+            numMaxBackups.Value = Convert.ToDecimal(Properties.OptionsBackupPage.Default.BackupFileKeepCount);
 
-            if (Settings.Default.SaveConnectionsFrequency == (int) ConnectionsBackupFrequencyEnum.Unassigned)
+            if (Properties.OptionsBackupPage.Default.SaveConnectionsFrequency == (int) ConnectionsBackupFrequencyEnum.Unassigned)
             {
-                if (Settings.Default.SaveConnectionsAfterEveryEdit)
+                if (Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit)
                 {
-                    Settings.Default.SaveConnectionsFrequency = (int) ConnectionsBackupFrequencyEnum.OnEdit;
+                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int) ConnectionsBackupFrequencyEnum.OnEdit;
                 }
-                else if (Settings.Default.SaveConsOnExit)
+                else if (Properties.OptionsBackupPage.Default.SaveConsOnExit)
                 {
-                    Settings.Default.SaveConnectionsFrequency = (int) ConnectionsBackupFrequencyEnum.OnExit;
+                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int) ConnectionsBackupFrequencyEnum.OnExit;
                 }
                 else
                 {
-                    Settings.Default.SaveConnectionsFrequency = (int) ConnectionsBackupFrequencyEnum.Never;
+                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int) ConnectionsBackupFrequencyEnum.Never;
                 }
             }
 
-            cmbConnectionBackupFrequency.SelectedValue = Settings.Default.SaveConnectionsFrequency;
-            textBoxConnectionBackupPath.Text = Settings.Default.CustomConsPath;
+            cmbConnectionBackupFrequency.SelectedValue = Properties.OptionsBackupPage.Default.SaveConnectionsFrequency;
+            textBoxConnectionBackupPath.Text = Properties.OptionsBackupPage.Default.CustomConsPath;
 
         }
 
         public override void SaveSettings()
         {
-            Settings.Default.BackupFileKeepCount = (int) numMaxBackups.Value;
+            Properties.OptionsBackupPage.Default.BackupFileKeepCount = (int) numMaxBackups.Value;
 
-            if (Settings.Default.AutoSaveEveryMinutes > 0)
+            if (Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes > 0)
             {
-                _frmMain.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes * 60000;
+                _frmMain.tmrAutoSave.Interval = Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes * 60000;
                 _frmMain.tmrAutoSave.Enabled = true;
             }
             else
@@ -107,12 +107,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 _frmMain.tmrAutoSave.Enabled = false;
             }
 
-            Settings.Default.SaveConnectionsFrequency = (int) cmbConnectionBackupFrequency.SelectedValue;
+            Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int) cmbConnectionBackupFrequency.SelectedValue;
 
             if (textBoxConnectionBackupPath.Text.Trim().Length <= 0)
             {
-                Settings.Default.LoadConsFromCustomLocation = false;
-                Settings.Default.CustomConsPath = String.Empty;
+                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
+                Properties.OptionsBackupPage.Default.CustomConsPath = String.Empty;
             }
             else
             {
@@ -123,18 +123,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
                 if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
                 {
-                    Settings.Default.LoadConsFromCustomLocation = false;
+                    Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
                 }
                 else
                 {
-                    Settings.Default.LoadConsFromCustomLocation = true;
-                    Settings.Default.CustomConsPath = newFileName;
+                    Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
+                    Properties.OptionsBackupPage.Default.CustomConsPath = newFileName;
                 }
             }
 
             //Obsolete. Set to false
-            Settings.Default.SaveConnectionsAfterEveryEdit = false;
-            Settings.Default.SaveConsOnExit = false;
+            Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit = false;
+            Properties.OptionsBackupPage.Default.SaveConsOnExit = false;
         }
 
         private void ButtonBrowsePath_Click(object sender, EventArgs e)

@@ -103,14 +103,14 @@ namespace mRemoteNG.UI.Window
             {
                 //Set the connection text based on name and preferences
                 string titleText;
-                if (Settings.Default.ShowProtocolOnTabs)
+                if (Properties.OptionsTabsPanelsPage.Default.ShowProtocolOnTabs)
                     titleText = connectionInfo.Protocol + @": ";
                 else
                     titleText = "";
 
                 titleText += connectionInfo.Name;
 
-                if (Settings.Default.ShowLogonInfoOnTabs)
+                if (Properties.OptionsTabsPanelsPage.Default.ShowLogonInfoOnTabs)
                 {
                     titleText += @" (";
                     if (connectionInfo.Domain != "")

@@ -59,10 +59,9 @@ namespace mRemoteNG.App
         public void CreateConnectionsProvider(MessageCollector messageCollector)
         {
             messageCollector.AddMessage(MessageClass.DebugMsg, "Determining if we need a database syncronizer");
-            if (!Settings.Default.UseSQLServer) return;
+            if (!Properties.OptionsDBsPage.Default.UseSQLServer) return;
             messageCollector.AddMessage(MessageClass.DebugMsg, "Creating database syncronizer");
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer =
-                new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer.Enable();
         }
 
@@ -78,12 +77,8 @@ namespace mRemoteNG.App
             }
 
             var nextUpdateCheck =
-                Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(
-                                                                                 TimeSpan
-                                                                                     .FromDays(Convert.ToDouble(Settings
-                                                                                                                .Default
-                                                                                                                .CheckForUpdatesFrequencyDays))));
-            if (!Settings.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
+                Convert.ToDateTime(Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays))));
+            if (!Properties.OptionsUpdatesPage.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
             {
                 return;
             }

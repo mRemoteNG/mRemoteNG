@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -74,7 +74,7 @@ namespace mRemoteNG.Config.Settings
                 LoadExternalAppsFromXml();
                 SetAlwaysShowPanelTabs();
 
-                if (Properties.Settings.Default.ResetToolbars)
+                if (Properties.App.Default.ResetToolbars)
                     SetToolbarsDefault();
                 else
                     LoadToolbarsFromSettings();
@@ -87,40 +87,37 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetAlwaysShowPanelTabs()
         {
-            if (Properties.Settings.Default.AlwaysShowPanelTabs)
+            if (Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelTabs)
                 FrmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
 
         private void SetSupportedCulture()
         {
-            if (Properties.Settings.Default.OverrideUICulture == "" ||
-                !SupportedCultures.IsNameSupported(Properties.Settings.Default.OverrideUICulture)) return;
+            if (Properties.Settings.Default.OverrideUICulture == "" || !SupportedCultures.IsNameSupported(Properties.Settings.Default.OverrideUICulture)) return;
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.OverrideUICulture);
-            _messageCollector.AddMessage(MessageClass.InformationMsg,
-                                         $"Override Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}",
-                                         true);
+            _messageCollector.AddMessage(MessageClass.InformationMsg, $"Override Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}", true);
         }
 
         private void SetApplicationWindowPositionAndSize()
         {
             MainForm.WindowState = FormWindowState.Normal;
-            if (Properties.Settings.Default.MainFormState == FormWindowState.Normal)
+            if (Properties.App.Default.MainFormState == FormWindowState.Normal)
             {
-                if (!Properties.Settings.Default.MainFormLocation.IsEmpty)
-                    MainForm.Location = Properties.Settings.Default.MainFormLocation;
-                if (!Properties.Settings.Default.MainFormSize.IsEmpty)
-                    MainForm.Size = Properties.Settings.Default.MainFormSize;
+                if (!Properties.App.Default.MainFormLocation.IsEmpty)
+                    MainForm.Location = Properties.App.Default.MainFormLocation;
+                if (!Properties.App.Default.MainFormSize.IsEmpty)
+                    MainForm.Size = Properties.App.Default.MainFormSize;
             }
             else
             {
-                if (!Properties.Settings.Default.MainFormRestoreLocation.IsEmpty)
-                    MainForm.Location = Properties.Settings.Default.MainFormRestoreLocation;
-                if (!Properties.Settings.Default.MainFormRestoreSize.IsEmpty)
-                    MainForm.Size = Properties.Settings.Default.MainFormRestoreSize;
+                if (!Properties.App.Default.MainFormRestoreLocation.IsEmpty)
+                    MainForm.Location = Properties.App.Default.MainFormRestoreLocation;
+                if (!Properties.App.Default.MainFormRestoreSize.IsEmpty)
+                    MainForm.Size = Properties.App.Default.MainFormRestoreSize;
             }
 
-            if (Properties.Settings.Default.MainFormState == FormWindowState.Maximized)
+            if (Properties.App.Default.MainFormState == FormWindowState.Maximized)
             {
                 MainForm.WindowState = FormWindowState.Maximized;
             }
@@ -145,33 +142,31 @@ namespace mRemoteNG.Config.Settings
 
         private void SetAutoSave()
         {
-            if (Properties.Settings.Default.AutoSaveEveryMinutes <= 0) return;
-            MainForm.tmrAutoSave.Interval = Properties.Settings.Default.AutoSaveEveryMinutes * 60000;
+            if (Properties.OptionsConnectionsPage.Default.AutoSaveEveryMinutes <= 0) return;
+            MainForm.tmrAutoSave.Interval = Properties.OptionsConnectionsPage.Default.AutoSaveEveryMinutes * 60000;
             MainForm.tmrAutoSave.Enabled = true;
         }
 
         private void SetKioskMode()
         {
-            if (!Properties.Settings.Default.MainFormKiosk) return;
+            if (!Properties.App.Default.MainFormKiosk) return;
             MainForm.Fullscreen.Value = true;
         }
 
         private static void SetShowSystemTrayIcon()
         {
-            if (Properties.Settings.Default.ShowSystemTrayIcon)
+            if (Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon)
                 Runtime.NotificationAreaIcon = new NotificationAreaIcon();
         }
 
         private static void SetPuttyPath()
         {
-            PuttyBase.PuttyPath = Properties.Settings.Default.UseCustomPuttyPath
-                ? Properties.Settings.Default.CustomPuttyPath
-                : GeneralAppInfo.PuttyPath;
+            PuttyBase.PuttyPath = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
         }
 
         private void EnsureSettingsAreSavedInNewestVersion()
         {
-            if (Properties.Settings.Default.DoUpgrade)
+            if (Properties.App.Default.DoUpgrade)
                 UpgradeSettingsVersion();
         }
 
@@ -187,12 +182,12 @@ namespace mRemoteNG.Config.Settings
                 _messageCollector.AddExceptionMessage("Settings.Upgrade() failed", ex);
             }
 
-            Properties.Settings.Default.DoUpgrade = false;
+            Properties.App.Default.DoUpgrade = false;
 
             // Clear pending update flag
             // This is used for automatic updates, not for settings migration, but it
             // needs to be cleared here because we know that we just updated.
-            Properties.Settings.Default.UpdatePending = false;
+            Properties.OptionsUpdatesPage.Default.UpdatePending = false;
         }
 
         private void SetToolbarsDefault()

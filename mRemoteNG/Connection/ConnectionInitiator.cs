@@ -299,9 +299,7 @@ namespace mRemoteNG.Connection
 
         private static string SetConnectionPanel(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
-            if (connectionInfo.Panel != "" &&
-                !force.HasFlag(ConnectionInfo.Force.OverridePanel) &&
-                !Settings.Default.AlwaysShowPanelSelectionDlg)
+            if (connectionInfo.Panel != "" && !force.HasFlag(ConnectionInfo.Force.OverridePanel) && !Properties.OptionsTabsPanelsPage.Default.AlwaysShowPanelSelectionDlg)
                 return connectionInfo.Panel;
 
             var frmPnl = new FrmChoosePanel();

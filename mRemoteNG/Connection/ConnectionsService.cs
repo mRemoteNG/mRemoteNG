@@ -94,7 +94,7 @@ namespace mRemoteNG.Connection
                 var newConnectionInfo = new ConnectionInfo();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
-                newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs
+                newConnectionInfo.Name = Properties.OptionsTabsPanelsPage.Default.IdentifyQuickConnectTabs
                     ? string.Format(Language.Quick, uriBuilder.Host)
                     : uriBuilder.Host;
 
@@ -149,8 +149,7 @@ namespace mRemoteNG.Connection
 
             if (newConnectionTreeModel == null)
             {
-                DialogFactory.ShowLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed",
-                                                              IsConnectionsFileLoaded);
+                DialogFactory.ShowLoadConnectionsFailedDialog(connectionFileName, "Decrypting connection file failed", IsConnectionsFileLoaded);
                 return;
             }
 
@@ -166,10 +165,8 @@ namespace mRemoteNG.Connection
 
             ConnectionTreeModel = newConnectionTreeModel;
             UpdateCustomConsPathSetting(connectionFileName);
-            RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue,
-                                        useDatabase, connectionFileName);
-            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                                                $"Connections loaded using {connectionLoader.GetType().Name}");
+            RaiseConnectionsLoadedEvent(oldConnectionTreeModel, newConnectionTreeModel, oldIsUsingDatabaseValue, useDatabase, connectionFileName);
+            Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Connections loaded using {connectionLoader.GetType().Name}");
         }
 
         /// <summary>
@@ -321,9 +318,7 @@ namespace mRemoteNG.Connection
 
         public string GetStartupConnectionFileName()
         {
-            return Settings.Default.LoadConsFromCustomLocation == false
-                ? GetDefaultStartupConnectionFileName()
-                : Settings.Default.CustomConsPath;
+            return Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation == false ? GetDefaultStartupConnectionFileName() : Properties.OptionsBackupPage.Default.BackupFilePath;
         }
 
         public string GetDefaultStartupConnectionFileName()
@@ -337,21 +332,18 @@ namespace mRemoteNG.Connection
         {
             if (filename == GetDefaultStartupConnectionFileName())
             {
-                Settings.Default.LoadConsFromCustomLocation = false;
+                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
             }
             else
             {
-                Settings.Default.LoadConsFromCustomLocation = true;
-                Settings.Default.CustomConsPath = filename;
+                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
+                Properties.OptionsBackupPage.Default.BackupFilePath = filename;
             }
         }
 
         private string GetDefaultStartupConnectionFileNameNormalEdition()
         {
-            var appDataPath = Path.Combine(
-                                           Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                                           Application.ProductName,
-                                           ConnectionsFileInfo.DefaultConnectionsFile);
+            var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName, ConnectionsFileInfo.DefaultConnectionsFile);
             return File.Exists(appDataPath) ? appDataPath : GetDefaultStartupConnectionFileNamePortableEdition();
         }
 

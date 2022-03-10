@@ -1393,7 +1393,7 @@ namespace mRemoteNG.UI.Tabs
             if (m.Msg == (int)Msgs.WM_LBUTTONDBLCLK)
             {
                 // If the option is not set, do nothing. Do not send the message to base.
-                if (!Settings.Default.DoubleClickOnTabClosesIt) return;
+                if (!Properties.OptionsTabsPanelsPage.Default.DoubleClickOnTabClosesIt) return;
 
                 // Option is set, close the tab, then send to base.
                 //DockPane.CloseActiveContent();

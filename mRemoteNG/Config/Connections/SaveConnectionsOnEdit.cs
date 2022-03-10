@@ -20,8 +20,7 @@ namespace mRemoteNG.Config.Connections
             connectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
         }
 
-        private void ConnectionsServiceOnConnectionsLoaded(object sender,
-                                                           ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+        private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
             connectionsLoadedEventArgs.NewConnectionTreeModel.CollectionChanged +=
                 ConnectionTreeModelOnCollectionChanged;
@@ -34,15 +33,12 @@ namespace mRemoteNG.Config.Connections
             }
         }
 
-        private void ConnectionTreeModelOnPropertyChanged(object sender,
-                                                          PropertyChangedEventArgs propertyChangedEventArgs)
+        private void ConnectionTreeModelOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             SaveConnectionOnEdit(propertyChangedEventArgs.PropertyName);
         }
 
-        private void ConnectionTreeModelOnCollectionChanged(object sender,
-                                                            NotifyCollectionChangedEventArgs
-                                                                notifyCollectionChangedEventArgs)
+        private void ConnectionTreeModelOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             SaveConnectionOnEdit();
         }
@@ -50,7 +46,7 @@ namespace mRemoteNG.Config.Connections
         private void SaveConnectionOnEdit(string propertyName = "")
         {
             //OBSOLETE: mRemoteNG.Settings.Default.SaveConnectionsAfterEveryEdit is obsolete and should be removed in a future release
-            if (mRemoteNG.Properties.Settings.Default.SaveConnectionsAfterEveryEdit || (mRemoteNG.Properties.Settings.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.OnEdit))
+            if (Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit || (Properties.OptionsBackupPage.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.OnEdit))
             {
                 if (FrmMain.Default.IsClosing)
                     return;

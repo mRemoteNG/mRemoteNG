@@ -32,18 +32,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            Settings.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
-            Settings.Default.SingleInstance = chkSingleInstance.Checked;
-            Settings.Default.StartMinimized = chkStartMinimized.Checked;
-            Settings.Default.StartFullScreen = chkStartFullScreen.Checked;
+            Properties.OptionsStartupExitPage.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
+            Properties.OptionsStartupExitPage.Default.SingleInstance = chkSingleInstance.Checked;
+            Properties.OptionsStartupExitPage.Default.StartMinimized = chkStartMinimized.Checked;
+            Properties.OptionsStartupExitPage.Default.StartFullScreen = chkStartFullScreen.Checked;
         }
 
         private void StartupExitPage_Load(object sender, EventArgs e)
         {
-            chkReconnectOnStart.Checked = Settings.Default.OpenConsFromLastSession;
-            chkSingleInstance.Checked = Settings.Default.SingleInstance;
-            chkStartMinimized.Checked = Settings.Default.StartMinimized;
-            chkStartFullScreen.Checked = Settings.Default.StartFullScreen;
+            chkReconnectOnStart.Checked = Properties.OptionsStartupExitPage.Default.OpenConsFromLastSession;
+            chkSingleInstance.Checked = Properties.OptionsStartupExitPage.Default.SingleInstance;
+            chkStartMinimized.Checked = Properties.OptionsStartupExitPage.Default.StartMinimized;
+            chkStartFullScreen.Checked = Properties.OptionsStartupExitPage.Default.StartFullScreen;
             ;
         }
 

@@ -43,19 +43,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            chkEncryptCompleteFile.Checked = Settings.Default.EncryptCompleteConnectionsFile;
-            comboBoxEncryptionEngine.Text = Enum.GetName(typeof(BlockCipherEngines), Settings.Default.EncryptionEngine);
+            chkEncryptCompleteFile.Checked = Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile;
+            comboBoxEncryptionEngine.Text = Enum.GetName(typeof(BlockCipherEngines), Properties.OptionsSecurityPage.Default.EncryptionEngine);
             comboBoxBlockCipher.Text =
-                Enum.GetName(typeof(BlockCipherModes), Settings.Default.EncryptionBlockCipherMode);
-            numberBoxKdfIterations.Value = Settings.Default.EncryptionKeyDerivationIterations;
+                Enum.GetName(typeof(BlockCipherModes), Properties.OptionsSecurityPage.Default.EncryptionBlockCipherMode);
+            numberBoxKdfIterations.Value = Properties.OptionsSecurityPage.Default.EncryptionKeyDerivationIterations;
         }
 
         public override void SaveSettings()
         {
-            Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
-            Settings.Default.EncryptionEngine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
-            Settings.Default.EncryptionBlockCipherMode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
-            Settings.Default.EncryptionKeyDerivationIterations = (int)numberBoxKdfIterations.Value;
+            Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
+            Properties.OptionsSecurityPage.Default.EncryptionEngine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
+            Properties.OptionsSecurityPage.Default.EncryptionBlockCipherMode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
+            Properties.OptionsSecurityPage.Default.EncryptionKeyDerivationIterations = (int)numberBoxKdfIterations.Value;
         }
 
         public override void RevertSettings()

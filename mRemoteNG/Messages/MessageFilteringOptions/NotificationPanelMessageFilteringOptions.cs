@@ -6,26 +6,26 @@ namespace mRemoteNG.Messages.MessageFilteringOptions
     {
         public bool AllowDebugMessages
         {
-            get => Settings.Default.NotificationPanelWriterWriteDebugMsgs;
-            set => Settings.Default.NotificationPanelWriterWriteDebugMsgs = value;
+            get => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteDebugMsgs;
+            set => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteDebugMsgs = value;
         }
 
         public bool AllowInfoMessages
         {
-            get => Settings.Default.NotificationPanelWriterWriteInfoMsgs;
-            set => Settings.Default.NotificationPanelWriterWriteInfoMsgs = value;
+            get => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteInfoMsgs;
+            set => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteInfoMsgs = value;
         }
 
         public bool AllowWarningMessages
         {
-            get => Settings.Default.NotificationPanelWriterWriteWarningMsgs;
-            set => Settings.Default.NotificationPanelWriterWriteWarningMsgs = value;
+            get => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteWarningMsgs;
+            set => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteWarningMsgs = value;
         }
 
         public bool AllowErrorMessages
         {
-            get => Settings.Default.NotificationPanelWriterWriteErrorMsgs;
-            set => Settings.Default.NotificationPanelWriterWriteErrorMsgs = value;
+            get => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteErrorMsgs;
+            set => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteErrorMsgs = value;
         }
     }
 }

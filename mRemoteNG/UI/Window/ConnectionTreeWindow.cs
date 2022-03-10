@@ -141,7 +141,7 @@ namespace mRemoteNG.UI.Window
                 new RootNodeExpander()
             };
 
-            if (Settings.Default.OpenConsFromLastSession && !Settings.Default.NoReconnect)
+            if (Properties.OptionsStartupExitPage.Default.OpenConsFromLastSession && !Settings.Default.NoReconnect)
                 actions.Add(new PreviousSessionOpener(Runtime.ConnectionInitiator));
 
             ConnectionTree.PostSetupActions = actions;

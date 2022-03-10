@@ -1,4 +1,5 @@
 ﻿using mRemoteNG.App;
+using mRemoteNG.Properties;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.Config.DatabaseConnectors
@@ -7,12 +8,12 @@ namespace mRemoteNG.Config.DatabaseConnectors
     {
         public static IDatabaseConnector DatabaseConnectorFromSettings()
         {
-            var sqlType = Properties.Settings.Default.SQLServerType;
-            var sqlHost = Properties.Settings.Default.SQLHost;
-            var sqlCatalog = Properties.Settings.Default.SQLDatabaseName;
-            var sqlUsername = Properties.Settings.Default.SQLUser;
+            var sqlType = Properties.OptionsDBsPage.Default.SQLServerType;
+            var sqlHost = Properties.OptionsDBsPage.Default.SQLHost;
+            var sqlCatalog = Properties.OptionsDBsPage.Default.SQLDatabaseName;
+            var sqlUsername = Properties.OptionsDBsPage.Default.SQLUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var sqlPassword = cryptographyProvider.Decrypt(Properties.Settings.Default.SQLPass, Runtime.EncryptionKey);
+            var sqlPassword = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
 
             return DatabaseConnector(sqlType, sqlHost, sqlCatalog, sqlUsername, sqlPassword);
         }

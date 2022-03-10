@@ -16,7 +16,7 @@ namespace mRemoteNG.Config.DataProviders
                     return;
 
                 var backupFileName =
-                    string.Format(Properties.Settings.Default.BackupFileNameFormat, fileName, DateTime.Now);
+                    string.Format(Properties.OptionsBackupPage.Default.BackupFileNameFormat, fileName, DateTime.Now);
                 File.Copy(fileName, backupFileName);
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace mRemoteNG.Config.DataProviders
 
         private bool FeatureIsTurnedOff()
         {
-            return Properties.Settings.Default.BackupFileKeepCount == 0;
+            return Properties.OptionsBackupPage.Default.BackupFileKeepCount == 0;
         }
     }
 }

@@ -162,7 +162,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewFullscreen.ShortcutKeys = Keys.F11;
             _mMenViewFullscreen.Size = new System.Drawing.Size(228, 22);
             _mMenViewFullscreen.Text = Language.Fullscreen;
-            _mMenViewFullscreen.Checked = Settings.Default.MainFormKiosk;
+            _mMenViewFullscreen.Checked = Properties.App.Default.MainFormKiosk;
             _mMenViewFullscreen.Click += mMenViewFullscreen_Click;
         }
 

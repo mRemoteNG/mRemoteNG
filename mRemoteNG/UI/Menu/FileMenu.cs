@@ -180,17 +180,16 @@ namespace mRemoteNG.UI.Menu
 
                 var newFileName = saveFileDialog.FileName;
 
-                Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false,
-                                                           new SaveFilter(), newFileName);
+                Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);
 
                 if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
                 {
-                    Settings.Default.LoadConsFromCustomLocation = false;
+                    Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
                 }
                 else
                 {
-                    Settings.Default.LoadConsFromCustomLocation = true;
-                    Settings.Default.CustomConsPath = newFileName;
+                    Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
+                    Properties.OptionsBackupPage.Default.BackupFilePath = newFileName;
                 }
             }
         }

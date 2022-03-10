@@ -69,44 +69,44 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(Settings.Default.RdpReconnectionCount);
             numRDPConTimeout.Value = Convert.ToDecimal(Settings.Default.ConRDPOverallConnectionTimeout);
-            numAutoSave.Value = Convert.ToDecimal(Settings.Default.AutoSaveEveryMinutes);
+            numAutoSave.Value = Convert.ToDecimal(Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes);
 
             //comboBoxConnectionWarning.SelectedValue = Settings.Default.ConfirmCloseConnection;
 
-            if (Settings.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.Unassigned)
+            if (Properties.OptionsBackupPage.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.Unassigned)
             {
-				if (Settings.Default.SaveConnectionsAfterEveryEdit)
+				if (Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit)
                 {
-                    Settings.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnEdit;
+                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnEdit;
                 }
-                else if (Settings.Default.SaveConsOnExit)
+                else if (Properties.OptionsBackupPage.Default.SaveConsOnExit)
                 {
-                    Settings.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnExit;
+                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnExit;
                 }
                 else
                 {
-                    Settings.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.Never;
+                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.Never;
                 }
             }
         }
 
         public override void SaveSettings()
         {
-            Settings.Default.SingleClickOnConnectionOpensIt = chkSingleClickOnConnectionOpensIt.Checked;
-            Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
-            Settings.Default.TrackActiveConnectionInConnectionTree = chkConnectionTreeTrackActiveConnection.Checked;
-            Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
+            Properties.Settings.Default.SingleClickOnConnectionOpensIt = chkSingleClickOnConnectionOpensIt.Checked;
+            Properties.Settings.Default.SingleClickSwitchesToOpenConnection = chkSingleClickOnOpenedConnectionSwitchesToIt.Checked;
+            Properties.Settings.Default.TrackActiveConnectionInConnectionTree = chkConnectionTreeTrackActiveConnection.Checked;
+            Properties.Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
 
-            Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
-            Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
-            Settings.Default.DoNotTrimUsername = chkDoNotTrimUsername.Checked;
+            Properties.Settings.Default.UseFilterSearch = chkUseFilterSearch.Checked;
+            Properties.Settings.Default.PlaceSearchBarAboveConnectionTree = chkPlaceSearchBarAboveConnectionTree.Checked;
+            Properties.Settings.Default.DoNotTrimUsername = chkDoNotTrimUsername.Checked;
 
-            Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
-            Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
-            Settings.Default.AutoSaveEveryMinutes = (int)numAutoSave.Value;
-            if (Settings.Default.AutoSaveEveryMinutes > 0)
+            Properties.Settings.Default.RdpReconnectionCount = (int)numRdpReconnectionCount.Value;
+            Properties.Settings.Default.ConRDPOverallConnectionTimeout = (int)numRDPConTimeout.Value;
+            Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes = (int)numAutoSave.Value;
+            if (Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes > 0)
             {
-                _frmMain.tmrAutoSave.Interval = Settings.Default.AutoSaveEveryMinutes * 60000;
+                _frmMain.tmrAutoSave.Interval = Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes * 60000;
                 _frmMain.tmrAutoSave.Enabled = true;
             }
             else

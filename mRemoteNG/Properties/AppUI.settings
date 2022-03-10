@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="mRemoteNG.Properties" GeneratedClassName="AppUI">
+  <Profiles />
+  <Settings>
+    <Setting Name="SupportedUICultures" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">cs-CZ,de,el,en,en-US,es-AR,es,fr,hu,it,lt,ja-JP,ko-KR,nb-NO,nl,pt,pt-BR,pl,ru,uk,tr-TR,zh-CN,zh-TW</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

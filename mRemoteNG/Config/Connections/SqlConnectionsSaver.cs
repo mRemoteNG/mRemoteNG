@@ -18,6 +18,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Properties;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -27,10 +28,7 @@ namespace mRemoteNG.Config.Connections
         private readonly ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> _localPropertiesSerializer;
         private readonly IDataProvider<string> _dataProvider;
 
-        public SqlConnectionsSaver(SaveFilter saveFilter,
-                                   ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string>
-                                       localPropertieSerializer,
-                                   IDataProvider<string> localPropertiesDataProvider)
+        public SqlConnectionsSaver(SaveFilter saveFilter, ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> localPropertieSerializer, IDataProvider<string> localPropertiesDataProvider)
         {
             if (saveFilter == null)
                 throw new ArgumentNullException(nameof(saveFilter));
@@ -47,15 +45,13 @@ namespace mRemoteNG.Config.Connections
 
             if (PropertyIsLocalOnly(propertyNameTrigger))
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
-                                                    $"Property {propertyNameTrigger} is local only. Not saving to database.");
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, $"Property {propertyNameTrigger} is local only. Not saving to database.");
                 return;
             }
 
             if (SqlUserIsReadOnly())
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    "Trying to save connection tree but the SQL read only checkbox is checked, aborting!");
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Trying to save connection tree but the SQL read only checkbox is checked, aborting!");
                 return;
             }
 
@@ -68,8 +64,7 @@ namespace mRemoteNG.Config.Connections
 
                 if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                        Language.ErrorConnectionListSaveFailed);
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ErrorConnectionListSaveFailed);
                     return;
                 }
 
@@ -178,7 +173,7 @@ namespace mRemoteNG.Config.Connections
 
         private bool SqlUserIsReadOnly()
         {
-            return Properties.Settings.Default.SQLReadOnly;
+            return Properties.OptionsDBsPage.Default.SQLReadOnly;
         }
     }
 }

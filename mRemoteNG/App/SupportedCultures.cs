@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -22,7 +22,7 @@ namespace mRemoteNG.App
 
         private SupportedCultures()
         {
-            foreach (var CultureName in Settings.Default.SupportedUICultures.Split(','))
+            foreach (var CultureName in Properties.AppUI.Default.SupportedUICultures.Split(','))
             {
                 try
                 {

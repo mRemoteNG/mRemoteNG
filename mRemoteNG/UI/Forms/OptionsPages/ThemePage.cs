@@ -81,20 +81,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            Settings.Default.ThemingActive = true;
+            Properties.OptionsThemePage.Default.ThemingActive = true;
 
             // Save the theme settings form close so we don't run into unexpected results while modifying...
             // Prompt the user that a restart is required to apply the new theme...
             if (cboTheme.SelectedItem != null
             ) // LoadSettings calls SaveSettings, so these might be null the first time around
             {
-                if (!Settings.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
+                if (!Properties.OptionsThemePage.Default.ThemeName.Equals(((ThemeInfo)cboTheme.SelectedItem).Name))
                 {
-                    Settings.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
-
-                    CTaskDialog.MessageBox("Theme Changed", "Restart Required.",
-                                           "Please restart mRemoteNG to apply the selected theme.",
-                                           ETaskDialogButtons.Ok, ESysIcons.Information);
+                    Properties.OptionsThemePage.Default.ThemeName = ((ThemeInfo)cboTheme.SelectedItem).Name;
+                    CTaskDialog.MessageBox("Theme Changed", "Restart Required.", "Please restart mRemoteNG to apply the selected theme.", ETaskDialogButtons.Ok, ESysIcons.Information);
                 }
             }
 

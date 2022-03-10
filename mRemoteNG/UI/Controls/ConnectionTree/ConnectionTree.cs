@@ -487,7 +487,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             try
             {
-                if (!Settings.Default.ShowDescriptionTooltipsInTree)
+                if (!Properties.OptionsAppearancePage.Default.ShowDescriptionTooltipsInTree)
                 {
                     // setting text to null prevents the tooltip from being shown
                     e.Text = null;
@@ -538,9 +538,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 

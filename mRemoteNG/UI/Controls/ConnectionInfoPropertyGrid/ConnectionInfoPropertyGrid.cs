@@ -311,10 +311,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
             if (rootInfo.Password)
             {
-                var passwordName = Settings.Default.UseSQLServer
-                    ? Language.SQLServer.TrimEnd(':')
-                    : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
-
+                var passwordName = Properties.OptionsDBsPage.Default.UseSQLServer ? Language.SQLServer.TrimEnd(':') : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
                 var password = MiscTools.PasswordDialog(passwordName);
 
                 // operation cancelled, dont set a password

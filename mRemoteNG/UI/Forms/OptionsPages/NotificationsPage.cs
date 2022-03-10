@@ -76,61 +76,61 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void LoadNotificationPanelSettings()
         {
-            chkShowDebugInMC.Checked = Settings.Default.NotificationPanelWriterWriteDebugMsgs;
-            chkShowInfoInMC.Checked = Settings.Default.NotificationPanelWriterWriteInfoMsgs;
-            chkShowWarningInMC.Checked = Settings.Default.NotificationPanelWriterWriteWarningMsgs;
-            chkShowErrorInMC.Checked = Settings.Default.NotificationPanelWriterWriteErrorMsgs;
-            chkSwitchToMCInformation.Checked = Settings.Default.SwitchToMCOnInformation;
-            chkSwitchToMCWarnings.Checked = Settings.Default.SwitchToMCOnWarning;
-            chkSwitchToMCErrors.Checked = Settings.Default.SwitchToMCOnError;
+            chkShowDebugInMC.Checked = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteDebugMsgs;
+            chkShowInfoInMC.Checked = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteInfoMsgs;
+            chkShowWarningInMC.Checked = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteWarningMsgs;
+            chkShowErrorInMC.Checked = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteErrorMsgs;
+            chkSwitchToMCInformation.Checked = Properties.OptionsNotificationsPage.Default.SwitchToMCOnInformation;
+            chkSwitchToMCWarnings.Checked = Properties.OptionsNotificationsPage.Default.SwitchToMCOnWarning;
+            chkSwitchToMCErrors.Checked = Properties.OptionsNotificationsPage.Default.SwitchToMCOnError;
         }
 
         private void LoadLoggingSettings()
         {
-            chkLogToCurrentDir.Checked = Settings.Default.LogToApplicationDirectory;
-            textBoxLogPath.Text = Settings.Default.LogFilePath;
-            chkLogDebugMsgs.Checked = Settings.Default.TextLogMessageWriterWriteDebugMsgs;
-            chkLogInfoMsgs.Checked = Settings.Default.TextLogMessageWriterWriteInfoMsgs;
-            chkLogWarningMsgs.Checked = Settings.Default.TextLogMessageWriterWriteWarningMsgs;
-            chkLogErrorMsgs.Checked = Settings.Default.TextLogMessageWriterWriteErrorMsgs;
+            chkLogToCurrentDir.Checked = Properties.OptionsNotificationsPage.Default.LogToApplicationDirectory;
+            textBoxLogPath.Text = Properties.OptionsNotificationsPage.Default.LogFilePath;
+            chkLogDebugMsgs.Checked = Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteDebugMsgs;
+            chkLogInfoMsgs.Checked = Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteInfoMsgs;
+            chkLogWarningMsgs.Checked = Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteWarningMsgs;
+            chkLogErrorMsgs.Checked = Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteErrorMsgs;
         }
 
         private void LoadPopupSettings()
         {
-            chkPopupDebug.Checked = Settings.Default.PopupMessageWriterWriteDebugMsgs;
-            chkPopupInfo.Checked = Settings.Default.PopupMessageWriterWriteInfoMsgs;
-            chkPopupWarning.Checked = Settings.Default.PopupMessageWriterWriteWarningMsgs;
-            chkPopupError.Checked = Settings.Default.PopupMessageWriterWriteErrorMsgs;
+            chkPopupDebug.Checked = Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteDebugMsgs;
+            chkPopupInfo.Checked = Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteInfoMsgs;
+            chkPopupWarning.Checked = Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteWarningMsgs;
+            chkPopupError.Checked = Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteErrorMsgs;
         }
 
         private void SaveNotificationPanelSettings()
         {
-            Settings.Default.NotificationPanelWriterWriteDebugMsgs = chkShowDebugInMC.Checked;
-            Settings.Default.NotificationPanelWriterWriteInfoMsgs = chkShowInfoInMC.Checked;
-            Settings.Default.NotificationPanelWriterWriteWarningMsgs = chkShowWarningInMC.Checked;
-            Settings.Default.NotificationPanelWriterWriteErrorMsgs = chkShowErrorInMC.Checked;
-            Settings.Default.SwitchToMCOnInformation = chkSwitchToMCInformation.Checked;
-            Settings.Default.SwitchToMCOnWarning = chkSwitchToMCWarnings.Checked;
-            Settings.Default.SwitchToMCOnError = chkSwitchToMCErrors.Checked;
+            Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteDebugMsgs = chkShowDebugInMC.Checked;
+            Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteInfoMsgs = chkShowInfoInMC.Checked;
+            Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteWarningMsgs = chkShowWarningInMC.Checked;
+            Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteErrorMsgs = chkShowErrorInMC.Checked;
+            Properties.OptionsNotificationsPage.Default.SwitchToMCOnInformation = chkSwitchToMCInformation.Checked;
+            Properties.OptionsNotificationsPage.Default.SwitchToMCOnWarning = chkSwitchToMCWarnings.Checked;
+            Properties.OptionsNotificationsPage.Default.SwitchToMCOnError = chkSwitchToMCErrors.Checked;
         }
 
         private void SaveLoggingSettings()
         {
-            Settings.Default.LogToApplicationDirectory = chkLogToCurrentDir.Checked;
-            Settings.Default.LogFilePath = textBoxLogPath.Text;
-            Logger.Instance.SetLogPath(Settings.Default.LogFilePath);
-            Settings.Default.TextLogMessageWriterWriteDebugMsgs = chkLogDebugMsgs.Checked;
-            Settings.Default.TextLogMessageWriterWriteInfoMsgs = chkLogInfoMsgs.Checked;
-            Settings.Default.TextLogMessageWriterWriteWarningMsgs = chkLogWarningMsgs.Checked;
-            Settings.Default.TextLogMessageWriterWriteErrorMsgs = chkLogErrorMsgs.Checked;
+            Properties.OptionsNotificationsPage.Default.LogToApplicationDirectory = chkLogToCurrentDir.Checked;
+            Properties.OptionsNotificationsPage.Default.LogFilePath = textBoxLogPath.Text;
+            Logger.Instance.SetLogPath(Properties.OptionsNotificationsPage.Default.LogFilePath);
+            Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteDebugMsgs = chkLogDebugMsgs.Checked;
+            Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteInfoMsgs = chkLogInfoMsgs.Checked;
+            Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteWarningMsgs = chkLogWarningMsgs.Checked;
+            Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteErrorMsgs = chkLogErrorMsgs.Checked;
         }
 
         private void SavePopupSettings()
         {
-            Settings.Default.PopupMessageWriterWriteDebugMsgs = chkPopupDebug.Checked;
-            Settings.Default.PopupMessageWriterWriteInfoMsgs = chkPopupInfo.Checked;
-            Settings.Default.PopupMessageWriterWriteWarningMsgs = chkPopupWarning.Checked;
-            Settings.Default.PopupMessageWriterWriteErrorMsgs = chkPopupError.Checked;
+            Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteDebugMsgs = chkPopupDebug.Checked;
+            Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteInfoMsgs = chkPopupInfo.Checked;
+            Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteWarningMsgs = chkPopupWarning.Checked;
+            Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteErrorMsgs = chkPopupError.Checked;
         }
 
         private void buttonSelectLogPath_Click(object sender, System.EventArgs e)

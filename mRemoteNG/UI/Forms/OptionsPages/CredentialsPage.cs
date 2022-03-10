@@ -36,7 +36,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void LoadSettings()
         {
             // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (Settings.Default.EmptyCredentials)
+            switch (Properties.OptionsCredentialsPage.Default.EmptyCredentials)
             {
                 case "noinfo":
                     radCredentialsNoInfo.Checked = true;
@@ -49,35 +49,35 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
             }
 
-            txtCredentialsUsername.Text = Settings.Default.DefaultUsername;
+            txtCredentialsUsername.Text = Properties.OptionsCredentialsPage.Default.DefaultUsername;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             txtCredentialsPassword.Text =
-                cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
-            txtCredentialsDomain.Text = Settings.Default.DefaultDomain;
-            txtCredentialsUserViaAPI.Text = Settings.Default.UserViaAPDefault;
+                cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
+            txtCredentialsDomain.Text = Properties.OptionsCredentialsPage.Default.DefaultDomain;
+            txtCredentialsUserViaAPI.Text = Properties.OptionsCredentialsPage.Default.UserViaAPDefault;
         }
 
         public override void SaveSettings()
         {
             if (radCredentialsNoInfo.Checked)
             {
-                Settings.Default.EmptyCredentials = "noinfo";
+                Properties.OptionsCredentialsPage.Default.EmptyCredentials = "noinfo";
             }
             else if (radCredentialsWindows.Checked)
             {
-                Settings.Default.EmptyCredentials = "windows";
+                Properties.OptionsCredentialsPage.Default.EmptyCredentials = "windows";
             }
             else if (radCredentialsCustom.Checked)
             {
-                Settings.Default.EmptyCredentials = "custom";
+                Properties.OptionsCredentialsPage.Default.EmptyCredentials = "custom";
             }
 
-            Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
+            Properties.OptionsCredentialsPage.Default.DefaultUsername = txtCredentialsUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.DefaultPassword =
+            Properties.OptionsCredentialsPage.Default.DefaultPassword =
                 cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
-            Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
-            Settings.Default.UserViaAPDefault = txtCredentialsUserViaAPI.Text;
+            Properties.OptionsCredentialsPage.Default.DefaultDomain = txtCredentialsDomain.Text;
+            Properties.OptionsCredentialsPage.Default.UserViaAPDefault = txtCredentialsUserViaAPI.Text;
         }
 
         private void radCredentialsCustom_CheckedChanged(object sender, EventArgs e)

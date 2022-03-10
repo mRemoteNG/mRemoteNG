@@ -44,42 +44,41 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            chkUseSQLServer.Checked = Settings.Default.UseSQLServer;
-            txtSQLType.Text = Settings.Default.SQLServerType;
-            txtSQLServer.Text = Settings.Default.SQLHost;
-            txtSQLDatabaseName.Text = Settings.Default.SQLDatabaseName;
-            txtSQLUsername.Text = Settings.Default.SQLUser;
+            chkUseSQLServer.Checked = Properties.OptionsDBsPage.Default.UseSQLServer;
+            txtSQLType.Text = Properties.OptionsDBsPage.Default.SQLServerType;
+            txtSQLServer.Text = Properties.OptionsDBsPage.Default.SQLHost;
+            txtSQLDatabaseName.Text = Properties.OptionsDBsPage.Default.SQLDatabaseName;
+            txtSQLUsername.Text = Properties.OptionsDBsPage.Default.SQLUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtSQLPassword.Text = cryptographyProvider.Decrypt(Settings.Default.SQLPass, Runtime.EncryptionKey);
-            chkSQLReadOnly.Checked = Settings.Default.SQLReadOnly;
+            txtSQLPassword.Text = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
+            chkSQLReadOnly.Checked = Properties.OptionsDBsPage.Default.SQLReadOnly;
             lblTestConnectionResults.Text = "";
         }
 
         public override void SaveSettings()
         {
             base.SaveSettings();
-            var sqlServerWasPreviouslyEnabled = Settings.Default.UseSQLServer;
+            var sqlServerWasPreviouslyEnabled = Properties.OptionsDBsPage.Default.UseSQLServer;
 
-            Settings.Default.UseSQLServer = chkUseSQLServer.Checked;
-            Settings.Default.SQLServerType = txtSQLType.Text;
-            Settings.Default.SQLHost = txtSQLServer.Text;
-            Settings.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
-            Settings.Default.SQLUser = txtSQLUsername.Text;
+            Properties.OptionsDBsPage.Default.UseSQLServer = chkUseSQLServer.Checked;
+            Properties.OptionsDBsPage.Default.SQLServerType = txtSQLType.Text;
+            Properties.OptionsDBsPage.Default.SQLHost = txtSQLServer.Text;
+            Properties.OptionsDBsPage.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
+            Properties.OptionsDBsPage.Default.SQLUser = txtSQLUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
-            Settings.Default.SQLReadOnly = chkSQLReadOnly.Checked;
+            Properties.OptionsDBsPage.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
+            Properties.OptionsDBsPage.Default.SQLReadOnly = chkSQLReadOnly.Checked;
 
-            if (Settings.Default.UseSQLServer)
+            if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 ReinitializeSqlUpdater();
-            else if (!Settings.Default.UseSQLServer && sqlServerWasPreviouslyEnabled)
+            else if (!Properties.OptionsDBsPage.Default.UseSQLServer && sqlServerWasPreviouslyEnabled)
                 DisableSql();
         }
 
         private static void ReinitializeSqlUpdater()
         {
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Dispose();
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer =
-                new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
+            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = new RemoteConnectionsSyncronizer(new SqlConnectionsUpdateChecker());
             Runtime.ConnectionsService.LoadConnections(true, false, "");
         }
 
@@ -163,16 +162,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void UpdateConnectionImage(bool connectionSuccess)
         {
-            imgConnectionStatus.Image = connectionSuccess
-                ? Properties.Resources.Test_16x
-                : Properties.Resources.LogError_16x;
+            imgConnectionStatus.Image = connectionSuccess ? Properties.Resources.Test_16x : Properties.Resources.LogError_16x;
         }
 
         private string BuildTestFailedMessage(string specificMessage)
         {
-            return Language.ConnectionOpenFailed +
-                   Environment.NewLine +
-                   specificMessage;
+            return Language.ConnectionOpenFailed + Environment.NewLine + specificMessage;
         }
     }
 }

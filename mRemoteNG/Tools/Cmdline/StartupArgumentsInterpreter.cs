@@ -48,28 +48,28 @@ namespace mRemoteNG.Tools.Cmdline
         {
             if (args["resetpos"] == null && args["rp"] == null && args["reset"] == null) return;
             _messageCollector.AddMessage(MessageClass.DebugMsg, "Cmdline arg: Resetting window positions.");
-            Settings.Default.MainFormKiosk = false;
+            Properties.App.Default.MainFormKiosk = false;
             var newWidth = 900;
             var newHeight = 600;
             var newX = Screen.PrimaryScreen.WorkingArea.Width / 2 - newWidth / 2;
             var newY = Screen.PrimaryScreen.WorkingArea.Height / 2 - newHeight / 2;
-            Settings.Default.MainFormLocation = new Point(newX, newY);
-            Settings.Default.MainFormSize = new Size(newWidth, newHeight);
-            Settings.Default.MainFormState = FormWindowState.Normal;
+            Properties.App.Default.MainFormLocation = new Point(newX, newY);
+            Properties.App.Default.MainFormSize = new Size(newWidth, newHeight);
+            Properties.App.Default.MainFormState = FormWindowState.Normal;
         }
 
         private void ParseResetPanelsArg(CmdArgumentsInterpreter args)
         {
             if (args["resetpanels"] == null && args["rpnl"] == null && args["reset"] == null) return;
             _messageCollector.AddMessage(MessageClass.DebugMsg, "Cmdline arg: Resetting panels");
-            Settings.Default.ResetPanels = true;
+            Properties.App.Default.ResetPanels = true;
         }
 
         private void ParseResetToolbarArg(CmdArgumentsInterpreter args)
         {
             if (args["resettoolbar"] == null && args["rtbr"] == null && args["reset"] == null) return;
             _messageCollector.AddMessage(MessageClass.DebugMsg, "Cmdline arg: Resetting toolbar position");
-            Settings.Default.ResetToolbars = true;
+            Properties.App.Default.ResetToolbars = true;
         }
 
         private void ParseNoReconnectArg(CmdArgumentsInterpreter args)
@@ -77,7 +77,7 @@ namespace mRemoteNG.Tools.Cmdline
             if (args["noreconnect"] == null && args["norc"] == null) return;
             _messageCollector.AddMessage(MessageClass.DebugMsg,
                                          "Cmdline arg: Disabling reconnection to previously connected hosts");
-            Settings.Default.NoReconnect = true;
+            Properties.App.Default.NoReconnect = true;
         }
 
         private void ParseCustomConnectionPathArg(CmdArgumentsInterpreter args)
@@ -94,20 +94,19 @@ namespace mRemoteNG.Tools.Cmdline
             {
                 if (File.Exists(Path.Combine(GeneralAppInfo.HomePath, args[consParam])))
                 {
-                    Settings.Default.LoadConsFromCustomLocation = true;
-                    Settings.Default.CustomConsPath = Path.Combine(GeneralAppInfo.HomePath, args[consParam]);
+                    Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
+                    Properties.OptionsBackupPage.Default.BackupFilePath = Path.Combine(GeneralAppInfo.HomePath, args[consParam]);
                     return;
                 }
 
                 if (!File.Exists(Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]))) return;
-                Settings.Default.LoadConsFromCustomLocation = true;
-                Settings.Default.CustomConsPath =
-                    Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
+                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
+                Properties.OptionsBackupPage.Default.BackupFilePath = Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
             }
             else
             {
-                Settings.Default.LoadConsFromCustomLocation = true;
-                Settings.Default.CustomConsPath = args[consParam];
+                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
+                Properties.OptionsBackupPage.Default.BackupFilePath = args[consParam];
             }
         }
     }

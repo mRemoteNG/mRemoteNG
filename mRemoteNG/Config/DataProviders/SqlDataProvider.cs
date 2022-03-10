@@ -2,6 +2,7 @@
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
+using mRemoteNG.Properties;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 
@@ -108,7 +109,7 @@ namespace mRemoteNG.Config.DataProviders
 
         private bool DbUserIsReadOnly()
         {
-            return Properties.Settings.Default.SQLReadOnly;
+            return Properties.OptionsDBsPage.Default.SQLReadOnly;
         }
     }
 }

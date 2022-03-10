@@ -1,4 +1,4 @@
-using mRemoteNG.Properties;
+﻿using mRemoteNG.Properties;
 using mRemoteNG.Tools.Cmdline;
 
 namespace mRemoteNG.Tools
@@ -7,9 +7,7 @@ namespace mRemoteNG.Tools
     {
         public bool Start(CommandLineArguments arguments = null)
         {
-            var filename = Settings.Default.UseCustomPuttyPath
-                ? Settings.Default.CustomPuttyPath
-                : App.Info.GeneralAppInfo.PuttyPath;
+            var filename = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
             return Start(filename, arguments);
         }
     }

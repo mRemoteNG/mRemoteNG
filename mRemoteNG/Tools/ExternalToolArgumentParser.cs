@@ -178,25 +178,23 @@ namespace mRemoteNG.Tools
                 case "username":
                     replacement = _connectionInfo.Username;
                     if (string.IsNullOrEmpty(replacement))
-                        if (Settings.Default.EmptyCredentials == "windows")
+                        if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "windows")
                             replacement = Environment.UserName;
-                        else if (Settings.Default.EmptyCredentials == "custom")
-                            replacement = Settings.Default.DefaultUsername;
+                        else if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
+                            replacement = Properties.OptionsCredentialsPage.Default.DefaultUsername;
                     break;
                 case "password":
                     replacement = _connectionInfo.Password;
-                    if (string.IsNullOrEmpty(replacement) && Settings.Default.EmptyCredentials == "custom")
-                        replacement = new LegacyRijndaelCryptographyProvider()
-                            .Decrypt(Convert.ToString(Settings.Default.DefaultPassword),
-                                     Runtime.EncryptionKey);
+                    if (string.IsNullOrEmpty(replacement) && Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
+                        replacement = new LegacyRijndaelCryptographyProvider().Decrypt(Convert.ToString(Properties.OptionsCredentialsPage.Default.DefaultPassword), Runtime.EncryptionKey);
                     break;
                 case "domain":
                     replacement = _connectionInfo.Domain;
                     if (string.IsNullOrEmpty(replacement))
-                        if (Settings.Default.EmptyCredentials == "windows")
+                        if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "windows")
                             replacement = Environment.UserDomainName;
-                        else if (Settings.Default.EmptyCredentials == "custom")
-                            replacement = Settings.Default.DefaultDomain;
+                        else if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
+                            replacement = Properties.OptionsCredentialsPage.Default.DefaultDomain;
                     break;
                 case "description":
                     replacement = _connectionInfo.Description;

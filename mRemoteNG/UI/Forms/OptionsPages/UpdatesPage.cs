@@ -60,19 +60,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadSettings()
         {
-            chkCheckForUpdatesOnStartup.Checked = Settings.Default.CheckForUpdatesOnStartup;
+            chkCheckForUpdatesOnStartup.Checked = Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup;
             cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
             cboUpdateCheckFrequency.Items.Clear();
             var nDaily = cboUpdateCheckFrequency.Items.Add(Language.Daily);
             var nWeekly = cboUpdateCheckFrequency.Items.Add(Language.Weekly);
             var nMonthly = cboUpdateCheckFrequency.Items.Add(Language.Monthly);
-            if (Settings.Default.CheckForUpdatesFrequencyDays < 1)
+            if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays < 1)
             {
                 chkCheckForUpdatesOnStartup.Checked = false;
                 cboUpdateCheckFrequency.SelectedIndex = nDaily;
             } // Daily
             else
-                switch (Settings.Default.CheckForUpdatesFrequencyDays)
+                switch (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays)
                 {
                     case 1:
                         cboUpdateCheckFrequency.SelectedIndex = nDaily;
@@ -85,9 +85,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                         break;
                     default:
                         var nCustom =
-                            cboUpdateCheckFrequency.Items.Add(string.Format(Language.UpdateFrequencyCustom,
-                                                                            Settings
-                                                                                .Default.CheckForUpdatesFrequencyDays));
+                            cboUpdateCheckFrequency.Items.Add(string.Format(Language.UpdateFrequencyCustom, Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays));
                         cboUpdateCheckFrequency.SelectedIndex = nCustom;
                         break;
                 }
@@ -95,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             var stable = cboReleaseChannel.Items.Add(UpdateChannelInfo.STABLE);
             var beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.PREVIEW);
             var dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.NIGHTLY);
-            switch (Settings.Default.UpdateChannel)
+            switch (Properties.OptionsUpdatesPage.Default.UpdateChannel)
             {
                 case UpdateChannelInfo.STABLE:
                     cboReleaseChannel.SelectedIndex = stable;
@@ -111,50 +109,49 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     break;
             }
 
-            chkUseProxyForAutomaticUpdates.Checked = Settings.Default.UpdateUseProxy;
-            tblProxyBasic.Enabled = Settings.Default.UpdateUseProxy;
-            txtProxyAddress.Text = Settings.Default.UpdateProxyAddress;
-            numProxyPort.Value = Convert.ToDecimal(Settings.Default.UpdateProxyPort);
+            chkUseProxyForAutomaticUpdates.Checked = Properties.OptionsUpdatesPage.Default.UpdateUseProxy;
+            tblProxyBasic.Enabled = Properties.OptionsUpdatesPage.Default.UpdateUseProxy;
+            txtProxyAddress.Text = Properties.OptionsUpdatesPage.Default.UpdateProxyAddress;
+            numProxyPort.Value = Convert.ToDecimal(Properties.OptionsUpdatesPage.Default.UpdateProxyPort);
 
-            chkUseProxyAuthentication.Checked = Settings.Default.UpdateProxyUseAuthentication;
-            tblProxyAuthentication.Enabled = Settings.Default.UpdateProxyUseAuthentication;
-            txtProxyUsername.Text = Settings.Default.UpdateProxyAuthUser;
+            chkUseProxyAuthentication.Checked = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
+            tblProxyAuthentication.Enabled = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
+            txtProxyUsername.Text = Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             txtProxyPassword.Text =
-                cryptographyProvider.Decrypt(Settings.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
+                cryptographyProvider.Decrypt(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
 
-            btnTestProxy.Enabled = Settings.Default.UpdateUseProxy;
+            btnTestProxy.Enabled = Properties.OptionsUpdatesPage.Default.UpdateUseProxy;
         }
 
         public override void SaveSettings()
         {
             base.SaveSettings();
 
-            Settings.Default.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked;
+            Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked;
             if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.Daily)
             {
-                Settings.Default.CheckForUpdatesFrequencyDays = 1;
+                Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays = 1;
             }
             else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.Weekly)
             {
-                Settings.Default.CheckForUpdatesFrequencyDays = 7;
+                Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays = 7;
             }
             else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.Monthly)
             {
-                Settings.Default.CheckForUpdatesFrequencyDays = 31;
+                Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays = 31;
             }
 
-            Settings.Default.UpdateChannel = cboReleaseChannel.Text;
+            Properties.OptionsUpdatesPage.Default.UpdateChannel = cboReleaseChannel.Text;
 
-            Settings.Default.UpdateUseProxy = chkUseProxyForAutomaticUpdates.Checked;
-            Settings.Default.UpdateProxyAddress = txtProxyAddress.Text;
-            Settings.Default.UpdateProxyPort = (int)numProxyPort.Value;
+            Properties.OptionsUpdatesPage.Default.UpdateUseProxy = chkUseProxyForAutomaticUpdates.Checked;
+            Properties.OptionsUpdatesPage.Default.UpdateProxyAddress = txtProxyAddress.Text;
+            Properties.OptionsUpdatesPage.Default.UpdateProxyPort = (int)numProxyPort.Value;
 
-            Settings.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
-            Settings.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
+            Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
+            Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Settings.Default.UpdateProxyAuthPass =
-                cryptographyProvider.Encrypt(txtProxyPassword.Text, Runtime.EncryptionKey);
+            Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, Runtime.EncryptionKey);
         }
 
         #endregion

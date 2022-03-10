@@ -481,18 +481,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (string.IsNullOrEmpty(userName))
                 {
-                    switch (Settings.Default.EmptyCredentials)
+                    switch (Properties.OptionsCredentialsPage.Default.EmptyCredentials)
                     {
                         case "windows":
                             _rdpClient.UserName = Environment.UserName;
                             break;
-                        case "custom" when !string.IsNullOrEmpty(Settings.Default.DefaultUsername):
-                            _rdpClient.UserName = Settings.Default.DefaultUsername;
+                        case "custom" when !string.IsNullOrEmpty(Properties.OptionsCredentialsPage.Default.DefaultUsername):
+                            _rdpClient.UserName = Properties.OptionsCredentialsPage.Default.DefaultUsername;
                             break;
                         case "custom":
                             try
                             {
-                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + Settings.Default.UserViaAPDefault, out userName, out password, out domain);
+                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + Properties.OptionsCredentialsPage.Default.UserViaAPDefault, out userName, out password, out domain);
                                 _rdpClient.UserName = userName;
                             }
                             catch (Exception ex)
@@ -510,13 +510,12 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (string.IsNullOrEmpty(password))
                 {
-                    if (Settings.Default.EmptyCredentials == "custom")
+                    if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
                     {
-                        if (Settings.Default.DefaultPassword != "")
+                        if (Properties.OptionsCredentialsPage.Default.DefaultPassword != "")
                         {
                             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                            _rdpClient.AdvancedSettings2.ClearTextPassword =
-                                cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, Runtime.EncryptionKey);
+                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
                         }
                     }
                 }
@@ -527,10 +526,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (string.IsNullOrEmpty(domain))
                 {
-                    _rdpClient.Domain = Settings.Default.EmptyCredentials switch
+                    _rdpClient.Domain = Properties.OptionsCredentialsPage.Default.EmptyCredentials switch
                     {
                         "windows" => Environment.UserDomainName,
-                        "custom" => Settings.Default.DefaultDomain,
+                        "custom" => Properties.OptionsCredentialsPage.Default.DefaultDomain,
                         _ => _rdpClient.Domain
                     };
                 }
@@ -740,7 +739,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 Event_Disconnected(this, reason, discReason);
             }
 
-            if (Settings.Default.ReconnectOnDisconnect)
+            if (Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect)
             {
                 ReconnectGroup = new ReconnectGroup();
                 ReconnectGroup.CloseClicked += Event_ReconnectGroupCloseClicked;

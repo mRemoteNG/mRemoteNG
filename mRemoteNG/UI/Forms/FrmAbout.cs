@@ -55,19 +55,19 @@ namespace mRemoteNG.UI.Forms
 
         private void llLicense_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/COPYING.txt");
+            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Properties.OptionsUpdatesPage.Default.CurrentUpdateChannelType + "/COPYING.txt");
             Close();
         }
 
         private void llChangelog_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/CHANGELOG.md");
+            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Properties.OptionsUpdatesPage.Default.CurrentUpdateChannelType + "/CHANGELOG.md");
             Close();
         }
 
         private void llCredits_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Settings.Default.CurrentUpdateChannelType + "/CREDITS.md");
+            OpenUrl("https://raw.githubusercontent.com/mRemoteNG/mRemoteNG/v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Substring(0, Assembly.GetExecutingAssembly().GetName().Version.ToString().Length - 2) + "-" + Properties.OptionsUpdatesPage.Default.CurrentUpdateChannelType + "/CREDITS.md");
             Close();
         }
 
