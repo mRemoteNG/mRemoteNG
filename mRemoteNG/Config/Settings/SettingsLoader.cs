@@ -27,12 +27,7 @@ namespace mRemoteNG.Config.Settings
         private FrmMain MainForm { get; }
 
 
-        public SettingsLoader(FrmMain mainForm,
-                              MessageCollector messageCollector,
-                              QuickConnectToolStrip quickConnectToolStrip,
-                              ExternalToolsToolStrip externalToolsToolStrip,
-                              MultiSshToolStrip multiSshToolStrip,
-                              MenuStrip mainMenu)
+        public SettingsLoader(FrmMain mainForm, MessageCollector messageCollector, QuickConnectToolStrip quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, MultiSshToolStrip multiSshToolStrip, MenuStrip mainMenu)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));

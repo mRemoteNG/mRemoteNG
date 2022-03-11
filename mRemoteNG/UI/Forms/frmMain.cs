@@ -147,8 +147,7 @@ namespace mRemoteNG.UI.Forms
         {
             var messageCollector = Runtime.MessageCollector;
 
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip,
-                _externalToolsToolStrip, _multiSshToolStrip, msMain);
+            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, msMain);
             settingsLoader.LoadSettings();
 
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
@@ -260,8 +259,7 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private void ConnectionsServiceOnConnectionsLoaded(object sender,
-                                                           ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
+        private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
             UpdateWindowTitle();
         }
@@ -311,14 +309,10 @@ namespace mRemoteNG.UI.Forms
             // Persist settings when rebuilding UI
             try
             {
-                vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version,
-                                             _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version,
-                                             _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version,
-                                             _themeManager.ActiveTheme.Theme);
-                vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version,
-                                             _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(msMain, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_quickConnectToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_externalToolsToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
+                vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 
                 if (!_themeManager.ActiveAndExtended) return;
                 tsContainer.TopToolStripPanel.BackColor =
@@ -428,7 +422,7 @@ namespace mRemoteNG.UI.Forms
                     var result = CTaskDialog.MessageBox(this, Application.ProductName, Language.ConfirmExitMainInstruction, "", "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
                     if (CTaskDialog.VerificationChecked)
                     {
-                        Properties.Settings.Default.ConfirmCloseConnection--;
+                        Properties.Settings.Default.ConfirmCloseConnection--; //--?
                     }
 
                     if (result == DialogResult.No)
