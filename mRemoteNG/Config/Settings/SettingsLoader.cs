@@ -249,9 +249,7 @@ namespace mRemoteNG.Config.Settings
 
         private void SetToolstripGripStyle(ToolStrip toolbar)
         {
-            toolbar.GripStyle = Properties.Settings.Default.LockToolbars
-                ? ToolStripGripStyle.Hidden
-                : ToolStripGripStyle.Visible;
+            toolbar.GripStyle = Properties.Settings.Default.LockToolbars ? ToolStripGripStyle.Hidden : ToolStripGripStyle.Visible;
         }
 
         private ToolStripPanel ToolStripPanelFromString(string panel)

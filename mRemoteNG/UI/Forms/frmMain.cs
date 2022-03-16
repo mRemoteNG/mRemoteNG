@@ -249,13 +249,10 @@ namespace mRemoteNG.UI.Forms
 
         private void LockToolbarPositions(bool shouldBeLocked)
         {
-            var toolbars = new ToolStrip[]
-                {_quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip, msMain};
+            var toolbars = new ToolStrip[] {_quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip, msMain};
             foreach (var toolbar in toolbars)
             {
-                toolbar.GripStyle = shouldBeLocked
-                    ? ToolStripGripStyle.Hidden
-                    : ToolStripGripStyle.Visible;
+                toolbar.GripStyle = shouldBeLocked ? ToolStripGripStyle.Hidden : ToolStripGripStyle.Visible;
             }
         }
 
@@ -315,8 +312,7 @@ namespace mRemoteNG.UI.Forms
                 vsToolStripExtender.SetStyle(_multiSshToolStrip, _themeManager.ActiveTheme.Version, _themeManager.ActiveTheme.Theme);
 
                 if (!_themeManager.ActiveAndExtended) return;
-                tsContainer.TopToolStripPanel.BackColor =
-                    _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
+                tsContainer.TopToolStripPanel.BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("CommandBarMenuDefault_Background");
                 BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Background");
                 ForeColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("Dialog_Foreground");
             }
