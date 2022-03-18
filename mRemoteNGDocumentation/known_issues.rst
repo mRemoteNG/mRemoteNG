@@ -121,10 +121,11 @@ the following connection options are set:
 
 To prevent reconnecting, you can do one of several things:
 
+- Change RDP Version to Rdc9 or higher. Rdc9 supports resolution changes without reconnecting.
 - Change the resolution to Smart Size. This will scale the original connection area when the view window size changes. This does not preserve aspect ratio.
 - Turn off Automatic Resize. When the view window size changes, you will see scroll bars or dead space.
 
-There is no way to update the view window size without a reconnect.
+There is no way to update the view window size without a reconnect in RDP Version lower than Rdc9.
 This is an RDP protocol limitation.
 
 AltGr key combinations stop working in other apps when connected to RDP

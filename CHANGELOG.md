@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - #2138: Improve compatibility with Remote Desktop Connection Manager v2.83
 - #2123: Thycotic Secret Server - Added 2FA OTP support
+### Changed
+- #1546: Enable resize without reconnect for RDP Version Rdc9 or higher
  
 ## [1.77.2]
 ### Added
