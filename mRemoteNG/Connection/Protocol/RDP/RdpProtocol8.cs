@@ -29,7 +29,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             protected set
             {
                 base.SmartSize = value;
-                ReconnectForResize();
+                DoResizeClient();
             }
         }
 
@@ -39,7 +39,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             protected set
             {
                 base.Fullscreen = value;
-                ReconnectForResize();
+                DoResizeClient();
             }
         }
 
@@ -50,19 +50,19 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public override void Resize(object sender, EventArgs e)
         {
-            if (DoResize() && _controlBeginningSize.IsEmpty)
+            if (DoResizeControl() && _controlBeginningSize.IsEmpty)
             {
-                ReconnectForResize();
+                DoResizeClient();
             }
             base.Resize(sender, e);
         }
 
         public override void ResizeEnd(object sender, EventArgs e)
         {
-            DoResize();
+            DoResizeControl();
             if (!(Control.Size == _controlBeginningSize))
             {
-                ReconnectForResize();
+                DoResizeClient();
             }
             _controlBeginningSize = Size.Empty;
         }
@@ -72,7 +72,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             return new AxMsRdpClient8NotSafeForScripting();
         }
 
-        private void ReconnectForResize()
+        private void DoResizeClient()
         {
             if (!loginComplete)
                 return;
@@ -95,7 +95,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var size = Fullscreen
                     ? Screen.FromControl(Control).Bounds.Size
                     : Control.Size;
-                RdpClient8.Reconnect((uint)size.Width, (uint)size.Height);
+                UpdateSessionDisplaySettings((uint)size.Width, (uint)size.Height);
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
         }
 
-        private bool DoResize()
+        private bool DoResizeControl()
         {
             Control.Location = InterfaceControl.Location;
             // kmscode - this doesn't look right to me. But I'm not aware of any functionality issues with this currently...
@@ -119,6 +119,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 return false;
             }
+        }
+
+        protected virtual void UpdateSessionDisplaySettings(uint width, uint height)
+        {
+            RdpClient8.Reconnect(width, height);
         }
     }
 }

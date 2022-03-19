@@ -118,7 +118,16 @@ In RDP 8, support was improved for reconnecting RDP connections for resizing ope
 RDP 9
 -----
 
-We support this protocol version, but are not yet using any of its features.
+In RDP 9, support was further improved for reconnecting RDP connections for resizing operations.
+
+.. list-table::
+	:widths: 30 70
+	:header-rows: 1
+
+	* - Property
+	  - Description
+	* - Automatic Resize
+	  - When this property is enabled and ``Resolution`` is set to ``Fit to Panel`` and the connection window is resized, the RDP connection will automatically change the resolution without reconnecting.
 
 
 RDP 10
