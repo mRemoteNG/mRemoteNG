@@ -138,8 +138,7 @@ namespace mRemoteNG.Connection
             var oldIsUsingDatabaseValue = UsingDatabase;
 
             var connectionLoader = useDatabase
-                ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer,
-                                                               _localConnectionPropertiesDataProvider)
+                ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
                 : new XmlConnectionsLoader(connectionFileName);
 
             var newConnectionTreeModel = connectionLoader.Load();
@@ -230,12 +229,7 @@ namespace mRemoteNG.Connection
         /// Optional. The name of the property that triggered
         /// this save.
         /// </param>
-        public void SaveConnections(ConnectionTreeModel connectionTreeModel,
-                                    bool useDatabase,
-                                    SaveFilter saveFilter,
-                                    string connectionFileName,
-                                    bool forceSave = false,
-                                    string propertyNameTrigger = "")
+        public void SaveConnections(ConnectionTreeModel connectionTreeModel, bool useDatabase, SaveFilter saveFilter, string connectionFileName, bool forceSave = false, string propertyNameTrigger = "")
         {
             if (connectionTreeModel == null)
                 return;
@@ -257,9 +251,7 @@ namespace mRemoteNG.Connection
                 var previouslyUsingDatabase = UsingDatabase;
 
                 var saver = useDatabase
-                    ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter,
-                                                                           _localConnectionPropertiesSerializer,
-                                                                           _localConnectionPropertiesDataProvider)
+                    ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
                     : new XmlConnectionsSaver(connectionFileName, saveFilter);
 
                 saver.Save(connectionTreeModel, propertyNameTrigger);
@@ -275,9 +267,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector?.AddExceptionMessage(
-                                                              string.Format(Language.ConnectionsFileCouldNotSaveAs,
-                                                                            connectionFileName), ex, logOnly: false);
+                Runtime.MessageCollector?.AddExceptionMessage(string.Format(Language.ConnectionsFileCouldNotSaveAs, connectionFileName), ex, logOnly: false);
             }
             finally
             {
@@ -304,12 +294,7 @@ namespace mRemoteNG.Connection
             {
                 lock (SaveLock)
                 {
-                    SaveConnections(
-                                    ConnectionTreeModel,
-                                    UsingDatabase,
-                                    new SaveFilter(),
-                                    ConnectionFileName,
-                                    propertyNameTrigger: propertyNameTrigger);
+                    SaveConnections(ConnectionTreeModel, UsingDatabase, new SaveFilter(), ConnectionFileName, propertyNameTrigger: propertyNameTrigger);
                 }
             });
             t.SetApartmentState(ApartmentState.STA);
@@ -318,7 +303,12 @@ namespace mRemoteNG.Connection
 
         public string GetStartupConnectionFileName()
         {
-            return Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation == false ? GetDefaultStartupConnectionFileName() : Properties.OptionsBackupPage.Default.BackupFilePath;
+            if (Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation == true && Properties.OptionsBackupPage.Default.BackupFilePath != "")
+            {
+                return Properties.OptionsBackupPage.Default.BackupFilePath;
+            } else {
+                return GetDefaultStartupConnectionFileName();
+            }
         }
 
         public string GetDefaultStartupConnectionFileName()
