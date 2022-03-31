@@ -8,7 +8,7 @@
     <Setting Name="BackupFileNameFormat" Type="System.String" Scope="User">
       <Value Profile="(Default)">{0}.{1:yyyyMMdd-HHmmssffff}.backup</Value>
     </Setting>
-    <Setting Name="BackupFilePath" Type="System.String" Scope="User">
+    <Setting Name="BackupLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="SaveConsOnExit" Type="System.Boolean" Scope="User">
@@ -28,6 +28,24 @@
     </Setting>
     <Setting Name="LoadConsFromCustomLocation" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="cbBackupEnableACL" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="cbBackupTypeACL" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="cbBackupFrequencyACL" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="cbBackupNumberACL" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="cbBackupNameFormatACL" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="cbBackupLocationACL" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

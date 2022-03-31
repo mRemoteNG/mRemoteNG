@@ -46,6 +46,9 @@
             this._externalToolsToolStrip = new mRemoteNG.UI.Controls.ExternalToolsToolStrip();
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
+            this.modeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsModeAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsModeUser = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.tsContainer.ContentPanel.SuspendLayout();
             this.tsContainer.TopToolStripPanel.SuspendLayout();
@@ -59,7 +62,7 @@
             this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
             this.pnlDock.Location = new System.Drawing.Point(0, 0);
             this.pnlDock.Name = "pnlDock";
-            this.pnlDock.Size = new System.Drawing.Size(1129, 496);
+            this.pnlDock.Size = new System.Drawing.Size(1129, 546);
             this.pnlDock.TabIndex = 13;
             this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
             // 
@@ -73,17 +76,18 @@
             this.fileMenu,
             this.viewMenu,
             this.toolsMenu,
-            this.helpMenu});
-            this.msMain.Location = new System.Drawing.Point(3, 50);
+            this.helpMenu,
+            this.modeToolStripMenuItem});
+            this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.msMain.Size = new System.Drawing.Size(303, 25);
+            this.msMain.Size = new System.Drawing.Size(309, 25);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
             // 
             // fileMenu
-            //
+            // 
             this.fileMenu.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.fileMenu.Name = "mMenFile";
             this.fileMenu.Size = new System.Drawing.Size(37, 19);
@@ -131,7 +135,7 @@
             // tsContainer.ContentPanel
             // 
             this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1129, 496);
+            this.tsContainer.ContentPanel.Size = new System.Drawing.Size(1129, 546);
             this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tsContainer.Location = new System.Drawing.Point(0, 0);
             this.tsContainer.Name = "tsContainer";
@@ -184,6 +188,11 @@
             // vsToolStripExtender
             // 
             this.vsToolStripExtender.DefaultRenderer = null;
+            this.tsModeUser.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.tsModeUser.Name = "tsModeUser";
+            this.tsModeUser.Size = new System.Drawing.Size(180, 22);
+            this.tsModeUser.Text = "UserMode";
+            this.tsModeUser.Click += new System.EventHandler(this.tsModeUser_Click);
             // 
             // FrmMain
             // 
@@ -191,7 +200,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1129, 571);
             this.Controls.Add(this.tsContainer);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.msMain;
             this.MinimumSize = new System.Drawing.Size(400, 400);
@@ -230,5 +239,8 @@
 		internal mRemoteNG.UI.Controls.MultiSshToolStrip _multiSshToolStrip;
         //theming support
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
+        private System.Windows.Forms.ToolStripMenuItem modeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsModeAdmin;
+        private System.Windows.Forms.ToolStripMenuItem tsModeUser;
     }
 }

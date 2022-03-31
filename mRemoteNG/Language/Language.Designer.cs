@@ -6380,5 +6380,114 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string ACLPermissionsHidden
+        {
+            get
+            {
+                return ResourceManager.GetString("ACLPermissionsHidden", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string ACLPermissionsReadOnly
+        {
+            get
+            {
+                return ResourceManager.GetString("ACLPermissionsReadOnly", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string ACLPermissionsWriteAllow
+        {
+            get
+            {
+                return ResourceManager.GetString("ACLPermissionsWriteAllow", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to lblACL.
+        /// </summary>
+        internal static string lblACL
+        {
+            get
+            {
+                return ResourceManager.GetString("lblACL", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to lblBackupEnable.
+        /// </summary>
+        internal static string lblBackupEnable
+        {
+            get
+            {
+                return ResourceManager.GetString("lblBackupEnable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to lblBackupType.
+        /// </summary>
+        internal static string lblBackupType
+        {
+            get
+            {
+                return ResourceManager.GetString("lblBackupType", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to lblConnectionsBackupPath.
+        /// </summary>
+        internal static string lblConnectionsBackupFrequency
+        {
+            get
+            {
+                return ResourceManager.GetString("lblConnectionsBackupFrequency", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to lblConnectionsBackupMaxCount.
+        /// </summary>
+        internal static string lblConnectionsBackupMaxCount
+        {
+            get
+            {
+                return ResourceManager.GetString("lblConnectionsBackupMaxCount", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to lblBackupNameFormat.
+        /// </summary>
+        internal static string lblBackupNameFormat
+        {
+            get
+            {
+                return ResourceManager.GetString("lblBackupNameFormat", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to lblConnectionsBackupPath.
+        /// </summary>
+        internal static string lblConnectionsBackupPath
+        {
+            get
+            {
+                return ResourceManager.GetString("lblConnectionsBackupPath", resourceCulture);
+            }
+        }
     }
 }

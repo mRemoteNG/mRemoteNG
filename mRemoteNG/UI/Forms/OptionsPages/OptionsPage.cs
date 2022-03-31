@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
@@ -10,7 +10,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         protected OptionsPage()
         {
             InitializeComponent();
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            //ThemeManager.getInstance().ThemeChanged += ApplyTheme;
         }
 
         #region Public Properties

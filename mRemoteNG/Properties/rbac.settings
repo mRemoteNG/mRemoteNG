@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ActiveRole" Type="System.String" Scope="User">
-      <Value Profile="(Default)">UserRole</Value>
+      <Value Profile="(Default)">AdminRole</Value>
     </Setting>
     <Setting Name="AdminRolePassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">mR3m0t3NG!</Value>

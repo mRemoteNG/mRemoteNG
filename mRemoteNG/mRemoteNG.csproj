@@ -74,6 +74,7 @@
     <PackageReference Include="DockPanelSuite.ThemeVS2013" Version="3.1.0" />
     <PackageReference Include="DockPanelSuite.ThemeVS2015" Version="3.1.0" />
     <PackageReference Include="log4net" Version="2.0.14" />
+    <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1150.38" />
     <PackageReference Include="MySql.Data" Version="8.0.28" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -146,6 +147,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>OptionsThemePage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\rbac.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>rbac.settings</DependentUpon>
     </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -330,6 +336,10 @@
     <None Update="Properties\OptionsThemePage.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>OptionsThemePage.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Properties\rbac.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>rbac.Designer.cs</LastGenOutput>
     </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
     <value>About</value>
@@ -2222,5 +2222,41 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="PropertyDescriptionEC2Region" xml:space="preserve">
     <value>fetch aws instance info from this region</value>
+  </data>
+  <data name="ACLPermissionsHidden" xml:space="preserve">
+    <value>Hidden</value>
+    <comment>Permission then option will be hide completly from user</comment>
+  </data>
+  <data name="ACLPermissionsReadOnly" xml:space="preserve">
+    <value>ReadOnly</value>
+    <comment>Permission then option is visible but user can't modify it</comment>
+  </data>
+  <data name="ACLPermissionsWriteAllow" xml:space="preserve">
+    <value>WriteAllow</value>
+    <comment>Permission then user could modify an option value</comment>
+  </data>
+  <data name="lblConnectionsBackupPath" xml:space="preserve">
+    <value>Select location for connection data backup folder</value>
+  </data>
+  <data name="btnBrowsePath" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="lblACL" xml:space="preserve">
+    <value>ACL for user</value>
+  </data>
+  <data name="lblBackupEnable" xml:space="preserve">
+    <value>Backups for connection data</value>
+  </data>
+  <data name="lblBackupNameFormat" xml:space="preserve">
+    <value>Backup file name format</value>
+  </data>
+  <data name="lblBackupType" xml:space="preserve">
+    <value>Backup type</value>
+  </data>
+  <data name="lblConnectionsBackupFrequency" xml:space="preserve">
+    <value>Connection Backup Frequency</value>
+  </data>
+  <data name="lblConnectionsBackupMaxCount" xml:space="preserve">
+    <value>Maximum number of backups</value>
   </data>
 </root>

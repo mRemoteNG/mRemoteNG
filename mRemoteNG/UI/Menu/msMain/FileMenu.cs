@@ -189,7 +189,7 @@ namespace mRemoteNG.UI.Menu
                 else
                 {
                     Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                    Properties.OptionsBackupPage.Default.BackupFilePath = newFileName;
+                    Properties.OptionsBackupPage.Default.BackupLocation = newFileName;
                 }
             }
         }

@@ -13,11 +13,11 @@ namespace mRemoteNG.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
-    internal sealed partial class OptionsConnectionsPage : global::System.Configuration.ApplicationSettingsBase {
+    internal sealed partial class rbac : global::System.Configuration.ApplicationSettingsBase {
         
-        private static OptionsConnectionsPage defaultInstance = ((OptionsConnectionsPage)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new OptionsConnectionsPage())));
+        private static rbac defaultInstance = ((rbac)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new rbac())));
         
-        public static OptionsConnectionsPage Default {
+        public static rbac Default {
             get {
                 return defaultInstance;
             }
@@ -25,25 +25,25 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int AutoSaveEveryMinutes {
+        [global::System.Configuration.DefaultSettingValueAttribute("AdminRole")]
+        public string ActiveRole {
             get {
-                return ((int)(this["AutoSaveEveryMinutes"]));
+                return ((string)(this["ActiveRole"]));
             }
             set {
-                this["AutoSaveEveryMinutes"] = value;
+                this["ActiveRole"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConnectrionFilePath {
+        [global::System.Configuration.DefaultSettingValueAttribute("mR3m0t3NG!")]
+        public string AdminRolePassword {
             get {
-                return ((string)(this["ConnectrionFilePath"]));
+                return ((string)(this["AdminRolePassword"]));
             }
             set {
-                this["ConnectrionFilePath"] = value;
+                this["AdminRolePassword"] = value;
             }
         }
     }

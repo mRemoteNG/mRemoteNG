@@ -805,5 +805,15 @@ namespace mRemoteNG.UI.Forms
         {
             viewMenu.mMenView_DropDownOpening(sender, e);
         }
+
+        private void tsModeUser_Click(object sender, EventArgs e)
+        {
+            Properties.rbac.Default.ActiveRole = "UserRole";
+        }
+
+        private void tsModeAdmin_Click(object sender, EventArgs e)
+        {
+            Properties.rbac.Default.ActiveRole = "AdminRole";
+        }
     }
 }

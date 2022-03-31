@@ -50,12 +50,12 @@ namespace mRemoteNG.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string BackupFilePath {
+        public string BackupLocation {
             get {
-                return ((string)(this["BackupFilePath"]));
+                return ((string)(this["BackupLocation"]));
             }
             set {
-                this["BackupFilePath"] = value;
+                this["BackupLocation"] = value;
             }
         }
         
@@ -128,6 +128,78 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["LoadConsFromCustomLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cbBackupEnableACL {
+            get {
+                return ((int)(this["cbBackupEnableACL"]));
+            }
+            set {
+                this["cbBackupEnableACL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cbBackupTypeACL {
+            get {
+                return ((int)(this["cbBackupTypeACL"]));
+            }
+            set {
+                this["cbBackupTypeACL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cbBackupFrequencyACL {
+            get {
+                return ((int)(this["cbBackupFrequencyACL"]));
+            }
+            set {
+                this["cbBackupFrequencyACL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cbBackupNumberACL {
+            get {
+                return ((int)(this["cbBackupNumberACL"]));
+            }
+            set {
+                this["cbBackupNumberACL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cbBackupNameFormatACL {
+            get {
+                return ((int)(this["cbBackupNameFormatACL"]));
+            }
+            set {
+                this["cbBackupNameFormatACL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cbBackupLocationACL {
+            get {
+                return ((int)(this["cbBackupLocationACL"]));
+            }
+            set {
+                this["cbBackupLocationACL"] = value;
             }
         }
     }

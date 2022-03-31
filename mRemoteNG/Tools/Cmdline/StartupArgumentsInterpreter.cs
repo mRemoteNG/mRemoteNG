@@ -95,18 +95,18 @@ namespace mRemoteNG.Tools.Cmdline
                 if (File.Exists(Path.Combine(GeneralAppInfo.HomePath, args[consParam])))
                 {
                     Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                    Properties.OptionsBackupPage.Default.BackupFilePath = Path.Combine(GeneralAppInfo.HomePath, args[consParam]);
+                    Properties.OptionsBackupPage.Default.BackupLocation = Path.Combine(GeneralAppInfo.HomePath, args[consParam]);
                     return;
                 }
 
                 if (!File.Exists(Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]))) return;
                 Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                Properties.OptionsBackupPage.Default.BackupFilePath = Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
+                Properties.OptionsBackupPage.Default.BackupLocation = Path.Combine(ConnectionsFileInfo.DefaultConnectionsPath, args[consParam]);
             }
             else
             {
                 Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                Properties.OptionsBackupPage.Default.BackupFilePath = args[consParam];
+                Properties.OptionsBackupPage.Default.BackupLocation = args[consParam];
             }
         }
     }

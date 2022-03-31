@@ -303,19 +303,27 @@ namespace mRemoteNG.Connection
 
         public string GetStartupConnectionFileName()
         {
-            if (Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation == true && Properties.OptionsBackupPage.Default.BackupFilePath != "")
+            /*
+            if (Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation == true && Properties.OptionsBackupPage.Default.BackupLocation != "")
             {
-                return Properties.OptionsBackupPage.Default.BackupFilePath;
+                return Properties.OptionsBackupPage.Default.BackupLocation;
             } else {
+                return GetDefaultStartupConnectionFileName();
+            }
+            */
+            if (Properties.OptionsConnectionsPage.Default.ConnectrionFilePath != "")
+            {
+                return Properties.OptionsConnectionsPage.Default.ConnectrionFilePath;
+            }
+            else
+            {
                 return GetDefaultStartupConnectionFileName();
             }
         }
 
         public string GetDefaultStartupConnectionFileName()
         {
-            return Runtime.IsPortableEdition
-                ? GetDefaultStartupConnectionFileNamePortableEdition()
-                : GetDefaultStartupConnectionFileNameNormalEdition();
+            return Runtime.IsPortableEdition ? GetDefaultStartupConnectionFileNamePortableEdition() : GetDefaultStartupConnectionFileNameNormalEdition();
         }
 
         private void UpdateCustomConsPathSetting(string filename)
@@ -327,7 +335,7 @@ namespace mRemoteNG.Connection
             else
             {
                 Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                Properties.OptionsBackupPage.Default.BackupFilePath = filename;
+                Properties.OptionsBackupPage.Default.BackupLocation = filename;
             }
         }
 
@@ -347,29 +355,14 @@ namespace mRemoteNG.Connection
         public event EventHandler<ConnectionsLoadedEventArgs> ConnectionsLoaded;
         public event EventHandler<ConnectionsSavedEventArgs> ConnectionsSaved;
 
-        private void RaiseConnectionsLoadedEvent(Optional<ConnectionTreeModel> previousTreeModel,
-                                                 ConnectionTreeModel newTreeModel,
-                                                 bool previousSourceWasDatabase,
-                                                 bool newSourceIsDatabase,
-                                                 string newSourcePath)
+        private void RaiseConnectionsLoadedEvent(Optional<ConnectionTreeModel> previousTreeModel, ConnectionTreeModel newTreeModel, bool previousSourceWasDatabase, bool newSourceIsDatabase, string newSourcePath)
         {
-            ConnectionsLoaded?.Invoke(this, new ConnectionsLoadedEventArgs(
-                                                                           previousTreeModel,
-                                                                           newTreeModel,
-                                                                           previousSourceWasDatabase,
-                                                                           newSourceIsDatabase,
-                                                                           newSourcePath));
+            ConnectionsLoaded?.Invoke(this, new ConnectionsLoadedEventArgs(previousTreeModel, newTreeModel, previousSourceWasDatabase, newSourceIsDatabase, newSourcePath));
         }
 
-        private void RaiseConnectionsSavedEvent(ConnectionTreeModel modelThatWasSaved,
-                                                bool previouslyUsingDatabase,
-                                                bool usingDatabase,
-                                                string connectionFileName)
+        private void RaiseConnectionsSavedEvent(ConnectionTreeModel modelThatWasSaved, bool previouslyUsingDatabase, bool usingDatabase, string connectionFileName)
         {
-            ConnectionsSaved?.Invoke(this,
-                                     new ConnectionsSavedEventArgs(modelThatWasSaved, previouslyUsingDatabase,
-                                                                   usingDatabase,
-                                                                   connectionFileName));
+            ConnectionsSaved?.Invoke(this, new ConnectionsSavedEventArgs(modelThatWasSaved, previouslyUsingDatabase, usingDatabase, connectionFileName));
         }
 
         #endregion

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
@@ -29,9 +31,7 @@ namespace mRemoteNG.UI
         /// <param name="connectionFileName"></param>
         /// <param name="messageText"></param>
         /// <param name="showCancelButton"></param>
-        public static void ShowLoadConnectionsFailedDialog(string connectionFileName,
-                                                           string messageText,
-                                                           bool showCancelButton)
+        public static void ShowLoadConnectionsFailedDialog(string connectionFileName, string messageText, bool showCancelButton)
         {
             var commandButtons = new List<string>
             {
@@ -48,14 +48,7 @@ namespace mRemoteNG.UI
             {
                 try
                 {
-                    CTaskDialog.ShowTaskDialogBox(
-                                                  GeneralAppInfo.ProductName,
-                                                  messageText,
-                                                  "", "", "", "", "",
-                                                  string.Join(" | ", commandButtons),
-                                                  ETaskDialogButtons.None,
-                                                  ESysIcons.Question,
-                                                  ESysIcons.Question);
+                    CTaskDialog.ShowTaskDialogBox(GeneralAppInfo.ProductName, messageText, "", "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
 
                     switch (CTaskDialog.CommandButtonResult)
                     {
@@ -80,12 +73,7 @@ namespace mRemoteNG.UI
                 }
                 catch (Exception exception)
                 {
-                    Runtime.MessageCollector.AddExceptionMessage(
-                                                                 string
-                                                                     .Format(Language.ConnectionsFileCouldNotBeLoadedNew,
-                                                                             connectionFileName),
-                                                                 exception,
-                                                                 MessageClass.WarningMsg);
+                    Runtime.MessageCollector.AddExceptionMessage(string .Format(Language.ConnectionsFileCouldNotBeLoadedNew, connectionFileName), exception, MessageClass.WarningMsg);
                 }
             }
         }
@@ -106,5 +94,17 @@ namespace mRemoteNG.UI
                 Filter = Language.FiltermRemoteXML + @"|*.xml|" + Language.FilterAll + @"|*.*"
             };
         }
+
+        public static CommonOpenFileDialog SelectFolder(string DialogWindowTitle)
+        {
+            return new CommonOpenFileDialog
+            {
+                IsFolderPicker = true,
+                Title = DialogWindowTitle,
+                EnsurePathExists = true,
+                InitialDirectory = Properties.OptionsBackupPage.Default.BackupLocation != "" ? Properties.OptionsBackupPage.Default.BackupLocation : Directory.GetCurrentDirectory()
+            };
+        }
+
     }
 }
