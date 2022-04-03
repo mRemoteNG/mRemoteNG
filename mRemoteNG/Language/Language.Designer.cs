@@ -6489,5 +6489,26 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("lblConnectionsBackupPath", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to PageСontrolInOptionsMenu.
+        /// </summary>
+        internal static string PageСontrolInOptionsMenu
+        {
+            get
+            {
+                return ResourceManager.GetString("PageСontrolInOptionsMenu", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to ShowForUser.
+        /// </summary>
+        internal static string ShowForUser
+        {
+            get
+            {
+                return ResourceManager.GetString("ShowForUser", resourceCulture);
+            }
+        }
     }
 }

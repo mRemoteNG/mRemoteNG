@@ -202,5 +202,17 @@ namespace mRemoteNG.Properties {
                 this["cbBackupLocationACL"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool cbBacupPageInOptionMenu {
+            get {
+                return ((bool)(this["cbBacupPageInOptionMenu"]));
+            }
+            set {
+                this["cbBacupPageInOptionMenu"] = value;
+            }
+        }
     }
 }

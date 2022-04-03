@@ -44,8 +44,8 @@ namespace mRemoteNG.UI.Forms
             btnOK.Text = Language._Ok;
             btnCancel.Text = Language._Cancel;
             btnApply.Text = Language.Apply;
-            ApplyTheme();
-            ThemeManager.getInstance().ThemeChanged += ApplyTheme;
+            //ApplyTheme();
+            //ThemeManager.getInstance().ThemeChanged += ApplyTheme;
             lstOptionPages.SelectedIndexChanged += LstOptionPages_SelectedIndexChanged;
             lstOptionPages.SelectedIndex = 0;
         }
@@ -82,9 +82,16 @@ namespace mRemoteNG.UI.Forms
                 {typeof(ThemePage).Name, new ThemePage {Dock = DockStyle.Fill}},
                 {typeof(SecurityPage).Name, new SecurityPage {Dock = DockStyle.Fill}},
                 {typeof(AdvancedPage).Name, new AdvancedPage {Dock = DockStyle.Fill}},
-                {typeof(BackupPage).Name, new BackupPage {Dock = DockStyle.Fill}},
-                //{typeof(ComponentsPage).Name, new ComponentsPage {Dock = DockStyle.Fill}},
             };
+                       
+            if (Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
+            {
+                _pages.Add(typeof(BackupPage).Name, new BackupPage { Dock = DockStyle.Fill });
+            }
+
+
+                //{typeof(ComponentsPage).Name, new ComponentsPage {Dock = DockStyle.Fill}},
+            
         }
 
         private void AddOptionsPagesToListView()

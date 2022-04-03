@@ -2259,4 +2259,10 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="lblConnectionsBackupMaxCount" xml:space="preserve">
     <value>Maximum number of backups</value>
   </data>
+  <data name="PageСontrolInOptionsMenu" xml:space="preserve">
+    <value>Page control in Options menu</value>
+  </data>
+  <data name="ShowForUser" xml:space="preserve">
+    <value>Show for user</value>
+  </data>
 </root>

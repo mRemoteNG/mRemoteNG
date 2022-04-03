@@ -37,6 +37,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (Properties.rbac.Default.ActiveRole == "AdminRole")
             {
                 lblACL.Visible = true;
+                lblBacupPageShowInOptionsMenu.Visible = true;
+                pnlShowForUser.Visible = true;
+
                 cbBackupEnableACL.Visible = true;
                 cbBackupTypeACL.Visible = true;
                 cbBackupFrequencyACL.Visible = true;
@@ -73,6 +76,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             } else
             {
                 lblACL.Visible = false;
+                lblBacupPageShowInOptionsMenu.Visible = false;
+                pnlShowForUser.Visible = false;
+
                 cbBackupEnableACL.Visible = false;
                 cbBackupTypeACL.Visible = false;
                 cbBackupFrequencyACL.Visible = false;
@@ -153,6 +159,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 //{ new DropdownList( (int)ConnectionsBackupFrequencyEnum.Custom, Language.ConnectionsBackupFrequencyCustom)}
             };
 
+            lblBacupPageShowInOptionsMenu.Text = Language.PageСontrolInOptionsMenu;
+            cbBacupPageInOptionMenu.Text = Language.ShowForUser;
+
             cbBackupEnableACL.BindingContext = new BindingContext();
             cbBackupEnableACL.DataSource = _permissionsListing;
             cbBackupEnableACL.DisplayMember = "DisplayString";
@@ -213,6 +222,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
             }
 
+            cbBacupPageInOptionMenu.Checked = Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu;
             cbBackupEnableACL.SelectedValue = Properties.OptionsBackupPage.Default.cbBackupEnableACL;
             cbBackupTypeACL.SelectedValue = Properties.OptionsBackupPage.Default.cbBackupTypeACL;
             cbBackupFrequencyACL.SelectedValue = Properties.OptionsBackupPage.Default.cbBackupFrequencyACL;
@@ -273,6 +283,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     Properties.OptionsBackupPage.Default.BackupLocation = newFileName;
                 }
             }
+
+            Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu = cbBacupPageInOptionMenu.Checked;
 
             //Obsolete. Set to false
             Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit = false;
