@@ -52,7 +52,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlShowForUser = new System.Windows.Forms.Panel();
             this.cbBacupPageInOptionMenu = new System.Windows.Forms.CheckBox();
             this.lblACL = new System.Windows.Forms.Label();
-            this.plBackupEnableACL = new System.Windows.Forms.Panel();
+            this.plBackupEnable = new System.Windows.Forms.Panel();
             this.cbBackupEnableACL = new System.Windows.Forms.ComboBox();
             this.plBackupType = new System.Windows.Forms.Panel();
             this.cbBackupTypeACL = new System.Windows.Forms.ComboBox();
@@ -69,7 +69,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlBackupEnable.SuspendLayout();
             this.pnlBackupType.SuspendLayout();
             this.pnlShowForUser.SuspendLayout();
-            this.plBackupEnableACL.SuspendLayout();
+            this.plBackupEnable.SuspendLayout();
             this.plBackupType.SuspendLayout();
             this.plBackupFrequency.SuspendLayout();
             this.plBackupNumber.SuspendLayout();
@@ -101,7 +101,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.tableLayoutPanelBackupFile.Controls.Add(this.lblBacupPageShowInOptionsMenu, 1, 0);
             this.tableLayoutPanelBackupFile.Controls.Add(this.pnlShowForUser, 2, 0);
             this.tableLayoutPanelBackupFile.Controls.Add(this.lblACL, 0, 0);
-            this.tableLayoutPanelBackupFile.Controls.Add(this.plBackupEnableACL, 0, 1);
+            this.tableLayoutPanelBackupFile.Controls.Add(this.plBackupEnable, 0, 1);
             this.tableLayoutPanelBackupFile.Controls.Add(this.plBackupType, 0, 2);
             this.tableLayoutPanelBackupFile.Controls.Add(this.plBackupFrequency, 0, 3);
             this.tableLayoutPanelBackupFile.Controls.Add(this.plBackupNumber, 0, 4);
@@ -356,15 +356,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblACL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblACL.Visible = false;
             // 
-            // plBackupEnableACL
+            // plBackupEnable
             // 
-            this.plBackupEnableACL.BackColor = System.Drawing.Color.Salmon;
-            this.plBackupEnableACL.Controls.Add(this.cbBackupEnableACL);
-            this.plBackupEnableACL.Location = new System.Drawing.Point(0, 27);
-            this.plBackupEnableACL.Margin = new System.Windows.Forms.Padding(0);
-            this.plBackupEnableACL.Name = "plBackupEnableACL";
-            this.plBackupEnableACL.Size = new System.Drawing.Size(100, 30);
-            this.plBackupEnableACL.TabIndex = 38;
+            this.plBackupEnable.BackColor = System.Drawing.Color.Salmon;
+            this.plBackupEnable.Controls.Add(this.cbBackupEnableACL);
+            this.plBackupEnable.Location = new System.Drawing.Point(0, 27);
+            this.plBackupEnable.Margin = new System.Windows.Forms.Padding(0);
+            this.plBackupEnable.Name = "plBackupEnable";
+            this.plBackupEnable.Size = new System.Drawing.Size(100, 30);
+            this.plBackupEnable.TabIndex = 38;
+            this.plBackupEnable.Visible = false;
             // 
             // cbBackupEnableACL
             // 
@@ -388,13 +389,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.plBackupType.Name = "plBackupType";
             this.plBackupType.Size = new System.Drawing.Size(100, 30);
             this.plBackupType.TabIndex = 39;
+            this.plBackupType.Visible = false;
             // 
             // cbBackupTypeACL
             // 
             this.cbBackupTypeACL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbBackupTypeACL.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBackupTypeACL.FormattingEnabled = true;
-            this.cbBackupTypeACL.Location = new System.Drawing.Point(3, 6);
+            this.cbBackupTypeACL.Location = new System.Drawing.Point(3, 5);
             this.cbBackupTypeACL.MaxDropDownItems = 3;
             this.cbBackupTypeACL.Name = "cbBackupTypeACL";
             this.cbBackupTypeACL.Size = new System.Drawing.Size(94, 21);
@@ -410,6 +412,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.plBackupFrequency.Name = "plBackupFrequency";
             this.plBackupFrequency.Size = new System.Drawing.Size(100, 30);
             this.plBackupFrequency.TabIndex = 40;
+            this.plBackupFrequency.Visible = false;
             // 
             // cbBackupFrequencyACL
             // 
@@ -432,13 +435,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.plBackupNumber.Name = "plBackupNumber";
             this.plBackupNumber.Size = new System.Drawing.Size(100, 30);
             this.plBackupNumber.TabIndex = 41;
+            this.plBackupNumber.Visible = false;
             // 
             // cbBackupNumberACL
             // 
             this.cbBackupNumberACL.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbBackupNumberACL.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBackupNumberACL.FormattingEnabled = true;
-            this.cbBackupNumberACL.Location = new System.Drawing.Point(3, 6);
+            this.cbBackupNumberACL.Location = new System.Drawing.Point(3, 5);
             this.cbBackupNumberACL.MaxDropDownItems = 3;
             this.cbBackupNumberACL.Name = "cbBackupNumberACL";
             this.cbBackupNumberACL.Size = new System.Drawing.Size(94, 21);
@@ -454,6 +458,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.plBackupNameFormat.Name = "plBackupNameFormat";
             this.plBackupNameFormat.Size = new System.Drawing.Size(100, 30);
             this.plBackupNameFormat.TabIndex = 42;
+            this.plBackupNameFormat.Visible = false;
             // 
             // cbBackupNameFormatACL
             // 
@@ -476,6 +481,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.plBackupLocation.Name = "plBackupLocation";
             this.plBackupLocation.Size = new System.Drawing.Size(100, 30);
             this.plBackupLocation.TabIndex = 43;
+            this.plBackupLocation.Visible = false;
             // 
             // cbBackupLocationACL
             // 
@@ -505,7 +511,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.pnlBackupType.PerformLayout();
             this.pnlShowForUser.ResumeLayout(false);
             this.pnlShowForUser.PerformLayout();
-            this.plBackupEnableACL.ResumeLayout(false);
+            this.plBackupEnable.ResumeLayout(false);
             this.plBackupType.ResumeLayout(false);
             this.plBackupFrequency.ResumeLayout(false);
             this.plBackupNumber.ResumeLayout(false);
@@ -543,7 +549,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.Label lblBacupPageShowInOptionsMenu;
         private System.Windows.Forms.CheckBox cbBacupPageInOptionMenu;
         private System.Windows.Forms.Panel pnlShowForUser;
-        private System.Windows.Forms.Panel plBackupEnableACL;
+        private System.Windows.Forms.Panel plBackupEnable;
         private System.Windows.Forms.Panel plBackupType;
         private System.Windows.Forms.Panel plBackupFrequency;
         private System.Windows.Forms.Panel plBackupNumber;

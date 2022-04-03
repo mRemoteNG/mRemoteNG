@@ -40,6 +40,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 lblBacupPageShowInOptionsMenu.Visible = true;
                 pnlShowForUser.Visible = true;
 
+                plBackupEnable.Visible = true;
+                plBackupType.Visible = true;
+                plBackupFrequency.Visible = true;
+                plBackupNumber.Visible = true;
+                plBackupNameFormat.Visible = true;
+                plBackupLocation.Visible = true;
+
                 cbBackupEnableACL.Visible = true;
                 cbBackupTypeACL.Visible = true;
                 cbBackupFrequencyACL.Visible = true;
