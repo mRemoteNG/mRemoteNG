@@ -14,5 +14,8 @@
     <Setting Name="EncryptionKeyDerivationIterations" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10000</Value>
     </Setting>
+    <Setting Name="cbSecurityPageInOptionMenu" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

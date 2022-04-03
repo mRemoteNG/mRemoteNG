@@ -184,5 +184,17 @@ namespace mRemoteNG.Properties {
                 this["CheckForUpdatesAsked"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool cbUpdatesPageInOptionMenu {
+            get {
+                return ((bool)(this["cbUpdatesPageInOptionMenu"]));
+            }
+            set {
+                this["cbUpdatesPageInOptionMenu"] = value;
+            }
+        }
     }
 }

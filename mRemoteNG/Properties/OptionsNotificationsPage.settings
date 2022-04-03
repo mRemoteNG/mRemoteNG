@@ -53,5 +53,8 @@
     <Setting Name="TextLogMessageWriterWriteWarningMsgs" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="cbNotificationsPageInOptionMenu" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

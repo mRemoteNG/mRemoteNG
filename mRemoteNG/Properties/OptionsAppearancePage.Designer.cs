@@ -82,5 +82,17 @@ namespace mRemoteNG.Properties {
                 this["ShowCompleteConsPathInTitle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool cbAppearancePageInOptionMenu {
+            get {
+                return ((bool)(this["cbAppearancePageInOptionMenu"]));
+            }
+            set {
+                this["cbAppearancePageInOptionMenu"] = value;
+            }
+        }
     }
 }

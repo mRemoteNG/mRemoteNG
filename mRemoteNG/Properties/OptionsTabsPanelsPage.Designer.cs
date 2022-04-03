@@ -142,5 +142,17 @@ namespace mRemoteNG.Properties {
                 this["AlwaysShowPanelSelectionDlg"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool cbTabsPanelsPageInOptionMenu {
+            get {
+                return ((bool)(this["cbTabsPanelsPageInOptionMenu"]));
+            }
+            set {
+                this["cbTabsPanelsPageInOptionMenu"] = value;
+            }
+        }
     }
 }

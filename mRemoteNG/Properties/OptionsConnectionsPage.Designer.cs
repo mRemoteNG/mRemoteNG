@@ -46,5 +46,17 @@ namespace mRemoteNG.Properties {
                 this["ConnectrionFilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool cbConnectionsPageInOptionMenu {
+            get {
+                return ((bool)(this["cbConnectionsPageInOptionMenu"]));
+            }
+            set {
+                this["cbConnectionsPageInOptionMenu"] = value;
+            }
+        }
     }
 }

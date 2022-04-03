@@ -106,5 +106,17 @@ namespace mRemoteNG.Properties {
                 this["SQLPass"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool cbDBsPageInOptionMenu {
+            get {
+                return ((bool)(this["cbDBsPageInOptionMenu"]));
+            }
+            set {
+                this["cbDBsPageInOptionMenu"] = value;
+            }
+        }
     }
 }

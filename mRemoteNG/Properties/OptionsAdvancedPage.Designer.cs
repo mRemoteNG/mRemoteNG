@@ -94,5 +94,17 @@ namespace mRemoteNG.Properties {
                 this["RdpLoadBalanceInfoUseUtf8"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool cbAdvancedPageInOptionMenu {
+            get {
+                return ((bool)(this["cbAdvancedPageInOptionMenu"]));
+            }
+            set {
+                this["cbAdvancedPageInOptionMenu"] = value;
+            }
+        }
     }
 }

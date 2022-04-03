@@ -25,7 +25,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UserRole")]
+        [global::System.Configuration.DefaultSettingValueAttribute("AdminRole")]
         public string ActiveRole {
             get {
                 return ((string)(this["ActiveRole"]));

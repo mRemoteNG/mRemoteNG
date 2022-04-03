@@ -226,5 +226,17 @@ namespace mRemoteNG.Properties {
                 this["TextLogMessageWriterWriteWarningMsgs"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool cbNotificationsPageInOptionMenu {
+            get {
+                return ((bool)(this["cbNotificationsPageInOptionMenu"]));
+            }
+            set {
+                this["cbNotificationsPageInOptionMenu"] = value;
+            }
+        }
     }
 }

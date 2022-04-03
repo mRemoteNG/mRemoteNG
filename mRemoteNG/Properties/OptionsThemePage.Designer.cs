@@ -46,5 +46,17 @@ namespace mRemoteNG.Properties {
                 this["ThemeName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool cbThemePageInOptionMenu {
+            get {
+                return ((bool)(this["cbThemePageInOptionMenu"]));
+            }
+            set {
+                this["cbThemePageInOptionMenu"] = value;
+            }
+        }
     }
 }

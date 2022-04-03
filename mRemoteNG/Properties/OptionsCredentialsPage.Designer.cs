@@ -82,5 +82,17 @@ namespace mRemoteNG.Properties {
                 this["EmptyCredentials"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool cbCredentialsPageInOptionMenu {
+            get {
+                return ((bool)(this["cbCredentialsPageInOptionMenu"]));
+            }
+            set {
+                this["cbCredentialsPageInOptionMenu"] = value;
+            }
+        }
     }
 }
