@@ -569,6 +569,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.Inheritance.UserViaAPI = xmlnode.GetAttributeAsBool("InheritUserViaAPI");
                     connectionInfo.EC2InstanceId = xmlnode.GetAttributeAsString("EC2InstanceId");
                     connectionInfo.EC2Region = xmlnode.GetAttributeAsString("EC2Region");
+                    connectionInfo.UseRestrictedAdmin = xmlnode.GetAttributeAsBool("UseRestrictedAdmin");
+                    connectionInfo.Inheritance.UseRestrictedAdmin = xmlnode.GetAttributeAsBool("InheritUseRestrictedAdmin");
+                    connectionInfo.UseRCG = xmlnode.GetAttributeAsBool("UseRCG");
+                    connectionInfo.Inheritance.UseRCG = xmlnode.GetAttributeAsBool("InheritUseRCG");
                 }
             }
             catch (Exception ex)

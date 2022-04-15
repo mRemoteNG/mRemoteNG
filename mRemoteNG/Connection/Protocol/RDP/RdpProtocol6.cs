@@ -307,6 +307,16 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 _rdpClient.AdvancedSettings7.EnableCredSspSupport = connectionInfo.UseCredSsp;
             }
+            if(_rdpVersion >= Versions.RDC81)
+            {
+                if (connectionInfo.UseRestrictedAdmin)
+                    SetExtendedProperty("RestrictedLogon", true);
+                else if (connectionInfo.UseRCG)
+                {
+                    SetExtendedProperty("DisableCredentialsDelegation", true);
+                    SetExtendedProperty("RedirectedAuthentication", true);
+                }
+            }
 
             SetUseConsoleSession();
             SetPort();

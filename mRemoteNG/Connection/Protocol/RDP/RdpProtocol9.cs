@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using AxMSTSCLib;
 using MSTSCLib;
 
@@ -20,5 +21,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             RdpClient9.UpdateSessionDisplaySettings(width, height, width, height, 0, 1, 1);
         }
+
     }
 }

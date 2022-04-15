@@ -97,6 +97,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 Favorite = true,
                 UseConsoleSession = true,
                 UseCredSsp = true,
+                UseRestrictedAdmin = true,
+                UseRCG = true,
                 UseVmId = false,
                 UseEnhancedMode = false,
                 RenderingEngine = HTTPBase.RenderingEngine.EdgeChromium,

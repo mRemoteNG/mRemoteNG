@@ -226,6 +226,18 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.UseCredSsp = value;
             }
 
+            if (headers.Contains("UseRestrictedAdmin"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("UseRestrictedAdmin")], out bool value))
+                    connectionRecord.UseRestrictedAdmin = value;
+            }
+            if (headers.Contains("UseRCG"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("UseRCG")], out bool value))
+                    connectionRecord.UseRCG = value;
+            }
+
+
             if (headers.Contains("UseVmId"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("UseVmId")], out bool value))
@@ -635,6 +647,19 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseCredSsp")], out bool value))
                     connectionRecord.Inheritance.UseCredSsp = value;
             }
+
+            if (headers.Contains("InheritUseRestrictedAdmin"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseRestrictedAdmin")], out bool value))
+                    connectionRecord.Inheritance.UseRestrictedAdmin = value;
+            }
+
+            if (headers.Contains("InheritUseRCG"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseRCG")], out bool value))
+                    connectionRecord.Inheritance.UseRCG = value;
+            }
+
 
             if (headers.Contains("InheritUseVmId"))
             {

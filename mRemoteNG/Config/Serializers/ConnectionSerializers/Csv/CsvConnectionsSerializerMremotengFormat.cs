@@ -56,7 +56,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             if (_saveFilter.SaveDomain)
                 sb.Append("Domain;");
 
-            sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;OpeningCommand;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
+            sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;OpeningCommand;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseRestrictedAdmin;UseRCG;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
                       "LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;DisableFullWindowDrag;DisableMenuAnimations;DisableCursorShadow;DisableCursorBlinking;" +
                       "CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
                       "PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                           "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDisableFullWindowDrag;InheritDisableMenuAnimations;InheritDisableCursorShadow;InheritDisableCursorBlinking;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;" +
                           "InheritProtocol;InheritSSHTunnelConnectionName;InheritOpeningCommand;InheritSSHOptions;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
                           "InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;" +
-                          "InheritUseConsoleSession;InheritUseCredSsp;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritRenderingEngine;InheritUsername;" +
+                          "InheritUseConsoleSession;InheritUseCredSsp;InheritUseRestrictedAdmin;InheritUseRCG;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritRenderingEngine;InheritUsername;" +
                           "InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;" +
                           "InheritFavorite;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;" +
                           "InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;" +
@@ -125,6 +125,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.PuttySession))
               .Append(FormatForCsv(con.UseConsoleSession))
               .Append(FormatForCsv(con.UseCredSsp))
+              .Append(FormatForCsv(con.UseRestrictedAdmin))
+              .Append(FormatForCsv(con.UseRCG))
               .Append(FormatForCsv(con.UseVmId))
               .Append(FormatForCsv(con.UseEnhancedMode))
               .Append(FormatForCsv(con.RenderingEngine))
@@ -216,6 +218,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.AutomaticResize))
               .Append(FormatForCsv(con.Inheritance.UseConsoleSession))
               .Append(FormatForCsv(con.Inheritance.UseCredSsp))
+              .Append(FormatForCsv(con.Inheritance.UseRestrictedAdmin))
+              .Append(FormatForCsv(con.Inheritance.UseRCG))
               .Append(FormatForCsv(con.Inheritance.UseVmId))
               .Append(FormatForCsv(con.Inheritance.UseEnhancedMode))
               .Append(FormatForCsv(con.Inheritance.VmId))

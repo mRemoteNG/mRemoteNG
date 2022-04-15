@@ -238,6 +238,8 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RDPMinutesToIdleTimeout),
                         nameof(ConnectionInfo.LoadBalanceInfo),
                         nameof(ConnectionInfo.UseCredSsp),
+                        nameof(ConnectionInfo.UseRestrictedAdmin),
+                        nameof(ConnectionInfo.UseRCG),
                         nameof(ConnectionInfo.RDGatewayUsageMethod),
                         nameof(ConnectionInfo.Resolution),
                         nameof(ConnectionInfo.Colors),

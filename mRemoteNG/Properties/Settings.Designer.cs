@@ -1390,6 +1390,70 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultUseCredSsp"] = value;
             }
         }
+
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultUseRestrictedAdmin
+        {
+            get
+            {
+                return ((bool)(this["InhDefaultUseRestrictedAdmin"]));
+            }
+            set
+            {
+                this["InhDefaultUseRestrictedAdmin"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConDefaultUseRestrictedAdmin
+        {
+            get
+            {
+                return ((bool)(this["ConDefaultUseRestrictedAdmin"]));
+            }
+            set
+            {
+                this["ConDefaultUseRestrictedAdmin"] = value;
+            }
+        }
+
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultUseRCG
+        {
+            get
+            {
+                return ((bool)(this["InhDefaultUseRCG"]));
+            }
+            set
+            {
+                this["InhDefaultUseRCG"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConDefaultUseRCG
+        {
+            get
+            {
+                return ((bool)(this["ConDefaultUseRCG"]));
+            }
+            set
+            {
+                this["ConDefaultUseRCG"] = value;
+            }
+        }
+
+       
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
