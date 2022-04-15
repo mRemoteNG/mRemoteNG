@@ -1086,6 +1086,15 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PropertyDescriptionUseCredSsp" xml:space="preserve">
     <value>Use the Credential Security Support Provider (CredSSP) for authentication if it is available.</value>
   </data>
+
+  <data name="PropertyDescriptionUseRestrictedAdmin" xml:space="preserve">
+    <value>Use restricted admin mode on the target host (local system context).</value>
+  </data>
+
+  <data name="PropertyDescriptionUseRemoteCredentialGuard" xml:space="preserve">
+    <value>Use Remote Credential Guard to tunnel authentication on target back to source through the RDP channel.</value>
+  </data>
+
   <data name="PropertyDescriptionUser1" xml:space="preserve">
     <value>Feel free to enter any information you need here.</value>
   </data>
@@ -1239,6 +1248,15 @@ If you run into such an error, please create a new connection file!</value>
   <data name="UseCredSsp" xml:space="preserve">
     <value>Use CredSSP</value>
   </data>
+
+  <data name="UseRestrictedAdmin" xml:space="preserve">
+    <value>Use Restricted Admin</value>
+  </data>
+  <data name="UseRCG" xml:space="preserve">
+    <value>Use Remote Credential Guard</value>
+  </data>
+
+
   <data name="UserField" xml:space="preserve">
     <value>User Field</value>
   </data>

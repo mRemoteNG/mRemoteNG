@@ -116,6 +116,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("PuttySession", typeof(string));
             dataTable.Columns.Add("ConnectToConsole", typeof(bool));
             dataTable.Columns.Add("UseCredSsp", typeof(bool));
+            dataTable.Columns.Add("UseRestrictedAdmin", typeof(bool));
+            dataTable.Columns.Add("UseRCG", typeof(bool));
             dataTable.Columns.Add("RenderingEngine", typeof(string));
             dataTable.Columns.Add("RDPAuthenticationLevel", typeof(string));
             dataTable.Columns.Add("Colors", typeof(string));
@@ -192,6 +194,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("InheritResolution", typeof(bool));
             dataTable.Columns.Add("InheritUseConsoleSession", typeof(bool));
             dataTable.Columns.Add("InheritUseCredSsp", typeof(bool));
+            dataTable.Columns.Add("InheritUseRestrictedAdmin", typeof(bool));
+            dataTable.Columns.Add("InheritUseRCG", typeof(bool));
             dataTable.Columns.Add("InheritRenderingEngine", typeof(bool));
             dataTable.Columns.Add("InheritRDPAuthenticationLevel", typeof(bool));
             dataTable.Columns.Add("InheritUsername", typeof(bool));
@@ -284,6 +288,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["ConnectToConsole"].Equals(connectionInfo.UseConsoleSession);
             isFieldNotChange = isFieldNotChange &&
             dataRow["UseCredSsp"].Equals(connectionInfo.UseCredSsp);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["UseRestrictedAdmin"].Equals(connectionInfo.UseRestrictedAdmin);
+            isFieldNotChange = isFieldNotChange &&
+            dataRow["UseRCG"].Equals(connectionInfo.UseRCG);
             isFieldNotChange = isFieldNotChange &&
             dataRow["UseVmId"].Equals(connectionInfo.UseVmId);
             isFieldNotChange = isFieldNotChange &&
@@ -385,6 +393,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritAutomaticResize"].Equals(connectionInfo.Inheritance.AutomaticResize) &&
                 dataRow["InheritUseConsoleSession"].Equals(connectionInfo.Inheritance.UseConsoleSession) &&
                 dataRow["InheritUseCredSsp"].Equals(connectionInfo.Inheritance.UseCredSsp) &&
+                dataRow["InheritUseRestrictedAdmin"].Equals(connectionInfo.Inheritance.UseRestrictedAdmin) &&
+                dataRow["InheritUseRCG"].Equals(connectionInfo.Inheritance.UseRCG) &&
                 dataRow["InheritRenderingEngine"].Equals(connectionInfo.Inheritance.RenderingEngine) &&
                 dataRow["InheritUsername"].Equals(connectionInfo.Inheritance.Username) &&
                 dataRow["InheritVmId"].Equals(connectionInfo.Inheritance.VmId) &&
@@ -452,6 +462,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritAutomaticResize"].Equals(false) &&
                 dataRow["InheritUseConsoleSession"].Equals(false) &&
                 dataRow["InheritUseCredSsp"].Equals(false) &&
+                dataRow["InheritUseRestrictedAdmin"].Equals(false) &&
+                dataRow["InheritUseRCG"].Equals(false) &&
                 dataRow["InheritRenderingEngine"].Equals(false) &&
                 dataRow["InheritUsername"].Equals(false) &&
                 dataRow["InheritRDPAuthenticationLevel"].Equals(false) &&
@@ -534,6 +546,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["Port"] = connectionInfo.Port;
             dataRow["ConnectToConsole"] = connectionInfo.UseConsoleSession;
             dataRow["UseCredSsp"] = connectionInfo.UseCredSsp;
+            dataRow["UseRestrictedAdmin"] = connectionInfo.UseRestrictedAdmin;
+            dataRow["UseRCG"] = connectionInfo.UseRCG;
             dataRow["UseVmId"] = connectionInfo.UseVmId;
             dataRow["UseEnhancedMode"] = connectionInfo.UseEnhancedMode;
             dataRow["RenderingEngine"] = connectionInfo.RenderingEngine;
@@ -629,6 +643,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritAutomaticResize"] = connectionInfo.Inheritance.AutomaticResize;
                 dataRow["InheritUseConsoleSession"] = connectionInfo.Inheritance.UseConsoleSession;
                 dataRow["InheritUseCredSsp"] = connectionInfo.Inheritance.UseCredSsp;
+                dataRow["InheritUseRestrictedAdmin"] = connectionInfo.Inheritance.UseRestrictedAdmin;
+                dataRow["InheritUseRCG"] = connectionInfo.Inheritance.UseRCG;
                 dataRow["InheritRenderingEngine"] = connectionInfo.Inheritance.RenderingEngine;
                 dataRow["InheritUsername"] = connectionInfo.Inheritance.Username;
                 dataRow["InheritVmId"] = connectionInfo.Inheritance.VmId;
@@ -700,6 +716,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritAutomaticResize"] = false;
                 dataRow["InheritUseConsoleSession"] = false;
                 dataRow["InheritUseCredSsp"] = false;
+                dataRow["InheritUseRestrictedAdmin"] = false;
+                dataRow["InheritUseRCG"] = false;
                 dataRow["InheritRenderingEngine"] = false;
                 dataRow["InheritUsername"] = false;
                 dataRow["InheritRDPAuthenticationLevel"] = false;

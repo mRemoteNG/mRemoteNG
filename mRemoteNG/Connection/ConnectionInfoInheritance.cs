@@ -185,6 +185,18 @@ namespace mRemoteNG.Connection
         public bool UseCredSsp { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UseRestrictedAdmin)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseRestrictedAdmin)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UseRestrictedAdmin { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UseRCG)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseRCG)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool UseRCG { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.UseVmId)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionUseVmId)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]

@@ -338,12 +338,27 @@
     <Setting Name="ConfirmCloseConnection" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4</Value>
     </Setting>
+    
     <Setting Name="InhDefaultUseCredSsp" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultUseCredSsp" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+
+    <Setting Name="InhDefaultUseRestrictedAdmin" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultUseRestrictedAdmin" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="InhDefaultUseRCG" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultUseRCG" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+
     <Setting Name="ConDefaultUseVmId" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

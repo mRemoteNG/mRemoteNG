@@ -4059,7 +4059,29 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PropertyDescriptionUseCredSsp", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string for UseRestrictedAdmin Description
+        /// </summary>
+        internal static string PropertyDescriptionUseRestrictedAdmin
+        {
+            get
+            {
+                return ResourceManager.GetString("PropertyDescriptionUseRestrictedAdmin", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string for UseRCG Description
+        /// </summary>
+        internal static string PropertyDescriptionUseRCG
+        {
+            get
+            {
+                return ResourceManager.GetString("PropertyDescriptionUseRCG", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Connect to a Hyper-V host with enhanced mode enabled..
         /// </summary>
@@ -6081,7 +6103,29 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("UseCredSsp", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to UseRestrictedAdmin.
+        /// </summary>
+        internal static string UseRestrictedAdmin
+        {
+            get
+            {
+                return ResourceManager.GetString("UseRestrictedAdmin", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to UseRestrictedAdmin.
+        /// </summary>
+        internal static string UseRCG
+        {
+            get
+            {
+                return ResourceManager.GetString("UseRCG", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Use default.
         /// </summary>

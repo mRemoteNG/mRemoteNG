@@ -45,6 +45,8 @@ namespace mRemoteNG.Connection
         private string _loadBalanceInfo;
         private HTTPBase.RenderingEngine _renderingEngine;
         private bool _useCredSsp;
+        private bool _useRestrictedAdmin;
+        private bool _useRCG;
         private bool _useVmId;
 
         private RDGatewayUsageMethod _rdGatewayUsageMethod;
@@ -392,6 +394,28 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("UseCredSsp", _useCredSsp);
             set => SetField(ref _useCredSsp, value, "UseCredSsp");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.UseRestrictedAdmin)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUseRestrictedAdmin)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public bool UseRestrictedAdmin
+        {
+            get => GetPropertyValue("UseRestrictedAdmin", _useRestrictedAdmin);
+            set => SetField(ref _useRestrictedAdmin, value, "UseRestrictedAdmin");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.UseRCG)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUseRCG)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public bool UseRCG
+        {
+            get => GetPropertyValue("UseRCG", _useRCG);
+            set => SetField(ref _useRCG, value, "UseRCG");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),

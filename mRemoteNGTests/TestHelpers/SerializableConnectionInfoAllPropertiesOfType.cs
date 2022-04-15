@@ -23,6 +23,8 @@
 		public TType LoadBalanceInfo { get; set; }
 		public TType RenderingEngine { get; set; }
 		public TType UseCredSsp { get; set; }
+		public TType UseRestrictedAdmin { get; set; }
+		public TType UseRCG { get; set; }
 		public TType RDGatewayUsageMethod { get; set; }
 		public TType RDGatewayHostname { get; set; }
 		public TType RDGatewayUseConnectionCredentials { get; set; }

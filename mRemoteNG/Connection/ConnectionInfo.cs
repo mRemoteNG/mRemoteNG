@@ -312,6 +312,8 @@ namespace mRemoteNG.Connection
             LoadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
             RenderingEngine = (HTTPBase.RenderingEngine)Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
             UseCredSsp = Settings.Default.ConDefaultUseCredSsp;
+            UseRestrictedAdmin = Settings.Default.ConDefaultUseRestrictedAdmin;
+            UseRCG = Settings.Default.ConDefaultUseRCG;
             UseVmId = Settings.Default.ConDefaultUseVmId;
             UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
         }

@@ -187,6 +187,24 @@ namespace mRemoteNGTests.Connection
         }
 
         [Test]
+        public void UseRestrictedAdminNotifiesOnValueChange()
+        {
+            var wasCalled = false;
+            _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
+            _testAbstractConnectionInfoData.UseRestrictedAdmin = true;
+            Assert.That(wasCalled, Is.True);
+        }
+
+        [Test]
+        public void UseRCGNotifiesOnValueChange()
+        {
+            var wasCalled = false;
+            _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
+            _testAbstractConnectionInfoData.UseRCG = true;
+            Assert.That(wasCalled, Is.True);
+        }
+
+        [Test]
         public void RdGatewayUsageMethodNotifiesOnValueChange()
         {
             var wasCalled = false;
