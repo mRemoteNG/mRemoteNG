@@ -1091,7 +1091,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Use restricted admin mode on the target host (local system context).</value>
   </data>
 
-  <data name="PropertyDescriptionUseRemoteCredentialGuard" xml:space="preserve">
+  <data name="PropertyDescriptionUseRCG" xml:space="preserve">
     <value>Use Remote Credential Guard to tunnel authentication on target back to source through the RDP channel.</value>
   </data>
 
