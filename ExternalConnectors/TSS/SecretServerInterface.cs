@@ -194,15 +194,24 @@ namespace ExternalConnectors.TSS
                     }
                     catch (Exception)
                     {
-                        // refresh token failed. maybe the refresh time is over? try to fetch a fresh one.
-                        // if OTP is used we need to ask user for a new OTP
+                        // refresh token failed. clean memory and start fresh
+                        SSConnectionData.ssTokenBearer = "";
+                        SSConnectionData.ssTokenRefresh = "";
+                        SSConnectionData.ssTokenExpiresOn = DateTime.Now;
+                        // if OTP is required we need to ask user for a new OTP
                         if (!String.IsNullOrEmpty(SSConnectionData.ssOTP))
                         {
                             SSConnectionData.initdone = false;
+                            // the call below executes a connection test, which fetches a valid token
                             SSConnectionData.Init();
+                            // we now have a fresh token in memory. return it to caller
+                            return SSConnectionData.ssTokenBearer;
                         }
-                        // get a fresh token
-                        return GetTokenFresh();
+                        else
+                        {
+                            // no user interaction required. get a fresh token and return it to caller
+                            return GetTokenFresh();
+                        }
                     }
                 }
             }
