@@ -12,6 +12,9 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv.RemoteDesktopManager;
 
+/// <summary>
+///     Import of connections from the Remote Desktop Manager (RDM) in a CSV file format
+/// </summary>
 public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string, ConnectionTreeModel>
 {
     private readonly List<RemoteDesktopManagerConnectionInfo> _connectionTypes;
@@ -21,8 +24,8 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
     {
         _connectionTypes = new List<RemoteDesktopManagerConnectionInfo>
         {
-            new(ProtocolType.RDP, "RDP (Microsoft Remote Desktop)", 3389),
-            new(ProtocolType.SSH2, "SSH Shell", 22)
+            new(ProtocolType.RDP, "RDP (Microsoft Remote Desktop)", 3389, "Remote Desktop"),
+            new(ProtocolType.SSH2, "SSH Shell", 22, "SSH")
         };
 
         _groups = new HashSet<string>();
@@ -32,6 +35,11 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
 
     private List<ContainerInfo> Containers { get; }
 
+    /// <summary>
+    ///     Deserializes the CSV file into a <see cref="ConnectionTreeModel" />
+    /// </summary>
+    /// <param name="serializedData">Data from the CSV file</param>
+    /// <returns></returns>
     public ConnectionTreeModel Deserialize(string serializedData)
     {
         var lines = serializedData.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -75,11 +83,18 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
                 container.AddChild(connection);
             }
 
-        connectionTreeModel.AddRootNode(unsortedConnections);
+        if (unsortedConnections.HasChildren())
+            connectionTreeModel.AddRootNode(unsortedConnections);
 
         return connectionTreeModel;
     }
 
+    /// <summary>
+    ///     Parses a line from the CSV file and returns <see cref="ConnectionInfo" />
+    /// </summary>
+    /// <param name="headers">CSV Headers</param>
+    /// <param name="connectionCsv">CSV Columns</param>
+    /// <returns></returns>
     private (ConnectionInfo connectionInfo, string) ParseConnectionInfo(IList<string> headers, IReadOnlyList<string> connectionCsv)
     {
         if (headers.Count != connectionCsv.Count) return default;
@@ -115,6 +130,7 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
             Username = username,
             Password = password,
             Domain = domain,
+            Icon = connectionType.IconName ?? "mRemoteNG",
             Description = description,
             Protocol = connectionType.Protocol
         };
@@ -124,6 +140,7 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
             {
                 var groupParts = group.Split('\\').ToList();
                 var parentContainerName = groupParts[0];
+
                 var parentContainer = Containers.FirstOrDefault(x => x.Name == parentContainerName);
                 if (parentContainer == default)
                 {
@@ -139,6 +156,12 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
         return string.IsNullOrEmpty(group) ? (connectionInfo, default) : (connectionInfo, group);
     }
 
+    /// <summary>
+    ///     Adds a child to a container recursively
+    /// </summary>
+    /// <param name="group">Full path of the RDM Grouping</param>
+    /// <param name="groupParts">Segements of the group path</param>
+    /// <param name="parentContainer">Parent container to add children to</param>
     private void AddChildrenRecursive(string group, IList<string> groupParts, ContainerInfo parentContainer)
     {
         if (_groups.Contains(group)) return;
@@ -178,6 +201,13 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
         }
     }
 
+    /// <summary>
+    ///     Adds a child to a container and returns the remaining group count
+    /// </summary>
+    /// <param name="parentContainer">Parent container</param>
+    /// <param name="newContainer">New child container</param>
+    /// <param name="groupCount">Remaining group count</param>
+    /// <returns></returns>
     private static int AddChild(ContainerInfo parentContainer, ContainerInfo newContainer, int groupCount)
     {
         parentContainer.AddChild(newContainer);
@@ -186,4 +216,11 @@ public partial class CsvConnectionsDeserializerRdmFormat : IDeserializer<string,
     }
 }
 
-internal sealed record RemoteDesktopManagerConnectionInfo(ProtocolType Protocol, string Name, int Port);
+/// <summary>
+///     Record of supported connection types
+/// </summary>
+/// <param name="Protocol">Procotol</param>
+/// <param name="Name">Display Name</param>
+/// <param name="Port">Default Port</param>
+/// <param name="IconName">Icon Name</param>
+internal sealed record RemoteDesktopManagerConnectionInfo(ProtocolType Protocol, string Name, int Port, string IconName);
