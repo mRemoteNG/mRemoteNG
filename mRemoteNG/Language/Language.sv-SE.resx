@@ -1,0 +1,2175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>Om</value>
+  </data>
+  <data name="AddNodeFromXmlFailed" xml:space="preserve">
+    <value>AddNodeFromXML misslyckades!</value>
+  </data>
+  <data name="AllowOnlySingleInstance" xml:space="preserve">
+    <value>Tillåt endast en enda instans av programmet (mRemoteNG omstart krävs)</value>
+  </data>
+  <data name="Always" xml:space="preserve">
+    <value>Alltid</value>
+  </data>
+  <data name="AlwaysConnectEvenIfAuthFails" xml:space="preserve">
+    <value>Anslut alltid, även om autentisering misslyckas</value>
+  </data>
+  <data name="AlwaysShowPanelSelection" xml:space="preserve">
+    <value>Visa alltid panelen urvalsdialog när anslutningar öppnas</value>
+  </data>
+  <data name="AlwaysShowPanelTabs" xml:space="preserve">
+    <value>Visa alltid panelen flikar</value>
+  </data>
+  <data name="AlwaysShowSysTrayIcon" xml:space="preserve">
+    <value>Visa alltid ikon i aktivitetsfältet</value>
+  </data>
+  <data name="AskUpdatesCommandAskLater" xml:space="preserve">
+    <value>Fråga mig igen senare</value>
+  </data>
+  <data name="AskUpdatesCommandCustom" xml:space="preserve">
+    <value>Anpassa inställningarna nu</value>
+  </data>
+  <data name="AskUpdatesCommandRecommended" xml:space="preserve">
+    <value>Använd rekommenderade inställningar</value>
+  </data>
+  <data name="AskUpdatesContent" xml:space="preserve">
+    <value>{0} kan automatiskt söka efter uppdateringar som kan ge nya funktioner och buggfixar. Det rekommenderas att du tillåter {0} att söka efter uppdateringar varje vecka.</value>
+  </data>
+  <data name="AskUpdatesMainInstruction" xml:space="preserve">
+    <value>Inställningar för automatisk uppdatering</value>
+  </data>
+  <data name="Aspect" xml:space="preserve">
+    <value>Förhållande</value>
+  </data>
+  <data name="AutoSaveEvery" xml:space="preserve">
+    <value>Spara automatiskt var X minut (0 betyder inaktiverad):</value>
+  </data>
+  <data name="AvailableVersion" xml:space="preserve">
+    <value>Senaste version</value>
+  </data>
+  <data name="_Browse" xml:space="preserve">
+    <value>&amp;Bläddra...</value>
+  </data>
+  <data name="_Cancel" xml:space="preserve">
+    <value>&amp;Avbryt</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Ändra</value>
+  </data>
+  <data name="_Close" xml:space="preserve">
+    <value>&amp;Stäng</value>
+  </data>
+  <data name="ButtonDefaultInheritance" xml:space="preserve">
+    <value>Förvalt arv</value>
+  </data>
+  <data name="ButtonDefaultProperties" xml:space="preserve">
+    <value>Förvalda egenskaper</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Koppla från</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Ikon</value>
+  </data>
+  <data name="_Import" xml:space="preserve">
+    <value>&amp;Importera</value>
+  </data>
+  <data name="Inheritance" xml:space="preserve">
+    <value>Arv</value>
+  </data>
+  <data name="_Launch" xml:space="preserve">
+    <value>&amp;Starta</value>
+  </data>
+  <data name="ButtonLaunchPutty" xml:space="preserve">
+    <value>Starta PuTTY</value>
+  </data>
+  <data name="_Ok" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Egenskaper</value>
+  </data>
+  <data name="_Scan" xml:space="preserve">
+    <value>&amp;Skanna</value>
+  </data>
+  <data name="_Stop" xml:space="preserve">
+    <value>&amp;Stopp</value>
+  </data>
+  <data name="TestProxy" xml:space="preserve">
+    <value>Testa proxy</value>
+  </data>
+  <data name="CannotStartPortScan" xml:space="preserve">
+    <value>Kan inte starta portskanning, felaktigt IP-format!</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Utseende</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>Anslutning</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>Skärm</value>
+  </data>
+  <data name="Gateway" xml:space="preserve">
+    <value>Nätverksnod (gateway)</value>
+  </data>
+  <data name="Miscellaneous" xml:space="preserve">
+    <value>Blandat</value>
+  </data>
+  <data name="Protocol" xml:space="preserve">
+    <value>Protokoll</value>
+  </data>
+  <data name="Redirect" xml:space="preserve">
+    <value>Omdirigering</value>
+  </data>
+  <data name="CheckFailed" xml:space="preserve">
+    <value>Kontrollen misslyckades!</value>
+  </data>
+  <data name="CheckboxAutomaticReconnect" xml:space="preserve">
+    <value>Försök automatiskt att återansluta när du kopplas från servern (endast RDP &amp;&amp; ICA)</value>
+  </data>
+  <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+    <value>Visa inte detta meddelande igen.</value>
+  </data>
+  <data name="CheckboxProxyAuthentication" xml:space="preserve">
+    <value>Denna proxyserver kräver autentisering</value>
+  </data>
+  <data name="CheckboxPuttyPath" xml:space="preserve">
+    <value>Använd anpassad PuTTY-sökväg:</value>
+  </data>
+  <data name="CheckboxReconnectWhenReady" xml:space="preserve">
+    <value>Återanslut när redo</value>
+  </data>
+  <data name="CheckboxUpdateUseProxy" xml:space="preserve">
+    <value>Använd en proxyserver för att ansluta</value>
+  </data>
+  <data name="UserViaAPI" xml:space="preserve">
+    <value>API användar-ID</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Användarnamn</value>
+  </data>
+  <data name="WaitForExit" xml:space="preserve">
+    <value>Invänta avslut</value>
+  </data>
+  <data name="CheckAgain" xml:space="preserve">
+    <value>Kontrollera igen</value>
+  </data>
+  <data name="CheckForUpdatesOnStartup" xml:space="preserve">
+    <value>Sök efter uppdateringar vid programstart</value>
+  </data>
+  <data name="CheckNow" xml:space="preserve">
+    <value>Kontrollera nu</value>
+  </data>
+  <data name="CheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
+    <value>Kontrollera korrekt installation av komponenter vid uppstart</value>
+  </data>
+  <data name="ChoosePanelBeforeConnecting" xml:space="preserve">
+    <value>Välj panel innan du ansluter</value>
+  </data>
+  <data name="ClosedPorts" xml:space="preserve">
+    <value>Stängda portar</value>
+  </data>
+  <data name="CollapseAllFolders" xml:space="preserve">
+    <value>Fäll ihop alla mappar</value>
+  </data>
+  <data name="Arguments" xml:space="preserve">
+    <value>Argument</value>
+  </data>
+  <data name="Filename" xml:space="preserve">
+    <value>Filnamn</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Meddelande</value>
+  </data>
+  <data name="CommandExitProgram" xml:space="preserve">
+    <value>A&amp;vsluta {0}</value>
+  </data>
+  <data name="CommandLineArgsCouldNotBeParsed" xml:space="preserve">
+    <value>Kunde inte tolka kommandoradsargument!</value>
+  </data>
+  <data name="CommandOpenConnectionFile" xml:space="preserve">
+    <value>&amp;Öppna en anslutningsfil</value>
+  </data>
+  <data name="_TryAgain" xml:space="preserve">
+    <value>&amp;Försök igen</value>
+  </data>
+  <data name="CompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} har upptäckt Lenovo Auto Scroll Utility som körs på detta system. Det här verktyget är känt för att orsaka problem med {0}. Det rekommenderas att du inaktiverar eller avinstallera det.</value>
+  </data>
+  <data name="CompatibilityProblemDetected" xml:space="preserve">
+    <value>Kompatibilitetsproblem upptäckt</value>
+  </data>
+  <data name="ConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+    <value>btnIcon_Click misslyckades!</value>
+  </data>
+  <data name="ConfigPropertyGridHideItemsFailed" xml:space="preserve">
+    <value>ShowHideGridItems misslyckades!</value>
+  </data>
+  <data name="ConfigPropertyGridMenuClickFailed" xml:space="preserve">
+    <value>IconMenu_Click misslyckades!</value>
+  </data>
+  <data name="ConfigPropertyGridObjectFailed" xml:space="preserve">
+    <value>Property Grid object misslyckades!</value>
+  </data>
+  <data name="ConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+    <value>SetHostStatus misslyckades!</value>
+  </data>
+  <data name="ConfigPropertyGridValueFailed" xml:space="preserve">
+    <value>pGrid_PopertyValueChanged misslyckades!</value>
+  </data>
+  <data name="ConfigUiLoadFailed" xml:space="preserve">
+    <value>Laddning av inställningsgränssnittet misslyckades!</value>
+  </data>
+  <data name="ConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
+    <value>Är du säker på att du vill stänga panelen "{0}"? Eventuella anslutningar som den innehåller kommer också att stängas.</value>
+  </data>
+  <data name="ConfirmDeleteExternalTool" xml:space="preserve">
+    <value>Är du säker på att du vill ta bort det externa verktyget, "{0}"?</value>
+  </data>
+  <data name="ConfirmDeleteExternalToolMultiple" xml:space="preserve">
+    <value>Är du säker på att du vill ta bort {0} valda externa verktyg?</value>
+  </data>
+  <data name="ConfirmDeleteNodeConnection" xml:space="preserve">
+    <value>Är du säker på att du vill ta bort anslutningen, "{0}"?</value>
+  </data>
+  <data name="ConfirmDeleteNodeFolder" xml:space="preserve">
+    <value>Är du säker på att du vill ta bort den tomma mappen, "{0}"?</value>
+  </data>
+  <data name="ConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+    <value>Är du säker på att du vill ta bort mappen, "{0}"? Alla mappar eller anslutningar som den innehåller kommer också att raderas.</value>
+  </data>
+  <data name="ConfirmExitMainInstruction" xml:space="preserve">
+    <value>Vill du stänga alla öppna anslutningar?</value>
+  </data>
+  <data name="ConfirmResetLayout" xml:space="preserve">
+    <value>Är du säker på att du vill återställa panelerna till deras standardlayout?</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Anslut</value>
+  </data>
+  <data name="ConnectInFullscreen" xml:space="preserve">
+    <value>Anslut i helskärmsläge</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Ansluter...</value>
+  </data>
+  <data name="ConnectionEventConnected" xml:space="preserve">
+    <value>Protokollhändelse ansluten</value>
+  </data>
+  <data name="ConnectionEventConnectedDetail" xml:space="preserve">
+    <value>Anslutning till "{0}" via "{1}" etablerad av användaren "{2}" (Beskrivning: "{3}"; Användarfält: "{4}")</value>
+  </data>
+  <data name="ConnectionFailed" xml:space="preserve">
+    <value>Anslutning misslyckades!</value>
+  </data>
+  <data name="ConnectionEventErrorOccured" xml:space="preserve">
+    <value>Ett anslutningsprotokollfel inträffade. Värd: "{1}"; Felkod: "{2}"; Fel Beskrivning: "{0}"</value>
+  </data>
+  <data name="ConnectionOpenFailed" xml:space="preserve">
+    <value>Öppning av anslutningen misslyckades!</value>
+  </data>
+  <data name="ConnectionOpenFailedNoHostname" xml:space="preserve">
+    <value>Kan inte öppna anslutning: Inget värdnamn angett!</value>
+  </data>
+  <data name="Connections" xml:space="preserve">
+    <value>Anslutningar</value>
+  </data>
+  <data name="ConnectionSetDefaultPortFailed" xml:space="preserve">
+    <value>Kunde inte ställa in standardport!</value>
+  </data>
+  <data name="ConnectionsFileBackupFailed" xml:space="preserve">
+    <value>Kunde inte skapa säkerhetskopia av anslutningsfilen!</value>
+  </data>
+  <data name="ConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+    <value>Anslutningsfilen "{0}" kunde inte laddas!</value>
+  </data>
+  <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
+    <value>Anslutningsfilen "{0}" kunde inte laddas!
+Startar med en ny anslutningsfil.</value>
+  </data>
+  <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
+    <value>Kunde inte spara anslutningsfilen som "{0}"!</value>
+  </data>
+  <data name="ConnectNoCredentials" xml:space="preserve">
+    <value>Anslut utan inloggningsuppgifter</value>
+  </data>
+  <data name="ConnectToConsoleSession" xml:space="preserve">
+    <value>Anslut till konsolsession</value>
+  </data>
+  <data name="ConnectWithOptions" xml:space="preserve">
+    <value>Anslut (med alternativ)</value>
+  </data>
+  <data name="ConnenctionClosedByUser" xml:space="preserve">
+    <value>Anslutning till {0} via {1} stängd av användare {2}.</value>
+  </data>
+  <data name="ConnenctionCloseEvent" xml:space="preserve">
+    <value>Anslutning stängd</value>
+  </data>
+  <data name="ConnenctionCloseEventFailed" xml:space="preserve">
+    <value>Anslutningsstängning misslyckades!</value>
+  </data>
+  <data name="CouldNotCreateNewConnectionsFile" xml:space="preserve">
+    <value>Kunde inte skapa ny anslutningsfil!</value>
+  </data>
+  <data name="CouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Kunde inte hitta ToolStrip-kontroll i FilteredPropertyGrid.</value>
+  </data>
+  <data name="Detect" xml:space="preserve">
+    <value>Detektera</value>
+  </data>
+  <data name="DontConnectToConsoleSession" xml:space="preserve">
+    <value>Anslut inte till konsolsessionen</value>
+  </data>
+  <data name="DontConnectWhenAuthFails" xml:space="preserve">
+    <value>Anslut inte om autentisering misslyckas</value>
+  </data>
+  <data name="DoubleClickTabClosesIt" xml:space="preserve">
+    <value>Dubbelklick på fliken stänger den</value>
+  </data>
+  <data name="DownloadAndInstall" xml:space="preserve">
+    <value>Ladda ner och installera</value>
+  </data>
+  <data name="Duplicate" xml:space="preserve">
+    <value>Duplicera</value>
+  </data>
+  <data name="EmptyPasswordContinue" xml:space="preserve">
+    <value>Vill du fortsätta utan lösenord?</value>
+  </data>
+  <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
+    <value>För tomt användarnamn, lösenord eller domännamn använd:</value>
+  </data>
+  <data name="EncryptCompleteConnectionFile" xml:space="preserve">
+    <value>Kryptera helt anslutningsfil</value>
+  </data>
+  <data name="LastIp" xml:space="preserve">
+    <value>Senaste IP</value>
+  </data>
+  <data name="LastPort" xml:space="preserve">
+    <value>Senaste port</value>
+  </data>
+  <data name="ErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+    <value>AddExternalToolsToToolBar (frmMain) misslyckades. {0}</value>
+  </data>
+  <data name="ErrorAddFolderFailed" xml:space="preserve">
+    <value>AddFolder (UI.Window.ConnectionTreeWindow) misslyckades. {0}</value>
+  </data>
+  <data name="ErrorBadDatabaseVersion" xml:space="preserve">
+    <value>Databasversionen {0} är inte kompatibel med denna version av {1}.</value>
+  </data>
+  <data name="ErrorConnectionListSaveFailed" xml:space="preserve">
+    <value>Anslutningslistan kunde inte sparas.</value>
+  </data>
+  <data name="ErrorCouldNotLaunchPutty" xml:space="preserve">
+    <value>PuTTY kunde inte startas.</value>
+  </data>
+  <data name="ErrorDecryptionFailed" xml:space="preserve">
+    <value>Dekryptering misslyckades. {0}</value>
+  </data>
+  <data name="ErrorEncryptionFailed" xml:space="preserve">
+    <value>Kryptering misslyckades. {0}</value>
+  </data>
+  <data name="ErrorFipsPolicyIncompatible" xml:space="preserve">
+    <value>Windows-säkerhetsinställningen, "Systemkryptografi: Använd FIPS-kompatibla algoritmer för kryptering, hashning och signering", är aktiverad.
+
+Se Microsofts supportartikel på http://support.microsoft.com/kb/811833 för mer information.
+
+{0} är inte helt FIPS-kompatibel. Klicka OK för att fortsätta på eget bevåg, eller Avbryt för att avsluta.</value>
+  </data>
+  <data name="Errors" xml:space="preserve">
+    <value>Fel</value>
+  </data>
+  <data name="ErrorStartupConnectionFileLoad" xml:space="preserve">
+    <value>Uppstartsanslutningsfilen kunde inte laddas.{0}{0}{2}{0}{3}{0}{0}För att förhindra dataförlust kommer {1} nu att avslutas.</value>
+  </data>
+  <data name="ErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+    <value>VerifyDatabaseVersion (Config.Connections.Save) misslyckades. {0}</value>
+  </data>
+  <data name="ExpandAllFolders" xml:space="preserve">
+    <value>Expandera alla mappar</value>
+  </data>
+  <data name="Experimental" xml:space="preserve">
+    <value>Experimentell</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Exportera</value>
+  </data>
+  <data name="ExportEverything" xml:space="preserve">
+    <value>Exportera allt</value>
+  </data>
+  <data name="ExportFile" xml:space="preserve">
+    <value>Exportera fil</value>
+  </data>
+  <data name="ExportItems" xml:space="preserve">
+    <value>Exportera objekt</value>
+  </data>
+  <data name="ExportProperties" xml:space="preserve">
+    <value>Exportera egenskaper</value>
+  </data>
+  <data name="ExportSelectedConnection" xml:space="preserve">
+    <value>Exportera den nu valda anslutningen</value>
+  </data>
+  <data name="ExportSelectedFolder" xml:space="preserve">
+    <value>Exportera den markerade mappen</value>
+  </data>
+  <data name="_ExportToFile" xml:space="preserve">
+    <value>&amp;Exportera till fil...</value>
+  </data>
+  <data name="ExternalToolDefaultName" xml:space="preserve">
+    <value>Nytt externt verktyg</value>
+  </data>
+  <data name="FileFormat" xml:space="preserve">
+    <value>Fil &amp;format:</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Alla filer (*.*)</value>
+  </data>
+  <data name="FilterAllImportable" xml:space="preserve">
+    <value>Alla importerbara filer</value>
+  </data>
+  <data name="FilterApplication" xml:space="preserve">
+    <value>Programfiler (*.exe)</value>
+  </data>
+  <data name="FiltermRemoteCSV" xml:space="preserve">
+    <value>mRemote CSV-filer (*.csv)</value>
+  </data>
+  <data name="FiltermRemoteXML" xml:space="preserve">
+    <value>mRemote XML-filer (*.xml)</value>
+  </data>
+  <data name="FilterPuttyConnectionManager" xml:space="preserve">
+    <value>PuTTY Anslutningshanterare-filer</value>
+  </data>
+  <data name="FilterRdgFiles" xml:space="preserve">
+    <value>Remote Desktop Connection Manager-filer (*.rdg)</value>
+  </data>
+  <data name="FilterRDP" xml:space="preserve">
+    <value>RDP-filer (*.rdp)</value>
+  </data>
+  <data name="FormatInherit" xml:space="preserve">
+    <value>Ärv {0}</value>
+  </data>
+  <data name="FormatInheritDescription" xml:space="preserve">
+    <value>Beskrivning av ärvd egenskap: {0}</value>
+  </data>
+  <data name="Free" xml:space="preserve">
+    <value>Fri</value>
+  </data>
+  <data name="Fullscreen" xml:space="preserve">
+    <value>Helskärm</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Allmänt</value>
+  </data>
+  <data name="GetConnectionInfoFromXmlFailed" xml:space="preserve">
+    <value>Ett fel inträffade när anslutningen laddades för "{0}" från "{1}". {2}</value>
+  </data>
+  <data name="GroupboxAutomaticReconnect" xml:space="preserve">
+    <value>Automatisk återanslutning</value>
+  </data>
+  <data name="ExternalToolProperties" xml:space="preserve">
+    <value>Externa verktygsegenskaper</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Filer</value>
+  </data>
+  <data name="Host" xml:space="preserve">
+    <value>Värd</value>
+  </data>
+  <data name="HttpConnectFailed" xml:space="preserve">
+    <value>HTTP-anslutning misslyckades!</value>
+  </data>
+  <data name="HttpConnectionFailed" xml:space="preserve">
+    <value>Kunde inte skapa ny HTTP-anslutning!</value>
+  </data>
+  <data name="HttpDocumentTileChangeFailed" xml:space="preserve">
+    <value>Ändring av HTTP-dokumentpanel misslyckades!</value>
+  </data>
+  <data name="HttpSetPropsFailed" xml:space="preserve">
+    <value>Set HTTP Props misslyckades!</value>
+  </data>
+  <data name="IdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Identifiera snabbanslutningsflikar genom att lägga till prefixet "Snabb:"</value>
+  </data>
+  <data name="ImportAD" xml:space="preserve">
+    <value>Importera från Active Directory</value>
+  </data>
+  <data name="ImportFileFailedContent" xml:space="preserve">
+    <value>Ett fel inträffade vid import av filen "{0}".</value>
+  </data>
+  <data name="ImportFromFile" xml:space="preserve">
+    <value>Importera från &amp;fil...</value>
+  </data>
+  <data name="ImportPortScan" xml:space="preserve">
+    <value>Importera från portskanning</value>
+  </data>
+  <data name="Informations" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="IntAppDisposeFailed" xml:space="preserve">
+    <value>Avpollettering av Int App processen misslyckades!</value>
+  </data>
+  <data name="IntAppFocusFailed" xml:space="preserve">
+    <value>Int App fokus misslyckades!</value>
+  </data>
+  <data name="IntAppHandle" xml:space="preserve">
+    <value>Int App handtag: {0}</value>
+  </data>
+  <data name="IntAppKillFailed" xml:space="preserve">
+    <value>Avsluta Int App processen misslyckades!</value>
+  </data>
+  <data name="IntAppResizeFailed" xml:space="preserve">
+    <value>Int App storleksändring misslyckades!</value>
+  </data>
+  <data name="IntAppStuff" xml:space="preserve">
+    <value>--- IntApp-grejer ---</value>
+  </data>
+  <data name="IntAppTitle" xml:space="preserve">
+    <value>Int App titel: {0}</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adress:</value>
+  </data>
+  <data name="ClosingConnections" xml:space="preserve">
+    <value>När anslutningar stängs:</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Visningsnamn</value>
+  </data>
+  <data name="Domain" xml:space="preserve">
+    <value>Domän</value>
+  </data>
+  <data name="Hostname" xml:space="preserve">
+    <value>Värdnamn:</value>
+  </data>
+  <data name="PortableEdition" xml:space="preserve">
+    <value>Portabel utgåva</value>
+  </data>
+  <data name="PuttySessionsConfig" xml:space="preserve">
+    <value>För att konfigurera PuTTY-sessioner klicka på denna knapp:</value>
+  </data>
+  <data name="PuttyTimeout" xml:space="preserve">
+    <value>Maximal väntetid för PuTTY och integrerade externa verktyg:</value>
+  </data>
+  <data name="ReleasedUnderGPL" xml:space="preserve">
+    <value>Utgiven under GNU General Public License (GPL)</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>Sekunder</value>
+  </data>
+  <data name="SelectPanel" xml:space="preserve">
+    <value>Välj en panel i listan nedan eller klicka på Ny för att lägga till en ny. Klicka OK för att fortsätta.</value>
+  </data>
+  <data name="ServerStatus" xml:space="preserve">
+    <value>Serverstatus:</value>
+  </data>
+  <data name="Database" xml:space="preserve">
+    <value>Databas:</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verifiera:</value>
+  </data>
+  <data name="LanguageString" xml:space="preserve">
+    <value>Språk</value>
+  </data>
+  <data name="LanguageDefault" xml:space="preserve">
+    <value>(Identifiera automatiskt)</value>
+  </data>
+  <data name="LanguageRestartRequired" xml:space="preserve">
+    <value>{0} måste startas om innan ändringarna till språket träder i kraft.</value>
+  </data>
+  <data name="LoadFromSqlFailed" xml:space="preserve">
+    <value>Laddning från SQL misslyckades</value>
+  </data>
+  <data name="LoadFromSqlFailedContent" xml:space="preserve">
+    <value>Anslutningsinformationen kunde inte laddas från SQL-servern.</value>
+  </data>
+  <data name="LoadFromXmlFailed" xml:space="preserve">
+    <value>Laddning från XML misslyckades!</value>
+  </data>
+  <data name="LocalFile" xml:space="preserve">
+    <value>Lokal fil</value>
+  </data>
+  <data name="LocalFileDoesNotExist" xml:space="preserve">
+    <value>Lokala filen existerar inte!</value>
+  </data>
+  <data name="AddConnectionPanel" xml:space="preserve">
+    <value>Lägg till anslutningspanel</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Sök efter uppdateringar</value>
+  </data>
+  <data name="Config" xml:space="preserve">
+    <value>Konfiguration</value>
+  </data>
+  <data name="ConnectionPanels" xml:space="preserve">
+    <value>Anslutningspaneler</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopiera</value>
+  </data>
+  <data name="DeleteExternalTool" xml:space="preserve">
+    <value>Ta bort externt verktyg...</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donera</value>
+  </data>
+  <data name="DuplicateTab" xml:space="preserve">
+    <value>Duplicera flik</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Avsluta</value>
+  </data>
+  <data name="ExternalToolsToolbar" xml:space="preserve">
+    <value>Externa verktyg verktygsfält</value>
+  </data>
+  <data name="_File" xml:space="preserve">
+    <value>&amp;Fil</value>
+  </data>
+  <data name="_Help" xml:space="preserve">
+    <value>&amp;Hjälp</value>
+  </data>
+  <data name="HelpContents" xml:space="preserve">
+    <value>mRemoteNG hjälp</value>
+  </data>
+  <data name="LaunchExternalTool" xml:space="preserve">
+    <value>Starta externt verktyg</value>
+  </data>
+  <data name="NewConnectionFile" xml:space="preserve">
+    <value>Ny anslutningsfil</value>
+  </data>
+  <data name="NewExternalTool" xml:space="preserve">
+    <value>Nytt externt verktyg</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Aviseringar</value>
+  </data>
+  <data name="CopyAll" xml:space="preserve">
+    <value>Kopiera alla</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Radera alla</value>
+  </data>
+  <data name="OpenConnectionFile" xml:space="preserve">
+    <value>Öppna anslutningsfil...</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Alternativ</value>
+  </data>
+  <data name="PortScan" xml:space="preserve">
+    <value>Portskanning</value>
+  </data>
+  <data name="QuickConnectToolbar" xml:space="preserve">
+    <value>Snabbanslut verktygsfält</value>
+  </data>
+  <data name="Reconnect" xml:space="preserve">
+    <value>Återanslut</value>
+  </data>
+  <data name="RefreshScreen" xml:space="preserve">
+    <value>Uppdatera skärmen (VNC)</value>
+  </data>
+  <data name="RenameTab" xml:space="preserve">
+    <value>Byt namn på flik</value>
+  </data>
+  <data name="ReportBug" xml:space="preserve">
+    <value>Rapportera en bugg</value>
+  </data>
+  <data name="ResetLayout" xml:space="preserve">
+    <value>Återställ layout</value>
+  </data>
+  <data name="SaveConnectionFile" xml:space="preserve">
+    <value>Spara anslutningsfil</value>
+  </data>
+  <data name="SaveConnectionFileAs" xml:space="preserve">
+    <value>Spara anslutningsfil som...</value>
+  </data>
+  <data name="SendSpecialKeys" xml:space="preserve">
+    <value>Skicka specialknappar (VNC)</value>
+  </data>
+  <data name="ShowHelpText" xml:space="preserve">
+    <value>&amp;Visa hjälptext</value>
+  </data>
+  <data name="ShowText" xml:space="preserve">
+    <value>Visa text</value>
+  </data>
+  <data name="SshFileTransfer" xml:space="preserve">
+    <value>SSH-filöverföring</value>
+  </data>
+  <data name="StartChat" xml:space="preserve">
+    <value>Starta chatt (VNC)</value>
+  </data>
+  <data name="SupportForum" xml:space="preserve">
+    <value>Supportforum</value>
+  </data>
+  <data name="_Tools" xml:space="preserve">
+    <value>&amp;Verktyg</value>
+  </data>
+  <data name="TransferFile" xml:space="preserve">
+    <value>Överför fil (SSH)</value>
+  </data>
+  <data name="_View" xml:space="preserve">
+    <value>&amp;Visa</value>
+  </data>
+  <data name="ViewOnly" xml:space="preserve">
+    <value>Visa endast</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Webbplats</value>
+  </data>
+  <data name="MinimizeToSysTray" xml:space="preserve">
+    <value>Minimera till notifikationsområdet</value>
+  </data>
+  <data name="MoveDown" xml:space="preserve">
+    <value>Flytta ner</value>
+  </data>
+  <data name="MoveUp" xml:space="preserve">
+    <value>Flytta upp</value>
+  </data>
+  <data name="MyCurrentWindowsCreds" xml:space="preserve">
+    <value>Mina nuvarande inloggningsuppgifter (inloggningsinformation för Windows)</value>
+  </data>
+  <data name="Never" xml:space="preserve">
+    <value>Aldrig</value>
+  </data>
+  <data name="NewConnection" xml:space="preserve">
+    <value>Ny anslutning</value>
+  </data>
+  <data name="NewFolder" xml:space="preserve">
+    <value>Ny mapp</value>
+  </data>
+  <data name="NewPanel" xml:space="preserve">
+    <value>Ny panel</value>
+  </data>
+  <data name="NewTitle" xml:space="preserve">
+    <value>Ny titel</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>Ingen komprimering</value>
+  </data>
+  <data name="NoExtAppDefined" xml:space="preserve">
+    <value>Ingen extern app angiven.</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Inga</value>
+  </data>
+  <data name="NoSmartSize" xml:space="preserve">
+    <value>Ingen smart storleksändring</value>
+  </data>
+  <data name="NoUpdateAvailable" xml:space="preserve">
+    <value>Ingen uppdatering tillgänglig</value>
+  </data>
+  <data name="OldConffile" xml:space="preserve">
+    <value>Du försöker ladda en anslutningsfil som skapades med hjälp av en mycket tidig version av mRemote, detta kan resultera i ett körfel.
+Om du stöter på ett sådant fel, vänligen skapa en ny anslutningsfil!</value>
+  </data>
+  <data name="OpenNewTabRight" xml:space="preserve">
+    <value>Öppna ny flik till höger om den valda fliken</value>
+  </data>
+  <data name="OpenPorts" xml:space="preserve">
+    <value>Öppna portar</value>
+  </data>
+  <data name="OptionsProxyTesting" xml:space="preserve">
+    <value>Testar...</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="_Delete" xml:space="preserve">
+    <value>&amp;Radera</value>
+  </data>
+  <data name="_New" xml:space="preserve">
+    <value>&amp;Ny</value>
+  </data>
+  <data name="PanelName" xml:space="preserve">
+    <value>Panelnamn</value>
+  </data>
+  <data name="PasswordProtect" xml:space="preserve">
+    <value>Lösenordsskydda</value>
+  </data>
+  <data name="PasswordStatusMustMatch" xml:space="preserve">
+    <value>Båda lösenorden måste matcha varandra.</value>
+  </data>
+  <data name="PasswordStatusTooShort" xml:space="preserve">
+    <value>Lösenordet måste vara minst 3 tecken långt.</value>
+  </data>
+  <data name="PleaseFillAllFields" xml:space="preserve">
+    <value>Vänligen fyll i alla fält</value>
+  </data>
+  <data name="PortScanComplete" xml:space="preserve">
+    <value>Portskanning slutförd.</value>
+  </data>
+  <data name="PortScanCouldNotLoadPanel" xml:space="preserve">
+    <value>Kunde inte ladda portskanningspanelen!</value>
+  </data>
+  <data name="PropertyDescriptionHostnameIp" xml:space="preserve">
+    <value>Ange värdnamnet eller IP-adressen som du vill ansluta till.</value>
+  </data>
+  <data name="PropertyDescriptionAll" xml:space="preserve">
+    <value>Växla alla ärftliga alternativ.</value>
+  </data>
+  <data name="PropertyDescriptionAuthenticationLevel" xml:space="preserve">
+    <value>Välj vilken autentiseringsnivå den här anslutningen ska använda.</value>
+  </data>
+  <data name="PropertyDescriptionAuthenticationMode" xml:space="preserve">
+    <value>Välj hur du vill autentisera mot VNC-servern.</value>
+  </data>
+  <data name="PropertyDescriptionAutomaticResize" xml:space="preserve">
+    <value>Välj om anslutningen ska skalas om automatiskt när fönstret skalas om eller när helskärmsläge är aktiverat. Kräver RDC 8.0 eller högre.</value>
+  </data>
+  <data name="PropertyDescriptionCacheBitmaps" xml:space="preserve">
+    <value>Välj om du vill använda bitmappscachning eller inte.</value>
+  </data>
+  <data name="PropertyDescriptionColors" xml:space="preserve">
+    <value>Välj färgkvalitet som ska användas.</value>
+  </data>
+  <data name="PropertyDescriptionCompression" xml:space="preserve">
+    <value>Välj komprimeringsvärdet som ska användas.</value>
+  </data>
+  <data name="PropertyDescriptionDescription" xml:space="preserve">
+    <value>Skriv dina anteckningar eller en beskrivning för värden här.</value>
+  </data>
+  <data name="PropertyDescriptionDisplayThemes" xml:space="preserve">
+    <value>Välj ja om temat för fjärrvärden ska visas.</value>
+  </data>
+  <data name="PropertyDescriptionDisplayWallpaper" xml:space="preserve">
+    <value>Välj ja om bakgrundsbilden för fjärrvärden ska visas.</value>
+  </data>
+  <data name="PropertyDescriptionDomain" xml:space="preserve">
+    <value>Ange din domän.</value>
+  </data>
+  <data name="PropertyDescriptionEnableDesktopComposition" xml:space="preserve">
+    <value>Välj om du vill använda skrivbordskomposition eller inte.</value>
+  </data>
+  <data name="PropertyDescriptionEnableFontSmoothing" xml:space="preserve">
+    <value>Välj om du vill använda utjämning av typsnitt eller inte.</value>
+  </data>
+  <data name="PropertyDescriptionEncoding" xml:space="preserve">
+    <value>Välj kodningsläget som ska användas.</value>
+  </data>
+  <data name="PropertyDescriptionExternalTool" xml:space="preserve">
+    <value>Välj det externa verktyget som ska startas.</value>
+  </data>
+  <data name="PropertyDescriptionExternalToolAfter" xml:space="preserve">
+    <value>Välj ett externt verktyg som ska startas efter frånkoppling till fjärrvärden.</value>
+  </data>
+  <data name="PropertyDescriptionExternalToolBefore" xml:space="preserve">
+    <value>Välj ett externt verktyg som ska startas innan anslutningen till fjärrvärden är etablerad.</value>
+  </data>
+  <data name="PropertyDescriptionIcon" xml:space="preserve">
+    <value>Välj en ikon som visas när du är ansluten till värden.</value>
+  </data>
+  <data name="PropertyDescriptionLoadBalanceInfo" xml:space="preserve">
+    <value>Anger lastbalanseringsinformation, för användning av routrar med lastbalansering, för att välja den bästa servern.</value>
+  </data>
+  <data name="PropertyDescriptionMACAddress" xml:space="preserve">
+    <value>Ange MAC-adressen för fjärrvärden om du vill använda den i ett externt verktyg.</value>
+  </data>
+  <data name="PropertyDescriptionName" xml:space="preserve">
+    <value>Detta är namnet som kommer att visas i anslutningsträdet.</value>
+  </data>
+  <data name="PropertyDescriptionPanel" xml:space="preserve">
+    <value>Ställer in panelen där anslutningen kommer att öppnas.</value>
+  </data>
+  <data name="PropertyDescriptionPassword" xml:space="preserve">
+    <value>Ange ditt lösenord.</value>
+  </data>
+  <data name="PropertyDescriptionPort" xml:space="preserve">
+    <value>Ange den port som det valda protokollet lyssnar på.</value>
+  </data>
+  <data name="PropertyDescriptionProtocol" xml:space="preserve">
+    <value>Välj protokollet mRemoteNG bör använda för att ansluta till värden.</value>
+  </data>
+  <data name="PropertyDescriptionPuttySession" xml:space="preserve">
+    <value>Välj en PuTTY-session som ska användas när du ansluter.</value>
+  </data>
+  <data name="PropertyDescriptionRDGatewayDomain" xml:space="preserve">
+    <value>Anger domännamnet som en användare tillhandahåller för att ansluta till RD Gateway-servern.</value>
+  </data>
+  <data name="PropertyDescriptionRDGatewayHostname" xml:space="preserve">
+    <value>Anger värdnamnet för Remote Desktop Gateway-servern.</value>
+  </data>
+  <data name="PropertyDescriptionRdpGatewayUsageMethod" xml:space="preserve">
+    <value>Anger när du ska använda en Remote Desktop Gateway (RD Gateway) server.</value>
+  </data>
+  <data name="PropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
+    <value>Anger om du vill logga in på gatewayen med samma användarnamn och lösenord som anslutningen.</value>
+  </data>
+  <data name="PropertyDescriptionRDGatewayUsername" xml:space="preserve">
+    <value>Anger det användarnamn som en användare ger för att ansluta till RD Gateway servern.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectDrives" xml:space="preserve">
+    <value>Välj om lokala diskenheter ska visas på fjärrvärden.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectKeys" xml:space="preserve">
+    <value>Välj om tangentkombinationer (t.ex. Alt-Tab) ska omdirigeras till fjärrvärden.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectPorts" xml:space="preserve">
+    <value>Välj om lokala portar (t.ex. seriell, parallell) ska visas på fjärrvärden.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectPrinters" xml:space="preserve">
+    <value>Välj om lokala skrivare ska visas på fjärrvärden.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectClipboard" xml:space="preserve">
+    <value>Välj om urklipp ska delas.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectSmartCards" xml:space="preserve">
+    <value>Välj om lokala smartkort(chipkort) ska vara tillgängliga på fjärrvärden.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectSounds" xml:space="preserve">
+    <value>Välj hur fjärrljud ska omdirigeras.</value>
+  </data>
+  <data name="PropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+    <value>Välj om standardljudenheten på fjärrmaskinen ska omdirigeras till den här datorn.</value>
+  </data>
+  <data name="PropertyDescriptionRenderingEngine" xml:space="preserve">
+    <value>Välj en av de tillgängliga renderingsmotorerna som kommer att användas för att visa HTML.</value>
+  </data>
+  <data name="PropertyDescriptionResolution" xml:space="preserve">
+    <value>Välj upplösning eller läge som denna anslutning öppnas i.</value>
+  </data>
+  <data name="PropertyDescriptionSmartSizeMode" xml:space="preserve">
+    <value>Välj SmartSize-läge som ska användas.</value>
+  </data>
+  <data name="PropertyDescriptionUseConsoleSession" xml:space="preserve">
+    <value>Anslut till konsolsessionen på fjärrvärden.</value>
+  </data>
+  <data name="PropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>Använd Credential Security Support Provider (CredSSP) för autentisering om det är tillgängligt.</value>
+  </data>
+  <data name="PropertyDescriptionUseRestrictedAdmin" xml:space="preserve">
+    <value>Använd begränsat administratörsläge på målvärden (lokalt systemsammanhang).</value>
+  </data>
+  <data name="PropertyDescriptionUseRCG" xml:space="preserve">
+    <value>Använd Remote Credential Guard för att tunnla autentisering på målet tillbaka till källan genom RDP-kanalen.</value>
+  </data>
+  <data name="PropertyDescriptionUser1" xml:space="preserve">
+    <value>Skriv gärna in all information du behöver här.</value>
+  </data>
+  <data name="PropertyDescriptionUserViaAPI" xml:space="preserve">
+    <value>Ange ID för användardata i externt API (t.ex. hemlig server). när den används, lämna användarnamn/lösenord/domänfält tomt</value>
+  </data>
+  <data name="PropertyDescriptionUsername" xml:space="preserve">
+    <value>Ange ditt användarnamn.</value>
+  </data>
+  <data name="PropertyDescriptionViewOnly" xml:space="preserve">
+    <value>Om du vill upprätta en anslutning till värden för att endast titta väljer du ja.</value>
+  </data>
+  <data name="PropertyDescriptionVNCProxyAddress" xml:space="preserve">
+    <value>Ange proxyadressen som ska användas.</value>
+  </data>
+  <data name="PropertyDescriptionVNCProxyPassword" xml:space="preserve">
+    <value>Ange ditt lösenord för autentisering mot proxy.</value>
+  </data>
+  <data name="PropertyDescriptionVNCProxyPort" xml:space="preserve">
+    <value>Ange porten som proxyservern lyssnar på.</value>
+  </data>
+  <data name="PropertyDescriptionVNCProxyType" xml:space="preserve">
+    <value>Om du använder en proxy som tunnel till VNC-anslutningar väljer du vilken typ det är.</value>
+  </data>
+  <data name="PropertyDescriptionVNCProxyUsername" xml:space="preserve">
+    <value>Ange ditt användarnamn för autentisering mot proxyn.</value>
+  </data>
+  <data name="HostnameIp" xml:space="preserve">
+    <value>Värdnamn/IP</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Alla</value>
+  </data>
+  <data name="AuthenticationLevel" xml:space="preserve">
+    <value>Serverautentisering</value>
+  </data>
+  <data name="AuthenticationMode" xml:space="preserve">
+    <value>Autentiseringsläge</value>
+  </data>
+  <data name="AutomaticResize" xml:space="preserve">
+    <value>Automatisk storleksändring</value>
+  </data>
+  <data name="CacheBitmaps" xml:space="preserve">
+    <value>Cache-lagra bitmappar</value>
+  </data>
+  <data name="Colors" xml:space="preserve">
+    <value>Färger</value>
+  </data>
+  <data name="Compression" xml:space="preserve">
+    <value>Komprimering</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beskrivning</value>
+  </data>
+  <data name="DisplayThemes" xml:space="preserve">
+    <value>Visa tema</value>
+  </data>
+  <data name="DisplayWallpaper" xml:space="preserve">
+    <value>Visa bakgrund</value>
+  </data>
+  <data name="EnableDesktopComposition" xml:space="preserve">
+    <value>Skrivbordskomposition</value>
+  </data>
+  <data name="FontSmoothing" xml:space="preserve">
+    <value>Teckensnittsutjämning</value>
+  </data>
+  <data name="Encoding" xml:space="preserve">
+    <value>Kodning</value>
+  </data>
+  <data name="ExternalTool" xml:space="preserve">
+    <value>Externt verktyg</value>
+  </data>
+  <data name="ExternalToolAfter" xml:space="preserve">
+    <value>Externt verktyg efter</value>
+  </data>
+  <data name="ExternalToolBefore" xml:space="preserve">
+    <value>Externt verktyg före</value>
+  </data>
+  <data name="LoadBalanceInfo" xml:space="preserve">
+    <value>Lastbalanceringsinfo</value>
+  </data>
+  <data name="MacAddress" xml:space="preserve">
+    <value>MAC-adress</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Namn</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Lösenord</value>
+  </data>
+  <data name="PuttySession" xml:space="preserve">
+    <value>PuTTY-session</value>
+  </data>
+  <data name="RdpGatewayDomain" xml:space="preserve">
+    <value>Gateway-domän</value>
+  </data>
+  <data name="RdpGatewayHostname" xml:space="preserve">
+    <value>Gateway-värdnamn</value>
+  </data>
+  <data name="RdpGatewayPassword" xml:space="preserve">
+    <value>Lösenord för fjärrskrivbordsgateway</value>
+  </data>
+  <data name="RdpGatewayUsageMethod" xml:space="preserve">
+    <value>Använd gateway</value>
+  </data>
+  <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
+    <value>Gateway-inloggningsuppgifter</value>
+  </data>
+  <data name="RdpGatewayUsername" xml:space="preserve">
+    <value>Gateway-användarnamn</value>
+  </data>
+  <data name="DiskDrives" xml:space="preserve">
+    <value>Diskenheter</value>
+  </data>
+  <data name="RedirectKeys" xml:space="preserve">
+    <value>Tangentkombinationer</value>
+  </data>
+  <data name="Ports" xml:space="preserve">
+    <value>Portar</value>
+  </data>
+  <data name="Printers" xml:space="preserve">
+    <value>Skrivare</value>
+  </data>
+  <data name="Clipboard" xml:space="preserve">
+    <value>Urklipp</value>
+  </data>
+  <data name="Sounds" xml:space="preserve">
+    <value>Ljud</value>
+  </data>
+  <data name="AudioCapture" xml:space="preserve">
+    <value>Ljudinspelning</value>
+  </data>
+  <data name="RenderingEngine" xml:space="preserve">
+    <value>Renderingsmotor</value>
+  </data>
+  <data name="Resolution" xml:space="preserve">
+    <value>Upplösning</value>
+  </data>
+  <data name="SmartSizeMode" xml:space="preserve">
+    <value>SmartSize-läge</value>
+  </data>
+  <data name="UseConsoleSession" xml:space="preserve">
+    <value>Använd konsolsession</value>
+  </data>
+  <data name="UseCredSsp" xml:space="preserve">
+    <value>Använd CredSSP</value>
+  </data>
+  <data name="UseRestrictedAdmin" xml:space="preserve">
+    <value>Använd begränsad administratör</value>
+  </data>
+  <data name="UseRCG" xml:space="preserve">
+    <value>Använd Remote Credential Guard</value>
+  </data>
+  <data name="UserField" xml:space="preserve">
+    <value>Användarfält</value>
+  </data>
+  <data name="ProxyAddress" xml:space="preserve">
+    <value>Proxy Adress</value>
+  </data>
+  <data name="ProxyPassword" xml:space="preserve">
+    <value>Proxy-lösenord</value>
+  </data>
+  <data name="ProxyPort" xml:space="preserve">
+    <value>Proxyport</value>
+  </data>
+  <data name="ProxyType" xml:space="preserve">
+    <value>Proxy-typ</value>
+  </data>
+  <data name="ProxyUsername" xml:space="preserve">
+    <value>Proxy-användarnamn</value>
+  </data>
+  <data name="ProtocolEventDisconnected" xml:space="preserve">
+    <value>Protokoll-händelse frånkopplad. Värd: "{1}"; Protokoll: "{2}" Meddelande: "{0}"</value>
+  </data>
+  <data name="ProtocolEventDisconnectFailed" xml:space="preserve">
+    <value>Protokoll-händelse frånkopplad misslyckades.
+{0}</value>
+  </data>
+  <data name="ProtocolToImport" xml:space="preserve">
+    <value>Protokoll att importera</value>
+  </data>
+  <data name="ProxyTestFailed" xml:space="preserve">
+    <value>Proxy-test misslyckades!</value>
+  </data>
+  <data name="ProxyTestSucceeded" xml:space="preserve">
+    <value>Proxy-test lyckades!</value>
+  </data>
+  <data name="PuttyDisposeFailed" xml:space="preserve">
+    <value>Kassering av Putty-processen misslyckades!</value>
+  </data>
+  <data name="PuttyFocusFailed" xml:space="preserve">
+    <value>Kunde inte sätta fokus!</value>
+  </data>
+  <data name="PuttyHandle" xml:space="preserve">
+    <value>Putty-handtag: {0}</value>
+  </data>
+  <data name="PuttyKillFailed" xml:space="preserve">
+    <value>Avsluta Putty-processen misslyckades!</value>
+  </data>
+  <data name="PanelHandle" xml:space="preserve">
+    <value>Panel-handtag: {0}</value>
+  </data>
+  <data name="PuttyResizeFailed" xml:space="preserve">
+    <value>Putty storleksändring misslyckades!</value>
+  </data>
+  <data name="PuttySavedSessionsRootName" xml:space="preserve">
+    <value>PuTTY sparade sessioner</value>
+  </data>
+  <data name="PuttySettings" xml:space="preserve">
+    <value>PuTTY-inställningar</value>
+  </data>
+  <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
+    <value>Visning av PuTTY-inställningar misslyckades!</value>
+  </data>
+  <data name="PuttyStuff" xml:space="preserve">
+    <value>--- PuTTY-grejer ---</value>
+  </data>
+  <data name="PuttyTitle" xml:space="preserve">
+    <value>PuTTY-titel: {0}</value>
+  </data>
+  <data name="Quick" xml:space="preserve">
+    <value>Snabb: {0}</value>
+  </data>
+  <data name="QuickConnect" xml:space="preserve">
+    <value>Snabbanslut</value>
+  </data>
+  <data name="QuickConnectAddFailed" xml:space="preserve">
+    <value>Snabbanslutsaddering misslyckades!</value>
+  </data>
+  <data name="QuickConnectFailed" xml:space="preserve">
+    <value>Skapa snabbanslutning misslyckades</value>
+  </data>
+  <data name="_CloseWarnAll" xml:space="preserve">
+    <value>Varna mig när anslutningar stängs</value>
+  </data>
+  <data name="RadioCloseWarnExit" xml:space="preserve">
+    <value>Varna mig endast när mRemoteNG a&amp;vslutas</value>
+  </data>
+  <data name="RadioCloseWarnMultiple" xml:space="preserve">
+    <value>Varna mig endast när &amp;flera anslutningar stängs</value>
+  </data>
+  <data name="RadioCloseWarnNever" xml:space="preserve">
+    <value>Varna &amp;mig inte när anslutningar stängs</value>
+  </data>
+  <data name="Rdp16777216Colors" xml:space="preserve">
+    <value>16777216 färger (24 bitar)</value>
+  </data>
+  <data name="Rdp256Colors" xml:space="preserve">
+    <value>256 färger (8 bitar)</value>
+  </data>
+  <data name="Rdp32768Colors" xml:space="preserve">
+    <value>32768 färger (15 bitar)</value>
+  </data>
+  <data name="Rdp4294967296Colors" xml:space="preserve">
+    <value>16777216 färger (32 bitar)</value>
+  </data>
+  <data name="Rdp65536Colors" xml:space="preserve">
+    <value>65536 färger (16 bitar)</value>
+  </data>
+  <data name="RdpControlCreationFailed" xml:space="preserve">
+    <value>Kunde inte skapa RDP-kontroll, kontrollera mRemoteNG-kraven.</value>
+  </data>
+  <data name="DisableCursorBlinking" xml:space="preserve">
+    <value>Inaktivera blinkande pekare</value>
+  </data>
+  <data name="DisableCursorShadow" xml:space="preserve">
+    <value>Inaktivera muspekarens skugga</value>
+  </data>
+  <data name="DisableFullWindowDrag" xml:space="preserve">
+    <value>Inaktivera helfönsterdrag</value>
+  </data>
+  <data name="DisableMenuAnimations" xml:space="preserve">
+    <value>Inaktivera menyanimationer</value>
+  </data>
+  <data name="RdpDisconnectFailed" xml:space="preserve">
+    <value>RDP-frånkoppling misslyckades, försöker stänga!</value>
+  </data>
+  <data name="RdpErrorCode1" xml:space="preserve">
+    <value>Intern felkod 1.</value>
+  </data>
+  <data name="RdpErrorCode2" xml:space="preserve">
+    <value>Intern felkod 2.</value>
+  </data>
+  <data name="RdpErrorCode3" xml:space="preserve">
+    <value>Internt felkod 3. Detta är inte ett giltigt tillstånd.</value>
+  </data>
+  <data name="RdpErrorCode4" xml:space="preserve">
+    <value>Intern felkod 4.</value>
+  </data>
+  <data name="RdpErrorConnection" xml:space="preserve">
+    <value>Ett oåterkalleligt fel har inträffat under klientanslutningen.</value>
+  </data>
+  <data name="RdpErrorGetFailure" xml:space="preserve">
+    <value>GetError misslyckades (FatalErrors)</value>
+  </data>
+  <data name="RdpErrorOutOfMemory" xml:space="preserve">
+    <value>Ett out-of-memory fel har inträffat.</value>
+  </data>
+  <data name="RdpErrorUnknown" xml:space="preserve">
+    <value>Ett okänt fel har inträffat.</value>
+  </data>
+  <data name="RdpErrorWindowCreation" xml:space="preserve">
+    <value>Ett fel uppstod vid skapande av fönster.</value>
+  </data>
+  <data name="RdpErrorWinsock" xml:space="preserve">
+    <value>Winsock initialiseringsfel.</value>
+  </data>
+  <data name="FitToPanel" xml:space="preserve">
+    <value>Anpassa till panel</value>
+  </data>
+  <data name="RdpFocusFailed" xml:space="preserve">
+    <value>RDP-fokus misslyckades!</value>
+  </data>
+  <data name="RdpGatewayIsSupported" xml:space="preserve">
+    <value>RDP-gateway stöds.</value>
+  </data>
+  <data name="RdpGatewayNotSupported" xml:space="preserve">
+    <value>RDP-gateway stöds inte!</value>
+  </data>
+  <data name="RdpReconnectCount" xml:space="preserve">
+    <value>RDP-återanslutningsantal:</value>
+  </data>
+  <data name="RdpSetAuthenticationLevelFailed" xml:space="preserve">
+    <value>RDP SetAuthenticationLevel misslyckades!</value>
+  </data>
+  <data name="RdpSetConsoleSessionFailed" xml:space="preserve">
+    <value>RDP SetUseConsoleSession misslyckades!</value>
+  </data>
+  <data name="RdpSetConsoleSwitch" xml:space="preserve">
+    <value>RDP Setting Console switch for RDC {0}.</value>
+  </data>
+  <data name="RdpSetCredentialsFailed" xml:space="preserve">
+    <value>RDP SetCredentials misslyckades!</value>
+  </data>
+  <data name="RdpSetEventHandlersFailed" xml:space="preserve">
+    <value>RDP SetEventHandlers misslyckades!</value>
+  </data>
+  <data name="RdpSetGatewayFailed" xml:space="preserve">
+    <value>RDP SetRDGateway misslyckades!</value>
+  </data>
+  <data name="RdpSetPerformanceFlagsFailed" xml:space="preserve">
+    <value>RDP SetPerformanceFlags misslyckades!</value>
+  </data>
+  <data name="RdpSetPortFailed" xml:space="preserve">
+    <value>RDP SetPort misslyckades!</value>
+  </data>
+  <data name="RdpSetPropsFailed" xml:space="preserve">
+    <value>RDP SetProps misslyckades!</value>
+  </data>
+  <data name="RdpSetRedirectionFailed" xml:space="preserve">
+    <value>RDP Set Redirection misslyckades!</value>
+  </data>
+  <data name="RdpSetRedirectKeysFailed" xml:space="preserve">
+    <value>RDP Set Redirect Keys misslyckades!</value>
+  </data>
+  <data name="RdpSetResolutionFailed" xml:space="preserve">
+    <value>RDP SetResolution misslyckades!</value>
+  </data>
+  <data name="RdpSoundBringToThisComputer" xml:space="preserve">
+    <value>Ta med till denna dator</value>
+  </data>
+  <data name="DoNotPlay" xml:space="preserve">
+    <value>Spela inte</value>
+  </data>
+  <data name="RdpSoundLeaveAtRemoteComputer" xml:space="preserve">
+    <value>Lämna vid fjärrdator</value>
+  </data>
+  <data name="RdpToggleFullscreenFailed" xml:space="preserve">
+    <value>RDP ToggleFullscreen misslyckades!</value>
+  </data>
+  <data name="RdpToggleSmartSizeFailed" xml:space="preserve">
+    <value>RDP ToggleSmartSize misslyckades!</value>
+  </data>
+  <data name="ReconnectAtStartup" xml:space="preserve">
+    <value>Återanslut till tidigare öppnade sessioner vid uppstart</value>
+  </data>
+  <data name="RemoteFile" xml:space="preserve">
+    <value>Fjärrfil</value>
+  </data>
+  <data name="RemoveAll" xml:space="preserve">
+    <value>Ta bort alla</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Byt namn</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Spara</value>
+  </data>
+  <data name="SaveAll" xml:space="preserve">
+    <value>Spara alla</value>
+  </data>
+  <data name="SaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
+    <value>Vill du spara den aktuella anslutningsfilen innan du laddar en annan?</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyDaily" xml:space="preserve">
+    <value>Dagligen</value>
+  </data>
+  <data name="strConnectionBackupFrequency" xml:space="preserve">
+    <value>Säkerhetskopieringsfrekvens för anslutning</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyWeekly" xml:space="preserve">
+    <value>Veckovis</value>
+  </data>
+  <data name="strConnectionsBackupMaxCount" xml:space="preserve">
+    <value>Max antal säkerhetskopior</value>
+  </data>
+  <data name="strConnectionsBackupPath" xml:space="preserve">
+    <value>Plats för säkerhetskopiering av anslutningsfil</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnEdit" xml:space="preserve">
+    <value>Vid redigering</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnExit" xml:space="preserve">
+    <value>Vid avslut</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyNever" xml:space="preserve">
+    <value>Säkerhetskopiera aldrig anslutningar</value>
+  </data>
+  <data name="strBrowse" xml:space="preserve">
+    <value>Bläddra...</value>
+  </data>
+  <data name="strBackup" xml:space="preserve">
+    <value>Säkerhetskopiera</value>
+  </data>
+  <data name="Screen" xml:space="preserve">
+    <value>Skärm</value>
+  </data>
+  <data name="Screenshot" xml:space="preserve">
+    <value>Skärmdump</value>
+  </data>
+  <data name="Screenshots" xml:space="preserve">
+    <value>Skärmdumpar</value>
+  </data>
+  <data name="SearchPrompt" xml:space="preserve">
+    <value>Sök</value>
+  </data>
+  <data name="SendTo" xml:space="preserve">
+    <value>Skicka till...</value>
+  </data>
+  <data name="SetHostnameLikeDisplayName" xml:space="preserve">
+    <value>Ange värdnamn som visningsnamn när du skapar eller byter namn på anslutningar</value>
+  </data>
+  <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+    <value>Kunde inte spara inställningar eller avpollettera SysTray ikon!</value>
+  </data>
+  <data name="ShowDescriptionTooltips" xml:space="preserve">
+    <value>Visa beskrivande verktygstips i anslutningsträdet</value>
+  </data>
+  <data name="ShowFullConsFilePath" xml:space="preserve">
+    <value>Visa fullständig sökväg till anslutningsfilen i fönstrets titel</value>
+  </data>
+  <data name="ShowLogonInfoOnTabs" xml:space="preserve">
+    <value>Visa inloggningsinformation på fliknamnen</value>
+  </data>
+  <data name="ShowProtocolOnTabs" xml:space="preserve">
+    <value>Visa protokoll på fliknamnen</value>
+  </data>
+  <data name="SingleClickOnConnectionOpensIt" xml:space="preserve">
+    <value>Enkelt klick på anslutningen öppnar den</value>
+  </data>
+  <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
+    <value>Klick på öppnad anslutning i anslutningsträdet växlar till vald anslutningsflik</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sortera</value>
+  </data>
+  <data name="SortAsc" xml:space="preserve">
+    <value>Stigande (A-Ö)</value>
+  </data>
+  <data name="SortDesc" xml:space="preserve">
+    <value>Fallande (Ö-A)</value>
+  </data>
+  <data name="SQLInfo" xml:space="preserve">
+    <value>Se Hjälp - Komma igång - SQL-konfiguration för mer info!</value>
+  </data>
+  <data name="SshBackgroundTransferFailed" xml:space="preserve">
+    <value>SSH bakgrundsöverföring misslyckades!</value>
+  </data>
+  <data name="SshTransferFailed" xml:space="preserve">
+    <value>SSH överföring misslyckades.</value>
+  </data>
+  <data name="FirstIp" xml:space="preserve">
+    <value>Första IP-adress</value>
+  </data>
+  <data name="FirstPort" xml:space="preserve">
+    <value>Första porten</value>
+  </data>
+  <data name="StartupExit" xml:space="preserve">
+    <value>Uppstart/Avsluta</value>
+  </data>
+  <data name="SwitchToErrorsAndInfos" xml:space="preserve">
+    <value>Växla till notifikationspanelen på:</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>Avancerat</value>
+  </data>
+  <data name="TabsAndPanels" xml:space="preserve">
+    <value>Flikar &amp;&amp; paneler</value>
+  </data>
+  <data name="Updates" xml:space="preserve">
+    <value>Uppdateringar</value>
+  </data>
+  <data name="TheFollowing" xml:space="preserve">
+    <value>Följande:</value>
+  </data>
+  <data name="TitleError" xml:space="preserve">
+    <value>Fel ({0})</value>
+  </data>
+  <data name="TitlePassword" xml:space="preserve">
+    <value>mRemoteNG lösenord</value>
+  </data>
+  <data name="TitlePasswordWithName" xml:space="preserve">
+    <value>mRemoteNG lösenord för {0}</value>
+  </data>
+  <data name="TitleSelectPanel" xml:space="preserve">
+    <value>Välj panel</value>
+  </data>
+  <data name="TitleWarning" xml:space="preserve">
+    <value>Varning ({0})</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>Överför</value>
+  </data>
+  <data name="TryToIntegrate" xml:space="preserve">
+    <value>Försök att integrera</value>
+  </data>
+  <data name="ShowOnToolbar" xml:space="preserve">
+    <value>Visa i verktygsfältet</value>
+  </data>
+  <data name="UncheckProperties" xml:space="preserve">
+    <value>Avmarkera egenskaperna du inte vill spara!</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>mRemoteNG kräver en uppdatering</value>
+  </data>
+  <data name="UpdateCheck" xml:space="preserve">
+    <value>mRemoteNG kan regelbundet ansluta till mRemoteNG webbplats för att söka efter uppdateringar.</value>
+  </data>
+  <data name="UpdateCheckCompleteFailed" xml:space="preserve">
+    <value>Uppdateringsinformationen kunde inte laddas ner.</value>
+  </data>
+  <data name="UpdateDownloadComplete" xml:space="preserve">
+    <value>Nedladdning slutförd!
+mRemoteNG kommer nu att avsluta och börja med installationen.</value>
+  </data>
+  <data name="UpdateDownloadCompleteFailed" xml:space="preserve">
+    <value>Uppdateringen kunde inte laddas ner.</value>
+  </data>
+  <data name="UpdateDownloadFailed" xml:space="preserve">
+    <value>Nedladdningen av uppdateringen kunde inte initieras.</value>
+  </data>
+  <data name="UpdateFrequencyCustom" xml:space="preserve">
+    <value>Varje {0} dagar</value>
+  </data>
+  <data name="Daily" xml:space="preserve">
+    <value>Dagligen</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>Månatligen</value>
+  </data>
+  <data name="Weekly" xml:space="preserve">
+    <value>Veckovis</value>
+  </data>
+  <data name="UpdateGetChangeLogFailed" xml:space="preserve">
+    <value>Ändringsloggen kunde inte laddas ner.</value>
+  </data>
+  <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
+    <value>Använd ett annat användarnamn och lösenord</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Användare</value>
+  </data>
+  <data name="UseSameUsernameAndPassword" xml:space="preserve">
+    <value>Använd samma användarnamn och lösenord</value>
+  </data>
+  <data name="UseSmartCard" xml:space="preserve">
+    <value>Använd ett smartkort</value>
+  </data>
+  <data name="UseSQLServer" xml:space="preserve">
+    <value>Använd SQL Server för att ladda &amp;&amp; spara anslutningar</value>
+  </data>
+  <data name="VncConnectionDisconnectFailed" xml:space="preserve">
+    <value>VNC-frånkoppling misslyckades!</value>
+  </data>
+  <data name="VncRefreshFailed" xml:space="preserve">
+    <value>VNC-skärmuppdatering misslyckades!</value>
+  </data>
+  <data name="VncSendSpecialKeysFailed" xml:space="preserve">
+    <value>VNC SendSpecialKeys misslyckades!</value>
+  </data>
+  <data name="VncSetEventHandlersFailed" xml:space="preserve">
+    <value>VNC Set Event Handlers misslyckades!</value>
+  </data>
+  <data name="VncSetPropsFailed" xml:space="preserve">
+    <value>VNC Set Props misslyckades!</value>
+  </data>
+  <data name="VncToggleSmartSizeFailed" xml:space="preserve">
+    <value>VNC växla SmartSize misslyckades!</value>
+  </data>
+  <data name="VncToggleViewOnlyFailed" xml:space="preserve">
+    <value>VNC Växling av ViewOnly misslyckades!</value>
+  </data>
+  <data name="WarnIfAuthFails" xml:space="preserve">
+    <value>Varna mig om autentisering misslyckas</value>
+  </data>
+  <data name="Warnings" xml:space="preserve">
+    <value>Varningar</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="RdpOverallConnectionTimeout" xml:space="preserve">
+    <value>RDP-anslutningstimeout</value>
+  </data>
+  <data name="NodeAlreadyInFolder" xml:space="preserve">
+    <value>Den här noden finns redan i den här mappen.</value>
+  </data>
+  <data name="NodeCannotDragOnSelf" xml:space="preserve">
+    <value>Kan inte dra noden till sig själv.</value>
+  </data>
+  <data name="NodeCannotDragParentOnChild" xml:space="preserve">
+    <value>Kan inte dra föräldranoden till barnet.</value>
+  </data>
+  <data name="NodeNotDraggable" xml:space="preserve">
+    <value>Den här noden är inte dragbar.</value>
+  </data>
+  <data name="EncryptionBlockCipherMode" xml:space="preserve">
+    <value>Blockkrypteringsläge</value>
+  </data>
+  <data name="EncryptionEngine" xml:space="preserve">
+    <value>Krypteringsmotor</value>
+  </data>
+  <data name="TabSecurity" xml:space="preserve">
+    <value>Säkerhet</value>
+  </data>
+  <data name="EncryptionKeyDerivationIterations" xml:space="preserve">
+    <value>Iterationer för krypteringsnyckelsderivation</value>
+  </data>
+  <data name="Dynamic" xml:space="preserve">
+    <value>Dynamisk</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>Hög</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Medel</value>
+  </data>
+  <data name="PropertyDescriptionSoundQuality" xml:space="preserve">
+    <value>Välj ljudkvalitet som tillhandahålls av protokollet: Dynamisk, Medium, Hög</value>
+  </data>
+  <data name="SoundQuality" xml:space="preserve">
+    <value>Ljudkvalitet</value>
+  </data>
+  <data name="UpdatePortableDownloadComplete" xml:space="preserve">
+    <value>Nedladdning slutförd!</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Ladda ner</value>
+  </data>
+  <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
+    <value>Antalet minuter för RDP-sessionen att sitta inaktiv innan automatiskt bortkoppling (sätt 0 för att inaktivera)</value>
+  </data>
+  <data name="MinutesToIdleTimeout" xml:space="preserve">
+    <value>Minuter till inaktiv</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Lägg till</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="ConfirmDeleteCredentialRecord" xml:space="preserve">
+    <value>Är du säker på att du vill ta bort inloggnignsuppgiften, {0}?</value>
+  </data>
+  <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Välj om du vill bli meddelad när RDP-sessionen kopplas bort på grund av inaktivitet</value>
+  </data>
+  <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+    <value>Lösenordet måste innehålla minst {0} av följande tecken: {1}</value>
+  </data>
+  <data name="PasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+    <value>Lösenordet måste innehålla minst {0} små bokstäver</value>
+  </data>
+  <data name="PasswordContainsNumbersConstraint" xml:space="preserve">
+    <value>Lösenordet måste innehålla minst {0} siffr(a/or)</value>
+  </data>
+  <data name="PasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+    <value>Lösenordet måste innehålla minst {0} stora bokstäver</value>
+  </data>
+  <data name="PasswordLengthConstraintHint" xml:space="preserve">
+    <value>Lösenordets längd måste vara mellan {0} och {1} tecken</value>
+  </data>
+  <data name="ChooseLogPath" xml:space="preserve">
+    <value>Välj en sökväg för mRemoteNG-loggfilen</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>Felsök</value>
+  </data>
+  <data name="ShowTheseMessageTypes" xml:space="preserve">
+    <value>Visa dessa meddelandetyper</value>
+  </data>
+  <data name="LogFilePath" xml:space="preserve">
+    <value>Sökväg till loggfil</value>
+  </data>
+  <data name="LogTheseMessageTypes" xml:space="preserve">
+    <value>Logga dessa meddelandetyper</value>
+  </data>
+  <data name="ChoosePath" xml:space="preserve">
+    <value>Välj sökväg</value>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>Öppna fil</value>
+  </data>
+  <data name="UseDefault" xml:space="preserve">
+    <value>Använd standard</value>
+  </data>
+  <data name="Logging" xml:space="preserve">
+    <value>Loggning</value>
+  </data>
+  <data name="Popups" xml:space="preserve">
+    <value>Popup-fönster</value>
+  </data>
+  <data name="LogToAppDir" xml:space="preserve">
+    <value>Logga till programkatalog</value>
+  </data>
+  <data name="AssignedCredential" xml:space="preserve">
+    <value>Tilldelad inloggninsuppgift</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Inloggningsuppgifter</value>
+  </data>
+  <data name="OpenADifferentFile" xml:space="preserve">
+    <value>Öppna en annan fil</value>
+  </data>
+  <data name="CredentialUnavailable" xml:space="preserve">
+    <value>Användaruppgift inte tillgänglig</value>
+  </data>
+  <data name="OptionsThemeDeleteConfirmation" xml:space="preserve">
+    <value>Vill du verkligen ta bort temat?</value>
+  </data>
+  <data name="OptionsThemeNewThemeCaption" xml:space="preserve">
+    <value>Nytt temanamn</value>
+  </data>
+  <data name="OptionsThemeNewThemeError" xml:space="preserve">
+    <value>Kan inte skapa tema, namnet finns redan eller specialtecken i namnet</value>
+  </data>
+  <data name="OptionsThemeNewThemeText" xml:space="preserve">
+    <value>Skriv in det nya temanamnet</value>
+  </data>
+  <data name="OptionsThemeChangeWarning" xml:space="preserve">
+    <value>Varning: Omstart krävs för att utföra ändringar i temainställningen.</value>
+  </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>Kunde inte hitta externt verktyg med namnet "{0}"</value>
+  </data>
+  <data name="ConfigurationCreateNew" xml:space="preserve">
+    <value>Skapa en ny anslutningsfil</value>
+  </data>
+  <data name="ConnectionFileNotFound" xml:space="preserve">
+    <value>Anslutningsfilen kunde inte hittas.</value>
+  </data>
+  <data name="ConfigurationImportFile" xml:space="preserve">
+    <value>Importera en befintlig fil</value>
+  </data>
+  <data name="ConfigurationCustomPath" xml:space="preserve">
+    <value>Använd en anpassad filsökväg</value>
+  </data>
+  <data name="TestingConnection" xml:space="preserve">
+    <value>Testar anslutning</value>
+  </data>
+  <data name="ServerNotAccessible" xml:space="preserve">
+    <value>Servern '{0}' var inte tillgänglig.</value>
+  </data>
+  <data name="ConnectionSuccessful" xml:space="preserve">
+    <value>Anslutningen lyckades</value>
+  </data>
+  <data name="LoginFailedForUser" xml:space="preserve">
+    <value>Inloggning misslyckades för användaren '{0}'.</value>
+  </data>
+  <data name="DatabaseNotAvailable" xml:space="preserve">
+    <value>Databasen '{0}' är inte tillgängligt.</value>
+  </data>
+  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
+    <value>Spara anslutningar efter varje ändring</value>
+  </data>
+  <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
+    <value>Filtrera sökmatchningar i anslutningsträdet</value>
+  </data>
+  <data name="TestConnection" xml:space="preserve">
+    <value>Testa anslutning</value>
+  </data>
+  <data name="ReadOnly" xml:space="preserve">
+    <value>Endast läsning:</value>
+  </data>
+  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Använd UTF-8 för RDP "Lastbalanceringsinfo"-inställning</value>
+  </data>
+  <data name="WorkingDirectory" xml:space="preserve">
+    <value>Arbetskatalog:</value>
+  </data>
+  <data name="RunElevated" xml:space="preserve">
+    <value>Kör med högre behörighet</value>
+  </data>
+  <data name="ShowOnToolbarColumnHeader" xml:space="preserve">
+    <value>Visa på verktygsfälts kolumn</value>
+  </data>
+  <data name="WorkingDirColumnHeader" xml:space="preserve">
+    <value>Arbetskatalog</value>
+  </data>
+  <data name="LockToolbars" xml:space="preserve">
+    <value>Lås verktygsfältets positioner</value>
+  </data>
+  <data name="MultiSshToolbar" xml:space="preserve">
+    <value>Multi SSH verktygsfält</value>
+  </data>
+  <data name="ImportSubOUs" xml:space="preserve">
+    <value>Importera under-OU:er</value>
+  </data>
+  <data name="AdvancedSecurityOptions" xml:space="preserve">
+    <value>Avancerade säkerhetsinställningar</value>
+  </data>
+  <data name="OptionsPageTitle" xml:space="preserve">
+    <value>mRemoteNG-alternativ</value>
+  </data>
+  <data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Skapa en tom panel när mRemoteNG startar</value>
+  </data>
+  <data name="MustBeBetween0And255" xml:space="preserve">
+    <value>Måste vara mellan 0 och 255</value>
+  </data>
+  <data name="OutOfRange" xml:space="preserve">
+    <value>Utanför intervall</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Radera</value>
+  </data>
+  <data name="ReconnectAllConnections" xml:space="preserve">
+    <value>Återanslut alla anslutningar</value>
+  </data>
+  <data name="DisconnectOthersRight" xml:space="preserve">
+    <value>Koppla ner flikar till höger</value>
+  </data>
+  <data name="DisconnectOthers" xml:space="preserve">
+    <value>Koppla ner alla utom denna</value>
+  </data>
+  <data name="ConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+    <value>Är du säker på att du vill stänga alla anslutningar utom "{0}"?</value>
+  </data>
+  <data name="AutomaticReconnectError" xml:space="preserve">
+    <value>Ett fel inträffade vid försök att återansluta till RDP-värden '{0}'</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>Ett fel inträffade medan försök att ändra anslutningens upplösning till värden '{0}'</value>
+  </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Stackspårning</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Felmeddelande</value>
+  </data>
+  <data name="mRemoteNGUnhandledException" xml:space="preserve">
+    <value>mRemoteNG ohanterat undantag</value>
+  </data>
+  <data name="UnhandledExceptionOccured" xml:space="preserve">
+    <value>Ett ohanterat undantag har inträffat</value>
+  </data>
+  <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
+    <value>Detta undantag kommer att tvinga mRemoteNG att stängas</value>
+  </data>
+  <data name="CopyHostname" xml:space="preserve">
+    <value>Kopiera värdnamn</value>
+  </data>
+  <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Placera sökfältet ovanför anslutningsträdet</value>
+  </data>
+  <data name="TrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Spåra aktiv anslutning i anslutningsträdet</value>
+  </data>
+  <data name="AlwaysShowConnectionTabs" xml:space="preserve">
+    <value>Visa alltid anslutningsflikar</value>
+  </data>
+  <data name="ReleaseChannel" xml:space="preserve">
+    <value>Utgåvokanal</value>
+  </data>
+  <data name="ReleaseChannelExplanation" xml:space="preserve">
+    <value>Stabila kanalen innehåller endast slututgåvor.
+Förhandsgranska kanalen inkluderar Betor &amp; Utgåvokandidater.
+Nattliga kanalen inkluderar Alfa, Betor &amp; Utgåvokandidater.</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Verkställ</value>
+  </data>
+  <data name="MultiSshToolTip" xml:space="preserve">
+    <value>Tryck ENTER för att skicka. Ctrl+C skickas omedelbart.</value>
+  </data>
+  <data name="PropertyDescriptionFavorite" xml:space="preserve">
+    <value>Visa denna anslutning i favoritmenyn.</value>
+  </data>
+  <data name="Favorite" xml:space="preserve">
+    <value>Favorit</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favoriter</value>
+  </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Rensa söksträng</value>
+  </data>
+  <data name="ConnectInViewOnlyMode" xml:space="preserve">
+    <value>Anslut i visningsläge</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Trimma inte mellanslag från användarnamn</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Miljö</value>
+  </data>
+  <data name="EncryptionTestResultMessage" xml:space="preserve">
+    <value>Kryptering av {0} poster med hjälp av {1}/{2} och {3} iterationer tog {4} sekunder.</value>
+  </data>
+  <data name="EncryptionTest" xml:space="preserve">
+    <value>Krypteringstest</value>
+  </data>
+  <data name="TestSettings" xml:space="preserve">
+    <value>Testa inställningar</value>
+  </data>
+  <data name="PropertyDescriptionRdpVersion" xml:space="preserve">
+    <value>Ställer in versionen av RDP att använda när du öppnar anslutningar.</value>
+  </data>
+  <data name="PropertyDescriptionUseVmId" xml:space="preserve">
+    <value>Använd VM-ID för att ansluta till VM som körs på Hyper-V.</value>
+  </data>
+  <data name="PropertyDescriptionVmId" xml:space="preserve">
+    <value>ID för Hyper-V virtuella maskinen att ansluta till.</value>
+  </data>
+  <data name="UseVmId" xml:space="preserve">
+    <value>Använd VM-ID</value>
+  </data>
+  <data name="VmId" xml:space="preserve">
+    <value>VM-ID</value>
+  </data>
+  <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
+    <value>Kunde inte skapa RDP-klient. RDP-protokollversion {0} stöds inte på den här maskinen. Välj en äldre protokollversion.</value>
+  </data>
+  <data name="PropertyDescriptionSshTunnel" xml:space="preserve">
+    <value>För anslutning via en SSH-tunnel (hoppa via värd) ange SSH-anslutning som ska användas för att upprätta SSH-tunnel.</value>
+  </data>
+  <data name="SshTunnel" xml:space="preserve">
+    <value>SSH-tunnel</value>
+  </data>
+  <data name="PropertyDescriptionSshOptions" xml:space="preserve">
+    <value>Ange här ytterligare alternativ som ska användas för SSH-anslutning. Se PuTTY-dokumentation för ytterligare detaljer.</value>
+  </data>
+  <data name="SshOptions" xml:space="preserve">
+    <value>SSH-alternativ</value>
+  </data>
+  <data name="SshTunnelConfigProblem" xml:space="preserve">
+    <value>SSH-tunnelanslutningsproblem. Anslutning till: "{0}" via SSH-tunnel: "{1}" är inte möjligt. En anslutning med namnet konfigurerad som SSH-tunnel och protokoll SSH-version 1 eller SSH-version 2 kan inte hittas i anslutningsträdet. Rensa SSH-tunnelkonfigurationen eller ange befintlig SSH-anslutning.</value>
+  </data>
+  <data name="SshTunnelIsNotPutty" xml:space="preserve">
+    <value>SSH-tunnelanslutningsproblem. Anslutning till: "{0}" via SSH-tunnel: "{1}" är inte möjligt. Anslutningen konfigurerad som SSH-tunnel finns i anslutningsträdet men protokollet härrör inte från PuTTY. Kontrollera att anslutningen är konfigurerad som SSH-tunnel använder SSH-protokollet.</value>
+  </data>
+  <data name="SshTunnelNotInitialized" xml:space="preserve">
+    <value>SSH-tunnelinitieringsproblem. Anslutning till: "{0}" via SSH-tunnel: "{1}" inte möjligt. SSH-anslutning kunde inte initieras. Kontrollera om anslutningen är konfigurerad som SSH-tunnel.</value>
+  </data>
+  <data name="SshTunnelNotConnected" xml:space="preserve">
+    <value>SSH-tunnelanslutningsproblem. Anslutning till: "{0}" via SSH-tunnel: "{1}" inte möjligt. SSH-anslutning misslyckades. Kontrollera eventuella problem med anslutningen konfigurerad som SSH-tunnel.</value>
+  </data>
+  <data name="SshTunnelFailed" xml:space="preserve">
+    <value>SSH-tunnelanslutning misslyckades. Anslutning till: "{0}" via SSH-tunnel: "{1}" inte möjligt. PuTTY-processen avslutades. Kontrollera eventuella problem med anslutningen konfigurerad som SSH-tunnel.</value>
+  </data>
+  <data name="SshTunnelPortNotReadyInTime" xml:space="preserve">
+    <value>Tiden för SSH-tunnelanslutningen löpte ut. Anslutning till: "{0}" via SSH-tunnel: "{1}" är inte möjligt. Lokal tunnelport blev inte tillgänglig i tid. Kontrollera eventuella problem med anslutningen konfigurerad som SSH-tunnel.</value>
+  </data>
+  <data name="StartMinimized" xml:space="preserve">
+    <value>Starta minimerad</value>
+  </data>
+  <data name="PropertyDescriptionPasswordProtect" xml:space="preserve">
+    <value>Ange ett lösenord som behövs för att kryptera anslutningsfilen. Du kommer att bli ombedd att ange ditt lösenord innan du startar mRemoteNG.</value>
+  </data>
+  <data name="PropertyDescriptionUseEnhancedMode" xml:space="preserve">
+    <value>Anslut till en Hyper-V-värd med förbättrat läge aktiverat.</value>
+  </data>
+  <data name="UseEnhancedMode" xml:space="preserve">
+    <value>Använd förbättrat läge</value>
+  </data>
+  <data name="PropertyDescriptionRdpGatewayPassword" xml:space="preserve">
+    <value>Anger lösenordet för Remote Desktop Gateway-servern.</value>
+  </data>
+  <data name="CloseToSysTray" xml:space="preserve">
+    <value>Stäng till notifikationsområdet</value>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Versionshistorik</value>
+  </data>
+  <data name="Credits" xml:space="preserve">
+    <value>Erkännanden</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Licens</value>
+  </data>
+  <data name="PropertyDescriptionDisableCursorBlinking" xml:space="preserve">
+    <value>Anger om markörblinkning ska inaktiveras.</value>
+  </data>
+  <data name="PropertyDescriptionDisableCursorShadow" xml:space="preserve">
+    <value>Anger om en musskugga ska vara synlig.</value>
+  </data>
+  <data name="PropertyDescriptionDisableFullWindowDrag" xml:space="preserve">
+    <value>Anger om fönsterinnehållet visas när du drar fönstret till en ny plats.</value>
+  </data>
+  <data name="PropertyDescriptionDisableMenuAnimations" xml:space="preserve">
+    <value>Anger om menyer och fönster kan visas med animeringseffekter i fjärrsessionen.</value>
+  </data>
+  <data name="HttpFailedUrlBuild" xml:space="preserve">
+    <value>Det gick inte att skapa URL:en att ladda</value>
+  </data>
+  <data name="ShowHideMenu" xml:space="preserve">
+    <value>Visa/Dölj Menyremsa</value>
+  </data>
+  <data name="PropertyDescriptionRDPStartProgram" xml:space="preserve">
+    <value>Programmet som ska startas på fjärrservern vid anslutning.</value>
+  </data>
+  <data name="PropertyDescriptionRDPStartProgramWorkDir" xml:space="preserve">
+    <value>Anger arbetskatalogen för det alternativa skalprogrammet.</value>
+  </data>
+  <data name="RDPStartProgram" xml:space="preserve">
+    <value>Alternativt skalprogram</value>
+    <comment>https://docs.microsoft.com/en-us/windows/win32/termserv/imstscsecuredsettings-startprogram</comment>
+  </data>
+  <data name="RDPStartProgramWorkDir" xml:space="preserve">
+    <value>Alternativt skalprograms arbetskatalog</value>
+    <comment>https://docs.microsoft.com/en-us/windows/win32/termserv/imstscsecuredsettings-workdir</comment>
+  </data>
+  <data name="OpeningCommand" xml:space="preserve">
+    <value>ATT GÖRA</value>
+  </data>
+  <data name="PropertyDescriptionOpeningCommand" xml:space="preserve">
+    <value>ATT GÖRA</value>
+  </data>
+  <data name="RedirectDrives" xml:space="preserve">
+    <value>Diskenheter</value>
+  </data>
+  <data name="RedirectSmartCards" xml:space="preserve">
+    <value>Smartkort</value>
+  </data>
+  <data name="ApplyInheritanceToChildren" xml:space="preserve">
+    <value>Verkställ arv på barnen</value>
+  </data>
+  <data name="ApplyDefaultInheritance" xml:space="preserve">
+    <value>Verkställ standardarv</value>
+  </data>
+  <data name="SmartCard" xml:space="preserve">
+    <value>Smartkort</value>
+  </data>
+  <data name="RemoteDesktopServices" xml:space="preserve">
+    <value>Fjärrskrivbordstjänster</value>
+  </data>
+  <data name="EC2InstanceId" xml:space="preserve">
+    <value>EC2 instans ID</value>
+  </data>
+  <data name="PropertyDescriptionEC2InstanceId" xml:space="preserve">
+    <value>använd denna instans id för att hämta publika ip från AWS EC2 instans</value>
+  </data>
+  <data name="PropertyDescriptionEC2Region" xml:space="preserve">
+    <value>hämta AWS instansinformation från denna region</value>
+  </data>
+  <data name="ACLPermissionsHidden" xml:space="preserve">
+    <value>Dold</value>
+    <comment>Permission then option will be hide completly from user</comment>
+  </data>
+  <data name="ACLPermissionsReadOnly" xml:space="preserve">
+    <value>Skrivskyddad</value>
+    <comment>Permission then option is visible but user can't modify it</comment>
+  </data>
+  <data name="ACLPermissionsWriteAllow" xml:space="preserve">
+    <value>Tillåt skrivning</value>
+    <comment>Permission then user could modify an option value</comment>
+  </data>
+  <data name="lblConnectionsBackupPath" xml:space="preserve">
+    <value>Välj plats för säkerhetskopiering av anslutningsdata</value>
+  </data>
+  <data name="btnBrowsePath" xml:space="preserve">
+    <value>Bläddra</value>
+  </data>
+  <data name="lblACL" xml:space="preserve">
+    <value>ACL för användare</value>
+  </data>
+  <data name="lblBackupEnable" xml:space="preserve">
+    <value>Säkerhetskopior för anslutningsdata</value>
+  </data>
+  <data name="lblBackupNameFormat" xml:space="preserve">
+    <value>Filnamnsformat för säkerhetskopiering</value>
+  </data>
+  <data name="lblBackupType" xml:space="preserve">
+    <value>Typ av säkethetskopia</value>
+  </data>
+  <data name="lblConnectionsBackupFrequency" xml:space="preserve">
+    <value>Säkerhetskopieringsfrekvens för anslutning</value>
+  </data>
+  <data name="lblConnectionsBackupMaxCount" xml:space="preserve">
+    <value>Max antal säkerhetskopior</value>
+  </data>
+  <data name="PageСontrolInOptionsMenu" xml:space="preserve">
+    <value>Sidkontroll i menyn Alternativ</value>
+  </data>
+  <data name="ShowForUser" xml:space="preserve">
+    <value>Visa för användare</value>
+  </data>
+  <data name="FiltermRemoteRemoteDesktopManagerCSV" xml:space="preserve">
+    <value>Remote Desktop Manager-filer (*.csv)</value>
+  </data>
+</root>
