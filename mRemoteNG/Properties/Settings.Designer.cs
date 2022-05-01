@@ -1390,70 +1390,54 @@ namespace mRemoteNG.Properties {
                 this["ConDefaultUseCredSsp"] = value;
             }
         }
-
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool InhDefaultUseRestrictedAdmin
-        {
-            get
-            {
+        public bool InhDefaultUseRestrictedAdmin {
+            get {
                 return ((bool)(this["InhDefaultUseRestrictedAdmin"]));
             }
-            set
-            {
+            set {
                 this["InhDefaultUseRestrictedAdmin"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ConDefaultUseRestrictedAdmin
-        {
-            get
-            {
+        public bool ConDefaultUseRestrictedAdmin {
+            get {
                 return ((bool)(this["ConDefaultUseRestrictedAdmin"]));
             }
-            set
-            {
+            set {
                 this["ConDefaultUseRestrictedAdmin"] = value;
             }
         }
-
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool InhDefaultUseRCG
-        {
-            get
-            {
+        public bool InhDefaultUseRCG {
+            get {
                 return ((bool)(this["InhDefaultUseRCG"]));
             }
-            set
-            {
+            set {
                 this["InhDefaultUseRCG"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ConDefaultUseRCG
-        {
-            get
-            {
+        public bool ConDefaultUseRCG {
+            get {
                 return ((bool)(this["ConDefaultUseRCG"]));
             }
-            set
-            {
+            set {
                 this["ConDefaultUseRCG"] = value;
             }
         }
-
-       
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2235,6 +2219,66 @@ namespace mRemoteNG.Properties {
             }
             set {
                 this["ConDefaultRDPStartProgramWorkDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultEC2InstanceId {
+            get {
+                return ((string)(this["ConDefaultEC2InstanceId"]));
+            }
+            set {
+                this["ConDefaultEC2InstanceId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultUserViaAPI {
+            get {
+                return ((string)(this["ConDefaultUserViaAPI"]));
+            }
+            set {
+                this["ConDefaultUserViaAPI"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultOpeningCommand {
+            get {
+                return ((string)(this["ConDefaultOpeningCommand"]));
+            }
+            set {
+                this["ConDefaultOpeningCommand"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultUserViaAPI {
+            get {
+                return ((bool)(this["InhDefaultUserViaAPI"]));
+            }
+            set {
+                this["InhDefaultUserViaAPI"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultOpeningCommand {
+            get {
+                return ((bool)(this["InhDefaultOpeningCommand"]));
+            }
+            set {
+                this["InhDefaultOpeningCommand"] = value;
             }
         }
     }
