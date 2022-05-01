@@ -7,7 +7,6 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.ACL;
 using mRemoteNG.Security;
-using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -16,8 +15,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         private readonly FrmMain _frmMain = FrmMain.Default;
         private List<DropdownList> _permissionsListing;
-        private List<DropdownList> _connectionBackup;
-
+        
         public BackupPage()
         {
             InitializeComponent();
@@ -62,8 +60,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 lblBackupType.Enabled = true;
                 pnlBackupType.Visible = true;
                 pnlBackupType.Enabled = true;
-                cbConnectionBackupFrequency.Visible = true;
-                cbConnectionBackupFrequency.Enabled = true;
+                plMakeBackup.Visible = true;
+                plMakeBackup.Enabled = true;
                 numMaxBackups.Visible = true;
                 numMaxBackups.Enabled = true;
                 txtBackupNameFormat.Visible = true;
@@ -72,8 +70,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 txtConnectionsBackupPath.Enabled = true;
                 btnBrowsePath.Visible = true;
                 btnBrowsePath.Enabled = true;
-                lblConnectionsBackupFrequency.Visible = true;
-                lblConnectionsBackupFrequency.Enabled = true;
+                lblMakeBackup.Visible = true;
+                lblMakeBackup.Enabled = true;
                 lblConnectionsBackupMaxCount.Visible = true;
                 lblConnectionsBackupMaxCount.Enabled = true;
                 lblBackupNameFormat.Visible = true;
@@ -103,10 +101,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 pnlBackupType.Visible = Properties.OptionsBackupPage.Default.cbBackupTypeACL == 0 ? false : true;
                 pnlBackupType.Enabled = Properties.OptionsBackupPage.Default.cbBackupTypeACL == 1 ? false : true;
 
-                lblConnectionsBackupFrequency.Visible = Properties.OptionsBackupPage.Default.cbBackupFrequencyACL == 0 ? false : true;
-                lblConnectionsBackupFrequency.Enabled = Properties.OptionsBackupPage.Default.cbBackupFrequencyACL == 1 ? false : true;
-                cbConnectionBackupFrequency.Visible = Properties.OptionsBackupPage.Default.cbBackupFrequencyACL == 0 ? false : true;
-                cbConnectionBackupFrequency.Enabled = Properties.OptionsBackupPage.Default.cbBackupFrequencyACL == 1 ? false : true;
+                lblMakeBackup.Visible = Properties.OptionsBackupPage.Default.cbBackupFrequencyACL == 0 ? false : true;
+                lblMakeBackup.Enabled = Properties.OptionsBackupPage.Default.cbBackupFrequencyACL == 1 ? false : true;
+                plMakeBackup.Visible = Properties.OptionsBackupPage.Default.cbBackupFrequencyACL == 0 ? false : true;
+                plMakeBackup.Enabled = Properties.OptionsBackupPage.Default.cbBackupFrequencyACL == 1 ? false : true;
 
                 lblConnectionsBackupMaxCount.Visible = Properties.OptionsBackupPage.Default.cbBackupNumberACL == 0 ? false : true;
                 lblConnectionsBackupMaxCount.Enabled = Properties.OptionsBackupPage.Default.cbBackupNumberACL == 1 ? false : true;
@@ -132,39 +130,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             _permissionsListing = new List<DropdownList>
             {
-                {
-                    new DropdownList((int) ACLPermissions.Hidden, Language.ACLPermissionsHidden)
-                },
-                {
-                    new DropdownList((int) ACLPermissions.ReadOnly, Language.ACLPermissionsReadOnly)
-                },
-                {
-                    new DropdownList((int) ACLPermissions.WriteAllow, Language.ACLPermissionsWriteAllow)
-                },
-
+                {new DropdownList((int) ACLPermissions.Hidden, Language.ACLPermissionsHidden)},
+                {new DropdownList((int) ACLPermissions.ReadOnly, Language.ACLPermissionsReadOnly)},
+                {new DropdownList((int) ACLPermissions.WriteAllow, Language.ACLPermissionsWriteAllow)},
             };
 
             btnBrowsePath.Text = Language.strBrowse;
-
-            _connectionBackup = new List<DropdownList>
-            {
-                {
-                    new DropdownList((int) ConnectionsBackupFrequencyEnum.Never, Language.ConnectionsBackupFrequencyNever)
-                },
-                {
-                    new DropdownList((int) ConnectionsBackupFrequencyEnum.OnEdit, Language.ConnectionsBackupFrequencyOnEdit)
-                },
-                {
-                    new DropdownList((int) ConnectionsBackupFrequencyEnum.OnExit, Language.ConnectionsBackupFrequencyOnExit)
-                },
-                {
-                    new DropdownList((int) ConnectionsBackupFrequencyEnum.Daily, Language.ConnectionsBackupFrequencyDaily)
-                },
-                {
-                    new DropdownList((int) ConnectionsBackupFrequencyEnum.Weekly, Language.ConnectionsBackupFrequencyWeekly)
-                },
-                //{ new DropdownList( (int)ConnectionsBackupFrequencyEnum.Custom, Language.ConnectionsBackupFrequencyCustom)}
-            };
 
             lblBacupPageShowInOptionsMenu.Text = Language.PageСontrolInOptionsMenu;
             cbBacupPageInOptionMenu.Text = Language.ShowForUser;
@@ -199,12 +170,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cbBackupLocationACL.DisplayMember = "DisplayString";
             cbBackupLocationACL.ValueMember = "Index";
 
-            cbConnectionBackupFrequency.BindingContext = new BindingContext();
-            cbConnectionBackupFrequency.DataSource = _connectionBackup;
-            cbConnectionBackupFrequency.DisplayMember = "DisplayString";
-            cbConnectionBackupFrequency.ValueMember = "Index";
-
-            lblConnectionsBackupFrequency.Text = Language.strConnectionBackupFrequency;
+            lblMakeBackup.Text = Language.strConnectionBackupFrequency;
             lblConnectionsBackupMaxCount.Text = Language.strConnectionsBackupMaxCount;
             lblConnectionsBackupPath.Text = Language.strConnectionsBackupPath;
         }
@@ -212,22 +178,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void LoadSettings()
         {
             numMaxBackups.Value = Convert.ToDecimal(Properties.OptionsBackupPage.Default.BackupFileKeepCount);
-
-            if (Properties.OptionsBackupPage.Default.SaveConnectionsFrequency == (int) ConnectionsBackupFrequencyEnum.Unassigned)
-            {
-                if (Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit)
-                {
-                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int) ConnectionsBackupFrequencyEnum.OnEdit;
-                }
-                else if (Properties.OptionsBackupPage.Default.SaveConsOnExit)
-                {
-                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int) ConnectionsBackupFrequencyEnum.OnExit;
-                }
-                else
-                {
-                    Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int) ConnectionsBackupFrequencyEnum.Never;
-                }
-            }
 
             cbBacupPageInOptionMenu.Checked = Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu;
             cbBackupEnableACL.SelectedValue = Properties.OptionsBackupPage.Default.cbBackupEnableACL;
@@ -238,7 +188,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cbBackupLocationACL.SelectedValue = Properties.OptionsBackupPage.Default.cbBackupLocationACL;
             txtBackupNameFormat.Text = Properties.OptionsBackupPage.Default.BackupFileNameFormat;
 
-            cbConnectionBackupFrequency.SelectedValue = Properties.OptionsBackupPage.Default.SaveConnectionsFrequency;
+            cbMakeBackupOnExit.Checked = Properties.OptionsBackupPage.Default.BackupConnectionsOnExit;
+            cbMakeBackupOnEdit.Checked = Properties.OptionsBackupPage.Default.BackupConnectionsOnEdit;
+            cbMakeBackupOnSave.Checked = Properties.OptionsBackupPage.Default.BackupConnectionsOnSave;
+
+            numMaxBackups.Value = Properties.OptionsBackupPage.Default.BackupFileKeepCount;
+            if (numMaxBackups.Value == 0)
+                rbBackupEnableDisable.Checked = true;
             txtConnectionsBackupPath.Text = Properties.OptionsBackupPage.Default.BackupLocation;
 
         }
@@ -246,7 +202,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             Properties.OptionsBackupPage.Default.BackupFileKeepCount = (int) numMaxBackups.Value;
-
+            /*
             if (Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes > 0)
             {
                 _frmMain.tmrAutoSave.Interval = Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes * 60000;
@@ -256,7 +212,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 _frmMain.tmrAutoSave.Enabled = false;
             }
-
+            */
             Properties.OptionsBackupPage.Default.cbBackupEnableACL = (int) cbBackupEnableACL.SelectedValue;
             Properties.OptionsBackupPage.Default.cbBackupTypeACL = (int) cbBackupTypeACL.SelectedValue;
             Properties.OptionsBackupPage.Default.cbBackupFrequencyACL = (int) cbBackupFrequencyACL.SelectedValue;
@@ -266,36 +222,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsBackupPage.Default.BackupFileNameFormat = (string) txtBackupNameFormat.Text;
 
-            Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int) cbConnectionBackupFrequency.SelectedValue;
+            Properties.OptionsBackupPage.Default.BackupConnectionsOnExit = (bool) cbMakeBackupOnExit.Checked;
+            Properties.OptionsBackupPage.Default.BackupConnectionsOnEdit = (bool) cbMakeBackupOnEdit.Checked;
+            Properties.OptionsBackupPage.Default.BackupConnectionsOnSave = (bool) cbMakeBackupOnSave.Checked;
 
-            if (txtConnectionsBackupPath.Text.Trim().Length <= 0)
-            {
-                Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
-                Properties.OptionsBackupPage.Default.BackupLocation = String.Empty;
-            }
-            else
-            {
-                var newFileName = txtConnectionsBackupPath.Text;
+            Properties.OptionsBackupPage.Default.BackupFileKeepCount = (int) numMaxBackups.Value;
 
-                Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false,
-                    new SaveFilter(), newFileName);
-
-                if (newFileName == Runtime.ConnectionsService.GetDefaultStartupConnectionFileName())
-                {
-                    Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = false;
-                }
-                else
-                {
-                    Properties.OptionsBackupPage.Default.LoadConsFromCustomLocation = true;
-                    Properties.OptionsBackupPage.Default.BackupLocation = newFileName;
-                }
-            }
-
+            Properties.OptionsBackupPage.Default.BackupLocation = (string) txtConnectionsBackupPath.Text;
+            
             Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu = cbBacupPageInOptionMenu.Checked;
-
-            //Obsolete. Set to false
-            Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit = false;
-            Properties.OptionsBackupPage.Default.SaveConsOnExit = false;
 
             //Save settings to persist changes between application sessions
             Properties.OptionsBackupPage.Default.Save();
@@ -305,6 +240,50 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             var selectFolderDialog = DialogFactory.SelectFolder(Language.lblConnectionsBackupPath);
             txtConnectionsBackupPath.Text = selectFolderDialog.ShowDialog() == CommonFileDialogResult.Ok ? selectFolderDialog.FileName : txtConnectionsBackupPath.Text;
+        }
+
+        private void rbBackupEnableDisable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbBackupEnableDisable.Checked)
+            {
+                lblBackupType.Enabled = false;
+                pnlBackupType.Enabled = false;
+                lblMakeBackup.Enabled = false;
+                plMakeBackup.Enabled = false;
+                lblConnectionsBackupMaxCount.Enabled = false;
+                numMaxBackups.Enabled = false;
+                numMaxBackups.Value = 0;
+                lblBackupNameFormat.Enabled = false;
+                txtBackupNameFormat.Enabled = false;
+                lblConnectionsBackupPath.Enabled = false;
+                txtConnectionsBackupPath.Enabled = false;
+                btnBrowsePath.Enabled = false;
+                cbBackupTypeACL.Enabled = false;
+                cbBackupFrequencyACL.Enabled = false;
+                cbBackupNumberACL.Enabled = false;
+                cbBackupNameFormatACL.Enabled = false;
+                cbBackupLocationACL.Enabled = false;
+            }
+            else
+            {
+                lblBackupType.Enabled = true;
+                pnlBackupType.Enabled = true;
+                lblMakeBackup.Enabled = true;
+                plMakeBackup.Enabled = true;
+                lblConnectionsBackupMaxCount.Enabled = true;
+                numMaxBackups.Enabled = true;
+                numMaxBackups.Value = 10;
+                lblBackupNameFormat.Enabled = true;
+                txtBackupNameFormat.Enabled = true;
+                lblConnectionsBackupPath.Enabled = true;
+                txtConnectionsBackupPath.Enabled = true;
+                btnBrowsePath.Enabled = true;
+                cbBackupTypeACL.Enabled = true;
+                cbBackupFrequencyACL.Enabled = true;
+                cbBackupNumberACL.Enabled = true;
+                cbBackupNameFormatACL.Enabled = true;
+                cbBackupLocationACL.Enabled = true;
+            }
         }
     }
 }

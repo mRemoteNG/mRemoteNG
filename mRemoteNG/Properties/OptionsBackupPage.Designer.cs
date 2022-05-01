@@ -214,5 +214,41 @@ namespace mRemoteNG.Properties {
                 this["cbBacupPageInOptionMenu"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool BackupConnectionsOnExit {
+            get {
+                return ((bool)(this["BackupConnectionsOnExit"]));
+            }
+            set {
+                this["BackupConnectionsOnExit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool BackupConnectionsOnEdit {
+            get {
+                return ((bool)(this["BackupConnectionsOnEdit"]));
+            }
+            set {
+                this["BackupConnectionsOnEdit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool BackupConnectionsOnSave {
+            get {
+                return ((bool)(this["BackupConnectionsOnSave"]));
+            }
+            set {
+                this["BackupConnectionsOnSave"] = value;
+            }
+        }
     }
 }
