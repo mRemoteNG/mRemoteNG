@@ -15,6 +15,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>latest</LangVersion>
     <PackageIcon>Header_dark.png</PackageIcon>
+	<ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+	<UseWPF>True</UseWPF>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>DEBUG</DefineConstants>
@@ -49,6 +51,7 @@
 
   <ItemGroup>
     <None Remove="buildenv.tmp" />
+    <None Remove="UI\Font\HandelGotDBol.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -419,6 +422,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExternalConnectors\ExternalConnectors.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="UI\Font\HandelGotDBol.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

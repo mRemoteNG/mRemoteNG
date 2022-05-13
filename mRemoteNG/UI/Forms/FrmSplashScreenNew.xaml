@@ -1,0 +1,22 @@
+﻿<Window x:Class="mRemoteNG.UI.Forms.FrmSplashScreenNew"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mRemoteNG.UI.Forms"
+        mc:Ignorable="d"
+        WindowStartupLocation="Manual"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Height="120"
+        Width="450">
+    <Border CornerRadius="10" BorderBrush="#211E1B" BorderThickness="1" Background="#373C42">
+        <Grid>
+            <Label Name="lblLogoPartA" Content="m" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Margin="78,12,0,0" Width="40" FontFamily="HandelGotDBol" FontSize="40" Foreground="#5289F9"/>
+            <Label Name="lblLogoPartB" Content="RemoteNG" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Margin="109,12,0,0" Width="210" FontFamily="HandelGotDBol" FontSize="40" Foreground="#E8EBEE"/>
+            <Label Name="lblLogoPartC" Content="Multi-Remote Next Generation Connection Manager" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Margin="0,72,0,0" Width="410" FontFamily="Segoe" FontSize="16" Foreground="#E8EBEE" FontWeight="Bold"/>
+            <Label Name="lblLogoPartD" Content="v.?.??.?" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="319,36,0,0" Width="75" FontFamily="Segoe" FontSize="16" Foreground="#E8EBEE"/>
+        </Grid>
+    </Border>
+</Window>

@@ -37,14 +37,9 @@ namespace mRemoteNG.App
             messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
 
             //About to pop up a message, let's not block it...
-            FrmSplashScreen.getInstance().Close();
+            FrmSplashScreenNew.GetInstance().Close();
 
-            var ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName,
-                                                                Language.CompatibilityProblemDetected, errorText, "",
-                                                                "",
-                                                                Language.CheckboxDoNotShowThisMessageAgain,
-                                                                ETaskDialogButtons.OkCancel, ESysIcons.Warning,
-                                                                ESysIcons.Warning);
+            var ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected, errorText, "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked && ShouldIStayOrShouldIGo == DialogResult.OK)
             {
                 messageCollector.AddMessage(MessageClass.ErrorMsg, "User requests that FIPS check be overridden", true);

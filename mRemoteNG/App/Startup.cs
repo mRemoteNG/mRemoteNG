@@ -38,8 +38,7 @@ namespace mRemoteNG.App
 
         public void InitializeProgram(MessageCollector messageCollector)
         {
-            Debug.Print("---------------------------" + Environment.NewLine + "[START] - " +
-                        Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
+            Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
             var startupLogger = new StartupDataLogger(messageCollector);
             startupLogger.LogStartupData();
             CompatibilityChecker.CheckCompatibility(messageCollector);
