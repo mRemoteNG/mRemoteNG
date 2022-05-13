@@ -29,17 +29,19 @@ public class RemoteDesktopManagerImporter : IConnectionImporter<string>
         var dataProvider = new FileDataProvider(filePath);
         var csvString = dataProvider.Load();
 
-        if (csvString.IsNullOrEmpty())
+        if (string.IsNullOrEmpty(csvString))
+        {
+            var csvDeserializer = new CsvConnectionsDeserializerRdmFormat();
+            var connectionTreeModel = csvDeserializer.Deserialize(csvString);
+
+            var rootContainer = new ContainerInfo { Name = Path.GetFileNameWithoutExtension(filePath) };
+            rootContainer.AddChildRange(connectionTreeModel.RootNodes);
+            destinationContainer.AddChild(rootContainer);
+        }
+        else
         {
             Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Unable to import file. File is empty.");
             return;
         }
-
-        var csvDeserializer = new CsvConnectionsDeserializerRdmFormat();
-        var connectionTreeModel = csvDeserializer.Deserialize(csvString);
-
-        var rootContainer = new ContainerInfo { Name = Path.GetFileNameWithoutExtension(filePath) };
-        rootContainer.AddChildRange(connectionTreeModel.RootNodes);
-        destinationContainer.AddChild(rootContainer);
     }
 }
