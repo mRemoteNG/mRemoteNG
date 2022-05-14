@@ -64,7 +64,14 @@ namespace mRemoteNG.UI.Forms
         {
             _showFullPathInTitle = Properties.OptionsAppearancePage.Default.ShowCompleteConsPathInTitle;
             InitializeComponent();
-            DPI_Per_Monitor.TryEnableDPIAware(this, SetUserFonts);
+            Screen targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
+
+            Rectangle viewport = targetScreen.WorkingArea;
+            
+            // normaly it should be screens[1] however due DPI apply 1 size "same" as default with 100%
+            this.Left = viewport.Left + (targetScreen.Bounds.Size.Width / 2) - (this.Width / 2);
+            this.Top = viewport.Top + (targetScreen.Bounds.Size.Height / 2) - (this.Height / 2);
+
             Fullscreen = new FullscreenHandler(this);
 
             //Theming support
@@ -74,23 +81,7 @@ namespace mRemoteNG.UI.Forms
 
             _advancedWindowMenu = new AdvancedWindowMenu(this);
         }
-        void SetUserFonts(float scaleFactorX, float scaleFactorY)
-        {
-            //this.Width  = (int)Math.Ceiling(this.Width *scaleFactorX);
-            //this.Height = (int)Math.Ceiling(this.Height*scaleFactorY);
-            var OldFont = Font;
-            Font = new Font(Font.FontFamily, 11f * scaleFactorX, Font.Style, GraphicsUnit.Pixel);
-            OldFont.Dispose();
-            //splitContainer1.Size = this.ClientSize; // not strictly important, but stabalize things against rounding errors...
-            //checkedListBoxSaved.Height = labelAnchorSaved.Top - checkedListBoxSaved.Top; //See note on listboxes
-            //checkedListBoxCurrent.Height = labelAnchorChecked.Top - checkedListBoxCurrent.Top; //See note on listboxes
-            Refresh();
-        }
-        //protected override void DefWndProc(ref System.Windows.Forms.Message m)
-        //{
-        //    DPI_Per_Monitor.Check_WM_DPICHANGED_WM_NCCREATE(SetUserFonts, m, this.Handle);
-        //    base.WndProc(ref m);
-        //}
+   
         #region Properties
 
         public FormWindowState PreviousWindowState { get; set; }

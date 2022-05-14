@@ -39,6 +39,7 @@
             this.viewMenu = new mRemoteNG.UI.Menu.ViewMenu();
             this.toolsMenu = new mRemoteNG.UI.Menu.ToolsMenu();
             this.helpMenu = new mRemoteNG.UI.Menu.HelpMenu();
+            this.modeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsContainer = new System.Windows.Forms.ToolStripContainer();
             this._quickConnectToolStrip = new mRemoteNG.UI.Controls.QuickConnectToolStrip();
@@ -81,7 +82,7 @@
             this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
-            this.msMain.Size = new System.Drawing.Size(309, 25);
+            this.msMain.Size = new System.Drawing.Size(151, 25);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 0;
             this.msMain.Text = "Main Toolbar";
@@ -123,6 +124,11 @@
             this.helpMenu.Size = new System.Drawing.Size(44, 19);
             this.helpMenu.Text = "&Help";
             this.helpMenu.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            // 
+            // modeToolStripMenuItem
+            // 
+            this.modeToolStripMenuItem.Name = "modeToolStripMenuItem";
+            this.modeToolStripMenuItem.Size = new System.Drawing.Size(12, 25);
             // 
             // mMenSep3
             // 
@@ -188,6 +194,15 @@
             // vsToolStripExtender
             // 
             this.vsToolStripExtender.DefaultRenderer = null;
+            // 
+            // tsModeAdmin
+            // 
+            this.tsModeAdmin.Name = "tsModeAdmin";
+            this.tsModeAdmin.Size = new System.Drawing.Size(32, 19);
+            // 
+            // tsModeUser
+            // 
+            this.tsModeUser.Checked = true;
             this.tsModeUser.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tsModeUser.Name = "tsModeUser";
             this.tsModeUser.Size = new System.Drawing.Size(180, 22);
@@ -206,7 +221,7 @@
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "FrmMain";
             this.Opacity = 0D;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);

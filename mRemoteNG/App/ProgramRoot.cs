@@ -30,6 +30,7 @@ namespace mRemoteNG.App
             CatchAllUnhandledExceptions();
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+
             var frmSplashScreen = FrmSplashScreenNew.GetInstance();
 
             Screen targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
@@ -37,18 +38,12 @@ namespace mRemoteNG.App
             Rectangle viewport = targetScreen.WorkingArea;
             frmSplashScreen.Top = viewport.Top;
             frmSplashScreen.Left = viewport.Left;
-            //mainWindow.Show();
-            Screen[] screens = Screen.AllScreens;
-            //if (screens.Length > 1)
-            //{
             // normaly it should be screens[1] however due DPI apply 1 size "same" as default with 100%
                 frmSplashScreen.Left = viewport.Left + (targetScreen.Bounds.Size.Width / 2) - (frmSplashScreen.Width / 2);
                 frmSplashScreen.Top = viewport.Top + (targetScreen.Bounds.Size.Height / 2) - (frmSplashScreen.Height / 2);
-            //frmSplashScreen.Top = 50;
-            //}
-
-            //frmSplashScreen.Show();
+            
             frmSplashScreen.Show();
+            
             System.Windows.Forms.Application.Run(FrmMain.Default);
         }
 
