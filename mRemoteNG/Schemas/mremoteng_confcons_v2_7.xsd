@@ -175,5 +175,10 @@
     <xs:attribute name="UserViaAPI" type="xs:string" use="optional" />
     <xs:attribute name="EC2InstanceId" type="xs:string" use="optional" />
     <xs:attribute name="EC2Region" type="xs:string" use="optional" />
+    <xs:attribute name="UseRCG" type="xs:boolean" use="optional" />
+    <xs:attribute name="UseRestrictedAdmin" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUseRCG" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritUseRestrictedAdmin" type="xs:boolean" use="optional" />
+
   </xs:complexType>
 </xs:schema>
