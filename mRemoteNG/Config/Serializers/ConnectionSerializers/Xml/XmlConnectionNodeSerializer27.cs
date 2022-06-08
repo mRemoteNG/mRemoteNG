@@ -151,6 +151,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 ? new XAttribute("RDGatewayDomain", connectionInfo.RDGatewayDomain)
                 : new XAttribute("RDGatewayDomain", ""));
 
+            element.Add(new XAttribute("UseRCG", connectionInfo.UseRCG));
+            element.Add(new XAttribute("UseRestrictedAdmin", connectionInfo.UseRestrictedAdmin));
+
             element.Add(new XAttribute("UserViaAPI", connectionInfo.UserViaAPI));
             element.Add(new XAttribute("EC2InstanceId", connectionInfo.EC2InstanceId));
             element.Add(new XAttribute("EC2Region", connectionInfo.EC2Region));
@@ -298,6 +301,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     element.Add(new XAttribute("InheritUseEnhancedMode", inheritance.UseEnhancedMode.ToString().ToLowerInvariant()));
                 if (inheritance.UserViaAPI)
                     element.Add(new XAttribute("InheritUserViaAPI", inheritance.UserViaAPI.ToString().ToLowerInvariant()));
+                if (inheritance.UseRCG)
+                    element.Add(new XAttribute("InheritUseRCG", inheritance.UseRCG.ToString().ToLowerInvariant()));
+                if (inheritance.UseRestrictedAdmin)
+                    element.Add(new XAttribute("InheritUseRestrictedAdmin", inheritance.UseRestrictedAdmin.ToString().ToLowerInvariant()));
             }
         }
     }
