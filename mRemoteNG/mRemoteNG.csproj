@@ -86,7 +86,7 @@
     <PackageReference Include="OpenCover" Version="4.7.1221" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
     <PackageReference Include="Renci.SshNet.Async" Version="1.4.0" />
-    <PackageReference Include="ReportGenerator" Version="5.1.6" />
+    <PackageReference Include="ReportGenerator" Version="5.1.9" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="System.DirectoryServices" Version="6.0.0" />
