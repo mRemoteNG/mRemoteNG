@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Core" Version="3.7.11.15" />
-    <PackageReference Include="AWSSDK.EC2" Version="3.7.74.6" />
+    <PackageReference Include="AWSSDK.Core" Version="3.7.12.2" />
+    <PackageReference Include="AWSSDK.EC2" Version="3.7.75" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
