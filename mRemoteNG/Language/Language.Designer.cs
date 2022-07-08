@@ -1042,6 +1042,17 @@ namespace mRemoteNG.Resources.Language {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to reset the panels to their default layout?.
+        /// </summary>
+        internal static string FileMenuWillBeHiddenNow
+        {
+            get
+            {
+                return ResourceManager.GetString("FileMenuWillBeHiddenNow", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Connect.
         /// </summary>
         internal static string Connect {
@@ -3147,6 +3158,17 @@ namespace mRemoteNG.Resources.Language {
         internal static string Notifications {
             get {
                 return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to FileMenu.
+        /// </summary>
+        internal static string FileMenu
+        {
+            get
+            {
+                return ResourceManager.GetString("FileMenu", resourceCulture);
             }
         }
 
