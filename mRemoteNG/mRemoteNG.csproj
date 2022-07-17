@@ -81,7 +81,6 @@
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1264.42" />
     <PackageReference Include="MySql.Data" Version="8.0.29" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="ObjectListView" Version="2.7.1.5" />
     <PackageReference Include="ObjectListView.Official" Version="2.9.1" />
     <PackageReference Include="OpenCover" Version="4.7.1221" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
