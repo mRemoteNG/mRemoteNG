@@ -727,7 +727,22 @@ namespace mRemoteNG.UI.Forms
             Windows.ErrorsForm.Show(pnlDock, DockState.DockBottomAutoHide);
             viewMenu._mMenViewErrorsAndInfos.Checked = true;
 
+            ShowFileMenu();
+
             pnlDock.Visible = true;
+        }
+
+        public void ShowFileMenu()
+        {
+            msMain.Visible = true;
+            viewMenu._mMenViewFileMenu.Checked = true;
+        }
+
+        public void HideFileMenu()
+        {
+            msMain.Visible = false;
+            viewMenu._mMenViewFileMenu.Checked = false;
+            MessageBox.Show(Language.FileMenuWillBeHiddenNow, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void SetLayout()
