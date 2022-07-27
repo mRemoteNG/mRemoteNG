@@ -163,7 +163,7 @@
     <value>Poměr stran</value>
   </data>
   <data name="AutoSaveEvery" xml:space="preserve">
-    <value>Automaticky ukládat každých:</value>
+    <value>Automatické uložení v minutách (0 znamená vypnuto):</value>
   </data>
   <data name="AvailableVersion" xml:space="preserve">
     <value>Poslední verze</value>
@@ -265,7 +265,7 @@
     <value>Pro spojení použít proxy server</value>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>Login</value>
+    <value>Přihlašovací jméno</value>
   </data>
   <data name="WaitForExit" xml:space="preserve">
     <value>Čekat na logout</value>
@@ -376,7 +376,7 @@
     <value>Protokol událostí připojen</value>
   </data>
   <data name="ConnectionEventConnectedDetail" xml:space="preserve">
-    <value>Připojení k "{0}" přes "{1}" bylo provedeno uživatelem "{2}" (Popis: "{3}"; Login: "{4}")</value>
+    <value>Připojení k "{0}" přes "{1}" bylo provedeno uživatelem "{2}" (Popis: "{3}"; Přihlašovací jméno: "{4}")</value>
   </data>
   <data name="ConnectionFailed" xml:space="preserve">
     <value>Připojení selhalo!</value>
@@ -410,7 +410,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
     <value>Nepovedlo se uložit soubor seznamu spojení "{0}"!</value>
   </data>
   <data name="ConnectNoCredentials" xml:space="preserve">
-    <value>Připojit bez loginu</value>
+    <value>Připojit bez přihlašovacích údajů</value>
   </data>
   <data name="ConnectToConsoleSession" xml:space="preserve">
     <value>Připojit k otevřenému sezení konzole</value>
@@ -455,7 +455,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
     <value>Přejete si pokračovat bez hesla?</value>
   </data>
   <data name="EmptyUsernamePasswordDomainFields" xml:space="preserve">
-    <value>Pro prázdná políčka Login, Heslo nebo Doména použít:</value>
+    <value>Pro prázdná políčka Přihlašovací jméno, Heslo nebo Doména použít:</value>
   </data>
   <data name="EncryptCompleteConnectionFile" xml:space="preserve">
     <value>Zakódovat celý soubor seznamu připojení</value>
@@ -593,7 +593,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
     <value>Spojení HTTP selhalo!</value>
   </data>
   <data name="HttpConnectionFailed" xml:space="preserve">
-    <value>Nezdařilo se vytvoření noebého spojení HTTP!</value>
+    <value>Nezdařilo se vytvoření nového spojení HTTP!</value>
   </data>
   <data name="HttpDocumentTileChangeFailed" xml:space="preserve">
     <value>Změna nadpisu dokumentu HTTP selhala!</value>
@@ -740,7 +740,7 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
     <value>Klonovat záložku tabu</value>
   </data>
   <data name="Exit" xml:space="preserve">
-    <value>Exit</value>
+    <value>Ukončit</value>
   </data>
   <data name="ExternalToolsToolbar" xml:space="preserve">
     <value>Nástrojová lišta externích nástrojů</value>
@@ -1002,7 +1002,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
     <value>Pokud se využívá v externím nástroji, zadejte sem MAC adresu vzdáleného hostitele.</value>
   </data>
   <data name="PropertyDescriptionName" xml:space="preserve">
-    <value>Toto jméno bude zobrazeno ve stromě seznamu spojení a jejich složek.</value>
+    <value>Toto jméno bude zobrazeno v seznamu spojení a jejich složek.</value>
   </data>
   <data name="PropertyDescriptionPanel" xml:space="preserve">
     <value>Zadaný název určí panel, ve kterém se má spojení otevřít.</value>
@@ -1149,7 +1149,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
     <value>Adresa MAC</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Jméno</value>
+    <value>Název</value>
   </data>
   <data name="Panel" xml:space="preserve">
     <value>Panel</value>
@@ -1179,7 +1179,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
     <value>Přihl. údaje brány</value>
   </data>
   <data name="RdpGatewayUsername" xml:space="preserve">
-    <value>Login brány</value>
+    <value>Přihlašovací jméno brány</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Připojit lok. disky</value>
@@ -1227,7 +1227,7 @@ Pokud k takové chybě dojde, prosím vytvořte nový soubor se seznamem spojen�
     <value>Typ proxy</value>
   </data>
   <data name="ProxyUsername" xml:space="preserve">
-    <value>Login k proxy</value>
+    <value>Přihlašovací jméno k proxy</value>
   </data>
   <data name="ProtocolEventDisconnected" xml:space="preserve">
     <value>Událost prokolu Odpojeno.
@@ -1497,7 +1497,7 @@ Zpráva:
     <value>V názvu okna zobrazovat úplnou cestu k souboru seznamu spojení</value>
   </data>
   <data name="ShowLogonInfoOnTabs" xml:space="preserve">
-    <value>Zobrazovat v názvu záložek (tabech) informace o loginu</value>
+    <value>Zobrazovat v názvu záložek (tabech) informace o uživateli</value>
   </data>
   <data name="ShowProtocolOnTabs" xml:space="preserve">
     <value>Zobrazovat v názvu záložek (tabech) protokol (typ spojení)</value>
@@ -1648,7 +1648,7 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
     <value>Použít čipovou kartu</value>
   </data>
   <data name="UseSQLServer" xml:space="preserve">
-    <value>Použít SQL Server ke stažení &amp;&amp; uloženho seznamu spojení</value>
+    <value>Použít SQL Server ke stažení &amp;&amp; uloženého seznamu spojení</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Verze</value>
@@ -1804,4 +1804,81 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
 + 
 + <data name="AssignedCredential" xml:space="preserve">
      <value>Přiřazené přihlašovací informace</value>
+  </data>
+  <data name="StartMinimized" xml:space="preserve">
+    <value>Po spuštění minimalizovat</value>
+  </data><data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Otevřít prázdný panel při startu aplikace</value>
+  </data>
+  <data name="IdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Zavřít záložku dvojklikem na ní</value>
+  </data>
+  <data name="CloseToSysTray" xml:space="preserve">
+    <value>Zavřít do oznamovací oblasti</value>
+  </data>
+  <data name="OptionsThemeNewThemeCaption" xml:space="preserve">
+    <value>Nový název šablony</value>
+  </data>
+  <data name="OptionsThemeNewThemeText" xml:space="preserve">
+    <value>Zadejte nový název šablony</value>
+  </data>
+  <data name="OptionsThemeNewThemeError" xml:space="preserve">
+    <value>Nepodařilo se vytvořit šablonu, buď již existuje šablona se stejným názvem nebo vámi zadaný název obsahuje speciální znaky.</value>
+  </data>
+  <data name="SetHostnameLikeDisplayNameNewConnection" xml:space="preserve">
+    <value>Při vytváření nového připojení nastaví stejný název zobrazení jako je název počítače</value>
+  </data>
+  <data name="RdpReconnectionCount" xml:space="preserve">
+    <value>Počet opětovných připojení k RDP</value>
+  </data>
+  <data name="RdpConnectionTimeout" xml:space="preserve">
+    <value>Časová prodleva připojení k RDP</value>
+  </data>
+    <data name="WhenClosingConnections" xml:space="preserve">
+    <value>Když se ukončí připojení:</value>
+  </data>
+    <data name="WarnMeWhenClosingConnections" xml:space="preserve">
+    <value>Upozornit mě na ukončení připojení</value>
+  </data>
+    <data name="WarnMeOnlyWhenClosingMultipleConnections" xml:space="preserve">
+    <value>Upozornit mě pouze při ukončení několika připojení</value>
+  </data>
+    <data name="WarnMeOnlyWhenExitingProgram" xml:space="preserve">
+    <value>Upozornit mě pouze při ukončení programu</value>
+  </data>
+    <data name="DoNotWarnMeWhenClosingConnections" xml:space="preserve">
+    <value>Neupozorňovat na ukončení připojení</value>
+  </data>
+    <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
+    <value>Uložit připojení při každé úpravě</value>
+  </data>
+    <data name="StartFullScreen" xml:space="preserve">
+    <value>Při spuštění zobrazit na celou obrazovku</value>
+  </data>
+    <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
+    <value>Filtrovat shody vyhledávání v seznamu připojení</value>
+  </data>
+    <data name="ReconnectToPreviouslyOpenedSessionsOnStartup" xml:space="preserve">
+    <value>Obnovit dříve spuštěná připojení po startu</value>
+  </data>
+    <data name="SaveConnectionsOnExit" xml:space="preserve">
+    <value>Uložit připojení při ukončení programu</value>
+  </data>
+    <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Umístit vyhledávací pole nad seznam připojení</value>
+  </data>
+    <data name="TrackActiveConnectionInTheConnectionTree" xml:space="preserve">
+    <value>Označovat aktivní připojení v seznamu</value>
+  </data>
+    <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Nezkracovat uživatelské jméno</value>
+  </data>
+  <data name="AutoSaveInMinutes" xml:space="preserve">
+    <value>Kliknutím na již otevřené připojení v seznamu otevře jeho záložku</value>
+  </data>
+    <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Použít kódování UTF8 pro vlastnost RDP "Load Balance Info"</value>
+  </data>
+    <data name="TestConnection" xml:space="preserve">
+    <value>Test spojení</value>
   </data></root>
