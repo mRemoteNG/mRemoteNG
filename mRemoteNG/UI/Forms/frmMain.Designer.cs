@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.UI.Forms
+﻿using System.Windows.Forms;
+
+namespace mRemoteNG.UI.Forms
 {
 	public partial class FrmMain : System.Windows.Forms.Form
 	{
@@ -229,9 +231,22 @@
             this.tsContainer.ResumeLayout(false);
             this.tsContainer.PerformLayout();
             this.ResumeLayout(false);
-
 		}
-		internal WeifenLuo.WinFormsUI.Docking.DockPanel pnlDock;
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Alt | Keys.Menu))
+            {
+                if(!msMain.Visible)
+                {
+                    msMain.Visible = true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        internal WeifenLuo.WinFormsUI.Docking.DockPanel pnlDock;
 		internal System.Windows.Forms.MenuStrip msMain;
 		internal System.Windows.Forms.ToolStripContainer tsContainer;
 		internal System.Windows.Forms.Timer tmrAutoSave;
