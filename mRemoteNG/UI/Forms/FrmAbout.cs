@@ -9,11 +9,11 @@ using System.Runtime.InteropServices;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class FrmAbout : Form
+    public partial class frmAbout : Form
     {
-        public static FrmAbout Instance { get; set; } = new FrmAbout();
+        public static frmAbout Instance { get; set; } = new frmAbout();
 
-        private FrmAbout()
+        private frmAbout()
         {
             InitializeComponent();
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.UIAboutBox_16x);

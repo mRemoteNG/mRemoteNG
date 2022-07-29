@@ -1,11 +1,11 @@
 ﻿namespace mRemoteNG.UI.Forms
 {
-    public partial class FrmAbout
+    public partial class frmAbout
     {
         #region  Windows Form Designer generated code
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAbout));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAbout));
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.llCredits = new System.Windows.Forms.LinkLabel();
@@ -133,7 +133,7 @@
             this.lblCopyright.Text = "Copyright";
             this.lblCopyright.UseCompatibleTextRendering = true;
             // 
-            // FrmAbout
+            // frmAbout
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -147,7 +147,7 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(20000, 10000);
             this.MinimizeBox = false;
-            this.Name = "FrmAbout";
+            this.Name = "frmAbout";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
             this.TopMost = true;
