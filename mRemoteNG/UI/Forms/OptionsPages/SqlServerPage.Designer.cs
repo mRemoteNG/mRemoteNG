@@ -247,7 +247,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.txtSQLType.FormattingEnabled = true;
             this.txtSQLType.Items.AddRange(new object[] {
             "mssql",
-            "mysql"});
+            "mysql",
+            "postgresql"});
             this.txtSQLType.Location = new System.Drawing.Point(163, 3);
             this.txtSQLType.Name = "txtSQLType";
             this.txtSQLType.Size = new System.Drawing.Size(235, 21);

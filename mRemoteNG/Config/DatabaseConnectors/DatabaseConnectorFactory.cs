@@ -22,6 +22,8 @@ namespace mRemoteNG.Config.DatabaseConnectors
         {
             switch (type)
             {
+                case "postgresql":
+                    return new PostgreSQLDatabaseConnector(server, database, username, password);
                 case "mysql":
                     return new MySqlDatabaseConnector(server, database, username, password);
                 case "mssql":

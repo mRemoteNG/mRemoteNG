@@ -34,7 +34,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 {
                     Name = dbDataReader["Name"] as string ?? "",
                     Protected = dbDataReader["Protected"] as string ?? "",
-                    Export = (bool)dbDataReader["Export"],
+                    Export = Convert.ToBoolean(dbDataReader["Export"]),
                     ConfVersion =
                         new Version(Convert.ToString(dbDataReader["confVersion"], CultureInfo.InvariantCulture))
                 };

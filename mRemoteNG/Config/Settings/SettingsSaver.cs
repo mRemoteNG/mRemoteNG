@@ -47,6 +47,21 @@ namespace mRemoteNG.Config.Settings
                 SaveQuickConnectToolbarLocation(quickConnectToolStrip);
                 SaveMultiSshToolbarLocation(multiSshToolStrip);
 
+                Properties.App.Default.Save();
+                Properties.AppUI.Default.Save();
+                Properties.OptionsAdvancedPage.Default.Save();
+                Properties.OptionsAppearancePage.Default.Save();
+                Properties.OptionsBackupPage.Default.Save();
+                Properties.OptionsConnectionsPage.Default.Save();
+                Properties.OptionsCredentialsPage.Default.Save();
+                Properties.OptionsDBsPage.Default.Save();
+                Properties.OptionsNotificationsPage.Default.Save();
+                Properties.OptionsSecurityPage.Default.Save();
+                Properties.OptionsStartupExitPage.Default.Save();
+                Properties.OptionsTabsPanelsPage.Default.Save();
+                Properties.OptionsThemePage.Default.Save();
+                Properties.OptionsUpdatesPage.Default.Save();
+                
                 Properties.Settings.Default.Save();
 
                 SaveDockPanelLayout();

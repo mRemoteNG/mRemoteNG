@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.Connection;
 using mRemoteNG.Properties;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.UI.Window;
-using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -16,6 +15,7 @@ namespace mRemoteNG.UI.Menu
         private ToolStripMenuItem _mMenReconnectAll;
         private ToolStripSeparator _mMenViewSep1;
         public ToolStripMenuItem _mMenViewErrorsAndInfos;
+        public ToolStripMenuItem _mMenViewFileMenu;
         private ToolStripMenuItem _mMenViewAddConnectionPanel;
         private ToolStripSeparator _mMenViewSep2;
         private ToolStripMenuItem _mMenViewFullscreen;
@@ -45,6 +45,7 @@ namespace mRemoteNG.UI.Menu
             _mMenViewAddConnectionPanel = new ToolStripMenuItem();
             _mMenViewConnectionPanels = new ToolStripMenuItem();
             _mMenViewSep1 = new ToolStripSeparator();
+            _mMenViewFileMenu = new ToolStripMenuItem();
             _mMenViewErrorsAndInfos = new ToolStripMenuItem();
             _mMenViewResetLayout = new ToolStripMenuItem();
             _mMenViewLockToolbars = new ToolStripMenuItem();
@@ -60,6 +61,7 @@ namespace mRemoteNG.UI.Menu
             // 
             DropDownItems.AddRange(new ToolStripItem[]
             {
+                _mMenViewFileMenu,
                 _mMenViewErrorsAndInfos,
                 _mMenViewQuickConnectToolbar,
                 _mMenViewExtAppsToolbar,
@@ -105,6 +107,15 @@ namespace mRemoteNG.UI.Menu
             // 
             _mMenViewSep1.Name = "mMenViewSep1";
             _mMenViewSep1.Size = new System.Drawing.Size(225, 6);
+            // 
+            // mMenViewFile
+            // 
+            _mMenViewFileMenu.Checked = true;
+            _mMenViewFileMenu.CheckState = CheckState.Checked;
+            _mMenViewFileMenu.Name = "mMenViewFile";
+            _mMenViewFileMenu.Size = new System.Drawing.Size(228, 22);
+            _mMenViewFileMenu.Text = Language.FileMenu;
+            _mMenViewFileMenu.Click += mMenViewFileMenu_Click;
             // 
             // mMenViewErrorsAndInfos
             // 
@@ -221,6 +232,18 @@ namespace mRemoteNG.UI.Menu
             {
                 Windows.ErrorsForm.Hide();
                 _mMenViewErrorsAndInfos.Checked = false;
+            }
+        }
+
+        private void mMenViewFileMenu_Click(object sender, EventArgs e)
+        {
+            if (_mMenViewFileMenu.Checked == false)
+            {
+                MainForm.ShowFileMenu();
+            }
+            else
+            {
+                MainForm.HideFileMenu();
             }
         }
 

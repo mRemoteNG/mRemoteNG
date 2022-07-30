@@ -2280,4 +2280,10 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="FiltermRemoteRemoteDesktopManagerCSV" xml:space="preserve">
     <value>Remote Desktop Manager Files (*.csv)</value>
   </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>File menu</value>
+  </data>
+  <data name="FileMenuWillBeHiddenNow" xml:space="preserve">
+    <value>File menu is hidded now. Press Alt button to peek</value>
+  </data>
 </root>

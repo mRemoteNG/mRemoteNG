@@ -5,6 +5,7 @@ using mRemoteNG.App;
 using mRemoteNG.Properties;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
+using Npgsql;
 
 namespace mRemoteNG.Config.DataProviders
 {
@@ -87,6 +88,28 @@ namespace mRemoteNG.Config.DataProviders
                         {
                             dataAdapter.UpdateBatchSize = 1000;
                             using (MySqlCommandBuilder cb = new MySqlCommandBuilder(dataAdapter))
+                            {
+                                dataAdapter.Update(dataTable);
+                                transaction.Commit();
+                            }
+                        }
+                    }
+                }
+            }
+            else if (DatabaseConnector.GetType() == typeof(PostgreSQLDatabaseConnector))
+            {
+                var dbConnection = (NpgsqlConnection)DatabaseConnector.DbConnection();
+                using (NpgsqlTransaction transaction = dbConnection.BeginTransaction(System.Data.IsolationLevel.Serializable))
+                {
+                    using (NpgsqlCommand sqlCommand = new NpgsqlCommand())
+                    {
+                        sqlCommand.Connection = dbConnection;
+                        sqlCommand.Transaction = transaction;
+                        sqlCommand.CommandText = "SELECT * FROM tblCons";
+                        using (NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sqlCommand))
+                        {
+                            //dataAdapter.UpdateBatchSize = 1000;
+                            using (NpgsqlCommandBuilder cb = new NpgsqlCommandBuilder(dataAdapter))
                             {
                                 dataAdapter.Update(dataTable);
                                 transaction.Commit();

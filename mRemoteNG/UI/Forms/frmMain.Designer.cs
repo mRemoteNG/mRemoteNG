@@ -1,4 +1,6 @@
-﻿namespace mRemoteNG.UI.Forms
+﻿using System.Windows.Forms;
+
+namespace mRemoteNG.UI.Forms
 {
 	public partial class FrmMain : System.Windows.Forms.Form
 	{
@@ -39,7 +41,6 @@
             this.viewMenu = new mRemoteNG.UI.Menu.ViewMenu();
             this.toolsMenu = new mRemoteNG.UI.Menu.ToolsMenu();
             this.helpMenu = new mRemoteNG.UI.Menu.HelpMenu();
-            this.modeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsContainer = new System.Windows.Forms.ToolStripContainer();
             this._quickConnectToolStrip = new mRemoteNG.UI.Controls.QuickConnectToolStrip();
@@ -47,7 +48,6 @@
             this._externalToolsToolStrip = new mRemoteNG.UI.Controls.ExternalToolsToolStrip();
             this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
             this.vsToolStripExtender = new WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender(this.components);
-            this.modeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsModeAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.tsModeUser = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
@@ -77,8 +77,7 @@
             this.fileMenu,
             this.viewMenu,
             this.toolsMenu,
-            this.helpMenu,
-            this.modeToolStripMenuItem});
+            this.helpMenu});
             this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(0, 0, 1, 0);
@@ -124,11 +123,6 @@
             this.helpMenu.Size = new System.Drawing.Size(44, 19);
             this.helpMenu.Text = "&Help";
             this.helpMenu.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            // 
-            // modeToolStripMenuItem
-            // 
-            this.modeToolStripMenuItem.Name = "modeToolStripMenuItem";
-            this.modeToolStripMenuItem.Size = new System.Drawing.Size(12, 25);
             // 
             // mMenSep3
             // 
@@ -237,9 +231,22 @@
             this.tsContainer.ResumeLayout(false);
             this.tsContainer.PerformLayout();
             this.ResumeLayout(false);
-
 		}
-		internal WeifenLuo.WinFormsUI.Docking.DockPanel pnlDock;
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Alt | Keys.Menu))
+            {
+                if(!msMain.Visible)
+                {
+                    msMain.Visible = true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        internal WeifenLuo.WinFormsUI.Docking.DockPanel pnlDock;
 		internal System.Windows.Forms.MenuStrip msMain;
 		internal System.Windows.Forms.ToolStripContainer tsContainer;
 		internal System.Windows.Forms.Timer tmrAutoSave;
@@ -254,7 +261,6 @@
 		internal mRemoteNG.UI.Controls.MultiSshToolStrip _multiSshToolStrip;
         //theming support
         private WeifenLuo.WinFormsUI.Docking.VisualStudioToolStripExtender vsToolStripExtender;
-        private System.Windows.Forms.ToolStripMenuItem modeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsModeAdmin;
         private System.Windows.Forms.ToolStripMenuItem tsModeUser;
     }
