@@ -68,7 +68,9 @@ namespace mRemoteNG.Tools
 		{
 			switch (Properties.OptionsDBsPage.Default.SQLServerType)
 			{
-				case "mysql":
+                case "postgresql":
+                    return Dt.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                case "mysql":
 					return Dt.ToString("yyyy/MM/dd HH:mm:ss");
 				case "mssql":
 				default:
@@ -80,7 +82,9 @@ namespace mRemoteNG.Tools
 		{
 			switch (Properties.OptionsDBsPage.Default.SQLServerType)
 			{
-				case "mysql":
+                case "postgresql":
+                    return typeof(DateTime);
+                case "mysql":
 					return typeof(MySqlDateTime);
 				case "mssql":
 				default:
@@ -95,7 +99,8 @@ namespace mRemoteNG.Tools
 				case "mysql":
 					return new MySqlDateTime(DateTime.Now);
 				case "mssql":
-				default:
+                case "postgresql":
+                default:
 					return DateTime.Now;
 			}
 		}
