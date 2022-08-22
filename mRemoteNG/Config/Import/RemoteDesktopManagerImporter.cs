@@ -29,7 +29,7 @@ public class RemoteDesktopManagerImporter : IConnectionImporter<string>
         var dataProvider = new FileDataProvider(filePath);
         var csvString = dataProvider.Load();
 
-        if (string.IsNullOrEmpty(csvString))
+        if (!string.IsNullOrEmpty(csvString))
         {
             var csvDeserializer = new CsvConnectionsDeserializerRdmFormat();
             var connectionTreeModel = csvDeserializer.Deserialize(csvString);
