@@ -18,7 +18,7 @@ using mRemoteNG.Properties;
 using mRemoteNG.Tree;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree.Root;
-
+using Connection;
 
 namespace mRemoteNG.Connection
 {
@@ -296,7 +296,10 @@ namespace mRemoteNG.Connection
         private void SetConnectionDefaults()
         {
             Hostname = string.Empty;
+            ExternalAddressProvider = (ExternalAddressProvider)Enum.Parse(typeof(ExternalAddressProvider), Settings.Default.ConDefaultExternalAddressProvider);
             EC2Region = Settings.Default.ConDefaultEC2Region;
+            ExternalCredentialProvider = (ExternalCredentialProvider)Enum.Parse(typeof(ExternalCredentialProvider), Settings.Default.ConDefaultExternalCredentialProvider);
+            UserViaAPI = "";
         }
 
         private void SetProtocolDefaults()
@@ -332,6 +335,8 @@ namespace mRemoteNG.Connection
             RDGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
             RDGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
             RDGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
+            RDGatewayExternalCredentialProvider = (ExternalCredentialProvider)Enum.Parse(typeof(ExternalCredentialProvider), Settings.Default.ConDefaultRDGatewayExternalCredentialProvider);
+            RDGatewayUserViaAPI = Settings.Default.ConDefaultRDGatewayUserViaAPI;
         }
 
         private void SetAppearanceDefaults()

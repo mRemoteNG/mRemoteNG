@@ -20,7 +20,7 @@
     <Compile Update="AWS\AWSConnectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="TSS\SSConnectionForm.cs">
+    <Compile Update="DSS\SSConnectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

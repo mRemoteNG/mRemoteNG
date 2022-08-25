@@ -12,7 +12,7 @@ namespace mRemoteNG.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2281,5 +2281,100 @@ namespace mRemoteNG.Properties {
                 this["InhDefaultOpeningCommand"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string ConDefaultExternalCredentialProvider {
+            get {
+                return ((string)(this["ConDefaultExternalCredentialProvider"]));
+            }
+            set {
+                this["ConDefaultExternalCredentialProvider"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultExternalCredentialProvider {
+            get {
+                return ((bool)(this["InhDefaultExternalCredentialProvider"]));
+            }
+            set {
+                this["InhDefaultExternalCredentialProvider"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string ConDefaultExternalAddressProvider {
+            get {
+                return ((string)(this["ConDefaultExternalAddressProvider"]));
+            }
+            set {
+                this["ConDefaultExternalAddressProvider"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultExternalAddressProvider {
+            get {
+                return ((bool)(this["InhDefaultExternalAddressProvider"]));
+            }
+            set {
+                this["InhDefaultExternalAddressProvider"] = value;
+            }
+        }
+
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string ConDefaultRDGatewayExternalCredentialProvider
+        {
+            get
+            {
+                return ((string)(this["ConDefaultRDGatewayExternalCredentialProvider"]));
+            }
+            set
+            {
+                this["ConDefaultRDGatewayExternalCredentialProvider"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InhDefaultRDGatewayExternalCredentialProvider
+        {
+            get
+            {
+                return ((bool)(this["InhDefaultRDGatewayExternalCredentialProvider"]));
+            }
+            set
+            {
+                this["InhDefaultRDGatewayExternalCredentialProvider"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultRDGatewayUserViaAPI
+        {
+            get
+            {
+                return ((string)(this["ConDefaultRDGatewayUserViaAPI"]));
+            }
+            set
+            {
+                this["ConDefaultRDGatewayUserViaAPI"] = value;
+            }
+        }
+
     }
 }

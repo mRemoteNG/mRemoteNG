@@ -8,7 +8,7 @@ using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
 using mRemoteNG.Resources.Language;
-
+using Connection;
 
 namespace mRemoteNG.Connection
 {
@@ -22,8 +22,10 @@ namespace mRemoteNG.Connection
         private string _panel;
 
         private string _hostname;
+        private ExternalAddressProvider _externalAddressProvider;
         private string _ec2InstanceId = "";
         private string _ec2Region = "";
+        private ExternalCredentialProvider _externalCredentialProvider;
         private string _userViaAPI = "";
         private string _username = "";
         private string _password = "";
@@ -55,6 +57,9 @@ namespace mRemoteNG.Connection
         private string _rdGatewayUsername;
         private string _rdGatewayPassword;
         private string _rdGatewayDomain;
+        private ExternalCredentialProvider _rdGatewayExternalCredentialProvider;
+        private string _rdGatewayUserViaAPI = "";
+
 
         private RDPResolutions _resolution;
         private bool _automaticResize;
@@ -167,15 +172,29 @@ namespace mRemoteNG.Connection
             set => SetField(ref _port, value, "Port");
         }
 
+        // external credential provider selector
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.ExternalCredentialProvider)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionExternalCredentialProvider)),
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2)]
+        public ExternalCredentialProvider ExternalCredentialProvider
+        {
+            get => GetPropertyValue("ExternalCredentialProvider", _externalCredentialProvider);
+            set => SetField(ref _externalCredentialProvider, value, "ExternalCredentialProvider");
+        }
+
+        // credential record identifier for external credential provider
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.UserViaAPI)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUserViaAPI)),
-         AttributeUsedInAllProtocolsExcept(ProtocolType.VNC, ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2)]
         public virtual string UserViaAPI
         {
             get => GetPropertyValue("UserViaAPI", _userViaAPI);
             set => SetField(ref _userViaAPI, value, "UserViaAPI");
         }
+
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Username)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUsername)),
@@ -205,6 +224,19 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("Domain", _domain).Trim();
             set => SetField(ref _domain, value?.Trim(), "Domain");
+        }
+
+
+        // external address provider selector
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.ExternalAddressProvider)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionExternalAddressProvider)),
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH2)]
+        public ExternalAddressProvider ExternalAddressProvider
+        {
+            get => GetPropertyValue("ExternalAddressProvider", _externalAddressProvider);
+            set => SetField(ref _externalAddressProvider, value, "ExternalAddressProvider");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
@@ -443,7 +475,7 @@ namespace mRemoteNG.Connection
 
         #region RD Gateway
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayUsageMethod)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRdpGatewayUsageMethod)),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
@@ -454,7 +486,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _rdGatewayUsageMethod, value, "RDGatewayUsageMethod");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayHostname)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDGatewayHostname)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
@@ -464,7 +496,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _rdGatewayHostname, value?.Trim(), "RDGatewayHostname");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayUseConnectionCredentials)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDGatewayUseConnectionCredentials)),
          TypeConverter(typeof(MiscTools.EnumTypeConverter)),
@@ -475,7 +507,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _rdGatewayUseConnectionCredentials, value, "RDGatewayUseConnectionCredentials");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayUsername)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDGatewayUsername)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
@@ -485,7 +517,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _rdGatewayUsername, value?.Trim(), "RDGatewayUsername");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayPassword)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRdpGatewayPassword)),
          PasswordPropertyText(true),
@@ -496,7 +528,7 @@ namespace mRemoteNG.Connection
             set => SetField(ref _rdGatewayPassword, value, "RDGatewayPassword");
         }
 
-        [LocalizedAttributes.LocalizedCategory(nameof(Language.Gateway), 4),
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayDomain)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRDGatewayDomain)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
@@ -505,7 +537,28 @@ namespace mRemoteNG.Connection
             get => GetPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim();
             set => SetField(ref _rdGatewayDomain, value?.Trim(), "RDGatewayDomain");
         }
+        // external credential provider selector for rd gateway
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.ExternalCredentialProvider)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionExternalCredentialProvider)),
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public ExternalCredentialProvider RDGatewayExternalCredentialProvider
+        {
+            get => GetPropertyValue("RDGatewayExternalCredentialProvider", _rdGatewayExternalCredentialProvider);
+            set => SetField(ref _rdGatewayExternalCredentialProvider, value, "RDGatewayExternalCredentialProvider");
+        }
 
+        // credential record identifier for external credential provider
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.UserViaAPI)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUserViaAPI)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public virtual string RDGatewayUserViaAPI
+        {
+            get => GetPropertyValue("RDGatewayUserViaAPI", _rdGatewayUserViaAPI);
+            set => SetField(ref _rdGatewayUserViaAPI, value, "RDGatewayUserViaAPI");
+        }
         #endregion
 
         #region Appearance

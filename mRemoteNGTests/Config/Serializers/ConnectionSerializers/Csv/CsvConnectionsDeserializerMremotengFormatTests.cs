@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Connection;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Csv;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -92,6 +93,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RDGatewayDomain = "SomeRDGatewayDomain",
                 VNCProxyIP = "SomeVNCProxyIP",
                 RDGatewayHostname = "SomeRDGatewayHostname",
+                RDGatewayExternalCredentialProvider = ExternalCredentialProvider.None,
+                RDGatewayUserViaAPI = "123",
                 Protocol = ProtocolType.RDP,
                 Port = 999,
                 Favorite = true,
@@ -134,7 +137,9 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard,
                 UserViaAPI = "",
                 EC2InstanceId = "",
-                EC2Region = "eu-central-1"
+                EC2Region = "eu-central-1",
+                ExternalAddressProvider = ExternalAddressProvider.None,
+                ExternalCredentialProvider = ExternalCredentialProvider.None
             };
         }
 

@@ -20,7 +20,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedLoadBalanceInfo = "tsv://MS Terminal Services Plugin.1.RDS-NAME";
         private const int ExpectedPort = 9933;
         private const RDPColors ExpectedColors = RDPColors.Colors24Bit;
-        private const bool ExpectedBitmapCaching = false;
+        private const bool ExpectedBitmapCaching = true;
         private const RDPResolutions ExpectedResolutionMode = RDPResolutions.FitToWindow;
         private const bool ExpectedWallpaperDisplay = true;
         private const bool ExpectedThemesDisplay = true;

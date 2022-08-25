@@ -260,10 +260,12 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RedirectSmartCards),
                         nameof(ConnectionInfo.RedirectSound),
                         nameof(ConnectionInfo.RedirectAudioCapture),
-			nameof(ConnectionInfo.RdpVersion),
+			            nameof(ConnectionInfo.RdpVersion),
                         nameof(ConnectionInfo.RDPStartProgram),
                         nameof(ConnectionInfo.RDPStartProgramWorkDir),
-			nameof(ConnectionInfo.UserViaAPI),
+			            nameof(ConnectionInfo.ExternalCredentialProvider),
+			            nameof(ConnectionInfo.UserViaAPI),
+                        nameof(ConnectionInfo.ExternalAddressProvider),
                         nameof(ConnectionInfo.EC2InstanceId),
                         nameof(ConnectionInfo.EC2Region)
                     });
@@ -286,6 +288,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.SSHOptions),
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
+                        nameof(ConnectionInfo.ExternalCredentialProvider),
                         nameof(ConnectionInfo.UserViaAPI),
                     });
                     break;
@@ -298,8 +301,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.SSHOptions),
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
+                        nameof(ConnectionInfo.ExternalAddressProvider),
                         nameof(ConnectionInfo.EC2InstanceId),
                         nameof(ConnectionInfo.EC2Region),
+                        nameof(ConnectionInfo.ExternalCredentialProvider),
                         nameof(ConnectionInfo.UserViaAPI),
                     });
                     break;
@@ -316,6 +321,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.HTTPS:
                     expectedProperties.AddRange(new []
                     {
+                        nameof(ConnectionInfo.ExternalCredentialProvider),
                         nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
@@ -325,6 +331,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.PowerShell:
                     expectedProperties.AddRange(new[]
                     {
+                        nameof(ConnectionInfo.ExternalCredentialProvider),
                         nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
@@ -334,6 +341,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.IntApp:
                     expectedProperties.AddRange(new[]
                     {
+                        nameof(ConnectionInfo.ExternalCredentialProvider),
                         nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),

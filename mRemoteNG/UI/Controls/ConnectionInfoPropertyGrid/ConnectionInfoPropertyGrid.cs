@@ -17,6 +17,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
+using Connection;
 
 namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 {
@@ -155,6 +156,10 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                     // hide any inherited properties
                     strHide.AddRange(SelectedConnectionInfo.Inheritance.GetEnabledInheritanceProperties());
 
+                    // hide external provider fields
+                    strHide.AddRange(SpecialExternalAddressProviderExclusions());
+                    strHide.AddRange(SpecialExternalCredentialProviderExclusions());
+
                     // ReSharper disable once SwitchStatementMissingSomeCases
                     switch (SelectedConnectionInfo.Protocol)
                     {
@@ -211,6 +216,37 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                     .Contains(protocol) != false);
         }
 
+        private List<string> SpecialExternalAddressProviderExclusions()
+        {
+            var strHide = new List<string>();
+
+            // aws
+            if (SelectedConnectionInfo.ExternalAddressProvider != ExternalAddressProvider.AmazonWebServices)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.EC2InstanceId));
+                strHide.Add(nameof(AbstractConnectionRecord.EC2Region));
+            }
+            return strHide;
+        }
+
+        private List<string> SpecialExternalCredentialProviderExclusions()
+        {
+            var strHide = new List<string>();
+
+            if (SelectedConnectionInfo.ExternalCredentialProvider == ExternalCredentialProvider.None)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.UserViaAPI));
+            }
+            else if (SelectedConnectionInfo.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.Username));
+                strHide.Add(nameof(AbstractConnectionRecord.Password));
+                strHide.Add(nameof(AbstractConnectionRecord.Domain));
+            }
+
+            return strHide;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -231,8 +267,16 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUseConnectionCredentials));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
             }
-            else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials ==
-                     RDGatewayUseConnectionCredentials.Yes)
+            else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes ||
+                     SelectedConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayExternalCredentialProvider));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUserViaAPI));
+            }
+            else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.ExternalCredentialProvider)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));

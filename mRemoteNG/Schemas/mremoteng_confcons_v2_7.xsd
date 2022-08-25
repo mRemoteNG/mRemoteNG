@@ -101,6 +101,8 @@
     <xs:attribute name="RDGatewayUsername" type="xs:string" use="required" />
     <xs:attribute name="RDGatewayPassword" type="xs:string" use="required" />
     <xs:attribute name="RDGatewayDomain" type="xs:string" use="required" />
+    <xs:attribute name="RDGatewayExternalCredentialProvider" type="xs:string" use="required" />
+    <xs:attribute name="RDGatewayUserViaAPI" type="xs:string" use="required" />
     <xs:attribute name="InheritCredentialRecord" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritCacheBitmaps" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritColors" type="xs:boolean" use="optional" />
@@ -169,10 +171,15 @@
     <xs:attribute name="InheritRDGatewayUsername" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRDGatewayPassword" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRDGatewayDomain" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDGatewayExternalCredentialProvider" type="xs:boolean" use="optional" />
+    <xs:attribute name="InheritRDGatewayUserViaAPI" type="xs:boolean" use="optional" />
     <xs:attribute name="StartProgram" type="xs:string" use="optional" />
     <xs:attribute name="StartProgramWorkDir" type="xs:string" use="optional" />
     <xs:attribute name="OpeningCommand" type="xs:string" use="optional" />
+    <xs:attribute name="ExternalCredentialProvider" type="xs:string" use="optional" />
+    <xs:attribute name="InheritExternalCredentialProvider" type="xs:boolean" use="optional" />
     <xs:attribute name="UserViaAPI" type="xs:string" use="optional" />
+    <xs:attribute name="ExternalAddressProvider" type="xs:string" use="optional" />
     <xs:attribute name="EC2InstanceId" type="xs:string" use="optional" />
     <xs:attribute name="EC2Region" type="xs:string" use="optional" />
     <xs:attribute name="UseRCG" type="xs:boolean" use="optional" />

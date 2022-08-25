@@ -15,6 +15,9 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
 using MSTSCLib;
 using mRemoteNG.Resources.Language;
+using Connection;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
@@ -382,8 +385,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     _rdpClient.TransportSettings.GatewayUsageMethod = (uint)connectionInfo.RDGatewayUsageMethod;
                     _rdpClient.TransportSettings.GatewayHostname = connectionInfo.RDGatewayHostname;
                     _rdpClient.TransportSettings.GatewayProfileUsageMethod = 1; // TSC_PROXY_PROFILE_MODE_EXPLICIT
-                    if (connectionInfo.RDGatewayUseConnectionCredentials ==
-                        RDGatewayUseConnectionCredentials.SmartCard)
+                    if (connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
                     {
                         _rdpClient.TransportSettings.GatewayCredsSource = 1; // TSC_PROXY_CREDS_MODE_SMARTCARD
                     }
@@ -396,17 +398,35 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             _rdpClient.TransportSettings2.GatewayPassword = connectionInfo.Password;
                             _rdpClient.TransportSettings2.GatewayDomain = connectionInfo?.Domain;
                         }
-                        else if (connectionInfo.RDGatewayUseConnectionCredentials ==
-                                 RDGatewayUseConnectionCredentials.SmartCard)
+                        else if (connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
                         {
                             _rdpClient.TransportSettings2.GatewayCredSharing = 0;
                         }
                         else
                         {
-                            _rdpClient.TransportSettings2.GatewayUsername = connectionInfo.RDGatewayUsername;
-                            _rdpClient.TransportSettings2.GatewayPassword = connectionInfo.RDGatewayPassword;
-                            _rdpClient.TransportSettings2.GatewayDomain = connectionInfo.RDGatewayDomain;
                             _rdpClient.TransportSettings2.GatewayCredSharing = 0;
+
+                            string gwu = connectionInfo.RDGatewayUsername;
+                            string gwp = connectionInfo.RDGatewayPassword;
+                            string gwd = connectionInfo.RDGatewayDomain;
+
+                            // access secret server api if necessary
+                            if (InterfaceControl.Info.RDGatewayExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
+                            {
+                                try
+                                {
+                                    string idviaapi = InterfaceControl.Info.RDGatewayUserViaAPI;
+                                    ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{idviaapi}", out gwu, out gwp, out gwd);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                                }
+
+                            }
+                            _rdpClient.TransportSettings2.GatewayUsername = gwu;
+                            _rdpClient.TransportSettings2.GatewayPassword = gwp;
+                            _rdpClient.TransportSettings2.GatewayDomain = gwd;
                         }
                     }
                 }
@@ -476,11 +496,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var UserViaAPI = connectionInfo?.UserViaAPI ?? "";
 
                 // access secret server api if necessary
-                if (!string.IsNullOrEmpty(UserViaAPI))
+                if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
                 {
                     try
                     {
-                        ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + connectionInfo?.UserViaAPI, out userName, out password, out domain);
+                        ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{UserViaAPI}", out userName, out password, out domain);
                     }
                     catch (Exception ex)
                     {
@@ -502,7 +522,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         case "custom":
                             try
                             {
-                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + Properties.OptionsCredentialsPage.Default.UserViaAPDefault, out userName, out password, out domain);
+                                ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + Properties.OptionsCredentialsPage.Default.UserViaAPDefault, out userName, out password, out domain);
                                 _rdpClient.UserName = userName;
                             }
                             catch (Exception ex)

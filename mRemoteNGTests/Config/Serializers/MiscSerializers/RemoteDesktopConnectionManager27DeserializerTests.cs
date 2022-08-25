@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Connection;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -19,6 +20,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const string ExpectedName = "server1_displayname";
         private const string ExpectedHostname = "server1";
         private const string ExpectedDescription = "Comment text here";
+        private const string ExpectedUserViaAPI = "123";
         private const string ExpectedUsername = "myusername1";
         private const string ExpectedDomain = "mydomain";
         private const string ExpectedPassword = "passwordHere!";
@@ -144,7 +146,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 	        return new[]
 	        {
 		        new TestCaseData((Func<ConnectionInfo,object>)(con => con.Name), ExpectedName).SetName(nameof(ConnectionInfo.Name)),
-				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Hostname), ExpectedHostname).SetName(nameof(ConnectionInfo.Hostname)),
+                new TestCaseData((Func<ConnectionInfo,object>)(con => con.Hostname), ExpectedHostname).SetName(nameof(ConnectionInfo.Hostname)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Description), ExpectedDescription).SetName(nameof(ConnectionInfo.Description)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Username), ExpectedUsername).SetName(nameof(ConnectionInfo.Username)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Domain), ExpectedDomain).SetName(nameof(ConnectionInfo.Domain)),
@@ -173,6 +175,9 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 			return new[]
 			{
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Name)).SetName(nameof(ConnectionInfo.Name)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.ExternalAddressProvider)).SetName(nameof(ConnectionInfo.ExternalAddressProvider)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.ExternalCredentialProvider)).SetName(nameof(ConnectionInfo.ExternalCredentialProvider)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.UserViaAPI)).SetName(nameof(ConnectionInfo.UserViaAPI)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Hostname)).SetName(nameof(ConnectionInfo.Hostname)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Description)).SetName(nameof(ConnectionInfo.Description)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Username)).SetName(nameof(ConnectionInfo.Username)),
@@ -184,6 +189,8 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayHostname)).SetName(nameof(ConnectionInfo.RDGatewayHostname)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUsername)).SetName(nameof(ConnectionInfo.RDGatewayUsername)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayDomain)).SetName(nameof(ConnectionInfo.RDGatewayDomain)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayExternalCredentialProvider)).SetName(nameof(ConnectionInfo.RDGatewayExternalCredentialProvider)),
+				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RDGatewayUserViaAPI)).SetName(nameof(ConnectionInfo.RDGatewayUserViaAPI)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Resolution)).SetName(nameof(ConnectionInfo.Resolution)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.Colors)).SetName(nameof(ConnectionInfo.Colors)),
 				new TestCaseData((Func<ConnectionInfo,object>)(con => con.RedirectSound)).SetName(nameof(ConnectionInfo.RedirectSound)),
