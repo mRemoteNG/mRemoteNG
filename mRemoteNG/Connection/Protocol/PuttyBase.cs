@@ -11,6 +11,7 @@ using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using Connection;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -87,11 +88,11 @@ namespace mRemoteNG.Connection.Protocol
 
 
                         // access secret server api if necessary
-                        if (!string.IsNullOrEmpty(UserViaAPI)) {
-
+                        if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
+                        {
                             try
                             {
-                                ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + InterfaceControl.Info?.UserViaAPI, out username, out password, out domain);
+                                ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{UserViaAPI}", out username, out password, out domain);
                             }
                             catch (Exception ex)
                             {
@@ -112,7 +113,7 @@ namespace mRemoteNG.Connection.Protocol
                                 case "custom":
                                     try
                                     {
-                                        ExternalConnectors.TSS.SecretServerInterface.FetchSecretFromServer(
+                                        ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer(
                                             "SSAPI:" + Properties.OptionsCredentialsPage.Default.UserViaAPDefault, out username, out password,
                                             out domain);
                                     }

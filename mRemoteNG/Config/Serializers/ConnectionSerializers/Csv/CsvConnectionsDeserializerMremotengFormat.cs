@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Connection;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -186,13 +187,25 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 ? connectionCsv[headers.IndexOf("RDGatewayDomain")]
                 : "";
 
+            connectionRecord.RDGatewayHostname = headers.Contains("RDGatewayHostname")
+                ? connectionCsv[headers.IndexOf("RDGatewayHostname")]
+                : "";
+
+            if (headers.Contains("RDGatewayExternalCredentialProvider"))
+            {
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("RDGatewayExternalCredentialProvider")], out ExternalCredentialProvider value))
+                    connectionRecord.RDGatewayExternalCredentialProvider = value;
+            }
+
+            connectionRecord.RDGatewayUserViaAPI = headers.Contains("RDGatewayUserViaAPI")
+                ? connectionCsv[headers.IndexOf("RDGatewayUserViaAPI")]
+                : "";
+
+
             connectionRecord.VNCProxyIP = headers.Contains("VNCProxyIP")
                 ? connectionCsv[headers.IndexOf("VNCProxyIP")]
                 : "";
 
-            connectionRecord.RDGatewayHostname = headers.Contains("RDGatewayHostname")
-                ? connectionCsv[headers.IndexOf("RDGatewayHostname")]
-                : "";
 
             connectionRecord.RDPStartProgram = headers.Contains("RDPStartProgram")
                 ? connectionCsv[headers.IndexOf("RDPStartProgram")]
@@ -453,6 +466,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RdpVersion")], true, out RdpVersion version))
                     connectionRecord.RdpVersion = version;
             }
+            if (headers.Contains("ExternalCredentialProvider"))
+            {
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("ExternalCredentialProvider")], out ExternalCredentialProvider value))
+                    connectionRecord.ExternalCredentialProvider = value;
+            }
+            if (headers.Contains("ExternalAddressProvider"))
+            {
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("ExternalAddressProvider")], out ExternalAddressProvider value))
+                    connectionRecord.ExternalAddressProvider = value;
+            }
 
             #region Inheritance
 
@@ -679,6 +702,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.Inheritance.RenderingEngine = value;
             }
 
+            if (headers.Contains("InheritExternalCredentialProvider"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritExternalCredentialProvider")], out bool value))
+                    connectionRecord.Inheritance.ExternalCredentialProvider = value;
+            }
             if (headers.Contains("InheritUserViaAPI"))
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUserViaAPI")], out bool value))
@@ -853,6 +881,18 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayDomain")], out bool value))
                     connectionRecord.Inheritance.RDGatewayDomain = value;
             }
+
+            if (headers.Contains("InheritRDGatewayExternalCredentialProvider"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayExternalCredentialProvider")], out bool value))
+                    connectionRecord.Inheritance.RDGatewayExternalCredentialProvider = value;
+            }
+            if (headers.Contains("InheritRDGatewayUserViaAPI"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRDGatewayUserViaAPI")], out bool value))
+                    connectionRecord.Inheritance.RDGatewayUserViaAPI = value;
+            }
+
 
             if (headers.Contains("InheritRDPAlertIdleTimeout"))
             {

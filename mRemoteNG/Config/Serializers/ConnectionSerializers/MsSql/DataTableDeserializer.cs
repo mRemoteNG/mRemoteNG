@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Security;
+using Connection;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -83,10 +84,15 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             connectionInfo.Description = (string)dataRow["Description"];
             connectionInfo.Icon = (string)dataRow["Icon"];
             connectionInfo.Panel = (string)dataRow["Panel"];
+            //connectionInfo.ExternalCredentialProvider = (ExternalCredentialProvider)Enum.Parse(typeof(ExternalCredentialProvider), (string)dataRow["ExternalCredentialProvider"]);
+            //connectionInfo.UserViaAPI = (string)dataRow["UserViaAPI"];
             connectionInfo.Username = (string)dataRow["Username"];
             connectionInfo.Domain = (string)dataRow["Domain"];
             connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
             connectionInfo.Hostname = (string)dataRow["Hostname"];
+            //connectionInfo.ExternalAddressProvider = (ExternalAddressProvider)Enum.Parse(typeof(ExternalAddressProvider), (string)dataRow["ExternalAddressProvider"]);
+            //connectionInfo.EC2Region = (string)dataRow["EC2Region"];
+            //connectionInfo.EC2InstanceId = (string)dataRow["EC2InstanceId"];
             connectionInfo.VmId = (string)dataRow["VmId"];
             connectionInfo.UseEnhancedMode = (bool)dataRow["UseEnhancedMode"];
             connectionInfo.Protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), (string)dataRow["Protocol"]);
@@ -151,6 +157,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             connectionInfo.RDGatewayUsername = (string)dataRow["RDGatewayUsername"];
             connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
+            //connectionInfo.RDGatewayExternalCredentialProvider = (ExternalCredentialProvider)Enum.Parse(typeof(ExternalCredentialProvider), (string)dataRow["RDGatewayExternalCredentialProvider"]);
+            //connectionInfo.RDGatewayUserViaAPI = (string)dataRow["RDGatewayUserViaAPI"];
 
             if (!dataRow.IsNull("RdpVersion")) // table allows null values which must be handled
                 if (Enum.TryParse((string)dataRow["RdpVersion"], true, out RdpVersion rdpVersion))
@@ -167,6 +175,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             connectionInfo.Inheritance.DisableMenuAnimations = (bool)dataRow["InheritDisableMenuAnimations"];
             connectionInfo.Inheritance.DisableCursorShadow = (bool)dataRow["InheritDisableCursorShadow"];
             connectionInfo.Inheritance.DisableCursorBlinking = (bool)dataRow["InheritDisableCursorBlinking"];
+            //connectionInfo.Inheritance.ExternalCredentialProvider = (bool)dataRow["InheritExternalCredentialProvider"];
+            //connectionInfo.Inheritance.UserViaAPI = (bool)dataRow["InheritUserViaAPI"];
             connectionInfo.Inheritance.Domain = (bool)dataRow["InheritDomain"];
             connectionInfo.Inheritance.Icon = (bool)dataRow["InheritIcon"];
             connectionInfo.Inheritance.Panel = (bool)dataRow["InheritPanel"];
@@ -224,6 +234,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             connectionInfo.Inheritance.RDGatewayUsername = (bool)dataRow["InheritRDGatewayUsername"];
             connectionInfo.Inheritance.RDGatewayPassword = (bool)dataRow["InheritRDGatewayPassword"];
             connectionInfo.Inheritance.RDGatewayDomain = (bool)dataRow["InheritRDGatewayDomain"];
+            //connectionInfo.Inheritance.RDGatewayExternalCredentialProvider = (bool)dataRow["InheritRDGatewayExternalCredentialProvider"];
+            //connectionInfo.Inheritance.RDGatewayUserViaAPI = (bool)dataRow["InheritRDGatewayUserViaAPI"];
             connectionInfo.Inheritance.RdpVersion = (bool)dataRow["InheritRdpVersion"];
         }
 

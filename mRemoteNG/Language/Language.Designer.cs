@@ -1638,6 +1638,35 @@ namespace mRemoteNG.Resources.Language {
             }
         }
 
+        internal static string ExternalAddressProvider
+        {
+            get
+            {
+                return ResourceManager.GetString("ExternalAddressProvider", resourceCulture);
+            }
+        }
+        internal static string PropertyDescriptionExternalAddressProvider
+        {
+            get
+            {
+                return ResourceManager.GetString("PropertyDescriptionExternalAddressProvider", resourceCulture);
+            }
+        }
+        internal static string EAPNone
+        {
+            get
+            {
+                return ResourceManager.GetString("EAPNone", resourceCulture);
+            }
+        }
+        internal static string EAPAmazonWebServices
+        {
+            get
+            {
+                return ResourceManager.GetString("EAPAmazonWebServices", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to EC2InstanceId.
         /// </summary>
@@ -2354,9 +2383,9 @@ namespace mRemoteNG.Resources.Language {
         /// <summary>
         ///   Looks up a localized string similar to Gateway.
         /// </summary>
-        internal static string Gateway {
+        internal static string RDPGateway {
             get {
-                return ResourceManager.GetString("Gateway", resourceCulture);
+                return ResourceManager.GetString("RDPGateway", resourceCulture);
             }
         }
 
@@ -4131,16 +4160,7 @@ namespace mRemoteNG.Resources.Language {
             }
         }
 
-        /// <summary>
-        ///   Looks up a localized string similar to Enter your username..
-        /// </summary>
-        internal static string PropertyDescriptionUserViaAPI
-        {
-            get
-            {
-                return ResourceManager.GetString("PropertyDescriptionUserViaAPI", resourceCulture);
-            }
-        }
+
 
         /// <summary>
         ///   Looks up a localized string similar to Enter your username..
@@ -6202,6 +6222,21 @@ namespace mRemoteNG.Resources.Language {
             }
         }
 
+        internal static string ExternalCredentialProvider
+        {
+            get
+            {
+                return ResourceManager.GetString("ExternalCredentialProvider", resourceCulture);
+            }
+        }
+        internal static string PropertyDescriptionExternalCredentialProvider
+        {
+            get
+            {
+                return ResourceManager.GetString("PropertyDescriptionExternalCredentialProvider", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
@@ -6210,6 +6245,16 @@ namespace mRemoteNG.Resources.Language {
             get
             {
                 return ResourceManager.GetString("UserViaAPI", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your username..
+        /// </summary>
+        internal static string PropertyDescriptionUserViaAPI
+        {
+            get
+            {
+                return ResourceManager.GetString("PropertyDescriptionUserViaAPI", resourceCulture);
             }
         }
 
@@ -6237,6 +6282,14 @@ namespace mRemoteNG.Resources.Language {
         internal static string UseSmartCard {
             get {
                 return ResourceManager.GetString("UseSmartCard", resourceCulture);
+            }
+        }
+
+        internal static string UseExternalCredentialProvider
+        {
+            get
+            {
+                return ResourceManager.GetString("UseExternalCredentialProvider", resourceCulture);
             }
         }
 
@@ -6583,6 +6636,22 @@ namespace mRemoteNG.Resources.Language {
             get
             {
                 return ResourceManager.GetString("ShowForUser", resourceCulture);
+            }
+        }
+
+
+        internal static string ECPNone
+        {
+            get
+            {
+                return ResourceManager.GetString("ECPNone", resourceCulture);
+            }
+        }
+        internal static string ECPDelineaSecretServer
+        {
+            get
+            {
+                return ResourceManager.GetString("ECPDelineaSecretServer", resourceCulture);
             }
         }
     }

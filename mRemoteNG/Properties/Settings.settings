@@ -566,5 +566,20 @@
     <Setting Name="InhDefaultOpeningCommand" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+
+    <Setting Name="ConDefaultExternalCredentialProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="InhDefaultExternalCredentialProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultExternalAddressProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="InhDefaultExternalAddressProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+
   </Settings>
+
 </SettingsFile>

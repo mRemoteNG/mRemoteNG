@@ -18,6 +18,7 @@ using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.Resources.Language;
+using Connection;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
@@ -469,28 +470,19 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 if (_confVersion >= 2.2)
                 {
                     // Get settings
-                    connectionInfo.RDGatewayUsageMethod =
-                        xmlnode.GetAttributeAsEnum<RDGatewayUsageMethod>("RDGatewayUsageMethod");
+                    connectionInfo.RDGatewayUsageMethod = xmlnode.GetAttributeAsEnum<RDGatewayUsageMethod>("RDGatewayUsageMethod");
                     connectionInfo.RDGatewayHostname = xmlnode.GetAttributeAsString("RDGatewayHostname");
-                    connectionInfo.RDGatewayUseConnectionCredentials =
-                        xmlnode.GetAttributeAsEnum<RDGatewayUseConnectionCredentials>(
-                                                                                                  "RDGatewayUseConnectionCredentials");
+                    connectionInfo.RDGatewayUseConnectionCredentials = xmlnode.GetAttributeAsEnum<RDGatewayUseConnectionCredentials>("RDGatewayUseConnectionCredentials");
                     connectionInfo.RDGatewayUsername = xmlnode.GetAttributeAsString("RDGatewayUsername");
-                    connectionInfo.RDGatewayPassword =
-                        _decryptor.Decrypt(xmlnode.GetAttributeAsString("RDGatewayPassword"));
+                    connectionInfo.RDGatewayPassword = _decryptor.Decrypt(xmlnode.GetAttributeAsString("RDGatewayPassword"));
                     connectionInfo.RDGatewayDomain = xmlnode.GetAttributeAsString("RDGatewayDomain");
 
                     // Get inheritance settings
-                    connectionInfo.Inheritance.RDGatewayUsageMethod =
-                        xmlnode.GetAttributeAsBool("InheritRDGatewayUsageMethod");
-                    connectionInfo.Inheritance.RDGatewayHostname =
-                        xmlnode.GetAttributeAsBool("InheritRDGatewayHostname");
-                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials =
-                        xmlnode.GetAttributeAsBool("InheritRDGatewayUseConnectionCredentials");
-                    connectionInfo.Inheritance.RDGatewayUsername =
-                        xmlnode.GetAttributeAsBool("InheritRDGatewayUsername");
-                    connectionInfo.Inheritance.RDGatewayPassword =
-                        xmlnode.GetAttributeAsBool("InheritRDGatewayPassword");
+                    connectionInfo.Inheritance.RDGatewayUsageMethod = xmlnode.GetAttributeAsBool("InheritRDGatewayUsageMethod");
+                    connectionInfo.Inheritance.RDGatewayHostname = xmlnode.GetAttributeAsBool("InheritRDGatewayHostname");
+                    connectionInfo.Inheritance.RDGatewayUseConnectionCredentials = xmlnode.GetAttributeAsBool("InheritRDGatewayUseConnectionCredentials");
+                    connectionInfo.Inheritance.RDGatewayUsername = xmlnode.GetAttributeAsBool("InheritRDGatewayUsername");
+                    connectionInfo.Inheritance.RDGatewayPassword = xmlnode.GetAttributeAsBool("InheritRDGatewayPassword");
                     connectionInfo.Inheritance.RDGatewayDomain = xmlnode.GetAttributeAsBool("InheritRDGatewayDomain");
                 }
 
@@ -501,10 +493,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.EnableDesktopComposition = xmlnode.GetAttributeAsBool("EnableDesktopComposition");
 
                     // Get inheritance settings
-                    connectionInfo.Inheritance.EnableFontSmoothing =
-                        xmlnode.GetAttributeAsBool("InheritEnableFontSmoothing");
-                    connectionInfo.Inheritance.EnableDesktopComposition =
-                        xmlnode.GetAttributeAsBool("InheritEnableDesktopComposition");
+                    connectionInfo.Inheritance.EnableFontSmoothing = xmlnode.GetAttributeAsBool("InheritEnableFontSmoothing");
+                    connectionInfo.Inheritance.EnableDesktopComposition = xmlnode.GetAttributeAsBool("InheritEnableDesktopComposition");
                 }
 
                 if (_confVersion >= 2.4)
@@ -523,15 +513,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
                 if (_confVersion >= 2.6)
                 {
-                    connectionInfo.SoundQuality =
-                        xmlnode.GetAttributeAsEnum<RDPSoundQuality>("SoundQuality");
+                    connectionInfo.SoundQuality = xmlnode.GetAttributeAsEnum<RDPSoundQuality>("SoundQuality");
                     connectionInfo.Inheritance.SoundQuality = xmlnode.GetAttributeAsBool("InheritSoundQuality");
                     connectionInfo.RDPMinutesToIdleTimeout = xmlnode.GetAttributeAsInt("RDPMinutesToIdleTimeout");
-                    connectionInfo.Inheritance.RDPMinutesToIdleTimeout =
-                        xmlnode.GetAttributeAsBool("InheritRDPMinutesToIdleTimeout");
+                    connectionInfo.Inheritance.RDPMinutesToIdleTimeout = xmlnode.GetAttributeAsBool("InheritRDPMinutesToIdleTimeout");
                     connectionInfo.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("RDPAlertIdleTimeout");
-                    connectionInfo.Inheritance.RDPAlertIdleTimeout =
-                        xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");          }
+                    connectionInfo.Inheritance.RDPAlertIdleTimeout = xmlnode.GetAttributeAsBool("InheritRDPAlertIdleTimeout");
+                }
 
                 if (_confVersion >= 2.7)
                 {
@@ -565,14 +553,21 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.Inheritance.DisableMenuAnimations = xmlnode.GetAttributeAsBool("InheritDisableMenuAnimations");
                     connectionInfo.Inheritance.DisableCursorShadow = xmlnode.GetAttributeAsBool("InheritDisableCursorShadow");
                     connectionInfo.Inheritance.DisableCursorBlinking = xmlnode.GetAttributeAsBool("InheritDisableCursorBlinking");
+                    connectionInfo.ExternalCredentialProvider = xmlnode.GetAttributeAsEnum("ExternalCredentialProvider", ExternalCredentialProvider.None);
+                    connectionInfo.Inheritance.ExternalCredentialProvider = xmlnode.GetAttributeAsBool("InheritExternalCredentialProvider");
                     connectionInfo.UserViaAPI = xmlnode.GetAttributeAsString("UserViaAPI");
                     connectionInfo.Inheritance.UserViaAPI = xmlnode.GetAttributeAsBool("InheritUserViaAPI");
+                    connectionInfo.ExternalAddressProvider = xmlnode.GetAttributeAsEnum("ExternalAddressProvider", ExternalAddressProvider.None);
                     connectionInfo.EC2InstanceId = xmlnode.GetAttributeAsString("EC2InstanceId");
                     connectionInfo.EC2Region = xmlnode.GetAttributeAsString("EC2Region");
                     connectionInfo.UseRestrictedAdmin = xmlnode.GetAttributeAsBool("UseRestrictedAdmin");
                     connectionInfo.Inheritance.UseRestrictedAdmin = xmlnode.GetAttributeAsBool("InheritUseRestrictedAdmin");
                     connectionInfo.UseRCG = xmlnode.GetAttributeAsBool("UseRCG");
                     connectionInfo.Inheritance.UseRCG = xmlnode.GetAttributeAsBool("InheritUseRCG");
+                    connectionInfo.RDGatewayExternalCredentialProvider = xmlnode.GetAttributeAsEnum("RDGatewayExternalCredentialProvider", ExternalCredentialProvider.None);
+                    connectionInfo.RDGatewayUserViaAPI = xmlnode.GetAttributeAsString("RDGatewayUserViaAPI");
+                    connectionInfo.Inheritance.RDGatewayExternalCredentialProvider = xmlnode.GetAttributeAsBool("InheritRDGatewayExternalCredentialProvider");
+                    connectionInfo.Inheritance.RDGatewayUserViaAPI = xmlnode.GetAttributeAsBool("InheritRDGatewayUserViaAPI");
                 }
             }
             catch (Exception ex)

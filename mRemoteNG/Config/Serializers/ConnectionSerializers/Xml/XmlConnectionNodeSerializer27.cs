@@ -138,6 +138,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("RDGatewayUsageMethod", connectionInfo.RDGatewayUsageMethod));
             element.Add(new XAttribute("RDGatewayHostname", connectionInfo.RDGatewayHostname));
             element.Add(new XAttribute("RDGatewayUseConnectionCredentials", connectionInfo.RDGatewayUseConnectionCredentials));
+            element.Add(new XAttribute("RDGatewayExternalCredentialProvider", connectionInfo.RDGatewayExternalCredentialProvider));
+            element.Add(new XAttribute("RDGatewayUserViaAPI", connectionInfo.RDGatewayUserViaAPI));
 
             element.Add(_saveFilter.SaveUsername
                 ? new XAttribute("RDGatewayUsername", connectionInfo.RDGatewayUsername)
@@ -157,6 +159,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("UserViaAPI", connectionInfo.UserViaAPI));
             element.Add(new XAttribute("EC2InstanceId", connectionInfo.EC2InstanceId));
             element.Add(new XAttribute("EC2Region", connectionInfo.EC2Region));
+            element.Add(new XAttribute("ExternalCredentialProvider", connectionInfo.ExternalCredentialProvider));
+            element.Add(new XAttribute("ExternalAddressProvider", connectionInfo.ExternalAddressProvider));
         }
 
         private void SetInheritanceAttributes(XContainer element, IInheritable connectionInfo)
@@ -293,12 +297,19 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     element.Add(new XAttribute("InheritRDGatewayPassword", inheritance.RDGatewayPassword.ToString().ToLowerInvariant()));
                 if (inheritance.RDGatewayDomain)
                     element.Add(new XAttribute("InheritRDGatewayDomain", inheritance.RDGatewayDomain.ToString().ToLowerInvariant()));
+                if (inheritance.RDGatewayExternalCredentialProvider)
+                    element.Add(new XAttribute("InheritRDGatewayExternalCredentialProvider", inheritance.RDGatewayExternalCredentialProvider.ToString().ToLowerInvariant()));
+                if (inheritance.RDGatewayUserViaAPI)
+                    element.Add(new XAttribute("InheritRDGatewayUserViaAPI", inheritance.RDGatewayUserViaAPI.ToString().ToLowerInvariant()));
+
                 if (inheritance.VmId)
                     element.Add(new XAttribute("InheritVmId", inheritance.VmId.ToString().ToLowerInvariant()));
                 if (inheritance.UseVmId)
                     element.Add(new XAttribute("InheritUseVmId", inheritance.UseVmId.ToString().ToLowerInvariant()));
                 if (inheritance.UseEnhancedMode)
                     element.Add(new XAttribute("InheritUseEnhancedMode", inheritance.UseEnhancedMode.ToString().ToLowerInvariant()));
+                if (inheritance.ExternalCredentialProvider)
+                    element.Add(new XAttribute("InheritExternalCredentialProvider", inheritance.ExternalCredentialProvider.ToString().ToLowerInvariant()));
                 if (inheritance.UserViaAPI)
                     element.Add(new XAttribute("InheritUserViaAPI", inheritance.UserViaAPI.ToString().ToLowerInvariant()));
                 if (inheritance.UseRCG)

@@ -105,10 +105,15 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("Description", typeof(string));
             dataTable.Columns.Add("Icon", typeof(string));
             dataTable.Columns.Add("Panel", typeof(string));
+            dataTable.Columns.Add("ExternalCredentialProvider", typeof(string));
+            dataTable.Columns.Add("UserViaAPI", typeof(string));
             dataTable.Columns.Add("Username", typeof(string));
             dataTable.Columns.Add("Domain", typeof(string));
             dataTable.Columns.Add("Password", typeof(string));
             dataTable.Columns.Add("Hostname", typeof(string));
+            dataTable.Columns.Add("ExternalAddressProvider", typeof(string));
+            dataTable.Columns.Add("EC2Region", typeof(string));
+            dataTable.Columns.Add("EC2InstanceId", typeof(string));
             dataTable.Columns.Add("Port", typeof(int));
             dataTable.Columns.Add("Protocol", typeof(string));
             dataTable.Columns.Add("SSHTunnelConnectionName", typeof(string));
@@ -163,6 +168,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("RDGatewayUsername", typeof(string));
             dataTable.Columns.Add("RDGatewayPassword", typeof(string));
             dataTable.Columns.Add("RDGatewayDomain", typeof(string));
+            dataTable.Columns.Add("RDGatewayExternalCredentialProvider", typeof(string));
+            dataTable.Columns.Add("RDGatewayUserViaAPI", typeof(string));
             dataTable.Columns.Add("InheritCacheBitmaps", typeof(bool));
             dataTable.Columns.Add("InheritColors", typeof(bool));
             dataTable.Columns.Add("InheritDescription", typeof(bool));
@@ -180,6 +187,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("InheritPassword", typeof(bool));
             dataTable.Columns.Add("InheritPort", typeof(bool));
             dataTable.Columns.Add("InheritProtocol", typeof(bool));
+            dataTable.Columns.Add("InheritExternalCredentialProvider", typeof(bool));
+            dataTable.Columns.Add("InheritUserViaAPI", typeof(bool));
             dataTable.Columns.Add("InheritSSHTunnelConnectionName", typeof(bool));
             dataTable.Columns.Add("InheritSSHOptions", typeof(bool));
             dataTable.Columns.Add("InheritPuttySession", typeof(bool));
@@ -222,6 +231,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataTable.Columns.Add("InheritRDGatewayUsername", typeof(bool));
             dataTable.Columns.Add("InheritRDGatewayPassword", typeof(bool));
             dataTable.Columns.Add("InheritRDGatewayDomain", typeof(bool));
+            dataTable.Columns.Add("InheritRDGatewayExternalCredentialProvider", typeof(bool));
+            dataTable.Columns.Add("InheritRDGatewayUserViaAPI", typeof(bool));
             dataTable.Columns.Add("LoadBalanceInfo", typeof(string));
             dataTable.Columns.Add("AutomaticResize", typeof(bool));
             dataTable.Columns.Add("InheritLoadBalanceInfo", typeof(bool));
@@ -279,7 +290,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             dataRow["Domain"].Equals(_saveFilter.SaveDomain ? connectionInfo.Domain : "");
 
             isFieldNotChange = isFieldNotChange && dataRow["Hostname"].Equals(connectionInfo.Hostname);
-             isFieldNotChange = isFieldNotChange && dataRow["VmId"].Equals(connectionInfo.VmId);
+            isFieldNotChange = isFieldNotChange && dataRow["EC2Region"].Equals(connectionInfo.EC2Region);
+            isFieldNotChange = isFieldNotChange && dataRow["EC2InstanceId"].Equals(connectionInfo.EC2InstanceId);
+            isFieldNotChange = isFieldNotChange && dataRow["ExternalAddressProvider"].Equals(connectionInfo.ExternalAddressProvider);
+            isFieldNotChange = isFieldNotChange && dataRow["ExternalCredentialProvider"].Equals(connectionInfo.ExternalCredentialProvider);
+            isFieldNotChange = isFieldNotChange && dataRow["UserViaAPI"].Equals(connectionInfo.UserViaAPI);
+            isFieldNotChange = isFieldNotChange && dataRow["VmId"].Equals(connectionInfo.VmId);
             isFieldNotChange = isFieldNotChange && dataRow["Protocol"].Equals(connectionInfo.Protocol.ToString());
             isFieldNotChange = isFieldNotChange && dataRow["PuttySession"].Equals(connectionInfo.PuttySession);
             isFieldNotChange = isFieldNotChange &&
@@ -357,6 +373,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
              dataRow["RDGatewayUseConnectionCredentials"].Equals(connectionInfo.RDGatewayUseConnectionCredentials.ToString()) &&
              dataRow["RDGatewayUsername"].Equals(connectionInfo.RDGatewayUsername) &&
              dataRow["RDGatewayDomain"].Equals(connectionInfo.RDGatewayDomain) &&
+             dataRow["RDGatewayExternalCredentialProvider"].Equals(connectionInfo.RDGatewayExternalCredentialProvider) &&
+             dataRow["RDGatewayUserViaAPI"].Equals(connectionInfo.RDGatewayUserViaAPI) &&
              dataRow["RdpVersion"].Equals(connectionInfo.RdpVersion.ToString());
 
             var isInheritanceFieldNotChange = false;
@@ -373,6 +391,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritDisableMenuAnimations"].Equals(connectionInfo.Inheritance.DisableMenuAnimations) &&
                 dataRow["InheritDisableCursorShadow"].Equals(connectionInfo.Inheritance.DisableCursorShadow) &&
                 dataRow["InheritDisableCursorBlinking"].Equals(connectionInfo.Inheritance.DisableCursorBlinking) &&
+                dataRow["InheritExternalCredentialProvider"].Equals(connectionInfo.Inheritance.ExternalCredentialProvider) &&
+                dataRow["InheritUserViaAPI"].Equals(connectionInfo.Inheritance.UserViaAPI) &&
                 dataRow["InheritDomain"].Equals(connectionInfo.Inheritance.Domain) &&
                 dataRow["InheritIcon"].Equals(connectionInfo.Inheritance.Icon) &&
                 dataRow["InheritPanel"].Equals(connectionInfo.Inheritance.Panel) &&
@@ -427,6 +447,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayUsername"].Equals(connectionInfo.Inheritance.RDGatewayUsername) &&
                 dataRow["InheritRDGatewayPassword"].Equals(connectionInfo.Inheritance.RDGatewayPassword) &&
                 dataRow["InheritRDGatewayDomain"].Equals(connectionInfo.Inheritance.RDGatewayDomain) &&
+                dataRow["InheritRDGatewayExternalCredentialProvider"].Equals(connectionInfo.Inheritance.RDGatewayExternalCredentialProvider) &&
+                dataRow["InheritRDGatewayUserViaAPI"].Equals(connectionInfo.Inheritance.RDGatewayUserViaAPI) &&
                 dataRow["InheritRdpVersion"].Equals(connectionInfo.Inheritance.RdpVersion));
             }
             else

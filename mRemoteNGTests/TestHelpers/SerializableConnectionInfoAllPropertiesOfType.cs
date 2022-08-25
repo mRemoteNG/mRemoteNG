@@ -31,6 +31,8 @@
 		public TType RDGatewayUsername { get; set; }
 		public TType RDGatewayPassword { get; set; }
 		public TType RDGatewayDomain { get; set; }
+		public TType RDGatewayExternalCredentialProvider { get; set; }
+		public TType RDGatewayUserViaAPI { get; set; }
 		public TType Resolution { get; set; }
 		public TType AutomaticResize { get; set; }
 		public TType Colors { get; set; }
@@ -77,8 +79,10 @@
         public TType RDPStartProgram { get; set; }
         public TType RDPStartProgramWorkDir { get; set; }
 		public TType OpeningCommand { get; set; }
+		public TType ExternalCredentialProvider { get; set; }
 		public TType UserViaAPI { get; set; }
 		public TType EC2InstanceId { get; set; }
+		public TType ExternalAddressProvider { get; set; }
 		public TType EC2Region { get; set; }
 	}
 }

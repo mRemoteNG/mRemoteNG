@@ -231,8 +231,8 @@
   <data name="Display" xml:space="preserve">
     <value>Display</value>
   </data>
-  <data name="Gateway" xml:space="preserve">
-    <value>Gateway</value>
+  <data name="RDPGateway" xml:space="preserve">
+    <value>RDP-Gateway</value>
   </data>
   <data name="Miscellaneous" xml:space="preserve">
     <value>Miscellaneous</value>
@@ -1192,22 +1192,22 @@ If you run into such an error, please create a new connection file!</value>
     <value>PuTTY Session</value>
   </data>
   <data name="RdpGatewayDomain" xml:space="preserve">
-    <value>Gateway Domain</value>
+    <value>RDP-Gateway Domain</value>
   </data>
   <data name="RdpGatewayHostname" xml:space="preserve">
-    <value>Gateway Hostname</value>
+    <value>RDP-Gateway Hostname</value>
   </data>
   <data name="RdpGatewayPassword" xml:space="preserve">
-    <value>Remote Desktop Gateway Password</value>
+    <value>RDP-Gateway Password</value>
   </data>
   <data name="RdpGatewayUsageMethod" xml:space="preserve">
-    <value>Use Gateway</value>
+    <value>Use RDP Gateway</value>
   </data>
   <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
-    <value>Gateway Credentials</value>
+    <value>RDP-Gateway Credentials</value>
   </data>
   <data name="RdpGatewayUsername" xml:space="preserve">
-    <value>Gateway Username</value>
+    <value>RDP-Gateway Username</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Disk Drives</value>
@@ -2285,5 +2285,32 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="FileMenuWillBeHiddenNow" xml:space="preserve">
     <value>File menu is hidded now. Press Alt button to peek</value>
+  </data>
+  <data name="ECPDelineaSecretServer" xml:space="preserve">
+    <value>Delinea Secret Server</value>
+  </data>
+  <data name="ECPNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="EAPAmazonWebServices" xml:space="preserve">
+    <value>AmazonEC2</value>
+  </data>
+  <data name="EAPNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ExternalCredentialProvider" xml:space="preserve">
+    <value>External Credential Provider</value>
+  </data>
+  <data name="PropertyDescriptionExternalCredentialProvider" xml:space="preserve">
+    <value>External credential provider / vault to retrieve credentials from</value>
+  </data>
+  <data name="PropertyDescriptionExternalAddressProvider" xml:space="preserve">
+    <value>External provider to retrieve host address from</value>
+  </data>
+  <data name="ExternalAddressProvider" xml:space="preserve">
+    <value>External Address Provider</value>
+  </data>
+  <data name="UseExternalCredentialProvider" xml:space="preserve">
+    <value>Use External Credential Provider</value>
   </data>
 </root>
