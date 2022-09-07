@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtCredentialsPassword.Text =
                 cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
             txtCredentialsDomain.Text = Properties.OptionsCredentialsPage.Default.DefaultDomain;
-            txtCredentialsUserViaAPI.Text = Properties.OptionsCredentialsPage.Default.UserViaAPDefault;
+            txtCredentialsUserViaAPI.Text = Properties.OptionsCredentialsPage.Default.UserViaAPIDefault;
         }
 
         public override void SaveSettings()
@@ -77,7 +77,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsCredentialsPage.Default.DefaultPassword =
                 cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
             Properties.OptionsCredentialsPage.Default.DefaultDomain = txtCredentialsDomain.Text;
-            Properties.OptionsCredentialsPage.Default.UserViaAPDefault = txtCredentialsUserViaAPI.Text;
+            Properties.OptionsCredentialsPage.Default.UserViaAPIDefault = txtCredentialsUserViaAPI.Text;
         }
 
         private void radCredentialsCustom_CheckedChanged(object sender, EventArgs e)

@@ -409,14 +409,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             string gwu = connectionInfo.RDGatewayUsername;
                             string gwp = connectionInfo.RDGatewayPassword;
                             string gwd = connectionInfo.RDGatewayDomain;
+                            string pkey = "";
 
                             // access secret server api if necessary
                             if (InterfaceControl.Info.RDGatewayExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
                             {
                                 try
                                 {
-                                    string idviaapi = InterfaceControl.Info.RDGatewayUserViaAPI;
-                                    ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{idviaapi}", out gwu, out gwp, out gwd);
+                                    string RDGUserViaAPI = InterfaceControl.Info.RDGatewayUserViaAPI;
+                                    ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{RDGUserViaAPI}", out gwu, out gwp, out gwd, out pkey);
                                 }
                                 catch (Exception ex)
                                 {
@@ -494,13 +495,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var password = connectionInfo?.Password ?? "";
                 var domain = connectionInfo?.Domain ?? "";
                 var UserViaAPI = connectionInfo?.UserViaAPI ?? "";
+                string pkey = "";
 
                 // access secret server api if necessary
                 if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
                 {
                     try
                     {
-                        ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{UserViaAPI}", out userName, out password, out domain);
+                        ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{UserViaAPI}", out userName, out password, out domain, out pkey);
                     }
                     catch (Exception ex)
                     {
@@ -522,7 +524,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         case "custom":
                             try
                             {
-                                ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer("SSAPI:" + Properties.OptionsCredentialsPage.Default.UserViaAPDefault, out userName, out password, out domain);
+                                ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer(Properties.OptionsCredentialsPage.Default.UserViaAPIDefault, out userName, out password, out domain, out pkey);
                                 _rdpClient.UserName = userName;
                             }
                             catch (Exception ex)

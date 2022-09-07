@@ -1,6 +1,11 @@
 ﻿using Microsoft.Win32;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.OpenSsl;
+using Org.BouncyCastle.Security;
 using SecretServerAuthentication.DSS;
 using SecretServerRestClient.DSS;
+using System.Security.Cryptography;
 
 namespace ExternalConnectors.DSS
 {
@@ -114,25 +119,22 @@ namespace ExternalConnectors.DSS
             }
         }
 
-        private static void FetchSecret(int secretID, out string secretUsername, out string secretPassword, out string secretDomain)
+        private static SecretsServiceClient ConstructSecretsServiceClient()
         {
             string baseURL = SSConnectionData.ssUrl;
-
-            SecretModel secret;
             if (SSConnectionData.ssSSO)
             {
                 // REQUIRES IIS CONFIG! https://docs.thycotic.com/ss/11.0.0/api-scripting/webservice-iwa-powershell
                 var handler = new HttpClientHandler() { UseDefaultCredentials = true };
-                using (var httpClient = new HttpClient(handler))
+                var httpClient = new HttpClient(handler);
                 {
                     // Call REST API:
-                    var client = new SecretsServiceClient($"{baseURL}/winauthwebservices/api", httpClient);
-                    secret = client.GetSecretAsync(false, true, secretID, null).Result;
+                    return new SecretsServiceClient($"{baseURL}/winauthwebservices/api", httpClient);
                 }
             }
             else
             {
-                using (var httpClient = new HttpClient())
+                var httpClient = new HttpClient();
                 {
 
                     var token = GetToken();
@@ -140,15 +142,22 @@ namespace ExternalConnectors.DSS
                     httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                     // Call REST API:
-                    var client = new SecretsServiceClient($"{baseURL}/api", httpClient);
-                    secret = client.GetSecretAsync(false, true, secretID, null).Result;
+                    return new SecretsServiceClient($"{baseURL}/api", httpClient);
                 }
             }
+
+        }
+        private static void FetchSecret(int secretID, out string secretUsername, out string secretPassword, out string secretDomain, out string privatekey)
+        {
+            var client = ConstructSecretsServiceClient();
+            SecretModel secret = client.GetSecretAsync(false, true, secretID, null).Result;
 
             // clear return variables
             secretDomain = "";
             secretUsername = "";
             secretPassword = "";
+            privatekey = "";
+            string privatekeypassphrase = "";
 
             // parse data and extract what we need
             foreach (var item in secret.Items)
@@ -159,10 +168,91 @@ namespace ExternalConnectors.DSS
                     secretUsername = item.ItemValue;
                 else if (item.FieldName.ToLower().Equals("password"))
                     secretPassword = item.ItemValue;
+                else if (item.FieldName.ToLower().Equals("private key"))
+                {
+                    client.ReadResponseNoJSONConvert = true;
+                    privatekey = client.GetFieldAsync(false, false, secretID, "private-key").Result;
+                    client.ReadResponseNoJSONConvert = false;
+                }
+                else if (item.FieldName.ToLower().Equals("private key passphrase"))
+                    privatekeypassphrase = item.ItemValue;
             }
 
+            // need to decode the private key?
+            if (!string.IsNullOrEmpty(privatekeypassphrase))
+            {
+                try
+                {
+                    var key = DecodePrivateKey(privatekey, privatekeypassphrase);
+                    privatekey = key;
+                }
+                catch(Exception)
+                {
+
+                }
+            }
+
+            // conversion to putty format necessary?
+            if (!string.IsNullOrEmpty(privatekey) && !privatekey.StartsWith("PuTTY-User-Key-File-2"))
+            {
+                try
+                {
+                    RSACryptoServiceProvider key = ImportPrivateKey(privatekey);
+                    privatekey = PuttyKeyFileGenerator.ToPuttyPrivateKey(key);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
 
+        #region PUTTY KEY HANDLING
+        // decode rsa private key with encryption password
+        private static string DecodePrivateKey(string encryptedPrivateKey, string password)
+        {
+            TextReader textReader = new StringReader(encryptedPrivateKey);
+            PemReader pemReader = new PemReader(textReader, new PasswordFinder(password));
+
+            AsymmetricCipherKeyPair keyPair = (AsymmetricCipherKeyPair)pemReader.ReadObject();
+
+            TextWriter textWriter = new StringWriter();
+            var pemWriter = new PemWriter(textWriter);
+            pemWriter.WriteObject(keyPair.Private);
+            pemWriter.Writer.Flush();
+
+            return ""+textWriter.ToString();
+        }
+        private class PasswordFinder : IPasswordFinder
+        {
+            private string password;
+
+            public PasswordFinder(string password)
+            {
+                this.password = password;
+            }
+
+
+            public char[] GetPassword()
+            {
+                return password.ToCharArray();
+            }
+        }
+
+        // read private key pem string to rsacryptoserviceprovider
+        public static RSACryptoServiceProvider ImportPrivateKey(string pem)
+        {
+            PemReader pr = new PemReader(new StringReader(pem));
+            AsymmetricCipherKeyPair KeyPair = (AsymmetricCipherKeyPair)pr.ReadObject();
+            RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)KeyPair.Private);
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            rsa.ImportParameters(rsaParams);
+            return rsa;
+        }
+        #endregion
+
+
+        #region TOKEN
         private static string GetToken()
         {
             // if there is no token, fetch a fresh one
@@ -233,11 +323,11 @@ namespace ExternalConnectors.DSS
                 return tokenResult;
             }
         }
-
+        #endregion
 
 
         // input must be the secret id to fetch
-        public static void FetchSecretFromServer(string input, out string username, out string password, out string domain)
+        public static void FetchSecretFromServer(string input, out string username, out string password, out string domain, out string privatekey)
         {
             // get secret id
             int secretID = Int32.Parse(input);
@@ -246,7 +336,7 @@ namespace ExternalConnectors.DSS
             SSConnectionData.Init();
 
             // get the secret
-            FetchSecret(secretID, out username, out password, out domain);
+            FetchSecret(secretID, out username, out password, out domain, out privatekey);
         }
     }
 }

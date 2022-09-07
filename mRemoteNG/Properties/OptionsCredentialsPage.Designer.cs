@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Connection;
+
 namespace mRemoteNG.Properties {
     
     
@@ -58,16 +60,31 @@ namespace mRemoteNG.Properties {
                 this["DefaultDomain"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UserViaAPDefault {
+        public ExternalCredentialProvider ExternalCredentialProviderDefault
+        {
+            get
+            {
+                return ((ExternalCredentialProvider)(this["ExternalCredentialProviderDefault"]));
+            }
+            set
+            {
+                this["ExternalCredentialProviderDefault"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserViaAPIDefault {
             get {
-                return ((string)(this["UserViaAPDefault"]));
+                return ((string)(this["UserViaAPIDefault"]));
             }
             set {
-                this["UserViaAPDefault"] = value;
+                this["UserViaAPIDefault"] = value;
             }
         }
         
