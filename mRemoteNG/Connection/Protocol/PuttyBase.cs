@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
 using Connection;
+using System.IO;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -57,6 +58,8 @@ namespace mRemoteNG.Connection.Protocol
 
         public override bool Connect()
         {
+            string optionalTemporaryPrivateKeyPath = ""; // path to ppk file instead of password. only temporary (extracted from credential vault).
+
             try
             {
                 _isPuttyNg = PuttyTypeDetector.GetPuttyType() == PuttyTypeDetector.PuttyType.PuttyNg;
@@ -85,14 +88,22 @@ namespace mRemoteNG.Connection.Protocol
                         var password = InterfaceControl.Info?.Password ?? "";
                         var domain = InterfaceControl.Info?.Domain ?? "";
                         var UserViaAPI = InterfaceControl.Info?.UserViaAPI ?? "";
-
+                        string privatekey = "";
 
                         // access secret server api if necessary
                         if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
                         {
                             try
                             {
-                                ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{UserViaAPI}", out username, out password, out domain);
+                                ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{UserViaAPI}", out username, out password, out domain, out privatekey);
+
+                                if (!string.IsNullOrEmpty(privatekey))
+                                {
+                                    optionalTemporaryPrivateKeyPath = Path.GetTempFileName();
+                                    File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
+                                    FileInfo fileInfo = new FileInfo(optionalTemporaryPrivateKeyPath);
+                                    fileInfo.Attributes = FileAttributes.Temporary;
+                                }
                             }
                             catch (Exception ex)
                             {
@@ -111,22 +122,26 @@ namespace mRemoteNG.Connection.Protocol
                                     username = Properties.OptionsCredentialsPage.Default.DefaultUsername;
                                     break;
                                 case "custom":
-                                    try
+
+                                    if (Properties.OptionsCredentialsPage.Default.ExternalCredentialProviderDefault == ExternalCredentialProvider.DelineaSecretServer)
                                     {
-                                        ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer(
-                                            "SSAPI:" + Properties.OptionsCredentialsPage.Default.UserViaAPDefault, out username, out password,
-                                            out domain);
+                                        try
+                                        {
+                                            ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer(
+                                                $"{Properties.OptionsCredentialsPage.Default.UserViaAPIDefault}", out username, out password, out domain, out privatekey);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                                        }
                                     }
-                                    catch (Exception ex)
-                                    {
-                                        Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
-                                    }
+
                                     break;
                             }
                         }
                        
 
-                        if (string.IsNullOrEmpty(password))
+                        if (string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(optionalTemporaryPrivateKeyPath))
                         {
                             if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
                             {
@@ -149,6 +164,13 @@ namespace mRemoteNG.Connection.Protocol
                                 arguments.Add("-pw", password);
                             }
                         }
+
+                        // use private key if specified
+                        if (!string.IsNullOrEmpty(optionalTemporaryPrivateKeyPath))
+                        {
+                            arguments.Add("-i", optionalTemporaryPrivateKeyPath);
+                        }
+
                     }
 
                     arguments.Add("-P", InterfaceControl.Info.Port.ToString());
@@ -218,6 +240,15 @@ namespace mRemoteNG.Connection.Protocol
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ConnectionFailed + Environment.NewLine + ex.Message);
                 return false;
+            }
+            finally
+            {
+                // make sure to remove the private key file
+                if (!string.IsNullOrEmpty(optionalTemporaryPrivateKeyPath))
+                {
+                    System.Threading.Thread.Sleep(500);
+                    System.IO.File.Delete(optionalTemporaryPrivateKeyPath);
+                }
             }
         }
 
