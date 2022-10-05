@@ -1,6 +1,7 @@
 
 body {
   --themecolor: #4F8AFF;
+  --linkcolor: #343131;
   color: var(--themecolor);
 }
 
@@ -26,21 +27,22 @@ body {
 }
 
 a:link {
-  color: var(--themecolor);
+  color: var(--linkcolor);
 }
 
 a:visited {
-  color: var(--themecolor);
+  color: var(--linkcolor);
 }
 
 a:hover {
-  color: var(--themecolor);
+  color: var(--linkcolor);
 }
 
 a:active {
-  color: var(--themecolor);
+  color: var(--linkcolor);
 }
 
 a {
-  color: var(--themecolor);
+  color: var(--linkcolor);
+  text-decoration: underline;
 }
