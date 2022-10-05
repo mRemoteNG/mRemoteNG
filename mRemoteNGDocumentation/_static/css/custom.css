@@ -2,6 +2,7 @@
 body {
   --themecolor: #4F8AFF;
   --linkcolor: #343131;
+  --menulinkcolor: #82ADFF;
   color: var(--themecolor);
 }
 
@@ -28,6 +29,10 @@ body {
 
 a:link {
   color: var(--linkcolor);
+}
+
+li a {
+  color: var(--menulinkcolor);
 }
 
 a:visited {
