@@ -1,8 +1,9 @@
 
 body {
-  --themecolor: #4F8AFF;
+  --themecolor: #307EB3;
   --linkcolor: #343131;
   --menulinkcolor: #82ADFF;
+  --sidebarcolor: #458BBB;
   color: var(--themecolor);
 }
 
@@ -14,7 +15,9 @@ body {
 .wy-side-nav-search {
   background-color: var(--themecolor);
 }
-
+.wy-menu wy-menu-vertical {
+  background-color: var(--sidebarcolor);
+}
 .wy-nav-top {
   background-color: var(--themecolor);
 }
@@ -33,6 +36,7 @@ a:link {
 
 li a {
   color: var(--menulinkcolor);
+  text-decoration: none;
 }
 
 a:visited {
