@@ -1,5 +1,5 @@
 project = 'mRemoteNG'
-copyright = '2021, The mRemoteNG Team'
+copyright = '2022, The mRemoteNG Team'
 author = 'The mRemoteNG Team'
 language = 'en'
 master_doc = 'index'
