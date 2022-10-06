@@ -1,3 +1,7 @@
 .wy-nav-content {
 	max-width:none !important;
 }
+
+.version {
+	color: #82ADFF !important;
+}
