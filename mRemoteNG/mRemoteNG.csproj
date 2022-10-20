@@ -67,7 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="5.0.0" />
+    <PackageReference Include="Castle.Core" Version="5.1.0" />
     <PackageReference Include="ConsoleControl" Version="1.3.0" />
     <PackageReference Include="Cucumber.Messages" Version="16.0.1" />
     <PackageReference Include="DockPanelSuite" Version="3.1.0" />
@@ -76,9 +76,10 @@
     <PackageReference Include="DockPanelSuite.ThemeVS2012" Version="3.1.0" />
     <PackageReference Include="DockPanelSuite.ThemeVS2013" Version="3.1.0" />
     <PackageReference Include="DockPanelSuite.ThemeVS2015" Version="3.1.0" />
-    <PackageReference Include="log4net" Version="2.0.14" />
+    <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1264.42" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1293.44" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="MySql.Data" Version="8.0.30" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="ObjectListView.Official" Version="2.9.1" />
@@ -174,6 +175,43 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>OptionsUpdatesPage.settings</DependentUpon>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\AdvancedPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\AppearancePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\BackupPage.cs" />
+    <Compile Update="UI\Forms\OptionsPages\ConnectionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\CredentialsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\NotificationsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\OptionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\SecurityPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\SqlServerPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\StartupExitPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\TabsPanelsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\ThemePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Forms\OptionsPages\UpdatesPage.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
 
