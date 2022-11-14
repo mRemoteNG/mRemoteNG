@@ -33,7 +33,7 @@ namespace mRemoteNG.App
 
             var frmSplashScreen = FrmSplashScreenNew.GetInstance();
 
-            Screen targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
+            var targetScreen = Screen.PrimaryScreen;
 
             Rectangle viewport = targetScreen.WorkingArea;
             frmSplashScreen.Top = viewport.Top;
