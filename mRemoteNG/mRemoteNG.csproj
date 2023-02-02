@@ -97,6 +97,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Language\Language.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\OptionsBackupPage.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
@@ -466,6 +471,14 @@
     <Resource Include="UI\Font\HandelGotDBol.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Language\Language.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>mRemoteNG.Resources.Language</CustomToolNamespace>
+      <LastGenOutput>Language.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
