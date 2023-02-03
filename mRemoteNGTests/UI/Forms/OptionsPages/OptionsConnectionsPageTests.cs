@@ -13,14 +13,14 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         public void ConnectionsPageLinkExistsInListView()
         {
             ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
-            Assert.That(listViewTester.Items[4].Text, Does.Match("Connections"));
+            Assert.That(listViewTester.Items[2].Text, Does.Match("Connections"));
         }
 
         [Test]
         public void ConnectionsIconShownInListView()
         {
             ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
-            Assert.That(listViewTester.Items[4].ImageList, Is.Not.Null);
+            Assert.That(listViewTester.Items[2].ImageList, Is.Not.Null);
         }
 
         [Test]
