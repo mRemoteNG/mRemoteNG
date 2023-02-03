@@ -566,7 +566,6 @@
     <Setting Name="InhDefaultOpeningCommand" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-
     <Setting Name="ConDefaultExternalCredentialProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">None</Value>
     </Setting>
@@ -579,7 +578,11 @@
     <Setting Name="InhDefaultExternalAddressProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-
+    <Setting Name="ConDefaultRDGatewayUserViaAPI" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayExternalCredentialProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
   </Settings>
-
 </SettingsFile>
