@@ -25,12 +25,14 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         {
             ConnectionInfo.RDGatewayUsageMethod = gatewayUsageMethod;
             ConnectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes;
-            ExpectedPropertyList.AddRange(new []
+            ExpectedPropertyList.AddRange(new[]
             {
                 nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayHostname),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials)
+                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials),
             });
-
+            ExpectedPropertyList.Remove(nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUserViaAPI));
+            ExpectedPropertyList.Remove(nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayExternalCredentialProvider));
+            
             RunVerification();
         }
 
@@ -40,14 +42,28 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         {
             ConnectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Always;
             ConnectionInfo.RDGatewayUseConnectionCredentials = useConnectionCredentials;
-            ExpectedPropertyList.AddRange(new []
+            switch (useConnectionCredentials)
             {
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayHostname),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUsername),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayPassword),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayDomain),
-                nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials)
-            });
+                case RDGatewayUseConnectionCredentials.No:
+                    ExpectedPropertyList.AddRange(new[]
+                    {
+                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayHostname),
+                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUsername),
+                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayPassword),
+                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayDomain),
+                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials)
+                    });
+                    break;
+                case RDGatewayUseConnectionCredentials.SmartCard:
+                    ExpectedPropertyList.AddRange(new[]
+                    {
+                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayHostname),
+                        nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUseConnectionCredentials)
+                    });
+                    ExpectedPropertyList.Remove(nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayUserViaAPI));
+                    ExpectedPropertyList.Remove(nameof(mRemoteNG.Connection.ConnectionInfo.RDGatewayExternalCredentialProvider));
+                    break;
+            }
 
             RunVerification();
         }
