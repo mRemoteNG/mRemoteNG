@@ -66,6 +66,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
         public void AutomaticResizePropertyShown_WhenResolutionIsDynamic(RDPResolutions resolution)
         {
             ConnectionInfo.Resolution = resolution;
+            ExpectedPropertyList.Clear();
             ExpectedPropertyList.Add(nameof(mRemoteNG.Connection.ConnectionInfo.AutomaticResize));
 
             RunVerification();
