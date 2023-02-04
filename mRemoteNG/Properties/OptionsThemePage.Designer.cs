@@ -12,7 +12,7 @@ namespace mRemoteNG.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class OptionsThemePage : global::System.Configuration.ApplicationSettingsBase {
         
         private static OptionsThemePage defaultInstance = ((OptionsThemePage)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new OptionsThemePage())));
@@ -37,7 +37,7 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("vs2015Light")]
         public string ThemeName {
             get {
                 return ((string)(this["ThemeName"]));
