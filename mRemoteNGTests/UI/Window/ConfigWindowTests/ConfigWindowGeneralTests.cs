@@ -263,11 +263,10 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
 			            nameof(ConnectionInfo.RdpVersion),
                         nameof(ConnectionInfo.RDPStartProgram),
                         nameof(ConnectionInfo.RDPStartProgramWorkDir),
-			            nameof(ConnectionInfo.ExternalCredentialProvider),
-			            nameof(ConnectionInfo.UserViaAPI),
+                        nameof(ConnectionInfo.RDGatewayExternalCredentialProvider),
+                        nameof(ConnectionInfo.RDGatewayUserViaAPI),
+                        nameof(ConnectionInfo.ExternalCredentialProvider),
                         nameof(ConnectionInfo.ExternalAddressProvider),
-                        nameof(ConnectionInfo.EC2InstanceId),
-                        nameof(ConnectionInfo.EC2Region)
                     });
                     break;
                 case ProtocolType.VNC:
@@ -289,7 +288,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
                         nameof(ConnectionInfo.ExternalCredentialProvider),
-                        nameof(ConnectionInfo.UserViaAPI),
                     });
                     break;
                 case ProtocolType.SSH2:
@@ -302,10 +300,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.PuttySession),
                         nameof(ConnectionInfo.OpeningCommand),
                         nameof(ConnectionInfo.ExternalAddressProvider),
-                        nameof(ConnectionInfo.EC2InstanceId),
-                        nameof(ConnectionInfo.EC2Region),
                         nameof(ConnectionInfo.ExternalCredentialProvider),
-                        nameof(ConnectionInfo.UserViaAPI),
                     });
                     break;
                 case ProtocolType.Telnet:
@@ -321,8 +316,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.HTTPS:
                     expectedProperties.AddRange(new []
                     {
-                        nameof(ConnectionInfo.ExternalCredentialProvider),
-                        nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Port),
                         nameof(ConnectionInfo.RenderingEngine),
@@ -331,8 +324,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.PowerShell:
                     expectedProperties.AddRange(new[]
                     {
-                        nameof(ConnectionInfo.ExternalCredentialProvider),
-                        nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),
@@ -341,8 +332,6 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                 case ProtocolType.IntApp:
                     expectedProperties.AddRange(new[]
                     {
-                        nameof(ConnectionInfo.ExternalCredentialProvider),
-                        nameof(ConnectionInfo.UserViaAPI),
                         nameof(ConnectionInfo.Password),
                         nameof(ConnectionInfo.Domain),
                         nameof(ConnectionInfo.Port),

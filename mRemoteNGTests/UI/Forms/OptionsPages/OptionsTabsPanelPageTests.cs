@@ -13,14 +13,14 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         public void TabsPanelPageLinkExistsInListView()
         {
             ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
-            Assert.That(listViewTester.Items[2].Text, Does.Match("Tabs & Panels"));
+            Assert.That(listViewTester.Items[3].Text, Does.Match("Tabs & Panels"));
         }
 
         [Test]
         public void TabsPanelIconShownInListView()
         {
             ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
-            Assert.That(listViewTester.Items[2].ImageList, Is.Not.Null);
+            Assert.That(listViewTester.Items[3].ImageList, Is.Not.Null);
         }
 
         [Test]
