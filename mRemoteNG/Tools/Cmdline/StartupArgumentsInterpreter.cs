@@ -77,7 +77,7 @@ namespace mRemoteNG.Tools.Cmdline
             if (args["noreconnect"] == null && args["norc"] == null) return;
             _messageCollector.AddMessage(MessageClass.DebugMsg,
                                          "Cmdline arg: Disabling reconnection to previously connected hosts");
-            Properties.App.Default.NoReconnect = true;
+            Properties.OptionsAdvancedPage.Default.NoReconnect = true;
         }
 
         private void ParseCustomConnectionPathArg(CmdArgumentsInterpreter args)

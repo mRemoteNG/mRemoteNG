@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using Google.Protobuf;
 using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Tools
@@ -9,6 +10,7 @@ namespace mRemoteNG.Tools
         public ReconnectGroup()
         {
             InitializeComponent();
+            chkReconnectWhenReady.Checked = !Properties.OptionsAdvancedPage.Default.NoReconnect;
         }
 
         private bool _ServerReady;

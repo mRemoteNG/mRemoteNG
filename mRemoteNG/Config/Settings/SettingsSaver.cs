@@ -41,7 +41,6 @@ namespace mRemoteNG.Config.Settings
                 Properties.App.Default.FirstStart = false;
                 Properties.App.Default.ResetPanels = false;
                 Properties.App.Default.ResetToolbars = false;
-                Properties.Settings.Default.NoReconnect = false;
 
                 SaveExternalAppsToolbarLocation(externalToolsToolStrip);
                 SaveQuickConnectToolbarLocation(quickConnectToolStrip);

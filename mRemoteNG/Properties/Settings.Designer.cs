@@ -254,18 +254,6 @@ namespace mRemoteNG.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool NoReconnect {
-            get {
-                return ((bool)(this["NoReconnect"]));
-            }
-            set {
-                this["NoReconnect"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ExtAppsTBVisible {
             get {
                 return ((bool)(this["ExtAppsTBVisible"]));
