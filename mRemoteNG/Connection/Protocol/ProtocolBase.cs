@@ -60,7 +60,7 @@ namespace mRemoteNG.Connection.Protocol
 
         public ConnectionInfo.Force Force { get; set; }
 
-        public readonly System.Timers.Timer tmrReconnect = new System.Timers.Timer(2000);
+        public readonly System.Timers.Timer tmrReconnect = new System.Timers.Timer(5000);
         protected ReconnectGroup ReconnectGroup;
 
         protected ProtocolBase(string name)
