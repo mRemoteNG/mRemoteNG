@@ -29,6 +29,29 @@ Per the MS documentation, the only way around this is to do the following:
 
 - Uninstall `KB4103727 <https://support.microsoft.com/en-us/help/4103727/windows-10-update-kb4103727>`_
 
+Log4net vulnerability CVE-2018-1285
+===================================
+
+Log4Net is an external library on which mRepoteNG application relies on. While the nightly builds are using the latest version of log4net that do not have the `CVE-2018-1285 <https://nvd.nist.gov/vuln/detail/CVE-2018-1285>`_ vulnerability, older releases require manual patching.
+
+1. Download latest version of log4net from `apache.org <http://archive.apache.org/dist/logging/log4net/binaries/>`_ - currently is v2.0.15
+
+2. Copy log4net.dll from net40 folder into mRemoteNG install folder (default *C:\\Program Files (x86)\\mRemoteNG\\* )
+   
+3. Edit *mRemoteNG.exe.config* and add the following section under the assembly binding for ``WeifenLuo.WinFormsUI.Docking``
+
+::
+
+   <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+    <dependentAssembly>
+        <assemblyIdentity name="log4net" publicKeyToken="669e0ddf0bb1aa2a" culture="neutral"/>
+        <bindingRedirect oldVersion="2.0.8.0-2.0.15.0" newVersion="2.0.15.0"/>
+    </dependentAssembly>
+  </assemblyBinding>
+
+.. highlights::
+  Make sure the newer log4net version in the ``bindingRedirect`` section of *mRemoteNG.exe.config* file matches the version of the log4net.dll copied over at step #2. Please refer to `Microsoft documentation <https://learn.microsoft.com/en-us/dotnet/framework/configure-apps/file-schema/runtime/bindingredirect-element>`_  for more details related to assembly binding in .NET applications. 
+
 I can't open more than X number of RDP sessions. New sessions fail with error code 3334
 =======================================================================================
 The issue here is likely the amount of resources available to the RDP component to open the connection. This was alleviated in `MR-714 <https://mremoteng.atlassian.net/browse/MR-714>`_ and `MR-864 <https://mremoteng.atlassian.net/browse/MR-864>`_
