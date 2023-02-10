@@ -10,7 +10,7 @@ namespace mRemoteNG.Tools
         public ReconnectGroup()
         {
             InitializeComponent();
-            chkReconnectWhenReady.Checked = !Properties.OptionsAdvancedPage.Default.NoReconnect;
+            chkReconnectWhenReady.Checked = Properties.OptionsAdvancedPage.Default.NoReconnect;
         }
 
         private bool _ServerReady;
