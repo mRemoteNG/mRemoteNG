@@ -247,7 +247,7 @@
     <value>Check failed!</value>
   </data>
   <data name="CheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>
+    <value>Display reconnection dialog when disconnected from server (RDP &amp;&amp; ICA only)</value>
   </data>
   <data name="CheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Do not show this message again.</value>
@@ -1367,7 +1367,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Couldn't create RDP control, please check mRemoteNG requirements.</value>
   </data>
   <data name="DisableCursorBlinking" xml:space="preserve">
-    <value>Disable Cursor blinking</value>
+    <value>Disable Cursor Blinking</value>
   </data>
   <data name="DisableCursorShadow" xml:space="preserve">
     <value>Disable Cursor Shadow</value>
@@ -2312,5 +2312,8 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="UseExternalCredentialProvider" xml:space="preserve">
     <value>Use External Credential Provider</value>
+  </data>
+  <data name="CheckboxNoReconnect" xml:space="preserve">
+    <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>
   </data>
 </root>

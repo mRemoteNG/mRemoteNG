@@ -38,6 +38,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSeconds.Text = Language.Seconds;
             lblMaximumPuttyWaitTime.Text = Language.PuttyTimeout;
             chkAutomaticReconnect.Text = Language.CheckboxAutomaticReconnect;
+            //chkNoReconnect.Text = Language.;
             chkLoadBalanceInfoUseUtf8.Text = Language.LoadBalanceInfoUseUtf8;
             lblConfigurePuttySessions.Text = Language.PuttySessionsConfig;
             btnLaunchPutty.Text = Language.ButtonLaunchPutty;
@@ -49,6 +50,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void LoadSettings()
         {
             chkAutomaticReconnect.Checked = Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect;
+            chkNoReconnect.Checked = Properties.OptionsAdvancedPage.Default.NoReconnect;
+            chkNoReconnect.Enabled = Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect;
+
             chkLoadBalanceInfoUseUtf8.Checked = Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8;
             numPuttyWaitTime.Value = Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime;
 
@@ -62,6 +66,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
+            Properties.OptionsAdvancedPage.Default.NoReconnect= chkNoReconnect.Checked;
             Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8 = chkLoadBalanceInfoUseUtf8.Checked;
 
             var puttyPathChanged = false;
@@ -158,7 +163,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblConfigurePuttySessions.Enabled = exists;
             btnLaunchPutty.Enabled = exists;
         }
+        
+        private void chkNoReconnect_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkAutomaticReconnect_CheckedChanged(object sender, EventArgs e)
+        {
+            chkNoReconnect.Enabled = chkAutomaticReconnect.Checked;
+        }
 
         #endregion
+
     }
 }
