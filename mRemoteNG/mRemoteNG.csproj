@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
@@ -15,8 +15,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>latest</LangVersion>
     <PackageIcon>Header_dark.png</PackageIcon>
-	<ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-	<UseWPF>True</UseWPF>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <UseWPF>True</UseWPF>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>DEBUG</DefineConstants>
@@ -24,7 +24,6 @@
     <WarningsAsErrors />
     <OutputPath>bin\x64\Debug\</OutputPath>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DefineConstants />
     <Optimize>false</Optimize>
@@ -32,7 +31,6 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|x64'">
     <DefineConstants>DEBUG;PORTABLE</DefineConstants>
     <Optimize>false</Optimize>
@@ -40,7 +38,6 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Portable|x64'">
     <DefineConstants>PORTABLE</DefineConstants>
     <Optimize>false</Optimize>
@@ -48,12 +45,22 @@
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
-
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en</MultilingualFallbackLanguage>
+    <TranslationReport Condition="'$(Configuration)' == 'Release'">true</TranslationReport>
+    <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\v$(MultilingualAppToolkitVersion)\Microsoft.Multilingual.ResxResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <ItemGroup>
     <None Remove="buildenv.tmp" />
+    <None Remove="MultilingualResources\mRemoteNG.ru-RU.xlf" />
+    <None Remove="MultilingualResources\mRemoteNG.ru.xlf" />
     <None Remove="UI\Font\HandelGotDBol.ttf" />
   </ItemGroup>
-
   <ItemGroup>
     <COMReference Include="MSTSCLib">
       <WrapperTool>aximp</WrapperTool>
@@ -65,7 +72,6 @@
       <EmbedInteropTypes>false</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="5.1.1" />
     <PackageReference Include="ConsoleControl" Version="1.3.0" />
@@ -87,7 +93,7 @@
     <PackageReference Include="OpenCover" Version="4.7.1221" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
     <PackageReference Include="Renci.SshNet.Async" Version="1.4.0" />
-    <PackageReference Include="ReportGenerator" Version="5.1.16" />
+    <PackageReference Include="ReportGenerator" Version="5.1.17" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.DirectoryServices" Version="7.0.0" />
@@ -95,7 +101,6 @@
     <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
     <PackageReference Include="VncSharpCore" Version="1.2.1" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Language\Language.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -220,7 +225,6 @@
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Icons\Admin.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -454,25 +458,24 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="echo $(ConfigurationName) &gt; buildenv.tmp" />
   </Target>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command=":: When passing paths to powershell scripts, check if the path ends with a backslash &quot;\&quot;&#xD;&#xA;:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.&#xD;&#xA;&#xD;&#xA;powershell -noprofile -command &quot;sleep 2&quot;&#xD;&#xA;&#xD;&#xA;set /p buildenv=&lt;buildenv.tmp&#xD;&#xA;&#xD;&#xA;:: Manual builds, set the cert password and uncomment below.&#xD;&#xA;:: IF &quot;%25APPVEYOR_BUILD_FOLDER&quot;==&quot;&quot; ( set cert_pwd= )&#xD;&#xA;&#xD;&#xA;:: Call the post build powershell script&#xD;&#xA;powershell.exe -ExecutionPolicy Bypass -File &quot;$(SolutionDir)Tools\postbuild_mremoteng.ps1&quot; -SolutionDir &quot;$(SolutionDir)\&quot; -TargetDir &quot;$(TargetDir)\&quot; -TargetFileName &quot;mRemoteNG.exe&quot; -ConfigurationName &quot;%25buildenv%25&quot; -CertificatePath &quot;$(CertPath)&quot; -CertificatePassword &quot;$(CertPassword)&quot; -ExcludeFromSigning &quot;PuTTYNG.exe&quot;" />
   </Target>
-
   <ItemGroup>
     <ProjectReference Include="..\ExternalConnectors\ExternalConnectors.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="UI\Font\HandelGotDBol.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\mRemoteNG.ru-RU.xlf" />
+    <XliffResource Include="MultilingualResources\mRemoteNG.ru.xlf" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Language\Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -480,13 +483,10 @@
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="92.0.25" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="92.0.25" />
   </ItemGroup>
-
 </Project>
