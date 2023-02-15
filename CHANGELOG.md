@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [1.77.3]
 ### Added
+- #1736: Update of SSH.NET to 2020.0.2 to allow File Transfer again
 - #2138: Improve compatibility with Remote Desktop Connection Manager v2.83
 - #2123: Thycotic Secret Server - Added 2FA OTP support
 ### Changed
