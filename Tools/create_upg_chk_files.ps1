@@ -6,10 +6,8 @@ param (
 
     [string]
     [Parameter(Mandatory=$true)]
-    [ValidateSet("Stable","Beta","Development")]
-    $UpdateChannel
+    $ProjectName
 )
-
 
 
 function New-MsiUpdateFileContent {
@@ -64,7 +62,7 @@ function Resolve-UpdateCheckFileName {
     param (
         [string]
         [Parameter(Mandatory=$true)]
-        [ValidateSet("Stable","Beta","Development")]
+        [ValidateSet("Stable","Preview","Nightly")]
         $UpdateChannel,
 
         [string]
@@ -75,8 +73,8 @@ function Resolve-UpdateCheckFileName {
 
     $fileName = ""
 
-    if ($UpdateChannel -eq "Beta") { $fileName += "beta-" }
-    elseif ($UpdateChannel -eq "Development") { $fileName += "dev-" }
+    if ($UpdateChannel -eq "Preview") { $fileName += "preview-" }
+    elseif ($UpdateChannel -eq "Nightly") { $fileName += "nightly-" }
 
     $fileName += "update"
 
@@ -87,23 +85,47 @@ function Resolve-UpdateCheckFileName {
     Write-Output $fileName
 }
 
+Write-Output "Begin create_upg_chk_files.ps1"
 
+# determine update channel
+if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
+    write-host "UpdateChannel = Nightly"
+    $UpdateChannel = "Nightly"
+} elseif ($env:APPVEYOR_PROJECT_NAME -match "(Preview)") {
+    write-host "UpdateChannel = Nightly"
+    $UpdateChannel = "Preview"
+} elseif ($env:APPVEYOR_PROJECT_NAME -match "(Stable)") {
+    write-host "UpdateChannel = Nightly"
+    $UpdateChannel = "Stable"
+} else {
+    $UpdateChannel = ""
+}
 
+$buildFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\mRemoteNG\bin\x64\Release" -Resolve -ErrorAction Ignore
 
+if ($UpdateChannel -ne "" -and $buildFolder -ne "") {
+    $releaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
+    $msiFile = Get-ChildItem -Path "$buildFolder\*.msi" | Sort-Object LastWriteTime | Select-Object -last 1
+    if (![string]::IsNullOrEmpty($msiFile)) {
+        $msiUpdateContents = New-MsiUpdateFileContent -MsiFile $msiFile -TagName $TagName
+        $msiUpdateFileName = Resolve-UpdateCheckFileName -UpdateChannel $UpdateChannel -Type Normal
+        Write-Output "`n`nMSI Update Check File Contents ($msiUpdateFileName)`n------------------------------"
+        Tee-Object -InputObject $msiUpdateContents -FilePath "$releaseFolder\$msiUpdateFileName"
+        write-host "msiUpdateFileName $releaseFolder\$msiUpdateFileName"
+    }
 
-$releaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
+    # build zip update file
+    $releaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
+    $zipFile = Get-ChildItem -Path "$releaseFolder\*.zip" -Exclude "*-symbols-*.zip" | Sort-Object LastWriteTime | Select-Object -last 1
+    if (![string]::IsNullOrEmpty($zipFile)) {
+        $zipUpdateContents = New-ZipUpdateFileContent -ZipFile $zipFile -TagName $TagName
+        $zipUpdateFileName = Resolve-UpdateCheckFileName -UpdateChannel $UpdateChannel -Type Portable
+        Write-Output "`n`nZip Update Check File Contents ($zipUpdateFileName)`n------------------------------"
+        Tee-Object -InputObject $zipUpdateContents -FilePath "$releaseFolder\$zipUpdateFileName"
+        write-host "zipUpdateFileName $releaseFolder\$zipUpdateFileName"
+    }
+} else {
+    write-host "BuildFolder not found"
+}
 
-# build msi update file
-$msiFile = Get-ChildItem -Path "$releaseFolder\*.msi" | sort LastWriteTime | select -last 1
-$msiUpdateContents = New-MsiUpdateFileContent -MsiFile $msiFile -TagName $TagName
-$msiUpdateFileName = Resolve-UpdateCheckFileName -UpdateChannel $UpdateChannel -Type Normal
-Write-Output "`n`nMSI Update Check File Contents ($msiUpdateFileName)`n------------------------------"
-Tee-Object -InputObject $msiUpdateContents -FilePath "$releaseFolder\$msiUpdateFileName"
-
-
-# build zip update file
-$zipFile = Get-ChildItem -Path "$releaseFolder\*.zip" | sort LastWriteTime | select -last 1
-$zipUpdateContents = New-ZipUpdateFileContent -ZipFile $zipFile -TagName $TagName
-$zipUpdateFileName = Resolve-UpdateCheckFileName -UpdateChannel $UpdateChannel -Type Portable
-Write-Output "`n`nZip Update Check File Contents ($zipUpdateFileName)`n------------------------------"
-Tee-Object -InputObject $zipUpdateContents -FilePath "$releaseFolder\$zipUpdateFileName"
+Write-Output "End create_upg_chk_files.ps1"

@@ -18,7 +18,7 @@ Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
 $ConfigurationName = $ConfigurationName.Trim()
 Write-Output "Config Name (trimmed): '$($ConfigurationName)'"
 $exe = Join-Path -Path $TargetDir -ChildPath $TargetFileName
-$Version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($exe).FileVersion
+$version = ((Get-Item -Path $exe).VersionInfo | Select-Object -Property ProductVersion)."ProductVersion"
 Write-Output "Version is $($version)"
 
 # Fix for AppVeyor
