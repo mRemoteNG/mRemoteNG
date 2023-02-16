@@ -2,6 +2,12 @@
 Known Issues
 ############
 
+Problems connecting to servers using SSH with mRemoteNG version below 1.77.3
+============================================================================
+Due the technological progress we are limited by puttyNG functionality exist in older versions, curently we already solve that for new releases, but due we are still in developing process we dont have stable version at the moment, so to address issue with connection to Ubuntu 22.04 or others servers who expect PubkeyAcceptedAlgorithms - manual update of PuttyNG is required:
+- Download the newest prerelease of mRemoteNG: https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1
+- Download newest PuttyNG exe and overwrite the version in the mRemoteNG install directory: https://github.com/mRemoteNG/PuTTYNG/releases/tag/v0.78.0.10
+
 CredSSP - CVE-2018-0886 - Authentication error
 ==============================================
 
