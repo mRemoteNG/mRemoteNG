@@ -1,7 +1,10 @@
-﻿using System;
+﻿#region Usings
+using System;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
+#endregion
 
 namespace mRemoteNG.App
 {
@@ -39,11 +42,8 @@ namespace mRemoteNG.App
                         _adimportForm.Show(dockPanel);
                         break;
                     case WindowType.Options:
-                        using (var optionsForm = new FrmOptions())
-                        {
-                            optionsForm.ShowDialog(dockPanel);
-                        }
-
+                        FrmMain.OptionsForm.SetActivatedPage(Language.StartupExit);
+                        FrmMain.OptionsForm.Visible = true;
                         break;
                     case WindowType.SSHTransfer:
                         if (SshtransferForm == null || SshtransferForm.IsDisposed)

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿#region Usings
+using Microsoft.Win32;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -30,9 +31,8 @@ using System.Windows.Forms;
 using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Controls;
-
 using mRemoteNG.Resources.Language;
-
+#endregion
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -54,6 +54,7 @@ namespace mRemoteNG.UI.Forms
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
         private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
+        public static FrmOptions OptionsForm;
 
         internal FullscreenHandler Fullscreen { get; set; }
 
@@ -64,11 +65,12 @@ namespace mRemoteNG.UI.Forms
         {
             _showFullPathInTitle = Properties.OptionsAppearancePage.Default.ShowCompleteConsPathInTitle;
             InitializeComponent();
+
             Screen targetScreen = (Screen.AllScreens.Length > 1) ? Screen.AllScreens[1] : Screen.AllScreens[0];
 
             Rectangle viewport = targetScreen.WorkingArea;
             
-            // normaly it should be screens[1] however due DPI apply 1 size "same" as default with 100%
+            // normally it should be screens[1] however due DPI apply 1 size "same" as default with 100%
             this.Left = viewport.Left + (targetScreen.Bounds.Size.Width / 2) - (this.Width / 2);
             this.Top = viewport.Top + (targetScreen.Bounds.Size.Height / 2) - (this.Height / 2);
 
@@ -81,7 +83,7 @@ namespace mRemoteNG.UI.Forms
 
             _advancedWindowMenu = new AdvancedWindowMenu(this);
         }
-   
+
         #region Properties
 
         public FormWindowState PreviousWindowState { get; set; }
@@ -216,6 +218,8 @@ namespace mRemoteNG.UI.Forms
                 Fullscreen.Value = true;
             }
 
+            OptionsForm = new FrmOptions();
+            
             if (!Properties.OptionsTabsPanelsPage.Default.CreateEmptyPanelOnStartUp) return;
             var panelName = !string.IsNullOrEmpty(Properties.OptionsTabsPanelsPage.Default.StartUpPanelName) ? Properties.OptionsTabsPanelsPage.Default.StartUpPanelName : Language.NewPanel;
 
@@ -356,10 +360,8 @@ namespace mRemoteNG.UI.Forms
 
             if (CTaskDialog.CommandButtonResult != 1) return;
 
-            using (var optionsForm = new FrmOptions(Language.Updates))
-            {
-                optionsForm.ShowDialog(this);
-            }
+            OptionsForm.SetActivatedPage(Language.Updates);
+            OptionsForm.ShowDialog(this);
         }
 
         private async Task CheckForUpdates()
