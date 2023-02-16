@@ -1,4 +1,5 @@
-﻿using mRemoteNG.UI.Forms.OptionsPages;
+﻿#region  Usings
+using mRemoteNG.UI.Forms.OptionsPages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,35 +9,55 @@ using mRemoteNG.Themes;
 using System.Configuration;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+#endregion
 
 namespace mRemoteNG.UI.Forms
 {
     public partial class FrmOptions : Form
     {
-        private Dictionary<string, OptionsPage> _pages;
-        private readonly string _pageName;
-        private readonly DisplayProperties _display = new DisplayProperties();
+        private int _currentIndex = 0;
+        private readonly List<OptionsPage> _optionPages = new();
+        private string _pageName;
+        private readonly DisplayProperties _display = new();
+        private readonly List<string> _optionPageObjectNames;
 
         public FrmOptions() : this(Language.StartupExit)
         {
         }
 
-        public FrmOptions(string pn)
+        private FrmOptions(string pageName)
         {
             Cursor.Current = Cursors.WaitCursor;
             Application.DoEvents();
             InitializeComponent();
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
-            _pageName = pn;
+            _pageName = pageName;
             Cursor.Current = Cursors.Default;
+
+            _optionPageObjectNames = new List<string>
+            {
+                nameof(StartupExitPage),
+                nameof(AppearancePage),
+                nameof(ConnectionsPage),
+                nameof(TabsPanelsPage),
+                nameof(NotificationsPage),
+                nameof(CredentialsPage),
+                nameof(SqlServerPage),
+                nameof(UpdatesPage),
+                nameof(ThemePage),
+                nameof(SecurityPage),
+                nameof(AdvancedPage),
+                nameof(BackupPage)
+            };
+
+            InitOptionsPagesToListView();
         }
 
         private void FrmOptions_Load(object sender, EventArgs e)
         {
-            CompileListOfOptionsPages();
+            this.Visible = true;
             FontOverrider.FontOverride(this);
-            AddOptionsPagesToListView();
-            SetInitiallyActivatedPage();
+            SetActivatedPage();
             //ApplyLanguage();
             // Handle the main page here and the individual pages in
             // AddOptionsPagesToListView()  -- one less foreach loop....
@@ -67,57 +88,137 @@ namespace mRemoteNG.UI.Forms
             }
         }
 #endif
-        private void CompileListOfOptionsPages()
-        {
-            _pages = new Dictionary<string, OptionsPage>{};
 
-            if (Properties.OptionsStartupExitPage.Default.cbStartupExitPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(StartupExitPage).Name, new StartupExitPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsAppearancePage.Default.cbAppearancePageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(AppearancePage).Name, new AppearancePage { Dock = DockStyle.Fill });
-            if (Properties.OptionsConnectionsPage.Default.cbConnectionsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(ConnectionsPage).Name, new ConnectionsPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsTabsPanelsPage.Default.cbTabsPanelsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(TabsPanelsPage).Name, new TabsPanelsPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsNotificationsPage.Default.cbNotificationsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(NotificationsPage).Name, new NotificationsPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsCredentialsPage.Default.cbCredentialsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(CredentialsPage).Name, new CredentialsPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsDBsPage.Default.cbDBsPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(SqlServerPage).Name, new SqlServerPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsUpdatesPage.Default.cbUpdatesPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(UpdatesPage).Name, new UpdatesPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsThemePage.Default.cbThemePageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(ThemePage).Name, new ThemePage { Dock = DockStyle.Fill });
-            if (Properties.OptionsSecurityPage.Default.cbSecurityPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(SecurityPage).Name, new SecurityPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsAdvancedPage.Default.cbAdvancedPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(AdvancedPage).Name, new AdvancedPage { Dock = DockStyle.Fill });
-            if (Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu == true || Properties.rbac.Default.ActiveRole == "AdminRole")
-                _pages.Add(typeof(BackupPage).Name, new BackupPage { Dock = DockStyle.Fill });
-        }
-
-        private void AddOptionsPagesToListView()
+        private void InitOptionsPagesToListView()
         {
             lstOptionPages.RowHeight = _display.ScaleHeight(lstOptionPages.RowHeight);
             lstOptionPages.AllColumns.First().ImageGetter = ImageGetter;
 
-            foreach (var page in _pages.Select(keyValuePair => keyValuePair.Value))
+            InitOptionsPage(_optionPageObjectNames[_currentIndex++]);
+            Application.Idle += new EventHandler(Application_Idle);
+        }
+
+        private void Application_Idle(object sender, EventArgs e)
+        {
+            if (_currentIndex >= _optionPageObjectNames.Count)
             {
-                page.ApplyLanguage();
-                page.LoadSettings();
-                lstOptionPages.AddObject(page);
+                Application.Idle -= new EventHandler(Application_Idle);
             }
+            else
+            {
+                InitOptionsPage(_optionPageObjectNames[_currentIndex++]);
+            }
+        }
+
+        private void InitOptionsPage(string pageName)
+        {
+            OptionsPage page = null;
+
+            switch (pageName)
+            {
+                case "StartupExitPage":
+                    {
+                        if (Properties.OptionsStartupExitPage.Default.cbStartupExitPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new StartupExitPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "AppearancePage":
+                    {
+                        if (Properties.OptionsAppearancePage.Default.cbAppearancePageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new AppearancePage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "ConnectionsPage":
+                    {
+                        if (Properties.OptionsConnectionsPage.Default.cbConnectionsPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new ConnectionsPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "TabsPanelsPage":
+                    {
+                        if (Properties.OptionsTabsPanelsPage.Default.cbTabsPanelsPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new TabsPanelsPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "NotificationsPage":
+                    {
+                        if (Properties.OptionsNotificationsPage.Default.cbNotificationsPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new NotificationsPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "CredentialsPage":
+                    {
+                        if (Properties.OptionsCredentialsPage.Default.cbCredentialsPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new CredentialsPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "SqlServerPage":
+                    {
+                        if (Properties.OptionsDBsPage.Default.cbDBsPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new SqlServerPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "UpdatesPage":
+                    {
+                        if (Properties.OptionsUpdatesPage.Default.cbUpdatesPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new UpdatesPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "ThemePage":
+                    {
+                        if (Properties.OptionsThemePage.Default.cbThemePageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new ThemePage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "SecurityPage":
+                    {
+                        if (Properties.OptionsSecurityPage.Default.cbSecurityPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new SecurityPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "AdvancedPage":
+                    {
+                        if (Properties.OptionsAdvancedPage.Default.cbAdvancedPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new AdvancedPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+                case "BackupPage":
+                    {
+                        if (Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu ||
+                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            page = new BackupPage { Dock = DockStyle.Fill };
+                        break;
+                    }
+            }
+
+            if (page == null) return;
+            page.ApplyLanguage();
+            page.LoadSettings();
+            _optionPages.Add(page);
+            lstOptionPages.AddObject(page);
         }
 
         private object ImageGetter(object rowobject)
         {
-            var page = rowobject as OptionsPage;
+            OptionsPage page = rowobject as OptionsPage;
             return page?.PageIcon == null ? _display.ScaleImage(Properties.Resources.F1Help_16x) : _display.ScaleImage(page.PageIcon);
         }
 
-        private void SetInitiallyActivatedPage()
+        public void SetActivatedPage(string pageName = default)
         {
+            _pageName = pageName ?? Language.StartupExit;
+
             var isSet = false;
             for (var i = 0; i < lstOptionPages.Items.Count; i++)
             {
@@ -131,14 +232,20 @@ namespace mRemoteNG.UI.Forms
                 lstOptionPages.Items[0].Selected = true;
         }
 
-        /*
-         * This gets called by both OK and Apply buttons.
-         * OK sets DialogResult = OK, Apply does not (None).
-         * Apply will no close the dialog.
-         */
         private void BtnOK_Click(object sender, EventArgs e)
         {
-            foreach (var page in _pages.Values)
+            SaveOptions();
+            this.Visible = false;
+        }
+
+        private void BtnApply_Click(object sender, EventArgs e)
+        {
+            SaveOptions();
+        }
+
+        private void SaveOptions()
+        {
+            foreach (var page in _optionPages)
             {
                 Debug.WriteLine(page.PageName);
                 page.SaveSettings();
@@ -147,7 +254,6 @@ namespace mRemoteNG.UI.Forms
             Debug.WriteLine((ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)).FilePath);
             Settings.Default.Save();
         }
-
 
         private void LstOptionPages_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -160,7 +266,13 @@ namespace mRemoteNG.UI.Forms
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Visible = false;
+        }
+
+        private void FrmOptions_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Visible = false;
         }
     }
 }
