@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Cucumber.Messages" Version="21.0.1" />
-    <PackageReference Include="Google.Protobuf" Version="3.21.12" />
+    <PackageReference Include="Google.Protobuf" Version="3.22.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
