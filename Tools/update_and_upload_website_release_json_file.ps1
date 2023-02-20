@@ -29,12 +29,15 @@ Write-Output "Begin create_website_release_json_file.ps1"
 if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
     write-host "UpdateChannel = Nightly"
     $UpdateChannel = "Nightly"
+    $ModifiedTagName = "$PreTagName-$TagName-NB"
 } elseif ($env:APPVEYOR_PROJECT_NAME -match "(Preview)") {
     write-host "UpdateChannel = Preview"
     $UpdateChannel = "Preview"
+    $ModifiedTagName = "v$TagName-PB"
 } elseif ($env:APPVEYOR_PROJECT_NAME -match "(Stable)") {
     write-host "UpdateChannel = Stable"
     $UpdateChannel = "Stable"
+    $ModifiedTagName = "v" + $TagName.Split("-")[0]
 } else {
     $UpdateChannel = ""
 }
@@ -99,9 +102,6 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "") {
         }
     }
 
-    # https://github.com/BlueBlock/mRemoteNG/releases/tag/20230218-1.77.3.405-NB
-    # https://github.com/mRemoteNG/mRemoteNG/releases/download//mRemoteNG-Installer-1.77.3.405.msi
-
 
     # portable
     $zipFile = Get-ChildItem -Path "$releaseFolder\*.zip" -Exclude "*-symbols-*.zip" | Sort-Object LastWriteTime | Select-Object -last 1
@@ -152,10 +152,12 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "") {
     $a | ConvertTo-Json -Depth 10 | set-content $websiteJsonReleaseFile
 
     # commit releases.json change
-    Write-Output "publish releases.json"
-    if (Test-Path -Path "$releaseFolder\releases.json") {
-        $releases_json_string = Get-Content "$releaseFolder\releases.json" | Out-String
-        Set-GitHubContent -OwnerName $WebsiteTargetOwner -RepositoryName $WebsiteTargetRepository -Path _data\releases.json -CommitMessage 'Updating releases.json' -Content $releases_json_string -BranchName main
+    if ($env:WEBSITE_UPDATE_ENABLED.ToLower() -eq "true") {
+        Write-Output "publish releases.json"
+        if (Test-Path -Path "$releaseFolder\releases.json") {
+            $releases_json_string = Get-Content "$releaseFolder\releases.json" | Out-String
+            Set-GitHubContent -OwnerName $WebsiteTargetOwner -RepositoryName $WebsiteTargetRepository -Path _data\releases.json -CommitMessage "Updated for $UpdateChannel $ModifiedTagName" -Content $releases_json_string -BranchName main
+        }
     }
 
 } else {

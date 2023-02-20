@@ -100,7 +100,6 @@ function Resolve-UpdateCheckFileName {
 
 Write-Output "Begin create_upg_chk_files.ps1"
 
-
 # determine update channel
 if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
     write-host "UpdateChannel = Nightly"
@@ -129,11 +128,14 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "") {
         Write-Output "`n`nMSI Update Check File Contents ($msiUpdateFileName)`n------------------------------"
         Tee-Object -InputObject $msiUpdateContents -FilePath "$releaseFolder\$msiUpdateFileName"
         write-host "msiUpdateFileName $releaseFolder\$msiUpdateFileName"
+        
         # commit msi update txt file
-        if ((Test-Path -Path "$releaseFolder\$msiUpdateFileName") -and (-not [string]::IsNullOrEmpty($WebsiteTargetRepository))) {
-            Write-Output "Publish $msiUpdateFileName to $WebsiteTargetRepository"
-            $update_file_content_string = Get-Content "$releaseFolder\$msiUpdateFileName" | Out-String
-            Set-GitHubContent -OwnerName $WebsiteTargetOwner -RepositoryName $WebsiteTargetRepository -Path $msiUpdateFileName -CommitMessage "Updating $msiUpdateFileName" -Content $update_file_content_string -BranchName main
+        if ($env:WEBSITE_UPDATE_ENABLED.ToLower() -eq "true") {
+            if ((Test-Path -Path "$releaseFolder\$msiUpdateFileName") -and (-not [string]::IsNullOrEmpty($WebsiteTargetRepository))) {
+                Write-Output "Publish $msiUpdateFileName to $WebsiteTargetRepository"
+                $update_file_content_string = Get-Content "$releaseFolder\$msiUpdateFileName" | Out-String
+                Set-GitHubContent -OwnerName $WebsiteTargetOwner -RepositoryName $WebsiteTargetRepository -Path $msiUpdateFileName -CommitMessage "Build $ModifiedTagName" -Content $update_file_content_string -BranchName main
+            }
         }
     }
 
@@ -146,16 +148,18 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "") {
         Write-Output "`n`nZip Update Check File Contents ($zipUpdateFileName)`n------------------------------"
         Tee-Object -InputObject $zipUpdateContents -FilePath "$releaseFolder\$zipUpdateFileName"
         write-host "zipUpdateFileName $releaseFolder\$zipUpdateFileName"
+        
         # commit zip update txt file
-        if ((Test-Path -Path "$releaseFolder\$zipUpdateFileName") -and (-not [string]::IsNullOrEmpty($WebsiteTargetRepository))) {
-            Write-Output "Publish $zipUpdateFileName to $WebsiteTargetRepository"
-            $update_file_content_string = Get-Content "$releaseFolder\$zipUpdateFileName" | Out-String
-            Set-GitHubContent -OwnerName $WebsiteTargetOwner -RepositoryName $WebsiteTargetRepository -Path $zipUpdateFileName -CommitMessage "Updating $zipUpdateFileName" -Content $update_file_content_string -BranchName main
+        if ($env:WEBSITE_UPDATE_ENABLED.ToLower() -eq "true") {
+            if ((Test-Path -Path "$releaseFolder\$zipUpdateFileName") -and (-not [string]::IsNullOrEmpty($WebsiteTargetRepository))) {
+                Write-Output "Publish $zipUpdateFileName to $WebsiteTargetRepository"
+                $update_file_content_string = Get-Content "$releaseFolder\$zipUpdateFileName" | Out-String
+                Set-GitHubContent -OwnerName $WebsiteTargetOwner -RepositoryName $WebsiteTargetRepository -Path $zipUpdateFileName -CommitMessage "Build $ModifiedTagName" -Content $update_file_content_string -BranchName main
+            }
         }
     }
 } else {
     write-host "BuildFolder not found"
 }
-
 
 Write-Output "End create_upg_chk_files.ps1"
