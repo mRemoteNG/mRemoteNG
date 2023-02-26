@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Core" Version="3.7.105.6" />
-    <PackageReference Include="AWSSDK.EC2" Version="3.7.123.4" />
+    <PackageReference Include="AWSSDK.Core" Version="3.7.105.8" />
+    <PackageReference Include="AWSSDK.EC2" Version="3.7.123.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
   </ItemGroup>
