@@ -31,24 +31,36 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
             // MYSQL
             const string mySqlAlter = @"
-ALTER TABLE tblCons ADD COLUMN
-    OpeningCommand VARCHAR(512) DEFAULT NULL,
-    InheritExternalCredentialProvider bit NOT NULL DEFAULT 0,
-    InheritUseRCG bit NOT NULL DEFAULT 0,
-    InheritUserViaAPI bit NOT NULL DEFAULT 0;
-ALTER TABLE tblRoot CHANGE COLUMN ConfVersion ConfVersion VARCHAR(15) NOT NULL;";
+ALTER TABLE tblCons ADD COLUMN `OpeningCommand` varchar(512) DEFAULT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayExternalCredentialProvider` tinyint(1) NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayUserViaAPI` tinyint(1) NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD COLUMN `InheritExternalCredentialProvider` tinyint(1) NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD COLUMN `InheritUseRCG` tinyint(1) NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD COLUMN `InheritUserViaAPI` tinyint(1) NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD COLUMN `EC2Region` varchar(32) DEFAULT NULL;
+ALTER TABLE tblCons ADD COLUMN `EC2InstanceId` varchar(32) DEFAULT NULL;
+ALTER TABLE tblCons ADD COLUMN `ExternalCredentialProvider` varchar(256) DEFAULT NULL;
+ALTER TABLE tblCons ADD COLUMN `ExternalAddressProvider` varchar(256) DEFAULT NULL;
+ALTER TABLE tblRoot CHANGE COLUMN ConfVersion ConfVersion VARCHAR(15) NOT NULL;
+";
 
             const string mySqlUpdate = @"UPDATE tblRoot SET ConfVersion=?;";
 
             // MS-SQL
-            const string msSqlAlter1 = @"
-ALTER TABLE tblCons ADD 
-    InheritExternalCredentialProvider bit NOT NULL DEFAULT 0,
-    InheritUseRCG bit NOT NULL DEFAULT 0,
-    InheritUserViaAPI bit NOT NULL DEFAULT 0;
+            const string msSqlAlter = @"
+ALTER TABLE tblCons ADD OpeningCommand VARCHAR(512) DEFAULT NULL;
+ALTER TABLE tblCons ADD InheritRDGatewayExternalCredentialProvider bit NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD InheritRDGatewayUserViaAPI bit NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD InheritExternalCredentialProvider bit NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD InheritUseRCG bit NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD InheritUserViaAPI bit NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD EC2Region] varchar(32) NULL;
+ALTER TABLE tblCons ADD [EC2InstanceId] varchar(32) NULL;
+ALTER TABLE tblCons ADD [ExternalCredentialProvider] varchar(256) NULL;
+ALTER TABLE tblCons ADD [ExternalAddressProvider] varchar(256) NULL;
+
+ALTER TABLE tblRoot ALTER COLUMN ConfVersion VARCHAR(15);
 ";
-            const string msSqlAlter2 = @"
-ALTER TABLE tblRoot ALTER COLUMN ConfVersion VARCHAR(15)";
 
             const string msSqlUpdate = @"UPDATE tblRoot SET ConfVersion=@confVersion;";
 
@@ -57,10 +69,7 @@ ALTER TABLE tblRoot ALTER COLUMN ConfVersion VARCHAR(15)";
                 DbCommand dbCommand;
                 if (_databaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
                 {
-                    dbCommand = _databaseConnector.DbCommand(msSqlAlter1);
-                    dbCommand.Transaction = sqlTran;
-                    dbCommand.ExecuteNonQuery();
-                    dbCommand = _databaseConnector.DbCommand(msSqlAlter2);
+                    dbCommand = _databaseConnector.DbCommand(msSqlAlter);
                     dbCommand.Transaction = sqlTran;
                     dbCommand.ExecuteNonQuery();
                     dbCommand = _databaseConnector.DbCommand(msSqlUpdate);
