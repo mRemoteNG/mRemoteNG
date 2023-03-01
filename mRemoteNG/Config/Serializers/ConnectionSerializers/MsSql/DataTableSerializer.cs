@@ -371,9 +371,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
              dataRow["RDGatewayUsageMethod"].Equals(connectionInfo.RDGatewayUsageMethod.ToString()) &&
              dataRow["RDGatewayHostname"].Equals(connectionInfo.RDGatewayHostname) &&
              dataRow["RDGatewayUseConnectionCredentials"].Equals(connectionInfo.RDGatewayUseConnectionCredentials.ToString()) &&
+             dataRow["RDGatewayExternalCredentialProvider"].Equals(connectionInfo.RDGatewayExternalCredentialProvider) &&
              dataRow["RDGatewayUsername"].Equals(connectionInfo.RDGatewayUsername) &&
              dataRow["RDGatewayDomain"].Equals(connectionInfo.RDGatewayDomain) &&
-             dataRow["RDGatewayExternalCredentialProvider"].Equals(connectionInfo.RDGatewayExternalCredentialProvider) &&
              dataRow["RDGatewayUserViaAPI"].Equals(connectionInfo.RDGatewayUserViaAPI) &&
              dataRow["RdpVersion"].Equals(connectionInfo.RdpVersion.ToString());
 
@@ -391,14 +391,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritDisableMenuAnimations"].Equals(connectionInfo.Inheritance.DisableMenuAnimations) &&
                 dataRow["InheritDisableCursorShadow"].Equals(connectionInfo.Inheritance.DisableCursorShadow) &&
                 dataRow["InheritDisableCursorBlinking"].Equals(connectionInfo.Inheritance.DisableCursorBlinking) &&
-                dataRow["InheritExternalCredentialProvider"].Equals(connectionInfo.Inheritance.ExternalCredentialProvider) &&
-                dataRow["InheritUserViaAPI"].Equals(connectionInfo.Inheritance.UserViaAPI) &&
                 dataRow["InheritDomain"].Equals(connectionInfo.Inheritance.Domain) &&
                 dataRow["InheritIcon"].Equals(connectionInfo.Inheritance.Icon) &&
                 dataRow["InheritPanel"].Equals(connectionInfo.Inheritance.Panel) &&
                 dataRow["InheritPassword"].Equals(connectionInfo.Inheritance.Password) &&
                 dataRow["InheritPort"].Equals(connectionInfo.Inheritance.Port) &&
                 dataRow["InheritProtocol"].Equals(connectionInfo.Inheritance.Protocol) &&
+                dataRow["InheritExternalCredentialProvider"].Equals(connectionInfo.Inheritance.ExternalCredentialProvider) &&
+                dataRow["InheritUserViaAPI"].Equals(connectionInfo.Inheritance.UserViaAPI) &&
                 dataRow["InheritPuttySession"].Equals(connectionInfo.Inheritance.PuttySession) &&
                 dataRow["InheritRedirectDiskDrives"].Equals(connectionInfo.Inheritance.RedirectDiskDrives) &&
                 dataRow["InheritRedirectKeys"].Equals(connectionInfo.Inheritance.RedirectKeys) &&
@@ -444,10 +444,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayUsageMethod"].Equals(connectionInfo.Inheritance.RDGatewayUsageMethod) &&
                 dataRow["InheritRDGatewayHostname"].Equals(connectionInfo.Inheritance.RDGatewayHostname) &&
                 dataRow["InheritRDGatewayUseConnectionCredentials"].Equals(connectionInfo.Inheritance.RDGatewayUseConnectionCredentials) &&
+                dataRow["InheritRDGatewayExternalCredentialProvider"].Equals(connectionInfo.Inheritance.RDGatewayExternalCredentialProvider) &&
                 dataRow["InheritRDGatewayUsername"].Equals(connectionInfo.Inheritance.RDGatewayUsername) &&
                 dataRow["InheritRDGatewayPassword"].Equals(connectionInfo.Inheritance.RDGatewayPassword) &&
                 dataRow["InheritRDGatewayDomain"].Equals(connectionInfo.Inheritance.RDGatewayDomain) &&
-                dataRow["InheritRDGatewayExternalCredentialProvider"].Equals(connectionInfo.Inheritance.RDGatewayExternalCredentialProvider) &&
                 dataRow["InheritRDGatewayUserViaAPI"].Equals(connectionInfo.Inheritance.RDGatewayUserViaAPI) &&
                 dataRow["InheritRdpVersion"].Equals(connectionInfo.Inheritance.RdpVersion));
             }
@@ -470,6 +470,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritPassword"].Equals(false) &&
                 dataRow["InheritPort"].Equals(false) &&
                 dataRow["InheritProtocol"].Equals(false) &&
+                dataRow["InheritExternalCredentialProvider"].Equals(false) &&
+                dataRow["InheritUserViaAPI"].Equals(false) &&
                 dataRow["InheritPuttySession"].Equals(false) &&
                 dataRow["InheritRedirectDiskDrives"].Equals(false) &&
                 dataRow["InheritRedirectKeys"].Equals(false) &&
@@ -512,9 +514,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayUsageMethod"].Equals(false) &&
                 dataRow["InheritRDGatewayHostname"].Equals(false) &&
                 dataRow["InheritRDGatewayUseConnectionCredentials"].Equals(false) &&
+                dataRow["InheritRDGatewayExternalCredentialProvider"].Equals(connectionInfo.Inheritance.RDGatewayExternalCredentialProvider) &&
                 dataRow["InheritRDGatewayUsername"].Equals(false) &&
                 dataRow["InheritRDGatewayPassword"].Equals(false) &&
                 dataRow["InheritRDGatewayDomain"].Equals(false) &&
+                dataRow["InheritRDGatewayUserViaAPI"].Equals(false) &&
                 dataRow["InheritRdpVersion"].Equals(false));
             }
 
@@ -648,6 +652,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritPassword"] = connectionInfo.Inheritance.Password;
                 dataRow["InheritPort"] = connectionInfo.Inheritance.Port;
                 dataRow["InheritProtocol"] = connectionInfo.Inheritance.Protocol;
+                dataRow["InheritExternalCredentialProvider"] = connectionInfo.Inheritance.ExternalCredentialProvider;
+                dataRow["InheritUserViaAPI"] = connectionInfo.Inheritance.UserViaAPI;
                 dataRow["InheritSSHTunnelConnectionName"] = connectionInfo.Inheritance.SSHTunnelConnectionName;
                 dataRow["InheritOpeningCommand"] = connectionInfo.Inheritance.OpeningCommand;
                 dataRow["InheritSSHOptions"] = connectionInfo.Inheritance.SSHOptions;
@@ -696,9 +702,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayUsageMethod"] = connectionInfo.Inheritance.RDGatewayUsageMethod;
                 dataRow["InheritRDGatewayHostname"] = connectionInfo.Inheritance.RDGatewayHostname;
                 dataRow["InheritRDGatewayUseConnectionCredentials"] = connectionInfo.Inheritance.RDGatewayUseConnectionCredentials;
+                dataRow["InheritRDGatewayExternalCredentialProvider"] = connectionInfo.Inheritance.RDGatewayExternalCredentialProvider;
                 dataRow["InheritRDGatewayUsername"] = connectionInfo.Inheritance.RDGatewayUsername;
                 dataRow["InheritRDGatewayPassword"] = connectionInfo.Inheritance.RDGatewayPassword;
                 dataRow["InheritRDGatewayDomain"] = connectionInfo.Inheritance.RDGatewayDomain;
+                dataRow["InheritRDGatewayUserViaAPI"] = connectionInfo.Inheritance.RDGatewayUserViaAPI;
                 dataRow["InheritRdpVersion"] = connectionInfo.Inheritance.RdpVersion;
                 dataRow["InheritFavorite"] = connectionInfo.Inheritance.Favorite;
                 dataRow["InheritICAEncryptionStrength"] = false;
@@ -722,6 +730,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritPassword"] = false;
                 dataRow["InheritPort"] = false;
                 dataRow["InheritProtocol"] = false;
+                dataRow["InheritExternalCredentialProvider"] = false;
+                dataRow["InheritUserViaAPI"] = false;
                 dataRow["InheritSSHTunnelConnectionName"] = false;
                 dataRow["InheritSSHOptions"] = false;
                 dataRow["InheritPuttySession"] = false;
@@ -766,9 +776,11 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 dataRow["InheritRDGatewayUsageMethod"] = false;
                 dataRow["InheritRDGatewayHostname"] = false;
                 dataRow["InheritRDGatewayUseConnectionCredentials"] = false;
+                dataRow["InheritRDGatewayExternalCredentialProvider"] = false;
                 dataRow["InheritRDGatewayUsername"] = false;
                 dataRow["InheritRDGatewayPassword"] = false;
                 dataRow["InheritRDGatewayDomain"] = false;
+                dataRow["InheritRDGatewayUserViaAPI"] = false;
                 dataRow["InheritRdpVersion"] = false;
                 dataRow["InheritFavorite"] = false;
                 dataRow["InheritICAEncryptionStrength"] = false;
