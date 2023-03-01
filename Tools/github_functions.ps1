@@ -2,13 +2,13 @@ $githubUrl = 'https://api.github.com'
 # GitHub doesn't support the default powershell protocol (TLS 1.0)
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-
-Install-Module -Name PowerShellForGitHub
-Set-GitHubConfiguration -DisableTelemetry
-$PSDefaultParameterValues["*-GitHub*:AccessToken"] = "$env:ACCESS_TOKEN"
-#$CURRENT_GITHUB_USER = $(Get-GitHubUser -Current).UserName
-$CURRENT_GITHUB_USER = $env:APPVEYOR_REPO_NAME.Split("/")[0]
-
+#$ConfigurationName = $ConfigurationName.Trim()
+if (![string]::IsNullOrEmpty($env:APPVEYOR_REPO_NAME)) {
+    $CURRENT_GITHUB_USER = $env:APPVEYOR_REPO_NAME.Split("/")[0]
+    Install-Module -Name PowerShellForGitHub -Scope CurrentUser
+    Set-GitHubConfiguration -DisableTelemetry
+    $PSDefaultParameterValues["*-GitHub*:AccessToken"] = "$env:ACCESS_TOKEN"    
+}
 
 Function ConvertFrom-Base64($base64) {
     return [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($base64))

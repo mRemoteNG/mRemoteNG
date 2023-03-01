@@ -46,8 +46,11 @@ Format-Table -AutoSize -Wrap -InputObject @{
 
 & "$PSScriptRoot\rename_and_copy_installer.ps1" -SolutionDir $SolutionDir -BuildConfiguration $ConfigurationName.Trim()
 
-& "$PSScriptRoot\create_upg_chk_files.ps1" -WebsiteTargetOwner $CURRENT_GITHUB_USER -WebsiteTargetRepository $env:WEBSITE_TARGET_REPOSITORY -PreTagName $env:NightlyBuildTagName -TagName $env:APPVEYOR_BUILD_VERSION -ProjectName $env:APPVEYOR_PROJECT_NAME
+if (![string]::IsNullOrEmpty($CURRENT_GITHUB_USER)) {
 
-& "$PSScriptRoot\update_and_upload_website_release_json_file.ps1" -WebsiteTargetOwner $CURRENT_GITHUB_USER -WebsiteTargetRepository $env:WEBSITE_TARGET_REPOSITORY -PreTagName $env:NightlyBuildTagName -TagName $env:APPVEYOR_BUILD_VERSION -ProjectName $env:APPVEYOR_PROJECT_NAME
+    & "$PSScriptRoot\create_upg_chk_files.ps1" -WebsiteTargetOwner $CURRENT_GITHUB_USER -WebsiteTargetRepository $env:WEBSITE_TARGET_REPOSITORY -PreTagName $env:NightlyBuildTagName -TagName $env:APPVEYOR_BUILD_VERSION -ProjectName $env:APPVEYOR_PROJECT_NAME
+
+    & "$PSScriptRoot\update_and_upload_website_release_json_file.ps1" -WebsiteTargetOwner $CURRENT_GITHUB_USER -WebsiteTargetRepository $env:WEBSITE_TARGET_REPOSITORY -PreTagName $env:NightlyBuildTagName -TagName $env:APPVEYOR_BUILD_VERSION -ProjectName $env:APPVEYOR_PROJECT_NAME
+}
 
 Write-Output "End mRemoteNG Installer Post Build"
