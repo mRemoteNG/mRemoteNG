@@ -32,11 +32,11 @@ namespace mRemoteNG.Config.Serializers.Versioning
             // MYSQL
             const string mySqlAlter = @"
 ALTER TABLE tblCons ADD COLUMN `OpeningCommand` varchar(512) DEFAULT NULL;
-ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayExternalCredentialProvider` tinyint(1) NOT NULL DEFAULT 0;
-ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayUserViaAPI` tinyint(1) NOT NULL DEFAULT 0;
-ALTER TABLE tblCons ADD COLUMN `InheritExternalCredentialProvider` tinyint(1) NOT NULL DEFAULT 0;
-ALTER TABLE tblCons ADD COLUMN `InheritUseRCG` tinyint(1) NOT NULL DEFAULT 0;
-ALTER TABLE tblCons ADD COLUMN `InheritUserViaAPI` tinyint(1) NOT NULL DEFAULT 0;
+ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayExternalCredentialProvider` tinyint(1) NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayUserViaAPI` tinyint(1) NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritExternalCredentialProvider` tinyint(1) NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritUseRCG` tinyint(1) NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritUserViaAPI` tinyint(1) NOT NULL;
 ALTER TABLE tblCons ADD COLUMN `EC2Region` varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons ADD COLUMN `EC2InstanceId` varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons ADD COLUMN `ExternalCredentialProvider` varchar(256) DEFAULT NULL;
@@ -49,17 +49,16 @@ ALTER TABLE tblRoot CHANGE COLUMN ConfVersion ConfVersion VARCHAR(15) NOT NULL;
             // MS-SQL
             const string msSqlAlter = @"
 ALTER TABLE tblCons ADD OpeningCommand VARCHAR(512) DEFAULT NULL;
-ALTER TABLE tblCons ADD InheritRDGatewayExternalCredentialProvider bit NOT NULL DEFAULT 0;
-ALTER TABLE tblCons ADD InheritRDGatewayUserViaAPI bit NOT NULL DEFAULT 0;
-ALTER TABLE tblCons ADD InheritExternalCredentialProvider bit NOT NULL DEFAULT 0;
-ALTER TABLE tblCons ADD InheritUseRCG bit NOT NULL DEFAULT 0;
-ALTER TABLE tblCons ADD InheritUserViaAPI bit NOT NULL DEFAULT 0;
-ALTER TABLE tblCons ADD EC2Region] varchar(32) NULL;
-ALTER TABLE tblCons ADD [EC2InstanceId] varchar(32) NULL;
-ALTER TABLE tblCons ADD [ExternalCredentialProvider] varchar(256) NULL;
-ALTER TABLE tblCons ADD [ExternalAddressProvider] varchar(256) NULL;
-
-ALTER TABLE tblRoot ALTER COLUMN ConfVersion VARCHAR(15);
+ALTER TABLE tblCons ADD InheritRDGatewayExternalCredentialProvider bit NOT NULL;
+ALTER TABLE tblCons ADD InheritRDGatewayUserViaAPI bit NOT NULL;
+ALTER TABLE tblCons ADD InheritExternalCredentialProvider bit NOT NULL;
+ALTER TABLE tblCons ADD InheritUseRCG bit NOT NULL;
+ALTER TABLE tblCons ADD InheritUserViaAPI bit NOT NULL;
+ALTER TABLE tblCons ADD EC2Region varchar(32) NULL;
+ALTER TABLE tblCons ADD EC2InstanceId varchar(32) NULL;
+ALTER TABLE tblCons ADD ExternalCredentialProvider varchar(256) NULL;
+ALTER TABLE tblCons ADD ExternalAddressProvider varchar(256) NULL;
+ALTER TABLE tblRoot ALTER COLUMN [ConfVersion] VARCHAR(15);
 ";
 
             const string msSqlUpdate = @"UPDATE tblRoot SET ConfVersion=@confVersion;";
