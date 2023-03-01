@@ -27,26 +27,40 @@ namespace mRemoteNG.Config.Serializers.Versioning
         public Version Upgrade()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                string.Format("Upgrading database to version {0}.", version));
+                $"Upgrading database to version {version}.");
 
+            // MYSQL
             const string mySqlAlter = @"
-ALTER TABLE tblCons ADD COLUMN StartProgram varchar(512) DEFAULT NULL;
-ALTER TABLE tblCons ADD COLUMN StartProgramWorkDir varchar(512) DEFAULT NULL;
+ALTER TABLE tblCons ADD COLUMN
+    OpeningCommand VARCHAR(512) DEFAULT NULL,
+    InheritExternalCredentialProvider bit NOT NULL DEFAULT 0,
+    InheritUseRCG bit NOT NULL DEFAULT 0,
+    InheritUserViaAPI bit NOT NULL DEFAULT 0;
 ALTER TABLE tblRoot CHANGE COLUMN ConfVersion ConfVersion VARCHAR(15) NOT NULL;";
+
             const string mySqlUpdate = @"UPDATE tblRoot SET ConfVersion=?;";
-            const string msSqlAlter = @"
-IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'[dbo].[tblCons]') AND name = 'StartProgram')
-BEGIN
- ALTER TABLE tblCons ADD StartProgram varchar(512), StartProgramWorkDir varchar(512);
-END;GO;
-ALTER TABLE tblRoot MODIFY COLUMN ConfVersion varchar(15);GO;";
+
+            // MS-SQL
+            const string msSqlAlter1 = @"
+ALTER TABLE tblCons ADD 
+    InheritExternalCredentialProvider bit NOT NULL DEFAULT 0,
+    InheritUseRCG bit NOT NULL DEFAULT 0,
+    InheritUserViaAPI bit NOT NULL DEFAULT 0;
+";
+            const string msSqlAlter2 = @"
+ALTER TABLE tblRoot ALTER COLUMN ConfVersion VARCHAR(15)";
+
             const string msSqlUpdate = @"UPDATE tblRoot SET ConfVersion=@confVersion;";
+
             using (var sqlTran = _databaseConnector.DbConnection().BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
                 DbCommand dbCommand;
                 if (_databaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
                 {
-                    dbCommand = _databaseConnector.DbCommand(msSqlAlter);
+                    dbCommand = _databaseConnector.DbCommand(msSqlAlter1);
+                    dbCommand.Transaction = sqlTran;
+                    dbCommand.ExecuteNonQuery();
+                    dbCommand = _databaseConnector.DbCommand(msSqlAlter2);
                     dbCommand.Transaction = sqlTran;
                     dbCommand.ExecuteNonQuery();
                     dbCommand = _databaseConnector.DbCommand(msSqlUpdate);
