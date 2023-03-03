@@ -44,7 +44,7 @@ namespace mRemoteNG.Tools
 
         public static Optional<SecureString> PasswordDialog(string passwordName = null, bool verify = true)
         {
-            var splash = FrmSplashScreenNew.GetInstance();
+            //var splash = FrmSplashScreenNew.GetInstance();
             //TODO: something not right there 
             //if (PresentationSource.FromVisual(splash))
             //    splash.Close();

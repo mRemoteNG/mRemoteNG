@@ -18,7 +18,6 @@ using mRemoteNG.Properties;
 using mRemoteNG.Tree;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree.Root;
-using Connection;
 
 namespace mRemoteNG.Connection
 {

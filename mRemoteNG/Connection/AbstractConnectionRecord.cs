@@ -8,7 +8,6 @@ using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
 using mRemoteNG.Resources.Language;
-using Connection;
 
 namespace mRemoteNG.Connection
 {

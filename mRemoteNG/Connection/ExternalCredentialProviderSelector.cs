@@ -1,7 +1,7 @@
 ﻿using mRemoteNG.Resources.Language;
 using mRemoteNG.Tools;
 
-namespace Connection
+namespace mRemoteNG.Connection
 {
     public enum ExternalCredentialProvider
     {
