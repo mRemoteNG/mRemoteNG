@@ -18,12 +18,7 @@ namespace mRemoteNG.App.Info
         public const string UrlDocumentation = "https://mremoteng.readthedocs.io/en/latest/";
         public static string ApplicationVersion = Application.ProductVersion;
         public static readonly string ProductName = Application.ProductName;
-
-        public static readonly string Copyright =
-            ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(),
-                                                                      typeof(AssemblyCopyrightAttribute), false))
-            .Copyright;
-
+        public static readonly string Copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false)).Copyright;
         public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
 
         //public static string ReportingFilePath = "";
