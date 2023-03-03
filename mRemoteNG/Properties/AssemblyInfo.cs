@@ -9,14 +9,14 @@ using System.Resources;
 [assembly: AssemblyDescription("Multi-Remote Next Generation Connection Manager")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("mRemoteNG")]
-[assembly: AssemblyProduct("mRemoteNG")]
-[assembly: AssemblyCopyright("© 2023 mRemoteNG")]
+[assembly: AssemblyProduct("mRemoteNG Connection Manager")]
+[assembly: AssemblyCopyright("(c) 2023 mRemoteNG")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Version information
-[assembly: AssemblyVersion("1.77.3.1754")]
-[assembly: AssemblyFileVersion("1.77.3.1754")]
+[assembly: AssemblyVersion("1.77.3.1763")]
+[assembly: AssemblyFileVersion("1.77.3.1763")]
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
-[assembly: AssemblyInformationalVersion("1.77.3   (Nightly Build: 1754)")]
+[assembly: AssemblyInformationalVersion("1.77.3   (Nightly Build: 1763)")]
 
