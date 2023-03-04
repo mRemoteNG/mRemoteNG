@@ -120,9 +120,6 @@
             <Component Id="cmp6107C12C2A55CB8E7E97FF2C9A33F385" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil135F9AEEB4A74E1EE438100986E97C41" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Xaml.Behaviors.dll" />
             </Component>
-            <Component Id="cmp1F9DC155A4152A7B61C375BCAEC12565" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil46E8EE7D018FEE0848D7DF0C0BD9952D" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG-Installer-1.77.3.1765.msi" />
-            </Component>
             <Component Id="cmp41D33384103998013724F7507BE537A3" Directory="INSTALLDIR" Guid="*">
                 <File Id="filD409F3953DFE64FEE2FDC4460BD98297" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.deps.json" />
             </Component>
@@ -133,6 +130,9 @@
                 <File Id="filAC4D49028FDDA1626E5B006C9D1ED57E" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.dll.config" />
             </Component>
             
+            <Component Id="cmp67313C6B4CE3487E9A8165EFFE369D16" Directory="INSTALLDIR" Guid="*">
+                <File Id="fil5F0524AF62166FF3C4DAE07F1113C0D9" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.pdb" />
+            </Component>
             <Component Id="cmp9FF194CCD09E9797444CF95F7C37C75A" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil09655B2FCDF14CBBA2E03BBD3F6C58EE" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.runtimeconfig.json" />
             </Component>
