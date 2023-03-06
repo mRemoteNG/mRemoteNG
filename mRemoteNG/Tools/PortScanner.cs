@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Threading;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
@@ -67,7 +68,10 @@ namespace mRemoteNG.Tools
         public void StartScan()
         {
             _scanThread = new Thread(ScanAsync);
-            _scanThread.SetApartmentState(ApartmentState.STA);
+
+            if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                _scanThread.SetApartmentState(ApartmentState.STA);
+
             _scanThread.IsBackground = true;
             _scanThread.Start();
         }
@@ -79,7 +83,8 @@ namespace mRemoteNG.Tools
                 p.SendAsyncCancel();
             }
 
-            _scanThread.Abort();
+            // Obsolete: https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/5.0/thread-abort-obsolete
+            //_scanThread.Abort();
         }
 
         public static bool IsPortOpen(string hostname, string port)
