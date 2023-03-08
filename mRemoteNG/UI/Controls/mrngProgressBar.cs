@@ -1,9 +1,11 @@
 ﻿using mRemoteNG.Themes;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     // Repaint of a ProgressBar on a flat style
     internal class MrngProgressBar : ProgressBar
     {

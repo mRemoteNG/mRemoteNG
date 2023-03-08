@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.Versioning;
 using BrightIdeasSoftware;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     //Simple coloring of ObjectListView
     //This is subclassed to avoid repeating the code in multiple places
     internal class MrngListView : ObjectListView

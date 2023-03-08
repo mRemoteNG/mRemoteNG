@@ -19,9 +19,11 @@ using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Window
 {
+    [SupportedOSPlatform("windows")]
     public partial class ConnectionWindow : BaseWindow
     {
         private VisualStudioToolStripExtender vsToolStripExtender;

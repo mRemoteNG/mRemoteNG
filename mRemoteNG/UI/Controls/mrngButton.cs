@@ -1,11 +1,13 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     [ToolboxBitmap(typeof(Button))]
     //Extended button class, the button onPaint completely repaint the control
     public class MrngButton : Button

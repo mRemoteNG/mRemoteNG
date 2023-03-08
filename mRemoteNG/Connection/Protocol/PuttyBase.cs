@@ -12,11 +12,13 @@ using System.Windows.Forms;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
 using System.IO;
+using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Connection.Protocol
 {
+    [SupportedOSPlatform("windows")]
     public class PuttyBase : ProtocolBase
     {
         private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID

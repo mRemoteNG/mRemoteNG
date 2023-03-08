@@ -1,11 +1,13 @@
-using System;
+﻿using System;
 using System.ComponentModel;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 
 
 namespace mRemoteNG.Connection
 {
+    [SupportedOSPlatform("windows")]
     public class ConnectionIcon : StringConverter
     {
         public static string[] Icons = { };

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -15,6 +16,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class ExternalTool : INotifyPropertyChanged
     {
         private string _displayName;

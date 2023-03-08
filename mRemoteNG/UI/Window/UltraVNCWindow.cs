@@ -2,10 +2,12 @@
 using mRemoteNG.App;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 
 namespace mRemoteNG.UI.Window
 {
+    [SupportedOSPlatform("windows")]
     public class UltraVNCWindow : BaseWindow
     {
         #region Form Init

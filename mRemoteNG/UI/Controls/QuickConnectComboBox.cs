@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
@@ -8,6 +9,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     public class QuickConnectComboBox : ToolStripComboBox
     {
         private readonly ComboBox _comboBox;

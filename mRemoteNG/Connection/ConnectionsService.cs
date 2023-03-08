@@ -19,10 +19,12 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection
 {
-	public class ConnectionsService
+    [SupportedOSPlatform("windows")]
+    public class ConnectionsService
     {
         private static readonly object SaveLock = new object();
         private readonly PuttySessionsManager _puttySessionsManager;

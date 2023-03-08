@@ -14,9 +14,11 @@ using MySql.Data.Types;
 using mRemoteNG.Resources.Language;
 using static System.String;
 using System.Windows;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public static class MiscTools
     {
         public static Icon GetIconFromFile(string FileName)

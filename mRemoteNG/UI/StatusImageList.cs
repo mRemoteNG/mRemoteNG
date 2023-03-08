@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
@@ -8,6 +9,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.UI
 {
+    [SupportedOSPlatform("windows")]
     public class StatusImageList : IDisposable
     {
         public ImageList ImageList { get; }

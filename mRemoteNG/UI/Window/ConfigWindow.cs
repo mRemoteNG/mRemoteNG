@@ -15,10 +15,12 @@ using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 
 namespace mRemoteNG.UI.Window
 {
+    [SupportedOSPlatform("windows")]
     public class ConfigWindow : BaseWindow
     {
         private bool _originalPropertyGridToolStripItemCountValid;

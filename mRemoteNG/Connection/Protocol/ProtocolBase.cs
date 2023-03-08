@@ -4,11 +4,13 @@ using System;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.UI.Tabs;
+using System.Runtime.Versioning;
 
 // ReSharper disable UnusedMember.Local
 
 namespace mRemoteNG.Connection.Protocol
 {
+    [SupportedOSPlatform("windows")]
     public abstract class ProtocolBase : IDisposable
     {
         #region Private Variables

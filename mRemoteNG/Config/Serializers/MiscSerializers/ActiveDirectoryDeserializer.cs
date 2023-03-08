@@ -10,9 +10,11 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
+    [SupportedOSPlatform("windows")]
     public class ActiveDirectoryDeserializer
     {
         private readonly string _ldapPath;

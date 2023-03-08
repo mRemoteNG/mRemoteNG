@@ -1,11 +1,13 @@
-using mRemoteNG.Themes;
+﻿using mRemoteNG.Themes;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Runtime.Versioning;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
 
 namespace mRemoteNG.UI.Window
 {
+    [SupportedOSPlatform("windows")]
     public class BaseWindow : DockContent
     {
         #region Private Variables

@@ -3,10 +3,12 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.TaskDialog
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class CommandButton : Button
     {
         //--------------------------------------------------------------------------------

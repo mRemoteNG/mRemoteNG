@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Management;
 using System.Net;
+using System.Runtime.Versioning;
 using System.Security.Principal;
 using Microsoft.Win32;
 using mRemoteNG.App;
@@ -12,6 +13,7 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Config.Putty
 {
+    [SupportedOSPlatform("windows")]
     public class PuttySessionsRegistryProvider : AbstractPuttySessionsProvider
     {
         private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";

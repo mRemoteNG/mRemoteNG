@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
@@ -7,6 +8,7 @@ using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     //Repaint of the NumericUpDown, the composite control buttons are replaced because the
     //original ones cannot be themed due to protected inheritance
     internal class MrngNumericUpDown : NumericUpDown

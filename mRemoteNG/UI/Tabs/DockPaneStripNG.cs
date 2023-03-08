@@ -8,9 +8,11 @@ using mRemoteNG.Connection;
 using mRemoteNG.Properties;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Tabs
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// This class is lifted from VS2013DockPaneStrip from DockPanelSuite and customized for MremoteNG
     /// </summary>

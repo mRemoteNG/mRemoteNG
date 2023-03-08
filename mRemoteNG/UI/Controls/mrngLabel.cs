@@ -2,9 +2,11 @@
 using mRemoteNG.Themes;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     //Themable label to overide the winforms behavior of drawing the forecolor of disabled with a system color
     //This class repaints the control to avoid Disabled state mismatch of the theme
     [ToolboxBitmap(typeof(Label))]

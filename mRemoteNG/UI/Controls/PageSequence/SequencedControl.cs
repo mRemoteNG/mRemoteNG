@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls.PageSequence
 {
+    [SupportedOSPlatform("windows")]
     public class SequencedControl : UserControl, ISequenceChangingNotifier
     {
         public event EventHandler Next;

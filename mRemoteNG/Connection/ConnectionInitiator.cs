@@ -12,10 +12,11 @@ using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
-
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection
 {
+    [SupportedOSPlatform("windows")]
     public class ConnectionInitiator : IConnectionInitiator
     {
         private readonly PanelAdder _panelAdder = new PanelAdder();

@@ -2,12 +2,14 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Security.AccessControl;
 using Microsoft.Win32;
 using mRemoteNG.App;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class IeBrowserEmulation
     {
         // found this here:

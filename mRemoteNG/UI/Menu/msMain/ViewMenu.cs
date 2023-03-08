@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Properties;
@@ -9,6 +10,7 @@ using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.UI.Menu
 {
+    [SupportedOSPlatform("windows")]
     public class ViewMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenViewConnectionPanels;

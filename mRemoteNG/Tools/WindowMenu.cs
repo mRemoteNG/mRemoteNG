@@ -2,11 +2,13 @@
 using System.Drawing;
 using mRemoteNG.App;
 using Microsoft.Win32.SafeHandles;
+using System.Runtime.Versioning;
 
 // ReSharper disable MemberCanBeMadeStatic.Global
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public sealed class WindowMenu : SafeHandleZeroOrMinusOneIsInvalid, IDisposable
     {
         [Flags]

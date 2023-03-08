@@ -8,9 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Runtime.Versioning;
+
 namespace mRemoteNG.Properties {
-    
-    
+    [SupportedOSPlatform("windows")]
+
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
     internal sealed partial class rbac : global::System.Configuration.ApplicationSettingsBase {

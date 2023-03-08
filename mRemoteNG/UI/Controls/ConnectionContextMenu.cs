@@ -11,12 +11,14 @@ using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 // ReSharper disable UnusedParameter.Local
 
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     public sealed class ConnectionContextMenu : ContextMenuStrip
     {
         private ToolStripMenuItem _cMenTreeAddConnection;

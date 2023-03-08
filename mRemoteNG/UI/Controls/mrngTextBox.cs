@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     //This class is only minimally themed as textboxes onPaint are hard to theme (system wm paint control most of the drawing process
     //There are some glitches on the initial draw of some controls
     public class MrngTextBox : TextBox

@@ -1,8 +1,10 @@
 ﻿using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI
 {
+    [SupportedOSPlatform("windows")]
     public class FontOverrider
     {
         public static void FontOverride(Control ctlParent)

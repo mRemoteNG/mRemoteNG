@@ -1,9 +1,11 @@
 ﻿using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     //Extended CheckBox class, the NGCheckBox onPaint completely repaint the control
 
     //

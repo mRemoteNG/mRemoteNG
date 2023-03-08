@@ -5,9 +5,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.TaskDialog
 {
+    [SupportedOSPlatform("windows")]
     public partial class frmTaskDialog : Form
     {
         //--------------------------------------------------------------------------------

@@ -1,9 +1,11 @@
 ﻿using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     //Extended ComboBox class, the NGComboBox onPaint completely repaint the control as does the item painting
     //warning: THe DropDown style rendering is glitchy in this control, only use DropDownList or correct the rendering method
     internal class MrngComboBox : ComboBox

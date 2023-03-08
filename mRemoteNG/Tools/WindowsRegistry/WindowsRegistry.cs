@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Versioning;
 using Microsoft.Win32;
 
 namespace mRemoteNG.Tools.WindowsRegistry
 {
+    [SupportedOSPlatform("windows")]
     public class WindowsRegistry : IRegistry
     {
         public string[] GetSubKeyNames(RegistryHive hive, string keyPath)

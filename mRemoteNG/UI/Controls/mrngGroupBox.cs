@@ -1,9 +1,11 @@
 ﻿using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     //Groupbox is colored using the innerTab colors as the vstheme doesnt have explicit groupbox palettes (at least completes)
     //This clas completely repaints the control
     public class MrngGroupBox : GroupBox

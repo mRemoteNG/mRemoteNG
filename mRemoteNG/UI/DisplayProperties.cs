@@ -2,11 +2,13 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Runtime.Versioning;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.GraphicsUtilities;
 
 namespace mRemoteNG.UI
 {
+    [SupportedOSPlatform("windows")]
     public class DisplayProperties
     {
         private readonly IGraphicsProvider _graphicsProvider;

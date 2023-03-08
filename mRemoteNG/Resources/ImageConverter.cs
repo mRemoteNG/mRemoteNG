@@ -1,7 +1,9 @@
 ﻿using System.Drawing;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Resources
 {
+    [SupportedOSPlatform("windows")]
     class ImageConverter
     {
         /// <summary>

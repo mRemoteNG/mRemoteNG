@@ -1,10 +1,12 @@
 ﻿using mRemoteNG.Themes;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     // total replace of RadioButton to avoid disabled state inconsistency on the themes
     // and glyph color inconsistency
     class MrngRadioButton : RadioButton

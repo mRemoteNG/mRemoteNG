@@ -22,6 +22,7 @@
     <Title>Multi-Remote Next Generation Connection Manager</Title>
     <RepositoryUrl>https://github.com/mRemoteNG/mRemoteNG.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <StartupObject>mRemoteNG.App.ProgramRoot</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>DEBUG</DefineConstants>

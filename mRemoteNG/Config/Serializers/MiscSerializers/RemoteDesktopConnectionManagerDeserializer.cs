@@ -10,10 +10,12 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
-	public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
+    [SupportedOSPlatform("windows")]
+    public class RemoteDesktopConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
         private static int _schemaVersion; /* 1 = RDCMan v2.2
                                        3 = RDCMan v2.7  */

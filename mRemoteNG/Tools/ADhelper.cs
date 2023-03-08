@@ -2,9 +2,11 @@
 using System.Collections;
 using System.DirectoryServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class AdHelper
     {
         private DirectoryEntry _dEntry;

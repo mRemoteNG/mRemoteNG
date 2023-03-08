@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Tabs
 {
+    [SupportedOSPlatform("windows")]
     internal sealed class MremoteNGAutoHideStrip : AutoHideStripBase
     {
         private class TabNG : Tab

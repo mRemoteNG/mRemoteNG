@@ -32,12 +32,14 @@ using mRemoteNG.UI.Panels;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 #endregion
 
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace mRemoteNG.UI.Forms
 {
+    [SupportedOSPlatform("windows")]
     public partial class FrmMain
     {
         public static FrmMain Default { get; } = new FrmMain();

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Security;
 using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Credential
 {
+    [SupportedOSPlatform("windows")]
     public class PlaceholderCredentialRecord : ICredentialRecord
     {
         public event PropertyChangedEventHandler PropertyChanged;

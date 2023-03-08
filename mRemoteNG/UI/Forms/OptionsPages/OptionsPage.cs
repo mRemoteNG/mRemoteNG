@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public class OptionsPage : UserControl
     {
         protected OptionsPage()

@@ -17,9 +17,11 @@ using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     public static class Runtime
     {
         public static bool IsPortableEdition

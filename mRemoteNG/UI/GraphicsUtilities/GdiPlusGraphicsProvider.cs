@@ -1,8 +1,10 @@
 ﻿using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.GraphicsUtilities
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// Gets environment graphics information using the Windows GDI+ API.
     /// </summary>

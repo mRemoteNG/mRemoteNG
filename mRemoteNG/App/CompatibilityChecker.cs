@@ -8,9 +8,11 @@ using mRemoteNG.Properties;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     public static class CompatibilityChecker
     {
         public static void CheckCompatibility(MessageCollector messageCollector)

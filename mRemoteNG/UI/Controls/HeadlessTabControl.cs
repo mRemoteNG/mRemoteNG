@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.App;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     public class HeadlessTabControl : TabControl
     {
         protected override void WndProc(ref Message m)

@@ -7,10 +7,12 @@ using mRemoteNG.Container;
 using mRemoteNG.Properties;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class NotificationAreaIcon
     {
         private readonly NotifyIcon _nI;

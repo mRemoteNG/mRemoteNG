@@ -7,9 +7,11 @@ using System;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     /* class IPTextBox
      * An IP Address Box
      * A TextBox that only allows entry of a valid ip address
