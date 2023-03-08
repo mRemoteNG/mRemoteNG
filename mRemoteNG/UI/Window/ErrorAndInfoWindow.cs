@@ -11,9 +11,11 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
 using mRemoteNG.Resources.Language;
 using Message = mRemoteNG.Messages.Message;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Window
 {
+    [SupportedOSPlatform("windows")]
     public partial class ErrorAndInfoWindow : BaseWindow
     {
         private ControlLayout _layout = ControlLayout.Vertical;

@@ -12,9 +12,11 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Window
 {
+    [SupportedOSPlatform("windows")]
     public partial class PortScanWindow
     {
         #region Constructors

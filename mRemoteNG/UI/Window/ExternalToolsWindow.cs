@@ -10,9 +10,11 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools.CustomCollections;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Window
 {
+    [SupportedOSPlatform("windows")]
     public partial class ExternalToolsWindow
     {
         private readonly ExternalAppsSaver _externalAppsSaver;

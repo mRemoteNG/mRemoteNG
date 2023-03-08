@@ -1,8 +1,10 @@
-using System;
+﻿using System;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.TaskDialog
 {
+    [SupportedOSPlatform("windows")]
     //--------------------------------------------------------------------------------
 
     #region PUBLIC enums

@@ -8,11 +8,13 @@ using mRemoteNG.Properties;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     public static class Shutdown
     {
         private static string _updateFilePath;
