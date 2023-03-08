@@ -5,7 +5,7 @@ using NSubstitute;
 using NUnit.Framework;
 
 
-namespace mRemoteNGTests.Tree
+namespace mRemoteNGTests.Tree.ClickHandlers
 {
     public class TreeNodeCompositeClickHandlerTests
     {
@@ -24,7 +24,7 @@ namespace mRemoteNGTests.Tree
         {
             var handler1 = Substitute.For<ITreeNodeClickHandler<ConnectionInfo>>();
             var handler2 = Substitute.For<ITreeNodeClickHandler<ConnectionInfo>>();
-            _clickHandler.ClickHandlers = new[] {handler1, handler2};
+            _clickHandler.ClickHandlers = new[] { handler1, handler2 };
             _clickHandler.Execute(_connectionInfo);
             handler1.Received().Execute(_connectionInfo);
             handler2.Received().Execute(_connectionInfo);

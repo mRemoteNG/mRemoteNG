@@ -7,7 +7,7 @@ using NSubstitute;
 using NUnit.Framework;
 
 
-namespace mRemoteNGTests.Tree
+namespace mRemoteNGTests.Tree.ClickHandlers
 {
     public class ExpandNodeClickHandlerTests
     {

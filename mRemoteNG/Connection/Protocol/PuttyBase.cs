@@ -11,7 +11,6 @@ using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
-using Connection;
 using System.IO;
 
 // ReSharper disable ArrangeAccessorOwnerBody

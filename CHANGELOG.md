@@ -2,6 +2,24 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [1.77.3.1784]
+### Fixed
+- #2362: Fix use of sql database
+- #2356: Improve speed for the display of the options page
+- #2352: SSH.NET Update
+- #2346: Modify "auto reconnect" to have the ability to really auto-reconnect
+- #2340: Set the default theme setting
+- #2339: Add 2 missing settings
+- #2261: Implement Show/Hide file menu in view menu
+- #2244: Save RCG and RestrictedAdmin fields correctly in connections file
+
+### Added
+- #2285: Support extraction of SSH private keys from external cred prov
+- #2268: Postregsql database support
+
+### Updated
+- #2295: Updates hyperlink style to make links more visible to end users
+- #2337: Set language.resx to auto generate the designer class
 
 ## [1.77.3]
 ### Added

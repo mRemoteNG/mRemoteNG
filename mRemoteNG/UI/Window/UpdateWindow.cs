@@ -182,7 +182,7 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector?.AddExceptionStackTrace(Language.UpdateCheckCompleteFailed, ex);
             }
         }
-        
+
         private void SetVisibilityOfUpdateControls(bool visible)
         {
             lblChangeLogLabel.Visible = visible;

@@ -15,7 +15,6 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Tabs;
 using MSTSCLib;
 using mRemoteNG.Resources.Language;
-using Connection;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.DirectoryServices.ActiveDirectory;
 

@@ -2,10 +2,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>Icons\mRemoteNG.ico</ApplicationIcon>
-    <Version>1.77.3</Version>
+    <Version>1.77.3-dev</Version>
     <Description>Multi-protocol remote connections manager</Description>
     <Copyright>$([System.DateTime]::Now.Year) mRemoteNG Dev Team, 2010-2013 Riley McArdle, 2007-2009 Felix Deimel</Copyright>
     <PackageLicenseFile>COPYING.TXT</PackageLicenseFile>
@@ -17,33 +17,52 @@
     <PackageIcon>Header_dark.png</PackageIcon>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UseWPF>True</UseWPF>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <SignAssembly>False</SignAssembly>
+    <Title>Multi-Remote Next Generation Connection Manager</Title>
+    <RepositoryUrl>https://github.com/mRemoteNG/mRemoteNG.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>DEBUG</DefineConstants>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <OutputPath>bin\x64\Debug\</OutputPath>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <Optimize>False</Optimize>
+    <WarningLevel>7</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DefineConstants />
-    <Optimize>false</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\x64\Release\</OutputPath>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>7</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|x64'">
     <DefineConstants>DEBUG;PORTABLE</DefineConstants>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\x64\Debug Portable\</OutputPath>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>7</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Portable|x64'">
     <DefineConstants>PORTABLE</DefineConstants>
-    <Optimize>false</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\x64\Release Portable\</OutputPath>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <WarningLevel>7</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Installer|x64'">
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <Optimize>True</Optimize>
+    <WarningLevel>7</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="buildenv.tmp" />
@@ -95,6 +114,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\AssemblyInfo.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AssemblyInfo.tt</DependentUpon>
     </Compile>
     <Compile Update="Properties\OptionsBackupPage.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -215,6 +239,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Properties\AssemblyInfo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
+    </None>
     <None Update="Icons\Admin.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -448,7 +476,7 @@
     </None>
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="echo $(ConfigurationName) &gt; buildenv.tmp" />
+	<Exec Command="echo $(ConfigurationName) &gt; buildenv.tmp&#xD;&#xA;&quot;$(DevEnvDir)TextTransform.exe&quot; -a !!BuildConfiguration!&quot;$(Configuration)&quot; &quot;$(ProjectDir)Properties\AssemblyInfo.tt&quot;" />
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command=":: When passing paths to powershell scripts, check if the path ends with a backslash &quot;\&quot;&#xD;&#xA;:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.&#xD;&#xA;&#xD;&#xA;powershell -noprofile -command &quot;sleep 2&quot;&#xD;&#xA;&#xD;&#xA;set /p buildenv=&lt;buildenv.tmp&#xD;&#xA;&#xD;&#xA;:: Manual builds, set the cert password and uncomment below.&#xD;&#xA;:: IF &quot;%25APPVEYOR_BUILD_FOLDER&quot;==&quot;&quot; ( set cert_pwd= )&#xD;&#xA;&#xD;&#xA;:: Call the post build powershell script&#xD;&#xA;powershell.exe -ExecutionPolicy Bypass -File &quot;$(SolutionDir)Tools\postbuild_mremoteng.ps1&quot; -SolutionDir &quot;$(SolutionDir)\&quot; -TargetDir &quot;$(TargetDir)\&quot; -TargetFileName &quot;mRemoteNG.exe&quot; -ConfigurationName &quot;%25buildenv%25&quot; -CertificatePath &quot;$(CertPath)&quot; -CertificatePassword &quot;$(CertPassword)&quot; -ExcludeFromSigning &quot;PuTTYNG.exe&quot;" />
@@ -477,5 +505,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="92.0.25" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 </Project>

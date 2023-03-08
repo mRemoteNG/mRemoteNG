@@ -8,11 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Connection;
+using mRemoteNG.Connection;
 
-namespace mRemoteNG.Properties {
-    
-    
+namespace mRemoteNG.Properties
+{
+
+
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
     internal sealed partial class OptionsCredentialsPage : global::System.Configuration.ApplicationSettingsBase {

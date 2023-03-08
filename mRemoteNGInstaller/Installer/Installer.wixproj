@@ -10,20 +10,8 @@
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <OutputPath>bin\x64\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Debug;</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Release;</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug Portable' ">
-    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Debug Portable;</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release Portable' ">
-    <DefineConstants>HarvestPath=..\mRemoteNG\bin\Release Portable;</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CustomActions\CheckForInstalledWindowsUpdates.wxs" />

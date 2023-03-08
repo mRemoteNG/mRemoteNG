@@ -20,8 +20,8 @@
   <a href="https://twitter.com/mremoteng">
     <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/mremoteng?color=%231DA1F2&label=Twitter&logo=Twitter&style=flat-square">
   </a>
-  <a href="https://gitter.im/mRemoteNG/PublicChat">
-    <img alt="Gitter" src="https://img.shields.io/gitter/room/mRemoteNG/PublicChat?label=Join%20the%20Chat&logo=Gitter&style=flat-square">
+  <a href="https://app.element.io/#/room/#mremoteng:matrix.org">
+    <img alt="Element" src="https://img.shields.io/matrix/mremoteng:matrix.org?label=Join%20to%20chat%20about%20mRemoteNG&logo=element&style=social&link=https://app.element.io/#/room/#mremoteng:matrix.org">
   </a>  
 </p>
 <p align="center">
@@ -51,7 +51,7 @@
 | ---------------|--------------|-----------|
 | Stable | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.76.20/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.76.20) |
 | Preview | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/preview?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.77.1/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1) |
-| Nightly | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/develop?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/2022.06.13-v1.77.3-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/2022.06.13-v1.77.3-nb) |
+| Nightly | ![Build status](https://ci.appveyor.com/api/projects/status/rqwxjxldail7btcf/branch/develop?svg=true) | [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/2023.03.03-v1.77.3-nb/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/2023.03.03-v1.77.3-nb) |
 
 ## Features
 
