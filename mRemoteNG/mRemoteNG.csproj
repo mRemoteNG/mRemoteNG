@@ -176,10 +176,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>OptionsThemePage.settings</DependentUpon>
     </Compile>
-    <Compile Update="Properties\rbac.Designer.cs">
+    <Compile Update="Properties\OptionsRbac.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
-      <DependentUpon>rbac.settings</DependentUpon>
+      <DependentUpon>OptionsRbac.settings</DependentUpon>
     </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -405,9 +405,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>OptionsThemePage.Designer.cs</LastGenOutput>
     </None>
-    <None Update="Properties\rbac.settings">
+    <None Update="Properties\OptionsRbac.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>rbac.Designer.cs</LastGenOutput>
+      <LastGenOutput>OptionsRbac.Designer.cs</LastGenOutput>
     </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
