@@ -8,9 +8,11 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.ACL;
 using mRemoteNG.Security;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class BackupPage
     {
         private readonly FrmMain _frmMain = FrmMain.Default;
@@ -32,7 +34,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public void Check4ACL()
         {
-            if (Properties.rbac.Default.ActiveRole == "AdminRole")
+            if (Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
             {
                 lblACL.Visible = true;
                 lblBacupPageShowInOptionsMenu.Visible = true;

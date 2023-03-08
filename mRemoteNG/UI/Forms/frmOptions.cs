@@ -9,10 +9,12 @@ using mRemoteNG.Themes;
 using System.Configuration;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 #endregion
 
 namespace mRemoteNG.UI.Forms
 {
+    [SupportedOSPlatform("windows")]
     public partial class FrmOptions : Form
     {
         private int _currentIndex = 0;
@@ -119,84 +121,84 @@ namespace mRemoteNG.UI.Forms
                 case "StartupExitPage":
                     {
                         if (Properties.OptionsStartupExitPage.Default.cbStartupExitPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new StartupExitPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "AppearancePage":
                     {
                         if (Properties.OptionsAppearancePage.Default.cbAppearancePageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new AppearancePage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "ConnectionsPage":
                     {
                         if (Properties.OptionsConnectionsPage.Default.cbConnectionsPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new ConnectionsPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "TabsPanelsPage":
                     {
                         if (Properties.OptionsTabsPanelsPage.Default.cbTabsPanelsPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new TabsPanelsPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "NotificationsPage":
                     {
                         if (Properties.OptionsNotificationsPage.Default.cbNotificationsPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new NotificationsPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "CredentialsPage":
                     {
                         if (Properties.OptionsCredentialsPage.Default.cbCredentialsPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new CredentialsPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "SqlServerPage":
                     {
                         if (Properties.OptionsDBsPage.Default.cbDBsPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new SqlServerPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "UpdatesPage":
                     {
                         if (Properties.OptionsUpdatesPage.Default.cbUpdatesPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new UpdatesPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "ThemePage":
                     {
                         if (Properties.OptionsThemePage.Default.cbThemePageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new ThemePage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "SecurityPage":
                     {
                         if (Properties.OptionsSecurityPage.Default.cbSecurityPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new SecurityPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "AdvancedPage":
                     {
                         if (Properties.OptionsAdvancedPage.Default.cbAdvancedPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new AdvancedPage { Dock = DockStyle.Fill };
                         break;
                     }
                 case "BackupPage":
                     {
                         if (Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu ||
-                            Properties.rbac.Default.ActiveRole == "AdminRole")
+                            Properties.OptionsRbac.Default.ActiveRole == "AdminRole")
                             page = new BackupPage { Dock = DockStyle.Fill };
                         break;
                     }

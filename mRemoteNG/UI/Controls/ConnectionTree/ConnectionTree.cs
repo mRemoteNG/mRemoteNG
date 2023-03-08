@@ -267,7 +267,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             return (RootNodeInfo)ConnectionTreeModel.RootNodes.First(item => item is RootNodeInfo);
         }
 
-        public void Invoke(Action action)
+        public new void Invoke(Action action)
         {
             Invoke((Delegate)action);
         }

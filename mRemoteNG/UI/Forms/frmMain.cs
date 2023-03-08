@@ -836,12 +836,12 @@ namespace mRemoteNG.UI.Forms
 
         private void tsModeUser_Click(object sender, EventArgs e)
         {
-            Properties.rbac.Default.ActiveRole = "UserRole";
+            Properties.OptionsRbac.Default.ActiveRole = "UserRole";
         }
 
         private void tsModeAdmin_Click(object sender, EventArgs e)
         {
-            Properties.rbac.Default.ActiveRole = "AdminRole";
+            Properties.OptionsRbac.Default.ActiveRole = "AdminRole";
         }
     }
 }
