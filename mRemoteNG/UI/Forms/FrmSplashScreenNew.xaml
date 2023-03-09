@@ -13,10 +13,10 @@
         Width="450">
     <Border CornerRadius="10" BorderBrush="#211E1B" BorderThickness="1" Background="#373C42">
         <Grid>
-            <Label Name="lblLogoPartA" Content="m" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Margin="78,12,0,0" Width="40" FontFamily="HandelGotDBol" FontSize="40" Foreground="#5289F9"/>
-            <Label Name="lblLogoPartB" Content="RemoteNG" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Margin="109,12,0,0" Width="210" FontFamily="HandelGotDBol" FontSize="40" Foreground="#E8EBEE"/>
-            <Label Name="lblLogoPartC" Content="Multi-Remote Next Generation Connection Manager" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Margin="0,72,0,0" Width="410" FontFamily="Segoe" FontSize="16" Foreground="#E8EBEE" FontWeight="Bold"/>
-            <Label Name="lblLogoPartD" Content="v.?.??.?" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="319,36,0,0" Width="115" FontFamily="Segoe" FontSize="16" Foreground="#E8EBEE"/>
+            <Label Name="lblLogoPartA" Content="m" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Margin="104,0,0,0" Width="40" FontFamily="HandelGotDBol" FontSize="40" Foreground="#5289F9"/>
+            <Label Name="lblLogoPartB" Content="RemoteNG" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Margin="134,0,0,0" Width="210" FontFamily="HandelGotDBol" FontSize="40" Foreground="#E8EBEE" RenderTransformOrigin="0.548,0.525"/>
+            <Label Name="lblLogoPartC" Content="Multi-Remote Next Generation Connection Manager" HorizontalAlignment="Center" VerticalAlignment="Top" Height="30" Margin="0,83,0,0" Width="410" FontFamily="Segoe" FontSize="16" Foreground="#E8EBEE" FontWeight="Bold"/>
+            <Label Name="lblLogoPartD" Content="v.?.??.?" HorizontalAlignment="Center" VerticalAlignment="Top" Height="28" Margin="0,50,0,0" Width="216" FontFamily="Segoe" FontSize="16" Foreground="#E8EBEE"/>
         </Grid>
     </Border>
 </Window>
