@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
@@ -17,6 +18,7 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     public static class Export
     {
         public static void ExportToFile(ConnectionInfo selectedNode, ConnectionTreeModel connectionTreeModel)

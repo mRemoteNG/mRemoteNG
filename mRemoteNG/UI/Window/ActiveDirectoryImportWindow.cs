@@ -6,9 +6,11 @@ using mRemoteNG.App;
 using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Window
 {
+    [SupportedOSPlatform("windows")]
     public partial class ActiveDirectoryImportWindow : BaseWindow
     {
         private string _currentDomain;
