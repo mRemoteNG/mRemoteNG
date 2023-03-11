@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 
 namespace mRemoteNG.Tree.ClickHandlers
 {
+    [SupportedOSPlatform("windows")]
     public class TreeNodeCompositeClickHandler : ITreeNodeClickHandler<ConnectionInfo>
     {
         public IEnumerable<ITreeNodeClickHandler<ConnectionInfo>> ClickHandlers { get; set; } =

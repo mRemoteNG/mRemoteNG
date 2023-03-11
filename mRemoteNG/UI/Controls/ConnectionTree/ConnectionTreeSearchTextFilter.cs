@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Versioning;
 using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 
 namespace mRemoteNG.UI.Controls.ConnectionTree
 {
+    [SupportedOSPlatform("windows")]
     public class ConnectionTreeSearchTextFilter : IModelFilter
     {
         public string FilterText { get; set; } = "";

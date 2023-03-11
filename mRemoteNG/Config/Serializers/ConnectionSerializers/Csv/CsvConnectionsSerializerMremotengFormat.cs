@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -11,6 +12,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 {
+    [SupportedOSPlatform("windows")]
     public class CsvConnectionsSerializerMremotengFormat : ISerializer<ConnectionInfo, string>
     {
         private readonly SaveFilter _saveFilter;

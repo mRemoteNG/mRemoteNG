@@ -5,9 +5,11 @@ using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools.Cmdline;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class ProcessController : IDisposable
     {
         #region Public Methods

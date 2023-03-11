@@ -8,9 +8,11 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class AdvancedPage
     {
         public AdvancedPage()

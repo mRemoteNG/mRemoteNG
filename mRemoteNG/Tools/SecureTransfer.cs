@@ -5,9 +5,11 @@ using Renci.SshNet;
 using Renci.SshNet.Sftp;
 using static System.IO.FileMode;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     internal class SecureTransfer : IDisposable
     {
         private readonly string Host;

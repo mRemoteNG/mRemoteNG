@@ -3,9 +3,11 @@ using mRemoteNG.App;
 using mRemoteNG.Properties;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class CredentialsPage : OptionsPage
     {
         public CredentialsPage()
@@ -51,8 +53,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             txtCredentialsUsername.Text = Properties.OptionsCredentialsPage.Default.DefaultUsername;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            txtCredentialsPassword.Text =
-                cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
+            txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
             txtCredentialsDomain.Text = Properties.OptionsCredentialsPage.Default.DefaultDomain;
             txtCredentialsUserViaAPI.Text = Properties.OptionsCredentialsPage.Default.UserViaAPIDefault;
         }
@@ -74,8 +75,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsCredentialsPage.Default.DefaultUsername = txtCredentialsUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            Properties.OptionsCredentialsPage.Default.DefaultPassword =
-                cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
+            Properties.OptionsCredentialsPage.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
             Properties.OptionsCredentialsPage.Default.DefaultDomain = txtCredentialsDomain.Text;
             Properties.OptionsCredentialsPage.Default.UserViaAPIDefault = txtCredentialsUserViaAPI.Text;
         }

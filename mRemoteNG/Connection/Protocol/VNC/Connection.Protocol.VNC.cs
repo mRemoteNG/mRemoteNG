@@ -6,12 +6,14 @@ using mRemoteNG.App;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 
 namespace mRemoteNG.Connection.Protocol.VNC
 {
+    [SupportedOSPlatform("windows")]
     public class ProtocolVNC : ProtocolBase
     {
         #region Private Declarations

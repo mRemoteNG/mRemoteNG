@@ -6,9 +6,11 @@ using mRemoteNG.Resources.Language;
 using System.Reflection;
 using mRemoteNG.Properties;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms
 {
+    [SupportedOSPlatform("windows")]
     public partial class frmAbout : Form
     {
         public static frmAbout Instance { get; set; } = new frmAbout();

@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class ConnectionsPage
     {
         private readonly FrmMain _frmMain = FrmMain.Default;

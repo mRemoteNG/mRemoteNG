@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls.PageSequence
 {
+    [SupportedOSPlatform("windows")]
     public class PageSequence : IDisposable
     {
         private readonly Control _pageContainer;
@@ -13,8 +15,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
         public IEnumerable<SequencedControl> Pages => _pages;
         public int CurrentPageIndex { get; private set; }
 
-        public PageSequence(Control pageContainer, IEnumerable<SequencedControl> pages) : this(pageContainer,
-                                                                                               pages.ToArray())
+        public PageSequence(Control pageContainer, IEnumerable<SequencedControl> pages) : this(pageContainer, pages.ToArray())
         {
         }
 

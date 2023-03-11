@@ -1,9 +1,11 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.UI.Window;
 using System;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Tabs
 {
+    [SupportedOSPlatform("windows")]
     class TabHelper
     {
         private static readonly Lazy<TabHelper> lazyHelper = new Lazy<TabHelper>(() => new TabHelper());
@@ -23,8 +25,7 @@ namespace mRemoteNG.UI.Tabs
             {
                 currentTab = value;
                 findCurrentPanel();
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg,
-                                                    "Tab got focused: " + currentTab.TabText);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.DebugMsg, "Tab got focused: " + currentTab.TabText);
             }
         }
 

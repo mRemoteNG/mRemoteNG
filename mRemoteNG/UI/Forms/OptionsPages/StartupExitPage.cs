@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class StartupExitPage
     {
+        [SupportedOSPlatform("windows")]
         public StartupExitPage()
         {
             InitializeComponent();

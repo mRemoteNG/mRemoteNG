@@ -8,9 +8,11 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI
 {
+    [SupportedOSPlatform("windows")]
     public class DialogFactory
     {
         public static OpenFileDialog BuildLoadConnectionsDialog()

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
@@ -8,6 +9,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
+    [SupportedOSPlatform("windows")]
     public class PortScanDeserializer : IDeserializer<IEnumerable<ScanHost>, ConnectionTreeModel>
     {
         private readonly ProtocolType _targetProtocolType;

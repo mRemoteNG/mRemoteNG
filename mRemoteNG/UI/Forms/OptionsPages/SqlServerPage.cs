@@ -5,9 +5,11 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Properties;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class SqlServerPage
     {
         private readonly DatabaseConnectionTester _databaseConnectionTester;

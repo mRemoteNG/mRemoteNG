@@ -5,9 +5,11 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Menu
 {
+    [SupportedOSPlatform("windows")]
     public class HelpMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenInfoHelp;

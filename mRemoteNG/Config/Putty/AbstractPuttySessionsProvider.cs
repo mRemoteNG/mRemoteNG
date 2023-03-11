@@ -4,11 +4,13 @@ using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree.Root;
 using System.Net;
+using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.Putty
 {
+    [SupportedOSPlatform("windows")]
     public abstract class AbstractPuttySessionsProvider
     {
         public virtual RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo();
@@ -60,20 +62,14 @@ namespace mRemoteNG.Config.Putty
             if (string.IsNullOrEmpty(sessionInfo?.Name) || Sessions.Any(child => child.Name == sessionInfo.Name))
                 return;
             RootInfo.AddChild(sessionInfo);
-            RaisePuttySessionCollectionChangedEvent(
-                                                    new
-                                                        NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add,
-                                                                                         sessionInfo));
+            RaisePuttySessionCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, sessionInfo));
         }
 
         protected virtual void RemoveSession(PuttySessionInfo sessionInfo)
         {
             if (!Sessions.Contains(sessionInfo)) return;
             RootInfo.RemoveChild(sessionInfo);
-            RaisePuttySessionCollectionChangedEvent(
-                                                    new
-                                                        NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove,
-                                                                                         sessionInfo));
+            RaisePuttySessionCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, sessionInfo));
         }
 
         public virtual void StartWatcher()

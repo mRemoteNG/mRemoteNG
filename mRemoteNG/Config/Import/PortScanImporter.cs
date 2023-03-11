@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
@@ -8,6 +9,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Import
 {
+    [SupportedOSPlatform("windows")]
     public class PortScanImporter : IConnectionImporter<IEnumerable<ScanHost>>
     {
         private readonly ProtocolType _targetProtocolType;

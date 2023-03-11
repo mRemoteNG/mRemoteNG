@@ -1,9 +1,11 @@
 ﻿using System.Windows.Forms;
 using mRemoteNG.Themes;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class FrmInputBox : Form
     {
         internal string returnValue;

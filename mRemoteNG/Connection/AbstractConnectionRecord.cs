@@ -8,9 +8,11 @@ using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection
 {
+    [SupportedOSPlatform("windows")]
     public abstract class AbstractConnectionRecord : INotifyPropertyChanged
     {
         #region Fields

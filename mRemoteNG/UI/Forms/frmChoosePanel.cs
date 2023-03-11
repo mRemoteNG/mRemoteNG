@@ -3,9 +3,11 @@ using mRemoteNG.App;
 using mRemoteNG.Themes;
 using mRemoteNG.UI.Panels;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms
 {
+    [SupportedOSPlatform("windows")]
     public partial class FrmChoosePanel
     {
         private readonly PanelAdder _panelAdder;

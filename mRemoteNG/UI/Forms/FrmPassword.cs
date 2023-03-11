@@ -5,9 +5,11 @@ using mRemoteNG.Security;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms
 {
+    [SupportedOSPlatform("windows")]
     public partial class FrmPassword : IKeyProvider
     {
         private readonly string _passwordName;

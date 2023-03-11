@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 
 
 namespace mRemoteNG.Tree
 {
+    [SupportedOSPlatform("windows")]
     public class NodeSearcher
     {
         private readonly ConnectionTreeModel _connectionTreeModel;

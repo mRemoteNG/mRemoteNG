@@ -10,9 +10,11 @@ using mRemoteNG.Properties;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Tabs
 {
+    [SupportedOSPlatform("windows")]
     public partial class ConnectionTab : DockContent
     {
         /// <summary>

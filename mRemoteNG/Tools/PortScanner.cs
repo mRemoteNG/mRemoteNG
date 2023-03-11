@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Threading;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
@@ -12,6 +13,7 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class PortScanner
     {
         private readonly List<IPAddress> _ipAddresses = new List<IPAddress>();
@@ -113,9 +115,7 @@ namespace mRemoteNG.Tools
             try
             {
                 _hostCount = 0;
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                    $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...",
-                                                    true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...", true);
                 foreach (var ipAddress in _ipAddresses)
                 {
                     RaiseBeginHostScanEvent(ipAddress);
@@ -130,17 +130,13 @@ namespace mRemoteNG.Tools
                     }
                     catch (Exception ex)
                     {
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                            $"Tools.PortScan: Ping failed for {ipAddress} {Environment.NewLine} {ex.Message}",
-                                                            true);
+                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"Tools.PortScan: Ping failed for {ipAddress} {Environment.NewLine} {ex.Message}", true);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    $"StartScanBG failed (Tools.PortScan) {Environment.NewLine} {ex.Message}",
-                                                    true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"StartScanBG failed (Tools.PortScan) {Environment.NewLine} {ex.Message}", true);
             }
         }
 

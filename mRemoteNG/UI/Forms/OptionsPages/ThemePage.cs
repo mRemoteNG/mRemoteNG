@@ -7,9 +7,11 @@ using BrightIdeasSoftware;
 using mRemoteNG.Properties;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class ThemePage
     {
         #region Private Fields
@@ -177,9 +179,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
-            using (var frmInputBox = new FrmInputBox(Language.OptionsThemeNewThemeCaption,
-                                                     Language.OptionsThemeNewThemeText,
-                                                     _themeManager.ActiveTheme.Name))
+            using (var frmInputBox = new FrmInputBox(Language.OptionsThemeNewThemeCaption, Language.OptionsThemeNewThemeText, _themeManager.ActiveTheme.Name))
             {
                 var dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK) return;
@@ -191,9 +191,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
                 else
                 {
-                    CTaskDialog.ShowTaskDialogBox(this, Language.Errors, Language.OptionsThemeNewThemeError, "",
-                                                  "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error,
-                                                  ESysIcons.Information, 0);
+                    CTaskDialog.ShowTaskDialogBox(this, Language.Errors, Language.OptionsThemeNewThemeError, "", "", "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error, ESysIcons.Information, 0);
                 }
             }
         }

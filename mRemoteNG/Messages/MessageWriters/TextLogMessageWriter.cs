@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 
 namespace mRemoteNG.Messages.MessageWriters
 {
+    [SupportedOSPlatform("windows")]
     public class TextLogMessageWriter : IMessageWriter
     {
         private readonly Logger _logger;

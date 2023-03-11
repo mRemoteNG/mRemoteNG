@@ -4,9 +4,11 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class SshTunnelTypeConverter : StringConverter
     {
         public static string[] SshTunnels

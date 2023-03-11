@@ -1,10 +1,12 @@
 ﻿using mRemoteNG.Tools;
 using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     public partial class MrngAdTree : UserControl
     {
         #region Public Methods

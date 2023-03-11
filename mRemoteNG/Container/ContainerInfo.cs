@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tree;
 
 namespace mRemoteNG.Container
 {
+    [SupportedOSPlatform("windows")]
     [DefaultProperty("Name")]
     public class ContainerInfo : ConnectionInfo, INotifyCollectionChanged
     {

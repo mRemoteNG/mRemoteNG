@@ -1,10 +1,12 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using mRemoteNG.App;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class WindowPlacement
     {
         private Form _form;

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.Messages.MessageWriters
 {
+    [SupportedOSPlatform("windows")]
     public class NotificationPanelMessageWriter : IMessageWriter
     {
         private readonly ErrorAndInfoWindow _messageWindow;

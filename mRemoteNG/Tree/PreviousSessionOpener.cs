@@ -3,10 +3,11 @@ using mRemoteNG.Container;
 using System;
 using System.Linq;
 using mRemoteNG.UI.Controls.ConnectionTree;
-
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tree
 {
+    [SupportedOSPlatform("windows")]
     public class PreviousSessionOpener : IConnectionTreeDelegate
     {
         private readonly IConnectionInitiator _connectionInitiator;

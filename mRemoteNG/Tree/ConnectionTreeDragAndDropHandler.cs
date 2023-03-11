@@ -6,10 +6,11 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
-
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tree
 {
+    [SupportedOSPlatform("windows")]
     public class ConnectionTreeDragAndDropHandler
     {
         private readonly Color DropAllowedFeedbackColor = Color.Green;

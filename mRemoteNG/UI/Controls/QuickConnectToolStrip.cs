@@ -12,9 +12,11 @@ using mRemoteNG.Properties;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     public class QuickConnectToolStrip : ToolStrip
     {
         private IContainer components;

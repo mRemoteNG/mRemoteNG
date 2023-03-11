@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.App;
 
 namespace mRemoteNG.UI
 {
+    [SupportedOSPlatform("windows")]
     public static class TextBoxExtensions
     {
         public static bool SetCueBannerText(this TextBox textBox, string cueText, bool showCueWhenFocused = false)

@@ -9,9 +9,11 @@ using System.Linq;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Themes
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// Main class of the theming component. Centralizes creation, loading and deletion of themes
     /// Implemented as a singleton

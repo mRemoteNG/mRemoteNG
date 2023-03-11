@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 using mRemoteNG.App;
 
@@ -8,6 +9,7 @@ using mRemoteNG.App;
 
 namespace mRemoteNG.Tools.Cmdline
 {
+    [SupportedOSPlatform("windows")]
     //
     //* Arguments class: application arguments interpreter
     //*

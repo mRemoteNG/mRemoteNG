@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 
 namespace mRemoteNG.Tree.ClickHandlers
 {
+    [SupportedOSPlatform("windows")]
     public class OpenConnectionClickHandler : ITreeNodeClickHandler<ConnectionInfo>
     {
         private readonly IConnectionInitiator _connectionInitiator;

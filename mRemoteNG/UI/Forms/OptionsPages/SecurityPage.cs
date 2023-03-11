@@ -9,9 +9,11 @@ using mRemoteNG.Properties;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Factories;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class SecurityPage : OptionsPage
     {
         public SecurityPage()

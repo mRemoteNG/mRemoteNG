@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Xml.Linq;
 using mRemoteNG.Security;
 using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
+    [SupportedOSPlatform("windows")]
     public class XmlRootNodeSerializer
     {
         public XElement SerializeRootNodeInfo(RootNodeInfo rootNodeInfo, ICryptographyProvider cryptographyProvider, Version version, bool fullFileEncryption = false)

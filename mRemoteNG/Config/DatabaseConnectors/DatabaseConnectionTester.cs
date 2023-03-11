@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 
 namespace mRemoteNG.Config.DatabaseConnectors
 {
+    [SupportedOSPlatform("windows")]
     /// <summary>
     /// A helper class for testing database connectivity
     /// </summary>

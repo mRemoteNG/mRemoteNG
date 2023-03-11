@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.App.Info
 {
+    [SupportedOSPlatform("windows")]
     public static class ConnectionsFileInfo
     {
         public static readonly string DefaultConnectionsPath = SettingsFileInfo.SettingsPath;

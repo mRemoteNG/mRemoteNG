@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
@@ -6,6 +7,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.UI.Menu
 {
+    [SupportedOSPlatform("windows")]
     public class ToolsMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenToolsSshTransfer;

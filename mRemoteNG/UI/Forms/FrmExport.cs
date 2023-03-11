@@ -7,9 +7,11 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Themes;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms
 {
+    [SupportedOSPlatform("windows")]
     public partial class FrmExport
     {
         private ThemeManager _themeManager;

@@ -1,10 +1,12 @@
-﻿namespace mRemoteNG.Themes
-{
-    using System.Drawing;
-    using UI.Tabs;
-    using WeifenLuo.WinFormsUI.Docking;
-    using WeifenLuo.WinFormsUI.ThemeVS2015;
+﻿using System.Drawing;
+using System.Runtime.Versioning;
+using mRemoteNG.UI.Tabs;
+using WeifenLuo.WinFormsUI.Docking;
+using WeifenLuo.WinFormsUI.ThemeVS2015;
 
+namespace mRemoteNG.Themes
+{
+    [SupportedOSPlatform("windows")]
 
     /// <summary>
     /// Visual Studio 2015 Light theme.

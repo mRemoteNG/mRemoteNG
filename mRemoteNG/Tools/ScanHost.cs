@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -13,6 +14,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class ScanHost
     {
         #region Properties

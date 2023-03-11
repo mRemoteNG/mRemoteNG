@@ -2,9 +2,11 @@
 using System.Windows.Forms;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Menu
 {
+    [SupportedOSPlatform("windows")]
     // This class creates new menu items to menu that appears when you right click the top of the app (where the window title is)
     public class AdvancedWindowMenu : IDisposable
     {

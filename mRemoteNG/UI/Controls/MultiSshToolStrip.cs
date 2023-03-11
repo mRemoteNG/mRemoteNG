@@ -8,9 +8,11 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     public partial class MultiSshToolStrip : ToolStrip
     {
         private IContainer components;
@@ -74,8 +76,7 @@ namespace mRemoteNG.UI.Controls
                 processHandlers.AddRange(ProcessOpenConnections(connection));
             }
 
-            var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList()
-                                                   .Where(item => item.OpenConnections.Count > 0);
+            var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
 
             foreach (var connection in connectionTreeConnections)
             {

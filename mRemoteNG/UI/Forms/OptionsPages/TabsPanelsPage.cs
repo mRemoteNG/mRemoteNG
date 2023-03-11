@@ -1,8 +1,10 @@
 ﻿using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class TabsPanelsPage
     {
         public TabsPanelsPage()

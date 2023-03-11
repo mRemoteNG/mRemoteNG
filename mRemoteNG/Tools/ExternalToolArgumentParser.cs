@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Properties;
@@ -8,6 +9,7 @@ using mRemoteNG.Tools.Cmdline;
 
 namespace mRemoteNG.Tools
 {
+    [SupportedOSPlatform("windows")]
     public class ExternalToolArgumentParser
     {
         private readonly ConnectionInfo _connectionInfo;

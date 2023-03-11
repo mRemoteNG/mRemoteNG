@@ -7,9 +7,11 @@ using mRemoteNG.Security;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Menu
 {
+    [SupportedOSPlatform("windows")]
     public class FileMenu : ToolStripMenuItem
     {
         private ToolStripMenuItem _mMenToolsOptions;

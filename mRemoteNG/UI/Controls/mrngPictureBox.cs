@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Controls
 {
+    [SupportedOSPlatform("windows")]
     public partial class MrngPictureBox : PictureBox
     {
         private ThemeManager _themeManager;

@@ -8,9 +8,11 @@ using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.UI.Panels
 {
+    [SupportedOSPlatform("windows")]
     public class PanelAdder
     {
         public ConnectionWindow AddPanel(string title = "")

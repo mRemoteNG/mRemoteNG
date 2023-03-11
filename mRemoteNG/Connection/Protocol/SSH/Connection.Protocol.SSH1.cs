@@ -1,5 +1,8 @@
+﻿using System.Runtime.Versioning;
+
 namespace mRemoteNG.Connection.Protocol.SSH
 {
+    [SupportedOSPlatform("windows")]
     public class ProtocolSSH1 : PuttyBase
     {
         public ProtocolSSH1()
