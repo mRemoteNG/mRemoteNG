@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
@@ -9,6 +10,7 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Settings
 {
+    [SupportedOSPlatform("windows")]
     public static class SettingsSaver
     {
         public static void SaveSettings(Control quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, MultiSshToolStrip multiSshToolStrip, FrmMain frmMain)

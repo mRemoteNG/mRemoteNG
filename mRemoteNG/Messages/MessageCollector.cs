@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Messages
 {
+    [SupportedOSPlatform("windows")]
     public class MessageCollector : INotifyCollectionChanged
     {
         private readonly IList<IMessage> _messageList;
@@ -44,19 +46,13 @@ namespace mRemoteNG.Messages
                 RaiseCollectionChangedEvent(NotifyCollectionChangedAction.Add, newMessages);
         }
 
-        public void AddExceptionMessage(string message,
-                                        Exception ex,
-                                        MessageClass msgClass = MessageClass.ErrorMsg,
-                                        bool logOnly = true)
+        public void AddExceptionMessage(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = true)
         {
             AddMessage(msgClass, message + Environment.NewLine + Tools.MiscTools.GetExceptionMessageRecursive(ex),
                        logOnly);
         }
 
-        public void AddExceptionStackTrace(string message,
-                                           Exception ex,
-                                           MessageClass msgClass = MessageClass.ErrorMsg,
-                                           bool logOnly = true)
+        public void AddExceptionStackTrace(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = true)
         {
             AddMessage(msgClass, message + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace,
                        logOnly);

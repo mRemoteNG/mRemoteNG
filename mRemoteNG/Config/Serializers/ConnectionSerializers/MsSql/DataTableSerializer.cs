@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Security;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -12,6 +13,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
 {
+    [SupportedOSPlatform("windows")]
     public class DataTableSerializer : ISerializer<ConnectionInfo, DataTable>
     {
         public readonly int DELETE = 0;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 using mRemoteNG.Resources.Language;
@@ -8,6 +9,7 @@ namespace mRemoteNG.Config.DataProviders
 {
     public class FileBackupCreator
     {
+        [SupportedOSPlatform("windows")]
         public void CreateBackupFile(string fileName)
         {
             try

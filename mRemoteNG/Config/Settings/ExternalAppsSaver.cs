@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Xml;
 using mRemoteNG.App;
@@ -9,6 +10,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Settings
 {
+    [SupportedOSPlatform("windows")]
     public class ExternalAppsSaver
     {
         public void Save(IEnumerable<ExternalTool> externalTools)

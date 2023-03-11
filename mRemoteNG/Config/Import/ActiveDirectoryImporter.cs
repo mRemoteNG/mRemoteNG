@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Container;
@@ -7,6 +8,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Import
 {
+    [SupportedOSPlatform("windows")]
     public class ActiveDirectoryImporter : IConnectionImporter<string>
     {
         public void Import(string ldapPath, ContainerInfo destinationContainer)

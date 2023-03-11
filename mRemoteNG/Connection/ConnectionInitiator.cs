@@ -78,8 +78,7 @@ namespace mRemoteNG.Connection
 
                 if (connectionInfo.Hostname == "" && connectionInfo.Protocol != ProtocolType.IntApp)
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                        Language.ConnectionOpenFailedNoHostname);
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.ConnectionOpenFailedNoHostname);
                     return;
                 }
 
@@ -108,8 +107,7 @@ namespace mRemoteNG.Connection
                     connectionInfoSshTunnel = getSSHConnectionInfoByName(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes, connectionInfoOriginal.SSHTunnelConnectionName);
                     if (connectionInfoSshTunnel == null)
                     {
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                            string.Format(Language.SshTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SSHTunnelConnectionName));
+                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.SshTunnelConfigProblem, connectionInfoOriginal.Name, connectionInfoOriginal.SSHTunnelConnectionName));
                         return;
                     }
                     Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,

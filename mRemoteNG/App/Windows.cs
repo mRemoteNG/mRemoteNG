@@ -1,5 +1,6 @@
 ﻿#region Usings
 using System;
+using System.Runtime.Versioning;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
@@ -8,6 +9,7 @@ using mRemoteNG.UI.Window;
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     public static class Windows
     {
         private static ActiveDirectoryImportWindow _adimportForm;

@@ -4,9 +4,11 @@ using MSTSCLib;
 using System;
 using System.Windows.Forms;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
+    [SupportedOSPlatform("windows")]
     public class RdpProtocol7 : RdpProtocol6
     {
         protected override RdpVersion RdpProtocolVersion => RdpVersion.Rdc7;

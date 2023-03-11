@@ -8,9 +8,11 @@ using mRemoteNG.Messages;
 using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection.Protocol
 {
+    [SupportedOSPlatform("windows")]
     public class IntegratedProgram : ProtocolBase
     {
         #region Private Fields

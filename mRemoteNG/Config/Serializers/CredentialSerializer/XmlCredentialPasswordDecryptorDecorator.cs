@@ -44,9 +44,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             return xdoc.ToString();
         }
 
-        private void DecryptAuthHeader(XElement rootElement,
-                                       ICryptographyProvider cryptographyProvider,
-                                       SecureString key)
+        private void DecryptAuthHeader(XElement rootElement, ICryptographyProvider cryptographyProvider, SecureString key)
         {
             var authAttribute = rootElement.Attribute("Auth");
             if (authAttribute == null)

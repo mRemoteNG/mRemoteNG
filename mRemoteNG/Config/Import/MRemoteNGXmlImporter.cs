@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
@@ -9,6 +10,7 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Config.Import
 {
+    [SupportedOSPlatform("windows")]
     // ReSharper disable once InconsistentNaming
     public class MRemoteNGXmlImporter : IConnectionImporter<string>
     {

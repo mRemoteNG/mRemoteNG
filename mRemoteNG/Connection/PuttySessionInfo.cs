@@ -7,10 +7,11 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
-
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection
 {
+    [SupportedOSPlatform("windows")]
     public sealed class PuttySessionInfo : ConnectionInfo, IComponent
     {
         #region Properties

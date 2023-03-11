@@ -18,9 +18,11 @@ using mRemoteNG.Properties;
 using mRemoteNG.Tree;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.Tree.Root;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection
 {
+    [SupportedOSPlatform("windows")]
     [DefaultProperty("Name")]
     public class ConnectionInfo : AbstractConnectionRecord, IHasParent, IInheritable
     {
@@ -215,8 +217,7 @@ namespace mRemoteNG.Connection
         {
             var inheritType = Inheritance.GetType();
             var inheritPropertyInfo = inheritType.GetProperty(propertyName);
-            var inheritPropertyValue = inheritPropertyInfo != null &&
-                                       Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, null));
+            var inheritPropertyValue = inheritPropertyInfo != null && Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, null));
             return inheritPropertyValue;
         }
 
@@ -236,9 +237,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception e)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                    $"Error retrieving inherited property '{propertyName}'", e
-                );
+                Runtime.MessageCollector.AddExceptionStackTrace($"Error retrieving inherited property '{propertyName}'", e);
                 inheritedValue = default(TPropertyType);
                 return false;
             }

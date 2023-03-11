@@ -41,9 +41,7 @@ namespace mRemoteNG.Connection
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
-                                                    $"Couldn\'t get Icon from String" + Environment.NewLine +
-                                                    ex.Message);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, $"Couldn\'t get Icon from String" + Environment.NewLine + ex.Message);
             }
 
             return null;

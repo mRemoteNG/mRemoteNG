@@ -4,9 +4,11 @@ using System.ComponentModel;
 using mRemoteNG.Connection;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Properties;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Connections
 {
+    [SupportedOSPlatform("windows")]
     public class SaveConnectionsOnEdit
     {
         private readonly ConnectionsService _connectionsService;

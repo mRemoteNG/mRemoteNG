@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Runtime.Versioning;
 using mRemoteNG.Properties;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     [Serializable]
     public sealed class SupportedCultures : Dictionary<string, string>
     {

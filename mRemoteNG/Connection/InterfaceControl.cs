@@ -5,10 +5,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.UI.Tabs;
 using WeifenLuo.WinFormsUI.Docking;
-
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection
 {
+    [SupportedOSPlatform("windows")]
     public sealed partial class InterfaceControl
     {
         public ProtocolBase Protocol { get; set; }

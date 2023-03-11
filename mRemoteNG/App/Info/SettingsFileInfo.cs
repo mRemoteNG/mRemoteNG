@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.Connection;
 
 namespace mRemoteNG.App.Info
 {
+    [SupportedOSPlatform("windows")]
     public static class SettingsFileInfo
     {
         private static readonly string ExePath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConnectionInfo))?.Location);

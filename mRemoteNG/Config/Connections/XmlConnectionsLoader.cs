@@ -5,9 +5,11 @@ using System;
 using System.IO;
 using System.Security;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Connections
 {
+    [SupportedOSPlatform("windows")]
     public class XmlConnectionsLoader : IConnectionsLoader
     {
         private readonly string _connectionFilePath;

@@ -6,9 +6,11 @@ using mRemoteNG.App;
 using mRemoteNG.Messages;
 using MSTSCLib;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
+    [SupportedOSPlatform("windows")]
     /* RDP v8 requires Windows 7 with:
 		* https://support.microsoft.com/en-us/kb/2592687 
 		* OR

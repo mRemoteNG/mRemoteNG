@@ -1,11 +1,13 @@
 ﻿using mRemoteNG.App;
 using System;
+using System.Runtime.Versioning;
 using System.Timers;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
 namespace mRemoteNG.Config.Connections.Multiuser
 {
+    [SupportedOSPlatform("windows")]
     public class RemoteConnectionsSyncronizer : IConnectionsUpdateChecker
     {
         private readonly System.Timers.Timer _updateTimer;

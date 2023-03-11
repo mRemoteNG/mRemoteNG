@@ -2,9 +2,11 @@
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using System;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
+    [SupportedOSPlatform("windows")]
     public class SqlVersion22To23Upgrader : IVersionUpgrader
     {
         private readonly IDatabaseConnector _databaseConnector;
@@ -24,8 +26,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public Version Upgrade()
         {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                "Upgrading database from version 2.2 to version 2.3.");
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.2 to version 2.3.");
             const string sqlText = @"
 ALTER TABLE tblCons
 ADD EnableFontSmoothing bit NOT NULL DEFAULT 0,

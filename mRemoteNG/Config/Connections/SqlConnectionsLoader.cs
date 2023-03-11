@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Security;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
@@ -17,6 +18,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Connections
 {
+    [SupportedOSPlatform("windows")]
     public class SqlConnectionsLoader : IConnectionsLoader
     {
         private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>>

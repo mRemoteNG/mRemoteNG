@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -12,6 +13,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
+    [SupportedOSPlatform("windows")]
     public class XmlConnectionsSerializer : ISerializer<ConnectionTreeModel, string>,
                                             ISerializer<ConnectionInfo, string>
     {

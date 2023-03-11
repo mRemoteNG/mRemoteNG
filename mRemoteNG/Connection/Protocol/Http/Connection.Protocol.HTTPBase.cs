@@ -5,10 +5,11 @@ using mRemoteNG.Tools;
 using mRemoteNG.App;
 using mRemoteNG.UI.Tabs;
 using mRemoteNG.Resources.Language;
-
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection.Protocol.Http
 {
+    [SupportedOSPlatform("windows")]
     public class HTTPBase : ProtocolBase
     {
         #region Private Properties

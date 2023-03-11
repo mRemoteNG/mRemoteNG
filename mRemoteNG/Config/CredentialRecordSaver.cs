@@ -13,8 +13,7 @@ namespace mRemoteNG.Config
         private readonly IDataProvider<string> _dataProvider;
         private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _serializer;
 
-        public CredentialRecordSaver(IDataProvider<string> dataProvider,
-                                     ISecureSerializer<IEnumerable<ICredentialRecord>, string> serializer)
+        public CredentialRecordSaver(IDataProvider<string> dataProvider, ISecureSerializer<IEnumerable<ICredentialRecord>, string> serializer)
         {
             if (dataProvider == null)
                 throw new ArgumentNullException(nameof(dataProvider));

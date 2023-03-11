@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Csv;
@@ -8,6 +9,7 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Config.Import
 {
+    [SupportedOSPlatform("windows")]
     public class MRemoteNGCsvImporter : IConnectionImporter<string>
     {
         public void Import(string filePath, ContainerInfo destinationContainer)

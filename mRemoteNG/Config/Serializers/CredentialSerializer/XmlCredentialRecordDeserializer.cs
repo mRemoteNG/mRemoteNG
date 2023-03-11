@@ -34,8 +34,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
         {
             var docSchemaVersion = rootElement?.Attribute("SchemaVersion")?.Value;
             if (docSchemaVersion != SchemaVersion)
-                throw new Exception(
-                                    $"The schema version of this document is not supported by this class. Document Version: {docSchemaVersion} Supported Version: {SchemaVersion}");
+                throw new Exception($"The schema version of this document is not supported by this class. Document Version: {docSchemaVersion} Supported Version: {SchemaVersion}");
         }
     }
 }

@@ -1,5 +1,8 @@
-﻿namespace mRemoteNG.Config.DataProviders
+﻿using System.Runtime.Versioning;
+
+namespace mRemoteNG.Config.DataProviders
 {
+    [SupportedOSPlatform("windows")]
     public class FileDataProviderWithRollingBackup : FileDataProvider
     {
         private readonly FileBackupCreator _fileBackupCreator;

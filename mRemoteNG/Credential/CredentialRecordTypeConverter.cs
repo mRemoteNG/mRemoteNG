@@ -2,30 +2,26 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 
 
 namespace mRemoteNG.Credential
 {
+    [SupportedOSPlatform("windows")]
     public class CredentialRecordTypeConverter : TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof(Guid) ||
-                   base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(Guid) || base.CanConvertFrom(context, sourceType);
         }
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            return destinationType == typeof(Guid) ||
-                   destinationType == typeof(ICredentialRecord) ||
-                   base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(Guid) || destinationType == typeof(ICredentialRecord) || base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context,
-                                         CultureInfo culture,
-                                         object value,
-                                         Type destinationType)
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (value is ICredentialRecord && destinationType == typeof(Guid))
                 return ((ICredentialRecord)value).Id;

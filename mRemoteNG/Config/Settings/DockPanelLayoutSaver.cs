@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.DataProviders;
@@ -9,6 +10,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Config.Settings
 {
+    [SupportedOSPlatform("windows")]
     public class DockPanelLayoutSaver
     {
         private readonly ISerializer<DockPanel, string> _dockPanelSerializer;

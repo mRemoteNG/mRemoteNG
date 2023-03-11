@@ -9,9 +9,11 @@ using System;
 using mRemoteNG.Connection.Protocol.PowerShell;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection.Protocol
 {
+    [SupportedOSPlatform("windows")]
     public class ProtocolFactory
     {
         private readonly RdpProtocolFactory _rdpProtocolFactory = new RdpProtocolFactory();

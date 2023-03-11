@@ -11,10 +11,11 @@ using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
-
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Settings
 {
+    [SupportedOSPlatform("windows")]
     public class SettingsLoader
     {
         private readonly ExternalAppsLoader _externalAppsLoader;

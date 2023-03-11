@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Csv;
@@ -7,6 +8,7 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Connections
 {
+    [SupportedOSPlatform("windows")]
     public class CsvConnectionsSaver : ISaver<ConnectionTreeModel>
     {
         private readonly string _connectionFileName;

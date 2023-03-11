@@ -29,9 +29,7 @@ namespace mRemoteNG.Config.Serializers
             _rootNodeInfo = rootNodeInfo;
         }
 
-        public XmlConnectionsDecryptor(BlockCipherEngines blockCipherEngine,
-                                       BlockCipherModes blockCipherMode,
-                                       RootNodeInfo rootNodeInfo)
+        public XmlConnectionsDecryptor(BlockCipherEngines blockCipherEngine, BlockCipherModes blockCipherMode, RootNodeInfo rootNodeInfo)
         {
             _cryptographyProvider = new CryptoProviderFactory(blockCipherEngine, blockCipherMode).Build();
             _rootNodeInfo = rootNodeInfo;
@@ -54,8 +52,7 @@ namespace mRemoteNG.Config.Serializers
 
             try
             {
-                decryptedContent =
-                    _cryptographyProvider.Decrypt(xml, _rootNodeInfo.PasswordString.ConvertToSecureString());
+                decryptedContent = _cryptographyProvider.Decrypt(xml, _rootNodeInfo.PasswordString.ConvertToSecureString());
                 notDecr = decryptedContent == xml;
             }
             catch (Exception)
@@ -88,17 +85,13 @@ namespace mRemoteNG.Config.Serializers
             var connectionsFileIsNotEncrypted = false;
             try
             {
-                connectionsFileIsNotEncrypted =
-                    _cryptographyProvider.Decrypt(protectedString,
-                                                  _rootNodeInfo.PasswordString.ConvertToSecureString()) ==
-                    "ThisIsNotProtected";
+                connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()) == "ThisIsNotProtected";
             }
             catch (EncryptionException)
             {
             }
 
-            return connectionsFileIsNotEncrypted ||
-                   Authenticate(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString());
+            return connectionsFileIsNotEncrypted || Authenticate(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString());
         }
 
         private bool Authenticate(string cipherText, SecureString password)

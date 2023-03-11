@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using mRemoteNG.Properties;
 
 // ReSharper disable InconsistentNaming
 
 namespace mRemoteNG.App.Info
 {
+    [SupportedOSPlatform("windows")]
     public static class UpdateChannelInfo
     {
         public const string STABLE = "Stable";

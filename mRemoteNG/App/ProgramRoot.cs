@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
@@ -9,6 +10,7 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     public static class ProgramRoot
     {
         private static Mutex _mutex;

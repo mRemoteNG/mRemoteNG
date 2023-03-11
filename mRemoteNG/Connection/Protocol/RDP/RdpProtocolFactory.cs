@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
+    [SupportedOSPlatform("windows")]
     public class RdpProtocolFactory
     {
         public RdpProtocol6 Build(RdpVersion rdpVersion)

@@ -12,9 +12,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
         private readonly ISerializer<IEnumerable<ICredentialRecord>, string> _baseSerializer;
         private readonly ICryptographyProvider _cryptographyProvider;
 
-        public XmlCredentialPasswordEncryptorDecorator(ICryptographyProvider cryptographyProvider,
-                                                       ISerializer<IEnumerable<ICredentialRecord>, string>
-                                                           baseSerializer)
+        public XmlCredentialPasswordEncryptorDecorator(ICryptographyProvider cryptographyProvider, ISerializer<IEnumerable<ICredentialRecord>, string> baseSerializer)
         {
             if (baseSerializer == null)
                 throw new ArgumentNullException(nameof(baseSerializer));
@@ -56,9 +54,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             xdoc.Root?.SetAttributeValue("EncryptionEngine", _cryptographyProvider.CipherEngine);
             xdoc.Root?.SetAttributeValue("BlockCipherMode", _cryptographyProvider.CipherMode);
             xdoc.Root?.SetAttributeValue("KdfIterations", _cryptographyProvider.KeyDerivationIterations);
-            xdoc.Root?.SetAttributeValue("Auth",
-                                         _cryptographyProvider.Encrypt(RandomGenerator.RandomString(20),
-                                                                       encryptionKey));
+            xdoc.Root?.SetAttributeValue("Auth", _cryptographyProvider.Encrypt(RandomGenerator.RandomString(20), encryptionKey));
         }
     }
 }

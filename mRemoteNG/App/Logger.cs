@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using log4net;
 using log4net.Appender;
@@ -11,6 +12,7 @@ using mRemoteNG.Properties;
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     public class Logger
     {
         public static readonly Logger Instance = new Logger();

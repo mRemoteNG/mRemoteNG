@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Runtime.Versioning;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 
@@ -8,6 +9,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Putty
 {
+    [SupportedOSPlatform("windows")]
     public class PuttySessionsManager
     {
         public static PuttySessionsManager Instance { get; } = new PuttySessionsManager();

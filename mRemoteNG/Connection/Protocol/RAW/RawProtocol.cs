@@ -1,5 +1,8 @@
+﻿using System.Runtime.Versioning;
+
 namespace mRemoteNG.Connection.Protocol.RAW
 {
+    [SupportedOSPlatform("windows")]
     public class RawProtocol : PuttyBase
     {
         public RawProtocol()

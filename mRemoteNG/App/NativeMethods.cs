@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Text;
 
 #pragma warning disable 649
@@ -9,6 +10,7 @@ using System.Text;
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     public static class NativeMethods
     {
         #region Functions

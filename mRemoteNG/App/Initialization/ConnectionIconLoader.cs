@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 
 
 namespace mRemoteNG.App.Initialization
 {
+    [SupportedOSPlatform("windows")]
     public class ConnectionIconLoader
     {
         private readonly string _path;

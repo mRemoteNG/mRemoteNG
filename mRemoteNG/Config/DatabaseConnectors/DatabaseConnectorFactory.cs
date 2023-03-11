@@ -1,9 +1,11 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.Properties;
 using mRemoteNG.Security.SymmetricEncryption;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.DatabaseConnectors
 {
+    [SupportedOSPlatform("windows")]
     public class DatabaseConnectorFactory
     {
         public static IDatabaseConnector DatabaseConnectorFromSettings()

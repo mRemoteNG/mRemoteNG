@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
@@ -18,6 +19,7 @@ using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
+    [SupportedOSPlatform("windows")]
     public class Startup
     {
         private AppUpdater _appUpdate;

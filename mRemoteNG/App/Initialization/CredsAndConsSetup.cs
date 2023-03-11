@@ -1,9 +1,11 @@
 ﻿using System.IO;
+using System.Runtime.Versioning;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Properties;
 
 namespace mRemoteNG.App.Initialization
 {
+    [SupportedOSPlatform("windows")]
     public class CredsAndConsSetup
     {
         public void LoadCredsAndCons()

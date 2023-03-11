@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using mRemoteNG.Messages.MessageFilteringOptions;
@@ -9,6 +10,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.Messages.WriterDecorators
 {
+    [SupportedOSPlatform("windows")]
     public class MessageFocusDecorator : IMessageWriter
     {
         private readonly IMessageTypeFilteringOptions _filter;
@@ -16,9 +18,7 @@ namespace mRemoteNG.Messages.WriterDecorators
         private readonly ErrorAndInfoWindow _messageWindow;
         private readonly FrmMain _frmMain = FrmMain.Default;
 
-        public MessageFocusDecorator(ErrorAndInfoWindow messageWindow,
-                                     IMessageTypeFilteringOptions filter,
-                                     IMessageWriter decoratedWriter)
+        public MessageFocusDecorator(ErrorAndInfoWindow messageWindow, IMessageTypeFilteringOptions filter, IMessageWriter decoratedWriter)
         {
             _filter = filter ?? throw new ArgumentNullException(nameof(filter));
             _messageWindow = messageWindow ?? throw new ArgumentNullException(nameof(messageWindow));

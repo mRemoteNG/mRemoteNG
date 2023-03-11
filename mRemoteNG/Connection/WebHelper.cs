@@ -1,9 +1,11 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Connection
 {
+    [SupportedOSPlatform("windows")]
     public class WebHelper
     {
         public static void GoToUrl(string url)

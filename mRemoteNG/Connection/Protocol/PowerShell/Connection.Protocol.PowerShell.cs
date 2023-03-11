@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
@@ -7,6 +8,7 @@ using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.PowerShell
 {
+    [SupportedOSPlatform("windows")]
     public class ProtocolPowerShell : ProtocolBase
     {
         #region Private Fields
@@ -28,8 +30,7 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
         {
             try
             {
-                Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg,
-                                                     "Attempting to start remote PowerShell session.", true);
+                Runtime.MessageCollector?.AddMessage(MessageClass.InformationMsg, "Attempting to start remote PowerShell session.", true);
 
                 _consoleControl = new ConsoleControl.ConsoleControl
                 {

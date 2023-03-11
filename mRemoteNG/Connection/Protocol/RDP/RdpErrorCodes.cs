@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Resources.Language;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
+    [SupportedOSPlatform("windows")]
     public static class RdpErrorCodes
     {
         private static Hashtable _description;

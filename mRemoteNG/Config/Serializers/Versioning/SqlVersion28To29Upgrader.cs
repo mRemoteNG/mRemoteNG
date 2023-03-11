@@ -3,9 +3,11 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using System;
 using System.Data.Common;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
+    [SupportedOSPlatform("windows")]
     public class SqlVersion28To29Upgrader : IVersionUpgrader
     {
         private readonly Version version = new Version(2, 9);

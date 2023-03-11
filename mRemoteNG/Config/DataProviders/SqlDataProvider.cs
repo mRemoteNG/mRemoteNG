@@ -5,9 +5,11 @@ using mRemoteNG.App;
 using mRemoteNG.Properties;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.DataProviders
 {
+    [SupportedOSPlatform("windows")]
     public class SqlDataProvider : IDataProvider<DataTable>
     {
         public IDatabaseConnector DatabaseConnector { get; }

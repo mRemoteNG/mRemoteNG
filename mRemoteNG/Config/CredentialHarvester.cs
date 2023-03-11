@@ -38,9 +38,7 @@ namespace mRemoteNG.Config
 
                 if (ConnectionToCredentialMap.Values.Contains(newCredential, _credentialComparer))
                 {
-                    var existingCredential =
-                        ConnectionToCredentialMap.Values.First(record =>
-                                                                   _credentialComparer.Equals(newCredential, record));
+                    var existingCredential = ConnectionToCredentialMap.Values.First(record => _credentialComparer.Equals(newCredential, record));
                     ConnectionToCredentialMap.Add(connectionId, existingCredential);
                 }
                 else
@@ -50,17 +48,14 @@ namespace mRemoteNG.Config
             return ConnectionToCredentialMap.Values.Distinct(_credentialComparer);
         }
 
-        private ICredentialRecord BuildCredential(XElement element,
-                                                  ICryptographyProvider cryptographyProvider,
-                                                  SecureString decryptionKey)
+        private ICredentialRecord BuildCredential(XElement element, ICryptographyProvider cryptographyProvider, SecureString decryptionKey)
         {
             var credential = new CredentialRecord
             {
                 Title = $"{element.Attribute("Username")?.Value}\\{element.Attribute("Domain")?.Value}",
                 Username = element.Attribute("Username")?.Value,
                 Domain = element.Attribute("Domain")?.Value,
-                Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey)
-                                               .ConvertToSecureString()
+                Password = cryptographyProvider.Decrypt(element.Attribute("Password")?.Value, decryptionKey).ConvertToSecureString()
             };
             return credential;
         }

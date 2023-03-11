@@ -8,9 +8,11 @@ using mRemoteNG.Security.Factories;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Properties;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Connections
 {
+    [SupportedOSPlatform("windows")]
     public class XmlConnectionsSaver : ISaver<ConnectionTreeModel>
     {
         private readonly string _connectionFileName;

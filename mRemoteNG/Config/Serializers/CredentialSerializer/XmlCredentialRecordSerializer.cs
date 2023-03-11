@@ -22,9 +22,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
                                                                       new XAttribute("Title", r.Title),
                                                                       new XAttribute("Username", r.Username),
                                                                       new XAttribute("Domain", r.Domain),
-                                                                      new XAttribute("Password",
-                                                                                     r.Password
-                                                                                      .ConvertToUnsecureString())
+                                                                      new XAttribute("Password", r.Password.ConvertToUnsecureString())
                                                                      )
                                                  )
                                     )

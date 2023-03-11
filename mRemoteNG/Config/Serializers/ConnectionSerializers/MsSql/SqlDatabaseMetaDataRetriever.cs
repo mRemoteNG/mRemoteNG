@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Common;
 using System.Globalization;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.DatabaseConnectors;
@@ -12,6 +13,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
 {
+    [SupportedOSPlatform("windows")]
     public class SqlDatabaseMetaDataRetriever
     {
         public SqlConnectionListMetaData GetDatabaseMetaData(IDatabaseConnector databaseConnector)

@@ -7,18 +7,18 @@ using System.Xml;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Controls;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Settings
 {
+    [SupportedOSPlatform("windows")]
     public class ExternalAppsLoader
     {
         private readonly FrmMain _mainForm;
         private readonly MessageCollector _messageCollector;
         private readonly ExternalToolsToolStrip _externalToolsToolStrip;
 
-        public ExternalAppsLoader(FrmMain mainForm,
-                                  MessageCollector messageCollector,
-                                  ExternalToolsToolStrip externalToolsToolStrip)
+        public ExternalAppsLoader(FrmMain mainForm, MessageCollector messageCollector, ExternalToolsToolStrip externalToolsToolStrip)
         {
             if (mainForm == null)
                 throw new ArgumentNullException(nameof(mainForm));
@@ -57,15 +57,13 @@ namespace mRemoteNG.Config.Settings
 #endif
             else
             {
-                _messageCollector.AddMessage(MessageClass.WarningMsg,
-                                             "Loading External Apps failed: Could not FIND file!");
+                _messageCollector.AddMessage(MessageClass.WarningMsg, "Loading External Apps failed: Could not FIND file!");
                 return;
             }
 
             if (xDom.DocumentElement == null)
             {
-                _messageCollector.AddMessage(MessageClass.WarningMsg,
-                                             "Loading External Apps failed: Could not LOAD file!");
+                _messageCollector.AddMessage(MessageClass.WarningMsg, "Loading External Apps failed: Could not LOAD file!");
                 return;
             }
 

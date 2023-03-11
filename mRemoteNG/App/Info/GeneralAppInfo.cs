@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Versioning;
 using System.Threading;
 using System.Windows.Forms;
 using static System.Environment;
@@ -9,6 +10,7 @@ using static System.Environment;
 
 namespace mRemoteNG.App.Info
 {
+    [SupportedOSPlatform("windows")]
     public static class GeneralAppInfo
     {
         public const string UrlHome = "https://www.mremoteng.org";

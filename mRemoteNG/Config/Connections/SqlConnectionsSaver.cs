@@ -19,10 +19,12 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
 using mRemoteNG.Properties;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Connections
 {
-	public class SqlConnectionsSaver : ISaver<ConnectionTreeModel>
+    [SupportedOSPlatform("windows")]
+    public class SqlConnectionsSaver : ISaver<ConnectionTreeModel>
     {
         private readonly SaveFilter _saveFilter;
         private readonly ISerializer<IEnumerable<LocalConnectionPropertiesModel>, string> _localPropertiesSerializer;

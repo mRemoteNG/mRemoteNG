@@ -1,5 +1,8 @@
+﻿using System.Runtime.Versioning;
+
 namespace mRemoteNG.Connection.Protocol.Serial
 {
+    [SupportedOSPlatform("windows")]
     public class ProtocolSerial : PuttyBase
     {
         public ProtocolSerial()

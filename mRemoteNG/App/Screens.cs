@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Runtime.Versioning;
+using System.Windows.Forms;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -6,6 +7,7 @@ namespace mRemoteNG.App
 {
     public static class Screens
     {
+        [SupportedOSPlatform("windows")]
         public static void SendFormToScreen(Screen screen)
         {
             var frmMain = FrmMain.Default;

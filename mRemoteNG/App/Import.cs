@@ -8,10 +8,12 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.App
 {
-	public static class Import
+    [SupportedOSPlatform("windows")]
+    public static class Import
     {
         public static void ImportFromFile(ContainerInfo importDestinationContainer)
         {

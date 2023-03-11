@@ -1,11 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 
 namespace mRemoteNG.Config.DataProviders
 {
+    [SupportedOSPlatform("windows")]
     public class FileDataProvider : IDataProvider<string>
     {
+        [SupportedOSPlatform("windows")]
         public string FilePath { get; set; }
 
         public FileDataProvider(string filePath)

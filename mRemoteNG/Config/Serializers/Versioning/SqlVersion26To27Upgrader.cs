@@ -3,9 +3,11 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using System;
 using System.Data.SqlClient;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
+    [SupportedOSPlatform("windows")]
     public class SqlVersion26To27Upgrader : IVersionUpgrader
     {
         private readonly IDatabaseConnector _databaseConnector;

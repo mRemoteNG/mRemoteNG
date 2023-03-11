@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Runtime.Versioning;
 using mRemoteNG.App;
 
 
 namespace mRemoteNG.Connection
 {
+    [SupportedOSPlatform("windows")]
     public class DefaultConnectionInfo : ConnectionInfo
     {
         [Browsable(false)]

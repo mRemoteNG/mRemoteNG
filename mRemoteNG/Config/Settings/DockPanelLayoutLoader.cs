@@ -6,9 +6,11 @@ using System;
 using System.IO;
 using mRemoteNG.Messages;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Settings
 {
+    [SupportedOSPlatform("windows")]
     public class DockPanelLayoutLoader
     {
         private readonly FrmMain _mainForm;

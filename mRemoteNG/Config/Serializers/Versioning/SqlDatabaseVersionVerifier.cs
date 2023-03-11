@@ -4,9 +4,11 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Messages;
 using mRemoteNG.Resources.Language;
 using System;
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.Serializers.Versioning
 {
+    [SupportedOSPlatform("windows")]
     public class SqlDatabaseVersionVerifier
     {
         protected readonly Version currentSupportedVersion = new Version(2, 9);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.App;
@@ -9,6 +10,7 @@ using mRemoteNG.Security;
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
     // ReSharper disable once InconsistentNaming
+    [SupportedOSPlatform("windows")]
     public class XmlConnectionNodeSerializer27 : ISerializer<ConnectionInfo, XElement>
     {
         private readonly ICryptographyProvider _cryptographyProvider;
