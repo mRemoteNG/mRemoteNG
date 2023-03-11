@@ -1,5 +1,8 @@
-﻿namespace mRemoteNG.App.Info
+﻿using System.Runtime.Versioning;
+
+namespace mRemoteNG.App.Info
 {
+    [SupportedOSPlatform("windows")]
     public class CredentialsFileInfo
     {
         public static readonly string CredentialsPath = SettingsFileInfo.SettingsPath;

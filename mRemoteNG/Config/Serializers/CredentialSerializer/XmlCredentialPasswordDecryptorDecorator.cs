@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Credential;
@@ -8,6 +9,7 @@ using mRemoteNG.Security.Factories;
 
 namespace mRemoteNG.Config.Serializers.CredentialSerializer
 {
+    [SupportedOSPlatform("windows")]
     public class XmlCredentialPasswordDecryptorDecorator : ISecureDeserializer<string, IEnumerable<ICredentialRecord>>
     {
         private readonly IDeserializer<string, IEnumerable<ICredentialRecord>> _baseDeserializer;

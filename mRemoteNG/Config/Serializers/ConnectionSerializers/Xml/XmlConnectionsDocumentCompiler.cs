@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Connection;
@@ -10,6 +11,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
+    [SupportedOSPlatform("windows")]
     public class XmlConnectionsDocumentCompiler
     {
         private readonly ICryptographyProvider _cryptographyProvider;

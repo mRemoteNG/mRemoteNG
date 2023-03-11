@@ -25,10 +25,7 @@ namespace mRemoteNG.Themes
 
     public class MremoteDockPaneStripFactory : DockPanelExtender.IDockPaneStripFactory
     {
-        public DockPaneStripBase CreateDockPaneStrip(DockPane pane)
-        {
-            return new DockPaneStripNG(pane);
-        }
+        public DockPaneStripBase CreateDockPaneStrip(DockPane pane) => new DockPaneStripNG(pane);
     }
 
     public class MremoteFloatWindowFactory : DockPanelExtender.IFloatWindowFactory

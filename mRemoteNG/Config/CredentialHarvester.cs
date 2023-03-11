@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Xml.Linq;
 using mRemoteNG.Credential;
@@ -9,6 +10,7 @@ using mRemoteNG.Security.Factories;
 
 namespace mRemoteNG.Config
 {
+    [SupportedOSPlatform("windows")]
     public class CredentialHarvester
     {
         private readonly IEqualityComparer<ICredentialRecord> _credentialComparer = new CredentialDomainUserComparer();

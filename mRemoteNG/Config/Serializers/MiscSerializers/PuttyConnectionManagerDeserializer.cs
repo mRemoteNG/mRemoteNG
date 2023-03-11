@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Versioning;
 using System.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -9,6 +10,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
+    [SupportedOSPlatform("windows")]
     public class PuttyConnectionManagerDeserializer : IDeserializer<string, ConnectionTreeModel>
     {
         public ConnectionTreeModel Deserialize(string puttycmConnectionsXml)

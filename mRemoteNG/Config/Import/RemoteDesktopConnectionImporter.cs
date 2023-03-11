@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Container;
@@ -7,6 +8,7 @@ using mRemoteNG.Container;
 
 namespace mRemoteNG.Config.Import
 {
+    [SupportedOSPlatform("windows")]
     public class RemoteDesktopConnectionImporter : IConnectionImporter<string>
     {
         public void Import(string fileName, ContainerInfo destinationContainer)

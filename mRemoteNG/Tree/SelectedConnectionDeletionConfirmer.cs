@@ -3,10 +3,11 @@ using mRemoteNG.Container;
 using System;
 using System.Windows.Forms;
 using mRemoteNG.Resources.Language;
-
+using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tree
 {
+    [SupportedOSPlatform("windows")]
     public class SelectedConnectionDeletionConfirmer : IConfirm<ConnectionInfo>
     {
         private readonly Func<string, DialogResult> _confirmationFunc;

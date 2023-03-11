@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Versioning;
 using System.Security;
 using mRemoteNG.Security;
 using mRemoteNG.Security.Authentication;
@@ -9,6 +10,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
+    [SupportedOSPlatform("windows")]
     public class XmlConnectionsDecryptor
     {
         private readonly ICryptographyProvider _cryptographyProvider;

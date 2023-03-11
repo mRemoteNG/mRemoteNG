@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using System.Xml.Linq;
 using mRemoteNG.Config;
 using mRemoteNG.Config.DataProviders;
@@ -7,6 +8,7 @@ using mRemoteNG.Config.Serializers;
 
 namespace mRemoteNG.Credential.Repositories
 {
+    [SupportedOSPlatform("windows")]
     public class XmlCredentialRepositoryFactory
     {
         private readonly ISecureSerializer<IEnumerable<ICredentialRecord>, string> _serializer;
