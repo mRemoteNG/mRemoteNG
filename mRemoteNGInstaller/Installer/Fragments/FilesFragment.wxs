@@ -48,9 +48,6 @@
             <Component Id="cmp9A3B2D379B0CE7EDEFF2F82ABE850DF3" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil87F50FF5306E148144A953F7C1056119" KeyPath="yes" Source="$(var.HarvestPath)\Castle.Core.dll" />
             </Component>
-            <Component Id="cmp9F9E216FB087423D125BF6F2160EA82B" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil38784B62B92BF5A8474A2B08BB4511AF" KeyPath="yes" Source="$(var.HarvestPath)\comerr64.dll" />
-            </Component>
             <Component Id="cmpADE94032AA8563E1E37003C8AB2D8F7E" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil6BA5B21301D77ADAE00F1DA02BFE8584" KeyPath="yes" Source="$(var.HarvestPath)\ConsoleControl.dll" />
             </Component>
@@ -69,9 +66,6 @@
             <Component Id="cmp19EC39A721B3368567C267C98B3A70BF" Directory="INSTALLDIR" Guid="*">
                 <File Id="filF4F0A4E8F055AEBFE89D956290E642D9" KeyPath="yes" Source="$(var.HarvestPath)\Google.Protobuf.dll" />
             </Component>
-            <Component Id="cmpAD73BE185387B3F278017F5AE4F0EBF3" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil14E9D904063D2BAFA70FD6B7073FD008" KeyPath="yes" Source="$(var.HarvestPath)\gssapi64.dll" />
-            </Component>
             <Component Id="cmp3B87E05C275CE85388D030CC01BF1E20" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil3FCEFF3CAE083B7927D5D4E4B0218A88" KeyPath="yes" Source="$(var.HarvestPath)\Interop.MSTSCLib.dll" />
             </Component>
@@ -83,15 +77,6 @@
             </Component>
             <Component Id="cmp9F2B7587D0DBBAE60FACF8282508F693" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil7A31D991E2C50622F9B19BE8FF45FCF0" KeyPath="yes" Source="$(var.HarvestPath)\K4os.Hash.xxHash.dll" />
-            </Component>
-            <Component Id="cmp3DEAB024371C408DF9D7FC1274163400" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil0A62857EE4D202DC5BFF90C099E52743" KeyPath="yes" Source="$(var.HarvestPath)\k5sprt64.dll" />
-            </Component>
-            <Component Id="cmpE874DBD4A90E93FF29E891E406E91B6E" Directory="INSTALLDIR" Guid="*">
-                <File Id="filF722A3D3275D2F59D0BEA98064F8F5A6" KeyPath="yes" Source="$(var.HarvestPath)\krb5_64.dll" />
-            </Component>
-            <Component Id="cmp30C9CA804C4E97992E830C00639DD3B4" Directory="INSTALLDIR" Guid="*">
-                <File Id="filEC0009EDDFED7DE5316A6096F885D827" KeyPath="yes" Source="$(var.HarvestPath)\krbcc64.dll" />
             </Component>
             <Component Id="cmp375F226751B298CD70903C1646985757" Directory="INSTALLDIR" Guid="*">
                 <File Id="filBF38EEDD7B5695007E9582D7EF347826" KeyPath="yes" Source="$(var.HarvestPath)\log4net.config" />
@@ -119,9 +104,6 @@
             </Component>
             <Component Id="cmp6107C12C2A55CB8E7E97FF2C9A33F385" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil135F9AEEB4A74E1EE438100986E97C41" KeyPath="yes" Source="$(var.HarvestPath)\Microsoft.Xaml.Behaviors.dll" />
-            </Component>
-            <Component Id="cmp6D79B55FE813E3B9698C5EC94C61A3ED" Directory="INSTALLDIR" Guid="*">
-                <File Id="filEAE7ACD0CC39325A589F2853F7C77C6A" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG-Installer-1.77.3 (Nightly Build 1824).msi" />
             </Component>
             <Component Id="cmp41D33384103998013724F7507BE537A3" Directory="INSTALLDIR" Guid="*">
                 <File Id="filD409F3953DFE64FEE2FDC4460BD98297" KeyPath="yes" Source="$(var.HarvestPath)\mRemoteNG.deps.json" />
@@ -203,9 +185,6 @@
             </Component>
             <Component Id="cmpCB1387F6E09FEBEA8084E857787F33EA" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil09E77F330B2D23A6F306099688F7A9C3" KeyPath="yes" Source="$(var.HarvestPath)\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll" />
-            </Component>
-            <Component Id="cmp643F6BC02D559138788B66788747B74E" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil9987BED6E61406EB6AADC003B6E8A6B9" KeyPath="yes" Source="$(var.HarvestPath)\ZstdNet.dll" />
             </Component>
             <Component Id="cmp46A31C5C8F6C32D00394B76FC10B878C" Directory="dir82972532CA27BEF6B972C3A142E19BC1" Guid="*">
                 <File Id="fil1BBD62B8CC672D965BD8B093F72F7E70" KeyPath="yes" Source="$(var.HarvestPath)\cs-CZ\mRemoteNG.resources.dll" />
@@ -404,6 +383,21 @@
             </Component>
             <Component Id="cmpBBD0399A2C7020A0BFFB886996B79169" Directory="dir8DE1CAE5F6B03F7A6BAE17D4E78639BA" Guid="*">
                 <File Id="fil7E9426B7CDAEEE105D4AEA1A60251BCB" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-arm64\native\WebView2Loader.dll" />
+            </Component>
+            <Component Id="cmpCDE072B46B634B7D20CA56645D07A3FA" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
+                <File Id="fil5840C3B26F389B2B2460E6151CB42740" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\comerr64.dll" />
+            </Component>
+            <Component Id="cmp7A0E90A912AE47F5379F918D036D325F" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
+                <File Id="fil600A01FA27BEFA498E1F25DB2EF59AF2" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\gssapi64.dll" />
+            </Component>
+            <Component Id="cmp381776BBC535C94543EBFFF73A80CEF2" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
+                <File Id="fil38AD21EC1C1C73CF5EC9F3FD2E4DFF61" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\k5sprt64.dll" />
+            </Component>
+            <Component Id="cmpBB8D67E2AF8E260C197D02D6CFC044BF" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
+                <File Id="fil93A323080EA8328D12496E9F0ED8145D" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\krb5_64.dll" />
+            </Component>
+            <Component Id="cmp6A7E12DD60C1A1C7DD4C714876DD4338" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
+                <File Id="filFB98DA2C736FBFF22876E65758DA5604" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\krbcc64.dll" />
             </Component>
             <Component Id="cmpFAFA9D64A2B1D8B66ACB1C2D958C9DC5" Directory="dir2ED89DAEE76564AD33DB582F055A5274" Guid="*">
                 <File Id="fil1352EAE0A6DCBF023872C40101DB9BB1" KeyPath="yes" Source="$(var.HarvestPath)\runtimes\win-x64\native\sni.dll" />
