@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.UI.Tabs;
 using System.Runtime.Versioning;
+using mRemoteNG.UI.Forms;
 
 // ReSharper disable UnusedMember.Local
 
@@ -88,8 +89,7 @@ namespace mRemoteNG.Connection.Protocol
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace("Couldn't focus Control (Connection.Protocol.Base)",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("Couldn't focus Control (Connection.Protocol.Base)", ex);
             }
         }
 
@@ -233,6 +233,12 @@ namespace mRemoteNG.Connection.Protocol
 
         private void DisposeControl()
         {
+            // do not attempt to dispose the control if the control is already closed, closing or disposed
+            if (Control == null || !Control.IsAccessible || Control.IsDisposed)
+            {
+                return;
+            }
+
             if (Control.InvokeRequired)
             {
                 var s = new DisposeControlCB(DisposeControl);
