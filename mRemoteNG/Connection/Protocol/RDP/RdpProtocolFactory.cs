@@ -22,6 +22,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     return new RdpProtocol8();
                 case RdpVersion.Rdc9:
                     return new RdpProtocol9();
+                case RdpVersion.Rdc10:
+                    return new RdpProtocol10();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(rdpVersion), rdpVersion, null);
             }
@@ -48,7 +50,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             var versions = Enum.GetValues(typeof(RdpVersion))
                 .OfType<RdpVersion>()
-                .Except(new[] {RdpVersion.Highest});
+                .Except(new[] { RdpVersion.Highest });
 
             var supportedVersions = new List<RdpVersion>();
             foreach (var version in versions)
