@@ -39,6 +39,7 @@ Global
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Debug|x64.ActiveCfg = Debug|x64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Debug|x64.Build.0 = Debug|x64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Installer|x64.ActiveCfg = Release|x64
+		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Installer|x64.Build.0 = Release|x64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Portable|x64.ActiveCfg = Release Portable|x64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release Portable|x64.Build.0 = Release Portable|x64
 		{4934A491-40BC-4E5B-9166-EA1169A220F6}.Release|x64.ActiveCfg = Release|x64
@@ -81,6 +82,7 @@ Global
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Debug|x64.ActiveCfg = Debug|x64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Debug|x64.Build.0 = Debug|x64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Installer|x64.ActiveCfg = Release|x64
+		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Installer|x64.Build.0 = Release|x64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Portable|x64.ActiveCfg = Release Portable|x64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release Portable|x64.Build.0 = Release Portable|x64
 		{A56A2029-79B8-492A-ABE5-D2BFE05801BD}.Release|x64.ActiveCfg = Release|x64
