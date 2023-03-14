@@ -25,6 +25,7 @@ namespace mRemoteNG.Config.Putty
         public virtual IEnumerable<PuttySessionInfo> GetSessions()
         {
             var sessionNamesFromProvider = GetSessionNames(true);
+
             foreach (var sessionName in GetSessionNamesToAdd(sessionNamesFromProvider))
             {
                 var sessionInfo = GetSession(sessionName);
@@ -42,6 +43,7 @@ namespace mRemoteNG.Config.Putty
 
         private IEnumerable<string> GetSessionNamesToAdd(IEnumerable<string> sessionNamesFromProvider)
         {
+            if (sessionNamesFromProvider == null) { return Enumerable.Empty<string>(); }
             var currentlyKnownSessionNames = Sessions.Select(session => session.Name);
             var sessionNamesToAdd = sessionNamesFromProvider.Except(currentlyKnownSessionNames);
             return sessionNamesToAdd;
@@ -49,10 +51,10 @@ namespace mRemoteNG.Config.Putty
 
         private IEnumerable<PuttySessionInfo> GetSessionToRemove(IEnumerable<string> sessionNamesFromProvider)
         {
+            if (sessionNamesFromProvider == null) return Enumerable.Empty<PuttySessionInfo>();
             var currentlyKnownSessionNames = Sessions.Select(session => session.Name);
             var normalizedSessionNames =
-                sessionNamesFromProvider.Select(name =>
-                                                    WebUtility.UrlDecode(name));
+                sessionNamesFromProvider.Select(name => WebUtility.UrlDecode(name));
             var sessionNamesToRemove = currentlyKnownSessionNames.Except(normalizedSessionNames);
             return Sessions.Where(session => sessionNamesToRemove.Contains(session.Name));
         }

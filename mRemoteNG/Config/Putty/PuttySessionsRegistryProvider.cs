@@ -17,12 +17,15 @@ namespace mRemoteNG.Config.Putty
     public class PuttySessionsRegistryProvider : AbstractPuttySessionsProvider
     {
         private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";
+        private string CurrentUserSid { get; } = WindowsIdentity.GetCurrent().User?.Value;
         private static ManagementEventWatcher _eventWatcher;
 
         #region Public Methods
 
         public override string[] GetSessionNames(bool raw = false)
         {
+            if (PuttySessionsKey == null) return null;
+
             var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
             if (sessionsKey == null) return new string[] { };
 
@@ -108,18 +111,20 @@ namespace mRemoteNG.Config.Putty
 
             try
             {
-                var currentUserSid = WindowsIdentity.GetCurrent().User?.Value;
-                var key = string.Join("\\", currentUserSid, PuttySessionsKey).Replace("\\", "\\\\");
+                var key = string.Join("\\", CurrentUserSid, PuttySessionsKey).Replace("\\", "\\\\");
+
+                if (Registry.Users.OpenSubKey(string.Join("\\\\", CurrentUserSid, PuttySessionsKey)) == null) return;
+
                 var query = new WqlEventQuery(
-                                              $"SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{key}\'");
+                    $"SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{key}\'");
                 _eventWatcher = new ManagementEventWatcher(query);
                 _eventWatcher.EventArrived += OnManagementEventArrived;
                 _eventWatcher.Start();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("PuttySessions.Watcher.StartWatching() failed.", ex,
-                                                             MessageClass.WarningMsg);
+                Runtime.MessageCollector.AddExceptionMessage("PuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg);
+                _eventWatcher?.Stop();
             }
         }
 
