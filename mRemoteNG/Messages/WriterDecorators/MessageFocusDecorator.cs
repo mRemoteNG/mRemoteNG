@@ -62,6 +62,12 @@ namespace mRemoteNG.Messages.WriterDecorators
 
         private void SwitchToMessage()
         {
+            // do not attempt to focus the notification panel if the application is closing
+            if (_frmMain == null || _frmMain.IsClosing || !_frmMain.IsAccessible || _frmMain.IsDisposed)
+            {
+                return;
+            }
+
             if (_messageWindow.InvokeRequired)
             {
                 _frmMain.Invoke((MethodInvoker)SwitchToMessage);
