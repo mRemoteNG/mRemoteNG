@@ -97,8 +97,7 @@ function Resolve-UpdateCheckFileName {
     Write-Output $fileName
 }
 
-
-Write-Output "Begin create_upg_chk_files.ps1"
+Write-Output "===== Begin create_upg_chk_files.ps1 ====="
 
 # determine update channel
 if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
@@ -119,7 +118,8 @@ if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
 
 $buildFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\mRemoteNG\bin\x64\Release" -Resolve -ErrorAction Ignore
 
-if ($UpdateChannel -ne "" -and $buildFolder -ne "") {
+if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and $WebsiteTargetRepository) {
+
     $releaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
     $msiFile = Get-ChildItem -Path "$buildFolder\*.msi" | Sort-Object LastWriteTime | Select-Object -last 1
     if (![string]::IsNullOrEmpty($msiFile)) {
