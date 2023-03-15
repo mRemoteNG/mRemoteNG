@@ -118,7 +118,7 @@ if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
 
 $buildFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\mRemoteNG\bin\x64\Release" -Resolve -ErrorAction Ignore
 
-if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and $WebsiteTargetRepository) {
+if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -ne "" -and $WebsiteTargetRepository -ne "" ) {
 
     $releaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
     $msiFile = Get-ChildItem -Path "$buildFolder\*.msi" | Sort-Object LastWriteTime | Select-Object -last 1
