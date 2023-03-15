@@ -24,6 +24,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     return new RdpProtocol9();
                 case RdpVersion.Rdc10:
                     return new RdpProtocol10();
+                case RdpVersion.Rdc11:
+                    return new RdpProtocol11();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(rdpVersion), rdpVersion, null);
             }
