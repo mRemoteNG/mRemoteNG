@@ -2,6 +2,10 @@
 param (
     [string]
     [Parameter(Mandatory=$true)]
+    $MainRepository,
+
+    [string]
+    [Parameter(Mandatory=$true)]
     $WebsiteTargetOwner,
 
     [string]
@@ -44,7 +48,7 @@ if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
 
 $buildFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\mRemoteNG\bin\x64\Release" -Resolve -ErrorAction Ignore
 
-if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and $WebsiteTargetRepository) {
+if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $MainRepository -ne "" -and $WebsiteTargetOwner -ne "" -and $WebsiteTargetRepository -ne "" ) {
 
     $releaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
     $published_at = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
@@ -65,8 +69,8 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and
         switch ($UpdateChannel) {
             "Nightly" {
                 $GithubTag = "$((Get-Date).ToUniversalTime().ToString("yyyyMMdd"))-$TagName-NB"
-                $html_url = "https://github.com/mRemoteNG/mRemoteNG/releases/tag/$GithubTag"
-                $browser_download_url = "https://github.com/mRemoteNG/mRemoteNG/releases/download/$GithubTag/$($msiFile.Name)"
+                $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
+                $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($msiFile.Name)"
                 $a.nightlybuild.name = "v$TagName"
                 $a.nightlybuild.published_at = $published_at
                 $a.nightlybuild.html_url = $html_url
@@ -77,8 +81,8 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and
             }
             "Preview" {
                 $GithubTag = "$TagName-PB"
-                $html_url = "https://github.com/mRemoteNG/mRemoteNG/releases/tag/$GithubTag"
-                $browser_download_url = "https://github.com/mRemoteNG/mRemoteNG/releases/download/$GithubTag/$($msiFile.Name)"
+                $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
+                $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($msiFile.Name)"
                 $a.prerelease.name = "v$TagName"
                 $a.prerelease.published_at = $published_at
                 $a.prerelease.html_url = $html_url
@@ -89,8 +93,8 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and
             }
             "Stable" {
                 $GithubTag = "$TagName"
-                $html_url = "https://github.com/mRemoteNG/mRemoteNG/releases/tag/$GithubTag"
-                $browser_download_url = "https://github.com/mRemoteNG/mRemoteNG/releases/download/$GithubTag/$($msiFile.Name)"
+                $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
+                $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($msiFile.Name)"
                 $a.stable.name = "v$TagName"
                 $a.stable.published_at = $published_at
                 $a.stable.html_url = $html_url
@@ -112,8 +116,8 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and
         switch ($UpdateChannel) {
             "Nightly" {
                 $GithubTag = "$((Get-Date).ToUniversalTime().ToString("yyyyMMdd"))-$TagName-NB"
-                $html_url = "https://github.com/mRemoteNG/mRemoteNG/releases/tag/$GithubTag"
-                $browser_download_url = "https://github.com/mRemoteNG/mRemoteNG/releases/download/$GithubTag/$($zipFile.Name)"
+                $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
+                $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($zipFile.Name)"
                 $a.nightlybuild.name = "v$TagName"
                 $a.nightlybuild.published_at = $published_at
                 $a.nightlybuild.html_url = $html_url
@@ -124,8 +128,8 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and
             }
             "Preview" {
                 $GithubTag = "$TagName-PB"
-                $html_url = "https://github.com/mRemoteNG/mRemoteNG/releases/tag/$GithubTag"
-                $browser_download_url = "https://github.com/mRemoteNG/mRemoteNG/releases/download/$GithubTag/$($zipFile.Name)"
+                $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
+                $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($zipFile.Name)"
                 $a.prerelease.name = "v$TagName"
                 $a.prerelease.published_at = $published_at
                 $a.prerelease.html_url = $html_url
@@ -136,8 +140,8 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and
             }
             "Stable" {
                 $GithubTag = "$TagName"
-                $html_url = "https://github.com/mRemoteNG/mRemoteNG/releases/tag/$GithubTag"
-                $browser_download_url = "https://github.com/mRemoteNG/mRemoteNG/releases/download/$GithubTag/$($zipFile.Name)"
+                $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
+                $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($zipFile.Name)"
                 $a.stable.name = "v$TagName"
                 $a.stable.published_at = $published_at
                 $a.stable.html_url = $html_url
