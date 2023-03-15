@@ -22,7 +22,7 @@ param (
 )
 
 
-Write-Output "Begin create_website_release_json_file.ps1"
+Write-Output "===== Begin update_and_upload_website_release_json_file.ps1 ====="
 
 
 # determine update channel
@@ -44,7 +44,7 @@ if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
 
 $buildFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\mRemoteNG\bin\x64\Release" -Resolve -ErrorAction Ignore
 
-if ($UpdateChannel -ne "" -and $buildFolder -ne "") {
+if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $WebsiteTargetOwner -and $WebsiteTargetRepository) {
 
     $releaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
     $published_at = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
@@ -165,4 +165,4 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "") {
 }
 
 
-Write-Output "End create_website_release_json_file.ps1"
+Write-Output "End update_and_upload_website_release_json_file.ps1"
