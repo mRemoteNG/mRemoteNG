@@ -41,6 +41,7 @@ namespace mRemoteNG.UI.TaskDialog
 
         #region [ShowTaskDialogBox]
 
+        [SupportedOSPlatform("windows")]
         public static DialogResult ShowTaskDialogBox(IWin32Window owner, string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string radioButtons, string commandButtons, ETaskDialogButtons buttons, ESysIcons mainIcon, ESysIcons footerIcon, int defaultIndex)
         {
             DialogResult result;
@@ -77,6 +78,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         // Overloaded versions...
         //--------------------------------------------------------------------------------
+        [SupportedOSPlatform("windows")]
         public static DialogResult ShowTaskDialogBox(IWin32Window owner,
                                                      string title,
                                                      string mainInstruction,
@@ -93,6 +95,7 @@ namespace mRemoteNG.UI.TaskDialog
             return ShowTaskDialogBox(owner, title, mainInstruction, content, expandedInfo, footer, verificationText, radioButtons, commandButtons, buttons, mainIcon, footerIcon, 0);
         }
 
+        [SupportedOSPlatform("windows")]
         public static DialogResult ShowTaskDialogBox(string title,
                                                      string mainInstruction,
                                                      string content,
@@ -111,6 +114,8 @@ namespace mRemoteNG.UI.TaskDialog
         #endregion
 
         #region [MessageBox]
+
+        [SupportedOSPlatform("windows")]
         public static DialogResult MessageBox(IWin32Window owner, string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, ETaskDialogButtons buttons, ESysIcons mainIcon, ESysIcons footerIcon)
         {
             return ShowTaskDialogBox(owner, title, mainInstruction, content, expandedInfo, footer, verificationText, "", "", buttons, mainIcon, footerIcon);
@@ -119,16 +124,19 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         // Overloaded versions...
         //--------------------------------------------------------------------------------
+        [SupportedOSPlatform("windows")]
         public static DialogResult MessageBox(string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, ETaskDialogButtons buttons, ESysIcons mainIcon, ESysIcons footerIcon)
         {
             return ShowTaskDialogBox(null, title, mainInstruction, content, expandedInfo, footer, verificationText, "", "", buttons, mainIcon, footerIcon);
         }
 
+        [SupportedOSPlatform("windows")]
         public static DialogResult MessageBox(IWin32Window owner, string title, string mainInstruction, string content, ETaskDialogButtons buttons, ESysIcons mainIcon)
         {
             return MessageBox(owner, title, mainInstruction, content, "", "", "", buttons, mainIcon, ESysIcons.Information);
         }
 
+        [SupportedOSPlatform("windows")]
         public static DialogResult MessageBox(string title, string mainInstruction, string content, ETaskDialogButtons buttons, ESysIcons mainIcon)
         {
             return MessageBox(null, title, mainInstruction, content, "", "", "", buttons, mainIcon, ESysIcons.Information);
@@ -143,6 +151,7 @@ namespace mRemoteNG.UI.TaskDialog
         #region [ShowRadioBox]
 
         //--------------------------------------------------------------------------------
+        [SupportedOSPlatform("windows")]
         public static int ShowRadioBox(IWin32Window owner, string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string radioButtons, ESysIcons mainIcon, ESysIcons footerIcon, int defaultIndex)
         {
             var res = ShowTaskDialogBox(owner, title, mainInstruction, content, expandedInfo, footer, verificationText, radioButtons, "", ETaskDialogButtons.OkCancel, mainIcon, footerIcon, defaultIndex);
@@ -154,6 +163,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         // Overloaded versions...
         //--------------------------------------------------------------------------------
+        [SupportedOSPlatform("windows")]
         public static int ShowRadioBox(string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string radioButtons, ESysIcons mainIcon, ESysIcons footerIcon, int defaultIndex)
         {
             var res = ShowTaskDialogBox(null, title, mainInstruction, content, expandedInfo, footer, verificationText, radioButtons, "", ETaskDialogButtons.OkCancel, mainIcon, footerIcon, defaultIndex);
@@ -162,21 +172,25 @@ namespace mRemoteNG.UI.TaskDialog
             return -1;
         }
 
+        [SupportedOSPlatform("windows")]
         public static int ShowRadioBox(IWin32Window owner, string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string radioButtons, ESysIcons mainIcon, ESysIcons footerIcon)
         {
             return ShowRadioBox(owner, title, mainInstruction, content, expandedInfo, footer, verificationText, radioButtons, ESysIcons.Question, ESysIcons.Information, 0);
         }
 
+        [SupportedOSPlatform("windows")]
         public static int ShowRadioBox(IWin32Window owner, string title, string mainInstruction, string content, string radioButtons, int defaultIndex)
         {
             return ShowRadioBox(owner, title, mainInstruction, content, "", "", "", radioButtons, ESysIcons.Question, ESysIcons.Information, defaultIndex);
         }
 
+        [SupportedOSPlatform("windows")]
         public static int ShowRadioBox(IWin32Window owner, string title, string mainInstruction, string content, string radioButtons)
         {
             return ShowRadioBox(owner, title, mainInstruction, content, "", "", "", radioButtons, ESysIcons.Question, ESysIcons.Information, 0);
         }
 
+        [SupportedOSPlatform("windows")]
         public static int ShowRadioBox(string title, string mainInstruction, string content, string radioButtons)
         {
             return ShowRadioBox(null, title, mainInstruction, content, "", "", "", radioButtons, ESysIcons.Question, ESysIcons.Information, 0);
@@ -189,6 +203,7 @@ namespace mRemoteNG.UI.TaskDialog
         #region ShowCommandBox
 
         //--------------------------------------------------------------------------------
+        [SupportedOSPlatform("windows")]
         public static int ShowCommandBox(IWin32Window owner, string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText,string commandButtons, bool showCancelButton, ESysIcons mainIcon, ESysIcons footerIcon)
         {
             var res = ShowTaskDialogBox(owner, title, mainInstruction, content, expandedInfo, footer, verificationText, "", commandButtons, showCancelButton ? ETaskDialogButtons.Cancel : ETaskDialogButtons.None, mainIcon, footerIcon);
@@ -200,6 +215,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         // Overloaded versions...
         //--------------------------------------------------------------------------------
+        [SupportedOSPlatform("windows")]
         public static int ShowCommandBox(string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string commandButtons, bool showCancelButton, ESysIcons mainIcon, ESysIcons footerIcon)
         {
             var res = ShowTaskDialogBox(null, title, mainInstruction, content, expandedInfo, footer, verificationText,"", commandButtons, showCancelButton ? ETaskDialogButtons.Cancel : ETaskDialogButtons.None, mainIcon, footerIcon);
@@ -208,11 +224,13 @@ namespace mRemoteNG.UI.TaskDialog
             return -1;
         }
 
+        [SupportedOSPlatform("windows")]
         public static int ShowCommandBox(IWin32Window owner, string title, string mainInstruction, string content, string commandButtons, bool showCancelButton)
         {
             return ShowCommandBox(owner, title, mainInstruction, content, "", "", "", commandButtons, showCancelButton, ESysIcons.Question, ESysIcons.Information);
         }
 
+        [SupportedOSPlatform("windows")]
         public static int ShowCommandBox(string title, string mainInstruction, string content, string commandButtons, bool showCancelButton)
         {
             return ShowCommandBox(null, title, mainInstruction, content, "", "", "", commandButtons, showCancelButton, ESysIcons.Question, ESysIcons.Information);
