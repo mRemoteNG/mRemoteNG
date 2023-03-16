@@ -1,11 +1,13 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Versioning;
 using WeifenLuo.WinFormsUI.Docking;
 
 
 namespace mRemoteNG.Themes
 {
+    [SupportedOSPlatform("windows")]
     /// <inheritdoc />
     /// <summary>
     /// Container class for all the color and style elements to define a theme
@@ -24,11 +26,7 @@ namespace mRemoteNG.Themes
 
         #region Constructors
 
-        public ThemeInfo(string themeName,
-                         ThemeBase inTheme,
-                         string inURI,
-                         VisualStudioToolStripExtender.VsVersion inVersion,
-                         ExtendedColorPalette inExtendedPalette)
+        public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion, ExtendedColorPalette inExtendedPalette)
         {
             _name = themeName;
             _theme = inTheme;
@@ -44,10 +42,7 @@ namespace mRemoteNG.Themes
             setCustomExtenders();
         }
 
-        public ThemeInfo(string themeName,
-                         ThemeBase inTheme,
-                         string inURI,
-                         VisualStudioToolStripExtender.VsVersion inVersion)
+        public ThemeInfo(string themeName, ThemeBase inTheme, string inURI, VisualStudioToolStripExtender.VsVersion inVersion)
         {
             _name = themeName;
             _theme = inTheme;

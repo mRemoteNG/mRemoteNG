@@ -19,8 +19,7 @@ public class PuttyKeyFileGenerator
     public static string ToPuttyPrivateKey(RSACryptoServiceProvider cryptoServiceProvider, string Comment = "imported-openssh-key")
     {
         var publicParameters = cryptoServiceProvider.ExportParameters(false);
-        byte[] publicBuffer = new byte[3 + keyType.Length + GetPrefixSize(publicParameters.Exponent) + publicParameters.Exponent.Length +
-                GetPrefixSize(publicParameters.Modulus) + publicParameters.Modulus.Length + 1];
+        byte[] publicBuffer = new byte[3 + keyType.Length + GetPrefixSize(publicParameters.Exponent) + publicParameters.Exponent.Length + GetPrefixSize(publicParameters.Modulus) + publicParameters.Modulus.Length + 1];
 
         using (var bw = new BinaryWriter(new MemoryStream(publicBuffer)))
         {
@@ -32,7 +31,8 @@ public class PuttyKeyFileGenerator
         var publicBlob = System.Convert.ToBase64String(publicBuffer);
 
         var privateParameters = cryptoServiceProvider.ExportParameters(true);
-        byte[] privateBuffer = new byte[paddedPrefixSize + privateParameters.D.Length + paddedPrefixSize + privateParameters.P.Length + paddedPrefixSize + privateParameters.Q.Length + paddedPrefixSize + privateParameters.InverseQ.Length];
+
+        byte[] privateBuffer = new byte[paddedPrefixSize + privateParameters.D.Length + paddedPrefixSize + privateParameters.P!.Length + paddedPrefixSize + privateParameters.Q.Length + paddedPrefixSize + privateParameters.InverseQ.Length];
 
         using (var bw = new BinaryWriter(new MemoryStream(privateBuffer)))
         {
@@ -43,10 +43,9 @@ public class PuttyKeyFileGenerator
         }
         var privateBlob = System.Convert.ToBase64String(privateBuffer);
 
-        HMACSHA1 hmacSha1 = new HMACSHA1(SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes("putty-private-key-file-mac-key")));
+        HMACSHA1 hmacSha1 = new(SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes("putty-private-key-file-mac-key")));
         //byte[] bytesToHash = new byte[4 + 7 + 4 + 4 + 4 + Comment.Length + 4 + publicBuffer.Length + 4 + privateBuffer.Length];
-        byte[] bytesToHash = new byte[prefixSize + keyType.Length + prefixSize + encryptionType.Length + prefixSize + Comment.Length +
-                                      prefixSize + publicBuffer.Length + prefixSize + privateBuffer.Length];
+        byte[] bytesToHash = new byte[prefixSize + keyType.Length + prefixSize + encryptionType.Length + prefixSize + Comment.Length + prefixSize + publicBuffer.Length + prefixSize + privateBuffer.Length];
 
         using (var bw = new BinaryWriter(new MemoryStream(bytesToHash)))
         {
