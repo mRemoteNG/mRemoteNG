@@ -18,13 +18,15 @@ param (
     $SolutionDir
 )
 
-Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
+Write-Output ""
+Write-Output "===== Begin $($PSCmdlet.MyInvocation.MyCommand) ====="
 
+$IsAppVeyor = !([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))
 
 #  validate release versions and if the certificate value was passed
 if ($ConfigurationName -match "Release" -And ($CertificatePath)) {
 	
-	if(-Not ([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) ) {
+	if($IsAppVeyor) {
 		$CertificatePath = Join-Path -Path $SolutionDir -ChildPath $CertificatePath
 	}
 	
@@ -37,9 +39,10 @@ if ($ConfigurationName -match "Release" -And ($CertificatePath)) {
 		
     Write-Output "Verifying signature of binaries"
     Write-Output "Getting files from path: $TargetDir"
-    $signableFiles = Get-ChildItem -Path $TargetDir -Recurse | ?{$_.Extension -match "dll|exe|msi"}
+    $signableFiles = Get-ChildItem -Path $TargetDir -Recurse | Where-Object {$_.Extension -match "dll|exe|msi"}
     Write-Output "Signable files count: $($signableFiles.Count)"
     $badSignatureFound = $false
+
     foreach ($file in $signableFiles) {
         $signature = Get-AuthenticodeSignature -FilePath $file.FullName
         if ($signature.Status -ne "Valid") {
@@ -47,6 +50,7 @@ if ($ConfigurationName -match "Release" -And ($CertificatePath)) {
             $badSignatureFound = $true
         }
     }
+
     if ($badSignatureFound) {
         Write-Output "One or more files were improperly signed."
     } else {
@@ -57,4 +61,5 @@ if ($ConfigurationName -match "Release" -And ($CertificatePath)) {
     Write-Output "Config: $($ConfigurationName)`tCertPath: $($CertificatePath)"
 }
 
+Write-Output "End $($PSCmdlet.MyInvocation.MyCommand)"
 Write-Output ""

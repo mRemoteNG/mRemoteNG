@@ -24,16 +24,17 @@ param (
     $SolutionDir
 )
 
-Write-Output "===== Beginning $($PSCmdlet.MyInvocation.MyCommand) ====="
-
+Write-Output ""
+Write-Output "===== Begin $($PSCmdlet.MyInvocation.MyCommand) ====="
 
 $timeserver = "http://timestamp.verisign.com/scripts/timstamp.dll"
 
+$IsAppVeyor = !([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))
 
 #  validate release versions and if the certificate value was passed
 if ($ConfigurationName -match "Release" -And ($CertificatePath)) {
 
-	if(-Not ([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) ) {
+	if($IsAppVeyor) {
 		$CertificatePath = Join-Path -Path $SolutionDir -ChildPath $CertificatePath
 	}
 
@@ -77,7 +78,7 @@ if ($ConfigurationName -match "Release" -And ($CertificatePath)) {
 
 
 	# Release certificate
-	if ($cert -ne $null) {
+	if ($null -ne $cert) {
 	    $cert.Dispose()
 	}
 } else {

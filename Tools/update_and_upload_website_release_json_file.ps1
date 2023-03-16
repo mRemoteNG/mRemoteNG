@@ -2,10 +2,6 @@
 param (
     [string]
     [Parameter(Mandatory=$true)]
-    $MainRepository,
-
-    [string]
-    [Parameter(Mandatory=$true)]
     $WebsiteTargetOwner,
 
     [string]
@@ -26,43 +22,45 @@ param (
 )
 
 
-Write-Output "===== Begin update_and_upload_website_release_json_file.ps1 ====="
+Write-Output ""
+Write-Output "===== Begin $($PSCmdlet.MyInvocation.MyCommand) ====="
 
+$MainRepository = $Env:APPVEYOR_REPO_NAME.Split("/\")[1]
 
 # determine update channel
 if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
-    write-host "UpdateChannel = Nightly"
+    Write-Output "UpdateChannel = Nightly"
     $UpdateChannel = "Nightly"
     $ModifiedTagName = "$PreTagName-$TagName-NB"
 } elseif ($env:APPVEYOR_PROJECT_NAME -match "(Preview)") {
-    write-host "UpdateChannel = Preview"
+    Write-Output "UpdateChannel = Preview"
     $UpdateChannel = "Preview"
     $ModifiedTagName = "v$TagName-PB"
 } elseif ($env:APPVEYOR_PROJECT_NAME -match "(Stable)") {
-    write-host "UpdateChannel = Stable"
+    Write-Output "UpdateChannel = Stable"
     $UpdateChannel = "Stable"
     $ModifiedTagName = "v" + $TagName.Split("-")[0]
 } else {
     $UpdateChannel = ""
 }
 
-$buildFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\mRemoteNG\bin\x64\Release" -Resolve -ErrorAction Ignore
+#$buildFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\mRemoteNG\bin\x64\Release" -Resolve -ErrorAction Ignore
+$ReleaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
 
-if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $MainRepository -ne "" -and $WebsiteTargetOwner -ne "" -and $WebsiteTargetRepository -ne "" ) {
+if ($UpdateChannel -ne "" -and $ReleaseFolder -ne "" -and $MainRepository -ne "" -and $WebsiteTargetOwner -ne "" -and $WebsiteTargetRepository -ne "" ) {
 
-    $releaseFolder = Join-Path -Path $PSScriptRoot -ChildPath "..\Release" -Resolve
     $published_at = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
     
-    #$websiteJsonReleaseFile = Join-Path -Path $PSScriptRoot -ChildPath "..\..\mRemoteNG.github.io\_data\releases.json" -Resolve
-
     # get releases.json from github
     $releases_json = Get-GitHubContent -OwnerName $WebsiteTargetOwner -RepositoryName $WebsiteTargetRepository -Path _data\releases.json
-    ConvertFrom-Base64($releases_json.content) | Out-File -FilePath "$releaseFolder\releases.json"
-    $websiteJsonReleaseFile = Get-ChildItem -Path "$releaseFolder\releases.json"
+    ConvertFrom-Base64($releases_json.content) | Out-File -FilePath "$ReleaseFolder\releases.json"
+    $websiteJsonReleaseFile = Get-ChildItem -Path "$ReleaseFolder\releases.json"
 
     # installer
-    $msiFile = Get-ChildItem -Path "$buildFolder\*.msi" | Sort-Object LastWriteTime | Select-Object -last 1
+    $msiFile = Get-ChildItem -Path "$ReleaseFolder\*.msi" | Sort-Object LastWriteTime | Select-Object -last 1
     if (![string]::IsNullOrEmpty($msiFile)) {
+        Write-Output "UpdateChannel: $UpdateChannel"
+        Write-Output "msiFile: $msiFile"
         $checksum = (Get-FileHash $msiFile -Algorithm SHA512).Hash
         $file_size = (Get-ChildItem $msiFile).Length
         $a = Get-Content $websiteJsonReleaseFile | ConvertFrom-Json
@@ -71,7 +69,7 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $MainRepository -ne "" -
                 $GithubTag = "$((Get-Date).ToUniversalTime().ToString("yyyyMMdd"))-$TagName-NB"
                 $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
                 $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($msiFile.Name)"
-                $a.nightlybuild.name = "v$TagName"
+                $a.nightlybuild.name = "v$TagName-NB"
                 $a.nightlybuild.published_at = $published_at
                 $a.nightlybuild.html_url = $html_url
                 $a.nightlybuild.assets.installer.browser_download_url = $browser_download_url
@@ -83,7 +81,7 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $MainRepository -ne "" -
                 $GithubTag = "$TagName-PB"
                 $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
                 $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($msiFile.Name)"
-                $a.prerelease.name = "v$TagName"
+                $a.prerelease.name = "v$TagName-PB"
                 $a.prerelease.published_at = $published_at
                 $a.prerelease.html_url = $html_url
                 $a.prerelease.assets.installer.browser_download_url = $browser_download_url
@@ -108,8 +106,10 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $MainRepository -ne "" -
 
 
     # portable
-    $zipFile = Get-ChildItem -Path "$releaseFolder\*.zip" -Exclude "*-symbols-*.zip" | Sort-Object LastWriteTime | Select-Object -last 1
+    $zipFile = Get-ChildItem -Path "$ReleaseFolder\*.zip" -Exclude "*-symbols-*.zip" | Sort-Object LastWriteTime | Select-Object -last 1
     if (![string]::IsNullOrEmpty($zipFile)) {
+        Write-Output "UpdateChannel: $UpdateChannel"
+        Write-Output "zipFile: $zipFile"
         $checksum = (Get-FileHash $zipFile -Algorithm SHA512).Hash
         $file_size = (Get-ChildItem $zipFile).Length
         $a = Get-Content $websiteJsonReleaseFile | ConvertFrom-Json
@@ -118,7 +118,7 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $MainRepository -ne "" -
                 $GithubTag = "$((Get-Date).ToUniversalTime().ToString("yyyyMMdd"))-$TagName-NB"
                 $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
                 $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($zipFile.Name)"
-                $a.nightlybuild.name = "v$TagName"
+                $a.nightlybuild.name = "v$TagName-NB"
                 $a.nightlybuild.published_at = $published_at
                 $a.nightlybuild.html_url = $html_url
                 $a.nightlybuild.assets.portable.browser_download_url = $browser_download_url
@@ -130,7 +130,7 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $MainRepository -ne "" -
                 $GithubTag = "$TagName-PB"
                 $html_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/tag/$GithubTag"
                 $browser_download_url = "https://github.com/$WebsiteTargetOwner/$MainRepository/releases/download/$GithubTag/$($zipFile.Name)"
-                $a.prerelease.name = "v$TagName"
+                $a.prerelease.name = "v$TagName-PB"
                 $a.prerelease.published_at = $published_at
                 $a.prerelease.html_url = $html_url
                 $a.prerelease.assets.portable.browser_download_url = $browser_download_url
@@ -153,20 +153,21 @@ if ($UpdateChannel -ne "" -and $buildFolder -ne "" -and $MainRepository -ne "" -
         }
     }
 
-    $a | ConvertTo-Json -Depth 10 | set-content $websiteJsonReleaseFile
+    $a | ConvertTo-Json -Depth 10 | Set-Content $websiteJsonReleaseFile
 
     # commit releases.json change
     if ($env:WEBSITE_UPDATE_ENABLED.ToLower() -eq "true") {
         Write-Output "publish releases.json"
-        if (Test-Path -Path "$releaseFolder\releases.json") {
-            $releases_json_string = Get-Content "$releaseFolder\releases.json" | Out-String
+        if (Test-Path -Path "$ReleaseFolder\releases.json") {
+            $releases_json_string = Get-Content "$ReleaseFolder\releases.json" | Out-String
             Set-GitHubContent -OwnerName $WebsiteTargetOwner -RepositoryName $WebsiteTargetRepository -Path _data\releases.json -CommitMessage "Updated for $UpdateChannel $ModifiedTagName" -Content $releases_json_string -BranchName main
+            Write-Output "publish completed"
         }
     }
-
 } else {
-    write-host "BuildFolder not found"
+    Write-Output "ReleaseFolder not found"
 }
 
 
-Write-Output "End update_and_upload_website_release_json_file.ps1"
+Write-Output "End $($PSCmdlet.MyInvocation.MyCommand)"
+Write-Output ""

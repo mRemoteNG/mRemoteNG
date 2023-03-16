@@ -2,9 +2,10 @@ $githubUrl = 'https://api.github.com'
 # GitHub doesn't support the default powershell protocol (TLS 1.0)
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-#$ConfigurationName = $ConfigurationName.Trim()
-if (![string]::IsNullOrEmpty($env:APPVEYOR_REPO_NAME)) {
-    $CURRENT_GITHUB_USER = $env:APPVEYOR_REPO_NAME.Split("/")[0]
+$IsAppVeyor = !([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))
+
+if ($IsAppVeyor) {
+    #$CURRENT_GITHUB_USER = $env:APPVEYOR_REPO_NAME.Split("/")[0]
     Install-Module -Name PowerShellForGitHub -Scope CurrentUser
     Set-GitHubConfiguration -DisableTelemetry
     $PSDefaultParameterValues["*-GitHub*:AccessToken"] = "$env:ACCESS_TOKEN"    
