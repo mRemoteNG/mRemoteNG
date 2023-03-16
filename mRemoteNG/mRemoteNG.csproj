@@ -41,6 +41,7 @@
     <WarningsAsErrors />
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <WarningLevel>7</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|x64'">
     <DefineConstants>DEBUG;PORTABLE</DefineConstants>
@@ -59,11 +60,13 @@
     <WarningsAsErrors />
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <WarningLevel>7</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Installer|x64'">
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <Optimize>True</Optimize>
     <WarningLevel>7</WarningLevel>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="buildenv.tmp" />
