@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers.CredentialProviderSerializer;
 using mRemoteNG.Credential;
@@ -22,6 +23,7 @@ namespace mRemoteNG.Config
             _deserializer = deserializer;
         }
 
+        [SupportedOSPlatform("windows")]
         public IEnumerable<ICredentialRepository> Load()
         {
             var data = _dataProvider.Load();
