@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Versioning;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -24,6 +25,7 @@ namespace mRemoteNG.Themes
 
         #region Constructors
 
+        [SupportedOSPlatform("windows")]
         public ThemeInfo(string themeName,
                          ThemeBase inTheme,
                          string inURI,
@@ -44,6 +46,7 @@ namespace mRemoteNG.Themes
             setCustomExtenders();
         }
 
+        [SupportedOSPlatform("windows")]
         public ThemeInfo(string themeName,
                          ThemeBase inTheme,
                          string inURI,
@@ -63,6 +66,7 @@ namespace mRemoteNG.Themes
 
         #region Public Methods
 
+        [SupportedOSPlatform("windows")]
         public object Clone()
         {
             var extPalette = new ExtendedColorPalette
@@ -100,6 +104,7 @@ namespace mRemoteNG.Themes
             }
         }
 
+        [SupportedOSPlatform("windows")]
         public ThemeBase Theme
         {
             get => _theme;
@@ -166,6 +171,7 @@ namespace mRemoteNG.Themes
         #endregion
 
         //Custom extenders for mremote customizations in DPS
+        [SupportedOSPlatform("windows")]
         private void setCustomExtenders()
         {
             _theme.Extender.DockPaneStripFactory = new MremoteDockPaneStripFactory();

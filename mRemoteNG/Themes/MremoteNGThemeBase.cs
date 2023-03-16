@@ -23,6 +23,7 @@ namespace mRemoteNG.Themes
         }
     }
 
+    [SupportedOSPlatform("windows")]
     public class MremoteDockPaneStripFactory : DockPanelExtender.IDockPaneStripFactory
     {
         public DockPaneStripBase CreateDockPaneStrip(DockPane pane) => new DockPaneStripNG(pane);
