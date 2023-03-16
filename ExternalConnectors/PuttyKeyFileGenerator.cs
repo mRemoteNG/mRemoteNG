@@ -43,7 +43,7 @@ public class PuttyKeyFileGenerator
         }
         var privateBlob = System.Convert.ToBase64String(privateBuffer);
 
-        HMACSHA1 hmacsha1 = new HMACSHA1(new SHA1CryptoServiceProvider().ComputeHash(Encoding.ASCII.GetBytes("putty-private-key-file-mac-key")));
+        HMACSHA1 hmacSha1 = new HMACSHA1(SHA1.Create().ComputeHash(Encoding.ASCII.GetBytes("putty-private-key-file-mac-key")));
         //byte[] bytesToHash = new byte[4 + 7 + 4 + 4 + 4 + Comment.Length + 4 + publicBuffer.Length + 4 + privateBuffer.Length];
         byte[] bytesToHash = new byte[prefixSize + keyType.Length + prefixSize + encryptionType.Length + prefixSize + Comment.Length +
                                       prefixSize + publicBuffer.Length + prefixSize + privateBuffer.Length];
@@ -57,7 +57,7 @@ public class PuttyKeyFileGenerator
             PutPrefixed(bw, privateBuffer);
         }
 
-        var hash = string.Join("", hmacsha1.ComputeHash(bytesToHash).Select(x => string.Format("{0:x2}", x)));
+        var hash = string.Join("", hmacSha1.ComputeHash(bytesToHash).Select(x => $"{x:x2}"));
 
         var sb = new StringBuilder();
         sb.AppendLine("PuTTY-User-Key-File-2: " + keyType);
@@ -82,6 +82,7 @@ public class PuttyKeyFileGenerator
 
         return sb.ToString();
     }
+
     private static void PutPrefixed(BinaryWriter bw, byte[] bytes, bool addLeadingNull = false)
     {
         bw.Write(BitConverter.GetBytes(bytes.Length + (addLeadingNull ? 1 : 0)).Reverse().ToArray());
