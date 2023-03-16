@@ -25,7 +25,7 @@ namespace mRemoteNG.Config.Putty
         public override string[] GetSessionNames(bool raw = false)
         {
             var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
-            if (sessionsKey == null) return new string[] { };
+            if (sessionsKey == null) return Array.Empty<string>();
 
             var sessionNames = new List<string>();
             foreach (var sessionName in sessionsKey.GetSubKeyNames())
