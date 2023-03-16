@@ -5,6 +5,7 @@
     $BuildConfiguration
 )
 
+Write-Output ""
 Write-Output "===== Begin rename_and_copy_installer.ps1 ====="
 
 $targetVersionedFile = "$SolutionDir\mRemoteNG\bin\x64\$BuildConfiguration\mRemoteNG.exe"
@@ -15,19 +16,24 @@ $msiversion = $fileversion
 
 # determine update channel
 if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
-    write-host "UpdateChannel = Nightly"
+    Write-Output "UpdateChannel = Nightly"
     $msiversion = "$msiversion-NB"
 } elseif ($env:APPVEYOR_PROJECT_NAME -match "(Preview)") {
-    write-host "UpdateChannel = Preview"
+    Write-Output "UpdateChannel = Preview"
     $msiversion = "$msiversion-PB"
 } elseif ($env:APPVEYOR_PROJECT_NAME -match "(Stable)") {
-    write-host "UpdateChannel = Stable"
+    Write-Output "UpdateChannel = Stable"
 } else {
 }
 
 $srcMsi = $SolutionDir + "mRemoteNGInstaller\Installer\bin\x64\$BuildConfiguration\en-US\mRemoteNG-Installer*.msi"
-$dstMsi = $SolutionDir + "mRemoteNG\bin\x64\$BuildConfiguration\mRemoteNG-Installer-" + $msiversion + ".msi"
+$dstMsi = $SolutionDir + "Release\mRemoteNG-Installer-" + $msiversion + ".msi"
+$srcSymbols = $SolutionDir + "mRemoteNGInstaller\Installer\bin\x64\$BuildConfiguration\en-US\mRemoteNG-Installer-Symbols*.zip"
+$dstSymbols = $SolutionDir + "Release\mRemoteNG-Installer-Symbols-" + $msiversion + ".zip"
 
-# Copy file
+# Copy files
 Copy-Item $srcMsi -Destination $dstMsi -Force
+Copy-Item $srcSymbols -Destination $dstSymbols -Force
 
+Write-Output "End rename_and_copy_installer.ps1"
+Write-Output ""

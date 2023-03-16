@@ -29,3 +29,5 @@ Write-Output "Signable files count: $($signableFiles.Count)"
 foreach ($file in $signableFiles) {
     Set-AuthenticodeSignature -Certificate $cert -TimestampServer $timeserver -IncludeChain all -FilePath $file.FullName
 }
+
+Write-Output ""

@@ -23,10 +23,9 @@ function EditBinCertificateIsValid() {
         "97221B97098F37A135DCC212E2B41E452BCE51F2"
     )
     $file_signature = Get-AuthenticodeSignature -FilePath $Path
-    write-host "Path: $Path"
-    Write-Host "file_signature.SignerCertificate.Thumbprint: $($file_signature.SignerCertificate.Thumbprint)"
     if (($file_signature.Status -ne "Valid") -or ($valid_microsoft_cert_thumbprints -notcontains $file_signature.SignerCertificate.Thumbprint)) {
         Write-Warning "Could not validate the signature of $Path"
+        Write-Output "file_signature.SignerCertificate.Thumbprint: $($file_signature.SignerCertificate.Thumbprint)"
         return $false
     } else {
         return $true
