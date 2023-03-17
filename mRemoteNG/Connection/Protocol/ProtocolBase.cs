@@ -203,6 +203,10 @@ namespace mRemoteNG.Connection.Protocol
 
         private void DisposeInterface()
         {
+            if (_interfaceControl.IsDisposed)
+            {
+                return;
+            }
             if (_interfaceControl.InvokeRequired)
             {
                 var s = new DisposeInterfaceCB(DisposeInterface);
