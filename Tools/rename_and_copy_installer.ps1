@@ -6,7 +6,7 @@
 )
 
 Write-Output ""
-Write-Output "===== Begin rename_and_copy_installer.ps1 ====="
+Write-Output "    /===== Begin $($PSCmdlet.MyInvocation.MyCommand) =====/"
 
 $targetVersionedFile = "$SolutionDir\mRemoteNG\bin\x64\$BuildConfiguration\mRemoteNG.exe"
 #$fileversion = &"$SolutionDir\Tools\exes\sigcheck.exe" /accepteula -q -n $targetVersionedFile
@@ -26,14 +26,29 @@ if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
 } else {
 }
 
-$srcMsi = $SolutionDir + "mRemoteNGInstaller\Installer\bin\x64\$BuildConfiguration\en-US\mRemoteNG-Installer*.msi"
-$dstMsi = $SolutionDir + "Release\mRemoteNG-Installer-" + $msiversion + ".msi"
-$srcSymbols = $SolutionDir + "mRemoteNGInstaller\Installer\bin\x64\$BuildConfiguration\en-US\mRemoteNG-Installer-Symbols*.zip"
-$dstSymbols = $SolutionDir + "Release\mRemoteNG-Installer-Symbols-" + $msiversion + ".zip"
+$srcMsi = $SolutionDir + "mRemoteNGInstaller\Installer\bin\x64\$BuildConfiguration\en-US\mRemoteNG-Installer.msi"
+#$dstMsi = $SolutionDir + "Release\mRemoteNG-Installer-" + $msiversion + ".msi"
+$dstMsi = $SolutionDir + "mRemoteNG\bin\x64\$BuildConfiguration\mRemoteNG-Installer-" + $msiversion + ".msi"
+#$srcSymbols = $SolutionDir + "mRemoteNGInstaller\Installer\bin\x64\$BuildConfiguration\en-US\mRemoteNG-Installer-Symbols*.zip"
+#$dstSymbols = $SolutionDir + "Release\mRemoteNG-Installer-Symbols-" + $msiversion + ".zip"
 
-# Copy files
-Copy-Item $srcMsi -Destination $dstMsi -Force
-Copy-Item $srcSymbols -Destination $dstSymbols -Force
+Write-Output "        Copy Installer file:"
+Write-Output "          From: $srcMsi"
+Write-Output "            To: $dstMsi"
+Write-Output "        ********************"
 
-Write-Output "End rename_and_copy_installer.ps1"
+# Copy file
+try
+{
+    Copy-Item $srcMsi -Destination $dstMsi -Force -errorAction stop
+    Write-Host "        Success!"
+}
+catch
+{
+    Write-Host "        Failure!"
+}
+#Copy-Item $srcSymbols -Destination $dstSymbols -Force
+
+Write-Output ""
+Write-Output "    /===== End $($PSCmdlet.MyInvocation.MyCommand) =====/"
 Write-Output ""
