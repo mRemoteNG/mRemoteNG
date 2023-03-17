@@ -16,13 +16,13 @@ $msiversion = $fileversion
 
 # determine update channel
 if ($env:APPVEYOR_PROJECT_NAME -match "(Nightly)") {
-    Write-Output "UpdateChannel = Nightly"
+    Write-Output "        UpdateChannel = Nightly"
     $msiversion = "$msiversion-NB"
 } elseif ($env:APPVEYOR_PROJECT_NAME -match "(Preview)") {
-    Write-Output "UpdateChannel = Preview"
+    Write-Output "        UpdateChannel = Preview"
     $msiversion = "$msiversion-PB"
 } elseif ($env:APPVEYOR_PROJECT_NAME -match "(Stable)") {
-    Write-Output "UpdateChannel = Stable"
+    Write-Output "        UpdateChannel = Stable"
 } else {
 }
 
@@ -35,17 +35,16 @@ $dstMsi = $SolutionDir + "mRemoteNG\bin\x64\$BuildConfiguration\mRemoteNG-Instal
 Write-Output "        Copy Installer file:"
 Write-Output "          From: $srcMsi"
 Write-Output "            To: $dstMsi"
-Write-Output "        ********************"
-
+Write-Output ""
 # Copy file
 try
 {
     Copy-Item $srcMsi -Destination $dstMsi -Force -errorAction stop
-    Write-Host "        Success!"
+    Write-Host "        [Success!]" -ForegroundColor green
 }
 catch
 {
-    Write-Host "        Failure!"
+    Write-Host "        [Failure!]" -ForegroundColor red
 }
 #Copy-Item $srcSymbols -Destination $dstSymbols -Force
 
