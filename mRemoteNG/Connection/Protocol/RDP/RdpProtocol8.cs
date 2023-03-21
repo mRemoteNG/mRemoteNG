@@ -21,18 +21,28 @@ namespace mRemoteNG.Connection.Protocol.RDP
     public class RdpProtocol8 : RdpProtocol7
     {
         private MsRdpClient8NotSafeForScripting RdpClient8 => (MsRdpClient8NotSafeForScripting)((AxHost)Control).GetOcx();
-        private Size _controlBeginningSize;
 
-        protected override RdpVersion RdpProtocolVersion => RdpVersion.Rdc8;
+        protected override RdpVersion RdpProtocolVersion => RDP.RdpVersion.Rdc8;
 
-        public override bool SmartSize
+        public override bool Initialize()
         {
-            get => base.SmartSize;
-            protected set
+            if (!base.Initialize())
+                return false;
+
+            if (RdpVersion < Versions.RDC81) return false; // minimum dll version checked, loaded MSTSCLIB dll version is not capable
+
+            // https://learn.microsoft.com/en-us/windows/win32/termserv/imsrdpextendedsettings-property
+            if (connectionInfo.UseRestrictedAdmin)
             {
-                base.SmartSize = value;
-                DoResizeClient();
+                SetExtendedProperty("RestrictedLogon", true);
             }
+            else if (connectionInfo.UseRCG)
+            {
+                SetExtendedProperty("DisableCredentialsDelegation", true);
+                SetExtendedProperty("RedirectedAuthentication", true);
+            }
+            
+            return true;
         }
 
         public override bool Fullscreen
@@ -45,28 +55,17 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
         }
 
-        public override void ResizeBegin(object sender, EventArgs e)
+        protected override void Resize(object sender, EventArgs e)
         {
-            _controlBeginningSize = Control.Size;
+            if (_frmMain.PreviousWindowState == _frmMain.WindowState) return;
+            DoResizeControl();
+            DoResizeClient();
         }
 
-        public override void Resize(object sender, EventArgs e)
-        {
-            if (DoResizeControl() && _controlBeginningSize.IsEmpty)
-            {
-                DoResizeClient();
-            }
-            base.Resize(sender, e);
-        }
-
-        public override void ResizeEnd(object sender, EventArgs e)
+        protected override void ResizeEnd(object sender, EventArgs e)
         {
             DoResizeControl();
-            if (!(Control.Size == _controlBeginningSize))
-            {
-                DoResizeClient();
-            }
-            _controlBeginningSize = Size.Empty;
+            DoResizeClient();
         }
 
         protected override AxHost CreateActiveXRdpClientControl()
@@ -97,13 +96,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var size = Fullscreen
                     ? Screen.FromControl(Control).Bounds.Size
                     : Control.Size;
+
                 UpdateSessionDisplaySettings((uint)size.Width, (uint)size.Height);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(
-                    string.Format(Language.ChangeConnectionResolutionError,
-                        connectionInfo.Hostname),
+                    string.Format(Language.ChangeConnectionResolutionError, connectionInfo.Hostname),
                     ex, MessageClass.WarningMsg, false);
             }
         }
@@ -112,20 +111,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             Control.Location = InterfaceControl.Location;
             // kmscode - this doesn't look right to me. But I'm not aware of any functionality issues with this currently...
-            if (!(Control.Size == InterfaceControl.Size) && !(InterfaceControl.Size == Size.Empty))
-            {
-                Control.Size = InterfaceControl.Size;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (Control.Size == InterfaceControl.Size || InterfaceControl.Size == Size.Empty) return false;
+            Control.Size = InterfaceControl.Size;
+            return true;
         }
 
         protected virtual void UpdateSessionDisplaySettings(uint width, uint height)
         {
             RdpClient8.Reconnect(width, height);
         }
+
     }
 }

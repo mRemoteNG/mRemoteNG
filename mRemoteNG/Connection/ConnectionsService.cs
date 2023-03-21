@@ -12,7 +12,6 @@ using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
-using mRemoteNG.Properties;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -75,8 +74,10 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                var uriBuilder = new UriBuilder();
-                uriBuilder.Scheme = "dummyscheme";
+                var uriBuilder = new UriBuilder
+                {
+                    Scheme = "dummyscheme"
+                };
 
                 if (connectionString.Contains("@"))
                 {

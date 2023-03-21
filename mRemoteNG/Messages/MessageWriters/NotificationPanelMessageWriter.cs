@@ -27,6 +27,7 @@ namespace mRemoteNG.Messages.MessageWriters
 
         private void AddToList(ListViewItem lvItem)
         {
+            if (!_messageWindow.IsAccessible || _messageWindow.IsDisposed) { return; }
             if (_messageWindow.lvErrorCollector.InvokeRequired)
                 _messageWindow.lvErrorCollector.Invoke((MethodInvoker)(() => AddToList(lvItem)));
             else
