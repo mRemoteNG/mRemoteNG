@@ -134,7 +134,7 @@ namespace mRemoteNG.Connection.Protocol
             }
         }
 
-        public override void Resize(object sender, EventArgs e)
+        protected override void Resize(object sender, EventArgs e)
         {
             try
             {
