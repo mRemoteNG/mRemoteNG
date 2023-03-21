@@ -8,14 +8,14 @@ namespace mRemoteNG.Connection.Protocol.RDP
     [SupportedOSPlatform("windows")]
     public class RdpProtocolFactory
     {
-        public RdpProtocol6 Build(RdpVersion rdpVersion)
+        public RdpProtocol Build(RdpVersion rdpVersion)
         {
             switch (rdpVersion)
             {
                 case RdpVersion.Highest:
                     return BuildHighestSupportedVersion();
                 case RdpVersion.Rdc6:
-                    return new RdpProtocol6();
+                    return new RdpProtocol();
                 case RdpVersion.Rdc7:
                     return new RdpProtocol7();
                 case RdpVersion.Rdc8:
@@ -31,7 +31,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
         }
 
-        private RdpProtocol6 BuildHighestSupportedVersion()
+        private RdpProtocol BuildHighestSupportedVersion()
         {
             var versions = Enum.GetValues(typeof(RdpVersion))
                 .OfType<RdpVersion>()
