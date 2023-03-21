@@ -46,7 +46,6 @@ namespace mRemoteNG.App
             _frmSplashScreen.Top = viewport.Top + (targetScreen.Bounds.Size.Height / 2) - (_frmSplashScreen.Height / 2);
             _frmSplashScreen.ShowInTaskbar = false;
             _frmSplashScreen.Show();
-            throw new Exception();
             
             System.Windows.Forms.Application.Run(FrmMain.Default);
         }
