@@ -375,7 +375,7 @@ namespace mRemoteNG.UI.Window
 
                 if (interfaceControl.Info.Protocol == ProtocolType.RDP)
                 {
-                    var rdp = (RdpProtocol6)interfaceControl.Protocol;
+                    var rdp = (RdpProtocol)interfaceControl.Protocol;
                     cmenTabFullscreen.Visible = true;
                     cmenTabFullscreen.Checked = rdp.Fullscreen;
                     cmenTabSmartSize.Visible = true;
@@ -433,7 +433,7 @@ namespace mRemoteNG.UI.Window
 
                 switch (interfaceControl.Protocol)
                 {
-                    case RdpProtocol6 rdp:
+                    case RdpProtocol rdp:
                         rdp.ToggleSmartSize();
                         break;
                 }
@@ -562,7 +562,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 var interfaceControl = GetInterfaceControl();
-                var rdp = interfaceControl?.Protocol as RdpProtocol6;
+                var rdp = interfaceControl?.Protocol as RdpProtocol;
                 rdp?.ToggleFullscreen();
             }
             catch (Exception ex)
