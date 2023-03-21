@@ -113,7 +113,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
                 // ANSI SQL way.  Works in PostgreSQL, MSSQL, MySQL.
                 var cmd = databaseConnector.DbCommand("select case when exists((select * from information_schema.tables where table_name = '" + tableName + "')) then 1 else 0 end");
                 cmd.ExecuteNonQuery();
-                exists = (int)cmd.ExecuteScalar()! == 1;
+                exists = (int)(long)cmd.ExecuteScalar()! == 1;
             }
             catch
             {
