@@ -9,9 +9,10 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.Connection.Protocol.RDP
 {
     [SupportedOSPlatform("windows")]
-    public class RdpProtocol7 : RdpProtocol6
+    public class RdpProtocol7 : RdpProtocol
     {
-        protected override RdpVersion RdpProtocolVersion => RdpVersion.Rdc7;
+        private MsRdpClient7NotSafeForScripting RdpClient7 => (MsRdpClient7NotSafeForScripting)((AxHost)Control).GetOcx();
+        protected override RdpVersion RdpProtocolVersion => RDP.RdpVersion.Rdc7;
 
         public override bool Initialize()
         {
@@ -20,20 +21,21 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             try
             {
-                var rdpClient7 = (MsRdpClient7NotSafeForScripting)((AxHost) Control).GetOcx();
-                rdpClient7.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
-                rdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
-                rdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
+                if (RdpVersion < Versions.RDC70) return false; // loaded MSTSCLIB dll version is not capable
+
+                RdpClient7.AdvancedSettings8.AudioQualityMode = (uint)connectionInfo.SoundQuality;
+                RdpClient7.AdvancedSettings8.AudioCaptureRedirectionMode = connectionInfo.RedirectAudioCapture;
+                RdpClient7.AdvancedSettings8.NetworkConnectionType = (int)RdpNetworkConnectionType.Modem;
 
                 if (connectionInfo.UseVmId)
                 {
                     SetExtendedProperty("DisableCredentialsDelegation", true);
-                    rdpClient7.AdvancedSettings7.AuthenticationServiceClass = "Microsoft Virtual Console Service";
-                    rdpClient7.AdvancedSettings8.EnableCredSspSupport = true;
-                    rdpClient7.AdvancedSettings8.NegotiateSecurityLayer = false;
-                    rdpClient7.AdvancedSettings7.PCB = $"{connectionInfo.VmId}";
+                    RdpClient7.AdvancedSettings7.AuthenticationServiceClass = "Microsoft Virtual Console Service";
+                    RdpClient7.AdvancedSettings8.EnableCredSspSupport = true;
+                    RdpClient7.AdvancedSettings8.NegotiateSecurityLayer = false;
+                    RdpClient7.AdvancedSettings7.PCB = $"{connectionInfo.VmId}";
                     if (connectionInfo.UseEnhancedMode)
-                        rdpClient7.AdvancedSettings7.PCB += ";EnhancedMode=1";
+                        RdpClient7.AdvancedSettings7.PCB += ";EnhancedMode=1";
                 }
             }
             catch (Exception ex)
@@ -47,7 +49,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         protected override AxHost CreateActiveXRdpClientControl()
         {
-            return new AxMsRdpClient7NotSafeForScripting();
+            return new AxMsRdpClient11NotSafeForScripting();
         }
+        
     }
 }
