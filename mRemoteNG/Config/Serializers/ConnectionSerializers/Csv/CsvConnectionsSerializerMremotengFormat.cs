@@ -18,7 +18,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
         private readonly SaveFilter _saveFilter;
         private readonly ICredentialRepositoryList _credentialRepositoryList;
 
-        public Version Version { get; } = new Version(2, 7);
+        public Version Version { get; } = new Version(2, 8);
 
         public CsvConnectionsSerializerMremotengFormat(SaveFilter saveFilter,
                                                        ICredentialRepositoryList credentialRepositoryList)
@@ -60,7 +60,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
             sb.Append("Hostname;Port;VmId;Protocol;SSHTunnelConnectionName;OpeningCommand;SSHOptions;PuttySession;ConnectToConsole;UseCredSsp;UseRestrictedAdmin;UseRCG;UseVmId;UseEnhancedMode;RenderingEngine;RDPAuthenticationLevel;" +
                       "LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;DisableFullWindowDrag;DisableMenuAnimations;DisableCursorShadow;DisableCursorBlinking;" +
-                      "CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
+                      "CacheBitmaps;RedirectDiskDrives;RedirectDiskDrivesCustomRedirectPorts;RedirectPrinters;RedirectClipboard;RedirectSmartCards;RedirectSound;RedirectKeys;" +
                       "PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;Favorite;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;" +
                       "VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;" +
                       "RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;RDGatewayExternalCredentialProvider;RDGatewayUserViaAPI;RedirectAudioCapture;RdpVersion;RDPStartProgram;RDPStartProgramWorkDir;UserViaAPI;EC2InstanceId;EC2Region;ExternalCredentialProvider;ExternalAddressProvider;");
@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             if (_saveFilter.SaveInheritance)
                 sb.Append("InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;" +
                           "InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDisableFullWindowDrag;InheritDisableMenuAnimations;InheritDisableCursorShadow;InheritDisableCursorBlinking;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;" +
-                          "InheritProtocol;InheritSSHTunnelConnectionName;InheritOpeningCommand;InheritSSHOptions;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
+                          "InheritProtocol;InheritSSHTunnelConnectionName;InheritOpeningCommand;InheritSSHOptions;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectDiskDrivesCustom;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;" +
                           "InheritRedirectClipboard;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;" +
                           "InheritUseConsoleSession;InheritUseCredSsp;InheritUseRestrictedAdmin;InheritUseRCG;InheritUseVmId;InheritUseEnhancedMode;InheritVmId;InheritRenderingEngine;InheritUsername;" +
                           "InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;" +
@@ -147,6 +147,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.DisableCursorBlinking))
               .Append(FormatForCsv(con.CacheBitmaps))
               .Append(FormatForCsv(con.RedirectDiskDrives))
+              .Append(FormatForCsv(con.RedirectDiskDrivesCustom))
               .Append(FormatForCsv(con.RedirectPorts))
               .Append(FormatForCsv(con.RedirectPrinters))
               .Append(FormatForCsv(con.RedirectClipboard))
@@ -215,6 +216,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
               .Append(FormatForCsv(con.Inheritance.SSHOptions))
               .Append(FormatForCsv(con.Inheritance.PuttySession))
               .Append(FormatForCsv(con.Inheritance.RedirectDiskDrives))
+              .Append(FormatForCsv(con.Inheritance.RedirectDiskDrivesCustom))
               .Append(FormatForCsv(con.Inheritance.RedirectKeys))
               .Append(FormatForCsv(con.Inheritance.RedirectPorts))
               .Append(FormatForCsv(con.Inheritance.RedirectPrinters))

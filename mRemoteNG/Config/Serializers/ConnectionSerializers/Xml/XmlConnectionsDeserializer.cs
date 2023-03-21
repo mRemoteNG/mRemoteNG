@@ -291,14 +291,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
                 if (_confVersion >= 0.5)
                 {
-                    connectionInfo.RedirectDiskDrives = xmlnode.GetAttributeAsBool("RedirectDiskDrives");
                     connectionInfo.RedirectPrinters = xmlnode.GetAttributeAsBool("RedirectPrinters");
                     connectionInfo.RedirectPorts = xmlnode.GetAttributeAsBool("RedirectPorts");
                     connectionInfo.RedirectSmartCards = xmlnode.GetAttributeAsBool("RedirectSmartCards");
                 }
                 else
                 {
-                    connectionInfo.RedirectDiskDrives = false;
+                    connectionInfo.RedirectDiskDrives = RDPDiskDrives.None;
                     connectionInfo.RedirectPrinters = false;
                     connectionInfo.RedirectPorts = false;
                     connectionInfo.RedirectSmartCards = false;
@@ -569,6 +568,21 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.RDGatewayUserViaAPI = xmlnode.GetAttributeAsString("RDGatewayUserViaAPI");
                     connectionInfo.Inheritance.RDGatewayExternalCredentialProvider = xmlnode.GetAttributeAsBool("InheritRDGatewayExternalCredentialProvider");
                     connectionInfo.Inheritance.RDGatewayUserViaAPI = xmlnode.GetAttributeAsBool("InheritRDGatewayUserViaAPI");
+                }
+                if (_confVersion >= 2.8)
+                {
+                    connectionInfo.RedirectDiskDrives = xmlnode.GetAttributeAsEnum<RDPDiskDrives>("RedirectDiskDrives");
+                    connectionInfo.RedirectDiskDrivesCustom = xmlnode.GetAttributeAsString("RedirectDiskDrivesCustom");
+                    connectionInfo.Inheritance.RedirectDiskDrivesCustom = xmlnode.GetAttributeAsBool("InheritRedirectDiskDrivesCustom");
+                }
+                else if (_confVersion >= 0.5)
+                {
+                    // used to be boolean
+                    bool tmpRedirect = xmlnode.GetAttributeAsBool("RedirectDiskDrives");
+                    if (tmpRedirect)
+                        connectionInfo.RedirectDiskDrives = RDPDiskDrives.Local;
+                    else
+                        connectionInfo.RedirectDiskDrives = RDPDiskDrives.None;
                 }
             }
             catch (Exception ex)

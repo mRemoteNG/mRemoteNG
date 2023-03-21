@@ -105,7 +105,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                     connectionInfo.RedirectSmartCards = value == "1";
                     break;
                 case "redirectdrives":
-                    connectionInfo.RedirectDiskDrives = value == "1";
+                    connectionInfo.RedirectDiskDrives = (value == "1" ? RDPDiskDrives.Local : RDPDiskDrives.None);
                     break;
                 case "redirectcomports":
                     connectionInfo.RedirectPorts = value == "1";

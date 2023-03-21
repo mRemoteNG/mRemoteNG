@@ -350,7 +350,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
             if (headers.Contains("RedirectDiskDrives"))
             {
-                if (bool.TryParse(connectionCsv[headers.IndexOf("RedirectDiskDrives")], out bool value))
+                if (Enum.TryParse(connectionCsv[headers.IndexOf("RedirectDiskDrives")], out RDPDiskDrives value))
                     connectionRecord.RedirectDiskDrives = value;
             }
 
@@ -610,6 +610,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectDiskDrives")], out bool value))
                     connectionRecord.Inheritance.RedirectDiskDrives = value;
+            }
+			
+            if (headers.Contains("InheritRedirectDiskDrivesCustom"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritRedirectDiskDrivesCustom")], out bool value))
+                    connectionRecord.Inheritance.RedirectDiskDrivesCustom = value;
             }
 
             if (headers.Contains("InheritRedirectKeys"))

@@ -364,6 +364,12 @@ namespace mRemoteNG.Connection
         public bool RedirectDiskDrives { get; set; }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 7),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.RedirectDiskDrivesCustom)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRedirectDiskDrivesCustom)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool RedirectDiskDrivesCustom { get; set; }
+        
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 7),
          LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.Printers)),
          LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionRedirectPrinters)),
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]

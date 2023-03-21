@@ -27,7 +27,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const bool ExpectedFontSmoothing = true;
         private const bool ExpectedDesktopComposition = true;
         private const bool ExpectedSmartcardRedirection = true;
-        private const bool ExpectedDriveRedirection = true;
+        private const RDPDiskDrives ExpectedDriveRedirection = RDPDiskDrives.Local;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
         private const RDPSounds ExpectedSoundRedirection = RDPSounds.BringToThisComputer;

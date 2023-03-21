@@ -76,7 +76,8 @@ namespace mRemoteNG.Connection
         private bool _disableCursorBlinking;
 
         private bool _redirectKeys;
-        private bool _redirectDiskDrives;
+        private RDPDiskDrives _redirectDiskDrives;
+        private string _redirectDiskDrivesCustom;
         private bool _redirectPrinters;
         private bool _redirectClipboard;
         private bool _redirectPorts;
@@ -713,12 +714,22 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.DiskDrives)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectDrives)),
-         TypeConverter(typeof(MiscTools.YesNoTypeConverter)),
+         TypeConverter(typeof(MiscTools.EnumTypeConverter)),
          AttributeUsedInProtocol(ProtocolType.RDP)]
-        public bool RedirectDiskDrives
+        public RDPDiskDrives RedirectDiskDrives
         {
             get => GetPropertyValue("RedirectDiskDrives", _redirectDiskDrives);
             set => SetField(ref _redirectDiskDrives, value, "RedirectDiskDrives");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.RedirectDiskDrivesCustom)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRedirectDiskDrivesCustom)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public string RedirectDiskDrivesCustom
+        {
+            get => GetPropertyValue("RedirectDiskDrivesCustom", _redirectDiskDrivesCustom);
+            set => SetField(ref _redirectDiskDrivesCustom, value, "RedirectDiskDrivesCustom");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Redirect), 6),
