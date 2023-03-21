@@ -93,25 +93,16 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             try
             {
-                //var q1 = Screen.FromControl(Control).Bounds.Size;
-                //var q2 = Control.Size;
-
                 var size = Fullscreen
                     ? Screen.FromControl(Control).Bounds.Size
                     : Control.Size;
 
-                //size = Screen.FromControl(Control).Bounds.Size;
                 UpdateSessionDisplaySettings((uint)size.Width, (uint)size.Height);
-
-                //size = Control.Size;
-                //UpdateSessionDisplaySettings((uint)size.Width, (uint)size.Height);
-
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage(
-                    string.Format(Language.ChangeConnectionResolutionError,
-                        connectionInfo.Hostname),
+                    string.Format(Language.ChangeConnectionResolutionError, connectionInfo.Hostname),
                     ex, MessageClass.WarningMsg, false);
             }
         }
@@ -120,18 +111,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             Control.Location = InterfaceControl.Location;
             // kmscode - this doesn't look right to me. But I'm not aware of any functionality issues with this currently...
-            if (!(Control.Size == InterfaceControl.Size) && !(InterfaceControl.Size == Size.Empty))
-            {
-                Control.Size = InterfaceControl.Size;
-                return true;
-            }
-
-            return false;
+            if (Control.Size == InterfaceControl.Size || InterfaceControl.Size == Size.Empty) return false;
+            Control.Size = InterfaceControl.Size;
+            return true;
         }
 
         protected virtual void UpdateSessionDisplaySettings(uint width, uint height)
         {
             RdpClient8.Reconnect(width, height);
         }
+
     }
 }
