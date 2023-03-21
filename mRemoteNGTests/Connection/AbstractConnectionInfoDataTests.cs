@@ -344,7 +344,7 @@ namespace mRemoteNGTests.Connection
         {
             var wasCalled = false;
             _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-            _testAbstractConnectionInfoData.RedirectDiskDrives = true;
+            _testAbstractConnectionInfoData.RedirectDiskDrives = RDPDiskDrives.Local;
             Assert.That(wasCalled, Is.True);
         }
 

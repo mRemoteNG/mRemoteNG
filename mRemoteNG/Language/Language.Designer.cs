@@ -4126,6 +4126,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter custom drives to redirect: C,D,X.
+        /// </summary>
+        internal static string PropertyDescriptionRedirectDiskDrivesCustom {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionRedirectDiskDrivesCustom", resourceCulture);
+            }
+        }
+
+        /// <summary>																						
         ///   Looks up a localized string similar to Select whether local disk drives should be shown on the remote host..
         /// </summary>
         internal static string PropertyDescriptionRedirectDrives {
@@ -4757,6 +4766,42 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        internal static string RdpDrivesAll {
+            get {
+                return ResourceManager.GetString("RdpDrivesAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        internal static string RdpDrivesCustom {
+            get {
+                return ResourceManager.GetString("RdpDrivesCustom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local.
+        /// </summary>
+        internal static string RdpDrivesLocal {
+            get {
+                return ResourceManager.GetString("RdpDrivesLocal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string RdpDrivesNone {
+            get {
+                return ResourceManager.GetString("RdpDrivesNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Internal error code 1..
         /// </summary>
         internal static string RdpErrorCode1 {
@@ -5176,6 +5221,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string Redirect {
             get {
                 return ResourceManager.GetString("Redirect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Drives.
+        /// </summary>
+        internal static string RedirectDiskDrivesCustom {
+            get {
+                return ResourceManager.GetString("RedirectDiskDrivesCustom", resourceCulture);
             }
         }
         

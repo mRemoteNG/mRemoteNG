@@ -33,7 +33,7 @@ namespace mRemoteNGTests.Config.Serializers.MiscSerializers
         private const RDPSounds ExpectedAudioRedirection = RDPSounds.DoNotPlay;
         private const bool ExpectedKeyRedirection = true;
         private const bool ExpectedSmartcardRedirection = true;
-        private const bool ExpectedDriveRedirection = true;
+        private const RDPDiskDrives ExpectedDriveRedirection = RDPDiskDrives.Local;
         private const bool ExpectedPortRedirection = true;
         private const bool ExpectedPrinterRedirection = true;
         private const AuthenticationLevel ExpectedAuthLevel = AuthenticationLevel.AuthRequired;

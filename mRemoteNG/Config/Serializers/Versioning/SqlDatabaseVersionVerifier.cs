@@ -44,6 +44,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     new SqlVersion26To27Upgrader(_databaseConnector),
                     new SqlVersion27To28Upgrader(_databaseConnector),
                     new SqlVersion28To29Upgrader(_databaseConnector),
+                    new SqlVersion29To30Upgrader(_databaseConnector),
                 };
 
                 foreach (var upgrader in dbUpgraders)

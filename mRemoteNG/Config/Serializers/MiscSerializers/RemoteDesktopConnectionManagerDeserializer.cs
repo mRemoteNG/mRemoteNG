@@ -294,7 +294,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
                 // ./redirectClipboard
                 if (bool.TryParse(localResourcesNode?.SelectSingleNode("./redirectDrives")?.InnerText, out var redirectDisks))
-	                connectionInfo.RedirectDiskDrives = redirectDisks;
+	                connectionInfo.RedirectDiskDrives = redirectDisks ? RDPDiskDrives.Local : RDPDiskDrives.None;
 
                 if (bool.TryParse(localResourcesNode?.SelectSingleNode("./redirectPorts")?.InnerText, out var redirectPorts))
 	                connectionInfo.RedirectPorts = redirectPorts;

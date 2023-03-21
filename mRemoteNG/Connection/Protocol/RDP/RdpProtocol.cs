@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Timers;
@@ -642,7 +643,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             try
             {
-                _rdpClient.AdvancedSettings2.RedirectDrives = connectionInfo.RedirectDiskDrives;
+                SetDriveRedirection();
                 _rdpClient.AdvancedSettings2.RedirectPorts = connectionInfo.RedirectPorts;
                 _rdpClient.AdvancedSettings2.RedirectPrinters = connectionInfo.RedirectPrinters;
                 _rdpClient.AdvancedSettings2.RedirectSmartCards = connectionInfo.RedirectSmartCards;
@@ -653,6 +654,46 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetRedirectionFailed, ex);
             }
+        }
+
+        private void SetDriveRedirection()
+        {
+            if (RDPDiskDrives.None == connectionInfo.RedirectDiskDrives)
+                _rdpClient.AdvancedSettings2.RedirectDrives = false;
+            else if (RDPDiskDrives.All == connectionInfo.RedirectDiskDrives)
+                _rdpClient.AdvancedSettings2.RedirectDrives = true;
+            else if (RDPDiskDrives.Custom == connectionInfo.RedirectDiskDrives)
+            {
+                var rdpNS5 = (IMsRdpClientNonScriptable5)((AxHost)Control).GetOcx();
+                for (uint i = 0; i < rdpNS5.DriveCollection.DriveCount; i++)
+                {
+                    IMsRdpDrive drive = rdpNS5.DriveCollection.DriveByIndex[i];
+                    drive.RedirectionState = connectionInfo.RedirectDiskDrivesCustom.Contains(drive.Name.Substring(0, 1));
+                }
+            }
+            else
+            {
+                // Local Drives
+                var rdpNS5 = (IMsRdpClientNonScriptable5)((AxHost)Control).GetOcx();
+                for (uint i = 0; i < rdpNS5.DriveCollection.DriveCount; i++)
+                {
+                    IMsRdpDrive drive = rdpNS5.DriveCollection.DriveByIndex[i];
+                    drive.RedirectionState = IsLocal(drive);
+                }
+            }
+        }
+
+        private bool IsLocal(IMsRdpDrive drive)
+        {
+            DriveInfo[] myDrives = DriveInfo.GetDrives();
+            foreach (DriveInfo myDrive in myDrives)
+            {
+                if (myDrive.Name.Substring(0, 1).Equals(drive.Name.Substring(0,1)))
+                {
+                    return myDrive.DriveType == DriveType.Fixed;
+                }
+            }
+            return false;
         }
 
         private void SetPerformanceFlags()

@@ -290,6 +290,11 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 strHide.Add(nameof(AbstractConnectionRecord.AutomaticResize));
             }
 
+            if (SelectedConnectionInfo.RedirectDiskDrives != RDPDiskDrives.Custom)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.RedirectDiskDrivesCustom));
+            }
+
             if (SelectedConnectionInfo.RedirectSound != RDPSounds.BringToThisComputer)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.SoundQuality));

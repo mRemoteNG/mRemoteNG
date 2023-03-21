@@ -2316,4 +2316,22 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="CheckboxNoReconnect" xml:space="preserve">
     <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>
   </data>
+  <data name="PropertyDescriptionRedirectDiskDrivesCustom" xml:space="preserve">
+    <value>Enter custom drives to redirect: C,D,X</value>
+  </data>
+  <data name="RdpDrivesAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="RdpDrivesCustom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="RdpDrivesLocal" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="RdpDrivesNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="RedirectDiskDrivesCustom" xml:space="preserve">
+    <value>Custom Drives</value>
+  </data>
 </root>

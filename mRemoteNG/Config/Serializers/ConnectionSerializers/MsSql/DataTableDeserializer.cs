@@ -124,7 +124,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             connectionInfo.DisableCursorShadow = (bool)dataRow["DisableCursorShadow"];
             connectionInfo.DisableCursorBlinking = (bool)dataRow["DisableCursorBlinking"];
             connectionInfo.CacheBitmaps = (bool)dataRow["CacheBitmaps"];
-            connectionInfo.RedirectDiskDrives = (bool)dataRow["RedirectDiskDrives"];
+            connectionInfo.RedirectDiskDrives = (RDPDiskDrives)Enum.Parse(typeof(RDPDiskDrives), (string)dataRow["RedirectDiskDrives"]);
+            connectionInfo.RedirectDiskDrivesCustom = (string)dataRow["RedirectDiskDrivesCustom"];
             connectionInfo.RedirectPorts = (bool)dataRow["RedirectPorts"];
             connectionInfo.RedirectPrinters = (bool)dataRow["RedirectPrinters"];
             connectionInfo.RedirectClipboard = (bool)dataRow["RedirectClipboard"];
@@ -189,6 +190,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
             connectionInfo.Inheritance.SSHOptions = (bool)dataRow["InheritSSHOptions"];
             connectionInfo.Inheritance.PuttySession = (bool)dataRow["InheritPuttySession"];
             connectionInfo.Inheritance.RedirectDiskDrives = (bool)dataRow["InheritRedirectDiskDrives"];
+            connectionInfo.Inheritance.RedirectDiskDrivesCustom = (bool)dataRow["InheritRedirectDiskDrivesCustom"];
             connectionInfo.Inheritance.RedirectKeys = (bool)dataRow["InheritRedirectKeys"];
             connectionInfo.Inheritance.RedirectPorts = (bool)dataRow["InheritRedirectPorts"];
             connectionInfo.Inheritance.RedirectPrinters = (bool)dataRow["InheritRedirectPrinters"];

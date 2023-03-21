@@ -447,6 +447,9 @@
     <None Update="Schemas\mremoteng_confcons_v2_6.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Schemas\mremoteng_confcons_v2_8.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Schemas\mremoteng_confcons_v2_7.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

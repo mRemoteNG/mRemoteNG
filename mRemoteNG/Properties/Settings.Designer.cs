@@ -169,16 +169,31 @@ namespace mRemoteNG.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ConDefaultRedirectDiskDrives {
+        [global::System.Configuration.DefaultSettingValueAttribute("Local")]
+        public string ConDefaultRedirectDiskDrives {
             get {
-                return ((bool)(this["ConDefaultRedirectDiskDrives"]));
+                return ((string)(this["ConDefaultRedirectDiskDrives"]));
             }
             set {
                 this["ConDefaultRedirectDiskDrives"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ConDefaultRedirectDiskDrivesCustom
+        {
+            get
+            {
+                return ((string)(this["ConDefaultRedirectDiskDrivesCustom"]));
+            }
+            set
+            {
+                this["ConDefaultRedirectDiskDrivesCustom"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
