@@ -1,4 +1,5 @@
-﻿using System.Runtime.Versioning;
+﻿using System;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using AxMSTSCLib;
 using MSTSCLib;
@@ -34,7 +35,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         protected override void UpdateSessionDisplaySettings(uint width, uint height)
         {
-            RdpClient9.UpdateSessionDisplaySettings(width, height, width, height, Orientation, DesktopScaleFactor, DeviceScaleFactor);
+            try
+            {
+                RdpClient9.UpdateSessionDisplaySettings(width, height, width, height, Orientation, DesktopScaleFactor, DeviceScaleFactor);
+            }
+            catch (Exception)
+            {
+                // target OS does not support newer method, fallback to an older method
+                base.UpdateSessionDisplaySettings(width, height);
+            }
         }
 
     }
