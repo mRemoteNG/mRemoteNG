@@ -71,7 +71,7 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
             }
         }
 
-        public override void Resize(object sender, EventArgs e)
+        protected override void Resize(object sender, EventArgs e)
         {
             try
             {

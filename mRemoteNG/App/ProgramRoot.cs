@@ -14,6 +14,7 @@ namespace mRemoteNG.App
     public static class ProgramRoot
     {
         private static Mutex _mutex;
+        private static FrmSplashScreenNew _frmSplashScreen = null;
 
         /// <summary>
         /// The main entry point for the application.
@@ -33,18 +34,19 @@ namespace mRemoteNG.App
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
-            var frmSplashScreen = FrmSplashScreenNew.GetInstance();
+            _frmSplashScreen = FrmSplashScreenNew.GetInstance();
 
             var targetScreen = Screen.PrimaryScreen;
 
             Rectangle viewport = targetScreen.WorkingArea;
-            frmSplashScreen.Top = viewport.Top;
-            frmSplashScreen.Left = viewport.Left;
-            // normaly it should be screens[1] however due DPI apply 1 size "same" as default with 100%
-                frmSplashScreen.Left = viewport.Left + (targetScreen.Bounds.Size.Width / 2) - (frmSplashScreen.Width / 2);
-                frmSplashScreen.Top = viewport.Top + (targetScreen.Bounds.Size.Height / 2) - (frmSplashScreen.Height / 2);
-            
-            frmSplashScreen.Show();
+            _frmSplashScreen.Top = viewport.Top;
+            _frmSplashScreen.Left = viewport.Left;
+            // normally it should be screens[1] however due DPI apply 1 size "same" as default with 100%
+            _frmSplashScreen.Left = viewport.Left + (targetScreen.Bounds.Size.Width / 2) - (_frmSplashScreen.Width / 2);
+            _frmSplashScreen.Top = viewport.Top + (targetScreen.Bounds.Size.Height / 2) - (_frmSplashScreen.Height / 2);
+            _frmSplashScreen.ShowInTaskbar = false;
+            _frmSplashScreen.Show();
+            throw new Exception();
             
             System.Windows.Forms.Application.Run(FrmMain.Default);
         }
@@ -101,14 +103,13 @@ namespace mRemoteNG.App
 
         private static void ApplicationOnThreadException(object sender, ThreadExceptionEventArgs e)
         {
-           // if (PresentationSource.FromVisual(FrmSplashScreenNew))
-                FrmSplashScreenNew.GetInstance().Close();
+            // if (PresentationSource.FromVisual(FrmSplashScreenNew))
+            FrmSplashScreenNew.GetInstance().Close();
 
             if (FrmMain.Default.IsDisposed) return;
-            
+
             var window = new FrmUnhandledException(e.Exception, false);
             window.ShowDialog(FrmMain.Default);
-            
         }
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)

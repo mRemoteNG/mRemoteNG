@@ -11,7 +11,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
     {
         private MsRdpClient9NotSafeForScripting RdpClient9 => (MsRdpClient9NotSafeForScripting)((AxHost)Control).GetOcx();
 
-        protected override RdpVersion RdpProtocolVersion => RdpVersion.Rdc9;
+        protected override RdpVersion RdpProtocolVersion => RDP.RdpVersion.Rdc9;
+
+        public RdpProtocol9()
+        {
+            _frmMain.ResizeEnd += ResizeEnd;
+        }
+        
+        public override bool Initialize()
+        {
+            if (!base.Initialize())
+                return false;
+
+            if (RdpVersion < Versions.RDC81) return false; // minimum dll version checked, loaded MSTSCLIB dll version is not capable
+
+            return true;
+        }
 
         protected override AxHost CreateActiveXRdpClientControl()
         {
@@ -20,7 +35,15 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         protected override void UpdateSessionDisplaySettings(uint width, uint height)
         {
-            RdpClient9.UpdateSessionDisplaySettings(width, height, width, height, 0, 1, 1);
+            try
+            {
+                RdpClient9.UpdateSessionDisplaySettings(width, height, width, height, Orientation, DesktopScaleFactor, DeviceScaleFactor);
+            }
+            catch (Exception)
+            {
+                // target OS does not support newer method, fallback to an older method
+                base.UpdateSessionDisplaySettings(width, height);
+            }
         }
 
     }

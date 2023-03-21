@@ -261,7 +261,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 }
                 else
                 {
-                    connectionInfo.Port = (int)RdpProtocol6.Defaults.Port;
+                    connectionInfo.Port = (int)RdpProtocol.Defaults.Port;
                     connectionInfo.Protocol = ProtocolType.RDP;
                 }
 
@@ -283,7 +283,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                         if (xmlnode.GetAttributeAsBool("UseVNC"))
                             connectionInfo.Port = (int)ProtocolVNC.Defaults.Port;
                         else
-                            connectionInfo.Port = (int)RdpProtocol6.Defaults.Port;
+                            connectionInfo.Port = (int)RdpProtocol.Defaults.Port;
                     }
 
                     connectionInfo.UseConsoleSession = false;

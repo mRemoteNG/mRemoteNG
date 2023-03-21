@@ -1,25 +1,26 @@
 ﻿using System.Runtime.Versioning;
 using System.Windows.Forms;
 using AxMSTSCLib;
-using MSTSCLib;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
     [SupportedOSPlatform("windows")]
     public class RdpProtocol11 : RdpProtocol10
     {
-        private MsRdpClient11NotSafeForScripting RdpClient11 => (MsRdpClient11NotSafeForScripting)((AxHost)Control).GetOcx();
-
-        protected override RdpVersion RdpProtocolVersion => RdpVersion.Rdc11;
+        protected override RdpVersion RdpProtocolVersion => RDP.RdpVersion.Rdc11;
 
         protected override AxHost CreateActiveXRdpClientControl()
         {
             return new AxMsRdpClient11NotSafeForScripting();
         }
-
-        protected override void UpdateSessionDisplaySettings(uint width, uint height)
+        public override bool Initialize()
         {
-            RdpClient11.UpdateSessionDisplaySettings(width, height, width, height, 0, 1, 1);
+            if (!base.Initialize())
+                return false;
+
+            if (RdpVersion < Versions.RDC100) return false; // minimum dll version checked, loaded MSTSCLIB dll version is not capable
+
+            return true;
         }
 
     }
