@@ -21,6 +21,11 @@ namespace mRemoteNG.Config.DataProviders
             var fileContents = "";
             try
             {
+                if (!File.Exists(FilePath))
+                {
+                    CreateMissingDirectories();
+                    File.WriteAllLines(FilePath, new []{ $@"<?xml version=""1.0"" encoding=""UTF-8""?>", $@"<LocalConnections/>" });
+                }
                 fileContents = File.ReadAllText(FilePath);
             }
             catch (FileNotFoundException ex)
