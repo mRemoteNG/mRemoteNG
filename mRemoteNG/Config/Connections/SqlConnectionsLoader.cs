@@ -6,7 +6,7 @@ using System.Security;
 using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
-using mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 using mRemoteNG.Config.Serializers.Versioning;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -21,20 +21,17 @@ namespace mRemoteNG.Config.Connections
     [SupportedOSPlatform("windows")]
     public class SqlConnectionsLoader : IConnectionsLoader
     {
-        private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>>
-            _localConnectionPropertiesDeserializer;
+        private readonly IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> _localConnectionPropertiesDeserializer;
 
         private readonly IDataProvider<string> _dataProvider;
 
-        public Func<Optional<SecureString>> AuthenticationRequestor { get; set; } =
-            () => MiscTools.PasswordDialog("", false);
+        private Func<Optional<SecureString>> AuthenticationRequestor { get; set; } = () => MiscTools.PasswordDialog("", false);
 
         public SqlConnectionsLoader(
             IDeserializer<string, IEnumerable<LocalConnectionPropertiesModel>> localConnectionPropertiesDeserializer,
             IDataProvider<string> dataProvider)
         {
-            _localConnectionPropertiesDeserializer =
-                localConnectionPropertiesDeserializer.ThrowIfNull(nameof(localConnectionPropertiesDeserializer));
+            _localConnectionPropertiesDeserializer = localConnectionPropertiesDeserializer.ThrowIfNull(nameof(localConnectionPropertiesDeserializer));
             _dataProvider = dataProvider.ThrowIfNull(nameof(dataProvider));
         }
 
@@ -45,9 +42,7 @@ namespace mRemoteNG.Config.Connections
             var metaDataRetriever = new SqlDatabaseMetaDataRetriever();
             var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);
             var cryptoProvider = new LegacyRijndaelCryptographyProvider();
-
-            var metaData = metaDataRetriever.GetDatabaseMetaData(connector) ?? 
-                           HandleFirstRun(metaDataRetriever, connector);
+            var metaData = metaDataRetriever.GetDatabaseMetaData(connector) ?? HandleFirstRun(metaDataRetriever, connector);
             var decryptionKey = GetDecryptionKey(metaData);
 
             if (!decryptionKey.Any())
@@ -66,13 +61,9 @@ namespace mRemoteNG.Config.Connections
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             var cipherText = metaData.Protected;
             var authenticator = new PasswordAuthenticator(cryptographyProvider, cipherText, AuthenticationRequestor);
-            var authenticated =
-                authenticator.Authenticate(new RootNodeInfo(RootNodeType.Connection).DefaultPassword
-                                                                                    .ConvertToSecureString());
+            var authenticated = authenticator.Authenticate(new RootNodeInfo(RootNodeType.Connection).DefaultPassword.ConvertToSecureString());
 
-            if (authenticated)
-                return authenticator.LastAuthenticatedPassword;
-            return Optional<SecureString>.Empty;
+            return authenticated ? authenticator.LastAuthenticatedPassword : Optional<SecureString>.Empty;
         }
 
         private void ApplyLocalConnectionProperties(ContainerInfo rootNode)
