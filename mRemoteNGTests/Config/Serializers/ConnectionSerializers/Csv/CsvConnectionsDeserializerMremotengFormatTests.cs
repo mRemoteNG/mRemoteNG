@@ -64,7 +64,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             Assert.That(con1.Parent, Is.EqualTo(folder1));
         }
 
-        internal static ConnectionInfo GetTestConnection()
+        private static ConnectionInfo GetTestConnection()
         {
             return new ConnectionInfo
             {
@@ -117,7 +117,8 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 DisableCursorShadow = false,
                 DisableCursorBlinking = false,
                 CacheBitmaps = true,
-                RedirectDiskDrives = true,
+                RedirectDiskDrives = RDPDiskDrives.None,
+                RedirectDiskDrivesCustom = "",
                 RedirectPorts = true,
                 RedirectPrinters = true,
                 RedirectSmartCards = true,
@@ -142,7 +143,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
             };
         }
 
-        internal static ConnectionInfo GetTestConnectionWithAllInherited()
+        private static ConnectionInfo GetTestConnectionWithAllInherited()
         {
             var connectionInfo = new ConnectionInfo();
             connectionInfo.Inheritance.TurnOnInheritanceCompletely();
