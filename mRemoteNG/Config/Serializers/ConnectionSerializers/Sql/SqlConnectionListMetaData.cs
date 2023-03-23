@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql
+namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
 {
     public class SqlConnectionListMetaData
     {
