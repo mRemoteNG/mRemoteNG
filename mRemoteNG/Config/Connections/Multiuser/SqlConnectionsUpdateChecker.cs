@@ -51,9 +51,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
             }
             catch (Exception e)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "Unable to connect to Sql DB to check for updates." +
-                                                    Environment.NewLine + e.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"Unable to connect to SQL DB to check for updates.{Environment.NewLine}{e.Message}", true);
             }
         }
 
@@ -66,31 +64,31 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
         {
-            DateTime lastSqlUpdateWithoutMilliseconds =
-                new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond),
-                             LastUpdateTime.Kind);
+            DateTime lastSqlUpdateWithoutMilliseconds = new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond), LastUpdateTime.Kind);
             return lastUpdateInDb == lastSqlUpdateWithoutMilliseconds;
         }
 
         private DateTime GetLastUpdateTimeFromDbResponse()
         {
-            var lastUpdateInDb = default(DateTime);
+            DateTime lastUpdateInDb = default(DateTime);
+
             try
             {
-                var sqlReader = _dbQuery.ExecuteReader(CommandBehavior.CloseConnection);
+                DbDataReader sqlReader = _dbQuery.ExecuteReader(CommandBehavior.CloseConnection);
                 sqlReader.Read();
                 if (sqlReader.HasRows)
+                {
                     lastUpdateInDb = Convert.ToDateTime(sqlReader["LastUpdate"]);
+                }
                 sqlReader.Close();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                    "Error executing Sql query to get updates from the DB." +
-                                                    Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Error executing SQL query to get updates from the DB." + Environment.NewLine + ex.Message, true);
             }
 
             _lastDatabaseUpdateTime = lastUpdateInDb;
+
             return lastUpdateInDb;
         }
 
