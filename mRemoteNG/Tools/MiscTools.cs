@@ -8,12 +8,9 @@ using System.IO;
 using System.Security;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
-using mRemoteNG.Properties;
 using mRemoteNG.UI.Forms;
 using MySql.Data.Types;
 using mRemoteNG.Resources.Language;
-using static System.String;
-using System.Windows;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tools
@@ -65,6 +62,26 @@ namespace mRemoteNG.Tools
             return Number;
         }
 
+        public static bool GetBooleanValue(object dataObject)
+        {
+            Type type = dataObject.GetType();
+
+            if (type == typeof(bool))
+            {
+                return (bool)dataObject;
+            }
+            if (type == typeof(string))
+            {
+                return (string)dataObject == "1";
+            }
+            if (type == typeof(sbyte))
+            {
+                return (sbyte)dataObject == 1;
+            }
+
+            Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"Conversion of object to boolean failed because the type, {type}, is not handled.");
+            return false;
+        }
 
         public static string DBDate(DateTime Dt)
 		{
@@ -95,10 +112,10 @@ namespace mRemoteNG.Tools
 			switch (Properties.OptionsDBsPage.Default.SQLServerType)
 			{
 				case "mysql":
-					return new MySqlDateTime(DateTime.Now);
+					return new MySqlDateTime(DateTime.Now.ToUniversalTime());
 				case "mssql":
 				default:
-					return DateTime.Now;
+					return DateTime.Now.ToUniversalTime();
 			}
 		}
 
@@ -117,7 +134,7 @@ namespace mRemoteNG.Tools
             var message = ex.Message;
             if (ex.InnerException == null) return message;
             var innerMessage = GetExceptionMessageRecursive(ex.InnerException, separator);
-            message = Join(separator, message, innerMessage);
+            message = String.Join(separator, message, innerMessage);
             return message;
         }
 
