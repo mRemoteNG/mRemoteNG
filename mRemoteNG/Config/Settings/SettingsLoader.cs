@@ -30,25 +30,12 @@ namespace mRemoteNG.Config.Settings
 
         public SettingsLoader(FrmMain mainForm, MessageCollector messageCollector, QuickConnectToolStrip quickConnectToolStrip, ExternalToolsToolStrip externalToolsToolStrip, MultiSshToolStrip multiSshToolStrip, MenuStrip mainMenu)
         {
-            if (mainForm == null)
-                throw new ArgumentNullException(nameof(mainForm));
-            if (messageCollector == null)
-                throw new ArgumentNullException(nameof(messageCollector));
-            if (quickConnectToolStrip == null)
-                throw new ArgumentNullException(nameof(quickConnectToolStrip));
-            if (externalToolsToolStrip == null)
-                throw new ArgumentNullException(nameof(externalToolsToolStrip));
-            if (multiSshToolStrip == null)
-                throw new ArgumentNullException(nameof(multiSshToolStrip));
-            if (mainMenu == null)
-                throw new ArgumentNullException(nameof(mainMenu));
-
-            MainForm = mainForm;
-            _messageCollector = messageCollector;
-            _quickConnectToolStrip = quickConnectToolStrip;
-            _externalToolsToolStrip = externalToolsToolStrip;
-            _multiSshToolStrip = multiSshToolStrip;
-            _mainMenu = mainMenu;
+            MainForm = mainForm ?? throw new ArgumentNullException(nameof(mainForm));
+            _messageCollector = messageCollector ?? throw new ArgumentNullException(nameof(messageCollector));
+            _quickConnectToolStrip = quickConnectToolStrip ?? throw new ArgumentNullException(nameof(quickConnectToolStrip));
+            _externalToolsToolStrip = externalToolsToolStrip ?? throw new ArgumentNullException(nameof(externalToolsToolStrip));
+            _multiSshToolStrip = multiSshToolStrip ?? throw new ArgumentNullException(nameof(multiSshToolStrip));
+            _mainMenu = mainMenu ?? throw new ArgumentNullException(nameof(mainMenu));
             _externalAppsLoader = new ExternalAppsLoader(MainForm, messageCollector, _externalToolsToolStrip);
         }
 
@@ -162,6 +149,7 @@ namespace mRemoteNG.Config.Settings
 
         private void EnsureSettingsAreSavedInNewestVersion()
         {
+            // TODO: is this ever true and run?
             if (Properties.App.Default.DoUpgrade)
                 UpgradeSettingsVersion();
         }

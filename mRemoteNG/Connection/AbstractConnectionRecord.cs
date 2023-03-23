@@ -91,8 +91,8 @@ namespace mRemoteNG.Connection
         private string _macAddress;
         private string _openingCommand;
         private string _userField;
-        private string _RDPStartProgram;
-        private string _RDPStartProgramWorkDir;
+        private string _rdpStartProgram;
+        private string _rdpStartProgramWorkDir;
         private bool _favorite;
 
         private ProtocolVNC.Compression _vncCompression;
@@ -870,8 +870,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual string RDPStartProgram
         {
-            get => GetPropertyValue("RDPStartProgram", _RDPStartProgram);
-            set => SetField(ref _RDPStartProgram, value, "RDPStartProgram");
+            get => GetPropertyValue("RDPStartProgram", _rdpStartProgram);
+            set => SetField(ref _rdpStartProgram, value, "RDPStartProgram");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous), 7),
@@ -880,8 +880,8 @@ namespace mRemoteNG.Connection
          AttributeUsedInProtocol(ProtocolType.RDP)]
         public virtual string RDPStartProgramWorkDir
         {
-            get => GetPropertyValue("RDPStartProgramWorkDir", _RDPStartProgramWorkDir);
-            set => SetField(ref _RDPStartProgramWorkDir, value, "RDPStartProgramWorkDir");
+            get => GetPropertyValue("RDPStartProgramWorkDir", _rdpStartProgramWorkDir);
+            set => SetField(ref _rdpStartProgramWorkDir, value, "RDPStartProgramWorkDir");
         }
 
         #endregion

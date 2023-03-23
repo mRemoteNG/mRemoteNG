@@ -8,14 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mRemoteNGTests.Config.Connections
+namespace mRemoteNGTests.Config.Connections;
+
+internal class XmlConnectionsLoaderTests
 {
-    class XmlConnectionsLoaderTests
+    [Test]
+    public void ThrowsFileNotFound()
     {
-        [Test]
-        public void ThrowsFileNotFound()
-        {
-            Assert.Throws<FileNotFoundException>(() => (new XmlConnectionsLoader(FileTestHelpers.NewTempFilePath())).Load());
-        }
+        Assert.Throws<FileNotFoundException>(() => new XmlConnectionsLoader(FileTestHelpers.NewTempFilePath()).Load());
     }
 }

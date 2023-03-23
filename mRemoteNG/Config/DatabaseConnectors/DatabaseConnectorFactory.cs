@@ -1,15 +1,15 @@
 ﻿using mRemoteNG.App;
-using mRemoteNG.Properties;
 using mRemoteNG.Security.SymmetricEncryption;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Config.DatabaseConnectors
 {
     [SupportedOSPlatform("windows")]
-    public class DatabaseConnectorFactory
+    public static class DatabaseConnectorFactory
     {
         public static IDatabaseConnector DatabaseConnectorFromSettings()
         {
+            // TODO: add custom port handling?
             var sqlType = Properties.OptionsDBsPage.Default.SQLServerType;
             var sqlHost = Properties.OptionsDBsPage.Default.SQLHost;
             var sqlCatalog = Properties.OptionsDBsPage.Default.SQLDatabaseName;

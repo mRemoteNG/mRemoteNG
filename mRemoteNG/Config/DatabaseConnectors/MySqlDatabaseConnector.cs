@@ -31,6 +31,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         public MySqlDatabaseConnector(string host, string database, string username, string password)
         {
+            // TODO: add custom port handling?
             string[] hostParts = host.Split(new char[]{':'}, 2);
             _dbHost = hostParts[0];
             _dbPort = (hostParts.Length == 2)?hostParts[1]:"3306";
@@ -48,9 +49,9 @@ namespace mRemoteNG.Config.DatabaseConnectors
 
         private void BuildSqlConnectionString()
         {
-            _dbConnectionString = $"server={_dbHost};user={_dbUsername};database={_dbName};port={_dbPort};password={_dbPassword}";
+            _dbConnectionString = $"server={_dbHost};user={_dbUsername};database={_dbName};port={_dbPort};password={_dbPassword};";
         }
-
+        
         public void Connect()
         {
             _dbConnection.Open();

@@ -11,26 +11,22 @@ namespace mRemoteNG.Config.Serializers.Versioning
     [SupportedOSPlatform("windows")]
     public class SqlDatabaseVersionVerifier
     {
-        protected readonly Version currentSupportedVersion = new Version(2, 9);
+        private readonly Version _currentSupportedVersion = new Version(3, 0);
 
         private readonly IDatabaseConnector _databaseConnector;
 
-        public SqlDatabaseVersionVerifier(IDatabaseConnector DatabaseConnector)
+        public SqlDatabaseVersionVerifier(IDatabaseConnector databaseConnector)
         {
-            if (DatabaseConnector == null)
-                throw new ArgumentNullException(nameof(DatabaseConnector));
-
-            _databaseConnector = DatabaseConnector;
+            _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
         }
 
         public bool VerifyDatabaseVersion(Version dbVersion)
         {
-            var isVerified = false;
             try
             {
-                var databaseVersion = dbVersion;
+                Version databaseVersion = dbVersion;
 
-                if (databaseVersion.Equals(new Version()))
+                if (databaseVersion.Equals(_currentSupportedVersion))
                 {
                     return true;
                 }
@@ -47,7 +43,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
                     new SqlVersion29To30Upgrader(_databaseConnector),
                 };
 
-                foreach (var upgrader in dbUpgraders)
+                foreach (IVersionUpgrader upgrader in dbUpgraders)
                 {
                     if (upgrader.CanUpgrade(databaseVersion))
                     {
@@ -56,23 +52,19 @@ namespace mRemoteNG.Config.Serializers.Versioning
                 }
 
                 // DB is at the highest current supported version
-                if (databaseVersion.CompareTo(currentSupportedVersion) == 0)
-                    isVerified = true;
+                if (databaseVersion.CompareTo(_currentSupportedVersion) == 0)
+                {
+                    return true;
+                }
 
-                if (isVerified == false)
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                        string.Format(Language.ErrorBadDatabaseVersion,
-                                                                      databaseVersion,
-                                                                      GeneralAppInfo.ProductName));
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.ErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProductName));
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    string.Format(Language.ErrorVerifyDatabaseVersionFailed,
-                                                                  ex.Message));
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.ErrorVerifyDatabaseVersionFailed, ex.Message));
             }
 
-            return isVerified;
+            return false;
         }
     }
 }

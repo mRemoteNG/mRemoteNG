@@ -9,7 +9,6 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.Connections.Multiuser;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
-using mRemoteNG.Config.Serializers.ConnectionSerializers.MsSql;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
@@ -19,6 +18,7 @@ using mRemoteNG.Tree.Root;
 using mRemoteNG.UI;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 
 namespace mRemoteNG.Connection
 {
@@ -142,7 +142,7 @@ namespace mRemoteNG.Connection
             var newConnectionTreeModel = connectionLoader.Load();
 
             if (useDatabase)
-                LastSqlUpdate = DateTime.Now;
+                LastSqlUpdate = DateTime.Now.ToUniversalTime();
 
             if (newConnectionTreeModel == null)
             {
@@ -246,7 +246,7 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Saving connections...");
                 RemoteConnectionsSyncronizer?.Disable();
 
-                var previouslyUsingDatabase = UsingDatabase;
+                bool previouslyUsingDatabase = UsingDatabase;
 
                 var saver = useDatabase
                     ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
@@ -255,12 +255,11 @@ namespace mRemoteNG.Connection
                 saver.Save(connectionTreeModel, propertyNameTrigger);
 
                 if (UsingDatabase)
-                    LastSqlUpdate = DateTime.Now;
+                    LastSqlUpdate = DateTime.Now.ToUniversalTime();
 
                 UsingDatabase = useDatabase;
                 ConnectionFileName = connectionFileName;
-                RaiseConnectionsSavedEvent(connectionTreeModel, previouslyUsingDatabase, UsingDatabase,
-                                           connectionFileName);
+                RaiseConnectionsSavedEvent(connectionTreeModel, previouslyUsingDatabase, UsingDatabase, connectionFileName);
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Successfully saved connections");
             }
             catch (Exception ex)

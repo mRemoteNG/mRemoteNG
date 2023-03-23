@@ -182,7 +182,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 {
                     nameof(ConnectionInfoInheritance.EverythingInherited),
                     nameof(ConnectionInfoInheritance.Parent),
-					nameof(ConnectionInfoInheritance.EverythingInherited)
+                    nameof(ConnectionInfoInheritance.EverythingInherited)
                 };
                 var properties = typeof(ConnectionInfoInheritance)
                     .GetProperties()
@@ -191,10 +191,10 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
 
                 return properties
-	                .Select(property => 
-		                new TestCaseData(property.Name)
-			                .Returns(property.GetValue(testInheritance)))
-	                .ToList();
+                    .Select(property =>
+                        new TestCaseData(property.Name)
+                            .Returns(property.GetValue(testInheritance)))
+                    .ToList();
             }
         }
     }

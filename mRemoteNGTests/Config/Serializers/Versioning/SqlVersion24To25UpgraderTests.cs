@@ -4,25 +4,24 @@ using mRemoteNG.Config.Serializers.Versioning;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace mRemoteNGTests.Config.Serializers.Versioning
+namespace mRemoteNGTests.Config.Serializers.Versioning;
+
+public class SqlVersion24To25UpgraderTests
 {
-    public class SqlVersion24To25UpgraderTests
+    private SqlVersion24To25Upgrader _versionUpgrader;
+
+    [SetUp]
+    public void Setup()
     {
-        private SqlVersion24To25Upgrader _versionUpgrader;
+        var sqlConnector = Substitute.For<MSSqlDatabaseConnector>("", "", "", "");
+        _versionUpgrader = new SqlVersion24To25Upgrader(sqlConnector);
+    }
 
-        [SetUp]
-        public void Setup()
-        {
-            var sqlConnector = Substitute.For<MSSqlDatabaseConnector>("", "", "", "");
-            _versionUpgrader = new SqlVersion24To25Upgrader(sqlConnector);
-        }
-
-        [Test]
-        public void CanUpgradeIfVersionIs24()
-        {
-            var currentVersion = new Version(2, 4);
-            var canUpgrade = _versionUpgrader.CanUpgrade(currentVersion);
-            Assert.That(canUpgrade, Is.True);
-        }
+    [Test]
+    public void CanUpgradeIfVersionIs24()
+    {
+        var currentVersion = new Version(2, 4);
+        var canUpgrade = _versionUpgrader.CanUpgrade(currentVersion);
+        Assert.That(canUpgrade, Is.True);
     }
 }

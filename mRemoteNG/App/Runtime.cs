@@ -105,7 +105,7 @@ namespace mRemoteNG.App
 
                 if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
-                    ConnectionsService.LastSqlUpdate = DateTime.Now;
+                    ConnectionsService.LastSqlUpdate = DateTime.Now.ToUniversalTime();
                 } 
 				else
                 {
