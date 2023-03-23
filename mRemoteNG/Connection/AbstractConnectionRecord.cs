@@ -76,8 +76,8 @@ namespace mRemoteNG.Connection
         private bool _disableCursorBlinking;
 
         private bool _redirectKeys;
-        private RDPDiskDrives _redirectDiskDrives = RDPDiskDrives.None;
-        private string _redirectDiskDrivesCustom = "";
+        private RDPDiskDrives _redirectDiskDrives;
+        private string _redirectDiskDrivesCustom;
         private bool _redirectPrinters;
         private bool _redirectClipboard;
         private bool _redirectPorts;
