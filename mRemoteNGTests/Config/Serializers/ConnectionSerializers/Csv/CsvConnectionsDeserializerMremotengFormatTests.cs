@@ -153,12 +153,85 @@ public class CsvConnectionsDeserializerMremotengFormatTests
     private class DeserializationTestSource
     {
         public static IEnumerable ConnectionPropertyTestCases()
+        private static ConnectionInfo GetTestConnection()
         {
             var ignoreProperties = new[]
             {
                 nameof(ConnectionInfo.Inheritance),
                 nameof(ConnectionInfo.ConstantID),
                 nameof(ConnectionInfo.Parent)
+                Name = "SomeName",
+                Description = "SomeDescription",
+                Icon = "SomeIcon",
+                Panel = "SomePanel",
+                Username = "SomeUsername",
+                Password = "SomePassword",
+                Domain = "SomeDomain",
+                Hostname = "SomeHostname",
+                PuttySession = "SomePuttySession",
+                LoadBalanceInfo = "SomeLoadBalanceInfo",
+                OpeningCommand = "SomeOpeningCommand",
+                PreExtApp = "SomePreExtApp",
+                PostExtApp = "SomePostExtApp",
+                MacAddress = "SomeMacAddress",
+                UserField = "SomeUserField",
+                VmId = "SomeVmId",
+                ExtApp = "SomeExtApp",
+                VNCProxyUsername = "SomeVNCProxyUsername",
+                VNCProxyPassword = "SomeVNCProxyPassword",
+                RDGatewayUsername = "SomeRDGatewayUsername",
+                RDGatewayPassword = "SomeRDGatewayPassword",
+                RDGatewayDomain = "SomeRDGatewayDomain",
+                VNCProxyIP = "SomeVNCProxyIP",
+                RDGatewayHostname = "SomeRDGatewayHostname",
+                RDGatewayExternalCredentialProvider = ExternalCredentialProvider.None,
+                RDGatewayUserViaAPI = "123",
+                Protocol = ProtocolType.RDP,
+                Port = 999,
+                Favorite = true,
+                UseConsoleSession = true,
+                UseCredSsp = true,
+                UseRestrictedAdmin = true,
+                UseRCG = true,
+                UseVmId = false,
+                UseEnhancedMode = false,
+                RenderingEngine = HTTPBase.RenderingEngine.EdgeChromium,
+                RDPAuthenticationLevel = AuthenticationLevel.WarnOnFailedAuth,
+                Colors = RDPColors.Colors16Bit,
+                Resolution = RDPResolutions.Res1366x768,
+                AutomaticResize = true,
+                DisplayWallpaper = true,
+                DisplayThemes = true,
+                EnableFontSmoothing = true,
+                EnableDesktopComposition = true,
+                DisableFullWindowDrag = false,
+                DisableMenuAnimations = false,
+                DisableCursorShadow = false,
+                DisableCursorBlinking = false,
+                CacheBitmaps = true,
+                RedirectDiskDrives = RDPDiskDrives.None,
+                RedirectDiskDrivesCustom = "",
+                RedirectPorts = true,
+                RedirectPrinters = true,
+                RedirectSmartCards = true,
+                RedirectSound = RDPSounds.LeaveAtRemoteComputer,
+                RedirectAudioCapture = true,
+                RedirectKeys = true,
+                VNCCompression = ProtocolVNC.Compression.Comp4,
+                VNCEncoding = ProtocolVNC.Encoding.EncRRE,
+                VNCAuthMode = ProtocolVNC.AuthMode.AuthVNC,
+                VNCProxyType = ProtocolVNC.ProxyType.ProxySocks5,
+                VNCProxyPort = 123,
+                VNCColors = ProtocolVNC.Colors.Col8Bit,
+                VNCSmartSizeMode = ProtocolVNC.SmartSizeMode.SmartSAspect,
+                VNCViewOnly = true,
+                RDGatewayUsageMethod = RDGatewayUsageMethod.Detect,
+                RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard,
+                UserViaAPI = "",
+                EC2InstanceId = "",
+                EC2Region = "eu-central-1",
+                ExternalAddressProvider = ExternalAddressProvider.None,
+                ExternalCredentialProvider = ExternalCredentialProvider.None
             };
             var properties = typeof(ConnectionInfo)
                 .GetProperties()
@@ -169,30 +242,59 @@ public class CsvConnectionsDeserializerMremotengFormatTests
             foreach (var property in properties)
                 testCases.Add(
                     new TestCaseData(property.Name)
-                        .Returns(property.GetValue(testConnectionInfo)));
-
-            return testCases;
+        private static ConnectionInfo GetTestConnectionWithAllInherited()
+        {
+            var connectionInfo = new ConnectionInfo();
+            connectionInfo.Inheritance.TurnOnInheritanceCompletely();
+            return connectionInfo;
         }
 
-        public static IEnumerable InheritanceTestCases()
+        private class DeserializationTestSource
         {
-            var ignoreProperties = new[]
+            public static IEnumerable ConnectionPropertyTestCases()
             {
-                nameof(ConnectionInfoInheritance.EverythingInherited),
-                nameof(ConnectionInfoInheritance.Parent),
-                nameof(ConnectionInfoInheritance.EverythingInherited)
-            };
-            var properties = typeof(ConnectionInfoInheritance)
-                .GetProperties()
-                .Where(property => !ignoreProperties.Contains(property.Name));
-            var testCases = new List<TestCaseData>();
-            var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+                var ignoreProperties = new[]
+                {
+                    nameof(ConnectionInfo.Inheritance),
+                    nameof(ConnectionInfo.ConstantID),
+                    nameof(ConnectionInfo.Parent)
+                };
+                var properties = typeof(ConnectionInfo)
+                    .GetProperties()
+                    .Where(property => !ignoreProperties.Contains(property.Name));
+                var testCases = new List<TestCaseData>();
+                var testConnectionInfo = GetTestConnection();
 
-            return properties
-                .Select(property =>
-                    new TestCaseData(property.Name)
-                        .Returns(property.GetValue(testInheritance)))
-                .ToList();
+                foreach (var property in properties)
+                {
+                    testCases.Add(
+                        new TestCaseData(property.Name)
+                        .Returns(property.GetValue(testConnectionInfo)));
+                }
+
+                return testCases;
+            }
+
+            public static IEnumerable InheritanceTestCases()
+            {
+                var ignoreProperties = new[]
+                {
+                    nameof(ConnectionInfoInheritance.EverythingInherited),
+                    nameof(ConnectionInfoInheritance.Parent),
+					nameof(ConnectionInfoInheritance.EverythingInherited)
+                };
+                var properties = typeof(ConnectionInfoInheritance)
+                    .GetProperties()
+                    .Where(property => !ignoreProperties.Contains(property.Name));
+                var testCases = new List<TestCaseData>();
+                var testInheritance = GetTestConnectionWithAllInherited().Inheritance;
+
+                return properties
+	                .Select(property => 
+		                new TestCaseData(property.Name)
+			                .Returns(property.GetValue(testInheritance)))
+	                .ToList();
+            }
         }
     }
 }
