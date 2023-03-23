@@ -13,10 +13,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public SqlVersion23To24Upgrader(IDatabaseConnector databaseConnector)
         {
-            if (databaseConnector == null)
-                throw new ArgumentNullException(nameof(databaseConnector));
-
-            _databaseConnector = databaseConnector;
+            _databaseConnector = databaseConnector ?? throw new ArgumentNullException(nameof(databaseConnector));
         }
 
         public bool CanUpgrade(Version currentVersion)
@@ -26,13 +23,15 @@ namespace mRemoteNG.Config.Serializers.Versioning
 
         public Version Upgrade()
         {
-            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                                                "Upgrading database from version 2.3 to version 2.4.");
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Upgrading database from version 2.3 to version 2.4.");
+
             const string sqlText = @"
 ALTER TABLE tblCons
 ADD UseCredSsp bit NOT NULL DEFAULT 1,
     InheritUseCredSsp bit NOT NULL DEFAULT 0;";
+
             var dbCommand = _databaseConnector.DbCommand(sqlText);
+
             dbCommand.ExecuteNonQuery();
 
             return new Version(2, 4);

@@ -10,7 +10,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
     [SupportedOSPlatform("windows")]
     public class SqlVersion28To29Upgrader : IVersionUpgrader
     {
-        private readonly Version version = new Version(2, 9);
+        private readonly Version _version = new Version(2, 9);
         private readonly IDatabaseConnector _databaseConnector;
 
         public SqlVersion28To29Upgrader(IDatabaseConnector databaseConnector)
@@ -23,44 +23,44 @@ namespace mRemoteNG.Config.Serializers.Versioning
             return currentVersion == new Version(2, 8) ||
                 // Support upgrading during dev revisions, 2.9.1, 2.9.2, etc...
                 (currentVersion <= new Version(2, 9) &&
-                currentVersion < version);
+                currentVersion < _version);
         }
 
         public Version Upgrade()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
-                $"Upgrading database to version {version}.");
+                $"Upgrading database to version {_version}.");
 
             // MYSQL
             const string mySqlAlter = @"
-ALTER TABLE tblCons ADD COLUMN `InheritUseRestrictedAdmin` tinyint(1) NOT NULL;
-ALTER TABLE tblCons ADD COLUMN `UseRCG` tinyint(1) NOT NULL;
-ALTER TABLE tblCons ADD COLUMN `UseRestrictedAdmin` tinyint(1) NOT NULL;
-ALTER TABLE tblCons ADD COLUMN `InheritUseRCG` tinyint(1) NOT NULL;
-ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayExternalCredentialProvider` tinyint(1) NOT NULL;
-ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayUserViaAPI` tinyint(1) NOT NULL;
-ALTER TABLE tblCons ADD COLUMN `InheritExternalCredentialProvider` tinyint(1) NOT NULL;
-ALTER TABLE tblCons ADD COLUMN `InheritUserViaAPI` tinyint(1) NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritUseRestrictedAdmin` tinyint NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `UseRCG` tinyint NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `UseRestrictedAdmin` tinyint NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritUseRCG` tinyint NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayExternalCredentialProvider` tinyint NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritRDGatewayUserViaAPI` tinyint NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritExternalCredentialProvider` tinyint NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `InheritUserViaAPI` tinyint NOT NULL;
 ALTER TABLE tblCons ADD COLUMN `EC2Region` varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons ADD COLUMN `EC2InstanceId` varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons ADD COLUMN `ExternalCredentialProvider` varchar(256) DEFAULT NULL;
 ALTER TABLE tblCons ADD COLUMN `ExternalAddressProvider` varchar(256) DEFAULT NULL;
 SET SQL_SAFE_UPDATES=0;
 UPDATE tblCons SET InheritUseEnhancedMode = 0 WHERE InheritUseEnhancedMode IS NULL;
-ALTER TABLE tblCons MODIFY COLUMN InheritUseEnhancedMode tinyint(1) NOT NULL;
+ALTER TABLE tblCons MODIFY COLUMN InheritUseEnhancedMode tinyint NOT NULL;
 UPDATE tblCons SET UseEnhancedMode = 0 WHERE UseEnhancedMode IS NULL;
-ALTER TABLE tblCons MODIFY COLUMN UseEnhancedMode tinyint(1) NOT NULL;
+ALTER TABLE tblCons MODIFY COLUMN UseEnhancedMode tinyint NOT NULL;
 UPDATE tblCons SET InheritVmId = 0 WHERE InheritVmId IS NULL;
-ALTER TABLE tblCons MODIFY COLUMN InheritVmId tinyint(1) NOT NULL;
+ALTER TABLE tblCons MODIFY COLUMN InheritVmId tinyint NOT NULL;
 UPDATE tblCons SET InheritUseVmId = 0 WHERE InheritUseVmId IS NULL;
-ALTER TABLE tblCons MODIFY COLUMN InheritUseVmId tinyint(1) NOT NULL;
+ALTER TABLE tblCons MODIFY COLUMN InheritUseVmId tinyint NOT NULL;
 UPDATE tblCons SET UseVmId = 0 WHERE UseVmId IS NULL;
-ALTER TABLE tblCons MODIFY COLUMN UseVmId tinyint(1) NOT NULL;
+ALTER TABLE tblCons MODIFY COLUMN UseVmId tinyint NOT NULL;
 SET SQL_SAFE_UPDATES=1;
-ALTER TABLE tblRoot ALTER COLUMN ConfVersion VARCHAR(15) NOT NULL;
+ALTER TABLE tblRoot MODIFY COLUMN ConfVersion VARCHAR(15) NOT NULL;
 ";
 
-            const string mySqlUpdate = @"UPDATE tblRoot SET ConfVersion=?;";
+            const string mySqlUpdate = @"SET SQL_SAFE_UPDATES=0; UPDATE tblRoot SET ConfVersion=?; SET SQL_SAFE_UPDATES=1;";
 
             // MS-SQL
             const string msSqlAlter = @"
@@ -116,7 +116,7 @@ ALTER TABLE tblRoot ALTER COLUMN [ConfVersion] VARCHAR(15) NOT NULL;
                 }
                 var pConfVersion = dbCommand.CreateParameter();
                 pConfVersion.ParameterName = "confVersion";
-                pConfVersion.Value = version.ToString();
+                pConfVersion.Value = _version.ToString();
                 pConfVersion.DbType = System.Data.DbType.String;
                 pConfVersion.Direction = System.Data.ParameterDirection.Input;
                 dbCommand.Parameters.Add(pConfVersion);
@@ -124,7 +124,7 @@ ALTER TABLE tblRoot ALTER COLUMN [ConfVersion] VARCHAR(15) NOT NULL;
                 dbCommand.ExecuteNonQuery();
                 sqlTran.Commit();
             }
-            return version;
+            return _version;
         }
     }
 }
