@@ -15,10 +15,7 @@ namespace mRemoteNG.App.Initialization
 
         public StartupDataLogger(MessageCollector messageCollector)
         {
-            if (messageCollector == null)
-                throw new ArgumentNullException(nameof(messageCollector));
-
-            _messageCollector = messageCollector;
+            _messageCollector = messageCollector ?? throw new ArgumentNullException(nameof(messageCollector));
         }
 
         public void LogStartupData()
@@ -50,7 +47,7 @@ namespace mRemoteNG.App.Initialization
                     .Get())
                 {
                     var managementObject = (ManagementObject)o;
-                    osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
+                    osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption"))?.Trim();
                     servicePack = GetOSServicePack(servicePack, managementObject);
                 }
             }
@@ -79,8 +76,7 @@ namespace mRemoteNG.App.Initialization
             var architecture = string.Empty;
             try
             {
-                foreach (var o in new ManagementObjectSearcher("SELECT AddressWidth FROM Win32_Processor WHERE DeviceID=\'CPU0\'")
-                    .Get())
+                foreach (var o in new ManagementObjectSearcher("SELECT AddressWidth FROM Win32_Processor WHERE DeviceID=\'CPU0\'").Get())
                 {
                     var managementObject = (ManagementObject)o;
                     var addressWidth = Convert.ToInt32(managementObject.GetPropertyValue("AddressWidth"));
@@ -118,8 +114,7 @@ namespace mRemoteNG.App.Initialization
 
         private void LogCultureData()
         {
-            var data =
-                $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}";
+            var data = $"System Culture: {Thread.CurrentThread.CurrentUICulture.Name}/{Thread.CurrentThread.CurrentUICulture.NativeName}";
             _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
         }
     }

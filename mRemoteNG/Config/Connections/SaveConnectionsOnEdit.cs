@@ -24,8 +24,7 @@ namespace mRemoteNG.Config.Connections
 
         private void ConnectionsServiceOnConnectionsLoaded(object sender, ConnectionsLoadedEventArgs connectionsLoadedEventArgs)
         {
-            connectionsLoadedEventArgs.NewConnectionTreeModel.CollectionChanged +=
-                ConnectionTreeModelOnCollectionChanged;
+            connectionsLoadedEventArgs.NewConnectionTreeModel.CollectionChanged += ConnectionTreeModelOnCollectionChanged;
             connectionsLoadedEventArgs.NewConnectionTreeModel.PropertyChanged += ConnectionTreeModelOnPropertyChanged;
 
             foreach (var oldTree in connectionsLoadedEventArgs.PreviousConnectionTreeModel)

@@ -23,16 +23,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                                              SecureString encryptionKey,
                                              SaveFilter saveFilter)
         {
-            if (cryptographyProvider == null)
-                throw new ArgumentNullException(nameof(cryptographyProvider));
-            if (encryptionKey == null)
-                throw new ArgumentNullException(nameof(encryptionKey));
-            if (saveFilter == null)
-                throw new ArgumentNullException(nameof(saveFilter));
-
-            _cryptographyProvider = cryptographyProvider;
-            _encryptionKey = encryptionKey;
-            _saveFilter = saveFilter;
+            _cryptographyProvider = cryptographyProvider ?? throw new ArgumentNullException(nameof(cryptographyProvider));
+            _encryptionKey = encryptionKey ?? throw new ArgumentNullException(nameof(encryptionKey));
+            _saveFilter = saveFilter ?? throw new ArgumentNullException(nameof(saveFilter));
         }
 
         public XElement Serialize(ConnectionInfo connectionInfo)
