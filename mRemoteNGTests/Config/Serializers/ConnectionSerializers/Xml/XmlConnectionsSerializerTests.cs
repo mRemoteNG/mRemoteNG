@@ -24,7 +24,7 @@ public class XmlConnectionsSerializerTests
     {
         _connectionTreeModel = SetupConnectionTreeModel();
         _cryptographyProvider = new AeadCryptographyProvider();
-        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+        var connectionNodeSerializer = new XmlConnectionNodeSerializer28(
             _cryptographyProvider,
             _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
             new SaveFilter());
@@ -37,8 +37,7 @@ public class XmlConnectionsSerializerTests
         var serializedConnections = _serializer.Serialize(_connectionTreeModel);
         var xmlDoc = new XmlDocument();
         xmlDoc.LoadXml(serializedConnections);
-        var nodeCon4 =
-            xmlDoc.DocumentElement?.SelectSingleNode("Node[@Name='folder2']/Node[@Name='folder3']/Node[@Name='con4']");
+        var nodeCon4 = xmlDoc.DocumentElement?.SelectSingleNode("Node[@Name='folder2']/Node[@Name='folder3']/Node[@Name='con4']");
         Assert.That(nodeCon4, Is.Not.Null);
     }
 
@@ -59,7 +58,7 @@ public class XmlConnectionsSerializerTests
     [TestCase("InheritAutomaticResize", null)]
     public void SerializerRespectsSaveFilterSettings(string attributeName, string expectedValue)
     {
-        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+        var connectionNodeSerializer = new XmlConnectionNodeSerializer28(
             _cryptographyProvider,
             _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
             new SaveFilter(true));

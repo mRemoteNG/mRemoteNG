@@ -127,7 +127,7 @@
     <xs:attribute name="InheritSSHOptions" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritPuttySession" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectDiskDrives" type="xs:boolean" use="optional" />
-    <xs:attribute name="InheritRedirectDiskDrivesCustom" type="xs:string" use="optional" />
+    <xs:attribute name="InheritRedirectDiskDrivesCustom" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectKeys" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectPorts" type="xs:boolean" use="optional" />
     <xs:attribute name="InheritRedirectPrinters" type="xs:boolean" use="optional" />

@@ -21,7 +21,7 @@ public class XmlConnectionsDocumentEncryptorTests
     {
         var connectionTreeModel = SetupConnectionTreeModel();
         var cryptoProvider = new CryptoProviderFactory(BlockCipherEngines.AES, BlockCipherModes.GCM).Build();
-        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+        var connectionNodeSerializer = new XmlConnectionNodeSerializer28(
             cryptoProvider,
             connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
             new SaveFilter());

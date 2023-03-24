@@ -254,6 +254,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.DisableCursorBlinking),
                         nameof(ConnectionInfo.RedirectKeys),
                         nameof(ConnectionInfo.RedirectDiskDrives),
+                        nameof(ConnectionInfo.RedirectDiskDrivesCustom),
                         nameof(ConnectionInfo.RedirectPrinters),
                         nameof(ConnectionInfo.RedirectClipboard),
                         nameof(ConnectionInfo.RedirectPorts),
@@ -267,6 +268,7 @@ namespace mRemoteNGTests.UI.Window.ConfigWindowTests
                         nameof(ConnectionInfo.RDGatewayUserViaAPI),
                         nameof(ConnectionInfo.ExternalCredentialProvider),
                         nameof(ConnectionInfo.ExternalAddressProvider),
+                        nameof(ConnectionInfo.UserViaAPI),
                     });
                     break;
                 case ProtocolType.VNC:

@@ -43,13 +43,13 @@ namespace mRemoteNGTests.Connection
 		{
             var saveTarget = new SerializableConnectionInfoAllPropertiesOfType<string>();
 
-			// randomize default connnection values to ensure we dont get false passing tests
+			// randomize default connection values to ensure we don't get false passing tests
 			var randomizedValue = property.GetValue(_randomizedConnectionInfo);
 			property.SetValue(DefaultConnectionInfo.Instance, randomizedValue);
 
             DefaultConnectionInfo.Instance.SaveTo(saveTarget);
 
-			var valueInSource = property.GetValue(DefaultConnectionInfo.Instance).ToString();
+			var valueInSource = property.GetValue(DefaultConnectionInfo.Instance)?.ToString();
 			var valueInDestination = saveTarget.GetType().GetProperty(property.Name)?.GetValue(saveTarget)?.ToString();
             Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
