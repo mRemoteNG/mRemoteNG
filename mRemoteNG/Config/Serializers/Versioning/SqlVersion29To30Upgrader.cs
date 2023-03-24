@@ -37,6 +37,7 @@ ALTER TABLE tblCons MODIFY COLUMN `RenderingEngine` varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons MODIFY COLUMN `RedirectDiskDrives` varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons ADD COLUMN `RedirectDiskDrivesCustom` varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons ADD COLUMN `InheritRedirectDiskDrivesCustom` tinyint NOT NULL;
+ALTER TABLE tblCons ADD COLUMN `UserViaAPI` varchar(512) NOT NULL;
 
 -- mysql tinyint(1) is deprecated - modify all tinyint(1) columns to tinyint
 ALTER TABLE tblCons MODIFY COLUMN `Expanded` tinyint NOT NULL;
@@ -151,6 +152,7 @@ ALTER TABLE tblCons ALTER COLUMN RenderingEngine varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons ALTER COLUMN RedirectDiskDrives varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons ADD RedirectDiskDrivesCustom varchar(32) DEFAULT NULL;
 ALTER TABLE tblCons ADD InheritRedirectDiskDrivesCustom bit NOT NULL;
+ALTER TABLE tblCons ADD `UserViaAPI` varchar(512) NOT NULL;
 ";
 
             const string msSqlUpdate = @"UPDATE tblRoot SET ConfVersion=@confVersion;";
