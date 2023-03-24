@@ -339,7 +339,7 @@ namespace mRemoteNG.UI.Menu
                 if (!(window is ConnectionWindow connectionWindow))
                     return;
 
-                connectionWindow.reconnectAll(Runtime.ConnectionInitiator);
+                connectionWindow.ReconnectAll(Runtime.ConnectionInitiator);
             }
         }
 
