@@ -26,7 +26,7 @@ namespace mRemoteNG.UI.Window
     [SupportedOSPlatform("windows")]
     public partial class ConnectionWindow : BaseWindow
     {
-        private VisualStudioToolStripExtender vsToolStripExtender;
+        private VisualStudioToolStripExtender _vsToolStripExtender;
         private readonly ToolStripRenderer _toolStripProfessionalRenderer = new ToolStripProfessionalRenderer();
 
         #region Public Methods
@@ -81,8 +81,7 @@ namespace mRemoteNG.UI.Window
             cmenTabStartChat.Click += (sender, args) => StartChat();
             cmenTabTransferFile.Click += (sender, args) => TransferFile();
             cmenTabRefreshScreen.Click += (sender, args) => RefreshScreen();
-            cmenTabSendSpecialKeysCtrlAltDel.Click +=
-                (sender, args) => SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlAltDel);
+            cmenTabSendSpecialKeysCtrlAltDel.Click += (sender, args) => SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlAltDel);
             cmenTabSendSpecialKeysCtrlEsc.Click += (sender, args) => SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlEsc);
             cmenTabRenameTab.Click += (sender, args) => RenameTab();
             cmenTabDuplicateTab.Click += (sender, args) => DuplicateTab();
@@ -151,8 +150,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("AddConnectionTab (UI.Window.ConnectionWindow) failed",
-                                                             ex);
+                Runtime.MessageCollector.AddExceptionMessage("AddConnectionTab (UI.Window.ConnectionWindow) failed", ex);
             }
 
             return null;
@@ -160,7 +158,7 @@ namespace mRemoteNG.UI.Window
 
         #endregion
 
-        public void reconnectAll(IConnectionInitiator initiator)
+        public void ReconnectAll(IConnectionInitiator initiator)
         {
             var controlList = new List<InterfaceControl>();
             try
@@ -213,16 +211,14 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector.AddExceptionMessage("UI.Window.ConnectionWindow.ApplyTheme() failed", ex);
             }
 
-            vsToolStripExtender = new VisualStudioToolStripExtender(components)
+            _vsToolStripExtender = new VisualStudioToolStripExtender(components)
             {
                 DefaultRenderer = _toolStripProfessionalRenderer
             };
-            vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version,
-                                         ThemeManager.getInstance().ActiveTheme.Theme);
+            _vsToolStripExtender.SetStyle(cmenTab, ThemeManager.getInstance().ActiveTheme.Version, ThemeManager.getInstance().ActiveTheme.Theme);
 
             if (!ThemeManager.getInstance().ActiveAndExtended) return;
-            connDock.DockBackColor =
-                ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
+            connDock.DockBackColor = ThemeManager.getInstance().ActiveTheme.ExtendedPalette.getColor("Tab_Item_Background");
         }
 
         private bool _documentHandlersAdded;
@@ -322,8 +318,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Connection.Connection_FormClosing() failed",
-                                                             ex);
+                Runtime.MessageCollector.AddExceptionMessage("UI.Window.Connection.Connection_FormClosing() failed", ex);
             }
         }
 
@@ -416,8 +411,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("ShowHideMenuButtons (UI.Window.ConnectionWindow) failed",
-                                                             ex);
+                Runtime.MessageCollector.AddExceptionMessage("ShowHideMenuButtons (UI.Window.ConnectionWindow) failed", ex);
             }
         }
 
@@ -613,15 +607,13 @@ namespace mRemoteNG.UI.Window
                         Image = externalTool.Image ?? Properties.Resources.mRemoteNG_Icon.ToBitmap()
                     };
 
-                    nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem)sender).Tag as ExternalTool);
+                    nItem.Click += (sender, args) => StartExternalApp(((ToolStripMenuItem)sender)?.Tag as ExternalTool);
                     cmenTabExternalApps.DropDownItems.Add(nItem);
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionWindow)",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionWindow)", ex);
             }
         }
 
@@ -634,9 +626,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage(
-                                                             "cmenTabExternalAppsEntry_Click failed (UI.Window.ConnectionWindow)",
-                                                             ex);
+                Runtime.MessageCollector.AddExceptionMessage("cmenTabExternalAppsEntry_Click failed (UI.Window.ConnectionWindow)", ex);
             }
         }
 
@@ -741,8 +731,7 @@ namespace mRemoteNG.UI.Window
                 var interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null)
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
-                                                        "Reconnect (UI.Window.ConnectionWindow) failed. Could not find InterfaceControl.");
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Reconnect (UI.Window.ConnectionWindow) failed. Could not find InterfaceControl.");
                     return;
                 }
 
