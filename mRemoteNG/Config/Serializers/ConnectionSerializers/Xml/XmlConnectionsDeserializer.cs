@@ -569,7 +569,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
                 switch (_confVersion)
                 {
-                    case >= 3.0:
+                    case >= 2.8:
                         connectionInfo.RedirectDiskDrives = xmlnode.GetAttributeAsEnum<RDPDiskDrives>("RedirectDiskDrives");
                         connectionInfo.RedirectDiskDrivesCustom = xmlnode.GetAttributeAsString("RedirectDiskDrivesCustom");
                         connectionInfo.Inheritance.RedirectDiskDrivesCustom = xmlnode.GetAttributeAsBool("InheritRedirectDiskDrivesCustom");

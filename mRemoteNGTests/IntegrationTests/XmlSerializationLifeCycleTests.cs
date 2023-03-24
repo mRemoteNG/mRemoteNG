@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Xml;
 
-
 namespace mRemoteNGTests.IntegrationTests
 {
     public class XmlSerializationLifeCycleTests
@@ -26,7 +25,7 @@ namespace mRemoteNGTests.IntegrationTests
         {
             _originalModel = SetupConnectionTreeModel();
             var cryptoProvider = _cryptoFactory.Build();
-            var nodeSerializer = new XmlConnectionNodeSerializer27(
+            var nodeSerializer = new XmlConnectionNodeSerializer28(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());
@@ -71,13 +70,12 @@ namespace mRemoteNGTests.IntegrationTests
             Assert.That(deserializedConnectionInfo.Description, Is.EqualTo(originalConnectionInfo.Description));
         }
 
-
         [Test]
         public void SerializeAndDeserializeWithCustomKdfIterationsValue()
         {
             var cryptoProvider = _cryptoFactory.Build();
             cryptoProvider.KeyDerivationIterations = 5000;
-            var nodeSerializer = new XmlConnectionNodeSerializer27(
+            var nodeSerializer = new XmlConnectionNodeSerializer28(
                 cryptoProvider, 
                 _originalModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
                 new SaveFilter());

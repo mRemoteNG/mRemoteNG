@@ -30,7 +30,7 @@ public class ValidateXmlSchemas
         _connectionTreeModel.AddRootNode(root);
 
         _cryptographyProvider = new AeadCryptographyProvider();
-        var connectionNodeSerializer = new XmlConnectionNodeSerializer27(
+        var connectionNodeSerializer = new XmlConnectionNodeSerializer28(
             _cryptographyProvider,
             _connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First().PasswordString.ConvertToSecureString(),
             new SaveFilter());
