@@ -12,7 +12,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     public sealed partial class ConnectionsPage
     {
         private readonly FrmMain _frmMain = FrmMain.Default;
-		private List<DropdownList> _connectionWarning;
+        private List<DropdownList> _connectionWarning;
 
         public ConnectionsPage()
         {
@@ -30,8 +30,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void ApplyLanguage()
         {
             base.ApplyLanguage();
-			
-			_connectionWarning = new List<DropdownList>
+
+            _connectionWarning = new List<DropdownList>
             {
                 { new DropdownList((int)ConfirmCloseEnum.Never, Language.RadioCloseWarnMultiple)},
                 { new DropdownList((int)ConfirmCloseEnum.Exit, Language.RadioCloseWarnExit)},
@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblRdpReconnectionCount.Text = Language.RdpReconnectCount;
             lblRDPConTimeout.Text = Language.RdpOverallConnectionTimeout;
             lblAutoSave1.Text = Language.AutoSaveEvery;
-			//ngLabel1.Text = Language.strLabelClosingConnections;
+            //ngLabel1.Text = Language.strLabelClosingConnections;
 
         }
 
@@ -64,7 +64,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = Settings.Default.SingleClickSwitchesToOpenConnection;
             chkConnectionTreeTrackActiveConnection.Checked = Settings.Default.TrackActiveConnectionInConnectionTree;
             chkHostnameLikeDisplayName.Checked = Settings.Default.SetHostnameLikeDisplayName;
-            
+
             chkUseFilterSearch.Checked = Settings.Default.UseFilterSearch;
             chkPlaceSearchBarAboveConnectionTree.Checked = Settings.Default.PlaceSearchBarAboveConnectionTree;
             chkDoNotTrimUsername.Checked = Settings.Default.DoNotTrimUsername;
@@ -77,7 +77,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (Properties.OptionsBackupPage.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.Unassigned)
             {
-				if (Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit)
+                if (Properties.OptionsBackupPage.Default.SaveConnectionsAfterEveryEdit)
                 {
                     Properties.OptionsBackupPage.Default.SaveConnectionsFrequency = (int)ConnectionsBackupFrequencyEnum.OnEdit;
                 }

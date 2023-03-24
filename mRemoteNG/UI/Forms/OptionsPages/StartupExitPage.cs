@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (chkStartFullScreen.Checked && chkStartMinimized.Checked)
             {
                 chkStartMinimized.Checked = false;
-            } 
+            }
         }
 
         private void chkStartMinimized_CheckedChanged(object sender, EventArgs e)

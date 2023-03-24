@@ -80,10 +80,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (!connectionTree.RootNodes.Any())
                 return;
 
-            var engine = (BlockCipherEngines) comboBoxEncryptionEngine.SelectedItem;
-            var mode = (BlockCipherModes) comboBoxBlockCipher.SelectedItem;
+            var engine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
+            var mode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
             var cryptographyProvider = new CryptoProviderFactory(engine, mode).Build();
-            cryptographyProvider.KeyDerivationIterations = (int) numberBoxKdfIterations.Value;
+            cryptographyProvider.KeyDerivationIterations = (int)numberBoxKdfIterations.Value;
 
             var serializerFactory = new XmlConnectionSerializerFactory();
             var serializer = serializerFactory.Build(cryptographyProvider, connectionTree, useFullEncryption: chkEncryptCompleteFile.Checked);
