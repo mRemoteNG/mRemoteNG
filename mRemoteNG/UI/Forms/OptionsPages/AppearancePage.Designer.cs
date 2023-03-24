@@ -4,158 +4,160 @@ using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	
+
     public sealed partial class AppearancePage : OptionsPage
-	{
-			
-		//UserControl overrides dispose to clean up the component list.
-		[System.Diagnostics.DebuggerNonUserCode()]protected override void Dispose(bool disposing)
-		{
-			try
-			{
-				if (disposing && components != null)
-				{
-					components.Dispose();
-				}
-			}
-			finally
-			{
-				base.Dispose(disposing);
-			}
-		}
-			
-		//Required by the Windows Form Designer
-		private System.ComponentModel.Container components = null;
-			
-		//NOTE: The following procedure is required by the Windows Form Designer
-		//It can be modified using the Windows Form Designer.
-		//Do not modify it using the code editor.
-		[System.Diagnostics.DebuggerStepThrough()]private void InitializeComponent()
-		{
-            this.lblLanguageRestartRequired = new mRemoteNG.UI.Controls.MrngLabel();
-            this.cboLanguage = new MrngComboBox();
-            this.lblLanguage = new mRemoteNG.UI.Controls.MrngLabel();
-            this.chkShowFullConnectionsFilePathInTitle = new MrngCheckBox();
-            this.chkShowDescriptionTooltipsInTree = new MrngCheckBox();
-            this.chkShowSystemTrayIcon = new MrngCheckBox();
-            this.chkMinimizeToSystemTray = new MrngCheckBox();
-            this.chkCloseToSystemTray = new MrngCheckBox();
-            this.SuspendLayout();
+    {
+
+        //UserControl overrides dispose to clean up the component list.
+        [System.Diagnostics.DebuggerNonUserCode()]
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                if (disposing && components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            finally
+            {
+                base.Dispose(disposing);
+            }
+        }
+
+        //Required by the Windows Form Designer
+        private System.ComponentModel.Container components = null;
+
+        //NOTE: The following procedure is required by the Windows Form Designer
+        //It can be modified using the Windows Form Designer.
+        //Do not modify it using the code editor.
+        [System.Diagnostics.DebuggerStepThrough()]
+        private void InitializeComponent()
+        {
+            lblLanguageRestartRequired = new MrngLabel();
+            cboLanguage = new MrngComboBox();
+            lblLanguage = new MrngLabel();
+            chkShowFullConnectionsFilePathInTitle = new MrngCheckBox();
+            chkShowDescriptionTooltipsInTree = new MrngCheckBox();
+            chkShowSystemTrayIcon = new MrngCheckBox();
+            chkMinimizeToSystemTray = new MrngCheckBox();
+            chkCloseToSystemTray = new MrngCheckBox();
+            SuspendLayout();
             // 
             // lblLanguageRestartRequired
             // 
-            this.lblLanguageRestartRequired.AutoSize = true;
-            this.lblLanguageRestartRequired.Location = new System.Drawing.Point(3, 56);
-            this.lblLanguageRestartRequired.Name = "lblLanguageRestartRequired";
-            this.lblLanguageRestartRequired.Size = new System.Drawing.Size(414, 13);
-            this.lblLanguageRestartRequired.TabIndex = 2;
-            this.lblLanguageRestartRequired.Text = "mRemoteNG must be restarted before changes to the language will take effect.";
+            lblLanguageRestartRequired.AutoSize = true;
+            lblLanguageRestartRequired.Location = new System.Drawing.Point(8, 61);
+            lblLanguageRestartRequired.Name = "lblLanguageRestartRequired";
+            lblLanguageRestartRequired.Size = new System.Drawing.Size(414, 13);
+            lblLanguageRestartRequired.TabIndex = 2;
+            lblLanguageRestartRequired.Text = "mRemoteNG must be restarted before changes to the language will take effect.";
             // 
             // cboLanguage
             // 
-            this.cboLanguage._mice = MrngComboBox.MouseState.HOVER;
-            this.cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLanguage.FormattingEnabled = true;
-            this.cboLanguage.Location = new System.Drawing.Point(3, 24);
-            this.cboLanguage.Name = "cboLanguage";
-            this.cboLanguage.Size = new System.Drawing.Size(304, 21);
-            this.cboLanguage.Sorted = true;
-            this.cboLanguage.TabIndex = 1;
+            cboLanguage._mice = MrngComboBox.MouseState.HOVER;
+            cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cboLanguage.FormattingEnabled = true;
+            cboLanguage.Location = new System.Drawing.Point(8, 29);
+            cboLanguage.Name = "cboLanguage";
+            cboLanguage.Size = new System.Drawing.Size(304, 21);
+            cboLanguage.Sorted = true;
+            cboLanguage.TabIndex = 1;
             // 
             // lblLanguage
             // 
-            this.lblLanguage.AutoSize = true;
-            this.lblLanguage.Location = new System.Drawing.Point(3, 3);
-            this.lblLanguage.Name = "lblLanguage";
-            this.lblLanguage.Size = new System.Drawing.Size(58, 13);
-            this.lblLanguage.TabIndex = 0;
-            this.lblLanguage.Text = "Language";
+            lblLanguage.AutoSize = true;
+            lblLanguage.Location = new System.Drawing.Point(8, 8);
+            lblLanguage.Name = "lblLanguage";
+            lblLanguage.Size = new System.Drawing.Size(58, 13);
+            lblLanguage.TabIndex = 0;
+            lblLanguage.Text = "Language";
             // 
             // chkShowFullConnectionsFilePathInTitle
             // 
-            this.chkShowFullConnectionsFilePathInTitle._mice = MrngCheckBox.MouseState.OUT;
-            this.chkShowFullConnectionsFilePathInTitle.AutoSize = true;
-            this.chkShowFullConnectionsFilePathInTitle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(3, 127);
-            this.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle";
-            this.chkShowFullConnectionsFilePathInTitle.Size = new System.Drawing.Size(268, 17);
-            this.chkShowFullConnectionsFilePathInTitle.TabIndex = 4;
-            this.chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title";
-            this.chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = true;
+            chkShowFullConnectionsFilePathInTitle._mice = MrngCheckBox.MouseState.OUT;
+            chkShowFullConnectionsFilePathInTitle.AutoSize = true;
+            chkShowFullConnectionsFilePathInTitle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(8, 132);
+            chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle";
+            chkShowFullConnectionsFilePathInTitle.Size = new System.Drawing.Size(268, 17);
+            chkShowFullConnectionsFilePathInTitle.TabIndex = 4;
+            chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title";
+            chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = true;
             // 
             // chkShowDescriptionTooltipsInTree
             // 
-            this.chkShowDescriptionTooltipsInTree._mice = MrngCheckBox.MouseState.OUT;
-            this.chkShowDescriptionTooltipsInTree.AutoSize = true;
-            this.chkShowDescriptionTooltipsInTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkShowDescriptionTooltipsInTree.Location = new System.Drawing.Point(3, 104);
-            this.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree";
-            this.chkShowDescriptionTooltipsInTree.Size = new System.Drawing.Size(256, 17);
-            this.chkShowDescriptionTooltipsInTree.TabIndex = 3;
-            this.chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree";
-            this.chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = true;
+            chkShowDescriptionTooltipsInTree._mice = MrngCheckBox.MouseState.OUT;
+            chkShowDescriptionTooltipsInTree.AutoSize = true;
+            chkShowDescriptionTooltipsInTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkShowDescriptionTooltipsInTree.Location = new System.Drawing.Point(8, 109);
+            chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree";
+            chkShowDescriptionTooltipsInTree.Size = new System.Drawing.Size(256, 17);
+            chkShowDescriptionTooltipsInTree.TabIndex = 3;
+            chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree";
+            chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = true;
             // 
             // chkShowSystemTrayIcon
             // 
-            this.chkShowSystemTrayIcon._mice = MrngCheckBox.MouseState.OUT;
-            this.chkShowSystemTrayIcon.AutoSize = true;
-            this.chkShowSystemTrayIcon.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkShowSystemTrayIcon.Location = new System.Drawing.Point(3, 173);
-            this.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon";
-            this.chkShowSystemTrayIcon.Size = new System.Drawing.Size(178, 17);
-            this.chkShowSystemTrayIcon.TabIndex = 5;
-            this.chkShowSystemTrayIcon.Text = "Always show System Tray Icon";
-            this.chkShowSystemTrayIcon.UseVisualStyleBackColor = true;
+            chkShowSystemTrayIcon._mice = MrngCheckBox.MouseState.OUT;
+            chkShowSystemTrayIcon.AutoSize = true;
+            chkShowSystemTrayIcon.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkShowSystemTrayIcon.Location = new System.Drawing.Point(8, 178);
+            chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon";
+            chkShowSystemTrayIcon.Size = new System.Drawing.Size(178, 17);
+            chkShowSystemTrayIcon.TabIndex = 5;
+            chkShowSystemTrayIcon.Text = "Always show System Tray Icon";
+            chkShowSystemTrayIcon.UseVisualStyleBackColor = true;
             // 
             // chkMinimizeToSystemTray
             // 
-            this.chkMinimizeToSystemTray._mice = MrngCheckBox.MouseState.OUT;
-            this.chkMinimizeToSystemTray.AutoSize = true;
-            this.chkMinimizeToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkMinimizeToSystemTray.Location = new System.Drawing.Point(3, 196);
-            this.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray";
-            this.chkMinimizeToSystemTray.Size = new System.Drawing.Size(147, 17);
-            this.chkMinimizeToSystemTray.TabIndex = 6;
-            this.chkMinimizeToSystemTray.Text = "Minimize to System Tray";
-            this.chkMinimizeToSystemTray.UseVisualStyleBackColor = true;
+            chkMinimizeToSystemTray._mice = MrngCheckBox.MouseState.OUT;
+            chkMinimizeToSystemTray.AutoSize = true;
+            chkMinimizeToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkMinimizeToSystemTray.Location = new System.Drawing.Point(8, 201);
+            chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray";
+            chkMinimizeToSystemTray.Size = new System.Drawing.Size(147, 17);
+            chkMinimizeToSystemTray.TabIndex = 6;
+            chkMinimizeToSystemTray.Text = "Minimize to System Tray";
+            chkMinimizeToSystemTray.UseVisualStyleBackColor = true;
             // 
             // chkCloseToSystemTray
             // 
-            this.chkCloseToSystemTray._mice = MrngCheckBox.MouseState.OUT;
-            this.chkCloseToSystemTray.AutoSize = true;
-            this.chkCloseToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkCloseToSystemTray.Location = new System.Drawing.Point(3, 219);
-            this.chkCloseToSystemTray.Name = "chkCloseToSystemTray";
-            this.chkCloseToSystemTray.Size = new System.Drawing.Size(129, 17);
-            this.chkCloseToSystemTray.TabIndex = 7;
-            this.chkCloseToSystemTray.Text = "Close to System Tray";
-            this.chkCloseToSystemTray.UseVisualStyleBackColor = true;
+            chkCloseToSystemTray._mice = MrngCheckBox.MouseState.OUT;
+            chkCloseToSystemTray.AutoSize = true;
+            chkCloseToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkCloseToSystemTray.Location = new System.Drawing.Point(8, 224);
+            chkCloseToSystemTray.Name = "chkCloseToSystemTray";
+            chkCloseToSystemTray.Size = new System.Drawing.Size(129, 17);
+            chkCloseToSystemTray.TabIndex = 7;
+            chkCloseToSystemTray.Text = "Close to System Tray";
+            chkCloseToSystemTray.UseVisualStyleBackColor = true;
             // 
             // AppearancePage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.Controls.Add(this.chkCloseToSystemTray);
-            this.Controls.Add(this.lblLanguageRestartRequired);
-            this.Controls.Add(this.cboLanguage);
-            this.Controls.Add(this.lblLanguage);
-            this.Controls.Add(this.chkShowFullConnectionsFilePathInTitle);
-            this.Controls.Add(this.chkShowDescriptionTooltipsInTree);
-            this.Controls.Add(this.chkShowSystemTrayIcon);
-            this.Controls.Add(this.chkMinimizeToSystemTray);
-            this.Name = "AppearancePage";
-            this.Size = new System.Drawing.Size(610, 490);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            Controls.Add(chkCloseToSystemTray);
+            Controls.Add(lblLanguageRestartRequired);
+            Controls.Add(cboLanguage);
+            Controls.Add(lblLanguage);
+            Controls.Add(chkShowFullConnectionsFilePathInTitle);
+            Controls.Add(chkShowDescriptionTooltipsInTree);
+            Controls.Add(chkShowSystemTrayIcon);
+            Controls.Add(chkMinimizeToSystemTray);
+            Name = "AppearancePage";
+            Size = new System.Drawing.Size(610, 490);
+            ResumeLayout(false);
+            PerformLayout();
+        }
 
-		}
-		internal Controls.MrngLabel lblLanguageRestartRequired;
-		internal MrngComboBox cboLanguage;
-		internal Controls.MrngLabel lblLanguage;
-		internal MrngCheckBox chkShowFullConnectionsFilePathInTitle;
-		internal MrngCheckBox chkShowDescriptionTooltipsInTree;
-		internal MrngCheckBox chkShowSystemTrayIcon;
-		internal MrngCheckBox chkMinimizeToSystemTray;
+        internal Controls.MrngLabel lblLanguageRestartRequired;
+        internal MrngComboBox cboLanguage;
+        internal Controls.MrngLabel lblLanguage;
+        internal MrngCheckBox chkShowFullConnectionsFilePathInTitle;
+        internal MrngCheckBox chkShowDescriptionTooltipsInTree;
+        internal MrngCheckBox chkShowSystemTrayIcon;
+        internal MrngCheckBox chkMinimizeToSystemTray;
         internal MrngCheckBox chkCloseToSystemTray;
     }
 }

@@ -68,7 +68,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             Properties.OptionsAdvancedPage.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
-            Properties.OptionsAdvancedPage.Default.NoReconnect= chkNoReconnect.Checked;
+            Properties.OptionsAdvancedPage.Default.NoReconnect = chkNoReconnect.Checked;
             Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8 = chkLoadBalanceInfoUseUtf8.Checked;
 
             var puttyPathChanged = false;
@@ -165,7 +165,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblConfigurePuttySessions.Enabled = exists;
             btnLaunchPutty.Enabled = exists;
         }
-        
+
         private void chkNoReconnect_CheckedChanged(object sender, EventArgs e)
         {
 

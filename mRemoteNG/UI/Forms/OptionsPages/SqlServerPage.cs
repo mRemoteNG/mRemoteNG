@@ -32,8 +32,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.ApplyLanguage();
 
-            lblExperimental.Text = Language.Experimental.ToUpper();
-            lblSQLInfo.Text = Language.SQLInfo;
+            //lblExperimental.Text = Language.Experimental.ToUpper();
+            //lblSQLInfo.Text = Language.SQLInfo;
 
             chkUseSQLServer.Text = Language.UseSQLServer;
             lblSQLServer.Text = Language.Hostname;

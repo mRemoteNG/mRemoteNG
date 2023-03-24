@@ -1,4 +1,6 @@
-﻿using mRemoteNG.UI.Controls;
+﻿using System.Windows;
+using System.Windows.Forms;
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -153,7 +155,7 @@ namespace mRemoteNG.UI.Forms
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(764, 527);
+            this.ClientSize = new System.Drawing.Size(1075, 725);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.lstOptionPages);

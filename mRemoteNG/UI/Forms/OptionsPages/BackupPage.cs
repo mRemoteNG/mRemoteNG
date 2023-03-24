@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         private readonly FrmMain _frmMain = FrmMain.Default;
         private List<DropdownList> _permissionsListing;
-        
+
         public BackupPage()
         {
             InitializeComponent();
@@ -80,7 +80,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 lblBackupNameFormat.Enabled = true;
                 lblConnectionsBackupPath.Visible = true;
                 lblConnectionsBackupPath.Enabled = true;
-            } else
+            }
+            else
             {
                 lblACL.Visible = false;
                 lblBacupPageShowInOptionsMenu.Visible = false;
@@ -203,7 +204,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void SaveSettings()
         {
-            Properties.OptionsBackupPage.Default.BackupFileKeepCount = (int) numMaxBackups.Value;
+            Properties.OptionsBackupPage.Default.BackupFileKeepCount = (int)numMaxBackups.Value;
             /*
             if (Properties.OptionsBackupPage.Default.AutoSaveEveryMinutes > 0)
             {
@@ -215,23 +216,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 _frmMain.tmrAutoSave.Enabled = false;
             }
             */
-            Properties.OptionsBackupPage.Default.cbBackupEnableACL = (int) cbBackupEnableACL.SelectedValue;
-            Properties.OptionsBackupPage.Default.cbBackupTypeACL = (int) cbBackupTypeACL.SelectedValue;
-            Properties.OptionsBackupPage.Default.cbBackupFrequencyACL = (int) cbBackupFrequencyACL.SelectedValue;
-            Properties.OptionsBackupPage.Default.cbBackupNumberACL = (int) cbBackupNumberACL.SelectedValue;
-            Properties.OptionsBackupPage.Default.cbBackupNameFormatACL = (int) cbBackupNameFormatACL.SelectedValue;
-            Properties.OptionsBackupPage.Default.cbBackupLocationACL = (int) cbBackupLocationACL.SelectedValue;
+            Properties.OptionsBackupPage.Default.cbBackupEnableACL = (int)cbBackupEnableACL.SelectedValue;
+            Properties.OptionsBackupPage.Default.cbBackupTypeACL = (int)cbBackupTypeACL.SelectedValue;
+            Properties.OptionsBackupPage.Default.cbBackupFrequencyACL = (int)cbBackupFrequencyACL.SelectedValue;
+            Properties.OptionsBackupPage.Default.cbBackupNumberACL = (int)cbBackupNumberACL.SelectedValue;
+            Properties.OptionsBackupPage.Default.cbBackupNameFormatACL = (int)cbBackupNameFormatACL.SelectedValue;
+            Properties.OptionsBackupPage.Default.cbBackupLocationACL = (int)cbBackupLocationACL.SelectedValue;
 
-            Properties.OptionsBackupPage.Default.BackupFileNameFormat = (string) txtBackupNameFormat.Text;
+            Properties.OptionsBackupPage.Default.BackupFileNameFormat = (string)txtBackupNameFormat.Text;
 
-            Properties.OptionsBackupPage.Default.BackupConnectionsOnExit = (bool) cbMakeBackupOnExit.Checked;
-            Properties.OptionsBackupPage.Default.BackupConnectionsOnEdit = (bool) cbMakeBackupOnEdit.Checked;
-            Properties.OptionsBackupPage.Default.BackupConnectionsOnSave = (bool) cbMakeBackupOnSave.Checked;
+            Properties.OptionsBackupPage.Default.BackupConnectionsOnExit = (bool)cbMakeBackupOnExit.Checked;
+            Properties.OptionsBackupPage.Default.BackupConnectionsOnEdit = (bool)cbMakeBackupOnEdit.Checked;
+            Properties.OptionsBackupPage.Default.BackupConnectionsOnSave = (bool)cbMakeBackupOnSave.Checked;
 
-            Properties.OptionsBackupPage.Default.BackupFileKeepCount = (int) numMaxBackups.Value;
+            Properties.OptionsBackupPage.Default.BackupFileKeepCount = (int)numMaxBackups.Value;
 
-            Properties.OptionsBackupPage.Default.BackupLocation = (string) txtConnectionsBackupPath.Text;
-            
+            Properties.OptionsBackupPage.Default.BackupLocation = (string)txtConnectionsBackupPath.Text;
+
             Properties.OptionsBackupPage.Default.cbBacupPageInOptionMenu = cbBacupPageInOptionMenu.Checked;
 
             //Save settings to persist changes between application sessions
