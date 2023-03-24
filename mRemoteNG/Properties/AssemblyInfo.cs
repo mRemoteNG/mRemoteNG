@@ -20,3 +20,6 @@ using System.Resources;
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
 [assembly: AssemblyInformationalVersion("1.77.3 (Nightly Build 1828)")]
 
+// Logging
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
+
