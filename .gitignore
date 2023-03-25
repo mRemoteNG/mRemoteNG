@@ -284,5 +284,5 @@ InstallerProjects/Installer/Fragments/FilesFragment.wxs
 InstallerProjects/Installer/Resources/License.rtf
 
 # mRemoteNG
-**/mRemoteNG\Properties\AssemblyInfo.tt
-**/mRemoteNG\Properties\AssemblyInfo.cs
+**/mRemoteNG/Properties/AssemblyInfo.tt
+**/mRemoteNG/Properties/AssemblyInfo.cs
