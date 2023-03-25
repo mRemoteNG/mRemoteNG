@@ -24,14 +24,13 @@ function EditBinCertificateIsValid() {
     )
     $file_signature = Get-AuthenticodeSignature -FilePath $Path
     if (($file_signature.Status -ne "Valid") -or ($valid_microsoft_cert_thumbprints -notcontains $file_signature.SignerCertificate.Thumbprint)) {
-        Write-Warning "Could not validate the signature of $Path"
+        Write-Warning "Could not validate the signature of $Path $($file_signature.SignerCertificate.Thumbprint)"
         Write-Output "file_signature.SignerCertificate.Thumbprint: $($file_signature.SignerCertificate.Thumbprint)"
         return $false
     } else {
         return $true
     }
 }
-
 
 function ToolCanBeExecuted {
     param (
@@ -40,6 +39,7 @@ function ToolCanBeExecuted {
     )
     $env:PATHEXT.Contains((Get-Item $Path).Extension.ToUpper())
 }
+
 
 $rootSearchPaths = @(
     [System.IO.Directory]::EnumerateFileSystemEntries("C:\Program Files", "*Visual Studio*", [System.IO.SearchOption]::TopDirectoryOnly),
@@ -52,7 +52,8 @@ foreach ($searchPath in $rootSearchPaths) {
         Write-Verbose "Searching in folder '$visualStudioFolder'"
         $matchingExes = [System.IO.Directory]::EnumerateFileSystemEntries($visualStudioFolder, $FileName, [System.IO.SearchOption]::AllDirectories)
         foreach ($matchingExe in $matchingExes) {
-            if ((EditBinCertificateIsValid -Path $matchingExe) -and (ToolCanBeExecuted -Path $matchingExe)) {
+            #if ((EditBinCertificateIsValid -Path $matchingExe) -and (ToolCanBeExecuted -Path $matchingExe)) {
+            if (ToolCanBeExecuted -Path $matchingExe) {
                 return $matchingExe
             }
         }
