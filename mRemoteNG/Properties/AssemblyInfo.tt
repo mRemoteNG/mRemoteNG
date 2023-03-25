@@ -12,7 +12,7 @@
         minor = Convert.ToInt32(matches[0].Groups["minor"].Value);
         revision = Convert.ToInt32(matches[0].Groups["revision"].Value);
         build = Convert.ToInt32(matches[0].Groups["build"].Value);
-        if( this.Host.ResolveParameterValue("-","-","BuildConfiguration") == "Release" )
+        if( this.Host.ResolveParameterValue("-","-","BuildConfiguration") == "Release" || this.Host.ResolveParameterValue("-","-","BuildConfiguration") == "Release Installer" )
             build++;
     }
 #>
