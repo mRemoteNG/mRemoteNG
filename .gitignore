@@ -286,3 +286,7 @@ InstallerProjects/Installer/Resources/License.rtf
 # gh-pages info
 runlocal.bat
 /_site
+
+# mRemoteNG
+**/mRemoteNG\Properties\AssemblyInfo.tt
+**/mRemoteNG\Properties\AssemblyInfo.cs
