@@ -38,6 +38,9 @@ using System.Resources;
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
 [assembly: AssemblyInformationalVersion("<#= this.major #>.<#= this.minor #>.<#= this.revision #> (<#= this.channel #> <#= this.build #>)")]
 
+// Logging
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
+
 <#+
     int major = 1;
     int minor = 77;
