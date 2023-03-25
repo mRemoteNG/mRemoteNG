@@ -52,7 +52,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
 
                 return Serialize(rootNode);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return _dataTable;
             }
