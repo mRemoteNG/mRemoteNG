@@ -23,6 +23,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private MsRdpClient8NotSafeForScripting RdpClient8 => (MsRdpClient8NotSafeForScripting)((AxHost)Control).GetOcx();
 
         protected override RdpVersion RdpProtocolVersion => RDP.RdpVersion.Rdc8;
+        protected FormWindowState LastWindowState = FormWindowState.Minimized;
 
         public override bool Initialize()
         {
@@ -57,7 +58,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         protected override void Resize(object sender, EventArgs e)
         {
-            if (_frmMain.PreviousWindowState == _frmMain.WindowState) return;
+            if (LastWindowState == _frmMain.WindowState) return;
+            LastWindowState = _frmMain.WindowState;
+            if (_frmMain.WindowState == FormWindowState.Minimized) return; // don't resize when going to minimized since it seems to resize anyway, as seen when window is restored
             DoResizeControl();
             DoResizeClient();
         }
