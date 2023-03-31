@@ -60,11 +60,22 @@ Format-Table -AutoSize -Wrap -InputObject @{
 #& "$PSScriptRoot\set_LargeAddressAware.ps1" -TargetDir $TargetDir -TargetFileName $TargetFileName
 #& "$PSScriptRoot\verify_LargeAddressAware.ps1" -TargetDir $TargetDir -TargetFileName $TargetFileName
 
+if (!([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))) {
+    $postbuild_installer_executed = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\AppVeyor_mRemoteNG' -Name postbuild_installer_executed
+} else {
+    $postbuild_installer_executed = ""
+}
+
+write-host "-SolutionDir $SolutionDir -TargetDir $TargetDir -ConfigurationName $ConfigurationName "
+
 & "$PSScriptRoot\tidy_files_for_release.ps1" -TargetDir $TargetDir -ConfigurationName $ConfigurationName
 
-& "$PSScriptRoot\sign_binaries.ps1" -TargetDir $TargetDir -CertificatePath $CertificatePath -CertificatePassword $CertificatePassword -ConfigurationName $ConfigurationName -Exclude $ExcludeFromSigning -SolutionDir $SolutionDir
+if ($postbuild_installer_executed -ne "true" -or $env:postbuild_installer_executed -ne "true") {
 
-& "$PSScriptRoot\verify_binary_signatures.ps1" -TargetDir $TargetDir -ConfigurationName $ConfigurationName -CertificatePath $CertificatePath -SolutionDir $SolutionDir
+    & "$PSScriptRoot\sign_binaries.ps1" -TargetDir $TargetDir -CertificatePath $CertificatePath -CertificatePassword $CertificatePassword -ConfigurationName $ConfigurationName -Exclude $ExcludeFromSigning -SolutionDir $SolutionDir
+
+    & "$PSScriptRoot\verify_binary_signatures.ps1" -TargetDir $TargetDir -ConfigurationName $ConfigurationName -CertificatePath $CertificatePath -SolutionDir $SolutionDir
+}
 
 & "$PSScriptRoot\zip_files.ps1" -SolutionDir $SolutionDir -TargetDir $TargetDir -ConfigurationName $ConfigurationName
 

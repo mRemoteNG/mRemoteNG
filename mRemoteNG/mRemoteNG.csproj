@@ -23,6 +23,7 @@
     <RepositoryUrl>https://github.com/mRemoteNG/mRemoteNG.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <StartupObject>mRemoteNG.App.ProgramRoot</StartupObject>
+    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>DEBUG</DefineConstants>
@@ -41,7 +42,7 @@
     <WarningsAsErrors />
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <WarningLevel>7</WarningLevel>
-    <ResolveComReferenceSilent>False</ResolveComReferenceSilent>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Portable|x64'">
     <DefineConstants>DEBUG;PORTABLE</DefineConstants>
@@ -60,13 +61,13 @@
     <WarningsAsErrors />
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <WarningLevel>7</WarningLevel>
-    <ResolveComReferenceSilent>False</ResolveComReferenceSilent>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Installer|x64'">
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <Optimize>True</Optimize>
     <WarningLevel>7</WarningLevel>
-    <ResolveComReferenceSilent>False</ResolveComReferenceSilent>
+    <ResolveComReferenceSilent>True</ResolveComReferenceSilent>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="buildenv.tmp" />
@@ -486,7 +487,7 @@
 	<Exec Command="echo $(ConfigurationName) &gt; buildenv.tmp&#xD;&#xA;powershell.exe -WindowStyle Hidden -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp; { $Env:DevEnvDir = ($(SolutionDir)Tools/find_vstool.ps1 devenv.exe); $Env:DevEnvDir = ($Env:DevEnvDir.Replace('devenv.exe','')).replace('`',''); $Env:DevEnvDir; if ($Env:APPVEYOR) {&amp;'$(DevEnvDir)TextTransform.exe' -a !!BuildConfiguration!'$(Configuration)' '$(ProjectDir)Properties\AssemblyInfo.tt'} }&quot;" />
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command=":: When passing paths to powershell scripts, check if the path ends with a backslash &quot;\&quot;&#xD;&#xA;:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.&#xD;&#xA;&#xD;&#xA;powershell -noprofile -command &quot;sleep 2&quot;&#xD;&#xA;&#xD;&#xA;set /p buildenv=&lt;buildenv.tmp&#xD;&#xA;&#xD;&#xA;:: Manual builds, set the cert password and uncomment below.&#xD;&#xA;:: IF &quot;%25APPVEYOR_BUILD_FOLDER&quot;==&quot;&quot; ( set cert_pwd= )&#xD;&#xA;&#xD;&#xA;:: Call the post build powershell script&#xD;&#xA;powershell.exe -ExecutionPolicy Bypass -File &quot;$(SolutionDir)Tools\postbuild_portable.ps1&quot; -SolutionDir &quot;$(SolutionDir)\&quot; -TargetDir &quot;$(TargetDir)\&quot; -TargetFileName &quot;mRemoteNG.exe&quot; -ConfigurationName &quot;%25buildenv%25&quot; -CertificatePath &quot;$(CertPath)&quot; -CertificatePassword &quot;$(CertPassword)&quot; -ExcludeFromSigning &quot;PuTTYNG.exe&quot;" />
+    <Exec Command=":: When passing paths to powershell scripts, check if the path ends with a backslash &quot;\&quot;&#xD;&#xA;:: If it does, then the backslash may be interpreted as an escape character. Add another backslash to cancel the first one.&#xD;&#xA;&#xD;&#xA;powershell -noprofile -command &quot;sleep 2&quot;&#xD;&#xA;&#xD;&#xA;set /p buildenv=&lt;buildenv.tmp&#xD;&#xA;&#xD;&#xA;:: Manual builds, set the cert password and uncomment below.&#xD;&#xA;:: IF &quot;%25APPVEYOR_BUILD_FOLDER&quot;==&quot;&quot; ( set cert_pwd= )&#xD;&#xA;&#xD;&#xA;:: Call the post build powershell script&#xD;&#xA;powershell.exe -ExecutionPolicy Bypass -File &quot;$(SolutionDir)Tools\postbuild.ps1&quot; -SolutionDir &quot;$(SolutionDir)\&quot; -TargetDir &quot;$(TargetDir)\&quot; -TargetFileName &quot;mRemoteNG.exe&quot; -ConfigurationName &quot;%25buildenv%25&quot; -CertificatePath &quot;$(CertPath)&quot; -CertificatePassword &quot;$(CertPassword)&quot; -ExcludeFromSigning &quot;PuTTYNG.exe&quot;" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\ExternalConnectors\ExternalConnectors.csproj" />
