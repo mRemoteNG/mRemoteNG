@@ -6,6 +6,7 @@ Write-Output "===== Begin $($PSCmdlet.MyInvocation.MyCommand) ====="
 $MainRepository = $Env:APPVEYOR_REPO_NAME.Split("/\")[1]
 $IsAppVeyor = !([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))
 
+Write-Output "MainRepository: $MainRepository"
 
 if ($IsAppVeyor) {
         
@@ -37,7 +38,7 @@ if ($IsAppVeyor) {
 
             $assemblyinfocs_content = [System.String]::Join("`r`n", (Get-Content "$buildFolder\mRemoteNG\Properties\AssemblyInfo.cs"))
 
-            Set-GitHubContent -OwnerName $MainRepository -RepositoryName $MainRepository -Path "mRemoteNG\Properties\AssemblyInfo.cs" -CommitMessage "AssemblyInfo.cs updated for  $UpdateChannel $ModifiedTagName" -Content $assemblyinfocs_content -BranchName main
+            #Set-GitHubContent -OwnerName $MainRepository -RepositoryName $MainRepository -Path "mRemoteNG\Properties\AssemblyInfo.cs" -CommitMessage "AssemblyInfo.cs updated for  $UpdateChannel $ModifiedTagName" -Content $assemblyinfocs_content -BranchName main
 
             Write-Output "publish completed"
 

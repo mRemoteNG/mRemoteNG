@@ -54,7 +54,7 @@ if ( $IsAppVeyor -and ($ConfigurationName.ToUpper() -match "RELEASE") -and (($en
     
     & "$PSScriptRoot\update_and_upload_website_release_json_file.ps1" -WebsiteTargetOwner $env:WEBSITE_TARGET_OWNER -WebsiteTargetRepository $env:WEBSITE_TARGET_REPOSITORY -PreTagName $env:NightlyBuildTagName -TagName $env:APPVEYOR_BUILD_VERSION -ProjectName $env:APPVEYOR_PROJECT_NAME
 
-    #& "$PSScriptRoot\update_and_upload_assemblyinfocs.ps1"
+    & "$PSScriptRoot\update_and_upload_assemblyinfocs.ps1"
 
 }
 
