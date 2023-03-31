@@ -40,10 +40,15 @@ Format-Table -AutoSize -Wrap -InputObject @{
     "ExcludeFromSigning" = $ExcludeFromSigning
 }
 
-$IsAppVeyor = !([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER))
 
-if ( $ConfigurationName -match "Debug" -and -not $IsAppVeyor ) {return; } #skip when Debug local developer build
-if ( $env:APPVEYOR_PROJECT_NAME -match "(CI)" -and -not $IsAppVeyor ) {return; } #skip when AppVeyor (CI) build
+Write-Output ($ConfigurationName -match "Release")
+Write-Output ($env:APPVEYOR_PROJECT_NAME -notcontains "(CI)")
+Write-Output ([string]::IsNullOrEmpty($env:WEBSITE_TARGET_OWNER))
+Write-Output ([string]::IsNullOrEmpty($env:WEBSITE_TARGET_REPOSITORY)) 
+
+
+if ( $ConfigurationName -match "Debug" -and ([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) ) { return; } #skip when Debug local developer build
+if ( $env:APPVEYOR_PROJECT_NAME -match "(CI)" -and -not ([string]::IsNullOrEmpty($Env:APPVEYOR_BUILD_FOLDER)) ) { return; } #skip when AppVeyor (CI) build
 
 $dstPath = "$($SolutionDir)Release"
 New-Item -Path $dstPath -ItemType Directory -Force
@@ -51,9 +56,9 @@ New-Item -Path $dstPath -ItemType Directory -Force
 # $RunInstaller = $TargetDir -match "\\mRemoteNGInstaller\\Installer\\bin\\"
 # $RunPortable = ( ($Targetdir -match "\\mRemoteNG\\bin\\") -and -not ($TargetDir -match "\\mRemoteNGInstaller\\Installer\\bin\\") )
 
-Write-Output "-Begin Release Portable"
+if ( ($ConfigurationName -match "Release") -and ($env:APPVEYOR_PROJECT_NAME -notcontains "(CI)") -and -not ([string]::IsNullOrEmpty($env:WEBSITE_TARGET_OWNER)) -and -not ([string]::IsNullOrEmpty($env:WEBSITE_TARGET_REPOSITORY)) ) {
 
-if ( ($ConfigurationName -match "Release") -and ($env:APPVEYOR_PROJECT_NAME -notcontains "(CI)") ) {
+    Write-Output "-Begin Release Portable"
 
     & "$PSScriptRoot\tidy_files_for_release.ps1" -TargetDir $TargetDir -ConfigurationName $ConfigurationName
 
@@ -63,13 +68,9 @@ if ( ($ConfigurationName -match "Release") -and ($env:APPVEYOR_PROJECT_NAME -not
 
     & "$PSScriptRoot\zip_files.ps1" -SolutionDir $SolutionDir -TargetDir $TargetDir -ConfigurationName $ConfigurationName
 
-    if ( $IsAppVeyor -and (![string]::IsNullOrEmpty($env:WEBSITE_TARGET_OWNER)) -and (![string]::IsNullOrEmpty($env:WEBSITE_TARGET_REPOSITORY)) ) {
-        
-        & "$PSScriptRoot\update_and_upload_website_release_json_file.ps1" -WebsiteTargetOwner $env:WEBSITE_TARGET_OWNER -WebsiteTargetRepository $env:WEBSITE_TARGET_REPOSITORY -PreTagName $env:NightlyBuildTagName -TagName $env:APPVEYOR_BUILD_VERSION -ProjectName $env:APPVEYOR_PROJECT_NAME
+    & "$PSScriptRoot\create_upg_chk_files.ps1" -WebsiteTargetOwner $env:WEBSITE_TARGET_OWNER -WebsiteTargetRepository $env:WEBSITE_TARGET_REPOSITORY -PreTagName $env:NightlyBuildTagName -TagName $env:APPVEYOR_BUILD_VERSION -ProjectName $env:APPVEYOR_PROJECT_NAME
 
-        & "$PSScriptRoot\create_upg_chk_files.ps1" -WebsiteTargetOwner $env:WEBSITE_TARGET_OWNER -WebsiteTargetRepository $env:WEBSITE_TARGET_REPOSITORY -PreTagName $env:NightlyBuildTagName -TagName $env:APPVEYOR_BUILD_VERSION -ProjectName $env:APPVEYOR_PROJECT_NAME
-        
-    }
+    & "$PSScriptRoot\update_and_upload_website_release_json_file.ps1" -WebsiteTargetOwner $env:WEBSITE_TARGET_OWNER -WebsiteTargetRepository $env:WEBSITE_TARGET_REPOSITORY -PreTagName $env:NightlyBuildTagName -TagName $env:APPVEYOR_BUILD_VERSION -ProjectName $env:APPVEYOR_PROJECT_NAME
 
     Write-Output "-End Release Portable"
 
