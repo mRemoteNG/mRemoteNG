@@ -8,7 +8,16 @@ if ($IsAppVeyor) {
     #$CURRENT_GITHUB_USER = $env:APPVEYOR_REPO_NAME.Split("/")[0]
     Install-Module -Name PowerShellForGitHub -Scope CurrentUser
     Set-GitHubConfiguration -DisableTelemetry
-    $PSDefaultParameterValues["*-GitHub*:AccessToken"] = "$env:ACCESS_TOKEN"    
+    $PSDefaultParameterValues["*-GitHub*:AccessToken"] = "$env:ACCESS_TOKEN"
+    #New-Item -Path "$Env:APPVEYOR_BUILD_FOLDER\Release" -ItemType Directory -Force
+}
+
+function New-TemporaryDirectory {
+    $parent = [System.IO.Path]::GetTempPath()
+    [string] $name = [System.Guid]::NewGuid()
+    $fullTempPath = (Join-Path $parent $name)
+    New-Item -ItemType Directory -Path $fullTempPath
+    return $fullTempPath
 }
 
 Function ConvertFrom-Base64($base64) {
