@@ -27,7 +27,7 @@ WinSCP is a free GUI Secure Copy program.
 
 - Filename: C:\\Program Files\\WinSCP\\WinSCP.exe (example path)
 - Arguments: scp://%Username%:%Password%@%Hostname%/
-- Optional Arguments - turn on compression and ignore any host key errors: -rawsetting Compression=1 -hostkey=*
+- Optional Arguments - turn on compression and ignore any host key errors: -rawsettings Compression=1 -hostkey=*
 - Can integrate: No
 
 `FileZilla S/FTP <https://filezilla-project.org/>`_
