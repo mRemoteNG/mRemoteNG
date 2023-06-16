@@ -52,12 +52,12 @@ namespace mRemoteNG.UI.Controls
             CMenToolbarShowText.Name = "cMenToolbarShowText";
             CMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
             CMenToolbarShowText.Text = Language.ShowText;
-            CMenToolbarShowText.Click += cMenToolbarShowText_Click;
+            CMenToolbarShowText.Click += CMenToolbarShowText_Click;
         }
 
         #region Ext Apps Toolbar
 
-        private void cMenToolbarShowText_Click(object sender, EventArgs e)
+        private void CMenToolbarShowText_Click(object sender, EventArgs e)
         {
             SwitchToolBarText(!CMenToolbarShowText.Checked);
         }
@@ -75,7 +75,7 @@ namespace mRemoteNG.UI.Controls
                 foreach (var tool in Runtime.ExternalToolsService.ExternalTools)
                 {
                     if (!tool.ShowOnToolbar) continue;
-                    var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, tsExtAppEntry_Click);
+                    var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, TsExtAppEntry_Click);
                     if (CMenToolbarShowText.Checked)
                         button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
                     else
@@ -96,7 +96,7 @@ namespace mRemoteNG.UI.Controls
             }
         }
 
-        private static void tsExtAppEntry_Click(object sender, EventArgs e)
+        private static void TsExtAppEntry_Click(object sender, EventArgs e)
         {
             var extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
@@ -129,8 +129,6 @@ namespace mRemoteNG.UI.Controls
         #endregion
 
         // CodeAyalysis doesn't like null propagation
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed",
-            MessageId = "components")]
         protected override void Dispose(bool disposing)
         {
             try

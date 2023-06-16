@@ -58,7 +58,7 @@ namespace mRemoteNG.Tree.Root
             }
         }
 
-        [Browsable(false)] public string DefaultPassword { get; } = "mR3m";
+        [Browsable(false)] public string DefaultPassword { get; } = "mR3m"; //TODO move password away from code to settings
 
         [Browsable(false)] public RootNodeType Type { get; set; }
 

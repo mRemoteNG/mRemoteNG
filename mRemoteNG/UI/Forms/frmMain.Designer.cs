@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Forms
             this.pnlDock.Name = "pnlDock";
             this.pnlDock.Size = new System.Drawing.Size(1129, 546);
             this.pnlDock.TabIndex = 13;
-            this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
+            this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.PnlDock_ActiveDocumentChanged);
             // 
             // msMain
             // 
@@ -183,7 +183,7 @@ namespace mRemoteNG.UI.Forms
             // tmrAutoSave
             // 
             this.tmrAutoSave.Interval = 10000;
-            this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
+            this.tmrAutoSave.Tick += new System.EventHandler(this.TmrAutoSave_Tick);
             // 
             // vsToolStripExtender
             // 
@@ -201,7 +201,7 @@ namespace mRemoteNG.UI.Forms
             this.tsModeUser.Name = "tsModeUser";
             this.tsModeUser.Size = new System.Drawing.Size(180, 22);
             this.tsModeUser.Text = "UserMode";
-            this.tsModeUser.Click += new System.EventHandler(this.tsModeUser_Click);
+            this.tsModeUser.Click += new System.EventHandler(this.TsModeUser_Click);
             // 
             // FrmMain
             // 
@@ -217,12 +217,12 @@ namespace mRemoteNG.UI.Forms
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = " ";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
-            this.Shown += new System.EventHandler(this.frmMain_Shown);
-            this.ResizeBegin += new System.EventHandler(this.frmMain_ResizeBegin);
-            this.ResizeEnd += new System.EventHandler(this.frmMain_ResizeEnd);
-            this.Resize += new System.EventHandler(this.frmMain_Resize);
+            this.Shown += new System.EventHandler(this.FrmMain_Shown);
+            this.ResizeBegin += new System.EventHandler(this.FrmMain_ResizeBegin);
+            this.ResizeEnd += new System.EventHandler(this.FrmMain_ResizeEnd);
+            this.Resize += new System.EventHandler(this.FrmMain_Resize);
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             this.tsContainer.ContentPanel.ResumeLayout(false);

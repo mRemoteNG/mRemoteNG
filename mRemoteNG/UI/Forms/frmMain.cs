@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
         private readonly ThemeManager _themeManager;
-        private readonly FileBackupPruner _backupPruner = new FileBackupPruner();
+        private readonly FileBackupPruner _backupPruner = new();
         public static FrmOptions OptionsForm;
 
         internal FullscreenHandler Fullscreen { get; set; }
@@ -337,7 +337,7 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private async void frmMain_Shown(object sender, EventArgs e)
+        private async void FrmMain_Shown(object sender, EventArgs e)
         {
             PromptForUpdatesPreference();
             await CheckForUpdates();
@@ -380,7 +380,7 @@ namespace mRemoteNG.UI.Forms
             await Startup.Instance.CheckForUpdate();
         }
 
-        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Runtime.WindowList != null)
             {
@@ -396,8 +396,7 @@ namespace mRemoteNG.UI.Forms
 
             if (Properties.OptionsAppearancePage.Default.CloseToTray)
             {
-                if (Runtime.NotificationAreaIcon == null)
-                    Runtime.NotificationAreaIcon = new NotificationAreaIcon();
+                Runtime.NotificationAreaIcon ??= new NotificationAreaIcon();
 
                 if (WindowState == FormWindowState.Normal || WindowState == FormWindowState.Maximized)
                 {
@@ -415,9 +414,9 @@ namespace mRemoteNG.UI.Forms
                 {
                     foreach (var dc in pnlDock.Contents)
                     {
-                        if (!(dc is ConnectionWindow cw)) continue;
+                        if (dc is not ConnectionWindow cw) continue;
                         if (cw.Controls.Count < 1) continue;
-                        if (!(cw.Controls[0] is DockPanel dp)) continue;
+                        if (cw.Controls[0] is not DockPanel dp) continue;
                         if (dp.Contents.Count > 0)
                             openConnections += dp.Contents.Count;
                     }
@@ -454,7 +453,7 @@ namespace mRemoteNG.UI.Forms
 
         #region Timer
 
-        private void tmrAutoSave_Tick(object sender, EventArgs e)
+        private void TmrAutoSave_Tick(object sender, EventArgs e)
         {
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Doing AutoSave");
             Runtime.ConnectionsService.SaveConnectionsAsync();
@@ -464,20 +463,17 @@ namespace mRemoteNG.UI.Forms
 
         #region Window Overrides and DockPanel Stuff
 
-        private void frmMain_ResizeBegin(object sender, EventArgs e)
+        private void FrmMain_ResizeBegin(object sender, EventArgs e)
         {
             _inSizeMove = true;
         }
 
-        private void frmMain_Resize(object sender, EventArgs e)
+        private void FrmMain_Resize(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
                 if (!Properties.OptionsAppearancePage.Default.MinimizeToTray) return;
-                if (Runtime.NotificationAreaIcon == null)
-                {
-                    Runtime.NotificationAreaIcon = new NotificationAreaIcon();
-                }
+                Runtime.NotificationAreaIcon ??= new NotificationAreaIcon();
 
                 Hide();
             }
@@ -487,7 +483,7 @@ namespace mRemoteNG.UI.Forms
             }
         }
 
-        private void frmMain_ResizeEnd(object sender, EventArgs e)
+        private void FrmMain_ResizeEnd(object sender, EventArgs e)
         {
             _inSizeMove = false;
             // This handles activations from clicks that started a size/move operation
@@ -602,7 +598,7 @@ namespace mRemoteNG.UI.Forms
             base.WndProc(ref m);
         }
 
-        private void SimulateClick(Control control)
+        private static void SimulateClick(Control control)
         {
             var clientMousePosition = control.PointToClient(MousePosition);
             var temp_wLow = clientMousePosition.X;
@@ -618,7 +614,7 @@ namespace mRemoteNG.UI.Forms
             var cw = pnlDock.ActiveDocument as ConnectionWindow;
             var dp = cw?.ActiveControl as DockPane;
 
-            if (!(dp?.ActiveContent is ConnectionTab tab)) return;
+            if (dp?.ActiveContent is not ConnectionTab tab) return;
             var ifc = InterfaceControl.FindInterfaceControl(tab);
             if (ifc == null) return;
 
@@ -627,7 +623,7 @@ namespace mRemoteNG.UI.Forms
             ((ConnectionTab)conFormWindow)?.RefreshInterfaceController();
         }
 
-        private void pnlDock_ActiveDocumentChanged(object sender, EventArgs e)
+        private void PnlDock_ActiveDocumentChanged(object sender, EventArgs e)
         {
             ActivateConnection();
         }
@@ -686,7 +682,7 @@ namespace mRemoteNG.UI.Forms
                 foreach (var dockContent in pnlDock.Documents)
                 {
                     var document = (DockContent)dockContent;
-                    if ((closingDocument == null || document != closingDocument) && !(document is ConnectionWindow))
+                    if ((closingDocument == null || document != closingDocument) && document is not ConnectionWindow)
                     {
                         nonConnectionPanelCount++;
                     }
@@ -834,12 +830,12 @@ namespace mRemoteNG.UI.Forms
             viewMenu.mMenView_DropDownOpening(sender, e);
         }
 
-        private void tsModeUser_Click(object sender, EventArgs e)
+        private void TsModeUser_Click(object sender, EventArgs e)
         {
             Properties.OptionsRbac.Default.ActiveRole = "UserRole";
         }
 
-        private void tsModeAdmin_Click(object sender, EventArgs e)
+        private void TsModeAdmin_Click(object sender, EventArgs e)
         {
             Properties.OptionsRbac.Default.ActiveRole = "AdminRole";
         }

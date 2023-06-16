@@ -33,7 +33,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 : defaultValue;
         }
 
-        public static T GetAttributeAsEnum<T>(this XmlNode xmlNode, string attribute, T defaultValue = default(T))
+        public static T GetAttributeAsEnum<T>(this XmlNode xmlNode, string attribute, T defaultValue = default)
             where T : struct
         {
             var value = xmlNode?.Attributes?[attribute]?.Value;

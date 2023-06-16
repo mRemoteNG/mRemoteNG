@@ -22,11 +22,8 @@ namespace mRemoteNG.Config.Connections
         {
             if (string.IsNullOrEmpty(connectionFileName))
                 throw new ArgumentException($"Argument '{nameof(connectionFileName)}' cannot be null or empty");
-            if (saveFilter == null)
-                throw new ArgumentNullException(nameof(saveFilter));
-
             _connectionFileName = connectionFileName;
-            _saveFilter = saveFilter;
+            _saveFilter = saveFilter ?? throw new ArgumentNullException(nameof(saveFilter));
         }
 
         public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
@@ -36,11 +33,7 @@ namespace mRemoteNG.Config.Connections
                 var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
                 var serializerFactory = new XmlConnectionSerializerFactory();
                 
-                var xmlConnectionsSerializer = serializerFactory.Build(
-                    cryptographyProvider,
-                    connectionTreeModel,
-                    _saveFilter,
-                    Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
+                var xmlConnectionsSerializer = serializerFactory.Build(cryptographyProvider, connectionTreeModel, _saveFilter, Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
 
                 var rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
                 var xml = xmlConnectionsSerializer.Serialize(rootNode);

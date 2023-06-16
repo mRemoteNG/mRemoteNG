@@ -26,7 +26,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
     {
         private readonly IAeadBlockCipher _aeadBlockCipher;
         private readonly Encoding _encoding;
-        private readonly SecureRandom _random = new SecureRandom();
+        private readonly SecureRandom _random = new();
 
         //Preconfigured Encryption Parameters
         protected virtual int NonceBitSize { get; set; } = 128;
@@ -90,8 +90,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         private void SetNonceForCcm()
         {
-            var ccm = _aeadBlockCipher as CcmBlockCipher;
-            if (ccm != null)
+            if (_aeadBlockCipher is CcmBlockCipher)
                 NonceBitSize = 88;
         }
 
@@ -113,7 +112,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         private byte[] SimpleEncryptWithPassword(byte[] secretMessage, string password, byte[] nonSecretPayload = null)
         {
-            nonSecretPayload = nonSecretPayload ?? new byte[] { };
+            nonSecretPayload ??= ""u8.ToArray();
 
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
@@ -148,7 +147,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             //Non-secret Payload Optional
-            nonSecretPayload = nonSecretPayload ?? new byte[] { };
+            nonSecretPayload ??= ""u8.ToArray();
 
             //Using random nonce large enough not to repeat
             var nonce = new byte[NonceBitSize / 8];
@@ -184,27 +183,21 @@ namespace mRemoteNG.Security.SymmetricEncryption
             return decryptedText;
         }
 
-        private string SimpleDecryptWithPassword(string encryptedMessage,
-                                                 SecureString decryptionKey,
-                                                 int nonSecretPayloadLength = 0)
+        private string SimpleDecryptWithPassword(string encryptedMessage, SecureString decryptionKey, int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
                 return ""; //throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
-            var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(),
-                                                      nonSecretPayloadLength);
+            var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(), nonSecretPayloadLength);
             return plainText == null ? null : _encoding.GetString(plainText);
         }
 
-        private byte[] SimpleDecryptWithPassword(byte[] encryptedMessage,
-                                                 string password,
-                                                 int nonSecretPayloadLength = 0)
+        private byte[] SimpleDecryptWithPassword(byte[] encryptedMessage, string password, int nonSecretPayloadLength = 0)
         {
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!",
-                                            nameof(password));
+                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
 
             if (encryptedMessage == null || encryptedMessage.Length == 0)
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
@@ -230,34 +223,32 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherStream = new MemoryStream(encryptedMessage);
-            using (var cipherReader = new BinaryReader(cipherStream))
+            using var cipherReader = new BinaryReader(cipherStream);
+            //Grab Payload
+            var nonSecretPayload = cipherReader.ReadBytes(nonSecretPayloadLength);
+
+            //Grab Nonce
+            var nonce = cipherReader.ReadBytes(NonceBitSize / 8);
+
+            var parameters = new AeadParameters(new KeyParameter(key), MacBitSize, nonce, nonSecretPayload);
+            _aeadBlockCipher.Init(false, parameters);
+
+            //Decrypt Cipher Text
+            var cipherText =
+                cipherReader.ReadBytes(encryptedMessage.Length - nonSecretPayloadLength - nonce.Length);
+            var plainText = new byte[_aeadBlockCipher.GetOutputSize(cipherText.Length)];
+
+            try
             {
-                //Grab Payload
-                var nonSecretPayload = cipherReader.ReadBytes(nonSecretPayloadLength);
-
-                //Grab Nonce
-                var nonce = cipherReader.ReadBytes(NonceBitSize / 8);
-
-                var parameters = new AeadParameters(new KeyParameter(key), MacBitSize, nonce, nonSecretPayload);
-                _aeadBlockCipher.Init(false, parameters);
-
-                //Decrypt Cipher Text
-                var cipherText =
-                    cipherReader.ReadBytes(encryptedMessage.Length - nonSecretPayloadLength - nonce.Length);
-                var plainText = new byte[_aeadBlockCipher.GetOutputSize(cipherText.Length)];
-
-                try
-                {
-                    var len = _aeadBlockCipher.ProcessBytes(cipherText, 0, cipherText.Length, plainText, 0);
-                    _aeadBlockCipher.DoFinal(plainText, len);
-                }
-                catch (InvalidCipherTextException e)
-                {
-                    throw new EncryptionException(Language.ErrorDecryptionFailed, e);
-                }
-
-                return plainText;
+                var len = _aeadBlockCipher.ProcessBytes(cipherText, 0, cipherText.Length, plainText, 0);
+                _aeadBlockCipher.DoFinal(plainText, len);
             }
+            catch (InvalidCipherTextException e)
+            {
+                throw new EncryptionException(Language.ErrorDecryptionFailed, e);
+            }
+
+            return plainText;
         }
 
         private byte[] GenerateSalt()
