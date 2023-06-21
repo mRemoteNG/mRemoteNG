@@ -2,7 +2,7 @@
 vs2012Light
 ***********
 
-.. figure:: /images/vs2012Light.png
+.. figure:: /images/themes/vs2012Light.png
 
 
 

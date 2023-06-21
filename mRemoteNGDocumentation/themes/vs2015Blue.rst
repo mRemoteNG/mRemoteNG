@@ -2,7 +2,7 @@
 vs2015Blue
 ***********
 
-.. figure:: /images/vs2015Blue.png
+.. figure:: /images/themes/vs2015Blue.png
 
 
 

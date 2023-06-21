@@ -2,7 +2,7 @@
 darculaNG
 ***********
 
-.. figure:: /images/darculaNG.png
+.. figure:: /images/themes/darculaNG.png
 
 
 

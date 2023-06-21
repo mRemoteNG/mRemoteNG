@@ -2,7 +2,7 @@
 vs2015Dark
 ***********
 
-.. figure:: /images/vs2015Dark.png
+.. figure:: /images/themes/vs2015Dark.png
 
 
 

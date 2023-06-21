@@ -2,7 +2,7 @@
 vs2015lightNG
 ***********
 
-.. figure:: /images/vs2015lightNG.png
+.. figure:: /images/themes/vs2015lightNG.png
 
 
 

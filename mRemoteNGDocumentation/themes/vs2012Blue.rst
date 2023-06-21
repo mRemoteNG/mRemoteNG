@@ -2,7 +2,7 @@
 vs2012Blue
 ***********
 
-.. figure:: /images/vs2012Blue.png
+.. figure:: /images/themes/vs2012Blue.png
 
 
 

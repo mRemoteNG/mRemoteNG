@@ -2,7 +2,7 @@
 vs2012Dark
 ***********
 
-.. figure:: /images/vs2012Dark.png
+.. figure:: /images/themes/vs2012Dark.png
 
 
 
