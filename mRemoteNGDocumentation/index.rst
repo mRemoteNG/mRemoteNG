@@ -12,6 +12,7 @@ Welcome to mRemoteNG's documentation!
    keyboard_shortcuts.rst
    sql_configuration.rst
    command_line_switches.rst
+   themes.rst
 
 .. toctree::
    :maxdepth: 2
