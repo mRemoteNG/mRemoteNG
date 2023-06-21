@@ -2,11 +2,27 @@
 Known Issues
 ############
 
-Problems connecting to servers using SSH with mRemoteNG version below 1.77.3
+mRemoteNG bundles a legacy PuTTY version (below 1.77.2)
+=======================================================
+
+mRemoteNG bundles puttyNG, a customized fork to improve the interoperability between Putty and mRemoteNG. As this bundling process happens with the building process, puttyNG can not be updated in the installer. 
+
+.. note::
+
+    Due to the current development progress at the moment there is no stable release bundling the latest puttyNG version.
+
+PuttyNG can be updated manually with the following steps:
+ 
+    1. Retrieve the newest PuttyNG version from `github.com/mRemoteNG/PuTTYNG/releases <https://github.com/mRemoteNG/PuTTYNG/releases>`_
+    2. Replace the local PuTTYNG.exe in the mRemoteNG installation directory
+
+Problems connecting to servers using SSH with mRemoteNG version below 1.77.2
 ============================================================================
-Due the technological progress we are limited by puttyNG functionality exist in older versions, curently we already solve that for new releases, but due we are still in developing process we dont have stable version at the moment, so to address issue with connection to Ubuntu 22.04 or others servers who expect PubkeyAcceptedAlgorithms - manual update of PuttyNG is required:
-- Download the newest prerelease of mRemoteNG: https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.77.1
-- Download newest PuttyNG exe and overwrite the version in the mRemoteNG install directory: https://github.com/mRemoteNG/PuTTYNG/releases/tag/v0.78.0.10
+
+mRemoteNG bundles puttyNG, a customized fork to improve the interoperability between Putty and mRemoteNG. Older Putty versions might cause connection issues, especially for Ubuntu 22 or other servers that expect PubkeyAcceptedAlgorithms. To fix this issue, either a mRemoteNG update to 1.77.2 or newer is required or the PuTTYNG.exe has to be replaced manually as follows:
+
+    1. Retrieve the newest PuttyNG version from `github.com/mRemoteNG/PuTTYNG/releases <https://github.com/mRemoteNG/PuTTYNG/releases>`_
+    2. Replace the local PuTTYNG.exe in the mRemoteNG installation directory
 
 CredSSP - CVE-2018-0886 - Authentication error
 ==============================================
@@ -28,15 +44,15 @@ client attempting to connect to an unpatched server.
 
 Per the MS documentation, the only way around this is to do the following:
 
-- Patch the servers
-- set the "Encryption Oracle Remediation" policy to "Vulnerable" - refer to the MS documentation above for details:
+- Patch the servers (recommended)
+- set the "Encryption Oracle Remediation" policy to "Vulnerable" - refer to the MS documentation above for details (not recommended):
 
  .. figure:: /images/oracle_remediation_setting.png
 
-- Uninstall `KB4103727 <https://support.microsoft.com/en-us/help/4103727/windows-10-update-kb4103727>`_
+- Uninstall `KB4103727 <https://support.microsoft.com/en-us/help/4103727/windows-10-update-kb4103727>`_ (not recommended)
 
-Log4net vulnerability CVE-2018-1285
-===================================
+Log4net vulnerability CVE-2018-1285 (mRemoteNG version below 1.77.2)
+====================================================================
 
 Log4Net is an external library on which mRepoteNG application relies on. While the nightly builds are using the latest version of log4net that do not have the `CVE-2018-1285 <https://nvd.nist.gov/vuln/detail/CVE-2018-1285>`_ vulnerability, older releases require manual patching.
 
