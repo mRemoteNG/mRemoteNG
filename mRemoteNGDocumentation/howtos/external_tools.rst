@@ -74,3 +74,7 @@ If you want to use **powershell** instead. Then follow information below:
 Notice that we replaced the /K with -NoExit and changed **cmd** with **powershell.exe**. See image below:
 
 .. figure:: /images/example_et_traceroute_05.png
+
+More examples
+=============
+Please check :doc:`/Common_External_Tool_Configurations`

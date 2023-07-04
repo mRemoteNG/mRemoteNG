@@ -133,3 +133,20 @@ Windows PowerShell Integrated Scripting Environment (ISE) is a graphical host ap
 - Filename: %WINDIR%\\system32\\WindowsPowerShell\\v1.0\\PowerShell_ISE.exe
 - Arguments: args here
 - Can integrate: Yes
+
+To get all windows file systems attributes of the remote server
+=========================================================================================================================================================================
+It’s could be very useful for database and application servers to know all windows file systems attributes of the remote server, the size in mb, free space in mb and free % including all lettered drives ( e.g c: ) as well as mounted drives. 
+Mounted drives are tricky to find and interrogate by other means.
+
+You must run mR as a user with appropriate permission on the remote server:
+shortcut = C:\Windows\System32\runas.exe /user:domain\ntuser  "C:\Program Files\mRemoteNG\mRemoteNG.exe"
+
+- Filename: %SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe
+- Arguments: -NoExit Get-WmiObject Win32_Volume -ComputerName %hostname% | Format-Table Name, @{Name=”Size(MB)”;Expression={“{0:0,0.00}” -f($_.Capacity/1mb)}}, @{Name=”Free Space(MB)”;Expression={“{0:0,0.00}” -f($_.FreeSpace/1mb)}}, @{Name=”Free (%)”;Expression={“{0,6:P0}” -f(($_.FreeSpace/1mb) / ($_.Capacity/1mb))}}
+- Can integrate: No
+
+You do not need to be logged into the remote server – just highlight the name.
+
+(suggested by: Ray Miller)
+
