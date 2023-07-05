@@ -77,4 +77,4 @@ Notice that we replaced the /K with -NoExit and changed **cmd** with **powershel
 
 More examples
 =============
-Please check :doc:`/Common_External_Tool_Configurations`
+Please check :doc:`/MISCELLANEOUS/Common_External_Tool_Configurations`
