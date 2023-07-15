@@ -37,13 +37,13 @@ try {
 
 		if($IsAppVeyor) {
 			$CertificatePath = Join-Path -Path $SolutionDir -ChildPath $CertificatePath
-			# Write-Output "Decrypt Cert"
-			# & appveyor-tools\secure-file -decrypt "$($Env:cert_path).enc" -secret "$Env:cert_decrypt_pwd"
-			# if(-Not (Test-Path $Env:cert_path)) {
-			# 		Write-Output "decrypt cert does not exist..."
-			# 		Throw "Could not decrypt cert"
-			# }
-			# Write-Output "Restoring NuGets"
+			 Write-Output "Decrypt Cert"
+			 & appveyor-tools\secure-file -decrypt "$($Env:cert_path).enc" -secret "$Env:cert_decrypt_pwd"
+			 if(-Not (Test-Path $Env:cert_path)) {
+			 		Write-Output "decrypt cert does not exist..."
+			 		Throw "Could not decrypt cert"
+			 }
+			 Write-Output "Restoring NuGets"
 		}
 
 		# make sure the cert is actually available
