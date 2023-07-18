@@ -646,7 +646,7 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only).
+        ///   Looks up a localized string similar to Display reconnection dialog when disconnected from server (RDP &amp;&amp; ICA only).
         /// </summary>
         internal static string CheckboxAutomaticReconnect {
             get {
@@ -660,6 +660,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string CheckboxDoNotShowThisMessageAgain {
             get {
                 return ResourceManager.GetString("CheckboxDoNotShowThisMessageAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only).
+        /// </summary>
+        internal static string CheckboxNoReconnect {
+            get {
+                return ResourceManager.GetString("CheckboxNoReconnect", resourceCulture);
             }
         }
         
@@ -1547,7 +1556,7 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable Cursor blinking.
+        ///   Looks up a localized string similar to Disable Cursor Blinking.
         /// </summary>
         internal static string DisableCursorBlinking {
             get {
@@ -4054,6 +4063,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specifies the access token for Remote Desktop Gateway server..
+        /// </summary>
+        internal static string PropertyDescriptionRdpGatewayAccessToken {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionRdpGatewayAccessToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specifies the password of the Remote Desktop Gateway server..
         /// </summary>
         internal static string PropertyDescriptionRdpGatewayPassword {
@@ -4133,8 +4151,8 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("PropertyDescriptionRedirectDiskDrivesCustom", resourceCulture);
             }
         }
-
-        /// <summary>																						
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select whether local disk drives should be shown on the remote host..
         /// </summary>
         internal static string PropertyDescriptionRedirectDrives {
@@ -4906,6 +4924,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string RDPGateway {
             get {
                 return ResourceManager.GetString("RDPGateway", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RDP-Gateway Access Token.
+        /// </summary>
+        internal static string RdpGatewayAccessToken {
+            get {
+                return ResourceManager.GetString("RdpGatewayAccessToken", resourceCulture);
             }
         }
         
@@ -6331,6 +6358,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string Updates {
             get {
                 return ResourceManager.GetString("Updates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use RD Gateway access token.
+        /// </summary>
+        internal static string UseAccessToken {
+            get {
+                return ResourceManager.GetString("UseAccessToken", resourceCulture);
             }
         }
         

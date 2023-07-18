@@ -267,6 +267,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUseConnectionCredentials));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayAccessToken));
             }
             else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes ||
                      SelectedConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
@@ -276,12 +277,22 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayExternalCredentialProvider));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUserViaAPI));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayAccessToken));
             }
             else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.ExternalCredentialProvider)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));
                 strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayAccessToken));
+            }
+            else if (SelectedConnectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.AccessToken)
+            {
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayDomain));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayPassword));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUsername));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayExternalCredentialProvider));
+                strHide.Add(nameof(AbstractConnectionRecord.RDGatewayUserViaAPI));
             }
 
             if (!(SelectedConnectionInfo.Resolution == RDPResolutions.FitToWindow ||
