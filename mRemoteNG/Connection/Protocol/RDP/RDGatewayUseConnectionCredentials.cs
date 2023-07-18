@@ -15,6 +15,9 @@ namespace mRemoteNG.Connection.Protocol.RDP
         SmartCard = 2,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.UseExternalCredentialProvider))]
-        ExternalCredentialProvider = 3
+        ExternalCredentialProvider = 3,
+
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.UseAccessToken))]
+        AccessToken = 4
     }
 }

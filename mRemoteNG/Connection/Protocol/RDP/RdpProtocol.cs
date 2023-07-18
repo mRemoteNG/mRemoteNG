@@ -428,9 +428,18 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             }
 
                         }
-                        _rdpClient.TransportSettings2.GatewayUsername = gwu;
-                        _rdpClient.TransportSettings2.GatewayPassword = gwp;
-                        _rdpClient.TransportSettings2.GatewayDomain = gwd;
+
+                        if (connectionInfo.RDGatewayUseConnectionCredentials != RDGatewayUseConnectionCredentials.AccessToken)
+                        {
+                            _rdpClient.TransportSettings2.GatewayUsername = gwu;
+                            _rdpClient.TransportSettings2.GatewayPassword = gwp;
+                            _rdpClient.TransportSettings2.GatewayDomain = gwd;
+                        }
+                        else
+                        {
+                            //TODO: should we check client version and throw if it is less than 7
+                        }
+                        
                         break;
                     }
                 }

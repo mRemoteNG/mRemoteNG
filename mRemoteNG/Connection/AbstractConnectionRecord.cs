@@ -58,6 +58,7 @@ namespace mRemoteNG.Connection
         private string _rdGatewayUsername;
         private string _rdGatewayPassword;
         private string _rdGatewayDomain;
+        private string _rdGatewayAccessToken;
         private ExternalCredentialProvider _rdGatewayExternalCredentialProvider;
         private string _rdGatewayUserViaAPI = "";
 
@@ -528,6 +529,17 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("RDGatewayPassword", _rdGatewayPassword);
             set => SetField(ref _rdGatewayPassword, value, "RDGatewayPassword");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
+        LocalizedAttributes.LocalizedDisplayName(nameof(Language.RdpGatewayAccessToken)),
+        LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionRdpGatewayAccessToken)),
+        PasswordPropertyText(true),
+        AttributeUsedInProtocol(ProtocolType.RDP)]
+        public string RDGatewayAccessToken
+        {
+            get => GetPropertyValue("RDGatewayAccessToken", _rdGatewayAccessToken);
+            set => SetField(ref _rdGatewayAccessToken, value, "RDGatewayAccessToken");
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.RDPGateway), 4),
