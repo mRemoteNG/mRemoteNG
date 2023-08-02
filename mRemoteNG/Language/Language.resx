@@ -2334,4 +2334,13 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="RedirectDiskDrivesCustom" xml:space="preserve">
     <value>Custom Drives</value>
   </data>
+  <data name="PropertyDescriptionRdpGatewayAccessToken" xml:space="preserve">
+    <value>Specifies the access token for Remote Desktop Gateway server.</value>
+  </data>
+  <data name="RdpGatewayAccessToken" xml:space="preserve">
+    <value>RDP-Gateway Access Token</value>
+  </data>
+  <data name="UseAccessToken" xml:space="preserve">
+    <value>Use RD Gateway access token</value>
+  </data>
 </root>
