@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Window
                 : Language.DownloadAndInstall;
             lblChangeLogLabel.Text = Language.Changelog;
             lblInstalledVersion.Text = Language.Version;
-            lblInstalledVersionLabel.Text = $"{Language.AvailableVersion}:";
+            lblInstalledVersionLabel.Text = $"{Language.Version}:";
             lblLatestVersion.Text = Language.Version;
             lblLatestVersionLabel.Text = $"{Language.AvailableVersion}:";
         }
