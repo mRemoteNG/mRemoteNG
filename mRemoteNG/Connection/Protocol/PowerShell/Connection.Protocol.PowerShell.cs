@@ -42,7 +42,7 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
                 };
 
                 _consoleControl.StartProcess(@"C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell.exe",
-                    $@"-NoExit -Command ""$password = ConvertTo-SecureString '{_connectionInfo.Password}' -AsPlainText -Force; $cred = New-Object System.Management.Automation.PSCredential -ArgumentList @('{_connectionInfo.Domain}\{_connectionInfo.Username}', $password); Enter-PSSession -ComputerName {_connectionInfo.Hostname} -Credential $cred""");
+                    $@"-NoExit -Command ""$password = ConvertTo-SecureString ""'{_connectionInfo.Password}'"" -AsPlainText -Force; $cred = New-Object System.Management.Automation.PSCredential -ArgumentList @('{_connectionInfo.Domain}\{_connectionInfo.Username}', $password); Enter-PSSession -ComputerName {_connectionInfo.Hostname} -Credential $cred""");
                 
                 while (!_consoleControl.IsHandleCreated) break;
                 _handle = _consoleControl.Handle;
