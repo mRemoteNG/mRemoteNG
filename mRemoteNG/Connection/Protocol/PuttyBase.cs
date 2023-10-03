@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Cmdline;
@@ -7,15 +8,12 @@ using mRemoteNG.UI;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.IO.Pipes;
+using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading;
 using System.Windows.Forms;
-using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
-using System.IO;
-using System.Runtime.Versioning;
-using System.IO.Pipes;
-using Google.Protobuf.WellKnownTypes;
-using System.Linq;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
