@@ -1079,8 +1079,20 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="PropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Połącz z sesją konsoli hosta zdalnego.</value>
   </data>
+  <data name="PropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>Użyj Credential Security Support Provider (CredSSP) do autoryzacji, jeżeli jest dostępny.</value>
+  </data>
+  <data name="PropertyDescriptionUseRestrictedAdmin" xml:space="preserve">
+    <value>Użyj ograniczonego trybu admina na hoście docelowym (kontekst lokalnego systemu).</value>
+  </data>
+  <data name="PropertyDescriptionUseRCG" xml:space="preserve">
+    <value>Użyj Zdalnej Ochrony Poświadczeń, aby tunelować autoryzację w miejscu docelowym z powrotem do źródła za pośrednictwem kanału RDP.</value>
+  </data>
   <data name="PropertyDescriptionUser1" xml:space="preserve">
     <value>Tu możesz wpisać wszelkie informacje jakich potrzebujesz.</value>
+  </data>
+  <data name="PropertyDescriptionUserViaAPI" xml:space="preserve">
+    <value>Podaj ID użytkownika w zewnętrznym API (np. tajnym serwerze). Jeżeli jest używane - pozostaw puste pola użytkownika/hasła/domeny.</value>
   </data>
   <data name="PropertyDescriptionUsername" xml:space="preserve">
     <value>Nazwa użytkownika.</value>
@@ -1154,6 +1166,9 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="ExternalToolBefore" xml:space="preserve">
     <value>Zewnętrzne narzędzie przed</value>
   </data>
+  <data name="LoadBalanceInfo" xml:space="preserve">
+    <value>Równoważne obciążenie</value>
+  </data>
   <data name="MacAddress" xml:space="preserve">
     <value>Adres MAC</value>
   </data>
@@ -1173,22 +1188,22 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Sesja PuTTY</value>
   </data>
   <data name="RdpGatewayDomain" xml:space="preserve">
-    <value>Domena bramy</value>
+    <value>Domena bramy RDP</value>
   </data>
   <data name="RdpGatewayHostname" xml:space="preserve">
-    <value>Nazwa hosta bramy</value>
+    <value>Nazwa hosta bramy RDP</value>
   </data>
   <data name="RdpGatewayPassword" xml:space="preserve">
-    <value>Hasło bramy zdalnego pulpitu</value>
+    <value>Hasło bramy RDP</value>
   </data>
   <data name="RdpGatewayUsageMethod" xml:space="preserve">
-    <value>Użyj bramy</value>
+    <value>Użyj bramy RDP</value>
   </data>
   <data name="RdpGatewayUseConnectionCredentials" xml:space="preserve">
-    <value>Poświadczenia bramy</value>
+    <value>Poświadczenia bramy RDP</value>
   </data>
   <data name="RdpGatewayUsername" xml:space="preserve">
-    <value>Użytkownik bramy</value>
+    <value>Użytkownik bramy RDP</value>
   </data>
   <data name="DiskDrives" xml:space="preserve">
     <value>Dyski</value>
@@ -1208,6 +1223,9 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="Sounds" xml:space="preserve">
     <value>Dźwięki</value>
   </data>
+  <data name="AudioCapture" xml:space="preserve">
+    <value>Przechwytywanie audio</value>
+  </data>
   <data name="RenderingEngine" xml:space="preserve">
     <value>Silnik renderujący</value>
   </data>
@@ -1222,6 +1240,12 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   </data>
   <data name="UseCredSsp" xml:space="preserve">
     <value>Użyj CredSSP</value>
+  </data>
+  <data name="UseRestrictedAdmin" xml:space="preserve">
+    <value>Użyj ograniczonego Admina</value>
+  </data>
+  <data name="UseRCG" xml:space="preserve">
+    <value>Użyj Zdalnej Ochrony Poświadczeń</value>
   </data>
   <data name="UserField" xml:space="preserve">
     <value>Pole użytkownika</value>
@@ -1241,6 +1265,13 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="ProxyUsername" xml:space="preserve">
     <value>Użytkownik proxy</value>
   </data>
+  <data name="ProtocolEventDisconnected" xml:space="preserve">
+    <value>Zdarzenie protokołu - rozłączenie. Host: "{1}"; Protokół: "{2}" Komunikat: "{0}"</value>
+  </data>
+  <data name="ProtocolEventDisconnectFailed" xml:space="preserve">
+    <value>Zadrzenie protokołu - błąd rozłączenia.
+{0}</value>
+  </data>
   <data name="ProtocolToImport" xml:space="preserve">
     <value>Protokół do zaimportowania</value>
   </data>
@@ -1250,17 +1281,35 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="ProxyTestSucceeded" xml:space="preserve">
     <value>Test proxy powiódł się!</value>
   </data>
+  <data name="PuttyDisposeFailed" xml:space="preserve">
+    <value>Usunięcie procesu Putty nie powiodło się!</value>
+  </data>
   <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Nie można ustawić ostrości!</value>
+  </data>
+  <data name="PuttyHandle" xml:space="preserve">
+    <value>Uchwyt Putty: {0}</value>
   </data>
   <data name="PuttyKillFailed" xml:space="preserve">
     <value>Zamknięcie procesu Putty nie powiodło się!</value>
   </data>
+  <data name="PanelHandle" xml:space="preserve">
+    <value>Uchwyt panelu: {0}</value>
+  </data>
   <data name="PuttyResizeFailed" xml:space="preserve">
     <value>Zmiana rozmiaru Putty nie powiodła się!</value>
   </data>
+  <data name="PuttySavedSessionsRootName" xml:space="preserve">
+    <value>Zapisane sesje PuTTY</value>
+  </data>
   <data name="PuttySettings" xml:space="preserve">
     <value>Ustawienia PuTTY</value>
+  </data>
+  <data name="PuttyShowSettingsDialogFailed" xml:space="preserve">
+    <value>Nieudane wyświetlenie okna ustawień PuTTY!</value>
+  </data>
+  <data name="PuttyStuff" xml:space="preserve">
+    <value>--- PuTTY Stuff ---</value>
   </data>
   <data name="PuttyTitle" xml:space="preserve">
     <value>Tytuł PuTTY: {0}</value>
@@ -1270,6 +1319,12 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   </data>
   <data name="QuickConnect" xml:space="preserve">
     <value>Szybkie połączenie</value>
+  </data>
+  <data name="QuickConnectAddFailed" xml:space="preserve">
+    <value>Błąd dodania szybkiego połączenia!</value>
+  </data>
+  <data name="QuickConnectFailed" xml:space="preserve">
+    <value>Błąd tworzenia szybkiego połączenia</value>
   </data>
   <data name="_CloseWarnAll" xml:space="preserve">
     <value>&amp;Ostrzegaj przed zamknięciem połączenia</value>
@@ -1290,25 +1345,31 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>RDP</value>
   </data>
   <data name="Rdp16777216Colors" xml:space="preserve">
-    <value>16777216 Kolorów (24-bir)</value>
+    <value>16777216 kolorów (24-bit)</value>
   </data>
   <data name="Rdp256Colors" xml:space="preserve">
-    <value>256 Kolorów (8-bit)</value>
+    <value>256 kolorów (8-bit)</value>
   </data>
   <data name="Rdp32768Colors" xml:space="preserve">
-    <value>32768 Kolorów (15-bit)</value>
+    <value>32768 kolorów (15-bit)</value>
   </data>
   <data name="Rdp4294967296Colors" xml:space="preserve">
-    <value>16777216 Kolorów (32-bit)</value>
+    <value>16777216 kolorów (32-bit)</value>
   </data>
   <data name="Rdp65536Colors" xml:space="preserve">
-    <value>65536 Kolorów (16-bit)</value>
+    <value>65536 kolorów (16-bit)</value>
+  </data>
+  <data name="RdpControlCreationFailed" xml:space="preserve">
+    <value>Błąd tworzenia kontrolki RDP, proszę sprawdzić wymagania mRemoteNG.</value>
   </data>
   <data name="DisableCursorBlinking" xml:space="preserve">
     <value>Wyłącz miganie kursora</value>
   </data>
   <data name="DisableCursorShadow" xml:space="preserve">
     <value>Wyłącz cień kursora</value>
+  </data>
+  <data name="DisableFullWindowDrag" xml:space="preserve">
+    <value>Wyłączenie przeciągania pełnego okna</value>
   </data>
   <data name="DisableMenuAnimations" xml:space="preserve">
     <value>Wyłącz animacje menu</value>
@@ -1317,22 +1378,31 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Nie udało sie rozłączyć RDP, spróbuj zamknąć!</value>
   </data>
   <data name="RdpErrorCode1" xml:space="preserve">
-    <value>Wewnętrzny kod błędu 1.</value>
+    <value>Błąd wewnętrzny, kod 1.</value>
   </data>
   <data name="RdpErrorCode2" xml:space="preserve">
-    <value>Wewnętrzny kod błędu 2.</value>
+    <value>Błąd wewnętrzny, kod 2.</value>
   </data>
   <data name="RdpErrorCode3" xml:space="preserve">
-    <value>Błąd wewnętrzny: kod 3. To nie tak miało być...</value>
+    <value>Błąd wewnętrzny, kod 3. To nie tak miało być...</value>
   </data>
   <data name="RdpErrorCode4" xml:space="preserve">
-    <value>Wewnętrzny kod błędu 4.</value>
+    <value>Błąd wewnętrzny, kod 4.</value>
+  </data>
+  <data name="RdpErrorConnection" xml:space="preserve">
+    <value>Wystąpił nienaprawialny błąd poczas połączenia z klientem.</value>
   </data>
   <data name="RdpErrorGetFailure" xml:space="preserve">
     <value>Błąd pobrania kodu błędu (FatalErrors)</value>
   </data>
+  <data name="RdpErrorOutOfMemory" xml:space="preserve">
+    <value>Wystąpił błąd braku pamięci.</value>
+  </data>
   <data name="RdpErrorUnknown" xml:space="preserve">
     <value>Wystąpił nieznany błąd.</value>
+  </data>
+  <data name="RdpErrorWindowCreation" xml:space="preserve">
+    <value>Wystąpił błąd tworzenia okna.</value>
   </data>
   <data name="RdpErrorWinsock" xml:space="preserve">
     <value>Inicjalizacja Winsock nie powiodła się.</value>
