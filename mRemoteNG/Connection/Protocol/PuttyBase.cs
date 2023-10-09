@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.Messages;
+using mRemoteNG.Resources.Language;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.Tools.Cmdline;
@@ -7,12 +8,12 @@ using mRemoteNG.UI;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.IO.Pipes;
+using System.Linq;
+using System.Runtime.Versioning;
 using System.Threading;
 using System.Windows.Forms;
-using mRemoteNG.Properties;
-using mRemoteNG.Resources.Language;
-using System.IO;
-using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -57,6 +58,19 @@ namespace mRemoteNG.Connection.Protocol
             return !PuttyProcess.HasExited;
         }
 
+        public void CreatePipe(object oData)
+        {
+            string data = (string)oData;
+            string random = data[..8];
+            string password = data[8..];
+            var server = new NamedPipeServerStream($"mRemoteNGSecretPipe{random}");
+            server.WaitForConnection();
+            StreamWriter writer = new(server);
+            writer.Write(password);
+            writer.Flush();
+            server.Dispose();
+        }
+
         public override bool Connect()
         {
             string optionalTemporaryPrivateKeyPath = ""; // path to ppk file instead of password. only temporary (extracted from credential vault).
@@ -74,7 +88,7 @@ namespace mRemoteNG.Connection.Protocol
                     }
                 };
 
-                var arguments = new CommandLineArguments {EscapeForShell = false};
+                var arguments = new CommandLineArguments { EscapeForShell = false };
 
                 arguments.Add("-load", InterfaceControl.Info.PuttySession);
 
@@ -140,7 +154,7 @@ namespace mRemoteNG.Connection.Protocol
                                     break;
                             }
                         }
-                       
+
 
                         if (string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(optionalTemporaryPrivateKeyPath))
                         {
@@ -162,7 +176,13 @@ namespace mRemoteNG.Connection.Protocol
 
                             if (!string.IsNullOrEmpty(password))
                             {
-                                arguments.Add("-pw", password);
+                                string random = string.Join("", Guid.NewGuid().ToString("n").Take(8).Select(o => o));
+                                // write data to pipe
+                                var thread = new Thread(new ParameterizedThreadStart(CreatePipe));
+                                thread.Start($"{random}{password}");
+                                // start putty with piped password
+                                arguments.Add("-pwfile", $"\\\\.\\PIPE\\mRemoteNGSecretPipe{random}");
+                                //arguments.Add("-pw", password);
                             }
                         }
 

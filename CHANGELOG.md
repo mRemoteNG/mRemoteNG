@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - #2261: Implement Show/Hide file menu in view menu
 - #2244: Save RCG and RestrictedAdmin fields correctly in connections file
 - #2195: Fix crafted XML File Code Execution vulnerability
+- #304: use pwfile instead of cleartext password for puttyng
 
 ### Added
 - #2285: Support extraction of SSH private keys from external cred prov
