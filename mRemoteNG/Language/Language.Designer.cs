@@ -4514,6 +4514,42 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login canceled! Restart if necessary..
+        /// </summary>
+        internal static string PsCanceled {
+            get {
+                return ResourceManager.GetString("PsCanceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please verify username and password and try again.If PSRemoting is not enabled on the server, enable it first..
+        /// </summary>
+        internal static string PsConnectionFailed {
+            get {
+                return ResourceManager.GetString("PsConnectionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login failed!.
+        /// </summary>
+        internal static string PsFailed {
+            get {
+                return ResourceManager.GetString("PsFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum login attempts exceeded. Please connect again..
+        /// </summary>
+        internal static string PsLoginAttempts {
+            get {
+                return ResourceManager.GetString("PsLoginAttempts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dispose of Putty process failed!.
         /// </summary>
         internal static string PuttyDisposeFailed {

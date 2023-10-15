@@ -2031,4 +2031,20 @@ Nightly umfasst Alphas, Betas und Release Candidates.</value>
   <data name="ApplyInheritanceToChildren" xml:space="preserve">
     <value>Vererbung auf Kinder anwenden</value>
   </data>
+  <data name="PsCanceled" xml:space="preserve">
+    <value>Anmeldung abgebrochen! Bei bedarf neu einleiten.</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="PsConnectionFailed" xml:space="preserve">
+    <value>Bitte Benutzernamen und Kennwort abgleichen und erneut versuchen. Wenn PSRemoting auf dem Server nicht aktiviert ist, bitte zuerst aktivieren.</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="PsFailed" xml:space="preserve">
+    <value>Anmeldung fehlgeschlagen!</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="PsLoginAttempts" xml:space="preserve">
+    <value>Maximale Anmeldeversuche erreicht. Verbindung erneut initiieren.</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
 </root>
