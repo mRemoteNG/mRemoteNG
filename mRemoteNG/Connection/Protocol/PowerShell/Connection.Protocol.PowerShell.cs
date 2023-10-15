@@ -190,7 +190,8 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
                 ";
 
                 // Setup process for script with arguments
-                _consoleControl.StartProcess(psExe, $@"-NoExit -NoProfile -Command ""& {{ {psScriptBlock} }}"" -Hostname ""'{_connectionInfo.Hostname}'"" -Username ""'{psUsername}'"" -Password ""'{_connectionInfo.Password}'"" -LoginAttempts {psLoginAttempts}");
+                //* The -NoProfile parameter would be a valuable addition but should be able to be deactivated.
+                _consoleControl.StartProcess(psExe, $@"-NoExit -Command ""& {{ {psScriptBlock} }}"" -Hostname ""'{_connectionInfo.Hostname}'"" -Username ""'{psUsername}'"" -Password ""'{_connectionInfo.Password}'"" -LoginAttempts {psLoginAttempts}");
                 
                 while (!_consoleControl.IsHandleCreated) break;
                 _handle = _consoleControl.Handle;
