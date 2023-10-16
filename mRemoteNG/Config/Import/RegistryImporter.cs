@@ -28,13 +28,12 @@ namespace mRemoteNG.Config.Import
                 {
                     if (key != null)
                     {
-                        int i = 0;
                         foreach (string sub in key.GetSubKeyNames())
                         {
                             if (sub.EndsWith("Default%20Settings")) continue;
                             using RegistryKey subkey = key.OpenSubKey(sub);
                             string Hostname = subkey.GetValue("HostName") as string;
-
+                            string connName = subkey.Name[(key.Name.Length + 1)..];
                             if (!string.IsNullOrEmpty(Hostname))
                             {
                                 int Port = 22;
@@ -60,20 +59,13 @@ namespace mRemoteNG.Config.Import
 
                                 importedNode.AddChild(new Connection.ConnectionInfo()
                                 {
-                                    Name = Hostname,
+                                    Name = connName,
                                     Hostname = Hostname,
+                                    Port = Port == 0 ? 22 : Port,
                                     Protocol = Protocol,
-                                    Parent = destinationContainer
+                                    Parent = destinationContainer,
+                                    Username = string.IsNullOrEmpty(Username) ? string.Empty : Username
                                 });
-                                if (Port > 0)
-                                {
-                                    importedNode.Children[i].Port = Port;
-                                }
-                                if (string.IsNullOrEmpty(Username))
-                                {
-                                    importedNode.Children[i].Username = Username;
-                                }
-                                i++;
                             }
                         }
                     }
