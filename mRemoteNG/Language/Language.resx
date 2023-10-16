@@ -2343,4 +2343,20 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="UseAccessToken" xml:space="preserve">
     <value>Use RD Gateway access token</value>
   </data>
+  <data name="PsCanceled" xml:space="preserve">
+    <value>Login canceled! Restart if necessary.</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="PsConnectionFailed" xml:space="preserve">
+    <value>Please verify username and password and try again.If PSRemoting is not enabled on the server, enable it first.</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="PsFailed" xml:space="preserve">
+    <value>Login failed!</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
+  <data name="PsLoginAttempts" xml:space="preserve">
+    <value>Maximum login attempts exceeded. Please connect again.</value>
+    <comment>C# to Powershell transfer issue with encoding possible</comment>
+  </data>
 </root>
