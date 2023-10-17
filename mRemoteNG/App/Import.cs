@@ -143,6 +143,21 @@ namespace mRemoteNG.App
             }
         }
 
+        internal static void ImportFromPutty(ContainerInfo selectedNodeAsContainer)
+        {
+            try
+            {
+                using (Runtime.ConnectionsService.BatchedSavingContext())
+                {
+                    RegistryImporter.Import("Software\\SimonTatham\\PuTTY\\Sessions", selectedNodeAsContainer);
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromPutty() failed.", ex);
+            }
+        }
+
         private static IConnectionImporter<string> BuildConnectionImporterFromFileExtension(string fileName)
         {
             // TODO: Use the file contents to determine the file type instead of trusting the extension
