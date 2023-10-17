@@ -100,7 +100,7 @@
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2045.28" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2088.41" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="MySql.Data" Version="8.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
