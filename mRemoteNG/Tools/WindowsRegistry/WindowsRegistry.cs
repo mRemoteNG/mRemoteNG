@@ -1,7 +1,4 @@
-﻿using Amazon.EC2.Model;
-using Google.Protobuf.WellKnownTypes;
-using Microsoft.Win32;
-using MySqlX.XDevAPI.Common;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +9,7 @@ using System.Security;
 namespace mRemoteNG.Tools.WindowsRegistry
 {
     /// <summary>
-    /// This class implements the IRegistryRead and IRegistryWrite interfaces and provides methods for interacting with the Windows Registry.
+    /// This class interacting with the Windows Registry.
     /// </summary>
     [SupportedOSPlatform("windows")]
     public class WindowsRegistry : IRegistry, IRegistryRead, IRegistryWrite

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Win32;
 using mRemoteNG.Tools.WindowsRegistry;
-using MySqlX.XDevAPI.Common;
-using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Tools.Registry

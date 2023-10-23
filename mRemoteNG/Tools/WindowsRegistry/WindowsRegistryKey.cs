@@ -111,12 +111,10 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// - The registry value type is set
         /// - The key path is set
         /// - The value name is set
-        /// - The value data is set
         /// </summary>
         /// <returns>Returns true if the key is write-ready, otherwise false.</returns>
         public bool IsKeyWritable() {
             return (IsHiveSet() && IsValueKindSet() && IsPathSet() && IsNameSet());
-            //return (IsHiveSet() && IsValueKindSet() && IsPathSet() && IsNameSet() && IsValueSet());
         }
         #endregion
 
