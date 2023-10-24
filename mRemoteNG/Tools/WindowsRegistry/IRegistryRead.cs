@@ -1,11 +1,12 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tools.WindowsRegistry
 {
     [SupportedOSPlatform("windows")]
-    public interface IRegistry
+    public interface IRegistryRead
     {
         #region registry reader
         string[] GetSubKeyNames(RegistryHive hive, string path);
@@ -18,17 +19,10 @@ namespace mRemoteNG.Tools.WindowsRegistry
 
         List<WindowsRegistryKey> GetRegistryEntries(RegistryHive hive, string path);
         List<WindowsRegistryKey> GetRegistryEntryiesRecursive(RegistryHive hive, string path);
-
         #endregion
-
-        #region registry writer
-        void SetRegistryValue(WindowsRegistryKey key);
-        void SetRegistryValue(RegistryHive hive, string path, string name, object value, RegistryValueKind valueKind);
-
-        #endregion
-
+        
         #region converter
-        RegistryHive      ConvertStringToRegistryHive(string hiveString);
+        RegistryHive ConvertStringToRegistryHive(string hiveString);
         RegistryValueKind ConvertStringToRegistryValueKind(string valueType);
         #endregion
     }
