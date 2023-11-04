@@ -909,7 +909,8 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Brak aktualizacji</value>
   </data>
   <data name="OldConffile" xml:space="preserve">
-    <value>Próbujesz załadować plik połączenia, który utworzono przy użyciu bardzo wczesnej wersji mRemote - to może spowodować poważne błędy działania programu. Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</value>
+    <value>Próbujesz załadować plik połączenia, który utworzono przy użyciu bardzo wczesnej wersji mRemote - to może spowodować poważne błędy działania programu.
+Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</value>
   </data>
   <data name="OpenNewTabRight" xml:space="preserve">
     <value>Otwórz nową zakładkę na prawo od aktualnie zaznaczonej</value>
@@ -978,10 +979,10 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Wstaw tutaj notatkę lub opis hosta.</value>
   </data>
   <data name="PropertyDescriptionDisplayThemes" xml:space="preserve">
-    <value>Wybierz "Tak" jeśli motyw ma być wyświetlany na zdalnym komputerze.</value>
+    <value>Wybierz 'Tak' jeśli motyw ma być wyświetlany na zdalnym hoście.</value>
   </data>
-  <data name="PropertyDescriptionName" xml:space="preserve">
-    <value>To jest nazwa, która będzie wyświetlana na drzewie połączeń.</value>
+  <data name="PropertyDescriptionDisplayWallpaper" xml:space="preserve">
+    <value>Wybierz 'Tak' jeżeli tapeta ze zdalnego hosta ma być wyświetlana.</value>
   </data>
   <data name="PropertyDescriptionDomain" xml:space="preserve">
     <value>Podaj domenę.</value>
@@ -1050,7 +1051,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Wybierz, czy lokalne dyski powinny być dostępne na zdalnym hoście.</value>
   </data>
   <data name="PropertyDescriptionRedirectKeys" xml:space="preserve">
-    <value>Wybierz, czy kombinacje klawiszy (np. Alt-Tab) powinny być przekierowane do komputera zdalnego.</value>
+    <value>Wybierz, czy kombinacje klawiszy (np. Alt-Tab) powinny być przekierowane do hosta zdalnego.</value>
   </data>
   <data name="PropertyDescriptionRedirectPorts" xml:space="preserve">
     <value>Określa, czy porty lokalne (np. szeregowy, równoległy) mają być wyświetlane na zdalnym hoście.</value>
@@ -1065,9 +1066,12 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Wybierz, czy lokalne karty inteligentne powinny być dostępne na zdalnym hoście.</value>
   </data>
   <data name="PropertyDescriptionRedirectSounds" xml:space="preserve">
-    <value>Wybierz jak dźwięk z zdalnego komputera powinien być przekierowany.</value>
+    <value>Wybierz, jak dźwięk z zdalnego hosta powinien być przekierowany.</value>
   </data>
-  <data name="PropertyDescriptionRenderingEngine" xml:space="preserve">
+  <data name="PropertyDescriptionRedirectAudioCapture" xml:space="preserve">
+    <value>Wybierz, jak domyślne urządzenie wejściowe audio na zdalnym hoście ma być przekierowane na ten komputer.</value>
+  </data>
+ <data name="PropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Wybierz jeden z silników renderowania, który będzie używany do wyświetlania stron HTML.</value>
   </data>
   <data name="PropertyDescriptionResolution" xml:space="preserve">
@@ -1122,10 +1126,10 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Wszystkie</value>
   </data>
   <data name="AuthenticationLevel" xml:space="preserve">
-    <value>Autentykacja serwera</value>
+    <value>Autoryzacja serwera</value>
   </data>
   <data name="AuthenticationMode" xml:space="preserve">
-    <value>Tryb autentykacji</value>
+    <value>Tryb autoryzacji</value>
   </data>
   <data name="AutomaticResize" xml:space="preserve">
     <value>Automatyczna zmiana rozmiaru</value>
@@ -1152,7 +1156,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Kompozycja pulpitu</value>
   </data>
   <data name="FontSmoothing" xml:space="preserve">
-    <value>Wygładzenie czcionki</value>
+    <value>Wygładzenie czcionek</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>Kodowanie</value>
@@ -1410,6 +1414,9 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="FitToPanel" xml:space="preserve">
     <value>Dostosuj do panelu</value>
   </data>
+  <data name="RdpFocusFailed" xml:space="preserve">
+    <value>Przełączenie na RDP nieudane!</value>
+  </data>
   <data name="RdpGatewayIsSupported" xml:space="preserve">
     <value>Brama zdalnego pulpitu jest wspierana.</value>
   </data>
@@ -1424,6 +1431,9 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   </data>
   <data name="RdpSetConsoleSessionFailed" xml:space="preserve">
     <value>Wykonanie RDP SetUseConsoleSession nie powiodło się!</value>
+  </data>
+  <data name="RdpSetConsoleSwitch" xml:space="preserve">
+    <value>Konsola ustawień RDP przełączona do RDC {0}.</value>
   </data>
   <data name="RdpSetCredentialsFailed" xml:space="preserve">
     <value>Wykonanie RDP SetCredentials nie powiodło się!</value>
@@ -1443,6 +1453,12 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="RdpSetPropsFailed" xml:space="preserve">
     <value>Wykonanie RDP SetProps nie powiodło się!</value>
   </data>
+  <data name="RdpSetRedirectionFailed" xml:space="preserve">
+    <value>Ustawienie przekierowania RDP nieudane!</value>
+  </data>
+  <data name="RdpSetRedirectKeysFailed" xml:space="preserve">
+    <value>Ustawienie przekierowania klawiszy RDP nieudane!</value>
+  </data>
   <data name="RdpSetResolutionFailed" xml:space="preserve">
     <value>Wykonanie RDP SetResolution nie powiodło się!</value>
   </data>
@@ -1453,7 +1469,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Nie odtwarzaj</value>
   </data>
   <data name="RdpSoundLeaveAtRemoteComputer" xml:space="preserve">
-    <value>Zostaw na komputerze zdalnym</value>
+    <value>Zostaw na hoście zdalnym</value>
   </data>
   <data name="RdpToggleFullscreenFailed" xml:space="preserve">
     <value>Wykonanie RDP ToggleFullscreen nie powiodło się!</value>
@@ -1488,7 +1504,34 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="SaveConsOnExit" xml:space="preserve">
     <value>Zapisz połączenia przy wyjściu</value>
   </data>
-  <data name="SaveImageFilter" xml:space="preserve">
+  <data name="strConnectionBackupFrequency" xml:space="preserve">
+    <value>Częstotliwość kopii zapasowej połączeń</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyWeekly" xml:space="preserve">
+    <value>Tygodniowo</value>
+  </data>
+  <data name="strConnectionsBackupMaxCount" xml:space="preserve">
+    <value>Maksymalna liczba kopii</value>
+  </data>
+  <data name="strConnectionsBackupPath" xml:space="preserve">
+    <value>Położenie pliku kopii połączeń</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnEdit" xml:space="preserve">
+    <value>Po edycji</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyOnExit" xml:space="preserve">
+    <value>Po wyjściu</value>
+  </data>
+  <data name="ConnectionsBackupFrequencyNever" xml:space="preserve">
+    <value>Nie twórz kopii zapasowych połączeń</value>
+  </data>
+  <data name="strBrowse" xml:space="preserve">
+    <value>Przeglądaj...</value>
+  </data>
+  <data name="strBackup" xml:space="preserve">
+    <value>Kopia zapasowa</value>
+  </data>
+ <data name="SaveImageFilter" xml:space="preserve">
     <value>GIF(.gif)|*.gif|JPEG(.jpeg)|*.jpeg|JPEG(.jpg)|*.jpg|PNG(.png)|*.png</value>
   </data>
   <data name="Screen" xml:space="preserve">
@@ -1508,6 +1551,9 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   </data>
   <data name="SetHostnameLikeDisplayName" xml:space="preserve">
     <value>Ustaw nawę hosta taką samą jak wyświetlaną nazwę gdy tworzysz lub zmieniasz nazwę połączeń</value>
+  </data>
+  <data name="SettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+    <value>Nie można zapisać ustawień ani wyłączyć ikony powiadomienia!</value>
   </data>
   <data name="ShowDescriptionTooltips" xml:space="preserve">
     <value>Pokaż opisy podpowiedzi w drzewie połączenia</value>
@@ -1575,11 +1621,17 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   <data name="Advanced" xml:space="preserve">
     <value>Zaawansowane</value>
   </data>
+  <data name="TabsAndPanels" xml:space="preserve">
+    <value>Zakładki i Panele</value>
+  </data>
   <data name="Updates" xml:space="preserve">
     <value>Aktualizacje</value>
   </data>
   <data name="Telnet" xml:space="preserve">
     <value>Telnet</value>
+  </data>
+  <data name="TheFollowing" xml:space="preserve">
+    <value>Następujące:</value>
   </data>
   <data name="TitleError" xml:space="preserve">
     <value>Błąd ({0})</value>
@@ -1610,6 +1662,12 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
   </data>
   <data name="UltraVncRepeater" xml:space="preserve">
     <value>Ultra VNC Repeater</value>
+  </data>
+  <data name="UltraVNCSCListeningPort" xml:space="preserve">
+    <value>Port UltraVNC SingleClick:</value>
+  </data>
+  <data name="UncheckProperties" xml:space="preserve">
+    <value>Odznacz właściwości, których nie chcesz zapisać!</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
     <value>mRemoteNG wymaga aktualizacji</value>
@@ -1675,6 +1733,7 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
   <data name="VncSendSpecialKeysFailed" xml:space="preserve">
     <value>VNC SendSpecialKeys nie powiodło się!</value>
   </data>
+XXXXXX
   <data name="WarnIfAuthFails" xml:space="preserve">
     <value>Ostrzegaj, jeśli uwierzytelnianie nie powiedzie się</value>
   </data>
@@ -1694,7 +1753,7 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
     <value>Loguj wiadomości następujących typów</value>
   </data>
   <data name="ChoosePath" xml:space="preserve">
-    <value>Wybierz katalog</value>
+    <value>Wybierz folder</value>
   </data>
   <data name="OpenFile" xml:space="preserve">
     <value>Otwórz plik</value>
@@ -1709,7 +1768,7 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
     <value>Wyskakujące okienka</value>
   </data>
   <data name="LogToAppDir" xml:space="preserve">
-    <value>Loguj do katalogu aplikacji</value>
+    <value>Loguj do folderu aplikacji</value>
   </data>
   <data name="Credentials" xml:space="preserve">
     <value>Uwierzytelnienia</value>
@@ -1717,13 +1776,28 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
   <data name="RdpOverallConnectionTimeout" xml:space="preserve">
     <value>Timeout połączeń RDP</value>
   </data>
+  <data name="ChoosePath" xml:space="preserve">
+    <value>Wybierz ścieżkę</value>
+  </data>
+  <data name="OpenFile" xml:space="preserve">
+    <value>Otwórz plik</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Poświadczenia</value>
+  </data>
+  <data name="TestConnection" xml:space="preserve">
+    <value>Test połączenia</value>
+  </data>
+  <data name="ReadOnly" xml:space="preserve">
+    <value>Tylko do odczytu:</value>
+  </data>
   <data name="WorkingDirectory" xml:space="preserve">
-    <value>Katalog roboczy:</value>
+    <value>Folder roboczy:</value>
   </data>
   <data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
     <value>Stwórz pusty panel przy uruchamianiu mRemoteNG</value>
   </data>
   <data name="WorkingDirColumnHeader" xml:space="preserve">
-    <value>Katalog roboczy</value>
+    <value>Folder roboczy</value>
   </data>
 </root>
