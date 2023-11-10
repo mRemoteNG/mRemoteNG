@@ -115,6 +115,9 @@
     <PackageReference Include="System.DirectoryServices" Version="7.0.1" />
     <PackageReference Include="System.Management" Version="7.0.2" />
     <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+    <PackageReference Include="System.Security.AccessControl" Version="6.0.0" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="7.0.1" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
     <PackageReference Include="VncSharpCore" Version="1.2.1" />
   </ItemGroup>
   <ItemGroup>
