@@ -118,7 +118,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             try
             {
                 // ANSI SQL way.  Works in PostgreSQL, MSSQL, MySQL.
-                var cmd = databaseConnector.DbCommand("select case when exists((select * from information_schema.tables where table_name = '" + tableName + "')) then 1 else 0 end");
+                var database_name = Properties.OptionsDBsPage.Default.SQLDatabaseName;
+                var cmd = databaseConnector.DbCommand("select case when exists((select * from information_schema.tables where table_name = '" + tableName + "' and table_schema='"+ database_name + "')) then 1 else 0 end");
                 var cmdResult = Convert.ToInt16(cmd.ExecuteScalar());
                 exists = (cmdResult == 1);
             }

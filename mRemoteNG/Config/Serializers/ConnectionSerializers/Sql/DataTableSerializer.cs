@@ -628,6 +628,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["VNCSmartSizeMode"] = connectionInfo.VNCSmartSizeMode;
             dataRow["VNCViewOnly"] = connectionInfo.VNCViewOnly; // TODO: this column can eventually be removed. we now save this property locally
             dataRow["VmId"] = connectionInfo.VmId;
+            dataRow["UserViaAPI"] = connectionInfo.UserViaAPI;
 
             if (_saveFilter.SaveInheritance)
             {
@@ -706,6 +707,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritVNCSmartSizeMode"] = connectionInfo.Inheritance.VNCSmartSizeMode;
                 dataRow["InheritVNCViewOnly"] = connectionInfo.Inheritance.VNCViewOnly;
                 dataRow["InheritVmId"] = connectionInfo.Inheritance.VmId;
+                dataRow["UserViaAPI"] = connectionInfo.UserViaAPI;
                 dataRow["InheritCacheBitmaps"] = connectionInfo.Inheritance.CacheBitmaps;
             }
             else
@@ -782,6 +784,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritVNCSmartSizeMode"] = false;
                 dataRow["InheritVNCViewOnly"] = false;
                 dataRow["InheritCacheBitmaps"] = false;
+                dataRow["UserViaAPI"] = "";
             }
 
             if (isNewRow) _dataTable.Rows.Add(dataRow);
