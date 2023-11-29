@@ -1120,7 +1120,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungsdatei erstell
     <value>Proxy-Benutzername</value>
   </data>
   <data name="ProtocolEventDisconnected" xml:space="preserve">
-    <value>Protokollereignis Verbindung getrennnt.
+    <value>Protokollereignis Verbindung getrennt.
 {0}</value>
   </data>
   <data name="ProtocolEventDisconnectFailed" xml:space="preserve">
