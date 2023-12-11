@@ -139,7 +139,7 @@
     <value>Pozwól wybrać panel przed każdym połączeniem</value>
   </data>
   <data name="AlwaysShowPanelTabs" xml:space="preserve">
-    <value>Zawsze pokazuj zakładki paneli</value>
+    <value>Zawsze pokazuj karty paneli</value>
   </data>
   <data name="AlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Zawsze pokazuj ikonę w obszarze powiadomień</value>
@@ -407,7 +407,7 @@
   </data>
   <data name="ConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Nie można załadować pliku połączeń "{0}"! 
-Załadowano nowy plik połączeń.</value>
+Utworzono nowy plik połączeń.</value>
   </data>
   <data name="ConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Nie można zapisać pliku połączeń jako "{0}"!</value>
@@ -534,7 +534,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Eksportuj aktualnie zaznaczony folder</value>
   </data>
   <data name="_ExportToFile" xml:space="preserve">
-    <value>&amp;Eksportuj do pliku...</value>
+    <value>&amp;Eksport do pliku...</value>
   </data>
   <data name="ExternalToolDefaultName" xml:space="preserve">
     <value>Nowe narzędzie zewnętrzne</value>
@@ -618,7 +618,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Konfiguracja ustawień HTTP nie powiodła się!</value>
   </data>
   <data name="IdentifyQuickConnectTabs" xml:space="preserve">
-    <value>Identyfikuj zakładki szybkich połączeń dodając przedrostek "Szybkie:"</value>
+    <value>Identyfikuj karty szybkich połączeń dodając przedrostek "Szybkie:"</value>
   </data>
   <data name="ImportAD" xml:space="preserve">
     <value>Import z Active Directory</value>
@@ -660,7 +660,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Adres:</value>
   </data>
   <data name="ClosingConnections" xml:space="preserve">
-    <value>Przy zamykaniu połączeń:</value>
+    <value>Podczas zamykania połączeń:</value>
   </data>
   <data name="DisplayName" xml:space="preserve">
     <value>Widoczna nazwa</value>
@@ -705,7 +705,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>(Wykryj automatycznie)</value>
   </data>
   <data name="LanguageRestartRequired" xml:space="preserve">
-    <value>{0} musi być ponownie uruchomiony aby zmiany języka zaczęły obowiązywać.</value>
+    <value>{0} musi być ponownie uruchomiony, aby zmiany języka zaczęły obowiązywać.</value>
   </data>
   <data name="LoadFromSqlFailed" xml:space="preserve">
     <value>Import z SQL nie powiódł się!</value>
@@ -744,13 +744,13 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Ctrl-Esc</value>
   </data>
   <data name="DeleteExternalTool" xml:space="preserve">
-    <value>Skazuj zewnętrzne narzędzie...</value>
+    <value>Usuń zewnętrzne narzędzie...</value>
   </data>
   <data name="Donate" xml:space="preserve">
     <value>Darowizna</value>
   </data>
   <data name="DuplicateTab" xml:space="preserve">
-    <value>Duplikuj zakładkę</value>
+    <value>Duplikuj kartę</value>
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Wyjście</value>
@@ -786,7 +786,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Usuń wszystko</value>
   </data>
   <data name="OpenConnectionFile" xml:space="preserve">
-    <value>Otwórz plik połączenia...</value>
+    <value>Otwórz plik połączeń...</value>
   </data>
   <data name="Options" xml:space="preserve">
     <value>Opcje</value>
@@ -804,7 +804,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Odśwież ekran (VNC)</value>
   </data>
   <data name="RenameTab" xml:space="preserve">
-    <value>Zmień nazwę zakładki</value>
+    <value>Zmień nazwę karty</value>
   </data>
   <data name="ReportBug" xml:space="preserve">
     <value>Zgłoś błąd</value>
@@ -831,10 +831,10 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Dopasuj (RDP/VNC)</value>
   </data>
   <data name="SshFileTransfer" xml:space="preserve">
-    <value>Transfer plików poprzez SSH</value>
+    <value>Transfer plików SSH</value>
   </data>
   <data name="StartChat" xml:space="preserve">
-    <value>Zacznij Chat (VNC)</value>
+    <value>Rozpocznij Chat (VNC)</value>
   </data>
   <data name="SupportForum" xml:space="preserve">
     <value>Forum pomocy</value>
@@ -858,10 +858,10 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
     <value>Minimalizuj do obszaru powiadomień</value>
   </data>
   <data name="MoveDown" xml:space="preserve">
-    <value>Idź w dół</value>
+    <value>Przenieś w dół</value>
   </data>
   <data name="MoveUp" xml:space="preserve">
-    <value>Idź w górę</value>
+    <value>Przenieś w górę</value>
   </data>
   <data name="MremoteNgCsv" xml:space="preserve">
     <value>mRemoteNG CSV</value>
@@ -913,7 +913,7 @@ Więcj informacji w aktykule Wsparcia Windows na stronie https://support.microso
 Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</value>
   </data>
   <data name="OpenNewTabRight" xml:space="preserve">
-    <value>Otwórz nową zakładkę na prawo od aktualnie zaznaczonej</value>
+    <value>Otwórz nową kartę na prawo od bieżącej</value>
   </data>
   <data name="OpenPorts" xml:space="preserve">
     <value>Porty otwarte</value>
@@ -979,10 +979,10 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>Wstaw tutaj notatkę lub opis hosta.</value>
   </data>
   <data name="PropertyDescriptionDisplayThemes" xml:space="preserve">
-    <value>Wybierz 'Tak' jeśli motyw ma być wyświetlany na zdalnym hoście.</value>
+    <value>Wybierz 'Tak', jeżeli motyw ma być wyświetlany na zdalnym hoście.</value>
   </data>
   <data name="PropertyDescriptionDisplayWallpaper" xml:space="preserve">
-    <value>Wybierz 'Tak' jeżeli tapeta ze zdalnego hosta ma być wyświetlana.</value>
+    <value>Wybierz 'Tak', jeżeli tapeta ze zdalnego hosta ma być wyświetlana.</value>
   </data>
   <data name="PropertyDescriptionDomain" xml:space="preserve">
     <value>Podaj domenę.</value>
@@ -1008,7 +1008,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
   <data name="PropertyDescriptionIcon" xml:space="preserve">
     <value>Wybierz ikonę, która będzie wyświetlana po połączeniu z hostem.</value>
   </data>
-   <data name="PropertyDescriptionLoadBalanceInfo" xml:space="preserve">
+  <data name="PropertyDescriptionLoadBalanceInfo" xml:space="preserve">
     <value>Określa informacje o równoważeniu obciążenia, które będą wykorzystywane przez routery w celu wyboru najlepszego serwera.</value>
   </data>
   <data name="PropertyDescriptionMACAddress" xml:space="preserve">
@@ -1020,7 +1020,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
   <data name="PropertyDescriptionPanel" xml:space="preserve">
     <value>Ustawienie panelu, w którym połączenie zostawnie otwarte.</value>
   </data>
- <data name="PropertyDescriptionPassword" xml:space="preserve">
+  <data name="PropertyDescriptionPassword" xml:space="preserve">
     <value>Wpisz swoje hasło.</value>
   </data>
   <data name="PropertyDescriptionPort" xml:space="preserve">
@@ -1071,7 +1071,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
   <data name="PropertyDescriptionRedirectAudioCapture" xml:space="preserve">
     <value>Wybierz, jak domyślne urządzenie wejściowe audio na zdalnym hoście ma być przekierowane na ten komputer.</value>
   </data>
- <data name="PropertyDescriptionRenderingEngine" xml:space="preserve">
+  <data name="PropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Wybierz jeden z silników renderowania, który będzie używany do wyświetlania stron HTML.</value>
   </data>
   <data name="PropertyDescriptionResolution" xml:space="preserve">
@@ -1120,7 +1120,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>Wprowadź nazwę użytkownika dla uwierzytelniania poprzez proxy.</value>
   </data>
   <data name="HostnameIp" xml:space="preserve">
-    <value>Nazwa hosta/IP</value>
+    <value>Nazwa hosta/Adres IP</value>
   </data>
   <data name="All" xml:space="preserve">
     <value>Wszystkie</value>
@@ -1273,7 +1273,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>Zdarzenie protokołu - rozłączenie. Host: "{1}"; Protokół: "{2}" Komunikat: "{0}"</value>
   </data>
   <data name="ProtocolEventDisconnectFailed" xml:space="preserve">
-    <value>Zadrzenie protokołu - błąd rozłączenia.
+    <value>Zdarzenie protokołu - błąd rozłączenia.
 {0}</value>
   </data>
   <data name="ProtocolToImport" xml:space="preserve">
@@ -1286,22 +1286,22 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>Test proxy powiódł się!</value>
   </data>
   <data name="PuttyDisposeFailed" xml:space="preserve">
-    <value>Usunięcie procesu Putty nie powiodło się!</value>
+    <value>Usunięcie procesu PuTTY nie powiodło się!</value>
   </data>
   <data name="PuttyFocusFailed" xml:space="preserve">
     <value>Nie można ustawić ostrości!</value>
   </data>
   <data name="PuttyHandle" xml:space="preserve">
-    <value>Uchwyt Putty: {0}</value>
+    <value>Uchwyt PuTTY: {0}</value>
   </data>
   <data name="PuttyKillFailed" xml:space="preserve">
-    <value>Zamknięcie procesu Putty nie powiodło się!</value>
+    <value>Zamknięcie procesu PuTTY nie powiodło się!</value>
   </data>
   <data name="PanelHandle" xml:space="preserve">
     <value>Uchwyt panelu: {0}</value>
   </data>
   <data name="PuttyResizeFailed" xml:space="preserve">
-    <value>Zmiana rozmiaru Putty nie powiodła się!</value>
+    <value>Zmiana rozmiaru PuTTY nie powiodła się!</value>
   </data>
   <data name="PuttySavedSessionsRootName" xml:space="preserve">
     <value>Zapisane sesje PuTTY</value>
@@ -1349,19 +1349,19 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>RDP</value>
   </data>
   <data name="Rdp16777216Colors" xml:space="preserve">
-    <value>16777216 kolorów (24-bit)</value>
+    <value>16777216 kolorów (24-bity)</value>
   </data>
   <data name="Rdp256Colors" xml:space="preserve">
-    <value>256 kolorów (8-bit)</value>
+    <value>256 kolorów (8-bitów)</value>
   </data>
   <data name="Rdp32768Colors" xml:space="preserve">
-    <value>32768 kolorów (15-bit)</value>
+    <value>32768 kolorów (15-bitów)</value>
   </data>
   <data name="Rdp4294967296Colors" xml:space="preserve">
-    <value>16777216 kolorów (32-bit)</value>
+    <value>16777216 kolorów (32-bity)</value>
   </data>
   <data name="Rdp65536Colors" xml:space="preserve">
-    <value>65536 kolorów (16-bit)</value>
+    <value>65536 kolorów (16-bitów)</value>
   </data>
   <data name="RdpControlCreationFailed" xml:space="preserve">
     <value>Błąd tworzenia kontrolki RDP, proszę sprawdzić wymagania mRemoteNG.</value>
@@ -1501,8 +1501,8 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
   <data name="SaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
     <value>Czy chcesz zapisać bieżący plik połączeń przed załadowaniem kolejnego?</value>
   </data>
-  <data name="SaveConsOnExit" xml:space="preserve">
-    <value>Zapisz połączenia przy wyjściu</value>
+  <data name="ConnectionsBackupFrequencyDaily" xml:space="preserve">
+    <value>Dziennie</value>
   </data>
   <data name="strConnectionBackupFrequency" xml:space="preserve">
     <value>Częstotliwość kopii zapasowej połączeń</value>
@@ -1520,7 +1520,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>Po edycji</value>
   </data>
   <data name="ConnectionsBackupFrequencyOnExit" xml:space="preserve">
-    <value>Po wyjściu</value>
+    <value>Przy wyjściu</value>
   </data>
   <data name="ConnectionsBackupFrequencyNever" xml:space="preserve">
     <value>Nie twórz kopii zapasowych połączeń</value>
@@ -1531,7 +1531,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
   <data name="strBackup" xml:space="preserve">
     <value>Kopia zapasowa</value>
   </data>
- <data name="SaveImageFilter" xml:space="preserve">
+  <data name="SaveImageFilter" xml:space="preserve">
     <value>GIF(.gif)|*.gif|JPEG(.jpeg)|*.jpeg|JPEG(.jpg)|*.jpg|PNG(.png)|*.png</value>
   </data>
   <data name="Screen" xml:space="preserve">
@@ -1562,13 +1562,13 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>Pokaż pełną ścieżkę pliku połączenia w tytule okna</value>
   </data>
   <data name="ShowLogonInfoOnTabs" xml:space="preserve">
-    <value>Pokaż informacje logowania na zakładce nazwy</value>
+    <value>Pokaż informacje logowania na karcie nazwy</value>
   </data>
   <data name="ShowProtocolOnTabs" xml:space="preserve">
-    <value>Pokaż nazwy protokołów na zakładkach</value>
+    <value>Pokaż nazwy protokołów na kartach</value>
   </data>
   <data name="SingleClickOnConnectionOpensIt" xml:space="preserve">
-    <value>Pojedyncze kliknięcie na połączeniu otwiera je</value>
+    <value>Połącz po pojedynczym kliknięciu na połączeniu</value>
   </data>
   <data name="SingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Pojedyncze klikniknięcie na otwarym połączeniu przełącza na nie</value>
@@ -1622,7 +1622,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>Zaawansowane</value>
   </data>
   <data name="TabsAndPanels" xml:space="preserve">
-    <value>Zakładki i Panele</value>
+    <value>Karty i Panele</value>
   </data>
   <data name="Updates" xml:space="preserve">
     <value>Aktualizacje</value>
@@ -1673,7 +1673,7 @@ Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</valu
     <value>mRemoteNG wymaga aktualizacji</value>
   </data>
   <data name="UpdateCheck" xml:space="preserve">
-    <value>mRemoteNG może okresowo łączyć się do strony mRemoteNG, aby sprawdzić dostępność aktualizacji i zapowiedzi produktów.</value>
+    <value>mRemoteNG może okresowo łączyć się do strony mRemoteNG, aby sprawdzić dostępność aktualizacji.</value>
   </data>
   <data name="UpdateCheckCompleteFailed" xml:space="preserve">
     <value>Sprawdzenie aktualizacji nie powiodło się!</value>
@@ -1704,7 +1704,7 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
     <value>Nie można pobrać dziennika zmian.</value>
   </data>
   <data name="UseDifferentUsernameAndPassword" xml:space="preserve">
-    <value>Użyj innego loginu użytkownika i hasła</value>
+    <value>Użyj innej nazwy użytkownika i hasła</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Użytkownik</value>
@@ -1716,7 +1716,7 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
     <value>Użyj karty inteligentnej</value>
   </data>
   <data name="UseSQLServer" xml:space="preserve">
-    <value>Użyj serwera SQL aby przechowywać konfigurację połączeń</value>
+    <value>Użyj serwera SQL, aby przechowywać konfigurację połączeń</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Wersja</value>
@@ -1731,11 +1731,22 @@ mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
     <value>Odświeżenie ekranu VNC nie powiodło się!</value>
   </data>
   <data name="VncSendSpecialKeysFailed" xml:space="preserve">
-    <value>VNC SendSpecialKeys nie powiodło się!</value>
+    <value>Wysłanie klawiszy specjalnych VNC nie powiodło się!</value>
   </data>
-XXXXXX
+  <data name="VncSetEventHandlersFailed" xml:space="preserve">
+    <value>Ustawienie uchwytu zdarzeń VNC nie powiodło się!</value>
+  </data>
+  <data name="VncSetPropsFailed" xml:space="preserve">
+    <value>Ustawienie właściwości VNC nie powiodło się!</value>
+  </data>
+  <data name="VncToggleSmartSizeFailed" xml:space="preserve">
+    <value>Przełączenie wielkości okna VNC nie powiodło się!</value>
+  </data>
+  <data name="VncToggleViewOnlyFailed" xml:space="preserve">
+    <value>Przełączenie na podgląd VNC nie powiodło się!</value>
+  </data>
   <data name="WarnIfAuthFails" xml:space="preserve">
-    <value>Ostrzegaj, jeśli uwierzytelnianie nie powiedzie się</value>
+    <value>Ostrzegaj, jeśli autoryzacja się nie powiedzie</value>
   </data>
   <data name="Warnings" xml:space="preserve">
     <value>Ostrzeżenia</value>
@@ -1743,38 +1754,101 @@ XXXXXX
   <data name="Yes" xml:space="preserve">
     <value>Tak</value>
   </data>
+  <data name="RdpOverallConnectionTimeout" xml:space="preserve">
+    <value>Upłynął czas połączenia RDP</value>
+  </data>
+  <data name="NodeAlreadyInFolder" xml:space="preserve">
+    <value>Ten węzeł znajduje się już w tym folderze.</value>
+  </data>
+  <data name="NodeCannotDragOnSelf" xml:space="preserve">
+    <value>Nie można przeciągać węzła na siebie..</value>
+  </data>
+  <data name="NodeCannotDragParentOnChild" xml:space="preserve">
+    <value>Nie można przeciągnąć rodzica węzła na jego potomka.</value>
+  </data>
+  <data name="NodeNotDraggable" xml:space="preserve">
+    <value>Nie można przeciągać tego węzła.</value>
+  </data>
+  <data name="EncryptionBlockCipherMode" xml:space="preserve">
+    <value>Blokada trybu szyfrowania</value>
+  </data>
+  <data name="EncryptionEngine" xml:space="preserve">
+    <value>Sinik szyfrowania</value>
+  </data>
+  <data name="TabSecurity" xml:space="preserve">
+    <value>Bezpieczeństwo</value>
+  </data>
+  <data name="EncryptionKeyDerivationIterations" xml:space="preserve">
+    <value>Iteracje funkcji wyprowadzania klucza</value>
+  </data>
+  <data name="Dynamic" xml:space="preserve">
+    <value>Dynamiczna</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>Wysoka</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Średnia</value>
+  </data>
+  <data name="PropertyDescriptionSoundQuality" xml:space="preserve">
+    <value>Wybierz jakość dźwięku zapewnianą przez protokół: Dynamiczna, Średnia, Wysoka</value>
+  </data>
+  <data name="SoundQuality" xml:space="preserve">
+    <value>Jakość dźwięku</value>
+  </data>
+  <data name="UpdatePortableDownloadComplete" xml:space="preserve">
+    <value>Pobieranie zakończone!</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Pobierz</value>
+  </data>
+  <data name="PropertyDescriptionRDPMinutesToIdleTimeout" xml:space="preserve">
+    <value>Liczba minut bezczynności połączenia RDP, przed automatycznym rozłączeniem (0 - jeżeli bez limitu)</value>
+  </data>
+  <data name="MinutesToIdleTimeout" xml:space="preserve">
+    <value>Minut bezczynności</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Tytuł</value>
+  </data>
+  <data name="ConfirmDeleteCredentialRecord" xml:space="preserve">
+    <value>Na pewno chcesz usunąć dane poświadczeń, {0}?</value>
+  </data>
+  <data name="PropertyDescriptionRDPAlertIdleTimeout" xml:space="preserve">
+    <value>Zaznacz, jeśli chcesz otrzymać powiadomienie po rozłączeniu sesji RDP z powodu bezczynności</value>
+  </data>
+  <data name="PasswordConstainsSpecialCharactersConstraintHint" xml:space="preserve">
+    <value>Hasło musi zawierać co najmniej {0} z następujących znaków: {1}</value>
+  </data>
+  <data name="PasswordContainsLowerCaseConstraintHint" xml:space="preserve">
+    <value>Hasło musi zawierać co najmniej {0} małych liter</value>
+  </data>
+  <data name="PasswordContainsNumbersConstraint" xml:space="preserve">
+    <value>Hasło musi zawierać co najmniej {0} cyfr</value>
+  </data>
+  <data name="PasswordContainsUpperCaseConstraintHint" xml:space="preserve">
+    <value>Hasło musi zawierać co najmniej {0} wielkich liter</value>
+  </data>
+  <data name="PasswordLengthConstraintHint" xml:space="preserve">
+    <value>Długość hasła musi być pomiędzy {0} a {1} znaków</value>
+  </data>
+  <data name="ChooseLogPath" xml:space="preserve">
+    <value>Wybierz ścieżkę do pliku dziennika mRemoteNG</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>Śledzenie błędów</value>
+  </data>
   <data name="ShowTheseMessageTypes" xml:space="preserve">
-    <value>Wyświetlaj wiadomości następujących typów</value>
+    <value>Pokazuj te typy komunikatów</value>
   </data>
   <data name="LogFilePath" xml:space="preserve">
-    <value>Ścieżka pliku logów</value>
+    <value>Ścieżka pliku dziennika</value>
   </data>
   <data name="LogTheseMessageTypes" xml:space="preserve">
-    <value>Loguj wiadomości następujących typów</value>
-  </data>
-  <data name="ChoosePath" xml:space="preserve">
-    <value>Wybierz folder</value>
-  </data>
-  <data name="OpenFile" xml:space="preserve">
-    <value>Otwórz plik</value>
-  </data>
-  <data name="UseDefault" xml:space="preserve">
-    <value>Użyj domyślnego</value>
-  </data>
-  <data name="Logging" xml:space="preserve">
-    <value>Logowanie</value>
-  </data>
-  <data name="Popups" xml:space="preserve">
-    <value>Wyskakujące okienka</value>
-  </data>
-  <data name="LogToAppDir" xml:space="preserve">
-    <value>Loguj do folderu aplikacji</value>
-  </data>
-  <data name="Credentials" xml:space="preserve">
-    <value>Uwierzytelnienia</value>
-  </data>
-  <data name="RdpOverallConnectionTimeout" xml:space="preserve">
-    <value>Timeout połączeń RDP</value>
+    <value>Zapisuj te typy komunikatów</value>
   </data>
   <data name="ChoosePath" xml:space="preserve">
     <value>Wybierz ścieżkę</value>
@@ -1782,8 +1856,80 @@ XXXXXX
   <data name="OpenFile" xml:space="preserve">
     <value>Otwórz plik</value>
   </data>
+  <data name="UseDefault" xml:space="preserve">
+    <value>Użyj domyślnych</value>
+  </data>
+  <data name="Logging" xml:space="preserve">
+    <value>Logowanie</value>
+  </data>
+  <data name="Popups" xml:space="preserve">
+    <value>Wyskakujące okna</value>
+  </data>
+  <data name="LogToAppDir" xml:space="preserve">
+    <value>Zapisuj do folderu aplikacji</value>
+  </data>
+  <data name="AssignedCredential" xml:space="preserve">
+    <value>Przypisane poświadczenia</value>
+  </data>
   <data name="Credentials" xml:space="preserve">
     <value>Poświadczenia</value>
+  </data>
+  <data name="OpenADifferentFile" xml:space="preserve">
+    <value>Otwórz inny plik</value>
+  </data>
+  <data name="CredentialUnavailable" xml:space="preserve">
+    <value>Poświadczenia nie dostępne</value>
+  </data>
+  <data name="OptionsThemeDeleteConfirmation" xml:space="preserve">
+    <value>Naprawdę chcesz usunąć ten motyw?</value>
+  </data>
+  <data name="OptionsThemeNewThemeCaption" xml:space="preserve">
+    <value>Nowa nazwa motywu</value>
+  </data>
+  <data name="OptionsThemeNewThemeError" xml:space="preserve">
+    <value>Nie można utworzyć motywu, nazwa już istnieje lub zawiera znaki specjalne</value>
+  </data>
+  <data name="OptionsThemeNewThemeText" xml:space="preserve">
+    <value>Podaj nową nazwę motywu</value>
+  </data>
+  <data name="OptionsThemeChangeWarning" xml:space="preserve">
+    <value>Uwaga: Wymagany jest restart, aby zatwierdzić zmiany konfiguracji motywu.</value>
+  </data>
+  <data name="CouldNotFindExternalTool" xml:space="preserve">
+    <value>Nie można znaleźć zewnętrznego narzędzia o nazwie "{0}"</value>
+  </data>
+  <data name="ConfigurationCreateNew" xml:space="preserve">
+    <value>Utwórz nowy plik połączeń</value>
+  </data>
+  <data name="ConnectionFileNotFound" xml:space="preserve">
+    <value>Nie można znaleźć pliku połączeń.</value>
+  </data>
+  <data name="ConfigurationImportFile" xml:space="preserve">
+    <value>Importuj istniejący plik</value>
+  </data>
+  <data name="ConfigurationCustomPath" xml:space="preserve">
+    <value>Użyj własnej ścieżki do pliku</value>
+  </data>
+  <data name="TestingConnection" xml:space="preserve">
+    <value>Testuję połączenie</value>
+  </data>
+  <data name="ServerNotAccessible" xml:space="preserve">
+    <value>Serwer '{0}' nie był dostępny.</value>
+  </data>
+  <data name="ConnectionSuccessful" xml:space="preserve">
+    <value>Nawiązano połączenie</value>
+  </data>
+  <data name="LoginFailedForUser" xml:space="preserve">
+    <value>Nieudane logowanie użytkownika '{0}'.</value>
+  </data>
+  <data name="DatabaseNotAvailable" xml:space="preserve">
+    <value>Baza danych '{0}' nie jest dostępna.</value>
+  </data>
+  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
+    <value>Zapisz połączenia po każdej edycji</value>
+  </data>
+  <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
+    <value>Filtrowanie dopasować w drzewie połączeń</value>
   </data>
   <data name="TestConnection" xml:space="preserve">
     <value>Test połączenia</value>
@@ -1791,13 +1937,426 @@ XXXXXX
   <data name="ReadOnly" xml:space="preserve">
     <value>Tylko do odczytu:</value>
   </data>
+  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Użyj kodowania UTF-8 dla właściwości "Równoważnego obciążenia" dla RDP</value>
+  </data>
+  <data name="TimeoutInSeconds" xml:space="preserve">
+    <value>Bezczynność [sekund]</value>
+  </data>
   <data name="WorkingDirectory" xml:space="preserve">
     <value>Folder roboczy:</value>
+  </data>
+  <data name="RunElevated" xml:space="preserve">
+    <value>Uruchom z większymi uprawnieniami</value>
+  </data>
+  <data name="ShowOnToolbarColumnHeader" xml:space="preserve">
+    <value>Pokaż w kolumnie paska narzędzi</value>
+  </data>
+  <data name="WorkingDirColumnHeader" xml:space="preserve">
+    <value>Folder roboczy</value>
+  </data>
+  <data name="LockToolbars" xml:space="preserve">
+    <value>Zablokuj pozycję paska narzędzi</value>
+  </data>
+  <data name="MultiSshToolbar" xml:space="preserve">
+    <value>Wiele pasków narzędzi SSH</value>
+  </data>
+  <data name="ImportSubOUs" xml:space="preserve">
+    <value>Importuj podległe OU (jednostki)</value>
+  </data>
+  <data name="AdvancedSecurityOptions" xml:space="preserve">
+    <value>Zaawansowanie opcje bezpieczeństwa</value>
+  </data>
+  <data name="OptionsPageTitle" xml:space="preserve">
+    <value>Opcje mRemoteNG</value>
   </data>
   <data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
     <value>Stwórz pusty panel przy uruchamianiu mRemoteNG</value>
   </data>
-  <data name="WorkingDirColumnHeader" xml:space="preserve">
-    <value>Folder roboczy</value>
+  <data name="MustBeBetween0And255" xml:space="preserve">
+    <value>Musi być pomiędzy 0 a 255</value>
+  </data>
+  <data name="OutOfRange" xml:space="preserve">
+    <value>Poza zakresem</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="ReconnectAllConnections" xml:space="preserve">
+    <value>Podłącz ponownie wszystkie połączenia</value>
+  </data>
+  <data name="UltraVNCSingleClick" xml:space="preserve">
+    <value>UltraVNC SingleClick</value>
+  </data>
+  <data name="DisconnectOthersRight" xml:space="preserve">
+    <value>Odłącz karty po prawej stronie</value>
+  </data>
+  <data name="DisconnectOthers" xml:space="preserve">
+    <value>Zamknij wszystkie oprócz tej</value>
+  </data>
+  <data name="ConfirmCloseConnectionOthersInstruction" xml:space="preserve">
+    <value>Na pewno chcesz zamknąć wszystkie połączenia oprócz "{0}"?</value>
+  </data>
+  <data name="AutomaticReconnectError" xml:space="preserve">
+    <value>Wystąpił błąd podczas odnawiania połączenia z hostem RDP '{0}'</value>
+  </data>
+  <data name="ChangeConnectionResolutionError" xml:space="preserve">
+    <value>Wystąpił błąd podczas zmiany rozdzielczości połączenia hosta '{0}'</value>
+  </data>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Ślad stosu</value>
+  </data>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Komunikat wyjątku</value>
+  </data>
+  <data name="mRemoteNGUnhandledException" xml:space="preserve">
+    <value>Nieobsługiwany wyjątek mRemoteNG</value>
+  </data>
+  <data name="UnhandledExceptionOccured" xml:space="preserve">
+    <value>Wystąpił nieobsługiwany wyjątek</value>
+  </data>
+  <data name="ExceptionForcesmRemoteNGToClose" xml:space="preserve">
+    <value>Ten błąd wymusza zamknięcie mRemoteNG</value>
+  </data>
+  <data name="CopyHostname" xml:space="preserve">
+    <value>Kopiuj nazwę hosta</value>
+  </data>
+  <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Umieść pasek wyszukiwania powyżej drzewka połączeń</value>
+  </data>
+  <data name="TrackActiveConnectionInConnectionTree" xml:space="preserve">
+    <value>Śledź aktywne połączenia w drzewku połączeń</value>
+  </data>
+  <data name="AlwaysShowConnectionTabs" xml:space="preserve">
+    <value>Zawsze pokazuj karty połączeń</value>
+  </data>
+  <data name="ReleaseChannel" xml:space="preserve">
+    <value>Kanał wydania aplikacji</value>
+  </data>
+  <data name="ReleaseChannelExplanation" xml:space="preserve">
+    <value>Kanał stabilny dotyczy tylko wersji końcowych.
+Kanał podglądu obejmuje wersje  beta i RC (gotowe do wydania).
+Kanał nocny obejmuje wersje alfa, beta i RC (gotowe do wydania).</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Zastosuj</value>
+  </data>
+  <data name="Proxy" xml:space="preserve">
+    <value>Proxy</value>
+  </data>
+  <data name="MultiSsh" xml:space="preserve">
+    <value>Wiel protokołów SSH:</value>
+  </data>
+  <data name="MultiSshToolTip" xml:space="preserve">
+    <value>Nciśnij ENTER, aby wysłać. Kombinacja Ctrl+C jest wysyłana natychmiast.</value>
+  </data>
+  <data name="PropertyDescriptionFavorite" xml:space="preserve">
+    <value>Dodaj to połączenie do menu ulubionych.</value>
+  </data>
+  <data name="Favorite" xml:space="preserve">
+    <value>Ulubione</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Ulubione</value>
+  </data>
+  <data name="ClearSearchString" xml:space="preserve">
+    <value>Wyczyść ciąg wyszukiwania</value>
+  </data>
+  <data name="ConnectInViewOnlyMode" xml:space="preserve">
+    <value>Połącz w trybie podglądu</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Nie usuwaj spacji z nawy użytkownika</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Środowisko</value>
+  </data>
+  <data name="EncryptionTestResultMessage" xml:space="preserve">
+    <value>Szyfrowanie {0} wpisów używając {1}/{2} i {3} iteracji zajęło {4} sekund.</value>
+  </data>
+  <data name="EncryptionTest" xml:space="preserve">
+    <value>Test szyfrowania</value>
+  </data>
+  <data name="TestSettings" xml:space="preserve">
+    <value>Ustawienia testu</value>
+  </data>
+  <data name="PropertyDescriptionRdpVersion" xml:space="preserve">
+    <value>Ustawia werjsję protokołu RDP jaka będzie użyta przy połączeniu.</value>
+  </data>
+  <data name="RdpVersion" xml:space="preserve">
+    <value>Wersja RDP</value>
+  </data>
+  <data name="PropertyDescriptionUseVmId" xml:space="preserve">
+    <value>Użyj ID maszyny wirtualnej do maszyn uruchamianych w Hyper-V.</value>
+  </data>
+  <data name="PropertyDescriptionVmId" xml:space="preserve">
+    <value>Identyfikator maszyny wirtualnej Hyper-V do połączenia.</value>
+  </data>
+  <data name="UseVmId" xml:space="preserve">
+    <value>Użyj VM ID</value>
+  </data>
+  <data name="VmId" xml:space="preserve">
+    <value>VM ID</value>
+  </data>
+  <data name="RdpProtocolVersionNotSupported" xml:space="preserve">
+    <value>Nie można utworzyć klienta RDP. Wersja {0} protokołu RDP nie jest obsługiwana na tej maszynie. Proszę wybrać starszą wersję protokołu.</value>
+  </data>
+  <data name="PropertyDescriptionSshTunnel" xml:space="preserve">
+    <value>Dla połączeń w tunelu SSH, podaj połączenie SSH, które będzie używane do ustawienia tunelu.</value>
+  </data>
+  <data name="SshTunnel" xml:space="preserve">
+    <value>Tunel SSH</value>
+  </data>
+  <data name="PropertyDescriptionSshOptions" xml:space="preserve">
+    <value>Podaj tutaj dodatkowe opcje do połączenia SSH. Więcej szczegółów w dokumentacji programu PuTTY.</value>
+  </data>
+  <data name="SshOptions" xml:space="preserve">
+    <value>Opcje SSH</value>
+  </data>
+  <data name="SshTunnelConfigProblem" xml:space="preserve">
+    <value>Problem z kongifuracją tunelu SSH. Połączenie do: {0} przez tunel SSH: {1} nie jest możliwe. W drzewku połączeń nie ma połączenia o nazwie podanej jako tunel SSH i protokół w wersji 1 SSH2 w wersji 2. Wyczyść konfigurację tunelu SSH lub podał istniejące połączenie SSH.</value>
+  </data>
+  <data name="SshTunnelIsNotPutty" xml:space="preserve">
+    <value>Problem z konfiguracją tunelu SSH. Połączenie z: {0} przez tunel SSH: {1} nie jest możliwe. Połączenie z tunelem SSH zostało znalezione w drzewku połączeń, ale protokół nie pochodzi z PuTTY. Upewnij się, że połączenie korzysta z protokołu SSH.</value>
+  </data>
+  <data name="SshTunnelNotInitialized" xml:space="preserve">
+    <value>Problem z inicjalizacją tunelu SSH. Połączenie z: {0} przez tunel SSH: {1} nie jest możliwe. Połączenie nie może być zainicjalizowane. Sprawdź, czy nie występują problemy z połączeniem ustawionym jako tunel SSH.</value>
+  </data>
+  <data name="SshTunnelNotConnected" xml:space="preserve">
+    <value>Problem z połączeniem SSH. Połączenie z: {0} przez tunel SSH: {1} nie jest możliwe. Sprawdź, czy nie występują problemy z połączeniem ustawionym jako tunel SSH.</value>
+  </data>
+  <data name="SshTunnelFailed" xml:space="preserve">
+    <value>Nieudane połączenie tunelu SSH. Połączenie z {0} przez tunel SSH: {1} nie jest możliwe. Program PuTTY został zamknięty. Sprawdź, czy nie występują problemy z konfiguracją połączenia jako tunel SSH.</value>
+  </data>
+  <data name="SshTunnelPortNotReadyInTime" xml:space="preserve">
+    <value>Upłynął czas połączenia tunelu SSH. Połączenie z {0} przez tunel SSH: {1} nie jest możliwe. Lokalny port tunelu nie był w tym czasie dostępny. Sprawdź, czy nie występują problemy z konfiguracją połączenia jako tunel SSH.</value>
+  </data>
+  <data name="StartMinimized" xml:space="preserve">
+    <value>Uruchom zminimalizowany</value>
+  </data>
+  <data name="PropertyDescriptionPasswordProtect" xml:space="preserve">
+    <value>Ustaw hasło wymagane do zaszyfrowania pliku połączenia. Zostaniesz poproszony o to hasło przed uruchomieniem mRemoteNG.</value>
+  </data>
+  <data name="PropertyDescriptionUseEnhancedMode" xml:space="preserve">
+    <value>Połącz z hostem Hyper-V z włączonym trybem rozszerzonym.</value>
+  </data>
+  <data name="UseEnhancedMode" xml:space="preserve">
+    <value>Użyj trybu rozszerzonego</value>
+  </data>
+  <data name="PropertyDescriptionRdpGatewayPassword" xml:space="preserve">
+    <value>Podaj hasło do bramki Zdalnego Pulpitu (RD Gateway).</value>
+  </data>
+  <data name="CloseToSysTray" xml:space="preserve">
+    <value>Minimalizuj do obszaru powiadomień</value>
+  </data>
+  <data name="Windows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="PowerShell" xml:space="preserve">
+    <value>PowerShell</value>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Dziennik zmian</value>
+  </data>
+  <data name="Credits" xml:space="preserve">
+    <value>Autorzy</value>
+  </data>
+  <data name="License" xml:space="preserve">
+    <value>Licencja</value>
+  </data>
+  <data name="PropertyDescriptionDisableCursorBlinking" xml:space="preserve">
+    <value>Określa, czy miganie kursora powinno być wyłączone.</value>
+  </data>
+  <data name="PropertyDescriptionDisableCursorShadow" xml:space="preserve">
+    <value>Określa, czy cie kursora myszy powinien być widoczny.</value>
+  </data>
+  <data name="PropertyDescriptionDisableFullWindowDrag" xml:space="preserve">
+    <value>Określa, czy zawartość okna jest wyświetlana po przeciągnięciu okna do nowej lokalizacji.</value>
+  </data>
+  <data name="PropertyDescriptionDisableMenuAnimations" xml:space="preserve">
+    <value>Określa, czy menu i okna mogą być wyświetlane z efektami animacji w sesji zdalnej.</value>
+  </data>
+  <data name="HttpCEF" xml:space="preserve">
+    <value>Edge Chromium</value>
+  </data>
+  <data name="HttpFailedUrlBuild" xml:space="preserve">
+    <value>Nie udało się skonstruować adresu URL do załadowania</value>
+  </data>
+  <data name="ShowHideMenu" xml:space="preserve">
+    <value>Pokaż/Ukryj pasek menu</value>
+  </data>
+  <data name="PropertyDescriptionRDPStartProgram" xml:space="preserve">
+    <value>Program, który ma być uruchomiony na zdalnym serwerze po nawiązaniu połączenia.</value>
+  </data>
+  <data name="PropertyDescriptionRDPStartProgramWorkDir" xml:space="preserve">
+    <value>Określa folder roboczy alternatywnej powłoki.</value>
+  </data>
+  <data name="RDPStartProgram" xml:space="preserve">
+    <value>Alternatywna powłoka</value>
+    <comment>https://docs.microsoft.com/en-us/windows/win32/termserv/imstscsecuredsettings-startprogram</comment>
+  </data>
+  <data name="RDPStartProgramWorkDir" xml:space="preserve">
+    <value>Folder roboczy alternatywnej powłoki</value>
+    <comment>https://docs.microsoft.com/en-us/windows/win32/termserv/imstscsecuredsettings-workdir</comment>
+  </data>
+  <data name="OpeningCommand" xml:space="preserve">
+    <value>Polecenie do wykonania</value>
+  </data>
+  <data name="PropertyDescriptionOpeningCommand" xml:space="preserve">
+    <value>Opis polecenia do wykonania</value>
+  </data>
+  <data name="RedirectDrives" xml:space="preserve">
+    <value>Napędy dyskowe</value>
+  </data>
+  <data name="RedirectSmartCards" xml:space="preserve">
+    <value>Karty inteligentne</value>
+  </data>
+  <data name="ApplyInheritanceToChildren" xml:space="preserve">
+    <value>Zastosuj dziedziczenie do potomnych</value>
+  </data>
+  <data name="ApplyDefaultInheritance" xml:space="preserve">
+    <value>Zastosuj domyślne dziedziczenie</value>
+  </data>
+  <data name="SmartCard" xml:space="preserve">
+    <value>Karta inteligentna</value>
+  </data>
+  <data name="RemoteDesktopServices" xml:space="preserve">
+    <value>Usługi Zdalnego Pulpitu (RDS)</value>
+  </data>
+  <data name="EC2InstanceId" xml:space="preserve">
+    <value>ID instancji EC2</value>
+  </data>
+  <data name="EC2Region" xml:space="preserve">
+    <value>Region EC2</value>
+  </data>
+  <data name="PropertyDescriptionEC2InstanceId" xml:space="preserve">
+    <value>użyj tego ID do pobrania publicznego adresu z instancji AWS EC2</value>
+  </data>
+  <data name="PropertyDescriptionEC2Region" xml:space="preserve">
+    <value>pobieranie instancji AWS z tego regionu</value>
+  </data>
+  <data name="ACLPermissionsHidden" xml:space="preserve">
+    <value>Ukryte</value>
+    <comment>Uprawnienie, a następnie opcja zostanie całkowicie ukryta przez użytkownikiem</comment>
+  </data>
+  <data name="ACLPermissionsReadOnly" xml:space="preserve">
+    <value>TylkoOdczyt</value>
+    <comment>Uprawienie, a następnie opcja jeset widoczna, ale użytkownik nie może jej modyfikować</comment>
+  </data>
+  <data name="ACLPermissionsWriteAllow" xml:space="preserve">
+    <value>ZezwólZapis</value>
+    <comment>Uprawnienie, aby użytkownik mógł modyfikować wartość opcji</comment>
+  </data>
+  <data name="lblConnectionsBackupPath" xml:space="preserve">
+    <value>Wybierz lokalizację folderu kopii zapasowej danych połączenia</value>
+  </data>
+  <data name="btnBrowsePath" xml:space="preserve">
+    <value>Przeglądaj</value>
+  </data>
+  <data name="lblACL" xml:space="preserve">
+    <value>ACL dla użytkownika</value>
+  </data>
+  <data name="lblBackupEnable" xml:space="preserve">
+    <value>Kopie zapasowe danych połączeń</value>
+  </data>
+  <data name="lblBackupNameFormat" xml:space="preserve">
+    <value>Format nazwy pliku kopii zapasowej</value>
+  </data>
+  <data name="lblBackupType" xml:space="preserve">
+    <value>Typ kopii</value>
+  </data>
+  <data name="lblConnectionsBackupFrequency" xml:space="preserve">
+    <value>Częstotliwość wykonywania kopii</value>
+  </data>
+  <data name="lblConnectionsBackupMaxCount" xml:space="preserve">
+    <value>Maksymalna liczba kopii</value>
+  </data>
+  <data name="PageСontrolInOptionsMenu" xml:space="preserve">
+    <value>Kontrola strony w menu Opcje</value>
+  </data>
+  <data name="ShowForUser" xml:space="preserve">
+    <value>Pokaż dla użytkownika</value>
+  </data>
+  <data name="FiltermRemoteRemoteDesktopManagerCSV" xml:space="preserve">
+    <value>Menedżer plików Zdalnego Pulpitu (*.csv)</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>Menu Plik</value>
+  </data>
+  <data name="FileMenuWillBeHiddenNow" xml:space="preserve">
+    <value>Menu Plik jest teraz uktyte. Naciśnij Alt, aby podejrzeć</value>
+  </data>
+  <data name="ECPDelineaSecretServer" xml:space="preserve">
+    <value>Delinea Secret Server</value>
+  </data>
+  <data name="ECPNone" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="EAPAmazonWebServices" xml:space="preserve">
+    <value>AmazonEC2</value>
+  </data>
+  <data name="EAPNone" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="ExternalCredentialProvider" xml:space="preserve">
+    <value>Zewnętrzny dostawca poświadczeń</value>
+  </data>
+  <data name="PropertyDescriptionExternalCredentialProvider" xml:space="preserve">
+    <value>Zewnętrzny dostawca poświadczeń / skarbiec do pobierania poświadczeń</value>
+  </data>
+  <data name="PropertyDescriptionExternalAddressProvider" xml:space="preserve">
+    <value>Zewnętrzny dostawca, od którego można pobrać adres hosta</value>
+  </data>
+  <data name="ExternalAddressProvider" xml:space="preserve">
+    <value>Dostawca adresu zewnętrznego</value>
+  </data>
+  <data name="UseExternalCredentialProvider" xml:space="preserve">
+    <value>Użyj zewnętrznego dostawcy poświadczeń</value>
+  </data>
+  <data name="CheckboxNoReconnect" xml:space="preserve">
+    <value>Automatyczna próba ponownego połączeniu po rozłączeniu z serwerem (tylko RDP &amp;&amp; ICA)</value>
+  </data>
+  <data name="PropertyDescriptionRedirectDiskDrivesCustom" xml:space="preserve">
+    <value>Podaj dyski użytkownika do przekierowania: C,D,X</value>
+  </data>
+  <data name="RdpDrivesAll" xml:space="preserve">
+    <value>Wszystkie</value>
+  </data>
+  <data name="RdpDrivesCustom" xml:space="preserve">
+    <value>Użytkownika</value>
+  </data>
+  <data name="RdpDrivesLocal" xml:space="preserve">
+    <value>Lokalne</value>
+  </data>
+  <data name="RdpDrivesNone" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="RedirectDiskDrivesCustom" xml:space="preserve">
+    <value>Dyski użytkownika</value>
+  </data>
+  <data name="PropertyDescriptionRdpGatewayAccessToken" xml:space="preserve">
+    <value>Określa token dostępu dla serwera bramy Zdalnego Pulpitu.</value>
+  </data>
+  <data name="RdpGatewayAccessToken" xml:space="preserve">
+    <value>Token do bramy dostępowej RDP</value>
+  </data>
+  <data name="UseAccessToken" xml:space="preserve">
+    <value>Użyj tokenu bramy dostępowej Zdalnego Pulpitu</value>
+  </data>
+  <data name="PsCanceled" xml:space="preserve">
+    <value>Logowanie anulowane! W razie potrzeby zrestartuj.</value>
+    <comment>Problem z transferem z C# do Powershell z możliwym kodowaniem</comment>
+  </data>
+  <data name="PsConnectionFailed" xml:space="preserve">
+    <value>Zweryfikuj użytkownika oraz hasło i spróbuj ponowniej. Jeżeli funkcja PSRemoting nie jest włączona na serwerze, najpierw ją włącz.</value>
+    <comment>Problem z transferem z C# do Powershell z możliwym kodowaniem</comment>
+  </data>
+  <data name="PsFailed" xml:space="preserve">
+    <value>Błędne logowanie!</value>
+    <comment>Problem z transferem z C# do Powershell z możliwym kodowaniem</comment>
+  </data>
+  <data name="PsLoginAttempts" xml:space="preserve">
+    <value>Maksymalna liczba prób została przekroczona. Proszę połączyć się ponownie.</value>
+    <comment>Problem z transferem z C# do Powershell z możliwym kodowaniem</comment>
   </data>
 </root>
