@@ -76,10 +76,18 @@ namespace mRemoteNG.Connection
                     }
                 }
 
-                if (connectionInfo.Hostname == "" && connectionInfo.Protocol != ProtocolType.IntApp)
+                if (string.IsNullOrEmpty(connectionInfo.Hostname))
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.ConnectionOpenFailedNoHostname);
-                    return;
+                    if (!ProtocolFeature.SupportBlankHostname(connectionInfo.Protocol))
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.ConnectionOpenFailedNoHostname);
+                        return;
+                    }
+
+                    if (string.IsNullOrEmpty(connectionInfo.Name))
+                    {
+                        connectionInfo.Name = "localhost";
+                    }
                 }
 
                 StartPreConnectionExternalApp(connectionInfo);

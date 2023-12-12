@@ -38,4 +38,12 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription(nameof(Language.ExternalTool))]
         IntApp = 20
     }
+
+    public class ProtocolFeature
+    {
+        public static bool SupportBlankHostname(ProtocolType protocolType)
+        {
+            return (protocolType == ProtocolType.IntApp || protocolType == ProtocolType.PowerShell);
+        }
+    }
 }
