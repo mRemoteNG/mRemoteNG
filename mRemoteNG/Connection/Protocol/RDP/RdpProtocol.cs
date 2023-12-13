@@ -79,7 +79,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
             }
         }
 
-
         public virtual bool Fullscreen
         {
             get => _rdpClient.FullScreen;
