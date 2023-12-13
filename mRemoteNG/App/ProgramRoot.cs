@@ -3,9 +3,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.Versioning;
 using System.Threading;
-using System.Windows;
 using System.Windows.Forms;
-using mRemoteNG.Properties;
+using mRemoteNG.Config.Settings;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
@@ -22,6 +21,19 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
+            var settingsManager = new LocalSettingsManager();
+
+            // Check if the database exists
+            if (settingsManager.DatabaseExists())
+            {
+                Console.WriteLine("Database exists.");
+            }
+            else
+            {
+                Console.WriteLine("Database does not exist. Creating...");
+                settingsManager.CreateDatabase();
+            }
+
             if (Properties.OptionsStartupExitPage.Default.SingleInstance)
                 StartApplicationAsSingleInstance();
             else
@@ -74,7 +86,7 @@ namespace mRemoteNG.App
             var singletonInstanceWindowHandle = GetRunningSingletonInstanceWindowHandle();
             if (singletonInstanceWindowHandle == IntPtr.Zero) return;
             if (NativeMethods.IsIconic(singletonInstanceWindowHandle) != 0)
-                NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int)NativeMethods.SW_RESTORE);
+                _ = NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int)NativeMethods.SW_RESTORE);
             NativeMethods.SetForegroundWindow(singletonInstanceWindowHandle);
         }
 
