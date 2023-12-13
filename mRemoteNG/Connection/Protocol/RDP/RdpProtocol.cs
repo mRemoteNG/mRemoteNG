@@ -51,9 +51,34 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
         public virtual bool SmartSize
         {
-            get => _rdpClient.AdvancedSettings2.SmartSizing;
-            protected set => _rdpClient.AdvancedSettings2.SmartSizing = value;
+            get
+            {
+                try
+                {
+                    return _rdpClient.AdvancedSettings2.SmartSizing;
+                }
+                catch (System.Runtime.InteropServices.InvalidComObjectException)
+                {
+                    // The COM object is separated from its RCW, try reacquiring the RCW or recreating the COM object
+                    _rdpClient = new MsRdpClient6NotSafeForScripting();
+                    return _rdpClient.AdvancedSettings2.SmartSizing;
+                }
+            }
+            protected set
+            {
+                try
+                {
+                    _rdpClient.AdvancedSettings2.SmartSizing = value;
+                }
+                catch (System.Runtime.InteropServices.InvalidComObjectException)
+                {
+                    // The COM object is separated from its RCW, try reacquiring the RCW or recreating the COM object
+                    _rdpClient = new MsRdpClient6NotSafeForScripting();
+                    _rdpClient.AdvancedSettings2.SmartSizing = value;
+                }
+            }
         }
+
 
         public virtual bool Fullscreen
         {
