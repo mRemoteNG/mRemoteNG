@@ -382,6 +382,23 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;VanDyke version=&quot;3.0&quot;&gt;
+        ///	&lt;key name=&quot;Security&quot;&gt;
+        ///		&lt;string name=&quot;Passphrase&quot;&gt;03:637dca491ee5dc1979744cecc6d4b0d662285574c56fc6b2aa97afaa2b9a54291e6946f62b0dcb21be8ca375ed236e42694ef1eedebf2aeccf10d40013e6e81d&lt;/string&gt;
+        ///	&lt;/key&gt;
+        ///	&lt;key name=&quot;Global&quot;&gt;
+        ///		&lt;string name=&quot;Active Sessions Manager Window State V2&quot;&gt;2,0,0,-209,117,41,411,0,0,0,0,0&lt;/string&gt;
+        ///		&lt;dword name=&quot;Active Window Alpha Transparency&quot;&gt;255&lt;/dword&gt;
+        ///		&lt;binary name=&quot;Add Keyword Dialog Size&quot;&gt;2c 00 00 00 00 00 00 00 01 0 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string test_securecrt {
+            get {
+                return ResourceManager.GetString("test_securecrt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap TestImage {

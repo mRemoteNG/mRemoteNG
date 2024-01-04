@@ -33,6 +33,7 @@ namespace mRemoteNG.App
                     fileTypes.AddRange(new[] {Language.FilterRdgFiles, "*.rdg"});
                     fileTypes.AddRange(new[] {Language.FilterPuttyConnectionManager, "*.dat"});
                     fileTypes.AddRange(new[] {Language.FilterAll, "*.*"});
+                    fileTypes.AddRange(new[] { Language.FilterSecureCRT, "*.crt" });
 
                     openFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 
@@ -174,6 +175,8 @@ namespace mRemoteNG.App
                     return new RemoteDesktopConnectionManagerImporter();
                 case ".dat":
                     return new PuttyConnectionManagerImporter();
+                case ".crt":
+                    return new SecureCRTImporter();
                 default:
                     throw new FileFormatException("Unrecognized file format.");
             }

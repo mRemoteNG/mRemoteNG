@@ -15,6 +15,19 @@ namespace mRemoteNG.App
         private static Mutex _mutex;
         private static FrmSplashScreenNew _frmSplashScreen = null;
 
+        public class LocalSettingsManager
+        {
+            internal bool DatabaseExists()
+            {
+                return true;
+            }
+
+            internal void CreateDatabase()
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

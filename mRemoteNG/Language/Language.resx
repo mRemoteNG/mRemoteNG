@@ -2359,4 +2359,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>Maximum login attempts exceeded. Please connect again.</value>
     <comment>C# to Powershell transfer issue with encoding possible</comment>
   </data>
+  <data name="FilterSecureCRT" xml:space="preserve">
+    <value>SecureCRT (*.xml)</value>
+  </data>
 </root>
