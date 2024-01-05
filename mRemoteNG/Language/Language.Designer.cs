@@ -2361,6 +2361,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SecureCRT (*.xml).
+        /// </summary>
+        internal static string FilterSecureCRT {
+            get {
+                return ResourceManager.GetString("FilterSecureCRT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First IP.
         /// </summary>
         internal static string FirstIp {
