@@ -40,7 +40,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// </summary>
         /// <param name="key">The WindowsRegistryKey containing information about the registry property.</param>
         /// <returns>An Optional<string> containing the property value, or Optional<string>.Empty if the value is not found.</returns>
-        public Optional<string> GetPropertyValue(WindowsRegistryKey key)
+        public string GetPropertyValue(WindowsRegistryKey key)
         {
             if (!key.IsKeyReadable())
                 throw new InvalidOperationException("The Windows Registry key is not ready for reading.");
@@ -55,7 +55,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <param name="path">The path to the registry key containing the property.</param>
         /// <param name="name">The name of the property to retrieve.</param>
         /// <returns>An Optional<string> containing the property value, or Optional<string>.Empty if the value is not found.</returns>
-        public Optional<string> GetPropertyValue(RegistryHive hive, string path, string name)
+        public string GetPropertyValue(RegistryHive hive, string path, string name)
         {
             if (hive == 0)
                 throw new ArgumentException("Unknown or unsupported RegistryHive value.", nameof(hive));
@@ -65,10 +65,39 @@ namespace mRemoteNG.Tools.WindowsRegistry
             using (var key = OpenSubKey(hive, path))
             {
                 if (!key.Any())
-                    return Optional<string>.Empty;
+                    return null;
 
-                return key.First().GetValue(name) as string;
+                var keyValue = key.First().GetValue(name);
+
+                if (keyValue == null)
+                    return null;
+
+                return keyValue.ToString();
             }
+        }
+
+        /// <summary>
+        /// Gets a boolean value from the Windows Registry based on the specified registry path and property name.
+        /// If the value is not found or cannot be parsed, it returns a specified default value.
+        /// </summary>
+        /// <param name="hive">The Registry hive where the value is located.</param>
+        /// <param name="path">The registry path to the key containing the property.</param>
+        /// <param name="propertyName">The name of the property to retrieve.</param>
+        /// <param name="defaultValue">The default value to return if the property is not found or cannot be parsed. Default is false.</param>
+        /// <returns>The boolean value of the specified property or the default value if not found or cannot be parsed.</returns>
+        public bool GetBoolValue(RegistryHive hive, string path, string propertyName, bool defaultValue = false)
+        {
+            var value = GetPropertyValue(hive, path, propertyName);
+
+            if (!string.IsNullOrEmpty(value))
+            {
+                if (int.TryParse(value, out int intValue))
+                    return intValue == 1;
+                if (bool.TryParse(value, out bool boolValue))
+                    return boolValue;
+            }
+
+            return defaultValue;
         }
 
         /// <summary>
@@ -80,7 +109,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <returns>A WindowsRegistryKey object representing the specified registry key and value.</returns>
         public WindowsRegistryKey GetWindowsRegistryKey(RegistryHive hive, string path, string name)
         {
-            WindowsRegistryKey key = new WindowsRegistryKey
+            WindowsRegistryKey key = new()
             {
                 Hive = hive,
                 Path = path,
@@ -108,8 +137,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
                     if (value != null)
                         key.Value = value.ToString();
 
-                    RegistryValueKind ValueKind;
-                    if (TestValueKindExists(subKey, key.Name, out ValueKind))
+                    if (TestValueKindExists(subKey, key.Name, out RegistryValueKind ValueKind))
                         key.ValueKind = ValueKind;
                 }
             }
@@ -212,6 +240,32 @@ namespace mRemoteNG.Tools.WindowsRegistry
         {
             CreateOrSetRegistryValue(key);
         }
+
+        /// <summary>
+        /// Deletes a registry key and its subkeys.
+        /// </summary>
+        /// <param name="hive">The registry hive to open.</param>
+        /// <param name="path">The path of the registry key to delete.</param>
+        /// <param name="ignoreNotFound">Set to true to ignore if the key is not found.</param>
+        public void DeleteRegistryKey(RegistryHive hive, string path, bool ignoreNotFound = false)
+        {
+            try
+            {
+                using (RegistryKey key = RegistryKey.OpenBaseKey(hive, RegistryView.Default))
+                {
+                    if (key != null)
+                    {
+                        key.DeleteSubKeyTree(path, ignoreNotFound);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions according to your requirements
+                Console.WriteLine($"Error deleting registry key: {ex.Message}");
+                throw;
+            }
+        }
         #endregion
 
         #region public methods
@@ -304,6 +358,69 @@ namespace mRemoteNG.Tools.WindowsRegistry
                     throw new ArgumentException("Invalid RegistryValueKind string representation.", nameof(valueType));
             }
         }
+
+
+        /// <summary>
+        /// Converts a .NET data type to the corresponding RegistryValueKind.
+        /// </summary>
+        /// <param name="valueType">The .NET data type to convert.</param>
+        /// <returns>The corresponding RegistryValueKind.</returns>
+        public RegistryValueKind ConvertTypeToRegistryValueKind(Type valueType)
+        {
+            switch (Type.GetTypeCode(valueType))
+            {
+                case TypeCode.String:
+                    return RegistryValueKind.String;
+                case TypeCode.Int32:
+                    return RegistryValueKind.DWord;
+                case TypeCode.Int64:
+                    return RegistryValueKind.QWord;
+                case TypeCode.Boolean:
+                    return RegistryValueKind.DWord;
+                case TypeCode.Byte:
+                    return RegistryValueKind.Binary;
+                /*
+                case TypeCode.Single:
+                    return RegistryValueKind;
+                case TypeCode.Double:
+                    return RegistryValueKind.String;
+                case TypeCode.DateTime:
+                    return RegistryValueKind.String; // DateTime can be stored as a string or other types
+                case TypeCode.Char:
+                    return RegistryValueKind.String; // Char can be stored as a string or other types
+                case TypeCode.Decimal:
+                     return RegistryValueKind.String; // Decimal can be stored as a string or other types
+                */
+                default:
+                    return RegistryValueKind.String; // Default to String for unsupported types
+            }
+        }
+
+        /// <summary>
+        /// Converts a RegistryValueKind enumeration value to its corresponding .NET Type.
+        /// </summary>
+        /// <param name="valueKind">The RegistryValueKind value to be converted.</param>
+        /// <returns>The .NET Type that corresponds to the given RegistryValueKind.</returns>
+        public Type ConvertRegistryValueKindToType(RegistryValueKind valueKind)
+        {
+            switch (valueKind)
+            {
+                case RegistryValueKind.String:
+                case RegistryValueKind.ExpandString:
+                    return typeof(string);
+                case RegistryValueKind.DWord:
+                    return typeof(int);
+                case RegistryValueKind.QWord:
+                    return typeof(long);
+                case RegistryValueKind.Binary:
+                    return typeof(byte[]);
+                case RegistryValueKind.MultiString:
+                    return typeof(string[]);
+                case RegistryValueKind.Unknown:
+                default:
+                    return typeof(object);
+            }
+        }
         #endregion
 
         #region private methods
@@ -391,26 +508,18 @@ namespace mRemoteNG.Tools.WindowsRegistry
             }
             catch (SecurityException ex)
             {
-                // Handle or log SecurityException
-                // For example: log ex.Message
-                throw;
+                throw ex;
             }
             catch (IOException ex)
             {
-                // Handle or log IOException
-                // For example: log ex.Message
-                throw;
+                throw ex;
             }
             catch (UnauthorizedAccessException ex)
             {
-                // Handle or log UnauthorizedAccessException
-                // For example: log ex.Message
-                throw;
+                throw ex;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // For all other exceptions, log and rethrow
-                // For example: log ex.ToString()
                 throw;
             }
         }

@@ -6,9 +6,8 @@ using Microsoft.Win32;
 namespace mRemoteNG.Tools.WindowsRegistry
 {
     /// <summary>
-    /// This class provides a convenient way to work with Windows Registry keys
-    /// by encapsulating information about a registry key, including its path,
-    /// name, value, and registry hive/type.
+    /// Represents a Windows Registry key with a default string value, providing a flexible abstraction for registry operations.
+    /// This class can be extended by inherited classes to customize behavior for specific data types.
     /// </summary>
     [SupportedOSPlatform("windows")]
     public class WindowsRegistryKey
@@ -56,42 +55,22 @@ namespace mRemoteNG.Tools.WindowsRegistry
         private string _Name { get; set; }
         #endregion
 
-        #region Property valueKind
-        public RegistryValueKind ValueKind
+        #region Property value
+        public virtual string Value
         {
-            get { return _ValueKind; }
-            set {
-                if (value == 0)
-                    throw new ArgumentNullException("ValueKind unknown.");
-
-                _ValueKind = value;
-
-                // Check if Type is uninitialized (null)
-                if (_Type == null)
-                    // Initialize Type if it's uninitialized
-                    _Type = ConvertRegistryValueKindToType(value); 
+            get => _value;
+            set
+            {
+                _value = value;
+                UpdateIsProvidedState();
             }
         }
-        private RegistryValueKind _ValueKind;
+        private string _value;
         #endregion
 
-        #region Property type
-        public Type Type
-        {
-            get { return _Type; }
-            set {
-                _Type = value;
-               
-                // Check if ValueKind is uninitialized(0)
-                if (_ValueKind == 0)
-                    // Initialize ValueKind if it's uninitialized
-                    _ValueKind = ConvertTypeToRegistryValueKind(value); 
-            }
-        }
-        private Type _Type;
-        #endregion
+        public RegistryValueKind ValueKind { get; set; } = RegistryValueKind.Unknown;
 
-        public string Value { get; set; }
+        public bool IsKeyPresent { get; set; } = false;
         #endregion
 
         #region public methods
@@ -118,94 +97,20 @@ namespace mRemoteNG.Tools.WindowsRegistry
         }
         #endregion
 
-        #region private methods
-        /// <summary>
-        /// Converts a .NET data type to the corresponding RegistryValueKind.
-        /// </summary>
-        /// <param name="valueType">The .NET data type to convert.</param>
-        /// <returns>The corresponding RegistryValueKind.</returns>
-        private RegistryValueKind ConvertTypeToRegistryValueKind(Type valueType)
+        #region protected methods
+        protected void UpdateIsProvidedState()
         {
-            switch (Type.GetTypeCode(valueType))
-            {
-                case TypeCode.String:
-                    return RegistryValueKind.String;
-                case TypeCode.Int32:
-                    return RegistryValueKind.DWord;
-                case TypeCode.Int64:
-                    return RegistryValueKind.QWord;
-                case TypeCode.Boolean:
-                    return RegistryValueKind.DWord;
-                case TypeCode.Byte:
-                    return RegistryValueKind.Binary;
-                /*
-                case TypeCode.Single:
-                    return RegistryValueKind;
-                case TypeCode.Double:
-                    return RegistryValueKind.String;
-                case TypeCode.DateTime:
-                    return RegistryValueKind.String; // DateTime can be stored as a string or other types
-                case TypeCode.Char:
-                    return RegistryValueKind.String; // Char can be stored as a string or other types
-                case TypeCode.Decimal:
-                     return RegistryValueKind.String; // Decimal can be stored as a string or other types
-                */
-                default:
-                    return RegistryValueKind.String; // Default to String for unsupported types
-            }
+            // Key is present when RegistryKey value is not null
+            IsKeyPresent = Value != null;
         }
 
-        /// <summary>
-        /// Converts a RegistryValueKind enumeration value to its corresponding .NET Type.
-        /// </summary>
-        /// <param name="valueKind">The RegistryValueKind value to be converted.</param>
-        /// <returns>The .NET Type that corresponds to the given RegistryValueKind.</returns>
-        private Type ConvertRegistryValueKindToType(RegistryValueKind valueKind)
-        {
-            switch (valueKind)
-            {
-                case RegistryValueKind.String:
-                case RegistryValueKind.ExpandString:
-                    return typeof(string);
-                case RegistryValueKind.DWord:
-                    return typeof(int);
-                case RegistryValueKind.QWord:
-                    return typeof(long);
-                case RegistryValueKind.Binary:
-                    return typeof(byte[]);
-                case RegistryValueKind.MultiString:
-                    return typeof(string[]);
-                case RegistryValueKind.Unknown:
-                default:
-                    return typeof(object);
-            }
-        }
+        protected bool IsHiveSet() => Hive != 0;
 
-        private bool IsHiveSet()
-        {
-            return Hive != 0;
-        }
+        protected bool IsValueKindSet() => ValueKind != 0;
 
-        private bool IsValueKindSet()
-        {
-            return ValueKind != 0;
-        }
+        protected bool IsPathSet() => Path != null;
 
-        private bool IsPathSet()
-        {
-            return Path != null; ;
-            //return !string.IsNullOrEmpty(Path);
-        }
-
-        private bool IsNameSet()
-        {
-            return Name != null;
-        }
-
-        private bool IsValueSet()
-        {
-            return !string.IsNullOrEmpty(Value);
-        }
+        protected bool IsNameSet() => Name != null;
         #endregion
     }
 }

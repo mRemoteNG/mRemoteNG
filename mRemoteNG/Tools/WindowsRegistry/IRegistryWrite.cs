@@ -1,9 +1,13 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Runtime.Versioning;
 
 namespace mRemoteNG.Tools.WindowsRegistry
 {
     [SupportedOSPlatform("windows")]
+    /// <summary>
+    /// Interface for the Registry class providing methods for interacting with write actions in the Windows Registry.
+    /// </summary>
     public interface IRegistryWrite
     {
         #region registry writer
@@ -12,9 +16,11 @@ namespace mRemoteNG.Tools.WindowsRegistry
 
         #endregion
 
-        #region converter
+        #region registry tools
         RegistryHive ConvertStringToRegistryHive(string hiveString);
         RegistryValueKind ConvertStringToRegistryValueKind(string valueType);
-        #endregion}
+        RegistryValueKind ConvertTypeToRegistryValueKind(Type valueType);
+        Type ConvertRegistryValueKindToType(RegistryValueKind valueKind);
+        #endregion
     }
 }
