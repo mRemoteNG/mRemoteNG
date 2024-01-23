@@ -53,9 +53,9 @@ namespace mRemoteNG.Config.Settings.Registry
         /// Specifies the authentication password for the proxy.
         /// </summary>
         /// <remarks>
-        /// Please only store encrypted passwords in the registry by using the password generator on the 'Credentials' options page.
+        /// Please only store encrypted passwords in the registry.
         /// </remarks>
-        public string ProxyAuthPass { get; }
+        //public string ProxyAuthPass { get; }
 
         public OptRegistryUpdatesPage()
         {
