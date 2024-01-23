@@ -6,6 +6,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.Config.Settings.Registry;
 
 namespace mRemoteNG.UI.Menu
 {
@@ -78,6 +79,8 @@ namespace mRemoteNG.UI.Menu
             _mMenToolsUpdate.Size = new System.Drawing.Size(190, 22);
             _mMenToolsUpdate.Text = Language.CheckForUpdates;
             _mMenToolsUpdate.Click += mMenToolsUpdate_Click;
+            _mMenToolsUpdate.Enabled = CommonRegistrySettings.AllowCheckForUpdates
+                && CommonRegistrySettings.AllowCheckForUpdatesManual;
             // 
             // mMenInfoSep1
             // 

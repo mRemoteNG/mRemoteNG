@@ -35,9 +35,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             lblUpdatesExplanation = new MrngLabel();
             pnlUpdateCheck = new System.Windows.Forms.Panel();
+            cboUpdateCheckFrequency = new MrngComboBox();
             btnUpdateCheckNow = new MrngButton();
             chkCheckForUpdatesOnStartup = new MrngCheckBox();
-            cboUpdateCheckFrequency = new MrngComboBox();
             lblReleaseChannelExplanation = new MrngTextBox();
             cboReleaseChannel = new MrngComboBox();
             pnlProxy = new System.Windows.Forms.Panel();
@@ -55,36 +55,53 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseProxyAuthentication = new MrngCheckBox();
             btnTestProxy = new MrngButton();
             groupBoxReleaseChannel = new MrngGroupBox();
+            pnlDefaultUpdate = new System.Windows.Forms.Panel();
+            lblUpdateAdminInfo = new System.Windows.Forms.Label();
             pnlUpdateCheck.SuspendLayout();
             pnlProxy.SuspendLayout();
             tblProxyBasic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numProxyPort).BeginInit();
             tblProxyAuthentication.SuspendLayout();
             groupBoxReleaseChannel.SuspendLayout();
+            pnlDefaultUpdate.SuspendLayout();
             SuspendLayout();
             // 
             // lblUpdatesExplanation
             // 
-            lblUpdatesExplanation.Location = new System.Drawing.Point(3, 3);
+            lblUpdatesExplanation.Dock = System.Windows.Forms.DockStyle.Top;
+            lblUpdatesExplanation.Location = new System.Drawing.Point(0, 0);
             lblUpdatesExplanation.Name = "lblUpdatesExplanation";
-            lblUpdatesExplanation.Size = new System.Drawing.Size(595, 32);
+            lblUpdatesExplanation.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            lblUpdatesExplanation.Size = new System.Drawing.Size(610, 38);
             lblUpdatesExplanation.TabIndex = 0;
             lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates.";
             // 
             // pnlUpdateCheck
             // 
+            pnlUpdateCheck.Controls.Add(cboUpdateCheckFrequency);
             pnlUpdateCheck.Controls.Add(btnUpdateCheckNow);
             pnlUpdateCheck.Controls.Add(chkCheckForUpdatesOnStartup);
-            pnlUpdateCheck.Controls.Add(cboUpdateCheckFrequency);
-            pnlUpdateCheck.Location = new System.Drawing.Point(3, 25);
+            pnlUpdateCheck.Controls.Add(lblUpdatesExplanation);
+            pnlUpdateCheck.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlUpdateCheck.Location = new System.Drawing.Point(0, 30);
             pnlUpdateCheck.Name = "pnlUpdateCheck";
-            pnlUpdateCheck.Size = new System.Drawing.Size(604, 99);
-            pnlUpdateCheck.TabIndex = 1;
+            pnlUpdateCheck.Size = new System.Drawing.Size(610, 114);
+            pnlUpdateCheck.TabIndex = 0;
+            // 
+            // cboUpdateCheckFrequency
+            // 
+            cboUpdateCheckFrequency._mice = MrngComboBox.MouseState.HOVER;
+            cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            cboUpdateCheckFrequency.FormattingEnabled = true;
+            cboUpdateCheckFrequency.Location = new System.Drawing.Point(27, 44);
+            cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency";
+            cboUpdateCheckFrequency.Size = new System.Drawing.Size(120, 21);
+            cboUpdateCheckFrequency.TabIndex = 1;
             // 
             // btnUpdateCheckNow
             // 
             btnUpdateCheckNow._mice = MrngButton.MouseState.OUT;
-            btnUpdateCheckNow.Location = new System.Drawing.Point(5, 63);
+            btnUpdateCheckNow.Location = new System.Drawing.Point(5, 79);
             btnUpdateCheckNow.Name = "btnUpdateCheckNow";
             btnUpdateCheckNow.Size = new System.Drawing.Size(122, 25);
             btnUpdateCheckNow.TabIndex = 2;
@@ -97,23 +114,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkCheckForUpdatesOnStartup._mice = MrngCheckBox.MouseState.OUT;
             chkCheckForUpdatesOnStartup.AutoSize = true;
             chkCheckForUpdatesOnStartup.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(6, 11);
+            chkCheckForUpdatesOnStartup.Location = new System.Drawing.Point(9, 21);
             chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup";
             chkCheckForUpdatesOnStartup.Size = new System.Drawing.Size(120, 17);
             chkCheckForUpdatesOnStartup.TabIndex = 0;
             chkCheckForUpdatesOnStartup.Text = "Check for updates";
             chkCheckForUpdatesOnStartup.UseVisualStyleBackColor = true;
             chkCheckForUpdatesOnStartup.CheckedChanged += chkCheckForUpdatesOnStartup_CheckedChanged;
-            // 
-            // cboUpdateCheckFrequency
-            // 
-            cboUpdateCheckFrequency._mice = MrngComboBox.MouseState.HOVER;
-            cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            cboUpdateCheckFrequency.FormattingEnabled = true;
-            cboUpdateCheckFrequency.Location = new System.Drawing.Point(6, 34);
-            cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency";
-            cboUpdateCheckFrequency.Size = new System.Drawing.Size(120, 21);
-            cboUpdateCheckFrequency.TabIndex = 1;
             // 
             // lblReleaseChannelExplanation
             // 
@@ -145,9 +152,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlProxy.Controls.Add(chkUseProxyForAutomaticUpdates);
             pnlProxy.Controls.Add(chkUseProxyAuthentication);
             pnlProxy.Controls.Add(btnTestProxy);
-            pnlProxy.Location = new System.Drawing.Point(3, 240);
+            pnlProxy.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlProxy.Location = new System.Drawing.Point(0, 248);
             pnlProxy.Name = "pnlProxy";
-            pnlProxy.Size = new System.Drawing.Size(604, 223);
+            pnlProxy.Size = new System.Drawing.Size(610, 232);
             pnlProxy.TabIndex = 3;
             // 
             // tblProxyBasic
@@ -311,24 +319,47 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             groupBoxReleaseChannel.Controls.Add(lblReleaseChannelExplanation);
             groupBoxReleaseChannel.Controls.Add(cboReleaseChannel);
-            groupBoxReleaseChannel.Location = new System.Drawing.Point(3, 130);
+            groupBoxReleaseChannel.Dock = System.Windows.Forms.DockStyle.Top;
+            groupBoxReleaseChannel.Location = new System.Drawing.Point(0, 144);
             groupBoxReleaseChannel.Name = "groupBoxReleaseChannel";
-            groupBoxReleaseChannel.Size = new System.Drawing.Size(604, 104);
+            groupBoxReleaseChannel.Size = new System.Drawing.Size(610, 104);
             groupBoxReleaseChannel.TabIndex = 3;
             groupBoxReleaseChannel.TabStop = false;
             groupBoxReleaseChannel.Text = "Release Channel";
+            // 
+            // pnlDefaultUpdate
+            // 
+            pnlDefaultUpdate.Controls.Add(pnlProxy);
+            pnlDefaultUpdate.Controls.Add(groupBoxReleaseChannel);
+            pnlDefaultUpdate.Controls.Add(pnlUpdateCheck);
+            pnlDefaultUpdate.Controls.Add(lblUpdateAdminInfo);
+            pnlDefaultUpdate.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlDefaultUpdate.Location = new System.Drawing.Point(0, 0);
+            pnlDefaultUpdate.Name = "pnlDefaultUpdate";
+            pnlDefaultUpdate.Size = new System.Drawing.Size(610, 483);
+            pnlDefaultUpdate.TabIndex = 4;
+            // 
+            // lblUpdateAdminInfo
+            // 
+            lblUpdateAdminInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            lblUpdateAdminInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            lblUpdateAdminInfo.ForeColor = System.Drawing.SystemColors.ControlText;
+            lblUpdateAdminInfo.Location = new System.Drawing.Point(0, 0);
+            lblUpdateAdminInfo.Name = "lblUpdateAdminInfo";
+            lblUpdateAdminInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            lblUpdateAdminInfo.Size = new System.Drawing.Size(610, 30);
+            lblUpdateAdminInfo.TabIndex = 0;
+            lblUpdateAdminInfo.Text = "Some settings are configured by your Administrator. Please contact your administrator for more information.";
+            lblUpdateAdminInfo.Visible = false;
             // 
             // UpdatesPage
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            Controls.Add(groupBoxReleaseChannel);
-            Controls.Add(lblUpdatesExplanation);
-            Controls.Add(pnlUpdateCheck);
-            Controls.Add(pnlProxy);
+            Controls.Add(pnlDefaultUpdate);
             Margin = new System.Windows.Forms.Padding(4);
             Name = "UpdatesPage";
-            Size = new System.Drawing.Size(610, 490);
+            Size = new System.Drawing.Size(610, 496);
             pnlUpdateCheck.ResumeLayout(false);
             pnlUpdateCheck.PerformLayout();
             pnlProxy.ResumeLayout(false);
@@ -340,6 +371,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tblProxyAuthentication.PerformLayout();
             groupBoxReleaseChannel.ResumeLayout(false);
             groupBoxReleaseChannel.PerformLayout();
+            pnlDefaultUpdate.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -347,7 +379,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal System.Windows.Forms.Panel pnlUpdateCheck;
         internal MrngButton btnUpdateCheckNow;
         internal MrngCheckBox chkCheckForUpdatesOnStartup;
-        internal MrngComboBox cboUpdateCheckFrequency;
         internal System.Windows.Forms.Panel pnlProxy;
         internal Controls.MrngLabel lblProxyAddress;
         internal Controls.MrngTextBox txtProxyAddress;
@@ -365,5 +396,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private MrngGroupBox groupBoxReleaseChannel;
         private System.Windows.Forms.TableLayoutPanel tblProxyBasic;
         private System.Windows.Forms.TableLayoutPanel tblProxyAuthentication;
+        private System.Windows.Forms.Panel pnlDefaultUpdate;
+        internal System.Windows.Forms.Label lblUpdateAdminInfo;
+        internal MrngComboBox cboUpdateCheckFrequency;
     }
 }

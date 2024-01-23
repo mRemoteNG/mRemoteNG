@@ -10,6 +10,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.Config.Settings.Registry;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -19,6 +20,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         #region Private Fields
 
         private AppUpdater _appUpdate;
+        private readonly OptRegistryUpdatesPage _RegistrySettings = new();
+        private bool _pageEnabled = true;
 
         #endregion
 
@@ -58,39 +61,51 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblProxyPassword.Text = Language.Password;
 
             btnTestProxy.Text = Language.TestProxy;
+
+            lblUpdateAdminInfo.Text = Language.OptionsAdminInfo;
         }
 
         public override void LoadSettings()
         {
+            if (UpdatesForbidden())
+                return;
+
             chkCheckForUpdatesOnStartup.Checked = Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup;
-            cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
-            cboUpdateCheckFrequency.Items.Clear();
-            var nDaily = cboUpdateCheckFrequency.Items.Add(Language.Daily);
-            var nWeekly = cboUpdateCheckFrequency.Items.Add(Language.Weekly);
-            var nMonthly = cboUpdateCheckFrequency.Items.Add(Language.Monthly);
-            if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays < 1)
+            if (!_RegistrySettings.CheckForUpdatesFrequencyDays.IsKeyPresent)
+                cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
+
+            if (CommonRegistrySettings.AllowCheckForUpdatesAutomatical)
             {
-                chkCheckForUpdatesOnStartup.Checked = false;
-                cboUpdateCheckFrequency.SelectedIndex = nDaily;
-            } // Daily
-            else
-                switch (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays)
+                cboUpdateCheckFrequency.Items.Clear();
+                var nDaily = cboUpdateCheckFrequency.Items.Add(Language.Daily);
+                var nWeekly = cboUpdateCheckFrequency.Items.Add(Language.Weekly);
+                var nMonthly = cboUpdateCheckFrequency.Items.Add(Language.Monthly);
+                if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays < 1)
                 {
-                    case 1:
-                        cboUpdateCheckFrequency.SelectedIndex = nDaily;
-                        break;
-                    case 7:
-                        cboUpdateCheckFrequency.SelectedIndex = nWeekly;
-                        break;
-                    case 31:
-                        cboUpdateCheckFrequency.SelectedIndex = nMonthly;
-                        break;
-                    default:
-                        var nCustom =
-                            cboUpdateCheckFrequency.Items.Add(string.Format(Language.UpdateFrequencyCustom, Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays));
-                        cboUpdateCheckFrequency.SelectedIndex = nCustom;
-                        break;
+                    chkCheckForUpdatesOnStartup.Checked = false;
+                    cboUpdateCheckFrequency.SelectedIndex = nDaily;
+                } // Daily
+                else
+                {
+                    switch (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays)
+                    {
+                        case 1:
+                            cboUpdateCheckFrequency.SelectedIndex = nDaily;
+                            break;
+                        case 7:
+                            cboUpdateCheckFrequency.SelectedIndex = nWeekly;
+                            break;
+                        case 31:
+                            cboUpdateCheckFrequency.SelectedIndex = nMonthly;
+                            break;
+                        default:
+                            var nCustom =
+                                cboUpdateCheckFrequency.Items.Add(string.Format(Language.UpdateFrequencyCustom, Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays));
+                            cboUpdateCheckFrequency.SelectedIndex = nCustom;
+                            break;
+                    }
                 }
+            }
 
             var stable = cboReleaseChannel.Items.Add(UpdateChannelInfo.STABLE);
             var beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.PREVIEW);
@@ -130,6 +145,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
+            if (UpdatesForbidden())
+                return;
+
             Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked;
             if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.Daily)
             {
@@ -156,13 +174,109 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, Runtime.EncryptionKey);
         }
 
+        public override void LoadRegistrySettings()
+        {
+            if (UpdatesForbidden())
+                return;
+
+            if (!CommonRegistrySettings.AllowCheckForUpdatesAutomatical)
+            {
+                Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup = false;
+                DisableControl(chkCheckForUpdatesOnStartup);
+                DisableControl(cboUpdateCheckFrequency);
+            }
+
+            if (_RegistrySettings.CheckForUpdatesFrequencyDays.IsKeyPresent && _RegistrySettings.CheckForUpdatesFrequencyDays.Value >= 1)
+            {
+                Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays = _RegistrySettings.CheckForUpdatesFrequencyDays.Value;
+                DisableControl(cboUpdateCheckFrequency);
+            }
+
+            btnUpdateCheckNow.Enabled = CommonRegistrySettings.AllowCheckForUpdatesManual;
+
+            if (_RegistrySettings.UpdateChannel.IsKeyPresent)
+            {
+                Properties.OptionsUpdatesPage.Default.UpdateChannel = _RegistrySettings.UpdateChannel.Value;
+                DisableControl(cboReleaseChannel);
+            }
+
+            if (_RegistrySettings.UseProxyForUpdates.IsKeyPresent)
+            {
+                Properties.OptionsUpdatesPage.Default.UpdateUseProxy = _RegistrySettings.UseProxyForUpdates.Value;
+                DisableControl(chkUseProxyForAutomaticUpdates);
+
+                if (_RegistrySettings.UseProxyForUpdates.Value == false)
+                {
+                    Properties.OptionsUpdatesPage.Default.UpdateProxyAddress = "";
+                    Properties.OptionsUpdatesPage.Default.UpdateProxyPort = 80;
+                }
+
+                if (_RegistrySettings.ProxyAddress.IsKeyPresent && _RegistrySettings.UseProxyForUpdates.Value == true)
+                {
+                    Properties.OptionsUpdatesPage.Default.UpdateProxyAddress = _RegistrySettings.ProxyAddress.Value;
+                    DisableControl(txtProxyAddress);
+                }
+
+                if (_RegistrySettings.ProxyPort.IsKeyPresent && _RegistrySettings.UseProxyForUpdates.Value == true)
+                {
+                    // only set value if not is 0 to prevent errors..
+                    if (_RegistrySettings.ProxyPort.Value >= 1)
+                        Properties.OptionsUpdatesPage.Default.UpdateProxyPort = _RegistrySettings.ProxyPort.Value;
+
+                    DisableControl(numProxyPort);
+                }
+            }
+
+            if (_RegistrySettings.UseProxyAuthentication.IsKeyPresent)
+            {
+                Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication = _RegistrySettings.UseProxyAuthentication.Value;
+                DisableControl(chkUseProxyAuthentication);
+
+                if (_RegistrySettings.UseProxyAuthentication.Value == false)
+                {
+                    Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser = "";
+                    //Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = "";
+                }
+
+                if (_RegistrySettings.ProxyAuthUser.IsKeyPresent && _RegistrySettings.UseProxyAuthentication.Value == true)
+                {
+                    Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser = _RegistrySettings.ProxyAuthUser.Value;
+                    DisableControl(txtProxyUsername);
+                }
+
+                /*if (_RegistrySettings.ProxyAuthPass.IsProvided && _RegistrySettings.UseProxyAuthentication.Value == true)
+                {
+                    Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = _RegistrySettings.ProxyAuthPass;
+                    DisableControl(txtProxyPassword);
+                }*/
+            }
+
+
+
+            lblUpdateAdminInfo.Visible = ShowAdministratorInfo();
+        }
+
+        public override bool ShowAdministratorInfo()
+        {
+            return !CommonRegistrySettings.AllowCheckForUpdatesAutomatical
+                || !CommonRegistrySettings.AllowCheckForUpdatesManual
+                || _RegistrySettings.CheckForUpdatesFrequencyDays.IsKeyPresent
+                || _RegistrySettings.UpdateChannel.IsKeyPresent
+                || _RegistrySettings.UseProxyForUpdates.IsKeyPresent
+                || _RegistrySettings.ProxyAddress.IsKeyPresent
+                || _RegistrySettings.ProxyPort.IsKeyPresent
+                || _RegistrySettings.UseProxyAuthentication.IsKeyPresent
+                || _RegistrySettings.ProxyAuthUser.IsKeyPresent;
+        }
+
         #endregion
 
         #region Event Handlers
 
         private void chkCheckForUpdatesOnStartup_CheckedChanged(object sender, EventArgs e)
         {
-            cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
+            if (!_RegistrySettings.CheckForUpdatesFrequencyDays.IsKeyPresent)
+                cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
         }
 
         private void btnUpdateCheckNow_Click(object sender, EventArgs e)
@@ -177,9 +291,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (chkUseProxyForAutomaticUpdates.Checked)
             {
-                chkUseProxyAuthentication.Enabled = true;
+                if (!_RegistrySettings.UseProxyForUpdates.IsKeyPresent)
+                    chkUseProxyAuthentication.Enabled = true;
 
-                if (chkUseProxyAuthentication.Checked)
+                if (chkUseProxyAuthentication.Checked && !_RegistrySettings.UseProxyAuthentication.IsKeyPresent)
                 {
                     tblProxyAuthentication.Enabled = true;
                 }
@@ -236,6 +351,49 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 tblProxyAuthentication.Enabled = chkUseProxyAuthentication.Checked;
             }
+        }
+
+        private bool UpdatesForbidden()
+        {
+            bool forbidden = !CommonRegistrySettings.AllowCheckForUpdates
+                || (!CommonRegistrySettings.AllowCheckForUpdatesAutomatical
+                && !CommonRegistrySettings.AllowCheckForUpdatesManual);
+
+            if (forbidden && _pageEnabled)
+                DisablePage();
+
+            return forbidden;
+        }
+
+        public override void DisablePage()
+        {
+            chkCheckForUpdatesOnStartup.Checked = false;
+            chkCheckForUpdatesOnStartup.Enabled = false;
+            cboUpdateCheckFrequency.Enabled = false;
+            btnUpdateCheckNow.Enabled = false;
+            cboReleaseChannel.Enabled = false;
+
+            chkUseProxyForAutomaticUpdates.Checked = false;
+            chkUseProxyForAutomaticUpdates.Enabled = false;
+
+            tblProxyBasic.Enabled = false;
+            txtProxyAddress.Enabled = false;
+            txtProxyAddress.ReadOnly = true;
+            numProxyPort.Enabled = false;
+
+            chkUseProxyAuthentication.Checked = false;
+            chkUseProxyAuthentication.Enabled = false;
+
+            tblProxyAuthentication.Enabled = false;
+            txtProxyUsername.Enabled = false;
+            txtProxyUsername.ReadOnly = true;
+            txtProxyPassword.Enabled = false;
+            txtProxyPassword.ReadOnly = true;
+            btnTestProxy.Enabled = false;
+
+            lblUpdateAdminInfo.Visible = true;
+
+            _pageEnabled = false;
         }
 
         #endregion
