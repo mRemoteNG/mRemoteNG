@@ -100,6 +100,26 @@ namespace mRemoteNG.Tools.WindowsRegistry
             return defaultValue;
         }
 
+        // <summary>
+        /// Retrieves a DWORD value from the Windows Registry, with an optional default value.
+        /// </summary>
+        /// <param name="hive">The Registry hive to access.</param>
+        /// <param name="path">The Registry path containing the key.</param>
+        /// <param name="propertyName">The name of the Registry property.</param>
+        /// <param name="defaultValue">The default value to return if the property is not found or cannot be parsed.</param>
+        /// <returns>The DWORD value from the Registry, or the specified default value.</returns>
+        public int GetDwordValue(RegistryHive hive, string path, string propertyName, int defaultValue = 0)
+        {
+            var value = GetPropertyValue(hive, path, propertyName);
+
+            if (int.TryParse(value, out int intValue))
+            {
+                return intValue;
+            }
+
+            return defaultValue;
+        }
+
         /// <summary>
         /// Retrieves a WindowsRegistryKey object for a specific registry hive, path, and value name.
         /// </summary>

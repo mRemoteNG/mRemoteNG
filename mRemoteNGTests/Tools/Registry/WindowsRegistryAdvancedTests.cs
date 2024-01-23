@@ -113,6 +113,13 @@ namespace mRemoteNGTests.Tools.Registry
                 Assert.That(key.IsKeyPresent, Is.EqualTo(false));
             });
         }
+
+        [Test]
+        public void GetDwordValue_returnIntegerValue()
+        {
+            int value = GetDwordValue(_TestHive, _TestRootKey, "TestInteger");
+            Assert.That(value, Is.EqualTo(4711));
+        }
         #endregion
 
         #region GetString()

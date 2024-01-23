@@ -15,7 +15,9 @@ namespace mRemoteNG.Tools.WindowsRegistry
         string[] GetSubKeyNames(RegistryHive hive, string path);
         string GetPropertyValue(WindowsRegistryKey key);
         string GetPropertyValue(RegistryHive hive, string path, string name);
+
         bool GetBoolValue(RegistryHive hive, string path, string propertyName, bool defaultValue = false);
+        int GetDwordValue(RegistryHive hive, string path, string propertyName, int defaultValue = 0);
 
         WindowsRegistryKey GetWindowsRegistryKey(RegistryHive hive, string path, string name);
         WindowsRegistryKey GetWindowsRegistryKey(WindowsRegistryKey key);
