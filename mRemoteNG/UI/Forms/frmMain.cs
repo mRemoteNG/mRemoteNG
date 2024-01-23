@@ -348,7 +348,7 @@ namespace mRemoteNG.UI.Forms
         {
             if (!CommonRegistrySettings.AllowCheckForUpdates) return;
             if (!CommonRegistrySettings.AllowCheckForUpdatesAutomatical) return;
-            if (CommonRegistrySettings.CheckForUpdatesAsked) return;
+            if (!CommonRegistrySettings.AllowPromptForUpdatesPreference) return;
 
             if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked) return;
             string[] commandButtons =

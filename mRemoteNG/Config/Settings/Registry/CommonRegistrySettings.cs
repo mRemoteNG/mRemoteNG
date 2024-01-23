@@ -53,7 +53,7 @@ namespace mRemoteNG.Config.Settings.Registry
         /// <remarks>
         /// Important: If the registry entry is set to true, a popup will appear every time you start
         /// </remarks>
-        public static bool CheckForUpdatesAsked { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(CheckForUpdatesAsked));
+        public static bool AllowPromptForUpdatesPreference { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(AllowPromptForUpdatesPreference), AllowCheckForUpdates);
         #endregion
 
 
