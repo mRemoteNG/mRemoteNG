@@ -15,7 +15,7 @@ namespace mRemoteNG.Config.Settings.Registry
         private static readonly RegistryHive _Hive = WindowsRegistryInfo.Hive;
 
         private const string __Update = WindowsRegistryInfo.UpdateSubkey;
-        private const string __Credential = WindowsRegistryInfo.CredentialSubkey;
+        //private const string __Credential = WindowsRegistryInfo.CredentialSubkey;
 
         #region general update registry settings
         /// <summary>
