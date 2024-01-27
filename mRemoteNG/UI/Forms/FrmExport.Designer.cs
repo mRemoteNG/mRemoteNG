@@ -1,5 +1,6 @@
 ﻿
 using System.Windows.Forms;
+using mRemoteNG.Config.Settings.Registry;
 using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms
@@ -72,27 +73,33 @@ namespace mRemoteNG.UI.Forms
             // 
             this.chkUsername._mice = MrngCheckBox.MouseState.HOVER;
             this.chkUsername.AutoSize = true;
-            this.chkUsername.Checked = true;
-            this.chkUsername.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkUsername.Checked = CommonRegistrySettings.AllowExportUsernames;
+            this.chkUsername.CheckState = CommonRegistrySettings.AllowExportUsernames ?
+                              System.Windows.Forms.CheckState.Checked :
+                              System.Windows.Forms.CheckState.Unchecked;
             this.chkUsername.Location = new System.Drawing.Point(15, 32);
             this.chkUsername.Name = "chkUsername";
             this.chkUsername.Size = new System.Drawing.Size(77, 17);
             this.chkUsername.TabIndex = 0;
             this.chkUsername.Text = "Username";
             this.chkUsername.UseVisualStyleBackColor = true;
+            this.chkUsername.Enabled = CommonRegistrySettings.AllowExportUsernames;
             // 
             // chkPassword
             // 
             this.chkPassword._mice = MrngCheckBox.MouseState.HOVER;
             this.chkPassword.AutoSize = true;
-            this.chkPassword.Checked = true;
-            this.chkPassword.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPassword.Checked = CommonRegistrySettings.AllowExportPasswords;
+            this.chkPassword.CheckState = CommonRegistrySettings.AllowExportPasswords ?
+                              System.Windows.Forms.CheckState.Checked :
+                              System.Windows.Forms.CheckState.Unchecked;
             this.chkPassword.Location = new System.Drawing.Point(15, 55);
             this.chkPassword.Name = "chkPassword";
             this.chkPassword.Size = new System.Drawing.Size(75, 17);
             this.chkPassword.TabIndex = 1;
             this.chkPassword.Text = "Password";
             this.chkPassword.UseVisualStyleBackColor = true;
+            this.chkPassword.Enabled = CommonRegistrySettings.AllowExportPasswords;
             // 
             // chkDomain
             // 

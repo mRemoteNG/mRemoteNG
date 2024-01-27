@@ -12,6 +12,9 @@ namespace mRemoteNG.App.Info
         #endregion
 
         #region subkey location parameters
+        // Credential
+        public const string CredentialSubkey = RootKey + "\\Credentials"; // Registry subkey for general credential settings
+        public const string CredentialOptionsSubkey = RootKey + "\\Credentials\\Options"; // Registry subkey for credential options within the credential settings
 
         // Updates
         public const string UpdateSubkey        = RootKey + "\\Updates"; // Registry subkey for general update settings

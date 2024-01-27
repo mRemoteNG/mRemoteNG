@@ -15,7 +15,7 @@ namespace mRemoteNG.Config.Settings.Registry
         private static readonly RegistryHive _Hive = WindowsRegistryInfo.Hive;
 
         private const string __Update = WindowsRegistryInfo.UpdateSubkey;
-        //private const string __Credential = WindowsRegistryInfo.CredentialSubkey;
+        private const string __Credential = WindowsRegistryInfo.CredentialSubkey;
 
         #region general update registry settings
         /// <summary>
@@ -23,7 +23,6 @@ namespace mRemoteNG.Config.Settings.Registry
         /// </summary>
         /// <remarks>
         /// Default value is true, which allows check for updates.
-        /// If the registry key is set to true, no action will be taken because the key is not needed.
         /// </remarks>
         public static bool AllowCheckForUpdates { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(AllowCheckForUpdates), true);
 
@@ -32,8 +31,6 @@ namespace mRemoteNG.Config.Settings.Registry
         /// </summary>
         /// <remarks>
         /// Default value is true, which allows check for updates automaticaly.
-        /// If the registry key is set to true, no action will be taken because the key is not needed.
-        /// Important: If AllowCheckForUpdates is false, the default for this value (AllowCheckForUpdatesAutomatical) is also false, manual update checks are disabled.
         /// </remarks>
         public static bool AllowCheckForUpdatesAutomatical { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(AllowCheckForUpdatesAutomatical), AllowCheckForUpdates);
 
@@ -42,21 +39,40 @@ namespace mRemoteNG.Config.Settings.Registry
         /// </summary>
         /// <remarks>
         /// The default value is true, enabling the manual check for updates.
-        /// If the registry key is set to true, no action will be taken because the key is not needed.
-        /// Important: If AllowCheckForUpdates is false, the default for this value (AllowCheckForUpdatesManual) is also false, manual update checks are disabled.
         /// </remarks>
         public static bool AllowCheckForUpdatesManual { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(AllowCheckForUpdatesManual), AllowCheckForUpdates);
 
         /// <summary>
         /// Specifies whether a question about checking for updates is displayed at startup.
         /// </summary>
-        /// <remarks>
-        /// Important: If the registry entry is set to true, a popup will appear every time you start
-        /// </remarks>
         public static bool AllowPromptForUpdatesPreference { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(AllowPromptForUpdatesPreference), AllowCheckForUpdates);
         #endregion
 
+        #region general credential registry settings
+        /// <summary>
+        /// Setting that indicates whether exporting passwords is allowed.
+        /// </summary>
+        public static bool AllowExportPasswords { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowExportPasswords), true);
 
-        
+        /// <summary>
+        /// Setting that indicates whether exporting usernames is allowed.
+        /// </summary>
+        public static bool AllowExportUsernames { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowExportUsernames), true);
+
+        /// <summary>
+        /// Setting that indicates whether saving passwords is allowed.
+        /// </summary>
+        public static bool AllowSavePasswords { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowSavePasswords), true);
+
+        /// <summary>
+        /// Setting that indicates whether saving usernames is allowed.
+        /// </summary>
+        public static bool AllowSaveUsernames { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowSaveUsernames), true);
+
+        /// <summary>
+        /// Setting that indicates whether modifying credential settings is allowed.
+        /// </summary>
+        public static bool AllowModifyCredentialSettings { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowModifyCredentialSettings), true);
+        #endregion
     }
 }
