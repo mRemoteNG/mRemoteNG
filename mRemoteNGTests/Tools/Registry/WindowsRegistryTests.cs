@@ -188,7 +188,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void SetRegistryValueThrowAccessDenied()
         {
-            Assert.Throws<UnauthorizedAccessException>(() => _registryWriter.SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\mRemoteNGTest", "TestKey", "A value string", RegistryValueKind.String));
+            Assert.Throws<InvalidOperationException>(() => _registryWriter.SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\mRemoteNGTest", "TestKey", "A value string", RegistryValueKind.String));
         }
         #endregion
     }

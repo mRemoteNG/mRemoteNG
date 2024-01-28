@@ -498,51 +498,34 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// Creates or sets the value of a specific property within a registry key.
         /// </summary>
         /// <param name="key">The WindowsRegistryKey object containing information about the registry property.</param>
-        /// <exception cref="InvalidOperationException">Thrown when the Windows Registry key is not ready for writing.</exception>
-        /// <exception cref="SecurityException">Thrown when a security-related error occurs while accessing the registry.</exception>
-        /// <exception cref="IOException">Thrown when an I/O error occurs while accessing the registry.</exception>
-        /// <exception cref="UnauthorizedAccessException">Thrown when access to the registry is unauthorized.</exception>
-        /// <exception cref="Exception">Thrown for all other exceptions.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when error by writing to the Windows Registry key.</exception>
         private void CreateOrSetRegistryValue(WindowsRegistryKey key)
         {
             try
             {
                 if (!key.IsKeyWritable())
-                    throw new InvalidOperationException("The Windows Registry key is not ready for writing.");
+                    throw new ArgumentNullException("The Windows Registry key is not ready for writing.");
 
-                using (RegistryKey baseKey = RegistryKey.OpenBaseKey(key.Hive, RegistryView.Default), registryKey = baseKey.OpenSubKey(key.Path, true))
+                using RegistryKey baseKey = RegistryKey.OpenBaseKey(key.Hive, RegistryView.Default);
+                RegistryKey registryKey = baseKey.OpenSubKey(key.Path, true);
+
+                if (registryKey == null)
                 {
-                    if (registryKey == null)
-                    {
-                        // The specified subkey doesn't exist, so create it.
-                        using (RegistryKey newKey = baseKey.CreateSubKey(key.Path))
-                        {
-                            newKey.SetValue(key.Name, key.Value, key.ValueKind);
-                        }
-                    }
-                    else
-                    {
-                        registryKey.SetValue(key.Name, key.Value, key.ValueKind);
-                    }
+                    // The specified subkey doesn't exist, so create it.
+                    using RegistryKey newKey = baseKey.CreateSubKey(key.Path);
+                    newKey.SetValue(key.Name, key.Value, key.ValueKind);
+                }
+                else
+                {
+                    registryKey.SetValue(key.Name, key.Value, key.ValueKind);
                 }
             }
-            catch (SecurityException ex)
+            catch (Exception ex)
             {
-                throw ex;
-            }
-            catch (IOException ex)
-            {
-                throw ex;
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                throw ex;
-            }
-            catch (Exception)
-            {
-                throw;
+                throw new InvalidOperationException("Error writing to the Windows Registry key.", ex);
             }
         }
+
         #endregion
     }
 }
