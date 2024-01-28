@@ -17,4 +17,5 @@ Make changes with caution and ensure that you have backups before making any adj
 .. toctree::
    :maxdepth: 4
 
+   registry/credential_settings
    registry/updates_settings
