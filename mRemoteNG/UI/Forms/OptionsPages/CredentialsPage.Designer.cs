@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             pnlDefaultCredentials = new System.Windows.Forms.Panel();
+            pnlCredentialsSettingsPanel = new System.Windows.Forms.Panel();
+            lblDefaultCredentials = new Controls.MrngLabel();
+            radCredentialsWindows = new Controls.MrngRadioButton();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             txtCredentialsUserViaAPI = new Controls.MrngTextBox();
             txtCredentialsUsername = new Controls.MrngTextBox();
@@ -38,25 +41,60 @@
             lblCredentialsUsername = new Controls.MrngLabel();
             lblCredentialsPassword = new Controls.MrngLabel();
             lblCredentialsDomain = new Controls.MrngLabel();
-            radCredentialsCustom = new Controls.MrngRadioButton();
-            lblDefaultCredentials = new Controls.MrngLabel();
             radCredentialsNoInfo = new Controls.MrngRadioButton();
-            radCredentialsWindows = new Controls.MrngRadioButton();
+            radCredentialsCustom = new Controls.MrngRadioButton();
+            lblCredentialsAdminInfo = new System.Windows.Forms.Label();
+            lblCredentialsGeneratorHelp = new Controls.MrngLabel();
+            btnCredentialsGenerator = new System.Windows.Forms.Button();
+            lblCredentialsGenerator = new Controls.MrngLabel();
+            txtCredentialsGeneratorPsswd = new System.Windows.Forms.TextBox();
             pnlDefaultCredentials.SuspendLayout();
+            pnlCredentialsSettingsPanel.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // pnlDefaultCredentials
             // 
-            pnlDefaultCredentials.Controls.Add(tableLayoutPanel1);
-            pnlDefaultCredentials.Controls.Add(radCredentialsCustom);
-            pnlDefaultCredentials.Controls.Add(lblDefaultCredentials);
-            pnlDefaultCredentials.Controls.Add(radCredentialsNoInfo);
-            pnlDefaultCredentials.Controls.Add(radCredentialsWindows);
-            pnlDefaultCredentials.Location = new System.Drawing.Point(3, 3);
+            pnlDefaultCredentials.Controls.Add(pnlCredentialsSettingsPanel);
+            pnlDefaultCredentials.Controls.Add(lblCredentialsAdminInfo);
+            pnlDefaultCredentials.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlDefaultCredentials.Location = new System.Drawing.Point(0, 0);
             pnlDefaultCredentials.Name = "pnlDefaultCredentials";
-            pnlDefaultCredentials.Size = new System.Drawing.Size(604, 200);
+            pnlDefaultCredentials.Size = new System.Drawing.Size(610, 416);
             pnlDefaultCredentials.TabIndex = 0;
+            // 
+            // pnlCredentialsSettingsPanel
+            // 
+            pnlCredentialsSettingsPanel.Controls.Add(lblDefaultCredentials);
+            pnlCredentialsSettingsPanel.Controls.Add(radCredentialsWindows);
+            pnlCredentialsSettingsPanel.Controls.Add(tableLayoutPanel1);
+            pnlCredentialsSettingsPanel.Controls.Add(radCredentialsNoInfo);
+            pnlCredentialsSettingsPanel.Controls.Add(radCredentialsCustom);
+            pnlCredentialsSettingsPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlCredentialsSettingsPanel.Location = new System.Drawing.Point(0, 30);
+            pnlCredentialsSettingsPanel.Name = "pnlCredentialsSettingsPanel";
+            pnlCredentialsSettingsPanel.Size = new System.Drawing.Size(610, 214);
+            pnlCredentialsSettingsPanel.TabIndex = 0;
+            // 
+            // lblDefaultCredentials
+            // 
+            lblDefaultCredentials.AutoSize = true;
+            lblDefaultCredentials.Location = new System.Drawing.Point(3, 0);
+            lblDefaultCredentials.Name = "lblDefaultCredentials";
+            lblDefaultCredentials.Size = new System.Drawing.Size(279, 13);
+            lblDefaultCredentials.TabIndex = 0;
+            lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:";
+            // 
+            // radCredentialsWindows
+            // 
+            radCredentialsWindows.AutoSize = true;
+            radCredentialsWindows.BackColor = System.Drawing.Color.Transparent;
+            radCredentialsWindows.Location = new System.Drawing.Point(6, 39);
+            radCredentialsWindows.Name = "radCredentialsWindows";
+            radCredentialsWindows.Size = new System.Drawing.Size(252, 17);
+            radCredentialsWindows.TabIndex = 2;
+            radCredentialsWindows.Text = "my current credentials (windows logon info)";
+            radCredentialsWindows.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel1
             // 
@@ -71,7 +109,7 @@
             tableLayoutPanel1.Controls.Add(lblCredentialsUsername, 0, 1);
             tableLayoutPanel1.Controls.Add(lblCredentialsPassword, 0, 2);
             tableLayoutPanel1.Controls.Add(lblCredentialsDomain, 0, 3);
-            tableLayoutPanel1.Location = new System.Drawing.Point(23, 85);
+            tableLayoutPanel1.Location = new System.Drawing.Point(26, 85);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -113,7 +151,6 @@
             txtCredentialsPassword.Name = "txtCredentialsPassword";
             txtCredentialsPassword.Size = new System.Drawing.Size(166, 22);
             txtCredentialsPassword.TabIndex = 7;
-            txtCredentialsPassword.UseSystemPasswordChar = true;
             // 
             // txtCredentialsDomain
             // 
@@ -170,33 +207,12 @@
             lblCredentialsDomain.Text = "Domain:";
             lblCredentialsDomain.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // radCredentialsCustom
-            // 
-            radCredentialsCustom.AutoSize = true;
-            radCredentialsCustom.BackColor = System.Drawing.Color.Transparent;
-            radCredentialsCustom.Location = new System.Drawing.Point(3, 62);
-            radCredentialsCustom.Name = "radCredentialsCustom";
-            radCredentialsCustom.Size = new System.Drawing.Size(98, 17);
-            radCredentialsCustom.TabIndex = 3;
-            radCredentialsCustom.Text = "the following:";
-            radCredentialsCustom.UseVisualStyleBackColor = false;
-            radCredentialsCustom.CheckedChanged += radCredentialsCustom_CheckedChanged;
-            // 
-            // lblDefaultCredentials
-            // 
-            lblDefaultCredentials.AutoSize = true;
-            lblDefaultCredentials.Location = new System.Drawing.Point(0, 0);
-            lblDefaultCredentials.Name = "lblDefaultCredentials";
-            lblDefaultCredentials.Size = new System.Drawing.Size(279, 13);
-            lblDefaultCredentials.TabIndex = 0;
-            lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:";
-            // 
             // radCredentialsNoInfo
             // 
             radCredentialsNoInfo.AutoSize = true;
             radCredentialsNoInfo.BackColor = System.Drawing.Color.Transparent;
             radCredentialsNoInfo.Checked = true;
-            radCredentialsNoInfo.Location = new System.Drawing.Point(3, 16);
+            radCredentialsNoInfo.Location = new System.Drawing.Point(6, 16);
             radCredentialsNoInfo.Name = "radCredentialsNoInfo";
             radCredentialsNoInfo.Size = new System.Drawing.Size(103, 17);
             radCredentialsNoInfo.TabIndex = 1;
@@ -204,16 +220,58 @@
             radCredentialsNoInfo.Text = "no information";
             radCredentialsNoInfo.UseVisualStyleBackColor = false;
             // 
-            // radCredentialsWindows
+            // radCredentialsCustom
             // 
-            radCredentialsWindows.AutoSize = true;
-            radCredentialsWindows.BackColor = System.Drawing.Color.Transparent;
-            radCredentialsWindows.Location = new System.Drawing.Point(3, 39);
-            radCredentialsWindows.Name = "radCredentialsWindows";
-            radCredentialsWindows.Size = new System.Drawing.Size(252, 17);
-            radCredentialsWindows.TabIndex = 2;
-            radCredentialsWindows.Text = "my current credentials (windows logon info)";
-            radCredentialsWindows.UseVisualStyleBackColor = false;
+            radCredentialsCustom.AutoSize = true;
+            radCredentialsCustom.BackColor = System.Drawing.Color.Transparent;
+            radCredentialsCustom.Location = new System.Drawing.Point(6, 62);
+            radCredentialsCustom.Name = "radCredentialsCustom";
+            radCredentialsCustom.Size = new System.Drawing.Size(98, 17);
+            radCredentialsCustom.TabIndex = 3;
+            radCredentialsCustom.Text = "the following:";
+            radCredentialsCustom.UseVisualStyleBackColor = false;
+            radCredentialsCustom.CheckedChanged += radCredentialsCustom_CheckedChanged;
+            // 
+            // lblCredentialsAdminInfo
+            // 
+            lblCredentialsAdminInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            lblCredentialsAdminInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            lblCredentialsAdminInfo.ForeColor = System.Drawing.SystemColors.ControlText;
+            lblCredentialsAdminInfo.Location = new System.Drawing.Point(0, 0);
+            lblCredentialsAdminInfo.Name = "lblCredentialsAdminInfo";
+            lblCredentialsAdminInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            lblCredentialsAdminInfo.Size = new System.Drawing.Size(610, 30);
+            lblCredentialsAdminInfo.TabIndex = 0;
+            lblCredentialsAdminInfo.Text = "Some settings are configured by your Administrator. Please contact your administrator for more information.";
+            lblCredentialsAdminInfo.Visible = false;
+            // 
+            // lblCredentialsGeneratorHelp
+            // 
+            lblCredentialsGeneratorHelp.Location = new System.Drawing.Point(0, 0);
+            lblCredentialsGeneratorHelp.Name = "lblCredentialsGeneratorHelp";
+            lblCredentialsGeneratorHelp.Size = new System.Drawing.Size(100, 23);
+            lblCredentialsGeneratorHelp.TabIndex = 0;
+            // 
+            // btnCredentialsGenerator
+            // 
+            btnCredentialsGenerator.Location = new System.Drawing.Point(0, 0);
+            btnCredentialsGenerator.Name = "btnCredentialsGenerator";
+            btnCredentialsGenerator.Size = new System.Drawing.Size(75, 23);
+            btnCredentialsGenerator.TabIndex = 0;
+            // 
+            // lblCredentialsGenerator
+            // 
+            lblCredentialsGenerator.Location = new System.Drawing.Point(0, 0);
+            lblCredentialsGenerator.Name = "lblCredentialsGenerator";
+            lblCredentialsGenerator.Size = new System.Drawing.Size(100, 23);
+            lblCredentialsGenerator.TabIndex = 0;
+            // 
+            // txtCredentialsGeneratorPsswd
+            // 
+            txtCredentialsGeneratorPsswd.Location = new System.Drawing.Point(0, 0);
+            txtCredentialsGeneratorPsswd.Name = "txtCredentialsGeneratorPsswd";
+            txtCredentialsGeneratorPsswd.Size = new System.Drawing.Size(100, 23);
+            txtCredentialsGeneratorPsswd.TabIndex = 0;
             // 
             // CredentialsPage
             // 
@@ -224,7 +282,8 @@
             Name = "CredentialsPage";
             Size = new System.Drawing.Size(610, 490);
             pnlDefaultCredentials.ResumeLayout(false);
-            pnlDefaultCredentials.PerformLayout();
+            pnlCredentialsSettingsPanel.ResumeLayout(false);
+            pnlCredentialsSettingsPanel.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
@@ -245,5 +304,11 @@
         internal Controls.MrngTextBox txtCredentialsUsername;
         internal Controls.MrngLabel lblCredentialsDomain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        internal System.Windows.Forms.Label lblCredentialsAdminInfo;
+        internal System.Windows.Forms.Panel pnlCredentialsSettingsPanel;
+        internal Controls.MrngLabel lblCredentialsGenerator;
+        internal System.Windows.Forms.TextBox txtCredentialsGeneratorPsswd;
+        internal System.Windows.Forms.Button btnCredentialsGenerator;
+        internal Controls.MrngLabel lblCredentialsGeneratorHelp;
     }
 }

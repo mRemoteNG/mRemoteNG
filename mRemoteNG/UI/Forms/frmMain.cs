@@ -33,6 +33,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.UI.Controls;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.Config.Settings.Registry;
 #endregion
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -345,6 +346,10 @@ namespace mRemoteNG.UI.Forms
 
         private void PromptForUpdatesPreference()
         {
+            if (!CommonRegistrySettings.AllowCheckForUpdates) return;
+            if (!CommonRegistrySettings.AllowCheckForUpdatesAutomatical) return;
+            if (!CommonRegistrySettings.AllowPromptForUpdatesPreference) return;
+
             if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked) return;
             string[] commandButtons =
             {
@@ -368,6 +373,9 @@ namespace mRemoteNG.UI.Forms
 
         private async Task CheckForUpdates()
         {
+            if (!CommonRegistrySettings.AllowCheckForUpdates) return;
+            if (!CommonRegistrySettings.AllowCheckForUpdatesAutomatical) return;
+
             if (!Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup) return;
 
             var nextUpdateCheck =

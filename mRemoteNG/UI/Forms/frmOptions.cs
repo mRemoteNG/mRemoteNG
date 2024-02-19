@@ -206,6 +206,7 @@ namespace mRemoteNG.UI.Forms
 
             if (page == null) return;
             page.ApplyLanguage();
+            page.LoadRegistrySettings();
             page.LoadSettings();
             _optionPages.Add(page);
             lstOptionPages.AddObject(page);

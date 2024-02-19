@@ -42,6 +42,16 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public virtual void RevertSettings()
         {
         }
+        public virtual void LoadRegistrySettings()
+        {
+        }
+        public virtual bool ShowAdministratorInfo()
+        {
+            return false;
+        }
+        public virtual void DisablePage()
+        {
+        }
 
         #endregion
 
@@ -65,6 +75,27 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Name = "OptionsPage";
             ResumeLayout(false);
         }
+
+        /// <summary>
+        /// Disables the specified control by setting its Enabled property to false.
+        /// For TextBox controls, additionally sets the ReadOnly property based on the Enabled state.
+        /// Does nothing if the control is null.
+        /// </summary>
+        /// <param name="control">The control to be disabled.</param>
+        protected static void DisableControl(Control control)
+        {
+            if (control == null) return;
+
+            control.Enabled = false;
+
+            if (control is TextBox)
+            {
+                // If it's a TextBox, set the ReadOnly property
+                ((TextBox)control).ReadOnly = control.Enabled;
+            }
+        }
+
+
     }
 	internal class DropdownList
     {

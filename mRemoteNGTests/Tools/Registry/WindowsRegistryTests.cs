@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using Microsoft.Win32;
 using mRemoteNG.Tools.WindowsRegistry;
 using NUnit.Framework;
@@ -9,14 +10,12 @@ namespace mRemoteNGTests.Tools.Registry
 {
     public class WindowsRegistryTests
     {
-        private IRegistry _registry;
         private IRegistryRead _registryReader;
         private IRegistryWrite _registryWriter;
 
         [SetUp]
         public void Setup()
         {
-            _registry = new WindowsRegistry();
             _registryReader = new WindowsRegistry();
             _registryWriter = new WindowsRegistry();
         }
@@ -28,11 +27,13 @@ namespace mRemoteNGTests.Tools.Registry
             var subKeyNames = _registryReader.GetSubKeyNames(RegistryHive.CurrentUser, "Software");
             Assert.That(subKeyNames, Does.Contain("Microsoft"));
         }
+
         [Test]
         public void GetSubkeyNamesThrowsIfGivenNullKeyPath()
         {
             Assert.Throws<ArgumentNullException>(() => _registryReader.GetSubKeyNames(RegistryHive.CurrentUser, null));
         }
+
         [Test]
         public void GetSubkeyNamesThrowsIfGivenUnknownHive()
         {
@@ -45,13 +46,13 @@ namespace mRemoteNGTests.Tools.Registry
         public void CanGetPropertyValue()
         {
             var keyValue = _registryReader.GetPropertyValue(RegistryHive.ClassesRoot, @".dll\PersistentHandler", "");
-            Assert.That(keyValue.FirstOrDefault(), Is.EqualTo("{098f2470-bae0-11cd-b579-08002b30bfeb}"));
+            Assert.That(keyValue, Is.EqualTo("{098f2470-bae0-11cd-b579-08002b30bfeb}"));
         }
 
         [Test]
         public void CanGetPropertyValueByRegistryKeyObject()
         {
-            WindowsRegistryKey key = new WindowsRegistryKey
+            WindowsRegistryKey key = new()
             {
                 Hive = RegistryHive.ClassesRoot,
                 Path = @".dll\PersistentHandler",
@@ -59,7 +60,7 @@ namespace mRemoteNGTests.Tools.Registry
             };
 
             var keyValue = _registryReader.GetPropertyValue(key);
-            Assert.That(keyValue.FirstOrDefault(), Is.EqualTo("{098f2470-bae0-11cd-b579-08002b30bfeb}"));
+            Assert.That(keyValue, Is.EqualTo("{098f2470-bae0-11cd-b579-08002b30bfeb}"));
         }
         [Test]
         public void GetPropertyValueThrowsIfGivenNullKeyPath()
@@ -85,7 +86,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void CanGetWindowsRegistryKeyByObject()
         {
-            WindowsRegistryKey key = new WindowsRegistryKey
+            WindowsRegistryKey key = new()
             {
                 Hive = RegistryHive.ClassesRoot,
                 Path = @".dll\PersistentHandler",
@@ -107,11 +108,11 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void GetWindowsRegistryThrowNotReadable()
         {
-            WindowsRegistryKey key = new WindowsRegistryKey
+            WindowsRegistryKey key = new()
             {
                 Hive = RegistryHive.ClassesRoot,
             };
-
+        
             Assert.Throws<InvalidOperationException>(() => _registryReader.GetWindowsRegistryKey(key));
         }
         #endregion
@@ -137,7 +138,7 @@ namespace mRemoteNGTests.Tools.Registry
         public void IsWindowsRegistryKeyValid()
         {
             // Tests property rules of WindowsRegistryKey
-            WindowsRegistryKey key = new WindowsRegistryKey();
+            WindowsRegistryKey key = new();
 
             Assert.Multiple(() =>
             {
@@ -152,26 +153,27 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void WindowsRegistryKeyThrowHiveNullException()
         {
-            WindowsRegistryKey key = new WindowsRegistryKey();
+            WindowsRegistryKey key = new();
             Assert.Throws<ArgumentNullException>(() => key.Hive = 0, "Expected IsHiveValid to throw ArgumentNullException");
         }
 
         [Test]
-        public void WindowsRegistryKeyThrowValueKindNullException()
+        public void WindowsRegistryKeyValueKindUnknown()
         {
-            WindowsRegistryKey key = new WindowsRegistryKey();
-            Assert.Throws<ArgumentNullException>(() => key.ValueKind = 0, "Expected IsValueKindValid to throw ArgumentNullException");
+            WindowsRegistryKey key = new();
+            Assert.That(key.ValueKind, Is.EqualTo(RegistryValueKind.Unknown));
+
         }
         [Test]
         public void WindowsRegistryKeyThrowPathNullException()
         {
-            WindowsRegistryKey key = new WindowsRegistryKey();
+            WindowsRegistryKey key = new();
             Assert.Throws<ArgumentNullException>(() => key.Path = null, "Expected IsPathValid to throw ArgumentNullException");
         }
         [Test]
         public void WindowsRegistryKeyThrowNameNullException()
         {
-            WindowsRegistryKey key = new WindowsRegistryKey();
+            WindowsRegistryKey key = new();
             Assert.Throws<ArgumentNullException>(() => key.Name = null, "Expected IsNameValid to throw ArgumentNullException");
         }
         #endregion
@@ -186,7 +188,7 @@ namespace mRemoteNGTests.Tools.Registry
         [Test]
         public void SetRegistryValueThrowAccessDenied()
         {
-            Assert.Throws<UnauthorizedAccessException>(() => _registryWriter.SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\mRemoteNGTest", "TestKey", "A value string", RegistryValueKind.String));
+            Assert.Throws<InvalidOperationException>(() => _registryWriter.SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\mRemoteNGTest", "TestKey", "A value string", RegistryValueKind.String));
         }
         #endregion
     }
