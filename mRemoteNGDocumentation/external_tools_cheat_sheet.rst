@@ -1,3 +1,5 @@
+.. _external_tools_cheat_sheet:
+
 ***********************************
 Common External Tool Configurations
 ***********************************

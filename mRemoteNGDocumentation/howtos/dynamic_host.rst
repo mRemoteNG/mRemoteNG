@@ -1,10 +1,9 @@
-*************
+**********************
 Dynamic Host Addresses
-*************
+**********************
 
 .. warning::
-
-This feature is in beta and currently supports Amazon EC2 only
+    This feature is in beta and currently supports Amazon EC2 only
 
 Some hosts may have dynamic ip addresses or hostnames. For example, Amazon EC2 instances without elastic ips change their public address upon stop and restart events.
 mRemote can automatically update the host property when ec2 region and instance-id properties are set:
