@@ -8,7 +8,7 @@ Updates Settings
 .. warning::
     Before proceeding with any changes to the Windows Registry, it is imperative that you carefully read and comprehend the 
     **Modifying the Registry**, **Restricted Registry Settings** and **Disclaimer** 
-    on :doc:`Registry Settings Infromation </registry_settings_information>`.
+    on :doc:`Registry Settings Infromation <registry_settings_information>`.
     
 
 Common settings
@@ -98,7 +98,7 @@ Specifies the number of days between automatic update checks.
 
 UpdateChannel
 -------------
-Specifies the preferred update channel. Important note: Values are case-sensitive!
+Specifies the preferred update channel.
 
 - **Registry Hive:** HKEY_LOCAL_MACHINE
 - **Registry Path:** SOFTWARE\\mRemoteNG\\Updates\\Options
