@@ -1,0 +1,130 @@
+name: Build x86_64
+
+on:
+  push:
+    branches:
+      - v1.77.3-dev
+
+jobs:
+  Build-Debug-MSI:
+    runs-on: windows-2022
+    steps:
+      - name: 01. Copy repository
+        uses: actions/checkout@v4
+
+      - name: 02. Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.3.1  # Add MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+        with:
+          vs-version: '17.8.3'
+
+      - name: 03. Restore nuget packages for solution
+        shell: pwsh
+        run: |
+          dotnet restore
+
+      - name: 04. Compile mRemoteNG
+        shell: pwsh
+        run: |
+          msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" -p:Configuration="Debug Installer" -p:Platform=x64 /verbosity:normal
+
+      - name: 05. Publish MSI as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-msi-x86_64
+          path: ${{ github.workspace }}\mRemoteNGInstaller\Installer\bin\x64\Debug\en-US\
+          if-no-files-found: error
+
+  Build-Debug-Portable:
+    runs-on: windows-2022
+    steps:
+      - name: 01. Copy repository
+        uses: actions/checkout@v4
+
+      - name: 02. Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.3.1  # Add MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+        with:
+          vs-version: '17.8.3'
+
+      - name: 03. Restore nuget packages for solution
+        shell: pwsh
+        run: |
+          dotnet restore
+
+      - name: 04. Compile mRemoteNG
+        shell: pwsh
+        run: |
+          msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" -p:Configuration="Debug Portable" -p:Platform=x64 /verbosity:normal
+
+      - name: 05. Publish Portable Binary as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-portable-x86_64
+          path: ${{ github.workspace }}\mRemoteNG\bin\x64\Debug Portable\
+          if-no-files-found: error
+
+  Build-Release:
+    runs-on: windows-2022
+    steps:
+      - name: 01. Copy repository
+        uses: actions/checkout@v4
+
+      - name: 02. Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.3.1  # Add MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+        with:
+          vs-version: '17.8.3'
+
+      - name: 03. Restore nuget packages for solution
+        shell: pwsh
+        run: |
+          dotnet restore
+
+      - name: 04. Compile mRemoteNG
+        shell: pwsh
+        run: |
+          msbuild "$Env:GITHUB_WORKSPACE\mRemoteNG.sln" -p:Configuration="Release Installer and Portable" -p:Platform=x64 /verbosity:normal
+
+      - name: 05. Publish MSI Binary as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+         name: release-msi-x86_64
+         path: ${{ github.workspace }}\mRemoteNGInstaller\Installer\bin\x64\Release\en-US\
+         if-no-files-found: error
+
+      - name: 06. Publish Portable Binary as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-portable-x86_64
+          path: ${{ github.workspace }}\mRemoteNG\bin\x64\Release
+          if-no-files-found: error
+
+  Create-Release:
+    needs: [Build-Debug-MSI, Build-Debug-Portable, Build-Release]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: 01. Copy repository
+        uses: actions/checkout@v4
+
+      - name: 02. Download Artifacts
+        uses: actions/download-artifact@v4
+
+      - name: 03. Create compressed archives # Needs to be done because "actions/download-artifact@v4" is extracting the zipped Artifacts
+        shell: bash
+        run: |
+          zip -r debug-msi-x86_64.zip debug-msi-x86_64/
+          zip -r debug-portable-x86_64.zip debug-portable-x86_64/
+          zip -r release-msi-x86_64.zip release-msi-x86_64/
+          zip -r release-portable-x86_64.zip release-portable-x86_64/
+
+      - name: 04. Create Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v1.77.3-dev-${GITHUB_RUN_NUMBER}" \
+                            --title "v1.77.3-dev-${GITHUB_RUN_NUMBER}" \
+                            --prerelease \
+                            --generate-notes \
+                            $GITHUB_WORKSPACE/debug-msi-x86_64.zip \
+                            $GITHUB_WORKSPACE/debug-portable-x86_64.zip \
+                            $GITHUB_WORKSPACE/release-msi-x86_64.zip \
+                            $GITHUB_WORKSPACE/release-portable-x86_64.zip
