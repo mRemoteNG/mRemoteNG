@@ -8,7 +8,7 @@ Credential Settings
 .. warning::
     Before proceeding with any changes to the Windows Registry, it is imperative that you carefully read and comprehend the 
     **Modifying the Registry**, **Restricted Registry Settings** and **Disclaimer** 
-    on :doc:`Registry Settings Infromation </registry_settings_information>`.
+    on :doc:`Registry Settings Infromation <registry_settings_information>`.
     
 
 Common settings

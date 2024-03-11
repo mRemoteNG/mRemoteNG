@@ -1,14 +1,11 @@
-*************
+**************************
 Credential Vault Connector
-*************
+**************************
 
 .. warning::
-
-This feature is currently only developed for Thycotic Secret Server (on-premise installations). It is implemented for RDP and SSH connections.
-
-mRemote supports fetching credentials from external credential vaults. This allows providing credentials to the connection without storing these to disk, which has numerous benefits (security, auditing, rotating passwords, etc).
-
-Instead of specifying username/password/domain directly in mRemote, leave these fields empty and just set the secret id: 
+    This feature is currently only developed for Thycotic Secret Server (on-premise installations). It is implemented for RDP and SSH connections.
+    mRemote supports fetching credentials from external credential vaults. This allows providing credentials to the connection without storing these to disk, which has numerous benefits (security, auditing, rotating passwords, etc).
+    Instead of specifying username/password/domain directly in mRemote, leave these fields empty and just set the secret id: 
 
 .. figure:: /images/credvault01.png
 
