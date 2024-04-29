@@ -21,7 +21,7 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
-            var settingsManager = new LocalSettingsManager();
+            /*var settingsManager = new LocalSettingsManager();
 
             // Check if the database exists
             if (settingsManager.DatabaseExists())
@@ -32,7 +32,7 @@ namespace mRemoteNG.App
             {
                 Console.WriteLine("Database does not exist. Creating...");
                 settingsManager.CreateDatabase();
-            }
+            }*/
 
             if (Properties.OptionsStartupExitPage.Default.SingleInstance)
                 StartApplicationAsSingleInstance();
