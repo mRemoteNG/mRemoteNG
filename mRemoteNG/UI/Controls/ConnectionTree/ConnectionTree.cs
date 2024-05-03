@@ -25,13 +25,12 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
     [SupportedOSPlatform("windows")]
     public partial class ConnectionTree : TreeListView, IConnectionTree
     {
-        private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
+        private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new();
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
-        private readonly StatusImageList _statusImageList = new StatusImageList();
+        private readonly StatusImageList _statusImageList = new();
         private ThemeManager _themeManager;
 
-        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter =
-            new ConnectionTreeSearchTextFilter();
+        private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new();
 
         private bool _nodeInEditMode;
         private bool _allowEdit;
@@ -44,13 +43,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         public IConfirm<ConnectionInfo> NodeDeletionConfirmer { get; set; } = new AlwaysConfirmYes();
 
-        public IEnumerable<IConnectionTreeDelegate> PostSetupActions { get; set; } = new IConnectionTreeDelegate[0];
+        public IEnumerable<IConnectionTreeDelegate> PostSetupActions { get; set; } = Array.Empty<IConnectionTreeDelegate>();
 
-        public ITreeNodeClickHandler<ConnectionInfo> DoubleClickHandler { get; set; } =
-            new TreeNodeCompositeClickHandler();
+        public ITreeNodeClickHandler<ConnectionInfo> DoubleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
 
-        public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } =
-            new TreeNodeCompositeClickHandler();
+        public ITreeNodeClickHandler<ConnectionInfo> SingleClickHandler { get; set; } = new TreeNodeCompositeClickHandler();
 
         public ConnectionTreeModel ConnectionTreeModel
         {
@@ -58,8 +55,10 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             set
             {
                 if (_connectionTreeModel == value)
+                {
                     return;
-
+                }
+                
                 UnregisterModelUpdateHandlers(_connectionTreeModel);
                 _connectionTreeModel = value;
                 PopulateTreeView(value);
@@ -86,7 +85,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             if (!_themeManager.ActiveAndExtended)
                 return;
 
-            var themePalette = _themeManager.ActiveTheme.ExtendedPalette;
+            ExtendedColorPalette themePalette = _themeManager.ActiveTheme.ExtendedPalette;
 
             BackColor = themePalette.getColor("TreeView_Background");
             ForeColor = themePalette.getColor("TreeView_Foreground");
@@ -131,7 +130,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             CanExpandGetter = item =>
             {
-                var itemAsContainer = item as ContainerInfo;
+                ContainerInfo itemAsContainer = item as ContainerInfo;
                 return itemAsContainer?.Children.Count > 0;
             };
             ChildrenGetter = item => ((ContainerInfo)item).Children;
@@ -149,20 +148,20 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             Collapsed += (sender, args) =>
             {
-                if (!(args.Model is ContainerInfo container)) return;
+                if (args.Model is not ContainerInfo container) return;
                 container.IsExpanded = false;
                 AutoResizeColumn(Columns[0]);
             };
             Expanded += (sender, args) =>
             {
-                if (!(args.Model is ContainerInfo container)) return;
+                if (args.Model is not ContainerInfo container) return;
                 container.IsExpanded = true;
                 AutoResizeColumn(Columns[0]);
             };
-            SelectionChanged += tvConnections_AfterSelect;
+            SelectionChanged += TvConnections_AfterSelect;
             MouseDoubleClick += OnMouse_DoubleClick;
             MouseClick += OnMouse_SingleClick;
-            CellToolTipShowing += tvConnections_CellToolTipShowing;
+            CellToolTipShowing += TvConnections_CellToolTipShowing;
             ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
             BeforeLabelEdit += OnBeforeLabelEdit;
@@ -180,23 +179,19 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 return;
             }
 
-            var longestIndentationAndTextWidth = int.MinValue;
-            var horizontalScrollOffset = LowLevelScrollPosition.X;
+            int longestIndentationAndTextWidth = int.MinValue;
+            int horizontalScrollOffset = LowLevelScrollPosition.X;
             const int padding = 10;
 
-            for (var i = 0; i < Items.Count; i++)
+            for (int i = 0; i < Items.Count; i++)
             {
-                var rowIndentation = Items[i].Position.X;
-                var rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
+                int rowIndentation = Items[i].Position.X;
+                int rowTextWidth = TextRenderer.MeasureText(Items[i].Text, Font).Width;
 
-                longestIndentationAndTextWidth =
-                    Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
+                longestIndentationAndTextWidth = Math.Max(rowIndentation + rowTextWidth, longestIndentationAndTextWidth);
             }
 
-            column.Width = longestIndentationAndTextWidth +
-                           SmallImageSize.Width +
-                           horizontalScrollOffset +
-                           padding;
+            column.Width = longestIndentationAndTextWidth + SmallImageSize.Width + horizontalScrollOffset + padding;
         }
 
         private void PopulateTreeView(ConnectionTreeModel newModel)
@@ -235,7 +230,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             // for some reason property changed events are getting triggered twice for each changed property. should be just once. cant find source of duplication
             // Removed "TO DO" from above comment. Per #142 it apperas that this no longer occurs with ObjectListView 2.9.1
-            var property = propertyChangedEventArgs.PropertyName;
+            string property = propertyChangedEventArgs.PropertyName;
             if (property != nameof(ConnectionInfo.Name)
              && property != nameof(ConnectionInfo.OpenConnections)
              && property != nameof(ConnectionInfo.Icon))
@@ -243,7 +238,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                 return;
             }
 
-            if (!(sender is ConnectionInfo senderAsConnectionInfo))
+            if (sender is not ConnectionInfo senderAsConnectionInfo)
                 return;
 
             RefreshObject(senderAsConnectionInfo);
@@ -252,7 +247,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         private void ExecutePostSetupActions()
         {
-            foreach (var action in PostSetupActions)
+            foreach (IConnectionTreeDelegate action in PostSetupActions)
             {
                 action.Execute(this);
             }
@@ -324,8 +319,8 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             ConnectionInfo parentNode = SelectedNode ?? GetRootConnectionNode();
             DefaultConnectionInfo.Instance.SaveTo(newNode);
             DefaultConnectionInheritance.Instance.SaveTo(newNode.Inheritance);
-            var selectedContainer = parentNode as ContainerInfo;
-            var parent = selectedContainer ?? parentNode?.Parent;
+            ContainerInfo selectedContainer = parentNode as ContainerInfo;
+            ContainerInfo parent = selectedContainer ?? parentNode?.Parent;
             newNode.SetParent(parent);
             Expand(parent);
             SelectObject(newNode, true);
@@ -339,11 +334,11 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             if (SelectedNode == null)
                 return;
 
-            var selectedNodeType = SelectedNode.GetTreeNodeType();
+            TreeNodeType selectedNodeType = SelectedNode.GetTreeNodeType();
             if (selectedNodeType != TreeNodeType.Connection && selectedNodeType != TreeNodeType.Container)
                 return;
 
-            var newNode = SelectedNode.Clone();
+            ConnectionInfo newNode = SelectedNode.Clone();
             SelectedNode.Parent.AddChildBelow(newNode, SelectedNode);
             newNode.Parent.SetChildBelow(newNode, SelectedNode);
         }
@@ -372,7 +367,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             if (SelectedNode == null)
                 return;
 
-            var textToCopy = SelectedNode.IsContainer ? SelectedNode.Name : SelectedNode.Hostname;
+            string textToCopy = SelectedNode.IsContainer ? SelectedNode.Name : SelectedNode.Hostname;
 
             if (string.IsNullOrEmpty(textToCopy))
                 return;
@@ -382,8 +377,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         public void SortRecursive(ConnectionInfo sortTarget, ListSortDirection sortDirection)
         {
-            if (sortTarget == null)
-                sortTarget = GetRootConnectionNode();
+            sortTarget ??= GetRootConnectionNode();
 
             Runtime.ConnectionsService.BeginBatchingSaves();
 
@@ -429,8 +423,8 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             // disable filtering if necessary. prevents RefreshObjects from
             // throwing an exception
-            var filteringEnabled = IsFiltering;
-            var filter = ModelFilter;
+            bool filteringEnabled = IsFiltering;
+            IModelFilter filter = ModelFilter;
             if (filteringEnabled)
             {
                 ResetColumnFiltering();
@@ -451,7 +445,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             AutoResizeColumn(Columns[0]);
         }
 
-        private void tvConnections_AfterSelect(object sender, EventArgs e)
+        private void TvConnections_AfterSelect(object sender, EventArgs e)
         {
             try
             {
@@ -459,9 +453,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                "tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
 
@@ -469,9 +461,8 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             if (mouseEventArgs.Clicks < 2) return;
             // ReSharper disable once NotAccessedVariable
-            OLVColumn column;
-            var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            if (!(listItem?.RowObject is ConnectionInfo clickedNode)) return;
+            OLVListItem listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out _);
+            if (listItem?.RowObject is not ConnectionInfo clickedNode) return;
             DoubleClickHandler.Execute(clickedNode);
         }
 
@@ -479,13 +470,12 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         {
             if (mouseEventArgs.Clicks > 1) return;
             // ReSharper disable once NotAccessedVariable
-            OLVColumn column;
-            var listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            if (!(listItem?.RowObject is ConnectionInfo clickedNode)) return;
+            OLVListItem listItem = GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out _);
+            if (listItem?.RowObject is not ConnectionInfo clickedNode) return;
             SingleClickHandler.Execute(clickedNode);
         }
 
-        private void tvConnections_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
+        private void TvConnections_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
         {
             try
             {
@@ -496,7 +486,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
                     return;
                 }
 
-                var nodeProducingTooltip = (ConnectionInfo)e.Model;
+                ConnectionInfo nodeProducingTooltip = (ConnectionInfo)e.Model;
                 e.Text = nodeProducingTooltip.Description;
             }
             catch (Exception ex)
@@ -509,7 +499,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         private void OnBeforeLabelEdit(object sender, LabelEditEventArgs e)
         {
-            if (_nodeInEditMode || !(sender is ConnectionTree))
+            if (_nodeInEditMode || sender is not ConnectionTree)
                 return;
 
             if (!_allowEdit || SelectedNode is PuttySessionInfo || SelectedNode is RootPuttySessionsNodeInfo)

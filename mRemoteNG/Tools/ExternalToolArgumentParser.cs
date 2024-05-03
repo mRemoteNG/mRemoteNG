@@ -21,35 +21,35 @@ namespace mRemoteNG.Tools
 
         public string ParseArguments(string input)
         {
-            var replacements = BuildReplacementList(input);
-            var result = PerformReplacements(input, replacements);
+            List<Replacement> replacements = BuildReplacementList(input);
+            string result = PerformReplacements(input, replacements);
             return result;
         }
 
         private List<Replacement> BuildReplacementList(string input)
         {
-            var index = 0;
-            var replacements = new List<Replacement>();
+            int index = 0;
+            List<Replacement> replacements = new();
             do
             {
-                var tokenStart = input.IndexOf("%", index, StringComparison.InvariantCulture);
+                int tokenStart = input.IndexOf("%", index, StringComparison.InvariantCulture);
                 if (tokenStart == -1)
                     break;
 
-                var tokenEnd = input.IndexOf("%", tokenStart + 1, StringComparison.InvariantCulture);
+                int tokenEnd = input.IndexOf("%", tokenStart + 1, StringComparison.InvariantCulture);
                 if (tokenEnd == -1)
                     break;
 
-                var tokenLength = tokenEnd - tokenStart + 1;
-                var variableNameStart = tokenStart + 1;
-                var variableNameLength = tokenLength - 2;
-                var isEnvironmentVariable = false;
-                var variableName = "";
+                int tokenLength = tokenEnd - tokenStart + 1;
+                int variableNameStart = tokenStart + 1;
+                int variableNameLength = tokenLength - 2;
+                bool isEnvironmentVariable = false;
+                string variableName = "";
 
                 if (tokenStart > 0)
                 {
-                    var tokenStartPrefix = input.Substring(tokenStart - 1, 1).ToCharArray()[0];
-                    var tokenEndPrefix = input.Substring(tokenEnd - 1, 1).ToCharArray()[0];
+                    char tokenStartPrefix = input.Substring(tokenStart - 1, 1).ToCharArray()[0];
+                    char tokenEndPrefix = input.Substring(tokenEnd - 1, 1).ToCharArray()[0];
 
                     if (tokenStartPrefix == '\\' && tokenEndPrefix == '\\')
                     {
@@ -79,9 +79,9 @@ namespace mRemoteNG.Tools
                     }
                 }
 
-                var token = input.Substring(tokenStart, tokenLength);
+                string token = input.Substring(tokenStart, tokenLength);
 
-                var escape = DetermineEscapeType(token);
+                EscapeType escape = DetermineEscapeType(token);
 
                 if (escape != EscapeType.All)
                 {
@@ -98,13 +98,13 @@ namespace mRemoteNG.Tools
 
                 variableName = input.Substring(variableNameStart, variableNameLength);
 
-                var replacementValue = token;
+                string replacementValue = token;
                 if (!isEnvironmentVariable)
                 {
                     replacementValue = GetVariableReplacement(variableName, token);
                 }
 
-                var haveReplacement = false;
+                bool haveReplacement = false;
 
                 if (replacementValue != token)
                 {
@@ -119,7 +119,7 @@ namespace mRemoteNG.Tools
 
                 if (haveReplacement)
                 {
-                    var trailing = tokenEnd + 2 <= input.Length
+                    char trailing = tokenEnd + 2 <= input.Length
                         ? input.Substring(tokenEnd + 1, 1).ToCharArray()[0]
                         : '\0';
 
@@ -147,8 +147,8 @@ namespace mRemoteNG.Tools
 
         private EscapeType DetermineEscapeType(string token)
         {
-            var escape = EscapeType.All;
-            var prefix = token[1];
+            EscapeType escape = EscapeType.All;
+            char prefix = token[1];
             switch (prefix)
             {
                 case '-':
@@ -164,7 +164,7 @@ namespace mRemoteNG.Tools
 
         private string GetVariableReplacement(string variable, string original)
         {
-            var replacement = "";
+            string replacement = "";
             if (_connectionInfo == null) return replacement;
             switch (variable.ToLowerInvariant())
             {
@@ -217,19 +217,19 @@ namespace mRemoteNG.Tools
         private string PerformReplacements(string input, List<Replacement> replacements)
         {
             int index;
-            var result = input;
+            string result = input;
 
             for (index = result.Length; index >= 0; index--)
             {
-                foreach (var replacement in replacements)
+                foreach (Replacement replacement in replacements)
                 {
                     if (replacement.Start != index)
                     {
                         continue;
                     }
 
-                    var before = result.Substring(0, replacement.Start);
-                    var after = result.Substring(replacement.Start + replacement.Length);
+                    string before = result.Substring(0, replacement.Start);
+                    string after = result.Substring(replacement.Start + replacement.Length);
                     result = before + replacement.Value + after;
                 }
             }

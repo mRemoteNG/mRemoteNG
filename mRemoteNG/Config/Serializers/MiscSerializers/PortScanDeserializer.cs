@@ -21,11 +21,11 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         public ConnectionTreeModel Deserialize(IEnumerable<ScanHost> scannedHosts)
         {
-            var connectionTreeModel = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection);
+            ConnectionTreeModel connectionTreeModel = new();
+            RootNodeInfo root = new(RootNodeType.Connection);
             connectionTreeModel.AddRootNode(root);
 
-            foreach (var host in scannedHosts)
+            foreach (ScanHost host in scannedHosts)
                 ImportScannedHost(host, root);
 
             return connectionTreeModel;
@@ -33,8 +33,8 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private void ImportScannedHost(ScanHost host, ContainerInfo parentContainer)
         {
-            var finalProtocol = default(ProtocolType);
-            var protocolValid = true;
+            ProtocolType finalProtocol = default(ProtocolType);
+            bool protocolValid = true;
 
             switch (_targetProtocolType)
             {
@@ -72,7 +72,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             }
 
             if (!protocolValid) return;
-            var newConnectionInfo = new ConnectionInfo
+            ConnectionInfo newConnectionInfo = new()
             {
                 Name = host.HostNameWithoutDomain,
                 Hostname = host.HostName,

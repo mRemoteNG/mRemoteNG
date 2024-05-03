@@ -27,7 +27,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
                 throw new ArgumentException("Unknown or unsupported RegistryHive value.", nameof(hive));
             path.ThrowIfNull(nameof(path));
 
-            using (var key = OpenSubKey(hive, path))
+            using (DisposableOptional<RegistryKey> key = OpenSubKey(hive, path))
             {
                 return key.Any()
                     ? key.First().GetSubKeyNames()
@@ -62,12 +62,12 @@ namespace mRemoteNG.Tools.WindowsRegistry
             path.ThrowIfNull(nameof(path));
             name.ThrowIfNull(nameof(name));
 
-            using (var key = OpenSubKey(hive, path))
+            using (DisposableOptional<RegistryKey> key = OpenSubKey(hive, path))
             {
                 if (!key.Any())
                     return null;
 
-                var keyValue = key.First().GetValue(name);
+                object keyValue = key.First().GetValue(name);
 
                 if (keyValue == null)
                     return null;
@@ -87,7 +87,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <returns>The boolean value of the specified property or the default value if not found or cannot be parsed.</returns>
         public bool GetBoolValue(RegistryHive hive, string path, string propertyName, bool defaultValue = false)
         {
-            var value = GetPropertyValue(hive, path, propertyName);
+            string value = GetPropertyValue(hive, path, propertyName);
 
             if (!string.IsNullOrEmpty(value))
             {
@@ -110,7 +110,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         /// <returns>The DWORD value from the Registry, or the specified default value.</returns>
         public int GetDwordValue(RegistryHive hive, string path, string propertyName, int defaultValue = 0)
         {
-            var value = GetPropertyValue(hive, path, propertyName);
+            string value = GetPropertyValue(hive, path, propertyName);
 
             if (int.TryParse(value, out int intValue))
             {
@@ -153,7 +153,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
             {
                 if (subKey != null)
                 {
-                    var value = subKey.GetValue(key.Name);
+                    object value = subKey.GetValue(key.Name);
                     if (value != null)
                         key.Value = value.ToString();
 
@@ -177,7 +177,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
                 throw new ArgumentException("Unknown or unsupported RegistryHive value.", nameof(hive));
             path.ThrowIfNull(nameof(path));
 
-            List<WindowsRegistryKey> list = new List<WindowsRegistryKey>();
+            List<WindowsRegistryKey> list = [];
             using (RegistryKey baseKey = RegistryKey.OpenBaseKey(hive, RegistryView.Default), key = baseKey.OpenSubKey(path))
             {
                 if (key != null)

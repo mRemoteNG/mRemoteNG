@@ -25,8 +25,8 @@ namespace mRemoteNG.Security.Authentication
 
         public bool Authenticate(SecureString password)
         {
-            var authenticated = false;
-            var attempts = 0;
+            bool authenticated = false;
+            int attempts = 0;
             while (!authenticated && attempts < MaxAttempts)
             {
                 try
@@ -37,7 +37,7 @@ namespace mRemoteNG.Security.Authentication
                 }
                 catch
                 {
-                    var providedPassword = _authenticationRequestor();
+                    Optional<SecureString> providedPassword = _authenticationRequestor();
                     if (!providedPassword.Any())
                         return false;
 

@@ -33,7 +33,7 @@ namespace mRemoteNG.UI.Controls
 
             if (Controls.Count > 0)
             {
-                for (var i = 0; i < Controls.Count; i++)
+                for (int i = 0; i < Controls.Count; i++)
                 {
                     //Remove those non-themable buttons
                     if (Controls[i].GetType().ToString().Equals("System.Windows.Forms.UpDownBase+UpDownButtons"))

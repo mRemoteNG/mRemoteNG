@@ -12,7 +12,7 @@ namespace mRemoteNG.Security.Factories
 
         public CryptoProviderFactory(BlockCipherEngines engine, BlockCipherModes mode)
         {
-            var cipherEngine = ChooseBlockCipherEngine(engine);
+            IBlockCipher cipherEngine = ChooseBlockCipherEngine(engine);
             _aeadBlockCipher = ChooseBlockCipherMode(mode, cipherEngine);
         }
 
@@ -21,34 +21,26 @@ namespace mRemoteNG.Security.Factories
             return new AeadCryptographyProvider(_aeadBlockCipher);
         }
 
-        private IBlockCipher ChooseBlockCipherEngine(BlockCipherEngines engine)
+        private static IBlockCipher ChooseBlockCipherEngine(BlockCipherEngines engine)
         {
-            switch (engine)
+            return engine switch
             {
-                case BlockCipherEngines.AES:
-                    return new AesEngine();
-                case BlockCipherEngines.Twofish:
-                    return new TwofishEngine();
-                case BlockCipherEngines.Serpent:
-                    return new SerpentEngine();
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(engine), engine, null);
-            }
+                BlockCipherEngines.AES => new AesEngine(),
+                BlockCipherEngines.Twofish => new TwofishEngine(),
+                BlockCipherEngines.Serpent => new SerpentEngine(),
+                _ => throw new ArgumentOutOfRangeException(nameof(engine), engine, null),
+            };
         }
 
-        private IAeadBlockCipher ChooseBlockCipherMode(BlockCipherModes mode, IBlockCipher blockCipher)
+        private static IAeadBlockCipher ChooseBlockCipherMode(BlockCipherModes mode, IBlockCipher blockCipher)
         {
-            switch (mode)
+            return mode switch
             {
-                case BlockCipherModes.GCM:
-                    return new GcmBlockCipher(blockCipher);
-                case BlockCipherModes.CCM:
-                    return new CcmBlockCipher(blockCipher);
-                case BlockCipherModes.EAX:
-                    return new EaxBlockCipher(blockCipher);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
-            }
+                BlockCipherModes.GCM => new GcmBlockCipher(blockCipher),
+                BlockCipherModes.CCM => new CcmBlockCipher(blockCipher),
+                BlockCipherModes.EAX => new EaxBlockCipher(blockCipher),
+                _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null),
+            };
         }
     }
 }

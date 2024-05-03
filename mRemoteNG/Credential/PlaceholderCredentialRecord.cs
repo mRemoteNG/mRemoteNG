@@ -9,11 +9,11 @@ using mRemoteNG.Resources.Language;
 namespace mRemoteNG.Credential
 {
     [SupportedOSPlatform("windows")]
-    public class PlaceholderCredentialRecord : ICredentialRecord
+    public class PlaceholderCredentialRecord(IEnumerable<Guid> id) : ICredentialRecord
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Guid Id { get; }
+        public Guid Id { get; } = id.FirstOrDefault();
 
         [ReadOnly(true)] public string Title { get; set; } = Language.CredentialUnavailable;
 
@@ -22,11 +22,6 @@ namespace mRemoteNG.Credential
         [ReadOnly(true)] public SecureString Password { get; set; } = new SecureString();
 
         [ReadOnly(true)] public string Domain { get; set; } = Language.CredentialUnavailable;
-
-        public PlaceholderCredentialRecord(IEnumerable<Guid> id)
-        {
-            Id = id.FirstOrDefault();
-        }
 
         public override string ToString() => Language.CredentialUnavailable;
     }

@@ -62,7 +62,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             txtCredentialsUsername.Text = Properties.OptionsCredentialsPage.Default.DefaultUsername;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
             txtCredentialsDomain.Text = Properties.OptionsCredentialsPage.Default.DefaultDomain;
             txtCredentialsUserViaAPI.Text = Properties.OptionsCredentialsPage.Default.UserViaAPIDefault;
@@ -84,7 +84,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             Properties.OptionsCredentialsPage.Default.DefaultUsername = txtCredentialsUsername.Text;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             Properties.OptionsCredentialsPage.Default.DefaultPassword = cryptographyProvider.Encrypt(txtCredentialsPassword.Text, Runtime.EncryptionKey);
             Properties.OptionsCredentialsPage.Default.DefaultDomain = txtCredentialsDomain.Text;
             Properties.OptionsCredentialsPage.Default.UserViaAPIDefault = txtCredentialsUserViaAPI.Text;

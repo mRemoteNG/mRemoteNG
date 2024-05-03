@@ -23,13 +23,13 @@ namespace mRemoteNG.Security.KeyDerivation
 
         public byte[] DeriveKey(string password, byte[] salt)
         {
-            var passwordInBytes = PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray());
+            byte[] passwordInBytes = PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray());
 
-            var keyGenerator = new Pkcs5S2ParametersGenerator();
+            Pkcs5S2ParametersGenerator keyGenerator = new();
             keyGenerator.Init(passwordInBytes, salt, _iterations);
 
-            var keyParameter = (KeyParameter)keyGenerator.GenerateDerivedMacParameters(_keyBitSize);
-            var keyBytes = keyParameter.GetKey();
+            KeyParameter keyParameter = (KeyParameter)keyGenerator.GenerateDerivedMacParameters(_keyBitSize);
+            byte[] keyBytes = keyParameter.GetKey();
             return keyBytes;
         }
     }

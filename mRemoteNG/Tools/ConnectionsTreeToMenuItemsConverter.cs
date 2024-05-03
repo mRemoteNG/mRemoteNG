@@ -19,13 +19,13 @@ namespace mRemoteNG.Tools
 
         public IEnumerable<ToolStripDropDownItem> CreateToolStripDropDownItems(ConnectionTreeModel connectionTreeModel)
         {
-            var rootNodes = connectionTreeModel.RootNodes;
+            List<ContainerInfo> rootNodes = connectionTreeModel.RootNodes;
             return CreateToolStripDropDownItems(rootNodes);
         }
 
         public IEnumerable<ToolStripDropDownItem> CreateToolStripDropDownItems(IEnumerable<ConnectionInfo> nodes)
         {
-            var dropDownList = new List<ToolStripDropDownItem>();
+            List<ToolStripDropDownItem> dropDownList = new();
             try
             {
                 dropDownList.AddRange(nodes.Select(CreateMenuItem));
@@ -40,22 +40,22 @@ namespace mRemoteNG.Tools
 
         private void AddSubMenuNodes(IEnumerable<ConnectionInfo> nodes, ToolStripDropDownItem toolStripMenuItem)
         {
-            foreach (var connectionInfo in nodes)
+            foreach (ConnectionInfo connectionInfo in nodes)
             {
-                var newItem = CreateMenuItem(connectionInfo);
+                ToolStripDropDownItem newItem = CreateMenuItem(connectionInfo);
                 toolStripMenuItem.DropDownItems.Add(newItem);
             }
         }
 
         private ToolStripDropDownItem CreateMenuItem(ConnectionInfo node)
         {
-            var menuItem = new ToolStripMenuItem
+            ToolStripMenuItem menuItem = new()
             {
                 Text = node.Name,
                 Tag = node
             };
 
-            var nodeAsContainer = node as ContainerInfo;
+            ContainerInfo nodeAsContainer = node as ContainerInfo;
             if (nodeAsContainer != null)
             {
                 menuItem.Image = Properties.Resources.FolderClosed_16x;

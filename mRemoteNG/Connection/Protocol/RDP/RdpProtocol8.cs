@@ -96,7 +96,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
             try
             {
-                var size = Fullscreen
+                Size size = Fullscreen
                     ? Screen.FromControl(Control).Bounds.Size
                     : Control.Size;
 

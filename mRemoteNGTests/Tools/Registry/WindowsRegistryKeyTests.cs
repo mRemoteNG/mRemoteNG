@@ -257,8 +257,10 @@ namespace mRemoteNGTests.Tools.Registry
                 Value = "Big Bang"
             };
 
-            WindowsRegistryKeyString StrKey = new();
-            StrKey.AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" };
+            WindowsRegistryKeyString StrKey = new()
+            {
+                AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" }
+            };
             StrKey.ConvertFromWindowsRegistryKey(TestKey);
 
             Assert.That(StrKey.IsKeyPresent, Is.EqualTo(true));
@@ -277,8 +279,10 @@ namespace mRemoteNGTests.Tools.Registry
                 Value = "ig ang"
             };
 
-            WindowsRegistryKeyString StrKey = new();
-            StrKey.AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" };
+            WindowsRegistryKeyString StrKey = new()
+            {
+                AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" }
+            };
             StrKey.ConvertFromWindowsRegistryKey(TestKey);
 
             Assert.That(StrKey.IsKeyPresent, Is.EqualTo(true));
@@ -297,9 +301,11 @@ namespace mRemoteNGTests.Tools.Registry
                 Value = "BiG BAng"
             };
 
-            WindowsRegistryKeyString StrKey = new();
-            StrKey.AllowedValues = new[] { "BiG BAng", "Big Bang Theory", "The Big Bang Theory" };
-            StrKey.IsCaseSensitiveValidation = true;
+            WindowsRegistryKeyString StrKey = new()
+            {
+                AllowedValues = new[] { "BiG BAng", "Big Bang Theory", "The Big Bang Theory" },
+                IsCaseSensitiveValidation = true
+            };
             StrKey.ConvertFromWindowsRegistryKey(TestKey);
 
             Assert.That(StrKey.IsKeyPresent, Is.EqualTo(true));
@@ -318,9 +324,11 @@ namespace mRemoteNGTests.Tools.Registry
                 Value = "BiG BAng"
             };
 
-            WindowsRegistryKeyString StrKey = new();
-            StrKey.AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" };
-            StrKey.IsCaseSensitiveValidation = true;
+            WindowsRegistryKeyString StrKey = new()
+            {
+                AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" },
+                IsCaseSensitiveValidation = true
+            };
             StrKey.ConvertFromWindowsRegistryKey(TestKey);
 
             Assert.That(StrKey.IsKeyPresent, Is.EqualTo(true));
@@ -339,8 +347,10 @@ namespace mRemoteNGTests.Tools.Registry
                 Value = "ig ang"
             };
 
-            WindowsRegistryKeyString StrKey = new();
-            StrKey.AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" };
+            WindowsRegistryKeyString StrKey = new()
+            {
+                AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" }
+            };
             StrKey.ConvertFromWindowsRegistryKey(TestKey);
 
             Assert.That(StrKey.IsKeyPresent, Is.EqualTo(true));
@@ -360,8 +370,10 @@ namespace mRemoteNGTests.Tools.Registry
                 Value = "ig ang"
             };
 
-            WindowsRegistryKeyString StrKey = new();
-            StrKey.AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" };
+            WindowsRegistryKeyString StrKey = new()
+            {
+                AllowedValues = new[] { "Big Bang", "Big Bang Theory", "The Big Bang Theory" }
+            };
             StrKey.ConvertFromWindowsRegistryKey(TestKey, "Big Bang Theory");
 
             Assert.That(StrKey.IsKeyPresent, Is.EqualTo(true));

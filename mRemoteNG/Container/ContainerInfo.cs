@@ -16,7 +16,7 @@ namespace mRemoteNG.Container
     {
         private bool _isExpanded;
 
-        [Browsable(false)] public List<ConnectionInfo> Children { get; } = new List<ConnectionInfo>();
+        [Browsable(false)] public List<ConnectionInfo> Children { get; } = [];
 
         [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
         public bool IsExpanded
@@ -60,7 +60,7 @@ namespace mRemoteNG.Container
 
         public void AddChildAbove(ConnectionInfo newChildItem, ConnectionInfo reference)
         {
-            var newChildIndex = Children.IndexOf(reference);
+            int newChildIndex = Children.IndexOf(reference);
             if (newChildIndex < 0)
                 newChildIndex = Children.Count;
             AddChildAt(newChildItem, newChildIndex);
@@ -68,7 +68,7 @@ namespace mRemoteNG.Container
 
         public void AddChildBelow(ConnectionInfo newChildItem, ConnectionInfo reference)
         {
-            var newChildIndex = Children.IndexOf(reference) + 1;
+            int newChildIndex = Children.IndexOf(reference) + 1;
             if (newChildIndex > Children.Count || newChildIndex < 1)
                 newChildIndex = Children.Count;
             AddChildAt(newChildItem, newChildIndex);
@@ -86,7 +86,7 @@ namespace mRemoteNG.Container
 
         public void AddChildRange(IEnumerable<ConnectionInfo> newChildren)
         {
-            foreach (var child in newChildren)
+            foreach (ConnectionInfo child in newChildren)
             {
                 AddChild(child);
             }
@@ -103,7 +103,7 @@ namespace mRemoteNG.Container
 
         public void RemoveChildRange(IEnumerable<ConnectionInfo> removalTargets)
         {
-            foreach (var child in removalTargets)
+            foreach (ConnectionInfo child in removalTargets)
             {
                 RemoveChild(child);
             }
@@ -111,7 +111,7 @@ namespace mRemoteNG.Container
 
         public void SetChildPosition(ConnectionInfo child, int newIndex)
         {
-            var originalIndex = Children.IndexOf(child);
+            int originalIndex = Children.IndexOf(child);
             if (originalIndex < 0 || originalIndex == newIndex || newIndex < 0) return;
             Children.Remove(child);
             if (newIndex > Children.Count) newIndex = Children.Count;
@@ -121,14 +121,14 @@ namespace mRemoteNG.Container
 
         public void SetChildAbove(ConnectionInfo childToPromote, ConnectionInfo reference)
         {
-            var newIndex = GetNewChildIndexAboveReference(childToPromote, reference);
+            int newIndex = GetNewChildIndexAboveReference(childToPromote, reference);
             SetChildPosition(childToPromote, newIndex);
         }
 
         private int GetNewChildIndexAboveReference(ConnectionInfo childToPromote, ConnectionInfo reference)
         {
-            var originalIndex = Children.IndexOf(childToPromote);
-            var newIndex = Children.IndexOf(reference);
+            int originalIndex = Children.IndexOf(childToPromote);
+            int newIndex = Children.IndexOf(reference);
             if (originalIndex < newIndex)
                 newIndex -= 1;
             return newIndex < 0 ? 0 : newIndex;
@@ -136,14 +136,14 @@ namespace mRemoteNG.Container
 
         public void SetChildBelow(ConnectionInfo childToPromote, ConnectionInfo reference)
         {
-            var newIndex = GetNewChildIndexBelowReference(childToPromote, reference);
+            int newIndex = GetNewChildIndexBelowReference(childToPromote, reference);
             SetChildPosition(childToPromote, newIndex);
         }
 
         private int GetNewChildIndexBelowReference(ConnectionInfo childToPromote, ConnectionInfo reference)
         {
-            var originalIndex = Children.IndexOf(childToPromote);
-            var newIndex = Children.IndexOf(reference);
+            int originalIndex = Children.IndexOf(childToPromote);
+            int newIndex = Children.IndexOf(reference);
             if (originalIndex > newIndex)
                 newIndex += 1;
             return newIndex < 0 ? 0 : newIndex;
@@ -151,13 +151,13 @@ namespace mRemoteNG.Container
 
         public void PromoteChild(ConnectionInfo child)
         {
-            var originalIndex = Children.IndexOf(child);
+            int originalIndex = Children.IndexOf(child);
             SetChildPosition(child, originalIndex - 1);
         }
 
         public void DemoteChild(ConnectionInfo child)
         {
-            var originalIndex = Children.IndexOf(child);
+            int originalIndex = Children.IndexOf(child);
             SetChildPosition(child, originalIndex + 1);
         }
 
@@ -169,7 +169,7 @@ namespace mRemoteNG.Container
         public void SortOn<TProperty>(Func<ConnectionInfo, TProperty> propertyToCompare, ListSortDirection sortDirection = ListSortDirection.Ascending)
             where TProperty : IComparable<TProperty>
         {
-            var connectionComparer = new ConnectionInfoComparer<TProperty>(propertyToCompare)
+            ConnectionInfoComparer<TProperty> connectionComparer = new(propertyToCompare)
             {
                 SortDirection = sortDirection
             };
@@ -185,7 +185,7 @@ namespace mRemoteNG.Container
         public void SortOnRecursive<TProperty>(Func<ConnectionInfo, TProperty> propertyToCompare, ListSortDirection sortDirection = ListSortDirection.Ascending)
             where TProperty : IComparable<TProperty>
         {
-            foreach (var child in Children.OfType<ContainerInfo>())
+            foreach (ContainerInfo child in Children.OfType<ContainerInfo>())
                 child.SortOnRecursive(propertyToCompare, sortDirection);
             SortOn(propertyToCompare, sortDirection);
         }
@@ -193,13 +193,13 @@ namespace mRemoteNG.Container
         // Deep clone, recursive
         public override ConnectionInfo Clone()
         {
-            var newContainer = new ContainerInfo();
+            ContainerInfo newContainer = new();
             newContainer.CopyFrom(this);
-            newContainer.OpenConnections = new ProtocolList();
+            newContainer.OpenConnections = [];
             newContainer.Inheritance = Inheritance.Clone(newContainer);
-            foreach (var child in Children.ToArray())
+            foreach (ConnectionInfo child in Children.ToArray())
             {
-                var newChild = child.Clone();
+                ConnectionInfo newChild = child.Clone();
                 newChild.RemoveParent();
                 newContainer.AddChild(newChild);
             }
@@ -215,11 +215,11 @@ namespace mRemoteNG.Container
 
         public IEnumerable<ConnectionInfo> GetRecursiveChildList()
         {
-            var childList = new List<ConnectionInfo>();
-            foreach (var child in Children)
+            List<ConnectionInfo> childList = new();
+            foreach (ConnectionInfo child in Children)
             {
                 childList.Add(child);
-                var childContainer = child as ContainerInfo;
+                ContainerInfo childContainer = child as ContainerInfo;
                 if (childContainer != null)
                     childList.AddRange(GetRecursiveChildList(childContainer));
             }
@@ -229,11 +229,11 @@ namespace mRemoteNG.Container
 
         private IEnumerable<ConnectionInfo> GetRecursiveChildList(ContainerInfo container)
         {
-            var childList = new List<ConnectionInfo>();
-            foreach (var child in container.Children)
+            List<ConnectionInfo> childList = new();
+            foreach (ConnectionInfo child in container.Children)
             {
                 childList.Add(child);
-                var childContainer = child as ContainerInfo;
+                ContainerInfo childContainer = child as ContainerInfo;
                 if (childContainer != null)
                     childList.AddRange(GetRecursiveChildList(childContainer));
             }
@@ -243,12 +243,12 @@ namespace mRemoteNG.Container
 
         public IEnumerable<ConnectionInfo> GetRecursiveFavoriteChildList()
         {
-            var childList = new List<ConnectionInfo>();
-            foreach (var child in Children)
+            List<ConnectionInfo> childList = new();
+            foreach (ConnectionInfo child in Children)
             {
                 if (child.Favorite && child.GetTreeNodeType() == TreeNodeType.Connection)
                     childList.Add(child);
-                var childContainer = child as ContainerInfo;
+                ContainerInfo childContainer = child as ContainerInfo;
                 if (childContainer != null)
                     childList.AddRange(GetRecursiveFavoritChildList(childContainer));
             }
@@ -261,9 +261,9 @@ namespace mRemoteNG.Container
         /// </summary>
         public void ApplyConnectionPropertiesToChildren()
         {
-            var children = GetRecursiveChildList();
+            IEnumerable<ConnectionInfo> children = GetRecursiveChildList();
 
-            foreach (var child in children)
+            foreach (ConnectionInfo child in children)
             {
                 child.CopyFrom(this);
             }
@@ -275,9 +275,9 @@ namespace mRemoteNG.Container
         /// </summary>
         public void ApplyInheritancePropertiesToChildren()
         {
-            var children = GetRecursiveChildList();
+            IEnumerable<ConnectionInfo> children = GetRecursiveChildList();
 
-            foreach (var child in children)
+            foreach (ConnectionInfo child in children)
             {
                 child.Inheritance = Inheritance.Clone(child);
             }
@@ -285,12 +285,12 @@ namespace mRemoteNG.Container
 
         private IEnumerable<ConnectionInfo> GetRecursiveFavoritChildList(ContainerInfo container)
         {
-            var childList = new List<ConnectionInfo>();
-            foreach (var child in container.Children)
+            List<ConnectionInfo> childList = new();
+            foreach (ConnectionInfo child in container.Children)
             {
                 if (child.Favorite && child.GetTreeNodeType() == TreeNodeType.Connection)
                     childList.Add(child);
-                var childContainer = child as ContainerInfo;
+                ContainerInfo childContainer = child as ContainerInfo;
                 if (childContainer != null)
                     childList.AddRange(GetRecursiveFavoritChildList(childContainer));
             }
@@ -300,7 +300,7 @@ namespace mRemoteNG.Container
         protected virtual void SubscribeToChildEvents(ConnectionInfo child)
         {
             child.PropertyChanged += RaisePropertyChangedEvent;
-            var childAsContainer = child as ContainerInfo;
+            ContainerInfo childAsContainer = child as ContainerInfo;
             if (childAsContainer == null) return;
             childAsContainer.CollectionChanged += RaiseCollectionChangedEvent;
         }
@@ -308,7 +308,7 @@ namespace mRemoteNG.Container
         protected virtual void UnsubscribeToChildEvents(ConnectionInfo child)
         {
             child.PropertyChanged -= RaisePropertyChangedEvent;
-            var childAsContainer = child as ContainerInfo;
+            ContainerInfo childAsContainer = child as ContainerInfo;
             if (childAsContainer == null) return;
             childAsContainer.CollectionChanged -= RaiseCollectionChangedEvent;
         }

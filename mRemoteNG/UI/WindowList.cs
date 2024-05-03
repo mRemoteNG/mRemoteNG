@@ -43,7 +43,7 @@ namespace mRemoteNG.UI
 
         public void AddRange(BaseWindow[] uiWindow)
         {
-            foreach (var uW in uiWindow)
+            foreach (BaseWindow uW in uiWindow)
             {
                 List.Add(uW);
             }
@@ -57,7 +57,7 @@ namespace mRemoteNG.UI
         public BaseWindow FromString(string uiWindow)
         {
             CleanUp();
-            for (var i = 0; i < List.Count; i++)
+            for (int i = 0; i < List.Count; i++)
             {
                 if (this[i].Text == uiWindow.Replace("&", "&&"))
                 {
@@ -73,7 +73,7 @@ namespace mRemoteNG.UI
 
         private void CleanUp()
         {
-            for (var i = 0; i <= List.Count - 1; i++)
+            for (int i = 0; i <= List.Count - 1; i++)
             {
                 if (i > List.Count - 1)
                 {
@@ -81,7 +81,7 @@ namespace mRemoteNG.UI
                     return;
                 }
 
-                var baseWindow = List[i] as BaseWindow;
+                BaseWindow baseWindow = List[i] as BaseWindow;
                 if (baseWindow != null && !baseWindow.IsDisposed) continue;
                 List.RemoveAt(i);
                 CleanUp();
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI
         {
             try
             {
-                var objectIndex = List.IndexOf(Index);
+                int objectIndex = List.IndexOf(Index);
                 return IndexByNumber(objectIndex);
             }
             catch (ArgumentOutOfRangeException e)

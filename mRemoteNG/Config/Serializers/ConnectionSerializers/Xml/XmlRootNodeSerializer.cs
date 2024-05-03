@@ -12,7 +12,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         public XElement SerializeRootNodeInfo(RootNodeInfo rootNodeInfo, ICryptographyProvider cryptographyProvider, Version version, bool fullFileEncryption = false)
         {
             XNamespace xmlNamespace = "http://mremoteng.org";
-            var element = new XElement(xmlNamespace + "Connections");
+            XElement element = new(xmlNamespace + "Connections");
             element.Add(new XAttribute(XNamespace.Xmlns + "mrng", xmlNamespace));
             element.Add(new XAttribute(XName.Get("Name"), rootNodeInfo.Name));
             element.Add(new XAttribute(XName.Get("Export"), "false"));
@@ -27,9 +27,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private XAttribute CreateProtectedAttribute(RootNodeInfo rootNodeInfo, ICryptographyProvider cryptographyProvider)
         {
-            var attribute = new XAttribute(XName.Get("Protected"), "");
-            var plainText = rootNodeInfo.Password ? "ThisIsProtected" : "ThisIsNotProtected";
-            var encryptionPassword = rootNodeInfo.PasswordString.ConvertToSecureString();
+            XAttribute attribute = new(XName.Get("Protected"), "");
+            string plainText = rootNodeInfo.Password ? "ThisIsProtected" : "ThisIsNotProtected";
+            System.Security.SecureString encryptionPassword = rootNodeInfo.PasswordString.ConvertToSecureString();
             attribute.Value = cryptographyProvider.Encrypt(plainText, encryptionPassword);
             return attribute;
         }

@@ -12,7 +12,7 @@ namespace mRemoteNG.Connection.Protocol
         {
             get
             {
-                var @base = index as ProtocolBase;
+                ProtocolBase @base = index as ProtocolBase;
                 if (@base != null)
                     return @base;
                 if (index is int)
@@ -32,7 +32,7 @@ namespace mRemoteNG.Connection.Protocol
 
         public void AddRange(ProtocolBase[] cProt)
         {
-            foreach (var cP in cProt)
+            foreach (ProtocolBase cP in cProt)
             {
                 List.Add(cP);
             }

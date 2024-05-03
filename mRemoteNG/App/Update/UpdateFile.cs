@@ -34,19 +34,19 @@ namespace mRemoteNG.App.Update
             // no separators means no valid update data...
             if (content.Trim().IndexOfAny(keyValueSeparators) == -1) return;
 
-            using (var sr = new StringReader(content))
+            using (StringReader sr = new(content))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    var trimmedLine = line.Trim();
+                    string trimmedLine = line.Trim();
                     if (trimmedLine.Length == 0)
                         continue;
 
                     if (trimmedLine.Substring(0, 1).IndexOfAny(commentCharacters) != -1)
                         continue;
 
-                    var parts = trimmedLine.Split(keyValueSeparators, 2);
+                    string[] parts = trimmedLine.Split(keyValueSeparators, 2);
                     if (parts.Length != 2)
                         continue;
 
@@ -68,13 +68,13 @@ namespace mRemoteNG.App.Update
 
         public Version GetVersion(string key = "Version")
         {
-            var value = GetString(key);
+            string value = GetString(key);
             return string.IsNullOrEmpty(value) ? null : new Version(value);
         }
 
         public Uri GetUri(string key)
         {
-            var value = GetString(key);
+            string value = GetString(key);
             return string.IsNullOrEmpty(value) ? null : new Uri(value);
         }
 
@@ -85,8 +85,8 @@ namespace mRemoteNG.App.Update
 
         public string GetFileName()
         {
-            var value = GetString("dURL");
-            var sv = value.Split('/');
+            string value = GetString("dURL");
+            string[] sv = value.Split('/');
             return sv[sv.Length - 1];
         }
 

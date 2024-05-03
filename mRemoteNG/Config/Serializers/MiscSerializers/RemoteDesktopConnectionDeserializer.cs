@@ -14,20 +14,20 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         public ConnectionTreeModel Deserialize(string rdcFileContent)
         {
-            var connectionTreeModel = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection);
+            ConnectionTreeModel connectionTreeModel = new();
+            RootNodeInfo root = new(RootNodeType.Connection);
             connectionTreeModel.AddRootNode(root);
-            var connectionInfo = new ConnectionInfo();
-            foreach (var line in rdcFileContent.Split(Environment.NewLine.ToCharArray()))
+            ConnectionInfo connectionInfo = new();
+            foreach (string line in rdcFileContent.Split(Environment.NewLine.ToCharArray()))
             {
-                var parts = line.Split(new[] { ':' }, 3);
+                string[] parts = line.Split(new[] { ':' }, 3);
                 if (parts.Length < 3)
                 {
                     continue;
                 }
 
-                var key = parts[0].Trim();
-                var value = parts[2].Trim();
+                string key = parts[0].Trim();
+                string value = parts[2].Trim();
 
                 SetConnectionInfoParameter(connectionInfo, key, value);
             }
@@ -43,7 +43,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             switch (key.ToLower())
             {
                 case "full address":
-                    var uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + value);
+                    Uri uri = new("dummyscheme" + Uri.SchemeDelimiter + value);
                     if (!string.IsNullOrEmpty(uri.Host))
                         connectionInfo.Hostname = uri.Host;
                     if (uri.Port != -1)

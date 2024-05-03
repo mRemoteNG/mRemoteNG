@@ -19,9 +19,9 @@ namespace mRemoteNG.App.Initialization
 
                 IMessage[] messages = args.NewItems.Cast<IMessage>().ToArray();
 
-                foreach (var printer in messageWriterList)
+                foreach (IMessageWriter printer in messageWriterList)
                 {
-                    foreach (var message in messages)
+                    foreach (IMessage message in messages)
                     {
                         printer.Write(message);
                     }

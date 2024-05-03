@@ -44,7 +44,7 @@ ADD RedirectClipboard bit NOT NULL,
     InheritUseEnhancedMode bit NOT NULL;
 UPDATE tblRoot
     SET ConfVersion='2.7'";
-                var dbCommand = _databaseConnector.DbCommand(sqlText);
+                System.Data.Common.DbCommand dbCommand = _databaseConnector.DbCommand(sqlText);
                 dbCommand.ExecuteNonQuery();
             }
             catch (SqlException)

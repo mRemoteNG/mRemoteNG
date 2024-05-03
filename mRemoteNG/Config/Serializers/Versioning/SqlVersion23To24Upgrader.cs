@@ -30,7 +30,7 @@ ALTER TABLE tblCons
 ADD UseCredSsp bit NOT NULL DEFAULT 1,
     InheritUseCredSsp bit NOT NULL DEFAULT 0;";
 
-            var dbCommand = _databaseConnector.DbCommand(sqlText);
+            System.Data.Common.DbCommand dbCommand = _databaseConnector.DbCommand(sqlText);
 
             dbCommand.ExecuteNonQuery();
 

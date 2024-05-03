@@ -24,7 +24,7 @@ namespace mRemoteNG.Connection.Protocol
     {
         private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
         private bool _isPuttyNg;
-        private readonly DisplayProperties _display = new DisplayProperties();
+        private readonly DisplayProperties _display = new();
 
         #region Public Properties
 
@@ -63,7 +63,7 @@ namespace mRemoteNG.Connection.Protocol
             string data = (string)oData;
             string random = data[..8];
             string password = data[8..];
-            var server = new NamedPipeServerStream($"mRemoteNGSecretPipe{random}");
+            NamedPipeServerStream server = new($"mRemoteNGSecretPipe{random}");
             server.WaitForConnection();
             StreamWriter writer = new(server);
             writer.Write(password);
@@ -88,7 +88,7 @@ namespace mRemoteNG.Connection.Protocol
                     }
                 };
 
-                var arguments = new CommandLineArguments { EscapeForShell = false };
+                CommandLineArguments arguments = new() { EscapeForShell = false };
 
                 arguments.Add("-load", InterfaceControl.Info.PuttySession);
 
@@ -99,10 +99,10 @@ namespace mRemoteNG.Connection.Protocol
                     if (PuttyProtocol == Putty_Protocol.ssh)
                     {
 
-                        var username = InterfaceControl.Info?.Username ?? "";
-                        var password = InterfaceControl.Info?.Password ?? "";
-                        var domain = InterfaceControl.Info?.Domain ?? "";
-                        var UserViaAPI = InterfaceControl.Info?.UserViaAPI ?? "";
+                        string username = InterfaceControl.Info?.Username ?? "";
+                        string password = InterfaceControl.Info?.Password ?? "";
+                        string domain = InterfaceControl.Info?.Domain ?? "";
+                        string UserViaAPI = InterfaceControl.Info?.UserViaAPI ?? "";
                         string privatekey = "";
 
                         // access secret server api if necessary
@@ -116,8 +116,10 @@ namespace mRemoteNG.Connection.Protocol
                                 {
                                     optionalTemporaryPrivateKeyPath = Path.GetTempFileName();
                                     File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
-                                    FileInfo fileInfo = new FileInfo(optionalTemporaryPrivateKeyPath);
-                                    fileInfo.Attributes = FileAttributes.Temporary;
+                                    FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
+                                    {
+                                        Attributes = FileAttributes.Temporary
+                                    };
                                 }
                             }
                             catch (Exception ex)
@@ -160,7 +162,7 @@ namespace mRemoteNG.Connection.Protocol
                         {
                             if (Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
                             {
-                                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                                LegacyRijndaelCryptographyProvider cryptographyProvider = new();
                                 password = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
                             }
                         }
@@ -178,7 +180,7 @@ namespace mRemoteNG.Connection.Protocol
                             {
                                 string random = string.Join("", Guid.NewGuid().ToString("n").Take(8).Select(o => o));
                                 // write data to pipe
-                                var thread = new Thread(new ParameterizedThreadStart(CreatePipe));
+                                Thread thread = new(new ParameterizedThreadStart(CreatePipe));
                                 thread.Start($"{random}{password}");
                                 // start putty with piped password
                                 arguments.Add("-pwfile", $"\\\\.\\PIPE\\mRemoteNGSecretPipe{random}");
@@ -216,7 +218,7 @@ namespace mRemoteNG.Connection.Protocol
                 PuttyProcess.Start();
                 PuttyProcess.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
-                var startTicks = Environment.TickCount;
+                int startTicks = Environment.TickCount;
                 while (PuttyHandle.ToInt32() == 0 &
                        Environment.TickCount < startTicks + Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
                 {
@@ -249,7 +251,7 @@ namespace mRemoteNG.Connection.Protocol
                 if (!string.IsNullOrEmpty(InterfaceControl.Info?.OpeningCommand))
                 {
                     NativeMethods.SetForegroundWindow(PuttyHandle);
-                    var finalCommand = InterfaceControl.Info.OpeningCommand.TrimEnd() + "\n";
+                    string finalCommand = InterfaceControl.Info.OpeningCommand.TrimEnd() + "\n";
                     SendKeys.SendWait(finalCommand);
                 }
 
@@ -299,8 +301,8 @@ namespace mRemoteNG.Connection.Protocol
                 }
                 else
                 {
-                    var scaledFrameBorderHeight = _display.ScaleHeight(SystemInformation.FrameBorderSize.Height);
-                    var scaledFrameBorderWidth = _display.ScaleWidth(SystemInformation.FrameBorderSize.Width);
+                    int scaledFrameBorderHeight = _display.ScaleHeight(SystemInformation.FrameBorderSize.Height);
+                    int scaledFrameBorderWidth = _display.ScaleWidth(SystemInformation.FrameBorderSize.Width);
 
                     NativeMethods.MoveWindow(PuttyHandle, -scaledFrameBorderWidth,
                                              -(SystemInformation.CaptionHeight + scaledFrameBorderHeight),

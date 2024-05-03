@@ -35,7 +35,7 @@ namespace mRemoteNG.UI
         /// <param name="showCancelButton"></param>
         public static void ShowLoadConnectionsFailedDialog(string connectionFileName, string messageText, bool showCancelButton)
         {
-            var commandButtons = new List<string>
+            List<string> commandButtons = new()
             {
                 Language.ConfigurationCreateNew,
                 Language.OpenADifferentFile,
@@ -45,7 +45,7 @@ namespace mRemoteNG.UI
             if (showCancelButton)
                 commandButtons.Add(Language._Cancel);
 
-            var answered = false;
+            bool answered = false;
             while (!answered)
             {
                 try
@@ -55,7 +55,7 @@ namespace mRemoteNG.UI
                     switch (CTaskDialog.CommandButtonResult)
                     {
                         case 0: // New
-                            var saveAsDialog = ConnectionsSaveAsDialog();
+                            SaveFileDialog saveAsDialog = ConnectionsSaveAsDialog();
                             saveAsDialog.ShowDialog();
                             Runtime.ConnectionsService.NewConnectionsFile(saveAsDialog.FileName);
                             answered = true;

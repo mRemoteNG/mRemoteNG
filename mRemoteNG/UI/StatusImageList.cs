@@ -16,14 +16,12 @@ namespace mRemoteNG.UI
 
         public StatusImageList()
         {
-            var display = new DisplayProperties();
+            DisplayProperties display = new();
 
             ImageList = new ImageList
             {
                 ColorDepth = ColorDepth.Depth32Bit,
-                ImageSize = new Size(
-                                     (int)Math.Round(16 * display.ResolutionScalingFactor.Width),
-                                     (int)Math.Round(16 * display.ResolutionScalingFactor.Height)),
+                ImageSize = new Size((int)Math.Round(16 * display.ResolutionScalingFactor.Width), (int)Math.Round(16 * display.ResolutionScalingFactor.Height)),
                 TransparentColor = Color.Transparent
             };
 
@@ -37,7 +35,7 @@ namespace mRemoteNG.UI
 
         public Image GetImage(ConnectionInfo connectionInfo)
         {
-            var key = GetKey(connectionInfo);
+            string key = GetKey(connectionInfo);
             return ImageList.Images.ContainsKey(key)
                 ? ImageList.Images[key]
                 : null;
@@ -55,7 +53,7 @@ namespace mRemoteNG.UI
 
         private static string BuildConnectionIconName(string icon, bool connected)
         {
-            var status = connected ? "Play" : "Default";
+            string status = connected ? "Play" : "Default";
             return $"Connection_{icon}_{status}";
         }
 
@@ -68,25 +66,24 @@ namespace mRemoteNG.UI
                 return DefaultConnectionIcon;
             }
 
-            var connected = connection.OpenConnections.Count > 0;
-            var name = BuildConnectionIconName(connection.Icon, connected);
+            bool connected = connection.OpenConnections.Count > 0;
+            string name = BuildConnectionIconName(connection.Icon, connected);
             if (ImageList.Images.ContainsKey(name)) return name;
-            var image = ConnectionIcon.FromString(connection.Icon);
+            Icon image = ConnectionIcon.FromString(connection.Icon);
             if (image == null)
             {
                 return DefaultConnectionIcon;
             }
 
             ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), image);
-            ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true),
-                                 Overlay(image, Properties.Resources.ConnectedOverlay));
+            ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true), Overlay(image, Properties.Resources.ConnectedOverlay));
             return name;
         }
 
         private static Bitmap Overlay(Icon background, Image foreground)
         {
-            var result = new Bitmap(background.ToBitmap(), new Size(16, 16));
-            using (var gr = Graphics.FromImage(result))
+            Bitmap result = new(background.ToBitmap(), new Size(16, 16));
+            using (Graphics gr = Graphics.FromImage(result))
             {
                 gr.DrawImage(foreground, new Rectangle(0, 0, foreground.Width, foreground.Height));
             }
@@ -104,9 +101,7 @@ namespace mRemoteNG.UI
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionStackTrace(
-                                                                $"Unable to fill the image list of type {nameof(StatusImageList)}",
-                                                                ex);
+                Runtime.MessageCollector.AddExceptionStackTrace($"Unable to fill the image list of type {nameof(StatusImageList)}", ex);
             }
         }
 

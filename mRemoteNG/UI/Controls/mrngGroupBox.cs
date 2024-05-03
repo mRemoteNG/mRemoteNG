@@ -37,9 +37,9 @@ namespace mRemoteNG.UI.Controls
             }
 
             //Reusing the textbox colors
-            var titleColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground");
+            Color titleColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Foreground");
             //var backColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Backgorund");
-            var lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Line");
+            Color lineColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("GroupBox_Line");
 
             if (!Enabled)
             {
@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Controls
 
 
             //var state = Enabled ? GroupBoxState.Normal : GroupBoxState.Disabled;
-            var flags = TextFormatFlags.PreserveGraphicsTranslateTransform | TextFormatFlags.PreserveGraphicsClipping |
+            TextFormatFlags flags = TextFormatFlags.PreserveGraphicsTranslateTransform | TextFormatFlags.PreserveGraphicsClipping |
                         TextFormatFlags.TextBoxControl | TextFormatFlags.WordBreak;
 
             if (!ShowKeyboardCues)
@@ -61,10 +61,10 @@ namespace mRemoteNG.UI.Controls
             //No clear backgorund, this control is transparently
             //e.Graphics.FillRectangle(new SolidBrush(backColor), 0, 0, Width, Height);
 
-            var bounds = new Rectangle(0, 0, Width, Height);
-            var rectangle = bounds;
+            Rectangle bounds = new(0, 0, Width, Height);
+            Rectangle rectangle = bounds;
             rectangle.Width -= 8;
-            var size = TextRenderer.MeasureText(e.Graphics, Text, Font, new Size(rectangle.Width, rectangle.Height),
+            Size size = TextRenderer.MeasureText(e.Graphics, Text, Font, new Size(rectangle.Width, rectangle.Height),
                                                 flags);
             rectangle.Width = size.Width;
             rectangle.Height = size.Height;
@@ -76,9 +76,9 @@ namespace mRemoteNG.UI.Controls
 
             if (rectangle.Width > 0)
                 rectangle.Inflate(2, 0);
-            using (var pen = new Pen(lineColor))
+            using (Pen pen = new(lineColor))
             {
-                var num = bounds.Top + (Font.Height / 2);
+                int num = bounds.Top + (Font.Height / 2);
                 //Left line
                 e.Graphics.DrawLine(pen, bounds.Left + Padding.Left, num - Padding.Top, bounds.Left + Padding.Left,
                                     bounds.Height - Padding.Bottom);

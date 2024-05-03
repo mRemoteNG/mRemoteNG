@@ -107,7 +107,7 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         string GetLargeText()
         {
-            var lines = Text.Split('\n');
+            string[] lines = Text.Split('\n');
             return lines[0];
         }
 
@@ -116,31 +116,31 @@ namespace mRemoteNG.UI.TaskDialog
             if (Text.IndexOf('\n') < 0)
                 return "";
 
-            var s = Text;
-            var lines = s.Split('\n');
+            string s = Text;
+            string[] lines = s.Split('\n');
             s = "";
-            for (var i = 1; i < lines.Length; i++)
+            for (int i = 1; i < lines.Length; i++)
                 s += lines[i] + "\n";
             return s.Trim('\n');
         }
 
         SizeF GetLargeTextSizeF()
         {
-            var x = LEFT_MARGIN + ARROW_WIDTH + 5;
-            var mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F); // presume RIGHT_MARGIN = LEFT_MARGIN
-            var g = Graphics.FromHwnd(Handle);
-            var textSize = g.MeasureString(GetLargeText(), Font, mzSize);
+            int x = LEFT_MARGIN + ARROW_WIDTH + 5;
+            SizeF mzSize = new(Width - x - LEFT_MARGIN, 5000.0F); // presume RIGHT_MARGIN = LEFT_MARGIN
+            Graphics g = Graphics.FromHwnd(Handle);
+            SizeF textSize = g.MeasureString(GetLargeText(), Font, mzSize);
             return textSize;
         }
 
         SizeF GetSmallTextSizeF()
         {
-            var s = GetSmallText();
+            string s = GetSmallText();
             if (s == "") return new SizeF(0, 0);
-            var x = LEFT_MARGIN + ARROW_WIDTH + 8; // <- indent small text slightly more
-            var mzSize = new SizeF(Width - x - LEFT_MARGIN, 5000.0F); // presume RIGHT_MARGIN = LEFT_MARGIN
-            var g = Graphics.FromHwnd(Handle);
-            var textSize = g.MeasureString(s, SmallFont, mzSize);
+            int x = LEFT_MARGIN + ARROW_WIDTH + 8; // <- indent small text slightly more
+            SizeF mzSize = new(Width - x - LEFT_MARGIN, 5000.0F); // presume RIGHT_MARGIN = LEFT_MARGIN
+            Graphics g = Graphics.FromHwnd(Handle);
+            SizeF textSize = g.MeasureString(s, SmallFont, mzSize);
             return textSize;
         }
 
@@ -172,10 +172,10 @@ namespace mRemoteNG.UI.TaskDialog
 
             const LinearGradientMode mode = LinearGradientMode.Vertical;
 
-            var newRect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1,
+            Rectangle newRect = new(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - 1,
                                         ClientRectangle.Height - 1);
 
-            var img = imgArrow1;
+            Image img = imgArrow1;
 
 
             Color back;
@@ -216,15 +216,15 @@ namespace mRemoteNG.UI.TaskDialog
             }
             else
             {
-                var brush = new LinearGradientBrush(newRect, back, back, mode);
+                LinearGradientBrush brush = new(newRect, back, back, mode);
                 e.Graphics.FillRectangle(brush, newRect);
                 e.Graphics.DrawRectangle(new Pen(border, 1), newRect);
             }
 
-            var largetext = GetLargeText();
-            var smalltext = GetSmallText();
+            string largetext = GetLargeText();
+            string smalltext = GetSmallText();
 
-            var szL = GetLargeTextSizeF();
+            SizeF szL = GetLargeTextSizeF();
             //e.Graphics.DrawString(largetext, base.Font, new SolidBrush(text_color), new RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN), szL));
             TextRenderer.DrawText(e.Graphics, largetext, Font,
                                   new Rectangle(LEFT_MARGIN + imgArrow1.Width + 5, TOP_MARGIN, (int)szL.Width,
@@ -233,7 +233,7 @@ namespace mRemoteNG.UI.TaskDialog
 
             if (smalltext != "")
             {
-                var szS = GetSmallTextSizeF();
+                SizeF szS = GetSmallTextSizeF();
                 e.Graphics.DrawString(smalltext, SmallFont, new SolidBrush(fore),
                                       new
                                           RectangleF(new PointF(LEFT_MARGIN + imgArrow1.Width + 8, TOP_MARGIN + (int)szL.Height),
@@ -280,7 +280,7 @@ namespace mRemoteNG.UI.TaskDialog
         {
             if (m_autoHeight)
             {
-                var h = GetBestHeight();
+                int h = GetBestHeight();
                 if (Height != h)
                 {
                     Height = h;

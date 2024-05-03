@@ -22,8 +22,8 @@ namespace mRemoteNG.Config.Settings
                     Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
                 }
 
-                var xmlTextWriter =
-                    new XmlTextWriter(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.ExtAppsFilesName,
+                XmlTextWriter xmlTextWriter =
+                    new(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.ExtAppsFilesName,
                                       Encoding.UTF8)
                     {
                         Formatting = Formatting.Indented,
@@ -33,7 +33,7 @@ namespace mRemoteNG.Config.Settings
                 xmlTextWriter.WriteStartDocument();
                 xmlTextWriter.WriteStartElement("Apps");
 
-                foreach (var extA in externalTools)
+                foreach (ExternalTool extA in externalTools)
                 {
                     xmlTextWriter.WriteStartElement("App");
                     xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName);

@@ -16,9 +16,9 @@ namespace mRemoteNG.Themes
         /// <param name="baseTheme"></param>
         public static void SaveToXmlFile(ThemeInfo themeToSave, ThemeInfo baseTheme)
         {
-            var oldURI = baseTheme.URI;
-            var directoryName = Path.GetDirectoryName(oldURI);
-            var toSaveURI = directoryName + Path.DirectorySeparatorChar + themeToSave.Name + ".vstheme";
+            string oldURI = baseTheme.URI;
+            string directoryName = Path.GetDirectoryName(oldURI);
+            string toSaveURI = directoryName + Path.DirectorySeparatorChar + themeToSave.Name + ".vstheme";
             File.Copy(baseTheme.URI, toSaveURI);
             themeToSave.URI = toSaveURI;
         }
@@ -34,9 +34,9 @@ namespace mRemoteNG.Themes
         /// <param name="themeToUpdate"></param>
         public static void UpdateThemeXMLValues(ThemeInfo themeToUpdate)
         {
-            var bytesIn = File.ReadAllBytes(themeToUpdate.URI);
-            var manipulator = new MremoteNGPaletteManipulator(bytesIn, themeToUpdate.ExtendedPalette);
-            var bytesOut = manipulator.mergePalette(themeToUpdate.ExtendedPalette);
+            byte[] bytesIn = File.ReadAllBytes(themeToUpdate.URI);
+            MremoteNGPaletteManipulator manipulator = new(bytesIn, themeToUpdate.ExtendedPalette);
+            byte[] bytesOut = manipulator.mergePalette(themeToUpdate.ExtendedPalette);
             File.WriteAllBytes(themeToUpdate.URI, bytesOut);
         }
 
@@ -48,13 +48,13 @@ namespace mRemoteNG.Themes
         /// <returns></returns>
         public static ThemeInfo LoadFromXmlFile(string filename, ThemeInfo defaultTheme = null)
         {
-            var bytes = File.ReadAllBytes(filename);
+            byte[] bytes = File.ReadAllBytes(filename);
             //Load the dockpanel part
-            var themeBaseLoad = new MremoteNGThemeBase(bytes);
+            MremoteNGThemeBase themeBaseLoad = new(bytes);
             //Load the mremote part
             //Cause we cannot default the theme for the default theme
-            var extColorLoader = new MremoteNGPaletteManipulator(bytes, defaultTheme?.ExtendedPalette);
-            var loadedTheme = new ThemeInfo(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename,
+            MremoteNGPaletteManipulator extColorLoader = new(bytes, defaultTheme?.ExtendedPalette);
+            ThemeInfo loadedTheme = new(Path.GetFileNameWithoutExtension(filename), themeBaseLoad, filename,
                                             VisualStudioToolStripExtender.VsVersion.Vs2015, extColorLoader.getColors());
             if (new[] {"darcula", "vs2015blue", "vs2015dark", "vs2015light"}.Contains(
                                                                                       Path

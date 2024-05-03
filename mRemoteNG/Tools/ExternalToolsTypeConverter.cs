@@ -11,12 +11,13 @@ namespace mRemoteNG.Tools
         {
             get
             {
-                var externalToolList = new List<string>();
+                List<string> externalToolList = new()
+                {
+                    // Add a blank entry to signify that no external tool is selected
+                    string.Empty
+                };
 
-                // Add a blank entry to signify that no external tool is selected
-                externalToolList.Add(string.Empty);
-
-                foreach (var externalTool in App.Runtime.ExternalToolsService.ExternalTools)
+                foreach (ExternalTool externalTool in App.Runtime.ExternalToolsService.ExternalTools)
                 {
                     externalToolList.Add(externalTool.DisplayName);
                 }

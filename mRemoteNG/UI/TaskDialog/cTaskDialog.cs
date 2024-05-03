@@ -47,9 +47,9 @@ namespace mRemoteNG.UI.TaskDialog
             DialogResult result;
             OnTaskDialogShown?.Invoke(null, EventArgs.Empty);
 
-            using (var td = new frmTaskDialog())
+            using (frmTaskDialog td = new())
             {
-                var display = new DisplayProperties();
+                DisplayProperties display = new();
                 td.Title = title;
                 td.MainInstruction = mainInstruction;
                 td.Content = content;
@@ -154,7 +154,7 @@ namespace mRemoteNG.UI.TaskDialog
         [SupportedOSPlatform("windows")]
         public static int ShowRadioBox(IWin32Window owner, string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string radioButtons, ESysIcons mainIcon, ESysIcons footerIcon, int defaultIndex)
         {
-            var res = ShowTaskDialogBox(owner, title, mainInstruction, content, expandedInfo, footer, verificationText, radioButtons, "", ETaskDialogButtons.OkCancel, mainIcon, footerIcon, defaultIndex);
+            DialogResult res = ShowTaskDialogBox(owner, title, mainInstruction, content, expandedInfo, footer, verificationText, radioButtons, "", ETaskDialogButtons.OkCancel, mainIcon, footerIcon, defaultIndex);
             if (res == DialogResult.OK)
                 return RadioButtonResult;
             return -1;
@@ -166,7 +166,7 @@ namespace mRemoteNG.UI.TaskDialog
         [SupportedOSPlatform("windows")]
         public static int ShowRadioBox(string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string radioButtons, ESysIcons mainIcon, ESysIcons footerIcon, int defaultIndex)
         {
-            var res = ShowTaskDialogBox(null, title, mainInstruction, content, expandedInfo, footer, verificationText, radioButtons, "", ETaskDialogButtons.OkCancel, mainIcon, footerIcon, defaultIndex);
+            DialogResult res = ShowTaskDialogBox(null, title, mainInstruction, content, expandedInfo, footer, verificationText, radioButtons, "", ETaskDialogButtons.OkCancel, mainIcon, footerIcon, defaultIndex);
             if (res == DialogResult.OK)
                 return RadioButtonResult;
             return -1;
@@ -206,7 +206,7 @@ namespace mRemoteNG.UI.TaskDialog
         [SupportedOSPlatform("windows")]
         public static int ShowCommandBox(IWin32Window owner, string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText,string commandButtons, bool showCancelButton, ESysIcons mainIcon, ESysIcons footerIcon)
         {
-            var res = ShowTaskDialogBox(owner, title, mainInstruction, content, expandedInfo, footer, verificationText, "", commandButtons, showCancelButton ? ETaskDialogButtons.Cancel : ETaskDialogButtons.None, mainIcon, footerIcon);
+            DialogResult res = ShowTaskDialogBox(owner, title, mainInstruction, content, expandedInfo, footer, verificationText, "", commandButtons, showCancelButton ? ETaskDialogButtons.Cancel : ETaskDialogButtons.None, mainIcon, footerIcon);
             if (res == DialogResult.OK)
                 return CommandButtonResult;
             return -1;
@@ -218,7 +218,7 @@ namespace mRemoteNG.UI.TaskDialog
         [SupportedOSPlatform("windows")]
         public static int ShowCommandBox(string title, string mainInstruction, string content, string expandedInfo, string footer, string verificationText, string commandButtons, bool showCancelButton, ESysIcons mainIcon, ESysIcons footerIcon)
         {
-            var res = ShowTaskDialogBox(null, title, mainInstruction, content, expandedInfo, footer, verificationText,"", commandButtons, showCancelButton ? ETaskDialogButtons.Cancel : ETaskDialogButtons.None, mainIcon, footerIcon);
+            DialogResult res = ShowTaskDialogBox(null, title, mainInstruction, content, expandedInfo, footer, verificationText,"", commandButtons, showCancelButton ? ETaskDialogButtons.Cancel : ETaskDialogButtons.None, mainIcon, footerIcon);
             if (res == DialogResult.OK)
                 return CommandButtonResult;
             return -1;

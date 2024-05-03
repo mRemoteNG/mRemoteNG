@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Controls
                     // Items can't be removed from the ComboBox while it is dropped down without possibly causing
                     // an exception so we must close it, delete the item, and then drop it down again. When we
                     // close it programmatically, the SelectedItem may revert to Nothing, so we must save it first.
-                    var item = _comboBox.SelectedItem;
+                    object item = _comboBox.SelectedItem;
                     _comboBox.DroppedDown = false;
                     _comboBox.Items.Remove(item);
                     _comboBox.SelectedIndex = -1;
@@ -79,24 +79,24 @@ namespace mRemoteNG.UI.Controls
                 return;
             }
 
-            var historyItem = (HistoryItem)_comboBox.SelectedItem;
+            HistoryItem historyItem = (HistoryItem)_comboBox.SelectedItem;
             OnProtocolChanged(new ProtocolChangedEventArgs(historyItem.ConnectionInfo.Protocol));
         }
 
         private static void ComboBox_DrawItem(object sender, DrawItemEventArgs e)
         {
-            var comboBox = sender as ComboBox;
+            ComboBox comboBox = sender as ComboBox;
             if (comboBox == null)
             {
                 return;
             }
 
-            var drawItem = comboBox.Items[e.Index];
+            object drawItem = comboBox.Items[e.Index];
 
             string drawString;
             if (drawItem is HistoryItem)
             {
-                var historyItem = (HistoryItem)drawItem;
+                HistoryItem historyItem = (HistoryItem)drawItem;
                 drawString = historyItem.ToString(true);
             }
             else
@@ -136,7 +136,7 @@ namespace mRemoteNG.UI.Controls
 
             public string ToString(bool includeProtocol)
             {
-                var port = string.Empty;
+                string port = string.Empty;
                 if (ConnectionInfo.Port != ConnectionInfo.GetDefaultPort())
                 {
                     port = $":{ConnectionInfo.Port}";
@@ -150,14 +150,14 @@ namespace mRemoteNG.UI.Controls
 
         private bool Exists(HistoryItem searchItem)
         {
-            foreach (var item in _comboBox.Items)
+            foreach (object item in _comboBox.Items)
             {
                 if (!(item is HistoryItem))
                 {
                     continue;
                 }
 
-                var historyItem = (HistoryItem)item;
+                HistoryItem historyItem = (HistoryItem)item;
                 if (historyItem.Equals(searchItem))
                 {
                     return true;
@@ -171,7 +171,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                var historyItem = new HistoryItem {ConnectionInfo = connectionInfo};
+                HistoryItem historyItem = new() { ConnectionInfo = connectionInfo};
                 if (!Exists(historyItem))
                 {
                     _comboBox.Items.Insert(0, historyItem);

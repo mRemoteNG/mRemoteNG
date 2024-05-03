@@ -33,7 +33,7 @@ namespace mRemoteNG.UI.Controls
             Items.Add(NoneSelection);
             Items.Add(AddNewSelection);
 
-            foreach (var credential in listOfCredentialRecords)
+            foreach (ICredentialRecord credential in listOfCredentialRecords)
             {
                 Items.Add(credential);
             }

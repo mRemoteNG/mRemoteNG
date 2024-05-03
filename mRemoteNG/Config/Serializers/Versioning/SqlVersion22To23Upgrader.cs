@@ -32,7 +32,7 @@ ADD EnableFontSmoothing bit NOT NULL DEFAULT 0,
     InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, 
     InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;";
 
-            var dbCommand = _databaseConnector.DbCommand(sqlText);
+            System.Data.Common.DbCommand dbCommand = _databaseConnector.DbCommand(sqlText);
 
             dbCommand.ExecuteNonQuery();
 

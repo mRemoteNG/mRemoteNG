@@ -64,7 +64,7 @@ namespace mRemoteNG.Tools
         {
             collection = collection.ToList();
 
-            foreach (var item in collection)
+            foreach (T item in collection)
                 action(item);
 
             return collection;

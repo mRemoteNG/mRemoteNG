@@ -8,8 +8,8 @@ namespace mRemoteNG.UI.Controls
     {
         private bool _showDefaultText = true;
         private bool _settingDefaultText = true;
-        private readonly PictureBox _pbClear = new PictureBox();
-        private readonly ToolTip _btClearToolTip = new ToolTip();
+        private readonly PictureBox _pbClear = new();
+        private readonly ToolTip _btClearToolTip = new();
 
         public MrngSearchBox()
         {

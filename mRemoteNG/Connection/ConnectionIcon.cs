@@ -31,11 +31,11 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                var iconPath = $"{GeneralAppInfo.HomePath}\\Icons\\{iconName}.ico";
+                string iconPath = $"{GeneralAppInfo.HomePath}\\Icons\\{iconName}.ico";
 
                 if (System.IO.File.Exists(iconPath))
                 {
-                    var nI = new System.Drawing.Icon(iconPath);
+                    System.Drawing.Icon nI = new(iconPath);
                     return nI;
                 }
             }

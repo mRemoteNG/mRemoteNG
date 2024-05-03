@@ -217,8 +217,8 @@ namespace mRemoteNG.UI.Window
                     return;
                 }
 
-                var sItem = lvErrorCollector.SelectedItems[0];
-                var eMsg = (Message)sItem.Tag;
+                ListViewItem sItem = lvErrorCollector.SelectedItems[0];
+                Message eMsg = (Message)sItem.Tag;
                 switch (eMsg.Class)
                 {
                     case MessageClass.DebugMsg:
@@ -339,7 +339,7 @@ namespace mRemoteNG.UI.Window
                     items = lvErrorCollector.Items;
                 }
 
-                var stringBuilder = new StringBuilder();
+                StringBuilder stringBuilder = new();
                 stringBuilder.AppendLine("----------");
 
                 lvErrorCollector.BeginUpdate();

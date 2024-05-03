@@ -8,7 +8,7 @@ namespace mRemoteNG.Credential.Repositories
     {
         private string _title = "New Credential Repository";
         private string _source = "";
-        private SecureString _key = new SecureString();
+        private SecureString _key = new();
         private string _typeName = "";
         private bool _loaded;
 

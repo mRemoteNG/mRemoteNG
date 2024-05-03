@@ -7,7 +7,7 @@ namespace mRemoteNG.Tree
     {
         public void Execute(IConnectionTree connectionTree)
         {
-            var rootConnectionNode = connectionTree.GetRootConnectionNode();
+            Root.RootNodeInfo rootConnectionNode = connectionTree.GetRootConnectionNode();
             connectionTree.InvokeExpand(rootConnectionNode);
         }
     }

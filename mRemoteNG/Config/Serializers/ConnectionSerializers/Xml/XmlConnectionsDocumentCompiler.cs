@@ -26,19 +26,19 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         public XDocument CompileDocument(ConnectionTreeModel connectionTreeModel, bool fullFileEncryption)
         {
-            var rootNodeInfo = GetRootNodeFromConnectionTreeModel(connectionTreeModel);
+            RootNodeInfo rootNodeInfo = GetRootNodeFromConnectionTreeModel(connectionTreeModel);
             return CompileDocument(rootNodeInfo, fullFileEncryption);
         }
 
         public XDocument CompileDocument(ConnectionInfo serializationTarget, bool fullFileEncryption)
         {
-            var rootNodeInfo = GetRootNodeFromConnectionInfo(serializationTarget);
+            RootNodeInfo rootNodeInfo = GetRootNodeFromConnectionInfo(serializationTarget);
             _encryptionKey = rootNodeInfo.PasswordString.ConvertToSecureString();
-            var rootElement = CompileRootNode(rootNodeInfo, fullFileEncryption);
+            XElement rootElement = CompileRootNode(rootNodeInfo, fullFileEncryption);
 
             CompileRecursive(serializationTarget, rootElement);
-            var xmlDeclaration = new XDeclaration("1.0", "utf-8", null);
-            var xmlDocument = new XDocument(xmlDeclaration, rootElement);
+            XDeclaration xmlDeclaration = new("1.0", "utf-8", null);
+            XDocument xmlDocument = new(xmlDeclaration, rootElement);
             if (fullFileEncryption)
                 xmlDocument = new XmlConnectionsDocumentEncryptor(_cryptographyProvider).EncryptDocument(xmlDocument, _encryptionKey);
             return xmlDocument;
@@ -46,7 +46,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private void CompileRecursive(ConnectionInfo serializationTarget, XContainer parentElement)
         {
-            var newElement = parentElement;
+            XContainer newElement = parentElement;
             if (serializationTarget is not RootNodeInfo)
             {
                 newElement = CompileConnectionInfoNode(serializationTarget);
@@ -54,7 +54,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             }
 
             if (serializationTarget is not ContainerInfo serializationTargetAsContainer) return;
-            foreach (var child in serializationTargetAsContainer.Children.ToArray())
+            foreach (ConnectionInfo child in serializationTargetAsContainer.Children.ToArray())
                 CompileRecursive(child, newElement);
         }
 
@@ -74,7 +74,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private XElement CompileRootNode(RootNodeInfo rootNodeInfo, bool fullFileEncryption)
         {
-            var rootNodeSerializer = new XmlRootNodeSerializer();
+            XmlRootNodeSerializer rootNodeSerializer = new();
             return rootNodeSerializer.SerializeRootNodeInfo(rootNodeInfo, _cryptographyProvider, _connectionNodeSerializer.Version, fullFileEncryption);
         }
 

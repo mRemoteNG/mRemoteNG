@@ -35,11 +35,11 @@ namespace mRemoteNG.Tools
             if (Handle == IntPtr.Zero)
                 return false;
 
-            var controlHandle = GetControlHandle(className, text);
+            IntPtr controlHandle = GetControlHandle(className, text);
             if (controlHandle == IntPtr.Zero)
                 return false;
 
-            var nCmdShow = visible ? NativeMethods.SW_SHOW : NativeMethods.SW_HIDE;
+            uint nCmdShow = visible ? NativeMethods.SW_SHOW : NativeMethods.SW_HIDE;
             NativeMethods.ShowWindow(controlHandle, (int)nCmdShow);
             return true;
         }
@@ -49,11 +49,11 @@ namespace mRemoteNG.Tools
             if (Process == null || Process.HasExited || Handle == IntPtr.Zero)
                 return false;
 
-            var controlHandle = GetControlHandle(className, oldText);
+            IntPtr controlHandle = GetControlHandle(className, oldText);
             if (controlHandle == IntPtr.Zero)
                 return false;
 
-            var result = NativeMethods.SendMessage(controlHandle, NativeMethods.WM_SETTEXT, (IntPtr)0,
+            IntPtr result = NativeMethods.SendMessage(controlHandle, NativeMethods.WM_SETTEXT, (IntPtr)0,
                                                    new StringBuilder(newText));
             return result.ToInt32() == NativeMethods.TRUE;
         }
@@ -63,11 +63,11 @@ namespace mRemoteNG.Tools
             if (Process == null || Process.HasExited || Handle == IntPtr.Zero)
                 return false;
 
-            var listBoxHandle = GetControlHandle("ListBox");
+            IntPtr listBoxHandle = GetControlHandle("ListBox");
             if (listBoxHandle == IntPtr.Zero)
                 return false;
 
-            var result = NativeMethods.SendMessage(listBoxHandle, NativeMethods.LB_SELECTSTRING, (IntPtr)(-1),
+            IntPtr result = NativeMethods.SendMessage(listBoxHandle, NativeMethods.LB_SELECTSTRING, (IntPtr)(-1),
                                                    new StringBuilder(itemText));
             return result.ToInt32() != NativeMethods.LB_ERR;
         }
@@ -77,11 +77,11 @@ namespace mRemoteNG.Tools
             if (Process == null || Process.HasExited || Handle == IntPtr.Zero)
                 return false;
 
-            var buttonHandle = GetControlHandle("Button", text);
+            IntPtr buttonHandle = GetControlHandle("Button", text);
             if (buttonHandle == IntPtr.Zero)
                 return false;
 
-            var buttonControlId = NativeMethods.GetDlgCtrlID(buttonHandle);
+            int buttonControlId = NativeMethods.GetDlgCtrlID(buttonHandle);
             NativeMethods.SendMessage(Handle, NativeMethods.WM_COMMAND, (IntPtr)buttonControlId, buttonHandle);
 
             return true;
@@ -98,9 +98,9 @@ namespace mRemoteNG.Tools
 
         #region Protected Fields
 
-        private readonly Process Process = new Process();
+        private readonly Process Process = new();
         private IntPtr Handle = IntPtr.Zero;
-        private List<IntPtr> Controls = new List<IntPtr>();
+        private List<IntPtr> Controls = [];
 
         #endregion
 
@@ -115,7 +115,7 @@ namespace mRemoteNG.Tools
             Process.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
             Handle = IntPtr.Zero;
-            var startTicks = Environment.TickCount;
+            int startTicks = Environment.TickCount;
             while (Handle == IntPtr.Zero &&
                    Environment.TickCount < startTicks + (Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000))
             {
@@ -137,13 +137,13 @@ namespace mRemoteNG.Tools
 
             if (Controls.Count == 0)
             {
-                var windowEnumerator = new EnumWindows();
+                EnumWindows windowEnumerator = new();
                 Controls = windowEnumerator.EnumChildWindows(Handle);
             }
 
-            var stringBuilder = new StringBuilder();
-            var controlHandle = IntPtr.Zero;
-            foreach (var control in Controls)
+            StringBuilder stringBuilder = new();
+            IntPtr controlHandle = IntPtr.Zero;
+            foreach (IntPtr control in Controls)
             {
                 NativeMethods.GetClassName(control, stringBuilder, stringBuilder.Capacity);
                 if (stringBuilder.ToString() != className) continue;

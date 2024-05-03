@@ -31,7 +31,7 @@ ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     AutomaticResize bit NOT NULL DEFAULT 1,
     InheritLoadBalanceInfo bit NOT NULL DEFAULT 0,
     InheritAutomaticResize bit NOT NULL DEFAULT 0;";
-            var dbCommand = _databaseConnector.DbCommand(sqlText);
+            System.Data.Common.DbCommand dbCommand = _databaseConnector.DbCommand(sqlText);
             dbCommand.ExecuteNonQuery();
 
             return new Version(2, 5);

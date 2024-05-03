@@ -21,12 +21,12 @@ namespace mRemoteNG.Config.Import
 
         public void Import(IEnumerable<ScanHost> hosts, ContainerInfo destinationContainer)
         {
-            var deserializer = new PortScanDeserializer(_targetProtocolType);
-            var connectionTreeModel = deserializer.Deserialize(hosts);
+            PortScanDeserializer deserializer = new(_targetProtocolType);
+            Tree.ConnectionTreeModel connectionTreeModel = deserializer.Deserialize(hosts);
 
-            var importedRootNode = connectionTreeModel.RootNodes.First();
+            ContainerInfo importedRootNode = connectionTreeModel.RootNodes.First();
             if (importedRootNode == null) return;
-            var childrenToAdd = importedRootNode.Children.ToArray();
+            Connection.ConnectionInfo[] childrenToAdd = importedRootNode.Children.ToArray();
             destinationContainer.AddChildRange(childrenToAdd);
         }
     }

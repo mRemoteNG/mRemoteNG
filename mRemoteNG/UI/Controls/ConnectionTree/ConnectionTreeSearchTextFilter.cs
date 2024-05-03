@@ -15,7 +15,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         /// always be included in the output, regardless of matching
         /// the desired <see cref="FilterText"/>.
         /// </summary>
-        public List<ConnectionInfo> SpecialInclusionList { get; } = new List<ConnectionInfo>();
+        public List<ConnectionInfo> SpecialInclusionList { get; } = [];
 
         public bool Filter(object modelObject)
         {
@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             if (SpecialInclusionList.Contains(objectAsConnectionInfo))
                 return true;
 
-            var filterTextLower = FilterText.ToLowerInvariant();
+            string filterTextLower = FilterText.ToLowerInvariant();
 
             return objectAsConnectionInfo.Name.ToLowerInvariant().Contains(filterTextLower) ||
                    objectAsConnectionInfo.Hostname.ToLowerInvariant().Contains(filterTextLower) ||

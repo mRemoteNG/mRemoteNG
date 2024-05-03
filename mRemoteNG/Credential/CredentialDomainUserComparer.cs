@@ -8,7 +8,7 @@ namespace mRemoteNG.Credential
     {
         public int Compare(ICredentialRecord x, ICredentialRecord y)
         {
-            var comparer = new CaseInsensitiveComparer();
+            CaseInsensitiveComparer comparer = new();
             return comparer.Compare($"{x.Domain}\\{x.Username}", $"{y.Domain}\\{y.Username}");
         }
 

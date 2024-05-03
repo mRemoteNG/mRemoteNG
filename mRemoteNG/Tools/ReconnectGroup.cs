@@ -32,7 +32,7 @@ namespace mRemoteNG.Tools
         {
             if (pbServerStatus.InvokeRequired)
             {
-                var d = new SetStatusImageCB(SetStatusImage);
+                SetStatusImageCB d = new(SetStatusImage);
                 ParentForm?.Invoke(d, new object[] {Img});
             }
             else
@@ -64,7 +64,7 @@ namespace mRemoteNG.Tools
         {
             if (chkReconnectWhenReady.InvokeRequired)
             {
-                var d = new SetCheckboxCB(SetCheckbox);
+                SetCheckboxCB d = new(SetCheckbox);
                 ParentForm?.Invoke(d, new object[] {Val});
             }
             else
@@ -114,7 +114,7 @@ namespace mRemoteNG.Tools
         {
             if (InvokeRequired)
             {
-                var d = new DisposeReconnectGroupCB(DisposeReconnectGroup);
+                DisposeReconnectGroupCB d = new(DisposeReconnectGroup);
                 ParentForm?.Invoke(d);
             }
             else

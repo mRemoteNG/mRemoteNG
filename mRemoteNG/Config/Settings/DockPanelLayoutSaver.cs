@@ -37,7 +37,7 @@ namespace mRemoteNG.Config.Settings
                     Directory.CreateDirectory(SettingsFileInfo.SettingsPath);
                 }
 
-                var serializedLayout = _dockPanelSerializer.Serialize(FrmMain.Default.pnlDock);
+                string serializedLayout = _dockPanelSerializer.Serialize(FrmMain.Default.pnlDock);
                 _dataProvider.Save(serializedLayout);
             }
             catch (Exception ex)

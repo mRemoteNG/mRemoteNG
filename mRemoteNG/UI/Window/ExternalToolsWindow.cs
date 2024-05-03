@@ -30,7 +30,7 @@ namespace mRemoteNG.UI.Window
             _themeManager = ThemeManager.getInstance();
             _themeManager.ThemeChanged += ApplyTheme;
             _externalAppsSaver = new ExternalAppsSaver();
-            _currentlySelectedExternalTools = new FullyObservableCollection<ExternalTool>();
+            _currentlySelectedExternalTools = [];
             _currentlySelectedExternalTools.CollectionUpdated += CurrentlySelectedExternalToolsOnCollectionUpdated;
             BrowseButton.Height = FilenameTextBox.Height;
             BrowseWorkingDir.Height = WorkingDirTextBox.Height;
@@ -120,7 +120,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                foreach (var externalTool in _currentlySelectedExternalTools)
+                foreach (ExternalTool externalTool in _currentlySelectedExternalTools)
                 {
                     externalTool.Start();
                 }
@@ -133,7 +133,7 @@ namespace mRemoteNG.UI.Window
 
         private void UpdateEditorControls()
         {
-            var selectedTool = _currentlySelectedExternalTools.FirstOrDefault();
+            ExternalTool selectedTool = _currentlySelectedExternalTools.FirstOrDefault();
 
             DisplayNameTextBox.Text = selectedTool?.DisplayName;
             FilenameTextBox.Text = selectedTool?.FileName;
@@ -152,7 +152,7 @@ namespace mRemoteNG.UI.Window
             _currentlySelectedExternalTools.AddRange(ToolsListObjView.SelectedObjects.OfType<ExternalTool>());
             PropertiesGroupBox.Enabled = _currentlySelectedExternalTools.Count == 1;
 
-            var atleastOneToolSelected = _currentlySelectedExternalTools.Count > 0;
+            bool atleastOneToolSelected = _currentlySelectedExternalTools.Count > 0;
             DeleteToolMenuItem.Enabled = atleastOneToolSelected;
             DeleteToolToolstripButton.Enabled = atleastOneToolSelected;
             LaunchToolMenuItem.Enabled = atleastOneToolSelected;
@@ -181,7 +181,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var externalTool = new ExternalTool(Language.ExternalToolDefaultName);
+                ExternalTool externalTool = new(Language.ExternalToolDefaultName);
                 Runtime.ExternalToolsService.ExternalTools.Add(externalTool);
                 UpdateToolsListObjView();
                 ToolsListObjView.SelectedObject = externalTool;
@@ -211,17 +211,17 @@ namespace mRemoteNG.UI.Window
                                     MessageBoxIcon.Question) != DialogResult.Yes)
                     return;
 
-                foreach (var externalTool in _currentlySelectedExternalTools)
+                foreach (ExternalTool externalTool in _currentlySelectedExternalTools)
                 {
                     Runtime.ExternalToolsService.ExternalTools.Remove(externalTool);
                 }
 
-                var firstDeletedNode = _currentlySelectedExternalTools.FirstOrDefault();
-                var oldSelectedIndex = ToolsListObjView.IndexOf(firstDeletedNode);
+                ExternalTool firstDeletedNode = _currentlySelectedExternalTools.FirstOrDefault();
+                int oldSelectedIndex = ToolsListObjView.IndexOf(firstDeletedNode);
                 _currentlySelectedExternalTools.Clear();
                 UpdateToolsListObjView();
 
-                var maxIndex = ToolsListObjView.GetItemCount() - 1;
+                int maxIndex = ToolsListObjView.GetItemCount() - 1;
                 ToolsListObjView.SelectedIndex = oldSelectedIndex <= maxIndex
                     ? oldSelectedIndex
                     : maxIndex;
@@ -263,7 +263,7 @@ namespace mRemoteNG.UI.Window
 
         private void PropertyControl_ChangedOrLostFocus(object sender, EventArgs e)
         {
-            var selectedTool = _currentlySelectedExternalTools.FirstOrDefault();
+            ExternalTool selectedTool = _currentlySelectedExternalTools.FirstOrDefault();
             if (selectedTool == null)
                 return;
 
@@ -292,13 +292,13 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                using (var browseDialog = new OpenFileDialog())
+                using (OpenFileDialog browseDialog = new())
                 {
                     browseDialog.Filter = string.Join("|", Language.FilterApplication, "*.exe",
                                                       Language.FilterAll, "*.*");
                     if (browseDialog.ShowDialog() != DialogResult.OK)
                         return;
-                    var selectedItem = _currentlySelectedExternalTools.FirstOrDefault();
+                    ExternalTool selectedItem = _currentlySelectedExternalTools.FirstOrDefault();
                     if (selectedItem == null)
                         return;
                     selectedItem.FileName = browseDialog.FileName;
@@ -315,11 +315,11 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                using (var browseDialog = new FolderBrowserDialog())
+                using (FolderBrowserDialog browseDialog = new())
                 {
                     if (browseDialog.ShowDialog() != DialogResult.OK)
                         return;
-                    var selectedItem = _currentlySelectedExternalTools.FirstOrDefault();
+                    ExternalTool selectedItem = _currentlySelectedExternalTools.FirstOrDefault();
                     if (selectedItem == null)
                         return;
                     selectedItem.WorkingDir = browseDialog.SelectedPath;

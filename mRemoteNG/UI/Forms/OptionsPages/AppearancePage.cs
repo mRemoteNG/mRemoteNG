@@ -43,7 +43,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cboLanguage.Items.Clear();
             cboLanguage.Items.Add(Language.LanguageDefault);
 
-            foreach (var nativeName in SupportedCultures.CultureNativeNames)
+            foreach (string nativeName in SupportedCultures.CultureNativeNames)
             {
                 cboLanguage.Items.Add(nativeName);
             }

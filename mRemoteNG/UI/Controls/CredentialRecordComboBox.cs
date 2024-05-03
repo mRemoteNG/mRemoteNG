@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Controls
         {
             if (credentialRecords == null) return;
             Items.Clear();
-            foreach (var credential in credentialRecords)
+            foreach (ICredentialRecord credential in credentialRecords)
                 Items.Add(credential);
         }
     }

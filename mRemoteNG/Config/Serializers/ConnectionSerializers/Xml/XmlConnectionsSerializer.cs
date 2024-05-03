@@ -32,7 +32,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
+            RootNodeInfo rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return SerializeConnectionsData(rootNode);
         }
 
@@ -43,12 +43,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private string SerializeConnectionsData(ConnectionInfo serializationTarget)
         {
-            var xml = "";
+            string xml = "";
             try
             {
-                var documentCompiler =
-                    new XmlConnectionsDocumentCompiler(_cryptographyProvider, _connectionNodeSerializer);
-                var xmlDocument = documentCompiler.CompileDocument(serializationTarget, UseFullEncryption);
+                XmlConnectionsDocumentCompiler documentCompiler =
+                    new(_cryptographyProvider, _connectionNodeSerializer);
+                XDocument xmlDocument = documentCompiler.CompileDocument(serializationTarget, UseFullEncryption);
                 xml = WriteXmlToString(xmlDocument);
             }
             catch (Exception ex)
@@ -62,14 +62,13 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private static string WriteXmlToString(XNode xmlDocument)
         {
             string xmlString;
-            var xmlWriterSettings = new XmlWriterSettings
-                {Indent = true, IndentChars = "    ", Encoding = Encoding.UTF8};
-            var memoryStream = new MemoryStream();
-            using (var xmlTextWriter = XmlWriter.Create(memoryStream, xmlWriterSettings))
+            XmlWriterSettings xmlWriterSettings = new() { Indent = true, IndentChars = "    ", Encoding = Encoding.UTF8};
+            MemoryStream memoryStream = new();
+            using (XmlWriter xmlTextWriter = XmlWriter.Create(memoryStream, xmlWriterSettings))
             {
                 xmlDocument.WriteTo(xmlTextWriter);
                 xmlTextWriter.Flush();
-                var streamReader = new StreamReader(memoryStream, Encoding.UTF8, true);
+                StreamReader streamReader = new(memoryStream, Encoding.UTF8, true);
                 memoryStream.Seek(0, SeekOrigin.Begin);
                 xmlString = streamReader.ReadToEnd();
             }

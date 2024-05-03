@@ -77,9 +77,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (CommonRegistrySettings.AllowCheckForUpdatesAutomatical)
             {
                 cboUpdateCheckFrequency.Items.Clear();
-                var nDaily = cboUpdateCheckFrequency.Items.Add(Language.Daily);
-                var nWeekly = cboUpdateCheckFrequency.Items.Add(Language.Weekly);
-                var nMonthly = cboUpdateCheckFrequency.Items.Add(Language.Monthly);
+                int nDaily = cboUpdateCheckFrequency.Items.Add(Language.Daily);
+                int nWeekly = cboUpdateCheckFrequency.Items.Add(Language.Weekly);
+                int nMonthly = cboUpdateCheckFrequency.Items.Add(Language.Monthly);
                 if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays < 1)
                 {
                     chkCheckForUpdatesOnStartup.Checked = false;
@@ -99,7 +99,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                             cboUpdateCheckFrequency.SelectedIndex = nMonthly;
                             break;
                         default:
-                            var nCustom =
+                            int nCustom =
                                 cboUpdateCheckFrequency.Items.Add(string.Format(Language.UpdateFrequencyCustom, Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays));
                             cboUpdateCheckFrequency.SelectedIndex = nCustom;
                             break;
@@ -107,9 +107,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
             }
 
-            var stable = cboReleaseChannel.Items.Add(UpdateChannelInfo.STABLE);
-            var beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.PREVIEW);
-            var dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.NIGHTLY);
+            int stable = cboReleaseChannel.Items.Add(UpdateChannelInfo.STABLE);
+            int beta = cboReleaseChannel.Items.Add(UpdateChannelInfo.PREVIEW);
+            int dev = cboReleaseChannel.Items.Add(UpdateChannelInfo.NIGHTLY);
             switch (Properties.OptionsUpdatesPage.Default.UpdateChannel)
             {
                 case UpdateChannelInfo.STABLE:
@@ -134,7 +134,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseProxyAuthentication.Checked = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
             tblProxyAuthentication.Enabled = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
             txtProxyUsername.Text = Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             txtProxyPassword.Text =
                 cryptographyProvider.Decrypt(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
 
@@ -170,7 +170,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
             Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, Runtime.EncryptionKey);
         }
 

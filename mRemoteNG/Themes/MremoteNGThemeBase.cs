@@ -33,7 +33,7 @@ namespace mRemoteNG.Themes
     {
         public FloatWindow CreateFloatWindow(DockPanel dockPanel, DockPane pane, Rectangle bounds)
         {
-            var activeDocumentBounds = (dockPanel?.ActiveDocument as ConnectionTab)?.Bounds;
+            Rectangle? activeDocumentBounds = (dockPanel?.ActiveDocument as ConnectionTab)?.Bounds;
 
             return new FloatWindowNG(dockPanel, pane, activeDocumentBounds ?? bounds);
         }

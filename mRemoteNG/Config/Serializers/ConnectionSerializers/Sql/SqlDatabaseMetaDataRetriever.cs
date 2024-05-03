@@ -71,7 +71,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         {
             // TODO: use transaction
 
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
 
             string strProtected;
 
@@ -93,7 +93,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
-            var cmd = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
+            DbCommand cmd = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
             cmd.ExecuteNonQuery();
 
             if (rootTreeNode != null)
@@ -118,9 +118,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             try
             {
                 // ANSI SQL way.  Works in PostgreSQL, MSSQL, MySQL.
-                var database_name = Properties.OptionsDBsPage.Default.SQLDatabaseName;
-                var cmd = databaseConnector.DbCommand("select case when exists((select * from information_schema.tables where table_name = '" + tableName + "' and table_schema='"+ database_name + "')) then 1 else 0 end");
-                var cmdResult = Convert.ToInt16(cmd.ExecuteScalar());
+                string database_name = Properties.OptionsDBsPage.Default.SQLDatabaseName;
+                DbCommand cmd = databaseConnector.DbCommand("select case when exists((select * from information_schema.tables where table_name = '" + tableName + "' and table_schema='"+ database_name + "')) then 1 else 0 end");
+                short cmdResult = Convert.ToInt16(cmd.ExecuteScalar());
                 exists = (cmdResult == 1);
             }
             catch

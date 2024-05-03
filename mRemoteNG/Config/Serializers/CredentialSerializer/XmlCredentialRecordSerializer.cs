@@ -13,7 +13,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         public string Serialize(IEnumerable<ICredentialRecord> credentialRecords)
         {
-            var xdoc = new XDocument(
+            XDocument xdoc = new(
                                      new XElement("Credentials",
                                                   new XAttribute("SchemaVersion", Version.ToString(2)),
                                                   from r in credentialRecords

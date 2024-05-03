@@ -10,7 +10,7 @@ namespace mRemoteNG.Connection
     {
         public static void GoToUrl(string url)
         {
-            var connectionInfo = new ConnectionInfo();
+            ConnectionInfo connectionInfo = new();
             connectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
             connectionInfo.Name = "";

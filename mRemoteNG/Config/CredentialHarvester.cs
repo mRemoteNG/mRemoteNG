@@ -17,19 +17,19 @@ namespace mRemoteNG.Config
 
         // maps a connectioninfo (by its id) to the credential object that was harvested
         public Dictionary<Guid, ICredentialRecord> ConnectionToCredentialMap { get; } =
-            new Dictionary<Guid, ICredentialRecord>();
+            [];
 
         public IEnumerable<ICredentialRecord> Harvest(XDocument xDocument, SecureString decryptionKey)
         {
             if (xDocument == null)
                 throw new ArgumentNullException(nameof(xDocument));
 
-            var cryptoProvider = new CryptoProviderFactoryFromXml(xDocument.Root).Build();
+            ICryptographyProvider cryptoProvider = new CryptoProviderFactoryFromXml(xDocument.Root).Build();
 
-            foreach (var element in xDocument.Descendants("Node"))
+            foreach (XElement element in xDocument.Descendants("Node"))
             {
                 if (!EntryHasSomeCredentialData(element)) continue;
-                var newCredential = BuildCredential(element, cryptoProvider, decryptionKey);
+                ICredentialRecord newCredential = BuildCredential(element, cryptoProvider, decryptionKey);
 
                 Guid connectionId;
                 Guid.TryParse(element.Attribute("Id")?.Value, out connectionId);
@@ -40,7 +40,7 @@ namespace mRemoteNG.Config
 
                 if (ConnectionToCredentialMap.Values.Contains(newCredential, _credentialComparer))
                 {
-                    var existingCredential = ConnectionToCredentialMap.Values.First(record => _credentialComparer.Equals(newCredential, record));
+                    ICredentialRecord existingCredential = ConnectionToCredentialMap.Values.First(record => _credentialComparer.Equals(newCredential, record));
                     ConnectionToCredentialMap.Add(connectionId, existingCredential);
                 }
                 else
@@ -52,7 +52,7 @@ namespace mRemoteNG.Config
 
         private ICredentialRecord BuildCredential(XElement element, ICryptographyProvider cryptographyProvider, SecureString decryptionKey)
         {
-            var credential = new CredentialRecord
+            CredentialRecord credential = new()
             {
                 Title = $"{element.Attribute("Username")?.Value}\\{element.Attribute("Domain")?.Value}",
                 Username = element.Attribute("Username")?.Value,

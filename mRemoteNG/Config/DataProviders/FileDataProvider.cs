@@ -18,7 +18,7 @@ namespace mRemoteNG.Config.DataProviders
 
         public virtual string Load()
         {
-            var fileContents = "";
+            string fileContents = "";
             try
             {
                 if (!File.Exists(FilePath))
@@ -70,7 +70,7 @@ namespace mRemoteNG.Config.DataProviders
 
         private void CreateMissingDirectories()
         {
-            var dirname = Path.GetDirectoryName(FilePath);
+            string dirname = Path.GetDirectoryName(FilePath);
             if (dirname == null) return;
             Directory.CreateDirectory(dirname);
         }

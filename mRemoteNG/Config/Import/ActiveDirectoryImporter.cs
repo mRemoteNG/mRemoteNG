@@ -21,11 +21,11 @@ namespace mRemoteNG.Config.Import
             try
             {
                 ldapPath.ThrowIfNullOrEmpty(nameof(ldapPath));
-                var deserializer = new ActiveDirectoryDeserializer(ldapPath, importSubOu);
-                var connectionTreeModel = deserializer.Deserialize();
-                var importedRootNode = connectionTreeModel.RootNodes.First();
+                ActiveDirectoryDeserializer deserializer = new(ldapPath, importSubOu);
+                Tree.ConnectionTreeModel connectionTreeModel = deserializer.Deserialize();
+                ContainerInfo importedRootNode = connectionTreeModel.RootNodes.First();
                 if (importedRootNode == null) return;
-                var childrenToAdd = importedRootNode.Children.ToArray();
+                Connection.ConnectionInfo[] childrenToAdd = importedRootNode.Children.ToArray();
                 destinationContainer.AddChildRange(childrenToAdd);
             }
             catch (Exception ex)

@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Window
             if (!_themeManager.ThemingActive)
                 return;
 
-            var activeTheme = _themeManager.ActiveTheme;
+            ThemeInfo activeTheme = _themeManager.ActiveTheme;
             vsToolStripExtender.SetStyle(msMain, activeTheme.Version, activeTheme.Theme);
             vsToolStripExtender.SetStyle(ConnectionTree.ContextMenuStrip, activeTheme.Version,
                 activeTheme.Theme);
@@ -137,7 +137,7 @@ namespace mRemoteNG.UI.Window
 
         private void SetTreePostSetupActions()
         {
-            var actions = new List<IConnectionTreeDelegate>
+            List<IConnectionTreeDelegate> actions = new()
             {
                 new PreviouslyOpenedFolderExpander(),
                 new RootNodeExpander()
@@ -151,8 +151,8 @@ namespace mRemoteNG.UI.Window
 
         private void SetConnectionTreeClickHandlers()
         {
-            var singleClickHandlers = new List<ITreeNodeClickHandler<ConnectionInfo>>();
-            var doubleClickHandlers = new List<ITreeNodeClickHandler<ConnectionInfo>>
+            List<ITreeNodeClickHandler<ConnectionInfo>> singleClickHandlers = new();
+            List<ITreeNodeClickHandler<ConnectionInfo>> doubleClickHandlers = new()
             {
                 new ExpandNodeClickHandler(ConnectionTree)
             };
@@ -178,8 +178,7 @@ namespace mRemoteNG.UI.Window
             }
 
             ConnectionTree.ConnectionTreeModel = connectionsLoadedEventArgs.NewConnectionTreeModel;
-            ConnectionTree.SelectedObject =
-                connectionsLoadedEventArgs.NewConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().FirstOrDefault();
+            ConnectionTree.SelectedObject = connectionsLoadedEventArgs.NewConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().FirstOrDefault();
         }
 
         #endregion
@@ -212,14 +211,14 @@ namespace mRemoteNG.UI.Window
             mMenFavorites.Click += (sender, args) =>
             {
                 mMenFavorites.DropDownItems.Clear();
-                var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
-                var favoritesList = new List<ToolStripMenuItem>();
+                List<ContainerInfo> rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
+                List<ToolStripMenuItem> favoritesList = new();
 
-                foreach (var node in rootNodes)
+                foreach (ContainerInfo node in rootNodes)
                 {
-                    foreach (var containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
+                    foreach (ConnectionInfo containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
                     {
-                        var favoriteMenuItem = new ToolStripMenuItem
+                        ToolStripMenuItem favoriteMenuItem = new()
                         {
                             Text = containerInfo.Name,
                             Tag = containerInfo,
@@ -271,14 +270,14 @@ namespace mRemoteNG.UI.Window
                         break;
                     case Keys.Up:
                         {
-                            var match = ConnectionTree.NodeSearcher.PreviousMatch();
+                            ConnectionInfo match = ConnectionTree.NodeSearcher.PreviousMatch();
                             JumpToNode(match);
                             e.Handled = true;
                             break;
                         }
                     case Keys.Down:
                         {
-                            var match = ConnectionTree.NodeSearcher.NextMatch();
+                            ConnectionInfo match = ConnectionTree.NodeSearcher.NextMatch();
                             JumpToNode(match);
                             e.Handled = true;
                             break;
@@ -294,7 +293,7 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        private void TxtSearch_TextChanged(object sender, EventArgs e)
         {
             ApplyFiltering();
         }

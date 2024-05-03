@@ -8,7 +8,7 @@ namespace mRemoteNGTests.TestHelpers
 {
 	internal static class Randomizer
     {
-        private static readonly Random Random = new Random();
+        private static readonly Random Random = new();
 
         internal static string RandomString(params string[] excludedStrings)
         {

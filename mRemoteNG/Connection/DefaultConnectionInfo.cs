@@ -24,17 +24,17 @@ namespace mRemoteNG.Connection
             if (propertyNameMutator == null)
                 propertyNameMutator = a => a;
 
-            var connectionProperties = GetSerializableProperties();
-            foreach (var property in connectionProperties)
+            System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> connectionProperties = GetSerializableProperties();
+            foreach (System.Reflection.PropertyInfo property in connectionProperties)
             {
                 try
                 {
-                    var expectedPropertyName = propertyNameMutator(property.Name);
-                    var propertyFromSource = typeof(TSource).GetProperty(expectedPropertyName);
+                    string expectedPropertyName = propertyNameMutator(property.Name);
+                    System.Reflection.PropertyInfo propertyFromSource = typeof(TSource).GetProperty(expectedPropertyName);
                     if (propertyFromSource == null)
                         throw new SettingsPropertyNotFoundException($"No property with name '{expectedPropertyName}' found.");
 
-                    var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
+                    object valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
 
                     if (property.PropertyType.IsEnum)
                     {
@@ -56,20 +56,20 @@ namespace mRemoteNG.Connection
             if (propertyNameMutator == null)
                 propertyNameMutator = (a) => a;
 
-            var connectionProperties = GetSerializableProperties();
+            System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> connectionProperties = GetSerializableProperties();
 
-            foreach (var property in connectionProperties)
+            foreach (System.Reflection.PropertyInfo property in connectionProperties)
             {
                 try
                 {
-                    var expectedPropertyName = propertyNameMutator(property.Name);
-                    var propertyFromDestination = typeof(TDestination).GetProperty(expectedPropertyName);
+                    string expectedPropertyName = propertyNameMutator(property.Name);
+                    System.Reflection.PropertyInfo propertyFromDestination = typeof(TDestination).GetProperty(expectedPropertyName);
 
                     if (propertyFromDestination == null)
                         throw new SettingsPropertyNotFoundException($"No property with name '{expectedPropertyName}' found.");
 
                     // ensure value is of correct type
-                    var value = Convert.ChangeType(property.GetValue(Instance, null), propertyFromDestination.PropertyType);
+                    object value = Convert.ChangeType(property.GetValue(Instance, null), propertyFromDestination.PropertyType);
 
                     propertyFromDestination.SetValue(destinationInstance, value, null);
                 }

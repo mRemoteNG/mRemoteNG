@@ -16,10 +16,10 @@ namespace mRemoteNG.Tools
     [SupportedOSPlatform("windows")]
     public class PortScanner
     {
-        private readonly List<IPAddress> _ipAddresses = new List<IPAddress>();
-        private readonly List<int> _ports = new List<int>();
+        private readonly List<IPAddress> _ipAddresses = [];
+        private readonly List<int> _ports = [];
         private Thread _scanThread;
-        private readonly List<ScanHost> _scannedHosts = new List<ScanHost>();
+        private readonly List<ScanHost> _scannedHosts = [];
         private readonly int _timeoutInMilliseconds;
 
         #region Public Methods
@@ -31,11 +31,11 @@ namespace mRemoteNG.Tools
                            int timeoutInMilliseconds = 5000,
                            bool checkDefaultPortsOnly = false)
         {
-            var ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
-            var ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
+            IPAddress ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
+            IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
 
-            var portStart = Math.Min(port1, port2);
-            var portEnd = Math.Max(port1, port2);
+            int portStart = Math.Min(port1, port2);
+            int portEnd = Math.Max(port1, port2);
 
             // if only one port was specified, just scan the one port...
             if (portStart == 0)
@@ -55,7 +55,7 @@ namespace mRemoteNG.Tools
                 });
             else
             {
-                for (var port = portStart; port <= portEnd; port++)
+                for (int port = portStart; port <= portEnd; port++)
                 {
                     _ports.Add(port);
                 }
@@ -80,7 +80,7 @@ namespace mRemoteNG.Tools
 
         public void StopScan()
         {
-            foreach (var p in _pings)
+            foreach (Ping p in _pings)
             {
                 p.SendAsyncCancel();
             }
@@ -93,7 +93,7 @@ namespace mRemoteNG.Tools
         {
             try
             {
-                var tcpClient = new TcpClient(hostname, Convert.ToInt32(port));
+                TcpClient tcpClient = new(hostname, Convert.ToInt32(port));
                 tcpClient.Close();
                 return true;
             }
@@ -108,7 +108,7 @@ namespace mRemoteNG.Tools
         #region Private Methods
 
         private int _hostCount;
-        private readonly List<Ping> _pings = new List<Ping>();
+        private readonly List<Ping> _pings = [];
 
         private void ScanAsync()
         {
@@ -116,11 +116,11 @@ namespace mRemoteNG.Tools
             {
                 _hostCount = 0;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...", true);
-                foreach (var ipAddress in _ipAddresses)
+                foreach (IPAddress ipAddress in _ipAddresses)
                 {
                     RaiseBeginHostScanEvent(ipAddress);
 
-                    var pingSender = new Ping();
+                    Ping pingSender = new();
                     _pings.Add(pingSender);
 
                     try
@@ -146,11 +146,11 @@ namespace mRemoteNG.Tools
         private void PingSender_PingCompleted(object sender, PingCompletedEventArgs e)
         {
             // used for clean up later...
-            var p = (Ping)sender;
+            Ping p = (Ping)sender;
 
             // UserState is the IP Address
-            var ip = e.UserState.ToString();
-            var scanHost = new ScanHost(ip);
+            string ip = e.UserState.ToString();
+            ScanHost scanHost = new(ip);
             _hostCount++;
 
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
@@ -195,12 +195,12 @@ namespace mRemoteNG.Tools
                     scanHost.HostName = scanHost.HostIp;
                 }
 
-                foreach (var port in _ports)
+                foreach (int port in _ports)
                 {
                     bool isPortOpen;
                     try
                     {
-                        var tcpClient = new TcpClient(ip, port);
+                        TcpClient tcpClient = new(ip, port);
                         isPortOpen = true;
                         scanHost.OpenPorts.Add(port);
                         tcpClient.Close();
@@ -253,7 +253,7 @@ namespace mRemoteNG.Tools
             p.PingCompleted -= PingSender_PingCompleted;
             p.Dispose();
 
-            var h = string.IsNullOrEmpty(scanHost.HostName) ? "HostNameNotFound" : scanHost.HostName;
+            string h = string.IsNullOrEmpty(scanHost.HostName) ? "HostNameNotFound" : scanHost.HostName;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
                                                 $"Tools.PortScan: Scan of {scanHost.HostIp} ({h}) complete.", true);
 
@@ -266,16 +266,16 @@ namespace mRemoteNG.Tools
 
         private static IEnumerable<IPAddress> IpAddressArrayFromRange(IPAddress ipAddress1, IPAddress ipAddress2)
         {
-            var startIpAddress = IpAddressMin(ipAddress1, ipAddress2);
-            var endIpAddress = IpAddressMax(ipAddress1, ipAddress2);
+            IPAddress startIpAddress = IpAddressMin(ipAddress1, ipAddress2);
+            IPAddress endIpAddress = IpAddressMax(ipAddress1, ipAddress2);
 
-            var startAddress = IpAddressToInt32(startIpAddress);
-            var endAddress = IpAddressToInt32(endIpAddress);
-            var addressCount = endAddress - startAddress;
+            int startAddress = IpAddressToInt32(startIpAddress);
+            int endAddress = IpAddressToInt32(endIpAddress);
+            int addressCount = endAddress - startAddress;
 
-            var addressArray = new IPAddress[addressCount + 1];
-            var index = 0;
-            for (var address = startAddress; address <= endAddress; address++)
+            IPAddress[] addressArray = new IPAddress[addressCount + 1];
+            int index = 0;
+            for (int address = startAddress; address <= endAddress; address++)
             {
                 addressArray[index] = IpAddressFromInt32(address);
                 index++;
@@ -306,7 +306,7 @@ namespace mRemoteNG.Tools
                 throw (new ArgumentException("ipAddress"));
             }
 
-            var addressBytes = ipAddress.GetAddressBytes(); // in network order (big-endian)
+            byte[] addressBytes = ipAddress.GetAddressBytes(); // in network order (big-endian)
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(addressBytes); // to host order (little-endian)
@@ -319,7 +319,7 @@ namespace mRemoteNG.Tools
 
         private static IPAddress IpAddressFromInt32(int ipAddress)
         {
-            var addressBytes = BitConverter.GetBytes(ipAddress); // in host order
+            byte[] addressBytes = BitConverter.GetBytes(ipAddress); // in host order
             if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(addressBytes); // to network order (big-endian)

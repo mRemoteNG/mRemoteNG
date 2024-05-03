@@ -53,7 +53,7 @@ namespace mRemoteNG.Tools
         /// <summary>
         /// Returns an empty <see cref="Optional{T}"/>
         /// </summary>
-        public static Optional<T> Empty => new Optional<T>();
+        public static Optional<T> Empty => new();
 
         #region IEnumerable
 
@@ -81,8 +81,8 @@ namespace mRemoteNG.Tools
         /// <param name="other"></param>
         public int CompareTo(Optional<T> other)
         {
-            var otherHasAnything = other.Any();
-            var thisHasAnything = _optional.Length > 0;
+            bool otherHasAnything = other.Any();
+            bool thisHasAnything = _optional.Length > 0;
 
             // both are empty, equivalent value
             if (!thisHasAnything && !otherHasAnything)
@@ -109,7 +109,7 @@ namespace mRemoteNG.Tools
             if (ReferenceEquals(this, obj))
                 return true;
 
-            var objAsOptional = obj as Optional<T>;
+            Optional<T> objAsOptional = obj as Optional<T>;
             if (objAsOptional != null)
                 return Equals(objAsOptional);
 
@@ -121,8 +121,8 @@ namespace mRemoteNG.Tools
 
         private bool Equals(Optional<T> other)
         {
-            var otherObj = other.FirstOrDefault();
-            var thisObj = _optional.FirstOrDefault();
+            T otherObj = other.FirstOrDefault();
+            T thisObj = _optional.FirstOrDefault();
             if (thisObj == null && otherObj == null)
                 return true;
             if (thisObj == null)

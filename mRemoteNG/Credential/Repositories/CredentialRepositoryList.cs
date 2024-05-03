@@ -8,7 +8,7 @@ namespace mRemoteNG.Credential.Repositories
 {
     public class CredentialRepositoryList : ICredentialRepositoryList
     {
-        private readonly List<ICredentialRepository> _credentialProviders = new List<ICredentialRepository>();
+        private readonly List<ICredentialRepository> _credentialProviders = [];
 
         public IEnumerable<ICredentialRepository> CredentialProviders => _credentialProviders;
 
@@ -38,8 +38,8 @@ namespace mRemoteNG.Credential.Repositories
 
         public IEnumerable<ICredentialRecord> GetCredentialRecords()
         {
-            var list = new List<ICredentialRecord>();
-            foreach (var repository in CredentialProviders)
+            List<ICredentialRecord> list = new();
+            foreach (ICredentialRepository repository in CredentialProviders)
             {
                 list.AddRange(repository.CredentialRecords);
             }
@@ -79,7 +79,7 @@ namespace mRemoteNG.Credential.Repositories
 
         private void OnRepoConfigChanged(object sender, EventArgs args)
         {
-            var repo = sender as ICredentialRepository;
+            ICredentialRepository repo = sender as ICredentialRepository;
             if (repo == null) return;
             RaiseRepositoriesUpdatedEvent(ActionType.Updated, new[] {repo});
         }

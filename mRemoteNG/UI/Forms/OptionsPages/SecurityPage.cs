@@ -76,21 +76,21 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void BtnTestSettings_Click(object sender, EventArgs e)
         {
-            var connectionTree = Runtime.ConnectionsService.ConnectionTreeModel;
+            Tree.ConnectionTreeModel connectionTree = Runtime.ConnectionsService.ConnectionTreeModel;
             if (!connectionTree.RootNodes.Any())
                 return;
 
-            var engine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
-            var mode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
-            var cryptographyProvider = new CryptoProviderFactory(engine, mode).Build();
+            BlockCipherEngines engine = (BlockCipherEngines)comboBoxEncryptionEngine.SelectedItem;
+            BlockCipherModes mode = (BlockCipherModes)comboBoxBlockCipher.SelectedItem;
+            ICryptographyProvider cryptographyProvider = new CryptoProviderFactory(engine, mode).Build();
             cryptographyProvider.KeyDerivationIterations = (int)numberBoxKdfIterations.Value;
 
-            var serializerFactory = new XmlConnectionSerializerFactory();
-            var serializer = serializerFactory.Build(cryptographyProvider, connectionTree, useFullEncryption: chkEncryptCompleteFile.Checked);
-            var nodeCount = connectionTree.GetRecursiveChildList().Count;
+            XmlConnectionSerializerFactory serializerFactory = new();
+            Config.Serializers.ISerializer<Connection.ConnectionInfo, string> serializer = serializerFactory.Build(cryptographyProvider, connectionTree, useFullEncryption: chkEncryptCompleteFile.Checked);
+            int nodeCount = connectionTree.GetRecursiveChildList().Count;
 
-            var timer = Stopwatch.StartNew();
-            var rootNode = connectionTree.RootNodes.First();
+            Stopwatch timer = Stopwatch.StartNew();
+            Container.ContainerInfo rootNode = connectionTree.RootNodes.First();
             serializer.Serialize(rootNode);
             timer.Stop();
 

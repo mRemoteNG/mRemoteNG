@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
                 throw new ArgumentNullException(nameof(pages));
 
             _pageContainer = pageContainer ?? throw new ArgumentNullException(nameof(pageContainer));
-            foreach (var page in pages)
+            foreach (SequencedControl page in pages)
             {
                 SubscribeToPageEvents(page);
                 _pages.Add(page);
@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
 
         public virtual void ReplacePage(SequencedControl newPage, RelativePagePosition pageToReplace)
         {
-            var indexModifier = 0;
+            int indexModifier = 0;
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (pageToReplace)
             {
@@ -62,7 +62,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
                     break;
             }
 
-            var pageIndexToReplace = CurrentPageIndex + indexModifier;
+            int pageIndexToReplace = CurrentPageIndex + indexModifier;
             UnsubscribeFromPageEvents(_pages[pageIndexToReplace]);
             SubscribeToPageEvents(newPage);
             _pages[pageIndexToReplace] = newPage;
@@ -113,7 +113,7 @@ namespace mRemoteNG.UI.Controls.PageSequence
         protected virtual void Dispose(bool disposing)
         {
             if (!disposing) return;
-            foreach (var page in _pages)
+            foreach (SequencedControl page in _pages)
             {
                 UnsubscribeFromPageEvents(page);
             }

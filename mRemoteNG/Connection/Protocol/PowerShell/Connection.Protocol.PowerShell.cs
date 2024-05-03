@@ -191,9 +191,9 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
 
                 // Setup process for script with arguments
                 //* The -NoProfile parameter would be a valuable addition but should be able to be deactivated.
-                var arguments = $@"-NoExit -Command ""& {{ {psScriptBlock} }}"" -Hostname ""'{_connectionInfo.Hostname}'"" -Username ""'{psUsername}'"" -Password ""'{_connectionInfo.Password}'"" -LoginAttempts {psLoginAttempts}";
-                var hostname = _connectionInfo.Hostname.Trim().ToLower();
-                var useLocalHost = hostname == "" || hostname.Equals("localhost");
+                string arguments = $@"-NoExit -Command ""& {{ {psScriptBlock} }}"" -Hostname ""'{_connectionInfo.Hostname}'"" -Username ""'{psUsername}'"" -Password ""'{_connectionInfo.Password}'"" -LoginAttempts {psLoginAttempts}";
+                string hostname = _connectionInfo.Hostname.Trim().ToLower();
+                bool useLocalHost = hostname == "" || hostname.Equals("localhost");
                 if (useLocalHost)
                 {
                     arguments = $@"-NoExit";

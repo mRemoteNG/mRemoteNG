@@ -23,7 +23,7 @@ namespace mRemoteNG.Messages
 
         public void AddMessage(MessageClass messageClass, string messageText, bool onlyLog = false)
         {
-            var message = new Message(messageClass, messageText, onlyLog);
+            Message message = new(messageClass, messageText, onlyLog);
             AddMessage(message);
         }
 
@@ -34,8 +34,8 @@ namespace mRemoteNG.Messages
 
         public void AddMessages(IEnumerable<IMessage> messages)
         {
-            var newMessages = new List<IMessage>();
-            foreach (var message in messages)
+            List<IMessage> newMessages = new();
+            foreach (IMessage message in messages)
             {
                 if (_messageList.Contains(message)) continue;
                 _messageList.Add(message);

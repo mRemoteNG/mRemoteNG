@@ -18,25 +18,25 @@ namespace mRemoteNG.App.Info
         public const string UrlForum = "https://www.reddit.com/r/mRemoteNG";
         public const string UrlBugs = "https://bugs.mremoteng.org";
         public const string UrlDocumentation = "https://mremoteng.readthedocs.io/en/latest/";
-        public static string ApplicationVersion = Application.ProductVersion;
+        public static readonly string ApplicationVersion = Application.ProductVersion;
         public static readonly string ProductName = Application.ProductName;
         public static readonly string Copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false))?.Copyright;
         public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
 
         //public static string ReportingFilePath = "";
-        public static readonly string PuttyPath = HomePath + "\\PuTTYNG.exe";
+        private static readonly string puttyPath = HomePath + "\\PuTTYNG.exe";
 
         public static string UserAgent
         {
             get
             {
-                var details = new List<string>
-                {
+                List<string> details =
+                [
                     "compatible",
                     OSVersion.Platform == PlatformID.Win32NT
                         ? $"Windows NT {OSVersion.Version.Major}.{OSVersion.Version.Minor}"
                         : OSVersion.VersionString
-                };
+                ];
                 if (Is64BitProcess)
                 {
                     details.Add("WOW64");
@@ -44,15 +44,17 @@ namespace mRemoteNG.App.Info
 
                 details.Add(Thread.CurrentThread.CurrentUICulture.Name);
                 details.Add($".NET CLR {Environment.Version}");
-                var detailsString = string.Join("; ", details.ToArray());
+                string detailsString = string.Join("; ", [.. details]);
 
                 return $"Mozilla/5.0 ({detailsString}) {ProductName}/{ApplicationVersion}";
             }
         }
 
+        public static string PuttyPath => puttyPath;
+
         public static Version GetApplicationVersion()
         {
-            System.Version.TryParse(ApplicationVersion, out var v);
+            _ = System.Version.TryParse(ApplicationVersion, out Version v);
             return v;
         }
     }

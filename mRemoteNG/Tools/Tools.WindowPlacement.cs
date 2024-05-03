@@ -60,7 +60,7 @@ namespace mRemoteNG.Tools
                 throw (new NullReferenceException("WindowPlacement.Form is not set."));
             }
 
-            NativeMethods.WINDOWPLACEMENT windowPlacement = new NativeMethods.WINDOWPLACEMENT();
+            NativeMethods.WINDOWPLACEMENT windowPlacement = new();
             windowPlacement.length = (uint)Marshal.SizeOf(windowPlacement);
             try
             {

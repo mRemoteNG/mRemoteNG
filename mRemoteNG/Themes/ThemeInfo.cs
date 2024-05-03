@@ -60,13 +60,13 @@ namespace mRemoteNG.Themes
 
         public object Clone()
         {
-            var extPalette = new ExtendedColorPalette
+            ExtendedColorPalette extPalette = new()
             {
                 ExtColorPalette =
                     _extendedPalette.ExtColorPalette.ToDictionary(entry => entry.Key, entry => entry.Value),
                 DefaultColorPalette = _extendedPalette.DefaultColorPalette
             };
-            var clonedObj = new ThemeInfo(_name, _theme, _URI, _version, extPalette)
+            ThemeInfo clonedObj = new(_name, _theme, _URI, _version, extPalette)
             {
                 IsExtendable = IsExtendable,
                 IsThemeBase = IsThemeBase

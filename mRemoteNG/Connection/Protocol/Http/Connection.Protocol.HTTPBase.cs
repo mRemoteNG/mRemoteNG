@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Windows.Forms;
 using Microsoft.Web.WebView2.WinForms;
+using Microsoft.Web.WebView2.Core;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
 using mRemoteNG.UI.Tabs;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using System.Windows.Forms.VisualStyles;
+
 
 namespace mRemoteNG.Connection.Protocol.Http
 {
@@ -29,7 +32,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 if (renderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    Control = new WebView2()
+                    Control = new Microsoft.Web.WebView2.WinForms.WebView2()
                     {
                         Dock = DockStyle.Fill,
                     };
@@ -64,13 +67,12 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    var edge = (WebView2)_wBrowser;
-                    
+                    Microsoft.Web.WebView2.WinForms.WebView2 edge = (Microsoft.Web.WebView2.WinForms.WebView2)_wBrowser;
                     edge.CoreWebView2InitializationCompleted += Edge_CoreWebView2InitializationCompleted;
                 }
                 else
                 {
-                    var objWebBrowser = (WebBrowser)_wBrowser;
+                    WebBrowser objWebBrowser = (WebBrowser)_wBrowser;
                     objWebBrowser.ScrollBarsEnabled = true;
 
                     // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
@@ -95,11 +97,12 @@ namespace mRemoteNG.Connection.Protocol.Http
             {
                 if (InterfaceControl.Info.RenderingEngine == RenderingEngine.EdgeChromium)
                 {
-                    ((WebView2)_wBrowser).Source = new Uri(GetUrl());
+                    ((Microsoft.Web.WebView2.WinForms.WebView2)_wBrowser).Source = new Uri(GetUrl());
                 }
                 else
                 {
                     ((WebBrowser)_wBrowser).Navigate(GetUrl());
+
                 }
 
                 base.Connect();
@@ -112,6 +115,12 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
         }
 
+        private void CoreWebView2_NewWindowRequested(object sender, CoreWebView2NewWindowRequestedEventArgs e)
+        {
+            // Suppress the popup (prevent it from opening in a new window)
+            e.Handled = true;
+        }
+
         #endregion
 
         #region Private Methods
@@ -120,15 +129,19 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
-                var strHost = InterfaceControl.Info.Hostname;
+                string strHost = InterfaceControl.Info.Hostname;
 
                 if (InterfaceControl.Info.Port != defaultPort)
                 {
                     if (strHost.EndsWith("/"))
-                        strHost = strHost.Substring(0, strHost.Length - 1);
+                    {
+                        strHost = strHost[..^1];
+                    }
 
                     if (strHost.Contains(httpOrS + "://") == false)
+                    {
                         strHost = httpOrS + "://" + strHost;
+                    }
 
                     strHost = strHost + ":" + InterfaceControl.Info.Port;
                 }
@@ -161,7 +174,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 
         private void WBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
-            if (!(_wBrowser is WebBrowser objWebBrowser)) return;
+            if (_wBrowser is not WebBrowser objWebBrowser) return;
 
             // This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
             objWebBrowser.AllowWebBrowserDrop = false;
@@ -173,11 +186,11 @@ namespace mRemoteNG.Connection.Protocol.Http
         {
             try
             {
-                if (!(InterfaceControl.Parent is ConnectionTab tabP)) return;
+                if (InterfaceControl.Parent is not ConnectionTab tabP) return;
                 string shortTitle;
                 if (((WebBrowser)_wBrowser).DocumentTitle.Length >= 15)
                 {
-                    shortTitle = ((WebBrowser)_wBrowser).DocumentTitle.Substring(0, 10) + "...";
+                    shortTitle = ((WebBrowser)_wBrowser).DocumentTitle[..10] + "...";
                 }
                 else
                 {

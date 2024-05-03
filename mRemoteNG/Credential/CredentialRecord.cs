@@ -9,7 +9,7 @@ namespace mRemoteNG.Credential
     {
         private string _title = "New Credential";
         private string _username = "";
-        private SecureString _password = new SecureString();
+        private SecureString _password = new();
         private string _domain = "";
 
         public Guid Id { get; } = Guid.NewGuid();

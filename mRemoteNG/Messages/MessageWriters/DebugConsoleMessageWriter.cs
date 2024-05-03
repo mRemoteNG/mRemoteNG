@@ -6,7 +6,7 @@ namespace mRemoteNG.Messages.MessageWriters
     {
         public void Write(IMessage message)
         {
-            var textToPrint = $"{message.Class}: {message.Text}";
+            string textToPrint = $"{message.Class}: {message.Text}";
             Debug.Print(textToPrint);
         }
     }

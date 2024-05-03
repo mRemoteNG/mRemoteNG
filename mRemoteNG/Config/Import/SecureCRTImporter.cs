@@ -31,12 +31,12 @@ namespace mRemoteNG.Config.Import
                                                     $"Unable to import file. File does not exist. Path: {fileName}");
 
 
-            var dataProvider = new FileDataProvider(fileName);
-            var content = dataProvider.Load();
-            var deserializer = new SecureCRTFileDeserializer();
-            var connectionTreeModel = deserializer.Deserialize(content);
+            FileDataProvider dataProvider = new(fileName);
+            string content = dataProvider.Load();
+            SecureCRTFileDeserializer deserializer = new();
+            ConnectionTreeModel connectionTreeModel = deserializer.Deserialize(content);
 
-            var rootImportContainer = new ContainerInfo { Name = Path.GetFileNameWithoutExtension(fileName) };
+            ContainerInfo rootImportContainer = new() { Name = Path.GetFileNameWithoutExtension(fileName) };
             rootImportContainer.AddChildRange(connectionTreeModel.RootNodes.First().Children.ToArray());
             destinationContainer.AddChild(rootImportContainer);
         }

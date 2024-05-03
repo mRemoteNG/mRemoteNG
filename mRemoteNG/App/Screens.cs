@@ -10,8 +10,8 @@ namespace mRemoteNG.App
         [SupportedOSPlatform("windows")]
         public static void SendFormToScreen(Screen screen)
         {
-            var frmMain = FrmMain.Default;
-            var wasMax = false;
+            FrmMain frmMain = FrmMain.Default;
+            bool wasMax = false;
 
             if (frmMain.WindowState == FormWindowState.Maximized)
             {

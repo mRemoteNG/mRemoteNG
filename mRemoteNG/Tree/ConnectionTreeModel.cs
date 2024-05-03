@@ -13,7 +13,7 @@ namespace mRemoteNG.Tree
     [SupportedOSPlatform("windows")]
     public sealed class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
     {
-        public List<ContainerInfo> RootNodes { get; } = new List<ContainerInfo>();
+        public List<ContainerInfo> RootNodes { get; } = [];
 
         public void AddRootNode(ContainerInfo rootNode)
         {
@@ -39,8 +39,8 @@ namespace mRemoteNG.Tree
 
         public IReadOnlyList<ConnectionInfo> GetRecursiveChildList()
         {
-            var list = new List<ConnectionInfo>();
-            foreach (var rootNode in RootNodes)
+            List<ConnectionInfo> list = new();
+            foreach (ContainerInfo rootNode in RootNodes)
             {
                 list.AddRange(GetRecursiveChildList(rootNode));
             }

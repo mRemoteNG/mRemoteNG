@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Controls
         // Constructor
         public MrngRadioButton()
         {
-            var display = new DisplayProperties();
+            DisplayProperties display = new();
 
             _circleSmall = new Rectangle(display.ScaleWidth(4), display.ScaleHeight(4), display.ScaleWidth(6),
                                          display.ScaleHeight(6));
@@ -85,12 +85,12 @@ namespace mRemoteNG.UI.Controls
             }
 
             // Init
-            var g = e.Graphics;
+            Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            var fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
-            var outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border");
-            var centerBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
+            Color fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text");
+            Color outline = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Border");
+            Color centerBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
             Color center;
 
             // Overlay Graphic
@@ -116,7 +116,7 @@ namespace mRemoteNG.UI.Controls
                 fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Text_Disabled");
             }
 
-            var textRect = new Rectangle(_textXCoord, Padding.Top, Width - 16, Height);
+            Rectangle textRect = new(_textXCoord, Padding.Top, Width - 16, Height);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
                                   TextFormatFlags.PathEllipsis);
 

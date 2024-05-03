@@ -52,14 +52,14 @@ namespace mRemoteNG.UI.Controls
         private void TvActiveDirectory_AfterSelect(object sender, TreeViewEventArgs e)
         {
             AdPath = e.Node.Tag.ToString();
-            var pathChangedEvent = AdPathChanged;
+            AdPathChangedEventHandler pathChangedEvent = AdPathChanged;
             pathChangedEvent?.Invoke(this);
         }
 
         private void AdTree_Load(object sender, EventArgs e)
         {
             tvActiveDirectory.Nodes.Clear();
-            var treeNode = new TreeNode(Domain) { Tag = "" };
+            TreeNode treeNode = new(Domain) { Tag = "" };
             tvActiveDirectory.Nodes.Add(treeNode);
             AddTreeNodes(treeNode);
             tvActiveDirectory.Nodes[0].Expand();
@@ -67,15 +67,15 @@ namespace mRemoteNG.UI.Controls
 
         private void AddTreeNodes(TreeNode tNode)
         {
-            var adhelper = new AdHelper(Domain);
+            AdHelper adhelper = new(Domain);
             adhelper.GetChildEntries(tNode.Tag.ToString());
-            var enumerator = adhelper.Children.GetEnumerator();
+            System.Collections.IDictionaryEnumerator enumerator = adhelper.Children.GetEnumerator();
             tvActiveDirectory.BeginUpdate();
             while (enumerator.MoveNext())
             {
-                var flag1 = false;
+                bool flag1 = false;
                 if (enumerator.Key == null) continue;
-                var node1 = new TreeNode(enumerator.Key.ToString().Substring(3))
+                TreeNode node1 = new(enumerator.Key.ToString().Substring(3))
                 {
                     Tag = RuntimeHelpers.GetObjectValue(enumerator.Value)
                 };
@@ -86,7 +86,7 @@ namespace mRemoteNG.UI.Controls
 
                 if (flag1)
                 {
-                    var flag2 = false;
+                    bool flag2 = false;
                     try
                     {
                         foreach (TreeNode node2 in tNode.Nodes)
@@ -105,7 +105,7 @@ namespace mRemoteNG.UI.Controls
                         tNode.Nodes.Add(node1);
                 }
 
-                var imageIndex = GetImageIndex(enumerator.Key.ToString().Substring(0, 2));
+                int imageIndex = GetImageIndex(enumerator.Key.ToString().Substring(0, 2));
                 node1.ImageIndex = imageIndex;
                 node1.SelectedImageIndex = imageIndex;
             }

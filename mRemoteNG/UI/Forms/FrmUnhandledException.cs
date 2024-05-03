@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Forms
 
         private void buttonCopyAll_Click(object sender, EventArgs e)
         {
-            var text = new StringBuilder()
+            string text = new StringBuilder()
                .AppendLine("```")
                .AppendLine(labelExceptionMessageHeader.Text)
                .AppendLine("\"" + textBoxExceptionMessage.Text + "\"")

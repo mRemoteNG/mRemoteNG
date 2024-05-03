@@ -34,7 +34,7 @@ namespace ExternalConnectors.DSS
                 try
                 {
                     // display gui and ask for data
-                    SSConnectionForm f = new SSConnectionForm();
+                    SSConnectionForm f = new();
                     string? un = key.GetValue("Username") as string;
                     f.tbUsername.Text = un ?? "";
                     f.tbPassword.Text = SSConnectionData.ssPassword;    // in OTP refresh cases, this value might already be filled
@@ -212,7 +212,7 @@ namespace ExternalConnectors.DSS
         private static string DecodePrivateKey(string encryptedPrivateKey, string password)
         {
             TextReader textReader = new StringReader(encryptedPrivateKey);
-            PemReader pemReader = new PemReader(textReader, new PasswordFinder(password));
+            PemReader pemReader = new(textReader, new PasswordFinder(password));
 
             AsymmetricCipherKeyPair keyPair = (AsymmetricCipherKeyPair)pemReader.ReadObject();
 
@@ -242,10 +242,10 @@ namespace ExternalConnectors.DSS
         // read private key pem string to rsacryptoserviceprovider
         public static RSACryptoServiceProvider ImportPrivateKey(string pem)
         {
-            PemReader pr = new PemReader(new StringReader(pem));
+            PemReader pr = new(new StringReader(pem));
             AsymmetricCipherKeyPair KeyPair = (AsymmetricCipherKeyPair)pr.ReadObject();
             RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)KeyPair.Private);
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            RSACryptoServiceProvider rsa = new();
             rsa.ImportParameters(rsaParams);
             return rsa;
         }

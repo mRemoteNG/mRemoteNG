@@ -9,7 +9,7 @@ namespace mRemoteNG.Tools
     {
         public bool Start(CommandLineArguments arguments = null)
         {
-            var filename = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
+            string filename = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : App.Info.GeneralAppInfo.PuttyPath;
             return Start(filename, arguments);
         }
     }

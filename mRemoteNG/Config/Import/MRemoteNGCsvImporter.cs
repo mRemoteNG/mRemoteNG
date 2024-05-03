@@ -24,12 +24,12 @@ namespace mRemoteNG.Config.Import
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
                                                     $"Unable to import file. File does not exist. Path: {filePath}");
 
-            var dataProvider = new FileDataProvider(filePath);
-            var xmlString = dataProvider.Load();
-            var xmlConnectionsDeserializer = new CsvConnectionsDeserializerMremotengFormat();
-            var connectionTreeModel = xmlConnectionsDeserializer.Deserialize(xmlString);
+            FileDataProvider dataProvider = new(filePath);
+            string xmlString = dataProvider.Load();
+            CsvConnectionsDeserializerMremotengFormat xmlConnectionsDeserializer = new();
+            Tree.ConnectionTreeModel connectionTreeModel = xmlConnectionsDeserializer.Deserialize(xmlString);
 
-            var rootImportContainer = new ContainerInfo {Name = Path.GetFileNameWithoutExtension(filePath)};
+            ContainerInfo rootImportContainer = new() { Name = Path.GetFileNameWithoutExtension(filePath)};
             rootImportContainer.AddChildRange(connectionTreeModel.RootNodes.First().Children.ToArray());
             destinationContainer.AddChild(rootImportContainer);
         }

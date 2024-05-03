@@ -37,39 +37,39 @@ namespace mRemoteNG.Config.Connections
 
         public ConnectionTreeModel Load()
         {
-            var connector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
-            var dataProvider = new SqlDataProvider(connector);
-            var metaDataRetriever = new SqlDatabaseMetaDataRetriever();
-            var databaseVersionVerifier = new SqlDatabaseVersionVerifier(connector);
-            var cryptoProvider = new LegacyRijndaelCryptographyProvider();
-            var metaData = metaDataRetriever.GetDatabaseMetaData(connector) ?? HandleFirstRun(metaDataRetriever, connector);
-            var decryptionKey = GetDecryptionKey(metaData);
+            IDatabaseConnector connector = DatabaseConnectorFactory.DatabaseConnectorFromSettings();
+            SqlDataProvider dataProvider = new(connector);
+            SqlDatabaseMetaDataRetriever metaDataRetriever = new();
+            SqlDatabaseVersionVerifier databaseVersionVerifier = new(connector);
+            LegacyRijndaelCryptographyProvider cryptoProvider = new();
+            SqlConnectionListMetaData metaData = metaDataRetriever.GetDatabaseMetaData(connector) ?? HandleFirstRun(metaDataRetriever, connector);
+            Optional<SecureString> decryptionKey = GetDecryptionKey(metaData);
 
             if (!decryptionKey.Any())
                 throw new Exception("Could not load SQL connections");
 
             databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion);
-            var dataTable = dataProvider.Load();
-            var deserializer = new DataTableDeserializer(cryptoProvider, decryptionKey.First());
-            var connectionTree = deserializer.Deserialize(dataTable);
+            System.Data.DataTable dataTable = dataProvider.Load();
+            DataTableDeserializer deserializer = new(cryptoProvider, decryptionKey.First());
+            ConnectionTreeModel connectionTree = deserializer.Deserialize(dataTable);
             ApplyLocalConnectionProperties(connectionTree.RootNodes.First(i => i is RootNodeInfo));
             return connectionTree;
         }
 
         private Optional<SecureString> GetDecryptionKey(SqlConnectionListMetaData metaData)
         {
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var cipherText = metaData.Protected;
-            var authenticator = new PasswordAuthenticator(cryptographyProvider, cipherText, AuthenticationRequestor);
-            var authenticated = authenticator.Authenticate(new RootNodeInfo(RootNodeType.Connection).DefaultPassword.ConvertToSecureString());
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
+            string cipherText = metaData.Protected;
+            PasswordAuthenticator authenticator = new(cryptographyProvider, cipherText, AuthenticationRequestor);
+            bool authenticated = authenticator.Authenticate(new RootNodeInfo(RootNodeType.Connection).DefaultPassword.ConvertToSecureString());
 
             return authenticated ? authenticator.LastAuthenticatedPassword : Optional<SecureString>.Empty;
         }
 
         private void ApplyLocalConnectionProperties(ContainerInfo rootNode)
         {
-            var localPropertiesXml = _dataProvider.Load();
-            var localConnectionProperties = _localConnectionPropertiesDeserializer.Deserialize(localPropertiesXml);
+            string localPropertiesXml = _dataProvider.Load();
+            IEnumerable<LocalConnectionPropertiesModel> localConnectionProperties = _localConnectionPropertiesDeserializer.Deserialize(localPropertiesXml);
 
             rootNode
                 .GetRecursiveChildList()

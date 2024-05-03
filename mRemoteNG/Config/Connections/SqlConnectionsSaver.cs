@@ -38,7 +38,7 @@ namespace mRemoteNG.Config.Connections
 
         public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
-            var rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+            RootNodeInfo rootTreeNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 
             UpdateLocalConnectionProperties(rootTreeNode);
 
@@ -54,12 +54,12 @@ namespace mRemoteNG.Config.Connections
                 return;
             }
 
-            using (var dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings())
+            using (IDatabaseConnector dbConnector = DatabaseConnectorFactory.DatabaseConnectorFromSettings())
             {
                 dbConnector.Connect();
-                var databaseVersionVerifier = new SqlDatabaseVersionVerifier(dbConnector);
-                var metaDataRetriever = new SqlDatabaseMetaDataRetriever();
-                var metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
+                SqlDatabaseVersionVerifier databaseVersionVerifier = new(dbConnector);
+                SqlDatabaseMetaDataRetriever metaDataRetriever = new();
+                SqlConnectionListMetaData metaData = metaDataRetriever.GetDatabaseMetaData(dbConnector);
 
                 if (!databaseVersionVerifier.VerifyDatabaseVersion(metaData.ConfVersion))
                 {
@@ -93,7 +93,7 @@ namespace mRemoteNG.Config.Connections
 
         private void UpdateLocalConnectionProperties(ContainerInfo rootNode)
         {
-            var a = rootNode.GetRecursiveChildList().Select(info => new LocalConnectionPropertiesModel
+            IEnumerable<LocalConnectionPropertiesModel> a = rootNode.GetRecursiveChildList().Select(info => new LocalConnectionPropertiesModel
             {
                 ConnectionId = info.ConstantID,
                 Connected = info.OpenConnections.Count > 0,
@@ -101,7 +101,7 @@ namespace mRemoteNG.Config.Connections
                 Favorite = info.Favorite,
             });
 
-            var serializedProperties = _localPropertiesSerializer.Serialize(a);
+            string serializedProperties = _localPropertiesSerializer.Serialize(a);
             _dataProvider.Save(serializedProperties);
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Saved local connection properties");
         }
@@ -109,13 +109,13 @@ namespace mRemoteNG.Config.Connections
         private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
             // TODO: use transaction, but method not used at all?
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             string strProtected;
             if (rootTreeNode != null)
             {
                 if (rootTreeNode.Password)
                 {
-                    var password = rootTreeNode.PasswordString.ConvertToSecureString();
+                    System.Security.SecureString password = rootTreeNode.PasswordString.ConvertToSecureString();
                     strProtected = cryptographyProvider.Encrypt("ThisIsProtected", password);
                 }
                 else
@@ -128,7 +128,7 @@ namespace mRemoteNG.Config.Connections
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", Runtime.EncryptionKey);
             }
 
-            var dbQuery = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
+            System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("TRUNCATE TABLE tblRoot");
             dbQuery.ExecuteNonQuery();
 
             if (rootTreeNode != null)
@@ -148,11 +148,11 @@ namespace mRemoteNG.Config.Connections
 
         private void UpdateConnectionsTable(RootNodeInfo rootTreeNode, IDatabaseConnector databaseConnector)
         {
-            SqlDataProvider dataProvider = new SqlDataProvider(databaseConnector);
+            SqlDataProvider dataProvider = new(databaseConnector);
             DataTable currentDataTable = dataProvider.Load();
 
-            LegacyRijndaelCryptographyProvider cryptoProvider = new LegacyRijndaelCryptographyProvider();
-            DataTableSerializer serializer = new DataTableSerializer(_saveFilter, cryptoProvider, rootTreeNode.PasswordString.ConvertToSecureString());
+            LegacyRijndaelCryptographyProvider cryptoProvider = new();
+            DataTableSerializer serializer = new(_saveFilter, cryptoProvider, rootTreeNode.PasswordString.ConvertToSecureString());
             serializer.SetSourceDataTable(currentDataTable);
 
             DataTable dataTable = serializer.Serialize(rootTreeNode);
@@ -163,7 +163,7 @@ namespace mRemoteNG.Config.Connections
         private void UpdateUpdatesTable(IDatabaseConnector databaseConnector)
         {
             // TODO: use transaction
-            var dbQuery = databaseConnector.DbCommand("TRUNCATE TABLE tblUpdate");
+            System.Data.Common.DbCommand dbQuery = databaseConnector.DbCommand("TRUNCATE TABLE tblUpdate");
             dbQuery.ExecuteNonQuery();
             dbQuery = databaseConnector.DbCommand("INSERT INTO tblUpdate (LastUpdate) VALUES('" + MiscTools.DBDate(DateTime.Now.ToUniversalTime()) + "')");
             dbQuery.ExecuteNonQuery();

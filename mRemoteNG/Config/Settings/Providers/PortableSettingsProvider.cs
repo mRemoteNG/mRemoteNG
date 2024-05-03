@@ -115,7 +115,7 @@ namespace mRemoteNG.Config.Settings.Providers
         public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context,
                                                                           SettingsPropertyCollection collection)
         {
-            var values = new SettingsPropertyValueCollection();
+            SettingsPropertyValueCollection values = new();
 
             foreach (SettingsProperty property in collection)
             {
@@ -130,9 +130,9 @@ namespace mRemoteNG.Config.Settings.Providers
 
         private void SetValue(SettingsPropertyValue propertyValue)
         {
-            var targetNode = IsGlobal(propertyValue.Property) ? _globalSettingsNode : _localSettingsNode;
+            XmlNode targetNode = IsGlobal(propertyValue.Property) ? _globalSettingsNode : _localSettingsNode;
 
-            var settingNode = targetNode.SelectSingleNode($"setting[@name='{propertyValue.Name}']");
+            XmlNode settingNode = targetNode.SelectSingleNode($"setting[@name='{propertyValue.Name}']");
 
             if (settingNode != null)
                 settingNode.InnerText = propertyValue.SerializedValue.ToString();
@@ -140,7 +140,7 @@ namespace mRemoteNG.Config.Settings.Providers
             {
                 settingNode = _rootDocument.CreateElement("setting");
 
-                var nameAttribute = _rootDocument.CreateAttribute("name");
+                XmlAttribute nameAttribute = _rootDocument.CreateAttribute("name");
                 nameAttribute.Value = propertyValue.Name;
 
                 settingNode.Attributes?.Append(nameAttribute);
@@ -152,8 +152,8 @@ namespace mRemoteNG.Config.Settings.Providers
 
         private string GetValue(SettingsProperty property)
         {
-            var targetNode = IsGlobal(property) ? _globalSettingsNode : _localSettingsNode;
-            var settingNode = targetNode.SelectSingleNode($"setting[@name='{property.Name}']");
+            XmlNode targetNode = IsGlobal(property) ? _globalSettingsNode : _localSettingsNode;
+            XmlNode settingNode = targetNode.SelectSingleNode($"setting[@name='{property.Name}']");
 
             if (settingNode == null)
                 return property.DefaultValue != null ? property.DefaultValue.ToString() : string.Empty;
@@ -174,7 +174,7 @@ namespace mRemoteNG.Config.Settings.Providers
 
         private XmlNode GetSettingsNode(string name)
         {
-            var settingsNode = _rootNode.SelectSingleNode(name);
+            XmlNode settingsNode = _rootNode.SelectSingleNode(name);
 
             if (settingsNode != null) return settingsNode;
             settingsNode = _rootDocument.CreateElement(name);
@@ -185,7 +185,7 @@ namespace mRemoteNG.Config.Settings.Providers
 
         private static XmlDocument GetBlankXmlDocument()
         {
-            var blankXmlDocument = new XmlDocument();
+            XmlDocument blankXmlDocument = new();
             blankXmlDocument.AppendChild(blankXmlDocument.CreateXmlDeclaration("1.0", "utf-8", string.Empty));
             blankXmlDocument.AppendChild(blankXmlDocument.CreateElement(_rootNodeName));
 

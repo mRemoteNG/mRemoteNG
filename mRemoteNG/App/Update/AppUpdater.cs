@@ -60,13 +60,13 @@ namespace mRemoteNG.App.Update
 
         private void SetDefaultProxySettings()
         {
-            var shouldWeUseProxy = Properties.OptionsUpdatesPage.Default.UpdateUseProxy;
-            var proxyAddress = Properties.OptionsUpdatesPage.Default.UpdateProxyAddress;
-            var port = Properties.OptionsUpdatesPage.Default.UpdateProxyPort;
-            var useAuthentication = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
-            var username = Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var password = cryptographyProvider.Decrypt(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
+            bool shouldWeUseProxy = Properties.OptionsUpdatesPage.Default.UpdateUseProxy;
+            string proxyAddress = Properties.OptionsUpdatesPage.Default.UpdateProxyAddress;
+            int port = Properties.OptionsUpdatesPage.Default.UpdateProxyPort;
+            bool useAuthentication = Properties.OptionsUpdatesPage.Default.UpdateProxyUseAuthentication;
+            string username = Properties.OptionsUpdatesPage.Default.UpdateProxyAuthUser;
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
+            string password = cryptographyProvider.Decrypt(Properties.OptionsUpdatesPage.Default.UpdateProxyAuthPass, Runtime.EncryptionKey);
 
             SetProxySettings(shouldWeUseProxy, proxyAddress, port, useAuthentication, username, password);
         }
@@ -132,19 +132,19 @@ namespace mRemoteNG.App.Update
             try
             {
                 _getUpdateInfoCancelToken = new CancellationTokenSource();
-                using var response = await _httpClient.GetAsync(CurrentUpdateInfo.DownloadAddress, HttpCompletionOption.ResponseHeadersRead, _getUpdateInfoCancelToken.Token);
-                var buffer = new byte[_bufferLength];
-                var totalBytes = response.Content.Headers.ContentLength ?? 0;
-                var readBytes = 0L;
+                using HttpResponseMessage response = await _httpClient.GetAsync(CurrentUpdateInfo.DownloadAddress, HttpCompletionOption.ResponseHeadersRead, _getUpdateInfoCancelToken.Token);
+                byte[] buffer = new byte[_bufferLength];
+                long totalBytes = response.Content.Headers.ContentLength ?? 0;
+                long readBytes = 0L;
 
-                await using (var httpStream = await response.Content.ReadAsStreamAsync(_getUpdateInfoCancelToken.Token))
+                await using (Stream httpStream = await response.Content.ReadAsStreamAsync(_getUpdateInfoCancelToken.Token))
                 {
-                    await using var fileStream = new FileStream(CurrentUpdateInfo.UpdateFilePath, FileMode.Create,
+                    await using FileStream fileStream = new(CurrentUpdateInfo.UpdateFilePath, FileMode.Create,
                         FileAccess.Write, FileShare.None, _bufferLength, true);
 
                     while (readBytes <= totalBytes || !_getUpdateInfoCancelToken.IsCancellationRequested)
                     {
-                        var bytesRead =
+                        int bytesRead =
                             await httpStream.ReadAsync(buffer, 0, _bufferLength, _getUpdateInfoCancelToken.Token);
                         if (bytesRead == 0)
                         {
@@ -156,13 +156,13 @@ namespace mRemoteNG.App.Update
 
                         readBytes += bytesRead;
 
-                        var percentComplete = (int)(readBytes * 100 / totalBytes);
+                        int percentComplete = (int)(readBytes * 100 / totalBytes);
                         progress.Report(percentComplete);
                     }
                 }
 
 #if !PORTABLE
-                    var updateAuthenticode = new Authenticode(CurrentUpdateInfo.UpdateFilePath)
+                Authenticode updateAuthenticode = new(CurrentUpdateInfo.UpdateFilePath)
                     {
                         RequireThumbprintMatch = true,
                         ThumbprintToMatch = CurrentUpdateInfo.CertificateThumbprint
@@ -179,10 +179,10 @@ namespace mRemoteNG.App.Update
                     }
 #endif
 
-                using var checksum = SHA512.Create();
-                await using var stream = File.OpenRead(CurrentUpdateInfo.UpdateFilePath);
-                var hash = await checksum.ComputeHashAsync(stream);
-                var hashString = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
+                using SHA512 checksum = SHA512.Create();
+                await using FileStream stream = File.OpenRead(CurrentUpdateInfo.UpdateFilePath);
+                byte[] hash = await checksum.ComputeHashAsync(stream);
+                string hashString = BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
                 if (!hashString.Equals(CurrentUpdateInfo.Checksum))
                     throw new Exception("SHA512 Hashes didn't match!");
             } finally{
@@ -202,7 +202,7 @@ namespace mRemoteNG.App.Update
                 _httpClient.Dispose();
             }
 
-            var httpClientHandler = new HttpClientHandler();
+            HttpClientHandler httpClientHandler = new();
             if (_webProxy != null)
             {
                 httpClientHandler.UseProxy = true;
@@ -224,7 +224,7 @@ namespace mRemoteNG.App.Update
             try
             {
                 _getUpdateInfoCancelToken = new CancellationTokenSource();
-                var updateInfo = await _httpClient.GetStringAsync(UpdateChannelInfo.GetUpdateChannelInfo(), _getUpdateInfoCancelToken.Token);
+                string updateInfo = await _httpClient.GetStringAsync(UpdateChannelInfo.GetUpdateChannelInfo(), _getUpdateInfoCancelToken.Token);
                 CurrentUpdateInfo = UpdateInfo.FromString(updateInfo);
                 Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
 

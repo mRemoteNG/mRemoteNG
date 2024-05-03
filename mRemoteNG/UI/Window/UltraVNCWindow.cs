@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Window
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources =
-                new System.ComponentModel.ComponentResourceManager(typeof(UltraVNCWindow));
+                new(typeof(UltraVNCWindow));
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.btnDisconnect = new System.Windows.Forms.ToolStripButton();
             this.pnlContainer = new System.Windows.Forms.Panel();

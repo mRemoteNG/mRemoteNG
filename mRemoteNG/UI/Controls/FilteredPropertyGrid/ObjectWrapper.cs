@@ -26,7 +26,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
         /// <summary>
         /// Get or set a reference to the collection of properties to show in the parent PropertyGrid
         /// </summary>
-        public List<PropertyDescriptor> PropertyDescriptors { get; set; } = new List<PropertyDescriptor>();
+        public List<PropertyDescriptor> PropertyDescriptors { get; set; } = [];
 
         #region ICustomTypeDescriptor Members
 

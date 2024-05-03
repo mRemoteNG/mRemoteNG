@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private readonly ThemeManager _themeManager;
         private readonly bool _oriActiveTheming;
-        private readonly List<ThemeInfo> modifiedThemes = new List<ThemeInfo>();
+        private readonly List<ThemeInfo> modifiedThemes = [];
 
         #endregion
 
@@ -74,7 +74,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void ListPalette_FormatCell(object sender, FormatCellEventArgs e)
         {
             if (e.ColumnIndex != ColorCol.Index) return;
-            var colorElem = (PseudoKeyColor)e.Model;
+            PseudoKeyColor colorElem = (PseudoKeyColor)e.Model;
             e.SubItem.BackColor = colorElem.Value;
         }
 
@@ -97,7 +97,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
             }
 
-            foreach (var updatedTheme in modifiedThemes)
+            foreach (ThemeInfo updatedTheme in modifiedThemes)
             {
                 _themeManager.updateTheme(updatedTheme);
             }
@@ -127,7 +127,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             btnThemeNew.Enabled = true;
 
-            var selectedTheme = (ThemeInfo)cboTheme.SelectedItem;
+            ThemeInfo selectedTheme = (ThemeInfo)cboTheme.SelectedItem;
 
             if (selectedTheme != null && selectedTheme.IsExtendable)
             {
@@ -152,9 +152,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         /// <param name="e"></param>
         private void ListPalette_CellClick(object sender, CellClickEventArgs e)
         {
-            var colorElem = (PseudoKeyColor)e.Model;
+            PseudoKeyColor colorElem = (PseudoKeyColor)e.Model;
 
-            var colorDlg = new ColorDialog
+            ColorDialog colorDlg = new()
             {
                 AllowFullOpen = true,
                 FullOpen = true,
@@ -173,19 +173,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void ColorMeList(ThemeInfo ti)
         {
-            foreach (var colorElem in ti.ExtendedPalette.ExtColorPalette)
+            foreach (KeyValuePair<string, System.Drawing.Color> colorElem in ti.ExtendedPalette.ExtColorPalette)
                 listPalette.AddObject(new PseudoKeyColor(colorElem.Key, colorElem.Value));
         }
 
         private void btnThemeNew_Click(object sender, EventArgs e)
         {
-            using (var frmInputBox = new FrmInputBox(Language.OptionsThemeNewThemeCaption, Language.OptionsThemeNewThemeText, _themeManager.ActiveTheme.Name))
+            using (FrmInputBox frmInputBox = new(Language.OptionsThemeNewThemeCaption, Language.OptionsThemeNewThemeText, _themeManager.ActiveTheme.Name))
             {
-                var dr = frmInputBox.ShowDialog();
+                DialogResult dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK) return;
                 if (_themeManager.isThemeNameOk(frmInputBox.returnValue))
                 {
-                    var addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
+                    ThemeInfo addedTheme = _themeManager.addTheme(_themeManager.ActiveTheme, frmInputBox.returnValue);
                     _themeManager.ActiveTheme = addedTheme;
                     LoadSettings();
                 }
@@ -198,7 +198,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnThemeDelete_Click(object sender, EventArgs e)
         {
-            var res = CTaskDialog.ShowTaskDialogBox(this, Language.Warnings,
+            DialogResult res = CTaskDialog.ShowTaskDialogBox(this, Language.Warnings,
                                                     Language.OptionsThemeDeleteConfirmation, "", "", "", "", "", "",
                                                     ETaskDialogButtons.YesNo,
                                                     ESysIcons.Question, ESysIcons.Information, 0);

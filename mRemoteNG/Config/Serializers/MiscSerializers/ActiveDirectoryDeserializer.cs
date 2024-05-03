@@ -28,8 +28,8 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         public ConnectionTreeModel Deserialize()
         {
-            var connectionTreeModel = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection);
+            ConnectionTreeModel connectionTreeModel = new();
+            RootNodeInfo root = new(RootNodeType.Connection);
             connectionTreeModel.AddRootNode(root);
 
             ImportContainers(_ldapPath, root);
@@ -39,10 +39,10 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private void ImportContainers(string ldapPath, ContainerInfo parentContainer)
         {
-            var match = Regex.Match(ldapPath, "ou=([^,]*)", RegexOptions.IgnoreCase);
-            var name = match.Success ? match.Groups[1].Captures[0].Value : Language.ActiveDirectory;
+            Match match = Regex.Match(ldapPath, "ou=([^,]*)", RegexOptions.IgnoreCase);
+            string name = match.Success ? match.Groups[1].Captures[0].Value : Language.ActiveDirectory;
 
-            var newContainer = new ContainerInfo {Name = name};
+            ContainerInfo newContainer = new() { Name = name};
             parentContainer.AddChild(newContainer);
 
             ImportComputers(ldapPath, newContainer);
@@ -53,17 +53,17 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             try
             {
                 const string ldapFilter = "(|(objectClass=computer)(objectClass=organizationalUnit))";
-                using (var ldapSearcher = new DirectorySearcher())
+                using (DirectorySearcher ldapSearcher = new())
                 {
                     ldapSearcher.SearchRoot = new DirectoryEntry(ldapPath);
                     ldapSearcher.Filter = ldapFilter;
                     ldapSearcher.SearchScope = SearchScope.OneLevel;
                     ldapSearcher.PropertiesToLoad.AddRange(new[] {"securityEquals", "cn", "objectClass"});
 
-                    var ldapResults = ldapSearcher.FindAll();
+                    SearchResultCollection ldapResults = ldapSearcher.FindAll();
                     foreach (SearchResult ldapResult in ldapResults)
                     {
-                        using (var directoryEntry = ldapResult.GetDirectoryEntry())
+                        using (DirectoryEntry directoryEntry = ldapResult.GetDirectoryEntry())
                         {
                             if (directoryEntry.Properties["objectClass"].Contains("organizationalUnit"))
                             {
@@ -88,11 +88,11 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private void DeserializeConnection(DirectoryEntry directoryEntry, ContainerInfo parentContainer)
         {
-            var displayName = Convert.ToString(directoryEntry.Properties["cn"].Value);
-            var description = Convert.ToString(directoryEntry.Properties["Description"].Value);
-            var hostName = Convert.ToString(directoryEntry.Properties["dNSHostName"].Value);
+            string displayName = Convert.ToString(directoryEntry.Properties["cn"].Value);
+            string description = Convert.ToString(directoryEntry.Properties["Description"].Value);
+            string hostName = Convert.ToString(directoryEntry.Properties["dNSHostName"].Value);
 
-            var newConnectionInfo = new ConnectionInfo
+            ConnectionInfo newConnectionInfo = new()
             {
                 Name = displayName,
                 Hostname = hostName,

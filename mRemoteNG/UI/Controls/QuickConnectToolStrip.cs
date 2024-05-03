@@ -155,10 +155,10 @@ namespace mRemoteNG.UI.Controls
             try
             {
                 _mnuQuickConnectProtocol.Items.Clear();
-                foreach (var fieldInfo in typeof(ProtocolType).GetFields())
+                foreach (System.Reflection.FieldInfo fieldInfo in typeof(ProtocolType).GetFields())
                 {
                     if (fieldInfo.Name == "value__" || fieldInfo.Name == "IntApp") continue;
-                    var menuItem = new ToolStripMenuItem(fieldInfo.Name);
+                    ToolStripMenuItem menuItem = new(fieldInfo.Name);
                     if (fieldInfo.Name == Settings.Default.QuickConnectProtocol)
                     {
                         menuItem.Checked = true;
@@ -188,7 +188,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                var connectionInfo = Runtime.ConnectionsService.CreateQuickConnect(_cmbQuickConnect.Text.Trim(),
+                ConnectionInfo connectionInfo = Runtime.ConnectionsService.CreateQuickConnect(_cmbQuickConnect.Text.Trim(),
                                                                                    Converter.StringToProtocol(Settings
                                                                                                               .Default
                                                                                                               .QuickConnectProtocol));
@@ -238,7 +238,7 @@ namespace mRemoteNG.UI.Controls
         private void btnConnections_DropDownOpening(object sender, EventArgs e)
         {
             _btnConnections.DropDownItems.Clear();
-            var menuItemsConverter = new ConnectionsTreeToMenuItemsConverter
+            ConnectionsTreeToMenuItemsConverter menuItemsConverter = new()
             {
                 MouseUpEventHandler = ConnectionsMenuItem_MouseUp
             };
@@ -249,15 +249,15 @@ namespace mRemoteNG.UI.Controls
                                                                                  .ConnectionTreeModel).ToArray();
             _btnConnections.DropDownItems.AddRange(rootMenuItems);
 
-            ToolStripMenuItem favorites = new ToolStripMenuItem(Language.Favorites, Properties.Resources.Favorite_16x);
-            var rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
-            List<ToolStripMenuItem> favoritesList = new List<ToolStripMenuItem>();
+            ToolStripMenuItem favorites = new(Language.Favorites, Properties.Resources.Favorite_16x);
+            List<ContainerInfo> rootNodes = Runtime.ConnectionsService.ConnectionTreeModel.RootNodes;
+            List<ToolStripMenuItem> favoritesList = [];
 
-            foreach (var node in rootNodes)
+            foreach (ContainerInfo node in rootNodes)
             {
-                foreach (var containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
+                foreach (ConnectionInfo containerInfo in Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveFavoriteChildList(node))
                 {
-                    var favoriteMenuItem = new ToolStripMenuItem
+                    ToolStripMenuItem favoriteMenuItem = new()
                     {
                         Text = containerInfo.Name,
                         Tag = containerInfo,
@@ -274,7 +274,7 @@ namespace mRemoteNG.UI.Controls
         private void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left) return;
-            var menuItem = (ToolStripMenuItem)sender;
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
 
             switch (menuItem.Tag)
             {

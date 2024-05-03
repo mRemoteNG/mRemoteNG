@@ -10,12 +10,12 @@ namespace mRemoteNG.Config.DatabaseConnectors
         public static IDatabaseConnector DatabaseConnectorFromSettings()
         {
             // TODO: add custom port handling?
-            var sqlType = Properties.OptionsDBsPage.Default.SQLServerType;
-            var sqlHost = Properties.OptionsDBsPage.Default.SQLHost;
-            var sqlCatalog = Properties.OptionsDBsPage.Default.SQLDatabaseName;
-            var sqlUsername = Properties.OptionsDBsPage.Default.SQLUser;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var sqlPassword = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
+            string sqlType = Properties.OptionsDBsPage.Default.SQLServerType;
+            string sqlHost = Properties.OptionsDBsPage.Default.SQLHost;
+            string sqlCatalog = Properties.OptionsDBsPage.Default.SQLDatabaseName;
+            string sqlUsername = Properties.OptionsDBsPage.Default.SQLUser;
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
+            string sqlPassword = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
 
             return DatabaseConnector(sqlType, sqlHost, sqlCatalog, sqlUsername, sqlPassword);
         }

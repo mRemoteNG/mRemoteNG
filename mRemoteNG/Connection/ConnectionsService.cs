@@ -25,7 +25,7 @@ namespace mRemoteNG.Connection
     [SupportedOSPlatform("windows")]
     public class ConnectionsService
     {
-        private static readonly object SaveLock = new object();
+        private static readonly object SaveLock = new();
         private readonly PuttySessionsManager _puttySessionsManager;
         private readonly IDataProvider<string> _localConnectionPropertiesDataProvider;
         private readonly LocalConnectionPropertiesXmlSerializer _localConnectionPropertiesSerializer;
@@ -54,7 +54,7 @@ namespace mRemoteNG.Connection
             try
             {
                 filename.ThrowIfNullOrEmpty(nameof(filename));
-                var newConnectionsModel = new ConnectionTreeModel();
+                ConnectionTreeModel newConnectionsModel = new();
                 newConnectionsModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
                 SaveConnections(newConnectionsModel, false, new SaveFilter(), filename, true);
                 LoadConnections(false, false, filename);
@@ -69,27 +69,27 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                var uriBuilder = new UriBuilder
+                UriBuilder uriBuilder = new()
                 {
                     Scheme = "dummyscheme"
                 };
 
                 if (connectionString.Contains("@"))
                 {
-                    var x = connectionString.Split('@');
+                    string[] x = connectionString.Split('@');
                     uriBuilder.UserName = x[0];
                     connectionString = x[1];
                 }
                 if (connectionString.Contains(":"))
                 {
-                    var x = connectionString.Split(':');
+                    string[] x = connectionString.Split(':');
                     connectionString = x[0];
                     uriBuilder.Port = Convert.ToInt32(x[1]);
                 }
 
                 uriBuilder.Host = connectionString;
 
-                var newConnectionInfo = new ConnectionInfo();
+                ConnectionInfo newConnectionInfo = new();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
                 newConnectionInfo.Name = Properties.OptionsTabsPanelsPage.Default.IdentifyQuickConnectTabs
@@ -132,14 +132,14 @@ namespace mRemoteNG.Connection
         /// <param name="connectionFileName"></param>
         public void LoadConnections(bool useDatabase, bool import, string connectionFileName)
         {
-            var oldConnectionTreeModel = ConnectionTreeModel;
-            var oldIsUsingDatabaseValue = UsingDatabase;
+            ConnectionTreeModel oldConnectionTreeModel = ConnectionTreeModel;
+            bool oldIsUsingDatabaseValue = UsingDatabase;
 
-            var connectionLoader = useDatabase
+            IConnectionsLoader connectionLoader = useDatabase
                 ? (IConnectionsLoader)new SqlConnectionsLoader(_localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
                 : new XmlConnectionsLoader(connectionFileName);
 
-            var newConnectionTreeModel = connectionLoader.Load();
+            ConnectionTreeModel newConnectionTreeModel = connectionLoader.Load();
 
             if (useDatabase)
                 LastSqlUpdate = DateTime.Now.ToUniversalTime();
@@ -248,7 +248,7 @@ namespace mRemoteNG.Connection
 
                 bool previouslyUsingDatabase = UsingDatabase;
 
-                var saver = useDatabase
+                ISaver<ConnectionTreeModel> saver = useDatabase
                     ? (ISaver<ConnectionTreeModel>)new SqlConnectionsSaver(saveFilter, _localConnectionPropertiesSerializer, _localConnectionPropertiesDataProvider)
                     : new XmlConnectionsSaver(connectionFileName, saveFilter);
 
@@ -287,7 +287,7 @@ namespace mRemoteNG.Connection
                 return;
             }
 
-            var t = new Thread(() =>
+            Thread t = new(() =>
             {
                 lock (SaveLock)
                 {
@@ -338,7 +338,7 @@ namespace mRemoteNG.Connection
 
         private string GetDefaultStartupConnectionFileNameNormalEdition()
         {
-            var appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName, ConnectionsFileInfo.DefaultConnectionsFile);
+            string appDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName, ConnectionsFileInfo.DefaultConnectionsFile);
             return File.Exists(appDataPath) ? appDataPath : GetDefaultStartupConnectionFileNamePortableEdition();
         }
 

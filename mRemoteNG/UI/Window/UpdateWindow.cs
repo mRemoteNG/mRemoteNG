@@ -85,7 +85,7 @@ namespace mRemoteNG.UI.Window
 
         private void pbUpdateImage_Click(object sender, EventArgs e)
         {
-            var linkUri = pbUpdateImage.Tag as Uri;
+            Uri linkUri = pbUpdateImage.Tag as Uri;
             if (linkUri == null || linkUri.IsFile || linkUri.IsUnc || linkUri.IsLoopback)
             {
                 return;
@@ -135,7 +135,7 @@ namespace mRemoteNG.UI.Window
                     lblStatus.ForeColor = Color.OrangeRed;
                     SetVisibilityOfUpdateControls(true);
 
-                    var updateInfo = _appUpdate.CurrentUpdateInfo;
+                    UpdateInfo updateInfo = _appUpdate.CurrentUpdateInfo;
                     lblLatestVersion.Text = updateInfo.Version.ToString();
                     lblLatestVersionLabel.Visible = true;
                     lblLatestVersion.Visible = true;
@@ -153,7 +153,7 @@ namespace mRemoteNG.UI.Window
 
                     try
                     {
-                        var changeLog = await _appUpdate.GetChangeLogAsync();
+                        string changeLog = await _appUpdate.GetChangeLogAsync();
                         txtChangeLog.Text = changeLog.Replace("\n", Environment.NewLine);
                     }
                     catch (Exception ex)
@@ -169,7 +169,7 @@ namespace mRemoteNG.UI.Window
                     lblStatus.ForeColor = Color.ForestGreen;
 
                     if (_appUpdate.CurrentUpdateInfo == null) return;
-                    var updateInfo = _appUpdate.CurrentUpdateInfo;
+                    UpdateInfo updateInfo = _appUpdate.CurrentUpdateInfo;
                     if (!updateInfo.IsValid || updateInfo.Version == null) return;
                     lblLatestVersion.Text = updateInfo.Version.ToString();
                     lblLatestVersionLabel.Visible = true;

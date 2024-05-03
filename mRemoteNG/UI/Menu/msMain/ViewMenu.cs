@@ -207,9 +207,9 @@ namespace mRemoteNG.UI.Menu
 
             _mMenViewConnectionPanels.DropDownItems.Clear();
 
-            for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
+            for (int i = 0; i <= Runtime.WindowList.Count - 1; i++)
             {
-                var tItem = new ToolStripMenuItem(Runtime.WindowList[i].Text, Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
+                ToolStripMenuItem tItem = new(Runtime.WindowList[i].Text, Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click)
                 { Tag = Runtime.WindowList[i] };
                 _mMenViewConnectionPanels.DropDownItems.Add(tItem);
             }
@@ -251,7 +251,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
         {
-            var msgBoxResult = MessageBox.Show(Language.ConfirmResetLayout, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult msgBoxResult = MessageBox.Show(Language.ConfirmResetLayout, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (msgBoxResult == DialogResult.Yes)
             {
                 MainForm.SetDefaultLayout();

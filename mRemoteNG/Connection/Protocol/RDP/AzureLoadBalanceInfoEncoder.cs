@@ -33,7 +33,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 loadBalanceInfo += " ";
 
             loadBalanceInfo += "\r\n";
-            var bytes = Encoding.UTF8.GetBytes(loadBalanceInfo);
+            byte[] bytes = Encoding.UTF8.GetBytes(loadBalanceInfo);
             return Encoding.Unicode.GetString(bytes);
         }
     }

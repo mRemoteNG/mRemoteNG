@@ -18,7 +18,7 @@ namespace mRemoteNG.Messages.MessageWriters
 
         public void Write(IMessage message)
         {
-            var lvItem = new NotificationMessageListViewItem(message);
+            NotificationMessageListViewItem lvItem = new(message);
 
             AddToList(lvItem);
         }

@@ -7,7 +7,7 @@ namespace mRemoteNG.Tools.Cmdline
     // Adapted from http://qntm.org/cmd
     public class CommandLineArguments
     {
-        protected List<Argument> Arguments = new List<Argument>();
+        protected List<Argument> Arguments = [];
 
         public bool EscapeForShell { get; set; }
 
@@ -20,7 +20,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         public void Add(params string[] argumentArray)
         {
-            foreach (var argument in argumentArray)
+            foreach (string argument in argumentArray)
             {
                 Add(argument);
             }
@@ -33,7 +33,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         public override string ToString()
         {
-            var argList = Arguments.Select(argument => ProcessArgument(argument, EscapeForShell));
+            IEnumerable<string> argList = Arguments.Select(argument => ProcessArgument(argument, EscapeForShell));
             return string.Join(" ", argList.ToArray());
         }
 
@@ -94,7 +94,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         protected static string ProcessArgument(Argument argument, bool escapeForShell = false)
         {
-            var text = argument.Text;
+            string text = argument.Text;
 
             if (argument.IsFileName)
             {

@@ -13,7 +13,7 @@ namespace mRemoteNG.Resources
         /// <returns></returns>
         internal static Icon GetImageAsIcon(Bitmap bitmap)
         {
-            var icon = Icon.FromHandle(bitmap.GetHicon());
+            Icon icon = Icon.FromHandle(bitmap.GetHicon());
 
             return icon;
         }

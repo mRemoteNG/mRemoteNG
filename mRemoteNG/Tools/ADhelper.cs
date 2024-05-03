@@ -13,7 +13,7 @@ namespace mRemoteNG.Tools
 
         public AdHelper(string domain)
         {
-            Children = new Hashtable();
+            Children = [];
             Domain = domain;
         }
 

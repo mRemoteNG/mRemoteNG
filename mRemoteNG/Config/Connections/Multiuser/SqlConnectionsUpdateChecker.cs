@@ -29,7 +29,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
         {
             RaiseUpdateCheckStartedEvent();
             ConnectToSqlDb();
-            var updateIsAvailable = DatabaseIsMoreUpToDateThanUs();
+            bool updateIsAvailable = DatabaseIsMoreUpToDateThanUs();
             if (updateIsAvailable)
                 RaiseConnectionsUpdateAvailableEvent();
             RaiseUpdateCheckFinishedEvent(updateIsAvailable);
@@ -38,7 +38,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         public void IsUpdateAvailableAsync()
         {
-            var thread = new Thread(() => IsUpdateAvailable());
+            Thread thread = new(() => IsUpdateAvailable());
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -57,14 +57,14 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         private bool DatabaseIsMoreUpToDateThanUs()
         {
-            var lastUpdateInDb = GetLastUpdateTimeFromDbResponse();
-            var amTheLastoneUpdated = CheckIfIAmTheLastOneUpdated(lastUpdateInDb);
+            DateTime lastUpdateInDb = GetLastUpdateTimeFromDbResponse();
+            bool amTheLastoneUpdated = CheckIfIAmTheLastOneUpdated(lastUpdateInDb);
             return (lastUpdateInDb > LastUpdateTime && !amTheLastoneUpdated);
         }
 
         private bool CheckIfIAmTheLastOneUpdated(DateTime lastUpdateInDb)
         {
-            DateTime lastSqlUpdateWithoutMilliseconds = new DateTime(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond), LastUpdateTime.Kind);
+            DateTime lastSqlUpdateWithoutMilliseconds = new(LastUpdateTime.Ticks - (LastUpdateTime.Ticks % TimeSpan.TicksPerSecond), LastUpdateTime.Kind);
             return lastUpdateInDb == lastSqlUpdateWithoutMilliseconds;
         }
 
@@ -104,7 +104,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
 
         private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)
         {
-            var args = new ConnectionsUpdateCheckFinishedEventArgs {UpdateAvailable = updateAvailable};
+            ConnectionsUpdateCheckFinishedEventArgs args = new() { UpdateAvailable = updateAvailable};
             UpdateCheckFinished?.Invoke(this, args);
         }
 
@@ -113,7 +113,7 @@ namespace mRemoteNG.Config.Connections.Multiuser
         private void RaiseConnectionsUpdateAvailableEvent()
         {
             Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg, "Remote connection update is available");
-            var args = new ConnectionsUpdateAvailableEventArgs(_dbConnector, _lastDatabaseUpdateTime);
+            ConnectionsUpdateAvailableEventArgs args = new(_dbConnector, _lastDatabaseUpdateTime);
             ConnectionsUpdateAvailable?.Invoke(this, args);
         }
 

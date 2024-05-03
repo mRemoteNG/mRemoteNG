@@ -29,20 +29,20 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
             if (credentialRecords == null)
                 throw new ArgumentNullException(nameof(credentialRecords));
 
-            var baseReturn = _baseSerializer.Serialize(credentialRecords);
-            var encryptedReturn = EncryptPasswordAttributes(baseReturn, key);
+            string baseReturn = _baseSerializer.Serialize(credentialRecords);
+            string encryptedReturn = EncryptPasswordAttributes(baseReturn, key);
             return encryptedReturn;
         }
 
         private string EncryptPasswordAttributes(string xml, SecureString encryptionKey)
         {
-            var xdoc = XDocument.Parse(xml);
+            XDocument xdoc = XDocument.Parse(xml);
             SetEncryptionAttributes(xdoc, encryptionKey);
-            foreach (var element in xdoc.Descendants())
+            foreach (XElement element in xdoc.Descendants())
             {
-                var passwordAttribute = element.Attribute("Password");
+                XAttribute passwordAttribute = element.Attribute("Password");
                 if (passwordAttribute == null) continue;
-                var encryptedPassword = _cryptographyProvider.Encrypt(passwordAttribute.Value, encryptionKey);
+                string encryptedPassword = _cryptographyProvider.Encrypt(passwordAttribute.Value, encryptionKey);
                 passwordAttribute.Value = encryptedPassword;
             }
 

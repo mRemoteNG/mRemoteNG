@@ -20,12 +20,12 @@ namespace mRemoteNG.Config.DataProviders
 
         public DataTable Load()
         {
-            var dataTable = new DataTable();
-            var dbQuery = DatabaseConnector.DbCommand("SELECT * FROM tblCons ORDER BY PositionID ASC");
+            DataTable dataTable = new();
+            System.Data.Common.DbCommand dbQuery = DatabaseConnector.DbCommand("SELECT * FROM tblCons ORDER BY PositionID ASC");
             DatabaseConnector.AssociateItemToThisConnector(dbQuery);
             if (!DatabaseConnector.IsConnected)
                 OpenConnection();
-            var dbDataReader = dbQuery.ExecuteReader(CommandBehavior.CloseConnection);
+            System.Data.Common.DbDataReader dbDataReader = dbQuery.ExecuteReader(CommandBehavior.CloseConnection);
 
             if (dbDataReader.HasRows)
                 dataTable.Load(dbDataReader);
@@ -47,16 +47,18 @@ namespace mRemoteNG.Config.DataProviders
             {
                 SqlConnection sqlConnection = (SqlConnection)DatabaseConnector.DbConnection();
                 using SqlTransaction transaction = sqlConnection.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                using SqlCommand sqlCommand = new SqlCommand();
+                using SqlCommand sqlCommand = new();
                 sqlCommand.Connection = sqlConnection;
                 sqlCommand.Transaction = transaction;
                 sqlCommand.CommandText = "SELECT * FROM tblCons";
-                using SqlDataAdapter dataAdapter = new SqlDataAdapter();
+                using SqlDataAdapter dataAdapter = new();
                 dataAdapter.SelectCommand = sqlCommand;
 
-                SqlCommandBuilder builder = new SqlCommandBuilder(dataAdapter);
-                // Avoid optimistic concurrency, check if it is necessary.
-                builder.ConflictOption = ConflictOption.OverwriteChanges;
+                SqlCommandBuilder builder = new(dataAdapter)
+                {
+                    // Avoid optimistic concurrency, check if it is necessary.
+                    ConflictOption = ConflictOption.OverwriteChanges
+                };
 
                 dataAdapter.UpdateCommand = builder.GetUpdateCommand();
                 dataAdapter.DeleteCommand = builder.GetDeleteCommand();
@@ -66,15 +68,15 @@ namespace mRemoteNG.Config.DataProviders
             }
             else if (DatabaseConnector.GetType() == typeof(MySqlDatabaseConnector))
             {
-                var dbConnection = (MySqlConnection) DatabaseConnector.DbConnection();
+                MySqlConnection dbConnection = (MySqlConnection) DatabaseConnector.DbConnection();
                 using MySqlTransaction transaction = dbConnection.BeginTransaction(System.Data.IsolationLevel.Serializable);
-                using MySqlCommand sqlCommand = new MySqlCommand();
+                using MySqlCommand sqlCommand = new();
                 sqlCommand.Connection = dbConnection;
                 sqlCommand.Transaction = transaction;
                 sqlCommand.CommandText = "SELECT * FROM tblCons";
-                using MySqlDataAdapter dataAdapter = new MySqlDataAdapter(sqlCommand);
+                using MySqlDataAdapter dataAdapter = new(sqlCommand);
                 dataAdapter.UpdateBatchSize = 1000;
-                using MySqlCommandBuilder cb = new MySqlCommandBuilder(dataAdapter);
+                using MySqlCommandBuilder cb = new(dataAdapter);
                 dataAdapter.Update(dataTable);
                 transaction.Commit();
             }

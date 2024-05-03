@@ -22,7 +22,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
         private ConnectionInfo _info;
         private static bool _isConnectionSuccessful;
         private static Exception _socketexception;
-        private static readonly ManualResetEvent TimeoutObject = new ManualResetEvent(false);
+        private static readonly ManualResetEvent TimeoutObject = new(false);
 
         #endregion
 
@@ -160,7 +160,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
         private static bool TestConnect(string hostName, int port, int timeoutMSec)
         {
-            var tcpclient = new TcpClient();
+            TcpClient tcpclient = new();
 
             TimeoutObject.Reset();
             tcpclient.BeginConnect(hostName, port, CallBackMethod, tcpclient);
@@ -183,7 +183,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
             try
             {
                 _isConnectionSuccessful = false;
-                var tcpclient = asyncresult.AsyncState as TcpClient;
+                TcpClient tcpclient = asyncresult.AsyncState as TcpClient;
 
                 if (tcpclient?.Client == null) return;
 

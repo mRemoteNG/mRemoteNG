@@ -20,8 +20,8 @@ namespace mRemoteNG.Config
 
         public void Save(IEnumerable<ICredentialRepository> repositories, string propertyNameTrigger = "")
         {
-            var serializer = new CredentialRepositoryListSerializer();
-            var data = serializer.Serialize(repositories);
+            CredentialRepositoryListSerializer serializer = new();
+            string data = serializer.Serialize(repositories);
             _dataProvider.Save(data);
         }
     }

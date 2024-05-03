@@ -128,8 +128,8 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionDescription))]
         public virtual string Description
         {
-            get => GetPropertyValue("Description", _description);
-            set => SetField(ref _description, value, "Description");
+            get => GetPropertyValue(nameof(Description), _description);
+            set => SetField(ref _description, value, nameof(Description));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Display)),

@@ -26,7 +26,7 @@ namespace mRemoteNG.Config
         [SupportedOSPlatform("windows")]
         public IEnumerable<ICredentialRepository> Load()
         {
-            var data = _dataProvider.Load();
+            string data = _dataProvider.Load();
             return _deserializer.Deserialize(data);
         }
     }

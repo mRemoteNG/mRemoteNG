@@ -33,26 +33,26 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
             try
             {
-                using var aes = Aes.Create();
+                using Aes aes = Aes.Create();
                 aes.BlockSize = BlockSizeInBytes * 8;
 
-                using (var md5 = MD5.Create())
+                using (MD5 md5 = MD5.Create())
                 {
-                    var key = md5.ComputeHash(Encoding.UTF8.GetBytes(strSecret.ConvertToUnsecureString()));
+                    byte[] key = md5.ComputeHash(Encoding.UTF8.GetBytes(strSecret.ConvertToUnsecureString()));
                     aes.Key = key;
                     aes.GenerateIV();
                 }
 
-                using var ms = new MemoryStream();
+                using MemoryStream ms = new();
                 ms.Write(aes.IV, 0, BlockSizeInBytes);
 
-                using var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
-                var data = Encoding.UTF8.GetBytes(strToEncrypt);
+                using CryptoStream cs = new(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
+                byte[] data = Encoding.UTF8.GetBytes(strToEncrypt);
 
                 cs.Write(data, 0, data.Length);
                 cs.FlushFinalBlock();
 
-                var encdata = ms.ToArray();
+                byte[] encdata = ms.ToArray();
 
                 return Convert.ToBase64String(encdata);
             }
@@ -71,26 +71,26 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
             try
             {
-                using var aes = Aes.Create();
+                using Aes aes = Aes.Create();
                 aes.BlockSize = BlockSizeInBytes * 8;
 
-                using (var md5 = MD5.Create())
+                using (MD5 md5 = MD5.Create())
                 {
-                    var key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
+                    byte[] key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
                     aes.Key = key;
                 }
 
-                var ciphertext = Convert.FromBase64String(ciphertextBase64);
+                byte[] ciphertext = Convert.FromBase64String(ciphertextBase64);
 
-                using var ms = new MemoryStream(ciphertext);
+                using MemoryStream ms = new(ciphertext);
 
-                var iv = new byte[BlockSizeInBytes];
+                byte[] iv = new byte[BlockSizeInBytes];
                 ms.Read(iv, 0, iv.Length);
                 aes.IV = iv;
 
-                using var cryptoStream = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);
-                using var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true);
-                var plaintext = streamReader.ReadToEnd();
+                using CryptoStream cryptoStream = new(ms, aes.CreateDecryptor(), CryptoStreamMode.Read);
+                using StreamReader streamReader = new(cryptoStream, Encoding.UTF8, true);
+                string plaintext = streamReader.ReadToEnd();
 
                 return plaintext;
             }

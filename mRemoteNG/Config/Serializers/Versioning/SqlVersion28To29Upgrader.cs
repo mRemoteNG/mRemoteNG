@@ -10,7 +10,7 @@ namespace mRemoteNG.Config.Serializers.Versioning
     [SupportedOSPlatform("windows")]
     public class SqlVersion28To29Upgrader : IVersionUpgrader
     {
-        private readonly Version _version = new Version(2, 9);
+        private readonly Version _version = new(2, 9);
         private readonly IDatabaseConnector _databaseConnector;
 
         public SqlVersion28To29Upgrader(IDatabaseConnector databaseConnector)
@@ -91,7 +91,7 @@ ALTER TABLE tblRoot ALTER COLUMN [ConfVersion] VARCHAR(15) NOT NULL;
 
             const string msSqlUpdate = @"UPDATE tblRoot SET ConfVersion=@confVersion;";
 
-            using (var sqlTran = _databaseConnector.DbConnection().BeginTransaction(System.Data.IsolationLevel.Serializable))
+            using (DbTransaction sqlTran = _databaseConnector.DbConnection().BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
                 DbCommand dbCommand;
                 if (_databaseConnector.GetType() == typeof(MSSqlDatabaseConnector))
@@ -114,7 +114,7 @@ ALTER TABLE tblRoot ALTER COLUMN [ConfVersion] VARCHAR(15) NOT NULL;
                 {
                     throw new Exception("Unknown database back-end");
                 }
-                var pConfVersion = dbCommand.CreateParameter();
+                DbParameter pConfVersion = dbCommand.CreateParameter();
                 pConfVersion.ParameterName = "confVersion";
                 pConfVersion.Value = _version.ToString();
                 pConfVersion.DbType = System.Data.DbType.String;

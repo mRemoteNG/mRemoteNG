@@ -33,11 +33,11 @@ namespace mRemoteNG.Credential.Repositories
 
         public ICredentialRepository Build(XElement repositoryXElement)
         {
-            var stringId = repositoryXElement.Attribute("Id")?.Value;
+            string stringId = repositoryXElement.Attribute("Id")?.Value;
             Guid id;
             Guid.TryParse(stringId, out id);
             if (id.Equals(Guid.Empty)) id = Guid.NewGuid();
-            var config = new CredentialRepositoryConfig(id)
+            CredentialRepositoryConfig config = new(id)
             {
                 TypeName = repositoryXElement.Attribute("TypeName")?.Value,
                 Title = repositoryXElement.Attribute("Title")?.Value,
@@ -48,9 +48,9 @@ namespace mRemoteNG.Credential.Repositories
 
         private ICredentialRepository BuildXmlRepo(ICredentialRepositoryConfig config)
         {
-            var dataProvider = new FileDataProvider(config.Source);
-            var saver = new CredentialRecordSaver(dataProvider, _serializer);
-            var loader = new CredentialRecordLoader(dataProvider, _deserializer);
+            FileDataProvider dataProvider = new(config.Source);
+            CredentialRecordSaver saver = new(dataProvider, _serializer);
+            CredentialRecordLoader loader = new(dataProvider, _deserializer);
             return new XmlCredentialRepository(config, saver, loader);
         }
     }

@@ -14,11 +14,11 @@ namespace mRemoteNG.Config.Putty
     {
         public static PuttySessionsManager Instance { get; } = new PuttySessionsManager();
 
-        private readonly List<AbstractPuttySessionsProvider> _providers = new List<AbstractPuttySessionsProvider>();
+        private readonly List<AbstractPuttySessionsProvider> _providers = [];
 
         public IEnumerable<AbstractPuttySessionsProvider> Providers => _providers;
 
-        public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new List<RootPuttySessionsNodeInfo>();
+        public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = [];
 
         private PuttySessionsManager()
         {
@@ -30,7 +30,7 @@ namespace mRemoteNG.Config.Putty
 
         public void AddSessions()
         {
-            foreach (var provider in Providers)
+            foreach (AbstractPuttySessionsProvider provider in Providers)
             {
                 AddSessionsFromProvider(provider);
             }
@@ -40,7 +40,7 @@ namespace mRemoteNG.Config.Putty
         {
             puttySessionProvider.ThrowIfNull(nameof(puttySessionProvider));
 
-            var rootTreeNode = puttySessionProvider.RootInfo;
+            RootPuttySessionsNodeInfo rootTreeNode = puttySessionProvider.RootInfo;
             puttySessionProvider.GetSessions();
 
             if (!RootPuttySessionsNodes.Contains(rootTreeNode) && rootTreeNode.HasChildren())
@@ -50,7 +50,7 @@ namespace mRemoteNG.Config.Putty
 
         public void StartWatcher()
         {
-            foreach (var provider in Providers)
+            foreach (AbstractPuttySessionsProvider provider in Providers)
             {
                 provider.StartWatcher();
                 provider.PuttySessionChanged += PuttySessionChanged;
@@ -59,7 +59,7 @@ namespace mRemoteNG.Config.Putty
 
         public void StopWatcher()
         {
-            foreach (var provider in Providers)
+            foreach (AbstractPuttySessionsProvider provider in Providers)
             {
                 provider.StopWatcher();
                 provider.PuttySessionChanged -= PuttySessionChanged;
@@ -79,7 +79,7 @@ namespace mRemoteNG.Config.Putty
 
         public void AddProviders(IEnumerable<AbstractPuttySessionsProvider> newProviders)
         {
-            foreach (var provider in newProviders)
+            foreach (AbstractPuttySessionsProvider provider in newProviders)
                 AddProvider(provider);
         }
 
@@ -105,8 +105,8 @@ namespace mRemoteNG.Config.Putty
 
         private string[] GetSessionNames(bool raw = false)
         {
-            var sessionNames = new List<string>();
-            foreach (var provider in Providers)
+            List<string> sessionNames = new();
+            foreach (AbstractPuttySessionsProvider provider in Providers)
             {
                 if (!IsProviderEnabled(provider))
                 {
@@ -121,7 +121,7 @@ namespace mRemoteNG.Config.Putty
 
         private bool IsProviderEnabled(AbstractPuttySessionsProvider puttySessionsProvider)
         {
-            var enabled = true;
+            bool enabled = true;
             if (!(puttySessionsProvider is PuttySessionsRegistryProvider)) enabled = false;
 
             return enabled;

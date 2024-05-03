@@ -25,9 +25,9 @@ namespace mRemoteNG.App
         {
             try
             {
-                var saveFilter = new SaveFilter();
+                SaveFilter saveFilter = new();
 
-                using (var exportForm = new FrmExport())
+                using (FrmExport exportForm = new())
                 {
                     if (selectedNode?.GetTreeNodeType() == TreeNodeType.Container)
                         exportForm.SelectedFolder = selectedNode as ContainerInfo;
@@ -81,9 +81,9 @@ namespace mRemoteNG.App
                 switch (saveFormat)
                 {
                     case SaveFormat.mRXML:
-                        var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
-                        var rootNode = exportTarget.GetRootParent() as RootNodeInfo;
-                        var connectionNodeSerializer = new XmlConnectionNodeSerializer28(
+                        ICryptographyProvider cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
+                        RootNodeInfo rootNode = exportTarget.GetRootParent() as RootNodeInfo;
+                        XmlConnectionNodeSerializer28 connectionNodeSerializer = new(
                                                                                          cryptographyProvider,
                                                                                          rootNode?.PasswordString
                                                                                                  .ConvertToSecureString() ??
@@ -102,8 +102,8 @@ namespace mRemoteNG.App
                         throw new ArgumentOutOfRangeException(nameof(saveFormat), saveFormat, null);
                 }
 
-                var serializedData = serializer.Serialize(exportTarget);
-                var fileDataProvider = new FileDataProvider(fileName);
+                string serializedData = serializer.Serialize(exportTarget);
+                FileDataProvider fileDataProvider = new(fileName);
                 fileDataProvider.Save(serializedData);
             }
             catch (Exception ex)

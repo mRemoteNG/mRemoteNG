@@ -24,11 +24,11 @@ namespace mRemoteNG.App
 
         private SupportedCultures()
         {
-            foreach (var CultureName in Properties.AppUI.Default.SupportedUICultures.Split(','))
+            foreach (string CultureName in Properties.AppUI.Default.SupportedUICultures.Split(','))
             {
                 try
                 {
-                    var CultureInfo = new CultureInfo(CultureName.Trim());
+                    CultureInfo CultureInfo = new(CultureName.Trim());
                     Add(CultureInfo.Name, CultureInfo.TextInfo.ToTitleCase(CultureInfo.NativeName));
                 }
                 catch (Exception ex)
@@ -57,13 +57,13 @@ namespace mRemoteNG.App
 
         public static string get_CultureName(string CultureNativeName)
         {
-            var Names = new string[SingletonInstance.Count + 1];
-            var NativeNames = new string[SingletonInstance.Count + 1];
+            string[] Names = new string[SingletonInstance.Count + 1];
+            string[] NativeNames = new string[SingletonInstance.Count + 1];
 
             SingletonInstance.Keys.CopyTo(Names, 0);
             SingletonInstance.Values.CopyTo(NativeNames, 0);
 
-            for (var Index = 0; Index <= SingletonInstance.Count; Index++)
+            for (int Index = 0; Index <= SingletonInstance.Count; Index++)
             {
                 if (NativeNames[Index] == CultureNativeName)
                 {
@@ -83,8 +83,8 @@ namespace mRemoteNG.App
         {
             get
             {
-                var ValueList = new List<string>();
-                foreach (var Value in SingletonInstance.Values)
+                List<string> ValueList = new();
+                foreach (string Value in SingletonInstance.Values)
                 {
                     ValueList.Add(Value);
                 }

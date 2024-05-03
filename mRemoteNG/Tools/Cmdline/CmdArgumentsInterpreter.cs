@@ -29,9 +29,9 @@ namespace mRemoteNG.Tools.Cmdline
 
         public CmdArgumentsInterpreter(IEnumerable<string> args)
         {
-            _parameters = new StringDictionary();
-            var spliter = new Regex("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-            var remover = new Regex("^[\'\"]?(.*?)[\'\"]?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            _parameters = [];
+            Regex spliter = new("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            Regex remover = new("^[\'\"]?(.*?)[\'\"]?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             string parameter = null;
 
             // Valid parameters forms:
@@ -40,10 +40,10 @@ namespace mRemoteNG.Tools.Cmdline
 
             try
             {
-                foreach (var txt in args)
+                foreach (string txt in args)
                 {
                     // Look for new parameters (-,/ or --) and a possible enclosed value (=,:)
-                    var Parts = spliter.Split(txt, 3);
+                    string[] Parts = spliter.Split(txt, 3);
                     switch (Parts.Length)
                     {
                         case 1:

@@ -15,7 +15,7 @@ namespace mRemoteNG.Tree.ClickHandlers
         {
             if (clickedNode == null)
                 throw new ArgumentNullException(nameof(clickedNode));
-            foreach (var handler in ClickHandlers)
+            foreach (ITreeNodeClickHandler<ConnectionInfo> handler in ClickHandlers)
             {
                 handler.Execute(clickedNode);
             }

@@ -53,7 +53,7 @@ namespace mRemoteNG.UI.Controls
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    var pieces = value.Split(@".".ToCharArray(), 4);
+                    string[] pieces = value.Split(@".".ToCharArray(), 4);
                     Octet1.Text = pieces[0];
                     Octet2.Text = pieces[1];
                     Octet3.Text = pieces[2];
@@ -256,7 +256,7 @@ namespace mRemoteNG.UI.Controls
         {
             try
             {
-                var theValue = int.Parse(inString);
+                int theValue = int.Parse(inString);
                 if (theValue >= 0 && theValue <= 255)
                     return true;
 
@@ -431,7 +431,7 @@ namespace mRemoteNG.UI.Controls
         // Selects All text in a box for overwriting upon entering the box
         private void Box_Enter(object sender, EventArgs e)
         {
-            var tb = (TextBox)sender;
+            TextBox tb = (TextBox)sender;
             tb.SelectAll();
         }
     }

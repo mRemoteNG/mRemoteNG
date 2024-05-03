@@ -63,7 +63,7 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                var puttyProcess = new PuttyProcessController();
+                PuttyProcessController puttyProcess = new();
                 if (!puttyProcess.Start())
                 {
                     return;

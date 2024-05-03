@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
     [SupportedOSPlatform("windows")]
     public partial class ConnectionInfoPropertyGrid : FilteredPropertyGrid.FilteredPropertyGrid
     {
-        private readonly Dictionary<Type, IEnumerable<PropertyInfo>> _propertyCache = new Dictionary<Type, IEnumerable<PropertyInfo>>();
+        private readonly Dictionary<Type, IEnumerable<PropertyInfo>> _propertyCache = [];
         private ConnectionInfo _selectedConnectionInfo;
         private PropertyMode _propertyMode;
 
@@ -150,7 +150,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
                     .Select(property => property.Name)
                     .ToArray();
 
-                var strHide = new List<string>();
+                List<string> strHide = new();
 
                 if (PropertyMode == PropertyMode.Connection)
                 {
@@ -198,11 +198,11 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
         private IEnumerable<PropertyInfo> GetPropertiesForGridObject(object currentGridObject)
         {
-            if (_propertyCache.TryGetValue(currentGridObject.GetType(), out var properties))
+            if (_propertyCache.TryGetValue(currentGridObject.GetType(), out IEnumerable<PropertyInfo> properties))
                 return properties;
 
-            var type = currentGridObject.GetType();
-            var props = type.GetProperties();
+            Type type = currentGridObject.GetType();
+            PropertyInfo[] props = type.GetProperties();
             _propertyCache.Add(type, props);
 
             return props;
@@ -219,7 +219,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
         private List<string> SpecialExternalAddressProviderExclusions()
         {
-            var strHide = new List<string>();
+            List<string> strHide = new();
 
             // aws
             if (SelectedConnectionInfo.ExternalAddressProvider != ExternalAddressProvider.AmazonWebServices)
@@ -232,7 +232,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
         private List<string> SpecialExternalCredentialProviderExclusions()
         {
-            var strHide = new List<string>();
+            List<string> strHide = new();
 
             if (SelectedConnectionInfo.ExternalCredentialProvider == ExternalCredentialProvider.None)
             {
@@ -253,7 +253,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
         /// </summary>
         private List<string> SpecialRdpExclusions()
         {
-            var strHide = new List<string>();
+            List<string> strHide = new();
 
             if (SelectedConnectionInfo.RDPMinutesToIdleTimeout <= 0)
             {
@@ -322,7 +322,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
         private List<string> SpecialVncExclusions()
         {
-            var strHide = new List<string>();
+            List<string> strHide = new();
             if (SelectedConnectionInfo.VNCAuthMode == ProtocolVNC.AuthMode.AuthVNC)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.Username));
@@ -372,8 +372,8 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
 
             if (rootInfo.Password)
             {
-                var passwordName = Properties.OptionsDBsPage.Default.UseSQLServer ? Language.SQLServer.TrimEnd(':') : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
-                var password = MiscTools.PasswordDialog(passwordName);
+                string passwordName = Properties.OptionsDBsPage.Default.UseSQLServer ? Language.SQLServer.TrimEnd(':') : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
+                Optional<System.Security.SecureString> password = MiscTools.PasswordDialog(passwordName);
 
                 // operation cancelled, dont set a password
                 if (!password.Any() || password.First().Length == 0)

@@ -23,7 +23,7 @@ namespace mRemoteNG.Tree
         public void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
         {
             if (!(e.TargetModel is ConnectionInfo dropTarget)) return;
-            foreach(var dropSource in e.SourceModels.Cast<ConnectionInfo>())
+            foreach(ConnectionInfo dropSource in e.SourceModels.Cast<ConnectionInfo>())
             {
                 DropModel(dropSource, dropTarget, e.DropTargetLocation);
             }           
@@ -76,9 +76,9 @@ namespace mRemoteNG.Tree
             _enableFeedback = true;
             _currentFeedbackColor = DropDeniedFeedbackColor;
             _infoMessage = null;
-            foreach (var dropSource in e.SourceModels.Cast<ConnectionInfo>())
+            foreach (ConnectionInfo dropSource in e.SourceModels.Cast<ConnectionInfo>())
             {
-                var dropTarget = e.TargetModel as ConnectionInfo;
+                ConnectionInfo dropTarget = e.TargetModel as ConnectionInfo;
 
                 e.Effect = CanModelDrop(dropSource, dropTarget, e.DropTargetLocation);
                 e.InfoMessage = _infoMessage;
@@ -92,7 +92,7 @@ namespace mRemoteNG.Tree
                                             ConnectionInfo dropTarget,
                                             DropTargetLocation dropTargetLocation)
         {
-            var dragDropEffect = DragDropEffects.None;
+            DragDropEffects dragDropEffect = DragDropEffects.None;
             if (!NodeIsDraggable(dropSource))
             {
                 _infoMessage = Language.NodeNotDraggable;
@@ -115,7 +115,7 @@ namespace mRemoteNG.Tree
 
         private DragDropEffects HandleCanDropOnItem(ConnectionInfo dropSource, ConnectionInfo dropTarget)
         {
-            var dragDropEffect = DragDropEffects.None;
+            DragDropEffects dragDropEffect = DragDropEffects.None;
             if (dropTarget is ContainerInfo && !(dropTarget is RootPuttySessionsNodeInfo))
             {
                 if (!IsValidDrag(dropSource, dropTarget)) return dragDropEffect;
@@ -132,7 +132,7 @@ namespace mRemoteNG.Tree
 
         private DragDropEffects HandleCanDropBetweenItems(ConnectionInfo dropSource, ConnectionInfo dropTarget)
         {
-            var dragDropEffect = DragDropEffects.None;
+            DragDropEffects dragDropEffect = DragDropEffects.None;
             if (AncestorDraggingOntoChild(dropSource, dropTarget))
                 _infoMessage = Language.NodeCannotDragParentOnChild;
             else if (dropTarget is PuttySessionInfo || dropTarget is RootNodeInfo)
@@ -148,7 +148,7 @@ namespace mRemoteNG.Tree
 
         private bool IsValidDrag(ConnectionInfo dropSource, ConnectionInfo dropTarget)
         {
-            var validDrag = false;
+            bool validDrag = false;
             if (NodeDraggingOntoSelf(dropSource, dropTarget))
                 _infoMessage = Language.NodeCannotDragOnSelf;
             else if (AncestorDraggingOntoChild(dropSource, dropTarget))

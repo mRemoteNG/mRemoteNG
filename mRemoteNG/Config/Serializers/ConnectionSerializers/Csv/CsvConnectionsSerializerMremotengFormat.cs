@@ -34,14 +34,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
         {
             connectionTreeModel.ThrowIfNull(nameof(connectionTreeModel));
 
-            var rootNode = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
+            ContainerInfo rootNode = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
             return Serialize(rootNode);
         }
 
         public string Serialize(ConnectionInfo serializationTarget)
         {
             serializationTarget.ThrowIfNull(nameof(serializationTarget));
-            var sb = new StringBuilder();
+            StringBuilder sb = new();
 
             WriteCsvHeader(sb);
             SerializeNodesRecursive(serializationTarget, sb);
@@ -81,10 +81,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
         private void SerializeNodesRecursive(ConnectionInfo node, StringBuilder sb)
         {
-            var nodeAsContainer = node as ContainerInfo;
+            ContainerInfo nodeAsContainer = node as ContainerInfo;
             if (nodeAsContainer != null)
             {
-                foreach (var child in nodeAsContainer.Children)
+                foreach (ConnectionInfo child in nodeAsContainer.Children)
                 {
                     SerializeNodesRecursive(child, sb);
                 }
@@ -272,7 +272,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
 
         private string FormatForCsv(object value)
         {
-            var cleanedString = value.ToString().Replace(";", "");
+            string cleanedString = value.ToString().Replace(";", "");
             return cleanedString + ";";
         }
     }

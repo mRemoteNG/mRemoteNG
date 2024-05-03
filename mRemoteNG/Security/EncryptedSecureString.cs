@@ -32,24 +32,24 @@ namespace mRemoteNG.Security
 
         public string GetClearTextValue()
         {
-            var encryptedText = _secureString.ConvertToUnsecureString();
-            var clearText = _cryptographyProvider.Decrypt(encryptedText, MachineKey);
+            string encryptedText = _secureString.ConvertToUnsecureString();
+            string clearText = _cryptographyProvider.Decrypt(encryptedText, MachineKey);
             return clearText;
         }
 
         public void SetValue(string value)
         {
-            var cipherText = _cryptographyProvider.Encrypt(value, MachineKey);
+            string cipherText = _cryptographyProvider.Encrypt(value, MachineKey);
             _secureString = cipherText.ConvertToSecureString();
         }
 
         private static SecureString GenerateNewMachineKey(int keySize)
         {
-            var random = new SecureRandom();
+            SecureRandom random = new();
             random.SetSeed(random.GenerateSeed(128));
 
-            var machineKeyString = "";
-            for (var x = 0; x < keySize; x++)
+            string machineKeyString = "";
+            for (int x = 0; x < keySize; x++)
             {
                 machineKeyString += (char)random.Next(33, 126);
             }

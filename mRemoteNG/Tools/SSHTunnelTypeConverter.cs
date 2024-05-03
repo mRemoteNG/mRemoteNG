@@ -15,7 +15,7 @@ namespace mRemoteNG.Tools
         {
             get
             {
-                var sshTunnelList = new List<string> {string.Empty};
+                List<string> sshTunnelList = new() { string.Empty};
 
                 // Add a blank entry to signify that no external tool is selected
                 sshTunnelList.AddRange(GetSshConnectionNames(Runtime.ConnectionsService.ConnectionTreeModel.RootNodes));
@@ -26,8 +26,8 @@ namespace mRemoteNG.Tools
         // recursively traverse the connection tree to find all ConnectionInfo s of type SSH
         private static IEnumerable<string> GetSshConnectionNames(IEnumerable<ConnectionInfo> rootnodes)
         {
-            var result = new List<string>();
-            foreach (var node in rootnodes)
+            List<string> result = new();
+            foreach (ConnectionInfo node in rootnodes)
                 if (node is ContainerInfo container)
                 {
                     result.AddRange(GetSshConnectionNames(container.Children));

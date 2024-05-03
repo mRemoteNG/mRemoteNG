@@ -35,13 +35,13 @@ namespace mRemoteNG.App
 
             if (!FipsPolicyEnabledForServer2003() && !FipsPolicyEnabledForServer2008AndNewer()) return;
 
-            var errorText = string.Format(Language.ErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName);
+            string errorText = string.Format(Language.ErrorFipsPolicyIncompatible, GeneralAppInfo.ProductName);
             messageCollector.AddMessage(MessageClass.ErrorMsg, errorText, true);
 
             //About to pop up a message, let's not block it...
             FrmSplashScreenNew.GetInstance().Close();
 
-            var ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected, errorText, "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
+            DialogResult ShouldIStayOrShouldIGo = CTaskDialog.MessageBox(Application.ProductName, Language.CompatibilityProblemDetected, errorText, "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.OkCancel, ESysIcons.Warning, ESysIcons.Warning);
             if (CTaskDialog.VerificationChecked && ShouldIStayOrShouldIGo == DialogResult.OK)
             {
                 messageCollector.AddMessage(MessageClass.ErrorMsg, "User requests that FIPS check be overridden", true);
@@ -56,7 +56,7 @@ namespace mRemoteNG.App
 
         private static bool FipsPolicyEnabledForServer2003()
         {
-            var regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa");
+            RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa");
             if (!(regKey?.GetValue("FIPSAlgorithmPolicy") is int fipsPolicy))
                 return false;
             return fipsPolicy != 0;
@@ -64,7 +64,7 @@ namespace mRemoteNG.App
 
         private static bool FipsPolicyEnabledForServer2008AndNewer()
         {
-            var regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy");
+            RegistryKey regKey = Registry.LocalMachine.OpenSubKey(@"System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy");
             if (!(regKey?.GetValue("Enabled") is int fipsPolicy))
                 return false;
             return fipsPolicy != 0;
@@ -77,7 +77,7 @@ namespace mRemoteNG.App
             if (!Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
                 return;
 
-            var proccesses = new Process[] { };
+            Process[] proccesses = new Process[] { };
             try
             {
                 proccesses = Process.GetProcessesByName("virtscrl");

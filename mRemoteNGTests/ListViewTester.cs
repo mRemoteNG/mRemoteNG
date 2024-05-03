@@ -147,7 +147,7 @@ namespace mRemoteNGTests
         /// <param name="matchList"></param>
         public bool SelectedItemsMatch(string[] matches)
         {
-            ArrayList matchList = new ArrayList(matches);
+            ArrayList matchList = new(matches);
 
             if (matchList.Count != Properties.SelectedItems.Count)
             {

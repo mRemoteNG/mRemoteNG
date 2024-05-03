@@ -33,15 +33,15 @@ namespace mRemoteNG.Config.Settings
             {
                 while (_mainForm.pnlDock.Contents.Count > 0)
                 {
-                    var dc = (DockContent)_mainForm.pnlDock.Contents[0];
+                    DockContent dc = (DockContent)_mainForm.pnlDock.Contents[0];
                     dc.Close();
                 }
 
 #if !PORTABLE
-                var oldPath =
+                string oldPath =
  Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + GeneralAppInfo.ProductName + "\\" + SettingsFileInfo.LayoutFileName;
 #endif
-                var newPath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
+                string newPath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
                 if (File.Exists(newPath))
                 {
                     _mainForm.pnlDock.LoadFromXml(newPath, GetContentFromPersistString);

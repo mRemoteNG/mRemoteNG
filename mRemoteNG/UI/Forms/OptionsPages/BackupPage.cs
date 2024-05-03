@@ -241,7 +241,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void ButtonBrowsePath_Click(object sender, EventArgs e)
         {
-            var selectFolderDialog = DialogFactory.SelectFolder(Language.lblConnectionsBackupPath);
+            CommonOpenFileDialog selectFolderDialog = DialogFactory.SelectFolder(Language.lblConnectionsBackupPath);
             txtConnectionsBackupPath.Text = selectFolderDialog.ShowDialog() == CommonFileDialogResult.Ok ? selectFolderDialog.FileName : txtConnectionsBackupPath.Text;
         }
 

@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Forms
     public partial class FrmPassword : IKeyProvider
     {
         private readonly string _passwordName;
-        private SecureString _password = new SecureString();
+        private SecureString _password = new();
 
         /// <summary>
         /// Puts the dialog into the New Password mode. An extra
@@ -45,7 +45,7 @@ namespace mRemoteNG.UI.Forms
         /// <returns></returns>
         public Optional<SecureString> GetKey()
         {
-            var dialog = ShowDialog();
+            DialogResult dialog = ShowDialog();
             return dialog == DialogResult.OK
                 ? _password
                 : Optional<SecureString>.Empty;
@@ -57,7 +57,7 @@ namespace mRemoteNG.UI.Forms
         {
             ApplyLanguage();
             ApplyTheme();
-            var display = new DisplayProperties();
+            DisplayProperties display = new();
             pbLock.Image = display.ScaleImage(pbLock.Image);
             Height = tableLayoutPanel1.Height;
 
@@ -113,7 +113,7 @@ namespace mRemoteNG.UI.Forms
             if (!ThemeManager.getInstance().ActiveAndExtended)
                 return;
 
-            var activeTheme = ThemeManager.getInstance().ActiveTheme;
+            ThemeInfo activeTheme = ThemeManager.getInstance().ActiveTheme;
 
             BackColor = activeTheme.ExtendedPalette.getColor("Dialog_Background");
             ForeColor = activeTheme.ExtendedPalette.getColor("Dialog_Foreground");

@@ -527,7 +527,7 @@ namespace mRemoteNG.Connection
 
         public ConnectionInfoInheritance Clone(ConnectionInfo parent)
         {
-            var newInheritance = (ConnectionInfoInheritance)MemberwiseClone();
+            ConnectionInfoInheritance newInheritance = (ConnectionInfoInheritance)MemberwiseClone();
             newInheritance.Parent = parent;
             return newInheritance;
         }
@@ -567,15 +567,15 @@ namespace mRemoteNG.Connection
 
         private bool EverythingIsInherited()
         {
-            var inheritanceProperties = GetProperties();
-            var everythingInherited = inheritanceProperties.All((p) => (bool)p.GetValue(this, null));
+            IEnumerable<PropertyInfo> inheritanceProperties = GetProperties();
+            bool everythingInherited = inheritanceProperties.All((p) => (bool)p.GetValue(this, null));
             return everythingInherited;
         }
 
         public IEnumerable<PropertyInfo> GetProperties()
         {
-            var properties = typeof(ConnectionInfoInheritance).GetProperties();
-            var filteredProperties = properties.Where(FilterProperty);
+            PropertyInfo[] properties = typeof(ConnectionInfoInheritance).GetProperties();
+            IEnumerable<PropertyInfo> filteredProperties = properties.Where(FilterProperty);
             return filteredProperties;
         }
 
@@ -596,20 +596,20 @@ namespace mRemoteNG.Connection
 
         private bool FilterProperty(PropertyInfo propertyInfo)
         {
-            var exclusions = new[]
+            string[] exclusions = new[]
             {
                 nameof(EverythingInherited),
                 nameof(Parent),
                 nameof(InheritanceActive)
             };
-            var valueShouldNotBeFiltered = !exclusions.Contains(propertyInfo.Name);
+            bool valueShouldNotBeFiltered = !exclusions.Contains(propertyInfo.Name);
             return valueShouldNotBeFiltered;
         }
 
         private void SetAllValues(bool value)
         {
-            var properties = GetProperties();
-            foreach (var property in properties)
+            IEnumerable<PropertyInfo> properties = GetProperties();
+            foreach (PropertyInfo property in properties)
             {
                 if (property.PropertyType.Name == typeof(bool).Name)
                     property.SetValue(this, value, null);
@@ -618,10 +618,10 @@ namespace mRemoteNG.Connection
 
         private void SetAllValues(ConnectionInfoInheritance otherInheritanceObject)
         {
-            var properties = GetProperties();
-            foreach (var property in properties)
+            IEnumerable<PropertyInfo> properties = GetProperties();
+            foreach (PropertyInfo property in properties)
             {
-                var newPropertyValue = property.GetValue(otherInheritanceObject, null);
+                object newPropertyValue = property.GetValue(otherInheritanceObject, null);
                 property.SetValue(this, newPropertyValue, null);
             }
         }

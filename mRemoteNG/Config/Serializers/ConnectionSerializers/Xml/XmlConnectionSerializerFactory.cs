@@ -16,12 +16,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             SaveFilter saveFilter = null,
             bool useFullEncryption = false)
         {
-            var encryptionKey = connectionTreeModel
+            System.Security.SecureString encryptionKey = connectionTreeModel
                 .RootNodes.OfType<RootNodeInfo>()
                 .First().PasswordString
                 .ConvertToSecureString();
 
-            var connectionNodeSerializer = new XmlConnectionNodeSerializer28(
+            XmlConnectionNodeSerializer28 connectionNodeSerializer = new(
                 cryptographyProvider,
                 encryptionKey,
                 saveFilter ?? new SaveFilter());

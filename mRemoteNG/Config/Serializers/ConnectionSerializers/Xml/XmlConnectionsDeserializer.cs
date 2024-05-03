@@ -23,7 +23,7 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 {
     [SupportedOSPlatform("windows")]
-    public class XmlConnectionsDeserializer : IDeserializer<string, ConnectionTreeModel>
+    public class XmlConnectionsDeserializer(Func<Optional<SecureString>> authenticationRequestor = null) : IDeserializer<string, ConnectionTreeModel>
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
@@ -32,12 +32,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private const double MaxSupportedConfVersion = 2.8;
         private readonly RootNodeInfo _rootNodeInfo = new(RootNodeType.Connection);
 
-        public Func<Optional<SecureString>> AuthenticationRequestor { get; set; }
-
-        public XmlConnectionsDeserializer(Func<Optional<SecureString>> authenticationRequestor = null)
-        {
-            AuthenticationRequestor = authenticationRequestor;
-        }
+        public Func<Optional<SecureString>> AuthenticationRequestor { get; set; } = authenticationRequestor;
 
         public ConnectionTreeModel Deserialize(string xml)
         {
@@ -52,16 +47,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 LoadXmlConnectionData(xml);
                 ValidateConnectionFileVersion();
 
-                var rootXmlElement = _xmlDocument.DocumentElement;
+                XmlElement rootXmlElement = _xmlDocument.DocumentElement;
                 InitializeRootNode(rootXmlElement);
                 CreateDecryptor(_rootNodeInfo, rootXmlElement);
-                var connectionTreeModel = new ConnectionTreeModel();
+                ConnectionTreeModel connectionTreeModel = new();
                 connectionTreeModel.AddRootNode(_rootNodeInfo);
 
 
                 if (_confVersion > 1.3)
                 {
-                    var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"]?.Value;
+                    string protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"]?.Value;
                     if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()))
                     {
                         return null;
@@ -70,10 +65,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
                 if (_confVersion >= 2.6)
                 {
-                    var fullFileEncryptionValue = rootXmlElement.GetAttributeAsBool("FullFileEncryption");
+                    bool fullFileEncryptionValue = rootXmlElement.GetAttributeAsBool("FullFileEncryption");
                     if (fullFileEncryptionValue)
                     {
-                        var decryptedContent = _decryptor.Decrypt(rootXmlElement.InnerText);
+                        string decryptedContent = _decryptor.Decrypt(rootXmlElement.InnerText);
                         rootXmlElement.InnerXml = decryptedContent;
                     }
                 }
@@ -118,28 +113,14 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private void ShowIncompatibleVersionDialogBox()
         {
-            CTaskDialog.ShowTaskDialogBox(
-                                          FrmMain.Default,
-                                          Application.ProductName,
-                                          "Incompatible connection file format",
-                                          $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
-                                          string
-                                              .Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}",
-                                                      Environment.NewLine,
-                                                      ConnectionFileName, _confVersion, MaxSupportedConfVersion),
-                                          "",
-                                          "",
-                                          "",
-                                          "",
-                                          ETaskDialogButtons.Ok,
-                                          ESysIcons.Error,
-                                          ESysIcons.Error
-                                         );
+            CTaskDialog.ShowTaskDialogBox(FrmMain.Default, Application.ProductName, "Incompatible connection file format", $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
+                                          string .Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, _confVersion, MaxSupportedConfVersion),
+                                          "", "", "", "", ETaskDialogButtons.Ok, ESysIcons.Error, ESysIcons.Error);
         }
 
         private void InitializeRootNode(XmlElement connectionsRootElement)
         {
-            var rootNodeName = connectionsRootElement?.Attributes["Name"]?.Value.Trim();
+            string rootNodeName = connectionsRootElement?.Attributes["Name"]?.Value.Trim();
             _rootNodeInfo.Name = rootNodeName;
         }
 
@@ -147,9 +128,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         {
             if (_confVersion >= 2.6)
             {
-                var engine = connectionsRootElement.GetAttributeAsEnum<BlockCipherEngines>("EncryptionEngine");
-                var mode = connectionsRootElement.GetAttributeAsEnum<BlockCipherModes>("BlockCipherMode");
-                var keyDerivationIterations = connectionsRootElement.GetAttributeAsInt("KdfIterations");
+                BlockCipherEngines engine = connectionsRootElement.GetAttributeAsEnum<BlockCipherEngines>("EncryptionEngine");
+                BlockCipherModes mode = connectionsRootElement.GetAttributeAsEnum<BlockCipherModes>("BlockCipherMode");
+                int keyDerivationIterations = connectionsRootElement.GetAttributeAsInt("KdfIterations");
 
                 _decryptor = new XmlConnectionsDecryptor(engine, mode, rootNodeInfo)
                 {
@@ -173,17 +154,17 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 if (!parentXmlNode.HasChildNodes) return;
                 foreach (XmlNode xmlNode in parentXmlNode.ChildNodes)
                 {
-                    var nodeType = xmlNode.GetAttributeAsEnum("Type", TreeNodeType.Connection);
+                    TreeNodeType nodeType = xmlNode.GetAttributeAsEnum("Type", TreeNodeType.Connection);
 
                     // ReSharper disable once SwitchStatementMissingSomeCases
                     switch (nodeType)
                     {
                         case TreeNodeType.Connection:
-                            var connectionInfo = GetConnectionInfoFromXml(xmlNode);
+                            ConnectionInfo connectionInfo = GetConnectionInfoFromXml(xmlNode);
                             parentContainer.AddChild(connectionInfo);
                             break;
                         case TreeNodeType.Container:
-                            var containerInfo = new ContainerInfo();
+                            ContainerInfo containerInfo = new();
 
                             if (_confVersion >= 0.9)
                                 containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
@@ -210,10 +191,10 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             if (xmlnode?.Attributes == null)
                 return null;
 
-            var connectionId = xmlnode.GetAttributeAsString("Id");
+            string connectionId = xmlnode.GetAttributeAsString("Id");
             if (string.IsNullOrWhiteSpace(connectionId))
                 connectionId = Guid.NewGuid().ToString();
-            var connectionInfo = new ConnectionInfo(connectionId);
+            ConnectionInfo connectionInfo = new(connectionId);
 
             try
             {

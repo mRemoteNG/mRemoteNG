@@ -42,7 +42,7 @@ namespace mRemoteNG.UI.Window
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources =
-                new System.ComponentModel.ComponentResourceManager(typeof(SSHTransferWindow));
+                new(typeof(SSHTransferWindow));
             grpFiles = new MrngGroupBox();
             lblLocalFile = new MrngLabel();
             txtLocalFile = new MrngTextBox();
@@ -352,7 +352,7 @@ namespace mRemoteNG.UI.Window
             ApplyTheme();
             ApplyLanguage();
             Icon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.SyncArrow_16x);
-            var display = new DisplayProperties();
+            DisplayProperties display = new();
             btnTransfer.Image = display.ScaleImage(btnTransfer.Image);
         }
 
@@ -411,7 +411,7 @@ namespace mRemoteNG.UI.Window
                         break;
                 }
 
-                var t = new Thread(StartTransferBG);
+                Thread t = new(StartTransferBG);
                 t.SetApartmentState(ApartmentState.STA);
                 t.IsBackground = true;
                 t.Start();
@@ -432,10 +432,10 @@ namespace mRemoteNG.UI.Window
         private void ScpClt_Uploading(object sender, Renci.SshNet.Common.ScpUploadEventArgs e)
         {
             // If the file size is over 2 gigs, convert to kb. This means we'll support a 2TB file.
-            var max = e.Size > int.MaxValue ? Convert.ToInt32(e.Size / 1024) : Convert.ToInt32(e.Size);
+            int max = e.Size > int.MaxValue ? Convert.ToInt32(e.Size / 1024) : Convert.ToInt32(e.Size);
 
             // yes, compare to size since that's the total/original file size
-            var cur = e.Size > int.MaxValue ? Convert.ToInt32(e.Uploaded / 1024) : Convert.ToInt32(e.Uploaded);
+            int cur = e.Size > int.MaxValue ? Convert.ToInt32(e.Uploaded / 1024) : Convert.ToInt32(e.Uploaded);
 
             SshTransfer_Progress(cur, max);
         }
@@ -452,14 +452,14 @@ namespace mRemoteNG.UI.Window
                 // SftpClient is Asynchronous, so we need to wait here after the upload and handle the status directly since no status events are raised.
                 if (st.Protocol == SecureTransfer.SSHTransferProtocol.SFTP)
                 {
-                    var fi = new FileInfo(st.SrcFile);
+                    FileInfo fi = new(st.SrcFile);
                     while (!st.asyncResult.IsCompleted)
                     {
-                        var max = fi.Length > int.MaxValue
+                        int max = fi.Length > int.MaxValue
                             ? Convert.ToInt32(fi.Length / 1024)
                             : Convert.ToInt32(fi.Length);
 
-                        var cur = fi.Length > int.MaxValue
+                        int cur = fi.Length > int.MaxValue
                             ? Convert.ToInt32(st.asyncResult.UploadedBytes / 1024)
                             : Convert.ToInt32(st.asyncResult.UploadedBytes);
                         SshTransfer_Progress(cur, max);

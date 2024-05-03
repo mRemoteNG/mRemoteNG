@@ -58,7 +58,7 @@ namespace mRemoteNG.App
 
         public static void LoadConnectionsAsync()
         {
-            var t = new Thread(LoadConnectionsBGd);
+            Thread t = new(LoadConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
@@ -77,7 +77,7 @@ namespace mRemoteNG.App
         /// </param>
         public static void LoadConnections(bool withDialog = false)
         {
-            var connectionFileName = "";
+            string connectionFileName = "";
 
             try
             {
@@ -86,7 +86,7 @@ namespace mRemoteNG.App
 
                 if (withDialog)
                 {
-                    var loadDialog = DialogFactory.BuildLoadConnectionsDialog();
+                    OpenFileDialog loadDialog = DialogFactory.BuildLoadConnectionsDialog();
                     if (loadDialog.ShowDialog() != DialogResult.OK)
                         return;
 
@@ -120,7 +120,7 @@ namespace mRemoteNG.App
                 if (Properties.OptionsDBsPage.Default.UseSQLServer)
                 {
                     MessageCollector.AddExceptionMessage(Language.LoadFromSqlFailed, ex);
-                    var commandButtons = string.Join("|", Language._TryAgain, Language.CommandOpenConnectionFile, string.Format(Language.CommandExitProgram, Application.ProductName));
+                    string commandButtons = string.Join("|", Language._TryAgain, Language.CommandOpenConnectionFile, string.Format(Language.CommandExitProgram, Application.ProductName));
                     CTaskDialog.ShowCommandBox(Application.ProductName, Language.LoadFromSqlFailed, Language.LoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, ESysIcons.Error, ESysIcons.Error);
                     switch (CTaskDialog.CommandButtonResult)
                     {
@@ -152,7 +152,7 @@ namespace mRemoteNG.App
                         Language.Exit
                     };
 
-                    var answered = false;
+                    bool answered = false;
                     while (!answered)
                     {
                         try

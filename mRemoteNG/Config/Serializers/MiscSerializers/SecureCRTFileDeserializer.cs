@@ -18,14 +18,14 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         public ConnectionTreeModel Deserialize(string content)
         {
-            var connectionTreeModel = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection);
+            ConnectionTreeModel connectionTreeModel = new();
+            RootNodeInfo root = new(RootNodeType.Connection);
             connectionTreeModel.AddRootNode(root);
 
-            var xmlDocument = new XmlDocument();
+            XmlDocument xmlDocument = new();
             xmlDocument.LoadXml(content);
 
-            var sessionsNode = xmlDocument.SelectSingleNode("/VanDyke/key[@name=\"Sessions\"]");
+            XmlNode sessionsNode = xmlDocument.SelectSingleNode("/VanDyke/key[@name=\"Sessions\"]");
 
             ImportRootOrContainer(sessionsNode, root);
 
@@ -34,17 +34,17 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private void ImportRootOrContainer(XmlNode rootNode, ContainerInfo parentContainer)
         {
-            var newContainer = ImportContainer(rootNode, parentContainer);
+            ContainerInfo newContainer = ImportContainer(rootNode, parentContainer);
 
             if (rootNode.ChildNodes.Count == 0)
                 return;
 
             foreach (XmlNode child in rootNode.ChildNodes)
             {
-                var name = child.Attributes["name"].Value;
+                string name = child.Attributes["name"].Value;
                 if (name == "Default" || name == "Default_LocalShell")
                     continue;
-                var nodeType = GetFolderOrSession(child);
+                SecureCRTNodeType nodeType = GetFolderOrSession(child);
                 switch (nodeType)
                 {
                     case SecureCRTNodeType.folder:
@@ -59,7 +59,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private void ImportConnection(XmlNode childNode, ContainerInfo parentContainer)
         {
-            var connectionInfo = ConnectionInfoFromXml(childNode);
+            ConnectionInfo connectionInfo = ConnectionInfoFromXml(childNode);
             if (connectionInfo == null)
                 return;
 
@@ -68,7 +68,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private ContainerInfo ImportContainer(XmlNode containerNode, ContainerInfo parentContainer)
         {
-            var containerInfo = new ContainerInfo
+            ContainerInfo containerInfo = new()
             {
                 Name = containerNode.Attributes["name"].InnerText
             };
@@ -86,7 +86,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
         {
-            var connectionInfo = new ConnectionInfo();
+            ConnectionInfo connectionInfo = new();
             try
             {
                 connectionInfo.Name = xmlNode.Attributes["name"].InnerText;
@@ -131,11 +131,11 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private ProtocolType GetProtocolFromNode(XmlNode xmlNode)
         {
-            var protocolNode = xmlNode.SelectSingleNode("string[@name=\"Protocol Name\"]");
+            XmlNode protocolNode = xmlNode.SelectSingleNode("string[@name=\"Protocol Name\"]");
             if (protocolNode == null)
                 throw new FileFormatException($"Protocol node not found");
 
-            var protocolText = protocolNode.InnerText.ToUpper();
+            string protocolText = protocolNode.InnerText.ToUpper();
             switch (protocolText)
             {
                 case "RDP":
@@ -157,8 +157,8 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private string GetDescriptionFromNode(XmlNode xmlNode)
         {
-            var description = string.Empty;
-            var descNode = xmlNode.SelectSingleNode("array[@name=\"Description\"]");
+            string description = string.Empty;
+            XmlNode descNode = xmlNode.SelectSingleNode("array[@name=\"Description\"]");
             foreach(XmlNode n in descNode.ChildNodes)
             {
                 description += n.InnerText + " ";

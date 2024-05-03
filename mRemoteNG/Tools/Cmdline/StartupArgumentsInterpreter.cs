@@ -32,7 +32,7 @@ namespace mRemoteNG.Tools.Cmdline
 
             try
             {
-                var args = new CmdArgumentsInterpreter(cmdlineArgs);
+                CmdArgumentsInterpreter args = new(cmdlineArgs);
 
                 ParseResetPositionArg(args);
                 ParseResetPanelsArg(args);
@@ -51,10 +51,10 @@ namespace mRemoteNG.Tools.Cmdline
             if (args["resetpos"] == null && args["rp"] == null && args["reset"] == null) return;
             _messageCollector.AddMessage(MessageClass.DebugMsg, "Cmdline arg: Resetting window positions.");
             Properties.App.Default.MainFormKiosk = false;
-            var newWidth = 900;
-            var newHeight = 600;
-            var newX = Screen.PrimaryScreen.WorkingArea.Width / 2 - newWidth / 2;
-            var newY = Screen.PrimaryScreen.WorkingArea.Height / 2 - newHeight / 2;
+            int newWidth = 900;
+            int newHeight = 600;
+            int newX = Screen.PrimaryScreen.WorkingArea.Width / 2 - newWidth / 2;
+            int newY = Screen.PrimaryScreen.WorkingArea.Height / 2 - newHeight / 2;
             Properties.App.Default.MainFormLocation = new Point(newX, newY);
             Properties.App.Default.MainFormSize = new Size(newWidth, newHeight);
             Properties.App.Default.MainFormState = FormWindowState.Normal;
@@ -84,7 +84,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         private void ParseCustomConnectionPathArg(CmdArgumentsInterpreter args)
         {
-            var consParam = "";
+            string consParam = "";
             if (args["cons"] != null)
                 consParam = "cons";
             if (args["c"] != null)

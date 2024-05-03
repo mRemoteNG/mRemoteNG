@@ -12,7 +12,7 @@ namespace mRemoteNG.App
     [SupportedOSPlatform("windows")]
     public class Logger
     {
-        public static readonly Logger Instance = new Logger();
+        public static readonly Logger Instance = new();
 
         public ILog Log { get; private set; }
 
@@ -43,7 +43,7 @@ namespace mRemoteNG.App
 
             IAppender[] appenders = repository.GetAppenders();
 
-            foreach (var appender in appenders)
+            foreach (IAppender appender in appenders)
             {
                 RollingFileAppender fileAppender = (RollingFileAppender)appender;
                 if (fileAppender is not { Name: "LogFileAppender" }) continue;

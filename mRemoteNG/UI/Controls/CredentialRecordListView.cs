@@ -62,10 +62,10 @@ namespace mRemoteNG.UI.Controls
 
         private void SetObjectList()
         {
-            var objects = new Dictionary<ICredentialRecord, ICredentialRepository>();
-            foreach (var repository in _credentialRepositoryList.CredentialProviders)
+            Dictionary<ICredentialRecord, ICredentialRepository> objects = new();
+            foreach (ICredentialRepository repository in _credentialRepositoryList.CredentialProviders)
             {
-                foreach (var credential in repository.CredentialRecords)
+                foreach (ICredentialRecord credential in repository.CredentialRecords)
                     objects.Add(credential, repository);
             }
 
@@ -81,37 +81,37 @@ namespace mRemoteNG.UI.Controls
 
         private object CredentialIdAspectGetter(object rowObject)
         {
-            var keyValuePair = CastRowObject(rowObject);
+            KeyValuePair<ICredentialRecord, ICredentialRepository> keyValuePair = CastRowObject(rowObject);
             return keyValuePair.Key.Id;
         }
 
         private object CredentialTitleAspectGetter(object rowObject)
         {
-            var keyValuePair = CastRowObject(rowObject);
+            KeyValuePair<ICredentialRecord, ICredentialRepository> keyValuePair = CastRowObject(rowObject);
             return keyValuePair.Key.Title;
         }
 
         private object CredentialUsernameAspectGetter(object rowObject)
         {
-            var keyValuePair = CastRowObject(rowObject);
+            KeyValuePair<ICredentialRecord, ICredentialRepository> keyValuePair = CastRowObject(rowObject);
             return keyValuePair.Key.Username;
         }
 
         private object CredentialDomainAspectGetter(object rowObject)
         {
-            var keyValuePair = CastRowObject(rowObject);
+            KeyValuePair<ICredentialRecord, ICredentialRepository> keyValuePair = CastRowObject(rowObject);
             return keyValuePair.Key.Domain;
         }
 
         private object CredentialSourceAspectGetter(object rowObject)
         {
-            var keyValuePair = CastRowObject(rowObject);
+            KeyValuePair<ICredentialRecord, ICredentialRepository> keyValuePair = CastRowObject(rowObject);
             return keyValuePair.Value.Config.Source;
         }
 
         private object RepoTitleAspectGetter(object rowObject)
         {
-            var keyValuePair = CastRowObject(rowObject);
+            KeyValuePair<ICredentialRecord, ICredentialRepository> keyValuePair = CastRowObject(rowObject);
             return keyValuePair.Value.Config.Title;
         }
 
@@ -119,7 +119,7 @@ namespace mRemoteNG.UI.Controls
         {
             if (!(model is KeyValuePair<ICredentialRecord, ICredentialRepository>))
                 return default(KeyValuePair<ICredentialRecord, ICredentialRepository>);
-            var keyValuePair = (KeyValuePair<ICredentialRecord, ICredentialRepository>)model;
+            KeyValuePair<ICredentialRecord, ICredentialRepository> keyValuePair = (KeyValuePair<ICredentialRecord, ICredentialRepository>)model;
             return keyValuePair;
         }
 

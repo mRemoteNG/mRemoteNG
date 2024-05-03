@@ -17,7 +17,7 @@ namespace mRemoteNG.Config.Settings
         {
             try
             {
-                var windowPlacement = new WindowPlacement(FrmMain.Default);
+                WindowPlacement windowPlacement = new(FrmMain.Default);
                 if (frmMain.WindowState == FormWindowState.Minimized & windowPlacement.RestoreToMaximized)
                 {
                     frmMain.Opacity = 0;
@@ -110,8 +110,8 @@ namespace mRemoteNG.Config.Settings
 
         private static void SaveDockPanelLayout()
         {
-            var panelLayoutXmlFilePath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
-            var panelLayoutSaver = new DockPanelLayoutSaver(
+            string panelLayoutXmlFilePath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
+            DockPanelLayoutSaver panelLayoutSaver = new(
                                                             new DockPanelLayoutSerializer(),
                                                             new FileDataProvider(panelLayoutXmlFilePath)
                                                            );
@@ -120,7 +120,7 @@ namespace mRemoteNG.Config.Settings
 
         private static void SaveExternalApps()
         {
-            var externalAppsSaver = new ExternalAppsSaver();
+            ExternalAppsSaver externalAppsSaver = new();
             externalAppsSaver.Save(Runtime.ExternalToolsService.ExternalTools);
         }
     }

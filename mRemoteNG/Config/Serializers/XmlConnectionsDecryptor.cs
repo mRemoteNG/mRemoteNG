@@ -49,7 +49,7 @@ namespace mRemoteNG.Config.Serializers
             if (string.IsNullOrEmpty(xml)) return "";
             if (xml.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>")) return xml;
 
-            var decryptedContent = "";
+            string decryptedContent = "";
             bool notDecr;
 
             try
@@ -84,7 +84,7 @@ namespace mRemoteNG.Config.Serializers
 
         public bool ConnectionsFileIsAuthentic(string protectedString, SecureString password)
         {
-            var connectionsFileIsNotEncrypted = false;
+            bool connectionsFileIsNotEncrypted = false;
             try
             {
                 connectionsFileIsNotEncrypted = _cryptographyProvider.Decrypt(protectedString, _rootNodeInfo.PasswordString.ConvertToSecureString()) == "ThisIsNotProtected";
@@ -98,8 +98,8 @@ namespace mRemoteNG.Config.Serializers
 
         private bool Authenticate(string cipherText, SecureString password)
         {
-            var authenticator = new PasswordAuthenticator(_cryptographyProvider, cipherText, AuthenticationRequestor);
-            var authenticated = authenticator.Authenticate(password);
+            PasswordAuthenticator authenticator = new(_cryptographyProvider, cipherText, AuthenticationRequestor);
+            bool authenticated = authenticator.Authenticate(password);
 
             if (!authenticated)
                 return false;

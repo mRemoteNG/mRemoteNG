@@ -8,10 +8,10 @@ namespace mRemoteNG.Config.Serializers
     {
         public void EnsureElementsHaveIds(XDocument xdoc)
         {
-            foreach (var element in xdoc.Descendants("Node"))
+            foreach (XElement element in xdoc.Descendants("Node"))
             {
                 if (element.Attribute("Id") != null) continue;
-                var id = Guid.NewGuid();
+                Guid id = Guid.NewGuid();
                 element.Add(new XAttribute("Id", id));
             }
         }

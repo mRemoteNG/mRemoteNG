@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Forms
         {
             cbPanels.Items.Clear();
 
-            for (var i = 0; i <= Runtime.WindowList.Count - 1; i++)
+            for (int i = 0; i <= Runtime.WindowList.Count - 1; i++)
             {
                 cbPanels.Items.Add(Runtime.WindowList[i].Text.Replace("&&", "&"));
             }
@@ -75,10 +75,10 @@ namespace mRemoteNG.UI.Forms
 
         private void btnNew_Click(object sender, System.EventArgs e)
         {
-            using (var frmInputBox =
-                new FrmInputBox(Language.NewPanel, Language.PanelName + ":", Language.NewPanel))
+            using (FrmInputBox frmInputBox =
+                new(Language.NewPanel, Language.PanelName + ":", Language.NewPanel))
             {
-                var dr = frmInputBox.ShowDialog();
+                DialogResult dr = frmInputBox.ShowDialog();
                 if (dr != DialogResult.OK || string.IsNullOrEmpty(frmInputBox.returnValue)) return;
                 _panelAdder.AddPanel(frmInputBox.returnValue);
                 AddAvailablePanels();

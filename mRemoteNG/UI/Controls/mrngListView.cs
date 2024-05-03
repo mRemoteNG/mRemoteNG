@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Controls
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-            var _themeManager = ThemeManager.getInstance();
+            ThemeManager _themeManager = ThemeManager.getInstance();
             if (!_themeManager.ActiveAndExtended) return;
             //List back color
             BackColor = _themeManager.ActiveTheme.ExtendedPalette.getColor("List_Background");
@@ -36,7 +36,7 @@ namespace mRemoteNG.UI.Controls
 
             //Header style
             HeaderUsesThemes = false;
-            var headerStylo = new HeaderFormatStyle
+            HeaderFormatStyle headerStylo = new()
             {
                 Normal =
                 {

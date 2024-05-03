@@ -68,14 +68,14 @@ namespace mRemoteNG.UI.Controls
             {
                 SuspendLayout();
 
-                for (var index = Items.Count - 1; index >= 0; index--)
+                for (int index = Items.Count - 1; index >= 0; index--)
                     Items[index].Dispose();
                 Items.Clear();
 
-                foreach (var tool in Runtime.ExternalToolsService.ExternalTools)
+                foreach (ExternalTool tool in Runtime.ExternalToolsService.ExternalTools)
                 {
                     if (!tool.ShowOnToolbar) continue;
-                    var button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, TsExtAppEntry_Click);
+                    ToolStripButton button = (ToolStripButton)Items.Add(tool.DisplayName, tool.Image, TsExtAppEntry_Click);
                     if (CMenToolbarShowText.Checked)
                         button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
                     else
@@ -98,9 +98,9 @@ namespace mRemoteNG.UI.Controls
 
         private static void TsExtAppEntry_Click(object sender, EventArgs e)
         {
-            var extA = (ExternalTool)((ToolStripButton)sender).Tag;
+            ExternalTool extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
-            var selectedTreeNode = Windows.TreeForm.SelectedNode;
+            Connection.ConnectionInfo selectedTreeNode = Windows.TreeForm.SelectedNode;
             if (selectedTreeNode != null && selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection ||
                 selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
                 extA.Start(selectedTreeNode);

@@ -18,9 +18,9 @@ namespace mRemoteNG.UI.GraphicsUtilities
         {
             //This method could be optimized, as it is called for every control / subcontrol 
             //and causes overhead for 100s in the options page
-            using (var f = new Form())
+            using (Form f = new())
             {
-                var g = f.CreateGraphics();
+                Graphics g = f.CreateGraphics();
                 return new SizeF(g.DpiX / BaselineDpi, g.DpiY / BaselineDpi);
             }
         }

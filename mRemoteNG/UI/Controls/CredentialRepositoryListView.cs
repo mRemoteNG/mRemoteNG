@@ -38,7 +38,7 @@ namespace mRemoteNG.UI.Controls
 
         public void RefreshObjects()
         {
-            var repos = CredentialRepositoryList.CredentialProviders.ToList();
+            List<ICredentialRepository> repos = CredentialRepositoryList.CredentialProviders.ToList();
             objectListView1.RefreshObjects(repos);
         }
 
@@ -61,7 +61,7 @@ namespace mRemoteNG.UI.Controls
 
         private void SetListObjects(IEnumerable<ICredentialRepository> repositories)
         {
-            var filteredRepositories = RepositoryFilter == null ? repositories : repositories.Where(RepositoryFilter);
+            IEnumerable<ICredentialRepository> filteredRepositories = RepositoryFilter == null ? repositories : repositories.Where(RepositoryFilter);
             objectListView1.SetObjects(filteredRepositories);
         }
 
@@ -69,8 +69,8 @@ namespace mRemoteNG.UI.Controls
         {
             if (mouseEventArgs.Clicks < 2) return;
             OLVColumn column;
-            var listItem = objectListView1.GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
-            var clickedNode = listItem.RowObject as ICredentialRepository;
+            OLVListItem listItem = objectListView1.GetItemAt(mouseEventArgs.X, mouseEventArgs.Y, out column);
+            ICredentialRepository clickedNode = listItem.RowObject as ICredentialRepository;
             if (clickedNode == null) return;
             DoubleClickHandler?.Invoke(clickedNode);
         }

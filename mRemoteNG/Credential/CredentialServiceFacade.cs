@@ -35,7 +35,7 @@ namespace mRemoteNG.Credential
 
         public void LoadRepositoryList()
         {
-            foreach (var repository in _loader.Load())
+            foreach (ICredentialRepository repository in _loader.Load())
             {
                 _repositoryList.AddProvider(repository);
             }
@@ -80,7 +80,7 @@ namespace mRemoteNG.Credential
                                                    CollectionUpdatedEventArgs<ICredentialRecord>
                                                        collectionUpdatedEventArgs)
         {
-            var repo = sender as ICredentialRepository;
+            ICredentialRepository repo = sender as ICredentialRepository;
             repo?.SaveCredentials(repo.Config.Key);
         }
 

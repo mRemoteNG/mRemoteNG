@@ -48,7 +48,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
         {
             get
             {
-                var cipherEngine = _aeadBlockCipher.AlgorithmName.Split('/')[0];
+                string cipherEngine = _aeadBlockCipher.AlgorithmName.Split('/')[0];
                 return (BlockCipherEngines)Enum.Parse(typeof(BlockCipherEngines), cipherEngine);
             }
         }
@@ -57,7 +57,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
         {
             get
             {
-                var cipherMode = _aeadBlockCipher.AlgorithmName.Split('/')[1];
+                string cipherMode = _aeadBlockCipher.AlgorithmName.Split('/')[1];
                 return (BlockCipherModes)Enum.Parse(typeof(BlockCipherModes), cipherMode);
             }
         }
@@ -96,7 +96,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         public string Encrypt(string plainText, SecureString encryptionKey)
         {
-            var encryptedText = SimpleEncryptWithPassword(plainText, encryptionKey.ConvertToUnsecureString());
+            string encryptedText = SimpleEncryptWithPassword(plainText, encryptionKey.ConvertToUnsecureString());
             return encryptedText;
         }
 
@@ -105,8 +105,8 @@ namespace mRemoteNG.Security.SymmetricEncryption
             if (string.IsNullOrEmpty(secretMessage))
                 return ""; //throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
-            var plainText = _encoding.GetBytes(secretMessage);
-            var cipherText = SimpleEncryptWithPassword(plainText, password, nonSecretPayload);
+            byte[] plainText = _encoding.GetBytes(secretMessage);
+            byte[] cipherText = SimpleEncryptWithPassword(plainText, password, nonSecretPayload);
             return Convert.ToBase64String(cipherText);
         }
 
@@ -123,14 +123,14 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             //Use Random Salt to minimize pre-generated weak password attacks.
-            var salt = GenerateSalt();
+            byte[] salt = GenerateSalt();
 
             //Generate Key
-            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, KeyDerivationIterations);
-            var key = keyDerivationFunction.DeriveKey(password, salt);
+            Pkcs5S2KeyGenerator keyDerivationFunction = new(KeyBitSize, KeyDerivationIterations);
+            byte[] key = keyDerivationFunction.DeriveKey(password, salt);
 
             //Create Full Non Secret Payload
-            var payload = new byte[salt.Length + nonSecretPayload.Length];
+            byte[] payload = new byte[salt.Length + nonSecretPayload.Length];
             Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
             Array.Copy(salt, 0, payload, nonSecretPayload.Length, salt.Length);
 
@@ -150,20 +150,20 @@ namespace mRemoteNG.Security.SymmetricEncryption
             nonSecretPayload ??= ""u8.ToArray();
 
             //Using random nonce large enough not to repeat
-            var nonce = new byte[NonceBitSize / 8];
+            byte[] nonce = new byte[NonceBitSize / 8];
             _random.NextBytes(nonce, 0, nonce.Length);
 
-            var parameters = new AeadParameters(new KeyParameter(key), MacBitSize, nonce, nonSecretPayload);
+            AeadParameters parameters = new(new KeyParameter(key), MacBitSize, nonce, nonSecretPayload);
             _aeadBlockCipher.Init(true, parameters);
 
             //Generate Cipher Text With Auth Tag
-            var cipherText = new byte[_aeadBlockCipher.GetOutputSize(secretMessage.Length)];
-            var len = _aeadBlockCipher.ProcessBytes(secretMessage, 0, secretMessage.Length, cipherText, 0);
+            byte[] cipherText = new byte[_aeadBlockCipher.GetOutputSize(secretMessage.Length)];
+            int len = _aeadBlockCipher.ProcessBytes(secretMessage, 0, secretMessage.Length, cipherText, 0);
             _aeadBlockCipher.DoFinal(cipherText, len);
 
             //Assemble Message
-            var combinedStream = new MemoryStream();
-            using (var binaryWriter = new BinaryWriter(combinedStream))
+            MemoryStream combinedStream = new();
+            using (BinaryWriter binaryWriter = new(combinedStream))
             {
                 //Prepend Authenticated Payload
                 binaryWriter.Write(nonSecretPayload);
@@ -179,7 +179,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         public string Decrypt(string cipherText, SecureString decryptionKey)
         {
-            var decryptedText = SimpleDecryptWithPassword(cipherText, decryptionKey);
+            string decryptedText = SimpleDecryptWithPassword(cipherText, decryptionKey);
             return decryptedText;
         }
 
@@ -188,8 +188,8 @@ namespace mRemoteNG.Security.SymmetricEncryption
             if (string.IsNullOrWhiteSpace(encryptedMessage))
                 return ""; //throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
-            var cipherText = Convert.FromBase64String(encryptedMessage);
-            var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(), nonSecretPayloadLength);
+            byte[] cipherText = Convert.FromBase64String(encryptedMessage);
+            byte[] plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(), nonSecretPayloadLength);
             return plainText == null ? null : _encoding.GetString(plainText);
         }
 
@@ -203,12 +203,12 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             //Grab Salt from Payload
-            var salt = new byte[SaltBitSize / 8];
+            byte[] salt = new byte[SaltBitSize / 8];
             Array.Copy(encryptedMessage, nonSecretPayloadLength, salt, 0, salt.Length);
 
             //Generate Key
-            var keyDerivationFunction = new Pkcs5S2KeyGenerator(KeyBitSize, KeyDerivationIterations);
-            var key = keyDerivationFunction.DeriveKey(password, salt);
+            Pkcs5S2KeyGenerator keyDerivationFunction = new(KeyBitSize, KeyDerivationIterations);
+            byte[] key = keyDerivationFunction.DeriveKey(password, salt);
 
             return SimpleDecrypt(encryptedMessage, key, salt.Length + nonSecretPayloadLength);
         }
@@ -222,25 +222,25 @@ namespace mRemoteNG.Security.SymmetricEncryption
             if (encryptedMessage == null || encryptedMessage.Length == 0)
                 throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
-            var cipherStream = new MemoryStream(encryptedMessage);
-            using var cipherReader = new BinaryReader(cipherStream);
+            MemoryStream cipherStream = new(encryptedMessage);
+            using BinaryReader cipherReader = new(cipherStream);
             //Grab Payload
-            var nonSecretPayload = cipherReader.ReadBytes(nonSecretPayloadLength);
+            byte[] nonSecretPayload = cipherReader.ReadBytes(nonSecretPayloadLength);
 
             //Grab Nonce
-            var nonce = cipherReader.ReadBytes(NonceBitSize / 8);
+            byte[] nonce = cipherReader.ReadBytes(NonceBitSize / 8);
 
-            var parameters = new AeadParameters(new KeyParameter(key), MacBitSize, nonce, nonSecretPayload);
+            AeadParameters parameters = new(new KeyParameter(key), MacBitSize, nonce, nonSecretPayload);
             _aeadBlockCipher.Init(false, parameters);
 
             //Decrypt Cipher Text
-            var cipherText =
+            byte[] cipherText =
                 cipherReader.ReadBytes(encryptedMessage.Length - nonSecretPayloadLength - nonce.Length);
-            var plainText = new byte[_aeadBlockCipher.GetOutputSize(cipherText.Length)];
+            byte[] plainText = new byte[_aeadBlockCipher.GetOutputSize(cipherText.Length)];
 
             try
             {
-                var len = _aeadBlockCipher.ProcessBytes(cipherText, 0, cipherText.Length, plainText, 0);
+                int len = _aeadBlockCipher.ProcessBytes(cipherText, 0, cipherText.Length, plainText, 0);
                 _aeadBlockCipher.DoFinal(plainText, len);
             }
             catch (InvalidCipherTextException e)
@@ -253,7 +253,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         private byte[] GenerateSalt()
         {
-            var salt = new byte[SaltBitSize / 8];
+            byte[] salt = new byte[SaltBitSize / 8];
             _random.NextBytes(salt);
             return salt;
         }

@@ -15,30 +15,30 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         public XDocument EncryptDocument(XDocument documentToEncrypt, SecureString encryptionKey)
         {
-            var contentToEncrypt = GetContentToEncrypt(documentToEncrypt.Root);
-            var encryptedContent = _cryptographyProvider.Encrypt(contentToEncrypt, encryptionKey);
-            var encryptedDocument = ReplaceInnerXml(documentToEncrypt, encryptedContent);
+            string contentToEncrypt = GetContentToEncrypt(documentToEncrypt.Root);
+            string encryptedContent = _cryptographyProvider.Encrypt(contentToEncrypt, encryptionKey);
+            XDocument encryptedDocument = ReplaceInnerXml(documentToEncrypt, encryptedContent);
             return encryptedDocument;
         }
 
         private string GetContentToEncrypt(XNode element)
         {
-            var reader = element.CreateReader();
+            System.Xml.XmlReader reader = element.CreateReader();
             reader.MoveToContent();
             return reader.ReadInnerXml();
         }
 
         private XDocument ReplaceInnerXml(XDocument originalDocument, string newContent)
         {
-            var newRootElement = ShallowCloneRootNode(originalDocument.Root);
+            XElement newRootElement = ShallowCloneRootNode(originalDocument.Root);
             newRootElement.SetValue(newContent);
             return new XDocument(newRootElement);
         }
 
         private XElement ShallowCloneRootNode(XElement originalElement)
         {
-            var newElement = new XElement(originalElement.Name);
-            foreach (var attribute in originalElement.Attributes())
+            XElement newElement = new(originalElement.Name);
+            foreach (XAttribute attribute in originalElement.Attributes())
                 newElement.Add(new XAttribute(attribute));
             return newElement;
         }

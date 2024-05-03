@@ -7,23 +7,23 @@ namespace mRemoteNG.Config.DataProviders
     {
         public void PruneBackupFiles(string filePath, int maxBackupsToKeep)
         {
-            var fileName = Path.GetFileName(filePath);
-            var directoryName = Path.GetDirectoryName(filePath);
+            string fileName = Path.GetFileName(filePath);
+            string directoryName = Path.GetDirectoryName(filePath);
 
             if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(directoryName))
                 return;
 
-            var searchPattern = string.Format(Properties.OptionsBackupPage.Default.BackupFileNameFormat, fileName, "*");
-            var files = Directory.GetFiles(directoryName, searchPattern);
+            string searchPattern = string.Format(Properties.OptionsBackupPage.Default.BackupFileNameFormat, fileName, "*");
+            string[] files = Directory.GetFiles(directoryName, searchPattern);
 
             if (files.Length <= maxBackupsToKeep)
                 return;
 
-            var filesToDelete = files
+            System.Collections.Generic.IEnumerable<string> filesToDelete = files
                                 .OrderByDescending(s => s)
                                 .Skip(maxBackupsToKeep);
 
-            foreach (var file in filesToDelete)
+            foreach (string file in filesToDelete)
             {
                 File.Delete(file);
             }

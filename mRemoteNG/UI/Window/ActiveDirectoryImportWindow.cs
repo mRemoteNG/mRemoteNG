@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Window
 
         private void BtnImport_Click(object sender, EventArgs e)
         {
-            var selectedNode = Windows.TreeForm.SelectedNode;
+            Connection.ConnectionInfo selectedNode = Windows.TreeForm.SelectedNode;
             ContainerInfo importDestination;
             if (selectedNode != null)
                 importDestination = selectedNode as ContainerInfo ?? selectedNode.Parent;

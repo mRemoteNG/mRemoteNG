@@ -19,13 +19,13 @@ namespace mRemoteNG.App
         {
             try
             {
-                using (var openFileDialog = new OpenFileDialog())
+                using (OpenFileDialog openFileDialog = new())
                 {
                     openFileDialog.CheckFileExists = true;
                     openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                     openFileDialog.Multiselect = true;
 
-                    var fileTypes = new List<string>();
+                    List<string> fileTypes = new();
                     fileTypes.AddRange(new[] {Language.FilterAllImportable, "*.xml;*.rdp;*.rdg;*.dat;*.csv"});
                     fileTypes.AddRange(new[] {Language.FiltermRemoteXML, "*.xml"});
                     fileTypes.AddRange(new[] {Language.FiltermRemoteCSV, "*.csv"});
@@ -60,13 +60,13 @@ namespace mRemoteNG.App
             {
                 using (Runtime.ConnectionsService.BatchedSavingContext())
                 {
-                    using (var openFileDialog = new OpenFileDialog())
+                    using (OpenFileDialog openFileDialog = new())
                     {
                         openFileDialog.CheckFileExists = true;
                         openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                         openFileDialog.Multiselect = false;
 
-                        var fileTypes = new List<string>();
+                        List<string> fileTypes = new();
                         fileTypes.AddRange(new[] {Language.FiltermRemoteRemoteDesktopManagerCSV, "*.csv"});
 
                         openFileDialog.Filter = string.Join("|", fileTypes.ToArray());
@@ -74,7 +74,7 @@ namespace mRemoteNG.App
                         if (openFileDialog.ShowDialog() != DialogResult.OK)
                             return;
 
-                        var importer = new RemoteDesktopManagerImporter();
+                        RemoteDesktopManagerImporter importer = new();
                         importer.Import(openFileDialog.FileName, importDestinationContainer);
                     }
                 }
@@ -93,11 +93,11 @@ namespace mRemoteNG.App
         {
 	        using (connectionsService.BatchedSavingContext())
 	        {
-		        foreach (var fileName in filePaths)
+		        foreach (string fileName in filePaths)
 		        {
 			        try
 			        {
-				        var importer = BuildConnectionImporterFromFileExtension(fileName);
+                        IConnectionImporter<string> importer = BuildConnectionImporterFromFileExtension(fileName);
 				        importer.Import(fileName, importDestinationContainer);
 			        }
 			        catch (Exception ex)
@@ -134,7 +134,7 @@ namespace mRemoteNG.App
             {
 	            using (Runtime.ConnectionsService.BatchedSavingContext())
 	            {
-					var importer = new PortScanImporter(protocol);
+                    PortScanImporter importer = new(protocol);
 					importer.Import(hosts, importDestinationContainer);
 	            }
             }
@@ -162,7 +162,7 @@ namespace mRemoteNG.App
         private static IConnectionImporter<string> BuildConnectionImporterFromFileExtension(string fileName)
         {
             // TODO: Use the file contents to determine the file type instead of trusting the extension
-            var extension = Path.GetExtension(fileName) ?? "";
+            string extension = Path.GetExtension(fileName) ?? "";
             switch (extension.ToLowerInvariant())
             {
                 case ".xml":

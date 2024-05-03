@@ -30,7 +30,7 @@ namespace mRemoteNGTests.UI.Forms
         [Test]
         public void ListViewContainsOptionsPages()
         {
-            ListViewTester listViewTester = new ListViewTester("lstOptionPages", _optionsForm);
+            ListViewTester listViewTester = new("lstOptionPages", _optionsForm);
             Assert.That(listViewTester.Items.Count, Is.EqualTo(12));
         }
     }

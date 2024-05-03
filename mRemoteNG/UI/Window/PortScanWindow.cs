@@ -28,7 +28,7 @@ namespace mRemoteNG.UI.Window
             WindowType = WindowType.PortScan;
             DockPnl = new DockContent();
             ApplyTheme();
-            var display = new DisplayProperties();
+            DisplayProperties display = new();
             btnScan.Image = display.ScaleImage(btnScan.Image);
         }
 
@@ -154,7 +154,7 @@ namespace mRemoteNG.UI.Window
 
         private void btnImport_Click(object sender, EventArgs e)
         {
-            var protocol =
+            ProtocolType protocol =
                 (ProtocolType)Enum.Parse(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem), true);
             importSelectedHosts(protocol);
         }
@@ -195,8 +195,8 @@ namespace mRemoteNG.UI.Window
                 SwitchButtonText();
                 olvHosts.Items.Clear();
 
-                var ipAddressStart = IPAddress.Parse(ipStart.Text);
-                var ipAddressEnd = IPAddress.Parse(ipEnd.Text);
+                IPAddress ipAddressStart = IPAddress.Parse(ipStart.Text);
+                IPAddress ipAddressEnd = IPAddress.Parse(ipEnd.Text);
 
                 if (!ngCheckFirstPort.Checked && !ngCheckLastPort.Checked)
                     _portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int)portStart.Value,
@@ -279,7 +279,7 @@ namespace mRemoteNG.UI.Window
 
         private void importSelectedHosts(ProtocolType protocol)
         {
-            var hosts = new List<ScanHost>();
+            List<ScanHost> hosts = new();
             foreach (ScanHost host in olvHosts.SelectedObjects)
             {
                 hosts.Add(host);
@@ -292,7 +292,7 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            var destinationContainer = GetDestinationContainerForImportedHosts();
+            ContainerInfo destinationContainer = GetDestinationContainerForImportedHosts();
             Import.ImportFromPortScan(hosts, protocol, destinationContainer);
         }
 
@@ -302,7 +302,7 @@ namespace mRemoteNG.UI.Window
         /// </summary>
         private ContainerInfo GetDestinationContainerForImportedHosts()
         {
-            var selectedNode = Windows.TreeForm.SelectedNode
+            ConnectionInfo selectedNode = Windows.TreeForm.SelectedNode
                             ?? Windows.TreeForm.ConnectionTree.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>()
                                       .First();
 
@@ -312,7 +312,7 @@ namespace mRemoteNG.UI.Window
                                       .First();
 
             // if the selected node is a connection, use its parent container
-            var selectedTreeNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
+            ContainerInfo selectedTreeNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
 
             return selectedTreeNodeAsContainer;
         }

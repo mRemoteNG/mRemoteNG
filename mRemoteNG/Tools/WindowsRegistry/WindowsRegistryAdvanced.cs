@@ -23,7 +23,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         public WindowsRegistryKeyInteger GetInteger(RegistryHive hive, string path, string propertyName, int? defaultValue = null)
         {
             // Retrieve the Windows Registry key
-            var key = GetWindowsRegistryKey(hive, path, propertyName);
+            WindowsRegistryKey key = GetWindowsRegistryKey(hive, path, propertyName);
 
             // Create a WindowsRegistryKeyInteger instance and initialize it from the retrieved key
             WindowsRegistryKeyInteger IntKey = new();
@@ -45,7 +45,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         public WindowsRegistryKeyString GetString(RegistryHive hive, string path, string propertyName, string defaultValue = null)
         {
             // Retrieve the Windows Registry key
-            var key = GetWindowsRegistryKey(hive, path, propertyName);
+            WindowsRegistryKey key = GetWindowsRegistryKey(hive, path, propertyName);
 
             // Create a WindowsRegistryKeyString instance and initialize it from the retrieved key
             WindowsRegistryKeyString StrKey = new();
@@ -66,12 +66,14 @@ namespace mRemoteNG.Tools.WindowsRegistry
         public WindowsRegistryKeyString GetStringValidated(RegistryHive hive, string path, string propertyName, string[] allowedValues, bool caseSensitive = false, string defaultValue = null)
         {
             // Retrieve the Windows Registry key
-            var key = GetWindowsRegistryKey(hive, path, propertyName);
+            WindowsRegistryKey key = GetWindowsRegistryKey(hive, path, propertyName);
 
             // Create a WindowsRegistryKeyString instance and initialize it from the retrieved key
-            WindowsRegistryKeyString StrKey = new();
-            StrKey.AllowedValues = allowedValues;
-            StrKey.IsCaseSensitiveValidation = caseSensitive;
+            WindowsRegistryKeyString StrKey = new()
+            {
+                AllowedValues = allowedValues,
+                IsCaseSensitiveValidation = caseSensitive
+            };
             StrKey.ConvertFromWindowsRegistryKey(key, defaultValue);
 
             return StrKey;
@@ -102,7 +104,7 @@ namespace mRemoteNG.Tools.WindowsRegistry
         public WindowsRegistryKeyBoolean GetBoolean(RegistryHive hive, string path, string propertyName, bool? defaultValue = null)
         {
             // Retrieve the Windows Registry key
-            var key = GetWindowsRegistryKey(hive, path, propertyName);
+            WindowsRegistryKey key = GetWindowsRegistryKey(hive, path, propertyName);
 
             // Create a WindowsRegistryKeyBoolean instance and initialize it from the retrieved key
             WindowsRegistryKeyBoolean boolKey = new ();

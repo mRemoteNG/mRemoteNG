@@ -108,8 +108,8 @@ namespace mRemoteNG.Config.Settings
             // Make sure the form is visible on the screen
             const int minHorizontal = 300;
             const int minVertical = 150;
-            var screenBounds = Screen.FromHandle(MainForm.Handle).Bounds;
-            var newBounds = MainForm.Bounds;
+            Rectangle screenBounds = Screen.FromHandle(MainForm.Handle).Bounds;
+            Rectangle newBounds = MainForm.Bounds;
 
             if (newBounds.Right < screenBounds.Left + minHorizontal)
                 newBounds.X = screenBounds.Left + minHorizontal - newBounds.Width;
@@ -198,7 +198,7 @@ namespace mRemoteNG.Config.Settings
         /// </summary>
         private void ResetAllToolbarLocations()
         {
-            var tempToolStrip = new ToolStripPanel();
+            ToolStripPanel tempToolStrip = new();
             tempToolStrip.Join(_mainMenu);
             tempToolStrip.Join(_quickConnectToolStrip);
             tempToolStrip.Join(_externalToolsToolStrip);
@@ -208,7 +208,7 @@ namespace mRemoteNG.Config.Settings
         private void AddMainMenuPanel()
         {
             SetToolstripGripStyle(_mainMenu);
-            var toolStripPanel = ToolStripPanelFromString("top");
+            ToolStripPanel toolStripPanel = ToolStripPanelFromString("top");
             toolStripPanel.Join(_mainMenu, new Point(3, 0));
         }
 
@@ -216,7 +216,7 @@ namespace mRemoteNG.Config.Settings
         {
             SetToolstripGripStyle(_quickConnectToolStrip);
             _quickConnectToolStrip.Visible = Properties.Settings.Default.QuickyTBVisible;
-            var toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.QuickyTBParentDock);
+            ToolStripPanel toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.QuickyTBParentDock);
             toolStripPanel.Join(_quickConnectToolStrip, Properties.Settings.Default.QuickyTBLocation);
         }
 
@@ -224,7 +224,7 @@ namespace mRemoteNG.Config.Settings
         {
             SetToolstripGripStyle(_externalToolsToolStrip);
             _externalToolsToolStrip.Visible = Properties.Settings.Default.ExtAppsTBVisible;
-            var toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.ExtAppsTBParentDock);
+            ToolStripPanel toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.ExtAppsTBParentDock);
             toolStripPanel.Join(_externalToolsToolStrip, Properties.Settings.Default.ExtAppsTBLocation);
         }
 
@@ -232,7 +232,7 @@ namespace mRemoteNG.Config.Settings
         {
             SetToolstripGripStyle(_multiSshToolStrip);
             _multiSshToolStrip.Visible = Properties.Settings.Default.MultiSshToolbarVisible;
-            var toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.MultiSshToolbarParentDock);
+            ToolStripPanel toolStripPanel = ToolStripPanelFromString(Properties.Settings.Default.MultiSshToolbarParentDock);
             toolStripPanel.Join(_multiSshToolStrip, Properties.Settings.Default.MultiSshToolbarLocation);
         }
 

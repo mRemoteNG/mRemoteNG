@@ -66,7 +66,7 @@ namespace mRemoteNG.Connection.Protocol
                     return false;
                 }
 
-                var argParser = new ExternalToolArgumentParser(_externalTool.ConnectionInfo);
+                ExternalToolArgumentParser argParser = new(_externalTool.ConnectionInfo);
                 _process = new Process
                 {
                     StartInfo =
@@ -84,7 +84,7 @@ namespace mRemoteNG.Connection.Protocol
                 _process.Start();
                 _process.WaitForInputIdle(Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000);
 
-                var startTicks = Environment.TickCount;
+                int startTicks = Environment.TickCount;
                 while (_handle.ToInt32() == 0 &
                        Environment.TickCount < startTicks + Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime * 1000)
                 {

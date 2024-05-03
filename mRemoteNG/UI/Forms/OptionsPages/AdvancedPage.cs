@@ -20,8 +20,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             InitializeComponent();
             ApplyTheme();
             PageIcon = Resources.ImageConverter.GetImageAsIcon(Properties.Resources.Settings_16x);
-            var display = new DisplayProperties();
-            var img = display.ScaleImage(Properties.Resources.PuttyConfig);
+            DisplayProperties display = new();
+            System.Drawing.Bitmap img = display.ScaleImage(Properties.Resources.PuttyConfig);
             btnLaunchPutty.Image = img;
         }
 
@@ -71,7 +71,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsAdvancedPage.Default.NoReconnect = chkNoReconnect.Checked;
             Properties.OptionsAdvancedPage.Default.RdpLoadBalanceInfoUseUtf8 = chkLoadBalanceInfoUseUtf8.Checked;
 
-            var puttyPathChanged = false;
+            bool puttyPathChanged = false;
             if (Properties.OptionsAdvancedPage.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
             {
                 puttyPathChanged = true;
@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnBrowseCustomPuttyPath_Click(object sender, EventArgs e)
         {
-            using (var openFileDialog = new OpenFileDialog())
+            using (OpenFileDialog openFileDialog = new())
             {
                 openFileDialog.Filter = $@"{Language.FilterApplication}|*.exe|{Language.FilterAll}|*.*";
                 openFileDialog.FileName = Path.GetFileName(GeneralAppInfo.PuttyPath);
@@ -131,8 +131,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             try
             {
-                var puttyProcess = new PuttyProcessController();
-                var fileName = chkUseCustomPuttyPath.Checked ? txtCustomPuttyPath.Text : GeneralAppInfo.PuttyPath;
+                PuttyProcessController puttyProcess = new();
+                string fileName = chkUseCustomPuttyPath.Checked ? txtCustomPuttyPath.Text : GeneralAppInfo.PuttyPath;
                 puttyProcess.Start(fileName);
                 puttyProcess.SetControlText("Button", "&Cancel", "&Close");
                 puttyProcess.SetControlVisible("Button", "&Open", false);
@@ -150,9 +150,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void SetPuttyLaunchButtonEnabled()
         {
-            var puttyPath = chkUseCustomPuttyPath.Checked ? txtCustomPuttyPath.Text : GeneralAppInfo.PuttyPath;
+            string puttyPath = chkUseCustomPuttyPath.Checked ? txtCustomPuttyPath.Text : GeneralAppInfo.PuttyPath;
 
-            var exists = false;
+            bool exists = false;
             try
             {
                 exists = File.Exists(puttyPath);

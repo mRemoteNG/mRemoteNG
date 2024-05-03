@@ -26,17 +26,17 @@ namespace mRemoteNG.Themes
         //Load the colors for the mRemoteNG own components as Dockpanel only have a menus and docks palette
         public ExtendedColorPalette getColors()
         {
-            var newPalette = new ExtendedColorPalette();
+            ExtendedColorPalette newPalette = new();
             newPalette.setDefault(_defaultPalette);
-            var resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            System.Resources.ResourceSet resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
             //
             foreach (DictionaryEntry entry in resourceSet)
             {
-                var colorName = entry.Key.ToString();
-                var xmlQueryPath = entry.Value.ToString();
+                string colorName = entry.Key.ToString();
+                string xmlQueryPath = entry.Value.ToString();
                 if (_xml.DocumentElement == null) continue;
-                var colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
-                var color = colorNodeList != null && colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
+                XmlNodeList colorNodeList = _xml.DocumentElement.FirstChild.SelectNodes(xmlQueryPath);
+                string color = colorNodeList != null && colorNodeList.Count > 0 ? colorNodeList[0].Value : null;
                 if (color != null)
                 {
                     newPalette.addColor(colorName, ColorTranslator.FromHtml($"#{color}"));
@@ -54,21 +54,21 @@ namespace mRemoteNG.Themes
         /// <returns></returns>
         public byte[] mergePalette(ExtendedColorPalette colorPalette)
         {
-            var resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            System.Resources.ResourceSet resourceSet = ColorMapTheme.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
 
             foreach (DictionaryEntry entry in resourceSet)
             {
-                var colorName = entry.Key.ToString();
-                var xmlQueryPath = entry.Value.ToString();
-                var colorNodeList = _xml.DocumentElement?.FirstChild.SelectNodes(xmlQueryPath);
+                string colorName = entry.Key.ToString();
+                string xmlQueryPath = entry.Value.ToString();
+                XmlNodeList colorNodeList = _xml.DocumentElement?.FirstChild.SelectNodes(xmlQueryPath);
                 if (colorNodeList == null || colorNodeList.Count <= 0) continue;
-                var paletteColor = colorPalette.getColor(colorName);
+                Color paletteColor = colorPalette.getColor(colorName);
                 colorNodeList[0].Value = $"FF{paletteColor.R:X2}{paletteColor.G:X2}{paletteColor.B:X2}";
             }
 
-            var ms = new MemoryStream();
+            MemoryStream ms = new();
             _xml.Save(ms);
-            var bytes = ms.ToArray();
+            byte[] bytes = ms.ToArray();
 
             return bytes;
         }

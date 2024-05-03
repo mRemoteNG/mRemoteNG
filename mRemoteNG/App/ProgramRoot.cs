@@ -48,7 +48,7 @@ namespace mRemoteNG.App
 
             _frmSplashScreen = FrmSplashScreenNew.GetInstance();
 
-            var targetScreen = Screen.PrimaryScreen;
+            Screen targetScreen = Screen.PrimaryScreen;
 
             Rectangle viewport = targetScreen.WorkingArea;
             _frmSplashScreen.Top = viewport.Top;
@@ -70,7 +70,7 @@ namespace mRemoteNG.App
         private static void StartApplicationAsSingleInstance()
         {
             const string mutexID = "mRemoteNG_SingleInstanceMutex";
-            _mutex = new Mutex(false, mutexID, out var newInstanceCreated);
+            _mutex = new Mutex(false, mutexID, out bool newInstanceCreated);
             if (!newInstanceCreated)
             {
                 SwitchToCurrentInstance();
@@ -83,7 +83,7 @@ namespace mRemoteNG.App
 
         private static void SwitchToCurrentInstance()
         {
-            var singletonInstanceWindowHandle = GetRunningSingletonInstanceWindowHandle();
+            IntPtr singletonInstanceWindowHandle = GetRunningSingletonInstanceWindowHandle();
             if (singletonInstanceWindowHandle == IntPtr.Zero) return;
             if (NativeMethods.IsIconic(singletonInstanceWindowHandle) != 0)
                 _ = NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int)NativeMethods.SW_RESTORE);
@@ -92,9 +92,9 @@ namespace mRemoteNG.App
 
         private static IntPtr GetRunningSingletonInstanceWindowHandle()
         {
-            var windowHandle = IntPtr.Zero;
-            var currentProcess = Process.GetCurrentProcess();
-            foreach (var enumeratedProcess in Process.GetProcessesByName(currentProcess.ProcessName))
+            IntPtr windowHandle = IntPtr.Zero;
+            Process currentProcess = Process.GetCurrentProcess();
+            foreach (Process enumeratedProcess in Process.GetProcessesByName(currentProcess.ProcessName))
             {
                 if (enumeratedProcess.Id != currentProcess.Id &&
                     enumeratedProcess.MainModule.FileName == currentProcess.MainModule.FileName &&
@@ -119,7 +119,7 @@ namespace mRemoteNG.App
 
             if (FrmMain.Default.IsDisposed) return;
 
-            var window = new FrmUnhandledException(e.Exception, false);
+            FrmUnhandledException window = new(e.Exception, false);
             window.ShowDialog(FrmMain.Default);
         }
 
@@ -129,7 +129,7 @@ namespace mRemoteNG.App
             //if (!FrmSplashScreenNew.GetInstance().IsDisposed)
             //    FrmSplashScreenNew.GetInstance().Close();
 
-            var window = new FrmUnhandledException(e.ExceptionObject as Exception, e.IsTerminating);
+            FrmUnhandledException window = new(e.ExceptionObject as Exception, e.IsTerminating);
             window.ShowDialog(FrmMain.Default);
         }
     }

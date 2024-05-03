@@ -19,7 +19,7 @@ namespace mRemoteNG.Security
             if (securePassword == null)
                 throw new ArgumentNullException(nameof(securePassword));
 
-            var unmanagedString = IntPtr.Zero;
+            IntPtr unmanagedString = IntPtr.Zero;
             try
             {
                 unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(securePassword);
@@ -36,8 +36,8 @@ namespace mRemoteNG.Security
             if (unsecuredPassword == null)
                 throw new ArgumentNullException(nameof(unsecuredPassword));
 
-            var secureString = new SecureString();
-            foreach (var character in unsecuredPassword.ToCharArray())
+            SecureString secureString = new();
+            foreach (char character in unsecuredPassword.ToCharArray())
                 secureString.AppendChar(character);
             // ReSharper disable once RedundantAssignment
             unsecuredPassword = null;

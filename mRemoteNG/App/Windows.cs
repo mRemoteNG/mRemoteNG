@@ -34,7 +34,7 @@ namespace mRemoteNG.App
         {
             try
             {
-                var dockPanel = FrmMain.Default.pnlDock;
+                WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel = FrmMain.Default.pnlDock;
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (windowType)
                 {

@@ -59,28 +59,28 @@ namespace mRemoteNG.UI.Window
             Load += Config_Load;
             SystemColorsChanged += Config_SystemColorsChanged;
             _pGrid = new ConnectionInfoPropertyGrid();
-            _pGrid.PropertyValueChanged += pGrid_PropertyValueChanged;
-            _pGrid.PropertySortChanged += pGrid_PropertySortChanged;
+            _pGrid.PropertyValueChanged += PGrid_PropertyValueChanged;
+            _pGrid.PropertySortChanged += PGrid_PropertySortChanged;
             PropertyGridContextMenu = new ContextMenuStrip(_components);
-            PropertyGridContextMenu.Opening += propertyGridContextMenu_Opening;
+            PropertyGridContextMenu.Opening += PropertyGridContextMenu_Opening;
             _propertyGridContextMenuReset = new ToolStripMenuItem();
-            _propertyGridContextMenuReset.Click += propertyGridContextMenuReset_Click;
+            _propertyGridContextMenuReset.Click += PropertyGridContextMenuReset_Click;
             _toolStripSeparator1 = new ToolStripSeparator();
             _propertyGridContextMenuShowHelpText = new ToolStripMenuItem();
-            _propertyGridContextMenuShowHelpText.Click += propertyGridContextMenuShowHelpText_Click;
-            _propertyGridContextMenuShowHelpText.CheckedChanged += propertyGridContextMenuShowHelpText_CheckedChanged;
+            _propertyGridContextMenuShowHelpText.Click += PropertyGridContextMenuShowHelpText_Click;
+            _propertyGridContextMenuShowHelpText.CheckedChanged += PropertyGridContextMenuShowHelpText_CheckedChanged;
             _btnShowInheritance = new ToolStripButton();
-            _btnShowInheritance.Click += btnShowInheritance_Click;
+            _btnShowInheritance.Click += BtnShowInheritance_Click;
             _btnShowDefaultInheritance = new ToolStripButton();
-            _btnShowDefaultInheritance.Click += btnShowDefaultInheritance_Click;
+            _btnShowDefaultInheritance.Click += BtnShowDefaultInheritance_Click;
             _btnShowProperties = new ToolStripButton();
-            _btnShowProperties.Click += btnShowProperties_Click;
+            _btnShowProperties.Click += BtnShowProperties_Click;
             _btnShowDefaultProperties = new ToolStripButton();
-            _btnShowDefaultProperties.Click += btnShowDefaultProperties_Click;
+            _btnShowDefaultProperties.Click += BtnShowDefaultProperties_Click;
             _btnIcon = new ToolStripButton();
-            _btnIcon.MouseUp += btnIcon_Click;
+            _btnIcon.MouseUp += BtnIcon_Click;
             _btnHostStatus = new ToolStripButton();
-            _btnHostStatus.Click += btnHostStatus_Click;
+            _btnHostStatus.Click += BtnHostStatus_Click;
             CMenIcons = new ContextMenuStrip(_components);
             PropertyGridContextMenu.SuspendLayout();
             SuspendLayout();
@@ -385,7 +385,7 @@ namespace mRemoteNG.UI.Window
             _btnHostStatus.Enabled =
                 !_pGrid.RootNodeSelected &&
                 !_pGrid.IsShowingDefaultProperties &&
-                !(_pGrid.SelectedConnectionInfo is ContainerInfo);
+                _pGrid.SelectedConnectionInfo is not ContainerInfo;
 
             SetHostStatus(_pGrid.SelectedObject);
         }
@@ -408,7 +408,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var customToolStrip = new ToolStrip();
+                ToolStrip customToolStrip = new();
                 customToolStrip.Items.Add(_btnShowProperties);
                 customToolStrip.Items.Add(_btnShowInheritance);
                 customToolStrip.Items.Add(_btnShowDefaultProperties);
@@ -417,7 +417,7 @@ namespace mRemoteNG.UI.Window
                 customToolStrip.Items.Add(_btnIcon);
                 customToolStrip.Show();
 
-                var propertyGridToolStrip = new ToolStrip();
+                ToolStrip propertyGridToolStrip = new();
 
                 ToolStrip toolStrip = null;
                 foreach (Control control in _pGrid.Controls)
@@ -446,7 +446,7 @@ namespace mRemoteNG.UI.Window
                 // Hide the "Property Pages" button
                 propertyGridToolStrip.Items[_originalPropertyGridToolStripItemCount - 1].Visible = false;
 
-                var expectedToolStripItemCount = _originalPropertyGridToolStripItemCount + customToolStrip.Items.Count;
+                int expectedToolStripItemCount = _originalPropertyGridToolStripItemCount + customToolStrip.Items.Count;
                 if (propertyGridToolStrip.Items.Count == expectedToolStripItemCount) return;
                 propertyGridToolStrip.AllowMerge = true;
                 ToolStripManager.Merge(customToolStrip, propertyGridToolStrip);
@@ -473,13 +473,13 @@ namespace mRemoteNG.UI.Window
             AddToolStripItems();
         }
 
-        private void pGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        private void PGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
             try
             {
                 if (e.ChangedItem.Label == Language.Icon)
                 {
-                    var conIcon = ConnectionIcon.FromString(_pGrid.SelectedConnectionInfo.Icon);
+                    Icon conIcon = ConnectionIcon.FromString(_pGrid.SelectedConnectionInfo.Icon);
                     if (conIcon != null)
                         _btnIcon.Image = conIcon.ToBitmap();
                 }
@@ -496,47 +496,47 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        private void pGrid_PropertySortChanged(object sender, EventArgs e)
+        private void PGrid_PropertySortChanged(object sender, EventArgs e)
         {
             if (_pGrid.PropertySort == PropertySort.CategorizedAlphabetical)
                 _pGrid.PropertySort = PropertySort.Categorized;
         }
 
-        private void btnShowProperties_Click(object sender, EventArgs e)
+        private void BtnShowProperties_Click(object sender, EventArgs e)
         {
             ShowConnectionProperties();
         }
 
-        private void btnShowInheritance_Click(object sender, EventArgs e)
+        private void BtnShowInheritance_Click(object sender, EventArgs e)
         {
             ShowInheritanceProperties();
         }
 
-        private void btnShowDefaultProperties_Click(object sender, EventArgs e)
+        private void BtnShowDefaultProperties_Click(object sender, EventArgs e)
         {
             ShowDefaultConnectionProperties();
         }
 
-        private void btnShowDefaultInheritance_Click(object sender, EventArgs e)
+        private void BtnShowDefaultInheritance_Click(object sender, EventArgs e)
         {
             ShowDefaultInheritanceProperties();
         }
 
-        private void btnHostStatus_Click(object sender, EventArgs e)
+        private void BtnHostStatus_Click(object sender, EventArgs e)
         {
             SetHostStatus(_pGrid.SelectedObject);
         }
 
-        private void btnIcon_Click(object sender, MouseEventArgs e)
+        private void BtnIcon_Click(object sender, MouseEventArgs e)
         {
             try
             {
-                if (!(_pGrid.SelectedObject is ConnectionInfo) || _pGrid.SelectedObject is PuttySessionInfo) return;
+                if (_pGrid.SelectedObject is not ConnectionInfo || _pGrid.SelectedObject is PuttySessionInfo) return;
                 CMenIcons.Items.Clear();
 
-                foreach (var iStr in ConnectionIcon.Icons)
+                foreach (string iStr in ConnectionIcon.Icons)
                 {
-                    var tI = new ToolStripMenuItem
+                    ToolStripMenuItem tI = new()
                     {
                         Text = iStr,
                         Image = ConnectionIcon.FromString(iStr).ToBitmap()
@@ -546,16 +546,12 @@ namespace mRemoteNG.UI.Window
                     CMenIcons.Items.Add(tI);
                 }
 
-                var mPos = new Point(
-                                     new Size(PointToScreen(new Point(e.Location.X + _pGrid.Width - 100,
-                                                                      e.Location.Y))));
+                Point mPos = new(new Size(PointToScreen(new Point(e.Location.X + _pGrid.Width - 100, e.Location.Y))));
                 CMenIcons.Show(mPos);
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ConfigPropertyGridButtonIconClickFailed +
-                                                    Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ConfigPropertyGridButtonIconClickFailed + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -563,15 +559,15 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var connectionInfo = (ConnectionInfo)_pGrid.SelectedObject;
+                ConnectionInfo connectionInfo = (ConnectionInfo)_pGrid.SelectedObject;
                 if (connectionInfo == null) return;
 
-                var selectedMenuItem = (ToolStripMenuItem)sender;
+                ToolStripMenuItem selectedMenuItem = (ToolStripMenuItem)sender;
 
-                var iconName = selectedMenuItem?.Text;
+                string iconName = selectedMenuItem?.Text;
                 if (string.IsNullOrEmpty(iconName)) return;
 
-                var connectionIcon = ConnectionIcon.FromString(iconName);
+                Icon connectionIcon = ConnectionIcon.FromString(iconName);
                 if (connectionIcon == null) return;
 
                 _btnIcon.Image = connectionIcon.ToBitmap();
@@ -583,9 +579,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                                                    Language.ConfigPropertyGridMenuClickFailed +
-                                                    Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ConfigPropertyGridMenuClickFailed + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -603,26 +597,35 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            var pingSender = new Ping();
+            Ping pingSender = new();
 
             try
             {
-                var pReply = pingSender.Send((string)hostName);
+                PingReply pReply = pingSender.Send((string)hostName);
                 if (pReply?.Status == IPStatus.Success)
                 {
                     if ((string)_btnHostStatus.Tag == "checking")
+                    {
                         ShowStatusImage(Properties.Resources.HostStatus_On);
+                    }
+                        
                 }
                 else
                 {
                     if ((string)_btnHostStatus.Tag == "checking")
+                    {
                         ShowStatusImage(Properties.Resources.HostStatus_Off);
+                    }
+                        
                 }
             }
             catch (Exception)
             {
                 if ((string)_btnHostStatus.Tag == "checking")
+                {
                     ShowStatusImage(Properties.Resources.HostStatus_Off);
+                }
+                   
             }
         }
 
@@ -648,7 +651,7 @@ namespace mRemoteNG.UI.Window
             {
                 _btnHostStatus.Image = Properties.Resources.HostStatus_Check;
                 // To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
-                if (!(connectionInfo is ConnectionInfo info)) return;
+                if (connectionInfo is not ConnectionInfo info) return;
                 if (info.IsContainer) return;
 
                 _btnHostStatus.Tag = "checking";
@@ -669,12 +672,12 @@ namespace mRemoteNG.UI.Window
 
         #region Event Handlers
 
-        private void propertyGridContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void PropertyGridContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
             {
                 _propertyGridContextMenuShowHelpText.Checked = Settings.Default.ShowConfigHelpText;
-                var gridItem = _pGrid.SelectedGridItem;
+                GridItem gridItem = _pGrid.SelectedGridItem;
                 _propertyGridContextMenuReset.Enabled = Convert.ToBoolean(_pGrid.SelectedObject != null &&
                                                                           gridItem?.PropertyDescriptor != null &&
                                                                           gridItem.PropertyDescriptor.CanResetValue(_pGrid.SelectedObject));
@@ -685,11 +688,11 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        private void propertyGridContextMenuReset_Click(object sender, EventArgs e)
+        private void PropertyGridContextMenuReset_Click(object sender, EventArgs e)
         {
             try
             {
-                var gridItem = _pGrid.SelectedGridItem;
+                GridItem gridItem = _pGrid.SelectedGridItem;
                 if (_pGrid.SelectedObject != null && gridItem?.PropertyDescriptor != null &&
                     gridItem.PropertyDescriptor.CanResetValue(_pGrid.SelectedObject))
                 {
@@ -702,12 +705,12 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        private void propertyGridContextMenuShowHelpText_Click(object sender, EventArgs e)
+        private void PropertyGridContextMenuShowHelpText_Click(object sender, EventArgs e)
         {
             _propertyGridContextMenuShowHelpText.Checked = !_propertyGridContextMenuShowHelpText.Checked;
         }
 
-        private void propertyGridContextMenuShowHelpText_CheckedChanged(object sender, EventArgs e)
+        private void PropertyGridContextMenuShowHelpText_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.ShowConfigHelpText = _propertyGridContextMenuShowHelpText.Checked;
             _pGrid.HelpVisible = _propertyGridContextMenuShowHelpText.Checked;

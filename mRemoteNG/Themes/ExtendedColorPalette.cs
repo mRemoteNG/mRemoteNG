@@ -35,9 +35,9 @@ namespace mRemoteNG.Themes
 
         public ExtendedColorPalette()
         {
-            ExtColorPalette = new Dictionary<string, Color>();
+            ExtColorPalette = [];
             DefaultColorPalette =
-                new Dictionary<string, Color>(); // If this is the default palette, it will not have a default-default palette
+                []; // If this is the default palette, it will not have a default-default palette
         }
 
         #endregion
@@ -59,7 +59,7 @@ namespace mRemoteNG.Themes
         /// <returns></returns>
         public Color getColor(string colorKey)
         {
-            var retColor = ExtColorPalette.ContainsKey(colorKey) ? ExtColorPalette[colorKey] : Color.Empty;
+            Color retColor = ExtColorPalette.ContainsKey(colorKey) ? ExtColorPalette[colorKey] : Color.Empty;
             //Invisible colors are not good, might  indicate missing color from the palette as is represented by 00000000
             if (retColor != Color.Empty && retColor.A != 0) return retColor;
             if (DefaultColorPalette != null)

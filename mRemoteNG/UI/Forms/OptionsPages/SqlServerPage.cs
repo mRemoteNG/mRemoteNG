@@ -51,7 +51,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLServer.Text = Properties.OptionsDBsPage.Default.SQLHost;
             txtSQLDatabaseName.Text = Properties.OptionsDBsPage.Default.SQLDatabaseName;
             txtSQLUsername.Text = Properties.OptionsDBsPage.Default.SQLUser;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             txtSQLPassword.Text = cryptographyProvider.Decrypt(Properties.OptionsDBsPage.Default.SQLPass, Runtime.EncryptionKey);
             chkSQLReadOnly.Checked = Properties.OptionsDBsPage.Default.SQLReadOnly;
             lblTestConnectionResults.Text = "";
@@ -60,14 +60,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public override void SaveSettings()
         {
             base.SaveSettings();
-            var sqlServerWasPreviouslyEnabled = Properties.OptionsDBsPage.Default.UseSQLServer;
+            bool sqlServerWasPreviouslyEnabled = Properties.OptionsDBsPage.Default.UseSQLServer;
 
             Properties.OptionsDBsPage.Default.UseSQLServer = chkUseSQLServer.Checked;
             Properties.OptionsDBsPage.Default.SQLServerType = txtSQLType.Text;
             Properties.OptionsDBsPage.Default.SQLHost = txtSQLServer.Text;
             Properties.OptionsDBsPage.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
             Properties.OptionsDBsPage.Default.SQLUser = txtSQLUsername.Text;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             Properties.OptionsDBsPage.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, Runtime.EncryptionKey);
             Properties.OptionsDBsPage.Default.SQLReadOnly = chkSQLReadOnly.Checked;
 
@@ -115,17 +115,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private async void btnTestConnection_Click(object sender, EventArgs e)
         {
-            var type = txtSQLType.Text;
-            var server = txtSQLServer.Text;
-            var database = txtSQLDatabaseName.Text;
-            var username = txtSQLUsername.Text;
-            var password = txtSQLPassword.Text;
+            string type = txtSQLType.Text;
+            string server = txtSQLServer.Text;
+            string database = txtSQLDatabaseName.Text;
+            string username = txtSQLUsername.Text;
+            string password = txtSQLPassword.Text;
 
             lblTestConnectionResults.Text = Language.TestingConnection;
             imgConnectionStatus.Image = Properties.Resources.Loading_Spinner;
             btnTestConnection.Enabled = false;
 
-            var connectionTestResult =
+            ConnectionTestResult connectionTestResult =
                 await _databaseConnectionTester.TestConnectivity(type, server, database, username, password);
 
             btnTestConnection.Enabled = true;

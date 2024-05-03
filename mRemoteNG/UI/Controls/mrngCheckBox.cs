@@ -24,7 +24,7 @@ namespace mRemoteNG.UI.Controls
         {
             InitializeComponent();
             ThemeManager.getInstance().ThemeChanged += OnCreateControl;
-            var display = new DisplayProperties();
+            DisplayProperties display = new();
             _checkboxSize = new Size(display.ScaleWidth(11), display.ScaleHeight(11));
             _checkboxYCoord = (display.ScaleHeight(Height) - _checkboxSize.Height) / 2 - display.ScaleHeight(5);
             _textXCoord = _checkboxSize.Width + display.ScaleWidth(2);
@@ -86,7 +86,7 @@ namespace mRemoteNG.UI.Controls
             Color glyph;
             Color checkBorder;
 
-            var back = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
+            Color back = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Background");
             if (Enabled)
             {
                 glyph = _themeManager.ActiveTheme.ExtendedPalette.getColor("CheckBox_Glyph");
@@ -114,9 +114,9 @@ namespace mRemoteNG.UI.Controls
 
             e.Graphics.Clear(Parent.BackColor);
 
-            using (var p = new Pen(checkBorder))
+            using (Pen p = new(checkBorder))
             {
-                var boxRect = new Rectangle(0, _checkboxYCoord, _checkboxSize.Width, _checkboxSize.Height);
+                Rectangle boxRect = new(0, _checkboxYCoord, _checkboxSize.Width, _checkboxSize.Height);
                 e.Graphics.FillRectangle(new SolidBrush(back), boxRect);
                 e.Graphics.DrawRectangle(p, boxRect);
             }
@@ -127,7 +127,7 @@ namespace mRemoteNG.UI.Controls
                 e.Graphics.DrawString("\uE001", new Font("Segoe UI Symbol", 7.75f), new SolidBrush(glyph), -4, 0);
             }
 
-            var textRect = new Rectangle(_textXCoord, 0, Width - 16, Height);
+            Rectangle textRect = new(_textXCoord, 0, Width - 16, Height);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, fore, Parent.BackColor,
                                   TextFormatFlags.PathEllipsis);
         }

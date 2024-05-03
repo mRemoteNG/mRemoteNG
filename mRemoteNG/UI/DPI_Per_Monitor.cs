@@ -91,7 +91,7 @@ static class DPI_Per_Monitor
     [DllImport("User32.dll")]
     private static extern IntPtr MonitorFromPoint([In]System.Drawing.Point pt, [In]uint dwFlags);
 
-    static List<Tuple<Control, Form, float>> ManResCtrl = new List<Tuple<Control, Form, float>>();
+    static List<Tuple<Control, Form, float>> ManResCtrl = [];
     internal static void TryEnableDPIAware(Form form, VoidOfFloatFloatDelegate CallBackWithScale)
     {
         int handledLev = 0;
@@ -110,7 +110,7 @@ static class DPI_Per_Monitor
                 handledLev = 1;
             } catch { }
         try {
-            var mon = MonitorFromPoint(new System.Drawing.Point(1, 1), 2/*MONITOR_DEFAULTTONEAREST*/); //(0,0) always top left of primary
+            IntPtr mon = MonitorFromPoint(new System.Drawing.Point(1, 1), 2/*MONITOR_DEFAULTTONEAREST*/); //(0,0) always top left of primary
             uint dpiX;
             uint dpiY;
             GetDpiForMonitor(mon, DpiType.Effective, out dpiX, out dpiY);
@@ -123,7 +123,7 @@ static class DPI_Per_Monitor
     [DllImport("user32.dll", SetLastError = true)]
     public static extern bool EnableNonClientDpiScaling(IntPtr hWnd);
 
-    private static SemaphoreSlim semaphoreScale = new SemaphoreSlim(1, 1);
+    private static SemaphoreSlim semaphoreScale = new(1, 1);
     internal delegate void VoidOfFloatFloatDelegate(float x, float y);
     static Int32 Oldscales = -1;
     static bool isCurrentlyScaling=false;

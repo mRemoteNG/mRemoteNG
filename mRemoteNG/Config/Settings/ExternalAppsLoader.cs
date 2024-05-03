@@ -36,11 +36,11 @@ namespace mRemoteNG.Config.Settings
         public void LoadExternalAppsFromXML()
         {
 #if !PORTABLE
-            var oldPath =
+            string oldPath =
  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), GeneralAppInfo.ProductName, SettingsFileInfo.ExtAppsFilesName);
 #endif
-            var newPath = Path.Combine(SettingsFileInfo.SettingsPath, SettingsFileInfo.ExtAppsFilesName);
-            var xDom = new XmlDocument();
+            string newPath = Path.Combine(SettingsFileInfo.SettingsPath, SettingsFileInfo.ExtAppsFilesName);
+            XmlDocument xDom = new();
             if (File.Exists(newPath))
             {
                 _messageCollector.AddMessage(MessageClass.InformationMsg, $"Loading External Apps from: {newPath}",
@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Settings
 
             foreach (XmlElement xEl in xDom.DocumentElement.ChildNodes)
             {
-                var extA = new ExternalTool
+                ExternalTool extA = new()
                 {
                     DisplayName = xEl.Attributes["DisplayName"].Value,
                     FileName = xEl.Attributes["FileName"].Value,

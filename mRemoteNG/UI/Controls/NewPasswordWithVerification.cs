@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Controls
 
         public void SetPassword(SecureString password)
         {
-            var text = password.ConvertToUnsecureString();
+            string text = password.ConvertToUnsecureString();
             secureTextBox1.Text = text;
             secureTextBox2.Text = text;
         }

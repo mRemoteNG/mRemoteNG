@@ -12,7 +12,7 @@ namespace mRemoteNG.UI
             // Override the font of all controls in a container with the default font based on the OS version
             foreach (Control tempLoopVarCtlChild in ctlParent.Controls)
             {
-                var ctlChild = tempLoopVarCtlChild;
+                Control ctlChild = tempLoopVarCtlChild;
                 ctlChild.Font = new Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style,
                                          ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
                 if (ctlChild.Controls.Count > 0)

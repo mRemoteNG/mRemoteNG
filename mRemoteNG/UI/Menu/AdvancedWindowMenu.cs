@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Menu
 
         public Screen GetScreenById(int id)
         {
-            for (var i = 0; i <= _sysMenSubItems.Length - 1; i++)
+            for (int i = 0; i <= _sysMenSubItems.Length - 1; i++)
             {
                 if (_sysMenSubItems[i] != id) continue;
                 return Screen.AllScreens[i];
@@ -43,8 +43,8 @@ namespace mRemoteNG.UI.Menu
         public void BuildAdditionalMenuItems()
         {
             // option to send main form to another screen
-            var popMen = _windowMenu.CreatePopupMenuItem();
-            for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
+            IntPtr popMen = _windowMenu.CreatePopupMenuItem();
+            for (int i = 0; i <= Screen.AllScreens.Length - 1; i++)
             {
                 _sysMenSubItems[i] = 200 + i;
                 _windowMenu.AppendMenuItem(popMen, WindowMenu.Flags.MF_STRING, new IntPtr(_sysMenSubItems[i]),

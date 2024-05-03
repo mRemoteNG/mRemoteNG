@@ -15,16 +15,16 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
     {
         public ConnectionTreeModel Deserialize(string puttycmConnectionsXml)
         {
-            var connectionTreeModel = new ConnectionTreeModel();
-            var root = new RootNodeInfo(RootNodeType.Connection);
+            ConnectionTreeModel connectionTreeModel = new();
+            RootNodeInfo root = new(RootNodeType.Connection);
             connectionTreeModel.AddRootNode(root);
 
-            var xmlDocument = new XmlDocument();
+            XmlDocument xmlDocument = new();
             xmlDocument.LoadXml(puttycmConnectionsXml);
 
-            var configurationNode = xmlDocument.SelectSingleNode("/configuration");
+            XmlNode configurationNode = xmlDocument.SelectSingleNode("/configuration");
 
-            var rootNodes = configurationNode?.SelectNodes("./root");
+            XmlNodeList rootNodes = configurationNode?.SelectNodes("./root");
             if (rootNodes == null) return connectionTreeModel;
             foreach (XmlNode rootNode in rootNodes)
             {
@@ -38,9 +38,9 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
         {
             VerifyNodeType(xmlNode);
 
-            var newContainer = ImportContainer(xmlNode, parentContainer);
+            ContainerInfo newContainer = ImportContainer(xmlNode, parentContainer);
 
-            var childNodes = xmlNode.SelectNodes("./*");
+            XmlNodeList childNodes = xmlNode.SelectNodes("./*");
             if (childNodes == null) return;
             foreach (XmlNode childNode in childNodes)
             {
@@ -60,7 +60,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private void VerifyNodeType(XmlNode xmlNode)
         {
-            var xmlNodeType = xmlNode?.Attributes?["type"].Value;
+            string xmlNodeType = xmlNode?.Attributes?["type"].Value;
             switch (xmlNode?.Name)
             {
                 case "root":
@@ -86,7 +86,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private ContainerInfo ImportContainer(XmlNode containerNode, ContainerInfo parentContainer)
         {
-            var containerInfo = new ContainerInfo
+            ContainerInfo containerInfo = new()
             {
                 Name = containerNode.Attributes?["name"].Value,
                 IsExpanded = bool.Parse(containerNode.Attributes?["expanded"].InnerText ?? "false")
@@ -97,22 +97,22 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
         private void ImportConnection(XmlNode connectionNode, ContainerInfo parentContainer)
         {
-            var connectionNodeType = connectionNode.Attributes?["type"].Value;
+            string connectionNodeType = connectionNode.Attributes?["type"].Value;
             if (string.Compare(connectionNodeType, "PuTTY", StringComparison.OrdinalIgnoreCase) != 0)
                 throw (new FileFormatException($"Unrecognized connection node type ({connectionNodeType})."));
 
-            var connectionInfo = ConnectionInfoFromXml(connectionNode);
+            ConnectionInfo connectionInfo = ConnectionInfoFromXml(connectionNode);
             parentContainer.AddChild(connectionInfo);
         }
 
         private ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
         {
-            var connectionInfoNode = xmlNode.SelectSingleNode("./connection_info");
+            XmlNode connectionInfoNode = xmlNode.SelectSingleNode("./connection_info");
 
-            var name = connectionInfoNode?.SelectSingleNode("./name")?.InnerText;
-            var connectionInfo = new ConnectionInfo {Name = name};
+            string name = connectionInfoNode?.SelectSingleNode("./name")?.InnerText;
+            ConnectionInfo connectionInfo = new() { Name = name};
 
-            var protocol = connectionInfoNode?.SelectSingleNode("./protocol")?.InnerText;
+            string protocol = connectionInfoNode?.SelectSingleNode("./protocol")?.InnerText;
             switch (protocol?.ToLowerInvariant())
             {
                 case "telnet":
@@ -131,7 +131,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
             // ./commandline
             connectionInfo.Description = connectionInfoNode.SelectSingleNode("./description")?.InnerText;
 
-            var loginNode = xmlNode.SelectSingleNode("./login");
+            XmlNode loginNode = xmlNode.SelectSingleNode("./login");
             connectionInfo.Username = loginNode?.SelectSingleNode("login")?.InnerText;
             connectionInfo.Password = loginNode?.SelectSingleNode("password")?.InnerText;
             // ./prompt

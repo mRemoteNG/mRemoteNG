@@ -17,7 +17,7 @@ namespace mRemoteNG.Config.Settings
                 throw new ArgumentNullException(nameof(dockPanel));
 
             XDocument xdoc;
-            using (var memoryStream = new MemoryStream())
+            using (MemoryStream memoryStream = new())
             {
                 dockPanel.SaveAsXml(memoryStream, Encoding.UTF8);
                 memoryStream.Position = 0;

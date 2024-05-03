@@ -21,10 +21,10 @@ namespace mRemoteNG.UI.TaskDialog
         private string _mainInstruction = "Main Instruction Text";
 
         private readonly Font _mainInstructionFont =
-            new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            new("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
-        private readonly List<MrngRadioButton> _radioButtonCtrls = new List<MrngRadioButton>();
-        private readonly DisplayProperties _display = new DisplayProperties();
+        private readonly List<MrngRadioButton> _radioButtonCtrls = [];
+        private readonly DisplayProperties _display = new();
         private Control _focusControl;
 
         private bool _isVista = false;
@@ -84,7 +84,7 @@ namespace mRemoteNG.UI.TaskDialog
         {
             get
             {
-                foreach (var rb in _radioButtonCtrls)
+                foreach (MrngRadioButton rb in _radioButtonCtrls)
                     if (rb.Checked)
                         return (int)rb.Tag;
                 return -1;
@@ -144,7 +144,7 @@ namespace mRemoteNG.UI.TaskDialog
 
         public void BuildForm()
         {
-            var formHeight = 0;
+            int formHeight = 0;
             imgMain.Width = _display.ScaleWidth(imgMain.Width);
             imgMain.Height = _display.ScaleHeight(imgMain.Height);
 
@@ -185,7 +185,7 @@ namespace mRemoteNG.UI.TaskDialog
                 formHeight += pnlContent.Height;
             }
 
-            var showVerifyCheckbox = cbVerify.Text != "";
+            bool showVerifyCheckbox = cbVerify.Text != "";
             cbVerify.Visible = showVerifyCheckbox;
 
             // Setup Expanded Info and Buttons panels
@@ -213,11 +213,11 @@ namespace mRemoteNG.UI.TaskDialog
             pnlRadioButtons.Visible = RadioButtons != "";
             if (RadioButtons != "")
             {
-                var arr = RadioButtons.Split('|');
-                var pnlHeight = _display.ScaleHeight(12);
-                for (var i = 0; i < arr.Length; i++)
+                string[] arr = RadioButtons.Split('|');
+                int pnlHeight = _display.ScaleHeight(12);
+                for (int i = 0; i < arr.Length; i++)
                 {
-                    var rb = new MrngRadioButton {Parent = pnlRadioButtons};
+                    MrngRadioButton rb = new() { Parent = pnlRadioButtons};
                     rb.Location = new Point(_display.ScaleWidth(60), _display.ScaleHeight(4) + i * rb.Height);
                     rb.Text = arr[i];
                     rb.Tag = i;
@@ -235,12 +235,12 @@ namespace mRemoteNG.UI.TaskDialog
             pnlCommandButtons.Visible = CommandButtons != "";
             if (CommandButtons != "")
             {
-                var arr = CommandButtons.Split('|');
-                var t = _display.ScaleHeight(8);
-                var pnlHeight = _display.ScaleHeight(16);
-                for (var i = 0; i < arr.Length; i++)
+                string[] arr = CommandButtons.Split('|');
+                int t = _display.ScaleHeight(8);
+                int pnlHeight = _display.ScaleHeight(16);
+                for (int i = 0; i < arr.Length; i++)
                 {
-                    var btn = new CommandButton
+                    CommandButton btn = new()
                     {
                         Parent = pnlCommandButtons, Location = new Point(_display.ScaleWidth(50), t)
                     };
@@ -402,16 +402,16 @@ namespace mRemoteNG.UI.TaskDialog
         //--------------------------------------------------------------------------------
         private Image ResizeBitmap(Image srcImg, int newWidth, int newHeight)
         {
-            var percentWidth = _display.ScaleWidth(newWidth) / (float)srcImg.Width;
-            var percentHeight = _display.ScaleHeight(newHeight) / (float)srcImg.Height;
+            float percentWidth = _display.ScaleWidth(newWidth) / (float)srcImg.Width;
+            float percentHeight = _display.ScaleHeight(newHeight) / (float)srcImg.Height;
 
-            var resizePercent = percentHeight < percentWidth ? percentHeight : percentWidth;
+            float resizePercent = percentHeight < percentWidth ? percentHeight : percentWidth;
 
-            var w = (int)(srcImg.Width * resizePercent);
-            var h = (int)(srcImg.Height * resizePercent);
-            var b = new Bitmap(w, h);
+            int w = (int)(srcImg.Width * resizePercent);
+            int h = (int)(srcImg.Height * resizePercent);
+            Bitmap b = new(w, h);
 
-            using (var g = Graphics.FromImage(b))
+            using (Graphics g = Graphics.FromImage(b))
             {
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 g.DrawImage(srcImg, 0, 0, w, h);
@@ -424,13 +424,13 @@ namespace mRemoteNG.UI.TaskDialog
         // utility function for setting a Label's height
         private static void AdjustLabelHeight(Control lb)
         {
-            var text = lb.Text;
-            var textFont = lb.Font;
-            var layoutSize = new SizeF(lb.ClientSize.Width, 5000.0F);
+            string text = lb.Text;
+            Font textFont = lb.Font;
+            SizeF layoutSize = new(lb.ClientSize.Width, 5000.0F);
 
-            using (var g = Graphics.FromHwnd(lb.Handle))
+            using (Graphics g = Graphics.FromHwnd(lb.Handle))
             {
-                var stringSize = g.MeasureString(text, textFont, layoutSize);
+                SizeF stringSize = g.MeasureString(text, textFont, layoutSize);
                 lb.Height = (int)stringSize.Height + 4;
             }
         }

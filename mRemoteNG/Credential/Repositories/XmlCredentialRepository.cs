@@ -39,8 +39,8 @@ namespace mRemoteNG.Credential.Repositories
 
         public void LoadCredentials(SecureString key)
         {
-            var credentials = _credentialRecordLoader.Load(key);
-            foreach (var newCredential in credentials)
+            IEnumerable<ICredentialRecord> credentials = _credentialRecordLoader.Load(key);
+            foreach (ICredentialRecord newCredential in credentials)
             {
                 if (ThisIsADuplicateCredentialRecord(newCredential)) continue;
                 CredentialRecords.Add(newCredential);

@@ -137,13 +137,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void buttonSelectLogPath_Click(object sender, System.EventArgs e)
         {
-            var currentFile = textBoxLogPath.Text;
-            var currentDirectory = Path.GetDirectoryName(currentFile);
+            string currentFile = textBoxLogPath.Text;
+            string currentDirectory = Path.GetDirectoryName(currentFile);
             saveFileDialogLogging.Title = Language.ChooseLogPath;
             saveFileDialogLogging.Filter = @"Log file|*.log";
             saveFileDialogLogging.InitialDirectory = currentDirectory;
             saveFileDialogLogging.FileName = currentFile;
-            var dialogResult = saveFileDialogLogging.ShowDialog();
+            DialogResult dialogResult = saveFileDialogLogging.ShowDialog();
             if (dialogResult != DialogResult.OK) return;
             textBoxLogPath.Text = saveFileDialogLogging.FileName;
         }

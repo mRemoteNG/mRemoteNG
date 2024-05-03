@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.Forms
     public partial class FrmOptions : Form
     {
         private int _currentIndex = 0;
-        private readonly List<OptionsPage> _optionPages = new();
+        private readonly List<OptionsPage> _optionPages = [];
         private string _pageName;
         private readonly DisplayProperties _display = new();
         private readonly List<string> _optionPageObjectNames;
@@ -36,8 +36,8 @@ namespace mRemoteNG.UI.Forms
             _pageName = pageName;
             Cursor.Current = Cursors.Default;
 
-            _optionPageObjectNames = new List<string>
-            {
+            _optionPageObjectNames =
+            [
                 nameof(StartupExitPage),
                 nameof(AppearancePage),
                 nameof(ConnectionsPage),
@@ -50,7 +50,7 @@ namespace mRemoteNG.UI.Forms
                 nameof(SecurityPage),
                 nameof(AdvancedPage),
                 nameof(BackupPage)
-            };
+            ];
 
             InitOptionsPagesToListView();
         }
@@ -222,8 +222,8 @@ namespace mRemoteNG.UI.Forms
         {
             _pageName = pageName ?? Language.StartupExit;
 
-            var isSet = false;
-            for (var i = 0; i < lstOptionPages.Items.Count; i++)
+            bool isSet = false;
+            for (int i = 0; i < lstOptionPages.Items.Count; i++)
             {
                 if (!lstOptionPages.Items[i].Text.Equals(_pageName)) continue;
                 lstOptionPages.Items[i].Selected = true;
@@ -248,7 +248,7 @@ namespace mRemoteNG.UI.Forms
 
         private void SaveOptions()
         {
-            foreach (var page in _optionPages)
+            foreach (OptionsPage page in _optionPages)
             {
                 Debug.WriteLine(page.PageName);
                 page.SaveSettings();
@@ -262,7 +262,7 @@ namespace mRemoteNG.UI.Forms
         {
             pnlMain.Controls.Clear();
 
-            var page = (OptionsPage)lstOptionPages.SelectedObject;
+            OptionsPage page = (OptionsPage)lstOptionPages.SelectedObject;
             if (page != null)
                 pnlMain.Controls.Add(page);
         }

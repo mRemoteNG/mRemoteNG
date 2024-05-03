@@ -23,9 +23,9 @@ namespace mRemoteNG.UI.Controls.Adapters
             _editorService = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
             if (_editorService == null) return value;
 
-            var credentialManager = Runtime.CredentialProviderCatalog;
+            Credential.ICredentialRepositoryList credentialManager = Runtime.CredentialProviderCatalog;
 
-            var listBox = new CredentialRecordListBox(credentialManager.GetCredentialRecords());
+            CredentialRecordListBox listBox = new(credentialManager.GetCredentialRecords());
             listBox.SelectedValueChanged += ListBoxOnSelectedValueChanged;
 
             _editorService.DropDownControl(listBox);

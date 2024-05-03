@@ -8,10 +8,10 @@ namespace mRemoteNG.Tools
     {
         public List<IntPtr> EnumWindows_Renamed()
         {
-            var handleList = new List<IntPtr>();
+            List<IntPtr> handleList = new();
 
             HandleLists.Add(handleList);
-            var handleIndex = (IntPtr)HandleLists.IndexOf(handleList);
+            IntPtr handleIndex = (IntPtr)HandleLists.IndexOf(handleList);
             NativeMethods.EnumWindows(EnumCallback, handleIndex);
             HandleLists.Remove(handleList);
 
@@ -20,17 +20,17 @@ namespace mRemoteNG.Tools
 
         public List<IntPtr> EnumChildWindows(IntPtr hWndParent)
         {
-            var handleList = new List<IntPtr>();
+            List<IntPtr> handleList = new();
 
             HandleLists.Add(handleList);
-            var handleIndex = (IntPtr)HandleLists.IndexOf(handleList);
+            IntPtr handleIndex = (IntPtr)HandleLists.IndexOf(handleList);
             NativeMethods.EnumChildWindows(hWndParent, EnumCallback, handleIndex);
             HandleLists.Remove(handleList);
 
             return handleList;
         }
 
-        private readonly List<List<IntPtr>> HandleLists = new List<List<IntPtr>>();
+        private readonly List<List<IntPtr>> HandleLists = [];
 
         private bool EnumCallback(int hwnd, int lParam)
         {

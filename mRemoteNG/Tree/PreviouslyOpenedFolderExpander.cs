@@ -11,10 +11,10 @@ namespace mRemoteNG.Tree
     {
         public void Execute(IConnectionTree connectionTree)
         {
-            var rootNode = connectionTree.GetRootConnectionNode();
-            var containerList = connectionTree.ConnectionTreeModel.GetRecursiveChildList(rootNode)
+            Root.RootNodeInfo rootNode = connectionTree.GetRootConnectionNode();
+            System.Collections.Generic.IEnumerable<ContainerInfo> containerList = connectionTree.ConnectionTreeModel.GetRecursiveChildList(rootNode)
                                               .OfType<ContainerInfo>();
-            var previouslyExpandedNodes = containerList.Where(container => container.IsExpanded);
+            System.Collections.Generic.IEnumerable<ContainerInfo> previouslyExpandedNodes = containerList.Where(container => container.IsExpanded);
             connectionTree.ExpandedObjects = previouslyExpandedNodes;
             connectionTree.InvokeRebuildAll(true);
         }

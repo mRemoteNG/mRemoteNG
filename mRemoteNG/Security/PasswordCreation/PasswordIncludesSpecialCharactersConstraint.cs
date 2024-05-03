@@ -36,7 +36,7 @@ namespace mRemoteNG.Security.PasswordCreation
 
         public bool Validate(SecureString password)
         {
-            var regex = new Regex($"[{string.Concat(SpecialCharacters)}]");
+            Regex regex = new($"[{string.Concat(SpecialCharacters)}]");
             return regex.Matches(password.ConvertToUnsecureString()).Count >= _minimumCount;
         }
     }

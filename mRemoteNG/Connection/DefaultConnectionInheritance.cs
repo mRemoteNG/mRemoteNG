@@ -24,17 +24,17 @@ namespace mRemoteNG.Connection
         public void LoadFrom<TSource>(TSource sourceInstance, Func<string, string> propertyNameMutator = null)
         {
             if (propertyNameMutator == null) propertyNameMutator = a => a;
-            var inheritanceProperties = GetProperties();
-            foreach (var property in inheritanceProperties)
+            System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> inheritanceProperties = GetProperties();
+            foreach (System.Reflection.PropertyInfo property in inheritanceProperties)
             {
-                var propertyFromSettings = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
+                System.Reflection.PropertyInfo propertyFromSettings = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
                 if (propertyFromSettings == null)
                 {
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, $"DefaultConInherit-LoadFrom: Could not load {property.Name}", true);
                     continue;
                 }
 
-                var valueFromSettings = propertyFromSettings.GetValue(sourceInstance, null);
+                object valueFromSettings = propertyFromSettings.GetValue(sourceInstance, null);
                 property.SetValue(Instance, valueFromSettings, null);
             }
         }
@@ -43,11 +43,11 @@ namespace mRemoteNG.Connection
                                          Func<string, string> propertyNameMutator = null)
         {
             if (propertyNameMutator == null) propertyNameMutator = a => a;
-            var inheritanceProperties = GetProperties();
-            foreach (var property in inheritanceProperties)
+            System.Collections.Generic.IEnumerable<System.Reflection.PropertyInfo> inheritanceProperties = GetProperties();
+            foreach (System.Reflection.PropertyInfo property in inheritanceProperties)
             {
-                var propertyFromSettings = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
-                var localValue = property.GetValue(Instance, null);
+                System.Reflection.PropertyInfo propertyFromSettings = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
+                object localValue = property.GetValue(Instance, null);
                 if (propertyFromSettings == null)
                 {
                     Runtime.MessageCollector?.AddMessage(Messages.MessageClass.ErrorMsg, $"DefaultConInherit-SaveTo: Could not load {property.Name}", true);

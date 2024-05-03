@@ -22,14 +22,14 @@ namespace mRemoteNG.App.Update
 
         public static UpdateInfo FromString(string input)
         {
-            var newInfo = new UpdateInfo();
+            UpdateInfo newInfo = new();
             if (string.IsNullOrEmpty(input))
             {
                 newInfo.IsValid = false;
             }
             else
             {
-                var updateFile = new UpdateFile(input);
+                UpdateFile updateFile = new(input);
                 newInfo.Version = updateFile.GetVersion();
                 newInfo.DownloadAddress = updateFile.GetUri("dURL");
                 newInfo.ChangeLogAddress = updateFile.GetUri("clURL");

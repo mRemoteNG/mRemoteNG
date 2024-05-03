@@ -35,7 +35,7 @@ ADD RDPMinutesToIdleTimeout int NOT NULL DEFAULT 0,
 	InheritSoundQuality bit NOT NULL DEFAULT 0;
 UPDATE tblRoot
     SET ConfVersion='2.6'";
-            var dbCommand = _databaseConnector.DbCommand(sqlText);
+            System.Data.Common.DbCommand dbCommand = _databaseConnector.DbCommand(sqlText);
             dbCommand.ExecuteNonQuery();
 
             return new Version(2, 6);

@@ -19,7 +19,7 @@ namespace mRemoteNG.Tools
         {
             if (Environment.Is64BitOperatingSystem)
             {
-                using (var key = Registry.CurrentUser.CreateSubKey(
+                using (RegistryKey key = Registry.CurrentUser.CreateSubKey(
                                                                    string
                                                                        .Concat("Software\\Wow6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
                                                                                feature),
@@ -30,7 +30,7 @@ namespace mRemoteNG.Tools
             }
 
 
-            using (var key = Registry.CurrentUser.CreateSubKey(
+            using (RegistryKey key = Registry.CurrentUser.CreateSubKey(
                                                                string
                                                                    .Concat("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\",
                                                                            feature),
@@ -74,7 +74,7 @@ namespace mRemoteNG.Tools
             // http://msdn.microsoft.com/en-us/library/ee330720(v=vs.85).aspx
 
             // FeatureControl settings are per-process
-            var fileName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
+            string fileName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
 
             // make sure the control is not running inside Visual Studio Designer
             if (string.Compare(fileName, "devenv.exe", StringComparison.OrdinalIgnoreCase) == 0 ||
@@ -157,16 +157,16 @@ namespace mRemoteNG.Tools
         {
             // https://msdn.microsoft.com/en-us/library/ee330730%28v=vs.85%29.aspx
 
-            var browserVersion = 9;
+            int browserVersion = 9;
             // default to IE9.
 
-            using (var ieKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Internet Explorer",
+            using (RegistryKey ieKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Internet Explorer",
                                                                 RegistryKeyPermissionCheck.ReadSubTree,
                                                                 RegistryRights.QueryValues))
             {
                 if (ieKey != null)
                 {
-                    var version = ieKey.GetValue("svcVersion");
+                    object version = ieKey.GetValue("svcVersion");
                     if (null == version)
                     {
                         version = ieKey.GetValue("Version");

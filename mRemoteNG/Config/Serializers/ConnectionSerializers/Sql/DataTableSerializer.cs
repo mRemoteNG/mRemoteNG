@@ -21,7 +21,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         private readonly SecureString _encryptionKey;
         private DataTable _dataTable;
         private DataTable _sourceDataTable;
-        private readonly Dictionary<string, int> _sourcePrimaryKeyDict = new Dictionary<string, int>();
+        private readonly Dictionary<string, int> _sourcePrimaryKeyDict = [];
         private const string TABLE_NAME = "tblCons";
         private readonly SaveFilter _saveFilter;
         private int _currentNodeIndex;
@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
 
             List<string> entryToDelete = _sourcePrimaryKeyDict.Keys.ToList();
 
-            foreach (var entry in entryToDelete)
+            foreach (string entry in entryToDelete)
             {
                 _dataTable.Rows.Find(entry)?.Delete();
             }
@@ -277,7 +277,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 SerializeConnectionInfo(connectionInfo);
             }
 
-            var containerInfo = connectionInfo as ContainerInfo;
+            ContainerInfo containerInfo = connectionInfo as ContainerInfo;
             if (containerInfo == null) return;
 
             foreach (ConnectionInfo child in containerInfo.Children)
@@ -288,7 +288,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
 
         private bool IsRowUpdated(ConnectionInfo connectionInfo, DataRow dataRow)
         {
-            var isFieldNotChange = dataRow["Name"].Equals(connectionInfo.Name) &&
+            bool isFieldNotChange = dataRow["Name"].Equals(connectionInfo.Name) &&
             dataRow["Type"].Equals(connectionInfo.GetTreeNodeType().ToString()) &&
             dataRow["ParentID"].Equals(connectionInfo.Parent?.ConstantID ?? "") &&
             dataRow["PositionID"].Equals(_currentNodeIndex) &&
@@ -370,7 +370,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["VNCViewOnly"].Equals(connectionInfo.VNCViewOnly);
             isFieldNotChange = isFieldNotChange && dataRow["VmId"].Equals(connectionInfo.VmId);
 
-            var isInheritanceFieldNotChange = false;
+            bool isInheritanceFieldNotChange = false;
             if (_saveFilter.SaveInheritance)
             {
                 isInheritanceFieldNotChange =
@@ -519,7 +519,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritVNCViewOnly"].Equals(false);
             }
 
-            var pwd = dataRow["Password"].Equals(_saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) : "") &&
+            bool pwd = dataRow["Password"].Equals(_saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) : "") &&
                       dataRow["VNCProxyPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey)) &&
                       dataRow["RDGatewayPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey));
             return !(pwd && isFieldNotChange && isInheritanceFieldNotChange);
@@ -528,7 +528,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         private void SerializeConnectionInfo(ConnectionInfo connectionInfo)
         {
             _currentNodeIndex++;
-            var isNewRow = false;
+            bool isNewRow = false;
             DataRow dataRow = _dataTable.Rows.Find(connectionInfo.ConstantID);
             if (dataRow == null)
             {
@@ -540,7 +540,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             {
                 _sourcePrimaryKeyDict.Remove(connectionInfo.ConstantID);
             }
-            var tmp = IsRowUpdated(connectionInfo, dataRow);
+            bool tmp = IsRowUpdated(connectionInfo, dataRow);
             if (!tmp)
             {
                 return;

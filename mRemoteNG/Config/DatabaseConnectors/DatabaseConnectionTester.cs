@@ -17,7 +17,7 @@ namespace mRemoteNG.Config.DatabaseConnectors
                                                                  string username,
                                                                  string password)
         {
-            using (var dbConnector = DatabaseConnectorFactory.DatabaseConnector(type, server, database, username, password))
+            using (IDatabaseConnector dbConnector = DatabaseConnectorFactory.DatabaseConnector(type, server, database, username, password))
             {
                 try
                 {

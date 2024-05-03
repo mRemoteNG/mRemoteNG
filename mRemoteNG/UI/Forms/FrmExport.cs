@@ -28,14 +28,14 @@ namespace mRemoteNG.UI.Forms
         {
             get
             {
-                var exportFormat = cboFileFormat.SelectedItem as ExportFormat;
+                ExportFormat exportFormat = cboFileFormat.SelectedItem as ExportFormat;
                 return exportFormat?.Format ?? SaveFormat.mRXML;
             }
             set
             {
-                foreach (var item in cboFileFormat.Items)
+                foreach (object item in cboFileFormat.Items)
                 {
-                    var exportFormat = item as ExportFormat;
+                    ExportFormat exportFormat = item as ExportFormat;
                     if (exportFormat?.Format != value) continue;
                     cboFileFormat.SelectedItem = item;
                     break;
@@ -164,13 +164,13 @@ namespace mRemoteNG.UI.Forms
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            using (var saveFileDialog = new SaveFileDialog())
+            using (SaveFileDialog saveFileDialog = new())
             {
                 saveFileDialog.CheckPathExists = true;
                 saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 saveFileDialog.OverwritePrompt = true;
 
-                var fileTypes = new List<string>();
+                List<string> fileTypes = new();
                 fileTypes.AddRange(new[] {Language.FiltermRemoteXML, "*.xml"});
                 fileTypes.AddRange(new[] {Language.FiltermRemoteCSV, "*.csv"});
                 fileTypes.AddRange(new[] {Language.FilterAll, "*.*"});

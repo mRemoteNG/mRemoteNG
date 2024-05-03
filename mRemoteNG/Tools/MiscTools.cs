@@ -48,7 +48,7 @@ namespace mRemoteNG.Tools
             //if (PresentationSource.FromVisual(splash))
             //    splash.Close();
 
-            var passwordForm = new FrmPassword(passwordName, verify);
+            FrmPassword passwordForm = new(passwordName, verify);
             return passwordForm.GetKey();
         }
 
@@ -131,9 +131,9 @@ namespace mRemoteNG.Tools
 
         private static string GetExceptionMessageRecursive(Exception ex, string separator)
         {
-            var message = ex.Message;
+            string message = ex.Message;
             if (ex.InnerException == null) return message;
-            var innerMessage = GetExceptionMessageRecursive(ex.InnerException, separator);
+            string innerMessage = GetExceptionMessageRecursive(ex.InnerException, separator);
             message = String.Join(separator, message, innerMessage);
             return message;
         }
@@ -145,7 +145,7 @@ namespace mRemoteNG.Tools
             {
                 if (sender != null)
                 {
-                    var bmp = new Bitmap(sender.Width, sender.Height, PixelFormat.Format32bppRgb);
+                    Bitmap bmp = new(sender.Width, sender.Height, PixelFormat.Format32bppRgb);
                     Graphics g = Graphics.FromImage(bmp);
                     g.CopyFromScreen(sender.PointToScreen(System.Drawing.Point.Empty), System.Drawing.Point.Empty, bmp.Size, CopyPixelOperation.SourceCopy);
                     return bmp;
@@ -179,8 +179,8 @@ namespace mRemoteNG.Tools
                                              Type destType)
             {
                 if (value == null) return null;
-                var fi = _enumType.GetField(Enum.GetName(_enumType, value));
-                var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+                System.Reflection.FieldInfo fi = _enumType.GetField(Enum.GetName(_enumType, value));
+                DescriptionAttribute dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
 
                 return dna != null ? dna.Description : value.ToString();
             }
@@ -192,9 +192,9 @@ namespace mRemoteNG.Tools
 
             public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
             {
-                foreach (var fi in _enumType.GetFields())
+                foreach (System.Reflection.FieldInfo fi in _enumType.GetFields())
                 {
-                    var dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
+                    DescriptionAttribute dna = (DescriptionAttribute)Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute));
 
                     if (dna != null && (string)value == dna.Description)
                     {
@@ -256,7 +256,7 @@ namespace mRemoteNG.Tools
             {
                 bool[] bools = {true, false};
 
-                var svc = new StandardValuesCollection(bools);
+                StandardValuesCollection svc = new(bools);
 
                 return svc;
             }

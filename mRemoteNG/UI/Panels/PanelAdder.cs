@@ -19,7 +19,7 @@ namespace mRemoteNG.UI.Panels
         {
             try
             {
-                var connectionForm = new ConnectionWindow(new DockContent());
+                ConnectionWindow connectionForm = new(new DockContent());
                 BuildConnectionWindowContextMenu(connectionForm);
                 SetConnectionWindowTitle(title, connectionForm);
                 ShowConnectionWindow(connectionForm);
@@ -58,17 +58,17 @@ namespace mRemoteNG.UI.Panels
 
         private static void BuildConnectionWindowContextMenu(DockContent pnlcForm)
         {
-            var cMen = new ContextMenuStrip();
-            var cMenRen = CreateRenameMenuItem(pnlcForm);
-            var cMenScreens = CreateScreensMenuItem(pnlcForm);
-            var cMenClose = CreateCloseMenuItem(pnlcForm);
+            ContextMenuStrip cMen = new();
+            ToolStripMenuItem cMenRen = CreateRenameMenuItem(pnlcForm);
+            ToolStripMenuItem cMenScreens = CreateScreensMenuItem(pnlcForm);
+            ToolStripMenuItem cMenClose = CreateCloseMenuItem(pnlcForm);
             cMen.Items.AddRange(new ToolStripItem[] {cMenRen, cMenScreens, cMenClose});
             pnlcForm.TabPageContextMenuStrip = cMen;
         }
 
         private static ToolStripMenuItem CreateScreensMenuItem(DockContent pnlcForm)
         {
-            var cMenScreens = new ToolStripMenuItem
+            ToolStripMenuItem cMenScreens = new()
             {
                 Text = Language.SendTo,
                 Image = Properties.Resources.Monitor_16x,
@@ -81,7 +81,7 @@ namespace mRemoteNG.UI.Panels
 
         private static ToolStripMenuItem CreateRenameMenuItem(DockContent pnlcForm)
         {
-            var cMenRen = new ToolStripMenuItem
+            ToolStripMenuItem cMenRen = new()
             {
                 Text = Language.Rename,
                 Image = Properties.Resources.Rename_16x,
@@ -93,7 +93,7 @@ namespace mRemoteNG.UI.Panels
 
         private static ToolStripMenuItem CreateCloseMenuItem(DockContent pnlcForm)
         {
-            var cMenClose = new ToolStripMenuItem
+            ToolStripMenuItem cMenClose = new()
             {
                 Text = Language._Close,
                 Image = Properties.Resources.Close_16x,
@@ -107,9 +107,9 @@ namespace mRemoteNG.UI.Panels
         {
             try
             {
-                var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
+                ConnectionWindow conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
 
-                using (var newTitle = new FrmInputBox(Language.NewTitle, Language.NewTitle + ":", ""))
+                using (FrmInputBox newTitle = new(Language.NewTitle, Language.NewTitle + ":", ""))
                     if (newTitle.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(newTitle.returnValue))
                         conW.SetFormText(newTitle.returnValue.Replace("&", "&&"));
             }
@@ -123,7 +123,7 @@ namespace mRemoteNG.UI.Panels
         {
             try
             {
-                var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
+                ConnectionWindow conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
                 conW.Close();
             }
             catch (Exception ex)
@@ -136,12 +136,12 @@ namespace mRemoteNG.UI.Panels
         {
             try
             {
-                var cMenScreens = (ToolStripMenuItem)sender;
+                ToolStripMenuItem cMenScreens = (ToolStripMenuItem)sender;
                 cMenScreens.DropDownItems.Clear();
 
-                for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
+                for (int i = 0; i <= Screen.AllScreens.Length - 1; i++)
                 {
-                    var cMenScreen = new ToolStripMenuItem(Language.Screen + " " + Convert.ToString(i + 1))
+                    ToolStripMenuItem cMenScreen = new(Language.Screen + " " + Convert.ToString(i + 1))
                     {
                         Tag = new ArrayList(),
                         Image = Properties.Resources.Monitor_16x
@@ -164,9 +164,9 @@ namespace mRemoteNG.UI.Panels
             DockContent panel = null;
             try
             {
-                var tagEnumeration = (IEnumerable)((ToolStripMenuItem)sender).Tag;
+                IEnumerable tagEnumeration = (IEnumerable)((ToolStripMenuItem)sender).Tag;
                 if (tagEnumeration == null) return;
-                foreach (var obj in tagEnumeration)
+                foreach (object obj in tagEnumeration)
                 {
                     if (obj is Screen screen1)
                     {

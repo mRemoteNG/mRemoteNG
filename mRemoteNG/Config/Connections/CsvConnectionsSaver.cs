@@ -27,10 +27,10 @@ namespace mRemoteNG.Config.Connections
 
         public void Save(ConnectionTreeModel connectionTreeModel, string propertyNameTrigger = "")
         {
-            var csvConnectionsSerializer =
-                new CsvConnectionsSerializerMremotengFormat(_saveFilter, Runtime.CredentialProviderCatalog);
-            var dataProvider = new FileDataProvider(_connectionFileName);
-            var csvContent = csvConnectionsSerializer.Serialize(connectionTreeModel);
+            CsvConnectionsSerializerMremotengFormat csvConnectionsSerializer =
+                new(_saveFilter, Runtime.CredentialProviderCatalog);
+            FileDataProvider dataProvider = new(_connectionFileName);
+            string csvContent = csvConnectionsSerializer.Serialize(connectionTreeModel);
             dataProvider.Save(csvContent);
         }
     }

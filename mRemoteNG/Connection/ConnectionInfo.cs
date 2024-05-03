@@ -84,7 +84,7 @@ namespace mRemoteNG.Connection
 
         public virtual ConnectionInfo Clone()
         {
-            var newConnectionInfo = new ConnectionInfo();
+            ConnectionInfo newConnectionInfo = new();
             newConnectionInfo.CopyFrom(this);
             return newConnectionInfo;
         }
@@ -96,16 +96,16 @@ namespace mRemoteNG.Connection
         /// <param name="sourceConnectionInfo"></param>
         public void CopyFrom(ConnectionInfo sourceConnectionInfo)
         {
-            var properties = GetType().BaseType?.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
+            IEnumerable<PropertyInfo> properties = GetType().BaseType?.GetProperties().Where(prop => prop.CanRead && prop.CanWrite);
             if (properties == null) return;
-            foreach (var property in properties)
+            foreach (PropertyInfo property in properties)
             {
                 if (property.Name == nameof(Parent)) continue;
-                var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
+                object remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
                 property.SetValue(this, remotePropertyValue, null);
             }
 
-            var clonedInheritance = sourceConnectionInfo.Inheritance.Clone(this);
+            ConnectionInfoInheritance clonedInheritance = sourceConnectionInfo.Inheritance.Clone(this);
             Inheritance = clonedInheritance;
         }
 
@@ -134,14 +134,14 @@ namespace mRemoteNG.Connection
 
         protected virtual IEnumerable<PropertyInfo> GetProperties(string[] excludedPropertyNames)
         {
-            var properties = typeof(ConnectionInfo).GetProperties();
-            var filteredProperties = properties.Where((prop) => !excludedPropertyNames.Contains(prop.Name));
+            PropertyInfo[] properties = typeof(ConnectionInfo).GetProperties();
+            IEnumerable<PropertyInfo> filteredProperties = properties.Where((prop) => !excludedPropertyNames.Contains(prop.Name));
             return filteredProperties;
         }
 
         public virtual IEnumerable<PropertyInfo> GetSerializableProperties()
         {
-            var excludedProperties = new[]
+            string[] excludedProperties = new[]
             {
                 "Parent", "Name", "Hostname", "Port", "Inheritance", "OpenConnections",
                 "IsContainer", "IsDefault", "PositionID", "ConstantID", "TreeNode", "IsQuickConnect", "PleaseConnect"
@@ -192,8 +192,8 @@ namespace mRemoteNG.Connection
             if (!ShouldThisPropertyBeInherited(propertyName))
                 return value;
 
-            var couldGetInheritedValue =
-                TryGetInheritedPropertyValue<TPropertyType>(propertyName, out var inheritedValue);
+            bool couldGetInheritedValue =
+                TryGetInheritedPropertyValue<TPropertyType>(propertyName, out TPropertyType inheritedValue);
 
             return couldGetInheritedValue
                 ? inheritedValue
@@ -215,9 +215,9 @@ namespace mRemoteNG.Connection
 
         private bool IsInheritanceTurnedOnForThisProperty(string propertyName)
         {
-            var inheritType = Inheritance.GetType();
-            var inheritPropertyInfo = inheritType.GetProperty(propertyName);
-            var inheritPropertyValue = inheritPropertyInfo != null && Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, null));
+            Type inheritType = Inheritance.GetType();
+            PropertyInfo inheritPropertyInfo = inheritType.GetProperty(propertyName);
+            bool inheritPropertyValue = inheritPropertyInfo != null && Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, null));
             return inheritPropertyValue;
         }
 
@@ -225,8 +225,8 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                var connectionInfoType = Parent.GetType();
-                var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
+                Type connectionInfoType = Parent.GetType();
+                PropertyInfo parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
                 if (parentPropertyInfo == null)
                     throw new NullReferenceException(
                         $"Could not retrieve property data for property '{propertyName}' on parent node '{Parent?.Name}'"
@@ -402,7 +402,7 @@ namespace mRemoteNG.Connection
 
         private void SetNewOpenConnectionList()
         {
-            OpenConnections = new ProtocolList();
+            OpenConnections = [];
             OpenConnections.CollectionChanged += (sender, args) => RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("OpenConnections"));
         }
 

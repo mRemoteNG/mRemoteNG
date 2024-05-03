@@ -46,7 +46,7 @@ namespace mRemoteNG.UI.Tabs
                 {
                     if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
                     {
-                        var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
+                        DialogResult result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
                                                             string
                                                                 .Format(Language.ConfirmCloseConnectionPanelMainInstruction,
                                                                         TabText), "", "", "",
@@ -89,7 +89,7 @@ namespace mRemoteNG.UI.Tabs
         {
             try
             {
-                var interfaceControl = Tag as InterfaceControl;
+                InterfaceControl interfaceControl = Tag as InterfaceControl;
                 if (interfaceControl?.Info.Protocol == ProtocolType.VNC)
                     ((ProtocolVNC)interfaceControl.Protocol).RefreshScreen();
             }

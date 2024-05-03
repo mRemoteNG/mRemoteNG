@@ -168,7 +168,7 @@ namespace mRemoteNG.UI.Window
             this.txtSearch.TabIndex = 30;
             this.txtSearch.TabStop = false;
             this.txtSearch.Text = "Search";
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.TextChanged += new System.EventHandler(this.TxtSearch_TextChanged);
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtSearch_KeyDown);
             // 
             // tableLayoutPanel1

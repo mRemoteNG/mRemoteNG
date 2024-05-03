@@ -54,7 +54,7 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private readonly AdvancedWindowMenu _advancedWindowMenu;
         private ConnectionInfo _selectedConnection;
-        private readonly IList<IMessageWriter> _messageWriters = new List<IMessageWriter>();
+        private readonly IList<IMessageWriter> _messageWriters = [];
         private readonly ThemeManager _themeManager;
         private readonly FileBackupPruner _backupPruner = new();
         public static FrmOptions OptionsForm;
@@ -159,9 +159,9 @@ namespace mRemoteNG.UI.Forms
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            var messageCollector = Runtime.MessageCollector;
+            MessageCollector messageCollector = Runtime.MessageCollector;
 
-            var settingsLoader = new SettingsLoader(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, msMain);
+            SettingsLoader settingsLoader = new(this, messageCollector, _quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, msMain);
             settingsLoader.LoadSettings();
 
             MessageCollectorSetup.SetupMessageCollector(messageCollector, _messageWriters);
@@ -171,7 +171,7 @@ namespace mRemoteNG.UI.Forms
 
             SetMenuDependencies();
 
-            var uiLoader = new DockPanelLayoutLoader(this, messageCollector);
+            DockPanelLayoutLoader uiLoader = new(this, messageCollector);
             uiLoader.LoadPanelsFromXml();
 
             LockToolbarPositions(Properties.Settings.Default.LockToolbars);
@@ -181,7 +181,7 @@ namespace mRemoteNG.UI.Forms
 
             _fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
-            Runtime.WindowList = new WindowList();
+            Runtime.WindowList = [];
 
             if (Properties.App.Default.ResetPanels)
                 SetDefaultLayout();
@@ -190,7 +190,7 @@ namespace mRemoteNG.UI.Forms
 
             Runtime.ConnectionsService.ConnectionsLoaded += ConnectionsServiceOnConnectionsLoaded;
             Runtime.ConnectionsService.ConnectionsSaved += ConnectionsServiceOnConnectionsSaved;
-            var credsAndConsSetup = new CredsAndConsSetup();
+            CredsAndConsSetup credsAndConsSetup = new();
             credsAndConsSetup.LoadCredsAndCons();
 
             Windows.TreeForm.Focus();
@@ -224,9 +224,9 @@ namespace mRemoteNG.UI.Forms
             OptionsForm = new FrmOptions();
             
             if (!Properties.OptionsTabsPanelsPage.Default.CreateEmptyPanelOnStartUp) return;
-            var panelName = !string.IsNullOrEmpty(Properties.OptionsTabsPanelsPage.Default.StartUpPanelName) ? Properties.OptionsTabsPanelsPage.Default.StartUpPanelName : Language.NewPanel;
+            string panelName = !string.IsNullOrEmpty(Properties.OptionsTabsPanelsPage.Default.StartUpPanelName) ? Properties.OptionsTabsPanelsPage.Default.StartUpPanelName : Language.NewPanel;
 
-            var panelAdder = new PanelAdder();
+            PanelAdder panelAdder = new();
             if (!panelAdder.DoesPanelExist(panelName))
                 panelAdder.AddPanel(panelName);
         }
@@ -265,8 +265,8 @@ namespace mRemoteNG.UI.Forms
 
         private void LockToolbarPositions(bool shouldBeLocked)
         {
-            var toolbars = new ToolStrip[] {_quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip, msMain};
-            foreach (var toolbar in toolbars)
+            ToolStrip[] toolbars = [_quickConnectToolStrip, _multiSshToolStrip, _externalToolsToolStrip, msMain];
+            foreach (ToolStrip toolbar in toolbars)
             {
                 toolbar.GripStyle = shouldBeLocked ? ToolStripGripStyle.Hidden : ToolStripGripStyle.Visible;
             }
@@ -352,11 +352,11 @@ namespace mRemoteNG.UI.Forms
 
             if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesAsked) return;
             string[] commandButtons =
-            {
+            [
                 Language.AskUpdatesCommandRecommended,
                 Language.AskUpdatesCommandCustom,
                 Language.AskUpdatesCommandAskLater
-            };
+            ];
 
             CTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProductName, Language.AskUpdatesMainInstruction, string.Format(Language.AskUpdatesContent, GeneralAppInfo.ProductName), "", "", "", "", string.Join(" | ", commandButtons), ETaskDialogButtons.None, ESysIcons.Question, ESysIcons.Question);
 
@@ -378,7 +378,7 @@ namespace mRemoteNG.UI.Forms
 
             if (!Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup) return;
 
-            var nextUpdateCheck =
+            DateTime nextUpdateCheck =
                 Convert.ToDateTime(Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays))));
 
             if (!Properties.OptionsUpdatesPage.Default.UpdatePending && DateTime.UtcNow <= nextUpdateCheck) return;
@@ -417,10 +417,10 @@ namespace mRemoteNG.UI.Forms
 
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
             {
-                var openConnections = 0;
+                int openConnections = 0;
                 if (pnlDock.Contents.Count > 0)
                 {
-                    foreach (var dc in pnlDock.Contents)
+                    foreach (IDockContent dc in pnlDock.Contents)
                     {
                         if (dc is not ConnectionWindow cw) continue;
                         if (cw.Controls.Count < 1) continue;
@@ -435,7 +435,7 @@ namespace mRemoteNG.UI.Forms
                      (Properties.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple &
                       openConnections > 1) || Properties.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
                 {
-                    var result = CTaskDialog.MessageBox(this, Application.ProductName, Language.ConfirmExitMainInstruction, "", "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+                    DialogResult result = CTaskDialog.MessageBox(this, Application.ProductName, Language.ConfirmExitMainInstruction, "", "", "", Language.CheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
                     if (CTaskDialog.VerificationChecked)
                     {
                         Properties.Settings.Default.ConfirmCloseConnection--; //--?
@@ -510,7 +510,7 @@ namespace mRemoteNG.UI.Forms
                         _inMouseActivate = true;
                         break;
                     case NativeMethods.WM_ACTIVATEAPP:
-                        var candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
+                        Control candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
                                                ?? GetChildAtPoint(MousePosition);
                         if (candidateTabToFocus is InterfaceControl) candidateTabToFocus.Parent.Focus();
                         _inMouseActivate = false;
@@ -519,7 +519,7 @@ namespace mRemoteNG.UI.Forms
                         // Only handle this msg if it was triggered by a click
                         if (NativeMethods.LOWORD(m.WParam) == NativeMethods.WA_CLICKACTIVE)
                         {
-                            var controlThatWasClicked = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
+                            Control controlThatWasClicked = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
                                                      ?? GetChildAtPoint(MousePosition);
                             if (controlThatWasClicked != null)
                             {
@@ -553,7 +553,7 @@ namespace mRemoteNG.UI.Forms
                         break;
                     case NativeMethods.WM_WINDOWPOSCHANGED:
                         // Ignore this message if the window wasn't activated
-                        var windowPos =
+                        NativeMethods.WINDOWPOS windowPos =
                             (NativeMethods.WINDOWPOS)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.WINDOWPOS));
                         if ((windowPos.flags & NativeMethods.SWP_NOACTIVATE) == 0)
                         {
@@ -564,7 +564,7 @@ namespace mRemoteNG.UI.Forms
                     case NativeMethods.WM_SYSCOMMAND:
                         if (m.WParam == new IntPtr(0))
                             ShowHideMenu();
-                        var screen = _advancedWindowMenu.GetScreenById(m.WParam.ToInt32());
+                        Screen screen = _advancedWindowMenu.GetScreenById(m.WParam.ToInt32());
                         if (screen != null)
                         {
                             Screens.SendFormToScreen(screen);
@@ -608,9 +608,9 @@ namespace mRemoteNG.UI.Forms
 
         private static void SimulateClick(Control control)
         {
-            var clientMousePosition = control.PointToClient(MousePosition);
-            var temp_wLow = clientMousePosition.X;
-            var temp_wHigh = clientMousePosition.Y;
+            Point clientMousePosition = control.PointToClient(MousePosition);
+            int temp_wLow = clientMousePosition.X;
+            int temp_wHigh = clientMousePosition.Y;
             NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, (IntPtr)NativeMethods.MK_LBUTTON,
                                       (IntPtr)NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
             clientMousePosition.X = temp_wLow;
@@ -619,15 +619,15 @@ namespace mRemoteNG.UI.Forms
 
         private void ActivateConnection()
         {
-            var cw = pnlDock.ActiveDocument as ConnectionWindow;
-            var dp = cw?.ActiveControl as DockPane;
+            ConnectionWindow cw = pnlDock.ActiveDocument as ConnectionWindow;
+            DockPane dp = cw?.ActiveControl as DockPane;
 
             if (dp?.ActiveContent is not ConnectionTab tab) return;
-            var ifc = InterfaceControl.FindInterfaceControl(tab);
+            InterfaceControl ifc = InterfaceControl.FindInterfaceControl(tab);
             if (ifc == null) return;
 
             ifc.Protocol.Focus();
-            var conFormWindow = ifc.FindForm();
+            Form conFormWindow = ifc.FindForm();
             ((ConnectionTab)conFormWindow)?.RefreshInterfaceController();
         }
 
@@ -644,7 +644,7 @@ namespace mRemoteNG.UI.Forms
                 return;
             }
 
-            var titleBuilder = new StringBuilder(Application.ProductName);
+            StringBuilder titleBuilder = new(Application.ProductName);
             const string separator = " - ";
 
             if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
@@ -686,10 +686,10 @@ namespace mRemoteNG.UI.Forms
             }
             else
             {
-                var nonConnectionPanelCount = 0;
-                foreach (var dockContent in pnlDock.Documents)
+                int nonConnectionPanelCount = 0;
+                foreach (IDockContent dockContent in pnlDock.Documents)
                 {
-                    var document = (DockContent)dockContent;
+                    DockContent document = (DockContent)dockContent;
                     if ((closingDocument == null || document != closingDocument) && document is not ConnectionWindow)
                     {
                         nonConnectionPanelCount++;

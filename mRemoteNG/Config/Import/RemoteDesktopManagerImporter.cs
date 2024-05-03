@@ -27,15 +27,15 @@ namespace mRemoteNG.Config.Import
             if (!File.Exists(filePath))
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"Unable to import file. File does not exist. Path: {filePath}");
 
-            var dataProvider = new FileDataProvider(filePath);
-            var csvString = dataProvider.Load();
+            FileDataProvider dataProvider = new(filePath);
+            string csvString = dataProvider.Load();
 
             if (!string.IsNullOrEmpty(csvString))
             {
-                var csvDeserializer = new CsvConnectionsDeserializerRdmFormat();
-                var connectionTreeModel = csvDeserializer.Deserialize(csvString);
+                CsvConnectionsDeserializerRdmFormat csvDeserializer = new();
+                Tree.ConnectionTreeModel connectionTreeModel = csvDeserializer.Deserialize(csvString);
 
-                var rootContainer = new ContainerInfo { Name = Path.GetFileNameWithoutExtension(filePath) };
+                ContainerInfo rootContainer = new() { Name = Path.GetFileNameWithoutExtension(filePath) };
                 rootContainer.AddChildRange(connectionTreeModel.RootNodes);
                 destinationContainer.AddChild(rootContainer);
             }

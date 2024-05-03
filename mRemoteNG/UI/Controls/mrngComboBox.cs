@@ -65,7 +65,7 @@ namespace mRemoteNG.UI.Controls
 
         private void NG_DrawItem(object sender, DrawItemEventArgs e)
         {
-            var index = e.Index >= 0 ? e.Index : 0;
+            int index = e.Index >= 0 ? e.Index : 0;
             Brush itemBrush = new SolidBrush(_themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground"));
 
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
@@ -115,11 +115,11 @@ namespace mRemoteNG.UI.Controls
             }
 
             //Colors
-            var Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Border");
-            var Back = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
-            var Fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
-            var ButtBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Background");
-            var ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Foreground");
+            Color Border = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Border");
+            Color Back = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Background");
+            Color Fore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Foreground");
+            Color ButtBack = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Background");
+            Color ButtFore = _themeManager.ActiveTheme.ExtendedPalette.getColor("ComboBox_Button_Foreground");
 
             if (_mice == MouseState.HOVER)
             {
@@ -139,14 +139,14 @@ namespace mRemoteNG.UI.Controls
             e.Graphics.Clear(Back);
 
             //Border
-            using (var p = new Pen(Border))
+            using (Pen p = new(Border))
             {
-                var boxRect = new Rectangle(0, 0, Width - 1, Height - 1);
+                Rectangle boxRect = new(0, 0, Width - 1, Height - 1);
                 e.Graphics.DrawRectangle(p, boxRect);
             }
 
             //Button
-            using (var b = new SolidBrush(ButtBack))
+            using (SolidBrush b = new(ButtBack))
             {
                 e.Graphics.FillRectangle(b, Width - 18, 2, 16, Height - 4);
             }
@@ -155,7 +155,7 @@ namespace mRemoteNG.UI.Controls
             e.Graphics.DrawString("\u25BC", Font, new SolidBrush(ButtFore), Width - 17, Height / 2 - 5);
 
             //Text
-            var textRect = new Rectangle(2, 2, Width - 20, Height - 4);
+            Rectangle textRect = new(2, 2, Width - 20, Height - 4);
             TextRenderer.DrawText(e.Graphics, Text, Font, textRect, Fore, Back,
                                   TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
         }

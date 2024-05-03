@@ -26,11 +26,11 @@ namespace mRemoteNG.Tools
 			
 		public StatusValue Verify()
 		{
-			var trustFileInfoPointer = default(IntPtr);
-			var trustDataPointer = default(IntPtr);
+            IntPtr trustFileInfoPointer = default(IntPtr);
+            IntPtr trustDataPointer = default(IntPtr);
 			try
 			{
-				var fileInfo = new FileInfo(FilePath);
+                FileInfo fileInfo = new(FilePath);
 				if (!fileInfo.Exists)
 				{
 					Status = StatusValue.FileNotExist;
@@ -49,8 +49,8 @@ namespace mRemoteNG.Tools
 						Status = StatusValue.NoThumbprintToMatch;
 						return Status;
 					}
-						
-					var certificate2 = new X509Certificate2(X509Certificate.CreateFromSignedFile(FilePath));
+
+                    X509Certificate2 certificate2 = new(X509Certificate.CreateFromSignedFile(FilePath));
 					_thumbprint = certificate2.Thumbprint;
 					if (_thumbprint != ThumbprintToMatch)
 					{
@@ -59,12 +59,12 @@ namespace mRemoteNG.Tools
 					}
 				}
 
-			    var trustFileInfo = new NativeMethods.WINTRUST_FILE_INFO {pcwszFilePath = FilePath};
+                NativeMethods.WINTRUST_FILE_INFO trustFileInfo = new() { pcwszFilePath = FilePath};
 			    trustFileInfoPointer = Marshal.AllocCoTaskMem(Marshal.SizeOf(trustFileInfo));
 				Marshal.StructureToPtr(trustFileInfo, trustFileInfoPointer, false);
 
-			    var trustData = new NativeMethods.WINTRUST_DATA
-			    {
+                NativeMethods.WINTRUST_DATA trustData = new()
+                {
 			        dwUIChoice = (uint) Display,
 			        fdwRevocationChecks = NativeMethods.WTD_REVOKE_WHOLECHAIN,
 			        dwUnionChoice = NativeMethods.WTD_CHOICE_FILE,
@@ -76,7 +76,7 @@ namespace mRemoteNG.Tools
 			    trustDataPointer = Marshal.AllocCoTaskMem(Marshal.SizeOf(trustData));
 				Marshal.StructureToPtr(trustData, trustDataPointer, false);
 
-			    var windowHandle = DisplayParentForm?.Handle ?? IntPtr.Zero;
+                IntPtr windowHandle = DisplayParentForm?.Handle ?? IntPtr.Zero;
 					
 				_trustProviderErrorCode =
  NativeMethods.WinVerifyTrust(windowHandle, NativeMethods.WINTRUST_ACTION_GENERIC_VERIFY_V2, trustDataPointer);
@@ -104,11 +104,11 @@ namespace mRemoteNG.Tools
 
 			    if (ex is CryptographicException)
 			    {
-			        var hResultProperty =
+                    PropertyInfo hResultProperty =
  ex.GetType().GetProperty("HResult", BindingFlags.NonPublic | BindingFlags.Instance);
 			        if (hResultProperty != null)
 			        {
-			            var hResult = Convert.ToInt32(hResultProperty.GetValue(ex, null));
+                        int hResult = Convert.ToInt32(hResultProperty.GetValue(ex, null));
 			            if (hResult == NativeMethods.CRYPT_E_NO_MATCH)
 			            {
 			                Status = StatusValue.NoSignature;
@@ -175,7 +175,7 @@ namespace mRemoteNG.Tools
                      */
 	                return $"The thumbprint does not match. {_thumbprint} {(char) 0x2260} {ThumbprintToMatch}.";
 	            case StatusValue.TrustProviderError:
-	                var ex = new Win32Exception(_trustProviderErrorCode);
+                    Win32Exception ex = new(_trustProviderErrorCode);
 	                return $"The trust provider returned an error. {ex.Message}";
 	            case StatusValue.UnhandledException:
 	                return $"An unhandled exception occurred. {Exception.Message}";
@@ -273,7 +273,7 @@ namespace mRemoteNG.Tools
 			public const int TRUST_E_NOSIGNATURE = unchecked ((int) 0x800B0100);
 				
 			public static readonly Guid WINTRUST_ACTION_GENERIC_VERIFY_V2 =
- new Guid("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}");
+ new("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}");
 				
 			public const uint WTD_CHOICE_FILE = 1;
 			public const uint WTD_DISABLE_MD2_MD4 = 0x2000;

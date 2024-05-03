@@ -25,21 +25,21 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         public IEnumerable<ICredentialRecord> Deserialize(string xml, SecureString key)
         {
-            var decryptedXml = DecryptPasswords(xml, key);
+            string decryptedXml = DecryptPasswords(xml, key);
             return _baseDeserializer.Deserialize(decryptedXml);
         }
 
         private string DecryptPasswords(string xml, SecureString key)
         {
             if (string.IsNullOrEmpty(xml)) return xml;
-            var xdoc = XDocument.Parse(xml);
-            var cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
+            XDocument xdoc = XDocument.Parse(xml);
+            ICryptographyProvider cryptoProvider = new CryptoProviderFactoryFromXml(xdoc.Root).Build();
             DecryptAuthHeader(xdoc.Root, cryptoProvider, key);
-            foreach (var credentialElement in xdoc.Descendants())
+            foreach (XElement credentialElement in xdoc.Descendants())
             {
-                var passwordAttribute = credentialElement.Attribute("Password");
+                XAttribute passwordAttribute = credentialElement.Attribute("Password");
                 if (passwordAttribute == null) continue;
-                var decryptedPassword = cryptoProvider.Decrypt(passwordAttribute.Value, key);
+                string decryptedPassword = cryptoProvider.Decrypt(passwordAttribute.Value, key);
                 passwordAttribute.SetValue(decryptedPassword);
             }
 
@@ -48,7 +48,7 @@ namespace mRemoteNG.Config.Serializers.CredentialSerializer
 
         private void DecryptAuthHeader(XElement rootElement, ICryptographyProvider cryptographyProvider, SecureString key)
         {
-            var authAttribute = rootElement.Attribute("Auth");
+            XAttribute authAttribute = rootElement.Attribute("Auth");
             if (authAttribute == null)
                 throw new EncryptionException("Could not find Auth header in the XML repository root element.");
             cryptographyProvider.Decrypt(authAttribute.Value, key);

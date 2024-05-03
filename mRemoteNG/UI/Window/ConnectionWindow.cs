@@ -129,7 +129,7 @@ namespace mRemoteNG.UI.Window
 
                 titleText = titleText.Replace("&", "&&");
 
-                var conTab = new ConnectionTab
+                ConnectionTab conTab = new()
                 {
                     Tag = connectionInfo,
                     DockAreas = DockAreas.Document | DockAreas.Float,
@@ -160,16 +160,16 @@ namespace mRemoteNG.UI.Window
 
         public void ReconnectAll(IConnectionInitiator initiator)
         {
-            var controlList = new List<InterfaceControl>();
+            List<InterfaceControl> controlList = new();
             try
             {
-                foreach (var dockContent in connDock.DocumentsToArray())
+                foreach (IDockContent dockContent in connDock.DocumentsToArray())
                 {
-                    var tab = (ConnectionTab)dockContent;
+                    ConnectionTab tab = (ConnectionTab)dockContent;
                     controlList.Add((InterfaceControl)tab.Tag);
                 }
 
-                foreach (var iControl in controlList)
+                foreach (InterfaceControl iControl in controlList)
                 {
                     iControl.Protocol.Close();
                     initiator.OpenConnection(iControl.Info, ConnectionInfo.Force.DoNotJump);
@@ -287,7 +287,7 @@ namespace mRemoteNG.UI.Window
                  Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple &
                  connDock.Documents.Count() > 1))
             {
-                var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
+                DialogResult result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
                                                     string
                                                         .Format(Language.ConfirmCloseConnectionPanelMainInstruction,
                                                                 Text), "", "", "",
@@ -308,9 +308,9 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                foreach (var dockContent in connDock.Documents.ToArray())
+                foreach (IDockContent dockContent in connDock.Documents.ToArray())
                 {
-                    var tabP = (ConnectionTab)dockContent;
+                    ConnectionTab tabP = (ConnectionTab)dockContent;
                     if (tabP.Tag == null) continue;
                     tabP.silentClose = true;
                     tabP.Close();
@@ -342,7 +342,7 @@ namespace mRemoteNG.UI.Window
 
         private void ConnDockOnActiveContentChanged(object sender, EventArgs e)
         {
-            var ic = GetInterfaceControl();
+            InterfaceControl ic = GetInterfaceControl();
             if (ic?.Info == null) return;
             FrmMain.Default.SelectedConnection = ic.Info;
         }
@@ -355,7 +355,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
+                InterfaceControl interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
 
                 if (interfaceControl.Protocol is ISupportsViewOnly viewOnly)
@@ -370,7 +370,7 @@ namespace mRemoteNG.UI.Window
 
                 if (interfaceControl.Info.Protocol == ProtocolType.RDP)
                 {
-                    var rdp = (RdpProtocol)interfaceControl.Protocol;
+                    RdpProtocol rdp = (RdpProtocol)interfaceControl.Protocol;
                     cmenTabFullscreen.Visible = true;
                     cmenTabFullscreen.Checked = rdp.Fullscreen;
                     cmenTabSmartSize.Visible = true;
@@ -384,7 +384,7 @@ namespace mRemoteNG.UI.Window
 
                 if (interfaceControl.Info.Protocol == ProtocolType.VNC)
                 {
-                    var vnc = (ProtocolVNC)interfaceControl.Protocol;
+                    ProtocolVNC vnc = (ProtocolVNC)interfaceControl.Protocol;
                     cmenTabSendSpecialKeys.Visible = true;
                     cmenTabSmartSize.Visible = true;
                     cmenTabStartChat.Visible = true;
@@ -423,7 +423,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
+                InterfaceControl interfaceControl = GetInterfaceControl();
 
                 switch (interfaceControl.Protocol)
                 {
@@ -442,7 +442,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
+                InterfaceControl interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
 
                 if (interfaceControl.Info.Protocol == ProtocolType.SSH1 |
@@ -461,11 +461,11 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
+                InterfaceControl interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
 
                 Windows.Show(WindowType.SSHTransfer);
-                var connectionInfo = interfaceControl.Info;
+                ConnectionInfo connectionInfo = interfaceControl.Info;
 
                 Windows.SshtransferForm.Hostname = connectionInfo.Hostname;
                 Windows.SshtransferForm.Username = connectionInfo.Username;
@@ -482,8 +482,8 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
+                InterfaceControl interfaceControl = GetInterfaceControl();
+                ProtocolVNC vnc = interfaceControl?.Protocol as ProtocolVNC;
                 vnc?.StartFileTransfer();
             }
             catch (Exception ex)
@@ -496,7 +496,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
+                InterfaceControl interfaceControl = GetInterfaceControl();
                 if (!(interfaceControl?.Protocol is ISupportsViewOnly viewOnly))
                     return;
 
@@ -513,8 +513,8 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
+                InterfaceControl interfaceControl = GetInterfaceControl();
+                ProtocolVNC vnc = interfaceControl?.Protocol as ProtocolVNC;
                 vnc?.StartChat();
             }
             catch (Exception ex)
@@ -527,8 +527,8 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
+                InterfaceControl interfaceControl = GetInterfaceControl();
+                ProtocolVNC vnc = interfaceControl?.Protocol as ProtocolVNC;
                 vnc?.RefreshScreen();
             }
             catch (Exception ex)
@@ -541,8 +541,8 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
-                var vnc = interfaceControl?.Protocol as ProtocolVNC;
+                InterfaceControl interfaceControl = GetInterfaceControl();
+                ProtocolVNC vnc = interfaceControl?.Protocol as ProtocolVNC;
                 vnc?.SendSpecialKeys(keys);
             }
             catch (Exception ex)
@@ -555,8 +555,8 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
-                var rdp = interfaceControl?.Protocol as RdpProtocol;
+                InterfaceControl interfaceControl = GetInterfaceControl();
+                RdpProtocol rdp = interfaceControl?.Protocol as RdpProtocol;
                 rdp?.ToggleFullscreen();
             }
             catch (Exception ex)
@@ -570,8 +570,8 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
-                var puttyBase = interfaceControl?.Protocol as PuttyBase;
+                InterfaceControl interfaceControl = GetInterfaceControl();
+                PuttyBase puttyBase = interfaceControl?.Protocol as PuttyBase;
                 puttyBase?.ShowSettingsDialog();
             }
             catch (Exception ex)
@@ -589,15 +589,15 @@ namespace mRemoteNG.UI.Window
                 //clean up. since new items are added below, we have to dispose of any previous items first
                 if (cmenTabExternalApps.DropDownItems.Count > 0)
                 {
-                    for (var i = cmenTabExternalApps.DropDownItems.Count - 1; i >= 0; i--)
+                    for (int i = cmenTabExternalApps.DropDownItems.Count - 1; i >= 0; i--)
                         cmenTabExternalApps.DropDownItems[i].Dispose();
                     cmenTabExternalApps.DropDownItems.Clear();
                 }
 
                 //add ext apps
-                foreach (var externalTool in Runtime.ExternalToolsService.ExternalTools)
+                foreach (ExternalTool externalTool in Runtime.ExternalToolsService.ExternalTools)
                 {
-                    var nItem = new ToolStripMenuItem
+                    ToolStripMenuItem nItem = new()
                     {
                         Text = externalTool.DisplayName,
                         Tag = externalTool,
@@ -621,7 +621,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
+                InterfaceControl interfaceControl = GetInterfaceControl();
                 externalTool.Start(interfaceControl?.Info);
             }
             catch (Exception ex)
@@ -633,7 +633,7 @@ namespace mRemoteNG.UI.Window
 
         private void CloseTabMenu()
         {
-            var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
             if (selectedTab == null) return;
 
             try
@@ -648,11 +648,11 @@ namespace mRemoteNG.UI.Window
 
         private void CloseOtherTabs()
         {
-            var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+            ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
             if (selectedTab == null) return;
             if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple)
             {
-                var result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
+                DialogResult result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProductName,
                                                     string.Format(Language.ConfirmCloseConnectionOthersInstruction,
                                                                   selectedTab.TabText), "", "", "",
                                                     Language.CheckboxDoNotShowThisMessageAgain,
@@ -669,9 +669,9 @@ namespace mRemoteNG.UI.Window
                 }
             }
 
-            foreach (var dockContent in connDock.DocumentsToArray())
+            foreach (IDockContent dockContent in connDock.DocumentsToArray())
             {
-                var tab = (ConnectionTab)dockContent;
+                ConnectionTab tab = (ConnectionTab)dockContent;
                 if (selectedTab != tab)
                 {
                     tab.Close();
@@ -683,15 +683,15 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
+                ConnectionTab selectedTab = (ConnectionTab)GetInterfaceControl()?.Parent;
                 if (selectedTab == null) return;
-                var dockPane = selectedTab.Pane;
+                DockPane dockPane = selectedTab.Pane;
 
-                var pastTabToKeepAlive = false;
-                var connectionsToClose = new List<ConnectionTab>();
-                foreach (var dockContent in dockPane.Contents)
+                bool pastTabToKeepAlive = false;
+                List<ConnectionTab> connectionsToClose = new();
+                foreach (IDockContent dockContent in dockPane.Contents)
                 {
-                    var tab = (ConnectionTab)dockContent;
+                    ConnectionTab tab = (ConnectionTab)dockContent;
                     if (pastTabToKeepAlive)
                         connectionsToClose.Add(tab);
 
@@ -699,7 +699,7 @@ namespace mRemoteNG.UI.Window
                         pastTabToKeepAlive = true;
                 }
 
-                foreach (var tab in connectionsToClose)
+                foreach (ConnectionTab tab in connectionsToClose)
                 {
                     tab.Close();
                 }
@@ -714,7 +714,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
+                InterfaceControl interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
                 Runtime.ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
             }
@@ -728,7 +728,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
+                InterfaceControl interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null)
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Reconnect (UI.Window.ConnectionWindow) failed. Could not find InterfaceControl.");
@@ -748,12 +748,12 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = GetInterfaceControl();
+                InterfaceControl interfaceControl = GetInterfaceControl();
                 if (interfaceControl == null) return;
-                using (var frmInputBox = new FrmInputBox(Language.NewTitle, Language.NewTitle,
+                using (FrmInputBox frmInputBox = new(Language.NewTitle, Language.NewTitle,
                                                          ((ConnectionTab)interfaceControl.Parent).TabText))
                 {
-                    var dr = frmInputBox.ShowDialog();
+                    DialogResult dr = frmInputBox.ShowDialog();
                     if (dr != DialogResult.OK) return;
                     if (!string.IsNullOrEmpty(frmInputBox.returnValue))
                         ((ConnectionTab)interfaceControl.Parent).TabText = frmInputBox.returnValue.Replace("&", "&&");
@@ -771,7 +771,7 @@ namespace mRemoteNG.UI.Window
 
         public void Prot_Event_Closed(object sender)
         {
-            var protocolBase = sender as ProtocolBase;
+            ProtocolBase protocolBase = sender as ProtocolBase;
             if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
             if (tabPage.Disposing || tabPage.IsDisposed) return;
             tabPage.protocolClose = true;

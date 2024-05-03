@@ -30,15 +30,15 @@ namespace mRemoteNG.Config.Connections
         {
             try
             {
-                var cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
-                var serializerFactory = new XmlConnectionSerializerFactory();
-                
-                var xmlConnectionsSerializer = serializerFactory.Build(cryptographyProvider, connectionTreeModel, _saveFilter, Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
+                ICryptographyProvider cryptographyProvider = new CryptoProviderFactoryFromSettings().Build();
+                XmlConnectionSerializerFactory serializerFactory = new();
 
-                var rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
-                var xml = xmlConnectionsSerializer.Serialize(rootNode);
+                Serializers.ISerializer<Connection.ConnectionInfo, string> xmlConnectionsSerializer = serializerFactory.Build(cryptographyProvider, connectionTreeModel, _saveFilter, Properties.OptionsSecurityPage.Default.EncryptCompleteConnectionsFile);
 
-                var fileDataProvider = new FileDataProviderWithRollingBackup(_connectionFileName);
+                RootNodeInfo rootNode = connectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
+                string xml = xmlConnectionsSerializer.Serialize(rootNode);
+
+                FileDataProviderWithRollingBackup fileDataProvider = new(_connectionFileName);
                 fileDataProvider.Save(xml);
             }
             catch (Exception ex)

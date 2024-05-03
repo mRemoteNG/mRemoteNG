@@ -12,15 +12,15 @@ namespace mRemoteNG.Config.Import
     {
         public void Import(string filePath, ContainerInfo destinationContainer)
         {
-            var dataProvider = new FileDataProvider(filePath);
-            var xmlContent = dataProvider.Load();
+            FileDataProvider dataProvider = new(filePath);
+            string xmlContent = dataProvider.Load();
 
-            var deserializer = new PuttyConnectionManagerDeserializer();
-            var connectionTreeModel = deserializer.Deserialize(xmlContent);
+            PuttyConnectionManagerDeserializer deserializer = new();
+            Tree.ConnectionTreeModel connectionTreeModel = deserializer.Deserialize(xmlContent);
 
-            var importedRootNode = connectionTreeModel.RootNodes.First();
+            ContainerInfo importedRootNode = connectionTreeModel.RootNodes.First();
             if (importedRootNode == null) return;
-            var childrenToAdd = importedRootNode.Children.ToArray();
+            Connection.ConnectionInfo[] childrenToAdd = importedRootNode.Children.ToArray();
             destinationContainer.AddChildRange(childrenToAdd);
         }
     }

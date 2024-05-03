@@ -19,10 +19,11 @@ namespace mRemoteNG.UI.Forms
         }
         public static FrmSplashScreenNew GetInstance()
         {
-            if (instance == null)
-                instance = new FrmSplashScreenNew();
+            //instance == null
+            instance ??= new FrmSplashScreenNew();
             return instance;
         }
+
         void LoadFont()
         {
             lblLogoPartA.FontFamily = new System.Windows.Media.FontFamily(new Uri("pack://application:,,,/"), "./UI/Font/#HandelGotDBol");

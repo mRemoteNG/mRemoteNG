@@ -76,14 +76,14 @@ namespace mRemoteNG.UI
             if (image == null)
                 throw new ArgumentNullException(nameof(image));
 
-            var width = ScaleWidth(image.Width);
-            var height = ScaleHeight(image.Height);
-            var destRect = new Rectangle(0, 0, width, height);
-            var destImage = new Bitmap(width, height);
+            int width = ScaleWidth(image.Width);
+            int height = ScaleHeight(image.Height);
+            Rectangle destRect = new(0, 0, width, height);
+            Bitmap destImage = new(width, height);
 
             destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
-            using (var graphics = Graphics.FromImage(destImage))
+            using (Graphics graphics = Graphics.FromImage(destImage))
             {
                 graphics.CompositingMode = CompositingMode.SourceCopy;
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
@@ -91,7 +91,7 @@ namespace mRemoteNG.UI
                 graphics.SmoothingMode = SmoothingMode.HighQuality;
                 graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-                using (var wrapMode = new ImageAttributes())
+                using (ImageAttributes wrapMode = new())
                 {
                     wrapMode.SetWrapMode(WrapMode.TileFlipXY);
                     graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);

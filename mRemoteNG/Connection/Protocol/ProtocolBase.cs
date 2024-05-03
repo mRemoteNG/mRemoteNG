@@ -62,7 +62,7 @@ namespace mRemoteNG.Connection.Protocol
 
         public ConnectionInfo.Force Force { get; set; }
 
-        protected readonly System.Timers.Timer tmrReconnect = new System.Timers.Timer(5000);
+        protected readonly System.Timers.Timer tmrReconnect = new(5000);
         protected ReconnectGroup ReconnectGroup;
 
         protected ProtocolBase(string name)
@@ -145,7 +145,7 @@ namespace mRemoteNG.Connection.Protocol
 
         public virtual void Close()
         {
-            var t = new Thread(CloseBG);
+            Thread t = new(CloseBG);
             t.SetApartmentState(ApartmentState.STA);
             t.IsBackground = true;
             t.Start();
@@ -208,7 +208,7 @@ namespace mRemoteNG.Connection.Protocol
             }
             if (_interfaceControl.InvokeRequired)
             {
-                var s = new DisposeInterfaceCB(DisposeInterface);
+                DisposeInterfaceCB s = new(DisposeInterface);
                 _interfaceControl.Invoke(s);
             }
             else
@@ -227,7 +227,7 @@ namespace mRemoteNG.Connection.Protocol
 
             if (_interfaceControl.Parent.InvokeRequired)
             {
-                var s = new SetTagToNothingCB(SetTagToNothing);
+                SetTagToNothingCB s = new(SetTagToNothing);
                 _interfaceControl.Parent.Invoke(s);
             }
             else
@@ -245,7 +245,7 @@ namespace mRemoteNG.Connection.Protocol
 
             if (Control.InvokeRequired)
             {
-                var s = new DisposeControlCB(DisposeControl);
+                DisposeControlCB s = new(DisposeControl);
                 Control.Invoke(s);
             }
             else

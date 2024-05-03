@@ -8,7 +8,7 @@ namespace mRemoteNG.UI.Tabs
     [SupportedOSPlatform("windows")]
     class TabHelper
     {
-        private static readonly Lazy<TabHelper> lazyHelper = new Lazy<TabHelper>(() => new TabHelper());
+        private static readonly Lazy<TabHelper> lazyHelper = new(() => new TabHelper());
 
         public static TabHelper Instance => lazyHelper.Value;
 
@@ -31,7 +31,7 @@ namespace mRemoteNG.UI.Tabs
 
         private void findCurrentPanel()
         {
-            var currentForm = currentTab.Parent;
+            System.Windows.Forms.Control currentForm = currentTab.Parent;
             while (currentForm != null && !(currentForm is ConnectionWindow))
             {
                 currentForm = currentForm.Parent;

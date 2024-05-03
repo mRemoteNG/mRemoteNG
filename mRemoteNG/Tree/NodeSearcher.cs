@@ -24,9 +24,9 @@ namespace mRemoteNG.Tree
         {
             ResetMatches();
             if (searchText == "") return Matches;
-            var nodes = _connectionTreeModel.GetRecursiveChildList();
-            var searchTextLower = searchText.ToLowerInvariant();
-            foreach (var node in nodes)
+            IReadOnlyList<ConnectionInfo> nodes = _connectionTreeModel.GetRecursiveChildList();
+            string searchTextLower = searchText.ToLowerInvariant();
+            foreach (ConnectionInfo node in nodes)
             {
                 if (node.Name.ToLowerInvariant().Contains(searchTextLower) ||
                     node.Description.ToLowerInvariant().Contains(searchTextLower) ||
@@ -41,7 +41,7 @@ namespace mRemoteNG.Tree
 
         public ConnectionInfo NextMatch()
         {
-            var currentMatchIndex = Matches.IndexOf(CurrentMatch);
+            int currentMatchIndex = Matches.IndexOf(CurrentMatch);
             if (!CurrentMatchIsTheLastMatchInTheList())
                 CurrentMatch = Matches[currentMatchIndex + 1];
             return CurrentMatch;
@@ -49,13 +49,13 @@ namespace mRemoteNG.Tree
 
         private bool CurrentMatchIsTheLastMatchInTheList()
         {
-            var currentMatchIndex = Matches.IndexOf(CurrentMatch);
+            int currentMatchIndex = Matches.IndexOf(CurrentMatch);
             return currentMatchIndex >= Matches.Count - 1;
         }
 
         public ConnectionInfo PreviousMatch()
         {
-            var currentMatchIndex = Matches.IndexOf(CurrentMatch);
+            int currentMatchIndex = Matches.IndexOf(CurrentMatch);
             if (!CurrentMatchIsTheFirstMatchInTheList())
                 CurrentMatch = Matches[currentMatchIndex - 1];
             return CurrentMatch;
@@ -63,13 +63,13 @@ namespace mRemoteNG.Tree
 
         private bool CurrentMatchIsTheFirstMatchInTheList()
         {
-            var currentMatchIndex = Matches.IndexOf(CurrentMatch);
+            int currentMatchIndex = Matches.IndexOf(CurrentMatch);
             return currentMatchIndex <= 0;
         }
 
         private void ResetMatches()
         {
-            Matches = new List<ConnectionInfo>();
+            Matches = [];
             CurrentMatch = null;
         }
     }

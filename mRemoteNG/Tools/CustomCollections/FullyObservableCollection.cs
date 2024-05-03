@@ -46,10 +46,10 @@ namespace mRemoteNG.Tools.CustomCollections
         /// <param name="items"></param>
         public void AddRange(IEnumerable<T> items)
         {
-            var itemsAsList = items.ToList();
+            List<T> itemsAsList = items.ToList();
             _eventsAllowed = false;
 
-            foreach (var item in itemsAsList)
+            foreach (T item in itemsAsList)
                 Add(item);
 
             _eventsAllowed = true;
@@ -65,7 +65,7 @@ namespace mRemoteNG.Tools.CustomCollections
 
         public bool Remove(T item)
         {
-            var worked = _list.Remove(item);
+            bool worked = _list.Remove(item);
             if (!worked) return worked;
             UnsubscribeFromChildEvents(item);
             RaiseCollectionChangedEvent(ActionType.Removed, new[] {item});
@@ -74,7 +74,7 @@ namespace mRemoteNG.Tools.CustomCollections
 
         public void RemoveAt(int index)
         {
-            var item = _list[index];
+            T item = _list[index];
             _list.RemoveAt(index);
             UnsubscribeFromChildEvents(item);
             RaiseCollectionChangedEvent(ActionType.Removed, new[] {item});
@@ -82,9 +82,9 @@ namespace mRemoteNG.Tools.CustomCollections
 
         public void Clear()
         {
-            var oldItems = _list.ToArray();
+            T[] oldItems = _list.ToArray();
             _list.Clear();
-            foreach (var item in oldItems)
+            foreach (T item in oldItems)
                 UnsubscribeFromChildEvents(item);
             RaiseCollectionChangedEvent(ActionType.Removed, oldItems);
         }

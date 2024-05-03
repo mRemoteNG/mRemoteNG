@@ -24,15 +24,15 @@ namespace mRemoteNG.Config.Putty
 
         public virtual IEnumerable<PuttySessionInfo> GetSessions()
         {
-            var sessionNamesFromProvider = GetSessionNames(true);
+            string[] sessionNamesFromProvider = GetSessionNames(true);
 
-            foreach (var sessionName in GetSessionNamesToAdd(sessionNamesFromProvider))
+            foreach (string sessionName in GetSessionNamesToAdd(sessionNamesFromProvider))
             {
-                var sessionInfo = GetSession(sessionName);
+                PuttySessionInfo sessionInfo = GetSession(sessionName);
                 AddSession(sessionInfo);
             }
 
-            foreach (var session in GetSessionToRemove(sessionNamesFromProvider))
+            foreach (PuttySessionInfo session in GetSessionToRemove(sessionNamesFromProvider))
             {
                 RemoveSession(session);
             }
@@ -44,18 +44,18 @@ namespace mRemoteNG.Config.Putty
         private IEnumerable<string> GetSessionNamesToAdd(IEnumerable<string> sessionNamesFromProvider)
         {
             if (sessionNamesFromProvider == null) { return Enumerable.Empty<string>(); }
-            var currentlyKnownSessionNames = Sessions.Select(session => session.Name);
-            var sessionNamesToAdd = sessionNamesFromProvider.Except(currentlyKnownSessionNames);
+            IEnumerable<string> currentlyKnownSessionNames = Sessions.Select(session => session.Name);
+            IEnumerable<string> sessionNamesToAdd = sessionNamesFromProvider.Except(currentlyKnownSessionNames);
             return sessionNamesToAdd;
         }
 
         private IEnumerable<PuttySessionInfo> GetSessionToRemove(IEnumerable<string> sessionNamesFromProvider)
         {
             if (sessionNamesFromProvider == null) return Enumerable.Empty<PuttySessionInfo>();
-            var currentlyKnownSessionNames = Sessions.Select(session => session.Name);
-            var normalizedSessionNames =
+            IEnumerable<string> currentlyKnownSessionNames = Sessions.Select(session => session.Name);
+            IEnumerable<string> normalizedSessionNames =
                 sessionNamesFromProvider.Select(name => WebUtility.UrlDecode(name));
-            var sessionNamesToRemove = currentlyKnownSessionNames.Except(normalizedSessionNames);
+            IEnumerable<string> sessionNamesToRemove = currentlyKnownSessionNames.Except(normalizedSessionNames);
             return Sessions.Where(session => sessionNamesToRemove.Contains(session.Name));
         }
 

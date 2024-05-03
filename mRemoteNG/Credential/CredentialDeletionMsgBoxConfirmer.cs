@@ -23,7 +23,7 @@ namespace mRemoteNG.Credential
 
         public bool Confirm(IEnumerable<ICredentialRecord> confirmationTargets)
         {
-            var targetsArray = confirmationTargets.ToArray();
+            ICredentialRecord[] targetsArray = confirmationTargets.ToArray();
             if (targetsArray.Length == 0) return false;
             if (targetsArray.Length > 1)
                 return PromptUser(string.Format("Are you sure you want to delete these {0} selected credentials?", targetsArray.Length));
@@ -32,7 +32,7 @@ namespace mRemoteNG.Credential
 
         private bool PromptUser(string promptMessage)
         {
-            var msgBoxResponse = _confirmationFunc.Invoke(promptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult msgBoxResponse = _confirmationFunc.Invoke(promptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return msgBoxResponse == DialogResult.Yes;
         }
     }

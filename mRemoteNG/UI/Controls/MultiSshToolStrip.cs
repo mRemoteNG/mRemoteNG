@@ -19,9 +19,9 @@ namespace mRemoteNG.UI.Controls
         private ToolStripLabel lblMultiSsh;
         private ToolStripTextBox txtMultiSsh;
         private int previousCommandIndex = 0;
-        private readonly ArrayList processHandlers = new ArrayList();
-        private readonly ArrayList quickConnectConnections = new ArrayList();
-        private readonly ArrayList previousCommands = new ArrayList();
+        private readonly ArrayList processHandlers = [];
+        private readonly ArrayList quickConnectConnections = [];
+        private readonly ArrayList previousCommands = [];
         private readonly ThemeManager _themeManager;
 
         private int CommandHistoryLength { get; set; } = 100;
@@ -43,7 +43,7 @@ namespace mRemoteNG.UI.Controls
 
         private ArrayList ProcessOpenConnections(ConnectionInfo connection)
         {
-            var handlers = new ArrayList();
+            ArrayList handlers = new();
 
             foreach (ProtocolBase _base in connection.OpenConnections)
             {
@@ -76,9 +76,9 @@ namespace mRemoteNG.UI.Controls
                 processHandlers.AddRange(ProcessOpenConnections(connection));
             }
 
-            var connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
+            System.Collections.Generic.IEnumerable<ConnectionInfo> connectionTreeConnections = Runtime.ConnectionsService.ConnectionTreeModel.GetRecursiveChildList().Where(item => item.OpenConnections.Count > 0);
 
-            foreach (var connection in connectionTreeConnections)
+            foreach (ConnectionInfo connection in connectionTreeConnections)
             {
                 processHandlers.AddRange(ProcessOpenConnections(connection));
             }
@@ -116,7 +116,7 @@ namespace mRemoteNG.UI.Controls
 
             if (e.KeyCode == Keys.Enter)
             {
-                foreach (var chr1 in txtMultiSsh.Text)
+                foreach (char chr1 in txtMultiSsh.Text)
                 {
                     SendAllKeystrokes(NativeMethods.WM_CHAR, Convert.ToByte(chr1));
                 }

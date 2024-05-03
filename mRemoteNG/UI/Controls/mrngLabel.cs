@@ -92,7 +92,7 @@ namespace mRemoteNG.UI.Controls
             }
             else
             {
-                var disabledtextLabel =
+                Color disabledtextLabel =
                     _themeManager.ActiveTheme.ExtendedPalette.getColor("TextBox_Disabled_Foreground");
                 TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, disabledtextLabel, _textFormatFlags);
             }

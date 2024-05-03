@@ -40,8 +40,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 
                 if (connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.AccessToken)
                 {
-                    var authToken = connectionInfo.RDGatewayAccessToken;
-                    var encryptedAuthToken = RdGatewayAccessTokenHelper.EncryptAuthCookieString(authToken);
+                    string authToken = connectionInfo.RDGatewayAccessToken;
+                    string encryptedAuthToken = RdGatewayAccessTokenHelper.EncryptAuthCookieString(authToken);
                     RdpClient7.TransportSettings3.GatewayEncryptedAuthCookie = encryptedAuthToken;  
                     RdpClient7.TransportSettings3.GatewayEncryptedAuthCookieSize = (uint)encryptedAuthToken.Length;
                     RdpClient7.TransportSettings3.GatewayCredsSource = 5;

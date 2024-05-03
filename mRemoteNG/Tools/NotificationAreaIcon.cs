@@ -32,9 +32,9 @@ namespace mRemoteNG.Tools
                     Image = Properties.Resources.ASPWebSite_16x
                 };
 
-                var cMenSep1 = new ToolStripSeparator();
+                ToolStripSeparator cMenSep1 = new();
 
-                var cMenExit = new ToolStripMenuItem {Text = Language.Exit};
+                ToolStripMenuItem cMenExit = new() { Text = Language.Exit};
                 cMenExit.Click += cMenExit_Click;
 
                 _cMen = new ContextMenuStrip
@@ -82,7 +82,7 @@ namespace mRemoteNG.Tools
         {
             if (e.Button != MouseButtons.Right) return;
             _cMenCons.DropDownItems.Clear();
-            var menuItemsConverter = new ConnectionsTreeToMenuItemsConverter
+            ConnectionsTreeToMenuItemsConverter menuItemsConverter = new()
             {
                 MouseUpEventHandler = ConMenItem_MouseUp
             };

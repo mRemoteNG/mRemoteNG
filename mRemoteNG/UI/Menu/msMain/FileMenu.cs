@@ -137,7 +137,7 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileNew_Click(object sender, EventArgs e)
         {
-            using (var saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
+            using (SaveFileDialog saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
             {
                 if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 {
@@ -152,7 +152,7 @@ namespace mRemoteNG.UI.Menu
         {
             if (Runtime.ConnectionsService.IsConnectionsFileLoaded)
             {
-                var msgBoxResult = MessageBox.Show(Language.SaveConnectionsFileBeforeOpeningAnother,
+                DialogResult msgBoxResult = MessageBox.Show(Language.SaveConnectionsFileBeforeOpeningAnother,
                                                    Language.Save, MessageBoxButtons.YesNoCancel);
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (msgBoxResult)
@@ -175,12 +175,12 @@ namespace mRemoteNG.UI.Menu
 
         private void mMenFileSaveAs_Click(object sender, EventArgs e)
         {
-            using (var saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
+            using (SaveFileDialog saveFileDialog = DialogFactory.ConnectionsSaveAsDialog())
             {
                 if (saveFileDialog.ShowDialog(FrmMain.Default) != DialogResult.OK)
                     return;
 
-                var newFileName = saveFileDialog.FileName;
+                string newFileName = saveFileDialog.FileName;
 
                 Runtime.ConnectionsService.SaveConnections(Runtime.ConnectionsService.ConnectionTreeModel, false, new SaveFilter(), newFileName);
 

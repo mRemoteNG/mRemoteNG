@@ -27,15 +27,15 @@ namespace mRemoteNG.Config.Connections
 
         public ConnectionTreeModel Load()
         {
-            var dataProvider = new FileDataProvider(_connectionFilePath);
-            var xmlString = dataProvider.Load();
-            var deserializer = new XmlConnectionsDeserializer(PromptForPassword);
+            FileDataProvider dataProvider = new(_connectionFilePath);
+            string xmlString = dataProvider.Load();
+            XmlConnectionsDeserializer deserializer = new(PromptForPassword);
             return deserializer.Deserialize(xmlString);
         }
 
         private Optional<SecureString> PromptForPassword()
         {
-            var password = MiscTools.PasswordDialog(Path.GetFileName(_connectionFilePath), false);
+            Optional<SecureString> password = MiscTools.PasswordDialog(Path.GetFileName(_connectionFilePath), false);
             return password;
         }
     }

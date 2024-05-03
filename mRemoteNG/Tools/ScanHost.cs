@@ -58,8 +58,8 @@ namespace mRemoteNG.Tools
         public ScanHost(string host)
         {
             HostIp = host;
-            OpenPorts = new ArrayList();
-            ClosedPorts = new ArrayList();
+            OpenPorts = [];
+            ClosedPorts = [];
         }
 
         public override string ToString()
@@ -107,7 +107,7 @@ namespace mRemoteNG.Tools
         {
             get
             {
-                var strOpen = "";
+                string strOpen = "";
                 foreach (int p in OpenPorts)
                 {
                     strOpen += p + ", ";
@@ -121,7 +121,7 @@ namespace mRemoteNG.Tools
         {
             get
             {
-                var strClosed = "";
+                string strClosed = "";
                 foreach (int p in ClosedPorts)
                 {
                     strClosed += p + ", ";
