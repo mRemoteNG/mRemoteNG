@@ -14,6 +14,7 @@ using System.Linq;
 using System.Runtime.Versioning;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -127,6 +128,28 @@ namespace mRemoteNG.Connection.Protocol
                                 Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
                             }
                         }
+                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
+                        {
+                            try
+                            {
+                                ExternalConnectors.CPS.PasswordstateInterface.FetchSecretFromServer($"{UserViaAPI}", out username, out password, out domain, out privatekey);
+
+                                if (!string.IsNullOrEmpty(privatekey))
+                                {
+                                    optionalTemporaryPrivateKeyPath = Path.GetTempFileName();
+                                    File.WriteAllText(optionalTemporaryPrivateKeyPath, privatekey);
+                                    FileInfo fileInfo = new(optionalTemporaryPrivateKeyPath)
+                                    {
+                                        Attributes = FileAttributes.Temporary
+                                    };
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Event_ErrorOccured(this, "Passwordstate Interface Error: " + ex.Message, 0);
+                            }
+                        }
+
 
                         if (string.IsNullOrEmpty(username))
                         {

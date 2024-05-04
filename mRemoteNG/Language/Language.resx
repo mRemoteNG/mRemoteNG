@@ -2289,7 +2289,10 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="ECPDelineaSecretServer" xml:space="preserve">
     <value>Delinea Secret Server</value>
   </data>
-  <data name="ECPNone" xml:space="preserve">
+    <data name="ECPClickstudiosPasswordstate" xml:space="preserve">
+    <value>Clickstudios Passwordstate</value>
+  </data>
+    <data name="ECPNone" xml:space="preserve">
     <value>None</value>
   </data>
   <data name="EAPAmazonWebServices" xml:space="preserve">

@@ -9,6 +9,10 @@ namespace mRemoteNG.Connection
         None = 0,
 
         [LocalizedAttributes.LocalizedDescription(nameof(Language.ECPDelineaSecretServer))]
-        DelineaSecretServer = 1
+        DelineaSecretServer = 1,
+
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.ECPClickstudiosPasswordstate))]
+        ClickstudiosPasswordState = 2
+
     }
 }

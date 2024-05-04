@@ -15,14 +15,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Core" Version="3.7.303.25" />
-    <PackageReference Include="AWSSDK.EC2" Version="3.7.326" />
+    <PackageReference Include="AWSSDK.Core" Version="3.7.303.26" />
+    <PackageReference Include="AWSSDK.EC2" Version="3.7.326.1" />
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="AWS\AWSConnectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CPS\CPSConnectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="DSS\SSConnectionForm.cs">

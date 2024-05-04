@@ -238,7 +238,8 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid
             {
                 strHide.Add(nameof(AbstractConnectionRecord.UserViaAPI));
             }
-            else if (SelectedConnectionInfo.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
+            else if (SelectedConnectionInfo.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer
+                || SelectedConnectionInfo.ExternalCredentialProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
             {
                 strHide.Add(nameof(AbstractConnectionRecord.Username));
                 strHide.Add(nameof(AbstractConnectionRecord.Password));
