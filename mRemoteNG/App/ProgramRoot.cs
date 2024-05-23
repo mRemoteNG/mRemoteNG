@@ -21,6 +21,12 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
+            /*
+             * Temporarily disable LocalSettingsManager initialization at startup
+             * due to unfinished implementation causing build errors.
+             * Uncomment if needed in your local repo.
+             */
+            /*
             /*var settingsManager = new LocalSettingsManager();
 
             // Check if the database exists
