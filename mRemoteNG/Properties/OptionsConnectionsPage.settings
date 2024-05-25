@@ -5,7 +5,7 @@
     <Setting Name="AutoSaveEveryMinutes" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ConnectrionFilePath" Type="System.String" Scope="User">
+    <Setting Name="ConnectionFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="cbConnectionsPageInOptionMenu" Type="System.Boolean" Scope="User">

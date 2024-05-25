@@ -152,6 +152,8 @@ namespace mRemoteNG.Connection
 
             IsConnectionsFileLoaded = true;
             ConnectionFileName = connectionFileName;
+            Properties.OptionsConnectionsPage.Default.ConnectionFilePath = connectionFileName;
+
             UsingDatabase = useDatabase;
 
             if (!import)
@@ -308,9 +310,9 @@ namespace mRemoteNG.Connection
                 return GetDefaultStartupConnectionFileName();
             }
             */
-            if (Properties.OptionsConnectionsPage.Default.ConnectrionFilePath != "")
+            if (Properties.OptionsConnectionsPage.Default.ConnectionFilePath != "")
             {
-                return Properties.OptionsConnectionsPage.Default.ConnectrionFilePath;
+                return Properties.OptionsConnectionsPage.Default.ConnectionFilePath;
             }
             else
             {
