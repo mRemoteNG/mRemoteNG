@@ -155,8 +155,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void buttonOpenLogFile_Click(object sender, System.EventArgs e)
         {
-            if (Path.GetExtension(textBoxLogPath.Text) == ".log")
-                Process.Start(textBoxLogPath.Text);
+            string logFile = textBoxLogPath.Text;
+            bool doesExist = File.Exists(logFile);
+
+            if (doesExist && OpenLogAssociated(logFile))
+                return;
+            else if (doesExist && OpenLogNotepad(logFile))
+                return;
+
+            OpenLogLocation(logFile);
         }
 
         private void chkLogToCurrentDir_CheckedChanged(object sender, System.EventArgs e)
@@ -165,5 +172,71 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             buttonRestoreDefaultLogPath.Enabled = !chkLogToCurrentDir.Checked;
             textBoxLogPath.Text = Logger.DefaultLogPath;
         }
+
+        #region Privat Methods to Open Logfile
+
+        /// <summary>
+        /// Attempts to open a file using the default application associated with its file type.
+        /// </summary>
+        /// <param name="path">The path of the file to be opened.</param>
+        /// <returns>True if the operation was successful; otherwise, false.</returns>
+        private static bool OpenLogAssociated(string path)
+        {
+            try
+            {
+                // Open the file using the default application associated with its file type based on the user's preference
+                Process.Start(path);
+                return true;
+            }
+            catch
+            {
+                // If necessary, the error can be logged here.
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Attempts to open a file in Notepad, the default text editor on Windows systems.
+        /// </summary>
+        /// <param name="path">The path of the file to be opened in Notepad.</param>
+        /// <returns>True if the operation was successful; otherwise, false.</returns>
+        private static bool OpenLogNotepad(string path)
+        {
+            try
+            {
+                // Open it in "Notepad" (Windows default editor).
+                // Usually available on all Windows systems
+                Process.Start("notepad.exe", path);
+                return true;
+            }
+            catch
+            {
+                // If necessary, the error can be logged here.
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Attempts to open the location of a specified file in Windows Explorer.
+        /// </summary>
+        /// <param name="path">The path of the file whose location needs to be opened.</param>
+        /// <returns>True if the operation was successful; otherwise, false.</returns>
+        private static bool OpenLogLocation(string path)
+        {
+            try
+            {
+                /// when all fails open filelocation to logfile...
+                // Open Windows Explorer to the directory containing the file
+                Process.Start("explorer.exe", $"/select,\"{path}\"");
+                return true;
+            }
+            catch
+            {
+                // If necessary, the error can be logged here.
+                return false;
+            }
+        }
+
+        #endregion
     }
 }
