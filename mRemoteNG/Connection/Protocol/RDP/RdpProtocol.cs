@@ -18,6 +18,8 @@ using MSTSCLib;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using FileDialog = Microsoft.Win32.FileDialog;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
@@ -450,8 +452,20 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             {
                                 Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
                             }
-
                         }
+                        else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
+                        {
+                            try
+                            {
+                                string RDGUserViaAPI = InterfaceControl.Info.RDGatewayUserViaAPI;
+                                ExternalConnectors.CPS.PasswordstateInterface.FetchSecretFromServer($"{RDGUserViaAPI}", out gwu, out gwp, out gwd, out pkey);
+                            }
+                            catch (Exception ex)
+                            {
+                                Event_ErrorOccured(this, "Passwordstate Interface Error: " + ex.Message, 0);
+                            }
+                        }
+
 
                         if (connectionInfo.RDGatewayUseConnectionCredentials != RDGatewayUseConnectionCredentials.AccessToken)
                         {
@@ -538,7 +552,17 @@ namespace mRemoteNG.Connection.Protocol.RDP
                     {
                         Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
                     }
-
+                }
+                else if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.ClickstudiosPasswordState)
+                {
+                    try
+                    {
+                        ExternalConnectors.CPS.PasswordstateInterface.FetchSecretFromServer($"{userViaApi}", out userName, out password, out domain, out pkey);
+                    }
+                    catch (Exception ex)
+                    {
+                        Event_ErrorOccured(this, "Passwordstate Interface Error: " + ex.Message, 0);
+                    }
                 }
 
                 if (string.IsNullOrEmpty(userName))

@@ -1808,6 +1808,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clickstudios Passwordstate.
+        /// </summary>
+        internal static string ECPClickstudiosPasswordstate {
+            get {
+                return ResourceManager.GetString("ECPClickstudiosPasswordstate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delinea Secret Server.
         /// </summary>
         internal static string ECPDelineaSecretServer {
