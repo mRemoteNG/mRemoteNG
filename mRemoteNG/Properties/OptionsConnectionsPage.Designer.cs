@@ -38,12 +38,12 @@ namespace mRemoteNG.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ConnectrionFilePath {
+        public string ConnectionFilePath {
             get {
-                return ((string)(this["ConnectrionFilePath"]));
+                return ((string)(this["ConnectionFilePath"]));
             }
             set {
-                this["ConnectrionFilePath"] = value;
+                this["ConnectionFilePath"] = value;
             }
         }
         
