@@ -9,18 +9,13 @@ using mRemoteNG.Resources.Language;
 namespace mRemoteNG.Connection.Protocol.PowerShell
 {
     [SupportedOSPlatform("windows")]
-    public class ProtocolPowerShell : ProtocolBase
+    public class ProtocolPowerShell(ConnectionInfo connectionInfo) : ProtocolBase
     {
         #region Private Fields
 
         private IntPtr _handle;
-        private readonly ConnectionInfo _connectionInfo;
+        private readonly ConnectionInfo _connectionInfo = connectionInfo;
         private ConsoleControl.ConsoleControl _consoleControl;
-
-        public ProtocolPowerShell(ConnectionInfo connectionInfo)
-        {
-            _connectionInfo = connectionInfo;
-        }
 
         #endregion
 
@@ -45,7 +40,9 @@ namespace mRemoteNG.Connection.Protocol.PowerShell
                  * Prepair powershell script parameter and create script
                  */
                 // Path to the Windows PowerShell executable; can be configured through options.
-                string psExe = @"C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell.exe";
+                //string psExe = @"C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell.exe"; //old ps
+                string psExe = @"C:\Program Files\PowerShell\7\pwsh.exe"; //new ps
+                //string psExe = @"%LocalAppData%\Microsoft\WindowsApps\wt.exe"; //test for terminal
 
                 // Maximum number of login attempts; can be configured through options.
                 int psLoginAttempts = 3;
