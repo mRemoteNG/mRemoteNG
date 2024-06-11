@@ -36,7 +36,7 @@ namespace mRemoteNG.UI.Tabs
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern uint SendMessage(IntPtr hWnd, int Msg, uint wParam, uint lParam);
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        //[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
             int WM_NCLBUTTONDOWN = 0x00A1;
@@ -53,9 +53,9 @@ namespace mRemoteNG.UI.Tabs
                 if ((uint)m.WParam == 8) // Check if button down occured in minimize box
                 {
                     if (WindowState == FormWindowState.Minimized)
-                        FloatWindowNG.SendMessage(Handle, (int)WM_SYSCOMMAND, (uint)SC_RESTORE, 0);
+                        _ = FloatWindowNG.SendMessage(Handle, (int)WM_SYSCOMMAND, (uint)SC_RESTORE, 0);
                     else
-                        FloatWindowNG.SendMessage(Handle, (int)WM_SYSCOMMAND, (uint)SC_MINIMIZE, 0);
+                        _ = FloatWindowNG.SendMessage(Handle, (int)WM_SYSCOMMAND, (uint)SC_MINIMIZE, 0);
 
                     return;
                 }
