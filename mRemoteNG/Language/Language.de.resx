@@ -2047,7 +2047,7 @@ Nightly umfasst Alphas, Betas und Release Candidates.</value>
     <value>Maximale Anmeldeversuche erreicht. Verbindung erneut initiieren.</value>
     <comment>C# to Powershell transfer issue with encoding possible</comment>
   </data>
-  <data name="OptionsAdminInfo" xml:space="preserve">
+  <data name="OptionsCompanyPolicyMessage" xml:space="preserve">
     <value>*Einige Einstellungen werden von Ihrem Unternehmen festgelegt. Für weitere Informationen wenden Sie sich an Ihren Systemadministrator.</value>
   </data>
 </root>

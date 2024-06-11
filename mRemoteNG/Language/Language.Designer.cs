@@ -3399,9 +3399,9 @@ namespace mRemoteNG.Resources.Language {
         /// <summary>
         ///   Looks up a localized string similar to *Some settings are determined by your company. For further information, please contact your administrator.
         /// </summary>
-        internal static string OptionsAdminInfo {
+        internal static string OptionsCompanyPolicyMessage {
             get {
-                return ResourceManager.GetString("OptionsAdminInfo", resourceCulture);
+                return ResourceManager.GetString("OptionsCompanyPolicyMessage", resourceCulture);
             }
         }
         

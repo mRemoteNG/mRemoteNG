@@ -2292,7 +2292,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <data name="ECPClickstudiosPasswordstate" xml:space="preserve">
     <value>Clickstudios Passwordstate</value>
   </data>
-    <data name="ECPNone" xml:space="preserve">
+  <data name="ECPNone" xml:space="preserve">
     <value>None</value>
   </data>
   <data name="EAPAmazonWebServices" xml:space="preserve">
@@ -2365,7 +2365,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="FilterSecureCRT" xml:space="preserve">
     <value>SecureCRT (*.xml)</value>
   </data>
-  <data name="OptionsAdminInfo" xml:space="preserve">
+  <data name="OptionsCompanyPolicyMessage" xml:space="preserve">
     <value>*Some settings are determined by your company. For further information, please contact your administrator</value>
   </data>
 </root>
