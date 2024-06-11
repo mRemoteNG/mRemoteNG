@@ -6,19 +6,27 @@ namespace mRemoteNG.App.Info
     [SupportedOSPlatform("windows")]
     public static class WindowsRegistryInfo
     {
-        #region general parameters
+        #region General Parameters
+
         public const RegistryHive Hive = RegistryHive.LocalMachine;
         public const string RootKey = "SOFTWARE\\mRemoteNG";
+        private const string OptionsSubKey = "Options";
+
         #endregion
 
-        #region subkey location parameters
+        #region Key Locations
+
         // Credential
-        public const string CredentialSubkey = RootKey + "\\Credentials"; // Registry subkey for general credential settings
-        public const string CredentialOptionsSubkey = RootKey + "\\Credentials\\Options"; // Registry subkey for credential options within the credential settings
+        // Registry subkey for general application credentials settings
+        // Registry subkey for credentials options page settings
+        public const string Credential = RootKey + "\\Credentials";
+        public const string CredentialOptions = Credential + "\\" + OptionsSubKey;
 
         // Updates
-        public const string UpdateSubkey        = RootKey + "\\Updates"; // Registry subkey for general update settings
-        public const string UpdateOptionsSubkey = RootKey + "\\Updates\\Options"; // Registry subkey for update options within the update settings
+        // Registry subkey for general application update settings
+        // Registry subkey for updates options page settings
+        public const string Update = RootKey + "\\Updates";
+        public const string UpdateOptions = Update + "\\" + OptionsSubKey;
         #endregion
     }
 }

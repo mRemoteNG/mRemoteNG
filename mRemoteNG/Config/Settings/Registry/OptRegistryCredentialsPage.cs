@@ -9,16 +9,22 @@ namespace mRemoteNG.Config.Settings.Registry
     /// Static utility class that provides access to and management of registry settings on the local machine.
     /// It abstracts complex registry operations and centralizes the handling of various registry keys.
     /// Benefits: Simplified code, enhances maintainability, and ensures consistency. #ReadOnly
-    public sealed partial class OptRegistryCredentialsPage : WindowsRegistryAdvanced
+    public sealed partial class OptRegistryCredentialsPage
     {
         #region option page credential registry settings
+
+        /// <summary>
+        /// Indicates whether modifying credential page settings is enabled.
+        /// </summary>
+        public bool CredentialPageEnabled { get; }
+
         /// <summary>
         /// Specifies the radio button is set to none, windows or custom on the credentials page.
         /// </summary>
         /// <remarks>
         /// When set to noinfo or windows, WindowsCredentials and CustomCredentials are not evaluated and disabled.
         /// </remarks>
-        public WindowsRegistryKeyString UseCredentials { get; }
+        public WinRegistryEntry<string> UseCredentials { get; }
 
         /// <summary>
         /// Specifies the user set via API as the default username.
@@ -26,7 +32,7 @@ namespace mRemoteNG.Config.Settings.Registry
         /// <remarks>
         /// Only avaiable if UseCredentials is set to custom!
         /// </remarks>
-        public WindowsRegistryKeyString UserViaAPIDefault { get; }
+        public WinRegistryEntry<string> UserViaAPIDefault { get; }
 
         /// <summary>
         /// Specifies the default username.
@@ -34,7 +40,7 @@ namespace mRemoteNG.Config.Settings.Registry
         /// <remarks>
         /// Only avaiable if UseCredentials is set to custom!
         /// </remarks>
-        public WindowsRegistryKeyString DefaultUsername { get; }
+        public WinRegistryEntry<string> DefaultUsername { get; }
 
         /// <summary>
         /// Specifies the default password.
@@ -42,7 +48,7 @@ namespace mRemoteNG.Config.Settings.Registry
         /// <remarks>
         /// Only avaiable if UseCredentials is set to custom!
         /// </remarks>
-        //public WindowsRegistryKeyString DefaultPassword { get; }
+        public WinRegistryEntry<string> DefaultPassword { get; }
 
         /// <summary>
         /// Specifies the default domain.
@@ -50,28 +56,27 @@ namespace mRemoteNG.Config.Settings.Registry
         /// <remarks>
         /// Only avaiable if UseCredentials is set to custom!
         /// </remarks>
-        public WindowsRegistryKeyString DefaultDomain { get; }
+        public WinRegistryEntry<string> DefaultDomain { get; }
+
         #endregion
 
         public OptRegistryCredentialsPage()
         {
+            IRegistry regValueUtility = new WinRegistry();
             RegistryHive hive = WindowsRegistryInfo.Hive;
-            string subKey = WindowsRegistryInfo.CredentialOptionsSubkey;
+            string subKey = WindowsRegistryInfo.CredentialOptions;
 
-            UseCredentials = GetStringValidated(hive, subKey, nameof(UseCredentials),
+            CredentialPageEnabled = regValueUtility.GetBoolValue(hive, subKey, nameof(CredentialPageEnabled), true);
+            UseCredentials = new WinRegistryEntry<string>(hive, subKey, nameof(UseCredentials)).SetValidation(
                 new string[] {
                     "noinfo",
                     "windows",
                     "custom"
-                }, true
-             );
-
-            UserViaAPIDefault = GetString(hive, subKey, nameof(UserViaAPIDefault), null);
-            DefaultUsername = GetString(hive, subKey, nameof(DefaultUsername), null);
-            //Currently not supported, but needed for configuration...
-            //DefaultPassword = GetPassword(hive, subKey, nameof(DefaultPassword));
-
-            DefaultDomain = GetString(hive, subKey, nameof(DefaultDomain), null);
+                }).Read();
+            UserViaAPIDefault = new WinRegistryEntry<string>(hive, subKey, nameof(UserViaAPIDefault)).Read();
+            DefaultUsername = new WinRegistryEntry<string>(hive, subKey, nameof(DefaultUsername)).Read();
+            DefaultPassword = new WinRegistryEntry<string>(hive, subKey, nameof(DefaultPassword)).Read();
+            DefaultDomain = new WinRegistryEntry<string>(hive, subKey, nameof(DefaultDomain)).Read();
         }
     }
 }
