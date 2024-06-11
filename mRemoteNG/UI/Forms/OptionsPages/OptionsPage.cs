@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
@@ -42,13 +43,27 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         public virtual void RevertSettings()
         {
         }
+
+        /// <summary>
+        /// Loads registry settings related to update options and proxy configurations.
+        /// This method retrieves values from the registry and initializes the corresponding controls
+        /// on the page with these values. It also updates internal flags and properties accordingly.
+        /// </summary>
         public virtual void LoadRegistrySettings()
         {
         }
-        public virtual bool ShowAdministratorInfo()
+
+        /// <summary>
+        /// Determines if any registry settings are being used.
+        /// </summary>
+        /// <returns>
+        /// A boolean value indicating whether registry settings are used, as determined by the configuration on the options page.
+        /// </returns>
+        public virtual bool ShowRegistrySettingsUsedInfo()
         {
             return false;
         }
+
         public virtual void DisablePage()
         {
         }
@@ -94,10 +109,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 ((TextBox)control).ReadOnly = control.Enabled;
             }
         }
-
-
     }
-	internal class DropdownList
+    internal class DropdownList
     {
         public int Index { get; set; }
         public string DisplayString { get; set; }

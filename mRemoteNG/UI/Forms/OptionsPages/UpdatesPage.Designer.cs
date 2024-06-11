@@ -56,7 +56,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnTestProxy = new MrngButton();
             groupBoxReleaseChannel = new MrngGroupBox();
             pnlDefaultUpdate = new System.Windows.Forms.Panel();
-            lblUpdateAdminInfo = new System.Windows.Forms.Label();
+            lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
             pnlUpdateCheck.SuspendLayout();
             pnlProxy.SuspendLayout();
             tblProxyBasic.SuspendLayout();
@@ -97,6 +97,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency";
             cboUpdateCheckFrequency.Size = new System.Drawing.Size(120, 21);
             cboUpdateCheckFrequency.TabIndex = 1;
+            cboUpdateCheckFrequency.Enabled = false;
             // 
             // btnUpdateCheckNow
             // 
@@ -137,7 +138,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // cboReleaseChannel
             // 
-            cboReleaseChannel._mice = MrngComboBox.MouseState.HOVER;
             cboReleaseChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cboReleaseChannel.FormattingEnabled = true;
             cboReleaseChannel.Location = new System.Drawing.Point(7, 21);
@@ -273,6 +273,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtProxyPassword.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             txtProxyPassword.Location = new System.Drawing.Point(163, 29);
             txtProxyPassword.Name = "txtProxyPassword";
+            txtProxyPassword.PasswordChar = '*';
             txtProxyPassword.Size = new System.Drawing.Size(184, 22);
             txtProxyPassword.TabIndex = 3;
             txtProxyPassword.UseSystemPasswordChar = true;
@@ -332,25 +333,25 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlDefaultUpdate.Controls.Add(pnlProxy);
             pnlDefaultUpdate.Controls.Add(groupBoxReleaseChannel);
             pnlDefaultUpdate.Controls.Add(pnlUpdateCheck);
-            pnlDefaultUpdate.Controls.Add(lblUpdateAdminInfo);
+            pnlDefaultUpdate.Controls.Add(lblRegistrySettingsUsedInfo);
             pnlDefaultUpdate.Dock = System.Windows.Forms.DockStyle.Top;
             pnlDefaultUpdate.Location = new System.Drawing.Point(0, 0);
             pnlDefaultUpdate.Name = "pnlDefaultUpdate";
             pnlDefaultUpdate.Size = new System.Drawing.Size(610, 483);
             pnlDefaultUpdate.TabIndex = 4;
             // 
-            // lblUpdateAdminInfo
+            // lblRegistrySettingsUsedInfo
             // 
-            lblUpdateAdminInfo.BackColor = System.Drawing.SystemColors.ControlLight;
-            lblUpdateAdminInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            lblUpdateAdminInfo.ForeColor = System.Drawing.SystemColors.ControlText;
-            lblUpdateAdminInfo.Location = new System.Drawing.Point(0, 0);
-            lblUpdateAdminInfo.Name = "lblUpdateAdminInfo";
-            lblUpdateAdminInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            lblUpdateAdminInfo.Size = new System.Drawing.Size(610, 30);
-            lblUpdateAdminInfo.TabIndex = 0;
-            lblUpdateAdminInfo.Text = "Some settings are configured by your Administrator. Please contact your administrator for more information.";
-            lblUpdateAdminInfo.Visible = false;
+            lblRegistrySettingsUsedInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            lblRegistrySettingsUsedInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            lblRegistrySettingsUsedInfo.ForeColor = System.Drawing.SystemColors.ControlText;
+            lblRegistrySettingsUsedInfo.Location = new System.Drawing.Point(0, 0);
+            lblRegistrySettingsUsedInfo.Name = "lblRegistrySettingsUsedInfo";
+            lblRegistrySettingsUsedInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            lblRegistrySettingsUsedInfo.Size = new System.Drawing.Size(610, 30);
+            lblRegistrySettingsUsedInfo.TabIndex = 0;
+            lblRegistrySettingsUsedInfo.Text = "Some settings are configured by your Administrator. Please contact your administrator for more information.";
+            lblRegistrySettingsUsedInfo.Visible = false;
             // 
             // UpdatesPage
             // 
@@ -397,7 +398,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private System.Windows.Forms.TableLayoutPanel tblProxyBasic;
         private System.Windows.Forms.TableLayoutPanel tblProxyAuthentication;
         private System.Windows.Forms.Panel pnlDefaultUpdate;
-        internal System.Windows.Forms.Label lblUpdateAdminInfo;
+        internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
         internal MrngComboBox cboUpdateCheckFrequency;
     }
 }
