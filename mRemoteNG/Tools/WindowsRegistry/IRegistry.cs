@@ -6,39 +6,98 @@ using System.Runtime.Versioning;
 namespace mRemoteNG.Tools.WindowsRegistry
 {
     [SupportedOSPlatform("windows")]
-    /// <summary>
-    /// Interface for the Registry class providing methods for interacting with the Windows Registry.
-    /// </summary>
     public interface IRegistry
     {
-        #region registry reader
+        #region Registry Reader
+
+        /// <summary>
+        /// Gets the names of subkeys under the specified registry hive and path.
+        /// </summary>
         string[] GetSubKeyNames(RegistryHive hive, string path);
-        string GetPropertyValue(WindowsRegistryKey key);
-        string GetPropertyValue(RegistryHive hive, string path, string name);
 
+        /// <summary>
+        /// Gets the value of a registry entry specified by its name.
+        /// </summary>
+        string GetValue(RegistryHive hive, string path, string name);
+
+        /// <summary>
+        /// Gets the string value of a registry entry specified by its name.
+        /// </summary>
+        string GetStringValue(RegistryHive hive, string path, string name, string defaultValue = null);
+
+        /// <summary>
+        /// Gets the boolean value of a registry entry specified by its name.
+        /// </summary>
         bool GetBoolValue(RegistryHive hive, string path, string propertyName, bool defaultValue = false);
-        int GetDwordValue(RegistryHive hive, string path, string propertyName, int defaultValue = 0);
 
-        WindowsRegistryKey GetWindowsRegistryKey(RegistryHive hive, string path, string name);
-        WindowsRegistryKey GetWindowsRegistryKey(WindowsRegistryKey key);
+        /// <summary>
+        /// Gets the DWORD value of a registry entry specified by its name.
+        /// </summary>
+        int GetIntegerValue(RegistryHive hive, string path, string propertyName, int defaultValue = -1);
 
-        List<WindowsRegistryKey> GetRegistryEntries(RegistryHive hive, string path);
-        List<WindowsRegistryKey> GetRegistryEntryiesRecursive(RegistryHive hive, string path);
+        /// <summary>
+        /// Retrieves a specific registry entry of type string from the Windows Registry.
+        /// </summary>
+        WinRegistryEntry<string> GetEntry(RegistryHive hive, string path, string name);
+
+        /// <summary>
+        /// Retrieves a list of string-type registry entries from the Windows Registry under the specified path.
+        /// </summary>
+        List<WinRegistryEntry<string>> GetEntries(RegistryHive hive, string path);
+
+        /// <summary>
+        /// Retrieves a list of string-type registry entries from the Windows Registry under the specified path and its subkeys recursively.
+        /// </summary>
+        List<WinRegistryEntry<string>> GetEntriesRecursive(RegistryHive hive, string path);
 
         #endregion
 
-        #region registry writer
-        void SetRegistryValue(WindowsRegistryKey key);
-        void SetRegistryValue(RegistryHive hive, string path, string name, object value, RegistryValueKind valueKind);
-        void DeleteRegistryKey(RegistryHive hive, string path, bool ignoreNotFound = false);
+        #region Registry Writer
+
+        /// <summary>
+        /// Sets the value of a registry entry.
+        /// </summary>
+        void SetValue(RegistryHive hive, string path, string name, object value, RegistryValueKind valueKind);
+
+        /// <summary>
+        /// Creates a new registry key.
+        /// </summary>
+        void CreateKey(RegistryHive hive, string path);
+
+        /// <summary>
+        /// Deletes a registry value.
+        /// </summary>
+        void DeleteRegistryValue(RegistryHive hive, string path, string name);
+
+        /// <summary>
+        /// Deletes a registry key and all its subkeys and values.
+        /// </summary>
+        void DeleteTree(RegistryHive hive, string path);
 
         #endregion
 
-        #region registry tools
+        #region Registry Tools
+
+        /// <summary>
+        /// Converts a string representation of a registry hive to the corresponding RegistryHive enum value.
+        /// </summary>
         RegistryHive ConvertStringToRegistryHive(string hiveString);
+
+        /// <summary>
+        /// Converts a string representation of a registry value kind to the corresponding RegistryValueKind enum value.
+        /// </summary>
         RegistryValueKind ConvertStringToRegistryValueKind(string valueType);
+
+        /// <summary>
+        /// Converts a .NET type to the corresponding RegistryValueKind enum value.
+        /// </summary>
         RegistryValueKind ConvertTypeToRegistryValueKind(Type valueType);
+
+        /// <summary>
+        /// Converts a RegistryValueKind enum value to the corresponding .NET type.
+        /// </summary>
         Type ConvertRegistryValueKindToType(RegistryValueKind valueKind);
+
         #endregion
     }
 }
