@@ -5,6 +5,7 @@ using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Registry;
+using System.DirectoryServices;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -13,8 +14,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     {
         #region Private Fields
         private readonly OptRegistryCredentialsPage _RegistrySettings = new();
-        private bool _pageEnabled = true;
-
         #endregion
 
         public CredentialsPage()
@@ -40,27 +39,28 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblCredentialsUsername.Text = Language.Username;
             lblCredentialsPassword.Text = Language.Password;
             lblCredentialsDomain.Text = Language.Domain;
-            lblCredentialsAdminInfo.Text = Language.OptionsAdminInfo;
+            lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 
         public override void LoadSettings()
         {
-            if (!_pageEnabled) { return; }
+            if (!_RegistrySettings.CredentialPageEnabled)
+                return;
 
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (Properties.OptionsCredentialsPage.Default.EmptyCredentials)
             {
-                case "noinfo":
-                    radCredentialsNoInfo.Checked = true;
-                    break;
-                case "windows":
-                    radCredentialsWindows.Checked = true;
-                    break;
-                case "custom":
-                    radCredentialsCustom.Checked = true;
-                    break;
-            }
-
+                    case "noinfo":
+                        radCredentialsNoInfo.Checked = true;
+                        break;
+                    case "windows":
+                        radCredentialsWindows.Checked = true;
+                        break;
+                    case "custom":
+                        radCredentialsCustom.Checked = true;
+                        break;
+                }
+            
             txtCredentialsUsername.Text = Properties.OptionsCredentialsPage.Default.DefaultUsername;
             LegacyRijndaelCryptographyProvider cryptographyProvider = new();
             txtCredentialsPassword.Text = cryptographyProvider.Decrypt(Properties.OptionsCredentialsPage.Default.DefaultPassword, Runtime.EncryptionKey);
@@ -92,13 +92,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public override void LoadRegistrySettings()
         {
-            if (!CommonRegistrySettings.AllowModifyCredentialSettings)
+            // CredentialPageEnabled reg setting: enabled/default: true; Disabled: false.
+            if (!_RegistrySettings.CredentialPageEnabled)
             {
                 DisablePage();
                 return;
             }
 
-            if (_RegistrySettings.UseCredentials.IsKeyPresent)
+            // UseCredentials reg setting with validation:
+            //  1. Is not set or valid, stop processing.
+            //  2. Set the 'EmptyCredentials' option based on value
+            //  3. Only proceed when "custom"
+            if (!_RegistrySettings.UseCredentials.IsValid) { return; }
+            else if (_RegistrySettings.UseCredentials.IsValid)
             {
                 Properties.OptionsCredentialsPage.Default.EmptyCredentials = _RegistrySettings.UseCredentials.Value;
 
@@ -107,11 +113,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     case "noinfo":
                         DisableControl(radCredentialsWindows);
                         DisableControl(radCredentialsCustom);
-                        break;
+                        SetVisibilitySettingsUsedInfo();
+                        return;
                     case "windows":
                         DisableControl(radCredentialsNoInfo);
                         DisableControl(radCredentialsCustom);
-                        break;
+                        SetVisibilitySettingsUsedInfo();
+                        return;
                     case "custom":
                         DisableControl(radCredentialsNoInfo);
                         DisableControl(radCredentialsWindows);
@@ -119,95 +127,87 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
             }
 
-            if (_RegistrySettings.UseCredentials.Value != "custom") { return; }
+            // ***
+            // The following is only used when set to custom!
 
-
-            if (!CommonRegistrySettings.AllowSaveUsernames)
-            {
-                Properties.OptionsCredentialsPage.Default.DefaultUsername = "";
-                DisableControl(txtCredentialsUsername);
-            }
-            else if (_RegistrySettings.DefaultUsername.IsKeyPresent)
+            // DefaultUsername reg setting: set DefaultUsername option based on value
+            if (_RegistrySettings.DefaultUsername.IsSet)
             {
                 Properties.OptionsCredentialsPage.Default.DefaultUsername = _RegistrySettings.DefaultUsername.Value;
                 DisableControl(txtCredentialsUsername);
             }
 
-            if (!CommonRegistrySettings.AllowSavePasswords)
+            // DefaultPassword reg setting:
+            //  1. Test decription works to prevents potential issues
+            //  2. Set DefaultPassword option based on value
+            //  3. Clears reg setting if fails
+            if (_RegistrySettings.DefaultPassword.IsSet)
             {
-                Properties.OptionsCredentialsPage.Default.DefaultPassword = "";
-                DisableControl(txtCredentialsPassword);
-            }
-            //else if (_RegistrySettings.DefaultPassword.IsKeyPresent)
-            //{
-            //    Properties.OptionsCredentialsPage.Default.DefaultPassword = _RegistrySettings.DefaultPassword.Value;
-            //    DisableControl(txtCredentialsPassword);
-            //}
+                try
+                {
+                    LegacyRijndaelCryptographyProvider cryptographyProvider = new();
+                    string decryptedPassword;
+                    string defaultPassword = _RegistrySettings.DefaultPassword.Value;
 
-            if (_RegistrySettings.DefaultDomain.IsKeyPresent)
+                    decryptedPassword = cryptographyProvider.Decrypt(defaultPassword, Runtime.EncryptionKey);
+                    Properties.OptionsCredentialsPage.Default.DefaultPassword = defaultPassword;
+                    DisableControl(txtCredentialsPassword);
+                }
+                catch
+                {
+                    // Fire-and-forget: The DefaultPassword in the registry is not encrypted.
+                    _RegistrySettings.DefaultPassword.Clear();
+                }
+            }
+
+            // DefaultDomain reg setting: set DefaultDomain option based on value
+            if (_RegistrySettings.DefaultDomain.IsSet)
             {
                 Properties.OptionsCredentialsPage.Default.DefaultDomain = _RegistrySettings.DefaultDomain.Value;
                 DisableControl(txtCredentialsDomain);
             }
 
-            if (!CommonRegistrySettings.AllowSaveUsernames)
-            {
-                Properties.OptionsCredentialsPage.Default.UserViaAPIDefault = "";
-                DisableControl(txtCredentialsUserViaAPI);
-            }
-            else if (_RegistrySettings.UserViaAPIDefault.IsKeyPresent)
+            // UserViaAPIDefault reg setting: set UserViaAPIDefault option based on value
+            if (_RegistrySettings.UserViaAPIDefault.IsSet)
             {
                 Properties.OptionsCredentialsPage.Default.UserViaAPIDefault = _RegistrySettings.UserViaAPIDefault.Value;
                 DisableControl(txtCredentialsUserViaAPI);
             }
 
-            lblCredentialsAdminInfo.Visible = ShowAdministratorInfo();
+            SetVisibilitySettingsUsedInfo();
         }
 
-        public override bool ShowAdministratorInfo()
+        /// <summary>
+        /// Checks if any credantil registry settings are being used.
+        /// </summary>
+        /// <returns>
+        /// True if any relevant registry settings are used; otherwise, false.
+        /// </returns>
+        public override bool ShowRegistrySettingsUsedInfo()
         {
-            return !CommonRegistrySettings.AllowModifyCredentialSettings
-                || !CommonRegistrySettings.AllowExportPasswords
+            return !CommonRegistrySettings.AllowExportPasswords
                 || !CommonRegistrySettings.AllowExportUsernames
                 || !CommonRegistrySettings.AllowSavePasswords
                 || !CommonRegistrySettings.AllowSaveUsernames
-                || _RegistrySettings.DefaultUsername.IsKeyPresent
-                //|| _RegistrySettings.DefaultPassword.IsKeyPresent
-                || _RegistrySettings.DefaultDomain.IsKeyPresent
-                || _RegistrySettings.UserViaAPIDefault.IsKeyPresent;
+                || !_RegistrySettings.CredentialPageEnabled
+                || _RegistrySettings.UseCredentials.IsValid;
+
+            /* 
+             * Checking these values is unnecessary because UseCredentials must be valid and set to Custom.
+             * 
+            ||_RegistrySettings.DefaultUsername.IsSet
+            || _RegistrySettings.DefaultPassword.IsSet
+            || _RegistrySettings.DefaultDomain.IsSet
+            || _RegistrySettings.UserViaAPIDefault.IsSet;
+            */
         }
 
-        private void radCredentialsCustom_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!_RegistrySettings.DefaultUsername.IsKeyPresent && CommonRegistrySettings.AllowSaveUsernames)
-            {
-                lblCredentialsUsername.Enabled = radCredentialsCustom.Checked;
-                txtCredentialsUsername.Enabled = radCredentialsCustom.Checked;
-            }
-
-            if (/*!_RegistrySettings.DefaultPassword.IsKeyPresent &&*/ CommonRegistrySettings.AllowSavePasswords)
-            {
-                lblCredentialsPassword.Enabled = radCredentialsCustom.Checked;
-                txtCredentialsPassword.Enabled = radCredentialsCustom.Checked;
-            }
-
-            if (!_RegistrySettings.DefaultDomain.IsKeyPresent)
-            {
-                lblCredentialsDomain.Enabled = radCredentialsCustom.Checked;
-                txtCredentialsDomain.Enabled = radCredentialsCustom.Checked;
-            }
-
-            if (!_RegistrySettings.UserViaAPIDefault.IsKeyPresent)
-            {
-                lblCredentialsUserViaAPI.Enabled = radCredentialsCustom.Checked;
-                txtCredentialsUserViaAPI.Enabled = radCredentialsCustom.Checked;
-            }
-        }
-
+        /// <summary>
+        /// Disables the page by setting default values and disabling controls.
+        /// </summary>
         public override void DisablePage()
         {
             Properties.OptionsCredentialsPage.Default.EmptyCredentials = "noinfo";
-            //radCredentialsNoInfo.Enabled = false;
             radCredentialsWindows.Enabled = false;
             radCredentialsCustom.Enabled = false;
 
@@ -216,8 +216,50 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtCredentialsDomain.Enabled = false;
             txtCredentialsUserViaAPI.Enabled = false;
 
-            lblCredentialsAdminInfo.Visible = true;
-            _pageEnabled = false;
+            SetVisibilitySettingsUsedInfo();
         }
+
+        #region Event Handlers
+
+        private void radCredentialsCustom_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!_RegistrySettings.DefaultUsername.IsSet && CommonRegistrySettings.AllowSaveUsernames)
+            {
+                lblCredentialsUsername.Enabled = radCredentialsCustom.Checked;
+                txtCredentialsUsername.Enabled = radCredentialsCustom.Checked;
+            }
+
+            if (!_RegistrySettings.DefaultPassword.IsSet && CommonRegistrySettings.AllowSavePasswords)
+            {
+                lblCredentialsPassword.Enabled = radCredentialsCustom.Checked;
+                txtCredentialsPassword.Enabled = radCredentialsCustom.Checked;
+            }
+
+            if (!_RegistrySettings.DefaultDomain.IsSet)
+            {
+                lblCredentialsDomain.Enabled = radCredentialsCustom.Checked;
+                txtCredentialsDomain.Enabled = radCredentialsCustom.Checked;
+            }
+
+            if (!_RegistrySettings.UserViaAPIDefault.IsSet && CommonRegistrySettings.AllowSaveUsernames)
+            {
+                lblCredentialsUserViaAPI.Enabled = radCredentialsCustom.Checked;
+                txtCredentialsUserViaAPI.Enabled = radCredentialsCustom.Checked;
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Updates the visibility of the information label indicating whether registry settings are used.
+        /// </summary>
+        private void SetVisibilitySettingsUsedInfo()
+        {
+            lblRegistrySettingsUsedInfo.Visible = ShowRegistrySettingsUsedInfo();
+        }
+
+        #endregion
     }
 }

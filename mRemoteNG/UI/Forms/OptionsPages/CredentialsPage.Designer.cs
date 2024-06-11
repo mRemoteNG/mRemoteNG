@@ -43,7 +43,7 @@
             lblCredentialsDomain = new Controls.MrngLabel();
             radCredentialsNoInfo = new Controls.MrngRadioButton();
             radCredentialsCustom = new Controls.MrngRadioButton();
-            lblCredentialsAdminInfo = new System.Windows.Forms.Label();
+            lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
             lblCredentialsGeneratorHelp = new Controls.MrngLabel();
             btnCredentialsGenerator = new System.Windows.Forms.Button();
             lblCredentialsGenerator = new Controls.MrngLabel();
@@ -56,7 +56,7 @@
             // pnlDefaultCredentials
             // 
             pnlDefaultCredentials.Controls.Add(pnlCredentialsSettingsPanel);
-            pnlDefaultCredentials.Controls.Add(lblCredentialsAdminInfo);
+            pnlDefaultCredentials.Controls.Add(lblRegistrySettingsUsedInfo);
             pnlDefaultCredentials.Dock = System.Windows.Forms.DockStyle.Top;
             pnlDefaultCredentials.Location = new System.Drawing.Point(0, 0);
             pnlDefaultCredentials.Name = "pnlDefaultCredentials";
@@ -149,6 +149,7 @@
             txtCredentialsPassword.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             txtCredentialsPassword.Location = new System.Drawing.Point(163, 55);
             txtCredentialsPassword.Name = "txtCredentialsPassword";
+            txtCredentialsPassword.PasswordChar = '*';
             txtCredentialsPassword.Size = new System.Drawing.Size(166, 22);
             txtCredentialsPassword.TabIndex = 7;
             // 
@@ -232,18 +233,18 @@
             radCredentialsCustom.UseVisualStyleBackColor = false;
             radCredentialsCustom.CheckedChanged += radCredentialsCustom_CheckedChanged;
             // 
-            // lblCredentialsAdminInfo
+            // lblRegistrySettingsUsedInfo
             // 
-            lblCredentialsAdminInfo.BackColor = System.Drawing.SystemColors.ControlLight;
-            lblCredentialsAdminInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            lblCredentialsAdminInfo.ForeColor = System.Drawing.SystemColors.ControlText;
-            lblCredentialsAdminInfo.Location = new System.Drawing.Point(0, 0);
-            lblCredentialsAdminInfo.Name = "lblCredentialsAdminInfo";
-            lblCredentialsAdminInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            lblCredentialsAdminInfo.Size = new System.Drawing.Size(610, 30);
-            lblCredentialsAdminInfo.TabIndex = 0;
-            lblCredentialsAdminInfo.Text = "Some settings are configured by your Administrator. Please contact your administrator for more information.";
-            lblCredentialsAdminInfo.Visible = false;
+            lblRegistrySettingsUsedInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            lblRegistrySettingsUsedInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            lblRegistrySettingsUsedInfo.ForeColor = System.Drawing.SystemColors.ControlText;
+            lblRegistrySettingsUsedInfo.Location = new System.Drawing.Point(0, 0);
+            lblRegistrySettingsUsedInfo.Name = "lblRegistrySettingsUsedInfo";
+            lblRegistrySettingsUsedInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            lblRegistrySettingsUsedInfo.Size = new System.Drawing.Size(610, 30);
+            lblRegistrySettingsUsedInfo.TabIndex = 0;
+            lblRegistrySettingsUsedInfo.Text = "Some settings are configured by your Administrator. Please contact your administrator for more information.";
+            lblRegistrySettingsUsedInfo.Visible = false;
             // 
             // lblCredentialsGeneratorHelp
             // 
@@ -304,7 +305,7 @@
         internal Controls.MrngTextBox txtCredentialsUsername;
         internal Controls.MrngLabel lblCredentialsDomain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        internal System.Windows.Forms.Label lblCredentialsAdminInfo;
+        internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
         internal System.Windows.Forms.Panel pnlCredentialsSettingsPanel;
         internal Controls.MrngLabel lblCredentialsGenerator;
         internal System.Windows.Forms.TextBox txtCredentialsGeneratorPsswd;

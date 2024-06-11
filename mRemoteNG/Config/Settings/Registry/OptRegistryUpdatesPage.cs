@@ -9,12 +9,12 @@ namespace mRemoteNG.Config.Settings.Registry
     /// Static utility class that provides access to and management of registry settings on the local machine.
     /// It abstracts complex registry operations and centralizes the handling of various registry keys.
     /// Benefits: Simplified code, enhances maintainability, and ensures consistency. #ReadOnly
-    public sealed partial class OptRegistryUpdatesPage : WindowsRegistryAdvanced
+    public sealed partial class OptRegistryUpdatesPage
     {
         /// <summary>
         /// Specifies the number of days between update checks.
         /// </summary>
-        public WindowsRegistryKeyInteger CheckForUpdatesFrequencyDays { get; }
+        public WinRegistryEntry<int> CheckForUpdatesFrequencyDays { get; }
 
         /// <summary>
         /// Specifies the update channel for updates.
@@ -22,62 +22,58 @@ namespace mRemoteNG.Config.Settings.Registry
         /// <remarks>
         /// The update channel should be one of the predefined values: Stable, Preview, Nightly.
         /// </remarks>
-        public WindowsRegistryKeyString UpdateChannel { get; }
+        public WinRegistryEntry<string> UpdateChannel { get; }
 
         /// <summary>
         /// Indicates whether proxy usage for updates is enabled.
         /// </summary>
-        public WindowsRegistryKeyBoolean UseProxyForUpdates { get; }
+        public WinRegistryEntry<bool> UseProxyForUpdates { get; }
 
         /// <summary>
         /// Specifies the proxy address for updates.
         /// </summary>
-        public WindowsRegistryKeyString ProxyAddress { get; }
+        public WinRegistryEntry<string> ProxyAddress { get; }
 
         /// <summary>
         /// Specifies the proxy port for updates.
         /// </summary>
-        public WindowsRegistryKeyInteger ProxyPort { get; }
+        public WinRegistryEntry<int> ProxyPort { get; }
 
         /// <summary>
         /// Indicates whether proxy authentication is enabled.
         /// </summary>
-        public WindowsRegistryKeyBoolean UseProxyAuthentication { get; }
+        public WinRegistryEntry<bool> UseProxyAuthentication { get; }
 
         /// <summary>
         /// Specifies the authentication username for the proxy.
         /// </summary>
-        public WindowsRegistryKeyString ProxyAuthUser { get; }
+        public WinRegistryEntry<string> ProxyAuthUser { get; }
 
         /// <summary>
         /// Specifies the authentication password for the proxy.
         /// </summary>
-        //public string ProxyAuthPass { get; }
+        public WinRegistryEntry<string> ProxyAuthPass { get; }
 
         public OptRegistryUpdatesPage()
         {
             RegistryHive hive = WindowsRegistryInfo.Hive;
-            string subKey = WindowsRegistryInfo.UpdateOptionsSubkey;
+            string subKey = WindowsRegistryInfo.UpdateOptions;
 
-            CheckForUpdatesFrequencyDays = GetInteger(hive, subKey, nameof(CheckForUpdatesFrequencyDays));
-
-            UpdateChannel = GetStringValidated(hive, subKey, nameof(UpdateChannel),
-                new string[] {
+            CheckForUpdatesFrequencyDays = new WinRegistryEntry<int>(hive, subKey, nameof(CheckForUpdatesFrequencyDays)).Read();
+            UpdateChannel = new WinRegistryEntry<string>(hive, subKey, nameof(UpdateChannel))
+                .SetValidation(new string[] {
                     UpdateChannelInfo.STABLE,
                     UpdateChannelInfo.PREVIEW,
                     UpdateChannelInfo.NIGHTLY
-                }
-                ,true
-            );
+                }).Read();
 
-            UseProxyForUpdates = GetBoolean(hive, subKey, nameof(UseProxyForUpdates));
-            ProxyAddress = GetString(hive, subKey, nameof(ProxyAddress), null);
-            ProxyPort = GetInteger(hive, subKey, nameof(ProxyPort));
+            UseProxyForUpdates = new WinRegistryEntry<bool>(hive, subKey, nameof(UseProxyForUpdates)).Read();
+            ProxyAddress = new WinRegistryEntry<string>(hive, subKey, nameof(ProxyAddress)).Read();
+            ProxyPort = new WinRegistryEntry<int>(hive, subKey, nameof(ProxyPort)).Read();
 
-            UseProxyAuthentication = GetBoolean(hive, subKey, nameof(UseProxyAuthentication));
-            ProxyAuthUser = GetString(hive, subKey, nameof(ProxyAuthUser), null);
-            //Currently not supported:
-            //ProxyAuthPass = GetPassword(Hive, _SubKey, nameof(ProxyAuthPass));
+            UseProxyAuthentication = new WinRegistryEntry<bool>(hive, subKey, nameof(UseProxyAuthentication)).Read();
+            ProxyAuthUser = new WinRegistryEntry<string>(hive, subKey, nameof(ProxyAuthUser)).Read();
+            ProxyAuthPass = new WinRegistryEntry<string>(hive, subKey, nameof(ProxyAuthPass)).Read();
         }
     }
 }

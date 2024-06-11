@@ -11,28 +11,23 @@ namespace mRemoteNG.Config.Settings.Registry
     /// Benefits: Simplified code, enhances maintainability, and ensures consistency. #ReadOnly
     public static class CommonRegistrySettings
     {
-        private static readonly IRegistryAdvancedRead _WindowsRegistry = new WindowsRegistryAdvanced();
-        private static readonly RegistryHive _Hive = WindowsRegistryInfo.Hive;
-
-        private const string __Update = WindowsRegistryInfo.UpdateSubkey;
-        private const string __Credential = WindowsRegistryInfo.CredentialSubkey;
-
         #region general update registry settings
+
         /// <summary>
         /// Indicates whether searching for updates is allowed. If false, there is no way to update directly from mRemoteNG.
         /// </summary>
         /// <remarks>
         /// Default value is true, which allows check for updates.
         /// </remarks>
-        public static bool AllowCheckForUpdates { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(AllowCheckForUpdates), true);
+        public static bool AllowCheckForUpdates { get; }
 
         /// <summary>
         /// Indicates whether automatic search for updates is allowed.
         /// </summary>
         /// <remarks>
-        /// Default value is true, which allows check for updates automaticaly.
+        /// Default value is true, which allows check for updates automatically.
         /// </remarks>
-        public static bool AllowCheckForUpdatesAutomatical { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(AllowCheckForUpdatesAutomatical), AllowCheckForUpdates);
+        public static bool AllowCheckForUpdatesAutomatical { get; }
 
         /// <summary>
         /// Indicates whether a manual search for updates is allowed.
@@ -40,39 +35,65 @@ namespace mRemoteNG.Config.Settings.Registry
         /// <remarks>
         /// The default value is true, enabling the manual check for updates.
         /// </remarks>
-        public static bool AllowCheckForUpdatesManual { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(AllowCheckForUpdatesManual), AllowCheckForUpdates);
+        public static bool AllowCheckForUpdatesManual { get; }
 
         /// <summary>
         /// Specifies whether a question about checking for updates is displayed at startup.
         /// </summary>
-        public static bool AllowPromptForUpdatesPreference { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Update, nameof(AllowPromptForUpdatesPreference), AllowCheckForUpdates);
+        public static bool AllowPromptForUpdatesPreference { get; }
+
         #endregion
 
         #region general credential registry settings
+
         /// <summary>
         /// Setting that indicates whether exporting passwords is allowed.
         /// </summary>
-        public static bool AllowExportPasswords { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowExportPasswords), true);
+        public static bool AllowExportPasswords { get; }
 
         /// <summary>
         /// Setting that indicates whether exporting usernames is allowed.
         /// </summary>
-        public static bool AllowExportUsernames { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowExportUsernames), true);
+        public static bool AllowExportUsernames { get; }
 
         /// <summary>
-        /// Setting that indicates whether saving passwords is allowed.
+        /// Setting that indicates whether saving passwords in connections is allowed.
         /// </summary>
-        public static bool AllowSavePasswords { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowSavePasswords), true);
+        public static bool AllowSavePasswords { get; }
 
         /// <summary>
-        /// Setting that indicates whether saving usernames is allowed.
+        /// Setting that indicates whether saving in connections usernames is allowed.
         /// </summary>
-        public static bool AllowSaveUsernames { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowSaveUsernames), true);
+        public static bool AllowSaveUsernames { get; }
 
-        /// <summary>
-        /// Setting that indicates whether modifying credential settings is allowed.
-        /// </summary>
-        public static bool AllowModifyCredentialSettings { get; } = _WindowsRegistry.GetBoolValue(_Hive, __Credential, nameof(AllowModifyCredentialSettings), true);
         #endregion
+
+        static CommonRegistrySettings()
+        {
+            IRegistry regValueUtility = new WinRegistry();
+            RegistryHive hive = WindowsRegistryInfo.Hive;
+
+            #region update registry settings setup
+
+            string updateSubkey = WindowsRegistryInfo.Update;
+
+            AllowCheckForUpdates = regValueUtility.GetBoolValue(hive, updateSubkey, nameof(AllowCheckForUpdates), true);
+            AllowCheckForUpdatesAutomatical = regValueUtility.GetBoolValue(hive, updateSubkey, nameof(AllowCheckForUpdatesAutomatical), AllowCheckForUpdates);
+            AllowCheckForUpdatesManual = regValueUtility.GetBoolValue(hive, updateSubkey, nameof(AllowCheckForUpdatesManual), AllowCheckForUpdates);
+            AllowPromptForUpdatesPreference = regValueUtility.GetBoolValue(hive, updateSubkey, nameof(AllowPromptForUpdatesPreference), AllowCheckForUpdates);
+
+            #endregion
+
+            #region credential registry settings setup
+
+            string credentialSubkey = WindowsRegistryInfo.Credential;
+
+            AllowExportPasswords = regValueUtility.GetBoolValue(hive, credentialSubkey, nameof(AllowExportPasswords), true);
+            AllowExportUsernames = regValueUtility.GetBoolValue(hive, credentialSubkey, nameof(AllowExportUsernames), true);
+            AllowSavePasswords = regValueUtility.GetBoolValue(hive, credentialSubkey, nameof(AllowSavePasswords), true);
+            AllowSaveUsernames = regValueUtility.GetBoolValue(hive, credentialSubkey, nameof(AllowSaveUsernames), true);
+
+            #endregion
+        }
     }
 }

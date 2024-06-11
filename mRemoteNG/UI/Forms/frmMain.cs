@@ -377,6 +377,7 @@ namespace mRemoteNG.UI.Forms
             if (!CommonRegistrySettings.AllowCheckForUpdatesAutomatical) return;
 
             if (!Properties.OptionsUpdatesPage.Default.CheckForUpdatesOnStartup) return;
+            if (Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays == 0) return;
 
             DateTime nextUpdateCheck =
                 Convert.ToDateTime(Properties.OptionsUpdatesPage.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Properties.OptionsUpdatesPage.Default.CheckForUpdatesFrequencyDays))));
