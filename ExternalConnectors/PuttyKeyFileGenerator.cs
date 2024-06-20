@@ -15,7 +15,7 @@ public class PuttyKeyFileGenerator
     public static string ToPuttyPrivateKey(RSACryptoServiceProvider cryptoServiceProvider, string Comment = "imported-openssh-key")
     {
         var publicParameters = cryptoServiceProvider.ExportParameters(false);
-        byte[] publicBuffer = new byte[3 + keyType.Length + GetPrefixSize(publicParameters.Exponent) + publicParameters.Exponent.Length + GetPrefixSize(publicParameters.Modulus) + publicParameters.Modulus.Length + 1];
+        byte[] publicBuffer = new byte[3 + keyType.Length + GetPrefixSize(publicParameters.Exponent) + publicParameters.Exponent!.Length + GetPrefixSize(publicParameters.Modulus) + publicParameters.Modulus!.Length + 1];
 
         using (var bw = new BinaryWriter(new MemoryStream(publicBuffer)))
         {
@@ -28,12 +28,12 @@ public class PuttyKeyFileGenerator
 
         var privateParameters = cryptoServiceProvider.ExportParameters(true);
 
-        byte[] privateBuffer = new byte[paddedPrefixSize + privateParameters.D.Length + paddedPrefixSize + privateParameters.P!.Length + paddedPrefixSize + privateParameters.Q.Length + paddedPrefixSize + privateParameters.InverseQ.Length];
+        byte[] privateBuffer = new byte[paddedPrefixSize + privateParameters.D!.Length + paddedPrefixSize + privateParameters.P!.Length + paddedPrefixSize + privateParameters.Q!.Length + paddedPrefixSize + privateParameters.InverseQ!.Length];
 
         using (var bw = new BinaryWriter(new MemoryStream(privateBuffer)))
         {
             PutPrefixed(bw, privateParameters.D, true);
-            PutPrefixed(bw, privateParameters.P!, true);
+            PutPrefixed(bw, privateParameters.P, true);
             PutPrefixed(bw, privateParameters.Q, true);
             PutPrefixed(bw, privateParameters.InverseQ, true);
         }
@@ -89,6 +89,7 @@ public class PuttyKeyFileGenerator
     {
         return Regex.Matches(text, ".{1," + lineLength + "}").Cast<Match>().Select(m => m.Value).ToArray();
     }
+
     private static int GetPrefixSize(byte[]? bytes)
     {
         if (bytes is null)
@@ -96,6 +97,7 @@ public class PuttyKeyFileGenerator
 
         return CheckIsNeddPadding(bytes) ? paddedPrefixSize : prefixSize;
     }
+
     private static bool CheckIsNeddPadding(byte[] bytes)
     {
         if (bytes is null || bytes.Length == 0)
