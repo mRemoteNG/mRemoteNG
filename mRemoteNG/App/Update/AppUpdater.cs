@@ -145,14 +145,14 @@ namespace mRemoteNG.App.Update
                     while (readBytes <= totalBytes || !_getUpdateInfoCancelToken.IsCancellationRequested)
                     {
                         int bytesRead =
-                            await httpStream.ReadAsync(buffer, 0, _bufferLength, _getUpdateInfoCancelToken.Token);
+                            await httpStream.ReadAsync(buffer.AsMemory(0, _bufferLength), _getUpdateInfoCancelToken.Token);
                         if (bytesRead == 0)
                         {
                             progress.Report(100);
                             break;
                         }
 
-                        await fileStream.WriteAsync(buffer, 0, bytesRead, _getUpdateInfoCancelToken.Token);
+                        await fileStream.WriteAsync(buffer.AsMemory(0, bytesRead), _getUpdateInfoCancelToken.Token);
 
                         readBytes += bytesRead;
 

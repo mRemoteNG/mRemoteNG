@@ -19,7 +19,7 @@
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
     <PackageReference Include="Cucumber.Messages" Version="25.0.1" />
-    <PackageReference Include="Google.Protobuf" Version="3.27.1" />
+    <PackageReference Include="Google.Protobuf" Version="3.27.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NUnit" Version="4.1.0" />
