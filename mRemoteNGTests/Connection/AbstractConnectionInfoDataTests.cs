@@ -4,6 +4,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Security;
 using NUnit.Framework;
 
 
@@ -93,7 +94,7 @@ public class AbstractConnectionInfoDataTests
     {
         var wasCalled = false;
         _testAbstractConnectionInfoData.PropertyChanged += (sender, args) => wasCalled = true;
-        _testAbstractConnectionInfoData.Password = "a";
+        _testAbstractConnectionInfoData.Password = "a".ConvertToSecureString();
         Assert.That(wasCalled, Is.True);
     }
 

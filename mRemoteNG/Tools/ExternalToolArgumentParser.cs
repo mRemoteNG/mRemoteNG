@@ -4,6 +4,7 @@ using System.Runtime.Versioning;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Properties;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools.Cmdline;
 
@@ -186,7 +187,7 @@ namespace mRemoteNG.Tools
                             replacement = Properties.OptionsCredentialsPage.Default.DefaultUsername;
                     break;
                 case "password":
-                    replacement = _connectionInfo.Password;
+                    replacement = _connectionInfo.Password.ConvertToUnsecureString();
                     if (string.IsNullOrEmpty(replacement) && Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
                         replacement = new LegacyRijndaelCryptographyProvider().Decrypt(Convert.ToString(Properties.OptionsCredentialsPage.Default.DefaultPassword), Runtime.EncryptionKey);
                     break;

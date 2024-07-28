@@ -9,6 +9,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.Tools.Attributes;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using System.Security;
 
 namespace mRemoteNG.Connection
 {
@@ -29,7 +30,7 @@ namespace mRemoteNG.Connection
         private ExternalCredentialProvider _externalCredentialProvider;
         private string _userViaAPI = "";
         private string _username = "";
-        private string _password = "";
+        private SecureString _password = null;
         private string _domain = "";
         private string _vmId = "";
         private bool _useEnhancedMode;
@@ -213,7 +214,7 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPassword)),
          PasswordPropertyText(true),
          AttributeUsedInAllProtocolsExcept(ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
-        public virtual string Password
+        public virtual SecureString Password
         {
             get => GetPropertyValue("Password", _password);
             set => SetField(ref _password, value, "Password");

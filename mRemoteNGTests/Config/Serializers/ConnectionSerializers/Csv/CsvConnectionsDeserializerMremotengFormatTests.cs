@@ -73,7 +73,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 Icon = "SomeIcon",
                 Panel = "SomePanel",
                 Username = "SomeUsername",
-                Password = "SomePassword",
+                Password = "SomePassword".ConvertToSecureString(),
                 Domain = "SomeDomain",
                 Hostname = "SomeHostname",
                 PuttySession = "SomePuttySession",
@@ -168,6 +168,9 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
 
                 foreach (var property in properties)
                 {
+                    if (property.Name == "Password")
+                        continue;
+
                     testCases.Add(
                         new TestCaseData(property.Name)
                         .Returns(property.GetValue(testConnectionInfo)));

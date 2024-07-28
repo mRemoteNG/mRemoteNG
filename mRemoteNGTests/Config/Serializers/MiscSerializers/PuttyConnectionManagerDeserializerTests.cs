@@ -3,6 +3,7 @@ using mRemoteNG.Config.Serializers.MiscSerializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
@@ -99,7 +100,7 @@ public class PuttyConnectionManagerDeserializerTests
     public void ConnectionPasswordImported()
     {
         var connection = GetSshConnection();
-        Assert.That(connection.Password, Is.EqualTo(ExpectedConnectionPassword));
+        Assert.That(connection.Password?.ConvertToUnsecureString(), Is.EqualTo(ExpectedConnectionPassword));
     }
 
     private ConnectionInfo GetSshConnection()

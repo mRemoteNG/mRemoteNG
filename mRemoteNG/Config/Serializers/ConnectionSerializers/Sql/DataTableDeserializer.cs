@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Security;
+using System.Windows.Media.TextFormatting;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -111,7 +112,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.OpeningCommand = (string)dataRow["OpeningCommand"];
             connectionInfo.OpeningCommand = (string)dataRow["OpeningCommand"];
             connectionInfo.Panel = (string)dataRow["Panel"];
-            connectionInfo.Password = DecryptValue((string)dataRow["Password"]);
+            var pw = dataRow["Password"] as string;
+            connectionInfo.Password = DecryptValue(pw ?? "").ConvertToSecureString();
             connectionInfo.Port = (int)dataRow["Port"];
             connectionInfo.PostExtApp = (string)dataRow["PostExtApp"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];

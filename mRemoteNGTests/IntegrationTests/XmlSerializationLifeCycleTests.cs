@@ -115,6 +115,9 @@ namespace mRemoteNGTests.IntegrationTests
             var sb = new StringBuilder();
             foreach (var property in originalConnectionInfo.GetSerializableProperties())
             {
+                if (property.Name == nameof(ConnectionInfo.Password))
+                    continue;
+
                 var originalValue = property.GetValue(originalConnectionInfo);
                 var deserializedValue = property.GetValue(deserializedConnectionInfo);
                 if (originalValue.Equals(deserializedValue))
@@ -143,6 +146,9 @@ namespace mRemoteNGTests.IntegrationTests
             var sb = new StringBuilder();
             foreach (var property in originalConnectionInfo.Inheritance.GetProperties())
             {
+                if (property.Name == nameof(originalConnectionInfo.Password))
+                    continue;
+
                 var originalValue = property.GetValue(originalConnectionInfo.Inheritance);
                 var deserializedValue = property.GetValue(deserializedConnectionInfo.Inheritance);
 

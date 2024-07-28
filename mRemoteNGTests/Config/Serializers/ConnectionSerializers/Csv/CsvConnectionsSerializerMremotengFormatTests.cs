@@ -113,7 +113,7 @@ public class CsvConnectionsSerializerMremotengFormatTests
         Assert.That(csv, Does.Match(container.Name));
         Assert.That(csv, Does.Match(container.Username));
         Assert.That(csv, Does.Match(container.Domain));
-        Assert.That(csv, Does.Match(container.Password));
+        Assert.That(csv, Does.Match(container.Password?.ConvertToUnsecureString()));
         Assert.That(csv, Does.Contain(TreeNodeType.Container.ToString()));
     }
 
@@ -128,7 +128,7 @@ public class CsvConnectionsSerializerMremotengFormatTests
             .First(s => s.Contains(serializationTarget.Name));
         Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Username));
         Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Domain));
-        Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Password));
+        Assert.That(lineWithFolder3, Does.Contain(serializationTarget.Password?.ConvertToUnsecureString()));
     }
 
     private ConnectionInfo BuildConnectionInfo()
@@ -138,7 +138,7 @@ public class CsvConnectionsSerializerMremotengFormatTests
             Name = ConnectionName,
             Username = Username,
             Domain = Domain,
-            Password = Password,
+            Password = Password?.ConvertToSecureString(),
             Inheritance = { Colors = true }
         };
     }
@@ -150,7 +150,7 @@ public class CsvConnectionsSerializerMremotengFormatTests
             Name = "MyFolder",
             Username = "BlahBlah1",
             Domain = "aklkskkksh8",
-            Password = "qweraslkdjf87"
+            Password = "qweraslkdjf87".ConvertToSecureString()
         };
     }
 }

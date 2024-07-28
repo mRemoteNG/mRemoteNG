@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using mRemoteNG.Connection;
+using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using NUnit.Framework;
 
@@ -28,7 +29,7 @@ namespace mRemoteNGTests.Tools
                 Hostname = TestString,
                 Port = Port,
                 Username = TestString,
-                Password = TestString,
+                Password = TestString.ConvertToSecureString(),
                 Domain = TestString,
                 Description = TestString,
                 MacAddress = TestString,

@@ -5,6 +5,7 @@ using System.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -133,7 +134,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
             XmlNode loginNode = xmlNode.SelectSingleNode("./login");
             connectionInfo.Username = loginNode?.SelectSingleNode("login")?.InnerText;
-            connectionInfo.Password = loginNode?.SelectSingleNode("password")?.InnerText;
+            connectionInfo.Password = loginNode?.SelectSingleNode("password")?.InnerText.ConvertToSecureString();
             // ./prompt
 
             // ./timeout/connectiontimeout
