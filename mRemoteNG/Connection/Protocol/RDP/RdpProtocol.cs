@@ -540,7 +540,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 string domain = connectionInfo?.Domain ?? "";
                 string userViaApi = connectionInfo?.UserViaAPI ?? "";
                 string pkey = "";
-                string password = (connectionInfo?.Password.ConvertToUnsecureString() ?? "");
+                string password = (connectionInfo?.Password?.ConvertToUnsecureString() ?? "");
 
                 // access secret server api if necessary
                 if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
