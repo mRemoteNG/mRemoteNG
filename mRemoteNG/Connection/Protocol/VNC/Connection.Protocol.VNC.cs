@@ -7,6 +7,7 @@ using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.Security;
 
 // ReSharper disable ArrangeAccessorOwnerBody
 
@@ -225,7 +226,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
         private string VNCEvent_Authenticate()
         {
-            return _info.Password;
+            return _info.Password.ConvertToUnsecureString();
         }
 
         #endregion

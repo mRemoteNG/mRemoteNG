@@ -8,6 +8,7 @@ using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -112,8 +113,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 : "";
 
             connectionRecord.Password = headers.Contains("Password")
-                ? connectionCsv[headers.IndexOf("Password")]
-                : "";
+                ? connectionCsv[headers.IndexOf("Password")].ConvertToSecureString()
+                : "".ConvertToSecureString();
 
             connectionRecord.Domain = headers.Contains("Domain")
                 ? connectionCsv[headers.IndexOf("Domain")]

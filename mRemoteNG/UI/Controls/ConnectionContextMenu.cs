@@ -12,6 +12,7 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.Security;
 
 // ReSharper disable UnusedParameter.Local
 
@@ -832,7 +833,7 @@ namespace mRemoteNG.UI.Controls
                 Windows.Show(WindowType.SSHTransfer);
                 Windows.SshtransferForm.Hostname = _connectionTree.SelectedNode.Hostname;
                 Windows.SshtransferForm.Username = _connectionTree.SelectedNode.Username;
-                Windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password;
+                Windows.SshtransferForm.Password = _connectionTree.SelectedNode.Password.ConvertToUnsecureString();
                 Windows.SshtransferForm.Port = Convert.ToString(_connectionTree.SelectedNode.Port);
             }
             catch (Exception ex)

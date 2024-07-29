@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using mRemoteNG.Connection;
 using mRemoteNGTests.TestHelpers;
@@ -51,6 +52,14 @@ namespace mRemoteNGTests.Connection
 
 			var valueInSource = property.GetValue(DefaultConnectionInfo.Instance)?.ToString();
 			var valueInDestination = saveTarget.GetType().GetProperty(property.Name)?.GetValue(saveTarget)?.ToString();
+            try
+            {
+                Assert.That(valueInDestination, Is.EqualTo(valueInSource));
+            }
+            catch (AssertionException)
+            {
+                Console.WriteLine($"Assertion Failed: Parameter {property.Name}");                
+            }
             Assert.That(valueInDestination, Is.EqualTo(valueInSource));
         }
 

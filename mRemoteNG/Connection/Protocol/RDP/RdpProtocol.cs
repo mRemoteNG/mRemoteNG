@@ -20,6 +20,7 @@ using System.Runtime.Versioning;
 using FileDialog = Microsoft.Win32.FileDialog;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.DirectoryServices.ActiveDirectory;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
@@ -425,7 +426,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 {
                     case RDGatewayUseConnectionCredentials.Yes:
                         _rdpClient.TransportSettings2.GatewayUsername = connectionInfo.Username;
-                        _rdpClient.TransportSettings2.GatewayPassword = connectionInfo.Password;
+                        _rdpClient.TransportSettings2.GatewayPassword = connectionInfo.Password.ConvertToUnsecureString();
                         _rdpClient.TransportSettings2.GatewayDomain = connectionInfo?.Domain;
                         break;
                     case RDGatewayUseConnectionCredentials.SmartCard:
@@ -536,10 +537,10 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 }
 
                 string userName = connectionInfo?.Username ?? "";
-                string password = connectionInfo?.Password ?? "";
                 string domain = connectionInfo?.Domain ?? "";
                 string userViaApi = connectionInfo?.UserViaAPI ?? "";
                 string pkey = "";
+                string password = (connectionInfo?.Password?.ConvertToUnsecureString() ?? "");
 
                 // access secret server api if necessary
                 if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)

@@ -20,6 +20,7 @@ using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.UI.Window
 {
@@ -469,7 +470,7 @@ namespace mRemoteNG.UI.Window
 
                 Windows.SshtransferForm.Hostname = connectionInfo.Hostname;
                 Windows.SshtransferForm.Username = connectionInfo.Username;
-                Windows.SshtransferForm.Password = connectionInfo.Password;
+                Windows.SshtransferForm.Password = connectionInfo.Password.ConvertToUnsecureString();
                 Windows.SshtransferForm.Port = Convert.ToString(connectionInfo.Port);
             }
             catch (Exception ex)

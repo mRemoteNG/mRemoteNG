@@ -7,6 +7,7 @@ using System.Runtime.Versioning;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Tree;
 
 #endregion
@@ -130,7 +131,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv.RemoteDesktopMa
                 Hostname = hostString,
                 Port = port,
                 Username = username,
-                Password = password,
+                Password = password?.ConvertToSecureString(),
                 Domain = domain,
                 Icon = connectionType.IconName ?? "mRemoteNG",
                 Description = description,

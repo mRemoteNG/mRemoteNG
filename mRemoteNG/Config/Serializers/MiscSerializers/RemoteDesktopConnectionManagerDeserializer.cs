@@ -11,6 +11,7 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Config.Serializers.MiscSerializers
 {
@@ -163,12 +164,12 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
                 if (_schemaVersion == 1) // Version 2.2 allows clear text passwords
                 {
                     connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"]?.Value == "True"
-                        ? passwordNode.InnerText
-                        : DecryptRdcManPassword(passwordNode?.InnerText);
+                        ? passwordNode.InnerText.ConvertToSecureString()
+                        : DecryptRdcManPassword(passwordNode?.InnerText).ConvertToSecureString();
                 }
                 else
                 {
-                    connectionInfo.Password = DecryptRdcManPassword(passwordNode?.InnerText);
+                    connectionInfo.Password = DecryptRdcManPassword(passwordNode?.InnerText).ConvertToSecureString();
                 }
 
                 connectionInfo.Domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText ?? string.Empty;

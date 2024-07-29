@@ -112,7 +112,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 sb.Append(FormatForCsv(con.Username));
 
             if (_saveFilter.SavePassword)
-                sb.Append(FormatForCsv(con.Password));
+                sb.Append(con.Password?.ConvertToUnsecureString() + ";");
 
             if (_saveFilter.SaveDomain)
                 sb.Append(FormatForCsv(con.Domain));

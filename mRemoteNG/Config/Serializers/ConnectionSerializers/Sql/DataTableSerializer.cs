@@ -519,7 +519,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritVNCViewOnly"].Equals(false);
             }
 
-            bool pwd = dataRow["Password"].Equals(_saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) : "") &&
+            bool pwd = dataRow["Password"].Equals(_saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password?.ConvertToUnsecureString(), _encryptionKey) : "") &&
                       dataRow["VNCProxyPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.VNCProxyPassword, _encryptionKey)) &&
                       dataRow["RDGatewayPassword"].Equals(_cryptographyProvider.Encrypt(connectionInfo.RDGatewayPassword, _encryptionKey));
             return !(pwd && isFieldNotChange && isInheritanceFieldNotChange);
@@ -575,7 +575,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["OpeningCommand"] = connectionInfo.OpeningCommand;
             dataRow["Panel"] = connectionInfo.Panel;
             dataRow["ParentID"] = connectionInfo.Parent?.ConstantID ?? "";
-            dataRow["Password"] = _saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password, _encryptionKey) : "";
+            dataRow["Password"] = _saveFilter.SavePassword ? _cryptographyProvider.Encrypt(connectionInfo.Password?.ConvertToUnsecureString(), _encryptionKey) : "";
             dataRow["Port"] = connectionInfo.Port;
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["PostExtApp"] = connectionInfo.PostExtApp;
