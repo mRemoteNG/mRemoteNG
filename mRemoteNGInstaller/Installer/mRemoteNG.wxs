@@ -76,9 +76,6 @@
       <ComponentRef Id="C.MainExe" Primary="yes" />
       <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
       <ComponentRef Id="C.RegistryEntries" Primary="yes" />
-       <Feature Id="F.PuttyNG" Title="PuTTYNG" Absent="allow" AllowAdvertise="no" Level="1">
-         <ComponentRef Id="C.PuttyNGFile" Primary="yes" />
-        </Feature>
     </Feature>
 
     <Feature Id="F.DesktopShortcut" Title="!(loc.Feature_DesktopShortcut)" Absent="allow" AllowAdvertise="no" Level="1">

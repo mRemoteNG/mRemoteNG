@@ -23,7 +23,6 @@
     <Compile Include="Fragments\DirectoriesFragment.wxs" />
     <Compile Include="Fragments\MainExeFragment.wxs" />
     <Compile Include="Fragments\MiscTextFilesFragment.wxs" />
-    <Compile Include="Fragments\PuTTYNGFragment.wxs" />
     <Compile Include="Fragments\RegistryEntriesFragment.wxs" />
     <Compile Include="Fragments\ShortcutFragment.wxs" />
     <Compile Include="mRemoteNG.wxs" />
