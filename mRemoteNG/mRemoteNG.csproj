@@ -109,7 +109,7 @@
     <PackageReference Include="ObjectListView.Updated" Version="2.9.3" />
     <PackageReference Include="OpenCover" Version="4.7.1221" />
     <PackageReference Include="Renci.SshNet.Async" Version="1.4.0" />
-    <PackageReference Include="ReportGenerator" Version="5.3.7" />
+    <PackageReference Include="ReportGenerator" Version="5.3.8" />
     <PackageReference Include="SSH.NET" Version="2024.1.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
