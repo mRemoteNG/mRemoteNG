@@ -34,5 +34,17 @@ using System.Resources;
     int minor = 77;
     int revision = 3;
     string channel = "Nightly Build";
-    int build = (int)(DateTime.UtcNow - new DateTime(2019, 9, 2)).TotalDays + DateTime.UtcNow.Hour + DateTime.UtcNow.Minute;
+    DateTime lastReleaseDate = new DateTime(2019, 9, 2);
+    DateTime CurrentDate = DateTime.UtcNow;
+    TimeSpan elapsedTime;
+    double TotalMinutes;
+    int build;
+
+    public override void Initialize()
+    {
+        elapsedTime = CurrentDate.Subtract(lastReleaseDate);
+        TotalMinutes = elapsedTime.TotalMinutes;
+        build = (int)(TotalMinutes / 1000);
+        base.Initialize();
+    }
 #>
