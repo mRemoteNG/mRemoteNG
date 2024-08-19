@@ -220,7 +220,7 @@ namespace mRemoteNG.Connection
             get
             {
                 // ensure the UI shows that a password has been entered
-                return "defaultpassword";
+                return "ThisPasswordIsNeverUseful_useGetPasswordInstead";
             }
             set
             {
@@ -230,6 +230,10 @@ namespace mRemoteNG.Connection
             }
         }
 
+        /// <summary>
+        /// Access the plaintext password field. Only use this at the point of connection, or for unit tests.
+        /// </summary>
+        /// <returns>The plaintext password not stored in a SecureString</returns>
         public string GetPlaintextPassword()
         {
             if (_password != null)
