@@ -134,7 +134,7 @@ namespace mRemoteNG.Config.Serializers.MiscSerializers
 
             XmlNode loginNode = xmlNode.SelectSingleNode("./login");
             connectionInfo.Username = loginNode?.SelectSingleNode("login")?.InnerText;
-            connectionInfo.Password = loginNode?.SelectSingleNode("password")?.InnerText.ConvertToSecureString();
+            connectionInfo.Password = loginNode?.SelectSingleNode("password")?.InnerText;
             // ./prompt
 
             // ./timeout/connectiontimeout

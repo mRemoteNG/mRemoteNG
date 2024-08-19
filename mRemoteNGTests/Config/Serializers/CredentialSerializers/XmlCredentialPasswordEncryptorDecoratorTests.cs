@@ -79,7 +79,7 @@ public class XmlCredentialPasswordEncryptorDecoratorTests
         cryptoProvider.CipherEngine.Returns(CipherEngine);
         cryptoProvider.CipherMode.Returns(CipherMode);
         cryptoProvider.KeyDerivationIterations.Returns(KdfIterations);
-        cryptoProvider.Encrypt(null, null).ReturnsForAnyArgs("encrypted");
+        cryptoProvider.Encrypt(string.Empty, null).ReturnsForAnyArgs("encrypted");
         return cryptoProvider;
     }
 }

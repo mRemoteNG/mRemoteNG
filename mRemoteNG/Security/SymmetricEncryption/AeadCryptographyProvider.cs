@@ -96,16 +96,21 @@ namespace mRemoteNG.Security.SymmetricEncryption
 
         public string Encrypt(string plainText, SecureString encryptionKey)
         {
+            return Encrypt(plainText.ConvertToSecureString(), encryptionKey);
+        }
+
+        public string Encrypt(SecureString plainText, SecureString encryptionKey)
+        {
             string encryptedText = SimpleEncryptWithPassword(plainText, encryptionKey.ConvertToUnsecureString());
             return encryptedText;
         }
 
-        private string SimpleEncryptWithPassword(string secretMessage, string password, byte[] nonSecretPayload = null)
+        private string SimpleEncryptWithPassword(SecureString secretMessage, string password, byte[] nonSecretPayload = null)
         {
-            if (string.IsNullOrEmpty(secretMessage))
+            if (secretMessage == null || secretMessage.Length == 0)
                 return ""; //throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
-            byte[] plainText = _encoding.GetBytes(secretMessage);
+            byte[] plainText = _encoding.GetBytes(secretMessage.ConvertToUnsecureString());
             byte[] cipherText = SimpleEncryptWithPassword(plainText, password, nonSecretPayload);
             return Convert.ToBase64String(cipherText);
         }
@@ -257,5 +262,12 @@ namespace mRemoteNG.Security.SymmetricEncryption
             _random.NextBytes(salt);
             return salt;
         }
+
+        public SecureString DecryptSecure(string cipherText, SecureString decryptionKey)
+        {
+            return Decrypt(cipherText, decryptionKey).ConvertToSecureString();
+        }
+
+
     }
 }

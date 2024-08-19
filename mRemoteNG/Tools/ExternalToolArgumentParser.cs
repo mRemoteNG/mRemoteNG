@@ -187,7 +187,7 @@ namespace mRemoteNG.Tools
                             replacement = Properties.OptionsCredentialsPage.Default.DefaultUsername;
                     break;
                 case "password":
-                    replacement = _connectionInfo.Password.ConvertToUnsecureString();
+                    replacement = _connectionInfo.GetPlaintextPassword();
                     if (string.IsNullOrEmpty(replacement) && Properties.OptionsCredentialsPage.Default.EmptyCredentials == "custom")
                         replacement = new LegacyRijndaelCryptographyProvider().Decrypt(Convert.ToString(Properties.OptionsCredentialsPage.Default.DefaultPassword), Runtime.EncryptionKey);
                     break;

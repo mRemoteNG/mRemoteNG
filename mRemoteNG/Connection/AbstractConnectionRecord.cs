@@ -10,6 +10,7 @@ using mRemoteNG.Tools.Attributes;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using System.Security;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Connection
 {
@@ -214,10 +215,34 @@ namespace mRemoteNG.Connection
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionPassword)),
          PasswordPropertyText(true),
          AttributeUsedInAllProtocolsExcept(ProtocolType.Telnet, ProtocolType.Rlogin, ProtocolType.RAW)]
-        public virtual SecureString Password
+        public virtual string Password
         {
-            get => GetPropertyValue("Password", _password);
-            set => SetField(ref _password, value, "Password");
+            get
+            {
+                // ensure the UI shows that a password has been entered
+                return "defaultpassword";
+            }
+            set
+            {
+                // immediately convert a password held in an insecure string to a SecureString
+                SetPasswordFromSecureString(value.ConvertToSecureString());
+                value = string.Empty;
+            }
+        }
+
+        public string GetPlaintextPassword()
+        {
+            if (_password != null)
+                return _password.ConvertToUnsecureString();
+            return string.Empty;
+        }
+
+        public SecureString GetPassword() { return _password; }
+
+        public void SetPasswordFromSecureString(SecureString securePassword)
+        {
+            this._password = securePassword;
+            RaisePropertyChangedEvent(this, new PropertyChangedEventArgs("Password"));
         }
 
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),

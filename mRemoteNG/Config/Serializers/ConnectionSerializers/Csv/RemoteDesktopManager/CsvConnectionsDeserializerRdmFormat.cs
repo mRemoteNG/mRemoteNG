@@ -131,7 +131,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv.RemoteDesktopMa
                 Hostname = hostString,
                 Port = port,
                 Username = username,
-                Password = password?.ConvertToSecureString(),
+                Password = password,
                 Domain = domain,
                 Icon = connectionType.IconName ?? "mRemoteNG",
                 Description = description,

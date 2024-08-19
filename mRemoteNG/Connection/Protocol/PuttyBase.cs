@@ -102,7 +102,7 @@ namespace mRemoteNG.Connection.Protocol
                     {
 
                         string username = InterfaceControl.Info?.Username ?? "";
-                        string password = InterfaceControl.Info?.Password.ConvertToUnsecureString() ?? "";
+                        string password = InterfaceControl.Info?.GetPlaintextPassword() ?? "";
                         string domain = InterfaceControl.Info?.Domain ?? "";
                         string UserViaAPI = InterfaceControl.Info?.UserViaAPI ?? "";
                         string privatekey = "";

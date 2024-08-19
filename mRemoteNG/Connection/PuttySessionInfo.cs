@@ -43,7 +43,7 @@ namespace mRemoteNG.Connection
 
         [ReadOnly(true)] public override string Username { get; set; }
 
-        [ReadOnly(true), Browsable(false)] public override SecureString Password { get; set; }
+        [ReadOnly(true), Browsable(false)] public override string Password { get; set; }
 
         [ReadOnly(true)] public override ProtocolType Protocol { get; set; }
 

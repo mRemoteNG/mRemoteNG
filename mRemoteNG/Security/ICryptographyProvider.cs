@@ -13,7 +13,10 @@ namespace mRemoteNG.Security
         int KeyDerivationIterations { get; set; }
 
         string Encrypt(string plainText, SecureString encryptionKey);
+        string Encrypt(SecureString plainText, SecureString encryptionKey);
 
         string Decrypt(string cipherText, SecureString decryptionKey);
+
+        SecureString DecryptSecure(string cipherText, SecureString decryptionKey);
     }
 }

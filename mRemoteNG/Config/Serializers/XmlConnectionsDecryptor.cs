@@ -37,12 +37,20 @@ namespace mRemoteNG.Config.Serializers
             _rootNodeInfo = rootNodeInfo;
         }
 
-        public string Decrypt(string plainText)
+        public SecureString Decrypt(string plainText)
+        {
+            return plainText == ""
+                ? "".ConvertToSecureString()
+                : _cryptographyProvider.Decrypt(plainText, _rootNodeInfo.PasswordString.ConvertToSecureString()).ConvertToSecureString();
+        }
+
+        public string DecryptUnsecure(string plainText)
         {
             return plainText == ""
                 ? ""
                 : _cryptographyProvider.Decrypt(plainText, _rootNodeInfo.PasswordString.ConvertToSecureString());
         }
+
 
         public string LegacyFullFileDecrypt(string xml)
         {

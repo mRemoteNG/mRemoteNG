@@ -73,7 +73,7 @@ namespace mRemoteNGTests.Config.Serializers.ConnectionSerializers.Csv
                 Icon = "SomeIcon",
                 Panel = "SomePanel",
                 Username = "SomeUsername",
-                Password = "SomePassword".ConvertToSecureString(),
+                Password = "SomePassword",
                 Domain = "SomeDomain",
                 Hostname = "SomeHostname",
                 PuttySession = "SomePuttySession",

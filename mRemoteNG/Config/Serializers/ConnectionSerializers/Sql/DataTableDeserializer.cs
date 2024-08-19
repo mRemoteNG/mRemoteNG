@@ -113,7 +113,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.OpeningCommand = (string)dataRow["OpeningCommand"];
             connectionInfo.Panel = (string)dataRow["Panel"];
             var pw = dataRow["Password"] as string;
-            connectionInfo.Password = DecryptValue(pw ?? "").ConvertToSecureString();
+            //connectionInfo.Password = DecryptValue(pw ?? "");
+            connectionInfo.SetPasswordFromSecureString(DecryptValue(pw ?? ""));
             connectionInfo.Port = (int)dataRow["Port"];
             connectionInfo.PostExtApp = (string)dataRow["PostExtApp"];
             connectionInfo.PreExtApp = (string)dataRow["PreExtApp"];
@@ -121,7 +122,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.PuttySession = (string)dataRow["PuttySession"];
             connectionInfo.RDGatewayDomain = (string)dataRow["RDGatewayDomain"];
             connectionInfo.RDGatewayHostname = (string)dataRow["RDGatewayHostname"];
-            connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]);
+            connectionInfo.RDGatewayPassword = DecryptValue((string)dataRow["RDGatewayPassword"]).ConvertToUnsecureString();
             connectionInfo.RDGatewayUsageMethod = (RDGatewayUsageMethod)Enum.Parse(typeof(RDGatewayUsageMethod), (string)dataRow["RDGatewayUsageMethod"]);
             connectionInfo.RDGatewayUseConnectionCredentials = (RDGatewayUseConnectionCredentials)Enum.Parse(typeof(RDGatewayUseConnectionCredentials), (string)dataRow["RDGatewayUseConnectionCredentials"]);
             connectionInfo.RDGatewayUsername = (string)dataRow["RDGatewayUsername"];
@@ -158,7 +159,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.VNCCompression = (ProtocolVNC.Compression)Enum.Parse(typeof(ProtocolVNC.Compression), (string)dataRow["VNCCompression"]);
             connectionInfo.VNCEncoding = (ProtocolVNC.Encoding)Enum.Parse(typeof(ProtocolVNC.Encoding), (string)dataRow["VNCEncoding"]);
             connectionInfo.VNCProxyIP = (string)dataRow["VNCProxyIP"];
-            connectionInfo.VNCProxyPassword = DecryptValue((string)dataRow["VNCProxyPassword"]);
+            connectionInfo.VNCProxyPassword = DecryptValue((string)dataRow["VNCProxyPassword"]).ConvertToUnsecureString();
             connectionInfo.VNCProxyPort = (int)dataRow["VNCProxyPort"];
             connectionInfo.VNCProxyType = (ProtocolVNC.ProxyType)Enum.Parse(typeof(ProtocolVNC.ProxyType), (string)dataRow["VNCProxyType"]);
             connectionInfo.VNCProxyUsername = (string)dataRow["VNCProxyUsername"];
@@ -245,16 +246,16 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.Inheritance.VNCViewOnly = MiscTools.GetBooleanValue(dataRow["InheritVNCViewOnly"]);
         }
 
-        private string DecryptValue(string cipherText)
+        private SecureString DecryptValue(string cipherText)
         {
             try
             {
-                return _cryptographyProvider.Decrypt(cipherText, _decryptionKey);
+                return _cryptographyProvider.DecryptSecure(cipherText, _decryptionKey);
             }
             catch (EncryptionException)
             {
                 // value may not be encrypted
-                return cipherText;
+                return cipherText.ConvertToSecureString();
             }
         }
 

@@ -113,8 +113,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                 : "";
 
             connectionRecord.Password = headers.Contains("Password")
-                ? connectionCsv[headers.IndexOf("Password")].ConvertToSecureString()
-                : "".ConvertToSecureString();
+                ? connectionCsv[headers.IndexOf("Password")] : "";
+
 
             connectionRecord.Domain = headers.Contains("Domain")
                 ? connectionCsv[headers.IndexOf("Domain")]

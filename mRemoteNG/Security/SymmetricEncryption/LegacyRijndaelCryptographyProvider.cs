@@ -26,10 +26,10 @@ namespace mRemoteNG.Security.SymmetricEncryption
             BlockSizeInBytes = 16;
         }
 
-        public string Encrypt(string strToEncrypt, SecureString strSecret)
+        public string Encrypt(SecureString strToEncrypt, SecureString strSecret)
         {
-            if (string.IsNullOrWhiteSpace(strToEncrypt) || strSecret.Length == 0)
-                return strToEncrypt;
+            if (strToEncrypt == null || strToEncrypt.Length == 0)
+                return string.Empty;
 
             try
             {
@@ -47,7 +47,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 ms.Write(aes.IV, 0, BlockSizeInBytes);
 
                 using CryptoStream cs = new(ms, aes.CreateEncryptor(), CryptoStreamMode.Write);
-                byte[] data = Encoding.UTF8.GetBytes(strToEncrypt);
+                byte[] data = Encoding.UTF8.GetBytes(strToEncrypt.ConvertToUnsecureString());
 
                 cs.Write(data, 0, data.Length);
                 cs.FlushFinalBlock();
@@ -61,7 +61,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.ErrorEncryptionFailed, ex.Message));
             }
 
-            return strToEncrypt;
+            return string.Empty;
         }
 
         public string Decrypt(string ciphertextBase64, SecureString password)
@@ -99,6 +99,16 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 //Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.ErrorDecryptionFailed, ex.Message));
                 throw new EncryptionException(Language.ErrorDecryptionFailed, ex);
             }
+        }
+
+        public SecureString DecryptSecure(string cipherText, SecureString decryptionKey)
+        {
+            return Decrypt(cipherText, decryptionKey).ConvertToSecureString();
+        }
+
+        public string Encrypt(string plainText, SecureString encryptionKey)
+        {
+            return Encrypt(plainText.ConvertToSecureString(), encryptionKey);
         }
     }
 }

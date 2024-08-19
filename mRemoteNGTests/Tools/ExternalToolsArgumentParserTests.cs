@@ -29,7 +29,7 @@ namespace mRemoteNGTests.Tools
                 Hostname = TestString,
                 Port = Port,
                 Username = TestString,
-                Password = TestString.ConvertToSecureString(),
+                Password = TestString,
                 Domain = TestString,
                 Description = TestString,
                 MacAddress = TestString,

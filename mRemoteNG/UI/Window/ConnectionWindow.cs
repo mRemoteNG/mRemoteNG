@@ -470,7 +470,7 @@ namespace mRemoteNG.UI.Window
 
                 Windows.SshtransferForm.Hostname = connectionInfo.Hostname;
                 Windows.SshtransferForm.Username = connectionInfo.Username;
-                Windows.SshtransferForm.Password = connectionInfo.Password.ConvertToUnsecureString();
+                Windows.SshtransferForm.Password = connectionInfo.GetPlaintextPassword();
                 Windows.SshtransferForm.Port = Convert.ToString(connectionInfo.Port);
             }
             catch (Exception ex)

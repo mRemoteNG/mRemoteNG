@@ -19,7 +19,7 @@ public class CredentialHarvesterTests
     private CredentialHarvester _credentialHarvester;
     private ICryptographyProvider _cryptographyProvider;
     private SecureString _key;
-    private SecureString _password = "mypass".ConvertToSecureString();
+    private string _password = "mypass";
     [SetUp]
     public void Setup()
     {
@@ -52,7 +52,8 @@ public class CredentialHarvesterTests
         var connection = new ConnectionInfo { Username = "myuser", Domain = "somedomain", Password = _password };
         var xdoc = CreateTestData(connection);
         var credentials = _credentialHarvester.Harvest(xdoc, _key);
-        Assert.That(credentials.Single().Password.ConvertToUnsecureString(), Is.EqualTo(connection.Password.ConvertToUnsecureString()));
+        //Assert.That(credentials.Single().Password.ConvertToUnsecureString(), Is.EqualTo(connection.Password.ConvertToUnsecureString()));
+        Assert.That(credentials.Single().Password.ConvertToUnsecureString(), Is.EqualTo(connection.GetPlaintextPassword()));
     }
 
     [Test]
