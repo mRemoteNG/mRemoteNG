@@ -25,6 +25,7 @@
     <StartupObject>mRemoteNG.App.ProgramRoot</StartupObject>
     <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
     <UserSecretsId>1307e3e3-38d6-41ee-8301-0a9bae87038b</UserSecretsId>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <DefineConstants>DEBUG</DefineConstants>
@@ -450,16 +451,16 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Schemas\mremoteng_confcons_v2_5.xsd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Schemas\mremoteng_confcons_v2_6.xsd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Schemas\mremoteng_confcons_v2_8.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Schemas\mremoteng_confcons_v2_7.xsd">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Schemas\mremoteng_credrepo_list_v1_0.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
