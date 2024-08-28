@@ -40,7 +40,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 
             try
             {
-                _vnc = (VncSharpCore.RemoteDesktop)Control;
+                _vnc = Control as VncSharpCore.RemoteDesktop;
                 _info = InterfaceControl.Info;
                 _vnc.VncPort = _info.Port;
 
