@@ -15,7 +15,8 @@ namespace mRemoteNG.UI.Forms
         {
             InitializeComponent();
             LoadFont();
-            lblLogoPartD.Content = $@"v. {GeneralAppInfo.ApplicationVersion}";
+            lblLogoPartD.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            lblLogoPartD.Content = $@"v. {GeneralAppInfo.ApplicationVersion} - 'Libro Ultimo'";
         }
         public static FrmSplashScreenNew GetInstance()
         {
