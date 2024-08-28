@@ -91,9 +91,9 @@
             lblTitle.ForeColor = System.Drawing.SystemColors.ControlText;
             lblTitle.Location = new System.Drawing.Point(6, 3);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new System.Drawing.Size(101, 27);
+            lblTitle.Size = new System.Drawing.Size(103, 27);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "Libro ultimo";
+            lblTitle.Text = "Libro Ultimo";
             lblTitle.UseCompatibleTextRendering = true;
             // 
             // lblVersion
