@@ -99,18 +99,18 @@
     <PackageReference Include="DockPanelSuite.ThemeVS2013" Version="3.1.1" />
     <PackageReference Include="DockPanelSuite.ThemeVS2015" Version="3.1.1" />
     <PackageReference Include="LiteDB" Version="5.0.21" />
-    <PackageReference Include="log4net" Version="2.0.17" />
+    <PackageReference Include="log4net" Version="3.0.0" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2739.15" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="MySql.Data" Version="9.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1" />
     <PackageReference Include="ObjectListView.Updated" Version="2.9.3" />
     <PackageReference Include="OpenCover" Version="4.7.1221" />
     <PackageReference Include="Renci.SshNet.Async" Version="1.4.0" />
-    <PackageReference Include="ReportGenerator" Version="5.3.8" />
+    <PackageReference Include="ReportGenerator" Version="5.3.9" />
     <PackageReference Include="SSH.NET" Version="2024.1.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
