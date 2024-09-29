@@ -18,13 +18,13 @@
 
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
-    <PackageReference Include="Cucumber.Messages" Version="26.0.0" />
-    <PackageReference Include="Google.Protobuf" Version="3.28.1" />
+    <PackageReference Include="Cucumber.Messages" Version="26.0.1" />
+    <PackageReference Include="Google.Protobuf" Version="3.28.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NUnit" Version="4.2.2" />
-    <PackageReference Include="NUnit.Console" Version="3.18.1" />
-    <PackageReference Include="NUnit.ConsoleRunner" Version="3.18.1" />
+    <PackageReference Include="NUnit.Console" Version="3.18.2" />
+    <PackageReference Include="NUnit.ConsoleRunner" Version="3.18.2" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
     <PackageReference Include="SpecFlow" Version="3.9.74" />
