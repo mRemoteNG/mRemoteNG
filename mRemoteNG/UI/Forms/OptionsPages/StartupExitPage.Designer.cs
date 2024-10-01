@@ -35,10 +35,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void InitializeComponent()
         {
             chkReconnectOnStart = new MrngCheckBox();
-            chkSaveConsOnExit = new MrngCheckBox();
             chkSingleInstance = new MrngCheckBox();
             chkStartMinimized = new MrngCheckBox();
             chkStartFullScreen = new MrngCheckBox();
+            pnlOptions = new System.Windows.Forms.Panel();
+            lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
+            pnlOptions.SuspendLayout();
             SuspendLayout();
             // 
             // chkReconnectOnStart
@@ -46,31 +48,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkReconnectOnStart._mice = MrngCheckBox.MouseState.OUT;
             chkReconnectOnStart.AutoSize = true;
             chkReconnectOnStart.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkReconnectOnStart.Location = new System.Drawing.Point(8, 31);
+            chkReconnectOnStart.Location = new System.Drawing.Point(6, 4);
             chkReconnectOnStart.Name = "chkReconnectOnStart";
             chkReconnectOnStart.Size = new System.Drawing.Size(295, 17);
             chkReconnectOnStart.TabIndex = 1;
             chkReconnectOnStart.Text = "Reconnect to previously opened sessions on startup";
             chkReconnectOnStart.UseVisualStyleBackColor = true;
             // 
-            // chkSaveConsOnExit
-            // 
-            chkSaveConsOnExit._mice = MrngCheckBox.MouseState.OUT;
-            chkSaveConsOnExit.AutoSize = true;
-            chkSaveConsOnExit.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkSaveConsOnExit.Location = new System.Drawing.Point(8, 7);
-            chkSaveConsOnExit.Name = "chkSaveConsOnExit";
-            chkSaveConsOnExit.Size = new System.Drawing.Size(153, 17);
-            chkSaveConsOnExit.TabIndex = 0;
-            chkSaveConsOnExit.Text = "Save connections on exit";
-            chkSaveConsOnExit.UseVisualStyleBackColor = true;
-            // 
             // chkSingleInstance
             // 
             chkSingleInstance._mice = MrngCheckBox.MouseState.OUT;
             chkSingleInstance.AutoSize = true;
             chkSingleInstance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkSingleInstance.Location = new System.Drawing.Point(8, 55);
+            chkSingleInstance.Location = new System.Drawing.Point(6, 27);
             chkSingleInstance.Name = "chkSingleInstance";
             chkSingleInstance.Size = new System.Drawing.Size(404, 17);
             chkSingleInstance.TabIndex = 2;
@@ -82,7 +72,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkStartMinimized._mice = MrngCheckBox.MouseState.OUT;
             chkStartMinimized.AutoSize = true;
             chkStartMinimized.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkStartMinimized.Location = new System.Drawing.Point(8, 78);
+            chkStartMinimized.Location = new System.Drawing.Point(6, 50);
             chkStartMinimized.Name = "chkStartMinimized";
             chkStartMinimized.Size = new System.Drawing.Size(105, 17);
             chkStartMinimized.TabIndex = 3;
@@ -95,7 +85,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkStartFullScreen._mice = MrngCheckBox.MouseState.OUT;
             chkStartFullScreen.AutoSize = true;
             chkStartFullScreen.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkStartFullScreen.Location = new System.Drawing.Point(8, 101);
+            chkStartFullScreen.Location = new System.Drawing.Point(6, 73);
             chkStartFullScreen.Name = "chkStartFullScreen";
             chkStartFullScreen.Size = new System.Drawing.Size(109, 17);
             chkStartFullScreen.TabIndex = 4;
@@ -103,26 +93,50 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkStartFullScreen.UseVisualStyleBackColor = true;
             chkStartFullScreen.CheckedChanged += chkStartFullScreen_CheckedChanged;
             // 
+            // pnlOptions
+            // 
+            pnlOptions.Controls.Add(chkStartFullScreen);
+            pnlOptions.Controls.Add(chkReconnectOnStart);
+            pnlOptions.Controls.Add(chkStartMinimized);
+            pnlOptions.Controls.Add(chkSingleInstance);
+            pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlOptions.Location = new System.Drawing.Point(0, 30);
+            pnlOptions.Name = "pnlOptions";
+            pnlOptions.Size = new System.Drawing.Size(610, 135);
+            pnlOptions.TabIndex = 0;
+            // 
+            // lblRegistrySettingsUsedInfo
+            // 
+            lblRegistrySettingsUsedInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            lblRegistrySettingsUsedInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            lblRegistrySettingsUsedInfo.ForeColor = System.Drawing.SystemColors.ControlText;
+            lblRegistrySettingsUsedInfo.Location = new System.Drawing.Point(0, 0);
+            lblRegistrySettingsUsedInfo.Name = "lblRegistrySettingsUsedInfo";
+            lblRegistrySettingsUsedInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            lblRegistrySettingsUsedInfo.Size = new System.Drawing.Size(610, 30);
+            lblRegistrySettingsUsedInfo.TabIndex = 0;
+            lblRegistrySettingsUsedInfo.Text = "Some settings are configured by your Administrator. Please contact your administrator for more information.";
+            lblRegistrySettingsUsedInfo.Visible = false;
+            // 
             // StartupExitPage
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            Controls.Add(chkStartFullScreen);
-            Controls.Add(chkReconnectOnStart);
-            Controls.Add(chkSaveConsOnExit);
-            Controls.Add(chkSingleInstance);
-            Controls.Add(chkStartMinimized);
+            Controls.Add(pnlOptions);
+            Controls.Add(lblRegistrySettingsUsedInfo);
             Name = "StartupExitPage";
             Size = new System.Drawing.Size(610, 490);
             Load += StartupExitPage_Load;
+            pnlOptions.ResumeLayout(false);
+            pnlOptions.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         internal MrngCheckBox chkReconnectOnStart;
-        internal MrngCheckBox chkSaveConsOnExit;
         internal MrngCheckBox chkSingleInstance;
         internal MrngCheckBox chkStartMinimized;
         internal MrngCheckBox chkStartFullScreen;
+        internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
+        internal System.Windows.Forms.Panel pnlOptions;
     }
 }

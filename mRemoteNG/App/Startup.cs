@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Versioning;
@@ -8,6 +7,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.App.Initialization;
 using mRemoteNG.App.Update;
 using mRemoteNG.Config.Connections.Multiuser;
+using mRemoteNG.Config.Settings.Registry;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Properties;
@@ -22,6 +22,7 @@ namespace mRemoteNG.App
     [SupportedOSPlatform("windows")]
     public class Startup
     {
+        private RegistryLoader _RegistryLoader;
         private AppUpdater _appUpdate;
         private readonly ConnectionIconLoader _connectionIconLoader;
         private readonly FrmMain _frmMain = FrmMain.Default;
@@ -30,7 +31,8 @@ namespace mRemoteNG.App
 
         private Startup()
         {
-            _appUpdate = new AppUpdater();
+            _RegistryLoader = RegistryLoader.Instance; //created instance
+            _appUpdate = new AppUpdater(); 
             _connectionIconLoader = new ConnectionIconLoader(GeneralAppInfo.HomePath + "\\Icons\\");
         }
 

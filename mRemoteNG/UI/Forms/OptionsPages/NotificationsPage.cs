@@ -1,8 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Versioning;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Config.Settings.Registry;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
 
@@ -11,6 +13,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     [SupportedOSPlatform("windows")]
     public sealed partial class NotificationsPage
     {
+        #region Private Fields
+        private OptRegistryNotificationsPage pageRegSettingsInstance;
+        #endregion
+
         public NotificationsPage()
         {
             InitializeComponent();
@@ -60,6 +66,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkPopupInfo.Text = Language.Informations;
             chkPopupWarning.Text = Language.Warnings;
             chkPopupError.Text = Language.Errors;
+
+            // Registry Settings Used Info
+            lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 
         public override void LoadSettings()
@@ -135,6 +144,148 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteErrorMsgs = chkPopupError.Checked;
         }
 
+        public override void LoadRegistrySettings()
+        {
+            Type settingsType = typeof(OptRegistryNotificationsPage);
+            RegistryLoader.RegistrySettings.TryGetValue(settingsType, out var settings);
+            pageRegSettingsInstance = settings as OptRegistryNotificationsPage;
+
+            RegistryLoader.Cleanup(settingsType);
+
+            LoadRegistryNotificationPanelSettings();
+            LoadRegistryLoggingSettings();
+            LoadRegistryPopupSettings();
+
+            // Updates the visibility of the information label indicating whether registry settings are used.
+            lblRegistrySettingsUsedInfo.Visible = ShowRegistrySettingsUsedInfo();
+        }
+
+        private void LoadRegistryNotificationPanelSettings()
+        {
+            if (!CommonRegistrySettings.AllowNotifications)
+            {
+                DisableControl(groupBoxNotifications);
+                return;
+            }
+
+            // ***
+            // Disable controls based on the registry settings.
+            //
+            if (pageRegSettingsInstance.NfpWriteDebugMsgs.IsSet)
+                DisableControl(chkShowDebugInMC);
+
+            if (pageRegSettingsInstance.NfpWriteInfoMsgs.IsSet)
+                DisableControl(chkShowInfoInMC);
+
+            if (pageRegSettingsInstance.NfpWriteWarningMsgs.IsSet)
+                DisableControl(chkShowWarningInMC);
+
+            if (pageRegSettingsInstance.NfpWriteErrorMsgs.IsSet)
+                DisableControl(chkShowErrorInMC);
+
+            if (pageRegSettingsInstance.SwitchToMCOnInformation.IsSet)
+                DisableControl(chkSwitchToMCInformation);
+
+            if (pageRegSettingsInstance.SwitchToMCOnWarning.IsSet)
+                DisableControl(chkSwitchToMCWarnings);
+
+            if (pageRegSettingsInstance.SwitchToMCOnError.IsSet)
+                DisableControl(chkSwitchToMCErrors);
+            
+        }
+
+        private void LoadRegistryLoggingSettings()
+        {
+            if (!CommonRegistrySettings.AllowLogging)
+            {
+                DisableControl(groupBoxLogging);
+                return;
+            }
+
+            // ***
+            // Disable controls based on the registry settings.
+            //
+            if (pageRegSettingsInstance.LogToApplicationDirectory.IsSet)
+                DisableControl(chkLogToCurrentDir);
+
+            if (pageRegSettingsInstance.LogFilePath.IsSet)
+            {
+                DisableControl(textBoxLogPath);
+                DisableControl(buttonRestoreDefaultLogPath);
+                DisableControl(buttonSelectLogPath);
+                DisableControl(chkLogToCurrentDir);
+            }
+
+            if (pageRegSettingsInstance.LfWriteDebugMsgs.IsSet)
+                DisableControl(chkLogDebugMsgs);
+
+            if (pageRegSettingsInstance.LfWriteInfoMsgs.IsSet)
+                DisableControl(chkLogInfoMsgs);
+
+            if (pageRegSettingsInstance.LfWriteWarningMsgs.IsSet)
+                DisableControl(chkLogWarningMsgs);
+
+            if (pageRegSettingsInstance.LfWriteErrorMsgs.IsSet)
+                DisableControl(chkLogErrorMsgs);
+        }
+
+        private void LoadRegistryPopupSettings()
+        {
+            if (!CommonRegistrySettings.AllowPopups)
+            {
+                DisableControl(groupBoxPopups);
+                return;
+            }
+
+            // ***
+            // Disable controls based on the registry settings.
+            //
+            if (pageRegSettingsInstance.PuWriteDebugMsgs.IsSet)
+                DisableControl(chkPopupDebug);
+
+            if (pageRegSettingsInstance.PuWriteInfoMsgs.IsSet)
+                DisableControl(chkPopupInfo);
+
+            if (pageRegSettingsInstance.PuWriteWarningMsgs.IsSet)
+                DisableControl(chkPopupWarning);
+
+            if (pageRegSettingsInstance.PuWriteErrorMsgs.IsSet)
+                DisableControl(chkPopupError);
+        }
+
+        public bool ShowRegistrySettingsUsedInfo()
+        {
+            bool CommonSettings =
+                   !CommonRegistrySettings.AllowNotifications
+                || !CommonRegistrySettings.AllowLogging
+                || !CommonRegistrySettings.AllowPopups;
+
+            bool NotificationPanelSettings =
+                   pageRegSettingsInstance.NfpWriteDebugMsgs.IsSet
+                || pageRegSettingsInstance.NfpWriteInfoMsgs.IsSet
+                || pageRegSettingsInstance.NfpWriteWarningMsgs.IsSet
+                || pageRegSettingsInstance.NfpWriteErrorMsgs.IsSet
+                || pageRegSettingsInstance.SwitchToMCOnInformation.IsSet
+                || pageRegSettingsInstance.SwitchToMCOnWarning.IsSet
+                || pageRegSettingsInstance.SwitchToMCOnError.IsSet;
+
+            bool LoggingSettings =
+                   pageRegSettingsInstance.LogToApplicationDirectory.IsSet
+                || pageRegSettingsInstance.LogFilePath.IsSet
+                || pageRegSettingsInstance.LfWriteDebugMsgs.IsSet
+                || pageRegSettingsInstance.LfWriteInfoMsgs.IsSet
+                || pageRegSettingsInstance.LfWriteWarningMsgs.IsSet
+                || pageRegSettingsInstance.LfWriteErrorMsgs.IsSet;
+
+            bool PopupSettings =
+                   pageRegSettingsInstance.PuWriteDebugMsgs.IsSet
+                || pageRegSettingsInstance.PuWriteInfoMsgs.IsSet
+                || pageRegSettingsInstance.PuWriteWarningMsgs.IsSet
+                || pageRegSettingsInstance.PuWriteErrorMsgs.IsSet;
+
+            return CommonSettings || NotificationPanelSettings || LoggingSettings || PopupSettings;
+        }
+
         private void buttonSelectLogPath_Click(object sender, System.EventArgs e)
         {
             string currentFile = textBoxLogPath.Text;
@@ -189,7 +340,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 return true;
             }
             catch
-            {
+        {
                 // If necessary, the error can be logged here.
                 return false;
             }
@@ -225,11 +376,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             try
             {
-                /// when all fails open filelocation to logfile...
+                // when all fails open filelocation to logfile...
                 // Open Windows Explorer to the directory containing the file
                 Process.Start("explorer.exe", $"/select,\"{path}\"");
-                return true;
-            }
+            return true;
+        }
             catch
             {
                 // If necessary, the error can be logged here.
