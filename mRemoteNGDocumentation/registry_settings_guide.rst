@@ -22,6 +22,9 @@ Make changes with caution and ensure that you have backups before making any adj
 .. toctree::
    :maxdepth: 4
 
-   registry/credential_settings
+   registry/startupExit_settings.rst
+   registry/appearance_settings.rst
+   registry/tabsPanels_settings.rst
+   registry/notification_settings.rst
    registry/credential_settings.rst
    registry/updates_settings.rst
