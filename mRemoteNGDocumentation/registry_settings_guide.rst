@@ -30,3 +30,4 @@ Make changes with caution and ensure that you have backups before making any adj
    registry/credential_settings.rst
    registry/sqlServer_settings.rst
    registry/updates_settings.rst
+   registry/security_settings.rst

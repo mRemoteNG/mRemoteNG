@@ -18,7 +18,7 @@ Common
 
 Allow Export Usernames
 ----------------------
-Determines whether exporting usernames is allowed.
+Specifies whether the export of usernames for saved connections is allowed.
 
 - **Value Name:** ``AllowExportUsernames``
 - **Value Type:** ``REG_SZ``
@@ -30,7 +30,7 @@ Determines whether exporting usernames is allowed.
 
 Allow Export Passwords
 ----------------------
-Determines whether exporting passwords is allowed.
+Specifies whether the export of passwords for saved connections is allowed.
 
 - **Value Name:** ``AllowExportPasswords``
 - **Value Type:** ``REG_SZ``
@@ -42,7 +42,7 @@ Determines whether exporting passwords is allowed.
 
 Allow Save Usernames
 --------------------
-Determines whether saving usernames is allowed.
+Specifies whether the saving of usernames for saved connections is allowed.
 
 - **Value Name:** ``AllowSaveUsernames``
 - **Value Type:** ``REG_SZ``
@@ -61,7 +61,7 @@ Determines whether saving usernames is allowed.
 
 Allow Save Passwords
 --------------------
-Determines whether saving passwords is allowed.
+Specifies whether the saving of passwords for saved connections is allowed.
 
 - **Value Name:** ``AllowSavePasswords``
 - **Value Type:** ``REG_SZ``
@@ -154,7 +154,8 @@ Specifies the default domain.
 
 Default Username Enabled
 ------------------------
-Specifies that entering the custom default username field is enabled.
+Controls whether the default username field is enabled or disabled. 
+Locking the field may make more sense than disabling the entire settings option.
 
 - **Value Name:** ``DefaultUsernameEnabled``
 - **Value Type:** ``REG_SZ``
@@ -166,7 +167,8 @@ Specifies that entering the custom default username field is enabled.
 
 Default Password Enabled
 ------------------------
-Specifies that entering the custom default password field is enabled.
+Controls whether the default password field is enabled or disabled. 
+Locking the field may make more sense than disabling the entire settings option.
 
 - **Value Name:** ``DefaultPasswordEnabled``
 - **Value Type:** ``REG_SZ``
@@ -178,7 +180,8 @@ Specifies that entering the custom default password field is enabled.
 
 Default User Via API Enabled
 ----------------------------
-Specifies that entering the custom default api user field is enabled.
+Controls whether the default user via API field is enabled or disabled. 
+Locking the field may make more sense than disabling the entire settings option.
 
 - **Value Name:** ``DefaultUserViaAPIEnabled``
 - **Value Type:** ``REG_SZ``

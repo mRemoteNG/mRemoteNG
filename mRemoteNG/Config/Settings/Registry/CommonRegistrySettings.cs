@@ -40,22 +40,22 @@ namespace mRemoteNG.Config.Settings.Registry
         #region general credential registry settings
 
         /// <summary>
-        /// Setting that indicates whether exporting passwords is allowed.
+        /// Specifies whether the export of passwords for saved connections is allowed.
         /// </summary>
         public static bool AllowExportPasswords { get; }
 
         /// <summary>
-        /// Setting that indicates whether exporting usernames is allowed.
+        /// Specifies whether the export of usernames for saved connections is allowed.
         /// </summary>
         public static bool AllowExportUsernames { get; }
 
         /// <summary>
-        /// Setting that indicates whether saving passwords in connections is allowed.
+        /// Specifies whether the saving of usernames for saved connections is allowed.
         /// </summary>
         public static bool AllowSavePasswords { get; }
 
         /// <summary>
-        /// Setting that indicates whether saving in connections usernames is allowed.
+        /// Specifies whether the saving of passwords for saved connections is allowed.
         /// </summary>
         public static bool AllowSaveUsernames { get; }
 
