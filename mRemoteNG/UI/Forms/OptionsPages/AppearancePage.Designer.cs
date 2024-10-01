@@ -42,12 +42,15 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon = new MrngCheckBox();
             chkMinimizeToSystemTray = new MrngCheckBox();
             chkCloseToSystemTray = new MrngCheckBox();
+            pnlOptions = new System.Windows.Forms.Panel();
+            lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
+            pnlOptions.SuspendLayout();
             SuspendLayout();
             // 
             // lblLanguageRestartRequired
             // 
             lblLanguageRestartRequired.AutoSize = true;
-            lblLanguageRestartRequired.Location = new System.Drawing.Point(8, 61);
+            lblLanguageRestartRequired.Location = new System.Drawing.Point(3, 59);
             lblLanguageRestartRequired.Name = "lblLanguageRestartRequired";
             lblLanguageRestartRequired.Size = new System.Drawing.Size(414, 13);
             lblLanguageRestartRequired.TabIndex = 2;
@@ -58,7 +61,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cboLanguage._mice = MrngComboBox.MouseState.HOVER;
             cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cboLanguage.FormattingEnabled = true;
-            cboLanguage.Location = new System.Drawing.Point(8, 29);
+            cboLanguage.Location = new System.Drawing.Point(3, 27);
             cboLanguage.Name = "cboLanguage";
             cboLanguage.Size = new System.Drawing.Size(304, 21);
             cboLanguage.Sorted = true;
@@ -67,7 +70,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblLanguage
             // 
             lblLanguage.AutoSize = true;
-            lblLanguage.Location = new System.Drawing.Point(8, 8);
+            lblLanguage.Location = new System.Drawing.Point(3, 6);
             lblLanguage.Name = "lblLanguage";
             lblLanguage.Size = new System.Drawing.Size(58, 13);
             lblLanguage.TabIndex = 0;
@@ -78,7 +81,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowFullConnectionsFilePathInTitle._mice = MrngCheckBox.MouseState.OUT;
             chkShowFullConnectionsFilePathInTitle.AutoSize = true;
             chkShowFullConnectionsFilePathInTitle.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(8, 132);
+            chkShowFullConnectionsFilePathInTitle.Location = new System.Drawing.Point(3, 130);
             chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle";
             chkShowFullConnectionsFilePathInTitle.Size = new System.Drawing.Size(268, 17);
             chkShowFullConnectionsFilePathInTitle.TabIndex = 4;
@@ -90,7 +93,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowDescriptionTooltipsInTree._mice = MrngCheckBox.MouseState.OUT;
             chkShowDescriptionTooltipsInTree.AutoSize = true;
             chkShowDescriptionTooltipsInTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkShowDescriptionTooltipsInTree.Location = new System.Drawing.Point(8, 109);
+            chkShowDescriptionTooltipsInTree.Location = new System.Drawing.Point(3, 107);
             chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree";
             chkShowDescriptionTooltipsInTree.Size = new System.Drawing.Size(256, 17);
             chkShowDescriptionTooltipsInTree.TabIndex = 3;
@@ -102,7 +105,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon._mice = MrngCheckBox.MouseState.OUT;
             chkShowSystemTrayIcon.AutoSize = true;
             chkShowSystemTrayIcon.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkShowSystemTrayIcon.Location = new System.Drawing.Point(8, 178);
+            chkShowSystemTrayIcon.Location = new System.Drawing.Point(3, 176);
             chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon";
             chkShowSystemTrayIcon.Size = new System.Drawing.Size(178, 17);
             chkShowSystemTrayIcon.TabIndex = 5;
@@ -114,7 +117,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkMinimizeToSystemTray._mice = MrngCheckBox.MouseState.OUT;
             chkMinimizeToSystemTray.AutoSize = true;
             chkMinimizeToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkMinimizeToSystemTray.Location = new System.Drawing.Point(8, 201);
+            chkMinimizeToSystemTray.Location = new System.Drawing.Point(3, 199);
             chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray";
             chkMinimizeToSystemTray.Size = new System.Drawing.Size(147, 17);
             chkMinimizeToSystemTray.TabIndex = 6;
@@ -126,29 +129,53 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkCloseToSystemTray._mice = MrngCheckBox.MouseState.OUT;
             chkCloseToSystemTray.AutoSize = true;
             chkCloseToSystemTray.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkCloseToSystemTray.Location = new System.Drawing.Point(8, 224);
+            chkCloseToSystemTray.Location = new System.Drawing.Point(3, 222);
             chkCloseToSystemTray.Name = "chkCloseToSystemTray";
             chkCloseToSystemTray.Size = new System.Drawing.Size(129, 17);
             chkCloseToSystemTray.TabIndex = 7;
             chkCloseToSystemTray.Text = "Close to System Tray";
             chkCloseToSystemTray.UseVisualStyleBackColor = true;
             // 
+            // pnlOptions
+            // 
+            pnlOptions.Controls.Add(cboLanguage);
+            pnlOptions.Controls.Add(chkCloseToSystemTray);
+            pnlOptions.Controls.Add(chkMinimizeToSystemTray);
+            pnlOptions.Controls.Add(lblLanguageRestartRequired);
+            pnlOptions.Controls.Add(chkShowSystemTrayIcon);
+            pnlOptions.Controls.Add(chkShowDescriptionTooltipsInTree);
+            pnlOptions.Controls.Add(lblLanguage);
+            pnlOptions.Controls.Add(chkShowFullConnectionsFilePathInTitle);
+            pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
+            pnlOptions.Location = new System.Drawing.Point(0, 30);
+            pnlOptions.Name = "pnlOptions";
+            pnlOptions.Size = new System.Drawing.Size(610, 267);
+            pnlOptions.TabIndex = 8;
+            // 
+            // lblRegistrySettingsUsedInfo
+            // 
+            lblRegistrySettingsUsedInfo.BackColor = System.Drawing.SystemColors.ControlLight;
+            lblRegistrySettingsUsedInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            lblRegistrySettingsUsedInfo.ForeColor = System.Drawing.SystemColors.ControlText;
+            lblRegistrySettingsUsedInfo.Location = new System.Drawing.Point(0, 0);
+            lblRegistrySettingsUsedInfo.Name = "lblRegistrySettingsUsedInfo";
+            lblRegistrySettingsUsedInfo.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            lblRegistrySettingsUsedInfo.Size = new System.Drawing.Size(610, 30);
+            lblRegistrySettingsUsedInfo.TabIndex = 9;
+            lblRegistrySettingsUsedInfo.Text = "Some settings are configured by your Administrator. Please contact your administrator for more information.";
+            lblRegistrySettingsUsedInfo.Visible = false;
+            // 
             // AppearancePage
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            Controls.Add(chkCloseToSystemTray);
-            Controls.Add(lblLanguageRestartRequired);
-            Controls.Add(cboLanguage);
-            Controls.Add(lblLanguage);
-            Controls.Add(chkShowFullConnectionsFilePathInTitle);
-            Controls.Add(chkShowDescriptionTooltipsInTree);
-            Controls.Add(chkShowSystemTrayIcon);
-            Controls.Add(chkMinimizeToSystemTray);
+            Controls.Add(pnlOptions);
+            Controls.Add(lblRegistrySettingsUsedInfo);
             Name = "AppearancePage";
             Size = new System.Drawing.Size(610, 490);
+            pnlOptions.ResumeLayout(false);
+            pnlOptions.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         internal Controls.MrngLabel lblLanguageRestartRequired;
@@ -159,5 +186,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngCheckBox chkShowSystemTrayIcon;
         internal MrngCheckBox chkMinimizeToSystemTray;
         internal MrngCheckBox chkCloseToSystemTray;
+        private System.Windows.Forms.Panel pnlOptions;
+        internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
     }
 }

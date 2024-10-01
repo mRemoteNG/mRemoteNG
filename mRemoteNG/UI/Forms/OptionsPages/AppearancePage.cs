@@ -5,12 +5,14 @@ using mRemoteNG.Properties;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
+using mRemoteNG.Config.Settings.Registry;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     [SupportedOSPlatform("windows")]
     public sealed partial class AppearancePage
     {
+        private OptRegistryAppearancePage pageRegSettingsInstance;
         public AppearancePage()
         {
             InitializeComponent();
@@ -36,6 +38,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon.Text = Language.AlwaysShowSysTrayIcon;
             chkMinimizeToSystemTray.Text = Language.MinimizeToSysTray;
             chkCloseToSystemTray.Text = Language.CloseToSysTray;
+            lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 
         public override void LoadSettings()
@@ -101,6 +104,48 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsAppearancePage.Default.MinimizeToTray = chkMinimizeToSystemTray.Checked;
             Properties.OptionsAppearancePage.Default.CloseToTray = chkCloseToSystemTray.Checked;
+        }
+
+        public override void LoadRegistrySettings()
+        {
+            Type settingsType = typeof(OptRegistryAppearancePage);
+            RegistryLoader.RegistrySettings.TryGetValue(settingsType, out var settings);
+            pageRegSettingsInstance = settings as OptRegistryAppearancePage;
+
+            RegistryLoader.Cleanup(settingsType);
+
+            // ***
+            // Disable controls based on the registry settings.
+            //
+            if (pageRegSettingsInstance.ShowDescriptionTooltipsInConTree.IsSet)
+                DisableControl(chkShowDescriptionTooltipsInTree);
+
+            if (pageRegSettingsInstance.ShowCompleteConFilePathInTitle.IsSet)
+                DisableControl(chkShowFullConnectionsFilePathInTitle);
+
+            if (pageRegSettingsInstance.AlwaysShowSystemTrayIcon.IsSet)
+                DisableControl(chkShowSystemTrayIcon);
+
+            if (pageRegSettingsInstance.MinimizeToTray.IsSet)
+                DisableControl(chkMinimizeToSystemTray);
+
+            if (pageRegSettingsInstance.CloseToTray.IsSet)
+                DisableControl(chkCloseToSystemTray);
+
+            // Updates the visibility of the information label indicating whether registry settings are used.
+            lblRegistrySettingsUsedInfo.Visible = ShowRegistrySettingsUsedInfo();
+        }
+
+        /// <summary>
+        /// Checks if specific registry settings related to appearence page are used.
+        /// </summary>
+        public bool ShowRegistrySettingsUsedInfo()
+        {
+            return pageRegSettingsInstance.ShowDescriptionTooltipsInConTree.IsSet
+                || pageRegSettingsInstance.ShowCompleteConFilePathInTitle.IsSet
+                || pageRegSettingsInstance.AlwaysShowSystemTrayIcon.IsSet
+                || pageRegSettingsInstance.MinimizeToTray.IsSet
+                || pageRegSettingsInstance.CloseToTray.IsSet;
         }
     }
 }

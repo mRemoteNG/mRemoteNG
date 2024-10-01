@@ -61,6 +61,25 @@ namespace mRemoteNG.Config.Settings.Registry
 
         #endregion
 
+        #region general notification registry settings
+
+        /// <summary>
+        /// Specifies whether logging to a file is allowed or not.
+        /// </summary>
+        public static bool AllowLogging { get; }
+
+        /// <summary>
+        /// Specifies whether notifications are allowed or not.
+        /// </summary>
+        public static bool AllowNotifications { get; }
+
+        /// <summary>
+        /// Specifies whether pop-up notifications are allowed or not.
+        /// </summary>
+        public static bool AllowPopups { get; }
+
+        #endregion
+
         static CommonRegistrySettings()
         {
             IRegistryRead regValueUtility = new WinRegistry();
@@ -87,6 +106,17 @@ namespace mRemoteNG.Config.Settings.Registry
             AllowSaveUsernames = regValueUtility.GetBoolValue(hive, credentialSubkey, nameof(AllowSaveUsernames), true);
 
             #endregion
+
+            #region notification registry settings
+
+            string notificationSubkey = WindowsRegistryInfo.Notification;
+
+            AllowLogging = regValueUtility.GetBoolValue(hive, notificationSubkey, nameof(AllowLogging), true);
+            AllowNotifications = regValueUtility.GetBoolValue(hive, notificationSubkey, nameof(AllowNotifications), true);
+            AllowPopups = regValueUtility.GetBoolValue(hive, notificationSubkey, nameof(AllowPopups), true);
+
+            #endregion
+
         }
     }
 }
