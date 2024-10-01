@@ -24,7 +24,9 @@ Make changes with caution and ensure that you have backups before making any adj
 
    registry/startupExit_settings.rst
    registry/appearance_settings.rst
+   registry/connection_settings.rst
    registry/tabsPanels_settings.rst
    registry/notification_settings.rst
    registry/credential_settings.rst
+   registry/sqlServer_settings.rst
    registry/updates_settings.rst
