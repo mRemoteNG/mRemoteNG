@@ -67,8 +67,7 @@ namespace mRemoteNG.App
             DateTime updateDate;
             DateTime currentDate = DateTime.Now;
 
-            //OBSOLETE: Settings.Default.SaveConsOnExit is obsolete and should be removed in a future release
-            if (Properties.OptionsStartupExitPage.Default.SaveConnectionsOnExit || (Properties.OptionsBackupPage.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.OnExit))
+            if ((Properties.OptionsBackupPage.Default.SaveConnectionsFrequency == (int)ConnectionsBackupFrequencyEnum.OnExit))
             {
                 Runtime.ConnectionsService.SaveConnections();
 				return;
