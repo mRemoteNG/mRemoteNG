@@ -6,9 +6,6 @@ using mRemoteNG.Tools.WindowsRegistry;
 namespace mRemoteNG.Config.Settings.Registry
 {
     [SupportedOSPlatform("windows")]
-    /// Static utility class that provides access to and management of registry settings on the local machine.
-    /// It abstracts complex registry operations and centralizes the handling of various registry keys.
-    /// Benefits: Simplified code, enhances maintainability, and ensures consistency. #ReadOnly
     public static class CommonRegistrySettings
     {
         #region general update registry settings
@@ -37,10 +34,6 @@ namespace mRemoteNG.Config.Settings.Registry
         /// </remarks>
         public static bool AllowCheckForUpdatesManual { get; }
 
-        /// <summary>
-        /// Specifies whether a question about checking for updates is displayed at startup.
-        /// </summary>
-        public static bool AllowPromptForUpdatesPreference { get; }
 
         #endregion
 
@@ -70,21 +63,21 @@ namespace mRemoteNG.Config.Settings.Registry
 
         static CommonRegistrySettings()
         {
-            IRegistry regValueUtility = new WinRegistry();
+            IRegistryRead regValueUtility = new WinRegistry();
             RegistryHive hive = WindowsRegistryInfo.Hive;
 
-            #region update registry settings setup
+            #region update registry settings
 
             string updateSubkey = WindowsRegistryInfo.Update;
 
             AllowCheckForUpdates = regValueUtility.GetBoolValue(hive, updateSubkey, nameof(AllowCheckForUpdates), true);
             AllowCheckForUpdatesAutomatical = regValueUtility.GetBoolValue(hive, updateSubkey, nameof(AllowCheckForUpdatesAutomatical), AllowCheckForUpdates);
             AllowCheckForUpdatesManual = regValueUtility.GetBoolValue(hive, updateSubkey, nameof(AllowCheckForUpdatesManual), AllowCheckForUpdates);
-            AllowPromptForUpdatesPreference = regValueUtility.GetBoolValue(hive, updateSubkey, nameof(AllowPromptForUpdatesPreference), AllowCheckForUpdates);
+            
 
             #endregion
 
-            #region credential registry settings setup
+            #region credential registry settings
 
             string credentialSubkey = WindowsRegistryInfo.Credential;
 

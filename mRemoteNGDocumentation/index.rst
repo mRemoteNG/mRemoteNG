@@ -11,7 +11,6 @@ Welcome to mRemoteNG's documentation!
    protocols.rst
    keyboard_shortcuts.rst
    sql_configuration.rst
-   registry_settings_information.rst
    registry_settings_guide.rst
    command_line_switches.rst
    themes.rst
