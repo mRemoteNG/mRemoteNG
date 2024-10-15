@@ -169,22 +169,6 @@ namespace mRemoteNG.Themes
 
                     //Load the embedded themes, extended palettes are taken from the vs2015 themes, trying to match the color theme
 
-                    // 2012
-                    ThemeInfo vs2012Light = new("vs2012Light", new VS2012LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
-                    themes.Add(vs2012Light.Name, vs2012Light);
-                    ThemeInfo vs2012Dark = new("vs2012Dark", new VS2012DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015darkNG"]).ExtendedPalette);
-                    themes.Add(vs2012Dark.Name, vs2012Dark);
-                    ThemeInfo vs2012Blue = new("vs2012Blue", new VS2012BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2012, ((ThemeInfo)themes["vs2015blueNG"]).ExtendedPalette);
-                    themes.Add(vs2012Blue.Name, vs2012Blue);
-
-                    // 2013
-                    ThemeInfo vs2013Light = new("vs2013Light", new VS2013LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
-                    themes.Add(vs2013Light.Name, vs2013Light);
-                    ThemeInfo vs2013Dark = new("vs2013Dark", new VS2013DarkTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015darkNG"]).ExtendedPalette);
-                    themes.Add(vs2013Dark.Name, vs2013Dark);
-                    ThemeInfo vs2013Blue = new("vs2013Blue", new VS2013BlueTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2013, ((ThemeInfo)themes["vs2015blueNG"]).ExtendedPalette);
-                    themes.Add(vs2013Blue.Name, vs2013Blue);
-
                     // 2015
                     ThemeInfo vs2015Light = new("vs2015Light", new VS2015LightTheme(), "", VisualStudioToolStripExtender.VsVersion.Vs2015, ((ThemeInfo)themes["vs2015lightNG"]).ExtendedPalette);
                     themes.Add(vs2015Light.Name, vs2015Light);

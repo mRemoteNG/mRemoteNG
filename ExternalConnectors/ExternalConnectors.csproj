@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <UseWindowsForms>True</UseWindowsForms>
     <Platforms>x64</Platforms>
-    <Configurations>Debug;Release;Debug Portable;Release Portable</Configurations>
+    <Configurations>Debug;Release;Debug Portable;Release Portable;Deploy to github</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Portable|x64'">
@@ -15,8 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AWSSDK.Core" Version="3.7.400.26" />
-    <PackageReference Include="AWSSDK.EC2" Version="3.7.406.4" />
+    <PackageReference Include="AWSSDK.Core" Version="3.7.400.34" />
+    <PackageReference Include="AWSSDK.EC2" Version="3.7.409.1" />
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>

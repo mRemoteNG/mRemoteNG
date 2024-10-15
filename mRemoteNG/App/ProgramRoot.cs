@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Runtime.Versioning;
 using System.Threading;
 using System.Windows.Forms;
@@ -21,6 +23,20 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
+            // Set path for assembly resolution
+            // This is needed for the application to find the assemblies in the Assemblies folder
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, resolveArgs) =>
+            {
+                string assemblyName = new AssemblyName(resolveArgs.Name).Name.Replace(".resources", string.Empty);
+                string assemblyFile = assemblyName + ".dll";
+                string assemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies", assemblyFile);
+
+                if (File.Exists(assemblyPath))
+                {
+                    return Assembly.LoadFrom(assemblyPath);
+                }
+                return null;
+            };
             /*
              * Temporarily disable LocalSettingsManager initialization at startup
              * due to unfinished implementation causing build errors.
