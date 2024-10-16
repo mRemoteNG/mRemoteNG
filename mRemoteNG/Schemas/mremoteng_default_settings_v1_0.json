@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "mRemoteNG Default Settings",
+  "description": "This schema defines the default settings for mRemoteNG.",
+  "type": "object",
+  "database": {
+    "filename": "mRemoteNG.appSettings",
+    "autoCreatedb": true
+  },
+  "tables": [
+    {
+      "name": "main",
+      "columns": [
+        {
+          "name": "name",
+          "description": "The name of the application.",
+          "type": "string",
+          "value": "mRemoteNG",
+          "required": true
+        },
+        {
+          "name": "version",
+          "description": "The version of the application.",
+          "type": "string",
+          "value": "1.77.3",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "update",
+      "columns": [
+        {
+          "name": "checkInterval",
+          "description": "The interval at which to check for updates in seconds.",
+          "type": "integer",
+          "value": 86400,
+          "required": true
+        },
+        {
+          "name": "autoUpdate",
+          "description": "Whether to automatically update the application.",
+          "type": "boolean",
+          "value": false,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "theme",
+      "columns": [
+        {
+          "name": "primaryColor",
+          "description": "The primary color of the application.",
+          "type": "string",
+          "value": "#[a-f0-9]{6}",
+          "required": true
+        },
+        {
+          "name": "secondaryColor",
+          "type": "string",
+          "value": "#[a-f0-9]{6}",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "backup",
+      "columns": [
+        {
+          "name": "schedule",
+          "description": "The schedule for backing up the application.",
+          "type": "string",
+          "value": ["daily", "weekly", "monthly"],
+          "required": true
+        },
+        {
+          "name": "destination",
+          "description": "The destination for the backup file.",
+          "type": "string",
+          "format": "file",
+          "value": "C:\\Users\\user\\Documents\\mRemoteNG\\backup",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

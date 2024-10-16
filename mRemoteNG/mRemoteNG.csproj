@@ -464,6 +464,9 @@
     <None Update="Schemas\mremoteng_creds_v1_0.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Schemas\mremoteng_default_settings_v1_0.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Themes\darcula.vstheme">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

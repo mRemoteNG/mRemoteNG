@@ -37,24 +37,10 @@ namespace mRemoteNG.App
                 }
                 return null;
             };
-            /*
-             * Temporarily disable LocalSettingsManager initialization at startup
-             * due to unfinished implementation causing build errors.
-             * Uncomment if needed in your local repo.
-             */
-            /*
-            /*var settingsManager = new LocalSettingsManager();
 
-            // Check if the database exists
-            if (settingsManager.DatabaseExists())
-            {
-                Console.WriteLine("Database exists.");
-            }
-            else
-            {
-                Console.WriteLine("Database does not exist. Creating...");
-                settingsManager.CreateDatabase();
-            }*/
+            LocalSettingsDBManager settingsManager = new LocalSettingsDBManager(dbPath: "mRemoteNG.appSettings", useEncryption: false, schemaFilePath: "");
+
+            
 
             if (Properties.OptionsStartupExitPage.Default.SingleInstance)
                 StartApplicationAsSingleInstance();
