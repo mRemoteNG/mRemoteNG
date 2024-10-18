@@ -231,9 +231,6 @@
   <data name="Display" xml:space="preserve">
     <value>Zobrazení</value>
   </data>
-  <data name="Gateway" xml:space="preserve">
-    <value>Brána</value>
-  </data>
   <data name="Miscellaneous" xml:space="preserve">
     <value>Různé</value>
   </data>
@@ -606,6 +603,9 @@ Otevírám nový prázdný soubor seznamu spojení.</value>
   </data>
   <data name="HttpSetPropsFailed" xml:space="preserve">
     <value>Nastavení vlast. HTTP selhalo!</value>
+  </data>
+  <data name="IdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Zavřít záložku dvojklikem na ní</value>
   </data>
   <data name="ImportAD" xml:space="preserve">
     <value>Import z Active Directory</value>
@@ -1463,9 +1463,6 @@ Zpráva:
   <data name="SaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
     <value>Přejete si uložit stávající soubor seznamu připojení před načtením jiného?</value>
   </data>
-  <data name="SaveConsOnExit" xml:space="preserve">
-    <value>Ukládat spojení při ukončení aplikace</value>
-  </data>
   <data name="SaveImageFilter" xml:space="preserve">
     <value>Soubor Graphics Interchange Format (.gif)|*.gif|Soubor Joint Photographic Experts Group (.jpeg)|*.jpeg|Soubor Joint Photographic Experts Group (.jpg)|*.jpg|Soubor Portable Network Graphics (.png)|*.png</value>
   </data>
@@ -1800,30 +1797,50 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="LogToAppDir" xml:space="preserve">
     <value>Logovat do adresáře kde je aplikace umístěna.</value>
   </data>
-+ 
-+ 
-+ <data name="AssignedCredential" xml:space="preserve">
-     <value>Přiřazené přihlašovací informace</value>
-  </data>
-  <data name="StartMinimized" xml:space="preserve">
-    <value>Po spuštění minimalizovat</value>
-  </data><data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
-    <value>Otevřít prázdný panel při startu aplikace</value>
-  </data>
-  <data name="IdentifyQuickConnectTabs" xml:space="preserve">
-    <value>Zavřít záložku dvojklikem na ní</value>
-  </data>
-  <data name="CloseToSysTray" xml:space="preserve">
-    <value>Zavřít do oznamovací oblasti</value>
+  <data name="AssignedCredential" xml:space="preserve">
+    <value>Přiřazené přihlašovací informace</value>
   </data>
   <data name="OptionsThemeNewThemeCaption" xml:space="preserve">
     <value>Nový název šablony</value>
   </data>
+  <data name="OptionsThemeNewThemeError" xml:space="preserve">
+    <value>Nepodařilo se vytvořit šablonu, buď již existuje šablona se stejným názvem nebo vámi zadaný název obsahuje speciální znaky.</value>
+  </data>
   <data name="OptionsThemeNewThemeText" xml:space="preserve">
     <value>Zadejte nový název šablony</value>
   </data>
-  <data name="OptionsThemeNewThemeError" xml:space="preserve">
-    <value>Nepodařilo se vytvořit šablonu, buď již existuje šablona se stejným názvem nebo vámi zadaný název obsahuje speciální znaky.</value>
+  <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
+    <value>Uložit připojení při každé úpravě</value>
+  </data>
+  <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
+    <value>Filtrovat shody vyhledávání v seznamu připojení</value>
+  </data>
+  <data name="TestConnection" xml:space="preserve">
+    <value>Test spojení</value>
+  </data>
+  <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
+    <value>Použít kódování UTF8 pro vlastnost RDP "Load Balance Info"</value>
+  </data>
+  <data name="CreateEmptyPanelOnStartUp" xml:space="preserve">
+    <value>Otevřít prázdný panel při startu aplikace</value>
+  </data>
+  <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
+    <value>Umístit vyhledávací pole nad seznam připojení</value>
+  </data>
+  <data name="DoNotTrimUsername" xml:space="preserve">
+    <value>Nezkracovat uživatelské jméno</value>
+  </data>
+  <data name="StartMinimized" xml:space="preserve">
+    <value>Po spuštění minimalizovat</value>
+  </data>
+  <data name="CloseToSysTray" xml:space="preserve">
+    <value>Zavřít do oznamovací oblasti</value>
+  </data>
+  <data name="Gateway" xml:space="preserve">
+    <value>Brána</value>
+  </data>
+  <data name="SaveConsOnExit" xml:space="preserve">
+    <value>Ukládat spojení při ukončení aplikace</value>
   </data>
   <data name="SetHostnameLikeDisplayNameNewConnection" xml:space="preserve">
     <value>Při vytváření nového připojení nastaví stejný název zobrazení jako je název počítače</value>
@@ -1834,51 +1851,34 @@ mRemoteNG se nyní ukončí a zahájí instalaci.</value>
   <data name="RdpConnectionTimeout" xml:space="preserve">
     <value>Časová prodleva připojení k RDP</value>
   </data>
-    <data name="WhenClosingConnections" xml:space="preserve">
+  <data name="WhenClosingConnections" xml:space="preserve">
     <value>Když se ukončí připojení:</value>
   </data>
-    <data name="WarnMeWhenClosingConnections" xml:space="preserve">
+  <data name="WarnMeWhenClosingConnections" xml:space="preserve">
     <value>Upozornit mě na ukončení připojení</value>
   </data>
-    <data name="WarnMeOnlyWhenClosingMultipleConnections" xml:space="preserve">
-    <value>Upozornit mě pouze při ukončení několika připojení</value>
-  </data>
-    <data name="WarnMeOnlyWhenExitingProgram" xml:space="preserve">
+  <data name="WarnMeOnlyWhenExitingProgram" xml:space="preserve">
     <value>Upozornit mě pouze při ukončení programu</value>
   </data>
-    <data name="DoNotWarnMeWhenClosingConnections" xml:space="preserve">
+  <data name="DoNotWarnMeWhenClosingConnections" xml:space="preserve">
     <value>Neupozorňovat na ukončení připojení</value>
   </data>
-    <data name="SaveConnectionsAfterEveryEdit" xml:space="preserve">
-    <value>Uložit připojení při každé úpravě</value>
-  </data>
-    <data name="StartFullScreen" xml:space="preserve">
+  <data name="StartFullScreen" xml:space="preserve">
     <value>Při spuštění zobrazit na celou obrazovku</value>
   </data>
-    <data name="FilterSearchMatchesInConnectionTree" xml:space="preserve">
-    <value>Filtrovat shody vyhledávání v seznamu připojení</value>
-  </data>
-    <data name="ReconnectToPreviouslyOpenedSessionsOnStartup" xml:space="preserve">
+  <data name="ReconnectToPreviouslyOpenedSessionsOnStartup" xml:space="preserve">
     <value>Obnovit dříve spuštěná připojení po startu</value>
   </data>
-    <data name="SaveConnectionsOnExit" xml:space="preserve">
+  <data name="SaveConnectionsOnExit" xml:space="preserve">
     <value>Uložit připojení při ukončení programu</value>
   </data>
-    <data name="PlaceSearchBarAboveConnectionTree" xml:space="preserve">
-    <value>Umístit vyhledávací pole nad seznam připojení</value>
-  </data>
-    <data name="TrackActiveConnectionInTheConnectionTree" xml:space="preserve">
+  <data name="TrackActiveConnectionInTheConnectionTree" xml:space="preserve">
     <value>Označovat aktivní připojení v seznamu</value>
-  </data>
-    <data name="DoNotTrimUsername" xml:space="preserve">
-    <value>Nezkracovat uživatelské jméno</value>
   </data>
   <data name="AutoSaveInMinutes" xml:space="preserve">
     <value>Kliknutím na již otevřené připojení v seznamu otevře jeho záložku</value>
   </data>
-    <data name="LoadBalanceInfoUseUtf8" xml:space="preserve">
-    <value>Použít kódování UTF8 pro vlastnost RDP "Load Balance Info"</value>
+  <data name="WarnMeOnlyWhenClosingMultipleConnections1" xml:space="preserve">
+    <value>Upozornit mě pouze při ukončení několika připojení</value>
   </data>
-    <data name="TestConnection" xml:space="preserve">
-    <value>Test spojení</value>
-  </data></root>
+</root>

@@ -23,36 +23,65 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
-            // Set path for assembly resolution
-            // This is needed for the application to find the assemblies in the Assemblies folder
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, resolveArgs) =>
+            Trace.WriteLine("!!!!!!=============== TEST ==================!!!!!!!!!!!!!");
+            // Forcing to load System.Configuration.ConfigurationManager before any other assembly to be able to check settings 
+            try
             {
-                string assemblyName = new AssemblyName(resolveArgs.Name).Name.Replace(".resources", string.Empty);
-                string assemblyFile = assemblyName + ".dll";
+                string assemblyFile = "System.Configuration.ConfigurationManager" + ".dll";
                 string assemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies", assemblyFile);
+
 
                 if (File.Exists(assemblyPath))
                 {
-                    return Assembly.LoadFrom(assemblyPath);
+                    Assembly.LoadFrom(assemblyPath);
                 }
-                return null;
-            };
+            }
+            catch (FileNotFoundException ex)
+            {
+               Trace.WriteLine("Error occured: " + ex.Message);
+            }
 
-            LocalSettingsDBManager settingsManager = new LocalSettingsDBManager(dbPath: "mRemoteNG.appSettings", useEncryption: false, schemaFilePath: "");
+            //Subscribe to AssemblyResolve event
+            AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
 
-            
+            //Check if local settings DB exist or accessible
+            CheckLockalDB();
 
-            if (Properties.OptionsStartupExitPage.Default.SingleInstance)
+            Lazy<bool> singleInstanceOption = new Lazy<bool>(() => Properties.OptionsStartupExitPage.Default.SingleInstance);
+
+            if (singleInstanceOption.Value)
+            {
                 StartApplicationAsSingleInstance();
+            }
             else
+            {
                 StartApplication();
+            }
         }
 
+        private static void CheckLockalDB()
+        {
+            LocalSettingsDBManager settingsManager = new LocalSettingsDBManager(dbPath: "mRemoteNG.appSettings", useEncryption: false, schemaFilePath: "");
+        }
+        private static Assembly OnAssemblyResolve(object sender, ResolveEventArgs resolveArgs)
+        {
+            string assemblyName = new AssemblyName(resolveArgs.Name).Name.Replace(".resources", string.Empty);
+            string assemblyFile = assemblyName + ".dll";
+            string assemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assemblies", assemblyFile);
+
+
+            if (File.Exists(assemblyPath))
+            {
+                return Assembly.LoadFrom(assemblyPath);
+            }
+            return null;
+        }
+        
         private static void StartApplication()
         {
             CatchAllUnhandledExceptions();
-            System.Windows.Forms.Application.EnableVisualStyles();
-            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
             _frmSplashScreen = FrmSplashScreenNew.GetInstance();
 
@@ -62,12 +91,12 @@ namespace mRemoteNG.App
             _frmSplashScreen.Top = viewport.Top;
             _frmSplashScreen.Left = viewport.Left;
             // normally it should be screens[1] however due DPI apply 1 size "same" as default with 100%
-            _frmSplashScreen.Left = viewport.Left + (targetScreen.Bounds.Size.Width / 2) - (_frmSplashScreen.Width / 2);
-            _frmSplashScreen.Top = viewport.Top + (targetScreen.Bounds.Size.Height / 2) - (_frmSplashScreen.Height / 2);
+            _frmSplashScreen.Left = viewport.Left + (targetScreen.Bounds.Size.Width - _frmSplashScreen.Width) / 2;
+            _frmSplashScreen.Top = viewport.Top + (targetScreen.Bounds.Size.Height - _frmSplashScreen.Height) / 2;
             _frmSplashScreen.ShowInTaskbar = false;
             _frmSplashScreen.Show();
-            
-            System.Windows.Forms.Application.Run(FrmMain.Default);
+
+            Application.Run(FrmMain.Default);
         }
 
         public static void CloseSingletonInstanceMutex()
@@ -140,5 +169,6 @@ namespace mRemoteNG.App
             FrmUnhandledException window = new(e.ExceptionObject as Exception, e.IsTerminating);
             window.ShowDialog(FrmMain.Default);
         }
+        
     }
 }

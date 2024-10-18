@@ -1424,7 +1424,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>RDP Gateway is not supported!</value>
   </data>
   <data name="RdpReconnectCount" xml:space="preserve">
-    <value>RDP reconnection count:</value>
+    <value>RDP reconnect count:</value>
   </data>
   <data name="RdpSetAuthenticationLevelFailed" xml:space="preserve">
     <value>RDP SetAuthenticationLevel failed!</value>
@@ -2289,7 +2289,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   <data name="ECPDelineaSecretServer" xml:space="preserve">
     <value>Delinea Secret Server</value>
   </data>
-    <data name="ECPClickstudiosPasswordstate" xml:space="preserve">
+  <data name="ECPClickstudiosPasswordstate" xml:space="preserve">
     <value>Clickstudios Passwordstate</value>
   </data>
   <data name="ECPNone" xml:space="preserve">
@@ -2367,5 +2367,53 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
   </data>
   <data name="OptionsCompanyPolicyMessage" xml:space="preserve">
     <value>*Some settings are determined by your company. For further information, please contact your administrator</value>
+  </data>
+  <data name="Gateway" xml:space="preserve">
+    <value>Gateway</value>
+  </data>
+  <data name="SaveConsOnExit" xml:space="preserve">
+    <value>SaveConsOnExit</value>
+  </data>
+  <data name="SetHostnameLikeDisplayNameNewConnection" xml:space="preserve">
+    <value>SetHostnameLikeDisplayNameNewConnection</value>
+  </data>
+  <data name="RdpReconnectionCount" xml:space="preserve">
+    <value>RDP reconnection count:</value>
+  </data>
+  <data name="RdpConnectionTimeout" xml:space="preserve">
+    <value>RDP connection timeout</value>
+  </data>
+  <data name="WhenClosingConnections" xml:space="preserve">
+    <value>WhenClosingConnections</value>
+  </data>
+  <data name="WarnMeWhenClosingConnections" xml:space="preserve">
+    <value>WarnMeWhenClosingConnections</value>
+  </data>
+  <data name="WarnMeOnlyWhenExitingProgram" xml:space="preserve">
+    <value>WarnMeOnlyWhenExitingProgram</value>
+  </data>
+  <data name="DoNotWarnMeWhenClosingConnections" xml:space="preserve">
+    <value>Do Not Warn Me When Closing Connections</value>
+  </data>
+  <data name="StartFullScreen" xml:space="preserve">
+    <value>Start Full Screen</value>
+  </data>
+  <data name="ReconnectToPreviouslyOpenedSessionsOnStartup" xml:space="preserve">
+    <value>ReconnectToPreviouslyOpenedSessionsOnStartup</value>
+  </data>
+  <data name="SaveConnectionsOnExit" xml:space="preserve">
+    <value>SaveConnectionsOnExit</value>
+  </data>
+  <data name="TrackActiveConnectionInTheConnectionTree" xml:space="preserve">
+    <value>Track Active Connection In The Connection Tree</value>
+  </data>
+  <data name="AutoSaveInMinutes" xml:space="preserve">
+    <value>AutoSaveInMinutes</value>
+  </data>
+  <data name="WebView2InitializationFailed" xml:space="preserve">
+    <value>WebView2InitializationFailed</value>
+  </data>
+  <data name="WarnMeOnlyWhenClosingMultipleConnections" xml:space="preserve">
+    <value>WarnMeOnlyWhenClosingMultipleConnections</value>
   </data>
 </root>

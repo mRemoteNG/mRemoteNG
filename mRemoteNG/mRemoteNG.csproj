@@ -526,12 +526,21 @@
   </ItemGroup>
   <PropertyGroup>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-</PropertyGroup>
+  </PropertyGroup>
+  <!--
   <Target Name="MoveAssemblies" AfterTargets="Build">
     <ItemGroup>
       <Assemblies Include="$(OutputPath)**\*.dll" Exclude="$(OutputPath)Assemblies\**\*" />
     </ItemGroup>
-    <MakeDir Directories="$(OutputPath)Assemblies" />
+    
+    <MakeDir Directories="$(OutputPath)Languages" />
     <Copy SourceFiles="@(Assemblies)" DestinationFolder="$(OutputPath)Assemblies" />
-  </Target>
+    <Delete Files="@(Assemblies)" /> 
+  </Target>  
+  -->
+  <Target Name="CopyPackageAssembliesToSubFolder" AfterTargets="ResolveReferences">
+    <ItemGroup>
+      <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Assemblies\" />
+    </ItemGroup>
+</Target>
 </Project>
