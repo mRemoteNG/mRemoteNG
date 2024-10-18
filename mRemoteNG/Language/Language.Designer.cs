@@ -39,6 +39,9 @@ namespace mRemoteNG.Resources.Language {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
+                    //string resourceFilePath = "Languages/ru/mRemoteNG.resources.dll";
+                    //global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager(resourceFilePath, typeof(Language).Assembly);
+
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("mRemoteNG.Language.Language", typeof(Language).Assembly);
                     resourceMan = temp;
                 }

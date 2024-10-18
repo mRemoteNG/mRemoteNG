@@ -538,9 +538,27 @@
     <Delete Files="@(Assemblies)" /> 
   </Target>  
   -->
+  <!--<ItemGroup>
+  
+    <None Update="**\*.resources.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>Languages\%(Culture)\%(Filename)%(Extension)</TargetPath>
+    </None>
+  </ItemGroup>
+  -->
+  <Target Name="MoveSatelliteResources" AfterTargets="Build">
+    <ItemGroup>
+      <SatelliteResources Include="$(OutputPath)**\*.resources.dll" />
+    </ItemGroup>
+
+    <!-- Создаем папку Languages, если она еще не существует -->
+    <MakeDir Directories="$(OutputPath)Languages" />
+    <Move SourceFiles="@(SatelliteResources)" DestinationFolder="$(OutputPath)Languages\%(RecursiveDir)" />
+    <RemoveDir Directories="@(SatelliteResources->'%(RootDir)%(Directory)')" Condition="Exists('%(RootDir)%(Directory)')" />
+  </Target>
   <Target Name="CopyPackageAssembliesToSubFolder" AfterTargets="ResolveReferences">
     <ItemGroup>
       <ReferenceCopyLocalPaths Condition=" '%(ReferenceCopyLocalPaths.NuGetPackageId)' != '' " Update="%(ReferenceCopyLocalPaths)" DestinationSubDirectory="Assemblies\" />
     </ItemGroup>
-</Target>
+  </Target>
 </Project>

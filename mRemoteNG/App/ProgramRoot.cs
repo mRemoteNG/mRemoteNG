@@ -16,6 +16,7 @@ namespace mRemoteNG.App
     {
         private static Mutex _mutex;
         private static FrmSplashScreenNew _frmSplashScreen = null;
+        private static string customResourcePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Languages");
 
         /// <summary>
         /// The main entry point for the application.
