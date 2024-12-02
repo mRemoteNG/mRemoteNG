@@ -22,7 +22,6 @@ namespace mRemoteNG.App
                 using (OpenFileDialog openFileDialog = new())
                 {
                     openFileDialog.CheckFileExists = true;
-                    openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                     openFileDialog.Multiselect = true;
 
                     List<string> fileTypes = new();
