@@ -1,9 +1,15 @@
 name: Build x86_64
 
 on:
-  push:
+  release:
+    types:
+      - published
     branches:
       - v1.77.3-dev
+#on:
+  #push:
+    #branches:
+      #- v1.77.3-dev
 
 jobs:
   Build-Debug-MSI:
