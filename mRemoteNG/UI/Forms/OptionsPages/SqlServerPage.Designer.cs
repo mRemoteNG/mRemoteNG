@@ -20,6 +20,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         [System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SqlServerPage));
             lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
             lblSectionName = new System.Windows.Forms.Label();
@@ -27,13 +28,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tabCtrlSQL = new System.Windows.Forms.TabControl();
             tabPage1 = new System.Windows.Forms.TabPage();
             pnlSQLCon = new System.Windows.Forms.TableLayoutPanel();
+            chkSQLReadOnly = new System.Windows.Forms.CheckBox();
             txtSQLAuthType = new MrngComboBox();
             lblSQLAuthType = new MrngLabel();
             lblSQLReadOnly = new MrngLabel();
             lblSQLType = new MrngLabel();
             txtSQLType = new MrngComboBox();
             lblSQLServer = new MrngLabel();
-            chkSQLReadOnly = new MrngCheckBox();
             lblSQLUsername = new MrngLabel();
             lblSQLPassword = new MrngLabel();
             txtSQLServer = new MrngTextBox();
@@ -72,6 +73,25 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mrngLabel17 = new MrngLabel();
             mrngTextBox11 = new MrngTextBox();
             tabPage4 = new System.Windows.Forms.TabPage();
+            tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            DCMSetuptxtmandatory4 = new System.Windows.Forms.Label();
+            DCMSetuptxtmandatory3 = new System.Windows.Forms.Label();
+            DCMSetuptxtmandatory2 = new System.Windows.Forms.Label();
+            DCMSetuptxtmandatory1 = new System.Windows.Forms.Label();
+            DCMSetuptxtuserpwd = new MrngTextBox();
+            DCMSetuptxtuser = new MrngTextBox();
+            DCMSetuplbluserpwd = new System.Windows.Forms.Label();
+            DCMSetuplbluser = new System.Windows.Forms.Label();
+            DCMSetuptxtdbname = new MrngTextBox();
+            DCMSetuplbldbname = new System.Windows.Forms.Label();
+            DCMSetuptxtadmpwd = new MrngTextBox();
+            DCMSetuplbladminpwd = new System.Windows.Forms.Label();
+            DCMSetuptxtadmuser = new MrngTextBox();
+            DCMSetupRdBtnC = new System.Windows.Forms.RadioButton();
+            DCMSetupRdBtnV = new System.Windows.Forms.RadioButton();
+            DCMSetuplblschema = new System.Windows.Forms.Label();
+            DCMSetupddschema = new System.Windows.Forms.ComboBox();
+            DCMSetuplbladminuser = new System.Windows.Forms.Label();
             imgConnectionStatus = new System.Windows.Forms.PictureBox();
             lblTestConnectionResults = new MrngLabel();
             btnTestConnection = new MrngButton();
@@ -86,6 +106,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             label1 = new System.Windows.Forms.Label();
             picboxLogo = new System.Windows.Forms.PictureBox();
             chkUseSQLServer = new System.Windows.Forms.CheckBox();
+            frmtoolTip = new System.Windows.Forms.ToolTip(components);
             pnlServerBlock.SuspendLayout();
             tabCtrlSQL.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -97,6 +118,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             tabPage3.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
+            tabPage4.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgConnectionStatus).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)picboxLogo).BeginInit();
@@ -144,6 +167,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlServerBlock.Name = "pnlServerBlock";
             pnlServerBlock.Size = new System.Drawing.Size(492, 324);
             pnlServerBlock.TabIndex = 27;
+            pnlServerBlock.Visible = false;
             // 
             // tabCtrlSQL
             // 
@@ -175,13 +199,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlSQLCon.ColumnCount = 2;
             pnlSQLCon.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160F));
             pnlSQLCon.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            pnlSQLCon.Controls.Add(chkSQLReadOnly, 1, 7);
             pnlSQLCon.Controls.Add(txtSQLAuthType, 1, 3);
             pnlSQLCon.Controls.Add(lblSQLAuthType, 0, 3);
             pnlSQLCon.Controls.Add(lblSQLReadOnly, 0, 7);
             pnlSQLCon.Controls.Add(lblSQLType, 0, 0);
             pnlSQLCon.Controls.Add(txtSQLType, 1, 0);
             pnlSQLCon.Controls.Add(lblSQLServer, 0, 1);
-            pnlSQLCon.Controls.Add(chkSQLReadOnly, 1, 7);
             pnlSQLCon.Controls.Add(lblSQLUsername, 0, 4);
             pnlSQLCon.Controls.Add(lblSQLPassword, 0, 5);
             pnlSQLCon.Controls.Add(txtSQLServer, 1, 1);
@@ -189,7 +213,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlSQLCon.Controls.Add(txtSQLUsername, 1, 4);
             pnlSQLCon.Location = new System.Drawing.Point(-3, 9);
             pnlSQLCon.Name = "pnlSQLCon";
-            pnlSQLCon.RowCount = 8;
+            pnlSQLCon.RowCount = 9;
             pnlSQLCon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             pnlSQLCon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             pnlSQLCon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -198,8 +222,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlSQLCon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             pnlSQLCon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             pnlSQLCon.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            pnlSQLCon.RowStyles.Add(new System.Windows.Forms.RowStyle());
             pnlSQLCon.Size = new System.Drawing.Size(458, 223);
             pnlSQLCon.TabIndex = 23;
+            // 
+            // chkSQLReadOnly
+            // 
+            chkSQLReadOnly.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            chkSQLReadOnly.AutoSize = true;
+            chkSQLReadOnly.Location = new System.Drawing.Point(163, 188);
+            chkSQLReadOnly.Name = "chkSQLReadOnly";
+            chkSQLReadOnly.Size = new System.Drawing.Size(15, 14);
+            chkSQLReadOnly.TabIndex = 24;
+            chkSQLReadOnly.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            chkSQLReadOnly.UseVisualStyleBackColor = true;
             // 
             // txtSQLAuthType
             // 
@@ -227,13 +263,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblSQLReadOnly
             // 
             lblSQLReadOnly.Dock = System.Windows.Forms.DockStyle.Fill;
-            lblSQLReadOnly.Enabled = false;
             lblSQLReadOnly.Location = new System.Drawing.Point(3, 182);
             lblSQLReadOnly.Name = "lblSQLReadOnly";
-            lblSQLReadOnly.Size = new System.Drawing.Size(154, 41);
+            lblSQLReadOnly.Size = new System.Drawing.Size(154, 26);
             lblSQLReadOnly.TabIndex = 22;
             lblSQLReadOnly.Text = "Access for Read Only:";
             lblSQLReadOnly.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            frmtoolTip.SetToolTip(lblSQLReadOnly, "Data from db will be loaded but not saved");
             // 
             // lblSQLType
             // 
@@ -266,18 +302,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblSQLServer.TabIndex = 3;
             lblSQLServer.Text = "Server name or IP:";
             lblSQLServer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // chkSQLReadOnly
-            // 
-            chkSQLReadOnly._mice = MrngCheckBox.MouseState.OUT;
-            chkSQLReadOnly.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            chkSQLReadOnly.AutoSize = true;
-            chkSQLReadOnly.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            chkSQLReadOnly.Location = new System.Drawing.Point(163, 185);
-            chkSQLReadOnly.Name = "chkSQLReadOnly";
-            chkSQLReadOnly.Size = new System.Drawing.Size(15, 35);
-            chkSQLReadOnly.TabIndex = 14;
-            chkSQLReadOnly.UseVisualStyleBackColor = true;
             // 
             // lblSQLUsername
             // 
@@ -715,6 +739,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(tableLayoutPanel4);
             tabPage4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             tabPage4.Location = new System.Drawing.Point(4, 22);
             tabPage4.Name = "tabPage4";
@@ -723,6 +748,248 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tabPage4.TabIndex = 3;
             tabPage4.Text = "Setup";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.ColumnCount = 3;
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel4.Controls.Add(DCMSetuptxtmandatory4, 2, 4);
+            tableLayoutPanel4.Controls.Add(DCMSetuptxtmandatory3, 2, 3);
+            tableLayoutPanel4.Controls.Add(DCMSetuptxtmandatory2, 2, 2);
+            tableLayoutPanel4.Controls.Add(DCMSetuptxtmandatory1, 2, 1);
+            tableLayoutPanel4.Controls.Add(DCMSetuptxtuserpwd, 1, 6);
+            tableLayoutPanel4.Controls.Add(DCMSetuptxtuser, 1, 5);
+            tableLayoutPanel4.Controls.Add(DCMSetuplbluserpwd, 0, 6);
+            tableLayoutPanel4.Controls.Add(DCMSetuplbluser, 0, 5);
+            tableLayoutPanel4.Controls.Add(DCMSetuptxtdbname, 1, 4);
+            tableLayoutPanel4.Controls.Add(DCMSetuplbldbname, 0, 4);
+            tableLayoutPanel4.Controls.Add(DCMSetuptxtadmpwd, 1, 3);
+            tableLayoutPanel4.Controls.Add(DCMSetuplbladminpwd, 0, 3);
+            tableLayoutPanel4.Controls.Add(DCMSetuptxtadmuser, 1, 2);
+            tableLayoutPanel4.Controls.Add(DCMSetupRdBtnC, 1, 0);
+            tableLayoutPanel4.Controls.Add(DCMSetupRdBtnV, 0, 0);
+            tableLayoutPanel4.Controls.Add(DCMSetuplblschema, 0, 1);
+            tableLayoutPanel4.Controls.Add(DCMSetupddschema, 1, 1);
+            tableLayoutPanel4.Controls.Add(DCMSetuplbladminuser, 0, 2);
+            tableLayoutPanel4.Location = new System.Drawing.Point(8, 6);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 8;
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            tableLayoutPanel4.Size = new System.Drawing.Size(452, 225);
+            tableLayoutPanel4.TabIndex = 0;
+            // 
+            // DCMSetuptxtmandatory4
+            // 
+            DCMSetuptxtmandatory4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            DCMSetuptxtmandatory4.AutoSize = true;
+            DCMSetuptxtmandatory4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            DCMSetuptxtmandatory4.Location = new System.Drawing.Point(435, 126);
+            DCMSetuptxtmandatory4.Name = "DCMSetuptxtmandatory4";
+            DCMSetuptxtmandatory4.Size = new System.Drawing.Size(14, 17);
+            DCMSetuptxtmandatory4.TabIndex = 44;
+            DCMSetuptxtmandatory4.Text = "*";
+            // 
+            // DCMSetuptxtmandatory3
+            // 
+            DCMSetuptxtmandatory3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            DCMSetuptxtmandatory3.AutoSize = true;
+            DCMSetuptxtmandatory3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            DCMSetuptxtmandatory3.Location = new System.Drawing.Point(435, 96);
+            DCMSetuptxtmandatory3.Name = "DCMSetuptxtmandatory3";
+            DCMSetuptxtmandatory3.Size = new System.Drawing.Size(14, 17);
+            DCMSetuptxtmandatory3.TabIndex = 43;
+            DCMSetuptxtmandatory3.Text = "*";
+            // 
+            // DCMSetuptxtmandatory2
+            // 
+            DCMSetuptxtmandatory2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            DCMSetuptxtmandatory2.AutoSize = true;
+            DCMSetuptxtmandatory2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            DCMSetuptxtmandatory2.Location = new System.Drawing.Point(435, 66);
+            DCMSetuptxtmandatory2.Name = "DCMSetuptxtmandatory2";
+            DCMSetuptxtmandatory2.Size = new System.Drawing.Size(14, 17);
+            DCMSetuptxtmandatory2.TabIndex = 42;
+            DCMSetuptxtmandatory2.Text = "*";
+            // 
+            // DCMSetuptxtmandatory1
+            // 
+            DCMSetuptxtmandatory1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            DCMSetuptxtmandatory1.AutoSize = true;
+            DCMSetuptxtmandatory1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            DCMSetuptxtmandatory1.Location = new System.Drawing.Point(435, 36);
+            DCMSetuptxtmandatory1.Name = "DCMSetuptxtmandatory1";
+            DCMSetuptxtmandatory1.Size = new System.Drawing.Size(14, 17);
+            DCMSetuptxtmandatory1.TabIndex = 41;
+            DCMSetuptxtmandatory1.Text = "*";
+            // 
+            // DCMSetuptxtuserpwd
+            // 
+            DCMSetuptxtuserpwd.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            DCMSetuptxtuserpwd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            DCMSetuptxtuserpwd.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            DCMSetuptxtuserpwd.Location = new System.Drawing.Point(219, 184);
+            DCMSetuptxtuserpwd.Name = "DCMSetuptxtuserpwd";
+            DCMSetuptxtuserpwd.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtuserpwd.TabIndex = 38;
+            frmtoolTip.SetToolTip(DCMSetuptxtuserpwd, "If provided will be saved");
+            DCMSetuptxtuserpwd.UseSystemPasswordChar = true;
+            DCMSetuptxtuserpwd.Visible = false;
+            // 
+            // DCMSetuptxtuser
+            // 
+            DCMSetuptxtuser.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            DCMSetuptxtuser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            DCMSetuptxtuser.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            DCMSetuptxtuser.Location = new System.Drawing.Point(219, 154);
+            DCMSetuptxtuser.Name = "DCMSetuptxtuser";
+            DCMSetuptxtuser.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtuser.TabIndex = 37;
+            frmtoolTip.SetToolTip(DCMSetuptxtuser, "If provided will be saved and grant write permissions to db");
+            DCMSetuptxtuser.UseSystemPasswordChar = true;
+            DCMSetuptxtuser.Visible = false;
+            // 
+            // DCMSetuplbluserpwd
+            // 
+            DCMSetuplbluserpwd.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            DCMSetuplbluserpwd.AutoSize = true;
+            DCMSetuplbluserpwd.Location = new System.Drawing.Point(111, 188);
+            DCMSetuplbluserpwd.Name = "DCMSetuplbluserpwd";
+            DCMSetuplbluserpwd.Size = new System.Drawing.Size(102, 13);
+            DCMSetuplbluserpwd.TabIndex = 36;
+            DCMSetuplbluserpwd.Text = "db user password:";
+            DCMSetuplbluserpwd.Visible = false;
+            // 
+            // DCMSetuplbluser
+            // 
+            DCMSetuplbluser.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            DCMSetuplbluser.AutoSize = true;
+            DCMSetuplbluser.Location = new System.Drawing.Point(164, 158);
+            DCMSetuplbluser.Name = "DCMSetuplbluser";
+            DCMSetuplbluser.Size = new System.Drawing.Size(49, 13);
+            DCMSetuplbluser.TabIndex = 34;
+            DCMSetuplbluser.Text = "db user:";
+            frmtoolTip.SetToolTip(DCMSetuplbluser, "With write permissions");
+            DCMSetuplbluser.Visible = false;
+            // 
+            // DCMSetuptxtdbname
+            // 
+            DCMSetuptxtdbname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            DCMSetuptxtdbname.Dock = System.Windows.Forms.DockStyle.Fill;
+            DCMSetuptxtdbname.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            DCMSetuptxtdbname.Location = new System.Drawing.Point(219, 123);
+            DCMSetuptxtdbname.Name = "DCMSetuptxtdbname";
+            DCMSetuptxtdbname.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtdbname.TabIndex = 33;
+            // 
+            // DCMSetuplbldbname
+            // 
+            DCMSetuplbldbname.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            DCMSetuplbldbname.AutoSize = true;
+            DCMSetuplbldbname.Location = new System.Drawing.Point(123, 128);
+            DCMSetuplbldbname.Name = "DCMSetuplbldbname";
+            DCMSetuplbldbname.Size = new System.Drawing.Size(90, 13);
+            DCMSetuplbldbname.TabIndex = 14;
+            DCMSetuplbldbname.Text = "Database name:";
+            // 
+            // DCMSetuptxtadmpwd
+            // 
+            DCMSetuptxtadmpwd.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            DCMSetuptxtadmpwd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            DCMSetuptxtadmpwd.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            DCMSetuptxtadmpwd.Location = new System.Drawing.Point(219, 94);
+            DCMSetuptxtadmpwd.Name = "DCMSetuptxtadmpwd";
+            DCMSetuptxtadmpwd.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtadmpwd.TabIndex = 13;
+            frmtoolTip.SetToolTip(DCMSetuptxtadmpwd, "Will be used but not saved");
+            DCMSetuptxtadmpwd.UseSystemPasswordChar = true;
+            // 
+            // DCMSetuplbladminpwd
+            // 
+            DCMSetuplbladminpwd.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            DCMSetuplbladminpwd.AutoSize = true;
+            DCMSetuplbladminpwd.Location = new System.Drawing.Point(100, 98);
+            DCMSetuplbladminpwd.Name = "DCMSetuplbladminpwd";
+            DCMSetuplbladminpwd.Size = new System.Drawing.Size(113, 13);
+            DCMSetuplbladminpwd.TabIndex = 12;
+            DCMSetuplbladminpwd.Text = "db admin password:";
+            // 
+            // DCMSetuptxtadmuser
+            // 
+            DCMSetuptxtadmuser.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            DCMSetuptxtadmuser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            DCMSetuptxtadmuser.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            DCMSetuptxtadmuser.Location = new System.Drawing.Point(219, 64);
+            DCMSetuptxtadmuser.Name = "DCMSetuptxtadmuser";
+            DCMSetuptxtadmuser.Size = new System.Drawing.Size(210, 22);
+            DCMSetuptxtadmuser.TabIndex = 11;
+            frmtoolTip.SetToolTip(DCMSetuptxtadmuser, "Will be used but not saved");
+            DCMSetuptxtadmuser.UseSystemPasswordChar = true;
+            // 
+            // DCMSetupRdBtnC
+            // 
+            DCMSetupRdBtnC.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            DCMSetupRdBtnC.AutoSize = true;
+            DCMSetupRdBtnC.Location = new System.Drawing.Point(219, 3);
+            DCMSetupRdBtnC.Name = "DCMSetupRdBtnC";
+            DCMSetupRdBtnC.Size = new System.Drawing.Size(136, 24);
+            DCMSetupRdBtnC.TabIndex = 1;
+            DCMSetupRdBtnC.TabStop = true;
+            DCMSetupRdBtnC.Text = "Create table structure";
+            DCMSetupRdBtnC.UseVisualStyleBackColor = true;
+            DCMSetupRdBtnC.CheckedChanged += DCMSetupRdBtnC_CheckedChanged;
+            // 
+            // DCMSetupRdBtnV
+            // 
+            DCMSetupRdBtnV.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            DCMSetupRdBtnV.AutoSize = true;
+            DCMSetupRdBtnV.Checked = true;
+            DCMSetupRdBtnV.Location = new System.Drawing.Point(81, 3);
+            DCMSetupRdBtnV.Name = "DCMSetupRdBtnV";
+            DCMSetupRdBtnV.Size = new System.Drawing.Size(132, 24);
+            DCMSetupRdBtnV.TabIndex = 0;
+            DCMSetupRdBtnV.TabStop = true;
+            DCMSetupRdBtnV.Text = "Verify table structure";
+            DCMSetupRdBtnV.UseVisualStyleBackColor = true;
+            DCMSetupRdBtnV.CheckedChanged += DCMSetupRdBtnV_CheckedChanged;
+            // 
+            // DCMSetuplblschema
+            // 
+            DCMSetuplblschema.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            DCMSetuplblschema.AutoSize = true;
+            DCMSetuplblschema.Location = new System.Drawing.Point(122, 38);
+            DCMSetuplblschema.Name = "DCMSetuplblschema";
+            DCMSetuplblschema.Size = new System.Drawing.Size(91, 13);
+            DCMSetuplblschema.TabIndex = 2;
+            DCMSetuplblschema.Text = "Choose schema:";
+            // 
+            // DCMSetupddschema
+            // 
+            DCMSetupddschema.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            DCMSetupddschema.FormattingEnabled = true;
+            DCMSetupddschema.Location = new System.Drawing.Point(219, 33);
+            DCMSetupddschema.Name = "DCMSetupddschema";
+            DCMSetupddschema.Size = new System.Drawing.Size(210, 21);
+            DCMSetupddschema.TabIndex = 3;
+            // 
+            // DCMSetuplbladminuser
+            // 
+            DCMSetuplbladminuser.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            DCMSetuplbladminuser.AutoSize = true;
+            DCMSetuplbladminuser.Location = new System.Drawing.Point(127, 68);
+            DCMSetuplbladminuser.Name = "DCMSetuplbladminuser";
+            DCMSetuplbladminuser.Size = new System.Drawing.Size(86, 13);
+            DCMSetuplbladminuser.TabIndex = 4;
+            DCMSetuplbladminuser.Text = "db admin User:";
+            frmtoolTip.SetToolTip(DCMSetuplbladminuser, "With write permissions");
             // 
             // imgConnectionStatus
             // 
@@ -897,6 +1164,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Margin = new System.Windows.Forms.Padding(4);
             Name = "SqlServerPage";
             Size = new System.Drawing.Size(656, 490);
+            Load += SqlServerPage_Load;
             pnlServerBlock.ResumeLayout(false);
             pnlServerBlock.PerformLayout();
             tabCtrlSQL.ResumeLayout(false);
@@ -912,6 +1180,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tabPage3.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
+            tabPage4.ResumeLayout(false);
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)imgConnectionStatus).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
@@ -941,7 +1212,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngLabel lblSQLType;
         private MrngComboBox txtSQLType;
         internal MrngLabel lblSQLServer;
-        private MrngCheckBox chkSQLReadOnly;
         internal MrngLabel lblSQLUsername;
         internal MrngLabel lblSQLPassword;
         internal MrngTextBox txtSQLServer;
@@ -974,7 +1244,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngLabel mrngLabel7;
         internal MrngTextBox mrngTextBox5;
         internal MrngLabel mrngLabel3;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkSQLReadOnly;
         private System.Windows.Forms.CheckBox chkUseSQLServer;
         internal MrngLabel mrngLabel19;
         private MrngComboBox mrngComboBox4;
@@ -985,5 +1255,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngTextBox txtSQLDatabaseName;
         internal MrngLabel lblSQLDatabaseName;
         internal MrngLabel lblSQLReadOnly;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.RadioButton DCMSetupRdBtnC;
+        private System.Windows.Forms.RadioButton DCMSetupRdBtnV;
+        internal MrngTextBox DCMSetuptxtadmuser;
+        private System.Windows.Forms.Label DCMSetuplblschema;
+        private System.Windows.Forms.ComboBox DCMSetupddschema;
+        private System.Windows.Forms.Label DCMSetuplbladminuser;
+        private System.Windows.Forms.ToolTip frmtoolTip;
+        private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.Label DCMSetuplbladminpwd;
+        internal MrngTextBox DCMSetuptxtadmpwd;
+        internal MrngTextBox DCMSetuptxtdbname;
+        private System.Windows.Forms.Label DCMSetuplbldbname;
+        internal MrngTextBox DCMSetuptxtuserpwd;
+        internal MrngTextBox DCMSetuptxtuser;
+        private System.Windows.Forms.Label DCMSetuplbluserpwd;
+        private System.Windows.Forms.Label DCMSetuplbluser;
+        private System.Windows.Forms.Label DCMSetuptxtmandatory4;
+        private System.Windows.Forms.Label DCMSetuptxtmandatory3;
+        private System.Windows.Forms.Label DCMSetuptxtmandatory2;
+        private System.Windows.Forms.Label DCMSetuptxtmandatory1;
     }
 }

@@ -175,7 +175,7 @@ namespace BrightIdeasSoftware
         public override IList CheckedObjects {
             get {
                 // If we aren't should checkboxes, then no objects can be checked
-                if (!this.CheckBoxes)
+                if (!this.GetCheckBoxes())
                     return new ArrayList();
 
                 // If the data source has somehow vanished, we can't do anything
@@ -199,7 +199,7 @@ namespace BrightIdeasSoftware
                 return objects;
             }
             set {
-                if (!this.CheckBoxes)
+                if (!this.GetCheckBoxes())
                     return;
 
                 // If a custom check state getter is install, we can't use our check state management

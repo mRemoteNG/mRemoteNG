@@ -125,7 +125,7 @@ namespace BrightIdeasSoftware
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.objectListView1.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClick;
-            this.objectListView1.CheckBoxes = true;
+            this.objectListView1.SetCheckBoxes(true);
             this.objectListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1});
             this.objectListView1.FullRowSelect = true;

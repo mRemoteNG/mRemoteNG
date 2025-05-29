@@ -112,7 +112,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
 
         private void SetupConnectionTreeView()
         {
-            SmallImageList = _statusImageList.ImageList;
+            SetSmallImageList(_statusImageList.ImageList);
             AddColumns(_statusImageList.ImageGetter);
             LinkModelToView();
             _contextMenu = new ConnectionContextMenu(this);

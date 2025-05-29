@@ -7,6 +7,10 @@ using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 using mRemoteNG.Config.Settings.Registry;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using System.Linq;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -86,7 +90,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             Type settingsType = typeof(OptRegistrySqlServerPage);
             RegistryLoader.RegistrySettings.TryGetValue(settingsType, out var settings);
-            pageRegSettingsInstance = settings as OptRegistrySqlServerPage;
+
+            // Ensure settings is not null before assignment
+            if (settings is OptRegistrySqlServerPage registrySettings)
+            {
+                pageRegSettingsInstance = registrySettings;
+            }
+            else
+            {
+                pageRegSettingsInstance = new OptRegistrySqlServerPage(); // Initialize with a new instance instead of null
+                return; // Exit early if settings is null
+            }
 
             RegistryLoader.Cleanup(settingsType);
 
@@ -134,7 +148,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void DisableSql()
         {
             Runtime.ConnectionsService.RemoteConnectionsSyncronizer?.Dispose();
-            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = null;
+            Runtime.ConnectionsService.RemoteConnectionsSyncronizer = null!;
             Runtime.LoadConnections(true);
         }
 
@@ -152,9 +166,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private void toggleSQLPageControls(bool useSQLServer)
         {
             if (!chkUseSQLServer.Enabled) return;
-            pnlServerBlock.Enabled = useSQLServer;
-            btnTestConnection.Enabled = useSQLServer;
-            btnExpandOptions.Enabled = useSQLServer;
+            pnlServerBlock.Visible = useSQLServer;
         }
 
         private void btnExpandOptions_Click(object sender, EventArgs e)
@@ -244,7 +256,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 // Check the selected value and call appropriate action
                 if (selectedValue == "Windows Authentication")
                 {
-                    lblSQLUsername.Text = "User name:"; 
+                    lblSQLUsername.Text = "User name:";
                     lblSQLUsername.Enabled = false;
                     txtSQLUsername.Enabled = false;
                     txtSQLUsername.Text = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
@@ -320,6 +332,132 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     Console.WriteLine("No matching option.");
                 }
             }
+        }
+
+        private void DCMSetupRdBtnV_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DCMSetupRdBtnV.Checked)
+            {
+                DCMSetuplbluser.Visible = false;
+                DCMSetuptxtuser.Visible = false;
+                DCMSetuplbluserpwd.Visible = false;
+                DCMSetuptxtuserpwd.Visible = false;
+            }
+        }
+
+        private void DCMSetupRdBtnC_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DCMSetupRdBtnC.Checked)
+            {
+                DCMSetuplbluser.Visible = true;
+                DCMSetuptxtuser.Visible = true;
+                DCMSetuplbluserpwd.Visible = true;
+                DCMSetuptxtuserpwd.Visible = true;
+            }
+        }
+
+        private void SqlServerPage_Load(object sender, EventArgs e)
+        {
+            // Initial load
+            RefreshSchemaFiles();
+
+            // Attach the DropDown event handler
+            DCMSetupddschema.DropDown += DCMSetupddschema_DropDown;
+        }
+
+        private void DCMSetupddschema_DropDown(object sender, EventArgs e)
+        {
+            // Refresh files each time dropdown is opened
+            RefreshSchemaFiles();
+        }
+
+        private void RefreshSchemaFiles()
+        {
+            try
+            {
+                // Store the currently selected item
+                string currentSelection = DCMSetupddschema.SelectedValue?.ToString();
+
+                // Get the application's running directory
+                string schemasFolder = Path.Combine(Application.StartupPath, "Schemas");
+
+                // Check if Schemas folder exists
+                if (!Directory.Exists(schemasFolder))
+                {
+                    DCMSetupddschema.DataSource = null;
+                    DCMSetupddschema.Items.Clear();
+                    DCMSetupddschema.Items.Add("Schemas folder not found");
+                    return;
+                }
+
+                // Get all files matching the pattern
+                var schemaFiles = Directory.GetFiles(schemasFolder, "mremoteng_confcons_*.xsd");
+
+                if (schemaFiles.Length == 0)
+                {
+                    DCMSetupddschema.DataSource = null;
+                    DCMSetupddschema.Items.Clear();
+                    DCMSetupddschema.Items.Add("No schema files found");
+                    return;
+                }
+
+                // Extract version numbers and sort
+                var filesWithVersions = schemaFiles
+                    .Select(file => new
+                    {
+                        FilePath = file,
+                        FileName = Path.GetFileName(file),
+                        Version = ExtractVersionNumber(file)
+                    })
+                    .OrderByDescending(x => x.Version)
+                    .ToList();
+
+                // Add files to ComboBox
+                DCMSetupddschema.DataSource = filesWithVersions;
+                DCMSetupddschema.DisplayMember = "FileName";
+                DCMSetupddschema.ValueMember = "FilePath";
+
+                // Try to restore the previous selection if it still exists
+                if (!string.IsNullOrEmpty(currentSelection))
+                {
+                    var itemToSelect = filesWithVersions.FirstOrDefault(x => x.FilePath == currentSelection);
+                    if (itemToSelect != null)
+                    {
+                        DCMSetupddschema.SelectedValue = itemToSelect.FilePath;
+                    }
+                    else if (filesWithVersions.Count > 0)
+                    {
+                        // Select the highest version if previous selection no longer exists
+                        DCMSetupddschema.SelectedIndex = 0;
+                    }
+                }
+                else if (filesWithVersions.Count > 0)
+                {
+                    // Select the highest version if there was no previous selection
+                    DCMSetupddschema.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                DCMSetupddschema.DataSource = null;
+                DCMSetupddschema.Items.Clear();
+                DCMSetupddschema.Items.Add($"Error: {ex.Message}");
+            }
+        }
+
+        private Version ExtractVersionNumber(string filePath)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(filePath);
+            var match = Regex.Match(fileName, @"mremoteng_confcons_v(\d+)_(\d+)");
+
+            if (match.Success && match.Groups.Count == 3)
+            {
+                int major = int.Parse(match.Groups[1].Value);
+                int minor = int.Parse(match.Groups[2].Value);
+                return new Version(major, minor);
+            }
+
+            return new Version(0, 0);
         }
     }
 }

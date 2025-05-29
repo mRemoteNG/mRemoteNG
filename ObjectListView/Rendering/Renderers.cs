@@ -518,7 +518,7 @@ namespace BrightIdeasSoftware {
         [Browsable(false),
          DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ImageList ImageListOrDefault {
-            get { return this.ImageList ?? this.ListView.SmallImageList; }
+            get { return this.ImageList ?? this.ListView.GetSmallImageList(); }
         }
 
         /// <summary>
@@ -809,7 +809,7 @@ namespace BrightIdeasSoftware {
         /// <param name="g"></param>
         /// <returns></returns>
         protected virtual Size CalculatePrimaryCheckBoxSize(Graphics g) {
-            if (!this.ListView.CheckBoxes || !this.ColumnIsPrimary)
+            if (!this.ListView.GetCheckBoxes() || !this.ColumnIsPrimary)
                 return Size.Empty;
             
             Size size = this.CalculateCheckBoxSize(g);
@@ -1299,7 +1299,7 @@ namespace BrightIdeasSoftware {
             int width = 0;
 
             // Did they hit a check box on the primary column?
-            if (this.ColumnIsPrimary && this.ListView.CheckBoxes) {
+            if (this.ColumnIsPrimary && this.ListView.GetCheckBoxes()) {
                 Size checkBoxSize = this.CalculateCheckBoxSize(g);
                 int checkBoxTop = this.AlignVertically(r, checkBoxSize.Height);
                 Rectangle r3 = new Rectangle(r.X, checkBoxTop, checkBoxSize.Width, checkBoxSize.Height);
@@ -1635,7 +1635,7 @@ namespace BrightIdeasSoftware {
         /// <param name="r">Bounds of the cell</param>
         protected virtual void DrawImageAndText(Graphics g, Rectangle r) {
             int offset = 0;
-            if (this.ListView.CheckBoxes && this.ColumnIsPrimary) {
+            if (this.ListView.GetCheckBoxes() && this.ColumnIsPrimary) {
                 offset = this.DrawCheckBox(g, r) + 6;
                 r.X += offset;
                 r.Width -= offset;

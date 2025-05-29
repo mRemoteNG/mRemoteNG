@@ -193,7 +193,7 @@ namespace BrightIdeasSoftware
 // ReSharper restore DoNotCallOverridableMethodsInConstructor
 
             // This improves hit detection even if we don't have any state image
-            this.SmallImageList = new ImageList();
+            this.SetSmallImageList(new ImageList());
            // this.StateImageList.ImageSize = new Size(6, 6);
         }
 
@@ -364,7 +364,7 @@ namespace BrightIdeasSoftware
                     return;
 
                 this.hierarchicalCheckboxes = value;
-                this.CheckBoxes = value;
+                this.SetCheckBoxes(value);
                 if (value)
                     this.TriStateCheckBoxes = false;
             }
