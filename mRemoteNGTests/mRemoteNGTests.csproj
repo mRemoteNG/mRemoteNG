@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
     <LangVersion>preview</LangVersion>
     <IsPackable>false</IsPackable>
     <Platforms>x64</Platforms>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <Configurations>Debug;Release;Debug Portable;Release Portable;Release Installer;Deploy to github</Configurations>
-    <SupportedOSPlatformVersion>10.0.26100.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>10.0.22621.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" />

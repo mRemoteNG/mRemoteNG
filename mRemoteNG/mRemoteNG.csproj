@@ -7,7 +7,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>Icons\mRemoteNG.ico</ApplicationIcon>
     <Version>1.78.2-dev</Version>
@@ -22,7 +22,7 @@
     <PackageIcon>Header_dark.png</PackageIcon>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UseWPF>True</UseWPF>
-    <SupportedOSPlatformVersion>10.0.26100.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>10.0.22621.0</SupportedOSPlatformVersion>
     <SignAssembly>False</SignAssembly>
     <Title>Multi-Remote Next Generation Connection Manager</Title>
     <RepositoryUrl>https://github.com/mRemoteNG/mRemoteNG.git</RepositoryUrl>
