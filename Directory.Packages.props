@@ -25,7 +25,7 @@
     <PackageVersion Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.8" />
     <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="9.0.4" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
     <PackageVersion Include="Microsoft.NETCore.Targets" Version="5.0.0" />
     <PackageVersion Include="Microsoft.VisualStudio.TextTemplating.VSHost" Version="17.14.40265" />
