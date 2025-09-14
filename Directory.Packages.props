@@ -98,7 +98,7 @@
     <PackageVersion Include="System.Text.RegularExpressions" Version="4.3.1" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
     <PackageVersion Include="System.ValueTuple" Version="4.6.1" />
-    <PackageVersion Include="System.Windows.Extensions" Version="9.0.8" />
+    <PackageVersion Include="System.Windows.Extensions" Version="9.0.9" />
     <PackageVersion Include="System.Xml.ReaderWriter" Version="4.3.1" />
     <PackageVersion Include="VncSharpCore" Version="1.2.1" />
     <PackageVersion Include="ZstdSharp.Port" Version="0.8.6" />
