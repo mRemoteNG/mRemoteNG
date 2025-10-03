@@ -156,11 +156,7 @@ namespace mRemoteNG.Tools
             ExternalToolArgumentParser argParser = new(startConnectionInfo);
             process.StartInfo.UseShellExecute = true;
             process.StartInfo.FileName = argParser.ParseArguments(FileName);
-            var parsedArgs = argParser.ParseArguments(Arguments).Split(' ');
-            foreach (var arg in parsedArgs)
-            {
-                process.StartInfo.ArgumentList.Add(arg);
-            }
+            process.StartInfo.ArgumentList.Add(argParser.ParseArguments(Arguments));
             if (WorkingDir != "") process.StartInfo.WorkingDirectory = argParser.ParseArguments(WorkingDir);
             if (RunElevated) process.StartInfo.Verb = "runas";
         }
