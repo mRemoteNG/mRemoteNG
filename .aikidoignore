@@ -6,10 +6,11 @@
 # Reason: Auto-generated Windows Forms Designer code containing UI component names
 #         (e.g., "btnPasswdGenerator", "pnlPasswordTxtAndBtn") that are falsely detected as secrets.
 #         These are legitimate designer-generated variable names for UI controls, not secrets.
+#         This issue appears repeatedly across multiple Designer.cs files.
 # Reference: https://app.aikido.dev/queue?sidebarIssue=16286775
 
 # Ignore this specific issue
 issue:16286775
 
-# Optionally ignore all Designer.cs files to prevent similar false positives
-# path:**/*.Designer.cs
+# Ignore all Designer.cs files to prevent recurring false positives in auto-generated code
+path:**/*.Designer.cs
