@@ -1,0 +1,15 @@
+# Aikido Security Scanner Ignore File
+# This file contains patterns for false positives that should be ignored by Aikido security scanning
+
+# Issue ID: 16286775
+# File: mRemoteNG/UI/Forms/OptionsPages/SecurityPage.Designer.cs
+# Reason: Auto-generated Windows Forms Designer code containing UI component names
+#         (e.g., "btnPasswdGenerator", "pnlPasswordTxtAndBtn") that are falsely detected as secrets.
+#         These are legitimate designer-generated variable names for UI controls, not secrets.
+# Reference: https://app.aikido.dev/queue?sidebarIssue=16286775
+
+# Ignore this specific issue
+issue:16286775
+
+# Optionally ignore all Designer.cs files to prevent similar false positives
+# path:**/*.Designer.cs
