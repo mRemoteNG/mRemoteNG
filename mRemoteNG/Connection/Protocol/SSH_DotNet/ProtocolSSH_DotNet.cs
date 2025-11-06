@@ -441,76 +441,70 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 {
                     try
                     {
-                        if (_shellStream.DataAvailable)
+                        // Don't check DataAvailable - it's unreliable on SSH.NET ShellStream
+                        // Just call ReadAsync which will block until data arrives or timeout
+                        int bytesRead = await _shellStream.ReadAsync(
+                            buffer, 0, buffer.Length, cancellationToken);
+
+                        if (bytesRead > 0)
                         {
-                            int bytesRead = await _shellStream.ReadAsync(
-                                buffer, 0, buffer.Length, cancellationToken);
+                            consecutiveEmptyReads = 0;
+                            _bytesReceived += bytesRead;
+                            totalBytes += bytesRead;
 
-                            if (bytesRead > 0)
+                            // Log raw data if enabled
+                            SSHDotNetDiagnostics.LogRawDataBinary(buffer, bytesRead, "Received");
+
+                            SSHDotNetDiagnostics.LogDebug($"Output: Read {bytesRead} bytes (total: {_bytesReceived})");
+
+                            // Convert to string
+                            string data = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+
+                            // Send to terminal control
+                            if (_terminalControl != null && !_terminalControl.IsDisposed)
                             {
-                                consecutiveEmptyReads = 0;
-                                _bytesReceived += bytesRead;
-                                totalBytes += bytesRead;
-
-                                // Log raw data if enabled
-                                SSHDotNetDiagnostics.LogRawDataBinary(buffer, bytesRead, "Received");
-
-                                SSHDotNetDiagnostics.LogDebug($"Output: Read {bytesRead} bytes (total: {_bytesReceived})");
-
-                                // Convert to string
-                                string data = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-
-                                // Send to terminal control
-                                if (_terminalControl != null && !_terminalControl.IsDisposed)
+                                _terminalControl.Invoke((Action)(() =>
                                 {
-                                    _terminalControl.Invoke((Action)(() =>
+                                    try
                                     {
-                                        try
-                                        {
-                                            _terminalControl.WriteOutput(data);
-                                        }
-                                        catch (Exception writeEx)
-                                        {
-                                            SSHDotNetDiagnostics.LogException("Output: Error writing to terminal", writeEx);
-                                        }
-                                    }));
-                                }
-
-                                // Log data rate periodically
-                                var elapsed = DateTime.Now - lastRateLog;
-                                if (elapsed.TotalSeconds >= RATE_LOG_INTERVAL_SECONDS)
-                                {
-                                    double rate = totalBytes / elapsed.TotalSeconds;
-                                    SSHDotNetDiagnostics.LogInfo($"Output: Data rate: {rate:F0} bytes/sec");
-
-                                    if (rate > 100000) // > 100 KB/s
-                                    {
-                                        SSHDotNetDiagnostics.LogWarning($"Output: High data rate detected ({rate:F0} bytes/sec), may impact performance");
+                                        _terminalControl.WriteOutput(data);
                                     }
-
-                                    totalBytes = 0;
-                                    lastRateLog = DateTime.Now;
-                                }
+                                    catch (Exception writeEx)
+                                    {
+                                        SSHDotNetDiagnostics.LogException("Output: Error writing to terminal", writeEx);
+                                    }
+                                }));
                             }
-                            else
-                            {
-                                // Read returned 0 bytes, connection might be closed
-                                consecutiveEmptyReads++;
-                                SSHDotNetDiagnostics.LogDebug($"Output: Empty read #{consecutiveEmptyReads}");
 
-                                if (consecutiveEmptyReads >= MAX_EMPTY_READS)
+                            // Log data rate periodically
+                            var elapsed = DateTime.Now - lastRateLog;
+                            if (elapsed.TotalSeconds >= RATE_LOG_INTERVAL_SECONDS)
+                            {
+                                double rate = totalBytes / elapsed.TotalSeconds;
+                                SSHDotNetDiagnostics.LogInfo($"Output: Data rate: {rate:F0} bytes/sec");
+
+                                if (rate > 100000) // > 100 KB/s
                                 {
-                                    SSHDotNetDiagnostics.LogWarning("Output: Too many empty reads, connection may be closed");
-                                    break;
+                                    SSHDotNetDiagnostics.LogWarning($"Output: High data rate detected ({rate:F0} bytes/sec), may impact performance");
                                 }
 
-                                await Task.Delay(100, cancellationToken);
+                                totalBytes = 0;
+                                lastRateLog = DateTime.Now;
                             }
                         }
                         else
                         {
-                            // No data available, wait a bit
-                            await Task.Delay(10, cancellationToken);
+                            // Read returned 0 bytes, connection might be closed
+                            consecutiveEmptyReads++;
+                            SSHDotNetDiagnostics.LogDebug($"Output: Empty read #{consecutiveEmptyReads}");
+
+                            if (consecutiveEmptyReads >= MAX_EMPTY_READS)
+                            {
+                                SSHDotNetDiagnostics.LogWarning("Output: Too many empty reads, connection may be closed");
+                                break;
+                            }
+
+                            await Task.Delay(100, cancellationToken);
                         }
                     }
                     catch (OperationCanceledException)
