@@ -741,11 +741,12 @@ namespace mRemoteNG.UI.Controls
                         {
                             StringFormat format = new StringFormat(StringFormatFlags.NoWrap);
                             int y = 0;
+                            Font font = TerminalFont;  // Use property with lazy initialization
 
                             foreach (var line in screenText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None))
                             {
-                                e.Graphics.DrawString(line ?? "", _terminalFont, foregroundBrush, 0, y, format);
-                                y += _terminalFont.Height;
+                                e.Graphics.DrawString(line ?? "", font, foregroundBrush, 0, y, format);
+                                y += font.Height;
 
                                 if (y > this.Height)
                                     break;
@@ -758,7 +759,8 @@ namespace mRemoteNG.UI.Controls
                     // Show placeholder before initialization
                     using (Brush brush = new SolidBrush(_foregroundColor))
                     {
-                        e.Graphics.DrawString("Terminal not initialized", _terminalFont, brush, 0, 0);
+                        Font font = TerminalFont;  // Use property with lazy initialization
+                        e.Graphics.DrawString("Terminal not initialized", font, brush, 0, 0);
                     }
                 }
 
