@@ -71,7 +71,6 @@ namespace mRemoteNG.Connection
         private ExternalCredentialProvider _rdGatewayExternalCredentialProvider;
         private string _rdGatewayUserViaAPI = "";
 
-
         private RDPResolutions _resolution;
         private bool _automaticResize;
         private RDPColors _colors;

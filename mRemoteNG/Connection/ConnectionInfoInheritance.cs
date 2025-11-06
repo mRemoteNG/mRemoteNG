@@ -288,7 +288,6 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RDGatewayUserViaAPI { get; set; }
 
-
         #endregion
 
         #region Appearance
