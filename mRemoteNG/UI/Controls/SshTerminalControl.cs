@@ -1,8 +1,14 @@
 using System;
 using System.Drawing;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Runtime.Versioning;
+using System.Collections.Generic;
+using System.Linq;
 using mRemoteNG.Connection.Protocol.SSH_DotNet;
+using VtNetCore.VirtualTerminal;
+using VtNetCore.XTermParser;
 
 namespace mRemoteNG.UI.Controls
 {
@@ -14,6 +20,8 @@ namespace mRemoteNG.UI.Controls
         private const int DEFAULT_COLUMNS = 80;
         private const int DEFAULT_ROWS = 24;
         private const int DEFAULT_SCROLLBACK = 1000;
+        private const int CHAR_WIDTH = 8;
+        private const int CHAR_HEIGHT = 16;
 
         private int _columns = DEFAULT_COLUMNS;
         private int _rows = DEFAULT_ROWS;
@@ -26,6 +34,23 @@ namespace mRemoteNG.UI.Controls
         private bool _isInitialized = false;
         private Panel _diagnosticOverlay;
         private Label _diagnosticLabel;
+
+        // VtNetCore terminal emulation
+        private VirtualTerminalController _vtController;
+        private DataConsumer _dataConsumer;
+        private List<string> _scrollbackBuffer;
+        private int _scrollbackPosition = 0;
+
+        // Input handling
+        private StringBuilder _inputBuffer;
+        private Stream _sshStream;
+        private bool _streamAttached = false;
+
+        // Selection/Copy-Paste state
+        private Point _selectionStart = Point.Empty;
+        private Point _selectionEnd = Point.Empty;
+        private bool _isSelecting = false;
+        private ContextMenuStrip _contextMenu;
 
         #endregion
 
@@ -133,12 +158,34 @@ namespace mRemoteNG.UI.Controls
 
             InitializeComponent();
             InitializeDiagnosticOverlay();
+            InitializeContextMenu();
 
             this.BackColor = _backgroundColor;
             this.ForeColor = _foregroundColor;
             this.DoubleBuffered = true;
 
-            SSHDotNetDiagnostics.LogInfo($"Terminal: Initialized {_columns}x{_rows} terminal control");
+            // Initialize VtNetCore controller
+            try
+            {
+                _vtController = new VirtualTerminalController();
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Failed to initialize VirtualTerminalController", ex);
+                _vtController = null;
+            }
+            _scrollbackBuffer = new List<string>();
+            _inputBuffer = new StringBuilder();
+
+            // Register event handlers
+            this.KeyDown += SshTerminalControl_KeyDown;
+            this.KeyPress += SshTerminalControl_KeyPress;
+            this.MouseDown += SshTerminalControl_MouseDown;
+            this.MouseMove += SshTerminalControl_MouseMove;
+            this.MouseUp += SshTerminalControl_MouseUp;
+            this.Resize += SshTerminalControl_Resize;
+
+            SSHDotNetDiagnostics.LogInfo($"Terminal: Initialized {_columns}x{_rows} terminal control with VtNetCore");
             _isInitialized = true;
         }
 
@@ -183,7 +230,35 @@ namespace mRemoteNG.UI.Controls
 
             try
             {
-                // VtNetCore initialization will go here in Phase 3
+                // Initialize VtNetCore terminal emulation
+                _vtController = new VirtualTerminalController();
+                _vtController.ResizeView(_columns, _rows);
+                _dataConsumer = new DataConsumer(_vtController);
+
+                // Initialize scrollback buffer
+                _scrollbackBuffer = new List<string>();
+                _inputBuffer = new StringBuilder();
+
+                // Event handlers
+                this.KeyDown += SshTerminalControl_KeyDown;
+                this.KeyPress += SshTerminalControl_KeyPress;
+                this.MouseDown += SshTerminalControl_MouseDown;
+                this.MouseMove += SshTerminalControl_MouseMove;
+                this.MouseUp += SshTerminalControl_MouseUp;
+                this.Resize += SshTerminalControl_Resize;
+
+                // Terminal font
+                _terminalFont = new Font("Courier New", 10f, FontStyle.Regular);
+
+                // Initialize diagnostic overlay if needed
+                if (DiagnosticMode)
+                {
+                    InitializeDiagnosticOverlay();
+                }
+
+                // Initialize context menu
+                InitializeContextMenu();
+
                 RecalculateDimensions();
 
                 SSHDotNetDiagnostics.LogInfo("Terminal: Initialization complete");
@@ -225,36 +300,480 @@ namespace mRemoteNG.UI.Controls
 
         #endregion
 
-        #region Placeholder Methods (To be implemented in Phase 3)
+        #region Stream Management
 
         public void AttachSshStream(System.IO.Stream sshStream)
         {
-            SSHDotNetDiagnostics.LogInfo("Terminal: Attaching SSH stream (placeholder)");
-            // Implementation in Phase 3
+            try
+            {
+                _sshStream = sshStream;
+                _streamAttached = true;
+                SSHDotNetDiagnostics.LogInfo("Terminal: SSH stream attached");
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Failed to attach SSH stream", ex);
+            }
         }
 
         public void DetachSshStream()
         {
-            SSHDotNetDiagnostics.LogInfo("Terminal: Detaching SSH stream (placeholder)");
-            // Implementation in Phase 3
+            try
+            {
+                _sshStream = null;
+                _streamAttached = false;
+                SSHDotNetDiagnostics.LogInfo("Terminal: SSH stream detached");
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Failed to detach SSH stream", ex);
+            }
         }
+
+        #endregion
+
+        #region Output Handling
 
         public void WriteOutput(string data)
         {
-            SSHDotNetDiagnostics.LogDebug($"Terminal: WriteOutput called with {data?.Length ?? 0} characters (placeholder)");
+            if (string.IsNullOrEmpty(data))
+                return;
 
-            if (DiagnosticMode && _diagnosticLabel != null)
+            try
             {
-                _diagnosticLabel.Text = $"Diagnostic Mode: {data?.Length ?? 0} chars received";
+                // Process data through VtNetCore terminal controller using DataConsumer
+                if (_dataConsumer != null)
+                {
+                    _dataConsumer.Push(Encoding.UTF8.GetBytes(data));
+                }
+
+                // Update scrollback buffer
+                AddToScrollback(data);
+
+                // Update diagnostic mode if enabled
+                if (DiagnosticMode && _diagnosticLabel != null)
+                {
+                    this.Invoke((Action)(() =>
+                    {
+                        _diagnosticLabel.Text = $"Terminal: {_columns}x{_rows}, Scrollback: {_scrollbackBuffer.Count}, Input: {data?.Length ?? 0} bytes";
+                    }));
+                }
+
+                // Trigger repaint
+                this.Invoke((Action)(() => this.Invalidate()));
+
+                SSHDotNetDiagnostics.LogDebug($"Terminal: Processed {data?.Length ?? 0} characters of output");
             }
-            // Implementation in Phase 3
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error writing output", ex);
+            }
         }
+
+        #endregion
+
+        #region Input Handling
 
         public void ReadInput(out byte[] inputData)
         {
-            SSHDotNetDiagnostics.LogDebug("Terminal: ReadInput called (placeholder)");
-            inputData = Array.Empty<byte>();
-            // Implementation in Phase 3
+            try
+            {
+                if (_inputBuffer.Length > 0)
+                {
+                    inputData = Encoding.UTF8.GetBytes(_inputBuffer.ToString());
+                    _inputBuffer.Clear();
+                    SSHDotNetDiagnostics.LogDebug($"Terminal: Read {inputData.Length} bytes of input");
+                }
+                else
+                {
+                    inputData = Array.Empty<byte>();
+                }
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error reading input", ex);
+                inputData = Array.Empty<byte>();
+            }
+        }
+
+        #endregion
+
+        #region Scrollback Management
+
+        private void AddToScrollback(string data)
+        {
+            if (string.IsNullOrEmpty(data))
+                return;
+
+            try
+            {
+                // Split by newlines and add to scrollback
+                var lines = data.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                foreach (var line in lines)
+                {
+                    _scrollbackBuffer.Add(line);
+
+                    // Maintain maximum scrollback size
+                    if (_scrollbackBuffer.Count > _scrollbackLines)
+                    {
+                        _scrollbackBuffer.RemoveAt(0);
+                    }
+                }
+
+                SSHDotNetDiagnostics.LogDebug($"Terminal: Added {lines.Length} lines to scrollback (total: {_scrollbackBuffer.Count})");
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error adding to scrollback", ex);
+            }
+        }
+
+        public string GetScrollbackContent(int startLine, int endLine)
+        {
+            try
+            {
+                startLine = Math.Max(0, Math.Min(startLine, _scrollbackBuffer.Count - 1));
+                endLine = Math.Max(0, Math.Min(endLine, _scrollbackBuffer.Count - 1));
+
+                if (startLine > endLine)
+                    return string.Empty;
+
+                var lines = _scrollbackBuffer.Skip(startLine).Take(endLine - startLine + 1);
+                return string.Join(Environment.NewLine, lines);
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error getting scrollback content", ex);
+                return string.Empty;
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers - Keyboard Input (Task 3.2)
+
+        private void SshTerminalControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                // Handle special keys
+                if (e.KeyCode == Keys.C && e.Control)
+                {
+                    // Copy selected text to clipboard
+                    CopySelectionToClipboard();
+                    e.Handled = true;
+                    return;
+                }
+
+                if (e.KeyCode == Keys.V && e.Control)
+                {
+                    // Paste from clipboard
+                    PasteFromClipboard();
+                    e.Handled = true;
+                    return;
+                }
+
+                // Handle function keys and special keys
+                string keySequence = GetKeySequence(e);
+                if (!string.IsNullOrEmpty(keySequence))
+                {
+                    _inputBuffer.Append(keySequence);
+                    e.Handled = true;
+                    SSHDotNetDiagnostics.LogDebug($"Terminal: Key sequence added to input buffer: {keySequence}");
+                }
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error in KeyDown handler", ex);
+            }
+        }
+
+        private void SshTerminalControl_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                // Only process printable characters
+                if (!char.IsControl(e.KeyChar))
+                {
+                    _inputBuffer.Append(e.KeyChar);
+                    SSHDotNetDiagnostics.LogDebug($"Terminal: Character '{e.KeyChar}' added to input buffer");
+                    e.Handled = true;
+                }
+                else if (e.KeyChar == (char)Keys.Return)
+                {
+                    _inputBuffer.Append('\n');
+                    e.Handled = true;
+                }
+                else if (e.KeyChar == (char)Keys.Back)
+                {
+                    if (_inputBuffer.Length > 0)
+                        _inputBuffer.Length--;
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error in KeyPress handler", ex);
+            }
+        }
+
+        private string GetKeySequence(KeyEventArgs e)
+        {
+            // Map special keys to terminal sequences
+            return e.KeyCode switch
+            {
+                Keys.Up => "\x1b[A",       // Cursor up
+                Keys.Down => "\x1b[B",     // Cursor down
+                Keys.Right => "\x1b[C",    // Cursor right
+                Keys.Left => "\x1b[D",     // Cursor left
+                Keys.Home => "\x1b[H",     // Home
+                Keys.End => "\x1b[F",      // End
+                Keys.PageUp => "\x1b[5~",  // Page up
+                Keys.PageDown => "\x1b[6~",// Page down
+                Keys.Delete => "\x1b[3~",  // Delete
+                Keys.F1 => "\x1bOP",       // F1
+                Keys.F2 => "\x1bOQ",       // F2
+                Keys.F3 => "\x1bOR",       // F3
+                Keys.F4 => "\x1bOS",       // F4
+                Keys.F5 => "\x1b[15~",     // F5
+                Keys.Tab => "\t",
+                _ => null
+            };
+        }
+
+        #endregion
+
+        #region Event Handlers - Mouse (Task 3.3 & 3.4)
+
+        private void SshTerminalControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Left)
+                {
+                    _isSelecting = true;
+                    _selectionStart = e.Location;
+                    _selectionEnd = e.Location;
+                    SSHDotNetDiagnostics.LogDebug($"Terminal: Selection started at {e.Location}");
+                }
+                else if (e.Button == MouseButtons.Right)
+                {
+                    // PuTTY-style right-click paste
+                    PasteFromClipboard();
+                }
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error in MouseDown handler", ex);
+            }
+        }
+
+        private void SshTerminalControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (_isSelecting && e.Button == MouseButtons.Left)
+                {
+                    _selectionEnd = e.Location;
+                    this.Invalidate();
+                    SSHDotNetDiagnostics.LogDebug($"Terminal: Selection extended to {e.Location}");
+                }
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error in MouseMove handler", ex);
+            }
+        }
+
+        private void SshTerminalControl_MouseUp(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Left && _isSelecting)
+                {
+                    _isSelecting = false;
+                    // PuTTY-style: selection = automatic copy
+                    CopySelectionToClipboard();
+                    SSHDotNetDiagnostics.LogDebug("Terminal: Selection completed and copied to clipboard");
+                }
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error in MouseUp handler", ex);
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers - Window Resize (Task 3.3)
+
+        private void SshTerminalControl_Resize(object sender, EventArgs e)
+        {
+            try
+            {
+                RecalculateDimensions();
+                this.Invalidate();
+                SSHDotNetDiagnostics.LogDebug($"Terminal: Resized to {this.Size}");
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error in Resize handler", ex);
+            }
+        }
+
+        #endregion
+
+        #region Copy/Paste Operations (Task 3.4)
+
+        private void CopySelectionToClipboard()
+        {
+            try
+            {
+                // Get selected text from scrollback or current display
+                // For now, get the range based on selection coordinates
+                int startLine = Math.Min(_selectionStart.Y, _selectionEnd.Y) / CHAR_HEIGHT;
+                int endLine = Math.Max(_selectionStart.Y, _selectionEnd.Y) / CHAR_HEIGHT;
+
+                string selectedText = GetScrollbackContent(startLine, endLine);
+                if (!string.IsNullOrEmpty(selectedText))
+                {
+                    Clipboard.SetText(selectedText);
+                    SSHDotNetDiagnostics.LogInfo($"Terminal: Copied {selectedText.Length} characters to clipboard");
+                }
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error copying to clipboard", ex);
+            }
+        }
+
+        private void PasteFromClipboard()
+        {
+            try
+            {
+                if (Clipboard.ContainsText())
+                {
+                    string pastedText = Clipboard.GetText();
+                    _inputBuffer.Append(pastedText);
+                    SSHDotNetDiagnostics.LogInfo($"Terminal: Pasted {pastedText.Length} characters from clipboard");
+                }
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error pasting from clipboard", ex);
+            }
+        }
+
+        #endregion
+
+        #region Context Menu (Task 3.7)
+
+        private void InitializeContextMenu()
+        {
+            _contextMenu = new ContextMenuStrip();
+
+            var copyItem = new ToolStripMenuItem("&Copy", null, (s, e) => CopySelectionToClipboard());
+            var pasteItem = new ToolStripMenuItem("&Paste", null, (s, e) => PasteFromClipboard());
+            var selectAllItem = new ToolStripMenuItem("Select &All", null, (s, e) => SelectAll());
+
+            _contextMenu.Items.Add(copyItem);
+            _contextMenu.Items.Add(pasteItem);
+            _contextMenu.Items.Add(new ToolStripSeparator());
+            _contextMenu.Items.Add(selectAllItem);
+
+            this.ContextMenuStrip = _contextMenu;
+            SSHDotNetDiagnostics.LogDebug("Terminal: Context menu initialized");
+        }
+
+        private void SelectAll()
+        {
+            try
+            {
+                _selectionStart = Point.Empty;
+                _selectionEnd = new Point(this.Width, this.Height);
+                this.Invalidate();
+                SSHDotNetDiagnostics.LogDebug("Terminal: Select All executed");
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error in SelectAll", ex);
+            }
+        }
+
+        #endregion
+
+        #region Color Support (Task 3.5)
+
+        public void SetColorScheme(Color backgroundColor, Color foregroundColor)
+        {
+            try
+            {
+                TerminalBackColor = backgroundColor;
+                TerminalForeColor = foregroundColor;
+                SSHDotNetDiagnostics.LogInfo($"Terminal: Color scheme changed to BG:{backgroundColor.Name}, FG:{foregroundColor.Name}");
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error setting color scheme", ex);
+            }
+        }
+
+        #endregion
+
+        #region Terminal Rendering
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            try
+            {
+                // Clear background
+                e.Graphics.Clear(_backgroundColor);
+
+                // Get terminal screen text from VtNetCore
+                if (_vtController != null)
+                {
+                    string screenText = _vtController.GetScreenText();
+
+                    if (!string.IsNullOrEmpty(screenText))
+                    {
+                        // Render terminal text
+                        using (Brush foregroundBrush = new SolidBrush(_foregroundColor))
+                        {
+                            StringFormat format = new StringFormat(StringFormatFlags.NoWrap);
+                            int y = 0;
+
+                            foreach (var line in screenText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None))
+                            {
+                                e.Graphics.DrawString(line ?? "", _terminalFont, foregroundBrush, 0, y, format);
+                                y += _terminalFont.Height;
+
+                                if (y > this.Height)
+                                    break;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Show placeholder before initialization
+                    using (Brush brush = new SolidBrush(_foregroundColor))
+                    {
+                        e.Graphics.DrawString("Terminal not initialized", _terminalFont, brush, 0, 0);
+                    }
+                }
+
+                // Draw diagnostic overlay if enabled
+                if (DiagnosticMode && _diagnosticOverlay != null)
+                {
+                    _diagnosticOverlay.Invalidate();
+                }
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Terminal: Error in OnPaint", ex);
+            }
+
+            base.OnPaint(e);
         }
 
         #endregion

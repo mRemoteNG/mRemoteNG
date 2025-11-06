@@ -203,6 +203,7 @@
     <PackageReference Include="System.Windows.Extensions" />
     <PackageReference Include="System.Xml.ReaderWriter" />
     <PackageReference Include="VncSharpCore" />
+    <PackageReference Include="VtNetCore" />
     <PackageReference Include="ZstdSharp.Port" />
   </ItemGroup>
   <ItemGroup>
