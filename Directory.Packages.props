@@ -99,6 +99,7 @@
     <PackageVersion Include="System.Windows.Extensions" Version="9.0.10" />
     <PackageVersion Include="System.Xml.ReaderWriter" Version="4.3.1" />
     <PackageVersion Include="VaultSharp" Version="1.17.5.1" />
+    <PackageVersion Include="VtNetCore" Version="1.0.24" />
     <PackageVersion Include="VncSharpCore" Version="1.2.1" />
     <PackageVersion Include="ZstdSharp.Port" Version="0.8.6" />
   </ItemGroup>

@@ -6368,7 +6368,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("SshV2", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to SSH (.NET SSH.NET).
+        /// </summary>
+        internal static string SshDotNet {
+            get {
+                return ResourceManager.GetString("SshDotNet", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Stack trace.
         /// </summary>

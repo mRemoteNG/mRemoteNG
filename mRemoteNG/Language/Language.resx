@@ -1630,6 +1630,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="SshV2" xml:space="preserve">
     <value>SSH version 2</value>
   </data>
+  <data name="SshDotNet" xml:space="preserve">
+    <value>SSH (.NET SSH.NET)</value>
+  </data>
   <data name="SshBackgroundTransferFailed" xml:space="preserve">
     <value>SSH background transfer failed!</value>
   </data>
