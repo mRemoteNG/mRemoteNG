@@ -222,7 +222,7 @@ namespace mRemoteNG.UI.Controls
         {
             if (_isInitialized)
             {
-                SSHDotNetDiagnostics.LogWarning("Terminal: Already initialized");
+                SSHDotNetDiagnostics.LogDebug("Terminal: Already initialized, skipping re-initialization");
                 return;
             }
 
