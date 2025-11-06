@@ -159,36 +159,13 @@ namespace mRemoteNG.UI.Controls
             SSHDotNetDiagnostics.LogDebug("Terminal: Creating SshTerminalControl");
 
             InitializeComponent();
-            InitializeDiagnosticOverlay();
-            InitializeContextMenu();
 
             this.BackColor = _backgroundColor;
             this.ForeColor = _foregroundColor;
             this.DoubleBuffered = true;
 
-            // Initialize VtNetCore controller
-            try
-            {
-                _vtController = new VirtualTerminalController();
-            }
-            catch (Exception ex)
-            {
-                SSHDotNetDiagnostics.LogException("Terminal: Failed to initialize VirtualTerminalController", ex);
-                _vtController = null;
-            }
-            _scrollbackBuffer = new List<string>();
-            _inputBuffer = new StringBuilder();
-
-            // Register event handlers
-            this.KeyDown += SshTerminalControl_KeyDown;
-            this.KeyPress += SshTerminalControl_KeyPress;
-            this.MouseDown += SshTerminalControl_MouseDown;
-            this.MouseMove += SshTerminalControl_MouseMove;
-            this.MouseUp += SshTerminalControl_MouseUp;
-            this.Resize += SshTerminalControl_Resize;
-
-            SSHDotNetDiagnostics.LogInfo($"Terminal: Initialized {_columns}x{_rows} terminal control with VtNetCore");
-            _isInitialized = true;
+            // Note: Do NOT set _isInitialized here - let Initialize() do the full setup
+            SSHDotNetDiagnostics.LogDebug("Terminal: Constructor complete, waiting for Initialize() call");
         }
 
         #endregion
@@ -236,6 +213,8 @@ namespace mRemoteNG.UI.Controls
                 _vtController = new VirtualTerminalController();
                 _vtController.ResizeView(_columns, _rows);
                 _dataConsumer = new DataConsumer(_vtController);
+
+                SSHDotNetDiagnostics.LogInfo($"Terminal: Created VtNetCore controller and DataConsumer ({_columns}x{_rows})");
 
                 // Initialize scrollback buffer
                 _scrollbackBuffer = new List<string>();
