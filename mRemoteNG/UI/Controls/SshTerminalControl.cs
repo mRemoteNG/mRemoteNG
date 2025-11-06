@@ -34,6 +34,8 @@ namespace mRemoteNG.UI.Controls
         private bool _isInitialized = false;
         private Panel _diagnosticOverlay;
         private Label _diagnosticLabel;
+        private bool _hasLoggedFirstRender = false;
+        private bool _hasLoggedEmptyScreen = false;
 
         // VtNetCore terminal emulation
         private VirtualTerminalController _vtController;
@@ -345,6 +347,11 @@ namespace mRemoteNG.UI.Controls
                 if (_dataConsumer != null)
                 {
                     _dataConsumer.Push(Encoding.UTF8.GetBytes(data));
+                    SSHDotNetDiagnostics.LogDebug($"Terminal: Pushed {data.Length} bytes to VtNetCore DataConsumer");
+                }
+                else
+                {
+                    SSHDotNetDiagnostics.LogWarning("Terminal: DataConsumer is null, cannot process output");
                 }
 
                 // Update scrollback buffer
@@ -736,6 +743,13 @@ namespace mRemoteNG.UI.Controls
 
                     if (!string.IsNullOrEmpty(screenText))
                     {
+                        // Log first time we get screen text for debugging
+                        if (!_hasLoggedFirstRender)
+                        {
+                            SSHDotNetDiagnostics.LogInfo($"Terminal: First render - screen text length: {screenText.Length} chars");
+                            _hasLoggedFirstRender = true;
+                        }
+
                         // Render terminal text
                         using (Brush foregroundBrush = new SolidBrush(_foregroundColor))
                         {
@@ -751,6 +765,15 @@ namespace mRemoteNG.UI.Controls
                                 if (y > this.Height)
                                     break;
                             }
+                        }
+                    }
+                    else
+                    {
+                        // Log if screen text is empty
+                        if (!_hasLoggedEmptyScreen)
+                        {
+                            SSHDotNetDiagnostics.LogDebug("Terminal: OnPaint called but GetScreenText() returned empty");
+                            _hasLoggedEmptyScreen = true;
                         }
                     }
                 }

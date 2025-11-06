@@ -35,6 +35,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         private SshTerminalControl _terminalControl;
         private CancellationTokenSource _cancellationTokenSource;
         private Task _outputReadTask;
+        private Task _inputWriteTask;
 
         private ConnectionState _state = ConnectionState.Disconnected;
         private DateTime _connectionStartTime;
@@ -275,11 +276,12 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 SSHDotNetDiagnostics.LogDebug("Protocol: Attaching terminal to shell stream");
                 _terminalControl.AttachSshStream(_shellStream);
 
-                // Start reading output
+                // Start reading output and writing input
                 _cancellationTokenSource = new CancellationTokenSource();
                 _outputReadTask = Task.Run(() => ReadOutputAsync(_cancellationTokenSource.Token));
+                _inputWriteTask = Task.Run(() => WriteInputAsync(_cancellationTokenSource.Token));
 
-                SSHDotNetDiagnostics.LogInfo("Protocol: Output reading task started");
+                SSHDotNetDiagnostics.LogInfo("Protocol: Output reading and input writing tasks started");
 
                 // Execute opening command if configured
                 if (!string.IsNullOrEmpty(connectionInfo.OpeningCommand))
@@ -352,7 +354,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 State = ConnectionState.Disconnecting;
                 SSHDotNetDiagnostics.LogInfo("Protocol: Disconnect() called");
 
-                // Cancel output reading
+                // Cancel output reading and input writing
                 _cancellationTokenSource?.Cancel();
 
                 // Wait for output task to complete
@@ -361,6 +363,19 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     try
                     {
                         _outputReadTask.Wait(TimeSpan.FromSeconds(2));
+                    }
+                    catch (AggregateException)
+                    {
+                        // Task was cancelled, this is expected
+                    }
+                }
+
+                // Wait for input task to complete
+                if (_inputWriteTask != null)
+                {
+                    try
+                    {
+                        _inputWriteTask.Wait(TimeSpan.FromSeconds(2));
                     }
                     catch (AggregateException)
                     {
@@ -538,6 +553,62 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             {
                 SSHDotNetDiagnostics.LogException("Output: Fatal error in output reading", ex);
                 Event_ErrorOccured(this, $"Output reading error: {ex.Message}", null);
+            }
+        }
+
+        private async Task WriteInputAsync(CancellationToken cancellationToken)
+        {
+            SSHDotNetDiagnostics.LogInfo("Input: Starting input writing loop");
+
+            try
+            {
+                while (!cancellationToken.IsCancellationRequested && _shellStream != null && _terminalControl != null)
+                {
+                    try
+                    {
+                        // Poll terminal control for user input
+                        _terminalControl.ReadInput(out byte[] inputData);
+
+                        if (inputData != null && inputData.Length > 0)
+                        {
+                            // Write input to SSH shell stream
+                            await _shellStream.WriteAsync(inputData, 0, inputData.Length, cancellationToken);
+                            await _shellStream.FlushAsync(cancellationToken);
+
+                            _bytesSent += inputData.Length;
+
+                            // Log raw data if enabled
+                            SSHDotNetDiagnostics.LogRawDataBinary(inputData, inputData.Length, "Sent");
+                            SSHDotNetDiagnostics.LogDebug($"Input: Sent {inputData.Length} bytes (total: {_bytesSent})");
+                        }
+                        else
+                        {
+                            // No input available, wait a bit before polling again
+                            await Task.Delay(50, cancellationToken);
+                        }
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        SSHDotNetDiagnostics.LogInfo("Input: Writing cancelled");
+                        break;
+                    }
+                    catch (IOException ioEx)
+                    {
+                        SSHDotNetDiagnostics.LogException("Input: I/O error writing to stream", ioEx);
+                        break;
+                    }
+                    catch (Exception ex)
+                    {
+                        SSHDotNetDiagnostics.LogException("Input: Error in writing loop", ex);
+                        await Task.Delay(100, cancellationToken);
+                    }
+                }
+
+                SSHDotNetDiagnostics.LogInfo("Input: Input writing loop ended");
+            }
+            catch (Exception ex)
+            {
+                SSHDotNetDiagnostics.LogException("Input: Fatal error in input writing", ex);
             }
         }
 
