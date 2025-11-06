@@ -44,8 +44,10 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowWarningInMC = new MrngCheckBox();
             chkShowInfoInMC = new MrngCheckBox();
             chkShowDebugInMC = new MrngCheckBox();
+            chkShowTraceInMC = new MrngCheckBox();
             groupBoxLogging = new MrngGroupBox();
             tblLogging = new System.Windows.Forms.TableLayoutPanel();
+            chkLogTraceMsgs = new MrngCheckBox();
             chkLogDebugMsgs = new MrngCheckBox();
             chkLogInfoMsgs = new MrngCheckBox();
             chkLogWarningMsgs = new MrngCheckBox();
@@ -60,6 +62,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             saveFileDialogLogging = new System.Windows.Forms.SaveFileDialog();
             groupBoxPopups = new MrngGroupBox();
             tblPopups = new System.Windows.Forms.TableLayoutPanel();
+            chkPopupTrace = new MrngCheckBox();
             chkPopupDebug = new MrngCheckBox();
             chkPopupError = new MrngCheckBox();
             chkPopupInfo = new MrngCheckBox();
@@ -87,7 +90,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSwitchToMCInformation._mice = MrngCheckBox.MouseState.OUT;
             chkSwitchToMCInformation.AutoSize = true;
             chkSwitchToMCInformation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkSwitchToMCInformation.Location = new System.Drawing.Point(195, 64);
+            chkSwitchToMCInformation.Location = new System.Drawing.Point(195, 87);
             chkSwitchToMCInformation.Name = "chkSwitchToMCInformation";
             chkSwitchToMCInformation.Size = new System.Drawing.Size(87, 17);
             chkSwitchToMCInformation.TabIndex = 6;
@@ -99,7 +102,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSwitchToMCErrors._mice = MrngCheckBox.MouseState.OUT;
             chkSwitchToMCErrors.AutoSize = true;
             chkSwitchToMCErrors.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkSwitchToMCErrors.Location = new System.Drawing.Point(195, 110);
+            chkSwitchToMCErrors.Location = new System.Drawing.Point(195, 133);
             chkSwitchToMCErrors.Name = "chkSwitchToMCErrors";
             chkSwitchToMCErrors.Size = new System.Drawing.Size(51, 17);
             chkSwitchToMCErrors.TabIndex = 8;
@@ -111,7 +114,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkSwitchToMCWarnings._mice = MrngCheckBox.MouseState.OUT;
             chkSwitchToMCWarnings.AutoSize = true;
             chkSwitchToMCWarnings.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkSwitchToMCWarnings.Location = new System.Drawing.Point(195, 87);
+            chkSwitchToMCWarnings.Location = new System.Drawing.Point(195, 110);
             chkSwitchToMCWarnings.Name = "chkSwitchToMCWarnings";
             chkSwitchToMCWarnings.Size = new System.Drawing.Size(71, 17);
             chkSwitchToMCWarnings.TabIndex = 7;
@@ -129,10 +132,11 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             groupBoxNotifications.Controls.Add(chkSwitchToMCWarnings);
             groupBoxNotifications.Controls.Add(chkShowInfoInMC);
             groupBoxNotifications.Controls.Add(chkShowDebugInMC);
+            groupBoxNotifications.Controls.Add(chkShowTraceInMC);
             groupBoxNotifications.Dock = System.Windows.Forms.DockStyle.Top;
             groupBoxNotifications.Location = new System.Drawing.Point(0, 0);
             groupBoxNotifications.Name = "groupBoxNotifications";
-            groupBoxNotifications.Size = new System.Drawing.Size(610, 132);
+            groupBoxNotifications.Size = new System.Drawing.Size(610, 160);
             groupBoxNotifications.TabIndex = 0;
             groupBoxNotifications.TabStop = false;
             groupBoxNotifications.Text = "Notifications Panel";
@@ -151,7 +155,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowErrorInMC._mice = MrngCheckBox.MouseState.OUT;
             chkShowErrorInMC.AutoSize = true;
             chkShowErrorInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkShowErrorInMC.Location = new System.Drawing.Point(20, 110);
+            chkShowErrorInMC.Location = new System.Drawing.Point(20, 133);
             chkShowErrorInMC.Name = "chkShowErrorInMC";
             chkShowErrorInMC.Size = new System.Drawing.Size(51, 17);
             chkShowErrorInMC.TabIndex = 4;
@@ -163,7 +167,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowWarningInMC._mice = MrngCheckBox.MouseState.OUT;
             chkShowWarningInMC.AutoSize = true;
             chkShowWarningInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkShowWarningInMC.Location = new System.Drawing.Point(20, 87);
+            chkShowWarningInMC.Location = new System.Drawing.Point(20, 110);
             chkShowWarningInMC.Name = "chkShowWarningInMC";
             chkShowWarningInMC.Size = new System.Drawing.Size(71, 17);
             chkShowWarningInMC.TabIndex = 3;
@@ -175,7 +179,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowInfoInMC._mice = MrngCheckBox.MouseState.OUT;
             chkShowInfoInMC.AutoSize = true;
             chkShowInfoInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkShowInfoInMC.Location = new System.Drawing.Point(20, 64);
+            chkShowInfoInMC.Location = new System.Drawing.Point(20, 87);
             chkShowInfoInMC.Name = "chkShowInfoInMC";
             chkShowInfoInMC.Size = new System.Drawing.Size(87, 17);
             chkShowInfoInMC.TabIndex = 2;
@@ -183,17 +187,29 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowInfoInMC.UseVisualStyleBackColor = true;
             // 
             // chkShowDebugInMC
-            // 
+            //
             chkShowDebugInMC._mice = MrngCheckBox.MouseState.OUT;
             chkShowDebugInMC.AutoSize = true;
             chkShowDebugInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkShowDebugInMC.Location = new System.Drawing.Point(20, 41);
+            chkShowDebugInMC.Location = new System.Drawing.Point(20, 64);
             chkShowDebugInMC.Name = "chkShowDebugInMC";
             chkShowDebugInMC.Size = new System.Drawing.Size(61, 17);
             chkShowDebugInMC.TabIndex = 1;
             chkShowDebugInMC.Text = "Debug";
             chkShowDebugInMC.UseVisualStyleBackColor = true;
-            // 
+            //
+            // chkShowTraceInMC
+            //
+            chkShowTraceInMC._mice = MrngCheckBox.MouseState.OUT;
+            chkShowTraceInMC.AutoSize = true;
+            chkShowTraceInMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkShowTraceInMC.Location = new System.Drawing.Point(20, 41);
+            chkShowTraceInMC.Name = "chkShowTraceInMC";
+            chkShowTraceInMC.Size = new System.Drawing.Size(53, 17);
+            chkShowTraceInMC.TabIndex = 0;
+            chkShowTraceInMC.Text = "Trace";
+            chkShowTraceInMC.UseVisualStyleBackColor = true;
+            //
             // groupBoxLogging
             // 
             groupBoxLogging.Controls.Add(tblLogging);
@@ -213,16 +229,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             groupBoxLogging.Text = "Logging";
             // 
             // tblLogging
-            // 
-            tblLogging.ColumnCount = 4;
-            tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tblLogging.Controls.Add(chkLogDebugMsgs, 0, 0);
-            tblLogging.Controls.Add(chkLogInfoMsgs, 1, 0);
-            tblLogging.Controls.Add(chkLogWarningMsgs, 2, 0);
-            tblLogging.Controls.Add(chkLogErrorMsgs, 3, 0);
+            //
+            tblLogging.ColumnCount = 5;
+            tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblLogging.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblLogging.Controls.Add(chkLogTraceMsgs, 0, 0);
+            tblLogging.Controls.Add(chkLogDebugMsgs, 1, 0);
+            tblLogging.Controls.Add(chkLogInfoMsgs, 2, 0);
+            tblLogging.Controls.Add(chkLogWarningMsgs, 3, 0);
+            tblLogging.Controls.Add(chkLogErrorMsgs, 4, 0);
             tblLogging.Location = new System.Drawing.Point(9, 138);
             tblLogging.Name = "tblLogging";
             tblLogging.RowCount = 1;
@@ -231,18 +249,30 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tblLogging.Size = new System.Drawing.Size(585, 25);
             tblLogging.TabIndex = 7;
             // 
+            // chkLogTraceMsgs
+            //
+            chkLogTraceMsgs._mice = MrngCheckBox.MouseState.OUT;
+            chkLogTraceMsgs.AutoSize = true;
+            chkLogTraceMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkLogTraceMsgs.Location = new System.Drawing.Point(3, 3);
+            chkLogTraceMsgs.Name = "chkLogTraceMsgs";
+            chkLogTraceMsgs.Size = new System.Drawing.Size(53, 17);
+            chkLogTraceMsgs.TabIndex = 0;
+            chkLogTraceMsgs.Text = "Trace";
+            chkLogTraceMsgs.UseVisualStyleBackColor = true;
+            //
             // chkLogDebugMsgs
-            // 
+            //
             chkLogDebugMsgs._mice = MrngCheckBox.MouseState.OUT;
             chkLogDebugMsgs.AutoSize = true;
             chkLogDebugMsgs.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkLogDebugMsgs.Location = new System.Drawing.Point(3, 3);
+            chkLogDebugMsgs.Location = new System.Drawing.Point(70, 3);
             chkLogDebugMsgs.Name = "chkLogDebugMsgs";
             chkLogDebugMsgs.Size = new System.Drawing.Size(61, 17);
-            chkLogDebugMsgs.TabIndex = 0;
+            chkLogDebugMsgs.TabIndex = 1;
             chkLogDebugMsgs.Text = "Debug";
             chkLogDebugMsgs.UseVisualStyleBackColor = true;
-            // 
+            //
             // chkLogInfoMsgs
             // 
             chkLogInfoMsgs._mice = MrngCheckBox.MouseState.OUT;
@@ -366,16 +396,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             groupBoxPopups.Text = "Pop-ups";
             // 
             // tblPopups
-            // 
-            tblPopups.ColumnCount = 4;
-            tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tblPopups.Controls.Add(chkPopupDebug, 0, 0);
-            tblPopups.Controls.Add(chkPopupError, 3, 0);
-            tblPopups.Controls.Add(chkPopupInfo, 1, 0);
-            tblPopups.Controls.Add(chkPopupWarning, 2, 0);
+            //
+            tblPopups.ColumnCount = 5;
+            tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblPopups.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tblPopups.Controls.Add(chkPopupTrace, 0, 0);
+            tblPopups.Controls.Add(chkPopupDebug, 1, 0);
+            tblPopups.Controls.Add(chkPopupInfo, 2, 0);
+            tblPopups.Controls.Add(chkPopupWarning, 3, 0);
+            tblPopups.Controls.Add(chkPopupError, 4, 0);
             tblPopups.Location = new System.Drawing.Point(11, 40);
             tblPopups.Name = "tblPopups";
             tblPopups.RowCount = 1;
@@ -383,19 +415,31 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             tblPopups.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             tblPopups.Size = new System.Drawing.Size(584, 25);
             tblPopups.TabIndex = 1;
-            // 
+            //
+            // chkPopupTrace
+            //
+            chkPopupTrace._mice = MrngCheckBox.MouseState.OUT;
+            chkPopupTrace.AutoSize = true;
+            chkPopupTrace.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            chkPopupTrace.Location = new System.Drawing.Point(3, 3);
+            chkPopupTrace.Name = "chkPopupTrace";
+            chkPopupTrace.Size = new System.Drawing.Size(53, 17);
+            chkPopupTrace.TabIndex = 0;
+            chkPopupTrace.Text = "Trace";
+            chkPopupTrace.UseVisualStyleBackColor = true;
+            //
             // chkPopupDebug
-            // 
+            //
             chkPopupDebug._mice = MrngCheckBox.MouseState.OUT;
             chkPopupDebug.AutoSize = true;
             chkPopupDebug.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            chkPopupDebug.Location = new System.Drawing.Point(3, 3);
+            chkPopupDebug.Location = new System.Drawing.Point(120, 3);
             chkPopupDebug.Name = "chkPopupDebug";
             chkPopupDebug.Size = new System.Drawing.Size(61, 17);
-            chkPopupDebug.TabIndex = 0;
+            chkPopupDebug.TabIndex = 1;
             chkPopupDebug.Text = "Debug";
             chkPopupDebug.UseVisualStyleBackColor = true;
-            // 
+            //
             // chkPopupError
             // 
             chkPopupError._mice = MrngCheckBox.MouseState.OUT;
@@ -487,6 +531,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private MrngCheckBox chkShowWarningInMC;
         private MrngCheckBox chkShowInfoInMC;
         private MrngCheckBox chkShowDebugInMC;
+        private MrngCheckBox chkShowTraceInMC;
         private System.Windows.Forms.SaveFileDialog saveFileDialogLogging;
         private Controls.MrngLabel labelLogFilePath;
         private Controls.MrngTextBox textBoxLogPath;
@@ -496,6 +541,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private MrngCheckBox chkLogWarningMsgs;
         private MrngCheckBox chkLogInfoMsgs;
         private MrngCheckBox chkLogDebugMsgs;
+        private MrngCheckBox chkLogTraceMsgs;
         private MrngButton buttonOpenLogFile;
         private MrngButton buttonRestoreDefaultLogPath;
         private MrngCheckBox chkPopupError;
@@ -503,6 +549,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         private MrngCheckBox chkPopupWarning;
         private MrngCheckBox chkPopupDebug;
         private MrngCheckBox chkPopupInfo;
+        private MrngCheckBox chkPopupTrace;
         private MrngCheckBox chkLogToCurrentDir;
         private System.Windows.Forms.TableLayoutPanel tblLogging;
         private System.Windows.Forms.TableLayoutPanel tblPopups;

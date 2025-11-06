@@ -1877,6 +1877,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="Debug" xml:space="preserve">
     <value>Debug</value>
   </data>
+  <data name="Trace" xml:space="preserve">
+    <value>Trace</value>
+  </data>
   <data name="ShowTheseMessageTypes" xml:space="preserve">
     <value>Show these message types</value>
   </data>

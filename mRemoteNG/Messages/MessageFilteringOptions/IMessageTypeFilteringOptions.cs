@@ -2,6 +2,7 @@
 {
     public interface IMessageTypeFilteringOptions
     {
+        bool AllowTraceMessages { get; set; }
         bool AllowDebugMessages { get; set; }
         bool AllowInfoMessages { get; set; }
         bool AllowWarningMessages { get; set; }

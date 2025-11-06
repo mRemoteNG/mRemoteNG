@@ -25,6 +25,9 @@ namespace mRemoteNG.Messages.MessageWriters
                 case MessageClass.ErrorMsg:
                     _logger.Log.Error(message.Text);
                     break;
+                case MessageClass.TraceMsg:
+                    _logger.Log.Debug($"TRACE - {message.Text}");
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

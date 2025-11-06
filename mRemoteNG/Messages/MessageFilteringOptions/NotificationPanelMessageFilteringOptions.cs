@@ -4,6 +4,12 @@ namespace mRemoteNG.Messages.MessageFilteringOptions
 {
     public class NotificationPanelMessageFilteringOptions : IMessageTypeFilteringOptions
     {
+        public bool AllowTraceMessages
+        {
+            get => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs;
+            set => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs = value;
+        }
+
         public bool AllowDebugMessages
         {
             get => Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteDebugMsgs;

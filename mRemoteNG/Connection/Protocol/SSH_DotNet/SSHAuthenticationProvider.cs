@@ -19,7 +19,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
             string password,
             ConnectionInfo connectionInfo)
         {
-            SSHDotNetDiagnostics.LogInfo($"Auth: Building authentication methods for user '{username}'");
+            SSHDotNetDiagnostics.LogDebug($"Auth: Building authentication methods for user '{username}'");
 
             var authMethods = new List<AuthenticationMethod>();
 
@@ -44,7 +44,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 SSHDotNetDiagnostics.LogDebug("Auth: Adding keyboard-interactive method");
                 authMethods.Add(CreateKeyboardInteractiveAuth(username, password));
 
-                SSHDotNetDiagnostics.LogInfo($"Auth: Created {authMethods.Count} authentication method(s)");
+                SSHDotNetDiagnostics.LogDebug($"Auth: Created {authMethods.Count} authentication method(s)");
 
                 return authMethods.ToArray();
             }

@@ -26,6 +26,10 @@ namespace mRemoteNG.Messages.MessageWriters
                     MessageBox.Show(message.Text, string.Format(Language.TitleError, message.Date),
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
+                case MessageClass.TraceMsg:
+                    MessageBox.Show(message.Text, string.Format(Language.TitleInformation, message.Date),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }

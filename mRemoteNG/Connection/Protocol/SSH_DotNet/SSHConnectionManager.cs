@@ -11,8 +11,8 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
     {
         #region Constants
 
-        private const int DEFAULT_TIMEOUT_SECONDS = 30;
-        private const int DEFAULT_KEEPALIVE_SECONDS = 30;
+        private const int DEFAULT_TIMEOUT_SECONDS = 15;  // Reduced from 30s for faster timeout
+        private const int DEFAULT_KEEPALIVE_SECONDS = 5;  // Reduced from 30s for faster disconnect detection
         private const int DEFAULT_BUFFER_SIZE = 1024;
         private const string DEFAULT_TERMINAL_NAME = "xterm-256color";
 
@@ -66,7 +66,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                 // Configure client properties
                 client.ConnectionInfo.Encoding = System.Text.Encoding.UTF8;
 
-                SSHDotNetDiagnostics.LogInfo("Connection: SSH client created, ready to connect");
+                SSHDotNetDiagnostics.LogDebug("Connection: SSH client created, ready to connect");
 
                 return client;
             }
@@ -147,7 +147,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             string actualTerminalName = terminalName ?? DEFAULT_TERMINAL_NAME;
 
-            SSHDotNetDiagnostics.LogInfo($"Shell: Creating shell stream with terminal '{actualTerminalName}' ({columns}x{rows})");
+            SSHDotNetDiagnostics.LogDebug($"Shell: Creating shell stream with terminal '{actualTerminalName}' ({columns}x{rows})");
 
             try
             {
@@ -159,7 +159,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
                     height,
                     bufferSize);
 
-                SSHDotNetDiagnostics.LogInfo($"Shell: Shell stream created successfully");
+                SSHDotNetDiagnostics.LogDebug($"Shell: Shell stream created successfully");
                 SSHDotNetDiagnostics.LogDebug($"Shell: Buffer size: {bufferSize} bytes");
 
                 return shellStream;
@@ -185,7 +185,7 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
 
             var actualInterval = interval ?? TimeSpan.FromSeconds(DEFAULT_KEEPALIVE_SECONDS);
 
-            SSHDotNetDiagnostics.LogInfo($"KeepAlive: Configuring keep-alive interval to {actualInterval.TotalSeconds}s");
+            SSHDotNetDiagnostics.LogDebug($"KeepAlive: Configuring keep-alive interval to {actualInterval.TotalSeconds}s");
 
             try
             {

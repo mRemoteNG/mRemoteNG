@@ -9,9 +9,32 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
     {
         #region Configuration Flags
 
+        /// <summary>
+        /// Enable debug-level logging (method entry/exit, state changes, calculations)
+        /// Expected volume: 50-100 messages/second during active operation
+        /// </summary>
         public static bool VerboseLogging { get; set; } = false;
+
+        /// <summary>
+        /// Enable trace-level logging (byte-level operations, every keystroke, every paint)
+        /// Expected volume: 1000-10000 messages/second during active operation
+        /// WARNING: Extremely verbose, use only for deep debugging
+        /// </summary>
+        public static bool TraceLogging { get; set; } = false;
+
+        /// <summary>
+        /// Enable raw data hex dumps (requires TraceLogging to also be enabled)
+        /// </summary>
         public static bool LogRawData { get; set; } = false;
+
+        /// <summary>
+        /// Enable escape sequence interpretation logging
+        /// </summary>
         public static bool LogEscapeSequences { get; set; } = false;
+
+        /// <summary>
+        /// Enable performance metrics logging
+        /// </summary>
         public static bool LogPerformanceMetrics { get; set; } = false;
 
         #endregion
@@ -25,7 +48,33 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         #region Logging Methods
 
         /// <summary>
+        /// Log a trace message (only if trace logging is enabled via code flag OR user UI settings)
+        /// Use for: Byte-level operations, every keystroke, every screen paint, buffer operations
+        /// Expected volume: 1000-10000 messages/second during active operation
+        /// WARNING: Extremely verbose, use only for deep debugging
+        /// </summary>
+        public static void LogTrace(string message)
+        {
+            // Generate trace messages if either:
+            // 1. Code-level TraceLogging flag is enabled (developer override), OR
+            // 2. User has enabled Trace in Options > Notifications UI
+            if (!TraceLogging)
+            {
+                bool traceEnabledInUI = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs
+                                     || Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs
+                                     || Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteTraceMsgs;
+                if (!traceEnabledInUI) return;
+            }
+
+            Runtime.MessageCollector.AddMessage(
+                MessageClass.TraceMsg,
+                $"[SSH_DotNet TRACE] {message}");
+        }
+
+        /// <summary>
         /// Log a debug message (only if verbose logging is enabled)
+        /// Use for: Method entry/exit, state changes, property updates, loop lifecycle, internal calculations
+        /// Expected volume: 50-100 messages/second during active operation
         /// </summary>
         public static void LogDebug(string message)
         {
@@ -36,7 +85,10 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         }
 
         /// <summary>
-        /// Log an informational message
+        /// Log an informational message (always logged, not gated by flags)
+        /// Use for: Connection established/closed, authentication success, major state transitions, user actions
+        /// Expected volume: 5-20 messages per connection lifecycle
+        /// Guidelines: Only events important enough for users to see in production logs
         /// </summary>
         public static void LogInfo(string message)
         {
@@ -81,30 +133,49 @@ namespace mRemoteNG.Connection.Protocol.SSH_DotNet
         #region Raw Data Logging
 
         /// <summary>
-        /// Log raw data in hex format (only if raw data logging is enabled)
+        /// Log raw data in hex format (requires both TraceLogging and LogRawData to be enabled)
+        /// Use for: Debugging protocol-level issues, verifying byte sequences
         /// </summary>
         public static void LogRawDataBinary(byte[] data, int length, string context)
         {
+            // Require LogRawData flag AND (TraceLogging flag OR UI settings)
             if (!LogRawData) return;
+
+            if (!TraceLogging)
+            {
+                bool traceEnabledInUI = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs
+                                     || Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs
+                                     || Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteTraceMsgs;
+                if (!traceEnabledInUI) return;
+            }
 
             int displayLength = Math.Min(length, 64);
             string hex = BitConverter.ToString(data, 0, displayLength);
             if (length > 64) hex += "...";
 
             Runtime.MessageCollector.AddMessage(
-                MessageClass.DebugMsg,
-                $"[SSH_DotNet RAW] {context}: [{length} bytes] {hex}");
+                MessageClass.TraceMsg,
+                $"[SSH_DotNet TRACE] {context}: [{length} bytes] {hex}");
         }
 
         /// <summary>
-        /// Log escape sequence interpretation
+        /// Log escape sequence interpretation (only if LogEscapeSequences flag OR user UI settings enabled)
         /// </summary>
         public static void LogEscapeSequence(string sequence, string interpretation)
         {
-            if (!LogEscapeSequences) return;
+            // Generate escape sequence logs if either:
+            // 1. Code-level LogEscapeSequences flag is enabled, OR
+            // 2. User has enabled Trace in Options > Notifications UI
+            if (!LogEscapeSequences)
+            {
+                bool traceEnabledInUI = Properties.OptionsNotificationsPage.Default.NotificationPanelWriterWriteTraceMsgs
+                                     || Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs
+                                     || Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteTraceMsgs;
+                if (!traceEnabledInUI) return;
+            }
 
             Runtime.MessageCollector.AddMessage(
-                MessageClass.DebugMsg,
+                MessageClass.TraceMsg,
                 $"[SSH_DotNet ESC] {sequence} → {interpretation}");
         }
 

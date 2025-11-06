@@ -6,5 +6,6 @@
         InformationMsg = 1,
         WarningMsg = 2,
         ErrorMsg = 3,
+        TraceMsg = 4,
     }
 }

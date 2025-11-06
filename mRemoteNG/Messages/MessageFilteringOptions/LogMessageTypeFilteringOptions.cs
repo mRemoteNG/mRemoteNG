@@ -4,6 +4,12 @@ namespace mRemoteNG.Messages.MessageFilteringOptions
 {
     public class LogMessageTypeFilteringOptions : IMessageTypeFilteringOptions
     {
+        public bool AllowTraceMessages
+        {
+            get => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs;
+            set => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteTraceMsgs = value;
+        }
+
         public bool AllowDebugMessages
         {
             get => Properties.OptionsNotificationsPage.Default.TextLogMessageWriterWriteDebugMsgs;

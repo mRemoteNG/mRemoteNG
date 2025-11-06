@@ -4,6 +4,12 @@ namespace mRemoteNG.Messages.MessageFilteringOptions
 {
     public class PopupMessageFilteringOptions : IMessageTypeFilteringOptions
     {
+        public bool AllowTraceMessages
+        {
+            get => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteTraceMsgs;
+            set => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteTraceMsgs = value;
+        }
+
         public bool AllowDebugMessages
         {
             get => Properties.OptionsNotificationsPage.Default.PopupMessageWriterWriteDebugMsgs;

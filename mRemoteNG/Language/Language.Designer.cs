@@ -1545,7 +1545,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Debug", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Trace.
+        /// </summary>
+        internal static string Trace {
+            get {
+                return ResourceManager.GetString("Trace", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
