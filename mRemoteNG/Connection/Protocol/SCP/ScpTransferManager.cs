@@ -483,7 +483,11 @@ namespace mRemoteNG.Connection.Protocol.SCP
         }
 
         /// <summary>
-        /// Deletes a directory and all its contents from the remote server.
+        /// Deletes a directory and all its contents from the remote server recursively.
+        /// SFTP requires directories to be empty before deletion, so this method:
+        /// 1. Recursively deletes all subdirectories
+        /// 2. Deletes all files in the directory
+        /// 3. Finally deletes the now-empty directory
         /// </summary>
         /// <param name="remotePath">Remote directory path to delete</param>
         public void DeleteDirectory(string remotePath)
@@ -493,14 +497,212 @@ namespace mRemoteNG.Connection.Protocol.SCP
 
             try
             {
-                Logger.Instance.Log?.Debug($"[ScpTransferManager.DeleteDirectory] Deleting remote directory: {remotePath}");
+                Logger.Instance.Log?.Debug($"[ScpTransferManager.DeleteDirectory] Recursively deleting remote directory: {remotePath}");
+
+                // First, get all items in the directory
+                var items = _sftpClient.ListDirectory(remotePath)
+                    .Where(f => f.Name != "." && f.Name != "..")
+                    .ToList();
+
+                // Delete all subdirectories recursively
+                foreach (var item in items.Where(f => f.IsDirectory))
+                {
+                    Logger.Instance.Log?.Debug($"[ScpTransferManager.DeleteDirectory] Recursively deleting subdirectory: {item.FullName}");
+                    DeleteDirectory(item.FullName);
+                }
+
+                // Delete all files in the directory
+                foreach (var item in items.Where(f => !f.IsDirectory))
+                {
+                    Logger.Instance.Log?.Debug($"[ScpTransferManager.DeleteDirectory] Deleting file: {item.FullName}");
+                    _sftpClient.DeleteFile(item.FullName);
+                }
+
+                // Finally, delete the now-empty directory
+                Logger.Instance.Log?.Debug($"[ScpTransferManager.DeleteDirectory] Deleting empty directory: {remotePath}");
                 _sftpClient.DeleteDirectory(remotePath);
-                Logger.Instance.Log?.Info($"[ScpTransferManager.DeleteDirectory] Successfully deleted directory: {remotePath}");
+
+                Logger.Instance.Log?.Info($"[ScpTransferManager.DeleteDirectory] Successfully deleted directory and all contents: {remotePath}");
             }
             catch (Exception ex)
             {
                 Logger.Instance.Log?.Error($"[ScpTransferManager.DeleteDirectory] Error deleting directory: {remotePath}", ex);
                 Runtime.MessageCollector?.AddExceptionMessage($"Error deleting remote directory: {remotePath}", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Creates a directory on the remote server if it doesn't exist.
+        /// </summary>
+        /// <param name="remotePath">Remote directory path to create</param>
+        public void CreateRemoteDirectory(string remotePath)
+        {
+            if (!_isConnected || _sftpClient == null || !_sftpClient.IsConnected)
+                throw new InvalidOperationException("Not connected to remote server");
+
+            try
+            {
+                if (!_sftpClient.Exists(remotePath))
+                {
+                    Logger.Instance.Log?.Debug($"[ScpTransferManager.CreateRemoteDirectory] Creating remote directory: {remotePath}");
+                    _sftpClient.CreateDirectory(remotePath);
+                    Logger.Instance.Log?.Info($"[ScpTransferManager.CreateRemoteDirectory] Successfully created directory: {remotePath}");
+                }
+                else
+                {
+                    Logger.Instance.Log?.Debug($"[ScpTransferManager.CreateRemoteDirectory] Directory already exists: {remotePath}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Log?.Error($"[ScpTransferManager.CreateRemoteDirectory] Error creating directory: {remotePath}", ex);
+                Runtime.MessageCollector?.AddExceptionMessage($"Error creating remote directory: {remotePath}", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Recursively uploads a local directory and all its contents to the remote server.
+        /// </summary>
+        /// <param name="localPath">Local directory path</param>
+        /// <param name="remotePath">Remote destination path</param>
+        /// <param name="progressCallback">Optional progress callback (current file path)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Task that completes when upload finishes</returns>
+        public async Task UploadDirectoryAsync(string localPath, string remotePath,
+            Action<string> progressCallback = null,
+            CancellationToken cancellationToken = default)
+        {
+            if (!IsConnected)
+            {
+                Logger.Instance.Log?.Error("[ScpTransferManager.UploadDirectoryAsync] Not connected to server");
+                throw new InvalidOperationException("Not connected to server");
+            }
+
+            if (!Directory.Exists(localPath))
+            {
+                Logger.Instance.Log?.Error($"[ScpTransferManager.UploadDirectoryAsync] Local directory not found: {localPath}");
+                throw new DirectoryNotFoundException($"Local directory not found: {localPath}");
+            }
+
+            try
+            {
+                Logger.Instance.Log?.Info($"[ScpTransferManager.UploadDirectoryAsync] Starting recursive upload: {localPath} -> {remotePath}");
+
+                // Create the remote directory if it doesn't exist
+                CreateRemoteDirectory(remotePath);
+
+                // Get all files in current directory
+                var files = Directory.GetFiles(localPath);
+                foreach (var file in files)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    var fileName = Path.GetFileName(file);
+                    var remoteFilePath = $"{remotePath}/{fileName}".Replace("\\", "/");
+
+                    progressCallback?.Invoke(file);
+                    await UploadFileAsync(file, remoteFilePath, null, cancellationToken);
+                }
+
+                // Recursively upload subdirectories
+                var directories = Directory.GetDirectories(localPath);
+                foreach (var directory in directories)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    var dirName = Path.GetFileName(directory);
+                    var remoteSubDirPath = $"{remotePath}/{dirName}".Replace("\\", "/");
+
+                    await UploadDirectoryAsync(directory, remoteSubDirPath, progressCallback, cancellationToken);
+                }
+
+                Logger.Instance.Log?.Info($"[ScpTransferManager.UploadDirectoryAsync] Completed recursive upload: {localPath}");
+            }
+            catch (OperationCanceledException)
+            {
+                Logger.Instance.Log?.Warn($"[ScpTransferManager.UploadDirectoryAsync] Upload cancelled: {localPath}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Log?.Error($"[ScpTransferManager.UploadDirectoryAsync] Error uploading directory: {localPath}", ex);
+                Runtime.MessageCollector?.AddExceptionMessage($"Error uploading directory: {localPath}", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Recursively downloads a remote directory and all its contents to the local system.
+        /// </summary>
+        /// <param name="remotePath">Remote directory path</param>
+        /// <param name="localPath">Local destination path</param>
+        /// <param name="progressCallback">Optional progress callback (current file path)</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        /// <returns>Task that completes when download finishes</returns>
+        public async Task DownloadDirectoryAsync(string remotePath, string localPath,
+            Action<string> progressCallback = null,
+            CancellationToken cancellationToken = default)
+        {
+            if (!IsConnected)
+            {
+                Logger.Instance.Log?.Error("[ScpTransferManager.DownloadDirectoryAsync] Not connected to server");
+                throw new InvalidOperationException("Not connected to server");
+            }
+
+            if (!_sftpClient.Exists(remotePath))
+            {
+                Logger.Instance.Log?.Error($"[ScpTransferManager.DownloadDirectoryAsync] Remote directory not found: {remotePath}");
+                throw new DirectoryNotFoundException($"Remote directory not found: {remotePath}");
+            }
+
+            try
+            {
+                Logger.Instance.Log?.Info($"[ScpTransferManager.DownloadDirectoryAsync] Starting recursive download: {remotePath} -> {localPath}");
+
+                // Create the local directory if it doesn't exist
+                if (!Directory.Exists(localPath))
+                {
+                    Logger.Instance.Log?.Debug($"[ScpTransferManager.DownloadDirectoryAsync] Creating local directory: {localPath}");
+                    Directory.CreateDirectory(localPath);
+                }
+
+                // Get all items in the remote directory
+                var items = _sftpClient.ListDirectory(remotePath)
+                    .Where(f => f.Name != "." && f.Name != "..")
+                    .ToList();
+
+                // Download files
+                foreach (var item in items.Where(f => !f.IsDirectory))
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    var localFilePath = Path.Combine(localPath, item.Name);
+                    progressCallback?.Invoke(item.FullName);
+                    await DownloadFileAsync(item.FullName, localFilePath, null, cancellationToken);
+                }
+
+                // Recursively download subdirectories
+                foreach (var item in items.Where(f => f.IsDirectory))
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    var localSubDirPath = Path.Combine(localPath, item.Name);
+                    await DownloadDirectoryAsync(item.FullName, localSubDirPath, progressCallback, cancellationToken);
+                }
+
+                Logger.Instance.Log?.Info($"[ScpTransferManager.DownloadDirectoryAsync] Completed recursive download: {remotePath}");
+            }
+            catch (OperationCanceledException)
+            {
+                Logger.Instance.Log?.Warn($"[ScpTransferManager.DownloadDirectoryAsync] Download cancelled: {remotePath}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Log?.Error($"[ScpTransferManager.DownloadDirectoryAsync] Error downloading directory: {remotePath}", ex);
+                Runtime.MessageCollector?.AddExceptionMessage($"Error downloading directory: {remotePath}", ex);
                 throw;
             }
         }

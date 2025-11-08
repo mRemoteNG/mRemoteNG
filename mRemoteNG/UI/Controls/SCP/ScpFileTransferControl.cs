@@ -368,23 +368,27 @@ namespace mRemoteNG.UI.Controls.SCP
                 var selectedFiles = _localPanel.SelectedFiles;
                 if (selectedFiles == null || selectedFiles.Count == 0)
                 {
-                    MessageBox.Show("Please select files to upload.",
+                    MessageBox.Show("Please select files or directories to upload.",
                         "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                // Filter out directories (MVP: files only)
-                var filesToUpload = selectedFiles.Where(f => !f.IsDirectory).ToList();
-                if (filesToUpload.Count == 0)
-                {
-                    MessageBox.Show("Directory upload not supported in this version.\nPlease select files only.",
-                        "Directory Upload", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
+                // Count total files and directories
+                var fileCount = selectedFiles.Count(f => !f.IsDirectory);
+                var dirCount = selectedFiles.Count(f => f.IsDirectory);
+
+                // Build confirmation message
+                var itemDescription = new List<string>();
+                if (fileCount > 0)
+                    itemDescription.Add($"{fileCount} file(s)");
+                if (dirCount > 0)
+                    itemDescription.Add($"{dirCount} directory(ies) (recursive)");
+
+                var itemList = string.Join(" and ", itemDescription);
 
                 // Confirm transfer
                 var result = MessageBox.Show(
-                    $"Upload {filesToUpload.Count} file(s) to {_remotePanel.CurrentPath}?",
+                    $"Upload {itemList} to {_remotePanel.CurrentPath}?",
                     "Confirm Upload",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -400,7 +404,7 @@ namespace mRemoteNG.UI.Controls.SCP
                 using (var progressForm = new Form
                 {
                     Text = "Uploading Files",
-                    Size = new Size(400, 150),
+                    Size = new Size(500, 150),
                     FormBorderStyle = FormBorderStyle.FixedDialog,
                     StartPosition = FormStartPosition.CenterParent,
                     MaximizeBox = false,
@@ -412,41 +416,69 @@ namespace mRemoteNG.UI.Controls.SCP
                         Text = "Uploading...",
                         Dock = DockStyle.Top,
                         Height = 30,
-                        TextAlign = ContentAlignment.MiddleCenter
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        AutoEllipsis = true
                     };
 
                     var progressBar = new ProgressBar
                     {
                         Dock = DockStyle.Top,
                         Height = 30,
-                        Style = ProgressBarStyle.Continuous
+                        Style = ProgressBarStyle.Marquee,
+                        MarqueeAnimationSpeed = 30
                     };
 
                     progressForm.Controls.Add(progressBar);
                     progressForm.Controls.Add(progressLabel);
                     progressForm.Show();
 
-                    // Upload each file
+                    // Upload each file and directory
                     int completed = 0;
-                    foreach (var file in filesToUpload)
+                    int totalItems = selectedFiles.Count;
+
+                    foreach (var item in selectedFiles)
                     {
-                        progressLabel.Text = $"Uploading {file.Name} ({completed + 1}/{filesToUpload.Count})...";
-                        progressBar.Value = (int)((float)completed / filesToUpload.Count * 100);
-                        Application.DoEvents();
+                        if (item.IsDirectory)
+                        {
+                            // Upload directory recursively
+                            progressLabel.Text = $"Uploading directory {item.Name} ({completed + 1}/{totalItems})...";
+                            Application.DoEvents();
 
-                        string remotePath = Path.Combine(_remotePanel.CurrentPath, file.Name).Replace("\\", "/");
+                            string remotePath = Path.Combine(_remotePanel.CurrentPath, item.Name).Replace("\\", "/");
 
-                        await _transferManager.UploadFileAsync(file.FullPath, remotePath);
+                            await _transferManager.UploadDirectoryAsync(item.FullPath, remotePath, currentFile =>
+                            {
+                                // Update progress with current file being uploaded
+                                var relPath = currentFile.Substring(item.FullPath.Length).TrimStart('\\', '/');
+                                progressLabel.Text = $"Uploading: {item.Name}/{relPath}";
+                                Application.DoEvents();
+                            });
+                        }
+                        else
+                        {
+                            // Upload single file
+                            progressLabel.Text = $"Uploading {item.Name} ({completed + 1}/{totalItems})...";
+                            Application.DoEvents();
+
+                            string remotePath = Path.Combine(_remotePanel.CurrentPath, item.Name).Replace("\\", "/");
+
+                            await _transferManager.UploadFileAsync(item.FullPath, remotePath);
+                        }
+
                         completed++;
                     }
-
-                    progressBar.Value = 100;
                 }
 
                 // Refresh remote panel
                 _remotePanel.RefreshCurrentDirectory();
 
-                MessageBox.Show($"Successfully uploaded {filesToUpload.Count} file(s).",
+                // Refresh tree view if any directories were uploaded
+                if (dirCount > 0)
+                {
+                    _remotePanel.RefreshTreeView();
+                }
+
+                MessageBox.Show($"Successfully uploaded {itemList}.",
                     "Upload Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -469,23 +501,27 @@ namespace mRemoteNG.UI.Controls.SCP
                 var selectedFiles = _remotePanel.SelectedFiles;
                 if (selectedFiles == null || selectedFiles.Count == 0)
                 {
-                    MessageBox.Show("Please select files to download.",
+                    MessageBox.Show("Please select files or directories to download.",
                         "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                // Filter out directories (MVP: files only)
-                var filesToDownload = selectedFiles.Where(f => !f.IsDirectory).ToList();
-                if (filesToDownload.Count == 0)
-                {
-                    MessageBox.Show("Directory download not supported in this version.\nPlease select files only.",
-                        "Directory Download", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
+                // Count total files and directories
+                var fileCount = selectedFiles.Count(f => !f.IsDirectory);
+                var dirCount = selectedFiles.Count(f => f.IsDirectory);
+
+                // Build confirmation message
+                var itemDescription = new List<string>();
+                if (fileCount > 0)
+                    itemDescription.Add($"{fileCount} file(s)");
+                if (dirCount > 0)
+                    itemDescription.Add($"{dirCount} directory(ies) (recursive)");
+
+                var itemList = string.Join(" and ", itemDescription);
 
                 // Confirm transfer
                 var result = MessageBox.Show(
-                    $"Download {filesToDownload.Count} file(s) to {_localPanel.CurrentPath}?",
+                    $"Download {itemList} to {_localPanel.CurrentPath}?",
                     "Confirm Download",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -501,7 +537,7 @@ namespace mRemoteNG.UI.Controls.SCP
                 using (var progressForm = new Form
                 {
                     Text = "Downloading Files",
-                    Size = new Size(400, 150),
+                    Size = new Size(500, 150),
                     FormBorderStyle = FormBorderStyle.FixedDialog,
                     StartPosition = FormStartPosition.CenterParent,
                     MaximizeBox = false,
@@ -513,41 +549,72 @@ namespace mRemoteNG.UI.Controls.SCP
                         Text = "Downloading...",
                         Dock = DockStyle.Top,
                         Height = 30,
-                        TextAlign = ContentAlignment.MiddleCenter
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        AutoEllipsis = true
                     };
 
                     var progressBar = new ProgressBar
                     {
                         Dock = DockStyle.Top,
                         Height = 30,
-                        Style = ProgressBarStyle.Continuous
+                        Style = ProgressBarStyle.Marquee,
+                        MarqueeAnimationSpeed = 30
                     };
 
                     progressForm.Controls.Add(progressBar);
                     progressForm.Controls.Add(progressLabel);
                     progressForm.Show();
 
-                    // Download each file
+                    // Download each file and directory
                     int completed = 0;
-                    foreach (var file in filesToDownload)
+                    int totalItems = selectedFiles.Count;
+
+                    foreach (var item in selectedFiles)
                     {
-                        progressLabel.Text = $"Downloading {file.Name} ({completed + 1}/{filesToDownload.Count})...";
-                        progressBar.Value = (int)((float)completed / filesToDownload.Count * 100);
-                        Application.DoEvents();
+                        if (item.IsDirectory)
+                        {
+                            // Download directory recursively
+                            progressLabel.Text = $"Downloading directory {item.Name} ({completed + 1}/{totalItems})...";
+                            Application.DoEvents();
 
-                        string localPath = Path.Combine(_localPanel.CurrentPath, file.Name);
+                            string localPath = Path.Combine(_localPanel.CurrentPath, item.Name);
 
-                        await _transferManager.DownloadFileAsync(file.FullPath, localPath);
+                            await _transferManager.DownloadDirectoryAsync(item.FullPath, localPath, currentFile =>
+                            {
+                                // Update progress with current file being downloaded
+                                // Extract relative path from full remote path
+                                var relPath = currentFile.StartsWith(item.FullPath)
+                                    ? currentFile.Substring(item.FullPath.Length).TrimStart('/', '\\')
+                                    : Path.GetFileName(currentFile);
+                                progressLabel.Text = $"Downloading: {item.Name}/{relPath}";
+                                Application.DoEvents();
+                            });
+                        }
+                        else
+                        {
+                            // Download single file
+                            progressLabel.Text = $"Downloading {item.Name} ({completed + 1}/{totalItems})...";
+                            Application.DoEvents();
+
+                            string localPath = Path.Combine(_localPanel.CurrentPath, item.Name);
+
+                            await _transferManager.DownloadFileAsync(item.FullPath, localPath);
+                        }
+
                         completed++;
                     }
-
-                    progressBar.Value = 100;
                 }
 
                 // Refresh local panel
                 _localPanel.RefreshCurrentDirectory();
 
-                MessageBox.Show($"Successfully downloaded {filesToDownload.Count} file(s).",
+                // Refresh tree view if any directories were downloaded
+                if (dirCount > 0)
+                {
+                    _localPanel.RefreshTreeView();
+                }
+
+                MessageBox.Show($"Successfully downloaded {itemList}.",
                     "Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)

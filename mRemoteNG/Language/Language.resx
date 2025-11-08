@@ -2560,7 +2560,7 @@ Nightly Channel includes Alphas, Betas &amp; Release Candidates.</value>
     <value>SSH engine OTP mode</value>
   </data>
   <data name="ScpDotNet" xml:space="preserve">
-    <value>SCP</value>
+    <value>SCP/SFTP (SSH.NET)</value>
   </data>
   <data name="ScpSettings" xml:space="preserve">
     <value>SCP Settings</value>

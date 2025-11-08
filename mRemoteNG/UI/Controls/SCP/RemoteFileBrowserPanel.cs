@@ -356,6 +356,128 @@ namespace mRemoteNG.UI.Controls.SCP
         }
 
         /// <summary>
+        /// Refreshes the TreeView to show new/deleted directories.
+        /// This reloads the children of the current directory's parent node in the tree.
+        /// </summary>
+        public void RefreshTreeView()
+        {
+            try
+            {
+                if (!IsConnected || _directoryTree.Nodes.Count == 0)
+                    return;
+
+                Logger.Instance.Log?.Debug($"[RemoteFileBrowserPanel.RefreshTreeView] Refreshing tree view for path: {_currentPath}");
+
+                // Get the parent directory path
+                string parentPath = _currentPath;
+                if (parentPath != "/")
+                {
+                    int lastSlash = parentPath.TrimEnd('/').LastIndexOf('/');
+                    parentPath = lastSlash <= 0 ? "/" : parentPath.Substring(0, lastSlash);
+                }
+
+                // Find the parent node in the tree
+                TreeNode parentNode = FindNodeByPath(parentPath);
+                if (parentNode != null)
+                {
+                    // Save current expanded state of child nodes
+                    var expandedChildren = new HashSet<string>();
+                    foreach (TreeNode child in parentNode.Nodes)
+                    {
+                        if (child.IsExpanded && child.Tag is string childPath)
+                        {
+                            expandedChildren.Add(childPath);
+                        }
+                    }
+
+                    // Reload the parent node's children
+                    Logger.Instance.Log?.Debug($"[RemoteFileBrowserPanel.RefreshTreeView] Reloading children for: {parentPath}");
+                    LoadTreeNodeChildren(parentNode);
+
+                    // Restore expanded state
+                    foreach (TreeNode child in parentNode.Nodes)
+                    {
+                        if (child.Tag is string childPath && expandedChildren.Contains(childPath))
+                        {
+                            child.Expand();
+                            LoadTreeNodeChildren(child);
+                        }
+                    }
+
+                    // Re-expand to current path to ensure it's visible and selected
+                    ExpandTreeToPath(_currentPath);
+                }
+
+                Logger.Instance.Log?.Debug("[RemoteFileBrowserPanel.RefreshTreeView] Tree view refresh complete");
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Log?.Error("[RemoteFileBrowserPanel.RefreshTreeView] Error refreshing tree view", ex);
+                Runtime.MessageCollector?.AddExceptionMessage("Error refreshing tree view", ex);
+            }
+        }
+
+        /// <summary>
+        /// Finds a tree node by its full path.
+        /// </summary>
+        /// <param name="path">The full path to find</param>
+        /// <returns>The matching TreeNode, or null if not found</returns>
+        private TreeNode FindNodeByPath(string path)
+        {
+            try
+            {
+                if (_directoryTree.Nodes.Count == 0)
+                    return null;
+
+                // Normalize path
+                path = path.TrimEnd('/');
+                if (string.IsNullOrEmpty(path))
+                    path = "/";
+
+                // Root node
+                TreeNode currentNode = _directoryTree.Nodes[0];
+                if (path == "/")
+                    return currentNode;
+
+                // Split path into segments
+                string[] segments = path.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+
+                // Navigate through each segment
+                foreach (string segment in segments)
+                {
+                    // Load children if needed
+                    if (currentNode.Nodes.Count == 1 && currentNode.Nodes[0].Tag == null)
+                    {
+                        LoadTreeNodeChildren(currentNode);
+                    }
+
+                    // Find matching child
+                    TreeNode matchingChild = null;
+                    foreach (TreeNode child in currentNode.Nodes)
+                    {
+                        if (child.Text == segment)
+                        {
+                            matchingChild = child;
+                            break;
+                        }
+                    }
+
+                    if (matchingChild == null)
+                        return null;
+
+                    currentNode = matchingChild;
+                }
+
+                return currentNode;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Log?.Error($"[RemoteFileBrowserPanel.FindNodeByPath] Error finding node: {path}", ex);
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Deletes the currently selected files/folders from the remote file system.
         /// </summary>
         public void DeleteSelectedFiles()
@@ -393,8 +515,17 @@ namespace mRemoteNG.UI.Controls.SCP
 
                 Logger.Instance.Log?.Info($"[RemoteFileBrowserPanel.DeleteSelectedFiles] Successfully deleted {selectedFiles.Count} remote item(s)");
 
+                // Check if any directories were deleted
+                bool deletedDirectories = selectedFiles.Any(f => f.IsDirectory);
+
                 // Refresh the directory view
                 RefreshCurrentDirectory();
+
+                // Refresh tree view if any directories were deleted
+                if (deletedDirectories)
+                {
+                    RefreshTreeView();
+                }
             }
             catch (Exception ex)
             {
