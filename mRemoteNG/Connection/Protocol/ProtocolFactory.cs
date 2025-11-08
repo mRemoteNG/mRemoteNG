@@ -11,6 +11,7 @@ using mRemoteNG.Connection.Protocol.PowerShell;
 using mRemoteNG.Connection.Protocol.WSL;
 using mRemoteNG.Connection.Protocol.Terminal;
 using mRemoteNG.Connection.Protocol.AnyDesk;
+using mRemoteNG.Connection.Protocol.SCP;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
 
@@ -56,6 +57,8 @@ namespace mRemoteNG.Connection.Protocol
                     return new ProtocolTerminal(connectionInfo);
                 case ProtocolType.AnyDesk:
                     return new ProtocolAnyDesk(connectionInfo);
+                case ProtocolType.SCP_DotNet:
+                    return new ProtocolSCP_DotNet(connectionInfo);
                 case ProtocolType.IntApp:
                     if (connectionInfo.ExtApp == "")
                     {

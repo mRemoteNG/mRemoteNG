@@ -587,5 +587,17 @@
     <Setting Name="ConDefaultRDGatewayExternalCredentialProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">None</Value>
     </Setting>
+    <Setting Name="ConDefaultScpInitialLocalPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultScpInitialRemotePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultScpInitialLocalPath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultScpInitialRemotePath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

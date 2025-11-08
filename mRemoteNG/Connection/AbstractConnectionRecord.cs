@@ -118,6 +118,10 @@ namespace mRemoteNG.Connection
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
 
+        // SCP Settings
+        private string _scpInitialLocalPath = "";
+        private string _scpInitialRemotePath = "";
+
         #endregion
 
         #region Properties
@@ -243,7 +247,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory(nameof(Language.Connection), 2),
          LocalizedAttributes.LocalizedDisplayName(nameof(Language.Username)),
          LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionUsername)),
-         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2, ProtocolType.HTTP, ProtocolType.HTTPS, ProtocolType.IntApp)]
+         AttributeUsedInProtocol(ProtocolType.RDP, ProtocolType.SSH1, ProtocolType.SSH2, ProtocolType.HTTP, ProtocolType.HTTPS, ProtocolType.IntApp, ProtocolType.SCP_DotNet)]
         public virtual string Username
         {
             get => GetPropertyValue("Username", _username);
@@ -1108,6 +1112,30 @@ namespace mRemoteNG.Connection
         {
             get => GetPropertyValue("VNCViewOnly", _vncViewOnly);
             set => SetField(ref _vncViewOnly, value, "VNCViewOnly");
+        }
+
+        #endregion
+
+        #region SCP Settings
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.ScpSettings), 8),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.ScpInitialLocalPath)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionScpInitialLocalPath)),
+         AttributeUsedInProtocol(ProtocolType.SCP_DotNet)]
+        public string ScpInitialLocalPath
+        {
+            get => GetPropertyValue("ScpInitialLocalPath", _scpInitialLocalPath);
+            set => SetField(ref _scpInitialLocalPath, value, "ScpInitialLocalPath");
+        }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.ScpSettings), 8),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.ScpInitialRemotePath)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionScpInitialRemotePath)),
+         AttributeUsedInProtocol(ProtocolType.SCP_DotNet)]
+        public string ScpInitialRemotePath
+        {
+            get => GetPropertyValue("ScpInitialRemotePath", _scpInitialRemotePath);
+            set => SetField(ref _scpInitialRemotePath, value, "ScpInitialRemotePath");
         }
 
         #endregion

@@ -7323,5 +7323,59 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to SCP.
+        /// </summary>
+        internal static string ScpDotNet {
+            get {
+                return ResourceManager.GetString("ScpDotNet", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to SCP Settings.
+        /// </summary>
+        internal static string ScpSettings {
+            get {
+                return ResourceManager.GetString("ScpSettings", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Initial Local Path.
+        /// </summary>
+        internal static string ScpInitialLocalPath {
+            get {
+                return ResourceManager.GetString("ScpInitialLocalPath", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Starting directory for local file browser (leave empty for program directory).
+        /// </summary>
+        internal static string PropertyDescriptionScpInitialLocalPath {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionScpInitialLocalPath", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Initial Remote Path.
+        /// </summary>
+        internal static string ScpInitialRemotePath {
+            get {
+                return ResourceManager.GetString("ScpInitialRemotePath", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Starting directory for remote file browser (leave empty for user home directory).
+        /// </summary>
+        internal static string PropertyDescriptionScpInitialRemotePath {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionScpInitialRemotePath", resourceCulture);
+            }
+        }
     }
 }

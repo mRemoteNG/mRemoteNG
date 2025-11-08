@@ -47,6 +47,9 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription(nameof(Language.AnyDesk))]
         AnyDesk = 14,
 
+        [LocalizedAttributes.LocalizedDescription(nameof(Language.ScpDotNet))]
+        SCP_DotNet = 15,
+
         [LocalizedAttributes.LocalizedDescription(nameof(Language.ExternalTool))]
         IntApp = 20
     }
