@@ -407,13 +407,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 
                 // when all fails open filelocation to logfile...
                 // Open Windows Explorer to the directory containing the file
-                // Use ArgumentList for better security
+                // Use ArgumentList for better security with separate arguments
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = "explorer.exe",
                     UseShellExecute = false
                 };
-                startInfo.ArgumentList.Add("/select," + path);
+                startInfo.ArgumentList.Add("/select,");
+                startInfo.ArgumentList.Add(path);
                 Process.Start(startInfo);
             return true;
         }

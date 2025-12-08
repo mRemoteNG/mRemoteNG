@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Resources.Language;
 using System.Reflection;
@@ -77,6 +79,19 @@ namespace mRemoteNG.UI.Forms
 
         private void OpenUrl(string url)
         {
+            // Validate URL format to prevent injection
+            if (string.IsNullOrWhiteSpace(url))
+                return;
+            
+            // Basic URL validation - ensure it starts with http:// or https://
+            if (!url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) &&
+                !url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                Runtime.MessageCollector?.AddMessage(MessageClass.WarningMsg,
+                    $"Invalid URL format: {url}", true);
+                return;
+            }
+            
             try
             {
                 // Try to open URL with UseShellExecute
@@ -92,15 +107,15 @@ namespace mRemoteNG.UI.Forms
                 // hack because of this: https://github.com/dotnet/corefx/issues/10361
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    // Use ArgumentList for better security instead of string concatenation
+                    // Use rundll32 with url.dll,FileProtocolHandler as a safer alternative to cmd /c start
+                    // This is the recommended Windows approach for opening URLs
                     var startInfo = new ProcessStartInfo
                     {
-                        FileName = "cmd",
+                        FileName = "rundll32.exe",
                         UseShellExecute = false,
                         CreateNoWindow = true
                     };
-                    startInfo.ArgumentList.Add("/c");
-                    startInfo.ArgumentList.Add("start");
+                    startInfo.ArgumentList.Add("url.dll,FileProtocolHandler");
                     startInfo.ArgumentList.Add(url);
                     Process.Start(startInfo);
                 }

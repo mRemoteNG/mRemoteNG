@@ -221,7 +221,7 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                     return false;
                 }
                 
-                string arguments = $"{anydeskId}";
+                string arguments = anydeskId;
 
                 // Add --with-password flag if password is provided
                 bool hasPassword = !string.IsNullOrEmpty(_connectionInfo.Password);
