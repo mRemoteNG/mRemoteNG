@@ -342,8 +342,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             try
             {
+                // Validate path to prevent command injection
+                Tools.PathValidator.ValidatePathOrThrow(path, nameof(path));
+                
                 // Open the file using the default application associated with its file type based on the user's preference
-                Process.Start(path);
+                // Use ProcessStartInfo with UseShellExecute for better control
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = path,
+                    UseShellExecute = true
+                };
+                Process.Start(startInfo);
                 return true;
             }
             catch
@@ -362,9 +371,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             try
             {
+                // Validate path to prevent command injection
+                Tools.PathValidator.ValidatePathOrThrow(path, nameof(path));
+                
                 // Open it in "Notepad" (Windows default editor).
                 // Usually available on all Windows systems
-                Process.Start("notepad.exe", path);
+                // Use ProcessStartInfo with ArgumentList for better security
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = "notepad.exe",
+                    UseShellExecute = false
+                };
+                startInfo.ArgumentList.Add(path);
+                Process.Start(startInfo);
                 return true;
             }
             catch
@@ -383,9 +402,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             try
             {
+                // Validate path to prevent command injection
+                Tools.PathValidator.ValidatePathOrThrow(path, nameof(path));
+                
                 // when all fails open filelocation to logfile...
                 // Open Windows Explorer to the directory containing the file
-                Process.Start("explorer.exe", $"/select,\"{path}\"");
+                // Use ArgumentList for better security
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = "explorer.exe",
+                    UseShellExecute = false
+                };
+                startInfo.ArgumentList.Add("/select," + path);
+                Process.Start(startInfo);
             return true;
         }
             catch

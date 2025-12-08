@@ -91,7 +91,12 @@ namespace mRemoteNG.UI.Forms
 
         private void buttonCreateBug_Click(object sender, EventArgs e)
         {
-            Process.Start(GeneralAppInfo.UrlBugs);
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = GeneralAppInfo.UrlBugs,
+                UseShellExecute = true
+            };
+            Process.Start(startInfo);
         }
     }
 }

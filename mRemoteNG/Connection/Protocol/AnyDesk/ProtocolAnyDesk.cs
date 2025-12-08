@@ -211,6 +211,16 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                 // Username field is optional and not used in the CLI (reserved for future use)
                 // Password field is piped via stdin when --with-password flag is used
                 string anydeskId = _connectionInfo.Hostname.Trim();
+                
+                // Validate AnyDesk ID to prevent command injection
+                // AnyDesk IDs are numeric or alphanumeric with @ and - characters for aliases
+                if (!IsValidAnydeskId(anydeskId))
+                {
+                    Runtime.MessageCollector?.AddMessage(MessageClass.ErrorMsg,
+                        "Invalid AnyDesk ID format. Only alphanumeric characters, @, -, and _ are allowed.", true);
+                    return false;
+                }
+                
                 string arguments = $"{anydeskId}";
 
                 // Add --with-password flag if password is provided
@@ -242,27 +252,45 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                 return false;
             }
         }
+        
+        private bool IsValidAnydeskId(string anydeskId)
+        {
+            if (string.IsNullOrWhiteSpace(anydeskId))
+                return false;
+            
+            // AnyDesk IDs can be:
+            // - Pure numeric (e.g., 123456789)
+            // - Alphanumeric with @ for aliases (e.g., alias@ad)
+            // - May contain hyphens and underscores in aliases
+            // Reject any characters that could be used for command injection
+            foreach (char c in anydeskId)
+            {
+                if (!char.IsLetterOrDigit(c) && c != '@' && c != '-' && c != '_' && c != '.')
+                {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
 
         private bool StartAnydeskWithPassword(string anydeskPath, string arguments)
         {
             try
             {
-                // Use PowerShell to pipe the password to AnyDesk
-                // This is the recommended way according to AnyDesk documentation
-                string escapedPassword = _connectionInfo.Password.Replace("'", "''");
-                string powershellCommand = $"echo '{escapedPassword}' | & '{anydeskPath}' {arguments}";
-
+                // Start AnyDesk and pipe the password directly to stdin
+                // This avoids command injection vulnerabilities from using PowerShell
                 _process = new Process
                 {
                     StartInfo = new ProcessStartInfo
                     {
-                        FileName = "powershell.exe",
-                        Arguments = $"-WindowStyle Hidden -Command \"{powershellCommand}\"",
+                        FileName = anydeskPath,
+                        Arguments = arguments,
                         UseShellExecute = false,
-                        CreateNoWindow = true,
+                        CreateNoWindow = false,
                         RedirectStandardOutput = false,
                         RedirectStandardError = false,
-                        RedirectStandardInput = false
+                        RedirectStandardInput = true
                     },
                     EnableRaisingEvents = true
                 };
@@ -270,8 +298,23 @@ namespace mRemoteNG.Connection.Protocol.AnyDesk
                 _process.Exited += ProcessExited;
                 _process.Start();
 
+                // Write the password to stdin and close the stream
+                // AnyDesk expects the password on stdin when --with-password is used
+                try
+                {
+                    if (_process.StandardInput != null)
+                    {
+                        _process.StandardInput.WriteLine(_connectionInfo.Password);
+                        _process.StandardInput.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Runtime.MessageCollector?.AddMessage(MessageClass.WarningMsg,
+                        $"Failed to send password to AnyDesk: {ex.Message}", true);
+                }
+
                 // Wait for the AnyDesk window to appear
-                // Note: The window belongs to the AnyDesk process, not PowerShell
                 if (!WaitForAnydeskWindow())
                 {
                     Runtime.MessageCollector?.AddMessage(MessageClass.WarningMsg,

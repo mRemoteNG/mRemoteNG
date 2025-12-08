@@ -99,7 +99,12 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            Process.Start(linkUri.ToString());
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = linkUri.ToString(),
+                UseShellExecute = true
+            };
+            Process.Start(startInfo);
         }
 
         #endregion

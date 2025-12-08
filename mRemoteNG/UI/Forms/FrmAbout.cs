@@ -79,23 +79,50 @@ namespace mRemoteNG.UI.Forms
         {
             try
             {
-                Process.Start(url);
+                // Try to open URL with UseShellExecute
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                };
+                Process.Start(startInfo);
             }
             catch
             {
                 // hack because of this: https://github.com/dotnet/corefx/issues/10361
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    url = url.Replace("&", "^&");
-                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                    // Use ArgumentList for better security instead of string concatenation
+                    var startInfo = new ProcessStartInfo
+                    {
+                        FileName = "cmd",
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    };
+                    startInfo.ArgumentList.Add("/c");
+                    startInfo.ArgumentList.Add("start");
+                    startInfo.ArgumentList.Add(url);
+                    Process.Start(startInfo);
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
-                    Process.Start("xdg-open", url);
+                    var startInfo = new ProcessStartInfo
+                    {
+                        FileName = "xdg-open",
+                        UseShellExecute = false
+                    };
+                    startInfo.ArgumentList.Add(url);
+                    Process.Start(startInfo);
                 }
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 {
-                    Process.Start("open", url);
+                    var startInfo = new ProcessStartInfo
+                    {
+                        FileName = "open",
+                        UseShellExecute = false
+                    };
+                    startInfo.ArgumentList.Add(url);
+                    Process.Start(startInfo);
                 }
                 else
                 {
