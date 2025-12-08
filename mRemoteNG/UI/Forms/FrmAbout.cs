@@ -1,8 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
-using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Resources.Language;
 using System.Reflection;
@@ -87,14 +86,14 @@ namespace mRemoteNG.UI.Forms
             if (!url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) &&
                 !url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
             {
-                Runtime.MessageCollector?.AddMessage(MessageClass.WarningMsg,
-                    $"Invalid URL format: {url}", true);
+                // Invalid URL format - don't try to open it
                 return;
             }
             
             try
             {
-                // Try to open URL with UseShellExecute
+                // Use the standard .NET approach for opening URLs securely
+                // UseShellExecute=true delegates to the OS default handler
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = url,
@@ -104,44 +103,47 @@ namespace mRemoteNG.UI.Forms
             }
             catch
             {
-                // hack because of this: https://github.com/dotnet/corefx/issues/10361
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                // Fallback for older .NET Core versions with bug: https://github.com/dotnet/corefx/issues/10361
+                // Use platform-specific URL launchers
+                try
                 {
-                    // Use rundll32 with url.dll,FileProtocolHandler as a safer alternative to cmd /c start
-                    // This is the recommended Windows approach for opening URLs
-                    var startInfo = new ProcessStartInfo
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     {
-                        FileName = "rundll32.exe",
-                        UseShellExecute = false,
-                        CreateNoWindow = true
-                    };
-                    startInfo.ArgumentList.Add("url.dll,FileProtocolHandler");
-                    startInfo.ArgumentList.Add(url);
-                    Process.Start(startInfo);
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    var startInfo = new ProcessStartInfo
+                        // Use rundll32 with url.dll as fallback
+                        var startInfo = new ProcessStartInfo
+                        {
+                            FileName = "rundll32.exe",
+                            UseShellExecute = false,
+                            CreateNoWindow = true
+                        };
+                        startInfo.ArgumentList.Add("url.dll,FileProtocolHandler");
+                        startInfo.ArgumentList.Add(url);
+                        Process.Start(startInfo);
+                    }
+                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     {
-                        FileName = "xdg-open",
-                        UseShellExecute = false
-                    };
-                    startInfo.ArgumentList.Add(url);
-                    Process.Start(startInfo);
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    var startInfo = new ProcessStartInfo
+                        var startInfo = new ProcessStartInfo
+                        {
+                            FileName = "xdg-open",
+                            UseShellExecute = false
+                        };
+                        startInfo.ArgumentList.Add(url);
+                        Process.Start(startInfo);
+                    }
+                    else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                     {
-                        FileName = "open",
-                        UseShellExecute = false
-                    };
-                    startInfo.ArgumentList.Add(url);
-                    Process.Start(startInfo);
+                        var startInfo = new ProcessStartInfo
+                        {
+                            FileName = "open",
+                            UseShellExecute = false
+                        };
+                        startInfo.ArgumentList.Add(url);
+                        Process.Start(startInfo);
+                    }
                 }
-                else
+                catch
                 {
-                    throw;
+                    // Unable to open URL - silently fail
                 }
             }
         }

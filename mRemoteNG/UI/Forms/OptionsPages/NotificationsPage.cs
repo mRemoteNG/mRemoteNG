@@ -7,6 +7,7 @@ using mRemoteNG.App;
 using mRemoteNG.Config.Settings.Registry;
 using mRemoteNG.Properties;
 using mRemoteNG.Resources.Language;
+using mRemoteNG.Tools;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -343,7 +344,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             try
             {
                 // Validate path to prevent command injection
-                Tools.PathValidator.ValidatePathOrThrow(path, nameof(path));
+                PathValidator.ValidatePathOrThrow(path, nameof(path));
                 
                 // Open the file using the default application associated with its file type based on the user's preference
                 // Use ProcessStartInfo with UseShellExecute for better control
@@ -372,7 +373,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             try
             {
                 // Validate path to prevent command injection
-                Tools.PathValidator.ValidatePathOrThrow(path, nameof(path));
+                PathValidator.ValidatePathOrThrow(path, nameof(path));
                 
                 // Open it in "Notepad" (Windows default editor).
                 // Usually available on all Windows systems
@@ -403,18 +404,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             try
             {
                 // Validate path to prevent command injection
-                Tools.PathValidator.ValidatePathOrThrow(path, nameof(path));
+                PathValidator.ValidatePathOrThrow(path, nameof(path));
                 
                 // when all fails open filelocation to logfile...
                 // Open Windows Explorer to the directory containing the file
-                // Use ArgumentList for better security with separate arguments
+                // Explorer expects /select,"path" as a single argument
                 var startInfo = new ProcessStartInfo
                 {
                     FileName = "explorer.exe",
                     UseShellExecute = false
                 };
-                startInfo.ArgumentList.Add("/select,");
-                startInfo.ArgumentList.Add(path);
+                startInfo.ArgumentList.Add($"/select,\"{path}\"");
                 Process.Start(startInfo);
             return true;
         }
