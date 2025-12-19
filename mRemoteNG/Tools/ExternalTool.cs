@@ -175,6 +175,9 @@ namespace mRemoteNG.Tools
             {
                 // With UseShellExecute = false, use ArgumentList for better security
                 // Parse arguments using CommandLineArguments for proper splitting
+                // Note: argParser will still escape shell metacharacters by default.
+                // If calling a program that doesn't expect escaped values, use %!VARIABLE% syntax
+                // to disable escaping (e.g., %!PASSWORD% instead of %PASSWORD%).
                 var cmdLineArgs = new Cmdline.CommandLineArguments { EscapeForShell = false };
                 string parsedArguments = argParser.ParseArguments(Arguments);
                 
