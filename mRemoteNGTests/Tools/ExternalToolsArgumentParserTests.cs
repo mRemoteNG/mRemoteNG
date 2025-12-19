@@ -102,6 +102,43 @@ namespace mRemoteNGTests.Tools
                     yield return new TestCaseData(@"^%COMSPEC^%") { TestName = "ChevronEscapedEnvironmentVariablesNotParsed" }.Returns("%COMSPEC%");
                 }
             }
+        }
+
+        [Test]
+        public void PasswordWithCommaIsEscaped()
+        {
+            var connectionInfo = new ConnectionInfo
+            {
+                Password = "1234,56789"
+            };
+            var parser = new ExternalToolArgumentParser(connectionInfo);
+            var result = parser.ParseArguments("%PASSWORD%");
+            Assert.That(result, Is.EqualTo("1234^,56789"));
+        }
+
+        [Test]
+        public void PasswordWithSemicolonIsEscaped()
+        {
+            var connectionInfo = new ConnectionInfo
+            {
+                Password = "1234;56789"
+            };
+            var parser = new ExternalToolArgumentParser(connectionInfo);
+            var result = parser.ParseArguments("%PASSWORD%");
+            Assert.That(result, Is.EqualTo("1234^;56789"));
+        }
+
+        [Test]
+        public void PasswordWithMultipleSpecialCharsIsEscaped()
+        {
+            var connectionInfo = new ConnectionInfo
+            {
+                Password = "pass,word;test&more"
+            };
+            var parser = new ExternalToolArgumentParser(connectionInfo);
+            var result = parser.ParseArguments("%PASSWORD%");
+            Assert.That(result, Is.EqualTo("pass^,word^;test^&more"));
+        }
     }
     }
 }
