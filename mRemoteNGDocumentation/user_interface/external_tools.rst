@@ -155,7 +155,7 @@ To disable argument splitting escaping for a variable, precede its name with a m
 Shell metacharacter escaping
 ----------------------------
 
-- The shell metacharacters are ( ) % ! ^ " < > & |
+- The shell metacharacters are ( ) % ! ^ " < > & | , ;
 - Each shell metacharacter will be escaped by a caret (^)
 
 To disable both argument splitting and shell metacharacter escaping for a variable, precede its name with an exclamation point (!).
