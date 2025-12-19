@@ -85,7 +85,7 @@ namespace mRemoteNG.Tools.Cmdline
 
         public static string EscapeShellMetacharacters(string argument)
         {
-            return string.IsNullOrEmpty(argument) ? argument : Regex.Replace(argument, "([()%!^\"<>&|])", "^$1");
+            return string.IsNullOrEmpty(argument) ? argument : Regex.Replace(argument, "([()%!^\"<>&|,;])", "^$1");
         }
 
         #endregion
