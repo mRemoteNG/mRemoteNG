@@ -24,7 +24,7 @@
     <PackageVersion Include="Microsoft.Data.SqlClient.SNI" Version="6.0.2" />
     <PackageVersion Include="Microsoft.Data.SqlClient.SNI.runtime" Version="6.0.2" />
     <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="10.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.2" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
     <PackageVersion Include="Microsoft.NETCore.Targets" Version="5.0.0" />
@@ -64,7 +64,7 @@
     <PackageVersion Include="System.Data.Common" Version="4.3.0" />
     <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="10.0.2" />
     <PackageVersion Include="System.Drawing.Common" Version="10.0.2" />
-    <PackageVersion Include="System.Diagnostics.EventLog" Version="10.0.1" />
+    <PackageVersion Include="System.Diagnostics.EventLog" Version="10.0.2" />
     <PackageVersion Include="System.DirectoryServices" Version="10.0.2" />
     <PackageVersion Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageVersion Include="System.IO.Pipelines" Version="10.0.2" />
