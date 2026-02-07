@@ -20,11 +20,9 @@ namespace mRemoteNG.Config.DataProviders
             DatabaseConnector.AssociateItemToThisConnector(dbQuery);
             if (!DatabaseConnector.IsConnected)
                 OpenConnection();
-            System.Data.Common.DbDataReader dbDataReader = dbQuery.ExecuteReader(CommandBehavior.CloseConnection);
-
-            if (dbDataReader.HasRows)
-                dataTable.Load(dbDataReader);
-            dbDataReader.Close();
+            using System.Data.Common.DbDataReader dbDataReader = dbQuery.ExecuteReader(CommandBehavior.CloseConnection);
+            // Always load the reader so table schema is available even when tblCons has 0 rows.
+            dataTable.Load(dbDataReader);
             return dataTable;
         }
 

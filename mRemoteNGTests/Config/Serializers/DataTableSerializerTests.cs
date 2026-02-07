@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Linq;
 using System.Security;
 using mRemoteNG.Config.Serializers.ConnectionSerializers.Sql;
 using mRemoteNG.Connection;
@@ -119,6 +120,19 @@ public class DataTableSerializerTests
     {
         var dataTable = _dataTableSerializer.Serialize(new ConnectionInfo());
         Assert.That(dataTable.Rows.Count, Is.EqualTo(1));
+    }
+
+    [Test]
+    public void MissingColumnsAreAddedWhenSourceSqlSchemaIsOutdated()
+    {
+        var sourceDataTable = new DataTable("tblCons");
+        sourceDataTable.Columns.Add("ConstantID", typeof(string));
+        _dataTableSerializer.SetSourceDataTable(sourceDataTable);
+
+        Assert.DoesNotThrow(() => _dataTableSerializer.Serialize(new ConnectionInfo("existing-id")));
+
+        Assert.That(sourceDataTable.Columns.Contains("DisableCursorBlinking"), Is.True);
+        Assert.That(sourceDataTable.Columns.Contains("InheritDisableCursorBlinking"), Is.True);
     }
 
 

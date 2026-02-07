@@ -74,7 +74,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
         {
             DataTable dataTable = _sourceDataTable ?? new DataTable(TABLE_NAME);
 
-            if (dataTable.Columns.Count == 0) CreateSchema(dataTable);
+            EnsureSchemaCompatibility(dataTable);
 
             if (dataTable.PrimaryKey.Length == 0) SetPrimaryKey(dataTable);
 
@@ -84,6 +84,27 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             }
 
             return dataTable;
+        }
+
+        private void EnsureSchemaCompatibility(DataTable dataTable)
+        {
+            if (dataTable.Columns.Count == 0)
+            {
+                CreateSchema(dataTable);
+                return;
+            }
+
+            DataTable expectedSchemaTable = new(TABLE_NAME);
+            CreateSchema(expectedSchemaTable);
+
+            foreach (DataColumn expectedColumn in expectedSchemaTable.Columns)
+            {
+                if (dataTable.Columns.Contains(expectedColumn.ColumnName))
+                    continue;
+
+                DataColumn missingColumn = new(expectedColumn.ColumnName, expectedColumn.DataType);
+                dataTable.Columns.Add(missingColumn);
+            }
         }
 
         private void CreateSchema(DataTable dataTable)
