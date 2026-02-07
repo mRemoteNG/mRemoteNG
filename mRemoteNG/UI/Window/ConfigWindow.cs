@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -39,6 +40,11 @@ namespace mRemoteNG.UI.Window
         private ToolStripSeparator _toolStripSeparator1;
         private ConnectionInfoPropertyGrid _pGrid;
         private ThemeManager _themeManager;
+        private int _cachedPropertyGridLabelWidth;
+        private bool _applySplitterWidthQueued;
+        private const int MinPropertyNameColumnWidth = 50;
+        private const int MinPropertyValueColumnWidth = 80;
+        private static readonly BindingFlags NonPublicInstanceBinding = BindingFlags.Instance | BindingFlags.NonPublic;
 
         private ConnectionInfo _selectedTreeNode;
 
@@ -57,10 +63,13 @@ namespace mRemoteNG.UI.Window
         {
             _components = new System.ComponentModel.Container();
             Load += Config_Load;
+            VisibleChanged += Config_VisibleChanged;
             SystemColorsChanged += Config_SystemColorsChanged;
             _pGrid = new ConnectionInfoPropertyGrid();
             _pGrid.PropertyValueChanged += PGrid_PropertyValueChanged;
             _pGrid.PropertySortChanged += PGrid_PropertySortChanged;
+            _pGrid.MouseUp += PGrid_MouseUp;
+            _pGrid.Resize += PGrid_Resize;
             PropertyGridContextMenu = new ContextMenuStrip(_components);
             PropertyGridContextMenu.Opening += PropertyGridContextMenu_Opening;
             _propertyGridContextMenuReset = new ToolStripMenuItem();
@@ -459,6 +468,143 @@ namespace mRemoteNG.UI.Window
             }
         }
 
+        private void Config_VisibleChanged(object sender, EventArgs e)
+        {
+            if (!Visible)
+                return;
+
+            QueueApplyPropertyGridSplitterWidth();
+        }
+
+        private void PGrid_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+
+            CachePropertyGridLabelWidth();
+        }
+
+        private void PGrid_Resize(object sender, EventArgs e)
+        {
+            QueueApplyPropertyGridSplitterWidth();
+        }
+
+        private void QueueApplyPropertyGridSplitterWidth()
+        {
+            if (_applySplitterWidthQueued || _cachedPropertyGridLabelWidth <= 0 || !_pGrid.IsHandleCreated || IsDisposed || Disposing)
+                return;
+
+            _applySplitterWidthQueued = true;
+            try
+            {
+                BeginInvoke((MethodInvoker)(() =>
+                {
+                    _applySplitterWidthQueued = false;
+                    TryApplyCachedPropertyGridLabelWidth();
+                }));
+            }
+            catch (ObjectDisposedException)
+            {
+                _applySplitterWidthQueued = false;
+            }
+            catch (InvalidOperationException)
+            {
+                _applySplitterWidthQueued = false;
+            }
+        }
+
+        private void CachePropertyGridLabelWidth()
+        {
+            if (!TryGetPropertyGridLabelWidth(_pGrid, out int labelWidth))
+                return;
+
+            if (labelWidth <= MinPropertyNameColumnWidth)
+                return;
+
+            _cachedPropertyGridLabelWidth = labelWidth;
+        }
+
+        private void TryApplyCachedPropertyGridLabelWidth()
+        {
+            if (_cachedPropertyGridLabelWidth <= 0 || !_pGrid.IsHandleCreated || !_pGrid.Visible)
+                return;
+
+            int maxLabelWidth = Math.Max(MinPropertyNameColumnWidth, _pGrid.ClientSize.Width - MinPropertyValueColumnWidth);
+            int targetLabelWidth = Math.Min(_cachedPropertyGridLabelWidth, maxLabelWidth);
+            if (targetLabelWidth <= MinPropertyNameColumnWidth)
+                return;
+
+            TrySetPropertyGridLabelWidth(_pGrid, targetLabelWidth);
+        }
+
+        private static bool TryGetPropertyGridLabelWidth(PropertyGrid propertyGrid, out int labelWidth)
+        {
+            labelWidth = 0;
+            if (propertyGrid == null)
+                return false;
+
+            try
+            {
+                object gridView = typeof(PropertyGrid).GetField("gridView", NonPublicInstanceBinding)?.GetValue(propertyGrid);
+                if (gridView == null)
+                    return false;
+
+                PropertyInfo internalLabelWidth = gridView.GetType().GetProperty("InternalLabelWidth", NonPublicInstanceBinding);
+                if (internalLabelWidth?.GetValue(gridView) is int widthFromProperty && widthFromProperty > 0)
+                {
+                    labelWidth = widthFromProperty;
+                    return true;
+                }
+
+                FieldInfo labelWidthField = gridView.GetType().GetField("labelWidth", NonPublicInstanceBinding);
+                if (labelWidthField?.GetValue(gridView) is int widthFromField && widthFromField > 0)
+                {
+                    labelWidth = widthFromField;
+                    return true;
+                }
+            }
+            catch
+            {
+                // Ignore reflection differences between runtime versions.
+            }
+
+            return false;
+        }
+
+        private static bool TrySetPropertyGridLabelWidth(PropertyGrid propertyGrid, int labelWidth)
+        {
+            if (propertyGrid == null || labelWidth <= 0)
+                return false;
+
+            try
+            {
+                object gridView = typeof(PropertyGrid).GetField("gridView", NonPublicInstanceBinding)?.GetValue(propertyGrid);
+                if (gridView == null)
+                    return false;
+
+                MethodInfo moveSplitterTo = gridView.GetType().GetMethod("MoveSplitterTo", NonPublicInstanceBinding);
+                if (moveSplitterTo != null)
+                {
+                    moveSplitterTo.Invoke(gridView, [labelWidth]);
+                    return true;
+                }
+
+                PropertyInfo internalLabelWidth = gridView.GetType().GetProperty("InternalLabelWidth", NonPublicInstanceBinding);
+                if (internalLabelWidth is { CanWrite: true })
+                {
+                    internalLabelWidth.SetValue(gridView, labelWidth);
+                    propertyGrid.Invalidate();
+                    return true;
+                }
+            }
+            catch
+            {
+                // Ignore reflection differences between runtime versions.
+            }
+
+            return false;
+        }
+
         private void Config_Load(object sender, EventArgs e)
         {
             _themeManager = ThemeManager.getInstance();
@@ -466,6 +612,8 @@ namespace mRemoteNG.UI.Window
             ApplyTheme();
             AddToolStripItems();
             _pGrid.HelpVisible = Settings.Default.ShowConfigHelpText;
+            CachePropertyGridLabelWidth();
+            QueueApplyPropertyGridSplitterWidth();
         }
 
         private void Config_SystemColorsChanged(object sender, EventArgs e)
