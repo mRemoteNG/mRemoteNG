@@ -303,7 +303,7 @@ namespace mRemoteNG.Connection
                 return GetDefaultStartupConnectionFileName();
             }
             */
-            if (Properties.OptionsConnectionsPage.Default.ConnectionFilePath != "")
+            if (!string.IsNullOrWhiteSpace(Properties.OptionsConnectionsPage.Default.ConnectionFilePath))
             {
                 return Properties.OptionsConnectionsPage.Default.ConnectionFilePath;
             }
