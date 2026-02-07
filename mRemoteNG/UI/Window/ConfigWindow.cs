@@ -497,7 +497,7 @@ namespace mRemoteNG.UI.Window
             _applySplitterWidthQueued = true;
             try
             {
-                BeginInvoke((MethodInvoker)(() =>
+                BeginInvoke((System.Windows.Forms.MethodInvoker)(() =>
                 {
                     _applySplitterWidthQueued = false;
                     TryApplyCachedPropertyGridLabelWidth();
