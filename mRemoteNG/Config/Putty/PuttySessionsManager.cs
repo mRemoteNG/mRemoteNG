@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.Versioning;
+using mRemoteNG.App;
+using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 
@@ -41,7 +44,18 @@ namespace mRemoteNG.Config.Putty
             puttySessionProvider.ThrowIfNull(nameof(puttySessionProvider));
 
             RootPuttySessionsNodeInfo rootTreeNode = puttySessionProvider.RootInfo;
-            puttySessionProvider.GetSessions();
+            try
+            {
+                puttySessionProvider.GetSessions();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(
+                    $"Failed to load PuTTY sessions from provider {puttySessionProvider.GetType().Name}.",
+                    ex,
+                    MessageClass.WarningMsg);
+                return;
+            }
 
             if (!RootPuttySessionsNodes.Contains(rootTreeNode) && rootTreeNode.HasChildren())
                 RootPuttySessionsNodes.Add(rootTreeNode);
