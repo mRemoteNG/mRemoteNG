@@ -23,8 +23,11 @@ namespace mRemoteNG.Config.Import
             }
 
             if (!File.Exists(fileName))
+            {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
                                                     $"Unable to import file. File does not exist. Path: {fileName}");
+                return;
+            }
 
             FileDataProvider dataProvider = new(fileName);
             string xmlString = dataProvider.Load();

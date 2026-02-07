@@ -141,6 +141,45 @@ namespace mRemoteNG.Security
         }
 
         /// <summary>
+        /// Sanitizes an LDAP path or distinguished name.
+        /// Supports plain DN values and LDAP/LDAPS URI-style values.
+        /// </summary>
+        /// <param name="ldapPath">The LDAP path or DN to sanitize</param>
+        /// <returns>A sanitized LDAP path or DN</returns>
+        /// <exception cref="ArgumentException">Thrown when the input format is invalid</exception>
+        public static string SanitizeLdapPath(string ldapPath)
+        {
+            if (!IsValidDistinguishedNameFormat(ldapPath))
+                throw new ArgumentException("Invalid LDAP path format", nameof(ldapPath));
+
+            if (ldapPath.StartsWith("LDAP://", StringComparison.OrdinalIgnoreCase) ||
+                ldapPath.StartsWith("LDAPS://", StringComparison.OrdinalIgnoreCase))
+            {
+                int schemeEndIndex = ldapPath.IndexOf("://", StringComparison.OrdinalIgnoreCase) + 3;
+                if (schemeEndIndex >= ldapPath.Length)
+                    throw new ArgumentException("Invalid LDAP path format", nameof(ldapPath));
+
+                int pathStartIndex = ldapPath.IndexOf('/', schemeEndIndex);
+                if (pathStartIndex < 0)
+                    return ldapPath;
+
+                string scheme = ldapPath.Substring(0, schemeEndIndex);
+                string serverPart = ldapPath.Substring(schemeEndIndex, pathStartIndex - schemeEndIndex);
+                if (string.IsNullOrWhiteSpace(serverPart))
+                    throw new ArgumentException("Invalid LDAP path format", nameof(ldapPath));
+
+                string dnPart = ldapPath.Substring(pathStartIndex + 1);
+                if (string.IsNullOrWhiteSpace(dnPart))
+                    return scheme + serverPart + "/";
+
+                string sanitizedDn = SanitizeDistinguishedName(dnPart);
+                return scheme + serverPart + "/" + sanitizedDn;
+            }
+
+            return SanitizeDistinguishedName(ldapPath);
+        }
+
+        /// <summary>
         /// Validates that a distinguished name appears to be in valid LDAP DN format.
         /// This is a basic check to ensure the DN structure is reasonable.
         /// </summary>
@@ -151,16 +190,40 @@ namespace mRemoteNG.Security
             if (string.IsNullOrWhiteSpace(distinguishedName))
                 return false;
 
-            // Basic validation: should start with LDAP:// or contain = for attribute=value pairs
-            // This is a simple heuristic check, not a full RFC validation
             if (distinguishedName.StartsWith("LDAP://", StringComparison.OrdinalIgnoreCase) ||
                 distinguishedName.StartsWith("LDAPS://", StringComparison.OrdinalIgnoreCase))
             {
-                return true;
+                int schemeEndIndex = distinguishedName.IndexOf("://", StringComparison.OrdinalIgnoreCase) + 3;
+                if (schemeEndIndex >= distinguishedName.Length)
+                    return false;
+
+                string pathRemainder = distinguishedName.Substring(schemeEndIndex);
+                if (string.IsNullOrWhiteSpace(pathRemainder) || ContainsUnsafeLdapUriCharacters(pathRemainder))
+                    return false;
+
+                int pathStartIndex = pathRemainder.IndexOf('/');
+                if (pathStartIndex == 0)
+                    return false;
+
+                if (pathStartIndex < 0)
+                    return true;
+
+                string dnPart = pathRemainder.Substring(pathStartIndex + 1);
+                return string.IsNullOrWhiteSpace(dnPart) || dnPart.Contains("=");
             }
 
-            // Check if it looks like a DN (contains attribute=value pairs)
+            if (distinguishedName.IndexOf("://", StringComparison.OrdinalIgnoreCase) >= 0)
+                return false;
+
+            if (ContainsUnsafeLdapUriCharacters(distinguishedName))
+                return false;
+
             return distinguishedName.Contains("=");
+        }
+
+        private static bool ContainsUnsafeLdapUriCharacters(string value)
+        {
+            return value.Contains("?") || value.Contains("#");
         }
     }
 }

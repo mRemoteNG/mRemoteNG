@@ -171,6 +171,22 @@ namespace mRemoteNGTests.Security
         }
 
         [Test]
+        public void IsValidDistinguishedNameFormat_ReturnsFalseForLdapUriWithQuery()
+        {
+            string input = "LDAP://dc01.example.com/DC=example,DC=com??sub?(objectClass=*)";
+            bool result = LdapPathSanitizer.IsValidDistinguishedNameFormat(input);
+            Assert.That(result, Is.False);
+        }
+
+        [Test]
+        public void IsValidDistinguishedNameFormat_ReturnsFalseForLdapUriWithFragment()
+        {
+            string input = "LDAP://dc01.example.com/DC=example,DC=com#fragment";
+            bool result = LdapPathSanitizer.IsValidDistinguishedNameFormat(input);
+            Assert.That(result, Is.False);
+        }
+
+        [Test]
         public void IsValidDistinguishedNameFormat_ReturnsTrueForDnWithEquals()
         {
             string input = "CN=User,OU=Users,DC=example,DC=com";
@@ -204,6 +220,29 @@ namespace mRemoteNGTests.Security
         {
             bool result = LdapPathSanitizer.IsValidDistinguishedNameFormat("plainstring");
             Assert.That(result, Is.False);
+        }
+
+        [Test]
+        public void SanitizeLdapPath_ReturnsServerOnlyPath()
+        {
+            const string input = "LDAP://dc01.example.com";
+            string result = LdapPathSanitizer.SanitizeLdapPath(input);
+            Assert.That(result, Is.EqualTo(input));
+        }
+
+        [Test]
+        public void SanitizeLdapPath_SanitizesDnPart()
+        {
+            const string input = "LDAP://dc01.example.com/OU=Admins,DC=example,DC=com";
+            string result = LdapPathSanitizer.SanitizeLdapPath(input);
+            Assert.That(result, Is.EqualTo("LDAP://dc01.example.com/OU\\=Admins\\,DC\\=example\\,DC\\=com"));
+        }
+
+        [Test]
+        public void SanitizeLdapPath_ThrowsForUnsafeLdapUri()
+        {
+            const string input = "LDAP://dc01.example.com/DC=example,DC=com??sub?(objectClass=*)";
+            Assert.Throws<ArgumentException>(() => LdapPathSanitizer.SanitizeLdapPath(input));
         }
 
         [Test]
