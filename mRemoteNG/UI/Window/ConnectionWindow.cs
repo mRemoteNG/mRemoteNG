@@ -788,7 +788,7 @@ namespace mRemoteNG.UI.Window
                     return;
                 }
 
-                Invoke(new Action(() => Prot_Event_Closed(interfaceControl.Protocol)));
+                Prot_Event_Closed(interfaceControl.Protocol);
                 Runtime.ConnectionInitiator.OpenConnection(interfaceControl.Info, ConnectionInfo.Force.DoNotJump);
             }
             catch (Exception ex)
@@ -824,12 +824,44 @@ namespace mRemoteNG.UI.Window
 
         public void Prot_Event_Closed(object sender)
         {
+            if (IsDisposed || Disposing || !IsHandleCreated)
+                return;
+
+            if (InvokeRequired)
+            {
+                try
+                {
+                    BeginInvoke(new Action<object>(Prot_Event_Closed), sender);
+                }
+                catch (ObjectDisposedException)
+                {
+                    // Window already disposed while protocol close callback was queued.
+                }
+                catch (InvalidOperationException)
+                {
+                    // Window handle is no longer valid.
+                }
+
+                return;
+            }
+
             ProtocolBase protocolBase = sender as ProtocolBase;
-            if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
+            if (!(protocolBase?.InterfaceControl?.Parent is ConnectionTab tabPage)) return;
             if (tabPage.Disposing || tabPage.IsDisposed) return;
-            if (IsDisposed || Disposing) return;
             tabPage.protocolClose = true;
-            Invoke(new Action(() => tabPage.Close()));
+
+            try
+            {
+                tabPage.Close();
+            }
+            catch (ObjectDisposedException)
+            {
+                // Tab was already disposed by another close path.
+            }
+            catch (InvalidOperationException)
+            {
+                // Handle invalidated during close operation.
+            }
         }
 
         #endregion
