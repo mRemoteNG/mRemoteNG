@@ -623,14 +623,50 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             _rdpClient.UserName = Properties.OptionsCredentialsPage.Default.DefaultUsername;
                             break;
                         case "custom":
-                            try
+                            switch (Properties.OptionsCredentialsPage.Default.ExternalCredentialProviderDefault)
                             {
-                                ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer(Properties.OptionsCredentialsPage.Default.UserViaAPIDefault, out userName, out password, out domain, out pkey);
-                                _rdpClient.UserName = userName;
+                                case ExternalCredentialProvider.DelineaSecretServer:
+                                    try
+                                    {
+                                        ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer(
+                                            Properties.OptionsCredentialsPage.Default.UserViaAPIDefault, out userName, out password, out domain, out pkey);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                                    }
+
+                                    break;
+                                case ExternalCredentialProvider.ClickstudiosPasswordState:
+                                    try
+                                    {
+                                        ExternalConnectors.CPS.PasswordstateInterface.FetchSecretFromServer(
+                                            Properties.OptionsCredentialsPage.Default.UserViaAPIDefault, out userName, out password, out domain, out pkey);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Event_ErrorOccured(this, "Passwordstate Interface Error: " + ex.Message, 0);
+                                    }
+
+                                    break;
+                                case ExternalCredentialProvider.OnePassword:
+                                    try
+                                    {
+                                        ExternalConnectors.OP.OnePasswordCli.ReadPassword(
+                                            Properties.OptionsCredentialsPage.Default.UserViaAPIDefault, out userName, out password, out domain, out pkey);
+                                    }
+                                    catch (ExternalConnectors.OP.OnePasswordCliException ex)
+                                    {
+                                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.ECPOnePasswordCommandLine + ": " + ex.Arguments);
+                                        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ECPOnePasswordReadFailed + Environment.NewLine + ex.Message);
+                                    }
+
+                                    break;
                             }
-                            catch (Exception ex)
+
+                            if (!string.IsNullOrEmpty(userName))
                             {
-                                Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                                _rdpClient.UserName = userName;
                             }
 
                             break;
