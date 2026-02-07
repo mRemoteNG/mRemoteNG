@@ -1,3 +1,4 @@
+using System;
 using mRemoteNG.Security;
 using NUnit.Framework;
 
