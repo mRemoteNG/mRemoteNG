@@ -1,6 +1,6 @@
-﻿using mRemoteNG.Config.Putty;
+﻿using System.Reflection;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
-using mRemoteNG.Properties;
 using NUnit.Framework;
 
 namespace mRemoteNGTests.Connection;
@@ -14,10 +14,14 @@ public class ConnectionsServiceStartupPathTests
     public void StartupConnectionPathFallsBackToDefaultWhenConfiguredPathIsMissing(string configuredPath)
     {
         var connectionsService = new ConnectionsService(PuttySessionsManager.Instance);
-        var originalPath = OptionsConnectionsPage.Default.ConnectionFilePath;
+        var optionsType = typeof(ConnectionsService).Assembly.GetType("mRemoteNG.Properties.OptionsConnectionsPage", throwOnError: true);
+        var defaultProperty = optionsType!.GetProperty("Default", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+        var settingsInstance = defaultProperty!.GetValue(null);
+        var connectionFilePathProperty = optionsType.GetProperty("ConnectionFilePath", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        var originalPath = (string)connectionFilePathProperty!.GetValue(settingsInstance);
         try
         {
-            OptionsConnectionsPage.Default.ConnectionFilePath = configuredPath;
+            connectionFilePathProperty.SetValue(settingsInstance, configuredPath);
 
             var startupPath = connectionsService.GetStartupConnectionFileName();
             var defaultPath = connectionsService.GetDefaultStartupConnectionFileName();
@@ -26,7 +30,7 @@ public class ConnectionsServiceStartupPathTests
         }
         finally
         {
-            OptionsConnectionsPage.Default.ConnectionFilePath = originalPath;
+            connectionFilePathProperty.SetValue(settingsInstance, originalPath);
         }
     }
 }
