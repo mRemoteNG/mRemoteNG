@@ -568,9 +568,20 @@ namespace mRemoteNG.UI.Forms
                         _inMouseActivate = true;
                         break;
                     case NativeMethods.WM_ACTIVATEAPP:
+                        bool appActivated = m.WParam != IntPtr.Zero;
                         Control candidateTabToFocus = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition))
                                                ?? GetChildAtPoint(MousePosition);
-                        if (candidateTabToFocus is InterfaceControl) candidateTabToFocus.Parent.Focus();
+                        if (candidateTabToFocus is InterfaceControl)
+                        {
+                            candidateTabToFocus.Parent.Focus();
+                        }
+
+                        // When returning via Alt+Tab, ensure the active connection regains keyboard focus.
+                        if (appActivated && !Properties.OptionsStartupExitPage.Default.DisableRefocus)
+                        {
+                            QueueActivateConnection();
+                        }
+
                         _inMouseActivate = false;
                         break;
                     case NativeMethods.WM_ACTIVATE:
@@ -675,12 +686,60 @@ namespace mRemoteNG.UI.Forms
             clientMousePosition.Y = temp_wHigh;
         }
 
+        private void QueueActivateConnection()
+        {
+            if (IsDisposed || Disposing || !IsHandleCreated)
+                return;
+
+            try
+            {
+                BeginInvoke((MethodInvoker)ActivateConnection);
+            }
+            catch (ObjectDisposedException)
+            {
+            }
+            catch (InvalidOperationException)
+            {
+            }
+        }
+
+        private static ConnectionTab GetActiveConnectionTab(ConnectionWindow connectionWindow)
+        {
+            if (connectionWindow == null)
+                return null;
+
+            if (connectionWindow.ActiveControl is DockPane activePane &&
+                activePane.ActiveContent is ConnectionTab activePaneTab)
+            {
+                return activePaneTab;
+            }
+
+            foreach (Control control in connectionWindow.Controls)
+            {
+                if (control is not DockPanel dockPanel)
+                    continue;
+
+                if (dockPanel.ActiveContent is ConnectionTab activeDockTab)
+                    return activeDockTab;
+
+                foreach (IDockContent document in dockPanel.DocumentsToArray())
+                {
+                    if (document is ConnectionTab activatedDocument &&
+                        activatedDocument.DockHandler.IsActivated)
+                    {
+                        return activatedDocument;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         private void ActivateConnection()
         {
             ConnectionWindow cw = pnlDock.ActiveDocument as ConnectionWindow;
-            DockPane dp = cw?.ActiveControl as DockPane;
-
-            if (dp?.ActiveContent is not ConnectionTab tab) return;
+            ConnectionTab tab = GetActiveConnectionTab(cw);
+            if (tab == null) return;
             InterfaceControl ifc = InterfaceControl.FindInterfaceControl(tab);
             if (ifc == null) return;
 
