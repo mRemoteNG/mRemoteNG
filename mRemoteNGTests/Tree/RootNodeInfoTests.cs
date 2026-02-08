@@ -16,6 +16,12 @@ namespace mRemoteNGTests.Tree
         }
 
         [Test]
+        public void AutoLockOnMinimizeIsDisabledByDefault()
+        {
+            Assert.That(_rootNodeInfo.AutoLockOnMinimize, Is.False);
+        }
+
+        [Test]
         public void DefaultPasswordReturnsExpectedValue()
         {
             var defaultPassword = _rootNodeInfo.DefaultPassword;

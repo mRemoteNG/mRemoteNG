@@ -120,6 +120,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
         private void InitializeRootNode(XmlElement connectionsRootElement)
         {
             _rootNodeInfo.Name = connectionsRootElement?.Attributes["Name"]?.Value.Trim();
+            _rootNodeInfo.AutoLockOnMinimize = connectionsRootElement.GetAttributeAsBool("AutoLockOnMinimize");
         }
 
         private void CreateDecryptor(RootNodeInfo rootNodeInfo, XmlElement connectionsRootElement = null)

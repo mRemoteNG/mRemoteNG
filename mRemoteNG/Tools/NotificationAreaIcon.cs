@@ -103,19 +103,23 @@ namespace mRemoteNG.Tools
             }
             else
             {
-                ShowForm();
-                FrmMain.ShowInTaskbar = true;
+                if (ShowForm())
+                    FrmMain.ShowInTaskbar = true;
             }
         }
 
-        private static void ShowForm()
+        private static bool ShowForm()
         {
+            if (!FrmMain.TryUnlockIfNeeded())
+                return false;
+
             FrmMain.Show();
             FrmMain.WindowState = FrmMain.PreviousWindowState;
 
-            if (Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon) return;
+            if (Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon) return true;
             Runtime.NotificationAreaIcon.Dispose();
             Runtime.NotificationAreaIcon = null;
+            return true;
         }
 
         private static void HideForm()
@@ -128,8 +132,8 @@ namespace mRemoteNG.Tools
         {
             if (e.Button != MouseButtons.Left) return;
             if (((ToolStripMenuItem)sender).Tag is ContainerInfo) return;
-            if (FrmMain.Visible == false)
-                ShowForm();
+            if (FrmMain.Visible == false && !ShowForm())
+                return;
             Runtime.ConnectionInitiator.OpenConnection((ConnectionInfo)((ToolStripMenuItem)sender).Tag);
         }
 

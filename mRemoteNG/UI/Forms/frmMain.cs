@@ -13,6 +13,7 @@ using mRemoteNG.Messages;
 using mRemoteNG.Messages.MessageWriters;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Menu;
 using mRemoteNG.UI.Tabs;
 using mRemoteNG.UI.TaskDialog;
@@ -24,6 +25,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,6 +85,10 @@ namespace mRemoteNG.UI.Forms
         private readonly IList<IMessageWriter> _messageWriters = [];
         private readonly ThemeManager _themeManager;
         private readonly FileBackupPruner _backupPruner = new();
+        private readonly System.Windows.Forms.Timer _autoLockTimer = new() { Interval = 1000 };
+        private const int AutoLockIdleThresholdMs = 5 * 60 * 1000;
+        private bool _isAutoLocked;
+        private bool _unlockPromptInProgress;
         public static FrmOptions OptionsForm;
 
         /// <summary>
@@ -131,6 +137,7 @@ namespace mRemoteNG.UI.Forms
             ApplyTheme();
 
             _advancedWindowMenu = new AdvancedWindowMenu(this);
+            _autoLockTimer.Tick += AutoLockTimer_Tick;
         }
 
         #region Properties
@@ -246,6 +253,7 @@ namespace mRemoteNG.UI.Forms
 
             CredsAndConsSetup credsAndConsSetup = new();
             credsAndConsSetup.LoadCredsAndCons();
+            _autoLockTimer.Start();
 
             // Initialize panel binding for Connections and Config panels
             UI.Panels.PanelBinder.Instance.Initialize();
@@ -457,6 +465,7 @@ namespace mRemoteNG.UI.Forms
             }
 
             IsClosing = true;
+            _autoLockTimer.Stop();
 
             Hide();
 
@@ -525,6 +534,96 @@ namespace mRemoteNG.UI.Forms
             Runtime.ConnectionsService.SaveConnectionsAsync();
         }
 
+        private void AutoLockTimer_Tick(object sender, EventArgs e)
+        {
+            if (_isAutoLocked || IsClosing || !AutoLockEnabled())
+                return;
+
+            int idleMilliseconds = NativeMethods.GetIdleMilliseconds();
+            if (idleMilliseconds < AutoLockIdleThresholdMs)
+                return;
+
+            EngageAutoLock("idle-timeout");
+        }
+
+        private bool AutoLockEnabled()
+        {
+            RootNodeInfo rootNodeInfo = GetConnectionRootNodeInfo();
+            return rootNodeInfo is { Password: true, AutoLockOnMinimize: true };
+        }
+
+        private RootNodeInfo GetConnectionRootNodeInfo()
+        {
+            return Runtime.ConnectionsService.ConnectionTreeModel?.RootNodes
+                ?.OfType<RootNodeInfo>()
+                .FirstOrDefault(node => node.Type == RootNodeType.Connection);
+        }
+
+        private void EngageAutoLock(string reason)
+        {
+            if (_isAutoLocked || !AutoLockEnabled())
+                return;
+
+            _isAutoLocked = true;
+            Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"Autolock engaged ({reason}).");
+
+            if (WindowState != FormWindowState.Minimized)
+            {
+                PreviousWindowState = WindowState;
+                WindowState = FormWindowState.Minimized;
+            }
+
+            if (!Properties.OptionsAppearancePage.Default.MinimizeToTray)
+                return;
+
+            Runtime.NotificationAreaIcon ??= new NotificationAreaIcon();
+            Hide();
+            ShowInTaskbar = false;
+        }
+
+        internal bool TryUnlockIfNeeded()
+        {
+            if (!_isAutoLocked || IsClosing)
+                return true;
+
+            RootNodeInfo rootNodeInfo = GetConnectionRootNodeInfo();
+            if (rootNodeInfo?.Password != true)
+            {
+                _isAutoLocked = false;
+                return true;
+            }
+
+            if (_unlockPromptInProgress)
+                return false;
+
+            _unlockPromptInProgress = true;
+            try
+            {
+                string passwordName = Properties.OptionsDBsPage.Default.UseSQLServer
+                    ? Language.SQLServer.TrimEnd(':')
+                    : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
+
+                Optional<System.Security.SecureString> password = MiscTools.PasswordDialog(passwordName, false);
+                if (!password.Any() || password.First().Length == 0)
+                    return false;
+
+                bool matches = rootNodeInfo.IsPasswordMatch(password.First());
+                if (matches)
+                {
+                    _isAutoLocked = false;
+                    return true;
+                }
+
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    "Autolock unlock request rejected: provided password did not match.");
+                return false;
+            }
+            finally
+            {
+                _unlockPromptInProgress = false;
+            }
+        }
+
         #endregion
 
         #region Window Overrides and DockPanel Stuff
@@ -538,6 +637,8 @@ namespace mRemoteNG.UI.Forms
         {
             if (WindowState == FormWindowState.Minimized)
             {
+                EngageAutoLock("minimized");
+
                 if (!Properties.OptionsAppearancePage.Default.MinimizeToTray) return;
                 Runtime.NotificationAreaIcon ??= new NotificationAreaIcon();
 
@@ -545,6 +646,20 @@ namespace mRemoteNG.UI.Forms
             }
             else
             {
+                if (!TryUnlockIfNeeded())
+                {
+                    WindowState = FormWindowState.Minimized;
+
+                    if (Properties.OptionsAppearancePage.Default.MinimizeToTray)
+                    {
+                        Runtime.NotificationAreaIcon ??= new NotificationAreaIcon();
+                        Hide();
+                        ShowInTaskbar = false;
+                    }
+
+                    return;
+                }
+
                 PreviousWindowState = WindowState;
             }
         }

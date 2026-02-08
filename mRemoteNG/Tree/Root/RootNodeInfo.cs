@@ -40,6 +40,13 @@ namespace mRemoteNG.Tree.Root
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public new bool Password { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Miscellaneous)),
+         Browsable(true),
+         DisplayName("Auto lock on minimize"),
+         Description("Require master password when restoring the app after minimize."),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool AutoLockOnMinimize { get; set; }
+
         [Browsable(false)]
         public string PasswordString
         {

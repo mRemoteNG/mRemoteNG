@@ -6,6 +6,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.Tree;
+using mRemoteNG.Tree.Root;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
@@ -119,6 +120,19 @@ public class XmlConnectionsDeserializerTests
         Setup(testData.ConfCons, testData.Password);
         var folder1 = GetFolderNamed("Folder1", _connectionTreeModel.GetRecursiveChildList());
         Assert.That(folder1.IsExpanded, Is.True);
+    }
+
+    [Test]
+    public void RootNodeAutoLockOnMinimizeGetsDeserialized()
+    {
+        string xml = Resources.confCons_v2_6.Replace("<Connections ", "<Connections AutoLockOnMinimize=\"true\" ",
+            System.StringComparison.Ordinal);
+
+        Setup(xml, "mR3m");
+        var rootNode = _connectionTreeModel.RootNodes[0] as RootNodeInfo;
+
+        Assert.That(rootNode, Is.Not.Null);
+        Assert.That(rootNode.AutoLockOnMinimize, Is.True);
     }
 
     private bool ContainsNodeNamed(string name, IEnumerable<ConnectionInfo> list)

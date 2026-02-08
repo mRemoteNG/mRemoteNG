@@ -116,11 +116,17 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
                             nameof(RootPuttySessionsNodeInfo.Name)
                         };
                     } else if (SelectedConnectionInfo is RootNodeInfo) {
-                        BrowsableProperties = new[]
-                        {
+                        RootNodeInfo rootInfo = (RootNodeInfo)SelectedConnectionInfo;
+                        List<string> rootProperties =
+                        [
                             nameof(RootNodeInfo.Name),
                             nameof(RootNodeInfo.Password)
-                        };
+                        ];
+
+                        if (rootInfo.Password)
+                            rootProperties.Add(nameof(RootNodeInfo.AutoLockOnMinimize));
+
+                        BrowsableProperties = rootProperties.ToArray();
                     }
 
                     Refresh();
@@ -333,7 +339,16 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
             if (!(SelectedObject is RootNodeInfo rootInfo))
                 return;
 
-            if (e.ChangedItem.PropertyDescriptor?.Name != "Password")
+            string changedProperty = e.ChangedItem.PropertyDescriptor?.Name ?? "";
+            if (changedProperty == nameof(RootNodeInfo.AutoLockOnMinimize) && !rootInfo.Password)
+            {
+                rootInfo.AutoLockOnMinimize = false;
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    "Autolock requires password protection to be enabled.");
+                return;
+            }
+
+            if (changedProperty != nameof(RootNodeInfo.Password))
                 return;
 
             if (rootInfo.Password) {
@@ -348,6 +363,7 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
 
                 rootInfo.PasswordString = password.First().ConvertToUnsecureString();
             } else {
+                rootInfo.AutoLockOnMinimize = false;
                 rootInfo.PasswordString = "";
             }
         }

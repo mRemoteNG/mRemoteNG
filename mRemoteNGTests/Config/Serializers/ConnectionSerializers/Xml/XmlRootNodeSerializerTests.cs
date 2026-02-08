@@ -83,6 +83,16 @@ public class XmlRootNodeSerializerTests
         Assert.That(bool.Parse(attributeValue), Is.EqualTo(fullFileEncryption));
     }
 
+    [TestCase(true)]
+    [TestCase(false)]
+    public void AutoLockOnMinimizeSerialized(bool autoLockOnMinimize)
+    {
+        _rootNodeInfo.AutoLockOnMinimize = autoLockOnMinimize;
+        var element = _rootNodeSerializer.SerializeRootNodeInfo(_rootNodeInfo, _cryptographyProvider, _version);
+        var attributeValue = element.Attribute(XName.Get("AutoLockOnMinimize"))?.Value;
+        Assert.That(bool.Parse(attributeValue), Is.EqualTo(autoLockOnMinimize));
+    }
+
     [TestCase("", "ThisIsNotProtected")]
     [TestCase(null, "ThisIsNotProtected")]
     [TestCase("mR3m", "ThisIsNotProtected")]

@@ -104,6 +104,9 @@ namespace mRemoteNG.App
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern int GetDlgCtrlID(IntPtr hwndCtl);
 
@@ -156,9 +159,29 @@ namespace mRemoteNG.App
             public long bottom;
         }
 
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct LASTINPUTINFO
+        {
+            public uint cbSize;
+            public uint dwTime;
+        }
+
         #endregion
 
         #region Helpers
+
+        public static int GetIdleMilliseconds()
+        {
+            LASTINPUTINFO lastInputInfo = new()
+            {
+                cbSize = (uint)Marshal.SizeOf(typeof(LASTINPUTINFO))
+            };
+
+            if (!GetLastInputInfo(ref lastInputInfo))
+                return 0;
+
+            return unchecked((int)(Environment.TickCount - lastInputInfo.dwTime));
+        }
 
         public static int MAKELONG(int wLow, int wHigh)
         {
