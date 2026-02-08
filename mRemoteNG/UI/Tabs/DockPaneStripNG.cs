@@ -88,6 +88,7 @@ namespace mRemoteNG.UI.Tabs
         private Font m_font;
         private Font m_boldFont;
         private int m_startDisplayingTab;
+        private int m_lastDocumentDragScrollTick;
         private bool m_documentTabsOverflow;
         private static string m_toolTipSelect;
         private bool m_suspendDrag;
@@ -698,6 +699,8 @@ namespace mRemoteNG.UI.Tabs
         }
 
         private const int TAB_CLOSE_BUTTON_WIDTH = 30;
+        private const int DOCUMENT_DRAG_SCROLL_EDGE_WIDTH = 24;
+        private const int DOCUMENT_DRAG_SCROLL_INTERVAL_MS = 120;
 
         private int GetMaxTabWidth_Document(int index)
         {
@@ -1120,6 +1123,8 @@ namespace mRemoteNG.UI.Tabs
             if (!m_suspendDrag)
                 base.OnMouseMove(e);
 
+            TryScrollDocumentTabsDuringDrag(e);
+
             int index = HitTest(PointToClient(MousePosition));
             string toolTip = string.Empty;
 
@@ -1165,6 +1170,41 @@ namespace mRemoteNG.UI.Tabs
             m_toolTip.Active = false;
             m_toolTip.SetToolTip(this, toolTip);
             m_toolTip.Active = true;
+        }
+
+        private void TryScrollDocumentTabsDuringDrag(MouseEventArgs e)
+        {
+            if (Appearance != DockPane.AppearanceStyle.Document || !m_documentTabsOverflow || m_suspendDrag)
+                return;
+
+            if ((Control.MouseButtons & MouseButtons.Left) != MouseButtons.Left)
+                return;
+
+            int now = Environment.TickCount;
+            if (now - m_lastDocumentDragScrollTick < DOCUMENT_DRAG_SCROLL_INTERVAL_MS)
+                return;
+
+            Rectangle tabsRect = TabsRectangle;
+            if (e.Y < tabsRect.Top || e.Y > tabsRect.Bottom)
+                return;
+
+            int nextStartDisplayingTab = m_startDisplayingTab;
+            if (e.X >= tabsRect.Right - DOCUMENT_DRAG_SCROLL_EDGE_WIDTH)
+            {
+                if (EndDisplayingTab < Tabs.Count - 1)
+                    nextStartDisplayingTab = Math.Min(m_startDisplayingTab + 1, Tabs.Count - 1);
+            }
+            else if (e.X <= tabsRect.Left + DOCUMENT_DRAG_SCROLL_EDGE_WIDTH)
+            {
+                if (m_startDisplayingTab > 0)
+                    nextStartDisplayingTab = Math.Max(m_startDisplayingTab - 1, 0);
+            }
+
+            if (nextStartDisplayingTab == m_startDisplayingTab)
+                return;
+
+            m_lastDocumentDragScrollTick = now;
+            StartDisplayingTab = nextStartDisplayingTab;
         }
 
         protected override void OnMouseClick(MouseEventArgs e)
