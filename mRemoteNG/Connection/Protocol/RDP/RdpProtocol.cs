@@ -85,6 +85,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
             protected set => _rdpClient.FullScreen = value;
         }
 
+        public bool RedirectKeysEnabled => _redirectKeys;
+
         private bool RedirectKeys
         {
             set
