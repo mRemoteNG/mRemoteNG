@@ -231,6 +231,7 @@ namespace mRemoteNG.UI.Window
 
         private bool _documentHandlersAdded;
         private bool _floatHandlersAdded;
+        private bool _emptyPanelCloseQueued;
 
         private void Connection_DockStateChanged(object sender, EventArgs e)
         {
@@ -396,6 +397,67 @@ namespace mRemoteNG.UI.Window
             InterfaceControl ic = GetInterfaceControl();
             if (ic?.Info == null) return;
             FrmMain.Default.SelectedConnection = ic.Info;
+        }
+
+        private void ClosePanelIfEmpty()
+        {
+            if (_emptyPanelCloseQueued || IsDisposed || Disposing || !IsHandleCreated)
+            {
+                return;
+            }
+
+            if (FrmMain.Default?.IsClosing == true)
+            {
+                return;
+            }
+
+            if (connDock.Documents.Any())
+            {
+                return;
+            }
+
+            _emptyPanelCloseQueued = true;
+            try
+            {
+                BeginInvoke((MethodInvoker)ClosePanelIfEmptyOnUiTick);
+            }
+            catch (ObjectDisposedException)
+            {
+                _emptyPanelCloseQueued = false;
+            }
+            catch (InvalidOperationException)
+            {
+                _emptyPanelCloseQueued = false;
+            }
+        }
+
+        private void ClosePanelIfEmptyOnUiTick()
+        {
+            _emptyPanelCloseQueued = false;
+
+            if (IsDisposed || Disposing || !IsHandleCreated)
+            {
+                return;
+            }
+
+            if (FrmMain.Default?.IsClosing == true)
+            {
+                return;
+            }
+
+            if (connDock.Documents.Any())
+            {
+                return;
+            }
+
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("ClosePanelIfEmptyOnUiTick (UI.Window.ConnectionWindow) failed", ex);
+            }
         }
 
         #endregion
@@ -696,6 +758,10 @@ namespace mRemoteNG.UI.Window
             {
                 Runtime.MessageCollector.AddExceptionMessage("CloseTabMenu (UI.Window.ConnectionWindow) failed", ex);
             }
+            finally
+            {
+                ClosePanelIfEmpty();
+            }
         }
 
         private void CloseOtherTabs()
@@ -829,7 +895,14 @@ namespace mRemoteNG.UI.Window
             if (tabPage.Disposing || tabPage.IsDisposed) return;
             if (IsDisposed || Disposing) return;
             tabPage.protocolClose = true;
-            Invoke(new Action(() => tabPage.Close()));
+            try
+            {
+                Invoke(new Action(() => tabPage.Close()));
+            }
+            finally
+            {
+                ClosePanelIfEmpty();
+            }
         }
 
         #endregion
