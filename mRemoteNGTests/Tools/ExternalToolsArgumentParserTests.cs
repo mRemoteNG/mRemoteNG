@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using NUnit.Framework;
@@ -17,6 +18,7 @@ namespace mRemoteNGTests.Tools
         private const string StringAfterNoEscaping = TestString;
         private const int Port = 9933;
         private const string PortAsString = "9933";
+        private const string ProtocolAsString = "RDP";
         private const string SampleCommandString = @"/k echo ()%!^abc123*<>&|""'\";
 
 
@@ -28,6 +30,7 @@ namespace mRemoteNGTests.Tools
                 Name = TestString,
                 Hostname = TestString,
                 Port = Port,
+                Protocol = ProtocolType.RDP,
                 Username = TestString,
                 //Password = TestString.ConvertToSecureString(),
                 Password = TestString,
@@ -94,6 +97,9 @@ namespace mRemoteNGTests.Tools
                     yield return new TestCaseData("%USERFIELD%").Returns(StringAfterAllEscaping);
                     yield return new TestCaseData("%-USERFIELD%").Returns(StringAfterMetacharacterEscaping);
                     yield return new TestCaseData("%!USERFIELD%").Returns(StringAfterNoEscaping);
+                    yield return new TestCaseData("%PROTOCOL%").Returns(ProtocolAsString);
+                    yield return new TestCaseData("%-PROTOCOL%").Returns(ProtocolAsString);
+                    yield return new TestCaseData("%!PROTOCOL%").Returns(ProtocolAsString);
                     yield return new TestCaseData("%%") {TestName = "EmptyVariableTagsNotParsed" }.Returns("%%");
                     yield return new TestCaseData("/k echo %!USERNAME%") { TestName = "ParsingWorksWhenVariableIsNotInFirstPosition" }.Returns(SampleCommandString);
                     yield return new TestCaseData("%COMSPEC%") { TestName = "EnvironmentVariablesParsed" }.Returns(Environment.GetEnvironmentVariable("comspec"));
