@@ -100,6 +100,9 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
 
         private void ValidateConnectionFileVersion()
         {
+            if (_xmlDocument?.DocumentElement == null)
+                throw new XmlException("Failed to parse XML connection file.");
+
             if (_xmlDocument.DocumentElement != null && _xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
                 _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"]?.Value.Replace(",", "."), CultureInfo.InvariantCulture);
             else
