@@ -86,8 +86,8 @@ namespace mRemoteNG.UI.Forms
 
         private void BtnOK_Click(object sender, EventArgs e)
         {
-            if (NewPasswordMode)
-                VerifyNewPassword();
+            if (NewPasswordMode && !VerifyNewPassword())
+                return;
 
             DialogResult = DialogResult.OK;
         }

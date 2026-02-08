@@ -348,8 +348,34 @@ namespace mRemoteNG.UI.Controls.ConnectionInfoPropertyGrid {
 
                 rootInfo.PasswordString = password.First().ConvertToUnsecureString();
             } else {
+                if (!CurrentPasswordVerified(rootInfo))
+                {
+                    rootInfo.Password = true;
+                    return;
+                }
+
                 rootInfo.PasswordString = "";
             }
+        }
+
+        private bool CurrentPasswordVerified(RootNodeInfo rootInfo)
+        {
+            string passwordName = Properties.OptionsDBsPage.Default.UseSQLServer
+                ? Language.SQLServer.TrimEnd(':')
+                : Path.GetFileName(Runtime.ConnectionsService.GetStartupConnectionFileName());
+
+            Optional<System.Security.SecureString> password = MiscTools.PasswordDialog(passwordName, false);
+            if (!password.Any() || password.First().Length == 0)
+                return false;
+
+            bool matches = rootInfo.IsPasswordMatch(password.First());
+            if (!matches)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                    "Password protection disable request rejected: provided password did not match.");
+            }
+
+            return matches;
         }
 
         private void UpdateInheritanceNode() {

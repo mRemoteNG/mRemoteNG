@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Security;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
@@ -52,6 +54,17 @@ namespace mRemoteNG.Tree.Root
         }
 
         [Browsable(false)] public string DefaultPassword { get; } = "mR3m"; //TODO move password away from code to settings
+
+        [Browsable(false)]
+        public bool IsPasswordMatch(SecureString? providedPassword)
+        {
+            if (providedPassword == null)
+                return false;
+
+            string expectedPassword = string.IsNullOrEmpty(_customPassword) ? DefaultPassword : _customPassword;
+            string suppliedPassword = providedPassword.ConvertToUnsecureString();
+            return string.Equals(expectedPassword, suppliedPassword, StringComparison.Ordinal);
+        }
 
         [Browsable(false)] public RootNodeType Type { get; set; } = rootType;
 

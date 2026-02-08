@@ -1,4 +1,5 @@
-﻿using mRemoteNG.Tree;
+﻿using mRemoteNG.Security;
+using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
@@ -54,6 +55,35 @@ namespace mRemoteNGTests.Tree
             // Edge case: Password property set to true directly without setting PasswordString
             _rootNodeInfo.Password = true;
             Assert.That(_rootNodeInfo.PasswordString, Is.EqualTo(_rootNodeInfo.DefaultPassword));
+        }
+
+        [Test]
+        public void IsPasswordMatchReturnsTrueForDefaultPasswordWhenNoCustomPasswordSet()
+        {
+            Assert.That(_rootNodeInfo.IsPasswordMatch(_rootNodeInfo.DefaultPassword.ConvertToSecureString()), Is.True);
+        }
+
+        [Test]
+        public void IsPasswordMatchReturnsTrueForCustomPasswordEvenWhenPasswordFlagIsFalse()
+        {
+            _rootNodeInfo.PasswordString = "custom";
+            _rootNodeInfo.Password = false;
+
+            Assert.That(_rootNodeInfo.IsPasswordMatch("custom".ConvertToSecureString()), Is.True);
+        }
+
+        [Test]
+        public void IsPasswordMatchReturnsFalseForWrongPassword()
+        {
+            _rootNodeInfo.PasswordString = "custom";
+
+            Assert.That(_rootNodeInfo.IsPasswordMatch("wrong".ConvertToSecureString()), Is.False);
+        }
+
+        [Test]
+        public void IsPasswordMatchReturnsFalseForNullPassword()
+        {
+            Assert.That(_rootNodeInfo.IsPasswordMatch(null), Is.False);
         }
 
         [TestCase(RootNodeType.Connection, TreeNodeType.Root)]
