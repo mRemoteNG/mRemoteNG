@@ -171,6 +171,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 return;
             }
 
+            if (Control == null || InterfaceControl == null || Control.IsDisposed || InterfaceControl.IsDisposed)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,
+                    $"Resize skipped for '{connectionInfo.Hostname}': RDP controls are no longer available");
+                return;
+            }
+
             if (!InterfaceControl.Info.AutomaticResize)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.DebugMsg,

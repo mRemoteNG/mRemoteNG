@@ -53,28 +53,60 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             get
             {
+                if (_rdpClient == null)
+                {
+                    return false;
+                }
+
                 try
                 {
                     return _rdpClient.AdvancedSettings2.SmartSizing;
                 }
-                catch (System.Runtime.InteropServices.InvalidComObjectException)
+                catch (InvalidComObjectException ex)
                 {
-                    // The COM object is separated from its RCW, try reacquiring the RCW or recreating the COM object
-                    _rdpClient = new MsRdpClient6NotSafeForScripting();
-                    return _rdpClient.AdvancedSettings2.SmartSizing;
+                    Runtime.MessageCollector.AddExceptionMessage(
+                        "Unable to read RDP SmartSize state because the COM client is no longer valid.",
+                        ex,
+                        MessageClass.WarningMsg,
+                        false);
+                    return false;
+                }
+                catch (COMException ex)
+                {
+                    Runtime.MessageCollector.AddExceptionMessage(
+                        "Unable to read RDP SmartSize state due to a COM access error.",
+                        ex,
+                        MessageClass.WarningMsg,
+                        false);
+                    return false;
                 }
             }
             protected set
             {
+                if (_rdpClient == null)
+                {
+                    return;
+                }
+
                 try
                 {
                     _rdpClient.AdvancedSettings2.SmartSizing = value;
                 }
-                catch (System.Runtime.InteropServices.InvalidComObjectException)
+                catch (InvalidComObjectException ex)
                 {
-                    // The COM object is separated from its RCW, try reacquiring the RCW or recreating the COM object
-                    _rdpClient = new MsRdpClient6NotSafeForScripting();
-                    _rdpClient.AdvancedSettings2.SmartSizing = value;
+                    Runtime.MessageCollector.AddExceptionMessage(
+                        "Unable to update RDP SmartSize because the COM client is no longer valid.",
+                        ex,
+                        MessageClass.WarningMsg,
+                        false);
+                }
+                catch (COMException ex)
+                {
+                    Runtime.MessageCollector.AddExceptionMessage(
+                        "Unable to update RDP SmartSize due to a COM access error.",
+                        ex,
+                        MessageClass.WarningMsg,
+                        false);
                 }
             }
         }
@@ -84,6 +116,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
             get => _rdpClient.FullScreen;
             protected set => _rdpClient.FullScreen = value;
         }
+
+        public bool RedirectKeysEnabled => _redirectKeys;
 
         private bool RedirectKeys
         {
@@ -623,14 +657,50 @@ namespace mRemoteNG.Connection.Protocol.RDP
                             _rdpClient.UserName = Properties.OptionsCredentialsPage.Default.DefaultUsername;
                             break;
                         case "custom":
-                            try
+                            switch (Properties.OptionsCredentialsPage.Default.ExternalCredentialProviderDefault)
                             {
-                                ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer(Properties.OptionsCredentialsPage.Default.UserViaAPIDefault, out userName, out password, out domain, out pkey);
-                                _rdpClient.UserName = userName;
+                                case ExternalCredentialProvider.DelineaSecretServer:
+                                    try
+                                    {
+                                        ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer(
+                                            Properties.OptionsCredentialsPage.Default.UserViaAPIDefault, out userName, out password, out domain, out pkey);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                                    }
+
+                                    break;
+                                case ExternalCredentialProvider.ClickstudiosPasswordState:
+                                    try
+                                    {
+                                        ExternalConnectors.CPS.PasswordstateInterface.FetchSecretFromServer(
+                                            Properties.OptionsCredentialsPage.Default.UserViaAPIDefault, out userName, out password, out domain, out pkey);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Event_ErrorOccured(this, "Passwordstate Interface Error: " + ex.Message, 0);
+                                    }
+
+                                    break;
+                                case ExternalCredentialProvider.OnePassword:
+                                    try
+                                    {
+                                        ExternalConnectors.OP.OnePasswordCli.ReadPassword(
+                                            Properties.OptionsCredentialsPage.Default.UserViaAPIDefault, out userName, out password, out domain, out pkey);
+                                    }
+                                    catch (ExternalConnectors.OP.OnePasswordCliException ex)
+                                    {
+                                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.ECPOnePasswordCommandLine + ": " + ex.Arguments);
+                                        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.ECPOnePasswordReadFailed + Environment.NewLine + ex.Message);
+                                    }
+
+                                    break;
                             }
-                            catch (Exception ex)
+
+                            if (!string.IsNullOrEmpty(userName))
                             {
-                                Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                                _rdpClient.UserName = userName;
                             }
 
                             break;
@@ -948,6 +1018,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             Fullscreen = false;
             _leaveFullscreenEvent?.Invoke(this, EventArgs.Empty);
+
+            try
+            {
+                if (_frmMain.WindowState == FormWindowState.Minimized)
+                {
+                    _frmMain.WindowState = FormWindowState.Normal;
+                }
+
+                _frmMain.Activate();
+                InterfaceControl?.Parent?.Focus();
+                Focus();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("RDP leave-fullscreen refocus failed", ex, MessageClass.WarningMsg, false);
+            }
         }
 
         private void RdpClient_GotFocus(object sender, EventArgs e)
