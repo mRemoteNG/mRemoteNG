@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree.Root;
-using System.Net;
 using System.Runtime.Versioning;
 
 // ReSharper disable ArrangeAccessorOwnerBody
@@ -54,7 +53,7 @@ namespace mRemoteNG.Config.Putty
             if (sessionNamesFromProvider == null) return Enumerable.Empty<PuttySessionInfo>();
             IEnumerable<string> currentlyKnownSessionNames = Sessions.Select(session => session.Name);
             IEnumerable<string> normalizedSessionNames =
-                sessionNamesFromProvider.Select(name => WebUtility.UrlDecode(name));
+                sessionNamesFromProvider.Select(name => PuttySessionNameDecoder.Decode(name));
             IEnumerable<string> sessionNamesToRemove = currentlyKnownSessionNames.Except(normalizedSessionNames);
             return Sessions.Where(session => sessionNamesToRemove.Contains(session.Name));
         }

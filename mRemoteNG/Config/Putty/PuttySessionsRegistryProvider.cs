@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Management;
-using System.Net;
 using System.Runtime.Versioning;
 using System.Security.Principal;
 using Microsoft.Win32;
@@ -30,8 +29,7 @@ namespace mRemoteNG.Config.Putty
             List<string> sessionNames = new();
             foreach (string sessionName in sessionsKey.GetSubKeyNames())
             {
-                sessionNames.Add(raw ? sessionName
-                                     : WebUtility.UrlDecode(sessionName.Replace("+", "%2B")));
+                sessionNames.Add(raw ? sessionName : PuttySessionNameDecoder.Decode(sessionName));
             }
 
             if (raw && !sessionNames.Contains("Default%20Settings"))
@@ -51,7 +49,7 @@ namespace mRemoteNG.Config.Putty
             RegistryKey sessionKey = sessionsKey?.OpenSubKey(sessionName);
             if (sessionKey == null) return null;
 
-            sessionName = WebUtility.UrlDecode(sessionName.Replace("+", "%2B"));
+            sessionName = PuttySessionNameDecoder.Decode(sessionName);
 
             PuttySessionInfo sessionInfo = new()
             {
