@@ -250,7 +250,12 @@ namespace mRemoteNG.UI.Forms
             // Initialize panel binding for Connections and Config panels
             UI.Panels.PanelBinder.Instance.Initialize();
 
-            AppWindows.TreeForm.Focus();
+            // Respect the active panel restored from persisted dock layout.
+            // Fallback to the Connections panel only when no active content was restored.
+            if (pnlDock.ActiveContent == null && AppWindows.TreeForm.Visible)
+            {
+                AppWindows.TreeForm.Focus();
+            }
 
             PuttySessionsManager.Instance.StartWatcher();
 
