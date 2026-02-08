@@ -25,21 +25,29 @@ Portable version
 Crash at Startup
 ================
 
-Try deleting the :code:`user.config` file. It contains all the user-specific program settings. This file is automatically upgraded between version when new user settings are added.
+Try deleting the user settings file. It contains all user-specific program settings and is automatically upgraded between versions.
+
+The exact file path is logged during startup in :code:`mRemoteNG.log` as:
+
+::
+
+   User settings file: <full path>
 
 Installed Version
 -----------------
 
 ::
 
-   %LOCALAPPDATA%\mRemoteNG\<most recently updated folder>\<mRemoteNG version>\user.config
+   %LOCALAPPDATA%\[CompanyName]\mRemoteNG.exe_Url_[hash]\[mRemoteNG version]\user.config
+
+The folder can vary by build metadata (company name and URL hash), so rely on the startup log entry above for the exact location.
 
 Portable Version
 ----------------
 
 ::
 
-   %APPDATA%\mRemoteNG\<most recently updated folder>\<mRemoteNG version>\user.config
+   [location of mRemoteNG.exe]\mRemoteNG.settings
 
 Crash Information
 =================

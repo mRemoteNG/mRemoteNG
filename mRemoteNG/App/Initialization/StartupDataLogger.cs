@@ -3,6 +3,7 @@ using System.Management;
 using System.Runtime.Versioning;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.Resources.Language;
 
@@ -16,6 +17,7 @@ namespace mRemoteNG.App.Initialization
         public void LogStartupData()
         {
             LogApplicationData();
+            LogSettingsData();
             LogCmdLineArgs();
             LogSystemData();
             LogClrData();
@@ -93,6 +95,17 @@ namespace mRemoteNG.App.Initialization
                 data += $" {Language.PortableEdition}";
             data += " starting.";
             _messageCollector.AddMessage(MessageClass.InformationMsg, data, true);
+        }
+
+        private void LogSettingsData()
+        {
+            if (string.IsNullOrWhiteSpace(SettingsFileInfo.UserSettingsFilePath))
+            {
+                return;
+            }
+
+            _messageCollector.AddMessage(MessageClass.InformationMsg,
+                $"User settings file: {SettingsFileInfo.UserSettingsFilePath}", true);
         }
 
         private void LogCmdLineArgs()
