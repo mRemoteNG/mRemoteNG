@@ -448,18 +448,6 @@ namespace mRemoteNG.UI.Forms
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Runtime.WindowList != null)
-            {
-                foreach (BaseWindow window in Runtime.WindowList)
-                {
-                    window.Close();
-                }
-            }
-
-            IsClosing = true;
-
-            Hide();
-
             if (Properties.OptionsAppearancePage.Default.CloseToTray)
             {
                 Runtime.NotificationAreaIcon ??= new NotificationAreaIcon();
@@ -475,19 +463,7 @@ namespace mRemoteNG.UI.Forms
 
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
             {
-                int openConnections = 0;
-                if (pnlDock.Contents.Count > 0)
-                {
-                    foreach (IDockContent dc in pnlDock.Contents)
-                    {
-                        if (dc is not ConnectionWindow cw) continue;
-                        if (cw.Controls.Count < 1) continue;
-                        if (cw.Controls[0] is not DockPanel dp) continue;
-                        if (dp.Contents.Count > 0)
-                            openConnections += dp.Contents.Count;
-                    }
-                }
-
+                int openConnections = GetOpenConnectionsCount();
                 if (openConnections > 0 &&
                     (Properties.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All |
                      (Properties.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple &
@@ -507,12 +483,49 @@ namespace mRemoteNG.UI.Forms
                 }
             }
 
+            if (Runtime.WindowList != null)
+            {
+                foreach (BaseWindow window in Runtime.WindowList)
+                {
+                    window.Close();
+                }
+
+                // If a child window/panel close is cancelled (for example user clicks "No"),
+                // keep main app visible and abort this close request.
+                if (GetOpenConnectionsCount() > 0)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
+            IsClosing = true;
+            Hide();
+
             NativeMethods.ChangeClipboardChain(Handle, _fpChainedWindowHandle);
             Shutdown.Cleanup(_quickConnectToolStrip, _externalToolsToolStrip, _multiSshToolStrip, this);
 
             Shutdown.StartUpdate();
 
             Debug.Print("[END] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
+        }
+
+        private int GetOpenConnectionsCount()
+        {
+            int openConnections = 0;
+            if (pnlDock.Contents.Count == 0)
+                return openConnections;
+
+            foreach (IDockContent dc in pnlDock.Contents)
+            {
+                if (dc is not ConnectionWindow cw) continue;
+                if (cw.Controls.Count < 1) continue;
+                if (cw.Controls[0] is not DockPanel dp) continue;
+                if (dp.Contents.Count > 0)
+                    openConnections += dp.Contents.Count;
+            }
+
+            return openConnections;
         }
 
         #endregion
