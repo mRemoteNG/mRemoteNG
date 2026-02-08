@@ -1180,10 +1180,62 @@ namespace mRemoteNG.UI.Tabs
 
         private void TabCloseButtonHit(int index)
         {
+            if (index < 0 || index >= Tabs.Count)
+                return;
+
             Point mousePos = PointToClient(MousePosition);
             Rectangle tabRect = GetTabBounds(Tabs[index]);
-            if (tabRect.Contains(ActiveClose) && ActiveCloseHitTest(mousePos))
-                TryCloseTab(index);
+            if (!tabRect.Contains(ActiveClose) || !ActiveCloseHitTest(mousePos))
+                return;
+
+            IDockContent tabContent = Tabs[index].Content;
+            if (tabContent == null || IsDisposed || Disposing || !IsHandleCreated)
+                return;
+
+            QueueCloseTab(tabContent);
+        }
+
+        private void QueueCloseTab(IDockContent tabContent)
+        {
+            try
+            {
+                BeginInvoke((MethodInvoker)(() =>
+                {
+                    if (IsDisposed || Disposing)
+                        return;
+
+                    for (int i = 0; i < Tabs.Count; i++)
+                    {
+                        if (Tabs[i].Content != tabContent)
+                            continue;
+
+                        try
+                        {
+                            TryCloseTab(i);
+                        }
+                        catch (NullReferenceException)
+                        {
+                            // Avoid crash on transient dock layout races during tab-close.
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            // Tab/pane was disposed before queued close executed.
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            // Docking state changed before queued close executed.
+                        }
+
+                        break;
+                    }
+                }));
+            }
+            catch (ObjectDisposedException)
+            {
+            }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         private Rectangle GetCloseButtonRect(Rectangle rectTab)
