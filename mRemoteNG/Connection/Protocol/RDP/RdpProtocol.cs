@@ -948,6 +948,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
         {
             Fullscreen = false;
             _leaveFullscreenEvent?.Invoke(this, EventArgs.Empty);
+
+            try
+            {
+                if (_frmMain.WindowState == FormWindowState.Minimized)
+                {
+                    _frmMain.WindowState = FormWindowState.Normal;
+                }
+
+                _frmMain.Activate();
+                InterfaceControl?.Parent?.Focus();
+                Focus();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("RDP leave-fullscreen refocus failed", ex, MessageClass.WarningMsg, false);
+            }
         }
 
         private void RdpClient_GotFocus(object sender, EventArgs e)
