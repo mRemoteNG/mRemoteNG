@@ -17,6 +17,8 @@ namespace mRemoteNG.Tools
         private bool _disposed;
         private const int CheckIntervalMs = 30000;
         private const int PingTimeoutMs = 5000;
+        private const int MaxConcurrentChecks = 10;
+        private readonly SemaphoreSlim _throttle = new(MaxConcurrentChecks, MaxConcurrentChecks);
 
         public ConnectionStatusChecker(ConnectionTreeModel model)
         {
@@ -31,7 +33,7 @@ namespace mRemoteNG.Tools
 
         private void CheckAllConnections(object state)
         {
-            if (!Properties.OptionsAppearancePage.Default.ShowStatusIndicatorInTree)
+            if (!OptionsAppearancePage.Default.ShowStatusIndicatorInTree)
                 return;
 
             if (_model == null)
@@ -40,7 +42,20 @@ namespace mRemoteNG.Tools
             var connections = GetAllConnections(_model);
             foreach (var connection in connections)
             {
-                Task.Run(() => CheckConnectionStatus(connection));
+                Task.Run(() => CheckConnectionStatusThrottled(connection));
+            }
+        }
+
+        private async Task CheckConnectionStatusThrottled(ConnectionInfo connection)
+        {
+            await _throttle.WaitAsync().ConfigureAwait(false);
+            try
+            {
+                CheckConnectionStatus(connection);
+            }
+            finally
+            {
+                _throttle.Release();
             }
         }
 
@@ -60,9 +75,13 @@ namespace mRemoteNG.Tools
                     ? HostStatus.Online
                     : HostStatus.Offline;
             }
-            catch
+            catch (PingException)
             {
                 connection.HostStatus = HostStatus.Offline;
+            }
+            catch (Exception)
+            {
+                connection.HostStatus = HostStatus.Unknown;
             }
         }
 
@@ -105,6 +124,7 @@ namespace mRemoteNG.Tools
             {
                 _timer?.Dispose();
                 _timer = null;
+                _throttle?.Dispose();
             }
 
             _disposed = true;
