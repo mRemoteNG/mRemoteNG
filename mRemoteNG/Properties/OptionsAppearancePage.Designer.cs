@@ -94,5 +94,17 @@ namespace mRemoteNG.Properties {
                 this["cbAppearancePageInOptionMenu"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowStatusIndicatorInTree {
+            get {
+                return ((bool)(this["ShowStatusIndicatorInTree"]));
+            }
+            set {
+                this["ShowStatusIndicatorInTree"] = value;
+            }
+        }
     }
 }

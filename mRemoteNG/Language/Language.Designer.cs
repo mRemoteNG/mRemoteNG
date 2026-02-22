@@ -6100,6 +6100,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show host status indicator in connection tree.
+        /// </summary>
+        internal static string ShowStatusIndicatorInTree {
+            get {
+                return ResourceManager.GetString("ShowStatusIndicatorInTree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Show Help Text.
         /// </summary>
         internal static string ShowHelpText {

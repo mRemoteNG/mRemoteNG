@@ -11,6 +11,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Properties;
 using mRemoteNG.Themes;
+using mRemoteNG.Tools;
 using mRemoteNG.Tools.Clipboard;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.ClickHandlers;
@@ -29,6 +30,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
         private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
         private readonly StatusImageList _statusImageList = new();
         private ThemeManager _themeManager;
+        private ConnectionStatusChecker _connectionStatusChecker;
 
         private readonly ConnectionTreeSearchTextFilter _connectionTreeSearchTextFilter = new();
 
@@ -101,6 +103,7 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             {
                 components?.Dispose();
                 _statusImageList?.Dispose();
+                _connectionStatusChecker?.Dispose();
 
                 _themeManager.ThemeChanged -= ThemeManagerOnThemeChanged;
             }
@@ -202,6 +205,9 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             NodeSearcher = new NodeSearcher(newModel);
             ExecutePostSetupActions();
             AutoResizeColumn(Columns[0]);
+
+            _connectionStatusChecker?.Dispose();
+            _connectionStatusChecker = new ConnectionStatusChecker(newModel);
         }
 
         private void RegisterModelUpdateHandlers(ConnectionTreeModel newModel)
@@ -234,7 +240,8 @@ namespace mRemoteNG.UI.Controls.ConnectionTree
             string property = propertyChangedEventArgs.PropertyName;
             if (property != nameof(ConnectionInfo.Name)
              && property != nameof(ConnectionInfo.OpenConnections)
-             && property != nameof(ConnectionInfo.Icon))
+             && property != nameof(ConnectionInfo.Icon)
+             && property != nameof(ConnectionInfo.HostStatus))
             {
                 return;
             }

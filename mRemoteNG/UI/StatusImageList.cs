@@ -57,6 +57,11 @@ namespace mRemoteNG.UI
             return $"Connection_{icon}_{status}";
         }
 
+        private static string BuildStatusIconName(string baseKey, HostStatus hostStatus)
+        {
+            return $"{baseKey}_{hostStatus}";
+        }
+
         private const string DefaultConnectionIcon = "";
 
         private string GetConnectionIcon(ConnectionInfo connection)
@@ -67,17 +72,78 @@ namespace mRemoteNG.UI
             }
 
             bool connected = connection.OpenConnections.Count > 0;
-            string name = BuildConnectionIconName(connection.Icon, connected);
+            string baseKey = BuildConnectionIconName(connection.Icon, connected);
+
+            bool showStatusIndicator = Properties.OptionsAppearancePage.Default.ShowStatusIndicatorInTree;
+            string name = showStatusIndicator
+                ? BuildStatusIconName(baseKey, connection.HostStatus)
+                : baseKey;
+
             if (ImageList.Images.ContainsKey(name)) return name;
+
             Icon image = ConnectionIcon.FromString(connection.Icon);
             if (image == null)
             {
                 return DefaultConnectionIcon;
             }
 
-            ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), image);
-            ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true), Overlay(image, Properties.Resources.ConnectedOverlay));
+            Bitmap defaultBitmap = image.ToBitmap();
+            Bitmap playBitmap = Overlay(image, Properties.Resources.ConnectedOverlay);
+
+            if (showStatusIndicator)
+            {
+                foreach (HostStatus status in Enum.GetValues<HostStatus>())
+                {
+                    Color barColor = GetStatusColor(status);
+                    string defaultStatusKey = BuildStatusIconName(BuildConnectionIconName(connection.Icon, false), status);
+                    string playStatusKey = BuildStatusIconName(BuildConnectionIconName(connection.Icon, true), status);
+
+                    if (!ImageList.Images.ContainsKey(defaultStatusKey))
+                        ImageList.Images.Add(defaultStatusKey, AddStatusBar(defaultBitmap, barColor));
+                    if (!ImageList.Images.ContainsKey(playStatusKey))
+                        ImageList.Images.Add(playStatusKey, AddStatusBar(playBitmap, barColor));
+                }
+
+                defaultBitmap.Dispose();
+                playBitmap.Dispose();
+            }
+            else
+            {
+                if (!ImageList.Images.ContainsKey(BuildConnectionIconName(connection.Icon, false)))
+                    ImageList.Images.Add(BuildConnectionIconName(connection.Icon, false), defaultBitmap);
+                else
+                    defaultBitmap.Dispose();
+
+                if (!ImageList.Images.ContainsKey(BuildConnectionIconName(connection.Icon, true)))
+                    ImageList.Images.Add(BuildConnectionIconName(connection.Icon, true), playBitmap);
+                else
+                    playBitmap.Dispose();
+            }
+
             return name;
+        }
+
+        private static Color GetStatusColor(HostStatus status)
+        {
+            return status switch
+            {
+                HostStatus.Online => Color.FromArgb(0, 180, 0),
+                HostStatus.Offline => Color.FromArgb(200, 0, 0),
+                _ => Color.FromArgb(160, 160, 160)
+            };
+        }
+
+        private static Bitmap AddStatusBar(Bitmap source, Color barColor)
+        {
+            Bitmap result = new(source.Width, source.Height);
+            using (Graphics gr = Graphics.FromImage(result))
+            {
+                gr.DrawImage(source, new Rectangle(0, 0, source.Width, source.Height));
+                using SolidBrush brush = new(barColor);
+                gr.FillRectangle(brush, 0, 0, 3, source.Height);
+            }
+
+            return result;
         }
 
         private static Bitmap Overlay(Icon background, Image foreground)
