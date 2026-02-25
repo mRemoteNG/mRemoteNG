@@ -1114,10 +1114,10 @@ If you run into such an error, please create a new connection file!</value>
     <value>Use the Credential Security Support Provider (CredSSP) for authentication if it is available.</value>
   </data>
   <data name="PropertyDescriptionUseRestrictedAdmin" xml:space="preserve">
-    <value>Use restricted admin mode on the target host (local system context).</value>
+    <value>Use restricted admin mode on the target host (local system context). Credentials are not forwarded to the remote host; the current user's Kerberos ticket is used instead. Recommended for AD Protected Users accounts where NTLM authentication is disabled. Requires the connecting user to have administrative rights on the target.</value>
   </data>
   <data name="PropertyDescriptionUseRCG" xml:space="preserve">
-    <value>Use Remote Credential Guard to tunnel authentication on target back to source through the RDP channel.</value>
+    <value>Use Remote Credential Guard to tunnel authentication on target back to source through the RDP channel. Kerberos requests are redirected back to the connecting device, so credentials are never sent to the remote host. Recommended for AD Protected Users accounts where NTLM authentication is disabled. Requires both client and server to be domain-joined.</value>
   </data>
   <data name="PropertyDescriptionUser1" xml:space="preserve">
     <value>Feel free to enter any information you need here.</value>
